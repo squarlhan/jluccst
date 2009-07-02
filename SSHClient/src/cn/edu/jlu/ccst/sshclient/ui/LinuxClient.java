@@ -1,0 +1,652 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+/*
+ * LinuxClient.java
+ *
+ * Created on 2009-6-30, 14:09:55
+ */
+
+package cn.edu.jlu.ccst.sshclient.ui;
+
+import cn.edu.jlu.ccst.sshclient.model.BaseClass;
+import cn.edu.jlu.ccst.sshclient.model.SSHComputer;
+import cn.edu.jlu.ccst.sshclient.model.SSHGroup;
+import cn.edu.jlu.ccst.sshclient.model.SSHTask;
+import cn.edu.jlu.ccst.sshclient.ui.ComputerUI;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.io.File;
+import java.io.FileWriter;
+import java.text.DateFormat;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.*;
+
+import javax.swing.JMenuItem;
+import javax.swing.JPopupMenu;
+import javax.swing.JTree;
+import javax.swing.JTree.DynamicUtilTreeNode;
+import javax.swing.SwingUtilities;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.TreeNode;
+import javax.swing.tree.TreePath;
+import org.dom4j.Document;
+import org.dom4j.DocumentException;
+import org.dom4j.Element;
+import org.dom4j.io.SAXReader;
+import org.dom4j.DocumentHelper;
+import org.dom4j.io.OutputFormat;
+import org.dom4j.io.XMLWriter;
+import org.dom4j.io.*;
+/**
+ *
+ * @author Woden
+ */
+public class LinuxClient extends javax.swing.JFrame {
+
+    /** Creates new form LinuxClient */
+    public LinuxClient() {
+        initComponents();
+        this.cps = new ArrayList();
+        this.gps = new ArrayList();
+        this.tks = new ArrayList();
+
+        //下面根据xml文件生成所需要的类
+        SAXReader reader = new SAXReader();
+        try {
+            Document doc = reader.read(this.getClass().getResource("/").getPath() + "cn/edu/jlu/ccst/sshclient/util/Config.xml");
+            Element root = doc.getRootElement();
+            List<Element> celements = root.elements();
+            for (Element c : celements) {
+                SSHComputer cp = new SSHComputer();
+                cp.setId(c.valueOf("@id"));        
+                cp.setName(c.valueOf("@name"));
+                cp.setType((byte) 0);
+                cp.setMemo(c.valueOf("@memo"));
+
+                cp.setCreatdate(DateFormat.getDateInstance().parse(c.valueOf("@creatdate")));
+                //System.out.println(DateFormat.getDateInstance().parse(c.valueOf("@creatdate")));
+                cp.setHost(c.valueOf("@host"));
+                cp.setUsername(c.valueOf("@user"));
+                cp.setPassword(c.valueOf("@pswd"));
+                cp.setGps(new ArrayList());
+
+                System.out.println(cp);
+                this.cps.add(cp);
+
+                List<Element> gelements = c.elements();
+                for (Element g : gelements) {
+                    System.out.println("hasgroup");
+                    SSHGroup gp = new SSHGroup();
+                    gp.setId(g.valueOf("@id"));
+                    gp.setName(g.valueOf("@name"));
+                    gp.setType((byte) 1);
+                    gp.setMemo(g.valueOf("@memo"));
+                    gp.setCreatdate(DateFormat.getDateInstance().parse(g.valueOf("@creatdate")));
+
+                    gp.setCp(cp);
+                    gp.setSts(new ArrayList());
+                    cp.getGps().add(gp);
+
+                    System.out.println(gp);
+                    this.gps.add(gp);
+
+                    List<Element> telements = g.elements();
+                    for (Element t : telements) {
+                        SSHTask tk = new SSHTask();
+                        tk.setId(t.valueOf("@id"));
+                        tk.setName(t.valueOf("@name"));
+                        tk.setType((byte) 2);
+                        tk.setMemo(t.valueOf("@memo"));
+                        tk.setCreatdate(DateFormat.getDateInstance().parse(t.valueOf("@creatdate")));
+
+                        tk.setCmd(t.valueOf("@cmd"));
+                        tk.setFin(new File("@in"));
+                        tk.setFout(new File("@out"));
+                        List<String> params = new ArrayList();
+                        List<Element> pelements = t.elements();
+                        for(Element p : pelements){
+                            params.add(p.elementTextTrim("param"));
+                        }
+                        tk.setParams(params);
+
+                        tk.setGp(gp);
+                        gp.getSts().add(tk);
+
+                        System.out.println(tk);
+                        this.tks.add(tk);
+                    }
+
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        GenerateTree();
+    }
+
+/*构建生成的Computer树*/
+public void GenerateTree()
+{
+       //下面开始构建树
+       DefaultMutableTreeNode root = new DefaultMutableTreeNode("Computers", true);
+        for(SSHComputer c : cps){
+            DefaultMutableTreeNode tcp = new DefaultMutableTreeNode(c,true);
+            root.add(tcp);
+            if(c.getGps() != null){
+            for(SSHGroup g: c.getGps()){
+                DefaultMutableTreeNode tgp = new DefaultMutableTreeNode(g,true);
+                tcp.add(tgp);
+                if(g.getSts() != null){
+                for(SSHTask t : g.getSts()){
+                     DefaultMutableTreeNode ttk = new DefaultMutableTreeNode(t,true);
+                     tgp.add(ttk);
+                }
+                }
+            }
+            }
+        }
+        jTree1 = new JTree(root);
+        jScrollPane1.setViewportView(jTree1);
+         jTree1.addMouseListener(
+               new MouseAdapter()
+        {
+            @Override
+             public   void   mouseClicked(MouseEvent   e){
+                try{
+                    JTree tree = (JTree)e.getSource();
+                    int rowLocation = tree.getRowForLocation(e.getX(), e.getY());
+                    TreePath treepath = tree.getPathForRow(rowLocation);
+                    DefaultMutableTreeNode treenode = (DefaultMutableTreeNode) treepath.getLastPathComponent();
+                    if(treenode.toString().equals("Computers"))
+                    {
+                        return;
+                    }
+                    String s=null;
+                    BaseClass b=(BaseClass)treenode.getUserObject();
+                    switch(b.getType())
+                    {
+                        case 0:
+                        {
+                            SSHComputer c=(SSHComputer)treenode.getUserObject();
+                            s="computer--id:"+c.getId()+";name:"+c.getName()+";memo:"+c.getMemo()
+                             +";host:"+c.getHost()+";user:"+c.getUsername()
+                             +";pswd:"+c.getPassword()
+                             +";date:"+b.getCreatdate();
+                            jTextArea1.setText(s);
+                            break;
+                        }
+                        case 1:
+                        {
+                            SSHGroup g=(SSHGroup)treenode.getUserObject();
+                            s="group--id:"+g.getId()+";name:"+g.getName()+";memo:"+g.getMemo()+";date:"+b.getCreatdate();
+                            jTextArea1.setText(s);
+                            break;
+                        }
+                        case 2:
+                        {
+                            SSHTask t=(SSHTask)treenode.getUserObject();
+                            s="task--id:"+t.getId()+";name:"+t.getName()+";memo:"+t.getMemo()+";cmd:"+t.getCmd()+";date:"+b.getCreatdate();
+                            jTextArea1.setText(s);
+                            break;
+                        }
+                        default:
+                            break;
+                    }
+                    System.out.println(s);
+                    }catch(NullPointerException ne){}
+             }
+            @Override
+            public void mouseReleased(MouseEvent e)
+              {
+                 try
+                 {
+                    //是否右键单击
+                   if (e.getClickCount() == 1 && SwingUtilities.isRightMouseButton(e))
+                      {
+                           JTree tree = (JTree)e.getSource();
+                           int rowLocation = tree.getRowForLocation(e.getX(), e.getY());
+                           TreePath treepath = tree.getPathForRow(rowLocation);
+                           DefaultMutableTreeNode treenode = (DefaultMutableTreeNode) treepath.getLastPathComponent();
+                           if(treenode.toString().equals("Computers"))
+                            {
+                                return;
+                            }
+                          cur=(BaseClass)treenode.getUserObject();
+                          TreePath path = jTree1.getPathForLocation(e.getX(), e.getY());
+                          if (path == null)
+                              return;
+                          jTree1.setSelectionPath(path);
+                          popMenu.show(jTree1, e.getX(), e.getY());
+                        }
+                 }
+                        catch (Exception ex)
+                        {
+                              ex.printStackTrace();
+                        }
+                  }
+
+        }
+                );
+        jScrollPane1.setViewportView(jTree1);
+
+        popMenu = new JPopupMenu();
+        addItem = new JMenuItem("添加");
+        addItem.addActionListener(null);
+        delItem = new JMenuItem("删除");
+        delItem.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+           {
+                try
+                {
+                    action(e);
+                } catch (DocumentException ex)
+                {}
+           }
+        }
+           );
+        editItem = new JMenuItem("修改");
+        editItem.addActionListener(null);
+        popMenu.add(addItem);
+        popMenu.add(delItem);
+        popMenu.add(editItem);
+}
+private void action ( ActionEvent e ) throws DocumentException
+    {
+      String str = e.getActionCommand();
+      if(str.equals("删除"))
+      {
+          SAXReader reader = new SAXReader();
+          Document doc = reader.read(this.getClass().getResource("/").getPath() + "cn/edu/jlu/ccst/sshclient/util/Config.xml");
+          switch(cur.getType())
+          {
+              case 0:
+              {
+                  List   list=doc.selectNodes("/config/computer");
+                  //System.out.println(list.size());
+                  Iterator iter = list.iterator();
+                  while(iter.hasNext())
+                  {
+                      Element el=(Element)iter.next();
+                      String it=el.attributeValue("id");
+                      if(it.equals(cur.getId()))
+                      {
+                          el.getParent().remove(el);
+                      }
+                  }
+                   break;
+              }
+              case 1:
+              {
+                  List   list=doc.selectNodes("/config/computer");
+                  Iterator iter = list.iterator();
+                  while(iter.hasNext())
+                  {
+                      Element el=(Element)iter.next();
+                      Iterator it=el.elementIterator("group");
+                      while(it.hasNext())
+                      {
+                          Element et=(Element)it.next();
+                          String s=et.attributeValue("id");
+                          if(s.equals(cur.getId()))
+                          {
+                              el.remove(et);
+                          }
+                      }
+                  }
+                   break;
+              }
+              case 2:
+              {
+                    break;
+              }
+              default:
+                    break;
+       }
+       try{
+               XMLWriter writer = new XMLWriter(new FileWriter("test.xml"));
+               writer.write(doc);
+               writer.close();
+
+           }catch(Exception ex)
+           {
+               ex.printStackTrace();
+           }
+      }
+    }
+/**
+ * 将新建的计算机信息存到config.xml文件
+ */
+public void NewComputerToXML(SSHComputer newComputer){
+    SAXReader reader = new SAXReader();
+    try{
+    String filepath = this.getClass().getResource("/").getPath() + "cn/edu/jlu/ccst/sshclient/util/Config.xml";
+    Document doc = reader.read(filepath);
+    OutputFormat format = OutputFormat.createPrettyPrint();
+    Element root = doc.getRootElement();
+    XMLWriter writer = null;// 声明写XML的对象
+
+    Element newnode = root.addElement("computer");
+    newnode.addAttribute("id", newComputer.getId());
+    newnode.addAttribute("name",newComputer.getName());
+    newnode.addAttribute("host",newComputer.getHost());
+    newnode.addAttribute("user",newComputer.getUsername());
+    newnode.addAttribute("pswd", newComputer.getPassword());
+    newnode.addAttribute("cteatdate",newComputer.getCreatdate().toString());
+
+    writer = new XMLWriter();
+    }
+    catch(Exception e ){
+        e.printStackTrace();
+    }
+
+
+
+}
+
+    /** This method is called from within the constructor to
+     * initialize the form.
+     * WARNING: Do NOT modify this code. The content of this method is
+     * always regenerated by the Form Editor.
+     */
+    @SuppressWarnings("unchecked")
+    // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
+    private void initComponents() {
+
+        jSplitPane1 = new javax.swing.JSplitPane();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTree1 = new javax.swing.JTree();
+        jSplitPane2 = new javax.swing.JSplitPane();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
+        jTabbedPane1 = new javax.swing.JTabbedPane();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTextArea2 = new javax.swing.JTextArea();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        jTextArea3 = new javax.swing.JTextArea();
+        jMenuBar1 = new javax.swing.JMenuBar();
+        jMenu1 = new javax.swing.JMenu();
+        jMenu4 = new javax.swing.JMenu();
+        jMenuItem4 = new javax.swing.JMenuItem();
+        jMenuItem5 = new javax.swing.JMenuItem();
+        jMenuItem6 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
+        jSeparator1 = new javax.swing.JSeparator();
+        jMenu2 = new javax.swing.JMenu();
+        jMenuItem8 = new javax.swing.JMenuItem();
+        jMenuItem9 = new javax.swing.JMenuItem();
+        jMenuItem10 = new javax.swing.JMenuItem();
+        jSeparator2 = new javax.swing.JSeparator();
+        jMenuItem11 = new javax.swing.JMenuItem();
+        jMenuItem12 = new javax.swing.JMenuItem();
+        jMenuItem13 = new javax.swing.JMenuItem();
+        jMenuItem14 = new javax.swing.JMenuItem();
+        jSeparator3 = new javax.swing.JSeparator();
+        jMenuItem15 = new javax.swing.JMenuItem();
+        jMenuItem16 = new javax.swing.JMenuItem();
+        jMenu3 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem7 = new javax.swing.JMenuItem();
+
+        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("LinuxClient");
+
+        jSplitPane1.setName("jSplitPane1"); // NOI18N
+
+        jScrollPane1.setName("jScrollPane1"); // NOI18N
+
+        jTree1.setName("jTree1"); // NOI18N
+        jScrollPane1.setViewportView(jTree1);
+
+        jSplitPane1.setLeftComponent(jScrollPane1);
+
+        jSplitPane2.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
+        jSplitPane2.setName("jSplitPane2"); // NOI18N
+
+        jScrollPane2.setName("jScrollPane2"); // NOI18N
+
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jTextArea1.setEnabled(false);
+        jTextArea1.setName("jTextArea1"); // NOI18N
+        jScrollPane2.setViewportView(jTextArea1);
+
+        jSplitPane2.setLeftComponent(jScrollPane2);
+
+        jTabbedPane1.setName("jTabbedPane1"); // NOI18N
+
+        jScrollPane3.setName("jScrollPane3"); // NOI18N
+
+        jTextArea2.setColumns(20);
+        jTextArea2.setRows(5);
+        jTextArea2.setEnabled(false);
+        jTextArea2.setName("jTextArea2"); // NOI18N
+        jScrollPane3.setViewportView(jTextArea2);
+
+        jTabbedPane1.addTab("tab1", jScrollPane3);
+
+        jScrollPane4.setName("jScrollPane4"); // NOI18N
+
+        jTextArea3.setColumns(20);
+        jTextArea3.setRows(5);
+        jTextArea3.setName("jTextArea3"); // NOI18N
+        jScrollPane4.setViewportView(jTextArea3);
+
+        jTabbedPane1.addTab("tab2", jScrollPane4);
+
+        jSplitPane2.setRightComponent(jTabbedPane1);
+
+        jSplitPane1.setRightComponent(jSplitPane2);
+
+        jMenuBar1.setName("jMenuBar1"); // NOI18N
+
+        jMenu1.setText("File");
+        jMenu1.setName("jMenu1"); // NOI18N
+
+        jMenu4.setText("New");
+        jMenu4.setName("jMenu4"); // NOI18N
+        jMenu4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu4MouseClicked(evt);
+            }
+        });
+
+        jMenuItem4.setText("Computer");
+        jMenuItem4.setName("jMenuItem4"); // NOI18N
+        jMenuItem4.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenuItem4MouseClicked(evt);
+            }
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jMenuItem4MousePressed(evt);
+            }
+        });
+        jMenu4.add(jMenuItem4);
+
+        jMenuItem5.setText("Group");
+        jMenuItem5.setName("jMenuItem5"); // NOI18N
+        jMenu4.add(jMenuItem5);
+
+        jMenuItem6.setText("Task");
+        jMenuItem6.setName("jMenuItem6"); // NOI18N
+        jMenu4.add(jMenuItem6);
+
+        jMenu1.add(jMenu4);
+
+        jMenuItem2.setText("Save");
+        jMenuItem2.setName("jMenuItem2"); // NOI18N
+        jMenu1.add(jMenuItem2);
+
+        jMenuItem3.setText("Quit");
+        jMenuItem3.setName("jMenuItem3"); // NOI18N
+        jMenu1.add(jMenuItem3);
+
+        jSeparator1.setName("jSeparator1"); // NOI18N
+        jMenu1.add(jSeparator1);
+
+        jMenuBar1.add(jMenu1);
+
+        jMenu2.setText("Task");
+        jMenu2.setName("jMenu2"); // NOI18N
+
+        jMenuItem8.setText("Add");
+        jMenuItem8.setName("jMenuItem8"); // NOI18N
+        jMenu2.add(jMenuItem8);
+
+        jMenuItem9.setText("Update");
+        jMenuItem9.setName("jMenuItem9"); // NOI18N
+        jMenu2.add(jMenuItem9);
+
+        jMenuItem10.setText("Remove");
+        jMenuItem10.setName("jMenuItem10"); // NOI18N
+        jMenu2.add(jMenuItem10);
+
+        jSeparator2.setName("jSeparator2"); // NOI18N
+        jMenu2.add(jSeparator2);
+
+        jMenuItem11.setText("Start");
+        jMenuItem11.setName("jMenuItem11"); // NOI18N
+        jMenu2.add(jMenuItem11);
+
+        jMenuItem12.setText("Group Start");
+        jMenuItem12.setName("jMenuItem12"); // NOI18N
+        jMenu2.add(jMenuItem12);
+
+        jMenuItem13.setText("All Start");
+        jMenuItem13.setName("jMenuItem13"); // NOI18N
+        jMenu2.add(jMenuItem13);
+
+        jMenuItem14.setText("Start Now");
+        jMenuItem14.setName("jMenuItem14"); // NOI18N
+        jMenu2.add(jMenuItem14);
+
+        jSeparator3.setName("jSeparator3"); // NOI18N
+        jMenu2.add(jSeparator3);
+
+        jMenuItem15.setText("Stop Now");
+        jMenuItem15.setName("jMenuItem15"); // NOI18N
+        jMenu2.add(jMenuItem15);
+
+        jMenuItem16.setText("All Stop");
+        jMenuItem16.setName("jMenuItem16"); // NOI18N
+        jMenu2.add(jMenuItem16);
+
+        jMenuBar1.add(jMenu2);
+
+        jMenu3.setText("Help");
+        jMenu3.setName("jMenu3"); // NOI18N
+
+        jMenuItem1.setText("Index");
+        jMenuItem1.setName("jMenuItem1"); // NOI18N
+        jMenu3.add(jMenuItem1);
+
+        jMenuItem7.setText("About");
+        jMenuItem7.setName("jMenuItem7"); // NOI18N
+        jMenu3.add(jMenuItem7);
+
+        jMenuBar1.add(jMenu3);
+
+        setJMenuBar(jMenuBar1);
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jSplitPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 400, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jSplitPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 295, Short.MAX_VALUE)
+        );
+
+        pack();
+    }// </editor-fold>//GEN-END:initComponents
+
+    private void jMenu4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu4MouseClicked
+        // TODO add your handling code here:
+       ComputerUI newComputerUi = new ComputerUI();
+       newComputerUi.setVisible(true);
+       this.setVisible(false);
+        
+
+
+    }//GEN-LAST:event_jMenu4MouseClicked
+     /*此函数没有用到*/
+    private void jMenuItem4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem4MouseClicked
+        // TODO add your handling code here:
+      ComputerUI newComputerUi = new ComputerUI();
+       newComputerUi.setVisible(true);
+    }//GEN-LAST:event_jMenuItem4MouseClicked
+
+    private void jMenuItem4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem4MousePressed
+        // TODO add your handling code here:
+        ComputerUI newComputerUi = new ComputerUI();
+        newComputerUi.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_jMenuItem4MousePressed
+
+    /**
+    * @param args the command line arguments
+    */
+    public static void main(String args[]) {
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new LinuxClient().setVisible(true);
+            }
+        });
+    }
+
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem10;
+    private javax.swing.JMenuItem jMenuItem11;
+    private javax.swing.JMenuItem jMenuItem12;
+    private javax.swing.JMenuItem jMenuItem13;
+    private javax.swing.JMenuItem jMenuItem14;
+    private javax.swing.JMenuItem jMenuItem15;
+    private javax.swing.JMenuItem jMenuItem16;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
+    private javax.swing.JMenuItem jMenuItem7;
+    private javax.swing.JMenuItem jMenuItem8;
+    private javax.swing.JMenuItem jMenuItem9;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JSplitPane jSplitPane1;
+    private javax.swing.JSplitPane jSplitPane2;
+    private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextArea jTextArea2;
+    private javax.swing.JTextArea jTextArea3;
+    private javax.swing.JTree jTree1;
+    // End of variables declaration//GEN-END:variables
+    private JPopupMenu popMenu;
+    private JMenuItem addItem;
+    private JMenuItem delItem;
+    private JMenuItem editItem;
+    private BaseClass cur;
+
+    public static List<SSHComputer> cps;
+    public List<SSHGroup> gps;
+    public List<SSHTask> tks;
+}
