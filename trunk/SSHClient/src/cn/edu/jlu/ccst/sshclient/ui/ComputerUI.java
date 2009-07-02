@@ -17,12 +17,14 @@ import cn.edu.jlu.ccst.sshclient.ui.LinuxClient;
         
 import java.io.File;
 import java.text.DateFormat;
-import java.util.ArrayList;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.*;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import java.net.*;  
+import java.awt.event.*;
 
 /**
  *
@@ -301,8 +303,9 @@ public class ComputerUI extends javax.swing.JFrame {
             System.out.println(e.toString());
 
         }
-        newComputer1.setCreatdate(new java.util.Date());//获得创建成功时的时间
-        newComputer1.setHost(null);
+    	Date SeverTime = new Date();
+    	SimpleDateFormat Severtimeformat = new SimpleDateFormat("yyyy-MM-dd");
+        newComputer1.setCreatdate(SeverTime);//获得创建成功时的时间
         this.setVisible(false);
         System.out.println(newComputer1.getName());
         LinuxClient temp = new LinuxClient();
@@ -313,6 +316,7 @@ public class ComputerUI extends javax.swing.JFrame {
          }
          temp.setVisible(true);
          temp.GenerateTree();
+         temp.NewComputerToXML(newComputer1);
       /*  ListIterator<SSHComputer> i = temp.cps.listIterator();
 
        while(i.hasNext()){
