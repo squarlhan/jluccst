@@ -225,7 +225,7 @@ public void GenerateTree()
                           popMenu.show(jTree1, e.getX(), e.getY());
                         }
                  }
-                        catch (Exception ex)
+                        catch (Exception ex)  
                         {
                               ex.printStackTrace();
                         }
