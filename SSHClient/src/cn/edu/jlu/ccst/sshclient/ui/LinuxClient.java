@@ -94,8 +94,7 @@ public class LinuxClient extends javax.swing.JFrame {
                     cp.getGps().add(gp);
 
                     System.out.println(gp);
-                    this.gps.add(gp);
-
+                    this.gps.add(gp);                
                     List<Element> telements = g.elements();
                     for (Element t : telements) {
                         SSHTask tk = new SSHTask();
@@ -129,7 +128,85 @@ public class LinuxClient extends javax.swing.JFrame {
         }
         GenerateTree();
     }
+//************更新********//
+ void  updata() {
+        
+        this.cps = new ArrayList();
+        this.gps = new ArrayList();
+        this.tks = new ArrayList();
 
+        //下面根据xml文件生成所需要的类
+        SAXReader reader = new SAXReader();
+        try {
+            Document doc = reader.read(this.getClass().getResource("/").getPath() + "cn/edu/jlu/ccst/sshclient/util/Config.xml");
+            Element root = doc.getRootElement();
+            List<Element> celements = root.elements();
+            for (Element c : celements) {
+                SSHComputer cp = new SSHComputer();
+                cp.setId(c.valueOf("@id"));        
+                cp.setName(c.valueOf("@name"));
+                cp.setType((byte) 0);
+                cp.setMemo(c.valueOf("@memo"));
+
+                cp.setCreatdate(DateFormat.getDateInstance().parse(c.valueOf("@creatdate")));
+                //System.out.println(DateFormat.getDateInstance().parse(c.valueOf("@creatdate")));
+                cp.setHost(c.valueOf("@host"));
+                cp.setUsername(c.valueOf("@user"));
+                cp.setPassword(c.valueOf("@pswd"));
+                cp.setGps(new ArrayList());
+
+                System.out.println(cp);
+                this.cps.add(cp);
+
+                List<Element> gelements = c.elements();
+                for (Element g : gelements) {
+                    System.out.println("hasgroup");
+                    SSHGroup gp = new SSHGroup();
+                    gp.setId(g.valueOf("@id"));
+                    gp.setName(g.valueOf("@name"));
+                    gp.setType((byte) 1);
+                    gp.setMemo(g.valueOf("@memo"));
+                    gp.setCreatdate(DateFormat.getDateInstance().parse(g.valueOf("@creatdate")));
+
+                    gp.setCp(cp);
+                    gp.setSts(new ArrayList());
+                    cp.getGps().add(gp);
+
+                    System.out.println(gp);
+                    this.gps.add(gp);                
+                    List<Element> telements = g.elements();
+                    for (Element t : telements) {
+                        SSHTask tk = new SSHTask();
+                        tk.setId(t.valueOf("@id"));
+                        tk.setName(t.valueOf("@name"));
+                        tk.setType((byte) 2);
+                        tk.setMemo(t.valueOf("@memo"));
+                        tk.setCreatdate(DateFormat.getDateInstance().parse(t.valueOf("@creatdate")));
+
+                        tk.setCmd(t.valueOf("@cmd"));
+                        tk.setFin(new File("@in"));
+                        tk.setFout(new File("@out"));
+                        List<String> params = new ArrayList();
+                        List<Element> pelements = t.elements();
+                        for(Element p : pelements){
+                            params.add(p.elementTextTrim("param"));
+                        }
+                        tk.setParams(params);
+
+                        tk.setGp(gp);
+                        gp.getSts().add(tk);
+
+                        System.out.println(tk);
+                        this.tks.add(tk);
+                    }
+
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        GenerateTree();
+    }
 /*构建生成的Computer树*/
 public void GenerateTree()
 {
@@ -152,8 +229,9 @@ public void GenerateTree()
             }
         }
         jTree1 = new JTree(root);
+        
         jScrollPane1.setViewportView(jTree1);
-         jTree1.addMouseListener(
+        jTree1.addMouseListener(
                new MouseAdapter()
         {
             @Override
@@ -227,7 +305,7 @@ public void GenerateTree()
                  }
                         catch (Exception ex)  
                         {
-                              ex.printStackTrace();
+                              //ex.printStackTrace();
                         }
                   }
 
@@ -304,21 +382,50 @@ private void action ( ActionEvent e ) throws DocumentException
               }
               case 2:
               {
+                  List   list=doc.selectNodes("/config/computer");
+                  Iterator iter = list.iterator();
+                  while(iter.hasNext())
+                  {
+                      Element el=(Element)iter.next();
+                      Iterator it=el.elementIterator("group");
+                      while(it.hasNext())
+                      {
+                          Element elta=(Element)it.next();
+                          Iterator itta=elta.elementIterator("task");
+                          while(itta.hasNext())
+                          {
+                          Element et=(Element)itta.next();
+                          String s=et.attributeValue("id");
+                          if(s.equals(cur.getId()))
+                          {
+                              elta.remove(et);
+                          }
+                          }
+
+                      }
+                  }
                     break;
               }
               default:
                     break;
        }
        try{
-               XMLWriter writer = new XMLWriter(new FileWriter("test.xml"));
+              //XMLWriter writer = new XMLWriter(new FileWriter("test.xml"));
+    	   	   XMLWriter writer = new XMLWriter(new FileWriter(this.getClass().getResource("/").getPath() + "cn/edu/jlu/ccst/sshclient/util/Config.xml"));
+    	   	   System.out.println(this.getClass().getResource("/").getPath() + "cn/edu/jlu/ccst/sshclient/util/Config.xml");
                writer.write(doc);
                writer.close();
-
+               writer = new XMLWriter(new FileWriter("test.xml"));
+               writer.write(doc);
+               writer.close();
            }catch(Exception ex)
            {
                ex.printStackTrace();
            }
+           updata(); 
+           System.out.println("updata");
       }
+      
     }
 /**
  * 将新建的计算机信息存到config.xml文件
