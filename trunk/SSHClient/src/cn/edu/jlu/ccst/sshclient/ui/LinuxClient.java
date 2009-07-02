@@ -128,7 +128,7 @@ public class LinuxClient extends javax.swing.JFrame {
         }
         GenerateTree();
     }
-//************更新********//
+//updata the jtree
  void  updata() {
         
         this.cps = new ArrayList();
@@ -410,12 +410,9 @@ private void action ( ActionEvent e ) throws DocumentException
                     break;
        }
        try{
-              //XMLWriter writer = new XMLWriter(new FileWriter("test.xml"));
+              
     	   	   XMLWriter writer = new XMLWriter(new FileWriter(this.getClass().getResource("/").getPath() + "cn/edu/jlu/ccst/sshclient/util/Config.xml"));
     	   	   System.out.println(this.getClass().getResource("/").getPath() + "cn/edu/jlu/ccst/sshclient/util/Config.xml");
-               writer.write(doc);
-               writer.close();
-               writer = new XMLWriter(new FileWriter("test.xml"));
                writer.write(doc);
                writer.close();
            }catch(Exception ex)
