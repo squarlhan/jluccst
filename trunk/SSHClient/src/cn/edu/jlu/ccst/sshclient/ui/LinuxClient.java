@@ -12,6 +12,7 @@
 package cn.edu.jlu.ccst.sshclient.ui;
 
 import cn.edu.jlu.ccst.sshclient.model.BaseClass;
+
 import cn.edu.jlu.ccst.sshclient.model.SSHComputer;
 import cn.edu.jlu.ccst.sshclient.model.SSHGroup;
 import cn.edu.jlu.ccst.sshclient.model.SSHTask;
@@ -26,6 +27,7 @@ import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.*;
+import java.text.*;
 
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
@@ -60,11 +62,16 @@ public class LinuxClient extends javax.swing.JFrame {
         SAXReader reader = new SAXReader();
         try {
             Document doc = reader.read(this.getClass().getResource("/").getPath() + "cn/edu/jlu/ccst/sshclient/util/Config.xml");
+         //   String fileP = this.getClass().getResource("/").getPath() + "cn/edu/jlu/ccst/sshclient/util/Config.xml";
+          //  System.out.println(fileP);
             Element root = doc.getRootElement();
             List<Element> celements = root.elements();
+            int k = 1;
             for (Element c : celements) {
+            	System.out.println("K+"+k++);
                 SSHComputer cp = new SSHComputer();
-                cp.setId(c.valueOf("@id"));        
+               // cp.setId(c.valueOf("@id"));  
+                cp.setId(c.attributeValue("id"));
                 cp.setName(c.valueOf("@name"));
                 cp.setType((byte) 0);
                 cp.setMemo(c.valueOf("@memo"));
@@ -81,7 +88,7 @@ public class LinuxClient extends javax.swing.JFrame {
 
                 List<Element> gelements = c.elements();
                 for (Element g : gelements) {
-                    System.out.println("hasgroup");
+                 //   System.out.println("hasgroup");
                     SSHGroup gp = new SSHGroup();
                     gp.setId(g.valueOf("@id"));
                     gp.setName(g.valueOf("@name"));
@@ -196,12 +203,18 @@ public class LinuxClient extends javax.swing.JFrame {
                         tk.setGp(gp);
                         gp.getSts().add(tk);
 
-                        System.out.println(tk);
+                       // System.out.println(tk);
                         this.tks.add(tk);
                     }
 
                 }
             }
+        Iterator<SSHComputer> it;
+        SSHComputer tmp = new SSHComputer();
+        for(it = cps.iterator(); it.hasNext();){
+             tmp = (SSHComputer)it.next();
+             System.out.println("tmp"+tmp.getId());
+        }
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -430,21 +443,33 @@ private void action ( ActionEvent e ) throws DocumentException
 public void NewComputerToXML(SSHComputer newComputer){
     SAXReader reader = new SAXReader();
     try{
-    String filepath = this.getClass().getResource("/").getPath() + "cn/edu/jlu/ccst/sshclient/util/Config.xml";
-    Document doc = reader.read(filepath);
+    String filePath = this.getClass().getResource("/").getPath() + "cn/edu/jlu/ccst/sshclient/util/Config.xml";
+    System.out.println(filePath);
+    Document doc = reader.read(filePath);
     OutputFormat format = OutputFormat.createPrettyPrint();
     Element root = doc.getRootElement();
     XMLWriter writer = null;// 声明写XML的对象
-
+    List<Element> celements = root.elements();
+    for (Element c : celements);
+    
     Element newnode = root.addElement("computer");
     newnode.addAttribute("id", newComputer.getId());
     newnode.addAttribute("name",newComputer.getName());
+    System.out.println(newComputer.getHost());
     newnode.addAttribute("host",newComputer.getHost());
     newnode.addAttribute("user",newComputer.getUsername());
     newnode.addAttribute("pswd", newComputer.getPassword());
-    newnode.addAttribute("cteatdate",newComputer.getCreatdate().toString());
-
-    writer = new XMLWriter();
+    
+    SimpleDateFormat timeFormat;
+	timeFormat=new SimpleDateFormat("yyyy-MM-dd");
+    newnode.addAttribute("creatdate",timeFormat.format(newComputer.getCreatdate()));
+    String filePath2 = "c:\\temp.xml";
+    System.out.println("操作成功！");
+    System.out.println(filePath);
+    writer = new XMLWriter(new FileWriter(filePath), format);
+    writer.write(doc);
+    writer.close();
+    
     }
     catch(Exception e ){
         e.printStackTrace();
@@ -751,6 +776,6 @@ public void NewComputerToXML(SSHComputer newComputer){
     private BaseClass cur;
 
     public static List<SSHComputer> cps;
-    public List<SSHGroup> gps;
-    public List<SSHTask> tks;
+    public static List<SSHGroup> gps;
+    public static List<SSHTask> tks;
 }
