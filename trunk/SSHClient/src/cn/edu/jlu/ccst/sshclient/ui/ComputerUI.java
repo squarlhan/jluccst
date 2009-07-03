@@ -34,7 +34,9 @@ public class ComputerUI extends javax.swing.JDialog {
 
     /** Creates new form ComputerUI */
     public ComputerUI() {
+    	
         initComponents();
+        
         jPasswordField1.setEchoChar('*');
         jPasswordField2.setEchoChar('*');
      
