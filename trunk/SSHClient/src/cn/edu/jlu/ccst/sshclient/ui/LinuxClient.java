@@ -66,6 +66,7 @@ public class LinuxClient extends javax.swing.JFrame {
           //  System.out.println(fileP);
             Element root = doc.getRootElement();
             List<Element> celements = root.elements();
+            
             int k = 1;
             for (Element c : celements) {
             	System.out.println("K+"+k++);
@@ -75,8 +76,11 @@ public class LinuxClient extends javax.swing.JFrame {
                 cp.setName(c.valueOf("@name"));
                 cp.setType((byte) 0);
                 cp.setMemo(c.valueOf("@memo"));
-
-                cp.setCreatdate(DateFormat.getDateInstance().parse(c.valueOf("@creatdate")));
+                
+                Date tempTime;
+                SimpleDateFormat timeFormat;
+                timeFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                cp.setCreatdate(timeFormat.parse(c.valueOf("@creatdate")));
                 //System.out.println(DateFormat.getDateInstance().parse(c.valueOf("@creatdate")));
                 cp.setHost(c.valueOf("@host"));
                 cp.setUsername(c.valueOf("@user"));
@@ -94,7 +98,7 @@ public class LinuxClient extends javax.swing.JFrame {
                     gp.setName(g.valueOf("@name"));
                     gp.setType((byte) 1);
                     gp.setMemo(g.valueOf("@memo"));
-                    gp.setCreatdate(DateFormat.getDateInstance().parse(g.valueOf("@creatdate")));
+                    gp.setCreatdate(timeFormat.parse(g.valueOf("@creatdate")));
 
                     gp.setCp(cp);
                     gp.setSts(new ArrayList());
@@ -109,7 +113,7 @@ public class LinuxClient extends javax.swing.JFrame {
                         tk.setName(t.valueOf("@name"));
                         tk.setType((byte) 2);
                         tk.setMemo(t.valueOf("@memo"));
-                        tk.setCreatdate(DateFormat.getDateInstance().parse(t.valueOf("@creatdate")));
+                        tk.setCreatdate(timeFormat.parse(t.valueOf("@creatdate")));
 
                         tk.setCmd(t.valueOf("@cmd"));
                         tk.setFin(new File("@in"));
@@ -154,8 +158,10 @@ public class LinuxClient extends javax.swing.JFrame {
                 cp.setName(c.valueOf("@name"));
                 cp.setType((byte) 0);
                 cp.setMemo(c.valueOf("@memo"));
-
-                cp.setCreatdate(DateFormat.getDateInstance().parse(c.valueOf("@creatdate")));
+                
+                SimpleDateFormat timeFormat;
+                timeFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                cp.setCreatdate(timeFormat.parse(c.valueOf("@creatdate")));
                 //System.out.println(DateFormat.getDateInstance().parse(c.valueOf("@creatdate")));
                 cp.setHost(c.valueOf("@host"));
                 cp.setUsername(c.valueOf("@user"));
@@ -173,7 +179,7 @@ public class LinuxClient extends javax.swing.JFrame {
                     gp.setName(g.valueOf("@name"));
                     gp.setType((byte) 1);
                     gp.setMemo(g.valueOf("@memo"));
-                    gp.setCreatdate(DateFormat.getDateInstance().parse(g.valueOf("@creatdate")));
+                    gp.setCreatdate(timeFormat.parse(g.valueOf("@creatdate")));
 
                     gp.setCp(cp);
                     gp.setSts(new ArrayList());
@@ -188,7 +194,7 @@ public class LinuxClient extends javax.swing.JFrame {
                         tk.setName(t.valueOf("@name"));
                         tk.setType((byte) 2);
                         tk.setMemo(t.valueOf("@memo"));
-                        tk.setCreatdate(DateFormat.getDateInstance().parse(t.valueOf("@creatdate")));
+                        tk.setCreatdate(timeFormat.parse(t.valueOf("@creatdate")));
 
                         tk.setCmd(t.valueOf("@cmd"));
                         tk.setFin(new File("@in"));
@@ -249,6 +255,8 @@ public void GenerateTree()
         {
             @Override
              public   void   mouseClicked(MouseEvent   e){
+            	SimpleDateFormat timeFormat;
+            	timeFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 try{
                     JTree tree = (JTree)e.getSource();
                     int rowLocation = tree.getRowForLocation(e.getX(), e.getY());
@@ -268,21 +276,21 @@ public void GenerateTree()
                             s="computer--id:"+c.getId()+";name:"+c.getName()+";memo:"+c.getMemo()
                              +";host:"+c.getHost()+";user:"+c.getUsername()
                              +";pswd:"+c.getPassword()
-                             +";date:"+b.getCreatdate();
+                             +";date:"+timeFormat.format(b.getCreatdate());
                             jTextArea1.setText(s);
                             break;
                         }
                         case 1:
                         {
                             SSHGroup g=(SSHGroup)treenode.getUserObject();
-                            s="group--id:"+g.getId()+";name:"+g.getName()+";memo:"+g.getMemo()+";date:"+b.getCreatdate();
+                            s="group--id:"+g.getId()+";name:"+g.getName()+";memo:"+g.getMemo()+";date:"+timeFormat.format(b.getCreatdate());
                             jTextArea1.setText(s);
                             break;
                         }
                         case 2:
                         {
                             SSHTask t=(SSHTask)treenode.getUserObject();
-                            s="task--id:"+t.getId()+";name:"+t.getName()+";memo:"+t.getMemo()+";cmd:"+t.getCmd()+";date:"+b.getCreatdate();
+                            s="task--id:"+t.getId()+";name:"+t.getName()+";memo:"+t.getMemo()+";cmd:"+t.getCmd()+";date:"+timeFormat.format(b.getCreatdate());
                             jTextArea1.setText(s);
                             break;
                         }
@@ -462,7 +470,7 @@ public void NewComputerToXML(SSHComputer newComputer){
     newnode.addAttribute("pswd", newComputer.getPassword());
     
     SimpleDateFormat timeFormat;
-	timeFormat=new SimpleDateFormat("yyyy-MM-dd");
+	timeFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     newnode.addAttribute("creatdate",timeFormat.format(newComputer.getCreatdate()));
     String filePath2 = "c:\\temp.xml";
     System.out.println("操作成功！");
