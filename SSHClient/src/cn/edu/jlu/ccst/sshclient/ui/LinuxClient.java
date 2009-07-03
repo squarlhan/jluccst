@@ -432,6 +432,7 @@ private void action ( ActionEvent e ) throws DocumentException
            {
                ex.printStackTrace();
            }
+           //jTree1.repaint();
            updata(); 
            System.out.println("updata");
       }
@@ -717,8 +718,11 @@ public void NewComputerToXML(SSHComputer newComputer){
     private void jMenuItem4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem4MousePressed
         // TODO add your handling code here:
         ComputerUI newComputerUi = new ComputerUI();
+        newComputerUi.setModal(true);
         newComputerUi.setVisible(true);
-        this.setVisible(false);
+        //this.dispose();
+        updata();
+        //this.setVisible(false);
     }//GEN-LAST:event_jMenuItem4MousePressed
 
     /**
