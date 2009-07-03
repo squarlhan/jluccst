@@ -30,7 +30,7 @@ import java.awt.event.*;
  *
  * @author Administrator
  */
-public class ComputerUI extends javax.swing.JFrame {
+public class ComputerUI extends javax.swing.JDialog {
 
     /** Creates new form ComputerUI */
     public ComputerUI() {
@@ -309,14 +309,15 @@ public class ComputerUI extends javax.swing.JFrame {
         this.setVisible(false);
         System.out.println(newComputer1.getName());
         LinuxClient temp = new LinuxClient();
-        temp.cps.add(newComputer1);
+        //temp.cps.add(newComputer1);
 
-         for(SSHComputer c :temp.cps){
-             System.out.println(c.getName());
-         }
-         temp.setVisible(true);
-         temp.GenerateTree();
+         //for(SSHComputer c :temp.cps){
+         //    System.out.println(c.getName());
+         //}
+         //temp.setVisible(true);
+         //temp.GenerateTree();
          temp.NewComputerToXML(newComputer1);
+         temp.dispose();
       /*  ListIterator<SSHComputer> i = temp.cps.listIterator();
 
        while(i.hasNext()){
