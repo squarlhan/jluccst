@@ -277,7 +277,18 @@ public void GenerateTree() {
 
         popMenuC = new JPopupMenu();
         addItemC = new JMenuItem("添加任务组");
-        addItemC.addActionListener(null);
+        addItemC.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+           {
+                try
+                {
+                    action(e);
+                } catch (DocumentException ex)
+                {}
+           }
+        }
+        );
         delItemC = new JMenuItem("删除此电脑");
         delItemC.addActionListener(new ActionListener()
         {
@@ -300,7 +311,18 @@ public void GenerateTree() {
         
         popMenuG = new JPopupMenu();
         addItemG = new JMenuItem("添加一新任务");
-        addItemG.addActionListener(null);
+        addItemG.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+           {
+                try
+                {
+                    action(e);
+                } catch (DocumentException ex)
+                {}
+           }
+        }
+        );
         delItemG = new JMenuItem("删除此任务组");
         delItemG.addActionListener(new ActionListener()
         {
@@ -478,26 +500,34 @@ private void action ( ActionEvent e ) throws DocumentException
 		  newComputerUi.setModal(true);
 		  newComputerUi.setVisible(true);
 		  //this.dispose();
-		  updata();
-		  return;
+		  //updata();
+		  //return;
 	  }
-	  switch(cur.getType())
+	  else
 	  {
-	  case 0:
-	  {
-		  break;
+		 // System.out.println(cur.getType());
+		  switch(cur.getType())
+		  {
+		  case 0:
+		  {
+			  GroupUI newGroup = new GroupUI();
+			  newGroup.setModal(true);
+	       	  newGroup.setVisible(true); 
+	       	  break;
+		  }
+		  case 1:
+		  {
+			  TaskUI newTask = new TaskUI();
+		      newTask.setModal(true);
+		      newTask.setVisible(true);
+		      updata();
+			  break;
+		  }
+		  default:
+			  break;
+		  }
 	  }
-	  case 1:
-	  {
-		  break;
-	  }
-	  case 2:
-	  {
-		  break;
-	  }
-	  default:
-		  break;
-	  }
+	  updata();
   }
   if(str.startsWith("编辑"))
   {
