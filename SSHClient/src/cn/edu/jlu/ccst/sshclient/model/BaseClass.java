@@ -28,6 +28,10 @@ public class BaseClass {
 
 	public BaseClass() {
 		super();
+		this.id = null;
+		this.name = null;
+		this.type = -1;
+		this.creatdate = null;		
 	}
 
 	public String getId() {
