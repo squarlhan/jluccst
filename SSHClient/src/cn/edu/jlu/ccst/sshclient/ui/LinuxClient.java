@@ -168,9 +168,7 @@ public void GenerateTree() {
                new MouseAdapter()
         {
             @Override
-             public   void   mouseClicked(MouseEvent   e){
-            	SimpleDateFormat timeFormat;
-            	timeFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            public   void   mouseClicked(MouseEvent   e){
                 try{
                     JTree tree = (JTree)e.getSource();
                     int rowLocation = tree.getRowForLocation(e.getX(), e.getY());
@@ -179,11 +177,10 @@ public void GenerateTree() {
                     if(treenode.toString().equals("Computers"))
                     {
                         return;
+                    	
                     }
                     String s=null;
                     BaseClass b=(BaseClass)treenode.getUserObject();
-                    cur = (BaseClass)treenode.getUserObject();
-                   // System.out.println("curtype"+cur.getType());
                     switch(b.getType())
                     {
                         case 0:
@@ -192,21 +189,21 @@ public void GenerateTree() {
                             s="computer--id:"+c.getId()+";name:"+c.getName()+";memo:"+c.getMemo()
                              +";host:"+c.getHost()+";user:"+c.getUsername()
                              +";pswd:"+c.getPassword()
-                             +";date:"+timeFormat.format(b.getCreatdate());
+                             +";date:"+b.getCreatdate();
                             jTextArea1.setText(s);
                             break;
                         }
                         case 1:
                         {
                             SSHGroup g=(SSHGroup)treenode.getUserObject();
-                            s="group--id:"+g.getId()+";name:"+g.getName()+";memo:"+g.getMemo()+";date:"+timeFormat.format(b.getCreatdate());
+                            s="group--id:"+g.getId()+";name:"+g.getName()+";memo:"+g.getMemo()+";date:"+b.getCreatdate();
                             jTextArea1.setText(s);
                             break;
                         }
                         case 2:
                         {
                             SSHTask t=(SSHTask)treenode.getUserObject();
-                            s="task--id:"+t.getId()+";name:"+t.getName()+";memo:"+t.getMemo()+";cmd:"+t.getCmd()+";date:"+timeFormat.format(b.getCreatdate());
+                            s="task--id:"+t.getId()+";name:"+t.getName()+";memo:"+t.getMemo()+";cmd:"+t.getCmd()+";date:"+b.getCreatdate();
                             jTextArea1.setText(s);
                             break;
                         }
@@ -230,14 +227,42 @@ public void GenerateTree() {
                            DefaultMutableTreeNode treenode = (DefaultMutableTreeNode) treepath.getLastPathComponent();
                            if(treenode.toString().equals("Computers"))
                             {
-                                return;
+                        	   TreePath path = jTree1.getPathForLocation(e.getX(), e.getY());
+                               if (path == null)
+                                   return;
+                               jTree1.setSelectionPath(path);
+                               popMenuCA.show(jTree1, e.getX(), e.getY());
+                               System.out.println(treenode.toString());
+                               cur=null;
+                               
+                               return;
                             }
                           cur=(BaseClass)treenode.getUserObject();
                           TreePath path = jTree1.getPathForLocation(e.getX(), e.getY());
                           if (path == null)
                               return;
                           jTree1.setSelectionPath(path);
-                          popMenu.show(jTree1, e.getX(), e.getY());
+                          switch(cur.getType())
+                          {
+                          case 0:
+                          {
+                        	  popMenuC.show(jTree1, e.getX(), e.getY());
+                        	  break;
+                          }
+                          case 1:
+                          {
+                        	  popMenuG.show(jTree1, e.getX(), e.getY());
+                        	  break;
+                          }
+                          case 2:
+                          {
+                        	  popMenuT.show(jTree1, e.getX(), e.getY());
+                        	  break;
+                          }
+                          default:
+                        	  break;
+                          
+                          }                        
                         }
                  }
                         catch (Exception ex)  
@@ -250,11 +275,11 @@ public void GenerateTree() {
                 );
         jScrollPane1.setViewportView(jTree1);
 
-        popMenu = new JPopupMenu();
-        addItem = new JMenuItem("添加");
-        addItem.addActionListener(null);
-        delItem = new JMenuItem("删除");
-        delItem.addActionListener(new ActionListener()
+        popMenuC = new JPopupMenu();
+        addItemC = new JMenuItem("添加任务组");
+        addItemC.addActionListener(null);
+        delItemC = new JMenuItem("删除此电脑");
+        delItemC.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent e)
            {
@@ -266,102 +291,220 @@ public void GenerateTree() {
            }
         }
            );
-        editItem = new JMenuItem("修改");
-        editItem.addActionListener(null);
-        popMenu.add(addItem);
-        popMenu.add(delItem);
-        popMenu.add(editItem);
+        editItemC = new JMenuItem("编辑此电脑");
+        editItemC.addActionListener(null);
+        popMenuC.add(addItemC);
+        popMenuC.add(delItemC);
+        popMenuC.add(editItemC);
+        
+        
+        popMenuG = new JPopupMenu();
+        addItemG = new JMenuItem("添加一新任务");
+        addItemG.addActionListener(null);
+        delItemG = new JMenuItem("删除此任务组");
+        delItemG.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+           {
+                try
+                {
+                    action(e);
+                } catch (DocumentException ex)
+                {}
+           }
+        }
+           );
+        editItemG = new JMenuItem("编辑此任务组");
+        editItemG.addActionListener(null);
+        popMenuG.add(addItemG);
+        popMenuG.add(delItemG);
+        popMenuG.add(editItemG);
+        
+        popMenuT = new JPopupMenu();       
+        delItemT = new JMenuItem("删除此任务");
+        delItemT.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+           {
+                try
+                {
+                    action(e);
+                } catch (DocumentException ex)
+                {}
+           }
+        }
+           );
+        editItemT = new JMenuItem("编辑此任务");
+        editItemT.addActionListener(null);
+        popMenuT.add(delItemT);
+        popMenuT.add(editItemT);
+        
+        popMenuCA = new JPopupMenu();       
+        delItemCA = new JMenuItem("删除所有电脑");
+        delItemCA.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+           {
+                try
+                {
+                    action(e);
+                } catch (DocumentException ex)
+                {}
+           }
+        }
+           );
+        addItemCA = new JMenuItem("添加一新电脑");
+        addItemCA.addActionListener(
+        new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+           {
+                try
+                {
+                    action(e);
+                } catch (DocumentException ex)
+                {}
+           }
+        }
+        );
+        popMenuCA.add(delItemCA);
+        popMenuCA.add(addItemCA);
 }
 private void action ( ActionEvent e ) throws DocumentException
-    {
-      String str = e.getActionCommand();
-      if(str.equals("删除"))
+{
+  String str = e.getActionCommand();
+  SAXReader reader = new SAXReader();
+  Document doc = reader.read(this.getClass().getResource("/").getPath() + "cn/edu/jlu/ccst/sshclient/util/Config.xml");
+  if(str.startsWith("删除"))
+  {
+      if(cur==null)
       {
-          SAXReader reader = new SAXReader();
-          Document doc = reader.read(this.getClass().getResource("/").getPath() + "cn/edu/jlu/ccst/sshclient/util/Config.xml");
-          switch(cur.getType())
+    	  List   list=doc.selectNodes("/config/computer");
+          Iterator iter = list.iterator();             
+          while(iter.hasNext())
           {
-              case 0:
-              {
-                  List   list=doc.selectNodes("/config/computer");
-                  //System.out.println(list.size());
-                  Iterator iter = list.iterator();
-                  while(iter.hasNext())
-                  {
-                      Element el=(Element)iter.next();
-                      String it=el.attributeValue("id");
-                      if(it.equals(cur.getId()))
-                      {
-                          el.getParent().remove(el);
-                      }
-                  }
-                   break;
-              }
-              case 1:
-              {
-                  List   list=doc.selectNodes("/config/computer");
-                  Iterator iter = list.iterator();
-                  while(iter.hasNext())
-                  {
-                      Element el=(Element)iter.next();
-                      Iterator it=el.elementIterator("group");
-                      while(it.hasNext())
-                      {
-                          Element et=(Element)it.next();
-                          String s=et.attributeValue("id");
-                          if(s.equals(cur.getId()))
-                          {
-                              el.remove(et);
-                          }
-                      }
-                  }
-                   break;
-              }
-              case 2:
-              {
-                  List   list=doc.selectNodes("/config/computer");
-                  Iterator iter = list.iterator();
-                  while(iter.hasNext())
-                  {
-                      Element el=(Element)iter.next();
-                      Iterator it=el.elementIterator("group");
-                      while(it.hasNext())
-                      {
-                          Element elta=(Element)it.next();
-                          Iterator itta=elta.elementIterator("task");
-                          while(itta.hasNext())
-                          {
-                          Element et=(Element)itta.next();
-                          String s=et.attributeValue("id");
-                          if(s.equals(cur.getId()))
-                          {
-                              elta.remove(et);
-                          }
-                          }
-
-                      }
-                  }
-                    break;
-              }
-              default:
-                    break;
-       }
-       try{
-              
-    	   	   XMLWriter writer = new XMLWriter(new FileWriter(this.getClass().getResource("/").getPath() + "cn/edu/jlu/ccst/sshclient/util/Config.xml"));
-    	   	   System.out.println(this.getClass().getResource("/").getPath() + "cn/edu/jlu/ccst/sshclient/util/Config.xml");
-               writer.write(doc);
-               writer.close();
-           }catch(Exception ex)
-           {
-               ex.printStackTrace();
-           }
-           //jTree1.repaint();
-           updata(); 
-           System.out.println("updata");
+              Element el=(Element)iter.next();
+              el.getParent().remove(el); 
+          } 
       }
-      
-    }
+      else
+      {
+    	  switch(cur.getType())
+    	  {
+          	case 0:
+          	{
+          		List   list=doc.selectNodes("/config/computer");
+          		//System.out.println(list.size());
+          		Iterator iter = list.iterator();
+          		while(iter.hasNext())
+          		{
+                  Element el=(Element)iter.next();
+                  String it=el.attributeValue("id");
+                  if(it.equals(cur.getId()))
+                  {
+                      el.getParent().remove(el);
+                  }
+          		}
+          		break;
+          	}
+          	case 1:
+          	{
+          		List   list=doc.selectNodes("/config/computer");
+          		Iterator iter = list.iterator();
+          		while(iter.hasNext())
+          		{
+                  Element el=(Element)iter.next();
+                  Iterator it=el.elementIterator("group");
+                  while(it.hasNext())
+                  {
+                      Element et=(Element)it.next();
+                      String s=et.attributeValue("id");
+                      if(s.equals(cur.getId()))
+                      {
+                          el.remove(et);
+                      }
+                  }
+          		}
+          		break;
+          	}
+          	case 2:
+          	{
+          		List   list=doc.selectNodes("/config/computer");
+          		Iterator iter = list.iterator();
+          		while(iter.hasNext())
+          		{
+                  Element el=(Element)iter.next();
+                  Iterator it=el.elementIterator("group");
+                  while(it.hasNext())
+                  {
+                      Element elta=(Element)it.next();
+                      Iterator itta=elta.elementIterator("task");
+                      while(itta.hasNext())
+                      {
+                      Element et=(Element)itta.next();
+                      String s=et.attributeValue("id");
+                      if(s.equals(cur.getId()))
+                      {
+                          elta.remove(et);
+                      }
+                      }
+
+                  }
+          		}
+          			break;
+          	}
+          	default:
+          		break;
+    	  }
+      }
+     try{
+          
+	   	   XMLWriter writer = new XMLWriter(new FileWriter(this.getClass().getResource("/").getPath() + "cn/edu/jlu/ccst/sshclient/util/Config.xml"));
+	   	   System.out.println(this.getClass().getResource("/").getPath() + "cn/edu/jlu/ccst/sshclient/util/Config.xml");
+	   	   writer.write(doc);
+	   	   writer.close();
+     }catch(Exception ex)
+     {
+         ex.printStackTrace();
+     }
+     updata(); 
+     System.out.println("updata");
+  }
+  if(str.startsWith("添加"))
+  {
+	  if(cur==null)
+	  {
+		  ComputerUI newComputerUi = new ComputerUI();
+		  newComputerUi.setModal(true);
+		  newComputerUi.setVisible(true);
+		  //this.dispose();
+		  updata();
+		  return;
+	  }
+	  switch(cur.getType())
+	  {
+	  case 0:
+	  {
+		  break;
+	  }
+	  case 1:
+	  {
+		  break;
+	  }
+	  case 2:
+	  {
+		  break;
+	  }
+	  default:
+		  break;
+	  }
+  }
+  if(str.startsWith("编辑"))
+  {
+	  
+  }
+ 
+}
 /**
  * 将新建的计算机信息存到config.xml文件
  */
@@ -734,10 +877,23 @@ public void NewComputerToXML(SSHComputer newComputer){
     private javax.swing.JTextArea jTextArea3;
     private javax.swing.JTree jTree1;
     // End of variables declaration//GEN-END:variables
-    private JPopupMenu popMenu;
-    private JMenuItem addItem;
-    private JMenuItem delItem;
-    private JMenuItem editItem;
+    private JPopupMenu popMenuC;
+    private JMenuItem addItemC;
+    private JMenuItem delItemC;
+    private JMenuItem editItemC;
+    
+    private JPopupMenu popMenuG;
+    private JMenuItem addItemG;
+    private JMenuItem delItemG;
+    private JMenuItem editItemG;
+    
+    private JPopupMenu popMenuT;
+    private JMenuItem delItemT;
+    private JMenuItem editItemT;
+    
+    private JPopupMenu popMenuCA;
+    private JMenuItem delItemCA;
+    private JMenuItem addItemCA;
     protected static BaseClass cur;
 
     public static List<SSHComputer> cps;
