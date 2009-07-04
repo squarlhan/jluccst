@@ -26,6 +26,9 @@ public class GroupUI extends javax.swing.JDialog  {
 	private JButton resetButton , submitButton;
     public GroupUI(){
 	    this.setTitle("新建工作组");
+	    Toolkit tk = Toolkit.getDefaultToolkit();
+		Image img = tk.getImage(this.getClass().getResource("/").getPath() + "cn/edu/jlu/ccst/sshclient/ui/resource/g.png");
+		setIconImage(img);
 		this.setLayout(null);
 		this.setSize(350, 250);
 		
@@ -80,7 +83,7 @@ public class GroupUI extends javax.swing.JDialog  {
       	Date SeverTime = new Date();
     	SimpleDateFormat Severtimeformat = new SimpleDateFormat("yyyyMMddHHmmss");
         newGroup1.setCreatdate(SeverTime);//获得创建成功时的时间
-        newGroup1.setId(Severtimeformat.format(SeverTime));
+        newGroup1.setId("G"+Severtimeformat.format(SeverTime));
         newGroup1.setName(gTextField1.getText());
         newGroup1.setType((byte)1);
         

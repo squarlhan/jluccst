@@ -25,6 +25,9 @@ public class TaskUI extends javax.swing.JDialog {
 	
 	TaskUI() {
 		this.setTitle("新建任务");
+		Toolkit tk = Toolkit.getDefaultToolkit();
+		Image img = tk.getImage(this.getClass().getResource("/").getPath() + "cn/edu/jlu/ccst/sshclient/ui/resource/t.png");
+		setIconImage(img);
 		this.setLayout(null);
 		this.setSize(350, 250);
 		
@@ -104,7 +107,7 @@ public class TaskUI extends javax.swing.JDialog {
          Date SeverTime = new Date();
          SimpleDateFormat Severtimeformat = new SimpleDateFormat("yyyyMMddHHmmss");
          newTask1.setCreatdate(SeverTime);//获得创建成功时的时间
-         newTask1.setId(Severtimeformat.format(SeverTime));
+         newTask1.setId("T"+Severtimeformat.format(SeverTime));
          newTask1.setType((byte) 2);
       
          //找到选中的组

@@ -52,6 +52,9 @@ public class ComputerUI extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
 private void initComponents() {
         this.setTitle("新建计算机");
+        Toolkit tk = Toolkit.getDefaultToolkit();
+		Image img = tk.getImage(this.getClass().getResource("/").getPath() + "cn/edu/jlu/ccst/sshclient/ui/resource/c.png");
+		setIconImage(img);
         jTextField2 = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -280,7 +283,7 @@ private void initComponents() {
     	Date SeverTime = new Date();
     	SimpleDateFormat Severtimeformat = new SimpleDateFormat("yyyyMMddHHmmss");
         newComputer1.setCreatdate(SeverTime);//获得创建成功时的时间
-        newComputer1.setId(Severtimeformat.format(SeverTime));
+        newComputer1.setId("C"+Severtimeformat.format(SeverTime));
         this.setVisible(false);
         System.out.println(newComputer1.getName());
         LinuxClient temp = new LinuxClient();
