@@ -536,7 +536,23 @@ private void action ( ActionEvent e ) throws DocumentException
   }
   if(str.startsWith("编辑"))
   {
-	  
+	  switch(cur.getType())
+	  {
+	  case 0:
+	  {
+		  break;
+	  }
+	  case 1:
+	  {
+		  break;
+	  }
+	  case 2:
+	  {
+		  break;
+	  }
+	  default:
+		  break;
+	  }
   }
  
 }
