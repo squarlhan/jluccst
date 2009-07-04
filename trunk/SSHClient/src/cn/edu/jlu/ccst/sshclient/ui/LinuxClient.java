@@ -17,6 +17,9 @@ import cn.edu.jlu.ccst.sshclient.model.SSHComputer;
 import cn.edu.jlu.ccst.sshclient.model.SSHGroup;
 import cn.edu.jlu.ccst.sshclient.model.SSHTask;
 import cn.edu.jlu.ccst.sshclient.ui.ComputerUI;
+
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -164,6 +167,8 @@ public void GenerateTree() {
         jTree1 = new JTree(root);
         
         jScrollPane1.setViewportView(jTree1);
+        
+        jTree1.setCellRenderer(new MyTreeCellRender());
         jTree1.addMouseListener(
                new MouseAdapter()
         {
@@ -624,6 +629,9 @@ public void NewComputerToXML(SSHComputer newComputer){
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("LinuxClient");
+		Toolkit tk = Toolkit.getDefaultToolkit();
+		Image img = tk.getImage(this.getClass().getResource("/").getPath() + "cn/edu/jlu/ccst/sshclient/ui/resource/faver.png");
+		setIconImage(img);
 
         jSplitPane1.setName("jSplitPane1"); // NOI18N
 
