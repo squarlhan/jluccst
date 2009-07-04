@@ -174,4 +174,10 @@ public class SSHTask extends BaseClass implements BaseAction, BaseOperation {
            // return "task--id:"+id+";name:"+name+";memo:"+memo+";cmd:"+cmd+";date:"+creatdate;
         }
 
+		@Override
+		public boolean isdone() {
+			// TODO Auto-generated method stub
+			return false;
+		}
+
 }

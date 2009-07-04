@@ -144,4 +144,10 @@ public List<SSHTask> getSts() {
              // return "group--id:"+id+";name:"+name+";memo:"+memo+";date:"+creatdate;
         }
 
+		@Override
+		public boolean isdone() {
+			// TODO Auto-generated method stub
+			return false;
+		}
+
 }
