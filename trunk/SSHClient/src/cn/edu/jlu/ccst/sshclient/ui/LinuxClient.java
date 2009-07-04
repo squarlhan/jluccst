@@ -181,11 +181,35 @@ public void GenerateTree() {
                     DefaultMutableTreeNode treenode = (DefaultMutableTreeNode) treepath.getLastPathComponent();
                     if(treenode.toString().equals("Computers"))
                     {
+                      	jMenuItem4.setEnabled(true);
+                    	jMenuItem5.setEnabled(false);
+                    	jMenuItem6.setEnabled(false);
                         return;
                     	
                     }
                     String s=null;
                     BaseClass b=(BaseClass)treenode.getUserObject();
+                    cur=(BaseClass)treenode.getUserObject();
+                    if(cur.getType() == 0) { //获得选中的类型，给工具栏中相应的选项变色
+                    	 jMenuItem5.setEnabled(true);
+                    	 jMenuItem4.setEnabled(false);
+                    	 jMenuItem6.setEnabled(false);
+                    }
+                    else if(cur.getType() == 1) {
+                    	 jMenuItem6.setEnabled(true);
+                    	 jMenuItem4.setEnabled(false);
+                    	 jMenuItem5.setEnabled(false);
+                    }
+                    else if(cur.getType() == 2){
+                    	jMenuItem4.setEnabled(false);
+                    	jMenuItem5.setEnabled(false);
+                    	jMenuItem6.setEnabled(false);
+                    }
+                    else {
+                      	jMenuItem4.setEnabled(true);
+                    	jMenuItem5.setEnabled(false);
+                    	jMenuItem6.setEnabled(false);
+                    }
                     switch(b.getType())
                     {
                         case 0:
@@ -708,16 +732,25 @@ public void NewComputerToXML(SSHComputer newComputer){
                 jMenu4MouseClicked(evt);
             }
         });
-
+     //   jMenu4.setEnabled(false);
+        
+        //没有选中内容时新建选项全设为暗色
+        if(cur == null) {
+            jMenuItem4.setEnabled(true);
+            jMenuItem5.setEnabled(false);
+            jMenuItem6.setEnabled(false);
+        }
+        
         jMenuItem4.setText("Computer");
         jMenuItem4.setName("jMenuItem4"); // NOI18N
+        //"新建计算机"的监听函数
         jMenuItem4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jMenuItem4MousePressed(evt);
             }
         });
         jMenu4.add(jMenuItem4);
-
+        
         jMenuItem5.setText("Group");
         jMenuItem5.setName("jMenuItem5"); // NOI18N
         //"新建工作组"的监听函数
@@ -844,12 +877,14 @@ public void NewComputerToXML(SSHComputer newComputer){
  */
     private void jMenuItem4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem4MousePressed
         // TODO add your handling code here:
+    	if(jMenuItem4.isArmed() == true) {
         ComputerUI newComputerUi = new ComputerUI();
         newComputerUi.setModal(true);
         newComputerUi.setVisible(true);
         //this.dispose();
         updata();
         System.out.println("computer");
+    	}
         //this.setVisible(false);
     }//GEN-LAST:event_jMenuItem4MousePressed
 
@@ -857,15 +892,12 @@ public void NewComputerToXML(SSHComputer newComputer){
  * 工具栏中新建组的处理函数
  */
     private void jMenuMousePressNewGroup(java.awt.event.MouseEvent evt){//GEN-FIRST:event_jMenuItem5MousePressed
-       	if( this.cur == null || this.cur.getType() != 0) {
-       	 JOptionPane.showMessageDialog(null, "请选中要新建组的计算机");
-       	 return;
-    	}
+    	if(jMenuItem5.isArmed() == true) {
        	GroupUI newGroup = new GroupUI();
        	newGroup.setModal(true);
        	newGroup.setVisible(true);
        	updata();
-       	System.out.println("选中类型"+cur.getType());
+    	}
        	
     }
     
@@ -873,15 +905,12 @@ public void NewComputerToXML(SSHComputer newComputer){
  * 工具栏中新建任务的处理函数    
  */
     private void jMenuMousePressNewTask(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jMenuItem6MousePressed
-    	if( this.cur == null || this.cur.getType() != 1 ) {
-    		 JOptionPane.showMessageDialog(null, "请选中要新建任务的组");
-           	 return;
-    	}
+    if(jMenuItem6.isArmed() == true) {
     	TaskUI newTask = new TaskUI();
     	newTask.setModal(true);
     	newTask.setVisible(true);
     	updata();
-    	System.out.println("新建任务over");
+    	}
     }
     /**
     * @param args the command line arguments
