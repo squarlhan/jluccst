@@ -24,12 +24,11 @@ import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.FileWriter;
 import java.text.DateFormat;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.*;
 import java.text.*;
 
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
 import javax.swing.JTree;
 import javax.swing.JTree.DynamicUtilTreeNode;
@@ -42,8 +41,6 @@ import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 import org.dom4j.DocumentHelper;
-import org.dom4j.io.OutputFormat;
-import org.dom4j.io.XMLWriter;
 import org.dom4j.io.*;
 /**
  *
@@ -56,6 +53,7 @@ public class LinuxClient extends javax.swing.JFrame {
         initComponents();
         updata();
     }
+    
 //updata the jtree
  void  updata() {
         
@@ -75,8 +73,10 @@ public class LinuxClient extends javax.swing.JFrame {
                 cp.setName(c.valueOf("@name"));
                 cp.setType((byte) 0);
                 cp.setMemo(c.valueOf("@memo"));
-
-                cp.setCreatdate(DateFormat.getDateInstance().parse(c.valueOf("@creatdate")));
+                
+                SimpleDateFormat timeFormat;
+                timeFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+                cp.setCreatdate(timeFormat.parse(c.valueOf("@creatdate")));
                 //System.out.println(DateFormat.getDateInstance().parse(c.valueOf("@creatdate")));
                 cp.setHost(c.valueOf("@host"));
                 cp.setUsername(c.valueOf("@user"));
@@ -94,7 +94,7 @@ public class LinuxClient extends javax.swing.JFrame {
                     gp.setName(g.valueOf("@name"));
                     gp.setType((byte) 1);
                     gp.setMemo(g.valueOf("@memo"));
-                    gp.setCreatdate(DateFormat.getDateInstance().parse(g.valueOf("@creatdate")));
+                    gp.setCreatdate(timeFormat.parse(g.valueOf("@creatdate")));
 
                     gp.setCp(cp);
                     gp.setSts(new ArrayList());
@@ -109,7 +109,7 @@ public class LinuxClient extends javax.swing.JFrame {
                         tk.setName(t.valueOf("@name"));
                         tk.setType((byte) 2);
                         tk.setMemo(t.valueOf("@memo"));
-                        tk.setCreatdate(DateFormat.getDateInstance().parse(t.valueOf("@creatdate")));
+                        tk.setCreatdate(timeFormat.parse(t.valueOf("@creatdate")));
 
                         tk.setCmd(t.valueOf("@cmd"));
                         tk.setFin(new File("@in"));
@@ -142,8 +142,7 @@ public class LinuxClient extends javax.swing.JFrame {
         GenerateTree();
     }
 /*构建生成的Computer树*/
-public void GenerateTree()
-{
+public void GenerateTree() {
        //下面开始构建树
        DefaultMutableTreeNode root = new DefaultMutableTreeNode("Computers", true);
         for(SSHComputer c : cps){
@@ -170,6 +169,8 @@ public void GenerateTree()
         {
             @Override
              public   void   mouseClicked(MouseEvent   e){
+            	SimpleDateFormat timeFormat;
+            	timeFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 try{
                     JTree tree = (JTree)e.getSource();
                     int rowLocation = tree.getRowForLocation(e.getX(), e.getY());
@@ -178,10 +179,11 @@ public void GenerateTree()
                     if(treenode.toString().equals("Computers"))
                     {
                         return;
-                    	
                     }
                     String s=null;
                     BaseClass b=(BaseClass)treenode.getUserObject();
+                    cur = (BaseClass)treenode.getUserObject();
+                   // System.out.println("curtype"+cur.getType());
                     switch(b.getType())
                     {
                         case 0:
@@ -190,21 +192,21 @@ public void GenerateTree()
                             s="computer--id:"+c.getId()+";name:"+c.getName()+";memo:"+c.getMemo()
                              +";host:"+c.getHost()+";user:"+c.getUsername()
                              +";pswd:"+c.getPassword()
-                             +";date:"+b.getCreatdate();
+                             +";date:"+timeFormat.format(b.getCreatdate());
                             jTextArea1.setText(s);
                             break;
                         }
                         case 1:
                         {
                             SSHGroup g=(SSHGroup)treenode.getUserObject();
-                            s="group--id:"+g.getId()+";name:"+g.getName()+";memo:"+g.getMemo()+";date:"+b.getCreatdate();
+                            s="group--id:"+g.getId()+";name:"+g.getName()+";memo:"+g.getMemo()+";date:"+timeFormat.format(b.getCreatdate());
                             jTextArea1.setText(s);
                             break;
                         }
                         case 2:
                         {
                             SSHTask t=(SSHTask)treenode.getUserObject();
-                            s="task--id:"+t.getId()+";name:"+t.getName()+";memo:"+t.getMemo()+";cmd:"+t.getCmd()+";date:"+b.getCreatdate();
+                            s="task--id:"+t.getId()+";name:"+t.getName()+";memo:"+t.getMemo()+";cmd:"+t.getCmd()+";date:"+timeFormat.format(b.getCreatdate());
                             jTextArea1.setText(s);
                             break;
                         }
@@ -228,42 +230,14 @@ public void GenerateTree()
                            DefaultMutableTreeNode treenode = (DefaultMutableTreeNode) treepath.getLastPathComponent();
                            if(treenode.toString().equals("Computers"))
                             {
-                        	   TreePath path = jTree1.getPathForLocation(e.getX(), e.getY());
-                               if (path == null)
-                                   return;
-                               jTree1.setSelectionPath(path);
-                               popMenuCA.show(jTree1, e.getX(), e.getY());
-                               System.out.println(treenode.toString());
-                               cur=null;
-                               
-                               return;
+                                return;
                             }
                           cur=(BaseClass)treenode.getUserObject();
                           TreePath path = jTree1.getPathForLocation(e.getX(), e.getY());
                           if (path == null)
                               return;
                           jTree1.setSelectionPath(path);
-                          switch(cur.getType())
-                          {
-                          case 0:
-                          {
-                        	  popMenuC.show(jTree1, e.getX(), e.getY());
-                        	  break;
-                          }
-                          case 1:
-                          {
-                        	  popMenuG.show(jTree1, e.getX(), e.getY());
-                        	  break;
-                          }
-                          case 2:
-                          {
-                        	  popMenuT.show(jTree1, e.getX(), e.getY());
-                        	  break;
-                          }
-                          default:
-                        	  break;
-                          
-                          }                        
+                          popMenu.show(jTree1, e.getX(), e.getY());
                         }
                  }
                         catch (Exception ex)  
@@ -276,11 +250,11 @@ public void GenerateTree()
                 );
         jScrollPane1.setViewportView(jTree1);
 
-        popMenuC = new JPopupMenu();
-        addItemC = new JMenuItem("添加任务组");
-        addItemC.addActionListener(null);
-        delItemC = new JMenuItem("删除此电脑");
-        delItemC.addActionListener(new ActionListener()
+        popMenu = new JPopupMenu();
+        addItem = new JMenuItem("添加");
+        addItem.addActionListener(null);
+        delItem = new JMenuItem("删除");
+        delItem.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent e)
            {
@@ -292,128 +266,43 @@ public void GenerateTree()
            }
         }
            );
-        editItemC = new JMenuItem("编辑此电脑");
-        editItemC.addActionListener(null);
-        popMenuC.add(addItemC);
-        popMenuC.add(delItemC);
-        popMenuC.add(editItemC);
-        
-        
-        popMenuG = new JPopupMenu();
-        addItemG = new JMenuItem("添加一新任务");
-        addItemG.addActionListener(null);
-        delItemG = new JMenuItem("删除此任务组");
-        delItemG.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-           {
-                try
-                {
-                    action(e);
-                } catch (DocumentException ex)
-                {}
-           }
-        }
-           );
-        editItemG = new JMenuItem("编辑此任务组");
-        editItemG.addActionListener(null);
-        popMenuG.add(addItemG);
-        popMenuG.add(delItemG);
-        popMenuG.add(editItemG);
-        
-        popMenuT = new JPopupMenu();       
-        delItemT = new JMenuItem("删除此任务");
-        delItemT.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-           {
-                try
-                {
-                    action(e);
-                } catch (DocumentException ex)
-                {}
-           }
-        }
-           );
-        editItemT = new JMenuItem("编辑此任务");
-        editItemT.addActionListener(null);
-        popMenuT.add(delItemT);
-        popMenuT.add(editItemT);
-        
-        popMenuCA = new JPopupMenu();       
-        delItemCA = new JMenuItem("删除所有电脑");
-        delItemCA.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-           {
-                try
-                {
-                    action(e);
-                } catch (DocumentException ex)
-                {}
-           }
-        }
-           );
-        addItemCA = new JMenuItem("添加一新电脑");
-        addItemCA.addActionListener(
-        new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-           {
-                try
-                {
-                    action(e);
-                } catch (DocumentException ex)
-                {}
-           }
-        }
-        );
-        popMenuCA.add(delItemCA);
-        popMenuCA.add(addItemCA);
+        editItem = new JMenuItem("修改");
+        editItem.addActionListener(null);
+        popMenu.add(addItem);
+        popMenu.add(delItem);
+        popMenu.add(editItem);
 }
 private void action ( ActionEvent e ) throws DocumentException
     {
       String str = e.getActionCommand();
-      SAXReader reader = new SAXReader();
-      Document doc = reader.read(this.getClass().getResource("/").getPath() + "cn/edu/jlu/ccst/sshclient/util/Config.xml");
-      if(str.startsWith("删除"))
+      if(str.equals("删除"))
       {
-          if(cur==null)
+          SAXReader reader = new SAXReader();
+          Document doc = reader.read(this.getClass().getResource("/").getPath() + "cn/edu/jlu/ccst/sshclient/util/Config.xml");
+          switch(cur.getType())
           {
-        	  List   list=doc.selectNodes("/config/computer");
-              Iterator iter = list.iterator();             
-              while(iter.hasNext())
+              case 0:
               {
-                  Element el=(Element)iter.next();
-                  el.getParent().remove(el); 
-              } 
-          }
-          else
-          {
-        	  switch(cur.getType())
-        	  {
-              	case 0:
-              	{
-              		List   list=doc.selectNodes("/config/computer");
-              		//System.out.println(list.size());
-              		Iterator iter = list.iterator();
-              		while(iter.hasNext())
-              		{
+                  List   list=doc.selectNodes("/config/computer");
+                  //System.out.println(list.size());
+                  Iterator iter = list.iterator();
+                  while(iter.hasNext())
+                  {
                       Element el=(Element)iter.next();
                       String it=el.attributeValue("id");
                       if(it.equals(cur.getId()))
                       {
                           el.getParent().remove(el);
                       }
-              		}
-              		break;
-              	}
-              	case 1:
-              	{
-              		List   list=doc.selectNodes("/config/computer");
-              		Iterator iter = list.iterator();
-              		while(iter.hasNext())
-              		{
+                  }
+                   break;
+              }
+              case 1:
+              {
+                  List   list=doc.selectNodes("/config/computer");
+                  Iterator iter = list.iterator();
+                  while(iter.hasNext())
+                  {
                       Element el=(Element)iter.next();
                       Iterator it=el.elementIterator("group");
                       while(it.hasNext())
@@ -425,15 +314,15 @@ private void action ( ActionEvent e ) throws DocumentException
                               el.remove(et);
                           }
                       }
-              		}
-              		break;
-              	}
-              	case 2:
-              	{
-              		List   list=doc.selectNodes("/config/computer");
-              		Iterator iter = list.iterator();
-              		while(iter.hasNext())
-              		{
+                  }
+                   break;
+              }
+              case 2:
+              {
+                  List   list=doc.selectNodes("/config/computer");
+                  Iterator iter = list.iterator();
+                  while(iter.hasNext())
+                  {
                       Element el=(Element)iter.next();
                       Iterator it=el.elementIterator("group");
                       while(it.hasNext())
@@ -451,59 +340,27 @@ private void action ( ActionEvent e ) throws DocumentException
                           }
 
                       }
-              		}
-              			break;
-              	}
-              	default:
-              		break;
-        	  }
-          }
-         try{
+                  }
+                    break;
+              }
+              default:
+                    break;
+       }
+       try{
               
-   	   	   XMLWriter writer = new XMLWriter(new FileWriter(this.getClass().getResource("/").getPath() + "cn/edu/jlu/ccst/sshclient/util/Config.xml"));
-   	   	   System.out.println(this.getClass().getResource("/").getPath() + "cn/edu/jlu/ccst/sshclient/util/Config.xml");
-   	   	   writer.write(doc);
-   	   	   writer.close();
-         }catch(Exception ex)
-         {
-             ex.printStackTrace();
-         }
-         updata(); 
-         System.out.println("updata");
+    	   	   XMLWriter writer = new XMLWriter(new FileWriter(this.getClass().getResource("/").getPath() + "cn/edu/jlu/ccst/sshclient/util/Config.xml"));
+    	   	   System.out.println(this.getClass().getResource("/").getPath() + "cn/edu/jlu/ccst/sshclient/util/Config.xml");
+               writer.write(doc);
+               writer.close();
+           }catch(Exception ex)
+           {
+               ex.printStackTrace();
+           }
+           //jTree1.repaint();
+           updata(); 
+           System.out.println("updata");
       }
-      if(str.startsWith("添加"))
-      {
-    	  if(cur==null)
-    	  {
-    		  ComputerUI newComputerUi = new ComputerUI();
-    		  newComputerUi.setModal(true);
-    		  newComputerUi.setVisible(true);
-    		  //this.dispose();
-    		  updata();
-    	  }
-    	  switch(cur.getType())
-    	  {
-    	  case 0:
-    	  {
-    		  break;
-    	  }
-    	  case 1:
-    	  {
-    		  break;
-    	  }
-    	  case 2:
-    	  {
-    		  break;
-    	  }
-    	  default:
-    		  break;
-    	  }
-      }
-      if(str.startsWith("编辑"))
-      {
-    	  
-      }
-     
+      
     }
 /**
  * 将新建的计算机信息存到config.xml文件
@@ -517,8 +374,8 @@ public void NewComputerToXML(SSHComputer newComputer){
     OutputFormat format = OutputFormat.createPrettyPrint();
     Element root = doc.getRootElement();
     XMLWriter writer = null;// 声明写XML的对象
-    List<Element> celements = root.elements();
-    for (Element c : celements);
+   // List<Element> celements = root.elements();
+    //for (Element c : celements);
     
     Element newnode = root.addElement("computer");
     newnode.addAttribute("id", newComputer.getId());
@@ -529,45 +386,7 @@ public void NewComputerToXML(SSHComputer newComputer){
     newnode.addAttribute("pswd", newComputer.getPassword());
     
     SimpleDateFormat timeFormat;
-	timeFormat=new SimpleDateFormat("yyyy-MM-dd");
-    newnode.addAttribute("creatdate",timeFormat.format(newComputer.getCreatdate()));
-    String filePath2 = "c:\\temp.xml";
-    System.out.println("操作成功！");
-    System.out.println(filePath);
-    writer = new XMLWriter(new FileWriter(filePath), format);
-    writer.write(doc);
-    writer.close();
-    
-    }
-    catch(Exception e ){
-        e.printStackTrace();
-    }
-
-
-
-}
-public void NewGroupToXML(SSHComputer newComputer){
-    SAXReader reader = new SAXReader();
-    try{
-    String filePath = this.getClass().getResource("/").getPath() + "cn/edu/jlu/ccst/sshclient/util/Config.xml";
-    System.out.println(filePath);
-    Document doc = reader.read(filePath);
-    OutputFormat format = OutputFormat.createPrettyPrint();
-    Element root = doc.getRootElement();
-    XMLWriter writer = null;// 声明写XML的对象
-    List<Element> celements = root.elements();
-    for (Element c : celements);
-    
-    Element newnode = root.addElement("computer");
-    newnode.addAttribute("id", newComputer.getId());
-    newnode.addAttribute("name",newComputer.getName());
-    System.out.println(newComputer.getHost());
-    newnode.addAttribute("host",newComputer.getHost());
-    newnode.addAttribute("user",newComputer.getUsername());
-    newnode.addAttribute("pswd", newComputer.getPassword());
-    
-    SimpleDateFormat timeFormat;
-	timeFormat=new SimpleDateFormat("yyyy-MM-dd");
+	timeFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     newnode.addAttribute("creatdate",timeFormat.format(newComputer.getCreatdate()));
     String filePath2 = "c:\\temp.xml";
     System.out.println("操作成功！");
@@ -594,7 +413,6 @@ public void NewGroupToXML(SSHComputer newComputer){
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-    	cur=null;
         jSplitPane1 = new javax.swing.JSplitPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTree1 = new javax.swing.JTree();
@@ -697,9 +515,6 @@ public void NewGroupToXML(SSHComputer newComputer){
         jMenuItem4.setText("Computer");
         jMenuItem4.setName("jMenuItem4"); // NOI18N
         jMenuItem4.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jMenuItem4MouseClicked(evt);
-            }
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jMenuItem4MousePressed(evt);
             }
@@ -708,10 +523,22 @@ public void NewGroupToXML(SSHComputer newComputer){
 
         jMenuItem5.setText("Group");
         jMenuItem5.setName("jMenuItem5"); // NOI18N
+        //"新建工作组"的监听函数
+        jMenuItem5.addMouseListener(new java.awt.event.MouseAdapter() {
+        	public void mousePressed(java.awt.event.MouseEvent evt) {
+        		jMenuMousePressNewGroup(evt);
+        	}
+        });
         jMenu4.add(jMenuItem5);
 
         jMenuItem6.setText("Task");
         jMenuItem6.setName("jMenuItem6"); // NOI18N
+        //“新建任务的监听函数”
+        jMenuItem6.addMouseListener(new java.awt.event.MouseAdapter() {
+        	public void mousePressed(java.awt.event.MouseEvent evt) {
+        		jMenuMousePressNewTask(evt);
+        	}
+        });
         jMenu4.add(jMenuItem6);
 
         jMenu1.add(jMenu4);
@@ -813,14 +640,11 @@ public void NewGroupToXML(SSHComputer newComputer){
         
 
 
-    }//GEN-LAST:event_jMenu4MouseClicked
-     /*此函数没有用到*/
-    private void jMenuItem4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem4MouseClicked
-        // TODO add your handling code here:
-      ComputerUI newComputerUi = new ComputerUI();
-       newComputerUi.setVisible(true);
-    }//GEN-LAST:event_jMenuItem4MouseClicked
-
+    }
+/**
+ * 工具栏中新建计算机的处理函数
+ * @param evt
+ */
     private void jMenuItem4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem4MousePressed
         // TODO add your handling code here:
         ComputerUI newComputerUi = new ComputerUI();
@@ -828,9 +652,40 @@ public void NewGroupToXML(SSHComputer newComputer){
         newComputerUi.setVisible(true);
         //this.dispose();
         updata();
+        System.out.println("computer");
         //this.setVisible(false);
     }//GEN-LAST:event_jMenuItem4MousePressed
 
+/**
+ * 工具栏中新建组的处理函数
+ */
+    private void jMenuMousePressNewGroup(java.awt.event.MouseEvent evt){//GEN-FIRST:event_jMenuItem5MousePressed
+       	if( this.cur == null || this.cur.getType() != 0) {
+       	 JOptionPane.showMessageDialog(null, "请选中要新建组的计算机");
+       	 return;
+    	}
+       	GroupUI newGroup = new GroupUI();
+       	newGroup.setModal(true);
+       	newGroup.setVisible(true);
+       	updata();
+       	System.out.println("选中类型"+cur.getType());
+       	
+    }
+    
+/**
+ * 工具栏中新建任务的处理函数    
+ */
+    private void jMenuMousePressNewTask(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jMenuItem6MousePressed
+    	if( this.cur == null || this.cur.getType() != 1 ) {
+    		 JOptionPane.showMessageDialog(null, "请选中要新建任务的组");
+           	 return;
+    	}
+    	TaskUI newTask = new TaskUI();
+    	newTask.setModal(true);
+    	newTask.setVisible(true);
+    	updata();
+    	System.out.println("新建任务over");
+    }
     /**
     * @param args the command line arguments
     */
@@ -879,24 +734,11 @@ public void NewGroupToXML(SSHComputer newComputer){
     private javax.swing.JTextArea jTextArea3;
     private javax.swing.JTree jTree1;
     // End of variables declaration//GEN-END:variables
-    private JPopupMenu popMenuC;
-    private JMenuItem addItemC;
-    private JMenuItem delItemC;
-    private JMenuItem editItemC;
-    
-    private JPopupMenu popMenuG;
-    private JMenuItem addItemG;
-    private JMenuItem delItemG;
-    private JMenuItem editItemG;
-    
-    private JPopupMenu popMenuT;
-    private JMenuItem delItemT;
-    private JMenuItem editItemT;
-    
-    private JPopupMenu popMenuCA;
-    private JMenuItem delItemCA;
-    private JMenuItem addItemCA;
-    private BaseClass cur;
+    private JPopupMenu popMenu;
+    private JMenuItem addItem;
+    private JMenuItem delItem;
+    private JMenuItem editItem;
+    protected static BaseClass cur;
 
     public static List<SSHComputer> cps;
     public static List<SSHGroup> gps;
