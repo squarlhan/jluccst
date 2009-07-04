@@ -26,19 +26,15 @@ public class MyTreeCellRender extends DefaultTreeCellRenderer {
 		ImageIcon image3 = new ImageIcon(this.getClass().getResource("/").getPath() + "cn/edu/jlu/ccst/sshclient/ui/resource/t.png");
 		ImageIcon image4 = new ImageIcon(this.getClass().getResource("/").getPath() + "cn/edu/jlu/ccst/sshclient/ui/resource/default.png");
 		if (node.getLevel() == 0) {
-			System.out.println("level0"+image0.getIconHeight());
 			this.setIcon(image0);
 			this.setSize(30,30);
 		} else if (node.getLevel() == 1) {
-			System.out.println("level1");
 			this.setIcon(image1);
 			this.setSize(30,30);
 		} else if (node.getLevel() == 2) {
-			System.out.println("level2");
 			this.setIcon(image2);
 			this.setSize(30,30);
 		} else if (node.getLevel() == 3) {
-			System.out.println("level3");
 			this.setIcon(image3);
 			this.setSize(30,30);
 		} else {
