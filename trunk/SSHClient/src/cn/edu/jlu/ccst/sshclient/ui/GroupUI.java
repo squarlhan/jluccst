@@ -29,6 +29,7 @@ public class GroupUI extends javax.swing.JDialog  {
 	private JButton resetButton , submitButton;
     public GroupUI(){
 	   initComponent();
+	   this.setTitle("新建工作组");
 	   submitButton.addMouseListener(new java.awt.event.MouseAdapter() {
            public void mousePressed(java.awt.event.MouseEvent evt) {
                SubmitButtonMousePressed(evt);
@@ -38,6 +39,7 @@ public class GroupUI extends javax.swing.JDialog  {
     //----------------------------------------------------------//
     public GroupUI(String name,String memo){
 	  initComponent();
+	  this.setTitle("修改工作组");
 	  submitButton.addMouseListener(new java.awt.event.MouseAdapter() {
           public void mousePressed(java.awt.event.MouseEvent evt) {
         	  SubmitMousePressedE(evt);
@@ -50,7 +52,7 @@ public class GroupUI extends javax.swing.JDialog  {
      * 初始画图函数
      */
     private void initComponent(){
-    	 this.setTitle("新建工作组");
+    	 
  	    this.setLocationRelativeTo(null);
  	    Toolkit tk = Toolkit.getDefaultToolkit();
  		Image img = tk.getImage(this.getClass().getResource("/").getPath() + "cn/edu/jlu/ccst/sshclient/ui/resource/g.png");
@@ -88,6 +90,15 @@ public class GroupUI extends javax.swing.JDialog  {
  		submitButton.setBounds(180, 200, 80, 30);
  		
  		this.add(submitButton);
+ 		Dimension   screenSize   =   Toolkit.getDefaultToolkit().getScreenSize();   
+        Dimension   frameSize   =   this.getSize();   
+
+        if   (frameSize.height   >   screenSize.height)   
+                frameSize.height   =   screenSize.height;   
+        if   (frameSize.width   >   screenSize.width)   
+                frameSize.width   =   screenSize.width;   
+
+        this.setLocation((screenSize.width   -   frameSize.width)   /   2,   (screenSize.height   -   frameSize.height)   /   2);
     }
     //-----------------------------------------------------------------//
       /**
@@ -162,10 +173,9 @@ public class GroupUI extends javax.swing.JDialog  {
         writer = new XMLWriter(new FileWriter(filePath), format);
         writer.write(doc);
         writer.close();
-        //System.out.println("新建组结束");
         this.setVisible(false);
         this.dispose();
-      //  temp.updata();    
+        JOptionPane.showMessageDialog(null, "创建组成功！");   
         }
         catch(Exception e){
         	e.printStackTrace();
@@ -185,6 +195,7 @@ public class GroupUI extends javax.swing.JDialog  {
       	  this.EditGroupFromXML(LinuxClient.getCur().getId(), gTextField1.getText(), memoJArea.getText());
           this.setVisible(false);
           this.dispose();   
+          JOptionPane.showMessageDialog(null, "修改组成功！");
         }
           
 //-----------------------------------------------//
