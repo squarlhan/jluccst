@@ -3,11 +3,20 @@
  */
 package cn.edu.jlu.ccst.sshclient.model;
 
+import java.io.FileWriter;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
+
+import org.dom4j.Document;
+import org.dom4j.Element;
+import org.dom4j.io.SAXReader;
+import org.dom4j.io.XMLWriter;
 
 import cn.edu.jlu.ccst.sshclient.inter.BaseAction;
 import cn.edu.jlu.ccst.sshclient.inter.BaseOperation;
+import cn.edu.jlu.ccst.sshclient.ui.GroupUI;
+import cn.edu.jlu.ccst.sshclient.ui.LinuxClient;
 
 /**�������ʵ����
  * @author Woden
@@ -99,6 +108,9 @@ public List<SSHTask> getSts() {
 	@Override
 	public boolean creat() {
 		// TODO Auto-generated method stub
+		GroupUI newGroup = new GroupUI();
+		newGroup.setModal(true);
+     	newGroup.setVisible(true); 
 		return false;
 	}
 
@@ -126,6 +138,34 @@ public List<SSHTask> getSts() {
 	@Override
 	public boolean remove() {
 		// TODO Auto-generated method stub
+		SAXReader reader = new SAXReader();
+		try
+		{
+		  Document doc = reader.read(this.getClass().getResource("/").getPath() + "cn/edu/jlu/ccst/sshclient/util/Config.xml");
+		  List   list=doc.selectNodes("/config/computer");
+    		Iterator iter = list.iterator();
+    		while(iter.hasNext())
+    		{
+            Element el=(Element)iter.next();
+            Iterator it=el.elementIterator("group");
+            while(it.hasNext())
+            {
+                Element et=(Element)it.next();
+                String s=et.attributeValue("id");
+                if(s.equals(LinuxClient.getCur().getId()))
+                {
+                    el.remove(et);
+                }
+            }
+    		}
+    	  XMLWriter writer = new XMLWriter(new FileWriter(this.getClass().getResource("/").getPath() + "cn/edu/jlu/ccst/sshclient/util/Config.xml"));	   	 
+		  writer.write(doc);
+		  writer.close();
+		}
+	     catch(Exception ex)
+	     {
+	         ex.printStackTrace();
+	     }
 		return false;
 	}
 
@@ -135,6 +175,10 @@ public List<SSHTask> getSts() {
 	@Override
 	public boolean update() {
 		// TODO Auto-generated method stub
+		 SSHGroup t=(SSHGroup)LinuxClient.getCur();
+		 GroupUI newGroup = new GroupUI(t.getName(),t.getMemo());
+		 newGroup.setModal(true);
+		 newGroup.setVisible(true);
 		return false;
 	}
 
