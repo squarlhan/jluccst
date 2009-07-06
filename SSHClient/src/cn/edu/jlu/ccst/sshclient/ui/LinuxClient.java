@@ -110,8 +110,8 @@ public class LinuxClient extends javax.swing.JFrame {
                         tk.setMemo(t.valueOf("@memo"));
                         tk.setCreatdate(timeFormat.parse(t.valueOf("@creatdate")));
                         tk.setCmd(t.valueOf("@cmd"));
-                        tk.setFin(new File("@in"));
-                        tk.setFout(new File("@out"));
+                        tk.setFin(t.valueOf("@in"));
+                        tk.setFout(t.valueOf("@out"));
                         List<String> params = new ArrayList();
                         List<Element> pelements = t.elements();
                         for(Element p : pelements){
@@ -158,295 +158,41 @@ public void GenerateTree() {
         jTree1 = new JTree(root);       
         jScrollPane1.setViewportView(jTree1);       
         jTree1.setCellRenderer(new MyTreeCellRender());
-        jTree1.addMouseListener(
-               new MouseAdapter()
-        {
-            @Override
-            public   void   mouseClicked(MouseEvent   e){
-                try{
-                    JTree tree = (JTree)e.getSource();
-                    int rowLocation = tree.getRowForLocation(e.getX(), e.getY());
-                    TreePath treepath = tree.getPathForRow(rowLocation);
-                    DefaultMutableTreeNode treenode = (DefaultMutableTreeNode) treepath.getLastPathComponent();
-                    if(treenode.toString().equals("Computers"))
-                    {
-                    	jTextArea1.setText("");
-                    	jMenuItem4.setEnabled(true);
-                    	jMenuItem5.setEnabled(false);
-                    	jMenuItem6.setEnabled(false);
-                        return;
-                    	
-                    }
-                    String s=null;
-                    BaseClass b=(BaseClass)treenode.getUserObject();
-                    cur=(BaseClass)treenode.getUserObject();
-                    if(cur.getType() == 0) { //获得选中的类型，给工具栏中相应的选项变色
-                    	 jMenuItem5.setEnabled(true);
-                    	 jMenuItem4.setEnabled(false);
-                    	 jMenuItem6.setEnabled(false);
-                    }
-                    else if(cur.getType() == 1) {
-                    	 jMenuItem6.setEnabled(true);
-                    	 jMenuItem4.setEnabled(false);
-                    	 jMenuItem5.setEnabled(false);
-                    }
-                    else if(cur.getType() == 2){
-                    	jMenuItem4.setEnabled(false);
-                    	jMenuItem5.setEnabled(false);
-                    	jMenuItem6.setEnabled(false);
-                    }
-                    else {
-                      	jMenuItem4.setEnabled(true);
-                    	jMenuItem5.setEnabled(false);
-                    	jMenuItem6.setEnabled(false);
-                    }
-                    switch(b.getType())
-                    {
-                        case 0:
-                        {
-                            SSHComputer c=(SSHComputer)treenode.getUserObject();
-                            s="计算机名字:"+c.getName()
-                             +"\n服务器ip地址:"+c.getHost()
-                             +"\n帐户名:"+c.getUsername()
-                             +"\n密码:"+c.getPassword()
-                             +"\n登录时间:"+b.getCreatdate()
-                             +"\n备注:"+c.getMemo();
-                            Font x = new Font("Serif",0,15);
-                            jTextArea1.setFont(x);
-                            jTextArea1.setText(s);
-                            break;
-                        }
-                        case 1:
-                        {
-                            SSHGroup g=(SSHGroup)treenode.getUserObject();
-                            s="任务名:"+g.getName()
-                            +"\n创建时间:"+b.getCreatdate()
-                            +"\n备注:"+g.getMemo();
-                            Font x = new Font("Serif",0,15);
-                            jTextArea1.setFont(x);
-                            jTextArea1.setText(s);
-                            break;
-                        }
-                        case 2:
-                        {
-                            SSHTask t=(SSHTask)treenode.getUserObject();
-                            s="任务名:"+t.getName()                           
-                            +"\n命令内容:"+t.getCmd()
-                            +"\n创建时间:"+b.getCreatdate()
-                            +"\n备注:"+t.getMemo();
-                            Font x = new Font("Serif",0,15);
-                            jTextArea1.setFont(x);
-                            jTextArea1.setText(s);
-                            break;
-                        }
-                        default:
-                            break;
-                    }
-                    }catch(NullPointerException ne){}
-             }
-            @Override
-            public void mouseReleased(MouseEvent e)
-              {
-                 try
-                 {
-                    //是否右键单击
-                   if (e.getClickCount() == 1 && SwingUtilities.isRightMouseButton(e))
-                      {
-                           JTree tree = (JTree)e.getSource();
-                           int rowLocation = tree.getRowForLocation(e.getX(), e.getY());
-                           TreePath treepath = tree.getPathForRow(rowLocation);
-                           DefaultMutableTreeNode treenode = (DefaultMutableTreeNode) treepath.getLastPathComponent();
-                           if(treenode.toString().equals("Computers"))
-                            {
-                        	   TreePath path = jTree1.getPathForLocation(e.getX(), e.getY());
-                               if (path == null)
-                                   return;
-                               jTree1.setSelectionPath(path);
-                               popMenuCA.show(jTree1, e.getX(), e.getY());
-                              // System.out.println(treenode.toString());
-                               cur=null;
-                               
-                               return;
-                            }
-                          cur=(BaseClass)treenode.getUserObject();
-                          TreePath path = jTree1.getPathForLocation(e.getX(), e.getY());
-                          if (path == null)
-                              return;
-                          jTree1.setSelectionPath(path);
-                          switch(cur.getType())
-                          {
-                          case 0:
-                          {
-                        	  popMenuC.show(jTree1, e.getX(), e.getY());
-                        	  break;
-                          }
-                          case 1:
-                          {
-                        	  popMenuG.show(jTree1, e.getX(), e.getY());
-                        	  break;
-                          }
-                          case 2:
-                          {
-                        	  popMenuT.show(jTree1, e.getX(), e.getY());
-                        	  break;
-                          }
-                          default:
-                        	  break;
-                          
-                          }                        
-                        }
-                 }
-                        catch (Exception ex)  
-                        {}
-                  }
-
-        }
-                );
+        jTree1.addMouseListener(new thismouse());
         jScrollPane1.setViewportView(jTree1);
         popMenuC = new JPopupMenu();
         addItemC = new JMenuItem("添加任务组");
-        addItemC.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-           {
-                try
-                {
-                    action(e);
-                } catch (DocumentException ex)
-                {}
-           }
-        }
-        );
+        addItemC.addActionListener(new rightclick());
         delItemC = new JMenuItem("删除此电脑");
-        delItemC.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-           {
-                try
-                {
-                    action(e);
-                } catch (DocumentException ex)
-                {}
-           }
-        }
-           );
+        delItemC.addActionListener(new rightclick());
         editItemC = new JMenuItem("编辑此电脑");
-        editItemC.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-           {
-                try
-                {
-                    action(e);
-                } catch (DocumentException ex)
-                {}
-           }
-        }
-        );
+        editItemC.addActionListener(new rightclick());
         popMenuC.add(addItemC);
         popMenuC.add(delItemC);
         popMenuC.add(editItemC);        
         popMenuG = new JPopupMenu();
         addItemG = new JMenuItem("添加一新任务");
-        addItemG.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-           {
-                try
-                {
-                    action(e);
-                } catch (DocumentException ex)
-                {}
-           }
-        }
-        );
+        addItemG.addActionListener(new rightclick());
         delItemG = new JMenuItem("删除此任务组");
-        delItemG.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-           {
-                try
-                {
-                    action(e);
-                } catch (DocumentException ex)
-                {}
-           }
-        }
-           );
+        delItemG.addActionListener(new rightclick());
         editItemG = new JMenuItem("编辑此任务组");
-        editItemG.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-           {
-                try
-                {
-                    action(e);
-                } catch (DocumentException ex)
-                {}
-           }
-        }
-        );
+        editItemG.addActionListener(new rightclick());
         popMenuG.add(addItemG);
         popMenuG.add(delItemG);
         popMenuG.add(editItemG);     
         popMenuT = new JPopupMenu();       
         delItemT = new JMenuItem("删除此任务");
-        delItemT.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-           {
-                try
-                {
-                    action(e);
-                } catch (DocumentException ex)
-                {}
-           }
-        }
-           );
+        delItemT.addActionListener(new rightclick());
         editItemT = new JMenuItem("编辑此任务");
-        editItemT.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-           {
-                try
-                {
-                    action(e);
-                } catch (DocumentException ex)
-                {}
-           }
-        }
-        );
+        editItemT.addActionListener(new rightclick());
         popMenuT.add(delItemT);
         popMenuT.add(editItemT);
         
         popMenuCA = new JPopupMenu();       
         delItemCA = new JMenuItem("删除所有电脑");
-        delItemCA.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-           {
-                try
-                {
-                    action(e);
-                } catch (DocumentException ex)
-                {}
-           }
-        }
-           );
+        delItemCA.addActionListener(new rightclick());
         addItemCA = new JMenuItem("添加一新电脑");
-        addItemCA.addActionListener(
-        new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-           {
-                try
-                {
-                    action(e);
-                } catch (DocumentException ex)
-                {}
-           }
-        }
-        );
+        addItemCA.addActionListener(new rightclick());
         popMenuCA.add(delItemCA);
         popMenuCA.add(addItemCA);
 }
@@ -610,52 +356,35 @@ private void action ( ActionEvent e ) throws DocumentException
 		setIconImage(img);
 
         jSplitPane1.setName("jSplitPane1"); // NOI18N
-
         jScrollPane1.setName("jScrollPane1"); // NOI18N
-
         jTree1.setName("jTree1"); // NOI18N
         jScrollPane1.setViewportView(jTree1);
-
         jSplitPane1.setLeftComponent(jScrollPane1);
-
         jSplitPane2.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
         jSplitPane2.setName("jSplitPane2"); // NOI18N
-
         jScrollPane2.setName("jScrollPane2"); // NOI18N
-
         jTextArea1.setColumns(20);
         jTextArea1.setRows(5);
         jTextArea1.setEnabled(false);
         jTextArea1.setName("jTextArea1"); // NOI18N
         jScrollPane2.setViewportView(jTextArea1);
-
         jSplitPane2.setLeftComponent(jScrollPane2);
-
         jTabbedPane1.setName("jTabbedPane1"); // NOI18N
-
         jScrollPane3.setName("jScrollPane3"); // NOI18N
-
         jTextArea2.setColumns(20);
         jTextArea2.setRows(5);
         jTextArea2.setEnabled(false);
         jTextArea2.setName("jTextArea2"); // NOI18N
         jScrollPane3.setViewportView(jTextArea2);
-
         jTabbedPane1.addTab("tab1", jScrollPane3);
-
         jScrollPane4.setName("jScrollPane4"); // NOI18N
-
         jTextArea3.setColumns(20);
         jTextArea3.setRows(5);
         jTextArea3.setName("jTextArea3"); // NOI18N
         jScrollPane4.setViewportView(jTextArea3);
-
         jTabbedPane1.addTab("tab2", jScrollPane4);
-
         jSplitPane2.setRightComponent(jTabbedPane1);
-
         jSplitPane1.setRightComponent(jSplitPane2);
-
         jMenuBar1.setName("jMenuBar1"); // NOI18N
 
         jMenu1.setText("File");
@@ -816,11 +545,8 @@ private void action ( ActionEvent e ) throws DocumentException
             ComputerUI newComputerUi = new ComputerUI();
             newComputerUi.setModal(true);
             newComputerUi.setVisible(true);
-            //this.dispose();
             updata();
-           // System.out.println("computer");
         	}
-            //this.setVisible(false);
         }//GEN-LAST:event_jMenuItem4MousePressed
 
     /**
@@ -935,4 +661,159 @@ private void action ( ActionEvent e ) throws DocumentException
     public static List<SSHComputer> cps;
     public static List<SSHGroup> gps;
     public static List<SSHTask> tks;
+//鼠标点击处理类
+    private class thismouse extends  MouseAdapter
+    {
+    	
+            @Override
+            public   void   mouseClicked(MouseEvent   e){
+                try{
+                    JTree tree = (JTree)e.getSource();
+                    int rowLocation = tree.getRowForLocation(e.getX(), e.getY());
+                    TreePath treepath = tree.getPathForRow(rowLocation);
+                    DefaultMutableTreeNode treenode = (DefaultMutableTreeNode) treepath.getLastPathComponent();
+                    if(treenode.toString().equals("Computers"))
+                    {
+                    	jTextArea1.setText("");
+                    	jMenuItem4.setEnabled(true);
+                    	jMenuItem5.setEnabled(false);
+                    	jMenuItem6.setEnabled(false);
+                        return;                    	
+                    }
+                    String s=null;
+                    BaseClass b=(BaseClass)treenode.getUserObject();
+                    cur=(BaseClass)treenode.getUserObject();
+                    if(cur.getType() == 0) { //获得选中的类型，给工具栏中相应的选项变色
+                    	 jMenuItem5.setEnabled(true);
+                    	 jMenuItem4.setEnabled(false);
+                    	 jMenuItem6.setEnabled(false);
+                    }
+                    else if(cur.getType() == 1) {
+                    	 jMenuItem6.setEnabled(true);
+                    	 jMenuItem4.setEnabled(false);
+                    	 jMenuItem5.setEnabled(false);
+                    }
+                    else if(cur.getType() == 2){
+                    	jMenuItem4.setEnabled(false);
+                    	jMenuItem5.setEnabled(false);
+                    	jMenuItem6.setEnabled(false);
+                    }
+                    else {
+                      	jMenuItem4.setEnabled(true);
+                    	jMenuItem5.setEnabled(false);
+                    	jMenuItem6.setEnabled(false);
+                    }
+                    switch(b.getType())
+                    {
+                        case 0:
+                        {
+                            SSHComputer c=(SSHComputer)treenode.getUserObject();
+                            s="计算机名字:"+c.getName()
+                             +"\n服务器ip地址:"+c.getHost()
+                             +"\n帐户名:"+c.getUsername()
+                             +"\n密码:"+c.getPassword()
+                             +"\n登录时间:"+b.getCreatdate()
+                             +"\n备注:"+c.getMemo();
+                            Font x = new Font("Serif",0,15);
+                            jTextArea1.setFont(x);
+                            jTextArea1.setText(s);
+                            break;
+                        }
+                        case 1:
+                        {
+                            SSHGroup g=(SSHGroup)treenode.getUserObject();
+                            s="任务名:"+g.getName()
+                            +"\n创建时间:"+b.getCreatdate()
+                            +"\n备注:"+g.getMemo();
+                            Font x = new Font("Serif",0,15);
+                            jTextArea1.setFont(x);
+                            jTextArea1.setText(s);
+                            break;
+                        }
+                        case 2:
+                        {
+                            SSHTask t=(SSHTask)treenode.getUserObject();
+                            s="任务名:"+t.getName()                           
+                            +"\n命令内容:"+t.getCmd()
+                            +"\n创建时间:"+b.getCreatdate()
+                            +"\n输入文件路径:"+t.getFin()
+                            +"\n输入目录路径:"+t.getFout()
+                            +"\n备注:"+t.getMemo();
+                            Font x = new Font("Serif",0,15);
+                            jTextArea1.setFont(x);
+                            jTextArea1.setText(s);
+                            break;
+                        }
+                        default:
+                            break;
+                    }
+                    }catch(NullPointerException ne){}
+             }
+            @Override
+            public void mouseReleased(MouseEvent e)
+              {
+                 try
+                 {
+                    //是否右键单击
+                   if (e.getClickCount() == 1 && SwingUtilities.isRightMouseButton(e))
+                      {
+                           JTree tree = (JTree)e.getSource();
+                           int rowLocation = tree.getRowForLocation(e.getX(), e.getY());
+                           TreePath treepath = tree.getPathForRow(rowLocation);
+                           DefaultMutableTreeNode treenode = (DefaultMutableTreeNode) treepath.getLastPathComponent();
+                           if(treenode.toString().equals("Computers"))
+                            {
+                        	   TreePath path = jTree1.getPathForLocation(e.getX(), e.getY());
+                               if (path == null)
+                                   return;
+                               jTree1.setSelectionPath(path);
+                               popMenuCA.show(jTree1, e.getX(), e.getY());
+                               cur=null;                              
+                               return;
+                            }
+                          cur=(BaseClass)treenode.getUserObject();
+                          TreePath path = jTree1.getPathForLocation(e.getX(), e.getY());
+                          if (path == null)
+                              return;
+                          jTree1.setSelectionPath(path);
+                          switch(cur.getType())
+                          {
+                          case 0:
+                          {
+                        	  popMenuC.show(jTree1, e.getX(), e.getY());
+                        	  break;
+                          }
+                          case 1:
+                          {
+                        	  popMenuG.show(jTree1, e.getX(), e.getY());
+                        	  break;
+                          }
+                          case 2:
+                          {
+                        	  popMenuT.show(jTree1, e.getX(), e.getY());
+                        	  break;
+                          }
+                          default:
+                        	  break;                         
+                          }                        
+                        }
+                 }
+                        catch (Exception ex)  
+                        {}
+                  }
+    }
+    //------------------------------------------------------------//
+    class rightclick implements ActionListener
+    {
+        public void actionPerformed(ActionEvent e)
+       {
+            try
+            {
+                action(e);
+            } catch (DocumentException ex)
+            {}
+       }
+    }
+    //---------------------------------------------------------------//
 }
+
