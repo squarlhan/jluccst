@@ -3,10 +3,19 @@
  */
 package cn.edu.jlu.ccst.sshclient.model;
 
+import java.io.FileWriter;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
+import org.dom4j.Document;
+import org.dom4j.Element;
+import org.dom4j.io.SAXReader;
+import org.dom4j.io.XMLWriter;
+
+import cn.edu.jlu.ccst.sshclient.ui.LinuxClient;
 import cn.edu.jlu.ccst.sshclient.inter.BaseOperation;
+import cn.edu.jlu.ccst.sshclient.ui.ComputerUI;
 
 /** ������ʵ����
  * @author Woden
@@ -68,9 +77,12 @@ public class SSHComputer extends BaseClass implements BaseOperation{
 		this.gps = gps;
 	}
 	//����ķ�����Ҫʵ��
-	@Override
-	public boolean creat() {
+	
+ public  boolean creat() {
 		// TODO Auto-generated method stub
+		ComputerUI newComputerUi = new ComputerUI();
+		newComputerUi.setModal(true);
+		newComputerUi.setVisible(true);
 		return false;
 	}
 	@Override
@@ -86,11 +98,39 @@ public class SSHComputer extends BaseClass implements BaseOperation{
 	@Override
 	public boolean remove() {
 		// TODO Auto-generated method stub
+		SAXReader reader = new SAXReader();
+		try
+		{
+		  Document doc = reader.read(this.getClass().getResource("/").getPath() + "cn/edu/jlu/ccst/sshclient/util/Config.xml");
+		  List   list=doc.selectNodes("/config/computer");
+    	  Iterator iter = list.iterator();
+    	  while(iter.hasNext())
+    		{
+            Element el=(Element)iter.next();
+            String it=el.attributeValue("id");
+            if(it.equals(LinuxClient.getCur().getId()))
+            	{
+            		el.getParent().remove(el);
+            	}
+    		}
+    	  XMLWriter writer = new XMLWriter(new FileWriter(this.getClass().getResource("/").getPath() + "cn/edu/jlu/ccst/sshclient/util/Config.xml"));	   	 
+		  writer.write(doc);
+		  writer.close();
+		}
+	     catch(Exception ex)
+	     {
+	         ex.printStackTrace();
+	     }
 		return false;
 	}
 	@Override
 	public boolean update() {
 		// TODO Auto-generated method stub
+		
+		SSHComputer t=(SSHComputer)(LinuxClient.getCur());
+		ComputerUI newComputerUi = new ComputerUI(t.getName(),t.getUsername(),t.getPassword(),t.getHost(),t.getMemo());
+		newComputerUi.setModal(true);
+		newComputerUi.setVisible(true);
 		return false;
 	}
 
