@@ -4,11 +4,20 @@
 package cn.edu.jlu.ccst.sshclient.model;
 
 import java.io.File;
+import java.io.FileWriter;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
+
+import org.dom4j.Document;
+import org.dom4j.Element;
+import org.dom4j.io.SAXReader;
+import org.dom4j.io.XMLWriter;
 
 import cn.edu.jlu.ccst.sshclient.inter.BaseAction;
 import cn.edu.jlu.ccst.sshclient.inter.BaseOperation;
+import cn.edu.jlu.ccst.sshclient.ui.LinuxClient;
+import cn.edu.jlu.ccst.sshclient.ui.TaskUI;
 
 /**
  * @author Woden
@@ -128,6 +137,9 @@ public class SSHTask extends BaseClass implements BaseAction, BaseOperation {
 	@Override
 	public boolean creat() {
 		// TODO Auto-generated method stub
+		TaskUI newTask = new TaskUI();
+	    newTask.setModal(true);
+	    newTask.setVisible(true);
 		return false;
 	}
 
@@ -155,6 +167,40 @@ public class SSHTask extends BaseClass implements BaseAction, BaseOperation {
 	@Override
 	public boolean remove() {
 		// TODO Auto-generated method stub
+		SAXReader reader = new SAXReader();
+		try
+		{
+		  Document doc = reader.read(this.getClass().getResource("/").getPath() + "cn/edu/jlu/ccst/sshclient/util/Config.xml");
+		  List   list=doc.selectNodes("/config/computer");
+    		Iterator iter = list.iterator();
+    		while(iter.hasNext())
+    		{
+            Element el=(Element)iter.next();
+            Iterator it=el.elementIterator("group");
+            while(it.hasNext())
+            {
+                Element elta=(Element)it.next();
+                Iterator itta=elta.elementIterator("task");
+                while(itta.hasNext())
+                {
+                Element et=(Element)itta.next();
+                String s=et.attributeValue("id");
+                if(s.equals(LinuxClient.getCur().getId()))
+                {
+                    elta.remove(et);
+                }
+                }
+
+            }
+    		}
+    	  XMLWriter writer = new XMLWriter(new FileWriter(this.getClass().getResource("/").getPath() + "cn/edu/jlu/ccst/sshclient/util/Config.xml"));	   	 
+		  writer.write(doc);
+		  writer.close();
+		}
+	     catch(Exception ex)
+	     {
+	         ex.printStackTrace();
+	     }
 		return false;
 	}
 
@@ -164,6 +210,10 @@ public class SSHTask extends BaseClass implements BaseAction, BaseOperation {
 	@Override
 	public boolean update() {
 		// TODO Auto-generated method stub
+		 SSHTask t=(SSHTask)LinuxClient.getCur();
+		 TaskUI newTask = new TaskUI(t.getName(),t.getCmd(),t.getMemo());
+		 newTask.setModal(true);
+		 newTask.setVisible(true);
 		return false;
 	}
 
