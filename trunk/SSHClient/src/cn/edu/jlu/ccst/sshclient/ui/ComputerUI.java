@@ -45,6 +45,7 @@ public class ComputerUI extends javax.swing.JDialog
             	SubmitMousePressed(evt);
             }
         });
+        
         jPasswordField1.setEchoChar('*');
         jPasswordField2.setEchoChar('*');
     }
@@ -52,12 +53,14 @@ public class ComputerUI extends javax.swing.JDialog
     public ComputerUI(String name,String user,String pwd,String host,String memo) 
 	{
     	this.setLocationRelativeTo(null);
+    	this.setTitle("修改计算机");
         initComponents(name,user,pwd,host,memo);  
         SubmitButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
             	SubmitMousePressedE(evt);
             }
         });
+        
         jPasswordField1.setEchoChar('*');
         jPasswordField2.setEchoChar('*');
      
@@ -65,6 +68,7 @@ public class ComputerUI extends javax.swing.JDialog
 //------------------------------------------------------------//
 private void initComponents(String name,String user,String pwd,String host,String memo) {
 	initComponents();
+	this.setTitle("新建计算机");
 	jTextField2.setText(name);
     jTextField6.setText(user);
     jPasswordField1.setText(pwd);
@@ -75,7 +79,7 @@ private void initComponents(String name,String user,String pwd,String host,Strin
 	
 //----------------------------------------------------------------------------//
 private void initComponents() {
-	this.setTitle("新建计算机");
+	
 	Toolkit tk = Toolkit.getDefaultToolkit();
 	Image img = tk.getImage(this.getClass().getResource("/").getPath() + "cn/edu/jlu/ccst/sshclient/ui/resource/t.png");
 	setIconImage(img);
@@ -143,6 +147,15 @@ private void initComponents() {
     SubmitButton.setBounds(160, 270, 80, 30);
     
     this.add(SubmitButton);
+    Dimension   screenSize   =   Toolkit.getDefaultToolkit().getScreenSize();   
+    Dimension   frameSize   =   this.getSize();   
+
+    if   (frameSize.height   >   screenSize.height)   
+            frameSize.height   =   screenSize.height;   
+    if   (frameSize.width   >   screenSize.width)   
+            frameSize.width   =   screenSize.width;   
+
+    this.setLocation((screenSize.width   -   frameSize.width)   /   2,   (screenSize.height   -   frameSize.height)   /   2);
 }
 //----------------------------------------------------------------------------//
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
@@ -293,9 +306,9 @@ private void initComponents() {
           {   
         	  el.addAttribute("name", n);
         	  el.addAttribute("user", user);
-        	  el.addAttribute("pswd", n);
-        	  el.addAttribute("host", n);
-        	  el.addAttribute("memo", n);
+        	  el.addAttribute("pswd", pwd);
+        	  el.addAttribute("host", host);
+        	  el.addAttribute("memo", memo);
           }
     	}
         writer = new XMLWriter(new FileWriter(filePath), format);
