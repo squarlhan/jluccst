@@ -30,8 +30,7 @@ public class SSHTask extends BaseClass implements BaseAction, BaseOperation {
 	private File fout;
 	private SSHGroup gp;
 	
-	public SSHTask(String id, String name, byte type, String memo,
-			Date creatdate) {
+	public SSHTask(String id, String name, byte type, String memo,Date creatdate) {
 		super(id, name, type, memo, creatdate);
 		// TODO Auto-generated constructor stub
 	}
