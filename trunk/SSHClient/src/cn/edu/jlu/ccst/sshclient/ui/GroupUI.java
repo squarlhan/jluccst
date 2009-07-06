@@ -28,96 +28,67 @@ public class GroupUI extends javax.swing.JDialog  {
 	private JScrollPane memoAreaPane; 
 	private JButton resetButton , submitButton;
     public GroupUI(){
-	    this.setTitle("新建工作组");
-	    this.setLocationRelativeTo(null);
-	    Toolkit tk = Toolkit.getDefaultToolkit();
-		Image img = tk.getImage(this.getClass().getResource("/").getPath() + "cn/edu/jlu/ccst/sshclient/ui/resource/g.png");
-		setIconImage(img);
-		this.setLayout(null);
-		this.setSize(350, 300);
-		
-		gLabel1= new JLabel("工作组名字:");
-		gLabel1.setBounds(50, 50, 80, 30);
-		this.add(gLabel1);
-		gTextField1 = new JTextField();
-		gTextField1.setBounds(150,50, 150, 30);
-		this.add(gTextField1);
-		
-		memoLabel = new JLabel("备注:");
-		memoLabel.setBounds(50, 100, 80, 30);
-		this.add(memoLabel);
-		memoJArea = new javax.swing.JTextArea("");
-		memoJArea.setLineWrap(true);
-		memoJArea.setBorder(BorderFactory.createLineBorder(Color.black));
-	    memoAreaPane = new JScrollPane(memoJArea,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-	    memoAreaPane.setBounds(150, 100, 150, 80);
-	    this.add(memoAreaPane);
-	    
-		resetButton = new JButton("重置:");
-		resetButton.setBounds(50,200, 80, 30);
-		resetButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-              //  ResetButtonMousePressed(evt);
-            }
-        });
-		this.add(resetButton);
-		
-		submitButton = new JButton("提交:");
-		submitButton.setBounds(180, 200, 80, 30);
-		submitButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                SubmitButtonMousePressed(evt);
-            }
-        });
-		this.add(submitButton);
+	   initComponent();
+	   submitButton.addMouseListener(new java.awt.event.MouseAdapter() {
+           public void mousePressed(java.awt.event.MouseEvent evt) {
+               SubmitButtonMousePressed(evt);
+           }
+       });
 	}
     //----------------------------------------------------------//
     public GroupUI(String name,String memo){
-	    this.setTitle("新建工作组");
-	    this.setLocationRelativeTo(null);
-	    Toolkit tk = Toolkit.getDefaultToolkit();
-		Image img = tk.getImage(this.getClass().getResource("/").getPath() + "cn/edu/jlu/ccst/sshclient/ui/resource/g.png");
-		setIconImage(img);
-		this.setLayout(null);
-		this.setSize(350, 300);
-		
-		gLabel1= new JLabel("工作组名字:");
-		gLabel1.setBounds(50, 50, 80, 30);
-		this.add(gLabel1);
-		gTextField1 = new JTextField();
-		gTextField1.setBounds(150,50, 150, 30);
-		gTextField1.setText(name);
-		this.add(gTextField1);
-		
-		memoLabel = new JLabel("备注:");
-		memoLabel.setBounds(50, 100, 80, 30);
-		this.add(memoLabel);
-		memoJArea = new javax.swing.JTextArea("");
-		memoJArea.setText(memo);
-		memoJArea.setLineWrap(true);
-		memoJArea.setBorder(BorderFactory.createLineBorder(Color.black));
-	    memoAreaPane = new JScrollPane(memoJArea,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-	    memoAreaPane.setBounds(150, 100, 150, 80);
-	    this.add(memoAreaPane);
-	    
-		resetButton = new JButton("重置:");
-		resetButton.setBounds(50,200, 80, 30);
-		resetButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-              //  ResetButtonMousePressed(evt);
-            }
-        });
-		this.add(resetButton);
-		
-		submitButton = new JButton("提交:");
-		submitButton.setBounds(180, 200, 80, 30);
-		submitButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                SubmitMousePressedE(evt);
-            }
-        });
-		this.add(submitButton);
+	  initComponent();
+	  submitButton.addMouseListener(new java.awt.event.MouseAdapter() {
+          public void mousePressed(java.awt.event.MouseEvent evt) {
+        	  SubmitMousePressedE(evt);
+          }
+      });
+	  gTextField1.setText(name);
+	  memoJArea.setText(memo);
 	}
+    /**
+     * 初始画图函数
+     */
+    private void initComponent(){
+    	 this.setTitle("新建工作组");
+ 	    this.setLocationRelativeTo(null);
+ 	    Toolkit tk = Toolkit.getDefaultToolkit();
+ 		Image img = tk.getImage(this.getClass().getResource("/").getPath() + "cn/edu/jlu/ccst/sshclient/ui/resource/g.png");
+ 		setIconImage(img);
+ 		this.setLayout(null);
+ 		this.setSize(350, 300);
+ 		
+ 		gLabel1= new JLabel("工作组名字:");
+ 		gLabel1.setBounds(50, 50, 80, 30);
+ 		this.add(gLabel1);
+ 		gTextField1 = new JTextField();
+ 		gTextField1.setBounds(150,50, 150, 30);
+ 		this.add(gTextField1);
+ 		
+ 		memoLabel = new JLabel("备注:");
+ 		memoLabel.setBounds(50, 100, 80, 30);
+ 		this.add(memoLabel);
+ 		memoJArea = new javax.swing.JTextArea("");
+ 		memoJArea.setLineWrap(true);
+ 		memoJArea.setBorder(BorderFactory.createLineBorder(Color.black));
+ 	    memoAreaPane = new JScrollPane(memoJArea,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+ 	    memoAreaPane.setBounds(150, 100, 150, 80);
+ 	    this.add(memoAreaPane);
+ 	    
+ 		resetButton = new JButton("重置:");
+ 		resetButton.setBounds(50,200, 80, 30);
+ 		resetButton.addMouseListener(new java.awt.event.MouseAdapter() {
+             public void mousePressed(java.awt.event.MouseEvent evt) {
+                ResetButtonMousePressed(evt);
+             }
+         });
+ 		this.add(resetButton);
+ 		
+ 		submitButton = new JButton("提交:");
+ 		submitButton.setBounds(180, 200, 80, 30);
+ 		
+ 		this.add(submitButton);
+    }
     //-----------------------------------------------------------------//
       /**
        * 处理重置按钮
@@ -146,7 +117,7 @@ public class GroupUI extends javax.swing.JDialog  {
       	Date SeverTime = new Date();
     	SimpleDateFormat Severtimeformat = new SimpleDateFormat("yyyyMMddHHmmss");
         newGroup1.setCreatdate(SeverTime);//获得创建成功时的时间
-        newGroup1.setId(Severtimeformat.format(SeverTime));
+        newGroup1.setId("G"+Severtimeformat.format(SeverTime));
         newGroup1.setName(gTextField1.getText());
         newGroup1.setType((byte)1);
         
@@ -209,14 +180,51 @@ public class GroupUI extends javax.swing.JDialog  {
       		  JOptionPane.showMessageDialog(null,"请输入工作组的名字");
       		  return;
       	  }
-      	  LinuxClient temp = new LinuxClient();
-      	  SSHGroup t=(SSHGroup)temp.cur;
-      	  temp.EditGroupFromXML(t.getId(), gTextField1.getText(), memoJArea.getText());
+      	  //LinuxClient temp = new LinuxClient();
+      	  //SSHGroup t=(SSHGroup)temp.cur;
+      	  this.EditGroupFromXML(LinuxClient.getCur().getId(), gTextField1.getText(), memoJArea.getText());
           this.setVisible(false);
           this.dispose();   
         }
           
 //-----------------------------------------------//
+      //根据id修改某个任务组
+        public void EditGroupFromXML(String id,String n,String memo)
+        {		
+            SAXReader reader = new SAXReader();
+            try{
+            String filePath = this.getClass().getResource("/").getPath() + "cn/edu/jlu/ccst/sshclient/util/Config.xml";
+            Document doc = reader.read(filePath);
+            OutputFormat format = OutputFormat.createPrettyPrint();
+            Element root = doc.getRootElement();
+            XMLWriter writer = null;// 声明写XML的对象
+            List   list=doc.selectNodes("/config/computer");
+        	Iterator iter = list.iterator();
+        	while(iter.hasNext())
+        	{
+        		Element el=(Element)iter.next();
+        		Iterator it=el.elementIterator("group");
+        		while(it.hasNext())
+        		{
+        			Element et=(Element)it.next();
+        			String s=et.attributeValue("id");
+        			if(s.equals(id))
+        			{
+        				 et.addAttribute("name",n);
+        				 et.addAttribute("memo",memo);
+        				
+        			}
+        		}
+        	}
+            writer = new XMLWriter(new FileWriter(filePath), format);
+            writer.write(doc);
+            writer.close();   
+            }
+            catch(Exception e ){
+                e.printStackTrace();
+            }
+        }
+//---------------------------------------------//
     	  /*任务：1）新建组对象；
     	   * 2）写到xml文件中
     	   */
