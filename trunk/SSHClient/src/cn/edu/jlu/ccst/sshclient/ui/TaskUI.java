@@ -30,6 +30,7 @@ public class TaskUI extends javax.swing.JDialog {
 	
 	public TaskUI() {
 		initComponent();
+		this.setTitle("新建任务");
 		submitButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 SubmitButtonMousePressed(evt);
@@ -39,6 +40,7 @@ public class TaskUI extends javax.swing.JDialog {
 //-------------------------------------------------------------------//
 	public TaskUI(String name,String cmd,String in,String out,String memo) {
 		initComponent();
+		this.setTitle("修改任务");
 		submitButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 SubmitButtonMousePressedE(evt);
@@ -56,7 +58,7 @@ public class TaskUI extends javax.swing.JDialog {
 	 * 初始画图函数
 	 */
 	private void initComponent(){
-		this.setTitle("新建任务");
+		
 		this.setLocationRelativeTo(null);
 		Toolkit tk = Toolkit.getDefaultToolkit();
 		Image img = tk.getImage(this.getClass().getResource("/").getPath() + "cn/edu/jlu/ccst/sshclient/ui/resource/t.png");
@@ -158,6 +160,15 @@ public class TaskUI extends javax.swing.JDialog {
 		submitButton.setBounds(180, 280, 80, 30);
 		
 		this.add(submitButton);
+		Dimension   screenSize   =   Toolkit.getDefaultToolkit().getScreenSize();   
+        Dimension   frameSize   =   this.getSize();   
+
+        if   (frameSize.height   >   screenSize.height)   
+                frameSize.height   =   screenSize.height;   
+        if   (frameSize.width   >   screenSize.width)   
+                frameSize.width   =   screenSize.width;   
+
+        this.setLocation((screenSize.width   -   frameSize.width)   /   2,   (screenSize.height   -   frameSize.height)   /   2);
 	}
 	/**
 	 * Reset按钮的处理函数
@@ -247,7 +258,8 @@ public class TaskUI extends javax.swing.JDialog {
          writer.write(doc);
          writer.close();
          this.setVisible(false);
-         this.dispose();         
+         this.dispose(); 
+         JOptionPane.showMessageDialog(null, "创建任务成功！");
          }catch(Exception e) {
         	 e.printStackTrace();
          }
@@ -265,6 +277,7 @@ public class TaskUI extends javax.swing.JDialog {
    	     this.EditTaskFromXML(LinuxClient.getCur().getId(), tTextField1.getText(), tTextArea2.getText(),tTextField3.getText(),tfin.getText(),tfout.getText());
    	     this.setVisible(false);
          this.dispose(); 
+         JOptionPane.showMessageDialog(null, "修改任务成功！");
 	 }
 	 //--------------------------------------------//
 	//根据id修改某个任务组
