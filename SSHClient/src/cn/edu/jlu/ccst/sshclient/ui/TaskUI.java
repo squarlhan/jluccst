@@ -25,62 +25,32 @@ public class TaskUI extends javax.swing.JDialog {
     private JScrollPane memoAreaPane; 
 	private JButton resetButton , submitButton;
 	
-	TaskUI() {
-		this.setTitle("新建任务");
-		this.setLocationRelativeTo(null);
-		Toolkit tk = Toolkit.getDefaultToolkit();
-		Image img = tk.getImage(this.getClass().getResource("/").getPath() + "cn/edu/jlu/ccst/sshclient/ui/resource/t.png");
-		setIconImage(img);
-		this.setLayout(null);
-		this.setSize(350,300);
-		
-		tLabel1= new JLabel("任务名字:");
-		tLabel1.setBounds(50, 30, 80, 20);
-		this.add(tLabel1);
-		tTextField1 = new JTextField();
-		tTextField1.setBounds(150,30, 150, 30);
-		this.add(tTextField1);
-		
-
-		
-		tLabel3 = new JLabel("任务命令:");
-		tLabel3.setBounds(50, 70, 80, 20);
-		this.add(tLabel3);
-		tTextField3 = new JTextField();
-		tTextField3.setBounds(150, 70, 150, 30);
-		this.add(tTextField3);
-		
-		tLabel2 = new JLabel("任务备注:");
-		tLabel2.setBounds(50, 110, 80, 20);
-		this.add(tLabel2);
-		tTextArea2 = new JTextArea("");
-		tTextArea2.setBounds(150,110, 150, 80);
-		tTextArea2.setLineWrap(true);
-		tTextArea2.setBorder(BorderFactory.createLineBorder(Color.black));
-	    memoAreaPane = new JScrollPane(tTextArea2,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-	    memoAreaPane.setBounds(150,110, 150, 80);
-	    this.add(memoAreaPane);
-		
-		resetButton = new JButton("重置:");
-		resetButton.setBounds(50,200, 80, 30);
-		resetButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                ResetButtonMousePressed(evt);
-            }
-        });
-		this.add(resetButton);
-		
-		submitButton = new JButton("提交:");
-		submitButton.setBounds(180, 200, 80, 30);
+	public TaskUI() {
+		initComponent();
 		submitButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 SubmitButtonMousePressed(evt);
             }
         });
-		this.add(submitButton);
 	}
 //-------------------------------------------------------------------//
-	TaskUI(String name,String cmd,String memo) {
+	public TaskUI(String name,String cmd,String memo) {
+		initComponent();
+		submitButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                SubmitButtonMousePressedE(evt);
+            }
+        });
+		tTextField1.setText(name);
+		tTextField3.setText(cmd);
+		tTextArea2.setText(memo);
+	}
+	
+	//----------------------------------------------------//
+	/**
+	 * 初始画图函数
+	 */
+	private void initComponent(){
 		this.setTitle("新建任务");
 		this.setLocationRelativeTo(null);
 		Toolkit tk = Toolkit.getDefaultToolkit();
@@ -93,7 +63,6 @@ public class TaskUI extends javax.swing.JDialog {
 		tLabel1.setBounds(50, 30, 80, 20);
 		this.add(tLabel1);
 		tTextField1 = new JTextField();
-		tTextField1.setText(name);
 		tTextField1.setBounds(150,30, 150, 30);
 		this.add(tTextField1);
 		
@@ -103,7 +72,6 @@ public class TaskUI extends javax.swing.JDialog {
 		tLabel3.setBounds(50, 70, 80, 20);
 		this.add(tLabel3);
 		tTextField3 = new JTextField();
-		tTextField3.setText(cmd);
 		tTextField3.setBounds(150, 70, 150, 30);
 		this.add(tTextField3);
 		
@@ -111,7 +79,6 @@ public class TaskUI extends javax.swing.JDialog {
 		tLabel2.setBounds(50, 110, 80, 20);
 		this.add(tLabel2);
 		tTextArea2 = new JTextArea("");
-		tTextArea2.setText(memo);
 		tTextArea2.setBounds(150,110, 150, 80);
 		tTextArea2.setLineWrap(true);
 		tTextArea2.setBorder(BorderFactory.createLineBorder(Color.black));
@@ -130,14 +97,9 @@ public class TaskUI extends javax.swing.JDialog {
 		
 		submitButton = new JButton("提交:");
 		submitButton.setBounds(180, 200, 80, 30);
-		submitButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                SubmitButtonMousePressedE(evt);
-            }
-        });
+		
 		this.add(submitButton);
 	}
-	//----------------------------------------------------//
 	/**
 	 * Reset按钮的处理函数
 	 */
@@ -174,7 +136,7 @@ public class TaskUI extends javax.swing.JDialog {
          Date SeverTime = new Date();
          SimpleDateFormat Severtimeformat = new SimpleDateFormat("yyyyMMddHHmmss");
          newTask1.setCreatdate(SeverTime);//获得创建成功时的时间
-         newTask1.setId(Severtimeformat.format(SeverTime));
+         newTask1.setId("T"+Severtimeformat.format(SeverTime));
          newTask1.setType((byte) 2);
       
          //找到选中的组
@@ -243,14 +205,55 @@ public class TaskUI extends javax.swing.JDialog {
 			 JOptionPane.showMessageDialog(null,"请输入新建任务的命令");
 			 return;
 		 }
-		 
-   	     LinuxClient tempClient = new LinuxClient();
-   	     SSHTask selectGroup =  (SSHTask)tempClient.cur;
-   	     tempClient.EditTaskFromXML(selectGroup.getId(), tTextField1.getText(), tTextArea2.getText(),tTextField3.getText());
+   	     this.EditTaskFromXML(LinuxClient.getCur().getId(), tTextField1.getText(), tTextArea2.getText(),tTextField3.getText());
    	     this.setVisible(false);
          this.dispose(); 
 	 }
 	 //--------------------------------------------//
+	//根据id修改某个任务组
+	 public void EditTaskFromXML(String id,String n,String memo,String cmd)
+	 {		
+	     SAXReader reader = new SAXReader();
+	     try{
+	     String filePath = this.getClass().getResource("/").getPath() + "cn/edu/jlu/ccst/sshclient/util/Config.xml";
+	     Document doc = reader.read(filePath);
+	     OutputFormat format = OutputFormat.createPrettyPrint();
+	     Element root = doc.getRootElement();
+	     XMLWriter writer = null;// 声明写XML的对象
+	     List   list=doc.selectNodes("/config/computer");
+	 	Iterator iter = list.iterator();
+	 	while(iter.hasNext())
+	 	{
+	 		Element el=(Element)iter.next();
+	 		Iterator it=el.elementIterator("group");
+	 		 while(it.hasNext())
+	          {
+	              Element elta=(Element)it.next();
+	              Iterator itta=elta.elementIterator("task");
+	              while(itta.hasNext())
+	              {
+	              Element et=(Element)itta.next();
+	              String s=et.attributeValue("id");
+	              if(s.equals(id))
+	              {
+	             	 et.addAttribute("name", n);
+	             	 et.addAttribute("memo", memo);
+	             	 et.addAttribute("cmd", cmd);
+	              }
+	              }
+
+	          }
+	 	}
+	     writer = new XMLWriter(new FileWriter(filePath), format);
+	     writer.write(doc);
+	     writer.close();
+	     
+	     }
+	     catch(Exception e ){
+	         e.printStackTrace();
+	     }
+	 }
+	 //--------------------------------------------------//
 	/**
 	 * 主函数
 	 */

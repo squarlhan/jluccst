@@ -16,6 +16,7 @@ import cn.edu.jlu.ccst.sshclient.model.SSHTask;
 import cn.edu.jlu.ccst.sshclient.ui.LinuxClient;
         
 import java.io.File;
+import java.io.FileWriter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -23,6 +24,12 @@ import java.util.*;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+
+import org.dom4j.Document;
+import org.dom4j.Element;
+import org.dom4j.io.OutputFormat;
+import org.dom4j.io.SAXReader;
+import org.dom4j.io.XMLWriter;
 
 import java.net.*;  
 import java.awt.event.*;
@@ -33,6 +40,11 @@ public class ComputerUI extends javax.swing.JDialog
     { 	
         initComponents();
         this.setLocationRelativeTo(null);
+        SubmitButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+            	SubmitMousePressed(evt);
+            }
+        });
         jPasswordField1.setEchoChar('*');
         jPasswordField2.setEchoChar('*');
     }
@@ -40,92 +52,27 @@ public class ComputerUI extends javax.swing.JDialog
     public ComputerUI(String name,String user,String pwd,String host,String memo) 
 	{
     	this.setLocationRelativeTo(null);
-        initComponents(name,user,pwd,host,memo);      
+        initComponents(name,user,pwd,host,memo);  
+        SubmitButton.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+            	SubmitMousePressedE(evt);
+            }
+        });
         jPasswordField1.setEchoChar('*');
         jPasswordField2.setEchoChar('*');
      
     }
 //------------------------------------------------------------//
 private void initComponents(String name,String user,String pwd,String host,String memo) {
-    	this.setTitle("新建计算机");
-    	Toolkit tk = Toolkit.getDefaultToolkit();
-		Image img = tk.getImage(this.getClass().getResource("/").getPath() + "cn/edu/jlu/ccst/sshclient/ui/resource/t.png");
-		setIconImage(img);
-		this.setLayout(null);
-		this.setSize(300, 350);
-		this.setResizable(false);
-		
-	    jLabel2 = new javax.swing.JLabel("计算机名字:");
-	    jLabel2.setBounds(20, 20, 70, 30);
-	    this.add(jLabel2);
-        jTextField2 = new javax.swing.JTextField("");
-        jTextField2.setBounds(110, 20, 150, 30);
-        jTextField2.setText(name);
-        this.add(jTextField2);
-  
-        jLabel6 = new javax.swing.JLabel("用户名:");
-        jLabel6.setBounds(20, 60, 70, 30);
-        this.add(jLabel6);
-        jTextField6 = new javax.swing.JTextField();
-        jTextField6.setBounds(110, 60, 150, 30);
-        jTextField6.setText(user);
-        this.add(jTextField6);
-      
-        jLabel5 = new javax.swing.JLabel("设置密码：");
-        jLabel5.setBounds(20, 100, 70, 30);
-        this.add(jLabel5);
-        jPasswordField1 = new javax.swing.JPasswordField();
-        jPasswordField1.setBounds(110, 100, 150, 30);
-        jPasswordField1.setEchoChar('*');
-        jPasswordField1.setText(pwd);
-        this.add(jPasswordField1);
-        
-        jLabel7 = new javax.swing.JLabel("重输密码：");
-        jLabel7.setBounds(20, 140, 70, 30);
-        this.add(jLabel7);
-        jPasswordField2 = new javax.swing.JPasswordField();
-        jPasswordField2.setBounds(110, 140, 150, 30);
-        jPasswordField2.setEchoChar('*');
-        jPasswordField2.setText(pwd);
-        this.add(jPasswordField2);
-        
-        jLabel8 = new javax.swing.JLabel("主机IP地址:");
-        jLabel8.setBounds(20, 180, 70, 30);
-        this.add(jLabel8);
-        jTextField8 = new javax.swing.JTextField();
-        jTextField8.setBounds(110, 180, 150, 30);
-        jTextField8.setText(host);
-        this.add(jTextField8);
-        
-        jLabel4 = new javax.swing.JLabel("备注:");
-        jLabel4.setBounds(20, 220, 70, 30);
-        this.add(jLabel4);
-        
-        jTextArea4 = new javax.swing.JTextArea("");
-        jTextArea4.setLineWrap(true);
-        jTextArea4.setText(memo);
-        jTextArea4.setBorder(BorderFactory.createLineBorder(Color.black));
-        memoAreaPane = new JScrollPane(jTextArea4,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        memoAreaPane.setBounds(110, 220, 150, 40);
-        this.add(memoAreaPane);
-        
-        ResetButton = new JButton("重置");
-        ResetButton.setBounds(40, 270, 80, 30);
-        ResetButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-            	jButton1MousePressed(evt);
-            }
-        });
-        this.add(ResetButton);
-        SubmitButton = new JButton("提交");
-        SubmitButton.setBounds(160, 270, 80, 30);
-        SubmitButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-            	SubmitMousePressedE(evt);
-            }
-        });
-        this.add(SubmitButton);
-    }
+	initComponents();
+	jTextField2.setText(name);
+    jTextField6.setText(user);
+    jPasswordField1.setText(pwd);
+    jPasswordField2.setText(pwd);
+    jTextField8.setText(host);
+    jTextArea4.setText(memo);
+}
+	
 //----------------------------------------------------------------------------//
 private void initComponents() {
 	this.setTitle("新建计算机");
@@ -194,11 +141,7 @@ private void initComponents() {
     this.add(ResetButton);
     SubmitButton = new JButton("提交");
     SubmitButton.setBounds(160, 270, 80, 30);
-    SubmitButton.addMouseListener(new java.awt.event.MouseAdapter() {
-        public void mousePressed(java.awt.event.MouseEvent evt) {
-        	SubmitMousePressed(evt);
-        }
-    });
+    
     this.add(SubmitButton);
 }
 //----------------------------------------------------------------------------//
@@ -261,11 +204,9 @@ private void initComponents() {
     	Date SeverTime = new Date();
     	SimpleDateFormat Severtimeformat = new SimpleDateFormat("yyyyMMddHHmmss");
         newComputer1.setCreatdate(SeverTime);//获得创建成功时的时间
-        newComputer1.setId(Severtimeformat.format(SeverTime));
+        newComputer1.setId("C"+Severtimeformat.format(SeverTime));
         this.setVisible(false);
-        LinuxClient temp = new LinuxClient();
-         temp.NewComputerToXML(newComputer1);
-         temp.dispose();
+        this.NewComputerToXML(newComputer1);
     }//GEN-LAST:event_SubmitMousePressed
 //----------------------------------------------------------//
     private void SubmitMousePressedE(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SubmitMousePressed
@@ -296,11 +237,77 @@ private void initComponents() {
         }
         JOptionPane.showMessageDialog(null, "修改用户成功！");
         this.setVisible(false);
-        LinuxClient temp = new LinuxClient();
-        temp.EditComputerFromXML(temp.cur.getId(), jTextField2.getText(), jTextField6.getText(), String.valueOf(jPasswordField1.getPassword()), jTextArea4.getText(), jTextField8.getText());
-        temp.dispose();
+        this.EditComputerFromXML(LinuxClient.getCur().getId(), jTextField2.getText(), jTextField6.getText(), String.valueOf(jPasswordField1.getPassword()), jTextArea4.getText(), jTextField8.getText());
     }
     //--------------------------------------------//
+    /**
+     * 将新建的计算机信息存到config.xml文件
+     */
+    public void NewComputerToXML(SSHComputer newComputer){
+        SAXReader reader = new SAXReader();
+        try{
+        String filePath = this.getClass().getResource("/").getPath() + "cn/edu/jlu/ccst/sshclient/util/Config.xml";
+        Document doc = reader.read(filePath);
+        OutputFormat format = OutputFormat.createPrettyPrint();
+        Element root = doc.getRootElement();
+        XMLWriter writer = null;// 声明写XML的对象   
+        Element newnode = root.addElement("computer");
+        newnode.addAttribute("id", newComputer.getId());
+        newnode.addAttribute("name",newComputer.getName());
+        newnode.addAttribute("host",newComputer.getHost());
+        newnode.addAttribute("user",newComputer.getUsername());
+        newnode.addAttribute("pswd", newComputer.getPassword());
+        newnode.addAttribute("memo",newComputer.getMemo());
+        
+        SimpleDateFormat timeFormat;
+    	timeFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        newnode.addAttribute("creatdate",timeFormat.format(newComputer.getCreatdate()));
+        writer = new XMLWriter(new FileWriter(filePath), format);
+        writer.write(doc);
+        writer.close();
+        
+        }
+        catch(Exception e ){
+            e.printStackTrace();
+        }
+
+    }
+   //根据id修改某台电脑
+    public void EditComputerFromXML(String id,String n,String user,String pwd,String memo,String host)
+    {
+        SAXReader reader = new SAXReader();
+        try{
+        String filePath = this.getClass().getResource("/").getPath() + "cn/edu/jlu/ccst/sshclient/util/Config.xml";
+        Document doc = reader.read(filePath);
+        OutputFormat format = OutputFormat.createPrettyPrint();
+        Element root = doc.getRootElement();
+        XMLWriter writer = null;// 声明写XML的对象
+        List   list=doc.selectNodes("/config/computer");
+    	Iterator iter = list.iterator();
+    	while(iter.hasNext())
+    	{
+          Element el=(Element)iter.next();
+          String it=el.attributeValue("id");
+          
+          if(it.equals(id))
+          {   
+        	  el.addAttribute("name", n);
+        	  el.addAttribute("user", user);
+        	  el.addAttribute("pswd", n);
+        	  el.addAttribute("host", n);
+        	  el.addAttribute("memo", n);
+          }
+    	}
+        writer = new XMLWriter(new FileWriter(filePath), format);
+        writer.write(doc);
+        writer.close();
+        
+        }
+        catch(Exception e ){
+            e.printStackTrace();
+        }
+    }
+    //-----------------------------------------------------------//
     private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField6ActionPerformed
