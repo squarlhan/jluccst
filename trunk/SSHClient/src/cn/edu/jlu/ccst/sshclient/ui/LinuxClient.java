@@ -32,6 +32,7 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 import java.text.*;
 
+import javax.swing.JFrame;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
@@ -60,6 +61,7 @@ public class LinuxClient extends javax.swing.JFrame {
     	this.setLocationRelativeTo(null);
         initComponents();
         updata();
+        this.setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
     
 //updata the jtree
@@ -165,7 +167,7 @@ public void GenerateTree() {
         addItemC.addActionListener(new rightclick());
         delItemC = new JMenuItem("删除此电脑");
         delItemC.addActionListener(new rightclick());
-        editItemC = new JMenuItem("编辑此电脑");
+        editItemC = new JMenuItem("修改此电脑");
         editItemC.addActionListener(new rightclick());
         popMenuC.add(addItemC);
         popMenuC.add(delItemC);
@@ -175,7 +177,7 @@ public void GenerateTree() {
         addItemG.addActionListener(new rightclick());
         delItemG = new JMenuItem("删除此任务组");
         delItemG.addActionListener(new rightclick());
-        editItemG = new JMenuItem("编辑此任务组");
+        editItemG = new JMenuItem("修改此任务组");
         editItemG.addActionListener(new rightclick());
         popMenuG.add(addItemG);
         popMenuG.add(delItemG);
@@ -183,7 +185,7 @@ public void GenerateTree() {
         popMenuT = new JPopupMenu();       
         delItemT = new JMenuItem("删除此任务");
         delItemT.addActionListener(new rightclick());
-        editItemT = new JMenuItem("编辑此任务");
+        editItemT = new JMenuItem("修改此任务");
         editItemT.addActionListener(new rightclick());
         popMenuT.add(delItemT);
         popMenuT.add(editItemT);
@@ -281,7 +283,7 @@ private void action ( ActionEvent e ) throws DocumentException
 	  }
 	  updata();
   }
-  if(str.startsWith("编辑"))
+  if(str.startsWith("修改"))
   {
 	  switch(cur.getType())
 	  {
