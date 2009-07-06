@@ -18,6 +18,8 @@ import cn.edu.jlu.ccst.sshclient.model.SSHGroup;
 import cn.edu.jlu.ccst.sshclient.model.SSHTask;
 import cn.edu.jlu.ccst.sshclient.ui.ComputerUI;
 
+import java.awt.Font;
+import java.awt.Color;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -27,6 +29,7 @@ import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.FileWriter;
 import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.text.*;
 
@@ -34,8 +37,6 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
 import javax.swing.JTree;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.JTree.DynamicUtilTreeNode;
 import javax.swing.SwingUtilities;
 import javax.swing.tree.DefaultMutableTreeNode;
@@ -55,6 +56,7 @@ public class LinuxClient extends javax.swing.JFrame {
 
     /** Creates new form LinuxClient */
     public LinuxClient() {
+    	this.setLocationRelativeTo(null);
         initComponents();
         updata();
     }
@@ -77,35 +79,29 @@ public class LinuxClient extends javax.swing.JFrame {
                 cp.setId(c.valueOf("@id"));        
                 cp.setName(c.valueOf("@name"));
                 cp.setType((byte) 0);
-                cp.setMemo(c.valueOf("@memo"));
-                
+                cp.setMemo(c.valueOf("@memo"));               
                 SimpleDateFormat timeFormat;
                 timeFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 cp.setCreatdate(timeFormat.parse(c.valueOf("@creatdate")));
-                //System.out.println(DateFormat.getDateInstance().parse(c.valueOf("@creatdate")));
                 cp.setHost(c.valueOf("@host"));
                 cp.setUsername(c.valueOf("@user"));
                 cp.setPassword(c.valueOf("@pswd"));
                 cp.setGps(new ArrayList());
-
-                System.out.println(cp);
+               // System.out.println(cp);
                 this.cps.add(cp);
-
                 List<Element> gelements = c.elements();
                 for (Element g : gelements) {
-                    System.out.println("hasgroup");
+                    //System.out.println("hasgroup");
                     SSHGroup gp = new SSHGroup();
                     gp.setId(g.valueOf("@id"));
                     gp.setName(g.valueOf("@name"));
                     gp.setType((byte) 1);
                     gp.setMemo(g.valueOf("@memo"));
                     gp.setCreatdate(timeFormat.parse(g.valueOf("@creatdate")));
-
                     gp.setCp(cp);
                     gp.setSts(new ArrayList());
                     cp.getGps().add(gp);
-
-                    System.out.println(gp);
+                    //System.out.println(gp);
                     this.gps.add(gp);                
                     List<Element> telements = g.elements();
                     for (Element t : telements) {
@@ -115,7 +111,6 @@ public class LinuxClient extends javax.swing.JFrame {
                         tk.setType((byte) 2);
                         tk.setMemo(t.valueOf("@memo"));
                         tk.setCreatdate(timeFormat.parse(t.valueOf("@creatdate")));
-
                         tk.setCmd(t.valueOf("@cmd"));
                         tk.setFin(new File("@in"));
                         tk.setFout(new File("@out"));
@@ -125,11 +120,8 @@ public class LinuxClient extends javax.swing.JFrame {
                             params.add(p.elementTextTrim("param"));
                         }
                         tk.setParams(params);
-
                         tk.setGp(gp);
                         gp.getSts().add(tk);
-
-                       // System.out.println(tk);
                         this.tks.add(tk);
                     }
 
@@ -139,7 +131,7 @@ public class LinuxClient extends javax.swing.JFrame {
         SSHComputer tmp = new SSHComputer();
         for(it = cps.iterator(); it.hasNext();){
              tmp = (SSHComputer)it.next();
-             System.out.println("tmp"+tmp.getId());
+            // System.out.println("tmp"+tmp.getId());
         }
         } catch (Exception e) {
             e.printStackTrace();
@@ -166,10 +158,8 @@ public void GenerateTree() {
             }
             }
         }
-        jTree1 = new JTree(root);
-        
-        jScrollPane1.setViewportView(jTree1);
-        
+        jTree1 = new JTree(root);       
+        jScrollPane1.setViewportView(jTree1);       
         jTree1.setCellRenderer(new MyTreeCellRender());
         jTree1.addMouseListener(
                new MouseAdapter()
@@ -183,7 +173,8 @@ public void GenerateTree() {
                     DefaultMutableTreeNode treenode = (DefaultMutableTreeNode) treepath.getLastPathComponent();
                     if(treenode.toString().equals("Computers"))
                     {
-                      	jMenuItem4.setEnabled(true);
+                    	jTextArea1.setText("");
+                    	jMenuItem4.setEnabled(true);
                     	jMenuItem5.setEnabled(false);
                     	jMenuItem6.setEnabled(false);
                         return;
@@ -217,31 +208,43 @@ public void GenerateTree() {
                         case 0:
                         {
                             SSHComputer c=(SSHComputer)treenode.getUserObject();
-                            s="computer--id:"+c.getId()+";name:"+c.getName()+";memo:"+c.getMemo()
-                             +";host:"+c.getHost()+";user:"+c.getUsername()
-                             +";pswd:"+c.getPassword()
-                             +";date:"+b.getCreatdate();
+                            s="计算机名字:"+c.getName()
+                             +"\n服务器ip地址:"+c.getHost()
+                             +"\n帐户名:"+c.getUsername()
+                             +"\n密码:"+c.getPassword()
+                             +"\n登录时间:"+b.getCreatdate()
+                             +"\n备注:"+c.getMemo();
+                            Font x = new Font("Serif",0,15);
+                            jTextArea1.setFont(x);
                             jTextArea1.setText(s);
                             break;
                         }
                         case 1:
                         {
                             SSHGroup g=(SSHGroup)treenode.getUserObject();
-                            s="group--id:"+g.getId()+";name:"+g.getName()+";memo:"+g.getMemo()+";date:"+b.getCreatdate();
+                            s="任务名:"+g.getName()
+                            +"\n创建时间:"+b.getCreatdate()
+                            +"\n备注:"+g.getMemo();
+                            Font x = new Font("Serif",0,15);
+                            jTextArea1.setFont(x);
                             jTextArea1.setText(s);
                             break;
                         }
                         case 2:
                         {
                             SSHTask t=(SSHTask)treenode.getUserObject();
-                            s="task--id:"+t.getId()+";name:"+t.getName()+";memo:"+t.getMemo()+";cmd:"+t.getCmd()+";date:"+b.getCreatdate();
+                            s="任务名:"+t.getName()                           
+                            +"\n命令内容:"+t.getCmd()
+                            +"\n创建时间:"+b.getCreatdate()
+                            +"\n备注:"+t.getMemo();
+                            Font x = new Font("Serif",0,15);
+                            jTextArea1.setFont(x);
                             jTextArea1.setText(s);
                             break;
                         }
                         default:
                             break;
                     }
-                    System.out.println(s);
                     }catch(NullPointerException ne){}
              }
             @Override
@@ -263,7 +266,7 @@ public void GenerateTree() {
                                    return;
                                jTree1.setSelectionPath(path);
                                popMenuCA.show(jTree1, e.getX(), e.getY());
-                               System.out.println(treenode.toString());
+                              // System.out.println(treenode.toString());
                                cur=null;
                                
                                return;
@@ -305,7 +308,6 @@ public void GenerateTree() {
         }
                 );
         jScrollPane1.setViewportView(jTree1);
-
         popMenuC = new JPopupMenu();
         addItemC = new JMenuItem("添加任务组");
         addItemC.addActionListener(new ActionListener()
@@ -334,12 +336,21 @@ public void GenerateTree() {
         }
            );
         editItemC = new JMenuItem("编辑此电脑");
-        editItemC.addActionListener(null);
+        editItemC.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+           {
+                try
+                {
+                    action(e);
+                } catch (DocumentException ex)
+                {}
+           }
+        }
+        );
         popMenuC.add(addItemC);
         popMenuC.add(delItemC);
-        popMenuC.add(editItemC);
-        
-        
+        popMenuC.add(editItemC);        
         popMenuG = new JPopupMenu();
         addItemG = new JMenuItem("添加一新任务");
         addItemG.addActionListener(new ActionListener()
@@ -368,7 +379,18 @@ public void GenerateTree() {
         }
            );
         editItemG = new JMenuItem("编辑此任务组");
-        editItemG.addActionListener(null);
+        editItemG.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+           {
+                try
+                {
+                    action(e);
+                } catch (DocumentException ex)
+                {}
+           }
+        }
+        );
         popMenuG.add(addItemG);
         popMenuG.add(delItemG);
         popMenuG.add(editItemG);
@@ -388,7 +410,18 @@ public void GenerateTree() {
         }
            );
         editItemT = new JMenuItem("编辑此任务");
-        editItemT.addActionListener(null);
+        editItemT.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+           {
+                try
+                {
+                    action(e);
+                } catch (DocumentException ex)
+                {}
+           }
+        }
+        );
         popMenuT.add(delItemT);
         popMenuT.add(editItemT);
         
@@ -447,7 +480,6 @@ private void action ( ActionEvent e ) throws DocumentException
           	case 0:
           	{
           		List   list=doc.selectNodes("/config/computer");
-          		//System.out.println(list.size());
           		Iterator iter = list.iterator();
           		while(iter.hasNext())
           		{
@@ -512,8 +544,7 @@ private void action ( ActionEvent e ) throws DocumentException
       }
      try{
           
-	   	   XMLWriter writer = new XMLWriter(new FileWriter(this.getClass().getResource("/").getPath() + "cn/edu/jlu/ccst/sshclient/util/Config.xml"));
-	   	   System.out.println(this.getClass().getResource("/").getPath() + "cn/edu/jlu/ccst/sshclient/util/Config.xml");
+	   	   XMLWriter writer = new XMLWriter(new FileWriter(this.getClass().getResource("/").getPath() + "cn/edu/jlu/ccst/sshclient/util/Config.xml"));	   	 
 	   	   writer.write(doc);
 	   	   writer.close();
      }catch(Exception ex)
@@ -521,7 +552,6 @@ private void action ( ActionEvent e ) throws DocumentException
          ex.printStackTrace();
      }
      updata(); 
-     System.out.println("updata");
   }
   if(str.startsWith("添加"))
   {
@@ -530,13 +560,9 @@ private void action ( ActionEvent e ) throws DocumentException
 		  ComputerUI newComputerUi = new ComputerUI();
 		  newComputerUi.setModal(true);
 		  newComputerUi.setVisible(true);
-		  //this.dispose();
-		  //updata();
-		  //return;
 	  }
 	  else
 	  {
-		 // System.out.println(cur.getType());
 		  switch(cur.getType())
 		  {
 		  case 0:
@@ -566,19 +592,32 @@ private void action ( ActionEvent e ) throws DocumentException
 	  {
 	  case 0:
 	  {
+		  SSHComputer t=(SSHComputer)cur;
+		  ComputerUI newComputerUi = new ComputerUI(t.getName(),t.getUsername(),t.getPassword(),t.getHost(),t.getMemo());
+		  newComputerUi.setModal(true);
+		  newComputerUi.setVisible(true);
 		  break;
 	  }
 	  case 1:
 	  {
+		  SSHGroup t=(SSHGroup)cur;
+		  GroupUI newGroup = new GroupUI(t.getName(),t.getMemo());
+		  newGroup.setModal(true);
+		  newGroup.setVisible(true);
 		  break;
 	  }
 	  case 2:
 	  {
+		  SSHTask t=(SSHTask)cur;
+		  TaskUI newTask = new TaskUI(t.getName(),t.getCmd(),t.getMemo());
+		  newTask.setModal(true);
+		  newTask.setVisible(true);
 		  break;
 	  }
 	  default:
 		  break;
 	  }
+	  updata();
   }
  
 }
@@ -589,28 +628,21 @@ public void NewComputerToXML(SSHComputer newComputer){
     SAXReader reader = new SAXReader();
     try{
     String filePath = this.getClass().getResource("/").getPath() + "cn/edu/jlu/ccst/sshclient/util/Config.xml";
-    System.out.println(filePath);
     Document doc = reader.read(filePath);
     OutputFormat format = OutputFormat.createPrettyPrint();
     Element root = doc.getRootElement();
-    XMLWriter writer = null;// 声明写XML的对象
-   // List<Element> celements = root.elements();
-    //for (Element c : celements);
-    
+    XMLWriter writer = null;// 声明写XML的对象   
     Element newnode = root.addElement("computer");
     newnode.addAttribute("id", newComputer.getId());
     newnode.addAttribute("name",newComputer.getName());
-    System.out.println(newComputer.getHost());
     newnode.addAttribute("host",newComputer.getHost());
     newnode.addAttribute("user",newComputer.getUsername());
     newnode.addAttribute("pswd", newComputer.getPassword());
+    newnode.addAttribute("memo",newComputer.getMemo());
     
     SimpleDateFormat timeFormat;
 	timeFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     newnode.addAttribute("creatdate",timeFormat.format(newComputer.getCreatdate()));
-    String filePath2 = "c:\\temp.xml";
-    System.out.println("操作成功！");
-    System.out.println(filePath);
     writer = new XMLWriter(new FileWriter(filePath), format);
     writer.write(doc);
     writer.close();
@@ -620,8 +652,126 @@ public void NewComputerToXML(SSHComputer newComputer){
         e.printStackTrace();
     }
 
+}
+//根据id修改某台电脑
+@SuppressWarnings("deprecation")
+public void EditComputerFromXML(String id,String n,String user,String pwd,String memo,String host)
+{
+    SAXReader reader = new SAXReader();
+    try{
+    String filePath = this.getClass().getResource("/").getPath() + "cn/edu/jlu/ccst/sshclient/util/Config.xml";
+    Document doc = reader.read(filePath);
+    OutputFormat format = OutputFormat.createPrettyPrint();
+    Element root = doc.getRootElement();
+    XMLWriter writer = null;// 声明写XML的对象
+    List   list=doc.selectNodes("/config/computer");
+	Iterator iter = list.iterator();
+	while(iter.hasNext())
+	{
+      Element el=(Element)iter.next();
+      String it=el.attributeValue("id");
+      
+      if(it.equals(id))
+      {   
+    	  el.addAttribute("name", n);
+    	  el.addAttribute("user", user);
+    	  el.addAttribute("pswd", n);
+    	  el.addAttribute("host", n);
+    	  el.addAttribute("memo", n);
+    	 
+    	  //Date SeverTime = new Date();
+    	  //SimpleDateFormat Severtimeformat = new SimpleDateFormat("yyyyMMddHHmmss");
+    	  //el.element("creatdate").setText(Severtimeformat.format(SeverTime));
+      }
+	}
+    writer = new XMLWriter(new FileWriter(filePath), format);
+    writer.write(doc);
+    writer.close();
+    
+    }
+    catch(Exception e ){
+        e.printStackTrace();
+    }
+}
+//根据id修改某个任务组
+@SuppressWarnings("deprecation")
+public void EditGroupFromXML(String id,String n,String memo)
+{		
+    SAXReader reader = new SAXReader();
+    try{
+    String filePath = this.getClass().getResource("/").getPath() + "cn/edu/jlu/ccst/sshclient/util/Config.xml";
+    Document doc = reader.read(filePath);
+    OutputFormat format = OutputFormat.createPrettyPrint();
+    Element root = doc.getRootElement();
+    XMLWriter writer = null;// 声明写XML的对象
+    List   list=doc.selectNodes("/config/computer");
+	Iterator iter = list.iterator();
+	while(iter.hasNext())
+	{
+		Element el=(Element)iter.next();
+		Iterator it=el.elementIterator("group");
+		while(it.hasNext())
+		{
+			Element et=(Element)it.next();
+			String s=et.attributeValue("id");
+			if(s.equals(id))
+			{
+				 et.addAttribute("name",n);
+				 et.addAttribute("memo",memo);
+				
+			}
+		}
+	}
+    writer = new XMLWriter(new FileWriter(filePath), format);
+    writer.write(doc);
+    writer.close();   
+    }
+    catch(Exception e ){
+        e.printStackTrace();
+    }
+}
+//根据id修改某个任务组
+public void EditTaskFromXML(String id,String n,String memo,String cmd)
+{		
+    SAXReader reader = new SAXReader();
+    try{
+    String filePath = this.getClass().getResource("/").getPath() + "cn/edu/jlu/ccst/sshclient/util/Config.xml";
+    Document doc = reader.read(filePath);
+    OutputFormat format = OutputFormat.createPrettyPrint();
+    Element root = doc.getRootElement();
+    XMLWriter writer = null;// 声明写XML的对象
+    List   list=doc.selectNodes("/config/computer");
+	Iterator iter = list.iterator();
+	while(iter.hasNext())
+	{
+		Element el=(Element)iter.next();
+		Iterator it=el.elementIterator("group");
+		 while(it.hasNext())
+         {
+             Element elta=(Element)it.next();
+             Iterator itta=elta.elementIterator("task");
+             while(itta.hasNext())
+             {
+             Element et=(Element)itta.next();
+             String s=et.attributeValue("id");
+             if(s.equals(id))
+             {
+            	 et.addAttribute("name", n);
+            	 et.addAttribute("memo", memo);
+            	 et.addAttribute("cmd", cmd);
+             }
+             }
 
-
+         }
+	}
+    writer = new XMLWriter(new FileWriter(filePath), format);
+    writer.write(doc);
+    writer.close();
+    
+    }
+    catch(Exception e ){
+        e.printStackTrace();
+    }
 }
 
     /** This method is called from within the constructor to
@@ -734,25 +884,22 @@ public void NewComputerToXML(SSHComputer newComputer){
                 jMenu4MouseClicked(evt);
             }
         });
-     //   jMenu4.setEnabled(false);
-        
-        //没有选中内容时新建选项全设为暗色
+
+      //没有选中内容时新建选项全设为暗色
         if(cur == null) {
             jMenuItem4.setEnabled(true);
             jMenuItem5.setEnabled(false);
             jMenuItem6.setEnabled(false);
         }
-        
         jMenuItem4.setText("Computer");
         jMenuItem4.setName("jMenuItem4"); // NOI18N
-        //"新建计算机"的监听函数
         jMenuItem4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 jMenuItem4MousePressed(evt);
             }
         });
         jMenu4.add(jMenuItem4);
-        
+
         jMenuItem5.setText("Group");
         jMenuItem5.setName("jMenuItem5"); // NOI18N
         //"新建工作组"的监听函数
@@ -781,6 +928,11 @@ public void NewComputerToXML(SSHComputer newComputer){
 
         jMenuItem3.setText("Quit");
         jMenuItem3.setName("jMenuItem3"); // NOI18N
+        jMenuItem3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+              System.exit(0);
+            }
+        });
         jMenu1.add(jMenuItem3);
 
         jSeparator1.setName("jSeparator1"); // NOI18N
@@ -869,70 +1021,52 @@ public void NewComputerToXML(SSHComputer newComputer){
        ComputerUI newComputerUi = new ComputerUI();
        newComputerUi.setVisible(true);
        this.setVisible(false);
+    }
+    /**
+     * 工具栏中新建计算机的处理函数
+     * @param evt
+     */
+        private void jMenuItem4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem4MousePressed
+            // TODO add your handling code here:
+        	if(jMenuItem4.isEnabled() == true) {
+            ComputerUI newComputerUi = new ComputerUI();
+            newComputerUi.setModal(true);
+            newComputerUi.setVisible(true);
+            //this.dispose();
+            updata();
+           // System.out.println("computer");
+        	}
+            //this.setVisible(false);
+        }//GEN-LAST:event_jMenuItem4MousePressed
+
+    /**
+     * 工具栏中新建组的处理函数
+     */
+        private void jMenuMousePressNewGroup(java.awt.event.MouseEvent evt){//GEN-FIRST:event_jMenuItem5MousePressed
+        	if(jMenuItem5.isEnabled() == true) {
+           	GroupUI newGroup = new GroupUI();
+           	newGroup.setModal(true);
+           	newGroup.setVisible(true);
+           	updata();
+        	}
+           	
+        }
         
-
-
-    }
-/**
- * 工具栏中新建计算机的处理函数
- * @param evt
- */
-    private void jMenuItem4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem4MousePressed
-        // TODO add your handling code here:
-    	if(jMenuItem4.isArmed() == true) {
-        ComputerUI newComputerUi = new ComputerUI();
-        newComputerUi.setModal(true);
-        newComputerUi.setVisible(true);
-        //this.dispose();
-        updata();
-        System.out.println("computer");
-    	}
-        //this.setVisible(false);
-    }//GEN-LAST:event_jMenuItem4MousePressed
-
-/**
- * 工具栏中新建组的处理函数
- */
-    private void jMenuMousePressNewGroup(java.awt.event.MouseEvent evt){//GEN-FIRST:event_jMenuItem5MousePressed
-    	if(jMenuItem5.isArmed() == true) {
-       	GroupUI newGroup = new GroupUI();
-       	newGroup.setModal(true);
-       	newGroup.setVisible(true);
-       	updata();
-    	}
-       	
-    }
-    
-/**
- * 工具栏中新建任务的处理函数    
- */
-    private void jMenuMousePressNewTask(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jMenuItem6MousePressed
-    if(jMenuItem6.isArmed() == true) {
-    	TaskUI newTask = new TaskUI();
-    	newTask.setModal(true);
-    	newTask.setVisible(true);
-    	updata();
-    	}
-    }
+    /**
+     * 工具栏中新建任务的处理函数    
+     */
+        private void jMenuMousePressNewTask(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jMenuItem6MousePressed
+        if(jMenuItem6.isEnabled() == true) {
+        	TaskUI newTask = new TaskUI();
+        	newTask.setModal(true);
+        	newTask.setVisible(true);
+        	updata();
+        	}
+        }
     /**
     * @param args the command line arguments
     */
     public static void main(String args[]) {
-    	try {
-			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (InstantiationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (UnsupportedLookAndFeelException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new LinuxClient().setVisible(true);
