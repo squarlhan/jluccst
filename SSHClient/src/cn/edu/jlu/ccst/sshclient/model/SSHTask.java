@@ -35,8 +35,8 @@ public class SSHTask extends BaseClass implements BaseAction, BaseOperation {
 	
 	private String cmd;
 	private List<String> params;
-	private File fin;
-	private File fout;
+	private String fin;
+	private String fout;
 	private SSHGroup gp;
 	
 	public SSHTask(String id, String name, byte type, String memo,Date creatdate) {
@@ -62,7 +62,7 @@ public class SSHTask extends BaseClass implements BaseAction, BaseOperation {
 	}	
 	
     public SSHTask(String id, String name, byte type, String memo,
-			Date creatdate, String cmd, List<String> params, File fin, File fout,
+			Date creatdate, String cmd, List<String> params, String fin, String fout,
 			SSHGroup gp) {
 		super(id, name, type, memo, creatdate);
 		this.cmd = cmd;
@@ -88,19 +88,19 @@ public class SSHTask extends BaseClass implements BaseAction, BaseOperation {
 		this.params = params;
 	}
 
-	public File getFin() {
+	public String getFin() {
 		return fin;
 	}
 
-	public void setFin(File fin) {
+	public void setFin(String fin) {
 		this.fin = fin;
 	}
 
-	public File getFout() {
+	public String getFout() {
 		return fout;
 	}
 
-	public void setFout(File fout) {
+	public void setFout(String fout) {
 		this.fout = fout;
 	}
 
@@ -211,7 +211,7 @@ public class SSHTask extends BaseClass implements BaseAction, BaseOperation {
 	public boolean update() {
 		// TODO Auto-generated method stub
 		 SSHTask t=(SSHTask)LinuxClient.getCur();
-		 TaskUI newTask = new TaskUI(t.getName(),t.getCmd(),t.getMemo());
+		 TaskUI newTask = new TaskUI(t.getName(),t.getCmd(),t.getFin(),t.getFout(),t.getMemo());
 		 newTask.setModal(true);
 		 newTask.setVisible(true);
 		return false;
