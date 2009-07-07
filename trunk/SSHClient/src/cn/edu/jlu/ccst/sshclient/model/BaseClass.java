@@ -2,6 +2,8 @@ package cn.edu.jlu.ccst.sshclient.model;
 
 import java.util.Date;
 
+import javax.swing.JTextArea;
+
 public class BaseClass {
 
 	protected String id;
@@ -63,6 +65,11 @@ public class BaseClass {
 	}
 	public void setCreatdate(Date creatdate) {
 		this.creatdate = creatdate;
+	}
+
+	public void start(JTextArea jtext) {
+		// TODO Auto-generated method stub
+		
 	}
 	
 	
