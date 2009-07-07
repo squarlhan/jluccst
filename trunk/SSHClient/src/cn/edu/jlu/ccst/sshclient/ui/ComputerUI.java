@@ -14,6 +14,7 @@ import cn.edu.jlu.ccst.sshclient.model.SSHComputer;
 import cn.edu.jlu.ccst.sshclient.model.SSHGroup;
 import cn.edu.jlu.ccst.sshclient.model.SSHTask;
 import cn.edu.jlu.ccst.sshclient.ui.LinuxClient;
+import cn.edu.jlu.ccst.sshclient.util.SSHOpCommand;
         
 import java.io.File;
 import java.io.FileWriter;
@@ -39,6 +40,7 @@ public class ComputerUI extends javax.swing.JDialog
     public ComputerUI()   
     { 	
         initComponents();
+        this.setTitle("新建计算机");
         this.setLocationRelativeTo(null);
         SubmitButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -47,7 +49,7 @@ public class ComputerUI extends javax.swing.JDialog
         });
         
         jPasswordField1.setEchoChar('*');
-        jPasswordField2.setEchoChar('*');
+       // jPasswordField2.setEchoChar('*');
     }
 //--------------------------------------------------------------// 
     public ComputerUI(String name,String user,String pwd,String host,String memo) 
@@ -62,17 +64,16 @@ public class ComputerUI extends javax.swing.JDialog
         });
         
         jPasswordField1.setEchoChar('*');
-        jPasswordField2.setEchoChar('*');
+        //jPasswordField2.setEchoChar('*');
      
     }
 //------------------------------------------------------------//
 private void initComponents(String name,String user,String pwd,String host,String memo) {
 	initComponents();
-	this.setTitle("新建计算机");
 	jTextField2.setText(name);
     jTextField6.setText(user);
     jPasswordField1.setText(pwd);
-    jPasswordField2.setText(pwd);
+   // jPasswordField2.setText(pwd);
     jTextField8.setText(host);
     jTextArea4.setText(memo);
 }
@@ -108,7 +109,7 @@ private void initComponents() {
     jPasswordField1.setBounds(110, 100, 150, 30);
     jPasswordField1.setEchoChar('*');
     this.add(jPasswordField1);
-    
+    /*
     jLabel7 = new javax.swing.JLabel("重输密码：");
     jLabel7.setBounds(20, 140, 70, 30);
     this.add(jLabel7);
@@ -116,13 +117,30 @@ private void initComponents() {
     jPasswordField2.setBounds(110, 140, 150, 30);
     jPasswordField2.setEchoChar('*');
     this.add(jPasswordField2);
+    */
     
     jLabel8 = new javax.swing.JLabel("主机IP地址:");
-    jLabel8.setBounds(20, 180, 70, 30);
+    jLabel8.setBounds(20, 140, 70, 30);
     this.add(jLabel8);
     jTextField8 = new javax.swing.JTextField();
-    jTextField8.setBounds(110, 180, 150, 30);
+    jTextField8.setBounds(110, 140, 150, 30);
     this.add(jTextField8);
+    
+    Contest=new JButton("测试连接");
+    Contest.setBounds(170, 180, 90, 30);
+    this.add(Contest);
+    Contest.addMouseListener(
+    		new MouseAdapter() 
+			{
+            public void mousePressed(java.awt.event.MouseEvent evt) 
+            {
+            	JOptionPane.showMessageDialog(null, "测试连接中....");
+                SSHOpCommand test=new SSHOpCommand(jTextField8.getText(), jTextField6.getText(),String.valueOf(jPasswordField1.getPassword()),2);
+                test.init();
+                test.start();
+            }
+			}
+    		);
     
     jLabel4 = new javax.swing.JLabel("备注:");
     jLabel4.setBounds(20, 220, 70, 30);
@@ -168,7 +186,7 @@ private void initComponents() {
         jTextArea4.setText(null);
         jTextField6.setText(null);
         jPasswordField1.setText(null);
-        jPasswordField2.setText(null);
+ //       jPasswordField2.setText(null);
         jTextField8.setText(null);
     }//GEN-LAST:event_jButton1MousePressed
 
@@ -186,6 +204,7 @@ private void initComponents() {
             JOptionPane.showMessageDialog(null, "请输入用户名密码");
             return;
         }
+        /*
         if(jPasswordField2.getPassword().equals("")){
              JOptionPane.showMessageDialog(null, "请输入用户名密码");
              return;
@@ -194,6 +213,7 @@ private void initComponents() {
              JOptionPane.showMessageDialog(null, "两次输入的密码不一致");
              return;
         }
+        */
         if(jTextField8.getText().equals("")){
             JOptionPane.showMessageDialog(null, "请输入用户名主机名");
             return;
@@ -236,6 +256,7 @@ private void initComponents() {
             JOptionPane.showMessageDialog(null, "请输入用户名密码");
             return;
         }
+        /*
         if(jPasswordField2.getPassword().equals("")){
              JOptionPane.showMessageDialog(null, "请输入用户名密码");
              return;
@@ -244,6 +265,7 @@ private void initComponents() {
              JOptionPane.showMessageDialog(null, "两次输入的密码不一致");
              return;
         }
+        */
         if(jTextField8.getText().equals("")){
             JOptionPane.showMessageDialog(null, "请输入用户名主机名");
             return;
@@ -346,17 +368,18 @@ private void initComponents() {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
+    //private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JPasswordField jPasswordField2;
+ //   private javax.swing.JPasswordField jPasswordField2;
  //   private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
+   // private javax.swing.JTextField jTextField3;
     private javax.swing.JTextArea jTextArea4;
     private javax.swing.JTextField jTextField6;
     private javax.swing.JTextField jTextField8;
     private JScrollPane memoAreaPane; 
+    private JButton Contest;
     // End of variables declaration//GEN-END:variables
 
 }
