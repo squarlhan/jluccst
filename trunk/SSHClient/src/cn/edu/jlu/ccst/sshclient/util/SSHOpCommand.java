@@ -170,8 +170,8 @@ public class SSHOpCommand implements Runnable {
     		et.printStackTrace();
     	}    	
         
-    	killPidProcess(pidlist);
-    /*    if(pidlist.size() > 0) {
+    	//kill正在执行的命令
+     if(pidlist.size() > 0) {
         		try {
         			conn = getOpenedConnection();
      			    sess = conn.openSession();
@@ -184,10 +184,10 @@ public class SSHOpCommand implements Runnable {
         		catch(Exception et) {
         			et.printStackTrace();
         		}
-        	}*/
+        	}
 	   	
 	}
-    private void killPidProcess(List<String> pidlist) {
+ /*   private void killPidProcess(List<String> pidlist) {
         if(pidlist.size() > 0) {
     		try {
     			Connection conn = getOpenedConnection();
@@ -205,6 +205,8 @@ public class SSHOpCommand implements Runnable {
 	
     	
     }
+    */
+    
     /**
      * 连接函数
      */
