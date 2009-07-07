@@ -48,12 +48,13 @@ public class SSHOpCommand implements Runnable {
 	 * @param psw
 	 * @param conInfo 2
 	 */
-	public SSHOpCommand(String host, String name, String psw, int conInfo) {
+	public SSHOpCommand(String host, String name, String psw, int conInfo,JLabel l) {
 		super();
 		Host = host;
 		Name = name;
 		Psw = psw;
 		opType = conInfo;
+		conl=l;
 	}
     /**
      * 停止命令用这个构造方法
