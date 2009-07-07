@@ -18,6 +18,7 @@ import cn.edu.jlu.ccst.sshclient.inter.BaseAction;
 import cn.edu.jlu.ccst.sshclient.inter.BaseOperation;
 import cn.edu.jlu.ccst.sshclient.ui.LinuxClient;
 import cn.edu.jlu.ccst.sshclient.ui.TaskUI;
+import cn.edu.jlu.ccst.sshclient.util.SSHOpCommand;
 
 /**
  * @author Woden
@@ -39,6 +40,7 @@ public class SSHTask extends BaseClass implements BaseAction, BaseOperation {
 	private String fout;
 	private SSHGroup gp;
 	private int taskstatus;
+    private boolean taskfinish;
 	
 	public SSHTask(String id, String name, byte type, String memo,Date creatdate) {
 		super(id, name, type, memo, creatdate);
@@ -137,8 +139,13 @@ public class SSHTask extends BaseClass implements BaseAction, BaseOperation {
 	 */
 	@Override
 	public void stop() {
-		// TODO Auto-generated method stub
-
+		SSHComputer selectComputer = new SSHComputer();
+		selectComputer = gp.getCp();
+		int stopType = 1;
+		SSHOpCommand ry = new SSHOpCommand(selectComputer.getHost(), selectComputer.getUsername(),selectComputer.getPassword(),cmd,stopType);
+		Thread ty = new Thread(ry);
+		ty.start();
+   
 	}
 
 	/* (non-Javadoc)
