@@ -85,7 +85,7 @@ private void initComponents() {
 	Image img = tk.getImage(this.getClass().getResource("/").getPath() + "cn/edu/jlu/ccst/sshclient/ui/resource/t.png");
 	setIconImage(img);
 	this.setLayout(null);
-	this.setSize(300, 350);
+	this.setSize(300, 400);
 	this.setResizable(false);
 	
     jLabel2 = new javax.swing.JLabel("计算机名字:");
@@ -126,35 +126,39 @@ private void initComponents() {
     jTextField8.setBounds(110, 140, 150, 30);
     this.add(jTextField8);
     
+    Ltest=new JLabel();
+    
     Contest=new JButton("测试连接");
-    Contest.setBounds(170, 180, 90, 30);
+    Contest.setBounds(200, 300, 90, 30);
     this.add(Contest);
     Contest.addMouseListener(
     		new MouseAdapter() 
 			{
             public void mousePressed(java.awt.event.MouseEvent evt) 
-            {
-            	JOptionPane.showMessageDialog(null, "测试连接中....");
-                SSHOpCommand test=new SSHOpCommand(jTextField8.getText(), jTextField6.getText(),String.valueOf(jPasswordField1.getPassword()),2);
-                test.init();
-                test.start();
+            {            	
+                SSHOpCommand test=new SSHOpCommand(jTextField8.getText(), jTextField6.getText(),String.valueOf(jPasswordField1.getPassword()),2,Ltest);
+                Thread Ctest=new Thread(test);
+                Ctest.start();
+                Ltest.setText("测试连接中....");
+                add(Ltest);
+                Ltest.setBounds(120, 270, 90, 30);
             }
 			}
     		);
     
     jLabel4 = new javax.swing.JLabel("备注:");
-    jLabel4.setBounds(20, 220, 70, 30);
+    jLabel4.setBounds(20, 180, 70, 30);
     this.add(jLabel4);
     
     jTextArea4 = new javax.swing.JTextArea("");
     jTextArea4.setLineWrap(true);
     jTextArea4.setBorder(BorderFactory.createLineBorder(Color.black));
     memoAreaPane = new JScrollPane(jTextArea4,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-    memoAreaPane.setBounds(110, 220, 150, 40);
+    memoAreaPane.setBounds(110, 180, 150, 80);
     this.add(memoAreaPane);
     
     ResetButton = new JButton("重置");
-    ResetButton.setBounds(40, 270, 80, 30);
+    ResetButton.setBounds(20, 300, 80, 30);
     ResetButton.addMouseListener(new java.awt.event.MouseAdapter() {
         public void mousePressed(java.awt.event.MouseEvent evt) {
         	jButton1MousePressed(evt);
@@ -162,7 +166,7 @@ private void initComponents() {
     });
     this.add(ResetButton);
     SubmitButton = new JButton("提交");
-    SubmitButton.setBounds(160, 270, 80, 30);
+    SubmitButton.setBounds(110, 300, 80, 30);
     
     this.add(SubmitButton);
     Dimension   screenSize   =   Toolkit.getDefaultToolkit().getScreenSize();   
@@ -380,6 +384,7 @@ private void initComponents() {
     private javax.swing.JTextField jTextField8;
     private JScrollPane memoAreaPane; 
     private JButton Contest;
+    private JLabel Ltest;
     // End of variables declaration//GEN-END:variables
 
 }
