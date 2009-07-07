@@ -416,17 +416,6 @@ private void execTaskCommand ( ActionEvent e ) throws DocumentException {
 	SSHOpCommand ry = new SSHOpCommand(computerHost, userName, userPsw, taskCmd,jTextArea2,taskInfo);
 	Thread ty = new Thread(ry);
 	ty.start();
-	
-	/*if(!ty.isAlive()) {
-		System.out.println("**");
-		setSelTaskStatus(0);
-	}*/
-
-	System.out.println("主机地址:"+ computerHost +"\n"+
-			           "用户名:"+ userName + "\n" + 
-			           "密码:"+ userPsw+ "\n" +
-			           "任务命令:" + taskCmd );
-	System.out.println("jTextArea2:" +jTextArea2.getText());
 	}
 	
 }
@@ -441,36 +430,7 @@ private void stopTaskCommand( ActionEvent e ) throws DocumentException  {
     setSelTaskStatus(0);
 	SSHTask stopTask = new SSHTask();
 	stopTask = findSelectTask();
-	SSHGroup selectGroup = new SSHGroup();
-	SSHComputer selectComputer = new SSHComputer();
-	selectGroup = stopTask.getGp();
-	selectComputer = selectGroup.getCp();
-	
-	String stopTaskcmd = stopTask.getCmd();
-	stopTaskcmd = stopTaskcmd.substring(0,stopTaskcmd.indexOf(" "));
-	List<String> listp = new ArrayList();
-	List<String> listp0= new ArrayList();
-	String sscmd = "ps U "+selectComputer.getUsername()+" | grep "+
-	              stopTaskcmd+" | awk '{print $1}'";
-	
-	SSHOpCommand stopCommand = new SSHOpCommand();
-	try{
-		stopCommand.stopSSH(selectComputer.getHost(), selectComputer.getUsername(), selectComputer.getPassword(), sscmd, listp);
-	}catch(IOException ie) {
-		ie.printStackTrace();
-	}
-	if(listp.size() > 0) {
-		for(int i = 0; i < listp.size()-1 ; i ++) {
-			try {
-				System.out.println("pid"+listp.get(i));
-				stopCommand.stopSSH(selectComputer.getHost(), selectComputer.getUsername(), selectComputer.getPassword(),"kill pid "+ listp.get(i), listp0);
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-		}
-	}
-	
+	stopTask.stop();
     }
 }
 
