@@ -3,6 +3,10 @@
  */
 package cn.edu.jlu.ccst.sshclient.util;
 
+import cn.edu.jlu.ccst.sshclient.ui.*;
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -10,17 +14,30 @@ import java.io.InputStreamReader;
 import ch.ethz.ssh2.Connection;
 import ch.ethz.ssh2.SCPClient;
 import ch.ethz.ssh2.Session;
+import java.lang.Thread;
+import java.util.List;
+
+import javax.swing.JFrame;
+import javax.swing.JTextArea;
+import javax.management.timer.Timer;
 
 /**
  * @author Woden
- * Õë¶ÔsshÁ¬½ÓµÄ²Ù×÷½Ó¿Ú
+ * ï¿½ï¿½ï¿½sshlï¿½ÓµÄ²ï¿½ï¿½ï¿½Ó¿ï¿½
  */
-public class SSHCommand{
+public class SSHCommand extends JFrame {
 	
-	private SSHCommand() {
+
+	 public SSHCommand() {
+			this.setLayout(null);
+			this.setSize(300, 350);
+			
+			jTextArea1 = new JTextArea();
+			jTextArea1.setBounds(10, 10, 200, 300);
+			this.add(jTextArea1);
 	}
 	/**
-	 * ´Ó·þÎñÆ÷»ñÈ¡ÎÄ¼þ
+	 * ï¿½Ó·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È¡ï¿½Ä¼ï¿½
 	 * @param host ip
 	 * @param username
 	 * @param password
@@ -38,7 +55,7 @@ public class SSHCommand{
 	}
 
 	/**
-	 * Ïò·þÎñÆ÷·¢ËÍÎÄ¼þ
+	 * ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ä¼ï¿½
 	 * @param host ip
 	 * @param username
 	 * @param password
@@ -56,7 +73,7 @@ public class SSHCommand{
 	}
 
 	/**
-	 * ÔÚ·þÎñÆ÷ÉÏÔËÐÐÃüÁî
+	 * ï¿½Ú·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 * @param host
 	 * @param username
 	 * @param password
@@ -64,15 +81,32 @@ public class SSHCommand{
 	 * @return exit status
 	 */
 
-	public static int runSSH(String host, String username, String password, String cmd) throws IOException {
+	public static int runSSH(String host, String username, String password, String cmd,List<String> pidlist) throws IOException {
 
 		Connection conn = getOpenedConnection(host, username, password);
 		Session sess = conn.openSession();
 		sess.execCommand(cmd);		
-		String out;
-		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(sess.getStdout()));     
-		while((out=bufferedReader.readLine())!=null)     
-		System.out.println(out);
+        String out;
+		Thread thr1 = new Thread();
+		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(sess.getStdout()));    
+		
+		 
+		    
+		
+		while((out=bufferedReader.readLine())!=null) {
+			pidlist.add(out);   
+			//out += "\n";
+			   //jTextArea1.append(out);   
+			/* ActionListener   action=new   ActionListener()   
+			  {   
+			  public   void   actionPerformed(ActionEvent   e)   
+			  {   
+				 
+			  }   
+			  };   
+			  Timer time=new  Timer(); 
+			  time.*/
+		}
 		sess.close();
 		conn.close();
 		return sess.getExitStatus().intValue();
@@ -80,14 +114,14 @@ public class SSHCommand{
 	}
 
 	/**
-	 * µÃµ½Ò»¸ö´ò¿ªµÄÁ¬½Ó
+	 * ï¿½Ãµï¿½Ò»ï¿½ï¿½ò¿ªµï¿½lï¿½ï¿½
 	 * @param host
 	 * @param username
 	 * @param password
 	 * @return
 	 */
 
-	private static Connection getOpenedConnection(String host, String username, String password) throws IOException {
+	public static Connection getOpenedConnection(String host, String username, String password) throws IOException {
 
 		Connection conn = new Connection(host);
 		conn.connect();
@@ -99,7 +133,7 @@ public class SSHCommand{
 	}
 
 	/**
-	 * ÔÚ±¾µØ»úÆ÷ÉÏÔËÐÐÃüÁî
+	 * ï¿½Ú±ï¿½ï¿½Ø»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 	 * @param cmd
 	 * @return exit status 
 	 */
@@ -108,12 +142,28 @@ public class SSHCommand{
 	public static int runLocal(String cmd) throws IOException {
 
 		Runtime rt = Runtime.getRuntime();
-		Process p = rt.exec(cmd);		
+		Process p = rt.exec(cmd);	
+	
 		String out;
-		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(p.getInputStream()));     
-		while((out=bufferedReader.readLine())!=null)     
-		System.out.println(out);       
+		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(p.getInputStream())); 
+		//int tt = 0;
+		while((out=bufferedReader.readLine())!=null){
+		System.out.println(out);
+	//	System.out.println("tt"+tt);
+		//++tt;
+		}
+	//	rt.exit(1);
 		return p.exitValue();
 
+	}
+	  private static   JTextArea   jTextArea1;
+//	private static String exec
+	/**
+	 * ä¸»å‡½æ•°
+	 */
+	public static void main(String args[]) throws IOException {
+		SSHCommand s1 = new SSHCommand();
+		s1.setVisible(true);
+//	s1.runSSH("10.60.58.194", "wuchunguo", "wucg", "ping 10.60.58.254");
 	}
 }
