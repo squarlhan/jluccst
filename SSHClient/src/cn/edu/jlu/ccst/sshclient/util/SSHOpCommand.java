@@ -1,11 +1,12 @@
 package cn.edu.jlu.ccst.sshclient.util;
 
+import cn.edu.jlu.ccst.sshclient.model.SSHTask;
 import cn.edu.jlu.ccst.sshclient.ui.*;
-
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.FileWriter;
 import java.io.InputStreamReader;
 
 import ch.ethz.ssh2.Connection;
@@ -16,6 +17,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.management.timer.Timer;
@@ -29,6 +31,8 @@ public class SSHOpCommand implements Runnable {
 	private String Cmd;
 	private int opType;
 	private JTextArea  jTextArea1;
+	private JLabel  conl;
+	private  String rs;
 	//默认构造方法
 	public SSHOpCommand() {
 		
@@ -40,12 +44,13 @@ public class SSHOpCommand implements Runnable {
 	 * @param psw
 	 * @param conInfo 2
 	 */
-	public SSHOpCommand(String host, String name, String psw, int conInfo) {
+	public SSHOpCommand(String host, String name, String psw, int conInfo,JLabel l) {
 		super();
 		Host = host;
 		Name = name;
 		Psw = psw;
 		opType = conInfo;
+		conl=l;
 	}
     /**
      * 停止命令用这个构造方法
@@ -65,6 +70,7 @@ public class SSHOpCommand implements Runnable {
 		Cmd = cmd;
 		this.opType = stopType;
 	}
+    
 	/**
      * 运行命令用这个构造方法
      * @param host
@@ -105,7 +111,7 @@ public class SSHOpCommand implements Runnable {
     		stopSSH();
     		break;
     	case 2://测试连接
-		    getOpenedConnection();
+		    getOpenedConnectionT();
 			break;
     	default: break;
     	}
@@ -116,6 +122,13 @@ public class SSHOpCommand implements Runnable {
      * 运行ssh远程命令
      */
     private void runSSH() {
+    	String filename=((SSHTask)(LinuxClient.getCur())).getFout()+"/"+LinuxClient.getCur().getId()+".txt";
+    	FileWriter write = null;
+    	try
+    	{
+    	write=new FileWriter(filename,true);
+    	}catch(IOException e)
+    	{}
     	try{
         	Connection conn = getOpenedConnection();
     		Session sess = conn.openSession();
@@ -124,10 +137,13 @@ public class SSHOpCommand implements Runnable {
     		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(sess.getStdout()));        
     		while((out=bufferedReader.readLine())!=null) {
     			   out += "\n";
+    			   write.append(out);
     			   jTextArea1.append(out);   
     		}
     		sess.close();
     		conn.close();
+    		write.flush();
+    		write.close();
         	}
         	catch(Exception ie) {
         		ie.printStackTrace();
@@ -220,25 +236,60 @@ public class SSHOpCommand implements Runnable {
 		}
 		catch (IOException e)
 		{
-			JOptionPane.showMessageDialog(null, "连接失败！");
 			return conn;
 		}
 		boolean isAuthenticated = conn.authenticateWithPassword(Name, Psw);
 		if (isAuthenticated == false)
 		{
-			JOptionPane.showMessageDialog(null, "连接失败！");
 			throw new IOException("Authentication failed.");			
 			
-		}
-		else
-		{
-			JOptionPane.showMessageDialog(null, "连接成功！");
 		}
 		}
 		catch(Exception ev){
 			ev.printStackTrace();
 		}
+		
+		return conn;
+
+}
+
+/**
+ * 连接函数
+ */
+ public  Connection getOpenedConnectionT()  {
+	 Connection conn = new Connection(Host);
+	try{	
+	try
+	{
+	conn.connect();
+	}
+	catch (IOException e)
+	{
+		JOptionPane.showMessageDialog(null, "连接失败！");
+		conl.setText("测试结束");
 		return conn;
 	}
+	boolean isAuthenticated = conn.authenticateWithPassword(Name, Psw);
+	if (isAuthenticated == false)
+	{
+		JOptionPane.showMessageDialog(null, "连接失败！");
+		conl.setText("测试结束");
+		throw new IOException("Authentication failed.");			
+		
+	}
+	else
+	{
+		JOptionPane.showMessageDialog(null, "连接成功！");
+		 conl.setText("测试结束");
+	}
+	}
+	catch(Exception ev){
+		JOptionPane.showMessageDialog(null, "连接失败！");
+		conl.setText("测试结束");
+		ev.printStackTrace();
+	}
+	
+	return conn;
+}
 
 }
