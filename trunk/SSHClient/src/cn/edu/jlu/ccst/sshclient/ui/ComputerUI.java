@@ -36,7 +36,7 @@ import java.awt.event.*;
 
 public class ComputerUI extends javax.swing.JDialog 
 {
-    public ComputerUI() 
+    public ComputerUI()   
     { 	
         initComponents();
         this.setLocationRelativeTo(null);
