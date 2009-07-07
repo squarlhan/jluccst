@@ -2,11 +2,12 @@ package cn.edu.jlu.ccst.sshclient.util;
 
 import cn.edu.jlu.ccst.sshclient.model.SSHTask;
 import cn.edu.jlu.ccst.sshclient.ui.*;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.io.InputStreamReader;
 
 import ch.ethz.ssh2.Connection;
@@ -14,6 +15,7 @@ import ch.ethz.ssh2.SCPClient;
 import ch.ethz.ssh2.Session;
 import java.lang.Thread;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.swing.JFrame;
@@ -31,6 +33,8 @@ public class SSHOpCommand implements Runnable {
 	private String Cmd;
 	private int opType;
 	private JTextArea  jTextArea1;
+	private static long endtime;
+	private static boolean flag = true; 
 	private JLabel  conl;
 	private  String rs;
 	//默认构造方法
@@ -44,13 +48,12 @@ public class SSHOpCommand implements Runnable {
 	 * @param psw
 	 * @param conInfo 2
 	 */
-	public SSHOpCommand(String host, String name, String psw, int conInfo,JLabel l) {
+	public SSHOpCommand(String host, String name, String psw, int conInfo) {
 		super();
 		Host = host;
 		Name = name;
 		Psw = psw;
 		opType = conInfo;
-		conl=l;
 	}
     /**
      * 停止命令用这个构造方法
@@ -70,7 +73,6 @@ public class SSHOpCommand implements Runnable {
 		Cmd = cmd;
 		this.opType = stopType;
 	}
-    
 	/**
      * 运行命令用这个构造方法
      * @param host
@@ -129,6 +131,11 @@ public class SSHOpCommand implements Runnable {
     	write=new FileWriter(filename,true);
     	}catch(IOException e)
     	{}
+    	
+    	System.out.println("flag1:"+flag);
+    	long startime = System.currentTimeMillis();
+    	System.out.print("starttime:"+startime);
+    	flag = false;
     	try{
         	Connection conn = getOpenedConnection();
     		Session sess = conn.openSession();
@@ -149,7 +156,15 @@ public class SSHOpCommand implements Runnable {
         		ie.printStackTrace();
         	}
         	LinuxClient tmpLinx = new LinuxClient();
-        	tmpLinx.setSelTaskStatus(0);    
+        	tmpLinx.setSelTaskStatus(0); 
+            tmpLinx.setTaskRunSucc(flag);
+        	
+        	if(flag == false) {
+        	//	flag = true;
+        	endtime = System.currentTimeMillis();
+        	}
+        	System.out.println("flag:" + flag);
+        	System.out.println("end:"+endtime);
         	
     }
     
@@ -158,6 +173,7 @@ public class SSHOpCommand implements Runnable {
      * 停止正在运行的任务
      */
     public void stopSSH() {
+    	
     	List<String> pidlist;
     	pidlist = new ArrayList();
     	String stopTaskcmd = Cmd;
@@ -202,6 +218,9 @@ public class SSHOpCommand implements Runnable {
         			et.printStackTrace();
         		}
         	}
+     flag = true;
+     endtime = System.currentTimeMillis();
+     System.out.println("ttime:"+endtime);
 	   	
 	}
  /*   private void killPidProcess(List<String> pidlist) {
@@ -291,5 +310,18 @@ public class SSHOpCommand implements Runnable {
 	
 	return conn;
 }
-
+     //----------------------------------------------//
+    /**
+     * 程序结束时间
+     */
+     public long getRunEndTime() {
+    	 return endtime;
+     }
+     //----------------------------------------------//
+     /**
+      * 程序执行状态
+      */
+     public boolean getRunStatus() {
+    	 return flag;
+     }
 }
