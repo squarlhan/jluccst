@@ -247,6 +247,7 @@ public class TaskUI extends javax.swing.JDialog {
                           t.addAttribute("cmd", newTask1.getCmd());
                           t.addAttribute("in", newTask1.getFin());
                           t.addAttribute("out", newTask1.getFout());
+                          t.addAttribute("starttime","");
                           t.addAttribute("memo", newTask1.getMemo());
                           flag = true;
                           break;
@@ -274,14 +275,21 @@ public class TaskUI extends javax.swing.JDialog {
 			 JOptionPane.showMessageDialog(null,"请输入新建任务的命令");
 			 return;
 		 }
-   	     this.EditTaskFromXML(LinuxClient.getCur().getId(), tTextField1.getText(), tTextArea2.getText(),tTextField3.getText(),tfin.getText(),tfout.getText());
+		 int i;
+		 for(i = 0; i < LinuxClient.tks.size() ; ++ i) {
+			 if(LinuxClient.getCur().getId().equals(LinuxClient.tks.get(i).getId())) {
+				 break;
+			 }
+		 }
+   	     this.EditTaskFromXML(LinuxClient.getCur().getId(), tTextField1.getText(), tTextArea2.getText(),tTextField3.getText(),tfin.getText(),tfout.getText(),
+   	    		              LinuxClient.tks.get(i).getStartTime());
    	     this.setVisible(false);
          this.dispose(); 
          JOptionPane.showMessageDialog(null, "修改任务成功！");
 	 }
 	 //--------------------------------------------//
 	//根据id修改某个任务组
-	 public void EditTaskFromXML(String id,String n,String memo,String cmd,String in,String out)
+	 public void EditTaskFromXML(String id,String n,String memo,String cmd,String in,String out,Date starttime)
 	 {		
 	     SAXReader reader = new SAXReader();
 	     try{
@@ -291,7 +299,9 @@ public class TaskUI extends javax.swing.JDialog {
 	     Element root = doc.getRootElement();
 	     XMLWriter writer = null;// 声明写XML的对象
 	     List   list=doc.selectNodes("/config/computer");
-	 	Iterator iter = list.iterator();
+	 	 Iterator iter = list.iterator();
+	 	 SimpleDateFormat timeFormat;
+	     timeFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 	 	while(iter.hasNext())
 	 	{
 	 		Element el=(Element)iter.next();
@@ -307,15 +317,17 @@ public class TaskUI extends javax.swing.JDialog {
 	              if(s.equals(id))
 	              {
 	             	 et.addAttribute("name", n);
-	             	 et.addAttribute("memo", memo);
 	             	 et.addAttribute("cmd", cmd);
 	             	 et.addAttribute("in", in);
 	             	 et.addAttribute("out",out);
+	             	 et.addAttribute("starttime",timeFormat.format(starttime));
+	             	 et.addAttribute("memo", memo);
 	              }
 	              }
 
 	          }
 	 	}
+	 	System.out.println("写入xml:"+ starttime);
 	     writer = new XMLWriter(new FileWriter(filePath), format);
 	     writer.write(doc);
 	     writer.close();
