@@ -42,11 +42,15 @@ public class SSHTask extends BaseClass implements BaseAction, BaseOperation {
 	private SSHGroup gp;
 	private int taskstatus;
     private boolean taskfinish;
+    private Date taskstartTime;
+    private long taskrunTime;
+    
     private JTextArea jTextArea1;
 	
 	public SSHTask(String id, String name, byte type, String memo,Date creatdate) {
 		super(id, name, type, memo, creatdate);
 		taskstatus = 0;
+		taskfinish = false;
 		// TODO Auto-generated constructor stub
 	}
 
@@ -58,6 +62,7 @@ public class SSHTask extends BaseClass implements BaseAction, BaseOperation {
 	public SSHTask(String name, byte type, Date creatdate) {
 		super(name, type, creatdate);
 		taskstatus = 0;
+		taskfinish = false;
 		// TODO Auto-generated constructor stub
 	}
 
@@ -67,6 +72,8 @@ public class SSHTask extends BaseClass implements BaseAction, BaseOperation {
 	public SSHTask() {
 		// TODO Auto-generated constructor stub
 		taskstatus = 0;
+		taskfinish = false;
+		taskstartTime = null;
 	}	
 	
     public SSHTask(String id, String name, byte type, String memo,
@@ -126,13 +133,29 @@ public class SSHTask extends BaseClass implements BaseAction, BaseOperation {
     public int getStatus() {
     	return taskstatus;
     }
-	//����ķ�����Ҫʵ��
+    
+    public void setRunSucc(boolean t) {
+    	taskfinish = t;
+    }
+    public void setStartTime(Date t){
+    	taskstartTime = t;
+    }
+    public Date getStartTime() {
+    	return taskstartTime;
+    }
+    public void setRunTime(long t) {
+    	taskrunTime = t;
+    }
+    public long getRunTime() {
+    	return taskrunTime;
+    }
+    
+	//-----------------------------------------------------------------------//
 	/* (non-Javadoc)
 	 * @see cn.edu.jlu.ccst.sshclient.inter.BaseAction#start()
 	 */
 	@Override
 	public void start(JTextArea jtext) {
-	
 	jTextArea1 = jtext;
 	SSHComputer selectComputer = new SSHComputer();
 	selectComputer = gp.getCp();
@@ -144,6 +167,7 @@ public class SSHTask extends BaseClass implements BaseAction, BaseOperation {
 	SSHOpCommand ry = new SSHOpCommand(computerHost, userName, userPsw, cmd,jTextArea1,taskInfo);
 	Thread ty = new Thread(ry);
 	ty.start();
+	
 	}
 
 	/* (non-Javadoc)
