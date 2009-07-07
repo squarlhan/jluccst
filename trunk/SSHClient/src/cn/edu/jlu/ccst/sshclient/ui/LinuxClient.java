@@ -117,6 +117,12 @@ public class LinuxClient extends javax.swing.JFrame {
                         tk.setCmd(t.valueOf("@cmd"));
                         tk.setFin(t.valueOf("@in"));
                         tk.setFout(t.valueOf("@out"));
+                        if(t.valueOf("@starttime").equals("")){
+                        	tk.setStartTime(null);
+                        }
+                        else {
+                        tk.setStartTime(timeFormat.parse(t.valueOf("@starttime")));
+                        }
                         List<String> params = new ArrayList();
                         List<Element> pelements = t.elements();
                         for(Element p : pelements){
@@ -361,8 +367,8 @@ private void action ( ActionEvent e ) throws DocumentException
 /**
  * 找到选中的任务
  */
-private SSHTask findSelectTask() {
-	  SSHTask selectTask = new SSHTask();
+public SSHTask findSelectTask() {
+	 SSHTask selectTask = new SSHTask();
 	 Iterator <SSHTask> it;
 	 SSHGroup selectGroup = new SSHGroup();
 	//寻找选中的任务
@@ -381,9 +387,22 @@ private SSHTask findSelectTask() {
  * 设置相应的任务运行状态
  */
 public void setSelTaskStatus(int t) {
-	for( int i = 0; i < tks.size(); i++) {
+	for(int i = 0; i < tks.size(); i++) {
 		if(tks.get(i).getId().equals(cur.getId())) {
 			tks.get(i).setStatus(t);
+		    return;
+		}
+	}
+}
+//-----------------------------------------------------------------------//
+/**
+ * 设置任务运行成功
+ */
+public void setTaskRunSucc(boolean t) {
+	for( int i = 0; i < tks.size(); i++) {
+		if(tks.get(i).getId().equals(cur.getId())) {
+			tks.get(i).setRunSucc(t);
+			System.out.println("run sucss!");
 			return;
 		}
 	}
@@ -399,25 +418,24 @@ private void execTaskCommand ( ActionEvent e ) throws DocumentException {
 	setSelTaskStatus(1);
 	SSHTask selectTask = new SSHTask();
 	//寻找选中的任务
-    selectTask = findSelectTask();
+	int i;
+	for( i = 0; i < tks.size() ; i++) {
+		if(cur.getId().equals(tks.get(i).getId())) {
+			selectTask = tks.get(i);
+			break;
+		}
+	}
+    Date curtime = new Date();
+    selectTask.setStartTime(curtime);
+    selectTask.setRunTime(System.currentTimeMillis());
+    System.out.println(curtime);
+    TaskUI tempUI = new TaskUI();
+    tempUI.EditTaskFromXML(selectTask.getId(), selectTask.getName(), selectTask.getMemo(),
+          selectTask.getCmd(), selectTask.getFin(), selectTask.getFout(), curtime);
+    // updata();
+  //  tks.get(i).setStartTime(curtime);
     selectTask.start(jTextArea2);
-
-    //找到该任务所在组和计算机
-/*	 SSHGroup selectGroup = new SSHGroup();
-    SSHComputer selectComputer = new SSHComputer();       
-    selectGroup = selectTask.getGp();
-	selectComputer = selectGroup.getCp();
-	//获得执行命令的相关信息
-	String taskCmd = selectTask.getCmd();
-	String computerHost = selectComputer.getHost();
-	String userName = selectComputer.getUsername();
-	String userPsw = selectComputer.getPassword();
-	int taskInfo = 0;//开启任务信息：0
-	
-	SSHOpCommand ry = new SSHOpCommand(computerHost, userName, userPsw, taskCmd,jTextArea2,taskInfo);
-	Thread ty = new Thread(ry);
-	ty.start();
-*/
+    System.out.println("ddover!");
 	}
 	
 }
@@ -436,12 +454,194 @@ private void stopTaskCommand( ActionEvent e ) throws DocumentException  {
     }
 }
 
+//-----------------------------------------------------------------------//
+//鼠标点击处理类
+  private class thismouse extends  MouseAdapter
+  {
+  	
+          @Override
+          public   void   mouseClicked(MouseEvent   e){
+              try{
+                  JTree tree = (JTree)e.getSource();
+                  int rowLocation = tree.getRowForLocation(e.getX(), e.getY());
+                  TreePath treepath = tree.getPathForRow(rowLocation);
+                  DefaultMutableTreeNode treenode = (DefaultMutableTreeNode) treepath.getLastPathComponent();
+                  if(treenode.toString().equals("Computers"))
+                  {
+                  	jTextArea1.setText("");
+                  	jMenuItem4.setEnabled(true);
+                  	jMenuItem5.setEnabled(false);
+                  	jMenuItem6.setEnabled(false);
+                      return;                    	
+                  }
+                  String s=null;
+                  BaseClass b=(BaseClass)treenode.getUserObject();
+                  cur=(BaseClass)treenode.getUserObject();
+                  if(cur.getType() == 0) { //获得选中的类型，给工具栏中相应的选项变色
+                  	 jMenuItem5.setEnabled(true);
+                  	 jMenuItem4.setEnabled(false);
+                  	 jMenuItem6.setEnabled(false);
+                  }
+                  else if(cur.getType() == 1) {
+                  	 jMenuItem6.setEnabled(true);
+                  	 jMenuItem4.setEnabled(false);
+                  	 jMenuItem5.setEnabled(false);
+                  }
+                  else if(cur.getType() == 2){
+                  	jMenuItem4.setEnabled(false);
+                  	jMenuItem5.setEnabled(false);
+                  	jMenuItem6.setEnabled(false);
+                  }
+                  else {
+                    	jMenuItem4.setEnabled(true);
+                  	jMenuItem5.setEnabled(false);
+                  	jMenuItem6.setEnabled(false);
+                  }
+                  switch(b.getType())
+                  {
+                      case 0:
+                      {
+                          SSHComputer c=(SSHComputer)treenode.getUserObject();
+                          s="计算机名字:"+c.getName()
+                           +"\n服务器ip地址:"+c.getHost()
+                           +"\n帐户名:"+c.getUsername()
+                           +"\n密码:"+c.getPassword()
+                           +"\n登录时间:"+b.getCreatdate()
+                           +"\n备注:"+c.getMemo();
+                          Font x = new Font("Serif",0,15);
+                          jTextArea1.setFont(x);
+                          jTextArea1.setText(s);
+                          break;
+                      }
+                      case 1:
+                      {
+                          SSHGroup g=(SSHGroup)treenode.getUserObject();
+                          s="任务名:"+g.getName()
+                          +"\n创建时间:"+b.getCreatdate()
+                          +"\n备注:"+g.getMemo();
+                          Font x = new Font("Serif",0,15);
+                          jTextArea1.setFont(x);
+                          jTextArea1.setText(s);
+                          break;
+                      }
+                      case 2:
+                      {
+                          SSHTask t=(SSHTask)treenode.getUserObject();
+                          if(t.getStartTime() == null) {
+                          s="任务名:"+t.getName()                           
+                          +"\n命令内容:"+t.getCmd()
+                          +"\n创建时间:"+b.getCreatdate()
+                          +"\n输入文件路径:"+t.getFin()
+                          +"\n输入目录路径:"+t.getFout()
+                          +"\n备注:"+t.getMemo();
+                          }
+                          else {
+                          	s="任务名:"+t.getName()                           
+                              +"\n命令内容:"+t.getCmd()
+                              +"\n创建时间:"+b.getCreatdate()
+                              +"\n输入文件路径:"+t.getFin()
+                              +"\n输入目录路径:"+t.getFout()
+                              +"\n上次任务开始时间:" + t.getStartTime(); 
+                          	SSHOpCommand temp = new SSHOpCommand();
+                          	if(temp.getRunStatus() == false) {                          		
+                          	s += "\n正在执行中，执行时间:" + String.valueOf(System.currentTimeMillis() - t.getRunTime());	
+                          	}
+                          	else {
+                          		s += "\n任务执行结束!";
+                          	}
+                          	s += "\n备注:"+t.getMemo();
+                          }
+                          Font x = new Font("Serif",0,15);
+                          jTextArea1.setFont(x);
+                          jTextArea1.setText(s);
+                          break;
+                      }
+                      default:
+                          break;
+                  }
+                  }catch(NullPointerException ne){}
+           }
+          @Override
+          public void mouseReleased(MouseEvent e)
+            {
+               try
+               {
+                  //是否右键单击
+                 if (e.getClickCount() == 1 && SwingUtilities.isRightMouseButton(e))
+                    {
+                         JTree tree = (JTree)e.getSource();
+                         int rowLocation = tree.getRowForLocation(e.getX(), e.getY());
+                         TreePath treepath = tree.getPathForRow(rowLocation);
+                         DefaultMutableTreeNode treenode = (DefaultMutableTreeNode) treepath.getLastPathComponent();
+                         if(treenode.toString().equals("Computers"))
+                          {
+                      	   TreePath path = jTree1.getPathForLocation(e.getX(), e.getY());
+                             if (path == null)
+                                 return;
+                             jTree1.setSelectionPath(path);
+                             popMenuCA.show(jTree1, e.getX(), e.getY());
+                             cur=null;                              
+                             return;
+                          }
+                        cur=(BaseClass)treenode.getUserObject();
+                        TreePath path = jTree1.getPathForLocation(e.getX(), e.getY());
+                        if (path == null)
+                            return;
+                        jTree1.setSelectionPath(path);
+                        switch(cur.getType())
+                        {
+                        case 0:
+                        {
+                      	  popMenuC.show(jTree1, e.getX(), e.getY());
+                      	  break;
+                        }
+                        case 1:
+                        {
+                      	  popMenuG.show(jTree1, e.getX(), e.getY());
+                      	  break;
+                        }
+                        case 2:
+                        {
+                      	  popMenuT.show(jTree1, e.getX(), e.getY());
+                      	  SSHTask temptask = new SSHTask();
+                      	  temptask = findSelectTask();//变灰相应的任务信息
+                      	  if(temptask.getStatus() == 0) {
+                      		  stopItemT.setEnabled(false);
+                      		  execItemT.setEnabled(true);
+                      	  }
+                      	  else {
+                      		  stopItemT.setEnabled(true);
+                      		  execItemT.setEnabled(false);
+                      	  }
+                      	  break;
+                        }
+                        default:
+                      	  break;                         
+                        }                        
+                      }
+               }
+                      catch (Exception ex)  
+                      {}
+                }
+  }
+  //------------------------------------------------------------//
+  class rightclick implements ActionListener
+  {
+      public void actionPerformed(ActionEvent e)
+     {
+          try
+          {
+              action(e);
+          } catch (DocumentException ex)
+          {}
+     }
+  }
 /**
  * 初始画图函数
  */
 //-------------------------------------------------------------//
     private void initComponents() {
-
+        
         jSplitPane1 = new javax.swing.JSplitPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTree1 = new javax.swing.JTree();
@@ -721,170 +921,8 @@ private void stopTaskCommand( ActionEvent e ) throws DocumentException  {
     {
     	return cur;
     }
-   
-//鼠标点击处理类
-    private class thismouse extends  MouseAdapter
-    {
-    	
-            @Override
-            public   void   mouseClicked(MouseEvent   e){
-                try{
-                    JTree tree = (JTree)e.getSource();
-                    int rowLocation = tree.getRowForLocation(e.getX(), e.getY());
-                    TreePath treepath = tree.getPathForRow(rowLocation);
-                    DefaultMutableTreeNode treenode = (DefaultMutableTreeNode) treepath.getLastPathComponent();
-                    if(treenode.toString().equals("Computers"))
-                    {
-                    	jTextArea1.setText("");
-                    	jMenuItem4.setEnabled(true);
-                    	jMenuItem5.setEnabled(false);
-                    	jMenuItem6.setEnabled(false);
-                        return;                    	
-                    }
-                    String s=null;
-                    BaseClass b=(BaseClass)treenode.getUserObject();
-                    cur=(BaseClass)treenode.getUserObject();
-                    if(cur.getType() == 0) { //获得选中的类型，给工具栏中相应的选项变色
-                    	 jMenuItem5.setEnabled(true);
-                    	 jMenuItem4.setEnabled(false);
-                    	 jMenuItem6.setEnabled(false);
-                    }
-                    else if(cur.getType() == 1) {
-                    	 jMenuItem6.setEnabled(true);
-                    	 jMenuItem4.setEnabled(false);
-                    	 jMenuItem5.setEnabled(false);
-                    }
-                    else if(cur.getType() == 2){
-                    	jMenuItem4.setEnabled(false);
-                    	jMenuItem5.setEnabled(false);
-                    	jMenuItem6.setEnabled(false);
-                    }
-                    else {
-                      	jMenuItem4.setEnabled(true);
-                    	jMenuItem5.setEnabled(false);
-                    	jMenuItem6.setEnabled(false);
-                    }
-                    switch(b.getType())
-                    {
-                        case 0:
-                        {
-                            SSHComputer c=(SSHComputer)treenode.getUserObject();
-                            s="计算机名字:"+c.getName()
-                             +"\n服务器ip地址:"+c.getHost()
-                             +"\n帐户名:"+c.getUsername()
-                             +"\n密码:"+c.getPassword()
-                             +"\n登录时间:"+b.getCreatdate()
-                             +"\n备注:"+c.getMemo();
-                            Font x = new Font("Serif",0,15);
-                            jTextArea1.setFont(x);
-                            jTextArea1.setText(s);
-                            break;
-                        }
-                        case 1:
-                        {
-                            SSHGroup g=(SSHGroup)treenode.getUserObject();
-                            s="任务名:"+g.getName()
-                            +"\n创建时间:"+b.getCreatdate()
-                            +"\n备注:"+g.getMemo();
-                            Font x = new Font("Serif",0,15);
-                            jTextArea1.setFont(x);
-                            jTextArea1.setText(s);
-                            break;
-                        }
-                        case 2:
-                        {
-                            SSHTask t=(SSHTask)treenode.getUserObject();
-                            s="任务名:"+t.getName()                           
-                            +"\n命令内容:"+t.getCmd()
-                            +"\n创建时间:"+b.getCreatdate()
-                            +"\n输入文件路径:"+t.getFin()
-                            +"\n输入目录路径:"+t.getFout()
-                            +"\n备注:"+t.getMemo();
-                            Font x = new Font("Serif",0,15);
-                            jTextArea1.setFont(x);
-                            jTextArea1.setText(s);
-                            break;
-                        }
-                        default:
-                            break;
-                    }
-                    }catch(NullPointerException ne){}
-             }
-            @Override
-            public void mouseReleased(MouseEvent e)
-              {
-                 try
-                 {
-                    //是否右键单击
-                   if (e.getClickCount() == 1 && SwingUtilities.isRightMouseButton(e))
-                      {
-                           JTree tree = (JTree)e.getSource();
-                           int rowLocation = tree.getRowForLocation(e.getX(), e.getY());
-                           TreePath treepath = tree.getPathForRow(rowLocation);
-                           DefaultMutableTreeNode treenode = (DefaultMutableTreeNode) treepath.getLastPathComponent();
-                           if(treenode.toString().equals("Computers"))
-                            {
-                        	   TreePath path = jTree1.getPathForLocation(e.getX(), e.getY());
-                               if (path == null)
-                                   return;
-                               jTree1.setSelectionPath(path);
-                               popMenuCA.show(jTree1, e.getX(), e.getY());
-                               cur=null;                              
-                               return;
-                            }
-                          cur=(BaseClass)treenode.getUserObject();
-                          TreePath path = jTree1.getPathForLocation(e.getX(), e.getY());
-                          if (path == null)
-                              return;
-                          jTree1.setSelectionPath(path);
-                          switch(cur.getType())
-                          {
-                          case 0:
-                          {
-                        	  popMenuC.show(jTree1, e.getX(), e.getY());
-                        	  break;
-                          }
-                          case 1:
-                          {
-                        	  popMenuG.show(jTree1, e.getX(), e.getY());
-                        	  break;
-                          }
-                          case 2:
-                          {
-                        	  popMenuT.show(jTree1, e.getX(), e.getY());
-                        	  SSHTask temptask = new SSHTask();
-                        	  temptask = findSelectTask();//变灰相应的任务信息
-                        	  if(temptask.getStatus() == 0) {
-                        		  stopItemT.setEnabled(false);
-                        		  execItemT.setEnabled(true);
-                        	  }
-                        	  else {
-                        		  stopItemT.setEnabled(true);
-                        		  execItemT.setEnabled(false);
-                        	  }
-                        	  break;
-                          }
-                          default:
-                        	  break;                         
-                          }                        
-                        }
-                 }
-                        catch (Exception ex)  
-                        {}
-                  }
-    }
-    //------------------------------------------------------------//
-    class rightclick implements ActionListener
-    {
-        public void actionPerformed(ActionEvent e)
-       {
-            try
-            {
-                action(e);
-            } catch (DocumentException ex)
-            {}
-       }
-    }
+  
+
     //---------------------------------------------------------------//
     
     
