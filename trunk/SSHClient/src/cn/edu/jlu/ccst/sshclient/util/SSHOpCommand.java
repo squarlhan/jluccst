@@ -12,6 +12,7 @@ import ch.ethz.ssh2.Connection;
 import ch.ethz.ssh2.SCPClient;
 import ch.ethz.ssh2.Session;
 import java.lang.Thread;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JFrame;
@@ -27,8 +28,6 @@ public class SSHOpCommand implements Runnable {
 	private String Cmd;
 	private int opType;
 	private JTextArea  jTextArea1;
-	public  Thread task;
-	List<String> pidlist;
 	//默认构造方法
 	public SSHOpCommand() {
 		
@@ -57,14 +56,13 @@ public class SSHOpCommand implements Runnable {
      * @param pidlist
      */
     public SSHOpCommand(String host, String name, String psw, String cmd,
-			int stopType, List<String> pidlist) {
+			int stopType) {
 		super();
 		Host = host;
 		Name = name;
 		Psw = psw;
 		Cmd = cmd;
 		this.opType = stopType;
-		this.pidlist = pidlist;
 	}
 	/**
      * 运行命令用这个构造方法
@@ -87,10 +85,8 @@ public class SSHOpCommand implements Runnable {
    
 	
     public void init() {
-    	task = new Thread(this);
     }
     public void start() {
-    	task.start();
     }
     public void run(){
     	/**
@@ -105,15 +101,11 @@ public class SSHOpCommand implements Runnable {
     	case 0: //执行命令
     		runSSH();break;
     	case 1:
+    		stopSSH();
     		break;
     	case 2://测试连接
-    		try {
-				getOpenedConnection();
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-    		break;
+		    getOpenedConnection();
+			break;
     	default: break;
     	}
     	
@@ -128,7 +120,6 @@ public class SSHOpCommand implements Runnable {
     		Session sess = conn.openSession();
     		sess.execCommand(Cmd);		
             String out;
-    		Thread thr1 = new Thread();
     		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(sess.getStdout()));        
     		while((out=bufferedReader.readLine())!=null) {
     			   out += "\n";
@@ -149,33 +140,86 @@ public class SSHOpCommand implements Runnable {
      * 重载执行函数，停止启动任务
      * 停止正在运行的任务
      */
-    public void stopSSH() throws IOException {
-
-		Connection conn = getOpenedConnection();
-		Session sess = conn.openSession();
-		sess.execCommand(Cmd);		
-        String out;
-		Thread thr1 = new Thread();
-		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(sess.getStdout()));    		
- 
+    public void stopSSH() {
+    	List<String> pidlist;
+    	pidlist = new ArrayList();
+    	String stopTaskcmd = Cmd;
+    	stopTaskcmd = stopTaskcmd.substring(0,stopTaskcmd.indexOf(" "));
+    	System.out.println("stop:"+stopTaskcmd);
+    	
+    	String sscmd = "ps U "+ Name +" | grep "+
+        stopTaskcmd+" | awk '{print $1}'";
+    	
+    	Connection conn;
+    	Session sess;
+    	String out;
+    	BufferedReader bufferedReader;
+    	try{
+	    conn = getOpenedConnection();
+	    sess = conn.openSession();
+		sess.execCommand(sscmd);		
+        bufferedReader = new BufferedReader(new InputStreamReader(sess.getStdout()));    		
 		while((out=bufferedReader.readLine())!=null) {
-			pidlist.add(out);   
+			pidlist.add(out);  
+			System.out.println("pid"+out);
 		}
 		sess.close();
 		conn.close();
-
+    	}
+    	catch(Exception et) {
+    		et.printStackTrace();
+    	}    	
+        
+    	killPidProcess(pidlist);
+    /*    if(pidlist.size() > 0) {
+        		try {
+        			conn = getOpenedConnection();
+     			    sess = conn.openSession();
+        			for(int i = 0; i < pidlist.size() - 1; i++){
+        			sess.execCommand("kill pid "+ pidlist.get(i));
+        		    }
+        			sess.close();
+        	     	conn.close();
+        		}
+        		catch(Exception et) {
+        			et.printStackTrace();
+        		}
+        	}*/
+	   	
 	}
-    
+    private void killPidProcess(List<String> pidlist) {
+        if(pidlist.size() > 0) {
+    		try {
+    			Connection conn = getOpenedConnection();
+    			Session sess = conn.openSession();
+    			for(int i = 0; i < pidlist.size() - 1; i++){
+    			sess.execCommand("kill pid "+ pidlist.get(i));
+    		    }
+    			sess.close();
+    	     	conn.close();
+    		}
+    		catch(Exception et) {
+    			et.printStackTrace();
+    		}
+    	}
+	
+    	
+    }
     /**
      * 连接函数
      */
-     public  Connection getOpenedConnection() throws IOException {
-		Connection conn = new Connection(Host);
+     public  Connection getOpenedConnection()  {
+    	 Connection conn = new Connection(Host);
+		try{	
 		conn.connect();
 		boolean isAuthenticated = conn.authenticateWithPassword(Name, Psw);
 		if (isAuthenticated == false)
 			throw new IOException("Authentication failed.");
+		}
+		catch(Exception ev){
+			ev.printStackTrace();
+		}
 		return conn;
-
 	}
+
 }
