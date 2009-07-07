@@ -38,9 +38,11 @@ public class SSHTask extends BaseClass implements BaseAction, BaseOperation {
 	private String fin;
 	private String fout;
 	private SSHGroup gp;
+	private int taskstatus;
 	
 	public SSHTask(String id, String name, byte type, String memo,Date creatdate) {
 		super(id, name, type, memo, creatdate);
+		taskstatus = 0;
 		// TODO Auto-generated constructor stub
 	}
 
@@ -51,6 +53,7 @@ public class SSHTask extends BaseClass implements BaseAction, BaseOperation {
 	 */
 	public SSHTask(String name, byte type, Date creatdate) {
 		super(name, type, creatdate);
+		taskstatus = 0;
 		// TODO Auto-generated constructor stub
 	}
 
@@ -59,6 +62,7 @@ public class SSHTask extends BaseClass implements BaseAction, BaseOperation {
 	 */
 	public SSHTask() {
 		// TODO Auto-generated constructor stub
+		taskstatus = 0;
 	}	
 	
     public SSHTask(String id, String name, byte type, String memo,
@@ -70,6 +74,7 @@ public class SSHTask extends BaseClass implements BaseAction, BaseOperation {
 		this.fin = fin;
 		this.fout = fout;
 		this.gp = gp;
+		taskstatus = 0;
 	}
 
 	public String getCmd() {
@@ -111,7 +116,12 @@ public class SSHTask extends BaseClass implements BaseAction, BaseOperation {
 	public void setGp(SSHGroup gp) {
 		this.gp = gp;
 	}
-
+    public void setStatus(int t) {
+    	taskstatus = t;
+    }
+    public int getStatus() {
+    	return taskstatus;
+    }
 	//����ķ�����Ҫʵ��
 	/* (non-Javadoc)
 	 * @see cn.edu.jlu.ccst.sshclient.inter.BaseAction#start()
