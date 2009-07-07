@@ -16,6 +16,8 @@ import cn.edu.jlu.ccst.sshclient.model.SSHComputer;
 import cn.edu.jlu.ccst.sshclient.model.SSHGroup;
 import cn.edu.jlu.ccst.sshclient.model.SSHTask;
 import cn.edu.jlu.ccst.sshclient.ui.ComputerUI;
+import cn.edu.jlu.ccst.sshclient.util.SSHCommand;
+import cn.edu.jlu.ccst.sshclient.util.SSHOpCommand;
 
 import java.awt.Font;
 import java.awt.Color;
@@ -27,11 +29,12 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.text.*;
-
+import javax.management.timer.Timer;
 import javax.swing.JFrame;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
@@ -190,6 +193,40 @@ public void GenerateTree() {
         popMenuT.add(delItemT);
         popMenuT.add(editItemT);
         
+        //////////////////////////////////////////////////////// 运行任务命令
+        execItemT = new JMenuItem("执行任务命令");
+        execItemT.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+           {
+                try
+                {
+                	execTaskCommand(e);
+                } catch (DocumentException ex)
+                {}
+           }
+        }
+        );
+        popMenuT.add(execItemT);
+        
+        ////停止任务命令
+        stopItemT = new JMenuItem("停止任务命令");
+        stopItemT.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+           {
+                try
+                {
+                	stopTaskCommand(e);
+                } catch (DocumentException ex)
+                {
+                	ex.printStackTrace();
+                }
+           }
+        }
+        );
+        popMenuT.add(stopItemT);
+        
         popMenuCA = new JPopupMenu();       
         delItemCA = new JMenuItem("删除所有电脑");
         delItemCA.addActionListener(new rightclick());
@@ -198,6 +235,12 @@ public void GenerateTree() {
         popMenuCA.add(delItemCA);
         popMenuCA.add(addItemCA);
 }
+
+/**
+ * 对右键的相应操作
+ * @param e
+ * @throws DocumentException
+ */
 private void action ( ActionEvent e ) throws DocumentException
 {
   String str = e.getActionCommand(); 
@@ -226,6 +269,7 @@ private void action ( ActionEvent e ) throws DocumentException
       }
       else
       {
+    	  
     	  switch(cur.getType())
     	  {
           	case 0:
@@ -312,6 +356,127 @@ private void action ( ActionEvent e ) throws DocumentException
   }
  
 }
+
+//-----------------------------------------------------------------------//
+/**
+ * 找到选中的任务
+ */
+private SSHTask findSelectTask() {
+	  SSHTask selectTask = new SSHTask();
+	 Iterator <SSHTask> it;
+	 SSHGroup selectGroup = new SSHGroup();
+	//寻找选中的任务
+		for(it = tks.iterator(); it.hasNext() ;) {
+		     selectTask = (SSHTask) it.next();
+		    if(selectTask.getId().equals(cur.getId())) {
+		    	break;
+		    }
+		}
+		return selectTask;
+		
+}
+
+//------------------------------------------------------------------------//
+/**
+ * 设置相应的任务运行状态
+ */
+public void setSelTaskStatus(int t) {
+	for( int i = 0; i < tks.size(); i++) {
+		if(tks.get(i).getId().equals(cur.getId())) {
+			tks.get(i).setStatus(t);
+			return;
+		}
+	}
+		
+}
+//------------------------------------------------------------------------//
+/**
+ * 执行选中任务的命令
+ */
+private void execTaskCommand ( ActionEvent e ) throws DocumentException {
+	if(execItemT.isEnabled()) {
+    jTextArea2.setText("");
+	setSelTaskStatus(1);
+	SSHTask selectTask = new SSHTask();
+    SSHGroup selectGroup = new SSHGroup();
+    SSHComputer selectComputer = new SSHComputer();
+    
+	//寻找选中的任务
+    selectTask = findSelectTask();
+	//找到该任务所在组和计算机
+	selectGroup = selectTask.getGp();
+	selectComputer = selectGroup.getCp();
+	//获得执行命令的相关信息
+	String taskCmd = selectTask.getCmd();
+	String computerHost = selectComputer.getHost();
+	String userName = selectComputer.getUsername();
+	String userPsw = selectComputer.getPassword();
+	int taskInfo = 0;//开启任务信息：0
+	
+	SSHOpCommand ry = new SSHOpCommand(computerHost, userName, userPsw, taskCmd,jTextArea2,taskInfo);
+	Thread ty = new Thread(ry);
+	ty.start();
+	
+	/*if(!ty.isAlive()) {
+		System.out.println("**");
+		setSelTaskStatus(0);
+	}*/
+
+	System.out.println("主机地址:"+ computerHost +"\n"+
+			           "用户名:"+ userName + "\n" + 
+			           "密码:"+ userPsw+ "\n" +
+			           "任务命令:" + taskCmd );
+	System.out.println("jTextArea2:" +jTextArea2.getText());
+	}
+	
+}
+
+
+//-------------------------------------------------------------//
+/**
+ * 停止选中任务
+ */
+private void stopTaskCommand( ActionEvent e ) throws DocumentException  {
+    if(stopItemT.isEnabled()) {
+    setSelTaskStatus(0);
+	SSHTask stopTask = new SSHTask();
+	stopTask = findSelectTask();
+	SSHGroup selectGroup = new SSHGroup();
+	SSHComputer selectComputer = new SSHComputer();
+	selectGroup = stopTask.getGp();
+	selectComputer = selectGroup.getCp();
+	
+	String stopTaskcmd = stopTask.getCmd();
+	stopTaskcmd = stopTaskcmd.substring(0,stopTaskcmd.indexOf(" "));
+	List<String> listp = new ArrayList();
+	List<String> listp0= new ArrayList();
+	String sscmd = "ps U "+selectComputer.getUsername()+" | grep "+
+	              stopTaskcmd+" | awk '{print $1}'";
+	
+	SSHOpCommand stopCommand = new SSHOpCommand();
+	try{
+		stopCommand.stopSSH(selectComputer.getHost(), selectComputer.getUsername(), selectComputer.getPassword(), sscmd, listp);
+	}catch(IOException ie) {
+		ie.printStackTrace();
+	}
+	if(listp.size() > 0) {
+		for(int i = 0; i < listp.size()-1 ; i ++) {
+			try {
+				System.out.println("pid"+listp.get(i));
+				stopCommand.stopSSH(selectComputer.getHost(), selectComputer.getUsername(), selectComputer.getPassword(),"kill pid "+ listp.get(i), listp0);
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+		}
+	}
+	
+    }
+}
+
+/**
+ * 初始画图函数
+ */
 //-------------------------------------------------------------//
     private void initComponents() {
 
@@ -475,6 +640,7 @@ private void action ( ActionEvent e ) throws DocumentException
 
         jMenuItem11.setText("Start");
         jMenuItem11.setName("jMenuItem11"); // NOI18N
+        
         jMenu2.add(jMenuItem11);
 
         jMenuItem12.setText("Group Start");
@@ -494,6 +660,19 @@ private void action ( ActionEvent e ) throws DocumentException
 
         jMenuItem15.setText("Stop Now");
         jMenuItem15.setName("jMenuItem15"); // NOI18N
+        //////////////////////////////////////////
+        jMenuItem15.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+           {
+                try
+                {
+                	stopTaskCommand(e);
+                } catch (DocumentException ex)
+                {}
+           }
+        }
+        );
         jMenu2.add(jMenuItem15);
 
         jMenuItem16.setText("All Stop");
@@ -604,65 +783,7 @@ private void action ( ActionEvent e ) throws DocumentException
     {
     	return cur;
     }
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu4;
-    private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem10;
-    private javax.swing.JMenuItem jMenuItem11;
-    private javax.swing.JMenuItem jMenuItem12;
-    private javax.swing.JMenuItem jMenuItem13;
-    private javax.swing.JMenuItem jMenuItem14;
-    private javax.swing.JMenuItem jMenuItem15;
-    private javax.swing.JMenuItem jMenuItem16;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
-    private javax.swing.JMenuItem jMenuItem6;
-    private javax.swing.JMenuItem jMenuItem7;
-    private javax.swing.JMenuItem jMenuItem8;
-    private javax.swing.JMenuItem jMenuItem9;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JSeparator jSeparator3;
-    private javax.swing.JSplitPane jSplitPane1;
-    private javax.swing.JSplitPane jSplitPane2;
-    private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextArea jTextArea2;
-    private javax.swing.JTextArea jTextArea3;
-    private javax.swing.JTree jTree1;
-    // End of variables declaration//GEN-END:variables
-    private JPopupMenu popMenuC;
-    private JMenuItem addItemC;
-    private JMenuItem delItemC;
-    private JMenuItem editItemC;
-    
-    private JPopupMenu popMenuG;
-    private JMenuItem addItemG;
-    private JMenuItem delItemG;
-    private JMenuItem editItemG;
-    
-    private JPopupMenu popMenuT;
-    private JMenuItem delItemT;
-    private JMenuItem editItemT;
-    
-    private JPopupMenu popMenuCA;
-    private JMenuItem delItemCA;
-    private JMenuItem addItemCA;
-    protected static BaseClass cur;
-
-    public static List<SSHComputer> cps;
-    public static List<SSHGroup> gps;
-    public static List<SSHTask> tks;
+   
 //鼠标点击处理类
     private class thismouse extends  MouseAdapter
     {
@@ -793,6 +914,16 @@ private void action ( ActionEvent e ) throws DocumentException
                           case 2:
                           {
                         	  popMenuT.show(jTree1, e.getX(), e.getY());
+                        	  SSHTask temptask = new SSHTask();
+                        	  temptask = findSelectTask();//变灰相应的任务信息
+                        	  if(temptask.getStatus() == 0) {
+                        		  stopItemT.setEnabled(false);
+                        		  execItemT.setEnabled(true);
+                        	  }
+                        	  else {
+                        		  stopItemT.setEnabled(true);
+                        		  execItemT.setEnabled(false);
+                        	  }
                         	  break;
                           }
                           default:
@@ -817,5 +948,68 @@ private void action ( ActionEvent e ) throws DocumentException
        }
     }
     //---------------------------------------------------------------//
+    
+    
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
+    private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem10;
+    private javax.swing.JMenuItem jMenuItem11;
+    private javax.swing.JMenuItem jMenuItem12;
+    private javax.swing.JMenuItem jMenuItem13;
+    private javax.swing.JMenuItem jMenuItem14;
+    private javax.swing.JMenuItem jMenuItem15;
+    private javax.swing.JMenuItem jMenuItem16;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
+    private javax.swing.JMenuItem jMenuItem5;
+    private javax.swing.JMenuItem jMenuItem6;
+    private javax.swing.JMenuItem jMenuItem7;
+    private javax.swing.JMenuItem jMenuItem8;
+    private javax.swing.JMenuItem jMenuItem9;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JSplitPane jSplitPane1;
+    private javax.swing.JSplitPane jSplitPane2;
+    private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextArea jTextArea2;
+    private javax.swing.JTextArea jTextArea3;
+    private javax.swing.JTree jTree1;
+    // End of variables declaration//GEN-END:variables
+    private JPopupMenu popMenuC;
+    private JMenuItem addItemC;
+    private JMenuItem delItemC;
+    private JMenuItem editItemC;
+    
+    private JPopupMenu popMenuG;
+    private JMenuItem addItemG;
+    private JMenuItem delItemG;
+    private JMenuItem editItemG;
+    
+    private JPopupMenu popMenuT;
+    private JMenuItem delItemT;
+    private JMenuItem editItemT;
+    private JMenuItem execItemT;
+    private JMenuItem stopItemT;
+    
+    private JPopupMenu popMenuCA;
+    private JMenuItem delItemCA;
+    private JMenuItem addItemCA;
+    protected static BaseClass cur;
+
+    public static List<SSHComputer> cps;
+    public static List<SSHGroup> gps;
+    public static List<SSHTask> tks;
 }
 
