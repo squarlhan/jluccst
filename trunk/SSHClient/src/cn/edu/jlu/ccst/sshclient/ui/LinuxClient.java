@@ -398,13 +398,14 @@ private void execTaskCommand ( ActionEvent e ) throws DocumentException {
     jTextArea2.setText("");
 	setSelTaskStatus(1);
 	SSHTask selectTask = new SSHTask();
-    SSHGroup selectGroup = new SSHGroup();
-    SSHComputer selectComputer = new SSHComputer();
-    
 	//寻找选中的任务
     selectTask = findSelectTask();
-	//找到该任务所在组和计算机
-	selectGroup = selectTask.getGp();
+    selectTask.start(jTextArea2);
+
+    //找到该任务所在组和计算机
+/*	 SSHGroup selectGroup = new SSHGroup();
+    SSHComputer selectComputer = new SSHComputer();       
+    selectGroup = selectTask.getGp();
 	selectComputer = selectGroup.getCp();
 	//获得执行命令的相关信息
 	String taskCmd = selectTask.getCmd();
@@ -416,6 +417,7 @@ private void execTaskCommand ( ActionEvent e ) throws DocumentException {
 	SSHOpCommand ry = new SSHOpCommand(computerHost, userName, userPsw, taskCmd,jTextArea2,taskInfo);
 	Thread ty = new Thread(ry);
 	ty.start();
+*/
 	}
 	
 }
@@ -714,31 +716,7 @@ private void stopTaskCommand( ActionEvent e ) throws DocumentException  {
         	updata();
         	}
         }
-    /**
-    * @param args the command line arguments
-    */
-    public static void main(String args[]) {
-    	try {
-			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (InstantiationException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IllegalAccessException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (UnsupportedLookAndFeelException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-    	java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new LinuxClient().setVisible(true);
-            }
-        });
-    }
+   
     static public BaseClass getCur()
     {
     	return cur;
@@ -971,5 +949,31 @@ private void stopTaskCommand( ActionEvent e ) throws DocumentException  {
     public static List<SSHComputer> cps;
     public static List<SSHGroup> gps;
     public static List<SSHTask> tks;
+    
+    /**
+     * @param args the command line arguments
+     */
+     public static void main(String args[]) {
+     	try {
+ 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+ 		} catch (ClassNotFoundException e) {
+ 			// TODO Auto-generated catch block
+ 			e.printStackTrace();
+ 		} catch (InstantiationException e) {
+ 			// TODO Auto-generated catch block
+ 			e.printStackTrace();
+ 		} catch (IllegalAccessException e) {
+ 			// TODO Auto-generated catch block
+ 			e.printStackTrace();
+ 		} catch (UnsupportedLookAndFeelException e) {
+ 			// TODO Auto-generated catch block
+ 			e.printStackTrace();
+ 		}
+     	java.awt.EventQueue.invokeLater(new Runnable() {
+             public void run() {
+                 new LinuxClient().setVisible(true);
+             }
+         });
+     }
 }
 
