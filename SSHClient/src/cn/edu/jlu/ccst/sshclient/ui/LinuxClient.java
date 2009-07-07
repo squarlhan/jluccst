@@ -16,7 +16,7 @@ import cn.edu.jlu.ccst.sshclient.model.SSHComputer;
 import cn.edu.jlu.ccst.sshclient.model.SSHGroup;
 import cn.edu.jlu.ccst.sshclient.model.SSHTask;
 import cn.edu.jlu.ccst.sshclient.ui.ComputerUI;
-import cn.edu.jlu.ccst.sshclient.util.SSHCommand;
+import cn.edu.jlu.ccst.sshclient.util.SSHOpCommand;
 import cn.edu.jlu.ccst.sshclient.util.SSHOpCommand;
 
 import java.awt.Font;
