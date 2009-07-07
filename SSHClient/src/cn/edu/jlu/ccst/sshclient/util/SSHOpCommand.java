@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.management.timer.Timer;
 import java.awt.*;
@@ -213,10 +214,26 @@ public class SSHOpCommand implements Runnable {
      public  Connection getOpenedConnection()  {
     	 Connection conn = new Connection(Host);
 		try{	
+		try
+		{
 		conn.connect();
+		}
+		catch (IOException e)
+		{
+			JOptionPane.showMessageDialog(null, "连接失败！");
+			return conn;
+		}
 		boolean isAuthenticated = conn.authenticateWithPassword(Name, Psw);
 		if (isAuthenticated == false)
-			throw new IOException("Authentication failed.");
+		{
+			JOptionPane.showMessageDialog(null, "连接失败！");
+			throw new IOException("Authentication failed.");			
+			
+		}
+		else
+		{
+			JOptionPane.showMessageDialog(null, "连接成功！");
+		}
 		}
 		catch(Exception ev){
 			ev.printStackTrace();
