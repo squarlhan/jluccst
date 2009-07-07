@@ -3,6 +3,8 @@
  */
 package cn.edu.jlu.ccst.sshclient.inter;
 
+import javax.swing.JTextArea;
+
 /**
  * @author Woden
  * �������������Ķ����ӿ�
@@ -20,5 +22,6 @@ public interface BaseAction {
 	void stop();
 	
 	boolean isdone();
+	void start(JTextArea jtext);
 
 }
