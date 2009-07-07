@@ -8,6 +8,7 @@ import java.io.FileWriter;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import javax.swing.*;
 
 import org.dom4j.Document;
 import org.dom4j.Element;
@@ -41,6 +42,7 @@ public class SSHTask extends BaseClass implements BaseAction, BaseOperation {
 	private SSHGroup gp;
 	private int taskstatus;
     private boolean taskfinish;
+    private JTextArea jTextArea1;
 	
 	public SSHTask(String id, String name, byte type, String memo,Date creatdate) {
 		super(id, name, type, memo, creatdate);
@@ -129,9 +131,19 @@ public class SSHTask extends BaseClass implements BaseAction, BaseOperation {
 	 * @see cn.edu.jlu.ccst.sshclient.inter.BaseAction#start()
 	 */
 	@Override
-	public String start() {
-		// TODO Auto-generated method stub
-		return null;
+	public void start(JTextArea jtext) {
+	
+	jTextArea1 = jtext;
+	SSHComputer selectComputer = new SSHComputer();
+	selectComputer = gp.getCp();
+	//获得执行命令的相关信息
+	String computerHost = selectComputer.getHost();
+	String userName = selectComputer.getUsername();
+	String userPsw = selectComputer.getPassword();
+	int taskInfo = 0;//开启任务信息：0	
+	SSHOpCommand ry = new SSHOpCommand(computerHost, userName, userPsw, cmd,jTextArea1,taskInfo);
+	Thread ty = new Thread(ry);
+	ty.start();
 	}
 
 	/* (non-Javadoc)
@@ -244,6 +256,17 @@ public class SSHTask extends BaseClass implements BaseAction, BaseOperation {
 		public boolean isdone() {
 			// TODO Auto-generated method stub
 			return false;
+		}
+
+		public void setTextArea(JTextArea jTextArea2) {
+			// TODO Auto-generated method stub
+			jTextArea1 = jTextArea2;
+		}
+
+		@Override
+		public String start() {
+			// TODO Auto-generated method stub
+			return null;
 		}
 
 }
