@@ -28,10 +28,18 @@ public class SSHOpCommand implements Runnable {
 	private int opType;
 	private JTextArea  jTextArea1;
 	public  Thread task;
-	
+	List<String> pidlist;
+	//默认构造方法
 	public SSHOpCommand() {
 		
 	}
+	/**
+	 * 测试连接用这个构造方法
+	 * @param host
+	 * @param name
+	 * @param psw
+	 * @param conInfo 2
+	 */
 	public SSHOpCommand(String host, String name, String psw, int conInfo) {
 		super();
 		Host = host;
@@ -39,8 +47,34 @@ public class SSHOpCommand implements Runnable {
 		Psw = psw;
 		opType = conInfo;
 	}
-
-
+    /**
+     * 停止命令用这个构造方法
+     * @param host
+     * @param name
+     * @param psw
+     * @param cmd
+     * @param stopType 1
+     * @param pidlist
+     */
+    public SSHOpCommand(String host, String name, String psw, String cmd,
+			int stopType, List<String> pidlist) {
+		super();
+		Host = host;
+		Name = name;
+		Psw = psw;
+		Cmd = cmd;
+		this.opType = stopType;
+		this.pidlist = pidlist;
+	}
+	/**
+     * 运行命令用这个构造方法
+     * @param host
+     * @param name
+     * @param psw
+     * @param cmd
+     * @param jText
+     * @param taskInfo 0
+     */
 	public SSHOpCommand(String host, String name, String psw, String cmd,JTextArea  jText,int taskInfo) {
 		super();
 		Host = host;
@@ -69,16 +103,18 @@ public class SSHOpCommand implements Runnable {
     	 */
     	switch(opType){
     	case 0: //执行命令
-    		runSSH();
+    		runSSH();break;
     	case 1:
-    		
+    		break;
     	case 2://测试连接
-    		try{
-    		getOpenedConnection();
-    		}catch(Exception e) {
-    			
-    		}
-    		
+    		try {
+				getOpenedConnection();
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+    		break;
+    	default: break;
     	}
     	
     }
@@ -113,11 +149,11 @@ public class SSHOpCommand implements Runnable {
      * 重载执行函数，停止启动任务
      * 停止正在运行的任务
      */
-    public  void stopSSH(String host, String username, String password, String cmd,List<String> pidlist) throws IOException {
+    public void stopSSH() throws IOException {
 
 		Connection conn = getOpenedConnection();
 		Session sess = conn.openSession();
-		sess.execCommand(cmd);		
+		sess.execCommand(Cmd);		
         String out;
 		Thread thr1 = new Thread();
 		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(sess.getStdout()));    		
