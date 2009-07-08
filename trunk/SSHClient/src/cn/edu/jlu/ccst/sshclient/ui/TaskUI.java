@@ -320,6 +320,10 @@ public class TaskUI extends javax.swing.JDialog {
 	             	 et.addAttribute("cmd", cmd);
 	             	 et.addAttribute("in", in);
 	             	 et.addAttribute("out",out);
+	             	 if(starttime == null) {
+	             		et.addAttribute("starttime","");
+	             	 }
+	             	 else
 	             	 et.addAttribute("starttime",timeFormat.format(starttime));
 	             	 et.addAttribute("memo", memo);
 	              }
