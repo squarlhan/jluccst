@@ -427,7 +427,7 @@ public void setTaskRunSucc(boolean t) {
  * 执行选中任务的命令
  */
 private void execTaskCommand ( ActionEvent e ) throws DocumentException {
-	if(execItemT.isEnabled()) {
+	if(execItemT.isEnabled()||jMenuItem14.isEnabled()) {
     jTextArea2.setText("");
 	setSelTaskStatus(1);
 	SSHTask selectTask = new SSHTask();
@@ -441,7 +441,9 @@ private void execTaskCommand ( ActionEvent e ) throws DocumentException {
 	}
     Date curtime = new Date();
     selectTask.setStartTime(curtime);
-    selectTask.setRunTime(System.currentTimeMillis());
+    long t1 = System.currentTimeMillis();
+    selectTask.setRunTime(t1);
+    System.out.println(t1);
     System.out.println(curtime);
    
     //将任务开始时间写入XML文件中
@@ -460,7 +462,7 @@ private void execTaskCommand ( ActionEvent e ) throws DocumentException {
  * 停止选中任务
  */
 private void stopTaskCommand( ActionEvent e ) throws DocumentException  {
-    if(stopItemT.isEnabled()) {
+    if(stopItemT.isEnabled()||jMenuItem15.isEnabled()) {
     setSelTaskStatus(0);
 	SSHTask stopTask = new SSHTask();
 	stopTask = findSelectTask();
@@ -486,8 +488,16 @@ private void stopTaskCommand( ActionEvent e ) throws DocumentException  {
                   	jMenuItem4.setEnabled(true);
                   	jMenuItem5.setEnabled(false);
                   	jMenuItem6.setEnabled(false);
-                  	
-                      return;                    	
+                  	jMenuItem8.setEnabled(false);
+                    jMenuItem9.setEnabled(false);
+                    jMenuItem10.setEnabled(false);
+                    jMenuItem11.setEnabled(false);
+                    jMenuItem12.setEnabled(false);
+                    jMenuItem13.setEnabled(false);
+                    jMenuItem14.setEnabled(false);
+                    jMenuItem15.setEnabled(false);
+                    jMenuItem16.setEnabled(false);
+                    return;                    	
                   }
                   String s=null;
                   BaseClass b=(BaseClass)treenode.getUserObject();
@@ -496,21 +506,65 @@ private void stopTaskCommand( ActionEvent e ) throws DocumentException  {
                   	 jMenuItem5.setEnabled(true);
                   	 jMenuItem4.setEnabled(false);
                   	 jMenuItem6.setEnabled(false);
+                  	 jMenuItem8.setEnabled(false);
+                     jMenuItem9.setEnabled(false);
+                     jMenuItem10.setEnabled(false);
+                     jMenuItem11.setEnabled(false);
+                     jMenuItem12.setEnabled(false);
+                     jMenuItem13.setEnabled(false);
+                     jMenuItem14.setEnabled(false);
+                     jMenuItem15.setEnabled(false);
+                     jMenuItem16.setEnabled(false);
                   }
                   else if(cur.getType() == 1) {
                   	 jMenuItem6.setEnabled(true);
                   	 jMenuItem4.setEnabled(false);
                   	 jMenuItem5.setEnabled(false);
+                  	 jMenuItem8.setEnabled(true);
+                     jMenuItem9.setEnabled(false);
+                     jMenuItem10.setEnabled(false);
+                     jMenuItem11.setEnabled(false);
+                     jMenuItem12.setEnabled(true);
+                     jMenuItem13.setEnabled(true);
+                     jMenuItem14.setEnabled(false);
+                     jMenuItem15.setEnabled(false);
+                     jMenuItem16.setEnabled(false);
                   }
                   else if(cur.getType() == 2){
                   	jMenuItem4.setEnabled(false);
                   	jMenuItem5.setEnabled(false);
                   	jMenuItem6.setEnabled(false);
+                  	jMenuItem8.setEnabled(false);
+                    jMenuItem9.setEnabled(true);
+                    jMenuItem10.setEnabled(true);
+                    jMenuItem11.setEnabled(false);
+                    jMenuItem12.setEnabled(false);
+                    jMenuItem13.setEnabled(false);
+                    SSHTask temptask = new SSHTask();
+                    temptask = findSelectTask();//变灰相应的任务信息
+                    if(temptask.getStatus() == 0) {
+                    jMenuItem14.setEnabled(true);
+                    jMenuItem15.setEnabled(false);
+                    } 
+                    else {
+                    jMenuItem14.setEnabled(false);
+                    jMenuItem15.setEnabled(true);
+                    }
+                    jMenuItem16.setEnabled(false);
                   }
                   else {
-                    	jMenuItem4.setEnabled(true);
+                    jMenuItem4.setEnabled(true);
                   	jMenuItem5.setEnabled(false);
                   	jMenuItem6.setEnabled(false);
+                  	jMenuItem8.setEnabled(false);
+                    jMenuItem9.setEnabled(false);
+                    jMenuItem10.setEnabled(false);
+                    jMenuItem11.setEnabled(false);
+                    jMenuItem12.setEnabled(false);
+                    jMenuItem13.setEnabled(false);
+                    jMenuItem14.setEnabled(false);
+                    jMenuItem15.setEnabled(false);
+                    jMenuItem16.setEnabled(false);
                   }
                   switch(b.getType())
                   {
@@ -567,7 +621,7 @@ private void stopTaskCommand( ActionEvent e ) throws DocumentException  {
                               +"\n输入目录路径:"+t.getFout()
                               +"\n上次任务开始时间:" + taskstartTime; 
                             if(t.getRunSucc() == true) {                          		
-                          	s += "\n正在执行中，执行时间:" + String.valueOf(System.currentTimeMillis() - t.getRunTime());	
+                          	s += "\n正在执行中，执行时间:" + String.valueOf((System.currentTimeMillis() - t.getRunTime())/1000.0)+"s";	    
                           	}
                           	else {
                           		s += "\n任务执行结束!";
@@ -804,14 +858,29 @@ private void stopTaskCommand( ActionEvent e ) throws DocumentException  {
 
         jMenuItem8.setText("Add");
         jMenuItem8.setName("jMenuItem8"); // NOI18N
+        jMenuItem8.addMouseListener(new java.awt.event.MouseAdapter() {
+        	public void mousePressed(java.awt.event.MouseEvent evt) {
+        		jMenuMousePressNewTask(evt);
+        	}
+        });
         jMenu2.add(jMenuItem8);
 
         jMenuItem9.setText("Update");
         jMenuItem9.setName("jMenuItem9"); // NOI18N
+        jMenuItem9.addMouseListener(new java.awt.event.MouseAdapter() {
+        	public void mousePressed(java.awt.event.MouseEvent evt) {
+        		 jMenuMousePressUpdateTask(evt);
+        	}
+        });       
         jMenu2.add(jMenuItem9);
 
         jMenuItem10.setText("Remove");
         jMenuItem10.setName("jMenuItem10"); // NOI18N
+        jMenuItem10.addMouseListener(new java.awt.event.MouseAdapter() {
+        	public void mousePressed(java.awt.event.MouseEvent evt) {
+        		 jMenuMousePressRemoveTask(evt);
+        	}
+        });  
         jMenu2.add(jMenuItem10);
 
         jSeparator2.setName("jSeparator2"); // NOI18N
@@ -896,7 +965,7 @@ private void stopTaskCommand( ActionEvent e ) throws DocumentException  {
             jMenuItem10.setEnabled(false);
             jMenuItem11.setEnabled(false);
             jMenuItem12.setEnabled(false);
-            jMenuItem13.setEnabled(true);
+            jMenuItem13.setEnabled(false);
             jMenuItem14.setEnabled(false);
             jMenuItem15.setEnabled(false);
             jMenuItem16.setEnabled(false);
@@ -929,10 +998,9 @@ private void stopTaskCommand( ActionEvent e ) throws DocumentException  {
         private void jMenuItem4MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenuItem4MousePressed
             // TODO add your handling code here:
         	if(jMenuItem4.isEnabled() == true) {
-            ComputerUI newComputerUi = new ComputerUI();
-            newComputerUi.setModal(true);
-            newComputerUi.setVisible(true);
-            updata();
+              SSHComputer ncp = new SSHComputer();
+              ncp.creat();
+              updata();
         	}
         }//GEN-LAST:event_jMenuItem4MousePressed
 
@@ -941,10 +1009,9 @@ private void stopTaskCommand( ActionEvent e ) throws DocumentException  {
      */
         private void jMenuMousePressNewGroup(java.awt.event.MouseEvent evt){//GEN-FIRST:event_jMenuItem5MousePressed
         	if(jMenuItem5.isEnabled() == true) {
-           	GroupUI newGroup = new GroupUI();
-           	newGroup.setModal(true);
-           	newGroup.setVisible(true);
-           	updata();
+              SSHGroup grp = new SSHGroup();
+              grp.creat();
+              updata();
         	}
            	
         }
@@ -953,14 +1020,34 @@ private void stopTaskCommand( ActionEvent e ) throws DocumentException  {
      * 工具栏中新建任务的处理函数    
      */
         private void jMenuMousePressNewTask(java.awt.event.MouseEvent evt) {// GEN-FIRST:event_jMenuItem6MousePressed
-        if(jMenuItem6.isEnabled() == true) {
-        	TaskUI newTask = new TaskUI();
-        	newTask.setModal(true);
-        	newTask.setVisible(true);
-        	updata();
+        if(jMenuItem6.isEnabled() == true || jMenuItem8.isEnabled()) {
+        	SSHTask tas=new SSHTask();
+  		     tas.creat();
+  		     updata();
         	}
         }
-   
+   /**
+    * 工具栏中的更新任务的处理函数
+    * @return
+    */
+        private void jMenuMousePressUpdateTask(java.awt.event.MouseEvent evt) {
+        	if(jMenuItem9.isEnabled() == true) {
+        		  SSHTask tas=new SSHTask();
+        		  tas.update();
+        		  updata();
+        	}
+        }
+    /**
+     * 工具栏中的删除任务的处理函数
+     * @return
+     */
+        private void jMenuMousePressRemoveTask(java.awt.event.MouseEvent evt) {
+        	if(jMenuItem10.isEnabled() == true) {
+      		  SSHTask tas=new SSHTask();
+      		  tas.remove();
+      		  updata();  		  
+      	     }
+        }
     static public BaseClass getCur()
     {
     	return cur;
