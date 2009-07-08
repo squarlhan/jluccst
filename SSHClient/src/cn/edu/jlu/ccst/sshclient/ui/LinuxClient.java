@@ -429,11 +429,11 @@ private void execTaskCommand ( ActionEvent e ) throws DocumentException {
     selectTask.setStartTime(curtime);
     selectTask.setRunTime(System.currentTimeMillis());
     System.out.println(curtime);
+   
+    //将任务开始时间写入XML文件中
     TaskUI tempUI = new TaskUI();
     tempUI.EditTaskFromXML(selectTask.getId(), selectTask.getName(), selectTask.getMemo(),
           selectTask.getCmd(), selectTask.getFin(), selectTask.getFout(), curtime);
-    // updata();
-  //  tks.get(i).setStartTime(curtime);
     selectTask.start(jTextArea2);
     System.out.println("ddover!");
 	}
@@ -527,6 +527,9 @@ private void stopTaskCommand( ActionEvent e ) throws DocumentException  {
                       case 2:
                       {
                           SSHTask t=(SSHTask)treenode.getUserObject();
+                          TaskUI tk1 = new TaskUI();
+                        //  Date taskstartTime = null;
+                          Date taskstartTime = tk1.getTaskStartTime(t);
                           if(t.getStartTime() == null) {
                           s="任务名:"+t.getName()                           
                           +"\n命令内容:"+t.getCmd()
@@ -541,7 +544,7 @@ private void stopTaskCommand( ActionEvent e ) throws DocumentException  {
                               +"\n创建时间:"+b.getCreatdate()
                               +"\n输入文件路径:"+t.getFin()
                               +"\n输入目录路径:"+t.getFout()
-                              +"\n上次任务开始时间:" + t.getStartTime(); 
+                              +"\n上次任务开始时间:" + taskstartTime; 
                           	SSHOpCommand temp = new SSHOpCommand();
                           	if(temp.getRunStatus() == false) {                          		
                           	s += "\n正在执行中，执行时间:" + String.valueOf(System.currentTimeMillis() - t.getRunTime());	
