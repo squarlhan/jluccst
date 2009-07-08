@@ -117,7 +117,7 @@ public class GroupUI extends javax.swing.JDialog  {
     		  JOptionPane.showMessageDialog(null,"请输入工作组的名字");
     		  return;
     	  }
-    	  LinuxClient temp = new LinuxClient();
+    	  LinuxClient temp = LinuxClient.GetObj();
     	  BaseClass curType = new BaseClass();
     	  curType = temp.cur;   
     	  String computerId = curType.getId();
