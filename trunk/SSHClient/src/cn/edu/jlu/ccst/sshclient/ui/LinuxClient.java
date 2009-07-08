@@ -60,12 +60,26 @@ import org.dom4j.io.*;
 public class LinuxClient extends javax.swing.JFrame {
 
     /** Creates new form LinuxClient */
-    public LinuxClient() {
+   private  LinuxClient() {
+	    flag=1;
     	this.setLocationRelativeTo(null);
         initComponents();
         updata();
         this.setExtendedState(JFrame.MAXIMIZED_BOTH);
     }
+   static public LinuxClient GetObj()
+   {
+	   if(flag==0)
+	   {
+		   Obj=new LinuxClient();
+		   return Obj;
+	   }
+	   else
+	  {
+		   return Obj;
+	  }
+	   
+   }
     
 //updata the jtree
  void  updata() {
@@ -472,6 +486,7 @@ private void stopTaskCommand( ActionEvent e ) throws DocumentException  {
                   	jMenuItem4.setEnabled(true);
                   	jMenuItem5.setEnabled(false);
                   	jMenuItem6.setEnabled(false);
+                  	
                       return;                    	
                   }
                   String s=null;
@@ -527,9 +542,13 @@ private void stopTaskCommand( ActionEvent e ) throws DocumentException  {
                       case 2:
                       {
                           SSHTask t=(SSHTask)treenode.getUserObject();
-                          TaskUI tk1 = new TaskUI();
-                        //  Date taskstartTime = null;
-                          Date taskstartTime = tk1.getTaskStartTime(t);
+                         // boolean taskrunsucc;
+                          for(int i = 0; i < tks.size() ;++ i) {
+                        	  if(t.getId().equals(tks.get(i).getId())) {
+                        		  t.setRunSucc(tks.get(i).getRunSucc());
+                        		  break;
+                        	  }
+                          }
                           if(t.getStartTime() == null) {
                           s="任务名:"+t.getName()                           
                           +"\n命令内容:"+t.getCmd()
@@ -539,14 +558,15 @@ private void stopTaskCommand( ActionEvent e ) throws DocumentException  {
                           +"\n备注:"+t.getMemo();
                           }
                           else {
+                        	TaskUI tk1 = new TaskUI();
+                            Date taskstartTime = tk1.getTaskStartTime(t);//查找XML文件获得上次任务开始时间
                           	s="任务名:"+t.getName()                           
                               +"\n命令内容:"+t.getCmd()
                               +"\n创建时间:"+b.getCreatdate()
                               +"\n输入文件路径:"+t.getFin()
                               +"\n输入目录路径:"+t.getFout()
                               +"\n上次任务开始时间:" + taskstartTime; 
-                          	SSHOpCommand temp = new SSHOpCommand();
-                          	if(temp.getRunStatus() == false) {                          		
+                            if(t.getRunSucc() == true) {                          		
                           	s += "\n正在执行中，执行时间:" + String.valueOf(System.currentTimeMillis() - t.getRunTime());	
                           	}
                           	else {
@@ -730,12 +750,6 @@ private void stopTaskCommand( ActionEvent e ) throws DocumentException  {
             }
         });
 
-      //没有选中内容时新建选项全设为暗色
-        if(cur == null) {
-            jMenuItem4.setEnabled(true);
-            jMenuItem5.setEnabled(false);
-            jMenuItem6.setEnabled(false);
-        }
         jMenuItem4.setText("Computer");
         jMenuItem4.setName("jMenuItem4"); // NOI18N
         jMenuItem4.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -818,6 +832,18 @@ private void stopTaskCommand( ActionEvent e ) throws DocumentException  {
 
         jMenuItem14.setText("Start Now");
         jMenuItem14.setName("jMenuItem14"); // NOI18N
+        jMenuItem14.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+           {
+                try
+                {
+                	execTaskCommand(e);
+                } catch (DocumentException ex)
+                {}
+           }
+        }
+        );
         jMenu2.add(jMenuItem14);
 
         jSeparator3.setName("jSeparator3"); // NOI18N
@@ -825,7 +851,7 @@ private void stopTaskCommand( ActionEvent e ) throws DocumentException  {
 
         jMenuItem15.setText("Stop Now");
         jMenuItem15.setName("jMenuItem15"); // NOI18N
-        //////////////////////////////////////////
+        //////////////////////////////////////////停止任务的监听函数
         jMenuItem15.addActionListener(new ActionListener()
         {
             public void actionPerformed(ActionEvent e)
@@ -858,9 +884,24 @@ private void stopTaskCommand( ActionEvent e ) throws DocumentException  {
         jMenu3.add(jMenuItem7);
 
         jMenuBar1.add(jMenu3);
-
         setJMenuBar(jMenuBar1);
 
+      //没有选中内容时新建选项全设为暗色
+        if(cur == null) {
+            jMenuItem4.setEnabled(true);
+            jMenuItem5.setEnabled(false);
+            jMenuItem6.setEnabled(false);
+            jMenuItem8.setEnabled(false);
+            jMenuItem9.setEnabled(false);
+            jMenuItem10.setEnabled(false);
+            jMenuItem11.setEnabled(false);
+            jMenuItem12.setEnabled(false);
+            jMenuItem13.setEnabled(true);
+            jMenuItem14.setEnabled(false);
+            jMenuItem15.setEnabled(false);
+            jMenuItem16.setEnabled(false);
+        }
+        
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -985,6 +1026,8 @@ private void stopTaskCommand( ActionEvent e ) throws DocumentException  {
     private JPopupMenu popMenuCA;
     private JMenuItem delItemCA;
     private JMenuItem addItemCA;
+    private static int flag = 0;
+    private static LinuxClient Obj;
     protected static BaseClass cur;
 
     public static List<SSHComputer> cps;
@@ -1012,7 +1055,7 @@ private void stopTaskCommand( ActionEvent e ) throws DocumentException  {
  		}
      	java.awt.EventQueue.invokeLater(new Runnable() {
              public void run() {
-                 new LinuxClient().setVisible(true);
+                 GetObj().setVisible(true);
              }
          });
      }
