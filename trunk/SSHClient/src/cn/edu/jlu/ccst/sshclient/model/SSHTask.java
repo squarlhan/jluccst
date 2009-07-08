@@ -137,6 +137,9 @@ public class SSHTask extends BaseClass implements BaseAction, BaseOperation {
     public void setRunSucc(boolean t) {
     	taskfinish = t;
     }
+    public boolean getRunSucc() {
+    	return taskfinish;
+    }
     public void setStartTime(Date t){
     	taskstartTime = t;
     }
