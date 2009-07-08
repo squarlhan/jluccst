@@ -34,7 +34,7 @@ public class SSHOpCommand implements Runnable {
 	private int opType;
 	private JTextArea  jTextArea1;
 	private static long endtime;
-	private static boolean flag = true; 
+	private  static boolean flag = false; 
 	private JLabel  conl;
 	private  String rs;
 	//默认构造方法
@@ -136,7 +136,8 @@ public class SSHOpCommand implements Runnable {
     	System.out.println("flag1:"+flag);
     	long startime = System.currentTimeMillis();
     	System.out.print("starttime:"+startime);
-    	flag = false;
+    	flag = true;
+    	LinuxClient.GetObj().setTaskRunSucc(flag);
     	try{
         	Connection conn = getOpenedConnection();
     		Session sess = conn.openSession();
@@ -156,16 +157,12 @@ public class SSHOpCommand implements Runnable {
         	catch(Exception ie) {
         		ie.printStackTrace();
         	}
-        	LinuxClient tmpLinx = new LinuxClient();
-        	tmpLinx.setSelTaskStatus(0); 
-            tmpLinx.setTaskRunSucc(flag);
-        	
-        	if(flag == false) {
-        		flag = true;
-        	endtime = System.currentTimeMillis();
+        	LinuxClient tmpLinx = LinuxClient.GetObj();
+        	tmpLinx.setSelTaskStatus(0);         	
+        	if(flag == true) {
+        		flag = false;
+        		LinuxClient.GetObj().setTaskRunSucc(flag);      
         	}
-        	System.out.println("flag:" + flag);
-        	System.out.println("end:"+endtime);
         	
     }
     
@@ -219,7 +216,8 @@ public class SSHOpCommand implements Runnable {
         			et.printStackTrace();
         		}
         	}
-     flag = true;
+     flag = false;
+     LinuxClient.GetObj().setTaskRunSucc(flag); 
      endtime = System.currentTimeMillis();
      System.out.println("ttime:"+endtime);
 	   	
