@@ -337,6 +337,49 @@ public class TaskUI extends javax.swing.JDialog {
 	         e.printStackTrace();
 	     }
 	 }
+	 
+	 //-----------------------------------------------------------//
+	 public Date getTaskStartTime(SSHTask runtask) {
+		 Date startime1;
+		 SAXReader reader = new SAXReader();
+	     try{
+	     String filePath = this.getClass().getResource("/").getPath() + "cn/edu/jlu/ccst/sshclient/util/Config.xml";
+	     Document doc = reader.read(filePath);
+	     OutputFormat format = OutputFormat.createPrettyPrint();
+	     Element root = doc.getRootElement();
+	     XMLWriter writer = null;// 声明写XML的对象
+	     List   list=doc.selectNodes("/config/computer");
+	 	 Iterator iter = list.iterator();
+	 	 SimpleDateFormat timeFormat;
+	     timeFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	 	while(iter.hasNext())
+	 	{
+	 		Element el=(Element)iter.next();
+	 		Iterator it=el.elementIterator("group");
+	 		 while(it.hasNext())
+	          {
+	              Element elta=(Element)it.next();
+	              Iterator itta=elta.elementIterator("task");
+	              while(itta.hasNext())
+	              {
+	              Element et=(Element)itta.next();
+	              String s=et.attributeValue("id");
+	              if(s.equals(runtask.getId())) {
+	            	  startime1 = timeFormat.parse(et.attributeValue("starttime"));
+	            	  return startime1;
+	              }
+	              }
+	          }
+	 	 }
+	     }
+	     catch(Exception e)
+	     {
+	    	 e.printStackTrace();	    	 
+	     }
+		 		 
+		 return null;
+	 }
+	 
 	 //--------------------------------------------------//
 	/**
 	 * 主函数
