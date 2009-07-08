@@ -161,7 +161,7 @@ public class SSHOpCommand implements Runnable {
             tmpLinx.setTaskRunSucc(flag);
         	
         	if(flag == false) {
-        	//	flag = true;
+        		flag = true;
         	endtime = System.currentTimeMillis();
         	}
         	System.out.println("flag:" + flag);
