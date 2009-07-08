@@ -192,7 +192,7 @@ public class TaskUI extends javax.swing.JDialog {
 			 return;
 		 }
 		 
-   	     LinuxClient tempClient = new LinuxClient();
+   	     LinuxClient tempClient = LinuxClient.GetObj();
    	     SSHGroup selectGroup = new SSHGroup();
 	     BaseClass curType = new BaseClass();
 	     curType = tempClient.cur;   
