@@ -39,6 +39,8 @@ import javax.swing.JFrame;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.JTree;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
@@ -219,6 +221,7 @@ public void GenerateTree() {
         {
             public void actionPerformed(ActionEvent e)
            {
+            	           	
                 try
                 {
                 	execTaskCommand(e);
@@ -308,6 +311,23 @@ private void action ( ActionEvent e ) throws DocumentException
           	{
           		SSHTask tas=new SSHTask();
           		tas.remove();
+          		for(int i=0;i<jsl.size();i++)
+          		{
+          			if(jsl.get(i).getName().equals(cur.getId()))
+          			{
+          				jTabbedPane1.remove(jsl.get(i));
+          				jsl.remove(i);
+          				break;
+          			}
+          		}
+          		for(int i=0;i<jtl.size();i++)
+          		{
+          			if(jtl.get(i).getName().equals(cur.getId()));
+          			{
+          				jtl.remove(i);
+          				break;
+          			}
+          		}
           		break;
           	}
           	default:
@@ -427,7 +447,41 @@ public void setTaskRunSucc(boolean t) {
  * 执行选中任务的命令
  */
 private void execTaskCommand ( ActionEvent e ) throws DocumentException {
+
+	boolean flag=false;
+	JTextArea t1 = null;
+	JScrollPane t2=null;
+	for(int i=0;i<jtl.size();i++)
+	{
+		if(jtl.get(i).getName().equals(cur.getId()))
+		{
+			flag=true;
+			t1=jtl.get(i);
+		}
+	}
+	if(!flag)
+	{
+	t1=new JTextArea(cur.getId());
+	t1.setName(cur.getId());
+	jtl.add(t1);
+	t2=new JScrollPane();
+	t2.setName(cur.getId());
+	jsl.add(t2);
+	t2.add(t1);
+	t1.setColumns(20);
+	t1.setRows(5);
+	t1.setEnabled(false);
+	t2.setViewportView(t1);
+	jTabbedPane1.addTab(cur.getName(), t2);
+	}
+	System.out.println("1");
+   
+    
+    
+    
+
 	if(execItemT.isEnabled()||jMenuItem14.isEnabled()) {
+
     jTextArea2.setText("");
 	setSelTaskStatus(1);
 	SSHTask selectTask = new SSHTask();
@@ -441,17 +495,17 @@ private void execTaskCommand ( ActionEvent e ) throws DocumentException {
 	}
     Date curtime = new Date();
     selectTask.setStartTime(curtime);
-    long t1 = System.currentTimeMillis();
-    selectTask.setRunTime(t1);
-    System.out.println(t1);
+    long t = System.currentTimeMillis();
+    selectTask.setRunTime(t);
+    System.out.println(t);
     System.out.println(curtime);
    
     //将任务开始时间写入XML文件中
     TaskUI tempUI = new TaskUI();
     tempUI.EditTaskFromXML(selectTask.getId(), selectTask.getName(), selectTask.getMemo(),
           selectTask.getCmd(), selectTask.getFin(), selectTask.getFout(), curtime);
-    selectTask.start(jTextArea2);
-    System.out.println("ddover!");
+    selectTask.start(t1);
+    //System.out.println("ddover!");
 	}
 	
 }
@@ -718,6 +772,10 @@ private void stopTaskCommand( ActionEvent e ) throws DocumentException  {
  */
 //-------------------------------------------------------------//
     private void initComponents() {
+    	
+    	
+    	jtl=new ArrayList();
+        jsl=new ArrayList();
         
         jSplitPane1 = new javax.swing.JSplitPane();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -1120,6 +1178,9 @@ private void stopTaskCommand( ActionEvent e ) throws DocumentException  {
     public static List<SSHComputer> cps;
     public static List<SSHGroup> gps;
     public static List<SSHTask> tks;
+    
+    private List<javax.swing.JTextArea> jtl;
+    private List<javax.swing.JScrollPane> jsl;
     
     /**
      * @param args the command line arguments
