@@ -29,7 +29,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.DateFormat;
@@ -572,6 +574,7 @@ private void stopTaskCommand( ActionEvent e ) throws DocumentException  {
                   int rowLocation = tree.getRowForLocation(e.getX(), e.getY());
                   TreePath treepath = tree.getPathForRow(rowLocation);
                   DefaultMutableTreeNode treenode = (DefaultMutableTreeNode) treepath.getLastPathComponent();
+               
                   if(treenode.toString().equals("Computers"))
                   {
                   	jTextArea1.setText("");
@@ -592,6 +595,88 @@ private void stopTaskCommand( ActionEvent e ) throws DocumentException  {
                   String s=null;
                   BaseClass b=(BaseClass)treenode.getUserObject();
                   cur=(BaseClass)treenode.getUserObject();
+                  //-------------处理双击事件----------------------------//
+                  if(e.getClickCount()==2)
+                  {
+                	if(cur.getType()!=2)return;
+                	cur=(SSHTask)cur;
+                	for(int i=0;i<jtl.size();i++)
+                	{
+                		if(jtl.get(i).getName().equals(cur.getId()))
+                		{
+                			return;
+                		}
+                	}
+                	for(int i=0;i<tks.size();i++)
+          		  	{
+          			  if(tks.get(i).getId().equals(cur.getId())) 
+          			  {
+          					if(tks.get(i).getStatus()==1)
+          					{
+          						return;
+          					}
+          			  }
+          		  	}
+                	JScrollPane t2=null;
+                	t1=new JTextArea(cur.getId());
+                	t1.setName(cur.getId());
+                	jtl.add(t1);
+                	t2=new JScrollPane();
+                	t2.setName(cur.getId());
+                	jsl.add(t2);
+                	t2.add(t1);
+                	t1.setColumns(20);
+                	t1.setRows(5);
+                	t1.setEditable(false);
+                	t2.setViewportView(t1);
+                	jTabbedPane1.addTab(cur.getName(), t2);
+                	t1.addMouseListener(new MouseAdapter()
+                	{ 
+                		public void mouseReleased(MouseEvent e)
+                        {
+                           //是否右键单击
+                          if (e.getClickCount() == 1 && SwingUtilities.isRightMouseButton(e))
+                          {
+                        	  JTextArea temp=(JTextArea)e.getComponent();
+                        	  if(temp.getSelectedText()==null)
+                        	  {
+                        		  copyTA.setEnabled(false);
+                        	  }
+                        	  else
+                        	  {
+                        		  copyTA.setEnabled(true);
+                        	  }
+                        	  if(old!=null)
+                        	  {
+                        		  copyTA.removeActionListener(old);
+                        		  shutTA.removeActionListener(old);
+                        		  clearTA.removeActionListener(old);
+                        	  }
+                        	  old=new TARight(temp);
+                        	  copyTA.addActionListener(old);
+                        	  shutTA.addActionListener(old);
+                        	  clearTA.addActionListener(old);
+                        	  popMenuTA.show(temp,e.getX(),e.getY());
+                          }
+                		}
+                	}
+                	);
+                	SSHTask curT=(SSHTask)cur;
+                	try
+                	{
+                	FileReader reader = new FileReader(curT.getFout()+"/"+curT.getId()+".txt");    
+                    BufferedReader br = new BufferedReader(reader);    
+                    String s1 = null;    
+                    while((s1 = br.readLine()) != null) 
+                    {    
+                        t1.append(s1);    
+                    }    
+                   br.close();    
+                   reader.close();  
+                	}catch(Exception ex){ex.printStackTrace();}
+                	
+                  }
+                  //-----------------------------------------------------//
                   if(cur.getType() == 0) { //获得选中的类型，给工具栏中相应的选项变色
                   	 jMenuItem5.setEnabled(true);
                   	 jMenuItem4.setEnabled(false);
