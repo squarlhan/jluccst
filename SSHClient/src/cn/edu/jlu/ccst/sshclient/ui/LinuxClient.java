@@ -23,6 +23,8 @@ import java.awt.Font;
 import java.awt.Color;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
+import java.awt.datatransfer.StringSelection;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -449,7 +451,7 @@ public void setTaskRunSucc(boolean t) {
 private void execTaskCommand ( ActionEvent e ) throws DocumentException {
 
 	boolean flag=false;
-	JTextArea t1 = null;
+	t1 = null;
 	JScrollPane t2=null;
 	for(int i=0;i<jtl.size();i++)
 	{
@@ -470,10 +472,44 @@ private void execTaskCommand ( ActionEvent e ) throws DocumentException {
 	t2.add(t1);
 	t1.setColumns(20);
 	t1.setRows(5);
-	t1.setEnabled(false);
+	t1.setEditable(false);
 	t2.setViewportView(t1);
 	jTabbedPane1.addTab(cur.getName(), t2);
+	
+	t1.addMouseListener(new MouseAdapter()
+	{ 
+		public void mouseReleased(MouseEvent e)
+        {
+           //是否右键单击
+          if (e.getClickCount() == 1 && SwingUtilities.isRightMouseButton(e))
+          {
+        	  JTextArea temp=(JTextArea)e.getComponent();
+        	  if(temp.getSelectedText()==null)
+        	  {
+        		  copyTA.setEnabled(false);
+        	  }
+        	  else
+        	  {
+        		  copyTA.setEnabled(true);
+        	  }
+        	  if(old!=null)
+        	  {
+        		  copyTA.removeActionListener(old);
+        		  shutTA.removeActionListener(old);
+        		  clearTA.removeActionListener(old);
+        	  }
+        	  old=new TARight(temp);
+        	  copyTA.addActionListener(old);
+        	  shutTA.addActionListener(old);
+        	  clearTA.addActionListener(old);
+        	  popMenuTA.show(temp,e.getX(),e.getY());
+          }
+		}
 	}
+	);
+	
+	}
+	
 	System.out.println("1");
    
     
@@ -767,6 +803,65 @@ private void stopTaskCommand( ActionEvent e ) throws DocumentException  {
           {}
      }
   }
+  //----------------------------------------------------------//
+  class TARight implements ActionListener
+  {
+	  JTextArea t;
+	  TARight(JTextArea t)
+	  {
+		  this.t=t;
+	  }
+      public void actionPerformed(ActionEvent e)
+     {
+    	  if(e.getActionCommand().equals("复制"))
+    	  {
+    		 
+    		  String temp=t.getSelectedText(); //拖动鼠标选取文本。
+    		  StringSelection text=new StringSelection(temp); 
+    		  clipboard=getToolkit().getSystemClipboard();
+    		  clipboard.setContents(text,null); 
+
+    	  }
+    	  if(e.getActionCommand().equals("关闭窗口"))
+    	  {
+    		  for(int i=0;i<tks.size();i++)
+    		  {
+    			  if(tks.get(i).getId().equals(t.getName())) 
+    			  {
+    					if(tks.get(i).getStatus()==1)
+    					{
+    						JOptionPane.showMessageDialog(null, "任务执行中不可关闭！");
+    						return;
+    					}
+    			  }
+    		  }
+    		  for(int i=0;i<jsl.size();i++)
+        		{
+        			if(jsl.get(i).getName().equals(t.getName()))
+        			{
+        				jTabbedPane1.remove(jsl.get(i));
+        				jsl.remove(i);
+        				
+        				break;
+        			}
+        		}
+        		for(int i=0;i<jtl.size();i++)
+        		{
+        			if(jtl.get(i).getName().equals(t.getName()));
+        			{
+        				jtl.remove(i);
+        				
+        				break;
+        			}
+        		}  
+    	  }
+    	  if(e.getActionCommand().equals("清空"))
+    	  {
+    		  System.out.println("清空");
+    		  t.setText("");
+    	  }
+     }
+  }
 /**
  * 初始画图函数
  */
@@ -776,6 +871,14 @@ private void stopTaskCommand( ActionEvent e ) throws DocumentException  {
     	
     	jtl=new ArrayList();
         jsl=new ArrayList();
+        popMenuTA=new JPopupMenu();
+        copyTA=new JMenuItem("复制");
+        shutTA=new JMenuItem("关闭窗口");
+        clearTA=new JMenuItem("清空");
+        popMenuTA.add(copyTA);
+        popMenuTA.add(shutTA);
+        popMenuTA.add(clearTA);
+        
         
         jSplitPane1 = new javax.swing.JSplitPane();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -1167,6 +1270,15 @@ private void stopTaskCommand( ActionEvent e ) throws DocumentException  {
     private JMenuItem editItemT;
     private JMenuItem execItemT;
     private JMenuItem stopItemT;
+    
+    private JPopupMenu popMenuTA;
+    private JMenuItem copyTA;
+    private JMenuItem shutTA;
+    private JMenuItem clearTA;
+    JTextArea t1;
+    Clipboard clipboard=null; 
+    private TARight old=null;
+
     
     private JPopupMenu popMenuCA;
     private JMenuItem delItemCA;
