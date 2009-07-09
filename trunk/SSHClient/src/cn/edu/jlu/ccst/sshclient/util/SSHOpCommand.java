@@ -32,6 +32,7 @@ public class SSHOpCommand implements Runnable {
 	private String Psw;
 	private String Cmd;
 	private String Id;
+	private String Finout;
 	private int opType;
 	private JTextArea  jTextArea1;
 	private static long endtime;
@@ -88,13 +89,14 @@ public class SSHOpCommand implements Runnable {
      * @param jText
      * @param taskInfo 0
      */
-	public SSHOpCommand(String host, String name, String psw, String cmd,String id,JTextArea  jText,int taskInfo) {
+	public SSHOpCommand(String host, String name, String psw, String cmd,String id,JTextArea  jText,String finout,int taskInfo) {
 		super();
 		Host = host;
 		Name = name;
 		Psw = psw;
 		Cmd = cmd;
 		Id = id;
+		Finout = finout;
 		jTextArea1 = jText;
 		opType = taskInfo;
 	}
@@ -162,14 +164,14 @@ public class SSHOpCommand implements Runnable {
      * 运行ssh远程命令
      */
     private void runSSH() {
-   	String filename=((SSHTask)(LinuxClient.getCur())).getFout()+"/"+LinuxClient.getCur().getId()+".txt";
+  	String filename=Finout+"/"+LinuxClient.getCur().getId()+".txt";
     	FileWriter write = null;
     	try
     	{
     	write=new FileWriter(filename,true);    
     	}catch(IOException e)
     	{}
-    	
+    
     	
     	flag = true;
     	LinuxClient.GetObj().setTaskRunSucc(Id,flag);
@@ -182,14 +184,14 @@ public class SSHOpCommand implements Runnable {
     		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(sess.getStdout()));        
     		while((out=bufferedReader.readLine())!=null) {
     			   out += "\n";
-    			   write.append(out);
+    		//	   write.append(out);
     			   jTextArea1.append(out);   
     		}
     		sess.close();
     		conn.close();
     		
-    		write.flush();
-    		write.close();
+    	//	write.flush();
+    	//	write.close();
         	}
         	catch(Exception ie) {
         		ie.printStackTrace();
