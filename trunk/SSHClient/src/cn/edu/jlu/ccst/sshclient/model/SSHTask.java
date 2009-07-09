@@ -168,7 +168,7 @@ public class SSHTask extends BaseClass implements BaseAction, BaseOperation {
 	String userPsw = selectComputer.getPassword();
 	int taskInfo = 0;//开启任务信息：0	
 	try{
-	SSHOpCommand ry = new SSHOpCommand(computerHost, userName, userPsw, cmd,id,jTextArea1,taskInfo);
+	SSHOpCommand ry = new SSHOpCommand(computerHost, userName, userPsw, cmd,id,jTextArea1,fout,taskInfo);
 	Thread ty = new Thread(ry);
 	ty.start();
 	
