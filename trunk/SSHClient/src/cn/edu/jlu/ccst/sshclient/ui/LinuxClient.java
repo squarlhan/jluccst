@@ -208,9 +208,37 @@ public void GenerateTree() {
         delItemG.addActionListener(new rightclick());
         editItemG = new JMenuItem("修改此任务组");
         editItemG.addActionListener(new rightclick());
+        groupStartG = new JMenuItem("串行启动所有任务");
+        groupStartG.addMouseListener(new java.awt.event.MouseAdapter() {
+        	public void mousePressed(java.awt.event.MouseEvent evt) {
+      		  jMenuMousePressGroupStart(evt); 
+      	}
+      });  
+        groupStopG = new JMenuItem("停止所有串行任务");
+        groupStopG.addMouseListener(new java.awt.event.MouseAdapter() {
+        	public void mousePressed(java.awt.event.MouseEvent evt) {
+      		  jMenuMousePressGroupStop(evt); 
+      	}
+      });  
+        allStartG = new JMenuItem("同时启动所有任务");
+        allStartG.addMouseListener(new java.awt.event.MouseAdapter() {
+        	public void mousePressed(java.awt.event.MouseEvent evt) {
+      		  jMenuMousePressAllStartG(evt); 
+      	}
+      });
+        allStopG = new JMenuItem("停止所有任务");
+        allStopG.addMouseListener(new java.awt.event.MouseAdapter() {
+        	public void mousePressed(java.awt.event.MouseEvent evt) {
+      		  jMenuMousePressAllStopG(evt); 
+      	}
+      });
         popMenuG.add(addItemG);
         popMenuG.add(delItemG);
-        popMenuG.add(editItemG);     
+        popMenuG.add(editItemG); 
+        popMenuG.add(groupStartG);
+        popMenuG.add(groupStopG);
+        popMenuG.add(allStartG);
+        popMenuG.add(allStopG);
         popMenuT = new JPopupMenu();       
         delItemT = new JMenuItem("删除此任务");
         delItemT.addActionListener(new rightclick());
@@ -284,8 +312,7 @@ private void action ( ActionEvent e ) throws DocumentException
               Element el=(Element)iter.next();
               el.getParent().remove(el); 
           } 
-          try{
-              
+          try{              
    	   	   XMLWriter writer = new XMLWriter(new FileWriter(this.getClass().getResource("/").getPath() + "cn/edu/jlu/ccst/sshclient/util/Config.xml"));	   	 
    	   	   writer.write(doc);
    	   	   writer.close();
@@ -424,9 +451,9 @@ public SSHTask findSelectTask() {
 /**
  * 设置相应的任务运行状态
  */
-public void setSelTaskStatus(int t) {
+public void setSelTaskStatus(String str,int t) {
 	for(int i = 0; i < tks.size(); i++) {
-		if(tks.get(i).getId().equals(cur.getId())) {
+		if(tks.get(i).getId().equals(str)) {
 			tks.get(i).setStatus(t);
 		    return;
 		}
@@ -436,9 +463,9 @@ public void setSelTaskStatus(int t) {
 /**
  * 设置任务运行成功
  */
-public void setTaskRunSucc(boolean t) {
+public void setTaskRunSucc(String Id,boolean t) {
 	for( int i = 0; i < tks.size(); i++) {
-		if(tks.get(i).getId().equals(cur.getId())) {
+		if(tks.get(i).getId().equals(Id)) {
 			tks.get(i).setRunSucc(t);
 			System.out.println("run sucss!");
 			return;
@@ -521,7 +548,7 @@ private void execTaskCommand ( ActionEvent e ) throws DocumentException {
 	if(execItemT.isEnabled()||jMenuItem14.isEnabled()) {
 
     jTextArea2.setText("");
-	setSelTaskStatus(1);
+	setSelTaskStatus(cur.getId(),1);
 	SSHTask selectTask = new SSHTask();
 	//寻找选中的任务
 	int i;
@@ -555,13 +582,228 @@ private void execTaskCommand ( ActionEvent e ) throws DocumentException {
  */
 private void stopTaskCommand( ActionEvent e ) throws DocumentException  {
     if(stopItemT.isEnabled()||jMenuItem15.isEnabled()) {
-    setSelTaskStatus(0);
+    setSelTaskStatus(cur.getId(),0);
 	SSHTask stopTask = new SSHTask();
 	stopTask = findSelectTask();
 	stopTask.stop();
     }
 }
 
+//---------------------------------------------------------------//
+/**
+ * 启动组内的所有任务
+ */
+private void jMenuMousePressGroupStart(MouseEvent evt) {
+	if( jMenuItem12.isEnabled() ) {
+	jTextArea2.setText("");
+	SSHGroup sgp = new SSHGroup();
+	sgp = findSelectGroup();//找到当前选中的组
+	setGpsStatus(sgp.getId(),true);
+	
+	SSHComputer selectComputer = new SSHComputer();
+	selectComputer = sgp.getCp();
+	String computerHost = selectComputer.getHost();
+	String userName = selectComputer.getUsername();
+	String userPsw = selectComputer.getPassword();
+	sgp.setGroupStatus(true);
+	
+	int taskInfo = 3;//开启任务信息：0	
+		try{
+		SSHOpCommand ry = new SSHOpCommand(computerHost, userName, userPsw, sgp.getSts(),jTextArea2,taskInfo);
+		Thread ty = new Thread(ry);
+		ty.start();
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}	
+	sgp.setGroupStatus(false);
+	}	
+	
+}
+
+//-------------------------------------------------------------------//
+/**
+ * 停止组内的所有任务
+ */
+private void jMenuMousePressGroupStop(MouseEvent evt) {
+    
+	SSHGroup sgp = new SSHGroup();
+	sgp = findSelectGroup();//找到当前选中的组
+	SSHComputer selectComputer = new SSHComputer();
+	selectComputer = sgp.getCp();
+	String computerHost = selectComputer.getHost();
+	String userName = selectComputer.getUsername();
+	String userPsw = selectComputer.getPassword();
+	
+	setGpsStatus(sgp.getId(),false);
+	
+	int taskInfo = 4;//开启任务信息：0	
+		try{
+		SSHOpCommand ry = new SSHOpCommand(computerHost, userName, userPsw, sgp.getSts(),taskInfo);
+		Thread ty = new Thread(ry);
+		ty.start();
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}	
+	sgp.setGroupStatus(true);
+}
+
+//----------------------------------------------------------------------//
+/**
+ * 同时启动组内的所有任务
+ */
+private void jMenuMousePressAllStartG(MouseEvent evt) {
+	SSHGroup sgp = new SSHGroup();
+	sgp = findSelectGroup();//找到当前选中的组
+	SSHComputer selectComputer = new SSHComputer();
+	selectComputer = sgp.getCp();
+	String computerHost = selectComputer.getHost();
+	String userName = selectComputer.getUsername();
+	String userPsw = selectComputer.getPassword();
+	
+	SSHTask rstk = new SSHTask();
+	int taskInfo = 0;
+	for(int i = 0; i < sgp.getSts().size(); ++i) {		
+		rstk = sgp.getSts().get(i);
+		setSelTaskStatus(rstk.getId(),1);
+	    Date curtime = new Date();
+	    rstk.setStartTime(curtime);
+	    long timerun = System.currentTimeMillis();
+	    rstk.setRunTime(timerun);
+	    System.out.println(curtime);
+	   
+	    //将任务开始时间写入XML文件中
+	    TaskUI tempUI = new TaskUI();
+	    tempUI.EditTaskFromXML(rstk.getId(), rstk.getName(), rstk.getMemo(),
+	    		rstk.getCmd(), rstk.getFin(), rstk.getFout(), curtime);
+	    
+	    
+	    
+	    ///新建TAb
+	    boolean flag=false;
+		t1 = null;
+		JScrollPane t2=null;
+		for(int j=0;j<jtl.size();j++)
+		{
+			if(jtl.get(j).getName().equals(cur.getId()))
+			{
+				flag=true;
+				t1=jtl.get(j);
+			}
+		}
+		if(!flag)
+		{
+		t1=new JTextArea(rstk.getId());
+		t1.setName(rstk.getId());
+		jtl.add(t1);
+		t2=new JScrollPane();
+		t2.setName(rstk.getId());
+		jsl.add(t2);
+		t2.add(t1);
+		t1.setColumns(20);
+		t1.setRows(5);
+		t1.setEditable(false);
+		t2.setViewportView(t1);
+		jTabbedPane1.addTab(rstk.getName(), t2);
+		
+		t1.addMouseListener(new MouseAdapter()
+		{ 
+			public void mouseReleased(MouseEvent e)
+	        {
+	           //是否右键单击
+	          if (e.getClickCount() == 1 && SwingUtilities.isRightMouseButton(e))
+	          {
+	        	  JTextArea temp=(JTextArea)e.getComponent();
+	        	  if(temp.getSelectedText()==null)
+	        	  {
+	        		  copyTA.setEnabled(false);
+	        	  }
+	        	  else
+	        	  {
+	        		  copyTA.setEnabled(true);
+	        	  }
+	        	  if(old!=null)
+	        	  {
+	        		  copyTA.removeActionListener(old);
+	        		  shutTA.removeActionListener(old);
+	        		  clearTA.removeActionListener(old);
+	        	  }
+	        	  old=new TARight(temp);
+	        	  copyTA.addActionListener(old);
+	        	  shutTA.addActionListener(old);
+	        	  clearTA.addActionListener(old);
+	        	  popMenuTA.show(temp,e.getX(),e.getY());
+	          }
+			}
+		}
+		);
+		
+		}
+			    
+	    rstk.start(t1);
+	    System.out.println("ddover!");
+	}
+	
+}
+
+//---------------------------------------------------------------------//
+/**
+ * 停止同时执行的所有任务
+ */
+private void jMenuMousePressAllStopG(MouseEvent evt) {
+	SSHGroup sgp = new SSHGroup();
+	sgp = findSelectGroup();//找到当前选中的组
+	SSHTask tsk = new SSHTask();
+	
+	for(int i = 0; i < sgp.getSts().size(); ++i) {
+		tsk = sgp.getSts().get(i);
+		setSelTaskStatus(tsk.getId(),0);
+		tsk.stop();
+	}
+	
+}
+//----------------------------------------------------------------------//
+/**
+ * 寻找选中的组
+ */
+private SSHGroup findSelectGroup() {
+	for(int i = 0; i < gps.size() ; i++) {
+		if(cur.getId().equals(gps.get(i).getId())) {
+                  return gps.get(i);
+		}
+	}	
+	return null;
+}
+//-----------------------------------------------------------------------//
+/**
+ * 设置gps中选中的组的任务执行状态
+ */
+public void setGpsStatus(String Id, boolean t) {
+	for(int i = 0; i < gps.size(); ++i) {
+		if(gps.get(i).getId().equals(Id)) {
+			gps.get(i).setGroupStatus(t);
+			break;
+		}
+	}
+}
+
+public void setGpsrunSucc(String Id, boolean t) {
+	for(int i = 0; i < gps.size(); ++ i) {
+		if(gps.get(i).getId().equals(Id)) {
+			gps.get(i).setGroupRunSucc(t);
+			break;
+		}
+	}
+}
+public boolean getGpsrunSucc(String Id) {
+	for(int i = 0; i < gps.size(); ++ i) {
+		if(gps.get(i).getId().equals(Id)) {
+			return gps.get(i).getGroupRunSucc();
+		}
+	}
+	return false;
+}
 //-----------------------------------------------------------------------//
 //鼠标点击处理类
   private class thismouse extends  MouseAdapter
@@ -698,8 +940,15 @@ private void stopTaskCommand( ActionEvent e ) throws DocumentException  {
                   	 jMenuItem8.setEnabled(true);
                      jMenuItem9.setEnabled(false);
                      jMenuItem10.setEnabled(false);
+                     SSHGroup sgp = findSelectGroup();
+                     if(sgp.getGroupStatus() == false) {
                      jMenuItem11.setEnabled(false);
                      jMenuItem12.setEnabled(true);
+                     }
+                     else {
+                     jMenuItem11.setEnabled(true);
+                     jMenuItem12.setEnabled(false);
+                     }
                      jMenuItem13.setEnabled(true);
                      jMenuItem14.setEnabled(false);
                      jMenuItem15.setEnabled(false);
@@ -850,6 +1099,16 @@ private void stopTaskCommand( ActionEvent e ) throws DocumentException  {
                         case 1:
                         {
                       	  popMenuG.show(jTree1, e.getX(), e.getY());
+                      	  SSHGroup sgp = new SSHGroup();
+                      	  sgp = findSelectGroup();
+                      	  if(sgp.getGroupStatus() == false) {
+                      		groupStartG.setEnabled(true);
+                      		groupStopG.setEnabled(false);
+                      	  }
+                      	  else {
+                      		groupStartG.setEnabled(false);
+                      		groupStopG.setEnabled(true);
+                      	  }
                       	  break;
                         }
                         case 2:
@@ -888,6 +1147,8 @@ private void stopTaskCommand( ActionEvent e ) throws DocumentException  {
           {}
      }
   }
+  
+
   //----------------------------------------------------------//
   class TARight implements ActionListener
   {
@@ -947,13 +1208,13 @@ private void stopTaskCommand( ActionEvent e ) throws DocumentException  {
     	  }
      }
   }
+  
 /**
  * 初始画图函数
  */
 //-------------------------------------------------------------//
     private void initComponents() {
-    	
-    	
+    			  
     	jtl=new ArrayList();
         jsl=new ArrayList();
         popMenuTA=new JPopupMenu();
@@ -963,7 +1224,6 @@ private void stopTaskCommand( ActionEvent e ) throws DocumentException  {
         popMenuTA.add(copyTA);
         popMenuTA.add(shutTA);
         popMenuTA.add(clearTA);
-        
         
         jSplitPane1 = new javax.swing.JSplitPane();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -1132,19 +1392,29 @@ private void stopTaskCommand( ActionEvent e ) throws DocumentException  {
         jSeparator2.setName("jSeparator2"); // NOI18N
         jMenu2.add(jSeparator2);
 
-        jMenuItem11.setText("Start");
-        jMenuItem11.setName("jMenuItem11"); // NOI18N
-        
-        jMenu2.add(jMenuItem11);
+
 
         jMenuItem12.setText("Group Start");
         jMenuItem12.setName("jMenuItem12"); // NOI18N
+        jMenuItem12.addMouseListener(new java.awt.event.MouseAdapter() {
+        	public void mousePressed(java.awt.event.MouseEvent evt) {
+        		  jMenuMousePressGroupStart(evt); 
+        		//jMenuMousePressRemoveTask(evt);
+        	}
+        });  
         jMenu2.add(jMenuItem12);
-
+        
+        jMenuItem11.setText("Group Stop");
+        jMenuItem11.setName("jMenuItem11"); // NOI18N
+        
+        jMenu2.add(jMenuItem11);
         jMenuItem13.setText("All Start");
         jMenuItem13.setName("jMenuItem13"); // NOI18N
         jMenu2.add(jMenuItem13);
-
+        
+        jMenuItem16.setText("All Stop");
+        jMenuItem16.setName("jMenuItem16"); // NOI18N
+        jMenu2.add(jMenuItem16);
         jMenuItem14.setText("Start Now");
         jMenuItem14.setName("jMenuItem14"); // NOI18N
         jMenuItem14.addActionListener(new ActionListener()
@@ -1181,9 +1451,7 @@ private void stopTaskCommand( ActionEvent e ) throws DocumentException  {
         );
         jMenu2.add(jMenuItem15);
 
-        jMenuItem16.setText("All Stop");
-        jMenuItem16.setName("jMenuItem16"); // NOI18N
-        jMenu2.add(jMenuItem16);
+
 
         jMenuBar1.add(jMenu2);
 
@@ -1317,6 +1585,7 @@ private void stopTaskCommand( ActionEvent e ) throws DocumentException  {
     private javax.swing.JMenuItem jMenuItem14;
     private javax.swing.JMenuItem jMenuItem15;
     private javax.swing.JMenuItem jMenuItem16;
+    private javax.swing.JMenuItem jMenuItem17;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
@@ -1349,6 +1618,10 @@ private void stopTaskCommand( ActionEvent e ) throws DocumentException  {
     private JMenuItem addItemG;
     private JMenuItem delItemG;
     private JMenuItem editItemG;
+    private JMenuItem groupStartG;
+    private JMenuItem groupStopG;
+    private JMenuItem allStartG;
+    private JMenuItem allStopG;
     
     private JPopupMenu popMenuT;
     private JMenuItem delItemT;
@@ -1356,6 +1629,7 @@ private void stopTaskCommand( ActionEvent e ) throws DocumentException  {
     private JMenuItem execItemT;
     private JMenuItem stopItemT;
     
+
     private JPopupMenu popMenuTA;
     private JMenuItem copyTA;
     private JMenuItem shutTA;
@@ -1363,7 +1637,6 @@ private void stopTaskCommand( ActionEvent e ) throws DocumentException  {
     JTextArea t1;
     Clipboard clipboard=null; 
     private TARight old=null;
-
     
     private JPopupMenu popMenuCA;
     private JMenuItem delItemCA;
