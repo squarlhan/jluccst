@@ -136,11 +136,11 @@ public class SSHOpCommand implements Runnable {
     	 * 测试连接2
     	 * 开启 组内任务3
     	 * 停止组内任务4
-    	 * 
-    	 * 
+    	 * 同时开启组内所有任务5
+    	 * 停止组内所有任务6
     	 */
     	switch(opType){
-    	case 0: //执行task命令
+    	case 0: //执行task命令 5
     		runSSH();break;
     	case 1: //停止task命令
     		stopSSH();
