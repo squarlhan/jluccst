@@ -131,13 +131,12 @@ public class SSHOpCommand implements Runnable {
     }
     public void run(){
     	/**
-    	 * 开启任务0
-    	 * 停止任务1
+    	 * 开启任务0     同时开启组内所有任务0
+    	 * 停止任务1    停止组内所有任务1
     	 * 测试连接2
     	 * 开启 组内任务3
     	 * 停止组内任务4
-    	 * 同时开启组内所有任务5
-    	 * 停止组内所有任务6
+    	 * 
     	 */
     	switch(opType){
     	case 0: //执行task命令 5
@@ -163,14 +162,14 @@ public class SSHOpCommand implements Runnable {
      * 运行ssh远程命令
      */
     private void runSSH() {
-    /*	String filename=((SSHTask)(LinuxClient.getCur())).getFout()+"/"+LinuxClient.getCur().getId()+".txt";
+   	String filename=((SSHTask)(LinuxClient.getCur())).getFout()+"/"+LinuxClient.getCur().getId()+".txt";
     	FileWriter write = null;
     	try
     	{
-    	write=new FileWriter(filename,true);
+    	write=new FileWriter(filename,true);    
     	}catch(IOException e)
     	{}
-    */	
+    	
     	
     	flag = true;
     	LinuxClient.GetObj().setTaskRunSucc(Id,flag);
@@ -179,17 +178,18 @@ public class SSHOpCommand implements Runnable {
     		Session sess = conn.openSession();
     		sess.execCommand(Cmd);		
             String out;
+
     		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(sess.getStdout()));        
     		while((out=bufferedReader.readLine())!=null) {
     			   out += "\n";
-    			  // write.append(out);
+    			   write.append(out);
     			   jTextArea1.append(out);   
     		}
     		sess.close();
     		conn.close();
     		
-    	//	write.flush();
-    	//	write.close();
+    		write.flush();
+    		write.close();
         	}
         	catch(Exception ie) {
         		ie.printStackTrace();
@@ -286,6 +286,13 @@ public class SSHOpCommand implements Runnable {
      * 串行开始组内的所有任务
      */
     public void runGroupSSH() {
+    	String filename="./"+LinuxClient.getCur().getId()+".txt";
+    	FileWriter write = null;
+    	try
+    	{
+    	write=new FileWriter(filename,true);
+    	}catch(IOException e)
+    	{}
     	
     	for(int i = 0; i < runtasklist.size(); ++i) {
 		    runtasklist.get(i).setStatus(1);   
@@ -313,6 +320,7 @@ public class SSHOpCommand implements Runnable {
     	        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(sess.getStdout()));        
     	    	while((out=bufferedReader.readLine())!=null) {
     	    			   out += "\n";
+    	    			   write.append(out);
     	    			   jTextArea1.append(out);   
     	    		}
     	    	runtasklist.get(i).setStatus(0);
@@ -327,7 +335,8 @@ public class SSHOpCommand implements Runnable {
     	    	sess.close();
         		conn.close();
     		}
-    			
+        	write.flush();
+        	write.close();
         	}
         	catch(Exception ie) {
         		ie.printStackTrace();
