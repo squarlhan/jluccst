@@ -31,12 +31,16 @@ public class SSHOpCommand implements Runnable {
 	private String Name;
 	private String Psw;
 	private String Cmd;
+	private String Id;
 	private int opType;
 	private JTextArea  jTextArea1;
 	private static long endtime;
-	private  static boolean flag = false; 
+	private  boolean flag = false; 
+	private  boolean groupflag = false;
 	private JLabel  conl;
-	private  String rs;
+	private  String rs;	
+	private List<SSHTask> runtasklist;
+	
 	//默认构造方法
 	public SSHOpCommand() {
 		
@@ -65,17 +69,18 @@ public class SSHOpCommand implements Runnable {
      * @param stopType 1
      * @param pidlist
      */
-    public SSHOpCommand(String host, String name, String psw, String cmd,
+    public SSHOpCommand(String host, String name, String psw, String cmd, String id,
 			int stopType) {
 		super();
 		Host = host;
 		Name = name;
 		Psw = psw;
 		Cmd = cmd;
+		Id = id;
 		this.opType = stopType;
 	}
 	/**
-     * 运行命令用这个构造方法
+     * 运行单个任务命令用这个构造方法
      * @param host
      * @param name
      * @param psw
@@ -83,39 +88,72 @@ public class SSHOpCommand implements Runnable {
      * @param jText
      * @param taskInfo 0
      */
-	public SSHOpCommand(String host, String name, String psw, String cmd,JTextArea  jText,int taskInfo) {
+	public SSHOpCommand(String host, String name, String psw, String cmd,String id,JTextArea  jText,int taskInfo) {
 		super();
 		Host = host;
 		Name = name;
 		Psw = psw;
 		Cmd = cmd;
+		Id = id;
 		jTextArea1 = jText;
 		opType = taskInfo;
 	}
-   
-	
+   /**
+    * 串行运行组内的所有任务用这个构造方法
+    */
+    public SSHOpCommand(String host, String name, String psw,  List<SSHTask> runtasklist,
+    		JTextArea jTextArea1, int opType) {
+    	super();
+    	Host = host;
+    	Name = name;
+    	Psw = psw;
+    	this.opType = opType;
+    	this.jTextArea1 = jTextArea1;
+    	this.runtasklist = runtasklist;
+    }
+    
+   /**
+    * 停止组内串行运行的所有任务用这个构造方法 
+    */
+    public SSHOpCommand(String host, String name, String psw,  List<SSHTask> runtasklist,
+    		 int opType) {
+    	super();
+    	Host = host;
+    	Name = name;
+    	Psw = psw;
+    	this.opType = opType;
+    	this.runtasklist = runtasklist;
+    }
+    
     public void init() {
     }
-    public void start() {
+	public void start() {
     }
     public void run(){
     	/**
     	 * 开启任务0
     	 * 停止任务1
     	 * 测试连接2
-    	 * 传文件3
-    	 * 接受文件4
+    	 * 开启 组内任务3
+    	 * 停止组内任务4
+    	 * 
     	 * 
     	 */
     	switch(opType){
-    	case 0: //执行命令
+    	case 0: //执行task命令
     		runSSH();break;
-    	case 1:
+    	case 1: //停止task命令
     		stopSSH();
     		break;
-    	case 2://测试连接
+    	case 2://测试计算机连接
 		    getOpenedConnectionT();
 			break;
+    	case 3 ://串行执行组内的所有任务
+    		runGroupSSH();
+    		break;
+    	case 4 ://停止组内串行执行的所有任务
+    		stopGroupSSH();
+    		break;
     	default: break;
     	}
     	
@@ -125,19 +163,17 @@ public class SSHOpCommand implements Runnable {
      * 运行ssh远程命令
      */
     private void runSSH() {
-    	String filename=((SSHTask)(LinuxClient.getCur())).getFout()+"/"+LinuxClient.getCur().getId()+".txt";
+    /*	String filename=((SSHTask)(LinuxClient.getCur())).getFout()+"/"+LinuxClient.getCur().getId()+".txt";
     	FileWriter write = null;
     	try
     	{
     	write=new FileWriter(filename,true);
     	}catch(IOException e)
     	{}
+    */	
     	
-    	System.out.println("flag1:"+flag);
-    	long startime = System.currentTimeMillis();
-    	System.out.print("starttime:"+startime);
     	flag = true;
-    	LinuxClient.GetObj().setTaskRunSucc(flag);
+    	LinuxClient.GetObj().setTaskRunSucc(Id,flag);
     	try{
         	Connection conn = getOpenedConnection();
     		Session sess = conn.openSession();
@@ -146,22 +182,23 @@ public class SSHOpCommand implements Runnable {
     		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(sess.getStdout()));        
     		while((out=bufferedReader.readLine())!=null) {
     			   out += "\n";
-    			   write.append(out);
+    			  // write.append(out);
     			   jTextArea1.append(out);   
     		}
     		sess.close();
     		conn.close();
-    		write.flush();
-    		write.close();
+    		
+    	//	write.flush();
+    	//	write.close();
         	}
         	catch(Exception ie) {
         		ie.printStackTrace();
         	}
         	LinuxClient tmpLinx = LinuxClient.GetObj();
-        	tmpLinx.setSelTaskStatus(0);         	
+        	tmpLinx.setSelTaskStatus(Id,0);         	
         	if(flag == true) {
         		flag = false;
-        		LinuxClient.GetObj().setTaskRunSucc(flag);      
+        		LinuxClient.GetObj().setTaskRunSucc(Id,flag);      
         	}
         	
     }
@@ -202,7 +239,7 @@ public class SSHOpCommand implements Runnable {
     	}    	
         
     	//kill正在执行的命令
-     if(pidlist.size() > 0) {
+    /* if(pidlist.size() > 0) {
         		try {
         			conn = getOpenedConnection();
      			    sess = conn.openSession();
@@ -216,13 +253,15 @@ public class SSHOpCommand implements Runnable {
         			et.printStackTrace();
         		}
         	}
+      */
+    	killPidProcess(pidlist);
      flag = false;
-     LinuxClient.GetObj().setTaskRunSucc(flag); 
+     LinuxClient.GetObj().setTaskRunSucc(Id,flag); 
      endtime = System.currentTimeMillis();
      System.out.println("ttime:"+endtime);
 	   	
 	}
- /*   private void killPidProcess(List<String> pidlist) {
+  private void killPidProcess(List<String> pidlist) {
         if(pidlist.size() > 0) {
     		try {
     			Connection conn = getOpenedConnection();
@@ -240,10 +279,109 @@ public class SSHOpCommand implements Runnable {
 	
     	
     }
-    */
-    
+   
+   
+ //-------------------------------------------------------------//
     /**
-     * 连接函数
+     * 串行开始组内的所有任务
+     */
+    public void runGroupSSH() {
+    	
+    	for(int i = 0; i < runtasklist.size(); ++i) {
+		    runtasklist.get(i).setStatus(1);   
+    	}
+    	try{
+        	Connection conn ;
+    		Session sess ;
+    		for(int i = 0; i < runtasklist.size(); ++i){  
+    			conn = getOpenedConnection();
+    			sess = conn.openSession();
+    			sess.execCommand(runtasklist.get(i).getCmd());
+    		    String out; 		    
+    		    flag = true;
+    		    runtasklist.get(i).setRunSucc(true);
+    		    LinuxClient.GetObj().setTaskRunSucc(runtasklist.get(i).getId(),flag);   		    
+    		    long stime = System.currentTimeMillis();
+    		    runtasklist.get(i).setRunTime(stime);
+    		    Date curtime = new Date();
+    		    //将任务开始时间写config.xml文件中
+    		    TaskUI tempUI = new TaskUI();
+    		    tempUI.EditTaskFromXML(runtasklist.get(i).getId(), runtasklist.get(i).getName(), runtasklist.get(i).getMemo(),
+    		    		runtasklist.get(i).getCmd(), runtasklist.get(i).getFin(),runtasklist.get(i).getFout(), curtime);
+
+    		    
+    	        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(sess.getStdout()));        
+    	    	while((out=bufferedReader.readLine())!=null) {
+    	    			   out += "\n";
+    	    			   jTextArea1.append(out);   
+    	    		}
+    	    	runtasklist.get(i).setStatus(0);
+    	      	if(flag == true) { 
+    	    		LinuxClient.GetObj().setTaskRunSucc(runtasklist.get(i).getId(),false);
+    	    		}    	      	
+    	      	boolean temp = LinuxClient.GetObj().getGpsrunSucc(runtasklist.get(i).getGp().getId());
+    	      	if(temp == true) {
+    	      		LinuxClient.GetObj().setGpsrunSucc(runtasklist.get(i).getGp().getId(),false);
+    	      		break;
+    	      	}
+    	    	sess.close();
+        		conn.close();
+    		}
+    			
+        	}
+        	catch(Exception ie) {
+        		ie.printStackTrace();
+        	}
+        //	LinuxClient.GetObj().setGpsStatus(runtasklist.get(0).getGp().getId(),false);
+    }
+//-----------------------------------------------------------------//
+    /**
+     * 
+     */
+    public void stopGroupSSH() {
+    	for(int i = 0; i < runtasklist.size(); ++i) {
+		    runtasklist.get(i).setStatus(0);   
+    	}
+    	for(int i = 0; i < runtasklist.size(); ++i) {   		
+    		if(runtasklist.get(i).getRunSucc() == true) { //如果组中的任务正在执行中
+    		String stopcmd = runtasklist.get(i).getCmd().substring(0,runtasklist.get(i).getCmd().indexOf(" "));
+    		System.out.println("stopcmd:"+ stopcmd);
+    		String sscmd = "ps U "+ Name +" | grep "+
+            stopcmd+" | awk '{print $1}'";
+    		
+        	List<String> pidlist;
+        	pidlist = new ArrayList();
+        	Connection conn ;
+    		Session sess ;
+    		String out;
+        	BufferedReader bufferedReader;
+        	
+        	//连接server获得执行命令的pid;
+        	try{
+    	    conn = getOpenedConnection();
+    	    sess = conn.openSession();
+    		sess.execCommand(sscmd);		
+            bufferedReader = new BufferedReader(new InputStreamReader(sess.getStdout()));    		
+    		while((out=bufferedReader.readLine())!=null) {
+    			pidlist.add(out);  
+    			System.out.println("pid"+out);
+    		}
+    		sess.close();
+    		conn.close();
+        	}
+        	catch(Exception et) {
+        		et.printStackTrace();
+        	}    	
+        	killPidProcess(pidlist);//结束pid等于pidlist内容的进程
+        	flag = false;
+        	LinuxClient.GetObj().setGpsrunSucc(runtasklist.get(i).getGp().getId(), true);
+        	LinuxClient.GetObj().setTaskRunSucc( runtasklist.get(i).getId(),false);
+    		}
+    	}
+    	
+    }
+    /**
+     * 连接函数1
      */
      public  Connection getOpenedConnection()  {
     	 Connection conn = new Connection(Host);
@@ -272,7 +410,7 @@ public class SSHOpCommand implements Runnable {
 }
 
 /**
- * 连接函数
+ * 连接函数2
  */
  public  Connection getOpenedConnectionT()  {
 	 Connection conn = new Connection(Host);
@@ -322,5 +460,8 @@ public class SSHOpCommand implements Runnable {
       */
      public boolean getRunStatus() {
     	 return flag;
+     }
+     public void setRunStatus(boolean f){
+    	 flag = f;
      }
 }
