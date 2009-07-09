@@ -167,10 +167,16 @@ public class SSHTask extends BaseClass implements BaseAction, BaseOperation {
 	String userName = selectComputer.getUsername();
 	String userPsw = selectComputer.getPassword();
 	int taskInfo = 0;//开启任务信息：0	
-	SSHOpCommand ry = new SSHOpCommand(computerHost, userName, userPsw, cmd,jTextArea1,taskInfo);
+	try{
+	SSHOpCommand ry = new SSHOpCommand(computerHost, userName, userPsw, cmd,id,jTextArea1,taskInfo);
 	Thread ty = new Thread(ry);
 	ty.start();
 	
+	//ty.join();
+	}
+	catch(Exception e) {
+		e.printStackTrace();
+	}
 	}
 
 	/* (non-Javadoc)
@@ -181,7 +187,7 @@ public class SSHTask extends BaseClass implements BaseAction, BaseOperation {
 		SSHComputer selectComputer = new SSHComputer();
 		selectComputer = gp.getCp();
 		int stopType = 1;
-		SSHOpCommand ry = new SSHOpCommand(selectComputer.getHost(), selectComputer.getUsername(),selectComputer.getPassword(),cmd,stopType);
+		SSHOpCommand ry = new SSHOpCommand(selectComputer.getHost(), selectComputer.getUsername(),selectComputer.getPassword(),cmd,id,stopType);
 		Thread ty = new Thread(ry);
 		ty.start();
    
