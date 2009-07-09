@@ -34,6 +34,8 @@ public class SSHGroup extends BaseClass implements BaseAction, BaseOperation {
 	
 	private List<SSHTask> sts;
 	private SSHComputer cp;
+	private boolean gprunstatus = false;
+	private boolean gprunsucc = false;
 	
 	public SSHGroup(String id, String name, byte type, String memo,
 			Date creatdate) {
@@ -59,15 +61,28 @@ public class SSHGroup extends BaseClass implements BaseAction, BaseOperation {
 	}
 	
 	
-	
-public SSHGroup(String id, String name, byte type, String memo,
+/**
+ * 生成函数	
+ * @param id
+ * @param name
+ * @param type
+ * @param memo
+ * @param creatdate
+ * @param sts
+ * @param cp
+ */
+     public SSHGroup(String id, String name, byte type, String memo,
 			Date creatdate, List<SSHTask> sts, SSHComputer cp) {
-		super(id, name, type, memo, creatdate);
-		this.sts = sts;
-		this.cp = cp;
-	}
+		    super(id, name, type, memo, creatdate);
+		    this.sts = sts;
+		    this.cp = cp;
+	  }
 
-public List<SSHTask> getSts() {
+/**
+ * 获得group中的任务列表
+ * @return
+ */
+    public List<SSHTask> getSts() {
 		return sts;
 	}
 
@@ -83,7 +98,7 @@ public List<SSHTask> getSts() {
 		this.cp = cp;
 	}
 
-	//����ķ�����Ҫʵ��
+	
 	/* (non-Javadoc)
 	 * @see cn.edu.jlu.ccst.sshclient.inter.BaseAction#start()
 	 */
@@ -192,6 +207,18 @@ public List<SSHTask> getSts() {
 		public boolean isdone() {
 			// TODO Auto-generated method stub
 			return false;
+		}
+		public void setGroupStatus(boolean st) {
+			gprunstatus = st;
+		}
+		public boolean getGroupStatus() {
+			return gprunstatus;
+		}
+		public void setGroupRunSucc(boolean gr) {
+			gprunsucc = gr;
+		}
+		public boolean getGroupRunSucc() {
+			return gprunsucc;
 		}
 
 }
