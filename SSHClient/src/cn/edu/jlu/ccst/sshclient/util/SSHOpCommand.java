@@ -286,13 +286,7 @@ public class SSHOpCommand implements Runnable {
      * 串行开始组内的所有任务
      */
     public void runGroupSSH() {
-    	String filename="./"+LinuxClient.getCur().getId()+".txt";
-    	FileWriter write = null;
-    	try
-    	{
-    	write=new FileWriter(filename,true);
-    	}catch(IOException e)
-    	{}
+    	
     	
     	for(int i = 0; i < runtasklist.size(); ++i) {
 		    runtasklist.get(i).setStatus(1);   
@@ -300,7 +294,14 @@ public class SSHOpCommand implements Runnable {
     	try{
         	Connection conn ;
     		Session sess ;
-    		for(int i = 0; i < runtasklist.size(); ++i){  
+    		for(int i = 0; i < runtasklist.size(); ++i){ 
+    			String filename=runtasklist.get(i).getFout()+"/"+runtasklist.get(i).getId()+".txt";
+    	    	FileWriter write = null;
+    	    	try
+    	    	{
+    	    	write=new FileWriter(filename,true);
+    	    	}catch(IOException e)
+    	    	{}
     			conn = getOpenedConnection();
     			sess = conn.openSession();
     			sess.execCommand(runtasklist.get(i).getCmd());
@@ -334,9 +335,10 @@ public class SSHOpCommand implements Runnable {
     	      	}
     	    	sess.close();
         		conn.close();
+        		write.flush();
+            	write.close();
     		}
-        	write.flush();
-        	write.close();
+        	
         	}
         	catch(Exception ie) {
         		ie.printStackTrace();
