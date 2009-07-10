@@ -227,9 +227,24 @@ public void GenerateTree() {
         delItemC.addActionListener(new rightclick());
         editItemC = new JMenuItem("修改此电脑");
         editItemC.addActionListener(new rightclick());
+        computerStartC = new JMenuItem("启动所有组任务");
+        computerStartC.addMouseListener(new java.awt.event.MouseAdapter() {
+        	public void mousePressed(java.awt.event.MouseEvent evt) {
+      		 computerStartAllGroupT(evt);
+      	}
+      });
+        computerStopC = new JMenuItem("停止所有组任务");
+        computerStopC.addMouseListener(new java.awt.event.MouseAdapter() {
+        	public void mousePressed(java.awt.event.MouseEvent evt) {
+    		 computerStopAllGroupT(evt);
+      	}
+      });
         popMenuC.add(addItemC);
         popMenuC.add(delItemC);
-        popMenuC.add(editItemC);        
+        popMenuC.add(editItemC);
+        popMenuC.add(computerStartC);
+        popMenuC.add(computerStopC);
+        
         popMenuG = new JPopupMenu();
         addItemG = new JMenuItem("添加一新任务");
         addItemG.addActionListener(new rightclick());
@@ -952,6 +967,153 @@ public boolean getGpsrunSucc(String Id) {
 	}
 	return false;
 }
+
+
+//------------------------------------计算机的任务操作-------------------------//
+
+/**
+ * 
+ */
+  private void computerStartAllGroupT (MouseEvent evt) {
+	  if(computerStartC.isEnabled()) {
+		  //找到选中的计算机
+		  SSHComputer selectComputer = new SSHComputer();		  
+		  for(int i = 0; i < cps.size() ; i++) {
+			  if(cur.getId().equals(cps.get(i).getId())) {
+				  selectComputer = cps.get(i);
+				  break;
+			  }
+		  }
+		  String computerHost = selectComputer.getHost();
+		  String userName = selectComputer.getUsername();
+		  String userPsw = selectComputer.getPassword();
+		  
+		  //新建TAb
+		  ///新建TAb
+		    boolean flag=false;
+			t1 = null;
+			JScrollPane t2=null;
+			for(int j=0;j<jtl.size();j++)
+			{
+				if(jtl.get(j).getName().equals(selectComputer.getId()))
+				{
+					flag=true;
+					t1=jtl.get(j);
+				}
+			}
+			if(!flag)
+			{
+			t1=new JTextArea(selectComputer.getId());
+			t1.setName(selectComputer.getId());
+			jtl.add(t1);
+			t2=new JScrollPane();
+			t2.setName(selectComputer.getId());
+			jsl.add(t2);
+			t2.add(t1);
+			t1.setColumns(20);
+			t1.setRows(5);
+			t1.setEditable(false);
+			t2.setViewportView(t1);
+			jTabbedPane1.addTab(selectComputer.getName(), t2);
+			
+			t1.addMouseListener(new MouseAdapter()
+			{ 
+				public void mouseReleased(MouseEvent e)
+		        {
+		           //是否右键单击
+		          if (e.getClickCount() == 1 && SwingUtilities.isRightMouseButton(e))
+		          {
+		        	  JTextArea temp=(JTextArea)e.getComponent();
+		        	  if(temp.getSelectedText()==null)
+		        	  {
+		        		  copyTA.setEnabled(false);
+		        	  }
+		        	  else
+		        	  {
+		        		  copyTA.setEnabled(true);
+		        	  }
+		        	  if(old!=null)
+		        	  {
+		        		  copyTA.removeActionListener(old);
+		        		  shutTA.removeActionListener(old);
+		        		  clearTA.removeActionListener(old);
+		        	  }
+		        	  old=new TARight(temp);
+		        	  copyTA.addActionListener(old);
+		        	  shutTA.addActionListener(old);
+		        	  clearTA.addActionListener(old);
+		        	  popMenuTA.show(temp,e.getX(),e.getY());
+		          }
+				}
+			}
+			);
+			}
+		  
+		  
+		  //找到计算机中的所有组
+		  List<SSHTask> liTask;
+		  liTask = new ArrayList();
+		  for(int i = 0; i < selectComputer.getGps().size(); i++) {
+			  SSHGroup temp = selectComputer.getGps().get(i);
+			  for(int j = 0; j < temp.getSts().size(); j++) {
+				  liTask.add(temp.getSts().get(j));
+			  }
+		  }
+		  
+		  int taskInfo = 3;//开启任务信息：0	
+		  try{
+			SSHOpCommand ry = new SSHOpCommand(computerHost, userName, userPsw, liTask,t1,taskInfo);
+			Thread ty = new Thread(ry);
+			ty.start();
+			}
+			catch(Exception e) {
+				e.printStackTrace();
+			}	
+		  
+	  }
+  }
+  
+  //------------------------------------------//
+  /**
+   * 停止计算机的所有组的任务
+   */
+  private void computerStopAllGroupT(MouseEvent evt) {
+	  if(computerStopC.isEnabled()) {
+		  //找到选中的计算机
+		  SSHComputer selectComputer = new SSHComputer();		  
+		  for(int i = 0; i < cps.size() ; i++) {
+			  if(cur.getId().equals(cps.get(i).getId())) {
+				  selectComputer = cps.get(i);
+				  break;
+			  }
+		  }
+		  String computerHost = selectComputer.getHost();
+		  String userName = selectComputer.getUsername();
+		  String userPsw = selectComputer.getPassword();	  
+		  
+		  //找到计算机中的所有组
+		  List<SSHTask> liTask;
+		  liTask = new ArrayList();
+		  for(int i = 0; i < selectComputer.getGps().size(); i++) {
+			  SSHGroup temp = selectComputer.getGps().get(i);
+			  for(int j = 0; j < temp.getSts().size(); j++) {
+				  liTask.add(temp.getSts().get(j));
+			  }
+		  }
+		  int taskInfo = 4;//开启任务信息：0	
+			try{
+			SSHOpCommand ry = new SSHOpCommand(computerHost, userName, userPsw, liTask,taskInfo);
+			Thread ty = new Thread(ry);
+			ty.start();
+			}
+			catch(Exception e) {
+				e.printStackTrace();
+			}	
+
+	  }
+  }
+  
+  
 //-----------------------------------------------------------------------//
 //鼠标点击处理类
   private class thismouse extends  MouseAdapter
@@ -1802,6 +1964,8 @@ public boolean getGpsrunSucc(String Id) {
     private JMenuItem groupStopG;
     private JMenuItem allStartG;
     private JMenuItem allStopG;
+    private JMenuItem computerStartC;
+    private JMenuItem computerStopC;
     
     private JPopupMenu popMenuT;
     private JMenuItem delItemT;
