@@ -164,7 +164,7 @@ public class SSHOpCommand implements Runnable {
      * 运行ssh远程命令
      */
     private void runSSH() {
-  	String filename=Finout+"/"+LinuxClient.getCur().getId()+".txt";
+  	String filename=Finout+"/"+Id+".txt";
     	FileWriter write = null;
     	try
     	{
@@ -184,14 +184,14 @@ public class SSHOpCommand implements Runnable {
     		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(sess.getStdout()));        
     		while((out=bufferedReader.readLine())!=null) {
     			   out += "\n";
-    		//	   write.append(out);
+    			   write.append(out);
     			   jTextArea1.append(out);   
     		}
     		sess.close();
     		conn.close();
     		
-    	//	write.flush();
-    	//	write.close();
+    		write.flush();
+    		write.close();
         	}
         	catch(Exception ie) {
         		ie.printStackTrace();
@@ -335,6 +335,7 @@ public class SSHOpCommand implements Runnable {
     	      		LinuxClient.GetObj().setGpsrunSucc(runtasklist.get(i).getGp().getId(),false);
     	      		break;
     	      	}
+    	      	
     	    	sess.close();
         		conn.close();
         		write.flush();
@@ -345,7 +346,7 @@ public class SSHOpCommand implements Runnable {
         	catch(Exception ie) {
         		ie.printStackTrace();
         	}
-        //	LinuxClient.GetObj().setGpsStatus(runtasklist.get(0).getGp().getId(),false);
+        	LinuxClient.GetObj().setGpsStatus(runtasklist.get(0).getGp().getId(),false);
     }
 //-----------------------------------------------------------------//
     /**
