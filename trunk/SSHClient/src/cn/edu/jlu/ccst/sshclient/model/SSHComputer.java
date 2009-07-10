@@ -27,6 +27,7 @@ public class SSHComputer extends BaseClass implements BaseOperation{
 	private String password;
 	private String host;
 	private List<SSHGroup> gps;
+	private boolean runstatus = false;
 		
 	public SSHComputer() {
 		super();
@@ -144,6 +145,11 @@ public class SSHComputer extends BaseClass implements BaseOperation{
                      +";date:"+creatdate;
              */
         }
-	
+	public boolean getRunStatusC() {
+		return runstatus;
+	}
+	public void setRunStatusC(boolean t) {
+		runstatus = t;
+	}
 	
 }
