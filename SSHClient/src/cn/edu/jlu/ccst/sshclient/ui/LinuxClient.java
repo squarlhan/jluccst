@@ -970,9 +970,36 @@ public boolean getGpsrunSucc(String Id) {
 
 
 //------------------------------------计算机的任务操作-------------------------//
-
 /**
- * 
+ * 找到选中的计算机
+ */
+public SSHComputer findselectComputer(String id) {
+	for(int i = 0; i < cps.size(); i++) {
+		if(id.equals(cps.get(i).getId())) {
+			return cps.get(i);
+		}
+	}
+	return null;
+}
+//设置计算机运行的状态
+public void setRunStatusC(String id,boolean t) {
+	for(int i = 0; i < cps.size(); i++) {
+		if(id.equals(cps.get(i).getId())){
+			cps.get(i).setRunStatusC(t);
+		}
+	}
+}
+//获得计算机运行的状态
+public boolean getRunStatusC(String id) {
+	for(int i = 0; i < cps.size(); i++) {
+		if(id.equals(cps.get(i).getId())) {
+			return cps.get(i).getRunStatusC();
+		}
+	}
+	return false;
+}
+/**
+ *串行启动计算机内的所有任务
  */
   private void computerStartAllGroupT (MouseEvent evt) {
 	  if(computerStartC.isEnabled()) {
@@ -984,6 +1011,7 @@ public boolean getGpsrunSucc(String Id) {
 				  break;
 			  }
 		  }
+		  setRunStatusC(selectComputer.getId(), true);
 		  String computerHost = selectComputer.getHost();
 		  String userName = selectComputer.getUsername();
 		  String userPsw = selectComputer.getPassword();
@@ -1087,6 +1115,7 @@ public boolean getGpsrunSucc(String Id) {
 				  break;
 			  }
 		  }
+		  setRunStatusC(selectComputer.getId(), false);
 		  String computerHost = selectComputer.getHost();
 		  String userName = selectComputer.getUsername();
 		  String userPsw = selectComputer.getPassword();	  
@@ -1413,6 +1442,14 @@ public boolean getGpsrunSucc(String Id) {
                         case 0:
                         {
                       	  popMenuC.show(jTree1, e.getX(), e.getY());
+                      	  if(getRunStatusC(cur.getId()) == false) {
+                      		 computerStartC.setEnabled(true);
+                      		 computerStopC.setEnabled(false);
+                      	  }
+                      	  else {
+                      		 computerStartC.setEnabled(false);
+                     		 computerStopC.setEnabled(true);
+                      	  }
                       	  break;
                         }
                         case 1:
