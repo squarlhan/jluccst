@@ -358,6 +358,7 @@ public class SSHOpCommand implements Runnable {
         		ie.printStackTrace();
         	}
         	LinuxClient.GetObj().setGpsStatus(runtasklist.get(0).getGp().getId(),false);
+        	LinuxClient.GetObj().setRunStatusC(runtasklist.get(0).getGp().getCp().getId(), false);
         	LinuxClient.GetObj().setSinglerun(1);
     }
 //-----------------------------------------------------------------//
