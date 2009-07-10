@@ -755,7 +755,7 @@ private void jMenuMousePressAllStartG(MouseEvent evt) {
 		JScrollPane t2=null;
 		for(int j=0;j<jtl.size();j++)
 		{
-			if(jtl.get(j).getName().equals(cur.getId()))
+			if(jtl.get(j).getName().equals(rstk.getId()))
 			{
 				flag=true;
 				t1=jtl.get(j);
