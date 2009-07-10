@@ -60,6 +60,7 @@ public class SSHOpCommand implements Runnable {
 		Psw = psw;
 		opType = conInfo;
 		conl=l;
+		runtasklist = null;
 	}
     /**
      * 停止命令用这个构造方法
@@ -79,6 +80,7 @@ public class SSHOpCommand implements Runnable {
 		Cmd = cmd;
 		Id = id;
 		this.opType = stopType;
+		runtasklist = null ;
 	}
 	/**
      * 运行单个任务命令用这个构造方法
@@ -99,6 +101,7 @@ public class SSHOpCommand implements Runnable {
 		Finout = finout;
 		jTextArea1 = jText;
 		opType = taskInfo;
+		runtasklist = null;
 	}
    /**
     * 串行运行组内的所有任务用这个构造方法
@@ -201,6 +204,14 @@ public class SSHOpCommand implements Runnable {
         	if(flag == true) {
         		flag = false;
         		LinuxClient.GetObj().setTaskRunSucc(Id,flag);      
+        	}
+        	
+        	//判断并行结束
+        	if(runtasklist == null){
+        		System.out.println("并行jieshu");
+        		if(LinuxClient.GetObj().getAllRunSucc(Id) == false) {
+            		LinuxClient.GetObj().setSinglerun(1);
+            	}
         	}
         	
     }
@@ -347,6 +358,7 @@ public class SSHOpCommand implements Runnable {
         		ie.printStackTrace();
         	}
         	LinuxClient.GetObj().setGpsStatus(runtasklist.get(0).getGp().getId(),false);
+        	LinuxClient.GetObj().setSinglerun(1);
     }
 //-----------------------------------------------------------------//
     /**
