@@ -607,9 +607,69 @@ private void jMenuMousePressGroupStart(MouseEvent evt) {
 	String userPsw = selectComputer.getPassword();
 	sgp.setGroupStatus(true);
 	
+	 ///新建TAb
+    boolean flag=false;
+	t1 = null;
+	JScrollPane t2=null;
+	for(int j=0;j<jtl.size();j++)
+	{
+		if(jtl.get(j).getName().equals(cur.getId()))
+		{
+			flag=true;
+			t1=jtl.get(j);
+		}
+	}
+	if(!flag)
+	{
+	t1=new JTextArea(sgp.getId());
+	t1.setName(sgp.getId());
+	jtl.add(t1);
+	t2=new JScrollPane();
+	t2.setName(sgp.getId());
+	jsl.add(t2);
+	t2.add(t1);
+	t1.setColumns(20);
+	t1.setRows(5);
+	t1.setEditable(false);
+	t2.setViewportView(t1);
+	jTabbedPane1.addTab(sgp.getName(), t2);
+	
+	t1.addMouseListener(new MouseAdapter()
+	{ 
+		public void mouseReleased(MouseEvent e)
+        {
+           //是否右键单击
+          if (e.getClickCount() == 1 && SwingUtilities.isRightMouseButton(e))
+          {
+        	  JTextArea temp=(JTextArea)e.getComponent();
+        	  if(temp.getSelectedText()==null)
+        	  {
+        		  copyTA.setEnabled(false);
+        	  }
+        	  else
+        	  {
+        		  copyTA.setEnabled(true);
+        	  }
+        	  if(old!=null)
+        	  {
+        		  copyTA.removeActionListener(old);
+        		  shutTA.removeActionListener(old);
+        		  clearTA.removeActionListener(old);
+        	  }
+        	  old=new TARight(temp);
+        	  copyTA.addActionListener(old);
+        	  shutTA.addActionListener(old);
+        	  clearTA.addActionListener(old);
+        	  popMenuTA.show(temp,e.getX(),e.getY());
+          }
+		}
+	}
+	);
+	}
+	
 	int taskInfo = 3;//开启任务信息：0	
 		try{
-		SSHOpCommand ry = new SSHOpCommand(computerHost, userName, userPsw, sgp.getSts(),jTextArea2,taskInfo);
+		SSHOpCommand ry = new SSHOpCommand(computerHost, userName, userPsw, sgp.getSts(),t1,taskInfo);
 		Thread ty = new Thread(ry);
 		ty.start();
 		}
