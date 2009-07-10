@@ -951,6 +951,7 @@ public boolean getGpsrunSucc(String Id) {
           					if(tks.get(i).getStatus()==1)
           					{
           						return;
+          						
           					}
           			  }
           		  	}
