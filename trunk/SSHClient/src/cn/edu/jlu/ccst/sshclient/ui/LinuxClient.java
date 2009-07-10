@@ -166,6 +166,32 @@ public class LinuxClient extends javax.swing.JFrame {
         }
         GenerateTree();
     }
+ //--------------------------------------------------------------------------//
+ public void expandAll(JTree tree, boolean expand) {
+     TreeNode root = (TreeNode)tree.getModel().getRoot();
+ 
+     // Traverse tree from root
+     expandAll(tree, new TreePath(root), expand);
+ }
+ private void expandAll(JTree tree, TreePath parent, boolean expand) {
+     // Traverse children
+     TreeNode node = (TreeNode)parent.getLastPathComponent();
+     if (node.getChildCount() >= 0) {
+         for (Enumeration e=node.children(); e.hasMoreElements(); ) {
+             TreeNode n = (TreeNode)e.nextElement();
+             TreePath path = parent.pathByAddingChild(n);
+             expandAll(tree, path, expand);
+         }
+     }
+ 
+     // Expansion or collapse must be done bottom-up
+     if (expand) {
+         tree.expandPath(parent);
+     } else {
+         tree.collapsePath(parent);
+     }
+ }
+//------------------------------------------------------------------------//
 /*构建生成的Computer树*/
 public void GenerateTree() {
        //下面开始构建树
@@ -191,6 +217,9 @@ public void GenerateTree() {
         jTree1.setCellRenderer(new MyTreeCellRender());
         jTree1.addMouseListener(new thismouse());
         jScrollPane1.setViewportView(jTree1);
+        expandAll(jTree1, true);
+        
+        
         popMenuC = new JPopupMenu();
         addItemC = new JMenuItem("添加任务组");
         addItemC.addActionListener(new rightclick());
