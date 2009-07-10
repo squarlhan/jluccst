@@ -609,8 +609,9 @@ private void stopTaskCommand( ActionEvent e ) throws DocumentException  {
  * 串行启动组内的所有任务
  */
 private void jMenuMousePressGroupStart(MouseEvent evt) {
-	if( jMenuItem12.isEnabled() ) {
+	if( jMenuItem12.isEnabled() || groupStartG.isEnabled()) {
 	jTextArea2.setText("");
+	singlerun = 2;
 	SSHGroup sgp = new SSHGroup();
 	sgp = findSelectGroup();//找到当前选中的组
 	setGpsStatus(sgp.getId(),true);
@@ -698,7 +699,7 @@ private void jMenuMousePressGroupStart(MouseEvent evt) {
  * 停止组内的所有串行任务
  */
 private void jMenuMousePressGroupStop(MouseEvent evt) {
-    
+    if(jMenuItem11.isEnabled() || groupStopG.isEnabled()) {
 	SSHGroup sgp = new SSHGroup();
 	sgp = findSelectGroup();//找到当前选中的组
 	SSHComputer selectComputer = new SSHComputer();
@@ -716,6 +717,7 @@ private void jMenuMousePressGroupStop(MouseEvent evt) {
 		catch(Exception e) {
 			e.printStackTrace();
 		}	
+    }
 }
 
 //----------------------------------------------------------------------//
@@ -723,6 +725,7 @@ private void jMenuMousePressGroupStop(MouseEvent evt) {
  * 同时启动组内的所有任务
  */
 private void jMenuMousePressAllStartG(MouseEvent evt) {
+	if(jMenuItem13.isEnabled() || allStartG.isEnabled()) {	
 	SSHGroup sgp = new SSHGroup();
 	sgp = findSelectGroup();//找到当前选中的组
 	SSHComputer selectComputer = new SSHComputer();
@@ -730,6 +733,7 @@ private void jMenuMousePressAllStartG(MouseEvent evt) {
 	String computerHost = selectComputer.getHost();
 	String userName = selectComputer.getUsername();
 	String userPsw = selectComputer.getPassword();
+	singlerun = 3;
 	
 	SSHTask rstk = new SSHTask();
 	int taskInfo = 0;
@@ -813,9 +817,10 @@ private void jMenuMousePressAllStartG(MouseEvent evt) {
 	    rstk.start(t1);
 	    System.out.println("ddover!");
 	}
+	}
 	
 }
-private boolean getAllRunStatus(String Id) {
+public boolean getAllRunStatus(String Id) {
 	int i,j;
 	for( i = 0; i < gps.size(); i++) {
 		if(Id.equals(gps.get(i).getId())) 
@@ -831,15 +836,33 @@ private boolean getAllRunStatus(String Id) {
 	}
 	return res;
 }
+
+public boolean getAllRunSucc(String Id) {
+	int i,j;
+	for( i = 0; i < tks.size(); i++) {
+		if(Id.equals(tks.get(i).getId())) 
+			break;
+	}
+	SSHGroup sgp = tks.get(i).getGp();
+	boolean res = false;
+	for(j = 0; j < sgp.getSts().size(); ++ j) {
+		boolean t = getTaskRunSucc(sgp.getSts().get(j).getId());
+		if(t == true) break ;
+	}
+	if(j < sgp.getSts().size() ){
+		res = true; 
+	}
+	return res;
+}
 //---------------------------------------------------------------------//
 /**
  * 停止同时执行的所有任务
  */
 private void jMenuMousePressAllStopG(MouseEvent evt) {
+	if(jMenuItem16.isEnabled() || allStopG.isEnabled()) {
 	SSHGroup sgp = new SSHGroup();
 	sgp = findSelectGroup();//找到当前选中的组
 	SSHTask tsk = new SSHTask();
-	
 	for(int i = 0; i < sgp.getSts().size(); ++i) {
 		tsk = sgp.getSts().get(i);
 		setSelTaskStatus(tsk.getId(),0);
@@ -848,7 +871,8 @@ private void jMenuMousePressAllStopG(MouseEvent evt) {
 		}
 		
 	}
-	
+	singlerun = 1 ;
+	}
 }
 //----------------------------------------------------------------------//
 /**
@@ -1037,25 +1061,26 @@ public boolean getGpsrunSucc(String Id) {
                      jMenuItem9.setEnabled(false);
                      jMenuItem10.setEnabled(false);
  /***?*/             SSHGroup sgp = findSelectGroup();
-                     if(getGpsStatus(sgp.getId()) == false) {
-                     jMenuItem11.setEnabled(false);
-                     jMenuItem12.setEnabled(true);
+                     if(singlerun == 1){
+                      jMenuItem11.setEnabled(false);
+                      jMenuItem12.setEnabled(true);
+                      jMenuItem13.setEnabled(true);
+                      jMenuItem16.setEnabled(false);
                      }
-                     else {
-                     jMenuItem11.setEnabled(true);
-                     jMenuItem12.setEnabled(false);
+                     else if(singlerun == 2) {
+                       jMenuItem11.setEnabled(true);
+                       jMenuItem12.setEnabled(false);
+                       jMenuItem13.setEnabled(false);
+                       jMenuItem16.setEnabled(false);
                      }
-                     
+                     else if(singlerun == 3) {
+                        jMenuItem11.setEnabled(false);
+                        jMenuItem12.setEnabled(false);
+                        jMenuItem13.setEnabled(false);
+                        jMenuItem16.setEnabled(true); 
+                     }                     
                      jMenuItem14.setEnabled(false);
                      jMenuItem15.setEnabled(false);
-                     if(getAllRunStatus(sgp.getId()) == false) {
-                     jMenuItem13.setEnabled(true);
-                     jMenuItem16.setEnabled(false);
-                     }
-                     else {
-                     jMenuItem13.setEnabled(false);
-                     jMenuItem16.setEnabled(true);
-                     }
                   }
                   else if(cur.getType() == 2){
                   	jMenuItem4.setEnabled(false);
@@ -1204,22 +1229,25 @@ public boolean getGpsrunSucc(String Id) {
                       	  popMenuG.show(jTree1, e.getX(), e.getY());
                       	  SSHGroup sgp = new SSHGroup();
                       	  sgp = findSelectGroup();
-/**/                      	  if(getGpsStatus(sgp.getId()) == false) {
+                      	  if(singlerun == 1) {
                       		groupStartG.setEnabled(true);
                       		groupStopG.setEnabled(false);
+                      		allStartG.setEnabled(true);
+                     		allStopG.setEnabled(false);
                       	  }
-                      	  else {
+                      	  else if(singlerun == 2) {
                       		groupStartG.setEnabled(false);
                       		groupStopG.setEnabled(true);
+                      		allStartG.setEnabled(false);
+                     		allStopG.setEnabled(false);
                       	  }
-                      	  if( getAllRunStatus(sgp.getId()) == false) {
-                      		  allStartG.setEnabled(true);
-                      		  allStopG.setEnabled(false);
-                      	  } else {
-                      		  allStartG.setEnabled(false);
-                     		  allStopG.setEnabled(true);
+                      	  else if(singlerun == 3) {
+                      		groupStartG.setEnabled(false);
+                      		groupStopG.setEnabled(false);
+                      		allStartG.setEnabled(false);
+                     		allStopG.setEnabled(true);
+
                       	  }
-                      	
                       	  break;
                         }
                         case 2:
@@ -1687,7 +1715,9 @@ public boolean getGpsrunSucc(String Id) {
     {
     	return cur;
     }
-  
+    public void setSinglerun(int t) {
+    	singlerun = t;
+    }
 
     //---------------------------------------------------------------//
     
@@ -1759,6 +1789,7 @@ public boolean getGpsrunSucc(String Id) {
     Clipboard clipboard=null; 
     private TARight old=null;
     
+    private int singlerun = 1;
     private JPopupMenu popMenuCA;
     private JMenuItem delItemCA;
     private JMenuItem addItemCA;
