@@ -288,7 +288,7 @@ public class TaskUI extends javax.swing.JDialog {
          JOptionPane.showMessageDialog(null, "修改任务成功！");
 	 }
 	 //--------------------------------------------//
-	//根据id修改某个任务组
+	//根据id修改某个任务组,修改任务的开始执行时间
 	 public void EditTaskFromXML(String id,String n,String memo,String cmd,String in,String out,Date starttime)
 	 {		
 	     SAXReader reader = new SAXReader();
@@ -306,10 +306,12 @@ public class TaskUI extends javax.swing.JDialog {
 	 	{
 	 		Element el=(Element)iter.next();
 	 		Iterator it=el.elementIterator("group");
+	 		 boolean flg1 = true;
 	 		 while(it.hasNext())
 	          {
 	              Element elta=(Element)it.next();
 	              Iterator itta=elta.elementIterator("task");
+	              boolean flag = true;
 	              while(itta.hasNext())
 	              {
 	              Element et=(Element)itta.next();
@@ -326,11 +328,18 @@ public class TaskUI extends javax.swing.JDialog {
 	             	 else
 	             	 et.addAttribute("starttime",timeFormat.format(starttime));
 	             	 et.addAttribute("memo", memo);
+	             	 flag = false;
+	             	 break;
 	              }
 	              }
-
+	              if(flag == false){ 
+	            	  flg1 = false;
+	            	  break;
+	            	  }
 	          }
+	 		 if(flg1 == false) break;
 	 	}
+
 	 	System.out.println("写入xml:"+ starttime);
 	     writer = new XMLWriter(new FileWriter(filePath), format);
 	     writer.write(doc);
@@ -343,6 +352,9 @@ public class TaskUI extends javax.swing.JDialog {
 	 }
 	 
 	 //-----------------------------------------------------------//
+	 /*
+	  *从config.xml中获得任务开始的时间，未执行返回null
+	  */
 	 public Date getTaskStartTime(SSHTask runtask) {
 		 Date startime1;
 		 SAXReader reader = new SAXReader();
@@ -382,6 +394,62 @@ public class TaskUI extends javax.swing.JDialog {
 	     }
 		 		 
 		 return null;
+	 }
+	 
+	//-----------------------------------------------------//
+	 /**
+	  * 修改任务执行状态
+	  */
+	 public void EditTaskRunSuccXML(String id,boolean runsucc)
+	 {		
+	     SAXReader reader = new SAXReader();
+	     try{
+	     String filePath = this.getClass().getResource("/").getPath() + "cn/edu/jlu/ccst/sshclient/util/Config.xml";
+	     Document doc = reader.read(filePath);
+	     OutputFormat format = OutputFormat.createPrettyPrint();
+	     Element root = doc.getRootElement();
+	     XMLWriter writer = null;// 声明写XML的对象
+	     List   list=doc.selectNodes("/config/computer");
+	 	 Iterator iter = list.iterator();
+	 	while(iter.hasNext())
+	 	{
+	 		boolean flg1 = true;
+	 		Element el=(Element)iter.next();
+	 		Iterator it=el.elementIterator("group");
+	 		 while(it.hasNext())
+	          {
+	 			 boolean flag1 = true;
+	              Element elta=(Element)it.next();
+	              Iterator itta=elta.elementIterator("task");
+	              while(itta.hasNext())
+	              {
+	              Element et=(Element)itta.next();
+	              String s=et.attributeValue("id");
+	              if(s.equals(id))
+	              {
+	             	 String temps;
+	             	 if(runsucc == true) temps = "1";
+	             	 else temps = "0";
+	             	 et.addAttribute("runsc",temps);
+	             	 flag1 = false;
+	             	 break;
+	              }	              
+	              }
+	              if(flag1 == false) {
+	            	  flg1 = false;
+	            	  break;
+	              }
+	          }
+	          if(flg1 == false)break;
+	 	}
+	     writer = new XMLWriter(new FileWriter(filePath), format);
+	     writer.write(doc);
+	     writer.close();
+	     
+	     }
+	     catch(Exception e ){
+	         e.printStackTrace();
+	     }
 	 }
 	 
 	 //--------------------------------------------------//
