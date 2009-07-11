@@ -178,6 +178,8 @@ public class SSHOpCommand implements Runnable {
     	
     	flag = true;
     	LinuxClient.GetObj().setTaskRunSucc(Id,flag);
+    	TaskUI temp = new TaskUI();
+    	temp.EditTaskRunSuccXML(Id,flag);//向config.xml中写入任务运行状态
     	try{
         	Connection conn = getOpenedConnection();
     		Session sess = conn.openSession();
@@ -204,6 +206,7 @@ public class SSHOpCommand implements Runnable {
         	if(flag == true) {
         		flag = false;
         		LinuxClient.GetObj().setTaskRunSucc(Id,flag);      
+            	temp.EditTaskRunSuccXML(Id,flag);//向config.xml中写入任务运行状态
         	}
         	
         	//判断并行结束
@@ -270,6 +273,8 @@ public class SSHOpCommand implements Runnable {
     	killPidProcess(pidlist);
      flag = false;
      LinuxClient.GetObj().setTaskRunSucc(Id,flag); 
+   	 TaskUI temp = new TaskUI();
+	 temp.EditTaskRunSuccXML(Id,flag);//向config.xml中写入任务运行状态
      endtime = System.currentTimeMillis();
      System.out.println("ttime:"+endtime);
 	   	
@@ -298,10 +303,8 @@ public class SSHOpCommand implements Runnable {
     /**
      * 串行开始组内的所有任务
      */
-    public void runGroupSSH() {
-    	
-    	
-    	for(int i = 0; i < runtasklist.size(); ++i) {
+    public void runGroupSSH() {    	
+       	for(int i = 0; i < runtasklist.size(); ++i) {
 		    runtasklist.get(i).setStatus(1);   
     	}
     	try{
@@ -321,15 +324,16 @@ public class SSHOpCommand implements Runnable {
     		    String out; 		    
     		    flag = true;
     		    runtasklist.get(i).setRunSucc(true);
-    		    LinuxClient.GetObj().setTaskRunSucc(runtasklist.get(i).getId(),flag);   		    
+    		    LinuxClient.GetObj().setTaskRunSucc(runtasklist.get(i).getId(),flag);
+    		    TaskUI tempUI = new TaskUI();
+    		    //向config.xml中写入任务运行信息
+                tempUI.EditTaskRunSuccXML(runtasklist.get(i).getId(), flag);
     		    long stime = System.currentTimeMillis();
     		    runtasklist.get(i).setRunTime(stime);
     		    Date curtime = new Date();
     		    //将任务开始时间写config.xml文件中
-    		    TaskUI tempUI = new TaskUI();
     		    tempUI.EditTaskFromXML(runtasklist.get(i).getId(), runtasklist.get(i).getName(), runtasklist.get(i).getMemo(),
     		    		runtasklist.get(i).getCmd(), runtasklist.get(i).getFin(),runtasklist.get(i).getFout(), curtime);
-
     		    
     	        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(sess.getStdout()));        
     	    	while((out=bufferedReader.readLine())!=null) {
@@ -340,6 +344,7 @@ public class SSHOpCommand implements Runnable {
     	    	runtasklist.get(i).setStatus(0);
     	      	if(flag == true) { 
     	    		LinuxClient.GetObj().setTaskRunSucc(runtasklist.get(i).getId(),false);
+    	    		tempUI.EditTaskRunSuccXML(runtasklist.get(i).getId(), false);
     	    		}    	      	
     	      	boolean temp = LinuxClient.GetObj().getGpsrunSucc(runtasklist.get(i).getGp().getId());
     	      	if(temp == true) {
@@ -403,6 +408,9 @@ public class SSHOpCommand implements Runnable {
         	flag = false;
         	LinuxClient.GetObj().setGpsrunSucc(runtasklist.get(i).getGp().getId(), true);
         	LinuxClient.GetObj().setTaskRunSucc( runtasklist.get(i).getId(),false);
+            //将任务运行信息写入config.xml文件中
+        	TaskUI tempT = new TaskUI();
+        	tempT.EditTaskRunSuccXML(runtasklist.get(i).getId(), false);
     		}
     	}
     	
