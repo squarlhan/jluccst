@@ -224,7 +224,11 @@ public void GenerateTree() {
         jTree1.setCellRenderer(new MyTreeCellRender());
         jTree1.addMouseListener(new thismouse());
         jScrollPane1.setViewportView(jTree1);
-        expandAll(jTree1, true);        
+
+
+        expandAll(jTree1, true);
+       
+
 }
 
 /**
@@ -488,8 +492,9 @@ private void execTaskCommand ( ActionEvent e ) throws DocumentException {
 	}
 	);
 	
-	} 
-    
+	}
+	
+  
 
 	if(execItemT.isEnabled()||jMenuItem14.isEnabled()) {
 
@@ -515,6 +520,7 @@ private void execTaskCommand ( ActionEvent e ) throws DocumentException {
     TaskUI tempUI = new TaskUI();
     tempUI.EditTaskFromXML(selectTask.getId(), selectTask.getName(), selectTask.getMemo(),
           selectTask.getCmd(), selectTask.getFin(), selectTask.getFout(), curtime);
+    
     selectTask.start(t1);
     //System.out.println("ddover!");
 	}
@@ -1486,6 +1492,121 @@ public boolean getRunStatusC(String id) {
         popMenuTA.add(shutTA);
         popMenuTA.add(clearTA);
         
+        //---------------------------------------------------//
+        popMenuC = new JPopupMenu();
+        addItemC = new JMenuItem("添加任务组");
+        addItemC.addActionListener(new rightclick());
+        delItemC = new JMenuItem("删除此电脑");
+        delItemC.addActionListener(new rightclick());
+        editItemC = new JMenuItem("修改此电脑");
+        editItemC.addActionListener(new rightclick());
+        computerStartC = new JMenuItem("启动所有组任务");
+        computerStartC.addMouseListener(new java.awt.event.MouseAdapter() {
+        	public void mousePressed(java.awt.event.MouseEvent evt) {
+      		 computerStartAllGroupT(evt);
+      	}
+      });
+        computerStopC = new JMenuItem("停止所有组任务");
+        computerStopC.addMouseListener(new java.awt.event.MouseAdapter() {
+        	public void mousePressed(java.awt.event.MouseEvent evt) {
+    		 computerStopAllGroupT(evt);
+      	}
+      });
+        popMenuC.add(addItemC);
+        popMenuC.add(delItemC);
+        popMenuC.add(editItemC);
+        popMenuC.add(computerStartC);
+        popMenuC.add(computerStopC);
+        
+        popMenuG = new JPopupMenu();
+        addItemG = new JMenuItem("添加一新任务");
+        addItemG.addActionListener(new rightclick());
+        delItemG = new JMenuItem("删除此任务组");
+        delItemG.addActionListener(new rightclick());
+        editItemG = new JMenuItem("修改此任务组");
+        editItemG.addActionListener(new rightclick());
+        groupStartG = new JMenuItem("串行启动所有任务");
+        groupStartG.addMouseListener(new java.awt.event.MouseAdapter() {
+        	public void mousePressed(java.awt.event.MouseEvent evt) {
+      		  jMenuMousePressGroupStart(evt); 
+      	}
+      });  
+        groupStopG = new JMenuItem("停止所有串行任务");
+        groupStopG.addMouseListener(new java.awt.event.MouseAdapter() {
+        	public void mousePressed(java.awt.event.MouseEvent evt) {
+      		  jMenuMousePressGroupStop(evt); 
+      	}
+      });  
+        allStartG = new JMenuItem("同时启动所有任务");
+        allStartG.addMouseListener(new java.awt.event.MouseAdapter() {
+        	public void mousePressed(java.awt.event.MouseEvent evt) {
+      		  jMenuMousePressAllStartG(evt); 
+      	}
+      });
+        allStopG = new JMenuItem("停止所有任务");
+        allStopG.addMouseListener(new java.awt.event.MouseAdapter() {
+        	public void mousePressed(java.awt.event.MouseEvent evt) {
+      		  jMenuMousePressAllStopG(evt); 
+      	}
+      });
+        popMenuG.add(addItemG);
+        popMenuG.add(delItemG);
+        popMenuG.add(editItemG); 
+        popMenuG.add(groupStartG);
+        popMenuG.add(groupStopG);
+        popMenuG.add(allStartG);
+        popMenuG.add(allStopG);
+        popMenuT = new JPopupMenu();       
+        delItemT = new JMenuItem("删除此任务");
+        delItemT.addActionListener(new rightclick());
+        editItemT = new JMenuItem("修改此任务");
+        editItemT.addActionListener(new rightclick());
+        popMenuT.add(delItemT);
+        popMenuT.add(editItemT);
+        
+        //////////////////////////////////////////////////////// 运行任务命令
+        execItemT = new JMenuItem("执行任务命令");
+        execItemT.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+           {
+            	           	
+                try
+                {
+                	execTaskCommand(e);
+                } catch (DocumentException ex)
+                {}
+           }
+        }
+        );
+        popMenuT.add(execItemT);
+        
+        ////停止任务命令
+        stopItemT = new JMenuItem("停止任务命令");
+        stopItemT.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+           {
+                try
+                {
+                	stopTaskCommand(e);
+                } catch (DocumentException ex)
+                {
+                	ex.printStackTrace();
+                }
+           }
+        }
+        );
+        popMenuT.add(stopItemT);
+        
+        popMenuCA = new JPopupMenu();       
+        delItemCA = new JMenuItem("删除所有电脑");
+        delItemCA.addActionListener(new rightclick());
+        addItemCA = new JMenuItem("添加一新电脑");
+        addItemCA.addActionListener(new rightclick());
+        popMenuCA.add(delItemCA);
+        popMenuCA.add(addItemCA);
+        //---------------------------------------------------//
         jSplitPane1 = new javax.swing.JSplitPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTree1 = new javax.swing.JTree();
