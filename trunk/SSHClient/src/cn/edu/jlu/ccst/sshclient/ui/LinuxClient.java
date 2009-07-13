@@ -224,8 +224,7 @@ public void GenerateTree() {
         jTree1.setCellRenderer(new MyTreeCellRender());
         jTree1.addMouseListener(new thismouse());
         jScrollPane1.setViewportView(jTree1);
-        expandAll(jTree1, true);
-        
+        expandAll(jTree1, true);        
 }
 
 /**
@@ -444,7 +443,7 @@ private void execTaskCommand ( ActionEvent e ) throws DocumentException {
 	}
 	if(!flag)
 	{
-	t1=new JTextArea(cur.getId());
+	t1=new JTextArea(cur.getId()+"\n");
 	t1.setName(cur.getId());
 	jtl.add(t1);
 	t2=new JScrollPane();
@@ -489,12 +488,7 @@ private void execTaskCommand ( ActionEvent e ) throws DocumentException {
 	}
 	);
 	
-	}
-	
-	System.out.println("1");
-   
-    
-    
+	} 
     
 
 	if(execItemT.isEnabled()||jMenuItem14.isEnabled()) {
@@ -572,7 +566,7 @@ private void jMenuMousePressGroupStart(MouseEvent evt) {
 	}
 	if(!flag)
 	{
-	t1=new JTextArea(sgp.getId());
+	t1=new JTextArea(sgp.getId()+"\n");
 	t1.setName(sgp.getId());
 	jtl.add(t1);
 	t2=new JScrollPane();
@@ -704,7 +698,7 @@ private void jMenuMousePressAllStartG(MouseEvent evt) {
 		}
 		if(!flag)
 		{
-		t1=new JTextArea(rstk.getId());
+		t1=new JTextArea(rstk.getId()+"\n");
 		t1.setName(rstk.getId());
 		jtl.add(t1);
 		t2=new JScrollPane();
@@ -924,7 +918,7 @@ public boolean getRunStatusC(String id) {
 			}
 			if(!flag)
 			{
-			t1=new JTextArea(selectComputer.getId());
+			t1=new JTextArea(selectComputer.getId()+"\n");
 			t1.setName(selectComputer.getId());
 			jtl.add(t1);
 			t2=new JScrollPane();
@@ -1092,8 +1086,15 @@ public boolean getRunStatusC(String id) {
           					}
           			  }
           		  	}
+                	SSHTask curT=(SSHTask)cur;
+                	try
+                	{
+                	FileReader reader = new FileReader(curT.getFout()+"/"+curT.getId()+".txt");         
+                    reader.close();  
+                	}catch(Exception ex){return;}
+                	
                 	JScrollPane t2=null;
-                	t1=new JTextArea(cur.getId());
+                	t1=new JTextArea(cur.getId()+"\n");
                 	t1.setName(cur.getId());
                 	jtl.add(t1);
                 	t2=new JScrollPane();
@@ -1136,7 +1137,7 @@ public boolean getRunStatusC(String id) {
                 		}
                 	}
                 	);
-                	SSHTask curT=(SSHTask)cur;
+//                	SSHTask curT=(SSHTask)cur;
                 	try
                 	{
                 	FileReader reader = new FileReader(curT.getFout()+"/"+curT.getId()+".txt");    
@@ -1548,13 +1549,13 @@ public boolean getRunStatusC(String id) {
         jTextArea2.setEnabled(false);
         jTextArea2.setName("jTextArea2"); // NOI18N
         jScrollPane3.setViewportView(jTextArea2);
-        jTabbedPane1.addTab("tab1", jScrollPane3);
+        //jTabbedPane1.addTab("tab1", jScrollPane3);
         jScrollPane4.setName("jScrollPane4"); // NOI18N
         jTextArea3.setColumns(20);
         jTextArea3.setRows(5);
         jTextArea3.setName("jTextArea3"); // NOI18N
         jScrollPane4.setViewportView(jTextArea3);
-        jTabbedPane1.addTab("tab2", jScrollPane4);
+        //jTabbedPane1.addTab("tab2", jScrollPane4);
         jSplitPane2.setRightComponent(jTabbedPane1);
         jSplitPane1.setRightComponent(jSplitPane2);
         jMenuBar1.setName("jMenuBar1"); // NOI18N
