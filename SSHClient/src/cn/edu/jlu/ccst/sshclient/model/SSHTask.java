@@ -152,7 +152,6 @@ public class SSHTask extends BaseClass implements BaseAction, BaseOperation {
     public long getRunTime() {
     	return taskrunTime;
     }
-    
 	//-----------------------------------------------------------------------//
 	/* (non-Javadoc)
 	 * @see cn.edu.jlu.ccst.sshclient.inter.BaseAction#start()
@@ -168,7 +167,7 @@ public class SSHTask extends BaseClass implements BaseAction, BaseOperation {
 	String userPsw = selectComputer.getPassword();
 	int taskInfo = 0;//开启任务信息：0	
 	try{
-	SSHOpCommand ry = new SSHOpCommand(computerHost, userName, userPsw, cmd,id,jTextArea1,fout,taskInfo);
+	SSHOpCommand ry = new SSHOpCommand(computerHost, userName, userPsw, cmd,id,jTextArea1,fout,fin,taskInfo);
 	Thread ty = new Thread(ry);
 	ty.start();
 	
