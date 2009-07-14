@@ -6,6 +6,7 @@ import cn.edu.jlu.ccst.sshclient.ui.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -175,19 +176,29 @@ public class SSHOpCommand implements Runnable {
     	}catch(IOException e)
     	{}
     
-    	
+    	String pidout = null;
     	flag = true;
     	LinuxClient.GetObj().setTaskRunSucc(Id,flag);
     	TaskUI temp = new TaskUI();
     	temp.EditTaskRunSuccXML(Id,flag);//向config.xml中写入任务运行状态
     	try{
-        	Connection conn = getOpenedConnection();
+        	
+    		
+    		Connection conn = getOpenedConnection();
     		Session sess = conn.openSession();
-    		sess.execCommand(Cmd);		
+    		sess.execCommand(Cmd);
             String out;
-
+            boolean first=true;
     		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(sess.getStdout()));        
     		while((out=bufferedReader.readLine())!=null) {
+    			   if(first&&Cmd.startsWith("./"))
+    			   {
+    				   pidout=out;
+    				   first=false;
+    				   File f=new File("./"+Id+"_"+out+".txt");
+    	    	       f.createNewFile();
+    				   continue;
+    			   }
     			   out += "\n";
     			   write.append(out);
     			   jTextArea1.append(out);   
@@ -197,6 +208,12 @@ public class SSHOpCommand implements Runnable {
     		
     		write.flush();
     		write.close();
+    		if(Cmd.startsWith("./"))
+			   {
+			
+				   File f=new File("./"+Id+"_"+pidout+".txt");
+	    	       f.delete();
+			   }
         	}
         	catch(Exception ie) {
         		ie.printStackTrace();
