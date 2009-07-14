@@ -34,6 +34,7 @@ public class SSHOpCommand implements Runnable {
 	private String Cmd;
 	private String Id;
 	private String Finout;
+	private String Fin;
 	private int opType;
 	private JTextArea  jTextArea1;
 	private static long endtime;
@@ -92,7 +93,7 @@ public class SSHOpCommand implements Runnable {
      * @param jText
      * @param taskInfo 0
      */
-	public SSHOpCommand(String host, String name, String psw, String cmd,String id,JTextArea  jText,String finout,int taskInfo) {
+	public SSHOpCommand(String host, String name, String psw, String cmd,String id,JTextArea  jText,String finout,String fin,int taskInfo) {
 		super();
 		Host = host;
 		Name = name;
@@ -100,6 +101,7 @@ public class SSHOpCommand implements Runnable {
 		Cmd = cmd;
 		Id = id;
 		Finout = finout;
+		Fin=fin;
 		jTextArea1 = jText;
 		opType = taskInfo;
 		runtasklist = null;
@@ -163,7 +165,15 @@ public class SSHOpCommand implements Runnable {
     	}
     	
     }
-    
+    /*
+     * 向linux端传送文件
+     */
+public  void scpPut(Connection conn,String localFile, String remoteFileName,String remoteDir) throws IOException {
+
+		SCPClient client = new SCPClient(conn);
+		client.put(localFile, remoteFileName, remoteDir, "0600");
+
+	} 
     /**
      * 运行ssh远程命令
      */
@@ -186,6 +196,13 @@ public class SSHOpCommand implements Runnable {
     		
     		Connection conn = getOpenedConnection();
     		Session sess = conn.openSession();
+    		if(Cmd.startsWith("./"))
+    		{
+    			String s=Cmd.substring(Cmd.indexOf(" "), Cmd.length());
+    			s=s.trim();
+    			s=s.substring(0,s.indexOf(" "));
+    			scpPut(conn,Fin,s,".\\");
+    		}
     		sess.execCommand(Cmd);
             String out;
             boolean first=true;
