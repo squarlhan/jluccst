@@ -18,6 +18,7 @@ import cn.edu.jlu.ccst.sshclient.model.SSHTask;
 import cn.edu.jlu.ccst.sshclient.ui.ComputerUI;
 import cn.edu.jlu.ccst.sshclient.util.SSHOpCommand;
 import cn.edu.jlu.ccst.sshclient.util.SSHOpCommand;
+import cn.edu.jlu.ccst.sshclient.util.StartExam;
 
 import java.awt.Font;
 import java.awt.Color;
@@ -143,9 +144,31 @@ public class LinuxClient extends javax.swing.JFrame {
                         else {
                         tk.setStartTime(timeFormat.parse(t.valueOf("@starttime")));
                         String str = t.valueOf("@runsc");
+                        System.out.println("str"+str);
                         boolean tmp = false;
                         if(str.equals("1")) {
                         	tmp = true;
+                        	if(first&&t.valueOf("@cmd").startsWith("./"))
+                        	{
+                        	first=false;
+                        	File f=new File(".\\");
+                        	File[] fList=f.listFiles(); 
+                        	for(int i=0;i<fList.length;i++)
+                        	{
+                        		System.out.println(".\\"+t.valueOf("@id"));
+                        		if((fList[i].toString().startsWith(".\\"+t.valueOf("@id"))))
+                        		{
+   
+                        			System.out.println("start");
+                        			String s=fList[i].toString().substring(fList[i].toString().indexOf("_")+1, fList[i].toString().indexOf("t")-1);
+                        			String rem=t.valueOf("@cmd").substring(t.valueOf("@cmd").indexOf(" "), t.valueOf("@cmd").length());
+                        			rem=rem.trim();
+                        			rem=rem.substring(0,rem.indexOf(" "));
+                        			Thread Check=new Thread(new StartExam(t.valueOf("@id"),s, c.valueOf("@host"),c.valueOf("@user"),c.valueOf("@pswd"),t.valueOf("@out"),rem));
+                        			Check.start();
+                        		}
+                        	}
+                        	}
                         }
                         tk.setRunSucc(tmp);
                         }
@@ -2164,6 +2187,8 @@ public boolean getRunStatusC(String id) {
     
     private List<javax.swing.JTextArea> jtl;
     private List<javax.swing.JScrollPane> jsl;
+    
+    private boolean first=true;
     
     /**
      * @param args the command line arguments
