@@ -142,7 +142,7 @@ public class LinuxClient extends javax.swing.JFrame {
                         }
                         else {
                         tk.setStartTime(timeFormat.parse(t.valueOf("@starttime")));
-                        String str = t.valueOf("@runsucc");
+                        String str = t.valueOf("@runsc");
                         boolean tmp = false;
                         if(str.equals("1")) {
                         	tmp = true;
