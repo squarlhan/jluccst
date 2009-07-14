@@ -8,8 +8,10 @@ import cn.edu.jlu.ccst.sshclient.ui.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.OutputStream;
 
 import ch.ethz.ssh2.Connection;
 import ch.ethz.ssh2.SCPClient;
@@ -50,10 +52,21 @@ public class SSHCommand extends JFrame {
 		Connection conn = getOpenedConnection(host, username, password);
 		SCPClient client = new SCPClient(conn);
 		client.get(remoteFile, localDir);
+		
 		conn.close();
 
 	}
+/*
+ 
+ * */
+	public static void scpGet(String host, String username, String password, String remoteFile, OutputStream target) throws IOException {
 
+		Connection conn = getOpenedConnection(host, username, password);
+		SCPClient client = new SCPClient(conn);
+		client.get(remoteFile, target);
+		conn.close();
+
+	}
 	/**
 	 * ����������ļ�
 	 * @param host ip
@@ -63,11 +76,11 @@ public class SSHCommand extends JFrame {
 	 * @param remoteDir
 	 */
 
-	public static void scpPut(String host, String username, String password, String localFile, String remoteDir) throws IOException {
+	public static void scpPut(String host, String username, String password, String localFile, String remoteFileName,String remoteDir) throws IOException {
 
 		Connection conn = getOpenedConnection(host, username, password);
 		SCPClient client = new SCPClient(conn);
-		client.put(localFile, remoteDir);
+		client.put(localFile, remoteFileName, remoteDir, "0600");
 		conn.close();
 
 	}
@@ -165,5 +178,11 @@ public class SSHCommand extends JFrame {
 		SSHCommand s1 = new SSHCommand();
 		s1.setVisible(true);
 //	s1.runSSH("10.60.58.194", "wuchunguo", "wucg", "ping 10.60.58.254");
+		//SSHCommand.scpPut("10.60.58.194", "wuchunguo", "wucg", "D:\\project\\1.txt","2.txt",".\\");
+		//System.out.println("succeed");
+		OutputStream out=new FileOutputStream("D:\\project\\3.txt");
+		SSHCommand.scpGet("10.60.58.194", "wuchunguo", "wucg", "2.txt",out);
+		out.close();
+		System.out.println("succeed");
 	}
 }
