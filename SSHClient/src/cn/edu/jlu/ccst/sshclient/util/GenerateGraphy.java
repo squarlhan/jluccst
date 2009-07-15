@@ -276,10 +276,11 @@ public class GenerateGraphy {
 	public static void GetObj(String id,String filepath) throws IOException {
 		// 将生成的报表放到预览窗口中
 
-		//final ChartFrame preview = new ChartFrame("TEST",generateBar("e:/ssh/test.txt"));
+
 		final ChartPanel preview = new ChartPanel(generateBar(filepath));
+		//final ChartPanel preview = new ChartPanel(generateLine(filepath));		
+		//final ChartPanel preview = new ChartPanel(generatePie(filepath));
 		preview.setName(id+"Gra");
-		//final ChartFrame preview = new ChartFrame("TEST",generatePie("e:/ssh/test.txt"));
 //		preview.addWindowListener(new WindowAdapter() {
 //			public void windowClosing(final WindowEvent event) {
 //				preview.dispose();
