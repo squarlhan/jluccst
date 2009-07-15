@@ -3,6 +3,8 @@ package cn.edu.jlu.ccst.sshclient.util;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Toolkit;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.BufferedReader;
@@ -12,6 +14,8 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+
+import javax.swing.SwingUtilities;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartFrame;
@@ -273,7 +277,7 @@ public class GenerateGraphy {
 		// 将生成的报表放到预览窗口中
 
 		//final ChartFrame preview = new ChartFrame("TEST",generateBar("e:/ssh/test.txt"));
-		final ChartPanel preview = new ChartPanel(generateLine(filepath));
+		final ChartPanel preview = new ChartPanel(generateBar(filepath));
 		preview.setName(id+"Gra");
 		//final ChartFrame preview = new ChartFrame("TEST",generatePie("e:/ssh/test.txt"));
 //		preview.addWindowListener(new WindowAdapter() {
@@ -299,6 +303,23 @@ public class GenerateGraphy {
 		preview.setVisible(true);
 		LinuxClient.GetObj().getJTabbedPane().remove(pre);
 		LinuxClient.GetObj().getJTabbedPane().addTab(id, preview);
+		final String strid = id;
+		//右键关闭选中的选项卡
+		LinuxClient.GetObj().getJTabbedPane().addMouseListener(new MouseAdapter() {
+			public void mousePressed(MouseEvent e) {
+				 if (e.getClickCount() == 1 && SwingUtilities.isRightMouseButton(e)) {
+					 if(LinuxClient.GetObj().getJTabbedPane().getTabCount() > 0) {
+			         if(LinuxClient.GetObj().getJTabbedPane().getSelectedIndex() == LinuxClient.GetObj().getJTabbedPane().indexOfTab(strid)) {
+					 LinuxClient.GetObj().getJTabbedPane().removeTabAt(LinuxClient.GetObj().getJTabbedPane().getSelectedIndex());
+					// System.out.println("选中的选项卡为:" + LinuxClient.GetObj().getJTabbedPane().getSelectedIndex());
+					// LinuxClient.GetObj().getJTabbedPane().getTabComponentAt(LinuxClient.GetObj().getJTabbedPane().getSelectedIndex()).repaint();
+					// LinuxClient.GetObj().getJTabbedPane().addTab(null,null);
+					//return;
+					 }
+					 }
+				 }
+			}
+		});
 		pre=preview;
 	}
 	private static ChartPanel pre=null;
