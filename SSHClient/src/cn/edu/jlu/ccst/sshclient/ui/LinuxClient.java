@@ -45,6 +45,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
+import javax.swing.JTabbedPane;
 import javax.swing.JTextArea;
 import javax.swing.JTree;
 import javax.swing.UIManager;
@@ -1491,7 +1492,7 @@ public boolean getRunStatusC(String id) {
         				
         				break;
         			}
-        		}  
+        		}
     	  }
     	  if(e.getActionCommand().equals("清空"))
     	  {
@@ -2101,6 +2102,10 @@ public boolean getRunStatusC(String id) {
     }
     public void setSinglerun(int t) {
     	singlerun = t;
+    }
+    public JTabbedPane getJTabbedPane()
+    {
+    	return jTabbedPane1;
     }
 
     //---------------------------------------------------------------//
