@@ -299,19 +299,61 @@ private void action ( ActionEvent e ) throws DocumentException
           	case 0:
           	{
           		SSHComputer Com=new SSHComputer();
+          		Com = findselectComputer(cur.getId());
+          		List<SSHTask> listT;
+          		
+          		//判断计算机内是否有任务正在执行
+          		boolean fg = true;
+          		for(int i = 0; i < Com.getGps().size(); i++) {
+          			SSHGroup tempG = Com.getGps().get(i);
+          			if(fg == false) break;
+          			for(int j = 0; j < tempG.getSts().size(); j++) {
+          				SSHTask tempT = tempG.getSts().get(j);
+          				if(getTaskRunSucc(tempT.getId()) == true) {
+          					fg = false;
+          					break;
+          				}
+          			}
+          		}
+          		if(fg == true) {
           		Com.remove();
+          		}
+          		else {
+          			JOptionPane.showMessageDialog(null, "有任务执行，不能删除!");
+          		}
           		break;
           	}
           	case 1:
           	{
           		SSHGroup Gro=new SSHGroup();
+          		Gro = findSelectGroup();
+          		
+          		//判断组内是否有任务正在执行
+          		boolean fg = true;
+          		for(int i = 0; i < Gro.getSts().size(); i++) {
+          			if(getTaskRunSucc(Gro.getSts().get(i).getId()) == true) {
+          				fg = false;
+          				break;
+          			}
+          		}
+          		if(fg == true){
           		Gro.remove();
+          		}
+          		else {
+          		JOptionPane.showMessageDialog(null, "有任务执行，不能删除!");
+          		}
           		break;
           	}
           	case 2:
           	{
           		SSHTask tas=new SSHTask();
+          		if(getTaskRunSucc(cur.getId()) == false) {
           		tas.remove();
+          		}
+          		else {
+          			JOptionPane.showMessageDialog(null, "任务执行中，不能删除!");
+          			break;
+          		}
           		for(int i=0;i<jsl.size();i++)
           		{
           			if(jsl.get(i).getName().equals(cur.getId()))
@@ -1264,11 +1306,14 @@ public boolean getRunStatusC(String id) {
                     temptask = findSelectTask();//变灰相应的任务信息
                     if(!temptask.getFout().equals("")) {
                     	String filename = temptask.getFout()+"/"+temptask.getId()+".txt";
-                    	File f = new File(filename);
-                    	if(f.exists()) {
+                    	File f = new File(filename);                
+                    	if(f.exists() && temptask.getCmd().startsWith("./")) {
                     		dispResT.setEnabled(true);
                     	}
                     	else dispResT.setEnabled(false);
+                    }
+                    else {
+                    	dispResT.setEnabled(false);
                     }
                     if(temptask.getStatus() == 0) {
                     jMenuItem14.setEnabled(true);
