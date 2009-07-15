@@ -7,11 +7,13 @@ import java.io.FileWriter;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import javax.swing.*;
 
 import org.dom4j.Document;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 import org.dom4j.io.XMLWriter;
+
 
 import cn.edu.jlu.ccst.sshclient.ui.LinuxClient;
 import cn.edu.jlu.ccst.sshclient.inter.BaseOperation;
@@ -98,6 +100,11 @@ public class SSHComputer extends BaseClass implements BaseOperation{
 	}
 	@Override
 	public boolean remove() {
+		JOptionPane.showConfirmDialog(null, "删除电脑", "确认删除", JOptionPane.YES_NO_OPTION);
+	    if(JOptionPane.NO_OPTION == 1)
+			{
+			return false;
+			}
 		// TODO Auto-generated method stub
 		SAXReader reader = new SAXReader();
 		try
