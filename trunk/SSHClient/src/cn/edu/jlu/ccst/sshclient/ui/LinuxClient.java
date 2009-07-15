@@ -41,7 +41,9 @@ import java.text.SimpleDateFormat;
 import java.util.*;
 import java.text.*;
 import javax.management.timer.Timer;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
@@ -1735,9 +1737,11 @@ public boolean getRunStatusC(String id) {
         jMenuBar1.setName("jMenuBar1"); // NOI18N
 
         jMenu1.setText("File");
+      
         jMenu1.setName("jMenu1"); // NOI18N
 
         jMenu4.setText("New");
+        jMenu4.setIcon(new ImageIcon(this.getClass().getResource("/").getPath() + "cn/edu/jlu/ccst/sshclient/ui/resource/file.png"));
         jMenu4.setName("jMenu4"); // NOI18N
         jMenu4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -1746,6 +1750,7 @@ public boolean getRunStatusC(String id) {
         });
 
         jMenuItem4.setText("Computer");
+        jMenuItem4.setIcon(new ImageIcon(this.getClass().getResource("/").getPath() + "cn/edu/jlu/ccst/sshclient/ui/resource/c.png"));
         jMenuItem4.setName("jMenuItem4"); // NOI18N
         jMenuItem4.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -1755,6 +1760,7 @@ public boolean getRunStatusC(String id) {
         jMenu4.add(jMenuItem4);
 
         jMenuItem5.setText("Group");
+        jMenuItem5.setIcon(new ImageIcon(this.getClass().getResource("/").getPath() + "cn/edu/jlu/ccst/sshclient/ui/resource/g.png"));
         jMenuItem5.setName("jMenuItem5"); // NOI18N
         //"新建工作组"的监听函数
         jMenuItem5.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1765,6 +1771,7 @@ public boolean getRunStatusC(String id) {
         jMenu4.add(jMenuItem5);
 
         jMenuItem6.setText("Task");
+        jMenuItem6.setIcon(new ImageIcon(this.getClass().getResource("/").getPath() + "cn/edu/jlu/ccst/sshclient/ui/resource/t.png"));
         jMenuItem6.setName("jMenuItem6"); // NOI18N
         //“新建任务的监听函数”
         jMenuItem6.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -1776,11 +1783,9 @@ public boolean getRunStatusC(String id) {
 
         jMenu1.add(jMenu4);
 
-        jMenuItem2.setText("Save");
-        jMenuItem2.setName("jMenuItem2"); // NOI18N
-        jMenu1.add(jMenuItem2);
 
         jMenuItem3.setText("Quit");
+        jMenuItem3.setIcon(new ImageIcon(this.getClass().getResource("/").getPath() + "cn/edu/jlu/ccst/sshclient/ui/resource/q.png"));
         jMenuItem3.setName("jMenuItem3"); // NOI18N
         jMenuItem3.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -1789,8 +1794,6 @@ public boolean getRunStatusC(String id) {
         });
         jMenu1.add(jMenuItem3);
 
-        jSeparator1.setName("jSeparator1"); // NOI18N
-        jMenu1.add(jSeparator1);
 
         jMenuBar1.add(jMenu1);
 
@@ -1798,6 +1801,7 @@ public boolean getRunStatusC(String id) {
         jMenu2.setName("jMenu2"); // NOI18N
 
         jMenuItem8.setText("Add");
+        jMenuItem8.setIcon(new ImageIcon(this.getClass().getResource("/").getPath() + "cn/edu/jlu/ccst/sshclient/ui/resource/add.png"));
         jMenuItem8.setName("jMenuItem8"); // NOI18N
         jMenuItem8.addMouseListener(new java.awt.event.MouseAdapter() {
         	public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -1807,6 +1811,7 @@ public boolean getRunStatusC(String id) {
         jMenu2.add(jMenuItem8);
 
         jMenuItem9.setText("Update");
+        jMenuItem9.setIcon(new ImageIcon(this.getClass().getResource("/").getPath() + "cn/edu/jlu/ccst/sshclient/ui/resource/up.png"));
         jMenuItem9.setName("jMenuItem9"); // NOI18N
         jMenuItem9.addMouseListener(new java.awt.event.MouseAdapter() {
         	public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -1816,6 +1821,7 @@ public boolean getRunStatusC(String id) {
         jMenu2.add(jMenuItem9);
 
         jMenuItem10.setText("Remove");
+        jMenuItem10.setIcon(new ImageIcon(this.getClass().getResource("/").getPath() + "cn/edu/jlu/ccst/sshclient/ui/resource/del.png"));
         jMenuItem10.setName("jMenuItem10"); // NOI18N
         jMenuItem10.addMouseListener(new java.awt.event.MouseAdapter() {
         	public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -1830,6 +1836,7 @@ public boolean getRunStatusC(String id) {
 
 
         jMenuItem12.setText("Group Start");
+        jMenuItem12.setIcon(new ImageIcon(this.getClass().getResource("/").getPath() + "cn/edu/jlu/ccst/sshclient/ui/resource/gst.png"));
         jMenuItem12.setName("jMenuItem12"); // NOI18N
         jMenuItem12.addMouseListener(new java.awt.event.MouseAdapter() {
         	public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -1840,10 +1847,12 @@ public boolean getRunStatusC(String id) {
         jMenu2.add(jMenuItem12);
         
         jMenuItem11.setText("Group Stop");
+        jMenuItem11.setIcon(new ImageIcon(this.getClass().getResource("/").getPath() + "cn/edu/jlu/ccst/sshclient/ui/resource/gsp.png"));
         jMenuItem11.setName("jMenuItem11"); // NOI18N
         
         jMenu2.add(jMenuItem11);
         jMenuItem13.setText("All Start");
+        jMenuItem13.setIcon(new ImageIcon(this.getClass().getResource("/").getPath() + "cn/edu/jlu/ccst/sshclient/ui/resource/ast.png"));
         jMenuItem13.setName("jMenuItem13"); // NOI18N
         jMenuItem13.addMouseListener(new java.awt.event.MouseAdapter() {
         	public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -1853,6 +1862,7 @@ public boolean getRunStatusC(String id) {
         jMenu2.add(jMenuItem13);
         
         jMenuItem16.setText("All Stop");
+        jMenuItem16.setIcon(new ImageIcon(this.getClass().getResource("/").getPath() + "cn/edu/jlu/ccst/sshclient/ui/resource/asp.png"));
         jMenuItem16.setName("jMenuItem16"); // NOI18N
         jMenuItem16.addMouseListener(new java.awt.event.MouseAdapter() {
         	public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -1861,6 +1871,7 @@ public boolean getRunStatusC(String id) {
       });
         jMenu2.add(jMenuItem16);
         jMenuItem14.setText("Start Now");
+        jMenuItem14.setIcon(new ImageIcon(this.getClass().getResource("/").getPath() + "cn/edu/jlu/ccst/sshclient/ui/resource/s.png"));
         jMenuItem14.setName("jMenuItem14"); // NOI18N
         jMenuItem14.addActionListener(new ActionListener()
         {
@@ -1880,6 +1891,7 @@ public boolean getRunStatusC(String id) {
         jMenu2.add(jSeparator3);
 
         jMenuItem15.setText("Stop Now");
+        jMenuItem15.setIcon(new ImageIcon(this.getClass().getResource("/").getPath() + "cn/edu/jlu/ccst/sshclient/ui/resource/sn.png"));
         jMenuItem15.setName("jMenuItem15"); // NOI18N
         //////////////////////////////////////////停止任务的监听函数
         jMenuItem15.addActionListener(new ActionListener()
@@ -1904,10 +1916,12 @@ public boolean getRunStatusC(String id) {
         jMenu3.setName("jMenu3"); // NOI18N
 
         jMenuItem1.setText("Index");
+        jMenuItem1.setIcon(new ImageIcon(this.getClass().getResource("/").getPath() + "cn/edu/jlu/ccst/sshclient/ui/resource/i.png"));
         jMenuItem1.setName("jMenuItem1"); // NOI18N
         jMenu3.add(jMenuItem1);
 
         jMenuItem7.setText("About");
+        jMenuItem7.setIcon(new ImageIcon(this.getClass().getResource("/").getPath() + "cn/edu/jlu/ccst/sshclient/ui/resource/ab.png"));
         jMenuItem7.setName("jMenuItem7"); // NOI18N
         jMenu3.add(jMenuItem7);
 
