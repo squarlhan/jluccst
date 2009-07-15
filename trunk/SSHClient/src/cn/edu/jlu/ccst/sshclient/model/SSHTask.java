@@ -227,6 +227,11 @@ public class SSHTask extends BaseClass implements BaseAction, BaseOperation {
 	 */
 	@Override
 	public boolean remove() {
+		JOptionPane.showConfirmDialog(null, "删除任务", "确认删除", JOptionPane.YES_NO_OPTION);
+	    if(JOptionPane.NO_OPTION == 1)
+			{
+			return false;
+			}
 		// TODO Auto-generated method stub
 		SAXReader reader = new SAXReader();
 		try
