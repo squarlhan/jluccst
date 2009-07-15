@@ -16,6 +16,7 @@ import cn.edu.jlu.ccst.sshclient.model.SSHComputer;
 import cn.edu.jlu.ccst.sshclient.model.SSHGroup;
 import cn.edu.jlu.ccst.sshclient.model.SSHTask;
 import cn.edu.jlu.ccst.sshclient.ui.ComputerUI;
+import cn.edu.jlu.ccst.sshclient.util.GenerateGraphy;
 import cn.edu.jlu.ccst.sshclient.util.SSHOpCommand;
 import cn.edu.jlu.ccst.sshclient.util.SSHOpCommand;
 import cn.edu.jlu.ccst.sshclient.util.StartExam;
@@ -566,6 +567,24 @@ private void stopTaskCommand( ActionEvent e ) throws DocumentException  {
 	stopTask = findSelectTask();
 	stopTask.stop();
     }
+}
+
+//--------------------------------------------------------------//
+/**
+ * 查看自定义任务的运行结果图
+ */
+
+private void displayResT(ActionEvent e) throws DocumentException  {
+	if(dispResT.isEnabled()) {
+		SSHTask stk = findSelectTask();
+		try {
+		String filename=stk.getFout()+"/"+stk.getId()+".txt";
+		GenerateGraphy.GetObj(stk.getId(),filename);
+		}
+		catch(Exception ev) {
+			ev.printStackTrace();
+		}
+	}
 }
 
 //---------------------------------------------------------------//
@@ -1241,6 +1260,14 @@ public boolean getRunStatusC(String id) {
                     jMenuItem13.setEnabled(false);
                     SSHTask temptask = new SSHTask();
                     temptask = findSelectTask();//变灰相应的任务信息
+                    if(!temptask.getFout().equals("")) {
+                    	String filename = temptask.getFout()+"/"+temptask.getId()+".txt";
+                    	File f = new File(filename);
+                    	if(f.exists()) {
+                    		dispResT.setEnabled(true);
+                    	}
+                    	else dispResT.setEnabled(false);
+                    }
                     if(temptask.getStatus() == 0) {
                     jMenuItem14.setEnabled(true);
                     jMenuItem15.setEnabled(false);
@@ -2010,6 +2037,26 @@ public boolean getRunStatusC(String id) {
         );
         popMenuT.add(stopItemT);
         
+        //查看任务运行的结果图
+        dispResT = new JMenuItem("自定义任务的效果图");
+        dispResT.addActionListener(new ActionListener()
+        {
+            public void actionPerformed(ActionEvent e)
+           {
+                try
+                {
+                	displayResT(e);
+                } catch (DocumentException ex)
+                {
+                	ex.printStackTrace();
+                }
+           }
+        }
+        );
+        dispResT.setEnabled(false);
+        popMenuT.add(dispResT);
+        
+        
         popMenuCA = new JPopupMenu();       
         delItemCA = new JMenuItem("删除所有电脑");
         delItemCA.addActionListener(new rightclick());
@@ -2107,7 +2154,10 @@ public boolean getRunStatusC(String id) {
     {
     	return jTabbedPane1;
     }
-
+   /* public JCloseableTabbedPane getJCloseableTabPane() {
+    	return jCloseableTabPane1;
+    }*/
+    
     //---------------------------------------------------------------//
     
     
@@ -2170,6 +2220,7 @@ public boolean getRunStatusC(String id) {
     private JMenuItem editItemT;
     private JMenuItem execItemT;
     private JMenuItem stopItemT;
+    private JMenuItem dispResT;
     
 
     private JPopupMenu popMenuTA;
