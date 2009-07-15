@@ -182,7 +182,7 @@ public  void scpPut(Connection conn,String localFile, String remoteFileName,Stri
     	FileWriter write = null;
     	try
     	{
-    	write=new FileWriter(filename,true);    
+    	write=new FileWriter(filename,false);  
     	}catch(IOException e)
     	{}
     
@@ -230,6 +230,7 @@ public  void scpPut(Connection conn,String localFile, String remoteFileName,Stri
 			
 				   File f=new File("./"+Id+"_"+pidout+".txt");
 	    	       f.delete();
+	    	        GenerateGraphy.GetObj(filename);
 			   }
         	}
         	catch(Exception ie) {
