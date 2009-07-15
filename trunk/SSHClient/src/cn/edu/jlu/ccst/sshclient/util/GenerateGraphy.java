@@ -216,7 +216,7 @@ public class GenerateGraphy {
 		List<Float> datas = new ArrayList();
 		int a = 1;
 		while ((line = br.readLine()) != null) {
-			// System.out.println(line);
+			 System.out.println(line);
 			if (line.trim().length() >= 1)
 				datas.add(Float.valueOf(line));
 		}
@@ -265,12 +265,12 @@ public class GenerateGraphy {
 		return result;
 	}
 
-	public static void main(String[] args) throws IOException {
-
+	//public static void main(String[] args) throws IOException {
+	public static void GetObj(String filepath) throws IOException {
 		// 将生成的报表放到预览窗口中
 
 		//final ChartFrame preview = new ChartFrame("TEST",generateBar("e:/ssh/test.txt"));
-		final ChartFrame preview = new ChartFrame("TEST",generateLine("e:/ssh/test.txt"));
+		final ChartFrame preview = new ChartFrame("TEST",generateLine(filepath));
 		//final ChartFrame preview = new ChartFrame("TEST",generatePie("e:/ssh/test.txt"));
 		preview.addWindowListener(new WindowAdapter() {
 			public void windowClosing(final WindowEvent event) {
