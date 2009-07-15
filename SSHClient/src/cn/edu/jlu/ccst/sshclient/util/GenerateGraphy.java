@@ -15,6 +15,7 @@ import java.util.List;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartFrame;
+import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.NumberAxis;
@@ -25,6 +26,8 @@ import org.jfree.chart.title.LegendTitle;
 import org.jfree.data.category.CategoryDataset;
 import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
+
+import cn.edu.jlu.ccst.sshclient.ui.LinuxClient;
 
 public class GenerateGraphy {
 
@@ -266,18 +269,19 @@ public class GenerateGraphy {
 	}
 
 	//public static void main(String[] args) throws IOException {
-	public static void GetObj(String filepath) throws IOException {
+	public static void GetObj(String id,String filepath) throws IOException {
 		// 将生成的报表放到预览窗口中
 
 		//final ChartFrame preview = new ChartFrame("TEST",generateBar("e:/ssh/test.txt"));
-		final ChartFrame preview = new ChartFrame("TEST",generateLine(filepath));
+		final ChartPanel preview = new ChartPanel(generateLine(filepath));
+		preview.setName(id+"Gra");
 		//final ChartFrame preview = new ChartFrame("TEST",generatePie("e:/ssh/test.txt"));
-		preview.addWindowListener(new WindowAdapter() {
-			public void windowClosing(final WindowEvent event) {
-				preview.dispose();
-			}
-		});
-		preview.pack();
+//		preview.addWindowListener(new WindowAdapter() {
+//			public void windowClosing(final WindowEvent event) {
+//				preview.dispose();
+//			}
+//		});
+//		preview.pack();
 		// 调整预览窗口的大小和位置,适合屏幕，并且居中
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		preview.setSize(screenSize.width, screenSize.height - 50);// 适合屏幕，50表示把工具栏要考虑在内
@@ -293,5 +297,9 @@ public class GenerateGraphy {
 				(screenSize.height - frameSize.height - 50) / 2);
 		// 显示报表预览窗口
 		preview.setVisible(true);
+		LinuxClient.GetObj().getJTabbedPane().remove(pre);
+		LinuxClient.GetObj().getJTabbedPane().addTab(id, preview);
+		pre=preview;
 	}
+	private static ChartPanel pre=null;
 }
