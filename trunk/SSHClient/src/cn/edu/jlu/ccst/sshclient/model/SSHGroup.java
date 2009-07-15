@@ -8,6 +8,8 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 import org.dom4j.Document;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
@@ -153,6 +155,11 @@ public class SSHGroup extends BaseClass implements BaseAction, BaseOperation {
 	@Override
 	public boolean remove() {
 		// TODO Auto-generated method stub
+		JOptionPane.showConfirmDialog(null, "删除任务组", "确认删除", JOptionPane.YES_NO_OPTION);
+	    if(JOptionPane.NO_OPTION == 1)
+			{
+			return false;
+			}
 		SAXReader reader = new SAXReader();
 		try
 		{
