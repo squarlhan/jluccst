@@ -201,7 +201,8 @@ public  void scpPut(Connection conn,String localFile, String remoteFileName,Stri
     			String s=Cmd.substring(Cmd.indexOf(" "), Cmd.length());
     			s=s.trim();
     			s=s.substring(0,s.indexOf(" "));
-    			scpPut(conn,Fin,s,".\\");
+    			System.out.println("S+:" + s + "输入文件.txt:"+Fin);
+    			scpPut(conn,Fin,s,"./");
     		}
     		sess.execCommand(Cmd);
             String out;
@@ -211,8 +212,9 @@ public  void scpPut(Connection conn,String localFile, String remoteFileName,Stri
     			   if(first&&Cmd.startsWith("./"))
     			   {
     				   pidout=out;
+    				   System.out.println("out:"+".\\"+Id+"_"+out+".txt");
     				   first=false;
-    				   File f=new File("./"+Id+"_"+out+".txt");
+    				   File f=new File(".\\"+Id+"_"+out+".txt");
     	    	       f.createNewFile();
     				   continue;
     			   }
@@ -231,6 +233,7 @@ public  void scpPut(Connection conn,String localFile, String remoteFileName,Stri
 				   File f=new File("./"+Id+"_"+pidout+".txt");
 	    	       f.delete();
 	    	       GenerateGraphy.GetObj(Id,filename);
+	    	       System.out.print("文件路径:"+filename);
 			   }
         	}
         	catch(Exception ie) {
