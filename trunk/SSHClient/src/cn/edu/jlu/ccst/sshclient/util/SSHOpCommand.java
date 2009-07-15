@@ -230,7 +230,7 @@ public  void scpPut(Connection conn,String localFile, String remoteFileName,Stri
 			
 				   File f=new File("./"+Id+"_"+pidout+".txt");
 	    	       f.delete();
-	    	        GenerateGraphy.GetObj(filename);
+	    	       GenerateGraphy.GetObj(Id,filename);
 			   }
         	}
         	catch(Exception ie) {
