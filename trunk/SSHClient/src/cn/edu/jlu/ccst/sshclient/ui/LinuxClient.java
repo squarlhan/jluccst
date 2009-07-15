@@ -142,7 +142,7 @@ public class LinuxClient extends javax.swing.JFrame {
                         	tk.setStartTime(null);
                         }
                         else {
-                        tk.setStartTime(timeFormat.parse(t.valueOf("@starttime")));
+                        tk.setStartTime(timeFormat.parse(t.valueOf("@starttime")));                  
                         String str = t.valueOf("@runsc");
                         System.out.println("str"+str);
                         boolean tmp = false;
@@ -171,6 +171,9 @@ public class LinuxClient extends javax.swing.JFrame {
                         	}
                         }
                         tk.setRunSucc(tmp);
+                        if(!tk.getCmd().startsWith("./")) {
+                        	tk.setRunSucc(false);
+                        }
                         }
                         
                         List<String> params = new ArrayList();
@@ -1291,7 +1294,6 @@ public boolean getRunStatusC(String id) {
                       case 2:
                       {
                           SSHTask t=(SSHTask)treenode.getUserObject();
-                         // boolean taskrunsucc;
                           for(int i = 0; i < tks.size() ;++ i) {
                         	  if(t.getId().equals(tks.get(i).getId())) {
                         		  t.setRunSucc(tks.get(i).getRunSucc());
