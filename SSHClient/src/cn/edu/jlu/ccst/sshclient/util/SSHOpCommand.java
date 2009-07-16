@@ -50,10 +50,6 @@ public class SSHOpCommand implements Runnable {
 	}
 	/**
 	 * 测试连接用这个构造方法
-	 * @param host
-	 * @param name
-	 * @param psw
-	 * @param conInfo 2
 	 */
 	public SSHOpCommand(String host, String name, String psw, int conInfo,JLabel l) {
 		super();
@@ -66,12 +62,6 @@ public class SSHOpCommand implements Runnable {
 	}
     /**
      * 停止命令用这个构造方法
-     * @param host
-     * @param name
-     * @param psw
-     * @param cmd
-     * @param stopType 1
-     * @param pidlist
      */
     public SSHOpCommand(String host, String name, String psw, String cmd, String id,
 			int stopType) {
@@ -86,12 +76,6 @@ public class SSHOpCommand implements Runnable {
 	}
 	/**
      * 运行单个任务命令用这个构造方法
-     * @param host
-     * @param name
-     * @param psw
-     * @param cmd
-     * @param jText
-     * @param taskInfo 0
      */
 	public SSHOpCommand(String host, String name, String psw, String cmd,String id,JTextArea  jText,String finout,String fin,int taskInfo) {
 		super();
@@ -165,7 +149,7 @@ public class SSHOpCommand implements Runnable {
     	}
     	
     }
-    /*
+    /**
      * 向linux端传送文件
      */
 public  void scpPut(Connection conn,String localFile, String remoteFileName,String remoteDir) throws IOException {
@@ -178,7 +162,7 @@ public  void scpPut(Connection conn,String localFile, String remoteFileName,Stri
      * 运行ssh远程命令
      */
     private void runSSH() {
-  	String filename=Finout+"/"+Id+".txt";
+  	String filename=Finout+"\\"+Id+".txt";
     	FileWriter write = null;
     	try
     	{
@@ -190,7 +174,7 @@ public  void scpPut(Connection conn,String localFile, String remoteFileName,Stri
     	flag = true;
     	LinuxClient.GetObj().setTaskRunSucc(Id,flag);
     	TaskUI temp = new TaskUI();
-    	temp.EditTaskRunSuccXML(Id,flag);//向config.xml中写入任务运行状态
+    	//temp.EditTaskRunSuccXML(Id,flag);//向config.xml中写入任务运行状态
     	try{
         	
     		
@@ -205,23 +189,46 @@ public  void scpPut(Connection conn,String localFile, String remoteFileName,Stri
     			scpPut(conn,Fin,s,"./");
     		}
     		sess.execCommand(Cmd);
+    		//任务已经开始，添加标志文件
+    		if(Cmd.startsWith("./"))
+    		{
+    		String stopTaskcmd = Cmd;
+        	stopTaskcmd = stopTaskcmd.substring(0,stopTaskcmd.indexOf(" "));
+        	System.out.println("stop:"+stopTaskcmd);
+        	
+        	String sscmd = "ps U "+ Name +" | grep "+
+            stopTaskcmd+" | awk '{print $1}'";
+        	
+        	Connection connGP;
+        	Session sessGP;
+        	String outGP;
+        	BufferedReader bufferedReaderGP;
+        	try{
+    	    connGP = getOpenedConnection();
+    	    sessGP = connGP.openSession();
+    		sessGP.execCommand(sscmd);		
+            bufferedReaderGP = new BufferedReader(new InputStreamReader(sessGP.getStdout()));    		
+    		while((outGP=bufferedReaderGP.readLine())!=null) {
+    			pidout=outGP;
+    		}
+    		File f=new File(".\\"+Id+"_"+pidout+".txt");
+ 	        f.createNewFile();
+    		sessGP.close();
+    		connGP.close();
+        	}
+        	catch(Exception et) {
+        		et.printStackTrace();
+        	} 
+    		}
+    		temp.EditTaskRunSuccXML(Id,flag);//向config.xml中写入任务运行状态
+        	//-----------------------------------------//
             String out;
-            boolean first=true;
             DynDispThread disTh = new DynDispThread(jTextArea1,Id,System.currentTimeMillis());
             disTh.start();
             int ft = 0;
     		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(sess.getStdout()));        
     		while((out=bufferedReader.readLine())!=null) {
-    			   if(first&&Cmd.startsWith("./"))
-    			   {
-    				   pidout=out;
-    				   System.out.println("out:"+".\\"+Id+"_"+out+".txt");
-    				   first=false;
-    				   File f=new File(".\\"+Id+"_"+out+".txt");
-    	    	       f.createNewFile();
-    				   continue;
-    			   }
-    			   out += "\n";
+    			   out += "\r\n";
     			   write.append(out);
     			   if(ft == 0) {
     				   disTh.stop();
@@ -240,7 +247,9 @@ public  void scpPut(Connection conn,String localFile, String remoteFileName,Stri
 			
 				   File f=new File("./"+Id+"_"+pidout+".txt");
 	    	       f.delete();
-	    	       GenerateGraphy.GetObj(Id,filename,2);
+
+	    	       GenerateGraphy.GetObj(Name+Id,filename,2);
+
 	    	       System.out.print("文件路径:"+filename);
 			   }
         	}
@@ -257,7 +266,7 @@ public  void scpPut(Connection conn,String localFile, String remoteFileName,Stri
         	
         	//判断并行结束
         	if(runtasklist == null){
-        		System.out.println("并行jieshu");
+        		//System.out.println("并行jieshu");
         		if(LinuxClient.GetObj().getAllRunSucc(Id) == false) {
             		LinuxClient.GetObj().setSinglerun(1);
             	}
@@ -275,7 +284,7 @@ public  void scpPut(Connection conn,String localFile, String remoteFileName,Stri
     	pidlist = new ArrayList();
     	String stopTaskcmd = Cmd;
     	stopTaskcmd = stopTaskcmd.substring(0,stopTaskcmd.indexOf(" "));
-    	System.out.println("stop:"+stopTaskcmd);
+    	//System.out.println("stop:"+stopTaskcmd);
     	
     	String sscmd = "ps U "+ Name +" | grep "+
         stopTaskcmd+" | awk '{print $1}'";
@@ -291,7 +300,7 @@ public  void scpPut(Connection conn,String localFile, String remoteFileName,Stri
         bufferedReader = new BufferedReader(new InputStreamReader(sess.getStdout()));    		
 		while((out=bufferedReader.readLine())!=null) {
 			pidlist.add(out);  
-			System.out.println("pid"+out);
+			//System.out.println("pid"+out);
 		}
 		sess.close();
 		conn.close();
@@ -299,30 +308,14 @@ public  void scpPut(Connection conn,String localFile, String remoteFileName,Stri
     	catch(Exception et) {
     		et.printStackTrace();
     	}    	
-        
-    	//kill正在执行的命令
-    /* if(pidlist.size() > 0) {
-        		try {
-        			conn = getOpenedConnection();
-     			    sess = conn.openSession();
-        			for(int i = 0; i < pidlist.size() - 1; i++){
-        			sess.execCommand("kill pid "+ pidlist.get(i));
-        		    }
-        			sess.close();
-        	     	conn.close();
-        		}
-        		catch(Exception et) {
-        			et.printStackTrace();
-        		}
-        	}
-      */
-    	killPidProcess(pidlist);
+
+     killPidProcess(pidlist);
      flag = false;
      LinuxClient.GetObj().setTaskRunSucc(Id,flag); 
    	 TaskUI temp = new TaskUI();
 	 temp.EditTaskRunSuccXML(Id,flag);//向config.xml中写入任务运行状态
      endtime = System.currentTimeMillis();
-     System.out.println("ttime:"+endtime);
+     //System.out.println("ttime:"+endtime);
 	   	
 	}
   private void killPidProcess(List<String> pidlist) {
@@ -423,7 +416,7 @@ public  void scpPut(Connection conn,String localFile, String remoteFileName,Stri
     	for(int i = 0; i < runtasklist.size(); ++i) {   		
     		if(runtasklist.get(i).getRunSucc() == true) { //如果组中的任务正在执行中
     		String stopcmd = runtasklist.get(i).getCmd().substring(0,runtasklist.get(i).getCmd().indexOf(" "));
-    		System.out.println("stopcmd:"+ stopcmd);
+    		//System.out.println("stopcmd:"+ stopcmd);
     		String sscmd = "ps U "+ Name +" | grep "+
             stopcmd+" | awk '{print $1}'";
     		
@@ -442,7 +435,7 @@ public  void scpPut(Connection conn,String localFile, String remoteFileName,Stri
             bufferedReader = new BufferedReader(new InputStreamReader(sess.getStdout()));    		
     		while((out=bufferedReader.readLine())!=null) {
     			pidlist.add(out);  
-    			System.out.println("pid"+out);
+    			//System.out.println("pid"+out);
     		}
     		sess.close();
     		conn.close();
