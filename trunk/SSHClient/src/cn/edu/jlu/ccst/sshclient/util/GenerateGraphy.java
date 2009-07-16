@@ -224,8 +224,14 @@ public class GenerateGraphy {
 		int a = 1;
 		while ((line = br.readLine()) != null) {
 			 //System.out.println(line);
-			if (line.trim().length() >= 1)
-				datas.add(Float.valueOf(line));
+			 for(int i = 0 ;i < 9; ++i)
+			 {
+				 int index = line.indexOf(" ");
+				 String temp = line.substring(0,index);
+				 datas.add(Float.valueOf(temp));
+				 line = line.substring(index+1,line.length()).trim();
+			 }
+		     datas.add(Float.valueOf(line));
 		}
 		br.close();
 		insr.close();
