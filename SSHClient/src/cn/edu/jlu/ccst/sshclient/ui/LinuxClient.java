@@ -149,11 +149,7 @@ public class LinuxClient extends javax.swing.JFrame {
                         else {
                         tk.setStartTime(timeFormat.parse(t.valueOf("@starttime")));                  
                         String str = t.valueOf("@runsc");
-
-                        //System.out.println("str"+str);
-
                         tk.setRunTime(Long.parseLong(t.valueOf("@stimelong")));
-
                         boolean tmp = false;
                         if(str.equals("1")) {
                         	tmp = true;
