@@ -203,6 +203,7 @@ public class GenerateGraphy {
 			if (line.trim().length() >= 1) {
 				while ((line = br.readLine()) != null) {
 					 //System.out.println(line);
+					 line = line.trim();
 					 for(int i = 0 ;i < 9; ++i)
 					 {
 						 int index = line.indexOf(" ");
@@ -235,7 +236,7 @@ public class GenerateGraphy {
 		List<Float> datas = new ArrayList();
 		int a = 1;
 		while ((line = br.readLine()) != null) {
-			 //System.out.println(line);
+			 line = line.trim();
 			 for(int i = 0 ;i < 9; ++i)
 			 {
 				 int index = line.indexOf(" ");
@@ -268,7 +269,7 @@ public class GenerateGraphy {
 			if (line.trim().length() >= 1) 
 			{
 				while ((line = br.readLine()) != null) {
-					 //System.out.println(line);
+					 line = line.trim();
 					 for(int i = 0 ;i < 9; ++i)
 					 {
 						 int index = line.indexOf(" ");
