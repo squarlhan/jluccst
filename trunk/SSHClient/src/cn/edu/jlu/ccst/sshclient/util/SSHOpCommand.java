@@ -176,7 +176,8 @@ public  void scpPut(Connection conn,String localFile, String remoteFileName,Stri
     	TaskUI temp = new TaskUI();
     	//temp.EditTaskRunSuccXML(Id,flag);//向config.xml中写入任务运行状态
     	try{
-        	
+            DynDispThread disTh = new DynDispThread(jTextArea1,Id,System.currentTimeMillis());
+            disTh.start();	
     		
     		Connection conn = getOpenedConnection();
     		Session sess = conn.openSession();
@@ -220,21 +221,21 @@ public  void scpPut(Connection conn,String localFile, String remoteFileName,Stri
         		et.printStackTrace();
         	} 
     		}
+    		
     		temp.EditTaskRunSuccXML(Id,flag);//向config.xml中写入任务运行状态
         	//-----------------------------------------//
             String out;
-            DynDispThread disTh = new DynDispThread(jTextArea1,Id,System.currentTimeMillis());
-            disTh.start();
+
             int ft = 0;
     		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(sess.getStdout()));        
     		while((out=bufferedReader.readLine())!=null) {
+    			if(ft == 0) {
+ 				   disTh.stop();
+ 				   jTextArea1.setText(Id+"\n");
+ 				   ft = 1;
+ 				   }
     			   out += "\r\n";
-    			   write.append(out);
-    			   if(ft == 0) {
-    				   disTh.stop();
-    				   jTextArea1.setText(Id+"\n");
-    				   ft = 1;
-    				   }
+    			   write.append(out);    			   
     			   jTextArea1.append(out);   
     		}
     		sess.close();
