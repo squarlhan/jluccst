@@ -88,7 +88,7 @@ public class GenerateGraphy {
      */
 	public static JFreeChart generateLine(String input) throws IOException {
 
-		JFreeChart chart = ChartFactory.createLineChart3D("", // 图表标题
+		JFreeChart chart = ChartFactory.createLineChart("", // 图表标题
 				"", // 目录轴的显示标签
 				"", // 数值轴的显示标签
 				getLineDataSet(input), // 数据集
@@ -223,7 +223,7 @@ public class GenerateGraphy {
 		List<Float> datas = new ArrayList();
 		int a = 1;
 		while ((line = br.readLine()) != null) {
-			 System.out.println(line);
+			 //System.out.println(line);
 			if (line.trim().length() >= 1)
 				datas.add(Float.valueOf(line));
 		}
@@ -275,6 +275,7 @@ public class GenerateGraphy {
 	//public static void main(String[] args) throws IOException {
 	public static void GetObj(String id,String filepath, int t) throws IOException {
 		// 将生成的报表放到预览窗口中
+
 		final ChartPanel preview ;
 		if(t == 1) {
 			preview = new ChartPanel(generateLine(filepath));	
@@ -310,7 +311,7 @@ public class GenerateGraphy {
 		LinuxClient.GetObj().getJTabbedPane().remove(pre);
 		LinuxClient.GetObj().getJTabbedPane().addTab(id, preview);
 		final String strid = id;
-		//右键关闭选中的选项卡
+		//左键双击键关闭选中的选项卡
 		LinuxClient.GetObj().getJTabbedPane().addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
 				 if (e.getClickCount() == 2 && SwingUtilities.isLeftMouseButton(e)) {

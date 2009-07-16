@@ -161,7 +161,7 @@ public class SSHCommand extends JFrame {
 		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(p.getInputStream())); 
 		//int tt = 0;
 		while((out=bufferedReader.readLine())!=null){
-		System.out.println(out);
+		//System.out.println(out);
 	//	System.out.println("tt"+tt);
 		//++tt;
 		}
@@ -183,6 +183,6 @@ public class SSHCommand extends JFrame {
 		OutputStream out=new FileOutputStream("D:\\project\\3.txt");
 		SSHCommand.scpGet("10.60.58.194", "wuchunguo", "wucg", "2.txt",out);
 		out.close();
-		System.out.println("succeed");
+		//System.out.println("succeed");
 	}
 }

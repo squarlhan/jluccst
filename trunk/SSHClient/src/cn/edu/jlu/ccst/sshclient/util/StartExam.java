@@ -54,7 +54,6 @@ public class StartExam implements Runnable {
     	String out;
     	BufferedReader bufferedReader;
 	    conn = getOpenedConnection();
-	    //System.out.println("开始");
     	while(rs!=null&&!rs.equals("1"))
     	{
     	try
@@ -73,18 +72,17 @@ public class StartExam implements Runnable {
     		et.printStackTrace();
     	} 
     	}
-    	//System.out.println("结束");
     	try
     	{
-    	OutputStream fout=new FileOutputStream(Finout+id+".txt");
+    	OutputStream fout=new FileOutputStream(Finout+"\\"+id+".txt");
 		scpGet(conn,remoteFile,fout);
+		System.out.println(remoteFile+"...."+Finout+"\\"+id+".txt");
 		fout.close();
     	}catch(Exception e){e.printStackTrace();}
     	TaskUI temp = new TaskUI();
     	temp.EditTaskRunSuccXML(id,false);
     	LinuxClient.GetObj().setTaskRunSucc(id,false); 
     	File f=new File(".\\"+id+"_"+pid+".txt");
-    	System.out.println(".\\"+id+"_"+pid+".txt");
     	f.delete();
     }
 //-----------------------------------------------------------------// 

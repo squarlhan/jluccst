@@ -15,16 +15,22 @@ import java.util.TimerTask;
 public class Test5m {
 
     public static void main(String[] args){
-        final int aa = 11;
-        final Timer timer = new Timer();
-        timer.schedule(new TimerTask(){
-            int a = 0;
-            int b = 0;
-            public void run(){
-                System.out.println("a = "+(++a)+"; "+(b+=5));
-                if(a>aa)timer.cancel();   
-            }
-        }, 0, 1000*5);
+    	String cmd=".//squarlhan//line i.txt o.txt 1";
+    	String rem=cmd.substring(cmd.indexOf(" "), cmd.length());
+		//System.out.println("rem"+rem);
+		rem=rem.trim();
+		System.out.println("rem:"+rem);
+		System.out.println("rem.indexOf():"+rem.indexOf(" "));
+		rem=rem.substring(rem.indexOf(" "),rem.length());
+		//System.out.println("rem"+rem);
+		rem=rem.trim();
+		System.out.println("rem:"+rem);
+		
+		System.out.println("rem.indexOf():"+rem.indexOf(" "));
+		
+		rem=rem.substring(0,rem.indexOf(" "));
+		
+		System.out.println("rem:"+rem);
     }
 
 }
