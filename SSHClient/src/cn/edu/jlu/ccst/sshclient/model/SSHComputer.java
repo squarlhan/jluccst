@@ -19,7 +19,7 @@ import cn.edu.jlu.ccst.sshclient.ui.LinuxClient;
 import cn.edu.jlu.ccst.sshclient.inter.BaseOperation;
 import cn.edu.jlu.ccst.sshclient.ui.ComputerUI;
 
-/** ������ʵ����
+/** 
  * @author Woden
  *
  */
@@ -79,7 +79,7 @@ public class SSHComputer extends BaseClass implements BaseOperation{
 	public void setGps(List<SSHGroup> gps) {
 		this.gps = gps;
 	}
-	//����ķ�����Ҫʵ��
+	//
 	
  public  boolean creat() {
 		// TODO Auto-generated method stub
