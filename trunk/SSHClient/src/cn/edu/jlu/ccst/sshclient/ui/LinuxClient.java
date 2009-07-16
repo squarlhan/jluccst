@@ -149,7 +149,11 @@ public class LinuxClient extends javax.swing.JFrame {
                         else {
                         tk.setStartTime(timeFormat.parse(t.valueOf("@starttime")));                  
                         String str = t.valueOf("@runsc");
+
+                        //System.out.println("str"+str);
+
                         tk.setRunTime(Long.parseLong(t.valueOf("@stimelong")));
+
                         boolean tmp = false;
                         if(str.equals("1")) {
                         	tmp = true;
@@ -160,15 +164,18 @@ public class LinuxClient extends javax.swing.JFrame {
                         	File[] fList=f.listFiles(); 
                         	for(int i=0;i<fList.length;i++)
                         	{
-                        		System.out.println(".\\"+t.valueOf("@id"));
+                        		//System.out.println(".\\"+t.valueOf("@id"));
                         		if((fList[i].toString().startsWith(".\\"+t.valueOf("@id"))))
                         		{
    
-                        			System.out.println("start");
+                        			//System.out.println("start");
                         			String s=fList[i].toString().substring(fList[i].toString().indexOf("_")+1, fList[i].toString().indexOf("t")-1);
                         			String rem=t.valueOf("@cmd").substring(t.valueOf("@cmd").indexOf(" "), t.valueOf("@cmd").length());
                         			rem=rem.trim();
+                        			rem=rem.substring(rem.indexOf(" "),rem.length());
+                        			rem=rem.trim();
                         			rem=rem.substring(0,rem.indexOf(" "));
+                        			System.out.println("rem"+rem);
                         			Thread Check=new Thread(new StartExam(t.valueOf("@id"),s, c.valueOf("@host"),c.valueOf("@user"),c.valueOf("@pswd"),t.valueOf("@out"),rem));
                         			Check.start();
                         		}
@@ -487,7 +494,7 @@ public void setTaskRunSucc(String Id,boolean t) {
 	for( int i = 0; i < tks.size(); i++) {
 		if(tks.get(i).getId().equals(Id)) {
 			tks.get(i).setRunSucc(t);
-			System.out.println("run sucss!");
+			//System.out.println("run sucss!");
 			return;
 		}
 	}
@@ -586,8 +593,8 @@ private void execTaskCommand ( ActionEvent e ) throws DocumentException {
     selectTask.setStartTime(curtime);
     long t = System.currentTimeMillis();
     selectTask.setRunTime(t);
-    System.out.println(t);
-    System.out.println(curtime);
+    //System.out.println(t);
+    //System.out.println(curtime);
    
     //将任务开始时间写入XML文件中
     TaskUI tempUI = new TaskUI();
@@ -755,7 +762,7 @@ private void jMenuMousePressAllStartG(MouseEvent evt) {
 	    rstk.setStartTime(curtime);
 	    long timerun = System.currentTimeMillis();
 	    rstk.setRunTime(timerun);
-	    System.out.println(curtime);
+	    //System.out.println(curtime);
 	   
 	    //将任务开始时间写入XML文件中
 	    TaskUI tempUI = new TaskUI();
@@ -826,7 +833,7 @@ private void jMenuMousePressAllStartG(MouseEvent evt) {
 		}
 			    
 	    rstk.start(t1);
-	    System.out.println("ddover!");
+	    //System.out.println("ddover!");
 	}
 	}
 	
@@ -1225,6 +1232,7 @@ public boolean getRunStatusC(String id) {
                     String s1 = null;    
                     while((s1 = br.readLine()) != null) 
                     {    
+                    	s1+="\r\n";
                         t1.append(s1);    
                     }    
                    br.close();    
@@ -1370,7 +1378,8 @@ public boolean getRunStatusC(String id) {
                           else {
                         	TaskUI tk1 = new TaskUI();
                             Date taskstartTime = tk1.getTaskStartTime(t);//查找XML文件获得上次任务开始时间
-                          	s="任务名:"+t.getName()                           
+                          	s="任务名:"+t.getName()  
+                          	  +"\n命令ID:"+t.getId()
                               +"\n命令内容:"+t.getCmd()
                               +"\n创建时间:"+b.getCreatdate()
                               +"\n输入文件路径:"+t.getFin()
@@ -1554,7 +1563,7 @@ public boolean getRunStatusC(String id) {
     	  }
     	  if(e.getActionCommand().equals("清空"))
     	  {
-    		  System.out.println("清空");
+    		  //System.out.println("清空");
     		  t.setText("");
     	  }
      }

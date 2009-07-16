@@ -49,7 +49,6 @@ public class ComputerUI extends javax.swing.JDialog
         });
         
         jPasswordField1.setEchoChar('*');
-       // jPasswordField2.setEchoChar('*');
     }
 //--------------------------------------------------------------// 
     public ComputerUI(String name,String user,String pwd,String host,String memo) 
@@ -64,7 +63,6 @@ public class ComputerUI extends javax.swing.JDialog
         });
         
         jPasswordField1.setEchoChar('*');
-        //jPasswordField2.setEchoChar('*');
      
     }
 //------------------------------------------------------------//
@@ -73,7 +71,6 @@ private void initComponents(String name,String user,String pwd,String host,Strin
 	jTextField2.setText(name);
     jTextField6.setText(user);
     jPasswordField1.setText(pwd);
-   // jPasswordField2.setText(pwd);
     jTextField8.setText(host);
     jTextArea4.setText(memo);
 }
@@ -109,15 +106,6 @@ private void initComponents() {
     jPasswordField1.setBounds(110, 100, 150, 30);
     jPasswordField1.setEchoChar('*');
     this.add(jPasswordField1);
-    /*
-    jLabel7 = new javax.swing.JLabel("重输密码：");
-    jLabel7.setBounds(20, 140, 70, 30);
-    this.add(jLabel7);
-    jPasswordField2 = new javax.swing.JPasswordField();
-    jPasswordField2.setBounds(110, 140, 150, 30);
-    jPasswordField2.setEchoChar('*');
-    this.add(jPasswordField2);
-    */
     
     jLabel8 = new javax.swing.JLabel("主机IP地址:");
     jLabel8.setBounds(20, 140, 70, 30);
@@ -190,7 +178,6 @@ private void initComponents() {
         jTextArea4.setText(null);
         jTextField6.setText(null);
         jPasswordField1.setText(null);
- //       jPasswordField2.setText(null);
         jTextField8.setText(null);
     }//GEN-LAST:event_jButton1MousePressed
 
@@ -208,16 +195,6 @@ private void initComponents() {
             JOptionPane.showMessageDialog(null, "请输入用户名密码");
             return;
         }
-        /*
-        if(jPasswordField2.getPassword().equals("")){
-             JOptionPane.showMessageDialog(null, "请输入用户名密码");
-             return;
-        }
-        if(! String.valueOf(jPasswordField1.getPassword()).equals(String.valueOf(jPasswordField2.getPassword()))){
-             JOptionPane.showMessageDialog(null, "两次输入的密码不一致");
-             return;
-        }
-        */
         if(jTextField8.getText().equals("")){
             JOptionPane.showMessageDialog(null, "请输入用户名主机名");
             return;
@@ -260,16 +237,6 @@ private void initComponents() {
             JOptionPane.showMessageDialog(null, "请输入用户名密码");
             return;
         }
-        /*
-        if(jPasswordField2.getPassword().equals("")){
-             JOptionPane.showMessageDialog(null, "请输入用户名密码");
-             return;
-        }
-        if(! String.valueOf(jPasswordField1.getPassword()).equals(String.valueOf(jPasswordField2.getPassword()))){
-             JOptionPane.showMessageDialog(null, "两次输入的密码不一致");
-             return;
-        }
-        */
         if(jTextField8.getText().equals("")){
             JOptionPane.showMessageDialog(null, "请输入用户名主机名");
             return;

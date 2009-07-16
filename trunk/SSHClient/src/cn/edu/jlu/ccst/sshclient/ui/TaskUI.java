@@ -191,7 +191,10 @@ public class TaskUI extends javax.swing.JDialog {
 			 JOptionPane.showMessageDialog(null,"请输入新建任务的命令");
 			 return;
 		 }
-		 
+		 if(tfout.getText().equals("")) {
+			 JOptionPane.showMessageDialog(null,"请选择输出目录");
+			 return;
+		 }
    	     LinuxClient tempClient = LinuxClient.GetObj();
    	     SSHGroup selectGroup = new SSHGroup();
 	     BaseClass curType = new BaseClass();
@@ -343,7 +346,7 @@ public class TaskUI extends javax.swing.JDialog {
 	 		 if(flg1 == false) break;
 	 	}
 
-	 	System.out.println("写入xml:"+ starttime);
+	 	//System.out.println("写入xml:"+ starttime);
 	     writer = new XMLWriter(new FileWriter(filePath), format);
 	     writer.write(doc);
 	     writer.close();
