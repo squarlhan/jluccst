@@ -282,14 +282,14 @@ public class TaskUI extends javax.swing.JDialog {
 			 }
 		 }
    	     this.EditTaskFromXML(LinuxClient.getCur().getId(), tTextField1.getText(), tTextArea2.getText(),tTextField3.getText(),tfin.getText(),tfout.getText(),
-   	    		              LinuxClient.tks.get(i).getStartTime());
+   	    		              LinuxClient.tks.get(i).getStartTime(),0);
    	     this.setVisible(false);
          this.dispose(); 
          JOptionPane.showMessageDialog(null, "修改任务成功！");
 	 }
 	 //--------------------------------------------//
 	//根据id修改某个任务组,修改任务的开始执行时间
-	 public void EditTaskFromXML(String id,String n,String memo,String cmd,String in,String out,Date starttime)
+	 public void EditTaskFromXML(String id,String n,String memo,String cmd,String in,String out,Date starttime, long stimelong)
 	 {		
 	     SAXReader reader = new SAXReader();
 	     try{
@@ -324,9 +324,12 @@ public class TaskUI extends javax.swing.JDialog {
 	             	 et.addAttribute("out",out);
 	             	 if(starttime == null) {
 	             		et.addAttribute("starttime","");
+	             		et.addAttribute("stimelong","0");
 	             	 }
-	             	 else
+	             	 else {
 	             	 et.addAttribute("starttime",timeFormat.format(starttime));
+	             	 et.addAttribute("stimelong",String.valueOf(stimelong));
+	             	 }
 	             	 et.addAttribute("memo", memo);
 	             	 flag = false;
 	             	 break;

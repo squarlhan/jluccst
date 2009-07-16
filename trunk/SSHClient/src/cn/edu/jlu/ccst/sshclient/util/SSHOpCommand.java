@@ -207,6 +207,9 @@ public  void scpPut(Connection conn,String localFile, String remoteFileName,Stri
     		sess.execCommand(Cmd);
             String out;
             boolean first=true;
+            DynDispThread disTh = new DynDispThread(jTextArea1,Id,System.currentTimeMillis());
+            disTh.start();
+            int ft = 0;
     		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(sess.getStdout()));        
     		while((out=bufferedReader.readLine())!=null) {
     			   if(first&&Cmd.startsWith("./"))
@@ -220,6 +223,11 @@ public  void scpPut(Connection conn,String localFile, String remoteFileName,Stri
     			   }
     			   out += "\n";
     			   write.append(out);
+    			   if(ft == 0) {
+    				   disTh.stop();
+    				   jTextArea1.setText(Id+"\n");
+    				   ft = 1;
+    				   }
     			   jTextArea1.append(out);   
     		}
     		sess.close();
@@ -232,7 +240,7 @@ public  void scpPut(Connection conn,String localFile, String remoteFileName,Stri
 			
 				   File f=new File("./"+Id+"_"+pidout+".txt");
 	    	       f.delete();
-	    	       GenerateGraphy.GetObj(Id,filename);
+	    	       GenerateGraphy.GetObj(Id,filename,2);
 	    	       System.out.print("文件路径:"+filename);
 			   }
         	}
@@ -371,11 +379,11 @@ public  void scpPut(Connection conn,String localFile, String remoteFileName,Stri
     		    Date curtime = new Date();
     		    //将任务开始时间写config.xml文件中
     		    tempUI.EditTaskFromXML(runtasklist.get(i).getId(), runtasklist.get(i).getName(), runtasklist.get(i).getMemo(),
-    		    		runtasklist.get(i).getCmd(), runtasklist.get(i).getFin(),runtasklist.get(i).getFout(), curtime);
+    		    		runtasklist.get(i).getCmd(), runtasklist.get(i).getFin(),runtasklist.get(i).getFout(), curtime,stime);
     		    
     	        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(sess.getStdout()));        
     	    	while((out=bufferedReader.readLine())!=null) {
-    	    			   out += "\n";
+    	    			   out += "\r\n";
     	    			   write.append(out);
     	    			   jTextArea1.append(out);   
     	    		}

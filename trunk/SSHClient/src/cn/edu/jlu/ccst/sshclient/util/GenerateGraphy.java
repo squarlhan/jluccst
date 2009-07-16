@@ -273,13 +273,18 @@ public class GenerateGraphy {
 	}
 
 	//public static void main(String[] args) throws IOException {
-	public static void GetObj(String id,String filepath) throws IOException {
+	public static void GetObj(String id,String filepath, int t) throws IOException {
 		// 将生成的报表放到预览窗口中
-
-
-		final ChartPanel preview = new ChartPanel(generateBar(filepath));
-		//final ChartPanel preview = new ChartPanel(generateLine(filepath));		
-		//final ChartPanel preview = new ChartPanel(generatePie(filepath));
+		final ChartPanel preview ;
+		if(t == 1) {
+			preview = new ChartPanel(generateLine(filepath));	
+		 }
+		else if(t == 2) {
+			preview = new ChartPanel(generateBar(filepath));
+		}
+		else {
+			preview = new ChartPanel(generatePie(filepath));
+		}
 		preview.setName(id+"Gra");
 //		preview.addWindowListener(new WindowAdapter() {
 //			public void windowClosing(final WindowEvent event) {
@@ -308,7 +313,7 @@ public class GenerateGraphy {
 		//右键关闭选中的选项卡
 		LinuxClient.GetObj().getJTabbedPane().addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
-				 if (e.getClickCount() == 1 && SwingUtilities.isRightMouseButton(e)) {
+				 if (e.getClickCount() == 2 && SwingUtilities.isLeftMouseButton(e)) {
 					 if(LinuxClient.GetObj().getJTabbedPane().getTabCount() > 0) {
 			         if(LinuxClient.GetObj().getJTabbedPane().getSelectedIndex() == LinuxClient.GetObj().getJTabbedPane().indexOfTab(strid)) {
 					 LinuxClient.GetObj().getJTabbedPane().removeTabAt(LinuxClient.GetObj().getJTabbedPane().getSelectedIndex());
