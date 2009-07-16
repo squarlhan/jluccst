@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <config>
+
     <computer id="1" name="bi" host="10.60.58.194" 
               user="wuchunguo" pswd="wucg"
               creatdate="2009-06-26">             

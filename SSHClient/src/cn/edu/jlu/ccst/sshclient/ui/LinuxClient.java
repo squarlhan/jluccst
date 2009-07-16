@@ -144,11 +144,12 @@ public class LinuxClient extends javax.swing.JFrame {
                         tk.setFout(t.valueOf("@out"));
                         if(t.valueOf("@starttime").equals("")){
                         	tk.setStartTime(null);
+                        	tk.setRunTime(0);
                         }
                         else {
                         tk.setStartTime(timeFormat.parse(t.valueOf("@starttime")));                  
                         String str = t.valueOf("@runsc");
-                        System.out.println("str"+str);
+                        tk.setRunTime(Long.parseLong(t.valueOf("@stimelong")));
                         boolean tmp = false;
                         if(str.equals("1")) {
                         	tmp = true;
@@ -591,7 +592,7 @@ private void execTaskCommand ( ActionEvent e ) throws DocumentException {
     //将任务开始时间写入XML文件中
     TaskUI tempUI = new TaskUI();
     tempUI.EditTaskFromXML(selectTask.getId(), selectTask.getName(), selectTask.getMemo(),
-          selectTask.getCmd(), selectTask.getFin(), selectTask.getFout(), curtime);
+          selectTask.getCmd(), selectTask.getFin(), selectTask.getFout(), curtime,t);
     
     selectTask.start(t1);
     //System.out.println("ddover!");
@@ -613,23 +614,6 @@ private void stopTaskCommand( ActionEvent e ) throws DocumentException  {
     }
 }
 
-//--------------------------------------------------------------//
-/**
- * 查看自定义任务的运行结果图
- */
-
-private void displayResT(ActionEvent e) throws DocumentException  {
-	if(dispResT.isEnabled()) {
-		SSHTask stk = findSelectTask();
-		try {
-		String filename=stk.getFout()+"/"+stk.getId()+".txt";
-		GenerateGraphy.GetObj(stk.getId(),filename);
-		}
-		catch(Exception ev) {
-			ev.printStackTrace();
-		}
-	}
-}
 
 //---------------------------------------------------------------//
 /**
@@ -776,7 +760,7 @@ private void jMenuMousePressAllStartG(MouseEvent evt) {
 	    //将任务开始时间写入XML文件中
 	    TaskUI tempUI = new TaskUI();
 	    tempUI.EditTaskFromXML(rstk.getId(), rstk.getName(), rstk.getMemo(),
-	    		rstk.getCmd(), rstk.getFin(), rstk.getFout(), curtime);
+	    		rstk.getCmd(), rstk.getFin(), rstk.getFout(), curtime,timerun);
 	    
 	    
 	    
@@ -1307,7 +1291,7 @@ public boolean getRunStatusC(String id) {
                     if(!temptask.getFout().equals("")) {
                     	String filename = temptask.getFout()+"/"+temptask.getId()+".txt";
                     	File f = new File(filename);                
-                    	if(f.exists() && temptask.getCmd().startsWith("./")) {
+                    	if(f.exists() && temptask.getCmd().startsWith("./") && temptask.getRunSucc() == false) {
                     		dispResT.setEnabled(true);
                     	}
                     	else dispResT.setEnabled(false);
@@ -1575,7 +1559,49 @@ public boolean getRunStatusC(String id) {
     	  }
      }
   }
-  
+
+//------------------------------------------------------------//
+  /**
+   * 显示运行自定义结果图的响应处理
+   */
+  class dispclick implements ActionListener
+  {
+      public void actionPerformed(ActionEvent e)
+     {
+          try
+          {
+              actionDispClick(e);
+          } catch (DocumentException ex)
+          {}
+     }
+  }
+  /**
+   * 根据点击选项显示不同的效果图
+   * @param e
+   */
+  private void actionDispClick(ActionEvent e) throws DocumentException { 
+	  if(dispResT.isEnabled()) {		
+	  String selI = e.getActionCommand();
+	  int t = 0;
+	  if(selI.startsWith("显示线")) {
+		  t = 1;
+	  }
+	  else if(selI.startsWith("显示柱")) {
+		  t = 2;
+	  }
+	  else t =3;
+	  
+	  SSHTask stk = findSelectTask();
+	try {
+		String filename=stk.getFout()+"/"+stk.getId()+".txt";
+		GenerateGraphy.GetObj(stk.getId(),filename,t);
+		}
+		catch(Exception ev) {
+			ev.printStackTrace();
+		}
+	  }
+	  
+  }
 /**
  * 初始画图函数
  */
@@ -2097,22 +2123,17 @@ public boolean getRunStatusC(String id) {
         popMenuT.add(stopItemT);
         
         //查看任务运行的结果图
-        dispResT = new JMenuItem("自定义任务的效果图");
-        dispResT.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-           {
-                try
-                {
-                	displayResT(e);
-                } catch (DocumentException ex)
-                {
-                	ex.printStackTrace();
-                }
-           }
-        }
-        );
+        dispResT = new JMenu("自定义任务的效果图");
         dispResT.setEnabled(false);
+        linedispresT = new JMenuItem("显示线状效果图");
+        linedispresT.addActionListener(new dispclick());
+        bardispresT = new JMenuItem("显示柱状效果图");
+        bardispresT.addActionListener(new dispclick());
+        piedispresT = new JMenuItem("显示饼状效果图");
+        piedispresT.addActionListener(new dispclick());
+        dispResT.add(linedispresT);
+        dispResT.add(bardispresT);
+        dispResT.add(piedispresT);
         popMenuT.add(dispResT);
         
         
@@ -2279,7 +2300,10 @@ public boolean getRunStatusC(String id) {
     private JMenuItem editItemT;
     private JMenuItem execItemT;
     private JMenuItem stopItemT;
-    private JMenuItem dispResT;
+    private JMenu dispResT;
+    private JMenuItem linedispresT;
+    private JMenuItem bardispresT;
+    private JMenuItem piedispresT;
     
 
     private JPopupMenu popMenuTA;
