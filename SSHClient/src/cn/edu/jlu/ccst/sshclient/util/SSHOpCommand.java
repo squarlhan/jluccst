@@ -177,9 +177,105 @@ public  void scpPut(Connection conn,String localFile, String remoteFileName,Stri
 		client.put(localFile, remoteFileName, remoteDir, "0600");
 
 	} 
-    /**
-     * 运行ssh远程命令
-     */
+/**
+ * 运行ssh远程命令
+ */
+private void runSSH() {
+	String filename=Finout+"\\"+Id+".txt";
+	FileWriter write = null;
+	try
+	{
+	write=new FileWriter(filename,false);  
+	}catch(IOException e)
+	{}
+
+	String pidout = null;
+	flag = true;
+	LinuxClient.GetObj().setTaskRunSucc(Id,flag);
+	TaskUI temp = new TaskUI();
+	temp.EditTaskRunSuccXML(Id,flag);//向config.xml中写入任务运行状态
+	try{
+    	
+		DynDispThread disTh = new DynDispThread(jTextArea1,Id,System.currentTimeMillis());
+        disTh.start();
+		Connection conn = getOpenedConnection();
+		Session sess = conn.openSession();
+		if(Cmd.startsWith("./"))
+		{
+			String s=Cmd.substring(Cmd.indexOf(" "), Cmd.length());
+			s=s.trim();
+			s=s.substring(0,s.indexOf(" "));
+			System.out.println("S+:" + s + "输入文件.txt:"+Fin);
+			scpPut(conn,Fin,s,"./");
+		}
+		sess.execCommand(Cmd);
+        String out;
+        int ft = 0;
+        boolean first=true;
+		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(sess.getStdout()));        
+		while((out=bufferedReader.readLine())!=null) {
+			   if(first&&Cmd.startsWith("./"))
+			   {
+				   pidout=out;
+				   //向正在运行的自定义任务写入pid
+				   temp.EditTaskRunPid(Id,out.trim());
+				   System.out.println("out:"+".\\"+Id+"_"+out+".txt");
+				   first=false;
+				   File f=new File(".\\"+Id+"_"+out+".txt");
+	    	       f.createNewFile();
+				   continue;
+			   }
+			   if(ft == 0) {
+ 				   disTh.stop();
+ 				   jTextArea1.setText(Id+"\n");
+ 				   ft = 1;
+ 				   }
+			   out += "\r\n";
+			   write.append(out);
+			   jTextArea1.append(out);   
+		}
+		sess.close();
+		conn.close();
+		
+		write.flush();
+		write.close();
+		if(Cmd.startsWith("./"))
+		   {
+		
+			   File f=new File("./"+Id+"_"+pidout+".txt");
+    	       f.delete();
+    	       System.out.println("文件路径:"+filename);
+    	       GenerateGraphy.GetObj(Id,filename,2);
+    	       
+		   }
+    	}
+    	catch(Exception ie) {
+    		ie.printStackTrace();
+    	}
+    	LinuxClient tmpLinx = LinuxClient.GetObj();
+    	tmpLinx.setSelTaskStatus(Id,0);         	
+    	if(flag == true) {
+    		flag = false;
+    		LinuxClient.GetObj().setTaskRunSucc(Id,flag);      
+        	temp.EditTaskRunSuccXML(Id,flag);//向config.xml中写入任务运行状态
+    	}
+    	
+    	//判断并行结束
+    	if(runtasklist == null){
+    		//System.out.println("并行jieshu");
+    		if(LinuxClient.GetObj().getAllRunSucc(Id) == false) {
+        		LinuxClient.GetObj().setSinglerun(1);
+        	}
+    	}
+    	
+}
+
+/**
+ * 重载执行函数，停止启动任务
+ * 停止正在运行的任务
+ */
+
+/*
     private void runSSH() {
   	String filename=Finout+"\\"+Id+".txt";
     	FileWriter write = null;
@@ -230,6 +326,8 @@ public  void scpPut(Connection conn,String localFile, String remoteFileName,Stri
             bufferedReaderGP = new BufferedReader(new InputStreamReader(sessGP.getStdout()));    		
     		while((outGP=bufferedReaderGP.readLine())!=null) {
     			pidout=outGP;
+    			System.out.println(pidout);
+    			break;
     		}
     		File f=new File(".\\"+Id+"_"+pidout+".txt");
  	        f.createNewFile();
@@ -293,11 +391,7 @@ public  void scpPut(Connection conn,String localFile, String remoteFileName,Stri
         	}
         	
     }
-    
-    /**
-     * 重载执行函数，停止启动任务
-     * 停止正在运行的任务
-     */
+  */  
     public void stopSSH() {
     	
     	List<String> pidlist;
@@ -359,6 +453,7 @@ public  void scpPut(Connection conn,String localFile, String remoteFileName,Stri
 //-------------------------------------------------------------//
   /**
    * 停止自己定义的任务
+   * 
    */
   public void stopOwn() {
 	  try {
@@ -418,19 +513,23 @@ public  void scpPut(Connection conn,String localFile, String remoteFileName,Stri
     		    
     	        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(sess.getStdout()));     
     	        if(runtasklist.get(i).getCmd().startsWith("./")) { //处理自定义任务
-    	        	int first = 0;
+    	        	int first1 = 0;
     	        	while((out=bufferedReader.readLine())!=null) { 
  	    		       if(ft == 0) {
     	 				   disTh.stop();
     	 				   jTextArea1.setText(runtasklist.get(i).getGp().getId()+"\n");
     	 				   ft = 1;
-    	 				   tempUI.EditTaskRunPid(runtasklist.get(i).getId(),out.trim());
-    	 				   continue;
     	 				   }
+ 	    		       if(first1 == 0) {
+ 	    		    	   first1 = 1;
+ 	    		           tempUI.EditTaskRunPid(runtasklist.get(i).getId(),out.trim());
+   	 				       continue;
+ 	    		       }
 	    			   out += "\r\n";
 	    			   write.append(out);
 	    			   jTextArea1.append(out);  
     	        	}
+    	        	first1 = 0;
     	        }
     	        else {
     	    	    while((out=bufferedReader.readLine())!=null) { //处理费自定义任务
@@ -444,6 +543,7 @@ public  void scpPut(Connection conn,String localFile, String remoteFileName,Stri
     	    			   jTextArea1.append(out);   
     	    		 }
     	        }
+    	       
     	    	runtasklist.get(i).setStatus(0);
     	      	if(flag == true) { 
     	    		LinuxClient.GetObj().setTaskRunSucc(runtasklist.get(i).getId(),false);
@@ -471,14 +571,28 @@ public  void scpPut(Connection conn,String localFile, String remoteFileName,Stri
     }
 //-----------------------------------------------------------------//
     /**
-     * 
+     * 停止串行执行的组内的任务
      */
     public void stopGroupSSH() {
     	for(int i = 0; i < runtasklist.size(); ++i) {
 		    runtasklist.get(i).setStatus(0);   
     	}
-    	for(int i = 0; i < runtasklist.size(); ++i) {   		
-    		if(runtasklist.get(i).getRunSucc() == true) { //如果组中的任务正在执行中
+       for(int i = 0; i < runtasklist.size(); ++i) {   		
+    	 if(runtasklist.get(i).getRunSucc() == true) { //如果组中的任务正在执行中
+    	  if(runtasklist.get(i).getCmd().startsWith("./")) {
+    		  try {
+      			Connection conn = getOpenedConnection();
+      			Session sess = conn.openSession();
+      			SSHTask st = LinuxClient.GetObj().findSelectTask(runtasklist.get(i).getId());
+      			sess.execCommand("kill pid "+ st.getPid());
+      			sess.close();
+      	     	conn.close();
+      		}
+      		catch(Exception et) {
+      			et.printStackTrace();
+      		}
+    	  }
+    	  else {
     		String stopcmd = runtasklist.get(i).getCmd().substring(0,runtasklist.get(i).getCmd().indexOf(" "));
     		//System.out.println("stopcmd:"+ stopcmd);
     		String sscmd = "ps U "+ Name +" | grep "+
@@ -508,6 +622,7 @@ public  void scpPut(Connection conn,String localFile, String remoteFileName,Stri
         		et.printStackTrace();
         	}    	
         	killPidProcess(pidlist);//结束pid等于pidlist内容的进程
+    	  }
         	flag = false;
         	LinuxClient.GetObj().setGpsrunSucc(runtasklist.get(i).getGp().getId(), true);
         	LinuxClient.GetObj().setTaskRunSucc( runtasklist.get(i).getId(),false);

@@ -9,9 +9,6 @@ package cn.edu.jlu.ccst.sshclient.ui;
  *
  * Created on 2009-6-30, 14:09:55
  */
-
-
-
 import cn.edu.jlu.ccst.sshclient.model.BaseClass;
 import cn.edu.jlu.ccst.sshclient.model.SSHComputer;
 import cn.edu.jlu.ccst.sshclient.model.SSHGroup;
