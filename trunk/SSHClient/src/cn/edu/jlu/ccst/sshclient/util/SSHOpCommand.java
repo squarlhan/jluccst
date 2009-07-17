@@ -416,8 +416,24 @@ public  void scpPut(Connection conn,String localFile, String remoteFileName,Stri
     		    tempUI.EditTaskFromXML(runtasklist.get(i).getId(), runtasklist.get(i).getName(), runtasklist.get(i).getMemo(),
     		    		runtasklist.get(i).getCmd(), runtasklist.get(i).getFin(),runtasklist.get(i).getFout(), curtime,stime);
     		    
-    	        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(sess.getStdout()));        
-    	    	while((out=bufferedReader.readLine())!=null) {
+    	        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(sess.getStdout()));     
+    	        if(runtasklist.get(i).getCmd().startsWith("./")) { //处理自定义任务
+    	        	int first = 0;
+    	        	while((out=bufferedReader.readLine())!=null) { 
+ 	    		       if(ft == 0) {
+    	 				   disTh.stop();
+    	 				   jTextArea1.setText(runtasklist.get(i).getGp().getId()+"\n");
+    	 				   ft = 1;
+    	 				   tempUI.EditTaskRunPid(runtasklist.get(i).getId(),out.trim());
+    	 				   continue;
+    	 				   }
+	    			   out += "\r\n";
+	    			   write.append(out);
+	    			   jTextArea1.append(out);  
+    	        	}
+    	        }
+    	        else {
+    	    	    while((out=bufferedReader.readLine())!=null) { //处理费自定义任务
     	    		       if(ft == 0) {
     	 				   disTh.stop();
     	 				   jTextArea1.setText(runtasklist.get(i).getGp().getId()+"\n");
@@ -426,7 +442,8 @@ public  void scpPut(Connection conn,String localFile, String remoteFileName,Stri
     	    			   out += "\r\n";
     	    			   write.append(out);
     	    			   jTextArea1.append(out);   
-    	    		}
+    	    		 }
+    	        }
     	    	runtasklist.get(i).setStatus(0);
     	      	if(flag == true) { 
     	    		LinuxClient.GetObj().setTaskRunSucc(runtasklist.get(i).getId(),false);
