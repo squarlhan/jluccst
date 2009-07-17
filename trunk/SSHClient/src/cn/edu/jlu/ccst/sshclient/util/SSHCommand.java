@@ -197,7 +197,7 @@ public class SSHCommand extends JFrame {
 		try {
 			SSHCommand
 					.scpPut("10.60.58.194", "wuchunguo", "wucg",
-							"E:/SSH/cpp/Linepid.cpp", "Linepid.cpp",
+							"E:/SSH/cpp/irsvm.cpp", "irsvm.cpp",
 							"squarlhan/");
 			// SSHCommand.runSSH("10.60.58.194", "wuchunguo", "wucg",
 			// "./squarlhan/pid squarlhan/test.txt squarlhan/test2.txt 10");
