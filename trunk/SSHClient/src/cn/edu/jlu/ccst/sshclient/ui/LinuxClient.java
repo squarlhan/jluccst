@@ -182,6 +182,12 @@ public class LinuxClient extends javax.swing.JFrame {
                         if(!tk.getCmd().startsWith("./")) {
                         	tk.setRunSucc(false);
                         }
+                        else {
+                        	//如果自定任务正在执行,获得自定任务的pid.
+                        	if(tmp == true) {
+                        	 tk.setPid(t.valueOf("@runpid"));
+                        	}
+                        }
                         }
                         
                         List<String> params = new ArrayList();
