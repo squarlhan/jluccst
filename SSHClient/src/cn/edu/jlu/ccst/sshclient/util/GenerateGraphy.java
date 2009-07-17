@@ -337,7 +337,7 @@ public class GenerateGraphy {
 		while ((line = br.readLine()) != null) {
 			 line = line.trim();
 			if (line.trim().length() >= 1) {
-					 System.out.println(line);					
+					 //System.out.println(line);					
                      String[] strs = line.split("       ");
                      datas1.add(Float.valueOf(strs[1]));
 				     datas2.add(Float.valueOf(strs[2]));				
@@ -375,7 +375,7 @@ public class GenerateGraphy {
 			 line = line.trim();
 			 if(line == "")break;
 			 if (line.trim().length() >= 1) {
-				 System.out.println(line);					
+				 //System.out.println(line);					
                  String[] strs = line.split("       ");
                  datas1.add(Float.valueOf(strs[1]));
 			     datas2.add(Float.valueOf(strs[2]));				
