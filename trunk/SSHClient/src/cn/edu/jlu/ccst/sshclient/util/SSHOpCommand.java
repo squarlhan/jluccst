@@ -41,9 +41,10 @@ public class SSHOpCommand implements Runnable {
 	private  boolean flag = false; 
 	private  boolean groupflag = false;
 	private JLabel  conl;
+	private String ownPid;
 	private  String rs;	
 	private List<SSHTask> runtasklist;
-	
+
 	//默认构造方法
 	public SSHOpCommand() {
 		
@@ -74,6 +75,21 @@ public class SSHOpCommand implements Runnable {
 		this.opType = stopType;
 		runtasklist = null ;
 	}
+    /**
+     * 停止自定义的命令用这个构造方法
+     */
+    public SSHOpCommand(String host, String name, String psw, String cmd, String id,
+			String pid,int stopType) {
+    	super();
+		Host = host;
+		Name = name;
+		Psw = psw;
+		Cmd = cmd;
+		Id = id;
+		this.opType = stopType;
+		ownPid = pid;
+		runtasklist = null ;
+    }
 	/**
      * 运行单个任务命令用这个构造方法
      */
@@ -144,6 +160,9 @@ public class SSHOpCommand implements Runnable {
     		break;
     	case 4 ://停止组内串行执行的所有任务
     		stopGroupSSH();
+    		break;
+    	case 5 : //停止自定义的任务
+    		stopOwn();
     		break;
     	default: break;
     	}
@@ -301,7 +320,7 @@ public  void scpPut(Connection conn,String localFile, String remoteFileName,Stri
         bufferedReader = new BufferedReader(new InputStreamReader(sess.getStdout()));    		
 		while((out=bufferedReader.readLine())!=null) {
 			pidlist.add(out);  
-			//System.out.println("pid"+out);
+			System.out.println("pid"+out);
 		}
 		sess.close();
 		conn.close();
@@ -316,7 +335,6 @@ public  void scpPut(Connection conn,String localFile, String remoteFileName,Stri
    	 TaskUI temp = new TaskUI();
 	 temp.EditTaskRunSuccXML(Id,flag);//向config.xml中写入任务运行状态
      endtime = System.currentTimeMillis();
-     //System.out.println("ttime:"+endtime);
 	   	
 	}
   private void killPidProcess(List<String> pidlist) {
@@ -338,6 +356,26 @@ public  void scpPut(Connection conn,String localFile, String remoteFileName,Stri
     	
     }
    
+//-------------------------------------------------------------//
+  /**
+   * 停止自己定义的任务
+   */
+  public void stopOwn() {
+	  try {
+			Connection conn = getOpenedConnection();
+			Session sess = conn.openSession();
+			sess.execCommand("kill pid "+ ownPid);
+			sess.close();
+	     	conn.close();
+		}
+		catch(Exception et) {
+			et.printStackTrace();
+		}
+		 flag = false;
+	     LinuxClient.GetObj().setTaskRunSucc(Id,flag); 
+	   	 TaskUI temp = new TaskUI();
+		 temp.EditTaskRunSuccXML(Id,flag);//向config.xml中写入任务运行状态
+  }
    
  //-------------------------------------------------------------//
     /**
@@ -350,6 +388,9 @@ public  void scpPut(Connection conn,String localFile, String remoteFileName,Stri
     	try{
         	Connection conn ;
     		Session sess ;
+            DynDispThread disTh = new DynDispThread(jTextArea1,runtasklist.get(0).getGp().getId(),System.currentTimeMillis());
+            disTh.start();	
+            int ft = 0;
     		for(int i = 0; i < runtasklist.size(); ++i){ 
     			String filename=runtasklist.get(i).getFout()+"/"+runtasklist.get(i).getId()+".txt";
     	    	FileWriter write = null;
@@ -377,6 +418,11 @@ public  void scpPut(Connection conn,String localFile, String remoteFileName,Stri
     		    
     	        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(sess.getStdout()));        
     	    	while((out=bufferedReader.readLine())!=null) {
+    	    		       if(ft == 0) {
+    	 				   disTh.stop();
+    	 				   jTextArea1.setText(runtasklist.get(i).getGp().getId()+"\n");
+    	 				   ft = 1;
+    	 				   }
     	    			   out += "\r\n";
     	    			   write.append(out);
     	    			   jTextArea1.append(out);   
