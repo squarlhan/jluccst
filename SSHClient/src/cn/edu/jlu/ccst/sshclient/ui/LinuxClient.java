@@ -1670,12 +1670,10 @@ public boolean getRunStatusC(String id) {
 	  String selI = e.getActionCommand();
 	  int t = 0;
 	  if(selI.startsWith("显示线")) {
-		  t = 1;
+		  t = 4;
 	  }
-	  else if(selI.startsWith("显示柱")) {
-		  t = 2;
-	  }
-	  else t =3;
+	  else  t = 5;
+
 	  
 	  SSHTask stk = findSelectTask(cur.getId());
 	try {
@@ -2216,10 +2214,10 @@ public boolean getRunStatusC(String id) {
         bardispresT = new JMenuItem("显示柱状效果图");
         bardispresT.addActionListener(new dispclick());
         piedispresT = new JMenuItem("显示饼状效果图");
-        piedispresT.addActionListener(new dispclick());
+        //piedispresT.addActionListener(new dispclick());
         dispResT.add(linedispresT);
         dispResT.add(bardispresT);
-        dispResT.add(piedispresT);
+        //dispResT.add(piedispresT);
         popMenuT.add(dispResT);
         
         

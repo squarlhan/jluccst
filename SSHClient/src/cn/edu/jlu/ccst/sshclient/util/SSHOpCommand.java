@@ -245,8 +245,9 @@ private void runSSH() {
     		   fout.close();
     		   conn.close();
     	       System.out.println("文件路径:"+filename);
+
     	       
-    	       GenerateGraphy.GetObj(LinuxClient.GetObj().findSelectTask(Id).getName()+"_"+Id,filename,2);
+    	       GenerateGraphy.GetObj(LinuxClient.GetObj().findSelectTask(Id).getName()+"_"+Id,filename,4);
     	       
 		   }
 		sess.close();
