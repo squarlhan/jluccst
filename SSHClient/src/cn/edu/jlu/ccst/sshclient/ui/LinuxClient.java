@@ -1,3 +1,4 @@
+package cn.edu.jlu.ccst.sshclient.ui;
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -9,13 +10,15 @@
  * Created on 2009-6-30, 14:09:55
  */
 
-package cn.edu.jlu.ccst.sshclient.ui;
+
 
 import cn.edu.jlu.ccst.sshclient.model.BaseClass;
 import cn.edu.jlu.ccst.sshclient.model.SSHComputer;
 import cn.edu.jlu.ccst.sshclient.model.SSHGroup;
 import cn.edu.jlu.ccst.sshclient.model.SSHTask;
 import cn.edu.jlu.ccst.sshclient.ui.ComputerUI;
+import cn.edu.jlu.ccst.sshclient.ui.MyTreeCellRender;
+import cn.edu.jlu.ccst.sshclient.ui.TaskUI;
 import cn.edu.jlu.ccst.sshclient.util.GenerateGraphy;
 import cn.edu.jlu.ccst.sshclient.util.SSHOpCommand;
 import cn.edu.jlu.ccst.sshclient.util.SSHOpCommand;
@@ -166,6 +169,7 @@ public class LinuxClient extends javax.swing.JFrame {
    
                         			//System.out.println("start");
                         			String s=fList[i].toString().substring(fList[i].toString().indexOf("_")+1, fList[i].toString().indexOf("t")-1);
+                        			System.out.println("S:"+s);
                         			String rem=t.valueOf("@cmd").substring(t.valueOf("@cmd").indexOf(" "), t.valueOf("@cmd").length());
                         			rem=rem.trim();
                         			rem=rem.substring(rem.indexOf(" "),rem.length());
@@ -454,14 +458,14 @@ private void action ( ActionEvent e ) throws DocumentException
 /**
  * 找到选中的任务
  */
-public SSHTask findSelectTask() {
+public SSHTask findSelectTask(String id) {
 	 SSHTask selectTask = new SSHTask();
 	 Iterator <SSHTask> it;
 	 SSHGroup selectGroup = new SSHGroup();
 	//寻找选中的任务
 		for(it = tks.iterator(); it.hasNext() ;) {
 		     selectTask = (SSHTask) it.next();
-		    if(selectTask.getId().equals(cur.getId())) {
+		    if(selectTask.getId().equals(id)) {
 		    	break;
 		    }
 		}
@@ -618,7 +622,7 @@ private void stopTaskCommand( ActionEvent e ) throws DocumentException  {
     if(stopItemT.isEnabled()||jMenuItem15.isEnabled()) {
     setSelTaskStatus(cur.getId(),0);
 	SSHTask stopTask = new SSHTask();
-	stopTask = findSelectTask();
+	stopTask = findSelectTask(cur.getId());
 	stopTask.stop();
     }
 }
@@ -1297,7 +1301,7 @@ public boolean getRunStatusC(String id) {
                     jMenuItem12.setEnabled(false);
                     jMenuItem13.setEnabled(false);
                     SSHTask temptask = new SSHTask();
-                    temptask = findSelectTask();//变灰相应的任务信息
+                    temptask = findSelectTask(cur.getId());//变灰相应的任务信息
                     if(!temptask.getFout().equals("")) {
                     	String filename = temptask.getFout()+"/"+temptask.getId()+".txt";
                     	File f = new File(filename);                
@@ -1309,7 +1313,7 @@ public boolean getRunStatusC(String id) {
                     else {
                     	dispResT.setEnabled(false);
                     }
-                    if(temptask.getStatus() == 0) {
+                    if(temptask.getRunSucc() == false) {
                     jMenuItem14.setEnabled(true);
                     jMenuItem15.setEnabled(false);
                     } 
@@ -1477,8 +1481,8 @@ public boolean getRunStatusC(String id) {
                         {
                       	  popMenuT.show(jTree1, e.getX(), e.getY());
                       	  SSHTask temptask = new SSHTask();
-                      	  temptask = findSelectTask();//变灰相应的任务信息
-                      	  if(temptask.getStatus() == 0) {
+                      	  temptask = findSelectTask(cur.getId());//变灰相应的任务信息
+                      	  if(temptask.getRunSucc() == false) {
                       		  stopItemT.setEnabled(false);
                       		  execItemT.setEnabled(true);
                       	  }
@@ -1602,7 +1606,7 @@ public boolean getRunStatusC(String id) {
 	  }
 	  else t =3;
 	  
-	  SSHTask stk = findSelectTask();
+	  SSHTask stk = findSelectTask(cur.getId());
 	try {
 		String filename=stk.getFout()+"/"+stk.getId()+".txt";
 		GenerateGraphy.GetObj(stk.getId(),filename,t);
