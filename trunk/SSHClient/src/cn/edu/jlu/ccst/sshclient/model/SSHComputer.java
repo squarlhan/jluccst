@@ -101,7 +101,6 @@ public class SSHComputer extends BaseClass implements BaseOperation{
 	@Override
 	public boolean remove() {
 		int tt = JOptionPane.showConfirmDialog(null, "删除电脑", "确认删除", JOptionPane.YES_NO_OPTION);
-        System.out.print("yesoption:"+JOptionPane.YES_NO_OPTION);
 		if(JOptionPane.NO_OPTION == tt)
 			{
 			return false;
@@ -122,7 +121,7 @@ public class SSHComputer extends BaseClass implements BaseOperation{
             		el.getParent().remove(el);
             	}
     		}
-    	  XMLWriter writer = new XMLWriter(new FileWriter(this.getClass().getResource("/").getPath() + "cn/edu/jlu/ccst/sshclient/util/Config.xml"));	   	 
+    	  XMLWriter writer = new XMLWriter(new FileWriter("Config.xml"));	   	 
 		  writer.write(doc);
 		  writer.close();
 		}
