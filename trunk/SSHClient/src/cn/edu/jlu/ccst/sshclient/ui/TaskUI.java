@@ -290,8 +290,10 @@ public class TaskUI extends javax.swing.JDialog {
          //如果是自己的任务，先把文件传过去。
          String Cmd=tTextField3.getText();
          SSHComputer TC=LinuxClient.GetObj().GfindselectComputer(LinuxClient.GetObj().getCur().getId());
+         System.out.println(TC.getName());
          Connection conn = getOpenedConnection(TC);
  		Session sess = conn.openSession();
+ 		System.out.println("新的S+:" + "输入文件.txt:"+tfin.getText());
  		if((Cmd.startsWith("./"))&&(tfin.getText()!=null)&&(!tfin.getText().equals("")))
  		{
  			String s=Cmd.substring(Cmd.indexOf(" "), Cmd.length());
@@ -323,7 +325,7 @@ public class TaskUI extends javax.swing.JDialog {
 		{
 			return conn;
 		}
-		boolean isAuthenticated = conn.authenticateWithPassword(c.getName(), c.getPassword());
+		boolean isAuthenticated = conn.authenticateWithPassword(c.getUsername(), c.getPassword());
 		if (isAuthenticated == false)
 		{
 			throw new IOException("Authentication failed.");			
@@ -362,6 +364,21 @@ public class TaskUI extends javax.swing.JDialog {
    	     this.setVisible(false);
          this.dispose(); 
          JOptionPane.showMessageDialog(null, "修改任务成功！");
+         String Cmd=tTextField3.getText();
+         SSHComputer TC=LinuxClient.GetObj().TfindselectComputer(LinuxClient.GetObj().getCur().getId());
+         System.out.println(LinuxClient.GetObj().getCur().getId());
+         Connection conn = getOpenedConnection(TC);
+ 		Session sess = conn.openSession();
+	     if((Cmd.startsWith("./"))&&(tfin.getText()!=null)&&(!tfin.getText().equals("")))
+	 		{
+	 			String s=Cmd.substring(Cmd.indexOf(" "), Cmd.length());
+	 			s=s.trim();
+	 			s=s.substring(0,s.indexOf(" "));
+	 			System.out.println("新的S+:" + s + "输入文件.txt:"+tfin.getText());
+	 			scpPut(conn,tfin.getText(),s,"./");
+	 		}
+	     sess.close();
+		 conn.close();
 	 }
 	 //--------------------------------------------//
 	//根据id修改某个任务组,修改任务的开始执行时间
@@ -428,21 +445,7 @@ public class TaskUI extends javax.swing.JDialog {
 	     catch(Exception e ){
 	         e.printStackTrace();
 	     }
-	     String Cmd=tTextField3.getText();
-         SSHComputer TC=LinuxClient.GetObj().TfindselectComputer(LinuxClient.GetObj().getCur().getId());
-         System.out.println(LinuxClient.GetObj().getCur().getId());
-         Connection conn = getOpenedConnection(TC);
- 		Session sess = conn.openSession();
-	     if((Cmd.startsWith("./"))&&(tfin.getText()!=null)&&(!tfin.getText().equals("")))
-	 		{
-	 			String s=Cmd.substring(Cmd.indexOf(" "), Cmd.length());
-	 			s=s.trim();
-	 			s=s.substring(0,s.indexOf(" "));
-	 			System.out.println("新的S+:" + s + "输入文件.txt:"+tfin.getText());
-	 			scpPut(conn,tfin.getText(),s,"./");
-	 		}
-	     sess.close();
-		 conn.close();
+	     
 	 }
 	 
 	 //-----------------------------------------------------------//
