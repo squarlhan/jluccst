@@ -11,7 +11,11 @@ import java.io.BufferedReader;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.io.OutputStream;
+
 
 import ch.ethz.ssh2.Connection;
 import ch.ethz.ssh2.SCPClient;
@@ -25,21 +29,15 @@ import javax.management.timer.Timer;
 
 /**
  * @author Woden
- * ���sshl�ӵĲ���ӿ�
+>>>>>>> .r75
  */
 public class SSHCommand extends JFrame {
 	
 
 	 public SSHCommand() {
-			this.setLayout(null);
-			this.setSize(300, 350);
 			
-			jTextArea1 = new JTextArea();
-			jTextArea1.setBounds(10, 10, 200, 300);
-			this.add(jTextArea1);
 	}
 	/**
-	 * �ӷ������ȡ�ļ�
 	 * @param host ip
 	 * @param username
 	 * @param password
@@ -68,7 +66,6 @@ public class SSHCommand extends JFrame {
 
 	}
 	/**
-	 * ����������ļ�
 	 * @param host ip
 	 * @param username
 	 * @param password
@@ -125,9 +122,34 @@ public class SSHCommand extends JFrame {
 		return sess.getExitStatus().intValue();
 
 	}
+	/**
+	 * 执行命令组
+	 * @param host
+	 * @param username
+	 * @param password
+	 * @param cmd[]
+	 * @return
+	 * @throws IOException
+	 */
+	public static int runSSHs(String host, String username, String password, List<String> cmds) throws IOException {
+
+		Connection conn = getOpenedConnection(host, username, password);
+		Session sess = conn.openSession();
+		for(String cmd : cmds){
+			sess = conn.openSession();
+			sess.execCommand(cmd);		
+		}		
+		String out;
+		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(sess.getStdout()));     
+		while((out=bufferedReader.readLine())!=null)     
+		System.out.println(out);
+		sess.close();
+		conn.close();
+		return sess.getExitStatus().intValue();
+
+	}
 
 	/**
-	 * �õ�һ��򿪵�l��
 	 * @param host
 	 * @param username
 	 * @param password
@@ -169,20 +191,24 @@ public class SSHCommand extends JFrame {
 		return p.exitValue();
 
 	}
-	  private static   JTextArea   jTextArea1;
-//	private static String exec
-	/**
-	 * 主函数
-	 */
-	public static void main(String args[]) throws IOException {
-		SSHCommand s1 = new SSHCommand();
-		s1.setVisible(true);
-//	s1.runSSH("10.60.58.194", "wuchunguo", "wucg", "ping 10.60.58.254");
-		//SSHCommand.scpPut("10.60.58.194", "wuchunguo", "wucg", "D:\\project\\1.txt","2.txt",".\\");
-		//System.out.println("succeed");
-		OutputStream out=new FileOutputStream("D:\\project\\3.txt");
-		SSHCommand.scpGet("10.60.58.194", "wuchunguo", "wucg", "2.txt",out);
-		out.close();
-		//System.out.println("succeed");
+
+	
+	public static void main(String[] args){
+		try {
+			SSHCommand
+					.scpPut("10.60.58.194", "wuchunguo", "wucg",
+							"E:/SSH/cpp/LineEquation.cpp", "LineEquation.cpp",
+							"squarlhan/");
+			// SSHCommand.runSSH("10.60.58.194", "wuchunguo", "wucg",
+			// "./squarlhan/pid squarlhan/test.txt squarlhan/test2.txt 10");
+//			OutputStream out = new FileOutputStream("D:\\project\\3.txt");
+//			SSHCommand
+//					.scpGet("10.60.58.194", "wuchunguo", "wucg", "2.txt", out);
+//			out.close();
+//			System.out.println("succeed");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
 	}
 }

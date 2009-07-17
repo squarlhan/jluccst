@@ -22,14 +22,14 @@ public class MyTreeCellRender extends DefaultTreeCellRenderer {
 		DefaultMutableTreeNode node = (DefaultMutableTreeNode) value;
 		super.getTreeCellRendererComponent(tree, value, selected, expanded,
 				leaf, row, hasFocus);
-		ImageIcon image0 = new ImageIcon(this.getClass().getResource("/").getPath() + "cn/edu/jlu/ccst/sshclient/ui/resource/cs.png");
-		ImageIcon image1 = new ImageIcon(this.getClass().getResource("/").getPath() + "cn/edu/jlu/ccst/sshclient/ui/resource/c.png");
-		ImageIcon image2 = new ImageIcon(this.getClass().getResource("/").getPath() + "cn/edu/jlu/ccst/sshclient/ui/resource/g.png");
-		ImageIcon image3 = new ImageIcon(this.getClass().getResource("/").getPath() + "cn/edu/jlu/ccst/sshclient/ui/resource/s.png");
-		ImageIcon image5 = new ImageIcon(this.getClass().getResource("/").getPath() + "cn/edu/jlu/ccst/sshclient/ui/resource/m.png");
-		ImageIcon image6 = new ImageIcon(this.getClass().getResource("/").getPath() + "cn/edu/jlu/ccst/sshclient/ui/resource/e.png");
+		ImageIcon image0 = new ImageIcon(this.getClass().getResource("/cn/edu/jlu/ccst/sshclient/ui/resource/cs.png"));
+		ImageIcon image1 = new ImageIcon(this.getClass().getResource("/cn/edu/jlu/ccst/sshclient/ui/resource/c.png"));
+		ImageIcon image2 = new ImageIcon(this.getClass().getResource("/cn/edu/jlu/ccst/sshclient/ui/resource/g.png"));
+		ImageIcon image3 = new ImageIcon(this.getClass().getResource("/cn/edu/jlu/ccst/sshclient/ui/resource/s.png"));
+		ImageIcon image5 = new ImageIcon(this.getClass().getResource("/cn/edu/jlu/ccst/sshclient/ui/resource/m.png"));
+		ImageIcon image6 = new ImageIcon(this.getClass().getResource("/cn/edu/jlu/ccst/sshclient/ui/resource/e.png"));
 		
-		ImageIcon image4 = new ImageIcon(this.getClass().getResource("/").getPath() + "cn/edu/jlu/ccst/sshclient/ui/resource/default.png");
+		ImageIcon image4 = new ImageIcon(this.getClass().getResource("/cn/edu/jlu/ccst/sshclient/ui/resource/d.png"));
 		if (node.getLevel() == 0) {
 			this.setIcon(image0);
 			this.setSize(30,30);
