@@ -79,7 +79,7 @@ private void initComponents(String name,String user,String pwd,String host,Strin
 private void initComponents() {
 	
 	Toolkit tk = Toolkit.getDefaultToolkit();
-	Image img = tk.getImage(this.getClass().getResource("/").getPath() + "cn/edu/jlu/ccst/sshclient/ui/resource/t.png");
+	Image img = tk.getImage(this.getClass().getResource("/cn/edu/jlu/ccst/sshclient/ui/resource/t.png"));
 	setIconImage(img);
 	this.setLayout(null);
 	this.setSize(300, 400);
@@ -252,8 +252,8 @@ private void initComponents() {
     public void NewComputerToXML(SSHComputer newComputer){
         SAXReader reader = new SAXReader();
         try{
-        String filePath = this.getClass().getResource("/").getPath() + "cn/edu/jlu/ccst/sshclient/util/Config.xml";
-        Document doc = reader.read(filePath);
+        //String filePath = this.getClass().getResource("/").getPath() + "cn/edu/jlu/ccst/sshclient/util/Config.xml";
+        Document doc = reader.read("Config.xml");
         OutputFormat format = OutputFormat.createPrettyPrint();
         Element root = doc.getRootElement();
         XMLWriter writer = null;// 声明写XML的对象   
@@ -268,7 +268,8 @@ private void initComponents() {
         SimpleDateFormat timeFormat;
     	timeFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         newnode.addAttribute("creatdate",timeFormat.format(newComputer.getCreatdate()));
-        writer = new XMLWriter(new FileWriter(filePath), format);
+        //System.out.println(this.getClass().getResource("/cn/edu/jlu/ccst/sshclient/util/Config.xml").toExternalForm());
+        writer = new XMLWriter(new FileWriter("Config.xml"), format);
         writer.write(doc);
         writer.close();
         
@@ -283,8 +284,8 @@ private void initComponents() {
     {
         SAXReader reader = new SAXReader();
         try{
-        String filePath = this.getClass().getResource("/").getPath() + "cn/edu/jlu/ccst/sshclient/util/Config.xml";
-        Document doc = reader.read(filePath);
+        //String filePath = this.getClass().getResource("/").getPath() + "cn/edu/jlu/ccst/sshclient/util/Config.xml";
+        Document doc = reader.read("Config.xml");
         OutputFormat format = OutputFormat.createPrettyPrint();
         Element root = doc.getRootElement();
         XMLWriter writer = null;// 声明写XML的对象
@@ -304,7 +305,7 @@ private void initComponents() {
         	  el.addAttribute("memo", memo);
           }
     	}
-        writer = new XMLWriter(new FileWriter(filePath), format);
+        writer = new XMLWriter(new FileWriter("Config.xml"), format);
         writer.write(doc);
         writer.close();
         

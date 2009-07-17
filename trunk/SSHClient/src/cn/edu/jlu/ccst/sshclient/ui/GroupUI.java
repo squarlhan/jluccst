@@ -55,7 +55,7 @@ public class GroupUI extends javax.swing.JDialog  {
     	 
  	    this.setLocationRelativeTo(null);
  	    Toolkit tk = Toolkit.getDefaultToolkit();
- 		Image img = tk.getImage(this.getClass().getResource("/").getPath() + "cn/edu/jlu/ccst/sshclient/ui/resource/g.png");
+ 		Image img = tk.getImage(this.getClass().getResource("/cn/edu/jlu/ccst/sshclient/ui/resource/g.png"));
  		setIconImage(img);
  		this.setLayout(null);
  		this.setSize(350, 300);
@@ -137,9 +137,9 @@ public class GroupUI extends javax.swing.JDialog  {
         
         SAXReader reader = new SAXReader();
         try{
-        String filePath = this.getClass().getResource("/").getPath() + "cn/edu/jlu/ccst/sshclient/util/Config.xml";
+        //String filePath = this.getClass().getResource("/").getPath() + "cn/edu/jlu/ccst/sshclient/util/Config.xml";
         //System.out.println(filePath);
-        Document doc = reader.read(filePath);
+        Document doc = reader.read("Config.xml");
         OutputFormat format = OutputFormat.createPrettyPrint();
         Element root = doc.getRootElement();
         XMLWriter writer = null;// 声明写XML的对象
@@ -170,7 +170,7 @@ public class GroupUI extends javax.swing.JDialog  {
                 break;
         	}
         }
-        writer = new XMLWriter(new FileWriter(filePath), format);
+        writer = new XMLWriter(new FileWriter("Config.xml"), format);
         writer.write(doc);
         writer.close();
         this.setVisible(false);
@@ -204,8 +204,8 @@ public class GroupUI extends javax.swing.JDialog  {
         {		
             SAXReader reader = new SAXReader();
             try{
-            String filePath = this.getClass().getResource("/").getPath() + "cn/edu/jlu/ccst/sshclient/util/Config.xml";
-            Document doc = reader.read(filePath);
+            //String filePath = this.getClass().getResource("/").getPath() + "cn/edu/jlu/ccst/sshclient/util/Config.xml";
+            Document doc = reader.read("Config.xml");
             OutputFormat format = OutputFormat.createPrettyPrint();
             Element root = doc.getRootElement();
             XMLWriter writer = null;// 声明写XML的对象
@@ -227,7 +227,7 @@ public class GroupUI extends javax.swing.JDialog  {
         			}
         		}
         	}
-            writer = new XMLWriter(new FileWriter(filePath), format);
+            writer = new XMLWriter(new FileWriter("Config.xml"), format);
             writer.write(doc);
             writer.close();   
             }
