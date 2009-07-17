@@ -110,7 +110,7 @@ public class SSHComputer extends BaseClass implements BaseOperation{
 		SAXReader reader = new SAXReader();
 		try
 		{
-		  Document doc = reader.read(this.getClass().getResource("/").getPath() + "cn/edu/jlu/ccst/sshclient/util/Config.xml");
+		  Document doc = reader.read("Config.xml");
 		  List   list=doc.selectNodes("/config/computer");
     	  Iterator iter = list.iterator();
     	  while(iter.hasNext())
