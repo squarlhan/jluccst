@@ -459,6 +459,59 @@ public class TaskUI extends javax.swing.JDialog {
 	 }
 	 
 	 //--------------------------------------------------//
+	 /**
+	  * 将自定义任务的pid写入config.xml中
+	  */
+	 public void EditTaskRunPid(String id,String pid) {
+		 SAXReader reader = new SAXReader();
+	     try{
+	     //String filePath = this.getClass().getResource("/").getPath() + "cn/edu/jlu/ccst/sshclient/util/Config.xml";
+	     Document doc = reader.read("Config.xml");
+	     OutputFormat format = OutputFormat.createPrettyPrint();
+	     Element root = doc.getRootElement();
+	     XMLWriter writer = null;// 声明写XML的对象
+	     List   list=doc.selectNodes("/config/computer");
+	 	 Iterator iter = list.iterator();
+	 	while(iter.hasNext())
+	 	{
+	 		boolean flg1 = true;
+	 		Element el=(Element)iter.next();
+	 		Iterator it=el.elementIterator("group");
+	 		 while(it.hasNext())
+	          {
+	 			 boolean flag1 = true;
+	              Element elta=(Element)it.next();
+	              Iterator itta=elta.elementIterator("task");
+	              while(itta.hasNext())
+	              {
+	              Element et=(Element)itta.next();
+	              String s=et.attributeValue("id");
+	              if(s.equals(id))
+	              {
+	             	 et.addAttribute("runpid",pid);
+	             	 flag1 = false;
+	             	 break;
+	              }	              
+	              }
+	              if(flag1 == false) {
+	            	  flg1 = false;
+	            	  break;
+	              }
+	          }
+	          if(flg1 == false)break;
+	 	}
+	     writer = new XMLWriter(new FileWriter("Config.xml"), format);
+	     writer.write(doc);
+	     writer.close();
+	     
+	     }
+	     catch(Exception e ){
+	         e.printStackTrace();
+	     }
+	 }
+	 //--------------------------------------------------//
+	 
+	 
 	/**
 	 * 主函数
 	 */
