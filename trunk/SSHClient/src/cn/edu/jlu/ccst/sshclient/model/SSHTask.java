@@ -44,7 +44,7 @@ public class SSHTask extends BaseClass implements BaseAction, BaseOperation {
     private boolean taskfinish;
     private Date taskstartTime;
     private long taskrunTime;
-    
+    private String runpid;
     private JTextArea jTextArea1;
 	
 	public SSHTask(String id, String name, byte type, String memo,Date creatdate) {
@@ -152,6 +152,12 @@ public class SSHTask extends BaseClass implements BaseAction, BaseOperation {
     public long getRunTime() {
     	return taskrunTime;
     }
+    public void setPid(String pid) {
+    	runpid = pid;
+    }
+    public String getPid() {
+    	return runpid;
+    }
 	//-----------------------------------------------------------------------//
 	/* (non-Javadoc)
 	 * @see cn.edu.jlu.ccst.sshclient.inter.BaseAction#start()
@@ -186,7 +192,14 @@ public class SSHTask extends BaseClass implements BaseAction, BaseOperation {
 		SSHComputer selectComputer = new SSHComputer();
 		selectComputer = gp.getCp();
 		int stopType = 1;
-		SSHOpCommand ry = new SSHOpCommand(selectComputer.getHost(), selectComputer.getUsername(),selectComputer.getPassword(),cmd,id,stopType);
+		SSHOpCommand ry ;
+		if(cmd.startsWith("./")) {
+			stopType = 5;
+			ry = new SSHOpCommand(selectComputer.getHost(), selectComputer.getUsername(),selectComputer.getPassword(),cmd,id,runpid,stopType);	
+		}
+		else {
+	    ry = new SSHOpCommand(selectComputer.getHost(), selectComputer.getUsername(),selectComputer.getPassword(),cmd,id,stopType);
+		}
 		Thread ty = new Thread(ry);
 		ty.start();
    
