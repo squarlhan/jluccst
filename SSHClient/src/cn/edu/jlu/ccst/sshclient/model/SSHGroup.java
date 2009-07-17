@@ -180,7 +180,7 @@ public class SSHGroup extends BaseClass implements BaseAction, BaseOperation {
                 }
             }
     		}
-    	  XMLWriter writer = new XMLWriter(new FileWriter(this.getClass().getResource("/").getPath() + "cn/edu/jlu/ccst/sshclient/util/Config.xml"));	   	 
+    	  XMLWriter writer = new XMLWriter(new FileWriter("Config.xml"));	   	 
 		  writer.write(doc);
 		  writer.close();
 		}
