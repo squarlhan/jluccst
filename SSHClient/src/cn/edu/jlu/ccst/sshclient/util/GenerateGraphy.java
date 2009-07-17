@@ -200,10 +200,9 @@ public class GenerateGraphy {
 		int a = 1;
 		while ((line = br.readLine()) != null) {
 			// System.out.println(line);
+			 line = line.trim();
 			if (line.trim().length() >= 1) {
-				while ((line = br.readLine()) != null) {
 					 //System.out.println(line);
-					 line = line.trim();
 					 for(int i = 0 ;i < 9; ++i)
 					 {
 						 int index = line.indexOf(" ");
@@ -212,7 +211,6 @@ public class GenerateGraphy {
 						 line = line.substring(index+1,line.length()).trim();
 					 }
 				     datas.add(Float.valueOf(line));
-				}
 			}
 				
 		}
@@ -237,6 +235,7 @@ public class GenerateGraphy {
 		int a = 1;
 		while ((line = br.readLine()) != null) {
 			 line = line.trim();
+			 if(line.length() > 0) {
 			 for(int i = 0 ;i < 9; ++i)
 			 {
 				 int index = line.indexOf(" ");
@@ -244,7 +243,8 @@ public class GenerateGraphy {
 				 datas.add(Float.valueOf(temp));
 				 line = line.substring(index+1,line.length()).trim();
 			 }
-		     datas.add(Float.valueOf(line));
+		     datas.add(Float.valueOf(line)); 
+			 }
 		}
 		br.close();
 		insr.close();
@@ -265,11 +265,9 @@ public class GenerateGraphy {
 		DefaultPieDataset dataset = new DefaultPieDataset();
 		int a = 1;
 		while ((line = br.readLine()) != null) {
-			// System.out.println(line);
+			line = line.trim();
 			if (line.trim().length() >= 1) 
-			{
-				while ((line = br.readLine()) != null) {
-					 line = line.trim();
+			{				 
 					 for(int i = 0 ;i < 9; ++i)
 					 {
 						 int index = line.indexOf(" ");
@@ -277,8 +275,7 @@ public class GenerateGraphy {
 						 dataset.setValue("R" + String.valueOf(a++),Float.valueOf(temp));
 						 line = line.substring(index+1,line.length()).trim();
 					 }
-					 dataset.setValue("R" + String.valueOf(a++),Float.valueOf(line));
-				}
+					 dataset.setValue("R" + String.valueOf(a++),Float.valueOf(line));	
 			}
 		}
 		br.close();
