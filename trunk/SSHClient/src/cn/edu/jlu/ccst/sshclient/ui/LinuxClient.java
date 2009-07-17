@@ -9,6 +9,7 @@ package cn.edu.jlu.ccst.sshclient.ui;
  *
  * Created on 2009-6-30, 14:09:55
  */
+
 import cn.edu.jlu.ccst.sshclient.model.BaseClass;
 import cn.edu.jlu.ccst.sshclient.model.SSHComputer;
 import cn.edu.jlu.ccst.sshclient.model.SSHGroup;
@@ -167,11 +168,15 @@ public class LinuxClient extends javax.swing.JFrame {
                         			//System.out.println("start");
                         			String s=fList[i].toString().substring(fList[i].toString().indexOf("_")+1, fList[i].toString().indexOf("t")-1);
                         			System.out.println("S:"+s);
-                        			String rem=t.valueOf("@cmd").substring(t.valueOf("@cmd").indexOf(" "), t.valueOf("@cmd").length());
+                        			String rem=null;
+                        			
+                        			rem=t.valueOf("@cmd").substring(t.valueOf("@cmd").indexOf(" "), t.valueOf("@cmd").length());
                         			rem=rem.trim();
                         			rem=rem.substring(rem.indexOf(" "),rem.length());
                         			rem=rem.trim();
                         			rem=rem.substring(0,rem.indexOf(" "));
+                        			
+                        			
                         			System.out.println("rem"+rem);
                         			Thread Check=new Thread(new StartExam(t.valueOf("@id"),s, c.valueOf("@host"),c.valueOf("@user"),c.valueOf("@pswd"),t.valueOf("@out"),rem));
                         			Check.start();
@@ -413,6 +418,7 @@ private void action ( ActionEvent e ) throws DocumentException
 		  {
 			  SSHTask Tas=new SSHTask();
 			  Tas.creat();
+			  SSHComputer TC=GfindselectComputer(cur.getId());
 			  break;
 		  }
 		  default:
@@ -601,11 +607,17 @@ private void execTaskCommand ( ActionEvent e ) throws DocumentException {
    
     //将任务开始时间写入XML文件中
     TaskUI tempUI = new TaskUI();
+    try
+    {
     tempUI.EditTaskFromXML(selectTask.getId(), selectTask.getName(), selectTask.getMemo(),
           selectTask.getCmd(), selectTask.getFin(), selectTask.getFout(), curtime,t);
     
     selectTask.start(t1);
     //System.out.println("ddover!");
+	}catch(Exception em)
+	{
+		em.printStackTrace();
+	}
 	}
 	
 }
@@ -769,8 +781,14 @@ private void jMenuMousePressAllStartG(MouseEvent evt) {
 	   
 	    //将任务开始时间写入XML文件中
 	    TaskUI tempUI = new TaskUI();
+	    try
+	    {
 	    tempUI.EditTaskFromXML(rstk.getId(), rstk.getName(), rstk.getMemo(),
 	    		rstk.getCmd(), rstk.getFin(), rstk.getFout(), curtime,timerun);
+	    }catch(Exception e)
+	    {
+	    	e.printStackTrace();
+	    }
 	    
 	    
 	    
@@ -947,6 +965,48 @@ public boolean getGpsrunSucc(String Id) {
 
 
 //------------------------------------计算机的任务操作-------------------------//
+/**
+ * 根据gropu的id找到选中的计算机
+ */
+public SSHComputer GfindselectComputer(String id) 
+{
+	for(int i = 0; i < cps.size(); i++) 
+	{
+		List<SSHGroup> t=cps.get(i).getGps();
+		for(int j=0;j<t.size();j++)
+		{
+			if(t.get(j).getId().equals(id))
+			{
+				return cps.get(i);
+			}
+				
+		}
+		
+	}
+	return null;
+}
+/**
+ * 根据task的id找到选中的计算机
+ */
+public SSHComputer TfindselectComputer(String id) 
+{
+	for(int i = 0; i < cps.size(); i++) 
+	{
+		List<SSHGroup> t=cps.get(i).getGps();
+		for(int j=0;j<t.size();j++)
+		{
+			List<SSHTask> l=t.get(i).getSts();
+			for(int k=0;k<l.size();k++)
+			{
+				if(l.get(k).getId().equals(id))
+					return cps.get(i);
+			}
+				
+		}
+		
+	}
+	return null;
+}
 /**
  * 找到选中的计算机
  */
@@ -1158,10 +1218,24 @@ public boolean getRunStatusC(String id) {
                   {
                 	if(cur.getType()!=2)return;
                 	cur=(SSHTask)cur;
+                	SSHTask curT=(SSHTask)cur;
                 	for(int i=0;i<jtl.size();i++)
                 	{
                 		if(jtl.get(i).getName().equals(cur.getId()))
                 		{
+                			try
+                        	{
+                        	FileReader reader = new FileReader(curT.getFout()+"/"+curT.getId()+".txt");    
+                            BufferedReader br = new BufferedReader(reader);    
+                            String s1 = null;    
+                            while((s1 = br.readLine()) != null) 
+                            {    
+                            	s1+="\r\n";
+                            	jtl.get(i).append(s1);    
+                            }    
+                           br.close();    
+                           reader.close();  
+                        	}catch(Exception ex){ex.printStackTrace();}
                 			return;
                 		}
                 	}
@@ -1176,7 +1250,7 @@ public boolean getRunStatusC(String id) {
           					}
           			  }
           		  	}
-                	SSHTask curT=(SSHTask)cur;
+                	
                 	try
                 	{
                 	FileReader reader = new FileReader(curT.getFout()+"/"+curT.getId()+".txt");         
