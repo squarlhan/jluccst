@@ -100,8 +100,9 @@ public class SSHComputer extends BaseClass implements BaseOperation{
 	}
 	@Override
 	public boolean remove() {
-		JOptionPane.showConfirmDialog(null, "删除电脑", "确认删除", JOptionPane.YES_NO_OPTION);
-	    if(JOptionPane.NO_OPTION == 1)
+		int tt = JOptionPane.showConfirmDialog(null, "删除电脑", "确认删除", JOptionPane.YES_NO_OPTION);
+        System.out.print("yesoption:"+JOptionPane.YES_NO_OPTION);
+		if(JOptionPane.NO_OPTION == tt)
 			{
 			return false;
 			}
