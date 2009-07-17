@@ -147,7 +147,7 @@ public class GenerateGraphy {
 				getBarDataSet(input), // 数据集
 				// PlotOrientation.HORIZONTAL , // 图表方向：水平
 				PlotOrientation.VERTICAL, // 图表方向：垂直
-				true, // 是否显示图例(对于简单的柱状图必须是false)
+				false, // 是否显示图例(对于简单的柱状图必须是false)
 				false, // 是否生成工具
 				false // 是否生成URL链接
 				);
@@ -156,9 +156,9 @@ public class GenerateGraphy {
 		// chart.setTitle(new TextTitle("图书销量统计图", new Font("黑体",
 		// Font.ITALIC,22)));
 		// 取得统计图标的第一个图例
-		LegendTitle legend = chart.getLegend(0);
+		//LegendTitle legend = chart.getLegend(0);
 		// 修改图例的字体
-		legend.setItemFont(new Font("宋体", Font.BOLD, 14));
+		//legend.setItemFont(new Font("宋体", Font.BOLD, 14));
 
 		CategoryPlot plot = (CategoryPlot) chart.getPlot();
 		// 取得横轴
@@ -172,7 +172,7 @@ public class GenerateGraphy {
 		NumberAxis numberAxis = (NumberAxis) plot.getRangeAxis();
 		// 设置纵轴显示标签的字体
 		numberAxis.setLabelFont(new Font("宋体", Font.BOLD, 22));
-
+		//numberAxis.setVisible(false); 
 		// FileOutputStream fos = null;
 		// fos = new FileOutputStream("book.jpg");
 		// // 将统计图标输出成JPG文件
