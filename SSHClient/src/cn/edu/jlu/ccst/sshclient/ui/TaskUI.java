@@ -1,9 +1,13 @@
 package cn.edu.jlu.ccst.sshclient.ui;
 
+import ch.ethz.ssh2.Connection;
+import ch.ethz.ssh2.SCPClient;
+import ch.ethz.ssh2.Session;
 import cn.edu.jlu.ccst.sshclient.model.*;
 
 import java.io.File;
 import java.io.FileWriter;
+import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -33,7 +37,14 @@ public class TaskUI extends javax.swing.JDialog {
 		this.setTitle("新建任务");
 		submitButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                SubmitButtonMousePressed(evt);
+                
+            	try
+            	{
+            		SubmitButtonMousePressed(evt);
+            	}catch(Exception e)
+            	{
+            		e.printStackTrace();
+            	}
             }
         });
 	}
@@ -43,7 +54,15 @@ public class TaskUI extends javax.swing.JDialog {
 		this.setTitle("修改任务");
 		submitButton.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(java.awt.event.MouseEvent evt) {
-                SubmitButtonMousePressedE(evt);
+                
+            	try
+            	{
+            		SubmitButtonMousePressedE(evt);
+            	
+            	}catch(Exception e)
+            	{
+            		e.printStackTrace();
+            	}
             }
         });
 		tTextField1.setText(name);
@@ -181,8 +200,9 @@ public class TaskUI extends javax.swing.JDialog {
 	 
 	 /**
 	  * Submit按钮的处理函数
+	 * @throws IOException 
 	  */
-	 private void SubmitButtonMousePressed(java.awt.event.MouseEvent evt) {
+	 private void SubmitButtonMousePressed(java.awt.event.MouseEvent evt) throws IOException {
 		 if(tTextField1.getText().equals("")) {
 			 JOptionPane.showMessageDialog(null,"请输入新建任务的名字");
 			 return;
@@ -267,15 +287,68 @@ public class TaskUI extends javax.swing.JDialog {
          }catch(Exception e) {
         	 e.printStackTrace();
          }
+         //如果是自己的任务，先把文件传过去。
+         String Cmd=tTextField3.getText();
+         SSHComputer TC=LinuxClient.GetObj().GfindselectComputer(LinuxClient.GetObj().getCur().getId());
+         Connection conn = getOpenedConnection(TC);
+ 		Session sess = conn.openSession();
+ 		if((Cmd.startsWith("./"))&&(tfin.getText()!=null)&&(!tfin.getText().equals("")))
+ 		{
+ 			String s=Cmd.substring(Cmd.indexOf(" "), Cmd.length());
+ 			s=s.trim();
+ 			s=s.substring(0,s.indexOf(" "));
+ 			System.out.println("新的S+:" + s + "输入文件.txt:"+tfin.getText());
+ 			scpPut(conn,tfin.getText(),s,"./");
+ 		}
+ 		sess.close();
+		conn.close();
+ 		
 	 }
 	//----------------------------------------------------------//
-	 private void SubmitButtonMousePressedE(java.awt.event.MouseEvent evt) {
+	 public  void scpPut(Connection conn,String localFile, String remoteFileName,String remoteDir) throws IOException {
+
+			SCPClient client = new SCPClient(conn);
+			client.put(localFile, remoteFileName, remoteDir, "0600");
+
+		} 
+	 //--------------------------------------------------------//
+     public  Connection getOpenedConnection(SSHComputer c)  {
+    	 Connection conn = new Connection(c.getHost());
+		try{	
+		try
+		{
+		conn.connect();
+		}
+		catch (IOException e)
+		{
+			return conn;
+		}
+		boolean isAuthenticated = conn.authenticateWithPassword(c.getName(), c.getPassword());
+		if (isAuthenticated == false)
+		{
+			throw new IOException("Authentication failed.");			
+			
+		}
+		}
+		catch(Exception ev){
+			ev.printStackTrace();
+		}
+		
+		return conn;
+
+}
+     //------------------------------------------------------------------------//
+	 private void SubmitButtonMousePressedE(java.awt.event.MouseEvent evt) throws IOException {
 		 if(tTextField1.getText().equals("")) {
 			 JOptionPane.showMessageDialog(null,"请输入新建任务的名字");
 			 return;
 		 }
 		 if(tTextField3.getText().equals("")) {
 			 JOptionPane.showMessageDialog(null,"请输入新建任务的命令");
+			 return;
+		 }
+		 if(tfout.getText().equals("")) {
+			 JOptionPane.showMessageDialog(null,"请选择输出目录");
 			 return;
 		 }
 		 int i;
@@ -292,7 +365,7 @@ public class TaskUI extends javax.swing.JDialog {
 	 }
 	 //--------------------------------------------//
 	//根据id修改某个任务组,修改任务的开始执行时间
-	 public void EditTaskFromXML(String id,String n,String memo,String cmd,String in,String out,Date starttime, long stimelong)
+	 public void EditTaskFromXML(String id,String n,String memo,String cmd,String in,String out,Date starttime, long stimelong) throws IOException
 	 {		
 	     SAXReader reader = new SAXReader();
 	     try{
@@ -355,6 +428,21 @@ public class TaskUI extends javax.swing.JDialog {
 	     catch(Exception e ){
 	         e.printStackTrace();
 	     }
+	     String Cmd=tTextField3.getText();
+         SSHComputer TC=LinuxClient.GetObj().TfindselectComputer(LinuxClient.GetObj().getCur().getId());
+         System.out.println(LinuxClient.GetObj().getCur().getId());
+         Connection conn = getOpenedConnection(TC);
+ 		Session sess = conn.openSession();
+	     if((Cmd.startsWith("./"))&&(tfin.getText()!=null)&&(!tfin.getText().equals("")))
+	 		{
+	 			String s=Cmd.substring(Cmd.indexOf(" "), Cmd.length());
+	 			s=s.trim();
+	 			s=s.substring(0,s.indexOf(" "));
+	 			System.out.println("新的S+:" + s + "输入文件.txt:"+tfin.getText());
+	 			scpPut(conn,tfin.getText(),s,"./");
+	 		}
+	     sess.close();
+		 conn.close();
 	 }
 	 
 	 //-----------------------------------------------------------//
