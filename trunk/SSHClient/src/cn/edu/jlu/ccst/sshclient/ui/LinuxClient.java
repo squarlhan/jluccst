@@ -995,7 +995,7 @@ public SSHComputer TfindselectComputer(String id)
 		List<SSHGroup> t=cps.get(i).getGps();
 		for(int j=0;j<t.size();j++)
 		{
-			List<SSHTask> l=t.get(i).getSts();
+			List<SSHTask> l=t.get(j).getSts();
 			for(int k=0;k<l.size();k++)
 			{
 				if(l.get(k).getId().equals(id))
