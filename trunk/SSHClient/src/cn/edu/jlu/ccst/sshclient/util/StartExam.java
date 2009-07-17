@@ -54,8 +54,10 @@ public class StartExam implements Runnable {
     	String out;
     	BufferedReader bufferedReader;
 	    conn = getOpenedConnection();
-    	while(rs!=null&&!rs.equals("1"))
+	    System.out.println("开始");
+    	while(rs==null||rs.equals("2"))
     	{
+    		//System.out.println(rs);
     	try
     	{
     	sess = conn.openSession();
@@ -66,7 +68,7 @@ public class StartExam implements Runnable {
 			rs=out;
 		}
 		sess.close();
-		conn.close();
+		//conn.close();
     	}
     	catch(Exception et) {
     		et.printStackTrace();
@@ -76,8 +78,9 @@ public class StartExam implements Runnable {
     	{
     	OutputStream fout=new FileOutputStream(Finout+"\\"+id+".txt");
 		scpGet(conn,remoteFile,fout);
-		System.out.println(remoteFile+"...."+Finout+"\\"+id+".txt");
+		//System.out.println(remoteFile+"...."+Finout+"\\"+id+".txt");
 		fout.close();
+		conn.close();
     	}catch(Exception e){e.printStackTrace();}
     	TaskUI temp = new TaskUI();
     	temp.EditTaskRunSuccXML(id,false);
