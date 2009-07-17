@@ -155,8 +155,8 @@ public class SSHGroup extends BaseClass implements BaseAction, BaseOperation {
 	@Override
 	public boolean remove() {
 		// TODO Auto-generated method stub
-		JOptionPane.showConfirmDialog(null, "删除任务组", "确认删除", JOptionPane.YES_NO_OPTION);
-	    if(JOptionPane.NO_OPTION == 1)
+		int tt = JOptionPane.showConfirmDialog(null, "删除任务组", "确认删除", JOptionPane.YES_NO_OPTION);
+	    if(JOptionPane.NO_OPTION == tt)
 			{
 			return false;
 			}
