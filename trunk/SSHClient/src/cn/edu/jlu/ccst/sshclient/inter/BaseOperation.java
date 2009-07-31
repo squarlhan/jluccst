@@ -10,13 +10,13 @@ import cn.edu.jlu.ccst.sshclient.model.BaseClass;
  */
 
 public interface BaseOperation {
-	
+
 	/**
 	 * 
 	 */
 	boolean creat();
 	/**
-	 
+
 	 */
 	boolean remove();
 	/**
