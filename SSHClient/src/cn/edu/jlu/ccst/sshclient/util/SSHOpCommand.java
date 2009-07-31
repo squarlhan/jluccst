@@ -47,10 +47,7 @@ public class SSHOpCommand implements Runnable {
 //	private  String rs;	
 	private List<SSHTask> runtasklist;
 
-	//默认构造方法
-	public SSHOpCommand() {
 
-	}
 	/**
 	 * 测试连接用这个构造方法
 	 */
@@ -135,6 +132,20 @@ public class SSHOpCommand implements Runnable {
 		this.runtasklist = runtasklist;
 	}
 
+	/**
+	 * 运行单个任务命令且没有返回值
+	 */
+	public SSHOpCommand(String host, String name, String psw, String cmd,int taskInfo,JLabel l,boolean flag) {
+		super();
+		Host = host;
+		Name = name;
+		Psw = psw;
+		Cmd = cmd;
+		opType = taskInfo;
+		conl = l;
+		this.flag = flag;
+	}
+	
 	public void init() {
 	}
 	public void start() {
@@ -146,7 +157,7 @@ public class SSHOpCommand implements Runnable {
 		 * 测试连接2
 		 * 开启 组内任务3
 		 * 停止组内任务4
-		 * 
+		 * 开启某个任务6
 		 */
 		switch(opType){
 		case 0: //执行task命令 5
@@ -166,6 +177,9 @@ public class SSHOpCommand implements Runnable {
 		case 5 : //停止自定义的任务
 			stopOwn();
 			break;
+		case 6 : //停止自定义的任务
+			runnoback();
+			break;
 		default: break;
 		}
 
@@ -180,8 +194,33 @@ public class SSHOpCommand implements Runnable {
 
 	} 
 
+    /**
+     * 运行没有返回值的命令
+     */
+	private void runnoback() {
 
-
+		Connection conn = getOpenedConnection();
+		Session sess;
+		try {
+			conl.setText("正在创建目录...");
+			sess = conn.openSession();
+			String finalcmd = Cmd.substring(1);
+			sess.execCommand("./squarlhan/CShell mkdir -p "+finalcmd.trim());
+			
+//			if(sess.getExitStatus().intValue()!=0)conl.setText("创建目录失败！");
+//			else {conl.setText("创建目录成功！");this.flag = true;}
+			
+			conl.setText("创建目录成功！");
+			sess.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			conl.setText("创建目录失败！");
+		}
+		
+		conn.close();
+		
+	}
 	/**
 	 * 运行ssh远程命令
 	 */

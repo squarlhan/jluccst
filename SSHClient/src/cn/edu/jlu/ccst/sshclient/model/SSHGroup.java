@@ -34,6 +34,8 @@ public class SSHGroup extends BaseClass implements BaseAction, BaseOperation {
 	 * @param creatdate
 	 */
 
+	private String dirname;
+
 	private List<SSHTask> sts;
 	private SSHComputer cp;
 	private boolean gprunstatus = false;
@@ -140,6 +142,14 @@ public class SSHGroup extends BaseClass implements BaseAction, BaseOperation {
 		return null;
 	}
 
+	public String getDirname() {
+		return dirname;
+	}
+
+	public void setDirname(String dirname) {
+		this.dirname = dirname;
+	}
+
 	/* (non-Javadoc)
 	 * @see cn.edu.jlu.ccst.sshclient.inter.BaseOperation#load(java.lang.String)
 	 */
@@ -197,10 +207,12 @@ public class SSHGroup extends BaseClass implements BaseAction, BaseOperation {
 	@Override
 	public boolean update() {
 		// TODO Auto-generated method stub
-		SSHGroup t=(SSHGroup)LinuxClient.getCur();
-		GroupUI newGroup = new GroupUI(t.getName(),t.getMemo());
-		newGroup.setModal(true);
-		newGroup.setVisible(true);
+
+		 SSHGroup t=(SSHGroup)LinuxClient.getCur();
+		 GroupUI newGroup = new GroupUI(t.getName(),t.getDirname(),t.getMemo());
+		 newGroup.setModal(true);
+		 newGroup.setVisible(true);
+
 		return false;
 	}
 
