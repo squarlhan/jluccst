@@ -478,14 +478,14 @@ public class GenerateGraphy {
 	public static void GetObj(String id,String filepath, int t) throws IOException {
 		// 将生成的报表放到预览窗口中
 
-		final ChartPanel preview ;
+		final ChartFrame preview ;
 		switch(t){
-		case 1: preview = new ChartPanel(generateLine(filepath));break;
-		case 2: preview = new ChartPanel(generateBar(filepath));break;
-		case 3: preview = new ChartPanel(generatePie(filepath));break;
-		case 4: preview = new ChartPanel(generate2Line(filepath));break;
-		case 5: preview = new ChartPanel(generate2Bar(filepath));break;
-		default:preview = new ChartPanel(generate2Line(filepath));break;
+		case 1: preview = new ChartFrame("结果图", generateLine(filepath));break;
+		case 2: preview = new ChartFrame("结果图",generateBar(filepath));break;
+		case 3: preview = new ChartFrame("结果图",generatePie(filepath));break;
+		case 4: preview = new ChartFrame("结果图",generate2Line(filepath));break;
+		case 5: preview = new ChartFrame("结果图",generate2Bar(filepath));break;
+		default:preview = new ChartFrame("结果图",generate2Line(filepath));break;
 		}
 
 		preview.setName(id+"Gra");
@@ -510,8 +510,8 @@ public class GenerateGraphy {
 				(screenSize.height - frameSize.height - 50) / 2);
 		// 显示报表预览窗口
 		preview.setVisible(true);
-		LinuxClient.GetObj().getJTabbedPane().remove(pre);
-		LinuxClient.GetObj().getJTabbedPane().addTab(id, preview);
+//		LinuxClient.GetObj().getJTabbedPane().remove(pre);
+//		LinuxClient.GetObj().getJTabbedPane().addTab(id, preview);
 		final String strid = id;
 		//左键双击键关闭选中的选项卡
 		LinuxClient.GetObj().getJTabbedPane().addMouseListener(new MouseAdapter() {
@@ -531,7 +531,7 @@ public class GenerateGraphy {
 		});
 		pre=preview;
 	}
-	private static ChartPanel pre=null;
+	private static ChartFrame pre=null;
 
 
 	public static void main(String[] args) throws IOException{
