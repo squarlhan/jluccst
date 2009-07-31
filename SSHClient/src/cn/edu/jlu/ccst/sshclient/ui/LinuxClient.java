@@ -1428,7 +1428,8 @@ public boolean getRunStatusC(String id) {
                       case 1:
                       {
                           SSHGroup g=(SSHGroup)treenode.getUserObject();
-                          s="任务名:"+g.getName()
+                          s="任务组名:"+g.getName()
+                          +"\n工作目录:"+g.getDirname()
                           +"\n创建时间:"+b.getCreatdate()
                           +"\n备注:"+g.getMemo();
                           Font x = new Font("Serif",0,15);
