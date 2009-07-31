@@ -131,20 +131,6 @@ public class SSHOpCommand implements Runnable {
 		this.opType = opType;
 		this.runtasklist = runtasklist;
 	}
-
-	/**
-	 * 运行单个任务命令且没有返回值
-	 */
-	public SSHOpCommand(String host, String name, String psw, String cmd,int taskInfo,JLabel l,boolean flag) {
-		super();
-		Host = host;
-		Name = name;
-		Psw = psw;
-		Cmd = cmd;
-		opType = taskInfo;
-		conl = l;
-		this.flag = flag;
-	}
 	
 	public void init() {
 	}
@@ -177,9 +163,6 @@ public class SSHOpCommand implements Runnable {
 		case 5 : //停止自定义的任务
 			stopOwn();
 			break;
-		case 6 : //停止自定义的任务
-			runnoback();
-			break;
 		default: break;
 		}
 
@@ -194,33 +177,6 @@ public class SSHOpCommand implements Runnable {
 
 	} 
 
-    /**
-     * 运行没有返回值的命令
-     */
-	private void runnoback() {
-
-		Connection conn = getOpenedConnection();
-		Session sess;
-		try {
-			conl.setText("正在创建目录...");
-			sess = conn.openSession();
-			String finalcmd = Cmd.substring(1);
-			sess.execCommand("./squarlhan/CShell mkdir -p "+finalcmd.trim());
-			
-//			if(sess.getExitStatus().intValue()!=0)conl.setText("创建目录失败！");
-//			else {conl.setText("创建目录成功！");this.flag = true;}
-			
-			conl.setText("创建目录成功！");
-			sess.close();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			conl.setText("创建目录失败！");
-		}
-		
-		conn.close();
-		
-	}
 	/**
 	 * 运行ssh远程命令
 	 */
@@ -317,125 +273,6 @@ public class SSHOpCommand implements Runnable {
 	 * 重载执行函数，停止启动任务
 	 * 停止正在运行的任务
 	 */
-
-	/*
->>>>>>> .r159
-    private void runSSH() {
-  	String filename=Finout+"\\"+Id+".txt";
-    	FileWriter write = null;
-    	try
-    	{
-    	write=new FileWriter(filename,false);  
-    	}catch(IOException e)
-    	{}
-
-    	String pidout = null;
-    	flag = true;
-    	LinuxClient.GetObj().setTaskRunSucc(Id,flag);
-    	TaskUI temp = new TaskUI();
-    	//temp.EditTaskRunSuccXML(Id,flag);//向config.xml中写入任务运行状态
-    	try{
-            DynDispThread disTh = new DynDispThread(jTextArea1,Id,System.currentTimeMillis());
-            disTh.start();	
-
-    		Connection conn = getOpenedConnection();
-    		Session sess = conn.openSession();
-    		if(Cmd.startsWith("./"))
-    		{
-    			String s=Cmd.substring(Cmd.indexOf(" "), Cmd.length());
-    			s=s.trim();
-    			s=s.substring(0,s.indexOf(" "));
-    			System.out.println("S+:" + s + "输入文件.txt:"+Fin);
-    			scpPut(conn,Fin,s,"./");
-    		}
-    		sess.execCommand(Cmd);
-    		//任务已经开始，添加标志文件
-    		if(Cmd.startsWith("./"))
-    		{
-    		String stopTaskcmd = Cmd;
-        	stopTaskcmd = stopTaskcmd.substring(0,stopTaskcmd.indexOf(" "));
-        	System.out.println("stop:"+stopTaskcmd);
-
-        	String sscmd = "ps U "+ Name +" | grep "+
-            stopTaskcmd+" | awk '{print $1}'";
-
-        	Connection connGP;
-        	Session sessGP;
-        	String outGP;
-        	BufferedReader bufferedReaderGP;
-        	try{
-    	    connGP = getOpenedConnection();
-    	    sessGP = connGP.openSession();
-    		sessGP.execCommand(sscmd);		
-            bufferedReaderGP = new BufferedReader(new InputStreamReader(sessGP.getStdout()));    		
-    		while((outGP=bufferedReaderGP.readLine())!=null) {
-    			pidout=outGP;
-    			System.out.println(pidout);
-    			break;
-    		}
-    		File f=new File(".\\"+Id+"_"+pidout+".txt");
- 	        f.createNewFile();
-    		sessGP.close();
-    		connGP.close();
-        	}
-        	catch(Exception et) {
-        		et.printStackTrace();
-        	} 
-    		}
-
-    		temp.EditTaskRunSuccXML(Id,flag);//向config.xml中写入任务运行状态
-        	//-----------------------------------------//
-            String out;
-
-            int ft = 0;
-    		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(sess.getStdout()));        
-    		while((out=bufferedReader.readLine())!=null) {
-    			if(ft == 0) {
- 				   disTh.stop();
- 				   jTextArea1.setText(Id+"\n");
- 				   ft = 1;
- 				   }
-    			   out += "\r\n";
-    			   write.append(out);    			   
-    			   jTextArea1.append(out);   
-    		}
-    		sess.close();
-    		conn.close();
-
-    		write.flush();
-    		write.close();
-    		if(Cmd.startsWith("./"))
-			   {
-
-				   File f=new File("./"+Id+"_"+pidout+".txt");
-	    	       f.delete();
-
-	    	       GenerateGraphy.GetObj(Name+Id,filename,2);
-
-	    	       System.out.print("文件路径:"+filename);
-			   }
-        	}
-        	catch(Exception ie) {
-        		ie.printStackTrace();
-        	}
-        	LinuxClient tmpLinx = LinuxClient.GetObj();
-        	tmpLinx.setSelTaskStatus(Id,0);         	
-        	if(flag == true) {
-        		flag = false;
-        		LinuxClient.GetObj().setTaskRunSucc(Id,flag);      
-            	temp.EditTaskRunSuccXML(Id,flag);//向config.xml中写入任务运行状态
-        	}
-
-        	//判断并行结束
-        	if(runtasklist == null){
-        		//System.out.println("并行jieshu");
-        		if(LinuxClient.GetObj().getAllRunSucc(Id) == false) {
-            		LinuxClient.GetObj().setSinglerun(1);
-            	}
-        	}
-
-    }
-	 */  
 	public void stopSSH() {
 
 		List<String> pidlist;

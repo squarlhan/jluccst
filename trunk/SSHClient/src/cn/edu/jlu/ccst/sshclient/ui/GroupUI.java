@@ -2,17 +2,19 @@ package cn.edu.jlu.ccst.sshclient.ui;
 
 
 
+import ch.ethz.ssh2.Connection;
+import ch.ethz.ssh2.Session;
 import cn.edu.jlu.ccst.sshclient.model.*;
-import cn.edu.jlu.ccst.sshclient.util.SSHOpCommand;
 
-//import java.io.File;
+
+import java.io.BufferedReader;
 import java.io.FileWriter;
-//import java.text.DateFormat;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.*;
 import java.awt.*;
-//import java.awt.event.*;
 
 import javax.swing.*;
 import javax.swing.event.DocumentEvent;
@@ -190,9 +192,12 @@ public class GroupUI extends javax.swing.JDialog  {
    	   }
         }
         newGroup1.setCp(selectComputer);
-        SSHOpCommand test=new SSHOpCommand(selectComputer.getHost(), selectComputer.getUsername(),selectComputer.getPassword(),dirTextField.getText(),6,Ltest,flag);
-        Thread Ctest=new Thread(test);
-        Ctest.start();
+        try {
+        	this.createdirs(this.getOpenedConnection(selectComputer), dirTextField.getText(),"c");
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
         add(Ltest);
         Ltest.setBounds(120, 270, 90, 30);
         
@@ -268,10 +273,12 @@ public class GroupUI extends javax.swing.JDialog  {
       	if(!older.equals(dirTextField.getText())){
         Ltest= new JLabel();
         SSHComputer selectComputer = LinuxClient.GetObj().GfindselectComputer(LinuxClient.GetObj().getCur().getId());
-        System.out.println(selectComputer);
-        SSHOpCommand test=new SSHOpCommand(selectComputer.getHost(), selectComputer.getUsername(),selectComputer.getPassword(),dirTextField.getText(),6,Ltest,flag);
-        Thread Ctest=new Thread(test);
-        Ctest.start();
+        try {
+			this.createdirs(this.getOpenedConnection(selectComputer), dirTextField.getText(),"m");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         add(Ltest);
         Ltest.setBounds(120, 270, 90, 30);}
       	  //LinuxClient temp = new LinuxClient();
@@ -323,10 +330,58 @@ public class GroupUI extends javax.swing.JDialog  {
             }
         }
 
-	//---------------------------------------------//
-	/*任务：1）新建组对象；
-	 * 2）写到xml文件中
-	 */
+	//---------------------------------------------//创建目录
+        private  void createdirs(Connection conn,String dirs,String type) throws IOException {
+
+        	//Connection conn = getOpenedConnection(TC);
+		    Ltest.setText("正在设置目录...");
+		    Session sess = conn.openSession();
+		    String finalcmd = dirs.substring(1);
+		    if(type.equals("m")){
+		    	String orin = this.older.substring(1);
+		    	sess.execCommand("./squarlhan/CShell mv " + orin + " " + finalcmd.trim());
+		    }else sess.execCommand("./squarlhan/CShell mkdir -p " + finalcmd.trim());
+
+		    String out;
+			BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(sess.getStdout()));    
+		    while((out=bufferedReader.readLine())!=null) {
+				if(out.equals("EOP")){
+					    Ltest.setText("设置目录成功！");
+					    this.flag = true;
+				    
+				}
+			}
+		    sess.close();
+		    conn.close();
+
+    	} 
+    	//--------------------------------------------------------//
+    	public  Connection getOpenedConnection(SSHComputer c)  {
+    		Connection conn = new Connection(c.getHost());
+    		try{	
+    			try
+    			{
+    				conn.connect();
+    			}
+    			catch (IOException e)
+    			{
+    				return conn;
+    			}
+    			boolean isAuthenticated = conn.authenticateWithPassword(c.getUsername(), c.getPassword());
+    			if (isAuthenticated == false)
+    			{
+    				throw new IOException("Authentication failed.");			
+
+    			}
+    		}
+    		catch(Exception ev){
+    			ev.printStackTrace();
+    		}
+
+    		return conn;
+
+    	}   
+ 
 	/**
 	 * 
 	 * 主函数
