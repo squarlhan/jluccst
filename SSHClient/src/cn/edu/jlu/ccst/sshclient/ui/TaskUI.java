@@ -26,74 +26,74 @@ public class TaskUI extends javax.swing.JDialog {
 	private JLabel tLabel1, tLabel2,tLabel3,memoLabel;
 	private JTextField tTextField1,tTextField3;
 	private JTextArea tTextArea2;
-    private JScrollPane memoAreaPane; 
+	private JScrollPane memoAreaPane; 
 	private JButton resetButton , submitButton;
 	private JLabel lfin,lfout;
 	private JTextField tfin,tfout;
 	private JButton choosein,chooseout;
-	
+
 	public TaskUI() {
 		initComponent();
 		this.setTitle("新建任务");
 		submitButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                
-            	try
-            	{
-            		SubmitButtonMousePressed(evt);
-            	}catch(Exception e)
-            	{
-            		e.printStackTrace();
-            	}
-            }
-        });
+			public void mousePressed(java.awt.event.MouseEvent evt) {
+
+				try
+				{
+					SubmitButtonMousePressed(evt);
+				}catch(Exception e)
+				{
+					e.printStackTrace();
+				}
+			}
+		});
 	}
-//-------------------------------------------------------------------//
+	//-------------------------------------------------------------------//
 	public TaskUI(String name,String cmd,String in,String out,String memo) {
 		initComponent();
 		this.setTitle("修改任务");
 		submitButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                
-            	try
-            	{
-            		SubmitButtonMousePressedE(evt);
-            	
-            	}catch(Exception e)
-            	{
-            		e.printStackTrace();
-            	}
-            }
-        });
+			public void mousePressed(java.awt.event.MouseEvent evt) {
+
+				try
+				{
+					SubmitButtonMousePressedE(evt);
+
+				}catch(Exception e)
+				{
+					e.printStackTrace();
+				}
+			}
+		});
 		tTextField1.setText(name);
 		tTextField3.setText(cmd);
 		tTextArea2.setText(memo);
 		tfin.setText(in);
 		tfout.setText(out);
 	}
-	
+
 	//----------------------------------------------------//
 	/**
 	 * 初始画图函数
 	 */
 	private void initComponent(){
-		
+
 		this.setLocationRelativeTo(null);
 		Toolkit tk = Toolkit.getDefaultToolkit();
 		Image img = tk.getImage(this.getClass().getResource("/cn/edu/jlu/ccst/sshclient/ui/resource/t.png"));
 		setIconImage(img);
 		this.setLayout(null);
 		this.setSize(400,350);
-		
+
 		tLabel1= new JLabel("任务名字:");
 		tLabel1.setBounds(50, 30, 80, 20);
 		this.add(tLabel1);
 		tTextField1 = new JTextField();
 		tTextField1.setBounds(150,30, 150, 30);
 		this.add(tTextField1);
-		
 
-		
+
+
 		tLabel3 = new JLabel("任务命令:");
 		tLabel3.setBounds(50, 70, 80, 20);
 		this.add(tLabel3);
@@ -108,21 +108,21 @@ public class TaskUI extends javax.swing.JDialog {
 		this.add(lfin);
 		this.add(tfin);
 		choosein.addMouseListener(new java.awt.event.MouseAdapter() 
-				{
-            public void mousePressed(java.awt.event.MouseEvent evt) 
-            {
-                
-                	JFileChooser chooser=new JFileChooser(); 
-            		chooser.setFileSelectionMode(JFileChooser.FILES_ONLY); 
-            		int result=chooser.showOpenDialog(null); 
-            		if(result==JFileChooser.APPROVE_OPTION)
-            		{ 
-            		String filePath=chooser.getSelectedFile().getPath();
-            		tfin.setText(filePath);
-            		} 
-                
-            }
-				}
+		{
+			public void mousePressed(java.awt.event.MouseEvent evt) 
+			{
+
+				JFileChooser chooser=new JFileChooser(); 
+				chooser.setFileSelectionMode(JFileChooser.FILES_ONLY); 
+				int result=chooser.showOpenDialog(null); 
+				if(result==JFileChooser.APPROVE_OPTION)
+				{ 
+					String filePath=chooser.getSelectedFile().getPath();
+					tfin.setText(filePath);
+				} 
+
+			}
+		}
 		);
 		choosein.setBounds(300, 110, 80, 25);
 		this.add(choosein);
@@ -134,27 +134,27 @@ public class TaskUI extends javax.swing.JDialog {
 		chooseout.setBounds(300, 150, 80, 25);
 		chooseout.addMouseListener(new java.awt.event.MouseAdapter() 
 		{
-		public void mousePressed(java.awt.event.MouseEvent evt) 
-        {
-        
-        	JFileChooser chooser=new JFileChooser(); 
-    		chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY); 
-    		int result=chooser.showOpenDialog(null); 
-    		if(result==JFileChooser.APPROVE_OPTION)
-    		{ 
-    		String filePath=chooser.getSelectedFile().getPath();
-    		tfout.setText(filePath);
-    		} 
-        
-        }
+			public void mousePressed(java.awt.event.MouseEvent evt) 
+			{
+
+				JFileChooser chooser=new JFileChooser(); 
+				chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY); 
+				int result=chooser.showOpenDialog(null); 
+				if(result==JFileChooser.APPROVE_OPTION)
+				{ 
+					String filePath=chooser.getSelectedFile().getPath();
+					tfout.setText(filePath);
+				} 
+
+			}
 		}
-       );
+		);
 		this.add(lfout);
 		this.add(tfout);
 		this.add(chooseout);
-		
 
-		
+
+
 		tLabel2 = new JLabel("任务备注:");
 		tLabel2.setBounds(50, 180, 80, 20);
 		this.add(tLabel2);
@@ -162,456 +162,456 @@ public class TaskUI extends javax.swing.JDialog {
 		tTextArea2.setBounds(150,180, 150, 80);
 		tTextArea2.setLineWrap(true);
 		tTextArea2.setBorder(BorderFactory.createLineBorder(Color.black));
-	    memoAreaPane = new JScrollPane(tTextArea2,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-	    memoAreaPane.setBounds(150,180, 150, 80);
-	    this.add(memoAreaPane);
-		
+		memoAreaPane = new JScrollPane(tTextArea2,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		memoAreaPane.setBounds(150,180, 150, 80);
+		this.add(memoAreaPane);
+
 		resetButton = new JButton("重置:");
 		resetButton.setBounds(50,280, 80, 30);
 		resetButton.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                ResetButtonMousePressed(evt);
-            }
-        });
+			public void mousePressed(java.awt.event.MouseEvent evt) {
+				ResetButtonMousePressed(evt);
+			}
+		});
 		this.add(resetButton);
-		
+
 		submitButton = new JButton("提交:");
 		submitButton.setBounds(180, 280, 80, 30);
-		
+
 		this.add(submitButton);
 		Dimension   screenSize   =   Toolkit.getDefaultToolkit().getScreenSize();   
-        Dimension   frameSize   =   this.getSize();   
+		Dimension   frameSize   =   this.getSize();   
 
-        if   (frameSize.height   >   screenSize.height)   
-                frameSize.height   =   screenSize.height;   
-        if   (frameSize.width   >   screenSize.width)   
-                frameSize.width   =   screenSize.width;   
+		if   (frameSize.height   >   screenSize.height)   
+			frameSize.height   =   screenSize.height;   
+		if   (frameSize.width   >   screenSize.width)   
+			frameSize.width   =   screenSize.width;   
 
-        this.setLocation((screenSize.width   -   frameSize.width)   /   2,   (screenSize.height   -   frameSize.height)   /   2);
+		this.setLocation((screenSize.width   -   frameSize.width)   /   2,   (screenSize.height   -   frameSize.height)   /   2);
 	}
 	/**
 	 * Reset按钮的处理函数
 	 */
-	 private void ResetButtonMousePressed(java.awt.event.MouseEvent evt) {
-		 tTextField1.setText(null);
-		 tTextField3.setText(null);
-		 tTextArea2.setText(null);
-	 }
-	 
-	 /**
-	  * Submit按钮的处理函数
+	private void ResetButtonMousePressed(java.awt.event.MouseEvent evt) {
+		tTextField1.setText(null);
+		tTextField3.setText(null);
+		tTextArea2.setText(null);
+	}
+
+	/**
+	 * Submit按钮的处理函数
 	 * @throws IOException 
-	  */
-	 private void SubmitButtonMousePressed(java.awt.event.MouseEvent evt) throws IOException {
-		 if(tTextField1.getText().equals("")) {
-			 JOptionPane.showMessageDialog(null,"请输入新建任务的名字");
-			 return;
-		 }
-		 if(tTextField3.getText().equals("")) {
-			 JOptionPane.showMessageDialog(null,"请输入新建任务的命令");
-			 return;
-		 }
-		 if(tfout.getText().equals("")) {
-			 JOptionPane.showMessageDialog(null,"请选择输出目录");
-			 return;
-		 }
-   	     LinuxClient tempClient = LinuxClient.GetObj();
-   	     SSHGroup selectGroup = new SSHGroup();
-	     BaseClass curType = new BaseClass();
-	     curType = tempClient.cur;   
-	     String selectGroupId = curType.getId();
-	     String selectComputerId;//选中任务所在组的计算机ID
-	  
-	     SSHTask newTask1 = new SSHTask();
-	     newTask1.setName(tTextField1.getText());
-	     newTask1.setCmd(tTextField3.getText());
-	     newTask1.setMemo(tTextArea2.getText());
-	     newTask1.setFin(tfin.getText());
-	     newTask1.setFout(tfout.getText());
-         Date SeverTime = new Date();
-         SimpleDateFormat Severtimeformat = new SimpleDateFormat("yyyyMMddHHmmss");
-         newTask1.setCreatdate(SeverTime);//获得创建成功时的时间
-         newTask1.setId("T"+Severtimeformat.format(SeverTime));
-         newTask1.setType((byte) 2);     
-         //找到选中的组
-         Iterator <SSHGroup> it;
-         for(it = tempClient.gps.iterator(); it.hasNext();){
-    	    selectGroup = (SSHGroup) it.next();
-    	    if(selectGroup.getId().equals(selectGroupId)) {
-    		  break;
-    	   }
-         }
-         newTask1.setGp(selectGroup);
-         selectComputerId = selectGroup.getCp().getId() ;//找到计算机的ID             
-         //将信息保存到config.xml中
-         SAXReader reader = new SAXReader();
-         try{
-         //String filePath = this.getClass().getResource("/").getPath() + "cn/edu/jlu/ccst/sshclient/util/Config.xml";
-         //System.out.println(filePath);
-         Document doc = reader.read("Config.xml");
-         OutputFormat format = OutputFormat.createPrettyPrint();
-         Element root = doc.getRootElement();
-         XMLWriter writer = null;// 声明写XML的对象
-         
-         List<Element> celements = root.elements();
-         boolean flag = false;
-         for(Element c : celements) {
-        	 if( flag == true) break;
-         	if( c.valueOf("@id").equals(selectComputerId)) {
-         		  List<Element> gelements = c.elements();
-                  for (Element g : gelements) {
-                	  if(g.valueOf("@id").equals(selectGroupId)) {
-                		  Element t = g.addElement("task");
-                		  t.addAttribute("id", newTask1.getId());
-                		  t.addAttribute("name", newTask1.getName());
-                          SimpleDateFormat timeFormat;
-                          timeFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-                          t.addAttribute("creatdate",timeFormat.format(newTask1.getCreatdate()));
-                          t.addAttribute("cmd", newTask1.getCmd());
-                          t.addAttribute("in", newTask1.getFin());
-                          t.addAttribute("out", newTask1.getFout());
-                          t.addAttribute("starttime","");
-                          t.addAttribute("memo", newTask1.getMemo());
-                          flag = true;
-                          break;
-                	  }
-                  }         		
-         	}
-         }
-         writer = new XMLWriter(new FileWriter("Config.xml"), format);
-         writer.write(doc);
-         writer.close();
-         this.setVisible(false);
-         this.dispose(); 
-         JOptionPane.showMessageDialog(null, "创建任务成功！");
-         }catch(Exception e) {
-        	 e.printStackTrace();
-         }
-         //如果是自己的任务，先把文件传过去。
-         String Cmd=tTextField3.getText();
-         SSHComputer TC=LinuxClient.GetObj().GfindselectComputer(LinuxClient.GetObj().getCur().getId());
-         System.out.println(TC.getName());
-         Connection conn = getOpenedConnection(TC);
- 		Session sess = conn.openSession();
- 		System.out.println("新的S+:" + "输入文件.txt:"+tfin.getText());
- 		if((Cmd.startsWith("./"))&&(tfin.getText()!=null)&&(!tfin.getText().equals("")))
- 		{
- 			String s=Cmd.substring(Cmd.indexOf(" "), Cmd.length());
- 			s=s.trim();
- 			s=s.substring(0,s.indexOf(" "));
- 			System.out.println("新的S+:" + s + "输入文件.txt:"+tfin.getText());
- 			scpPut(conn,tfin.getText(),s,"./");
- 		}
- 		sess.close();
+	 */
+	private void SubmitButtonMousePressed(java.awt.event.MouseEvent evt) throws IOException {
+		if(tTextField1.getText().equals("")) {
+			JOptionPane.showMessageDialog(null,"请输入新建任务的名字");
+			return;
+		}
+		if(tTextField3.getText().equals("")) {
+			JOptionPane.showMessageDialog(null,"请输入新建任务的命令");
+			return;
+		}
+		if(tfout.getText().equals("")) {
+			JOptionPane.showMessageDialog(null,"请选择输出目录");
+			return;
+		}
+		LinuxClient tempClient = LinuxClient.GetObj();
+		SSHGroup selectGroup = new SSHGroup();
+		BaseClass curType = new BaseClass();
+		curType = tempClient.cur;   
+		String selectGroupId = curType.getId();
+		String selectComputerId;//选中任务所在组的计算机ID
+
+		SSHTask newTask1 = new SSHTask();
+		newTask1.setName(tTextField1.getText());
+		newTask1.setCmd(tTextField3.getText());
+		newTask1.setMemo(tTextArea2.getText());
+		newTask1.setFin(tfin.getText());
+		newTask1.setFout(tfout.getText());
+		Date SeverTime = new Date();
+		SimpleDateFormat Severtimeformat = new SimpleDateFormat("yyyyMMddHHmmss");
+		newTask1.setCreatdate(SeverTime);//获得创建成功时的时间
+		newTask1.setId("T"+Severtimeformat.format(SeverTime));
+		newTask1.setType((byte) 2);     
+		//找到选中的组
+		Iterator <SSHGroup> it;
+		for(it = tempClient.gps.iterator(); it.hasNext();){
+			selectGroup = (SSHGroup) it.next();
+			if(selectGroup.getId().equals(selectGroupId)) {
+				break;
+			}
+		}
+		newTask1.setGp(selectGroup);
+		selectComputerId = selectGroup.getCp().getId() ;//找到计算机的ID             
+		//将信息保存到config.xml中
+		SAXReader reader = new SAXReader();
+		try{
+			//String filePath = this.getClass().getResource("/").getPath() + "cn/edu/jlu/ccst/sshclient/util/Config.xml";
+			//System.out.println(filePath);
+			Document doc = reader.read("Config.xml");
+			OutputFormat format = OutputFormat.createPrettyPrint();
+			Element root = doc.getRootElement();
+			XMLWriter writer = null;// 声明写XML的对象
+
+			List<Element> celements = root.elements();
+			boolean flag = false;
+			for(Element c : celements) {
+				if( flag == true) break;
+				if( c.valueOf("@id").equals(selectComputerId)) {
+					List<Element> gelements = c.elements();
+					for (Element g : gelements) {
+						if(g.valueOf("@id").equals(selectGroupId)) {
+							Element t = g.addElement("task");
+							t.addAttribute("id", newTask1.getId());
+							t.addAttribute("name", newTask1.getName());
+							SimpleDateFormat timeFormat;
+							timeFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+							t.addAttribute("creatdate",timeFormat.format(newTask1.getCreatdate()));
+							t.addAttribute("cmd", newTask1.getCmd());
+							t.addAttribute("in", newTask1.getFin());
+							t.addAttribute("out", newTask1.getFout());
+							t.addAttribute("starttime","");
+							t.addAttribute("memo", newTask1.getMemo());
+							flag = true;
+							break;
+						}
+					}         		
+				}
+			}
+			writer = new XMLWriter(new FileWriter("Config.xml"), format);
+			writer.write(doc);
+			writer.close();
+			this.setVisible(false);
+			this.dispose(); 
+			JOptionPane.showMessageDialog(null, "创建任务成功！");
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		//如果是自己的任务，先把文件传过去。
+		String Cmd=tTextField3.getText();
+		SSHComputer TC=LinuxClient.GetObj().GfindselectComputer(LinuxClient.GetObj().getCur().getId());
+		System.out.println(TC.getName());
+		Connection conn = getOpenedConnection(TC);
+		Session sess = conn.openSession();
+		System.out.println("新的S+:" + "输入文件.txt:"+tfin.getText());
+		if((Cmd.startsWith("./"))&&(tfin.getText()!=null)&&(!tfin.getText().equals("")))
+		{
+			String s=Cmd.substring(Cmd.indexOf(" "), Cmd.length());
+			s=s.trim();
+			s=s.substring(0,s.indexOf(" "));
+			System.out.println("新的S+:" + s + "输入文件.txt:"+tfin.getText());
+			scpPut(conn,tfin.getText(),s,"./");
+		}
+		sess.close();
 		conn.close();
- 		
-	 }
+
+	}
 	//----------------------------------------------------------//
-	 public  void scpPut(Connection conn,String localFile, String remoteFileName,String remoteDir) throws IOException {
+	public  void scpPut(Connection conn,String localFile, String remoteFileName,String remoteDir) throws IOException {
 
-			SCPClient client = new SCPClient(conn);
-			client.put(localFile, remoteFileName, remoteDir, "0600");
+		SCPClient client = new SCPClient(conn);
+		client.put(localFile, remoteFileName, remoteDir, "0600");
 
-		} 
-	 //--------------------------------------------------------//
-     public  Connection getOpenedConnection(SSHComputer c)  {
-    	 Connection conn = new Connection(c.getHost());
+	} 
+	//--------------------------------------------------------//
+	public  Connection getOpenedConnection(SSHComputer c)  {
+		Connection conn = new Connection(c.getHost());
 		try{	
-		try
-		{
-		conn.connect();
-		}
-		catch (IOException e)
-		{
-			return conn;
-		}
-		boolean isAuthenticated = conn.authenticateWithPassword(c.getUsername(), c.getPassword());
-		if (isAuthenticated == false)
-		{
-			throw new IOException("Authentication failed.");			
-			
-		}
+			try
+			{
+				conn.connect();
+			}
+			catch (IOException e)
+			{
+				return conn;
+			}
+			boolean isAuthenticated = conn.authenticateWithPassword(c.getUsername(), c.getPassword());
+			if (isAuthenticated == false)
+			{
+				throw new IOException("Authentication failed.");			
+
+			}
 		}
 		catch(Exception ev){
 			ev.printStackTrace();
 		}
-		
+
 		return conn;
 
-}
-     //------------------------------------------------------------------------//
-	 private void SubmitButtonMousePressedE(java.awt.event.MouseEvent evt) throws IOException {
-		 if(tTextField1.getText().equals("")) {
-			 JOptionPane.showMessageDialog(null,"请输入新建任务的名字");
-			 return;
-		 }
-		 if(tTextField3.getText().equals("")) {
-			 JOptionPane.showMessageDialog(null,"请输入新建任务的命令");
-			 return;
-		 }
-		 if(tfout.getText().equals("")) {
-			 JOptionPane.showMessageDialog(null,"请选择输出目录");
-			 return;
-		 }
-		 int i;
-		 for(i = 0; i < LinuxClient.tks.size() ; ++ i) {
-			 if(LinuxClient.getCur().getId().equals(LinuxClient.tks.get(i).getId())) {
-				 break;
-			 }
-		 }
-   	     this.EditTaskFromXML(LinuxClient.getCur().getId(), tTextField1.getText(), tTextArea2.getText(),tTextField3.getText(),tfin.getText(),tfout.getText(),
-   	    		              LinuxClient.tks.get(i).getStartTime(),0);
-   	     this.setVisible(false);
-         this.dispose(); 
-         JOptionPane.showMessageDialog(null, "修改任务成功！");
-         String Cmd=tTextField3.getText();
-         SSHComputer TC=LinuxClient.GetObj().TfindselectComputer(LinuxClient.GetObj().getCur().getId());
-         System.out.println(LinuxClient.GetObj().getCur().getId());
-         Connection conn = getOpenedConnection(TC);
- 		Session sess = conn.openSession();
-	     if((Cmd.startsWith("./"))&&(tfin.getText()!=null)&&(!tfin.getText().equals("")))
-	 		{
-	 			String s=Cmd.substring(Cmd.indexOf(" "), Cmd.length());
-	 			s=s.trim();
-	 			s=s.substring(0,s.indexOf(" "));
-	 			System.out.println("新的S+:" + s + "输入文件.txt:"+tfin.getText());
-	 			scpPut(conn,tfin.getText(),s,"./");
-	 		}
-	     sess.close();
-		 conn.close();
-	 }
-	 //--------------------------------------------//
+	}
+	//------------------------------------------------------------------------//
+	private void SubmitButtonMousePressedE(java.awt.event.MouseEvent evt) throws IOException {
+		if(tTextField1.getText().equals("")) {
+			JOptionPane.showMessageDialog(null,"请输入新建任务的名字");
+			return;
+		}
+		if(tTextField3.getText().equals("")) {
+			JOptionPane.showMessageDialog(null,"请输入新建任务的命令");
+			return;
+		}
+		if(tfout.getText().equals("")) {
+			JOptionPane.showMessageDialog(null,"请选择输出目录");
+			return;
+		}
+		int i;
+		for(i = 0; i < LinuxClient.tks.size() ; ++ i) {
+			if(LinuxClient.getCur().getId().equals(LinuxClient.tks.get(i).getId())) {
+				break;
+			}
+		}
+		this.EditTaskFromXML(LinuxClient.getCur().getId(), tTextField1.getText(), tTextArea2.getText(),tTextField3.getText(),tfin.getText(),tfout.getText(),
+				LinuxClient.tks.get(i).getStartTime(),0);
+		this.setVisible(false);
+		this.dispose(); 
+		JOptionPane.showMessageDialog(null, "修改任务成功！");
+		String Cmd=tTextField3.getText();
+		SSHComputer TC=LinuxClient.GetObj().TfindselectComputer(LinuxClient.GetObj().getCur().getId());
+		System.out.println(LinuxClient.GetObj().getCur().getId());
+		Connection conn = getOpenedConnection(TC);
+		Session sess = conn.openSession();
+		if((Cmd.startsWith("./"))&&(tfin.getText()!=null)&&(!tfin.getText().equals("")))
+		{
+			String s=Cmd.substring(Cmd.indexOf(" "), Cmd.length());
+			s=s.trim();
+			s=s.substring(0,s.indexOf(" "));
+			System.out.println("新的S+:" + s + "输入文件.txt:"+tfin.getText());
+			scpPut(conn,tfin.getText(),s,"./");
+		}
+		sess.close();
+		conn.close();
+	}
+	//--------------------------------------------//
 	//根据id修改某个任务组,修改任务的开始执行时间
-	 public void EditTaskFromXML(String id,String n,String memo,String cmd,String in,String out,Date starttime, long stimelong) throws IOException
-	 {		
-	     SAXReader reader = new SAXReader();
-	     try{
-	     //String filePath = this.getClass().getResource("/").getPath() + "cn/edu/jlu/ccst/sshclient/util/Config.xml";
-	     Document doc = reader.read("Config.xml");
-	     OutputFormat format = OutputFormat.createPrettyPrint();
-	     Element root = doc.getRootElement();
-	     XMLWriter writer = null;// 声明写XML的对象
-	     List   list=doc.selectNodes("/config/computer");
-	 	 Iterator iter = list.iterator();
-	 	 SimpleDateFormat timeFormat;
-	     timeFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-	 	while(iter.hasNext())
-	 	{
-	 		Element el=(Element)iter.next();
-	 		Iterator it=el.elementIterator("group");
-	 		 boolean flg1 = true;
-	 		 while(it.hasNext())
-	          {
-	              Element elta=(Element)it.next();
-	              Iterator itta=elta.elementIterator("task");
-	              boolean flag = true;
-	              while(itta.hasNext())
-	              {
-	              Element et=(Element)itta.next();
-	              String s=et.attributeValue("id");
-	              if(s.equals(id))
-	              {
-	             	 et.addAttribute("name", n);
-	             	 et.addAttribute("cmd", cmd);
-	             	 et.addAttribute("in", in);
-	             	 et.addAttribute("out",out);
-	             	 if(starttime == null) {
-	             		et.addAttribute("starttime","");
-	             		et.addAttribute("stimelong","0");
-	             	 }
-	             	 else {
-	             	 et.addAttribute("starttime",timeFormat.format(starttime));
-	             	 et.addAttribute("stimelong",String.valueOf(stimelong));
-	             	 }
-	             	 et.addAttribute("memo", memo);
-	             	 flag = false;
-	             	 break;
-	              }
-	              }
-	              if(flag == false){ 
-	            	  flg1 = false;
-	            	  break;
-	            	  }
-	          }
-	 		 if(flg1 == false) break;
-	 	}
+	public void EditTaskFromXML(String id,String n,String memo,String cmd,String in,String out,Date starttime, long stimelong) throws IOException
+	{		
+		SAXReader reader = new SAXReader();
+		try{
+			//String filePath = this.getClass().getResource("/").getPath() + "cn/edu/jlu/ccst/sshclient/util/Config.xml";
+			Document doc = reader.read("Config.xml");
+			OutputFormat format = OutputFormat.createPrettyPrint();
+			Element root = doc.getRootElement();
+			XMLWriter writer = null;// 声明写XML的对象
+			List   list=doc.selectNodes("/config/computer");
+			Iterator iter = list.iterator();
+			SimpleDateFormat timeFormat;
+			timeFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			while(iter.hasNext())
+			{
+				Element el=(Element)iter.next();
+				Iterator it=el.elementIterator("group");
+				boolean flg1 = true;
+				while(it.hasNext())
+				{
+					Element elta=(Element)it.next();
+					Iterator itta=elta.elementIterator("task");
+					boolean flag = true;
+					while(itta.hasNext())
+					{
+						Element et=(Element)itta.next();
+						String s=et.attributeValue("id");
+						if(s.equals(id))
+						{
+							et.addAttribute("name", n);
+							et.addAttribute("cmd", cmd);
+							et.addAttribute("in", in);
+							et.addAttribute("out",out);
+							if(starttime == null) {
+								et.addAttribute("starttime","");
+								et.addAttribute("stimelong","0");
+							}
+							else {
+								et.addAttribute("starttime",timeFormat.format(starttime));
+								et.addAttribute("stimelong",String.valueOf(stimelong));
+							}
+							et.addAttribute("memo", memo);
+							flag = false;
+							break;
+						}
+					}
+					if(flag == false){ 
+						flg1 = false;
+						break;
+					}
+				}
+				if(flg1 == false) break;
+			}
 
-	 	//System.out.println("写入xml:"+ starttime);
-	     writer = new XMLWriter(new FileWriter("Config.xml"), format);
-	     writer.write(doc);
-	     writer.close();
-	     
-	     }
-	     catch(Exception e ){
-	         e.printStackTrace();
-	     }
-	     
-	 }
-	 
-	 //-----------------------------------------------------------//
-	 /*
-	  *从config.xml中获得任务开始的时间，未执行返回null
-	  */
-	 public Date getTaskStartTime(SSHTask runtask) {
-		 Date startime1;
-		 SAXReader reader = new SAXReader();
-	     try{
-	     //String filePath = this.getClass().getResource("/").getPath() + "cn/edu/jlu/ccst/sshclient/util/Config.xml";
-	     Document doc = reader.read("Config.xml");
-	     OutputFormat format = OutputFormat.createPrettyPrint();
-	     Element root = doc.getRootElement();
-	     XMLWriter writer = null;// 声明写XML的对象
-	     List   list=doc.selectNodes("/config/computer");
-	 	 Iterator iter = list.iterator();
-	 	 SimpleDateFormat timeFormat;
-	     timeFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-	 	while(iter.hasNext())
-	 	{
-	 		Element el=(Element)iter.next();
-	 		Iterator it=el.elementIterator("group");
-	 		 while(it.hasNext())
-	          {
-	              Element elta=(Element)it.next();
-	              Iterator itta=elta.elementIterator("task");
-	              while(itta.hasNext())
-	              {
-	              Element et=(Element)itta.next();
-	              String s=et.attributeValue("id");
-	              if(s.equals(runtask.getId())) {
-	            	  startime1 = timeFormat.parse(et.attributeValue("starttime"));
-	            	  return startime1;
-	              }
-	              }
-	          }
-	 	 }
-	     }
-	     catch(Exception e)
-	     {
-	    	 e.printStackTrace();	    	 
-	     }
-		 		 
-		 return null;
-	 }
-	 
+			//System.out.println("写入xml:"+ starttime);
+			writer = new XMLWriter(new FileWriter("Config.xml"), format);
+			writer.write(doc);
+			writer.close();
+
+		}
+		catch(Exception e ){
+			e.printStackTrace();
+		}
+
+	}
+
+	//-----------------------------------------------------------//
+	/*
+	 *从config.xml中获得任务开始的时间，未执行返回null
+	 */
+	public Date getTaskStartTime(SSHTask runtask) {
+		Date startime1;
+		SAXReader reader = new SAXReader();
+		try{
+			//String filePath = this.getClass().getResource("/").getPath() + "cn/edu/jlu/ccst/sshclient/util/Config.xml";
+			Document doc = reader.read("Config.xml");
+			OutputFormat format = OutputFormat.createPrettyPrint();
+			Element root = doc.getRootElement();
+			XMLWriter writer = null;// 声明写XML的对象
+			List   list=doc.selectNodes("/config/computer");
+			Iterator iter = list.iterator();
+			SimpleDateFormat timeFormat;
+			timeFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			while(iter.hasNext())
+			{
+				Element el=(Element)iter.next();
+				Iterator it=el.elementIterator("group");
+				while(it.hasNext())
+				{
+					Element elta=(Element)it.next();
+					Iterator itta=elta.elementIterator("task");
+					while(itta.hasNext())
+					{
+						Element et=(Element)itta.next();
+						String s=et.attributeValue("id");
+						if(s.equals(runtask.getId())) {
+							startime1 = timeFormat.parse(et.attributeValue("starttime"));
+							return startime1;
+						}
+					}
+				}
+			}
+		}
+		catch(Exception e)
+		{
+			e.printStackTrace();	    	 
+		}
+
+		return null;
+	}
+
 	//-----------------------------------------------------//
-	 /**
-	  * 修改任务执行状态
-	  */
-	 public void EditTaskRunSuccXML(String id,boolean runsucc)
-	 {		
-	     SAXReader reader = new SAXReader();
-	     try{
-	     //String filePath = this.getClass().getResource("/").getPath() + "cn/edu/jlu/ccst/sshclient/util/Config.xml";
-	     Document doc = reader.read("Config.xml");
-	     OutputFormat format = OutputFormat.createPrettyPrint();
-	     Element root = doc.getRootElement();
-	     XMLWriter writer = null;// 声明写XML的对象
-	     List   list=doc.selectNodes("/config/computer");
-	 	 Iterator iter = list.iterator();
-	 	while(iter.hasNext())
-	 	{
-	 		boolean flg1 = true;
-	 		Element el=(Element)iter.next();
-	 		Iterator it=el.elementIterator("group");
-	 		 while(it.hasNext())
-	          {
-	 			 boolean flag1 = true;
-	              Element elta=(Element)it.next();
-	              Iterator itta=elta.elementIterator("task");
-	              while(itta.hasNext())
-	              {
-	              Element et=(Element)itta.next();
-	              String s=et.attributeValue("id");
-	              if(s.equals(id))
-	              {
-	             	 String temps;
-	             	 if(runsucc == true) temps = "1";
-	             	 else temps = "0";
-	             	 et.addAttribute("runsc",temps);
-	             	 flag1 = false;
-	             	 break;
-	              }	              
-	              }
-	              if(flag1 == false) {
-	            	  flg1 = false;
-	            	  break;
-	              }
-	          }
-	          if(flg1 == false)break;
-	 	}
-	     writer = new XMLWriter(new FileWriter("Config.xml"), format);
-	     writer.write(doc);
-	     writer.close();
-	     
-	     }
-	     catch(Exception e ){
-	         e.printStackTrace();
-	     }
-	 }
-	 
-	 //--------------------------------------------------//
-	 /**
-	  * 将自定义任务的pid写入config.xml中
-	  */
-	 public void EditTaskRunPid(String id,String pid) {
-		 SAXReader reader = new SAXReader();
-	     try{
-	     //String filePath = this.getClass().getResource("/").getPath() + "cn/edu/jlu/ccst/sshclient/util/Config.xml";
-	     Document doc = reader.read("Config.xml");
-	     OutputFormat format = OutputFormat.createPrettyPrint();
-	     Element root = doc.getRootElement();
-	     XMLWriter writer = null;// 声明写XML的对象
-	     List   list=doc.selectNodes("/config/computer");
-	 	 Iterator iter = list.iterator();
-	 	while(iter.hasNext())
-	 	{
-	 		boolean flg1 = true;
-	 		Element el=(Element)iter.next();
-	 		Iterator it=el.elementIterator("group");
-	 		 while(it.hasNext())
-	          {
-	 			 boolean flag1 = true;
-	              Element elta=(Element)it.next();
-	              Iterator itta=elta.elementIterator("task");
-	              while(itta.hasNext())
-	              {
-	              Element et=(Element)itta.next();
-	              String s=et.attributeValue("id");
-	              if(s.equals(id))
-	              {
-	             	 et.addAttribute("runpid",pid);
-	             	 flag1 = false;
-	             	 break;
-	              }	              
-	              }
-	              if(flag1 == false) {
-	            	  flg1 = false;
-	            	  break;
-	              }
-	          }
-	          if(flg1 == false)break;
-	 	}
-	     writer = new XMLWriter(new FileWriter("Config.xml"), format);
-	     writer.write(doc);
-	     writer.close();
-	     
-	     }
-	     catch(Exception e ){
-	         e.printStackTrace();
-	     }
-	 }
-	 //--------------------------------------------------//
-	 
-	 
+	/**
+	 * 修改任务执行状态
+	 */
+	public void EditTaskRunSuccXML(String id,boolean runsucc)
+	{		
+		SAXReader reader = new SAXReader();
+		try{
+			//String filePath = this.getClass().getResource("/").getPath() + "cn/edu/jlu/ccst/sshclient/util/Config.xml";
+			Document doc = reader.read("Config.xml");
+			OutputFormat format = OutputFormat.createPrettyPrint();
+			Element root = doc.getRootElement();
+			XMLWriter writer = null;// 声明写XML的对象
+			List   list=doc.selectNodes("/config/computer");
+			Iterator iter = list.iterator();
+			while(iter.hasNext())
+			{
+				boolean flg1 = true;
+				Element el=(Element)iter.next();
+				Iterator it=el.elementIterator("group");
+				while(it.hasNext())
+				{
+					boolean flag1 = true;
+					Element elta=(Element)it.next();
+					Iterator itta=elta.elementIterator("task");
+					while(itta.hasNext())
+					{
+						Element et=(Element)itta.next();
+						String s=et.attributeValue("id");
+						if(s.equals(id))
+						{
+							String temps;
+							if(runsucc == true) temps = "1";
+							else temps = "0";
+							et.addAttribute("runsc",temps);
+							flag1 = false;
+							break;
+						}	              
+					}
+					if(flag1 == false) {
+						flg1 = false;
+						break;
+					}
+				}
+				if(flg1 == false)break;
+			}
+			writer = new XMLWriter(new FileWriter("Config.xml"), format);
+			writer.write(doc);
+			writer.close();
+
+		}
+		catch(Exception e ){
+			e.printStackTrace();
+		}
+	}
+
+	//--------------------------------------------------//
+	/**
+	 * 将自定义任务的pid写入config.xml中
+	 */
+	public void EditTaskRunPid(String id,String pid) {
+		SAXReader reader = new SAXReader();
+		try{
+			//String filePath = this.getClass().getResource("/").getPath() + "cn/edu/jlu/ccst/sshclient/util/Config.xml";
+			Document doc = reader.read("Config.xml");
+			OutputFormat format = OutputFormat.createPrettyPrint();
+			Element root = doc.getRootElement();
+			XMLWriter writer = null;// 声明写XML的对象
+			List   list=doc.selectNodes("/config/computer");
+			Iterator iter = list.iterator();
+			while(iter.hasNext())
+			{
+				boolean flg1 = true;
+				Element el=(Element)iter.next();
+				Iterator it=el.elementIterator("group");
+				while(it.hasNext())
+				{
+					boolean flag1 = true;
+					Element elta=(Element)it.next();
+					Iterator itta=elta.elementIterator("task");
+					while(itta.hasNext())
+					{
+						Element et=(Element)itta.next();
+						String s=et.attributeValue("id");
+						if(s.equals(id))
+						{
+							et.addAttribute("runpid",pid);
+							flag1 = false;
+							break;
+						}	              
+					}
+					if(flag1 == false) {
+						flg1 = false;
+						break;
+					}
+				}
+				if(flg1 == false)break;
+			}
+			writer = new XMLWriter(new FileWriter("Config.xml"), format);
+			writer.write(doc);
+			writer.close();
+
+		}
+		catch(Exception e ){
+			e.printStackTrace();
+		}
+	}
+	//--------------------------------------------------//
+
+
 	/**
 	 * 主函数
 	 */
-	 public static void main(String args[]) {
-	        java.awt.EventQueue.invokeLater(new Runnable() {
-	            public void run() {
-	                new TaskUI().setVisible(true);
-	            }
-	        });
-	    }
+	public static void main(String args[]) {
+		java.awt.EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				new TaskUI().setVisible(true);
+			}
+		});
+	}
 
 }

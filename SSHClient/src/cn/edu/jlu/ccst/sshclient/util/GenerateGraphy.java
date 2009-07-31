@@ -38,11 +38,11 @@ public class GenerateGraphy {
 	public GenerateGraphy() {
 	}
 	/**
-     * 生成饼图
-     * @param input
-     * @return
-     * @throws IOException
-     */
+	 * 生成饼图
+	 * @param input
+	 * @return
+	 * @throws IOException
+	 */
 	public static JFreeChart generatePie(String input) throws IOException {
 
 		JFreeChart chart = ChartFactory.createPieChart3D("", // 图表标题
@@ -50,7 +50,7 @@ public class GenerateGraphy {
 				true, // 是否显示图例(对于简单的柱状图必须是false)
 				false, // 是否生成工具
 				false // 是否生成URL链接
-				);
+		);
 
 		//重新设置图标标题，改变字体
 		//chart.setTitle(new TextTitle("图书销量统计图", new Font("黑体", Font.ITALIC , 22))); 
@@ -63,9 +63,9 @@ public class GenerateGraphy {
 		//设置饼图各部分的标签字体
 		plot.setLabelFont(new Font("隶书", Font.BOLD, 18)); 
 		//设定背景透明度（0-1.0之间）
-        plot.setBackgroundAlpha(0.9f);
+		plot.setBackgroundAlpha(0.9f);
 		//设定前景透明度（0-1.0之间）
-        plot.setForegroundAlpha(0.50f);
+		plot.setForegroundAlpha(0.50f);
 
 		// FileOutputStream fos = null;
 		// fos = new FileOutputStream("book.jpg");
@@ -81,11 +81,11 @@ public class GenerateGraphy {
 		return chart;
 	}
 	/**
-     * 生成折线图
-     * @param input
-     * @return
-     * @throws IOException
-     */
+	 * 生成折线图
+	 * @param input
+	 * @return
+	 * @throws IOException
+	 */
 	public static JFreeChart generateLine(String input) throws IOException {
 
 		JFreeChart chart = ChartFactory.createLineChart("", // 图表标题
@@ -97,7 +97,7 @@ public class GenerateGraphy {
 				true, // 是否显示图例(对于简单的柱状图必须是false)
 				false, // 是否生成工具
 				false // 是否生成URL链接
-				);
+		);
 
 		// 重新设置图标标题，改变字体
 		// chart.setTitle(new TextTitle("图书销量统计图", new Font("黑体",
@@ -133,12 +133,12 @@ public class GenerateGraphy {
 		// fos.close();
 		return chart;
 	}
-    /**
-     * 生成柱状图
-     * @param input
-     * @return
-     * @throws IOException
-     */
+	/**
+	 * 生成柱状图
+	 * @param input
+	 * @return
+	 * @throws IOException
+	 */
 	public static JFreeChart generateBar(String input) throws IOException {
 
 		JFreeChart chart = ChartFactory.createBarChart3D("", // 图表标题
@@ -150,7 +150,7 @@ public class GenerateGraphy {
 				false, // 是否显示图例(对于简单的柱状图必须是false)
 				false, // 是否生成工具
 				false // 是否生成URL链接
-				);
+		);
 
 		// 重新设置图标标题，改变字体
 		// chart.setTitle(new TextTitle("图书销量统计图", new Font("黑体",
@@ -203,7 +203,7 @@ public class GenerateGraphy {
 				true, // 是否显示图例(对于简单的柱状图必须是false)
 				false, // 是否生成工具
 				false // 是否生成URL链接
-				);
+		);
 
 		// 重新设置图标标题，改变字体
 		// chart.setTitle(new TextTitle("图书销量统计图", new Font("黑体",
@@ -250,7 +250,7 @@ public class GenerateGraphy {
 				true, // 是否显示图例(对于简单的柱状图必须是false)
 				false, // 是否生成工具
 				false // 是否生成URL链接
-				);
+		);
 
 		// 重新设置图标标题，改变字体
 		// chart.setTitle(new TextTitle("图书销量统计图", new Font("黑体",
@@ -300,19 +300,19 @@ public class GenerateGraphy {
 		int a = 1;
 		while ((line = br.readLine()) != null) {
 			// System.out.println(line);
-			 line = line.trim();
+			line = line.trim();
 			if (line.trim().length() >= 1) {
-					 //System.out.println(line);
-					 for(int i = 0 ;i < 9; ++i)
-					 {
-						 int index = line.indexOf(" ");
-						 String temp = line.substring(0,index);
-						 datas.add(Float.valueOf(temp));
-						 line = line.substring(index+1,line.length()).trim();
-					 }
-				     datas.add(Float.valueOf(line));
+				//System.out.println(line);
+				for(int i = 0 ;i < 9; ++i)
+				{
+					int index = line.indexOf(" ");
+					String temp = line.substring(0,index);
+					datas.add(Float.valueOf(temp));
+					line = line.substring(index+1,line.length()).trim();
+				}
+				datas.add(Float.valueOf(line));
 			}
-				
+
 		}
 		br.close();
 		insr.close();
@@ -335,14 +335,14 @@ public class GenerateGraphy {
 		List<Float> datas2 = new ArrayList();
 		int a = 1,aa = 1;
 		while ((line = br.readLine()) != null) {
-			 line = line.trim();
+			line = line.trim();
 			if (line.trim().length() >= 1) {
-					 //System.out.println(line);					
-                     String[] strs = line.split("       ");
-                     datas1.add(Float.valueOf(strs[1]));
-				     datas2.add(Float.valueOf(strs[2]));				
+				//System.out.println(line);					
+				String[] strs = line.split("       ");
+				datas1.add(Float.valueOf(strs[1]));
+				datas2.add(Float.valueOf(strs[2]));				
 			}else break;
-				
+
 		}
 		br.close();
 		insr.close();
@@ -372,15 +372,15 @@ public class GenerateGraphy {
 		int a = 1,aa = 1;
 		while ((line = br.readLine()) != null) {
 			// System.out.println(line);
-			 line = line.trim();
-			 if(line == "")break;
-			 if (line.trim().length() >= 1) {
-				 //System.out.println(line);					
-                 String[] strs = line.split("       ");
-                 datas1.add(Float.valueOf(strs[1]));
-			     datas2.add(Float.valueOf(strs[2]));				
-		}else break;
-				
+			line = line.trim();
+			if(line == "")break;
+			if (line.trim().length() >= 1) {
+				//System.out.println(line);					
+				String[] strs = line.split("       ");
+				datas1.add(Float.valueOf(strs[1]));
+				datas2.add(Float.valueOf(strs[2]));				
+			}else break;
+
 		}
 		br.close();
 		insr.close();
@@ -408,17 +408,17 @@ public class GenerateGraphy {
 		List<Float> datas = new ArrayList();
 		int a = 1;
 		while ((line = br.readLine()) != null) {
-			 line = line.trim();
-			 if(line.length() > 0) {
-			 for(int i = 0 ;i < 9; ++i)
-			 {
-				 int index = line.indexOf(" ");
-				 String temp = line.substring(0,index);
-				 datas.add(Float.valueOf(temp));
-				 line = line.substring(index+1,line.length()).trim();
-			 }
-		     datas.add(Float.valueOf(line)); 
-			 }
+			line = line.trim();
+			if(line.length() > 0) {
+				for(int i = 0 ;i < 9; ++i)
+				{
+					int index = line.indexOf(" ");
+					String temp = line.substring(0,index);
+					datas.add(Float.valueOf(temp));
+					line = line.substring(index+1,line.length()).trim();
+				}
+				datas.add(Float.valueOf(line)); 
+			}
 		}
 		br.close();
 		insr.close();
@@ -442,14 +442,14 @@ public class GenerateGraphy {
 			line = line.trim();
 			if (line.trim().length() >= 1) 
 			{				 
-					 for(int i = 0 ;i < 9; ++i)
-					 {
-						 int index = line.indexOf(" ");
-						 String temp = line.substring(0,index);
-						 dataset.setValue("R" + String.valueOf(a++),Float.valueOf(temp));
-						 line = line.substring(index+1,line.length()).trim();
-					 }
-					 dataset.setValue("R" + String.valueOf(a++),Float.valueOf(line));	
+				for(int i = 0 ;i < 9; ++i)
+				{
+					int index = line.indexOf(" ");
+					String temp = line.substring(0,index);
+					dataset.setValue("R" + String.valueOf(a++),Float.valueOf(temp));
+					line = line.substring(index+1,line.length()).trim();
+				}
+				dataset.setValue("R" + String.valueOf(a++),Float.valueOf(line));	
 			}
 		}
 		br.close();
@@ -489,12 +489,12 @@ public class GenerateGraphy {
 		}
 
 		preview.setName(id+"Gra");
-//		preview.addWindowListener(new WindowAdapter() {
-//			public void windowClosing(final WindowEvent event) {
-//				preview.dispose();
-//			}
-//		});
-//		preview.pack();
+		//		preview.addWindowListener(new WindowAdapter() {
+		//			public void windowClosing(final WindowEvent event) {
+		//				preview.dispose();
+		//			}
+		//		});
+		//		preview.pack();
 		// 调整预览窗口的大小和位置,适合屏幕，并且居中
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		preview.setSize(screenSize.width, screenSize.height - 50);// 适合屏幕，50表示把工具栏要考虑在内
@@ -516,72 +516,72 @@ public class GenerateGraphy {
 		//左键双击键关闭选中的选项卡
 		LinuxClient.GetObj().getJTabbedPane().addMouseListener(new MouseAdapter() {
 			public void mousePressed(MouseEvent e) {
-				 if (e.getClickCount() == 2 && SwingUtilities.isLeftMouseButton(e)) {
-					 if(LinuxClient.GetObj().getJTabbedPane().getTabCount() > 0) {
-			         if(LinuxClient.GetObj().getJTabbedPane().getSelectedIndex() == LinuxClient.GetObj().getJTabbedPane().indexOfTab(strid)) {
-					 LinuxClient.GetObj().getJTabbedPane().removeTabAt(LinuxClient.GetObj().getJTabbedPane().getSelectedIndex());
-					// System.out.println("选中的选项卡为:" + LinuxClient.GetObj().getJTabbedPane().getSelectedIndex());
-					// LinuxClient.GetObj().getJTabbedPane().getTabComponentAt(LinuxClient.GetObj().getJTabbedPane().getSelectedIndex()).repaint();
-					// LinuxClient.GetObj().getJTabbedPane().addTab(null,null);
-					//return;
-					 }
-					 }
-				 }
+				if (e.getClickCount() == 2 && SwingUtilities.isLeftMouseButton(e)) {
+					if(LinuxClient.GetObj().getJTabbedPane().getTabCount() > 0) {
+						if(LinuxClient.GetObj().getJTabbedPane().getSelectedIndex() == LinuxClient.GetObj().getJTabbedPane().indexOfTab(strid)) {
+							LinuxClient.GetObj().getJTabbedPane().removeTabAt(LinuxClient.GetObj().getJTabbedPane().getSelectedIndex());
+							// System.out.println("选中的选项卡为:" + LinuxClient.GetObj().getJTabbedPane().getSelectedIndex());
+							// LinuxClient.GetObj().getJTabbedPane().getTabComponentAt(LinuxClient.GetObj().getJTabbedPane().getSelectedIndex()).repaint();
+							// LinuxClient.GetObj().getJTabbedPane().addTab(null,null);
+							//return;
+						}
+					}
+				}
 			}
 		});
 		pre=preview;
 	}
 	private static ChartPanel pre=null;
-	
-	
-	  public static void main(String[] args) throws IOException{
 
 
-      //将生成的报表放到预览窗口中
-
-      final ChartFrame preview = new ChartFrame("分析",generate2Line("E:/SSH/cpp/Iterative Regression/Debug/out.txt"));
-
-       preview.addWindowListener(new WindowAdapter() {
-
-         public void windowClosing(final WindowEvent event) {
-
-           preview.dispose();
-
-         }
-
-       });
-
-       preview.pack();
-
-       //调整预览窗口的大小和位置,适合屏幕，并且居中
-
-       Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-
-       preview.setSize(screenSize.width,screenSize.height-50);//适合屏幕，50表示把工具栏要考虑在内
-
-       Dimension frameSize = preview.getSize();
-
-       if (frameSize.height > screenSize.height) {
-
-         frameSize.height = screenSize.height;
-
-       }
-
-       if (frameSize.width > screenSize.width) {
-
-         frameSize.width = screenSize.width;
-
-       }
-
-       preview.setLocation( (screenSize.width - frameSize.width) / 2,
-
-                  (screenSize.height - frameSize.height-50) / 2);
+	public static void main(String[] args) throws IOException{
 
 
+		//将生成的报表放到预览窗口中
 
-       //显示报表预览窗口
+		final ChartFrame preview = new ChartFrame("分析",generate2Line("E:/SSH/cpp/Iterative Regression/Debug/out.txt"));
 
-       preview.setVisible(true);
+		preview.addWindowListener(new WindowAdapter() {
 
-  }
+			public void windowClosing(final WindowEvent event) {
+
+				preview.dispose();
+
+			}
+
+		});
+
+		preview.pack();
+
+		//调整预览窗口的大小和位置,适合屏幕，并且居中
+
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+
+		preview.setSize(screenSize.width,screenSize.height-50);//适合屏幕，50表示把工具栏要考虑在内
+
+		Dimension frameSize = preview.getSize();
+
+		if (frameSize.height > screenSize.height) {
+
+			frameSize.height = screenSize.height;
+
+		}
+
+		if (frameSize.width > screenSize.width) {
+
+			frameSize.width = screenSize.width;
+
+		}
+
+		preview.setLocation( (screenSize.width - frameSize.width) / 2,
+
+				(screenSize.height - frameSize.height-50) / 2);
+
+
+
+		//显示报表预览窗口
+
+		preview.setVisible(true);
+
+	}
 }

@@ -30,7 +30,7 @@ public class SSHComputer extends BaseClass implements BaseOperation{
 	private String host;
 	private List<SSHGroup> gps;
 	private boolean runstatus = false;
-		
+
 	public SSHComputer() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -44,7 +44,7 @@ public class SSHComputer extends BaseClass implements BaseOperation{
 		super(id, name, type, memo, creatdate);
 		// TODO Auto-generated constructor stub
 	}	
-	
+
 	public SSHComputer(String id, String name, byte type, String memo,
 			Date creatdate, String username, String password, String host,
 			List<SSHGroup> gps) {
@@ -72,7 +72,7 @@ public class SSHComputer extends BaseClass implements BaseOperation{
 	public void setHost(String host) {
 		this.host = host;
 	}
-	
+
 	public List<SSHGroup> getGps() {
 		return gps;
 	}
@@ -80,8 +80,8 @@ public class SSHComputer extends BaseClass implements BaseOperation{
 		this.gps = gps;
 	}
 	//
-	
- public  boolean creat() {
+
+	public  boolean creat() {
 		// TODO Auto-generated method stub
 		ComputerUI newComputerUi = new ComputerUI();
 		newComputerUi.setModal(true);
@@ -102,39 +102,39 @@ public class SSHComputer extends BaseClass implements BaseOperation{
 	public boolean remove() {
 		int tt = JOptionPane.showConfirmDialog(null, "删除电脑", "确认删除", JOptionPane.YES_NO_OPTION);
 		if(JOptionPane.NO_OPTION == tt)
-			{
+		{
 			return false;
-			}
+		}
 		// TODO Auto-generated method stub
 		SAXReader reader = new SAXReader();
 		try
 		{
-		  Document doc = reader.read("Config.xml");
-		  List   list=doc.selectNodes("/config/computer");
-    	  Iterator iter = list.iterator();
-    	  while(iter.hasNext())
-    		{
-            Element el=(Element)iter.next();
-            String it=el.attributeValue("id");
-            if(it.equals(LinuxClient.getCur().getId()))
-            	{
-            		el.getParent().remove(el);
-            	}
-    		}
-    	  XMLWriter writer = new XMLWriter(new FileWriter("Config.xml"));	   	 
-		  writer.write(doc);
-		  writer.close();
+			Document doc = reader.read("Config.xml");
+			List   list=doc.selectNodes("/config/computer");
+			Iterator iter = list.iterator();
+			while(iter.hasNext())
+			{
+				Element el=(Element)iter.next();
+				String it=el.attributeValue("id");
+				if(it.equals(LinuxClient.getCur().getId()))
+				{
+					el.getParent().remove(el);
+				}
+			}
+			XMLWriter writer = new XMLWriter(new FileWriter("Config.xml"));	   	 
+			writer.write(doc);
+			writer.close();
 		}
-	     catch(Exception ex)
-	     {
-	         ex.printStackTrace();
-	     }
+		catch(Exception ex)
+		{
+			ex.printStackTrace();
+		}
 		return false;
 	}
 	@Override
 	public boolean update() {
 		// TODO Auto-generated method stub
-		
+
 		SSHComputer t=(SSHComputer)(LinuxClient.getCur());
 		ComputerUI newComputerUi = new ComputerUI(t.getName(),t.getUsername(),t.getPassword(),t.getHost(),t.getMemo());
 		newComputerUi.setModal(true);
@@ -142,21 +142,21 @@ public class SSHComputer extends BaseClass implements BaseOperation{
 		return false;
 	}
 
-        @Override
-        public String toString(){
-            return name;
-            /*
+	@Override
+	public String toString(){
+		return name;
+		/*
              return "computer--id:"+id+";name:"+name+";memo:"+memo
                      +";host:"+host+";user:"+username
                      +";pswd:"+password
                      +";date:"+creatdate;
-             */
-        }
+		 */
+	}
 	public boolean getRunStatusC() {
 		return runstatus;
 	}
 	public void setRunStatusC(boolean t) {
 		runstatus = t;
 	}
-	
+
 }

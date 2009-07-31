@@ -34,19 +34,19 @@ public class SSHTask extends BaseClass implements BaseAction, BaseOperation {
 	 * @param memo
 	 * @param creatdate
 	 */
-	
+
 	private String cmd;
 	private List<String> params;
 	private String fin;
 	private String fout;
 	private SSHGroup gp;
 	private int taskstatus;
-    private boolean taskfinish;
-    private Date taskstartTime;
-    private long taskrunTime;
-    private String runpid;
-    private JTextArea jTextArea1;
-	
+	private boolean taskfinish;
+	private Date taskstartTime;
+	private long taskrunTime;
+	private String runpid;
+	private JTextArea jTextArea1;
+
 	public SSHTask(String id, String name, byte type, String memo,Date creatdate) {
 		super(id, name, type, memo, creatdate);
 		taskstatus = 0;
@@ -75,8 +75,8 @@ public class SSHTask extends BaseClass implements BaseAction, BaseOperation {
 		taskfinish = false;
 		taskstartTime = null;
 	}	
-	
-    public SSHTask(String id, String name, byte type, String memo,
+
+	public SSHTask(String id, String name, byte type, String memo,
 			Date creatdate, String cmd, List<String> params, String fin, String fout,
 			SSHGroup gp) {
 		super(id, name, type, memo, creatdate);
@@ -127,61 +127,61 @@ public class SSHTask extends BaseClass implements BaseAction, BaseOperation {
 	public void setGp(SSHGroup gp) {
 		this.gp = gp;
 	}
-    public void setStatus(int t) {
-    	taskstatus = t;
-    }
-    public int getStatus() {
-    	return taskstatus;
-    }
-    
-    public void setRunSucc(boolean t) {
-    	taskfinish = t;
-    }
-    public boolean getRunSucc() {
-    	return taskfinish;
-    }
-    public void setStartTime(Date t){
-    	taskstartTime = t;
-    }
-    public Date getStartTime() {
-    	return taskstartTime;
-    }
-    public void setRunTime(long t) {
-    	taskrunTime = t;
-    }
-    public long getRunTime() {
-    	return taskrunTime;
-    }
-    public void setPid(String pid) {
-    	runpid = pid;
-    }
-    public String getPid() {
-    	return runpid;
-    }
+	public void setStatus(int t) {
+		taskstatus = t;
+	}
+	public int getStatus() {
+		return taskstatus;
+	}
+
+	public void setRunSucc(boolean t) {
+		taskfinish = t;
+	}
+	public boolean getRunSucc() {
+		return taskfinish;
+	}
+	public void setStartTime(Date t){
+		taskstartTime = t;
+	}
+	public Date getStartTime() {
+		return taskstartTime;
+	}
+	public void setRunTime(long t) {
+		taskrunTime = t;
+	}
+	public long getRunTime() {
+		return taskrunTime;
+	}
+	public void setPid(String pid) {
+		runpid = pid;
+	}
+	public String getPid() {
+		return runpid;
+	}
 	//-----------------------------------------------------------------------//
 	/* (non-Javadoc)
 	 * @see cn.edu.jlu.ccst.sshclient.inter.BaseAction#start()
 	 */
 	@Override
 	public void start(JTextArea jtext) {
-	jTextArea1 = jtext;
-	SSHComputer selectComputer = new SSHComputer();
-	selectComputer = gp.getCp();
-	//获得执行命令的相关信息
-	String computerHost = selectComputer.getHost();
-	String userName = selectComputer.getUsername();
-	String userPsw = selectComputer.getPassword();
-	int taskInfo = 0;//开启任务信息：0	
-	try{
-	SSHOpCommand ry = new SSHOpCommand(computerHost, userName, userPsw, cmd,id,jTextArea1,fout,fin,taskInfo);
-	Thread ty = new Thread(ry);
-	ty.start();
-	
-	//ty.join();
-	}
-	catch(Exception e) {
-		e.printStackTrace();
-	}
+		jTextArea1 = jtext;
+		SSHComputer selectComputer = new SSHComputer();
+		selectComputer = gp.getCp();
+		//获得执行命令的相关信息
+		String computerHost = selectComputer.getHost();
+		String userName = selectComputer.getUsername();
+		String userPsw = selectComputer.getPassword();
+		int taskInfo = 0;//开启任务信息：0	
+		try{
+			SSHOpCommand ry = new SSHOpCommand(computerHost, userName, userPsw, cmd,id,jTextArea1,fout,fin,taskInfo);
+			Thread ty = new Thread(ry);
+			ty.start();
+
+			//ty.join();
+		}
+		catch(Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	/* (non-Javadoc)
@@ -198,11 +198,11 @@ public class SSHTask extends BaseClass implements BaseAction, BaseOperation {
 			ry = new SSHOpCommand(selectComputer.getHost(), selectComputer.getUsername(),selectComputer.getPassword(),cmd,id,runpid,stopType);	
 		}
 		else {
-	    ry = new SSHOpCommand(selectComputer.getHost(), selectComputer.getUsername(),selectComputer.getPassword(),cmd,id,stopType);
+			ry = new SSHOpCommand(selectComputer.getHost(), selectComputer.getUsername(),selectComputer.getPassword(),cmd,id,stopType);
 		}
 		Thread ty = new Thread(ry);
 		ty.start();
-   
+
 	}
 
 	/* (non-Javadoc)
@@ -212,8 +212,8 @@ public class SSHTask extends BaseClass implements BaseAction, BaseOperation {
 	public boolean creat() {
 		// TODO Auto-generated method stub
 		TaskUI newTask = new TaskUI();
-	    newTask.setModal(true);
-	    newTask.setVisible(true);
+		newTask.setModal(true);
+		newTask.setVisible(true);
 		return false;
 	}
 
@@ -241,45 +241,45 @@ public class SSHTask extends BaseClass implements BaseAction, BaseOperation {
 	@Override
 	public boolean remove() {
 		int tt = JOptionPane.showConfirmDialog(null, "删除任务", "确认删除", JOptionPane.YES_NO_OPTION);
-	    if(JOptionPane.NO_OPTION == tt)
-			{
+		if(JOptionPane.NO_OPTION == tt)
+		{
 			return false;
-			}
+		}
 		// TODO Auto-generated method stub
 		SAXReader reader = new SAXReader();
 		try
 		{
-		  Document doc = reader.read("Config.xml");
-		  List   list=doc.selectNodes("/config/computer");
-    		Iterator iter = list.iterator();
-    		while(iter.hasNext())
-    		{
-            Element el=(Element)iter.next();
-            Iterator it=el.elementIterator("group");
-            while(it.hasNext())
-            {
-                Element elta=(Element)it.next();
-                Iterator itta=elta.elementIterator("task");
-                while(itta.hasNext())
-                {
-                Element et=(Element)itta.next();
-                String s=et.attributeValue("id");
-                if(s.equals(LinuxClient.getCur().getId()))
-                {
-                    elta.remove(et);
-                }
-                }
+			Document doc = reader.read("Config.xml");
+			List   list=doc.selectNodes("/config/computer");
+			Iterator iter = list.iterator();
+			while(iter.hasNext())
+			{
+				Element el=(Element)iter.next();
+				Iterator it=el.elementIterator("group");
+				while(it.hasNext())
+				{
+					Element elta=(Element)it.next();
+					Iterator itta=elta.elementIterator("task");
+					while(itta.hasNext())
+					{
+						Element et=(Element)itta.next();
+						String s=et.attributeValue("id");
+						if(s.equals(LinuxClient.getCur().getId()))
+						{
+							elta.remove(et);
+						}
+					}
 
-            }
-    		}
-    	  XMLWriter writer = new XMLWriter(new FileWriter("Config.xml"));	   	 
-		  writer.write(doc);
-		  writer.close();
+				}
+			}
+			XMLWriter writer = new XMLWriter(new FileWriter("Config.xml"));	   	 
+			writer.write(doc);
+			writer.close();
 		}
-	     catch(Exception ex)
-	     {
-	         ex.printStackTrace();
-	     }
+		catch(Exception ex)
+		{
+			ex.printStackTrace();
+		}
 		return false;
 	}
 
@@ -289,34 +289,34 @@ public class SSHTask extends BaseClass implements BaseAction, BaseOperation {
 	@Override
 	public boolean update() {
 		// TODO Auto-generated method stub
-		 SSHTask t=(SSHTask)LinuxClient.getCur();
-		 TaskUI newTask = new TaskUI(t.getName(),t.getCmd(),t.getFin(),t.getFout(),t.getMemo());
-		 newTask.setModal(true);
-		 newTask.setVisible(true);
+		SSHTask t=(SSHTask)LinuxClient.getCur();
+		TaskUI newTask = new TaskUI(t.getName(),t.getCmd(),t.getFin(),t.getFout(),t.getMemo());
+		newTask.setModal(true);
+		newTask.setVisible(true);
 		return false;
 	}
 
-         @Override
-        public String toString(){
-             return name;
-           // return "task--id:"+id+";name:"+name+";memo:"+memo+";cmd:"+cmd+";date:"+creatdate;
-        }
+	@Override
+	public String toString(){
+		return name;
+		// return "task--id:"+id+";name:"+name+";memo:"+memo+";cmd:"+cmd+";date:"+creatdate;
+	}
 
-		@Override
-		public boolean isdone() {
-			// TODO Auto-generated method stub
-			return false;
-		}
+	@Override
+	public boolean isdone() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 
-		public void setTextArea(JTextArea jTextArea2) {
-			// TODO Auto-generated method stub
-			jTextArea1 = jTextArea2;
-		}
+	public void setTextArea(JTextArea jTextArea2) {
+		// TODO Auto-generated method stub
+		jTextArea1 = jTextArea2;
+	}
 
-		@Override
-		public String start() {
-			// TODO Auto-generated method stub
-			return null;
-		}
+	@Override
+	public String start() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 
 }

@@ -11,7 +11,7 @@ public class BaseClass {
 	protected byte type;
 	protected String memo;
 	protected Date creatdate;	
-	
+
 	public BaseClass(String id, String name, byte type, String memo, Date creatdate) {
 		super();
 		this.id = id;
@@ -20,7 +20,7 @@ public class BaseClass {
 		this.memo = memo;
 		this.creatdate = creatdate;
 	}
-	
+
 	public BaseClass(String name, byte type, Date creatdate) {
 		super();
 		this.name = name;
@@ -69,7 +69,7 @@ public class BaseClass {
 
 	public void start(JTextArea jtext) {
 		// TODO Auto-generated method stub
-		
+
 	}
-	
+
 }

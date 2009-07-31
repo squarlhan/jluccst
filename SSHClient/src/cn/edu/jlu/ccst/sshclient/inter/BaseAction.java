@@ -10,7 +10,7 @@ import javax.swing.JTextArea;
  *
  */
 public interface BaseAction {
-	
+
 	/**
 	 * 
 	 */
@@ -19,7 +19,7 @@ public interface BaseAction {
 	 * 
 	 */
 	void stop();
-	
+
 	boolean isdone();
 	void start(JTextArea jtext);
 

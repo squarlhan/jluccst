@@ -20,7 +20,7 @@ import ch.ethz.ssh2.Session;
 public class StartExam implements Runnable {
 	private String id;
 	private String pid;
-	
+
 	private String Host;
 	private String Name;
 	private String Psw;
@@ -37,88 +37,88 @@ public class StartExam implements Runnable {
 		this.Finout=Finout;
 		this.remoteFile=remoteFile;
 	}
-//-----------------------------------------------------------------//	
-    public void init() {
-    }
-//----------------------------------------------------------------//
+	//-----------------------------------------------------------------//	
+	public void init() {
+	}
+	//----------------------------------------------------------------//
 	public void start() {
-    }
-//-----------------------------------------------------------------//
-    public void run(){
-    	
-    	String rs = null;
-    	String sscmd = "ps -p "+pid+" | wc -l ";
+	}
+	//-----------------------------------------------------------------//
+	public void run(){
 
-    	Connection conn;
-    	Session sess;
-    	String out;
-    	BufferedReader bufferedReader;
-	    conn = getOpenedConnection();
-	    System.out.println("开始");
-    	while(rs==null||rs.equals("2"))
-    	{
-    		//System.out.println(rs);
-    	try
-    	{
-    	sess = conn.openSession();
-		sess.execCommand(sscmd);
-        bufferedReader = new BufferedReader(new InputStreamReader(sess.getStdout()));    		
-		while((out=bufferedReader.readLine())!=null) 
+		String rs = null;
+		String sscmd = "ps -p "+pid+" | wc -l ";
+
+		Connection conn;
+		Session sess;
+		String out;
+		BufferedReader bufferedReader;
+		conn = getOpenedConnection();
+		System.out.println("开始");
+		while(rs==null||rs.equals("2"))
 		{
-			rs=out;
+			//System.out.println(rs);
+			try
+			{
+				sess = conn.openSession();
+				sess.execCommand(sscmd);
+				bufferedReader = new BufferedReader(new InputStreamReader(sess.getStdout()));    		
+				while((out=bufferedReader.readLine())!=null) 
+				{
+					rs=out;
+				}
+				sess.close();
+				//conn.close();
+			}
+			catch(Exception et) {
+				et.printStackTrace();
+			} 
 		}
-		sess.close();
-		//conn.close();
-    	}
-    	catch(Exception et) {
-    		et.printStackTrace();
-    	} 
-    	}
-    	try
-    	{
-    	OutputStream fout=new FileOutputStream(Finout+"\\"+id+".txt");
-		scpGet(conn,remoteFile,fout);
-		//System.out.println(remoteFile+"...."+Finout+"\\"+id+".txt");
-		fout.close();
-		conn.close();
-    	}catch(Exception e){e.printStackTrace();}
-    	TaskUI temp = new TaskUI();
-    	temp.EditTaskRunSuccXML(id,false);
-    	LinuxClient.GetObj().setTaskRunSucc(id,false); 
-    	File f=new File(".\\"+id+"_"+pid+".txt");
-    	f.delete();
-    }
-//-----------------------------------------------------------------// 
-    public  Connection getOpenedConnection()  {
-   	 Connection conn = new Connection(Host);
-		try{	
 		try
 		{
-		conn.connect();
-		}
-		catch (IOException e)
-		{
-			return conn;
-		}
-		boolean isAuthenticated = conn.authenticateWithPassword(Name, Psw);
-		if (isAuthenticated == false)
-		{
-			throw new IOException("Authentication failed.");			
-			
-		}
+			OutputStream fout=new FileOutputStream(Finout+"\\"+id+".txt");
+			scpGet(conn,remoteFile,fout);
+			//System.out.println(remoteFile+"...."+Finout+"\\"+id+".txt");
+			fout.close();
+			conn.close();
+		}catch(Exception e){e.printStackTrace();}
+		TaskUI temp = new TaskUI();
+		temp.EditTaskRunSuccXML(id,false);
+		LinuxClient.GetObj().setTaskRunSucc(id,false); 
+		File f=new File(".\\"+id+"_"+pid+".txt");
+		f.delete();
+	}
+	//-----------------------------------------------------------------// 
+	public  Connection getOpenedConnection()  {
+		Connection conn = new Connection(Host);
+		try{	
+			try
+			{
+				conn.connect();
+			}
+			catch (IOException e)
+			{
+				return conn;
+			}
+			boolean isAuthenticated = conn.authenticateWithPassword(Name, Psw);
+			if (isAuthenticated == false)
+			{
+				throw new IOException("Authentication failed.");			
+
+			}
 		}
 		catch(Exception ev){
 			ev.printStackTrace();
 		}
-		
+
 		return conn;
 
-}
-//-----------------------------------------------------------------------------------//    
-    public  void scpGet(Connection conn, String remoteFile, OutputStream target) throws IOException 
-    {
+	}
+	//-----------------------------------------------------------------------------------//    
+	public  void scpGet(Connection conn, String remoteFile, OutputStream target) throws IOException 
+	{
 		SCPClient client = new SCPClient(conn);
 		client.get(remoteFile, target);
 	}
-//---------------------------------------------------------------------------------//
+	//---------------------------------------------------------------------------------//
 }
