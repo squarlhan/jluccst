@@ -366,8 +366,10 @@ public class TaskUI extends javax.swing.JDialog {
 		this.dispose(); 
 		JOptionPane.showMessageDialog(null, "修改任务成功！");
 		String Cmd=tTextField3.getText();
-		SSHComputer TC=LinuxClient.GetObj().TfindselectComputer(LinuxClient.GetObj().getCur().getId());
-		System.out.println(LinuxClient.GetObj().getCur().getId());
+//		LinuxClient.GetObj();
+		SSHComputer TC=LinuxClient.GetObj().TfindselectComputer(LinuxClient.getCur().getId());
+//		LinuxClient.GetObj();
+		System.out.println(LinuxClient.getCur().getId());
 		Connection conn = getOpenedConnection(TC);
 		Session sess = conn.openSession();
 		if((Cmd.startsWith("./"))&&(tfin.getText()!=null)&&(!tfin.getText().equals("")))

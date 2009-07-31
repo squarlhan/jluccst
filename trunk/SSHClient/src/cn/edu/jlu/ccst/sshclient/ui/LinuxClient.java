@@ -71,6 +71,11 @@ import org.dom4j.io.*;
  */
 public class LinuxClient extends javax.swing.JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	/** Creates new form LinuxClient */
 	private  LinuxClient() {
 		flag=1;
@@ -93,7 +98,7 @@ public class LinuxClient extends javax.swing.JFrame {
 
 	}
 
-	//updata the jtree
+	//Update the jtree
 	void  updata() {
 
 		LinuxClient.cps = new ArrayList<SSHComputer>();
