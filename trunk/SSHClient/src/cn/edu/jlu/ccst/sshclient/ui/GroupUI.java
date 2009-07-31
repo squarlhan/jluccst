@@ -4,14 +4,14 @@ package cn.edu.jlu.ccst.sshclient.ui;
 
 import cn.edu.jlu.ccst.sshclient.model.*;
 
-import java.io.File;
+//import java.io.File;
 import java.io.FileWriter;
-import java.text.DateFormat;
+//import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.*;
 import java.awt.*;
-import java.awt.event.*;
+//import java.awt.event.*;
 
 import javax.swing.*;
 
@@ -159,7 +159,7 @@ public class GroupUI extends javax.swing.JDialog  {
 					cp.setHost(c.valueOf("@host"));
 					cp.setUsername(c.valueOf("@user"));
 					cp.setPassword(c.valueOf("@pswd"));
-					cp.setGps(new ArrayList());
+					cp.setGps(new ArrayList<SSHGroup>());
 					newGroup1.setCp(cp);//指示出该组的父节点
 					/****************************************************/
 					Element g = c.addElement("group");
@@ -207,7 +207,7 @@ public class GroupUI extends javax.swing.JDialog  {
 			//String filePath = this.getClass().getResource("/").getPath() + "cn/edu/jlu/ccst/sshclient/util/Config.xml";
 			Document doc = reader.read("Config.xml");
 			OutputFormat format = OutputFormat.createPrettyPrint();
-			Element root = doc.getRootElement();
+//			Element root = doc.getRootElement();
 			XMLWriter writer = null;// 声明写XML的对象
 			List   list=doc.selectNodes("/config/computer");
 			Iterator iter = list.iterator();

@@ -3,8 +3,8 @@ package cn.edu.jlu.ccst.sshclient.util;
 import cn.edu.jlu.ccst.sshclient.model.SSHTask;
 import cn.edu.jlu.ccst.sshclient.ui.*;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+//import java.awt.event.ActionEvent;
+//import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -16,18 +16,18 @@ import java.io.OutputStream;
 import ch.ethz.ssh2.Connection;
 import ch.ethz.ssh2.SCPClient;
 import ch.ethz.ssh2.Session;
-import java.lang.Thread;
+//import java.lang.Thread;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.swing.JFrame;
+//import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
-import javax.management.timer.Timer;
-import java.awt.*;
-import java.awt.event.*;
+//import javax.management.timer.Timer;
+//import java.awt.*;
+//import java.awt.event.*;
 
 public class SSHOpCommand implements Runnable {
 	private String Host;
@@ -36,15 +36,15 @@ public class SSHOpCommand implements Runnable {
 	private String Cmd;
 	private String Id;
 	private String Finout;
-	private String Fin;
+//	private String Fin;
 	private int opType;
 	private JTextArea  jTextArea1;
 	private static long endtime;
 	private  boolean flag = false; 
-	private  boolean groupflag = false;
+//	private  boolean groupflag = false;
 	private JLabel  conl;
 	private String ownPid;
-	private  String rs;	
+//	private  String rs;	
 	private List<SSHTask> runtasklist;
 
 	//默认构造方法
@@ -103,7 +103,7 @@ public class SSHOpCommand implements Runnable {
 		Cmd = cmd;
 		Id = id;
 		Finout = finout;
-		Fin=fin;
+//		Fin=fin;
 		jTextArea1 = jText;
 		opType = taskInfo;
 		runtasklist = null;
@@ -400,7 +400,7 @@ public class SSHOpCommand implements Runnable {
 	public void stopSSH() {
 
 		List<String> pidlist;
-		pidlist = new ArrayList();
+		pidlist = new ArrayList<String>();
 		String stopTaskcmd = Cmd;
 		stopTaskcmd = stopTaskcmd.substring(0,stopTaskcmd.indexOf(" "));
 		//System.out.println("stop:"+stopTaskcmd);
@@ -604,7 +604,7 @@ public class SSHOpCommand implements Runnable {
 					stopcmd+" | awk '{print $1}'";
 
 					List<String> pidlist;
-					pidlist = new ArrayList();
+					pidlist = new ArrayList<String>();
 					Connection conn ;
 					Session sess ;
 					String out;

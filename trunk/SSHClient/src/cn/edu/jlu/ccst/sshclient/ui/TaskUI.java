@@ -5,15 +5,15 @@ import ch.ethz.ssh2.SCPClient;
 import ch.ethz.ssh2.Session;
 import cn.edu.jlu.ccst.sshclient.model.*;
 
-import java.io.File;
+//import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.text.DateFormat;
+//import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.*;
 import java.awt.*;
-import java.awt.event.*;
+//import java.awt.event.*;
 import javax.swing.*;
 
 import org.dom4j.Document;
@@ -23,14 +23,15 @@ import org.dom4j.io.SAXReader;
 import org.dom4j.io.XMLWriter;
 
 public class TaskUI extends javax.swing.JDialog {	
-	private JLabel tLabel1, tLabel2,tLabel3,memoLabel;
+	private JLabel tLabel1, tLabel2,tLabel3;
+//	private JLabel memoLabel;
 	private JTextField tTextField1,tTextField3;
 	private JTextArea tTextArea2;
 	private JScrollPane memoAreaPane; 
 	private JButton resetButton , submitButton;
 	private JLabel lfin,lfout;
 	private JTextField tfin,tfout;
-	private JButton choosein,chooseout;
+//	private JButton choosein,chooseout;
 
 	public TaskUI() {
 		initComponent();
@@ -218,7 +219,7 @@ public class TaskUI extends javax.swing.JDialog {
 		LinuxClient tempClient = LinuxClient.GetObj();
 		SSHGroup selectGroup = new SSHGroup();
 		BaseClass curType = new BaseClass();
-		curType = tempClient.cur;   
+		curType = LinuxClient.cur;   
 		String selectGroupId = curType.getId();
 		String selectComputerId;//选中任务所在组的计算机ID
 
@@ -235,7 +236,7 @@ public class TaskUI extends javax.swing.JDialog {
 		newTask1.setType((byte) 2);     
 		//找到选中的组
 		Iterator <SSHGroup> it;
-		for(it = tempClient.gps.iterator(); it.hasNext();){
+		for(it = LinuxClient.gps.iterator(); it.hasNext();){
 			selectGroup = (SSHGroup) it.next();
 			if(selectGroup.getId().equals(selectGroupId)) {
 				break;
@@ -389,7 +390,7 @@ public class TaskUI extends javax.swing.JDialog {
 			//String filePath = this.getClass().getResource("/").getPath() + "cn/edu/jlu/ccst/sshclient/util/Config.xml";
 			Document doc = reader.read("Config.xml");
 			OutputFormat format = OutputFormat.createPrettyPrint();
-			Element root = doc.getRootElement();
+//			Element root = doc.getRootElement();
 			XMLWriter writer = null;// 声明写XML的对象
 			List   list=doc.selectNodes("/config/computer");
 			Iterator iter = list.iterator();
@@ -458,9 +459,9 @@ public class TaskUI extends javax.swing.JDialog {
 		try{
 			//String filePath = this.getClass().getResource("/").getPath() + "cn/edu/jlu/ccst/sshclient/util/Config.xml";
 			Document doc = reader.read("Config.xml");
-			OutputFormat format = OutputFormat.createPrettyPrint();
-			Element root = doc.getRootElement();
-			XMLWriter writer = null;// 声明写XML的对象
+//			OutputFormat format = OutputFormat.createPrettyPrint();
+//			Element root = doc.getRootElement();
+//			XMLWriter writer = null;// 声明写XML的对象
 			List   list=doc.selectNodes("/config/computer");
 			Iterator iter = list.iterator();
 			SimpleDateFormat timeFormat;
@@ -504,7 +505,7 @@ public class TaskUI extends javax.swing.JDialog {
 			//String filePath = this.getClass().getResource("/").getPath() + "cn/edu/jlu/ccst/sshclient/util/Config.xml";
 			Document doc = reader.read("Config.xml");
 			OutputFormat format = OutputFormat.createPrettyPrint();
-			Element root = doc.getRootElement();
+//			Element root = doc.getRootElement();
 			XMLWriter writer = null;// 声明写XML的对象
 			List   list=doc.selectNodes("/config/computer");
 			Iterator iter = list.iterator();
@@ -559,7 +560,7 @@ public class TaskUI extends javax.swing.JDialog {
 			//String filePath = this.getClass().getResource("/").getPath() + "cn/edu/jlu/ccst/sshclient/util/Config.xml";
 			Document doc = reader.read("Config.xml");
 			OutputFormat format = OutputFormat.createPrettyPrint();
-			Element root = doc.getRootElement();
+//			Element root = doc.getRootElement();
 			XMLWriter writer = null;// 声明写XML的对象
 			List   list=doc.selectNodes("/config/computer");
 			Iterator iter = list.iterator();
