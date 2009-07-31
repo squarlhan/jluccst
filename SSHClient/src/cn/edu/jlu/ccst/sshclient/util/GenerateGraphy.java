@@ -296,7 +296,7 @@ public class GenerateGraphy {
 		BufferedReader br = new BufferedReader(insr);
 		String line;
 		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-		List<Float> datas = new ArrayList();
+		List<Float> datas = new ArrayList<Float>();
 		int a = 1;
 		while ((line = br.readLine()) != null) {
 			// System.out.println(line);
@@ -331,8 +331,8 @@ public class GenerateGraphy {
 		BufferedReader br = new BufferedReader(insr);
 		String line;
 		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-		List<Float> datas1 = new ArrayList();
-		List<Float> datas2 = new ArrayList();
+		List<Float> datas1 = new ArrayList<Float>();
+		List<Float> datas2 = new ArrayList<Float>();
 		int a = 1,aa = 1;
 		while ((line = br.readLine()) != null) {
 			line = line.trim();
@@ -358,44 +358,44 @@ public class GenerateGraphy {
 		}
 		return dataset;
 	}
-	// 返回2线图的数据集
-	private static CategoryDataset get2BarDataSet(String input) throws IOException {
-
-		File file = new File(input);
-		InputStreamReader insr = new InputStreamReader(
-				new FileInputStream(file), "gb2312");
-		BufferedReader br = new BufferedReader(insr);
-		String line;
-		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-		List<Float> datas1 = new ArrayList();
-		List<Float> datas2 = new ArrayList();
-		int a = 1,aa = 1;
-		while ((line = br.readLine()) != null) {
-			// System.out.println(line);
-			line = line.trim();
-			if(line == "")break;
-			if (line.trim().length() >= 1) {
-				//System.out.println(line);					
-				String[] strs = line.split("       ");
-				datas1.add(Float.valueOf(strs[1]));
-				datas2.add(Float.valueOf(strs[2]));				
-			}else break;
-
-		}
-		br.close();
-		insr.close();
-		List<Float> fdatas1 = formatdate(datas1);
-		List<Float> fdatas2 = formatdate(datas2);
-		for (float f : fdatas1) {
-			dataset.addValue(f, "正解", "Y" + String.valueOf(a++));
-			if(a==200)break;
-		}
-		for (float f : fdatas2) {
-			dataset.addValue(f, "测解", "Y" + String.valueOf(aa++));
-			if(aa==200)break;
-		}
-		return dataset;
-	}
+//	// 返回2线图的数据集
+//	private static CategoryDataset get2BarDataSet(String input) throws IOException {
+//
+//		File file = new File(input);
+//		InputStreamReader insr = new InputStreamReader(
+//				new FileInputStream(file), "gb2312");
+//		BufferedReader br = new BufferedReader(insr);
+//		String line;
+//		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+//		List<Float> datas1 = new ArrayList<Float>();
+//		List<Float> datas2 = new ArrayList<Float>();
+//		int a = 1,aa = 1;
+//		while ((line = br.readLine()) != null) {
+//			// System.out.println(line);
+//			line = line.trim();
+//			if(line == "")break;
+//			if (line.trim().length() >= 1) {
+//				//System.out.println(line);					
+//				String[] strs = line.split("       ");
+//				datas1.add(Float.valueOf(strs[1]));
+//				datas2.add(Float.valueOf(strs[2]));				
+//			}else break;
+//
+//		}
+//		br.close();
+//		insr.close();
+//		List<Float> fdatas1 = formatdate(datas1);
+//		List<Float> fdatas2 = formatdate(datas2);
+//		for (float f : fdatas1) {
+//			dataset.addValue(f, "正解", "Y" + String.valueOf(a++));
+//			if(a==200)break;
+//		}
+//		for (float f : fdatas2) {
+//			dataset.addValue(f, "测解", "Y" + String.valueOf(aa++));
+//			if(aa==200)break;
+//		}
+//		return dataset;
+//	}
 	// 返回柱图的数据集
 	private static CategoryDataset getBarDataSet(String input) throws IOException {
 
@@ -405,7 +405,7 @@ public class GenerateGraphy {
 		BufferedReader br = new BufferedReader(insr);
 		String line;
 		DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-		List<Float> datas = new ArrayList();
+		List<Float> datas = new ArrayList<Float>();
 		int a = 1;
 		while ((line = br.readLine()) != null) {
 			line = line.trim();
@@ -433,7 +433,7 @@ public class GenerateGraphy {
 
 		File file = new File(input);
 		InputStreamReader insr = new InputStreamReader(
-				new FileInputStream(file), "gb2312");
+				new FileInputStream(file), "gb2312"); //fix me, gb2312 is not good.
 		BufferedReader br = new BufferedReader(insr);
 		String line;
 		DefaultPieDataset dataset = new DefaultPieDataset();
@@ -458,7 +458,7 @@ public class GenerateGraphy {
 	}
 	//数据格式化
 	private static List<Float> formatdate(List<Float> datas) {
-		List<Float> result = new ArrayList();
+		List<Float> result = new ArrayList<Float>();
 		Float max = datas.get(0);
 		Float min = datas.get(0);
 		for (float f : datas) {
@@ -539,7 +539,7 @@ public class GenerateGraphy {
 
 		//将生成的报表放到预览窗口中
 
-		final ChartFrame preview = new ChartFrame("分析",generate2Line("E:/SSH/cpp/Iterative Regression/Debug/out.txt"));
+		final ChartFrame preview = new ChartFrame("分析",generate2Line("D:/SSH/cpp/Iterative Regression/Debug/out.txt"));
 
 		preview.addWindowListener(new WindowAdapter() {
 

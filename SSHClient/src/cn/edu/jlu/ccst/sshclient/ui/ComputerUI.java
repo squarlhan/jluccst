@@ -11,14 +11,14 @@
 
 package cn.edu.jlu.ccst.sshclient.ui;
 import cn.edu.jlu.ccst.sshclient.model.SSHComputer;
-import cn.edu.jlu.ccst.sshclient.model.SSHGroup;
-import cn.edu.jlu.ccst.sshclient.model.SSHTask;
+//import cn.edu.jlu.ccst.sshclient.model.SSHGroup;
+//import cn.edu.jlu.ccst.sshclient.model.SSHTask;
 import cn.edu.jlu.ccst.sshclient.ui.LinuxClient;
 import cn.edu.jlu.ccst.sshclient.util.SSHOpCommand;
 
-import java.io.File;
+//import java.io.File;
 import java.io.FileWriter;
-import java.text.DateFormat;
+//import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.*;
@@ -32,8 +32,8 @@ import org.dom4j.io.OutputFormat;
 import org.dom4j.io.SAXReader;
 import org.dom4j.io.XMLWriter;
 
-import java.net.*;  
-import java.awt.event.*;
+//import java.net.*;  
+//import java.awt.event.*;
 
 public class ComputerUI extends javax.swing.JDialog 
 {
@@ -168,9 +168,9 @@ public class ComputerUI extends javax.swing.JDialog
 		this.setLocation((screenSize.width   -   frameSize.width)   /   2,   (screenSize.height   -   frameSize.height)   /   2);
 	}
 	//----------------------------------------------------------------------------//
-	private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
-		// TODO add your handling code here:
-	}//GEN-LAST:event_jTextField1ActionPerformed
+//	private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+//		// TODO add your handling code here:
+//	}//GEN-LAST:event_jTextField1ActionPerformed
 
 	private void jButton1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MousePressed
 		// TODO add your handling code here:
@@ -287,7 +287,7 @@ public class ComputerUI extends javax.swing.JDialog
 			//String filePath = this.getClass().getResource("/").getPath() + "cn/edu/jlu/ccst/sshclient/util/Config.xml";
 			Document doc = reader.read("Config.xml");
 			OutputFormat format = OutputFormat.createPrettyPrint();
-			Element root = doc.getRootElement();
+//			Element root = doc.getRootElement();
 			XMLWriter writer = null;// 声明写XML的对象
 			List   list=doc.selectNodes("/config/computer");
 			Iterator iter = list.iterator();
@@ -315,9 +315,9 @@ public class ComputerUI extends javax.swing.JDialog
 		}
 	}
 	//-----------------------------------------------------------//
-	private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
-		// TODO add your handling code here:
-	}//GEN-LAST:event_jTextField6ActionPerformed
+//	private void jTextField6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField6ActionPerformed
+//		// TODO add your handling code here:
+//	}//GEN-LAST:event_jTextField6ActionPerformed
 
 	/**
 	 * @param args the command line arguments

@@ -3,7 +3,7 @@
  */
 package cn.edu.jlu.ccst.sshclient.model;
 
-import java.io.File;
+//import java.io.File;
 import java.io.FileWriter;
 import java.util.Date;
 import java.util.Iterator;

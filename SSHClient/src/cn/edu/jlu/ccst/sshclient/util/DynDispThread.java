@@ -1,6 +1,6 @@
 package cn.edu.jlu.ccst.sshclient.util;
 
-import java.util.*;
+//import java.util.*;
 import java.lang.Thread;
 import javax.swing.*;
 

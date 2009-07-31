@@ -3,16 +3,16 @@
  */
 package cn.edu.jlu.ccst.sshclient.util;
 
-import cn.edu.jlu.ccst.sshclient.ui.*;
+//import cn.edu.jlu.ccst.sshclient.ui.*;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+//import java.awt.event.ActionEvent;
+//import java.awt.event.ActionListener;
 import java.io.BufferedReader;
-import java.io.FileOutputStream;
+//import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-import java.util.ArrayList;
+//import java.util.ArrayList;
 import java.util.List;
 import java.io.OutputStream;
 
@@ -20,12 +20,12 @@ import java.io.OutputStream;
 import ch.ethz.ssh2.Connection;
 import ch.ethz.ssh2.SCPClient;
 import ch.ethz.ssh2.Session;
-import java.lang.Thread;
-import java.util.List;
+//import java.lang.Thread;
+//import java.util.List;
 
 import javax.swing.JFrame;
-import javax.swing.JTextArea;
-import javax.management.timer.Timer;
+//import javax.swing.JTextArea;
+//import javax.management.timer.Timer;
 
 /**
  * @author Woden
@@ -97,7 +97,7 @@ public class SSHCommand extends JFrame {
 		Session sess = conn.openSession();
 		sess.execCommand(cmd);		
 		String out;
-		Thread thr1 = new Thread();
+//		Thread thr1 = new Thread();
 		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(sess.getStdout()));    
 
 

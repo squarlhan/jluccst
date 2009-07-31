@@ -19,11 +19,11 @@ import cn.edu.jlu.ccst.sshclient.ui.MyTreeCellRender;
 import cn.edu.jlu.ccst.sshclient.ui.TaskUI;
 import cn.edu.jlu.ccst.sshclient.util.GenerateGraphy;
 import cn.edu.jlu.ccst.sshclient.util.SSHOpCommand;
-import cn.edu.jlu.ccst.sshclient.util.SSHOpCommand;
+//import cn.edu.jlu.ccst.sshclient.util.SSHOpCommand;
 import cn.edu.jlu.ccst.sshclient.util.StartExam;
 
 import java.awt.Font;
-import java.awt.Color;
+//import java.awt.Color;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
@@ -36,12 +36,12 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
-import java.io.IOException;
-import java.text.DateFormat;
+//import java.io.IOException;
+//import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
-import java.text.*;
-import javax.management.timer.Timer;
+//import java.text.*;
+//import javax.management.timer.Timer;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -54,7 +54,7 @@ import javax.swing.JTextArea;
 import javax.swing.JTree;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
-import javax.swing.JTree.DynamicUtilTreeNode;
+//import javax.swing.JTree.DynamicUtilTreeNode;
 import javax.swing.SwingUtilities;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreeNode;
@@ -63,7 +63,7 @@ import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
-import org.dom4j.DocumentHelper;
+//import org.dom4j.DocumentHelper;
 import org.dom4j.io.*;
 /**
  *
@@ -96,9 +96,9 @@ public class LinuxClient extends javax.swing.JFrame {
 	//updata the jtree
 	void  updata() {
 
-		this.cps = new ArrayList();
-		this.gps = new ArrayList();
-		this.tks = new ArrayList();
+		LinuxClient.cps = new ArrayList<SSHComputer>();
+		LinuxClient.gps = new ArrayList<SSHGroup>();
+		LinuxClient.tks = new ArrayList<SSHTask>();
 
 		//下面根据xml文件生成所需要的类
 		SAXReader reader = new SAXReader();
@@ -118,7 +118,7 @@ public class LinuxClient extends javax.swing.JFrame {
 				cp.setHost(c.valueOf("@host"));
 				cp.setUsername(c.valueOf("@user"));
 				cp.setPassword(c.valueOf("@pswd"));
-				cp.setGps(new ArrayList());
+				cp.setGps(new ArrayList<SSHGroup>());
 				this.cps.add(cp);
 				List<Element> gelements = c.elements();
 				for (Element g : gelements) {
@@ -129,9 +129,9 @@ public class LinuxClient extends javax.swing.JFrame {
 					gp.setMemo(g.valueOf("@memo"));
 					gp.setCreatdate(timeFormat.parse(g.valueOf("@creatdate")));
 					gp.setCp(cp);
-					gp.setSts(new ArrayList());
+					gp.setSts(new ArrayList<SSHTask>());
 					cp.getGps().add(gp);
-					this.gps.add(gp);                
+					LinuxClient.gps.add(gp);                
 					List<Element> telements = g.elements();
 					for (Element t : telements) {
 						SSHTask tk = new SSHTask();
@@ -196,7 +196,7 @@ public class LinuxClient extends javax.swing.JFrame {
 							}
 						}
 
-						List<String> params = new ArrayList();
+						List<String> params = new ArrayList<String>();
 						List<Element> pelements = t.elements();
 						for(Element p : pelements){
 							params.add(p.elementTextTrim("param"));
@@ -204,13 +204,14 @@ public class LinuxClient extends javax.swing.JFrame {
 						tk.setParams(params);
 						tk.setGp(gp);
 						gp.getSts().add(tk);
-						this.tks.add(tk);
+						LinuxClient.tks.add(tk);
 					}
 
 				}
 			}
 			Iterator<SSHComputer> it;
-			SSHComputer tmp = new SSHComputer();
+//			SSHComputer tmp = new SSHComputer();
+			SSHComputer tmp;
 			for(it = cps.iterator(); it.hasNext();){
 				tmp = (SSHComputer)it.next();
 			}
@@ -316,7 +317,7 @@ public class LinuxClient extends javax.swing.JFrame {
 				{
 					SSHComputer Com=new SSHComputer();
 					Com = findselectComputer(cur.getId());
-					List<SSHTask> listT;
+//					List<SSHTask> listT;
 
 					//判断计算机内是否有任务正在执行
 					boolean fg = true;
@@ -418,7 +419,7 @@ public class LinuxClient extends javax.swing.JFrame {
 				{
 					SSHTask Tas=new SSHTask();
 					Tas.creat();
-					SSHComputer TC=GfindselectComputer(cur.getId());
+//					SSHComputer TC=GfindselectComputer(cur.getId());
 					break;
 				}
 				default:
@@ -464,7 +465,7 @@ public class LinuxClient extends javax.swing.JFrame {
 	public SSHTask findSelectTask(String id) {
 		SSHTask selectTask = new SSHTask();
 		Iterator <SSHTask> it;
-		SSHGroup selectGroup = new SSHGroup();
+//		SSHGroup selectGroup = new SSHGroup();
 		//寻找选中的任务
 		for(it = tks.iterator(); it.hasNext() ;) {
 			selectTask = (SSHTask) it.next();
@@ -761,15 +762,15 @@ public class LinuxClient extends javax.swing.JFrame {
 		if(jMenuItem13.isEnabled() || allStartG.isEnabled()) {	
 			SSHGroup sgp = new SSHGroup();
 			sgp = findSelectGroup();//找到当前选中的组
-			SSHComputer selectComputer = new SSHComputer();
-			selectComputer = sgp.getCp();
-			String computerHost = selectComputer.getHost();
-			String userName = selectComputer.getUsername();
-			String userPsw = selectComputer.getPassword();
+//			SSHComputer selectComputer = new SSHComputer();
+//			SSHComputer selectComputer = sgp.getCp();
+//			String computerHost = selectComputer.getHost();
+//			String userName = selectComputer.getUsername();
+//			String userPsw = selectComputer.getPassword();
 			singlerun = 3;
 
 			SSHTask rstk = new SSHTask();
-			int taskInfo = 0;
+//			int taskInfo = 0;
 			for(int i = 0; i < sgp.getSts().size(); ++i) {		
 				rstk = sgp.getSts().get(i);
 				setSelTaskStatus(rstk.getId(),1);
@@ -1117,7 +1118,7 @@ public class LinuxClient extends javax.swing.JFrame {
 
 			//找到计算机中的所有组
 			List<SSHTask> liTask;
-			liTask = new ArrayList();
+			liTask = new ArrayList<SSHTask>();
 			for(int i = 0; i < selectComputer.getGps().size(); i++) {
 				SSHGroup temp = selectComputer.getGps().get(i);
 				for(int j = 0; j < temp.getSts().size(); j++) {
@@ -1159,7 +1160,7 @@ public class LinuxClient extends javax.swing.JFrame {
 
 			//找到计算机中的所有组
 			List<SSHTask> liTask;
-			liTask = new ArrayList();
+			liTask = new ArrayList<SSHTask>();
 			for(int i = 0; i < selectComputer.getGps().size(); i++) {
 				SSHGroup temp = selectComputer.getGps().get(i);
 				for(int j = 0; j < temp.getSts().size(); j++) {
@@ -1339,7 +1340,7 @@ public class LinuxClient extends javax.swing.JFrame {
 					jMenuItem8.setEnabled(true);
 					jMenuItem9.setEnabled(false);
 					jMenuItem10.setEnabled(false);
-					/***?*/             SSHGroup sgp = findSelectGroup();
+//					/***?*/             SSHGroup sgp = findSelectGroup();
 					if(singlerun == 1){
 						jMenuItem11.setEnabled(false);
 						jMenuItem12.setEnabled(true);
@@ -1525,8 +1526,8 @@ public class LinuxClient extends javax.swing.JFrame {
 					case 1:
 					{
 						popMenuG.show(jTree1, e.getX(), e.getY());
-						SSHGroup sgp = new SSHGroup();
-						sgp = findSelectGroup();
+//						SSHGroup sgp = new SSHGroup();
+//						SSHGroup sgp = findSelectGroup();
 						if(singlerun == 1) {
 							groupStartG.setEnabled(true);
 							groupStopG.setEnabled(false);
@@ -1692,8 +1693,8 @@ public class LinuxClient extends javax.swing.JFrame {
 	//-------------------------------------------------------------//
 	private void initComponents() {
 
-		jtl=new ArrayList();
-		jsl=new ArrayList();
+		jtl=new ArrayList<JTextArea>();
+		jsl=new ArrayList<JScrollPane>();
 		popMenuTA=new JPopupMenu();
 		copyTA=new JMenuItem("复制");
 		shutTA=new JMenuItem("关闭窗口");
@@ -1834,9 +1835,9 @@ public class LinuxClient extends javax.swing.JFrame {
 		jMenuItem4 = new javax.swing.JMenuItem();
 		jMenuItem5 = new javax.swing.JMenuItem();
 		jMenuItem6 = new javax.swing.JMenuItem();
-		jMenuItem2 = new javax.swing.JMenuItem();
+//		jMenuItem2 = new javax.swing.JMenuItem();
 		jMenuItem3 = new javax.swing.JMenuItem();
-		jSeparator1 = new javax.swing.JSeparator();
+//		jSeparator1 = new javax.swing.JSeparator();
 		jMenu2 = new javax.swing.JMenu();
 		jMenuItem8 = new javax.swing.JMenuItem();
 		jMenuItem9 = new javax.swing.JMenuItem();
@@ -2213,7 +2214,7 @@ public class LinuxClient extends javax.swing.JFrame {
 		linedispresT.addActionListener(new dispclick());
 		bardispresT = new JMenuItem("显示柱状效果图");
 		bardispresT.addActionListener(new dispclick());
-		piedispresT = new JMenuItem("显示饼状效果图");
+//		piedispresT = new JMenuItem("显示饼状效果图");
 		//piedispresT.addActionListener(new dispclick());
 		dispResT.add(linedispresT);
 		dispResT.add(bardispresT);
@@ -2339,8 +2340,8 @@ public class LinuxClient extends javax.swing.JFrame {
 	private javax.swing.JMenuItem jMenuItem14;
 	private javax.swing.JMenuItem jMenuItem15;
 	private javax.swing.JMenuItem jMenuItem16;
-	private javax.swing.JMenuItem jMenuItem17;
-	private javax.swing.JMenuItem jMenuItem2;
+//	private javax.swing.JMenuItem jMenuItem17;
+//	private javax.swing.JMenuItem jMenuItem2;
 	private javax.swing.JMenuItem jMenuItem3;
 	private javax.swing.JMenuItem jMenuItem4;
 	private javax.swing.JMenuItem jMenuItem5;
@@ -2352,7 +2353,7 @@ public class LinuxClient extends javax.swing.JFrame {
 	private javax.swing.JScrollPane jScrollPane2;
 	private javax.swing.JScrollPane jScrollPane3;
 	private javax.swing.JScrollPane jScrollPane4;
-	private javax.swing.JSeparator jSeparator1;
+//	private javax.swing.JSeparator jSeparator1;
 	private javax.swing.JSeparator jSeparator2;
 	private javax.swing.JSeparator jSeparator3;
 	private javax.swing.JSplitPane jSplitPane1;
@@ -2387,7 +2388,7 @@ public class LinuxClient extends javax.swing.JFrame {
 	private JMenu dispResT;
 	private JMenuItem linedispresT;
 	private JMenuItem bardispresT;
-	private JMenuItem piedispresT;
+//	private JMenuItem piedispresT;
 
 
 	private JPopupMenu popMenuTA;
