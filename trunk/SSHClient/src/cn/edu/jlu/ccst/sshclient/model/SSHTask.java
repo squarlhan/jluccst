@@ -44,6 +44,7 @@ public class SSHTask extends BaseClass implements BaseAction, BaseOperation {
 	private boolean taskfinish;
 	private Date taskstartTime;
 	private long taskrunTime;
+	private String dirname;
 	private String runpid;
 	private JTextArea jTextArea1;
 
@@ -86,6 +87,14 @@ public class SSHTask extends BaseClass implements BaseAction, BaseOperation {
 		this.fout = fout;
 		this.gp = gp;
 		taskstatus = 0;
+	}
+
+	public String getDirname() {
+		return dirname;
+	}
+
+	public void setDirname(String dirname) {
+		this.dirname = dirname;
 	}
 
 	public String getCmd() {
@@ -290,7 +299,7 @@ public class SSHTask extends BaseClass implements BaseAction, BaseOperation {
 	public boolean update() {
 		// TODO Auto-generated method stub
 		SSHTask t=(SSHTask)LinuxClient.getCur();
-		TaskUI newTask = new TaskUI(t.getName(),t.getCmd(),t.getFin(),t.getFout(),t.getMemo());
+		TaskUI newTask = new TaskUI(t.getName(),t.getDirname(),t.getCmd(),t.getFin(),t.getFout(),t.getMemo());
 		newTask.setModal(true);
 		newTask.setVisible(true);
 		return false;
