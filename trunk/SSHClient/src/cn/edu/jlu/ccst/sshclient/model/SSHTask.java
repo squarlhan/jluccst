@@ -39,6 +39,8 @@ public class SSHTask extends BaseClass implements BaseAction, BaseOperation {
 	private List<String> params;
 	private String fin;
 	private String fout;
+	private String fouts;
+	private String opts;
 	private SSHGroup gp;
 	private int taskstatus;
 	private boolean taskfinish;
@@ -87,6 +89,22 @@ public class SSHTask extends BaseClass implements BaseAction, BaseOperation {
 		this.fout = fout;
 		this.gp = gp;
 		taskstatus = 0;
+	}
+
+	public String getFouts() {
+		return fouts;
+	}
+
+	public void setFouts(String fouts) {
+		this.fouts = fouts;
+	}
+
+	public String getOpts() {
+		return opts;
+	}
+
+	public void setOpts(String opts) {
+		this.opts = opts;
 	}
 
 	public String getDirname() {
@@ -299,7 +317,7 @@ public class SSHTask extends BaseClass implements BaseAction, BaseOperation {
 	public boolean update() {
 		// TODO Auto-generated method stub
 		SSHTask t=(SSHTask)LinuxClient.getCur();
-		TaskUI newTask = new TaskUI(t.getName(),t.getDirname(),t.getCmd(),t.getFin(),t.getFout(),t.getMemo());
+		TaskUI newTask = new TaskUI(t.getName(),t.getDirname(),t.getCmd(),t.getFin(),t.getFout(),t.getMemo(), t.getFouts(), t.opts);
 		newTask.setModal(true);
 		newTask.setVisible(true);
 		return false;

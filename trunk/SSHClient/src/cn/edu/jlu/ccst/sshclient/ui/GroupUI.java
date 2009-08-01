@@ -34,6 +34,7 @@ public class GroupUI extends javax.swing.JDialog  {
 	private JButton resetButton , submitButton;
 	private boolean flag = false;
 	private String older;
+	private SSHGroup sgodler;
 	public GroupUI(){
 		this.setTitle("新建工作组");
 		initComponent();	   
@@ -56,6 +57,11 @@ public class GroupUI extends javax.swing.JDialog  {
 		dirTextField.setText(dirname);
 		memoJArea.setText(memo);
 		older = dirname;
+		
+		sgodler = new SSHGroup();
+		sgodler.setName(name);
+		sgodler.setDirname(dirname);
+		sgodler.setMemo(memo);
 	}
 
 	/**
@@ -144,7 +150,15 @@ public class GroupUI extends javax.swing.JDialog  {
 	 * 处理重置按钮
 	 */
 	private  void ResetButtonMousePressed(java.awt.event.MouseEvent evt){
-		gTextField1.setText(null);
+		if (this.getTitle().startsWith("新建")) {
+			gTextField1.setText(null);
+			dirTextField.setText(null);
+			memoJArea.setText(null);
+		}else{
+			gTextField1.setText(sgodler.getName());
+			dirTextField.setText(sgodler.getDirname());
+			memoJArea.setText(sgodler.getMemo());
+		}
 	}
 
 	/**
