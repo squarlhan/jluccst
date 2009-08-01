@@ -37,6 +37,7 @@ public class TaskUI extends javax.swing.JDialog {
 	private String gdir;
 	private String older;
 	private SSHTask oldertask;
+	private String infiles = "";
 
 	// private JButton choosein,chooseout;
 
@@ -142,7 +143,7 @@ public class TaskUI extends javax.swing.JDialog {
 		tTextField3.setBounds(150, 110, 150, 30);
 		this.add(tTextField3);
 
-		loutnames = new JLabel("输入结果文件");
+		loutnames = new JLabel("结果文件");
 		tfous = new JTextArea();
 		tfous.setLineWrap(true);
 		tfous.setBounds(150, 150, 150, 80);
@@ -186,6 +187,7 @@ public class TaskUI extends javax.swing.JDialog {
 				if (result == JFileChooser.APPROVE_OPTION) {
 					String filePath = chooser.getSelectedFile().getPath();
 					tfin.append(filePath + ";\n");
+					infiles = infiles+chooser.getSelectedFile().getName()+"; ";
 				}
 
 			}
@@ -521,7 +523,7 @@ public class TaskUI extends javax.swing.JDialog {
 			}
 			add(Ltest);
 			Ltest.setBounds(120, 550, 90, 30);
-		}
+		}else flag = true;
 
 		if (flag) {
 			this.EditTaskFromXML(LinuxClient.getCur().getId(), tTextField1
