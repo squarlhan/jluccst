@@ -143,10 +143,16 @@ public class LinuxClient extends javax.swing.JFrame {
                         tk.setMemo(t.valueOf("@memo"));
                         tk.setCreatdate(timeFormat.parse(t.valueOf("@creatdate")));
                         tk.setCmd(t.valueOf("@cmd"));
-                        tk.setFin(t.valueOf("@in"));
+                        tk.setInfiles("");
+                    	tk.setFin("");
                         tk.setFout(t.valueOf("@out"));
                         tk.setFouts(t.valueOf("@outfiles"));
                         tk.setOpts(t.valueOf("@opts"));
+                        List<Element> felements = t.elements();
+                        for(Element f : felements){
+                        	tk.setInfiles(tk.getInfiles()+f.getTextTrim()+"; ");
+                        	tk.setFin(tk.getFin()+f.valueOf("@url")+"; ");
+                        }
                         if(t.valueOf("@starttime").equals("")){
                         	tk.setStartTime(null);
                         	tk.setRunTime(0);
@@ -1457,6 +1463,7 @@ public boolean getRunStatusC(String id) {
                           +"\n命令输出文件名:"+t.getFouts()
                           +"\n命令参数:"+t.getOpts()
                           +"\n创建时间:"+b.getCreatdate()
+                          +"\n输入文件:"+t.getInfiles()
                           +"\n输入文件路径:"+t.getFin()
                           +"\n输入目录路径:"+t.getFout()
                           +"\n备注:"+t.getMemo();
@@ -1471,6 +1478,7 @@ public boolean getRunStatusC(String id) {
                               +"\n命令输出文件名:"+t.getFouts()
                               +"\n命令参数:"+t.getOpts()
                               +"\n创建时间:"+b.getCreatdate()
+                              +"\n输入文件:"+t.getInfiles()
                               +"\n输入文件路径:"+t.getFin()
                               +"\n输入目录路径:"+t.getFout()
                               +"\n上次任务开始时间:" + taskstartTime; 
