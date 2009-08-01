@@ -389,7 +389,7 @@ public class SSHOpCommand implements Runnable {
 				runtasklist.get(i).setRunTime(stime);
 				Date curtime = new Date();
 				//将任务开始时间写config.xml文件中
-				tempUI.EditTaskFromXML(runtasklist.get(i).getId(), runtasklist.get(i).getName(), runtasklist.get(i).getMemo(),
+				tempUI.EditTaskFromXML(runtasklist.get(i).getId(), runtasklist.get(i).getName(), runtasklist.get(i).getDirname(),runtasklist.get(i).getMemo(),
 						runtasklist.get(i).getCmd(), runtasklist.get(i).getFin(),runtasklist.get(i).getFout(), curtime,stime);
 
 				BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(sess.getStdout()));     

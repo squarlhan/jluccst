@@ -138,6 +138,7 @@ public class LinuxClient extends javax.swing.JFrame {
                         SSHTask tk = new SSHTask();
                         tk.setId(t.valueOf("@id"));
                         tk.setName(t.valueOf("@name"));
+                        tk.setDirname(t.valueOf("@dirname"));
                         tk.setType((byte) 2);
                         tk.setMemo(t.valueOf("@memo"));
                         tk.setCreatdate(timeFormat.parse(t.valueOf("@creatdate")));
@@ -610,7 +611,7 @@ private void execTaskCommand ( ActionEvent e ) throws DocumentException {
     TaskUI tempUI = new TaskUI();
     try
     {
-    tempUI.EditTaskFromXML(selectTask.getId(), selectTask.getName(), selectTask.getMemo(),
+    tempUI.EditTaskFromXML(selectTask.getId(), selectTask.getName(), selectTask.getDirname(),selectTask.getMemo(),
           selectTask.getCmd(), selectTask.getFin(), selectTask.getFout(), curtime,t);
     
     selectTask.start(t1);
@@ -784,7 +785,7 @@ private void jMenuMousePressAllStartG(MouseEvent evt) {
 	    TaskUI tempUI = new TaskUI();
 	    try
 	    {
-	    tempUI.EditTaskFromXML(rstk.getId(), rstk.getName(), rstk.getMemo(),
+	    tempUI.EditTaskFromXML(rstk.getId(), rstk.getName(), rstk.getDirname(),rstk.getMemo(),
 	    		rstk.getCmd(), rstk.getFin(), rstk.getFout(), curtime,timerun);
 	    }catch(Exception e)
 	    {
@@ -1447,7 +1448,8 @@ public boolean getRunStatusC(String id) {
                         	  }
                           }
                           if(t.getStartTime() == null) {
-                          s="任务名:"+t.getName()                           
+                          s="任务名:"+t.getName()  
+                          +"\n工作目录:"+t.getDirname()
                           +"\n命令内容:"+t.getCmd()
                           +"\n创建时间:"+b.getCreatdate()
                           +"\n输入文件路径:"+t.getFin()
@@ -1459,6 +1461,7 @@ public boolean getRunStatusC(String id) {
                             Date taskstartTime = tk1.getTaskStartTime(t);//查找XML文件获得上次任务开始时间
                           	s="任务名:"+t.getName()  
                           	  +"\n命令ID:"+t.getId()
+                          	  +"\n工作目录:"+t.getDirname()
                               +"\n命令内容:"+t.getCmd()
                               +"\n创建时间:"+b.getCreatdate()
                               +"\n输入文件路径:"+t.getFin()

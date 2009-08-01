@@ -6,8 +6,10 @@ import ch.ethz.ssh2.Session;
 import cn.edu.jlu.ccst.sshclient.model.*;
 
 //import java.io.File;
+import java.io.BufferedReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStreamReader;
 //import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.List;
@@ -15,6 +17,8 @@ import java.util.*;
 import java.awt.*;
 //import java.awt.event.*;
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 import org.dom4j.Document;
 import org.dom4j.Element;
@@ -23,19 +27,23 @@ import org.dom4j.io.SAXReader;
 import org.dom4j.io.XMLWriter;
 
 public class TaskUI extends javax.swing.JDialog {	
-	private JLabel tLabel1, tLabel2,tLabel3;
+	private JLabel Ltest, tLabel1, tLabel2,tLabel3,dirLabel;
 //	private JLabel memoLabel;
-	private JTextField tTextField1,tTextField3;
+	private JTextField tTextField1,tTextField3,dirTextField;
 	private JTextArea tTextArea2;
 	private JScrollPane memoAreaPane; 
 	private JButton resetButton , submitButton;
 	private JLabel lfin,lfout;
 	private JTextField tfin,tfout;
+	private boolean flag = false;
+	private String gdir;
+	private String older;
 //	private JButton choosein,chooseout;
 
 	public TaskUI() {
-		initComponent();
 		this.setTitle("新建任务");
+		initComponent();
+		
 		submitButton.addMouseListener(new java.awt.event.MouseAdapter() {
 			public void mousePressed(java.awt.event.MouseEvent evt) {
 
@@ -50,9 +58,10 @@ public class TaskUI extends javax.swing.JDialog {
 		});
 	}
 	//-------------------------------------------------------------------//
-	public TaskUI(String name,String cmd,String in,String out,String memo) {
-		initComponent();
+	public TaskUI(String name,String dirname,String cmd,String in,String out,String memo) {
 		this.setTitle("修改任务");
+		initComponent();
+		
 		submitButton.addMouseListener(new java.awt.event.MouseAdapter() {
 			public void mousePressed(java.awt.event.MouseEvent evt) {
 
@@ -71,6 +80,8 @@ public class TaskUI extends javax.swing.JDialog {
 		tTextArea2.setText(memo);
 		tfin.setText(in);
 		tfout.setText(out);
+		dirTextField.setText(dirname);
+		older = dirname;
 	}
 
 	//----------------------------------------------------//
@@ -84,7 +95,7 @@ public class TaskUI extends javax.swing.JDialog {
 		Image img = tk.getImage(this.getClass().getResource("/cn/edu/jlu/ccst/sshclient/ui/resource/t.png"));
 		setIconImage(img);
 		this.setLayout(null);
-		this.setSize(400,350);
+		this.setSize(400,400);
 
 		tLabel1= new JLabel("任务名字:");
 		tLabel1.setBounds(50, 30, 80, 20);
@@ -92,19 +103,38 @@ public class TaskUI extends javax.swing.JDialog {
 		tTextField1 = new JTextField();
 		tTextField1.setBounds(150,30, 150, 30);
 		this.add(tTextField1);
+		if(this.getTitle().startsWith("新建"))
+			tTextField1.getDocument().addDocumentListener(new Swing_OnValueChanged());
+		
+		dirLabel= new JLabel("工作目录:");
+		dirLabel.setBounds(50, 70, 80, 30);
+		this.add(dirLabel);
+		dirTextField = new JTextField();
+		dirTextField.setBounds(150,70, 150, 30);
+		SSHGroup selectGroup = new SSHGroup();
+		Iterator <SSHGroup> it;
+		for(it = LinuxClient.gps.iterator(); it.hasNext();){
+			selectGroup = (SSHGroup) it.next();
+			if(selectGroup.getId().equals(LinuxClient.cur.getId())) {
+				break;
+			}
+		}
+		this.gdir = selectGroup.getDirname();
+		dirTextField.setText(gdir);
+		this.add(dirTextField);
 
 
 
 		tLabel3 = new JLabel("任务命令:");
-		tLabel3.setBounds(50, 70, 80, 20);
+		tLabel3.setBounds(50, 110, 80, 20);
 		this.add(tLabel3);
 		tTextField3 = new JTextField();
-		tTextField3.setBounds(150, 70, 150, 30);
+		tTextField3.setBounds(150, 110, 150, 30);
 		this.add(tTextField3);
 		lfin=new JLabel("选择输入文件");
 		tfin=new JTextField();
-		tfin.setBounds(150, 110, 150, 30);
-		lfin.setBounds(50, 110, 80, 20);
+		tfin.setBounds(150, 150, 150, 30);
+		lfin.setBounds(50, 150, 80, 20);
 		JButton choosein=new JButton("Browse");
 		this.add(lfin);
 		this.add(tfin);
@@ -125,14 +155,14 @@ public class TaskUI extends javax.swing.JDialog {
 			}
 		}
 		);
-		choosein.setBounds(300, 110, 80, 25);
+		choosein.setBounds(300, 150, 80, 25);
 		this.add(choosein);
 		lfout=new JLabel("选择输出目录");
 		tfout=new JTextField();
-		tfout.setBounds(150, 150, 150, 30);
-		lfout.setBounds(50, 150, 80, 20);
+		tfout.setBounds(150, 190, 150, 30);
+		lfout.setBounds(50, 190, 80, 20);
 		JButton chooseout=new JButton("Browse");
-		chooseout.setBounds(300, 150, 80, 25);
+		chooseout.setBounds(300, 190, 80, 25);
 		chooseout.addMouseListener(new java.awt.event.MouseAdapter() 
 		{
 			public void mousePressed(java.awt.event.MouseEvent evt) 
@@ -157,18 +187,18 @@ public class TaskUI extends javax.swing.JDialog {
 
 
 		tLabel2 = new JLabel("任务备注:");
-		tLabel2.setBounds(50, 180, 80, 20);
+		tLabel2.setBounds(50, 230, 80, 20);
 		this.add(tLabel2);
 		tTextArea2 = new JTextArea("");
-		tTextArea2.setBounds(150,180, 150, 80);
+		tTextArea2.setBounds(150,230, 150, 80);
 		tTextArea2.setLineWrap(true);
 		tTextArea2.setBorder(BorderFactory.createLineBorder(Color.black));
 		memoAreaPane = new JScrollPane(tTextArea2,JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-		memoAreaPane.setBounds(150,180, 150, 80);
+		memoAreaPane.setBounds(150,230, 150, 80);
 		this.add(memoAreaPane);
 
 		resetButton = new JButton("重置:");
-		resetButton.setBounds(50,280, 80, 30);
+		resetButton.setBounds(50,320, 80, 30);
 		resetButton.addMouseListener(new java.awt.event.MouseAdapter() {
 			public void mousePressed(java.awt.event.MouseEvent evt) {
 				ResetButtonMousePressed(evt);
@@ -177,7 +207,7 @@ public class TaskUI extends javax.swing.JDialog {
 		this.add(resetButton);
 
 		submitButton = new JButton("提交:");
-		submitButton.setBounds(180, 280, 80, 30);
+		submitButton.setBounds(180, 320, 80, 30);
 
 		this.add(submitButton);
 		Dimension   screenSize   =   Toolkit.getDefaultToolkit().getScreenSize();   
@@ -190,6 +220,32 @@ public class TaskUI extends javax.swing.JDialog {
 
 		this.setLocation((screenSize.width   -   frameSize.width)   /   2,   (screenSize.height   -   frameSize.height)   /   2);
 	}
+	
+	//内部类，用来处理两个文本框文字同步
+	private class Swing_OnValueChanged implements DocumentListener {
+
+		@Override
+		public void changedUpdate(DocumentEvent e) {
+			// TODO Auto-generated method stub
+			dirTextField.setText(gdir+"/"+tTextField1.getText());
+
+		}
+
+		@Override
+		public void insertUpdate(DocumentEvent e) {
+			// TODO Auto-generated method stub
+			dirTextField.setText(gdir+"/"+tTextField1.getText());
+		}
+
+		@Override
+		public void removeUpdate(DocumentEvent e) {
+			// TODO Auto-generated method stub
+			dirTextField.setText(gdir+"/"+tTextField1.getText());
+		}
+
+	}
+
+	
 	/**
 	 * Reset按钮的处理函数
 	 */
@@ -206,6 +262,14 @@ public class TaskUI extends javax.swing.JDialog {
 	private void SubmitButtonMousePressed(java.awt.event.MouseEvent evt) throws IOException {
 		if(tTextField1.getText().equals("")) {
 			JOptionPane.showMessageDialog(null,"请输入新建任务的名字");
+			return;
+		}
+		if(dirTextField.getText().equals("")){
+			JOptionPane.showMessageDialog(null,"请输入工作组目录");
+			return;
+		}
+		if(!dirTextField.getText().startsWith("/")){
+			JOptionPane.showMessageDialog(null,"目录格式不对，请以“/”开头");
 			return;
 		}
 		if(tTextField3.getText().equals("")) {
@@ -243,7 +307,19 @@ public class TaskUI extends javax.swing.JDialog {
 			}
 		}
 		newTask1.setGp(selectGroup);
-		selectComputerId = selectGroup.getCp().getId() ;//找到计算机的ID             
+		selectComputerId = selectGroup.getCp().getId() ;//找到计算机的ID  
+		
+		//在服务器上创建工作目录
+		Ltest= new JLabel();
+		try {
+			this.createdirs(this.getOpenedConnection(selectGroup.getCp()), dirTextField.getText());
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		add(Ltest);
+		Ltest.setBounds(120, 350, 90, 30);
+		
 		//将信息保存到config.xml中
 		SAXReader reader = new SAXReader();
 		try{
@@ -263,8 +339,9 @@ public class TaskUI extends javax.swing.JDialog {
 					for (Element g : gelements) {
 						if(g.valueOf("@id").equals(selectGroupId)) {
 							Element t = g.addElement("task");
-							t.addAttribute("id", newTask1.getId());
+							t.addAttribute("id", newTask1.getId());							
 							t.addAttribute("name", newTask1.getName());
+							t.addAttribute("dirname", newTask1.getDirname());
 							SimpleDateFormat timeFormat;
 							timeFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 							t.addAttribute("creatdate",timeFormat.format(newTask1.getCreatdate()));
@@ -282,16 +359,16 @@ public class TaskUI extends javax.swing.JDialog {
 			writer = new XMLWriter(new FileWriter("Config.xml"), format);
 			writer.write(doc);
 			writer.close();
+			if(flag){
 			this.setVisible(false);
 			this.dispose(); 
-			JOptionPane.showMessageDialog(null, "创建任务成功！");
+			JOptionPane.showMessageDialog(null, "创建任务成功！");}
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
 		//如果是自己的任务，先把文件传过去。
-		String Cmd=tTextField3.getText();
-		SSHComputer TC=LinuxClient.GetObj().GfindselectComputer(LinuxClient.GetObj().getCur().getId());
-		System.out.println(TC.getName());
+		/*String Cmd=tTextField3.getText();
+		
 		Connection conn = getOpenedConnection(TC);
 		Session sess = conn.openSession();
 		System.out.println("新的S+:" + "输入文件.txt:"+tfin.getText());
@@ -304,7 +381,7 @@ public class TaskUI extends javax.swing.JDialog {
 			scpPut(conn,tfin.getText(),s,"./");
 		}
 		sess.close();
-		conn.close();
+		conn.close();*/
 
 	}
 	//----------------------------------------------------------//
@@ -346,6 +423,14 @@ public class TaskUI extends javax.swing.JDialog {
 			JOptionPane.showMessageDialog(null,"请输入新建任务的名字");
 			return;
 		}
+		if(dirTextField.getText().equals("")){
+			JOptionPane.showMessageDialog(null,"请输入工作组目录");
+			return;
+		}
+		if(!dirTextField.getText().startsWith("/")){
+			JOptionPane.showMessageDialog(null,"目录格式不对，请以“/”开头");
+			return;
+		}
 		if(tTextField3.getText().equals("")) {
 			JOptionPane.showMessageDialog(null,"请输入新建任务的命令");
 			return;
@@ -360,12 +445,27 @@ public class TaskUI extends javax.swing.JDialog {
 				break;
 			}
 		}
-		this.EditTaskFromXML(LinuxClient.getCur().getId(), tTextField1.getText(), tTextArea2.getText(),tTextField3.getText(),tfin.getText(),tfout.getText(),
+		
+		//在服务器上创建工作目录
+		if(!older.equals(dirTextField.getText())){
+			Ltest= new JLabel();
+			SSHComputer selectComputer = LinuxClient.GetObj().TfindselectComputer(LinuxClient.GetObj().getCur().getId());
+			try {
+				this.createdirs(this.getOpenedConnection(selectComputer), dirTextField.getText());
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			add(Ltest);
+			Ltest.setBounds(120, 350, 90, 30);}
+
+		if(flag){
+		this.EditTaskFromXML(LinuxClient.getCur().getId(), tTextField1.getText(),dirTextField.getText(), tTextArea2.getText(),tTextField3.getText(),tfin.getText(),tfout.getText(),
 				LinuxClient.tks.get(i).getStartTime(),0);
 		this.setVisible(false);
 		this.dispose(); 
-		JOptionPane.showMessageDialog(null, "修改任务成功！");
-		String Cmd=tTextField3.getText();
+		JOptionPane.showMessageDialog(null, "修改任务成功！");}
+	/*	String Cmd=tTextField3.getText();
 //		LinuxClient.GetObj();
 		SSHComputer TC=LinuxClient.GetObj().TfindselectComputer(LinuxClient.getCur().getId());
 //		LinuxClient.GetObj();
@@ -381,11 +481,11 @@ public class TaskUI extends javax.swing.JDialog {
 			scpPut(conn,tfin.getText(),s,"./");
 		}
 		sess.close();
-		conn.close();
+		conn.close();*/
 	}
 	//--------------------------------------------//
 	//根据id修改某个任务组,修改任务的开始执行时间
-	public void EditTaskFromXML(String id,String n,String memo,String cmd,String in,String out,Date starttime, long stimelong) throws IOException
+	public void EditTaskFromXML(String id,String n,String dn,String memo,String cmd,String in,String out,Date starttime, long stimelong) throws IOException
 	{		
 		SAXReader reader = new SAXReader();
 		try{
@@ -415,6 +515,7 @@ public class TaskUI extends javax.swing.JDialog {
 						if(s.equals(id))
 						{
 							et.addAttribute("name", n);
+							et.addAttribute("dirname", dn);
 							et.addAttribute("cmd", cmd);
 							et.addAttribute("in", in);
 							et.addAttribute("out",out);
@@ -605,6 +706,39 @@ public class TaskUI extends javax.swing.JDialog {
 	}
 	//--------------------------------------------------//
 
+	//---------------------------------------------//创建目录
+	private  void createdirs(Connection conn,String dirs) throws IOException {
+
+
+        	//Connection conn = getOpenedConnection(TC);
+		    Ltest.setText("正在设置目录...");
+		    Session sess = conn.openSession();
+		    String finalcmd = dirs.substring(1);
+//		    while(finalcmd.endsWith("/")){
+//		    	finalcmd = finalcmd.substring(0, finalcmd.length()-2);
+//		    }
+//		    if(type.equals("m")){
+//		    	String orin = this.older.substring(1);
+//		    	int i = finalcmd.lastIndexOf("/");
+//		    	String newdir = "";
+//		    	if(i>0)newdir = " mkdir -p "+finalcmd.substring(0, i)+" ;";		    	
+//		    	sess.execCommand("./squarlhan/CShell "+ newdir + " mv " + orin + " " + finalcmd.trim());
+//		    }else 
+		    sess.execCommand("./squarlhan/CShell mkdir -p " + finalcmd.trim());
+
+		String out;
+		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(sess.getStdout()));    
+		while((out=bufferedReader.readLine())!=null) {
+			if(out.equals("EOP")){
+				Ltest.setText("设置目录成功！");
+				this.flag = true;
+
+			}
+		}
+		sess.close();
+		conn.close();
+
+	} 
 
 	/**
 	 * 主函数
