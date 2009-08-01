@@ -145,6 +145,8 @@ public class LinuxClient extends javax.swing.JFrame {
                         tk.setCmd(t.valueOf("@cmd"));
                         tk.setFin(t.valueOf("@in"));
                         tk.setFout(t.valueOf("@out"));
+                        tk.setFouts(t.valueOf("@fileouts"));
+                        tk.setOpts(t.valueOf("@opts"));
                         if(t.valueOf("@starttime").equals("")){
                         	tk.setStartTime(null);
                         	tk.setRunTime(0);
@@ -612,7 +614,7 @@ private void execTaskCommand ( ActionEvent e ) throws DocumentException {
     try
     {
     tempUI.EditTaskFromXML(selectTask.getId(), selectTask.getName(), selectTask.getDirname(),selectTask.getMemo(),
-          selectTask.getCmd(), selectTask.getFin(), selectTask.getFout(), curtime,t);
+          selectTask.getCmd(), selectTask.getFin(), selectTask.getFout(), curtime,t, selectTask.getFouts(), selectTask.getOpts());
     
     selectTask.start(t1);
     //System.out.println("ddover!");
@@ -786,7 +788,7 @@ private void jMenuMousePressAllStartG(MouseEvent evt) {
 	    try
 	    {
 	    tempUI.EditTaskFromXML(rstk.getId(), rstk.getName(), rstk.getDirname(),rstk.getMemo(),
-	    		rstk.getCmd(), rstk.getFin(), rstk.getFout(), curtime,timerun);
+	    		rstk.getCmd(), rstk.getFin(), rstk.getFout(), curtime,timerun, rstk.getFouts(), rstk.getOpts());
 	    }catch(Exception e)
 	    {
 	    	e.printStackTrace();
@@ -1449,8 +1451,11 @@ public boolean getRunStatusC(String id) {
                           }
                           if(t.getStartTime() == null) {
                           s="任务名:"+t.getName()  
+                          +"\n命令ID:"+t.getId()
                           +"\n工作目录:"+t.getDirname()
                           +"\n命令内容:"+t.getCmd()
+                          +"\n命令输出文件名:"+t.getFouts()
+                          +"\n命令参数:"+t.getOpts()
                           +"\n创建时间:"+b.getCreatdate()
                           +"\n输入文件路径:"+t.getFin()
                           +"\n输入目录路径:"+t.getFout()
@@ -1463,6 +1468,8 @@ public boolean getRunStatusC(String id) {
                           	  +"\n命令ID:"+t.getId()
                           	  +"\n工作目录:"+t.getDirname()
                               +"\n命令内容:"+t.getCmd()
+                              +"\n命令输出文件名:"+t.getFouts()
+                              +"\n命令参数:"+t.getOpts()
                               +"\n创建时间:"+b.getCreatdate()
                               +"\n输入文件路径:"+t.getFin()
                               +"\n输入目录路径:"+t.getFout()
