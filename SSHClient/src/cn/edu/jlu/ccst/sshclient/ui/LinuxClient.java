@@ -145,7 +145,7 @@ public class LinuxClient extends javax.swing.JFrame {
                         tk.setCmd(t.valueOf("@cmd"));
                         tk.setFin(t.valueOf("@in"));
                         tk.setFout(t.valueOf("@out"));
-                        tk.setFouts(t.valueOf("@fileouts"));
+                        tk.setFouts(t.valueOf("@outfiles"));
                         tk.setOpts(t.valueOf("@opts"));
                         if(t.valueOf("@starttime").equals("")){
                         	tk.setStartTime(null);
