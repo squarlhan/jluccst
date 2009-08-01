@@ -49,6 +49,7 @@ public class SSHTask extends BaseClass implements BaseAction, BaseOperation {
 	private String dirname;
 	private String runpid;
 	private JTextArea jTextArea1;
+	private String infiles;
 
 	public SSHTask(String id, String name, byte type, String memo,Date creatdate) {
 		super(id, name, type, memo, creatdate);
@@ -185,6 +186,14 @@ public class SSHTask extends BaseClass implements BaseAction, BaseOperation {
 	public String getPid() {
 		return runpid;
 	}
+	public String getInfiles() {
+		return infiles;
+	}
+
+	public void setInfiles(String infiles) {
+		this.infiles = infiles;
+	}
+
 	//-----------------------------------------------------------------------//
 	/* (non-Javadoc)
 	 * @see cn.edu.jlu.ccst.sshclient.inter.BaseAction#start()

@@ -302,7 +302,7 @@ public class GroupUI extends javax.swing.JDialog  {
 			this.setVisible(false);
 			this.dispose();
 			JOptionPane.showMessageDialog(null, "修改组成功！");
-		}//else JOptionPane.showMessageDialog(null, "创建组失败！");
+		}else flag = true;
 	}
 
 	//-----------------------------------------------//
