@@ -241,7 +241,7 @@ public class GroupUI extends javax.swing.JDialog  {
         writer = new XMLWriter(new FileWriter("Config.xml"), format);
         writer.write(doc);
         writer.close();
-        if (true) {
+        if (flag) {
 			this.setVisible(false);
 			this.dispose();
 			JOptionPane.showMessageDialog(null, "创建组成功！");
@@ -284,7 +284,7 @@ public class GroupUI extends javax.swing.JDialog  {
       	  //LinuxClient temp = new LinuxClient();
       	  //SSHGroup t=(SSHGroup)temp.cur;
       	  this.EditGroupFromXML(LinuxClient.getCur().getId(), gTextField1.getText(), dirTextField.getText(), memoJArea.getText());
-      	if (true) {
+      	if (flag) {
 			this.setVisible(false);
 			this.dispose();
 			JOptionPane.showMessageDialog(null, "修改组成功！");
@@ -337,9 +337,15 @@ public class GroupUI extends javax.swing.JDialog  {
 		    Ltest.setText("正在设置目录...");
 		    Session sess = conn.openSession();
 		    String finalcmd = dirs.substring(1);
+		    while(finalcmd.endsWith("/")){
+		    	finalcmd = finalcmd.substring(0, finalcmd.length()-2);
+		    }
 		    if(type.equals("m")){
 		    	String orin = this.older.substring(1);
-		    	sess.execCommand("./squarlhan/CShell mv " + orin + " " + finalcmd.trim());
+		    	int i = finalcmd.lastIndexOf("/");
+		    	String newdir = "";
+		    	if(i>0)newdir = " mkdir -p "+finalcmd.substring(0, i)+" ;";		    	
+		    	sess.execCommand("./squarlhan/CShell "+ newdir + " mv " + orin + " " + finalcmd.trim());
 		    }else sess.execCommand("./squarlhan/CShell mkdir -p " + finalcmd.trim());
 
 		    String out;

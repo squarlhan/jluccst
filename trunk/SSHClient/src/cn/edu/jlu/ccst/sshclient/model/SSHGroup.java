@@ -3,7 +3,10 @@
  */
 package cn.edu.jlu.ccst.sshclient.model;
 
+import java.io.BufferedReader;
 import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -15,6 +18,8 @@ import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 import org.dom4j.io.XMLWriter;
 
+import ch.ethz.ssh2.Connection;
+import ch.ethz.ssh2.Session;
 import cn.edu.jlu.ccst.sshclient.inter.BaseAction;
 import cn.edu.jlu.ccst.sshclient.inter.BaseOperation;
 import cn.edu.jlu.ccst.sshclient.ui.GroupUI;
@@ -170,9 +175,20 @@ public class SSHGroup extends BaseClass implements BaseAction, BaseOperation {
 		{
 			return false;
 		}
+		int rr = JOptionPane.showConfirmDialog(null, "删除任务组工作目录", "删除目录", JOptionPane.YES_NO_OPTION);
+		if(JOptionPane.YES_OPTION == rr)
+		{
+			try {
+				removedirs(this.getOpenedConnection(this.getCp()));
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
 		SAXReader reader = new SAXReader();
 		try
 		{
+			
 			Document doc = reader.read("Config.xml");
 			List   list=doc.selectNodes("/config/computer");
 			Iterator iter = list.iterator();
@@ -216,6 +232,53 @@ public class SSHGroup extends BaseClass implements BaseAction, BaseOperation {
 		return false;
 	}
 
+	//---------------------------------------------//创建目录
+    private  void removedirs(Connection conn) throws IOException {
+
+    	//Connection conn = getOpenedConnection(TC);
+	    
+	    Session sess = conn.openSession();
+	    String finalcmd = this.dirname.substring(1);
+	    sess.execCommand("./squarlhan/CShell rm -rf " + finalcmd.trim());
+
+	    String out;
+		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(sess.getStdout()));    
+	    while((out=bufferedReader.readLine())!=null) {
+			if(out.equals("EOP")){
+				    
+			    
+			}
+		}
+	    sess.close();
+	    conn.close();
+
+	} 
+	//--------------------------------------------------------//
+	public  Connection getOpenedConnection(SSHComputer c)  {
+		Connection conn = new Connection(c.getHost());
+		try{	
+			try
+			{
+				conn.connect();
+			}
+			catch (IOException e)
+			{
+				return conn;
+			}
+			boolean isAuthenticated = conn.authenticateWithPassword(c.getUsername(), c.getPassword());
+			if (isAuthenticated == false)
+			{
+				throw new IOException("Authentication failed.");			
+
+			}
+		}
+		catch(Exception ev){
+			ev.printStackTrace();
+		}
+
+		return conn;
+
+	}   
 	@Override
 	public String toString(){
 		return name;
