@@ -649,17 +649,8 @@ public class TaskUI extends javax.swing.JDialog {
 							et.addAttribute("name", n);
 							et.addAttribute("dirname", dn);
 							et.addAttribute("cmd", cmd);
-							//et.addAttribute("in", in.replace("\n", " "));
-//							List<Element> cets = (List<Element>)(et.elements());
-//							int cs = cets.size()-1;
-//							for(int i = 0; i<=cs; i++){
-//								//et.remove(cet);
-//								System.out.println(i);
-//								System.out.println(cets.get(i).getText());
-//								cets.remove(i);
-//							}
+							
 							for(Element cet:(List<Element>)(et.elements())){
-								System.out.println(et.elements().size());
 								et.remove(cet);
 							}
 							
@@ -669,12 +660,9 @@ public class TaskUI extends javax.swing.JDialog {
 							infiles = infiles.trim();
 							infiles = infiles.substring(0, infiles.length()-1);
 							String[] infs = infiles.split(";");
-							System.out.println("ins:"+in);
-							System.out.println("infs:"+infiles);
 							for(int i = 0; i<=ins.length-1; i++){
 								Element ti = et.addElement("infile");
 								ti.setText(ins[i]);
-								System.out.println("in:"+ins[i]);
 								ti.addAttribute("url",infs[i]);
 							}
 							
