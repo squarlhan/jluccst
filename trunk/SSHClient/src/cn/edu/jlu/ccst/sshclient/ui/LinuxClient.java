@@ -10,6 +10,11 @@ package cn.edu.jlu.ccst.sshclient.ui;
  * Created on 2009-6-30, 14:09:55
  */
 
+import ch.ethz.ssh2.Connection;
+import ch.ethz.ssh2.SFTPv3Client;
+import ch.ethz.ssh2.SFTPv3FileAttributes;
+import ch.ethz.ssh2.SFTPv3FileHandle;
+import ch.ethz.ssh2.Session;
 import cn.edu.jlu.ccst.sshclient.model.BaseClass;
 import cn.edu.jlu.ccst.sshclient.model.SSHComputer;
 import cn.edu.jlu.ccst.sshclient.model.SSHGroup;
@@ -18,6 +23,7 @@ import cn.edu.jlu.ccst.sshclient.ui.ComputerUI;
 import cn.edu.jlu.ccst.sshclient.ui.MyTreeCellRender;
 import cn.edu.jlu.ccst.sshclient.ui.TaskUI;
 import cn.edu.jlu.ccst.sshclient.util.GenerateGraphy;
+import cn.edu.jlu.ccst.sshclient.util.MidScr;
 import cn.edu.jlu.ccst.sshclient.util.SSHOpCommand;
 import cn.edu.jlu.ccst.sshclient.util.SSHOpCommand;
 import cn.edu.jlu.ccst.sshclient.util.StartExam;
@@ -34,6 +40,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -50,6 +57,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
+import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTree;
 import javax.swing.UIManager;
@@ -536,6 +544,12 @@ public boolean getTaskRunSucc(String Id) {
 private void execTaskCommand ( ActionEvent e ) throws DocumentException {
 
 	boolean flag=false;
+	JFrame fr = new JFrame();
+	fr.setSize(600,800);
+	 //使用中心定位窗体类
+    MidScr ms=new MidScr(fr);
+    //设定窗体的左上坐标
+    fr.setLocation(ms.getX(), ms.getY ()); 
 	t1 = null;
 	JScrollPane t2=null;
 	for(int i=0;i<jtl.size();i++)
@@ -550,17 +564,17 @@ private void execTaskCommand ( ActionEvent e ) throws DocumentException {
 	{
 	t1=new JTextArea(cur.getId()+"\n");
 	t1.setName(cur.getId());
-	jtl.add(t1);
+	fr.add(t1);
 	t2=new JScrollPane();
 	t2.setName(cur.getId());
-	jsl.add(t2);
+	fr.add(t2);
 	t2.add(t1);
 	t1.setColumns(20);
 	t1.setRows(5);
 	t1.setEditable(false);
 	t2.setViewportView(t1);
-	jTabbedPane1.addTab(cur.getName(), t2);
-	
+	//jTabbedPane1.addTab(cur.getName(), t2);
+	fr.setVisible(true);
 	t1.addMouseListener(new MouseAdapter()
 	{ 
 		public void mouseReleased(MouseEvent e)
@@ -634,7 +648,176 @@ private void execTaskCommand ( ActionEvent e ) throws DocumentException {
 	
 }
 
+//---------------------------------------------------------------//
+/**
+ * 下载选中任务的输出文件
+ */
+private void downloadCommand( ActionEvent e) throws DocumentException	{
+		SSHTask selectTask = new SSHTask();
+		//寻找选中的任务
+		int i;
+		for( i = 0; i < tks.size() ; i++) {
+			if(cur.getId().equals(tks.get(i).getId())) {
+				selectTask = tks.get(i);
+				break;
+			}
+		}
+		SSHComputer selectComputer = new SSHComputer();
+		selectComputer = selectTask.getGp().getCp();
+		//获得下载命令的相关信息
+		String computerHost = selectComputer.getHost();
+		String userName = selectComputer.getUsername();
+		String userPsw = selectComputer.getPassword();
 
+		int beginIndex = 0;
+		int endIndex = 0;
+		String separate = ";";
+		String sourceDir = "."+selectTask.getDirname();
+		String sourceFiles = selectTask.getFouts();
+		endIndex = sourceFiles.indexOf(separate);
+		while (endIndex != -1){
+			String fileOut = sourceFiles.substring(beginIndex, endIndex);
+			String sourceFile=sourceDir+"/"+fileOut;
+			beginIndex = endIndex + 1;
+			sourceFiles = sourceFiles.substring(beginIndex).trim();
+			String aimDir = selectTask.getFout();
+			if(aimDir.endsWith("\\"))
+			{
+				aimDir=aimDir.substring(0, aimDir.length()-1);
+				System.out.println(aimDir);
+			}
+			String aimFile = aimDir+"\\"+fileOut;
+			System.out.println("sourceFile:"+sourceFile);
+			System.out.println("aimFile:"+aimFile);
+			System.out.println("aimDir:"+aimDir);
+			SSHOpCommand sc = new SSHOpCommand(computerHost, userName, userPsw);
+			Connection conn = sc.getOpenedConnection();
+			SFTPv3Client s3c = null;
+			boolean fileExist = true;
+			SFTPv3FileAttributes sfa = null;
+			
+			//判断源文件和目标文件是否存在
+			try{
+			s3c = new SFTPv3Client(conn);
+			 sfa = s3c.stat(sourceFile);
+			}catch(IOException ee){
+				fileExist = false;
+			}
+			if(!fileExist){
+				System.out.println("源文件不存在");
+				JOptionPane.showMessageDialog(null, "源文件不存在", "传输报错", JOptionPane.ERROR_MESSAGE);
+			}else{
+				File file= new File(aimFile);
+			    if(file.exists()){
+			    	int tt = JOptionPane.showConfirmDialog(null, "目标文件已存在，是否覆盖", "确认覆盖", JOptionPane.YES_NO_OPTION);
+					if(JOptionPane.NO_OPTION == tt)
+					{
+						return;
+					}else{
+						file.delete();
+					}
+			    }
+				ProgressBar pb = new ProgressBar(conn, sourceFile, aimFile, aimDir, 1);
+				Thread t = new Thread(pb);
+				t.start();
+				beginIndex = 0;
+				endIndex = sourceFiles.indexOf(separate);
+			}
+
+		}
+}
+//-------------------------------------------------------------//
+private void uploadCommand( ActionEvent e) throws DocumentException	{
+	SSHTask selectTask = new SSHTask();
+	boolean fileExist = true;
+	//寻找选中的任务
+	int i;
+	for( i = 0; i < tks.size() ; i++) {
+		if(cur.getId().equals(tks.get(i).getId())) {
+			selectTask = tks.get(i);
+			break;
+		}
+	}
+	SSHComputer selectComputer = new SSHComputer();
+	selectComputer = selectTask.getGp().getCp();
+	//获得上传命令的相关信息
+	String computerHost = selectComputer.getHost();
+	String userName = selectComputer.getUsername();
+	String userPsw = selectComputer.getPassword();
+	int beginIndex = 0;
+	int endIndex = 0;
+	String separate = ";";
+	String aimDir = "."+selectTask.getDirname();
+	String sourceFiles = selectTask.getFin();
+	System.out.println("sourceFiles:"+sourceFiles);
+	System.out.println();
+	String aimFiles = selectTask.getInfiles();
+	System.out.println("aimFiles:"+aimFiles);
+	endIndex = sourceFiles.indexOf(separate);
+	while (endIndex != -1){
+		String sourceFile=sourceFiles.substring(beginIndex, endIndex);
+		beginIndex = endIndex + 1;
+		sourceFiles = sourceFiles.substring(beginIndex).trim();
+
+		beginIndex = 0;
+		endIndex = aimFiles.indexOf(separate);
+		String aimFile = aimDir+"/"+aimFiles.substring(beginIndex, endIndex);
+		beginIndex = endIndex + 1;
+		aimFiles = aimFiles.substring(beginIndex).trim();
+		System.out.println("aimFiles:"+aimFiles);
+		
+		SSHOpCommand sc = new SSHOpCommand(computerHost, userName, userPsw);
+		Connection conn = sc.getOpenedConnection();
+		SFTPv3Client s3c = null;
+
+		System.out.println("sourceFile:"+sourceFile);
+		System.out.println("aimDir:"+aimDir);
+		System.out.println("aimFile:"+aimFile);
+
+		SFTPv3FileAttributes sfa = null;
+		File file= new File(sourceFile);
+		
+		//判断源文件和目标文件是否存在
+		if(!file.exists()){
+			JOptionPane.showMessageDialog(null, "源文件不存在", "传输报错", JOptionPane.ERROR_MESSAGE);
+		}else{
+			try{
+				s3c = new SFTPv3Client(conn);
+				 sfa = s3c.stat(aimFile);
+				}catch(IOException ee){
+					fileExist = false;
+				}
+				if(fileExist){
+					System.out.println("文件存在");
+					int tt = JOptionPane.showConfirmDialog(null, "目标文件已存在，是否覆盖", "确认覆盖", JOptionPane.YES_NO_OPTION);
+					if(JOptionPane.NO_OPTION == tt)
+					{
+						return;
+					}else{
+						try{
+						s3c.rm(aimFile);
+						}catch(IOException ee){
+							System.out.println("删除目标文件失败");
+						}
+						@SuppressWarnings("unused")
+						ProgressBar pb = new ProgressBar(conn, sourceFile, aimFile, aimDir,2);
+						Thread t = new Thread(pb);
+						t.start();
+					}
+				}
+				else{
+					@SuppressWarnings("unused")
+					ProgressBar pb = new ProgressBar(conn, sourceFile, aimFile, aimDir,2);
+					Thread t = new Thread(pb);
+					t.start();
+				}
+		}
+	
+		beginIndex = 0;
+		endIndex = sourceFiles.indexOf(separate);
+	}
+	
+}
 //-------------------------------------------------------------//
 /**
  * 停止选中任务
@@ -1724,121 +1907,6 @@ public boolean getRunStatusC(String id) {
         popMenuTA.add(shutTA);
         popMenuTA.add(clearTA);
         
-        //---------------------------------------------------//
-        popMenuC = new JPopupMenu();
-        addItemC = new JMenuItem("添加任务组");
-        addItemC.addActionListener(new rightclick());
-        delItemC = new JMenuItem("删除此电脑");
-        delItemC.addActionListener(new rightclick());
-        editItemC = new JMenuItem("修改此电脑");
-        editItemC.addActionListener(new rightclick());
-        computerStartC = new JMenuItem("启动所有组任务");
-        computerStartC.addMouseListener(new java.awt.event.MouseAdapter() {
-        	public void mousePressed(java.awt.event.MouseEvent evt) {
-      		 computerStartAllGroupT(evt);
-      	}
-      });
-        computerStopC = new JMenuItem("停止所有组任务");
-        computerStopC.addMouseListener(new java.awt.event.MouseAdapter() {
-        	public void mousePressed(java.awt.event.MouseEvent evt) {
-    		 computerStopAllGroupT(evt);
-      	}
-      });
-        popMenuC.add(addItemC);
-        popMenuC.add(delItemC);
-        popMenuC.add(editItemC);
-        popMenuC.add(computerStartC);
-        popMenuC.add(computerStopC);
-        
-        popMenuG = new JPopupMenu();
-        addItemG = new JMenuItem("添加一新任务");
-        addItemG.addActionListener(new rightclick());
-        delItemG = new JMenuItem("删除此任务组");
-        delItemG.addActionListener(new rightclick());
-        editItemG = new JMenuItem("修改此任务组");
-        editItemG.addActionListener(new rightclick());
-        groupStartG = new JMenuItem("串行启动所有任务");
-        groupStartG.addMouseListener(new java.awt.event.MouseAdapter() {
-        	public void mousePressed(java.awt.event.MouseEvent evt) {
-      		  jMenuMousePressGroupStart(evt); 
-      	}
-      });  
-        groupStopG = new JMenuItem("停止所有串行任务");
-        groupStopG.addMouseListener(new java.awt.event.MouseAdapter() {
-        	public void mousePressed(java.awt.event.MouseEvent evt) {
-      		  jMenuMousePressGroupStop(evt); 
-      	}
-      });  
-        allStartG = new JMenuItem("同时启动所有任务");
-        allStartG.addMouseListener(new java.awt.event.MouseAdapter() {
-        	public void mousePressed(java.awt.event.MouseEvent evt) {
-      		  jMenuMousePressAllStartG(evt); 
-      	}
-      });
-        allStopG = new JMenuItem("停止所有任务");
-        allStopG.addMouseListener(new java.awt.event.MouseAdapter() {
-        	public void mousePressed(java.awt.event.MouseEvent evt) {
-      		  jMenuMousePressAllStopG(evt); 
-      	}
-      });
-        popMenuG.add(addItemG);
-        popMenuG.add(delItemG);
-        popMenuG.add(editItemG); 
-        popMenuG.add(groupStartG);
-        popMenuG.add(groupStopG);
-        popMenuG.add(allStartG);
-        popMenuG.add(allStopG);
-        popMenuT = new JPopupMenu();       
-        delItemT = new JMenuItem("删除此任务");
-        delItemT.addActionListener(new rightclick());
-        editItemT = new JMenuItem("修改此任务");
-        editItemT.addActionListener(new rightclick());
-        popMenuT.add(delItemT);
-        popMenuT.add(editItemT);
-        
-        //////////////////////////////////////////////////////// 运行任务命令
-        execItemT = new JMenuItem("执行任务命令");
-        execItemT.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-           {
-            	           	
-                try
-                {
-                	execTaskCommand(e);
-                } catch (DocumentException ex)
-                {}
-           }
-        }
-        );
-        popMenuT.add(execItemT);
-        
-        ////停止任务命令
-        stopItemT = new JMenuItem("停止任务命令");
-        stopItemT.addActionListener(new ActionListener()
-        {
-            public void actionPerformed(ActionEvent e)
-           {
-                try
-                {
-                	stopTaskCommand(e);
-                } catch (DocumentException ex)
-                {
-                	ex.printStackTrace();
-                }
-           }
-        }
-        );
-        popMenuT.add(stopItemT);
-        
-        popMenuCA = new JPopupMenu();       
-        delItemCA = new JMenuItem("删除所有电脑");
-        delItemCA.addActionListener(new rightclick());
-        addItemCA = new JMenuItem("添加一新电脑");
-        addItemCA.addActionListener(new rightclick());
-        popMenuCA.add(delItemCA);
-        popMenuCA.add(addItemCA);
-        //---------------------------------------------------//
         jSplitPane1 = new javax.swing.JSplitPane();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTree1 = new javax.swing.JTree();
@@ -2228,6 +2296,41 @@ public boolean getRunStatusC(String id) {
         );
         popMenuT.add(stopItemT);
         
+        ////下载结果文件
+        downloadItemT = new JMenuItem("下载结果文件");
+        downloadItemT.addActionListener(new ActionListener()
+        {
+        	public void actionPerformed(ActionEvent e)
+        	{
+        		try
+                {
+                	downloadCommand(e);
+                } catch (DocumentException ex)
+                {
+                	ex.printStackTrace();
+                }
+        	}
+        }
+        );
+        popMenuT.add(downloadItemT);
+        ////上传输入文件
+        uploadItemT = new JMenuItem("上传输入文件");
+        uploadItemT.addActionListener(new ActionListener()
+        {
+        	public void actionPerformed(ActionEvent e)
+        	{
+        		try
+                {
+                	uploadCommand(e);
+                } catch (DocumentException ex)
+                {
+                	ex.printStackTrace();
+                }
+        	}
+        }
+        );
+        popMenuT.add(uploadItemT);
+        
         //查看任务运行的结果图
         dispResT = new JMenu("自定义任务的效果图");
         dispResT.setEnabled(false);
@@ -2406,6 +2509,8 @@ public boolean getRunStatusC(String id) {
     private JMenuItem editItemT;
     private JMenuItem execItemT;
     private JMenuItem stopItemT;
+    private JMenuItem downloadItemT;
+    private JMenuItem uploadItemT;
     private JMenu dispResT;
     private JMenuItem linedispresT;
     private JMenuItem bardispresT;
