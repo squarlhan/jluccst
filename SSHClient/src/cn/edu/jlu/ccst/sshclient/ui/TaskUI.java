@@ -62,6 +62,7 @@ public class TaskUI extends javax.swing.JDialog {
 	public List<JTextField> maketextfields(String fin, String infiles){
 		List<JTextField> results = new ArrayList();
 		fin = fin.trim();
+		if(fin.length()==0)return results;
 		fin = fin.substring(0, fin.length()-1);
 		String[] ins = fin.split(";");
 		infiles = infiles.trim();
@@ -383,9 +384,11 @@ public class TaskUI extends javax.swing.JDialog {
 		newTask1.setMemo(tTextArea2.getText());
 		//newTask1.setFin(tfin.getText());
 		for(Component cc: tfin.getComponents()){
-			if(cc instanceof JTextField){   
-				newTask1.setFin(newTask1.getFin()+((JTextField)cc).getText().trim()+"; ");
-				newTask1.setInfiles(newTask1.getInfiles()+((JTextField)cc).getToolTipText().trim()+"; ");
+			if(cc instanceof JTextField){
+				if(((JTextField)cc).getText().trim().length()>0){
+				    newTask1.setFin(newTask1.getFin()+((JTextField)cc).getText().trim()+"; ");
+				    newTask1.setInfiles(newTask1.getInfiles()+((JTextField)cc).getToolTipText().trim()+"; ");
+				}
             }   
 		}
 		newTask1.setFout(tfout.getText());
@@ -583,9 +586,11 @@ public class TaskUI extends javax.swing.JDialog {
 			String mins = "";
 			String minfs = "";
 			for(Component cc: tfin.getComponents()){
-				if(cc instanceof JTextField){   
-					mins = mins +((JTextField)cc).getText()+"; ";
-					minfs = minfs +((JTextField)cc).getToolTipText()+"; ";
+				if(cc instanceof JTextField){  
+					if(((JTextField)cc).getText().length()>0){
+					    mins = mins +((JTextField)cc).getText()+"; ";
+					    minfs = minfs +((JTextField)cc).getToolTipText()+"; ";
+					}
 	            }   
 			}
 			this.EditTaskFromXML(LinuxClient.getCur().getId(), tTextField1
@@ -645,20 +650,34 @@ public class TaskUI extends javax.swing.JDialog {
 							et.addAttribute("dirname", dn);
 							et.addAttribute("cmd", cmd);
 							//et.addAttribute("in", in.replace("\n", " "));
-							List<Element> cets = (List<Element>)(et.elements());
-							for(int i = 0; i<=cets.size()-1; i++){
-								//et.remove(cet);
-								cets.remove(i);
+//							List<Element> cets = (List<Element>)(et.elements());
+//							int cs = cets.size()-1;
+//							for(int i = 0; i<=cs; i++){
+//								//et.remove(cet);
+//								System.out.println(i);
+//								System.out.println(cets.get(i).getText());
+//								cets.remove(i);
+//							}
+							for(Element cet:(List<Element>)(et.elements())){
+								System.out.println(et.elements().size());
+								et.remove(cet);
 							}
-							for(Component cc: tfin.getComponents()){
-								if(cc instanceof JTextField){   
-									Element ti = et.addElement("infile");
-									if(((JTextField)cc).getText().trim().length()>0){
-										ti.setText(((JTextField) cc).getText().trim());
-										ti.addAttribute("url",((JTextField) cc).getToolTipText().trim());
-									}
-					            }   
-							}	
+							
+							in = in.trim();
+							in = in.substring(0, in.length()-1);
+							String[] ins = in.split(";");
+							infiles = infiles.trim();
+							infiles = infiles.substring(0, infiles.length()-1);
+							String[] infs = infiles.split(";");
+							System.out.println("ins:"+in);
+							System.out.println("infs:"+infiles);
+							for(int i = 0; i<=ins.length-1; i++){
+								Element ti = et.addElement("infile");
+								ti.setText(ins[i]);
+								System.out.println("in:"+ins[i]);
+								ti.addAttribute("url",infs[i]);
+							}
+							
 							et.addAttribute("out", out);
 							et.addAttribute("outfiles", outs.replace("\n", " "));
 							et.addAttribute("opts", opts);
