@@ -28,7 +28,7 @@ public class TaskUI extends javax.swing.JDialog {
 	private JLabel Ltest, tLabel1, tLabel2, tLabel3, dirLabel;
 	// private JLabel memoLabel;
 	private JTextField tTextField1, tTextField3, dirTextField;
-	private JTextArea tTextArea2, tfin, tfous;
+	private JTextArea tTextArea2, tfous;
 	private JScrollPane tfinAreaPane, tfousAreaPane, memoAreaPane;
 	private JButton resetButton, submitButton;
 	private JLabel lfin, lfout, loutnames, lopts;
@@ -37,7 +37,7 @@ public class TaskUI extends javax.swing.JDialog {
 	private String gdir;
 	private String older;
 	private SSHTask oldertask;
-	private String infiles = "";
+	private JPanel tfin;
 
 	// private JButton choosein,chooseout;
 
@@ -58,8 +58,26 @@ public class TaskUI extends javax.swing.JDialog {
 	}
 
 	// -------------------------------------------------------------------//
+	
+	public List<JTextField> maketextfields(String fin, String infiles){
+		List<JTextField> results = new ArrayList();
+		fin = fin.trim();
+		fin = fin.substring(0, fin.length()-1);
+		String[] ins = fin.split(";");
+		infiles = infiles.trim();
+		infiles = infiles.substring(0, infiles.length()-1);
+		String[] infs = infiles.split(";");
+		for(int i = 0; i<=ins.length-1; i++){
+			JTextField tf = new JTextField();
+			tf.setToolTipText(ins[i].trim());
+			tf.setText(infs[i].trim());
+			if(infs[i].trim().length()>0)results.add(tf);
+		}
+		return results;
+	}
+	
 	public TaskUI(String name, String dirname, String cmd, String in,
-			String out, String memo, String fouts, String opts) {
+			String out, String memo, String fouts, String opts, String infiles) {
 		this.setTitle("修改任务");
 		initComponent();
 
@@ -77,7 +95,10 @@ public class TaskUI extends javax.swing.JDialog {
 		tTextField1.setText(name);
 		tTextField3.setText(cmd);
 		tTextArea2.setText(memo);
-		tfin.setText(in.replace("; ", ";\n"));
+		for(JTextField jtf : maketextfields(in,infiles)){
+			tfin.add(jtf);
+		}
+		tfin.validate();
 		tfout.setText(out);
 		dirTextField.setText(dirname);
 		tfous.setText(fouts.replace("; ", ";\n"));
@@ -93,6 +114,7 @@ public class TaskUI extends javax.swing.JDialog {
 		oldertask.setFout(out);
 		oldertask.setFouts(fouts);
 		oldertask.setOpts(opts);
+		oldertask.setInfiles(infiles);
 	}
 
 	// ----------------------------------------------------//
@@ -166,14 +188,18 @@ public class TaskUI extends javax.swing.JDialog {
 		this.add(topts);
 
 		lfin = new JLabel("选择输入文件");
-		tfin = new JTextArea("");
-		tfin.setBounds(150, 290, 150, 80);
-		tfin.setLineWrap(true);
+		tfin = new JPanel();
+		//tfin.setBounds(150, 290, 150, 80);
+		//tfin.setLineWrap(true);
 		tfin.setBorder(BorderFactory.createLineBorder(Color.black));
-		tfinAreaPane = new JScrollPane(tfin,
+		tfin.setLayout(new GridLayout(10,1));
+		tfinAreaPane = new JScrollPane(
 				JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
-				JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+				JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		//tfinAreaPane = new JScrollPane();
+		tfinAreaPane.getViewport().setView(tfin);
 		tfinAreaPane.setBounds(150, 290, 150, 80);
+		tfinAreaPane.setPreferredSize(new   Dimension(500,500)); 
 		this.add(tfinAreaPane);
 		lfin.setBounds(50, 290, 80, 20);
 		JButton choosein = new JButton("Browse");
@@ -186,8 +212,13 @@ public class TaskUI extends javax.swing.JDialog {
 				int result = chooser.showOpenDialog(null);
 				if (result == JFileChooser.APPROVE_OPTION) {
 					String filePath = chooser.getSelectedFile().getPath();
-					tfin.append(filePath + ";\n");
-					infiles = infiles+chooser.getSelectedFile().getName()+"; ";
+					JTextField newtf = new JTextField();
+					newtf.setText(chooser.getSelectedFile().getName());
+					newtf.setToolTipText(filePath);
+					tfin.add(newtf);
+					tfin.validate();
+//					tfin.append(filePath + ";\n");
+//					infiles = infiles+chooser.getSelectedFile().getName()+"; ";
 				}
 
 			}
@@ -291,7 +322,7 @@ public class TaskUI extends javax.swing.JDialog {
 			tfout.setText(null);
 			topts.setText(null);
 			tTextArea2.setText(null);
-			tfin.setText(null);
+			tfin.removeAll();
 			tfous.setText(null);
 		}else{
 			tTextField1.setText(oldertask.getName());
@@ -300,7 +331,13 @@ public class TaskUI extends javax.swing.JDialog {
 			tfout.setText(oldertask.getFout());
 			topts.setText(oldertask.getOpts());
 			tTextArea2.setText(oldertask.getMemo());
-			tfin.setText(oldertask.getFin().replace("; ", ";\n"));
+			//tfin.setText(oldertask.getFin().replace("; ", ";\n"));
+			tfin.removeAll();
+			tfin.repaint();
+			for(JTextField jtf : maketextfields(oldertask.getFin(),oldertask.getInfiles())){
+				tfin.add(jtf);
+			}
+			tfin.validate();
 			tfous.setText(oldertask.getFouts().replace("; ", ";\n"));
 		}
 	}
@@ -341,9 +378,16 @@ public class TaskUI extends javax.swing.JDialog {
 
 		SSHTask newTask1 = new SSHTask();
 		newTask1.setName(tTextField1.getText());
+		newTask1.setDirname(dirTextField.getText());
 		newTask1.setCmd(tTextField3.getText());
 		newTask1.setMemo(tTextArea2.getText());
-		newTask1.setFin(tfin.getText());
+		//newTask1.setFin(tfin.getText());
+		for(Component cc: tfin.getComponents()){
+			if(cc instanceof JTextField){   
+				newTask1.setFin(newTask1.getFin()+((JTextField)cc).getText().trim()+"; ");
+				newTask1.setInfiles(newTask1.getInfiles()+((JTextField)cc).getToolTipText().trim()+"; ");
+            }   
+		}
 		newTask1.setFout(tfout.getText());
 		newTask1.setFouts(tfous.getText());
 		newTask1.setOpts(topts.getText());
@@ -406,12 +450,22 @@ public class TaskUI extends javax.swing.JDialog {
 							t.addAttribute("creatdate", timeFormat
 									.format(newTask1.getCreatdate()));
 							t.addAttribute("cmd", newTask1.getCmd());
-							t.addAttribute("in", newTask1.getFin().replace("\n", " "));
+							//t.addAttribute("in", newTask1.getFin().replace("\n", " "));
 							t.addAttribute("out", newTask1.getFout());
 							t.addAttribute("outfiles", newTask1.getFouts().replace("\n", " "));
 							t.addAttribute("opts", newTask1.getOpts());
 							t.addAttribute("starttime", "");
 							t.addAttribute("memo", newTask1.getMemo());
+							for(Component cc: tfin.getComponents()){
+								if(cc instanceof JTextField){   
+									Element ti = t.addElement("infile");
+									if(((JTextField)cc).getText().trim().length()>0){
+										ti.setText(((JTextField) cc).getText().trim());
+										ti.addAttribute("url",((JTextField) cc).getToolTipText().trim());
+									}
+					            }   
+							}						
+							
 							flag = true;
 							break;
 						}
@@ -526,10 +580,18 @@ public class TaskUI extends javax.swing.JDialog {
 		}else flag = true;
 
 		if (flag) {
+			String mins = "";
+			String minfs = "";
+			for(Component cc: tfin.getComponents()){
+				if(cc instanceof JTextField){   
+					mins = mins +((JTextField)cc).getText()+"; ";
+					minfs = minfs +((JTextField)cc).getToolTipText()+"; ";
+	            }   
+			}
 			this.EditTaskFromXML(LinuxClient.getCur().getId(), tTextField1
 					.getText(), dirTextField.getText(), tTextArea2.getText(),
-					tTextField3.getText(), tfin.getText(), tfout.getText(),
-					LinuxClient.tks.get(i).getStartTime(), 0, tfous.getText(), topts.getText());
+					tTextField3.getText(), mins, tfout.getText(),
+					LinuxClient.tks.get(i).getStartTime(), 0, tfous.getText(), topts.getText(), minfs);
 			this.setVisible(false);
 			this.dispose();
 			JOptionPane.showMessageDialog(null, "修改任务成功！");
@@ -553,7 +615,7 @@ public class TaskUI extends javax.swing.JDialog {
 	// --------------------------------------------//
 	// 根据id修改某个任务组,修改任务的开始执行时间
 	public void EditTaskFromXML(String id, String n, String dn, String memo,
-			String cmd, String in, String out, Date starttime, long stimelong, String outs, String opts)
+			String cmd, String in, String out, Date starttime, long stimelong, String outs, String opts, String infiles)
 			throws IOException {
 		SAXReader reader = new SAXReader();
 		try {
@@ -582,7 +644,21 @@ public class TaskUI extends javax.swing.JDialog {
 							et.addAttribute("name", n);
 							et.addAttribute("dirname", dn);
 							et.addAttribute("cmd", cmd);
-							et.addAttribute("in", in.replace("\n", " "));
+							//et.addAttribute("in", in.replace("\n", " "));
+							List<Element> cets = (List<Element>)(et.elements());
+							for(int i = 0; i<=cets.size()-1; i++){
+								//et.remove(cet);
+								cets.remove(i);
+							}
+							for(Component cc: tfin.getComponents()){
+								if(cc instanceof JTextField){   
+									Element ti = et.addElement("infile");
+									if(((JTextField)cc).getText().trim().length()>0){
+										ti.setText(((JTextField) cc).getText().trim());
+										ti.addAttribute("url",((JTextField) cc).getToolTipText().trim());
+									}
+					            }   
+							}	
 							et.addAttribute("out", out);
 							et.addAttribute("outfiles", outs.replace("\n", " "));
 							et.addAttribute("opts", opts);

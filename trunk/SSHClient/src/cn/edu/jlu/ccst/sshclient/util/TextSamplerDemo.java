@@ -46,6 +46,7 @@ import java.awt.event.*;        //for action events
 
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 import java.io.IOException;
 
 public class TextSamplerDemo extends JPanel
@@ -205,6 +206,23 @@ public class TextSamplerDemo extends JPanel
         }
     }
 
+    public List<JTextField> maketextfields(String fin, String infiles){
+		List<JTextField> results = new ArrayList();
+		fin = fin.trim();
+		fin = fin.substring(0, fin.length()-1);
+		String[] ins = fin.split(";");
+		infiles = infiles.trim();
+		infiles = infiles.substring(0, infiles.length()-1);
+		String[] infs = infiles.split(";");
+		for(int i = 0; i<=ins.length-1; i++){
+			JTextField tf = new JTextField();
+			tf.setText(ins[i].trim());
+			tf.setToolTipText(infs[i].trim());
+			results.add(tf);
+		}
+		return results;
+	}
+    
     private JEditorPane createEditorPane() {
         JEditorPane editorPane = new JEditorPane();
         JTextField[] tflist = new JTextField[2];
@@ -220,13 +238,23 @@ public class TextSamplerDemo extends JPanel
         tflist[1].setMargin(new Insets(0,0,0,0));
         tflist[1].setToolTipText("khgkkghkjh");
         //tflist[1].validate();
-        editorPane.add(tflist[0]);
-        editorPane.add(tflist[1]);
-        editorPane.invalidate();
+        //editorPane.add(tflist[0]);
+        //editorPane.add(tflist[1]);
+       for(JTextField tt : maketextfields("1; 2; 3; ", "11; 22; 33; ")){
+    	   editorPane.add(tt);
+       }
         editorPane.validate();
-        for(JTextField tf : tflist){
-        	System.out.println(tf.getText()+":"+tf.getWidth());
+        Component[] tfs =  editorPane.getComponents();
+        System.out.println(tfs.length); 
+        for(Component tf : tfs){
+        	System.out.println(tf.getClass()); 
+        	 if(tf instanceof JTextField){   
+                 System.out.println(((JTextField)tf).getText()+":"+((JTextField)tf).getToolTipText()); 
+         }   
+
         }
+        
+        System.out.println("****************"); 
         /*editorPane.setEditable(false);
 		java.net.URL helpURL = TextSamplerDemo.class
 				.getResource("TextSamplerDemoHelp.html");

@@ -150,8 +150,10 @@ public class LinuxClient extends javax.swing.JFrame {
                         tk.setOpts(t.valueOf("@opts"));
                         List<Element> felements = t.elements();
                         for(Element f : felements){
-                        	tk.setInfiles(tk.getInfiles()+f.getTextTrim()+"; ");
-                        	tk.setFin(tk.getFin()+f.valueOf("@url")+"; ");
+                        	if(f.getTextTrim().length()>0){
+                        	    tk.setInfiles(tk.getInfiles()+f.getTextTrim()+"; ");
+                        	    tk.setFin(tk.getFin()+f.valueOf("@url")+"; ");
+                        	}
                         }
                         if(t.valueOf("@starttime").equals("")){
                         	tk.setStartTime(null);
@@ -620,7 +622,7 @@ private void execTaskCommand ( ActionEvent e ) throws DocumentException {
     try
     {
     tempUI.EditTaskFromXML(selectTask.getId(), selectTask.getName(), selectTask.getDirname(),selectTask.getMemo(),
-          selectTask.getCmd(), selectTask.getFin(), selectTask.getFout(), curtime,t, selectTask.getFouts(), selectTask.getOpts());
+          selectTask.getCmd(), selectTask.getFin(), selectTask.getFout(), curtime,t, selectTask.getFouts(), selectTask.getOpts(), selectTask.getInfiles());
     
     selectTask.start(t1);
     //System.out.println("ddover!");
@@ -794,7 +796,7 @@ private void jMenuMousePressAllStartG(MouseEvent evt) {
 	    try
 	    {
 	    tempUI.EditTaskFromXML(rstk.getId(), rstk.getName(), rstk.getDirname(),rstk.getMemo(),
-	    		rstk.getCmd(), rstk.getFin(), rstk.getFout(), curtime,timerun, rstk.getFouts(), rstk.getOpts());
+	    		rstk.getCmd(), rstk.getFin(), rstk.getFout(), curtime,timerun, rstk.getFouts(), rstk.getOpts(), rstk.getInfiles());
 	    }catch(Exception e)
 	    {
 	    	e.printStackTrace();
