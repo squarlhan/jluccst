@@ -193,7 +193,8 @@ public class TaskUI extends javax.swing.JDialog {
 		//tfin.setBounds(150, 290, 150, 80);
 		//tfin.setLineWrap(true);
 		tfin.setBorder(BorderFactory.createLineBorder(Color.black));
-		tfin.setLayout(new GridLayout(10,1));
+		tfin.setLayout(new GridLayout(10,1,25,0));
+		
 		tfinAreaPane = new JScrollPane(
 				JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
 				JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
@@ -657,6 +658,7 @@ public class TaskUI extends javax.swing.JDialog {
 							in = in.trim();
 							in = in.substring(0, in.length()-1);
 							String[] ins = in.split(";");
+							System.out.println(in);
 							infiles = infiles.trim();
 							infiles = infiles.substring(0, infiles.length()-1);
 							String[] infs = infiles.split(";");
