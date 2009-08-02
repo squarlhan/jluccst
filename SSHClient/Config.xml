@@ -10,8 +10,15 @@
       <task id="T20090717201551" name="svmtrain" creatdate="2009-07-17 20:15:51" cmd="./squarlhan/irsvm in.txt out.txt alpha.dat 1" in="E:\SSH\cpp\sinc.txt" out="C:\Users\Woden\Desktop" starttime="2009-07-20 15:39:14" memo="" stimelong="1248075554328" runsc="0" runpid="10137"/> 
     </group>  
     <group id="G20090801084618" name="g4" dirname="/g4/g5" creatdate="2009-08-01 08:46:18" memo=""> 
-      <task id="T20090801112843" name="t1" creatdate="2009-08-01 11:28:43" cmd="cd" in="F:\Woden 的文档\pic.doc; F:\Woden 的文档\一棵开花的树.txt; " out="F:\Woden 的文档" starttime="" memo="" dirname="/g4/t1" outfiles="1; 2; 3;" opts="l;u;y;" stimelong="0">
-       <infile url="F:\Woden 的文档\pic.doc">pic.doc</infile>
+      <task id="T20090801112843" name="t12" creatdate="2009-08-01 11:28:43" cmd="cd" in="pic.doc; run; " out="F:\Woden 的文档" starttime="" memo="" dirname="/g4/t1" outfiles="1; 2; 3;" opts="l;u;y;" stimelong="0"> 
+        <infile url="F:\Woden 的文档\pic.doc">pic.doc</infile> 
+      </task>  
+      <task id="T20090802093701" name="t2" creatdate="2009-08-02 09:37:01" cmd="cmd" out="F:\Woden 的文档" outfiles="6;7;8;" opts="l;j;" starttime="" memo="" dirname="/t2" stimelong="0"> 
+        <infile/>  
+        <infile url="F:\Woden 的文档\JBookMaker.exe">JBookMaker.exe</infile>
+        <infile url="F:\Woden 的文档\[南区出售]N81N82E51电池BP-6MT三星相机NV3电池座充.txt">[南区出售]N81N82E51电池BP-6MT三星相机NV3电池座充.txt</infile>
+        <infile url="F:\Woden 的文档\Mscomctl.ocx">Mscomctl.ocx</infile>
+        <infile url="F:\Woden 的文档\一棵开花的树.txt">一棵开花的树.txt</infile>
       </task> 
     </group> 
   </computer> 
