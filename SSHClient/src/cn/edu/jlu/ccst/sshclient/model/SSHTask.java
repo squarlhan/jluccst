@@ -326,7 +326,7 @@ public class SSHTask extends BaseClass implements BaseAction, BaseOperation {
 	public boolean update() {
 		// TODO Auto-generated method stub
 		SSHTask t=(SSHTask)LinuxClient.getCur();
-		TaskUI newTask = new TaskUI(t.getName(),t.getDirname(),t.getCmd(),t.getFin(),t.getFout(),t.getMemo(), t.getFouts(), t.opts);
+		TaskUI newTask = new TaskUI(t.getName(),t.getDirname(),t.getCmd(),t.getFin(),t.getFout(),t.getMemo(), t.getFouts(), t.opts, t.infiles);
 		newTask.setModal(true);
 		newTask.setVisible(true);
 		return false;
