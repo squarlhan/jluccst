@@ -665,7 +665,6 @@ public class TaskUI extends javax.swing.JDialog {
 							if(in.length()>0){
 								in = in.substring(0, in.length() - 1);
 								String[] ins = in.split(";");
-								System.out.println(in);
 								infiles = infiles.trim();
 								infiles = infiles.substring(0,
 										infiles.length() - 1);
