@@ -193,7 +193,11 @@ public class TaskUI extends javax.swing.JDialog {
 		//tfin.setBounds(150, 290, 150, 80);
 		//tfin.setLineWrap(true);
 		tfin.setBorder(BorderFactory.createLineBorder(Color.black));
-		tfin.setLayout(new GridLayout(10,1,25,0));
+		GridLayout gl = new GridLayout();
+		gl.setColumns(1);
+		gl.setRows(0);
+		
+		tfin.setLayout(gl);
 		
 		tfinAreaPane = new JScrollPane(
 				JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
@@ -218,6 +222,8 @@ public class TaskUI extends javax.swing.JDialog {
 					newtf.setText(chooser.getSelectedFile().getName());
 					newtf.setToolTipText(filePath);
 					tfin.add(newtf);
+					tfin.repaint();
+					tfin.revalidate();
 					tfin.validate();
 //					tfin.append(filePath + ";\n");
 //					infiles = infiles+chooser.getSelectedFile().getName()+"; ";
@@ -656,18 +662,21 @@ public class TaskUI extends javax.swing.JDialog {
 							}
 							
 							in = in.trim();
-							in = in.substring(0, in.length()-1);
-							String[] ins = in.split(";");
-							System.out.println(in);
-							infiles = infiles.trim();
-							infiles = infiles.substring(0, infiles.length()-1);
-							String[] infs = infiles.split(";");
-							for(int i = 0; i<=ins.length-1; i++){
-								Element ti = et.addElement("infile");
-								ti.setText(ins[i]);
-								ti.addAttribute("url",infs[i]);
+							if(in.length()>0){
+								in = in.substring(0, in.length() - 1);
+								String[] ins = in.split(";");
+								System.out.println(in);
+								infiles = infiles.trim();
+								infiles = infiles.substring(0,
+										infiles.length() - 1);
+								String[] infs = infiles.split(";");
+								for (int i = 0; i <= ins.length - 1; i++) {
+									Element ti = et.addElement("infile");
+									ti.setText(ins[i]);
+									ti.addAttribute("url", infs[i]);
+								}
 							}
-							
+
 							et.addAttribute("out", out);
 							et.addAttribute("outfiles", outs.replace("\n", " "));
 							et.addAttribute("opts", opts);
