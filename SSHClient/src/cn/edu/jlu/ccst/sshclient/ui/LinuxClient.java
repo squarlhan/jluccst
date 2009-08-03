@@ -79,6 +79,11 @@ import org.dom4j.io.*;
  */
 public class LinuxClient extends javax.swing.JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	/** Creates new form LinuxClient */
 	private  LinuxClient() {
 		flag=1;
