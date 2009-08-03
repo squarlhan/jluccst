@@ -22,5 +22,4 @@ public interface BaseAction {
 
 	boolean isDone();
 	void start(JTextArea jtext);
-
 }
