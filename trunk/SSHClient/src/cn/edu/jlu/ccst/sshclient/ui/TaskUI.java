@@ -60,7 +60,7 @@ public class TaskUI extends javax.swing.JDialog {
 	// -------------------------------------------------------------------//
 
 	public List<JTextField> maketextfields(String fin, String infiles){
-		List<JTextField> results = new ArrayList();
+		List<JTextField> results = new ArrayList<JTextField>();
 		fin = fin.trim();
 		if(fin.length()==0)return results;
 		fin = fin.substring(0, fin.length()-1);
