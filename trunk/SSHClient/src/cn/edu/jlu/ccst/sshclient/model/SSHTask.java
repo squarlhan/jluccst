@@ -339,7 +339,7 @@ public class SSHTask extends BaseClass implements BaseAction, BaseOperation {
 	}
 
 	@Override
-	public boolean isdone() {
+	public boolean isDone() {
 		// TODO Auto-generated method stub
 		return false;
 	}
