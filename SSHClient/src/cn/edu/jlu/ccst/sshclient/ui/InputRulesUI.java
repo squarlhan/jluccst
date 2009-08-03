@@ -109,7 +109,7 @@ public class InputRulesUI extends javax.swing.JDialog {
 		int y = 30;
 		
 		for(int i=0;i<=optssum-1;i++){
-			JLabel newlabel = new JLabel("输入第"+(i+1)+"个参数的上界：");
+			JLabel newlabel = new JLabel("输入第"+(i+1)+"个参数的下界：");
 			newlabel.setBounds(x,y+i*40,140, 30);
 			labels.add(newlabel);
 			panel.add(newlabel);
@@ -119,7 +119,7 @@ public class InputRulesUI extends javax.swing.JDialog {
 			textFields.add(newtf);
 			panel.add(newtf);
 			
-			JLabel newlabel1 = new JLabel("下界：");
+			JLabel newlabel1 = new JLabel("上界：");
 			newlabel1.setBounds(x+200,y+i*40,50, 30);
 			labels1.add(newlabel1);
 			panel.add(newlabel1);
@@ -185,7 +185,9 @@ public class InputRulesUI extends javax.swing.JDialog {
 	 */
 	private void SubmitButtonMousePressed(java.awt.event.MouseEvent evt)
 	throws IOException {
-		
+		List<Float> downers = new ArrayList();
+		List<Float> upers = new ArrayList();
+		List<Integer> nums = new ArrayList();
 		opts = new ArrayList();
 		rules = new ArrayList();
 		for(int a = 0; a <= textFields.size()-1; a++){
@@ -193,18 +195,17 @@ public class InputRulesUI extends javax.swing.JDialog {
 			String t2 = textFields1.get(a).getText().trim();
 			String t3 = textFields2.get(a).getText().trim();
 			if(t1.isEmpty()){
-				JOptionPane.showMessageDialog(null, "请输入第"+(a+1)+"个参数的上界");
+				JOptionPane.showMessageDialog(null, "请输入第"+(a+1)+"个参数的下界");
 				return;
 			}
 			if(t2.isEmpty()){
-				JOptionPane.showMessageDialog(null, "请输入第"+(a+1)+"个参数的下界");
+				JOptionPane.showMessageDialog(null, "请输入第"+(a+1)+"个参数的上界");
 				return;
 			}
 			if(t3.isEmpty()){
 				JOptionPane.showMessageDialog(null, "请输入第"+(a+1)+"个参数的个数");
 				return;
 			}
-
 			if(!Pattern.matches("\\d+\\.{0,1}\\d*", t1)){
 				JOptionPane.showMessageDialog(null, "第"+(a+1)+"个参数上界必须是小数或整数");
 				return;
@@ -213,13 +214,29 @@ public class InputRulesUI extends javax.swing.JDialog {
 				JOptionPane.showMessageDialog(null, "第"+(a+1)+"个参数下界必须是小数或整数");
 				return;
 			}
-			if(!Pattern.matches("\\d+", t3)){
-				JOptionPane.showMessageDialog(null, "第"+(a+1)+"个参数个数是整数");
+			if(!Pattern.matches("[1-9]\\d*", t3)){			
+				JOptionPane.showMessageDialog(null, "第"+(a+1)+"个参数个数是大于0整数");
 				return;
 			}
-			rules.add(t1+";"+t2+";"+t3);
+			if(Float.parseFloat(t1)>Float.parseFloat(t2)){
+				JOptionPane.showMessageDialog(null, "第"+(a+1)+"个参数上界必须大于等于下界");
+				return;
+			}
 			
+			rules.add(t1+";"+t2+";"+t3);
+			downers.add(Float.parseFloat(t1));
+			upers.add(Float.parseFloat(t2));
+			nums.add(Integer.parseInt(t3));		
 		}
+		int sum = 1;
+		for(JTextField tf : textFields2){			
+			sum = sum * Integer.parseInt(tf.getText().trim());
+		}
+		if(sum!=tasksum){			
+			JOptionPane.showMessageDialog(null, "各参数个数乘积必须与任务个数相同");
+			return;
+		}
+		
 		//MulityTaskUI.rules = rules;
 		this.setVisible(false);
 		this.dispose();
@@ -247,7 +264,7 @@ public class InputRulesUI extends javax.swing.JDialog {
 		}
 		java.awt.EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				new InputRulesUI(15,1).setVisible(true);
+				new InputRulesUI(15,2).setVisible(true);
 			}
 		});
 	}
