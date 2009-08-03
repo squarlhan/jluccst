@@ -1897,8 +1897,8 @@ public class LinuxClient extends javax.swing.JFrame {
 	//-------------------------------------------------------------//
 	private void initComponents() {
 
-		jtl=new ArrayList();
-		jsl=new ArrayList();
+		jtl=new ArrayList<JTextArea>();
+		jsl=new ArrayList<JScrollPane>();
 		popMenuTA=new JPopupMenu();
 		copyTA=new JMenuItem("复制");
 		shutTA=new JMenuItem("关闭窗口");
