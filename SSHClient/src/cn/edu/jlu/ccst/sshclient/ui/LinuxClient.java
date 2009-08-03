@@ -1317,7 +1317,7 @@ public class LinuxClient extends javax.swing.JFrame {
 
 			//找到计算机中的所有组
 			List<SSHTask> liTask;
-			liTask = new ArrayList();
+			liTask = new ArrayList<SSHTask>();
 			for(int i = 0; i < selectComputer.getGps().size(); i++) {
 				SSHGroup temp = selectComputer.getGps().get(i);
 				for(int j = 0; j < temp.getSts().size(); j++) {
