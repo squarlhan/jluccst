@@ -13,8 +13,8 @@ package cn.edu.jlu.ccst.sshclient.ui;
 import ch.ethz.ssh2.Connection;
 import ch.ethz.ssh2.SFTPv3Client;
 import ch.ethz.ssh2.SFTPv3FileAttributes;
-import ch.ethz.ssh2.SFTPv3FileHandle;
-import ch.ethz.ssh2.Session;
+//import ch.ethz.ssh2.SFTPv3FileHandle;
+//import ch.ethz.ssh2.Session;
 import cn.edu.jlu.ccst.sshclient.model.BaseClass;
 import cn.edu.jlu.ccst.sshclient.model.SSHComputer;
 import cn.edu.jlu.ccst.sshclient.model.SSHGroup;
@@ -25,11 +25,11 @@ import cn.edu.jlu.ccst.sshclient.ui.TaskUI;
 import cn.edu.jlu.ccst.sshclient.util.GenerateGraphy;
 import cn.edu.jlu.ccst.sshclient.util.MidScr;
 import cn.edu.jlu.ccst.sshclient.util.SSHOpCommand;
-import cn.edu.jlu.ccst.sshclient.util.SSHOpCommand;
+//import cn.edu.jlu.ccst.sshclient.util.SSHOpCommand;
 import cn.edu.jlu.ccst.sshclient.util.StartExam;
 
 import java.awt.Font;
-import java.awt.Color;
+//import java.awt.Color;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
@@ -40,15 +40,15 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
+//import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.text.DateFormat;
+//import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
-import java.text.*;
-import javax.management.timer.Timer;
+//import java.text.*;
+//import javax.management.timer.Timer;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -57,12 +57,12 @@ import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.JTabbedPane;
-import javax.swing.JTable;
+//import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTree;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
-import javax.swing.JTree.DynamicUtilTreeNode;
+//import javax.swing.JTree.DynamicUtilTreeNode;
 import javax.swing.SwingUtilities;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreeNode;
@@ -71,7 +71,7 @@ import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
-import org.dom4j.DocumentHelper;
+//import org.dom4j.DocumentHelper;
 import org.dom4j.io.*;
 /**
  *
@@ -110,7 +110,7 @@ public class LinuxClient extends javax.swing.JFrame {
 	void  updata() {
 
 		this.cps = new ArrayList<SSHComputer>();
-		this.gps = new ArrayList();
+		this.gps = new ArrayList<SSHGroup>();
 		this.tks = new ArrayList();
 
 		//下面根据xml文件生成所需要的类
@@ -221,7 +221,7 @@ public class LinuxClient extends javax.swing.JFrame {
 							}
 						}
 
-						List<String> params = new ArrayList();
+						List<String> params = new ArrayList<String>();
 						List<Element> pelements = t.elements();
 						for(Element p : pelements){
 							params.add(p.elementTextTrim("param"));
