@@ -399,6 +399,7 @@ public class TaskUI extends javax.swing.JDialog {
 			}   
 		}
 		newTask1.setFout(tfout.getText());
+		if(!tfous.getText().trim().endsWith(";"))newTask1.setFouts(tfous.getText()+";");
 		newTask1.setFouts(tfous.getText());
 		newTask1.setOpts(topts.getText());
 		Date SeverTime = new Date();
@@ -674,9 +675,9 @@ public class TaskUI extends javax.swing.JDialog {
 									ti.setText(ins[i]);
 									ti.addAttribute("url", infs[i]);
 								}
-							}
-
+							}                           
 							et.addAttribute("out", out);
+							if(!outs.trim().endsWith(";"))outs = outs +";";
 							et.addAttribute("outfiles", outs.replace("\n", " "));
 							et.addAttribute("opts", opts);
 							if (starttime == null) {
