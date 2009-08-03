@@ -20,7 +20,7 @@ public interface BaseAction {
 	 */
 	void stop();
 
-	boolean isdone();
+	boolean isDone();
 	void start(JTextArea jtext);
 
 }
