@@ -188,7 +188,7 @@ public class SSHGroup extends BaseClass implements BaseAction, BaseOperation {
 		SAXReader reader = new SAXReader();
 		try
 		{
-			
+
 			Document doc = reader.read("Config.xml");
 			List   list=doc.selectNodes("/config/computer");
 			Iterator iter = list.iterator();
@@ -224,33 +224,33 @@ public class SSHGroup extends BaseClass implements BaseAction, BaseOperation {
 	public boolean update() {
 		// TODO Auto-generated method stub
 
-		 SSHGroup t=(SSHGroup)LinuxClient.getCur();
-		 GroupUI newGroup = new GroupUI(t.getName(),t.getDirname(),t.getMemo());
-		 newGroup.setModal(true);
-		 newGroup.setVisible(true);
+		SSHGroup t=(SSHGroup)LinuxClient.getCur();
+		GroupUI newGroup = new GroupUI(t.getName(),t.getDirname(),t.getMemo());
+		newGroup.setModal(true);
+		newGroup.setVisible(true);
 
 		return false;
 	}
 
 	//---------------------------------------------//创建目录
-    private  void removedirs(Connection conn) throws IOException {
+	private  void removedirs(Connection conn) throws IOException {
 
-    	//Connection conn = getOpenedConnection(TC);
-	    
-	    Session sess = conn.openSession();
-	    String finalcmd = this.dirname.substring(1);
-	    sess.execCommand("./squarlhan/CShell rm -rf " + finalcmd.trim());
+		//Connection conn = getOpenedConnection(TC);
 
-	    String out;
+		Session sess = conn.openSession();
+		String finalcmd = this.dirname.substring(1);
+		sess.execCommand("./squarlhan/CShell rm -rf " + finalcmd.trim());
+
+		String out;
 		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(sess.getStdout()));    
-	    while((out=bufferedReader.readLine())!=null) {
+		while((out=bufferedReader.readLine())!=null) {
 			if(out.equals("EOP")){
-				    
-			    
+
+
 			}
 		}
-	    sess.close();
-	    conn.close();
+		sess.close();
+		conn.close();
 
 	} 
 	//--------------------------------------------------------//
