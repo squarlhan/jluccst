@@ -79,7 +79,7 @@ public class MulityTaskUI extends javax.swing.JDialog {
 					return;
 				}
 				
-				InputRulesUI newInputRulesUI = new InputRulesUI(Integer.parseInt(tTextField0.getText()), optnum.size());
+				InputRulesUI newInputRulesUI = new InputRulesUI(Integer.parseInt(tTextField0.getText()), optnum.size(), rules);
 				newInputRulesUI.setModal(true);
 				newInputRulesUI.setVisible(true);
 				
