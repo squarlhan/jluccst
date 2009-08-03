@@ -104,7 +104,7 @@ public class LinuxClient extends javax.swing.JFrame {
 	//updata the jtree
 	void  updata() {
 
-		this.cps = new ArrayList();
+		this.cps = new ArrayList<SSHComputer>();
 		this.gps = new ArrayList();
 		this.tks = new ArrayList();
 
