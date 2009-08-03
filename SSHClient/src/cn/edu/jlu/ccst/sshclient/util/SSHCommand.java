@@ -22,17 +22,23 @@ import ch.ethz.ssh2.SCPClient;
 import ch.ethz.ssh2.SFTPv3Client;
 import ch.ethz.ssh2.Session;
 import java.lang.Thread;
-import java.util.List;
+//import java.util.List;
 
 import javax.swing.JFrame;
-import javax.swing.JTextArea;
-import javax.management.timer.Timer;
+//import javax.swing.JTextArea;
+//import javax.management.timer.Timer;
 
 /**
  * @author Woden
 >>>>>>> .r75
  */
 public class SSHCommand extends JFrame {
+
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 
 
 	public SSHCommand() {
