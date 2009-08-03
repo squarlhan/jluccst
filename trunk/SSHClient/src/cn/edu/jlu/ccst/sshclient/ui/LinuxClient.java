@@ -111,7 +111,7 @@ public class LinuxClient extends javax.swing.JFrame {
 
 		this.cps = new ArrayList<SSHComputer>();
 		this.gps = new ArrayList<SSHGroup>();
-		this.tks = new ArrayList();
+		this.tks = new ArrayList<SSHTask>();
 
 		//下面根据xml文件生成所需要的类
 		SAXReader reader = new SAXReader();
@@ -131,7 +131,7 @@ public class LinuxClient extends javax.swing.JFrame {
 				cp.setHost(c.valueOf("@host"));
 				cp.setUsername(c.valueOf("@user"));
 				cp.setPassword(c.valueOf("@pswd"));
-				cp.setGps(new ArrayList());
+				cp.setGps(new ArrayList<SSHGroup>());
 				this.cps.add(cp);
 				List<Element> gelements = c.elements();
 				for (Element g : gelements) {
@@ -143,7 +143,7 @@ public class LinuxClient extends javax.swing.JFrame {
 					gp.setMemo(g.valueOf("@memo"));
 					gp.setCreatdate(timeFormat.parse(g.valueOf("@creatdate")));
 					gp.setCp(cp);
-					gp.setSts(new ArrayList());
+					gp.setSts(new ArrayList<SSHTask>());
 					cp.getGps().add(gp);
 					this.gps.add(gp);                
 					List<Element> telements = g.elements();

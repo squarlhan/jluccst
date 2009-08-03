@@ -529,9 +529,9 @@ public class GenerateGraphy {
 				}
 			}
 		});
-		pre=preview;
+//		pre=preview;
 	}
-	private static ChartFrame pre=null;
+//	private static ChartFrame pre=null;
 
 
 	public static void main(String[] args) throws IOException{
