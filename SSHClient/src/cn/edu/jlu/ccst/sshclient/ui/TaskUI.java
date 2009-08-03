@@ -128,6 +128,7 @@ public class TaskUI extends javax.swing.JDialog {
 	 */
 	private void initComponent() {
 
+		this.setResizable(false);
 		this.setLocationRelativeTo(null);
 		Toolkit tk = Toolkit.getDefaultToolkit();
 		Image img = tk.getImage(this.getClass().getResource(

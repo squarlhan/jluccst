@@ -68,7 +68,8 @@ public class GroupUI extends javax.swing.JDialog  {
 	 * 初始画图函数
 	 */
 	private void initComponent(){
-
+		
+		this.setResizable(false);
 		this.setLocationRelativeTo(null);
 		Toolkit tk = Toolkit.getDefaultToolkit();
 		Image img = tk.getImage(this.getClass().getResource("/cn/edu/jlu/ccst/sshclient/ui/resource/g.png"));

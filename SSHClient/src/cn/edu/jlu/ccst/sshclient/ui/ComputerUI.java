@@ -78,6 +78,7 @@ public class ComputerUI extends javax.swing.JDialog
 	//----------------------------------------------------------------------------//
 	private void initComponents() {
 
+		this.setResizable(false);
 		Toolkit tk = Toolkit.getDefaultToolkit();
 		Image img = tk.getImage(this.getClass().getResource("/cn/edu/jlu/ccst/sshclient/ui/resource/t.png"));
 		setIconImage(img);
