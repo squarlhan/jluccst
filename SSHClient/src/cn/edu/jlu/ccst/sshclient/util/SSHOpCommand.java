@@ -36,19 +36,19 @@ public class SSHOpCommand implements Runnable {
 	private String Cmd;
 	private String Id;
 	private String Finout;
-//	private String Fin;
+	//	private String Fin;
 	private int opType;
 	private JTextArea  jTextArea1;
 	private static long endtime;
 	private  boolean flag = false; 
-//	private  boolean groupflag = false;
+	//	private  boolean groupflag = false;
 	private JLabel  conl;
 	private String ownPid;
-//	private  String rs;	
+	//	private  String rs;	
 	private List<SSHTask> runtasklist;
 
 
-	
+
 	/**
 	 * 测试连接用这个构造方法
 	 */
@@ -101,43 +101,43 @@ public class SSHOpCommand implements Runnable {
 		Cmd = cmd;
 		Id = id;
 		Finout = finout;
-//		Fin=fin;
+		//		Fin=fin;
 		jTextArea1 = jText;
 		opType = taskInfo;
 		runtasklist = null;
 	}
-//<<<<<<< .mine
-//   /**
-//    * 串行运行组内的所有任务用这个构造方法
-//    */
-//    public SSHOpCommand(String host, String name, String psw,  List<SSHTask> runtasklist,
-//    		JTextArea jTextArea1, int opType) {
-//    	super();
-//    	Host = host;
-//    	Name = name;
-//    	Psw = psw;
-//    	this.opType = opType;
-//    	this.jTextArea1 = jTextArea1;
-//    	this.runtasklist = runtasklist;
-//    }
-//    
-//   /**
-//    * 停止组内串行运行的所有任务用这个构造方法 
-//    */
-//    public SSHOpCommand(String host, String name, String psw,  List<SSHTask> runtasklist,
-//    		 int opType) {
-//    	super();
-//    	Host = host;
-//    	Name = name;
-//    	Psw = psw;
-//    	this.opType = opType;
-//    	this.runtasklist = runtasklist;
-//    }
-//    
+	//<<<<<<< .mine
+	//   /**
+	//    * 串行运行组内的所有任务用这个构造方法
+	//    */
+	//    public SSHOpCommand(String host, String name, String psw,  List<SSHTask> runtasklist,
+	//    		JTextArea jTextArea1, int opType) {
+	//    	super();
+	//    	Host = host;
+	//    	Name = name;
+	//    	Psw = psw;
+	//    	this.opType = opType;
+	//    	this.jTextArea1 = jTextArea1;
+	//    	this.runtasklist = runtasklist;
+	//    }
+	//    
+	//   /**
+	//    * 停止组内串行运行的所有任务用这个构造方法 
+	//    */
+	//    public SSHOpCommand(String host, String name, String psw,  List<SSHTask> runtasklist,
+	//    		 int opType) {
+	//    	super();
+	//    	Host = host;
+	//    	Name = name;
+	//    	Psw = psw;
+	//    	this.opType = opType;
+	//    	this.runtasklist = runtasklist;
+	//    }
+	//    
 
-//    public void init() {
-//    }
-//=======
+	//    public void init() {
+	//    }
+	//=======
 	/**
 	 * 串行运行组内的所有任务用这个构造方法
 	 */
@@ -164,22 +164,22 @@ public class SSHOpCommand implements Runnable {
 		this.opType = opType;
 		this.runtasklist = runtasklist;
 	}
-    /**
-     * 下载输出文件用的构造方法
-     * @param host
-     * @param name
-     * @param psw
-     */
-    public SSHOpCommand(String host, String name, String psw){
-    	super();
-    	Host = host;
-    	Name = name;
-    	Psw = psw;
-    }
-	
+	/**
+	 * 下载输出文件用的构造方法
+	 * @param host
+	 * @param name
+	 * @param psw
+	 */
+	public SSHOpCommand(String host, String name, String psw){
+		super();
+		Host = host;
+		Name = name;
+		Psw = psw;
+	}
+
 	public void init() {
 	}
-//>>>>>>> .r185
+	//>>>>>>> .r185
 	public void start() {
 	}
 	public void run(){
@@ -313,45 +313,45 @@ public class SSHOpCommand implements Runnable {
 			}
 		}
 
-//<<<<<<< .mine
-//    	       
-//    	       GenerateGraphy.GetObj(LinuxClient.GetObj().findSelectTask(Id).getName()+"_"+Id,filename,4);
-//    	       
-//		   }
-//		sess.close();
-//		conn.close();
-//		conn = getOpenedConnection();
-//		SCPClient client = new SCPClient(conn);
-//		//client.get("out1.txt", "E:");
-////		client.put("E:/Friend.avi", "./");
-////		SSHCommand
-////		.scpPut("10.60.58.194", "wuchunguo", "wucg",
-////				"E:/out1.txt", "f.txt",
-////				"./");
-//    	}
-//    	catch(Exception ie) {
-//    		ie.printStackTrace();
-//    	}
-//    	LinuxClient tmpLinx = LinuxClient.GetObj();
-//    	tmpLinx.setSelTaskStatus(Id,0);         	
-//    	if(flag == true) {
-//    		flag = false;
-//    		LinuxClient.GetObj().setTaskRunSucc(Id,flag);      
-//        	temp.EditTaskRunSuccXML(Id,flag);//向config.xml中写入任务运行状态
-//    	}
-//    	
-//    	//判断并行结束
-//    	if(runtasklist == null){
-//    		//System.out.println("并行jieshu");
-//    		if(LinuxClient.GetObj().getAllRunSucc(Id) == false) {
-//        		LinuxClient.GetObj().setSinglerun(1);
-//        	}
-//    	}
-//    		
-//}
-//=======
+		//<<<<<<< .mine
+		//    	       
+		//    	       GenerateGraphy.GetObj(LinuxClient.GetObj().findSelectTask(Id).getName()+"_"+Id,filename,4);
+		//    	       
+		//		   }
+		//		sess.close();
+		//		conn.close();
+		//		conn = getOpenedConnection();
+		//		SCPClient client = new SCPClient(conn);
+		//		//client.get("out1.txt", "E:");
+		////		client.put("E:/Friend.avi", "./");
+		////		SSHCommand
+		////		.scpPut("10.60.58.194", "wuchunguo", "wucg",
+		////				"E:/out1.txt", "f.txt",
+		////				"./");
+		//    	}
+		//    	catch(Exception ie) {
+		//    		ie.printStackTrace();
+		//    	}
+		//    	LinuxClient tmpLinx = LinuxClient.GetObj();
+		//    	tmpLinx.setSelTaskStatus(Id,0);         	
+		//    	if(flag == true) {
+		//    		flag = false;
+		//    		LinuxClient.GetObj().setTaskRunSucc(Id,flag);      
+		//        	temp.EditTaskRunSuccXML(Id,flag);//向config.xml中写入任务运行状态
+		//    	}
+		//    	
+		//    	//判断并行结束
+		//    	if(runtasklist == null){
+		//    		//System.out.println("并行jieshu");
+		//    		if(LinuxClient.GetObj().getAllRunSucc(Id) == false) {
+		//        		LinuxClient.GetObj().setSinglerun(1);
+		//        	}
+		//    	}
+		//    		
+		//}
+		//=======
 	}
-//>>>>>>> .r185
+	//>>>>>>> .r185
 
 	/**
 	 * 重载执行函数，停止启动任务

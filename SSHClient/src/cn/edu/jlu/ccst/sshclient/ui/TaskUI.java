@@ -58,7 +58,7 @@ public class TaskUI extends javax.swing.JDialog {
 	}
 
 	// -------------------------------------------------------------------//
-	
+
 	public List<JTextField> maketextfields(String fin, String infiles){
 		List<JTextField> results = new ArrayList();
 		fin = fin.trim();
@@ -76,7 +76,7 @@ public class TaskUI extends javax.swing.JDialog {
 		}
 		return results;
 	}
-	
+
 	public TaskUI(String name, String dirname, String cmd, String in,
 			String out, String memo, String fouts, String opts, String infiles) {
 		this.setTitle("修改任务");
@@ -105,7 +105,7 @@ public class TaskUI extends javax.swing.JDialog {
 		tfous.setText(fouts.replace("; ", ";\n"));
 		topts.setText(opts);
 		older = dirname;
-		
+
 		oldertask = new SSHTask();
 		oldertask.setName(name);
 		oldertask.setCmd(cmd);
@@ -127,7 +127,7 @@ public class TaskUI extends javax.swing.JDialog {
 		this.setLocationRelativeTo(null);
 		Toolkit tk = Toolkit.getDefaultToolkit();
 		Image img = tk.getImage(this.getClass().getResource(
-				"/cn/edu/jlu/ccst/sshclient/ui/resource/t.png"));
+		"/cn/edu/jlu/ccst/sshclient/ui/resource/t.png"));
 		setIconImage(img);
 		this.setLayout(null);
 		this.setSize(400, 600);
@@ -196,9 +196,9 @@ public class TaskUI extends javax.swing.JDialog {
 		GridLayout gl = new GridLayout();
 		gl.setColumns(1);
 		gl.setRows(0);
-		
+
 		tfin.setLayout(gl);
-		
+
 		tfinAreaPane = new JScrollPane(
 				JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
 				JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
@@ -225,8 +225,8 @@ public class TaskUI extends javax.swing.JDialog {
 					tfin.repaint();
 					tfin.revalidate();
 					tfin.validate();
-//					tfin.append(filePath + ";\n");
-//					infiles = infiles+chooser.getSelectedFile().getName()+"; ";
+					//					tfin.append(filePath + ";\n");
+					//					infiles = infiles+chooser.getSelectedFile().getName()+"; ";
 				}
 
 			}
@@ -356,7 +356,7 @@ public class TaskUI extends javax.swing.JDialog {
 	 * @throws IOException
 	 */
 	private void SubmitButtonMousePressed(java.awt.event.MouseEvent evt)
-			throws IOException {
+	throws IOException {
 		if (tTextField1.getText().equals("")) {
 			JOptionPane.showMessageDialog(null, "请输入新建任务的名字");
 			return;
@@ -393,17 +393,17 @@ public class TaskUI extends javax.swing.JDialog {
 		for(Component cc: tfin.getComponents()){
 			if(cc instanceof JTextField){
 				if(((JTextField)cc).getText().trim().length()>0){
-				    newTask1.setFin(newTask1.getFin()+((JTextField)cc).getText().trim()+"; ");
-				    newTask1.setInfiles(newTask1.getInfiles()+((JTextField)cc).getToolTipText().trim()+"; ");
+					newTask1.setFin(newTask1.getFin()+((JTextField)cc).getText().trim()+"; ");
+					newTask1.setInfiles(newTask1.getInfiles()+((JTextField)cc).getToolTipText().trim()+"; ");
 				}
-            }   
+			}   
 		}
 		newTask1.setFout(tfout.getText());
 		newTask1.setFouts(tfous.getText());
 		newTask1.setOpts(topts.getText());
 		Date SeverTime = new Date();
 		SimpleDateFormat Severtimeformat = new SimpleDateFormat(
-				"yyyyMMddHHmmss");
+		"yyyyMMddHHmmss");
 		newTask1.setCreatdate(SeverTime);// 获得创建成功时的时间
 		newTask1.setId("T" + Severtimeformat.format(SeverTime));
 		newTask1.setType((byte) 2);
@@ -456,7 +456,7 @@ public class TaskUI extends javax.swing.JDialog {
 							t.addAttribute("dirname", newTask1.getDirname());
 							SimpleDateFormat timeFormat;
 							timeFormat = new SimpleDateFormat(
-									"yyyy-MM-dd HH:mm:ss");
+							"yyyy-MM-dd HH:mm:ss");
 							t.addAttribute("creatdate", timeFormat
 									.format(newTask1.getCreatdate()));
 							t.addAttribute("cmd", newTask1.getCmd());
@@ -473,9 +473,9 @@ public class TaskUI extends javax.swing.JDialog {
 										ti.setText(((JTextField) cc).getText().trim());
 										ti.addAttribute("url",((JTextField) cc).getToolTipText().trim());
 									}
-					            }   
+								}   
 							}						
-							
+
 							flag = true;
 							break;
 						}
@@ -544,7 +544,7 @@ public class TaskUI extends javax.swing.JDialog {
 
 	// ------------------------------------------------------------------------//
 	private void SubmitButtonMousePressedE(java.awt.event.MouseEvent evt)
-			throws IOException {
+	throws IOException {
 		if (tTextField1.getText().equals("")) {
 			JOptionPane.showMessageDialog(null, "请输入新建任务的名字");
 			return;
@@ -577,7 +577,7 @@ public class TaskUI extends javax.swing.JDialog {
 		if (!older.equals(dirTextField.getText())) {
 			Ltest = new JLabel();
 			SSHComputer selectComputer = LinuxClient.GetObj()
-					.TfindselectComputer(LinuxClient.GetObj().getCur().getId());
+			.TfindselectComputer(LinuxClient.GetObj().getCur().getId());
 			try {
 				this.createdirs(this.getOpenedConnection(selectComputer),
 						dirTextField.getText());
@@ -595,10 +595,10 @@ public class TaskUI extends javax.swing.JDialog {
 			for(Component cc: tfin.getComponents()){
 				if(cc instanceof JTextField){  
 					if(((JTextField)cc).getText().length()>0){
-					    mins = mins +((JTextField)cc).getText()+"; ";
-					    minfs = minfs +((JTextField)cc).getToolTipText()+"; ";
+						mins = mins +((JTextField)cc).getText()+"; ";
+						minfs = minfs +((JTextField)cc).getToolTipText()+"; ";
 					}
-	            }   
+				}   
 			}
 			this.EditTaskFromXML(LinuxClient.getCur().getId(), tTextField1
 					.getText(), dirTextField.getText(), tTextArea2.getText(),
@@ -628,7 +628,7 @@ public class TaskUI extends javax.swing.JDialog {
 	// 根据id修改某个任务组,修改任务的开始执行时间
 	public void EditTaskFromXML(String id, String n, String dn, String memo,
 			String cmd, String in, String out, Date starttime, long stimelong, String outs, String opts, String infiles)
-			throws IOException {
+	throws IOException {
 		SAXReader reader = new SAXReader();
 		try {
 			// String filePath = this.getClass().getResource("/").getPath() +
@@ -656,11 +656,11 @@ public class TaskUI extends javax.swing.JDialog {
 							et.addAttribute("name", n);
 							et.addAttribute("dirname", dn);
 							et.addAttribute("cmd", cmd);
-							
+
 							for(Element cet:(List<Element>)(et.elements())){
 								et.remove(cet);
 							}
-							
+
 							in = in.trim();
 							if(in.length()>0){
 								in = in.substring(0, in.length() - 1);

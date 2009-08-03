@@ -57,7 +57,7 @@ public class GroupUI extends javax.swing.JDialog  {
 		dirTextField.setText(dirname);
 		memoJArea.setText(memo);
 		older = dirname;
-		
+
 		sgodler = new SSHGroup();
 		sgodler.setName(name);
 		sgodler.setDirname(dirname);
@@ -240,7 +240,7 @@ public class GroupUI extends javax.swing.JDialog  {
 					cp.setHost(c.valueOf("@host"));
 					cp.setUsername(c.valueOf("@user"));
 					cp.setPassword(c.valueOf("@pswd"));
-					cp.setGps(new ArrayList());
+					cp.setGps(new ArrayList<SSHGroup>());
 					newGroup1.setCp(cp);//指示出该组的父节点
 					/****************************************************/
 					Element g = c.addElement("group");
@@ -348,21 +348,21 @@ public class GroupUI extends javax.swing.JDialog  {
 	private  void createdirs(Connection conn,String dirs,String type) throws IOException {
 
 
-        	//Connection conn = getOpenedConnection(TC);
-		    Ltest.setText("正在设置目录...");
-		    Session sess = conn.openSession();
-		    String finalcmd = dirs.substring(1);
-//		    while(finalcmd.endsWith("/")){
-//		    	finalcmd = finalcmd.substring(0, finalcmd.length()-2);
-//		    }
-//		    if(type.equals("m")){
-//		    	String orin = this.older.substring(1);
-//		    	int i = finalcmd.lastIndexOf("/");
-//		    	String newdir = "";
-//		    	if(i>0)newdir = " mkdir -p "+finalcmd.substring(0, i)+" ;";		    	
-//		    	sess.execCommand("./squarlhan/CShell "+ newdir + " mv " + orin + " " + finalcmd.trim());
-//		    }else 
-		    sess.execCommand("./squarlhan/CShell mkdir -p " + finalcmd.trim());
+		//Connection conn = getOpenedConnection(TC);
+		Ltest.setText("正在设置目录...");
+		Session sess = conn.openSession();
+		String finalcmd = dirs.substring(1);
+		//		    while(finalcmd.endsWith("/")){
+		//		    	finalcmd = finalcmd.substring(0, finalcmd.length()-2);
+		//		    }
+		//		    if(type.equals("m")){
+		//		    	String orin = this.older.substring(1);
+		//		    	int i = finalcmd.lastIndexOf("/");
+		//		    	String newdir = "";
+		//		    	if(i>0)newdir = " mkdir -p "+finalcmd.substring(0, i)+" ;";		    	
+		//		    	sess.execCommand("./squarlhan/CShell "+ newdir + " mv " + orin + " " + finalcmd.trim());
+		//		    }else 
+		sess.execCommand("./squarlhan/CShell mkdir -p " + finalcmd.trim());
 
 		String out;
 		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(sess.getStdout()));    
