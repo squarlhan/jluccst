@@ -25,6 +25,10 @@ import org.dom4j.io.SAXReader;
 import org.dom4j.io.XMLWriter;
 
 public class TaskUI extends javax.swing.JDialog {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JLabel Ltest, tLabel1, tLabel2, tLabel3, dirLabel;
 	// private JLabel memoLabel;
 	private JTextField tTextField1, tTextField3, dirTextField;
@@ -150,7 +154,7 @@ public class TaskUI extends javax.swing.JDialog {
 		SSHGroup selectGroup = new SSHGroup();
 		Iterator<SSHGroup> it;
 		for (it = LinuxClient.gps.iterator(); it.hasNext();) {
-			selectGroup = (SSHGroup) it.next();
+			selectGroup = it.next();
 			if (selectGroup.getId().equals(LinuxClient.cur.getId())) {
 				break;
 			}
@@ -377,7 +381,7 @@ public class TaskUI extends javax.swing.JDialog {
 			JOptionPane.showMessageDialog(null, "请选择输出目录");
 			return;
 		}
-		LinuxClient tempClient = LinuxClient.GetObj();
+//		LinuxClient tempClient = LinuxClient.GetObj();
 		SSHGroup selectGroup = new SSHGroup();
 		BaseClass curType = new BaseClass();
 		curType = LinuxClient.cur;
@@ -411,7 +415,7 @@ public class TaskUI extends javax.swing.JDialog {
 		// 找到选中的组
 		Iterator<SSHGroup> it;
 		for (it = LinuxClient.gps.iterator(); it.hasNext();) {
-			selectGroup = (SSHGroup) it.next();
+			selectGroup = it.next();
 			if (selectGroup.getId().equals(selectGroupId)) {
 				break;
 			}
@@ -577,8 +581,9 @@ public class TaskUI extends javax.swing.JDialog {
 		// 在服务器上创建工作目录
 		if (!older.equals(dirTextField.getText())) {
 			Ltest = new JLabel();
+			LinuxClient.GetObj();
 			SSHComputer selectComputer = LinuxClient.GetObj()
-			.TfindselectComputer(LinuxClient.GetObj().getCur().getId());
+			.TfindselectComputer(LinuxClient.getCur().getId());
 			try {
 				this.createdirs(this.getOpenedConnection(selectComputer),
 						dirTextField.getText());

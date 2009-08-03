@@ -3,16 +3,16 @@
  */
 package cn.edu.jlu.ccst.sshclient.util;
 
-import cn.edu.jlu.ccst.sshclient.ui.*;
-
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+//import cn.edu.jlu.ccst.sshclient.ui.*;
+//
+//import java.awt.event.ActionEvent;
+//import java.awt.event.ActionListener;
 import java.io.BufferedReader;
-import java.io.FileOutputStream;
+//import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
-import java.util.ArrayList;
+//import java.util.ArrayList;
 import java.util.List;
 import java.io.OutputStream;
 
