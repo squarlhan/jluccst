@@ -35,6 +35,7 @@ public class InputRulesUI extends javax.swing.JDialog {
 	private List<JTextField> textFields2;
 	private int tasksum;
 	private int optssum;
+	private String template;
 	private JButton resetButton, submitButton;
 	private JScrollPane scrollPane;
 	private JPanel panel, panel1;
@@ -42,17 +43,28 @@ public class InputRulesUI extends javax.swing.JDialog {
 	private List<String> rules;
 
 
-	public InputRulesUI(int tasksum, int optssum, List<String> rules) {
+	public InputRulesUI(int tasksum, String template, List<String> rules) {
 		this.setTitle("输入参数规则");
 		this.tasksum = tasksum;
-		this.optssum = optssum;
+		
 		this.rules = rules;
+
+		this.template = template;
 		labels = new ArrayList<JLabel>();
 		textFields = new ArrayList<JTextField>();
 		labels1 = new ArrayList<JLabel>();
 		textFields1 = new ArrayList<JTextField>();
 		labels2 = new ArrayList<JLabel>();
 		textFields2 = new ArrayList<JTextField>();
+		String regEx="\\([1-9]\\d*\\)"; 
+		List<String> optnum = new ArrayList();
+		Pattern p=Pattern.compile(regEx);
+		Matcher m=p.matcher(template.trim()); 
+		while ( m.find()) {
+			//System.out.println(m.group());
+			optnum.add(m.group());
+	    }
+		this.optssum = optnum.size();
 		initComponent();
 		for(int i = 0; i<= rules.size()-1; i++){
 			String[] rulearray = rules.get(i).split(";");
@@ -315,9 +327,10 @@ public class InputRulesUI extends javax.swing.JDialog {
      }
 	
 	private void saveresults(Object[] array){
-        String result="";
+        String result=template;
         for (int i = 0; i < array.length; i++) {
-        	result = result + array[i].toString()+";";
+        	result = result.replace("("+(i+1)+")", array[i].toString());
+        	//result = result + array[i].toString()+";";
         }
         opts.add(result);
      }
@@ -407,7 +420,8 @@ public class InputRulesUI extends javax.swing.JDialog {
 		}
 		java.awt.EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				new InputRulesUI(15,2,null).setVisible(true);
+				List<String> tt = new ArrayList();
+				new InputRulesUI(15,"(1);(2);l",tt).setVisible(true);
 			}
 		});
 	}

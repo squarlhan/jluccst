@@ -38,7 +38,7 @@ public class MulityTaskUI extends javax.swing.JDialog {
 	private JButton resetButton, submitButton, inputoptsButton, inputrulesButton;
 	private JLabel lfin, lfout, loutnames, lopts;
 	private JTextField tfout, topts;
-	private boolean flag = false;
+	private boolean flag = true;
 	private String gdir;
 	private JPanel tfin;
 	public static List<String> opts; 
@@ -54,7 +54,7 @@ public class MulityTaskUI extends javax.swing.JDialog {
 
 		inputrulesButton.addMouseListener(new java.awt.event.MouseAdapter() {
 			public void mousePressed(java.awt.event.MouseEvent evt) {
-				String regEx="\\(\\d+\\)"; 
+				String regEx="\\([1-9]\\d*\\)"; 
 				List<String> optnum = new ArrayList();
 				Pattern p=Pattern.compile(regEx);
 				Matcher m=p.matcher(topts.getText().trim()); 
@@ -66,8 +66,8 @@ public class MulityTaskUI extends javax.swing.JDialog {
 					JOptionPane.showMessageDialog(null, "请输入任务个数");
 					return;
 				}
-				if(!Pattern.matches("\\d+",tTextField0.getText())){
-					JOptionPane.showMessageDialog(null, "任务个数只能是整数");
+				if(!Pattern.matches("[1-9]\\d*",tTextField0.getText())){
+					JOptionPane.showMessageDialog(null, "任务个数只能是正整数");
 					return;
 				}
 				if(tTextField0.getText().trim().startsWith("0")){
@@ -82,8 +82,12 @@ public class MulityTaskUI extends javax.swing.JDialog {
 					JOptionPane.showMessageDialog(null, "请输入可变参数");
 					return;
 				}
+				if(topts.getText().indexOf("(0)")!=-1){
+					JOptionPane.showMessageDialog(null, "可变参数从1开始替换");
+					return;
+				}
 				
-				InputRulesUI newInputRulesUI = new InputRulesUI(Integer.parseInt(tTextField0.getText()), optnum.size(), rules);
+				InputRulesUI newInputRulesUI = new InputRulesUI(Integer.parseInt(tTextField0.getText()), topts.getText().trim(), rules);
 				newInputRulesUI.setModal(true);
 				newInputRulesUI.setVisible(true);
 				
@@ -95,8 +99,8 @@ public class MulityTaskUI extends javax.swing.JDialog {
 					JOptionPane.showMessageDialog(null, "请输入任务个数");
 					return;
 				}
-				if(!Pattern.matches("\\d+",tTextField0.getText())){
-					JOptionPane.showMessageDialog(null, "任务个数只能是整数");
+				if(!Pattern.matches("[1-9]\\d*",tTextField0.getText())){
+					JOptionPane.showMessageDialog(null, "任务个数只能是正整数");
 					return;
 				}
 				if(tTextField0.getText().trim().startsWith("0")){
@@ -181,7 +185,7 @@ public class MulityTaskUI extends javax.swing.JDialog {
 		this.add(dirLabel);
 		dirTextField = new JTextField();
 		dirTextField.setBounds(150, 110, 150, 30);
-		/*SSHGroup selectGroup = new SSHGroup();
+		SSHGroup selectGroup = new SSHGroup();
 		Iterator<SSHGroup> it;
 		for (it = LinuxClient.gps.iterator(); it.hasNext();) {
 			selectGroup = (SSHGroup) it.next();
@@ -190,7 +194,7 @@ public class MulityTaskUI extends javax.swing.JDialog {
 			}
 		}
 		this.gdir = selectGroup.getDirname();
-		dirTextField.setText(gdir);*/
+		dirTextField.setText(gdir);
 		this.add(dirTextField);
 
 		tLabel3 = new JLabel("任务命令:");
@@ -375,6 +379,14 @@ public class MulityTaskUI extends javax.swing.JDialog {
 	 */
 	private void SubmitButtonMousePressed(java.awt.event.MouseEvent evt)
 	throws IOException {
+		if(tTextField0.getText().isEmpty()){
+			JOptionPane.showMessageDialog(null, "请输入任务个数");
+			return;
+		}
+		if(!Pattern.matches("[1-9]\\d*",tTextField0.getText())){
+			JOptionPane.showMessageDialog(null, "任务个数只能是正整数");
+			return;
+		}
 		if (tTextField1.getText().equals("")) {
 			JOptionPane.showMessageDialog(null, "请输入新建任务的名字");
 			return;
@@ -401,114 +413,131 @@ public class MulityTaskUI extends javax.swing.JDialog {
 		curType = LinuxClient.cur;
 		String selectGroupId = curType.getId();
 		String selectComputerId;// 选中任务所在组的计算机ID
-
-		SSHTask newTask1 = new SSHTask();
-		newTask1.setName(tTextField1.getText());
-		newTask1.setDirname(dirTextField.getText());
-		newTask1.setCmd(tTextField3.getText());
-		newTask1.setMemo(tTextArea2.getText());
-		//newTask1.setFin(tfin.getText());
-		for(Component cc: tfin.getComponents()){
-			if(cc instanceof JTextField){
-				if(((JTextField)cc).getText().trim().length()>0){
-					newTask1.setFin(newTask1.getFin()+((JTextField)cc).getText().trim()+"; ");
-					newTask1.setInfiles(newTask1.getInfiles()+((JTextField)cc).getToolTipText().trim()+"; ");
-				}
-			}   
-		}
-		newTask1.setFout(tfout.getText());
-		if(!tfous.getText().trim().endsWith(";"))newTask1.setFouts(tfous.getText()+";");
-		newTask1.setFouts(tfous.getText());
-		newTask1.setOpts(topts.getText());
-		Date SeverTime = new Date();
-		SimpleDateFormat Severtimeformat = new SimpleDateFormat(
-		"yyyyMMddHHmmss");
-		newTask1.setCreatdate(SeverTime);// 获得创建成功时的时间
-		newTask1.setId("T" + Severtimeformat.format(SeverTime));
-		newTask1.setType((byte) 2);
-		// 找到选中的组
-		Iterator<SSHGroup> it;
-		for (it = LinuxClient.gps.iterator(); it.hasNext();) {
-			selectGroup = (SSHGroup) it.next();
-			if (selectGroup.getId().equals(selectGroupId)) {
-				break;
-			}
-		}
-		newTask1.setGp(selectGroup);
-		selectComputerId = selectGroup.getCp().getId();// 找到计算机的ID
-
-		// 在服务器上创建工作目录
-		Ltest = new JLabel();
-		try {
-			this.createdirs(this.getOpenedConnection(selectGroup.getCp()),
-					dirTextField.getText());
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		add(Ltest);
-		Ltest.setBounds(120, 550, 90, 30);
-
-		// 将信息保存到config.xml中
-		SAXReader reader = new SAXReader();
-		try {
-			Document doc = reader.read("Config.xml");
-			OutputFormat format = OutputFormat.createPrettyPrint();
-			Element root = doc.getRootElement();
-			XMLWriter writer = null;// 声明写XML的对象
-
-			List<Element> celements = root.elements();
-			boolean flag = false;
-			for (Element c : celements) {
-				if (flag == true)
-					break;
-				if (c.valueOf("@id").equals(selectComputerId)) {
-					List<Element> gelements = c.elements();
-					for (Element g : gelements) {
-						if (g.valueOf("@id").equals(selectGroupId)) {
-							Element t = g.addElement("task");
-							t.addAttribute("id", newTask1.getId());
-							t.addAttribute("name", newTask1.getName());
-							t.addAttribute("dirname", newTask1.getDirname());
-							SimpleDateFormat timeFormat;
-							timeFormat = new SimpleDateFormat(
-							"yyyy-MM-dd HH:mm:ss");
-							t.addAttribute("creatdate", timeFormat
-									.format(newTask1.getCreatdate()));
-							t.addAttribute("cmd", newTask1.getCmd());
-							//t.addAttribute("in", newTask1.getFin().replace("\n", " "));
-							t.addAttribute("out", newTask1.getFout());
-							t.addAttribute("outfiles", newTask1.getFouts().replace("\n", " "));
-							t.addAttribute("opts", newTask1.getOpts());
-							t.addAttribute("starttime", "");
-							t.addAttribute("memo", newTask1.getMemo());
-							for(Component cc: tfin.getComponents()){
-								if(cc instanceof JTextField){   
-									Element ti = t.addElement("infile");
-									if(((JTextField)cc).getText().trim().length()>0){
-										ti.setText(((JTextField) cc).getText().trim());
-										ti.addAttribute("url",((JTextField) cc).getToolTipText().trim());
-									}
-								}   
-							}						
-
-							flag = true;
-							break;
-						}
+		
+        
+		for (int ii = 0; ii < Integer.parseInt(tTextField0.getText().trim()); ii++) {
+			SSHTask newTask1 = new SSHTask();
+			newTask1.setName(tTextField1.getText().trim()+(ii+1));
+			newTask1.setDirname(dirTextField.getText().trim()+(ii+1));
+			newTask1.setCmd(tTextField3.getText());
+			newTask1.setMemo(tTextArea2.getText());
+			// newTask1.setFin(tfin.getText());
+			for (Component cc : tfin.getComponents()) {
+				if (cc instanceof JTextField) {
+					if (((JTextField) cc).getText().trim().length() > 0) {
+						newTask1.setFin(newTask1.getFin()
+								+ ((JTextField) cc).getText().trim() + "; ");
+						newTask1.setInfiles(newTask1.getInfiles()
+								+ ((JTextField) cc).getToolTipText().trim()
+								+ "; ");
 					}
 				}
 			}
-			writer = new XMLWriter(new FileWriter("Config.xml"), format);
-			writer.write(doc);
-			writer.close();
-			if (flag) {
-				this.setVisible(false);
-				this.dispose();
-				JOptionPane.showMessageDialog(null, "创建任务成功！");
+			newTask1.setFout(tfout.getText().trim());
+			if (!tfous.getText().trim().endsWith(";"))
+				newTask1.setFouts(tfous.getText() + ";");
+			newTask1.setFouts((ii+1)+"_"+tfous.getText().trim());
+			newTask1.setOpts(opts.get(ii).trim());
+			Date SeverTime = new Date();
+			SimpleDateFormat Severtimeformat = new SimpleDateFormat(
+					"yyyyMMddHHmmss");
+			newTask1.setCreatdate(SeverTime);// 获得创建成功时的时间
+			newTask1.setId("T" + Severtimeformat.format(SeverTime)+"_"+(ii+1));
+			newTask1.setType((byte) 2);
+			// 找到选中的组
+			Iterator<SSHGroup> it;
+			for (it = LinuxClient.gps.iterator(); it.hasNext();) {
+				selectGroup = (SSHGroup) it.next();
+				if (selectGroup.getId().equals(selectGroupId)) {
+					break;
+				}
 			}
-		} catch (Exception e) {
-			e.printStackTrace();
+			newTask1.setGp(selectGroup);
+			selectComputerId = selectGroup.getCp().getId();// 找到计算机的ID
+
+			// 在服务器上创建工作目录
+			Ltest = new JLabel();
+			try {
+				this.createdirs(this.getOpenedConnection(selectGroup.getCp()),
+						dirTextField.getText().trim()+(ii+1));
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			add(Ltest);
+			Ltest.setBounds(120, 550, 90, 30);
+
+			// 将信息保存到config.xml中
+			SAXReader reader = new SAXReader();
+			try {
+				Document doc = reader.read("Config.xml");
+				OutputFormat format = OutputFormat.createPrettyPrint();
+				Element root = doc.getRootElement();
+				XMLWriter writer = null;// 声明写XML的对象
+
+				List<Element> celements = root.elements();
+				boolean flag = false;
+				for (Element c : celements) {
+					if (flag == true)
+						break;
+					if (c.valueOf("@id").equals(selectComputerId)) {
+						List<Element> gelements = c.elements();
+						for (Element g : gelements) {
+							if (g.valueOf("@id").equals(selectGroupId)) {
+								Element t = g.addElement("task");
+								t.addAttribute("id", newTask1.getId());
+								t.addAttribute("name", newTask1.getName());
+								t
+										.addAttribute("dirname", newTask1
+												.getDirname());
+								SimpleDateFormat timeFormat;
+								timeFormat = new SimpleDateFormat(
+										"yyyy-MM-dd HH:mm:ss");
+								t.addAttribute("creatdate", timeFormat
+										.format(newTask1.getCreatdate()));
+								t.addAttribute("cmd", newTask1.getCmd());
+								// t.addAttribute("in",
+								// newTask1.getFin().replace("\n", " "));
+								t.addAttribute("out", newTask1.getFout());
+								t.addAttribute("outfiles", newTask1.getFouts()
+										.replace("\n", " "));
+								t.addAttribute("opts", newTask1.getOpts());
+								t.addAttribute("starttime", "");
+								t.addAttribute("memo", newTask1.getMemo());
+								for (Component cc : tfin.getComponents()) {
+									if (cc instanceof JTextField) {
+										Element ti = t.addElement("infile");
+										if (((JTextField) cc).getText().trim()
+												.length() > 0) {
+											ti.setText(((JTextField) cc)
+													.getText().trim());
+											ti.addAttribute("url",
+													((JTextField) cc)
+															.getToolTipText()
+															.trim());
+										}
+									}
+								}
+
+								flag = true;
+								break;
+							}
+						}
+					}
+				}
+				writer = new XMLWriter(new FileWriter("Config.xml"), format);
+				writer.write(doc);
+				writer.close();
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
+		
+			this.setVisible(false);
+			this.dispose();
+			JOptionPane.showMessageDialog(null, "创建任务成功！");
+		
 	}
 
 	// ----------------------------------------------------------//
@@ -559,9 +588,9 @@ public class MulityTaskUI extends javax.swing.JDialog {
 		while ((out = bufferedReader.readLine()) != null) {
 			if (out.equals("EOP")) {
 				Ltest.setText("设置目录成功！");
-				this.flag = true;
+				this.flag = this.flag && true;
 
-			}
+			}else this.flag = this.flag && false;
 		}
 		sess.close();
 		conn.close();
