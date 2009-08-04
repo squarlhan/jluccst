@@ -3,8 +3,6 @@ package cn.edu.jlu.ccst.sshclient.util;
 import cn.edu.jlu.ccst.sshclient.model.SSHTask;
 import cn.edu.jlu.ccst.sshclient.ui.*;
 
-//import java.awt.event.ActionEvent;
-//import java.awt.event.ActionListener;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -16,18 +14,14 @@ import java.io.OutputStream;
 import ch.ethz.ssh2.Connection;
 import ch.ethz.ssh2.SCPClient;
 import ch.ethz.ssh2.Session;
-//import java.lang.Thread;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-//import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
-//import javax.management.timer.Timer;
-//import java.awt.*;
-//import java.awt.event.*;
+
 
 public class SSHOpCommand implements Runnable {
 	private String Host;
@@ -106,38 +100,6 @@ public class SSHOpCommand implements Runnable {
 		opType = taskInfo;
 		runtasklist = null;
 	}
-	//<<<<<<< .mine
-	//   /**
-	//    * 串行运行组内的所有任务用这个构造方法
-	//    */
-	//    public SSHOpCommand(String host, String name, String psw,  List<SSHTask> runtasklist,
-	//    		JTextArea jTextArea1, int opType) {
-	//    	super();
-	//    	Host = host;
-	//    	Name = name;
-	//    	Psw = psw;
-	//    	this.opType = opType;
-	//    	this.jTextArea1 = jTextArea1;
-	//    	this.runtasklist = runtasklist;
-	//    }
-	//    
-	//   /**
-	//    * 停止组内串行运行的所有任务用这个构造方法 
-	//    */
-	//    public SSHOpCommand(String host, String name, String psw,  List<SSHTask> runtasklist,
-	//    		 int opType) {
-	//    	super();
-	//    	Host = host;
-	//    	Name = name;
-	//    	Psw = psw;
-	//    	this.opType = opType;
-	//    	this.runtasklist = runtasklist;
-	//    }
-	//    
-
-	//    public void init() {
-	//    }
-	//=======
 	/**
 	 * 串行运行组内的所有任务用这个构造方法
 	 */
@@ -179,7 +141,6 @@ public class SSHOpCommand implements Runnable {
 
 	public void init() {
 	}
-	//>>>>>>> .r185
 	public void start() {
 	}
 	public void run(){
@@ -253,8 +214,8 @@ public class SSHOpCommand implements Runnable {
 					temp.EditTaskRunPid(Id,out.trim());
 					System.out.println("out:"+".\\"+Id+"_"+out+".txt");
 					first=false;
-					File f=new File(".\\"+Id+"_"+out+".txt");
-					f.createNewFile();
+					//File f=new File(".\\"+Id+"_"+out+".txt");
+					//f.createNewFile();
 					continue;
 				}
 				if(ft == 0) {
@@ -269,8 +230,8 @@ public class SSHOpCommand implements Runnable {
 			if(Cmd.startsWith("./"))
 			{
 
-				File f=new File("./"+Id+"_"+pidout+".txt");
-				f.delete();   	 
+				//File f=new File("./"+Id+"_"+pidout+".txt");
+				//f.delete();   	 
 				String rem=Cmd.substring(Cmd.indexOf(" "), Cmd.length());
 				//System.out.println("1"+rem);
 				rem=rem.trim();
@@ -288,7 +249,7 @@ public class SSHOpCommand implements Runnable {
 				System.out.println("文件路径:"+filename);
 
 
-				GenerateGraphy.GetObj(LinuxClient.GetObj().findSelectTask(Id).getName()+"_"+Id,filename,4);
+				//GenerateGraphy.GetObj(LinuxClient.GetObj().findSelectTask(Id).getName()+"_"+Id,filename,4);
 
 			}
 			sess.close();
@@ -312,46 +273,7 @@ public class SSHOpCommand implements Runnable {
 				LinuxClient.GetObj().setSinglerun(1);
 			}
 		}
-
-		//<<<<<<< .mine
-		//    	       
-		//    	       GenerateGraphy.GetObj(LinuxClient.GetObj().findSelectTask(Id).getName()+"_"+Id,filename,4);
-		//    	       
-		//		   }
-		//		sess.close();
-		//		conn.close();
-		//		conn = getOpenedConnection();
-		//		SCPClient client = new SCPClient(conn);
-		//		//client.get("out1.txt", "E:");
-		////		client.put("E:/Friend.avi", "./");
-		////		SSHCommand
-		////		.scpPut("10.60.58.194", "wuchunguo", "wucg",
-		////				"E:/out1.txt", "f.txt",
-		////				"./");
-		//    	}
-		//    	catch(Exception ie) {
-		//    		ie.printStackTrace();
-		//    	}
-		//    	LinuxClient tmpLinx = LinuxClient.GetObj();
-		//    	tmpLinx.setSelTaskStatus(Id,0);         	
-		//    	if(flag == true) {
-		//    		flag = false;
-		//    		LinuxClient.GetObj().setTaskRunSucc(Id,flag);      
-		//        	temp.EditTaskRunSuccXML(Id,flag);//向config.xml中写入任务运行状态
-		//    	}
-		//    	
-		//    	//判断并行结束
-		//    	if(runtasklist == null){
-		//    		//System.out.println("并行jieshu");
-		//    		if(LinuxClient.GetObj().getAllRunSucc(Id) == false) {
-		//        		LinuxClient.GetObj().setSinglerun(1);
-		//        	}
-		//    	}
-		//    		
-		//}
-		//=======
 	}
-	//>>>>>>> .r185
 
 	/**
 	 * 重载执行函数，停止启动任务
