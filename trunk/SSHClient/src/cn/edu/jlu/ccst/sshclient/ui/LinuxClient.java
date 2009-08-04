@@ -436,10 +436,18 @@ public class LinuxClient extends javax.swing.JFrame {
 				}
 				case 1:
 				{
-					SSHTask Tas=new SSHTask();
-					Tas.creat();
-					SSHComputer TC=GfindselectComputer(cur.getId());
-					break;
+					if(str.startsWith("添加一")){
+						SSHTask Tas = new SSHTask();
+						Tas.creat();
+						SSHComputer TC = GfindselectComputer(cur.getId());
+						break;
+					}
+					else {
+						MulityTaskUI newMTask = new MulityTaskUI();
+						newMTask.setModal(true);
+						newMTask.setVisible(true);
+						break;
+					}
 				}
 				default:
 					break;
@@ -2218,6 +2226,8 @@ public class LinuxClient extends javax.swing.JFrame {
 		popMenuG = new JPopupMenu();
 		addItemG = new JMenuItem("添加一新任务");
 		addItemG.addActionListener(new rightclick());
+		addMItemG = new JMenuItem("添加批量任务");
+		addMItemG.addActionListener(new rightclick());
 		delItemG = new JMenuItem("删除此任务组");
 		delItemG.addActionListener(new rightclick());
 		editItemG = new JMenuItem("修改此任务组");
@@ -2247,6 +2257,7 @@ public class LinuxClient extends javax.swing.JFrame {
 			}
 		});
 		popMenuG.add(addItemG);
+		popMenuG.add(addMItemG);
 		popMenuG.add(delItemG);
 		popMenuG.add(editItemG); 
 		popMenuG.add(groupStartG);
@@ -2495,6 +2506,7 @@ public class LinuxClient extends javax.swing.JFrame {
 
 	private JPopupMenu popMenuG;
 	private JMenuItem addItemG;
+	private JMenuItem addMItemG;
 	private JMenuItem delItemG;
 	private JMenuItem editItemG;
 	private JMenuItem groupStartG;
