@@ -50,12 +50,12 @@ public class test {
 	
 	public static void main(String[] args) throws IOException{
 		//String outlist = "";
-		String str2 = "";
+//		String str2 = "";
 		test.runSSH("10.60.58.194", "wuchunguo", "wucg", "pstree -p 30242");
 		System.out.println("str:"+outlist);
 		String regEx="\\(\\d+\\)"; 
 		//outlist="CShell(29779)---ping(29780)"; 
-		List<String> spids = new ArrayList();
+		List<String> spids = new ArrayList<String>();
 		Pattern p=Pattern.compile(regEx); 
 		Matcher m=p.matcher(outlist); 
 		while ( m.find()) {
