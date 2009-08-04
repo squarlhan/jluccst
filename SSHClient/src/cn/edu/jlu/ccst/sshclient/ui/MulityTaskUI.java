@@ -38,7 +38,7 @@ public class MulityTaskUI extends javax.swing.JDialog {
 	private JButton resetButton, submitButton, inputoptsButton, inputrulesButton;
 	private JLabel lfin, lfout, loutnames, lopts;
 	private JTextField tfout, topts;
-	private boolean flag = true;
+	private boolean flag = false;
 	private String gdir;
 	private JPanel tfin;
 	public static List<String> opts; 
@@ -413,12 +413,14 @@ public class MulityTaskUI extends javax.swing.JDialog {
 		curType = LinuxClient.cur;
 		String selectGroupId = curType.getId();
 		String selectComputerId;// 选中任务所在组的计算机ID
-		
+		String mkdircmds = "";
+		Ltest = new JLabel();
+		submitButton.setEnabled(false);
         
 		for (int ii = 0; ii < Integer.parseInt(tTextField0.getText().trim()); ii++) {
 			SSHTask newTask1 = new SSHTask();
-			newTask1.setName(tTextField1.getText().trim()+(ii+1));
-			newTask1.setDirname(dirTextField.getText().trim()+(ii+1));
+			newTask1.setName(tTextField1.getText().trim()+"_"+(ii+1));
+			newTask1.setDirname(dirTextField.getText().trim()+"_"+(ii+1));
 			newTask1.setCmd(tTextField3.getText());
 			newTask1.setMemo(tTextArea2.getText());
 			// newTask1.setFin(tfin.getText());
@@ -455,17 +457,8 @@ public class MulityTaskUI extends javax.swing.JDialog {
 			newTask1.setGp(selectGroup);
 			selectComputerId = selectGroup.getCp().getId();// 找到计算机的ID
 
-			// 在服务器上创建工作目录
-			Ltest = new JLabel();
-			try {
-				this.createdirs(this.getOpenedConnection(selectGroup.getCp()),
-						dirTextField.getText().trim()+(ii+1));
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-			add(Ltest);
-			Ltest.setBounds(120, 550, 90, 30);
+			// 在服务器上创建工作目录的命令			
+			mkdircmds = mkdircmds + " mkdir -p ."+dirTextField.getText().trim()+(ii+1)+"; ";
 
 			// 将信息保存到config.xml中
 			SAXReader reader = new SAXReader();
@@ -533,7 +526,15 @@ public class MulityTaskUI extends javax.swing.JDialog {
 				e.printStackTrace();
 			}
 		}
-		
+		// 在服务器上创建工作目录
+		try {
+			this.createdirs(this.getOpenedConnection(selectGroup.getCp()),mkdircmds);
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		add(Ltest);
+		Ltest.setBounds(120, 650, 90, 30);
 			this.setVisible(false);
 			this.dispose();
 			JOptionPane.showMessageDialog(null, "创建任务成功！");
@@ -579,8 +580,7 @@ public class MulityTaskUI extends javax.swing.JDialog {
 		// Connection conn = getOpenedConnection(TC);
 		Ltest.setText("正在设置目录...");
 		Session sess = conn.openSession();
-		String finalcmd = dirs.substring(1);
-		sess.execCommand("./squarlhan/CShell mkdir -p " + finalcmd.trim());
+		sess.execCommand("./squarlhan/CShell " + dirs);
 
 		String out;
 		BufferedReader bufferedReader = new BufferedReader(
@@ -588,9 +588,8 @@ public class MulityTaskUI extends javax.swing.JDialog {
 		while ((out = bufferedReader.readLine()) != null) {
 			if (out.equals("EOP")) {
 				Ltest.setText("设置目录成功！");
-				this.flag = this.flag && true;
-
-			}else this.flag = this.flag && false;
+				this.flag = true;
+			}
 		}
 		sess.close();
 		conn.close();

@@ -1417,7 +1417,7 @@ public class LinuxClient extends javax.swing.JFrame {
 				BaseClass b=(BaseClass)treenode.getUserObject();
 				cur=(BaseClass)treenode.getUserObject();
 				//-------------处理双击事件----------------------------//
-				if(e.getClickCount()==2)
+				/*if(e.getClickCount()==2)
 				{
 					if(cur.getType()!=2)return;
 					cur=(SSHTask)cur;
@@ -1519,7 +1519,7 @@ public class LinuxClient extends javax.swing.JFrame {
 						reader.close();  
 					}catch(Exception ex){ex.printStackTrace();}
 
-				}
+				}*/
 				//-----------------------------------------------------//
 				if(cur.getType() == 0) { //获得选中的类型，给工具栏中相应的选项变色
 					jMenuItem5.setEnabled(true);
@@ -1577,12 +1577,23 @@ public class LinuxClient extends javax.swing.JFrame {
 					SSHTask temptask = new SSHTask();
 					temptask = findSelectTask(cur.getId());//变灰相应的任务信息
 					if(!temptask.getFout().equals("")) {
-						String filename = temptask.getFout()+"/"+temptask.getId()+".txt";
-						File f = new File(filename);                
-						if(f.exists() && temptask.getCmd().startsWith("./") && temptask.getRunSucc() == false) {
-							dispResT.setEnabled(true);
+						boolean ff = true;
+						String temp = "";		
+						if(temptask.getFouts().trim().endsWith(";"))
+							temp = temptask.getFouts().trim().substring(0, temptask.getFouts().trim().length()-1);
+						String[] outnames = temptask.getFouts().trim().split(";");
+						for(String str:outnames){
+							if(!str.trim().isEmpty()){
+								String filename = temptask.getFout().trim()+"/"+str.trim();
+								File f = new File(filename);
+								if(f.exists() && temptask.getCmd().startsWith("./") && temptask.getRunSucc() == false) {
+									ff = ff&&true;
+								}
+								else ff = ff&&false;
+							}
 						}
-						else dispResT.setEnabled(false);
+						System.out.println(ff);
+						dispResT.setEnabled(ff);
 					}
 					else {
 						dispResT.setEnabled(false);
@@ -1861,7 +1872,7 @@ public class LinuxClient extends javax.swing.JFrame {
 
 	//------------------------------------------------------------//
 	/**
-	 * 显示运行自定义结果图的响应处理
+	* 查看结果的响应事件处理
 	 */
 	class dispclick implements ActionListener
 	{
@@ -1875,27 +1886,23 @@ public class LinuxClient extends javax.swing.JFrame {
 		}
 	}
 	/**
-	 * 根据点击选项显示不同的效果图
+	 * 查看结果的响应事件处理
 	 * @param e
 	 */
 	private void actionDispClick(ActionEvent e) throws DocumentException { 
 		if(dispResT.isEnabled()) {		
 			String selI = e.getActionCommand();
-			int t = 0;
-			if(selI.startsWith("显示线")) {
-				t = 4;
-			}
-			else  t = 5;
+			
+			JOptionPane.showMessageDialog(null, "结果");
 
-
-			SSHTask stk = findSelectTask(cur.getId());
+			/*SSHTask stk = findSelectTask(cur.getId());
 			try {
 				String filename=stk.getFout()+"/"+stk.getId()+".txt";
 				GenerateGraphy.GetObj(stk.getId(),filename,t);
 			}
 			catch(Exception ev) {
 				ev.printStackTrace();
-			}
+			}*/
 		}
 
 	}
@@ -2343,17 +2350,9 @@ public class LinuxClient extends javax.swing.JFrame {
 		popMenuT.add(uploadItemT);
 
 		//查看任务运行的结果图
-		dispResT = new JMenu("自定义任务的效果图");
+		dispResT = new JMenuItem("查看任务结果");
 		dispResT.setEnabled(false);
-		linedispresT = new JMenuItem("显示线状效果图");
-		linedispresT.addActionListener(new dispclick());
-		bardispresT = new JMenuItem("显示柱状效果图");
-		bardispresT.addActionListener(new dispclick());
-		piedispresT = new JMenuItem("显示饼状效果图");
-		//piedispresT.addActionListener(new dispclick());
-		dispResT.add(linedispresT);
-		dispResT.add(bardispresT);
-		//dispResT.add(piedispresT);
+		dispResT.addActionListener(new dispclick());
 		popMenuT.add(dispResT);
 
 
@@ -2523,10 +2522,7 @@ public class LinuxClient extends javax.swing.JFrame {
 	private JMenuItem stopItemT;
 	private JMenuItem downloadItemT;
 	private JMenuItem uploadItemT;
-	private JMenu dispResT;
-	private JMenuItem linedispresT;
-	private JMenuItem bardispresT;
-	private JMenuItem piedispresT;
+	private JMenuItem dispResT;
 
 
 	private JPopupMenu popMenuTA;
