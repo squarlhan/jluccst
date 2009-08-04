@@ -222,11 +222,11 @@ public class InputRulesUI extends javax.swing.JDialog {
 				JOptionPane.showMessageDialog(null, "请输入第"+(a+1)+"个参数的个数");
 				return;
 			}
-			if(!Pattern.matches("\\d+\\.{0,1}\\d*", t1)){
+			if(!Pattern.matches("-{0,1}\\d+\\.{0,1}\\d*", t1)){
 				JOptionPane.showMessageDialog(null, "第"+(a+1)+"个参数上界必须是小数或整数");
 				return;
 			}
-			if(!Pattern.matches("\\d+\\.{0,1}\\d*", t2)){
+			if(!Pattern.matches("-{0,1}\\d+\\.{0,1}\\d*", t2)){
 				JOptionPane.showMessageDialog(null, "第"+(a+1)+"个参数下界必须是小数或整数");
 				return;
 			}
