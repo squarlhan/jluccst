@@ -27,6 +27,10 @@ import org.dom4j.io.SAXReader;
 import org.dom4j.io.XMLWriter;
 
 public class GroupUI extends javax.swing.JDialog  {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JLabel gLabel1 , dirLabel, memoLabel, Ltest;
 	private JTextField gTextField1, dirTextField;
 	private JTextArea memoJArea;

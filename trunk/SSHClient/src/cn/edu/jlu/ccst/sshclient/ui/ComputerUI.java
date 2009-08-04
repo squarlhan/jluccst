@@ -37,6 +37,10 @@ import org.dom4j.io.XMLWriter;
 
 public class ComputerUI extends javax.swing.JDialog 
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	public ComputerUI()   
 	{ 	
 		initComponents();

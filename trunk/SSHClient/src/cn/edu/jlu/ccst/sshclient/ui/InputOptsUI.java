@@ -8,6 +8,10 @@ import java.awt.*;
 import javax.swing.*;
 
 public class InputOptsUI extends javax.swing.JDialog {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private List<JLabel> labels;
 	private List<JTextField> textFields;
 	private int tasksum;
@@ -20,8 +24,8 @@ public class InputOptsUI extends javax.swing.JDialog {
 	public InputOptsUI(int tasksum,List<String> opts) {
 		this.setTitle("输入所有任务参数");
 		this.tasksum = tasksum;
-		labels = new ArrayList();
-		textFields = new ArrayList();
+		labels = new ArrayList<JLabel>();
+		textFields = new ArrayList<JTextField>();
 		this.opts = opts;
 		initComponent();
 		for(int i = 0; i<= opts.size()-1; i++){

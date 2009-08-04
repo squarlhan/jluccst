@@ -47,12 +47,12 @@ public class InputRulesUI extends javax.swing.JDialog {
 		this.tasksum = tasksum;
 		this.optssum = optssum;
 		this.rules = rules;
-		labels = new ArrayList();
-		textFields = new ArrayList();
-		labels1 = new ArrayList();
-		textFields1 = new ArrayList();
-		labels2 = new ArrayList();
-		textFields2 = new ArrayList();
+		labels = new ArrayList<JLabel>();
+		textFields = new ArrayList<JTextField>();
+		labels1 = new ArrayList<JLabel>();
+		textFields1 = new ArrayList<JTextField>();
+		labels2 = new ArrayList<JLabel>();
+		textFields2 = new ArrayList<JTextField>();
 		initComponent();
 		for(int i = 0; i<= rules.size()-1; i++){
 			String[] rulearray = rules.get(i).split(";");

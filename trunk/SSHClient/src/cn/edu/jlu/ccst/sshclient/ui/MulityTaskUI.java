@@ -26,6 +26,10 @@ import org.dom4j.io.SAXReader;
 import org.dom4j.io.XMLWriter;
 
 public class MulityTaskUI extends javax.swing.JDialog {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JLabel Ltest, tLabel0, tLabel1, tLabel2, tLabel3, dirLabel;
 	// private JLabel memoLabel;
 	private JTextField tTextField0, tTextField1, tTextField3, dirTextField;
@@ -44,8 +48,8 @@ public class MulityTaskUI extends javax.swing.JDialog {
 
 	public MulityTaskUI() {
 		this.setTitle("新建批量任务");
-		opts = new ArrayList();
-		rules = new ArrayList();
+		opts = new ArrayList<String>();
+		rules = new ArrayList<String>();
 		initComponent();
 
 		inputrulesButton.addMouseListener(new java.awt.event.MouseAdapter() {
