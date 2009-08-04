@@ -610,7 +610,8 @@ public class SSHOpCommand implements Runnable {
 			}
 			catch (IOException e)
 			{
-				return conn;
+				System.out.println("conn failed");
+				return null;	
 			}
 			boolean isAuthenticated = conn.authenticateWithPassword(Name, Psw);
 			if (isAuthenticated == false)

@@ -212,9 +212,54 @@ public class SSHTask extends BaseClass implements BaseAction, BaseOperation {
 		String computerHost = selectComputer.getHost();
 		String userName = selectComputer.getUsername();
 		String userPsw = selectComputer.getPassword();
+		String cmdLine  = cmd;
+		String separate = ";";
+		
+		String dir = this.getDirname();
+		dir = "."+dir+"/";
+		String infiles = this.getInfiles();
+		System.out.println("infiles:"+infiles);
+		int beginIndex = 0;
+		int endIndex = 0;
+		endIndex = infiles.indexOf(separate);
+		while (endIndex != -1){
+			String infile = infiles.substring(beginIndex, endIndex);
+			cmdLine=cmdLine+" "+dir+infile;
+			beginIndex = endIndex + 1;
+			infiles = infiles.substring(beginIndex).trim();
+			beginIndex = 0;
+			endIndex = infiles.indexOf(separate);
+		}
+		String outfiles = this.getFouts();
+		beginIndex = 0;
+		endIndex = 0;
+		endIndex = outfiles.indexOf(separate);
+		
+		while (endIndex != -1){
+			String outfile = outfiles.substring(beginIndex, endIndex);
+			cmdLine=cmdLine+" "+dir+outfile;
+			beginIndex = endIndex + 1;
+			outfiles = outfiles.substring(beginIndex).trim();
+			beginIndex = 0;
+			endIndex = outfiles.indexOf(separate);
+		}
+		
+		String opts = this.getOpts();
+		endIndex = opts.indexOf(separate);
+		while (endIndex != -1){
+			String opt = opts.substring(beginIndex, endIndex);
+			cmdLine=cmdLine+" "+opt;
+			beginIndex = endIndex + 1;
+			opts = opts.substring(beginIndex).trim();
+			beginIndex = 0;
+			endIndex = opts.indexOf(separate);
+		}
+		System.out.println("Dir:"+this.getDirname());
+		System.out.println("cmdLine:"+cmdLine);	
+		//System.exit(0);
 		int taskInfo = 0;//开启任务信息：0	
 		try{
-			SSHOpCommand ry = new SSHOpCommand(computerHost, userName, userPsw, cmd,id,jTextArea1,fout,fin,taskInfo);
+			SSHOpCommand ry = new SSHOpCommand(computerHost, userName, userPsw, cmdLine,id,jTextArea1,fout,fin,taskInfo);
 			Thread ty = new Thread(ry);
 			ty.start();
 

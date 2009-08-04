@@ -662,6 +662,7 @@ public class LinuxClient extends javax.swing.JFrame {
 	 */
 	private void downloadCommand( ActionEvent e) throws DocumentException	{
 		SSHTask selectTask = new SSHTask();
+		
 		//寻找选中的任务
 		int i;
 		for( i = 0; i < tks.size() ; i++) {
@@ -700,6 +701,9 @@ public class LinuxClient extends javax.swing.JFrame {
 			System.out.println("aimDir:"+aimDir);
 			SSHOpCommand sc = new SSHOpCommand(computerHost, userName, userPsw);
 			Connection conn = sc.getOpenedConnection();
+			if(conn == null){
+				JOptionPane.showMessageDialog(null, "网络连接不可用", "连接报错", JOptionPane.ERROR_MESSAGE);
+			}
 			SFTPv3Client s3c = null;
 			boolean fileExist = true;
 			SFTPv3FileAttributes sfa = null;
@@ -711,25 +715,34 @@ public class LinuxClient extends javax.swing.JFrame {
 			}catch(IOException ee){
 				fileExist = false;
 			}
+//			s3c.close();
+			s3c.close();
+			beginIndex = 0;
+			endIndex = sourceFiles.indexOf(separate);
 			if(!fileExist){
 				System.out.println("源文件不存在");
 				JOptionPane.showMessageDialog(null, "源文件不存在", "传输报错", JOptionPane.ERROR_MESSAGE);
 			}else{
 				File file= new File(aimFile);
 				if(file.exists()){
-					int tt = JOptionPane.showConfirmDialog(null, "目标文件已存在，是否覆盖", "确认覆盖", JOptionPane.YES_NO_OPTION);
+					int tt = JOptionPane.showConfirmDialog(null, sourceFile+"目标文件已存在，是否覆盖", "确认覆盖", JOptionPane.YES_NO_OPTION);
 					if(JOptionPane.NO_OPTION == tt)
 					{
-						return;
+						continue;
 					}else{
 						file.delete();
 					}
 				}
 				ProgressBar pb = new ProgressBar(conn, sourceFile, aimFile, aimDir, 1);
-				Thread t = new Thread(pb);
-				t.start();
-				beginIndex = 0;
-				endIndex = sourceFiles.indexOf(separate);
+//				Thread t = new Thread(pb);
+//				t.start();
+//				while (t.isAlive()) {
+//				     System.out.println("线程在运行中");
+				
+//				}
+				pb.setVisible(true);
+				 System.out.println(sourceFile+"线程已经结束");
+				
 			}
 
 		}
@@ -737,6 +750,7 @@ public class LinuxClient extends javax.swing.JFrame {
 	//-------------------------------------------------------------//
 	private void uploadCommand( ActionEvent e) throws DocumentException	{
 		SSHTask selectTask = new SSHTask();
+		boolean key = true;
 		boolean fileExist = true;
 		//寻找选中的任务
 		int i;
@@ -776,54 +790,51 @@ public class LinuxClient extends javax.swing.JFrame {
 
 			SSHOpCommand sc = new SSHOpCommand(computerHost, userName, userPsw);
 			Connection conn = sc.getOpenedConnection();
-			SFTPv3Client s3c = null;
-
-			System.out.println("sourceFile:"+sourceFile);
-			System.out.println("aimDir:"+aimDir);
-			System.out.println("aimFile:"+aimFile);
-
-			SFTPv3FileAttributes sfa = null;
-			File file= new File(sourceFile);
-
-			//判断源文件和目标文件是否存在
-			if(!file.exists()){
-				JOptionPane.showMessageDialog(null, "源文件不存在", "传输报错", JOptionPane.ERROR_MESSAGE);
-			}else{
-				try{
-					s3c = new SFTPv3Client(conn);
-					sfa = s3c.stat(aimFile);
-				}catch(IOException ee){
-					fileExist = false;
-				}
-				if(fileExist){
-					System.out.println("文件存在");
-					int tt = JOptionPane.showConfirmDialog(null, "目标文件已存在，是否覆盖", "确认覆盖", JOptionPane.YES_NO_OPTION);
-					if(JOptionPane.NO_OPTION == tt)
-					{
-						return;
-					}else{
-						try{
-							s3c.rm(aimFile);
-						}catch(IOException ee){
-							System.out.println("删除目标文件失败");
-						}
-						@SuppressWarnings("unused")
-						ProgressBar pb = new ProgressBar(conn, sourceFile, aimFile, aimDir,2);
-						Thread t = new Thread(pb);
-						t.start();
+			if(conn == null){
+				JOptionPane.showMessageDialog(null, "网络连接不可用", "连接报错", JOptionPane.ERROR_MESSAGE);
+				return;
+			}
+				SFTPv3Client s3c = null;
+	
+				System.out.println("sourceFile:"+sourceFile);
+				System.out.println("aimDir:"+aimDir);
+				System.out.println("aimFile:"+aimFile);
+				SFTPv3FileAttributes sfa = null;
+				File file= new File(sourceFile);
+				beginIndex = 0;
+				endIndex = sourceFiles.indexOf(separate);
+				//判断源文件和目标文件是否存在
+				if(!file.exists()){
+					JOptionPane.showMessageDialog(null, "源文件不存在", "传输报错", JOptionPane.ERROR_MESSAGE);
+				}else{
+					try{
+						s3c = new SFTPv3Client(conn);
+						sfa = s3c.stat(aimFile);
+					}catch(IOException ee){
+						fileExist = false;
 					}
-				}
-				else{
-					@SuppressWarnings("unused")
+					
+					if(fileExist){
+						System.out.println("文件存在");
+						int tt = JOptionPane.showConfirmDialog(null, "目标文件已存在，是否覆盖", "确认覆盖", JOptionPane.YES_NO_OPTION);
+						if(JOptionPane.NO_OPTION == tt)
+						{
+							continue;
+						}else{
+							try{
+								s3c.rm(aimFile);
+							}catch(IOException ee){
+								System.out.println("删除目标文件失败");
+							}
+						}
+					}
+					s3c.close();
 					ProgressBar pb = new ProgressBar(conn, sourceFile, aimFile, aimDir,2);
 					Thread t = new Thread(pb);
 					t.start();
 				}
+				
 			}
-
-			beginIndex = 0;
-			endIndex = sourceFiles.indexOf(separate);
-		}
 
 	}
 	//-------------------------------------------------------------//
