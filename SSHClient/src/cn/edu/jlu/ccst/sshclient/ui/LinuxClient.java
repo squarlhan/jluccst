@@ -1592,7 +1592,7 @@ public class LinuxClient extends javax.swing.JFrame {
 								else ff = ff&&false;
 							}
 						}
-						System.out.println(ff);
+						
 						dispResT.setEnabled(ff);
 					}
 					else {
@@ -1996,11 +1996,11 @@ public class LinuxClient extends javax.swing.JFrame {
 		jSplitPane1.setRightComponent(jSplitPane2);
 		jMenuBar1.setName("jMenuBar1"); // NOI18N
 
-		jMenu1.setText("File");
+		jMenu1.setText("文件");
 
 		jMenu1.setName("jMenu1"); // NOI18N
 
-		jMenu4.setText("New");
+		jMenu4.setText("新建");
 		jMenu4.setIcon(new ImageIcon(this.getClass().getResource("/cn/edu/jlu/ccst/sshclient/ui/resource/file.png")));
 		jMenu4.setName("jMenu4"); // NOI18N
 		jMenu4.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -2009,7 +2009,7 @@ public class LinuxClient extends javax.swing.JFrame {
 			}
 		});
 
-		jMenuItem4.setText("Computer");
+		jMenuItem4.setText("计算机");
 		jMenuItem4.setIcon(new ImageIcon(this.getClass().getResource("/cn/edu/jlu/ccst/sshclient/ui/resource/c.png")));
 		jMenuItem4.setName("jMenuItem4"); // NOI18N
 		jMenuItem4.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -2019,7 +2019,7 @@ public class LinuxClient extends javax.swing.JFrame {
 		});
 		jMenu4.add(jMenuItem4);
 
-		jMenuItem5.setText("Group");
+		jMenuItem5.setText("任务组");
 		jMenuItem5.setIcon(new ImageIcon(this.getClass().getResource("/cn/edu/jlu/ccst/sshclient/ui/resource/g.png")));
 		jMenuItem5.setName("jMenuItem5"); // NOI18N
 		//"新建工作组"的监听函数
@@ -2030,7 +2030,7 @@ public class LinuxClient extends javax.swing.JFrame {
 		});
 		jMenu4.add(jMenuItem5);
 
-		jMenuItem6.setText("Task");
+		jMenuItem6.setText("任务");
 		jMenuItem6.setIcon(new ImageIcon(this.getClass().getResource("/cn/edu/jlu/ccst/sshclient/ui/resource/t.png")));
 		jMenuItem6.setName("jMenuItem6"); // NOI18N
 		//“新建任务的监听函数”
@@ -2044,7 +2044,7 @@ public class LinuxClient extends javax.swing.JFrame {
 		jMenu1.add(jMenu4);
 
 
-		jMenuItem3.setText("Quit");
+		jMenuItem3.setText("退出");
 		jMenuItem3.setIcon(new ImageIcon(this.getClass().getResource("/cn/edu/jlu/ccst/sshclient/ui/resource/q.png")));
 		jMenuItem3.setName("jMenuItem3"); // NOI18N
 		jMenuItem3.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -2057,10 +2057,10 @@ public class LinuxClient extends javax.swing.JFrame {
 
 		jMenuBar1.add(jMenu1);
 
-		jMenu2.setText("Task");
+		jMenu2.setText("任务");
 		jMenu2.setName("jMenu2"); // NOI18N
 
-		jMenuItem8.setText("Add");
+		jMenuItem8.setText("新建");
 		jMenuItem8.setIcon(new ImageIcon(this.getClass().getResource("/cn/edu/jlu/ccst/sshclient/ui/resource/add.png")));
 		jMenuItem8.setName("jMenuItem8"); // NOI18N
 		jMenuItem8.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -2070,7 +2070,7 @@ public class LinuxClient extends javax.swing.JFrame {
 		});
 		jMenu2.add(jMenuItem8);
 
-		jMenuItem9.setText("Update");
+		jMenuItem9.setText("更改");
 		jMenuItem9.setIcon(new ImageIcon(this.getClass().getResource("/cn/edu/jlu/ccst/sshclient/ui/resource/up.png")));
 		jMenuItem9.setName("jMenuItem9"); // NOI18N
 		jMenuItem9.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -2080,7 +2080,7 @@ public class LinuxClient extends javax.swing.JFrame {
 		});       
 		jMenu2.add(jMenuItem9);
 
-		jMenuItem10.setText("Remove");
+		jMenuItem10.setText("删除");
 		jMenuItem10.setIcon(new ImageIcon(this.getClass().getResource("/cn/edu/jlu/ccst/sshclient/ui/resource/del.png")));
 		jMenuItem10.setName("jMenuItem10"); // NOI18N
 		jMenuItem10.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -2095,7 +2095,7 @@ public class LinuxClient extends javax.swing.JFrame {
 
 
 
-		jMenuItem12.setText("Group Start");
+		jMenuItem12.setText("串行启动组内所有任务");
 		jMenuItem12.setIcon(new ImageIcon(this.getClass().getResource("/cn/edu/jlu/ccst/sshclient/ui/resource/gst.png")));
 		jMenuItem12.setName("jMenuItem12"); // NOI18N
 		jMenuItem12.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -2106,12 +2106,12 @@ public class LinuxClient extends javax.swing.JFrame {
 		});  
 		jMenu2.add(jMenuItem12);
 
-		jMenuItem11.setText("Group Stop");
+		jMenuItem11.setText("停止组内所有任务");
 		jMenuItem11.setIcon(new ImageIcon(this.getClass().getResource("/cn/edu/jlu/ccst/sshclient/ui/resource/gsp.png")));
 		jMenuItem11.setName("jMenuItem11"); // NOI18N
 
 		jMenu2.add(jMenuItem11);
-		jMenuItem13.setText("All Start");
+		jMenuItem13.setText("启动所有任务");
 		jMenuItem13.setIcon(new ImageIcon(this.getClass().getResource("/cn/edu/jlu/ccst/sshclient/ui/resource/ast.png")));
 		jMenuItem13.setName("jMenuItem13"); // NOI18N
 		jMenuItem13.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -2121,7 +2121,7 @@ public class LinuxClient extends javax.swing.JFrame {
 		});
 		jMenu2.add(jMenuItem13);
 
-		jMenuItem16.setText("All Stop");
+		jMenuItem16.setText("停止所有任务");
 		jMenuItem16.setIcon(new ImageIcon(this.getClass().getResource("/cn/edu/jlu/ccst/sshclient/ui/resource/asp.png")));
 		jMenuItem16.setName("jMenuItem16"); // NOI18N
 		jMenuItem16.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -2130,7 +2130,7 @@ public class LinuxClient extends javax.swing.JFrame {
 			}
 		});
 		jMenu2.add(jMenuItem16);
-		jMenuItem14.setText("Start Now");
+		jMenuItem14.setText("立即启动任务");
 		jMenuItem14.setIcon(new ImageIcon(this.getClass().getResource("/cn/edu/jlu/ccst/sshclient/ui/resource/s.png")));
 		jMenuItem14.setName("jMenuItem14"); // NOI18N
 		jMenuItem14.addActionListener(new ActionListener()
@@ -2150,7 +2150,7 @@ public class LinuxClient extends javax.swing.JFrame {
 		jSeparator3.setName("jSeparator3"); // NOI18N
 		jMenu2.add(jSeparator3);
 
-		jMenuItem15.setText("Stop Now");
+		jMenuItem15.setText("停止当前任务");
 		jMenuItem15.setIcon(new ImageIcon(this.getClass().getResource("/cn/edu/jlu/ccst/sshclient/ui/resource/sn.png")));
 		jMenuItem15.setName("jMenuItem15"); // NOI18N
 		//////////////////////////////////////////停止任务的监听函数
@@ -2172,15 +2172,15 @@ public class LinuxClient extends javax.swing.JFrame {
 
 		jMenuBar1.add(jMenu2);
 
-		jMenu3.setText("Help");
+		jMenu3.setText("帮助");
 		jMenu3.setName("jMenu3"); // NOI18N
 
-		jMenuItem1.setText("Index");
+		jMenuItem1.setText("索引");
 		jMenuItem1.setIcon(new ImageIcon(this.getClass().getResource("/cn/edu/jlu/ccst/sshclient/ui/resource/i.png")));
 		jMenuItem1.setName("jMenuItem1"); // NOI18N
 		jMenu3.add(jMenuItem1);
 
-		jMenuItem7.setText("About");
+		jMenuItem7.setText("关于");
 		jMenuItem7.setIcon(new ImageIcon(this.getClass().getResource("/cn/edu/jlu/ccst/sshclient/ui/resource/ab.png")));
 		jMenuItem7.setName("jMenuItem7"); // NOI18N
 		jMenu3.add(jMenuItem7);
