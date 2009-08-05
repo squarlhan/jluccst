@@ -1910,8 +1910,6 @@ public class LinuxClient extends javax.swing.JFrame {
 			// zhou
 			
 			try {
-//				System.out.println();
-//				System.out.println(((SSHTask)cur).getFouts());
 				String dirstr = ((SSHTask)cur).getFout();
 				String filesstr = ((SSHTask)cur).getFouts();
 				String[] strSplit = filesstr.split("(\\;*,\\;*|\\;+)");//分号分隔
