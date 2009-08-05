@@ -3,18 +3,14 @@ package cn.edu.jlu.ccst.sshclient.util;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-
 import javax.swing.JFrame;
 import javax.swing.JProgressBar;
-
-import cn.edu.jlu.ccst.sshclient.ui.LinuxClient;
-
 import ch.ethz.ssh2.Connection;
 import ch.ethz.ssh2.SFTPv3Client;
 import ch.ethz.ssh2.SFTPv3FileAttributes;
 
 public class ProgressBarSpeeder implements Runnable {
-	private float speed;
+	private float speed = 0;
 	Connection conn = null;
 	String sourceFile = null;
 	String aimFile = null;
@@ -29,10 +25,13 @@ public class ProgressBarSpeeder implements Runnable {
 	public File file = null;
 	SFTPv3FileAttributes sfa = null;
 	ProgressBarRun pbr = null;
+	
 	public float getSpeed() {
 		return speed;
 	}
-	
+	public void setSpeed(float speed) {
+		this.speed = speed;
+	}
 
 	public ProgressBarSpeeder(Connection conn, String sourceFile,
 			String aimFile, String aimDir, int upOrDown,
@@ -45,17 +44,13 @@ public class ProgressBarSpeeder implements Runnable {
 		this.aimDir = aimDir;
 		this.upOrDown = upOrDown;
 		this.progressbar = progressbar;
-		this.fileSize = fileSize;
 		this.f = f;
 		this.pbr = pbr;
 	}
 
-	public void setSpeed(float speed) {
-		this.speed = speed;
-	}
-	
 	@Override
 	public void run() {
+		fileSize = pbr.fileSize;
 		// TODO Auto-generated method stub
 		if(upOrDown==1){
 			setDownloadProgressBar();
@@ -89,7 +84,8 @@ public class ProgressBarSpeeder implements Runnable {
 
 			file= new File(aimFile);
 			while(!file.exists()){
-
+				if(pbr.isNormalInterupt())
+					break;
 			}
 			FileInputStream fis = null;
 			try{
@@ -100,7 +96,7 @@ public class ProgressBarSpeeder implements Runnable {
 				for(int j=0;j<i;j++){
 					localFStemp/=10;
 				}
-				//	                    System.out.println("localFStemp:"+localFStemp);
+				System.out.println(sourceFile+":localFStemp:"+localFStemp);
 				progressbar.setValue(Integer.valueOf(String.valueOf(localFStemp)));
 				if(fileSize == 0)
 					progressbar.setValue(100);
@@ -110,18 +106,24 @@ public class ProgressBarSpeeder implements Runnable {
 
 			endTime = System.nanoTime();
 			time = endTime-startTime;
+			if(pbr.isNormalInterupt())
+				break;
 		}while(localFS<fileSize);
-		f.setVisible(false);
-		f.dispose();
-		while(!pbr.isDone())
-			;
+		System.out.println("fileSizeS:"+fileSize);
+		while(!pbr.isDone()){
+			if(pbr.isNormalInterupt())
+				break;
+		}
+		if(!pbr.isNormalInterupt())
+	        	f.dispose();
+		pbr.setNormalclosed(true);
 		conn.close();
-		//LinuxClient.key = true;
 		System.out.println("Dtr2_"+aimFile+"_end");
 	}
+	
 	private void setUploadProgressBar() {
-		System.out.println("Utr2_"+aimFile+"_start");
 		//进度条实时信息
+		System.out.println("Utr2_"+aimFile+"_start");
 		long startFS = 0;
 		long endFS = 0;
 		long transFS = 0;
@@ -136,13 +138,11 @@ public class ProgressBarSpeeder implements Runnable {
 		return;
 		}
 		do{
-			
 			if(time>1000000000){
 				transFS = endFS-startFS;
 				startFS = endFS;
 				speed = 1000000*transFS/time;
 				startTime = endTime;		
-	//		System.out.println("transFS:"+transFS);
 			}
 			boolean fileExist = true;
 			do{
@@ -151,10 +151,11 @@ public class ProgressBarSpeeder implements Runnable {
 					fileExist = true;
 				}catch(IOException ee){
 					fileExist = false;
+					if(pbr.isNormalInterupt())
+						break;
 				}
-			}while(!fileExist) ;              	
+			}while(!fileExist);              	
 			localFS = sfa.size; 
-			
 			endFS = localFS;
 			long localFStemp = localFS;
 			for(int j=0;j<i;j++){
@@ -162,17 +163,24 @@ public class ProgressBarSpeeder implements Runnable {
 			}
 			progressbar.setValue(Integer.valueOf(String.valueOf(localFStemp)));
 			if(fileSize == 0)
-			progressbar.setValue(100);
-			
+				progressbar.setValue(100);
 			endTime = System.nanoTime();
 			time = endTime-startTime;
-	//		System.out.println("localFS:"+localFS);
-	//		System.out.println("fileSize:"+fileSize);
+			if(pbr.isNormalInterupt())
+				break;
 		}while(localFS<fileSize);
 		s3c.close();
-		f.dispose();
-		while(!pbr.isDone())
-			;
+		while(!pbr.isDone()){
+			if(pbr.isNormalInterupt())
+				break;
+		}
+		if(!pbr.isNormalInterupt())
+        	f.dispose();
+		try  {  
+			Thread.sleep(10000);  
+        }    
+        catch(InterruptedException   e)   {} 
+        pbr.setNormalclosed(true);
 		conn.close();
 		System.out.println("Utr2_"+aimFile+"_end");
 	}
