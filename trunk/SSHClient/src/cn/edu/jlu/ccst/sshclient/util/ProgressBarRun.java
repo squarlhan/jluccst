@@ -1,25 +1,18 @@
 package cn.edu.jlu.ccst.sshclient.util;
 
-import java.io.BufferedReader;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.io.InputStreamReader;
-
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.JProgressBar;
-
-import cn.edu.jlu.ccst.sshclient.ui.ProgressBar;
-
 import ch.ethz.ssh2.Connection;
 import ch.ethz.ssh2.SCPClient;
 import ch.ethz.ssh2.SFTPv3Client;
 import ch.ethz.ssh2.SFTPv3FileAttributes;
-import ch.ethz.ssh2.Session;
 
 public class ProgressBarRun implements Runnable {
-	private boolean shouldIStopped = false;
+
 	private float speed;
 	Connection conn = null;
 	String sourceFile = null;
@@ -34,6 +27,8 @@ public class ProgressBarRun implements Runnable {
 	JFrame f = null;
 	public File file = null;
 	private boolean done = false;
+	private boolean normalInterupt = false;
+	private boolean normalclosed = false;
 	
 	public float getSpeed() {
 		return speed;
@@ -43,8 +38,6 @@ public class ProgressBarRun implements Runnable {
 		this.speed = speed;
 	}
 	
-	
-
 	public boolean isDone() {
 		return done;
 	}
@@ -60,6 +53,24 @@ public class ProgressBarRun implements Runnable {
 	public void setFileSize(long fileSize) {
 		this.fileSize = fileSize;
 	}
+	
+	
+	public boolean isNormalInterupt() {
+		return normalInterupt;
+	}
+
+	public void setNormalInterupt(boolean normalInterupt) {
+		this.normalInterupt = normalInterupt;
+	}
+
+	
+	public boolean isNormalclosed() {
+		return normalclosed;
+	}
+
+	public void setNormalclosed(boolean normalclosed) {
+		this.normalclosed = normalclosed;
+	}
 
 	public ProgressBarRun(Connection conn, String sourceFile, String aimFile, String aimDir, int upOrDown,
 			JProgressBar progressbar, JFrame f) {
@@ -71,25 +82,25 @@ public class ProgressBarRun implements Runnable {
 		this.upOrDown = upOrDown;
 		this.progressbar = progressbar;
 		this.f = f;
+		
 		if(upOrDown == 1){
-		SFTPv3Client s3c = null;
-		SFTPv3FileAttributes sfa = null;
-		try{
-			s3c = new SFTPv3Client(conn);
-			sfa = s3c.stat(sourceFile);
-		}catch(IOException ee){
-			ee.printStackTrace();
-		}
-//		first = false;
-		fileSize = sfa.size;
-		s3c.close();
+			SFTPv3Client s3c = null;
+			SFTPv3FileAttributes sfa = null;
+			try{
+				s3c = new SFTPv3Client(conn);
+				sfa = s3c.stat(sourceFile);
+			}catch(IOException ee){
+				ee.printStackTrace();
+			}
+			fileSize = sfa.size;
+			s3c.close();
 		}else{
 			if(upOrDown == 2){
 				file= new File(sourceFile);
 				FileInputStream fis = null;
 				try{
-				fis = new FileInputStream(file);
-				fileSize = fis.available();
+					fis = new FileInputStream(file);
+					fileSize = fis.available();
 				}catch(IOException ee){
 					ee.printStackTrace();
 				}
@@ -98,12 +109,11 @@ public class ProgressBarRun implements Runnable {
 	}
 
 	public void run() {
-		// TODO Auto-generated method stub
 		//处理下载进度
 		if(upOrDown==1){
 			downloadFile();
 		}else{
-			//处理上传进度
+
 			if(upOrDown == 2){
 				uploadFile();
 			}else{
@@ -113,46 +123,48 @@ public class ProgressBarRun implements Runnable {
 	}
 
 	private void uploadFile() {
-		System.out.println("Utr1_"+aimFile+"_start");
-		try{
-		// TODO Auto-generated catch block
-		
-		int l = String.valueOf(fileSize).length();
-		System.out.println("文件size:"+fileSize);
-		if(fileSize == 0)
-		progressbar.setMaximum(100);
-		else{
-		if(l>9)
-		{
-		i=l-9;
-		long temp = fileSize;
-		for(int j=0;j<1;j++)
-		temp/=10;
-		progressbar.setMaximum(Integer.valueOf(String.valueOf(temp)));
-		}
-		else
-		progressbar.setMaximum(Integer.valueOf(String.valueOf(fileSize)));
-		}
-		SCPClient client = new SCPClient(conn);
-		client.put(sourceFile, aimDir);
-		System.out.println("upLoad:"+sourceFile+"Suc");
-//		conn.close();
-		//progressbar.setMaximum(fileSize);
-		} catch (IOException e1) {
-		// TODO Auto-generated catch block
-		JOptionPane.showMessageDialog(null, "U网络连接不可用", "连接报错", JOptionPane.ERROR_MESSAGE);
-		return;
-		}
-		this.setDone(true);
-		System.out.println("Utr1_"+aimFile+"_end");
+			System.out.println("Utr1_"+aimFile+"_start");
+			int l = String.valueOf(fileSize).length();
+			System.out.println("文件size:"+fileSize);
+			if(fileSize == 0)
+				progressbar.setMaximum(100);
+			else{
+				if(l>9){
+					i=l-9;
+					long temp = fileSize;
+				for(int j=0;j<1;j++)
+					temp/=10;
+				progressbar.setMaximum(Integer.valueOf(String.valueOf(temp)));
+				}
+				else
+					progressbar.setMaximum(Integer.valueOf(String.valueOf(fileSize)));
+			}
+			SCPClient client = new SCPClient(conn);
+			System.out.println("sourceFileR:"+sourceFile);
+			System.out.println("aimDirR:"+aimDir);
+			System.out.println("aimFileR:"+aimFile);
+			System.out.println("upLoad:"+sourceFile+"Suc");
+			
+			String fileName = aimFile.substring(aimDir.length()+1);
+			System.out.println("fileName:"+fileName);
+			try {
+				client.put(sourceFile, aimDir);
+			} catch (IOException e) {
+				if(this.isNormalInterupt())
+					System.out.println("isNormalInterupt");
+				if(this.isNormalclosed())
+					System.out.println("isNormalclosed");
+				else
+					e.printStackTrace();
+			}
+			
+			this.setDone(true);
+			System.out.println("Utr1_"+aimFile+"_end");
 	}
 
 
 	private void downloadFile() {
-		System.out.println("Dtr1_"+aimFile+"_start");
-		try{
-			// TODO Auto-generated catch block
-			
+			System.out.println("Dtr1_"+aimFile+"_start");		
 			int l = String.valueOf(fileSize).length();
 			System.out.println("文件Download size:"+fileSize);
 			if(fileSize == 0)
@@ -170,30 +182,20 @@ public class ProgressBarRun implements Runnable {
 					progressbar.setMaximum(Integer.valueOf(String.valueOf(fileSize)));
 			}
 			SCPClient client = new SCPClient(conn);
-			client.get(sourceFile, aimDir);
-//			s3c.close();
+			try {
+				client.get(sourceFile, aimDir);
+			} catch (IOException e) {
+				if(this.isNormalInterupt())
+					System.out.println("isNormalInterupt");
+				if(this.isNormalclosed())
+					System.out.println("isNormalclosed");
+				else
+					e.printStackTrace();
+			}
+
 			System.out.println("downLoad:"+sourceFile+"Suc");
-			//progressbar.setMaximum(fileSize);
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			JOptionPane.showMessageDialog(null, sourceFile+"D网络连接不可用", "连接报错", JOptionPane.ERROR_MESSAGE);
-			return;
-		}
-		this.setDone(true);
-		System.out.println("Dtr1_"+aimFile+"_end");
-	}
-
-//	public void pleaseStop()
-//	{
-//		shouldIStopped = true;		
-//	}
-	//	void dispose(){
-	//		;
-	//		
-	//	}
-
-
-
-
+			this.setDone(true);
+			System.out.println("Dtr1_"+aimFile+"_end");
+	}	
 
 }
