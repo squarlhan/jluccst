@@ -1905,8 +1905,31 @@ public class LinuxClient extends javax.swing.JFrame {
 		if(dispResT.isEnabled()) {		
 			String selI = e.getActionCommand();
 			
-			JOptionPane.showMessageDialog(null, "结果"+((SSHTask)cur).getFout()+((SSHTask)cur).getFouts());
-
+//			JOptionPane.showMessageDialog(null, "结果"+((SSHTask)cur).getFout()+((SSHTask)cur).getFouts());
+			
+			// zhou
+			
+			try {
+//				System.out.println();
+//				System.out.println(((SSHTask)cur).getFouts());
+				String dirstr = ((SSHTask)cur).getFout();
+				String filesstr = ((SSHTask)cur).getFouts();
+				String[] strSplit = filesstr.split("(\\;*,\\;*|\\;+)");//分号分隔
+				for(int i=0;i<strSplit.length;i++){
+					strSplit[i]=dirstr+"\\"+strSplit[i];
+				}
+				System.out.println("*********************----------------");
+				for(int i=0;i<strSplit.length;i++){
+					ResultUI resultui = new ResultUI();
+					resultui.out(strSplit[i]);
+				}
+				
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			
+			
 			/*SSHTask stk = findSelectTask(cur.getId());
 			try {
 				String filename=stk.getFout()+"/"+stk.getId()+".txt";
@@ -2363,7 +2386,9 @@ public class LinuxClient extends javax.swing.JFrame {
 
 		//查看任务运行的结果图
 		dispResT = new JMenuItem("查看任务结果");
-		dispResT.setEnabled(false);
+//		dispResT.setEnabled(false);
+		// zhou
+		dispResT.setEnabled(true);
 		dispResT.addActionListener(new dispclick());
 		popMenuT.add(dispResT);
 
