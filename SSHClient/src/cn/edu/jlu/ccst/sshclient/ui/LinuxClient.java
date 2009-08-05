@@ -1944,6 +1944,8 @@ public class LinuxClient extends javax.swing.JFrame {
 	 */
 	//-------------------------------------------------------------//
 	private void initComponents() {
+		
+		res = ResourceBundle.getBundle( "cn.edu.jlu.ccst.sshclient.ui.RES_US_EN" );
 
 		jtl=new ArrayList<JTextArea>();
 		jsl=new ArrayList<JScrollPane>();
@@ -2029,7 +2031,7 @@ public class LinuxClient extends javax.swing.JFrame {
 		jSplitPane1.setRightComponent(jSplitPane2);
 		jMenuBar1.setName("jMenuBar1"); // NOI18N
 
-		jMenu1.setText("文件");
+		jMenu1.setText(res.getString("FILE"));
 
 		jMenu1.setName("jMenu1"); // NOI18N
 
@@ -2090,7 +2092,7 @@ public class LinuxClient extends javax.swing.JFrame {
 
 		jMenuBar1.add(jMenu1);
 
-		jMenu2.setText("任务");
+		jMenu2.setText(res.getString("TASK"));
 		jMenu2.setName("jMenu2"); // NOI18N
 
 		jMenuItem8.setText("新建");
@@ -2203,7 +2205,17 @@ public class LinuxClient extends javax.swing.JFrame {
 
 		jMenuBar1.add(jMenu2);
 
-		jMenu3.setText("帮助");
+		languMenu = new JMenu();
+		languMenu.setText(res.getString("LANGUAGE"));
+		setcn = new JMenuItem();
+		setcn.setText(res.getString("CN"));
+		languMenu.add(setcn);
+		seten = new JMenuItem();
+		seten.setText(res.getString("EN"));
+		languMenu.add(seten);
+		jMenuBar1.add(languMenu);
+		
+		jMenu3.setText(res.getString("HELP"));
 		jMenu3.setName("jMenu3"); // NOI18N
 
 		jMenuItem1.setText("索引");
@@ -2556,6 +2568,10 @@ public class LinuxClient extends javax.swing.JFrame {
 	private JMenuItem downloadItemT;
 	private JMenuItem uploadItemT;
 	private JMenuItem dispResT;
+	
+	private JMenu languMenu;
+	private JMenuItem setcn;
+	private JMenuItem seten;
 
 
 	private JPopupMenu popMenuTA;
@@ -2582,6 +2598,9 @@ public class LinuxClient extends javax.swing.JFrame {
 	private List<javax.swing.JScrollPane> jsl;
 
 	private boolean first=true;
+	
+	ResourceBundle res;
+
 
 	/**
 	 * @param args the command line arguments
