@@ -681,8 +681,8 @@ public class TaskUI extends javax.swing.JDialog {
 								String[] infs = infiles.split(";");
 								for (int i = 0; i <= ins.length - 1; i++) {
 									Element ti = et.addElement("infile");
-									ti.setText(ins[i]);
-									ti.addAttribute("url", infs[i]);
+									ti.addAttribute("url",ins[i]);
+									ti.setText(infs[i]);
 								}
 							}                           
 							et.addAttribute("out", out);
