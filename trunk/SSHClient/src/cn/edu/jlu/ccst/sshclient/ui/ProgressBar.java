@@ -6,26 +6,18 @@ import java.awt.Dimension;
 import java.awt.HeadlessException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.io.File;
 import java.io.IOException;
 import java.text.NumberFormat;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.Timer;
-import javax.swing.UIManager;
-import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-
 import ch.ethz.ssh2.Connection;
 import ch.ethz.ssh2.SFTPv3Client;
-import ch.ethz.ssh2.SFTPv3FileAttributes;
 import cn.edu.jlu.ccst.sshclient.util.MidScr;
 import cn.edu.jlu.ccst.sshclient.util.ProgressBarRun;
 import cn.edu.jlu.ccst.sshclient.util.ProgressBarSpeeder;
@@ -35,7 +27,6 @@ import cn.edu.jlu.ccst.sshclient.util.ProgressBarSpeeder;
  *
  */
 public class ProgressBar extends javax.swing.JFrame implements  ActionListener,ChangeListener,Runnable{
-	//JFrame   f   =   null;  
     JProgressBar   progressbar;  
     JLabel   label;  
     Timer   timer;  
@@ -133,33 +124,26 @@ public class ProgressBar extends javax.swing.JFrame implements  ActionListener,C
 			this.setAimFile(aimFile);
 			this.setAimDir(aimDir);
 			this.setUpOrDown(upOrDown);
-            this.setTitle("文件"+sourceFile+"传输");  
+            this.setTitle("文件传输");  
             Container   contentPane   =   this.getContentPane();  
-             
             label   =   new   JLabel("   ",JLabel.CENTER);  
             progressbar   =   new   JProgressBar();  
             progressbar.setOrientation(JProgressBar.HORIZONTAL);  
             progressbar.setMinimum(0);  
-            //progressbar.setMaximum(200);  
             progressbar.setValue(0);  
             progressbar.setStringPainted(true);  
             progressbar.addChangeListener(this);  
             progressbar.setPreferredSize(new   Dimension(200,30));  
             progressbar.setBorderPainted(true);  
-            
             JPanel   panel   =   new   JPanel();  
             b   =   new   JButton("中止传输");  
             b.addActionListener(this);  
             panel.add(b);  
-             
-            //timer   =   new   Timer(50,this);  
-             
             contentPane.add(panel,BorderLayout.CENTER);  
             contentPane.add(progressbar,BorderLayout.NORTH);  
             contentPane.add(label,BorderLayout.SOUTH); 
             //设置窗体大小
             this.setSize(150, 60);
-            
             this.setResizable(false);
             //使用中心定位窗体类
             MidScr ms=new MidScr(this);
@@ -168,19 +152,23 @@ public class ProgressBar extends javax.swing.JFrame implements  ActionListener,C
             this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
             this.pack();  
             this.setVisible(true);  
-            
-            // TODO Auto-generated method stub
+
             pbrt = new ProgressBarRun(conn, sourceFile, aimFile, aimDir, upOrDown,
         			progressbar, this);
+         
             pbst = new ProgressBarSpeeder(conn, sourceFile, aimFile, aimDir, upOrDown, progressbar, pbrt.getFileSize(), this, pbrt);
            
             System.out.println(sourceFile+":setVisible");
+
             ty = new Thread(pbrt);
             ty.start();
-            //线程ty2获取进度条需要的实时文件信息
+            try   {  
+    			Thread.sleep(50);  
+            }    
+            catch(InterruptedException   e)   {} 
             ty2 = new Thread(pbst);
             ty2.start();
-               
+            
     }  
      
      
@@ -188,42 +176,26 @@ public class ProgressBar extends javax.swing.JFrame implements  ActionListener,C
     {  
 
     	if(upOrDown == 2){
+    		pbrt.setNormalInterupt(true);
 	    	SFTPv3Client s3c = null;
 	    	System.out.println("deleteAimFile:"+aimFile);
-	    	conn.close();
-	    	ty.stop();
-	    	ty2.stop();
 	    	try{
 	    	s3c = new SFTPv3Client(conn);
 	    	s3c.rm(aimFile);
 	    	}catch(IOException ee){
 	    		ee.printStackTrace();
 	    	}
-	    	
+	    	ty.interrupt();
+	    	ty2.interrupt();
+	    	conn.close();
 	    	this.dispose();
     	}else{
     		if(upOrDown == 1){
-    			System.out.println("deleteAimFile:"+aimFile);
-    			
-//    			if(aimFile.equals("E:\\TDDOWNLOAD\\Friend2.avi"))
-//    				aimFile = "E:\\\\TDDOWNLOAD\\\\Friend2.avi";
-//    			else
-//    				aimFile = "E:\\\\TDDOWNLOAD\\\\Friend.avi";
-//    			System.out.println("deleteAimFileAF:"+aimFile);
-//    			pbrt.file;
-    			File file= new File(aimFile);
-//    			conn.close();
-    			ty.interrupt();
+    			pbrt.setNormalInterupt(true);
+    	    	ty.interrupt();
     	    	ty2.interrupt();
+    	    	conn.close();
     	    	this.dispose();
-    	    	if(file.exists()&&file.isFile()){
-    	    		System.out.println(aimFile);
-    	    		if(file.delete()){
-    	    			System.out.println("DeleteS");
-    	    		}else{
-    	    			System.out.println("DeleteF");
-    	    		}
-    	    	}
     			
     		}
     	}
@@ -232,10 +204,9 @@ public class ProgressBar extends javax.swing.JFrame implements  ActionListener,C
                      
     public   void   stateChanged(ChangeEvent   e1)  
     {  
-//            int   value   =   progressbar.getValue();  
-//            int   maxValue = progressbar.getMaximum();
-            float speed = pbst.getSpeed();
-            String unit=null;
+            float speed = 0;
+            speed = pbst.getSpeed();
+            String unit="";
             if (speed>1000){
             	speed/=1000;
             	unit = "MB/S";
@@ -255,7 +226,6 @@ public class ProgressBar extends javax.swing.JFrame implements  ActionListener,C
 
 	@Override
 	public void run() {
-		// TODO Auto-generated method stub
 		//线程ty获取进度条初始相关信息,开始文件传输
         ty = new Thread(pbrt);
         ty.start();
@@ -263,5 +233,4 @@ public class ProgressBar extends javax.swing.JFrame implements  ActionListener,C
         ty2 = new Thread(pbst);
         ty2.start();
 	}
- 
 }
