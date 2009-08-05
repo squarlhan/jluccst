@@ -2128,8 +2128,6 @@ public class LinuxClient extends javax.swing.JFrame {
 		jSeparator2.setName("jSeparator2"); // NOI18N
 		jMenu2.add(jSeparator2);
 
-
-
 		jMenuItem12.setText("串行启动组内所有任务");
 		jMenuItem12.setIcon(new ImageIcon(this.getClass().getResource("/cn/edu/jlu/ccst/sshclient/ui/resource/gst.png")));
 		jMenuItem12.setName("jMenuItem12"); // NOI18N
