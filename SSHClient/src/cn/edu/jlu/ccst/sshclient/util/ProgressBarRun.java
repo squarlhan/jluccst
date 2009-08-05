@@ -71,7 +71,6 @@ public class ProgressBarRun implements Runnable {
 		this.upOrDown = upOrDown;
 		this.progressbar = progressbar;
 		this.f = f;
-		f.setVisible(true);
 		if(upOrDown == 1){
 		SFTPv3Client s3c = null;
 		SFTPv3FileAttributes sfa = null;

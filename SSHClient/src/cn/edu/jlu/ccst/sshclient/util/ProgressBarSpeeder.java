@@ -48,7 +48,6 @@ public class ProgressBarSpeeder implements Runnable {
 		this.fileSize = fileSize;
 		this.f = f;
 		this.pbr = pbr;
-		f.setVisible(true);
 	}
 
 	public void setSpeed(float speed) {
