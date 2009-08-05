@@ -1905,7 +1905,7 @@ public class LinuxClient extends javax.swing.JFrame {
 		if(dispResT.isEnabled()) {		
 			String selI = e.getActionCommand();
 			
-			JOptionPane.showMessageDialog(null, "结果");
+			JOptionPane.showMessageDialog(null, "结果"+((SSHTask)cur).getFout()+((SSHTask)cur).getFouts());
 
 			/*SSHTask stk = findSelectTask(cur.getId());
 			try {
