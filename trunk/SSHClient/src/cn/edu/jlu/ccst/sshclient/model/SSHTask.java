@@ -237,6 +237,7 @@ public class SSHTask extends BaseClass implements BaseAction, BaseOperation {
 		
 		while (endIndex != -1){
 			String outfile = outfiles.substring(beginIndex, endIndex);
+			if(!outfile.trim().isEmpty())
 			cmdLine=cmdLine+" "+dir+outfile;
 			beginIndex = endIndex + 1;
 			outfiles = outfiles.substring(beginIndex).trim();
@@ -248,6 +249,7 @@ public class SSHTask extends BaseClass implements BaseAction, BaseOperation {
 		endIndex = opts.indexOf(separate);
 		while (endIndex != -1){
 			String opt = opts.substring(beginIndex, endIndex);
+			if(!opt.trim().isEmpty())
 			cmdLine=cmdLine+" "+opt;
 			beginIndex = endIndex + 1;
 			opts = opts.substring(beginIndex).trim();
@@ -331,7 +333,7 @@ public class SSHTask extends BaseClass implements BaseAction, BaseOperation {
 		{
 			return false;
 		}
-		int rr = JOptionPane.showConfirmDialog(null, "删除任务组工作目录", "删除目录", JOptionPane.YES_NO_OPTION);
+		int rr = JOptionPane.showConfirmDialog(null, "删除任务工作目录", "删除目录", JOptionPane.YES_NO_OPTION);
 		if(JOptionPane.YES_OPTION == rr)
 		{
 			try {

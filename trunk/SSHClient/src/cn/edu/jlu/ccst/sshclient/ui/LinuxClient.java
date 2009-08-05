@@ -384,6 +384,7 @@ public class LinuxClient extends javax.swing.JFrame {
 				{
 					SSHTask tas=new SSHTask();
 					if(getTaskRunSucc(cur.getId()) == false) {
+						tas = (SSHTask)cur;
 						tas.remove();
 					}
 					else {

@@ -404,9 +404,12 @@ public class TaskUI extends javax.swing.JDialog {
 			}   
 		}
 		newTask1.setFout(tfout.getText());
-		if(!tfous.getText().trim().endsWith(";"))newTask1.setFouts(tfous.getText()+";");
 		newTask1.setFouts(tfous.getText());
+		if(!tfous.getText().trim().endsWith(";")&&!tfous.getText().trim().isEmpty())
+			newTask1.setFouts(tfous.getText().trim()+";");		
 		newTask1.setOpts(topts.getText());
+		if(!topts.getText().trim().endsWith(";")&&!topts.getText().trim().isEmpty())	
+		    newTask1.setOpts(topts.getText().trim()+";");
 		Date SeverTime = new Date();
 		SimpleDateFormat Severtimeformat = new SimpleDateFormat(
 		"yyyyMMddHHmmss");
@@ -683,9 +686,12 @@ public class TaskUI extends javax.swing.JDialog {
 								}
 							}                           
 							et.addAttribute("out", out);
-							if(!outs.trim().endsWith(";"))outs = outs +";";
-							et.addAttribute("outfiles", outs.replace("\n", " "));
-							et.addAttribute("opts", opts);
+							if(!outs.trim().endsWith(";")&&!outs.trim().isEmpty())
+								outs = outs.trim()+";";
+							if(!opts.trim().endsWith(";")&&!opts.trim().isEmpty())	
+								opts = opts.trim()+";";
+							et.addAttribute("outfiles", outs.trim().replace("\n", " "));
+							et.addAttribute("opts", opts.trim());
 							if (starttime == null) {
 								et.addAttribute("starttime", "");
 								et.addAttribute("stimelong", "0");
