@@ -436,9 +436,17 @@ public class MulityTaskUI extends javax.swing.JDialog {
 				}
 			}
 			newTask1.setFout(tfout.getText().trim());
-			if (!tfous.getText().trim().endsWith(";"))
-				newTask1.setFouts(tfous.getText() + ";");
-			newTask1.setFouts((ii+1)+"_"+tfous.getText().trim());
+
+			String finalfouts = "";
+			String[] outs =  tfous.getText().trim().split(";");
+			for(String str:outs){
+				if(!str.trim().isEmpty()){
+					str = (ii+1)+"_"+str.trim();
+					finalfouts = finalfouts+str+";";
+				}					
+			}
+			newTask1.setFouts(finalfouts);
+			if(opts.size()==Integer.parseInt(tTextField0.getText().trim()))
 			newTask1.setOpts(opts.get(ii).trim());
 			Date SeverTime = new Date();
 			SimpleDateFormat Severtimeformat = new SimpleDateFormat(
@@ -458,7 +466,7 @@ public class MulityTaskUI extends javax.swing.JDialog {
 			selectComputerId = selectGroup.getCp().getId();// 找到计算机的ID
 
 			// 在服务器上创建工作目录的命令			
-			mkdircmds = mkdircmds + " mkdir -p ."+dirTextField.getText().trim()+(ii+1)+"; ";
+			mkdircmds = mkdircmds + " mkdir -p ."+dirTextField.getText().trim()+"_"+(ii+1)+"; ";
 
 			// 将信息保存到config.xml中
 			SAXReader reader = new SAXReader();

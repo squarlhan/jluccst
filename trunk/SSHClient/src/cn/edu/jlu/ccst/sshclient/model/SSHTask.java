@@ -261,7 +261,7 @@ public class SSHTask extends BaseClass implements BaseAction, BaseOperation {
 		//System.exit(0);
 		int taskInfo = 0;//开启任务信息：0	
 		try{
-			SSHOpCommand ry = new SSHOpCommand(computerHost, userName, userPsw, cmdLine,id,jTextArea1,fout,fin,taskInfo);
+			SSHOpCommand ry = new SSHOpCommand(computerHost, userName, userPsw, "./CShell "+cmdLine,id,jTextArea1,fout,fin,taskInfo);
 			Thread ty = new Thread(ry);
 			ty.start();
 
