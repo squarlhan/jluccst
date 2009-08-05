@@ -716,7 +716,6 @@ public class LinuxClient extends javax.swing.JFrame {
 			}catch(IOException ee){
 				fileExist = false;
 			}
-//			s3c.close();
 			s3c.close();
 			beginIndex = 0;
 			endIndex = sourceFiles.indexOf(separate);
@@ -735,15 +734,7 @@ public class LinuxClient extends javax.swing.JFrame {
 					}
 				}
 				ProgressBar pb = new ProgressBar(conn, sourceFile, aimFile, aimDir, 1);
-//				Thread t = new Thread(pb);
-//				t.start();
-//				while (t.isAlive()) {
-//				     System.out.println("线程在运行中");
-				
-//				}
-				pb.setVisible(true);
-				 System.out.println(sourceFile+"线程已经结束");
-				
+				pb.setVisible(true);	
 			}
 
 		}
