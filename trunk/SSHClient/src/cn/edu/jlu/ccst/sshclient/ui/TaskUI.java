@@ -608,8 +608,8 @@ public class TaskUI extends javax.swing.JDialog {
 			for(Component cc: tfin.getComponents()){
 				if(cc instanceof JTextField){  
 					if(((JTextField)cc).getText().length()>0){
-						mins = mins +((JTextField)cc).getText()+"; ";
-						minfs = minfs +((JTextField)cc).getToolTipText()+"; ";
+						minfs = minfs +((JTextField)cc).getText()+"; ";
+						mins = mins +((JTextField)cc).getToolTipText()+"; ";
 					}
 				}   
 			}
@@ -617,6 +617,7 @@ public class TaskUI extends javax.swing.JDialog {
 					.getText(), dirTextField.getText(), tTextArea2.getText(),
 					tTextField3.getText(), mins, tfout.getText(),
 					LinuxClient.tks.get(i).getStartTime(), 0, tfous.getText(), topts.getText(), minfs);
+			
 			this.setVisible(false);
 			this.dispose();
 			JOptionPane.showMessageDialog(null, "修改任务成功！");
