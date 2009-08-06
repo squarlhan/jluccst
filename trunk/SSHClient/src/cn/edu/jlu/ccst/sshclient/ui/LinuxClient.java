@@ -355,7 +355,7 @@ public class LinuxClient extends javax.swing.JFrame {
 						Com.remove();
 					}
 					else {
-						JOptionPane.showMessageDialog(null, "有任务执行，不能删除!");
+						JOptionPane.showMessageDialog(null, res.getString("TIP_NOT_DELETE"));
 					}
 					break;
 				}
@@ -376,7 +376,7 @@ public class LinuxClient extends javax.swing.JFrame {
 						Gro.remove();
 					}
 					else {
-						JOptionPane.showMessageDialog(null, "有任务执行，不能删除!");
+						JOptionPane.showMessageDialog(null, res.getString("TIP_NOT_DELETE"));
 					}
 					break;
 				}
@@ -388,7 +388,7 @@ public class LinuxClient extends javax.swing.JFrame {
 						tas.remove();
 					}
 					else {
-						JOptionPane.showMessageDialog(null, "任务执行中，不能删除!");
+						JOptionPane.showMessageDialog(null, res.getString("TIP_NOT_DELETE"));
 						break;
 					}
 					for(int i=0;i<jsl.size();i++)
@@ -866,7 +866,7 @@ public class LinuxClient extends javax.swing.JFrame {
 			SSHOpCommand sc = new SSHOpCommand(computerHost, userName, userPsw);
 			Connection conn = sc.getOpenedConnection();
 			if(conn == null){
-				JOptionPane.showMessageDialog(null, "网络连接不可用", "连接报错", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, res.getString("TIP_NETWORK"), res.getString("TITLE_NETWORK"), JOptionPane.ERROR_MESSAGE);
 				return;
 			}
 				SFTPv3Client s3c = null;
@@ -880,7 +880,7 @@ public class LinuxClient extends javax.swing.JFrame {
 				endIndex = sourceFiles.indexOf(separate);
 				//判断源文件和目标文件是否存在
 				if(!file.exists()){
-					JOptionPane.showMessageDialog(null, "源文件不存在", "传输报错", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, res.getString("TIP_NO_SOURCE"), res.getString("TITLE_NO_SOURCE"), JOptionPane.ERROR_MESSAGE);
 				}else{
 					try{
 						s3c = new SFTPv3Client(conn);
@@ -891,7 +891,7 @@ public class LinuxClient extends javax.swing.JFrame {
 					
 					if(fileExist){
 						System.out.println("文件存在");
-						int tt = JOptionPane.showConfirmDialog(null, "目标文件已存在，是否覆盖", "确认覆盖", JOptionPane.YES_NO_OPTION);
+						int tt = JOptionPane.showConfirmDialog(null, res.getString("TIP_FILE_EXIST"), res.getString("TITLE_FILE_EXIST"), JOptionPane.YES_NO_OPTION);
 						if(JOptionPane.NO_OPTION == tt)
 						{
 							continue;
@@ -2330,19 +2330,19 @@ public class LinuxClient extends javax.swing.JFrame {
 
 		//右键窗口部分
 		popMenuC = new JPopupMenu();
-		addItemC = new JMenuItem("添加任务组");
+		addItemC = new JMenuItem(res.getString("ADD_GROUP"));
 		addItemC.addActionListener(new rightclick());
-		delItemC = new JMenuItem("删除此电脑");
+		delItemC = new JMenuItem(res.getString("DELETE_COMPUTER"));
 		delItemC.addActionListener(new rightclick());
-		editItemC = new JMenuItem("修改此电脑");
+		editItemC = new JMenuItem(res.getString("MODIFY_COMPUTER"));
 		editItemC.addActionListener(new rightclick());
-		computerStartC = new JMenuItem("启动所有组任务");
+		computerStartC = new JMenuItem(res.getString("START_ALL"));
 		computerStartC.addMouseListener(new java.awt.event.MouseAdapter() {
 			public void mousePressed(java.awt.event.MouseEvent evt) {
 				computerStartAllGroupT(evt);
 			}
 		});
-		computerStopC = new JMenuItem("停止所有组任务");
+		computerStopC = new JMenuItem(res.getString("STOP_ALL"));
 		computerStopC.addMouseListener(new java.awt.event.MouseAdapter() {
 			public void mousePressed(java.awt.event.MouseEvent evt) {
 				computerStopAllGroupT(evt);
@@ -2355,39 +2355,39 @@ public class LinuxClient extends javax.swing.JFrame {
 		popMenuC.add(computerStopC);
 
 		popMenuG = new JPopupMenu();
-		addItemG = new JMenuItem("添加一新任务");
+		addItemG = new JMenuItem(res.getString("ADD_TASK"));
 		addItemG.addActionListener(new rightclick());
-		addMItemG = new JMenuItem("添加批量任务");
+		addMItemG = new JMenuItem(res.getString("ADD_MANY_TASK"));
 		addMItemG.addActionListener(new rightclick());
-		delItemG = new JMenuItem("删除此任务组");
+		delItemG = new JMenuItem(res.getString("DELETE_GROUP"));
 		delItemG.addActionListener(new rightclick());
-		editItemG = new JMenuItem("修改此任务组");
+		editItemG = new JMenuItem(res.getString("MODIFY_GROUP"));
 		editItemG.addActionListener(new rightclick());
-		groupStartG = new JMenuItem("串行启动所有任务");
+		groupStartG = new JMenuItem(res.getString("SERIAL_START_GROUP"));
 		groupStartG.addMouseListener(new java.awt.event.MouseAdapter() {
 			public void mousePressed(java.awt.event.MouseEvent evt) {
 				jMenuMousePressGroupStart(evt); 
 			}
 		});  
-		groupStopG = new JMenuItem("停止所有串行任务");
+		groupStopG = new JMenuItem(res.getString("STOP_GROUP"));
 		groupStopG.addMouseListener(new java.awt.event.MouseAdapter() {
 			public void mousePressed(java.awt.event.MouseEvent evt) {
 				jMenuMousePressGroupStop(evt); 
 			}
 		});  
-		allStartG = new JMenuItem("同时启动所有任务");
+		allStartG = new JMenuItem(res.getString("PARALLEL_START_GROUP"));
 		allStartG.addMouseListener(new java.awt.event.MouseAdapter() {
 			public void mousePressed(java.awt.event.MouseEvent evt) {
 				jMenuMousePressAllStartG(evt); 
 			}
 		});
-		allStopG = new JMenuItem("停止所有任务");
+		allStopG = new JMenuItem(res.getString("STOP_ALL"));
 		allStopG.addMouseListener(new java.awt.event.MouseAdapter() {
 			public void mousePressed(java.awt.event.MouseEvent evt) {
 				jMenuMousePressAllStopG(evt); 
 			}
 		});
-		downloadG = new JMenuItem("下载整组输出文件");
+		downloadG = new JMenuItem(res.getString("DOWNLOAD_GROUP"));
 		downloadG.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent e)
@@ -2412,15 +2412,15 @@ public class LinuxClient extends javax.swing.JFrame {
 		popMenuG.add(allStopG);
 		popMenuG.add(downloadG);
 		popMenuT = new JPopupMenu();       
-		delItemT = new JMenuItem("删除此任务");
+		delItemT = new JMenuItem(res.getString("DELETE_TASK"));
 		delItemT.addActionListener(new rightclick());
-		editItemT = new JMenuItem("修改此任务");
+		editItemT = new JMenuItem(res.getString("MODIFY_TASK"));
 		editItemT.addActionListener(new rightclick());
 		popMenuT.add(delItemT);
 		popMenuT.add(editItemT);
 
 		//////////////////////////////////////////////////////// 运行任务命令
-		execItemT = new JMenuItem("执行任务命令");
+		execItemT = new JMenuItem(res.getString("EXECLUDE_TASK"));
 		execItemT.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent e)
@@ -2437,7 +2437,7 @@ public class LinuxClient extends javax.swing.JFrame {
 		popMenuT.add(execItemT);
 
 		////停止任务命令
-		stopItemT = new JMenuItem("停止任务命令");
+		stopItemT = new JMenuItem(res.getString("STOP_TASK"));
 		stopItemT.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent e)
@@ -2455,7 +2455,7 @@ public class LinuxClient extends javax.swing.JFrame {
 		popMenuT.add(stopItemT);
 
 		////下载结果文件
-		downloadItemT = new JMenuItem("下载结果文件");
+		downloadItemT = new JMenuItem(res.getString("DOWNLOAD_TASK"));
 		downloadItemT.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent e)
@@ -2472,7 +2472,7 @@ public class LinuxClient extends javax.swing.JFrame {
 		);
 		popMenuT.add(downloadItemT);
 		////上传输入文件
-		uploadItemT = new JMenuItem("上传输入文件");
+		uploadItemT = new JMenuItem(res.getString("UPLOAD_TASK"));
 		uploadItemT.addActionListener(new ActionListener()
 		{
 			public void actionPerformed(ActionEvent e)
@@ -2490,7 +2490,7 @@ public class LinuxClient extends javax.swing.JFrame {
 		popMenuT.add(uploadItemT);
 
 		//查看任务运行的结果图
-		dispResT = new JMenuItem("查看任务结果");
+		dispResT = new JMenuItem(res.getString("SHOW_RESULT"));
 //		dispResT.setEnabled(false);
 		// zhou
 		dispResT.setEnabled(true);
@@ -2499,9 +2499,9 @@ public class LinuxClient extends javax.swing.JFrame {
 
 
 		popMenuCA = new JPopupMenu();       
-		delItemCA = new JMenuItem("删除所有电脑");
+		delItemCA = new JMenuItem(res.getString("DELETE_ALL"));
 		delItemCA.addActionListener(new rightclick());
-		addItemCA = new JMenuItem("添加一新电脑");
+		addItemCA = new JMenuItem(res.getString("ADD_COMPUTER"));
 		addItemCA.addActionListener(new rightclick());
 		popMenuCA.add(delItemCA);
 		popMenuCA.add(addItemCA);
@@ -2718,7 +2718,7 @@ public class LinuxClient extends javax.swing.JFrame {
 
 	private boolean first=true;
 	
-	ResourceBundle res;
+	static ResourceBundle res;
 
 
 	/**
