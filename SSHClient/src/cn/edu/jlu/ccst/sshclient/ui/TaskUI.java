@@ -620,10 +620,11 @@ public class TaskUI extends javax.swing.JDialog {
 			this.setVisible(false);
 			this.dispose();
 			JOptionPane.showMessageDialog(null, "修改任务成功！");
+			if(cb.getState()){
+				LinuxClient.upload();
+			}
 		}
-		if(cb.getState()){
-			LinuxClient.upload();
-		}
+
 		/*
 		 * String Cmd=tTextField3.getText(); // LinuxClient.GetObj();
 		 * SSHComputer
