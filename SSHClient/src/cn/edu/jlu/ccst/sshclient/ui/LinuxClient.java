@@ -687,7 +687,6 @@ public class LinuxClient extends javax.swing.JFrame {
 		if(!sourceFiles.endsWith(separate))
 			sourceFiles = sourceFiles + separate;
 		System.out.println(sourceFiles);
-		System.exit(1);
 		endIndex = sourceFiles.indexOf(separate);
 		while (endIndex != -1){
 			String fileOut = sourceFiles.substring(beginIndex, endIndex);
