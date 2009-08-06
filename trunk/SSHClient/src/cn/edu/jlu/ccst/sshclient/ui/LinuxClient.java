@@ -741,6 +741,10 @@ public class LinuxClient extends javax.swing.JFrame {
 	}
 	//-------------------------------------------------------------//
 	private void uploadCommand( ActionEvent e) throws DocumentException	{
+		upload();
+
+	}
+	static public void upload() {
 		SSHTask selectTask = new SSHTask();
 		boolean key = true;
 		boolean fileExist = true;
@@ -827,7 +831,6 @@ public class LinuxClient extends javax.swing.JFrame {
 				}
 				
 			}
-
 	}
 	//-------------------------------------------------------------//
 	/**
