@@ -4,6 +4,8 @@ import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.HeadlessException;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -151,6 +153,9 @@ public class ProgressBar extends javax.swing.JFrame implements  ActionListener,C
             this.setLocation(ms.getX(), ms.getY ()); 
             this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
             this.pack();  
+            Toolkit tk = Toolkit.getDefaultToolkit();
+            Image img = tk.getImage(this.getClass().getResource("/cn/edu/jlu/ccst/sshclient/ui/resource/faver.png"));
+    		setIconImage(img);
             this.setVisible(true);  
 
             pbrt = new ProgressBarRun(conn, sourceFile, aimFile, aimDir, upOrDown,
