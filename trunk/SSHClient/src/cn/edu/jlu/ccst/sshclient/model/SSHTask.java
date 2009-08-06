@@ -221,6 +221,8 @@ public class SSHTask extends BaseClass implements BaseAction, BaseOperation {
 		System.out.println("infiles:"+infiles);
 		int beginIndex = 0;
 		int endIndex = 0;
+		if(!infiles.endsWith(separate))
+			infiles = infiles + separate;
 		endIndex = infiles.indexOf(separate);
 		while (endIndex != -1){
 			String infile = infiles.substring(beginIndex, endIndex);
@@ -233,6 +235,8 @@ public class SSHTask extends BaseClass implements BaseAction, BaseOperation {
 		String outfiles = this.getFouts();
 		beginIndex = 0;
 		endIndex = 0;
+		if(!outfiles.endsWith(separate))
+			outfiles = outfiles + separate;
 		endIndex = outfiles.indexOf(separate);
 		
 		while (endIndex != -1){
@@ -245,7 +249,10 @@ public class SSHTask extends BaseClass implements BaseAction, BaseOperation {
 			endIndex = outfiles.indexOf(separate);
 		}
 		
+		
 		String opts = this.getOpts();
+		if(!opts.endsWith(separate))
+			opts = opts + separate;
 		endIndex = opts.indexOf(separate);
 		while (endIndex != -1){
 			String opt = opts.substring(beginIndex, endIndex);
