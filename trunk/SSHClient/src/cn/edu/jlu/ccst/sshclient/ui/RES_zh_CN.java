@@ -2,7 +2,7 @@ package cn.edu.jlu.ccst.sshclient.ui;
 
 import java.util.ListResourceBundle;
 
-public class RES_ZH_CN extends ListResourceBundle
+public class RES_zh_CN extends ListResourceBundle
 {
     static final Object[][] contents = {
             { "FILE", "文件" }, 
