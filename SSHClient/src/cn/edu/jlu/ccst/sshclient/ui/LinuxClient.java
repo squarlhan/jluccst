@@ -2017,7 +2017,7 @@ public class LinuxClient extends javax.swing.JFrame {
 	//-------------------------------------------------------------//
 	private void initComponents() {
 		
-		res = ResourceBundle.getBundle( "cn.edu.jlu.ccst.sshclient.ui.RES_US_EN" );
+		res = ResourceBundle.getBundle( "cn.edu.jlu.ccst.sshclient.ui.RES" );
 
 		jtl=new ArrayList<JTextArea>();
 		jsl=new ArrayList<JScrollPane>();
@@ -2281,9 +2281,19 @@ public class LinuxClient extends javax.swing.JFrame {
 		languMenu.setText(res.getString("LANGUAGE"));
 		setcn = new JMenuItem();
 		setcn.setText(res.getString("CN"));
+		setcn.addMouseListener(new java.awt.event.MouseAdapter() {
+			public void mousePressed(java.awt.event.MouseEvent evt) {
+				setcnMouseClicked(evt);
+			}
+		});
 		languMenu.add(setcn);
 		seten = new JMenuItem();
 		seten.setText(res.getString("EN"));
+		seten.addMouseListener(new java.awt.event.MouseAdapter() {
+			public void mousePressed(java.awt.event.MouseEvent evt) {
+				setenMouseClicked(evt);
+			}
+		});
 		languMenu.add(seten);
 		jMenuBar1.add(languMenu);
 		
@@ -2512,6 +2522,27 @@ public class LinuxClient extends javax.swing.JFrame {
 		pack();
 	}// </editor-fold>//GEN-END:initComponents
 
+	//处理语言选择
+	private void setcnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu4MouseClicked
+		// TODO add your handling code here:
+		res = ResourceBundle.getBundle( "cn.edu.jlu.ccst.sshclient.ui.RES_ZH_CN" );	
+		LinuxClient.GetObj().validate();
+		LinuxClient.GetObj().repaint();
+		LinuxClient.GetObj().setVisible(false);
+		LinuxClient.GetObj().setVisible(true);
+		
+	}
+	
+	private void setenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu4MouseClicked
+		// TODO add your handling code here:
+		res = ResourceBundle.getBundle( "cn.edu.jlu.ccst.sshclient.ui.RES_US_EN" );
+		LinuxClient.GetObj().validate();
+		LinuxClient.GetObj().repaint();
+		LinuxClient.GetObj().setVisible(false);
+		LinuxClient.GetObj().setVisible(true);
+		
+	}
+	
 	private void jMenu4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu4MouseClicked
 		// TODO add your handling code here:
 		ComputerUI newComputerUi = new ComputerUI();
