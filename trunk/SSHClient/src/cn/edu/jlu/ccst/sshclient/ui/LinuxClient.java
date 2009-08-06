@@ -684,6 +684,10 @@ public class LinuxClient extends javax.swing.JFrame {
 		String separate = ";";
 		String sourceDir = "."+selectTask.getDirname();
 		String sourceFiles = selectTask.getFouts();
+		if(!sourceFiles.endsWith(separate))
+			sourceFiles = sourceFiles + separate;
+		System.out.println(sourceFiles);
+		System.exit(1);
 		endIndex = sourceFiles.indexOf(separate);
 		while (endIndex != -1){
 			String fileOut = sourceFiles.substring(beginIndex, endIndex);
@@ -902,8 +906,6 @@ public class LinuxClient extends javax.swing.JFrame {
 					}
 					s3c.close();
 					ProgressBar pb = new ProgressBar(conn, sourceFile, aimFile, aimDir,2);
-					Thread t = new Thread(pb);
-					t.start();
 				}
 				
 			}
