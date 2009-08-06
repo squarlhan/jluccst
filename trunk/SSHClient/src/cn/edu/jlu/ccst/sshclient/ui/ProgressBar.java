@@ -26,7 +26,7 @@ import cn.edu.jlu.ccst.sshclient.util.ProgressBarSpeeder;
  * @author Administrator
  *
  */
-public class ProgressBar extends javax.swing.JFrame implements  ActionListener,ChangeListener,Runnable{
+public class ProgressBar extends javax.swing.JFrame implements  ActionListener,ChangeListener{
     JProgressBar   progressbar;  
     JLabel   label;  
     Timer   timer;  
@@ -223,14 +223,4 @@ public class ProgressBar extends javax.swing.JFrame implements  ActionListener,C
             }  
     }
 
-
-	@Override
-	public void run() {
-		//线程ty获取进度条初始相关信息,开始文件传输
-        ty = new Thread(pbrt);
-        ty.start();
-        //线程ty2获取进度条需要的实时文件信息
-        ty2 = new Thread(pbst);
-        ty2.start();
-	}
 }
