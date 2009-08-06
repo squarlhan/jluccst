@@ -740,6 +740,82 @@ public class LinuxClient extends javax.swing.JFrame {
 		}
 	}
 	//-------------------------------------------------------------//
+	public void downloadGCommand( ActionEvent e) throws DocumentException{
+			
+		SSHGroup sgp = new SSHGroup();
+		sgp = findSelectGroup();//找到当前选中的组
+		SSHComputer selectComputer = new SSHComputer();
+		selectComputer = sgp.getCp();
+		//获得下载命令的相关信息
+		String computerHost = selectComputer.getHost();
+		String userName = selectComputer.getUsername();
+		String userPsw = selectComputer.getPassword();
+		SSHTask selectTask = new SSHTask();
+		for(int i = 0; i < sgp.getSts().size(); ++i) {		
+			selectTask = sgp.getSts().get(i);
+			int beginIndex = 0;
+			int endIndex = 0;
+			String separate = ";";
+			String sourceDir = "."+selectTask.getDirname();
+			String sourceFiles = selectTask.getFouts();
+			endIndex = sourceFiles.indexOf(separate);
+			while (endIndex != -1){
+				String fileOut = sourceFiles.substring(beginIndex, endIndex);
+				String sourceFile=sourceDir+"/"+fileOut;
+				beginIndex = endIndex + 1;
+				sourceFiles = sourceFiles.substring(beginIndex).trim();
+				String aimDir = selectTask.getFout();
+				if(aimDir.endsWith("\\"))
+				{
+					aimDir=aimDir.substring(0, aimDir.length()-1);
+					System.out.println(aimDir);
+				}
+				String aimFile = aimDir+"\\"+fileOut;
+				System.out.println("sourceFile:"+sourceFile);
+				System.out.println("aimFile:"+aimFile);
+				System.out.println("aimDir:"+aimDir);
+				SSHOpCommand sc = new SSHOpCommand(computerHost, userName, userPsw);
+				Connection conn = sc.getOpenedConnection();
+				if(conn == null){
+					JOptionPane.showMessageDialog(null, "网络连接不可用", "连接报错", JOptionPane.ERROR_MESSAGE);
+				}
+				SFTPv3Client s3c = null;
+				boolean fileExist = true;
+				SFTPv3FileAttributes sfa = null;
+
+				//判断源文件和目标文件是否存在
+				try{
+					s3c = new SFTPv3Client(conn);
+					sfa = s3c.stat(sourceFile);
+				}catch(IOException ee){
+					fileExist = false;
+				}
+				s3c.close();
+				beginIndex = 0;
+				endIndex = sourceFiles.indexOf(separate);
+				if(!fileExist){
+					System.out.println("源文件不存在");
+					JOptionPane.showMessageDialog(null, "源文件不存在", "传输报错", JOptionPane.ERROR_MESSAGE);
+				}else{
+					File file= new File(aimFile);
+					if(file.exists()){
+						int tt = JOptionPane.showConfirmDialog(null, sourceFile+"目标文件已存在，是否覆盖", "确认覆盖", JOptionPane.YES_NO_OPTION);
+						if(JOptionPane.NO_OPTION == tt)
+						{
+							continue;
+						}else{
+							file.delete();
+						}
+					}
+					ProgressBar pb = new ProgressBar(conn, sourceFile, aimFile, aimDir, 1);
+					pb.setVisible(true);	
+				}
+
+			}
+		}
+	}
+
+	//---------------------------------------------------------------//
 	private void uploadCommand( ActionEvent e) throws DocumentException	{
 		upload();
 
@@ -2300,6 +2376,21 @@ public class LinuxClient extends javax.swing.JFrame {
 				jMenuMousePressAllStopG(evt); 
 			}
 		});
+		downloadG = new JMenuItem("下载整组输出文件");
+		downloadG.addActionListener(new ActionListener()
+		{
+			public void actionPerformed(ActionEvent e)
+			{
+				try
+				{
+					downloadGCommand(e);
+				} catch (DocumentException ex)
+				{
+					ex.printStackTrace();
+				}
+			}
+		}
+		);
 		popMenuG.add(addItemG);
 		popMenuG.add(addMItemG);
 		popMenuG.add(delItemG);
@@ -2308,6 +2399,7 @@ public class LinuxClient extends javax.swing.JFrame {
 		popMenuG.add(groupStopG);
 		popMenuG.add(allStartG);
 		popMenuG.add(allStopG);
+		popMenuG.add(downloadG);
 		popMenuT = new JPopupMenu();       
 		delItemT = new JMenuItem("删除此任务");
 		delItemT.addActionListener(new rightclick());
@@ -2551,6 +2643,7 @@ public class LinuxClient extends javax.swing.JFrame {
 	private JMenuItem groupStopG;
 	private JMenuItem allStartG;
 	private JMenuItem allStopG;
+	private JMenuItem downloadG;
 	private JMenuItem computerStartC;
 	private JMenuItem computerStopC;
 
