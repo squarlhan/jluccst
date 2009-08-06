@@ -42,7 +42,7 @@ public class TaskUI extends javax.swing.JDialog {
 	private String older;
 	private SSHTask oldertask;
 	private JPanel tfin;
-
+	private Checkbox cb;
 	// private JButton choosein,chooseout;
 
 	public TaskUI() {
@@ -203,7 +203,6 @@ public class TaskUI extends javax.swing.JDialog {
 		gl.setRows(0);
 
 		tfin.setLayout(gl);
-
 		tfinAreaPane = new JScrollPane(
 				JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
 				JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
@@ -238,7 +237,11 @@ public class TaskUI extends javax.swing.JDialog {
 		});
 		choosein.setBounds(300, 290, 80, 25);
 		this.add(choosein);
-
+		
+		cb = new Checkbox("Upload",  true);
+		cb.setBounds(50, 320, 160, 50);
+		this.add(cb);
+		
 		lfout = new JLabel("选择输出目录");
 		tfout = new JTextField();
 		tfout.setBounds(150, 380, 150, 30);
@@ -283,10 +286,10 @@ public class TaskUI extends javax.swing.JDialog {
 			}
 		});
 		this.add(resetButton);
-
+		
 		submitButton = new JButton("提交:");
 		submitButton.setBounds(180, 510, 80, 30);
-
+		
 		this.add(submitButton);
 		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		Dimension frameSize = this.getSize();
@@ -617,6 +620,9 @@ public class TaskUI extends javax.swing.JDialog {
 			this.setVisible(false);
 			this.dispose();
 			JOptionPane.showMessageDialog(null, "修改任务成功！");
+		}
+		if(cb.getState()){
+			LinuxClient.upload();
 		}
 		/*
 		 * String Cmd=tTextField3.getText(); // LinuxClient.GetObj();
