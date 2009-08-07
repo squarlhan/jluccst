@@ -81,6 +81,7 @@ public class LinuxClient extends javax.swing.JFrame {
 
 	/** Creates new form LinuxClient */
 	private  LinuxClient() {
+		res = ResourceBundle.getBundle( "cn.edu.jlu.ccst.sshclient.ui.RES", new Locale("en","US") );
 		flag=1;
 		this.setLocationRelativeTo(null);
 		initComponents();
@@ -2036,9 +2037,7 @@ public class LinuxClient extends javax.swing.JFrame {
 	 * 初始画图函数
 	 */
 	//-------------------------------------------------------------//
-	private void initComponents() {
-		
-		res = ResourceBundle.getBundle( "cn.edu.jlu.ccst.sshclient.ui.RES", new Locale("zh","CN") );
+	private void initComponents() {		
 
 		jtl=new ArrayList<JTextArea>();
 		jsl=new ArrayList<JScrollPane>();
