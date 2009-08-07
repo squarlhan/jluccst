@@ -305,7 +305,7 @@ public class LinuxClient extends javax.swing.JFrame {
 	private void action ( ActionEvent e ) throws DocumentException
 	{
 		String str = e.getActionCommand(); 
-		if(str.startsWith("删除"))
+		if(str.startsWith("删除")||str.startsWith("Delete"))
 		{
 			if(cur==null)
 			{
@@ -416,7 +416,7 @@ public class LinuxClient extends javax.swing.JFrame {
 			}    
 			updata(); 
 		}
-		if(str.startsWith("添加"))
+		if(str.startsWith("添加")||str.startsWith("Add"))
 		{
 			if(cur==null)
 			{
@@ -437,7 +437,7 @@ public class LinuxClient extends javax.swing.JFrame {
 				}
 				case 1:
 				{
-					if(str.startsWith("添加一")){
+					if(str.startsWith("添加一")||str.startsWith("Add a")){
 						SSHTask Tas = new SSHTask();
 						Tas.creat();
 						SSHComputer TC = GfindselectComputer(cur.getId());
@@ -456,7 +456,7 @@ public class LinuxClient extends javax.swing.JFrame {
 			}
 			updata();
 		}
-		if(str.startsWith("修改"))
+		if(str.startsWith("修改")||str.startsWith("Modify"))
 		{
 			switch(cur.getType())
 			{
@@ -706,7 +706,7 @@ public class LinuxClient extends javax.swing.JFrame {
 			SSHOpCommand sc = new SSHOpCommand(computerHost, userName, userPsw);
 			Connection conn = sc.getOpenedConnection();
 			if(conn == null){
-				JOptionPane.showMessageDialog(null, "网络连接不可用", "连接报错", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, res.getString("TIP_NETWORK"), res.getString("TITLE_NETWORK"), JOptionPane.ERROR_MESSAGE);
 			}
 			SFTPv3Client s3c = null;
 			boolean fileExist = true;
@@ -724,11 +724,11 @@ public class LinuxClient extends javax.swing.JFrame {
 			endIndex = sourceFiles.indexOf(separate);
 			if(!fileExist){
 				System.out.println("源文件不存在");
-				JOptionPane.showMessageDialog(null, "源文件不存在", "传输报错", JOptionPane.ERROR_MESSAGE);
+				JOptionPane.showMessageDialog(null, res.getString("TIP_NO_SOURCE"), res.getString("TITLE_NO_SOURCE"), JOptionPane.ERROR_MESSAGE);
 			}else{
 				File file= new File(aimFile);
 				if(file.exists()){
-					int tt = JOptionPane.showConfirmDialog(null, sourceFile+"目标文件已存在，是否覆盖", "确认覆盖", JOptionPane.YES_NO_OPTION);
+					int tt = JOptionPane.showConfirmDialog(null, sourceFile+res.getString("TIP_FILE_EXIST"), res.getString("TITLE_FILE_EXIST"), JOptionPane.YES_NO_OPTION);
 					if(JOptionPane.NO_OPTION == tt)
 					{
 						continue;
@@ -780,7 +780,7 @@ public class LinuxClient extends javax.swing.JFrame {
 				SSHOpCommand sc = new SSHOpCommand(computerHost, userName, userPsw);
 				Connection conn = sc.getOpenedConnection();
 				if(conn == null){
-					JOptionPane.showMessageDialog(null, "网络连接不可用", "连接报错", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, res.getString("TIP_NETWORK"), res.getString("TITLE_NETWORK"), JOptionPane.ERROR_MESSAGE);
 				}
 				SFTPv3Client s3c = null;
 				boolean fileExist = true;
@@ -798,11 +798,11 @@ public class LinuxClient extends javax.swing.JFrame {
 				endIndex = sourceFiles.indexOf(separate);
 				if(!fileExist){
 					System.out.println("源文件不存在");
-					JOptionPane.showMessageDialog(null, "源文件不存在", "传输报错", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, res.getString("TIP_NO_SOURCE"), res.getString("TITLE_NO_SOURCE"), JOptionPane.ERROR_MESSAGE);
 				}else{
 					File file= new File(aimFile);
 					if(file.exists()){
-						int tt = JOptionPane.showConfirmDialog(null, sourceFile+"目标文件已存在，是否覆盖", "确认覆盖", JOptionPane.YES_NO_OPTION);
+						int tt = JOptionPane.showConfirmDialog(null, sourceFile+res.getString("TIP_FILE_EXIST"), res.getString("TITLE_FILE_EXIST"), JOptionPane.YES_NO_OPTION);
 						if(JOptionPane.NO_OPTION == tt)
 						{
 							continue;
@@ -891,7 +891,7 @@ public class LinuxClient extends javax.swing.JFrame {
 					
 					if(fileExist){
 						System.out.println("文件存在");
-						int tt = JOptionPane.showConfirmDialog(null, res.getString("TIP_FILE_EXIST"), res.getString("TITLE_FILE_EXIST"), JOptionPane.YES_NO_OPTION);
+						int tt = JOptionPane.showConfirmDialog(null, sourceFile+res.getString("TIP_FILE_EXIST"), res.getString("TITLE_FILE_EXIST"), JOptionPane.YES_NO_OPTION);
 						if(JOptionPane.NO_OPTION == tt)
 						{
 							continue;
@@ -1708,14 +1708,13 @@ public class LinuxClient extends javax.swing.JFrame {
 				switch(b.getType())
 				{
 				case 0:
-				{
+				{ 
 					SSHComputer c=(SSHComputer)treenode.getUserObject();
-					s="计算机名字:"+c.getName()
-					+"\n服务器ip地址:"+c.getHost()
-					+"\n帐户名:"+c.getUsername()
-					+"\n密码:"+c.getPassword()
-					+"\n登录时间:"+b.getCreatdate()
-					+"\n备注:"+c.getMemo();
+					s=res.getString("PROPERTY_CNAME")+":"+c.getName()
+					+"\n"+res.getString("PROPERTY_CIP")+":"+c.getHost()
+					+"\n"+res.getString("PROPERTY_CUSER")+":"+c.getUsername()
+					+"\n"+res.getString("PROPERTY_CLOGIN_TIME")+":"+b.getCreatdate()
+					+"\n"+res.getString("PROPERTY_MEMO")+":"+c.getMemo();
 					Font x = new Font("Serif",0,15);
 					jTextArea1.setFont(x);
 					jTextArea1.setText(s);
@@ -1724,10 +1723,10 @@ public class LinuxClient extends javax.swing.JFrame {
 				case 1:
 				{
 					SSHGroup g=(SSHGroup)treenode.getUserObject();
-					s="任务组名:"+g.getName()
-					+"\n工作目录:"+g.getDirname()
-					+"\n创建时间:"+b.getCreatdate()
-					+"\n备注:"+g.getMemo();
+					s=res.getString("PROPERTY_GNAME")+":"+g.getName()
+					+"\n"+res.getString("PROPERTY_WORKDIR")+":"+g.getDirname()
+					+"\n"+res.getString("PROPERTY_CREATE_TIME")+":"+b.getCreatdate()
+					+"\n"+res.getString("PROPERTY_MEMO")+":"+g.getMemo();
 					Font x = new Font("Serif",0,15);
 					jTextArea1.setFont(x);
 					jTextArea1.setText(s);
@@ -1743,39 +1742,37 @@ public class LinuxClient extends javax.swing.JFrame {
 						}
 					}
 					if(t.getStartTime() == null) {
-						s="任务名:"+t.getName()  
-						+"\n命令ID:"+t.getId()
-						+"\n工作目录:"+t.getDirname()
-						+"\n命令内容:"+t.getCmd()
-						+"\n命令输出文件名:"+t.getFouts()
-						+"\n命令参数:"+t.getOpts()
-						+"\n创建时间:"+b.getCreatdate()
-						+"\n输入文件:"+t.getInfiles()
-						+"\n输入文件路径:"+t.getFin()
-						+"\n输出目录路径:"+t.getFout()
-						+"\n备注:"+t.getMemo();
+						s=res.getString("PROPERTY_TNAME")+":"+t.getName()
+						+"\n"+res.getString("PROPERTY_WORKDIR")+":"+t.getDirname()
+						+"\n"+res.getString("PROPERTY_CMD")+":"+t.getCmd()
+						+"\n"+res.getString("PROPERTY_TRESULT")+":"+t.getFouts()
+						+"\n"+res.getString("PROPERTY_TRESULT_URL")+":"+t.getFout()					
+						+"\n"+res.getString("PROPERTY_TINPUT")+":"+t.getInfiles()
+						+"\n"+res.getString("PROPERTY_TINPUT_URL")+":"+t.getFin()
+						+"\n"+res.getString("PROPERTY_TOPTION")+":"+t.getOpts()
+						+"\n"+res.getString("PROPERTY_CREATE_TIME")+":"+b.getCreatdate()
+						+"\n"+res.getString("PROPERTY_MEMO")+":"+t.getMemo();
 					}
 					else {
 						TaskUI tk1 = new TaskUI();
 						Date taskstartTime = tk1.getTaskStartTime(t);//查找XML文件获得上次任务开始时间
-						s="任务名:"+t.getName()  
-						+"\n命令ID:"+t.getId()
-						+"\n工作目录:"+t.getDirname()
-						+"\n命令内容:"+t.getCmd()
-						+"\n命令输出文件名:"+t.getFouts()
-						+"\n命令参数:"+t.getOpts()
-						+"\n创建时间:"+b.getCreatdate()
-						+"\n输入文件:"+t.getInfiles()
-						+"\n输入文件路径:"+t.getFin()
-						+"\n输出目录路径:"+t.getFout()
-						+"\n上次任务开始时间:" + taskstartTime; 
+						s=res.getString("PROPERTY_TNAME")+":"+t.getName()
+						+"\n"+res.getString("PROPERTY_WORKDIR")+":"+t.getDirname()
+						+"\n"+res.getString("PROPERTY_CMD")+":"+t.getCmd()
+						+"\n"+res.getString("PROPERTY_TRESULT")+":"+t.getFouts()
+						+"\n"+res.getString("PROPERTY_TRESULT_URL")+":"+t.getFout()					
+						+"\n"+res.getString("PROPERTY_TINPUT")+":"+t.getInfiles()
+						+"\n"+res.getString("PROPERTY_TINPUT_URL")+":"+t.getFin()
+						+"\n"+res.getString("PROPERTY_TOPTION")+":"+t.getOpts()
+						+"\n"+res.getString("PROPERTY_CREATE_TIME")+":"+b.getCreatdate()
+						+"\n"+res.getString("PROPERTY_TLAST_TIME")+":"+ taskstartTime; 
 						if(t.getRunSucc() == true) {                          		
-							s += "\n正在执行中，执行时间:" + String.valueOf((System.currentTimeMillis() - t.getRunTime())/1000.0)+"s";	    
+							s += "\n"+res.getString("PROPERTY_TEXE_TIME")+":" + String.valueOf((System.currentTimeMillis() - t.getRunTime())/1000.0)+"s";	    
 						}
 						else {
-							s += "\n任务执行结束!";
+							s += "\n"+res.getString("PROPERTY_TEND")+"!";
 						}
-						s += "\n备注:"+t.getMemo();
+						s += "\n"+res.getString("PROPERTY_MEMO")+":"+t.getMemo();
 					}
 					Font x = new Font("Serif",0,15);
 					jTextArea1.setFont(x);
@@ -1903,7 +1900,7 @@ public class LinuxClient extends javax.swing.JFrame {
 		}
 		public void actionPerformed(ActionEvent e)
 		{
-			if(e.getActionCommand().equals("复制"))
+			if(e.getActionCommand().equals("复制")||e.getActionCommand().equals("Copy"))
 			{
 
 				String temp=t.getSelectedText(); //拖动鼠标选取文本。
@@ -1912,7 +1909,7 @@ public class LinuxClient extends javax.swing.JFrame {
 				clipboard.setContents(text,null); 
 
 			}
-			if(e.getActionCommand().equals("关闭窗口"))
+			if(e.getActionCommand().equals("关闭窗口")||e.getActionCommand().equals("Colse"))
 			{
 				for(int i=0;i<tks.size();i++)
 				{
@@ -1920,7 +1917,7 @@ public class LinuxClient extends javax.swing.JFrame {
 					{
 						if(tks.get(i).getStatus()==1)
 						{
-							JOptionPane.showMessageDialog(null, "任务执行中不可关闭！");
+							JOptionPane.showMessageDialog(null, res.getString("TIP_NOT_DELETE"));
 							return;
 						}
 					}
@@ -1945,7 +1942,7 @@ public class LinuxClient extends javax.swing.JFrame {
 					}
 				}
 			}
-			if(e.getActionCommand().equals("清空"))
+			if(e.getActionCommand().equals("清空")||e.getActionCommand().equals("Clear"))
 			{
 				//System.out.println("清空");
 				t.setText("");
