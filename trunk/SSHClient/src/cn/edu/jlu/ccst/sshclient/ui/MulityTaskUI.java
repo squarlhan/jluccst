@@ -43,11 +43,13 @@ public class MulityTaskUI extends javax.swing.JDialog {
 	private JPanel tfin;
 	public static List<String> opts; 
 	public static List<String> rules; 
+	private static ResourceBundle res;
 
 	// private JButton choosein,chooseout;
 
 	public MulityTaskUI() {
-		this.setTitle("新建批量任务");
+		res = ResourceBundle.getBundle( "cn.edu.jlu.ccst.sshclient.ui.RES_MTASKUI");
+		this.setTitle(res.getString("CREATEBATCHTASKS"));
 		opts = new ArrayList<String>();
 		rules = new ArrayList<String>();
 		initComponent();
@@ -63,27 +65,27 @@ public class MulityTaskUI extends javax.swing.JDialog {
 					optnum.add(m.group());
 			    }
 				if(tTextField0.getText().isEmpty()){
-					JOptionPane.showMessageDialog(null, "请输入任务个数");
+					JOptionPane.showMessageDialog(null, res.getString("TASKSAMOUNT"));
 					return;
 				}
 				if(!Pattern.matches("[1-9]\\d*",tTextField0.getText())){
-					JOptionPane.showMessageDialog(null, "任务个数只能是正整数");
+					JOptionPane.showMessageDialog(null, res.getString("ONLYSTARTWITHINT"));
 					return;
 				}
 				if(tTextField0.getText().trim().startsWith("0")){
-					JOptionPane.showMessageDialog(null, "任务个数不能以0开头");
+					JOptionPane.showMessageDialog(null, res.getString("NOTSTARTWITHZERO"));
 					return;
 				}
 				if(topts.getText().isEmpty()){
-					JOptionPane.showMessageDialog(null, "请输入参数");
+					JOptionPane.showMessageDialog(null, res.getString("ENTERPARAMETER"));
 					return;
 				}
 				if(optnum.isEmpty()){
-					JOptionPane.showMessageDialog(null, "请输入可变参数");
+					JOptionPane.showMessageDialog(null, res.getString("ENTERVARPARAMETER"));
 					return;
 				}
 				if(topts.getText().indexOf("(0)")!=-1){
-					JOptionPane.showMessageDialog(null, "可变参数从1开始替换");
+					JOptionPane.showMessageDialog(null, res.getString("VARREPLACEFROMONE"));
 					return;
 				}
 				
@@ -96,15 +98,15 @@ public class MulityTaskUI extends javax.swing.JDialog {
 		inputoptsButton.addMouseListener(new java.awt.event.MouseAdapter() {
 			public void mousePressed(java.awt.event.MouseEvent evt) {				
 				if(tTextField0.getText().isEmpty()){
-					JOptionPane.showMessageDialog(null, "请输入任务个数");
+					JOptionPane.showMessageDialog(null, res.getString("TASKSAMOUNT"));
 					return;
 				}
 				if(!Pattern.matches("[1-9]\\d*",tTextField0.getText())){
-					JOptionPane.showMessageDialog(null, "任务个数只能是正整数");
+					JOptionPane.showMessageDialog(null, res.getString("ONLYSTARTWITHINT"));
 					return;
 				}
 				if(tTextField0.getText().trim().startsWith("0")){
-					JOptionPane.showMessageDialog(null, "任务个数不能以0开头");
+					JOptionPane.showMessageDialog(null, res.getString("NOTSTARTWITHZERO"));
 					return;
 				}
 								
@@ -155,6 +157,7 @@ public class MulityTaskUI extends javax.swing.JDialog {
 	 * 初始画图函数
 	 */
 	private void initComponent() {
+		res = ResourceBundle.getBundle( "cn.edu.jlu.ccst.sshclient.ui.RES_MTASKUI");
 
 		this.setResizable(false);
 		this.setLocationRelativeTo(null);
@@ -165,14 +168,14 @@ public class MulityTaskUI extends javax.swing.JDialog {
 		this.setLayout(null);
 		this.setSize(400, 700);
 		
-		tLabel0 = new JLabel("任务个数:");
+		tLabel0 = new JLabel(res.getString("TASKSAMOUNT"));
 		tLabel0.setBounds(50, 30, 80, 20);
 		this.add(tLabel0);
 		tTextField0 = new JTextField();
 		tTextField0.setBounds(150, 30, 150, 30);
 		this.add(tTextField0);
 
-		tLabel1 = new JLabel("任务名字:");
+		tLabel1 = new JLabel(res.getString("TASKNAME"));
 		tLabel1.setBounds(50, 70, 80, 20);
 		this.add(tLabel1);
 		tTextField1 = new JTextField();
@@ -180,7 +183,7 @@ public class MulityTaskUI extends javax.swing.JDialog {
 		this.add(tTextField1);
 		tTextField1.getDocument().addDocumentListener(new Swing_OnValueChanged());
 
-		dirLabel = new JLabel("工作目录:");
+		dirLabel = new JLabel(res.getString("WORKDIR"));
 		dirLabel.setBounds(50, 110, 80, 30);
 		this.add(dirLabel);
 		dirTextField = new JTextField();
@@ -197,14 +200,14 @@ public class MulityTaskUI extends javax.swing.JDialog {
 		dirTextField.setText(gdir);
 		this.add(dirTextField);
 
-		tLabel3 = new JLabel("任务命令:");
+		tLabel3 = new JLabel(res.getString("TASKCOMMAND"));
 		tLabel3.setBounds(50, 150, 80, 20);
 		this.add(tLabel3);
 		tTextField3 = new JTextField();
 		tTextField3.setBounds(150, 150, 150, 30);
 		this.add(tTextField3);
 
-		loutnames = new JLabel("结果文件");
+		loutnames = new JLabel(res.getString("RESULTFILE"));
 		tfous = new JTextArea();
 		tfous.setLineWrap(true);
 		tfous.setBounds(150, 190, 150, 80);
@@ -214,27 +217,27 @@ public class MulityTaskUI extends javax.swing.JDialog {
 				JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		tfousAreaPane.setBounds(150, 190, 150, 80);
 		this.add(tfousAreaPane);
-		tfous.setToolTipText("请用半角分号隔开");
+		tfous.setToolTipText(res.getString("SEPARATEWITHSEMICOLON"));
 		loutnames.setBounds(50, 190, 80, 20);
 		this.add(loutnames);
 
-		lopts = new JLabel("任务参数:");
+		lopts = new JLabel(res.getString("ENTERPARAMETER"));
 		lopts.setBounds(50, 280, 80, 20);
 		this.add(lopts);
 		topts = new JTextField();
-		topts.setToolTipText("参数之间请用半角分号隔开，\n可变参数请用(),例如第一个可变参数是(1)");
+		topts.setToolTipText(res.getString("PARAMETEREXPLANATION"));
 		topts.setBounds(150, 280, 150, 30);
 		this.add(topts);
 
-		inputoptsButton = new JButton("输入/查看全部参数:");
+		inputoptsButton = new JButton(res.getString("CHECKPARAMETERS"));
 		inputoptsButton.setBounds(40, 320, 150, 30);
 		this.add(inputoptsButton);
 
-		inputrulesButton = new JButton("输入参数规则:");
+		inputrulesButton = new JButton(res.getString("PARAMETERRULE"));
 		inputrulesButton.setBounds(200, 320, 150, 30);
 		this.add(inputrulesButton);
 		
-		lfin = new JLabel("选择输入文件");
+		lfin = new JLabel(res.getString("INPUTFILE"));
 		tfin = new JPanel();
 		tfin.setBorder(BorderFactory.createLineBorder(Color.black));
 		GridLayout gl = new GridLayout();
@@ -276,7 +279,7 @@ public class MulityTaskUI extends javax.swing.JDialog {
 		choosein.setBounds(300, 360, 80, 25);
 		this.add(choosein);
 
-		lfout = new JLabel("选择输出目录");
+		lfout = new JLabel(res.getString("OUTPUTDIR"));
 		tfout = new JTextField();
 		tfout.setBounds(150, 450, 150, 30);
 		lfout.setBounds(50, 450, 80, 20);
@@ -299,7 +302,7 @@ public class MulityTaskUI extends javax.swing.JDialog {
 		this.add(tfout);
 		this.add(chooseout);
 
-		tLabel2 = new JLabel("任务备注:");
+		tLabel2 = new JLabel(res.getString("TASKMEMO"));
 		tLabel2.setBounds(50, 500, 80, 20);
 		this.add(tLabel2);
 		tTextArea2 = new JTextArea("");
@@ -312,11 +315,11 @@ public class MulityTaskUI extends javax.swing.JDialog {
 		memoAreaPane.setBounds(150, 500, 150, 80);
 		this.add(memoAreaPane);
 
-		resetButton = new JButton("重置:");
+		resetButton = new JButton(res.getString("RESET"));
 		resetButton.setBounds(50, 590, 80, 30);		
 		this.add(resetButton);
 
-		submitButton = new JButton("提交:");
+		submitButton = new JButton(res.getString("SUBMIT"));
 		submitButton.setBounds(180, 590, 80, 30);
 		this.add(submitButton);
 		
@@ -380,31 +383,31 @@ public class MulityTaskUI extends javax.swing.JDialog {
 	private void SubmitButtonMousePressed(java.awt.event.MouseEvent evt)
 	throws IOException {
 		if(tTextField0.getText().isEmpty()){
-			JOptionPane.showMessageDialog(null, "请输入任务个数");
+			JOptionPane.showMessageDialog(null, res.getString("TASKSAMOUNT"));
 			return;
 		}
 		if(!Pattern.matches("[1-9]\\d*",tTextField0.getText())){
-			JOptionPane.showMessageDialog(null, "任务个数只能是正整数");
+			JOptionPane.showMessageDialog(null, res.getString("ONLYSTARTWITHINT"));
 			return;
 		}
 		if (tTextField1.getText().equals("")) {
-			JOptionPane.showMessageDialog(null, "请输入新建任务的名字");
+			JOptionPane.showMessageDialog(null, res.getString("TASKNAME"));
 			return;
 		}
 		if (dirTextField.getText().equals("")) {
-			JOptionPane.showMessageDialog(null, "请输入工作组目录");
+			JOptionPane.showMessageDialog(null, res.getString("WORKDIR"));
 			return;
 		}
 		if (!dirTextField.getText().startsWith("/")) {
-			JOptionPane.showMessageDialog(null, "目录格式不对，请以“/”开头");
+			JOptionPane.showMessageDialog(null, res.getString("DIREXPLANATION"));
 			return;
 		}
 		if (tTextField3.getText().equals("")) {
-			JOptionPane.showMessageDialog(null, "请输入新建任务的命令");
+			JOptionPane.showMessageDialog(null, res.getString("TASKCOMMAND"));
 			return;
 		}
 		if (tfout.getText().equals("")) {
-			JOptionPane.showMessageDialog(null, "请选择输出目录");
+			JOptionPane.showMessageDialog(null, res.getString("OUTPUTDIR"));
 			return;
 		}
 		LinuxClient tempClient = LinuxClient.GetObj();
@@ -545,7 +548,7 @@ public class MulityTaskUI extends javax.swing.JDialog {
 		Ltest.setBounds(120, 650, 90, 30);
 			this.setVisible(false);
 			this.dispose();
-			JOptionPane.showMessageDialog(null, "创建任务成功！");
+			JOptionPane.showMessageDialog(null, res.getString("CREATETASKSUCC"));
 		
 	}
 
@@ -586,7 +589,7 @@ public class MulityTaskUI extends javax.swing.JDialog {
 	private void createdirs(Connection conn, String dirs) throws IOException {
 
 		// Connection conn = getOpenedConnection(TC);
-		Ltest.setText("正在设置目录...");
+		Ltest.setText(res.getString("DIRSETTING"));
 		Session sess = conn.openSession();
 		sess.execCommand("./squarlhan/CShell " + dirs);
 
@@ -595,7 +598,7 @@ public class MulityTaskUI extends javax.swing.JDialog {
 				new InputStreamReader(sess.getStdout()));
 		while ((out = bufferedReader.readLine()) != null) {
 			if (out.equals("EOP")) {
-				Ltest.setText("设置目录成功！");
+				Ltest.setText(res.getString("CREATEDIRSUCC"));
 				this.flag = true;
 			}
 		}
