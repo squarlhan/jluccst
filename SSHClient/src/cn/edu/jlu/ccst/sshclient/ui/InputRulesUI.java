@@ -41,14 +41,13 @@ public class InputRulesUI extends javax.swing.JDialog {
 	private JPanel panel, panel1;
 	private List<String> opts;
 	private List<String> rules;
-
+	private static ResourceBundle res;
 
 	public InputRulesUI(int tasksum, String template, List<String> rules) {
-		this.setTitle("输入参数规则");
-		this.tasksum = tasksum;
-		
+		res = ResourceBundle.getBundle( "cn.edu.jlu.ccst.sshclient.ui.RES_IRUI", new Locale("en","US") );
+		this.setTitle(res.getString("TITLE"));
+		this.tasksum = tasksum;		
 		this.rules = rules;
-
 		this.template = template;
 		labels = new ArrayList<JLabel>();
 		textFields = new ArrayList<JTextField>();
@@ -127,7 +126,7 @@ public class InputRulesUI extends javax.swing.JDialog {
 		int y = 30;
 		
 		for(int i=0;i<=optssum-1;i++){
-			JLabel newlabel = new JLabel("输入第"+(i+1)+"个参数的下界：");
+			JLabel newlabel = new JLabel(res.getString("LOWER_BOUND_1")+(i+1)+res.getString("LOWER_BOUND_2")+ "：");
 			newlabel.setBounds(x,y+i*40,140, 30);
 			labels.add(newlabel);
 			panel.add(newlabel);
@@ -137,7 +136,7 @@ public class InputRulesUI extends javax.swing.JDialog {
 			textFields.add(newtf);
 			panel.add(newtf);
 			
-			JLabel newlabel1 = new JLabel("上界：");
+			JLabel newlabel1 = new JLabel(res.getString("UPPER_BOUND")+"：");
 			newlabel1.setBounds(x+200,y+i*40,50, 30);
 			labels1.add(newlabel1);
 			panel.add(newlabel1);
@@ -147,7 +146,7 @@ public class InputRulesUI extends javax.swing.JDialog {
 			textFields1.add(newtf1);
 			panel.add(newtf1);
 			
-			JLabel newlabel2 = new JLabel("个数：");
+			JLabel newlabel2 = new JLabel(res.getString("NUMBER")+"：");
 			newlabel2.setBounds(x+310,y+i*40,50, 30);
 			labels2.add(newlabel2);
 			panel.add(newlabel2);
@@ -161,11 +160,11 @@ public class InputRulesUI extends javax.swing.JDialog {
 			
 			
 			if(i==optssum-1){
-				resetButton = new JButton("重置:");
+				resetButton = new JButton(res.getString("RESET"));
 				resetButton.setBounds(120, 0, 80, 30);
 				panel1.add(resetButton);
 
-				submitButton = new JButton("提交:");
+				submitButton = new JButton(res.getString("SUBMIT"));
 				submitButton.setBounds(250, 0, 80, 30);
 				panel1.add(submitButton);
 				
@@ -211,31 +210,31 @@ public class InputRulesUI extends javax.swing.JDialog {
 			String t2 = textFields1.get(a).getText().trim();
 			String t3 = textFields2.get(a).getText().trim();
 			if(t1.isEmpty()){
-				JOptionPane.showMessageDialog(null, "请输入第"+(a+1)+"个参数的下界");
+				JOptionPane.showMessageDialog(null, res.getString("TIP_NO_LOWER_1")+(a+1)+res.getString("TIP_NO_LOWER_2"));
 				return;
 			}
 			if(t2.isEmpty()){
-				JOptionPane.showMessageDialog(null, "请输入第"+(a+1)+"个参数的上界");
+				JOptionPane.showMessageDialog(null, res.getString("TIP_NO_UPPER_1")+(a+1)+res.getString("TIP_NO_UPPER_2"));
 				return;
 			}
 			if(t3.isEmpty()){
-				JOptionPane.showMessageDialog(null, "请输入第"+(a+1)+"个参数的个数");
+				JOptionPane.showMessageDialog(null, res.getString("TIP_NO_NUMBER_1")+(a+1)+res.getString("TIP_NO_NUMBER_2"));
 				return;
 			}
 			if(!Pattern.matches("-{0,1}\\d+\\.{0,1}\\d*", t1)){
-				JOptionPane.showMessageDialog(null, "第"+(a+1)+"个参数上界必须是小数或整数");
+				JOptionPane.showMessageDialog(null, res.getString("TIP_LOWER_1")+(a+1)+res.getString("TIP_LOWER_2"));
 				return;
 			}
 			if(!Pattern.matches("-{0,1}\\d+\\.{0,1}\\d*", t2)){
-				JOptionPane.showMessageDialog(null, "第"+(a+1)+"个参数下界必须是小数或整数");
+				JOptionPane.showMessageDialog(null, res.getString("TIP_UPPER_1")+(a+1)+res.getString("TIP_UPPER_2"));
 				return;
 			}
 			if(!Pattern.matches("[1-9]\\d*", t3)){			
-				JOptionPane.showMessageDialog(null, "第"+(a+1)+"个参数个数是大于0整数");
+				JOptionPane.showMessageDialog(null, res.getString("TIP_NUMBER_1")+(a+1)+res.getString("TIP_NUMBER_2"));
 				return;
 			}
 			if(Float.parseFloat(t1)>Float.parseFloat(t2)){
-				JOptionPane.showMessageDialog(null, "第"+(a+1)+"个参数上界必须大于等于下界");
+				JOptionPane.showMessageDialog(null, res.getString("TIP_LOWER_UPPER_1")+(a+1)+res.getString("TIP_LOWER_UPPER_2"));
 				return;
 			}
 			
@@ -262,7 +261,7 @@ public class InputRulesUI extends javax.swing.JDialog {
 			sum = sum * Integer.parseInt(tf.getText().trim());
 		}
 		if(sum!=tasksum){			
-			JOptionPane.showMessageDialog(null, "各参数个数乘积必须与任务个数相同");
+			JOptionPane.showMessageDialog(null, res.getString("TIP_NO_SAME"));
 			return;
 		}
 		
@@ -300,7 +299,7 @@ public class InputRulesUI extends javax.swing.JDialog {
 		MulityTaskUI.opts = opts;
 		this.setVisible(false);
 		this.dispose();
-		JOptionPane.showMessageDialog(null, "输入任务参数成功！");
+		JOptionPane.showMessageDialog(null, res.getString("TIP_SUCCESS"));
 	}
 	
 	private void printArrayList(ArrayList list){
