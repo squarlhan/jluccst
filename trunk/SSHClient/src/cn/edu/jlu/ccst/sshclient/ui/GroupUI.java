@@ -39,18 +39,26 @@ public class GroupUI extends javax.swing.JDialog  {
 	private boolean flag = false;
 	private String older;
 	private SSHGroup sgodler;
+	private static ResourceBundle res;
+	
 	public GroupUI(){
-		this.setTitle("新建工作组");
+		res = ResourceBundle.getBundle( "cn.edu.jlu.ccst.sshclient.ui.RES_GUI" );
+		
+//		this.setTitle("新建工作组");
+		this.setTitle(res.getString("TITLE"));
 		initComponent();	   
 		submitButton.addMouseListener(new java.awt.event.MouseAdapter() {
 			public void mousePressed(java.awt.event.MouseEvent evt) {
 				SubmitButtonMousePressed(evt);
 			}
 		});
+		
+		
 	}
 	//----------------------------------------------------------//
 	public GroupUI(String name,String dirname, String memo){
-		this.setTitle("修改工作组");
+//		this.setTitle("修改工作组");
+		this.setTitle(res.getString("MODIFY_GROUP"));
 		initComponent();	  
 		submitButton.addMouseListener(new java.awt.event.MouseAdapter() {
 			public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -81,16 +89,17 @@ public class GroupUI extends javax.swing.JDialog  {
 		this.setLayout(null);
 		this.setSize(350, 350);
 
-		gLabel1= new JLabel("工作组名字:");
+//		gLabel1= new JLabel("工作组名字:");
+		gLabel1= new JLabel(res.getString("GROUP_NAME")+":");
 		gLabel1.setBounds(50, 50, 80, 30);
 		this.add(gLabel1);
 		gTextField1 = new JTextField();
 		gTextField1.setBounds(150,50, 150, 30);
 		this.add(gTextField1);
-		if(this.getTitle().startsWith("新建"))
+		if(this.getTitle().startsWith(res.getString("NEW")))
 			gTextField1.getDocument().addDocumentListener(new Swing_OnValueChanged());
 
-		dirLabel= new JLabel("工作目录:");
+		dirLabel= new JLabel(res.getString("WORK_DIR")+":");
 		dirLabel.setBounds(50, 100, 80, 30);
 		this.add(dirLabel);
 		dirTextField = new JTextField();
@@ -98,7 +107,7 @@ public class GroupUI extends javax.swing.JDialog  {
 		dirTextField.setText(gTextField1.getText());
 		this.add(dirTextField);
 
-		memoLabel = new JLabel("备注:");
+		memoLabel = new JLabel(res.getString("MEMO")+":");
 		memoLabel.setBounds(50, 150, 80, 30);
 		this.add(memoLabel);
 		memoJArea = new javax.swing.JTextArea("");
@@ -108,7 +117,7 @@ public class GroupUI extends javax.swing.JDialog  {
 		memoAreaPane.setBounds(150, 150, 150, 80);
 		this.add(memoAreaPane);
 
-		resetButton = new JButton("重置:");
+		resetButton = new JButton(res.getString("RESET"));
 		resetButton.setBounds(50,250, 80, 30);
 		resetButton.addMouseListener(new java.awt.event.MouseAdapter() {
 			public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -117,7 +126,7 @@ public class GroupUI extends javax.swing.JDialog  {
 		});
 		this.add(resetButton);
 
-		submitButton = new JButton("提交:");
+		submitButton = new JButton(res.getString("SUBMIT"));
 		submitButton.setBounds(180, 250, 80, 30);
 
 		this.add(submitButton);
@@ -155,7 +164,7 @@ public class GroupUI extends javax.swing.JDialog  {
 	 * 处理重置按钮
 	 */
 	private  void ResetButtonMousePressed(java.awt.event.MouseEvent evt){
-		if (this.getTitle().startsWith("新建")) {
+		if (this.getTitle().startsWith(res.getString("NEW"))) {
 			gTextField1.setText(null);
 			dirTextField.setText(null);
 			memoJArea.setText(null);
@@ -172,15 +181,17 @@ public class GroupUI extends javax.swing.JDialog  {
 	private void SubmitButtonMousePressed(java.awt.event.MouseEvent evt)
 	{
 		if(gTextField1.getText().equals("")){
-			JOptionPane.showMessageDialog(null,"请输入工作组的名字");
+//			JOptionPane.showMessageDialog(null,res.getString("INPUT_GROUP_NAME"));
+			JOptionPane.showMessageDialog(null,res.getString("INPUT_GROUP_NAME"),"Message",JOptionPane.INFORMATION_MESSAGE );
 			return;
 		}
 		if(dirTextField.getText().equals("")){
-			JOptionPane.showMessageDialog(null,"请输入工作组目录");
+//			JOptionPane.showMessageDialog(null,res.getString("INPUT_WORK_DIR"));
+			JOptionPane.showMessageDialog(null,res.getString("INPUT_WORK_DIR"),"Message",JOptionPane.INFORMATION_MESSAGE );
 			return;
 		}
 		if(!dirTextField.getText().startsWith("/")){
-			JOptionPane.showMessageDialog(null,"目录格式不对，请以“/”开头");
+			JOptionPane.showMessageDialog(null,res.getString("WRONG_DIR"),"Message",JOptionPane.INFORMATION_MESSAGE );
 			return;
 		}
 		LinuxClient temp = LinuxClient.GetObj();
@@ -263,7 +274,7 @@ public class GroupUI extends javax.swing.JDialog  {
 			if (flag) {
 				this.setVisible(false);
 				this.dispose();
-				JOptionPane.showMessageDialog(null, "创建组成功！");
+				JOptionPane.showMessageDialog(null, res.getString("CREAT_GROUP_SUC")+"!");
 			}//else JOptionPane.showMessageDialog(null, "创建组失败！");
 		}
 		catch(Exception e){
@@ -276,15 +287,15 @@ public class GroupUI extends javax.swing.JDialog  {
 	{
 		if(gTextField1.getText().equals(""))
 		{
-			JOptionPane.showMessageDialog(null,"请输入工作组的名字");
+			JOptionPane.showMessageDialog(null,res.getString("INPUT_GROUP_NAME"));
 			return;
 		}
 		if(dirTextField.getText().equals("")){
-			JOptionPane.showMessageDialog(null,"请输入工作组目录");
+			JOptionPane.showMessageDialog(null,res.getString("INPUT_WORK_DIR"));
 			return;	  
 		}
 		if(!dirTextField.getText().startsWith("/")){
-			JOptionPane.showMessageDialog(null,"目录格式不对，请以“/”开头");
+			JOptionPane.showMessageDialog(null,res.getString("WRONG_DIR"));
 			return;
 		}
 
@@ -306,7 +317,7 @@ public class GroupUI extends javax.swing.JDialog  {
 		if (flag) {
 			this.setVisible(false);
 			this.dispose();
-			JOptionPane.showMessageDialog(null, "修改组成功！");
+			JOptionPane.showMessageDialog(null, res.getString("MODIFY_GP_SUC")+"！");
 		}else flag = true;
 	}
 
@@ -354,7 +365,7 @@ public class GroupUI extends javax.swing.JDialog  {
 
 
 		//Connection conn = getOpenedConnection(TC);
-		Ltest.setText("正在设置目录...");
+		Ltest.setText(res.getString("SET_UP_DIR")+"...");
 		Session sess = conn.openSession();
 		String finalcmd = dirs.substring(1);
 		//		    while(finalcmd.endsWith("/")){
@@ -373,7 +384,7 @@ public class GroupUI extends javax.swing.JDialog  {
 		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(sess.getStdout()));    
 		while((out=bufferedReader.readLine())!=null) {
 			if(out.equals("EOP")){
-				Ltest.setText("设置目录成功！");
+				Ltest.setText(res.getString("SET_UP_DIR_SUC")+"！");
 				this.flag = true;
 
 			}
