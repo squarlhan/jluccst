@@ -81,7 +81,7 @@ public class LinuxClient extends javax.swing.JFrame {
 
 	/** Creates new form LinuxClient */
 	private  LinuxClient() {
-		res = ResourceBundle.getBundle( "cn.edu.jlu.ccst.sshclient.ui.RES", new Locale("zh","CN") );
+		res = ResourceBundle.getBundle( "cn.edu.jlu.ccst.sshclient.ui.RES", new Locale("en","US"));
 		flag=1;
 		this.setLocationRelativeTo(null);
 		initComponents();
