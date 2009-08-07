@@ -2016,7 +2016,7 @@ public class LinuxClient extends javax.swing.JFrame {
 	//-------------------------------------------------------------//
 	private void initComponents() {
 		
-		res = ResourceBundle.getBundle( "cn.edu.jlu.ccst.sshclient.ui.RES" );
+		res = ResourceBundle.getBundle( "cn.edu.jlu.ccst.sshclient.ui.RES", new Locale("zh","CN") );
 
 		jtl=new ArrayList<JTextArea>();
 		jsl=new ArrayList<JScrollPane>();
