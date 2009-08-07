@@ -2,6 +2,7 @@ package cn.edu.jlu.ccst.sshclient.util;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.*;
+
 import javax.swing.*;
 import javax.swing.table.*;
 /**
@@ -13,7 +14,7 @@ import javax.swing.table.*;
  */
 public class ExcelExport  {
     public ExcelExport() { }
-    public void exportTable(JTable table, File file) throws IOException {
+    public Boolean exportTable(JTable table, File file) throws IOException {
         TableModel model = table.getModel();
         FileWriter out = new FileWriter(file);
         
@@ -32,8 +33,17 @@ public class ExcelExport  {
         }
         out.close();
         System.out.println("write out to: " + file);
+        return true;
     }
-    
+    public void openExcelFile(String filestr){
+    	File file=new File(filestr);
+		String cmdtt = file.toString();
+		try {
+			Runtime.getRuntime().exec("cmd /c start "+cmdtt);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+    }
     
 //    public static void main(String[] args) {
 //        String[][] data = { 
