@@ -2737,7 +2737,7 @@ public class LinuxClient extends javax.swing.JFrame {
 
 	private boolean first=true;
 	
-	static ResourceBundle res;
+	private static ResourceBundle res;
 
 
 	/**

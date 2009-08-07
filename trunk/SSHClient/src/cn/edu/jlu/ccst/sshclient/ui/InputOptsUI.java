@@ -20,13 +20,15 @@ public class InputOptsUI extends javax.swing.JDialog {
 	private JScrollPane scrollPane;
 	private JPanel panel, panel1;
 	private List<String> opts;
+	private static ResourceBundle res;
 
 	public InputOptsUI(int tasksum,List<String> opts) {
-		this.setTitle("输入所有任务参数");
+		res = ResourceBundle.getBundle( "cn.edu.jlu.ccst.sshclient.ui.RES_IOUI", new Locale("en","US") );
+		this.setTitle(res.getString("TITLE"));
 		this.tasksum = tasksum;
 		labels = new ArrayList<JLabel>();
 		textFields = new ArrayList<JTextField>();
-		this.opts = opts;
+		this.opts = opts;		
 		initComponent();
 		for(int i = 0; i<= opts.size()-1; i++){
 			textFields.get(i).setText(opts.get(i));
@@ -93,22 +95,22 @@ public class InputOptsUI extends javax.swing.JDialog {
 		int y = 30;
 		
 		for(int i=0;i<=tasksum-1;i++){
-			JLabel newlabel = new JLabel("输入第"+(i+1)+"个任务的参数：");
+			JLabel newlabel = new JLabel(res.getString("INPUT_1")+(i+1)+res.getString("INPUT_2")+"：");
 			newlabel.setBounds(x,y+i*40,140, 30);
 			labels.add(newlabel);
 			panel.add(newlabel);
 			JTextField newtf = new JTextField();
 			newtf.setBounds(x+140,y+i*40,150, 30);
 			newtf.setBorder(BorderFactory.createLineBorder(Color.black));
-			newtf.setToolTipText("请用半角分号隔开多个参数！");
+			newtf.setToolTipText(res.getString("TIP_TIP"));
 			textFields.add(newtf);
 			panel.add(newtf);
 			if(i==tasksum-1){
-				resetButton = new JButton("重置:");
+				resetButton = new JButton(res.getString("RESET"));
 				resetButton.setBounds(100, 0, 80, 30);
 				panel1.add(resetButton);
 
-				submitButton = new JButton("提交:");
+				submitButton = new JButton(res.getString("SUBMIT"));
 				submitButton.setBounds(250, 0, 80, 30);
 				panel1.add(submitButton);
 				
@@ -150,7 +152,7 @@ public class InputOptsUI extends javax.swing.JDialog {
 		MulityTaskUI.opts = opts;
 		this.setVisible(false);
 		this.dispose();
-		JOptionPane.showMessageDialog(null, "输入任务参数成功！");
+		JOptionPane.showMessageDialog(null, res.getString("TIP_SUCCESS"));
 	}
 
 	/**
@@ -174,7 +176,7 @@ public class InputOptsUI extends javax.swing.JDialog {
 		}
 		java.awt.EventQueue.invokeLater(new Runnable() {
 			public void run() {
-				new InputOptsUI(5,null).setVisible(true);
+				new InputOptsUI(5,new ArrayList()).setVisible(true);
 			}
 		});
 	}
