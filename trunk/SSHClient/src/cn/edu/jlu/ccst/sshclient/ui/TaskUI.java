@@ -43,10 +43,12 @@ public class TaskUI extends javax.swing.JDialog {
 	private SSHTask oldertask;
 	private JPanel tfin;
 	private Checkbox cb;
+	private static ResourceBundle res;
 	// private JButton choosein,chooseout;
 
 	public TaskUI() {
-		this.setTitle("新建任务");
+		res = ResourceBundle.getBundle( "cn.edu.jlu.ccst.sshclient.ui.RES_TUI" , new Locale("en","US"));
+		this.setTitle(res.getString("TITLE_NEW"));
 		initComponent();
 
 		submitButton.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -83,7 +85,7 @@ public class TaskUI extends javax.swing.JDialog {
 
 	public TaskUI(String name, String dirname, String cmd, String in,
 			String out, String memo, String fouts, String opts, String infiles) {
-		this.setTitle("修改任务");
+		this.setTitle(res.getString("TITLE_MOD"));
 		initComponent();
 
 		submitButton.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -137,17 +139,17 @@ public class TaskUI extends javax.swing.JDialog {
 		this.setLayout(null);
 		this.setSize(400, 600);
 
-		tLabel1 = new JLabel("任务名字:");
+		tLabel1 = new JLabel(res.getString("TASK_NAME")+":");
 		tLabel1.setBounds(50, 30, 80, 20);
 		this.add(tLabel1);
 		tTextField1 = new JTextField();
 		tTextField1.setBounds(150, 30, 150, 30);
 		this.add(tTextField1);
-		if (this.getTitle().startsWith("新建"))
+		if (this.getTitle().startsWith("新建")||this.getTitle().startsWith("New"))
 			tTextField1.getDocument().addDocumentListener(
 					new Swing_OnValueChanged());
 
-		dirLabel = new JLabel("工作目录:");
+		dirLabel = new JLabel(res.getString("WORK_DIR")+":");
 		dirLabel.setBounds(50, 70, 80, 30);
 		this.add(dirLabel);
 		dirTextField = new JTextField();
@@ -164,14 +166,14 @@ public class TaskUI extends javax.swing.JDialog {
 		dirTextField.setText(gdir);
 		this.add(dirTextField);
 
-		tLabel3 = new JLabel("任务命令:");
+		tLabel3 = new JLabel(res.getString("TASK_COMMAND")+":");
 		tLabel3.setBounds(50, 110, 80, 20);
 		this.add(tLabel3);
 		tTextField3 = new JTextField();
 		tTextField3.setBounds(150, 110, 150, 30);
 		this.add(tTextField3);
 
-		loutnames = new JLabel("结果文件");
+		loutnames = new JLabel(res.getString("RESULT_FILE")+":");
 		tfous = new JTextArea();
 		tfous.setLineWrap(true);
 		tfous.setBounds(150, 150, 150, 80);
@@ -181,19 +183,19 @@ public class TaskUI extends javax.swing.JDialog {
 				JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		tfousAreaPane.setBounds(150, 150, 150, 80);
 		this.add(tfousAreaPane);
-		tfous.setToolTipText("请用半角分号隔开");
+		tfous.setToolTipText(res.getString("TIP_TEXT_SEP"));
 		loutnames.setBounds(50, 150, 80, 20);
 		this.add(loutnames);
 
-		lopts = new JLabel("任务参数:");
+		lopts = new JLabel(res.getString("PARAMETERS")+":");
 		lopts.setBounds(50, 240, 80, 20);
 		this.add(lopts);
 		topts = new JTextField();
-		topts.setToolTipText("请用半角分号隔开");
+		topts.setToolTipText(res.getString("TIP_TEXT_SEP"));
 		topts.setBounds(150, 240, 150, 30);
 		this.add(topts);
 
-		lfin = new JLabel("选择输入文件");
+		lfin = new JLabel(res.getString("SELECT_INPUT_FILE")+":");
 		tfin = new JPanel();
 		//tfin.setBounds(150, 290, 150, 80);
 		//tfin.setLineWrap(true);
@@ -212,7 +214,7 @@ public class TaskUI extends javax.swing.JDialog {
 		tfinAreaPane.setPreferredSize(new   Dimension(500,500)); 
 		this.add(tfinAreaPane);
 		lfin.setBounds(50, 290, 80, 20);
-		JButton choosein = new JButton("Browse");
+		JButton choosein = new JButton(res.getString("BROWSER"));
 		this.add(lfin);
 		choosein.addMouseListener(new java.awt.event.MouseAdapter() {
 			public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -242,11 +244,12 @@ public class TaskUI extends javax.swing.JDialog {
 		cb.setBounds(50, 320, 160, 50);
 		this.add(cb);
 		
-		lfout = new JLabel("选择输出目录");
+		lfout = new JLabel(res.getString("OUTPUT_DIR")+":");
 		tfout = new JTextField();
 		tfout.setBounds(150, 380, 150, 30);
 		lfout.setBounds(50, 380, 80, 20);
-		JButton chooseout = new JButton("Browse");
+		// TODO BROWSER to zh_cn
+		JButton chooseout = new JButton(res.getString("BROWSER"));
 		chooseout.setBounds(300, 380, 80, 25);
 		chooseout.addMouseListener(new java.awt.event.MouseAdapter() {
 			public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -265,7 +268,7 @@ public class TaskUI extends javax.swing.JDialog {
 		this.add(tfout);
 		this.add(chooseout);
 
-		tLabel2 = new JLabel("任务备注:");
+		tLabel2 = new JLabel(res.getString("TASK_MEMO")+":");
 		tLabel2.setBounds(50, 420, 80, 20);
 		this.add(tLabel2);
 		tTextArea2 = new JTextArea("");
@@ -278,7 +281,7 @@ public class TaskUI extends javax.swing.JDialog {
 		memoAreaPane.setBounds(150, 420, 150, 80);
 		this.add(memoAreaPane);
 
-		resetButton = new JButton("重置:");
+		resetButton = new JButton(res.getString("RESET"));
 		resetButton.setBounds(50, 510, 80, 30);
 		resetButton.addMouseListener(new java.awt.event.MouseAdapter() {
 			public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -287,7 +290,7 @@ public class TaskUI extends javax.swing.JDialog {
 		});
 		this.add(resetButton);
 		
-		submitButton = new JButton("提交:");
+		submitButton = new JButton(res.getString("SUBMIT"));
 		submitButton.setBounds(180, 510, 80, 30);
 		
 		this.add(submitButton);
@@ -331,7 +334,7 @@ public class TaskUI extends javax.swing.JDialog {
 	 * Reset按钮的处理函数
 	 */
 	private void ResetButtonMousePressed(java.awt.event.MouseEvent evt) {
-		if (this.getTitle().startsWith("新建")) {
+		if (this.getTitle().startsWith("新建")||this.getTitle().startsWith("New")) {
 			tTextField1.setText(null);
 			tTextField3.setText(null);
 			dirTextField.setText(null);
@@ -366,23 +369,27 @@ public class TaskUI extends javax.swing.JDialog {
 	private void SubmitButtonMousePressed(java.awt.event.MouseEvent evt)
 	throws IOException {
 		if (tTextField1.getText().equals("")) {
-			JOptionPane.showMessageDialog(null, "请输入新建任务的名字");
+//			JOptionPane.showMessageDialog(null, "请输入新建任务的名字");
+			JOptionPane.showMessageDialog(null,res.getString("INPUT_TASK_NAME"),"Message",JOptionPane.INFORMATION_MESSAGE );
 			return;
 		}
 		if (dirTextField.getText().equals("")) {
-			JOptionPane.showMessageDialog(null, "请输入工作组目录");
+//			JOptionPane.showMessageDialog(null, "请输入工作组目录");
+			JOptionPane.showMessageDialog(null,res.getString("INPUT_WORK_DIR"),"Message",JOptionPane.INFORMATION_MESSAGE );
 			return;
 		}
 		if (!dirTextField.getText().startsWith("/")) {
-			JOptionPane.showMessageDialog(null, "目录格式不对，请以“/”开头");
+//			JOptionPane.showMessageDialog(null, "目录格式不对，请以“/”开头");
+			JOptionPane.showMessageDialog(null,res.getString("WRONG_DIR"),"Message",JOptionPane.INFORMATION_MESSAGE );
 			return;
 		}
 		if (tTextField3.getText().equals("")) {
-			JOptionPane.showMessageDialog(null, "请输入新建任务的命令");
+			JOptionPane.showMessageDialog(null,res.getString("NEW_TASK_CMD"),"Message",JOptionPane.INFORMATION_MESSAGE );
 			return;
 		}
 		if (tfout.getText().equals("")) {
-			JOptionPane.showMessageDialog(null, "请选择输出目录");
+			JOptionPane.showMessageDialog(null,res.getString("OUTPUT_DIR_SEL"),"Message",JOptionPane.INFORMATION_MESSAGE );
+//			JOptionPane.showMessageDialog(null, "请选择输出目录");
 			return;
 		}
 //		LinuxClient tempClient = LinuxClient.GetObj();
@@ -500,7 +507,7 @@ public class TaskUI extends javax.swing.JDialog {
 			if (flag) {
 				this.setVisible(false);
 				this.dispose();
-				JOptionPane.showMessageDialog(null, "创建任务成功！");
+				JOptionPane.showMessageDialog(null, res.getString("NEW_TASK_SUC"));
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -558,23 +565,28 @@ public class TaskUI extends javax.swing.JDialog {
 	private void SubmitButtonMousePressedE(java.awt.event.MouseEvent evt)
 	throws IOException {
 		if (tTextField1.getText().equals("")) {
-			JOptionPane.showMessageDialog(null, "请输入新建任务的名字");
+//			JOptionPane.showMessageDialog(null, "请输入新建任务的名字");
+			JOptionPane.showMessageDialog(null,res.getString("INPUT_TASK_NAME"),"Message",JOptionPane.INFORMATION_MESSAGE );
 			return;
 		}
 		if (dirTextField.getText().equals("")) {
-			JOptionPane.showMessageDialog(null, "请输入工作组目录");
+//			JOptionPane.showMessageDialog(null, "请输入工作组目录");
+			JOptionPane.showMessageDialog(null,res.getString("INPUT_WORK_DIR"),"Message",JOptionPane.INFORMATION_MESSAGE );
 			return;
 		}
 		if (!dirTextField.getText().startsWith("/")) {
-			JOptionPane.showMessageDialog(null, "目录格式不对，请以“/”开头");
+//			JOptionPane.showMessageDialog(null, "目录格式不对，请以“/”开头");
+			JOptionPane.showMessageDialog(null,res.getString("WRONG_DIR"),"Message",JOptionPane.INFORMATION_MESSAGE );
 			return;
 		}
 		if (tTextField3.getText().equals("")) {
-			JOptionPane.showMessageDialog(null, "请输入新建任务的命令");
+//			JOptionPane.showMessageDialog(null, "请输入新建任务的命令");
+			JOptionPane.showMessageDialog(null,res.getString("NEW_TASK_CMD"),"Message",JOptionPane.INFORMATION_MESSAGE );
 			return;
 		}
 		if (tfout.getText().equals("")) {
-			JOptionPane.showMessageDialog(null, "请选择输出目录");
+			JOptionPane.showMessageDialog(null,res.getString("OUTPUT_DIR_SEL"),"Message",JOptionPane.INFORMATION_MESSAGE );
+//			JOptionPane.showMessageDialog(null, "请选择输出目录");
 			return;
 		}
 		int i;
@@ -620,7 +632,7 @@ public class TaskUI extends javax.swing.JDialog {
 			
 			this.setVisible(false);
 			this.dispose();
-			JOptionPane.showMessageDialog(null, "修改任务成功！");
+			JOptionPane.showMessageDialog(null, res.getString("MOD_TASK_SUC"));
 			if(cb.getState()){
 				LinuxClient.upload();
 			}
@@ -885,7 +897,7 @@ public class TaskUI extends javax.swing.JDialog {
 	private void createdirs(Connection conn, String dirs) throws IOException {
 
 		// Connection conn = getOpenedConnection(TC);
-		Ltest.setText("正在设置目录...");
+		Ltest.setText(res.getString("SET_UP_DIR"));
 		Session sess = conn.openSession();
 		String finalcmd = dirs.substring(1);
 		// while(finalcmd.endsWith("/")){
@@ -906,7 +918,7 @@ public class TaskUI extends javax.swing.JDialog {
 				new InputStreamReader(sess.getStdout()));
 		while ((out = bufferedReader.readLine()) != null) {
 			if (out.equals("EOP")) {
-				Ltest.setText("设置目录成功！");
+				Ltest.setText(res.getString("SET_UP_DIR_SUC"));
 				this.flag = true;
 
 			}
