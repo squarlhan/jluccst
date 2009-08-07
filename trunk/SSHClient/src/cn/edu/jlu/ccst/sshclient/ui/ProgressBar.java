@@ -10,6 +10,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.text.NumberFormat;
+import java.util.ResourceBundle;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -42,7 +44,7 @@ public class ProgressBar extends javax.swing.JFrame implements  ActionListener,C
     Thread ty2 = null;
     ProgressBarRun pbrt;
     ProgressBarSpeeder pbst;
-
+    private static ResourceBundle res;
 	
 	public ProgressBar() throws HeadlessException {
 		super();
@@ -120,13 +122,13 @@ public class ProgressBar extends javax.swing.JFrame implements  ActionListener,C
     {  
     	
 			
-			
+			res = ResourceBundle.getBundle( "cn.edu.jlu.ccst.sshclient.ui.RES_PROGRESSBAR");
 			this.setConn(conn);
 			this.setSourceFile(sourceFile);
 			this.setAimFile(aimFile);
 			this.setAimDir(aimDir);
 			this.setUpOrDown(upOrDown);
-            this.setTitle("文件传输");  
+            this.setTitle(res.getString("FILETRANSFER"));  
             Container   contentPane   =   this.getContentPane();  
             label   =   new   JLabel("   ",JLabel.CENTER);  
             progressbar   =   new   JProgressBar();  
@@ -138,7 +140,7 @@ public class ProgressBar extends javax.swing.JFrame implements  ActionListener,C
             progressbar.setPreferredSize(new   Dimension(200,30));  
             progressbar.setBorderPainted(true);  
             JPanel   panel   =   new   JPanel();  
-            b   =   new   JButton("中止传输");  
+            b   =   new   JButton(res.getString("DISTURBTRANSMISSION"));  
             b.addActionListener(this);  
             panel.add(b);  
             contentPane.add(panel,BorderLayout.CENTER);  
@@ -224,7 +226,7 @@ public class ProgressBar extends javax.swing.JFrame implements  ActionListener,C
             String   speedF   =   nbf.format(speed);   
             if(e1.getSource()   ==   progressbar)  
             {  
-                    label.setText("传输速率："+speedF+unit);    
+                    label.setText(res.getString("TRANSFERRATE")+speedF+unit);    
             }  
     }
 
