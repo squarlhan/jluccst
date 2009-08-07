@@ -395,7 +395,7 @@ public class LinuxClient extends javax.swing.JFrame {
 					{
 						if(jsl.get(i).getName().equals(cur.getId()))
 						{
-							jTabbedPane1.remove(jsl.get(i));
+//							jTabbedPane1.remove(jsl.get(i));
 							jsl.remove(i);
 							break;
 						}
@@ -559,6 +559,9 @@ public class LinuxClient extends javax.swing.JFrame {
 		MidScr ms=new MidScr(fr);
 		//设定窗体的左上坐标
 		fr.setLocation(ms.getX(), ms.getY ()); 
+		Toolkit tk = Toolkit.getDefaultToolkit();
+        Image img = tk.getImage(this.getClass().getResource("/cn/edu/jlu/ccst/sshclient/ui/resource/faver.png"));
+		fr.setIconImage(img);
 		t1 = null;
 		JScrollPane t2=null;
 		for(int i=0;i<jtl.size();i++)
@@ -573,7 +576,6 @@ public class LinuxClient extends javax.swing.JFrame {
 		{
 			t1=new JTextArea(cur.getId()+"\n");
 			t1.setName(cur.getId());
-			fr.add(t1);
 			t2=new JScrollPane();
 			t2.setName(cur.getId());
 			fr.add(t2);
@@ -625,6 +627,7 @@ public class LinuxClient extends javax.swing.JFrame {
 			jTextArea2.setText("");
 			setSelTaskStatus(cur.getId(),1);
 			SSHTask selectTask = new SSHTask();
+			
 			//寻找选中的任务
 			int i;
 			for( i = 0; i < tks.size() ; i++) {
@@ -633,6 +636,7 @@ public class LinuxClient extends javax.swing.JFrame {
 					break;
 				}
 			}
+			fr.setTitle(selectTask.getName());
 			Date curtime = new Date();
 			selectTask.setStartTime(curtime);
 			long t = System.currentTimeMillis();
@@ -929,10 +933,21 @@ public class LinuxClient extends javax.swing.JFrame {
 	 */
 	private void jMenuMousePressGroupStart(MouseEvent evt) {
 		if( jMenuItem12.isEnabled() || groupStartG.isEnabled()) {
+			boolean flag=false;
+			JFrame fr = new JFrame();
+			fr.setSize(600,800);
+			//使用中心定位窗体类
+			MidScr ms=new MidScr(fr);
+			//设定窗体的左上坐标
+			fr.setLocation(ms.getX(), ms.getY ()); 
+			Toolkit tk = Toolkit.getDefaultToolkit();
+	        Image img = tk.getImage(this.getClass().getResource("/cn/edu/jlu/ccst/sshclient/ui/resource/faver.png"));
+			fr.setIconImage(img);
 			jTextArea2.setText("");
 			singlerun = 2;
 			SSHGroup sgp = new SSHGroup();
 			sgp = findSelectGroup();//找到当前选中的组
+			fr.setTitle(sgp.getName());
 			setGpsStatus(sgp.getId(),true);
 			SSHComputer selectComputer = new SSHComputer();
 			selectComputer = sgp.getCp();
@@ -940,8 +955,6 @@ public class LinuxClient extends javax.swing.JFrame {
 			String userName = selectComputer.getUsername();
 			String userPsw = selectComputer.getPassword();
 
-			///新建TAb
-			boolean flag=false;
 			t1 = null;
 			JScrollPane t2=null;
 			for(int j=0;j<jtl.size();j++)
@@ -956,17 +969,16 @@ public class LinuxClient extends javax.swing.JFrame {
 			{
 				t1=new JTextArea(sgp.getId()+"\n");
 				t1.setName(sgp.getId());
-				jtl.add(t1);
 				t2=new JScrollPane();
 				t2.setName(sgp.getId());
-				jsl.add(t2);
+				fr.add(t2);
 				t2.add(t1);
 				t1.setColumns(20);
 				t1.setRows(5);
 				t1.setEditable(false);
 				t2.setViewportView(t1);
-				jTabbedPane1.addTab(sgp.getName(), t2);
-
+//				jTabbedPane1.addTab(sgp.getName(), t2);
+				fr.setVisible(true);
 				t1.addMouseListener(new MouseAdapter()
 				{ 
 					public void mouseReleased(MouseEvent e)
@@ -1044,7 +1056,8 @@ public class LinuxClient extends javax.swing.JFrame {
 	 * 同时启动组内的所有任务
 	 */
 	private void jMenuMousePressAllStartG(MouseEvent evt) {
-		if(jMenuItem13.isEnabled() || allStartG.isEnabled()) {	
+		if(jMenuItem13.isEnabled() || allStartG.isEnabled()) {
+			
 			SSHGroup sgp = new SSHGroup();
 			sgp = findSelectGroup();//找到当前选中的组
 			SSHComputer selectComputer = new SSHComputer();
@@ -1056,13 +1069,25 @@ public class LinuxClient extends javax.swing.JFrame {
 
 			SSHTask rstk = new SSHTask();
 			int taskInfo = 0;
-			for(int i = 0; i < sgp.getSts().size(); ++i) {		
+			for(int i = 0; i < sgp.getSts().size(); ++i) {	
+				boolean flag=false;
+				JFrame fr = new JFrame();
+				fr.setSize(600,800);
+				//使用中心定位窗体类
+				MidScr ms=new MidScr(fr);
+				//设定窗体的左上坐标
+				fr.setLocation(ms.getX(), ms.getY ()); 
+				Toolkit tk = Toolkit.getDefaultToolkit();
+		        Image img = tk.getImage(this.getClass().getResource("/cn/edu/jlu/ccst/sshclient/ui/resource/faver.png"));
+				fr.setIconImage(img);
+				
 				rstk = sgp.getSts().get(i);
 				setSelTaskStatus(rstk.getId(),1);
 				Date curtime = new Date();
 				rstk.setStartTime(curtime);
 				long timerun = System.currentTimeMillis();
 				rstk.setRunTime(timerun);
+				fr.setTitle(rstk.getName());
 				//System.out.println(curtime);
 
 				//将任务开始时间写入XML文件中
@@ -1079,7 +1104,6 @@ public class LinuxClient extends javax.swing.JFrame {
 
 
 				///新建TAb
-				boolean flag=false;
 				t1 = null;
 				JScrollPane t2=null;
 				for(int j=0;j<jtl.size();j++)
@@ -1097,14 +1121,15 @@ public class LinuxClient extends javax.swing.JFrame {
 					jtl.add(t1);
 					t2=new JScrollPane();
 					t2.setName(rstk.getId());
+					fr.add(t2);
 					jsl.add(t2);
 					t2.add(t1);
 					t1.setColumns(20);
 					t1.setRows(5);
 					t1.setEditable(false);
 					t2.setViewportView(t1);
-					jTabbedPane1.addTab(rstk.getName(), t2);
-
+//					jTabbedPane1.addTab(rstk.getName(), t2);
+					fr.setVisible(true);
 					t1.addMouseListener(new MouseAdapter()
 					{ 
 						public void mouseReleased(MouseEvent e)
@@ -1365,7 +1390,7 @@ public class LinuxClient extends javax.swing.JFrame {
 				t1.setRows(5);
 				t1.setEditable(false);
 				t2.setViewportView(t1);
-				jTabbedPane1.addTab(selectComputer.getName(), t2);
+//				jTabbedPane1.addTab(selectComputer.getName(), t2);
 
 				t1.addMouseListener(new MouseAdapter()
 				{ 
@@ -1926,7 +1951,7 @@ public class LinuxClient extends javax.swing.JFrame {
 				{
 					if(jsl.get(i).getName().equals(t.getName()))
 					{
-						jTabbedPane1.remove(jsl.get(i));
+//						jTabbedPane1.remove(jsl.get(i));
 						jsl.remove(i);
 
 						break;
@@ -2028,10 +2053,10 @@ public class LinuxClient extends javax.swing.JFrame {
 		jSplitPane1 = new javax.swing.JSplitPane();
 		jScrollPane1 = new javax.swing.JScrollPane();
 		jTree1 = new javax.swing.JTree();
-		jSplitPane2 = new javax.swing.JSplitPane();
+//		jSplitPane2 = new javax.swing.JSplitPane();
 		jScrollPane2 = new javax.swing.JScrollPane();
 		jTextArea1 = new javax.swing.JTextArea();
-		jTabbedPane1 = new javax.swing.JTabbedPane();
+//		jTabbedPane1 = new javax.swing.JTabbedPane();
 		jScrollPane3 = new javax.swing.JScrollPane();
 		jTextArea2 = new javax.swing.JTextArea();
 		jScrollPane4 = new javax.swing.JScrollPane();
@@ -2072,16 +2097,16 @@ public class LinuxClient extends javax.swing.JFrame {
 		jTree1.setName("jTree1"); // NOI18N
 		jScrollPane1.setViewportView(jTree1);
 		jSplitPane1.setLeftComponent(jScrollPane1);
-		jSplitPane2.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
-		jSplitPane2.setName("jSplitPane2"); // NOI18N
+//		jSplitPane2.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
+//		jSplitPane2.setName("jSplitPane2"); // NOI18N
 		jScrollPane2.setName("jScrollPane2"); // NOI18N
 		jTextArea1.setColumns(20);
 		jTextArea1.setRows(5);
 		jTextArea1.setEnabled(false);
 		jTextArea1.setName("jTextArea1"); // NOI18N
 		jScrollPane2.setViewportView(jTextArea1);
-		jSplitPane2.setLeftComponent(jScrollPane2);
-		jTabbedPane1.setName("jTabbedPane1"); // NOI18N
+//		jSplitPane2.setLeftComponent(jScrollPane2);
+//		jTabbedPane1.setName("jTabbedPane1"); // NOI18N
 		jScrollPane3.setName("jScrollPane3"); // NOI18N
 		jTextArea2.setColumns(20);
 		jTextArea2.setRows(5);
@@ -2095,8 +2120,8 @@ public class LinuxClient extends javax.swing.JFrame {
 		jTextArea3.setName("jTextArea3"); // NOI18N
 		jScrollPane4.setViewportView(jTextArea3);
 		//jTabbedPane1.addTab("tab2", jScrollPane4);
-		jSplitPane2.setRightComponent(jTabbedPane1);
-		jSplitPane1.setRightComponent(jSplitPane2);
+//		jSplitPane2.setRightComponent(jTabbedPane1);
+		jSplitPane1.setRightComponent(jScrollPane2);
 		jMenuBar1.setName("jMenuBar1"); // NOI18N
 
 		jMenu1.setText(res.getString("FILE"));
@@ -2520,7 +2545,6 @@ public class LinuxClient extends javax.swing.JFrame {
 
 	//处理语言选择
 	private void setcnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu4MouseClicked
-		// TODO add your handling code here:
 		res = ResourceBundle.getBundle( "cn.edu.jlu.ccst.sshclient.ui.RES", new Locale ("zh", "CN"));	
 		LinuxClient.GetObj().validate();
 		LinuxClient.GetObj().repaint();
@@ -2530,7 +2554,6 @@ public class LinuxClient extends javax.swing.JFrame {
 	}
 	
 	private void setenMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu4MouseClicked
-		// TODO add your handling code here:
 		res = ResourceBundle.getBundle( "cn.edu.jlu.ccst.sshclient.ui.RES", new Locale ("en", "US"));
 		LinuxClient.GetObj().validate();
 		LinuxClient.GetObj().repaint();
@@ -2540,7 +2563,6 @@ public class LinuxClient extends javax.swing.JFrame {
 	}
 	
 	private void jMenu4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu4MouseClicked
-		// TODO add your handling code here:
 		ComputerUI newComputerUi = new ComputerUI();
 		newComputerUi.setVisible(true);
 		this.setVisible(false);
@@ -2609,10 +2631,10 @@ public class LinuxClient extends javax.swing.JFrame {
 	public void setSinglerun(int t) {
 		singlerun = t;
 	}
-	public JTabbedPane getJTabbedPane()
-	{
-		return jTabbedPane1;
-	}
+//	public JTabbedPane getJTabbedPane()
+//	{
+//		return jTabbedPane1;
+//	}
 	/* public JCloseableTabbedPane getJCloseableTabPane() {
     	return jCloseableTabPane1;
     }*/
@@ -2651,8 +2673,8 @@ public class LinuxClient extends javax.swing.JFrame {
 	private javax.swing.JSeparator jSeparator2;
 	private javax.swing.JSeparator jSeparator3;
 	private javax.swing.JSplitPane jSplitPane1;
-	private javax.swing.JSplitPane jSplitPane2;
-	private javax.swing.JTabbedPane jTabbedPane1;
+//	private javax.swing.JSplitPane jSplitPane2;
+//	private javax.swing.JTabbedPane jTabbedPane1;
 	private javax.swing.JTextArea jTextArea1;
 	private javax.swing.JTextArea jTextArea2;
 	private javax.swing.JTextArea jTextArea3;
