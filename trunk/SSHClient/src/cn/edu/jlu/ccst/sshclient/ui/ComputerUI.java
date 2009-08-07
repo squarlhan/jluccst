@@ -44,7 +44,7 @@ public class ComputerUI extends javax.swing.JDialog
 	public ComputerUI()   
 	{ 	
 		initComponents();
-		this.setTitle("新建计算机");
+		this.setTitle(res.getString("CREATECOMPUTER"));
 		this.setLocationRelativeTo(null);
 		SubmitButton.addMouseListener(new java.awt.event.MouseAdapter() {
 			public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -58,7 +58,7 @@ public class ComputerUI extends javax.swing.JDialog
 	public ComputerUI(String name,String user,String pwd,String host,String memo) 
 	{
 		this.setLocationRelativeTo(null);
-		this.setTitle("修改计算机");
+		this.setTitle(res.getString("MODIFYCOMUTER"));
 		initComponents(name,user,pwd,host,memo);  
 		SubmitButton.addMouseListener(new java.awt.event.MouseAdapter() {
 			public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -81,7 +81,8 @@ public class ComputerUI extends javax.swing.JDialog
 
 	//----------------------------------------------------------------------------//
 	private void initComponents() {
-
+		
+		res = ResourceBundle.getBundle( "cn.edu.jlu.ccst.sshclient.ui.RES_COMPUTERUI");
 		this.setResizable(false);
 		Toolkit tk = Toolkit.getDefaultToolkit();
 		Image img = tk.getImage(this.getClass().getResource("/cn/edu/jlu/ccst/sshclient/ui/resource/t.png"));
@@ -90,21 +91,21 @@ public class ComputerUI extends javax.swing.JDialog
 		this.setSize(300, 400);
 		this.setResizable(false);
 
-		jLabel2 = new javax.swing.JLabel("计算机名字:");
+		jLabel2 = new javax.swing.JLabel(res.getString("COMPUTERNAME"));
 		jLabel2.setBounds(20, 20, 70, 30);
 		this.add(jLabel2);
 		jTextField2 = new javax.swing.JTextField("");
 		jTextField2.setBounds(110, 20, 150, 30);
 		this.add(jTextField2);
 
-		jLabel6 = new javax.swing.JLabel("用户名:");
+		jLabel6 = new javax.swing.JLabel(res.getString("USERNAME"));
 		jLabel6.setBounds(20, 60, 70, 30);
 		this.add(jLabel6);
 		jTextField6 = new javax.swing.JTextField();
 		jTextField6.setBounds(110, 60, 150, 30);
 		this.add(jTextField6);
 
-		jLabel5 = new javax.swing.JLabel("设置密码：");
+		jLabel5 = new javax.swing.JLabel(res.getString("SETPASSWORD"));
 		jLabel5.setBounds(20, 100, 70, 30);
 		this.add(jLabel5);
 		jPasswordField1 = new javax.swing.JPasswordField();
@@ -112,7 +113,7 @@ public class ComputerUI extends javax.swing.JDialog
 		jPasswordField1.setEchoChar('*');
 		this.add(jPasswordField1);
 
-		jLabel8 = new javax.swing.JLabel("主机IP地址:");
+		jLabel8 = new javax.swing.JLabel(res.getString("HOSTIPADDRESS"));
 		jLabel8.setBounds(20, 140, 70, 30);
 		this.add(jLabel8);
 		jTextField8 = new javax.swing.JTextField();
@@ -121,7 +122,7 @@ public class ComputerUI extends javax.swing.JDialog
 
 		Ltest=new JLabel();
 
-		Contest=new JButton("测试连接");
+		Contest=new JButton(res.getString("TESTCONNECTION"));
 		Contest.setBounds(200, 300, 90, 30);
 		this.add(Contest);
 		Contest.addMouseListener(
@@ -132,14 +133,14 @@ public class ComputerUI extends javax.swing.JDialog
 						SSHOpCommand test=new SSHOpCommand(jTextField8.getText(), jTextField6.getText(),String.valueOf(jPasswordField1.getPassword()),2,Ltest);
 						Thread Ctest=new Thread(test);
 						Ctest.start();
-						Ltest.setText("测试连接中....");
+						Ltest.setText(res.getString("TESTINGCONN"));
 						add(Ltest);
 						Ltest.setBounds(120, 270, 90, 30);
 					}
 				}
 		);
 
-		jLabel4 = new javax.swing.JLabel("备注:");
+		jLabel4 = new javax.swing.JLabel(res.getString("MEMO"));
 		jLabel4.setBounds(20, 180, 70, 30);
 		this.add(jLabel4);
 
@@ -150,7 +151,7 @@ public class ComputerUI extends javax.swing.JDialog
 		memoAreaPane.setBounds(110, 180, 150, 80);
 		this.add(memoAreaPane);
 
-		ResetButton = new JButton("重置");
+		ResetButton = new JButton(res.getString("RESET"));
 		ResetButton.setBounds(20, 300, 80, 30);
 		ResetButton.addMouseListener(new java.awt.event.MouseAdapter() {
 			public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -158,7 +159,7 @@ public class ComputerUI extends javax.swing.JDialog
 			}
 		});
 		this.add(ResetButton);
-		SubmitButton = new JButton("提交");
+		SubmitButton = new JButton(res.getString("SUBMIT"));
 		SubmitButton.setBounds(110, 300, 80, 30);
 
 		this.add(SubmitButton);
@@ -189,22 +190,22 @@ public class ComputerUI extends javax.swing.JDialog
 	private void SubmitMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SubmitMousePressed
 		// TODO add your handling code here:
 		if(jTextField2.getText().equals("")){
-			JOptionPane.showMessageDialog(null, "请输入电脑Name");
+			JOptionPane.showMessageDialog(null, res.getString("ENTERCOMPUTERNAME"));
 			return;
 		}
 		if(jTextField6.getText().equals("")){
-			JOptionPane.showMessageDialog(null, "请输入用户名");
+			JOptionPane.showMessageDialog(null, res.getString("ENTERUSERNAME"));
 			return;
 		}
 		if(jPasswordField1.getPassword().equals("")){
-			JOptionPane.showMessageDialog(null, "请输入用户名密码");
+			JOptionPane.showMessageDialog(null, res.getString("ENTERUSERPASSWORD"));
 			return;
 		}
 		if(jTextField8.getText().equals("")){
-			JOptionPane.showMessageDialog(null, "请输入用户名主机名");
+			JOptionPane.showMessageDialog(null, res.getString("ENTERUSERHOSTNAME"));
 			return;
 		}
-		JOptionPane.showMessageDialog(null, "创建用户成功！");
+		JOptionPane.showMessageDialog(null, res.getString("CREATESUCC"));
 		try{
 			/**写入新建的电脑信息**/
 
@@ -231,22 +232,22 @@ public class ComputerUI extends javax.swing.JDialog
 	private void SubmitMousePressedE(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SubmitMousePressed
 		// TODO add your handling code here:
 		if(jTextField2.getText().equals("")){
-			JOptionPane.showMessageDialog(null, "请输入电脑Name");
+			JOptionPane.showMessageDialog(null, res.getString("ENTERCOMPUTERNAME"));
 			return;
 		}
 		if(jTextField6.getText().equals("")){
-			JOptionPane.showMessageDialog(null, "请输入用户名");
+			JOptionPane.showMessageDialog(null, res.getString("ENTERUSERNAME"));
 			return;
 		}
 		if(jPasswordField1.getPassword().equals("")){
-			JOptionPane.showMessageDialog(null, "请输入用户名密码");
+			JOptionPane.showMessageDialog(null, res.getString("ENTERUSERPASSWORD"));
 			return;
 		}
 		if(jTextField8.getText().equals("")){
-			JOptionPane.showMessageDialog(null, "请输入用户名主机名");
+			JOptionPane.showMessageDialog(null, res.getString("ENTERUSERHOSTNAME"));
 			return;
 		}
-		JOptionPane.showMessageDialog(null, "修改用户成功！");
+		JOptionPane.showMessageDialog(null, res.getString("MODIFYSUCC"));
 		this.setVisible(false);
 		this.EditComputerFromXML(LinuxClient.getCur().getId(), jTextField2.getText(), jTextField6.getText(), String.valueOf(jPasswordField1.getPassword()), jTextArea4.getText(), jTextField8.getText());
 	}
@@ -358,6 +359,7 @@ public class ComputerUI extends javax.swing.JDialog
 	private JScrollPane memoAreaPane; 
 	private JButton Contest;
 	private JLabel Ltest;
+	private static ResourceBundle res;
 	// End of variables declaration//GEN-END:variables
 
 }
