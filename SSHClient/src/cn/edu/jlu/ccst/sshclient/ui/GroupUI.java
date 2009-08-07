@@ -42,7 +42,7 @@ public class GroupUI extends javax.swing.JDialog  {
 	private static ResourceBundle res;
 	
 	public GroupUI(){
-		res = ResourceBundle.getBundle( "cn.edu.jlu.ccst.sshclient.ui.RES_GUI" );
+		res = ResourceBundle.getBundle( "cn.edu.jlu.ccst.sshclient.ui.RES_GUI", new Locale("en","US") );
 		
 //		this.setTitle("新建工作组");
 		this.setTitle(res.getString("TITLE"));
