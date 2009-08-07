@@ -62,7 +62,7 @@ public class InputOptsUI extends javax.swing.JDialog {
 		this.setLocationRelativeTo(null);
 		Toolkit tk = Toolkit.getDefaultToolkit();
 		Image img = tk.getImage(this.getClass().getResource(
-		"/cn/edu/jlu/ccst/sshclient/ui/resource/t.png"));
+		"/cn/edu/jlu/ccst/sshclient/ui/resource/io.png"));
 		setIconImage(img);
 		int tempheight,tempwidth;
 		if(tasksum>10){

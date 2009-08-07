@@ -160,7 +160,7 @@ public class MulityTaskUI extends javax.swing.JDialog {
 		this.setLocationRelativeTo(null);
 		Toolkit tk = Toolkit.getDefaultToolkit();
 		Image img = tk.getImage(this.getClass().getResource(
-		"/cn/edu/jlu/ccst/sshclient/ui/resource/t.png"));
+		"/cn/edu/jlu/ccst/sshclient/ui/resource/mt.png"));
 		setIconImage(img);
 		this.setLayout(null);
 		this.setSize(400, 700);
