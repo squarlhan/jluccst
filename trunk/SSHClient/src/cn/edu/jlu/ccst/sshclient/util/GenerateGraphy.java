@@ -514,21 +514,21 @@ public class GenerateGraphy {
 		//		LinuxClient.GetObj().getJTabbedPane().addTab(id, preview);
 		final String strid = id;
 		//左键双击键关闭选中的选项卡
-		LinuxClient.GetObj().getJTabbedPane().addMouseListener(new MouseAdapter() {
-			public void mousePressed(MouseEvent e) {
-				if (e.getClickCount() == 2 && SwingUtilities.isLeftMouseButton(e)) {
-					if(LinuxClient.GetObj().getJTabbedPane().getTabCount() > 0) {
-						if(LinuxClient.GetObj().getJTabbedPane().getSelectedIndex() == LinuxClient.GetObj().getJTabbedPane().indexOfTab(strid)) {
-							LinuxClient.GetObj().getJTabbedPane().removeTabAt(LinuxClient.GetObj().getJTabbedPane().getSelectedIndex());
-							// System.out.println("选中的选项卡为:" + LinuxClient.GetObj().getJTabbedPane().getSelectedIndex());
-							// LinuxClient.GetObj().getJTabbedPane().getTabComponentAt(LinuxClient.GetObj().getJTabbedPane().getSelectedIndex()).repaint();
-							// LinuxClient.GetObj().getJTabbedPane().addTab(null,null);
-							//return;
-						}
-					}
-				}
-			}
-		});
+//		LinuxClient.GetObj().getJTabbedPane().addMouseListener(new MouseAdapter() {
+//			public void mousePressed(MouseEvent e) {
+//				if (e.getClickCount() == 2 && SwingUtilities.isLeftMouseButton(e)) {
+//					if(LinuxClient.GetObj().getJTabbedPane().getTabCount() > 0) {
+//						if(LinuxClient.GetObj().getJTabbedPane().getSelectedIndex() == LinuxClient.GetObj().getJTabbedPane().indexOfTab(strid)) {
+//							LinuxClient.GetObj().getJTabbedPane().removeTabAt(LinuxClient.GetObj().getJTabbedPane().getSelectedIndex());
+//							// System.out.println("选中的选项卡为:" + LinuxClient.GetObj().getJTabbedPane().getSelectedIndex());
+//							// LinuxClient.GetObj().getJTabbedPane().getTabComponentAt(LinuxClient.GetObj().getJTabbedPane().getSelectedIndex()).repaint();
+//							// LinuxClient.GetObj().getJTabbedPane().addTab(null,null);
+//							//return;
+//						}
+//					}
+//				}
+//			}
+//		});
 //		pre=preview;
 	}
 //	private static ChartFrame pre=null;
