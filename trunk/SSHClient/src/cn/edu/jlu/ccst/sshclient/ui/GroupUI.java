@@ -379,7 +379,7 @@ public class GroupUI extends javax.swing.JDialog  {
 		//		    	if(i>0)newdir = " mkdir -p "+finalcmd.substring(0, i)+" ;";		    	
 		//		    	sess.execCommand("./squarlhan/CShell "+ newdir + " mv " + orin + " " + finalcmd.trim());
 		//		    }else 
-		sess.execCommand("./squarlhan/CShell mkdir -p " + finalcmd.trim());
+		sess.execCommand("./CShell mkdir -p " + finalcmd.trim());
 
 		String out;
 		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(sess.getStdout()));    
