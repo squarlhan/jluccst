@@ -17,6 +17,7 @@ import ch.ethz.ssh2.Session;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.ResourceBundle;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -606,6 +607,8 @@ public class SSHOpCommand implements Runnable {
 	 */
 	public  Connection getOpenedConnectionT()  {
 		Connection conn = new Connection(Host);
+		ResourceBundle res;		
+		res = ResourceBundle.getBundle( "cn.edu.jlu.ccst.sshclient.ui.lang.RES_OTHER");
 		try{	
 			try
 			{
@@ -613,27 +616,27 @@ public class SSHOpCommand implements Runnable {
 			}
 			catch (IOException e)
 			{
-				JOptionPane.showMessageDialog(null, "连接失败！");
-				conl.setText("测试结束");
+				JOptionPane.showMessageDialog(null, res.getString("TEST_FAILD"),null,JOptionPane.ERROR_MESSAGE);
+				conl.setText(res.getString("TEST_CONC"));
 				return conn;
 			}
 			boolean isAuthenticated = conn.authenticateWithPassword(Name, Psw);
 			if (isAuthenticated == false)
 			{
-				JOptionPane.showMessageDialog(null, "连接失败！");
-				conl.setText("测试结束");
+				JOptionPane.showMessageDialog(null, res.getString("TEST_FAILD"),null,JOptionPane.ERROR_MESSAGE);
+				conl.setText(res.getString("TEST_CONC"));
 				throw new IOException("Authentication failed.");			
 
 			}
 			else
 			{
-				JOptionPane.showMessageDialog(null, "连接成功！");
-				conl.setText("测试结束");
+				JOptionPane.showMessageDialog(null, res.getString("TEST_SUCCESS"),null,JOptionPane.INFORMATION_MESSAGE);
+				conl.setText(res.getString("TEST_CONC"));
 			}
 		}
 		catch(Exception ev){
-			JOptionPane.showMessageDialog(null, "连接失败！");
-			conl.setText("测试结束");
+			JOptionPane.showMessageDialog(null, res.getString("TEST_FAILD"),null,JOptionPane.ERROR_MESSAGE);
+			conl.setText(res.getString("TEST_CONC"));
 			ev.printStackTrace();
 		}
 
