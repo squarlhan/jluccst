@@ -23,7 +23,7 @@ public class InputOptsUI extends javax.swing.JDialog {
 	private static ResourceBundle res;
 
 	public InputOptsUI(int tasksum,List<String> opts) {
-		res = ResourceBundle.getBundle( "cn.edu.jlu.ccst.sshclient.ui.RES_IOUI", new Locale("en","US") );
+		res = ResourceBundle.getBundle( "cn.edu.jlu.ccst.sshclient.ui.lang.RES_IOUI");
 		this.setTitle(res.getString("TITLE"));
 		this.tasksum = tasksum;
 		labels = new ArrayList<JLabel>();

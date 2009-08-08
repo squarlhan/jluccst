@@ -122,7 +122,7 @@ public class ProgressBar extends javax.swing.JFrame implements  ActionListener,C
     {  
     	
 			
-			res = ResourceBundle.getBundle( "cn.edu.jlu.ccst.sshclient.ui.RES_PROGRESSBAR");
+			res = ResourceBundle.getBundle( "cn.edu.jlu.ccst.sshclient.ui.lang.RES_PROGRESSBAR");
 			this.setConn(conn);
 			this.setSourceFile(sourceFile);
 			this.setAimFile(aimFile);

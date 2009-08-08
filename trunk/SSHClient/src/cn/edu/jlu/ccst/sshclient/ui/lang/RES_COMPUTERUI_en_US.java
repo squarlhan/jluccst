@@ -1,4 +1,4 @@
-package cn.edu.jlu.ccst.sshclient.ui;
+package cn.edu.jlu.ccst.sshclient.ui.lang;
 
 import java.util.ListResourceBundle;
 

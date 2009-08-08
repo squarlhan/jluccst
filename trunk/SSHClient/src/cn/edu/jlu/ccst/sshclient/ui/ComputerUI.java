@@ -82,7 +82,7 @@ public class ComputerUI extends javax.swing.JDialog
 	//----------------------------------------------------------------------------//
 	private void initComponents() {
 		
-		res = ResourceBundle.getBundle( "cn.edu.jlu.ccst.sshclient.ui.RES_COMPUTERUI");
+		res = ResourceBundle.getBundle( "cn.edu.jlu.ccst.sshclient.ui.lang.RES_COMPUTERUI");
 		this.setResizable(false);
 		Toolkit tk = Toolkit.getDefaultToolkit();
 		Image img = tk.getImage(this.getClass().getResource("/cn/edu/jlu/ccst/sshclient/ui/resource/t.png"));

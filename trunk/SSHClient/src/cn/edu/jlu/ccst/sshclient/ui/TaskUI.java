@@ -47,7 +47,7 @@ public class TaskUI extends javax.swing.JDialog {
 	// private JButton choosein,chooseout;
 
 	public TaskUI() {
-		res = ResourceBundle.getBundle( "cn.edu.jlu.ccst.sshclient.ui.RES_TUI" , new Locale("en","US"));
+		res = ResourceBundle.getBundle( "cn.edu.jlu.ccst.sshclient.ui.lang.RES_TUI");
 		this.setTitle(res.getString("TITLE_NEW"));
 		initComponent();
 
