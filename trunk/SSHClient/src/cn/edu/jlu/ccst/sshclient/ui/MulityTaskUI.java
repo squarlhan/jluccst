@@ -65,7 +65,7 @@ public class MulityTaskUI extends javax.swing.JDialog {
 					optnum.add(m.group());
 			    }
 				if(tTextField0.getText().isEmpty()){
-					JOptionPane.showMessageDialog(null, res.getString("TASKSAMOUNT"),null,JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, res.getString("TIP_TASKSAMOUNT"),null,JOptionPane.ERROR_MESSAGE);
 					return;
 				}
 				if(!Pattern.matches("[1-9]\\d*",tTextField0.getText())){
@@ -77,7 +77,7 @@ public class MulityTaskUI extends javax.swing.JDialog {
 					return;
 				}
 				if(topts.getText().isEmpty()){
-					JOptionPane.showMessageDialog(null, res.getString("ENTERPARAMETER"),null,JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, res.getString("TIP_ENTERPARAMETER"),null,JOptionPane.ERROR_MESSAGE);
 					return;
 				}
 				if(optnum.isEmpty()){
@@ -98,7 +98,7 @@ public class MulityTaskUI extends javax.swing.JDialog {
 		inputoptsButton.addMouseListener(new java.awt.event.MouseAdapter() {
 			public void mousePressed(java.awt.event.MouseEvent evt) {				
 				if(tTextField0.getText().isEmpty()){
-					JOptionPane.showMessageDialog(null, res.getString("TASKSAMOUNT"),null,JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, res.getString("TIP_TASKSAMOUNT"),null,JOptionPane.ERROR_MESSAGE);
 					return;
 				}
 				if(!Pattern.matches("[1-9]\\d*",tTextField0.getText())){
@@ -157,7 +157,6 @@ public class MulityTaskUI extends javax.swing.JDialog {
 	 * 初始画图函数
 	 */
 	private void initComponent() {
-		res = ResourceBundle.getBundle( "cn.edu.jlu.ccst.sshclient.ui.lang.RES_MTASKUI");
 
 		this.setResizable(false);
 		this.setLocationRelativeTo(null);
@@ -255,7 +254,7 @@ public class MulityTaskUI extends javax.swing.JDialog {
 		tfinAreaPane.setPreferredSize(new   Dimension(500,500)); 
 		this.add(tfinAreaPane);
 		lfin.setBounds(50, 360, 80, 20);
-		JButton choosein = new JButton("Browse");
+		JButton choosein = new JButton(res.getString("BROWSE"));
 		this.add(lfin);
 		choosein.addMouseListener(new java.awt.event.MouseAdapter() {
 			public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -283,7 +282,7 @@ public class MulityTaskUI extends javax.swing.JDialog {
 		tfout = new JTextField();
 		tfout.setBounds(150, 450, 150, 30);
 		lfout.setBounds(50, 450, 80, 20);
-		JButton chooseout = new JButton("Browse");
+		JButton chooseout = new JButton(res.getString("BROWSE"));
 		chooseout.setBounds(300, 450, 80, 25);
 		chooseout.addMouseListener(new java.awt.event.MouseAdapter() {
 			public void mousePressed(java.awt.event.MouseEvent evt) {
@@ -383,7 +382,7 @@ public class MulityTaskUI extends javax.swing.JDialog {
 	private void SubmitButtonMousePressed(java.awt.event.MouseEvent evt)
 	throws IOException {
 		if(tTextField0.getText().isEmpty()){
-			JOptionPane.showMessageDialog(null, res.getString("TASKSAMOUNT"),null,JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, res.getString("TIP_TASKSAMOUNT"),null,JOptionPane.ERROR_MESSAGE);
 			return;
 		}
 		if(!Pattern.matches("[1-9]\\d*",tTextField0.getText())){
@@ -391,11 +390,11 @@ public class MulityTaskUI extends javax.swing.JDialog {
 			return;
 		}
 		if (tTextField1.getText().equals("")) {
-			JOptionPane.showMessageDialog(null, res.getString("TASKNAME"),null,JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, res.getString("TIP_TASKNAME"),null,JOptionPane.ERROR_MESSAGE);
 			return;
 		}
 		if (dirTextField.getText().equals("")) {
-			JOptionPane.showMessageDialog(null, res.getString("WORKDIR"),null,JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, res.getString("TIP_WORKDIR"),null,JOptionPane.ERROR_MESSAGE);
 			return;
 		}
 		if (!dirTextField.getText().startsWith("/")) {
@@ -403,11 +402,11 @@ public class MulityTaskUI extends javax.swing.JDialog {
 			return;
 		}
 		if (tTextField3.getText().equals("")) {
-			JOptionPane.showMessageDialog(null, res.getString("TASKCOMMAND"),null,JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, res.getString("TIP_TASKCOMMAND"),null,JOptionPane.ERROR_MESSAGE);
 			return;
 		}
 		if (tfout.getText().equals("")) {
-			JOptionPane.showMessageDialog(null, res.getString("OUTPUTDIR"),null,JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, res.getString("TIP_OUTPUTDIR"),null,JOptionPane.ERROR_MESSAGE);
 			return;
 		}
 		LinuxClient tempClient = LinuxClient.GetObj();

@@ -4,9 +4,9 @@ import java.util.ListResourceBundle;
 
 public class RES_COMPUTERUI_en_US extends ListResourceBundle{
 	static final Object[][] contents = {
-        {"CREATECOMPUTER","CreateAComputer"}, 
-        {"MODIFYCOMUTER","ModifyTheComputer"}, 
-        {"COMPUTERNAME","CompName:"},
+        {"CREATECOMPUTER","Create A Computer"}, 
+        {"MODIFYCOMUTER","Modify The Computer"}, 
+        {"COMPUTERNAME","Computer Name:"},
         {"USERNAME","UserName:"}, 
         {"SETPASSWORD","Password："}, 
         {"HOSTIPADDRESS","IPAddress:"}, 
@@ -15,12 +15,12 @@ public class RES_COMPUTERUI_en_US extends ListResourceBundle{
         {"MEMO","Memo:"}, 
         {"RESET","Reset"}, 
         {"SUBMIT","Submit"}, 
-        {"ENTERCOMPUTERNAME","EnterCompName"}, 
-        {"ENTERUSERNAME","EnterUserName"},
-        {"ENTERUSERPASSWORD","EnterUserPassword"},
-        {"ENTERUSERHOSTNAME","EnterHostName"},
-        {"CREATESUCC","CreateSucc！"},
-        {"MODIFYSUCC","ModifySucc！"}
+        {"ENTERCOMPUTERNAME","Please Enter Computer Name"}, 
+        {"ENTERUSERNAME","Please Enter UserName"},
+        {"ENTERUSERPASSWORD","Please Enter Password"},
+        {"ENTERUSERHOSTNAME","Please Enter HostName"},
+        {"CREATESUCC","Create Success!"},
+        {"MODIFYSUCC","Modify Success!"}
 	};
 
 	public Object[][] getContents()
