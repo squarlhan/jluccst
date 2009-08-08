@@ -210,31 +210,31 @@ public class InputRulesUI extends javax.swing.JDialog {
 			String t2 = textFields1.get(a).getText().trim();
 			String t3 = textFields2.get(a).getText().trim();
 			if(t1.isEmpty()){
-				JOptionPane.showMessageDialog(null, res.getString("TIP_NO_LOWER_1")+(a+1)+res.getString("TIP_NO_LOWER_2"));
+				JOptionPane.showMessageDialog(null, res.getString("TIP_NO_LOWER_1")+(a+1)+res.getString("TIP_NO_LOWER_2"),null,JOptionPane.ERROR_MESSAGE);
 				return;
 			}
 			if(t2.isEmpty()){
-				JOptionPane.showMessageDialog(null, res.getString("TIP_NO_UPPER_1")+(a+1)+res.getString("TIP_NO_UPPER_2"));
+				JOptionPane.showMessageDialog(null, res.getString("TIP_NO_UPPER_1")+(a+1)+res.getString("TIP_NO_UPPER_2"),null,JOptionPane.ERROR_MESSAGE);
 				return;
 			}
 			if(t3.isEmpty()){
-				JOptionPane.showMessageDialog(null, res.getString("TIP_NO_NUMBER_1")+(a+1)+res.getString("TIP_NO_NUMBER_2"));
+				JOptionPane.showMessageDialog(null, res.getString("TIP_NO_NUMBER_1")+(a+1)+res.getString("TIP_NO_NUMBER_2"),null,JOptionPane.ERROR_MESSAGE);
 				return;
 			}
 			if(!Pattern.matches("-{0,1}\\d+\\.{0,1}\\d*", t1)){
-				JOptionPane.showMessageDialog(null, res.getString("TIP_LOWER_1")+(a+1)+res.getString("TIP_LOWER_2"));
+				JOptionPane.showMessageDialog(null, res.getString("TIP_LOWER_1")+(a+1)+res.getString("TIP_LOWER_2"),null,JOptionPane.ERROR_MESSAGE);
 				return;
 			}
 			if(!Pattern.matches("-{0,1}\\d+\\.{0,1}\\d*", t2)){
-				JOptionPane.showMessageDialog(null, res.getString("TIP_UPPER_1")+(a+1)+res.getString("TIP_UPPER_2"));
+				JOptionPane.showMessageDialog(null, res.getString("TIP_UPPER_1")+(a+1)+res.getString("TIP_UPPER_2"),null,JOptionPane.ERROR_MESSAGE);
 				return;
 			}
 			if(!Pattern.matches("[1-9]\\d*", t3)){			
-				JOptionPane.showMessageDialog(null, res.getString("TIP_NUMBER_1")+(a+1)+res.getString("TIP_NUMBER_2"));
+				JOptionPane.showMessageDialog(null, res.getString("TIP_NUMBER_1")+(a+1)+res.getString("TIP_NUMBER_2"),null,JOptionPane.ERROR_MESSAGE);
 				return;
 			}
 			if(Float.parseFloat(t1)>Float.parseFloat(t2)){
-				JOptionPane.showMessageDialog(null, res.getString("TIP_LOWER_UPPER_1")+(a+1)+res.getString("TIP_LOWER_UPPER_2"));
+				JOptionPane.showMessageDialog(null, res.getString("TIP_LOWER_UPPER_1")+(a+1)+res.getString("TIP_LOWER_UPPER_2"),null,JOptionPane.ERROR_MESSAGE);
 				return;
 			}
 			
@@ -261,7 +261,7 @@ public class InputRulesUI extends javax.swing.JDialog {
 			sum = sum * Integer.parseInt(tf.getText().trim());
 		}
 		if(sum!=tasksum){			
-			JOptionPane.showMessageDialog(null, res.getString("TIP_NO_SAME"));
+			JOptionPane.showMessageDialog(null, res.getString("TIP_NO_SAME"),null,JOptionPane.ERROR_MESSAGE);
 			return;
 		}
 		
@@ -299,7 +299,7 @@ public class InputRulesUI extends javax.swing.JDialog {
 		MulityTaskUI.opts = opts;
 		this.setVisible(false);
 		this.dispose();
-		JOptionPane.showMessageDialog(null, res.getString("TIP_SUCCESS"));
+		JOptionPane.showMessageDialog(null, res.getString("TIP_SUCCESS"),null,JOptionPane.INFORMATION_MESSAGE);
 	}
 	
 	private void printArrayList(ArrayList list){

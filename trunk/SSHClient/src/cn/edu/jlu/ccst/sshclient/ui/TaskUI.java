@@ -50,7 +50,7 @@ public class TaskUI extends javax.swing.JDialog {
 		res = ResourceBundle.getBundle( "cn.edu.jlu.ccst.sshclient.ui.lang.RES_TUI");
 		this.setTitle(res.getString("TITLE_NEW"));
 		initComponent();
-
+		
 		submitButton.addMouseListener(new java.awt.event.MouseAdapter() {
 			public void mousePressed(java.awt.event.MouseEvent evt) {
 
@@ -85,9 +85,10 @@ public class TaskUI extends javax.swing.JDialog {
 
 	public TaskUI(String name, String dirname, String cmd, String in,
 			String out, String memo, String fouts, String opts, String infiles) {
+		res = ResourceBundle.getBundle( "cn.edu.jlu.ccst.sshclient.ui.lang.RES_TUI");
 		this.setTitle(res.getString("TITLE_MOD"));
 		initComponent();
-
+		
 		submitButton.addMouseListener(new java.awt.event.MouseAdapter() {
 			public void mousePressed(java.awt.event.MouseEvent evt) {
 
@@ -130,6 +131,7 @@ public class TaskUI extends javax.swing.JDialog {
 	 */
 	private void initComponent() {
 
+		
 		this.setResizable(false);
 		this.setLocationRelativeTo(null);
 		Toolkit tk = Toolkit.getDefaultToolkit();
@@ -370,25 +372,25 @@ public class TaskUI extends javax.swing.JDialog {
 	throws IOException {
 		if (tTextField1.getText().equals("")) {
 //			JOptionPane.showMessageDialog(null, "请输入新建任务的名字");
-			JOptionPane.showMessageDialog(null,res.getString("INPUT_TASK_NAME"),"Message",JOptionPane.INFORMATION_MESSAGE );
+			JOptionPane.showMessageDialog(null,res.getString("INPUT_TASK_NAME"),null,JOptionPane.ERROR_MESSAGE);
 			return;
 		}
 		if (dirTextField.getText().equals("")) {
 //			JOptionPane.showMessageDialog(null, "请输入工作组目录");
-			JOptionPane.showMessageDialog(null,res.getString("INPUT_WORK_DIR"),"Message",JOptionPane.INFORMATION_MESSAGE );
+			JOptionPane.showMessageDialog(null,res.getString("INPUT_WORK_DIR"),null,JOptionPane.ERROR_MESSAGE );
 			return;
 		}
 		if (!dirTextField.getText().startsWith("/")) {
 //			JOptionPane.showMessageDialog(null, "目录格式不对，请以“/”开头");
-			JOptionPane.showMessageDialog(null,res.getString("WRONG_DIR"),"Message",JOptionPane.INFORMATION_MESSAGE );
+			JOptionPane.showMessageDialog(null,res.getString("WRONG_DIR"),null,JOptionPane.ERROR_MESSAGE );
 			return;
 		}
 		if (tTextField3.getText().equals("")) {
-			JOptionPane.showMessageDialog(null,res.getString("NEW_TASK_CMD"),"Message",JOptionPane.INFORMATION_MESSAGE );
+			JOptionPane.showMessageDialog(null,res.getString("NEW_TASK_CMD"),null,JOptionPane.ERROR_MESSAGE);
 			return;
 		}
 		if (tfout.getText().equals("")) {
-			JOptionPane.showMessageDialog(null,res.getString("OUTPUT_DIR_SEL"),"Message",JOptionPane.INFORMATION_MESSAGE );
+			JOptionPane.showMessageDialog(null,res.getString("OUTPUT_DIR_SEL"),null,JOptionPane.ERROR_MESSAGE);
 //			JOptionPane.showMessageDialog(null, "请选择输出目录");
 			return;
 		}
@@ -507,7 +509,7 @@ public class TaskUI extends javax.swing.JDialog {
 			if (flag) {
 				this.setVisible(false);
 				this.dispose();
-				JOptionPane.showMessageDialog(null, res.getString("NEW_TASK_SUC"));
+				JOptionPane.showMessageDialog(null, res.getString("NEW_TASK_SUC"),null,JOptionPane.INFORMATION_MESSAGE);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -566,26 +568,26 @@ public class TaskUI extends javax.swing.JDialog {
 	throws IOException {
 		if (tTextField1.getText().equals("")) {
 //			JOptionPane.showMessageDialog(null, "请输入新建任务的名字");
-			JOptionPane.showMessageDialog(null,res.getString("INPUT_TASK_NAME"),"Message",JOptionPane.INFORMATION_MESSAGE );
+			JOptionPane.showMessageDialog(null,res.getString("INPUT_TASK_NAME"),null,JOptionPane.ERROR_MESSAGE);
 			return;
 		}
 		if (dirTextField.getText().equals("")) {
 //			JOptionPane.showMessageDialog(null, "请输入工作组目录");
-			JOptionPane.showMessageDialog(null,res.getString("INPUT_WORK_DIR"),"Message",JOptionPane.INFORMATION_MESSAGE );
+			JOptionPane.showMessageDialog(null,res.getString("INPUT_WORK_DIR"),null,JOptionPane.ERROR_MESSAGE);
 			return;
 		}
 		if (!dirTextField.getText().startsWith("/")) {
 //			JOptionPane.showMessageDialog(null, "目录格式不对，请以“/”开头");
-			JOptionPane.showMessageDialog(null,res.getString("WRONG_DIR"),"Message",JOptionPane.INFORMATION_MESSAGE );
+			JOptionPane.showMessageDialog(null,res.getString("WRONG_DIR"),null,JOptionPane.ERROR_MESSAGE);
 			return;
 		}
 		if (tTextField3.getText().equals("")) {
 //			JOptionPane.showMessageDialog(null, "请输入新建任务的命令");
-			JOptionPane.showMessageDialog(null,res.getString("NEW_TASK_CMD"),"Message",JOptionPane.INFORMATION_MESSAGE );
+			JOptionPane.showMessageDialog(null,res.getString("NEW_TASK_CMD"),null,JOptionPane.ERROR_MESSAGE);
 			return;
 		}
 		if (tfout.getText().equals("")) {
-			JOptionPane.showMessageDialog(null,res.getString("OUTPUT_DIR_SEL"),"Message",JOptionPane.INFORMATION_MESSAGE );
+			JOptionPane.showMessageDialog(null,res.getString("OUTPUT_DIR_SEL"),null,JOptionPane.ERROR_MESSAGE);
 //			JOptionPane.showMessageDialog(null, "请选择输出目录");
 			return;
 		}
@@ -632,7 +634,7 @@ public class TaskUI extends javax.swing.JDialog {
 			
 			this.setVisible(false);
 			this.dispose();
-			JOptionPane.showMessageDialog(null, res.getString("MOD_TASK_SUC"));
+			JOptionPane.showMessageDialog(null, res.getString("MOD_TASK_SUC"),null,JOptionPane.INFORMATION_MESSAGE);
 			if(cb.getState()){
 				LinuxClient.upload();
 			}

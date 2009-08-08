@@ -43,10 +43,9 @@ public class GroupUI extends javax.swing.JDialog  {
 	
 	public GroupUI(){
 		res = ResourceBundle.getBundle( "cn.edu.jlu.ccst.sshclient.ui.lang.RES_GUI");
-		
-//		this.setTitle("新建工作组");
 		this.setTitle(res.getString("TITLE"));
-		initComponent();	   
+		initComponent();
+				   
 		submitButton.addMouseListener(new java.awt.event.MouseAdapter() {
 			public void mousePressed(java.awt.event.MouseEvent evt) {
 				SubmitButtonMousePressed(evt);
@@ -57,9 +56,10 @@ public class GroupUI extends javax.swing.JDialog  {
 	}
 	//----------------------------------------------------------//
 	public GroupUI(String name,String dirname, String memo){
-//		this.setTitle("修改工作组");
+		res = ResourceBundle.getBundle( "cn.edu.jlu.ccst.sshclient.ui.lang.RES_GUI");
 		this.setTitle(res.getString("MODIFY_GROUP"));
-		initComponent();	  
+		initComponent();
+					  
 		submitButton.addMouseListener(new java.awt.event.MouseAdapter() {
 			public void mousePressed(java.awt.event.MouseEvent evt) {
 				SubmitMousePressedE(evt);
@@ -80,6 +80,7 @@ public class GroupUI extends javax.swing.JDialog  {
 	 * 初始画图函数
 	 */
 	private void initComponent(){
+		
 		
 		this.setResizable(false);
 		this.setLocationRelativeTo(null);
@@ -182,16 +183,16 @@ public class GroupUI extends javax.swing.JDialog  {
 	{
 		if(gTextField1.getText().equals("")){
 //			JOptionPane.showMessageDialog(null,res.getString("INPUT_GROUP_NAME"));
-			JOptionPane.showMessageDialog(null,res.getString("INPUT_GROUP_NAME"),"Message",JOptionPane.INFORMATION_MESSAGE );
+			JOptionPane.showMessageDialog(null,res.getString("INPUT_GROUP_NAME"),null,JOptionPane.ERROR_MESSAGE);
 			return;
 		}
 		if(dirTextField.getText().equals("")){
 //			JOptionPane.showMessageDialog(null,res.getString("INPUT_WORK_DIR"));
-			JOptionPane.showMessageDialog(null,res.getString("INPUT_WORK_DIR"),"Message",JOptionPane.INFORMATION_MESSAGE );
+			JOptionPane.showMessageDialog(null,res.getString("INPUT_WORK_DIR"),null,JOptionPane.ERROR_MESSAGE);
 			return;
 		}
 		if(!dirTextField.getText().startsWith("/")){
-			JOptionPane.showMessageDialog(null,res.getString("WRONG_DIR"),"Message",JOptionPane.INFORMATION_MESSAGE );
+			JOptionPane.showMessageDialog(null,res.getString("WRONG_DIR"),null,JOptionPane.ERROR_MESSAGE);
 			return;
 		}
 		LinuxClient temp = LinuxClient.GetObj();
@@ -274,7 +275,7 @@ public class GroupUI extends javax.swing.JDialog  {
 			if (flag) {
 				this.setVisible(false);
 				this.dispose();
-				JOptionPane.showMessageDialog(null, res.getString("CREAT_GROUP_SUC")+"!");
+				JOptionPane.showMessageDialog(null, res.getString("CREAT_GROUP_SUC")+"!",null,JOptionPane.INFORMATION_MESSAGE);
 			}//else JOptionPane.showMessageDialog(null, "创建组失败！");
 		}
 		catch(Exception e){
@@ -287,15 +288,15 @@ public class GroupUI extends javax.swing.JDialog  {
 	{
 		if(gTextField1.getText().equals(""))
 		{
-			JOptionPane.showMessageDialog(null,res.getString("INPUT_GROUP_NAME"));
+			JOptionPane.showMessageDialog(null,res.getString("INPUT_GROUP_NAME"),null,JOptionPane.ERROR_MESSAGE);
 			return;
 		}
 		if(dirTextField.getText().equals("")){
-			JOptionPane.showMessageDialog(null,res.getString("INPUT_WORK_DIR"));
+			JOptionPane.showMessageDialog(null,res.getString("INPUT_WORK_DIR"),null,JOptionPane.ERROR_MESSAGE);
 			return;	  
 		}
 		if(!dirTextField.getText().startsWith("/")){
-			JOptionPane.showMessageDialog(null,res.getString("WRONG_DIR"));
+			JOptionPane.showMessageDialog(null,res.getString("WRONG_DIR"),null,JOptionPane.ERROR_MESSAGE);
 			return;
 		}
 
@@ -317,7 +318,7 @@ public class GroupUI extends javax.swing.JDialog  {
 		if (flag) {
 			this.setVisible(false);
 			this.dispose();
-			JOptionPane.showMessageDialog(null, res.getString("MODIFY_GP_SUC")+"！");
+			JOptionPane.showMessageDialog(null, res.getString("MODIFY_GP_SUC")+"！",null,JOptionPane.INFORMATION_MESSAGE);
 		}else flag = true;
 	}
 

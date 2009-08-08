@@ -152,7 +152,7 @@ public class InputOptsUI extends javax.swing.JDialog {
 		MulityTaskUI.opts = opts;
 		this.setVisible(false);
 		this.dispose();
-		JOptionPane.showMessageDialog(null, res.getString("TIP_SUCCESS"));
+		JOptionPane.showMessageDialog(null, res.getString("TIP_SUCCESS"),null,JOptionPane.INFORMATION_MESSAGE);
 	}
 
 	/**
