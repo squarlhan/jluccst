@@ -85,7 +85,7 @@ public class TaskUI extends javax.swing.JDialog {
 
 	public TaskUI(String name, String dirname, String cmd, String in,
 			String out, String memo, String fouts, String opts, String infiles) {
-		res = ResourceBundle.getBundle( "cn.edu.jlu.ccst.sshclient.ui.lang.RES_TUI");
+		res = ResourceBundle.getBundle( "cn.edu.jlu.ccst.sshclient.ui.lang.RES_TUI", new Locale("en","US"));
 		this.setTitle(res.getString("TITLE_MOD"));
 		initComponent();
 		
@@ -243,7 +243,7 @@ public class TaskUI extends javax.swing.JDialog {
 		this.add(choosein);
 		
 		cb = new JCheckBox(res.getString("SET_UPLOAD"),  false);
-		cb.setBounds(50, 320, 160, 50);
+		cb.setBounds(10, 320, 160, 50);
 		this.add(cb);
 		
 		lfout = new JLabel(res.getString("OUTPUT_DIR")+":");
