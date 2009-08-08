@@ -5,7 +5,8 @@ import java.util.ListResourceBundle;
 public class RES_zh_CN extends ListResourceBundle
 {
     static final Object[][] contents = {
-            {"FILE","文件"}, 
+    	    {"COMS","计算机"},     
+    	    {"FILE","文件"}, 
             {"TASK","任务"}, 
             {"HELP","帮助"},
             {"LANGUAGE","Language"},

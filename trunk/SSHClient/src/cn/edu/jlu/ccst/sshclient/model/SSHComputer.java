@@ -7,6 +7,8 @@ import java.io.FileWriter;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import java.util.ResourceBundle;
+
 import javax.swing.*;
 
 import org.dom4j.Document;
@@ -100,7 +102,9 @@ public class SSHComputer extends BaseClass implements BaseOperation{
 	}
 	@Override
 	public boolean remove() {
-		int tt = JOptionPane.showConfirmDialog(null, "删除电脑", "确认删除", JOptionPane.YES_NO_OPTION);
+		ResourceBundle res;		
+		res = ResourceBundle.getBundle( "cn.edu.jlu.ccst.sshclient.ui.lang.RES_OTHER");
+		int tt = JOptionPane.showConfirmDialog(null, res.getString("DEL_COMPUTER"), res.getString("DEL_CONFIRM"), JOptionPane.YES_NO_OPTION);
 		if(JOptionPane.NO_OPTION == tt)
 		{
 			return false;

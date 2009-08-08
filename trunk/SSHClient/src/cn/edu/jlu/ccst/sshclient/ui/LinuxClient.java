@@ -270,7 +270,7 @@ public class LinuxClient extends javax.swing.JFrame {
 	/*构建生成的Computer树*/
 	public void GenerateTree() {
 		//下面开始构建树
-		DefaultMutableTreeNode root = new DefaultMutableTreeNode("Computers", true);
+		DefaultMutableTreeNode root = new DefaultMutableTreeNode(res.getString("COMS"), true);
 		for(SSHComputer c : cps){
 			DefaultMutableTreeNode tcp = new DefaultMutableTreeNode(c,true);
 			root.add(tcp);
