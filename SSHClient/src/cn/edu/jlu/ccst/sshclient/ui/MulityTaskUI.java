@@ -65,27 +65,27 @@ public class MulityTaskUI extends javax.swing.JDialog {
 					optnum.add(m.group());
 			    }
 				if(tTextField0.getText().isEmpty()){
-					JOptionPane.showMessageDialog(null, res.getString("TASKSAMOUNT"));
+					JOptionPane.showMessageDialog(null, res.getString("TASKSAMOUNT"),null,JOptionPane.ERROR_MESSAGE);
 					return;
 				}
 				if(!Pattern.matches("[1-9]\\d*",tTextField0.getText())){
-					JOptionPane.showMessageDialog(null, res.getString("ONLYSTARTWITHINT"));
+					JOptionPane.showMessageDialog(null, res.getString("ONLYSTARTWITHINT"),null,JOptionPane.ERROR_MESSAGE);
 					return;
 				}
 				if(tTextField0.getText().trim().startsWith("0")){
-					JOptionPane.showMessageDialog(null, res.getString("NOTSTARTWITHZERO"));
+					JOptionPane.showMessageDialog(null, res.getString("NOTSTARTWITHZERO"),null,JOptionPane.ERROR_MESSAGE);
 					return;
 				}
 				if(topts.getText().isEmpty()){
-					JOptionPane.showMessageDialog(null, res.getString("ENTERPARAMETER"));
+					JOptionPane.showMessageDialog(null, res.getString("ENTERPARAMETER"),null,JOptionPane.ERROR_MESSAGE);
 					return;
 				}
 				if(optnum.isEmpty()){
-					JOptionPane.showMessageDialog(null, res.getString("ENTERVARPARAMETER"));
+					JOptionPane.showMessageDialog(null, res.getString("ENTERVARPARAMETER"),null,JOptionPane.ERROR_MESSAGE);
 					return;
 				}
 				if(topts.getText().indexOf("(0)")!=-1){
-					JOptionPane.showMessageDialog(null, res.getString("VARREPLACEFROMONE"));
+					JOptionPane.showMessageDialog(null, res.getString("VARREPLACEFROMONE"),null,JOptionPane.ERROR_MESSAGE);
 					return;
 				}
 				
@@ -98,15 +98,15 @@ public class MulityTaskUI extends javax.swing.JDialog {
 		inputoptsButton.addMouseListener(new java.awt.event.MouseAdapter() {
 			public void mousePressed(java.awt.event.MouseEvent evt) {				
 				if(tTextField0.getText().isEmpty()){
-					JOptionPane.showMessageDialog(null, res.getString("TASKSAMOUNT"));
+					JOptionPane.showMessageDialog(null, res.getString("TASKSAMOUNT"),null,JOptionPane.ERROR_MESSAGE);
 					return;
 				}
 				if(!Pattern.matches("[1-9]\\d*",tTextField0.getText())){
-					JOptionPane.showMessageDialog(null, res.getString("ONLYSTARTWITHINT"));
+					JOptionPane.showMessageDialog(null, res.getString("ONLYSTARTWITHINT"),null,JOptionPane.ERROR_MESSAGE);
 					return;
 				}
 				if(tTextField0.getText().trim().startsWith("0")){
-					JOptionPane.showMessageDialog(null, res.getString("NOTSTARTWITHZERO"));
+					JOptionPane.showMessageDialog(null, res.getString("NOTSTARTWITHZERO"),null,JOptionPane.ERROR_MESSAGE);
 					return;
 				}
 								
@@ -383,31 +383,31 @@ public class MulityTaskUI extends javax.swing.JDialog {
 	private void SubmitButtonMousePressed(java.awt.event.MouseEvent evt)
 	throws IOException {
 		if(tTextField0.getText().isEmpty()){
-			JOptionPane.showMessageDialog(null, res.getString("TASKSAMOUNT"));
+			JOptionPane.showMessageDialog(null, res.getString("TASKSAMOUNT"),null,JOptionPane.ERROR_MESSAGE);
 			return;
 		}
 		if(!Pattern.matches("[1-9]\\d*",tTextField0.getText())){
-			JOptionPane.showMessageDialog(null, res.getString("ONLYSTARTWITHINT"));
+			JOptionPane.showMessageDialog(null, res.getString("ONLYSTARTWITHINT"),null,JOptionPane.ERROR_MESSAGE);
 			return;
 		}
 		if (tTextField1.getText().equals("")) {
-			JOptionPane.showMessageDialog(null, res.getString("TASKNAME"));
+			JOptionPane.showMessageDialog(null, res.getString("TASKNAME"),null,JOptionPane.ERROR_MESSAGE);
 			return;
 		}
 		if (dirTextField.getText().equals("")) {
-			JOptionPane.showMessageDialog(null, res.getString("WORKDIR"));
+			JOptionPane.showMessageDialog(null, res.getString("WORKDIR"),null,JOptionPane.ERROR_MESSAGE);
 			return;
 		}
 		if (!dirTextField.getText().startsWith("/")) {
-			JOptionPane.showMessageDialog(null, res.getString("DIREXPLANATION"));
+			JOptionPane.showMessageDialog(null, res.getString("DIREXPLANATION"),null,JOptionPane.ERROR_MESSAGE);
 			return;
 		}
 		if (tTextField3.getText().equals("")) {
-			JOptionPane.showMessageDialog(null, res.getString("TASKCOMMAND"));
+			JOptionPane.showMessageDialog(null, res.getString("TASKCOMMAND"),null,JOptionPane.ERROR_MESSAGE);
 			return;
 		}
 		if (tfout.getText().equals("")) {
-			JOptionPane.showMessageDialog(null, res.getString("OUTPUTDIR"));
+			JOptionPane.showMessageDialog(null, res.getString("OUTPUTDIR"),null,JOptionPane.ERROR_MESSAGE);
 			return;
 		}
 		LinuxClient tempClient = LinuxClient.GetObj();
@@ -548,7 +548,7 @@ public class MulityTaskUI extends javax.swing.JDialog {
 		Ltest.setBounds(120, 650, 90, 30);
 			this.setVisible(false);
 			this.dispose();
-			JOptionPane.showMessageDialog(null, res.getString("CREATETASKSUCC"));
+			JOptionPane.showMessageDialog(null, res.getString("CREATETASKSUCC"),null,JOptionPane.INFORMATION_MESSAGE);
 		
 	}
 

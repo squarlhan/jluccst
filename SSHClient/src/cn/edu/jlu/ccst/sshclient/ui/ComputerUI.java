@@ -57,9 +57,9 @@ public class ComputerUI extends javax.swing.JDialog
 	//--------------------------------------------------------------// 
 	public ComputerUI(String name,String user,String pwd,String host,String memo) 
 	{
+		initComponents(name,user,pwd,host,memo); 
 		this.setLocationRelativeTo(null);
-		this.setTitle(res.getString("MODIFYCOMUTER"));
-		initComponents(name,user,pwd,host,memo);  
+		this.setTitle(res.getString("MODIFYCOMUTER"));		 
 		SubmitButton.addMouseListener(new java.awt.event.MouseAdapter() {
 			public void mousePressed(java.awt.event.MouseEvent evt) {
 				SubmitMousePressedE(evt);
@@ -190,22 +190,22 @@ public class ComputerUI extends javax.swing.JDialog
 	private void SubmitMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SubmitMousePressed
 		// TODO add your handling code here:
 		if(jTextField2.getText().equals("")){
-			JOptionPane.showMessageDialog(null, res.getString("ENTERCOMPUTERNAME"));
+			JOptionPane.showMessageDialog(null, res.getString("ENTERCOMPUTERNAME"),null,JOptionPane.ERROR_MESSAGE);
 			return;
 		}
 		if(jTextField6.getText().equals("")){
-			JOptionPane.showMessageDialog(null, res.getString("ENTERUSERNAME"));
+			JOptionPane.showMessageDialog(null, res.getString("ENTERUSERNAME"),null,JOptionPane.ERROR_MESSAGE);
 			return;
 		}
 		if(jPasswordField1.getPassword().equals("")){
-			JOptionPane.showMessageDialog(null, res.getString("ENTERUSERPASSWORD"));
+			JOptionPane.showMessageDialog(null, res.getString("ENTERUSERPASSWORD"),null,JOptionPane.ERROR_MESSAGE);
 			return;
 		}
 		if(jTextField8.getText().equals("")){
-			JOptionPane.showMessageDialog(null, res.getString("ENTERUSERHOSTNAME"));
+			JOptionPane.showMessageDialog(null, res.getString("ENTERUSERHOSTNAME"),null,JOptionPane.ERROR_MESSAGE);
 			return;
 		}
-		JOptionPane.showMessageDialog(null, res.getString("CREATESUCC"));
+		JOptionPane.showMessageDialog(null, res.getString("CREATESUCC"),null,JOptionPane.INFORMATION_MESSAGE);
 		try{
 			/**写入新建的电脑信息**/
 
@@ -232,22 +232,22 @@ public class ComputerUI extends javax.swing.JDialog
 	private void SubmitMousePressedE(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SubmitMousePressed
 		// TODO add your handling code here:
 		if(jTextField2.getText().equals("")){
-			JOptionPane.showMessageDialog(null, res.getString("ENTERCOMPUTERNAME"));
+			JOptionPane.showMessageDialog(null, res.getString("ENTERCOMPUTERNAME"),null,JOptionPane.ERROR_MESSAGE);
 			return;
 		}
 		if(jTextField6.getText().equals("")){
-			JOptionPane.showMessageDialog(null, res.getString("ENTERUSERNAME"));
+			JOptionPane.showMessageDialog(null, res.getString("ENTERUSERNAME"),null,JOptionPane.ERROR_MESSAGE);
 			return;
 		}
 		if(jPasswordField1.getPassword().equals("")){
-			JOptionPane.showMessageDialog(null, res.getString("ENTERUSERPASSWORD"));
+			JOptionPane.showMessageDialog(null, res.getString("ENTERUSERPASSWORD"),null,JOptionPane.ERROR_MESSAGE);
 			return;
 		}
 		if(jTextField8.getText().equals("")){
-			JOptionPane.showMessageDialog(null, res.getString("ENTERUSERHOSTNAME"));
+			JOptionPane.showMessageDialog(null, res.getString("ENTERUSERHOSTNAME"),null,JOptionPane.ERROR_MESSAGE);
 			return;
 		}
-		JOptionPane.showMessageDialog(null, res.getString("MODIFYSUCC"));
+		JOptionPane.showMessageDialog(null, res.getString("MODIFYSUCC"),null,JOptionPane.ERROR_MESSAGE);
 		this.setVisible(false);
 		this.EditComputerFromXML(LinuxClient.getCur().getId(), jTextField2.getText(), jTextField6.getText(), String.valueOf(jPasswordField1.getPassword()), jTextArea4.getText(), jTextField8.getText());
 	}

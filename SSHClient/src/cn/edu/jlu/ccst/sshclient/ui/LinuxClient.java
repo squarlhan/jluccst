@@ -356,7 +356,7 @@ public class LinuxClient extends javax.swing.JFrame {
 						Com.remove();
 					}
 					else {
-						JOptionPane.showMessageDialog(null, res.getString("TIP_NOT_DELETE"));
+						JOptionPane.showMessageDialog(null, res.getString("TIP_NOT_DELETE"),null,JOptionPane.ERROR_MESSAGE);
 					}
 					break;
 				}
@@ -377,7 +377,7 @@ public class LinuxClient extends javax.swing.JFrame {
 						Gro.remove();
 					}
 					else {
-						JOptionPane.showMessageDialog(null, res.getString("TIP_NOT_DELETE"));
+						JOptionPane.showMessageDialog(null, res.getString("TIP_NOT_DELETE"),null,JOptionPane.ERROR_MESSAGE);
 					}
 					break;
 				}
@@ -389,7 +389,7 @@ public class LinuxClient extends javax.swing.JFrame {
 						tas.remove();
 					}
 					else {
-						JOptionPane.showMessageDialog(null, res.getString("TIP_NOT_DELETE"));
+						JOptionPane.showMessageDialog(null, res.getString("TIP_NOT_DELETE"),null,JOptionPane.ERROR_MESSAGE);
 						break;
 					}
 					for(int i=0;i<jsl.size();i++)
@@ -1943,7 +1943,7 @@ public class LinuxClient extends javax.swing.JFrame {
 					{
 						if(tks.get(i).getStatus()==1)
 						{
-							JOptionPane.showMessageDialog(null, res.getString("TIP_NOT_DELETE"));
+							JOptionPane.showMessageDialog(null, res.getString("TIP_NOT_DELETE"),null,JOptionPane.ERROR_MESSAGE);
 							return;
 						}
 					}
