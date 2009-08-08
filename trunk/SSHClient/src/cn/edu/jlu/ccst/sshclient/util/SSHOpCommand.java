@@ -228,6 +228,35 @@ public class SSHOpCommand implements Runnable {
 				jTextArea1.append(out);   
 			}
 
+
+			if(Cmd.startsWith("./"))
+			{
+
+				//File f=new File("./"+Id+"_"+pidout+".txt");
+				//f.delete();   	 
+				String rem=Cmd.substring(Cmd.indexOf(" "), Cmd.length());
+				//System.out.println("1"+rem);
+				rem=rem.trim();
+				rem=rem.substring(rem.indexOf(" "),rem.length());
+				//System.out.println("2"+rem);
+				rem=rem.trim();
+				//System.out.println("3"+rem);
+				rem=rem.substring(0,rem.indexOf(" "));
+				//System.out.println("4"+rem);
+				
+				
+//				OutputStream fout=new FileOutputStream(filename);
+//				scpGet(conn,rem,fout);
+//				System.out.println(rem+"...."+filename);
+//				fout.close();
+//				conn.close();
+//				System.out.println("文件路径:"+filename);
+
+
+				//GenerateGraphy.GetObj(LinuxClient.GetObj().findSelectTask(Id).getName()+"_"+Id,filename,4);
+
+			}
+
 //			if(Cmd.startsWith("./"))
 //			{
 //
@@ -253,6 +282,7 @@ public class SSHOpCommand implements Runnable {
 //				//GenerateGraphy.GetObj(LinuxClient.GetObj().findSelectTask(Id).getName()+"_"+Id,filename,4);
 //
 //			}
+
 			sess.close();
 			conn.close();
 		}
