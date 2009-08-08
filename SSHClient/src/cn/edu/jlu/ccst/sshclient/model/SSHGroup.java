@@ -10,6 +10,7 @@ import java.io.InputStreamReader;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+import java.util.ResourceBundle;
 
 import javax.swing.JOptionPane;
 
@@ -191,12 +192,14 @@ public class SSHGroup extends BaseClass implements BaseAction, BaseOperation {
 	@Override
 	public boolean remove() {
 		// TODO Auto-generated method stub
-		int tt = JOptionPane.showConfirmDialog(null, "删除任务组", "确认删除", JOptionPane.YES_NO_OPTION);
+		ResourceBundle res;		
+		res = ResourceBundle.getBundle( "cn.edu.jlu.ccst.sshclient.ui.lang.RES_OTHER");
+		int tt = JOptionPane.showConfirmDialog(null, res.getString("DEL_GROUP"), res.getString("DEL_CONFIRM"), JOptionPane.YES_NO_OPTION);
 		if(JOptionPane.NO_OPTION == tt)
 		{
 			return false;
 		}
-		int rr = JOptionPane.showConfirmDialog(null, "删除任务组工作目录", "删除目录", JOptionPane.YES_NO_OPTION);
+		int rr = JOptionPane.showConfirmDialog(null, res.getString("DEL_DIR"), res.getString("DEL_DIR_CONFIRM"), JOptionPane.YES_NO_OPTION);
 		if(JOptionPane.YES_OPTION == rr)
 		{
 			try {
