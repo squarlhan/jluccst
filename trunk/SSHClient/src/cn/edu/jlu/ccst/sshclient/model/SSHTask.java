@@ -221,11 +221,15 @@ public class SSHTask extends BaseClass implements BaseAction, BaseOperation {
 		System.out.println("infiles:"+infiles);
 		int beginIndex = 0;
 		int endIndex = 0;
+		
 		if(!infiles.endsWith(separate))
 			infiles = infiles + separate;
+		System.out.println("infiles:"+infiles);
 		endIndex = infiles.indexOf(separate);
+		System.out.println("endIndex"+endIndex);
 		while (endIndex != -1){
 			String infile = infiles.substring(beginIndex, endIndex);
+			if(!infile.trim().isEmpty())
 			cmdLine=cmdLine+" "+dir+infile;
 			beginIndex = endIndex + 1;
 			infiles = infiles.substring(beginIndex).trim();
@@ -238,7 +242,8 @@ public class SSHTask extends BaseClass implements BaseAction, BaseOperation {
 		if(!outfiles.endsWith(separate))
 			outfiles = outfiles + separate;
 		endIndex = outfiles.indexOf(separate);
-		
+		System.out.println("endIndex"+endIndex);
+		System.out.println("outfiles:"+outfiles);
 		while (endIndex != -1){
 			String outfile = outfiles.substring(beginIndex, endIndex);
 			if(!outfile.trim().isEmpty())
@@ -248,7 +253,6 @@ public class SSHTask extends BaseClass implements BaseAction, BaseOperation {
 			beginIndex = 0;
 			endIndex = outfiles.indexOf(separate);
 		}
-		
 		
 		String opts = this.getOpts();
 		if(!opts.endsWith(separate))
