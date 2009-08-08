@@ -48,7 +48,7 @@ public class MulityTaskUI extends javax.swing.JDialog {
 	// private JButton choosein,chooseout;
 
 	public MulityTaskUI() {
-		res = ResourceBundle.getBundle( "cn.edu.jlu.ccst.sshclient.ui.RES_MTASKUI");
+		res = ResourceBundle.getBundle( "cn.edu.jlu.ccst.sshclient.ui.lang.RES_MTASKUI");
 		this.setTitle(res.getString("CREATEBATCHTASKS"));
 		opts = new ArrayList<String>();
 		rules = new ArrayList<String>();

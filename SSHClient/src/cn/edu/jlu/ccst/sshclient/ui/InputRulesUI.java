@@ -44,7 +44,7 @@ public class InputRulesUI extends javax.swing.JDialog {
 	private static ResourceBundle res;
 
 	public InputRulesUI(int tasksum, String template, List<String> rules) {
-		res = ResourceBundle.getBundle( "cn.edu.jlu.ccst.sshclient.ui.RES_IRUI", new Locale("en","US") );
+		res = ResourceBundle.getBundle( "cn.edu.jlu.ccst.sshclient.ui.lang.RES_IRUI");
 		this.setTitle(res.getString("TITLE"));
 		this.tasksum = tasksum;		
 		this.rules = rules;

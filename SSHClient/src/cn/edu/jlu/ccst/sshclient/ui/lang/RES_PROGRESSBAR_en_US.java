@@ -1,6 +1,4 @@
-package cn.edu.jlu.ccst.sshclient.ui;
-
-import java.util.ListResourceBundle;
+package cn.edu.jlu.ccst.sshclient.ui.lang;
 
 public class RES_PROGRESSBAR_en_US {
 	static final Object[][] contents = {
