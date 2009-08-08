@@ -45,6 +45,7 @@ public class SSHGroup extends BaseClass implements BaseAction, BaseOperation {
 	private SSHComputer cp;
 	private boolean gprunstatus = false;
 	private boolean gprunsucc = false;
+	private String runpid;
 
 	public SSHGroup(String id, String name, byte type, String memo,
 			Date creatdate) {
@@ -69,6 +70,18 @@ public class SSHGroup extends BaseClass implements BaseAction, BaseOperation {
 		// TODO Auto-generated constructor stub
 	}
 
+
+	public SSHGroup(String id, String name, byte type, String memo,
+			Date creatdate, String dirname, List<SSHTask> sts, SSHComputer cp,
+			boolean gprunstatus, boolean gprunsucc, String runpid) {
+		super(id, name, type, memo, creatdate);
+		this.dirname = dirname;
+		this.sts = sts;
+		this.cp = cp;
+		this.gprunstatus = gprunstatus;
+		this.gprunsucc = gprunsucc;
+		this.runpid = runpid;
+	}
 
 	/**
 	 * 生成函数	
@@ -107,6 +120,14 @@ public class SSHGroup extends BaseClass implements BaseAction, BaseOperation {
 		this.cp = cp;
 	}
 
+
+	public String getRunpid() {
+		return runpid;
+	}
+
+	public void setRunpid(String runpid) {
+		this.runpid = runpid;
+	}
 
 	/* (non-Javadoc)
 	 * @see cn.edu.jlu.ccst.sshclient.inter.BaseAction#start()

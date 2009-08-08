@@ -139,6 +139,7 @@ public class LinuxClient extends javax.swing.JFrame {
 					gp.setMemo(g.valueOf("@memo"));
 					gp.setCreatdate(timeFormat.parse(g.valueOf("@creatdate")));
 					gp.setCp(cp);
+					gp.setRunpid(g.valueOf("@pid"));
 					gp.setSts(new ArrayList());
 					cp.getGps().add(gp);
 					this.gps.add(gp);                
