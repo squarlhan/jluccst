@@ -360,6 +360,39 @@ public class GroupUI extends javax.swing.JDialog  {
 			e.printStackTrace();
 		}
 	}
+	public void EditGroupRunPid(String id,String pid){
+		SAXReader reader = new SAXReader();
+		try{
+			//String filePath = this.getClass().getResource("/").getPath() + "cn/edu/jlu/ccst/sshclient/util/Config.xml";
+			Document doc = reader.read("Config.xml");
+			OutputFormat format = OutputFormat.createPrettyPrint();
+			Element root = doc.getRootElement();
+			XMLWriter writer = null;// 声明写XML的对象
+			List   list=doc.selectNodes("/config/computer");
+			Iterator iter = list.iterator();
+			while(iter.hasNext())
+			{
+				Element el=(Element)iter.next();
+				Iterator it=el.elementIterator("group");
+				while(it.hasNext())
+				{
+					Element et=(Element)it.next();
+					String s=et.attributeValue("id");
+					if(s.equals(id))
+					{
+						et.addAttribute("pid",pid);
+
+					}
+				}
+			}
+			writer = new XMLWriter(new FileWriter("Config.xml"), format);
+			writer.write(doc);
+			writer.close();   
+		}
+		catch(Exception e ){
+			e.printStackTrace();
+		}
+	}
 
 	//---------------------------------------------//创建目录
 	private  void createdirs(Connection conn,String dirs,String type) throws IOException {
