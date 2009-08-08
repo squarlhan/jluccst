@@ -28,6 +28,7 @@ public class RES_TUI_zh_CN extends ListResourceBundle
             {"MOD_TASK_SUC","修改任务成功！"}, 
             {"SET_UP_DIR","正在设置目录"}, 
             {"SET_UP_DIR_SUC","设置目录成功"}, 
+            {"SET_UPLOAD","提交后上传"}, 
     };
 
     public Object[][] getContents()

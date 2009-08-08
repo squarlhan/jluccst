@@ -5,8 +5,8 @@ import java.util.ListResourceBundle;
 public class RES_MTASKUI_zh_CN extends ListResourceBundle{
 	static final Object[][] contents = {
         {"CREATEBATCHTASKS","新建批量任务"}, 
-        {"TASKSAMOUNT","请输入任务个数"}, 
-        {"ONLYSTARTWITHINT","任务个数只能是正整数:"},
+        {"TASKSAMOUNT","输入任务个数"}, 
+        {"ONLYSTARTWITHINT","任务个数只能是正整数！"},
         {"NOTSTARTWITHZERO","任务个数不能以0开头"}, 
         {"ENTERPARAMETER","请输入参数"}, 
         {"ENTERVARPARAMETER","请输入可变参数"}, 

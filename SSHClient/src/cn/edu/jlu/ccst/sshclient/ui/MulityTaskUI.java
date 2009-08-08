@@ -157,7 +157,7 @@ public class MulityTaskUI extends javax.swing.JDialog {
 	 * 初始画图函数
 	 */
 	private void initComponent() {
-		res = ResourceBundle.getBundle( "cn.edu.jlu.ccst.sshclient.ui.RES_MTASKUI");
+		res = ResourceBundle.getBundle( "cn.edu.jlu.ccst.sshclient.ui.lang.RES_MTASKUI");
 
 		this.setResizable(false);
 		this.setLocationRelativeTo(null);

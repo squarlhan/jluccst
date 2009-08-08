@@ -42,7 +42,7 @@ public class TaskUI extends javax.swing.JDialog {
 	private String older;
 	private SSHTask oldertask;
 	private JPanel tfin;
-	private Checkbox cb;
+	private JCheckBox cb;
 	private static ResourceBundle res;
 	// private JButton choosein,chooseout;
 
@@ -242,7 +242,7 @@ public class TaskUI extends javax.swing.JDialog {
 		choosein.setBounds(300, 290, 80, 25);
 		this.add(choosein);
 		
-		cb = new Checkbox("Upload",  true);
+		cb = new JCheckBox(res.getString("SET_UPLOAD"),  false);
 		cb.setBounds(50, 320, 160, 50);
 		this.add(cb);
 		
@@ -635,7 +635,7 @@ public class TaskUI extends javax.swing.JDialog {
 			this.setVisible(false);
 			this.dispose();
 			JOptionPane.showMessageDialog(null, res.getString("MOD_TASK_SUC"),null,JOptionPane.INFORMATION_MESSAGE);
-			if(cb.getState()){
+			if(cb.isSelected()){
 				LinuxClient.upload();
 			}
 		}
