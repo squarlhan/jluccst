@@ -14,6 +14,7 @@ public class RES_OTHER_en_US extends ListResourceBundle
             {"DEL_CONFIRM","Delete Confirm"},
             {"DEL_DIR","Delete the Working Directory?"},
             {"DEL_DIR_CONFIRM","Delete Directory"},
+            {"RUNNING","The Task is Running..."},
     };
 
     public Object[][] getContents()

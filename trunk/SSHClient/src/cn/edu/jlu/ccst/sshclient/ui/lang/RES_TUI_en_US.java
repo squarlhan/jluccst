@@ -28,6 +28,7 @@ public class RES_TUI_en_US extends ListResourceBundle
         {"MOD_TASK_SUC","Modify Task Successfully"}, 
         {"SET_UP_DIR","Setting Up Directory"},
         {"SET_UP_DIR_SUC","Directory Set Up Successfully"},
+        {"SET_UPLOAD","Upload after Submit"}, 
     };
 
     public Object[][] getContents()

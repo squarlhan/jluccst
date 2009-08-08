@@ -16,6 +16,7 @@ public class RES_OTHER_zh_CN extends ListResourceBundle
             {"DEL_CONFIRM","确认删除"},
             {"DEL_DIR","删除任务工作目录？"},
             {"DEL_DIR_CONFIRM","删除目录"},
+            {"RUNNING","正在执行中"},
     };
 
     public Object[][] getContents()
