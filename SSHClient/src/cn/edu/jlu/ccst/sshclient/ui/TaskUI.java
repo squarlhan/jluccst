@@ -902,18 +902,7 @@ public class TaskUI extends javax.swing.JDialog {
 		Ltest.setText(res.getString("SET_UP_DIR"));
 		Session sess = conn.openSession();
 		String finalcmd = dirs.substring(1);
-		// while(finalcmd.endsWith("/")){
-		// finalcmd = finalcmd.substring(0, finalcmd.length()-2);
-		// }
-		// if(type.equals("m")){
-		// String orin = this.older.substring(1);
-		// int i = finalcmd.lastIndexOf("/");
-		// String newdir = "";
-		// if(i>0)newdir = " mkdir -p "+finalcmd.substring(0, i)+" ;";
-		// sess.execCommand("./squarlhan/CShell "+ newdir + " mv " + orin + " "
-		// + finalcmd.trim());
-		// }else
-		sess.execCommand("./squarlhan/CShell mkdir -p " + finalcmd.trim());
+		sess.execCommand("./CShell mkdir -p " + finalcmd.trim());
 
 		String out;
 		BufferedReader bufferedReader = new BufferedReader(

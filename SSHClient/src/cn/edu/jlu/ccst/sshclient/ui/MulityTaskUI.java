@@ -591,7 +591,7 @@ public class MulityTaskUI extends javax.swing.JDialog {
 		// Connection conn = getOpenedConnection(TC);
 		Ltest.setText(res.getString("DIRSETTING"));
 		Session sess = conn.openSession();
-		sess.execCommand("./squarlhan/CShell " + dirs);
+		sess.execCommand("./CShell " + dirs);
 
 		String out;
 		BufferedReader bufferedReader = new BufferedReader(
