@@ -227,31 +227,31 @@ public class SSHOpCommand implements Runnable {
 				jTextArea1.append(out);   
 			}
 
-			if(Cmd.startsWith("./"))
-			{
-
-				//File f=new File("./"+Id+"_"+pidout+".txt");
-				//f.delete();   	 
-				String rem=Cmd.substring(Cmd.indexOf(" "), Cmd.length());
-				//System.out.println("1"+rem);
-				rem=rem.trim();
-				rem=rem.substring(rem.indexOf(" "),rem.length());
-				//System.out.println("2"+rem);
-				rem=rem.trim();
-				//System.out.println("3"+rem);
-				rem=rem.substring(0,rem.indexOf(" "));
-				//System.out.println("4"+rem);
-				OutputStream fout=new FileOutputStream(filename);
-				scpGet(conn,rem,fout);
-				System.out.println(rem+"...."+filename);
-				fout.close();
-				conn.close();
-				System.out.println("文件路径:"+filename);
-
-
-				//GenerateGraphy.GetObj(LinuxClient.GetObj().findSelectTask(Id).getName()+"_"+Id,filename,4);
-
-			}
+//			if(Cmd.startsWith("./"))
+//			{
+//
+//				//File f=new File("./"+Id+"_"+pidout+".txt");
+//				//f.delete();   	 
+//				String rem=Cmd.substring(Cmd.indexOf(" "), Cmd.length());
+//				//System.out.println("1"+rem);
+//				rem=rem.trim();
+//				rem=rem.substring(rem.indexOf(" "),rem.length());
+//				//System.out.println("2"+rem);
+//				rem=rem.trim();
+//				//System.out.println("3"+rem);
+//				rem=rem.substring(0,rem.indexOf(" "));
+//				//System.out.println("4"+rem);
+//				OutputStream fout=new FileOutputStream(filename);
+//				scpGet(conn,rem,fout);
+//				System.out.println(rem+"...."+filename);
+//				fout.close();
+//				conn.close();
+//				System.out.println("文件路径:"+filename);
+//
+//
+//				//GenerateGraphy.GetObj(LinuxClient.GetObj().findSelectTask(Id).getName()+"_"+Id,filename,4);
+//
+//			}
 			sess.close();
 			conn.close();
 		}
@@ -373,18 +373,70 @@ public class SSHOpCommand implements Runnable {
 			DynDispThread disTh = new DynDispThread(jTextArea1,runtasklist.get(0).getGp().getId(),System.currentTimeMillis());
 			disTh.start();	
 			int ft = 0;
+			String cmdLine = "./CShell ";
+			conn = getOpenedConnection();
+			sess = conn.openSession();
 			for(int i = 0; i < runtasklist.size(); ++i){ 
-				String filename=runtasklist.get(i).getFout()+"/"+runtasklist.get(i).getId()+".txt";
-				FileWriter write = null;
-				try
-				{
-					write=new FileWriter(filename,true);
-				}catch(IOException e)
-				{}
-				conn = getOpenedConnection();
-				sess = conn.openSession();
-				sess.execCommand(runtasklist.get(i).getCmd());
-				String out; 		    
+				SSHTask selectedTask = runtasklist.get(i);
+				cmdLine  = cmdLine+selectedTask.getCmd();
+				String separate = ";";
+				
+				String dir = selectedTask.getDirname();
+				dir = "."+dir+"/";
+				String infiles = selectedTask.getInfiles();
+				System.out.println("infiles:"+infiles);
+				int beginIndex = 0;
+				int endIndex = 0;
+				if(!infiles.endsWith(separate))
+					infiles = infiles + separate;
+				endIndex = infiles.indexOf(separate);
+				while (endIndex != -1){
+					String infile = infiles.substring(beginIndex, endIndex);
+					if(!infile.trim().isEmpty())
+						cmdLine=cmdLine+" "+dir+infile;
+					beginIndex = endIndex + 1;
+					infiles = infiles.substring(beginIndex).trim();
+					beginIndex = 0;
+					endIndex = infiles.indexOf(separate);
+				}
+				String outfiles = selectedTask.getFouts();
+				beginIndex = 0;
+				endIndex = 0;
+				if(!outfiles.endsWith(separate))
+					outfiles = outfiles + separate;
+				endIndex = outfiles.indexOf(separate);
+				
+				while (endIndex != -1){
+					String outfile = outfiles.substring(beginIndex, endIndex);
+					if(!outfile.trim().isEmpty())
+					cmdLine=cmdLine+" "+dir+outfile;
+					beginIndex = endIndex + 1;
+					outfiles = outfiles.substring(beginIndex).trim();
+					beginIndex = 0;
+					endIndex = outfiles.indexOf(separate);
+				}
+				
+				
+				String opts = selectedTask.getOpts();
+				if(!opts.endsWith(separate))
+					opts = opts + separate;
+				endIndex = opts.indexOf(separate);
+				while (endIndex != -1){
+					String opt = opts.substring(beginIndex, endIndex);
+					if(!opt.trim().isEmpty())
+					cmdLine=cmdLine+" "+opt;
+					beginIndex = endIndex + 1;
+					opts = opts.substring(beginIndex).trim();
+					beginIndex = 0;
+					endIndex = opts.indexOf(separate);
+				}
+				
+				System.out.println("Dir:"+selectedTask.getDirname());
+				System.out.println("cmdLine:"+cmdLine);	
+				
+				
+				
+				    
 				flag = true;
 				runtasklist.get(i).setRunSucc(true);
 				LinuxClient.GetObj().setTaskRunSucc(runtasklist.get(i).getId(),flag);
@@ -397,39 +449,7 @@ public class SSHOpCommand implements Runnable {
 				//将任务开始时间写config.xml文件中
 				tempUI.EditTaskFromXML(runtasklist.get(i).getId(), runtasklist.get(i).getName(), runtasklist.get(i).getDirname(),runtasklist.get(i).getMemo(),
 						runtasklist.get(i).getCmd(), runtasklist.get(i).getFin(),runtasklist.get(i).getFout(), curtime,stime, runtasklist.get(i).getFouts(), runtasklist.get(i).getOpts(), runtasklist.get(i).getInfiles());
-
-				BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(sess.getStdout()));     
-				if(runtasklist.get(i).getCmd().startsWith("./")) { //处理自定义任务
-					int first1 = 0;
-					while((out=bufferedReader.readLine())!=null) { 
-						if(ft == 0) {
-							disTh.stop();
-							jTextArea1.setText(runtasklist.get(i).getGp().getId()+"\n");
-							ft = 1;
-						}
-						if(first1 == 0) {
-							first1 = 1;
-							tempUI.EditTaskRunPid(runtasklist.get(i).getId(),out.trim());
-							continue;
-						}
-						out += "\r\n";
-						write.append(out);
-						jTextArea1.append(out);  
-					}
-					first1 = 0;
-				}
-				else {
-					while((out=bufferedReader.readLine())!=null) { //处理费自定义任务
-						if(ft == 0) {
-							disTh.stop();
-							jTextArea1.setText(runtasklist.get(i).getGp().getId()+"\n");
-							ft = 1;
-						}
-						out += "\r\n";
-						write.append(out);
-						jTextArea1.append(out);   
-					}
-				}
+				
 
 				runtasklist.get(i).setStatus(0);
 				if(flag == true) { 
@@ -442,12 +462,43 @@ public class SSHOpCommand implements Runnable {
 					break;
 				}
 
-				sess.close();
-				conn.close();
-				write.flush();
-				write.close();
+				
+				cmdLine = cmdLine+"@echo "+selectedTask.getId()+"@";
+				System.out.println("cmdLine:"+i+cmdLine);	
 			}
-
+			//FileWriter write = null;
+			//String filename=selectedTask.getFout()+"/"+selectedTask.getId()+".txt";
+//			try
+//			{
+//				write=new FileWriter(filename,true);
+//			}catch(IOException e)
+//			{}
+			BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(sess.getStdout()));
+			String out; 	
+			boolean first = true;
+			GroupUI gp = new GroupUI();
+			sess.execCommand(cmdLine);
+			while((out=bufferedReader.readLine())!=null) { 
+					if(ft == 0) {
+						disTh.stop();
+						ft = 1;
+					}
+					if(first) {
+						first = false;
+						gp.EditGroupRunPid(runtasklist.get(0).getGp().getId(),out.trim());
+						continue;
+					}
+					out += "\r\n";
+//					write.append(out);
+					jTextArea1.append(out);  
+			}
+		
+//			write.flush();
+//			write.close();
+			System.out.println("cmdLine:"+cmdLine);	
+//			System.exit(1);
+			sess.close();
+			conn.close();
 		}
 		catch(Exception ie) {
 			ie.printStackTrace();
