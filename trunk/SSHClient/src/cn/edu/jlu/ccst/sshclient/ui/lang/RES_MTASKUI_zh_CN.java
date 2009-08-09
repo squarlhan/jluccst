@@ -27,6 +27,7 @@ public class RES_MTASKUI_zh_CN extends ListResourceBundle{
         {"DIREXPLANATION","目录格式不对，请以“/”开头"},
         {"CREATETASKSUCC","创建任务成功！"},
         {"DIRSETTING","正在设置目录..."},
+        {"SET_UPLOAD","上传"},
         {"CREATEDIRSUCC","设置目录成功！"},
         {"TIP_TASKSAMOUNT","请输入任务个数!"}, 
         {"TIP_ENTERPARAMETER","请输入参数!"}, 

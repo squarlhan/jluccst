@@ -4,6 +4,7 @@ import java.util.ListResourceBundle;
 
 public class RES_MTASKUI_en_US extends ListResourceBundle{
 	static final Object[][] contents = {
+
         {"CREATEBATCHTASKS","Create A Batch Of Tasks"}, 
         {"TASKSAMOUNT","Task Amount:"}, 
         {"TIP_TASKSAMOUNT","Please Input Task Amount!"}, 
@@ -34,8 +35,10 @@ public class RES_MTASKUI_en_US extends ListResourceBundle{
         {"CREATETASKSUCC","Create Task Success!"},
         {"DIRSETTING","Setting Dir..."},
         {"CREATEDIRSUCC","Set Dir Success!"},
-        {"BROWSE","Browse"}
+        {"BROWSE","Browse"},
+        {"SET_UPLOAD","Upload"}
         
+
 	};
 
 	public Object[][] getContents()
