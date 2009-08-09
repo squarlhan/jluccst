@@ -1033,6 +1033,9 @@ public class LinuxClient extends javax.swing.JFrame {
 				aimFiles = aimFiles.substring(beginIndex).trim();
 				endIndex = aimFiles.indexOf(separate);
 			}
+			aimFiles = inFiles;
+			System.out.println("aimFiles:"+aimFiles);
+			endIndex = aimFiles.indexOf(separate);
 		}
 		System.out.println("cmd:"+cmd);
 		Session sess;
