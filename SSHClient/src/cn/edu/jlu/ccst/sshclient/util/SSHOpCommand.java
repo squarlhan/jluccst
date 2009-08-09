@@ -15,6 +15,8 @@ import java.io.OutputStream;
 
 import ch.ethz.ssh2.Connection;
 import ch.ethz.ssh2.SCPClient;
+import ch.ethz.ssh2.SFTPv3Client;
+import ch.ethz.ssh2.SFTPv3FileAttributes;
 import ch.ethz.ssh2.Session;
 import java.util.ArrayList;
 import java.util.Date;
@@ -172,6 +174,9 @@ public class SSHOpCommand implements Runnable {
 			break;
 		case 5 : //停止自定义的任务
 			stopOwn();
+			break;
+		case 6: //检测任务是否完成
+			checkT();
 			break;
 		default: break;
 		}
@@ -389,6 +394,7 @@ public class SSHOpCommand implements Runnable {
 	public void stopOwn() {
 		try {
 			Connection conn = getOpenedConnection();
+			conn = getOpenedConnection();
 			Session sess = conn.openSession();
 			sess.execCommand("kill pid "+ ownPid);
 			sess.close();
@@ -404,6 +410,50 @@ public class SSHOpCommand implements Runnable {
 	}
 
 	//-------------------------------------------------------------//
+	public void checkT(){
+		String GID = runtasklist.get(0).getGp().getId();
+		Connection conn ;
+		conn = getOpenedConnection();
+		SFTPv3FileAttributes sfa = null;
+		
+		while(true){
+			String dir = "";
+			dir += "./"+GID;
+			SFTPv3Client s3cg = null;
+			try{
+				s3cg = new SFTPv3Client(conn);
+				sfa = s3cg.stat(dir);
+			}catch(IOException ee){
+				break;
+			}
+			s3cg.close();
+			for(int i = 0; i < runtasklist.size(); ++i) {
+				SSHTask selectedTask = runtasklist.get(i);
+				dir += "/"+selectedTask.getId();
+				//判断源文件和目标文件是否存在
+				boolean dirExist = true;
+				SFTPv3Client s3c = null;
+				try{
+					s3c = new SFTPv3Client(conn);
+					sfa = s3c.stat(dir);
+				}catch(IOException ee){
+					dirExist = false;
+				}
+				s3c.close();
+				if(dirExist)
+					System.out.println("dirExist");
+				else{
+					System.out.println("dirNotExist");
+					TaskUI tui = new TaskUI();
+					System.out.println("selectedTask.getId():"+selectedTask.getId());
+					LinuxClient.GetObj().setTaskRunSucc(runtasklist.get(i).getId(),false);
+					tui.EditTaskRunSuccXML(selectedTask.getId(), false);
+				}
+//				System.exit(1);
+			}
+		}
+	}
+	//----------------------------------------------------------------//
 	/**
 	 * 串行开始组内的所有任务
 	 */
@@ -422,6 +472,10 @@ public class SSHOpCommand implements Runnable {
 			conn = getOpenedConnection();
 			sess = conn.openSession();
 			sessMdir = conn.openSession();
+			
+
+			
+			
 			for(int i = 0; i < runtasklist.size(); ++i){ 
 				SSHTask selectedTask = runtasklist.get(i);
 				TaskUI tui = new TaskUI();
@@ -544,7 +598,10 @@ public class SSHOpCommand implements Runnable {
 			
 			sessMdir.execCommand(mkdirCmd);
 			sess.execCommand(cmdLine);
-
+			SSHOpCommand ss = new SSHOpCommand(Host, Name, Psw,  runtasklist,
+					jTextArea1, 6);
+			Thread tt = new Thread(ss);
+			tt.run();
 //			LinuxClient.GetObj().GenerateTree();
 //			TaskUI temp = new TaskUI();
 			while((out=bufferedReader.readLine())!=null) { 
