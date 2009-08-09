@@ -44,7 +44,8 @@ public class MulityTaskUI extends javax.swing.JDialog {
 	public static List<String> opts; 
 	public static List<String> rules; 
 	private static ResourceBundle res;
-
+	private JCheckBox cb;
+	
 	// private JButton choosein,chooseout;
 
 	public MulityTaskUI() {
@@ -256,6 +257,11 @@ public class MulityTaskUI extends javax.swing.JDialog {
 		lfin.setBounds(50, 360, 80, 20);
 		JButton choosein = new JButton(res.getString("BROWSE"));
 		this.add(lfin);
+		
+		cb = new JCheckBox(res.getString("SET_UPLOAD"),  false);
+		cb.setBounds(50, 400, 160, 50);
+		this.add(cb);
+		
 		choosein.addMouseListener(new java.awt.event.MouseAdapter() {
 			public void mousePressed(java.awt.event.MouseEvent evt) {
 
@@ -548,6 +554,22 @@ public class MulityTaskUI extends javax.swing.JDialog {
 			this.setVisible(false);
 			this.dispose();
 			JOptionPane.showMessageDialog(null, res.getString("CREATETASKSUCC"),null,JOptionPane.INFORMATION_MESSAGE);
+			
+		int taskAmount = Integer.valueOf(tTextField0.getText().trim());
+		String infiles = "";
+		String infilesP = "";
+		for (Component cc : tfin.getComponents()) {
+			if (cc instanceof JTextField) {
+				if (((JTextField) cc).getText().trim().length() > 0) {
+					 infiles += ((JTextField) cc).getText().trim() + "; ";
+					 infilesP += ((JTextField) cc).getToolTipText().trim()+ "; ";
+				}
+			}
+		}
+		String dir = dirTextField.getText().trim();
+		if(cb.isSelected()){
+			LinuxClient.upload(taskAmount, infiles, infilesP, dir);
+		}
 		
 	}
 
