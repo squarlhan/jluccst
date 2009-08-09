@@ -3,6 +3,8 @@ package cn.edu.jlu.ccst.sshclient.util;
 import cn.edu.jlu.ccst.sshclient.model.SSHTask;
 import cn.edu.jlu.ccst.sshclient.ui.*;
 
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -409,17 +411,23 @@ public class SSHOpCommand implements Runnable {
 		for(int i = 0; i < runtasklist.size(); ++i) {
 			runtasklist.get(i).setStatus(1);   
 		}
+		String GID = runtasklist.get(0).getGp().getId();
 		try{
 			Connection conn ;
-			Session sess ;
+			Session sess,sessMdir ;
 			DynDispThread disTh = new DynDispThread(jTextArea1,runtasklist.get(0).getGp().getId(),System.currentTimeMillis());
 			disTh.start();	
 			int ft = 0;
 			String cmdLine = "./CShell ";
 			conn = getOpenedConnection();
 			sess = conn.openSession();
+			sessMdir = conn.openSession();
 			for(int i = 0; i < runtasklist.size(); ++i){ 
 				SSHTask selectedTask = runtasklist.get(i);
+				TaskUI tui = new TaskUI();
+				System.out.println("selectedTask.getId():"+selectedTask.getId());
+				tui.EditTaskRunSuccXML(selectedTask.getId(), true);
+				
 				cmdLine  = cmdLine+selectedTask.getCmd();
 				String separate = ";";
 				
@@ -479,12 +487,12 @@ public class SSHOpCommand implements Runnable {
 				
 				
 				    
-				flag = true;
-				runtasklist.get(i).setRunSucc(true);
-				LinuxClient.GetObj().setTaskRunSucc(runtasklist.get(i).getId(),flag);
+//				flag = true;
+//				runtasklist.get(i).setRunSucc(true);
+//				LinuxClient.GetObj().setTaskRunSucc(runtasklist.get(i).getId(),flag);
 				TaskUI tempUI = new TaskUI();
 				//向config.xml中写入任务运行信息
-				tempUI.EditTaskRunSuccXML(runtasklist.get(i).getId(), flag);
+//				tempUI.EditTaskRunSuccXML(runtasklist.get(i).getId(), flag);
 				long stime = System.currentTimeMillis();
 				runtasklist.get(i).setRunTime(stime);
 				Date curtime = new Date();
@@ -492,22 +500,27 @@ public class SSHOpCommand implements Runnable {
 				tempUI.EditTaskFromXML(runtasklist.get(i).getId(), runtasklist.get(i).getName(), runtasklist.get(i).getDirname(),runtasklist.get(i).getMemo(),
 						runtasklist.get(i).getCmd(), runtasklist.get(i).getFin(),runtasklist.get(i).getFout(), curtime,stime, runtasklist.get(i).getFouts(), runtasklist.get(i).getOpts(), runtasklist.get(i).getInfiles());
 				
-
-				runtasklist.get(i).setStatus(0);
+				LinuxClient.GetObj().setTaskRunSucc(runtasklist.get(i).getId(),true);
+				runtasklist.get(i).setStatus(1);
 				if(flag == true) { 
-					LinuxClient.GetObj().setTaskRunSucc(runtasklist.get(i).getId(),false);
-					tempUI.EditTaskRunSuccXML(runtasklist.get(i).getId(), false);
+//					LinuxClient.GetObj().setTaskRunSucc(runtasklist.get(i).getId(),false);
+//					tempUI.EditTaskRunSuccXML(runtasklist.get(i).getId(), false);
 				}    	      	
 				boolean temp = LinuxClient.GetObj().getGpsrunSucc(runtasklist.get(i).getGp().getId());
 				if(temp == true) {
 					LinuxClient.GetObj().setGpsrunSucc(runtasklist.get(i).getGp().getId(),false);
 					break;
 				}
-
+				String tid;
+				tid=runtasklist.get(i).getId();
+//				System.out.println("tid="+tid);
 				
-				cmdLine = cmdLine+"@echo "+selectedTask.getId()+"@";
-				System.out.println("cmdLine:"+i+cmdLine);	
+				cmdLine = cmdLine+"@";
+//				rm –tf ggg/t1
+				cmdLine += "rmdir "+GID+"/"+tid+"@";
+//				System.out.println("cmdLine:"+i+cmdLine);	
 			}
+			cmdLine += "rmdir "+GID+"@";
 			//FileWriter write = null;
 			//String filename=selectedTask.getFout()+"/"+selectedTask.getId()+".txt";
 //			try
@@ -519,7 +532,21 @@ public class SSHOpCommand implements Runnable {
 			String out; 	
 			boolean first = true;
 			GroupUI gp = new GroupUI();
+			String mkdirCmd = "./CShell ";
+			mkdirCmd += "mkdir "+GID+"@";
+			for(int i = 0; i < runtasklist.size(); ++i) {
+				mkdirCmd += "mkdir -p "+GID+"/"+runtasklist.get(i).getId()+"@";   
+			}
+			System.out.println("mkdirCmd:"+mkdirCmd);
+			LinuxClient.GetObj().updata();
+//			Thread.sleep(50*1000);
+//			LinuxClient.GetObj().GenerateTree();
+			
+			sessMdir.execCommand(mkdirCmd);
 			sess.execCommand(cmdLine);
+
+//			LinuxClient.GetObj().GenerateTree();
+//			TaskUI temp = new TaskUI();
 			while((out=bufferedReader.readLine())!=null) { 
 					if(ft == 0) {
 						disTh.stop();
@@ -530,6 +557,7 @@ public class SSHOpCommand implements Runnable {
 						gp.EditGroupRunPid(runtasklist.get(0).getGp().getId(),out.trim());
 						continue;
 					}
+					
 					out += "\r\n";
 //					write.append(out);
 					jTextArea1.append(out);  
@@ -539,12 +567,15 @@ public class SSHOpCommand implements Runnable {
 //			write.close();
 			System.out.println("cmdLine:"+cmdLine);	
 //			System.exit(1);
+			sessMdir.close();
 			sess.close();
 			conn.close();
 		}
 		catch(Exception ie) {
 			ie.printStackTrace();
 		}
+		
+		
 		LinuxClient.GetObj().setGpsStatus(runtasklist.get(0).getGp().getId(),false);
 		LinuxClient.GetObj().setRunStatusC(runtasklist.get(0).getGp().getCp().getId(), false);
 		LinuxClient.GetObj().setSinglerun(1);
@@ -554,6 +585,7 @@ public class SSHOpCommand implements Runnable {
 	 * 停止串行执行的组内的任务
 	 */
 	public void stopGroupSSH() {
+		System.out.println("a00000000000");
 		for(int i = 0; i < runtasklist.size(); ++i) {
 			runtasklist.get(i).setStatus(0);   
 		}
