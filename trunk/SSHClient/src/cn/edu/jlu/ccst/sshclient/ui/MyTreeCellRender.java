@@ -28,7 +28,6 @@ public class MyTreeCellRender extends DefaultTreeCellRenderer {
 		ImageIcon image3 = new ImageIcon(this.getClass().getResource("/cn/edu/jlu/ccst/sshclient/ui/resource/s.png"));
 		ImageIcon image5 = new ImageIcon(this.getClass().getResource("/cn/edu/jlu/ccst/sshclient/ui/resource/m.png"));
 		ImageIcon image6 = new ImageIcon(this.getClass().getResource("/cn/edu/jlu/ccst/sshclient/ui/resource/e.png"));
-
 		ImageIcon image4 = new ImageIcon(this.getClass().getResource("/cn/edu/jlu/ccst/sshclient/ui/resource/d.png"));
 		if (node.getLevel() == 0) {
 			this.setIcon(image0);
