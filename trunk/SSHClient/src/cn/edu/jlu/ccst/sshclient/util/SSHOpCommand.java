@@ -224,10 +224,21 @@ public class SSHOpCommand implements Runnable {
 					jTextArea1.setText(Id+"\n");
 					ft = 1;
 				}
+				
+				//判断EOP
+				if(out.startsWith("EOP")){
+					if(flag == true) {
+						flag = false;
+						LinuxClient.GetObj().setTaskRunSucc(Id,flag);      
+						temp.EditTaskRunSuccXML(Id,flag);//向config.xml中写入任务运行状态
+					}
+				}
 				out += "\r\n";
 				jTextArea1.append(out);   
+				
 			}
-
+			
+			
 
 //			if(Cmd.startsWith("./"))
 //			{
@@ -291,11 +302,11 @@ public class SSHOpCommand implements Runnable {
 		}
 		LinuxClient tmpLinx = LinuxClient.GetObj();
 		tmpLinx.setSelTaskStatus(Id,0);         	
-		if(flag == true) {
-			flag = false;
-			LinuxClient.GetObj().setTaskRunSucc(Id,flag);      
-			temp.EditTaskRunSuccXML(Id,flag);//向config.xml中写入任务运行状态
-		}
+//		if(flag == true) {
+//			flag = false;
+//			LinuxClient.GetObj().setTaskRunSucc(Id,flag);      
+//			temp.EditTaskRunSuccXML(Id,flag);//向config.xml中写入任务运行状态
+//		}
 
 		//判断并行结束
 		if(runtasklist == null){
