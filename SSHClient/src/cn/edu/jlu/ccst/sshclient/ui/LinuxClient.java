@@ -916,6 +916,137 @@ public class LinuxClient extends javax.swing.JFrame {
 			}
 	}
 	//-------------------------------------------------------------//
+	static public void upload(int taskAmount, String inFiles, String inFilesP, String dir ) {
+		SSHGroup selectGroup = new SSHGroup();
+		boolean key = true;
+		boolean fileExist = true;
+		//寻找选中的任务
+		int i;
+		for( i = 0; i < gps.size() ; i++) {
+			if(cur.getId().equals(gps.get(i).getId())) {
+				selectGroup = gps.get(i);
+				break;
+			}
+		}
+		SSHComputer selectComputer = new SSHComputer();
+		selectComputer = selectGroup.getCp();
+		//获得上传命令的相关信息
+		String computerHost = selectComputer.getHost();
+		String userName = selectComputer.getUsername();
+		String userPsw = selectComputer.getPassword();
+		int beginIndex = 0;
+		int endIndex = 0;
+		String separate = ";";
+		String aimDir = "."+dir+"_"+1;
+		String sourceFiles = inFilesP;
+		System.out.println("sourceFiles:"+sourceFiles);
+		System.out.println();
+		String aimFiles = inFiles;
+		System.out.println("aimFiles:"+aimFiles);
+		endIndex = sourceFiles.indexOf(separate);
+		while (endIndex != -1){
+			String sourceFile=sourceFiles.substring(beginIndex, endIndex);
+			beginIndex = endIndex + 1;
+			sourceFiles = sourceFiles.substring(beginIndex).trim();
+
+			beginIndex = 0;
+			endIndex = aimFiles.indexOf(separate);
+			String aimFile = aimDir+"/"+aimFiles.substring(beginIndex, endIndex);
+			beginIndex = endIndex + 1;
+			aimFiles = aimFiles.substring(beginIndex).trim();
+			System.out.println("aimFiles:"+aimFiles);
+
+			SSHOpCommand sc = new SSHOpCommand(computerHost, userName, userPsw);
+			Connection conn = sc.getOpenedConnection();
+			if(conn == null){
+				JOptionPane.showMessageDialog(null, res.getString("TIP_NETWORK"), res.getString("TITLE_NETWORK"), JOptionPane.ERROR_MESSAGE);
+				return;
+			}
+				SFTPv3Client s3c = null;
+	
+				System.out.println("sourceFile:"+sourceFile);
+				System.out.println("aimDir:"+aimDir);
+				System.out.println("aimFile:"+aimFile);
+				SFTPv3FileAttributes sfa = null;
+				File file= new File(sourceFile);
+				beginIndex = 0;
+				endIndex = sourceFiles.indexOf(separate);
+				//判断源文件和目标文件是否存在
+				if(!file.exists()){
+					JOptionPane.showMessageDialog(null, res.getString("TIP_NO_SOURCE"), res.getString("TITLE_NO_SOURCE"), JOptionPane.ERROR_MESSAGE);
+				}else{
+					try{
+						s3c = new SFTPv3Client(conn);
+						sfa = s3c.stat(aimFile);
+					}catch(IOException ee){
+						fileExist = false;
+					}
+					
+					if(fileExist){
+						System.out.println("文件存在");
+						int tt = JOptionPane.showConfirmDialog(null, sourceFile+res.getString("TIP_FILE_EXIST"), res.getString("TITLE_FILE_EXIST"), JOptionPane.YES_NO_OPTION);
+						if(JOptionPane.NO_OPTION == tt)
+						{
+							continue;
+						}else{
+							try{
+								s3c.rm(aimFile);
+							}catch(IOException ee){
+								System.out.println("删除目标文件失败");
+							}
+						}
+					}
+					s3c.close();
+					ProgressBar pb = new ProgressBar(conn, sourceFile, aimFile, aimDir,2);
+				}
+				
+			}
+		String oriAimDir = "."+dir+"_"+1;
+		sourceFiles = inFilesP;
+		System.out.println("sourceFiles:"+sourceFiles);
+		System.out.println();
+		aimFiles = inFiles;
+		System.out.println("aimFiles:"+aimFiles);
+		endIndex = aimFiles.indexOf(separate);
+		String cmd = "";
+		Connection conn2 = null;
+		for(i=2;i<taskAmount+1;i++){
+			
+			while (endIndex != -1){
+				cmd += "cp ";
+				beginIndex = 0;
+				
+				String sourceFile = oriAimDir+"/"+aimFiles.substring(beginIndex, endIndex);
+				aimDir = "."+dir+"_"+i;
+				System.out.println("aimFiles:"+aimFiles);
+				String aimFile = aimDir+"/"+aimFiles.substring(beginIndex, endIndex);
+				SSHOpCommand sc = new SSHOpCommand(computerHost, userName, userPsw);
+				conn2 = sc.getOpenedConnection();
+				if(conn2 == null){
+					JOptionPane.showMessageDialog(null, res.getString("TIP_NETWORK"), res.getString("TITLE_NETWORK"), JOptionPane.ERROR_MESSAGE);
+					return;
+				}
+				cmd += sourceFile+" ";
+				cmd += aimFile+";";
+				System.out.println("cmdIn"+cmd);
+				beginIndex = endIndex + 1;
+				aimFiles = aimFiles.substring(beginIndex).trim();
+				endIndex = aimFiles.indexOf(separate);
+			}
+		}
+		System.out.println("cmd:"+cmd);
+		Session sess;
+		try {
+			sess = conn2.openSession();
+			sess.execCommand(cmd);
+			sess.close();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+
+	}
+	//-------------------------------------------------------------//
 	/**
 	 * 停止选中任务
 	 */
