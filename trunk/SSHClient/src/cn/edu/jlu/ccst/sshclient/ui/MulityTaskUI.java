@@ -259,7 +259,7 @@ public class MulityTaskUI extends javax.swing.JDialog {
 		this.add(lfin);
 		
 		cb = new JCheckBox(res.getString("SET_UPLOAD"),  false);
-		cb.setBounds(50, 400, 160, 50);
+		cb.setBounds(50, 400, 100, 50);
 		this.add(cb);
 		
 		choosein.addMouseListener(new java.awt.event.MouseAdapter() {
