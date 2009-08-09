@@ -408,7 +408,7 @@ public class TaskUI extends javax.swing.JDialog {
 		newTask1.setMemo(tTextArea2.getText());
 		//newTask1.setFin(tfin.getText());
 		for(Component cc: tfin.getComponents()){
-			if(cc instanceof JTextField){
+			if(cc instanceof JTextField){ 
 				if(((JTextField)cc).getText().trim().length()>0){
 					newTask1.setFin(newTask1.getFin()+((JTextField)cc).getText().trim()+"; ");
 					newTask1.setInfiles(newTask1.getInfiles()+((JTextField)cc).getToolTipText().trim()+"; ");
@@ -513,6 +513,9 @@ public class TaskUI extends javax.swing.JDialog {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+		}
+		if(cb.isSelected()){
+			LinuxClient.upload();
 		}
 		// 如果是自己的任务，先把文件传过去。
 		/*
