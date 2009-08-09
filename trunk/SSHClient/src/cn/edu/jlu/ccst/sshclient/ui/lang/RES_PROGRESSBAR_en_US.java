@@ -1,6 +1,8 @@
 package cn.edu.jlu.ccst.sshclient.ui.lang;
 
-public class RES_PROGRESSBAR_en_US {
+import java.util.ListResourceBundle;
+
+public class RES_PROGRESSBAR_en_US extends ListResourceBundle{
 	static final Object[][] contents = {
         {"FILETRANSFER","FileTransmission"}, 
         {"DISTURBTRANSMISSION","DisturbTransmission"}, 
