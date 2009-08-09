@@ -103,7 +103,7 @@ public class LinuxClient extends javax.swing.JFrame {
 	}
 
 	//updata the jtree
-	void  updata() {
+	public void  updata() {
 
 		this.cps = new ArrayList();
 		this.gps = new ArrayList();
@@ -207,15 +207,15 @@ public class LinuxClient extends javax.swing.JFrame {
 								}
 							}
 							tk.setRunSucc(tmp);
-							if(!tk.getCmd().startsWith("./")) {
-								tk.setRunSucc(false);
-							}
-							else {
-								//如果自定任务正在执行,获得自定任务的pid.
-								if(tmp == true) {
-									tk.setPid(t.valueOf("@runpid"));
-								}
-							}
+//							if(!tk.getCmd().startsWith("./")) {
+//								tk.setRunSucc(false);
+//							}
+//							else {
+//								//如果自定任务正在执行,获得自定任务的pid.
+//								if(tmp == true) {
+//									tk.setPid(t.valueOf("@runpid"));
+//								}
+//							}
 						}
 
 						List<String> params = new ArrayList();
