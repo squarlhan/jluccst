@@ -420,6 +420,12 @@ public class SSHOpCommand implements Runnable {
 		SFTPv3FileAttributes sfa = null;
 		
 		while(true){
+			try {
+				Thread.sleep(5*1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			String dir = "";
 			dir += "./"+GID;
 			SFTPv3Client s3cg = null;
