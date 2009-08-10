@@ -429,6 +429,15 @@ public class SSHOpCommand implements Runnable {
 		
 		Connection conn ;
 		conn = getOpenedConnection();
+		while(conn == null){
+			try {
+				Thread.sleep(300*1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			conn = getOpenedConnection();
+		}
 		while(true){
 			List <SSHTask> runtasklist = new ArrayList();
 			for(int i=0; i<LinuxClient.tks.size(); i++){
