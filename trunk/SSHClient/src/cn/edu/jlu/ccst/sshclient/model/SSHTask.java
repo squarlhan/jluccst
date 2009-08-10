@@ -439,7 +439,7 @@ public class SSHTask extends BaseClass implements BaseAction, BaseOperation {
 
 		Session sess = conn.openSession();
 		String finalcmd = this.dirname.substring(1);
-		sess.execCommand("./squarlhan/CShell rm -rf " + finalcmd.trim());
+		sess.execCommand("./CShell rm -rf " + finalcmd.trim());
 
 		String out;
 		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(sess.getStdout()));    
