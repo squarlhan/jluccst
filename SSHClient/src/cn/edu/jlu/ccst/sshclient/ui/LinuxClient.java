@@ -571,6 +571,7 @@ public class LinuxClient extends javax.swing.JFrame {
 			t1.setName(cur.getId());
 			t2=new JScrollPane();
 			t2.setName(cur.getId());
+			System.out.println("line 582");
 			fr.add(t2);
 			t2.add(t1);
 			t1.setColumns(20);
