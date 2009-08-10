@@ -8,8 +8,12 @@ import javax.swing.*;
 import javax.swing.table.*;
 
 /**
- * 将table写入excel文件中 列名放入第一行 每行用\t分割数，用\n分割行 无法更改列宽等参数，可以使用 JExcelApi包改进
- * JExcelApi http://www.andykhan.com/
+ * 将table写入excel文件中
+ * 列名放入第一行 
+ * 每行用\t分割数，用\n分割行 无法更改列宽等参数，
+ * 可以使用 JExcelApi包改进
+ * JExcelApi
+ * http://www.andykhan.com/
  */
 public class ExcelExport {
 	public ExcelExport() {
