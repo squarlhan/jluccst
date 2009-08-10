@@ -458,7 +458,7 @@ public class SSHOpCommand implements Runnable {
 					LinuxClient.GetObj().setTaskRunSucc(runtasklist.get(i).getId(),false);
 					tui.EditTaskRunSuccXML(selectedTask.getId(), false);
 				}
-				LinuxClient.GetObj().GenerateTree();
+				LinuxClient.GetObj().updata();
 //				System.exit(1);
 			}
 		}
