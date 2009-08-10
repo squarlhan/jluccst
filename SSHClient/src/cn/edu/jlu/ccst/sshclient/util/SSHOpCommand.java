@@ -420,6 +420,12 @@ public class SSHOpCommand implements Runnable {
 		SFTPv3FileAttributes sfa = null;
 		
 		while(true){
+			try {
+				Thread.sleep(5*1000);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			String dir = "";
 			dir += "./"+GID;
 			SFTPv3Client s3cg = null;
@@ -431,12 +437,6 @@ public class SSHOpCommand implements Runnable {
 			}
 			s3cg.close();
 			for(int i = 0; i < runtasklist.size(); ++i) {
-				try {
-					Thread.sleep(5*1000);
-				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
 				SSHTask selectedTask = runtasklist.get(i);
 				dir += "/"+selectedTask.getId();
 				//判断源文件和目标文件是否存在
