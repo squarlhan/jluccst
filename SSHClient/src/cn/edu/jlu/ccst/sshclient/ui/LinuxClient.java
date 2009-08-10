@@ -291,9 +291,9 @@ public class LinuxClient extends javax.swing.JFrame {
 		jTree1.addMouseListener(new thismouse());
 		jScrollPane1.setViewportView(jTree1);
 
-
+		
 		expandAll(jTree1, true);
-
+        jTree1.repaint();
 
 	}
 
@@ -2811,7 +2811,7 @@ public class LinuxClient extends javax.swing.JFrame {
 	private javax.swing.JTextArea jTextArea1;
 	private javax.swing.JTextArea jTextArea2;
 	private javax.swing.JTextArea jTextArea3;
-	private javax.swing.JTree jTree1;
+	public javax.swing.JTree jTree1;
 	// End of variables declaration//GEN-END:variables
 	private JPopupMenu popMenuC;
 	private JMenuItem addItemC;
