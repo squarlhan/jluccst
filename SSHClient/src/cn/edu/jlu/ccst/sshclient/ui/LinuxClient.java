@@ -13,7 +13,6 @@ package cn.edu.jlu.ccst.sshclient.ui;
 import ch.ethz.ssh2.Connection;
 import ch.ethz.ssh2.SFTPv3Client;
 import ch.ethz.ssh2.SFTPv3FileAttributes;
-import ch.ethz.ssh2.SFTPv3FileHandle;
 import ch.ethz.ssh2.Session;
 import cn.edu.jlu.ccst.sshclient.model.BaseClass;
 import cn.edu.jlu.ccst.sshclient.model.SSHComputer;
@@ -22,14 +21,11 @@ import cn.edu.jlu.ccst.sshclient.model.SSHTask;
 import cn.edu.jlu.ccst.sshclient.ui.ComputerUI;
 import cn.edu.jlu.ccst.sshclient.ui.MyTreeCellRender;
 import cn.edu.jlu.ccst.sshclient.ui.TaskUI;
-import cn.edu.jlu.ccst.sshclient.util.GenerateGraphy;
 import cn.edu.jlu.ccst.sshclient.util.MidScr;
-import cn.edu.jlu.ccst.sshclient.util.SSHOpCommand;
 import cn.edu.jlu.ccst.sshclient.util.SSHOpCommand;
 import cn.edu.jlu.ccst.sshclient.util.StartExam;
 
 import java.awt.Font;
-import java.awt.Color;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
@@ -38,17 +34,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
-import java.text.*;
-import javax.management.timer.Timer;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -56,13 +46,10 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
-import javax.swing.JTabbedPane;
-import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTree;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
-import javax.swing.JTree.DynamicUtilTreeNode;
 import javax.swing.SwingUtilities;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreeNode;
@@ -70,8 +57,6 @@ import javax.swing.tree.TreePath;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
-import org.dom4j.io.SAXReader;
-import org.dom4j.DocumentHelper;
 import org.dom4j.io.*;
 /**
  *
@@ -86,6 +71,12 @@ public class LinuxClient extends javax.swing.JFrame {
 		this.setLocationRelativeTo(null);
 		initComponents();
 		updata();
+		for(int i=0; i<cps.size(); i++){
+			SSHOpCommand ss = new SSHOpCommand(cps.get(i).getHost(), cps.get(i).getName(), cps.get(i).getPassword(),
+					jTextArea1, 6);
+			Thread tt = new Thread(ss);
+			tt.start();
+		}
 		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 	}
 	static public LinuxClient GetObj()
@@ -2865,7 +2856,6 @@ public class LinuxClient extends javax.swing.JFrame {
 	public static List<SSHComputer> cps;
 	public static List<SSHGroup> gps;
 	public static List<SSHTask> tks;
-
 	private List<javax.swing.JTextArea> jtl;
 	private List<javax.swing.JScrollPane> jsl;
 
