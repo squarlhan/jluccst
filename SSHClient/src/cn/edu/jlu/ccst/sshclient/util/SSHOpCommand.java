@@ -45,6 +45,7 @@ public class SSHOpCommand implements Runnable {
 	private String ownPid;
 	//	private  String rs;	
 	private List<SSHTask> runtasklist;
+	private String mkdirCmd;
 
 
 
@@ -92,7 +93,7 @@ public class SSHOpCommand implements Runnable {
 	/**
 	 * 运行单个任务命令用这个构造方法
 	 */
-	public SSHOpCommand(String host, String name, String psw, String cmd,String id,JTextArea  jText,String finout,String fin,int taskInfo) {
+	public SSHOpCommand(String host, String name, String psw, String cmd, String mkdirCmd, String id,JTextArea  jText,String finout,String fin,int taskInfo) {
 		super();
 		Host = host;
 		Name = name;
@@ -104,6 +105,7 @@ public class SSHOpCommand implements Runnable {
 		jTextArea1 = jText;
 		opType = taskInfo;
 		runtasklist = null;
+		this.mkdirCmd = mkdirCmd;
 	}
 	/**
 	 * 串行运行组内的所有任务用这个构造方法
@@ -221,6 +223,13 @@ public class SSHOpCommand implements Runnable {
 			disTh.start();
 			Connection conn = getOpenedConnection();
 			Session sess = conn.openSession();
+			Session sessMdir;
+			conn = getOpenedConnection();
+			sessMdir = conn.openSession();
+			sessMdir.execCommand(mkdirCmd);
+			System.out.println("mkdirCmd:"+mkdirCmd);
+//			Thread.sleep(50*1000);
+//			LinuxClient.GetObj().GenerateTree()
 			sess.execCommand(Cmd);
 			String out;
 			int ft = 0;
@@ -314,6 +323,7 @@ public class SSHOpCommand implements Runnable {
 //			}
 
 			sess.close();
+			sessMdir.close();
 			conn.close();
 		}
 		catch(Exception ie) {
