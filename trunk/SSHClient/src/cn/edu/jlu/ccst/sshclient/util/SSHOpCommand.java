@@ -426,17 +426,19 @@ public class SSHOpCommand implements Runnable {
 	 * 检测任务运行状态
 	 */
 	public void checkT(){
-		List <SSHTask> runtasklist = null;
-		for(int i=0; i<LinuxClient.tks.size(); i++){
-			if(LinuxClient.tks.get(i).getRunSucc())
-				runtasklist.add(LinuxClient.tks.get(i));
-		}
 		
 		Connection conn ;
 		conn = getOpenedConnection();
-		SFTPv3FileAttributes sfa = null;
-		
 		while(true){
+			List <SSHTask> runtasklist = new ArrayList();
+			for(int i=0; i<LinuxClient.tks.size(); i++){
+				if(LinuxClient.tks.get(i).getRunSucc())
+					runtasklist.add(LinuxClient.tks.get(i));
+			}
+//			System.out.println("checkTStart");
+//			System.out.println("runtasklist.size()"+runtasklist.size());
+			System.out.println("checking...");
+			SFTPv3FileAttributes sfa = null;
 			try {
 				Thread.sleep(5*1000);
 			} catch (InterruptedException e) {
