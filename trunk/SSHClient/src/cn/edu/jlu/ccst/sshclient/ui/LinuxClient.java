@@ -72,7 +72,14 @@ public class LinuxClient extends javax.swing.JFrame {
 		initComponents();
 		updata();
 		for(int i=0; i<cps.size(); i++){
-			SSHOpCommand ss = new SSHOpCommand(cps.get(i).getHost(), cps.get(i).getName(), cps.get(i).getPassword(),
+			String host = cps.get(i).getHost();
+			String userName = cps.get(i).getUsername();
+			String psw = cps.get(i).getPassword();
+//			System.out.println("host:"+host);
+//			System.out.println("userName:"+userName);
+//			System.out.println("psw:"+psw);
+//			System.exit(1);
+			SSHOpCommand ss = new SSHOpCommand(host,userName,psw,
 					jTextArea1, 6);
 			Thread tt = new Thread(ss);
 			tt.start();
