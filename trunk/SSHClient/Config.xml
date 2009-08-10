@@ -16,24 +16,15 @@
         <infile url="C:\Users\Administrator\Documents\T20090801112843.txt">T20090801112843.txt</infile> 
       </task> 
     </group>  
-    <group id="G20090804091031" name="gg5" dirname="/gg5" creatdate="2009-08-04 09:10:31"> 
-      <task id="T20090805104145_1" name="svm_1" dirname="/gg5/svm_1" creatdate="2009-08-05 10:41:45" cmd="./squarlhan/irsvm" out="F:\Woden 的文档" outfiles="1_out.txt;1_alpha.dat;" opts="4500.0;0.1;" starttime="2009-08-05 11:17:16" memo="" stimelong="1249442236332" runsc="0" runpid="5006"> 
-        <infile url="E:\SSH\cpp\Iterative Regression\sinc.txt">sinc.txt</infile> 
-      </task>  
-      <task id="T20090805104145_2" name="svm_2" dirname="/gg5/svm_2" creatdate="2009-08-05 10:41:45" cmd="./squarlhan/irsvm" out="F:\Woden 的文档" outfiles="2_out.txt;2_alpha.dat;" opts="4500.0;0.2;" starttime="2009-08-05 11:05:12" memo="" stimelong="1249441512257" runsc="0" runpid="4243"> 
-        <infile url="E:\SSH\cpp\Iterative Regression\sinc.txt">sinc.txt</infile> 
-      </task>  
-      <task id="T20090805104145_3" name="svm_3" dirname="/gg5/svm_3" creatdate="2009-08-05 10:41:45" cmd="./squarlhan/irsvm" out="F:\Woden 的文档" outfiles="3_out.txt;3_alpha.dat;" opts="5500.0;0.1;" starttime="2009-08-05 11:09:48" memo="" stimelong="1249441788457" runsc="0" runpid="4482"> 
-        <infile url="E:\SSH\cpp\Iterative Regression\sinc.txt">sinc.txt</infile> 
-      </task>  
-      <task id="T20090805104145_4" name="svm_4" dirname="/gg5/svm_4" creatdate="2009-08-05 10:41:45" cmd="./squarlhan/irsvm" out="F:\Woden 的文档" outfiles="4_out.txt;4_alpha.dat;" opts="5500.0;0.2;" starttime="2009-08-05 11:15:50" memo="" stimelong="1249442150690" runsc="0" runpid="4874"> 
-        <infile url="E:\SSH\cpp\Iterative Regression\sinc.txt">sinc.txt</infile> 
-      </task> 
+    <group id="G20090807143450" name="1" dirname="/1" creatdate="2009-08-07 14:34:50" pid="26520"> 
+      <task id="T20090809104857" name="1" dirname="/1/1" creatdate="2009-08-09 10:48:57" cmd="ls" out="C:\Users\Administrator\Documents" outfiles="" opts="" starttime="2009-08-10 09:54:15" memo="" runsc="0" stimelong="1249869255801"/>  
+      <task id="T20090809104942" name="2" dirname="/1/2" creatdate="2009-08-09 10:49:42" cmd="ls" out="C:\Users\Administrator\Documents" outfiles="" opts="-s;" starttime="2009-08-10 09:54:15" memo="" runsc="0" stimelong="1249869255847"/>  
+      <task id="T20090809132523" name="3" dirname="/1/3" creatdate="2009-08-09 13:25:23" cmd="sleep 20" out="C:\Users\Administrator\Documents" outfiles="" opts="" starttime="2009-08-10 09:54:15" memo="" stimelong="1249869255879" runsc="0" runpid="457"/> 
     </group>  
-    <group id="G20090807143450" name="1" dirname="/1" creatdate="2009-08-07 14:34:50" pid="17723"> 
-      <task id="T20090809104857" name="1" dirname="/1/1" creatdate="2009-08-09 10:48:57" cmd="ls" out="C:\Users\Administrator\Documents" outfiles="" opts="" starttime="2009-08-10 08:29:55" memo="" runsc="0" stimelong="1249864195415"/>  
-      <task id="T20090809104942" name="2" dirname="/1/2" creatdate="2009-08-09 10:49:42" cmd="ls" out="C:\Users\Administrator\Documents" outfiles="" opts="-s;" starttime="2009-08-10 08:29:55" memo="" runsc="0" stimelong="1249864195435"/>  
-      <task id="T20090809132523" name="3" dirname="/1/3" creatdate="2009-08-09 13:25:23" cmd="sleep 20" out="C:\Users\Administrator\Documents" outfiles="" opts="" starttime="2009-08-10 08:29:55" memo="" stimelong="1249864195446" runsc="0" runpid="457"/> 
+    <group id="G20090810095532" name="svms" dirname="/svms" creatdate="2009-08-10 09:55:32"> 
+      <task id="T20090810095856" name="svmir" dirname="/svms/svmir" creatdate="2009-08-10 09:58:56" cmd="./squarlhan/irsvm" out="F:\Woden 的文档" outfiles="out.txt;alpha.dat;" opts="4000;0.1;" starttime="2009-08-10 10:04:21" memo="" stimelong="0" runsc="0" runpid="26968"> 
+        <infile url="E:\SSH\cpp\sinc.txt">sinc.txt</infile>
+      </task> 
     </group> 
   </computer> 
 </config>
