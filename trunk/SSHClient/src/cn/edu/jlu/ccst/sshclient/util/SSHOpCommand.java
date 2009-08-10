@@ -445,9 +445,10 @@ public class SSHOpCommand implements Runnable {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			String dir = "";
+			
 			
 			for(int i = 0; i < runtasklist.size(); ++i) {
+				String dir = "";
 				String GID = runtasklist.get(i).getGp().getId();
 				dir += "./"+GID;
 				SSHTask selectedTask = runtasklist.get(i);
@@ -456,8 +457,9 @@ public class SSHOpCommand implements Runnable {
 				boolean dirExist = true;
 				SFTPv3Client s3c = null;
 				try{
+					System.out.println("dir:"+dir);
 					s3c = new SFTPv3Client(conn);
-					sfa = s3c.stat(dir);
+					sfa = s3c.stat(dir);	
 				}catch(IOException ee){
 					dirExist = false;
 				}
