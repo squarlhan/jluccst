@@ -118,6 +118,18 @@ public class SSHOpCommand implements Runnable {
 		this.jTextArea1 = jTextArea1;
 		this.runtasklist = runtasklist;
 	}
+	/**
+	 * 检测任务运行状态用这个构造方法
+	 */
+	public SSHOpCommand(String host, String name, String psw,
+			JTextArea jTextArea1, int opType) {
+		super();
+		Host = host;
+		Name = name;
+		Psw = psw;
+		this.opType = opType;
+		this.jTextArea1 = jTextArea1;
+	}
 
 	/**
 	 * 停止组内串行运行的所有任务用这个构造方法 
@@ -414,7 +426,12 @@ public class SSHOpCommand implements Runnable {
 	 * 检测任务运行状态
 	 */
 	public void checkT(){
-		String GID = runtasklist.get(0).getGp().getId();
+		List <SSHTask> runtasklist = null;
+		for(int i=0; i<LinuxClient.tks.size(); i++){
+			if(LinuxClient.tks.get(i).getRunSucc())
+				runtasklist.add(LinuxClient.tks.get(i));
+		}
+		
 		Connection conn ;
 		conn = getOpenedConnection();
 		SFTPv3FileAttributes sfa = null;
@@ -427,16 +444,10 @@ public class SSHOpCommand implements Runnable {
 				e.printStackTrace();
 			}
 			String dir = "";
-			dir += "./"+GID;
-			SFTPv3Client s3cg = null;
-			try{
-				s3cg = new SFTPv3Client(conn);
-				sfa = s3cg.stat(dir);
-			}catch(IOException ee){
-				break;
-			}
-			s3cg.close();
+			
 			for(int i = 0; i < runtasklist.size(); ++i) {
+				String GID = runtasklist.get(i).getGp().getId();
+				dir += "./"+GID;
 				SSHTask selectedTask = runtasklist.get(i);
 				dir += "/"+selectedTask.getId();
 				//判断源文件和目标文件是否存在
@@ -462,7 +473,6 @@ public class SSHOpCommand implements Runnable {
 //				System.exit(1);
 			}
 		}
-		LinuxClient.GetObj().GenerateTree();
 	}
 	//----------------------------------------------------------------//
 	/**
@@ -609,10 +619,6 @@ public class SSHOpCommand implements Runnable {
 			
 			sessMdir.execCommand(mkdirCmd);
 			sess.execCommand(cmdLine);
-			SSHOpCommand ss = new SSHOpCommand(Host, Name, Psw,  runtasklist,
-					jTextArea1, 6);
-			Thread tt = new Thread(ss);
-			tt.start();
 //			LinuxClient.GetObj().GenerateTree();
 //			TaskUI temp = new TaskUI();
 			while((out=bufferedReader.readLine())!=null) { 
