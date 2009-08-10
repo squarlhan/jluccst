@@ -410,6 +410,9 @@ public class SSHOpCommand implements Runnable {
 	}
 
 	//-------------------------------------------------------------//
+	/**
+	 * 检测任务运行状态
+	 */
 	public void checkT(){
 		String GID = runtasklist.get(0).getGp().getId();
 		Connection conn ;
@@ -449,6 +452,7 @@ public class SSHOpCommand implements Runnable {
 					LinuxClient.GetObj().setTaskRunSucc(runtasklist.get(i).getId(),false);
 					tui.EditTaskRunSuccXML(selectedTask.getId(), false);
 				}
+				LinuxClient.GetObj().GenerateTree();
 //				System.exit(1);
 			}
 		}
@@ -601,7 +605,7 @@ public class SSHOpCommand implements Runnable {
 			SSHOpCommand ss = new SSHOpCommand(Host, Name, Psw,  runtasklist,
 					jTextArea1, 6);
 			Thread tt = new Thread(ss);
-			tt.run();
+			tt.start();
 //			LinuxClient.GetObj().GenerateTree();
 //			TaskUI temp = new TaskUI();
 			while((out=bufferedReader.readLine())!=null) { 
