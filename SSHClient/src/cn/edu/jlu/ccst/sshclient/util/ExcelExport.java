@@ -39,7 +39,7 @@ public class ExcelExport  {
     	File file=new File(filestr);
 		String cmdtt = file.toString();
 		try {
-			Runtime.getRuntime().exec("cmd /c start "+cmdtt);
+			Runtime.getRuntime().exec("cmd /c start \"\" \""+file+"\"");
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
