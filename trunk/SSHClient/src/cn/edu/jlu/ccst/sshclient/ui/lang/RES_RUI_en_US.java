@@ -6,7 +6,7 @@ public class RES_RUI_en_US extends ListResourceBundle
 {
     static final Object[][] contents = {
     	{"SAVED_TO","Saved to "}, 
-        {"OPEN_OR_NOT","Are you sure to open?"}, 
+        {"OPEN_OR_NOT","Are you sure you want to open this file?"}, 
         {"OPEN_FILE","Open file"},
         {"EXPORT_EXCEL","Export Excel"}, 
         {"LINE_CHART","line chart"}, 
