@@ -26,7 +26,8 @@ import java.util.ResourceBundle;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
-
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class SSHOpCommand implements Runnable {
 	private String Host;
@@ -175,7 +176,8 @@ public class SSHOpCommand implements Runnable {
 		case 0: //执行task命令 5
 			runSSH();break;
 		case 1: //停止task命令
-			stopSSH();
+//			stopSSH();
+			stopOwn();
 			break;
 		case 2://测试计算机连接
 			getOpenedConnectionT();
@@ -414,21 +416,112 @@ public class SSHOpCommand implements Runnable {
 	 * 
 	 */
 	public void stopOwn() {
+//		try {
+//			Connection conn = getOpenedConnection();
+//			conn = getOpenedConnection();
+//			Session sess = conn.openSession();
+//			sess.execCommand("kill pid "+ ownPid);
+//			sess.close();
+//			conn.close();
+//		}
+//		catch(Exception et) {
+//			et.printStackTrace();
+//		}
+//		flag = false;
+//		LinuxClient.GetObj().setTaskRunSucc(Id,flag); 
+//		TaskUI temp = new TaskUI();
+//		temp.EditTaskRunSuccXML(Id,flag);//向config.xml中写入任务运行状态
+		
+		
+		
+//		private String Host;
+//		private String Name;
+//		private String Psw;
+//		private String Cmd;
+//		private String Id;
+//		private String Finout;
+
+		//String outlist = "";
+//		String str2 = "";
+		String selectPid="";
+		for(int i=0;i<LinuxClient.GetObj().tks.size();i++){
+			if(Id==LinuxClient.GetObj().tks.get(i).getPid()){
+				selectPid=LinuxClient.GetObj().tks.get(i).getPid();
+			}
+		}
+		
 		try {
-			Connection conn = getOpenedConnection();
-			conn = getOpenedConnection();
-			Session sess = conn.openSession();
-			sess.execCommand("kill pid "+ ownPid);
-			sess.close();
-			conn.close();
+			runSSH(Host, Name, Psw, "pstree -p "+selectPid);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		catch(Exception et) {
-			et.printStackTrace();
+		System.out.println("str:"+outlist);
+		String regEx="\\(\\d+\\)"; 
+		//outlist="CShell(29779)---ping(29780)"; 
+		List<String> spids = new ArrayList<String>();
+		Pattern p=Pattern.compile(regEx); 
+		Matcher m=p.matcher(outlist); 
+		while ( m.find()) {
+			spids.add(m.group());
+	        System.out.println("1:"+m.group());
+	    }
+		String cmdline = "";
+        for(int a = spids.size()-1;a>=0;a--){
+        	String mypid = spids.get(a).substring(1, spids.get(a).length()-1);
+        	System.out.println("2:"+mypid);
+        	cmdline+="kill pid "+mypid+";";
+//        	try {
+//        		runSSH(Host, Name, Psw, "kill pid "+mypid);
+//        		System.out.println("runSSH(Host, Name, Psw, \"kill pid \"+mypid);");
+        		
+//			} catch (IOException e) {
+				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+        }
+        try {
+			runSSH(Host, Name, Psw, "kill pid "+cmdline);
+			LinuxClient.GetObj().setTaskRunSucc(Id,false);
+			TaskUI temp = new TaskUI();
+			temp.EditTaskRunSuccXML(Id,flag);//向config.xml中写入任务运行状态
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		flag = false;
-		LinuxClient.GetObj().setTaskRunSucc(Id,flag); 
-		TaskUI temp = new TaskUI();
-		temp.EditTaskRunSuccXML(Id,flag);//向config.xml中写入任务运行状态
+	}
+	
+	public static String outlist = "";
+	public static void runSSH(String host, String username, String password, String cmd) throws IOException {
+		System.out.println("runSSH first line");
+		Connection conn = getOpenedConnection(host, username, password);
+		Session sess = conn.openSession();
+		sess.execCommand(cmd);		
+        String out;
+		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(sess.getStdout()));    
+		
+		 
+		    
+		
+		while((out=bufferedReader.readLine())!=null) {
+			System.out.println(out);
+			outlist=outlist + out;   
+		}
+		System.out.println(outlist);
+		sess.close();
+		conn.close();
+		//return sess.getExitStatus().intValue();
+
+	}
+	public static Connection getOpenedConnection(String host, String username, String password) throws IOException {
+
+		Connection conn = new Connection(host);
+		conn.connect();
+		boolean isAuthenticated = conn.authenticateWithPassword(username, password);
+		if (isAuthenticated == false)
+			throw new IOException("Authentication failed.");
+		return conn;
+
 	}
 
 	//-------------------------------------------------------------//
@@ -439,15 +532,6 @@ public class SSHOpCommand implements Runnable {
 		
 		Connection conn ;
 		conn = getOpenedConnection();
-		while(conn == null){
-			try {
-				Thread.sleep(300*1000);
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			conn = getOpenedConnection();
-		}
 		while(true){
 			List <SSHTask> runtasklist = new ArrayList();
 			for(int i=0; i<LinuxClient.tks.size(); i++){
@@ -456,7 +540,7 @@ public class SSHOpCommand implements Runnable {
 			}
 //			System.out.println("checkTStart");
 //			System.out.println("runtasklist.size()"+runtasklist.size());
-			System.out.println("checking...");
+//			System.out.println("checking...");
 			SFTPv3FileAttributes sfa = null;
 			try {
 				Thread.sleep(5*1000);
@@ -492,7 +576,7 @@ public class SSHOpCommand implements Runnable {
 					LinuxClient.GetObj().setTaskRunSucc(runtasklist.get(i).getId(),false);
 					tui.EditTaskRunSuccXML(selectedTask.getId(), false);
 				}
-				LinuxClient.GetObj().updata();
+				LinuxClient.GetObj().GenerateTree();
 //				System.exit(1);
 			}
 		}
