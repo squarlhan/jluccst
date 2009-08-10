@@ -462,6 +462,7 @@ public class SSHOpCommand implements Runnable {
 //				System.exit(1);
 			}
 		}
+		LinuxClient.GetObj().updata();
 	}
 	//----------------------------------------------------------------//
 	/**
