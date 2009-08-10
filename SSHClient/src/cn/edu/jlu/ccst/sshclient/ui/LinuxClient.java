@@ -293,7 +293,7 @@ public class LinuxClient extends javax.swing.JFrame {
 
 		
 		expandAll(jTree1, true);
-        jTree1.repaint();
+        jTree1.updateUI();
 
 	}
 
