@@ -274,7 +274,7 @@ public class SSHTask extends BaseClass implements BaseAction, BaseOperation {
 		//System.exit(0);
 		int taskInfo = 0;//开启任务信息：0	
 		try{
-			Connection conn ;
+//			Connection conn ;
 			Session sessMdir ;
 			String GID = this.getGp().getId();
 			String tid = this.getId();
@@ -284,15 +284,7 @@ public class SSHTask extends BaseClass implements BaseAction, BaseOperation {
 			String mkdirCmd = "./CShell ";
 			mkdirCmd += "mkdir "+GID+"@";		
 			mkdirCmd += "mkdir -p "+GID+"/"+this.getId()+"@";   
-			SSHOpCommand ry = new SSHOpCommand(computerHost, userName, userPsw, cmdLine,id,jTextArea1,fout,fin,taskInfo);
-			conn = ry.getOpenedConnection();
-			sessMdir = conn.openSession();
-			sessMdir.execCommand(mkdirCmd);
-			System.out.println("mkdirCmd:"+mkdirCmd);
-//			Thread.sleep(50*1000);
-//			LinuxClient.GetObj().GenerateTree();
-			
-			sessMdir.execCommand(mkdirCmd);
+			SSHOpCommand ry = new SSHOpCommand(computerHost, userName, userPsw, cmdLine, mkdirCmd, id,jTextArea1,fout,fin,taskInfo);
 			Thread ty = new Thread(ry);
 			ty.start();
 
