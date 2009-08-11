@@ -52,6 +52,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
+import javax.swing.JSplitPane;
 import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTree;
@@ -77,6 +78,7 @@ public class LinuxClient extends javax.swing.JFrame {
 		res = ResourceBundle.getBundle( "cn.edu.jlu.ccst.sshclient.ui.lang.RES");
 		flag=1;
 		this.setLocationRelativeTo(null);
+		this.setBackground(Color.WHITE);
 		
 		initComponents();
 		updata();		
@@ -111,7 +113,7 @@ public class LinuxClient extends javax.swing.JFrame {
 		MyTableModel model =new MyTableModel(rowData, columnNames); 
 		jtable.setModel(model); 
 		jtable.setBackground(Color.WHITE);
-		
+		//jtable.setDefaultRenderer(model.getClass(), new MyCellRenderer());
 		jScrollPane2.setViewportView(jtable);
 		jtable.addMouseListener(new mymouse());
 		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -1673,14 +1675,19 @@ public class LinuxClient extends javax.swing.JFrame {
 			        	String cid = tb.getModel().getValueAt(tb.getSelectedRow(), 2).toString();
 			        	for(int a = 0; a<= cps.size()-1; a++){
 			        		if(cid==cps.get(a).getId()){
-			        			Object[][] rows = new Object[cps.get(a).getGps().size()][4];
+			        			Object[][] rows = new Object[cps.get(a).getGps().size()][5];
 			        			for(int i = 0;i<=cps.get(a).getGps().size()-1;i++){
 			        				rows[i][0] = cps.get(a).getGps().get(i).getName();
 			        				rows[i][1] = timeFormat.format(cps.get(a).getGps().get(i).getCreatdate());
 			        				rows[i][2] = cps.get(a).getGps().get(i).getId();
-			        				rows[i][3] = cps.get(a).getGps().get(i).getMemo();
+			        				rows[i][3] = cps.get(a).getGps().get(i).getDirname();
+			        				rows[i][4] = cps.get(a).getGps().get(i).getMemo();
 			        			}
-			        			Object[] columnNames = {res.getString("PROPERTY_NAME"),res.getString("PROPERTY_CREATE_TIME"),res.getString("PROPERTY_ID"),res.getString("PROPERTY_MEMO")};
+			        			Object[] columnNames = {res.getString("PROPERTY_NAME"),
+			        					res.getString("PROPERTY_CREATE_TIME"),
+			        					res.getString("PROPERTY_ID"),
+			        					res.getString("PROPERTY_WORKDIR"),
+			        					res.getString("PROPERTY_MEMO")};
 			        			jtable = new JTable(rows, columnNames);
 			        			jtable.setShowGrid(false);
 			        			MyTableModel model =new MyTableModel(rows, columnNames); 
@@ -1695,14 +1702,30 @@ public class LinuxClient extends javax.swing.JFrame {
 			        	String cid = tb.getModel().getValueAt(tb.getSelectedRow(), 2).toString();
 			        	for(int a = 0; a<= gps.size()-1; a++){
 			        		if(cid==gps.get(a).getId()){
-			        			Object[][] rows = new Object[gps.get(a).getSts().size()][4];
+			        			Object[][] rows = new Object[gps.get(a).getSts().size()][10];
 			        			for(int i = 0;i<=gps.get(a).getSts().size()-1;i++){
+			        				rows[i][0] = gps.get(a).getSts().get(i).getName();
 			        				rows[i][0] = gps.get(a).getSts().get(i).getName();
 			        				rows[i][1] = timeFormat.format(gps.get(a).getSts().get(i).getCreatdate());
 			        				rows[i][2] = gps.get(a).getSts().get(i).getId();
-			        				rows[i][3] = gps.get(a).getSts().get(i).getMemo();
+			        				rows[i][3] = gps.get(a).getSts().get(i).getCmd();
+			        				rows[i][4] = gps.get(a).getSts().get(i).getInfiles();
+			        				rows[i][5] = gps.get(a).getSts().get(i).getFouts();
+			        				rows[i][6] = gps.get(a).getSts().get(i).getFout();
+			        				rows[i][7] = gps.get(a).getSts().get(i).getOpts();
+			        				rows[i][8] = gps.get(a).getSts().get(i).getDirname();
+			        				rows[i][9] = gps.get(a).getSts().get(i).getMemo();
 			        			}
-			        			Object[] columnNames = {res.getString("PROPERTY_NAME"),res.getString("PROPERTY_CREATE_TIME"),res.getString("PROPERTY_ID"),res.getString("PROPERTY_MEMO")};
+			        			Object[] columnNames = {res.getString("PROPERTY_NAME"),
+			        					res.getString("PROPERTY_CREATE_TIME"),
+			        					res.getString("PROPERTY_ID"),
+			        					res.getString("PROPERTY_CMD"),
+			        					res.getString("PROPERTY_TINPUT"),
+			        					res.getString("PROPERTY_TRESULT"),
+			        					res.getString("PROPERTY_TRESULT_URL"),
+			        					res.getString("PROPERTY_TOPTION"),
+			        					res.getString("PROPERTY_WORKDIR"),
+			        					res.getString("PROPERTY_MEMO")};
 			        			jtable = new JTable(rows, columnNames);
 			        			jtable.setShowGrid(false);
 			        			MyTableModel model =new MyTableModel(rows, columnNames); 
@@ -1976,14 +1999,19 @@ public class LinuxClient extends javax.swing.JFrame {
 					jTextArea1.setFont(x);
 					jTextArea1.setText(s);
 					
-					Object[][] rows = new Object[c.getGps().size()][4];
+					Object[][] rows = new Object[c.getGps().size()][5];
         			for(int i = 0;i<=c.getGps().size()-1;i++){
         				rows[i][0] = c.getGps().get(i).getName();
         				rows[i][1] = timeFormat.format(c.getGps().get(i).getCreatdate());
         				rows[i][2] = c.getGps().get(i).getId();
-        				rows[i][3] = c.getGps().get(i).getMemo();
+        				rows[i][3] = c.getGps().get(i).getDirname();
+        				rows[i][4] = c.getGps().get(i).getMemo();
         			}
-        			Object[] columnNames = {res.getString("PROPERTY_NAME"),res.getString("PROPERTY_CREATE_TIME"),res.getString("PROPERTY_ID"),res.getString("PROPERTY_MEMO")};
+        			Object[] columnNames = {res.getString("PROPERTY_NAME"),
+        					res.getString("PROPERTY_CREATE_TIME"),
+        					res.getString("PROPERTY_ID"),
+        					res.getString("PROPERTY_WORKDIR"),
+        					res.getString("PROPERTY_MEMO")};
         			jtable = new JTable(rows, columnNames);
         			jtable.setShowGrid(false);
         			MyTableModel model =new MyTableModel(rows, columnNames); 
@@ -2004,14 +2032,29 @@ public class LinuxClient extends javax.swing.JFrame {
 					jTextArea1.setFont(x);
 					jTextArea1.setText(s);
 					
-					Object[][] rows = new Object[g.getSts().size()][4];
+					Object[][] rows = new Object[g.getSts().size()][10];
         			for(int i = 0;i<=g.getSts().size()-1;i++){
         				rows[i][0] = g.getSts().get(i).getName();
         				rows[i][1] = timeFormat.format(g.getSts().get(i).getCreatdate());
         				rows[i][2] = g.getSts().get(i).getId();
-        				rows[i][3] = g.getSts().get(i).getMemo();
+        				rows[i][3] = g.getSts().get(i).getCmd();
+        				rows[i][4] = g.getSts().get(i).getInfiles();
+        				rows[i][5] = g.getSts().get(i).getFouts();
+        				rows[i][6] = g.getSts().get(i).getFout();
+        				rows[i][7] = g.getSts().get(i).getOpts();
+        				rows[i][8] = g.getSts().get(i).getDirname();
+        				rows[i][9] = g.getSts().get(i).getMemo();
         			}
-        			Object[] columnNames = {res.getString("PROPERTY_NAME"),res.getString("PROPERTY_CREATE_TIME"),res.getString("PROPERTY_ID"),res.getString("PROPERTY_MEMO")};
+        			Object[] columnNames = {res.getString("PROPERTY_NAME"),
+        					res.getString("PROPERTY_CREATE_TIME"),
+        					res.getString("PROPERTY_ID"),
+        					res.getString("PROPERTY_CMD"),
+        					res.getString("PROPERTY_TINPUT"),
+        					res.getString("PROPERTY_TRESULT"),
+        					res.getString("PROPERTY_TRESULT_URL"),
+        					res.getString("PROPERTY_TOPTION"),
+        					res.getString("PROPERTY_WORKDIR"),
+        					res.getString("PROPERTY_MEMO")};
         			jtable = new JTable(rows, columnNames);
         			jtable.setShowGrid(false);
         			MyTableModel model =new MyTableModel(rows, columnNames); 
@@ -2330,8 +2373,9 @@ public class LinuxClient extends javax.swing.JFrame {
 		popMenuTA.add(clearTA);
 
 		jSplitPane1 = new javax.swing.JSplitPane();
-		jSplitPane1.setDividerLocation(0.3);
 		jSplitPane1.setBackground(Color.WHITE);
+		jSplitPane1.setResizeWeight(0.25);
+		
 		jScrollPane1 = new javax.swing.JScrollPane();
 		jScrollPane1.setBackground(Color.WHITE);
 		jTree1 = new javax.swing.JTree();
