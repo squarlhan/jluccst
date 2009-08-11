@@ -302,15 +302,17 @@ public class SSHTask extends BaseClass implements BaseAction, BaseOperation {
 	public void stop() {
 		SSHComputer selectComputer = new SSHComputer();
 		selectComputer = gp.getCp();
-		int stopType = 1;
+		int stopType = 5;
 		SSHOpCommand ry ;
-		if(cmd.startsWith("./")) {
-			stopType = 5;
-			ry = new SSHOpCommand(selectComputer.getHost(), selectComputer.getUsername(),selectComputer.getPassword(),cmd,id,runpid,stopType);	
-		}
-		else {
-			ry = new SSHOpCommand(selectComputer.getHost(), selectComputer.getUsername(),selectComputer.getPassword(),cmd,id,stopType);
-		}
+		System.out.println(id +"\t id   *********************   stop   *********************************");
+		System.out.println(cmd +"\t cmd   *********************   stop   *********************************");
+		System.out.println(runpid +"\t runpid   *********************   stop   *********************************");
+		System.out.println(stopType +"\t stopType   *********************   stop   *********************************");
+//		stopType = 5;
+		ry = new SSHOpCommand(selectComputer.getHost(), selectComputer
+				.getUsername(), selectComputer.getPassword(), cmd, id, runpid,
+				stopType);
+
 		Thread ty = new Thread(ry);
 		ty.start();
 
