@@ -74,6 +74,8 @@ public class RES_en_US extends ListResourceBundle
             {"PROPERTY_TEXE_TIME","Task is running for "},
             {"PROPERTY_TLAST_TIME","Last Task Run Time"},
             {"PROPERTY_TEND","Task Ends"},
+            {"PROPERTY_NAME","Name"},
+            {"PROPERTY_ID","ID"},
     };
 
     public Object[][] getContents()

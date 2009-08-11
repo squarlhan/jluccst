@@ -87,7 +87,7 @@ public class LinuxClient extends javax.swing.JFrame {
 			rowData[a][2] = cps.get(a).getId();
 			rowData[a][3] = cps.get(a).getMemo();
 		}
-        Object[] columnNames = {"名称","创建时间","编号","备注"};
+        Object[] columnNames = {res.getString("PROPERTY_NAME"),res.getString("PROPERTY_CREATE_TIME"),res.getString("PROPERTY_ID"),res.getString("PROPERTY_MEMO")};
 		jtable = new JTable(rowData,columnNames);
 		jtable.setShowGrid(false);
 		MyTableModel model =new MyTableModel(rowData, columnNames); 
@@ -1674,7 +1674,7 @@ public class LinuxClient extends javax.swing.JFrame {
 			        				rows[i][2] = cps.get(a).getGps().get(i).getId();
 			        				rows[i][3] = cps.get(a).getGps().get(i).getMemo();
 			        			}
-			        			Object[] columnNames = {"名称","创建时间","编号","备注"};
+			        			Object[] columnNames = {res.getString("PROPERTY_NAME"),res.getString("PROPERTY_CREATE_TIME"),res.getString("PROPERTY_ID"),res.getString("PROPERTY_MEMO")};
 			        			jtable = new JTable(rows, columnNames);
 			        			jtable.setShowGrid(false);
 			        			MyTableModel model =new MyTableModel(rows, columnNames); 
@@ -1682,6 +1682,7 @@ public class LinuxClient extends javax.swing.JFrame {
 			        			jtable.setBackground(Color.WHITE);
 			        			jScrollPane2.setViewportView(jtable);
 			        			jtable.addMouseListener(new mymouse());
+			        			break;
 			        		}
 			        	}
 			        }  else if(tb.getModel().getValueAt(tb.getSelectedRow(), 2).toString().startsWith("G")){
@@ -1695,7 +1696,7 @@ public class LinuxClient extends javax.swing.JFrame {
 			        				rows[i][2] = gps.get(a).getSts().get(i).getId();
 			        				rows[i][3] = gps.get(a).getSts().get(i).getMemo();
 			        			}
-			        			Object[] columnNames = {"名称","创建时间","编号","备注"};
+			        			Object[] columnNames = {res.getString("PROPERTY_NAME"),res.getString("PROPERTY_CREATE_TIME"),res.getString("PROPERTY_ID"),res.getString("PROPERTY_MEMO")};
 			        			jtable = new JTable(rows, columnNames);
 			        			jtable.setShowGrid(false);
 			        			MyTableModel model =new MyTableModel(rows, columnNames); 
@@ -1703,6 +1704,7 @@ public class LinuxClient extends javax.swing.JFrame {
 			        			jtable.setBackground(Color.WHITE);
 			        			jScrollPane2.setViewportView(jtable);
 			        			jtable.addMouseListener(new mymouse());
+			        			break;
 			        		}
 			        	}
 			        } 
@@ -1719,10 +1721,13 @@ public class LinuxClient extends javax.swing.JFrame {
 		public   void   mouseClicked(MouseEvent   e){
 			try{
 				JTree tree = (JTree)e.getSource();
+				SimpleDateFormat timeFormat;
+				timeFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 				int rowLocation = tree.getRowForLocation(e.getX(), e.getY());
 				TreePath treepath = tree.getPathForRow(rowLocation);
 				DefaultMutableTreeNode treenode = (DefaultMutableTreeNode) treepath.getLastPathComponent();
-
+				BaseClass b = new BaseClass();
+				
 				if(treenode.toString().equals("Computers"))
 				{
 					jTextArea1.setText("");
@@ -1741,8 +1746,10 @@ public class LinuxClient extends javax.swing.JFrame {
 					return;                    	
 				}
 				String s=null;
-				BaseClass b=(BaseClass)treenode.getUserObject();
-				cur=(BaseClass)treenode.getUserObject();
+				if(!treenode.isRoot()){
+				    b=(BaseClass)treenode.getUserObject();
+				    cur=(BaseClass)treenode.getUserObject();
+				}
 				//-------------处理双击事件----------------------------//
 				/*if(e.getClickCount()==2)
 				{
@@ -1962,7 +1969,23 @@ public class LinuxClient extends javax.swing.JFrame {
 					Font x = new Font("Serif",0,15);
 					jTextArea1.setFont(x);
 					jTextArea1.setText(s);
-					break;
+					
+					Object[][] rows = new Object[c.getGps().size()][4];
+        			for(int i = 0;i<=c.getGps().size()-1;i++){
+        				rows[i][0] = c.getGps().get(i).getName();
+        				rows[i][1] = timeFormat.format(c.getGps().get(i).getCreatdate());
+        				rows[i][2] = c.getGps().get(i).getId();
+        				rows[i][3] = c.getGps().get(i).getMemo();
+        			}
+        			Object[] columnNames = {res.getString("PROPERTY_NAME"),res.getString("PROPERTY_CREATE_TIME"),res.getString("PROPERTY_ID"),res.getString("PROPERTY_MEMO")};
+        			jtable = new JTable(rows, columnNames);
+        			jtable.setShowGrid(false);
+        			MyTableModel model =new MyTableModel(rows, columnNames); 
+        			jtable.setModel(model); 
+        			jtable.setBackground(Color.WHITE);
+        			jScrollPane2.setViewportView(jtable);
+        			jtable.addMouseListener(new mymouse());
+        			break;
 				}
 				case 1:
 				{
@@ -1974,6 +1997,22 @@ public class LinuxClient extends javax.swing.JFrame {
 					Font x = new Font("Serif",0,15);
 					jTextArea1.setFont(x);
 					jTextArea1.setText(s);
+					
+					Object[][] rows = new Object[g.getSts().size()][4];
+        			for(int i = 0;i<=g.getSts().size()-1;i++){
+        				rows[i][0] = g.getSts().get(i).getName();
+        				rows[i][1] = timeFormat.format(g.getSts().get(i).getCreatdate());
+        				rows[i][2] = g.getSts().get(i).getId();
+        				rows[i][3] = g.getSts().get(i).getMemo();
+        			}
+        			Object[] columnNames = {res.getString("PROPERTY_NAME"),res.getString("PROPERTY_CREATE_TIME"),res.getString("PROPERTY_ID"),res.getString("PROPERTY_MEMO")};
+        			jtable = new JTable(rows, columnNames);
+        			jtable.setShowGrid(false);
+        			MyTableModel model =new MyTableModel(rows, columnNames); 
+        			jtable.setModel(model); 
+        			jtable.setBackground(Color.WHITE);
+        			jScrollPane2.setViewportView(jtable);
+        			jtable.addMouseListener(new mymouse());
 					break;
 				}
 				case 2:
@@ -2023,8 +2062,25 @@ public class LinuxClient extends javax.swing.JFrame {
 					jTextArea1.setText(s);
 					break;
 				}
-				default:
-					break;
+				default:{
+					Object[][] rows = new Object[cps.size()][4];
+        			for(int i = 0;i<=cps.size()-1;i++){
+        				rows[i][0] = cps.get(i).getName();
+        				rows[i][1] = timeFormat.format(cps.get(i).getCreatdate());
+        				rows[i][2] = cps.get(i).getId();
+        				rows[i][3] = cps.get(i).getMemo();
+        			}
+        			Object[] columnNames = {res.getString("PROPERTY_NAME"),res.getString("PROPERTY_CREATE_TIME"),res.getString("PROPERTY_ID"),res.getString("PROPERTY_MEMO")};
+        			jtable = new JTable(rows, columnNames);
+        			jtable.setShowGrid(false);
+        			MyTableModel model =new MyTableModel(rows, columnNames); 
+        			jtable.setModel(model); 
+        			jtable.setBackground(Color.WHITE);
+        			jScrollPane2.setViewportView(jtable);
+        			jtable.addMouseListener(new mymouse());
+        			break;
+				}
+					
 				}
 			}catch(NullPointerException ne){}
 		}
