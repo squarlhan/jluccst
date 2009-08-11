@@ -101,18 +101,26 @@ public class LinuxClient extends javax.swing.JFrame {
 		Object[][] rowData = new Object[cps.size()][4];
 		
 		for(int a = 0; a<= cps.size()-1;a++){
-			rowData[a][0] = cps.get(a).getName();
+			rowData[a][0] = "  "+cps.get(a).getName();
 			rowData[a][1] = timeFormat.format(cps.get(a).getCreatdate());
 			rowData[a][2] = cps.get(a).getId();
 			rowData[a][3] = cps.get(a).getMemo();
 		}
-        Object[] columnNames = {res.getString("PROPERTY_NAME"),res.getString("PROPERTY_CREATE_TIME"),res.getString("PROPERTY_ID"),res.getString("PROPERTY_MEMO")};
+        Object[] columnNames = {res.getString("PROPERTY_NAME"),
+        		res.getString("PROPERTY_CREATE_TIME"),
+        		res.getString("PROPERTY_ID"),
+        		res.getString("PROPERTY_MEMO")};
 		jtable = new JTable(rowData,columnNames);
 		jtable.setShowGrid(false);
 		MyTableModel model =new MyTableModel(rowData, columnNames); 
 		jtable.setModel(model); 
 		jtable.setBackground(Color.WHITE);
-		//jtable.setDefaultRenderer(model.getClass(), new MyCellRenderer());
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+		jtable.getColumn(res.getString("PROPERTY_NAME")).setPreferredWidth(150);
+		jtable.getColumn(res.getString("PROPERTY_CREATE_TIME")).setPreferredWidth(200);
+		jtable.getColumn(res.getString("PROPERTY_ID")).setPreferredWidth(150);
+		jtable.getColumn(res.getString("PROPERTY_MEMO")).setPreferredWidth((int) (screenSize.width*0.75-500));
+		jtable.setAutoResizeMode(jtable.AUTO_RESIZE_OFF);
 		jScrollPane2.setViewportView(jtable);
 		jtable.addMouseListener(new mymouse());
 		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
@@ -1677,7 +1685,7 @@ public class LinuxClient extends javax.swing.JFrame {
 			        		if(cid==cps.get(a).getId()){
 			        			Object[][] rows = new Object[cps.get(a).getGps().size()][5];
 			        			for(int i = 0;i<=cps.get(a).getGps().size()-1;i++){
-			        				rows[i][0] = cps.get(a).getGps().get(i).getName();
+			        				rows[i][0] = "  "+cps.get(a).getGps().get(i).getName();
 			        				rows[i][1] = timeFormat.format(cps.get(a).getGps().get(i).getCreatdate());
 			        				rows[i][2] = cps.get(a).getGps().get(i).getId();
 			        				rows[i][3] = cps.get(a).getGps().get(i).getDirname();
@@ -1693,6 +1701,13 @@ public class LinuxClient extends javax.swing.JFrame {
 			        			MyTableModel model =new MyTableModel(rows, columnNames); 
 			        			jtable.setModel(model); 
 			        			jtable.setBackground(Color.WHITE);
+			        			Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+			        			jtable.getColumn(res.getString("PROPERTY_NAME")).setPreferredWidth(150);
+			        			jtable.getColumn(res.getString("PROPERTY_CREATE_TIME")).setPreferredWidth(200);
+			        			jtable.getColumn(res.getString("PROPERTY_ID")).setPreferredWidth(150);
+			        			jtable.getColumn(res.getString("PROPERTY_WORKDIR")).setPreferredWidth(200);
+			        			jtable.getColumn(res.getString("PROPERTY_MEMO")).setPreferredWidth((int) (screenSize.width*0.75)-700);
+			        			jtable.setAutoResizeMode(jtable.AUTO_RESIZE_OFF);
 			        			jScrollPane2.setViewportView(jtable);
 			        			jtable.addMouseListener(new mymouse());
 			        			break;
@@ -1704,8 +1719,7 @@ public class LinuxClient extends javax.swing.JFrame {
 			        		if(cid==gps.get(a).getId()){
 			        			Object[][] rows = new Object[gps.get(a).getSts().size()][10];
 			        			for(int i = 0;i<=gps.get(a).getSts().size()-1;i++){
-			        				rows[i][0] = gps.get(a).getSts().get(i).getName();
-			        				rows[i][0] = gps.get(a).getSts().get(i).getName();
+			        				rows[i][0] = "  " +gps.get(a).getSts().get(i).getName();
 			        				rows[i][1] = timeFormat.format(gps.get(a).getSts().get(i).getCreatdate());
 			        				rows[i][2] = gps.get(a).getSts().get(i).getId();
 			        				rows[i][3] = gps.get(a).getSts().get(i).getCmd();
@@ -1730,6 +1744,18 @@ public class LinuxClient extends javax.swing.JFrame {
 			        			jtable.setShowGrid(false);
 			        			MyTableModel model =new MyTableModel(rows, columnNames); 
 			        			jtable.setModel(model); 
+			        			jtable.setBackground(Color.WHITE);
+			        			jtable.getColumn(res.getString("PROPERTY_NAME")).setPreferredWidth(100);
+			        			jtable.getColumn(res.getString("PROPERTY_CREATE_TIME")).setPreferredWidth(150);
+			        			jtable.getColumn(res.getString("PROPERTY_ID")).setPreferredWidth(100);
+			        			jtable.getColumn(res.getString("PROPERTY_CMD")).setPreferredWidth(150);
+			        			jtable.getColumn(res.getString("PROPERTY_TINPUT")).setPreferredWidth(200);
+			        			jtable.getColumn(res.getString("PROPERTY_TRESULT")).setPreferredWidth(200);
+			        			jtable.getColumn(res.getString("PROPERTY_TRESULT_URL")).setPreferredWidth(200);
+			        			jtable.getColumn(res.getString("PROPERTY_TOPTION")).setPreferredWidth(100);
+			        			jtable.getColumn(res.getString("PROPERTY_WORKDIR")).setPreferredWidth(150);
+			        			jtable.getColumn(res.getString("PROPERTY_MEMO")).setPreferredWidth(100);
+			        			jtable.setAutoResizeMode(jtable.AUTO_RESIZE_OFF);
 			        			jtable.setBackground(Color.WHITE);
 			        			jScrollPane2.setViewportView(jtable);
 			        			jtable.addMouseListener(new mymouse());
@@ -2001,7 +2027,7 @@ public class LinuxClient extends javax.swing.JFrame {
 					
 					Object[][] rows = new Object[c.getGps().size()][5];
         			for(int i = 0;i<=c.getGps().size()-1;i++){
-        				rows[i][0] = c.getGps().get(i).getName();
+        				rows[i][0] = "  "+c.getGps().get(i).getName();
         				rows[i][1] = timeFormat.format(c.getGps().get(i).getCreatdate());
         				rows[i][2] = c.getGps().get(i).getId();
         				rows[i][3] = c.getGps().get(i).getDirname();
@@ -2016,6 +2042,13 @@ public class LinuxClient extends javax.swing.JFrame {
         			jtable.setShowGrid(false);
         			MyTableModel model =new MyTableModel(rows, columnNames); 
         			jtable.setModel(model); 
+        			Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        			jtable.getColumn(res.getString("PROPERTY_NAME")).setPreferredWidth(150);
+        			jtable.getColumn(res.getString("PROPERTY_CREATE_TIME")).setPreferredWidth(200);
+        			jtable.getColumn(res.getString("PROPERTY_ID")).setPreferredWidth(150);
+        			jtable.getColumn(res.getString("PROPERTY_WORKDIR")).setPreferredWidth(200);
+        			jtable.getColumn(res.getString("PROPERTY_MEMO")).setPreferredWidth((int) (screenSize.width*0.75)-700);
+        			jtable.setAutoResizeMode(jtable.AUTO_RESIZE_OFF);
         			jtable.setBackground(Color.WHITE);
         			jScrollPane2.setViewportView(jtable);
         			jtable.addMouseListener(new mymouse());
@@ -2034,7 +2067,7 @@ public class LinuxClient extends javax.swing.JFrame {
 					
 					Object[][] rows = new Object[g.getSts().size()][10];
         			for(int i = 0;i<=g.getSts().size()-1;i++){
-        				rows[i][0] = g.getSts().get(i).getName();
+        				rows[i][0] = "  "+g.getSts().get(i).getName();
         				rows[i][1] = timeFormat.format(g.getSts().get(i).getCreatdate());
         				rows[i][2] = g.getSts().get(i).getId();
         				rows[i][3] = g.getSts().get(i).getCmd();
@@ -2059,6 +2092,17 @@ public class LinuxClient extends javax.swing.JFrame {
         			jtable.setShowGrid(false);
         			MyTableModel model =new MyTableModel(rows, columnNames); 
         			jtable.setModel(model); 
+        			jtable.getColumn(res.getString("PROPERTY_NAME")).setPreferredWidth(100);
+        			jtable.getColumn(res.getString("PROPERTY_CREATE_TIME")).setPreferredWidth(150);
+        			jtable.getColumn(res.getString("PROPERTY_ID")).setPreferredWidth(100);
+        			jtable.getColumn(res.getString("PROPERTY_CMD")).setPreferredWidth(150);
+        			jtable.getColumn(res.getString("PROPERTY_TINPUT")).setPreferredWidth(200);
+        			jtable.getColumn(res.getString("PROPERTY_TRESULT")).setPreferredWidth(200);
+        			jtable.getColumn(res.getString("PROPERTY_TRESULT_URL")).setPreferredWidth(200);
+        			jtable.getColumn(res.getString("PROPERTY_TOPTION")).setPreferredWidth(100);
+        			jtable.getColumn(res.getString("PROPERTY_WORKDIR")).setPreferredWidth(150);
+        			jtable.getColumn(res.getString("PROPERTY_MEMO")).setPreferredWidth(100);
+        			jtable.setAutoResizeMode(jtable.AUTO_RESIZE_OFF);
         			jtable.setBackground(Color.WHITE);
         			jScrollPane2.setViewportView(jtable);
         			jtable.addMouseListener(new mymouse());
@@ -2114,7 +2158,7 @@ public class LinuxClient extends javax.swing.JFrame {
 				default:{
 					Object[][] rows = new Object[cps.size()][4];
         			for(int i = 0;i<=cps.size()-1;i++){
-        				rows[i][0] = cps.get(i).getName();
+        				rows[i][0] = "  "+cps.get(i).getName();
         				rows[i][1] = timeFormat.format(cps.get(i).getCreatdate());
         				rows[i][2] = cps.get(i).getId();
         				rows[i][3] = cps.get(i).getMemo();
@@ -2124,6 +2168,12 @@ public class LinuxClient extends javax.swing.JFrame {
         			jtable.setShowGrid(false);
         			MyTableModel model =new MyTableModel(rows, columnNames); 
         			jtable.setModel(model); 
+        			Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        			jtable.getColumn(res.getString("PROPERTY_NAME")).setPreferredWidth(150);
+        			jtable.getColumn(res.getString("PROPERTY_CREATE_TIME")).setPreferredWidth(200);
+        			jtable.getColumn(res.getString("PROPERTY_ID")).setPreferredWidth(150);
+        			jtable.getColumn(res.getString("PROPERTY_MEMO")).setPreferredWidth((int) (screenSize.width*0.75-500));
+        			jtable.setAutoResizeMode(jtable.AUTO_RESIZE_OFF);
         			jtable.setBackground(Color.WHITE);
         			jScrollPane2.setViewportView(jtable);
         			jtable.addMouseListener(new mymouse());
@@ -2381,7 +2431,10 @@ public class LinuxClient extends javax.swing.JFrame {
 		jScrollPane1.setBackground(Color.WHITE);
 		jTree1 = new javax.swing.JTree();
 //		jSplitPane2 = new javax.swing.JSplitPane();
-		jScrollPane2 = new javax.swing.JScrollPane();
+		jScrollPane2 = new JScrollPane(
+				JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+				JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+		//jScrollPane2.setLayout(null);
 		jTextArea1 = new javax.swing.JTextArea();
 //		jTabbedPane1 = new javax.swing.JTabbedPane();
 		jScrollPane3 = new javax.swing.JScrollPane();
