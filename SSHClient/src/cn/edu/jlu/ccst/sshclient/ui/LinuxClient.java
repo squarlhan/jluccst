@@ -25,7 +25,10 @@ import cn.edu.jlu.ccst.sshclient.util.MidScr;
 import cn.edu.jlu.ccst.sshclient.util.SSHOpCommand;
 import cn.edu.jlu.ccst.sshclient.util.StartExam;
 
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Frame;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
@@ -46,11 +49,13 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
+import javax.swing.JTable;
 import javax.swing.JTextArea;
 import javax.swing.JTree;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 import javax.swing.SwingUtilities;
+import javax.swing.table.TableColumn;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
@@ -69,8 +74,28 @@ public class LinuxClient extends javax.swing.JFrame {
 		res = ResourceBundle.getBundle( "cn.edu.jlu.ccst.sshclient.ui.lang.RES");
 		flag=1;
 		this.setLocationRelativeTo(null);
+		
 		initComponents();
 		updata();
+		
+		SimpleDateFormat timeFormat;
+		timeFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Object[][] rowData = new Object[cps.size()][4];
+		for(int a = 0; a<= cps.size()-1;a++){
+			rowData[a][0] = cps.get(a).getName();
+			rowData[a][1] = timeFormat.format(cps.get(a).getCreatdate());
+			rowData[a][2] = cps.get(a).getId();
+			rowData[a][3] = cps.get(a).getMemo();
+		}
+        Object[] columnNames = {"名称","创建时间","编号","备注"};
+		jtable = new JTable(rowData,columnNames);
+		jtable.setShowGrid(false);
+		MyTableModel model =new MyTableModel(rowData, columnNames); 
+		jtable.setModel(model); 
+		jtable.setBackground(Color.WHITE);
+		jScrollPane2.setViewportView(jtable);
+		jtable.addMouseListener(new mymouse());
+		
 		for(int i=0; i<cps.size(); i++){
 			String host = cps.get(i).getHost();
 			String userName = cps.get(i).getUsername();
@@ -1629,6 +1654,64 @@ public class LinuxClient extends javax.swing.JFrame {
 
 	//-----------------------------------------------------------------------//
 	//鼠标点击处理类
+	private class mymouse extends  MouseAdapter{
+			  
+		public void mouseClicked(MouseEvent e) {
+			SimpleDateFormat timeFormat;
+			timeFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+	        if (e.getButton() == MouseEvent.BUTTON1) {// 单击鼠标左键
+			    if (e.getClickCount() == 2) {
+			        JTable tb = (JTable) e.getSource();
+			    	//int colummCount = tb.getModel().getColumnCount();// 列数
+			        if(tb.getModel().getValueAt(tb.getSelectedRow(), 2).toString().startsWith("C")){
+			        	String cid = tb.getModel().getValueAt(tb.getSelectedRow(), 2).toString();
+			        	for(int a = 0; a<= cps.size()-1; a++){
+			        		if(cid==cps.get(a).getId()){
+			        			Object[][] rows = new Object[cps.get(a).getGps().size()][4];
+			        			for(int i = 0;i<=cps.get(a).getGps().size()-1;i++){
+			        				rows[i][0] = cps.get(a).getGps().get(i).getName();
+			        				rows[i][1] = timeFormat.format(cps.get(a).getGps().get(i).getCreatdate());
+			        				rows[i][2] = cps.get(a).getGps().get(i).getId();
+			        				rows[i][3] = cps.get(a).getGps().get(i).getMemo();
+			        			}
+			        			Object[] columnNames = {"名称","创建时间","编号","备注"};
+			        			jtable = new JTable(rows, columnNames);
+			        			jtable.setShowGrid(false);
+			        			MyTableModel model =new MyTableModel(rows, columnNames); 
+			        			jtable.setModel(model); 
+			        			jtable.setBackground(Color.WHITE);
+			        			jScrollPane2.setViewportView(jtable);
+			        			jtable.addMouseListener(new mymouse());
+			        		}
+			        	}
+			        }  else if(tb.getModel().getValueAt(tb.getSelectedRow(), 2).toString().startsWith("G")){
+			        	String cid = tb.getModel().getValueAt(tb.getSelectedRow(), 2).toString();
+			        	for(int a = 0; a<= gps.size()-1; a++){
+			        		if(cid==gps.get(a).getId()){
+			        			Object[][] rows = new Object[gps.get(a).getSts().size()][4];
+			        			for(int i = 0;i<=gps.get(a).getSts().size()-1;i++){
+			        				rows[i][0] = gps.get(a).getSts().get(i).getName();
+			        				rows[i][1] = timeFormat.format(gps.get(a).getSts().get(i).getCreatdate());
+			        				rows[i][2] = gps.get(a).getSts().get(i).getId();
+			        				rows[i][3] = gps.get(a).getSts().get(i).getMemo();
+			        			}
+			        			Object[] columnNames = {"名称","创建时间","编号","备注"};
+			        			jtable = new JTable(rows, columnNames);
+			        			jtable.setShowGrid(false);
+			        			MyTableModel model =new MyTableModel(rows, columnNames); 
+			        			jtable.setModel(model); 
+			        			jtable.setBackground(Color.WHITE);
+			        			jScrollPane2.setViewportView(jtable);
+			        			jtable.addMouseListener(new mymouse());
+			        		}
+			        	}
+			        } 
+			    }
+			 }
+	    }
+
+	}
+	
 	private class thismouse extends  MouseAdapter
 	{
 
@@ -2185,7 +2268,10 @@ public class LinuxClient extends javax.swing.JFrame {
 		popMenuTA.add(clearTA);
 
 		jSplitPane1 = new javax.swing.JSplitPane();
+		jSplitPane1.setDividerLocation(0.3);
+		jSplitPane1.setBackground(Color.WHITE);
 		jScrollPane1 = new javax.swing.JScrollPane();
+		jScrollPane1.setBackground(Color.WHITE);
 		jTree1 = new javax.swing.JTree();
 //		jSplitPane2 = new javax.swing.JSplitPane();
 		jScrollPane2 = new javax.swing.JScrollPane();
@@ -2238,7 +2324,8 @@ public class LinuxClient extends javax.swing.JFrame {
 		jTextArea1.setRows(5);
 		jTextArea1.setEnabled(false);
 		jTextArea1.setName("jTextArea1"); // NOI18N
-		jScrollPane2.setViewportView(jTextArea1);
+		
+		
 //		jSplitPane2.setLeftComponent(jScrollPane2);
 //		jTabbedPane1.setName("jTabbedPane1"); // NOI18N
 		jScrollPane3.setName("jScrollPane3"); // NOI18N
@@ -2871,6 +2958,8 @@ public class LinuxClient extends javax.swing.JFrame {
 	private boolean first=true;
 	
 	private static ResourceBundle res;
+	
+	private JTable jtable;
 
 
 	/**
