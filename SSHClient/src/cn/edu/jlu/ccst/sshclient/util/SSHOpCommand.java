@@ -443,15 +443,18 @@ public class SSHOpCommand implements Runnable {
 
 		//String outlist = "";
 //		String str2 = "";
-		String selectPid="";
-		for(int i=0;i<LinuxClient.GetObj().tks.size();i++){
-			if(Id==LinuxClient.GetObj().tks.get(i).getPid()){
-				selectPid=LinuxClient.GetObj().tks.get(i).getPid();
-			}
-		}
+//		String selectPid="";
+//		for(int i=0;i<LinuxClient.GetObj().tks.size();i++){
+//			if(Id==LinuxClient.GetObj().tks.get(i).getPid()){
+//				selectPid=LinuxClient.GetObj().tks.get(i).getPid();
+//				System.out.println("selectPid = "+ownPid);
+//				break;
+//			}
+//			
+//		}
 		
 		try {
-			runSSH(Host, Name, Psw, "pstree -p "+selectPid);
+			runSSH(Host, Name, Psw, "pstree -p "+ownPid);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -481,7 +484,7 @@ public class SSHOpCommand implements Runnable {
 //			}
         }
         try {
-			runSSH(Host, Name, Psw, "kill pid "+cmdline);
+			runSSH(Host, Name, Psw, cmdline);
 			LinuxClient.GetObj().setTaskRunSucc(Id,false);
 			TaskUI temp = new TaskUI();
 			temp.EditTaskRunSuccXML(Id,flag);//向config.xml中写入任务运行状态
