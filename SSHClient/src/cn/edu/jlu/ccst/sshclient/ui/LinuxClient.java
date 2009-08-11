@@ -111,6 +111,7 @@ public class LinuxClient extends javax.swing.JFrame {
         		res.getString("PROPERTY_ID"),
         		res.getString("PROPERTY_MEMO")};
 		jtable = new JTable(rowData,columnNames);
+		jtable.getTableHeader().setReorderingAllowed(false);
 		jtable.setShowGrid(false);
 		MyTableModel model =new MyTableModel(rowData, columnNames); 
 		jtable.setModel(model); 
@@ -1699,6 +1700,7 @@ public class LinuxClient extends javax.swing.JFrame {
 			        					res.getString("PROPERTY_MEMO")};
 			        			jtable = new JTable(rows, columnNames);
 			        			jtable.setShowGrid(false);
+			        			jtable.getTableHeader().setReorderingAllowed(false);
 			        			MyTableModel model =new MyTableModel(rows, columnNames); 
 			        			jtable.setModel(model); 
 			        			jtable.setBackground(Color.WHITE);
@@ -1743,6 +1745,7 @@ public class LinuxClient extends javax.swing.JFrame {
 			        					res.getString("PROPERTY_MEMO")};
 			        			jtable = new JTable(rows, columnNames);
 			        			jtable.setShowGrid(false);
+			        			jtable.getTableHeader().setReorderingAllowed(false);
 			        			MyTableModel model =new MyTableModel(rows, columnNames); 
 			        			jtable.setModel(model); 
 			        			jtable.setBackground(Color.WHITE);
@@ -2041,6 +2044,7 @@ public class LinuxClient extends javax.swing.JFrame {
         					res.getString("PROPERTY_MEMO")};
         			jtable = new JTable(rows, columnNames);
         			jtable.setShowGrid(false);
+        			jtable.getTableHeader().setReorderingAllowed(false);
         			MyTableModel model =new MyTableModel(rows, columnNames); 
         			jtable.setModel(model); 
         			Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
@@ -2091,6 +2095,7 @@ public class LinuxClient extends javax.swing.JFrame {
         					res.getString("PROPERTY_MEMO")};
         			jtable = new JTable(rows, columnNames);
         			jtable.setShowGrid(false);
+        			jtable.getTableHeader().setReorderingAllowed(false);
         			MyTableModel model =new MyTableModel(rows, columnNames); 
         			jtable.setModel(model); 
         			jtable.getColumn(res.getString("PROPERTY_NAME")).setPreferredWidth(100);
@@ -2167,6 +2172,7 @@ public class LinuxClient extends javax.swing.JFrame {
         			Object[] columnNames = {res.getString("PROPERTY_NAME"),res.getString("PROPERTY_CREATE_TIME"),res.getString("PROPERTY_ID"),res.getString("PROPERTY_MEMO")};
         			jtable = new JTable(rows, columnNames);
         			jtable.setShowGrid(false);
+        			jtable.getTableHeader().setReorderingAllowed(false);
         			MyTableModel model =new MyTableModel(rows, columnNames); 
         			jtable.setModel(model); 
         			Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
