@@ -140,6 +140,7 @@ public class LinuxClient extends javax.swing.JFrame {
 	}
 
 	//updata the jtree
+	@SuppressWarnings("static-access")
 	public void  updata() {
 
 		this.cps = new ArrayList();
