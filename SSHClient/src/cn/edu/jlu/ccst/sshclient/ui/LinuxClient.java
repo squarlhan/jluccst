@@ -3077,7 +3077,31 @@ public class LinuxClient extends javax.swing.JFrame {
 	private void jMenuMousePressRemoveTask(java.awt.event.MouseEvent evt) {
 		if(jMenuItem10.isEnabled() == true) {
 			SSHTask tas=new SSHTask();
-			tas.remove();
+			if(getTaskRunSucc(cur.getId()) == false) {
+				tas = (SSHTask)cur;
+				tas.remove();
+			}
+			else {
+				JOptionPane.showMessageDialog(null, res.getString("TIP_NOT_DELETE"),null,JOptionPane.ERROR_MESSAGE);
+			     return;
+			}
+			for(int i=0;i<jsl.size();i++)
+			{
+				if(jsl.get(i).getName().equals(cur.getId()))
+				{
+//					jTabbedPane1.remove(jsl.get(i));
+					jsl.remove(i);
+					break;
+				}
+			}
+			for(int i=0;i<jtl.size();i++)
+			{
+				if(jtl.get(i).getName().equals(cur.getId()));
+				{
+					jtl.remove(i);
+					break;
+				}
+			}
 			updata();  		  
 		}
 	}
