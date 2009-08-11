@@ -531,6 +531,7 @@ public class SSHOpCommand implements Runnable {
 	/**
 	 * 检测任务运行状态
 	 */
+	@SuppressWarnings("unchecked")
 	public void checkT(){
 		
 		Connection conn ;
@@ -543,7 +544,7 @@ public class SSHOpCommand implements Runnable {
 			}
 //			System.out.println("checkTStart");
 //			System.out.println("runtasklist.size()"+runtasklist.size());
-//			System.out.println("checking...");
+			System.out.println("checking...");
 			SFTPv3FileAttributes sfa = null;
 			try {
 				Thread.sleep(5*1000);
