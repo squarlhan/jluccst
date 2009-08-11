@@ -147,6 +147,7 @@ public class LinuxClient extends javax.swing.JFrame {
 						tk.setId(t.valueOf("@id"));
 						tk.setName(t.valueOf("@name"));
 						tk.setDirname(t.valueOf("@dirname"));
+						tk.setPid(t.valueOf("@runpid"));
 						tk.setType((byte) 2);
 						tk.setMemo(t.valueOf("@memo"));
 						tk.setCreatdate(timeFormat.parse(t.valueOf("@creatdate")));
