@@ -1768,10 +1768,79 @@ public class LinuxClient extends javax.swing.JFrame {
 			        	}
 			        } 
 			    }
-			 }
-	    }
+			 }else if (e.getButton() == MouseEvent.BUTTON3)
+				{
+					JTable tb = (JTable)e.getSource();
+					String myid = tb.getModel().getValueAt(tb.getSelectedRow(), 2).toString();
+					if(myid.startsWith("C")){											
+						for(SSHComputer c : cps){
+							if(myid.trim().equals(c.getId().trim())){
+								cur = c;
+								break;
+							}							
+						}
+						popMenuC.show(jtable, e.getX(), e.getY());
+						if(getRunStatusC(myid) == false) {
+							computerStartC.setEnabled(true);
+							computerStopC.setEnabled(false);
+						}
+						else {
+							computerStartC.setEnabled(false);
+							computerStopC.setEnabled(true);
+						}
+					}else if(myid.startsWith("G")){
+						for(SSHGroup g : gps){
+							if(myid.trim().equals(g.getId().trim())){
+								cur = g;
+								break;
+							}							
+						}
+						popMenuG.show(jtable, e.getX(), e.getY());
+						SSHGroup sgp = new SSHGroup();
+						sgp = findSelectGroup();
+						if(singlerun == 1) {
+							groupStartG.setEnabled(true);
+							groupStopG.setEnabled(false);
+							allStartG.setEnabled(true);
+							allStopG.setEnabled(false);
+						}
+						else if(singlerun == 2) {
+							groupStartG.setEnabled(false);
+							groupStopG.setEnabled(true);
+							allStartG.setEnabled(false);
+							allStopG.setEnabled(false);
+						}
+						else if(singlerun == 3) {
+							groupStartG.setEnabled(false);
+							groupStopG.setEnabled(false);
+							allStartG.setEnabled(false);
+							allStopG.setEnabled(true);
 
-	}
+						}
+					}else if(myid.startsWith("T")){
+						for(SSHTask t : tks){
+							if(myid.trim().equals(t.getId().trim())){
+								cur = t;
+								break;
+							}							
+						}
+						popMenuT.show(jtable, e.getX(), e.getY());
+						SSHTask temptask = new SSHTask();
+						temptask = findSelectTask(myid);//变灰相应的任务信息
+						if(temptask.getRunSucc() == false) {
+							stopItemT.setEnabled(false);
+							execItemT.setEnabled(true);
+						}
+						else {
+							stopItemT.setEnabled(true);
+							execItemT.setEnabled(false);
+						}
+					}              
+				}
+	    }
+		
+		
+}
 	
 	private class thismouse extends  MouseAdapter
 	{
@@ -2202,7 +2271,7 @@ public class LinuxClient extends javax.swing.JFrame {
 					int rowLocation = tree.getRowForLocation(e.getX(), e.getY());
 					TreePath treepath = tree.getPathForRow(rowLocation);
 					DefaultMutableTreeNode treenode = (DefaultMutableTreeNode) treepath.getLastPathComponent();
-					if(treenode.toString().equals("Computers"))
+					if(treenode.toString().equals(res.getString("COMS")))
 					{
 						TreePath path = jTree1.getPathForLocation(e.getX(), e.getY());
 						if (path == null)
