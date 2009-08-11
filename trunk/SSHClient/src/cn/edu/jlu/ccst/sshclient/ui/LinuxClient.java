@@ -77,7 +77,19 @@ public class LinuxClient extends javax.swing.JFrame {
 		
 		initComponents();
 		updata();
-		
+		for(int i=0; i<cps.size(); i++){
+			String host = cps.get(i).getHost();
+			String userName = cps.get(i).getUsername();
+			String psw = cps.get(i).getPassword();
+//			System.out.println("host:"+host);
+//			System.out.println("userName:"+userName);
+//			System.out.println("psw:"+psw);
+//			System.exit(1);
+			SSHOpCommand ss = new SSHOpCommand(host,userName,psw,
+					jTextArea1, 6);
+			Thread tt = new Thread(ss);
+			tt.start();
+		}
 		SimpleDateFormat timeFormat;
 		timeFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		Object[][] rowData = new Object[cps.size()][4];
@@ -95,20 +107,6 @@ public class LinuxClient extends javax.swing.JFrame {
 		jtable.setBackground(Color.WHITE);
 		jScrollPane2.setViewportView(jtable);
 		jtable.addMouseListener(new mymouse());
-		
-		for(int i=0; i<cps.size(); i++){
-			String host = cps.get(i).getHost();
-			String userName = cps.get(i).getUsername();
-			String psw = cps.get(i).getPassword();
-//			System.out.println("host:"+host);
-//			System.out.println("userName:"+userName);
-//			System.out.println("psw:"+psw);
-//			System.exit(1);
-			SSHOpCommand ss = new SSHOpCommand(host,userName,psw,
-					jTextArea1, 6);
-			Thread tt = new Thread(ss);
-			tt.start();
-		}
 		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
 	}
 	static public LinuxClient GetObj()
@@ -272,6 +270,7 @@ public class LinuxClient extends javax.swing.JFrame {
 		// Traverse tree from root
 		expandAll(tree, new TreePath(root), expand);
 	}
+	@SuppressWarnings("unchecked")
 	private void expandAll(JTree tree, TreePath parent, boolean expand) {
 		// Traverse children
 		TreeNode node = (TreeNode)parent.getLastPathComponent();
