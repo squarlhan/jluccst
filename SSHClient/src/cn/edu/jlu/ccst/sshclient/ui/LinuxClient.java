@@ -42,8 +42,11 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.*;
+
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
@@ -76,7 +79,8 @@ public class LinuxClient extends javax.swing.JFrame {
 		this.setLocationRelativeTo(null);
 		
 		initComponents();
-		updata();
+		updata();		
+		
 		for(int i=0; i<cps.size(); i++){
 			String host = cps.get(i).getHost();
 			String userName = cps.get(i).getUsername();
@@ -90,9 +94,11 @@ public class LinuxClient extends javax.swing.JFrame {
 			Thread tt = new Thread(ss);
 			tt.start();
 		}
+		
 		SimpleDateFormat timeFormat;
 		timeFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		Object[][] rowData = new Object[cps.size()][4];
+		
 		for(int a = 0; a<= cps.size()-1;a++){
 			rowData[a][0] = cps.get(a).getName();
 			rowData[a][1] = timeFormat.format(cps.get(a).getCreatdate());
@@ -105,6 +111,7 @@ public class LinuxClient extends javax.swing.JFrame {
 		MyTableModel model =new MyTableModel(rowData, columnNames); 
 		jtable.setModel(model); 
 		jtable.setBackground(Color.WHITE);
+		
 		jScrollPane2.setViewportView(jtable);
 		jtable.addMouseListener(new mymouse());
 		this.setExtendedState(JFrame.MAXIMIZED_BOTH);
