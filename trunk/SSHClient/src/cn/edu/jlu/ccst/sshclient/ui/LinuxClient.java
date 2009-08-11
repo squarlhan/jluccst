@@ -42,7 +42,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.*;
-
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -180,6 +179,7 @@ public class LinuxClient extends javax.swing.JFrame {
 						tk.setName(t.valueOf("@name"));
 						tk.setDirname(t.valueOf("@dirname"));
 						tk.setPid(t.valueOf("@runpid"));
+//						System.out.println("tk.getPid()"+tk.getPid());
 						tk.setType((byte) 2);
 						tk.setMemo(t.valueOf("@memo"));
 						tk.setCreatdate(timeFormat.parse(t.valueOf("@creatdate")));
@@ -2334,8 +2334,9 @@ public class LinuxClient extends javax.swing.JFrame {
 					strSplit[i]=dirstr+"\\"+strSplit[i];
 				}
 				System.out.println("*********************----------------");
+				
 				for(int i=0;i<strSplit.length;i++){
-					ResultUI resultui = new ResultUI();
+					ResultUI resultui=new ResultUI();
 					resultui.out(strSplit[i]);
 				}
 				
