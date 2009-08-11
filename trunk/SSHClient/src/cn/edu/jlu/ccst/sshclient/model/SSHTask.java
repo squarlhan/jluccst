@@ -285,6 +285,7 @@ public class SSHTask extends BaseClass implements BaseAction, BaseOperation {
 			mkdirCmd += "mkdir "+GID+"@";		
 			mkdirCmd += "mkdir -p "+GID+"/"+this.getId()+"@";   
 			SSHOpCommand ry = new SSHOpCommand(computerHost, userName, userPsw, cmdLine, mkdirCmd, id,jTextArea1,fout,fin,taskInfo);
+			ry.setOwnPid(runpid);
 			Thread ty = new Thread(ry);
 			ty.start();
 
@@ -304,11 +305,6 @@ public class SSHTask extends BaseClass implements BaseAction, BaseOperation {
 		selectComputer = gp.getCp();
 		int stopType = 5;
 		SSHOpCommand ry ;
-		System.out.println(id +"\t id   *********************   stop   *********************************");
-		System.out.println(cmd +"\t cmd   *********************   stop   *********************************");
-		System.out.println(runpid +"\t runpid   *********************   stop   *********************************");
-		System.out.println(stopType +"\t stopType   *********************   stop   *********************************");
-//		stopType = 5;
 		ry = new SSHOpCommand(selectComputer.getHost(), selectComputer
 				.getUsername(), selectComputer.getPassword(), cmd, id, runpid,
 				stopType);
