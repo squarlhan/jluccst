@@ -74,6 +74,8 @@ public class RES_zh_CN extends ListResourceBundle
             {"PROPERTY_TEXE_TIME","正在执行中，执行时间"},
             {"PROPERTY_TLAST_TIME","上次任务开始时间"},
             {"PROPERTY_TEND","任务执行结束"},
+            {"PROPERTY_NAME","名称"},
+            {"PROPERTY_ID","编号"},
     };
 
     public Object[][] getContents()
