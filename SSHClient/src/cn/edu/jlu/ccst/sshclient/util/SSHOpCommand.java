@@ -20,12 +20,20 @@ import ch.ethz.ssh2.SFTPv3FileAttributes;
 import ch.ethz.ssh2.Session;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 import java.util.ResourceBundle;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
+
+import org.dom4j.Document;
+import org.dom4j.Element;
+import org.dom4j.io.OutputFormat;
+import org.dom4j.io.SAXReader;
+import org.dom4j.io.XMLWriter;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -44,12 +52,9 @@ public class SSHOpCommand implements Runnable {
 	//	private  boolean groupflag = false;
 	private JLabel  conl;
 	private String ownPid;
-	public String getOwnPid() {
-		return ownPid;
-	}
-	public void setOwnPid(String ownPid) {
-		this.ownPid = ownPid;
-	}
+	public String gid;
+	public String gPid;
+	
 
 	//	private  String rs;	
 	private List<SSHTask> runtasklist;
@@ -404,6 +409,7 @@ public class SSHOpCommand implements Runnable {
 				Connection conn = getOpenedConnection();
 				Session sess = conn.openSession();
 				for(int i = 0; i < pidlist.size() - 1; i++){
+					System.out.println("pidlist.get(i)"+pidlist.get(i));
 					sess.execCommand("kill pid "+ pidlist.get(i));
 				}
 				sess.close();
@@ -413,8 +419,6 @@ public class SSHOpCommand implements Runnable {
 				et.printStackTrace();
 			}
 		}
-
-
 	}
 
 	//-------------------------------------------------------------//
@@ -423,10 +427,45 @@ public class SSHOpCommand implements Runnable {
 	 * 
 	 */
 	public void stopOwn() {
-		for(int i=0;i<LinuxClient.GetObj().tks.size();i++){
-			if(LinuxClient.GetObj().tks.get(i).getId()==Id){
-				ownPid=LinuxClient.GetObj().tks.get(i).getPid();
+//		for(int i=0;i<LinuxClient.GetObj().tks.size();i++){
+//			if(LinuxClient.GetObj().tks.get(i).getId()==Id){
+//				ownPid=LinuxClient.GetObj().tks.get(i).getPid();
+//			}
+//		}
+		outlist = "";
+		SAXReader reader = new SAXReader();
+		try {
+			Document doc = reader.read("Config.xml");
+//			OutputFormat format = OutputFormat.createPrettyPrint();
+			List list = doc.selectNodes("/config/computer");
+			Iterator iter = list.iterator();
+			while (iter.hasNext()) {
+				boolean flg1 = true;
+				Element el = (Element) iter.next();
+				Iterator it = el.elementIterator("group");
+				while (it.hasNext()) {
+					boolean flag1 = true;
+					Element elta = (Element) it.next();
+					Iterator itta = elta.elementIterator("task");
+					while (itta.hasNext()) {
+						Element et = (Element) itta.next();
+						String s = et.attributeValue("id");
+						if (s.equals(Id)) {
+							ownPid=et.attributeValue("runpid");
+							flag1 = false;
+							break;
+						}
+					}
+					if (flag1 == false) {
+						flg1 = false;
+						break;
+					}
+				}
+				if (flg1 == false)
+					break;
 			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		
 		try {
@@ -734,6 +773,77 @@ public class SSHOpCommand implements Runnable {
 	 * 停止串行执行的组内的任务
 	 */
 	public void stopGroupSSH() {
+		List<String> idlist=new ArrayList<String>();
+		
+		System.out.println("停止串行执行的组内的任务");
+		SAXReader reader = new SAXReader();
+		try {
+			Document doc = reader.read("Config.xml");
+			List list = doc.selectNodes("/config/computer");
+			Iterator iter = list.iterator();
+			while (iter.hasNext()) {
+				boolean flg1 = true;
+				Element el = (Element) iter.next();
+				Iterator it = el.elementIterator("group");
+				while (it.hasNext()) {
+					boolean flag1 = true;
+					Element elta = (Element) it.next();
+					String tgid = elta.attributeValue("id");
+					if(tgid.equals(gid)){
+						gPid=elta.attributeValue("pid");
+//						System.out.println("gPid *** "+gPid);
+						flag1=false;
+						break;
+					}
+				}
+				if (flg1 == false)
+					break;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		
+		outlist="";
+		try {
+			runSSH(Host, Name, Psw, "pstree -p "+gPid);
+			System.out.println("gPid "+gPid);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		System.out.println("gPid str:"+outlist);
+		String regEx="\\(\\d+\\)"; 
+		//outlist="CShell(29779)---ping(29780)"; 
+		List<String> spids = new ArrayList<String>();
+		Pattern p=Pattern.compile(regEx); 
+		Matcher m=p.matcher(outlist); 
+		while ( m.find()) {
+			spids.add(m.group());
+//	        System.out.println("G1:"+m.group());
+	    }
+		String cmdline = "";
+        for(int a = spids.size()-1;a>=0;a--){
+        	String mypid = spids.get(a).substring(1, spids.get(a).length()-1);
+        	System.out.println("G2:"+mypid);
+        	cmdline+="kill pid "+mypid+";";
+        }
+        try {
+			runSSH(Host, Name, Psw, cmdline);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		for(int i = 0; i < runtasklist.size(); ++i) {
+			runtasklist.get(i).setStatus(0);   
+		}
+		for(int i = 0; i < runtasklist.size(); ++i) {   	
+				LinuxClient.GetObj().setGpsrunSucc(runtasklist.get(i).getGp().getId(), true);
+				LinuxClient.GetObj().setTaskRunSucc( runtasklist.get(i).getId(),false);
+				//将任务运行信息写入config.xml文件中
+				TaskUI tempT = new TaskUI();
+				tempT.EditTaskRunSuccXML(runtasklist.get(i).getId(), false);
+		}
+		
 //		System.out.println("a00000000000");
 //		for(int i = 0; i < runtasklist.size(); ++i) {
 //			runtasklist.get(i).setStatus(0);   
@@ -792,64 +902,6 @@ public class SSHOpCommand implements Runnable {
 //				tempT.EditTaskRunSuccXML(runtasklist.get(i).getId(), false);
 //			}
 //		}
-		System.out.println("a00000000000");
-		for(int i = 0; i < runtasklist.size(); ++i) {
-			runtasklist.get(i).setStatus(0);   
-		}
-		for(int i = 0; i < runtasklist.size(); ++i) {   		
-			if(runtasklist.get(i).getRunSucc() == true) { //如果组中的任务正在执行中
-				if(runtasklist.get(i).getCmd().startsWith("./")) {
-					try {
-						Connection conn = getOpenedConnection();
-						Session sess = conn.openSession();
-						SSHTask st = LinuxClient.GetObj().findSelectTask(runtasklist.get(i).getId());
-						sess.execCommand("kill pid "+ st.getPid());
-						sess.close();
-						conn.close();
-					}
-					catch(Exception et) {
-						et.printStackTrace();
-					}
-				}
-				else {
-					String stopcmd = runtasklist.get(i).getCmd().substring(0,runtasklist.get(i).getCmd().indexOf(" "));
-					//System.out.println("stopcmd:"+ stopcmd);
-					String sscmd = "ps U "+ Name +" | grep "+
-								stopcmd+" | awk '{print $1}'";
-
-					List<String> pidlist;
-					pidlist = new ArrayList<String>();
-					Connection conn ;
-					Session sess ;
-					String out;
-					BufferedReader bufferedReader;
-
-					//连接server获得执行命令的pid;
-					try{
-						conn = getOpenedConnection();
-						sess = conn.openSession();
-						sess.execCommand(sscmd);		
-						bufferedReader = new BufferedReader(new InputStreamReader(sess.getStdout()));    		
-						while((out=bufferedReader.readLine())!=null) {
-							pidlist.add(out);  
-							//System.out.println("pid"+out);
-						}
-						sess.close();
-						conn.close();
-					}
-					catch(Exception et) {
-						et.printStackTrace();
-					}    	
-					killPidProcess(pidlist);//结束pid等于pidlist内容的进程
-				}
-				flag = false;
-				LinuxClient.GetObj().setGpsrunSucc(runtasklist.get(i).getGp().getId(), true);
-				LinuxClient.GetObj().setTaskRunSucc( runtasklist.get(i).getId(),false);
-				//将任务运行信息写入config.xml文件中
-				TaskUI tempT = new TaskUI();
-				tempT.EditTaskRunSuccXML(runtasklist.get(i).getId(), false);
-			}
-		}
 
 	}
 	/**
@@ -946,4 +998,10 @@ public class SSHOpCommand implements Runnable {
 		client.get(remoteFile, target);
 	}
 	//---------------------------------------------------------------------------------//
+	public String getOwnPid() {
+		return ownPid;
+	}
+	public void setOwnPid(String ownPid) {
+		this.ownPid = ownPid;
+	}
 }
