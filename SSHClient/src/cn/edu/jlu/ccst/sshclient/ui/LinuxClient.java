@@ -598,7 +598,7 @@ public class LinuxClient extends javax.swing.JFrame {
 
 		boolean flag=false;
 		JFrame fr = new JFrame();
-		fr.setSize(600,800);
+		fr.setSize(600,600);
 		//使用中心定位窗体类
 		MidScr ms=new MidScr(fr);
 		//设定窗体的左上坐标
@@ -622,7 +622,7 @@ public class LinuxClient extends javax.swing.JFrame {
 			t1.setName(cur.getId());
 			t2=new JScrollPane();
 			t2.setName(cur.getId());
-			System.out.println("line 582");
+//			System.out.println("line 582");
 			fr.add(t2);
 			t2.add(t1);
 			t1.setColumns(20);
@@ -1114,7 +1114,7 @@ public class LinuxClient extends javax.swing.JFrame {
 		if( jMenuItem12.isEnabled() || groupStartG.isEnabled()) {
 			boolean flag=false;
 			JFrame fr = new JFrame();
-			fr.setSize(600,800);
+			fr.setSize(600,600);
 			//使用中心定位窗体类
 			MidScr ms=new MidScr(fr);
 			//设定窗体的左上坐标
@@ -1221,6 +1221,7 @@ public class LinuxClient extends javax.swing.JFrame {
 			int taskInfo = 4;//开启任务信息：0	
 			try{
 				SSHOpCommand ry = new SSHOpCommand(computerHost, userName, userPsw, sgp.getSts(),taskInfo);
+				ry.gid=sgp.getId();
 				Thread ty = new Thread(ry);
 				ty.start();
 			}
@@ -1251,7 +1252,7 @@ public class LinuxClient extends javax.swing.JFrame {
 			for(int i = 0; i < sgp.getSts().size(); ++i) {	
 				boolean flag=false;
 				JFrame fr = new JFrame();
-				fr.setSize(600,800);
+				fr.setSize(600,600);
 				//使用中心定位窗体类
 				MidScr ms=new MidScr(fr);
 				//设定窗体的左上坐标
