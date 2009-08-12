@@ -1532,6 +1532,19 @@ public class LinuxClient extends javax.swing.JFrame {
 	private void computerStartAllGroupT (MouseEvent evt) {
 		if(computerStartC.isEnabled()) {
 			//找到选中的计算机
+			JFrame fr = new JFrame();
+			fr.setSize(600,600);
+			//使用中心定位窗体类
+			MidScr ms=new MidScr(fr);
+			//设定窗体的左上坐标
+			fr.setLocation(ms.getX(), ms.getY ()); 
+			Toolkit tk = Toolkit.getDefaultToolkit();
+	        Image img = tk.getImage(this.getClass().getResource("/cn/edu/jlu/ccst/sshclient/ui/resource/faver.png"));
+			fr.setIconImage(img);
+			jTextArea2.setText("");
+			singlerun = 2;
+			
+			
 			SSHComputer selectComputer = new SSHComputer();		  
 			for(int i = 0; i < cps.size() ; i++) {
 				if(cur.getId().equals(cps.get(i).getId())) {
@@ -1540,6 +1553,7 @@ public class LinuxClient extends javax.swing.JFrame {
 				}
 			}
 			setRunStatusC(selectComputer.getId(), true);
+			fr.setTitle(selectComputer.getName());
 			String computerHost = selectComputer.getHost();
 			String userName = selectComputer.getUsername();
 			String userPsw = selectComputer.getPassword();
@@ -1561,15 +1575,17 @@ public class LinuxClient extends javax.swing.JFrame {
 			{
 				t1=new JTextArea(selectComputer.getId()+"\n");
 				t1.setName(selectComputer.getId());
-				jtl.add(t1);
 				t2=new JScrollPane();
 				t2.setName(selectComputer.getId());
-				jsl.add(t2);
+				fr.add(t2);
 				t2.add(t1);
 				t1.setColumns(20);
 				t1.setRows(5);
 				t1.setEditable(false);
 				t2.setViewportView(t1);
+//				jTabbedPane1.addTab(sgp.getName(), t2);
+				fr.setVisible(true);
+				
 //				jTabbedPane1.addTab(selectComputer.getName(), t2);
 
 				t1.addMouseListener(new MouseAdapter()
