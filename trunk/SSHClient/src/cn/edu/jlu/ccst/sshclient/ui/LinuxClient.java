@@ -38,6 +38,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -363,7 +364,7 @@ public class LinuxClient extends javax.swing.JFrame {
 					el.getParent().remove(el); 
 				} 
 				try{              
-					XMLWriter writer = new XMLWriter(new FileWriter("Config.xml"));	   	 
+					XMLWriter writer = new XMLWriter(new FileOutputStream("Config.xml"));	   	 
 					writer.write(doc);
 					writer.close();
 				}catch(Exception ex)

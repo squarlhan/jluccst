@@ -7,6 +7,7 @@ import cn.edu.jlu.ccst.sshclient.model.*;
 
 //import java.io.File;
 import java.io.BufferedReader;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader; //import java.text.DateFormat;
@@ -503,7 +504,7 @@ public class TaskUI extends javax.swing.JDialog {
 					}
 				}
 			}
-			writer = new XMLWriter(new FileWriter("Config.xml"), format);
+			writer = new XMLWriter(new FileOutputStream("Config.xml"), format);
 			writer.write(doc);
 			writer.close();
 			if (flag) {
@@ -741,7 +742,7 @@ public class TaskUI extends javax.swing.JDialog {
 			}
 
 			// System.out.println("写入xml:"+ starttime);
-			writer = new XMLWriter(new FileWriter("Config.xml"), format);
+			writer = new XMLWriter(new FileOutputStream("Config.xml"), format);
 			writer.write(doc);
 			writer.close();
 
@@ -838,7 +839,7 @@ public class TaskUI extends javax.swing.JDialog {
 				if (flg1 == false)
 					break;
 			}
-			writer = new XMLWriter(new FileWriter("Config.xml"), format);
+			writer = new XMLWriter(new FileOutputStream("Config.xml"), format);
 			writer.write(doc);
 			writer.close();
 
@@ -887,7 +888,7 @@ public class TaskUI extends javax.swing.JDialog {
 				if (flg1 == false)
 					break;
 			}
-			writer = new XMLWriter(new FileWriter("Config.xml"), format);
+			writer = new XMLWriter(new FileOutputStream("Config.xml"), format);
 			writer.write(doc);
 			writer.close();
 
