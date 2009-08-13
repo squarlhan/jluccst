@@ -433,6 +433,7 @@ public class SSHOpCommand implements Runnable {
 //			}
 //		}
 		outlist = "";
+		String groupid="";
 		SAXReader reader = new SAXReader();
 		try {
 			Document doc = reader.read("Config.xml");
@@ -452,6 +453,8 @@ public class SSHOpCommand implements Runnable {
 						String s = et.attributeValue("id");
 						if (s.equals(Id)) {
 							ownPid=et.attributeValue("runpid");
+							System.out.println("group id "+elta.attributeValue("id"));
+							groupid=elta.attributeValue("id");
 							flag1 = false;
 							break;
 						}
@@ -490,6 +493,7 @@ public class SSHOpCommand implements Runnable {
         	System.out.println("2:"+mypid);
         	cmdline+="kill pid "+mypid+";";
         }
+        cmdline+="rmdir "+groupid+"/"+Id+";";
         try {
 			runSSH(Host, Name, Psw, cmdline);
 			LinuxClient.GetObj().setTaskRunSucc(Id,false);
@@ -827,6 +831,7 @@ public class SSHOpCommand implements Runnable {
         	System.out.println("G2:"+mypid);
         	cmdline+="kill pid "+mypid+";";
         }
+        cmdline+="rm -rf "+gid+";";
         try {
 			runSSH(Host, Name, Psw, cmdline);
 		} catch (IOException e) {
