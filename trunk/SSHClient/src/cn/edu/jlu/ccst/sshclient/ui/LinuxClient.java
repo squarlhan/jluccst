@@ -2055,7 +2055,7 @@ public class LinuxClient extends javax.swing.JFrame {
 					jMenuItem13.setEnabled(false);
 					SSHTask temptask = new SSHTask();
 					temptask = findSelectTask(cur.getId());//变灰相应的任务信息
-					if(!temptask.getFout().equals("")) {
+					if(!temptask.getFouts().isEmpty()) {
 						boolean ff = true;
 						String temp = "";		
 						if(temptask.getFouts().trim().endsWith(";"))
@@ -2065,13 +2065,12 @@ public class LinuxClient extends javax.swing.JFrame {
 							if(!str.trim().isEmpty()){
 								String filename = temptask.getFout().trim()+"/"+str.trim();
 								File f = new File(filename);
-								if(f.exists() && temptask.getCmd().startsWith("./") && temptask.getRunSucc() == false) {
-									ff = ff&&true;
-								}
-								else ff = ff&&false;
-							}
+								if(f.exists()&&temptask.getRunSucc()==false) {
+									ff = true;
+								}else ff = false;					
+							}else ff = false;
 						}
-						
+						//System.out.println("((((((((("+ff);
 						dispResT.setEnabled(ff);
 					}
 					else {
