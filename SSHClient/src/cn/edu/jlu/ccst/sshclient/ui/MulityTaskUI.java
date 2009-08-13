@@ -6,6 +6,7 @@ import ch.ethz.ssh2.Session;
 import cn.edu.jlu.ccst.sshclient.model.*;
 
 import java.io.BufferedReader;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -534,7 +535,7 @@ public class MulityTaskUI extends javax.swing.JDialog {
 						}
 					}
 				}
-				writer = new XMLWriter(new FileWriter("Config.xml"), format);
+				writer = new XMLWriter(new FileOutputStream("Config.xml"), format);
 				writer.write(doc);
 				writer.close();
 				

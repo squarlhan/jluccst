@@ -4,6 +4,7 @@
 package cn.edu.jlu.ccst.sshclient.model;
 
 import java.io.BufferedReader;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -230,7 +231,7 @@ public class SSHGroup extends BaseClass implements BaseAction, BaseOperation {
 					}
 				}
 			}
-			XMLWriter writer = new XMLWriter(new FileWriter("Config.xml"));	   	 
+			XMLWriter writer = new XMLWriter(new FileOutputStream("Config.xml"));	   	 
 			writer.write(doc);
 			writer.close();
 		}

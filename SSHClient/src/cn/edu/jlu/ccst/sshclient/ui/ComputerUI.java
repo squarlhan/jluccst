@@ -17,6 +17,7 @@ import cn.edu.jlu.ccst.sshclient.ui.LinuxClient;
 import cn.edu.jlu.ccst.sshclient.util.SSHOpCommand;
 
 //import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 //import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -275,7 +276,7 @@ public class ComputerUI extends javax.swing.JDialog
 			timeFormat=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			newnode.addAttribute("creatdate",timeFormat.format(newComputer.getCreatdate()));
 			//System.out.println(this.getClass().getResource("/cn/edu/jlu/ccst/sshclient/util/Config.xml").toExternalForm());
-			writer = new XMLWriter(new FileWriter("Config.xml"), format);
+			writer = new XMLWriter(new FileOutputStream("Config.xml"), format);
 			writer.write(doc);
 			writer.close();
 
@@ -311,7 +312,7 @@ public class ComputerUI extends javax.swing.JDialog
 					el.addAttribute("memo", memo);
 				}
 			}
-			writer = new XMLWriter(new FileWriter("Config.xml"), format);
+			writer = new XMLWriter(new FileOutputStream("Config.xml"), format);
 			writer.write(doc);
 			writer.close();
 

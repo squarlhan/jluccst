@@ -3,6 +3,7 @@
  */
 package cn.edu.jlu.ccst.sshclient.model;
 
+import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.util.Date;
 import java.util.Iterator;
@@ -125,7 +126,7 @@ public class SSHComputer extends BaseClass implements BaseOperation{
 					el.getParent().remove(el);
 				}
 			}
-			XMLWriter writer = new XMLWriter(new FileWriter("Config.xml"));	   	 
+			XMLWriter writer = new XMLWriter(new FileOutputStream("Config.xml"));	   	 
 			writer.write(doc);
 			writer.close();
 		}
