@@ -2077,6 +2077,18 @@ public class LinuxClient extends javax.swing.JFrame {
 					else {
 						dispResT.setEnabled(false);
 					}
+					String at = temptask.getFouts().trim();
+					if(at.endsWith(";")) at = at.substring(0, at.length()-1);
+					if(temptask.getRunSucc() == true||at.isEmpty()){
+						downloadItemT.setEnabled(false);
+					}
+					else {
+						downloadItemT.setEnabled(true);
+					}
+					String inss = temptask.getInfiles().trim();
+					if(at.endsWith(";")) inss = inss.substring(0, at.length()-1);
+					if(inss.isEmpty()||temptask.getRunSucc() == true)uploadItemT.setEnabled(false);
+					else uploadItemT.setEnabled(true);
 					if(temptask.getRunSucc() == false) {
 						jMenuItem14.setEnabled(true);
 						jMenuItem15.setEnabled(false);

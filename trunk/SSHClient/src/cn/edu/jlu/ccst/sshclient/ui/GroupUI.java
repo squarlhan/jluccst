@@ -219,7 +219,7 @@ public class GroupUI extends javax.swing.JDialog  {
 		Iterator <SSHComputer> it;
 		for(it = LinuxClient.GetObj().cps.iterator(); it.hasNext();){
 			selectComputer = (SSHComputer) it.next();
-			if(selectComputer.getId().equals(selectComputer)) {
+			if(selectComputer.getId().equals(LinuxClient.GetObj().getCur().getId())) {
 				break;
 			}
 		}
@@ -414,6 +414,7 @@ public class GroupUI extends javax.swing.JDialog  {
 		//		    	sess.execCommand("./squarlhan/CShell "+ newdir + " mv " + orin + " " + finalcmd.trim());
 		//		    }else 
 		sess.execCommand("./CShell mkdir -p " + finalcmd.trim());
+		System.out.println("./CShell mkdir -p " + finalcmd.trim());
 
 		String out;
 		BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(sess.getStdout()));    
@@ -430,6 +431,9 @@ public class GroupUI extends javax.swing.JDialog  {
 	} 
 	//--------------------------------------------------------//
 	public  Connection getOpenedConnection(SSHComputer c)  {
+		System.out.println(c.getHost());
+		System.out.println(c.getUsername());
+		System.out.println(c.getPassword());
 		Connection conn = new Connection(c.getHost());
 		try{	
 			try
