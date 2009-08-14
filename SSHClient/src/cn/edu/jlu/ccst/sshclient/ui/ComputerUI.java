@@ -248,7 +248,7 @@ public class ComputerUI extends javax.swing.JDialog
 			JOptionPane.showMessageDialog(null, res.getString("ENTERUSERHOSTNAME"),null,JOptionPane.ERROR_MESSAGE);
 			return;
 		}
-		JOptionPane.showMessageDialog(null, res.getString("MODIFYSUCC"),null,JOptionPane.ERROR_MESSAGE);
+		JOptionPane.showMessageDialog(null, res.getString("MODIFYSUCC"),null,JOptionPane.INFORMATION_MESSAGE);
 		this.setVisible(false);
 		this.EditComputerFromXML(LinuxClient.getCur().getId(), jTextField2.getText(), jTextField6.getText(), String.valueOf(jPasswordField1.getPassword()), jTextArea4.getText(), jTextField8.getText());
 	}
