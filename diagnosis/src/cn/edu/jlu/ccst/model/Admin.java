@@ -9,8 +9,8 @@ import javax.persistence.Id;
 import org.springframework.stereotype.Component;
 
 @Entity
-@Component("user")
-public class User implements Serializable{
+@Component("admin")
+public class Admin implements Serializable{
 
 	/**
 	 * 
@@ -28,12 +28,12 @@ public class User implements Serializable{
 	
 	
 	
-	public User() {
+	public Admin() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 
-	public User(int id, String username, String password, String email,
+	public Admin(int id, String username, String password, String email,
 			String phone, String name, String jid) {
 		super();
 		this.id = id;
