@@ -28,13 +28,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <table id="mytable" class="list_table" align="center" width="100%">
 		<tr bgcolor="#4A708B">
 		    <th>USERNAME</th>
-			<th>PASSWORD</th>
+			<th>NAME</th>
+			<th>EMAIL</th>
+			<th>PHONE</th>
+			<th>JID</th>
+			<th>DEPT</th>
 	  </tr>
     <s:iterator id="users" value="userlist" status="index1">
        
      <tr  align="center" bgcolor="<s:if test="#index1.odd == true">#ffffff</s:if><s:else>#EDEDED</s:else>">
        <td><s:property value="username"/></td>
-       <td><s:property value="password"/></td>
+       <td><s:property value="name"/></td>
+       <td><s:property value="email"/></td>
+        <td><s:property value="phone"/></td>
+       <td><s:property value="jid"/></td>
+        <td><s:property value="dept"/></td>
      </tr>
      </s:iterator>
   </table>

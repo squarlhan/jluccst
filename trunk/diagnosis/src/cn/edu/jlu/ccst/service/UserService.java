@@ -23,7 +23,8 @@ public class UserService {
 	public void setUserServiceImpl(UserServiceImpl userServiceImpl) {
 		this.userServiceImpl = userServiceImpl;
 	}
-	public User getUser() {
+	 
+public User getUser() {
 		return user;
 	}
 	@Resource
@@ -42,7 +43,11 @@ public class UserService {
 		return resultlist;
 	}
 	
-	public boolean exits(String username){
-		return false;
+	public boolean exits(User user){
+		User u1=userServiceImpl.find(user);
+		System.out.println("88888"+u1+"88888");
+		if(u1!=null)
+			return true;
+		else return false;
 	}
 }
