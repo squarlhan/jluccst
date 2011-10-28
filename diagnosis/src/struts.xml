@@ -9,8 +9,40 @@
 	<constant name="struts.objectFactory" value="spring" />  
 	<package name="struts2" extends="struts-default" namespace="/">
 		<action name="useraction" class="userAction">
-			<result name="success">success.jsp</result>
+			<result name="success">usersuccess.jsp</result>
+			<result name="error">usererror.jsp</result>
+		</action>
+		
+		
+		<action name="adminaction" class="adminAction">
+			<result name="success">adminsuccess.jsp</result>
+			<result name="error">adminerror.jsp</result>
+		</action>
+		
+		<action name="alteraction" class="alterAction">
+			<result name="success">updatesuccess.jsp</result>
 			<result name="error">error.jsp</result>
+		</action>
+		
+		
+		<action name="adminaction!deleteUser" class="adminAction" >
+			<result name="success">/updatesuccess.jsp</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		<action name="adminaction!chUser" class="adminaction" >
+			<result name="success">/updatesuccess.jsp</result>
+			<result name="error">/error.jsp</result>
+		</action>
+		
+		<action name="adminaction!addUser" class="adminaction" >
+			<result name="success">/adminsuccess.jsp</result>
+			<result name="error">/usererror.jsp</result>
+		
+		</action>
+			<action name="adminaction!searchUser" class="adminaction">
+			<result name="success">/updatesuccess.jsp</result>
+			<result name="error">/error.jsp</result>
+			<result name="input">/admin.jsp</result>
 		</action>
 	</package>
 

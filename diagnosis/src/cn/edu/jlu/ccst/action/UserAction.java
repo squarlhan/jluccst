@@ -55,14 +55,21 @@ public class UserAction extends ActionSupport {
 	}
 	
 	public String execute() {
+		boolean flag;
 		userlist = userService.findall();
-		return SUCCESS;
+		flag=userService.exits(user);
+		System.out.print(flag);
+		if(flag==true){
+			
+		  return SUCCESS;}
+		 else return ERROR;
+		
 		}
 
 	public String  addUser() {
-		if(userService.exits(user.getUsername())){
+		/*if(userService.exits(user.getUsername())){
 			return ERROR;
-		}
+		}*/
 		userService.save(user);
 		userlist = userService.findall();
 

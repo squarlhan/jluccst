@@ -12,6 +12,10 @@ public interface UserServiceInter {
 
 	public void remove(int id);
 
-	public User find(int id);
+	public User find(User user);
+	public void updateUser(User user); 
+	
+	
+
 
 }
