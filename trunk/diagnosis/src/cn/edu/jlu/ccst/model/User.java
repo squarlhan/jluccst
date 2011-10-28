@@ -24,7 +24,7 @@ public class User implements Serializable{
 	private String email;
 	private String phone;
 	private String name;
-	
+	private String dept;
 	
 	
 	
@@ -34,7 +34,7 @@ public class User implements Serializable{
 	}
 
 	public User(int id, String username, String password, String email,
-			String phone, String name, String jid) {
+			String phone, String name, String jid, String dept) {
 		super();
 		this.id = id;
 		this.username = username;
@@ -43,6 +43,15 @@ public class User implements Serializable{
 		this.phone = phone;
 		this.name = name;
 		this.jid = jid;
+		this.dept = dept;
+	}
+
+	public String getDept() {
+		return dept;
+	}
+
+	public void setDept(String dept) {
+		this.dept = dept;
 	}
 
 	public String getEmail() {
