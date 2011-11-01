@@ -48,7 +48,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <div style="color: green;"> <strong><s:property value="#session.ad.username"/>:</strong>  您好
     <p class="STYLE1"><a href="adminshow.jsp">修改个人信息</a></p></div><br>
   
-  <table bordercolor="#000000" rules="all"  id="mytable" class="list_table" align="center" width="100%">
+  <table bordercolor="#4A708B" rules="all"  id="mytable" class="list_table" align="center" width="100%">
 		<tr bgcolor="#4A708B">
 		    <th>USERNAME</th>
 			<th>NAME</th>
