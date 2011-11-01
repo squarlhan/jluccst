@@ -11,6 +11,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <base href="<%=basePath%>">
     
     <title>净水厂设备诊断专家系统</title>
+     <script type="text/javascript">
+    	alert("当前密码错误，请重新输入！")
+    </script>
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">    
@@ -67,7 +70,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    <s:textfield name="admin.phone" key="电话" value="%{#session.ad.phone}" />
 	    </label></td>
 	  </tr>
-	  <tr>
+	   <tr>
 	 <td align="center"><label>
 	    <s:textfield name="admin.dept" key="部门" value="%{#session.ad.dept}" />
 	    </label></td>

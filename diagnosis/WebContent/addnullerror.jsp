@@ -12,6 +12,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <base href="<%=basePath%>">
     
     <title>净水厂设备诊断专家系统</title>
+     <script type="text/javascript">
+    	alert("用户名和密码不能为空！")
+    </script>
        <script type="text/javascript">
     	function confirmAdd(){
     		

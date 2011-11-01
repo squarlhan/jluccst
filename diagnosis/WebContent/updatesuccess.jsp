@@ -25,7 +25,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <body>
     <div style="color: red;">修改成功</div><br>
-    <s:property value="#session.admin.username"/>
-    
+   <p> 用户名:  <s:property value="#session.ad.username"/></p>
+   <p>email:  <s:property value="#session.ad.email"/></p>
+   <p>工作号:   <s:property value="#session.ad.jid"/></p>
+   <p>电话 :    <s:property value="#session.ad.phone"/></p>
+   <p>部门:    <s:property value="#session.ad.dept"/></p>
+   <p>姓名 :    <s:property value="#session.ad.name"/></p>
+   <p></p>
+   <p><s:a href="useraction!userList.action"> 
+						   <p><div style="color:red;"><p align="center"><u>返回用户列表</u></p></div></p>
+				  </s:a>	
   </body>
 </html>

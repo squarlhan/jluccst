@@ -6,6 +6,7 @@
 	<decorator name="main" page="maindecorator.jsp">
 	    <pattern>/*.jsp</pattern>
 		<pattern>/*.action</pattern>
+		<pattern>/*</pattern>
 	</decorator>
 	
 	<decorator name="panel" page="panel.jsp"/>
