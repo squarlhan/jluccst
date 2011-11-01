@@ -9,40 +9,26 @@
 	<constant name="struts.objectFactory" value="spring" />  
 	<package name="struts2" extends="struts-default" namespace="/">
 		<action name="useraction" class="userAction">
-			<result name="success">usersuccess.jsp</result>
-			<result name="error">usererror.jsp</result>
-		</action>
-		
-		
-		<action name="adminaction" class="adminAction">
 			<result name="success">adminsuccess.jsp</result>
-			<result name="error">adminerror.jsp</result>
+			<result name="error">researchusererror.jsp</result>
+			<result name="addnullerror">/addnullerror.jsp</result>
+			<result name="adderror">/useradderror.jsp</result>
 		</action>
 		
-		<action name="alteraction" class="alterAction">
+		
+	    <action name="alteraction" class="alterAction">
 			<result name="success">updatesuccess.jsp</result>
-			<result name="error">error.jsp</result>
+			<result name="error">altererror.jsp</result>
+			<result name="nullpass">nullpass.jsp</result>
 		</action>
 		
 		
-		<action name="adminaction!deleteUser" class="adminAction" >
-			<result name="success">/updatesuccess.jsp</result>
-			<result name="error">/error.jsp</result>
-		</action>
-		<action name="adminaction!chUser" class="adminaction" >
-			<result name="success">/updatesuccess.jsp</result>
-			<result name="error">/error.jsp</result>
-		</action>
-		
-		<action name="adminaction!addUser" class="adminaction" >
+		<action name="adminaction" class="adminAction" >
 			<result name="success">/adminsuccess.jsp</result>
-			<result name="error">/usererror.jsp</result>
-		
-		</action>
-			<action name="adminaction!searchUser" class="adminaction">
-			<result name="success">/updatesuccess.jsp</result>
-			<result name="error">/error.jsp</result>
-			<result name="input">/admin.jsp</result>
+			
+			<result name="loginerror">/loginerror.jsp</result>
+			
+			
 		</action>
 	</package>
 

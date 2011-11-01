@@ -102,8 +102,11 @@ public class AlterAction extends ActionSupport {
 		Admin oldadmin = (Admin) ActionContext.getContext().getSession()
 				.get("ad");
 		
-		System.out.println("++++"+oldadmin+"+++++");
+		
 		if (oldadmin.getPassword().equals(currentpassword)) {
+			System.out.println("7777"+newpassword+"99999999");
+			if(newpassword.isEmpty())
+			{ return "nullpass";}
 			admin.setPassword(newpassword);
 			admin.setId(oldadmin.getId());
 			admin.setUsername(oldadmin.getUsername());
@@ -116,7 +119,7 @@ public class AlterAction extends ActionSupport {
 			return SUCCESS;
 		} else {
 			
-			return ERROR;
+			return 	ERROR;
 		}
 		/*admin.setUsername(username);
 		if (currentpassword.equals(password)) {

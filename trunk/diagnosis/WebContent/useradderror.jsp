@@ -12,11 +12,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <base href="<%=basePath%>">
     
     <title>净水厂设备诊断专家系统</title>
+     <script type="text/javascript">
+    	alert("该用户名已存在，请重新输入！")
+    </script>
+    
        <script type="text/javascript">
     	function confirmAdd(){
     		
 			return confirm("确认要增加吗？");
 			
+    	}
+    	
+    	function reset(){
+    		username.text = null;
     	}
     </script>
     
@@ -38,7 +46,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <s:form action="useraction!addUser.action">
 <table width="200" align="center" style="margin-left:30">
 	<tr>
-	<td align="center"><s:textfield size="15" label="用户名" name="user.username" /></td>
+	<td align="center"><s:textfield size="15" label="用户名" name="user.username" id = "username"/></td>
 	</tr>
 	<tr>
 	<td align="center"><s:password size="17" label="初始密码" name="user.password" /></td>
@@ -62,13 +70,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<br/>
 	<table width="150" align="center">
 	<tr>
-	<td width="80" align="center"><s:submit value="添加用户" onclick="return confirmAdd();" theme="simple" />
+	<td width="80" align="center"><s:submit value="添加用户" onclick="confirmAdd();" theme="simple" />
 	
     
 	</td>
 	
 	<td width="80" align="center"> <s:reset value="取消"
-		theme="simple" /></td></tr></table>
+		theme="simple" onclick="reset()"/></td></tr></table>
+		
 </s:form></div>
 </div>
    
