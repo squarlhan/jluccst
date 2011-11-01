@@ -12,6 +12,7 @@ import cn.edu.jlu.ccst.model.User;
 import cn.edu.jlu.ccst.service.MailUtil;
 import cn.edu.jlu.ccst.service.UserService;
 import cn.edu.jlu.ccst.dao.UserServiceImpl;
+import cn.edu.jlu.ccst.dao.UserServiceInter;
 
 @Component("userAction")
 @Scope("prototype")
@@ -20,12 +21,13 @@ public class UserAction extends ActionSupport {
 	private UserService userService; 
 	private User user;
 	private List<User> userlist;
-	private UserServiceImpl userServiceImpl;
-	public UserServiceImpl getUserServiceImpl() {
+	private UserServiceInter userServiceImpl;
+	
+	public UserServiceInter getUserServiceImpl() {
 		return userServiceImpl;
 	}
 	@Resource
-	public void setUserServiceImpl(UserServiceImpl userServiceImpl) {
+	public void setUserServiceImpl(UserServiceInter userServiceImpl) {
 		this.userServiceImpl = userServiceImpl;
 	}
 

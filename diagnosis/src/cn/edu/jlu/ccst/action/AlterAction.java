@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Component;
 
 import cn.edu.jlu.ccst.dao.AdminServiceImpl;
+import cn.edu.jlu.ccst.dao.AdminServiceInter;
 import cn.edu.jlu.ccst.model.Admin;
 
 import com.opensymphony.xwork2.ActionContext;
@@ -18,7 +19,7 @@ public class AlterAction extends ActionSupport {
 	private String newpassword;
 	private String renewpassword;
 	private String currentpassword;
-	private AdminServiceImpl adminServiceImpl;
+	private AdminServiceInter adminServiceImpl;
 	public Admin getAdmin() {
 		return admin;
 	}
@@ -53,13 +54,6 @@ public class AlterAction extends ActionSupport {
 
 	
 
-	public AdminServiceImpl getAdminServiceImpl() {
-		return adminServiceImpl;
-	}
-	@Resource
-	public void setAdminServiceImpl(AdminServiceImpl adminServiceImpl) {
-		this.adminServiceImpl = adminServiceImpl;
-	}
 
 
 
@@ -98,6 +92,13 @@ public class AlterAction extends ActionSupport {
 		return user;
 	}*/
 
+	public AdminServiceInter getAdminServiceImpl() {
+		return adminServiceImpl;
+	}
+	@Resource
+	public void setAdminServiceImpl(AdminServiceInter adminServiceImpl) {
+		this.adminServiceImpl = adminServiceImpl;
+	}
 	public String execute () {
 		Admin oldadmin = (Admin) ActionContext.getContext().getSession()
 				.get("ad");

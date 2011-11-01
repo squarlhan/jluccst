@@ -34,10 +34,9 @@ public class Admin implements Serializable{
 		// TODO Auto-generated constructor stub
 	}
 
-	public Admin(int id, String username, String password, String email,
+	public Admin(String username, String password, String email,
 			String phone, String name, String jid, String dept) {
 		super();
-		this.id = id;
 		this.username = username;
 		this.password = password;
 		this.email = email;

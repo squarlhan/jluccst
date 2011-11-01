@@ -10,12 +10,13 @@ import org.springframework.stereotype.Component;
 
 
 import cn.edu.jlu.ccst.dao.AdminServiceImpl;
+import cn.edu.jlu.ccst.dao.AdminServiceInter;
 import cn.edu.jlu.ccst.model.Admin;
 import cn.edu.jlu.ccst.model.User;
 @Component("adminService")
 public class AdminService {
 	private Admin admin;
-	private AdminServiceImpl adminServiceImpl;
+	private AdminServiceInter adminServiceImpl;
 
 /*	public AdminServiceImpl getUserServiceImpl() {
 		return adminServiceImpl;
@@ -41,17 +42,17 @@ public User getUser() {
 		this.admin = admin;
 	}
 
-	public AdminServiceImpl getAdminServiceImpl() {
+	
+	
+	
+	
+	public AdminServiceInter getAdminServiceImpl() {
 		return adminServiceImpl;
 	}
-	@Resource
-	public void setAdminServiceImpl(AdminServiceImpl adminServiceImpl) {
+	 @Resource
+	public void setAdminServiceImpl(AdminServiceInter adminServiceImpl) {
 		this.adminServiceImpl = adminServiceImpl;
 	}
-
-	
-	
-	
 	public void save(Admin admin) {
 		System.out.println("ADMIN:"+admin.getUsername()+" ; "+admin.getPassword());
 		adminServiceImpl.save(admin);

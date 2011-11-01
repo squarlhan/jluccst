@@ -14,7 +14,7 @@ import cn.edu.jlu.ccst.model.User;
 
 @Component("adminServiceImpl")
 @Transactional
-public class AdminServiceImpl {
+public class AdminServiceImpl implements AdminServiceInter {
 	private EntityManager em; 
 
 	@PersistenceContext

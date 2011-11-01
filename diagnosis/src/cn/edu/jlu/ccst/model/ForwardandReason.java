@@ -17,30 +17,21 @@ public class ForwardandReason {
 	@ManyToOne (cascade = { CascadeType.MERGE }) 
 	@JoinColumn(name = "fid")
 	private Forward fid;
-	@ManyToOne (cascade = { CascadeType.MERGE }) 
-	@JoinColumn(name = "nouns_id")
-	private Nouns nouns_id;
+	private String nouns;
 	private float  cf_reason;
-	@ManyToOne (cascade = { CascadeType.MERGE }) 
-	@JoinColumn(name = "verb_id")
-	private Verb verb_id;
-	@ManyToOne (cascade = { CascadeType.MERGE }) 
-	@JoinColumn(name = "sid")
-	private Suggestion sid;
-	
+	private String verb;
+	private String sugg;
 	
 	
 
-
-	public ForwardandReason(int id, Forward fid, Nouns nouns_id,
-			float cf_reason, Verb verb_id, Suggestion sid ) {
+	public ForwardandReason(Forward fid, String nouns, float cf_reason,
+			String verb, String sugg) {
 		super();
-		this.id = id;
 		this.fid = fid;
-		this.nouns_id = nouns_id;
+		this.nouns = nouns;
 		this.cf_reason = cf_reason;
-		this.verb_id = verb_id;
-		this.sid = sid;
+		this.verb = verb;
+		this.sugg = sugg;
 	}
 	public ForwardandReason() {
 		super();
@@ -60,23 +51,29 @@ public class ForwardandReason {
 	public void setFid(Forward fid) {
 		this.fid = fid;
 	}
-	public Nouns getNouns_id() {
-		return nouns_id;
+	public String getNouns() {
+		return nouns;
 	}
-	public void setNouns_id(Nouns nouns_id) {
-		this.nouns_id = nouns_id;
+	public void setNouns(String nouns) {
+		this.nouns = nouns;
+	}
+	public String getVerb() {
+		return verb;
+	}
+	public void setVerb(String verb) {
+		this.verb = verb;
+	}
+	public String getSugg() {
+		return sugg;
+	}
+	public void setSugg(String sugg) {
+		this.sugg = sugg;
 	}
 	public float getCf_reason() {
 		return cf_reason;
 	}
 	public void setCf_reason(float cf_reason) {
 		this.cf_reason = cf_reason;
-	}
-	public Verb getVerb_id() {
-		return verb_id;
-	}
-	public void setVerb_id(Verb verb_id) {
-		this.verb_id = verb_id;
 	}
 
 	

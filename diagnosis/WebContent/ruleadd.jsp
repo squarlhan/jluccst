@@ -4,6 +4,7 @@ String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
 <%@taglib prefix="s" uri="/struts-tags" %>
+<%@ taglib prefix="sx" uri="/struts-dojo-tags"%>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
@@ -19,9 +20,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta http-equiv="description" content="This is my page">
 <script  language="javascript">
 
-  var count = 0; 
+  var count1 = 0; 
+  var count2 = 0; 
   function insertResult(){
-      count+=1;
+      count1+=1;
       var tb = document.getElementById("adresulttable");
      // var tb = table;
       var tr = tb.insertRow();  
@@ -31,13 +33,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		var td3 = tr.insertCell();
 		
 		var textfield1 = document.createElement("input");
-		textfield1.setAttribute("id","result_noun["+count+"]");
-		textfield1.setAttribute("name","result_noun["+count+"]");
+		textfield1.setAttribute("id","result_noun["+count1+"]");
+		textfield1.setAttribute("name","result_noun["+count1+"]");
 		textfield1.setAttribute("size","12");
 		
 		var textfield2 = document.createElement("input");
-		textfield2.setAttribute("id","result_verb["+count+"]");
-		textfield2.setAttribute("name","result_verb["+count+"]");
+		textfield2.setAttribute("id","result_verb["+count1+"]");
+		textfield2.setAttribute("name","result_verb["+count1+"]");
 		textfield2.setAttribute("size","12");
 		
 		td1.innerHTML  = "现象名词: ";
@@ -45,11 +47,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		td2.innerHTML  = "现象动词: ";
 		td2.appendChild(textfield2);
 		td3.innerHTML = "-";
-        count = 0;
 	}
 
   function insertReason(){
-      count+=1;
+      count2+=1;
       var tb = document.getElementById("adreasontable");
      // var tb = table;
       var tr = tb.insertRow();  
@@ -60,18 +61,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		var td4 = tr.insertCell();
 		
 		var textfield1 = document.createElement("input");
-		textfield1.setAttribute("id","result_noun["+count+"]");
-		textfield1.setAttribute("name","reason_noun["+count+"]");
+		textfield1.setAttribute("id","result_noun["+count2+"]");
+		textfield1.setAttribute("name","reason_noun["+count2+"]");
 		textfield1.setAttribute("size","12");
 		
 		var textfield2 = document.createElement("input");
-		textfield2.setAttribute("id","result_verb["+count+"]");
-		textfield2.setAttribute("name","reason_verb["+count+"]");
+		textfield2.setAttribute("id","result_verb["+count2+"]");
+		textfield2.setAttribute("name","reason_verb["+count2+"]");
 		textfield2.setAttribute("size","12");
 		
 		var textfield3 = document.createElement("input");
-		textfield3.setAttribute("id","sugg["+count+"]");
-		textfield3.setAttribute("name","sugg["+count+"]");
+		textfield3.setAttribute("id","sugg["+count2+"]");
+		textfield3.setAttribute("name","sugg["+count2+"]");
 		textfield3.setAttribute("size","12");
 		
 		td1.innerHTML  = "原因名词: ";
@@ -81,7 +82,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		td3.innerHTML  = "规则建议: ";
 		td3.appendChild(textfield3);
 		td4.innerHTML = "-";
-		count = 0;
 	}
   
 	function deleteRecord(table){
@@ -95,31 +95,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-    <div style="color: green;">success</div><br>
+ 
   
-  <table id="mytable" class="list_table" align="center" width="100%">
-		<tr bgcolor="#4A708B">
-		    <th><p align="center">规则录入界面</p></th>
-			
-	  </tr>
-    <s:iterator id="users" value="userlist" status="index1">
-       
-     <tr  align="center" bgcolor="<s:if test="#index1.odd == true">#ffffff</s:if><s:else>#EDEDED</s:else>">
-       <td><s:property value="username"/></td>
-       <td><s:property value="password"/></td>
-     </tr>
-     </s:iterator>
-  </table>
  
  
- <s:form action="useraction!addRule.action">
+ 
+ <s:form action="ruleaction!addRule.action">
 <div id="addrule">
 <table  align="center" width="100%" id="adruletable" class="list_table">
 	<tr>
-	<td align="center" width="543">规则名称: 
-	  <input size="12" name="rule.name" /></td>
-	<td align="center" width="554">规则备注: 
-	  <input size="12" name="rule.memo" /></td>
+	<td align="center" width="200">规则名称: <input size="12" name="rule.name" /></td>
+	<td align="center" width="200">规则备注: <input size="12" name="rule.memo" /></td>
 	</tr>
 </table>
 </div>
@@ -129,8 +115,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<td align="center" width="200">现象名词: <input size="12" name="result_noun[0]" /></td>
 	<td align="center" width="200">现象动词: <input size="12" name="result_verb[0]" /></td>
 	<td align="center" width="200">
-	   <input type="button" name="addone" value="+ " onClick="insertResult()" />
-       <input type="button" name="dele" value="- " onClick="deleteRecord(adresulttable)"/>
+	   <input type="button" name="addone" value="+ " onclick="insertResult()" />
+       <input type="button" name="dele" value="- " onclick="deleteRecord(adresulttable)"/>
     </td>
 	</tr>
 	</table>
@@ -142,7 +128,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<td align="center" width="200">原因动词: <input size="12"  name="reason_verb[0]" /></td>
 	<td align="center" width="200">规则建议: <input size="12"  name="sugg[0]" /></td>
 	<td align="center" width="200">
-	   <input type="button" name="addone" value="+ " onClick="insertReason()"/>
+	   <input type="button" name="addone" value="+ " onclick="insertReason()"/>
        <input type="button" name="dele" value="- "   onclick="deleteRecord(adreasontable)"/>
     </td>
 	</tr>

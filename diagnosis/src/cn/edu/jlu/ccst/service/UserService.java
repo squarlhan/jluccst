@@ -2,6 +2,7 @@ package cn.edu.jlu.ccst.service;
 
 
 import java.util.ArrayList;
+
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -10,20 +11,21 @@ import org.springframework.stereotype.Component;
 
 
 import cn.edu.jlu.ccst.dao.UserServiceImpl;
+import cn.edu.jlu.ccst.dao.UserServiceInter;
 import cn.edu.jlu.ccst.model.User;
 @Component("userService")
 public class UserService {
 	private User user;
-	private UserServiceImpl userServiceImpl;
+	private UserServiceInter userServiceImpl;
 
-	public UserServiceImpl getUserServiceImpl() {
+	
+public UserServiceInter getUserServiceImpl() {
 		return userServiceImpl;
 	}
-	@Resource
-	public void setUserServiceImpl(UserServiceImpl userServiceImpl) {
+@Resource
+	public void setUserServiceImpl(UserServiceInter userServiceImpl) {
 		this.userServiceImpl = userServiceImpl;
 	}
-	 
 public User getUser() {
 		return user;
 	}
