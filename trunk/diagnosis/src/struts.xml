@@ -23,6 +23,12 @@
 		</action>
 		
 		
+	    <action name="ruleaction" class="ruleAction">
+			<result name="success">ruleadd.jsp</result>
+			
+		</action>
+		
+		
 		<action name="adminaction" class="adminAction" >
 			<result name="success">/adminsuccess.jsp</result>
 			

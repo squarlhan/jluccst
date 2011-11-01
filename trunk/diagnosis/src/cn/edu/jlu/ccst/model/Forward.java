@@ -70,9 +70,8 @@ public class Forward implements Serializable{
 
 
 
-	public Forward(int fid, String memo, String name, int count, int priror) {
+	public Forward(String memo, String name, int count, int priror) {
 		super();
-		this.fid = fid;
 		this.memo = memo;
 		this.name = name;
 		this.count = count;
@@ -82,10 +81,9 @@ public class Forward implements Serializable{
 
 
 
-	public Forward(int fid, String memo, String name, int count, int priror,
+	public Forward(String memo, String name, int count, int priror,
 			List<ForwardandReason> reasons, List<ForwardandResult> results) {
 		super();
-		this.fid = fid;
 		this.memo = memo;
 		this.name = name;
 		this.count = count;

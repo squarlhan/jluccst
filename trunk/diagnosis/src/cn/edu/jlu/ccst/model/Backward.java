@@ -83,9 +83,8 @@ public class Backward implements Serializable{
 
 
 
-	public Backward(int bid, String memo, String name, int count, int priror) {
+	public Backward(String memo, String name, int count, int priror) {
 		super();
-		this.bid = bid;
 		this.memo = memo;
 		this.name = name;
 		this.count = count;
@@ -126,10 +125,9 @@ public class Backward implements Serializable{
 
 
 
-	public Backward(int bid, String memo, String name, int count, int priror,
+	public Backward(String memo, String name, int count, int priror,
 			List<BackwardandReason> reasons, List<BackwardandResult> results) {
 		super();
-		this.bid = bid;
 		this.memo = memo;
 		this.name = name;
 		this.count = count;
