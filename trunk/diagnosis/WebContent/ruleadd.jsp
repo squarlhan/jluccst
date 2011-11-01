@@ -96,54 +96,63 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <body>
  
-  
- 
  
  
  <s:form action="ruleaction!addRule.action">
-<div id="addrule">
-<table  align="center" width="100%" id="adruletable" class="list_table">
-	<tr>
-	<td align="center" width="200">规则名称: <input size="12" name="rule.name" /></td>
-	<td align="center" width="200">规则备注: <input size="12" name="rule.memo" /></td>
-	</tr>
-</table>
-</div>
-<div id="addresult">
-<table  align="center" width="100%" id="adresulttable" class="list_table">
-	<tr>
-	<td align="center" width="200">现象名词: <input size="12" name="result_noun[0]" /></td>
-	<td align="center" width="200">现象动词: <input size="12" name="result_verb[0]" /></td>
-	<td align="center" width="200">
-	   <input type="button" name="addone" value="+ " onclick="insertResult()" />
-       <input type="button" name="dele" value="- " onclick="deleteRecord(adresulttable)"/>
-    </td>
-	</tr>
-	</table>
-	</div>
-<div id="addreason">
-	<table  align="center" width="100%" id="adreasontable" class="list_table">
-	<tr>
-	<td align="center" width="200">原因名词: <input size="12"  name="reason_noun[0]" /></td>
-	<td align="center" width="200">原因动词: <input size="12"  name="reason_verb[0]" /></td>
-	<td align="center" width="200">规则建议: <input size="12"  name="sugg[0]" /></td>
-	<td align="center" width="200">
-	   <input type="button" name="addone" value="+ " onclick="insertReason()"/>
-       <input type="button" name="dele" value="- "   onclick="deleteRecord(adreasontable)"/>
-    </td>
-	</tr>
-	</table>
-</div>
-<div>
-	<table  align="center" style="margin-left:0" class="list_table">
-	<tr>
-	<td align="left" width="200">-</td>
-	<td  width="200"align="center"><s:submit value="新建 " theme="simple" /></td>	
-	<td  width="200" align="center"> <s:reset value="取消 "  theme="simple" /></td>	
-	<td align="left" width="200">-</td>
-	</tr>
-	</table>
-	</div>
+<table   bgcolor="#82C8F2"  width="100%"  rules="rows" border="1" bordercolor="#000000" cellpadding="0" cellspacing="0">
+    <tr bgcolor="#82C8F2">
+      <td height="54" colspan="2"><div align="center"><h2>规则录入界面</h2></div></td>
+    </tr>
+    <tr>
+      <td width="50%" height="35"><div align="center">规则名称：
+          <input name="rule.name" type="text" />
+      </div></td>
+      <td width="50%" height="35"> 规则备注：
+      <input name="rule.memo" type="text"  />      </td>
+    </tr>
+    <tr>
+      <td height="56" colspan="2"><table id="adresulttable" class="list_table" bgcolor="#EDEDED" width="100%" height="100%" border="0" cellspacing="0" >
+        <tr>
+          <td width="25%" ><div align="center">现象名词：
+              <input name="result_noun[0]" type="text" size="12" />
+          </div></td>
+          <td width="25%" ><div align="center">现象动词：
+            <input name="result_verb[0]" type="text" size="12" />
+          </div></td>
+          <td width="25%">&nbsp;</td>
+          <td width="25%"><div align="center">
+            <input name="addone" type="button" value="增加" onClick="insertResult()" />
+            <input name="dele" type="button" value="删除" onClick="deleteRecord(adresulttable)"/>
+          </div></td>
+        </tr>
+      </table></td>
+    </tr>
+    <tr>
+      <td height="45" colspan="2"><table bgcolor="#CCCCCC" id="adreasontable" class="list_table" width="100%" height="100%" border="0" cellspacing="0">
+  <tr>
+    <td width="25%" height="80%"><div align="center">原因名词:
+      <input name="reason_noun[0]" type="text" size="12" />
+    </div></td>
+    <td width="25%"><div align="center">原因动词:
+      <input name="reason_verb[0]" type="text" size="12" />
+    </div></td>
+    <td width="25%"><div align="center">规则建议:
+      <input name="sugg[0]" type="text" size="12" />
+    </div></td>
+    <td width="25%"><div align="center">
+      <input name="addone" type="button" value="增加" onClick="insertReason()" />
+      <input name="dele" type="button" value="删除"  onclick="deleteRecord(adreasontable)" />
+    </div></td>
+  </tr>
+</table></td>
+    </tr>
+    <tr>
+      <td   bgcolor="82C8F2"height="33" colspan="2"><div align="center">
+        <input name="Input22" type="submit" value="新建" />
+        <input name="Input22" type="submit" value="取消" />
+      </div></td>
+    </tr>
+  </table>
 </s:form>
   
   <div style="float:left; margin-right: 50px;">
