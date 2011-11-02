@@ -8,6 +8,8 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import com.opensymphony.xwork2.ActionSupport;
+
+import cn.edu.jlu.ccst.dao.AdminServiceInter;
 import cn.edu.jlu.ccst.model.Admin;
 import cn.edu.jlu.ccst.service.MailUtil;
 import cn.edu.jlu.ccst.service.AdminService;
@@ -26,11 +28,46 @@ public class AdminAction extends ActionSupport {
 	private UserService userService;
 	private List<User> userlist;
 	
+	private String newpassword;
+	
+
+	private String renewpassword;
+	private String currentpassword;
+	private AdminServiceInter adminServiceImpl;
 
 	
 	private AdminService adminService; 
 	private Admin admin;
 	private MailUtil mailUtil;
+	
+	public String getNewpassword() {
+		return newpassword;
+	}
+	public void setNewpassword(String newpassword) {
+		this.newpassword = newpassword;
+	}
+	public String getRenewpassword() {
+		return renewpassword;
+	}
+	public void setRenewpassword(String renewpassword) {
+		this.renewpassword = renewpassword;
+	}
+	public String getCurrentpassword() {
+		return currentpassword;
+	}
+	public void setCurrentpassword(String currentpassword) {
+		this.currentpassword = currentpassword;
+	}
+	public AdminServiceInter getAdminServiceImpl() {
+		return adminServiceImpl;
+	}
+	@Resource
+	public void setAdminServiceImpl(AdminServiceInter adminServiceImpl) {
+		this.adminServiceImpl = adminServiceImpl;
+	}
+
+
+
 
 	public MailUtil getMailUtil() {
 		return mailUtil;
@@ -93,6 +130,31 @@ public class AdminAction extends ActionSupport {
 	        Map session = actionContext.getSession();
 	        session.put("ad", flag1);
 	        return SUCCESS;}
+		
+		}
+	public String alterAdmin () {
+		 Admin oldadmin = (Admin) ActionContext.getContext().getSession()
+				.get("ad");
+		
+		
+		if (oldadmin.getPassword().equals(currentpassword)) {
+			System.out.println("7777"+newpassword+"99999999");
+			if(newpassword.isEmpty())
+			{ return "nullpass";}
+			admin.setPassword(newpassword);
+			admin.setId(oldadmin.getId());
+			admin.setUsername(oldadmin.getUsername());
+			adminServiceImpl.save(admin);
+			
+			
+			ActionContext actionContext = ActionContext.getContext();
+	        Map session = actionContext.getSession();
+	        session.put("ad", admin);
+			return "altersuccess";
+		} else {
+			
+			return 	"altererror";
+		}
 		
 		}
 	

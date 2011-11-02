@@ -9,19 +9,19 @@
 	<constant name="struts.objectFactory" value="spring" />  
 	<package name="struts2" extends="struts-default" namespace="/">
 		<action name="useraction" class="userAction">
-			<result name="success">usersuccess.jsp</result>
+		   <result name="success">adminsuccess.jsp</result>
+			<result name="loginsuccess">findreason.jsp</result>
+			<result name="loginerror">/userloginerror.jsp</result>
 			<result name="searcherror">searcherror.jsp</result>
 			<result name="addnullerror">/addnullerror.jsp</result>
 			<result name="adderror">/useradderror.jsp</result>
+			<result name="altersuccess">userupdatesuccess.jsp</result>
+			<result name="altererror">useraltererror.jsp</result>
+			<result name="nullpass">usernullpass.jsp</result>
 		</action>
 		
 		
-	    <action name="alteraction" class="alterAction">
-			<result name="success">updatesuccess.jsp</result>
-			<result name="error">altererror.jsp</result>
-			<result name="nullpass">nullpass.jsp</result>
-		</action>
-		
+	   
 		
 	    <action name="ruleaction" class="ruleAction">
 			<result name="success">ruleadd.jsp</result>
@@ -29,9 +29,11 @@
 		</action>
 		
 		
-		<action name="adminaction" class="adminAction" >
+		<action name="adminaction" class="adminAction"  >
 			<result name="success">/adminsuccess.jsp</result>
-			
+			<result name="altersuccess">updatesuccess.jsp</result>
+			<result name="altererror">altererror.jsp</result>
+			<result name="nullpass">nullpass.jsp</result>
 			<result name="loginerror">/loginerror.jsp</result>
 			
 			

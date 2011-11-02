@@ -1,18 +1,26 @@
 package cn.edu.jlu.ccst.action;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
+
+
 import cn.edu.jlu.ccst.model.User;
 import cn.edu.jlu.ccst.service.MailUtil;
 import cn.edu.jlu.ccst.service.UserService;
+
 import cn.edu.jlu.ccst.dao.UserServiceImpl;
 import cn.edu.jlu.ccst.dao.UserServiceInter;
+import java.util.Map;
+
+
 
 @Component("userAction")
 @Scope("prototype")
@@ -22,6 +30,31 @@ public class UserAction extends ActionSupport {
 	private User user;
 	private List<User> userlist;
 	private UserServiceInter userServiceImpl;
+	private String newpassword;
+    private String renewpassword;
+	private String currentpassword;
+	
+	
+    public String getNewpassword() {
+		return newpassword;
+	}
+	public void setNewpassword(String newpassword) {
+		this.newpassword = newpassword;
+	}
+	public String getRenewpassword() {
+		return renewpassword;
+	}
+	public void setRenewpassword(String renewpassword) {
+		this.renewpassword = renewpassword;
+	}
+	public String getCurrentpassword() {
+		return currentpassword;
+	}
+	public void setCurrentpassword(String currentpassword) {
+		this.currentpassword = currentpassword;
+	}
+
+
 	
 	public UserServiceInter getUserServiceImpl() {
 		return userServiceImpl;
@@ -67,14 +100,18 @@ public class UserAction extends ActionSupport {
 	}
 	
 	public String execute() {
-		boolean flag;
+		User flag1;
 		userlist = userService.findall();
-		flag=userService.exits(user);
-		System.out.print(flag);
-		if(flag==true){
+		flag1=userService.exits(user);
+		System.out.print(user);
+		if(flag1==null){
 			
-		  return SUCCESS;}
-		 else return ERROR;
+		  return "loginerror";}
+		 else {
+			 ActionContext actionContext = ActionContext.getContext();
+	        Map session = actionContext.getSession();
+	        session.put("us", flag1);
+	        return "loginsuccess";}
 		
 		}
 	public String deleteUser() {
@@ -139,6 +176,34 @@ public class UserAction extends ActionSupport {
 			userlist = userService.findall();
 			return SUCCESS;
 		}
+		
+		public String alterUser () {
+			User olduser = (User) ActionContext.getContext().getSession()
+					.get("us");
+			
+			
+			if (olduser.getPassword().equals(currentpassword)) {
+				
+				if(newpassword.isEmpty())
+				{ return "nullpass";}
+				user.setPassword(newpassword);
+				user.setId(olduser.getId());
+				user.setUsername(olduser.getUsername());
+				userServiceImpl.save(user);
+				
+				
+				ActionContext actionContext = ActionContext.getContext();
+		        Map session = actionContext.getSession();
+		        session.put("us", user);
+				return "altersuccess";
+			} else {
+				
+				return 	"altererror";
+			}
+			
+			}
+		
+		
 
 	
 }
