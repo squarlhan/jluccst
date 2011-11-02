@@ -104,7 +104,7 @@ public class UserAction extends ActionSupport {
 			userlist = userService.findall();
 			userlist = this.userServiceImpl.searchUser(user);
 			if (userlist == null || userlist.size() == 0) {
-				return ERROR;
+				return "searcherror";
 			} else {
 				
 				return SUCCESS;

@@ -42,11 +42,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		textfield2.setAttribute("name","result_verb["+count1+"]");
 		textfield2.setAttribute("size","12");
 		
-		td1.innerHTML  = "现象名词: ";
+		td1.innerHTML  = "现象名词： ";
 		td1.appendChild(textfield1);
-		td2.innerHTML  = "现象动词: ";
+		td2.innerHTML  = "现象动词： ";
 		td2.appendChild(textfield2);
-		td3.innerHTML = "-";
+		
 	}
 
   function insertReason(){
@@ -75,13 +75,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		textfield3.setAttribute("name","sugg["+count2+"]");
 		textfield3.setAttribute("size","12");
 		
-		td1.innerHTML  = "原因名词: ";
+		td1.innerHTML  = "原因名词： ";
 		td1.appendChild(textfield1);
-		td2.innerHTML  = "原因动词: ";
+		td2.innerHTML  = "原因动词： ";
 		td2.appendChild(textfield2);
-		td3.innerHTML  = "规则建议: ";
+		td3.innerHTML  = "规则建议： ";
 		td3.appendChild(textfield3);
-		td4.innerHTML = "-";
+		
 	}
   
 	function deleteRecord(table){
@@ -99,24 +99,24 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
  
  
  <s:form action="ruleaction!addRule.action">
-<table   bgcolor="#82C8F2"  width="100%"  rules="rows" border="1" bordercolor="#000000" cellpadding="0" cellspacing="0">
-    <tr bgcolor="#82C8F2">
-      <td height="54" colspan="2"><div align="center"><h2>规则录入界面</h2></div></td>
+<table   "  width="100%"  rules="rows" border="1" bordercolor="#000000" cellpadding="0" cellspacing="0">
+    <tr >
+      <td height="54" colspan="2"><h2>规则录入界面</h2></div></td>
     </tr>
     <tr>
-      <td width="50%" height="35"><div align="center">规则名称：
+      <td width="50%" height="35">规则名称：
           <input name="rule.name" type="text" />
       </div></td>
       <td width="50%" height="35"> 规则备注：
       <input name="rule.memo" type="text"  />      </td>
     </tr>
     <tr>
-      <td height="56" colspan="2"><table id="adresulttable" class="list_table" bgcolor="#EDEDED" width="100%" height="100%" border="0" cellspacing="0" >
+      <td height="56" colspan="2"><table id="adresulttable"  bgcolor="#EDEDED" width="100%" height="100%" border="0" cellspacing="0" >
         <tr>
-          <td width="25%" ><div align="center">现象名词：
+          <td width="25%" >现象名词：
               <input name="result_noun[0]" type="text" size="12" />
           </div></td>
-          <td width="25%" ><div align="center">现象动词：
+          <td width="25%" >现象动词：
             <input name="result_verb[0]" type="text" size="12" />
           </div></td>
           <td width="25%">&nbsp;</td>
@@ -128,15 +128,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       </table></td>
     </tr>
     <tr>
-      <td height="45" colspan="2"><table bgcolor="#CCCCCC" id="adreasontable" class="list_table" width="100%" height="100%" border="0" cellspacing="0">
+      <td height="45" colspan="2"><table bgcolor="#CCCCCC" id="adreasontable"  width="100%" height="100%" border="0" cellspacing="0">
   <tr>
-    <td width="25%" height="80%"><div align="center">原因名词:
+    <td width="25%" height="80%">原因名词：
       <input name="reason_noun[0]" type="text" size="12" />
     </div></td>
-    <td width="25%"><div align="center">原因动词:
+    <td width="25%">原因动词：
       <input name="reason_verb[0]" type="text" size="12" />
     </div></td>
-    <td width="25%"><div align="center">规则建议:
+    <td width="25%">规则建议：
       <input name="sugg[0]" type="text" size="12" />
     </div></td>
     <td width="25%"><div align="center">
@@ -147,7 +147,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </table></td>
     </tr>
     <tr>
-      <td   bgcolor="82C8F2"height="33" colspan="2"><div align="center">
+      <td  height="33" colspan="2"><div align="center">
         <input name="Input22" type="submit" value="新建" />
         <input name="Input22" type="submit" value="取消" />
       </div></td>

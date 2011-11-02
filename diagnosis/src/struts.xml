@@ -9,8 +9,8 @@
 	<constant name="struts.objectFactory" value="spring" />  
 	<package name="struts2" extends="struts-default" namespace="/">
 		<action name="useraction" class="userAction">
-			<result name="success">adminsuccess.jsp</result>
-			<result name="error">researchusererror.jsp</result>
+			<result name="success">usersuccess.jsp</result>
+			<result name="searcherror">searcherror.jsp</result>
 			<result name="addnullerror">/addnullerror.jsp</result>
 			<result name="adderror">/useradderror.jsp</result>
 		</action>
