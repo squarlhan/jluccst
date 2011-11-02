@@ -28,7 +28,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <div id="rightmain">
 	  <h2>管理员修改信息</h2>
       <div id="login">
-<s:form action="alteraction.action">
+<s:form action="adminaction!alterAdmin.action">
 <table width="320" align="center" style="margin-left:30">
 	<tr>
 	 <td ><label>

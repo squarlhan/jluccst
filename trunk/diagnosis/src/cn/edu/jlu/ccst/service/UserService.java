@@ -12,6 +12,7 @@ import org.springframework.stereotype.Component;
 
 import cn.edu.jlu.ccst.dao.UserServiceImpl;
 import cn.edu.jlu.ccst.dao.UserServiceInter;
+import cn.edu.jlu.ccst.model.Admin;
 import cn.edu.jlu.ccst.model.User;
 @Component("userService")
 public class UserService {
@@ -45,11 +46,11 @@ public User getUser() {
 		return resultlist;
 	}
 	
-	public boolean exits(User user){
+	public User exits(User user){
 		User u1=userServiceImpl.find(user);
-		System.out.println("88888"+u1+"88888");
+		
 		if(u1!=null)
-			return true;
-		else return false;
-	}
+			return u1;
+		else return null;
+	}	
 }
