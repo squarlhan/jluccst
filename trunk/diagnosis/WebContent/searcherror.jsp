@@ -10,6 +10,12 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
+   <%if(request.getSession().getAttribute("ad")==null) 
+  { 
+  response.sendRedirect("adminlogin.jsp"); 
+   }  
+                
+   %>  
     <base href="<%=basePath%>">
     
     <title>您所查找的用户不存在</title>

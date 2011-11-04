@@ -52,5 +52,21 @@ public User getUser() {
 		if(u1!=null)
 			return u1;
 		else return null;
-	}	
+	}
+	public User findbyid(int id){
+		 return userServiceImpl.find(id);
+}
+	public User findbyusername(User user){
+		return userServiceImpl.finduser(user);
+	}
+	 public void removebyid(int id){
+		  userServiceImpl.remove(id);
+	 }
+	 public void updateuser(User user){
+		  userServiceImpl.updateUser(user);
+	 }
+	 
+	 public List<User> search(User user) {
+		 return userServiceImpl.searchUser(user);
+	 }
 }

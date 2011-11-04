@@ -9,6 +9,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
+   <%if(request.getSession().getAttribute("ad")==null) 
+  { 
+  response.sendRedirect("adminlogin.jsp"); 
+   }  
+                
+   %>  
     <base href="<%=basePath%>">
     
     <title>结果页面</title>
@@ -99,7 +105,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
  
  
  <s:form action="ruleaction!addRule.action">
-<table   "  width="100%"  rules="rows" border="1" bordercolor="#000000" cellpadding="0" cellspacing="0">
+<table    width="100%"  rules="rows" border="1" bordercolor="#000000" cellpadding="0" cellspacing="0">
     <tr >
       <td height="54" colspan="2"><h2>规则录入界面</h2></div></td>
     </tr>

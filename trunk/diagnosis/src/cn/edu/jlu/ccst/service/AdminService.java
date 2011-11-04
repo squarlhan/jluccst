@@ -3,10 +3,13 @@ package cn.edu.jlu.ccst.service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Component;
+
+import com.opensymphony.xwork2.ActionContext;
 
 
 import cn.edu.jlu.ccst.dao.AdminServiceImpl;
@@ -17,23 +20,25 @@ import cn.edu.jlu.ccst.model.User;
 public class AdminService {
 	private Admin admin;
 	private AdminServiceInter adminServiceImpl;
-
-/*	public AdminServiceImpl getUserServiceImpl() {
-		return adminServiceImpl;
-	}
-	@Resource
-	public void setUserServiceImpl(UserServiceImpl userServiceImpl) {
-		this.userServiceImpl = userServiceImpl;
-	}
-	 
-public User getUser() {
-		return user;
-	}
+	private String newpassword;
 	
-	public void setUser(User user) {
-		this.user = user;
-	}*/
+	private String renewpassword;
+	private String currentpassword;
+	
 
+
+	public String getRenewpassword() {
+		return renewpassword;
+	}
+	public void setRenewpassword(String renewpassword) {
+		this.renewpassword = renewpassword;
+	}
+	public String getCurrentpassword() {
+		return currentpassword;
+	}
+	public void setCurrentpassword(String currentpassword) {
+		this.currentpassword = currentpassword;
+	}
 	public Admin getAdmin() {
 		return admin;
 	}
@@ -71,8 +76,7 @@ public User getUser() {
 			return u1;
 		else return null;
 	}	
-		
-  
+	
    
 	
 	

@@ -60,6 +60,24 @@ public class UserServiceImpl implements UserServiceInter {
 		return em;
 	}
   
+	public User finduser(User user) {
+		Query query = getEntityManager().createQuery("select u FROM User u where u.username =  '"+user.getUsername()+"'");
+		@SuppressWarnings("unchecked")
+		List<User> results= query.getResultList();
+		System.out.println(results);
+		if(results.size()<1)
+			return null;
+		else{
+			System.out.println(((User) results.get(0)).getId());
+			
+			
+			return (User) results.get(0);//User re=em.find(User.class, user);
+		}
+		//System.out.println(user.getId());
+		//return re;
+		//return em.find(User.class, user);
+		
+	}
 	
 	public User find(User user) {
 		Query query = getEntityManager().createQuery("select u FROM User u where u.username =  '"+user.getUsername()+"' and u.password='"+ user.getPassword()+"'");
