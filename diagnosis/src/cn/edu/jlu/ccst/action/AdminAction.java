@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 import com.opensymphony.xwork2.ActionSupport;
 
-import cn.edu.jlu.ccst.dao.AdminServiceInter;
+
 import cn.edu.jlu.ccst.model.Admin;
 import cn.edu.jlu.ccst.service.MailUtil;
 import cn.edu.jlu.ccst.service.AdminService;
@@ -33,7 +33,7 @@ public class AdminAction extends ActionSupport {
 
 	private String renewpassword;
 	private String currentpassword;
-	private AdminServiceInter adminServiceImpl;
+	
 
 	
 	private AdminService adminService; 
@@ -57,13 +57,6 @@ public class AdminAction extends ActionSupport {
 	}
 	public void setCurrentpassword(String currentpassword) {
 		this.currentpassword = currentpassword;
-	}
-	public AdminServiceInter getAdminServiceImpl() {
-		return adminServiceImpl;
-	}
-	@Resource
-	public void setAdminServiceImpl(AdminServiceInter adminServiceImpl) {
-		this.adminServiceImpl = adminServiceImpl;
 	}
 
 
@@ -138,13 +131,13 @@ public class AdminAction extends ActionSupport {
 		
 		
 		if (oldadmin.getPassword().equals(currentpassword)) {
-			System.out.println("7777"+newpassword+"99999999");
+			
 			if(newpassword.isEmpty())
 			{ return "nullpass";}
 			admin.setPassword(newpassword);
 			admin.setId(oldadmin.getId());
 			admin.setUsername(oldadmin.getUsername());
-			adminServiceImpl.save(admin);
+			 adminService.save(admin);
 			
 			
 			ActionContext actionContext = ActionContext.getContext();

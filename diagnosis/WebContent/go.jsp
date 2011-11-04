@@ -7,6 +7,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
+   <%if(request.getSession().getAttribute("us")==null) 
+  { 
+  response.sendRedirect("userlogin.jsp"); 
+   }  
+                
+   %>  
    <%//if(request.getSession().getAttribute("session_admin")==null) 
   //{ 
  // response.sendRedirect("adminlogin.jsp"); 

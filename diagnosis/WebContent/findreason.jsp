@@ -8,6 +8,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
+   <%if(request.getSession().getAttribute("us")==null) 
+  { 
+  response.sendRedirect("userlogin.jsp"); 
+   }  
+                
+   %>  
     <base href="<%=basePath%>">
     
     <title>净水厂设备诊断专家系统</title>
@@ -24,7 +30,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <body>
   <div id="rightmain">
 	
-	  <div style="color: green;"> <strong><s:property value="#session.ad.username"/>:</strong>  您好
+	  <div style="color: green;"> <strong><s:property value="#session.us.username"/>:</strong>  您好
     <p class="STYLE1"><a href="usershow.jsp">修改个人信息</a></p></div><br>
 <div id="login">
 <s:form action="adminaction.action">

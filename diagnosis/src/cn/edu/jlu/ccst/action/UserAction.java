@@ -16,8 +16,7 @@ import cn.edu.jlu.ccst.model.User;
 import cn.edu.jlu.ccst.service.MailUtil;
 import cn.edu.jlu.ccst.service.UserService;
 
-import cn.edu.jlu.ccst.dao.UserServiceImpl;
-import cn.edu.jlu.ccst.dao.UserServiceInter;
+
 import java.util.Map;
 
 
@@ -29,7 +28,7 @@ public class UserAction extends ActionSupport {
 	private UserService userService; 
 	private User user;
 	private List<User> userlist;
-	private UserServiceInter userServiceImpl;
+	
 	private String newpassword;
     private String renewpassword;
 	private String currentpassword;
@@ -56,13 +55,6 @@ public class UserAction extends ActionSupport {
 
 
 	
-	public UserServiceInter getUserServiceImpl() {
-		return userServiceImpl;
-	}
-	@Resource
-	public void setUserServiceImpl(UserServiceInter userServiceImpl) {
-		this.userServiceImpl = userServiceImpl;
-	}
 
 	private MailUtil mailUtil;
 
@@ -115,9 +107,9 @@ public class UserAction extends ActionSupport {
 		
 		}
 	public String deleteUser() {
-		
-		   user =this.userServiceImpl.find(user.getId());
-		   this.userServiceImpl.remove(user.getId());
+		    
+		   user =this.userService.findbyid(user.getId());
+		   this.userService.removebyid(user.getId());
 		   userlist = userService.findall();
 			return SUCCESS;
 
@@ -125,21 +117,17 @@ public class UserAction extends ActionSupport {
 		
 
 	public String chUser() {                   //密码重置
-			user = this.userServiceImpl.find(user.getId());
+			user = this.userService.findbyid(user.getId());
 			user.setPassword((user.getJid()));
 			
-			this.userServiceImpl.updateUser(user);
+			this.userService.updateuser(user);
 			userlist = userService.findall();
 			return SUCCESS;
 
 		}
 	public String searchUser() {
-
-			/*
-			 * user.setUsername(this.getUsername()); user.setPhone(phone);
-			 */
 			userlist = userService.findall();
-			userlist = this.userServiceImpl.searchUser(user);
+			userlist = this.userService.search(user);
 			if (userlist == null || userlist.size() == 0) {
 				return "searcherror";
 			} else {
@@ -150,11 +138,9 @@ public class UserAction extends ActionSupport {
 
 
 	public String  addUser() {
-			/*if(userService.exits(user.getUsername())){
-				return ERROR;
-			}*/
+			
 		
-			if(userServiceImpl.find(user)!=null){
+			if(userService.findbyusername(user)!=null){
 				
 				return "adderror";
 			}
@@ -189,7 +175,7 @@ public class UserAction extends ActionSupport {
 				user.setPassword(newpassword);
 				user.setId(olduser.getId());
 				user.setUsername(olduser.getUsername());
-				userServiceImpl.save(user);
+				userService.save(user);
 				
 				
 				ActionContext actionContext = ActionContext.getContext();

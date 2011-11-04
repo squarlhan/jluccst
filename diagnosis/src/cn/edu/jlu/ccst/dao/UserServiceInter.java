@@ -15,6 +15,7 @@ public interface UserServiceInter {
 	public User find(User user);
 	public void updateUser(User user); 
 	public User find(int id);
+	public User finduser(User user);
 	public List<User> searchUser(User user);
 	
 	
