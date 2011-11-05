@@ -8,12 +8,12 @@ import javax.persistence.Query;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import cn.edu.jlu.ccst.model.Backward;
+import cn.edu.jlu.ccst.model.BackwardandResult;
 
 
-@Component("ruleServiceImpl")
+@Component("rulebrServiceImpl")
 @Transactional
-public class RuleServiceImpl implements RuleServiceInter{
+public class RuleBRServiceImpl implements RuleBRServiceInter{
 	private EntityManager em;
 
 	@PersistenceContext
@@ -22,8 +22,8 @@ public class RuleServiceImpl implements RuleServiceInter{
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Backward> findAll() {
-		Query query = getEntityManager().createQuery("select b FROM Backward b");
+	public List<BackwardandResult> findAll() {
+		Query query = getEntityManager().createQuery("select b FROM BackwardandResult b");
 		return query.getResultList();
 	}
 	
@@ -31,29 +31,24 @@ public class RuleServiceImpl implements RuleServiceInter{
 	
 
 
-	public void save(Backward backward) {
-		if (backward.getBid() <= 0) {
+	public void save(BackwardandResult backwardandresult) {
+		if (backwardandresult.getId() <= 0) {
 			// new
-			em.persist(backward);
+			em.persist(backwardandresult);
 		} else {
 			// update
-			em.merge(backward);
+			em.merge(backwardandresult);
 		}
 	}
 
-	public void remove(int bid) {
-		Backward backward = find(bid);
-		if (backward != null) {
-			em.remove(backward);
-		}
-	}
+	
 
 	private EntityManager getEntityManager() {
 		return em;
 	}
 
-	public Backward find(int bid) {
-		return em.find(Backward.class, bid);
+	public BackwardandResult find(int id) {
+		return em.find(BackwardandResult.class,id);
 	}
 
 }

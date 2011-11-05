@@ -13,6 +13,8 @@ public interface RuleServiceInter {
 	public void remove(int id);
 
 	public Backward find(int id);
+
+
 	
 
 }

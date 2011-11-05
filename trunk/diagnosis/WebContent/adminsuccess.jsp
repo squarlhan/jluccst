@@ -13,9 +13,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    }  
                 
    %>  
+  
+   
     <base href="<%=basePath%>">
     
     <title>结果页面</title>
+    
       <script type="text/javascript">
     	function confirmDel(){
 			return confirm("确定删除？");
@@ -46,25 +49,27 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <body>
 
     <div style="color: green;"> <strong><s:property value="#session.ad.username"/>:</strong>  您好
-    <p class="STYLE1"><a href="adminshow.jsp">修改个人信息</a></p></div><br>
-  
-  <table bordercolor="#4A708B" rules="all"  id="mytable" class="list_table" align="center" width="100%">
+         <br><a href="adminshow.jsp"><U>修改个人信息</U></a></p></div>
+   <a href="adminaction!logoff.action"><U>注销登录</U></a>
+  <table bordercolor="#FFFFFF" rules="all"  id="mytable" class="list_table" align="center" width="100%" >
 		<tr bgcolor="#4A708B">
 		    <th>USERNAME</th>
 			<th>NAME</th>
 			<th>EMAIL</th>
 			<th>PHONE</th>
 			<th>JID</th>
+			<th>DEPT</th>
 			<th>管理员操作</th>
 	  </tr>
     <s:iterator id="users" value="userlist" status="index1">
        
-     <tr  align="center"  bordercolor="#000000" rules="all" bgcolor="<s:if test="#index1.odd == true">#ffffff</s:if><s:else>#EDEDED</s:else>">
+     <tr  align="center"  bordercolor="#FFFFFF" rules="all" bgcolor="<s:if test="#index1.odd == true">#ffffff</s:if><s:else>#EDEDED</s:else>" style="color: Black; ">
        <td><s:property value="username"/></td>
        <td><s:property value="name"/></td>
        <td><s:property value="email"/></td>
         <td><s:property value="phone"/></td>
        <td><s:property value="jid"/></td>
+       <td><s:property value="dept"/></td>
       <td width="200" height="35">
 						
 							<s:a href="useraction!chUser?user.id=%{#users.id}" onclick="return confirmReset();">重置密码</s:a>

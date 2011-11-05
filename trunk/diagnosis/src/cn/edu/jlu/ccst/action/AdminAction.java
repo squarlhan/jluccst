@@ -150,7 +150,12 @@ public class AdminAction extends ActionSupport {
 		}
 		
 		}
-	
+	public String logoff() {
+		ActionContext.getContext().getSession().remove("ad");
+		
+		System.out.println("注销成功！");
+		return "logoffsuccess";
+	}
 	
 
 
