@@ -31,27 +31,29 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <div id="rightmain">
 	
 	  <div style="color: green;"> <strong><s:property value="#session.us.username"/>:</strong>  您好
-    <p class="STYLE1"><a href="usershow.jsp">修改个人信息</a></p></div><br>
+    <p class="STYLE1"><a href="usershow.jsp"><U>修改个人信息</U></a><br></p></div><br>
+     <a href="useraction!logoff.action"><U>注销登录</U></a>
 <div id="login">
 <s:form action="adminaction.action">
 
 <table width="300" align="center" style="margin-left:30">
 	<tr>
 	<td >
-	 请选择故障设备名称：
+	故障设备名称：
+	 
 	    <select name="select" size="1">
-	      <option>故障设备名称1</option>
-	      <option>故障设备名称2</option>
-	      <option>故障设备名称3</option>
+	     <s:iterator id="backs" value="backwardandResultlist1" status="index1">
+	      <option><s:property /></option>
+	      </s:iterator>
 	      </select>
 	    </td>
 	</tr>
 	<tr>
-	<td >请选择故障设备现象：
+	<td >故障设备现象：
 	  <select name="select" size="1">
-	    <option>故障设备现象1</option>
-	    <option>故障设备现象2</option>
-	    <option>故障设备现象3</option>
+	       <s:iterator id="backs" value="backwardandResultlist2" status="index1">
+	      <option><s:property /></option>
+	      </s:iterator>
 	    </select>
 	  </td>
 	</tr>

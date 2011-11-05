@@ -1,7 +1,9 @@
 package cn.edu.jlu.ccst.action;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.annotation.Resource;
 
@@ -87,6 +89,7 @@ public class RuleAction extends ActionSupport {
 	public String execute() {
 		
 		backlist = ruleService.findAll();
+		
 		ActionContext.getContext().getSession().put("backs", backlist);
 		return SUCCESS;
 		}
@@ -115,7 +118,10 @@ public class RuleAction extends ActionSupport {
 		backlist = ruleService.findAll();
 		return SUCCESS;
 	}
-
+	public String  backList() {
+		backlist = ruleService.findAll();
+		return SUCCESS;
+	}
 	
 
 }
