@@ -5,6 +5,7 @@
 	</excludes>
 	<decorator name="user" page="maindecorator.jsp">
 		<pattern>/user*</pattern>
+		<pattern>/rule*</pattern>
 	</decorator>
 	<decorator name="admin" page="admindecorator.jsp">
 		<pattern>/admin*</pattern>

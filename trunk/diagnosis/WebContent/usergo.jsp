@@ -60,11 +60,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<th>相关建议</th>
 			
 	  </tr>
-    <s:iterator id="users" value="userlist" status="index1">
+    <s:iterator id="reasons" value="reasonlist" status="index1">
        
      <tr  align="center"  bordercolor="#000000" rules="all" bgcolor="<s:if test="#index1.odd == true">#ffffff</s:if><s:else>#EDEDED</s:else>">
-       <td><s:property value="reason"/></td>
-       <td><s:property value="adwive"/></td>
+       <td><s:property value="reason"/><s:property value="verb"/></td>
+       <td><s:property value="sugg"/></td>
       
      
      </tr>
