@@ -100,17 +100,25 @@ public class RuleAction extends ActionSupport {
 		for(int i = 0 ;i<=result_noun.size()-1;i++){
 			BackwardandResult brt  = new BackwardandResult();
 			brt.setBid(rule);
-			brt.setNouns(result_noun.get(i));
-			brt.setVerb(result_verb.get(i));
-			bresult.add(brt);
+			brt.setNouns(result_noun.get(i).trim());
+			brt.setVerb(result_verb.get(i).trim());
+			if(result_noun.get(i).trim().length()>0&&result_verb.get(i).trim().length()>0){
+				bresult.add(brt);
+			}
+			
 		}
 		for(int i = 0 ;i<=reason_noun.size()-1;i++){
 			BackwardandReason brs  = new BackwardandReason();
 			brs.setBid(rule);
-			brs.setNouns(reason_noun.get(i));
-			brs.setVerb(reason_verb.get(i));
-			brs.setSugg(sugg.get(i));
-			breason.add(brs);
+			brs.setNouns(reason_noun.get(i).trim());
+			brs.setVerb(reason_verb.get(i).trim());
+			brs.setSugg(sugg.get(i).trim());
+			if(reason_noun.get(i).trim().length()>0&&
+					reason_verb.get(i).trim().length()>0&&
+					sugg.get(i).trim().length()>0){
+				breason.add(brs);
+			}
+			
 		}
 		rule.setReasons(breason);
 		rule.setResults(bresult);
