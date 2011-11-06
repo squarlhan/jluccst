@@ -18,13 +18,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <base href="<%=basePath%>">
     
     <title>净水厂设备诊断专家系统</title>
-       <script type="text/javascript">
-    	function confirmAdd(){
-    		
-			return confirm("确认要增加吗？");
-			
-    	}
-    </script>
+       
     
    
 	<meta http-equiv="pragma" content="no-cache">
@@ -40,7 +34,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <body>
   <div id="rightmain">
 	  <h2>查找用户</h2>
-	   <p align="right" style="margin-right:100"><a href="adminaction!logoff.action"><u>注销登录</u></a></p>
+	 
 <div id="login">
 <s:form action="adminuseraction!searchUser.action">
 <table width="200" align="center" style="margin-left:30">
@@ -52,7 +46,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<td align="center"><s:textfield size="17" label="姓名" name="user.name" /></td>
 	</tr>
 	<tr>
-	<td align="center"><s:textfield size="17" label="email" name="user.email" /></td>
+	<td align="center"><s:textfield size="17" label="电子邮箱" name="user.email" /></td>
 	</tr>
 	<tr>
 	<td align="center"><s:textfield size="17" label="电话" name="user.phone" /></td>

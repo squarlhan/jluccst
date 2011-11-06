@@ -35,7 +35,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	   
 
 <s:form action="adminaction.action">
-<p align="right"><a href="useraction!logoff.action"><u>注销登录</u></a></p>
+
    <p>&nbsp;</p>
   <table width=810 border="2"  cellspacing="0" class="list_table" style="color: Gray; ">
     
@@ -187,7 +187,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
  <table width=800   cellspacing="0"  style="color: Gray; ">
   <tr>
       <td colspan="6"><div align="center">
-        <input type="submit" name="Submit" value="确定" />
+        <input type="reset" name="Submit" value="确定" />
         <input type="reset" name="Submit2" value="取消" />
       </div></td>
     </tr>

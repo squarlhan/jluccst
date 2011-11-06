@@ -32,7 +32,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <body>
   <div id="rightmain">
 	  <h2>管理员修改信息</h2>
-	   <p align="right" style="margin-right:100"><a href="adminaction!logoff.action"><u>注销登录</u></a></p>
+	 
       <div id="login">
 <s:form action="adminaction!alterAdmin.action">
 <table width="320" align="center" style="margin-left:30">
@@ -63,12 +63,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<tr>
 	
 	 <td align="center"><label>
-	    <s:textfield name="admin.email" key="email" value="%{#session.ad.email}" />
+	    <s:textfield name="admin.email" key="电子邮箱" value="%{#session.ad.email}" />
 	    </label></td>
 	  </tr>
 	<tr>
 	 <td align="center"><label>
-	    <s:textfield name="admin.jid" key="jid" value="%{#session.ad.jid}" />
+	    <s:textfield name="admin.jid" key="工作号" value="%{#session.ad.jid}" />
 	    </label></td>
 	  </tr>
 	<tr>

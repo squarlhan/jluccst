@@ -45,9 +45,9 @@
 			
 		</action>
 		<action name="adminuseraction" class="userAction">
-		
-		   <result name="success">adminsuccess.jsp</result>
-			
+		 <result name="deletesuccess">adminresetsuccess.jsp</result>
+		   <result name="resetsuccess">adminresetsuccess.jsp</result>
+			<result name="success">adminsuccess.jsp</result>
 			<result name="searcherror">adminsearcherror.jsp</result>
 			<result name="addnullerror">adminaddnullerror.jsp</result>
 			<result name="adderror">adminadderror.jsp</result>
