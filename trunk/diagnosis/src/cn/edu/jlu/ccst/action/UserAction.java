@@ -160,7 +160,7 @@ public class UserAction extends ActionSupport {
 		   user =this.userService.findbyid(user.getId());
 		   this.userService.removebyid(user.getId());
 		   userlist = userService.findall();
-			return SUCCESS;
+			return "deletesuccess";
 
 		}
 		
@@ -171,7 +171,7 @@ public class UserAction extends ActionSupport {
 			
 			this.userService.updateuser(user);
 			userlist = userService.findall();
-			return SUCCESS;
+			return "resetsuccess";
 
 		}
 	public String searchUser() {

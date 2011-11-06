@@ -50,17 +50,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
      <div id="rightmain">
 	  <h2>管理用户</h2>
-	 <p align="right" style="margin-right:30"><a href="adminaction!logoff.action"><u>注销登录</u></a></p>
+	
      
  
   <table bordercolor="#FFFFFF" rules="all"  id="mytable" class="list_table" align="center" width="100%" >
 		<tr bgcolor="#4A708B">
-		    <th>USERNAME</th>
-			<th>NAME</th>
-			<th>EMAIL</th>
-			<th>PHONE</th>
-			<th>JID</th>
-			<th>DEPT</th>
+		    <th>用户名</th>
+			<th>姓名</th>
+			<th>电子邮箱</th>
+			<th>电话</th>
+			<th>工作号</th>
+			<th>部门</th>
 			<th>管理员操作</th>
 	  </tr>
     <s:iterator id="users" value="userlist" status="index1">

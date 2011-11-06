@@ -32,7 +32,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <body>
     <div style="color: red;">修改成功</div><br>
    <p> 用户名:  <s:property value="#session.ad.username"/></p>
-   <p>email:  <s:property value="#session.ad.email"/></p>
+   <p>电子邮箱:  <s:property value="#session.ad.email"/></p>
    <p>工作号:   <s:property value="#session.ad.jid"/></p>
    <p>电话 :    <s:property value="#session.ad.phone"/></p>
    <p>部门:    <s:property value="#session.ad.dept"/></p>

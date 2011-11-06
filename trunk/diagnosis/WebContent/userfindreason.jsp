@@ -33,13 +33,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <table width="80%" height="77" border="0" cellspacing="0">
       <tr>
         <td><div style="color: green;"> 
-          <div align="right"><strong>
+          <strong>
             <s:property value="#session.us.username"/>
             :</strong> 您好
           </div>
        
         </div>
-        <p align="right"><a href="useraction!logoff.action"><u>注销登录</u></a></p></td>
+     
       </tr>
     </table>
     <p class="STYLE1"><br>
