@@ -164,23 +164,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </table>
 </s:form>
   
-  <div style="float:left; margin-right: 50px;">
-            <sx:tree label="parent" id="parentId"  templateCssPath="/struts/tree.CSS"
-                showRootGrid="true" showGrid="true" treeSelectedTopic="treeSelected">
-                <s:iterator value="backlist">
-                    <sx:treenode  label="%{name}">
-                        <s:iterator value="results">
-                            <sx:treenode  label="%{nouns} %{verb}">
-                                 <s:iterator value="reasons">
-                                     <sx:treenode  label="%{nouns} %{verb} : %{sugg} " >
-                                     </sx:treenode>
-                                 </s:iterator>
-                            </sx:treenode>
-                         </s:iterator>
-                     </sx:treenode>
-                </s:iterator>
-            </sx:tree>
-        </div>
 
  
   </body>
