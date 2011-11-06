@@ -41,6 +41,16 @@
 			
 			
 		</action>
+		<action name="adminuseraction" class="userAction">
+		
+		   <result name="success">adminsuccess.jsp</result>
+			
+			<result name="searcherror">usersearcherror.jsp</result>
+			<result name="addnullerror">/useraddnullerror.jsp</result>
+			<result name="adderror">/useradderror.jsp</result>
+			
+		</action>
+		
 	</package>
 
 </struts>

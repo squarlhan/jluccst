@@ -107,7 +107,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
  <s:form action="ruleaction!addRule.action">
 <table    width="100%"  rules="rows" border="1" bordercolor="#000000" cellpadding="0" cellspacing="0">
     <tr >
-      <td height="54" colspan="2"><h2>规则录入界面</h2></div></td>
+      <td height="54" colspan="2"><h2>规则录入界面</h2></div>
+       <p align="right"><a href="useraction!logoff.action"><u>注销登录</u></p></td>
+      
     </tr>
     <tr>
       <td  height="35" style="width: 200px; "><div align="left" >规则名称：

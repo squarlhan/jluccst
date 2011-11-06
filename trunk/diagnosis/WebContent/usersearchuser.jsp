@@ -40,8 +40,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <body>
   <div id="rightmain">
 	  <h2>查找用户</h2>
+	   <p align="right" style="margin-right:100"><a href="adminaction!logoff.action"><u>注销登录</u></a></p>
 <div id="login">
-<s:form action="useraction!searchUser.action">
+<s:form action="adminuseraction!searchUser.action">
 <table width="200" align="center" style="margin-left:30">
 	<tr>
 	<td align="center"><s:textfield size="15" label="用户名" name="user.username" /></td>
@@ -74,7 +75,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<td width="80" align="center"> <s:reset value="取消"
 		theme="simple" /></td></tr>
 		<tr>
-				 <td  align="center" height="33" colspan="2" bgcolor="#FFFFFF"><s:a href="useraction!userList.action"> 
+				 <td  align="center" height="33" colspan="2" ><s:a href="adminuseraction!userList.action"> 
 						   <div align="center" class="STYLE1"><U>返回用户列表</U></div>
 				  </s:a>		</td>
 			  </tr></table>

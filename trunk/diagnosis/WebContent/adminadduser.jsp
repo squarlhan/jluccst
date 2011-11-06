@@ -40,6 +40,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <body>
   <div id="rightmain">
 	  <h2>添加新用户</h2>
+	   <p align="right" style="margin-right:100"><a href="adminaction!logoff.action"><u>注销登录</u></a></p>
 <div id="login">
 <s:form action="useraction!addUser.action">
 <table width="200" align="center" style="margin-left:30">

@@ -33,9 +33,9 @@
   
   <body>
     <div style="color: red;">您所查找的用户不存在</div><br>
+      <p align="right" style="margin-right:100"><a href="adminaction!logoff.action"><u>注销登录</u></a></p>
      
-     
-     <s:a href="useraction!userList.action"> 
+     <s:a href="adminuseraction!userList.action"> 
 						   <div align="center" class="STYLE1"><U>返回用户列表</U></div></s:a>
   </body>
 </html>
