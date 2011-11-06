@@ -48,18 +48,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <body>
 
-   <table width="100%" height="77" border="0" cellspacing="0">
-      <tr>
-        <td><div style="color: green;"> 
-          <div align="right"><strong>
-            <s:property value="#session.ad.username"/>
-            :</strong> 您好
-          </div>
-       
-        </div>
-        <p align="right"><a href="adminaction!logoff.action"><u>注销登录</u></a></p></td>
-      </tr>
-    </table>
+     <div id="rightmain">
+	  <h2>管理用户</h2>
+	 <p align="right" style="margin-right:30"><a href="adminaction!logoff.action"><u>注销登录</u></a></p>
+     
  
   <table bordercolor="#FFFFFF" rules="all"  id="mytable" class="list_table" align="center" width="100%" >
 		<tr bgcolor="#4A708B">
@@ -74,12 +66,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <s:iterator id="users" value="userlist" status="index1">
        
      <tr  align="center"  bordercolor="#FFFFFF" rules="all" bgcolor="<s:if test="#index1.odd == true">#ffffff</s:if><s:else>#EDEDED</s:else>" style="color: Black; ">
-       <td><s:property value="username"/></td>
-       <td><s:property value="name"/></td>
-       <td><s:property value="email"/></td>
-        <td><s:property value="phone"/></td>
-       <td><s:property value="jid"/></td>
-       <td><s:property value="dept"/></td>
+       <td><s:property value="username"/>&nbsp;</td>
+       <td><s:property value="name"/>&nbsp;</td>
+       <td><s:property value="email"/>&nbsp;</td>
+        <td><s:property value="phone"/>&nbsp;</td>
+       <td><s:property value="jid"/>&nbsp;</td>
+       <td><s:property value="dept"/>&nbsp;</td>
       <td width="200" height="35">
 						
 							<s:a href="adminuseraction!chUser?user.id=%{#users.id}" onclick="return confirmReset();">重置密码</s:a>

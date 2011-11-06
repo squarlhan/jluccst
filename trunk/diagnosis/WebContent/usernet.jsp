@@ -36,8 +36,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
    <body>
   <form id="form1" name="form1" method="post" action="">
-  <p align="center" class="STYLE1"><h2>前馈型神经网络</h2></p>
-  <table width="100%" height="247" border="2" bordercolor="#000000" align="center" cellspacing="0">
+  <p align="center"><h2>前馈型神经网络</h2></p>
+  <table width="100%" height="247" border="20" bordercolor="#000000" align="center" cellspacing="0">
     <tr>
       <td height="20"><strong>请输入层数：</strong>
         <input type="text" name="textfield" />      </td>
@@ -45,7 +45,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <tr>
       <td height="114"><table width="100%" height="126" border="0" cellspacing="0">
         <tr>
-          <td height="22" colspan="9" bgcolor="#0C95CF"><div align="center"><strong>参数设置</strong></div></td>
+          <td height="22" colspan="9" bgcolor="#4A708B"><div align="center"><strong>参数设置</strong></div></td>
           </tr>
         <tr>
           <td><div align="center">网数：            
@@ -92,7 +92,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <tr>
       <td height="77"><table width="100%" height="72" border="0" cellspacing="0">
         <tr>
-          <td height="27" colspan="4" bgcolor="#0C95CF"><div align="center"><strong>操作&nbsp;&nbsp;
+          <td height="27" colspan="4" bgcolor="#4A708B"><div align="center"><strong>操作&nbsp;&nbsp;
             </strong>
             <select name="select" size="1">
               <option>BP</option>

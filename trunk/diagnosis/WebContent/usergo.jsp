@@ -74,7 +74,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <div align="center">
        
       
-      <input name="button" type=button onClick="window.location.href('userfindreason.jsp')" value="完成返回">
+      <input name="button" type=button onClick="window.location.href('rulebraction.action')" value="完成返回">
       </div>
   </body>
 </html>
