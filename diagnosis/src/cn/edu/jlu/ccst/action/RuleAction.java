@@ -24,7 +24,8 @@ public class RuleAction extends ActionSupport {
 
 	
 	private RuleService ruleService; 
-	
+	private BackwardandResult  result;
+	private List<BackwardandReason> reasonlist;
 	
 	
 	private List<Backward> backlist;
@@ -56,6 +57,18 @@ public class RuleAction extends ActionSupport {
 		this.ruleService = ruleService;
 	}
 	
+	public BackwardandResult getResult() {
+		return result;
+	}
+	public void setResult(BackwardandResult result) {
+		this.result = result;
+	}
+	public List<BackwardandReason> getReasonlist() {
+		return reasonlist;
+	}
+	public void setReasonlist(List<BackwardandReason> reasonlist) {
+		this.reasonlist = reasonlist;
+	}
 	public List<String> getReason_noun() {
 		return reason_noun;
 	}
@@ -86,12 +99,11 @@ public class RuleAction extends ActionSupport {
 	public void setSugg(List<String> sugg) {
 		this.sugg = sugg;
 	}
-	public String execute() {
-		
-		backlist = ruleService.findAll();
-		
-		ActionContext.getContext().getSession().put("backs", backlist);
-		return SUCCESS;
+	public String execute() {		
+		List<BackwardandResult> temp = new ArrayList();
+		temp.add(result);
+		reasonlist=ruleService.findreasons(temp);
+		return "go";
 		}
 	
 	public String addRule(){

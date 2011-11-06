@@ -27,6 +27,7 @@
 	    <action name="ruleaction" class="ruleAction">
 			<result name="success">userruleadd.jsp</result>
 			<result name="brsuccess">userfindreason.jsp</result>
+			<result name="go">usergo.jsp</result>
 		</action>
 		
 		

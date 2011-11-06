@@ -39,14 +39,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </p>
     </div><br>
 	  <div id="login">
-<s:form action="adminaction.action">
+<s:form action="ruleaction">
 
 <table width="300" align="center" style="margin-left:30">
 	<tr>
 	<td >
 	故障设备名称：
 	 
-	    <select name="select" size="1">
+	    <select name="result.nouns" size="1">
 	     <s:iterator id="backs" value="backwardandResultlist1" status="index1">
 	      <option><s:property /></option>
 	      </s:iterator>
@@ -55,7 +55,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</tr>
 	<tr>
 	<td >故障设备现象：
-	  <select name="select" size="1">
+	  <select name="result.verb" size="1">
 	       <s:iterator id="backs" value="backwardandResultlist2" status="index1">
 	      <option><s:property /></option>
 	      </s:iterator>
@@ -66,9 +66,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<br/>
 	<table width="300" align="center" style="margin-left:10">
 	<tr>
-	<td width="80" ><input type="button" onClick="window.location.href('userstepbystep.jsp')"  value="按步查找" /></td>
-	
-	<td width="80"> <input type="button" onClick="window.location.href('usergo.jsp')" value="直接查找" /></td>
+	<td width="80" ><s:submit value="开始推理" /></td>
 	</tr></table>
 </s:form></div>
 </div>

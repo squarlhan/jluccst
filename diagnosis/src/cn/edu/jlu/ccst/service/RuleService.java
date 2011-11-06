@@ -16,11 +16,18 @@ import cn.edu.jlu.ccst.model.*;
 public class RuleService {
 	
 	private Backward backward;
-	
+	private InferenceEngine inferenceEngine;
 	private RuleServiceInter ruleServiceImpl;
 
 	
 
+	public InferenceEngine getInferenceEngine() {
+		return inferenceEngine;
+	}
+	@Resource
+	public void setInferenceEngine(InferenceEngine inferenceEngine) {
+		this.inferenceEngine = inferenceEngine;
+	}
 	public Backward getBackward() {
 		return backward;
 	}
@@ -29,11 +36,11 @@ public class RuleService {
 		this.backward = backward;
 	}
 
-	public RuleServiceInter getRuleServiceInter() {
+	public RuleServiceInter getRuleServiceImpl() {
 		return ruleServiceImpl;
 	}
 	@Resource
-	public void setRuleServiceInter(RuleServiceInter ruleServiceImpl) {
+	public void setRuleServiceImpl(RuleServiceInter ruleServiceImpl) {
 		this.ruleServiceImpl = ruleServiceImpl;
 	}
 
@@ -45,6 +52,22 @@ public class RuleService {
 	public List<Backward> findAll() {
 		List<Backward> resultlist = new ArrayList();
 		resultlist = ruleServiceImpl.findAll();
+		return resultlist;
+	}
+	public List<BackwardandReason> findreasons(List<BackwardandResult> enters) {
+		List<BackwardandReason> resultlist = new ArrayList();
+		List<BackwardandReason> process = new ArrayList();
+		for(BackwardandResult brt:enters){
+			BackwardandReason brs = new BackwardandReason();
+			brs.setNouns(brt.getNouns());
+			brs.setVerb(brt.getVerb());
+			process.add(brs);
+		}
+		inferenceEngine.setEnter(enters);
+		inferenceEngine.setProcess(process);
+		inferenceEngine.setBackwardrule(ruleServiceImpl.findAll());
+		inferenceEngine.Inference("result to reason","fulfill");
+		resultlist = inferenceEngine.getEnding();
 		return resultlist;
 	}
 }
