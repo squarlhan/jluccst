@@ -86,7 +86,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<td width="80" align="center"><s:submit value="修改" theme="simple" />
 	  <div align="center"></div></td>
 	
-	<td width="80" align="center"> <s:reset value="取消"
+	<td width="80" align="center"> <s:reset value="重置"
 		theme="simple" /></td></tr></table>
 </s:form></div>
 </div>

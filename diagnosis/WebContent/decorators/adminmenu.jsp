@@ -11,8 +11,8 @@
   </head>
   <body>
     <table align="center" width="100%" id="nav">
-          <tr align="center"><td><li><a href="/diagnosis/adminsuccess.jsp">管理用户</a></li></td></tr>
-           <tr align="center"><td><li><a href="/diagnosis/usersearchuser.jsp">查找用户</a></li></td></tr>
+          <tr align="center"><td><li><a href="adminuseraction!userList.action">管理用户</a></li></td></tr>
+           <tr align="center"><td><li><a href="/diagnosis/adminsearchuser.jsp">查找用户</a></li></td></tr>
          <tr align="center"><td><li><a href="/diagnosis/adminadduser.jsp">添加用户</a></li></td></tr>
           <tr align="center"><td><li><a href="/diagnosis/adminshow.jsp">用户信息</a></li></td></tr>
     </table> 
