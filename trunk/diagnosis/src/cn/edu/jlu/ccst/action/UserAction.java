@@ -16,7 +16,6 @@ import com.opensymphony.xwork2.ActionSupport;
 
 
 import cn.edu.jlu.ccst.model.User;
-import cn.edu.jlu.ccst.service.MailUtil;
 import cn.edu.jlu.ccst.service.UserService;
 
 import cn.edu.jlu.ccst.model.BackwardandResult;
@@ -70,18 +69,6 @@ public class UserAction extends ActionSupport {
 		this.currentpassword = currentpassword;
 	}
 
-
-	
-
-	private MailUtil mailUtil;
-
-	public MailUtil getMailUtil() {
-		return mailUtil;
-	}
-	@Resource
-	public void setMailUtil(MailUtil mailUtil) {
-		this.mailUtil = mailUtil;
-	}
 
 	public List<User> getUserlist() {
 		return userlist;

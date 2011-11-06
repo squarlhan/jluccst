@@ -11,7 +11,6 @@ import com.opensymphony.xwork2.ActionSupport;
 
 
 import cn.edu.jlu.ccst.model.Admin;
-import cn.edu.jlu.ccst.service.MailUtil;
 import cn.edu.jlu.ccst.service.AdminService;
 
 import java.util.Map;
@@ -38,7 +37,6 @@ public class AdminAction extends ActionSupport {
 	
 	private AdminService adminService; 
 	private Admin admin;
-	private MailUtil mailUtil;
 	
 	public String getNewpassword() {
 		return newpassword;
@@ -57,17 +55,6 @@ public class AdminAction extends ActionSupport {
 	}
 	public void setCurrentpassword(String currentpassword) {
 		this.currentpassword = currentpassword;
-	}
-
-
-
-
-	public MailUtil getMailUtil() {
-		return mailUtil;
-	}
-	@Resource
-	public void setMailUtil(MailUtil mailUtil) {
-		this.mailUtil = mailUtil;
 	}
 
 	
