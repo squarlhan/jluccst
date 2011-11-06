@@ -14,7 +14,6 @@ import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 import cn.edu.jlu.ccst.model.*;
-import cn.edu.jlu.ccst.service.MailUtil;
 import cn.edu.jlu.ccst.service.RuleService;
 import cn.edu.jlu.ccst.service.UserService;
 
