@@ -8,6 +8,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
+   <%if(request.getSession().getAttribute("us")==null) 
+  { 
+  response.sendRedirect("userlogin.jsp"); 
+   }  
+                
+   %>  
+  
+   
     <base href="<%=basePath%>">
     
     <title>净水厂设备诊断专家系统</title>
