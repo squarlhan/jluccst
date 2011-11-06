@@ -65,7 +65,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  </tr>
 	<tr>
 	 <td align="center"><label>
-	    <s:textfield name="user.jid" key="jid" value="%{#session.us.jid}" />
+	    <s:textfield name="user.jid" key="工作号" value="%{#session.us.jid}" />
 	    </label></td>
 	  </tr>
 	<tr>
