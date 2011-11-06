@@ -46,9 +46,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<tr>
 	<td align="center"><s:textfield size="15" label="用户名" name="user.username" /></td>
 	</tr>
-	<tr>
-	<td align="center"><s:password size="17" label="初始密码" name="user.password" /></td>
-	</tr>
+	
 	<tr>
 	<td align="center"><s:textfield size="17" label="姓名" name="user.name" /></td>
 	</tr>

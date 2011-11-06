@@ -50,7 +50,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
     <div style="color: green;"> <strong><s:property value="#session.ad.username"/>:</strong>  您好
          <br><a href="adminshow.jsp"><U>修改个人信息</U></a></p></div>
-   <a href="adminaction!logoff.action"><U>注销登录</U></a>
+ 
   <table bordercolor="#FFFFFF" rules="all"  id="mytable" class="list_table" align="center" width="100%" >
 		<tr bgcolor="#4A708B">
 		    <th>USERNAME</th>
@@ -87,7 +87,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <div align="center">
       <input type=button onclick="window.location.href('adminadduser.jsp')" value="增加用户"> 
       
-      <input name="button" type=button onClick="window.location.href('searchuser.jsp')" value="查找用户">
+      <input name="button" type=button onClick="window.location.href('usersearchuser.jsp')" value="查找用户">
       </div>
   </body>
 </html>

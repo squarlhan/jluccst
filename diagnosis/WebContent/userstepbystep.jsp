@@ -8,15 +8,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
   <head>
    <%if(request.getSession().getAttribute("us")==null) 
-  { 
-  response.sendRedirect("userlogin.jsp"); 
-   }  
-                
-   %>  
-   <%//if(request.getSession().getAttribute("session_admin")==null) 
-  //{ 
- // response.sendRedirect("adminlogin.jsp"); 
- //  }  
+ { 
+  response.sendRedirect("adminlogin.jsp"); 
+  }  
                 
    %>  
     <base href="<%=basePath%>">
@@ -72,9 +66,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </table>
    
     <div align="center">
-       
+      <input type=button onclick="window.location.href('userstepbystep.jsp')" value="继续查找"> 
       
-      <input name="button" type=button onClick="window.location.href('findreason.jsp')" value="完成返回">
+      <input name="button" type=button onClick="window.location.href('userfindreason.jsp')" value="完成返回">
       </div>
   </body>
 </html>
