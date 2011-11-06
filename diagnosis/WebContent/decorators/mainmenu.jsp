@@ -14,6 +14,7 @@
           <tr align="center"><td><li><a href="/diagnosis/userruleadd.jsp">录入规则</a></li></td></tr>
          <tr align="center"><td><li><a href="#">学习规则</a></li></td></tr>
          <tr align="center"><td><li><a href="/diagnosis/userfindreason.jsp">专家系统</a></li></td></tr>
+          <tr align="center"><td><li><a href="/diagnosis/userdcs.jsp">DCS数据</a></li></td></tr>
           <tr align="center"><td><li><a href="/diagnosis/usershow.jsp">用户信息</a></li></td></tr>
     </table> 
   </body>
