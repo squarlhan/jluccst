@@ -29,11 +29,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <body>
   <div id="rightmain">
-	
-	  <div style="color: green;"> <strong><s:property value="#session.us.username"/>:</strong>  您好
-    <p class="STYLE1"><a href="usershow.jsp"><U>修改个人信息</U></a><br></p></div><br>
-     <a href="useraction!logoff.action"><U>注销登录</U></a>
-<div id="login">
+   
+      <table width="80%" height="30" border="0" cellspacing="0">
+       </div>
+        <p align="right"><a href="useraction!logoff.action"><u>注销登录</u></a></p></td>
+      </tr>
+    </table>
+    <p class="STYLE1"><br>
+    </p>
+    </div><br>
+	  <div id="login">
 <s:form action="adminaction.action">
 
 <table width="300" align="center" style="margin-left:30">
@@ -61,9 +66,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<br/>
 	<table width="300" align="center" style="margin-left:10">
 	<tr>
-	<td width="80" ><input type="button" onclick="window.location.href('stepbystep.jsp')"  value="按步查找" /></td>
+	<td width="80" ><input type="button" onClick="window.location.href('userstepbystep.jsp')"  value="按步查找" /></td>
 	
-	<td width="80"> <input type="button" onclick="window.location.href('go.jsp')" value="直接查找" /></td>
+	<td width="80"> <input type="button" onClick="window.location.href('usergo.jsp')" value="直接查找" /></td>
 	</tr></table>
 </s:form></div>
 </div>
