@@ -43,8 +43,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <body>
   <div id="rightmain">
 	  <h2>添加新用户</h2>
+	   <p align="right" style="margin-right:100"><a href="adminaction!logoff.action"><u>注销登录</u></a></p>
 <div id="login">
-<s:form action="useraction!addUser.action">
+<s:form action="adminuseraction!addUser.action">
 <table width="200" align="center" style="margin-left:30">
 	<tr>
 	<td align="center"><s:textfield size="15" label="用户名" name="user.username" /></td>

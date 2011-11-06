@@ -52,7 +52,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <body>
 
     <div style="color: green;"> <strong><s:property value="#session.ad.username"/>:</strong>  此处为前提
-    
+     <p align="right" style="margin-right:100"><a href="useraction!logoff.action"><u>注销登录</u></a></p>
   
   <table bordercolor="#4A708B" rules="all"  id="mytable" class="list_table" align="center" width="100%">
 		<tr bgcolor="#4A708B">

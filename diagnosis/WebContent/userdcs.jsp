@@ -24,8 +24,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <body>
   
 	  <h2>wwdcs数据录入界面</h2>
+	   
 
 <s:form action="adminaction.action">
+<p align="right"><a href="useraction!logoff.action"><u>注销登录</u></a></p>
    <p>&nbsp;</p>
   <table width=810 border="2"  cellspacing="0" class="list_table" style="color: Gray; ">
     

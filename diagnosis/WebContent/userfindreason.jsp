@@ -30,8 +30,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <body>
   <div id="rightmain">
    
-      <table width="80%" height="30" border="0" cellspacing="0">
-       </div>
+      <table width="80%" height="77" border="0" cellspacing="0">
+      <tr>
+        <td><div style="color: green;"> 
+          <div align="right"><strong>
+            <s:property value="#session.us.username"/>
+            :</strong> 您好
+          </div>
+       
+        </div>
         <p align="right"><a href="useraction!logoff.action"><u>注销登录</u></a></p></td>
       </tr>
     </table>
@@ -46,7 +53,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<td >
 	故障设备名称：
 	 
-	    <select name="result.nouns" size="1">
+	    <select name="result.nouns" size="1" style="width:150px">
 	     <s:iterator id="backs" value="backwardandResultlist1" status="index1">
 	      <option><s:property /></option>
 	      </s:iterator>
@@ -55,7 +62,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</tr>
 	<tr>
 	<td >故障设备现象：
-	  <select name="result.verb" size="1">
+	  <select name="result.verb" size="1" style="width:150px">
 	       <s:iterator id="backs" value="backwardandResultlist2" status="index1">
 	      <option><s:property /></option>
 	      </s:iterator>

@@ -17,6 +17,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <base href="<%=basePath%>">
     
     <title>修改成功</title>
+   
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -31,6 +32,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <body>
     <div style="color: red;">修改成功</div><br>
+     <p align="right" style="margin-right:100"><a href="useraction!logoff.action"><u>注销登录</u></a></p>
    <p> 用户名:  <s:property value="#session.us.username"/></p>
    <p>email:  <s:property value="#session.us.email"/></p>
    <p>工作号:   <s:property value="#session.us.jid"/></p>

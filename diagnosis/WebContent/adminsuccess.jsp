@@ -48,8 +48,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <body>
 
-    <div style="color: green;"> <strong><s:property value="#session.ad.username"/>:</strong>  您好
-         <br><a href="adminshow.jsp"><U>修改个人信息</U></a></p></div>
+   <table width="100%" height="77" border="0" cellspacing="0">
+      <tr>
+        <td><div style="color: green;"> 
+          <div align="right"><strong>
+            <s:property value="#session.ad.username"/>
+            :</strong> 您好
+          </div>
+       
+        </div>
+        <p align="right"><a href="adminaction!logoff.action"><u>注销登录</u></a></p></td>
+      </tr>
+    </table>
  
   <table bordercolor="#FFFFFF" rules="all"  id="mytable" class="list_table" align="center" width="100%" >
 		<tr bgcolor="#4A708B">
@@ -72,11 +82,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
        <td><s:property value="dept"/></td>
       <td width="200" height="35">
 						
-							<s:a href="useraction!chUser?user.id=%{#users.id}" onclick="return confirmReset();">重置密码</s:a>
+							<s:a href="adminuseraction!chUser?user.id=%{#users.id}" onclick="return confirmReset();">重置密码</s:a>
 
 						
 						&nbsp;
-						<s:a href="useraction!deleteUser?user.id=%{#users.id}" onclick="return confirmDel();">
+						<s:a href="adminuseraction!deleteUser?user.id=%{#users.id}" onclick="return confirmDel();">
 																						删除</s:a>
 
 	   </td>
@@ -84,10 +94,5 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
      </s:iterator>
   </table>
    
-    <div align="center">
-      <input type=button onclick="window.location.href('adminadduser.jsp')" value="增加用户"> 
-      
-      <input name="button" type=button onClick="window.location.href('usersearchuser.jsp')" value="查找用户">
-      </div>
   </body>
 </html>
