@@ -98,7 +98,7 @@ public class RuleAction extends ActionSupport {
 	public void setSugg(List<String> sugg) {
 		this.sugg = sugg;
 	}
-	public String execute() {		
+	public String execute() {
 		List<BackwardandResult> temp = new ArrayList();
 		temp.add(result);
 		reasonlist=ruleService.findreasons(temp);
