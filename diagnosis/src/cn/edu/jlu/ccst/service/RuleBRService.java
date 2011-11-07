@@ -2,7 +2,9 @@ package cn.edu.jlu.ccst.service;
 
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.annotation.Resource;
 
@@ -61,6 +63,23 @@ public class RuleBRService {
 	public List<BackwardandResult> findAll() {
 		List<BackwardandResult> resultlist = new ArrayList();
 		resultlist = rulebrServiceImpl.findAll();
+		
 		return resultlist;
 	}
+	public List<nverb> getalloptions() {
+		List<nverb> resultlist=new ArrayList();
+		
+
+	  List<String> nounses=rulebrServiceImpl.findAllnoun();
+	  
+	 for(String str:nounses){
+		 List<String> verb=rulebrServiceImpl.findAllverb(str);
+		 nverb nv=new nverb(str,verb);
+		 resultlist.add(nv);
+	 }
+	  
+		return resultlist;
+	}
+	
+	
 }
