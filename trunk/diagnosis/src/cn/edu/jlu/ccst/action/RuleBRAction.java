@@ -20,7 +20,7 @@ import cn.edu.jlu.ccst.service.UserService;
 
 import cn.edu.jlu.ccst.model.BackwardandResult;
 import cn.edu.jlu.ccst.service.RuleBRService;
-
+import cn.edu.jlu.ccst.model.nverb;
 import java.util.Map;
 
 
@@ -37,7 +37,7 @@ public class RuleBRAction extends ActionSupport {
 	
 	private List<String> backwardandResultlist1;
 	private List<String> backwardandResultlist2;
-	
+	private List<nverb> nb;
 	
 	
 	
@@ -47,6 +47,14 @@ public class RuleBRAction extends ActionSupport {
  
 	
 	
+	public List<nverb> getNb() {
+		return nb;
+	}
+
+	public void setNb(List<nverb> nb) {
+		this.nb = nb;
+	}
+
 	public List getBackwardandResultlist1() {
 		return backwardandResultlist1;
 	}
@@ -77,7 +85,9 @@ public class RuleBRAction extends ActionSupport {
 	}
 	
 	public String execute() {
-		User flag1;
+		nb=rulebrService.getalloptions();
+		return "rulesuccess";
+		/*User flag1;
 		backwardandResultlist = rulebrService.findAll();
 		Set<String> set1=new HashSet();
 		Set<String> set2=new HashSet();
@@ -89,11 +99,10 @@ public class RuleBRAction extends ActionSupport {
 	 backwardandResultlist2=new ArrayList();
 	 backwardandResultlist1.addAll(set1);
 	 backwardandResultlist2.addAll(set2);
-	  return "rulesuccess";
+	  return "rulesuccess";*/
 		}
 
 	
-
 	
 
 	
