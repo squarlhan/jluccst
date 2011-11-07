@@ -71,8 +71,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </table>
    
     <div align="center">
-       
-      
       <input name="button" type=button onClick="window.location.href('rulebraction.action')" value="Íê³É·µ»Ø">
       </div>
   </body>

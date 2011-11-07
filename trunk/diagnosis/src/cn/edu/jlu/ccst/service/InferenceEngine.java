@@ -13,10 +13,10 @@ import cn.edu.jlu.ccst.model.BackwardandReason;
 import cn.edu.jlu.ccst.model.BackwardandResult;
 @Component("inferenceEngine")
 public class InferenceEngine {
-	private  List<BackwardandResult> enter = new ArrayList();
-	private  List<BackwardandReason> process = new ArrayList();
-	private  List<Backward> backwardrule = new ArrayList();
-	private  List<BackwardandReason> ending = new ArrayList();
+	private  List<BackwardandResult> enter;
+	private  List<BackwardandReason> process;
+	private  List<Backward> backwardrule;
+	private  List<BackwardandReason> ending;
 	
 
 	public List<BackwardandReason> getEnding() {
@@ -59,6 +59,7 @@ public class InferenceEngine {
 	}
 	
 	public  void Inference(String rule,String way){
+	ending = new ArrayList();
 		String temp;
 		InputStreamReader stdin = new InputStreamReader(System.in);
 		BufferedReader bufin = new BufferedReader(stdin);
