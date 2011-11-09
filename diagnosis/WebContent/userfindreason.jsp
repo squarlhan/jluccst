@@ -101,13 +101,13 @@ function setSelectOption(selectObj, optionList, firstOption, selected)
 </script>
 
    <script language="JavaScript" type="text/javascript">   
-  
-  <s:iterator id="nverb" value="nb">
-  cityArr['<s:property value="nouns"/>'] = [      <s:iterator id="verbs" value="nb">     
-                  {txt:'<s:property value="verb"/>', val:'<s:property value="verb"/>'}        
-                     </s:iterator> ];   
-    </s:iterator>
-function setCity(nouns) {    
+ var cityArr = []; 
+
+
+  <s:iterator id="nverb" value="nb">  //
+     cityArr['<s:property value="nouns"/>'] = [  <s:property value="verb"/>   ];   
+  </s:iterator>
+   function setCity(nouns) {    
                          setSelectOption('verb', cityArr[nouns], '-请选择-'); }  
                           </script>  
 
@@ -149,17 +149,22 @@ function setCity(nouns) {
     </p>
     </div><br>
 	  <div id="login">
-<s:form action="ruleaction">
+   <s:form action="ruleaction">
 <select name="nouns" id="nouns" onchange="if(this.value != '') setCity(this.options[this.selectedIndex].value);">   
    <s:iterator id="nverb" value="nb">
-     <option value="<s:property value="nouns"/>"><s:property value="nouns"/></option>     
+       <option value="<s:property value="nouns"/>"><s:property value="nouns"/></option>     
     </s:iterator>
  </select> 省 
  <select name="verb" id="verb">
-      <s:iterator id="nverb" value="nb">
-     <option value="<s:property value="verb"/>"><s:property value="verb"/></option>     
-    </s:iterator>
+    <option value="">-请选择-</option> 
+
+</select> 市 
+     
+
+     
 </select>
+
+
 <!--  <table width="300" align="center" style="margin-left:30">
 	<tr>
 	<td >
