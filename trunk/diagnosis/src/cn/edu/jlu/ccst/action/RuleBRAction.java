@@ -14,13 +14,11 @@ import org.springframework.stereotype.Component;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
-
 import cn.edu.jlu.ccst.model.User;
 import cn.edu.jlu.ccst.service.UserService;
 
 import cn.edu.jlu.ccst.model.BackwardandResult;
 import cn.edu.jlu.ccst.service.RuleBRService;
-import cn.edu.jlu.ccst.model.Nverb;
 import java.util.Map;
 
 
@@ -37,22 +35,16 @@ public class RuleBRAction extends ActionSupport {
 	
 	private List<String> backwardandResultlist1;
 	private List<String> backwardandResultlist2;
-	private List<Nverb> nb;
+	private Map nvs;
 	
+
 	
-	
-	
-	
-	
- 
-	
-	
-	public List<Nverb> getNb() {
-		return nb;
+	public Map getNvs() {
+		return nvs;
 	}
 
-	public void setNb(List<Nverb> nb) {
-		this.nb = nb;
+	public void setNvs(Map nvs) {
+		this.nvs = nvs;
 	}
 
 	public List getBackwardandResultlist1() {
@@ -85,7 +77,11 @@ public class RuleBRAction extends ActionSupport {
 	}
 	
 	public String execute() {
-		nb=rulebrService.getalloptions();
+//		nb=rulebrService.getalloptions();
+		nvs = rulebrService.getallnvs();
+		ActionContext actionContext = ActionContext.getContext();
+        Map session = actionContext.getSession();
+        session.put("map", nvs);
 		return "rulesuccess";
 		/*User flag1;
 		backwardandResultlist = rulebrService.findAll();
