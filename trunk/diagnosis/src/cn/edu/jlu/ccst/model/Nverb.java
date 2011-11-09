@@ -2,18 +2,18 @@ package cn.edu.jlu.ccst.model;
 
 import java.util.List;
 
-public class nverb {
+public class Nverb {
 	private String nouns;
-	private List<String> verb;
+	private String verb;
 	
 	
 	
-	public nverb(String nouns, List<String> verb) {
+	public Nverb(String nouns, String verb) {
 		super();
 		this.nouns = nouns;
 		this.verb = verb;
 	}
-	public nverb() {
+	public Nverb() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
@@ -23,12 +23,13 @@ public class nverb {
 	public void setNouns(String nouns) {
 		this.nouns = nouns;
 	}
-	public List<String> getVerb() {
+	public String getVerb() {
 		return verb;
 	}
-	public void setVerb(List<String> verb) {
+	public void setVerb(String verb) {
 		this.verb = verb;
 	}
+
 	 
 	
 	

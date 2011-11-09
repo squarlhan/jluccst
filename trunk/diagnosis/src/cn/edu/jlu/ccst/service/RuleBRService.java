@@ -66,16 +66,25 @@ public class RuleBRService {
 		
 		return resultlist;
 	}
-	public List<nverb> getalloptions() {
-		List<nverb> resultlist=new ArrayList();
+	public List<Nverb> getalloptions() {
+		List<Nverb> resultlist=new ArrayList();
 		
 
 	  List<String> nounses=rulebrServiceImpl.findAllnoun();
 	  
 	 for(String str:nounses){
 		 List<String> verb=rulebrServiceImpl.findAllverb(str);
-		 nverb nv=new nverb(str,verb);
+		 Nverb nv=new Nverb();
+		 nv.setNouns(str);
+		 String verbs="";
+		 for(String er:verb){
+			 verbs=verbs+" {txt:'"+er+"', val:'"+er+"'},";
+
+		 }
+		 verbs = verbs.substring(0, verbs.length()-1);
+		 nv.setVerb(verbs);
 		 resultlist.add(nv);
+		 
 	 }
 	  
 		return resultlist;

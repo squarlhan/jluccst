@@ -20,7 +20,7 @@ import cn.edu.jlu.ccst.service.UserService;
 
 import cn.edu.jlu.ccst.model.BackwardandResult;
 import cn.edu.jlu.ccst.service.RuleBRService;
-import cn.edu.jlu.ccst.model.nverb;
+import cn.edu.jlu.ccst.model.Nverb;
 import java.util.Map;
 
 
@@ -37,7 +37,7 @@ public class RuleBRAction extends ActionSupport {
 	
 	private List<String> backwardandResultlist1;
 	private List<String> backwardandResultlist2;
-	private List<nverb> nb;
+	private List<Nverb> nb;
 	
 	
 	
@@ -47,11 +47,11 @@ public class RuleBRAction extends ActionSupport {
  
 	
 	
-	public List<nverb> getNb() {
+	public List<Nverb> getNb() {
 		return nb;
 	}
 
-	public void setNb(List<nverb> nb) {
+	public void setNb(List<Nverb> nb) {
 		this.nb = nb;
 	}
 
