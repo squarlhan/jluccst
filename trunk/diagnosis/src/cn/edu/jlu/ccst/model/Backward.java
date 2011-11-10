@@ -34,8 +34,39 @@ public class Backward implements Serializable{
 	private List<BackwardandReason> reasons= new ArrayList();
 	@OneToMany(mappedBy = "bid", cascade = CascadeType.ALL, fetch = FetchType.LAZY, targetEntity = BackwardandResult.class) 
 	private List<BackwardandResult> results= new ArrayList();
+	@OneToMany(mappedBy = "bid", cascade = CascadeType.ALL, fetch = FetchType.LAZY, targetEntity = BackwardandUpper.class) 
+	private List<BackwardandUpper> uppers= new ArrayList();
+	@OneToMany(mappedBy = "bid", cascade = CascadeType.ALL, fetch = FetchType.LAZY, targetEntity = BackwardandLower.class) 
+	private List<BackwardandLower> lowers= new ArrayList();
 	
-	
+	public List<BackwardandUpper> getUppers() {
+		return uppers;
+	}
+
+
+
+
+	public void setUppers(List<BackwardandUpper> uppers) {
+		this.uppers = uppers;
+	}
+
+
+
+
+	public List<BackwardandLower> getLowers() {
+		return lowers;
+	}
+
+
+
+
+	public void setLowers(List<BackwardandLower> lowers) {
+		this.lowers = lowers;
+	}
+
+
+
+
 	public int getBid() {
 		return bid;
 	}
