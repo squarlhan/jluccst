@@ -19,13 +19,24 @@
 			<result name="nullpass">usernullpass.jsp</result>
 		</action>
 		
+
 		
+	 <action name="wwdcsdataaction" class="wwdcsdataAction">
+			<result name="datasuccess">userruleadd.jsp</result>
+			
+		</action> 
+	   
 		 <action name="rulebraction" class="rulebrAction">
 			<result name="success">userruleadd.jsp</result>
 			<result name="rulesuccess">userfindreason.jsp</result>
 			<result name="go">usergo.jsp</result>
 		</action>
 	   
+	    <action name="dcsdscribaction" class="dcsDscribAction">
+			<result name="success">userruledsc.jsp</result>
+			
+			
+		</action>
 		
 	    <action name="ruleaction" class="ruleAction">
 			<result name="success">userruleadd.jsp</result>

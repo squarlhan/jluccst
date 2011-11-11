@@ -16,6 +16,7 @@ import com.opensymphony.xwork2.ActionSupport;
 
 
 import cn.edu.jlu.ccst.model.User;
+import cn.edu.jlu.ccst.service.DcsDscribService;
 import cn.edu.jlu.ccst.service.UserService;
 
 import cn.edu.jlu.ccst.model.BackwardandResult;
@@ -33,6 +34,7 @@ public class UserAction extends ActionSupport {
 	private User user;
 	private List<User> userlist;
 	private Set set1;
+	private DcsDscribService dcsDscribService;
 	
 	
 	private RuleBRService rulebrService; 
@@ -42,6 +44,7 @@ public class UserAction extends ActionSupport {
 	private List<String> backwardandResultlist1;
 	private List<String> backwardandResultlist2;
 	
+	private List<String> namelist;
 	
 	private String newpassword;
     private String renewpassword;
@@ -50,7 +53,20 @@ public class UserAction extends ActionSupport {
 	
 	
 	
-    public String getNewpassword() {
+    public DcsDscribService getDcsDscribService() {
+		return dcsDscribService;
+	}
+	@Resource
+	public void setDcsDscribService(DcsDscribService dcsDscribService) {
+		this.dcsDscribService = dcsDscribService;
+	}
+	public List<String> getNamelist() {
+		return namelist;
+	}
+	public void setNamelist(List<String> namelist) {
+		this.namelist = namelist;
+	}
+	public String getNewpassword() {
 		return newpassword;
 	}
 	public void setNewpassword(String newpassword) {
@@ -81,7 +97,7 @@ public class UserAction extends ActionSupport {
 	public User getUser() {
 		return user;
 	}
-
+  
 	public void setUser(User user) {
 		this.user = user;
 	}
@@ -131,8 +147,9 @@ public class UserAction extends ActionSupport {
 	
 	public String execute() {
 		User flag1;
+		namelist=dcsDscribService.findallname();
 		backwardandResultlist = rulebrService.findAll();
-		Set<String> set1=new HashSet();
+		/*Set<String> set1=new HashSet();
 		Set<String> set2=new HashSet();
 	 for(BackwardandResult brt:backwardandResultlist){
 		set1.add(brt.getNouns());
@@ -141,9 +158,9 @@ public class UserAction extends ActionSupport {
 	 backwardandResultlist1=new ArrayList();
 	 backwardandResultlist2=new ArrayList();
 	 backwardandResultlist1.addAll(set1);
-	 backwardandResultlist2.addAll(set2);
+	 backwardandResultlist2.addAll(set2);*/
 		flag1=userService.exits(user);
-		System.out.print(backwardandResultlist+"998989388974932");
+		System.out.print(namelist+"998989388974932");
 		if(flag1==null){
 			
 		  return "loginerror";}
