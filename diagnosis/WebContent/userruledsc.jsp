@@ -104,7 +104,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
  
  
  
- <s:form action="ruleaction!addRule.action">
+ <s:form action="ruleaction!newAdd.action">
 <table    width="100%"  rules="rows" border="1" bordercolor="#000000" cellpadding="0" cellspacing="0">
     <tr >
       <td height="54" colspan="2"><h2>规则描述界面</h2>
@@ -124,7 +124,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <tr>
           <td width="25%" >现象名词：
              
-             <select name="select" size="1" style="width:200px">
+             <select name="resultn" size="1" style="width:200px">
 	       <s:iterator id="names" value="namelist" status="index1">
 	      <option> <s:property /> </option>
 	      </s:iterator>
@@ -133,7 +133,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
              
           </div></td>
           <td width="25%" >现象动词：
-           <select name="select" style="width:200px">
+           <select name="resultv_value" style="width:200px">
                 <option value="0">高于最高值</option>
                 <option value="1">低于最低值</option>
               </select>

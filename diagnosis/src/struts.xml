@@ -40,7 +40,7 @@
 		
 	    <action name="ruleaction" class="ruleAction">
 			<result name="success">userruleadd.jsp</result>
-		
+		    <result name="input">userruledsc.jsp</result>
 			<result name="go">usergo.jsp</result>
 		</action>
 		

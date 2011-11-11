@@ -15,28 +15,39 @@ import cn.edu.jlu.ccst.model.DcsDscrib;
 @Transactional
 public class DcsDscribServiceImpl implements DcsDscribServiceInter{
 	private EntityManager em;
-
+	
+	
+	private EntityManager getEntityManager() {
+		return em;
+	}
 	@PersistenceContext
 	public void setEntityManager(EntityManager em) {
 		this.em = em;
 	}
-
-	
-	
 	public List<String> findAllname() {
 		Query query = getEntityManager().createQuery("select distinct name FROM DcsDscrib b");
 		return query.getResultList();
 	}
 
-	
-
-
-
-	
-
-	private EntityManager getEntityManager() {
-		return em;
+	public List<DcsDscrib> findbyname(String name) {
+		Query query = getEntityManager().createQuery("select b FROM DcsDscrib b where b.name='"+name+"'");
+		return query.getResultList();
 	}
+
+	public void save(DcsDscrib dcsDscrib){
+		if (dcsDscrib.getDid() <= 0) {
+			// new
+			em.persist(dcsDscrib);
+			
+		} else {
+			// update
+			em.merge(dcsDscrib);
+		}
+	}
+
+	
+
+	
 
 	
 }

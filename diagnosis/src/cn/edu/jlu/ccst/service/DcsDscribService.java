@@ -72,5 +72,15 @@ public class DcsDscribService {
 		return name;
 	}
 	
+	public List<DcsDscrib> findbyname(String name) {
+		List<DcsDscrib> dds = dcsDscribServiceImpl.findbyname(name);
+		
+		return dds;
+	}
+	
+	public void save(DcsDscrib dcsDscrib) {
+		dcsDscribServiceImpl.save(dcsDscrib);
+	}
+	
 		
 }

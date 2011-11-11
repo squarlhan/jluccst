@@ -14,6 +14,7 @@ import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 import cn.edu.jlu.ccst.model.*;
+import cn.edu.jlu.ccst.service.DcsDscribService;
 import cn.edu.jlu.ccst.service.RuleService;
 import cn.edu.jlu.ccst.service.UserService;
 
@@ -21,7 +22,7 @@ import cn.edu.jlu.ccst.service.UserService;
 @Scope("prototype")
 public class RuleAction extends ActionSupport {
 
-	
+	private DcsDscribService dcsDscribService;
 	private RuleService ruleService; 
 	private BackwardandResult  result;
 	private List<BackwardandReason> reasonlist;
@@ -34,7 +35,30 @@ public class RuleAction extends ActionSupport {
 	private List<String> reason_verb;
 	private List<String> result_verb;
 	private List<String> sugg;
+	private String resultn;
+	private int resultv_value;
 
+	
+	
+	public DcsDscribService getDcsDscribService() {
+		return dcsDscribService;
+	}
+	@Resource
+	public void setDcsDscribService(DcsDscribService dcsDscribService) {
+		this.dcsDscribService = dcsDscribService;
+	}
+	public int getResultv_value() {
+		return resultv_value;
+	}
+	public void setResultv_value(int resultv_value) {
+		this.resultv_value = resultv_value;
+	}
+	public String getResultn() {
+		return resultn;
+	}
+	public void setResultn(String resultn) {
+		this.resultn = resultn;
+	}
 	public Backward getRule() {
 		return rule;
 	}
@@ -136,6 +160,66 @@ public class RuleAction extends ActionSupport {
 		ruleService.save(rule);
 		backlist = ruleService.findAll();
 		return SUCCESS;
+	}
+	
+	public String newAdd(){
+		
+		String resultv = resultv_value==0?"过高":"过低";
+		
+		List<DcsDscrib> dcslist = dcsDscribService.findbyname(resultn);
+		
+		
+		List<BackwardandReason> breason = new ArrayList();
+		List<BackwardandResult> bresult = new ArrayList();
+        //新建规则前件
+		BackwardandResult brt = new BackwardandResult();
+		brt.setBid(rule);
+		brt.setNouns(resultn.trim());
+		brt.setVerb(resultv.trim());
+		if (resultn.trim().length() > 0
+				&& resultv.trim().length() > 0) {
+			bresult.add(brt);
+		}
+		//新建规则后件
+		for(int i = 0 ;i<=reason_noun.size()-1;i++){
+			BackwardandReason brs  = new BackwardandReason();
+			brs.setBid(rule);
+			brs.setNouns(reason_noun.get(i).trim());
+			brs.setVerb(reason_verb.get(i).trim());
+			brs.setSugg(sugg.get(i).trim());
+			if(reason_noun.get(i).trim().length()>0&&
+					reason_verb.get(i).trim().length()>0&&
+					sugg.get(i).trim().length()>0){
+				breason.add(brs);
+			}
+			
+		}
+		rule.setReasons(breason);
+		rule.setResults(bresult);
+		
+		if(resultv_value==0){
+			List<BackwardandUpper> bus= new ArrayList();
+			for(DcsDscrib dd:dcslist){
+				BackwardandUpper bu = new BackwardandUpper(rule, dd);
+				bus.add(bu);
+				dd.getUppers().add(bu);
+				dcsDscribService.save(dd);
+			}
+			rule.setUppers(bus);
+		}else{
+			List<BackwardandLower> bls= new ArrayList();
+			for(DcsDscrib dd:dcslist){
+				BackwardandLower bl = new BackwardandLower(rule, dd);
+				bls.add(bl);
+				dd.getLowers().add(bl);
+				dcsDscribService.save(dd);
+			}
+			rule.setLowers(bls);
+		}
+		
+		ruleService.save(rule);
+		
+		return "input";
 	}
 	public String  backList() {
 		backlist = ruleService.findAll();
