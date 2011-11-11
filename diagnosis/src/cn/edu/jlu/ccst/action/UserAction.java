@@ -50,7 +50,7 @@ public class UserAction extends ActionSupport {
     private String renewpassword;
 	private String currentpassword;
 	
-	
+	private Map nvs;
 	
 	
     public DcsDscribService getDcsDscribService() {
@@ -86,6 +86,12 @@ public class UserAction extends ActionSupport {
 	}
 
 
+	public Map getNvs() {
+		return nvs;
+	}
+	public void setNvs(Map nvs) {
+		this.nvs = nvs;
+	}
 	public List<User> getUserlist() {
 		return userlist;
 	}
@@ -168,6 +174,14 @@ public class UserAction extends ActionSupport {
 			 ActionContext actionContext = ActionContext.getContext();
 	        Map session = actionContext.getSession();
 	        session.put("us", flag1);
+	        
+	        nvs = rulebrService.getallnvs();
+			ActionContext actionContext1 = ActionContext.getContext();
+	        Map session1 = actionContext1.getSession();
+	        session1.put("map", nvs);
+	        
+	        
+	        
 	        return "loginsuccess";}
 		
 		}
