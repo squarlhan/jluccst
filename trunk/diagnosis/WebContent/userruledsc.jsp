@@ -110,7 +110,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <td height="54" colspan="2"><h2>规则描述界面</h2>
         </div>
        
-      
+       <tr>
+      <td  height="35" style="width: 200px; "><div align="left" >规则名称：
+        <input name="rule.name" type="text" size="12" />
+      </div></td>
+      <td height="35" style="width: 600px; "><div align="left"></div>规则备注：
+      <input name="rule.memo" type="text" size="72"  /></td>
+  
+    </tr>
   
     <tr>
       <td height="56" colspan="2"><table id="adresulttable"  bgcolor="#EDEDED" width="100%" height="100%" border="0" cellspacing="0" >
