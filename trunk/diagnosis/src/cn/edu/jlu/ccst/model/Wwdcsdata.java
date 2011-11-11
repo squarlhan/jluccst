@@ -2912,4 +2912,9 @@ public class Wwdcsdata implements Serializable {
 		ITEM260 = iTEM260;
 	}
 
+	public Wwdcsdata() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
 }
