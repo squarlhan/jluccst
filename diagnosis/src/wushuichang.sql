@@ -2,15 +2,15 @@
 Navicat MySQL Data Transfer
 
 Source Server         : local
-Source Server Version : 50516
+Source Server Version : 50510
 Source Host           : localhost:3306
 Source Database       : wushuichang
 
 Target Server Type    : MYSQL
-Target Server Version : 50516
+Target Server Version : 50510
 File Encoding         : 65001
 
-Date: 2011-11-04 21:47:24
+Date: 2011-11-12 18:53:53
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -33,7 +33,7 @@ CREATE TABLE `admin` (
 -- ----------------------------
 -- Records of admin
 -- ----------------------------
-INSERT INTO `admin` VALUES ('1', '王晓明', '1', '1', 'squarlhan@163.com', '13074347302', '000001', null);
+INSERT INTO `admin` VALUES ('1', '王晓明', '1', '1', 'squarlhan@163.com', '13074347302', '00010', '');
 
 -- ----------------------------
 -- Table structure for `backward`
@@ -46,7 +46,7 @@ CREATE TABLE `backward` (
   `count` int(10) NOT NULL DEFAULT '0',
   `priror` int(10) NOT NULL DEFAULT '0',
   PRIMARY KEY (`bid`)
-) ENGINE=InnoDB AUTO_INCREMENT=116 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=140 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of backward
@@ -144,6 +144,29 @@ INSERT INTO `backward` VALUES ('112', '生化部分臭氧机2', '生化部分臭
 INSERT INTO `backward` VALUES ('113', '生化部分臭氧机3', '生化部分臭氧机3', '0', '0');
 INSERT INTO `backward` VALUES ('114', '生化部分臭氧机4', '生化部分臭氧机4', '0', '0');
 INSERT INTO `backward` VALUES ('115', '生化部分臭氧机5', '生化部分臭氧机5', '0', '0');
+INSERT INTO `backward` VALUES ('135', '1', '1', '0', '0');
+INSERT INTO `backward` VALUES ('136', '2', '2', '0', '0');
+INSERT INTO `backward` VALUES ('137', '3', '3', '0', '0');
+INSERT INTO `backward` VALUES ('138', '3', '3', '0', '0');
+INSERT INTO `backward` VALUES ('139', '4', '4', '0', '0');
+
+-- ----------------------------
+-- Table structure for `backwardandlower`
+-- ----------------------------
+DROP TABLE IF EXISTS `backwardandlower`;
+CREATE TABLE `backwardandlower` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `bid` int(11) DEFAULT NULL,
+  `did` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FKB539CC6DDB7478BC` (`bid`),
+  KEY `FKB539CC6D96D877EE` (`did`),
+  CONSTRAINT `FKB539CC6DDB7478BC` FOREIGN KEY (`bid`) REFERENCES `backward` (`bid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of backwardandlower
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for `backwardandreason`
@@ -159,7 +182,7 @@ CREATE TABLE `backwardandreason` (
   PRIMARY KEY (`id`),
   KEY `FKFBA61E58DB7478BC` (`bid`),
   CONSTRAINT `FKFBA61E58DB7478BC` FOREIGN KEY (`bid`) REFERENCES `backward` (`bid`)
-) ENGINE=InnoDB AUTO_INCREMENT=315 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=333 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 -- Records of backwardandreason
@@ -470,6 +493,11 @@ INSERT INTO `backwardandreason` VALUES ('311', '115', '高压变压器TR1', '0',
 INSERT INTO `backwardandreason` VALUES ('312', '115', '控制电路', '0', '故障', '联系厂家处理');
 INSERT INTO `backwardandreason` VALUES ('313', '115', '电路电流', '0', '故障', '联系厂家处理');
 INSERT INTO `backwardandreason` VALUES ('314', '115', 'IGBT', '0', '故障', '联系厂家处理');
+INSERT INTO `backwardandreason` VALUES ('328', '135', '1', '0', '1', '1');
+INSERT INTO `backwardandreason` VALUES ('329', '136', '2', '0', '2', '2');
+INSERT INTO `backwardandreason` VALUES ('330', '137', '3', '0', '3', '3');
+INSERT INTO `backwardandreason` VALUES ('331', '138', '3', '0', '3', '3');
+INSERT INTO `backwardandreason` VALUES ('332', '139', '4', '0', '4', '4');
 
 -- ----------------------------
 -- Table structure for `backwardandresult`
@@ -484,7 +512,7 @@ CREATE TABLE `backwardandresult` (
   PRIMARY KEY (`id`),
   KEY `FKFBAE5431DB7478BC` (`bid`),
   CONSTRAINT `FKFBAE5431DB7478BC` FOREIGN KEY (`bid`) REFERENCES `backward` (`bid`)
-) ENGINE=InnoDB AUTO_INCREMENT=101 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=117 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 -- Records of backwardandresult
@@ -582,6 +610,295 @@ INSERT INTO `backwardandresult` VALUES ('97', '112', '臭氧机', '0', '进水�
 INSERT INTO `backwardandresult` VALUES ('98', '113', '臭氧机', '0', '进气压力过高');
 INSERT INTO `backwardandresult` VALUES ('99', '114', '臭氧机', '0', '水压过低');
 INSERT INTO `backwardandresult` VALUES ('100', '115', '臭氧机', '0', '臭氧发生器电路故障');
+INSERT INTO `backwardandresult` VALUES ('112', '135', '???A????DO', '0', '??');
+INSERT INTO `backwardandresult` VALUES ('113', '136', '???A????DO', '0', '??');
+INSERT INTO `backwardandresult` VALUES ('114', '137', '???A????DO', '0', '??');
+INSERT INTO `backwardandresult` VALUES ('115', '138', '???A????DO', '0', '??');
+INSERT INTO `backwardandresult` VALUES ('116', '139', '???A????DO', '0', '??');
+
+-- ----------------------------
+-- Table structure for `backwardandupper`
+-- ----------------------------
+DROP TABLE IF EXISTS `backwardandupper`;
+CREATE TABLE `backwardandupper` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `bid` int(11) DEFAULT NULL,
+  `did` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FKB5B8FA0EDB7478BC` (`bid`),
+  KEY `FKB5B8FA0E96D877EE` (`did`),
+  CONSTRAINT `FKB5B8FA0EDB7478BC` FOREIGN KEY (`bid`) REFERENCES `backward` (`bid`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of backwardandupper
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `dcsdscrib`
+-- ----------------------------
+DROP TABLE IF EXISTS `dcsdscrib`;
+CREATE TABLE `dcsdscrib` (
+  `did` int(11) NOT NULL AUTO_INCREMENT,
+  `eque` varchar(255) DEFAULT NULL,
+  `item` varchar(255) DEFAULT NULL,
+  `lower` double DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `upper` double DEFAULT NULL,
+  PRIMARY KEY (`did`)
+) ENGINE=InnoDB AUTO_INCREMENT=1332 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of dcsdscrib
+-- ----------------------------
+INSERT INTO `dcsdscrib` VALUES ('1083', '490  5号生化池', 'ITEM1', '0', '生化池A段溶解氧DO', '0.5');
+INSERT INTO `dcsdscrib` VALUES ('1084', '490  6号生化池', 'ITEM2', '0', '生化池A段溶解氧DO', '0.5');
+INSERT INTO `dcsdscrib` VALUES ('1085', '490  7号生化池', 'ITEM3', '0', '生化池A段溶解氧DO', '0.5');
+INSERT INTO `dcsdscrib` VALUES ('1086', '490  8号生化池', 'ITEM4', '0', '生化池A段溶解氧DO', '0.5');
+INSERT INTO `dcsdscrib` VALUES ('1087', '490  1号生化池', 'ITEM5', '6', '生化池PH', '9');
+INSERT INTO `dcsdscrib` VALUES ('1088', '490  3号生化池', 'ITEM7', '6', '生化池PH', '9');
+INSERT INTO `dcsdscrib` VALUES ('1089', '490  4号生化池', 'ITEM8', '6', '生化池PH', '9');
+INSERT INTO `dcsdscrib` VALUES ('1090', '490  5号生化池', 'ITEM9', '6', '生化池PH', '9');
+INSERT INTO `dcsdscrib` VALUES ('1091', '490  6号生化池', 'ITEM10', '6', '生化池PH', '9');
+INSERT INTO `dcsdscrib` VALUES ('1092', '490  7号生化池', 'ITEM11', '6', '生化池PH', '9');
+INSERT INTO `dcsdscrib` VALUES ('1093', '490  8号生化池', 'ITEM12', '6', '生化池PH', '9');
+INSERT INTO `dcsdscrib` VALUES ('1094', '462A进水提升泵房', 'ITEM13', '0', '进水提升泵NH3-N', '200');
+INSERT INTO `dcsdscrib` VALUES ('1095', '462B中间提升泵房', 'ITEM14', '0', '中间提升泵吸水池COD', '500');
+INSERT INTO `dcsdscrib` VALUES ('1096', '462B中间提升泵房', 'ITEM15', '0', '中间提升泵吸水池NH3-N', '200');
+INSERT INTO `dcsdscrib` VALUES ('1097', '462B中间提升泵房', 'ITEM16', '0', '中间提升泵吸水池SS', '300');
+INSERT INTO `dcsdscrib` VALUES ('1098', '462B中间提升泵房', 'ITEM17', '0', '中间提升泵吸水池PH', '10');
+INSERT INTO `dcsdscrib` VALUES ('1099', '462A进水提升泵房', 'ITEM18', '0', '进水提升泵PH', '10');
+INSERT INTO `dcsdscrib` VALUES ('1100', '入江排污口', 'ITEM19', '0', '出口PH', '10');
+INSERT INTO `dcsdscrib` VALUES ('1101', '入江排污口', 'ITEM20', '0', '出口SS', '300');
+INSERT INTO `dcsdscrib` VALUES ('1102', '入江排污口', 'ITEM21', '0', '出口COD', '50');
+INSERT INTO `dcsdscrib` VALUES ('1103', '入江排污口', 'ITEM22', '0', null, '10000');
+INSERT INTO `dcsdscrib` VALUES ('1104', '入江排污口', 'ITEM23', '0', '出口DO', '10000');
+INSERT INTO `dcsdscrib` VALUES ('1105', '入江排污口', 'ITEM24', '0', '出口NH3-N', '500');
+INSERT INTO `dcsdscrib` VALUES ('1106', '入江排污口', 'ITEM25', '0', null, '10000');
+INSERT INTO `dcsdscrib` VALUES ('1107', '入江排污口', 'ITEM26', '0', null, '10000');
+INSERT INTO `dcsdscrib` VALUES ('1108', '入江排污口', 'ITEM27', '0', null, '10000');
+INSERT INTO `dcsdscrib` VALUES ('1109', '490  1号生化池', 'ITEM28', '2', '生化池2段溶解氧DO', '4');
+INSERT INTO `dcsdscrib` VALUES ('1110', '490  2号生化池', 'ITEM29', '2', '生化池2段溶解氧DO', '4');
+INSERT INTO `dcsdscrib` VALUES ('1111', '490  3号生化池', 'ITEM30', '2', '生化池2段溶解氧DO', '4');
+INSERT INTO `dcsdscrib` VALUES ('1112', '490  4号生化池', 'ITEM31', '2', '生化池2段溶解氧DO', '4');
+INSERT INTO `dcsdscrib` VALUES ('1113', '490  1号生化池', 'ITEM32', '2', '生化池3段溶解氧DO', '4');
+INSERT INTO `dcsdscrib` VALUES ('1114', '490  2号生化池', 'ITEM33', '2', '生化池3段溶解氧DO', '4');
+INSERT INTO `dcsdscrib` VALUES ('1115', '490  3号生化池', 'ITEM34', '2', '生化池3段溶解氧DO', '4');
+INSERT INTO `dcsdscrib` VALUES ('1116', '490  4号生化池', 'ITEM35', '2', '生化池3段溶解氧DO', '4');
+INSERT INTO `dcsdscrib` VALUES ('1117', '490  1号生化池', 'ITEM36', '2', '生化池5段溶解氧DO', '4');
+INSERT INTO `dcsdscrib` VALUES ('1118', '490  2号生化池', 'ITEM36', '2', '生化池5段溶解氧DO', '4');
+INSERT INTO `dcsdscrib` VALUES ('1119', '490  3号生化池', 'ITEM38', '2', '生化池5段溶解氧DO', '4');
+INSERT INTO `dcsdscrib` VALUES ('1120', '490  4号生化池', 'ITEM39', '2', '生化池5段溶解氧DO', '4');
+INSERT INTO `dcsdscrib` VALUES ('1121', '490  5号生化池', 'ITEM40', '2', '生化池4段溶解氧DO', '4');
+INSERT INTO `dcsdscrib` VALUES ('1122', '490  6号生化池', 'ITEM41', '2', '生化池4段溶解氧DO', '4');
+INSERT INTO `dcsdscrib` VALUES ('1123', '490  7号生化池', 'ITEM42', '2', '生化池4段溶解氧DO', '4');
+INSERT INTO `dcsdscrib` VALUES ('1124', '490  8号生化池', 'ITEM43', '2', '生化池4段溶解氧DO', '4');
+INSERT INTO `dcsdscrib` VALUES ('1125', '490  5号生化池', 'ITEM44', '2', '生化池6段溶解氧DO', '4');
+INSERT INTO `dcsdscrib` VALUES ('1126', '490  6号生化池', 'ITEM45', '2', '生化池6段溶解氧DO', '4');
+INSERT INTO `dcsdscrib` VALUES ('1127', '490  7号生化池', 'ITEM46', '2', '生化池6段溶解氧DO', '4');
+INSERT INTO `dcsdscrib` VALUES ('1128', '490  8号生化池', 'ITEM47', '2', '生化池6段溶解氧DO', '4');
+INSERT INTO `dcsdscrib` VALUES ('1129', '污泥脱水离心式污泥泵', 'ITEM48', '0', 'P495A-1流量', '1000000');
+INSERT INTO `dcsdscrib` VALUES ('1130', '污泥脱水离心式污泥泵', 'ITEM49', '0', 'P495A-2流量', '1000000');
+INSERT INTO `dcsdscrib` VALUES ('1131', '污泥脱水离心式污泥泵', 'ITEM50', '0', 'P495A-3流量', '1000000');
+INSERT INTO `dcsdscrib` VALUES ('1132', '污泥脱水离心式污泥泵', 'ITEM51', '0', 'P495A-4流量', '1000000');
+INSERT INTO `dcsdscrib` VALUES ('1133', '污泥脱水离心式污泥泵', 'ITEM52', '0', 'P495A-5流量', '1000000');
+INSERT INTO `dcsdscrib` VALUES ('1134', '污泥脱水离心式污泥泵', 'ITEM53', '0', 'P495A-6流量', '1000000');
+INSERT INTO `dcsdscrib` VALUES ('1135', null, 'ITEM54', '0', null, '10000');
+INSERT INTO `dcsdscrib` VALUES ('1136', null, 'ITEM55', '0', null, '10000');
+INSERT INTO `dcsdscrib` VALUES ('1137', null, 'ITEM56', '0', null, '10000');
+INSERT INTO `dcsdscrib` VALUES ('1138', null, 'ITEM57', '0', null, '10000');
+INSERT INTO `dcsdscrib` VALUES ('1139', null, 'ITEM58', '0', null, '10000');
+INSERT INTO `dcsdscrib` VALUES ('1140', null, 'ITEM59', '0', null, '10000');
+INSERT INTO `dcsdscrib` VALUES ('1141', null, 'ITEM60', '0', null, '10000');
+INSERT INTO `dcsdscrib` VALUES ('1142', null, 'ITEM61', '0', null, '10000');
+INSERT INTO `dcsdscrib` VALUES ('1143', null, 'ITEM62', '0', null, '10000');
+INSERT INTO `dcsdscrib` VALUES ('1144', null, 'ITEM63', '0', null, '10000');
+INSERT INTO `dcsdscrib` VALUES ('1145', null, 'ITEM64', '0', null, '10000');
+INSERT INTO `dcsdscrib` VALUES ('1146', null, 'ITEM65', '0', null, '10000');
+INSERT INTO `dcsdscrib` VALUES ('1147', null, 'ITEM66', '0', null, '10000');
+INSERT INTO `dcsdscrib` VALUES ('1148', null, 'ITEM67', '0', null, '10000');
+INSERT INTO `dcsdscrib` VALUES ('1149', null, 'ITEM68', '0', null, '10000');
+INSERT INTO `dcsdscrib` VALUES ('1150', null, 'ITEM69', '0', null, '10000');
+INSERT INTO `dcsdscrib` VALUES ('1151', null, 'ITEM70', '0', null, '10000');
+INSERT INTO `dcsdscrib` VALUES ('1152', null, 'ITEM71', '0', null, '10000');
+INSERT INTO `dcsdscrib` VALUES ('1153', null, 'ITEM72', '0', null, '10000');
+INSERT INTO `dcsdscrib` VALUES ('1154', null, 'ITEM73', '0', null, '10000');
+INSERT INTO `dcsdscrib` VALUES ('1155', null, 'ITEM74', '0', null, '10000');
+INSERT INTO `dcsdscrib` VALUES ('1156', null, 'ITEM75', '0', null, '10000');
+INSERT INTO `dcsdscrib` VALUES ('1157', null, 'ITEM76', '0', null, '10000');
+INSERT INTO `dcsdscrib` VALUES ('1158', null, 'ITEM77', '0', null, '10000');
+INSERT INTO `dcsdscrib` VALUES ('1159', null, 'ITEM78', '0', null, '10000');
+INSERT INTO `dcsdscrib` VALUES ('1160', null, 'ITEM79', '0', null, '10000');
+INSERT INTO `dcsdscrib` VALUES ('1161', null, 'ITEM80', '0', null, '10000');
+INSERT INTO `dcsdscrib` VALUES ('1162', null, 'ITEM81', '0', null, '10000');
+INSERT INTO `dcsdscrib` VALUES ('1163', null, 'ITEM82', '0', null, '10000');
+INSERT INTO `dcsdscrib` VALUES ('1164', null, 'ITEM83', '0', null, '10000');
+INSERT INTO `dcsdscrib` VALUES ('1165', null, 'ITEM84', '0', null, '10000');
+INSERT INTO `dcsdscrib` VALUES ('1166', null, 'ITEM85', '0', null, '10000');
+INSERT INTO `dcsdscrib` VALUES ('1167', null, 'ITEM86', '0', null, '10000');
+INSERT INTO `dcsdscrib` VALUES ('1168', null, 'ITEM87', '0', null, '10000');
+INSERT INTO `dcsdscrib` VALUES ('1169', null, 'ITEM88', '0', null, '10000');
+INSERT INTO `dcsdscrib` VALUES ('1170', null, 'ITEM89', '0', null, '10000');
+INSERT INTO `dcsdscrib` VALUES ('1171', null, 'ITEM90', '0', null, '10000');
+INSERT INTO `dcsdscrib` VALUES ('1172', null, 'ITEM91', '0', null, '10000');
+INSERT INTO `dcsdscrib` VALUES ('1173', null, 'ITEM92', '0', null, '10000');
+INSERT INTO `dcsdscrib` VALUES ('1174', null, 'ITEM93', '0', null, '10000');
+INSERT INTO `dcsdscrib` VALUES ('1175', null, 'ITEM94', '0', null, '10000');
+INSERT INTO `dcsdscrib` VALUES ('1176', null, 'ITEM95', '0', null, '10000');
+INSERT INTO `dcsdscrib` VALUES ('1177', null, 'ITEM96', '0', null, '10000');
+INSERT INTO `dcsdscrib` VALUES ('1178', null, 'ITEM97', '0', null, '10000');
+INSERT INTO `dcsdscrib` VALUES ('1179', null, 'ITEM98', '0', null, '10000');
+INSERT INTO `dcsdscrib` VALUES ('1180', null, 'ITEM99', '0', null, '10000');
+INSERT INTO `dcsdscrib` VALUES ('1181', 'C-281鼓风机房  1#鼓风机', 'ITEM100', '0', '鼓风机分量', '10000');
+INSERT INTO `dcsdscrib` VALUES ('1182', 'C-282鼓风机房  2#鼓风机', 'ITEM101', '0', '鼓风机分量', '10000');
+INSERT INTO `dcsdscrib` VALUES ('1183', 'C-283鼓风机房  3#鼓风机', 'ITEM102', '0', '鼓风机分量', '10000');
+INSERT INTO `dcsdscrib` VALUES ('1184', 'C-284鼓风机房  4#鼓风机', 'ITEM103', '0', '鼓风机分量', '10000');
+INSERT INTO `dcsdscrib` VALUES ('1185', '465回流泵', 'ITEM104', '0', '回流泵回流量', '10000');
+INSERT INTO `dcsdscrib` VALUES ('1186', '465回流泵', 'ITEM105', '0', '回流泵剩余量', '10000');
+INSERT INTO `dcsdscrib` VALUES ('1187', '465A回流泵房', 'ITEM106', '0', '回流泵回流量', '10000');
+INSERT INTO `dcsdscrib` VALUES ('1188', '465A回流泵房', 'ITEM107', '0', '回流泵剩余量', '10000');
+INSERT INTO `dcsdscrib` VALUES ('1189', '465B回流泵房', 'ITEM108', '0', '回流泵回流量', '10000');
+INSERT INTO `dcsdscrib` VALUES ('1190', '465B回流泵房', 'ITEM109', '0', '回流泵剩余量', '10000');
+INSERT INTO `dcsdscrib` VALUES ('1191', '499巴氏计量槽', 'ITEM110', '0', '巴氏计量槽流量', '10000');
+INSERT INTO `dcsdscrib` VALUES ('1192', '14b主线', 'ITEM111', '0', '主线流量', '6000');
+INSERT INTO `dcsdscrib` VALUES ('1193', '466-1  P466-1~4泵', 'ITEM112', '0', '出口干管流量', '100');
+INSERT INTO `dcsdscrib` VALUES ('1194', '466-2  P466-1~4泵', 'ITEM113', '0', '泵出口干管流量', '100');
+INSERT INTO `dcsdscrib` VALUES ('1195', '495A-1-2', 'ITEM114', '0', '清水泵出口干管流量', '100');
+INSERT INTO `dcsdscrib` VALUES ('1196', '465回流泵  3#泵', 'ITEM115', '0', '出口管回流污泥量', '10000');
+INSERT INTO `dcsdscrib` VALUES ('1197', '428加压泵', 'ITEM116', '0', '生活给水量', '10000');
+INSERT INTO `dcsdscrib` VALUES ('1198', '428加压泵', 'ITEM117', '0', '工业给水量', '10000');
+INSERT INTO `dcsdscrib` VALUES ('1199', null, 'ITEM118', '0', '鼓风机', '10000');
+INSERT INTO `dcsdscrib` VALUES ('1200', null, 'ITEM119', '0', '加药岗位', '10000');
+INSERT INTO `dcsdscrib` VALUES ('1201', null, 'ITEM120', '0', '鼓风机', '10000');
+INSERT INTO `dcsdscrib` VALUES ('1202', null, 'ITEM121', '0', '鼓风机', '10000');
+INSERT INTO `dcsdscrib` VALUES ('1203', null, 'ITEM122', '0', '鼓风机', '10000');
+INSERT INTO `dcsdscrib` VALUES ('1204', null, 'ITEM123', '0', '鼓风机', '10000');
+INSERT INTO `dcsdscrib` VALUES ('1205', null, 'ITEM124', '0', '锅炉房', '10000');
+INSERT INTO `dcsdscrib` VALUES ('1206', null, 'ITEM125', '0', '锅炉房', '10000');
+INSERT INTO `dcsdscrib` VALUES ('1207', null, 'ITEM126', '0', '锅炉房', '10000');
+INSERT INTO `dcsdscrib` VALUES ('1208', null, 'ITEM127', '0', '锅炉房', '10000');
+INSERT INTO `dcsdscrib` VALUES ('1209', null, 'ITEM128', '0', null, '10000');
+INSERT INTO `dcsdscrib` VALUES ('1210', '1#粗格栅', 'ITEM129', '0', '前后液位差', '0.15');
+INSERT INTO `dcsdscrib` VALUES ('1211', '2#粗格栅', 'ITEM130', '0', '前后液位差', '0.15');
+INSERT INTO `dcsdscrib` VALUES ('1212', '3#粗格栅', 'ITEM131', '0', '前后液位差', '0.15');
+INSERT INTO `dcsdscrib` VALUES ('1213', null, 'ITEM132', '0', null, '10000');
+INSERT INTO `dcsdscrib` VALUES ('1214', null, 'ITEM133', '0', null, '10000');
+INSERT INTO `dcsdscrib` VALUES ('1215', null, 'ITEM134', '0', null, '10000');
+INSERT INTO `dcsdscrib` VALUES ('1216', null, 'ITEM135', '0', null, '10000');
+INSERT INTO `dcsdscrib` VALUES ('1217', 'M414-1~5加药间', 'ITEM136', '0', '溶药池液位', '10000');
+INSERT INTO `dcsdscrib` VALUES ('1218', '水解酸化池  1#', 'ITEM137', '4.5', '水解酸化池', '5.5');
+INSERT INTO `dcsdscrib` VALUES ('1219', '水解酸化池  2#', 'ITEM138', '4.5', '水解酸化池', '5.5');
+INSERT INTO `dcsdscrib` VALUES ('1220', '462B泵房', 'ITEM139', '0', '吸水池液位', '10000');
+INSERT INTO `dcsdscrib` VALUES ('1221', 'V462B-3', 'ITEM140', '0', '高位水池液位', '10000');
+INSERT INTO `dcsdscrib` VALUES ('1222', '465吸泥池', 'ITEM141', '0', '吸泥池液位', '10000');
+INSERT INTO `dcsdscrib` VALUES ('1223', null, 'ITEM142', '0', '生活水池液位', '10000');
+INSERT INTO `dcsdscrib` VALUES ('1224', null, 'ITEM143', '0', '生产水池液位', '10000');
+INSERT INTO `dcsdscrib` VALUES ('1225', null, 'ITEM144', '0', '地沟液位', '10000');
+INSERT INTO `dcsdscrib` VALUES ('1226', null, 'ITEM145', '0', null, '10000');
+INSERT INTO `dcsdscrib` VALUES ('1227', null, 'ITEM146', '0', null, '10000');
+INSERT INTO `dcsdscrib` VALUES ('1228', null, 'ITEM147', '0', null, '10000');
+INSERT INTO `dcsdscrib` VALUES ('1229', '499巴氏计量槽', 'ITEM148', '0', '巴氏计量槽前', '10000');
+INSERT INTO `dcsdscrib` VALUES ('1230', '499巴氏计量槽', 'ITEM149', '0', '巴氏计量槽后', '10000');
+INSERT INTO `dcsdscrib` VALUES ('1231', 'V495A-3药剂池', 'ITEM150', '0', '药剂池液位', '10000');
+INSERT INTO `dcsdscrib` VALUES ('1232', 'V495A-4药剂池', 'ITEM151', '0', '药剂池液位', '10000');
+INSERT INTO `dcsdscrib` VALUES ('1233', '462A泵房吸水池', 'ITEM152', '2', '吸水池液位', '3.6');
+INSERT INTO `dcsdscrib` VALUES ('1234', null, 'ITEM153', '0.2', '水解酸化池', '5.5');
+INSERT INTO `dcsdscrib` VALUES ('1235', '462B中间提升泵房', 'ITEM154', '0', '吸水池液位', '10000');
+INSERT INTO `dcsdscrib` VALUES ('1236', '462B中间提升泵房', 'ITEM155', '0', '高位水池液位', '10000');
+INSERT INTO `dcsdscrib` VALUES ('1237', '462B中间提升泵房', 'ITEM156', '0', '地面污水池液位', '10000');
+INSERT INTO `dcsdscrib` VALUES ('1238', '466泵房  V466污泥池', 'ITEM157', '0', '污泥池前液位', '5');
+INSERT INTO `dcsdscrib` VALUES ('1239', 'P495A-15', 'ITEM158', '0', '污泥脱水间地沟液位', '10000');
+INSERT INTO `dcsdscrib` VALUES ('1240', '465吸泥池', 'ITEM159', '0', '吸泥池液位', '10000');
+INSERT INTO `dcsdscrib` VALUES ('1241', '465A吸泥池', 'ITEM160', '0', '吸泥池液位', '10000');
+INSERT INTO `dcsdscrib` VALUES ('1242', '465A吸泥池', 'ITEM161', '0', '地面污水池液位', '10000');
+INSERT INTO `dcsdscrib` VALUES ('1243', '465B吸泥池', 'ITEM162', '0', '吸泥池液位', '10000');
+INSERT INTO `dcsdscrib` VALUES ('1244', '465B吸泥池', 'ITEM163', '0', '地面污水池液位', '10000');
+INSERT INTO `dcsdscrib` VALUES ('1245', 'M488刮沙机  M488-1#', 'ITEM164', '0', '刮沙机', '10000');
+INSERT INTO `dcsdscrib` VALUES ('1246', 'M488刮沙机  M488-2#', 'ITEM165', '0', '刮沙机', '10000');
+INSERT INTO `dcsdscrib` VALUES ('1247', 'M488刮沙机  M488-3#', 'ITEM166', '0', '刮沙机', '10000');
+INSERT INTO `dcsdscrib` VALUES ('1248', 'M488刮沙机  M488-4#', 'ITEM167', '0', '刮沙机', '10000');
+INSERT INTO `dcsdscrib` VALUES ('1249', 'M489-1#周边传动刮泥机', 'ITEM168', '0', '周边传动刮泥机', '10000');
+INSERT INTO `dcsdscrib` VALUES ('1250', 'M489-1#周边传动刮泥机', 'ITEM169', '0', '周边传动刮泥机', '10000');
+INSERT INTO `dcsdscrib` VALUES ('1251', 'M489-2#周边传动刮泥机', 'ITEM170', '0', '周边传动刮泥机', '10000');
+INSERT INTO `dcsdscrib` VALUES ('1252', 'M489-2#周边传动刮泥机', 'ITEM171', '0', '周边传动刮泥机', '10000');
+INSERT INTO `dcsdscrib` VALUES ('1253', 'M489-3#周边传动刮泥机', 'ITEM172', '0', '周边传动刮泥机', '10000');
+INSERT INTO `dcsdscrib` VALUES ('1254', 'M489-3#周边传动刮泥机', 'ITEM173', '0', '周边传动刮泥机', '10000');
+INSERT INTO `dcsdscrib` VALUES ('1255', '1#潜水排污泵', 'ITEM174', '0', '潜水排污泵', '10000');
+INSERT INTO `dcsdscrib` VALUES ('1256', '1#潜水排污泵', 'ITEM175', '0', '潜水排污泵', '10000');
+INSERT INTO `dcsdscrib` VALUES ('1257', '2#潜水排污泵', 'ITEM176', '0', '潜水排污泵', '10000');
+INSERT INTO `dcsdscrib` VALUES ('1258', '2#潜水排污泵', 'ITEM177', '0', '潜水排污泵', '10000');
+INSERT INTO `dcsdscrib` VALUES ('1259', '3#潜水排污泵', 'ITEM178', '0', '潜水排污泵', '10000');
+INSERT INTO `dcsdscrib` VALUES ('1260', '3#潜水排污泵', 'ITEM179', '0', '潜水排污泵', '10000');
+INSERT INTO `dcsdscrib` VALUES ('1261', '4#潜水排污泵', 'ITEM180', '0', '潜水排污泵', '10000');
+INSERT INTO `dcsdscrib` VALUES ('1262', '4#潜水排污泵', 'ITEM181', '0', '潜水排污泵', '10000');
+INSERT INTO `dcsdscrib` VALUES ('1263', '5#潜水排污泵', 'ITEM182', '0', '潜水排污泵', '10000');
+INSERT INTO `dcsdscrib` VALUES ('1264', '5#潜水排污泵', 'ITEM183', '0', '潜水排污泵', '10000');
+INSERT INTO `dcsdscrib` VALUES ('1265', 'P495A1-2', 'ITEM184', '0', '泵出口干管压力', '10000');
+INSERT INTO `dcsdscrib` VALUES ('1266', '加药间', 'ITEM185', '0', '生化处理车间加药间', '10000');
+INSERT INTO `dcsdscrib` VALUES ('1267', 'C281鼓风机房  1#鼓风机', 'ITEM186', '0', '鼓风机前压力', '10000');
+INSERT INTO `dcsdscrib` VALUES ('1268', 'C281鼓风机房  2#鼓风机', 'ITEM187', '0', '鼓风机前压力', '10000');
+INSERT INTO `dcsdscrib` VALUES ('1269', 'C281鼓风机房  3#鼓风机', 'ITEM188', '0', '鼓风机前压力', '10000');
+INSERT INTO `dcsdscrib` VALUES ('1270', 'C281鼓风机房  4#鼓风机', 'ITEM189', '0', '鼓风机前压力', '10000');
+INSERT INTO `dcsdscrib` VALUES ('1271', 'C281鼓风机房  1#鼓风机', 'ITEM190', '0', '鼓风机后压力', '10000');
+INSERT INTO `dcsdscrib` VALUES ('1272', 'C281鼓风机房  2#鼓风机', 'ITEM191', '0', '鼓风机后压力', '10000');
+INSERT INTO `dcsdscrib` VALUES ('1273', 'C281鼓风机房  3#鼓风机', 'ITEM192', '0', '鼓风机后压力', '10000');
+INSERT INTO `dcsdscrib` VALUES ('1274', 'C281鼓风机房  4#鼓风机', 'ITEM193', '0', '鼓风机后压力', '10000');
+INSERT INTO `dcsdscrib` VALUES ('1275', 'C281鼓风机房', 'ITEM194', '0', null, '10000');
+INSERT INTO `dcsdscrib` VALUES ('1276', 'C281鼓风机房', 'ITEM195', '0', null, '10000');
+INSERT INTO `dcsdscrib` VALUES ('1277', 'C281鼓风机房', 'ITEM196', '0', null, '10000');
+INSERT INTO `dcsdscrib` VALUES ('1278', '428加压泵房', 'ITEM197', '0', '生活给水压力', '10000');
+INSERT INTO `dcsdscrib` VALUES ('1279', '428加压泵房', 'ITEM198', '0', '工业给水压力', '10000');
+INSERT INTO `dcsdscrib` VALUES ('1280', '测空压站来空气', 'ITEM199', '0', '干管压力', '10000');
+INSERT INTO `dcsdscrib` VALUES ('1281', null, 'ITEM200', '0', '', '10000');
+INSERT INTO `dcsdscrib` VALUES ('1282', '1#带式压榨过滤机', 'ITEM201', '0', '带式压榨过滤机状态', '10000');
+INSERT INTO `dcsdscrib` VALUES ('1283', '2#带式压榨过滤机', 'ITEM202', '0', '带式压榨过滤机状态', '10000');
+INSERT INTO `dcsdscrib` VALUES ('1284', '3#带式压榨过滤机', 'ITEM203', '0', '带式压榨过滤机状态', '10000');
+INSERT INTO `dcsdscrib` VALUES ('1285', '4#带式压榨过滤机', 'ITEM204', '0', '带式压榨过滤机状态', '10000');
+INSERT INTO `dcsdscrib` VALUES ('1286', '5#带式压榨过滤机', 'ITEM205', '0', '带式压榨过滤机状态', '10000');
+INSERT INTO `dcsdscrib` VALUES ('1287', '462B中间提升泵房  462B高位水池', 'ITEM206', '0', '高位水池温度', '10000');
+INSERT INTO `dcsdscrib` VALUES ('1288', 'C281鼓风机房  1#增速机', 'ITEM207', '0', '增速机轴承温度', '10000');
+INSERT INTO `dcsdscrib` VALUES ('1289', 'C281鼓风机房  2#增速机', 'ITEM208', '0', '增速机轴承温度', '10000');
+INSERT INTO `dcsdscrib` VALUES ('1290', 'C281鼓风机房  3#增速机', 'ITEM209', '0', '增速机轴承温度', '10000');
+INSERT INTO `dcsdscrib` VALUES ('1291', 'C281鼓风机房  4#增速机', 'ITEM210', '0', '增速机轴承温度', '10000');
+INSERT INTO `dcsdscrib` VALUES ('1292', 'C281鼓风机房  1#电机', 'ITEM211', '0', '电机轴承温度', '10000');
+INSERT INTO `dcsdscrib` VALUES ('1293', 'C281鼓风机房  2#电机', 'ITEM212', '0', '电机轴承温度', '10000');
+INSERT INTO `dcsdscrib` VALUES ('1294', 'C281鼓风机房  3#电机', 'ITEM213', '0', '电机轴承温度', '10000');
+INSERT INTO `dcsdscrib` VALUES ('1295', 'C281鼓风机房  4#电机', 'ITEM214', '0', '电机轴承温度', '10000');
+INSERT INTO `dcsdscrib` VALUES ('1296', 'C281鼓风机房  1#电机', 'ITEM215', '0', '电机定子温度', '10000');
+INSERT INTO `dcsdscrib` VALUES ('1297', 'C281鼓风机房  2#电机', 'ITEM216', '0', '电机定子温度', '10000');
+INSERT INTO `dcsdscrib` VALUES ('1298', 'C281鼓风机房  3#电机', 'ITEM217', '0', '电机定子温度', '10000');
+INSERT INTO `dcsdscrib` VALUES ('1299', 'C281鼓风机房  4#电机', 'ITEM218', '0', '电机定子温度', '10000');
+INSERT INTO `dcsdscrib` VALUES ('1300', 'C281鼓风机房  1#鼓风机', 'ITEM219', '0', '鼓风机出口管温度', '10000');
+INSERT INTO `dcsdscrib` VALUES ('1301', 'C281鼓风机房  2#鼓风机', 'ITEM220', '0', '鼓风机出口管温度', '10000');
+INSERT INTO `dcsdscrib` VALUES ('1302', 'C281鼓风机房  3#鼓风机', 'ITEM221', '0', '鼓风机出口管温度', '10000');
+INSERT INTO `dcsdscrib` VALUES ('1303', 'C281鼓风机房  4#鼓风机', 'ITEM222', '0', '鼓风机出口管温度', '10000');
+INSERT INTO `dcsdscrib` VALUES ('1304', 'C281鼓风机房  1#鼓风机', 'ITEM223', '0', '鼓风机入口管温度', '10000');
+INSERT INTO `dcsdscrib` VALUES ('1305', 'C281鼓风机房  2#鼓风机', 'ITEM224', '0', '鼓风机入口管温度', '10000');
+INSERT INTO `dcsdscrib` VALUES ('1306', 'C281鼓风机房  3#鼓风机', 'ITEM225', '0', '鼓风机入口管温度', '10000');
+INSERT INTO `dcsdscrib` VALUES ('1307', 'C281鼓风机房  4#鼓风机', 'ITEM226', '0', '鼓风机入口管温度', '10000');
+INSERT INTO `dcsdscrib` VALUES ('1308', 'C281鼓风机房  1#鼓风机', 'ITEM227', '0', '鼓风机润滑油管温度', '10000');
+INSERT INTO `dcsdscrib` VALUES ('1309', 'C281鼓风机房  2#鼓风机', 'ITEM228', '0', '鼓风机润滑油管温度', '10000');
+INSERT INTO `dcsdscrib` VALUES ('1310', 'C281鼓风机房  3#鼓风机', 'ITEM229', '0', '鼓风机润滑油管温度', '10000');
+INSERT INTO `dcsdscrib` VALUES ('1311', 'C281鼓风机房  4#鼓风机', 'ITEM230', '0', '鼓风机润滑油管温度', '10000');
+INSERT INTO `dcsdscrib` VALUES ('1312', 'C281鼓风机房  1#鼓风机', 'ITEM231', '0', '鼓风机冷却回水温度', '10000');
+INSERT INTO `dcsdscrib` VALUES ('1313', 'C281鼓风机房  2#鼓风机', 'ITEM232', '0', '鼓风机冷却回水温度', '10000');
+INSERT INTO `dcsdscrib` VALUES ('1314', 'C281鼓风机房  3#鼓风机', 'ITEM233', '0', '鼓风机冷却回水温度', '10000');
+INSERT INTO `dcsdscrib` VALUES ('1315', 'C281鼓风机房  4#鼓风机', 'ITEM234', '0', '鼓风机冷却回水温度', '10000');
+INSERT INTO `dcsdscrib` VALUES ('1316', 'C281鼓风机房', 'ITEM235', '0', 'V-452-1冷却水池温度', '10000');
+INSERT INTO `dcsdscrib` VALUES ('1317', 'C281鼓风机房', 'ITEM236', '0', 'V-452-2冷却水池温度', '10000');
+INSERT INTO `dcsdscrib` VALUES ('1318', 'C281鼓风机房', 'ITEM237', '0', null, '10000');
+INSERT INTO `dcsdscrib` VALUES ('1319', 'C281鼓风机房', 'ITEM238', '0', null, '10000');
+INSERT INTO `dcsdscrib` VALUES ('1320', 'C281鼓风机房', 'ITEM239', '0', null, '10000');
+INSERT INTO `dcsdscrib` VALUES ('1321', 'C281鼓风机房', 'ITEM240', '0', null, '10000');
+INSERT INTO `dcsdscrib` VALUES ('1322', '490  1号生化池', 'ITEM241', '15', '生化池温度', '35');
+INSERT INTO `dcsdscrib` VALUES ('1323', '490  2号生化池', 'ITEM242', '15', '生化池温度', '35');
+INSERT INTO `dcsdscrib` VALUES ('1324', '490  3号生化池', 'ITEM243', '15', '生化池温度', '35');
+INSERT INTO `dcsdscrib` VALUES ('1325', '490  4号生化池', 'ITEM244', '15', '生化池温度', '35');
+INSERT INTO `dcsdscrib` VALUES ('1326', '490  5号生化池', 'ITEM245', '15', '生化池温度', '35');
+INSERT INTO `dcsdscrib` VALUES ('1327', '490  6号生化池', 'ITEM246', '15', '生化池温度', '35');
+INSERT INTO `dcsdscrib` VALUES ('1328', '490  7号生化池', 'ITEM247', '15', '生化池温度', '35');
+INSERT INTO `dcsdscrib` VALUES ('1329', '490  8号生化池', 'ITEM248', '15', '生化池温度', '35');
+INSERT INTO `dcsdscrib` VALUES ('1331', '490  2号生化池', 'ITEM 6', '6', '生化池PH', '9');
 
 -- ----------------------------
 -- Table structure for `forward`
@@ -640,6 +957,30 @@ CREATE TABLE `forwardandresult` (
 -- ----------------------------
 
 -- ----------------------------
+-- Table structure for `testuser`
+-- ----------------------------
+DROP TABLE IF EXISTS `testuser`;
+CREATE TABLE `testuser` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of testuser
+-- ----------------------------
+INSERT INTO `testuser` VALUES ('1', 'aaa', '12');
+INSERT INTO `testuser` VALUES ('2', '44', '44');
+INSERT INTO `testuser` VALUES ('3', 'sdf', '234');
+INSERT INTO `testuser` VALUES ('4', '234', '234');
+INSERT INTO `testuser` VALUES ('5', 'wer', '123');
+INSERT INTO `testuser` VALUES ('6', 'wer', '123');
+INSERT INTO `testuser` VALUES ('7', 'qqq', 'qqq');
+INSERT INTO `testuser` VALUES ('8', 'hhh', '123');
+INSERT INTO `testuser` VALUES ('9', 'ghj', '123');
+
+-- ----------------------------
 -- Table structure for `user`
 -- ----------------------------
 DROP TABLE IF EXISTS `user`;
@@ -653,9 +994,286 @@ CREATE TABLE `user` (
   `phone` varchar(16) NOT NULL,
   `jid` varchar(16) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
 INSERT INTO `user` VALUES (null, '1', '王晓明', '1', '1', 'squarlhan@163.com', '13074347302', '000001');
+INSERT INTO `user` VALUES ('8', '2', '8', '8', '8', '8', '8', '8');
+INSERT INTO `user` VALUES ('123', '3', '123', '张晓明', '123', '123', '123', '123');
+
+-- ----------------------------
+-- Table structure for `wwdcsdata`
+-- ----------------------------
+DROP TABLE IF EXISTS `wwdcsdata`;
+CREATE TABLE `wwdcsdata` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `ITEM1` float NOT NULL,
+  `ITEM10` float NOT NULL,
+  `ITEM100` float NOT NULL,
+  `ITEM101` float NOT NULL,
+  `ITEM102` float NOT NULL,
+  `ITEM103` float NOT NULL,
+  `ITEM104` float NOT NULL,
+  `ITEM105` float NOT NULL,
+  `ITEM106` float NOT NULL,
+  `ITEM107` float NOT NULL,
+  `ITEM108` float NOT NULL,
+  `ITEM109` float NOT NULL,
+  `ITEM11` float NOT NULL,
+  `ITEM110` float NOT NULL,
+  `ITEM111` float NOT NULL,
+  `ITEM112` float NOT NULL,
+  `ITEM113` float NOT NULL,
+  `ITEM114` float NOT NULL,
+  `ITEM115` float NOT NULL,
+  `ITEM116` float NOT NULL,
+  `ITEM117` float NOT NULL,
+  `ITEM118` float NOT NULL,
+  `ITEM119` float NOT NULL,
+  `ITEM12` float NOT NULL,
+  `ITEM120` float NOT NULL,
+  `ITEM121` float NOT NULL,
+  `ITEM122` float NOT NULL,
+  `ITEM123` float NOT NULL,
+  `ITEM124` float NOT NULL,
+  `ITEM125` float NOT NULL,
+  `ITEM126` float NOT NULL,
+  `ITEM127` float NOT NULL,
+  `ITEM128` float NOT NULL,
+  `ITEM129` float NOT NULL,
+  `ITEM13` float NOT NULL,
+  `ITEM130` float NOT NULL,
+  `ITEM131` float NOT NULL,
+  `ITEM132` float NOT NULL,
+  `ITEM133` float NOT NULL,
+  `ITEM134` float NOT NULL,
+  `ITEM135` float NOT NULL,
+  `ITEM136` float NOT NULL,
+  `ITEM137` float NOT NULL,
+  `ITEM138` float NOT NULL,
+  `ITEM139` float NOT NULL,
+  `ITEM14` float NOT NULL,
+  `ITEM140` float NOT NULL,
+  `ITEM141` float NOT NULL,
+  `ITEM142` float NOT NULL,
+  `ITEM143` float NOT NULL,
+  `ITEM144` float NOT NULL,
+  `ITEM145` float NOT NULL,
+  `ITEM146` float NOT NULL,
+  `ITEM147` float NOT NULL,
+  `ITEM148` float NOT NULL,
+  `ITEM149` float NOT NULL,
+  `ITEM15` float NOT NULL,
+  `ITEM150` float NOT NULL,
+  `ITEM151` float NOT NULL,
+  `ITEM152` float NOT NULL,
+  `ITEM153` float NOT NULL,
+  `ITEM154` float NOT NULL,
+  `ITEM155` float NOT NULL,
+  `ITEM156` float NOT NULL,
+  `ITEM157` float NOT NULL,
+  `ITEM158` float NOT NULL,
+  `ITEM159` float NOT NULL,
+  `ITEM16` float NOT NULL,
+  `ITEM160` float NOT NULL,
+  `ITEM161` float NOT NULL,
+  `ITEM162` float NOT NULL,
+  `ITEM163` float NOT NULL,
+  `ITEM164` float NOT NULL,
+  `ITEM165` float NOT NULL,
+  `ITEM166` float NOT NULL,
+  `ITEM167` float NOT NULL,
+  `ITEM168` float NOT NULL,
+  `ITEM169` float NOT NULL,
+  `ITEM17` float NOT NULL,
+  `ITEM170` float NOT NULL,
+  `ITEM171` float NOT NULL,
+  `ITEM172` float NOT NULL,
+  `ITEM173` float NOT NULL,
+  `ITEM174` float NOT NULL,
+  `ITEM175` float NOT NULL,
+  `ITEM176` float NOT NULL,
+  `ITEM177` float NOT NULL,
+  `ITEM178` float NOT NULL,
+  `ITEM179` float NOT NULL,
+  `ITEM18` float NOT NULL,
+  `ITEM180` float NOT NULL,
+  `ITEM181` float NOT NULL,
+  `ITEM182` float NOT NULL,
+  `ITEM183` float NOT NULL,
+  `ITEM184` float NOT NULL,
+  `ITEM185` float NOT NULL,
+  `ITEM186` float NOT NULL,
+  `ITEM187` float NOT NULL,
+  `ITEM188` float NOT NULL,
+  `ITEM189` float NOT NULL,
+  `ITEM19` float NOT NULL,
+  `ITEM190` float NOT NULL,
+  `ITEM191` float NOT NULL,
+  `ITEM192` float NOT NULL,
+  `ITEM193` float NOT NULL,
+  `ITEM194` float NOT NULL,
+  `ITEM195` float NOT NULL,
+  `ITEM196` float NOT NULL,
+  `ITEM197` float NOT NULL,
+  `ITEM198` float NOT NULL,
+  `ITEM199` float NOT NULL,
+  `ITEM2` float NOT NULL,
+  `ITEM20` float NOT NULL,
+  `ITEM200` float NOT NULL,
+  `ITEM201` float NOT NULL,
+  `ITEM202` float NOT NULL,
+  `ITEM203` float NOT NULL,
+  `ITEM204` float NOT NULL,
+  `ITEM205` float NOT NULL,
+  `ITEM206` float NOT NULL,
+  `ITEM207` float NOT NULL,
+  `ITEM208` float NOT NULL,
+  `ITEM209` float NOT NULL,
+  `ITEM21` float NOT NULL,
+  `ITEM210` float NOT NULL,
+  `ITEM211` float NOT NULL,
+  `ITEM212` float NOT NULL,
+  `ITEM213` float NOT NULL,
+  `ITEM214` float NOT NULL,
+  `ITEM215` float NOT NULL,
+  `ITEM216` float NOT NULL,
+  `ITEM217` float NOT NULL,
+  `ITEM218` float NOT NULL,
+  `ITEM219` float NOT NULL,
+  `ITEM22` float NOT NULL,
+  `ITEM220` float NOT NULL,
+  `ITEM221` float NOT NULL,
+  `ITEM222` float NOT NULL,
+  `ITEM223` float NOT NULL,
+  `ITEM224` float NOT NULL,
+  `ITEM225` float NOT NULL,
+  `ITEM226` float NOT NULL,
+  `ITEM227` float NOT NULL,
+  `ITEM228` float NOT NULL,
+  `ITEM229` float NOT NULL,
+  `ITEM23` float NOT NULL,
+  `ITEM230` float NOT NULL,
+  `ITEM231` float NOT NULL,
+  `ITEM232` float NOT NULL,
+  `ITEM233` float NOT NULL,
+  `ITEM234` float NOT NULL,
+  `ITEM235` float NOT NULL,
+  `ITEM236` float NOT NULL,
+  `ITEM237` float NOT NULL,
+  `ITEM238` float NOT NULL,
+  `ITEM239` float NOT NULL,
+  `ITEM24` float NOT NULL,
+  `ITEM240` float NOT NULL,
+  `ITEM241` float NOT NULL,
+  `ITEM242` float NOT NULL,
+  `ITEM243` float NOT NULL,
+  `ITEM244` float NOT NULL,
+  `ITEM245` float NOT NULL,
+  `ITEM246` float NOT NULL,
+  `ITEM247` float NOT NULL,
+  `ITEM248` float NOT NULL,
+  `ITEM249` float NOT NULL,
+  `ITEM25` float NOT NULL,
+  `ITEM250` float NOT NULL,
+  `ITEM251` float NOT NULL,
+  `ITEM252` float NOT NULL,
+  `ITEM253` float NOT NULL,
+  `ITEM254` float NOT NULL,
+  `ITEM255` float NOT NULL,
+  `ITEM256` float NOT NULL,
+  `ITEM257` float NOT NULL,
+  `ITEM258` float NOT NULL,
+  `ITEM259` float NOT NULL,
+  `ITEM26` float NOT NULL,
+  `ITEM260` float NOT NULL,
+  `ITEM27` float NOT NULL,
+  `ITEM28` float NOT NULL,
+  `ITEM29` float NOT NULL,
+  `ITEM3` float NOT NULL,
+  `ITEM30` float NOT NULL,
+  `ITEM31` float NOT NULL,
+  `ITEM32` float NOT NULL,
+  `ITEM33` float NOT NULL,
+  `ITEM34` float NOT NULL,
+  `ITEM35` float NOT NULL,
+  `ITEM36` float NOT NULL,
+  `ITEM37` float NOT NULL,
+  `ITEM38` float NOT NULL,
+  `ITEM39` float NOT NULL,
+  `ITEM4` float NOT NULL,
+  `ITEM40` float NOT NULL,
+  `ITEM41` float NOT NULL,
+  `ITEM42` float NOT NULL,
+  `ITEM43` float NOT NULL,
+  `ITEM44` float NOT NULL,
+  `ITEM45` float NOT NULL,
+  `ITEM46` float NOT NULL,
+  `ITEM47` float NOT NULL,
+  `ITEM48` float NOT NULL,
+  `ITEM49` float NOT NULL,
+  `ITEM5` float NOT NULL,
+  `ITEM50` float NOT NULL,
+  `ITEM51` float NOT NULL,
+  `ITEM52` float NOT NULL,
+  `ITEM53` float NOT NULL,
+  `ITEM54` float NOT NULL,
+  `ITEM55` float NOT NULL,
+  `ITEM56` float NOT NULL,
+  `ITEM57` float NOT NULL,
+  `ITEM58` float NOT NULL,
+  `ITEM59` float NOT NULL,
+  `ITEM6` float NOT NULL,
+  `ITEM60` float NOT NULL,
+  `ITEM61` float NOT NULL,
+  `ITEM62` float NOT NULL,
+  `ITEM63` float NOT NULL,
+  `ITEM64` float NOT NULL,
+  `ITEM65` float NOT NULL,
+  `ITEM66` float NOT NULL,
+  `ITEM67` float NOT NULL,
+  `ITEM68` float NOT NULL,
+  `ITEM69` float NOT NULL,
+  `ITEM7` float NOT NULL,
+  `ITEM70` float NOT NULL,
+  `ITEM71` float NOT NULL,
+  `ITEM72` float NOT NULL,
+  `ITEM73` float NOT NULL,
+  `ITEM74` float NOT NULL,
+  `ITEM75` float NOT NULL,
+  `ITEM76` float NOT NULL,
+  `ITEM77` float NOT NULL,
+  `ITEM78` float NOT NULL,
+  `ITEM79` float NOT NULL,
+  `ITEM8` float NOT NULL,
+  `ITEM80` float NOT NULL,
+  `ITEM81` float NOT NULL,
+  `ITEM82` float NOT NULL,
+  `ITEM83` float NOT NULL,
+  `ITEM84` float NOT NULL,
+  `ITEM85` float NOT NULL,
+  `ITEM86` float NOT NULL,
+  `ITEM87` float NOT NULL,
+  `ITEM88` float NOT NULL,
+  `ITEM89` float NOT NULL,
+  `ITEM9` float NOT NULL,
+  `ITEM90` float NOT NULL,
+  `ITEM91` float NOT NULL,
+  `ITEM92` float NOT NULL,
+  `ITEM93` float NOT NULL,
+  `ITEM94` float NOT NULL,
+  `ITEM95` float NOT NULL,
+  `ITEM96` float NOT NULL,
+  `ITEM97` float NOT NULL,
+  `ITEM98` float NOT NULL,
+  `ITEM99` float NOT NULL,
+  `ORGTIME` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of wwdcsdata
+-- ----------------------------
+INSERT INTO `wwdcsdata` VALUES ('1', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '1', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '1', '0', '0', '0', '0', '1', '0', '0', '0', '1', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '1', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '2011-11-11 16:08:56');
