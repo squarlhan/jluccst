@@ -8,7 +8,7 @@
 		<pattern>/rule*</pattern>
 		<pattern>/dcs*</pattern>
 		<pattern>/wwdcs*</pattern>
-		<pattern>/biocpool/*</pattern>
+		<pattern>/biocpool490/*</pattern>
 		
 	</decorator>
 	<decorator name="admin" page="admindecorator.jsp">
