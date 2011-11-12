@@ -15,6 +15,7 @@ import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 
+import cn.edu.jlu.ccst.model.Admin;
 import cn.edu.jlu.ccst.model.User;
 import cn.edu.jlu.ccst.service.DcsDscribService;
 import cn.edu.jlu.ccst.service.UserService;
@@ -176,6 +177,25 @@ public class UserAction extends ActionSupport {
 	        return "loginsuccess";}
 		
 		}
+	
+	public boolean checkuser(){
+		ActionContext actionContext = ActionContext.getContext();
+        Map user = actionContext.getSession();
+        User us = (User) user.get("us");
+		if(us!=null){
+			return true;
+		}
+		else return false;
+	}
+	public boolean checkadmin(){
+		ActionContext actionContext = ActionContext.getContext();
+        Map admin = actionContext.getSession();
+        Admin ad = (Admin) admin.get("ad");
+		if(ad!=null){
+			return true;
+		}
+		else return false;
+	}
 
 	public String deleteUser() {
 		    
@@ -230,7 +250,8 @@ public class UserAction extends ActionSupport {
 		
 		
 		public String  userList() {
-			userlist = userService.findall();
+			if(checkadmin()){
+			userlist = userService.findall();}
 			return SUCCESS;
 		}
 		
@@ -260,9 +281,11 @@ public class UserAction extends ActionSupport {
 			
 			}
 		public String logoff() {
+			
+			if(checkuser()){
 			ActionContext.getContext().getSession().remove("us");
 			
-			System.out.println("注销成功2！");
+			System.out.println("注销成功2！");}
 			return "logoffusersuccess";
 		}
 		
