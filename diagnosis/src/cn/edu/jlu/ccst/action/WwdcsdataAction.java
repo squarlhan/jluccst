@@ -44,6 +44,13 @@ public class WwdcsdataAction extends ActionSupport {
 	private List<BackwardandReason> reasonlist;
 	private RuleService ruleService; 
 	
+	public RuleService getRuleService() {
+		return ruleService;
+	}
+	@Resource
+	public void setRuleService(RuleService ruleService) {
+		this.ruleService = ruleService;
+	}
 	public List<BackwardandReason> getReasonlist() {
 		return reasonlist;
 	}
