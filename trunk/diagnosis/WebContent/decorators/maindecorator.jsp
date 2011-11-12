@@ -166,23 +166,23 @@ p a,p a:visited {
 											<ul>
 												<li><a href="#">生化池系列1</a>
 													<ul>
-														<li class="Child"><a href="#">1#生化池</a></li>
-														<li class="Child"><a href="#">2#生化池</a></li>
+														<li class="Child"><a href="http://localhost:8080/diagnosis/biocpool490/biocpool1.jsp">1#生化池</a></li>
+														<li class="Child"><a href="http://localhost:8080/diagnosis/biocpool490/biocpool2.jsp">2#生化池</a></li>
 													</ul></li>
 												<li><a href="#">生化池系列2</a>
 													<ul>
-														<li class="Child"><a href="#">3#生化池</a></li>
-														<li class="Child"><a href="#">4#生化池</a></li>
+														<li class="Child"><a href="http://localhost:8080/diagnosis/biocpool490/biocpool3.jsp">3#生化池</a></li>
+														<li class="Child"><a href="http://localhost:8080/diagnosis/biocpool490/biocpool4.jsp">4#生化池</a></li>
 													</ul></li>
 												<li><a href="#">生化池系列3</a>
 													<ul>
-														<li class="Child"><a href="#">5#生化池</a></li>
-														<li class="Child"><a href="#">6#生化池</a></li>
+														<li class="Child"><a href="http://localhost:8080/diagnosis/biocpool490/biocpool5.jsp">5#生化池</a></li>
+														<li class="Child"><a href="http://localhost:8080/diagnosis/biocpool490/biocpool6.jsp">6#生化池</a></li>
 													</ul></li>
 												<li><a href="#">生化池系列4</a>
 													<ul>
-														<li class="Child"><a href="#">7#生化池</a></li>
-														<li class="Child"><a href="#">8#生化池</a></li>
+														<li class="Child"><a href="http://localhost:8080/diagnosis/biocpool490/biocpool7.jsp">7#生化池</a></li>
+														<li class="Child"><a href="http://localhost:8080/diagnosis/biocpool490/biocpool8.jsp">8#生化池</a></li>
 													</ul></li>
 											</ul></li>
 
