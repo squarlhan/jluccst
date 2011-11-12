@@ -5,6 +5,8 @@ package cn.edu.jlu.ccst.service;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
+import java.util.Map;
 
 import java.util.List;
 
@@ -21,7 +23,7 @@ import cn.edu.jlu.ccst.model.Wwdcsdata;
 public class WwdcsdataService {
 	private Wwdcsdata wwdcsdata;
 	private WwdcsdataServiceInter wwdcsServiceImpl;
-
+    
 	
 public Wwdcsdata getWwdcsdata() {
 		return wwdcsdata;
@@ -64,6 +66,4 @@ public User getUser() {
 		       wwdcsdata.setORGTIME(dateString);
 		       wwdcsServiceImpl.save(wwdcsdata);   
 	}
-	
-	
-}
+	}

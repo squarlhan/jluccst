@@ -22,7 +22,7 @@
 
 		
 	 <action name="wwdcsdataaction" class="wwdcsdataAction">
-			<result name="datasuccess">userruleadd.jsp</result>
+			<result name="go">usergo.jsp</result>
 			
 		</action> 
 	   

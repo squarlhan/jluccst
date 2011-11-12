@@ -125,6 +125,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           <td width="25%" >现象名词：
              
              <select name="resultn" size="1" style="width:200px">
+             <option> -请选择-</option>
 	       <s:iterator id="names" value="namelist" status="index1">
 	      <option> <s:property /> </option>
 	      </s:iterator>

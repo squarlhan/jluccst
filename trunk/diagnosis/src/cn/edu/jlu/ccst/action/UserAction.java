@@ -155,18 +155,9 @@ public class UserAction extends ActionSupport {
 		User flag1;
 		namelist=dcsDscribService.findallname();
 		backwardandResultlist = rulebrService.findAll();
-		/*Set<String> set1=new HashSet();
-		Set<String> set2=new HashSet();
-	 for(BackwardandResult brt:backwardandResultlist){
-		set1.add(brt.getNouns());
-		set2.add(brt.getVerb());
-	}
-	 backwardandResultlist1=new ArrayList();
-	 backwardandResultlist2=new ArrayList();
-	 backwardandResultlist1.addAll(set1);
-	 backwardandResultlist2.addAll(set2);*/
+		
 		flag1=userService.exits(user);
-		System.out.print(namelist+"998989388974932");
+
 		if(flag1==null){
 			
 		  return "loginerror";}
