@@ -75,13 +75,22 @@ public class RuleBRAction extends ActionSupport {
 			List<BackwardandResult> backwardandResultlist) {
 		this.backwardandResultlist = backwardandResultlist;
 	}
+	public boolean checkup(){
+		ActionContext actionContext = ActionContext.getContext();
+        Map user = actionContext.getSession();
+        User us = (User) user.get("us");
+		if(us!=null){
+			return true;
+		}
+		else return false;
+	}
 	
 	public String execute() {
 //		nb=rulebrService.getalloptions();
-		nvs = rulebrService.getallnvs();
+		if( checkup()){nvs = rulebrService.getallnvs();
 		ActionContext actionContext = ActionContext.getContext();
         Map session = actionContext.getSession();
-        session.put("map", nvs);
+        session.put("map", nvs);}
 		return "rulesuccess";
 		/*User flag1;
 		backwardandResultlist = rulebrService.findAll();

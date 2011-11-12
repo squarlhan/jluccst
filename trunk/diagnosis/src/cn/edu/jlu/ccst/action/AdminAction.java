@@ -24,7 +24,7 @@ import cn.edu.jlu.ccst.service.UserService;
 @Component("adminAction")
 @Scope("prototype")
 public class AdminAction extends ActionSupport {
-	private UserService userService;
+	private UserService userService; 
 	private List<User> userlist;
 	
 	private String newpassword;
@@ -96,7 +96,15 @@ public class AdminAction extends ActionSupport {
 	
 	
 	
-	
+	public boolean checkadmin(){
+		ActionContext actionContext = ActionContext.getContext();
+        Map admin = actionContext.getSession();
+        Admin ad = (Admin) admin.get("ad");
+		if(ad!=null){
+			return true;
+		}
+		else return false;
+	}
 	public String execute() {
 		Admin flag1;
 		userlist = userService.findall();
@@ -138,9 +146,10 @@ public class AdminAction extends ActionSupport {
 		
 		}
 	public String logoff() {
+		if(checkadmin()){
 		ActionContext.getContext().getSession().remove("ad");
 		
-		System.out.println("注销成功！");
+		System.out.println("注销成功！");}
 		return "logoffsuccess";
 	}
 	
