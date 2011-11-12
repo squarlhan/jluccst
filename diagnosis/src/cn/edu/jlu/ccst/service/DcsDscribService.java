@@ -3,6 +3,7 @@ package cn.edu.jlu.ccst.service;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -81,6 +82,32 @@ public class DcsDscribService {
 	public void save(DcsDscrib dcsDscrib) {
 		dcsDscribServiceImpl.save(dcsDscrib);
 	}
-	
+	public List<BackwardandResult> validateinput(Map  map) {
+		 Iterator iter = map.entrySet().iterator(); 
+		 List<BackwardandResult> results=new ArrayList();
+		    while (iter.hasNext()) { 
+
+	        Map.Entry entry = (Map.Entry) iter.next(); 
+	        int  key = (Integer) entry.getKey(); 
+	        float val = (Float) entry.getValue(); 
+	        
+	        List<DcsDscrib> dcsDscribs=dcsDscribServiceImpl.findbyitem(key);
+	       if(dcsDscribs!=null&&dcsDscribs.size()>0){
+	    	   DcsDscrib db=  dcsDscribs.get(0); 
+	    	   if(val>db.getUpper()){
+	    		   BackwardandResult br=new BackwardandResult();
+	    		   br.setNouns(db.getName());
+	    		   br.setVerb("过高");
+	    		   results.add(br); }
+	    	    if(val<db.getLower()){
+	    		   BackwardandResult br=new BackwardandResult();
+	    		   br.setNouns(db.getName());
+	    		   br.setVerb("过低");
+	    		   results.add(br); }
+	    		   }
+	       
+	    
+		}
+     return results;}
 		
 }

@@ -37,9 +37,17 @@ public class RuleAction extends ActionSupport {
 	private List<String> sugg;
 	private String resultn;
 	private int resultv_value;
-
+    
+	
+	private List<String> namelist;
 	
 	
+	public List<String> getNamelist() {
+		return namelist;
+	}
+	public void setNamelist(List<String> namelist) {
+		this.namelist = namelist;
+	}
 	public DcsDscribService getDcsDscribService() {
 		return dcsDscribService;
 	}
@@ -196,7 +204,7 @@ public class RuleAction extends ActionSupport {
 		}
 		rule.setReasons(breason);
 		rule.setResults(bresult);
-		
+		ruleService.save(rule);
 		if(resultv_value==0){
 			List<BackwardandUpper> bus= new ArrayList();
 			for(DcsDscrib dd:dcslist){
@@ -218,7 +226,7 @@ public class RuleAction extends ActionSupport {
 		}
 		
 		ruleService.save(rule);
-		
+		namelist = dcsDscribService.findallname();
 		return "input";
 	}
 	public String  backList() {

@@ -44,7 +44,10 @@ public class DcsDscribServiceImpl implements DcsDscribServiceInter{
 			em.merge(dcsDscrib);
 		}
 	}
-
+	public List<DcsDscrib> findbyitem(int item){
+		Query query = getEntityManager().createQuery("select b FROM DcsDscrib b where b.item='ITEM"+item+"'");
+		return query.getResultList();
+	} 
 	
 
 	

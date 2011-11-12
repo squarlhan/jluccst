@@ -6,7 +6,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <%@taglib prefix="s" uri="/struts-tags" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
-  <head>
+<head>
    <%if(request.getSession().getAttribute("us")==null) 
   { 
   response.sendRedirect("userlogin.jsp"); 
@@ -21,7 +21,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    %>  
     <base href="<%=basePath%>">
     
-    <title>结果页面</title>
+<title>结果页面</title>
      
     
 	<meta http-equiv="pragma" content="no-cache">
@@ -35,12 +35,24 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 
 
-  </head>
+</head>
   
-  <body>
+<body>
 
-    
-  
+ <table width="1173" border="1">
+  <tr>
+    <td width="1163">故障现象：</td>
+  </tr>
+  <s:iterator id="result" value="backwardandResult" status="index1">
+  <tr>
+   
+	       <td><s:property value="nouns"/><s:property value="verb"/></td>
+	  
+  </tr>
+  </s:iterator>
+</table>
+
+
   <table bordercolor="#4A708B" rules="all"  id="mytable" class="list_table" align="center" width="100%">
 		<tr bgcolor="#4A708B">
 		    <th>故障原因</th>
@@ -55,11 +67,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       
      
      </tr>
-     </s:iterator>
-  </table>
+    </s:iterator>
+</table>
    
     <div align="center">
-      <input name="button" type=button onClick="window.location.href('rulebraction.action')" value="完成返回">
-      </div>
-  </body>
+      <p>
+        <input name="button" type=button onClick="window.location.href('rulebraction.action')" value="完成返回">
+      </p>
+</div>
+</body>
 </html>
