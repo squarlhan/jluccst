@@ -150,7 +150,7 @@ p a,p a:visited {
 					<div id="leftmenu" align="left">
 						<page:applyDecorator page="/decorators/mainmenu.jsp" name="panel" />
 					
-						<div class="CNLTreeMenu" id="CNLTreeMenu2"  style="  width:160px;margin-left:18px;border:solid #90BADE thin ">
+						<div class="CNLTreeMenu" id="CNLTreeMenu2"  style="  width:180px;margin-left:18px;border:solid #90BADE thin ">
 							<p>
 								<a id="AllOpen_2" href="#"
 									onclick="MyCNLTreeMenu2.SetNodes(0);Hd(this);Sw('AllClose_2');">全部展开</a><a
@@ -159,38 +159,67 @@ p a,p a:visited {
 									style="display: none;">全部折叠</a>
 							</p>
 							<ul>
+							  <li class="Closed"><a href="#1">点源车间</a>
+							    <ul>
+							       <li class="Child"><a href="#1">染料厂酸水</a></li>
+							       <li class="Child"><a href="#1">电石厂酸水</a></li>
+							       <li class="Child"><a href="#1">电石厂有机水</a></li>
+							       <li class="Child"><a href="#1">有机合成厂有机水</a></li>
+							       <li class="Child"><a href="#1">炼油厂有机水</a></li>
+							       <li class="Child"><a href="#1">精细化工厂废水</a></li>
+							       <li class="Child"><a href="#1">乙二醇废水</a></li>
+							       <li class="Child"><a href="#1">环氧乙烷废水</a></li>
+							       <li class="Child"><a href="#1">农药厂有机水</a></li>
+							       <li class="Child"><a href="#1">铁运489沉淀池出水</a></li>
+							       <li class="Child"><a href="#1">含氮废水</a></li>
+							       <li class="Child"><a href="#1">103厂碱水</a></li>
+							       <li class="Child"><a href="#1">化肥厂丁辛醇</a></li>
+							       <li class="Child"><a href="#1">丙烯腈废水</a></li>
+							       <li class="Child"><a href="#1">合成树脂厂有机水</a></li>
+							       <li class="Child"><a href="#1">龙潭区生活水</a></li>
+							       <li class="Child"><a href="#1">中部基地有机水</a></li>
+							    </ul>
+							  </li>
+							  <li class="Closed"><a href="#1">中和车间</a></li>
+							  <li class="Closed"><a href="#1">生活水车间</a></li>
+							  <li class="Closed"><a href="#1">预处理车间</a>
+							    <ul>
+							       <li class="Child"><a href="#1">稳流池(477)进水</a></li>
+							       <li class="Child"><a href="#1">进水提升泵房(462A)</a></li>
+							       <li class="Child"><a href="#1">巴氏计量槽（499）</a></li>
+							       <li class="Child"><a href="#1">除色池(414)</a></li>
+							       <li class="Child"><a href="#1">沉沙刮沙池(488)</a></li>
+							       <li class="Child"><a href="#1">初沉池(489B)</a></li>
+							       <li class="Child"><a href="#1">事故池(489)</a></li>
+							       <li class="Child"><a href="#1">14B生活水</a></li>
+							       <li class="Child"><a href="#1">1#水解酸化池</a></li>
+							       <li class="Child"><a href="#1">2#水解酸化池</a></li>
+							       <li class="Child"><a href="#1">污泥池(V466)</a></li>
+							       <li class="Child"><a href="#1">浓缩池(491)</a></li>
+							       <li class="Child"><a href="#1">脱水装置(495)</a></li>
+							    </ul>
+							  </li>
 								<li class="Closed"><a href="#">生化处理车间</a>
 									<ul>
-										<li><a href="#1">426B</a></li>
-										<li><a href="#1">生化池</a>
-											<ul>
-												<li><a href="#">生化池系列1</a>
-													<ul>
-														<li class="Child"><a href="http://localhost:8080/diagnosis/biocpool490/biocpool1.jsp">1#生化池</a></li>
-														<li class="Child"><a href="http://localhost:8080/diagnosis/biocpool490/biocpool2.jsp">2#生化池</a></li>
-													</ul></li>
-												<li><a href="#">生化池系列2</a>
-													<ul>
-														<li class="Child"><a href="http://localhost:8080/diagnosis/biocpool490/biocpool3.jsp">3#生化池</a></li>
-														<li class="Child"><a href="http://localhost:8080/diagnosis/biocpool490/biocpool4.jsp">4#生化池</a></li>
-													</ul></li>
-												<li><a href="#">生化池系列3</a>
-													<ul>
-														<li class="Child"><a href="http://localhost:8080/diagnosis/biocpool490/biocpool5.jsp">5#生化池</a></li>
-														<li class="Child"><a href="http://localhost:8080/diagnosis/biocpool490/biocpool6.jsp">6#生化池</a></li>
-													</ul></li>
-												<li><a href="#">生化池系列4</a>
-													<ul>
-														<li class="Child"><a href="http://localhost:8080/diagnosis/biocpool490/biocpool7.jsp">7#生化池</a></li>
-														<li class="Child"><a href="http://localhost:8080/diagnosis/biocpool490/biocpool8.jsp">8#生化池</a></li>
-													</ul></li>
-											</ul></li>
-
-										<li><a href="#1">二沉池</a></li>
-										<li><a href="#1">接触氧化池</a></li>
-										<li><a href="#1">入江口</a></li>
-									</ul></li>
-								<li class="Closed"><a href="#1">预处理车间</a></li>
+										<li class="Child"><a href="#1">中间提升泵房(462)</a></li>
+										<li class="Child"><a href="#1">中间提升泵房(462B)</a></li>
+										<li class="Child"><a href="#">生化池系列1</a></li>	
+									  <li class="Child"><a href="#">生化池系列2</a></li>
+										<li class="Child"><a href="#">生化池系列3</a></li>
+										<li class="Child"><a href="#">生化池系列4</a></li>
+										<li class="Child"><a href="#1">1系列二沉池</a></li>
+										<li class="Child"><a href="#1">2系列二沉池</a></li>
+										<li class="Child"><a href="#1">3系列二沉池</a></li>
+										<li class="Child"><a href="#1">4系列二沉池</a></li>
+										<li class="Child"><a href="#1">接触氧化池</a></li>
+										<li class="Child"><a href="#1">2系列排江出口线</a></li>
+										<li class="Child"><a href="#1">1、3系列排江出口线</a></li>
+										<li class="Child"><a href="#1">1系列465回流泵房</a></li>
+										<li class="Child"><a href="#1">2系列465A回流泵房</a></li>
+										<li class="Child"><a href="#1">3系列465B回流泵房</a></li>
+									</ul>
+								</li>
+								
 							</ul>
 						</div>
 						<!-- CNLTreeMenu -->

@@ -20,11 +20,18 @@ public class BackwardandResult {
 	private String nouns;
 	private float  cf_result;
 	private String verb;
+	private String memo;
 	
 	
 	
 	
 	
+	public String getMemo() {
+		return memo;
+	}
+	public void setMemo(String memo) {
+		this.memo = memo;
+	}
 	public BackwardandResult(Backward bid, String nouns, float cf_result,
 			String verb) {
 		super();
