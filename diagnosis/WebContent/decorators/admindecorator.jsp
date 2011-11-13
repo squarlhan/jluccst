@@ -33,7 +33,7 @@ response.setHeader("Expires","0");//防止被proxy
 		<td valign="top">
 		<div id="leftmenu">
 		<page:applyDecorator page="/decorators/adminmenu.jsp" name="panel" /> 
-	
+	    <page:applyDecorator page="/decorators/link.jsp" name="panel" /> 
 		</div>
 		</td>
 		<td width="100%">
