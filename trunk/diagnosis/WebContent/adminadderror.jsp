@@ -17,7 +17,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     
     <base href="<%=basePath%>">
     
-    <title>净水厂设备诊断专家系统</title>
+    <title>用户添加错误</title>
      <script type="text/javascript">
     	alert("该用户名已存在，请重新输入！")
     </script>
