@@ -16,11 +16,11 @@ list-style:none;
 }
 
 body{
-width:1000px;
+width:1024px;
 margin:auto;
 }
 #container{
-width:1000px;
+width:1024px;
 margin:auto;
 border-right:1px solid #A7A7A7;
 border-left:1px solid #A7A7A7;
@@ -43,7 +43,7 @@ background:#FFFFFF;
 clear:both;
 }
 #leftmenu{
-width:160px;
+width:180px;
 float:left;
 }
 /**********************导航菜单样式*******************************/
