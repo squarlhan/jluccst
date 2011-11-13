@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50510
 File Encoding         : 65001
 
-Date: 2011-11-12 18:53:53
+Date: 2011-11-13 13:26:04
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -509,6 +509,7 @@ CREATE TABLE `backwardandresult` (
   `nouns` varchar(255) NOT NULL,
   `cf_result` float(10,0) NOT NULL DEFAULT '1',
   `verb` varchar(255) DEFAULT NULL,
+  `memo` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `FKFBAE5431DB7478BC` (`bid`),
   CONSTRAINT `FKFBAE5431DB7478BC` FOREIGN KEY (`bid`) REFERENCES `backward` (`bid`)
@@ -517,104 +518,104 @@ CREATE TABLE `backwardandresult` (
 -- ----------------------------
 -- Records of backwardandresult
 -- ----------------------------
-INSERT INTO `backwardandresult` VALUES ('1', '16', '进水', '0', 'PH小于6');
-INSERT INTO `backwardandresult` VALUES ('3', '18', '进水', '0', 'PH大于9');
-INSERT INTO `backwardandresult` VALUES ('4', '19', '粗格栅间', '0', '有油渣');
-INSERT INTO `backwardandresult` VALUES ('7', '22', '沉砂池', '0', '曝气不均');
-INSERT INTO `backwardandresult` VALUES ('8', '23', '初沉池', '0', '出水带泥');
-INSERT INTO `backwardandresult` VALUES ('9', '24', '三个初沉池', '0', '出水SS浓度差异较大');
-INSERT INTO `backwardandresult` VALUES ('10', '25', '浓缩池', '0', '翻泥');
-INSERT INTO `backwardandresult` VALUES ('11', '26', '带式压榨过滤机', '0', '滤带两旁跑泥');
-INSERT INTO `backwardandresult` VALUES ('12', '27', '带式压榨过滤机', '0', '滤带过滤不好');
-INSERT INTO `backwardandresult` VALUES ('13', '28', '带式压榨过滤机', '0', '脱水效果不好');
-INSERT INTO `backwardandresult` VALUES ('14', '29', '带式压榨过滤机', '0', '泥饼含水率过高');
-INSERT INTO `backwardandresult` VALUES ('15', '30', '离心机', '0', '滤液澄清度差');
-INSERT INTO `backwardandresult` VALUES ('16', '31', '离心机', '0', '污泥含水率高');
-INSERT INTO `backwardandresult` VALUES ('17', '32', '离心机', '0', '固体排料很差');
-INSERT INTO `backwardandresult` VALUES ('18', '33', '格栅机', '0', '减速机发热');
-INSERT INTO `backwardandresult` VALUES ('19', '34', '格栅机', '0', '电机转动，其他部件不动');
-INSERT INTO `backwardandresult` VALUES ('21', '36', '机械格栅机', '0', '安全销断');
-INSERT INTO `backwardandresult` VALUES ('23', '38', '格栅机', '0', '耙齿振动大');
-INSERT INTO `backwardandresult` VALUES ('24', '39', '刮泥机', '0', '异常声响振动');
-INSERT INTO `backwardandresult` VALUES ('25', '40', '刮泥机', '0', '安全销断裂');
-INSERT INTO `backwardandresult` VALUES ('26', '41', '刮砂机', '0', '刮板弯曲');
-INSERT INTO `backwardandresult` VALUES ('27', '42', '刮砂轨道', '0', '变形，磨损变薄');
-INSERT INTO `backwardandresult` VALUES ('28', '43', '刮砂机', '0', '链节脱节');
-INSERT INTO `backwardandresult` VALUES ('29', '44', '刮砂机', '0', '电机过载');
-INSERT INTO `backwardandresult` VALUES ('30', '45', '刮砂机', '0', '主动链轮轴支撑轴承盒过力损坏');
-INSERT INTO `backwardandresult` VALUES ('31', '46', '潜水排污泵', '0', '流量不足');
-INSERT INTO `backwardandresult` VALUES ('32', '47', '潜水排污泵', '0', '不出水');
-INSERT INTO `backwardandresult` VALUES ('33', '48', '潜水排污泵', '0', '运行不稳定');
-INSERT INTO `backwardandresult` VALUES ('34', '49', '潜水排污泵', '0', '电流过大');
-INSERT INTO `backwardandresult` VALUES ('35', '50', '潜水排污泵', '0', '超温保护动作');
-INSERT INTO `backwardandresult` VALUES ('36', '51', '潜水排污泵油室', '0', '进水指示灯亮');
-INSERT INTO `backwardandresult` VALUES ('37', '52', '潜水排污泵', '0', '渗漏保护动作');
-INSERT INTO `backwardandresult` VALUES ('38', '53', '潜水排污泵接线盒', '0', '  探头发信号');
-INSERT INTO `backwardandresult` VALUES ('39', '54', '潜水排污泵', '0', '泵流量不足');
-INSERT INTO `backwardandresult` VALUES ('40', '55', '潜水排污泵', '0', '泵体过热');
-INSERT INTO `backwardandresult` VALUES ('41', '56', '潜水排污泵', '0', '泵轴承过热');
-INSERT INTO `backwardandresult` VALUES ('42', '57', '潜水排污泵', '0', '泵异常声响振动');
-INSERT INTO `backwardandresult` VALUES ('43', '58', '螺杆泵', '0', '泵不能启动');
-INSERT INTO `backwardandresult` VALUES ('44', '59', '螺杆泵', '0', '泵吸不上液体');
-INSERT INTO `backwardandresult` VALUES ('45', '60', '螺杆泵', '0', '流量不足');
-INSERT INTO `backwardandresult` VALUES ('46', '61', '螺杆泵', '0', '运转不稳定');
-INSERT INTO `backwardandresult` VALUES ('47', '62', '螺杆泵', '0', '噪音和振动');
-INSERT INTO `backwardandresult` VALUES ('48', '63', '螺杆泵', '0', '电机，设备过热');
-INSERT INTO `backwardandresult` VALUES ('49', '64', '带式压榨过滤机', '0', '滤带跑偏');
-INSERT INTO `backwardandresult` VALUES ('50', '65', '带式压榨过滤机', '0', '滤带撕裂');
-INSERT INTO `backwardandresult` VALUES ('51', '66', '带式压榨过滤机', '0', '异常声响或振动');
-INSERT INTO `backwardandresult` VALUES ('52', '67', '皮带输送机', '0', '皮带跑偏');
-INSERT INTO `backwardandresult` VALUES ('53', '68', '皮带输送机', '0', '皮带打滑');
-INSERT INTO `backwardandresult` VALUES ('54', '69', '皮带输送机', '0', '轴承温度过高或振动');
-INSERT INTO `backwardandresult` VALUES ('55', '70', '离心机', '0', '振动加剧');
-INSERT INTO `backwardandresult` VALUES ('57', '72', '离心机', '0', '突然振动');
-INSERT INTO `backwardandresult` VALUES ('58', '73', '离心机', '0', '逐渐地振动');
-INSERT INTO `backwardandresult` VALUES ('59', '74', '离心机', '0', '有噪音');
-INSERT INTO `backwardandresult` VALUES ('60', '75', '离心机', '0', '螺栓松动');
-INSERT INTO `backwardandresult` VALUES ('61', '76', '离心机', '0', '轴承座过热');
-INSERT INTO `backwardandresult` VALUES ('62', '77', '离心机', '0', '减速器过热');
-INSERT INTO `backwardandresult` VALUES ('64', '79', '离心机', '0', '电机过载');
-INSERT INTO `backwardandresult` VALUES ('65', '80', '离心机', '0', '螺旋转动不自如');
-INSERT INTO `backwardandresult` VALUES ('66', '81', '离心机', '0', '扭矩异常');
-INSERT INTO `backwardandresult` VALUES ('67', '82', '离心机', '0', '滤液澄清度差');
-INSERT INTO `backwardandresult` VALUES ('68', '83', '离心机', '0', '污泥含水率高');
-INSERT INTO `backwardandresult` VALUES ('69', '84', '离心机', '0', '固体排料很差');
-INSERT INTO `backwardandresult` VALUES ('70', '85', '排污泵', '0', '不出水');
-INSERT INTO `backwardandresult` VALUES ('71', '86', '排污泵', '0', '流量不足');
-INSERT INTO `backwardandresult` VALUES ('72', '87', '排污泵', '0', '电机超载');
-INSERT INTO `backwardandresult` VALUES ('73', '88', '排污泵', '0', '轴承温度过高');
-INSERT INTO `backwardandresult` VALUES ('74', '89', '排污泵', '0', '运行不平稳');
-INSERT INTO `backwardandresult` VALUES ('75', '90', '排污泵', '0', '泄漏');
-INSERT INTO `backwardandresult` VALUES ('76', '91', '提泥阀', '0', '不好用');
-INSERT INTO `backwardandresult` VALUES ('77', '92', '提泥阀', '0', '异常声音或振动');
-INSERT INTO `backwardandresult` VALUES ('78', '93', '提泥阀', '0', '运行不平稳');
-INSERT INTO `backwardandresult` VALUES ('79', '94', '提泥阀', '0', '原地不动');
-INSERT INTO `backwardandresult` VALUES ('80', '95', '离心泵', '0', '突然停泵');
-INSERT INTO `backwardandresult` VALUES ('81', '96', '离心泵', '0', '泵不出水');
-INSERT INTO `backwardandresult` VALUES ('82', '97', '离心泵', '0', '流量不足');
-INSERT INTO `backwardandresult` VALUES ('83', '98', '离心泵', '0', '功率过大');
-INSERT INTO `backwardandresult` VALUES ('84', '99', '离心泵', '0', '轴承过热');
-INSERT INTO `backwardandresult` VALUES ('85', '100', '离心泵', '0', '泵运行不稳定');
-INSERT INTO `backwardandresult` VALUES ('86', '101', '轴封', '0', '泄露过多');
-INSERT INTO `backwardandresult` VALUES ('87', '102', '鼓风机', '0', '轴承振动');
-INSERT INTO `backwardandresult` VALUES ('88', '103', '鼓风机', '0', '轴承发热');
-INSERT INTO `backwardandresult` VALUES ('89', '104', '鼓风机', '0', '噪音大');
-INSERT INTO `backwardandresult` VALUES ('90', '105', '空压机', '0', '油压降低');
-INSERT INTO `backwardandresult` VALUES ('91', '106', '空压机', '0', '排气量显著降低');
-INSERT INTO `backwardandresult` VALUES ('92', '107', '空压机', '0', '排气温度过高');
-INSERT INTO `backwardandresult` VALUES ('93', '108', '空压机', '0', '一级排气压力高');
-INSERT INTO `backwardandresult` VALUES ('94', '109', '空压机', '0', '一级排气压力低');
-INSERT INTO `backwardandresult` VALUES ('95', '110', '空压机', '0', '二级排气压力达不到规定值');
-INSERT INTO `backwardandresult` VALUES ('96', '111', '臭氧机', '0', '消防水池冒水');
-INSERT INTO `backwardandresult` VALUES ('97', '112', '臭氧机', '0', '进水压力过低');
-INSERT INTO `backwardandresult` VALUES ('98', '113', '臭氧机', '0', '进气压力过高');
-INSERT INTO `backwardandresult` VALUES ('99', '114', '臭氧机', '0', '水压过低');
-INSERT INTO `backwardandresult` VALUES ('100', '115', '臭氧机', '0', '臭氧发生器电路故障');
-INSERT INTO `backwardandresult` VALUES ('112', '135', '???A????DO', '0', '??');
-INSERT INTO `backwardandresult` VALUES ('113', '136', '???A????DO', '0', '??');
-INSERT INTO `backwardandresult` VALUES ('114', '137', '???A????DO', '0', '??');
-INSERT INTO `backwardandresult` VALUES ('115', '138', '???A????DO', '0', '??');
-INSERT INTO `backwardandresult` VALUES ('116', '139', '???A????DO', '0', '??');
+INSERT INTO `backwardandresult` VALUES ('1', '16', '进水', '0', 'PH小于6', null);
+INSERT INTO `backwardandresult` VALUES ('3', '18', '进水', '0', 'PH大于9', null);
+INSERT INTO `backwardandresult` VALUES ('4', '19', '粗格栅间', '0', '有油渣', null);
+INSERT INTO `backwardandresult` VALUES ('7', '22', '沉砂池', '0', '曝气不均', null);
+INSERT INTO `backwardandresult` VALUES ('8', '23', '初沉池', '0', '出水带泥', null);
+INSERT INTO `backwardandresult` VALUES ('9', '24', '三个初沉池', '0', '出水SS浓度差异较大', null);
+INSERT INTO `backwardandresult` VALUES ('10', '25', '浓缩池', '0', '翻泥', null);
+INSERT INTO `backwardandresult` VALUES ('11', '26', '带式压榨过滤机', '0', '滤带两旁跑泥', null);
+INSERT INTO `backwardandresult` VALUES ('12', '27', '带式压榨过滤机', '0', '滤带过滤不好', null);
+INSERT INTO `backwardandresult` VALUES ('13', '28', '带式压榨过滤机', '0', '脱水效果不好', null);
+INSERT INTO `backwardandresult` VALUES ('14', '29', '带式压榨过滤机', '0', '泥饼含水率过高', null);
+INSERT INTO `backwardandresult` VALUES ('15', '30', '离心机', '0', '滤液澄清度差', null);
+INSERT INTO `backwardandresult` VALUES ('16', '31', '离心机', '0', '污泥含水率高', null);
+INSERT INTO `backwardandresult` VALUES ('17', '32', '离心机', '0', '固体排料很差', null);
+INSERT INTO `backwardandresult` VALUES ('18', '33', '格栅机', '0', '减速机发热', null);
+INSERT INTO `backwardandresult` VALUES ('19', '34', '格栅机', '0', '电机转动，其他部件不动', null);
+INSERT INTO `backwardandresult` VALUES ('21', '36', '机械格栅机', '0', '安全销断', null);
+INSERT INTO `backwardandresult` VALUES ('23', '38', '格栅机', '0', '耙齿振动大', null);
+INSERT INTO `backwardandresult` VALUES ('24', '39', '刮泥机', '0', '异常声响振动', null);
+INSERT INTO `backwardandresult` VALUES ('25', '40', '刮泥机', '0', '安全销断裂', null);
+INSERT INTO `backwardandresult` VALUES ('26', '41', '刮砂机', '0', '刮板弯曲', null);
+INSERT INTO `backwardandresult` VALUES ('27', '42', '刮砂轨道', '0', '变形，磨损变薄', null);
+INSERT INTO `backwardandresult` VALUES ('28', '43', '刮砂机', '0', '链节脱节', null);
+INSERT INTO `backwardandresult` VALUES ('29', '44', '刮砂机', '0', '电机过载', null);
+INSERT INTO `backwardandresult` VALUES ('30', '45', '刮砂机', '0', '主动链轮轴支撑轴承盒过力损坏', null);
+INSERT INTO `backwardandresult` VALUES ('31', '46', '潜水排污泵', '0', '流量不足', null);
+INSERT INTO `backwardandresult` VALUES ('32', '47', '潜水排污泵', '0', '不出水', null);
+INSERT INTO `backwardandresult` VALUES ('33', '48', '潜水排污泵', '0', '运行不稳定', null);
+INSERT INTO `backwardandresult` VALUES ('34', '49', '潜水排污泵', '0', '电流过大', null);
+INSERT INTO `backwardandresult` VALUES ('35', '50', '潜水排污泵', '0', '超温保护动作', null);
+INSERT INTO `backwardandresult` VALUES ('36', '51', '潜水排污泵油室', '0', '进水指示灯亮', null);
+INSERT INTO `backwardandresult` VALUES ('37', '52', '潜水排污泵', '0', '渗漏保护动作', null);
+INSERT INTO `backwardandresult` VALUES ('38', '53', '潜水排污泵接线盒', '0', '  探头发信号', null);
+INSERT INTO `backwardandresult` VALUES ('39', '54', '潜水排污泵', '0', '泵流量不足', null);
+INSERT INTO `backwardandresult` VALUES ('40', '55', '潜水排污泵', '0', '泵体过热', null);
+INSERT INTO `backwardandresult` VALUES ('41', '56', '潜水排污泵', '0', '泵轴承过热', null);
+INSERT INTO `backwardandresult` VALUES ('42', '57', '潜水排污泵', '0', '泵异常声响振动', null);
+INSERT INTO `backwardandresult` VALUES ('43', '58', '螺杆泵', '0', '泵不能启动', null);
+INSERT INTO `backwardandresult` VALUES ('44', '59', '螺杆泵', '0', '泵吸不上液体', null);
+INSERT INTO `backwardandresult` VALUES ('45', '60', '螺杆泵', '0', '流量不足', null);
+INSERT INTO `backwardandresult` VALUES ('46', '61', '螺杆泵', '0', '运转不稳定', null);
+INSERT INTO `backwardandresult` VALUES ('47', '62', '螺杆泵', '0', '噪音和振动', null);
+INSERT INTO `backwardandresult` VALUES ('48', '63', '螺杆泵', '0', '电机，设备过热', null);
+INSERT INTO `backwardandresult` VALUES ('49', '64', '带式压榨过滤机', '0', '滤带跑偏', null);
+INSERT INTO `backwardandresult` VALUES ('50', '65', '带式压榨过滤机', '0', '滤带撕裂', null);
+INSERT INTO `backwardandresult` VALUES ('51', '66', '带式压榨过滤机', '0', '异常声响或振动', null);
+INSERT INTO `backwardandresult` VALUES ('52', '67', '皮带输送机', '0', '皮带跑偏', null);
+INSERT INTO `backwardandresult` VALUES ('53', '68', '皮带输送机', '0', '皮带打滑', null);
+INSERT INTO `backwardandresult` VALUES ('54', '69', '皮带输送机', '0', '轴承温度过高或振动', null);
+INSERT INTO `backwardandresult` VALUES ('55', '70', '离心机', '0', '振动加剧', null);
+INSERT INTO `backwardandresult` VALUES ('57', '72', '离心机', '0', '突然振动', null);
+INSERT INTO `backwardandresult` VALUES ('58', '73', '离心机', '0', '逐渐地振动', null);
+INSERT INTO `backwardandresult` VALUES ('59', '74', '离心机', '0', '有噪音', null);
+INSERT INTO `backwardandresult` VALUES ('60', '75', '离心机', '0', '螺栓松动', null);
+INSERT INTO `backwardandresult` VALUES ('61', '76', '离心机', '0', '轴承座过热', null);
+INSERT INTO `backwardandresult` VALUES ('62', '77', '离心机', '0', '减速器过热', null);
+INSERT INTO `backwardandresult` VALUES ('64', '79', '离心机', '0', '电机过载', null);
+INSERT INTO `backwardandresult` VALUES ('65', '80', '离心机', '0', '螺旋转动不自如', null);
+INSERT INTO `backwardandresult` VALUES ('66', '81', '离心机', '0', '扭矩异常', null);
+INSERT INTO `backwardandresult` VALUES ('67', '82', '离心机', '0', '滤液澄清度差', null);
+INSERT INTO `backwardandresult` VALUES ('68', '83', '离心机', '0', '污泥含水率高', null);
+INSERT INTO `backwardandresult` VALUES ('69', '84', '离心机', '0', '固体排料很差', null);
+INSERT INTO `backwardandresult` VALUES ('70', '85', '排污泵', '0', '不出水', null);
+INSERT INTO `backwardandresult` VALUES ('71', '86', '排污泵', '0', '流量不足', null);
+INSERT INTO `backwardandresult` VALUES ('72', '87', '排污泵', '0', '电机超载', null);
+INSERT INTO `backwardandresult` VALUES ('73', '88', '排污泵', '0', '轴承温度过高', null);
+INSERT INTO `backwardandresult` VALUES ('74', '89', '排污泵', '0', '运行不平稳', null);
+INSERT INTO `backwardandresult` VALUES ('75', '90', '排污泵', '0', '泄漏', null);
+INSERT INTO `backwardandresult` VALUES ('76', '91', '提泥阀', '0', '不好用', null);
+INSERT INTO `backwardandresult` VALUES ('77', '92', '提泥阀', '0', '异常声音或振动', null);
+INSERT INTO `backwardandresult` VALUES ('78', '93', '提泥阀', '0', '运行不平稳', null);
+INSERT INTO `backwardandresult` VALUES ('79', '94', '提泥阀', '0', '原地不动', null);
+INSERT INTO `backwardandresult` VALUES ('80', '95', '离心泵', '0', '突然停泵', null);
+INSERT INTO `backwardandresult` VALUES ('81', '96', '离心泵', '0', '泵不出水', null);
+INSERT INTO `backwardandresult` VALUES ('82', '97', '离心泵', '0', '流量不足', null);
+INSERT INTO `backwardandresult` VALUES ('83', '98', '离心泵', '0', '功率过大', null);
+INSERT INTO `backwardandresult` VALUES ('84', '99', '离心泵', '0', '轴承过热', null);
+INSERT INTO `backwardandresult` VALUES ('85', '100', '离心泵', '0', '泵运行不稳定', null);
+INSERT INTO `backwardandresult` VALUES ('86', '101', '轴封', '0', '泄露过多', null);
+INSERT INTO `backwardandresult` VALUES ('87', '102', '鼓风机', '0', '轴承振动', null);
+INSERT INTO `backwardandresult` VALUES ('88', '103', '鼓风机', '0', '轴承发热', null);
+INSERT INTO `backwardandresult` VALUES ('89', '104', '鼓风机', '0', '噪音大', null);
+INSERT INTO `backwardandresult` VALUES ('90', '105', '空压机', '0', '油压降低', null);
+INSERT INTO `backwardandresult` VALUES ('91', '106', '空压机', '0', '排气量显著降低', null);
+INSERT INTO `backwardandresult` VALUES ('92', '107', '空压机', '0', '排气温度过高', null);
+INSERT INTO `backwardandresult` VALUES ('93', '108', '空压机', '0', '一级排气压力高', null);
+INSERT INTO `backwardandresult` VALUES ('94', '109', '空压机', '0', '一级排气压力低', null);
+INSERT INTO `backwardandresult` VALUES ('95', '110', '空压机', '0', '二级排气压力达不到规定值', null);
+INSERT INTO `backwardandresult` VALUES ('96', '111', '臭氧机', '0', '消防水池冒水', null);
+INSERT INTO `backwardandresult` VALUES ('97', '112', '臭氧机', '0', '进水压力过低', null);
+INSERT INTO `backwardandresult` VALUES ('98', '113', '臭氧机', '0', '进气压力过高', null);
+INSERT INTO `backwardandresult` VALUES ('99', '114', '臭氧机', '0', '水压过低', null);
+INSERT INTO `backwardandresult` VALUES ('100', '115', '臭氧机', '0', '臭氧发生器电路故障', null);
+INSERT INTO `backwardandresult` VALUES ('112', '135', '???A????DO', '0', '??', null);
+INSERT INTO `backwardandresult` VALUES ('113', '136', '???A????DO', '0', '??', null);
+INSERT INTO `backwardandresult` VALUES ('114', '137', '???A????DO', '0', '??', null);
+INSERT INTO `backwardandresult` VALUES ('115', '138', '???A????DO', '0', '??', null);
+INSERT INTO `backwardandresult` VALUES ('116', '139', '???A????DO', '0', '??', null);
 
 -- ----------------------------
 -- Table structure for `backwardandupper`
@@ -1271,9 +1272,10 @@ CREATE TABLE `wwdcsdata` (
   `ITEM99` float NOT NULL,
   `ORGTIME` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of wwdcsdata
 -- ----------------------------
 INSERT INTO `wwdcsdata` VALUES ('1', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '1', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '1', '0', '0', '0', '0', '1', '0', '0', '0', '1', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '1', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '2011-11-11 16:08:56');
+INSERT INTO `wwdcsdata` VALUES ('2', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '8', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '6', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '5', '0', '0', '0', '5', '0', '0', '0', '5', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '0', '2011-11-12 21:17:46');
