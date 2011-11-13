@@ -23,29 +23,48 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <body>
   <div id="rightmain">
-	  <h2> 4号生化池</h2>
+	  <h2> 4系列生化池</h2>
 <div id="login">
 <s:form action="wwdcsdataaction.action">
 <table width="300" align="center" style="margin-left:30">
-	<tr>
-	<td align="center"><s:textfield size="17" label="生化池PH" name="wwdcsdata.ITEM8" /></td>
+<tr>
+	<td align="center"><s:textfield size="17" label="4#鼓风机分量" name="wwdcsdata.ITEM103" /></td>
 	</tr>
 	<tr>
-	<td align="center"><s:textfield size="17" label="生化池温度" name="wwdcsdata.ITEM244" /></td>
+	<td align="center"><s:textfield size="17" label="7号生化池PH" name="wwdcsdata.ITEM11" /></td>
+	</tr>
+	<tr>
+	<td align="center"><s:textfield size="17" label="7号生化池温度" name="wwdcsdata.ITEM247" /></td>
 	</tr>
 	
 	<tr>
-	<td align="center"><s:textfield size="17" label="生化池2段溶解氧DO" name="wwdcsdata.ITEM31" /></td>
+	<td align="center"><s:textfield size="17" label="7号生化池A段溶解氧DO" name="wwdcsdata.ITEM3" /></td>
 	</tr>
 	
 	<tr>
-	<td align="center"><s:textfield size="17" label="生化池3段溶解氧DO" name="wwdcsdata.ITEM35" /></td>
+	<td align="center"><s:textfield size="17" label="7号生化池4段溶解氧DO" name="wwdcsdata.ITEM42" /></td>
 	</tr>
 	<tr>
-	<td align="center"><s:textfield size="17" label="生化池5段溶解氧DO" name="wwdcsdata.ITEM39" /></td>
+	<td align="center"><s:textfield size="17" label="7号生化池6段溶解氧DO" name="wwdcsdata.ITEM46" /></td>
 	</tr>
-
 	
+	<tr>
+	<td align="center"><s:textfield size="17" label="8号生化池PH" name="wwdcsdata.ITEM12" /></td>
+	</tr>
+	<tr>
+	<td align="center"><s:textfield size="17" label="8号生化池温度" name="wwdcsdata.ITEM248" /></td>
+	</tr>
+	
+	<tr>
+	<td align="center"><s:textfield size="17" label="8号生化池A段溶解氧DO" name="wwdcsdata.ITEM4" /></td>
+	</tr>
+	
+	<tr>
+	<td align="center"><s:textfield size="17" label="8号生化池4段溶解氧DO" name="wwdcsdata.ITEM43" /></td>
+	</tr>
+	<tr>
+	<td align="center"><s:textfield size="17" label="8号生化池6段溶解氧DO" name="wwdcsdata.ITEM47" /></td>
+	</tr>
 	</table>
 	<br/>
 	<table width="250" align="center" style="margin-left:30">

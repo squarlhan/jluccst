@@ -6,7 +6,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <%@taglib prefix="s" uri="/struts-tags" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
-<head>
+  <head>
    <%if(request.getSession().getAttribute("us")==null) 
   { 
   response.sendRedirect("userlogin.jsp"); 
@@ -21,7 +21,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    %>  
     <base href="<%=basePath%>">
     
-<title>结果页面</title>
+    <title>结果页面</title>
      
     
 	<meta http-equiv="pragma" content="no-cache">
@@ -35,45 +35,48 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 
 
-</head>
+  </head>
   
-<body>
-
-
-
-
-  <table width="70%" align="right"    border="1"  id="mytable">
-		<tr bgcolor="#A4BEEA">
-		    <th height="18">故障原因</th>
-			<th>相关建议</th>
+  <body>
+    
+  
+  <table bordercolor="#4A708B" rules="all"  id="mytable" class="list_table" align="center" width="100%">
+		<tr bgcolor="#4A708B">
+		    <th style="width:50%">故障设备</th>
+			<th style="width:50%">故障现象</th>
+			
+	  </tr>
+    <s:iterator id="bandr" value="backwardandResult" status="index1">
+       
+     <tr  align="center"  bordercolor="#000000" rules="all" bgcolor="<s:if test="#index1.odd == true">#ffffff</s:if><s:else>#EDEDED</s:else>">
+       <td><s:property value="memo"/></td><td><s:property value="nouns"/><s:property value="verb"/></td>
+      
+      
+     
+     </tr>
+     </s:iterator>
+  </table>
+    
+  
+  <table bordercolor="#4A708B" rules="all"  id="mytable" class="list_table" align="center" width="100%">
+		<tr bgcolor="#4A708B">
+		    <th style="width:50%">故障原因</th>
+			<th style="width:50%">相关建议</th>
 			
 	  </tr>
     <s:iterator id="reasons" value="reasonlist" status="index1">
        
-     <tr  align="center"  bordercolor="#FFFFFF" rules="all" bgcolor="<s:if test="#index1.odd == true">#ffffff</s:if><s:else>#EDEDED</s:else>" style="color: Black; ">
+     <tr  align="center"  bordercolor="#000000" rules="all" bgcolor="<s:if test="#index1.odd == true">#ffffff</s:if><s:else>#EDEDED</s:else>">
        <td><s:property value="nouns"/><s:property value="verb"/></td>
        <td><s:property value="sugg"/></td>
       
      
      </tr>
-    </s:iterator>
-</table>
+     </s:iterator>
+  </table>
    
     <div align="center">
-      <table width="30%" border="1">
-        <tr bgcolor="#A4BEEA">
-          <td width="305" height="18"><div align="center"><b >设备故障</b></div></td>
-        </tr>
-        <tr>
-          <td><s:iterator id="result" value="backwardandResult" status="index1">
-		 <p> <div   style="color: red;"><s:property value="nouns"/><s:property value="verb"/></div></div></p>
-		   </s:iterator></td>
-        </tr>
-      </table>
-      
-      <p>
-        <input name="button" type=button onClick="window.location.href('rulebraction.action')" value="完成返回">
-      </p>
-</div>
-</body>
+      <input name="button" type=button onClick="window.location.href('rulebraction.action')" value="完成返回">
+      </div>
+  </body>
 </html>
