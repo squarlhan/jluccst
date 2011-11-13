@@ -38,7 +38,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    <p>部门:    <s:property value="#session.ad.dept"/></p>
    <p>姓名 :    <s:property value="#session.ad.name"/></p>
    <p></p>
-   <p><s:a href="useraction!userList.action"> 
+   <p><s:a href="adminuseraction!userList.action"> 
 						   <p><div style="color:red;"><p align="center"><u>返回用户列表</u></p></div></p>
 				  </s:a>	
   </body>
