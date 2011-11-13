@@ -42,7 +42,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 
 
-  <table width="70%" height="43" align="right" bordercolor="#A4BEEA" rules="all"  border="1"  id="mytable">
+  <table width="70%" align="right"    border="1"  id="mytable">
 		<tr bgcolor="#A4BEEA">
 		    <th height="18">故障原因</th>
 			<th>相关建议</th>

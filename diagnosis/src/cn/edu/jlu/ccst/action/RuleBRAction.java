@@ -75,7 +75,7 @@ public class RuleBRAction extends ActionSupport {
 			List<BackwardandResult> backwardandResultlist) {
 		this.backwardandResultlist = backwardandResultlist;
 	}
-	public boolean checkup(){
+	public boolean checkuser(){
 		ActionContext actionContext = ActionContext.getContext();
         Map user = actionContext.getSession();
         User us = (User) user.get("us");
@@ -87,11 +87,12 @@ public class RuleBRAction extends ActionSupport {
 	
 	public String execute() {
 //		nb=rulebrService.getalloptions();
-		if( checkup()){nvs = rulebrService.getallnvs();
+		if( checkuser()){nvs = rulebrService.getallnvs();
 		ActionContext actionContext = ActionContext.getContext();
         Map session = actionContext.getSession();
-        session.put("map", nvs);}
-		return "rulesuccess";
+        session.put("map", nvs);
+		return "rulesuccess";}
+		return "unuserlogin";
 		/*User flag1;
 		backwardandResultlist = rulebrService.findAll();
 		Set<String> set1=new HashSet();

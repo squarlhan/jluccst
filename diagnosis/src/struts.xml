@@ -9,39 +9,42 @@
 	<constant name="struts.objectFactory" value="spring" />  
 	<package name="struts2" extends="struts-default" namespace="/">
 		<action name="useraction" class="userAction">
-		<result name="logoffusersuccess">userlogin.jsp</result>
-		   <result name="success">adminsuccess.jsp</result>
+		    <result name="logoffusersuccess">userlogin.jsp</result>
+		    <result name="success">adminsuccess.jsp</result>
 			<result name="loginsuccess">userfindreason.jsp</result>
 			<result name="loginerror">/userloginerror.jsp</result>
-			
 			<result name="altersuccess">userupdatesuccess.jsp</result>
 			<result name="altererror">useraltererror.jsp</result>
 			<result name="nullpass">usernullpass.jsp</result>
+			<result name="unuserlogin">userlogin.jsp</result>
+			<result name="unadminlogin">adminlogin.jsp</result>
 		</action>
 		
 
 		
-	 <action name="wwdcsdataaction" class="wwdcsdataAction">
+	    <action name="wwdcsdataaction" class="wwdcsdataAction">
 			<result name="go">usererrorgo.jsp</result>
-			
+			<result name="input">usererrorgo.jsp</result>
 		</action> 
 	   
-		 <action name="rulebraction" class="rulebrAction">
+		<action name="rulebraction" class="rulebrAction">
 			<result name="success">userruleadd.jsp</result>
 			<result name="rulesuccess">userfindreason.jsp</result>
 			<result name="go">usergo.jsp</result>
+		    <result name="unuserlogin">userlogin.jsp</result>
+			<result name="unadminlogin">adminlogin.jsp</result>
 		</action>
 	   
 	    <action name="dcsdscribaction" class="dcsDscribAction">
 			<result name="success">userruledsc.jsp</result>
-			
-			
-		</action>
+	    </action>
 		
 	    <action name="ruleaction" class="ruleAction">
 			<result name="success">userruleadd.jsp</result>
 		    <result name="input">userruledsc.jsp</result>
 			<result name="go">usergo.jsp</result>
+			<result name="unuserlogin">userlogin.jsp</result>
+			<result name="unadminlogin">adminlogin.jsp</result>
 		</action>
 		
 		
@@ -52,7 +55,8 @@
 			<result name="altererror">adminaltererror.jsp</result>
 			<result name="nullpass">adminnullpass.jsp</result>
 			<result name="loginerror">adminloginerror.jsp</result>
-			
+			<result name="unuserlogin">userlogin.jsp</result>
+			<result name="unadminlogin">adminlogin.jsp</result>
 			
 		</action>
 		<action name="adminuseraction" class="userAction">
@@ -62,7 +66,8 @@
 			<result name="searcherror">adminsearcherror.jsp</result>
 			<result name="addnullerror">adminaddnullerror.jsp</result>
 			<result name="adderror">adminadderror.jsp</result>
-			
+			<result name="unuserlogin">userlogin.jsp</result>
+			<result name="unadminlogin">adminlogin.jsp</result>
 		</action>
 		
 	</package>

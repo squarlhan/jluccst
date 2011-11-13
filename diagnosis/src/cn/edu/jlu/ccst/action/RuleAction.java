@@ -3,6 +3,7 @@ package cn.edu.jlu.ccst.action;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javax.annotation.Resource;
@@ -136,6 +137,16 @@ public class RuleAction extends ActionSupport {
 		reasonlist=ruleService.findreasons(temp);
 		return "go";
 		}
+	
+	public boolean checkuser(){
+		ActionContext actionContext = ActionContext.getContext();
+        Map user = actionContext.getSession();
+        User us = (User) user.get("us");
+		if(us!=null){
+			return true;
+		}
+		else return false;
+	}
 	
 	public String addRule(){
 		List<BackwardandReason> breason = new ArrayList();

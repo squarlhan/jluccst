@@ -251,8 +251,9 @@ public class UserAction extends ActionSupport {
 		
 		public String  userList() {
 			if(checkadmin()){
-			userlist = userService.findall();}
-			return SUCCESS;
+			userlist = userService.findall();
+			return SUCCESS;}
+			else return "unadminlogin";
 		}
 		
 		public String alterUser () {
@@ -285,8 +286,9 @@ public class UserAction extends ActionSupport {
 			if(checkuser()){
 			ActionContext.getContext().getSession().remove("us");
 			
-			System.out.println("注销成功2！");}
-			return "logoffusersuccess";
+			System.out.println("注销成功2！");
+			return "logoffusersuccess";}
+			else return "unuserlogin";
 		}
 		
 
