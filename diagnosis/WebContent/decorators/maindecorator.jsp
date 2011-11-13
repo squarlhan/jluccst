@@ -158,8 +158,8 @@ p a,p a:visited {
 									onclick="MyCNLTreeMenu2.SetNodes(1);Hd(this);Sw('AllOpen_2');"
 									style="display: none;">全部折叠</a>
 							</p>
-							<ul>
-							  <li class="Closed"><a href="#1">点源车间</a>
+							    <ul>
+							  <li class="Closed"><a href="#1">点源处理</a>
 							    <ul>
 							       <li class="Child"><a href="#1">染料厂酸水</a></li>
 							       <li class="Child"><a href="#1">电石厂酸水</a></li>
@@ -180,9 +180,9 @@ p a,p a:visited {
 							       <li class="Child"><a href="#1">中部基地有机水</a></li>
 							    </ul>
 							  </li>
-							  <li class="Closed"><a href="#1">中和车间</a></li>
-							  <li class="Closed"><a href="#1">生活水车间</a></li>
-							  <li class="Closed"><a href="#1">预处理车间</a>
+							  <li class="Closed"><a href="#1">中和处理</a></li>
+							  <li class="Closed"><a href="#1">生活水处理</a></li>
+							  <li class="Closed"><a href="#1">预处理</a>
 							    <ul>
 							       <li class="Child"><a href="#1">稳流池(477)进水</a></li>
 							       <li class="Child"><a href="#1">进水提升泵房(462A)</a></li>
@@ -194,12 +194,9 @@ p a,p a:visited {
 							       <li class="Child"><a href="#1">14B生活水</a></li>
 							       <li class="Child"><a href="#1">1#水解酸化池</a></li>
 							       <li class="Child"><a href="#1">2#水解酸化池</a></li>
-							       <li class="Child"><a href="#1">污泥池(V466)</a></li>
-							       <li class="Child"><a href="#1">浓缩池(491)</a></li>
-							       <li class="Child"><a href="#1">脱水装置(495)</a></li>
 							    </ul>
 							  </li>
-								<li class="Closed"><a href="#">生化处理车间</a>
+								<li class="Closed"><a href="#">生化处理</a>
 									<ul>
 										<li class="Child"><a href="#1">中间提升泵房(462)</a></li>
 										<li class="Child"><a href="#1">中间提升泵房(462B)</a></li>
@@ -214,9 +211,16 @@ p a,p a:visited {
 										<li class="Child"><a href="#1">接触氧化池</a></li>
 										<li class="Child"><a href="#1">2系列排江出口线</a></li>
 										<li class="Child"><a href="#1">1、3系列排江出口线</a></li>
-										<li class="Child"><a href="#1">1系列465回流泵房</a></li>
-										<li class="Child"><a href="#1">2系列465A回流泵房</a></li>
-										<li class="Child"><a href="#1">3系列465B回流泵房</a></li>
+									</ul>
+								</li>
+								<li class="Closed"><a href="#">污泥处理</a>
+									<ul>
+										<li class="Child"><a href="#1">1系列(465)回流泵房</a></li>
+										<li class="Child"><a href="#1">2系列(465A)回流泵房</a></li>
+										<li class="Child"><a href="#1">3系列(465B)回流泵房</a></li>
+							       <li class="Child"><a href="#1">污泥池(V466)</a></li>
+							       <li class="Child"><a href="#1">浓缩池(491)</a></li>
+							       <li class="Child"><a href="#1">脱水装置(495)</a></li>
 									</ul>
 								</li>
 								
