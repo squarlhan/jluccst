@@ -3,6 +3,7 @@ package cn.edu.jlu.ccst.action;
 
 
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -63,7 +64,16 @@ public DcsDscrib getDcsDscrib() {
 	}
 
 
-
+  
+	public boolean checkuser(){
+		ActionContext actionContext = ActionContext.getContext();
+        Map user = actionContext.getSession();
+        User us = (User) user.get("us");
+		if(us!=null){
+			return true;
+		}
+		else return false;
+	}
 
 
 
@@ -71,10 +81,11 @@ public DcsDscrib getDcsDscrib() {
 
 	public String execute() {
 		
-		
+		if(checkuser()){
 		namelist = dcsDscribService.findallname();
 		System.out.println(namelist+"你好");
-	    return SUCCESS;
+	    return SUCCESS;}
+		else return "unuserlogin";
 		}
 }
 
