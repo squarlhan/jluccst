@@ -91,11 +91,13 @@ public class DcsDscribService {
 					BackwardandResult br = new BackwardandResult();
 					br.setNouns(db.getName());
 					br.setVerb("过高");
+					br.setMemo(db.getEque());
 					results.add(br);
 				}
 				if (val < db.getLower()) {
 					BackwardandResult br = new BackwardandResult();
 					br.setNouns(db.getName());
+					br.setMemo(db.getEque());
 					br.setVerb("过低");
 					results.add(br);
 				}
