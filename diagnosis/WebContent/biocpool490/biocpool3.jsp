@@ -23,28 +23,49 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <body>
   <div id="rightmain">
-	  <h2> 3号生化池</h2>
+	  <h2> 3系列生化池</h2>
 <div id="login">
 <s:form action="wwdcsdataaction.action">
 <table width="300" align="center" style="margin-left:30">
-	<tr>
-	<td align="center"><s:textfield size="17" label="生化池PH" name="wwdcsdata.ITEM7" /></td>
+<tr>
+	<td align="center"><s:textfield size="17" label="3#鼓风机分量" name="wwdcsdata.ITEM102" /></td>
 	</tr>
 	<tr>
-	<td align="center"><s:textfield size="17" label="生化池温度" name="wwdcsdata.ITEM243" /></td>
+	<tr>
+	<td align="center"><s:textfield size="17" label="5号生化池PH" name="wwdcsdata.ITEM9" /></td>
+	</tr>
+	<tr>
+	<td align="center"><s:textfield size="17" label="5号生化池温度" name="wwdcsdata.ITEM245" /></td>
 	</tr>
 	
 	<tr>
-	<td align="center"><s:textfield size="17" label="生化池2段溶解氧DO" name="wwdcsdata.ITEM30" /></td>
+	<td align="center"><s:textfield size="17" label="5号生化池A段溶解氧DO" name="wwdcsdata.ITEM1" /></td>
 	</tr>
-
+	
 	<tr>
-	<td align="center"><s:textfield size="17" label="生化池3段溶解氧DO" name="wwdcsdata.ITEM34" /></td>
+	<td align="center"><s:textfield size="17" label="5号生化池4段溶解氧DO" name="wwdcsdata.ITEM40" /></td>
 	</tr>
 	<tr>
-	<td align="center"><s:textfield size="17" label="生化池5段溶解氧DO" name="wwdcsdata.ITEM38" /></td>
+	<td align="center"><s:textfield size="17" label="5号生化池6段溶解氧DO" name="wwdcsdata.ITEM44" /></td>
 	</tr>
-
+	
+	<tr>
+	<td align="center"><s:textfield size="17" label="6号生化池PH" name="wwdcsdata.ITEM10" /></td>
+	</tr>
+	<tr>
+	<td align="center"><s:textfield size="17" label="6号生化池温度" name="wwdcsdata.ITEM246" /></td>
+	</tr>
+	
+	<tr>
+	<td align="center"><s:textfield size="17" label="6号生化池A段溶解氧DO" name="wwdcsdata.ITEM2" /></td>
+	</tr>
+	
+	<tr>
+	<td align="center"><s:textfield size="17" label="6号生化池4段溶解氧DO" name="wwdcsdata.ITEM41" /></td>
+	</tr>
+	<tr>
+	<td align="center"><s:textfield size="17" label="6号生化池6段溶解氧DO" name="wwdcsdata.ITEM45" /></td>
+	</tr>
 	
 	</table>
 	<br/>
