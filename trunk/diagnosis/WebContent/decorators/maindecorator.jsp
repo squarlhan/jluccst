@@ -12,7 +12,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title><decorator:title default="净水厂设备诊断专家系统" /></title>
+<title><decorator:title default="吉化污水处理过程模拟与优化系统" /></title>
 <link href="/diagnosis/css/css.css" rel="stylesheet" type="text/css" />
 <link href="/diagnosis/css/main.css" rel="stylesheet" type="text/css" />
 <link href="/diagnosis/css/tree.css" rel="stylesheet" type="text/css" />
@@ -137,7 +137,7 @@
 			<tr>
 				<td id="footer">
 					<div id="footer">
-						<p>主办单位: 中国石油吉林化工公司净水厂</p>
+						<p>主办单位: 中国石油吉林化工公司污水处理厂</p>
 						<p>COPYRIGHT&copy;2011 CNPC ALL RIGHT RESERVED</p>
 					</div>
 					<div id="banner"></div>
