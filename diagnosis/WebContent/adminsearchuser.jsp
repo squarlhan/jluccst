@@ -17,7 +17,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     
     <base href="<%=basePath%>">
     
-    <title>净水厂设备诊断专家系统</title>
+    <title>搜索页面</title>
        
     
    

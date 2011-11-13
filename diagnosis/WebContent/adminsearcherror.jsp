@@ -18,7 +18,7 @@
    %>  
     <base href="<%=basePath%>">
     
-    <title>净水厂设备诊断专家系统</title>
+    <title>搜索错误</title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">

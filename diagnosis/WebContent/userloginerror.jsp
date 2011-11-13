@@ -13,7 +13,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	alert("密码错误，请重新输入！")
     </script>
     
-    <title>净水厂设备诊断专家系统</title>
+    <title>用户登录失败</title>
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">    

@@ -10,7 +10,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     
-    <title>净水厂设备诊断专家系统</title>
+    <title>预处理车间其他项</title>
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">    
@@ -23,7 +23,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <body>
   <div id="rightmain">
-	  <h2>与处理车间其他项</h2>
+	  <h2>预处理车间其他项</h2>
 <div id="login">
 <s:form action="wwdcsdataaction.action">
 <table width="300" align="center" style="margin-left:30">

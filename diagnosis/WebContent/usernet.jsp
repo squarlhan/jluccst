@@ -17,7 +17,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    
     <base href="<%=basePath%>">
     
-    <title>结果页面</title>
+    <title>前馈型神经网络</title>
     
     
     
