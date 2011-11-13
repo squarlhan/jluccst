@@ -149,8 +149,8 @@ p a,p a:visited {
 				<td valign="top">
 					<div id="leftmenu" align="left">
 						<page:applyDecorator page="/decorators/mainmenu.jsp" name="panel" />
-						<page:applyDecorator page="/decorators/link.jsp" name="panel" />
-						<div class="CNLTreeMenu" id="CNLTreeMenu2">
+					
+						<div class="CNLTreeMenu" id="CNLTreeMenu2"  style="  width:160px;margin-left:18px;border:solid #90BADE thin ">
 							<p>
 								<a id="AllOpen_2" href="#"
 									onclick="MyCNLTreeMenu2.SetNodes(0);Hd(this);Sw('AllClose_2');">全部展开</a><a
