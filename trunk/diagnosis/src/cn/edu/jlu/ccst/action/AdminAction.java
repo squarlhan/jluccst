@@ -149,8 +149,9 @@ public class AdminAction extends ActionSupport {
 		if(checkadmin()){
 		ActionContext.getContext().getSession().remove("ad");
 		
-		System.out.println("注销成功！");}
-		return "logoffsuccess";
+		System.out.println("注销成功！");
+		return "logoffsuccess";}
+		return "unadminlogin";
 	}
 	
 
