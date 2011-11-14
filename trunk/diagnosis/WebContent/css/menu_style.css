@@ -1,6 +1,6 @@
 
 
-.nav {
+.newnav {
 margin-top:100px;
 height:35px; 
 background: url(/diagnosis/images/bg.gif) repeat-x; 
@@ -12,28 +12,28 @@ z-index:100;
 padding:0;
 }
 
-.nav .table {
-display:table; 
+.newnav .newtable {
+display:newtable; 
 margin:0 auto;
 }
 
-.nav .select,
-.nav .current {
+.newnav .select,
+.newnav .current {
 margin:0; 
 padding:0; 
 list-style:none; 
-display:table-cell; 
+display:newtable-cell; 
 white-space:nowrap;
 }
 
-.nav li {
+.newnav li {
 margin:0; 
 padding:0; 
 height:auto; 
 float:left;
 }
 
-.nav .select a {
+.newnav .select a {
 display:block; 
 height:35px; 
 float:left; 
@@ -47,20 +47,20 @@ color:#2b3238;
 }
 
 
-.nav .select a:hover, 
-.nav .select li:hover a {
+.newnav .select a:hover, 
+.newnav .select li:hover a {
 background: url(/diagnosis/images/hover.gif); 
 padding:0 0 0 15px; 
 cursor:pointer; 
 color:#2b3238;
 }
 
-.nav .select a b{
+.newnav .select a b{
 	font-weight:bold;
 	}
 
-.nav .select a:hover b, 
-.nav .select li:hover a b {
+.newnav .select a:hover b, 
+.newnav .select li:hover a b {
 display:block; 
 float:left; 
 padding:0 30px 0 15px; 
@@ -68,12 +68,12 @@ background:url(/diagnosis/images/hover.gif) right top;
 cursor:pointer;
 }
 
-.nav .select_sub {
+.newnav .select_sub {
 display:none;
 }
 
 /* IE6 only */
-.nav table {
+.newnav newtable {
 border-collapse:collapse; 
 margin:-1px; 
 font-size:1em; 
@@ -81,21 +81,21 @@ width:0;
 height:0;
 }
 
-.nav .sub {
-display:table; 
+.newnav .sub {
+display:newtable; 
 margin:0 auto; 
 padding:0; 
 list-style:none;
 }
 
-.nav .sub_active .current_sub a, 
-.nav .sub_active a:hover {
+.newnav .sub_active .current_sub a, 
+.newnav .sub_active a:hover {
 background:transparent; 
 color:#2b3238;
 }
 
-.nav .select :hover .select_sub, 
-.nav .current .show {
+.newnav .select :hover .select_sub, 
+.newnav .current .show {
 display:block; 
 position:absolute; 
 width:1000px; 
@@ -107,12 +107,12 @@ left:0;
 text-align:center;
 }
 
-.nav .current .show {
+.newnav .current .show {
 z-index:10;
 }
 
-.nav .select :hover .sub li a, 
-.nav .current .show .sub li a {
+.newnav .select :hover .sub li a, 
+.newnav .current .show .sub li a {
 display:block; 
 float:left; 
 background:transparent; 
@@ -123,17 +123,17 @@ border:0;
 color:#2b3238;
 }
 
-.nav .current .sub li.sub_show a {
+.newnav .current .sub li.sub_show a {
 color:#2b3238; 
 cursor:default; 
 }
 
-.nav .select .sub li a {
+.newnav .select .sub li a {
 	font-weight:normal;
 }
 
-.nav .select :hover .sub li a:hover, 
-.nav .current .sub li a:hover {
+.newnav .select :hover .sub li a:hover, 
+.newnav .current .sub li a:hover {
 visibility:visible; 
 color:#73a0d2; 
 }

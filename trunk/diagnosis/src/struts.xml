@@ -11,7 +11,7 @@
 		<action name="useraction" class="userAction">
 		    <result name="logoffusersuccess">userlogin.jsp</result>
 		    <result name="success">adminsuccess.jsp</result>
-			<result name="loginsuccess">userfindreason.jsp</result>
+			<result name="loginsuccess">userruledsc.jsp</result>
 			<result name="loginerror">/userloginerror.jsp</result>
 			<result name="altersuccess">userupdatesuccess.jsp</result>
 			<result name="altererror">useraltererror.jsp</result>

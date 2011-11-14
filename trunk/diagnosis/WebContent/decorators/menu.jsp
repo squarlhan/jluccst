@@ -15,8 +15,8 @@ pageEncoding="UTF-8"%>
 
 
 <body>
-	<div class="nav">
-		<div class="table">
+	<div class="newnav">
+		<div class="newtable">
 
 			<ul class="select">
 				<li><a href="#"><b>首页</b></a></li>
