@@ -44,68 +44,68 @@
 									style="display: none;">全部折叠</a>
 							</p>
 							    <ul>
-							  <li class="Closed"><a href="#1">点源处理</a>
+							  <li class="Closed">点源处理
 							    <ul>
-							       <li class="Child"><a href="#1">染料厂酸水</a></li>
-							       <li class="Child"><a href="#1">电石厂酸水</a></li>
-							       <li class="Child"><a href="#1">电石厂有机水</a></li>
-							       <li class="Child"><a href="#1">有机合成厂有机水</a></li>
-							       <li class="Child"><a href="#1">炼油厂有机水</a></li>
-							       <li class="Child"><a href="#1">精细化工厂废水</a></li>
-							       <li class="Child"><a href="#1">乙二醇废水</a></li>
-							       <li class="Child"><a href="#1">环氧乙烷废水</a></li>
-							       <li class="Child"><a href="#1">农药厂有机水</a></li>
-							       <li class="Child"><a href="#1">铁运489沉淀池出水</a></li>
-							       <li class="Child"><a href="#1">含氮废水</a></li>
-							       <li class="Child"><a href="#1">103厂碱水</a></li>
-							       <li class="Child"><a href="#1">化肥厂丁辛醇</a></li>
-							       <li class="Child"><a href="#1">丙烯腈废水</a></li>
-							       <li class="Child"><a href="#1">合成树脂厂有机水</a></li>
-							       <li class="Child"><a href="#1">龙潭区生活水</a></li>
-							       <li class="Child"><a href="#1">中部基地有机水</a></li>
+							       <li class="Child">染料厂酸水</li>
+							       <li class="Child">电石厂酸水</li>
+							       <li class="Child">电石厂有机水</li>
+							       <li class="Child">有机合成厂有机水</li>
+							       <li class="Child">炼油厂有机水</li>
+							       <li class="Child">精细化工厂废水</li>
+							       <li class="Child">乙二醇废水</li>
+							       <li class="Child">环氧乙烷废水</li>
+							       <li class="Child">农药厂有机水</li>
+							       <li class="Child">铁运489沉淀池出水</li>
+							       <li class="Child">含氮废水</li>
+							       <li class="Child">103厂碱水</li>
+							       <li class="Child">化肥厂丁辛醇</li>
+							       <li class="Child">丙烯腈废水</li>
+							       <li class="Child">合成树脂厂有机水</li>
+							       <li class="Child">龙潭区生活水</li>
+							       <li class="Child">中部基地有机水</li>
 							    </ul>
 							  </li>
-							  <li class="Closed"><a href="#1">中和处理</a></li>
-							  <li class="Closed"><a href="#1">生活水处理</a></li>
-							  <li class="Closed"><a href="#1">预处理</a>
+							  <li class="Closed">中和处理</li>
+							  <li class="Closed">生活水处理</li>
+							  <li class="Closed">预处理
 							    <ul>
-							       <li class="Child"><a href="#1">稳流池(477)进水</a></li>
-							       <li class="Child"><a href="#1">进水提升泵房(462A)</a></li>
-							       <li class="Child"><a href="#1">巴氏计量槽（499）</a></li>
-							       <li class="Child"><a href="#1">除色池(414)</a></li>
-							       <li class="Child"><a href="#1">沉沙刮沙池(488)</a></li>
-							       <li class="Child"><a href="#1">初沉池(489B)</a></li>
-							       <li class="Child"><a href="#1">事故池(489)</a></li>
-							       <li class="Child"><a href="#1">14B生活水</a></li>
-							       <li class="Child"><a href="#1">1#水解酸化池</a></li>
-							       <li class="Child"><a href="#1">2#水解酸化池</a></li>
+							       <li class="Child">稳流池(477)进水</li>
+							       <li class="Child">进水提升泵房(462A)</li>
+							       <li class="Child">巴氏计量槽（499）</li>
+							       <li class="Child">除色池(414)</li>
+							       <li class="Child">沉沙刮沙池(488)</li>
+							       <li class="Child">初沉池(489B)</li>
+							       <li class="Child">事故池(489)</li>
+							       <li class="Child">14B生活水</li>
+							       <li class="Child">1#水解酸化池</li>
+							       <li class="Child">2#水解酸化池</li>
 							    </ul>
 							  </li>
-								<li class="Closed"><a href="#">生化处理</a>
+								<li class="Closed">生化处理
 									<ul>
-										<li class="Child"><a href="#1">中间提升泵房(462)</a></li>
-										<li class="Child"><a href="#1">中间提升泵房(462B)</a></li>
+										<li class="Child">中间提升泵房(462)</li>
+										<li class="Child">中间提升泵房(462B)</li>
 										<li class="Child"><a href="/diagnosis/biocpool490/biocpool1.jsp">生化池系列1</a></li>	
 									  <li class="Child"><a href="/diagnosis/biocpool490/biocpool2.jsp">生化池系列2</a></li>
 										<li class="Child"><a href="/diagnosis/biocpool490/biocpool3.jsp">生化池系列3</a></li>
 										<li class="Child"><a href="/diagnosis/biocpool490/biocpool4.jsp">生化池系列4</a></li>
-										<li class="Child"><a href="#1">1系列二沉池</a></li>
-										<li class="Child"><a href="#1">2系列二沉池</a></li>
-										<li class="Child"><a href="#1">3系列二沉池</a></li>
-										<li class="Child"><a href="#1">4系列二沉池</a></li>
-										<li class="Child"><a href="#1">接触氧化池</a></li>
-										<li class="Child"><a href="#1">2系列排江出口线</a></li>
-										<li class="Child"><a href="#1">1、3系列排江出口线</a></li>
+										<li class="Child">1系列二沉池</li>
+										<li class="Child">2系列二沉池</li>
+										<li class="Child">3系列二沉池</li>
+										<li class="Child">4系列二沉池</li>
+										<li class="Child">接触氧化池</li>
+										<li class="Child">2系列排江出口线</li>
+										<li class="Child">1、3系列排江出口线</li>
 									</ul>
 								</li>
-								<li class="Closed"><a href="#">污泥处理</a>
+								<li class="Closed">污泥处理
 									<ul>
-										<li class="Child"><a href="#1">1系列(465)回流泵房</a></li>
-										<li class="Child"><a href="#1">2系列(465A)回流泵房</a></li>
-										<li class="Child"><a href="#1">3系列(465B)回流泵房</a></li>
-							       <li class="Child"><a href="#1">污泥池(V466)</a></li>
-							       <li class="Child"><a href="#1">浓缩池(491)</a></li>
-							       <li class="Child"><a href="#1">脱水装置(495)</a></li>
+										<li class="Child">1系列(465)回流泵房</li>
+										<li class="Child">2系列(465A)回流泵房</li>
+										<li class="Child">3系列(465B)回流泵房</li>
+							       <li class="Child">污泥池(V466)</li>
+							       <li class="Child">浓缩池(491)</li>
+							       <li class="Child">脱水装置(495)</li>
 									</ul>
 								</li>
 								
@@ -176,7 +176,7 @@
 				this.ImgUrl = ImgUrl || "/diagnosis/images/s.gif";
 				this.ImgBlankA = "<img src=\"" + this.ImgUrl
 						+ "\" class=\"s\" onclick=\"ExCls(this,'" + ClassName0
-						+ "','" + ClassName1 + "',1);\" alt=\"+/-\" />";
+						+ "','" + ClassName1 + "',1);\" alt=\"展开/折叠\" />";
 				this.ImgBlankB = "<img src=\""+this.ImgUrl+"\" class=\"s\" />";
 				for (i = 0; i < this.AllNodes.length; i++) {
 					this.AllNodes[i].className == "" ? this.AllNodes[i].className = ClassName1
