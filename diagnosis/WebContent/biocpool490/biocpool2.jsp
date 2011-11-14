@@ -24,57 +24,54 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <body>
   <div id="rightmain">
 	  <h2> 2系列生化池</h2>
-<div id="login">
+<div id="adddata">
 <s:form action="wwdcsdataaction.action">
-<table width="300" align="center" style="margin-left:30">
+<table width="600" align="center" style="margin-left:30">
 <tr>
-	<td align="center"><s:textfield size="17" label="2#鼓风机分量" name="wwdcsdata.ITEM101" /></td>
+    <td align="right">2#鼓风机分量</td>
+	<td align="center"><s:textfield size="17" label="2#鼓风机分量" name="wwdcsdata.ITEM101" theme="simple"/></td>
+	<td/>
+	<td/>
 	</tr>
 	<tr>
-	<td align="center"><s:textfield size="17" label="3号生化池PH" name="wwdcsdata.ITEM7" /></td>
-	</tr>
-	<tr> 
-	<td align="center"><s:textfield size="17" label="3号生化池温度" name="wwdcsdata.ITEM243" /></td>
-	</tr>
-	
-	<tr>
-	<td align="center"><s:textfield size="17" label="3号生化池2段溶解氧DO" name="wwdcsdata.ITEM30" /></td>
-	</tr>
-
-	<tr>
-	<td align="center"><s:textfield size="17" label="3号生化池3段溶解氧DO" name="wwdcsdata.ITEM34" /></td>
+	<td align="right">3号生化池PH</td>
+	<td align="center"><s:textfield size="17" label="3号生化池PH" name="wwdcsdata.ITEM7" theme="simple"/></td>
+	<td align="right">4号生化池PH</td>
+	<td align="center"><s:textfield size="17" label="4号生化池PH" name="wwdcsdata.ITEM8" theme="simple"/></td>
 	</tr>
 	<tr>
-	<td align="center"><s:textfield size="17" label="3号生化池5段溶解氧DO" name="wwdcsdata.ITEM38" /></td>
+	<td align="right">3号生化池温度</td>
+	<td align="center"><s:textfield size="17" label="3号生化池温度" name="wwdcsdata.ITEM243" theme="simple"/></td>
+	<td align="right">4号生化池温度</td>
+	<td align="center"><s:textfield size="17" label="4号生化池温度" name="wwdcsdata.ITEM244" theme="simple"/></td>
 	</tr>
 	<tr>
-	<td align="center"><s:textfield size="17" label="4号生化池PH" name="wwdcsdata.ITEM8" /></td>
+	<td align="right">3号生化池2段溶解氧DO</td>
+	<td align="center"><s:textfield size="17" label="3号生化池2段溶解氧DO" name="wwdcsdata.ITEM30" theme="simple"/></td>
+	<td align="right">4号生化池2段溶解氧DO</td>
+	<td align="center"><s:textfield size="17" label="4号生化池2段溶解氧DO" name="wwdcsdata.ITEM31" theme="simple"/></td>
 	</tr>
 	<tr>
-	<td align="center"><s:textfield size="17" label="4号生化池温度" name="wwdcsdata.ITEM244" /></td>
-	</tr>
-	
-	<tr>
-	<td align="center"><s:textfield size="17" label="4号生化池2段溶解氧DO" name="wwdcsdata.ITEM31" /></td>
-	</tr>
-	
-	<tr>
-	<td align="center"><s:textfield size="17" label="4号生化池3段溶解氧DO" name="wwdcsdata.ITEM35" /></td>
+	<td align="right">3号生化池3段溶解氧DO</td>
+	<td align="center"><s:textfield size="17" label="3号生化池3段溶解氧DO" name="wwdcsdata.ITEM34" theme="simple"/></td>
+	<td align="right">4号生化池3段溶解氧DO</td>
+	<td align="center"><s:textfield size="17" label="4号生化池3段溶解氧DO" name="wwdcsdata.ITEM35" theme="simple"/></td>
 	</tr>
 	<tr>
-	<td align="center"><s:textfield size="17" label="4号生化池5段溶解氧DO" name="wwdcsdata.ITEM39" /></td>
+	<td align="right">3号生化池5段溶解氧DO</td>
+	<td align="center"><s:textfield size="17" label="3号生化池5段溶解氧DO" name="wwdcsdata.ITEM38" theme="simple"/></td>
+	<td align="right">4号生化池5段溶解氧DO</td>
+	<td align="center"><s:textfield size="17" label="4号生化池5段溶解氧DO" name="wwdcsdata.ITEM39" theme="simple"/></td>
 	</tr>
-
-	
-	</table>
-	<br/>
-	<table width="250" align="center" style="margin-left:30">
+    <tr/>
 	<tr align="center">
-	<td width="80" align="center"><s:submit value="提交" theme="simple" />
+	<td/>
+	<td width="25%" align="center"><s:submit value="提交" theme="simple" />
 	</td>
 	
-	<td width="80" align="center"> <s:reset value="重置"
-		theme="simple" /></td></tr></table>
+	<td width="25%" align="center"> <s:reset value="重置"
+		theme="simple" /></td>
+		<td/></tr></table>
 </s:form></div>
 </div>
    
