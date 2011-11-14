@@ -86,10 +86,10 @@
 									<ul>
 										<li class="Child"><a href="#1">中间提升泵房(462)</a></li>
 										<li class="Child"><a href="#1">中间提升泵房(462B)</a></li>
-										<li class="Child"><a href="http://localhost:8080/diagnosis/biocpool490/biocpool1.jsp">生化池系列1</a></li>	
-									  <li class="Child"><a href="http://localhost:8080/diagnosis/biocpool490/biocpool2.jsp">生化池系列2</a></li>
-										<li class="Child"><a href="http://localhost:8080/diagnosis/biocpool490/biocpool3.jsp">生化池系列3</a></li>
-										<li class="Child"><a href="http://localhost:8080/diagnosis/biocpool490/biocpool4.jsp">生化池系列4</a></li>
+										<li class="Child"><a href="/diagnosis/biocpool490/biocpool1.jsp">生化池系列1</a></li>	
+									  <li class="Child"><a href="/diagnosis/biocpool490/biocpool2.jsp">生化池系列2</a></li>
+										<li class="Child"><a href="/diagnosis/biocpool490/biocpool3.jsp">生化池系列3</a></li>
+										<li class="Child"><a href="/diagnosis/biocpool490/biocpool4.jsp">生化池系列4</a></li>
 										<li class="Child"><a href="#1">1系列二沉池</a></li>
 										<li class="Child"><a href="#1">2系列二沉池</a></li>
 										<li class="Child"><a href="#1">3系列二沉池</a></li>
@@ -137,7 +137,7 @@
 			<tr>
 				<td id="footer">
 					<div id="footer">
-						<p>主办单位: 中国石油吉林化工公司污水处理厂</p>
+						<p>使用单位: 中国石油吉林化工公司污水处理厂</p>
 						<p>COPYRIGHT&copy;2011 CNPC ALL RIGHT RESERVED</p>
 					</div>
 					<div id="banner"></div>

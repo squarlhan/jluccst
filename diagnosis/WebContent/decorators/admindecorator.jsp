@@ -32,8 +32,7 @@ response.setHeader("Expires","0");//防止被proxy
 	<tr>
 		<td valign="top">
 		<div id="leftmenu">
-		<page:applyDecorator page="/decorators/adminmenu.jsp" name="panel" /> 
-	    <page:applyDecorator page="/decorators/link.jsp" name="panel" /> 
+		<page:applyDecorator page="/decorators/adminmenu.jsp" name="panel" />  
 		</div>
 		</td>
 		<td width="100%">
@@ -54,7 +53,7 @@ response.setHeader("Expires","0");//防止被proxy
 	<tr>
 		<td id="footer">
 		<div id="footer">
-		   <p>主办单位: 中国石油吉林化工公司污水处理厂</p>
+		   <p>使用单位: 中国石油吉林化工公司污水处理厂</p>
 		   <p>COPYRIGHT&copy;2011 CNPC ALL RIGHT RESERVED</p>
 		</div>
 		<div id="banner"></div>
