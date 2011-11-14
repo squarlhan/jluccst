@@ -33,6 +33,8 @@
 		<table align="center" width="1000">
 			<tr>
 				<td valign="top">
+					<div id="leftmenu" align="left">
+					<page:applyDecorator page="/decorators/mainmenu.jsp" name="panel" />  
 					<div class="CNLTreeMenu" id="CNLTreeMenu2"  style="  width:180px;margin-left:18px;border:solid #90BADE thin ">
 							<p>
 								<a id="AllOpen_2"
