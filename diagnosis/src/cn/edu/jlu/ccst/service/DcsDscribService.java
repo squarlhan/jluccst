@@ -61,8 +61,11 @@ public class DcsDscribService {
 
 	public List<String> findallname() {
 		List<String> name = dcsDscribServiceImpl.findAllname();
-
-		return name;
+		List<String> result  = new ArrayList();
+		for(String na:name){
+			if(na!=null&&na.trim().length()>0)result.add(na);
+		}
+		return result;
 	}
 
 	public List<DcsDscrib> findbyname(String name) {
