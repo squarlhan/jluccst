@@ -79,7 +79,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		var textfield3 = document.createElement("input");
 		textfield3.setAttribute("id","sugg["+count2+"]");
 		textfield3.setAttribute("name","sugg["+count2+"]");
-		textfield3.setAttribute("size","12");
+		textfield3.setAttribute("size","45");
 		
 		td1.innerHTML  = "原因名词： ";
 		td1.appendChild(textfield1);
@@ -152,12 +152,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <td width="25%">原因动词：
       <input name="reason_verb[0]" type="text" size="12" />
     </div></td>
-    <td width="25%">规则建议：
-      <input name="sugg[0]" type="text" size="12" />
+    <td width="45%">规则建议：
+      <input name="sugg[0]" type="text" size="45" />
     </div></td>
-    <td width="25%"><div align="center">
-      <input name="addone" type="button" value="增加" onClick="insertReason()" />
-      <input name="dele" type="button" value="删除"  onclick="deleteRecord(adreasontable)" />
+    <td width="5%"><div align="center">
+      <input name="addone" type="button" value=" + " onClick="insertReason()" />
+      <input name="dele" type="button" value="-"  onclick="deleteRecord(adreasontable)" />
     </div></td>
   </tr>
 </table></td>
