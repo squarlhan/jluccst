@@ -29,39 +29,50 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <table width="600" align="center" style="margin-left:30">
 <tr>
     <td align="right">1#鼓风机分量</td>
-	<td align="center"><s:textfield size="17" label="1#鼓风机分量" name="wwdcsdata.ITEM100" theme="simple"/></td>
+	<td align="center"><s:textfield size="17" label="1#鼓风机分量" name="wwdcsdata.ITEM100" theme="simple" 
+	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td>
 	<td/>
 	<td/>
 	</tr>
 	<tr>
 	<td align="right">1号生化池PH</td>
-	<td align="center"><s:textfield size="17" label="1号生化池PH" name="wwdcsdata.ITEM5" theme="simple"/></td>
+	<td align="center"><s:textfield size="17" label="1号生化池PH" name="wwdcsdata.ITEM5" theme="simple"
+	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td>
 	<td align="right">2号生化池PH</td>
-    <td align="center"><s:textfield size="17" label="2号生化池PH" name="wwdcsdata.ITEM6" theme="simple"/></td>
+    <td align="center"><s:textfield size="17" label="2号生化池PH" name="wwdcsdata.ITEM6" theme="simple"
+	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td>
     </tr>
 	<tr>
 	<td align="right">1号生化池温度</td>
-	<td align="center"><s:textfield size="17" label="1号生化池温度" name="wwdcsdata.ITEM241" theme="simple"/></td>
+	<td align="center"><s:textfield size="17" label="1号生化池温度" name="wwdcsdata.ITEM241" theme="simple"
+	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td>
 	<td align="right">2号生化池温度</td>
-	<td align="center"><s:textfield size="17" label="2号生化池温度" name="wwdcsdata.ITEM242" theme="simple"/></td>
+	<td align="center"><s:textfield size="17" label="2号生化池温度" name="wwdcsdata.ITEM242" theme="simple"
+	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td>
 	</tr>
 	<tr>
 	<td align="right">1号生化池2段溶解氧DO</td>
-	<td align="center"><s:textfield size="17" label="1号生化池2段溶解氧DO" name="wwdcsdata.ITEM28" theme="simple"/></td>
+	<td align="center"><s:textfield size="17" label="1号生化池2段溶解氧DO" name="wwdcsdata.ITEM28" theme="simple"
+	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td>
 	<td align="right">2号生化池2段溶解氧DO</td>
-	<td align="center"><s:textfield size="17" label="2号生化池2段溶解氧DO" name="wwdcsdata.ITEM29" theme="simple"/></td>
+	<td align="center"><s:textfield size="17" label="2号生化池2段溶解氧DO" name="wwdcsdata.ITEM29" theme="simple"
+	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td>
 	</tr>
 	<tr>
 	<td align="right">1号生化池3段溶解氧DO</td>
-	<td align="center"><s:textfield size="17" label="1号生化池3段溶解氧DO" name="wwdcsdata.ITEM32" theme="simple"/></td>
+	<td align="center"><s:textfield size="17" label="1号生化池3段溶解氧DO" name="wwdcsdata.ITEM32" theme="simple"
+	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td>
 	<td align="right">2号生化池3段溶解氧DO</td>
-	<td align="center"><s:textfield size="17" label="2号生化池3段溶解氧DO" name="wwdcsdata.ITEM33" theme="simple"/></td>
+	<td align="center"><s:textfield size="17" label="2号生化池3段溶解氧DO" name="wwdcsdata.ITEM33" theme="simple"
+	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td>
 	</tr>
 	<tr>
 	<td align="right">1号生化池5段溶解氧DO</td>
-	<td align="center"><s:textfield size="17" label="1号生化池5段溶解氧DO" name="wwdcsdata.ITEM36" theme="simple"/></td>
+	<td align="center"><s:textfield size="17" label="1号生化池5段溶解氧DO" name="wwdcsdata.ITEM36" theme="simple"
+	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td>
 	<td align="right">2号生化池5段溶解氧DO</td>
-	<td align="center"><s:textfield size="17" label="2号生化池5段溶解氧DO" name="wwdcsdata.ITEM37" theme="simple"/></td>
+	<td align="center"><s:textfield size="17" label="2号生化池5段溶解氧DO" name="wwdcsdata.ITEM37" theme="simple"
+	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td>
 	</tr>
     
 	<tr/>
