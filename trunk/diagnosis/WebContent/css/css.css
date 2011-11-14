@@ -10,6 +10,15 @@ border:1px solid #a2a2a2;
 padding:30px 30px;
 background:#EEF9F8;
 }
+#adddata{
+width:180px;
+height:100px;
+margin-left:20px;
+margin-top:15px;
+border:1px solid #a2a2a2;
+padding:30px 30px;
+background:#EEF9F8;
+}
 #adduser{
 width:250px;
 height:180px;
@@ -26,6 +35,23 @@ height:20px;
 #login p{
 height:30px;
 line-height:30px;
+}
+#adddata p{
+height:30px;
+line-height:30px;
+}
+#adddata input{
+margin-left:8px;
+margin-top:2px;
+width:110px;
+}
+#adddata .button2{
+width:45px;
+height:25px;
+margin-top:12px;
+}
+#adddata .button3{
+margin-left:40px;
 }
 #login input{
 margin-left:8px;
