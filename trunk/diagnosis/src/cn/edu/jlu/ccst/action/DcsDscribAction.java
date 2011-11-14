@@ -14,9 +14,11 @@ import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 
+import cn.edu.jlu.ccst.model.Backward;
 import cn.edu.jlu.ccst.model.DcsDscrib;
 import cn.edu.jlu.ccst.model.User;
 import cn.edu.jlu.ccst.service.DcsDscribService;
+import cn.edu.jlu.ccst.service.RuleService;
 
 
 
@@ -30,13 +32,29 @@ public class DcsDscribAction extends ActionSupport {
 
 	private DcsDscribService dcsDscribService; 
 	private DcsDscrib dcsDscrib; 
-
+	private RuleService ruleService; 
 	private List<String> namelist;
-
+	private List<Backward> backlist;
 	
 	
 
 	
+
+	public RuleService getRuleService() {
+		return ruleService;
+	}
+	@Resource
+	public void setRuleService(RuleService ruleService) {
+		this.ruleService = ruleService;
+	}
+
+	public List<Backward> getBacklist() {
+		return backlist;
+	}
+
+	public void setBacklist(List<Backward> backlist) {
+		this.backlist = backlist;
+	}
 
 	public List<String> getNamelist() {
 		return namelist;
@@ -83,6 +101,7 @@ public DcsDscrib getDcsDscrib() {
 		
 		if(checkuser()){
 		namelist = dcsDscribService.findallname();
+		backlist = ruleService.findAll();
 		System.out.println(namelist+"你好");
 	    return SUCCESS;}
 		else return "unuserlogin";

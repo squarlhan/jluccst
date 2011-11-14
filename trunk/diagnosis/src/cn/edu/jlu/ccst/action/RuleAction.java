@@ -238,6 +238,7 @@ public class RuleAction extends ActionSupport {
 		
 		ruleService.save(rule);
 		namelist = dcsDscribService.findallname();
+		backlist = ruleService.findAll();
 		return "input";
 	}
 	public String  backList() {

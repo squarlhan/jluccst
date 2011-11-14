@@ -26,8 +26,8 @@ public class Backward implements Serializable{
 	@Id
 	@GeneratedValue
 	private int bid;
-	private String memo;
-	private String name;
+	private String memo = "";
+	private String name = "";
 	private int count;
 	private int priror;
 	@OneToMany(mappedBy = "bid", cascade = CascadeType.ALL, fetch = FetchType.LAZY, targetEntity = BackwardandReason.class) 

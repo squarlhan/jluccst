@@ -16,8 +16,10 @@ import com.opensymphony.xwork2.ActionSupport;
 
 
 import cn.edu.jlu.ccst.model.Admin;
+import cn.edu.jlu.ccst.model.Backward;
 import cn.edu.jlu.ccst.model.User;
 import cn.edu.jlu.ccst.service.DcsDscribService;
+import cn.edu.jlu.ccst.service.RuleService;
 import cn.edu.jlu.ccst.service.UserService;
 
 import cn.edu.jlu.ccst.model.BackwardandResult;
@@ -45,7 +47,9 @@ public class UserAction extends ActionSupport {
 	private List<String> backwardandResultlist1;
 	private List<String> backwardandResultlist2;
 	
+	private RuleService ruleService; 
 	private List<String> namelist;
+	private List<Backward> backlist;
 	
 	private String newpassword;
     private String renewpassword;
@@ -54,7 +58,20 @@ public class UserAction extends ActionSupport {
 	private Map nvs;
 	
 	
-    public DcsDscribService getDcsDscribService() {
+    public RuleService getRuleService() {
+		return ruleService;
+	}
+    @Resource
+	public void setRuleService(RuleService ruleService) {
+		this.ruleService = ruleService;
+	}
+	public List<Backward> getBacklist() {
+		return backlist;
+	}
+	public void setBacklist(List<Backward> backlist) {
+		this.backlist = backlist;
+	}
+	public DcsDscribService getDcsDscribService() {
 		return dcsDscribService;
 	}
 	@Resource
@@ -156,7 +173,7 @@ public class UserAction extends ActionSupport {
 		User flag1;
 		namelist=dcsDscribService.findallname();
 		backwardandResultlist = rulebrService.findAll();
-		
+		backlist = ruleService.findAll();
 		flag1=userService.exits(user);
 
 		if(flag1==null){
