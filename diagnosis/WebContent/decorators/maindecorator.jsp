@@ -13,6 +13,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title><decorator:title default="吉化污水处理过程模拟与优化系统" /></title>
+<link rel="stylesheet" media="all" type="text/css" href="/diagnosis/css/menu_style.css" />
+<!--[if IE]>
+<link rel="stylesheet" media="all" type="text/css" href="/diagnosis/css/ie.css" />
+<![endif]-->
 <link href="/diagnosis/css/css.css" rel="stylesheet" type="text/css" />
 <link href="/diagnosis/css/main.css" rel="stylesheet" type="text/css" />
 <link href="/diagnosis/css/tree.css" rel="stylesheet" type="text/css" />
@@ -28,7 +32,7 @@
 		<table align="center" width="1000">
 			<tr>
 				<td align="left" id="header" height="100"></td>
-			</tr>
+				</tr>
 		</table>
 		<table align="center" width="1000">
 			<tr>
