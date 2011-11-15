@@ -108,7 +108,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <table    width="100%"  rules="rows" border="1" bordercolor="#000000" cellpadding="0" cellspacing="0">
     <tr >
       <td height="54" colspan="2"><h2>规则描述界面</h2>
-        </div>
+       
        
        <tr>
       <td  height="35" style="width: 200px; "><div align="left" >规则名称：
@@ -120,7 +120,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </tr>
   
     <tr>
-      <td height="56" colspan="2"><table id="adresulttable"  bgcolor="#EDEDED" width="100%" height="100%" border="0" cellspacing="0" >
+      <td colspan="2"><table id="adresulttable"  bgcolor="#EDEDED" width="100%" height="100%" border="0" cellspacing="0" >
         <tr>
           <td width="25%" >现象名词：
              
@@ -132,29 +132,31 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	      </select>
               
              
-          </div></td>
+          </td>
           <td width="25%" >现象动词：
            <select name="resultv_value" style="width:200px">
                 <option value="0">高于最高值</option>
                 <option value="1">低于最低值</option>
               </select>
           
-          </div></td>
+          </td>
         </tr>
       </table></td>
     </tr>
+    <tr/>
+    <tr/>
     <tr>
-      <td height="45" colspan="2"><table bgcolor="#CCCCCC" id="adreasontable"  width="100%" height="100%" border="0" cellspacing="0">
+      <td colspan="2"><table bgcolor="#CCCCCC" id="adreasontable"  width="100%" height="100%" border="0" cellspacing="0">
   <tr>
     <td width="25%" height="80%">原因名词：
       <input name="reason_noun[0]" type="text" size="12" />
-    </div></td>
+    </td>
     <td width="25%">原因动词：
       <input name="reason_verb[0]" type="text" size="12" />
-    </div></td>
+    </td>
     <td width="45%">规则建议：
       <input name="sugg[0]" type="text" size="45" />
-    </div></td>
+    </td>
     <td width="5%"><div align="center">
       <input name="addone" type="button" value=" + " onClick="insertReason()" />
       <input name="dele" type="button" value="-"  onclick="deleteRecord(adreasontable)" />
@@ -170,24 +172,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </tr>
   </table>
 </s:form>
-  <!-- 
-<div style="float:left; margin-right: 50px;">
-            <sx:tree label="所有规则" id="parentId"  templateCssPath="/struts/tree.CSS"
-                showRootGrid="true" showGrid="true" treeSelectedTopic="treeSelected">
-                <s:iterator value="backlist">
-                    <sx:treenode  label="%{name}">
-                        <s:iterator value="results">
-                            <sx:treenode  label="%{nouns} %{verb}">
-                                 <s:iterator value="reasons">
-                                     <sx:treenode  label="%{nouns} %{verb} : %{sugg} " >
-                                     </sx:treenode>
-                                 </s:iterator>
-                            </sx:treenode>
-                         </s:iterator>
-                     </sx:treenode>
-                </s:iterator>
-            </sx:tree>
-        </div>
-  -->
+ 
   </body>
 </html>
