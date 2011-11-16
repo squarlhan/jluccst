@@ -10,7 +10,7 @@ public interface WwdcsdataServiceInter {
 	public void save(Wwdcsdata wwdcsdata);
 
 
-
+	 public Wwdcsdata findbytime(Wwdcsdata wwdcsdata);
 	
 	
 	

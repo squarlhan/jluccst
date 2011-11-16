@@ -8,6 +8,7 @@ import javax.persistence.Query;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import cn.edu.jlu.ccst.model.User;
 import cn.edu.jlu.ccst.model.Wwdcsdata;
 import cn.edu.jlu.ccst.dao.WwdcsdataServiceInter;
 
@@ -23,16 +24,27 @@ public class WwdcsdataServiceImpl implements WwdcsdataServiceInter {
     private EntityManager getEntityManager() {
 		return em;
 	}
+    
+    public Wwdcsdata findbytime(Wwdcsdata wwdcsdata){
+    	Query query = getEntityManager().createQuery("select w FROM Wwdcsdata w where w.ORGTIME =  '"+wwdcsdata.getORGTIME()+"'");
+    	List<Wwdcsdata> mydata= query.getResultList();
+		if(mydata.size()<1)
+			return null;
+		else{
+			return (Wwdcsdata) mydata.get(0);//User re=em.find(User.class, user);
+		}
+    }
 	
 	public void save(Wwdcsdata wwdcsdata) {
-		if (wwdcsdata.getId()<= 0) {
+		Wwdcsdata temp = findbytime(wwdcsdata);
+		if(temp==null){
 			// new
 			em.persist(wwdcsdata);
-			
-		} else {
+		}else{	
+
 			// update
 			em.merge(wwdcsdata);
-		}
+			}
 	}
 	
 
