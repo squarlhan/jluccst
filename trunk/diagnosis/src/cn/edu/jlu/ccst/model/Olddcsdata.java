@@ -13,805 +13,815 @@ import javax.persistence.Id;
 import org.springframework.stereotype.Component;
 
 @Entity
-@Component("wwdcsdata")
-public class Wwdcsdata implements Serializable {
+@Component("olddcsdata")
+public class Olddcsdata implements Serializable {
 
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -4761095751458248560L;
 	@Id
+	@GeneratedValue
+	private int id;
 	private String ORGTIME;
-	private float ITEM1 = -1;
-	private float ITEM2 = -1;
-	private float ITEM3 = -1;
-	private float ITEM4 = -1;
-	private float ITEM5 = -1;
-	private float ITEM6 = -1;
-	private float ITEM7 = -1;
-	private float ITEM8 = -1;
-	private float ITEM9 = -1;
-	private float ITEM10 = -1;
-	private float ITEM11 = -1;
-	private float ITEM12 = -1;
-	private float ITEM13 = -1;
-	private float ITEM14 = -1;
-	private float ITEM15 = -1;
-	private float ITEM16 = -1;
-	private float ITEM17 = -1;
-	private float ITEM18 = -1;
-	private float ITEM19 = -1;
-	private float ITEM20 = -1;
-	private float ITEM21 = -1;
-	private float ITEM22 = -1;
-	private float ITEM23 = -1;
-	private float ITEM24 = -1;
-	private float ITEM25 = -1;
-	private float ITEM26 = -1;
-	private float ITEM27 = -1;
-	private float ITEM28 = -1;
-	private float ITEM29 = -1;
-	private float ITEM30 = -1;
-	private float ITEM31 = -1;
-	private float ITEM32 = -1;
-	private float ITEM33 = -1;
-	private float ITEM34 = -1;
-	private float ITEM35 = -1;
-	private float ITEM36 = -1;
-	private float ITEM37 = -1;
-	private float ITEM38 = -1;
-	private float ITEM39 = -1;
-	private float ITEM40 = -1;
-	private float ITEM41 = -1;
-	private float ITEM42 = -1;
-	private float ITEM43 = -1;
-	private float ITEM44 = -1;
-	private float ITEM45 = -1;
-	private float ITEM46 = -1;
-	private float ITEM47 = -1;
-	private float ITEM48 = -1;
-	private float ITEM49 = -1;
-	private float ITEM50 = -1;
-	private float ITEM51 = -1;
-	private float ITEM52 = -1;
-	private float ITEM53 = -1;
-	private float ITEM54 = -1;
-	private float ITEM55 = -1;
-	private float ITEM56 = -1;
-	private float ITEM57 = -1;
-	private float ITEM58 = -1;
-	private float ITEM59 = -1;
-	private float ITEM60 = -1;
-	private float ITEM61 = -1;
-	private float ITEM62 = -1;
-	private float ITEM63 = -1;
-	private float ITEM64 = -1;
-	private float ITEM65 = -1;
-	private float ITEM66 = -1;
-	private float ITEM67 = -1;
-	private float ITEM68 = -1;
-	private float ITEM69 = -1;
-	private float ITEM70 = -1;
-	private float ITEM71 = -1;
-	private float ITEM72 = -1;
-	private float ITEM73 = -1;
-	private float ITEM74 = -1;
-	private float ITEM75 = -1;
-	private float ITEM76 = -1;
-	private float ITEM77 = -1;
-	private float ITEM78 = -1;
-	private float ITEM79 = -1;
-	private float ITEM80 = -1;
-	private float ITEM81 = -1;
-	private float ITEM82 = -1;
-	private float ITEM83 = -1;
-	private float ITEM84 = -1;
-	private float ITEM85 = -1;
-	private float ITEM86 = -1;
-	private float ITEM87 = -1;
-	private float ITEM88 = -1;
-	private float ITEM89 = -1;
-	private float ITEM90 = -1;
-	private float ITEM91 = -1;
-	private float ITEM92 = -1;
-	private float ITEM93 = -1;
-	private float ITEM94 = -1;
-	private float ITEM95 = -1;
-	private float ITEM96 = -1;
-	private float ITEM97 = -1;
-	private float ITEM98 = -1;
-	private float ITEM99 = -1;
-	private float ITEM100 = -1;
-	private float ITEM101 = -1;
-	private float ITEM102 = -1;
-	private float ITEM103 = -1;
-	private float ITEM104 = -1;
-	private float ITEM105 = -1;
-	private float ITEM106 = -1;
-	private float ITEM107 = -1;
-	private float ITEM108 = -1;
-	private float ITEM109 = -1;
-	private float ITEM110 = -1;
-	private float ITEM111 = -1;
-	private float ITEM112 = -1;
-	private float ITEM113 = -1;
-	private float ITEM114 = -1;
-	private float ITEM115 = -1;
-	private float ITEM116 = -1;
-	private float ITEM117 = -1;
-	private float ITEM118 = -1;
-	private float ITEM119 = -1;
-	private float ITEM120 = -1;
-	private float ITEM121 = -1;
-	private float ITEM122 = -1;
-	private float ITEM123 = -1;
-	private float ITEM124 = -1;
-	private float ITEM125 = -1;
-	private float ITEM126 = -1;
-	private float ITEM127 = -1;
-	private float ITEM128 = -1;
-	private float ITEM129 = -1;
-	private float ITEM130 = -1;
-	private float ITEM131 = -1;
-	private float ITEM132 = -1;
-	private float ITEM133 = -1;
-	private float ITEM134 = -1;
-	private float ITEM135 = -1;
-	private float ITEM136 = -1;
-	private float ITEM137 = -1;
-	private float ITEM138 = -1;
-	private float ITEM139 = -1;
-	private float ITEM140 = -1;
-	private float ITEM141 = -1;
-	private float ITEM142 = -1;
-	private float ITEM143 = -1;
-	private float ITEM144 = -1;
-	private float ITEM145 = -1;
-	private float ITEM146 = -1;
-	private float ITEM147 = -1;
-	private float ITEM148 = -1;
-	private float ITEM149 = -1;
-	private float ITEM150 = -1;
-	private float ITEM151 = -1;
-	private float ITEM152 = -1;
-	private float ITEM153 = -1;
-	private float ITEM154 = -1;
-	private float ITEM155 = -1;
-	private float ITEM156 = -1;
-	private float ITEM157 = -1;
-	private float ITEM158 = -1;
-	private float ITEM159 = -1;
-	private float ITEM160 = -1;
-	private float ITEM161 = -1;
-	private float ITEM162 = -1;
-	private float ITEM163 = -1;
-	private float ITEM164 = -1;
-	private float ITEM165 = -1;
-	private float ITEM166 = -1;
-	private float ITEM167 = -1;
-	private float ITEM168 = -1;
-	private float ITEM169 = -1;
-	private float ITEM170 = -1;
-	private float ITEM171 = -1;
-	private float ITEM172 = -1;
-	private float ITEM173 = -1;
-	private float ITEM174 = -1;
-	private float ITEM175 = -1;
-	private float ITEM176 = -1;
-	private float ITEM177 = -1;
-	private float ITEM178 = -1;
-	private float ITEM179 = -1;
-	private float ITEM180 = -1;
-	private float ITEM181 = -1;
-	private float ITEM182 = -1;
-	private float ITEM183 = -1;
-	private float ITEM184 = -1;
-	private float ITEM185 = -1;
-	private float ITEM186 = -1;
-	private float ITEM187 = -1;
-	private float ITEM188 = -1;
-	private float ITEM189 = -1;
-	private float ITEM190 = -1;
-	private float ITEM191 = -1;
-	private float ITEM192 = -1;
-	private float ITEM193 = -1;
-	private float ITEM194 = -1;
-	private float ITEM195 = -1;
-	private float ITEM196 = -1;
-	private float ITEM197 = -1;
-	private float ITEM198 = -1;
-	private float ITEM199 = -1;
-	private float ITEM200 = -1;
-	private float ITEM201 = -1;
-	private float ITEM202 = -1;
-	private float ITEM203 = -1;
-	private float ITEM204 = -1;
-	private float ITEM205 = -1;
-	private float ITEM206 = -1;
-	private float ITEM207 = -1;
-	private float ITEM208 = -1;
-	private float ITEM209 = -1;
-	private float ITEM210 = -1;
-	private float ITEM211 = -1;
-	private float ITEM212 = -1;
-	private float ITEM213 = -1;
-	private float ITEM214 = -1;
-	private float ITEM215 = -1;
-	private float ITEM216 = -1;
-	private float ITEM217 = -1;
-	private float ITEM218 = -1;
-	private float ITEM219 = -1;
-	private float ITEM220 = -1;
-	private float ITEM221 = -1;
-	private float ITEM222 = -1;
-	private float ITEM223 = -1;
-	private float ITEM224 = -1;
-	private float ITEM225 = -1;
-	private float ITEM226 = -1;
-	private float ITEM227 = -1;
-	private float ITEM228 = -1;
-	private float ITEM229 = -1;
-	private float ITEM230 = -1;
-	private float ITEM231 = -1;
-	private float ITEM232 = -1;
-	private float ITEM233 = -1;
-	private float ITEM234 = -1;
-	private float ITEM235 = -1;
-	private float ITEM236 = -1;
-	private float ITEM237 = -1;
-	private float ITEM238 = -1;
-	private float ITEM239 = -1;
-	private float ITEM240 = -1;
-	private float ITEM241 = -1;
-	private float ITEM242 = -1;
-	private float ITEM243 = -1;
-	private float ITEM244 = -1;
-	private float ITEM245 = -1;
-	private float ITEM246 = -1;
-	private float ITEM247 = -1;
-	private float ITEM248 = -1;
-	private float ITEM249 = -1;
-	private float ITEM250 = -1;
-	private float ITEM251 = -1;
-	private float ITEM252 = -1;
-	private float ITEM253 = -1;
-	private float ITEM254 = -1;
-	private float ITEM255 = -1;
-	private float ITEM256 = -1;
-	private float ITEM257 = -1;
-	private float ITEM258 = -1;
-	private float ITEM259 = -1;
-	private float ITEM260 = -1;
+	private float ITEM1;
+	private float ITEM2;
+	private float ITEM3;
+	private float ITEM4;
+	private float ITEM5;
+	private float ITEM6;
+	private float ITEM7;
+	private float ITEM8;
+	private float ITEM9;
+	private float ITEM10;
+	private float ITEM11;
+	private float ITEM12;
+	private float ITEM13;
+	private float ITEM14;
+	private float ITEM15;
+	private float ITEM16;
+	private float ITEM17;
+	private float ITEM18;
+	private float ITEM19;
+	private float ITEM20;
+	private float ITEM21;
+	private float ITEM22;
+	private float ITEM23;
+	private float ITEM24;
+	private float ITEM25;
+	private float ITEM26;
+	private float ITEM27;
+	private float ITEM28;
+	private float ITEM29;
+	private float ITEM30;
+	private float ITEM31;
+	private float ITEM32;
+	private float ITEM33;
+	private float ITEM34;
+	private float ITEM35;
+	private float ITEM36;
+	private float ITEM37;
+	private float ITEM38;
+	private float ITEM39;
+	private float ITEM40;
+	private float ITEM41;
+	private float ITEM42;
+	private float ITEM43;
+	private float ITEM44;
+	private float ITEM45;
+	private float ITEM46;
+	private float ITEM47;
+	private float ITEM48;
+	private float ITEM49;
+	private float ITEM50;
+	private float ITEM51;
+	private float ITEM52;
+	private float ITEM53;
+	private float ITEM54;
+	private float ITEM55;
+	private float ITEM56;
+	private float ITEM57;
+	private float ITEM58;
+	private float ITEM59;
+	private float ITEM60;
+	private float ITEM61;
+	private float ITEM62;
+	private float ITEM63;
+	private float ITEM64;
+	private float ITEM65;
+	private float ITEM66;
+	private float ITEM67;
+	private float ITEM68;
+	private float ITEM69;
+	private float ITEM70;
+	private float ITEM71;
+	private float ITEM72;
+	private float ITEM73;
+	private float ITEM74;
+	private float ITEM75;
+	private float ITEM76;
+	private float ITEM77;
+	private float ITEM78;
+	private float ITEM79;
+	private float ITEM80;
+	private float ITEM81;
+	private float ITEM82;
+	private float ITEM83;
+	private float ITEM84;
+	private float ITEM85;
+	private float ITEM86;
+	private float ITEM87;
+	private float ITEM88;
+	private float ITEM89;
+	private float ITEM90;
+	private float ITEM91;
+	private float ITEM92;
+	private float ITEM93;
+	private float ITEM94;
+	private float ITEM95;
+	private float ITEM96;
+	private float ITEM97;
+	private float ITEM98;
+	private float ITEM99;
+	private float ITEM100;
+	private float ITEM101;
+	private float ITEM102;
+	private float ITEM103;
+	private float ITEM104;
+	private float ITEM105;
+	private float ITEM106;
+	private float ITEM107;
+	private float ITEM108;
+	private float ITEM109;
+	private float ITEM110;
+	private float ITEM111;
+	private float ITEM112;
+	private float ITEM113;
+	private float ITEM114;
+	private float ITEM115;
+	private float ITEM116;
+	private float ITEM117;
+	private float ITEM118;
+	private float ITEM119;
+	private float ITEM120;
+	private float ITEM121;
+	private float ITEM122;
+	private float ITEM123;
+	private float ITEM124;
+	private float ITEM125;
+	private float ITEM126;
+	private float ITEM127;
+	private float ITEM128;
+	private float ITEM129;
+	private float ITEM130;
+	private float ITEM131;
+	private float ITEM132;
+	private float ITEM133;
+	private float ITEM134;
+	private float ITEM135;
+	private float ITEM136;
+	private float ITEM137;
+	private float ITEM138;
+	private float ITEM139;
+	private float ITEM140;
+	private float ITEM141;
+	private float ITEM142;
+	private float ITEM143;
+	private float ITEM144;
+	private float ITEM145;
+	private float ITEM146;
+	private float ITEM147;
+	private float ITEM148;
+	private float ITEM149;
+	private float ITEM150;
+	private float ITEM151;
+	private float ITEM152;
+	private float ITEM153;
+	private float ITEM154;
+	private float ITEM155;
+	private float ITEM156;
+	private float ITEM157;
+	private float ITEM158;
+	private float ITEM159;
+	private float ITEM160;
+	private float ITEM161;
+	private float ITEM162;
+	private float ITEM163;
+	private float ITEM164;
+	private float ITEM165;
+	private float ITEM166;
+	private float ITEM167;
+	private float ITEM168;
+	private float ITEM169;
+	private float ITEM170;
+	private float ITEM171;
+	private float ITEM172;
+	private float ITEM173;
+	private float ITEM174;
+	private float ITEM175;
+	private float ITEM176;
+	private float ITEM177;
+	private float ITEM178;
+	private float ITEM179;
+	private float ITEM180;
+	private float ITEM181;
+	private float ITEM182;
+	private float ITEM183;
+	private float ITEM184;
+	private float ITEM185;
+	private float ITEM186;
+	private float ITEM187;
+	private float ITEM188;
+	private float ITEM189;
+	private float ITEM190;
+	private float ITEM191;
+	private float ITEM192;
+	private float ITEM193;
+	private float ITEM194;
+	private float ITEM195;
+	private float ITEM196;
+	private float ITEM197;
+	private float ITEM198;
+	private float ITEM199;
+	private float ITEM200;
+	private float ITEM201;
+	private float ITEM202;
+	private float ITEM203;
+	private float ITEM204;
+	private float ITEM205;
+	private float ITEM206;
+	private float ITEM207;
+	private float ITEM208;
+	private float ITEM209;
+	private float ITEM210;
+	private float ITEM211;
+	private float ITEM212;
+	private float ITEM213;
+	private float ITEM214;
+	private float ITEM215;
+	private float ITEM216;
+	private float ITEM217;
+	private float ITEM218;
+	private float ITEM219;
+	private float ITEM220;
+	private float ITEM221;
+	private float ITEM222;
+	private float ITEM223;
+	private float ITEM224;
+	private float ITEM225;
+	private float ITEM226;
+	private float ITEM227;
+	private float ITEM228;
+	private float ITEM229;
+	private float ITEM230;
+	private float ITEM231;
+	private float ITEM232;
+	private float ITEM233;
+	private float ITEM234;
+	private float ITEM235;
+	private float ITEM236;
+	private float ITEM237;
+	private float ITEM238;
+	private float ITEM239;
+	private float ITEM240;
+	private float ITEM241;
+	private float ITEM242;
+	private float ITEM243;
+	private float ITEM244;
+	private float ITEM245;
+	private float ITEM246;
+	private float ITEM247;
+	private float ITEM248;
+	private float ITEM249;
+	private float ITEM250;
+	private float ITEM251;
+	private float ITEM252;
+	private float ITEM253;
+	private float ITEM254;
+	private float ITEM255;
+	private float ITEM256;
+	private float ITEM257;
+	private float ITEM258;
+	private float ITEM259;
+	private float ITEM260;
 
 	public Map<Integer, Float> validataitem() {
 		Map<Integer, Float> result = new HashMap();
-		if (ITEM1 != -1.0)
+		if (ITEM1 != 0.0)
 			result.put(1, ITEM1);
-		if (ITEM2 != -1.0)
+		if (ITEM2 != 0.0)
 			result.put(2, ITEM2);
-		if (ITEM3 != -1.0)
+		if (ITEM3 != 0.0)
 			result.put(3, ITEM3);
-		if (ITEM4 != -1.0)
+		if (ITEM4 != 0.0)
 			result.put(4, ITEM4);
-		if (ITEM5 != -1.0)
+		if (ITEM5 != 0.0)
 			result.put(5, ITEM5);
-		if (ITEM6 != -1.0)
+		if (ITEM6 != 0.0)
 			result.put(6, ITEM6);
-		if (ITEM7 != -1.0)
+		if (ITEM7 != 0.0)
 			result.put(7, ITEM7);
-		if (ITEM8 != -1.0)
+		if (ITEM8 != 0.0)
 			result.put(8, ITEM8);
-		if (ITEM9 != -1.0)
+		if (ITEM9 != 0.0)
 			result.put(9, ITEM9);
-		if (ITEM10 != -1.0)
+		if (ITEM10 != 0.0)
 			result.put(10, ITEM10);
-		if (ITEM11 != -1.0)
+		if (ITEM11 != 0.0)
 			result.put(11, ITEM11);
-		if (ITEM12 != -1.0)
+		if (ITEM12 != 0.0)
 			result.put(12, ITEM12);
-		if (ITEM13 != -1.0)
+		if (ITEM13 != 0.0)
 			result.put(13, ITEM13);
-		if (ITEM14 != -1.0)
+		if (ITEM14 != 0.0)
 			result.put(14, ITEM14);
-		if (ITEM15 != -1.0)
+		if (ITEM15 != 0.0)
 			result.put(15, ITEM15);
-		if (ITEM16 != -1.0)
+		if (ITEM16 != 0.0)
 			result.put(16, ITEM16);
-		if (ITEM17 != -1.0)
+		if (ITEM17 != 0.0)
 			result.put(17, ITEM17);
-		if (ITEM18 != -1.0)
+		if (ITEM18 != 0.0)
 			result.put(18, ITEM18);
-		if (ITEM19 != -1.0)
+		if (ITEM19 != 0.0)
 			result.put(19, ITEM19);
-		if (ITEM20 != -1.0)
+		if (ITEM20 != 0.0)
 			result.put(20, ITEM20);
-		if (ITEM21 != -1.0)
+		if (ITEM21 != 0.0)
 			result.put(21, ITEM21);
-		if (ITEM22 != -1.0)
+		if (ITEM22 != 0.0)
 			result.put(22, ITEM22);
-		if (ITEM23 != -1.0)
+		if (ITEM23 != 0.0)
 			result.put(23, ITEM23);
-		if (ITEM24 != -1.0)
+		if (ITEM24 != 0.0)
 			result.put(24, ITEM24);
-		if (ITEM25 != -1.0)
+		if (ITEM25 != 0.0)
 			result.put(25, ITEM25);
-		if (ITEM26 != -1.0)
+		if (ITEM26 != 0.0)
 			result.put(26, ITEM26);
-		if (ITEM27 != -1.0)
+		if (ITEM27 != 0.0)
 			result.put(27, ITEM27);
-		if (ITEM28 != -1.0)
+		if (ITEM28 != 0.0)
 			result.put(28, ITEM28);
-		if (ITEM29 != -1.0)
+		if (ITEM29 != 0.0)
 			result.put(29, ITEM29);
-		if (ITEM30 != -1.0)
+		if (ITEM30 != 0.0)
 			result.put(30, ITEM30);
-		if (ITEM31 != -1.0)
+		if (ITEM31 != 0.0)
 			result.put(31, ITEM31);
-		if (ITEM32 != -1.0)
+		if (ITEM32 != 0.0)
 			result.put(32, ITEM32);
-		if (ITEM33 != -1.0)
+		if (ITEM33 != 0.0)
 			result.put(33, ITEM33);
-		if (ITEM34 != -1.0)
+		if (ITEM34 != 0.0)
 			result.put(34, ITEM34);
-		if (ITEM35 != -1.0)
+		if (ITEM35 != 0.0)
 			result.put(35, ITEM35);
-		if (ITEM36 != -1.0)
+		if (ITEM36 != 0.0)
 			result.put(36, ITEM36);
-		if (ITEM37 != -1.0)
+		if (ITEM37 != 0.0)
 			result.put(37, ITEM37);
-		if (ITEM38 != -1.0)
+		if (ITEM38 != 0.0)
 			result.put(38, ITEM38);
-		if (ITEM39 != -1.0)
+		if (ITEM39 != 0.0)
 			result.put(39, ITEM39);
-		if (ITEM40 != -1.0)
+		if (ITEM40 != 0.0)
 			result.put(40, ITEM40);
-		if (ITEM41 != -1.0)
+		if (ITEM41 != 0.0)
 			result.put(41, ITEM41);
-		if (ITEM42 != -1.0)
+		if (ITEM42 != 0.0)
 			result.put(42, ITEM42);
-		if (ITEM43 != -1.0)
+		if (ITEM43 != 0.0)
 			result.put(43, ITEM43);
-		if (ITEM44 != -1.0)
+		if (ITEM44 != 0.0)
 			result.put(44, ITEM44);
-		if (ITEM45 != -1.0)
+		if (ITEM45 != 0.0)
 			result.put(45, ITEM45);
-		if (ITEM46 != -1.0)
+		if (ITEM46 != 0.0)
 			result.put(46, ITEM46);
-		if (ITEM47 != -1.0)
+		if (ITEM47 != 0.0)
 			result.put(47, ITEM47);
-		if (ITEM48 != -1.0)
+		if (ITEM48 != 0.0)
 			result.put(48, ITEM48);
-		if (ITEM49 != -1.0)
+		if (ITEM49 != 0.0)
 			result.put(49, ITEM49);
-		if (ITEM50 != -1.0)
+		if (ITEM50 != 0.0)
 			result.put(50, ITEM50);
-		if (ITEM51 != -1.0)
+		if (ITEM51 != 0.0)
 			result.put(51, ITEM51);
-		if (ITEM52 != -1.0)
+		if (ITEM52 != 0.0)
 			result.put(52, ITEM52);
-		if (ITEM53 != -1.0)
+		if (ITEM53 != 0.0)
 			result.put(53, ITEM53);
-		if (ITEM54 != -1.0)
+		if (ITEM54 != 0.0)
 			result.put(54, ITEM54);
-		if (ITEM55 != -1.0)
+		if (ITEM55 != 0.0)
 			result.put(55, ITEM55);
-		if (ITEM56 != -1.0)
+		if (ITEM56 != 0.0)
 			result.put(56, ITEM56);
-		if (ITEM57 != -1.0)
+		if (ITEM57 != 0.0)
 			result.put(57, ITEM57);
-		if (ITEM58 != -1.0)
+		if (ITEM58 != 0.0)
 			result.put(58, ITEM58);
-		if (ITEM59 != -1.0)
+		if (ITEM59 != 0.0)
 			result.put(59, ITEM59);
-		if (ITEM60 != -1.0)
+		if (ITEM60 != 0.0)
 			result.put(60, ITEM60);
-		if (ITEM61 != -1.0)
+		if (ITEM61 != 0.0)
 			result.put(61, ITEM61);
-		if (ITEM62 != -1.0)
+		if (ITEM62 != 0.0)
 			result.put(62, ITEM62);
-		if (ITEM63 != -1.0)
+		if (ITEM63 != 0.0)
 			result.put(63, ITEM63);
-		if (ITEM64 != -1.0)
+		if (ITEM64 != 0.0)
 			result.put(64, ITEM64);
-		if (ITEM65 != -1.0)
+		if (ITEM65 != 0.0)
 			result.put(65, ITEM65);
-		if (ITEM66 != -1.0)
+		if (ITEM66 != 0.0)
 			result.put(66, ITEM66);
-		if (ITEM67 != -1.0)
+		if (ITEM67 != 0.0)
 			result.put(67, ITEM67);
-		if (ITEM68 != -1.0)
+		if (ITEM68 != 0.0)
 			result.put(68, ITEM68);
-		if (ITEM69 != -1.0)
+		if (ITEM69 != 0.0)
 			result.put(69, ITEM69);
-		if (ITEM70 != -1.0)
+		if (ITEM70 != 0.0)
 			result.put(70, ITEM70);
-		if (ITEM71 != -1.0)
+		if (ITEM71 != 0.0)
 			result.put(71, ITEM71);
-		if (ITEM72 != -1.0)
+		if (ITEM72 != 0.0)
 			result.put(72, ITEM72);
-		if (ITEM73 != -1.0)
+		if (ITEM73 != 0.0)
 			result.put(73, ITEM73);
-		if (ITEM74 != -1.0)
+		if (ITEM74 != 0.0)
 			result.put(74, ITEM74);
-		if (ITEM75 != -1.0)
+		if (ITEM75 != 0.0)
 			result.put(75, ITEM75);
-		if (ITEM76 != -1.0)
+		if (ITEM76 != 0.0)
 			result.put(76, ITEM76);
-		if (ITEM77 != -1.0)
+		if (ITEM77 != 0.0)
 			result.put(77, ITEM77);
-		if (ITEM78 != -1.0)
+		if (ITEM78 != 0.0)
 			result.put(78, ITEM78);
-		if (ITEM79 != -1.0)
+		if (ITEM79 != 0.0)
 			result.put(79, ITEM79);
-		if (ITEM80 != -1.0)
+		if (ITEM80 != 0.0)
 			result.put(80, ITEM80);
-		if (ITEM81 != -1.0)
+		if (ITEM81 != 0.0)
 			result.put(81, ITEM81);
-		if (ITEM82 != -1.0)
+		if (ITEM82 != 0.0)
 			result.put(82, ITEM82);
-		if (ITEM83 != -1.0)
+		if (ITEM83 != 0.0)
 			result.put(83, ITEM83);
-		if (ITEM84 != -1.0)
+		if (ITEM84 != 0.0)
 			result.put(84, ITEM84);
-		if (ITEM85 != -1.0)
+		if (ITEM85 != 0.0)
 			result.put(85, ITEM85);
-		if (ITEM86 != -1.0)
+		if (ITEM86 != 0.0)
 			result.put(86, ITEM86);
-		if (ITEM87 != -1.0)
+		if (ITEM87 != 0.0)
 			result.put(87, ITEM87);
-		if (ITEM88 != -1.0)
+		if (ITEM88 != 0.0)
 			result.put(88, ITEM88);
-		if (ITEM89 != -1.0)
+		if (ITEM89 != 0.0)
 			result.put(89, ITEM89);
-		if (ITEM90 != -1.0)
+		if (ITEM90 != 0.0)
 			result.put(90, ITEM90);
-		if (ITEM91 != -1.0)
+		if (ITEM91 != 0.0)
 			result.put(91, ITEM91);
-		if (ITEM92 != -1.0)
+		if (ITEM92 != 0.0)
 			result.put(92, ITEM92);
-		if (ITEM93 != -1.0)
+		if (ITEM93 != 0.0)
 			result.put(93, ITEM93);
-		if (ITEM94 != -1.0)
+		if (ITEM94 != 0.0)
 			result.put(94, ITEM94);
-		if (ITEM95 != -1.0)
+		if (ITEM95 != 0.0)
 			result.put(95, ITEM95);
-		if (ITEM96 != -1.0)
+		if (ITEM96 != 0.0)
 			result.put(96, ITEM96);
-		if (ITEM97 != -1.0)
+		if (ITEM97 != 0.0)
 			result.put(97, ITEM97);
-		if (ITEM98 != -1.0)
+		if (ITEM98 != 0.0)
 			result.put(98, ITEM98);
-		if (ITEM99 != -1.0)
+		if (ITEM99 != 0.0)
 			result.put(99, ITEM99);
-		if (ITEM100 != -1.0)
+		if (ITEM100 != 0.0)
 			result.put(100, ITEM100);
-		if (ITEM101 != -1.0)
+		if (ITEM101 != 0.0)
 			result.put(101, ITEM101);
-		if (ITEM102 != -1.0)
+		if (ITEM102 != 0.0)
 			result.put(102, ITEM102);
-		if (ITEM103 != -1.0)
+		if (ITEM103 != 0.0)
 			result.put(103, ITEM103);
-		if (ITEM104 != -1.0)
+		if (ITEM104 != 0.0)
 			result.put(104, ITEM104);
-		if (ITEM105 != -1.0)
+		if (ITEM105 != 0.0)
 			result.put(105, ITEM105);
-		if (ITEM106 != -1.0)
+		if (ITEM106 != 0.0)
 			result.put(106, ITEM106);
-		if (ITEM107 != -1.0)
+		if (ITEM107 != 0.0)
 			result.put(107, ITEM107);
-		if (ITEM108 != -1.0)
+		if (ITEM108 != 0.0)
 			result.put(108, ITEM108);
-		if (ITEM109 != -1.0)
+		if (ITEM109 != 0.0)
 			result.put(109, ITEM109);
-		if (ITEM110 != -1.0)
+		if (ITEM110 != 0.0)
 			result.put(110, ITEM110);
-		if (ITEM111 != -1.0)
+		if (ITEM111 != 0.0)
 			result.put(111, ITEM111);
-		if (ITEM112 != -1.0)
+		if (ITEM112 != 0.0)
 			result.put(112, ITEM112);
-		if (ITEM113 != -1.0)
+		if (ITEM113 != 0.0)
 			result.put(113, ITEM113);
-		if (ITEM114 != -1.0)
+		if (ITEM114 != 0.0)
 			result.put(114, ITEM114);
-		if (ITEM115 != -1.0)
+		if (ITEM115 != 0.0)
 			result.put(115, ITEM115);
-		if (ITEM116 != -1.0)
+		if (ITEM116 != 0.0)
 			result.put(116, ITEM116);
-		if (ITEM117 != -1.0)
+		if (ITEM117 != 0.0)
 			result.put(117, ITEM117);
-		if (ITEM118 != -1.0)
+		if (ITEM118 != 0.0)
 			result.put(118, ITEM118);
-		if (ITEM119 != -1.0)
+		if (ITEM119 != 0.0)
 			result.put(119, ITEM119);
-		if (ITEM120 != -1.0)
+		if (ITEM120 != 0.0)
 			result.put(120, ITEM120);
-		if (ITEM121 != -1.0)
+		if (ITEM121 != 0.0)
 			result.put(121, ITEM121);
-		if (ITEM122 != -1.0)
+		if (ITEM122 != 0.0)
 			result.put(122, ITEM122);
-		if (ITEM123 != -1.0)
+		if (ITEM123 != 0.0)
 			result.put(123, ITEM123);
-		if (ITEM124 != -1.0)
+		if (ITEM124 != 0.0)
 			result.put(124, ITEM124);
-		if (ITEM125 != -1.0)
+		if (ITEM125 != 0.0)
 			result.put(125, ITEM125);
-		if (ITEM126 != -1.0)
+		if (ITEM126 != 0.0)
 			result.put(126, ITEM126);
-		if (ITEM127 != -1.0)
+		if (ITEM127 != 0.0)
 			result.put(127, ITEM127);
-		if (ITEM128 != -1.0)
+		if (ITEM128 != 0.0)
 			result.put(128, ITEM128);
-		if (ITEM129 != -1.0)
+		if (ITEM129 != 0.0)
 			result.put(129, ITEM129);
-		if (ITEM130 != -1.0)
+		if (ITEM130 != 0.0)
 			result.put(130, ITEM130);
-		if (ITEM131 != -1.0)
+		if (ITEM131 != 0.0)
 			result.put(131, ITEM131);
-		if (ITEM132 != -1.0)
+		if (ITEM132 != 0.0)
 			result.put(132, ITEM132);
-		if (ITEM133 != -1.0)
+		if (ITEM133 != 0.0)
 			result.put(133, ITEM133);
-		if (ITEM134 != -1.0)
+		if (ITEM134 != 0.0)
 			result.put(134, ITEM134);
-		if (ITEM135 != -1.0)
+		if (ITEM135 != 0.0)
 			result.put(135, ITEM135);
-		if (ITEM136 != -1.0)
+		if (ITEM136 != 0.0)
 			result.put(136, ITEM136);
-		if (ITEM137 != -1.0)
+		if (ITEM137 != 0.0)
 			result.put(137, ITEM137);
-		if (ITEM138 != -1.0)
+		if (ITEM138 != 0.0)
 			result.put(138, ITEM138);
-		if (ITEM139 != -1.0)
+		if (ITEM139 != 0.0)
 			result.put(139, ITEM139);
-		if (ITEM140 != -1.0)
+		if (ITEM140 != 0.0)
 			result.put(140, ITEM140);
-		if (ITEM141 != -1.0)
+		if (ITEM141 != 0.0)
 			result.put(141, ITEM141);
-		if (ITEM142 != -1.0)
+		if (ITEM142 != 0.0)
 			result.put(142, ITEM142);
-		if (ITEM143 != -1.0)
+		if (ITEM143 != 0.0)
 			result.put(143, ITEM143);
-		if (ITEM144 != -1.0)
+		if (ITEM144 != 0.0)
 			result.put(144, ITEM144);
-		if (ITEM145 != -1.0)
+		if (ITEM145 != 0.0)
 			result.put(145, ITEM145);
-		if (ITEM146 != -1.0)
+		if (ITEM146 != 0.0)
 			result.put(146, ITEM146);
-		if (ITEM147 != -1.0)
+		if (ITEM147 != 0.0)
 			result.put(147, ITEM147);
-		if (ITEM148 != -1.0)
+		if (ITEM148 != 0.0)
 			result.put(148, ITEM148);
-		if (ITEM149 != -1.0)
+		if (ITEM149 != 0.0)
 			result.put(149, ITEM149);
-		if (ITEM150 != -1.0)
+		if (ITEM150 != 0.0)
 			result.put(150, ITEM150);
-		if (ITEM151 != -1.0)
+		if (ITEM151 != 0.0)
 			result.put(151, ITEM151);
-		if (ITEM152 != -1.0)
+		if (ITEM152 != 0.0)
 			result.put(152, ITEM152);
-		if (ITEM153 != -1.0)
+		if (ITEM153 != 0.0)
 			result.put(153, ITEM153);
-		if (ITEM154 != -1.0)
+		if (ITEM154 != 0.0)
 			result.put(154, ITEM154);
-		if (ITEM155 != -1.0)
+		if (ITEM155 != 0.0)
 			result.put(155, ITEM155);
-		if (ITEM156 != -1.0)
+		if (ITEM156 != 0.0)
 			result.put(156, ITEM156);
-		if (ITEM157 != -1.0)
+		if (ITEM157 != 0.0)
 			result.put(157, ITEM157);
-		if (ITEM158 != -1.0)
+		if (ITEM158 != 0.0)
 			result.put(158, ITEM158);
-		if (ITEM159 != -1.0)
+		if (ITEM159 != 0.0)
 			result.put(159, ITEM159);
-		if (ITEM160 != -1.0)
+		if (ITEM160 != 0.0)
 			result.put(160, ITEM160);
-		if (ITEM161 != -1.0)
+		if (ITEM161 != 0.0)
 			result.put(161, ITEM161);
-		if (ITEM162 != -1.0)
+		if (ITEM162 != 0.0)
 			result.put(162, ITEM162);
-		if (ITEM163 != -1.0)
+		if (ITEM163 != 0.0)
 			result.put(163, ITEM163);
-		if (ITEM164 != -1.0)
+		if (ITEM164 != 0.0)
 			result.put(164, ITEM164);
-		if (ITEM165 != -1.0)
+		if (ITEM165 != 0.0)
 			result.put(165, ITEM165);
-		if (ITEM166 != -1.0)
+		if (ITEM166 != 0.0)
 			result.put(166, ITEM166);
-		if (ITEM167 != -1.0)
+		if (ITEM167 != 0.0)
 			result.put(167, ITEM167);
-		if (ITEM168 != -1.0)
+		if (ITEM168 != 0.0)
 			result.put(168, ITEM168);
-		if (ITEM169 != -1.0)
+		if (ITEM169 != 0.0)
 			result.put(169, ITEM169);
-		if (ITEM170 != -1.0)
+		if (ITEM170 != 0.0)
 			result.put(170, ITEM170);
-		if (ITEM171 != -1.0)
+		if (ITEM171 != 0.0)
 			result.put(171, ITEM171);
-		if (ITEM172 != -1.0)
+		if (ITEM172 != 0.0)
 			result.put(172, ITEM172);
-		if (ITEM173 != -1.0)
+		if (ITEM173 != 0.0)
 			result.put(173, ITEM173);
-		if (ITEM174 != -1.0)
+		if (ITEM174 != 0.0)
 			result.put(174, ITEM174);
-		if (ITEM175 != -1.0)
+		if (ITEM175 != 0.0)
 			result.put(175, ITEM175);
-		if (ITEM176 != -1.0)
+		if (ITEM176 != 0.0)
 			result.put(176, ITEM176);
-		if (ITEM177 != -1.0)
+		if (ITEM177 != 0.0)
 			result.put(177, ITEM177);
-		if (ITEM178 != -1.0)
+		if (ITEM178 != 0.0)
 			result.put(178, ITEM178);
-		if (ITEM179 != -1.0)
+		if (ITEM179 != 0.0)
 			result.put(179, ITEM179);
-		if (ITEM180 != -1.0)
+		if (ITEM180 != 0.0)
 			result.put(180, ITEM180);
-		if (ITEM181 != -1.0)
+		if (ITEM181 != 0.0)
 			result.put(181, ITEM181);
-		if (ITEM182 != -1.0)
+		if (ITEM182 != 0.0)
 			result.put(182, ITEM182);
-		if (ITEM183 != -1.0)
+		if (ITEM183 != 0.0)
 			result.put(183, ITEM183);
-		if (ITEM184 != -1.0)
+		if (ITEM184 != 0.0)
 			result.put(184, ITEM184);
-		if (ITEM185 != -1.0)
+		if (ITEM185 != 0.0)
 			result.put(185, ITEM185);
-		if (ITEM186 != -1.0)
+		if (ITEM186 != 0.0)
 			result.put(186, ITEM186);
-		if (ITEM187 != -1.0)
+		if (ITEM187 != 0.0)
 			result.put(187, ITEM187);
-		if (ITEM188 != -1.0)
+		if (ITEM188 != 0.0)
 			result.put(188, ITEM188);
-		if (ITEM189 != -1.0)
+		if (ITEM189 != 0.0)
 			result.put(189, ITEM189);
-		if (ITEM190 != -1.0)
+		if (ITEM190 != 0.0)
 			result.put(190, ITEM190);
-		if (ITEM191 != -1.0)
+		if (ITEM191 != 0.0)
 			result.put(191, ITEM191);
-		if (ITEM192 != -1.0)
+		if (ITEM192 != 0.0)
 			result.put(192, ITEM192);
-		if (ITEM193 != -1.0)
+		if (ITEM193 != 0.0)
 			result.put(193, ITEM193);
-		if (ITEM194 != -1.0)
+		if (ITEM194 != 0.0)
 			result.put(194, ITEM194);
-		if (ITEM195 != -1.0)
+		if (ITEM195 != 0.0)
 			result.put(195, ITEM195);
-		if (ITEM196 != -1.0)
+		if (ITEM196 != 0.0)
 			result.put(196, ITEM196);
-		if (ITEM197 != -1.0)
+		if (ITEM197 != 0.0)
 			result.put(197, ITEM197);
-		if (ITEM198 != -1.0)
+		if (ITEM198 != 0.0)
 			result.put(198, ITEM198);
-		if (ITEM199 != -1.0)
+		if (ITEM199 != 0.0)
 			result.put(199, ITEM199);
-		if (ITEM200 != -1.0)
+		if (ITEM200 != 0.0)
 			result.put(200, ITEM200);
-		if (ITEM201 != -1.0)
+		if (ITEM201 != 0.0)
 			result.put(201, ITEM201);
-		if (ITEM202 != -1.0)
+		if (ITEM202 != 0.0)
 			result.put(202, ITEM202);
-		if (ITEM203 != -1.0)
+		if (ITEM203 != 0.0)
 			result.put(203, ITEM203);
-		if (ITEM204 != -1.0)
+		if (ITEM204 != 0.0)
 			result.put(204, ITEM204);
-		if (ITEM205 != -1.0)
+		if (ITEM205 != 0.0)
 			result.put(205, ITEM205);
-		if (ITEM206 != -1.0)
+		if (ITEM206 != 0.0)
 			result.put(206, ITEM206);
-		if (ITEM207 != -1.0)
+		if (ITEM207 != 0.0)
 			result.put(207, ITEM207);
-		if (ITEM208 != -1.0)
+		if (ITEM208 != 0.0)
 			result.put(208, ITEM208);
-		if (ITEM209 != -1.0)
+		if (ITEM209 != 0.0)
 			result.put(209, ITEM209);
-		if (ITEM210 != -1.0)
+		if (ITEM210 != 0.0)
 			result.put(210, ITEM210);
-		if (ITEM211 != -1.0)
+		if (ITEM211 != 0.0)
 			result.put(211, ITEM211);
-		if (ITEM212 != -1.0)
+		if (ITEM212 != 0.0)
 			result.put(212, ITEM212);
-		if (ITEM213 != -1.0)
+		if (ITEM213 != 0.0)
 			result.put(213, ITEM213);
-		if (ITEM214 != -1.0)
+		if (ITEM214 != 0.0)
 			result.put(214, ITEM214);
-		if (ITEM215 != -1.0)
+		if (ITEM215 != 0.0)
 			result.put(215, ITEM215);
-		if (ITEM216 != -1.0)
+		if (ITEM216 != 0.0)
 			result.put(216, ITEM216);
-		if (ITEM217 != -1.0)
+		if (ITEM217 != 0.0)
 			result.put(217, ITEM217);
-		if (ITEM218 != -1.0)
+		if (ITEM218 != 0.0)
 			result.put(218, ITEM218);
-		if (ITEM219 != -1.0)
+		if (ITEM219 != 0.0)
 			result.put(219, ITEM219);
-		if (ITEM220 != -1.0)
+		if (ITEM220 != 0.0)
 			result.put(220, ITEM220);
-		if (ITEM221 != -1.0)
+		if (ITEM221 != 0.0)
 			result.put(221, ITEM221);
-		if (ITEM222 != -1.0)
+		if (ITEM222 != 0.0)
 			result.put(222, ITEM222);
-		if (ITEM223 != -1.0)
+		if (ITEM223 != 0.0)
 			result.put(223, ITEM223);
-		if (ITEM224 != -1.0)
+		if (ITEM224 != 0.0)
 			result.put(224, ITEM224);
-		if (ITEM225 != -1.0)
+		if (ITEM225 != 0.0)
 			result.put(225, ITEM225);
-		if (ITEM226 != -1.0)
+		if (ITEM226 != 0.0)
 			result.put(226, ITEM226);
-		if (ITEM227 != -1.0)
+		if (ITEM227 != 0.0)
 			result.put(227, ITEM227);
-		if (ITEM228 != -1.0)
+		if (ITEM228 != 0.0)
 			result.put(228, ITEM228);
-		if (ITEM229 != -1.0)
+		if (ITEM229 != 0.0)
 			result.put(229, ITEM229);
-		if (ITEM230 != -1.0)
+		if (ITEM230 != 0.0)
 			result.put(230, ITEM230);
-		if (ITEM231 != -1.0)
+		if (ITEM231 != 0.0)
 			result.put(231, ITEM231);
-		if (ITEM232 != -1.0)
+		if (ITEM232 != 0.0)
 			result.put(232, ITEM232);
-		if (ITEM233 != -1.0)
+		if (ITEM233 != 0.0)
 			result.put(233, ITEM233);
-		if (ITEM234 != -1.0)
+		if (ITEM234 != 0.0)
 			result.put(234, ITEM234);
-		if (ITEM235 != -1.0)
+		if (ITEM235 != 0.0)
 			result.put(235, ITEM235);
-		if (ITEM236 != -1.0)
+		if (ITEM236 != 0.0)
 			result.put(236, ITEM236);
-		if (ITEM237 != -1.0)
+		if (ITEM237 != 0.0)
 			result.put(237, ITEM237);
-		if (ITEM238 != -1.0)
+		if (ITEM238 != 0.0)
 			result.put(238, ITEM238);
-		if (ITEM239 != -1.0)
+		if (ITEM239 != 0.0)
 			result.put(239, ITEM239);
-		if (ITEM240 != -1.0)
+		if (ITEM240 != 0.0)
 			result.put(240, ITEM240);
-		if (ITEM241 != -1.0)
+		if (ITEM241 != 0.0)
 			result.put(241, ITEM241);
-		if (ITEM242 != -1.0)
+		if (ITEM242 != 0.0)
 			result.put(242, ITEM242);
-		if (ITEM243 != -1.0)
+		if (ITEM243 != 0.0)
 			result.put(243, ITEM243);
-		if (ITEM244 != -1.0)
+		if (ITEM244 != 0.0)
 			result.put(244, ITEM244);
-		if (ITEM245 != -1.0)
+		if (ITEM245 != 0.0)
 			result.put(245, ITEM245);
-		if (ITEM246 != -1.0)
+		if (ITEM246 != 0.0)
 			result.put(246, ITEM246);
-		if (ITEM247 != -1.0)
+		if (ITEM247 != 0.0)
 			result.put(247, ITEM247);
-		if (ITEM248 != -1.0)
+		if (ITEM248 != 0.0)
 			result.put(248, ITEM248);
-		if (ITEM249 != -1.0)
+		if (ITEM249 != 0.0)
 			result.put(249, ITEM249);
-		if (ITEM250 != -1.0)
+		if (ITEM250 != 0.0)
 			result.put(250, ITEM250);
-		if (ITEM251 != -1.0)
+		if (ITEM251 != 0.0)
 			result.put(251, ITEM251);
-		if (ITEM252 != -1.0)
+		if (ITEM252 != 0.0)
 			result.put(252, ITEM252);
-		if (ITEM253 != -1.0)
+		if (ITEM253 != 0.0)
 			result.put(253, ITEM253);
-		if (ITEM254 != -1.0)
+		if (ITEM254 != 0.0)
 			result.put(254, ITEM254);
-		if (ITEM255 != -1.0)
+		if (ITEM255 != 0.0)
 			result.put(255, ITEM255);
-		if (ITEM256 != -1.0)
+		if (ITEM256 != 0.0)
 			result.put(256, ITEM256);
-		if (ITEM257 != -1.0)
+		if (ITEM257 != 0.0)
 			result.put(257, ITEM257);
-		if (ITEM258 != -1.0)
+		if (ITEM258 != 0.0)
 			result.put(258, ITEM258);
-		if (ITEM259 != -1.0)
+		if (ITEM259 != 0.0)
 			result.put(259, ITEM259);
-		if (ITEM260 != -1.0)
+		if (ITEM260 != 0.0)
 			result.put(260, ITEM260);
 
 		return result;
 	}
 
-	public Wwdcsdata(String oRGTIME) {
+	public Olddcsdata(String oRGTIME) {
 		super();
 		ORGTIME = oRGTIME;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public String getORGTIME() {
@@ -2902,533 +2912,9 @@ public class Wwdcsdata implements Serializable {
 		ITEM260 = iTEM260;
 	}
 
-	public Wwdcsdata() {
+	public Olddcsdata() {
 		super();
 		// TODO Auto-generated constructor stub
-	}
-
-	public void initbydcs(Wwdcsdata mydata) {
-		if (mydata.getITEM1() != -1.0)
-			setITEM1(mydata.getITEM1());
-		if (mydata.getITEM2() != -1.0)
-			setITEM2(mydata.getITEM2());
-		if (mydata.getITEM3() != -1.0)
-			setITEM3(mydata.getITEM3());
-		if (mydata.getITEM4() != -1.0)
-			setITEM4(mydata.getITEM4());
-		if (mydata.getITEM5() != -1.0)
-			setITEM5(mydata.getITEM5());
-		if (mydata.getITEM6() != -1.0)
-			setITEM6(mydata.getITEM6());
-		if (mydata.getITEM7() != -1.0)
-			setITEM7(mydata.getITEM7());
-		if (mydata.getITEM8() != -1.0)
-			setITEM8(mydata.getITEM8());
-		if (mydata.getITEM9() != -1.0)
-			setITEM9(mydata.getITEM9());
-		if (mydata.getITEM10() != -1.0)
-			setITEM10(mydata.getITEM10());
-		if (mydata.getITEM11() != -1.0)
-			setITEM11(mydata.getITEM11());
-		if (mydata.getITEM12() != -1.0)
-			setITEM12(mydata.getITEM12());
-		if (mydata.getITEM13() != -1.0)
-			setITEM13(mydata.getITEM13());
-		if (mydata.getITEM14() != -1.0)
-			setITEM14(mydata.getITEM14());
-		if (mydata.getITEM15() != -1.0)
-			setITEM15(mydata.getITEM15());
-		if (mydata.getITEM16() != -1.0)
-			setITEM16(mydata.getITEM16());
-		if (mydata.getITEM17() != -1.0)
-			setITEM17(mydata.getITEM17());
-		if (mydata.getITEM18() != -1.0)
-			setITEM18(mydata.getITEM18());
-		if (mydata.getITEM19() != -1.0)
-			setITEM19(mydata.getITEM19());
-		if (mydata.getITEM20() != -1.0)
-			setITEM20(mydata.getITEM20());
-		if (mydata.getITEM21() != -1.0)
-			setITEM21(mydata.getITEM21());
-		if (mydata.getITEM22() != -1.0)
-			setITEM22(mydata.getITEM22());
-		if (mydata.getITEM23() != -1.0)
-			setITEM23(mydata.getITEM23());
-		if (mydata.getITEM24() != -1.0)
-			setITEM24(mydata.getITEM24());
-		if (mydata.getITEM25() != -1.0)
-			setITEM25(mydata.getITEM25());
-		if (mydata.getITEM26() != -1.0)
-			setITEM26(mydata.getITEM26());
-		if (mydata.getITEM27() != -1.0)
-			setITEM27(mydata.getITEM27());
-		if (mydata.getITEM28() != -1.0)
-			setITEM28(mydata.getITEM28());
-		if (mydata.getITEM29() != -1.0)
-			setITEM29(mydata.getITEM29());
-		if (mydata.getITEM30() != -1.0)
-			setITEM30(mydata.getITEM30());
-		if (mydata.getITEM31() != -1.0)
-			setITEM31(mydata.getITEM31());
-		if (mydata.getITEM32() != -1.0)
-			setITEM32(mydata.getITEM32());
-		if (mydata.getITEM33() != -1.0)
-			setITEM33(mydata.getITEM33());
-		if (mydata.getITEM34() != -1.0)
-			setITEM34(mydata.getITEM34());
-		if (mydata.getITEM35() != -1.0)
-			setITEM35(mydata.getITEM35());
-		if (mydata.getITEM36() != -1.0)
-			setITEM36(mydata.getITEM36());
-		if (mydata.getITEM37() != -1.0)
-			setITEM37(mydata.getITEM37());
-		if (mydata.getITEM38() != -1.0)
-			setITEM38(mydata.getITEM38());
-		if (mydata.getITEM39() != -1.0)
-			setITEM39(mydata.getITEM39());
-		if (mydata.getITEM40() != -1.0)
-			setITEM40(mydata.getITEM40());
-		if (mydata.getITEM41() != -1.0)
-			setITEM41(mydata.getITEM41());
-		if (mydata.getITEM42() != -1.0)
-			setITEM42(mydata.getITEM42());
-		if (mydata.getITEM43() != -1.0)
-			setITEM43(mydata.getITEM43());
-		if (mydata.getITEM44() != -1.0)
-			setITEM44(mydata.getITEM44());
-		if (mydata.getITEM45() != -1.0)
-			setITEM45(mydata.getITEM45());
-		if (mydata.getITEM46() != -1.0)
-			setITEM46(mydata.getITEM46());
-		if (mydata.getITEM47() != -1.0)
-			setITEM47(mydata.getITEM47());
-		if (mydata.getITEM48() != -1.0)
-			setITEM48(mydata.getITEM48());
-		if (mydata.getITEM49() != -1.0)
-			setITEM49(mydata.getITEM49());
-		if (mydata.getITEM50() != -1.0)
-			setITEM50(mydata.getITEM50());
-		if (mydata.getITEM51() != -1.0)
-			setITEM51(mydata.getITEM51());
-		if (mydata.getITEM52() != -1.0)
-			setITEM52(mydata.getITEM52());
-		if (mydata.getITEM53() != -1.0)
-			setITEM53(mydata.getITEM53());
-		if (mydata.getITEM54() != -1.0)
-			setITEM54(mydata.getITEM54());
-		if (mydata.getITEM55() != -1.0)
-			setITEM55(mydata.getITEM55());
-		if (mydata.getITEM56() != -1.0)
-			setITEM56(mydata.getITEM56());
-		if (mydata.getITEM57() != -1.0)
-			setITEM57(mydata.getITEM57());
-		if (mydata.getITEM58() != -1.0)
-			setITEM58(mydata.getITEM58());
-		if (mydata.getITEM59() != -1.0)
-			setITEM59(mydata.getITEM59());
-		if (mydata.getITEM60() != -1.0)
-			setITEM60(mydata.getITEM60());
-		if (mydata.getITEM61() != -1.0)
-			setITEM61(mydata.getITEM61());
-		if (mydata.getITEM62() != -1.0)
-			setITEM62(mydata.getITEM62());
-		if (mydata.getITEM63() != -1.0)
-			setITEM63(mydata.getITEM63());
-		if (mydata.getITEM64() != -1.0)
-			setITEM64(mydata.getITEM64());
-		if (mydata.getITEM65() != -1.0)
-			setITEM65(mydata.getITEM65());
-		if (mydata.getITEM66() != -1.0)
-			setITEM66(mydata.getITEM66());
-		if (mydata.getITEM67() != -1.0)
-			setITEM67(mydata.getITEM67());
-		if (mydata.getITEM68() != -1.0)
-			setITEM68(mydata.getITEM68());
-		if (mydata.getITEM69() != -1.0)
-			setITEM69(mydata.getITEM69());
-		if (mydata.getITEM70() != -1.0)
-			setITEM70(mydata.getITEM70());
-		if (mydata.getITEM71() != -1.0)
-			setITEM71(mydata.getITEM71());
-		if (mydata.getITEM72() != -1.0)
-			setITEM72(mydata.getITEM72());
-		if (mydata.getITEM73() != -1.0)
-			setITEM73(mydata.getITEM73());
-		if (mydata.getITEM74() != -1.0)
-			setITEM74(mydata.getITEM74());
-		if (mydata.getITEM75() != -1.0)
-			setITEM75(mydata.getITEM75());
-		if (mydata.getITEM76() != -1.0)
-			setITEM76(mydata.getITEM76());
-		if (mydata.getITEM77() != -1.0)
-			setITEM77(mydata.getITEM77());
-		if (mydata.getITEM78() != -1.0)
-			setITEM78(mydata.getITEM78());
-		if (mydata.getITEM79() != -1.0)
-			setITEM79(mydata.getITEM79());
-		if (mydata.getITEM80() != -1.0)
-			setITEM80(mydata.getITEM80());
-		if (mydata.getITEM81() != -1.0)
-			setITEM81(mydata.getITEM81());
-		if (mydata.getITEM82() != -1.0)
-			setITEM82(mydata.getITEM82());
-		if (mydata.getITEM83() != -1.0)
-			setITEM83(mydata.getITEM83());
-		if (mydata.getITEM84() != -1.0)
-			setITEM84(mydata.getITEM84());
-		if (mydata.getITEM85() != -1.0)
-			setITEM85(mydata.getITEM85());
-		if (mydata.getITEM86() != -1.0)
-			setITEM86(mydata.getITEM86());
-		if (mydata.getITEM87() != -1.0)
-			setITEM87(mydata.getITEM87());
-		if (mydata.getITEM88() != -1.0)
-			setITEM88(mydata.getITEM88());
-		if (mydata.getITEM89() != -1.0)
-			setITEM89(mydata.getITEM89());
-		if (mydata.getITEM90() != -1.0)
-			setITEM90(mydata.getITEM90());
-		if (mydata.getITEM91() != -1.0)
-			setITEM91(mydata.getITEM91());
-		if (mydata.getITEM92() != -1.0)
-			setITEM92(mydata.getITEM92());
-		if (mydata.getITEM93() != -1.0)
-			setITEM93(mydata.getITEM93());
-		if (mydata.getITEM94() != -1.0)
-			setITEM94(mydata.getITEM94());
-		if (mydata.getITEM95() != -1.0)
-			setITEM95(mydata.getITEM95());
-		if (mydata.getITEM96() != -1.0)
-			setITEM96(mydata.getITEM96());
-		if (mydata.getITEM97() != -1.0)
-			setITEM97(mydata.getITEM97());
-		if (mydata.getITEM98() != -1.0)
-			setITEM98(mydata.getITEM98());
-		if (mydata.getITEM99() != -1.0)
-			setITEM99(mydata.getITEM99());
-		if (mydata.getITEM100() != -1.0)
-			setITEM100(mydata.getITEM100());
-		if (mydata.getITEM101() != -1.0)
-			setITEM101(mydata.getITEM101());
-		if (mydata.getITEM102() != -1.0)
-			setITEM102(mydata.getITEM102());
-		if (mydata.getITEM103() != -1.0)
-			setITEM103(mydata.getITEM103());
-		if (mydata.getITEM104() != -1.0)
-			setITEM104(mydata.getITEM104());
-		if (mydata.getITEM105() != -1.0)
-			setITEM105(mydata.getITEM105());
-		if (mydata.getITEM106() != -1.0)
-			setITEM106(mydata.getITEM106());
-		if (mydata.getITEM107() != -1.0)
-			setITEM107(mydata.getITEM107());
-		if (mydata.getITEM108() != -1.0)
-			setITEM108(mydata.getITEM108());
-		if (mydata.getITEM109() != -1.0)
-			setITEM109(mydata.getITEM109());
-		if (mydata.getITEM110() != -1.0)
-			setITEM110(mydata.getITEM110());
-		if (mydata.getITEM111() != -1.0)
-			setITEM111(mydata.getITEM111());
-		if (mydata.getITEM112() != -1.0)
-			setITEM112(mydata.getITEM112());
-		if (mydata.getITEM113() != -1.0)
-			setITEM113(mydata.getITEM113());
-		if (mydata.getITEM114() != -1.0)
-			setITEM114(mydata.getITEM114());
-		if (mydata.getITEM115() != -1.0)
-			setITEM115(mydata.getITEM115());
-		if (mydata.getITEM116() != -1.0)
-			setITEM116(mydata.getITEM116());
-		if (mydata.getITEM117() != -1.0)
-			setITEM117(mydata.getITEM117());
-		if (mydata.getITEM118() != -1.0)
-			setITEM118(mydata.getITEM118());
-		if (mydata.getITEM119() != -1.0)
-			setITEM119(mydata.getITEM119());
-		if (mydata.getITEM120() != -1.0)
-			setITEM120(mydata.getITEM120());
-		if (mydata.getITEM121() != -1.0)
-			setITEM121(mydata.getITEM121());
-		if (mydata.getITEM122() != -1.0)
-			setITEM122(mydata.getITEM122());
-		if (mydata.getITEM123() != -1.0)
-			setITEM123(mydata.getITEM123());
-		if (mydata.getITEM124() != -1.0)
-			setITEM124(mydata.getITEM124());
-		if (mydata.getITEM125() != -1.0)
-			setITEM125(mydata.getITEM125());
-		if (mydata.getITEM126() != -1.0)
-			setITEM126(mydata.getITEM126());
-		if (mydata.getITEM127() != -1.0)
-			setITEM127(mydata.getITEM127());
-		if (mydata.getITEM128() != -1.0)
-			setITEM128(mydata.getITEM128());
-		if (mydata.getITEM129() != -1.0)
-			setITEM129(mydata.getITEM129());
-		if (mydata.getITEM130() != -1.0)
-			setITEM130(mydata.getITEM130());
-		if (mydata.getITEM131() != -1.0)
-			setITEM131(mydata.getITEM131());
-		if (mydata.getITEM132() != -1.0)
-			setITEM132(mydata.getITEM132());
-		if (mydata.getITEM133() != -1.0)
-			setITEM133(mydata.getITEM133());
-		if (mydata.getITEM134() != -1.0)
-			setITEM134(mydata.getITEM134());
-		if (mydata.getITEM135() != -1.0)
-			setITEM135(mydata.getITEM135());
-		if (mydata.getITEM136() != -1.0)
-			setITEM136(mydata.getITEM136());
-		if (mydata.getITEM137() != -1.0)
-			setITEM137(mydata.getITEM137());
-		if (mydata.getITEM138() != -1.0)
-			setITEM138(mydata.getITEM138());
-		if (mydata.getITEM139() != -1.0)
-			setITEM139(mydata.getITEM139());
-		if (mydata.getITEM140() != -1.0)
-			setITEM140(mydata.getITEM140());
-		if (mydata.getITEM141() != -1.0)
-			setITEM141(mydata.getITEM141());
-		if (mydata.getITEM142() != -1.0)
-			setITEM142(mydata.getITEM142());
-		if (mydata.getITEM143() != -1.0)
-			setITEM143(mydata.getITEM143());
-		if (mydata.getITEM144() != -1.0)
-			setITEM144(mydata.getITEM144());
-		if (mydata.getITEM145() != -1.0)
-			setITEM145(mydata.getITEM145());
-		if (mydata.getITEM146() != -1.0)
-			setITEM146(mydata.getITEM146());
-		if (mydata.getITEM147() != -1.0)
-			setITEM147(mydata.getITEM147());
-		if (mydata.getITEM148() != -1.0)
-			setITEM148(mydata.getITEM148());
-		if (mydata.getITEM149() != -1.0)
-			setITEM149(mydata.getITEM149());
-		if (mydata.getITEM150() != -1.0)
-			setITEM150(mydata.getITEM150());
-		if (mydata.getITEM151() != -1.0)
-			setITEM151(mydata.getITEM151());
-		if (mydata.getITEM152() != -1.0)
-			setITEM152(mydata.getITEM152());
-		if (mydata.getITEM153() != -1.0)
-			setITEM153(mydata.getITEM153());
-		if (mydata.getITEM154() != -1.0)
-			setITEM154(mydata.getITEM154());
-		if (mydata.getITEM155() != -1.0)
-			setITEM155(mydata.getITEM155());
-		if (mydata.getITEM156() != -1.0)
-			setITEM156(mydata.getITEM156());
-		if (mydata.getITEM157() != -1.0)
-			setITEM157(mydata.getITEM157());
-		if (mydata.getITEM158() != -1.0)
-			setITEM158(mydata.getITEM158());
-		if (mydata.getITEM159() != -1.0)
-			setITEM159(mydata.getITEM159());
-		if (mydata.getITEM160() != -1.0)
-			setITEM160(mydata.getITEM160());
-		if (mydata.getITEM161() != -1.0)
-			setITEM161(mydata.getITEM161());
-		if (mydata.getITEM162() != -1.0)
-			setITEM162(mydata.getITEM162());
-		if (mydata.getITEM163() != -1.0)
-			setITEM163(mydata.getITEM163());
-		if (mydata.getITEM164() != -1.0)
-			setITEM164(mydata.getITEM164());
-		if (mydata.getITEM165() != -1.0)
-			setITEM165(mydata.getITEM165());
-		if (mydata.getITEM166() != -1.0)
-			setITEM166(mydata.getITEM166());
-		if (mydata.getITEM167() != -1.0)
-			setITEM167(mydata.getITEM167());
-		if (mydata.getITEM168() != -1.0)
-			setITEM168(mydata.getITEM168());
-		if (mydata.getITEM169() != -1.0)
-			setITEM169(mydata.getITEM169());
-		if (mydata.getITEM170() != -1.0)
-			setITEM170(mydata.getITEM170());
-		if (mydata.getITEM171() != -1.0)
-			setITEM171(mydata.getITEM171());
-		if (mydata.getITEM172() != -1.0)
-			setITEM172(mydata.getITEM172());
-		if (mydata.getITEM173() != -1.0)
-			setITEM173(mydata.getITEM173());
-		if (mydata.getITEM174() != -1.0)
-			setITEM174(mydata.getITEM174());
-		if (mydata.getITEM175() != -1.0)
-			setITEM175(mydata.getITEM175());
-		if (mydata.getITEM176() != -1.0)
-			setITEM176(mydata.getITEM176());
-		if (mydata.getITEM177() != -1.0)
-			setITEM177(mydata.getITEM177());
-		if (mydata.getITEM178() != -1.0)
-			setITEM178(mydata.getITEM178());
-		if (mydata.getITEM179() != -1.0)
-			setITEM179(mydata.getITEM179());
-		if (mydata.getITEM180() != -1.0)
-			setITEM180(mydata.getITEM180());
-		if (mydata.getITEM181() != -1.0)
-			setITEM181(mydata.getITEM181());
-		if (mydata.getITEM182() != -1.0)
-			setITEM182(mydata.getITEM182());
-		if (mydata.getITEM183() != -1.0)
-			setITEM183(mydata.getITEM183());
-		if (mydata.getITEM184() != -1.0)
-			setITEM184(mydata.getITEM184());
-		if (mydata.getITEM185() != -1.0)
-			setITEM185(mydata.getITEM185());
-		if (mydata.getITEM186() != -1.0)
-			setITEM186(mydata.getITEM186());
-		if (mydata.getITEM187() != -1.0)
-			setITEM187(mydata.getITEM187());
-		if (mydata.getITEM188() != -1.0)
-			setITEM188(mydata.getITEM188());
-		if (mydata.getITEM189() != -1.0)
-			setITEM189(mydata.getITEM189());
-		if (mydata.getITEM190() != -1.0)
-			setITEM190(mydata.getITEM190());
-		if (mydata.getITEM191() != -1.0)
-			setITEM191(mydata.getITEM191());
-		if (mydata.getITEM192() != -1.0)
-			setITEM192(mydata.getITEM192());
-		if (mydata.getITEM193() != -1.0)
-			setITEM193(mydata.getITEM193());
-		if (mydata.getITEM194() != -1.0)
-			setITEM194(mydata.getITEM194());
-		if (mydata.getITEM195() != -1.0)
-			setITEM195(mydata.getITEM195());
-		if (mydata.getITEM196() != -1.0)
-			setITEM196(mydata.getITEM196());
-		if (mydata.getITEM197() != -1.0)
-			setITEM197(mydata.getITEM197());
-		if (mydata.getITEM198() != -1.0)
-			setITEM198(mydata.getITEM198());
-		if (mydata.getITEM199() != -1.0)
-			setITEM199(mydata.getITEM199());
-		if (mydata.getITEM200() != -1.0)
-			setITEM200(mydata.getITEM200());
-		if (mydata.getITEM201() != -1.0)
-			setITEM201(mydata.getITEM201());
-		if (mydata.getITEM202() != -1.0)
-			setITEM202(mydata.getITEM202());
-		if (mydata.getITEM203() != -1.0)
-			setITEM203(mydata.getITEM203());
-		if (mydata.getITEM204() != -1.0)
-			setITEM204(mydata.getITEM204());
-		if (mydata.getITEM205() != -1.0)
-			setITEM205(mydata.getITEM205());
-		if (mydata.getITEM206() != -1.0)
-			setITEM206(mydata.getITEM206());
-		if (mydata.getITEM207() != -1.0)
-			setITEM207(mydata.getITEM207());
-		if (mydata.getITEM208() != -1.0)
-			setITEM208(mydata.getITEM208());
-		if (mydata.getITEM209() != -1.0)
-			setITEM209(mydata.getITEM209());
-		if (mydata.getITEM210() != -1.0)
-			setITEM210(mydata.getITEM210());
-		if (mydata.getITEM211() != -1.0)
-			setITEM211(mydata.getITEM211());
-		if (mydata.getITEM212() != -1.0)
-			setITEM212(mydata.getITEM212());
-		if (mydata.getITEM213() != -1.0)
-			setITEM213(mydata.getITEM213());
-		if (mydata.getITEM214() != -1.0)
-			setITEM214(mydata.getITEM214());
-		if (mydata.getITEM215() != -1.0)
-			setITEM215(mydata.getITEM215());
-		if (mydata.getITEM216() != -1.0)
-			setITEM216(mydata.getITEM216());
-		if (mydata.getITEM217() != -1.0)
-			setITEM217(mydata.getITEM217());
-		if (mydata.getITEM218() != -1.0)
-			setITEM218(mydata.getITEM218());
-		if (mydata.getITEM219() != -1.0)
-			setITEM219(mydata.getITEM219());
-		if (mydata.getITEM220() != -1.0)
-			setITEM220(mydata.getITEM220());
-		if (mydata.getITEM221() != -1.0)
-			setITEM221(mydata.getITEM221());
-		if (mydata.getITEM222() != -1.0)
-			setITEM222(mydata.getITEM222());
-		if (mydata.getITEM223() != -1.0)
-			setITEM223(mydata.getITEM223());
-		if (mydata.getITEM224() != -1.0)
-			setITEM224(mydata.getITEM224());
-		if (mydata.getITEM225() != -1.0)
-			setITEM225(mydata.getITEM225());
-		if (mydata.getITEM226() != -1.0)
-			setITEM226(mydata.getITEM226());
-		if (mydata.getITEM227() != -1.0)
-			setITEM227(mydata.getITEM227());
-		if (mydata.getITEM228() != -1.0)
-			setITEM228(mydata.getITEM228());
-		if (mydata.getITEM229() != -1.0)
-			setITEM229(mydata.getITEM229());
-		if (mydata.getITEM230() != -1.0)
-			setITEM230(mydata.getITEM230());
-		if (mydata.getITEM231() != -1.0)
-			setITEM231(mydata.getITEM231());
-		if (mydata.getITEM232() != -1.0)
-			setITEM232(mydata.getITEM232());
-		if (mydata.getITEM233() != -1.0)
-			setITEM233(mydata.getITEM233());
-		if (mydata.getITEM234() != -1.0)
-			setITEM234(mydata.getITEM234());
-		if (mydata.getITEM235() != -1.0)
-			setITEM235(mydata.getITEM235());
-		if (mydata.getITEM236() != -1.0)
-			setITEM236(mydata.getITEM236());
-		if (mydata.getITEM237() != -1.0)
-			setITEM237(mydata.getITEM237());
-		if (mydata.getITEM238() != -1.0)
-			setITEM238(mydata.getITEM238());
-		if (mydata.getITEM239() != -1.0)
-			setITEM239(mydata.getITEM239());
-		if (mydata.getITEM240() != -1.0)
-			setITEM240(mydata.getITEM240());
-		if (mydata.getITEM241() != -1.0)
-			setITEM241(mydata.getITEM241());
-		if (mydata.getITEM242() != -1.0)
-			setITEM242(mydata.getITEM242());
-		if (mydata.getITEM243() != -1.0)
-			setITEM243(mydata.getITEM243());
-		if (mydata.getITEM244() != -1.0)
-			setITEM244(mydata.getITEM244());
-		if (mydata.getITEM245() != -1.0)
-			setITEM245(mydata.getITEM245());
-		if (mydata.getITEM246() != -1.0)
-			setITEM246(mydata.getITEM246());
-		if (mydata.getITEM247() != -1.0)
-			setITEM247(mydata.getITEM247());
-		if (mydata.getITEM248() != -1.0)
-			setITEM248(mydata.getITEM248());
-		if (mydata.getITEM249() != -1.0)
-			setITEM249(mydata.getITEM249());
-		if (mydata.getITEM250() != -1.0)
-			setITEM250(mydata.getITEM250());
-		if (mydata.getITEM251() != -1.0)
-			setITEM251(mydata.getITEM251());
-		if (mydata.getITEM252() != -1.0)
-			setITEM252(mydata.getITEM252());
-		if (mydata.getITEM253() != -1.0)
-			setITEM253(mydata.getITEM253());
-		if (mydata.getITEM254() != -1.0)
-			setITEM254(mydata.getITEM254());
-		if (mydata.getITEM255() != -1.0)
-			setITEM255(mydata.getITEM255());
-		if (mydata.getITEM256() != -1.0)
-			setITEM256(mydata.getITEM256());
-		if (mydata.getITEM257() != -1.0)
-			setITEM257(mydata.getITEM257());
-		if (mydata.getITEM258() != -1.0)
-			setITEM258(mydata.getITEM258());
-		if (mydata.getITEM259() != -1.0)
-			setITEM259(mydata.getITEM259());
-		if (mydata.getITEM260() != -1.0)
-			setITEM260(mydata.getITEM260());
-        setORGTIME(mydata.getORGTIME());
 	}
 
 }

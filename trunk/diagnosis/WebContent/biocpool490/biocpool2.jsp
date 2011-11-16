@@ -31,8 +31,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <td align="right">2#鼓风机分量</td>
 	<td align="center"><s:textfield size="17" label="2#鼓风机分量" name="wwdcsdata.ITEM101" theme="simple"
 	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td>km/h</td>
-	<td/>
-	<td/>
+	<td align="right">请选择班次</td>
+	<td align="center">  <select name="wwdcsdata.ORGTIME"  style="width:110px">
+                <option value="00">零点班</option>
+                <option value="08">八点班</option>
+                <option value="16">十六点班</option>
+              </select></td><td></td>
 	</tr>
 	<tr>
 	<td align="right">3号生化池PH</td>
