@@ -150,10 +150,10 @@ public void setLocalPop(Population localPop) {
 //				// TODO Auto-generated catch block
 //				e.printStackTrace();
 //			}
-			
+			progress++;
 			// ---------------
 			if (percentEvolution > 0 && i % percentEvolution == 0) {
-				progress++;
+				
 				IChromosome fittest  = genotype.getFittestChromosome();
 				double best_fitness = fittest.getFitnessValueDirectly();
 				System.out.println("Currently fittest Chromosome has fitness "+ best_fitness);
@@ -193,7 +193,7 @@ public void setLocalPop(Population localPop) {
 		}
 		DecimalFormat myformat = new DecimalFormat("#0.00");
 		try {
-//			output.write(fittest.getFitnessValueDirectly() + "\t");
+			output.write(fittest.getFitnessValueDirectly() + "\t");
             output.flush();
 			
 			for (int i = 0; i < chromeSize; i++) {
