@@ -48,5 +48,11 @@ public class DcsdataService {
 		return resultlist;
 	}
 	
+	public List<Dcsdata> findAll() {
+		List<Dcsdata> resultlist = new ArrayList();
+		resultlist = dcsdataServiceImpl.findAll();
+		return resultlist;
+	}
+	
 	
 }

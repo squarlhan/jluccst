@@ -21,6 +21,7 @@ public class DcsDscribService {
 
 	private DcsDscrib dDcsDscrib;
 	private DcsDscribServiceInter dcsDscribServiceImpl;
+	private DcsdataService dcsdataService;
 
 	/*
 	 * public Backward getBackward() { return backward; }
@@ -42,6 +43,14 @@ public class DcsDscribService {
 
 	public DcsDscrib getdDcsDscrib() {
 		return dDcsDscrib;
+	}
+
+	public DcsdataService getDcsdataService() {
+		return dcsdataService;
+	}
+	@Resource
+	public void setDcsdataService(DcsdataService dcsdataService) {
+		this.dcsdataService = dcsdataService;
 	}
 
 	@Resource
@@ -98,6 +107,34 @@ public class DcsDscribService {
 					results.add(br);
 				}
 				if (val < db.getLower()) {
+					BackwardandResult br = new BackwardandResult();
+					br.setNouns(db.getName());
+					br.setMemo(db.getEque());
+					br.setVerb("过低");
+					results.add(br);
+				}
+			}
+
+		}
+		return results;
+	}
+	
+	public List<BackwardandResult> validateinput() {
+		List<Dcsdata> alldata = dcsdataService.findAll();
+		List<BackwardandResult> results = new ArrayList();
+		for(Dcsdata dd: alldata){
+
+			List<DcsDscrib> dcsDscribs = dcsDscribServiceImpl.findbyname(dd.getEquipment(), dd.getItem());
+			if (dcsDscribs != null && dcsDscribs.size() > 0) {
+				DcsDscrib db = dcsDscribs.get(0);
+				if (dd.getValue() > db.getUpper()) {
+					BackwardandResult br = new BackwardandResult();
+					br.setNouns(db.getName());
+					br.setVerb("过高");
+					br.setMemo(db.getEque());
+					results.add(br);
+				}
+				if (dd.getValue() < db.getLower()) {
 					BackwardandResult br = new BackwardandResult();
 					br.setNouns(db.getName());
 					br.setMemo(db.getEque());
