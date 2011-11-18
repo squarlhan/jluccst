@@ -13,7 +13,10 @@ import org.springframework.stereotype.Component;
 public class Dcshistory implements Serializable{
 
 	
-	private static final long serialVersionUID = -4761095751458248560L;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 499290511105257682L;
 	@Id
 	@GeneratedValue
 	private int id;
