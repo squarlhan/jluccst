@@ -11,8 +11,8 @@
 		<action name="useraction" class="userAction">
 		    <result name="logoffusersuccess">userlogin.jsp</result>
 		    <result name="success">adminsuccess.jsp</result>
-			<result name="loginsuccess">userruledsc.jsp</result>
-			<result name="loginerror">/userloginerror.jsp</result>
+		    <result name="loginsuccess">userruledsc.jsp</result>
+			<result name="loginerror">userloginerror.jsp</result>
 			<result name="altersuccess">userupdatesuccess.jsp</result>
 			<result name="altererror">useraltererror.jsp</result>
 			<result name="nullpass">usernullpass.jsp</result>
@@ -25,6 +25,10 @@
 	    <action name="wwdcsdataaction" class="wwdcsdataAction">
 			<result name="savesuccess">savesuccess.jsp</result>
 			<result name="input">biocpool490/showpool1.jsp</result>
+		</action> 
+		
+		<action name="monitoraction" class="monitorAction">
+			<result name="go">usermonitor.jsp</result>
 		</action> 
 	   
 		<action name="rulebraction" class="rulebrAction">
