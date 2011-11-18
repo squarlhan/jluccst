@@ -23,8 +23,8 @@
 
 		
 	    <action name="wwdcsdataaction" class="wwdcsdataAction">
-			<result name="go">usererrorgo.jsp</result>
-			<result name="input">usererrorgo.jsp</result>
+			<result name="savesuccess">savesuccess.jsp</result>
+			<result name="input">biocpool490/showpool1.jsp</result>
 		</action> 
 	   
 		<action name="rulebraction" class="rulebrAction">

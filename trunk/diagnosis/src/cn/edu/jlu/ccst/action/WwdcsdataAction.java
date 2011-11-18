@@ -20,6 +20,7 @@ import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 
+import cn.edu.jlu.ccst.model.Admin;
 import cn.edu.jlu.ccst.model.BackwardandReason;
 import cn.edu.jlu.ccst.model.BackwardandResult;
 import cn.edu.jlu.ccst.model.Wwdcsdata;
@@ -93,16 +94,26 @@ public class WwdcsdataAction extends ActionSupport {
 	public String execute() {
 		
 		
-		wwdcsdataService.save(wwdcsdata ) ;
+		ActionContext actionContext = ActionContext.getContext();
+        Map session = actionContext.getSession();
+        session.put("wc", wwdcsdata);
 		
-	   Map map = wwdcsdata.validataitem();
+	 /*  Map map = wwdcsdata.validataitem();
 	   backwardandResult= dcsDscribService.validateinput(map);
 	   if(backwardandResult.size()>0){
 		   
 		   reasonlist=ruleService.findreasons(backwardandResult);  
 	     return "go";}
 	   
-		  return "input";}
+		  return "input";      */
+		 return "input";}
+	public String save() {
+		ActionContext actionContext = ActionContext.getContext();
+        Map session1 = actionContext.getSession();
+        Wwdcsdata wc = (Wwdcsdata) session1.get("wc");
+        wwdcsdataService.save(wc);
+        return "savesuccess";
+	}
 	
 		}
 
