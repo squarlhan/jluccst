@@ -39,7 +39,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <body>
     
-  
+  <h2>超标信息页面</h2>
   <table bordercolor="#4A708B" rules="all"  id="mytable" class="list_table" align="center" width="100%">
 		<tr bgcolor="#4A708B">
 		    <th style="width:50%">故障设备</th>
