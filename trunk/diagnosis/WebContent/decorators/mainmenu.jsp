@@ -12,6 +12,7 @@
   <body>
     <table align="center" width="100%" id="nav">
           <!--<tr align="center"><td><li><a href="/diagnosis/userruleadd.jsp">录入规则</a></li></td></tr>  -->
+         <tr align="center"><td><li><a href="/diagnosis/monitoraction.action">实时监控</a></li></td></tr>
          <tr align="center"><td><li><a href="/diagnosis/usernet.jsp">神经网络</a></li></td></tr>
          <tr align="center"><td><li><a href="/diagnosis/rulebraction.action">专家系统</a></li></td></tr>
           <tr align="center"><td><li><a href="/diagnosis/dcsdscribaction.action">DCS规则</a></li></td></tr>
