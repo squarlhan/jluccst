@@ -12,6 +12,7 @@ public interface DcsDscribServiceInter {
 	public void save(DcsDscrib dcsDscrib);
 	public List<DcsDscrib> findbyname(String name) ;
 	public List<DcsDscrib> findbyitem(int item) ;
+	public List<DcsDscrib> findbyname(String eque, String item) ;
 	
 	
 

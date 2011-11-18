@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 import cn.edu.jlu.ccst.model.Dcsdata;
+import cn.edu.jlu.ccst.model.User;
 
 
 import cn.edu.jlu.ccst.dao.DcsdataServiceInter;
@@ -31,6 +32,13 @@ public class DcsdataServiceImpl implements DcsdataServiceInter {
 		Query query = getEntityManager().createQuery("select u FROM Dcsdata u WHERE u.equipment='"+equipment+"'");
 		return query.getResultList();
 	}
+    
+    @SuppressWarnings("unchecked")
+	public List<Dcsdata> findAll() {
+		Query query = getEntityManager().createQuery("select u FROM Dcsdata u");
+		return query.getResultList();
+	}
+    
     public void save(Dcsdata dcsdata) {
 		if (dcsdata.getId() <= 0) {
 			// new
