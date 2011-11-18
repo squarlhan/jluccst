@@ -66,9 +66,11 @@ public class MonitorAction extends ActionSupport {
 		backwardandResult = dcsDscribService.validateinput();
 		if (backwardandResult.size() > 0) {
 			reasonlist = ruleService.findreasons(backwardandResult);
+			return "go";
+		}else{
+			return "OK";
 		}
-
-		return "go";
+		
 
 	}
 

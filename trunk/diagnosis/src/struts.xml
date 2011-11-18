@@ -29,6 +29,7 @@
 		
 		<action name="monitoraction" class="monitorAction">
 			<result name="go">usermonitor.jsp</result>
+			<result name="OK">usermonitorok.jsp</result>
 		</action> 
 	   
 		<action name="rulebraction" class="rulebrAction">
