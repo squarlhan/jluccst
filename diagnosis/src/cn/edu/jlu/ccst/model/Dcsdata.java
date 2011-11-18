@@ -12,8 +12,10 @@ import org.springframework.stereotype.Component;
 @Component("dcsdata")
 public class Dcsdata implements Serializable{
 
-	
-	private static final long serialVersionUID = -4761095751458248560L;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6305660104857386885L;
 	@Id
 	@GeneratedValue
 	private int id;
