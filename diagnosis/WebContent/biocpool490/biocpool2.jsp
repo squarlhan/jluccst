@@ -25,7 +25,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <div id="rightmain">
 	  <h2> 2系列生化池</h2>
 <div id="adddata">
-<s:form action="wwdcsdataaction.action">
+<s:form action="wwdcsdataaction!save2.action">
 <table width="600" align="center" style="margin-left:30">
 <tr>
     <td align="right">2#鼓风机分量</td>
