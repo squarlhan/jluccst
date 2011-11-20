@@ -42,6 +42,11 @@ public class DcsdataService {
 		dcsdataServiceImpl.save(dcsdata);
 	}
 	
+	public void delete(Dcsdata dcsdata) {
+		
+		dcsdataServiceImpl.delete(dcsdata);
+	}
+	
 	public List<Dcsdata> findbyequipment(String equipment) {
 		List<Dcsdata> resultlist = new ArrayList();
 		resultlist = dcsdataServiceImpl.findByequipment(equipment);

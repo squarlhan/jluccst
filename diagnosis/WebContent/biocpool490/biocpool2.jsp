@@ -10,7 +10,26 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     
+     <%if(request.getSession().getAttribute("us")==null) 
+  { 
+  response.sendRedirect("userlogin.jsp"); 
+   }  
+                
+   %>  
+    
     <title>2系列生化池</title>
+    
+    
+     <script type="text/javascript">
+    	function confirmAdd(){
+			return confirm("确定录入？");
+			
+			    
+			
+    	}
+    	
+    	
+    </script>
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">    
@@ -25,63 +44,157 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <div id="rightmain">
 	  <h2> 2系列生化池</h2>
 <div id="adddata">
-<s:form action="wwdcsdataaction!save2.action">
+<s:form action="dcsdataaction!listsave.action">
 <table width="600" align="center" style="margin-left:30">
 <tr>
-    <td align="right">2#鼓风机分量</td>
-	<td align="center"><s:textfield size="17" label="2#鼓风机分量" name="wwdcsdata.ITEM101" theme="simple"
-	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td>km/h</td>
+    <td align="right"></td>
+	<td align="center"></td><td></td>
 	<td align="right">请选择班次</td>
-	<td align="center">  <select name="wwdcsdata.ORGTIME"  style="width:110px">
-                <option value="00">零点班</option>
-                <option value="08">八点班</option>
-                <option value="16">十六点班</option>
+	<td align="center"> <select name="dcsdatalist[23].value"   style="width:110px">
+                <option  value="00">零点班</option>
+                <option  value="08">八点班</option>
+                <option  value="16">十六点班</option>
               </select></td><td></td>
 	</tr>
 	<tr>
-	<td align="right">3号生化池PH</td>
-	<td align="center"><s:textfield size="17" label="3号生化池PH" name="wwdcsdata.ITEM7" theme="simple"
+	
+	<td align="right"><s:hidden   value="2系列生化池" name="dcsdatalist[1].equipment" theme="simple" />
+	<s:textfield  readonly="true" value="3号生化池PH" name="dcsdatalist[1].item" theme="simple" style="background:transparent;border:0px"/></td>
+	<td align="center"><s:textfield size="5" label="3号生化池PH" name="dcsdatalist[1].value" theme="simple"
 	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td></td>
-	<td align="right">4号生化池PH</td>
-	<td align="center"><s:textfield size="17" label="4号生化池PH" name="wwdcsdata.ITEM8" theme="simple"
+	<td align="right"><s:hidden   value="2系列生化池" name="dcsdatalist[2].equipment" theme="simple" />
+	<s:textfield  readonly="true" value="4号生化池PH" name="dcsdatalist[2].item" theme="simple" style="background:transparent;border:0px"/></td>
+	<td align="center"><s:textfield size="17" label="4号生化池PH" name="dcsdatalist[2].value" theme="simple"
 	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td></td>
 	</tr>
+	
 	<tr>
-	<td align="right">3号生化池温度</td>
-	<td align="center"><s:textfield size="17" label="3号生化池温度" name="wwdcsdata.ITEM243" theme="simple"
-	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td>℃</td>
-	<td align="right">4号生化池温度</td>
-	<td align="center"><s:textfield size="17" label="4号生化池温度" name="wwdcsdata.ITEM244" theme="simple"
-	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td>℃</td>
+	<td align="right">
+	<s:hidden   value="2系列生化池" name="dcsdatalist[3].equipment" theme="simple" /><s:textfield  readonly="true" value="3号生化池COD" name="dcsdatalist[3].item" theme="simple" style="background:transparent;border:0px"/></td>
+	<td align="center"><s:textfield size="5" label="3号生化池COD" name="dcsdatalist[3].value" theme="simple"
+	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td></td>
+	<td align="right">
+	<s:hidden   value="2系列生化池" name="dcsdatalist[4].equipment" theme="simple" />
+	<s:textfield  readonly="true" value="4号生化池COD" name="dcsdatalist[4].item" theme="simple" style="background:transparent;border:0px"/></td>
+	<td align="center"><s:textfield size="17" label="4号生化池COD" name="dcsdatalist[4].value" theme="simple"
+	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td></td>
+	</tr>
+	
+	<tr>
+	<td align="right">
+	
+	<s:hidden   value="2系列生化池" name="dcsdatalist[5].equipment" theme="simple" /><s:textfield  readonly="true" value="3号生化池碱度" name="dcsdatalist[5].item" theme="simple" style="background:transparent;border:0px"/></td>
+	<td align="center"><s:textfield size="5" label="3号生化池碱度" name="dcsdatalist[5].value" theme="simple"
+	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td></td>
+	<td align="right">
+	
+	<s:hidden   value="2系列生化池" name="dcsdatalist[6].equipment" theme="simple" /><s:textfield  readonly="true" value="4号生化池碱度" name="dcsdatalist[6].item" theme="simple" style="background:transparent;border:0px"/></td>
+	<td align="center"><s:textfield size="17" label="4号生化池碱度" name="dcsdatalist[6].value" theme="simple"
+	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td></td>
+	</tr>
+	
+	<tr>
+	<td align="right">
+	
+	<s:hidden   value="2系列生化池" name="dcsdatalist[7].equipment" theme="simple" /><s:textfield  readonly="true" value="3号生化池BOD5" name="dcsdatalist[7].item" theme="simple" style="background:transparent;border:0px"/></td>
+	<td align="center"><s:textfield size="5" label="3号生化池BOD5" name="dcsdatalist[7].value" theme="simple"
+	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td></td>
+	<td align="right">
+	<s:hidden   value="2系列生化池" name="dcsdatalist[8].equipment" theme="simple" />
+	<s:textfield  readonly="true" value="4号生化池BOD5" name="dcsdatalist[8].item" theme="simple" style="background:transparent;border:0px"/></td>
+	<td align="center"><s:textfield size="17" label="4号生化池BOD5" name="dcsdatalist[8].value" theme="simple"
+	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td></td>
+	</tr>
+	
+	<tr>
+	<s:hidden   value="2系列生化池" name="dcsdatalist[9].equipment" theme="simple" />
+	<td align="right"><s:textfield  readonly="true" value="3号生化池SS" name="dcsdatalist[9].item" theme="simple" style="background:transparent;border:0px"/></td>
+	<td align="center"><s:textfield size="5" label="3号生化池PH" name="dcsdatalist[9].value" theme="simple"
+	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td></td>
+	<td align="right"><s:textfield  readonly="true" value="4号生化池SS" name="dcsdatalist[10].item" theme="simple" style="background:transparent;border:0px"/></td>
+	<td align="center"><s:textfield size="17" label="4号生化池PH" name="dcsdatalist[10].value" theme="simple"
+	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td></td>
+	</tr>
+	
+	<tr>
+	<td align="right"><s:textfield  readonly="true" value="3号生化池NH3-N" name="dcsdatalist[11].item" theme="simple" style="background:transparent;border:0px"/></td>
+	<td align="center"><s:textfield size="5" label="3号生化池PH" name="dcsdatalist[11].value" theme="simple"
+	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td></td>
+	<td align="right"><s:textfield  readonly="true" value="4号生化池NH3-N" name="dcsdatalist[12].item" theme="simple" style="background:transparent;border:0px"/></td>
+	<td align="center"><s:textfield size="17" label="4号生化池PH" name="dcsdatalist[12].value" theme="simple"
+	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td></td>
+	</tr>
+
+	<tr>
+	<td align="right"><s:textfield  readonly="true" value="3号生化池硝态氮" name="dcsdatalist[13].item" theme="simple" style="background:transparent;border:0px"/></td>
+	<td align="center"><s:textfield size="5" label="3号生化池PH" name="dcsdatalist[13].value" theme="simple"
+	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td></td>
+	<td align="right"><s:textfield  readonly="true" value="4号生化池硝态氮" name="dcsdatalist[14].item" theme="simple" style="background:transparent;border:0px"/></td>
+	<td align="center"><s:textfield size="17" label="4号生化池PH" name="dcsdatalist[14].value" theme="simple"
+	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td></td>
+	</tr>
+	
+	
+
+<tr>
+	<td align="right"><s:textfield  readonly="true" value="3号生化池溶解氧" name="dcsdatalist[15].item" theme="simple" style="background:transparent;border:0px"/></td>
+	<td align="center"><s:textfield size="5"  name="dcsdatalist[15].value" theme="simple"
+	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td></td>
+	<td align="right"><s:textfield  readonly="true" value="4号生化池溶解氧" name="dcsdatalist[16].item" theme="simple" style="background:transparent;border:0px"/></td>
+	<td align="center"><s:textfield size="17" label="4号生化池PH" name="dcsdatalist[16].value" theme="simple"
+	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td></td>
+	</tr>
+	
+	<tr>
+	<td align="right"><s:textfield  readonly="true" value="3号生化池风量" name="dcsdatalist[17].item" theme="simple" style="background:transparent;border:0px"/></td>
+	<td align="center"><s:textfield size="5" label="3号生化池PH" name="dcsdatalist[17].value" theme="simple"
+	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td></td>
+	<td align="right"><s:textfield  readonly="true" value="4号生化池风量" name="dcsdatalist[18].item" theme="simple" style="background:transparent;border:0px"/></td>
+	<td align="center"><s:textfield size="17" label="4号生化池PH" name="dcsdatalist[18].value" theme="simple"
+	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td>km/h</td>
+	<s:hidden   value="2系列生化池" name="dcsdatalist[10].equipment" theme="simple" />
+	<s:hidden   value="2系列生化池" name="dcsdatalist[11].equipment" theme="simple" />
+	<s:hidden   value="2系列生化池" name="dcsdatalist[12].equipment" theme="simple" />
+	<s:hidden   value="2系列生化池" name="dcsdatalist[13].equipment" theme="simple" />
+	<s:hidden   value="2系列生化池" name="dcsdatalist[14].equipment" theme="simple" />
+	<s:hidden   value="2系列生化池" name="dcsdatalist[15].equipment" theme="simple" />
+	<s:hidden   value="2系列生化池" name="dcsdatalist[16].equipment" theme="simple" />
+	<s:hidden   value="2系列生化池" name="dcsdatalist[17].equipment" theme="simple" />
+	<s:hidden   value="2系列生化池" name="dcsdatalist[18].equipment" theme="simple" />
+	<s:hidden   value="2系列生化池" name="dcsdatalist[19].equipment" theme="simple" />
+	<s:hidden   value="2系列生化池" name="dcsdatalist[20].equipment" theme="simple" />
+	<s:hidden   value="2系列生化池" name="dcsdatalist[21].equipment" theme="simple" />
+	<s:hidden   value="2系列生化池" name="dcsdatalist[22].equipment" theme="simple" />
+	<s:hidden   value="2系列生化池" name="dcsdatalist[23].equipment" theme="simple" />
+	<s:hidden   value="班次" name="dcsdatalist[23].item" theme="simple" />
+	
+	
+	
+	
 	</tr>
 	<tr>
-	<td align="right">3号生化池2段溶解氧DO</td>
-	<td align="center"><s:textfield size="17" label="3号生化池2段溶解氧DO" name="wwdcsdata.ITEM30" theme="simple"
-	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td>mg/L</td>
-	<td align="right">4号生化池2段溶解氧DO</td>
-	<td align="center"><s:textfield size="17" label="4号生化池2段溶解氧DO" name="wwdcsdata.ITEM31" theme="simple"
-	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td>mg/L</td>
+	<td align="right"><s:textfield  readonly="true" value="3号生化池NO-N" name="dcsdatalist[19].item" theme="simple" style="background:transparent;border:0px"/></td>
+	<td align="center"><s:textfield size="5" label="3号生化池PH" name="dcsdatalist[19].value" theme="simple"
+	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td></td>
+	<td align="right"><s:textfield  readonly="true" value="4号生化池NO-N" name="dcsdatalist[20].item" theme="simple" style="background:transparent;border:0px"/></td>
+	<td align="center"><s:textfield size="17" label="4号生化池PH" name="dcsdatalist[20].value" theme="simple"
+	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td></td>
 	</tr>
+	
 	<tr>
-	<td align="right">3号生化池3段溶解氧DO</td>
-	<td align="center"><s:textfield size="17" label="3号生化池3段溶解氧DO" name="wwdcsdata.ITEM34" theme="simple"
-	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td>mg/L</td>
-	<td align="right">4号生化池3段溶解氧DO</td>
-	<td align="center"><s:textfield size="17" label="4号生化池3段溶解氧DO" name="wwdcsdata.ITEM35" theme="simple"
-	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td>mg/L</td>
+	<td align="right"><s:textfield  readonly="true" value="3号生化池水量" name="dcsdatalist[21].item" theme="simple" style="background:transparent;border:0px"/></td>
+	<td align="center"><s:textfield size="5" label="3号生化池PH" name="dcsdatalist[21].value" theme="simple"
+	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td></td>
+	<td align="right"><s:textfield  readonly="true" value="4号生化池水量" name="dcsdatalist[22].item" theme="simple" style="background:transparent;border:0px"/></td>
+	<td align="center"><s:textfield size="17" label="4号生化池PH" name="dcsdatalist[22].value" theme="simple"
+	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td></td>
 	</tr>
-	<tr>
-	<td align="right">3号生化池5段溶解氧DO</td>
-	<td align="center"><s:textfield size="17" label="3号生化池5段溶解氧DO" name="wwdcsdata.ITEM38" theme="simple"
-	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td>mg/L</td>
-	<td align="right">4号生化池5段溶解氧DO</td>
-	<td align="center"><s:textfield size="17" label="4号生化池5段溶解氧DO" name="wwdcsdata.ITEM39" theme="simple"
-	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td>mg/L</td>
-	</tr>
+	
+	
     <tr/>
 	<tr align="center">
 	<td width="25%"/>
-	<td width="20%" align="center"><s:submit value="提交" theme="simple" /></td>
+	<td width="20%" align="center"><s:submit value="提交" theme="simple" onclick="return confirmAdd();" /></td>
 	<td width="5%"/>
 	
 	<td width="25%" align="center"> <s:reset value="重置" theme="simple" /></td>
