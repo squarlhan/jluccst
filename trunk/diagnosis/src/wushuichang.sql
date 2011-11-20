@@ -2,15 +2,15 @@
 Navicat MySQL Data Transfer
 
 Source Server         : local
-Source Server Version : 50510
+Source Server Version : 50157
 Source Host           : localhost:3306
 Source Database       : wushuichang
 
 Target Server Type    : MYSQL
-Target Server Version : 50510
+Target Server Version : 50157
 File Encoding         : 65001
 
-Date: 2011-11-14 18:56:39
+Date: 2011-11-19 14:59:10
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -46,7 +46,7 @@ CREATE TABLE `backward` (
   `count` int(10) NOT NULL DEFAULT '0',
   `priror` int(10) NOT NULL DEFAULT '0',
   PRIMARY KEY (`bid`)
-) ENGINE=InnoDB AUTO_INCREMENT=140 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=116 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of backward
@@ -177,7 +177,7 @@ CREATE TABLE `backwardandreason` (
   PRIMARY KEY (`id`),
   KEY `FKFBA61E58DB7478BC` (`bid`),
   CONSTRAINT `FKFBA61E58DB7478BC` FOREIGN KEY (`bid`) REFERENCES `backward` (`bid`)
-) ENGINE=InnoDB AUTO_INCREMENT=333 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=315 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 -- Records of backwardandreason
@@ -503,7 +503,7 @@ CREATE TABLE `backwardandresult` (
   PRIMARY KEY (`id`),
   KEY `FKFBAE5431DB7478BC` (`bid`),
   CONSTRAINT `FKFBAE5431DB7478BC` FOREIGN KEY (`bid`) REFERENCES `backward` (`bid`)
-) ENGINE=InnoDB AUTO_INCREMENT=117 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=101 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 -- Records of backwardandresult
@@ -618,6 +618,22 @@ CREATE TABLE `backwardandupper` (
 
 -- ----------------------------
 -- Records of backwardandupper
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `dcsdata`
+-- ----------------------------
+DROP TABLE IF EXISTS `dcsdata`;
+CREATE TABLE `dcsdata` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `equipment` varchar(255) DEFAULT NULL,
+  `item` varchar(255) DEFAULT NULL,
+  `value` double DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of dcsdata
 -- ----------------------------
 
 -- ----------------------------
@@ -887,6 +903,62 @@ INSERT INTO `dcsdscrib` VALUES ('1329', '490  8号生化池', 'ITEM248', '15', '
 INSERT INTO `dcsdscrib` VALUES ('1331', '490  2号生化池', 'ITEM 6', '6', '生化池PH', '9');
 
 -- ----------------------------
+-- Table structure for `dcshistory`
+-- ----------------------------
+DROP TABLE IF EXISTS `dcshistory`;
+CREATE TABLE `dcshistory` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `equipment` varchar(255) DEFAULT NULL,
+  `item` varchar(255) DEFAULT NULL,
+  `seqno` varchar(255) DEFAULT NULL,
+  `value` double DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of dcshistory
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `dss_advice`
+-- ----------------------------
+DROP TABLE IF EXISTS `dss_advice`;
+CREATE TABLE `dss_advice` (
+  `id` int(10) NOT NULL AUTO_INCREMENT,
+  `name` varchar(36) DEFAULT NULL,
+  `value` varchar(20) DEFAULT NULL,
+  `sugg` varchar(1000) DEFAULT NULL,
+  `simu_time` varchar(20) DEFAULT NULL,
+  `seqno` varchar(20) DEFAULT NULL,
+  `error` varchar(200) DEFAULT NULL,
+  `level` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of dss_advice
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `errorlog`
+-- ----------------------------
+DROP TABLE IF EXISTS `errorlog`;
+CREATE TABLE `errorlog` (
+  `id` int(10) NOT NULL,
+  `seqno` varchar(255) DEFAULT NULL,
+  `equip` varchar(255) DEFAULT NULL,
+  `item` varchar(255) DEFAULT NULL,
+  `error` varchar(255) DEFAULT NULL,
+  `sugg` varchar(1000) DEFAULT NULL,
+  `level` int(10) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of errorlog
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for `forward`
 -- ----------------------------
 DROP TABLE IF EXISTS `forward`;
@@ -940,6 +1012,326 @@ CREATE TABLE `forwardandresult` (
 
 -- ----------------------------
 -- Records of forwardandresult
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `manualdata`
+-- ----------------------------
+DROP TABLE IF EXISTS `manualdata`;
+CREATE TABLE `manualdata` (
+  `name` varchar(36) NOT NULL DEFAULT '',
+  `value` varchar(64) DEFAULT NULL,
+  PRIMARY KEY (`name`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of manualdata
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `manualdatahistory`
+-- ----------------------------
+DROP TABLE IF EXISTS `manualdatahistory`;
+CREATE TABLE `manualdatahistory` (
+  `name` varchar(36) NOT NULL,
+  `seqno` varchar(20) NOT NULL,
+  `value` varchar(64) DEFAULT NULL,
+  PRIMARY KEY (`name`,`seqno`),
+  KEY `R_2` (`seqno`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of manualdatahistory
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `olddcsdata`
+-- ----------------------------
+DROP TABLE IF EXISTS `olddcsdata`;
+CREATE TABLE `olddcsdata` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `ITEM1` float NOT NULL,
+  `ITEM10` float NOT NULL,
+  `ITEM100` float NOT NULL,
+  `ITEM101` float NOT NULL,
+  `ITEM102` float NOT NULL,
+  `ITEM103` float NOT NULL,
+  `ITEM104` float NOT NULL,
+  `ITEM105` float NOT NULL,
+  `ITEM106` float NOT NULL,
+  `ITEM107` float NOT NULL,
+  `ITEM108` float NOT NULL,
+  `ITEM109` float NOT NULL,
+  `ITEM11` float NOT NULL,
+  `ITEM110` float NOT NULL,
+  `ITEM111` float NOT NULL,
+  `ITEM112` float NOT NULL,
+  `ITEM113` float NOT NULL,
+  `ITEM114` float NOT NULL,
+  `ITEM115` float NOT NULL,
+  `ITEM116` float NOT NULL,
+  `ITEM117` float NOT NULL,
+  `ITEM118` float NOT NULL,
+  `ITEM119` float NOT NULL,
+  `ITEM12` float NOT NULL,
+  `ITEM120` float NOT NULL,
+  `ITEM121` float NOT NULL,
+  `ITEM122` float NOT NULL,
+  `ITEM123` float NOT NULL,
+  `ITEM124` float NOT NULL,
+  `ITEM125` float NOT NULL,
+  `ITEM126` float NOT NULL,
+  `ITEM127` float NOT NULL,
+  `ITEM128` float NOT NULL,
+  `ITEM129` float NOT NULL,
+  `ITEM13` float NOT NULL,
+  `ITEM130` float NOT NULL,
+  `ITEM131` float NOT NULL,
+  `ITEM132` float NOT NULL,
+  `ITEM133` float NOT NULL,
+  `ITEM134` float NOT NULL,
+  `ITEM135` float NOT NULL,
+  `ITEM136` float NOT NULL,
+  `ITEM137` float NOT NULL,
+  `ITEM138` float NOT NULL,
+  `ITEM139` float NOT NULL,
+  `ITEM14` float NOT NULL,
+  `ITEM140` float NOT NULL,
+  `ITEM141` float NOT NULL,
+  `ITEM142` float NOT NULL,
+  `ITEM143` float NOT NULL,
+  `ITEM144` float NOT NULL,
+  `ITEM145` float NOT NULL,
+  `ITEM146` float NOT NULL,
+  `ITEM147` float NOT NULL,
+  `ITEM148` float NOT NULL,
+  `ITEM149` float NOT NULL,
+  `ITEM15` float NOT NULL,
+  `ITEM150` float NOT NULL,
+  `ITEM151` float NOT NULL,
+  `ITEM152` float NOT NULL,
+  `ITEM153` float NOT NULL,
+  `ITEM154` float NOT NULL,
+  `ITEM155` float NOT NULL,
+  `ITEM156` float NOT NULL,
+  `ITEM157` float NOT NULL,
+  `ITEM158` float NOT NULL,
+  `ITEM159` float NOT NULL,
+  `ITEM16` float NOT NULL,
+  `ITEM160` float NOT NULL,
+  `ITEM161` float NOT NULL,
+  `ITEM162` float NOT NULL,
+  `ITEM163` float NOT NULL,
+  `ITEM164` float NOT NULL,
+  `ITEM165` float NOT NULL,
+  `ITEM166` float NOT NULL,
+  `ITEM167` float NOT NULL,
+  `ITEM168` float NOT NULL,
+  `ITEM169` float NOT NULL,
+  `ITEM17` float NOT NULL,
+  `ITEM170` float NOT NULL,
+  `ITEM171` float NOT NULL,
+  `ITEM172` float NOT NULL,
+  `ITEM173` float NOT NULL,
+  `ITEM174` float NOT NULL,
+  `ITEM175` float NOT NULL,
+  `ITEM176` float NOT NULL,
+  `ITEM177` float NOT NULL,
+  `ITEM178` float NOT NULL,
+  `ITEM179` float NOT NULL,
+  `ITEM18` float NOT NULL,
+  `ITEM180` float NOT NULL,
+  `ITEM181` float NOT NULL,
+  `ITEM182` float NOT NULL,
+  `ITEM183` float NOT NULL,
+  `ITEM184` float NOT NULL,
+  `ITEM185` float NOT NULL,
+  `ITEM186` float NOT NULL,
+  `ITEM187` float NOT NULL,
+  `ITEM188` float NOT NULL,
+  `ITEM189` float NOT NULL,
+  `ITEM19` float NOT NULL,
+  `ITEM190` float NOT NULL,
+  `ITEM191` float NOT NULL,
+  `ITEM192` float NOT NULL,
+  `ITEM193` float NOT NULL,
+  `ITEM194` float NOT NULL,
+  `ITEM195` float NOT NULL,
+  `ITEM196` float NOT NULL,
+  `ITEM197` float NOT NULL,
+  `ITEM198` float NOT NULL,
+  `ITEM199` float NOT NULL,
+  `ITEM2` float NOT NULL,
+  `ITEM20` float NOT NULL,
+  `ITEM200` float NOT NULL,
+  `ITEM201` float NOT NULL,
+  `ITEM202` float NOT NULL,
+  `ITEM203` float NOT NULL,
+  `ITEM204` float NOT NULL,
+  `ITEM205` float NOT NULL,
+  `ITEM206` float NOT NULL,
+  `ITEM207` float NOT NULL,
+  `ITEM208` float NOT NULL,
+  `ITEM209` float NOT NULL,
+  `ITEM21` float NOT NULL,
+  `ITEM210` float NOT NULL,
+  `ITEM211` float NOT NULL,
+  `ITEM212` float NOT NULL,
+  `ITEM213` float NOT NULL,
+  `ITEM214` float NOT NULL,
+  `ITEM215` float NOT NULL,
+  `ITEM216` float NOT NULL,
+  `ITEM217` float NOT NULL,
+  `ITEM218` float NOT NULL,
+  `ITEM219` float NOT NULL,
+  `ITEM22` float NOT NULL,
+  `ITEM220` float NOT NULL,
+  `ITEM221` float NOT NULL,
+  `ITEM222` float NOT NULL,
+  `ITEM223` float NOT NULL,
+  `ITEM224` float NOT NULL,
+  `ITEM225` float NOT NULL,
+  `ITEM226` float NOT NULL,
+  `ITEM227` float NOT NULL,
+  `ITEM228` float NOT NULL,
+  `ITEM229` float NOT NULL,
+  `ITEM23` float NOT NULL,
+  `ITEM230` float NOT NULL,
+  `ITEM231` float NOT NULL,
+  `ITEM232` float NOT NULL,
+  `ITEM233` float NOT NULL,
+  `ITEM234` float NOT NULL,
+  `ITEM235` float NOT NULL,
+  `ITEM236` float NOT NULL,
+  `ITEM237` float NOT NULL,
+  `ITEM238` float NOT NULL,
+  `ITEM239` float NOT NULL,
+  `ITEM24` float NOT NULL,
+  `ITEM240` float NOT NULL,
+  `ITEM241` float NOT NULL,
+  `ITEM242` float NOT NULL,
+  `ITEM243` float NOT NULL,
+  `ITEM244` float NOT NULL,
+  `ITEM245` float NOT NULL,
+  `ITEM246` float NOT NULL,
+  `ITEM247` float NOT NULL,
+  `ITEM248` float NOT NULL,
+  `ITEM249` float NOT NULL,
+  `ITEM25` float NOT NULL,
+  `ITEM250` float NOT NULL,
+  `ITEM251` float NOT NULL,
+  `ITEM252` float NOT NULL,
+  `ITEM253` float NOT NULL,
+  `ITEM254` float NOT NULL,
+  `ITEM255` float NOT NULL,
+  `ITEM256` float NOT NULL,
+  `ITEM257` float NOT NULL,
+  `ITEM258` float NOT NULL,
+  `ITEM259` float NOT NULL,
+  `ITEM26` float NOT NULL,
+  `ITEM260` float NOT NULL,
+  `ITEM27` float NOT NULL,
+  `ITEM28` float NOT NULL,
+  `ITEM29` float NOT NULL,
+  `ITEM3` float NOT NULL,
+  `ITEM30` float NOT NULL,
+  `ITEM31` float NOT NULL,
+  `ITEM32` float NOT NULL,
+  `ITEM33` float NOT NULL,
+  `ITEM34` float NOT NULL,
+  `ITEM35` float NOT NULL,
+  `ITEM36` float NOT NULL,
+  `ITEM37` float NOT NULL,
+  `ITEM38` float NOT NULL,
+  `ITEM39` float NOT NULL,
+  `ITEM4` float NOT NULL,
+  `ITEM40` float NOT NULL,
+  `ITEM41` float NOT NULL,
+  `ITEM42` float NOT NULL,
+  `ITEM43` float NOT NULL,
+  `ITEM44` float NOT NULL,
+  `ITEM45` float NOT NULL,
+  `ITEM46` float NOT NULL,
+  `ITEM47` float NOT NULL,
+  `ITEM48` float NOT NULL,
+  `ITEM49` float NOT NULL,
+  `ITEM5` float NOT NULL,
+  `ITEM50` float NOT NULL,
+  `ITEM51` float NOT NULL,
+  `ITEM52` float NOT NULL,
+  `ITEM53` float NOT NULL,
+  `ITEM54` float NOT NULL,
+  `ITEM55` float NOT NULL,
+  `ITEM56` float NOT NULL,
+  `ITEM57` float NOT NULL,
+  `ITEM58` float NOT NULL,
+  `ITEM59` float NOT NULL,
+  `ITEM6` float NOT NULL,
+  `ITEM60` float NOT NULL,
+  `ITEM61` float NOT NULL,
+  `ITEM62` float NOT NULL,
+  `ITEM63` float NOT NULL,
+  `ITEM64` float NOT NULL,
+  `ITEM65` float NOT NULL,
+  `ITEM66` float NOT NULL,
+  `ITEM67` float NOT NULL,
+  `ITEM68` float NOT NULL,
+  `ITEM69` float NOT NULL,
+  `ITEM7` float NOT NULL,
+  `ITEM70` float NOT NULL,
+  `ITEM71` float NOT NULL,
+  `ITEM72` float NOT NULL,
+  `ITEM73` float NOT NULL,
+  `ITEM74` float NOT NULL,
+  `ITEM75` float NOT NULL,
+  `ITEM76` float NOT NULL,
+  `ITEM77` float NOT NULL,
+  `ITEM78` float NOT NULL,
+  `ITEM79` float NOT NULL,
+  `ITEM8` float NOT NULL,
+  `ITEM80` float NOT NULL,
+  `ITEM81` float NOT NULL,
+  `ITEM82` float NOT NULL,
+  `ITEM83` float NOT NULL,
+  `ITEM84` float NOT NULL,
+  `ITEM85` float NOT NULL,
+  `ITEM86` float NOT NULL,
+  `ITEM87` float NOT NULL,
+  `ITEM88` float NOT NULL,
+  `ITEM89` float NOT NULL,
+  `ITEM9` float NOT NULL,
+  `ITEM90` float NOT NULL,
+  `ITEM91` float NOT NULL,
+  `ITEM92` float NOT NULL,
+  `ITEM93` float NOT NULL,
+  `ITEM94` float NOT NULL,
+  `ITEM95` float NOT NULL,
+  `ITEM96` float NOT NULL,
+  `ITEM97` float NOT NULL,
+  `ITEM98` float NOT NULL,
+  `ITEM99` float NOT NULL,
+  `ORGTIME` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of olddcsdata
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `pre_dss`
+-- ----------------------------
+DROP TABLE IF EXISTS `pre_dss`;
+CREATE TABLE `pre_dss` (
+  `name` varchar(36) NOT NULL,
+  `value` varchar(64) DEFAULT NULL,
+  `simu_time` varchar(20) NOT NULL,
+  `seqno` varchar(20) NOT NULL,
+  PRIMARY KEY (`seqno`,`simu_time`,`name`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of pre_dss
 -- ----------------------------
 
 -- ----------------------------
