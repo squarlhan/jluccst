@@ -16,9 +16,12 @@ import com.opensymphony.xwork2.ActionSupport;
 
 
 import cn.edu.jlu.ccst.model.Dcsdata;
+import cn.edu.jlu.ccst.model.Dcshistory;
+import cn.edu.jlu.ccst.model.Wwdcsdata;
 
 import cn.edu.jlu.ccst.model.User;
 import cn.edu.jlu.ccst.service.DcsdataService;
+import cn.edu.jlu.ccst.service.DcshistoryService;
 
 
 
@@ -28,9 +31,44 @@ public class DcsdataAction extends ActionSupport {
 
 	
 	private List<Dcsdata> equipmentlist;
-
+	private List<Dcsdata> dcsdatalist;
 	private DcsdataService dcsdataService;
-	
+	private Dcsdata dcsdata;
+	private Dcshistory dcshistory;
+    private DcshistoryService dcshistoryService;
+
+    
+	public Dcshistory getDcshistory() {
+		return dcshistory;
+	}
+
+	public void setDcshistory(Dcshistory dcshistory) {
+		this.dcshistory = dcshistory;
+	}
+
+	public DcshistoryService getDcshistoryService() {
+		return dcshistoryService;
+	}
+    @Resource
+	public void setDcshistoryService(DcshistoryService dcshistoryService) {
+		this.dcshistoryService = dcshistoryService;
+	}
+
+	public List<Dcsdata> getDcsdatalist() {
+		return dcsdatalist;
+	}
+
+	public void setDcsdatalist(List<Dcsdata> dcsdatalist) {
+		this.dcsdatalist = dcsdatalist;
+	}
+
+	public Dcsdata getDcsdata() {
+		return dcsdata;
+	}
+
+	public void setDcsdata(Dcsdata dcsdata) {
+		this.dcsdata = dcsdata;
+	}
 
 	public List<Dcsdata> getEquipmentlist() {
 		return equipmentlist;
@@ -64,6 +102,8 @@ public class DcsdataAction extends ActionSupport {
 			return SUCCESS;}
 			else return "unuserlogin";
 		}
+	
+
 		
    /* public String alterDcsdata () {
 		User olduser = (User) ActionContext.getContext().getSession()
@@ -90,7 +130,46 @@ public class DcsdataAction extends ActionSupport {
 			}
 			
 			}*/
-		
-
+	public String save() {
+		/*ActionContext actionContext = ActionContext.getContext();
+        Map session1 = actionContext.getSession();
+        Wwdcsdata wc = (Wwdcsdata) session1.get("wc");*/
+        dcsdataService.save(dcsdata);
+        return "savesuccess";
+	}
+	 public String listsave(){
+	        List<Dcsdata> list=new ArrayList<Dcsdata>();
+	        List<Dcshistory> list2=new ArrayList<Dcshistory>();
+	        List<Dcsdata> list1=new ArrayList<Dcsdata>();
+	        System.out.println(dcsdatalist.get(23).getItem());
+	       list1=dcsdataService.findbyequipment(dcsdatalist.get(23).getEquipment());
+	        	for(Dcsdata dc:list1){
+	        		dcsdataService.delete(dc);
+	        	}
+	       
+	        for(int i=0;i<dcsdatalist.size();i++){
+	        	
+	            if(dcsdatalist.get(i)!=null){ 
+	            	
+	                 Dcsdata dat=new Dcsdata();
+	                 dat.setItem(dcsdatalist.get(i).getItem());
+	                 dat.setValue(dcsdatalist.get(i).getValue());
+	                 dat.setEquipment(dcsdatalist.get(i).getEquipment());
+	                   if(dat.getValue()!=null){
+	                          list.add(dat);
+	                          dcsdataService.save(dat);        }
+	                   
+	                 Dcshistory his=new Dcshistory();
+	                 his.setItem(dcsdatalist.get(i).getItem());
+	                 his.setValue(dcsdatalist.get(i).getValue());
+	                 his.setEquipment(dcsdatalist.get(i).getEquipment());
+	     	          if(his.getValue()!=null){
+	     	                    list2.add(his);
+	     	                     dcshistoryService.save(his);   }    
+	                          
+	                                             }
+	                                      }
+           
+	        return "savelistsuccess";}
 	
 }

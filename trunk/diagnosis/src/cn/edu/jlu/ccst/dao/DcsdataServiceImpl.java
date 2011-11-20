@@ -1,5 +1,6 @@
 package cn.edu.jlu.ccst.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -33,14 +34,41 @@ public class DcsdataServiceImpl implements DcsdataServiceInter {
 		return query.getResultList();
 	}
     
+    public void delete(Dcsdata dcsdata) {
+    	em.remove(dcsdata);
+		
+		
+	}
+    
+    
+   
+    
     @SuppressWarnings("unchecked")
 	public List<Dcsdata> findAll() {
 		Query query = getEntityManager().createQuery("select u FROM Dcsdata u");
 		return query.getResultList();
 	}
     
+   /* public void save(Dcsdata dcsdata) {
+    	 List<Dcsdata>	dcs=new ArrayList();
+         dcs=findByequipment(dcsdata.getEquipment());
+  		if (findByequipment(dcsdata.getEquipment())==null) {
+             // new
+  			
+  			em.persist(dcsdata);
+  			
+  		} else {
+  			System.out.println("哈哈哈");// update
+  		  for(Dcsdata dc:dcs){
+  	    	 delete(dc);
+  	     }
+  	     
+  			em.merge(dcsdata);
+  		}
+  	}*/
+    
     public void save(Dcsdata dcsdata) {
-		if (dcsdata.getId() <= 0) {
+		if (dcsdata.getId()<=0) {
 			// new
 			em.persist(dcsdata);
 			

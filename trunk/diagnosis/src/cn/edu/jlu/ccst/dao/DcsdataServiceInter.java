@@ -10,4 +10,5 @@ public interface DcsdataServiceInter {
 	public List<Dcsdata> findByequipment(String equipment) ;
 	public void save(Dcsdata dcsdata);
 	public List<Dcsdata> findAll();
+	public void delete(Dcsdata dcsdata);
 }

@@ -20,6 +20,11 @@
 			<result name="unadminlogin">adminlogin.jsp</result>
 		</action>
 		
+		
+		 <action name="dcsdataaction" class="dcsdataAction">
+			<result name="savelistsuccess">savesuccess.jsp</result>
+			
+		</action> 
 
 		
 	    <action name="wwdcsdataaction" class="wwdcsdataAction">
