@@ -61,23 +61,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<td align="right"><s:hidden   value="2系列生化池" name="dcsdatalist[1].equipment" theme="simple" />
 	<s:textfield  readonly="true" value="3号生化池PH" name="dcsdatalist[1].item" theme="simple" style="background:transparent;border:0px"/></td>
 	<td align="center"><s:textfield size="5" label="3号生化池PH" name="dcsdatalist[1].value" theme="simple"
-	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td></td>
+	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td>PH</td>
 	<td align="right"><s:hidden   value="2系列生化池" name="dcsdatalist[2].equipment" theme="simple" />
 	<s:textfield  readonly="true" value="4号生化池PH" name="dcsdatalist[2].item" theme="simple" style="background:transparent;border:0px"/></td>
 	<td align="center"><s:textfield size="17" label="4号生化池PH" name="dcsdatalist[2].value" theme="simple"
-	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td></td>
+	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td>PH</td>
 	</tr>
 	
 	<tr>
 	<td align="right">
 	<s:hidden   value="2系列生化池" name="dcsdatalist[3].equipment" theme="simple" /><s:textfield  readonly="true" value="3号生化池COD" name="dcsdatalist[3].item" theme="simple" style="background:transparent;border:0px"/></td>
 	<td align="center"><s:textfield size="5" label="3号生化池COD" name="dcsdatalist[3].value" theme="simple"
-	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td></td>
+	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td>mg/L</td>
 	<td align="right">
 	<s:hidden   value="2系列生化池" name="dcsdatalist[4].equipment" theme="simple" />
 	<s:textfield  readonly="true" value="4号生化池COD" name="dcsdatalist[4].item" theme="simple" style="background:transparent;border:0px"/></td>
 	<td align="center"><s:textfield size="17" label="4号生化池COD" name="dcsdatalist[4].value" theme="simple"
-	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td></td>
+	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td>mg/L</td>
 	</tr>
 	
 	<tr>
@@ -85,12 +85,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	<s:hidden   value="2系列生化池" name="dcsdatalist[5].equipment" theme="simple" /><s:textfield  readonly="true" value="3号生化池碱度" name="dcsdatalist[5].item" theme="simple" style="background:transparent;border:0px"/></td>
 	<td align="center"><s:textfield size="5" label="3号生化池碱度" name="dcsdatalist[5].value" theme="simple"
-	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td></td>
+	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td>PH</td>
 	<td align="right">
 	
 	<s:hidden   value="2系列生化池" name="dcsdatalist[6].equipment" theme="simple" /><s:textfield  readonly="true" value="4号生化池碱度" name="dcsdatalist[6].item" theme="simple" style="background:transparent;border:0px"/></td>
 	<td align="center"><s:textfield size="17" label="4号生化池碱度" name="dcsdatalist[6].value" theme="simple"
-	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td></td>
+	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td>PH</td>
 	</tr>
 	
 	<tr>
@@ -98,40 +98,40 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	<s:hidden   value="2系列生化池" name="dcsdatalist[7].equipment" theme="simple" /><s:textfield  readonly="true" value="3号生化池BOD5" name="dcsdatalist[7].item" theme="simple" style="background:transparent;border:0px"/></td>
 	<td align="center"><s:textfield size="5" label="3号生化池BOD5" name="dcsdatalist[7].value" theme="simple"
-	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td></td>
+	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td>mg/L</td>
 	<td align="right">
 	<s:hidden   value="2系列生化池" name="dcsdatalist[8].equipment" theme="simple" />
 	<s:textfield  readonly="true" value="4号生化池BOD5" name="dcsdatalist[8].item" theme="simple" style="background:transparent;border:0px"/></td>
 	<td align="center"><s:textfield size="17" label="4号生化池BOD5" name="dcsdatalist[8].value" theme="simple"
-	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td></td>
+	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td>mg/L</td>
 	</tr>
 	
 	<tr>
 	<s:hidden   value="2系列生化池" name="dcsdatalist[9].equipment" theme="simple" />
 	<td align="right"><s:textfield  readonly="true" value="3号生化池SS" name="dcsdatalist[9].item" theme="simple" style="background:transparent;border:0px"/></td>
 	<td align="center"><s:textfield size="5" label="3号生化池PH" name="dcsdatalist[9].value" theme="simple"
-	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td></td>
+	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td>mg/L</td>
 	<td align="right"><s:textfield  readonly="true" value="4号生化池SS" name="dcsdatalist[10].item" theme="simple" style="background:transparent;border:0px"/></td>
 	<td align="center"><s:textfield size="17" label="4号生化池PH" name="dcsdatalist[10].value" theme="simple"
-	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td></td>
+	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td>mg/L</td>
 	</tr>
 	
 	<tr>
 	<td align="right"><s:textfield  readonly="true" value="3号生化池NH3-N" name="dcsdatalist[11].item" theme="simple" style="background:transparent;border:0px"/></td>
 	<td align="center"><s:textfield size="5" label="3号生化池PH" name="dcsdatalist[11].value" theme="simple"
-	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td></td>
+	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td>mg/L</td>
 	<td align="right"><s:textfield  readonly="true" value="4号生化池NH3-N" name="dcsdatalist[12].item" theme="simple" style="background:transparent;border:0px"/></td>
 	<td align="center"><s:textfield size="17" label="4号生化池PH" name="dcsdatalist[12].value" theme="simple"
-	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td></td>
+	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td>mg/L</td>
 	</tr>
 
 	<tr>
 	<td align="right"><s:textfield  readonly="true" value="3号生化池硝态氮" name="dcsdatalist[13].item" theme="simple" style="background:transparent;border:0px"/></td>
 	<td align="center"><s:textfield size="5" label="3号生化池PH" name="dcsdatalist[13].value" theme="simple"
-	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td></td>
+	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td>mg/L</td>
 	<td align="right"><s:textfield  readonly="true" value="4号生化池硝态氮" name="dcsdatalist[14].item" theme="simple" style="background:transparent;border:0px"/></td>
 	<td align="center"><s:textfield size="17" label="4号生化池PH" name="dcsdatalist[14].value" theme="simple"
-	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td></td>
+	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td>mg/L</td>
 	</tr>
 	
 	
@@ -139,16 +139,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <tr>
 	<td align="right"><s:textfield  readonly="true" value="3号生化池溶解氧" name="dcsdatalist[15].item" theme="simple" style="background:transparent;border:0px"/></td>
 	<td align="center"><s:textfield size="5"  name="dcsdatalist[15].value" theme="simple"
-	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td></td>
+	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td>mg/L</td>
 	<td align="right"><s:textfield  readonly="true" value="4号生化池溶解氧" name="dcsdatalist[16].item" theme="simple" style="background:transparent;border:0px"/></td>
 	<td align="center"><s:textfield size="17" label="4号生化池PH" name="dcsdatalist[16].value" theme="simple"
-	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td></td>
+	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td>mg/L</td>
 	</tr>
 	
 	<tr>
 	<td align="right"><s:textfield  readonly="true" value="3号生化池风量" name="dcsdatalist[17].item" theme="simple" style="background:transparent;border:0px"/></td>
 	<td align="center"><s:textfield size="5" label="3号生化池PH" name="dcsdatalist[17].value" theme="simple"
-	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td></td>
+	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td>km/h</td>
 	<td align="right"><s:textfield  readonly="true" value="4号生化池风量" name="dcsdatalist[18].item" theme="simple" style="background:transparent;border:0px"/></td>
 	<td align="center"><s:textfield size="17" label="4号生化池PH" name="dcsdatalist[18].value" theme="simple"
 	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td>km/h</td>
@@ -175,19 +175,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<tr>
 	<td align="right"><s:textfield  readonly="true" value="3号生化池NO-N" name="dcsdatalist[19].item" theme="simple" style="background:transparent;border:0px"/></td>
 	<td align="center"><s:textfield size="5" label="3号生化池PH" name="dcsdatalist[19].value" theme="simple"
-	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td></td>
+	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td>mg/L</td>
 	<td align="right"><s:textfield  readonly="true" value="4号生化池NO-N" name="dcsdatalist[20].item" theme="simple" style="background:transparent;border:0px"/></td>
 	<td align="center"><s:textfield size="17" label="4号生化池PH" name="dcsdatalist[20].value" theme="simple"
-	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td></td>
+	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td>mg/L</td>
 	</tr>
 	
 	<tr>
 	<td align="right"><s:textfield  readonly="true" value="3号生化池水量" name="dcsdatalist[21].item" theme="simple" style="background:transparent;border:0px"/></td>
 	<td align="center"><s:textfield size="5" label="3号生化池PH" name="dcsdatalist[21].value" theme="simple"
-	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td></td>
+	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td>m3/h</td>
 	<td align="right"><s:textfield  readonly="true" value="4号生化池水量" name="dcsdatalist[22].item" theme="simple" style="background:transparent;border:0px"/></td>
 	<td align="center"><s:textfield size="17" label="4号生化池PH" name="dcsdatalist[22].value" theme="simple"
-	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td></td>
+	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td>m3/h</td>
 	</tr>
 	
 	

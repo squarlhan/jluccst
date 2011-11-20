@@ -39,7 +39,7 @@ public class DcshistoryService {
 	}
 
 	public void save(Dcshistory dcshistory) {
-		System.out.println(dcshistory.getItem()+"哈QQQQQ哈");
+	
 		if(dcshistory.getItem().matches("班次")){
 			Date currentTime = new Date();
 			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
