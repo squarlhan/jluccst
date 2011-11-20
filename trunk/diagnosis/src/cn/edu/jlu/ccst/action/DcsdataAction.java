@@ -15,13 +15,16 @@ import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 
+import cn.edu.jlu.ccst.model.DcsDscrib;
 import cn.edu.jlu.ccst.model.Dcsdata;
 import cn.edu.jlu.ccst.model.Dcshistory;
+import cn.edu.jlu.ccst.model.Errorlog;
 import cn.edu.jlu.ccst.model.Wwdcsdata;
 
 import cn.edu.jlu.ccst.model.User;
 import cn.edu.jlu.ccst.service.DcsdataService;
 import cn.edu.jlu.ccst.service.DcshistoryService;
+import cn.edu.jlu.ccst.service.ErrorlogService;
 
 
 
@@ -36,7 +39,7 @@ public class DcsdataAction extends ActionSupport {
 	private Dcsdata dcsdata;
 	private Dcshistory dcshistory;
     private DcshistoryService dcshistoryService;
-
+    private ErrorlogService errorlogService;
     
 	public Dcshistory getDcshistory() {
 		return dcshistory;
@@ -86,6 +89,14 @@ public class DcsdataAction extends ActionSupport {
 		this.dcsdataService = dcsdataService;
 	}
 
+    
+    public ErrorlogService getErrorlogService() {
+		return errorlogService;
+	}
+	 @Resource
+	public void setErrorlogService(ErrorlogService errorlogService) {
+		this.errorlogService = errorlogService;
+	}
 	public boolean checkuser(){
 		ActionContext actionContext = ActionContext.getContext();
         Map user = actionContext.getSession();
@@ -141,6 +152,8 @@ public class DcsdataAction extends ActionSupport {
 	        List<Dcsdata> list=new ArrayList<Dcsdata>();
 	        List<Dcshistory> list2=new ArrayList<Dcshistory>();
 	        List<Dcsdata> list1=new ArrayList<Dcsdata>();
+	        List<Errorlog> list3=new ArrayList<Errorlog>();
+
 	        System.out.println(dcsdatalist.get(23).getItem());
 	       list1=dcsdataService.findbyequipment(dcsdatalist.get(23).getEquipment());
 	        	for(Dcsdata dc:list1){
@@ -167,9 +180,35 @@ public class DcsdataAction extends ActionSupport {
 	     	                    list2.add(his);
 	     	                     dcshistoryService.save(his);   }    
 	                          
+	     	         Errorlog err=new Errorlog();
+	     	          err.setItem(dcsdatalist.get(i).getItem());
+	     	          err.setValue(dcsdatalist.get(i).getValue());
+	     	          err.setEquipment(dcsdatalist.get(i).getEquipment());
+	     	          if(his.getValue()!=null){
+	     	        	 if(errorlogService.validateinput(dcsdatalist.get(i)).matches("upper")
+	     	        			)
+	     	        	 {   
+	     	        		 list2.add(his);
+	     	        	  err.setLevel("过高");
+	     	        	errorlogService.save(err);   }    
+	     	        	 if(errorlogService.validateinput(dcsdatalist.get(i)).matches("lower")
+		     	        			)
+		     	        	 {   
+		     	        		 list2.add(his);
+		     	        	  err.setLevel("过低");
+		     	        	errorlogService.save(err);   }    
+	     	          }
+	     	          
+	     	          
+	     	          
+	     	          
+	     	          
+	     	          
+	     	          
 	                                             }
 	                                      }
            
 	        return "savelistsuccess";}
+
 	
 }
