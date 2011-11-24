@@ -20,7 +20,7 @@ public class Dss_advice implements Serializable{
 	@GeneratedValue
 	private int id;
 	private String name;
-	private String item;
+
 	private Double value;
 	private String seqno;
 	private String level;
@@ -31,11 +31,11 @@ public class Dss_advice implements Serializable{
 		super();
 		
 	}
-	public Dss_advice(int id, String name, String item, Double value, String seqno, String level,String simu_time,String error,String sugg) {
+	public Dss_advice(int id, String name,  Double value, String seqno, String level,String simu_time,String error,String sugg) {
 		super();
 		this.id = id;
 		this.name = name;
-		this.item = item;
+		
 		this.value = value;
 		this.seqno = seqno;
 		this.level = level;
@@ -73,12 +73,7 @@ public class Dss_advice implements Serializable{
 		this.id = id;
 	}
 	
-	public String getItem() {
-		return item;
-	}
-	public void setItem(String item) {
-		this.item = item;
-	}
+	
 	public Double getValue() {
 		return value;
 	}
