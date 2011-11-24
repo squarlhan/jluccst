@@ -128,6 +128,7 @@ public class InterfaceAction extends ActionSupport {
 		           for(int i=0;i<a;i++){
 		            BackwardandResult   back=backwardandResult.get(i);
 		            backwardandResult1.add(back);
+		            System.out.println("hello"+ruleService.findreasons(backwardandResult1));
 		            reasonlist1 = ruleService.findreasons(backwardandResult1);
 		        	  // reasonlist1=ruleService.findreasons((List<BackwardandReason>)backwardandResult.get(i));//有原因推出的reasonlist
 		    		for(BackwardandReason reason:reasonlist1){
