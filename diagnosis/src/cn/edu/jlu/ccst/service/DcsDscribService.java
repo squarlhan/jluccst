@@ -22,7 +22,7 @@ public class DcsDscribService {
 	private DcsDscrib dDcsDscrib;
 	private DcsDscribServiceInter dcsDscribServiceImpl;
 	private DcsdataService dcsdataService;
-
+	private Pre_dssService pre_dssService;
 	/*
 	 * public Backward getBackward() { return backward; }
 	 * 
@@ -40,9 +40,20 @@ public class DcsDscribService {
 	 * System.out.println("Rule:"+backward.getName()+" ; "+backward.getMemo());
 	 * ruleServiceImpl.save(backward); }
 	 */
-
+    
 	public DcsDscrib getdDcsDscrib() {
 		return dDcsDscrib;
+	}
+	@Resource
+	public void setdDcsDscrib(DcsDscrib dDcsDscrib) {
+		this.dDcsDscrib = dDcsDscrib;
+	}
+	public Pre_dssService getPre_dssService() {
+		return pre_dssService;
+	}
+	@Resource
+	public void setPre_dssService(Pre_dssService pre_dssService) {
+		this.pre_dssService = pre_dssService;
 	}
 
 	public DcsdataService getDcsdataService() {
@@ -53,10 +64,7 @@ public class DcsDscribService {
 		this.dcsdataService = dcsdataService;
 	}
 
-	@Resource
-	public void setdDcsDscrib(DcsDscrib dDcsDscrib) {
-		this.dDcsDscrib = dDcsDscrib;
-	}
+	
 
 	public DcsDscribServiceInter getDcsDscribServiceImpl() {
 		return dcsDscribServiceImpl;
@@ -125,6 +133,42 @@ public class DcsDscribService {
 		for(Dcsdata dd: alldata){
 
 			List<DcsDscrib> dcsDscribs = dcsDscribServiceImpl.findbyname(dd.getEquipment(), dd.getItem());
+			if (dcsDscribs != null && dcsDscribs.size() > 0) {
+				DcsDscrib db = dcsDscribs.get(0);
+				if (dd.getValue() > db.getUpper()) {
+					BackwardandResult br = new BackwardandResult();
+					br.setNouns(db.getName());
+					br.setVerb("过高");
+					br.setMemo(db.getEque());
+					results.add(br);
+				}
+				if (dd.getValue() < db.getLower()) {
+					BackwardandResult br = new BackwardandResult();
+					br.setNouns(db.getName());
+					br.setMemo(db.getEque());
+					br.setVerb("过低");
+					results.add(br);
+				}
+			}
+
+		}
+		
+		return results;
+	}
+	
+	
+	public List<BackwardandResult> validateinput1() {
+		List<Pre_dss> alldata = pre_dssService.findByseqno();
+		List<BackwardandResult> results = new ArrayList();
+		for(Pre_dss dd: alldata){
+			
+			String temp = dd.getName().replace('.',',');
+			String[] strArray = temp.split(",");
+
+
+			//String[] strArray=dd.getName().split(",");
+            System.out.println(strArray[1]);
+			List<DcsDscrib> dcsDscribs = dcsDscribServiceImpl.findbyname(strArray[0],strArray[1]);
 			if (dcsDscribs != null && dcsDscribs.size() > 0) {
 				DcsDscrib db = dcsDscribs.get(0);
 				if (dd.getValue() > db.getUpper()) {

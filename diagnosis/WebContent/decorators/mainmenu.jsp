@@ -12,10 +12,12 @@
   <body>
     <table align="center" width="100%" id="nav">
           <!--<tr align="center"><td><li><a href="/diagnosis/userruleadd.jsp">录入规则</a></li></td></tr>  -->
-         <tr align="center"><td><li><a href="/diagnosis/monitoraction.action">实时监控</a></li></td></tr>
-         <tr align="center"><td><li><a href="/diagnosis/usernet.jsp">神经网络</a></li></td></tr>
-         <tr align="center"><td><li><a href="/diagnosis/rulebraction.action">专家系统</a></li></td></tr>
-          <tr align="center"><td><li><a href="/diagnosis/dcsdscribaction.action">DCS规则</a></li></td></tr>
+          <tr align="center"><td><li><a href="/diagnosis/dcsdscribaction.action">规则录入</a></li></td></tr>
+          <tr align="center"><td><li><a href="/diagnosis/biocpool490/biocpool1.jsp">数据录入</a></li></td></tr>
+         <!--<tr align="center"><td><li><a href="/diagnosis/monitoraction.action">实时监控</a></li></td></tr>-->
+         <tr align="center"><td><li><a href="/diagnosis/interfaceaction.action">工艺接口</a></li></td></tr>
+         <tr align="center"><td><li><a href="/diagnosis/usernet.jsp">系统自学</a></li></td></tr>
+         <tr align="center"><td><li><a href="/diagnosis/rulebraction.action">手动推理</a></li></td></tr>
           <tr align="center"><td><li><a href="/diagnosis/usershow.jsp">用户信息</a></li></td></tr>
           <tr align="center"><td><li><a href="/diagnosis/adminlogin.jsp">管理员登陆</a></li></td></tr>
           <tr align="center"><td><li><a href="/diagnosis/useraction!logoff.action">注销登陆</a></li></td></tr>
