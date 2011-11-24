@@ -102,7 +102,7 @@ public DcsDscrib getDcsDscrib() {
 		if(checkuser()){
 		namelist = dcsDscribService.findallname();
 		backlist = ruleService.findAll();
-		System.out.println(namelist+"你好");
+		
 	    return SUCCESS;}
 		else return "unuserlogin";
 		}

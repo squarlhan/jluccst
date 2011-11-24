@@ -36,13 +36,26 @@ public class RuleAction extends ActionSupport {
 	private List<String> reason_verb;
 	private List<String> result_verb;
 	private List<String> sugg;
-	private String resultn;
+	private String resultn1;
+	private String resultn2;
 	private int resultv_value;
     
 	
 	private List<String> namelist;
 	
 	
+	public String getResultn1() {
+		return resultn1;
+	}
+	public void setResultn1(String resultn1) {
+		this.resultn1 = resultn1;
+	}
+	public String getResultn2() {
+		return resultn2;
+	}
+	public void setResultn2(String resultn2) {
+		this.resultn2 = resultn2;
+	}
 	public List<String> getNamelist() {
 		return namelist;
 	}
@@ -62,12 +75,7 @@ public class RuleAction extends ActionSupport {
 	public void setResultv_value(int resultv_value) {
 		this.resultv_value = resultv_value;
 	}
-	public String getResultn() {
-		return resultn;
-	}
-	public void setResultn(String resultn) {
-		this.resultn = resultn;
-	}
+	
 	public Backward getRule() {
 		return rule;
 	}
@@ -185,7 +193,7 @@ public class RuleAction extends ActionSupport {
 		
 		String resultv = resultv_value==0?"过高":"过低";
 		
-		List<DcsDscrib> dcslist = dcsDscribService.findbyname(resultn);
+		List<DcsDscrib> dcslist = dcsDscribService.findbyname(resultn2);
 		
 		
 		List<BackwardandReason> breason = new ArrayList();
@@ -193,10 +201,10 @@ public class RuleAction extends ActionSupport {
         //新建规则前件
 		BackwardandResult brt = new BackwardandResult();
 		brt.setBid(rule);
-		brt.setNouns(resultn.trim());
+		brt.setNouns(resultn1.trim()+resultn2.trim());
 		brt.setVerb(resultv.trim());
-		if (resultn.trim().length() > 0
-				&& resultv.trim().length() > 0) {
+		if (resultn1.trim().length() > 0
+				&& resultv.trim().length() > 0&& resultn2.trim().length() > 0) {
 			bresult.add(brt);
 		}
 		//新建规则后件

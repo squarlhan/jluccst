@@ -122,17 +122,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <tr>
       <td height="56" colspan="2"><table id="adresulttable"  bgcolor="#EDEDED" width="100%" height="100%" border="0" cellspacing="0" >
         <tr>
-          <td width="25%" >现象名词：
-              <input name="result_noun[0]" type="text" size="12" />
+          <td width="25%" >设备名称：
+               <select name="resultn" size="1" style="width:200px">
+             <option> </option>
+	        <option>  </option>
+	     
+	      </select>
           </div></td>
-          <td width="25%" >现象动词：
+          <td width="25%" >故障名词：
             <input name="result_verb[0]" type="text" size="12" />
           </div></td>
-          <td width="25%">&nbsp;</td>
-          <td width="25%"><div align="center">
-            <input name="addone" type="button" value="增加" onClick="insertResult()" />
-            <input name="dele" type="button" value="删除" onClick="deleteRecord(adresulttable)"/>
+           <td width="25%" >故障动词：
+            <input name="result_verb[0]" type="text" size="12" />
           </div></td>
+          
+          <td width="25%"></td>
         </tr>
       </table></td>
     </tr>

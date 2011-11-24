@@ -36,6 +36,11 @@
 			<result name="go">usermonitor.jsp</result>
 			<result name="OK">usermonitorok.jsp</result>
 		</action> 
+		
+		<action name="interfaceaction" class="interfaceAction">
+			<result name="go">usermonitor.jsp</result>
+			<result name="OK">usermonitorok.jsp</result>
+		</action> 
 	   
 		<action name="rulebraction" class="rulebrAction">
 			<result name="success">userruleadd.jsp</result>
