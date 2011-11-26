@@ -1,7 +1,9 @@
 package cn.edu.jlu.ccst.action;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -15,6 +17,8 @@ import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 
+import cn.edu.jlu.ccst.model.BackwardandReason;
+import cn.edu.jlu.ccst.model.BackwardandResult;
 import cn.edu.jlu.ccst.model.DcsDscrib;
 import cn.edu.jlu.ccst.model.Dcsdata;
 import cn.edu.jlu.ccst.model.Dcshistory;
@@ -39,8 +43,27 @@ public class DcsdataAction extends ActionSupport {
 	private Dcsdata dcsdata;
 	private Dcshistory dcshistory;
     private DcshistoryService dcshistoryService;
-    private ErrorlogService errorlogService;
+    private List<BackwardandResult> backwardandResult;
+    private List<BackwardandReason> reasonlist;
     
+    
+    
+	public List<BackwardandResult> getBackwardandResult() {
+		return backwardandResult;
+	}
+
+	public void setBackwardandResult(List<BackwardandResult> backwardandResult) {
+		this.backwardandResult = backwardandResult;
+	}
+
+	public List<BackwardandReason> getReasonlist() {
+		return reasonlist;
+	}
+
+	public void setReasonlist(List<BackwardandReason> reasonlist) {
+		this.reasonlist = reasonlist;
+	}
+
 	public Dcshistory getDcshistory() {
 		return dcshistory;
 	}
@@ -89,14 +112,6 @@ public class DcsdataAction extends ActionSupport {
 		this.dcsdataService = dcsdataService;
 	}
 
-    
-    public ErrorlogService getErrorlogService() {
-		return errorlogService;
-	}
-	 @Resource
-	public void setErrorlogService(ErrorlogService errorlogService) {
-		this.errorlogService = errorlogService;
-	}
 	public boolean checkuser(){
 		ActionContext actionContext = ActionContext.getContext();
         Map user = actionContext.getSession();
@@ -149,66 +164,55 @@ public class DcsdataAction extends ActionSupport {
         return "savesuccess";
 	}
 	 public String listsave(){
-	        List<Dcsdata> list=new ArrayList<Dcsdata>();
-	        List<Dcshistory> list2=new ArrayList<Dcshistory>();
-	        List<Dcsdata> list1=new ArrayList<Dcsdata>();
-	        List<Errorlog> list3=new ArrayList<Errorlog>();
+		List<Dcsdata> list = new ArrayList<Dcsdata>();
+		List<Dcshistory> list2 = new ArrayList<Dcshistory>();
+		List<Dcsdata> list1 = new ArrayList<Dcsdata>();
+		List<Errorlog> list3 = new ArrayList<Errorlog>();
+		backwardandResult = new ArrayList();
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String mytime = formatter.format(new Date());
+		System.out.println(dcsdatalist.get(23).getItem());
+		list1 = dcsdataService.findbyequipment(dcsdatalist.get(23)
+				.getEquipment());
+		for (Dcsdata dc : list1) {
+			dcsdataService.delete(dc);
+		}
 
-	        System.out.println(dcsdatalist.get(23).getItem());
-	       list1=dcsdataService.findbyequipment(dcsdatalist.get(23).getEquipment());
-	        	for(Dcsdata dc:list1){
-	        		dcsdataService.delete(dc);
-	        	}
-	       
-	        for(int i=0;i<dcsdatalist.size();i++){
-	        	
-	            if(dcsdatalist.get(i)!=null){ 
-	            	
-	                 Dcsdata dat=new Dcsdata();
-	                 dat.setItem(dcsdatalist.get(i).getItem());
-	                 dat.setValue(dcsdatalist.get(i).getValue());
-	                 dat.setEquipment(dcsdatalist.get(i).getEquipment());
-	                   if(dat.getValue()!=null){
-	                          list.add(dat);
-	                          dcsdataService.save(dat);        }
-	                   
-	                 Dcshistory his=new Dcshistory();
-	                 his.setItem(dcsdatalist.get(i).getItem());
-	                 his.setValue(dcsdatalist.get(i).getValue());
-	                 his.setEquipment(dcsdatalist.get(i).getEquipment());
-	     	          if(his.getValue()!=null){
-	     	                    list2.add(his);
-	     	                     dcshistoryService.save(his);   }    
-	                          
-	     	         Errorlog err=new Errorlog();
-	     	          err.setItem(dcsdatalist.get(i).getItem());
-	     	          err.setValue(dcsdatalist.get(i).getValue());
-	     	          err.setEquipment(dcsdatalist.get(i).getEquipment());
-	     	          if(his.getValue()!=null){
-	     	        	 if(errorlogService.validateinput(dcsdatalist.get(i)).matches("upper")
-	     	        			)
-	     	        	 {   
-	     	        		 list2.add(his);
-	     	        	  err.setLevel("过高");
-	     	        	errorlogService.save(err);   }    
-	     	        	 if(errorlogService.validateinput(dcsdatalist.get(i)).matches("lower")
-		     	        			)
-		     	        	 {   
-		     	        		 list2.add(his);
-		     	        	  err.setLevel("过低");
-		     	        	errorlogService.save(err);   }    
-	     	          }
-	     	          
-	     	          
-	     	          
-	     	          
-	     	          
-	     	          
-	     	          
-	                                             }
-	                                      }
-           
-	        return "savelistsuccess";}
+		for (int i = 0; i < dcsdatalist.size(); i++) {
 
+			if (dcsdatalist.get(i) != null) {
+
+				Dcsdata dat = new Dcsdata();
+				dat.setItem(dcsdatalist.get(i).getItem());
+				dat.setValue(dcsdatalist.get(i).getValue());
+				dat.setEquipment(dcsdatalist.get(i).getEquipment());
+				if (dat.getValue() != null) {
+					list.add(dat);
+					dcsdataService.save(dat);
+				}
+				Dcshistory his = new Dcshistory();
+				his.setItem(dcsdatalist.get(i).getItem());
+				his.setValue(dcsdatalist.get(i).getValue());
+				his.setEquipment(dcsdatalist.get(i).getEquipment());
+				his.setSeqno(mytime);
+				if (his.getValue() != null) {
+					list2.add(his);
+					dcshistoryService.save(his);
+					BackwardandResult tempbr = dcsdataService.validateinput(dcsdatalist.get(i));
+					if(tempbr!=null){
+						backwardandResult.add(tempbr);
+					}
+					
+				}
+				
+
+			}
+		}
+
+		if(backwardandResult!=null&&backwardandResult.size()>0){
+			return "saveerror";
+		}
+		return "savelistsuccess";
+	}
 	
 }
