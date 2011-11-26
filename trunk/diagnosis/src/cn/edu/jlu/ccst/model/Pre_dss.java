@@ -2,9 +2,13 @@ package cn.edu.jlu.ccst.model;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 
 import org.springframework.stereotype.Component;
 
@@ -19,7 +23,9 @@ public class Pre_dss implements Serializable{
 	@Id
 	@GeneratedValue
 	private int id;
-	private String name;
+	@OneToOne(cascade={CascadeType.ALL})
+	@JoinColumn(name="name")
+	private ExcelData name;
 	private String simu_time;
 	private String seqno;
 	private Double value;
@@ -27,7 +33,7 @@ public class Pre_dss implements Serializable{
 		super();
 		
 	}
-	public Pre_dss(int id,String name, String simu_time, String seqno, Double value) {
+	public Pre_dss(int id,ExcelData name, String simu_time, String seqno, Double value) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -44,11 +50,11 @@ public class Pre_dss implements Serializable{
 	public void setId(int id) {
 		this.id = id;
 	}
-	public String getName() {
+	public ExcelData getName() {
 		return name;
 	}
 	
-	public void setName(String name) {
+	public void setName(ExcelData name) {
 		this.name = name;
 	}
 	public String getSimu_time() {

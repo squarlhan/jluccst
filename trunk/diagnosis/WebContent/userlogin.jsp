@@ -23,7 +23,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <body>
   <div id="rightmain">
-	  <h2>用户登陆页面</h2>
+	  <h2>用户登录页面</h2>
 <div id="login">
 <s:form action="useraction.action">
 <table width="200" align="center" style="margin-left:30">
@@ -37,7 +37,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<br/>
 	<table width="150" align="center">
 	<tr>
-	<td width="80" align="center"><s:submit value="登陆" theme="simple" />
+	<td width="80" align="center"><s:submit value="登录" theme="simple" />
 	</td>
 	
 	<td width="80" align="center"> <s:reset value="取消"
