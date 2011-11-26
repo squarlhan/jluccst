@@ -22,33 +22,54 @@ public class Errorlog implements Serializable{
 	private String equipment;
 	private String item;
 	private Double value;
-	private String seqno;
+	private String time;//故障时间
 	private String level;
+	private String error;
+	private String sugg;
+	
+	
+	
 	public Errorlog() { 
 		super();
 		
 	}
-	public Errorlog(int id, String equipment, String item, Double value, String seqno, String level) {
+	public Errorlog(int id, String equipment, String item, Double value, String time, String level, String error,String sugg) {
 		super();
 		this.id = id;
 		this.equipment = equipment;
 		this.item = item;
 		this.value = value;
-		this.seqno = seqno;
+		this.time = time;
 		this.level = level;
+		this.error = error;
+		this.sugg = sugg;
 	}
 	/**
 	 * 
 	 */
 	
-	public String getSeqno() {
-		return seqno;
-	}
-	public void setSeqno(String seqno) {
-		this.seqno = seqno;
-	}
+
+  
 	public String getLevel() {
 		return level;
+	}
+	public String getTime() {
+		return time;
+	}
+	public void setTime(String time) {
+		this.time = time;
+	}
+	public String getError() {
+		return error;
+	}
+	public void setError(String error) {
+		this.error = error;
+	}
+	public String getSugg() {
+		return sugg;
+	}
+	public void setSugg(String sugg) {
+		this.sugg = sugg;
 	}
 	public void setLevel(String level) {
 		this.level = level;

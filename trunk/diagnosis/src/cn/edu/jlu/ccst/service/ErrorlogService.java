@@ -65,7 +65,7 @@ public class ErrorlogService {
 			Date currentTime = new Date();
 			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 			String dateString = formatter.format(currentTime);
-			errorlog.setSeqno(dateString);
+			errorlog.setTime(dateString);
 	        
 			errorlogImpl.save(errorlog);
 	}
