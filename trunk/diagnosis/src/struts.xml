@@ -22,8 +22,8 @@
 		
 		
 		 <action name="dcsdataaction" class="dcsdataAction">
+			<result name="saveerror">userdcsdataerror.jsp</result>
 			<result name="savelistsuccess">savesuccess.jsp</result>
-			
 		</action> 
 
 		
