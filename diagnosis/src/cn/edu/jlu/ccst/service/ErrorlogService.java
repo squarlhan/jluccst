@@ -55,7 +55,11 @@ public class ErrorlogService {
 	}
 
 
-
+    public List<Errorlog> findAll() {
+		List<Errorlog> resultlist = new ArrayList();
+		resultlist = errorlogImpl.findAll();
+		return resultlist;
+	}
 
 
 

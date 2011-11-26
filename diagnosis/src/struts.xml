@@ -86,6 +86,10 @@
 			<result name="unadminlogin">adminlogin.jsp</result>
 		</action>
 		
+		<action name="errorlogaction" class="errorlogAction">
+			<result name="OK">usererrorlist.jsp</result>
+		</action> 
+		
 	</package>
 
 </struts>

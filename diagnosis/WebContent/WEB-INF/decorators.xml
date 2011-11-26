@@ -10,6 +10,7 @@
 		<pattern>/wwdcs*</pattern>
 		<pattern>/monitor*</pattern>
 		<pattern>/interface*</pattern>
+		<pattern>/error*</pattern>
 		
 	</decorator>
 	<decorator name="userlogin" page="logindecorator.jsp">

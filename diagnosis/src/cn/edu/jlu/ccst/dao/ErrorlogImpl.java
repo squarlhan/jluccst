@@ -30,7 +30,10 @@ public class ErrorlogImpl implements ErrorlogInter  {
 		return em;
 	}
     
-    
+    public List<Errorlog> findAll(){
+    	Query query = getEntityManager().createQuery("select el FROM Errorlog el");
+		return query.getResultList();
+    }
    
     
     public void save(Errorlog errorlog) {
