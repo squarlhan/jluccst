@@ -2,9 +2,13 @@ package cn.edu.jlu.ccst.model;
 
 import java.io.Serializable;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
+import javax.persistence.PrimaryKeyJoinColumn;
 
 import org.springframework.stereotype.Component;
 
@@ -19,7 +23,9 @@ public class Dss_advice implements Serializable{
 	@Id
 	@GeneratedValue
 	private int id;
-	private String name;
+	@OneToOne(cascade={CascadeType.ALL})
+	@JoinColumn(name="name")
+	private ExcelData name;
 
 	private Double value;
 	private String seqno;
@@ -31,7 +37,7 @@ public class Dss_advice implements Serializable{
 		super();
 		
 	}
-	public Dss_advice(int id, String name,  Double value, String seqno, String level,String simu_time,String error,String sugg) {
+	public Dss_advice(int id, ExcelData name,  Double value, String seqno, String level,String simu_time,String error,String sugg) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -83,10 +89,10 @@ public class Dss_advice implements Serializable{
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-	public String getName() {
+	public ExcelData getName() {
 		return name;
 	}
-	public void setName(String name) {
+	public void setName(ExcelData name) {
 		this.name = name;
 	}
 	public String getSimu_time() {

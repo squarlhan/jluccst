@@ -122,17 +122,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <tr>
       <td height="56" colspan="2"><table id="adresulttable"  bgcolor="#EDEDED" width="100%" height="100%" border="0" cellspacing="0" >
         <tr>
-          <td width="25%" >设备名称：
+          <td width="25%" >控制结点：
                <select name="resultn" size="1" style="width:200px">
              <option> </option>
 	        <option>  </option>
 	     
 	      </select>
           </div></td>
-          <td width="25%" >故障名词：
+          <td width="25%" >控制参数：
             <input name="result_verb[0]" type="text" size="12" />
           </div></td>
-           <td width="25%" >故障动词：
+           <td width="25%" >智能诊断：
             <input name="result_verb[0]" type="text" size="12" />
           </div></td>
           

@@ -122,7 +122,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <tr>
       <td colspan="2"><table id="adresulttable"  bgcolor="#EDEDED" width="100%" height="100%" border="0" cellspacing="0" >
         <tr>
-          <td width="25%" >现象名词：
+          <td width="25%" >控制结点：
              
              <select name="resultn1" size="1" style="width:150px">
              <option> 染料厂酸水  </option>
@@ -175,11 +175,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <option>污泥池(V466) </option>
 <option>浓缩池(491) </option>
 <option>脱水装置(495) </option>
-
+<option>w1 </option>
 	         </select>
                </td>
           
-           <td width="25%" >现象名词：
+           <td width="25%" >控制参数：
              
              <select name="resultn2" size="1" style="width:150px">
              <option> 溶解氧</option>
@@ -197,7 +197,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               
              
           </td>
-          <td width="25%" >现象动词：
+          <td width="25%" >智能诊断：
            <select name="resultv_value" style="width:150px">
                 <option value="0">高于最高值</option>
                 <option value="1">低于最低值</option>

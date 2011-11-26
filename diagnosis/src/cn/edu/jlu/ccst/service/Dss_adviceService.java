@@ -52,9 +52,9 @@ public class Dss_adviceService {
 	
 	
 	
-	public List<Dss_advice> findseqno() {
+	public List<Dss_advice> findsimu_time() {
 		List<Dss_advice> resultlist = new ArrayList();
-		resultlist = dss_adviceServiceImpl.findseqno();
+		resultlist = dss_adviceServiceImpl.findsimu_time();
 		return resultlist;
 	}
 	

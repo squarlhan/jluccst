@@ -1,5 +1,6 @@
 package cn.edu.jlu.ccst.action;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -28,30 +29,24 @@ public class InterfaceAction extends ActionSupport {
 	 */
 	private static final long serialVersionUID = 1L;
 	private List<BackwardandResult> backwardandResult;
-	private List<BackwardandResult> backwardandResult1;
+	
 	private DcsDscribService dcsDscribService;
 	private List<BackwardandReason> reasonlist;
 	private RuleService ruleService;
 	private Pre_dssService pre_dssService;
 	private Dss_adviceService dss_adviceService;
-	private Dss_advice dss_advice;
+	private List<Dss_advice> dss_advice;
 	private List<BackwardandReason> reasonlist1;
 	
 	
 	
-	public List<BackwardandResult> getBackwardandResult1() {
-		return backwardandResult1;
-	}
 	
-	public void setBackwardandResult1(List<BackwardandResult> backwardandResult1) {
-		this.backwardandResult1 = backwardandResult1;
-	}
 
-	public Dss_advice getDss_advice() {
+
+	public List<Dss_advice> getDss_advice() {
 		return dss_advice;
 	}
-
-	public void setDss_advice(Dss_advice dss_advice) {
+	public void setDss_advice(List<Dss_advice> dss_advice) {
 		this.dss_advice = dss_advice;
 	}
 
@@ -115,32 +110,41 @@ public class InterfaceAction extends ActionSupport {
 	}
 
 	public String execute() {
-		List<Pre_dss> alldata = pre_dssService.findByseqno();
-		
+		List<Pre_dss> alldata = pre_dssService.findBysimu_time();
+	    List<BackwardandResult>  backwardandResult1=new ArrayList();
 		backwardandResult = dcsDscribService.validateinput1();
+		
 		if (backwardandResult.size() > 0) {
 			int a =backwardandResult.size();
 			reasonlist = ruleService.findreasons(backwardandResult);
-			
-			System.out.println("seqno"+pre_dssService.findseqno());
-		    if(!pre_dssService.findseqno().equals(dss_adviceService.findseqno())){
-		    	for(Pre_dss pre:alldata){
-		           for(int i=0;i<a;i++){
-		            BackwardandResult   back=backwardandResult.get(i);
-		            backwardandResult1.add(back);
-		            System.out.println("hello"+ruleService.findreasons(backwardandResult1));
-		            reasonlist1 = ruleService.findreasons(backwardandResult1);
+			System.out.println("seqno"+pre_dssService.findsimu_time());
+		    
+			if(!pre_dssService.findsimu_time().equals(dss_adviceService.findsimu_time())){
+		    	   
+				for(Pre_dss pre:alldata){
+		           
+					for(int i=0;i<a;i++){
+		              BackwardandResult   back=new BackwardandResult();
+		              backwardandResult1.clear();
+		              back=backwardandResult.get(i);
+		              backwardandResult1.add(back);
+		              System.out.println("hello"+ruleService.findreasons(backwardandResult1));
+		              reasonlist1 = ruleService.findreasons(backwardandResult1);
 		        	  // reasonlist1=ruleService.findreasons((List<BackwardandReason>)backwardandResult.get(i));//有原因推出的reasonlist
-		    		for(BackwardandReason reason:reasonlist1){
-		    			
-		    			dss_advice.setName(pre.getName());
-		    			dss_advice.setValue(pre.getValue());
-		    			dss_advice.setSimu_time(pre.getSimu_time());
-		    			dss_advice.setSeqno(pre.getSeqno());
-		    			dss_advice.setError(reason.getNouns()+reason.getVerb());
-		    			dss_advice.setSugg(reason.getSugg());
-		    			dss_adviceService.save(dss_advice);
-		    		}}
+		              dss_advice = new ArrayList();
+		              for(BackwardandReason reason:reasonlist1){
+		    			System.out.println(pre.getName()+"nihao");
+		    			Dss_advice da = new Dss_advice();
+		    			da.setName(pre.getName());
+		    			da.setValue(pre.getValue());
+		    			da.setSimu_time(pre.getSimu_time());
+		    			da.setSeqno(pre.getSeqno());
+		    			da.setError(reason.getNouns()+reason.getVerb());
+		    			da.setSugg(reason.getSugg());
+		    			dss_advice.add(da);
+		    			dss_adviceService.save(da);
+		    		  }
+		            }
 		    	}
 		    }
 		    

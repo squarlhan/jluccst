@@ -10,7 +10,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     
-    <title>管理员登陆</title>
+    <title>管理员登录</title>
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">    
@@ -23,7 +23,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <body>
   <div id="rightmain">
-	  <h2>管理员登陆页面</h2>
+	  <h2>管理员登录页面</h2>
 <div id="login">
 <s:form action="adminaction.action">
 <table width="200" align="center" style="margin-left:30">
@@ -37,7 +37,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<br/>
 	<table width="150" align="center">
 	<tr>
-	<td width="80" align="center"><s:submit value="登陆" theme="simple" />
+	<td width="80" align="center"><s:submit value="登录" theme="simple" />
 	</td>
 	
 	<td width="80" align="center"> <s:reset value="取消"

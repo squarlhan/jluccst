@@ -17,10 +17,10 @@
          <!--<tr align="center"><td><li><a href="/diagnosis/monitoraction.action">实时监控</a></li></td></tr>-->
          <tr align="center"><td><li><a href="/diagnosis/interfaceaction.action">工艺接口</a></li></td></tr>
          <tr align="center"><td><li><a href="/diagnosis/usernet.jsp">系统自学</a></li></td></tr>
-         <tr align="center"><td><li><a href="/diagnosis/rulebraction.action">手动推理</a></li></td></tr>
+         <tr align="center"><td><li><a href="/diagnosis/rulebraction.action">智能诊断</a></li></td></tr>
           <tr align="center"><td><li><a href="/diagnosis/usershow.jsp">用户信息</a></li></td></tr>
-          <tr align="center"><td><li><a href="/diagnosis/adminlogin.jsp">管理员登陆</a></li></td></tr>
-          <tr align="center"><td><li><a href="/diagnosis/useraction!logoff.action">注销登陆</a></li></td></tr>
+          <tr align="center"><td><li><a href="/diagnosis/adminlogin.jsp">管理员登录</a></li></td></tr>
+          <tr align="center"><td><li><a href="/diagnosis/useraction!logoff.action">注销登录</a></li></td></tr>
     </table> 
   </body>
 </html>

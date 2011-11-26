@@ -158,11 +158,11 @@ public class DcsDscribService {
 	
 	
 	public List<BackwardandResult> validateinput1() {
-		List<Pre_dss> alldata = pre_dssService.findByseqno();
+		List<Pre_dss> alldata = pre_dssService.findBysimu_time();
 		List<BackwardandResult> results = new ArrayList();
 		for(Pre_dss dd: alldata){
 			
-			String temp = dd.getName().replace('.',',');
+			String temp = dd.getName().getName().replace('.',',');
 			String[] strArray = temp.split(",");
 
 

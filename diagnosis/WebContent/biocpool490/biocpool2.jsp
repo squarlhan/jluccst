@@ -12,7 +12,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     
      <%if(request.getSession().getAttribute("us")==null) 
   { 
-  response.sendRedirect("userlogin.jsp"); 
+  response.sendRedirect("/diagnosis/userlogin.jsp"); 
    }  
                 
    %>  
@@ -194,7 +194,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <tr/>
 	<tr align="center">
 	<td width="25%"/>
-	<td width="20%" align="center"><s:submit value="提交" theme="simple" onclick="return confirmAdd();" /></td>
+	<td width="20%" align="center"><s:submit value="推理" theme="simple" onclick="return confirmAdd();" /></td>
 	<td width="5%"/>
 	
 	<td width="25%" align="center"> <s:reset value="重置" theme="simple" /></td>

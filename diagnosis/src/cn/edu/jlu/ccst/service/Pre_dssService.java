@@ -61,14 +61,14 @@ public class Pre_dssService {
 		resultlist = pre_dssServiceImpl.findAll();
 		return resultlist;
 	}
-	public List<Pre_dss> findByseqno() {
+	public List<Pre_dss> findBysimu_time() {
 		List<Pre_dss> resultlist = new ArrayList();
-		resultlist = pre_dssServiceImpl.findByseqno();
+		resultlist = pre_dssServiceImpl.findBysimu_time();
 		return resultlist;
 	}
-	public List<Pre_dss> findseqno() {
+	public List<Pre_dss> findsimu_time() {
 		List<Pre_dss> resultlist = new ArrayList();
-		resultlist = pre_dssServiceImpl.findseqno();
+		resultlist = pre_dssServiceImpl.findsimu_time();
 		return resultlist;
 	}
 	
