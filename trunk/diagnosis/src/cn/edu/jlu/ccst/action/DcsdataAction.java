@@ -29,6 +29,7 @@ import cn.edu.jlu.ccst.model.User;
 import cn.edu.jlu.ccst.service.DcsdataService;
 import cn.edu.jlu.ccst.service.DcshistoryService;
 import cn.edu.jlu.ccst.service.ErrorlogService;
+import cn.edu.jlu.ccst.service.RuleService;
 
 
 
@@ -45,9 +46,17 @@ public class DcsdataAction extends ActionSupport {
     private DcshistoryService dcshistoryService;
     private List<BackwardandResult> backwardandResult;
     private List<BackwardandReason> reasonlist;
+    private RuleService ruleService;
     
     
-    
+	public RuleService getRuleService() {
+		return ruleService;
+	}
+	@Resource
+	public void setRuleService(RuleService ruleService) {
+		this.ruleService = ruleService;
+	}
+
 	public List<BackwardandResult> getBackwardandResult() {
 		return backwardandResult;
 	}
@@ -210,6 +219,7 @@ public class DcsdataAction extends ActionSupport {
 		}
 
 		if(backwardandResult!=null&&backwardandResult.size()>0){
+			reasonlist = ruleService.findreasons(backwardandResult);
 			return "saveerror";
 		}
 		return "savelistsuccess";

@@ -55,8 +55,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
      </tr>
      </s:iterator>
   </table>
-    
-  <!--  
+      
   <table bordercolor="#4A708B" rules="all"  id="mytable" class="list_table" align="center" width="100%">
 		<tr bgcolor="#4A708B">
 		    <th style="width:50%">故障原因</th>
@@ -73,7 +72,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
      </tr>
      </s:iterator>
   </table>
-   -->
     <div align="center">
       <input name="button" type=button onClick="window.location.href('rulebraction.action')" value="完成返回">
       </div>
