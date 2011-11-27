@@ -49,7 +49,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <tr>
     
 	<td align="left">请选择班次</td>
-	<td align="center"> <select name="dcsdatalist[23].value"   style="width:110px">
+	<td align="center"> <select name="dcsdatalist[0].value"   style="width:110px">
                 <option  value="00">零点班</option>
                 <option  value="08">八点班</option>
                 <option  value="16">十六点班</option>
@@ -112,8 +112,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<s:hidden   value="3系列排江出口线" name="dcsdatalist[5].equipment" theme="simple" />
 	<s:hidden   value="3系列排江出口线" name="dcsdatalist[6].equipment" theme="simple" />
 	<s:hidden   value="3系列排江出口线" name="dcsdatalist[7].equipment" theme="simple" />
-	<s:hidden   value="3系列排江出口线" name="dcsdatalist[23].equipment" theme="simple" />
-	<s:hidden   value="班次" name="dcsdatalist[23].item" theme="simple" />
+	<s:hidden   value="3系列排江出口线" name="dcsdatalist[0].equipment" theme="simple" />
+	<s:hidden   value="班次" name="dcsdatalist[0].item" theme="simple" />
 	
 	
 	
