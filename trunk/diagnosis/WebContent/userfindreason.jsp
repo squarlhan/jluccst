@@ -28,6 +28,12 @@
 <!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
+	
+	<style> 
+    .nobr br{display:none}   
+    </style>
+
+	
 </head>
 
 <body>
@@ -42,20 +48,19 @@
 	<div id="login">
 		<s:form action="ruleaction">
 			<table width="500" align="center" >
-					<td>故障设备现象：
-					    <s:doubleselect  name = "result.nouns" list="#session.map.keySet()"  
+			    <tr>
+					<td align = "right">故障设备现象：</td>
+					<td>
+					    <div class="nobr">
+					    <s:doubleselect theme="simple" name = "result.nouns" list="#session.map.keySet()"  
 					    doubleName="result.verb" doubleList="#session.map[top]" ></s:doubleselect>
+					    </div>
 					</td>
+					<td align = "left"><s:submit value="开始推理" theme="simple"/></td>
 				</tr>
 			</table>
-			<br />
-			<table width="300" align="center" style="margin-left: 10">
-				<tr>
-					<td width="80"><s:submit value="开始推理" /></td>
-				</tr>
-			</table>
+		
 		</s:form>
-	</div>
 	</div>
 
 </body>
