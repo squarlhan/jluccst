@@ -1,7 +1,7 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : aa
+Source Server         : localhost_3306
 Source Server Version : 50516
 Source Host           : localhost:3306
 Source Database       : wushuichang
@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50516
 File Encoding         : 65001
 
-Date: 2011-11-27 16:17:51
+Date: 2011-11-27 17:34:10
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -46,7 +46,7 @@ CREATE TABLE `backward` (
   `count` int(10) NOT NULL DEFAULT '0',
   `priror` int(10) NOT NULL DEFAULT '0',
   PRIMARY KEY (`bid`)
-) ENGINE=InnoDB AUTO_INCREMENT=130 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=132 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of backward
@@ -158,6 +158,8 @@ INSERT INTO `backward` VALUES ('126', '', '', '0', '0');
 INSERT INTO `backward` VALUES ('127', '生化池', 'PH', '0', '0');
 INSERT INTO `backward` VALUES ('128', '生化池', 'PH', '0', '0');
 INSERT INTO `backward` VALUES ('129', '生化池', '水量不足', '0', '0');
+INSERT INTO `backward` VALUES ('130', '', '', '0', '0');
+INSERT INTO `backward` VALUES ('131', '', '', '0', '0');
 
 -- ----------------------------
 -- Table structure for `backwardandlower`
@@ -191,7 +193,7 @@ CREATE TABLE `backwardandreason` (
   PRIMARY KEY (`id`),
   KEY `FKFBA61E58DB7478BC` (`bid`),
   CONSTRAINT `FKFBA61E58DB7478BC` FOREIGN KEY (`bid`) REFERENCES `backward` (`bid`)
-) ENGINE=InnoDB AUTO_INCREMENT=327 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=329 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 -- Records of backwardandreason
@@ -199,6 +201,8 @@ CREATE TABLE `backwardandreason` (
 INSERT INTO `backwardandreason` VALUES ('324', '127', '中和站', '0', '控制不好', '增加测试PH频次，向车间工艺工程师汇报');
 INSERT INTO `backwardandreason` VALUES ('325', '128', '中和站', '0', '控制不好', '增加测试PH频次，向车间工艺工程师汇报');
 INSERT INTO `backwardandreason` VALUES ('326', '129', '液位', '0', '不合适', '调整液位');
+INSERT INTO `backwardandreason` VALUES ('327', '130', '好氧生物', '0', '不足', '增加污泥池污泥量');
+INSERT INTO `backwardandreason` VALUES ('328', '131', '厌氧生物', '0', '多', '减少污泥量');
 
 -- ----------------------------
 -- Table structure for `backwardandresult`
@@ -214,7 +218,7 @@ CREATE TABLE `backwardandresult` (
   PRIMARY KEY (`id`),
   KEY `FKFBAE5431DB7478BC` (`bid`),
   CONSTRAINT `FKFBAE5431DB7478BC` FOREIGN KEY (`bid`) REFERENCES `backward` (`bid`)
-) ENGINE=InnoDB AUTO_INCREMENT=115 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=117 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 -- Records of backwardandresult
@@ -222,6 +226,8 @@ CREATE TABLE `backwardandresult` (
 INSERT INTO `backwardandresult` VALUES ('112', '127', '生化池系列2 (3号生化池)PH', '0', '过高', null);
 INSERT INTO `backwardandresult` VALUES ('113', '128', '生化池系列2 (3号生化池)PH', '0', '过低', null);
 INSERT INTO `backwardandresult` VALUES ('114', '129', '生化池系列2 (3号生化池)水量', '0', '过低', null);
+INSERT INTO `backwardandresult` VALUES ('115', '130', '染料厂酸水溶解氧', '0', '过高', null);
+INSERT INTO `backwardandresult` VALUES ('116', '131', '染料厂酸水COD', '0', '过高', null);
 
 -- ----------------------------
 -- Table structure for `backwardandupper`
@@ -271,7 +277,7 @@ CREATE TABLE `dcsdscrib` (
   `name` varchar(255) DEFAULT NULL,
   `upper` double DEFAULT NULL,
   PRIMARY KEY (`did`)
-) ENGINE=InnoDB AUTO_INCREMENT=1372 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1373 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of dcsdscrib
@@ -298,6 +304,7 @@ INSERT INTO `dcsdscrib` VALUES ('1368', '2系列生化池', '4号生化池风量
 INSERT INTO `dcsdscrib` VALUES ('1369', '2系列生化池', '4号生化池NO-N', '0', '生化池系列2 (4号生化池)NO-N', '0.5');
 INSERT INTO `dcsdscrib` VALUES ('1370', '2系列生化池', '4号生化池水量', '100', '生化池系列2 (4号生化池)水量', '500');
 INSERT INTO `dcsdscrib` VALUES ('1371', '2系列生化池', '4号生化池PH', '6', '生化池系列2 (4号生化池)PH', '9');
+INSERT INTO `dcsdscrib` VALUES ('1372', '染料厂酸水', 'COD', '0', '染料厂酸水COD', '0.5');
 
 -- ----------------------------
 -- Table structure for `dcshistory`
@@ -386,11 +393,14 @@ CREATE TABLE `dss_advice` (
   `level` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `FK75158BF39A42C930` (`name`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of dss_advice
 -- ----------------------------
+INSERT INTO `dss_advice` VALUES ('1', 'w1.COD', '10.0', '减少污泥量', '1111.22', '20111224', '厌氧生物多', null);
+INSERT INTO `dss_advice` VALUES ('2', 'w1.COD', '11.0', '减少污泥量', '1111.23', '20111127', '厌氧生物多', null);
+INSERT INTO `dss_advice` VALUES ('3', 'w1.COD', '12.0', '减少污泥量', '1111.24', '20111128', '厌氧生物多', null);
 
 -- ----------------------------
 -- Table structure for `dss_history`
@@ -405,12 +415,15 @@ CREATE TABLE `dss_history` (
   `sugg` varchar(255) DEFAULT NULL,
   `value` double DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=big5;
+  PRIMARY KEY (`id`),
+  KEY `FKA84AB4F99A42C930` (`name`),
+  CONSTRAINT `FKA84AB4F99A42C930` FOREIGN KEY (`name`) REFERENCES `exceldata` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of dss_history
 -- ----------------------------
+INSERT INTO `dss_history` VALUES ('1', '厌氧生物多', null, '20111128', '1111.24', '减少污泥量', '12', 'w1.COD');
 
 -- ----------------------------
 -- Table structure for `errorlog`
@@ -882,14 +895,17 @@ CREATE TABLE `pre_dss` (
   `value` varchar(64) DEFAULT NULL,
   `simu_time` varchar(20) NOT NULL,
   `seqno` varchar(20) NOT NULL,
-  `id` int(11) NOT NULL,
-  PRIMARY KEY (`seqno`,`simu_time`,`name`),
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  PRIMARY KEY (`id`),
   KEY `FK5036F6089A42C930` (`name`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of pre_dss
 -- ----------------------------
+INSERT INTO `pre_dss` VALUES ('w1.COD', '10', '1111.22', '20111224', '1');
+INSERT INTO `pre_dss` VALUES ('w1.COD', '11', '1111.23', '20111127', '2');
+INSERT INTO `pre_dss` VALUES ('w1.COD', '12', '1111.24', '20111128', '3');
 
 -- ----------------------------
 -- Table structure for `testuser`
