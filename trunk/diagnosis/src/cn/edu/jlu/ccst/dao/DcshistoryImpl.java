@@ -31,7 +31,6 @@ public class DcshistoryImpl implements DcshistoryInter {
 	}
     
     
-   
     
     public void save(Dcshistory dcshistory) {
 		if (dcshistory.getId()<=0) {
