@@ -1,6 +1,7 @@
 package cn.edu.jlu.ccst.dao;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -12,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 import cn.edu.jlu.ccst.model.Dss_advice;
+import cn.edu.jlu.ccst.model.Dss_history;
 import cn.edu.jlu.ccst.model.Pre_dss;
 import cn.edu.jlu.ccst.model.User;
 
@@ -32,6 +34,20 @@ public class Dss_adviceServiceImpl implements Dss_adviceServiceInter  {
 	}
     
     
+    public List<Dss_advice> findAll(){
+    	Query query = getEntityManager().createQuery("select d FROM Dss_advice d");
+		return query.getResultList();
+    }
+    public void deleteall(){
+    	getEntityManager().createQuery("delete Dss_advice");
+//    	List<Dss_advice> all = findAll();
+//    	Iterator it = all.iterator();
+//    	while(it.hasNext()){
+//    		Dss_advice da = (Dss_advice) it.next();   		
+//    		all.remove(da);
+//    		em.remove(da);
+//    	}
+    }
    
     
     public void save(Dss_advice dss_advice) {

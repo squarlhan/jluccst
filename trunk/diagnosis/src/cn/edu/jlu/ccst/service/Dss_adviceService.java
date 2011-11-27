@@ -49,7 +49,9 @@ public class Dss_adviceService {
 	
 	
 	
-	
+	public void deleteall(){
+		dss_adviceServiceImpl.deleteall();
+	}
 	
 	
 	public List<Dss_advice> findsimu_time() {

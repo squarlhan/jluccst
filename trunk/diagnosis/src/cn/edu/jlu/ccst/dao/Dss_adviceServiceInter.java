@@ -5,5 +5,6 @@ import cn.edu.jlu.ccst.model.Dss_advice;
 public interface Dss_adviceServiceInter {
 	 public void save(Dss_advice dss_advice);
 	  public List<Dss_advice> findsimu_time();
-
+	  public List<Dss_advice> findAll();
+	  public void deleteall();
 }
