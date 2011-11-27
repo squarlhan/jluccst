@@ -12,9 +12,11 @@ import org.springframework.stereotype.Component;
 import cn.edu.jlu.ccst.model.BackwardandReason;
 import cn.edu.jlu.ccst.model.BackwardandResult;
 import cn.edu.jlu.ccst.model.Dss_advice;
+import cn.edu.jlu.ccst.model.Dss_history;
 import cn.edu.jlu.ccst.model.Pre_dss;
 import cn.edu.jlu.ccst.service.DcsDscribService;
 import cn.edu.jlu.ccst.service.Dss_adviceService;
+import cn.edu.jlu.ccst.service.Dss_historyService;
 import cn.edu.jlu.ccst.service.Pre_dssService;
 import cn.edu.jlu.ccst.service.RuleService;
 
@@ -36,13 +38,27 @@ public class InterfaceAction extends ActionSupport {
 	private Pre_dssService pre_dssService;
 	private Dss_adviceService dss_adviceService;
 	private List<Dss_advice> dss_advice;
+	private List<Dss_history> dss_history;
 	private List<BackwardandReason> reasonlist1;
-	
+	private Dss_historyService dss_historyService;
 	
 	
 	
 
 
+	public List<Dss_history> getDss_history() {
+		return dss_history;
+	}
+	public void setDss_history(List<Dss_history> dss_history) {
+		this.dss_history = dss_history;
+	}
+	public Dss_historyService getDss_historyService() {
+		return dss_historyService;
+	}
+	@Resource
+	public void setDss_historyService(Dss_historyService dss_historyService) {
+		this.dss_historyService = dss_historyService;
+	}
 	public List<Dss_advice> getDss_advice() {
 		return dss_advice;
 	}
@@ -120,7 +136,7 @@ public class InterfaceAction extends ActionSupport {
 			System.out.println("seqno"+pre_dssService.findsimu_time());
 		    
 			if(!pre_dssService.findsimu_time().equals(dss_adviceService.findsimu_time())){
-		    	   
+				dss_adviceService.deleteall();
 				for(Pre_dss pre:alldata){
 		           
 					for(int i=0;i<a;i++){
@@ -144,16 +160,41 @@ public class InterfaceAction extends ActionSupport {
 		    			dss_advice.add(da);
 		    			dss_adviceService.save(da);
 		    		  }
-		            }
+					}
+				for(Pre_dss are:alldata){
+				           
+						for(int i=0;i<a;i++){
+			              BackwardandResult   back=new BackwardandResult();
+			              backwardandResult1.clear();
+			              back=backwardandResult.get(i);
+			              backwardandResult1.add(back);
+			              System.out.println("hello"+ruleService.findreasons(backwardandResult1));
+			              reasonlist1 = ruleService.findreasons(backwardandResult1);
+			        	  // reasonlist1=ruleService.findreasons((List<BackwardandReason>)backwardandResult.get(i));//有原因推出的reasonlist
+			              dss_history = new ArrayList();
+			              for(BackwardandReason reason:reasonlist1){
+			    			System.out.println(pre.getName()+"nihao");
+			    			Dss_history da = new Dss_history();
+			    			da.setName(pre.getName());
+			    			da.setValue(pre.getValue());
+			    			da.setSimu_time(pre.getSimu_time());
+			    			da.setSeqno(pre.getSeqno());
+			    			da.setError(reason.getNouns()+reason.getVerb());
+			    			da.setSugg(reason.getSugg());
+			    			dss_history.add(da);
+			    			dss_historyService.save(da);
+			    		  }
+			            }
 		    	}
 		    }
 		    
-			return "go";
-		}else{
-			return "OK";
+			
 		}
 		
-
+			return "go";
+	}else{
+		return "OK";
+	}
+		}
 	}
 
-}
