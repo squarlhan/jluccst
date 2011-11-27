@@ -1,7 +1,7 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : wushuichang
+Source Server         : aa
 Source Server Version : 50516
 Source Host           : localhost:3306
 Source Database       : wushuichang
@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50516
 File Encoding         : 65001
 
-Date: 2011-11-22 15:17:44
+Date: 2011-11-27 16:17:51
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -251,13 +251,13 @@ CREATE TABLE `dcsdata` (
   `item` varchar(255) DEFAULT NULL,
   `value` double DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=53 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=59 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of dcsdata
 -- ----------------------------
-INSERT INTO `dcsdata` VALUES ('52', '2系列生化池', '班次', '0');
-INSERT INTO `dcsdata` VALUES ('51', '2系列生化池', '3号生化池PH', '7');
+INSERT INTO `dcsdata` VALUES ('57', '2系列生化池', '班次', '0');
+INSERT INTO `dcsdata` VALUES ('58', '2系列生化池', '3号生化池PH', '22');
 
 -- ----------------------------
 -- Table structure for `dcsdscrib`
@@ -310,7 +310,7 @@ CREATE TABLE `dcshistory` (
   `seqno` varchar(255) DEFAULT NULL,
   `value` double DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=50 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=56 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of dcshistory
@@ -364,6 +364,12 @@ INSERT INTO `dcshistory` VALUES ('46', '2系列生化池', '3号生化池碱度'
 INSERT INTO `dcshistory` VALUES ('47', '2系列生化池', '班次', '2011-11-21 13:14:12', '0');
 INSERT INTO `dcshistory` VALUES ('48', '2系列生化池', '3号生化池PH', null, '7');
 INSERT INTO `dcshistory` VALUES ('49', '2系列生化池', '班次', '2011-11-21 13:15:37', '0');
+INSERT INTO `dcshistory` VALUES ('50', '2系列生化池', '班次', '2011-11-27 15:04:02', '0');
+INSERT INTO `dcshistory` VALUES ('51', '2系列生化池', '3号生化池PH', '2011-11-27 15:04:02', '2');
+INSERT INTO `dcshistory` VALUES ('52', '2系列生化池', '班次', '2011-11-27 15:06:13', '0');
+INSERT INTO `dcshistory` VALUES ('53', '2系列生化池', '3号生化池PH', '2011-11-27 15:06:13', '111');
+INSERT INTO `dcshistory` VALUES ('54', '2系列生化池', '班次', '2011-11-27 15:10:07', '0');
+INSERT INTO `dcshistory` VALUES ('55', '2系列生化池', '3号生化池PH', '2011-11-27 15:10:07', '22');
 
 -- ----------------------------
 -- Table structure for `dss_advice`
@@ -378,11 +384,32 @@ CREATE TABLE `dss_advice` (
   `seqno` varchar(20) DEFAULT NULL,
   `error` varchar(200) DEFAULT NULL,
   `level` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`id`),
+  KEY `FK75158BF39A42C930` (`name`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of dss_advice
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `dss_history`
+-- ----------------------------
+DROP TABLE IF EXISTS `dss_history`;
+CREATE TABLE `dss_history` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `error` varchar(255) DEFAULT NULL,
+  `level` varchar(255) DEFAULT NULL,
+  `seqno` varchar(255) DEFAULT NULL,
+  `simu_time` varchar(255) DEFAULT NULL,
+  `sugg` varchar(255) DEFAULT NULL,
+  `value` double DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=big5;
+
+-- ----------------------------
+-- Records of dss_history
 -- ----------------------------
 
 -- ----------------------------
@@ -394,33 +421,97 @@ CREATE TABLE `errorlog` (
   `equipment` varchar(255) DEFAULT NULL,
   `item` varchar(255) DEFAULT NULL,
   `level` varchar(255) DEFAULT NULL,
-  `seqno` varchar(255) DEFAULT NULL,
+  `time` varchar(255) DEFAULT NULL,
   `value` double DEFAULT NULL,
+  `error` varchar(255) DEFAULT NULL,
+  `sugg` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of errorlog
 -- ----------------------------
-INSERT INTO `errorlog` VALUES ('1', '2系列生化池', '3号生化池PH', '过高', '2011-11-21 00:04:57', '33');
-INSERT INTO `errorlog` VALUES ('2', '2系列生化池', '3号生化池PH', '过高', '2011-11-21 00:17:16', '22');
-INSERT INTO `errorlog` VALUES ('3', '2系列生化池', '3号生化池PH', '过高', '2011-11-21 00:22:46', '111');
-INSERT INTO `errorlog` VALUES ('4', '2系列生化池', '3号生化池PH', '过高', '2011-11-21 00:49:30', '999');
-INSERT INTO `errorlog` VALUES ('5', '2系列生化池', '3号生化池PH', '过高', '2011-11-21 01:18:06', '111');
-INSERT INTO `errorlog` VALUES ('6', '2系列生化池', '3号生化池PH', '过高', '2011-11-21 01:26:29', '999');
-INSERT INTO `errorlog` VALUES ('7', '2系列生化池', '3号生化池COD', '过高', '2011-11-21 01:26:29', '9');
-INSERT INTO `errorlog` VALUES ('8', '2系列生化池', '3号生化池碱度', '过高', '2011-11-21 01:26:29', '999');
-INSERT INTO `errorlog` VALUES ('9', '2系列生化池', '3号生化池PH', '过高', '2011-11-21 01:30:51', '333');
-INSERT INTO `errorlog` VALUES ('10', '2系列生化池', '3号生化池碱度', '过高', '2011-11-21 01:30:51', '3333');
-INSERT INTO `errorlog` VALUES ('11', '2系列生化池', '3号生化池PH', '过高', '2011-11-21 12:57:49', '9999');
-INSERT INTO `errorlog` VALUES ('12', '2系列生化池', '3号生化池PH', '过高', '2011-11-21 13:04:38', '111');
-INSERT INTO `errorlog` VALUES ('13', '2系列生化池', '3号生化池水量', '过低', '2011-11-21 13:04:38', '1');
-INSERT INTO `errorlog` VALUES ('14', '2系列生化池', '3号生化池PH', '过低', '2011-11-21 13:08:01', '1');
-INSERT INTO `errorlog` VALUES ('15', '2系列生化池', '3号生化池COD', '过高', '2011-11-21 13:08:01', '1');
-INSERT INTO `errorlog` VALUES ('16', '2系列生化池', '3号生化池碱度', '过低', '2011-11-21 13:08:01', '1');
-INSERT INTO `errorlog` VALUES ('17', '2系列生化池', '3号生化池PH', '过高', '2011-11-21 13:14:12', '111');
-INSERT INTO `errorlog` VALUES ('18', '2系列生化池', '3号生化池COD', '过高', '2011-11-21 13:14:12', '1');
-INSERT INTO `errorlog` VALUES ('19', '2系列生化池', '3号生化池碱度', '过低', '2011-11-21 13:14:12', '1');
+INSERT INTO `errorlog` VALUES ('1', '2系列生化池', '3号生化池PH', '过高', '2011-11-21 00:04:57', '33', null, null);
+INSERT INTO `errorlog` VALUES ('2', '2系列生化池', '3号生化池PH', '过高', '2011-11-21 00:17:16', '22', null, null);
+INSERT INTO `errorlog` VALUES ('3', '2系列生化池', '3号生化池PH', '过高', '2011-11-21 00:22:46', '111', null, null);
+INSERT INTO `errorlog` VALUES ('4', '2系列生化池', '3号生化池PH', '过高', '2011-11-21 00:49:30', '999', null, null);
+INSERT INTO `errorlog` VALUES ('5', '2系列生化池', '3号生化池PH', '过高', '2011-11-21 01:18:06', '111', null, null);
+INSERT INTO `errorlog` VALUES ('6', '2系列生化池', '3号生化池PH', '过高', '2011-11-21 01:26:29', '999', null, null);
+INSERT INTO `errorlog` VALUES ('7', '2系列生化池', '3号生化池COD', '过高', '2011-11-21 01:26:29', '9', null, null);
+INSERT INTO `errorlog` VALUES ('8', '2系列生化池', '3号生化池碱度', '过高', '2011-11-21 01:26:29', '999', null, null);
+INSERT INTO `errorlog` VALUES ('9', '2系列生化池', '3号生化池PH', '过高', '2011-11-21 01:30:51', '333', null, null);
+INSERT INTO `errorlog` VALUES ('10', '2系列生化池', '3号生化池碱度', '过高', '2011-11-21 01:30:51', '3333', null, null);
+INSERT INTO `errorlog` VALUES ('11', '2系列生化池', '3号生化池PH', '过高', '2011-11-21 12:57:49', '9999', null, null);
+INSERT INTO `errorlog` VALUES ('12', '2系列生化池', '3号生化池PH', '过高', '2011-11-21 13:04:38', '111', null, null);
+INSERT INTO `errorlog` VALUES ('13', '2系列生化池', '3号生化池水量', '过低', '2011-11-21 13:04:38', '1', null, null);
+INSERT INTO `errorlog` VALUES ('14', '2系列生化池', '3号生化池PH', '过低', '2011-11-21 13:08:01', '1', null, null);
+INSERT INTO `errorlog` VALUES ('15', '2系列生化池', '3号生化池COD', '过高', '2011-11-21 13:08:01', '1', null, null);
+INSERT INTO `errorlog` VALUES ('16', '2系列生化池', '3号生化池碱度', '过低', '2011-11-21 13:08:01', '1', null, null);
+INSERT INTO `errorlog` VALUES ('17', '2系列生化池', '3号生化池PH', '过高', '2011-11-21 13:14:12', '111', null, null);
+INSERT INTO `errorlog` VALUES ('18', '2系列生化池', '3号生化池COD', '过高', '2011-11-21 13:14:12', '1', null, null);
+INSERT INTO `errorlog` VALUES ('19', '2系列生化池', '3号生化池碱度', '过低', '2011-11-21 13:14:12', '1', null, null);
+INSERT INTO `errorlog` VALUES ('20', '2系列生化池', '3号生化池PH', '过低', '2011-11-27 15:04:02', '2', '中和站控制不好;', '增加测试PH频次，向车间工艺工程师汇报;');
+INSERT INTO `errorlog` VALUES ('21', '2系列生化池', '3号生化池PH', '过高', '2011-11-27 15:06:13', '111', '中和站控制不好;', '增加测试PH频次，向车间工艺工程师汇报;');
+INSERT INTO `errorlog` VALUES ('22', '2系列生化池', '3号生化池PH', '过高', '2011-11-27 15:10:07', '22', '中和站控制不好;', '增加测试PH频次，向车间工艺工程师汇报;');
+
+-- ----------------------------
+-- Table structure for `exceldata`
+-- ----------------------------
+DROP TABLE IF EXISTS `exceldata`;
+CREATE TABLE `exceldata` (
+  `id` varchar(36) NOT NULL,
+  `name` varchar(36) DEFAULT NULL,
+  `value` varchar(64) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of exceldata
+-- ----------------------------
+INSERT INTO `exceldata` VALUES ('FINAL.COD', '出口水质.COD', '71');
+INSERT INTO `exceldata` VALUES ('FINAL.NH3-N', '出口水质.NH3-N', '0');
+INSERT INTO `exceldata` VALUES ('FINAL.PH', '出口水质.PH', '6');
+INSERT INTO `exceldata` VALUES ('FINAL.SS', '出口水质.SS', '29');
+INSERT INTO `exceldata` VALUES ('w1.COD', '染料厂酸水.COD', '500.0');
+INSERT INTO `exceldata` VALUES ('w1.Q', '染料厂酸水.流量', '531.0');
+INSERT INTO `exceldata` VALUES ('w10.COD', '铁运489沉淀池出水.COD', '924.0');
+INSERT INTO `exceldata` VALUES ('w10.Q', '铁运489沉淀池出水.流量', '1.0');
+INSERT INTO `exceldata` VALUES ('w11.Q', '含氮废水.流量', '100.0');
+INSERT INTO `exceldata` VALUES ('w12.Q', '103厂碱水.流量', '0.0');
+INSERT INTO `exceldata` VALUES ('w13.COD', '化肥厂丁辛醇废水.COD', '2510.0');
+INSERT INTO `exceldata` VALUES ('w13.Q', '化肥厂丁辛醇废水.流量', '95.0');
+INSERT INTO `exceldata` VALUES ('w14.COD', '丙烯腈厂废水.COD', '212.0');
+INSERT INTO `exceldata` VALUES ('w14.Q', '丙烯腈厂废水.流量', '200.0');
+INSERT INTO `exceldata` VALUES ('w15.COD', '合成树脂厂废水.COD', '492.5');
+INSERT INTO `exceldata` VALUES ('w15.Q', '合成树脂厂废水.流量', '190.0');
+INSERT INTO `exceldata` VALUES ('w16.Q', '龙潭区生活污水.流量', '1342.0');
+INSERT INTO `exceldata` VALUES ('w2.COD', '电石厂酸水.COD', '1735.0');
+INSERT INTO `exceldata` VALUES ('w2.Q', '电石厂酸水.流量', '206.0');
+INSERT INTO `exceldata` VALUES ('w3.COD', '电石厂有机废水.COD', '1595.0');
+INSERT INTO `exceldata` VALUES ('w3.Q', '电石厂有机废水.流量', '155.0');
+INSERT INTO `exceldata` VALUES ('w4.COD', '有机合成厂有机废水.COD', '366.0');
+INSERT INTO `exceldata` VALUES ('w4.Q', '有机合成厂有机废水.流量', '646.0');
+INSERT INTO `exceldata` VALUES ('w5.COD', '炼油厂有机废水.COD', '260.5');
+INSERT INTO `exceldata` VALUES ('w5.Q', '炼油厂有机废水.流量', '1010.0');
+INSERT INTO `exceldata` VALUES ('w6.COD', '精细化学品厂废水.COD', '622.5');
+INSERT INTO `exceldata` VALUES ('w6.Q', '精细化学品厂废水.流量', '71.0');
+INSERT INTO `exceldata` VALUES ('w7.COD', '乙二醇废水.COD', '532');
+INSERT INTO `exceldata` VALUES ('w7.Q', '乙二醇废水.流量', '40.0');
+INSERT INTO `exceldata` VALUES ('w8.COD', '环氧乙烷废水.COD', '195');
+INSERT INTO `exceldata` VALUES ('w8.Q', '环氧乙烷废水.流量', '50.0');
+INSERT INTO `exceldata` VALUES ('w9.COD', '农药厂废水.COD', '0.0');
+INSERT INTO `exceldata` VALUES ('w9.Q', '农药厂废水.流量', '0.0');
+INSERT INTO `exceldata` VALUES ('ws.COD', '2系列生化池.3号生化池COD', '22');
+INSERT INTO `exceldata` VALUES ('WW14A.COD', '14#A.COD', '582');
+INSERT INTO `exceldata` VALUES ('WW14A.NH3-N', '14#A.NH3-N', '10');
+INSERT INTO `exceldata` VALUES ('WW14A.PH', '14#A.PH', '7');
+INSERT INTO `exceldata` VALUES ('WW14A.Q', '14#A.流量', '3795.0');
+INSERT INTO `exceldata` VALUES ('WW14A.SS', '14#A.SS', '179');
+INSERT INTO `exceldata` VALUES ('WW14B.COD', '14#B.COD', '257');
+INSERT INTO `exceldata` VALUES ('WW14B.NH3-N', '14#B.NH3-N', '33');
+INSERT INTO `exceldata` VALUES ('WW14B.PH', '14#B.PH', '7');
+INSERT INTO `exceldata` VALUES ('WW14B.Q', '14#B.流量', '1442.0');
+INSERT INTO `exceldata` VALUES ('WW14B.SS', '14#B.SS', '175');
 
 -- ----------------------------
 -- Table structure for `forward`
@@ -791,7 +882,9 @@ CREATE TABLE `pre_dss` (
   `value` varchar(64) DEFAULT NULL,
   `simu_time` varchar(20) NOT NULL,
   `seqno` varchar(20) NOT NULL,
-  PRIMARY KEY (`seqno`,`simu_time`,`name`)
+  `id` int(11) NOT NULL,
+  PRIMARY KEY (`seqno`,`simu_time`,`name`),
+  KEY `FK5036F6089A42C930` (`name`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- ----------------------------
