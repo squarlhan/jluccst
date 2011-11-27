@@ -105,6 +105,7 @@ public class DcsdataService {
 				br.setNouns(db.getName());
 				br.setVerb("过高");
 				br.setMemo(db.getEque());
+				err = new Errorlog();	
 				err.setLevel("过高");
 				errorlogImpl.save(err);
 			}

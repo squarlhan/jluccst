@@ -41,7 +41,7 @@
 	<br>
 	<div id="login">
 		<s:form action="ruleaction">
-			<table width="500" align="center" style="margin-left: 30">
+			<table width="500" align="center" >
 					<td>故障设备现象：
 					    <s:doubleselect  name = "result.nouns" list="#session.map.keySet()"  
 					    doubleName="result.verb" doubleList="#session.map[top]" ></s:doubleselect>
