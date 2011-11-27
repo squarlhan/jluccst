@@ -88,7 +88,11 @@
 		
 		<action name="errorlogaction" class="errorlogAction">
 			<result name="OK">usererrorlist.jsp</result>
-		</action> 
+		</action>
+		
+		<action name="dsshistoryaction" class="dsshistoryAction">
+			<result name="OK">useradvicelist.jsp</result>
+		</action>
 		
 	</package>
 

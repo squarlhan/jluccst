@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 
 
+import cn.edu.jlu.ccst.model.Dcshistory;
 import cn.edu.jlu.ccst.model.Dss_history;
 import cn.edu.jlu.ccst.model.Pre_dss;
 import cn.edu.jlu.ccst.model.User;
@@ -32,6 +33,10 @@ public class Dss_historyServiceImpl implements Dss_historyServiceInter  {
 	}
     
     
+    public List<Dss_history> findAll(){
+    	Query query = getEntityManager().createQuery("select d FROM Dss_history d");
+		return query.getResultList();
+    }
    
     
     public void save(Dss_history dss_history) {

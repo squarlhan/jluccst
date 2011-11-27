@@ -13,8 +13,9 @@ import org.springframework.stereotype.Component;
 import cn.edu.jlu.ccst.dao.Dss_historyServiceImpl;
 import cn.edu.jlu.ccst.dao.Dss_historyServiceInter;
 import cn.edu.jlu.ccst.model.Dss_history;
+import cn.edu.jlu.ccst.model.Errorlog;
 
-@Component("dss_adviceService")
+@Component("dss_historyService")
 public class Dss_historyService {
 	private Dss_history dss_history;
 	private Dss_historyServiceInter dss_historyServiceImpl;
@@ -70,7 +71,11 @@ public class Dss_historyService {
 	}
 	
 	
-	
+	public List<Dss_history> findAll() {
+		List<Dss_history> resultlist = new ArrayList();
+		resultlist = dss_historyServiceImpl.findAll();
+		return resultlist;
+	}
 	
 	
 	

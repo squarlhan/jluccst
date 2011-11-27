@@ -13,7 +13,7 @@ import javax.persistence.PrimaryKeyJoinColumn;
 import org.springframework.stereotype.Component;
 
 @Entity
-@Component("dss_advice")
+@Component("dss_history")
 public class Dss_history implements Serializable{
 
 	/**
