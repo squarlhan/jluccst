@@ -171,8 +171,8 @@ public class DcsdataAction extends ActionSupport {
 		backwardandResult = new ArrayList();
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		String mytime = formatter.format(new Date());
-		System.out.println(dcsdatalist.get(23).getItem());
-		list1 = dcsdataService.findbyequipment(dcsdatalist.get(23)
+		System.out.println(dcsdatalist.get(0).getItem());
+		list1 = dcsdataService.findbyequipment(dcsdatalist.get(0)
 				.getEquipment());
 		for (Dcsdata dc : list1) {
 			dcsdataService.delete(dc);

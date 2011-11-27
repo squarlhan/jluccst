@@ -47,7 +47,7 @@
 							  <li class="Closed">点源处理
 							    <ul>
 							      
-							       <li class="Child">电石厂有机水</li>
+							       <li class="Child"><a href="/diagnosis/datadianshichang.jsp">电石厂有机水</a></li>
 							       <li class="Child">有机合成厂有机水</li>
 							       <li class="Child">炼油厂有机水</li>
 							       <li class="Child">精细化工厂废水</li>
@@ -110,8 +110,8 @@
 										<li class="Child">3系列二沉池</li>
 										<li class="Child">4系列二沉池</li>
 										<li class="Child">接触氧化池</li>
-										<li class="Child">3系列排江出口线</li>
-										<li class="Child">1、2、4系列排江出口线</li>
+										<li class="Child"><a href="/diagnosis/datapaijiangxian1.jsp">3系列排江出口线</a></li>
+										<li class="Child"><a href="/diagnosis/datapaijiangxian2.jsp">1、2、4系列排江出口线</a></li>
 									</ul>
 								</li>
 								
