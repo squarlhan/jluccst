@@ -25,7 +25,7 @@ public class Dss_advice implements Serializable{
 	private int id;
 	@OneToOne(cascade={CascadeType.ALL})
 	@JoinColumn(name="name")
-	private ExcelData name;
+	private InitData name;
 
 	private Double value;
 	private String seqno;
@@ -37,7 +37,7 @@ public class Dss_advice implements Serializable{
 		super();
 		
 	}
-	public Dss_advice(int id, ExcelData name,  Double value, String seqno, String level,String simu_time,String error,String sugg) {
+	public Dss_advice(int id, InitData name,  Double value, String seqno, String level,String simu_time,String error,String sugg) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -89,10 +89,10 @@ public class Dss_advice implements Serializable{
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-	public ExcelData getName() {
+	public InitData getName() {
 		return name;
 	}
-	public void setName(ExcelData name) {
+	public void setName(InitData name) {
 		this.name = name;
 	}
 	public String getSimu_time() {
