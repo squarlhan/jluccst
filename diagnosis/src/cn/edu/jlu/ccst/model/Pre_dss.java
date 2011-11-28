@@ -25,7 +25,7 @@ public class Pre_dss implements Serializable{
 	private int id;
 	@OneToOne(cascade={CascadeType.ALL})
 	@JoinColumn(name="name")
-	private InitData name;
+	private Init_Predict name;
 	private String simu_time;
 	private String seqno;
 	private Double value;
@@ -33,7 +33,7 @@ public class Pre_dss implements Serializable{
 		super();
 		
 	}
-	public Pre_dss(int id,InitData name, String simu_time, String seqno, Double value) {
+	public Pre_dss(int id,Init_Predict name, String simu_time, String seqno, Double value) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -50,11 +50,11 @@ public class Pre_dss implements Serializable{
 	public void setId(int id) {
 		this.id = id;
 	}
-	public InitData getName() {
+	public Init_Predict getName() {
 		return name;
 	}
 	
-	public void setName(InitData name) {
+	public void setName(Init_Predict name) {
 		this.name = name;
 	}
 	public String getSimu_time() {

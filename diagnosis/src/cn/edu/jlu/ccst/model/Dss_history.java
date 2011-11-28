@@ -25,7 +25,7 @@ public class Dss_history implements Serializable{
 	private int id;
 	@OneToOne(cascade={CascadeType.ALL})
 	@JoinColumn(name="name")
-	private InitData name;
+	private Init_Predict name;
 
 	private Double value;
 	private String seqno;
@@ -37,7 +37,7 @@ public class Dss_history implements Serializable{
 		super();
 		
 	}
-	public Dss_history(int id, InitData name,  Double value, String seqno, String level,String simu_time,String error,String sugg) {
+	public Dss_history(int id, Init_Predict name,  Double value, String seqno, String level,String simu_time,String error,String sugg) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -89,10 +89,10 @@ public class Dss_history implements Serializable{
 	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
-	public InitData getName() {
+	public Init_Predict getName() {
 		return name;
 	}
-	public void setName(InitData name) {
+	public void setName(Init_Predict name) {
 		this.name = name;
 	}
 	public String getSimu_time() {

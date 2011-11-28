@@ -48,13 +48,14 @@
 							    <ul>
 							      
 							       <li class="Child"><a href="/diagnosis/datadianshichang.jsp">电石厂有机水</a></li>
+							       <li class="Child">电石厂有机水</li>
 							       <li class="Child">有机合成厂有机水</li>
 							       <li class="Child">炼油厂有机水</li>
 							       <li class="Child">精细化工厂废水</li>
 							       <li class="Child">乙二醇废水</li>
 							       <li class="Child">环氧乙烷废水</li>
-							       <li class="Child">农药厂有机水</li>
 							      
+							       <li class="Child">农药厂有机水</li>
 							       <li class="Child">含氮废水</li>
 							       <li class="Child">103厂碱水</li>
 							       <li class="Child">化肥厂丁辛醇</li>
@@ -73,8 +74,8 @@
 							  </li>
 							  <li class="Closed">预处理
 							   <ul>
-							    <li class="Child">14A生活水</li>
-							   <li class="Child">14B生活水</li>
+							    <li class="Child">14a</li>
+							   <li class="Child">14b</li>
 							    </ul>
 							  </li>
 							  <li class="Closed">污泥处理
@@ -85,8 +86,8 @@
 							       <li class="Child">除色池(414)</li>
 							       <li class="Child">沉沙刮沙池(488)</li>
 							       <li class="Child">初沉池(489B)</li>
-							       
-							      
+							       <li class="Child">事故池(489)</li>
+							       <li class="Child">14B生活水</li>
 							       <li class="Child">老水解酸化池</li>
 							       <li class="Child">新水解酸化池</li>
 							      
@@ -97,9 +98,9 @@
 							  </li>
 								<li class="Closed">生化处理
 									<ul>
-										 <li class="Child">1、2系列(465)回流泵房</li>
-								         <li class="Child">3系列(465A)回流泵房</li>
-								         <li class="Child">4系列(465B)回流泵房</li>
+										 <li class="Child">1、2系列465回流泵房</li>
+								         <li class="Child">3系列465A回流泵房</li>
+								         <li class="Child">3系列465B回流泵房</li>
 										 <li class="Child">中间提升泵房(462B)</li>
 										 <li class="Child"><a href="/diagnosis/biocpool490/biocpool1.jsp">生化池系列1</a></li>	
 									     <li class="Child"><a href="/diagnosis/biocpool490/biocpool2.jsp">生化池系列2</a></li>

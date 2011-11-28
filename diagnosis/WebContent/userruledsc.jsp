@@ -125,56 +125,64 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           <td width="25%" >控制结点：
              
              <select name="resultn1" size="1" style="width:150px">
+              <option>电石厂有机水 </option>
+              <option>有机合成厂有机水 </option>
+               <option>炼油厂有机水 </option>
+               <option>精细化工厂废水 </option>
+               <option>乙二醇废水 </option>
+               <option>环氧乙烷废水 </option>
+               <option>农药厂有机水 </option>
+               <option>含氮废水 </option>
+              <option>103厂碱水 </option>
+              <option>化肥厂丁辛醇 </option>
+             <option>丙烯腈废水 </option>
+             <option>合成树脂厂有机水</option> 
+             <option>龙潭区生活水 </option>
+             
              <option> 染料厂酸水  </option>
              <option>电石厂酸水 </option>
-             <option>电石厂有机水 </option>
-             <option>有机合成厂有机水 </option>
-             <option>炼油厂有机水 </option>
-             <option>精细化工厂废水 </option>
-             <option>乙二醇废水 </option>
-             <option>环氧乙烷废水 </option>
-             <option>农药厂有机水 </option>
-           <option>铁运489沉淀池出水 </option>
-           <option>含氮废水 </option>
-           <option>103厂碱水 </option>
-          <option>化肥厂丁辛醇 </option>
-         <option>丙烯腈废水 </option>
-        <option>合成树脂厂有机水</option> 
-        <option>龙潭区生活水 </option>
+            <option>铁运489沉淀池出水 </option>
+          
+            <option>14a </option>
+            <option>14b</option> 
+          
         
 	         <option>稳流池(477)进水 </option>
-                  <option> 进水提升泵房(462A)</option> 
-                                <option>巴氏计量槽（499） </option>
-                                <option> 除色池(414) </option>
-                           <option>沉沙刮沙池(488) </option>
-                               <option>初沉池(489B) </option>
-                      
-              <option>14B生活水 </option>
+             <option> 进水提升泵房(462A)</option> 
+             <option>巴氏计量槽（499） </option>
+            <option> 除色池(414) </option>
+            <option>沉沙刮沙池(488) </option>
+            <option>事故池(489) </option>
+             <option>初沉池(489B) </option>
+             <option>14B生活水 </option>
             <option>老水解酸化池 </option>
            <option>新水解酸化池 </option>
-	      
+	         <option>污泥泵房(466) </option>
+	         <option>浓缩池(491) </option>
+            <option>脱水装置(495) </option>
+
+
          <option>中间提升泵房(462B)</option>
        <option>  生化池系列1 (1号生化池) </option>
        <option>  生化池系列1 (2号生化池) </option>
-<option>生化池系列2 (3号生化池)</option>
-<option>生化池系列2 (4号生化池)</option>
-<option>  生化池系列3 (5号生化池) </option>
+       <option>生化池系列2 (3号生化池)</option>
+       <option>生化池系列2 (4号生化池)</option>
+       <option>  生化池系列3 (5号生化池) </option>
        <option>  生化池系列3 (6号生化池) </option>
-<option>生化池系列4 (7号生化池)</option>
-<option>生化池系列4 (8号生化池)</option>
-<option>1系列二沉池 </option>
-<option>2系列二沉池 </option>
-<option>3系列二沉池 </option>
-<option>4系列二沉池 </option>
-<option>接触氧化池 </option>
-<option>3系列排江出口线 </option>
-<option>1、2、4系列排江出口线</option>
-<option>1系列(465)回流泵房 </option>
-<option>2系列(465A)回流泵房 </option>
-<option>3系列(465B)回流泵房 </option>
-<option>污泥泵房(466) </option>
-<option>浓缩池(491) </option>
-<option>脱水装置(495) </option>
+       <option>生化池系列4 (7号生化池)</option>
+      <option>生化池系列4 (8号生化池)</option>
+       <option>1系列二沉池 </option>
+         <option>2系列二沉池 </option>
+        <option>3系列二沉池 </option>
+        <option>4系列二沉池 </option>
+        <option>接触氧化池 </option>
+        <option>3系列排江出口线 </option>
+        <option>1、2、4系列排江出口线</option>
+        <option>1、2系列465回流泵房 </option>
+        <option>3系列465A回流泵房 </option>
+        <option>3系列465B回流泵房 </option>
+
+
 
 	         </select>
                </td>

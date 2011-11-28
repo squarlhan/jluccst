@@ -74,8 +74,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
      </s:iterator>
   </table>
    
-    <div align="center">
-      <input name="button" type=button onClick="window.location.href('dsshistoryaction.action')" value="故障日志">
-      </div>
+  <!--  <div align="center">
+      <input name="button" type=button onClick="window.location.href('dsshistoryaction.action')" value="完成返回">
+      </div>-->  
   </body>
 </html>

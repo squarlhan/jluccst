@@ -30,7 +30,7 @@ public class DssHistoryAction extends ActionSupport {
 	}
 
 
-
+	@Resource
 	public void setErrorlist(List<Dss_history> errorlist) {
 		this.errorlist = errorlist;
 	}
