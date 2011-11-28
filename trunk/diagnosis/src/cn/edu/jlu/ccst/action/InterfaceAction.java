@@ -13,6 +13,7 @@ import cn.edu.jlu.ccst.model.BackwardandReason;
 import cn.edu.jlu.ccst.model.BackwardandResult;
 import cn.edu.jlu.ccst.model.Dss_advice;
 import cn.edu.jlu.ccst.model.Dss_history;
+import cn.edu.jlu.ccst.model.Init_Predict;
 import cn.edu.jlu.ccst.model.Pre_dss;
 import cn.edu.jlu.ccst.service.DcsDscribService;
 import cn.edu.jlu.ccst.service.Dss_adviceService;
@@ -135,7 +136,7 @@ public class InterfaceAction extends ActionSupport {
 			reasonlist = ruleService.findreasons(backwardandResult);
 			System.out.println("seqno"+pre_dssService.findsimu_time());
 		    
-			if(!pre_dssService.findsimu_time().equals(dss_adviceService.findsimu_time())){
+		if(!pre_dssService.findsimu_time().equals(dss_adviceService.findsimu_time())){
 				dss_adviceService.deleteall();
 				for(Pre_dss pre:alldata){
 		           
@@ -156,12 +157,12 @@ public class InterfaceAction extends ActionSupport {
 		    			da.setSimu_time(pre.getSimu_time());
 		    			da.setSeqno(pre.getSeqno());
 		    			da.setError(reason.getNouns()+reason.getVerb());
-		    			da.setSugg(reason.getSugg());
+		    			da.setSugg("现象："+back.getNouns()+back.getVerb()+"   原因："+reason.getNouns()+reason.getVerb()+"  建议："+reason.getSugg());
 		    			dss_advice.add(da);
 		    			dss_adviceService.save(da);
 		    		  }
 					}
-				for(Pre_dss are:alldata){
+				/*for(Pre_dss are:alldata){
 				           
 						for(int i=0;i<a;i++){
 			              BackwardandResult   back=new BackwardandResult();
@@ -185,7 +186,7 @@ public class InterfaceAction extends ActionSupport {
 			    			dss_historyService.save(da);
 			    		  }
 			            }
-		    	}
+		    	}*/
 		    }
 		    
 			
@@ -193,6 +194,10 @@ public class InterfaceAction extends ActionSupport {
 		
 			return "go";
 	}else{
+		if(!pre_dssService.findsimu_time().equals(dss_adviceService.findsimu_time())){
+			Dss_advice zc = new Dss_advice();
+		 zc.setSugg("一切正常");
+		dss_adviceService.save(zc);}
 		return "OK";
 	}
 		}
