@@ -38,8 +38,8 @@
 		</action> 
 		
 		<action name="interfaceaction" class="interfaceAction">
-			<result name="go">usermonitor.jsp</result>
-			<result name="OK">usermonitorok.jsp</result>
+			<result name="go">userinterface.jsp</result>
+			<result name="OK">userinterfaceok.jsp</result>
 		</action> 
 	   
 		<action name="rulebraction" class="rulebrAction">

@@ -107,7 +107,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
  <s:form action="ruleaction!newAdd.action">
 <table    width="100%"  rules="rows" border="1" bordercolor="#000000" cellpadding="0" cellspacing="0">
     <tr >
-      <td height="54" colspan="2"><h2>规则描述界面</h2>
+      <td height="54" colspan="2"><h2>规则录入界面</h2>
        
        
        <tr>
@@ -141,18 +141,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
          <option>丙烯腈废水 </option>
         <option>合成树脂厂有机水</option> 
         <option>龙潭区生活水 </option>
-          <option>中部基地有机水 </option>
+        
 	         <option>稳流池(477)进水 </option>
                   <option> 进水提升泵房(462A)</option> 
                                 <option>巴氏计量槽（499） </option>
                                 <option> 除色池(414) </option>
                            <option>沉沙刮沙池(488) </option>
                                <option>初沉池(489B) </option>
-                        <option>事故池(489) </option>
+                      
               <option>14B生活水 </option>
-            <option>1#水解酸化池 </option>
-           <option>1#水解酸化池 </option>
-	        <option>  中间提升泵房(462) </option>
+            <option>老水解酸化池 </option>
+           <option>新水解酸化池 </option>
+	      
          <option>中间提升泵房(462B)</option>
        <option>  生化池系列1 (1号生化池) </option>
        <option>  生化池系列1 (2号生化池) </option>
@@ -167,15 +167,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <option>3系列二沉池 </option>
 <option>4系列二沉池 </option>
 <option>接触氧化池 </option>
-<option>2系列排江出口线 </option>
-<option>1、3系列排江出口线</option>
+<option>3系列排江出口线 </option>
+<option>1、2、4系列排江出口线</option>
 <option>1系列(465)回流泵房 </option>
 <option>2系列(465A)回流泵房 </option>
 <option>3系列(465B)回流泵房 </option>
-<option>污泥池(V466) </option>
+<option>污泥泵房(466) </option>
 <option>浓缩池(491) </option>
 <option>脱水装置(495) </option>
-<option>w1 </option>
+
 	         </select>
                </td>
           
@@ -197,7 +197,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               
              
           </td>
-          <td width="25%" >智能诊断：
+          <td width="25%" >参数状态：
            <select name="resultv_value" style="width:150px">
                 <option value="0">高于最高值</option>
                 <option value="1">低于最低值</option>
@@ -230,7 +230,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </tr>
     <tr>
       <td  height="33" colspan="2"><div align="center">
-        <input name="Input22" type="submit" value="新建" />
+        <input name="Input22" type="submit" value="录入" />
         <input name="Input22" type="submit" value="取消" />
       </div></td>
     </tr>

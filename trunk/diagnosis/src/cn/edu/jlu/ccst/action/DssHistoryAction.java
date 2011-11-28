@@ -40,7 +40,7 @@ public class DssHistoryAction extends ActionSupport {
 	}
 
 
-
+  @Resource
 	public void setDss_historyService(Dss_historyService dss_historyService) {
 		this.dss_historyService = dss_historyService;
 	}

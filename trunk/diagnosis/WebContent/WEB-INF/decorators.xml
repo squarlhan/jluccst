@@ -11,7 +11,8 @@
 		<pattern>/monitor*</pattern>
 		<pattern>/interface*</pattern>
 		<pattern>/error*</pattern>
-		
+		<pattern>/bioc*</pattern>
+			<pattern>/dss*</pattern>
 	</decorator>
 	<decorator name="userlogin" page="logindecorator.jsp">
 		<pattern>/userlogin.jsp</pattern>
