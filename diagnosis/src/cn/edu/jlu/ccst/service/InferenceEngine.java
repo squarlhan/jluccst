@@ -6,6 +6,8 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.Resource;
+
 import org.springframework.stereotype.Component;
 
 import cn.edu.jlu.ccst.model.Backward;
@@ -22,7 +24,7 @@ public class InferenceEngine {
 	public List<BackwardandReason> getEnding() {
 		return ending;
 	}
-
+	@Resource
 	public void setEnding(List<BackwardandReason> ending) {
 		this.ending = ending;
 	}
@@ -30,7 +32,7 @@ public class InferenceEngine {
 	public List<BackwardandResult> getEnter() {
 		return enter;
 	}
-
+	@Resource
 	public void setEnter(List<BackwardandResult> enter) {
 		this.enter = enter;
 	}
@@ -38,7 +40,7 @@ public class InferenceEngine {
 	public List<BackwardandReason> getProcess() {
 		return process;
 	}
-
+	@Resource
 	public void setProcess(List<BackwardandReason> process) {
 		this.process = process;
 	}
@@ -46,7 +48,7 @@ public class InferenceEngine {
 	public List<Backward> getBackwardrule() {
 		return backwardrule;
 	}
-
+	@Resource
 	public void setBackwardrule(List<Backward> backwardrule) {
 		this.backwardrule = backwardrule;
 	}

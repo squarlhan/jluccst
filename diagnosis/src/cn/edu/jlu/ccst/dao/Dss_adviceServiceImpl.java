@@ -39,7 +39,7 @@ public class Dss_adviceServiceImpl implements Dss_adviceServiceInter  {
 		return query.getResultList();
     }
     public void deleteall(){
-    	getEntityManager().createQuery("delete Dss_advice");
+    	getEntityManager().createQuery("delete Dss_advice").executeUpdate();
 //    	List<Dss_advice> all = findAll();
 //    	Iterator it = all.iterator();
 //    	while(it.hasNext()){
