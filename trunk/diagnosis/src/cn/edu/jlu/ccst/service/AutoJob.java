@@ -101,9 +101,22 @@ public class AutoJob {
 		dss_adviceService.deleteall();
 		boolean flag = true;
 		for (Pre_dss predss : alldata) {
-			if (predss.getName() != null) {
+			if (predss.getName().getName() != null) {
 				String temp = predss.getName().getName().replace('.', ',');
 				String[] strArray = temp.split(",");
+				String level = "0";
+				if (predss.getName().getName().contains("COD")) {
+					level = "4";
+				}
+				if (predss.getName().getName().contains("NH3-N")) {
+					level = "3";
+				}
+				if (predss.getName().getName().contains("SS")) {
+					level = "2";
+				}
+				if (predss.getName().getName().contains("BOD")) {
+					level = "1";
+				}
 
 				List<DcsDscrib> dcsDscribs = dcsDscribServiceImpl.findbyname(
 						strArray[0], strArray[1]);
@@ -113,10 +126,10 @@ public class AutoJob {
 					BackwardandResult br = new BackwardandResult();
 					br.setNouns(db.getName());
 					br.setMemo(db.getEque());
-					if (predss.getValue() > db.getUpper()) {
+					if (Double.parseDouble(predss.getValue()) > db.getUpper()) {
 						br.setVerb("过高");
 					}
-					if (predss.getValue() < db.getLower()) {
+					if (Double.parseDouble(predss.getValue()) < db.getLower()) {
 						br.setVerb("过低");
 					}
 
@@ -124,44 +137,47 @@ public class AutoJob {
 					// qianjian.add(br);
 					// List<BackwardandReason> houjian =
 					// ruleService.findreasons(qianjian);
-					List<BackwardandReason> houjian = backwardandResultService
-							.findbyresult(br);
-					Dss_advice da = new Dss_advice();
-					Dss_history dh = new Dss_history();
-					da.setLevel(br.getVerb());
-					da.setName(predss.getName());
-					da.setSeqno(predss.getSeqno());
-					da.setSimu_time(predss.getSimu_time());
-					da.setValue(predss.getValue());
-					dh.setLevel(br.getVerb());
-					dh.setName(predss.getName());
-					dh.setSeqno(predss.getSeqno());
-					dh.setSimu_time(predss.getSimu_time());
-					dh.setValue(predss.getValue());
-					String error = "";
-					String sugg = "";
-					for (BackwardandReason hj : houjian) {
-						error = error + hj.getNouns() + hj.getVerb() + ";";
-						sugg = sugg + hj.getSugg() + ";";
+					if (br.getVerb() != null) {
+						List<BackwardandReason> houjian = backwardandResultService
+								.findbyresult(br);
+						Dss_advice da = new Dss_advice();
+						Dss_history dh = new Dss_history();
+						da.setLevel(level);
+						da.setName(predss.getName());
+						da.setSeqno(predss.getSeqno());
+						da.setSimu_time(predss.getSimu_time());
+						da.setValue(Double.parseDouble(predss.getValue()));
+						dh.setLevel(level);
+						dh.setName(predss.getName());
+						dh.setSeqno(predss.getSeqno());
+						dh.setSimu_time(predss.getSimu_time());
+						dh.setValue(Double.parseDouble(predss.getValue()));
+						String error = "";
+						String sugg = "";
+						for (BackwardandReason hj : houjian) {
+							error = error + hj.getNouns() + hj.getVerb() + ";";
+							sugg = sugg + hj.getSugg() + ";";
+						}
+						da.setError(error);
+						da.setSugg(sugg);
+						dh.setError(error);
+						dh.setSugg(sugg);
+						dss_adviceService.save(da);
+						dss_historyService.save(dh);
 					}
-					da.setError(error);
-					da.setSugg(sugg);
-					dh.setError(error);
-					dh.setSugg(sugg);
-					dss_adviceService.save(da);
-					dss_historyService.save(dh);
+
 				}
-
 			}
 
-			if (flag) {
-				Dss_advice da = new Dss_advice();
-				Dss_history dh = new Dss_history();
-				da.setSugg("一切正常");
-				dh.setSugg("一切正常");
-				dss_adviceService.save(da);
-				dss_historyService.save(dh);
-			}
+			
+		}
+		if (flag) {
+			Dss_advice da = new Dss_advice();
+			Dss_history dh = new Dss_history();
+			da.setSugg("一切正常");
+			dh.setSugg("一切正常");
+			dss_adviceService.save(da);
+			dss_historyService.save(dh);
 		}
 	}
 

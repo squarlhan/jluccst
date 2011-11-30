@@ -29,12 +29,12 @@ public class Pre_dss implements Serializable{
 	private Init_Predict name;
 	private String simu_time;
 	private String seqno;
-	private Double value;
+	private String value;
 	public Pre_dss() { 
 		super();
 		
 	}
-	public Pre_dss(int id,Init_Predict name, String simu_time, String seqno, Double value) {
+	public Pre_dss(int id,Init_Predict name, String simu_time, String seqno, String value) {
 		super();
 		this.id = id;
 		this.name = name;
@@ -70,10 +70,10 @@ public class Pre_dss implements Serializable{
 	public void setSeqno(String seqno) {
 		this.seqno = seqno;
 	}
-	public Double getValue() {
+	public String getValue() {
 		return value;
 	}
-	public void setValue(Double value) {
+	public void setValue(String value) {
 		this.value = value;
 	}
 

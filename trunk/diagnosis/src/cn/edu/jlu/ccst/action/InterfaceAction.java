@@ -146,7 +146,7 @@ public class InterfaceAction extends ActionSupport {
 				dss_adviceService.deleteall();
 				for (Pre_dss pre : alldata) {
 
-					if (pre.getName() != null) {
+					if (pre.getName().getName() != null) {
 
 						for (int i = 0; i < a; i++) {
 							BackwardandResult back = new BackwardandResult();
@@ -164,7 +164,7 @@ public class InterfaceAction extends ActionSupport {
 								System.out.println(pre.getName() + "nihao");
 								Dss_advice da = new Dss_advice();
 								da.setName(pre.getName());
-								da.setValue(pre.getValue());
+								da.setValue(Double.parseDouble(pre.getValue()));
 								da.setSimu_time(pre.getSimu_time());
 								da.setSeqno(pre.getSeqno());
 								da.setError(reason.getNouns()
