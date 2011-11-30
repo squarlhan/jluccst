@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 @Component("init_predict")
 public class Init_Predict {
 	@Id
-	private String pid;
+	private String id;
 	private String name;
 
 	public String getName() {
@@ -18,16 +18,16 @@ public class Init_Predict {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public Init_Predict(String pid, String name) {
+	public Init_Predict(String id, String name) {
 		super();
-		this.pid = pid;
+		this.id = id;
 		this.name = name;
 	}
-	public String getPid() {
-		return pid;
+	public String getId() {
+		return id;
 	}
-	public void setPid(String pid) {
-		this.pid = pid;
+	public void setId(String id) {
+		this.id = id;
 	}
 	public Init_Predict() {
 		super();

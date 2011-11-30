@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : aa
-Source Server Version : 50516
+Source Server         : local
+Source Server Version : 50157
 Source Host           : localhost:3306
 Source Database       : wushuichang
 
 Target Server Type    : MYSQL
-Target Server Version : 50516
+Target Server Version : 50157
 File Encoding         : 65001
 
-Date: 2011-11-29 20:48:45
+Date: 2011-11-30 23:59:40
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -46,7 +46,7 @@ CREATE TABLE `backward` (
   `count` int(10) NOT NULL DEFAULT '0',
   `priror` int(10) NOT NULL DEFAULT '0',
   PRIMARY KEY (`bid`)
-) ENGINE=InnoDB AUTO_INCREMENT=138 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=139 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of backward
@@ -166,6 +166,7 @@ INSERT INTO `backward` VALUES ('134', '', '', '0', '0');
 INSERT INTO `backward` VALUES ('135', '', '', '0', '0');
 INSERT INTO `backward` VALUES ('136', '', '', '0', '0');
 INSERT INTO `backward` VALUES ('137', '', '', '0', '0');
+INSERT INTO `backward` VALUES ('138', 'han', 'han', '0', '0');
 
 -- ----------------------------
 -- Table structure for `backwardandlower`
@@ -199,7 +200,7 @@ CREATE TABLE `backwardandreason` (
   PRIMARY KEY (`id`),
   KEY `FKFBA61E58DB7478BC` (`bid`),
   CONSTRAINT `FKFBA61E58DB7478BC` FOREIGN KEY (`bid`) REFERENCES `backward` (`bid`)
-) ENGINE=InnoDB AUTO_INCREMENT=339 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=340 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 -- Records of backwardandreason
@@ -219,6 +220,7 @@ INSERT INTO `backwardandreason` VALUES ('335', '137', '酸水的流量', '0', '�
 INSERT INTO `backwardandreason` VALUES ('336', '137', '酸水的酸度', '0', '增加', '增加碱液投加量');
 INSERT INTO `backwardandreason` VALUES ('337', '137', '碱液管', '0', '堵塞', '及时清通，必要时短管清通');
 INSERT INTO `backwardandreason` VALUES ('338', '137', '仪表指示', '0', '不准', '用PH试纸实测');
+INSERT INTO `backwardandreason` VALUES ('339', '138', '生化池', '0', '低', '加大风力');
 
 -- ----------------------------
 -- Table structure for `backwardandresult`
@@ -234,7 +236,7 @@ CREATE TABLE `backwardandresult` (
   PRIMARY KEY (`id`),
   KEY `FKFBAE5431DB7478BC` (`bid`),
   CONSTRAINT `FKFBAE5431DB7478BC` FOREIGN KEY (`bid`) REFERENCES `backward` (`bid`)
-) ENGINE=InnoDB AUTO_INCREMENT=123 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=124 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 -- Records of backwardandresult
@@ -250,6 +252,7 @@ INSERT INTO `backwardandresult` VALUES ('119', '134', '生化池系列1 (1号生
 INSERT INTO `backwardandresult` VALUES ('120', '135', '生化池系列1 (2号生化池)PH', '0', '过高', null);
 INSERT INTO `backwardandresult` VALUES ('121', '136', '1、2、4系列排江出口线SS', '0', '过高', null);
 INSERT INTO `backwardandresult` VALUES ('122', '137', '生化池系列1 (1号生化池)PH', '0', '过高', null);
+INSERT INTO `backwardandresult` VALUES ('123', '138', '1、2、4系列排江出口线COD', '0', '过高', null);
 
 -- ----------------------------
 -- Table structure for `backwardandupper`
@@ -301,7 +304,7 @@ CREATE TABLE `dcsdscrib` (
   `name` varchar(255) DEFAULT NULL,
   `upper` double DEFAULT NULL,
   PRIMARY KEY (`did`)
-) ENGINE=InnoDB AUTO_INCREMENT=1400 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1401 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of dcsdscrib
@@ -355,6 +358,7 @@ INSERT INTO `dcsdscrib` VALUES ('1396', '1系列生化池', '2号生化池溶解
 INSERT INTO `dcsdscrib` VALUES ('1397', '1系列生化池', '2号生化池风量', '0', '生化池系列1 (2号生化池)风量', '50');
 INSERT INTO `dcsdscrib` VALUES ('1398', '1系列生化池', '2号生化池NO-N', '0', '生化池系列1 (2号生化池)NO-N', '0.5');
 INSERT INTO `dcsdscrib` VALUES ('1399', '1、2、4系列排江出口线', '出口SS', '0', '1、2、4系列排江出口线SS', '10');
+INSERT INTO `dcsdscrib` VALUES ('1400', '1、2、4系列排江出口线', '出口COD', '70', '1、2、4系列排江出口线COD', '120');
 
 -- ----------------------------
 -- Table structure for `dcshistory`
@@ -488,30 +492,15 @@ CREATE TABLE `dss_advice` (
   `simu_time` varchar(20) DEFAULT NULL,
   `seqno` varchar(20) DEFAULT NULL,
   `error` varchar(200) DEFAULT NULL,
-  `level` int(11) DEFAULT NULL,
+  `level` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `FK75158BF39A42C930` (`name`),
-  KEY `FK75158BF36D246B41` (`name`),
   KEY `FK75158BF323A4A4F1` (`name`)
-) ENGINE=MyISAM AUTO_INCREMENT=68 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=521 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of dss_advice
 -- ----------------------------
-INSERT INTO `dss_advice` VALUES ('64', null, null, '一切正常', null, null, null, null);
-INSERT INTO `dss_advice` VALUES ('65', null, null, '一切正常', null, null, null, null);
-INSERT INTO `dss_advice` VALUES ('66', 'w85.AIRA802', '12.0', '现象：1、2、4系列排江出口线SS过高   原因：二沉池水停留时间短  建议：增加二沉池污水停留时间', '1111.23', '20111124', '二沉池水停留时间短', null);
-INSERT INTO `dss_advice` VALUES ('67', 'w85.AIRA802', '12.0', '现象：1、2、4系列排江出口线SS过高   原因：中和处理不完全  建议：加强预处理', '1111.23', '20111124', '中和处理不完全', null);
-INSERT INTO `dss_advice` VALUES ('58', null, null, '一切正常', null, null, null, null);
-INSERT INTO `dss_advice` VALUES ('59', null, null, '一切正常', null, null, null, null);
-INSERT INTO `dss_advice` VALUES ('60', null, null, '一切正常', null, null, null, null);
-INSERT INTO `dss_advice` VALUES ('61', null, null, '一切正常', null, null, null, null);
-INSERT INTO `dss_advice` VALUES ('54', null, null, '一切正常', null, null, null, null);
-INSERT INTO `dss_advice` VALUES ('55', null, null, '一切正常', null, null, null, null);
-INSERT INTO `dss_advice` VALUES ('56', null, null, '一切正常', null, null, null, null);
-INSERT INTO `dss_advice` VALUES ('57', null, null, '一切正常', null, null, null, null);
-INSERT INTO `dss_advice` VALUES ('63', null, null, '一切正常', null, null, null, null);
-INSERT INTO `dss_advice` VALUES ('62', null, null, '一切正常', null, null, null, null);
+INSERT INTO `dss_advice` VALUES ('520', 'w85.AIRA802', '38.52968', '增加二沉池污水停留时间;加强预处理;', '          910.647778', '20080102125013', '二沉池水停留时间短;中和处理不完全;', '2');
 
 -- ----------------------------
 -- Table structure for `dss_history`
@@ -527,17 +516,465 @@ CREATE TABLE `dss_history` (
   `value` double DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `FKA84AB4F99A42C930` (`name`),
-  KEY `FKA84AB4F96D246B41` (`name`),
-  KEY `FKA84AB4F923A4A4F1` (`name`),
-  CONSTRAINT `FKA84AB4F923A4A4F1` FOREIGN KEY (`name`) REFERENCES `init_predict` (`Id`),
-  CONSTRAINT `FKA84AB4F96D246B41` FOREIGN KEY (`name`) REFERENCES `initdata` (`id`),
-  CONSTRAINT `FKA84AB4F99A42C930` FOREIGN KEY (`name`) REFERENCES `exceldata` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  KEY `FKA84AB4F923A4A4F1` (`name`)
+) ENGINE=MyISAM AUTO_INCREMENT=454 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of dss_history
 -- ----------------------------
+INSERT INTO `dss_history` VALUES ('1', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('2', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('3', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('4', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('5', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('6', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('7', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('8', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('9', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('10', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('11', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('12', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('13', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('14', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('15', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('16', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('17', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('18', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('19', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('20', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('21', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('22', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('23', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('24', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('25', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('26', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('27', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('28', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('29', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('30', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('31', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('32', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('33', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('34', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('35', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('36', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('37', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('38', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('39', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('40', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('41', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('42', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('43', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('44', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('45', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('46', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('47', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('48', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('49', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('50', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('51', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('52', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('53', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('54', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('55', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('56', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('57', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('58', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('59', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('60', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('61', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('62', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('63', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('64', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('65', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('66', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('67', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('68', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('69', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('70', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('71', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('72', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('73', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('74', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('75', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('76', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('77', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('78', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('79', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('80', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('81', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('82', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('83', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('84', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('85', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('86', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('87', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('88', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('89', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('90', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('91', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('92', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('93', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('94', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('95', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('96', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('97', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('98', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('99', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('100', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('101', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('102', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('103', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('104', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('105', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('106', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('107', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('108', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('109', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('110', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('111', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('112', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('113', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('114', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('115', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('116', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('117', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('118', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('119', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('120', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('121', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('122', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('123', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('124', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('125', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('126', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('127', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('128', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('129', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('130', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('131', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('132', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('133', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('134', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('135', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('136', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('137', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('138', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('139', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('140', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('141', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('142', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('143', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('144', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('145', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('146', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('147', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('148', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('149', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('150', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('151', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('152', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('153', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('154', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('155', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('156', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('157', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('158', '二沉池水停留时间短;中和处理不完全;', '2', '20111124', '1111.24', '增加二沉池污水停留时间;加强预处理;', '12', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('159', '生化池低;', '4', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('160', '二沉池水停留时间短;中和处理不完全;', '2', '20111124', '1111.24', '增加二沉池污水停留时间;加强预处理;', '12', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('161', '生化池低;', '4', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('162', '二沉池水停留时间短;中和处理不完全;', '2', '20111124', '1111.24', '增加二沉池污水停留时间;加强预处理;', '12', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('163', '生化池低;', '4', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('164', '二沉池水停留时间短;中和处理不完全;', '2', '20111124', '1111.24', '增加二沉池污水停留时间;加强预处理;', '12', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('165', '生化池低;', '4', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('166', '二沉池水停留时间短;中和处理不完全;', '2', '20111124', '1111.24', '增加二沉池污水停留时间;加强预处理;', '12', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('167', '生化池低;', '4', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('168', '二沉池水停留时间短;中和处理不完全;', '2', '20111124', '1111.24', '增加二沉池污水停留时间;加强预处理;', '12', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('169', '生化池低;', '4', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('170', '二沉池水停留时间短;中和处理不完全;', '2', '20111124', '1111.24', '增加二沉池污水停留时间;加强预处理;', '12', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('171', '生化池低;', '4', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('172', '二沉池水停留时间短;中和处理不完全;', '2', '20111124', '1111.24', '增加二沉池污水停留时间;加强预处理;', '12', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('173', '生化池低;', '4', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('174', '二沉池水停留时间短;中和处理不完全;', '2', '20111124', '1111.24', '增加二沉池污水停留时间;加强预处理;', '12', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('175', '生化池低;', '4', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('176', '二沉池水停留时间短;中和处理不完全;', '2', '20111124', '1111.24', '增加二沉池污水停留时间;加强预处理;', '12', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('177', '生化池低;', '4', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('178', '二沉池水停留时间短;中和处理不完全;', '2', '20111124', '1111.24', '增加二沉池污水停留时间;加强预处理;', '12', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('179', '生化池低;', '4', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('180', '二沉池水停留时间短;中和处理不完全;', '2', '20111124', '1111.24', '增加二沉池污水停留时间;加强预处理;', '12', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('181', '生化池低;', '4', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('182', '二沉池水停留时间短;中和处理不完全;', '2', '20111124', '1111.24', '增加二沉池污水停留时间;加强预处理;', '12', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('183', '生化池低;', '4', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('184', '二沉池水停留时间短;中和处理不完全;', '2', '20111124', '1111.24', '增加二沉池污水停留时间;加强预处理;', '12', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('185', '生化池低;', '4', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('186', '二沉池水停留时间短;中和处理不完全;', '2', '20111124', '1111.24', '增加二沉池污水停留时间;加强预处理;', '12', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('187', '生化池低;', '4', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('188', '二沉池水停留时间短;中和处理不完全;', '2', '20111124', '1111.24', '增加二沉池污水停留时间;加强预处理;', '12', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('189', '生化池低;', '4', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('190', '二沉池水停留时间短;中和处理不完全;', '2', '20111124', '1111.24', '增加二沉池污水停留时间;加强预处理;', '12', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('191', '生化池低;', '4', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('192', '二沉池水停留时间短;中和处理不完全;', '2', '20111124', '1111.24', '增加二沉池污水停留时间;加强预处理;', '12', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('193', '生化池低;', '4', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('194', '二沉池水停留时间短;中和处理不完全;', '2', '20111124', '1111.24', '增加二沉池污水停留时间;加强预处理;', '12', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('195', '生化池低;', '4', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('196', '二沉池水停留时间短;中和处理不完全;', '2', '20111124', '1111.24', '增加二沉池污水停留时间;加强预处理;', '12', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('197', '生化池低;', '4', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('198', '二沉池水停留时间短;中和处理不完全;', '2', '20111124', '1111.24', '增加二沉池污水停留时间;加强预处理;', '12', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('199', '生化池低;', '4', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('200', '二沉池水停留时间短;中和处理不完全;', '2', '20111124', '1111.24', '增加二沉池污水停留时间;加强预处理;', '12', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('201', '生化池低;', '4', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('202', '二沉池水停留时间短;中和处理不完全;', '2', '20111124', '1111.24', '增加二沉池污水停留时间;加强预处理;', '12', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('203', '生化池低;', '4', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('204', '二沉池水停留时间短;中和处理不完全;', '2', '20111124', '1111.24', '增加二沉池污水停留时间;加强预处理;', '12', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('205', '生化池低;', '4', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('206', '二沉池水停留时间短;中和处理不完全;', '2', '20111124', '1111.24', '增加二沉池污水停留时间;加强预处理;', '12', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('207', '生化池低;', '4', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('208', '二沉池水停留时间短;中和处理不完全;', '2', '20111124', '1111.24', '增加二沉池污水停留时间;加强预处理;', '12', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('209', '生化池低;', '4', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('210', '二沉池水停留时间短;中和处理不完全;', '2', '20111124', '1111.24', '增加二沉池污水停留时间;加强预处理;', '12', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('211', '生化池低;', '4', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('212', '二沉池水停留时间短;中和处理不完全;', '2', '20111124', '1111.24', '增加二沉池污水停留时间;加强预处理;', '12', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('213', '生化池低;', '4', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('214', '二沉池水停留时间短;中和处理不完全;', '2', '20111124', '1111.24', '增加二沉池污水停留时间;加强预处理;', '12', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('215', '生化池低;', '4', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('216', '二沉池水停留时间短;中和处理不完全;', '2', '20111124', '1111.24', '增加二沉池污水停留时间;加强预处理;', '12', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('217', '生化池低;', '4', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('218', '二沉池水停留时间短;中和处理不完全;', '2', '20111124', '1111.24', '增加二沉池污水停留时间;加强预处理;', '12', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('219', '生化池低;', '4', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('220', '二沉池水停留时间短;中和处理不完全;', '2', '20111124', '1111.24', '增加二沉池污水停留时间;加强预处理;', '12', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('221', '生化池低;', '4', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('222', '二沉池水停留时间短;中和处理不完全;', '2', '20111124', '1111.24', '增加二沉池污水停留时间;加强预处理;', '12', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('223', '生化池低;', '4', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('224', '二沉池水停留时间短;中和处理不完全;', '2', '20111124', '1111.24', '增加二沉池污水停留时间;加强预处理;', '12', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('225', '生化池低;', '4', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('226', '二沉池水停留时间短;中和处理不完全;', '2', '20111124', '1111.24', '增加二沉池污水停留时间;加强预处理;', '12', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('227', '生化池低;', '4', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('228', null, '0', '20080102125013', '          910.647778', null, '3.9344006e-005', 'w77.AIR202');
+INSERT INTO `dss_history` VALUES ('229', null, null, null, null, '一切正常', null, null);
+INSERT INTO `dss_history` VALUES ('230', null, '0', '20080102125013', '          910.647778', null, '3.9298677e-005', 'w78.AIR204');
+INSERT INTO `dss_history` VALUES ('231', null, null, null, null, '一切正常', null, null);
+INSERT INTO `dss_history` VALUES ('232', null, '0', '20080102125013', '          910.647778', null, '7', 'w75.AIR229');
+INSERT INTO `dss_history` VALUES ('233', null, null, null, null, '一切正常', null, null);
+INSERT INTO `dss_history` VALUES ('234', null, '0', '20080102125013', '          910.647778', null, '7', 'w77.AIR233');
+INSERT INTO `dss_history` VALUES ('235', null, null, null, null, '一切正常', null, null);
+INSERT INTO `dss_history` VALUES ('236', null, '0', '20080102125013', '          910.647778', null, '7', 'w78.AIR235');
+INSERT INTO `dss_history` VALUES ('237', null, null, null, null, '一切正常', null, null);
+INSERT INTO `dss_history` VALUES ('238', null, '0', '20080102125013', '          910.647778', null, '7', 'w78.AIR236');
+INSERT INTO `dss_history` VALUES ('239', null, null, null, null, '一切正常', null, null);
+INSERT INTO `dss_history` VALUES ('240', null, '4', '20080102125013', '          910.647778', null, '568.9976', 'w62.AIRA101');
+INSERT INTO `dss_history` VALUES ('241', null, null, null, null, '一切正常', null, null);
+INSERT INTO `dss_history` VALUES ('242', null, '3', '20080102125013', '          910.647778', null, '11.966514', 'w62.AIRA102');
+INSERT INTO `dss_history` VALUES ('243', null, null, null, null, '一切正常', null, null);
+INSERT INTO `dss_history` VALUES ('244', null, '4', '20080102125013', '          910.647778', null, '428.31717', 'w74.AIRA103');
+INSERT INTO `dss_history` VALUES ('245', null, null, null, null, '一切正常', null, null);
+INSERT INTO `dss_history` VALUES ('246', null, '3', '20080102125013', '          910.647778', null, '19.333183', 'w74.AIRA104');
+INSERT INTO `dss_history` VALUES ('247', null, null, null, null, '一切正常', null, null);
+INSERT INTO `dss_history` VALUES ('248', null, '0', '20080102125013', '          910.647778', null, '7', 'w74.AIRA106');
+INSERT INTO `dss_history` VALUES ('249', null, null, null, null, '一切正常', null, null);
+INSERT INTO `dss_history` VALUES ('250', null, '0', '20080102125013', '          910.647778', null, '7', 'w62.AIRA107');
+INSERT INTO `dss_history` VALUES ('251', null, null, null, null, '一切正常', null, null);
+INSERT INTO `dss_history` VALUES ('252', null, '0', '20080102125013', '          910.647778', null, '7', 'w85.AIRA801');
+INSERT INTO `dss_history` VALUES ('253', null, null, null, null, '一切正常', null, null);
+INSERT INTO `dss_history` VALUES ('254', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('255', '', '4', '20080102125013', '          910.647778', '', '73.48623', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('256', null, '3', '20080102125013', '          910.647778', null, '3.5872424', 'w85.AIRA804');
+INSERT INTO `dss_history` VALUES ('257', null, '0', '20080102125013', '          910.647778', null, '2.9837673', 'w76.AIRC212');
+INSERT INTO `dss_history` VALUES ('258', null, '0', '20080102125013', '          910.647778', null, '3.0058374', 'w75.AIRC213');
+INSERT INTO `dss_history` VALUES ('259', null, '0', '20080102125013', '          910.647778', null, '2.9999352', 'w75.AIRC214');
+INSERT INTO `dss_history` VALUES ('260', null, '0', '20080102125013', '          910.647778', null, '2.9998307', 'w76.AIRC216');
+INSERT INTO `dss_history` VALUES ('261', null, '0', '20080102125013', '          910.647778', null, '2.8586338', 'w77.AIRC217');
+INSERT INTO `dss_history` VALUES ('262', null, '0', '20080102125013', '          910.647778', null, '2.8586338', 'w77.AIRC218');
+INSERT INTO `dss_history` VALUES ('263', null, '0', '20080102125013', '          910.647778', null, '2.860854', 'w78.AIRC219');
+INSERT INTO `dss_history` VALUES ('264', null, '0', '20080102125013', '          910.647778', null, '2.860854', 'w78.AIRC220');
+INSERT INTO `dss_history` VALUES ('265', null, '0', '20080102125013', '          910.647778', null, '2.9922142', 'w77.AIRC221');
+INSERT INTO `dss_history` VALUES ('266', null, '0', '20080102125013', '          910.647778', null, '2.9922142', 'w77.AIRC222');
+INSERT INTO `dss_history` VALUES ('267', null, '0', '20080102125013', '          910.647778', null, '2.9841905', 'w78.AIRC223');
+INSERT INTO `dss_history` VALUES ('268', null, '0', '20080102125013', '          910.647778', null, '2.9841905', 'w78.AIRC224');
+INSERT INTO `dss_history` VALUES ('269', null, '0', '20080102125013', '          910.647778', null, '2.9967136', 'w77.AIRC225');
+INSERT INTO `dss_history` VALUES ('270', null, '0', '20080102125013', '          910.647778', null, '2.9967136', 'w77.AIRC226');
+INSERT INTO `dss_history` VALUES ('271', null, '0', '20080102125013', '          910.647778', null, '2.985795', 'w78.AIRC227');
+INSERT INTO `dss_history` VALUES ('272', null, '0', '20080102125013', '          910.647778', null, '2.985795', 'w78.AIRC228');
+INSERT INTO `dss_history` VALUES ('273', null, '0', '20080102125013', '          910.647778', null, '3.9344006e-005', 'w77.AIR202');
+INSERT INTO `dss_history` VALUES ('274', null, null, null, null, '一切正常', null, null);
+INSERT INTO `dss_history` VALUES ('275', null, '0', '20080102125013', '          910.647778', null, '3.9298677e-005', 'w78.AIR204');
+INSERT INTO `dss_history` VALUES ('276', null, null, null, null, '一切正常', null, null);
+INSERT INTO `dss_history` VALUES ('277', null, '0', '20080102125013', '          910.647778', null, '7', 'w75.AIR229');
+INSERT INTO `dss_history` VALUES ('278', null, null, null, null, '一切正常', null, null);
+INSERT INTO `dss_history` VALUES ('279', null, '0', '20080102125013', '          910.647778', null, '7', 'w77.AIR233');
+INSERT INTO `dss_history` VALUES ('280', null, null, null, null, '一切正常', null, null);
+INSERT INTO `dss_history` VALUES ('281', null, '0', '20080102125013', '          910.647778', null, '7', 'w78.AIR235');
+INSERT INTO `dss_history` VALUES ('282', null, null, null, null, '一切正常', null, null);
+INSERT INTO `dss_history` VALUES ('283', null, '0', '20080102125013', '          910.647778', null, '7', 'w78.AIR236');
+INSERT INTO `dss_history` VALUES ('284', null, null, null, null, '一切正常', null, null);
+INSERT INTO `dss_history` VALUES ('285', null, '4', '20080102125013', '          910.647778', null, '568.9976', 'w62.AIRA101');
+INSERT INTO `dss_history` VALUES ('286', null, null, null, null, '一切正常', null, null);
+INSERT INTO `dss_history` VALUES ('287', null, '3', '20080102125013', '          910.647778', null, '11.966514', 'w62.AIRA102');
+INSERT INTO `dss_history` VALUES ('288', null, null, null, null, '一切正常', null, null);
+INSERT INTO `dss_history` VALUES ('289', null, '4', '20080102125013', '          910.647778', null, '428.31717', 'w74.AIRA103');
+INSERT INTO `dss_history` VALUES ('290', null, null, null, null, '一切正常', null, null);
+INSERT INTO `dss_history` VALUES ('291', null, '3', '20080102125013', '          910.647778', null, '19.333183', 'w74.AIRA104');
+INSERT INTO `dss_history` VALUES ('292', null, null, null, null, '一切正常', null, null);
+INSERT INTO `dss_history` VALUES ('293', null, '0', '20080102125013', '          910.647778', null, '7', 'w74.AIRA106');
+INSERT INTO `dss_history` VALUES ('294', null, null, null, null, '一切正常', null, null);
+INSERT INTO `dss_history` VALUES ('295', null, '0', '20080102125013', '          910.647778', null, '7', 'w62.AIRA107');
+INSERT INTO `dss_history` VALUES ('296', null, null, null, null, '一切正常', null, null);
+INSERT INTO `dss_history` VALUES ('297', null, '0', '20080102125013', '          910.647778', null, '7', 'w85.AIRA801');
+INSERT INTO `dss_history` VALUES ('298', null, null, null, null, '一切正常', null, null);
+INSERT INTO `dss_history` VALUES ('299', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('300', '', '4', '20080102125013', '          910.647778', '', '73.48623', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('301', null, '3', '20080102125013', '          910.647778', null, '3.5872424', 'w85.AIRA804');
+INSERT INTO `dss_history` VALUES ('302', null, '0', '20080102125013', '          910.647778', null, '2.9837673', 'w76.AIRC212');
+INSERT INTO `dss_history` VALUES ('303', null, '0', '20080102125013', '          910.647778', null, '3.0058374', 'w75.AIRC213');
+INSERT INTO `dss_history` VALUES ('304', null, '0', '20080102125013', '          910.647778', null, '2.9999352', 'w75.AIRC214');
+INSERT INTO `dss_history` VALUES ('305', null, '0', '20080102125013', '          910.647778', null, '2.9998307', 'w76.AIRC216');
+INSERT INTO `dss_history` VALUES ('306', null, '0', '20080102125013', '          910.647778', null, '2.8586338', 'w77.AIRC217');
+INSERT INTO `dss_history` VALUES ('307', null, '0', '20080102125013', '          910.647778', null, '2.8586338', 'w77.AIRC218');
+INSERT INTO `dss_history` VALUES ('308', null, '0', '20080102125013', '          910.647778', null, '2.860854', 'w78.AIRC219');
+INSERT INTO `dss_history` VALUES ('309', null, '0', '20080102125013', '          910.647778', null, '2.860854', 'w78.AIRC220');
+INSERT INTO `dss_history` VALUES ('310', null, '0', '20080102125013', '          910.647778', null, '2.9922142', 'w77.AIRC221');
+INSERT INTO `dss_history` VALUES ('311', null, '0', '20080102125013', '          910.647778', null, '2.9922142', 'w77.AIRC222');
+INSERT INTO `dss_history` VALUES ('312', null, '0', '20080102125013', '          910.647778', null, '2.9841905', 'w78.AIRC223');
+INSERT INTO `dss_history` VALUES ('313', null, '0', '20080102125013', '          910.647778', null, '2.9841905', 'w78.AIRC224');
+INSERT INTO `dss_history` VALUES ('314', null, '0', '20080102125013', '          910.647778', null, '2.9967136', 'w77.AIRC225');
+INSERT INTO `dss_history` VALUES ('315', null, '0', '20080102125013', '          910.647778', null, '2.9967136', 'w77.AIRC226');
+INSERT INTO `dss_history` VALUES ('316', null, '0', '20080102125013', '          910.647778', null, '2.985795', 'w78.AIRC227');
+INSERT INTO `dss_history` VALUES ('317', null, '0', '20080102125013', '          910.647778', null, '2.985795', 'w78.AIRC228');
+INSERT INTO `dss_history` VALUES ('318', null, '0', '20080102125013', '          910.647778', null, '3.9344006e-005', 'w77.AIR202');
+INSERT INTO `dss_history` VALUES ('319', null, null, null, null, '一切正常', null, null);
+INSERT INTO `dss_history` VALUES ('320', null, '0', '20080102125013', '          910.647778', null, '3.9298677e-005', 'w78.AIR204');
+INSERT INTO `dss_history` VALUES ('321', null, null, null, null, '一切正常', null, null);
+INSERT INTO `dss_history` VALUES ('322', null, '0', '20080102125013', '          910.647778', null, '7', 'w75.AIR229');
+INSERT INTO `dss_history` VALUES ('323', null, null, null, null, '一切正常', null, null);
+INSERT INTO `dss_history` VALUES ('324', null, '0', '20080102125013', '          910.647778', null, '7', 'w77.AIR233');
+INSERT INTO `dss_history` VALUES ('325', null, null, null, null, '一切正常', null, null);
+INSERT INTO `dss_history` VALUES ('326', null, '0', '20080102125013', '          910.647778', null, '7', 'w78.AIR235');
+INSERT INTO `dss_history` VALUES ('327', null, null, null, null, '一切正常', null, null);
+INSERT INTO `dss_history` VALUES ('328', null, '0', '20080102125013', '          910.647778', null, '7', 'w78.AIR236');
+INSERT INTO `dss_history` VALUES ('329', null, null, null, null, '一切正常', null, null);
+INSERT INTO `dss_history` VALUES ('330', null, '4', '20080102125013', '          910.647778', null, '568.9976', 'w62.AIRA101');
+INSERT INTO `dss_history` VALUES ('331', null, null, null, null, '一切正常', null, null);
+INSERT INTO `dss_history` VALUES ('332', null, '3', '20080102125013', '          910.647778', null, '11.966514', 'w62.AIRA102');
+INSERT INTO `dss_history` VALUES ('333', null, null, null, null, '一切正常', null, null);
+INSERT INTO `dss_history` VALUES ('334', null, '4', '20080102125013', '          910.647778', null, '428.31717', 'w74.AIRA103');
+INSERT INTO `dss_history` VALUES ('335', null, null, null, null, '一切正常', null, null);
+INSERT INTO `dss_history` VALUES ('336', null, '3', '20080102125013', '          910.647778', null, '19.333183', 'w74.AIRA104');
+INSERT INTO `dss_history` VALUES ('337', null, null, null, null, '一切正常', null, null);
+INSERT INTO `dss_history` VALUES ('338', null, '0', '20080102125013', '          910.647778', null, '7', 'w74.AIRA106');
+INSERT INTO `dss_history` VALUES ('339', null, null, null, null, '一切正常', null, null);
+INSERT INTO `dss_history` VALUES ('340', null, '0', '20080102125013', '          910.647778', null, '7', 'w62.AIRA107');
+INSERT INTO `dss_history` VALUES ('341', null, null, null, null, '一切正常', null, null);
+INSERT INTO `dss_history` VALUES ('342', null, '0', '20080102125013', '          910.647778', null, '7', 'w85.AIRA801');
+INSERT INTO `dss_history` VALUES ('343', null, null, null, null, '一切正常', null, null);
+INSERT INTO `dss_history` VALUES ('344', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('345', '', '4', '20080102125013', '          910.647778', '', '73.48623', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('346', null, '3', '20080102125013', '          910.647778', null, '3.5872424', 'w85.AIRA804');
+INSERT INTO `dss_history` VALUES ('347', null, '0', '20080102125013', '          910.647778', null, '2.9837673', 'w76.AIRC212');
+INSERT INTO `dss_history` VALUES ('348', null, '0', '20080102125013', '          910.647778', null, '3.0058374', 'w75.AIRC213');
+INSERT INTO `dss_history` VALUES ('349', null, '0', '20080102125013', '          910.647778', null, '2.9999352', 'w75.AIRC214');
+INSERT INTO `dss_history` VALUES ('350', null, '0', '20080102125013', '          910.647778', null, '2.9998307', 'w76.AIRC216');
+INSERT INTO `dss_history` VALUES ('351', null, '0', '20080102125013', '          910.647778', null, '2.8586338', 'w77.AIRC217');
+INSERT INTO `dss_history` VALUES ('352', null, '0', '20080102125013', '          910.647778', null, '2.8586338', 'w77.AIRC218');
+INSERT INTO `dss_history` VALUES ('353', null, '0', '20080102125013', '          910.647778', null, '2.860854', 'w78.AIRC219');
+INSERT INTO `dss_history` VALUES ('354', null, '0', '20080102125013', '          910.647778', null, '2.860854', 'w78.AIRC220');
+INSERT INTO `dss_history` VALUES ('355', null, '0', '20080102125013', '          910.647778', null, '2.9922142', 'w77.AIRC221');
+INSERT INTO `dss_history` VALUES ('356', null, '0', '20080102125013', '          910.647778', null, '2.9922142', 'w77.AIRC222');
+INSERT INTO `dss_history` VALUES ('357', null, '0', '20080102125013', '          910.647778', null, '2.9841905', 'w78.AIRC223');
+INSERT INTO `dss_history` VALUES ('358', null, '0', '20080102125013', '          910.647778', null, '2.9841905', 'w78.AIRC224');
+INSERT INTO `dss_history` VALUES ('359', null, '0', '20080102125013', '          910.647778', null, '2.9967136', 'w77.AIRC225');
+INSERT INTO `dss_history` VALUES ('360', null, '0', '20080102125013', '          910.647778', null, '2.9967136', 'w77.AIRC226');
+INSERT INTO `dss_history` VALUES ('361', null, '0', '20080102125013', '          910.647778', null, '2.985795', 'w78.AIRC227');
+INSERT INTO `dss_history` VALUES ('362', null, '0', '20080102125013', '          910.647778', null, '2.985795', 'w78.AIRC228');
+INSERT INTO `dss_history` VALUES ('363', null, '0', '20080102125013', '          910.647778', null, '3.9344006e-005', 'w77.AIR202');
+INSERT INTO `dss_history` VALUES ('364', null, null, null, null, '一切正常', null, null);
+INSERT INTO `dss_history` VALUES ('365', null, '0', '20080102125013', '          910.647778', null, '3.9298677e-005', 'w78.AIR204');
+INSERT INTO `dss_history` VALUES ('366', null, null, null, null, '一切正常', null, null);
+INSERT INTO `dss_history` VALUES ('367', null, '0', '20080102125013', '          910.647778', null, '7', 'w75.AIR229');
+INSERT INTO `dss_history` VALUES ('368', null, null, null, null, '一切正常', null, null);
+INSERT INTO `dss_history` VALUES ('369', null, '0', '20080102125013', '          910.647778', null, '7', 'w77.AIR233');
+INSERT INTO `dss_history` VALUES ('370', null, null, null, null, '一切正常', null, null);
+INSERT INTO `dss_history` VALUES ('371', null, '0', '20080102125013', '          910.647778', null, '7', 'w78.AIR235');
+INSERT INTO `dss_history` VALUES ('372', null, null, null, null, '一切正常', null, null);
+INSERT INTO `dss_history` VALUES ('373', null, '0', '20080102125013', '          910.647778', null, '7', 'w78.AIR236');
+INSERT INTO `dss_history` VALUES ('374', null, null, null, null, '一切正常', null, null);
+INSERT INTO `dss_history` VALUES ('375', null, '4', '20080102125013', '          910.647778', null, '568.9976', 'w62.AIRA101');
+INSERT INTO `dss_history` VALUES ('376', null, null, null, null, '一切正常', null, null);
+INSERT INTO `dss_history` VALUES ('377', null, '3', '20080102125013', '          910.647778', null, '11.966514', 'w62.AIRA102');
+INSERT INTO `dss_history` VALUES ('378', null, null, null, null, '一切正常', null, null);
+INSERT INTO `dss_history` VALUES ('379', null, '4', '20080102125013', '          910.647778', null, '428.31717', 'w74.AIRA103');
+INSERT INTO `dss_history` VALUES ('380', null, null, null, null, '一切正常', null, null);
+INSERT INTO `dss_history` VALUES ('381', null, '3', '20080102125013', '          910.647778', null, '19.333183', 'w74.AIRA104');
+INSERT INTO `dss_history` VALUES ('382', null, null, null, null, '一切正常', null, null);
+INSERT INTO `dss_history` VALUES ('383', null, '0', '20080102125013', '          910.647778', null, '7', 'w74.AIRA106');
+INSERT INTO `dss_history` VALUES ('384', null, null, null, null, '一切正常', null, null);
+INSERT INTO `dss_history` VALUES ('385', null, '0', '20080102125013', '          910.647778', null, '7', 'w62.AIRA107');
+INSERT INTO `dss_history` VALUES ('386', null, null, null, null, '一切正常', null, null);
+INSERT INTO `dss_history` VALUES ('387', null, '0', '20080102125013', '          910.647778', null, '7', 'w85.AIRA801');
+INSERT INTO `dss_history` VALUES ('388', null, null, null, null, '一切正常', null, null);
+INSERT INTO `dss_history` VALUES ('389', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('390', '', '4', '20080102125013', '          910.647778', '', '73.48623', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('391', null, '3', '20080102125013', '          910.647778', null, '3.5872424', 'w85.AIRA804');
+INSERT INTO `dss_history` VALUES ('392', null, '0', '20080102125013', '          910.647778', null, '2.9837673', 'w76.AIRC212');
+INSERT INTO `dss_history` VALUES ('393', null, '0', '20080102125013', '          910.647778', null, '3.0058374', 'w75.AIRC213');
+INSERT INTO `dss_history` VALUES ('394', null, '0', '20080102125013', '          910.647778', null, '2.9999352', 'w75.AIRC214');
+INSERT INTO `dss_history` VALUES ('395', null, '0', '20080102125013', '          910.647778', null, '2.9998307', 'w76.AIRC216');
+INSERT INTO `dss_history` VALUES ('396', null, '0', '20080102125013', '          910.647778', null, '2.8586338', 'w77.AIRC217');
+INSERT INTO `dss_history` VALUES ('397', null, '0', '20080102125013', '          910.647778', null, '2.8586338', 'w77.AIRC218');
+INSERT INTO `dss_history` VALUES ('398', null, '0', '20080102125013', '          910.647778', null, '2.860854', 'w78.AIRC219');
+INSERT INTO `dss_history` VALUES ('399', null, '0', '20080102125013', '          910.647778', null, '2.860854', 'w78.AIRC220');
+INSERT INTO `dss_history` VALUES ('400', null, '0', '20080102125013', '          910.647778', null, '2.9922142', 'w77.AIRC221');
+INSERT INTO `dss_history` VALUES ('401', null, '0', '20080102125013', '          910.647778', null, '2.9922142', 'w77.AIRC222');
+INSERT INTO `dss_history` VALUES ('402', null, '0', '20080102125013', '          910.647778', null, '2.9841905', 'w78.AIRC223');
+INSERT INTO `dss_history` VALUES ('403', null, '0', '20080102125013', '          910.647778', null, '2.9841905', 'w78.AIRC224');
+INSERT INTO `dss_history` VALUES ('404', null, '0', '20080102125013', '          910.647778', null, '2.9967136', 'w77.AIRC225');
+INSERT INTO `dss_history` VALUES ('405', null, '0', '20080102125013', '          910.647778', null, '2.9967136', 'w77.AIRC226');
+INSERT INTO `dss_history` VALUES ('406', null, '0', '20080102125013', '          910.647778', null, '2.985795', 'w78.AIRC227');
+INSERT INTO `dss_history` VALUES ('407', null, '0', '20080102125013', '          910.647778', null, '2.985795', 'w78.AIRC228');
+INSERT INTO `dss_history` VALUES ('408', null, null, null, null, '一切正常', null, null);
+INSERT INTO `dss_history` VALUES ('409', null, null, null, null, '一切正常', null, null);
+INSERT INTO `dss_history` VALUES ('410', null, null, null, null, '一切正常', null, null);
+INSERT INTO `dss_history` VALUES ('411', null, null, null, null, '一切正常', null, null);
+INSERT INTO `dss_history` VALUES ('412', null, null, null, null, '一切正常', null, null);
+INSERT INTO `dss_history` VALUES ('413', null, null, null, null, '一切正常', null, null);
+INSERT INTO `dss_history` VALUES ('414', null, null, null, null, '一切正常', null, null);
+INSERT INTO `dss_history` VALUES ('415', null, null, null, null, '一切正常', null, null);
+INSERT INTO `dss_history` VALUES ('416', null, null, null, null, '一切正常', null, null);
+INSERT INTO `dss_history` VALUES ('417', null, null, null, null, '一切正常', null, null);
+INSERT INTO `dss_history` VALUES ('418', null, null, null, null, '一切正常', null, null);
+INSERT INTO `dss_history` VALUES ('419', null, null, null, null, '一切正常', null, null);
+INSERT INTO `dss_history` VALUES ('420', null, null, null, null, '一切正常', null, null);
+INSERT INTO `dss_history` VALUES ('421', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('422', null, null, null, null, '一切正常', null, null);
+INSERT INTO `dss_history` VALUES ('423', null, null, null, null, '一切正常', null, null);
+INSERT INTO `dss_history` VALUES ('424', null, null, null, null, '一切正常', null, null);
+INSERT INTO `dss_history` VALUES ('425', null, null, null, null, '一切正常', null, null);
+INSERT INTO `dss_history` VALUES ('426', null, null, null, null, '一切正常', null, null);
+INSERT INTO `dss_history` VALUES ('427', null, null, null, null, '一切正常', null, null);
+INSERT INTO `dss_history` VALUES ('428', null, null, null, null, '一切正常', null, null);
+INSERT INTO `dss_history` VALUES ('429', null, null, null, null, '一切正常', null, null);
+INSERT INTO `dss_history` VALUES ('430', null, null, null, null, '一切正常', null, null);
+INSERT INTO `dss_history` VALUES ('431', null, null, null, null, '一切正常', null, null);
+INSERT INTO `dss_history` VALUES ('432', null, null, null, null, '一切正常', null, null);
+INSERT INTO `dss_history` VALUES ('433', null, null, null, null, '一切正常', null, null);
+INSERT INTO `dss_history` VALUES ('434', null, null, null, null, '一切正常', null, null);
+INSERT INTO `dss_history` VALUES ('435', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('436', null, null, null, null, '一切正常', null, null);
+INSERT INTO `dss_history` VALUES ('437', null, null, null, null, '一切正常', null, null);
+INSERT INTO `dss_history` VALUES ('438', null, null, null, null, '一切正常', null, null);
+INSERT INTO `dss_history` VALUES ('439', null, null, null, null, '一切正常', null, null);
+INSERT INTO `dss_history` VALUES ('440', null, null, null, null, '一切正常', null, null);
+INSERT INTO `dss_history` VALUES ('441', null, null, null, null, '一切正常', null, null);
+INSERT INTO `dss_history` VALUES ('442', null, null, null, null, '一切正常', null, null);
+INSERT INTO `dss_history` VALUES ('443', null, null, null, null, '一切正常', null, null);
+INSERT INTO `dss_history` VALUES ('444', null, null, null, null, '一切正常', null, null);
+INSERT INTO `dss_history` VALUES ('445', null, null, null, null, '一切正常', null, null);
+INSERT INTO `dss_history` VALUES ('446', null, null, null, null, '一切正常', null, null);
+INSERT INTO `dss_history` VALUES ('447', null, null, null, null, '一切正常', null, null);
+INSERT INTO `dss_history` VALUES ('448', null, null, null, null, '一切正常', null, null);
+INSERT INTO `dss_history` VALUES ('449', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('450', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('451', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('452', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('453', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
 
 -- ----------------------------
 -- Table structure for `errorlog`
@@ -748,131 +1185,130 @@ INSERT INTO `initdata` VALUES ('WW14B.SS', '14#B.SS', '175');
 -- ----------------------------
 DROP TABLE IF EXISTS `init_predict`;
 CREATE TABLE `init_predict` (
-  `Id` varchar(36) CHARACTER SET utf8 NOT NULL DEFAULT '',
+  `id` varchar(36) CHARACTER SET utf8 NOT NULL DEFAULT '',
   `name` varchar(36) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `value` varchar(64) COLLATE utf8_unicode_ci DEFAULT NULL,
-  PRIMARY KEY (`Id`)
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- ----------------------------
 -- Records of init_predict
 -- ----------------------------
-INSERT INTO `init_predict` VALUES ('9999', '正常', null);
-INSERT INTO `init_predict` VALUES ('w3.COD', '电石厂有机水.COD', null);
-INSERT INTO `init_predict` VALUES ('w61.TIR203', '2系列生化池.3号生化池温度', null);
-INSERT INTO `init_predict` VALUES ('w62.AIRA101', '进水提升泵房(462A).462A进水提升泵房COD', null);
-INSERT INTO `init_predict` VALUES ('w62.AIRA102', '进水提升泵房(462A).462A进水提升泵房NH3-N', null);
-INSERT INTO `init_predict` VALUES ('w62.AIRA107', '进水提升泵房(462A).462A.进水提升泵房PH', null);
-INSERT INTO `init_predict` VALUES ('w62.AIRA108', '进水提升泵房(462A).462A进水提升泵房SS', null);
-INSERT INTO `init_predict` VALUES ('w62.LDISA102', '进水提升泵房(462A).2#粗格栅前后液位差', null);
-INSERT INTO `init_predict` VALUES ('w62.LDISA103', '进水提升泵房(462A).3#粗格栅前后液位差', null);
-INSERT INTO `init_predict` VALUES ('w62.LDISA104', '进水提升泵房(462A).泵室液位', null);
-INSERT INTO `init_predict` VALUES ('w62.LISA104', '进水提升泵房(462A).462A吸水池液位', null);
-INSERT INTO `init_predict` VALUES ('w62.P1STATUS', '进水提升泵房(462A).1#潜水排污泵', null);
-INSERT INTO `init_predict` VALUES ('w62.P2STATUS', '进水提升泵房(462A).2#潜水排污泵', null);
-INSERT INTO `init_predict` VALUES ('w62.P3STATU', '进水提升泵房(462A).3#潜水排污泵', null);
-INSERT INTO `init_predict` VALUES ('w62.P4STATUS', '进水提升泵房(462A).4#潜水排污泵', null);
-INSERT INTO `init_predict` VALUES ('w62.P5STATUS', '进水提升泵房(462A).5#潜水排污泵', null);
-INSERT INTO `init_predict` VALUES ('w6216.LDISA101', '进水提升泵房(462A).1#粗格栅前后液位差', null);
-INSERT INTO `init_predict` VALUES ('w63.FRQ101', '巴氏计量槽（499）.水量', null);
-INSERT INTO `init_predict` VALUES ('w63.LDISA106', '巴氏计量槽（499）.巴氏计量槽前液位', null);
-INSERT INTO `init_predict` VALUES ('w63.LDISA107', '巴氏计量槽（499）.巴氏计量槽后液位', null);
-INSERT INTO `init_predict` VALUES ('w65.M4881', '沉沙刮沙池(488).M488-1#刮沙机', null);
-INSERT INTO `init_predict` VALUES ('w65.M4882', '沉沙刮沙池(488).M488-2#刮沙机', null);
-INSERT INTO `init_predict` VALUES ('w65.M4883', '沉沙刮沙池(488).M488-3#刮沙机', null);
-INSERT INTO `init_predict` VALUES ('w65.M4884', '沉沙刮沙池(488).M488-3#刮沙机', null);
-INSERT INTO `init_predict` VALUES ('w66.M4891S', '初沉池(489B).M489-1#周边传动刮泥机', null);
-INSERT INTO `init_predict` VALUES ('w66.M4892S', '初沉池(489B).M489-2#周边传动刮泥机', null);
-INSERT INTO `init_predict` VALUES ('w66.M4893S', '初沉池(489B).M489-3#周边传动刮泥机', null);
-INSERT INTO `init_predict` VALUES ('w67.LIA115', '事故池(489).事故池液位', null);
-INSERT INTO `init_predict` VALUES ('w68.FRQ102', '14B生活水.水量', null);
-INSERT INTO `init_predict` VALUES ('w69.LIA114', '老水解酸化池.老水解酸化池液位', null);
-INSERT INTO `init_predict` VALUES ('w70.LIA115', '新水解酸化池.新水解酸化池液位', null);
-INSERT INTO `init_predict` VALUES ('w71.FRQ103', '污泥池(V466).P466-1-2泵出口干管流量', null);
-INSERT INTO `init_predict` VALUES ('w71.FRQ104', '污泥池(V466).P466-3-4泵出口干管流量', null);
-INSERT INTO `init_predict` VALUES ('w71.LISA119', '污泥泵房(466).V466污泥池前液位', null);
-INSERT INTO `init_predict` VALUES ('w73.FI106', '脱水装置(495).P495A-1流量', null);
-INSERT INTO `init_predict` VALUES ('w73.FI107', '脱水装置(495).P495A-2流量', null);
-INSERT INTO `init_predict` VALUES ('w73.FI108', '脱水装置(495).P495A-3流量', null);
-INSERT INTO `init_predict` VALUES ('w73.FI109', '脱水装置(495).P495A-4流量', null);
-INSERT INTO `init_predict` VALUES ('w73.FI110', '脱水装置(495).P495A-5流量', null);
-INSERT INTO `init_predict` VALUES ('w73.FI111', '脱水装置(495).P495A-6流量', null);
-INSERT INTO `init_predict` VALUES ('w73.LISA122', '脱水装置(495).V495A-5液位', null);
-INSERT INTO `init_predict` VALUES ('w73.LISA123', '脱水装置(495).药剂池V495-3液位', null);
-INSERT INTO `init_predict` VALUES ('w73.LISA124', '脱水装置(495).药剂池V495-4液位', null);
-INSERT INTO `init_predict` VALUES ('w73.R4951', '脱水装置(495).1#带式压榨过滤机状态', null);
-INSERT INTO `init_predict` VALUES ('w73.R4952', '脱水装置(495).2#带式压榨过滤机状态', null);
-INSERT INTO `init_predict` VALUES ('w73.R4953', '脱水装置(495).3#带式压榨过滤机状态', null);
-INSERT INTO `init_predict` VALUES ('w73.R4954', '脱水装置(495).4#带式压榨过滤机状态', null);
-INSERT INTO `init_predict` VALUES ('w73.R4955', '脱水装置(495).5#带式压榨过滤机状态', null);
-INSERT INTO `init_predict` VALUES ('w74.AIRA103', '中间提升泵房(462B).462B吸水池COD', null);
-INSERT INTO `init_predict` VALUES ('w74.AIRA104', '中间提升泵房(462B).462B吸水池NH3-N', null);
-INSERT INTO `init_predict` VALUES ('w74.AIRA105', '中间提升泵房(462B).462B吸水池SS', null);
-INSERT INTO `init_predict` VALUES ('w74.AIRA106', '中间提升泵房(462B).462B吸水池PH', null);
-INSERT INTO `init_predict` VALUES ('w74.AIRC207', '2系列生化池.3号生化池2段溶解氧DO', null);
-INSERT INTO `init_predict` VALUES ('w74.AIRC211', '2系列生化池.3号生化池3段溶解氧DO', null);
-INSERT INTO `init_predict` VALUES ('w74.AIRC215', '2系列生化池.3号生化池5段溶解氧DO', null);
-INSERT INTO `init_predict` VALUES ('w74.LIA116', '中间提升泵房(462B).462B泵房吸水池液位', null);
-INSERT INTO `init_predict` VALUES ('w74.LIA117', '中间提升泵房(462B).V462B-3高位水池液位', null);
-INSERT INTO `init_predict` VALUES ('w75.AIR229', '一系列生化池.1号生化池PH', null);
-INSERT INTO `init_predict` VALUES ('w75.AIR230', '一系列生化池.2号生化池PH', null);
-INSERT INTO `init_predict` VALUES ('w75.AIRC205', '一系列生化池.1号生化池2段溶解氧DO', null);
-INSERT INTO `init_predict` VALUES ('w75.AIRC206', '一系列生化池.2号生化池2段溶解氧DO', null);
-INSERT INTO `init_predict` VALUES ('w75.AIRC209', '一系列生化池.1号生化池3段溶解氧DO', null);
-INSERT INTO `init_predict` VALUES ('w75.AIRC210', '一系列生化池.2号生化池3段溶解氧DO', null);
-INSERT INTO `init_predict` VALUES ('w75.AIRC213', '一系列生化池.1号生化池5段溶解氧DO', null);
-INSERT INTO `init_predict` VALUES ('w75.AIRC214', '一系列生化池.2号生化池5段溶解氧DO', null);
-INSERT INTO `init_predict` VALUES ('w75.FR601A', '一系列生化池.1#鼓风机分量', null);
-INSERT INTO `init_predict` VALUES ('w75.TIR201', '一系列生化池.1号生化池温度', null);
-INSERT INTO `init_predict` VALUES ('w75.TIR202', '一系列生化池.2号生化池温度', null);
-INSERT INTO `init_predict` VALUES ('w76.AIR231', '2系列生化池.3号生化池PH', null);
-INSERT INTO `init_predict` VALUES ('w76.AIR232', '2系列生化池.4号生化池PH', null);
-INSERT INTO `init_predict` VALUES ('w76.AIR234', '3系列生化池.6号生化池PH', null);
-INSERT INTO `init_predict` VALUES ('w76.AIRC208', '2系列生化池.4号生化池2段溶解氧DO', null);
-INSERT INTO `init_predict` VALUES ('w76.AIRC212', '2系列生化池.4号生化池3段溶解氧DO', null);
-INSERT INTO `init_predict` VALUES ('w76.AIRC216', '2系列生化池.4号生化池5段溶解氧DO', null);
-INSERT INTO `init_predict` VALUES ('w76.FR601B', '2系列生化池.2#鼓风机分量', null);
-INSERT INTO `init_predict` VALUES ('w76.TIR204', '2系列生化池.4号生化池温度', null);
-INSERT INTO `init_predict` VALUES ('w77.AIR201', '3系列生化池.5号生化池A段溶解氧DO', null);
-INSERT INTO `init_predict` VALUES ('w77.AIR202', '3系列生化池.6号生化池A段溶解氧DO', null);
-INSERT INTO `init_predict` VALUES ('w77.AIR233', '3系列生化池.5号生化池PH', null);
-INSERT INTO `init_predict` VALUES ('w77.AIRC217', '3系列生化池.5号生化池2段溶解氧DO', null);
-INSERT INTO `init_predict` VALUES ('w77.AIRC218', '3系列生化池.号生化池2段溶解氧DO6', null);
-INSERT INTO `init_predict` VALUES ('w77.AIRC221', '3系列生化池.5号生化池4段溶解氧DO', null);
-INSERT INTO `init_predict` VALUES ('w77.AIRC222', '3系列生化池.6号生化池4段溶解氧DO', null);
-INSERT INTO `init_predict` VALUES ('w77.AIRC225', '3系列生化池.5号生化池6段溶解氧DO', null);
-INSERT INTO `init_predict` VALUES ('w77.AIRC226', '3系列生化池.6号生化池6段溶解氧DO', null);
-INSERT INTO `init_predict` VALUES ('w77.FR601C', '3系列生化池.3#鼓风机分量', null);
-INSERT INTO `init_predict` VALUES ('w77.TIR205', '3系列生化池.5号生化池温度', null);
-INSERT INTO `init_predict` VALUES ('w77.TIR206', '3系列生化池.6号生化池温度', null);
-INSERT INTO `init_predict` VALUES ('w78.AIR203', '4系列生化池.7号生化池A段溶解氧DO', null);
-INSERT INTO `init_predict` VALUES ('w78.AIR204', '4系列生化池.8号生化池A段溶解氧DO', null);
-INSERT INTO `init_predict` VALUES ('w78.AIR235', '4系列生化池.7号生化池PH', null);
-INSERT INTO `init_predict` VALUES ('w78.AIR236', '4系列生化池.8号生化池PH', null);
-INSERT INTO `init_predict` VALUES ('w78.AIRC219', '4系列生化池.7号生化池2段溶解氧DO', null);
-INSERT INTO `init_predict` VALUES ('w78.AIRC220', '4系列生化池.8号生化池2段溶解氧DO', null);
-INSERT INTO `init_predict` VALUES ('w78.AIRC223', '4系列生化池.7号生化池4段溶解氧DO', null);
-INSERT INTO `init_predict` VALUES ('w78.AIRC224', '4系列生化池.8号生化池4段溶解氧DO', null);
-INSERT INTO `init_predict` VALUES ('w78.AIRC227', '4系列生化池.7号生化池6段溶解氧DO', null);
-INSERT INTO `init_predict` VALUES ('w78.AIRC228', '4系列生化池.8号生化池6段溶解氧DO', null);
-INSERT INTO `init_predict` VALUES ('w78.FR601B', '4系列生化池.4#鼓风机分量', null);
-INSERT INTO `init_predict` VALUES ('w78.TIR207', '4系列生化池.7号生化池温度', null);
-INSERT INTO `init_predict` VALUES ('w78.TIR208', '4系列生化池.8号生化池温度', null);
-INSERT INTO `init_predict` VALUES ('w85.AIRA801', '1、2、4系列排江出口线.出口PH', null);
-INSERT INTO `init_predict` VALUES ('w85.AIRA802', '1、2、4系列排江出口线.出口SS', null);
-INSERT INTO `init_predict` VALUES ('w85.AIRA803', '1、2、4系列排江出口线.出口COD', null);
-INSERT INTO `init_predict` VALUES ('w85.AIRA804', '1、2、4系列排江出口线.出口NH3-N', null);
-INSERT INTO `init_predict` VALUES ('w85.AIRA805', '1、2、4系列排江出口线.出口DO', null);
-INSERT INTO `init_predict` VALUES ('w86.FRCQ201', '1系列465回流泵房.1系列465-1回流泵房回流量', null);
-INSERT INTO `init_predict` VALUES ('w86.FRCQ202', '1系列465回流泵房.2系列465-2回流泵房回流量', null);
-INSERT INTO `init_predict` VALUES ('w86.FRCQ203', '1系列465回流泵房.1系列465回流泵房剩余量', null);
-INSERT INTO `init_predict` VALUES ('w86.LISA201', '1系列465回流泵房.465吸泥池液位', null);
-INSERT INTO `init_predict` VALUES ('w87.FRCQ204', '2系列465A回流泵房.2系列465A回流泵房回流量', null);
-INSERT INTO `init_predict` VALUES ('w87.FRCQ205', '2系列465A回流泵房.2系列465A回流泵房剩余量', null);
-INSERT INTO `init_predict` VALUES ('w87.LISA202', '2系列465A回流泵房.465A吸泥池液位', null);
-INSERT INTO `init_predict` VALUES ('w88.FRCQ206', '3系列465B回流泵房.3系列465B回流泵房回流量', null);
-INSERT INTO `init_predict` VALUES ('w88.FRCQ207', '3系列465B回流泵房.3系列465B回流泵房剩余量', null);
-INSERT INTO `init_predict` VALUES ('w88.LISA204', '3系列465B回流泵房.465B吸泥池液位', null);
+INSERT INTO `init_predict` VALUES ('9999', '正常');
+INSERT INTO `init_predict` VALUES ('w3.COD', '电石厂有机水.COD');
+INSERT INTO `init_predict` VALUES ('w61.TIR203', '2系列生化池.3号生化池温度');
+INSERT INTO `init_predict` VALUES ('w62.AIRA101', '进水提升泵房(462A).462A进水提升泵房COD');
+INSERT INTO `init_predict` VALUES ('w62.AIRA102', '进水提升泵房(462A).462A进水提升泵房NH3-N');
+INSERT INTO `init_predict` VALUES ('w62.AIRA107', '进水提升泵房(462A).462A.进水提升泵房PH');
+INSERT INTO `init_predict` VALUES ('w62.AIRA108', '进水提升泵房(462A).462A进水提升泵房SS');
+INSERT INTO `init_predict` VALUES ('w62.LDISA102', '进水提升泵房(462A).2#粗格栅前后液位差');
+INSERT INTO `init_predict` VALUES ('w62.LDISA103', '进水提升泵房(462A).3#粗格栅前后液位差');
+INSERT INTO `init_predict` VALUES ('w62.LDISA104', '进水提升泵房(462A).泵室液位');
+INSERT INTO `init_predict` VALUES ('w62.LISA104', '进水提升泵房(462A).462A吸水池液位');
+INSERT INTO `init_predict` VALUES ('w62.P1STATUS', '进水提升泵房(462A).1#潜水排污泵');
+INSERT INTO `init_predict` VALUES ('w62.P2STATUS', '进水提升泵房(462A).2#潜水排污泵');
+INSERT INTO `init_predict` VALUES ('w62.P3STATU', '进水提升泵房(462A).3#潜水排污泵');
+INSERT INTO `init_predict` VALUES ('w62.P4STATUS', '进水提升泵房(462A).4#潜水排污泵');
+INSERT INTO `init_predict` VALUES ('w62.P5STATUS', '进水提升泵房(462A).5#潜水排污泵');
+INSERT INTO `init_predict` VALUES ('w6216.LDISA101', '进水提升泵房(462A).1#粗格栅前后液位差');
+INSERT INTO `init_predict` VALUES ('w63.FRQ101', '巴氏计量槽（499）.水量');
+INSERT INTO `init_predict` VALUES ('w63.LDISA106', '巴氏计量槽（499）.巴氏计量槽前液位');
+INSERT INTO `init_predict` VALUES ('w63.LDISA107', '巴氏计量槽（499）.巴氏计量槽后液位');
+INSERT INTO `init_predict` VALUES ('w65.M4881', '沉沙刮沙池(488).M488-1#刮沙机');
+INSERT INTO `init_predict` VALUES ('w65.M4882', '沉沙刮沙池(488).M488-2#刮沙机');
+INSERT INTO `init_predict` VALUES ('w65.M4883', '沉沙刮沙池(488).M488-3#刮沙机');
+INSERT INTO `init_predict` VALUES ('w65.M4884', '沉沙刮沙池(488).M488-3#刮沙机');
+INSERT INTO `init_predict` VALUES ('w66.M4891S', '初沉池(489B).M489-1#周边传动刮泥机');
+INSERT INTO `init_predict` VALUES ('w66.M4892S', '初沉池(489B).M489-2#周边传动刮泥机');
+INSERT INTO `init_predict` VALUES ('w66.M4893S', '初沉池(489B).M489-3#周边传动刮泥机');
+INSERT INTO `init_predict` VALUES ('w67.LIA115', '事故池(489).事故池液位');
+INSERT INTO `init_predict` VALUES ('w68.FRQ102', '14B生活水.水量');
+INSERT INTO `init_predict` VALUES ('w69.LIA114', '老水解酸化池.老水解酸化池液位');
+INSERT INTO `init_predict` VALUES ('w70.LIA115', '新水解酸化池.新水解酸化池液位');
+INSERT INTO `init_predict` VALUES ('w71.FRQ103', '污泥池(V466).P466-1-2泵出口干管流量');
+INSERT INTO `init_predict` VALUES ('w71.FRQ104', '污泥池(V466).P466-3-4泵出口干管流量');
+INSERT INTO `init_predict` VALUES ('w71.LISA119', '污泥泵房(466).V466污泥池前液位');
+INSERT INTO `init_predict` VALUES ('w73.FI106', '脱水装置(495).P495A-1流量');
+INSERT INTO `init_predict` VALUES ('w73.FI107', '脱水装置(495).P495A-2流量');
+INSERT INTO `init_predict` VALUES ('w73.FI108', '脱水装置(495).P495A-3流量');
+INSERT INTO `init_predict` VALUES ('w73.FI109', '脱水装置(495).P495A-4流量');
+INSERT INTO `init_predict` VALUES ('w73.FI110', '脱水装置(495).P495A-5流量');
+INSERT INTO `init_predict` VALUES ('w73.FI111', '脱水装置(495).P495A-6流量');
+INSERT INTO `init_predict` VALUES ('w73.LISA122', '脱水装置(495).V495A-5液位');
+INSERT INTO `init_predict` VALUES ('w73.LISA123', '脱水装置(495).药剂池V495-3液位');
+INSERT INTO `init_predict` VALUES ('w73.LISA124', '脱水装置(495).药剂池V495-4液位');
+INSERT INTO `init_predict` VALUES ('w73.R4951', '脱水装置(495).1#带式压榨过滤机状态');
+INSERT INTO `init_predict` VALUES ('w73.R4952', '脱水装置(495).2#带式压榨过滤机状态');
+INSERT INTO `init_predict` VALUES ('w73.R4953', '脱水装置(495).3#带式压榨过滤机状态');
+INSERT INTO `init_predict` VALUES ('w73.R4954', '脱水装置(495).4#带式压榨过滤机状态');
+INSERT INTO `init_predict` VALUES ('w73.R4955', '脱水装置(495).5#带式压榨过滤机状态');
+INSERT INTO `init_predict` VALUES ('w74.AIRA103', '中间提升泵房(462B).462B吸水池COD');
+INSERT INTO `init_predict` VALUES ('w74.AIRA104', '中间提升泵房(462B).462B吸水池NH3-N');
+INSERT INTO `init_predict` VALUES ('w74.AIRA105', '中间提升泵房(462B).462B吸水池SS');
+INSERT INTO `init_predict` VALUES ('w74.AIRA106', '中间提升泵房(462B).462B吸水池PH');
+INSERT INTO `init_predict` VALUES ('w74.AIRC207', '2系列生化池.3号生化池2段溶解氧DO');
+INSERT INTO `init_predict` VALUES ('w74.AIRC211', '2系列生化池.3号生化池3段溶解氧DO');
+INSERT INTO `init_predict` VALUES ('w74.AIRC215', '2系列生化池.3号生化池5段溶解氧DO');
+INSERT INTO `init_predict` VALUES ('w74.LIA116', '中间提升泵房(462B).462B泵房吸水池液位');
+INSERT INTO `init_predict` VALUES ('w74.LIA117', '中间提升泵房(462B).V462B-3高位水池液位');
+INSERT INTO `init_predict` VALUES ('w75.AIR229', '一系列生化池.1号生化池PH');
+INSERT INTO `init_predict` VALUES ('w75.AIR230', '一系列生化池.2号生化池PH');
+INSERT INTO `init_predict` VALUES ('w75.AIRC205', '一系列生化池.1号生化池2段溶解氧DO');
+INSERT INTO `init_predict` VALUES ('w75.AIRC206', '一系列生化池.2号生化池2段溶解氧DO');
+INSERT INTO `init_predict` VALUES ('w75.AIRC209', '一系列生化池.1号生化池3段溶解氧DO');
+INSERT INTO `init_predict` VALUES ('w75.AIRC210', '一系列生化池.2号生化池3段溶解氧DO');
+INSERT INTO `init_predict` VALUES ('w75.AIRC213', '一系列生化池.1号生化池5段溶解氧DO');
+INSERT INTO `init_predict` VALUES ('w75.AIRC214', '一系列生化池.2号生化池5段溶解氧DO');
+INSERT INTO `init_predict` VALUES ('w75.FR601A', '一系列生化池.1#鼓风机分量');
+INSERT INTO `init_predict` VALUES ('w75.TIR201', '一系列生化池.1号生化池温度');
+INSERT INTO `init_predict` VALUES ('w75.TIR202', '一系列生化池.2号生化池温度');
+INSERT INTO `init_predict` VALUES ('w76.AIR231', '2系列生化池.3号生化池PH');
+INSERT INTO `init_predict` VALUES ('w76.AIR232', '2系列生化池.4号生化池PH');
+INSERT INTO `init_predict` VALUES ('w76.AIR234', '3系列生化池.6号生化池PH');
+INSERT INTO `init_predict` VALUES ('w76.AIRC208', '2系列生化池.4号生化池2段溶解氧DO');
+INSERT INTO `init_predict` VALUES ('w76.AIRC212', '2系列生化池.4号生化池3段溶解氧DO');
+INSERT INTO `init_predict` VALUES ('w76.AIRC216', '2系列生化池.4号生化池5段溶解氧DO');
+INSERT INTO `init_predict` VALUES ('w76.FR601B', '2系列生化池.2#鼓风机分量');
+INSERT INTO `init_predict` VALUES ('w76.TIR204', '2系列生化池.4号生化池温度');
+INSERT INTO `init_predict` VALUES ('w77.AIR201', '3系列生化池.5号生化池A段溶解氧DO');
+INSERT INTO `init_predict` VALUES ('w77.AIR202', '3系列生化池.6号生化池A段溶解氧DO');
+INSERT INTO `init_predict` VALUES ('w77.AIR233', '3系列生化池.5号生化池PH');
+INSERT INTO `init_predict` VALUES ('w77.AIRC217', '3系列生化池.5号生化池2段溶解氧DO');
+INSERT INTO `init_predict` VALUES ('w77.AIRC218', '3系列生化池.号生化池2段溶解氧DO6');
+INSERT INTO `init_predict` VALUES ('w77.AIRC221', '3系列生化池.5号生化池4段溶解氧DO');
+INSERT INTO `init_predict` VALUES ('w77.AIRC222', '3系列生化池.6号生化池4段溶解氧DO');
+INSERT INTO `init_predict` VALUES ('w77.AIRC225', '3系列生化池.5号生化池6段溶解氧DO');
+INSERT INTO `init_predict` VALUES ('w77.AIRC226', '3系列生化池.6号生化池6段溶解氧DO');
+INSERT INTO `init_predict` VALUES ('w77.FR601C', '3系列生化池.3#鼓风机分量');
+INSERT INTO `init_predict` VALUES ('w77.TIR205', '3系列生化池.5号生化池温度');
+INSERT INTO `init_predict` VALUES ('w77.TIR206', '3系列生化池.6号生化池温度');
+INSERT INTO `init_predict` VALUES ('w78.AIR203', '4系列生化池.7号生化池A段溶解氧DO');
+INSERT INTO `init_predict` VALUES ('w78.AIR204', '4系列生化池.8号生化池A段溶解氧DO');
+INSERT INTO `init_predict` VALUES ('w78.AIR235', '4系列生化池.7号生化池PH');
+INSERT INTO `init_predict` VALUES ('w78.AIR236', '4系列生化池.8号生化池PH');
+INSERT INTO `init_predict` VALUES ('w78.AIRC219', '4系列生化池.7号生化池2段溶解氧DO');
+INSERT INTO `init_predict` VALUES ('w78.AIRC220', '4系列生化池.8号生化池2段溶解氧DO');
+INSERT INTO `init_predict` VALUES ('w78.AIRC223', '4系列生化池.7号生化池4段溶解氧DO');
+INSERT INTO `init_predict` VALUES ('w78.AIRC224', '4系列生化池.8号生化池4段溶解氧DO');
+INSERT INTO `init_predict` VALUES ('w78.AIRC227', '4系列生化池.7号生化池6段溶解氧DO');
+INSERT INTO `init_predict` VALUES ('w78.AIRC228', '4系列生化池.8号生化池6段溶解氧DO');
+INSERT INTO `init_predict` VALUES ('w78.FR601B', '4系列生化池.4#鼓风机分量');
+INSERT INTO `init_predict` VALUES ('w78.TIR207', '4系列生化池.7号生化池温度');
+INSERT INTO `init_predict` VALUES ('w78.TIR208', '4系列生化池.8号生化池温度');
+INSERT INTO `init_predict` VALUES ('w85.AIRA801', '1、2、4系列排江出口线.出口PH');
+INSERT INTO `init_predict` VALUES ('w85.AIRA802', '1、2、4系列排江出口线.出口SS');
+INSERT INTO `init_predict` VALUES ('w85.AIRA803', '1、2、4系列排江出口线.出口COD');
+INSERT INTO `init_predict` VALUES ('w85.AIRA804', '1、2、4系列排江出口线.出口NH3-N');
+INSERT INTO `init_predict` VALUES ('w85.AIRA805', '1、2、4系列排江出口线.出口DO');
+INSERT INTO `init_predict` VALUES ('w86.FRCQ201', '1系列465回流泵房.1系列465-1回流泵房回流量');
+INSERT INTO `init_predict` VALUES ('w86.FRCQ202', '1系列465回流泵房.2系列465-2回流泵房回流量');
+INSERT INTO `init_predict` VALUES ('w86.FRCQ203', '1系列465回流泵房.1系列465回流泵房剩余量');
+INSERT INTO `init_predict` VALUES ('w86.LISA201', '1系列465回流泵房.465吸泥池液位');
+INSERT INTO `init_predict` VALUES ('w87.FRCQ204', '2系列465A回流泵房.2系列465A回流泵房回流量');
+INSERT INTO `init_predict` VALUES ('w87.FRCQ205', '2系列465A回流泵房.2系列465A回流泵房剩余量');
+INSERT INTO `init_predict` VALUES ('w87.LISA202', '2系列465A回流泵房.465A吸泥池液位');
+INSERT INTO `init_predict` VALUES ('w88.FRCQ206', '3系列465B回流泵房.3系列465B回流泵房回流量');
+INSERT INTO `init_predict` VALUES ('w88.FRCQ207', '3系列465B回流泵房.3系列465B回流泵房剩余量');
+INSERT INTO `init_predict` VALUES ('w88.LISA204', '3系列465B回流泵房.465B吸泥池液位');
 
 -- ----------------------------
 -- Table structure for `manualdata`
@@ -1189,16 +1625,59 @@ CREATE TABLE `pre_dss` (
   `seqno` varchar(20) NOT NULL,
   `id` int(11) NOT NULL AUTO_INCREMENT,
   PRIMARY KEY (`id`),
-  KEY `FK5036F6089A42C930` (`name`),
-  KEY `FK5036F6086D246B41` (`name`),
   KEY `FK5036F60823A4A4F1` (`name`)
-) ENGINE=MyISAM AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=274000 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of pre_dss
 -- ----------------------------
-INSERT INTO `pre_dss` VALUES ('w85.AIRA802', '12', '1111.23', '20111124', '5');
-INSERT INTO `pre_dss` VALUES ('w85.AIRA802', '9', '1111.22', '20111125', '6');
+INSERT INTO `pre_dss` VALUES ('w77.AIR202', '3.9344006E-5', '          910.647778', '20080102125013', '273950');
+INSERT INTO `pre_dss` VALUES ('w78.AIR204', '3.9298677E-5', '          910.647778', '20080102125013', '273952');
+INSERT INTO `pre_dss` VALUES ('w75.AIR229', '7.0', '          910.647778', '20080102125013', '273957');
+INSERT INTO `pre_dss` VALUES ('w77.AIR233', '7.0', '          910.647778', '20080102125013', '273961');
+INSERT INTO `pre_dss` VALUES ('w78.AIR235', '7.0', '          910.647778', '20080102125013', '273963');
+INSERT INTO `pre_dss` VALUES ('w78.AIR236', '7.0', '          910.647778', '20080102125013', '273964');
+INSERT INTO `pre_dss` VALUES ('w62.AIRA101', '568.9976', '          910.647778', '20080102125013', '273965');
+INSERT INTO `pre_dss` VALUES ('w62.AIRA102', '11.966514', '          910.647778', '20080102125013', '273966');
+INSERT INTO `pre_dss` VALUES ('w74.AIRA103', '428.31717', '          910.647778', '20080102125013', '273967');
+INSERT INTO `pre_dss` VALUES ('w74.AIRA104', '19.333183', '          910.647778', '20080102125013', '273968');
+INSERT INTO `pre_dss` VALUES ('w74.AIRA106', '7.0', '          910.647778', '20080102125013', '273969');
+INSERT INTO `pre_dss` VALUES ('w62.AIRA107', '7.0', '          910.647778', '20080102125013', '273970');
+INSERT INTO `pre_dss` VALUES ('w85.AIRA801', '7.0', '          910.647778', '20080102125013', '273971');
+INSERT INTO `pre_dss` VALUES ('w85.AIRA802', '38.52968', '          910.647778', '20080102125013', '273972');
+INSERT INTO `pre_dss` VALUES ('w85.AIRA803', '73.48623', '          910.647778', '20080102125013', '273973');
+INSERT INTO `pre_dss` VALUES ('w85.AIRA804', '3.5872424', '          910.647778', '20080102125013', '273974');
+INSERT INTO `pre_dss` VALUES ('w76.AIRC212', '2.9837673', '          910.647778', '20080102125013', '273982');
+INSERT INTO `pre_dss` VALUES ('w75.AIRC213', '3.0058374', '          910.647778', '20080102125013', '273983');
+INSERT INTO `pre_dss` VALUES ('w75.AIRC214', '2.9999352', '          910.647778', '20080102125013', '273984');
+INSERT INTO `pre_dss` VALUES ('w76.AIRC216', '2.9998307', '          910.647778', '20080102125013', '273986');
+INSERT INTO `pre_dss` VALUES ('w77.AIRC217', '2.8586338', '          910.647778', '20080102125013', '273987');
+INSERT INTO `pre_dss` VALUES ('w77.AIRC218', '2.8586338', '          910.647778', '20080102125013', '273988');
+INSERT INTO `pre_dss` VALUES ('w78.AIRC219', '2.860854', '          910.647778', '20080102125013', '273989');
+INSERT INTO `pre_dss` VALUES ('w78.AIRC220', '2.860854', '          910.647778', '20080102125013', '273990');
+INSERT INTO `pre_dss` VALUES ('w77.AIRC221', '2.9922142', '          910.647778', '20080102125013', '273991');
+INSERT INTO `pre_dss` VALUES ('w77.AIRC222', '2.9922142', '          910.647778', '20080102125013', '273992');
+INSERT INTO `pre_dss` VALUES ('w78.AIRC223', '2.9841905', '          910.647778', '20080102125013', '273993');
+INSERT INTO `pre_dss` VALUES ('w78.AIRC224', '2.9841905', '          910.647778', '20080102125013', '273994');
+INSERT INTO `pre_dss` VALUES ('w77.AIRC225', '2.9967136', '          910.647778', '20080102125013', '273995');
+INSERT INTO `pre_dss` VALUES ('w77.AIRC226', '2.9967136', '          910.647778', '20080102125013', '273996');
+INSERT INTO `pre_dss` VALUES ('w78.AIRC227', '2.985795', '          910.647778', '20080102125013', '273997');
+INSERT INTO `pre_dss` VALUES ('w78.AIRC228', '2.985795', '          910.647778', '20080102125013', '273998');
+
+-- ----------------------------
+-- Table structure for `temp_init_predict`
+-- ----------------------------
+DROP TABLE IF EXISTS `temp_init_predict`;
+CREATE TABLE `temp_init_predict` (
+  `nameid` varchar(36) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `Id` varchar(36) NOT NULL DEFAULT ',',
+  `name` varchar(36) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL,
+  `value` varchar(64) CHARACTER SET utf8 COLLATE utf8_unicode_ci DEFAULT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of temp_init_predict
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for `testuser`
