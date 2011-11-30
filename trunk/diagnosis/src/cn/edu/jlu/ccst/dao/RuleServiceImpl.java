@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import cn.edu.jlu.ccst.model.Backward;
+import cn.edu.jlu.ccst.model.BackwardandResult;
 
 
 @Component("ruleServiceImpl")
@@ -26,8 +27,6 @@ public class RuleServiceImpl implements RuleServiceInter{
 		Query query = getEntityManager().createQuery("select b FROM Backward b");
 		return query.getResultList();
 	}
-	
-	
 	
 
 

@@ -53,6 +53,7 @@ public class Pre_dssServiceImpl implements Pre_dssServiceInter {
 		Query query = getEntityManager().createQuery("select u FROM Pre_dss u WHERE u.simu_time >=all(select u.simu_time from Pre_dss u)");
 		return query.getResultList();
 	}
+	
 	public List<Pre_dss> findsimu_time() {
 		Query query = getEntityManager().createQuery("select max(u.simu_time) FROM Pre_dss u ");
 		return query.getResultList();

@@ -2,8 +2,13 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
 	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:task="http://www.springframework.org/schema/task"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
            http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+           http://www.springframework.org/schema/fex  
+           http://www.springframework.org/schema/fex/spring-fex-1.5.xsd  
+           http://www.springframework.org/schema/task   
+           http://www.springframework.org/schema/task/spring-task-3.0.xsd 
            http://www.springframework.org/schema/context
            http://www.springframework.org/schema/context/spring-context-2.5.xsd
            http://www.springframework.org/schema/aop
@@ -15,7 +20,7 @@
 	<bean
 		class="org.springframework.orm.jpa.support.PersistenceAnnotationBeanPostProcessor" />
 
-	
+
 
 	<bean id="entityManagerFactory"
 		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
@@ -35,6 +40,9 @@
 	<!-- 用注解方式注入bean -->
 	<context:annotation-config />
 	<context:component-scan base-package="cn.edu.jlu.ccst" />
-	
+
+	<!-- 定时器开关 开始 -->
+	<task:annotation-driven />
+	<!-- 定时器开关 结束 -->
 
 </beans>

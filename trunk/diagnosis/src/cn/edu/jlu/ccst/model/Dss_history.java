@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -23,7 +24,7 @@ public class Dss_history implements Serializable{
 	@Id
 	@GeneratedValue
 	private int id;
-	@OneToOne(cascade={CascadeType.ALL})
+	@OneToOne
 	@JoinColumn(name="name")
 	private Init_Predict name;
 
