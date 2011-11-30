@@ -146,59 +146,65 @@ public class InterfaceAction extends ActionSupport {
 				dss_adviceService.deleteall();
 				for (Pre_dss pre : alldata) {
 
-					for (int i = 0; i < a; i++) {
-						BackwardandResult back = new BackwardandResult();
-						backwardandResult1.clear();
-						back = backwardandResult.get(i);
-						backwardandResult1.add(back);
-						System.out.println("hello"
-								+ ruleService.findreasons(backwardandResult1));
-						reasonlist1 = ruleService
-								.findreasons(backwardandResult1);
-						// reasonlist1=ruleService.findreasons((List<BackwardandReason>)backwardandResult.get(i));//有原因推出的reasonlist
-						dss_advice = new ArrayList();
-						for (BackwardandReason reason : reasonlist1) {
-							System.out.println(pre.getName() + "nihao");
-							Dss_advice da = new Dss_advice();
-							da.setName(pre.getName());
-							da.setValue(pre.getValue());
-							da.setSimu_time(pre.getSimu_time());
-							da.setSeqno(pre.getSeqno());
-							da.setError(reason.getNouns() + reason.getVerb());
-							da.setSugg("现象：" + back.getNouns() + back.getVerb()
-									+ "   原因：" + reason.getNouns()
-									+ reason.getVerb() + "  建议："
-									+ reason.getSugg());
-							dss_advice.add(da);
-							// dss_adviceService.save(da);
-						}
-					}
-					/*
-					 * for(Pre_dss are:alldata){
-					 * 
-					 * for(int i=0;i<a;i++){ BackwardandResult back=new
-					 * BackwardandResult(); backwardandResult1.clear();
-					 * back=backwardandResult.get(i);
-					 * backwardandResult1.add(back);
-					 * System.out.println("hello"+ruleService
-					 * .findreasons(backwardandResult1)); reasonlist1 =
-					 * ruleService.findreasons(backwardandResult1); //
-					 * reasonlist1
-					 * =ruleService.findreasons((List<BackwardandReason
-					 * >)backwardandResult.get(i));//有原因推出的reasonlist
-					 * dss_history = new ArrayList(); for(BackwardandReason
-					 * reason:reasonlist1){
-					 * System.out.println(pre.getName()+"nihao"); Dss_history da
-					 * = new Dss_history(); da.setName(pre.getName());
-					 * da.setValue(pre.getValue());
-					 * da.setSimu_time(pre.getSimu_time());
-					 * da.setSeqno(pre.getSeqno());
-					 * da.setError(reason.getNouns()+reason.getVerb());
-					 * da.setSugg(reason.getSugg()); dss_history.add(da);
-					 * dss_historyService.save(da); } } }
-					 */
-				}
+					if (pre.getName() != null) {
 
+						for (int i = 0; i < a; i++) {
+							BackwardandResult back = new BackwardandResult();
+							backwardandResult1.clear();
+							back = backwardandResult.get(i);
+							backwardandResult1.add(back);
+							System.out.println("hello"
+									+ ruleService
+											.findreasons(backwardandResult1));
+							reasonlist1 = ruleService
+									.findreasons(backwardandResult1);
+							// reasonlist1=ruleService.findreasons((List<BackwardandReason>)backwardandResult.get(i));//有原因推出的reasonlist
+							dss_advice = new ArrayList();
+							for (BackwardandReason reason : reasonlist1) {
+								System.out.println(pre.getName() + "nihao");
+								Dss_advice da = new Dss_advice();
+								da.setName(pre.getName());
+								da.setValue(pre.getValue());
+								da.setSimu_time(pre.getSimu_time());
+								da.setSeqno(pre.getSeqno());
+								da.setError(reason.getNouns()
+										+ reason.getVerb());
+								da.setSugg("现象：" + back.getNouns()
+										+ back.getVerb() + "   原因："
+										+ reason.getNouns() + reason.getVerb()
+										+ "  建议：" + reason.getSugg());
+								dss_advice.add(da);
+								// dss_adviceService.save(da);
+							}
+						}
+						/*
+						 * for(Pre_dss are:alldata){
+						 * 
+						 * for(int i=0;i<a;i++){ BackwardandResult back=new
+						 * BackwardandResult(); backwardandResult1.clear();
+						 * back=backwardandResult.get(i);
+						 * backwardandResult1.add(back);
+						 * System.out.println("hello"+ruleService
+						 * .findreasons(backwardandResult1)); reasonlist1 =
+						 * ruleService.findreasons(backwardandResult1); //
+						 * reasonlist1
+						 * =ruleService.findreasons((List<BackwardandReason
+						 * >)backwardandResult.get(i));//有原因推出的reasonlist
+						 * dss_history = new ArrayList(); for(BackwardandReason
+						 * reason:reasonlist1){
+						 * System.out.println(pre.getName()+"nihao");
+						 * Dss_history da = new Dss_history();
+						 * da.setName(pre.getName());
+						 * da.setValue(pre.getValue());
+						 * da.setSimu_time(pre.getSimu_time());
+						 * da.setSeqno(pre.getSeqno());
+						 * da.setError(reason.getNouns()+reason.getVerb());
+						 * da.setSugg(reason.getSugg()); dss_history.add(da);
+						 * dss_historyService.save(da); } } }
+						 */
+					}
+
+				}
 			}
 
 			return "go";

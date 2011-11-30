@@ -40,17 +40,20 @@ public class DcsDscribService {
 	 * System.out.println("Rule:"+backward.getName()+" ; "+backward.getMemo());
 	 * ruleServiceImpl.save(backward); }
 	 */
-    
+
 	public DcsDscrib getdDcsDscrib() {
 		return dDcsDscrib;
 	}
+
 	@Resource
 	public void setdDcsDscrib(DcsDscrib dDcsDscrib) {
 		this.dDcsDscrib = dDcsDscrib;
 	}
+
 	public Pre_dssService getPre_dssService() {
 		return pre_dssService;
 	}
+
 	@Resource
 	public void setPre_dssService(Pre_dssService pre_dssService) {
 		this.pre_dssService = pre_dssService;
@@ -59,12 +62,11 @@ public class DcsDscribService {
 	public DcsdataService getDcsdataService() {
 		return dcsdataService;
 	}
+
 	@Resource
 	public void setDcsdataService(DcsdataService dcsdataService) {
 		this.dcsdataService = dcsdataService;
 	}
-
-	
 
 	public DcsDscribServiceInter getDcsDscribServiceImpl() {
 		return dcsDscribServiceImpl;
@@ -78,9 +80,10 @@ public class DcsDscribService {
 
 	public List<String> findallname() {
 		List<String> name = dcsDscribServiceImpl.findAllname();
-		List<String> result  = new ArrayList();
-		for(String na:name){
-			if(na!=null&&na.trim().length()>0)result.add(na);
+		List<String> result = new ArrayList();
+		for (String na : name) {
+			if (na != null && na.trim().length() > 0)
+				result.add(na);
 		}
 		return result;
 	}
@@ -126,13 +129,14 @@ public class DcsDscribService {
 		}
 		return results;
 	}
-	
+
 	public List<BackwardandResult> validateinput() {
 		List<Dcsdata> alldata = dcsdataService.findAll();
 		List<BackwardandResult> results = new ArrayList();
-		for(Dcsdata dd: alldata){
+		for (Dcsdata dd : alldata) {
 
-			List<DcsDscrib> dcsDscribs = dcsDscribServiceImpl.findbyname(dd.getEquipment(), dd.getItem());
+			List<DcsDscrib> dcsDscribs = dcsDscribServiceImpl.findbyname(
+					dd.getEquipment(), dd.getItem());
 			if (dcsDscribs != null && dcsDscribs.size() > 0) {
 				DcsDscrib db = dcsDscribs.get(0);
 				if (dd.getValue() > db.getUpper()) {
@@ -152,41 +156,41 @@ public class DcsDscribService {
 			}
 
 		}
-		
+
 		return results;
 	}
-	
-	
+
 	public List<BackwardandResult> validateinput1() {
 		List<Pre_dss> alldata = pre_dssService.findBysimu_time();
 		List<BackwardandResult> results = new ArrayList();
-		for(Pre_dss dd: alldata){
-			
-			String temp = dd.getName().getName().replace('.',',');
-			String[] strArray = temp.split(",");
+		for (Pre_dss dd : alldata) {
+			if (dd.getName() != null) {
+				String temp = dd.getName().getName().replace('.', ',');
+				String[] strArray = temp.split(",");
 
+				// String[] strArray=dd.getName().split(",");
+				System.out.println(strArray[1]);
+				List<DcsDscrib> dcsDscribs = dcsDscribServiceImpl.findbyname(
+						strArray[0], strArray[1]);
+				if (dcsDscribs != null && dcsDscribs.size() > 0) {
+					DcsDscrib db = dcsDscribs.get(0);
+					if (dd.getValue() > db.getUpper()) {
+						BackwardandResult br = new BackwardandResult();
+						br.setNouns(db.getName());
+						br.setVerb("过高");
+						br.setMemo(db.getEque());
+						results.add(br);
+					}
+					if (dd.getValue() < db.getLower()) {
+						BackwardandResult br = new BackwardandResult();
+						br.setNouns(db.getName());
+						br.setMemo(db.getEque());
+						br.setVerb("过低");
+						results.add(br);
+					}
+				}
 
-			//String[] strArray=dd.getName().split(",");
-            System.out.println(strArray[1]);
-			List<DcsDscrib> dcsDscribs = dcsDscribServiceImpl.findbyname(strArray[0],strArray[1]);
-			if (dcsDscribs != null && dcsDscribs.size() > 0) {
-				DcsDscrib db = dcsDscribs.get(0);
-				if (dd.getValue() > db.getUpper()) {
-					BackwardandResult br = new BackwardandResult();
-					br.setNouns(db.getName());
-					br.setVerb("过高");
-					br.setMemo(db.getEque());
-					results.add(br);
-				}
-				if (dd.getValue() < db.getLower()) {
-					BackwardandResult br = new BackwardandResult();
-					br.setNouns(db.getName());
-					br.setMemo(db.getEque());
-					br.setVerb("过低");
-					results.add(br);
-				}
 			}
-
 		}
 		return results;
 	}
