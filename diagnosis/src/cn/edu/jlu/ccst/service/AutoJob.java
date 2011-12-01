@@ -154,9 +154,12 @@ public class AutoJob {
 						dh.setValue(Double.parseDouble(predss.getValue()));
 						String error = "";
 						String sugg = "";
-						for (BackwardandReason hj : houjian) {
-							error = error + hj.getNouns() + hj.getVerb() + ";";
-							sugg = sugg + hj.getSugg() + ";";
+						if (houjian != null && houjian.size() > 0) {
+							for (BackwardandReason hj : houjian) {
+								error = error + hj.getNouns() + hj.getVerb()
+										+ ";";
+								sugg = sugg + hj.getSugg() + ";";
+							}
 						}
 						da.setError(error);
 						da.setSugg(sugg);
