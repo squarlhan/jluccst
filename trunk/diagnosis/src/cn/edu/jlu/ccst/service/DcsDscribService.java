@@ -174,14 +174,14 @@ public class DcsDscribService {
 						strArray[0], strArray[1]);
 				if (dcsDscribs != null && dcsDscribs.size() > 0) {
 					DcsDscrib db = dcsDscribs.get(0);
-					if (Double.parseDouble(dd.getValue()) > db.getUpper()) {
+					if (Double.parseDouble(dd.getValue().trim()) > db.getUpper()) {
 						BackwardandResult br = new BackwardandResult();
 						br.setNouns(db.getName());
 						br.setVerb("过高");
 						br.setMemo(db.getEque());
 						results.add(br);
 					}
-					if (Double.parseDouble(dd.getValue()) < db.getLower()) {
+					if (Double.parseDouble(dd.getValue().trim()) < db.getLower()) {
 						BackwardandResult br = new BackwardandResult();
 						br.setNouns(db.getName());
 						br.setMemo(db.getEque());
