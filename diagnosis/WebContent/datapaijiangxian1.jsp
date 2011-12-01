@@ -58,7 +58,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<tr >
 	
 	<td align="right">
-	<s:textfield size="5" readonly="true" value="PH" name="dcsdatalist[1].item" theme="simple" style="background:transparent;border:0px"/></td>
+	<s:textfield size="5" readonly="true" value="出口PH" name="dcsdatalist[1].item" theme="simple" style="background:transparent;border:0px"/></td>
 	<td align="center"><s:textfield  name="dcsdatalist[1].value" theme="simple"
 	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td>PH</td>
 	
@@ -66,7 +66,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	<tr>
 	<td align="right">
-	<s:textfield  readonly="true" value="COD" name="dcsdatalist[2].item" theme="simple" style="background:transparent;border:0px"/></td>
+	<s:textfield  readonly="true" value="出口COD" name="dcsdatalist[2].item" theme="simple" style="background:transparent;border:0px"/></td>
 	<td align="center"><s:textfield name="dcsdatalist[2].value" theme="simple"
 	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td>PH</td>
 	
@@ -75,7 +75,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<tr>
 	<td align="right">
 	
-	<s:textfield  readonly="true" value="碱度" name="dcsdatalist[3].item" theme="simple" style="background:transparent;border:0px"/></td>
+	<s:textfield  readonly="true" value="出口碱度" name="dcsdatalist[3].item" theme="simple" style="background:transparent;border:0px"/></td>
 	<td align="center"><s:textfield  name="dcsdatalist[3].value" theme="simple"
 	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td>PH</td>
 	
@@ -84,25 +84,25 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<tr>
 	<td align="right">
 	
-	<s:textfield  readonly="true" value="BOD5" name="dcsdatalist[4].item" theme="simple" style="background:transparent;border:0px"/></td>
+	<s:textfield  readonly="true" value="出口BOD5" name="dcsdatalist[4].item" theme="simple" style="background:transparent;border:0px"/></td>
 	<td align="center"><s:textfield name="dcsdatalist[4].value" theme="simple"
 	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td>mg/L</td>
 		</tr>
 	
 	<tr>
-	<td align="right"><s:textfield  readonly="true" value="SS" name="dcsdatalist[5].item" theme="simple" style="background:transparent;border:0px"/></td>
+	<td align="right"><s:textfield  readonly="true" value="出口SS" name="dcsdatalist[5].item" theme="simple" style="background:transparent;border:0px"/></td>
 	<td align="center"><s:textfield  name="dcsdatalist[5].value" theme="simple"
 	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td>smu</td>
 	</tr>
 	
 	<tr>
-	<td align="right"><s:textfield  readonly="true" value="NH3-N" name="dcsdatalist[6].item" theme="simple" style="background:transparent;border:0px"/></td>
+	<td align="right"><s:textfield  readonly="true" value="出口NH3-N" name="dcsdatalist[6].item" theme="simple" style="background:transparent;border:0px"/></td>
 	<td align="center"><s:textfield name="dcsdatalist[6].value" theme="simple"
 	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td>PH</td>
 		</tr>
 
 	<tr>
-	<td align="right"><s:textfield  readonly="true" value="硝态氮" name="dcsdatalist[7].item" theme="simple" style="background:transparent;border:0px"/></td>
+	<td align="right"><s:textfield  readonly="true" value="出口硝态氮" name="dcsdatalist[7].item" theme="simple" style="background:transparent;border:0px"/></td>
 	<td align="center"><s:textfield  name="dcsdatalist[7].value" theme="simple"
 	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td>mg/L</td>
 	</tr>
@@ -127,13 +127,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	</tr>
 	<tr>
-	<td align="right"><s:textfield  readonly="true" value="NO-N" name="dcsdatalist[8].item" theme="simple" style="background:transparent;border:0px"/></td>
+	<td align="right"><s:textfield  readonly="true" value="出口NO-N" name="dcsdatalist[8].item" theme="simple" style="background:transparent;border:0px"/></td>
 	<td align="center"><s:textfield name="dcsdatalist[8].value" theme="simple"
 	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td>mg/L</td>
 		</tr>
 	
 	<tr>
-	<td align="right"><s:textfield  readonly="true" value="水量" name="dcsdatalist[9].item" theme="simple" style="background:transparent;border:0px"/></td>
+	<td align="right"><s:textfield  readonly="true" value="出口水量" name="dcsdatalist[9].item" theme="simple" style="background:transparent;border:0px"/></td>
 	<td align="center"><s:textfield name="dcsdatalist[9].value" theme="simple"
 	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td>m3/h</td>
 		</tr>

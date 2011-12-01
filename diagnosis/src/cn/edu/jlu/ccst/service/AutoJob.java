@@ -121,15 +121,17 @@ public class AutoJob {
 				List<DcsDscrib> dcsDscribs = dcsDscribServiceImpl.findbyname(
 						strArray[0], strArray[1]);
 				if (dcsDscribs != null && dcsDscribs.size() > 0) {
-					flag = false;
+//					flag = false;
 					DcsDscrib db = dcsDscribs.get(0);
 					BackwardandResult br = new BackwardandResult();
 					br.setNouns(db.getName());
 					br.setMemo(db.getEque());
-					if (Double.parseDouble(predss.getValue()) > db.getUpper()) {
+					if (Double.parseDouble(predss.getValue().trim()) > db.getUpper()) {
+						flag = false;
 						br.setVerb("过高");
 					}
-					if (Double.parseDouble(predss.getValue()) < db.getLower()) {
+					if (Double.parseDouble(predss.getValue().trim()) < db.getLower()) {
+						flag = false;
 						br.setVerb("过低");
 					}
 
@@ -146,12 +148,12 @@ public class AutoJob {
 						da.setName(predss.getName());
 						da.setSeqno(predss.getSeqno());
 						da.setSimu_time(predss.getSimu_time());
-						da.setValue(Double.parseDouble(predss.getValue()));
+						da.setValue(Double.parseDouble(predss.getValue().trim()));
 						dh.setLevel(level);
 						dh.setName(predss.getName());
 						dh.setSeqno(predss.getSeqno());
 						dh.setSimu_time(predss.getSimu_time());
-						dh.setValue(Double.parseDouble(predss.getValue()));
+						dh.setValue(Double.parseDouble(predss.getValue().trim()));
 						String error = "";
 						String sugg = "";
 						if (houjian != null && houjian.size() > 0) {
@@ -162,7 +164,7 @@ public class AutoJob {
 							}
 						}
 						da.setError(error);
-						da.setSugg(sugg);
+						da.setSugg(br.getNouns()+br.getVerb()+" : "+sugg);
 						dh.setError(error);
 						dh.setSugg(sugg);
 						dss_adviceService.save(da);
@@ -176,11 +178,11 @@ public class AutoJob {
 		}
 		if (flag) {
 			Dss_advice da = new Dss_advice();
-			Dss_history dh = new Dss_history();
+//			Dss_history dh = new Dss_history();
 			da.setSugg("一切正常");
-			dh.setSugg("一切正常");
+//			dh.setSugg("一切正常");
 			dss_adviceService.save(da);
-			dss_historyService.save(dh);
+//			dss_historyService.save(dh);
 		}
 	}
 

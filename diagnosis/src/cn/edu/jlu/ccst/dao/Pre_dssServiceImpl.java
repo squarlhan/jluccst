@@ -50,14 +50,19 @@ public class Pre_dssServiceImpl implements Pre_dssServiceInter {
 	}
     
 	public List<Pre_dss> findBysimu_time() {
-		getEntityManager().createQuery("delete FROM Pre_dss b WHERE b.name not in (select c FROM Init_Predict c)" ).executeUpdate();
-		Query query = getEntityManager().createQuery("select u FROM Pre_dss u WHERE u.simu_time >=all(select u.simu_time from Pre_dss u)");
+		String hql = "select u FROM Pre_dss u WHERE " +
+				"u.simu_time >=all(select u.simu_time from Pre_dss u) " +
+				"and u.name in (select c FROM Init_Predict c)" ;
+		//getEntityManager().createQuery("delete FROM Pre_dss b WHERE b.name not in (select c FROM Init_Predict c)" ).executeUpdate();
+		Query query = getEntityManager().createQuery(hql);
 		return query.getResultList();
 	}
 	
 	public List<Pre_dss> findsimu_time() {
-		getEntityManager().createQuery("delete FROM Pre_dss b WHERE b.name not in (select c FROM Init_Predict c)" ).executeUpdate();
-		Query query = getEntityManager().createQuery("select max(u.simu_time) FROM Pre_dss u ");
+		//getEntityManager().createQuery("delete FROM Pre_dss b WHERE b.name not in (select c FROM Init_Predict c)" ).executeUpdate();
+		String hql = "select max(u.simu_time) FROM Pre_dss u WHERE " +
+				"u.name in (select c FROM Init_Predict c)" ;
+		Query query = getEntityManager().createQuery(hql);
 		return query.getResultList();
 	}
    /* public void save(Dcsdata dcsdata) {
