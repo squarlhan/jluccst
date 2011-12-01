@@ -137,7 +137,11 @@ public class DcsdataService {
 				err.setSugg(suggs);
 				err.setTime(mytime);
 			}
-			errorlogImpl.save(err);
+			if(err.getEquipment()!=null){
+				errorlogImpl.save(err);
+			}
+				
+			
 		}
 
 		return br;
