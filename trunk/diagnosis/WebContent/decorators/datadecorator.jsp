@@ -48,7 +48,7 @@
 							    <ul>
 							      
 							       <li class="Child"><a href="/diagnosis/datadianshichang.jsp">电石厂有机水</a></li>
-							       <li class="Child">电石厂有机水</li>
+							      
 							       <li class="Child">有机合成厂有机水</li>
 							       <li class="Child">炼油厂有机水</li>
 							       <li class="Child">精细化工厂废水</li>
