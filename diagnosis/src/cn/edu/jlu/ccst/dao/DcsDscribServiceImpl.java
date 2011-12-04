@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import cn.edu.jlu.ccst.model.DcsDscrib;
+import cn.edu.jlu.ccst.model.User;
 
 
 @Component("dcsDscribServiceImpl")
@@ -23,6 +24,11 @@ public class DcsDscribServiceImpl implements DcsDscribServiceInter{
 	@PersistenceContext
 	public void setEntityManager(EntityManager em) {
 		this.em = em;
+	}
+	@SuppressWarnings("unchecked")
+	public List<DcsDscrib> findAll() {
+		Query query = getEntityManager().createQuery("select u FROM User u");
+		return query.getResultList();
 	}
 	public List<String> findAllname() {
 		Query query = getEntityManager().createQuery("select distinct name FROM DcsDscrib b");

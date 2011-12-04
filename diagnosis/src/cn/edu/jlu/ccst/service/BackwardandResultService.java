@@ -12,6 +12,7 @@ import cn.edu.jlu.ccst.dao.BackwardResultInter;
 import cn.edu.jlu.ccst.model.Backward;
 import cn.edu.jlu.ccst.model.BackwardandReason;
 import cn.edu.jlu.ccst.model.BackwardandResult;
+import cn.edu.jlu.ccst.model.User;
 
 @Component("backwardandResultService")
 public class BackwardandResultService {
@@ -43,4 +44,10 @@ public class BackwardandResultService {
 		}
 		return results;
 	}
+	public List<BackwardandResult> findall() {
+		List<BackwardandResult> resultlist = new ArrayList();
+		resultlist = backwardResultImpl.findAll();
+		return resultlist;
+	}
+	
 }

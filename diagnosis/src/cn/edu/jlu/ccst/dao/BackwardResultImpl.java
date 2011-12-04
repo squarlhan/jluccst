@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import cn.edu.jlu.ccst.model.BackwardandLower;
 import cn.edu.jlu.ccst.model.BackwardandResult;
+import cn.edu.jlu.ccst.model.User;
 import cn.edu.jlu.ccst.dao.BackwardLowerInter;
 
 @Component("backwardResultImpl")
@@ -30,6 +31,11 @@ public class BackwardResultImpl implements BackwardResultInter {
 		return query.getResultList();
     }
 	
+	@SuppressWarnings("unchecked")
+	public List<BackwardandResult> findAll() {
+		Query query = getEntityManager().createQuery("select u FROM User u");
+		return query.getResultList();
+	}
 
 
 

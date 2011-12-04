@@ -93,6 +93,12 @@ public class DcsDscribService {
 
 		return dds;
 	}
+	public List<DcsDscrib> findall() {
+		List<DcsDscrib> dcsDscriblist = dcsDscribServiceImpl.findAll();
+
+		return dcsDscriblist;
+	}
+
 
 	public void save(DcsDscrib dcsDscrib) {
 		dcsDscribServiceImpl.save(dcsDscrib);
