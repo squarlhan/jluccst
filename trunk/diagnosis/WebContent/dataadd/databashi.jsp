@@ -115,16 +115,26 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<s:hidden   value="巴氏计量槽" name="dcsdatalist[0].equipment" theme="simple" />
 	<s:hidden   value="班次" name="dcsdatalist[0].item" theme="simple" />
 	
-	
+	<tr>
+	<td align="right"><s:textfield  readonly="true" value="水量" name="dcsdatalist[7].item" theme="simple" style="background:transparent;border:0px"/></td>
+	<td align="center"><s:textfield name="dcsdatalist[7].value" theme="simple"
+	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td>m3/h</td>
+		</tr>
 	
 	
 	
 	
 	<tr>
-	<td align="right"><s:textfield  readonly="true" value="水量" name="dcsdatalist[7].item" theme="simple" style="background:transparent;border:0px"/></td>
+	<td align="right"><s:textfield  readonly="true" value="前液位" name="dcsdatalist[8].item" theme="simple" style="background:transparent;border:0px"/></td>
+	<td align="center"><s:textfield name="dcsdatalist[8].value" theme="simple"
+	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td>m3/h</td>
+		</tr>
+	<tr>
+	<td align="right"><s:textfield  readonly="true" value="后液位" name="dcsdatalist[9].item" theme="simple" style="background:transparent;border:0px"/></td>
 	<td align="center"><s:textfield name="dcsdatalist[9].value" theme="simple"
 	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td>m3/h</td>
 		</tr>
+	
 	
 	
     <tr/>
