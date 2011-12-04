@@ -13,7 +13,7 @@ public interface DcsDscribServiceInter {
 	public List<DcsDscrib> findbyname(String name) ;
 	public List<DcsDscrib> findbyitem(int item) ;
 	public List<DcsDscrib> findbyname(String eque, String item) ;
-	
+	public List<DcsDscrib> findAll();
 	
 
 

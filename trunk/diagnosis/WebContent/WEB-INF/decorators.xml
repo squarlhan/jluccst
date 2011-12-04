@@ -13,6 +13,7 @@
 		<pattern>/error*</pattern>
 		<pattern>/bioc*</pattern>
 			<pattern>/dss*</pattern>
+			<pattern>/backward*</pattern>
 	</decorator>
 	<decorator name="userlogin" page="logindecorator.jsp">
 		<pattern>/userlogin.jsp</pattern>

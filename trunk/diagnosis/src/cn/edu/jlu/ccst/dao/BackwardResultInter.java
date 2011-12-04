@@ -9,7 +9,7 @@ public interface BackwardResultInter {
 	
 	
 	public List<BackwardandResult> find(BackwardandResult br);
-
+	public List<BackwardandResult> findAll();
 
 
 	

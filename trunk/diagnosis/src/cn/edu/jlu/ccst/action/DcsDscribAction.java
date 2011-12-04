@@ -35,11 +35,18 @@ public class DcsDscribAction extends ActionSupport {
 	private RuleService ruleService; 
 	private List<String> namelist;
 	private List<Backward> backlist;
+	private List<DcsDscrib> dcsdscriblist;
 	
 	
 
 	
 
+	public List<DcsDscrib> getDcsdscriblist() {
+		return dcsdscriblist;
+	}
+	public void setDcsdscriblist(List<DcsDscrib> dcsdscriblist) {
+		this.dcsdscriblist = dcsdscriblist;
+	}
 	public RuleService getRuleService() {
 		return ruleService;
 	}
@@ -106,6 +113,14 @@ public DcsDscrib getDcsDscrib() {
 	    return SUCCESS;}
 		else return "unuserlogin";
 		}
+
+  public String findall(){
+	  dcsdscriblist=dcsDscribService.findall();
+	  return "bdsuccess";
+  }
+  
+
+
 }
 
 

@@ -53,7 +53,9 @@
 	    <action name="dcsdscribaction" class="dcsDscribAction">
 			<result name="success">userruledsc.jsp</result>
 			<result name="unuserlogin">userlogin.jsp</result>
+			<result name="bdsuccess">databdlist.jsp</result>
 	    </action>
+	    
 		
 	    <action name="ruleaction" class="ruleAction">
 			<result name="success">rulesuccess.jsp</result>
@@ -92,6 +94,10 @@
 		
 		<action name="dsshistoryaction" class="dsshistoryAction">
 			<result name="OK">useradvicelist.jsp</result>
+		</action>
+		<action name="backwardresultaction" class="backwardResultAction">
+			<result name="success">userdcsdscrib.jsp</result>
+			<result name="unuserlogin">userlogin.jsp</result>
 		</action>
 		
 	</package>
