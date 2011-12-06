@@ -44,5 +44,8 @@
 	<!-- 定时器开关 开始 -->
 	<task:annotation-driven />
 	<!-- 定时器开关 结束 -->
+	<task:scheduled-tasks>
+        <task:scheduled ref="autoJob" method="porcessdss" cron="5/10 * * * * ?"/>
+    </task:scheduled-tasks>
 
 </beans>

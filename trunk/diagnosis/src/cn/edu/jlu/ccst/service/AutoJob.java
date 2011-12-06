@@ -94,7 +94,7 @@ public class AutoJob {
 		this.dss_adviceService = dss_adviceService;
 	}
 
-	@Scheduled(fixedDelay = 10000)
+//	@Scheduled(fixedDelay = 10000)
 	public void porcessdss() {
 		List<Pre_dss> alldata = pre_dssService.findBysimu_time();
 		// List<Pre_dss> alldata = pre_dssService.findAll();
