@@ -55,7 +55,7 @@ public User getUser() {
 	}
 	public User findbyid(int id){
 		 return userServiceImpl.find(id);
-}
+    }
 	public User findbyusername(User user){
 		return userServiceImpl.finduser(user);
 	}
