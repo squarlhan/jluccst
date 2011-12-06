@@ -122,7 +122,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	<tr>
 	<td align="right"><s:textfield  readonly="true" value="水量" name="dcsdatalist[7].item" theme="simple" style="background:transparent;border:0px"/></td>
-	<td align="center"><s:textfield name="dcsdatalist[9].value" theme="simple"
+	<td align="center"><s:textfield name="dcsdatalist[7].value" theme="simple"
 	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td>m3/h</td>
 		</tr>
 	

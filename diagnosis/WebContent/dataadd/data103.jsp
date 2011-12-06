@@ -17,7 +17,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 
    %>  
     
-    <title>农药厂有机水</title>
+    <title> 103厂碱水</title>
     
     
      <script type="text/javascript">
@@ -42,7 +42,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <body>
   <div id="rightmain">
-	  <h2>农药厂有机水</h2>
+	  <h2> 103厂碱水</h2>
 <div id="login">
 <s:form action="dcsdataaction!listsave.action">
 <table width="300" align="center" style="margin-left:30">
@@ -105,14 +105,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 
 
-	<s:hidden   value="农药厂有机水" name="dcsdatalist[1].equipment" theme="simple" />
-	<s:hidden   value="农药厂有机水" name="dcsdatalist[2].equipment" theme="simple" />
-	<s:hidden   value="农药厂有机水" name="dcsdatalist[3].equipment" theme="simple" />
-	<s:hidden   value="农药厂有机水" name="dcsdatalist[4].equipment" theme="simple" />
-	<s:hidden   value="农药厂有机水" name="dcsdatalist[5].equipment" theme="simple" />
-	<s:hidden   value="农药厂有机水" name="dcsdatalist[6].equipment" theme="simple" />
-	<s:hidden   value="农药厂有机水" name="dcsdatalist[7].equipment" theme="simple" />
-	<s:hidden   value="农药厂有机水" name="dcsdatalist[0].equipment" theme="simple" />
+	<s:hidden   value="103厂碱水" name="dcsdatalist[1].equipment" theme="simple" />
+	<s:hidden   value="103厂碱水" name="dcsdatalist[2].equipment" theme="simple" />
+	<s:hidden   value="103厂碱水" name="dcsdatalist[3].equipment" theme="simple" />
+	<s:hidden   value="103厂碱水" name="dcsdatalist[4].equipment" theme="simple" />
+	<s:hidden   value="103厂碱水" name="dcsdatalist[5].equipment" theme="simple" />
+	<s:hidden   value="103厂碱水" name="dcsdatalist[6].equipment" theme="simple" />
+	<s:hidden   value="103厂碱水" name="dcsdatalist[7].equipment" theme="simple" />
+	<s:hidden   value="103厂碱水" name="dcsdatalist[0].equipment" theme="simple" />
 	<s:hidden   value="班次" name="dcsdatalist[0].item" theme="simple" />
 	
 	
