@@ -53,7 +53,7 @@
 	    <action name="dcsdscribaction" class="dcsDscribAction">
 			<result name="success">userruledsc.jsp</result>
 			<result name="unuserlogin">userlogin.jsp</result>
-			<result name="bdsuccess">databdlist.jsp</result>
+			<result name="bdsuccess">userdatadescriblist.jsp</result>
 	    </action>
 	    
 		

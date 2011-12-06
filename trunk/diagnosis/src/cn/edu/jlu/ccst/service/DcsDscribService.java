@@ -98,7 +98,14 @@ public class DcsDscribService {
 
 		return dcsDscriblist;
 	}
+	
+	public DcsDscrib findbyid(int id){
+		 return dcsDscribServiceImpl.find(id);
+    } 
 
+	public void removebyid(int id){
+		dcsDscribServiceImpl.remove(id);
+	 }
 
 	public void save(DcsDscrib dcsDscrib) {
 		dcsDscribServiceImpl.save(dcsDscrib);

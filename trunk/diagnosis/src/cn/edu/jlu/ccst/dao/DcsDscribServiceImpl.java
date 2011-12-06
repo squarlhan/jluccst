@@ -27,7 +27,7 @@ public class DcsDscribServiceImpl implements DcsDscribServiceInter{
 	}
 	@SuppressWarnings("unchecked")
 	public List<DcsDscrib> findAll() {
-		Query query = getEntityManager().createQuery("select u FROM User u");
+		Query query = getEntityManager().createQuery("select u FROM DcsDscrib u");
 		return query.getResultList();
 	}
 	public List<String> findAllname() {
@@ -58,6 +58,19 @@ public class DcsDscribServiceImpl implements DcsDscribServiceInter{
 	public List<DcsDscrib> findbyname(String eque, String item) {
 		Query query = getEntityManager().createQuery("select b FROM DcsDscrib b where b.eque='"+eque+"' and b.item='"+item+"'");
 		return query.getResultList();
+	}
+	
+	public DcsDscrib find(int id) {
+		return em.find(DcsDscrib.class, id);
+	}
+	
+	public void remove(int id) {
+		DcsDscrib dd = find(id);
+		if (dd != null) {
+			em.remove(dd);
+		
+		}
+		
 	}
 	
 

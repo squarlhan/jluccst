@@ -14,7 +14,7 @@ public interface DcsDscribServiceInter {
 	public List<DcsDscrib> findbyitem(int item) ;
 	public List<DcsDscrib> findbyname(String eque, String item) ;
 	public List<DcsDscrib> findAll();
-	
-
+	public DcsDscrib find(int id) ;
+	public void remove(int id);
 
 }
