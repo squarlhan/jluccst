@@ -97,6 +97,18 @@ public class AutoJob {
 //	@Scheduled(fixedDelay = 10000)
 	public void porcessdss() {
 		List<Pre_dss> alldata = pre_dssService.findBysimu_time();
+		List<String> advicetimes = dss_adviceService.findsimu_time();
+		String datatime = "";
+		String advicetime = "";
+		if(alldata!=null&&alldata.size()>0){
+			datatime = alldata.get(0).getSimu_time().trim();
+		}
+		if(advicetimes!=null&&advicetimes.size()>0){
+			advicetime = advicetimes.get(0).trim();
+		}
+		if(datatime==""||datatime.equals(advicetime)){
+			return;
+		}
 		// List<Pre_dss> alldata = pre_dssService.findAll();
 		dss_adviceService.deleteall();
 		boolean flag = true;

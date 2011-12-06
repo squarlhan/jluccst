@@ -10,5 +10,5 @@ public interface Pre_dssServiceInter {
 	 public List<Pre_dss> findAll();
 	 public void save(Pre_dss pre_dss);
 	 public List<Pre_dss> findBysimu_time();
-	 public List<Pre_dss> findsimu_time();
+	 public List<String> findsimu_time();
 }

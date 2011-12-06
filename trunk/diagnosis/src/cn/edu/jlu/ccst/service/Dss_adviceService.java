@@ -54,8 +54,8 @@ public class Dss_adviceService {
 	}
 	
 	
-	public List<Dss_advice> findsimu_time() {
-		List<Dss_advice> resultlist = new ArrayList();
+	public List<String> findsimu_time() {
+		List<String> resultlist = new ArrayList();
 		resultlist = dss_adviceServiceImpl.findsimu_time();
 		return resultlist;
 	}

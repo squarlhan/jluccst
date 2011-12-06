@@ -62,7 +62,7 @@ public class Dss_adviceServiceImpl implements Dss_adviceServiceInter  {
 	}
     
     
-    public List<Dss_advice> findsimu_time() {
+    public List<String> findsimu_time() {
 		Query query = getEntityManager().createQuery("select max(u.simu_time) FROM Dss_advice u ");
 		return query.getResultList();
 	}
