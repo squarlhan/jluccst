@@ -60,8 +60,8 @@ public class Pre_dssServiceImpl implements Pre_dssServiceInter {
 	
 	public List<String> findsimu_time() {
 		//getEntityManager().createQuery("delete FROM Pre_dss b WHERE b.name not in (select c FROM Init_Predict c)" ).executeUpdate();
-		String hql = "select max(u.simu_time) FROM Pre_dss u WHERE " +
-				"u.name in (select c FROM Init_Predict c)" ;
+		String hql = "select max(u.simu_time) FROM Pre_dss u" ;
+		hql = hql +" WHERE u.name in (select c FROM Init_Predict c)" ;
 		Query query = getEntityManager().createQuery(hql);
 		return query.getResultList();
 	}
