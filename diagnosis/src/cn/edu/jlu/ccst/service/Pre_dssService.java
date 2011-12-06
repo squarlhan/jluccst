@@ -66,8 +66,8 @@ public class Pre_dssService {
 		resultlist = pre_dssServiceImpl.findBysimu_time();
 		return resultlist;
 	}
-	public List<Pre_dss> findsimu_time() {
-		List<Pre_dss> resultlist = new ArrayList();
+	public List<String> findsimu_time() {
+		List<String> resultlist = new ArrayList();
 		resultlist = pre_dssServiceImpl.findsimu_time();
 		return resultlist;
 	}
