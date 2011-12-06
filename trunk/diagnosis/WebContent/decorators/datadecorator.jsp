@@ -47,70 +47,70 @@
 							  <li class="Closed">点源处理
 							    <ul>
 							      
-							       <li class="Child"><a href="/diagnosis/datadianshichang.jsp">电石厂有机水</a></li>
+							       <li class="Child"><a href="/diagnosis/dataadd/datadianshichang.jsp">电石厂有机水</a></li>
 							      
-							       <li class="Child">有机合成厂有机水</li>
-							       <li class="Child">炼油厂有机水</li>
-							       <li class="Child">精细化工厂废水</li>
-							       <li class="Child">乙二醇废水</li>
-							       <li class="Child">环氧乙烷废水</li>
+							       <li class="Child"><a href="/diagnosis/dataadd/datahechengchang.jsp">有机合成厂有机水</a></li>
+							       <li class="Child"><a href="/diagnosis/dataadd/datalianyouchang.jsp">炼油厂有机水</a></li>
+							       <li class="Child"><a href="/diagnosis/dataadd/datajingxi.jsp">精细化工厂废水</a></li>
+							       <li class="Child"><a href="/diagnosis/dataadd/datayierchun.jsp">乙二醇废水</a></li>
+							       <li class="Child"><a href="/diagnosis/dataadd/datahuanyang.jsp">环氧乙烷废水</a></li>
 							      
-							       <li class="Child">农药厂有机水</li>
-							       <li class="Child">含氮废水</li>
-							       <li class="Child">103厂碱水</li>
-							       <li class="Child">化肥厂丁辛醇</li>
-							       <li class="Child">丙烯腈废水</li>
-							       <li class="Child">合成树脂厂有机水</li>
-							       <li class="Child">龙潭区生活水</li>
+							       <li class="Child"><a href="/diagnosis/dataadd/datanongyaochang.jsp">农药厂有机水</a></li>
+							       <li class="Child"><a href="/diagnosis/dataadd/datahandan.jsp">含氮废水</a></li>
+							       <li class="Child"><a href="/diagnosis/dataadd/data103.jsp">103厂碱水</a></li>
+							       <li class="Child"><a href="/diagnosis/dataadd/datahuafei.jsp">化肥厂丁辛醇</a></li>
+							       <li class="Child"><a href="/diagnosis/dataadd/databingxi.jsp">丙烯腈废水</a></li>
+							       <li class="Child"><a href="/diagnosis/dataadd/datashuzhi.jsp">合成树脂厂有机水</a></li>
+							       <li class="Child"><a href="/diagnosis/dataadd/datalongtan.jsp">龙潭区生活水</a></li>
 							      
 							    </ul>
 							  </li>
 							  <li class="Closed">中和处理
 							   <ul>
-							      <li class="Child">染料厂酸水</li>
-							      <li class="Child">电石厂酸水</li> 
-							       <li class="Child">铁运489沉淀池出水</li>
+							      <li class="Child"><a href="/diagnosis/dataadd/dataranliao.jsp">染料厂酸水</a></li>
+							      <li class="Child"><a href="/diagnosis/dataadd/datadianshichang.jsp">电石厂酸水</a></li> 
+							       <li class="Child"><a href="/diagnosis/dataadd/data489.jsp">铁运489沉淀池出水</a></li>
 							   </ul>
 							  </li>
 							  <li class="Closed">生活水处理
 							   <ul>
-							    <li class="Child">14a</li>
-							   <li class="Child">14b</li>
+							    <li class="Child"><a href="/diagnosis/dataadd/data14a.jsp">14a</a></li>
+							   <li class="Child"><a href="/diagnosis/dataadd/data14b.jsp">14b</a></li>
 							    </ul>
 							  </li>
 							  <li class="Closed">预处理
 							    <ul>
-							       <li class="Child">稳流池(477)进水</li>
-							       <li class="Child">进水提升泵房(462A)</li>
-							       <li class="Child">巴氏计量槽（499）</li>
-							       <li class="Child">除色池(414)</li>
-							       <li class="Child">沉沙刮沙池(488)</li>
-							       <li class="Child">初沉池(489B)</li>
-							       <li class="Child">事故池(489)</li>
-							       <li class="Child">14B生活水</li>
-							       <li class="Child">老水解酸化池</li>
-							       <li class="Child">新水解酸化池</li>
+							       <li class="Child"><a href="/diagnosis/dataadd/datawenliuchi.jsp">稳流池(477)进水</a></li>
+							       <li class="Child"><a href="/diagnosis/dataadd/datajinshui.jsp">进水提升泵房(462A)</a></li>
+							       <li class="Child"><a href="/diagnosis/dataadd/databashi.jsp">巴氏计量槽（499）</a></li>
+							       <li class="Child"><a href="/diagnosis/dataadd/datachusechi(414).jsp">除色池(414)</a></li>
+							       <li class="Child"><a href="/diagnosis/dataadd/datachenshaguashachi(488).jsp">沉沙刮沙池(488)</a></li>
+							       <li class="Child"><a href="/diagnosis/dataadd/datachuchenshi(489B).jsp">初沉池(489B)</a></li>
+							       <li class="Child"><a href="/diagnosis/dataadd/datashuguchi(489).jsp">事故池(489)</a></li>
+							       <li class="Child"><a href="/diagnosis/dataadd/data14Bshenghuoshui.jsp">14B生活水</a></li>
+							       <li class="Child"><a href="/diagnosis/dataadd/datalaoshuijiesuanhuachi.jsp">老水解酸化池</a></li>
+							       <li class="Child"><a href="/diagnosis/dataadd/dataxinshuijiesuanhuachi.jsp">新水解酸化池</a></li>
 							      
-							       <li class="Child">污泥泵房(466)</li>
+							       <li class="Child"><a href="/diagnosis/dataadd/datawunichi(V466).jsp">污泥泵房(466)</a></li>
 							       <li class="Child">浓缩池(491)</li>
-							       <li class="Child">脱水装置(495)</li>
+							       <li class="Child"><a href="/diagnosis/dataadd/datatuoshuizhuangzhi(495).jsp">脱水装置(495)</a></li>
 							    </ul>
 							  </li>
 								<li class="Closed">生化处理
 									<ul>
-										 <li class="Child">1、2系列465回流泵房</li>
-								         <li class="Child">3系列465A回流泵房</li>
-								         <li class="Child">3系列465B回流泵房</li>
-										 <li class="Child">中间提升泵房(462B)</li>
+										 <li class="Child"><a href="/diagnosis/dataadd/data465huiliubengfang--1.jsp">1、2系列465回流泵房</a></li>
+								         <li class="Child"><a href="/diagnosis/dataadd/data465Ahuiliubengfang--2.jsp">3系列465A回流泵房</a></li>
+								         <li class="Child"><a href="/diagnosis/dataadd/data465Bhuiliubengfang--3.jsp">3系列465B回流泵房</a></li>
+										 <li class="Child"><a href="/diagnosis/dataadd/datazhongjiantishengbengfang(462B).jsp">中间提升泵房(462B)</a></li>
 										 <li class="Child"><a href="/diagnosis/biocpool490/biocpool1.jsp">生化池系列1</a></li>	
 									     <li class="Child"><a href="/diagnosis/biocpool490/biocpool2.jsp">生化池系列2</a></li>
 										<li class="Child"><a href="/diagnosis/biocpool490/biocpool3.jsp">生化池系列3</a></li>
 										<li class="Child"><a href="/diagnosis/biocpool490/biocpool4.jsp">生化池系列4</a></li>
-										<li class="Child">1系列二沉池</li>
-										<li class="Child">2系列二沉池</li>
-										<li class="Child">3系列二沉池</li>
-										<li class="Child">4系列二沉池</li>
-										<li class="Child">接触氧化池</li>
+										<li class="Child"><a href="/diagnosis/dataadd/dataerchenchi--1.jsp">1系列二沉池</a></li>
+										<li class="Child"><a href="/diagnosis/dataadd/dataerchenchi--2.jsp">2系列二沉池</a></li>
+										<li class="Child"><a href="/diagnosis/dataadd/dataerchenchi--3.jsp">3系列二沉池</a></li>
+										<li class="Child"><a href="/diagnosis/dataadd/dataerchenchi--4.jsp">4系列二沉池</a></li>
+										<li class="Child"><a href="/diagnosis/dataadd/datajiechuyanghuachi.jsp">接触氧化池</a></li>
 										<li class="Child"><a href="/diagnosis/datapaijiangxian1.jsp">3系列排江出口线</a></li>
 										<li class="Child"><a href="/diagnosis/datapaijiangxian2.jsp">1、2、4系列排江出口线</a></li>
 									</ul>
