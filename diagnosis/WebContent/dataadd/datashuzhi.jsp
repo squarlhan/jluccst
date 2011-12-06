@@ -17,7 +17,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 
    %>  
     
-    <title> 合成树脂厂有积水</title>
+    <title> 合成树脂厂有机水</title>
     
     
      <script type="text/javascript">
@@ -42,7 +42,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <body>
   <div id="rightmain">
-	  <h2> 合成树脂厂有积水</h2>
+	  <h2> 合成树脂厂有机水</h2>
 <div id="login">
 <s:form action="dcsdataaction!listsave.action">
 <table width="300" align="center" style="margin-left:30">
@@ -105,14 +105,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 
 
-	<s:hidden   value="合成树脂厂有积水" name="dcsdatalist[1].equipment" theme="simple" />
-	<s:hidden   value="合成树脂厂有积水" name="dcsdatalist[2].equipment" theme="simple" />
-	<s:hidden   value="合成树脂厂有积水" name="dcsdatalist[3].equipment" theme="simple" />
-	<s:hidden   value="合成树脂厂有积水" name="dcsdatalist[4].equipment" theme="simple" />
-	<s:hidden   value="合成树脂厂有积水" name="dcsdatalist[5].equipment" theme="simple" />
-	<s:hidden   value="合成树脂厂有积水" name="dcsdatalist[6].equipment" theme="simple" />
-	<s:hidden   value="合成树脂厂有积水" name="dcsdatalist[7].equipment" theme="simple" />
-	<s:hidden   value="合成树脂厂有积水" name="dcsdatalist[0].equipment" theme="simple" />
+	<s:hidden   value="合成树脂厂有机水" name="dcsdatalist[1].equipment" theme="simple" />
+	<s:hidden   value="合成树脂厂有机水" name="dcsdatalist[2].equipment" theme="simple" />
+	<s:hidden   value="合成树脂厂有机水" name="dcsdatalist[3].equipment" theme="simple" />
+	<s:hidden   value="合成树脂厂有机水" name="dcsdatalist[4].equipment" theme="simple" />
+	<s:hidden   value="合成树脂厂有机水" name="dcsdatalist[5].equipment" theme="simple" />
+	<s:hidden   value="合成树脂厂有机水" name="dcsdatalist[6].equipment" theme="simple" />
+	<s:hidden   value="合成树脂厂有机水" name="dcsdatalist[7].equipment" theme="simple" />
+	<s:hidden   value="合成树脂厂有机水" name="dcsdatalist[0].equipment" theme="simple" />
 	<s:hidden   value="班次" name="dcsdatalist[0].item" theme="simple" />
 	
 	
@@ -122,7 +122,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	<tr>
 	<td align="right"><s:textfield  readonly="true" value="水量" name="dcsdatalist[7].item" theme="simple" style="background:transparent;border:0px"/></td>
-	<td align="center"><s:textfield name="dcsdatalist[9].value" theme="simple"
+	<td align="center"><s:textfield name="dcsdatalist[7].value" theme="simple"
 	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td>m3/h</td>
 		</tr>
 	
