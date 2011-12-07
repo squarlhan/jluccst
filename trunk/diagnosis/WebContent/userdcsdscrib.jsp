@@ -43,9 +43,9 @@
 						<td align="right">检测节点：</td>
 						<td align="left">
 							<div class="nobr">
-								<s:doubleselect theme="simple" name="dcsDscrib.eque"
+								<s:doubleselect theme="simple" name="dcsDscrib.eque" 
 									list="#session.map2.keySet()" doubleName="dcsDscrib.item"
-									doubleList="#session.map2[top]"></s:doubleselect>
+									doubleList="#session.map2[top]"  ></s:doubleselect>
 							</div>
 						</td>
 					</tr>
