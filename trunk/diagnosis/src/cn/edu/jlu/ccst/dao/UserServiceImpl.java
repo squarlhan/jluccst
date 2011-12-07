@@ -48,7 +48,7 @@ public class UserServiceImpl implements UserServiceInter {
 
 	public void remove(int id) {
 		User person = find(id);
-		System.out.println(person+"实现接口里的");
+	
 		if (person != null) {
 			em.remove(person);
 		

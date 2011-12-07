@@ -16,7 +16,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    %>  
     <base href="<%=basePath%>">
     
-    <title>用户信息</title>
+    <title>规则修改界面</title>
+     <script type="text/javascript">
+    	function confirmDel(){
+			return confirm("确定删除？");
+			
+			    
+			
+    	}
+    	function confirmReset(){
+			return confirm("确认修改？");
+			
+    	}
+    	
+    </script>
+    	
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">    
@@ -29,67 +43,48 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <body>
   <div id="rightmain">
-	  <h2>用户修改信息</h2>
+	  <h2>规则修改界面</h2>
 	  
-      <div id="login">
+   
 <s:form action="useraction!alterUser.action">
 <table width="320" align="center" style="margin-left:30">
 	<tr>
 	 <td ><label>
-	   <s:property value="#session.us.username"/>
+	   <s:property value="result.nouns+result.verb"/>
 	  
 	    </label></td>
 	  </tr>
-	<tr>
-	 <td align="center"><label>
-	    <s:textfield name="user.name" key="姓名" value="%{#session.us.name}" />
-	    </label></td>
-	  </tr>
-	<tr>
-	  <td >当前密码</td>
-	  <td ><label>
-	    <input type="password" name="currentpassword">
-	  </label></td>
-	  </tr>
-	<tr>
-	<tr>
-	  <td >新密码</td>
-	  <td ><label>
-	    <input type="password" name="newpassword">
-	  </label></td>
-	  </tr>
-	<tr>
 	
-	 <td align="center"><label>
-	    <s:textfield name="user.email" key="电子邮箱" value="%{#session.us.email}" />
-	    </label></td>
+	 <table bordercolor="#FFFFFF" rules="all"  id="mytable" class="list_table" align="center" width="100%" >
+		<tr bgcolor="#4A708B">
+
+			<th width = "20%">原因名词</th>
+			<th width = "20%">原因动词</th>
+			<th width = "50%">相关建议</th>			
+			<th width = "10%">相关操作</th>	
 	  </tr>
-	<tr>
-	 <td align="center"><label>
-	    <s:textfield name="user.jid" key="工作号" value="%{#session.us.jid}" />
-	    </label></td>
-	  </tr>
-	<tr>
-	 <td align="center"><label>
-	    <s:textfield name="user.phone" key="电话" value="%{#session.us.phone}" />
-	    </label></td>
-	  </tr>
-	  <tr>
-	 <td align="center"><label>
-	    <s:textfield name="user.dept" key="部门" value="%{#session.us.dept}" />
-	    </label></td>
-	  </tr>
-	</table>
-	<br/>
-	<table width="150" align="center">
-	<tr>
-	<td width="80" align="center"><s:submit value="修改" theme="simple" />
-	  <div align="center"></div></td>
+    <s:iterator id="reasons" value="reasonlist" status="index1">
+     <tr  align="center"  bordercolor="#FFFFFF" bgcolor="<s:if test="#index1.odd == true">#ffffff</s:if><s:else>#EDEDED</s:else>" style="color: Black; ">
+    
+       <td><s:textfield name="nouns" value="%{nouns}" theme = "simple" size="10" style="background:transparent;border:0px" />&nbsp;</td>   
+       <td><s:textfield name="verb" value="%{verb}" theme = "simple" size="10" id="verb[%{#id}] " style="background:transparent;border:0px" />&nbsp;</td>
+       <td><s:textfield   name="sugg" value="%{sugg}" theme = "simple" size="40" id="upper[%{#id}]" style="background:transparent;border:0px"  />&nbsp;</td>
+          <td>
+		<s:a href="backwardresonaction!update?backwardandreason.id=%{id}" onclick="return confirmReset();">修改</s:a>
+
+						
+						&nbsp;
+		<s:a href="backwardresonaction!delete?backwardandreason.id=%{id}" onclick="return confirmDel();">
+																						删除</s:a>
+       
+	   </td>
+     </tr>
+     </s:iterator>
+  </table>
+
 	
-	<td width="80" align="center"> <s:reset value="重置"
-		theme="simple" /></td></tr></table>
 </s:form></div>
-</div>
+
    
   </body>
 </html>
