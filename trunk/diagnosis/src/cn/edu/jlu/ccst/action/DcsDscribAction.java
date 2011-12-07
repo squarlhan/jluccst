@@ -25,6 +25,35 @@ public class DcsDscribAction extends ActionSupport {
 	private DcsDscrib dcsDscrib;
 	private RuleService ruleService;
 	private List<DcsDscrib> dcsdscriblist;
+	private Map nvs;
+	private String dcsDscribname1;
+	private String dcsDscribname2;
+	
+	
+
+	public Map getNvs() {
+		return nvs;
+	}
+
+	public String getDcsDscribname1() {
+		return dcsDscribname1;
+	}
+
+	public void setDcsDscribname1(String dcsDscribname1) {
+		this.dcsDscribname1 = dcsDscribname1;
+	}
+
+	public String getDcsDscribname2() {
+		return dcsDscribname2;
+	}
+
+	public void setDcsDscribname2(String dcsDscribname2) {
+		this.dcsDscribname2 = dcsDscribname2;
+	}
+
+	public void setNvs(Map nvs) {
+		this.nvs = nvs;
+	}
 
 	public List<DcsDscrib> getDcsdscriblist() {
 		return dcsdscriblist;
@@ -70,9 +99,22 @@ public class DcsDscribAction extends ActionSupport {
 			return false;
 	}
 
+	public String goadd(){
+		if (checkuser()) {
+			nvs = dcsDscribService.getallnvs();
+			ActionContext actionContext = ActionContext.getContext();
+			Map session = actionContext.getSession();
+			session.put("map2", nvs);
+			return "success";
+		}
+		return "unuserlogin";
+	}
+	
 	public String addDescrib() {
+		dcsDscrib.setName(dcsDscribname1+dcsDscribname2);
 		dcsDscribService.save(dcsDscrib);
-		return SUCCESS;
+		dcsdscriblist = dcsDscribService.findall();
+		return "bdsuccess";
 	}
 
 	public String deleteDscrib() {

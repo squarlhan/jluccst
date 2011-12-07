@@ -12,8 +12,8 @@
   <body>
     <table align="center" width="100%" id="nav">
           <!--<tr align="center"><td><li><a href="/diagnosis/userruleadd.jsp">录入规则</a></li></td></tr>  -->
-          <tr align="center"><td><li><a href="/diagnosis/dcsdscribaction.action">规则录入</a></li></td></tr>
-           <tr align="center"><td><li><a href="/diagnosis/backwardresultaction.action">规则描述</a></li></td></tr>
+          <tr align="center"><td><li><a href="/diagnosis/userruledsc.jsp">规则录入</a></li></td></tr>
+           <tr align="center"><td><li><a href="/diagnosis/dcsdscribaction.action">规则描述</a></li></td></tr>
           <tr align="center"><td><li><a href="/diagnosis/biocpool490/biocpool1.jsp">数据录入</a></li></td></tr>
          <tr align="center"><td><li><a href="/diagnosis/monitoraction.action">dcs设备推演</a></li></td></tr>
          <tr align="center"><td><li><a href="/diagnosis/interfaceaction.action">工艺接口</a></li></td></tr>

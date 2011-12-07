@@ -57,7 +57,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  <h2>数据描述维护</h2>
 	
      
- 
+ <div align="right">
+      <input name="button" type=button onClick="window.location.href('dcsdscribaction!goadd.action')" value="新建参数描述">
+      </div>
   <table bordercolor="#FFFFFF" rules="all"  id="mytable" class="list_table" align="center" width="100%" >
 		<tr bgcolor="#4A708B">
 		    <th width = "13%">故障节点</th>
