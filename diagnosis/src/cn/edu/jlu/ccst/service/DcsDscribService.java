@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 
 import cn.edu.jlu.ccst.dao.DcsDscribServiceImpl;
 import cn.edu.jlu.ccst.dao.DcsDscribServiceInter;
+import cn.edu.jlu.ccst.dao.Init_PredictServiceInter;
 import cn.edu.jlu.ccst.model.*;
 
 @Component("dcsDscribService")
@@ -23,6 +24,7 @@ public class DcsDscribService {
 	private DcsDscribServiceInter dcsDscribServiceImpl;
 	private DcsdataService dcsdataService;
 	private Pre_dssService pre_dssService;
+	private Init_PredictServiceInter init_predictServiceImpl;
 	/*
 	 * public Backward getBackward() { return backward; }
 	 * 
@@ -43,6 +45,15 @@ public class DcsDscribService {
 
 	public DcsDscrib getdDcsDscrib() {
 		return dDcsDscrib;
+	}
+
+	public Init_PredictServiceInter getInit_predictServiceImpl() {
+		return init_predictServiceImpl;
+	}
+	@Resource
+	public void setInit_predictServiceImpl(
+			Init_PredictServiceInter init_predictServiceImpl) {
+		this.init_predictServiceImpl = init_predictServiceImpl;
 	}
 
 	@Resource
@@ -109,6 +120,34 @@ public class DcsDscribService {
 
 	public void save(DcsDscrib dcsDscrib) {
 		dcsDscribServiceImpl.save(dcsDscrib);
+	}
+	
+	public Map getallnvs() {
+		Map result = new HashMap();
+
+		List<Init_Predict> ips = init_predictServiceImpl.findAll();
+
+		for (Init_Predict ip : ips) {
+			String temp = ip.getName().replace('.', ',');
+			String[] strArray = temp.trim().split(",");
+			if(strArray.length>=2){
+				List<String> pps = init_predictServiceImpl.findbyjiedian(strArray[0]);
+				List<String> canshus = new ArrayList();
+				if(pps!=null&&pps.size()>0){
+					for(String pp:pps){
+					    String temp2 = pp.replace('.', ',');
+					    String[] strArray2 = temp2.trim().split(",");
+					    if(strArray2.length>=2){
+					    	canshus.add(strArray2[1].trim());
+					    }
+					}
+				}
+				result.put(strArray[0].trim(), canshus);
+			}
+			
+		}
+
+		return result;
 	}
 
 	public List<BackwardandResult> validateinput(Map map) {
