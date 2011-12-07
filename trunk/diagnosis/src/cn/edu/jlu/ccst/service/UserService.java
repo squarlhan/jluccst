@@ -53,6 +53,22 @@ public User getUser() {
 			return u1;
 		else return null;
 	}
+	
+	public User exitsadmin(User user){
+		User u1=userServiceImpl.findadmin(user);
+		
+		if(u1!=null)
+			return u1;
+		else return null;
+	}
+	
+	public User exitsprof(User user){
+		User u1=userServiceImpl.findprof(user);
+		
+		if(u1!=null)
+			return u1;
+		else return null;
+	}
 	public User findbyid(int id){
 		 return userServiceImpl.find(id);
     }

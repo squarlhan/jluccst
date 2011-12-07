@@ -109,7 +109,7 @@ public class AdminAction extends ActionSupport {
 		Admin flag1;
 		userlist = userService.findall();
 		flag1=adminService.exits(admin);
-		System.out.print(admin);
+		
 		if(flag1==null){
 			
 		  return "loginerror";}

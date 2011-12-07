@@ -194,6 +194,37 @@ public class UserAction extends ActionSupport {
 	        return "loginsuccess";}
 		
 		}
+	public String exitsadmin() {
+		User flag1;
+		userlist = userService.findall();
+		flag1=userService.exitsadmin(user);
+		
+		if(flag1==null){
+			
+		  return "loginerror";}
+		 else {
+			 ActionContext actionContext = ActionContext.getContext();
+	        Map session = actionContext.getSession();
+	        session.put("ad", flag1);
+	        return SUCCESS;}
+		
+		}
+	
+	public String exitsprof() {
+		User flag1;
+		userlist = userService.findall();
+		flag1=userService.exitsprof(user);
+		
+		if(flag1==null){
+			
+		  return "loginerror";}
+		 else {
+			 ActionContext actionContext = ActionContext.getContext();
+	        Map session = actionContext.getSession();
+	        session.put("pr", flag1);
+	        return SUCCESS;}
+		
+		}
 	
 	public boolean checkuser(){
 		ActionContext actionContext = ActionContext.getContext();
@@ -206,8 +237,8 @@ public class UserAction extends ActionSupport {
 	}
 	public boolean checkadmin(){
 		ActionContext actionContext = ActionContext.getContext();
-        Map admin = actionContext.getSession();
-        Admin ad = (Admin) admin.get("ad");
+        Map user = actionContext.getSession();
+        User ad = (User) user.get("ad");
 		if(ad!=null){
 			return true;
 		}
