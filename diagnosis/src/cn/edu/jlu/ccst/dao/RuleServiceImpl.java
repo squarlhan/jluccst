@@ -55,4 +55,5 @@ public class RuleServiceImpl implements RuleServiceInter{
 		return em.find(Backward.class, bid);
 	}
 
+
 }
