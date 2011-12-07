@@ -45,13 +45,22 @@ public class RuleService {
 	}
 
 	public void delete(Backward backward){
-		ruleServiceImpl.remove(backward.getBid());
+		if(backward.getBid()>0){
+		     ruleServiceImpl.remove(backward.getBid());
+		}
 	}
 	
 	public void save(Backward backward) {
-		ruleServiceImpl.save(backward);
+		if(backward.getBid()>0){
+		     ruleServiceImpl.save(backward);
+		}
 	}
-	
+	public Backward find(Backward backward){
+		if(backward.getBid()>0){
+			return ruleServiceImpl.find(backward.getBid()) ;
+		}
+		return null;
+	}
 	public List<Backward> findAll() {
 		List<Backward> resultlist = new ArrayList();
 		resultlist = ruleServiceImpl.findAll();

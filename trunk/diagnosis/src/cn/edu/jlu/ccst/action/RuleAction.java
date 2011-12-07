@@ -186,12 +186,7 @@ public class RuleAction extends ActionSupport {
 	}
 
 	public String godetail() {
-		for (Backward back : backlist) {
-			if (rule.getBid() == back.getBid()) {
-				rule = back;
-				break;
-			}
-		}
+		rule = ruleService.find(rule);
 		return "show";
 	}
 
