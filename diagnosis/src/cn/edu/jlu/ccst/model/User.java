@@ -25,7 +25,9 @@ public class User implements Serializable{
 	private String phone;
 	private String name;
 	private String dept;
-	
+	private String isuser;
+	private String isadmin;
+	private String isprof;
 	
 	
 	public User() {
@@ -43,6 +45,34 @@ public class User implements Serializable{
 		this.name = name;
 		this.jid = jid;
 		this.dept = dept;
+		this.isuser = isuser;
+		this.isadmin = isadmin;
+		this.isprof = isprof;
+	}
+   
+	
+	public String getIsuser() {
+		return isuser;
+	}
+
+	public void setIsuser(String isuser) {
+		this.isuser = isuser;
+	}
+
+	public String getIsadmin() {
+		return isadmin;
+	}
+
+	public void setIsadmin(String isadmin) {
+		this.isadmin = isadmin;
+	}
+
+	public String getIsprof() {
+		return isprof;
+	}
+
+	public void setIsprof(String isprof) {
+		this.isprof = isprof;
 	}
 
 	public String getDept() {

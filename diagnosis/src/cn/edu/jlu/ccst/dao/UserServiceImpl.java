@@ -80,7 +80,7 @@ public class UserServiceImpl implements UserServiceInter {
 	}
 	
 	public User find(User user) {
-		Query query = getEntityManager().createQuery("select u FROM User u where u.username =  '"+user.getUsername()+"' and u.password='"+ user.getPassword()+"'");
+		Query query = getEntityManager().createQuery("select u FROM User u where u.username =  '"+user.getUsername()+"' and u.password='"+ user.getPassword()+"'and u.isuser=1");
 		@SuppressWarnings("unchecked")
 		List<User> results= query.getResultList();
 		System.out.println(results);
@@ -90,11 +90,43 @@ public class UserServiceImpl implements UserServiceInter {
 			System.out.println(((User) results.get(0)).getId());
 			
 			
-			return (User) results.get(0);//User re=em.find(User.class, user);
+			return (User) results.get(0);
 		}
-		//System.out.println(user.getId());
-		//return re;
-		//return em.find(User.class, user);
+		
+		
+	}
+	
+	public User findadmin(User user) {
+		Query query = getEntityManager().createQuery("select u FROM User u where u.username =  '"+user.getUsername()+"' and u.password='"+ user.getPassword()+"'and u.isadmin=1");
+		@SuppressWarnings("unchecked")
+		List<User> results= query.getResultList();
+		System.out.println(results);
+		if(results.size()<1)
+			return null;
+		else{
+			System.out.println(((User) results.get(0)).getId());
+			
+			
+			return (User) results.get(0);
+		}
+		
+		
+	}
+	
+	public User findprof(User user) {
+		Query query = getEntityManager().createQuery("select u FROM User u where u.username =  '"+user.getUsername()+"' and u.password='"+ user.getPassword()+"'and u.isprof=1");
+		@SuppressWarnings("unchecked")
+		List<User> results= query.getResultList();
+		System.out.println(results);
+		if(results.size()<1)
+			return null;
+		else{
+			System.out.println(((User) results.get(0)).getId());
+			
+			
+			return (User) results.get(0);
+		}
+		
 		
 	}
 	public User find(int id) {

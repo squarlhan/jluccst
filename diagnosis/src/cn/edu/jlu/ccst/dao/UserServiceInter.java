@@ -17,7 +17,8 @@ public interface UserServiceInter {
 	public User find(int id);
 	public User finduser(User user);
 	public List<User> searchUser(User user);
-	
+	public User findadmin(User user);
+	public User findprof(User user);
 	
 
 
