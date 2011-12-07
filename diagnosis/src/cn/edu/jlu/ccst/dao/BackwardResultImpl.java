@@ -37,7 +37,7 @@ public class BackwardResultImpl implements BackwardResultInter {
 		return query.getResultList();
 	}
 
-
+	
 
 	
 

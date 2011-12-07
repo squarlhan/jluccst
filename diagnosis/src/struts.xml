@@ -102,6 +102,10 @@
 			<result name="unuserlogin">userlogin.jsp</result>
 		</action>
 		
+		<action name="backwardresonaction" class="backwardResonAction">
+			<result name="success">ruleaction!getall.action</result>
+			<result name="unuserlogin">userlogin.jsp</result>
+		</action>
 	</package>
 
 </struts>

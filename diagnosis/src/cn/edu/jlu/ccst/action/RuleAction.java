@@ -27,7 +27,7 @@ public class RuleAction extends ActionSupport {
 	private RuleService ruleService;
 	private BackwardandResult result;
 	private List<BackwardandReason> reasonlist;
-
+	
 	private List<Backward> backlist;
 	private Backward rule;
 	private List<String> reason_noun;
@@ -40,7 +40,7 @@ public class RuleAction extends ActionSupport {
 	private int resultv_value;
 
 	private List<String> namelist;
-
+    
 	public String getResultn1() {
 		return resultn1;
 	}
@@ -187,6 +187,10 @@ public class RuleAction extends ActionSupport {
 
 	public String godetail() {
 		rule = ruleService.find(rule);
+		result=rule.getResults().get(0);
+				
+		reasonlist=rule.getReasons();
+		System.out.println(rule.getReasons());
 		return "show";
 	}
 

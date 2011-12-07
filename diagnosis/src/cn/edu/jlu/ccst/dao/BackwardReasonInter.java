@@ -10,10 +10,10 @@ public interface BackwardReasonInter {
 	
 	public List<BackwardandReason> find(Backward bw);
 
+	public void save(BackwardandReason backwardandReason);
 
-
-	
-	
+	public BackwardandReason find(int id);
+	public void remove(int id);
 	
 
 
