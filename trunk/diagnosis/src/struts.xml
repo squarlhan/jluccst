@@ -59,9 +59,11 @@
 		
 	    <action name="ruleaction" class="ruleAction">
 			<result name="success">rulesuccess.jsp</result>
-		    <result name="input">userdatasuccess.jsp</result>
+		    <result name="input">rulesuccess.jsp</result>
 			<result name="go">usergo.jsp</result>
 			<result name="unuserlogin">userlogin.jsp</result>
+			<result name="list">rulelist.jsp</result>
+			<result name="show">ruleshow.jsp</result>
 			<result name="unadminlogin">adminlogin.jsp</result>
 		</action>
 		

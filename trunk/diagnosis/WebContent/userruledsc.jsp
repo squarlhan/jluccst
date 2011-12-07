@@ -109,7 +109,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <tr >
       <td height="54" colspan="2"><h2>规则录入界面</h2>
        
-       
+       <!--  
        <tr>
       <td  height="35" style="width: 200px; "><div align="left" >规则名称：
         <input name="rule.name" type="text" size="12" />
@@ -118,7 +118,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <input name="rule.memo" type="text" size="72"  /></td>
   
     </tr>
-  
+  -->
     <tr>
       <td colspan="2"><table id="adresulttable"  bgcolor="#EDEDED" width="100%" height="100%" border="0" cellspacing="0" >
         <tr>

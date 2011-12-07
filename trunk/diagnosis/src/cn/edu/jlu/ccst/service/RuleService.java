@@ -44,8 +44,11 @@ public class RuleService {
 		this.ruleServiceImpl = ruleServiceImpl;
 	}
 
+	public void delete(Backward backward){
+		ruleServiceImpl.remove(backward.getBid());
+	}
+	
 	public void save(Backward backward) {
-		System.out.println("Rule:"+backward.getName()+" ; "+backward.getMemo());
 		ruleServiceImpl.save(backward);
 	}
 	
