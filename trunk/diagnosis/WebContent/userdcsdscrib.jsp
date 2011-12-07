@@ -40,8 +40,8 @@
 			<s:form action="dcsdscribaction!addDescrib.action">
 				<table width="500" align="center" style="margin-left: 30">
 					<tr>
-						<td>检测节点：</td>
-						<td>
+						<td align="right">检测节点：</td>
+						<td align="left">
 							<div class="nobr">
 								<s:doubleselect theme="simple" name="dcsDscrib.eque"
 									list="#session.map2.keySet()" doubleName="dcsDscrib.item"
@@ -51,8 +51,8 @@
 					</tr>
 					<tr>
 					<tr>
-						<td>对应规则节点：</td>
-						<td><select name="dcsDscribname1" size="1"
+						<td align="right">对应规则节点：</td>
+						<td align="left"><select name="dcsDscribname1" size="1"
 							style="width: 150px">
 								<option>电石厂有机水</option>
 								<option>有机合成厂有机水</option>
@@ -113,8 +113,8 @@
 						</select></td>
 					</tr>
 					<tr>
-						<td>对应规则参数：</td>
-						<td><select name="dcsDscribname2" size="1" style="width: 150px">
+						<td align="right">对应规则参数：</td>
+						<td align="left"><select name="dcsDscribname2" size="1" style="width: 150px">
 								<option>溶解氧</option>
 								<option>PH</option>
 								<option>NH3-N</option>
@@ -129,17 +129,17 @@
 						</select></td>
 					</tr>
 					<tr>
-						<td>参数最小值：</td>
-						<td><s:textfield name="dcsDscrib.lower" theme = "simple" onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td>
+						<td align="right">参数最小值：</td>
+						<td align="left"><s:textfield name="dcsDscrib.lower"  size ="17" theme = "simple" onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td>
 					</tr>
 					<tr>
-						<td>参数最大值：</td>
-						<td><s:textfield name="dcsDscrib.upper" theme = "simple" onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td>
+						<td align="right">参数最大值：</td>
+						<td align="left"><s:textfield name="dcsDscrib.upper"  size ="17" theme = "simple" onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td>
 					</tr>
 					<tr>
-						<td width="80" align="center"><s:submit value="录入" theme="simple" />
+						<td align="right"><s:submit value="录入" theme="simple" />
 
-						<td width="80" align="right"><s:reset value="重置" theme="simple" /></td>
+						<td  align="left"><s:reset value="重置" theme="simple" /></td>
 					</tr>
 			</s:form>
 		</div>
