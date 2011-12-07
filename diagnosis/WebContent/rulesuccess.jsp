@@ -8,7 +8,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <html>
   <head>
     <base href="<%=basePath%>">
-    <META HTTP-EQUIV="Refresh" CONTENT="1;URL=userruleadd.jsp">
+    <META HTTP-EQUIV="Refresh" CONTENT="1;URL=ruleaction!getall.action">
     <title>结果页面</title>
     
 	

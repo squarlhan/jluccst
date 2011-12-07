@@ -77,9 +77,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
        <td><s:textfield name="dcsDscrib.lower" value="%{#dcsdscribs.lower}" theme = "simple" size="10" id="lower[%{#dcsdscribs.did}]"/>&nbsp;</td>
        <td><s:textfield name="dcsDscrib.upper" value="%{#dcsdscribs.upper}" theme = "simple" size="10" id="upper[%{#dcsdscribs.did}]"/>&nbsp;</td>
         <td>
-			<s:a id="a[%{#dcsdscribs.did}]" href="#" onclick="confirmChge(%{#dcsdscribs.did});">ÐÞ¸Ä</s:a>
+			<s:a id="a[%{#dcsdscribs.did}]" href="#" onclick="return confirmChge(%{#dcsdscribs.did});">ÐÞ¸Ä</s:a>
              &nbsp;
-			<s:a href="dcsdscribaction!deleteDscrib?dcsDscrib.did=%{#dcsdscribs.did}" onclick="confirmDel();">É¾³ý</s:a>
+			<s:a href="dcsdscribaction!deleteDscrib?dcsDscrib.did=%{#dcsdscribs.did}" onclick="return confirmDel();">É¾³ý</s:a>
 	   </td>
      </tr>
      </s:iterator>
