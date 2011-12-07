@@ -51,7 +51,7 @@
 		</action>
 	   
 	    <action name="dcsdscribaction" class="dcsDscribAction">
-			<result name="success">userdcsdscrib.jsp</result>
+			<result name="success">datadcsdscrib.jsp</result>
 			<result name="unuserlogin">userlogin.jsp</result>
 			<result name="bdsuccess">databdlist.jsp</result>
 	    </action>
