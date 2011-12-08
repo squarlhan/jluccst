@@ -187,7 +187,10 @@ public class RuleAction extends ActionSupport {
 
 	public String godetail() {
 		rule = ruleService.find(rule);
-		result=rule.getResults().get(0);
+		if(rule.getResults()!=null&&rule.getResults().size()>0){
+			result=rule.getResults().get(0);
+		}
+		
 				
 		reasonlist=rule.getReasons();
 		System.out.println(rule.getReasons());
