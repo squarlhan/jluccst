@@ -12,6 +12,7 @@ import javax.annotation.Resource;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
+import cn.edu.jlu.ccst.model.Backward;
 import cn.edu.jlu.ccst.model.BackwardandReason;
 import cn.edu.jlu.ccst.model.User;
 
@@ -102,10 +103,13 @@ public void setBackwardandReasonService(
 	}
 	
  public String save(){
-	 
+	 ActionContext actionContext = ActionContext.getContext();
+     Map session = actionContext.getSession();
+     Backward temp = (Backward) session.get("rule");
 	 for(int i = 0; i <= reason_noun.size() - 1; i++){
 		 BackwardandReason brs = new BackwardandReason();
-			brs.setBid(rule);//?
+		 System.out.println("我是bid"+temp.getBid());
+		    brs.setBid(temp);
 			brs.setNouns(reason_noun.get(i).trim());
 			brs.setVerb(reason_verb.get(i).trim());
 			brs.setSugg(sugg.get(i).trim());
@@ -113,10 +117,10 @@ public void setBackwardandReasonService(
 					&& reason_verb.get(i).trim().length() > 0
 					&& sugg.get(i).trim().length() > 0) { 
 				backwardandReasonService.update(brs);
-			}
-	 }
+			return "success";}
+	}
 	 
-	 
+	 return "saveerror";
 	 
 	 
 	 

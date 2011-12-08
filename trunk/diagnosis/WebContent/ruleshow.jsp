@@ -165,7 +165,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 </s:form>
 
 
-  <s:form action="useraction!alterUser.action">
+  <s:form action="backwardresonaction!save.action">
  <table bgcolor="#EDEDED" id="adreasontable" id="mytable" class="list_table"  style="margin-left:60" width="100%">
   <tr bgcolor="#4A708B">
 
