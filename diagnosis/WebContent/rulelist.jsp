@@ -46,7 +46,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
      
  <div align="right">
-      <input name="button" type=button onClick="window.location.href('ruleaction!justgo.action')" value="新建参规则">
+      <input name="button" type=button onClick="window.location.href('ruleaction!justgo.action')" value="新建规则">
       </div>
   <table bordercolor="#FFFFFF" rules="all"  id="mytable" class="list_table" align="center" width="100%" >
 		<tr bgcolor="#4A708B">
