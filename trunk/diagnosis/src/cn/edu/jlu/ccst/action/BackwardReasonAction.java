@@ -56,6 +56,7 @@ public void setBackwardandReasonService(
 		 backwardandReason.setNouns(nouns);
 		 backwardandReason.setSugg(sugg);
 		 backwardandReason.setVerb(verb);
+		 
 		 if(temp.getId()>0){
 			 backwardandReason.setBid(temp.getBid());
 			 backwardandReasonService.update(backwardandReason);

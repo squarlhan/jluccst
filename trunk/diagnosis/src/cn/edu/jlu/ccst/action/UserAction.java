@@ -206,7 +206,7 @@ public class UserAction extends ActionSupport {
 			 ActionContext actionContext = ActionContext.getContext();
 	        Map session = actionContext.getSession();
 	        session.put("ad", flag1);
-	        return SUCCESS;}
+	        return "adminsuccess";}
 		
 		}
 	
@@ -222,7 +222,7 @@ public class UserAction extends ActionSupport {
 			 ActionContext actionContext = ActionContext.getContext();
 	        Map session = actionContext.getSession();
 	        session.put("pr", flag1);
-	        return SUCCESS;}
+	        return "profsuccess";}
 		
 		}
 	
