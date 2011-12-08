@@ -108,7 +108,7 @@
 		</action>
 		
 		<action name="backwardresonaction" class="backwardResonAction">
-			<result name="success" type="redirect">ruleaction!godetail?rule.bid=%{backwardandReason.getBid()}</result>
+			<result name="success" type="redirect">ruleaction!godetail?rule.bid=%{backwardandReason.getBid().getBid()}</result>
 			<result name="unuserlogin">userlogin.jsp</result>
 		</action>
 	</package>

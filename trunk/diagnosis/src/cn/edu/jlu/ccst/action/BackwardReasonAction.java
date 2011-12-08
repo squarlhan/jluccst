@@ -30,8 +30,30 @@ import java.util.Map;
 public class BackwardReasonAction extends ActionSupport {
  private  BackwardandReasonService backwardandReasonService;
  private  BackwardandReason backwardandReason;
+ private List<String> reason_noun;
+ private List<String> reason_verb;
+ private List<String> sugg;
  
  
+public List<String> getReason_verb() {
+	return reason_verb;
+}
+public void setReason_verb(List<String> reason_verb) {
+	this.reason_verb = reason_verb;
+}
+
+public List<String> getSugg() {
+	return sugg;
+}
+public void setSugg(List<String> sugg) {
+	this.sugg = sugg;
+}
+public List<String> getReason_noun() {
+	return reason_noun;
+}
+public void setReason_noun(List<String> reason_noun) {
+	this.reason_noun = reason_noun;
+}
 public BackwardandReason getBackwardandReason() {
 	return backwardandReason;
 }
@@ -79,6 +101,26 @@ public void setBackwardandReasonService(
 
 	}
 	
+ public String save(){
+	 
+	 for(int i = 0; i <= reason_noun.size() - 1; i++){
+		 BackwardandReason brs = new BackwardandReason();
+			brs.setBid(rule);//?
+			brs.setNouns(reason_noun.get(i).trim());
+			brs.setVerb(reason_verb.get(i).trim());
+			brs.setSugg(sugg.get(i).trim());
+			if (reason_noun.get(i).trim().length() > 0
+					&& reason_verb.get(i).trim().length() > 0
+					&& sugg.get(i).trim().length() > 0) { 
+				backwardandReasonService.update(brs);
+			}
+	 }
+	 
+	 
+	 
+	 
+	 
+ }
 	
 	
 }
