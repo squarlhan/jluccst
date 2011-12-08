@@ -17,6 +17,7 @@ import cn.edu.jlu.ccst.model.BackwardandReason;
 import cn.edu.jlu.ccst.model.User;
 
 import cn.edu.jlu.ccst.service.BackwardandReasonService;
+import cn.edu.jlu.ccst.service.RuleService;
 import cn.edu.jlu.ccst.service.UserService;
 
 import com.opensymphony.xwork2.ActionContext;
@@ -30,12 +31,27 @@ import java.util.Map;
 @Scope("prototype")
 public class BackwardReasonAction extends ActionSupport {
  private  BackwardandReasonService backwardandReasonService;
+ private RuleService ruleService;
  private  BackwardandReason backwardandReason;
  private List<String> reason_noun;
  private List<String> reason_verb;
  private List<String> sugg;
+ private Backward rule;
  
  
+public Backward getRule() {
+	return rule;
+}
+public void setRule(Backward rule) {
+	this.rule = rule;
+}
+public RuleService getRuleService() {
+	return ruleService;
+}
+@Resource
+public void setRuleService(RuleService ruleService) {
+	this.ruleService = ruleService;
+}
 public List<String> getReason_verb() {
 	return reason_verb;
 }
@@ -71,6 +87,7 @@ public void setBackwardandReasonService(
 }
 
  public String update(){
+	 
 	 BackwardandReason temp = backwardandReasonService.findbyid(backwardandReason.getId());
 	 try {
 		String nouns= new String(backwardandReason.getNouns().getBytes("ISO-8859-1"),"UTF-8");
@@ -83,6 +100,7 @@ public void setBackwardandReasonService(
 		 if(temp.getId()>0){
 			 backwardandReason.setBid(temp.getBid());
 			 backwardandReasonService.update(backwardandReason);
+			 rule = temp.getBid();
 			 return "success";
 		 }
 	} catch (UnsupportedEncodingException e) {
@@ -95,7 +113,9 @@ public void setBackwardandReasonService(
 	 
  }
  public String delete() {
+	 
 	 backwardandReason = backwardandReasonService.findbyid(backwardandReason.getId());
+	 rule = backwardandReason.getBid();
 	 backwardandReasonService.removebyid(backwardandReason.getId());
 	
 		return "success";
@@ -105,22 +125,26 @@ public void setBackwardandReasonService(
  public String save(){
 	 ActionContext actionContext = ActionContext.getContext();
      Map session = actionContext.getSession();
-     Backward temp = (Backward) session.get("rule");
+     rule = (Backward) session.get("rule");
 	 for(int i = 0; i <= reason_noun.size() - 1; i++){
 		 BackwardandReason brs = new BackwardandReason();
-		 System.out.println("我是bid"+temp.getBid());
-		    brs.setBid(temp);
+		 System.out.println("我是bid"+rule.getBid());
+		    
+		    brs.setBid(rule);
 			brs.setNouns(reason_noun.get(i).trim());
 			brs.setVerb(reason_verb.get(i).trim());
 			brs.setSugg(sugg.get(i).trim());
+//			List<BackwardandReason> aaa = rule.getReasons();
+//			aaa.add(brs);
+//			rule.setReasons(aaa);
 			if (reason_noun.get(i).trim().length() > 0
 					&& reason_verb.get(i).trim().length() > 0
 					&& sugg.get(i).trim().length() > 0) { 
 				backwardandReasonService.update(brs);
-			return "success";}
+				
+			}
 	}
-	 
-	 return "saveerror";
+	 return "success";
 	 
 	 
 	 
