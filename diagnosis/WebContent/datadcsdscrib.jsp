@@ -101,6 +101,7 @@
 
 						<td  align="left"><s:reset value="重置" theme="simple" /></td>
 					</tr>
+					</table>
 			</s:form>
 		</div>
 	</div>

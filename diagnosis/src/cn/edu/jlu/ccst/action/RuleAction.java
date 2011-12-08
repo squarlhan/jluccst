@@ -185,6 +185,11 @@ public class RuleAction extends ActionSupport {
 		return "list";
 	}
 
+
+	public String justgo() {
+		return "gogogo";
+	}
+	
 	public String godetail() {
 		rule = ruleService.find(rule);
 		if(rule.getResults()!=null&&rule.getResults().size()>0){
