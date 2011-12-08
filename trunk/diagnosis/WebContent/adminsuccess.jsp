@@ -27,9 +27,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			
     	}
     	function confirmReset(){
-			return confirm("确认要重置密码吗？");
+			return confirm("确认重置密码？");
 			
     	}
+    	function confirmChge(id){
+    		if(confirm("确认修改？")){
+				var isuser = document.getElementById("isuser["+id+"]");
+				var isadmin = document.getElementById("isadmin["+id+"]");
+				var isprof = document.getElementById("isprof["+id+"]");
+				var url = "adminuseraction!update?user.id="+id+"&user.isuser="+isuser.value+"&user.isadmin="+isadmin.value+"&user.isprof="+isprof.value;
+				var a = document.getElementById("a["+id+"]");
+				a.href = url;
+				return true;
+			}
+			return false;
+			
+    	}
+    	
     	
     </script>
     
@@ -61,6 +75,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<th>电话</th>
 			<th>工作号</th>
 			<th>部门</th>
+			<th>用户</th>
+			<th>管理员</th>
+			<th>专家</th>
 			<th>管理员操作</th>
 	  </tr>
     <s:iterator id="users" value="userlist" status="index1">
@@ -72,12 +89,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <td><s:property value="phone"/>&nbsp;</td>
        <td><s:property value="jid"/>&nbsp;</td>
        <td><s:property value="dept"/>&nbsp;</td>
+       <td><s:checkbox name="isuser" fieldValue="%{#user.isuser}" id="isuser[%{#users.id}]" theme="simple"/></td>
+      <td><s:checkbox name="isadmin" fieldValue="%{#user.isadmin}" id="isadmin[%{#users.id}]" theme="simple"/></td>
+       <td><s:checkbox name="isprof" fieldValue="%{#user.isprof}" id="isprof[%{#users.id}]" theme="simple"/></td> 
       <td width="200" height="35">
 						
 							<s:a href="adminuseraction!chUser?user.id=%{#users.id}" onclick="return confirmReset();">重置密码</s:a>
 
+						<s:a id="a[%{#users.id}]"  href="#"  onclick="return confirmChge(%{#users.id});">修改</s:a>
 						
-						&nbsp;
 						<s:a href="adminuseraction!deleteUser?user.id=%{#users.id}" onclick="return confirmDel();">
 																						删除</s:a>
 

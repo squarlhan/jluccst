@@ -25,9 +25,9 @@ public class User implements Serializable{
 	private String phone;
 	private String name;
 	private String dept;
-	private String isuser;
-	private String isadmin;
-	private String isprof;
+	private Boolean isuser;
+	private Boolean isadmin;
+	private Boolean isprof;
 	
 	
 	public User() {
@@ -36,7 +36,7 @@ public class User implements Serializable{
 	}
 
 	public User(String username, String password, String email,
-			String phone, String name, String jid, String dept) {
+			String phone, String name, String jid, String dept,Boolean isuser,Boolean isadmin,Boolean isprof) {
 		super();
 		this.username = username;
 		this.password = password;
@@ -51,27 +51,29 @@ public class User implements Serializable{
 	}
    
 	
-	public String getIsuser() {
+	
+
+	public Boolean getIsuser() {
 		return isuser;
 	}
 
-	public void setIsuser(String isuser) {
+	public void setIsuser(Boolean isuser) {
 		this.isuser = isuser;
 	}
 
-	public String getIsadmin() {
+	public Boolean getIsadmin() {
 		return isadmin;
 	}
 
-	public void setIsadmin(String isadmin) {
+	public void setIsadmin(Boolean isadmin) {
 		this.isadmin = isadmin;
 	}
 
-	public String getIsprof() {
+	public Boolean getIsprof() {
 		return isprof;
 	}
 
-	public void setIsprof(String isprof) {
+	public void setIsprof(Boolean isprof) {
 		this.isprof = isprof;
 	}
 

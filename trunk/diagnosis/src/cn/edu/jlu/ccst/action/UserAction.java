@@ -238,7 +238,19 @@ public class UserAction extends ActionSupport {
 			return "deletesuccess";
 
 		}
+	public String update()	{
+		User temp =this.userService.findbyid(user.getId());
+		user.setDept(temp.getDept());
+		user.setEmail(temp.getEmail());
+		user.setJid(temp.getJid());
+		user.setName(temp.getName());
+		user.setPassword(temp.getPassword());
+		user.setPhone(temp.getPhone());
+		user.setUsername(temp.getUsername());
+		userService.save(user);
+		return "success";
 		
+	}
 
 	public String chUser() {                   //密码重置
 			user = this.userService.findbyid(user.getId());

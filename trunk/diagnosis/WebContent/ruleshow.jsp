@@ -146,7 +146,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <s:iterator id="reasons" value="reasonlist" status="index1">
      <tr  align="center"  bordercolor="#FFFFFF" bgcolor="<s:if test="#index1.odd == true">#ffffff</s:if><s:else>#EDEDED</s:else>" style="color: Black; ">
     
-       <td><s:textfield value="%{nouns}" theme = "simple" size="10" id="nouns[%{#reasons.id}]"  style="background:transparent;border:0px" />&nbsp;</td>   
+       <td><s:textfield value="%{nouns}" theme = "simple" size="10" id="nouns[%{#reasons.id}]" style="background:transparent;border:0px" />&nbsp;</td>   
        <td><s:textfield name="backwardandReason.verb" value="%{verb}" theme = "simple" size="10" id="verb[%{#reasons.id}]" style="background:transparent;border:0px" />&nbsp;</td>
        <td><s:textfield   name="backwardandReason.sugg" value="%{sugg}" theme = "simple" size="40" id="sugg[%{#reasons.id}]" style="background:transparent;border:0px"  />&nbsp;</td>
           <td>
