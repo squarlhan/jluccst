@@ -48,29 +48,100 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
+	<script  language="javascript">
+
+  var count1 = 0; 
+  var count2 = 0; 
+  function insertResult(){
+      count1+=1;
+      var tb = document.getElementById("adresulttable");
+     // var tb = table;
+      var tr = tb.insertRow();  
+      
+		var td1 = tr.insertCell();
+		var td2 = tr.insertCell();
+		var td3 = tr.insertCell();
+		
+		var textfield1 = document.createElement("input");
+		textfield1.setAttribute("id","result_noun["+count1+"]");
+		textfield1.setAttribute("name","result_noun["+count1+"]");
+		textfield1.setAttribute("size","12");
+		
+		var textfield2 = document.createElement("input");
+		textfield2.setAttribute("id","result_verb["+count1+"]");
+		textfield2.setAttribute("name","result_verb["+count1+"]");
+		textfield2.setAttribute("size","12");
+		
+		td1.innerHTML  = "现象名词： ";
+		td1.appendChild(textfield1);
+		td2.innerHTML  = "现象动词： ";
+		td2.appendChild(textfield2);
+		
+	}
+
+  function insertReason(){
+      count2+=1;
+      var tb = document.getElementById("adreasontable");
+     // var tb = table;
+      var tr = tb.insertRow();  
+      
+		var td1 = tr.insertCell();
+		var td2 = tr.insertCell();
+		var td3 = tr.insertCell();
+		var td4 = tr.insertCell();
+		
+		var textfield1 = document.createElement("input");
+		textfield1.setAttribute("id","result_noun["+count2+"]");
+		textfield1.setAttribute("name","reason_noun["+count2+"]");
+		textfield1.setAttribute("size","10");
+		
+		var textfield2 = document.createElement("input");
+		textfield2.setAttribute("id","result_verb["+count2+"]");
+		textfield2.setAttribute("name","reason_verb["+count2+"]");
+		textfield2.setAttribute("size","10");
+		
+		var textfield3 = document.createElement("input");
+		textfield3.setAttribute("id","sugg["+count2+"]");
+		textfield3.setAttribute("name","sugg["+count2+"]");
+		textfield3.setAttribute("size","40");
+		
+		//td1.innerHTML  = "原因名词： ";
+		td1.appendChild(textfield1);
+		//td2.innerHTML  = "原因动词： ";
+		td2.appendChild(textfield2);
+		//td3.innerHTML  = "规则建议： ";
+		td3.appendChild(textfield3);
+		
+	}
+  
+	function deleteRecord(table){
+		if(table.rows.length>1){
+			table.deleteRow(table.rows.length-1);
+			count--;
+		}
+
+	}
+</script>
   </head>
   
   <body>
   <div id="rightmain">
-	  <h2>规则修改界面</h2>
+	
 	  
    
+	   <h2><s:property value="result.nouns+result.verb" /></h2>
+	 
 <s:form action="useraction!alterUser.action">
-<table width="320" align="center" style="margin-left:30">
-	<tr>
-	 <td ><label>
-	   <s:property value="result.nouns+result.verb"/>
-	  
-	    </label></td>
-	  </tr>
+
+	
 	
 	 <table bordercolor="#FFFFFF" rules="all"  id="mytable" class="list_table" align="center" width="100%" >
 		<tr bgcolor="#4A708B">
 
-			<th width = "20%">原因名词</th>
-			<th width = "20%">原因动词</th>
+			<th width = "15%">原因名词</th>
+			<th width = "15%">原因动词</th>
 			<th width = "50%">相关建议</th>			
-			<th width = "10%">相关操作</th>	
+			<th width = "20%">相关操作</th>	
 	  </tr>
     <s:iterator id="reasons" value="reasonlist" status="index1">
      <tr  align="center"  bordercolor="#FFFFFF" bgcolor="<s:if test="#index1.odd == true">#ffffff</s:if><s:else>#EDEDED</s:else>" style="color: Black; ">
@@ -91,8 +162,59 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
      </s:iterator>
   </table>
 
+</s:form>
+
+
+  <s:form action="useraction!alterUser.action">
+ <table bgcolor="#EDEDED" id="adreasontable" id="mytable" class="list_table"  style="margin-left:60" width="100%">
+  <tr bgcolor="#4A708B">
+
+			<th width = "15%">原因名词</th>
+			<th width = "15%">原因动词</th>
+			<th width = "50%">相关建议</th>			
+			<th width = "20%">相关操作</th>	
+	  </tr>
+  
+  <tr>
+    <td width="15%" >
+      <input name="reason_noun[0]" type="text" size="10" />
+    </td>
+    <td width="15%">
+      <input name="reason_verb[0]" type="text" size="10" />
+    </td>
+    <td width="50%">
+      <input name="sugg[0]" type="text" size="40" />
+    </td>
+    <td width="20%">
+      <input name="addone" type="button" value=" + " onClick="insertReason()" />
+      <input name="dele" type="button" value=" - "  onclick="deleteRecord(adreasontable)" />
+   </td>
+  </tr>
+  
+</table>
+<table  width="100%">
+ <tr>
+      <td  height="33" >
+         <div align="center">
+        <input name="Input22" type="submit" value="增加" />
+        <input name="Input22" type="reset" value="取消" /></div>
+   </td>
+    </tr>
+  </table>
+
+</s:form>
+  
+
+
 	
-</s:form></div>
+	
+	
+
+
+
+
+
+</div>
 
    
   </body>
