@@ -91,12 +91,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		var td4 = tr.insertCell();
 		
 		var textfield1 = document.createElement("input");
-		textfield1.setAttribute("id","result_noun["+count2+"]");
+		textfield1.setAttribute("id","reason_noun["+count2+"]");
 		textfield1.setAttribute("name","reason_noun["+count2+"]");
 		textfield1.setAttribute("size","10");
 		
 		var textfield2 = document.createElement("input");
-		textfield2.setAttribute("id","result_verb["+count2+"]");
+		textfield2.setAttribute("id","reason_verb["+count2+"]");
 		textfield2.setAttribute("name","reason_verb["+count2+"]");
 		textfield2.setAttribute("size","10");
 		
@@ -177,13 +177,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <tr>
     <td width="15%" >
-      <input name="reason_noun[0]" type="text" size="10" />
+      <input name="reason_noun[0]"  id="reason_noun[0]"  type="text" size="10" />
     </td>
     <td width="15%">
-      <input name="reason_verb[0]" type="text" size="10" />
+      <input name="reason_verb[0]"  id="reason_verb[0]"  type="text" size="10" />
     </td>
     <td width="50%">
-      <input name="sugg[0]" type="text" size="40" />
+      <input name="sugg[0]"  id="sugg[0]"  type="text" size="40" />
     </td>
     <td width="20%">
       <input name="addone" type="button" value=" + " onClick="insertReason()" />
