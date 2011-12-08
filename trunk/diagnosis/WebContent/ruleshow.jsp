@@ -24,8 +24,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			    
 			
     	}
-    	function confirmReset(){
-			return confirm("确认修改？");
+    	function confirmChge(id){
+    		if(confirm("确认修改？")){
+				var nouns = document.getElementById("nouns["+id+"]");
+				var verb = document.getElementById("verb["+id+"]");
+				var sugg = document.getElementById("sugg["+id+"]");
+				var url = "backwardresonaction!update?backwardandReason.id="+id+"&backwardandReason.nouns="+nouns.value+"&backwardandReason.verb="+verb.value+"&backwardandReason.sugg="+sugg.value;
+				var a = document.getElementById("a["+id+"]");
+				a.href = url;
+				return true;
+			}
+			return false;
 			
     	}
     	
@@ -66,15 +75,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <s:iterator id="reasons" value="reasonlist" status="index1">
      <tr  align="center"  bordercolor="#FFFFFF" bgcolor="<s:if test="#index1.odd == true">#ffffff</s:if><s:else>#EDEDED</s:else>" style="color: Black; ">
     
-       <td><s:textfield name="nouns" value="%{nouns}" theme = "simple" size="10" style="background:transparent;border:0px" />&nbsp;</td>   
-       <td><s:textfield name="verb" value="%{verb}" theme = "simple" size="10" id="verb[%{#id}] " style="background:transparent;border:0px" />&nbsp;</td>
-       <td><s:textfield   name="sugg" value="%{sugg}" theme = "simple" size="40" id="upper[%{#id}]" style="background:transparent;border:0px"  />&nbsp;</td>
+       <td><s:textfield value="%{nouns}" theme = "simple" size="10" id="nouns[%{#reasons.id}]"  style="background:transparent;border:0px" />&nbsp;</td>   
+       <td><s:textfield name="backwardandReason.verb" value="%{verb}" theme = "simple" size="10" id="verb[%{#reasons.id}]" style="background:transparent;border:0px" />&nbsp;</td>
+       <td><s:textfield   name="backwardandReason.sugg" value="%{sugg}" theme = "simple" size="40" id="sugg[%{#reasons.id}]" style="background:transparent;border:0px"  />&nbsp;</td>
           <td>
-		<s:a href="backwardresonaction!update?backwardandreason.id=%{id}" onclick="return confirmReset();">修改</s:a>
+          <s:a id="a[%{#reasons.id}]"  href="#"  onclick="return confirmChge(%{#reasons.id});">修改</s:a>
 
 						
 						&nbsp;
-		<s:a href="backwardresonaction!delete?backwardandreason.id=%{id}" onclick="return confirmDel();">
+		<s:a href="backwardresonaction!delete?backwardandReason.id=%{#reasons.id}" onclick="return confirmDel();">
 																						删除</s:a>
        
 	   </td>

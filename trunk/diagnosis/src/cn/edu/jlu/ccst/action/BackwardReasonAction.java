@@ -1,5 +1,6 @@
 package cn.edu.jlu.ccst.action;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -31,6 +32,12 @@ public class BackwardReasonAction extends ActionSupport {
  private  BackwardandReason backwardandReason;
  
  
+public BackwardandReason getBackwardandReason() {
+	return backwardandReason;
+}
+public void setBackwardandReason(BackwardandReason backwardandReason) {
+	this.backwardandReason = backwardandReason;
+}
 public BackwardandReasonService getBackwardandReasonService() {
 	return backwardandReasonService;
 }
@@ -41,8 +48,27 @@ public void setBackwardandReasonService(
 }
 
  public String update(){
-	 backwardandReasonService.update(backwardandReason);
-	 return "success";
+	 BackwardandReason temp = backwardandReasonService.findbyid(backwardandReason.getId());
+	 try {
+		String nouns= new String(backwardandReason.getNouns().getBytes("ISO-8859-1"),"UTF-8");
+		String verb= new String(backwardandReason.getVerb().getBytes("ISO-8859-1"),"UTF-8"); 
+		 String sugg= new String(backwardandReason.getSugg().getBytes("ISO-8859-1"),"UTF-8"); 
+		 backwardandReason.setNouns(nouns);
+		 backwardandReason.setSugg(sugg);
+		 backwardandReason.setVerb(verb);
+		 if(temp.getId()>0){
+			 backwardandReason.setBid(temp.getBid());
+			 backwardandReasonService.update(backwardandReason);
+			 return "success";
+		 }
+	} catch (UnsupportedEncodingException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	} 
+	 
+	
+	 return "error";
+	 
  }
  public String delete() {
 	 backwardandReason = backwardandReasonService.findbyid(backwardandReason.getId());
