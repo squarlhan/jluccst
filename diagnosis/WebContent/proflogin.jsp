@@ -25,7 +25,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <div id="rightmain">
 	  <h2>专家登录页面</h2>
 <div id="login">
-<s:form action="adminaction.action">
+<s:form action="useraction!exitsprof.action">
 <table width="200" align="center" style="margin-left:30">
 	<tr>
 	<td align="center"><s:textfield size="15" label="用户名" name="admin.username" /></td>

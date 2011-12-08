@@ -156,7 +156,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						&nbsp;
 		<s:a href="backwardresonaction!delete?backwardandReason.id=%{#reasons.id}" onclick="return confirmDel();">
 																						删除</s:a>
-       
+         
 	   </td>
      </tr>
      </s:iterator>

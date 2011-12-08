@@ -16,7 +16,7 @@
          <tr align="center"><td><li><a href="/diagnosis/adminadduser.jsp">添加用户</a></li></td></tr>
           <tr align="center"><td><li><a href="/diagnosis/adminshow.jsp">用户信息</a></li></td></tr>
           <tr align="center"><td><li><a href="/diagnosis/userlogin.jsp">用户登录</a></li></td></tr>
-          <tr align="center"><td><li><a href="adminaction!logoff.action">注销登录</a></li></td></tr>
+          <tr align="center"><td><li><a href="adminaction!adminlogoff.action">注销登录</a></li></td></tr>
     </table> 
   </body>
 </html>
