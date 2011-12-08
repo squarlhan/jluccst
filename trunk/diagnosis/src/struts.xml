@@ -10,19 +10,26 @@
 	<package name="struts2" extends="struts-default" namespace="/">
 		<action name="useraction" class="userAction">
 		    <result name="logoffusersuccess">userlogin.jsp</result>
-		    <result name="adminsuccess">adminsuccess.jsp</result>
-		    
+		    <result name="profsuccess">profsuccess.jsp</result>
 		    <result name="loginsuccess">userruledsc.jsp</result>
 			<result name="loginerror">userloginerror.jsp</result>
 			<result name="altersuccess">userupdatesuccess.jsp</result>
 			<result name="altererror">useraltererror.jsp</result>
 			<result name="nullpass">usernullpass.jsp</result>
 			<result name="unuserlogin">userlogin.jsp</result>
+		</action>
+			
+			
+			<!-- 管理员操作 -->
+			<action name="adminaction" class="userAction">
+			  <result name="adminsuccess">adminsuccess.jsp</result>
+			  <result name="adminloginerror">adminloginerror.jsp</result>
+			<result name="adminaltersuccess">adminupdatesuccess.jsp</result>
+			<result name="adminaltererror">adminaltererror.jsp</result>
+			<result name="logoffadminsuccess">/adminlogin.jsp</result>
+			<result name="adminnullpass">adminnullpass.jsp</result>
+			<result name="adminloginerror">adminloginerror.jsp</result>
 			<result name="unadminlogin">adminlogin.jsp</result>
-			
-			
-			
-			
 		</action>
 		
 		
@@ -74,18 +81,9 @@
 		</action>
 		
 		
-		<action name="adminaction" class="adminAction"  >
-			<result name="success">/adminsuccess.jsp</result>
-			<result name="logoffsuccess">/adminlogin.jsp</result>
-			<result name="altersuccess">adminupdatesuccess.jsp</result>
-			<result name="altererror">adminaltererror.jsp</result>
-			<result name="nullpass">adminnullpass.jsp</result>
-			<result name="loginerror">adminloginerror.jsp</result>
-			<result name="unuserlogin">userlogin.jsp</result>
-			<result name="unadminlogin">adminlogin.jsp</result>
-			
-		</action>
+		
 		<action name="adminuseraction" class="userAction">
+		 <result name="adminsuccess">adminsuccess.jsp</result>
 		 <result name="deletesuccess">adminresetsuccess.jsp</result>
 		   <result name="resetsuccess">adminresetsuccess.jsp</result>
 			<result name="success">adminsuccess.jsp</result>

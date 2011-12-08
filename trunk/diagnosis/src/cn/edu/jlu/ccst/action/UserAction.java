@@ -15,7 +15,7 @@ import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
 
-import cn.edu.jlu.ccst.model.Admin;
+
 import cn.edu.jlu.ccst.model.Backward;
 import cn.edu.jlu.ccst.model.User;
 import cn.edu.jlu.ccst.service.DcsDscribService;
@@ -194,21 +194,6 @@ public class UserAction extends ActionSupport {
 	        return "loginsuccess";}
 		
 		}
-	public String exitsadmin() {
-		User flag1;
-		userlist = userService.findall();
-		flag1=userService.exitsadmin(user);
-		
-		if(flag1==null){
-			
-		  return "loginerror";}
-		 else {
-			 ActionContext actionContext = ActionContext.getContext();
-	        Map session = actionContext.getSession();
-	        session.put("ad", flag1);
-	        return "adminsuccess";}
-		
-		}
 	
 	public String exitsprof() {
 		User flag1;
@@ -316,6 +301,9 @@ public class UserAction extends ActionSupport {
 				user.setPassword(newpassword);
 				user.setId(olduser.getId());
 				user.setUsername(olduser.getUsername());
+				user.setIsuser(olduser.getIsuser());
+				user.setIsadmin(olduser.getIsadmin());
+				user.setIsprof(olduser.getIsprof());
 				userService.save(user);
 				
 				
@@ -329,6 +317,8 @@ public class UserAction extends ActionSupport {
 			}
 			
 			}
+		
+		
 		public String logoff() {
 			
 			if(checkuser()){
@@ -338,7 +328,66 @@ public class UserAction extends ActionSupport {
 			return "logoffusersuccess";}
 			else return "unuserlogin";
 		}
+   
 		
-
+/*************************************管理员操作*************************************************************/		
+		
+		
+		
+		
+		public String exitsadmin() {
+			User flag1;
+			userlist = userService.findall();
+			flag1=userService.exitsadmin(user);
+			
+			if(flag1==null){
+				
+			  return "adminloginerror";}
+			 else {
+				 ActionContext actionContext = ActionContext.getContext();
+		        Map session = actionContext.getSession();
+		        session.put("ad", flag1);
+		        return "adminsuccess";}
+			
+			}
+	public String alterAdmin () {
+				User olduser = (User) ActionContext.getContext().getSession()
+						.get("ad");
+				
+				
+				if (olduser.getPassword().equals(currentpassword)) {
+					
+					if(newpassword.isEmpty())
+					{ return "adminnullpass";}
+					user.setPassword(newpassword);
+					user.setId(olduser.getId());
+					user.setUsername(olduser.getUsername());
+					user.setIsuser(olduser.getIsuser());
+					user.setIsadmin(olduser.getIsadmin());
+					user.setIsprof(olduser.getIsprof());
+					userService.save(user);
+					
+					
+					ActionContext actionContext = ActionContext.getContext();
+			        Map session = actionContext.getSession();
+			        session.put("ad", user);
+					return "adminaltersuccess";
+				} else {
+					
+					return 	"adminaltererror";
+				}
+				
+				}
+	 public String adminlogoff() {
+				
+				if(checkadmin()){
+				ActionContext.getContext().getSession().remove("ad");
+				
+				System.out.println("注销成功2！");
+				return "logoffadminsuccess";}
+				else return "unadminlogin";
+			}
+			
+		
 	
 }

@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 
 import cn.edu.jlu.ccst.dao.UserServiceImpl;
 import cn.edu.jlu.ccst.dao.UserServiceInter;
-import cn.edu.jlu.ccst.model.Admin;
+
 import cn.edu.jlu.ccst.model.User;
 @Component("userService")
 public class UserService {

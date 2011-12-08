@@ -16,7 +16,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    %>  
     <base href="<%=basePath%>">
     
-    <title>管理员信息</title>
+    <title>专家信息</title>
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">    
@@ -29,7 +29,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <body>
   <div id="rightmain">
-	  <h2>管理员修改信息</h2>
+	  <h2>专家修改信息</h2>
 	
       <div id="login">
 <s:form action="adminaction!alterAdmin.action">
@@ -42,7 +42,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  </tr>
 	<tr>
 	 <td align="center"><label>
-	    <s:textfield name="user.name" key="姓名" value="%{#session.ad.name}" />
+	    <s:textfield name="admin.name" key="姓名" value="%{#session.ad.name}" />
 	    </label></td>
 	  </tr>
 	<tr>
@@ -61,22 +61,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<tr>
 	
 	 <td align="center"><label>
-	    <s:textfield name="user.email" key="电子邮箱" value="%{#session.ad.email}" />
+	    <s:textfield name="admin.email" key="电子邮箱" value="%{#session.ad.email}" />
 	    </label></td>
 	  </tr>
 	<tr>
 	 <td align="center"><label>
-	    <s:textfield name="user.jid" key="工作号" value="%{#session.ad.jid}" />
+	    <s:textfield name="admin.jid" key="工作号" value="%{#session.ad.jid}" />
 	    </label></td>
 	  </tr>
 	<tr>
 	 <td align="center"><label>
-	    <s:textfield name="user.phone" key="电话" value="%{#session.ad.phone}" />
+	    <s:textfield name="admin.phone" key="电话" value="%{#session.ad.phone}" />
 	    </label></td>
 	  </tr>
 	  <tr>
 	 <td align="center"><label>
-	    <s:textfield name="user.dept" key="部门" value="%{#session.ad.dept}" />
+	    <s:textfield name="admin.dept" key="部门" value="%{#session.ad.dept}" />
 	    </label></td>
 	  </tr>
 	</table>
