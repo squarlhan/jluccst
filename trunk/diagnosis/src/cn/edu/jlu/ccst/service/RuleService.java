@@ -51,9 +51,7 @@ public class RuleService {
 	}
 	
 	public void save(Backward backward) {
-		if(backward.getBid()>0){
 		     ruleServiceImpl.save(backward);
-		}
 	}
 	public Backward find(Backward backward){
 		if(backward.getBid()>0){
