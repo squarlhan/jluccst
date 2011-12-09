@@ -16,6 +16,7 @@
 <link href="/diagnosis/css/css.css" rel="stylesheet" type="text/css" />
 <link href="/diagnosis/css/main.css" rel="stylesheet" type="text/css" />
 <link href="/diagnosis/css/tree.css" rel="stylesheet" type="text/css" />
+
 <decorator:head />
 <style type="text/css">
 
@@ -24,6 +25,7 @@
 </head>
 
 <body>
+
 	<div id="maincontent">
 		<table align="center" width="1000">
 			<tr>
@@ -35,90 +37,7 @@
 				<td valign="top">
 					<div id="leftmenu" align="left">
 					<page:applyDecorator page="/decorators/mainmenu.jsp" name="panel" /> 
-						<div class="CNLTreeMenu" id="CNLTreeMenu2"  style="  width:180px;margin-left:18px;border:solid #90BADE thin ">
-							<p>
-								<a id="AllOpen_2"
-									onclick="MyCNLTreeMenu2.SetNodes(0);Hd(this);Sw('AllClose_2');">全部展开</a><a
-									id="AllClose_2"
-									onclick="MyCNLTreeMenu2.SetNodes(1);Hd(this);Sw('AllOpen_2');"
-									style="display: none;">全部折叠</a>
-							</p>
-							    <ul>
-							  <li class="Closed">点源处理
-							    <ul>
-							      
-							       <li class="Child"><a href="/diagnosis/dataadd/datadianshichang.jsp">电石厂有机水</a></li>
-							      
-							       <li class="Child"><a href="/diagnosis/dataadd/datahechengchang.jsp">有机合成厂有机水</a></li>
-							       <li class="Child"><a href="/diagnosis/dataadd/datalianyouchang.jsp">炼油厂有机水</a></li>
-							       <li class="Child"><a href="/diagnosis/dataadd/datajingxi.jsp">精细化工厂废水</a></li>
-							       <li class="Child"><a href="/diagnosis/dataadd/datayierchun.jsp">乙二醇废水</a></li>
-							       <li class="Child"><a href="/diagnosis/dataadd/datahuanyang.jsp">环氧乙烷废水</a></li>
-							      
-							       <li class="Child"><a href="/diagnosis/dataadd/datanongyaochang.jsp">农药厂有机水</a></li>
-							       <li class="Child"><a href="/diagnosis/dataadd/datahandan.jsp">含氮废水</a></li>
-							       <li class="Child"><a href="/diagnosis/dataadd/data103.jsp">103厂碱水</a></li>
-							       <li class="Child"><a href="/diagnosis/dataadd/datahuafei.jsp">化肥厂丁辛醇</a></li>
-							       <li class="Child"><a href="/diagnosis/dataadd/databingxi.jsp">丙烯腈废水</a></li>
-							       <li class="Child"><a href="/diagnosis/dataadd/datashuzhi.jsp">合成树脂厂有机水</a></li>
-							       <li class="Child"><a href="/diagnosis/dataadd/datalongtan.jsp">龙潭区生活水</a></li>
-							      
-							    </ul>
-							  </li>
-							  <li class="Closed">中和处理
-							   <ul>
-							      <li class="Child"><a href="/diagnosis/dataadd/dataranliao.jsp">染料厂酸水</a></li>
-							      <li class="Child"><a href="/diagnosis/dataadd/datadianshichang.jsp">电石厂酸水</a></li> 
-							       <li class="Child"><a href="/diagnosis/dataadd/data489.jsp">铁运489沉淀池出水</a></li>
-							   </ul>
-							  </li>
-							  <li class="Closed">生活水处理
-							   <ul>
-							    <li class="Child"><a href="/diagnosis/dataadd/data14a.jsp">14a</a></li>
-							   <li class="Child"><a href="/diagnosis/dataadd/data14b.jsp">14b</a></li>
-							    </ul>
-							  </li>
-							  <li class="Closed">预处理
-							    <ul>
-							       <li class="Child"><a href="/diagnosis/dataadd/datawenliuchi.jsp">稳流池(477)进水</a></li>
-							       <li class="Child"><a href="/diagnosis/dataadd/datajinshui.jsp">进水提升泵房(462A)</a></li>
-							       <li class="Child"><a href="/diagnosis/dataadd/databashi.jsp">巴氏计量槽（499）</a></li>
-							       <li class="Child"><a href="/diagnosis/dataadd/datachusechi(414).jsp">除色池(414)</a></li>
-							       <li class="Child"><a href="/diagnosis/dataadd/datachenshaguashachi(488).jsp">沉沙刮沙池(488)</a></li>
-							       <li class="Child"><a href="/diagnosis/dataadd/datachuchenshi(489B).jsp">初沉池(489B)</a></li>
-							       <li class="Child"><a href="/diagnosis/dataadd/datashuguchi(489).jsp">事故池(489)</a></li>
-							       <li class="Child"><a href="/diagnosis/dataadd/data14Bshenghuoshui.jsp">14B生活水</a></li>
-							       <li class="Child"><a href="/diagnosis/dataadd/datalaoshuijiesuanhuachi.jsp">老水解酸化池</a></li>
-							       <li class="Child"><a href="/diagnosis/dataadd/dataxinshuijiesuanhuachi.jsp">新水解酸化池</a></li>
-							      
-							       <li class="Child"><a href="/diagnosis/dataadd/datawunichi(V466).jsp">污泥泵房(466)</a></li>
-							       <li class="Child">浓缩池(491)</li>
-							       <li class="Child"><a href="/diagnosis/dataadd/datatuoshuizhuangzhi(495).jsp">脱水装置(495)</a></li>
-							    </ul>
-							  </li>
-								<li class="Closed">生化处理
-									<ul>
-										 <li class="Child"><a href="/diagnosis/dataadd/data465huiliubengfang--1.jsp">1、2系列465回流泵房</a></li>
-								         <li class="Child"><a href="/diagnosis/dataadd/data465Ahuiliubengfang--2.jsp">3系列465A回流泵房</a></li>
-								         <li class="Child"><a href="/diagnosis/dataadd/data465Bhuiliubengfang--3.jsp">3系列465B回流泵房</a></li>
-										 <li class="Child"><a href="/diagnosis/dataadd/datazhongjiantishengbengfang(462B).jsp">中间提升泵房(462B)</a></li>
-										 <li class="Child"><a href="/diagnosis/biocpool490/biocpool1.jsp">生化池系列1</a></li>	
-									     <li class="Child"><a href="/diagnosis/biocpool490/biocpool2.jsp">生化池系列2</a></li>
-										<li class="Child"><a href="/diagnosis/biocpool490/biocpool3.jsp">生化池系列3</a></li>
-										<li class="Child"><a href="/diagnosis/biocpool490/biocpool4.jsp">生化池系列4</a></li>
-										<li class="Child"><a href="/diagnosis/dataadd/dataerchenchi--1.jsp">1系列二沉池</a></li>
-										<li class="Child"><a href="/diagnosis/dataadd/dataerchenchi--2.jsp">2系列二沉池</a></li>
-										<li class="Child"><a href="/diagnosis/dataadd/dataerchenchi--3.jsp">3系列二沉池</a></li>
-										<li class="Child"><a href="/diagnosis/dataadd/dataerchenchi--4.jsp">4系列二沉池</a></li>
-										<li class="Child"><a href="/diagnosis/dataadd/datajiechuyanghuachi.jsp">接触氧化池</a></li>
-										<li class="Child"><a href="/diagnosis/datapaijiangxian1.jsp">3系列排江出口线</a></li>
-										<li class="Child"><a href="/diagnosis/datapaijiangxian2.jsp">1、2、4系列排江出口线</a></li>
-									</ul>
-								</li>
-								
-							</ul>
-						</div>
-						<!-- CNLTreeMenu -->
+					<page:applyDecorator page="/decorators/treedata.jsp" name="panel" /> 
 					</div>
 				</td>
 				<td width="100%">
@@ -152,60 +71,8 @@
 		</table>
 	</div>
 
-
-	<script type="text/javascript">
-	<!--
-		function Ob(o) {
-			var o = document.getElementById(o) ? document.getElementById(o) : o;
-			return o;
-		}
-		function Hd(o) {
-			Ob(o).style.display = "none";
-		}
-		function Sw(o) {
-			Ob(o).style.display = "";
-		}
-		function ExCls(o, a, b, n) {
-			var o = Ob(o);
-			for (i = 0; i < n; i++) {
-				o = o.parentNode;
-			}
-			o.className = o.className == a ? b : a;
-		}
-		function CNLTreeMenu(id, TagName0) {
-			this.id = id;
-			this.TagName0 = TagName0 == "" ? "li" : TagName0;
-			this.AllNodes = Ob(this.id).getElementsByTagName(TagName0);
-			this.InitCss = function(ClassName0, ClassName1, ClassName2, ImgUrl) {
-				this.ClassName0 = ClassName0;
-				this.ClassName1 = ClassName1;
-				this.ClassName2 = ClassName2;
-				this.ImgUrl = ImgUrl || "/diagnosis/images/s.gif";
-				this.ImgBlankA = "<img src=\"" + this.ImgUrl
-						+ "\" class=\"s\" onclick=\"ExCls(this,'" + ClassName0
-						+ "','" + ClassName1 + "',1);\" alt=\"展开/折叠\" />";
-				this.ImgBlankB = "<img src=\""+this.ImgUrl+"\" class=\"s\" />";
-				for (i = 0; i < this.AllNodes.length; i++) {
-					this.AllNodes[i].className == "" ? this.AllNodes[i].className = ClassName1
-							: "";
-					this.AllNodes[i].innerHTML = (this.AllNodes[i].className == ClassName2 ? this.ImgBlankB
-							: this.ImgBlankA)
-							+ this.AllNodes[i].innerHTML;
-				}
-			}
-			this.SetNodes = function(n) {
-				var sClsName = n == 0 ? this.ClassName0 : this.ClassName1;
-				for (i = 0; i < this.AllNodes.length; i++) {
-					this.AllNodes[i].className == this.ClassName2 ? ""
-							: this.AllNodes[i].className = sClsName;
-				}
-			}
-		}
-
-		var MyCNLTreeMenu2 = new CNLTreeMenu("CNLTreeMenu2", "li");
-		MyCNLTreeMenu2.InitCss("Opened", "Closed", "Child",
-				"/diagnosis/images/s.gif");
-	</script>
+<script Language="JavaScript"><%@ include file="tree.js"%></script>
+	
 
 </body>
 
