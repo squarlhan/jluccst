@@ -12,8 +12,8 @@
   <body>
     <table align="center" width="100%" id="nav">
           <!--<tr align="center"><td><li><a href="/diagnosis/userruleadd.jsp">录入规则</a></li></td></tr>  -->
-          <tr align="center"><td><li><a href="/diagnosis/ruleaction!getall.action">规则维护</a></li></td></tr>
-           <tr align="center"><td><li><a href="/diagnosis/dcsdscribaction.action">描述维护</a></li></td></tr>
+         <!-- <tr align="center"><td><li><a href="/diagnosis/ruleaction!getall.action">规则维护</a></li></td></tr>
+           <tr align="center"><td><li><a href="/diagnosis/dcsdscribaction.action">描述维护</a></li></td></tr>-->
           <tr align="center"><td><li><a href="/diagnosis/biocpool490/biocpool1.jsp">数据录入</a></li></td></tr>
          <tr align="center"><td><li><a href="/diagnosis/monitoraction.action">dcs设备推演</a></li></td></tr>
          <tr align="center"><td><li><a href="/diagnosis/interfaceaction.action">工艺接口</a></li></td></tr>
@@ -21,6 +21,7 @@
          <tr align="center"><td><li><a href="/diagnosis/rulebraction.action">智能诊断</a></li></td></tr>
           <tr align="center"><td><li><a href="/diagnosis/usershow.jsp">用户信息</a></li></td></tr>
           <tr align="center"><td><li><a href="/diagnosis/adminlogin.jsp">管理员登录</a></li></td></tr>
+           <tr align="center"><td><li><a href="/diagnosis/proflogin.jsp">专家登陆</a></li></td></tr>
           <tr align="center"><td><li><a href="/diagnosis/useraction!logoff.action">注销登录</a></li></td></tr>
     </table> 
   </body>
