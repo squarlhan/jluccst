@@ -10,7 +10,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     
-    <title>专家登录</title>
+    <title>专家登陆错误</title>
+     <script type="text/javascript">
+    	alert("密码错误，请重新输入！")
+    </script>
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">    
@@ -23,21 +26,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <body>
   <div id="rightmain">
-	  <h2>专家登录页面</h2>
+	  <h2>专家登陆页面</h2>
 <div id="login">
-<s:form action="useraction!exitsprof.action">
+<s:form action="profaction!exitsprof.action">
 <table width="200" align="center" style="margin-left:30">
 	<tr>
-	<td align="center"><s:textfield size="15" label="用户名" name="admin.username" /></td>
+	<td align="center"><s:textfield size="15" label="用户名" name="user.username" /></td>
 	</tr>
 	<tr>
-	<td align="center"><s:password size="17" label="密码" name="admin.password" /></td>
+	<td align="center"><s:password size="17" label="密码" name="user.password" /></td>
 	</tr>
 	</table>
 	<br/>
 	<table width="150" align="center">
 	<tr>
-	<td width="80" align="center"><s:submit value="登录" theme="simple" />
+	<td width="80" align="center"><s:submit value="登陆" theme="simple" />
 	</td>
 	
 	<td width="80" align="center"> <s:reset value="取消"

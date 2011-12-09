@@ -5,7 +5,7 @@
 	</excludes>
 	<decorator name="user" page="maindecorator.jsp">
 		<pattern>/user*</pattern>
-		<pattern>/rule*</pattern>
+		
 		<pattern>/dcs*</pattern>
 		<pattern>/wwdcs*</pattern>
 		<pattern>/monitor*</pattern>
@@ -27,6 +27,7 @@
 	</decorator>
 	<decorator name="prof" page="profdecorator.jsp">
 		<pattern>/prof*</pattern>
+		<pattern>/rule*</pattern>
 	</decorator>
 	
 	<decorator name="panel" page="panel.jsp"/>

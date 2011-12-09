@@ -12,8 +12,8 @@
 <html>
 <head>
 <%
-	if (request.getSession().getAttribute("us") == null) {
-		response.sendRedirect("userlogin.jsp");
+	if (request.getSession().getAttribute("pr") == null) {
+		response.sendRedirect("prof/proflogin.jsp");
 	}
 %>
 <base href="<%=basePath%>">

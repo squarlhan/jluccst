@@ -28,13 +28,21 @@
 			<result name="adminaltererror">adminaltererror.jsp</result>
 			<result name="logoffadminsuccess">/adminlogin.jsp</result>
 			<result name="adminnullpass">adminnullpass.jsp</result>
-			<result name="adminloginerror">adminloginerror.jsp</result>
+		
 			<result name="unadminlogin">adminlogin.jsp</result>
-			
+			</action>
 			
 			<!-- 专家操作 -->
-			 <result name="profloginsuccess">ruledsc.jsp</result>
-		</action>
+			<action name="profaction" class="userAction">
+			  <result name="profsuccess">ruledsc.jsp</result>
+			  <result name="profloginerror">prof/profloginerror.jsp</result>
+			<result name="profaltersuccess">prof/profupdatesuccess.jsp</result>
+			<result name="profaltererror">prof/profaltererror.jsp</result>
+			<result name="logoffprofsuccess">prof/proflogin.jsp</result>
+			<result name="profnullpass">prof/profnullpass.jsp</result>
+			<result name="unproflogin">prof/proflogin.jsp</result>
+			</action>
+		
 		
 		
 		 <action name="dcsdataaction" class="dcsdataAction">
