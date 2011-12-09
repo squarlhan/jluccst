@@ -78,16 +78,16 @@
 								         <li class="Child"><a href="/diagnosis/dataadd/data465Ahuiliubengfang--2.jsp">3系列465A回流泵房</a></li>
 								         <li class="Child"><a href="/diagnosis/dataadd/data465Bhuiliubengfang--3.jsp">3系列465B回流泵房</a></li>
 										 <li class="Child"><a href="/diagnosis/dataadd/datazhongjiantishengbengfang(462B).jsp">中间提升泵房(462B)</a></li>
-										 <li class="Child"><a href="/diagnosis/ruleaction!findbyname?name=生化池系列1">生化池系列1</a></li>	
-									     <li class="Child"><a href="/diagnosis/ruleaction!findbyname?name=生化池系列2">生化池系列2</a></li>
-										<li class="Child"><a href="/diagnosis/ruleaction!findbyname?name=生化池系列3">生化池系列3</a></li>
-										<li class="Child"><a href="/diagnosis/ruleaction!findbyname?name=生化池系列4">生化池系列4</a></li>
+										 <li class="Child"><a href="/diagnosis/ruleaction!findbyname?name=<%=java.net.URLEncoder.encode("生化池系列1","UTF-8")%>">生化池系列1</a></li>	
+									     <li class="Child"><a href="/diagnosis/ruleaction!findbyname?name=<%=java.net.URLEncoder.encode("生化池系列2","UTF-8")%>">生化池系列2</a></li>
+										<li class="Child"><a href="/diagnosis/ruleaction!findbyname?name=<%=java.net.URLEncoder.encode("生化池系列3","UTF-8")%>">生化池系列3</a></li>
+										<li class="Child"><a href="/diagnosis/ruleaction!findbyname?name=<%=java.net.URLEncoder.encode("生化池系列4","UTF-8")%>">生化池系列4</a></li>
 										<li class="Child"><a href="/diagnosis/dataadd/dataerchenchi--1.jsp">1系列二沉池</a></li>
 										<li class="Child"><a href="/diagnosis/dataadd/dataerchenchi--2.jsp">2系列二沉池</a></li>
 										<li class="Child"><a href="/diagnosis/dataadd/dataerchenchi--3.jsp">3系列二沉池</a></li>
 										<li class="Child"><a href="/diagnosis/dataadd/dataerchenchi--4.jsp">4系列二沉池</a></li>
 										<li class="Child"><a href="/diagnosis/dataadd/datajiechuyanghuachi.jsp">接触氧化池</a></li>
-										<li class="Child"><a href="/diagnosis/ruleaction!findbyname?name=排江出口线">排江出口线</a></li>
+										<li class="Child"><a href="/diagnosis/ruleaction!findbyname?name=<%=java.net.URLEncoder.encode("排江出口线","UTF-8")%>">排江出口线</a></li>
 										
 									</ul>
 								</li>
