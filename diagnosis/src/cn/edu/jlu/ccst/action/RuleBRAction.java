@@ -84,10 +84,19 @@ public class RuleBRAction extends ActionSupport {
 		} else
 			return false;
 	}
+	public boolean checkprof() {
+		ActionContext actionContext = ActionContext.getContext();
+		Map user = actionContext.getSession();
+		User us = (User) user.get("pr");
+		if (us != null) {
+			return true;
+		} else
+			return false;
+	}
 
 	public String execute() {
 		// nb=rulebrService.getalloptions();
-		if (checkuser()) {
+		if (checkuser()|checkprof()) {
 			nvs = rulebrService.getallnvs();
 			ActionContext actionContext = ActionContext.getContext();
 			Map session = actionContext.getSession();

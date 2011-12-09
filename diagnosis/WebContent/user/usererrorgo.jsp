@@ -9,7 +9,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
    <%if(request.getSession().getAttribute("us")==null) 
   { 
-  response.sendRedirect("userlogin.jsp"); 
+  response.sendRedirect("user/userlogin.jsp"); 
    }  
                 
    %>  
@@ -38,18 +38,35 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-
     
   
   <table bordercolor="#4A708B" rules="all"  id="mytable" class="list_table" align="center" width="100%">
 		<tr bgcolor="#4A708B">
-		    <th>故障原因</th>
-			<th>相关建议</th>
+		    <th style="width:50%">故障设备</th>
+			<th style="width:50%">故障现象</th>
+			
+	  </tr>
+    <s:iterator id="bandr" value="backwardandResult" status="index1">
+       
+     <tr  align="left"  bordercolor="#000000" rules="all" bgcolor="<s:if test="#index1.odd == true">#ffffff</s:if><s:else>#EDEDED</s:else>">
+       <td><s:property value="memo"/></td><td><s:property value="nouns"/><s:property value="verb"/></td>
+      
+      
+     
+     </tr>
+     </s:iterator>
+  </table>
+    
+  
+  <table bordercolor="#4A708B" rules="all"  id="mytable" class="list_table" align="center" width="100%">
+		<tr bgcolor="#4A708B">
+		    <th style="width:50%">故障原因</th>
+			<th style="width:50%">相关建议</th>
 			
 	  </tr>
     <s:iterator id="reasons" value="reasonlist" status="index1">
        
-     <tr  align="center"  bordercolor="#000000" rules="all" bgcolor="<s:if test="#index1.odd == true">#ffffff</s:if><s:else>#EDEDED</s:else>">
+     <tr  align="left"  bordercolor="#000000" rules="all" bgcolor="<s:if test="#index1.odd == true">#ffffff</s:if><s:else>#EDEDED</s:else>">
        <td><s:property value="nouns"/><s:property value="verb"/></td>
        <td><s:property value="sugg"/></td>
       

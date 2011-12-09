@@ -10,7 +10,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
    <%if(request.getSession().getAttribute("ad")==null) 
   { 
-  response.sendRedirect("adminlogin.jsp"); 
+  response.sendRedirect("admin/adminlogin.jsp"); 
    }  
                 
    %>  
@@ -19,18 +19,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     
     <title>用户添加错误</title>
      <script type="text/javascript">
-    	alert("该用户名已存在，请重新输入！")
+    	alert("用户名和密码不能为空！")
     </script>
-    
        <script type="text/javascript">
     	function confirmAdd(){
     		
 			return confirm("确认要增加吗？");
 			
-    	}
-    	
-    	function reset(){
-    		username.text = null;
     	}
     </script>
     
@@ -48,12 +43,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <body>
   <div id="rightmain">
 	  <h2>添加新用户</h2>
-	  
+	
 <div id="login">
 <s:form action="adminuseraction!addUser.action">
 <table width="200" align="center" style="margin-left:30">
 	<tr>
-	<td align="center"><s:textfield size="15" label="用户名" name="user.username" id = "username"/></td>
+	<td align="center"><s:textfield size="15" label="用户名" name="user.username" /></td>
 	</tr>
 	<tr>
 	<td align="center"><s:password size="17" label="初始密码" name="user.password" /></td>
@@ -73,18 +68,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<tr>
 	<td align="center"><s:textfield size="17" label="部门" name="user.dept" /></td>
 	</tr>
+	 <tr><td>用户</td><td ><s:checkbox name="user.isuser"     theme="simple"/></td></tr>
+      <tr><td>管理员</td><td><s:checkbox name="user.isadmin"   theme="simple"/></td></tr>
+       <tr><td>专家</td><td><s:checkbox name="user.isprof"   theme="simple"/></td></tr> 
 	</table>
 	<br/>
 	<table width="150" align="center">
 	<tr>
-	<td width="80" align="center"><s:submit value="添加用户" onclick="confirmAdd();" theme="simple" />
+	<td width="80" align="center"><s:submit value="添加用户" onclick="return confirmAdd();" theme="simple" />
 	
     
 	</td>
 	
 	<td width="80" align="center"> <s:reset value="取消"
-		theme="simple" onclick="reset()"/></td></tr></table>
-		
+		theme="simple" /></td></tr></table>
 </s:form></div>
 </div>
    

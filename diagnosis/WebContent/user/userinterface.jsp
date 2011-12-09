@@ -9,7 +9,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
    <%if(request.getSession().getAttribute("us")==null) 
   { 
-  response.sendRedirect("userlogin.jsp"); 
+  response.sendRedirect("user/userlogin.jsp"); 
    }  
                 
    %>  
@@ -22,7 +22,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <base href="<%=basePath%>">
     
     <title>结果页面</title>
-     
+     <meta http-equiv="refresh" content="10" />
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">    
@@ -55,7 +55,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
      </tr>
      </s:iterator>
   </table>
-      
+    
+  
   <table bordercolor="#4A708B" rules="all"  id="mytable" class="list_table" align="center" width="100%">
 		<tr bgcolor="#4A708B">
 		    <th style="width:50%">故障原因</th>
@@ -72,8 +73,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
      </tr>
      </s:iterator>
   </table>
-    <div align="center">
-      <input name="button" type=button onClick="window.location.href('errorlogaction.action')" value="故障日志">
-      </div>
+   
+  <!--  <div align="center">
+      <input name="button" type=button onClick="window.location.href('dsshistoryaction.action')" value="完成返回">
+      </div>-->  
   </body>
 </html>

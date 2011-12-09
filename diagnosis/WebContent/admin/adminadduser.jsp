@@ -10,15 +10,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
    <%if(request.getSession().getAttribute("ad")==null) 
   { 
-  response.sendRedirect("adminlogin.jsp"); 
+  response.sendRedirect("admin/adminlogin.jsp"); 
    }  
                 
    %>  
     
     <base href="<%=basePath%>">
     
-    <title>搜索页面</title>
-       
+    <title>新建用户</title>
+       <script type="text/javascript">
+    	function confirmAdd(){
+    		
+			return confirm("确认要增加吗？");
+			
+    	}
+    </script>
     
    
 	<meta http-equiv="pragma" content="no-cache">
@@ -33,15 +39,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <body>
   <div id="rightmain">
-	  <h2>查找用户</h2>
-	 
+	  <h2>添加新用户</h2>
+	
 <div id="login">
-<s:form action="adminuseraction!searchUser.action">
+<s:form action="adminuseraction!addUser.action">
 <table width="200" align="center" style="margin-left:30">
 	<tr>
 	<td align="center"><s:textfield size="15" label="用户名" name="user.username" /></td>
 	</tr>
-	
+	<tr>
+	<td align="center"><s:password size="17" label="初始密码" name="user.password" /></td>
+	</tr>
 	<tr>
 	<td align="center"><s:textfield size="17" label="姓名" name="user.name" /></td>
 	</tr>
@@ -57,23 +65,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<tr>
 	<td align="center"><s:textfield size="17" label="部门" name="user.dept" /></td>
 	</tr>
+	 <tr><td>用户</td><td ><s:checkbox name="user.isuser"     theme="simple"/></td></tr>
+      <tr><td>管理员</td><td><s:checkbox name="user.isadmin"   theme="simple"/></td></tr>
+       <tr><td>专家</td><td><s:checkbox name="user.isprof"   theme="simple"/></td></tr> 
 	</table>
 	<br/>
 	<table width="150" align="center">
 	<tr>
-	<td width="80" align="center"><s:submit value="查找用户"  theme="simple" />
+	<td width="80" align="center"><s:submit value="添加用户" onclick="return confirmAdd();" theme="simple" />
 	
     
 	</td>
 	
 	<td width="80" align="center"> <s:reset value="取消"
-		theme="simple" /></td></tr>
-		<tr>
-				 <td  align="center" height="33" colspan="2" ><s:a href="adminuseraction!userList.action"> 
-						   <div align="center" class="STYLE1"><U>返回用户列表</U></div>
-				  </s:a>		</td>
-			  </tr></table>
-		
+		theme="simple" /></td></tr></table>
 </s:form></div>
 </div>
    

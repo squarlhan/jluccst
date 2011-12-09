@@ -9,7 +9,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
    <%if(request.getSession().getAttribute("us")==null) 
   { 
-  response.sendRedirect("userlogin.jsp"); 
+  response.sendRedirect("user/userlogin.jsp"); 
    }  
                 
    %>  
@@ -74,8 +74,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
      </s:iterator>
   </table>
    
-  <!--  <div align="center">
-      <input name="button" type=button onClick="window.location.href('dsshistoryaction.action')" value="完成返回">
-      </div>-->  
+    <div align="center">
+      <input name="button" type=button onClick="window.location.href('errorlogaction.action')" value="故障日志">
+      </div>
   </body>
 </html>

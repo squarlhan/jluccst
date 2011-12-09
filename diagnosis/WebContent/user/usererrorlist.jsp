@@ -9,7 +9,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
    <%if(request.getSession().getAttribute("us")==null) 
   { 
-  response.sendRedirect("userlogin.jsp"); 
+  response.sendRedirect("user/userlogin.jsp"); 
    }  
                 
    %>  
@@ -17,7 +17,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    
     <base href="<%=basePath%>">
     
-    <title>工艺错误日志</title>
+    <title>错误日志</title>
     
     
 	<meta http-equiv="pragma" content="no-cache">
@@ -36,27 +36,27 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <body>
 
      <div id="rightmain">
-	  <h2>工艺错误日志</h2>
+	  <h2>错误日志</h2>
 	
      
  
   <table bordercolor="#FFFFFF" rules="all"  id="mytable" class="list_table" align="center" width="100%" >
 		<tr bgcolor="#4A708B">
-		    <th width = "20%">设备参数</th>
+		    <th width = "15%">设备名</th>
+			<th width = "15%">参数名</th>
 			<th width = "5%">故障现象</th>
 			<th width = "20%">故障时间</th>
 			<th width = "5%">故障值</th>
-			<th width = "20%">故障原因</th>
-			<th width = "30%">采取的建议</th>
+			<th width = "40%">采取的建议</th>
 	  </tr>
     <s:iterator id="errors" value="errorlist" status="index1">
        
      <tr  align="center"  bordercolor="#FFFFFF" rules="all" bgcolor="<s:if test="#index1.odd == true">#ffffff</s:if><s:else>#EDEDED</s:else>" style="color: Black; ">
-       <td><s:property value="name。name"/>&nbsp;</td>
+       <td><s:property value="equipment"/>&nbsp;</td>
+       <td><s:property value="item"/>&nbsp;</td>
        <td><s:property value="level"/>&nbsp;</td>
-       <td><s:property value="simu_time"/>&nbsp;</td>
-        <td><s:property value="value"/>&nbsp;</td>
-       <td><s:property value="error"/>&nbsp;</td>
+        <td><s:property value="time"/>&nbsp;</td>
+       <td><s:property value="value"/>&nbsp;</td>
        <td><s:property value="sugg"/>&nbsp;</td>
      </tr>
      </s:iterator>

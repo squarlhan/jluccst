@@ -16,10 +16,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    %>  
     <base href="<%=basePath%>">
     
-    <title>更改信息错误</title>
-     <script type="text/javascript">
-    	alert("当前密码错误，请重新输入！")
-    </script>
+    <title>专家信息</title>
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">    
@@ -32,11 +29,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <body>
   <div id="rightmain">
-	  <h2>管理员修改信息</h2>
-	  
+	  <h2>专家修改信息</h2>
+	
       <div id="login">
 <s:form action="adminaction!alterAdmin.action">
-<table width="320" align="center" style="margin-left:30">
+<table width="200" align="center" style="margin-left:30">
 	<tr>
 	 <td ><label>
 	   <s:property value="#session.ad.username"/>
@@ -45,7 +42,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  </tr>
 	<tr>
 	 <td align="center"><label>
-	    <s:textfield name="admin.name" key="姓名" value="%{#session.ad.name}" />
+	    <s:textfield name="user.name" key="姓名" value="%{#session.ad.name}" />
 	    </label></td>
 	  </tr>
 	<tr>
@@ -64,22 +61,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<tr>
 	
 	 <td align="center"><label>
-	    <s:textfield name="admin.email" key="电子邮箱" value="%{#session.ad.email}" />
+	    <s:textfield name="user.email" key="电子邮箱" value="%{#session.ad.email}" />
 	    </label></td>
 	  </tr>
 	<tr>
 	 <td align="center"><label>
-	    <s:textfield name="admin.jid" key="工作号" value="%{#session.ad.jid}" />
+	    <s:textfield name="user.jid" key="工作号" value="%{#session.ad.jid}" />
 	    </label></td>
 	  </tr>
 	<tr>
 	 <td align="center"><label>
-	    <s:textfield name="admin.phone" key="电话" value="%{#session.ad.phone}" />
+	    <s:textfield name="user.phone" key="电话" value="%{#session.ad.phone}" />
 	    </label></td>
 	  </tr>
-	   <tr>
+	  <tr>
 	 <td align="center"><label>
-	    <s:textfield name="admin.dept" key="部门" value="%{#session.ad.dept}" />
+	    <s:textfield name="user.dept" key="部门" value="%{#session.ad.dept}" />
 	    </label></td>
 	  </tr>
 	</table>
@@ -89,7 +86,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<td width="80" align="center"><s:submit value="修改" theme="simple" />
 	  <div align="center"></div></td>
 	
-	<td width="80" align="center"> <s:reset value="取消"
+	<td width="80" align="center"> <s:reset value="重置"
 		theme="simple" /></td></tr></table>
 </s:form></div>
 </div>
