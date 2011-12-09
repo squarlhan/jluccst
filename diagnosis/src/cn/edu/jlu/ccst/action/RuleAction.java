@@ -175,7 +175,7 @@ public class RuleAction extends ActionSupport {
 			backlist = ruleService.findAll();
 			return "list";
 		}else{
-			return "unadminlogin";
+			return "unproflogin";
 		}
 	}
 

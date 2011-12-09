@@ -9,9 +9,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
-   <%if(request.getSession().getAttribute("us")==null) 
+   <%if(request.getSession().getAttribute("pr")==null) 
   { 
-  response.sendRedirect("userlogin.jsp"); 
+  response.sendRedirect("prof/proflogin.jsp"); 
    }  
                 
    %>  
