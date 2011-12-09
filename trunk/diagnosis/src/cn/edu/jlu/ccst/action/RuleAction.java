@@ -171,7 +171,7 @@ public class RuleAction extends ActionSupport {
 	}
 
 	public String getall() {
-		if (checkuser()) {
+		if (checkprof()) {
 			backlist = ruleService.findAll();
 			return "list";
 		}else{
@@ -205,10 +205,10 @@ public class RuleAction extends ActionSupport {
 		return "show";
 	}
 
-	public boolean checkuser() {
+	public boolean checkprof() {
 		ActionContext actionContext = ActionContext.getContext();
 		Map user = actionContext.getSession();
-		User us = (User) user.get("us");
+		User us = (User) user.get("pr");
 		if (us != null) {
 			return true;
 		} else
