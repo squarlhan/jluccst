@@ -15,5 +15,7 @@ public interface RuleServiceInter {
 
 	public Backward find(int id);
 	
+	public List<Backward> findbyname(String name);
+	
 
 }

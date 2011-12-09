@@ -1,5 +1,6 @@
 package cn.edu.jlu.ccst.action;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -38,9 +39,20 @@ public class RuleAction extends ActionSupport {
 	private String resultn1;
 	private String resultn2;
 	private int resultv_value;
-
+	private String name;
 	private List<String> namelist;
     
+	
+	
+	
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	public String getResultn1() {
 		return resultn1;
 	}
@@ -177,6 +189,17 @@ public class RuleAction extends ActionSupport {
 		}else{
 			return "unproflogin";
 		}
+	}
+	
+	public String findbyname(){
+		try {
+			String keyword= new String(name.getBytes("ISO-8859-1"),"UTF-8");
+			backlist = ruleService.findbyname(keyword);
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		return "list";
 	}
 
 	public String delRule() {

@@ -16,6 +16,7 @@ response.setHeader("Expires","0");//防止被proxy
 
 <link href="/diagnosis/css/css.css" rel="stylesheet" type="text/css" />
 <link href="/diagnosis/css/main.css" rel="stylesheet" type="text/css" />
+<link href="/diagnosis/css/tree.css" rel="stylesheet" type="text/css" />
 <decorator:head />
 </head>
 
@@ -33,6 +34,7 @@ response.setHeader("Expires","0");//防止被proxy
 		<td valign="top">
 		<div id="leftmenu">
 		<page:applyDecorator page="/decorators/profmenu.jsp" name="panel" />  
+		<page:applyDecorator page="/decorators/treerule.jsp" name="panel" />
 		</div>
 		</td>
 		<td width="100%">
@@ -61,6 +63,7 @@ response.setHeader("Expires","0");//防止被proxy
 	</tr>
 </table>
 </div>
+<script Language="JavaScript"><%@ include file="tree.js"%></script>
 </body>
 
 </html>

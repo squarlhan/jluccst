@@ -72,6 +72,7 @@
 			<result name="go">rule/rulego.jsp</result>
 		    <result name="unuserlogin">user/userlogin.jsp</result>
 			<result name="unproflogin">prof/proflogin.jsp</result>
+			<result name="unproflogin">prof/proflogin.jsp</result>
 		</action>
 		<action name="userrulebraction" class="rulebrAction">
 		  <result name="rulesuccess">user/userfindreason.jsp</result>
