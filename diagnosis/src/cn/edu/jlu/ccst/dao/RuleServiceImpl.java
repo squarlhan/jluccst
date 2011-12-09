@@ -54,6 +54,11 @@ public class RuleServiceImpl implements RuleServiceInter{
 	public Backward find(int bid) {
 		return em.find(Backward.class, bid);
 	}
+	
+	public List<Backward> findbyname(String name){
+		Query query = getEntityManager().createQuery("select b FROM Backward b where b.name = '"+name+"'");
+		return query.getResultList();
+	}
 
 
 }

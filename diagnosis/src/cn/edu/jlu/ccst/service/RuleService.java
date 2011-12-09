@@ -64,6 +64,11 @@ public class RuleService {
 		resultlist = ruleServiceImpl.findAll();
 		return resultlist;
 	}
+	public List<Backward> findbyname(String name) {
+		List<Backward> resultlist = new ArrayList();
+		resultlist = ruleServiceImpl.findbyname(name);
+		return resultlist;
+	}
 	public List<BackwardandReason> findreasons(List<BackwardandResult> enters) {
 		List<BackwardandReason> resultlist = new ArrayList();
 		List<BackwardandReason> process = new ArrayList();
