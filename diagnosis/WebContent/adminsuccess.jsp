@@ -35,7 +35,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				var isuser = document.getElementById("isuser["+id+"]");
 				var isadmin = document.getElementById("isadmin["+id+"]");
 				var isprof = document.getElementById("isprof["+id+"]");
-				var url = "adminuseraction!update?user.id="+id+"&user.isuser="+isuser.value+"&user.isadmin="+isadmin.value+"&user.isprof="+isprof.value;
+				var url = "adminuseraction!update?user.id="+id+"&user.isuser="+isuser.checked+"&user.isadmin="+isadmin.checked+"&user.isprof="+isprof.checked;
 				var a = document.getElementById("a["+id+"]");
 				a.href = url;
 				return true;
