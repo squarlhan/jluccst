@@ -26,6 +26,7 @@
 		<pattern>/admin*</pattern>
 	</decorator>
 	<decorator name="prof" page="profdecorator.jsp">
+	<pattern>/dcsdscribaction.action</pattern>
 		<pattern>/prof*</pattern>
 		<pattern>/rule*</pattern>
 	</decorator>

@@ -89,10 +89,10 @@ public class DcsDscribAction extends ActionSupport {
 		this.dcsDscrib = dcsDscrib;
 	}
 
-	public boolean checkuser() {
+	public boolean checkprof() {
 		ActionContext actionContext = ActionContext.getContext();
 		Map user = actionContext.getSession();
-		User us = (User) user.get("us");
+		User us = (User) user.get("pr");
 		if (us != null) {
 			return true;
 		} else
@@ -100,7 +100,7 @@ public class DcsDscribAction extends ActionSupport {
 	}
 
 	public String goadd(){
-		if (checkuser()) {
+		if (checkprof()) {
 			nvs = dcsDscribService.getallnvs();
 			ActionContext actionContext = ActionContext.getContext();
 			Map session = actionContext.getSession();
@@ -137,7 +137,7 @@ public class DcsDscribAction extends ActionSupport {
 
 	public String execute() {
 
-		if (checkuser()) {
+		if (checkprof()) {
 			dcsdscriblist = dcsDscribService.findall();
 
 			return "bdsuccess";
