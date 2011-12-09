@@ -284,7 +284,7 @@ public class RuleAction extends ActionSupport {
 		}
 		rule.setReasons(breason);
 		rule.setResults(bresult);
-		ruleService.save(rule);
+//		ruleService.save(rule);
 		if (resultv_value == 0) {
 			List<BackwardandUpper> bus = new ArrayList();
 			for (DcsDscrib dd : dcslist) {
