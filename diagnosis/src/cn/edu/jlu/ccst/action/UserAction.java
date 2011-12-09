@@ -195,21 +195,6 @@ public class UserAction extends ActionSupport {
 		
 		}
 	
-	public String exitsprof() {
-		User flag1;
-		userlist = userService.findall();
-		flag1=userService.exitsprof(user);
-		
-		if(flag1==null){
-			
-		  return "loginerror";}
-		 else {
-			 ActionContext actionContext = ActionContext.getContext();
-	        Map session = actionContext.getSession();
-	        session.put("pr", flag1);
-	        return "profsuccess";}
-		
-		}
 	
 	public boolean checkuser(){
 		ActionContext actionContext = ActionContext.getContext();
@@ -225,6 +210,16 @@ public class UserAction extends ActionSupport {
         Map user = actionContext.getSession();
         User ad = (User) user.get("ad");
 		if(ad!=null){
+			return true;
+		}
+		else return false;
+	}
+	
+	public boolean checkprof(){
+		ActionContext actionContext = ActionContext.getContext();
+        Map user = actionContext.getSession();
+        User pr = (User) user.get("pr");
+		if(pr!=null){
 			return true;
 		}
 		else return false;
@@ -400,6 +395,63 @@ public class UserAction extends ActionSupport {
 				else return "unadminlogin";
 			}
 			
+	 /*************************************专家操作*************************************************************/		
 		
+		
+		
+		
+	 public String exitsprof() {
+			User flag1;
+			userlist = userService.findall();
+			flag1=userService.exitsprof(user);
+			
+			if(flag1==null){
+				
+			  return "profloginerror";}
+			 else {
+				 ActionContext actionContext = ActionContext.getContext();
+		        Map session = actionContext.getSession();
+		        session.put("pr", flag1);
+		        return "profsuccess";}
+			
+			}
+		
+	public String alterProf () {
+				User olduser = (User) ActionContext.getContext().getSession()
+						.get("pr");
+				
+				
+				if (olduser.getPassword().equals(currentpassword)) {
+					
+					if(newpassword.isEmpty())
+					{ return "profnullpass";}
+					user.setPassword(newpassword);
+					user.setId(olduser.getId());
+					user.setUsername(olduser.getUsername());
+					user.setIsuser(olduser.getIsuser());
+					user.setIsadmin(olduser.getIsadmin());
+					user.setIsprof(olduser.getIsprof());
+					userService.save(user);
+					
+					
+					ActionContext actionContext = ActionContext.getContext();
+			        Map session = actionContext.getSession();
+			        session.put("pr", user);
+					return "profaltersuccess";
+				} else {
+					
+					return 	"profaltererror";
+				}
+				
+				}
+	 public String proflogoff() {
+				
+				if(checkprof()){
+				ActionContext.getContext().getSession().remove("pr");
+				
+				System.out.println("注销成功3！");
+				return "logoffprofsuccess";}
+				else return "unproflogin";
+			}
 	
 }

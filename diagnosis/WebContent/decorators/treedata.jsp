@@ -87,8 +87,8 @@
 										<li class="Child"><a href="/diagnosis/dataadd/dataerchenchi--3.jsp">3系列二沉池</a></li>
 										<li class="Child"><a href="/diagnosis/dataadd/dataerchenchi--4.jsp">4系列二沉池</a></li>
 										<li class="Child"><a href="/diagnosis/dataadd/datajiechuyanghuachi.jsp">接触氧化池</a></li>
-										<li class="Child"><a href="/diagnosis/datapaijiangxian1.jsp">3系列排江出口线</a></li>
-										<li class="Child"><a href="/diagnosis/datapaijiangxian2.jsp">1、2、4系列排江出口线</a></li>
+										<li class="Child"><a href="/diagnosis/dataadd/datapaijiangxian.jsp">排江出口线</a></li>
+										
 									</ul>
 								</li>
 								

@@ -17,7 +17,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 
    %>  
     
-    <title> 3系列排江出口线</title>
+    <title> 排江出口线</title>
     
     
      <script type="text/javascript">
@@ -42,7 +42,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <body>
   <div id="rightmain">
-	  <h2> 3系列排江出口线 </h2>
+	  <h2> 排江出口线 </h2>
 <div id="login">
 <s:form action="dcsdataaction!listsave.action">
 <table width="300" align="center" style="margin-left:30">
@@ -110,18 +110,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 
 
-	<s:hidden   value="3系列排江出口线" name="dcsdatalist[1].equipment" theme="simple" />
-	<s:hidden   value="3系列排江出口线" name="dcsdatalist[2].equipment" theme="simple" />
-	<s:hidden   value="3系列排江出口线" name="dcsdatalist[3].equipment" theme="simple" />
-	<s:hidden   value="3系列排江出口线" name="dcsdatalist[4].equipment" theme="simple" />
-	<s:hidden   value="3系列排江出口线" name="dcsdatalist[5].equipment" theme="simple" />
-	<s:hidden   value="3系列排江出口线" name="dcsdatalist[6].equipment" theme="simple" />
-	<s:hidden   value="3系列排江出口线" name="dcsdatalist[7].equipment" theme="simple" />
-	<s:hidden   value="3系列排江出口线" name="dcsdatalist[8].equipment" theme="simple" />
-	<s:hidden   value="3系列排江出口线" name="dcsdatalist[9].equipment" theme="simple" />
+	<s:hidden   value="排江出口线" name="dcsdatalist[1].equipment" theme="simple" />
+	<s:hidden   value="排江出口线" name="dcsdatalist[2].equipment" theme="simple" />
+	<s:hidden   value="排江出口线" name="dcsdatalist[3].equipment" theme="simple" />
+	<s:hidden   value="排江出口线" name="dcsdatalist[4].equipment" theme="simple" />
+	<s:hidden   value="排江出口线" name="dcsdatalist[5].equipment" theme="simple" />
+	<s:hidden   value="排江出口线" name="dcsdatalist[6].equipment" theme="simple" />
+	<s:hidden   value="排江出口线" name="dcsdatalist[7].equipment" theme="simple" />
+	<s:hidden   value="排江出口线" name="dcsdatalist[8].equipment" theme="simple" />
+	<s:hidden   value="排江出口线" name="dcsdatalist[9].equipment" theme="simple" />
 
 	<s:hidden   value="班次" name="dcsdatalist[0].item" theme="simple" />
-	<s:hidden   value="3系列排江出口线" name="dcsdatalist[0].equipment" theme="simple" />
+	<s:hidden   value="排江出口线" name="dcsdatalist[0].equipment" theme="simple" />
 	
 	
 	
