@@ -11,7 +11,7 @@
 		<action name="useraction" class="userAction">
 		    <result name="logoffusersuccess">userlogin.jsp</result>
 		    <result name="profsuccess">profsuccess.jsp</result>
-		    <result name="loginsuccess">userruledsc.jsp</result>
+		    <result name="loginsuccess">ruledsc.jsp</result>
 			<result name="loginerror">userloginerror.jsp</result>
 			<result name="altersuccess">userupdatesuccess.jsp</result>
 			<result name="altererror">useraltererror.jsp</result>
@@ -55,7 +55,7 @@
 		</action> 
 	   
 		<action name="rulebraction" class="rulebrAction">
-			<result name="success">userruleadd.jsp</result>
+			<result name="success">ruleadd.jsp</result>
 			<result name="rulesuccess">userfindreason.jsp</result>
 			<result name="go">usergo.jsp</result>
 		    <result name="unuserlogin">userlogin.jsp</result>
@@ -73,7 +73,7 @@
 			<result name="success">rulesuccess.jsp</result>
 		    <result name="input">rulesuccess.jsp</result>
 			<result name="go">usergo.jsp</result>
-			<result name="gogogo">userruledsc.jsp</result>
+			<result name="gogogo">ruledsc.jsp</result>
 			<result name="unuserlogin">userlogin.jsp</result>
 			<result name="list">rulelist.jsp</result>
 			<result name="show">ruleshow.jsp</result>
