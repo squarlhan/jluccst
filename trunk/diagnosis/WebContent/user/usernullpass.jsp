@@ -8,15 +8,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
-   <%if(request.getSession().getAttribute("ad")==null) 
+    <%if(request.getSession().getAttribute("us")==null) 
   { 
-  response.sendRedirect("adminlogin.jsp"); 
+  response.sendRedirect("user/userlogin.jsp"); 
    }  
                 
    %>  
     <base href="<%=basePath%>">
+     <script type="text/javascript">
+    	alert("新密码不能为空！")
+    </script> 
     
-    <title>专家信息</title>
+    <title>用户登录失败</title>
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">    
@@ -29,20 +32,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <body>
   <div id="rightmain">
-	  <h2>专家修改信息</h2>
-	
+	  <h2>用户修改信息</h2>
+	   
       <div id="login">
-<s:form action="adminaction!alterAdmin.action">
-<table width="200" align="center" style="margin-left:30">
+<s:form action="useraction!alterUser.action">
+<table width="320" align="center" style="margin-left:30">
 	<tr>
 	 <td ><label>
-	   <s:property value="#session.ad.username"/>
+	   <s:property value="#session.us.username"/>
 	  
 	    </label></td>
 	  </tr>
 	<tr>
 	 <td align="center"><label>
-	    <s:textfield name="admin.name" key="姓名" value="%{#session.ad.name}" />
+	    <s:textfield name="user.name" key="姓名" value="%{#session.us.name}" />
 	    </label></td>
 	  </tr>
 	<tr>
@@ -61,22 +64,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<tr>
 	
 	 <td align="center"><label>
-	    <s:textfield name="admin.email" key="电子邮箱" value="%{#session.ad.email}" />
+	    <s:textfield name="user.email" key="电子邮箱" value="%{#session.us.email}" />
 	    </label></td>
 	  </tr>
 	<tr>
 	 <td align="center"><label>
-	    <s:textfield name="admin.jid" key="工作号" value="%{#session.ad.jid}" />
+	    <s:textfield name="user.jid" key="工作号" value="%{#session.us.jid}" />
 	    </label></td>
 	  </tr>
 	<tr>
 	 <td align="center"><label>
-	    <s:textfield name="admin.phone" key="电话" value="%{#session.ad.phone}" />
+	    <s:textfield name="user.phone" key="电话" value="%{#session.us.phone}" />
 	    </label></td>
 	  </tr>
 	  <tr>
 	 <td align="center"><label>
-	    <s:textfield name="admin.dept" key="部门" value="%{#session.ad.dept}" />
+	    <s:textfield name="user.dept" key="部门" value="%{#session.us.dept}" />
 	    </label></td>
 	  </tr>
 	</table>
@@ -86,7 +89,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<td width="80" align="center"><s:submit value="修改" theme="simple" />
 	  <div align="center"></div></td>
 	
-	<td width="80" align="center"> <s:reset value="重置"
+	<td width="80" align="center"> <s:reset value="取消"
 		theme="simple" /></td></tr></table>
 </s:form></div>
 </div>

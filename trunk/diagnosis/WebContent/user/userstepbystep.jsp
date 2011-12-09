@@ -9,26 +9,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
    <%if(request.getSession().getAttribute("us")==null) 
  { 
-  response.sendRedirect("adminlogin.jsp"); 
+  response.sendRedirect("user/userlogin.jsp"); 
   }  
                 
    %>  
     <base href="<%=basePath%>">
     
     <title>结果页面</title>
-      <script type="text/javascript">
-    	function confirmDel(){
-			return confirm("确定删除？");
-			
-			    
-			
-    	}
-    	function confirmReset(){
-			return confirm("确认要重置密码吗？");
-			
-    	}
-    	
-    </script>
+     
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">

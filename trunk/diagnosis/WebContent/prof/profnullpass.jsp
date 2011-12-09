@@ -45,7 +45,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  </tr>
 	<tr>
 	 <td align="center"><label>
-	    <s:textfield name="prof.name" key="姓名" value="%{#session.pr.name}" />
+	    <s:textfield name="user.name" key="姓名" value="%{#session.pr.name}" />
 	    </label></td>
 	  </tr>
 	<tr>
@@ -64,22 +64,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<tr>
 	
 	 <td align="center"><label>
-	    <s:textfield name="prof.email" key="电子邮箱" value="%{#session.pr.email}" />
+	    <s:textfield name="user.email" key="电子邮箱" value="%{#session.pr.email}" />
 	    </label></td>
 	  </tr>
 	<tr>
 	 <td align="center"><label>
-	    <s:textfield name="prof.jid" key="工作号" value="%{#session.pr.jid}" />
+	    <s:textfield name="user.jid" key="工作号" value="%{#session.pr.jid}" />
 	    </label></td>
 	  </tr>
 	<tr>
 	 <td align="center"><label>
-	    <s:textfield name="prof.phone" key="电话" value="%{#session.pr.phone}" />
+	    <s:textfield name="user.phone" key="电话" value="%{#session.pr.phone}" />
 	    </label></td>
 	  </tr>
 	   <tr>
 	 <td align="center"><label>
-	    <s:textfield name="prof.dept" key="部门" value="%{#session.pr.dept}" />
+	    <s:textfield name="user.dept" key="部门" value="%{#session.pr.dept}" />
 	    </label></td>
 	  </tr>
 	</table>

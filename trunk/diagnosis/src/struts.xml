@@ -9,32 +9,32 @@
 	<constant name="struts.objectFactory" value="spring" />  
 	<package name="struts2" extends="struts-default" namespace="/">
 		<action name="useraction" class="userAction">
-		    <result name="logoffusersuccess">userlogin.jsp</result>
-		    <result name="profsuccess">profsuccess.jsp</result>
+		    <result name="logoffusersuccess">user/userlogin.jsp</result>
+		    <result name="profsuccess">prof/profsuccess.jsp</result>
 		    <result name="loginsuccess">biocpool490/biocpool1.jsp</result>
-			<result name="loginerror">userloginerror.jsp</result>
-			<result name="altersuccess">userupdatesuccess.jsp</result>
-			<result name="altererror">useraltererror.jsp</result>
-			<result name="nullpass">usernullpass.jsp</result>
-			<result name="unuserlogin">userlogin.jsp</result>
+			<result name="loginerror">user/userloginerror.jsp</result>
+			<result name="altersuccess">user/userupdatesuccess.jsp</result>
+			<result name="altererror">user/useraltererror.jsp</result>
+			<result name="nullpass">user/usernullpass.jsp</result>
+			<result name="unuserlogin">user/userlogin.jsp</result>
 		</action>
 			
 			
 			<!-- 管理员操作 -->
 			<action name="adminaction" class="userAction">
-			  <result name="adminsuccess">adminsuccess.jsp</result>
-			  <result name="adminloginerror">adminloginerror.jsp</result>
-			<result name="adminaltersuccess">adminupdatesuccess.jsp</result>
-			<result name="adminaltererror">adminaltererror.jsp</result>
-			<result name="logoffadminsuccess">/adminlogin.jsp</result>
-			<result name="adminnullpass">adminnullpass.jsp</result>
+			  <result name="adminsuccess">admin/adminsuccess.jsp</result>
+			  <result name="adminloginerror">admin/adminloginerror.jsp</result>
+			<result name="adminaltersuccess">admin/adminupdatesuccess.jsp</result>
+			<result name="adminaltererror">admin/adminaltererror.jsp</result>
+			<result name="logoffadminsuccess">admin/adminlogin.jsp</result>
+			<result name="adminnullpass">admin/adminnullpass.jsp</result>
 		
-			<result name="unadminlogin">adminlogin.jsp</result>
+			<result name="unadminlogin">admin/adminlogin.jsp</result>
 			</action>
 			
 			<!-- 专家操作 -->
 			<action name="profaction" class="userAction">
-			  <result name="profsuccess">ruledsc.jsp</result>
+			  <result name="profsuccess">rule/ruledsc.jsp</result>
 			  <result name="profloginerror">prof/profloginerror.jsp</result>
 			<result name="profaltersuccess">prof/profupdatesuccess.jsp</result>
 			<result name="profaltererror">prof/profaltererror.jsp</result>
@@ -46,7 +46,7 @@
 		
 		
 		 <action name="dcsdataaction" class="dcsdataAction">
-			<result name="saveerror">userdcsdataerror.jsp</result>
+			<result name="saveerror">user/userdcsdataerror.jsp</result>
 			<result name="savelistsuccess">savesuccess.jsp</result>
 		</action> 
 
@@ -57,70 +57,80 @@
 		</action> 
 		
 		<action name="monitoraction" class="monitorAction">
-			<result name="go">usermonitor.jsp</result>
-			<result name="OK">usermonitorok.jsp</result>
+			<result name="go">user/usermonitor.jsp</result>
+			<result name="OK">user/usermonitorok.jsp</result>
 		</action> 
 		
 		<action name="interfaceaction" class="interfaceAction">
-			<result name="go">userinterface.jsp</result>
-			<result name="OK">userinterfaceok.jsp</result>
+			<result name="go">user/userinterface.jsp</result>
+			<result name="OK">user/userinterfaceok.jsp</result>
 		</action> 
 	   
 		<action name="rulebraction" class="rulebrAction">
-			<result name="success">ruleadd.jsp</result>
-			<result name="rulesuccess">userfindreason.jsp</result>
-			<result name="go">usergo.jsp</result>
-		    <result name="unuserlogin">userlogin.jsp</result>
-			<result name="unadminlogin">adminlogin.jsp</result>
+			<result name="success">rule/ruleadd.jsp</result>
+			<result name="rulesuccess">rule/rulefindreason.jsp</result>
+			<result name="go">rule/rulego.jsp</result>
+		    <result name="unuserlogin">user/userlogin.jsp</result>
+			<result name="unproflogin">prof/proflogin.jsp</result>
 		</action>
+		<action name="userrulebraction" class="rulebrAction">
+		  <result name="rulesuccess">user/userfindreason.jsp</result>
+		  <result name="go">user/usergo.jsp</result>
+		    <result name="unuserlogin">user/userlogin.jsp</result>
+			<result name="unproflogin">prof/proflogin.jsp</result>
+		  
+	   </action>
+	   <action name="userruleaction" class="ruleAction">
+	   <result name="go">user/usergo.jsp</result>
+	   </action>
 	   
 	    <action name="dcsdscribaction" class="dcsDscribAction">
 			<result name="success">datadcsdscrib.jsp</result>
-			<result name="unuserlogin">userlogin.jsp</result>
+			<result name="unuserlogin">user/userlogin.jsp</result>
 			<result name="bdsuccess">databdlist.jsp</result>
 	    </action>
 	    
 		
 	    <action name="ruleaction" class="ruleAction">
-			<result name="success">rulesuccess.jsp</result>
-		    <result name="input">rulesuccess.jsp</result>
-			<result name="go">usergo.jsp</result>
-			<result name="gogogo">ruledsc.jsp</result>
-			<result name="unuserlogin">userlogin.jsp</result>
+			<result name="success">rule/rulesuccess.jsp</result>
+		    <result name="input">rule/rulesuccess.jsp</result>
+			<result name="go">rule/rulego.jsp</result>
+			<result name="gogogo">rule/ruledsc.jsp</result>
+			<result name="unuserlogin">user/userlogin.jsp</result>
 			<result name="list">rulelist.jsp</result>
 			<result name="show">ruleshow.jsp</result>
-			<result name="unadminlogin">adminlogin.jsp</result>
+			<result name="unadminlogin">admin/adminlogin.jsp</result>
 		</action>
 		
 		
 		
 		<action name="adminuseraction" class="userAction">
-		 <result name="adminsuccess">adminsuccess.jsp</result>
-		 <result name="deletesuccess">adminresetsuccess.jsp</result>
-		   <result name="resetsuccess">adminresetsuccess.jsp</result>
-			<result name="success">adminsuccess.jsp</result>
-			<result name="searcherror">adminsearcherror.jsp</result>
-			<result name="addnullerror">adminaddnullerror.jsp</result>
-			<result name="adderror">adminadderror.jsp</result>
-			<result name="unuserlogin">userlogin.jsp</result>
-			<result name="unadminlogin">adminlogin.jsp</result>
+		 <result name="adminsuccess">admin/adminsuccess.jsp</result>
+		 <result name="deletesuccess">admin/adminresetsuccess.jsp</result>
+		   <result name="resetsuccess">admin/adminresetsuccess.jsp</result>
+			<result name="success">admin/adminsuccess.jsp</result>
+			<result name="searcherror">admin/adminsearcherror.jsp</result>
+			<result name="addnullerror">admin/adminaddnullerror.jsp</result>
+			<result name="adderror">admin/adminadderror.jsp</result>
+			<result name="unuserlogin">user/userlogin.jsp</result>
+			<result name="unadminlogin">admin/adminlogin.jsp</result>
 		</action>
 		
 		<action name="errorlogaction" class="errorlogAction">
-			<result name="OK">usererrorlist.jsp</result>
+			<result name="OK">user/usererrorlist.jsp</result>
 		</action>
 		
 		<action name="dsshistoryaction" class="dsshistoryAction">
-			<result name="OK">useradvicelist.jsp</result>
+			<result name="OK">user/useradvicelist.jsp</result>
 		</action>
 		<action name="backwardresultaction" class="backwardResultAction">
-			<result name="success">userdcsdscrib.jsp</result>
-			<result name="unuserlogin">userlogin.jsp</result>
+			<result name="success">user/userdcsdscrib.jsp</result>
+			<result name="unuserlogin">user/userlogin.jsp</result>
 		</action>
 		
 		<action name="backwardresonaction" class="backwardResonAction">
 			<result name="success" type="redirect">ruleaction!godetail?rule.bid=%{rule.getBid()}</result>
-			<result name="unuserlogin">userlogin.jsp</result>
+			<result name="unuserlogin">user/userlogin.jsp</result>
 		</action>
 	</package>
 

@@ -13,12 +13,12 @@
 
 <%
 	if (request.getSession().getAttribute("us") == null) {
-		response.sendRedirect("userlogin.jsp");
+		response.sendRedirect("user/userlogin.jsp");
 	}
 %>
 <base href="<%=basePath%>">
 
-<title>专家系统</title>
+<title>智能诊断</title>
 
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
@@ -39,14 +39,14 @@
 <body>
 	<div id="rightmain">
 
-		  <h2>专家系统</h2>
+		  <h2>智能诊断</h2>
 		<p class="STYLE1">
 			<br>
 		</p>
 	</div>
 	<br>
 	<div id="login">
-		<s:form action="ruleaction">
+		<s:form action="userruleaction">
 			<table width="500" align="center" >
 			    <tr>
 					<td align = "right">故障设备现象：</td>

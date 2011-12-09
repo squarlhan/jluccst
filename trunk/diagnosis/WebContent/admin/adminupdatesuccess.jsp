@@ -10,7 +10,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
    <%if(request.getSession().getAttribute("ad")==null) 
   { 
-  response.sendRedirect("adminlogin.jsp"); 
+  response.sendRedirect("admin/adminlogin.jsp"); 
    }  
                 
    %>  
