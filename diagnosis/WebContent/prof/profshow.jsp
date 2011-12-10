@@ -8,9 +8,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
-   <%if(request.getSession().getAttribute("ad")==null) 
+   <%if(request.getSession().getAttribute("pr")==null) 
   { 
-  response.sendRedirect("adminlogin.jsp"); 
+  response.sendRedirect("proflogin.jsp"); 
    }  
                 
    %>  
@@ -42,7 +42,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  </tr>
 	<tr>
 	 <td align="center"><label>
-	    <s:textfield name="user.name" key="姓名" value="%{#session.ad.name}" />
+	    <s:textfield name="user.name" key="姓名" value="%{#session.pr.name}" />
 	    </label></td>
 	  </tr>
 	<tr>
@@ -61,22 +61,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<tr>
 	
 	 <td align="center"><label>
-	    <s:textfield name="user.email" key="电子邮箱" value="%{#session.ad.email}" />
+	    <s:textfield name="user.email" key="电子邮箱" value="%{#session.pr.email}" />
 	    </label></td>
 	  </tr>
 	<tr>
 	 <td align="center"><label>
-	    <s:textfield name="user.jid" key="工作号" value="%{#session.ad.jid}" />
+	    <s:textfield name="user.jid" key="工作号" value="%{#session.pr.jid}" />
 	    </label></td>
 	  </tr>
 	<tr>
 	 <td align="center"><label>
-	    <s:textfield name="user.phone" key="电话" value="%{#session.ad.phone}" />
+	    <s:textfield name="user.phone" key="电话" value="%{#session.pr.phone}" />
 	    </label></td>
 	  </tr>
 	  <tr>
 	 <td align="center"><label>
-	    <s:textfield name="user.dept" key="部门" value="%{#session.ad.dept}" />
+	    <s:textfield name="user.dept" key="部门" value="%{#session.pr.dept}" />
 	    </label></td>
 	  </tr>
 	</table>

@@ -59,7 +59,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </table>
    
     <div align="center">
-      <input name="button" type=button onClick="window.location.href('userrulebraction.action')" value="完成返回">
+      <input name="button" type=button onClick="window.location.href('userbraction.action')" value="完成返回">
       </div>
   </body>
 </html>
