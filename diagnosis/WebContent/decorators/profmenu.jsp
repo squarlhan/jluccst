@@ -12,14 +12,14 @@
   <body>
     <table align="center" width="100%" id="nav">
           <!--<tr align="center"><td><li><a href="/diagnosis/userruleadd.jsp">录入规则</a></li></td></tr>  -->
-          <tr align="center"><td><li><a href="/diagnosis/rulebraction.action">智能诊断</a></li></td></tr>
+           <!--<tr align="center"><td><li><a href="/diagnosis/rulebraction.action">智能诊断</a></li></td></tr>-->
           <tr align="center"><td><li><a href="/diagnosis/ruleaction!getall.action">规则维护</a></li></td></tr>
            <tr align="center"><td><li><a href="/diagnosis/dcsdscribaction.action">描述维护</a></li></td></tr>
             <tr align="center"><td><li><a href="/diagnosis/rulebraction.action">智能诊断</a></li></td></tr>
            <tr align="center"><td><li><a href="/diagnosis/prof/profshow.jsp">个人信息</a></li></td></tr>
            <tr align="center"><td><li><a href="/diagnosis/user/userlogin.jsp">用户登录</a></li></td></tr>
           <tr align="center"><td><li><a href="/diagnosis/admin/adminlogin.jsp">管理员登录</a></li></td></tr>
-          <tr align="center"><td><li><a href="/diagnosis/useraction!proflogoff.action">注销登录</a></li></td></tr>
+          <tr align="center"><td><li><a href="/diagnosis/profaction!proflogoff.action">注销登录</a></li></td></tr>
     </table> 
   </body>
 </html>

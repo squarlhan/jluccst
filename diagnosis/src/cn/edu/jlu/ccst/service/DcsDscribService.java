@@ -104,6 +104,12 @@ public class DcsDscribService {
 
 		return dds;
 	}
+	
+	public List<DcsDscrib> findbyeque(String eque) {
+		List<DcsDscrib> dds = dcsDscribServiceImpl.findbyeque(eque);
+
+		return dds;
+	}
 	public List<DcsDscrib> findall() {
 		List<DcsDscrib> dcsDscriblist = dcsDscribServiceImpl.findAll();
 

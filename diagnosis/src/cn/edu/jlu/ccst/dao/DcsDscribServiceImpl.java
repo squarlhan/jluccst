@@ -39,6 +39,10 @@ public class DcsDscribServiceImpl implements DcsDscribServiceInter{
 		Query query = getEntityManager().createQuery("select b FROM DcsDscrib b where b.name='"+name+"'");
 		return query.getResultList();
 	}
+	public List<DcsDscrib> findbyeque(String eque) {
+		Query query = getEntityManager().createQuery("select b FROM DcsDscrib b where b.eque='"+eque+"'");
+		return query.getResultList();
+	}
 
 	public void save(DcsDscrib dcsDscrib){
 		if (dcsDscrib.getDid() <= 0) {

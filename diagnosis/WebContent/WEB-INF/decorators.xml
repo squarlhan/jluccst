@@ -26,9 +26,15 @@
 		<pattern>/admin*</pattern>
 	</decorator>
 	<decorator name="prof" page="profdecorator.jsp">
-	<pattern>/dcsdscribaction*</pattern>
+	
 		<pattern>/prof*</pattern>
 		<pattern>/rule*</pattern>
+	</decorator>
+	<decorator name="prof2" page="profdecorator2.jsp">
+	<pattern>/dcsdscribaction*</pattern>
+	</decorator>
+	<decorator name="prof3" page="profdecorator3.jsp">
+	<pattern>/rulebr*</pattern>
 	</decorator>
 	
 	<decorator name="panel" page="panel.jsp"/>
