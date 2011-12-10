@@ -25,6 +25,7 @@
 	<decorator name="admin" page="admindecorator.jsp">
 		<pattern>/admin*</pattern>
 	</decorator>
+	
 	<decorator name="prof" page="profdecorator.jsp">
 	
 		<pattern>/prof*</pattern>

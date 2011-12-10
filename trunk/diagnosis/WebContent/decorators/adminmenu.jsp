@@ -16,6 +16,7 @@
          <tr align="center"><td><li><a href="/diagnosis/admin/adminadduser.jsp">添加用户</a></li></td></tr>
           <tr align="center"><td><li><a href="/diagnosis/admin/adminshow.jsp">个人信息</a></li></td></tr>
           <tr align="center"><td><li><a href="/diagnosis/user/userlogin.jsp">用户登录</a></li></td></tr>
+            <tr align="center"><td><li><a href="/diagnosis/prof/proflogin.jsp">专家登录</a></li></td></tr>
           <tr align="center"><td><li><a href="adminaction!adminlogoff.action">注销登录</a></li></td></tr>
     </table> 
   </body>

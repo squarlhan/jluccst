@@ -22,9 +22,9 @@ import cn.edu.jlu.ccst.model.BackwardandResult;
 import cn.edu.jlu.ccst.service.RuleBRService;
 import java.util.Map;
 
-@Component("rulebrAction")
+@Component("userbrAction")
 @Scope("prototype")
-public class RuleBRAction extends ActionSupport {
+public class UserBRAction extends ActionSupport {
 
 	private RuleBRService rulebrService;
 
@@ -88,20 +88,20 @@ public class RuleBRAction extends ActionSupport {
 		this.backwardandResultlist = backwardandResultlist;
 	}
 
-	
-	public boolean checkprof() {
+	public boolean checkuser() {
 		ActionContext actionContext = ActionContext.getContext();
 		Map user = actionContext.getSession();
-		User us = (User) user.get("pr");
+		User us = (User) user.get("us");
 		if (us != null) {
 			return true;
 		} else
 			return false;
 	}
+	
 
 	public String execute() {
 		// nb=rulebrService.getalloptions();
-		if (checkprof()) {
+		if (checkuser()) {
 			nvs = rulebrService.getallnvs();
 			
 			ActionContext actionContext = ActionContext.getContext();
@@ -109,7 +109,7 @@ public class RuleBRAction extends ActionSupport {
 			session.put("map", nvs);
 			return "rulesuccess";
 		}
-		return "unproflogin";
+		return "unuserlogin";
 		/*
 		 * User flag1; backwardandResultlist = rulebrService.findAll();
 		 * Set<String> set1=new HashSet(); Set<String> set2=new HashSet();
@@ -124,7 +124,7 @@ public class RuleBRAction extends ActionSupport {
 	
 	public String findbynoun() {
 		// nb=rulebrService.getalloptions();
-		if (checkprof()) {
+		if (checkuser()) {
 			  try {
 				   String keyword= new String(noun.getBytes("ISO-8859-1"),"UTF-8");
 			       nvs = rulebrService.getbynvs(keyword);
@@ -138,7 +138,7 @@ public class RuleBRAction extends ActionSupport {
 			            //e.printStackTrace();
 		                                    } 
 			  }
-	         	return "unproflogin";
+	         	return "unuserlogin";
 		/*
 		 * User flag1; backwardandResultlist = rulebrService.findAll();
 		 * Set<String> set1=new HashSet(); Set<String> set2=new HashSet();

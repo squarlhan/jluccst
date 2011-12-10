@@ -331,7 +331,7 @@ public class UserAction extends ActionSupport {
 			if(checkuser()){
 			ActionContext.getContext().getSession().remove("us");
 			
-			System.out.println("注销成功2！");
+			System.out.println("注销成功！");
 			return "logoffusersuccess";}
 			else return "unuserlogin";
 		}

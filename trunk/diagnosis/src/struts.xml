@@ -74,7 +74,7 @@
 			<result name="unproflogin">prof/proflogin.jsp</result>
 			<result name="unproflogin">prof/proflogin.jsp</result>
 		</action>
-		<action name="userrulebraction" class="rulebrAction">
+		<action name="userbraction" class="userbrAction">
 		  <result name="rulesuccess">user/userfindreason.jsp</result>
 		  <result name="go">user/usergo.jsp</result>
 		    <result name="unuserlogin">user/userlogin.jsp</result>
@@ -88,6 +88,7 @@
 	    <action name="dcsdscribaction" class="dcsDscribAction">
 			<result name="success">datadcsdscrib.jsp</result>
 			<result name="unuserlogin">user/userlogin.jsp</result>
+			<result name="unproflogin">prof/proflogin.jsp</result>
 			<result name="bdsuccess">databdlist.jsp</result>
 	    </action>
 	    
@@ -101,6 +102,7 @@
 			<result name="list">rule/rulelist.jsp</result>
 			<result name="show">rule/ruleshow.jsp</result>
 			<result name="unadminlogin">admin/adminlogin.jsp</result>
+			<result name="unproflogin">prof/proflogin.jsp</result>
 		</action>
 		
 		

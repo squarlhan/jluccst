@@ -118,7 +118,7 @@ public class DcsDscribAction extends ActionSupport {
 			session.put("map2", nvs);
 			return "success";
 		}
-		return "unuserlogin";
+		return "unproflogin";
 	}
 	
 	public String addDescrib() {
@@ -153,7 +153,7 @@ public class DcsDscribAction extends ActionSupport {
 
 			return "bdsuccess";
 		} else
-			return "unuserlogin";
+			return "unproflogin";
 	}
 
 	
