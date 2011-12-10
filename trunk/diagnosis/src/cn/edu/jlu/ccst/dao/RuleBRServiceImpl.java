@@ -35,7 +35,10 @@ public class RuleBRServiceImpl implements RuleBRServiceInter{
 		Query query = getEntityManager().createQuery("select distinct b.verb FROM BackwardandResult b WHERE b.nouns='"+noun+"'");
 		return query.getResultList();
 	}
-	
+	public List<String> findbynoun(String noun) {
+		Query query = getEntityManager().createQuery("select distinct nouns FROM BackwardandResult b where b.nouns like'"+noun+"%'");
+		return query.getResultList();
+	}
 	
 
 

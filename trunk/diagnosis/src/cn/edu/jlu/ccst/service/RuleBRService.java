@@ -1,5 +1,6 @@
 package cn.edu.jlu.ccst.service;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -20,10 +21,30 @@ public class RuleBRService {
 
 	private BackwardandResult backwardandresult;
 	private RuleBRServiceInter rulebrServiceImpl;
-
+	private String noun;
 	public BackwardandResult getBackwardandresult() {
 		return backwardandresult;
 	}
+
+	
+	
+	
+	
+	public String getNoun() {
+		return noun;
+	}
+
+
+
+
+
+	public void setNoun(String noun) {
+		this.noun = noun;
+	}
+
+
+
+
 
 	@Resource
 	public void setBackwardandresult(BackwardandResult backwardandresult) {
@@ -76,4 +97,17 @@ public class RuleBRService {
 
 		return result;
 	}
+	public Map getbynvs(String noun) {
+		Map result = new HashMap();
+
+		List<String> nounses = rulebrServiceImpl.findbynoun(noun);
+
+		for (String str : nounses) {
+			List<String> verb = rulebrServiceImpl.findAllverb(str);
+			result.put(str, verb);
+		}
+
+		return result;
+	}
 }
+

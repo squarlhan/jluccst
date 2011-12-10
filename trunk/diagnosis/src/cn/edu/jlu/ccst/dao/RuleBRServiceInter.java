@@ -14,12 +14,12 @@ public interface RuleBRServiceInter {
 	public void save(BackwardandResult backwardandresult);
 
 	
-
+   
 	public BackwardandResult find(int id);
 
 	public List<String> findAllnoun() ;
 	public List<String> findAllverb(String noun);
-
+	public List<String> findbynoun(String noun);
 	
 
 }

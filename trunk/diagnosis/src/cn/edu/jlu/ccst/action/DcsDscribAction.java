@@ -1,5 +1,6 @@
 package cn.edu.jlu.ccst.action;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 import java.util.Map;
 
@@ -28,8 +29,18 @@ public class DcsDscribAction extends ActionSupport {
 	private Map nvs;
 	private String dcsDscribname1;
 	private String dcsDscribname2;
+	private String eque;
 	
+   
 	
+
+	public String getEque() {
+		return eque;
+	}
+
+	public void setEque(String eque) {
+		this.eque = eque;
+	}
 
 	public Map getNvs() {
 		return nvs;
@@ -145,4 +156,16 @@ public class DcsDscribAction extends ActionSupport {
 			return "unuserlogin";
 	}
 
+	
+	public String findbyeque(){
+		try {
+			String keyword= new String(eque.getBytes("ISO-8859-1"),"UTF-8");
+			dcsdscriblist = dcsDscribService.findbyeque(keyword);
+			System.out.println(dcsdscriblist);
+	} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			//e.printStackTrace();
+		} 
+		return "bdsuccess";
+	}
 }

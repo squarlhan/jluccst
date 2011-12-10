@@ -1,5 +1,6 @@
 package cn.edu.jlu.ccst.action;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -32,6 +33,18 @@ public class RuleBRAction extends ActionSupport {
 	private List<String> backwardandResultlist1;
 	private List<String> backwardandResultlist2;
 	private Map nvs;
+	private String noun;
+	
+	
+	
+
+	public String getNoun() {
+		return noun;
+	}
+
+	public void setNoun(String noun) {
+		this.noun = noun;
+	}
 
 	public Map getNvs() {
 		return nvs;
@@ -98,6 +111,7 @@ public class RuleBRAction extends ActionSupport {
 		// nb=rulebrService.getalloptions();
 		if (checkuser()|checkprof()) {
 			nvs = rulebrService.getallnvs();
+			
 			ActionContext actionContext = ActionContext.getContext();
 			Map session = actionContext.getSession();
 			session.put("map", nvs);
@@ -115,4 +129,32 @@ public class RuleBRAction extends ActionSupport {
 		 */
 	}
 
+	
+	public String findbynoun() {
+		// nb=rulebrService.getalloptions();
+		if (checkuser()|checkprof()) {
+			  try {
+				   String keyword= new String(noun.getBytes("ISO-8859-1"),"UTF-8");
+			       nvs = rulebrService.getbynvs(keyword);
+			
+			       ActionContext actionContext = ActionContext.getContext();
+			       Map session = actionContext.getSession();
+			       session.put("map", nvs);
+			       return "rulesuccess";
+		           } catch (UnsupportedEncodingException e) {
+			          // TODO Auto-generated catch block
+			            //e.printStackTrace();
+		                                    } 
+			  }
+	         	return "unuserlogin";
+		/*
+		 * User flag1; backwardandResultlist = rulebrService.findAll();
+		 * Set<String> set1=new HashSet(); Set<String> set2=new HashSet();
+		 * for(BackwardandResult brt:backwardandResultlist){
+		 * set1.add(brt.getNouns()); set2.add(brt.getVerb()); }
+		 * backwardandResultlist1=new ArrayList(); backwardandResultlist2=new
+		 * ArrayList(); backwardandResultlist1.addAll(set1);
+		 * backwardandResultlist2.addAll(set2); return "rulesuccess";
+		 */
+	}
 }
