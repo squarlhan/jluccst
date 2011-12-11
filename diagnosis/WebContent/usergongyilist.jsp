@@ -46,7 +46,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
      <tr  align="center"  bordercolor="#FFFFFF" bgcolor="<s:if test="#index1.odd == true">#ffffff</s:if><s:else>#EDEDED</s:else>" style="color: Black; ">
        <td><s:property value="equipment"/>&nbsp;</td>
        <td><s:property value="item"/>&nbsp;</td>
-       <td><s:property value="value"/>&nbsp;</td>       
+       <td style="color:<s:if test="%{#dcsdata.isok}">black</s:if><s:else>red</s:else>"><s:property value="value"/>&nbsp;</td>       
        
      </tr>
      </s:iterator>
