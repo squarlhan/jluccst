@@ -148,7 +148,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     
        <td><s:textfield value="%{nouns}" theme = "simple" size="10" id="nouns[%{#reasons.id}]" style="background:transparent;border:0px" />&nbsp;</td>   
        <td><s:textfield name="backwardandReason.verb" value="%{verb}" theme = "simple" size="10" id="verb[%{#reasons.id}]" style="background:transparent;border:0px" />&nbsp;</td>
-       <td><s:textfield   name="backwardandReason.sugg" value="%{sugg}" theme = "simple" size="40" id="sugg[%{#reasons.id}]" style="background:transparent;border:0px"  />&nbsp;</td>
+       <td><s:textfield   name="backwardandReason.sugg" value="%{sugg}" theme = "simple" size="60" id="sugg[%{#reasons.id}]" style="background:transparent;border:0px"  />&nbsp;</td>
           <td>
           <s:a id="a[%{#reasons.id}]"  href="#"  onclick="return confirmChge(%{#reasons.id});">修改</s:a>
 
@@ -183,7 +183,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <input name="reason_verb[0]"  id="reason_verb[0]"  type="text" size="10" />
     </td>
     <td width="50%">
-      <input name="sugg[0]"  id="sugg[0]"  type="text" size="40" />
+      <input name="sugg[0]"  id="sugg[0]"  type="text" size="60" />
     </td>
     <td width="20%">
       <input name="addone" type="button" value=" + " onClick="insertReason()" />
