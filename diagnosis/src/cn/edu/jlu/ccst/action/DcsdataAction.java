@@ -1,5 +1,6 @@
 package cn.edu.jlu.ccst.action;
 
+import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
@@ -147,7 +148,18 @@ public class DcsdataAction extends ActionSupport {
 		}
 	
 public String showgongyidata(){
-	dcsdatalist = dcsdataService.getallgongyidata(keyword);
+	String key = null;
+	try {
+		if(keyword!=null){
+			key = new String(keyword.getBytes("ISO-8859-1"),"UTF-8");
+			key="3系列生化池";
+		}		
+		dcsdatalist = dcsdataService.getallgongyidata(key);
+	} catch (UnsupportedEncodingException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	
 	return "gongyi";
 }
 		
