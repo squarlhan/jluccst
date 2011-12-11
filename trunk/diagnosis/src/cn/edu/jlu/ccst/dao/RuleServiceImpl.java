@@ -56,7 +56,7 @@ public class RuleServiceImpl implements RuleServiceInter{
 	}
 	
 	public List<Backward> findbyname(String name){
-		Query query = getEntityManager().createQuery("select b FROM Backward b where b.name = '"+name+"'");
+		Query query = getEntityManager().createQuery("select b FROM Backward b where b.name like '"+name+"%'");
 		return query.getResultList();
 	}
 
