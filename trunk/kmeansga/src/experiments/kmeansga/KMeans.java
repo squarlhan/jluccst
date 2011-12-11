@@ -17,24 +17,24 @@ import org.encog.ml.kmeans.Centroid;
 
 public class KMeans {
 
-	public static List<Integer> runKmeans(Population a_pop, double cluster_number, int max_gen) {
-		int currentPopSize = a_pop.size();
-		// if  all  of the chromosomes contain constant genes?
-		int currentChromSize = a_pop.getChromosome(a_pop.size() - 1).size(); 
-		// Ensure all chromosomes are updated.
-		// -----------------------------------
-		double[][] KmeansDataSet = new double[currentPopSize][currentChromSize];
-		for (int i = 0; i < currentPopSize; i++) {
-			IChromosome chrom = a_pop.getChromosome(i);
-			for (int j = 0; j < currentChromSize; j++) {
-				KmeansDataSet[i][j] = (Double) chrom.getGene(j).getAllele();
-				/*
-				 * if((Boolean)chrom.getGene(j).getAllele()){
-				 * KmeansDataSet[i][j]=1.9; } else{ KmeansDataSet[i][j]=0.25; }
-				 */
-			}
-		}
-
+	public static List<Integer> runKmeans(double[][] KmeansDataSet, double cluster_number, int max_gen) {
+//		int currentPopSize = a_pop.size();
+//		// if  all  of the chromosomes contain constant genes?
+//		int currentChromSize = a_pop.getChromosome(a_pop.size() - 1).size(); 
+//		// Ensure all chromosomes are updated.
+//		// -----------------------------------
+//		double[][] KmeansDataSet = new double[currentPopSize][currentChromSize];
+//		for (int i = 0; i < currentPopSize; i++) {
+//			IChromosome chrom = a_pop.getChromosome(i);
+//			for (int j = 0; j < currentChromSize; j++) {
+//				KmeansDataSet[i][j] = (Double) chrom.getGene(j).getAllele();
+//				/*
+//				 * if((Boolean)chrom.getGene(j).getAllele()){
+//				 * KmeansDataSet[i][j]=1.9; } else{ KmeansDataSet[i][j]=0.25; }
+//				 */
+//			}
+//		}
+		int currentPopSize = KmeansDataSet.length;
 		final BasicMLDataSet set = new BasicMLDataSet();
 		for (final double[] element : KmeansDataSet) {
 			set.add(new BasicMLData(element));

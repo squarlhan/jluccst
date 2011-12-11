@@ -28,6 +28,7 @@ import algorithm.abs.AffinityPropagationAlgorithm.AffinityConnectingMethod;
 import experiments.kmeansga.EucDistance;
 import experiments.kmeansga.KMeans;
 import experiments.kmeansga.KMeansGA;
+import experiments.kmeansga.RunKM;
 import experiments.kmeansga.clustObjectFun;
 
 public class GABreeder
@@ -541,27 +542,8 @@ public class GABreeder
   
   protected void updateChromosomes(Population a_pop, Configuration a_conf, KMeansGA obj, FitnessFunction fitness, int kmeans_max, double kmeans_num, double fit_lamda, double cutoff, double extra,BufferedWriter output) {
 		
-			double[][] chromatrix = pop2matrix(a_pop);
-			double[][] dis = EucDistance.calcEucMatrix(chromatrix);
-			List<Integer> results = KMeans.runKmeans(a_pop, kmeans_num, kmeans_max);
-			if(results==null||results.size()==0){
-				for(int i = 0; i<= a_pop.size()-1; i++){
-					results.add(i);
-				}
-				System.err.println("Cluster Error, 0 result!");	
-			}
-			 clustObjectFun.calcFittnessValue(a_pop, obj, fitness, results, dis, fit_lamda, cutoff, extra,output);
-//			 try {
-//					for (IChromosome mychrom : a_pop.getChromosomes()) {
-//						IChromosome mychrom1 = (IChromosome) mychrom.clone();
-//					output.write(Math.abs(fitness.evaluate(mychrom1)-mychrom.getFitnessValueDirectly()) + "\t");
-//				}
-//				output.write("\n");
-//				output.flush();
-//			} catch (IOException e) {
-//				// TODO Auto-generated catch block
-//				e.printStackTrace();
-//			}
+	  RunKM rap  = new RunKM();
+	  rap.run(a_pop, a_conf, obj, fitness, kmeans_max, kmeans_num, fit_lamda, cutoff, extra, output);
 	  }
   
   private double[][]  pop2matrix(Population pop){
