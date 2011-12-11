@@ -46,6 +46,9 @@
 	<decorator name="user" page="userbrdecorator.jsp">
 	<pattern>/userbr*</pattern>
 	</decorator>
+	<decorator name="dcsdata" page="gydecorator.jsp">
+	<pattern>/dcsdataaction*</pattern>
+	</decorator>
 	
 	<decorator name="panel" page="panel.jsp"/>
 </decorators>
