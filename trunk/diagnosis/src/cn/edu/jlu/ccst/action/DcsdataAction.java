@@ -152,7 +152,7 @@ public String showgongyidata(){
 	try {
 		if(keyword!=null){
 			key = new String(keyword.getBytes("ISO-8859-1"),"UTF-8");
-			key="3系列生化池";
+//			key="3系列生化池";
 		}		
 		dcsdatalist = dcsdataService.getallgongyidata(key);
 	} catch (UnsupportedEncodingException e) {
