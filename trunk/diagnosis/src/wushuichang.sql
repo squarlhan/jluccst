@@ -2,15 +2,15 @@
 Navicat MySQL Data Transfer
 
 Source Server         : local
-Source Server Version : 50157
+Source Server Version : 50517
 Source Host           : localhost:3306
 Source Database       : wushuichang
 
 Target Server Type    : MYSQL
-Target Server Version : 50157
+Target Server Version : 50517
 File Encoding         : 65001
 
-Date: 2011-11-30 23:59:40
+Date: 2011-12-11 12:22:41
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -41,12 +41,12 @@ INSERT INTO `admin` VALUES ('1', '王晓明', '1', '1', 'squarlhan@163.com', '13
 DROP TABLE IF EXISTS `backward`;
 CREATE TABLE `backward` (
   `bid` int(10) NOT NULL AUTO_INCREMENT,
-  `name` varchar(16) DEFAULT NULL,
-  `memo` varchar(200) DEFAULT NULL,
-  `count` int(10) NOT NULL DEFAULT '0',
-  `priror` int(10) NOT NULL DEFAULT '0',
+  `name` varchar(255) DEFAULT NULL,
+  `memo` varchar(255) DEFAULT NULL,
+  `count` int(10) DEFAULT '0',
+  `priror` int(10) DEFAULT '0',
   PRIMARY KEY (`bid`)
-) ENGINE=InnoDB AUTO_INCREMENT=139 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=143 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of backward
@@ -165,8 +165,7 @@ INSERT INTO `backward` VALUES ('133', '', '', '0', '0');
 INSERT INTO `backward` VALUES ('134', '', '', '0', '0');
 INSERT INTO `backward` VALUES ('135', '', '', '0', '0');
 INSERT INTO `backward` VALUES ('136', '', '', '0', '0');
-INSERT INTO `backward` VALUES ('137', '', '', '0', '0');
-INSERT INTO `backward` VALUES ('138', 'han', 'han', '0', '0');
+INSERT INTO `backward` VALUES ('142', '电石厂有机水', '溶解氧过高', '0', '0');
 
 -- ----------------------------
 -- Table structure for `backwardandlower`
@@ -200,7 +199,7 @@ CREATE TABLE `backwardandreason` (
   PRIMARY KEY (`id`),
   KEY `FKFBA61E58DB7478BC` (`bid`),
   CONSTRAINT `FKFBA61E58DB7478BC` FOREIGN KEY (`bid`) REFERENCES `backward` (`bid`)
-) ENGINE=InnoDB AUTO_INCREMENT=340 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=354 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 -- Records of backwardandreason
@@ -214,13 +213,16 @@ INSERT INTO `backwardandreason` VALUES ('329', '132', '进水池', '0', '控制�
 INSERT INTO `backwardandreason` VALUES ('330', '133', 'XX池', '0', '控制不好', '维修');
 INSERT INTO `backwardandreason` VALUES ('331', '134', '中和池', '0', '处理不好', '维修');
 INSERT INTO `backwardandreason` VALUES ('332', '135', '中和池', '0', '处理不好', '维修');
-INSERT INTO `backwardandreason` VALUES ('333', '136', '二沉池水', '0', '停留时间短', '增加二沉池污水停留时间');
-INSERT INTO `backwardandreason` VALUES ('334', '136', '中和处理', '0', '不完全', '加强预处理');
-INSERT INTO `backwardandreason` VALUES ('335', '137', '酸水的流量', '0', '增大', '增加碱液投加量');
-INSERT INTO `backwardandreason` VALUES ('336', '137', '酸水的酸度', '0', '增加', '增加碱液投加量');
-INSERT INTO `backwardandreason` VALUES ('337', '137', '碱液管', '0', '堵塞', '及时清通，必要时短管清通');
-INSERT INTO `backwardandreason` VALUES ('338', '137', '仪表指示', '0', '不准', '用PH试纸实测');
-INSERT INTO `backwardandreason` VALUES ('339', '138', '生化池', '0', '低', '加大风力');
+INSERT INTO `backwardandreason` VALUES ('333', '136', '你好', '0', '你好', '你好222');
+INSERT INTO `backwardandreason` VALUES ('343', '136', '1', '0', '1', '1');
+INSERT INTO `backwardandreason` VALUES ('344', '136', '2', '0', '2', '2');
+INSERT INTO `backwardandreason` VALUES ('345', '136', '3', '0', '3', '4');
+INSERT INTO `backwardandreason` VALUES ('347', '136', '5', '0', '5', '5');
+INSERT INTO `backwardandreason` VALUES ('348', '136', '4', '0', '4', '4');
+INSERT INTO `backwardandreason` VALUES ('349', '16', '1', '0', '1', '1');
+INSERT INTO `backwardandreason` VALUES ('350', '16', '2', '0', '2', '2');
+INSERT INTO `backwardandreason` VALUES ('351', '16', '3', '0', '3', '3');
+INSERT INTO `backwardandreason` VALUES ('353', '142', '4', '0', '4', '4');
 
 -- ----------------------------
 -- Table structure for `backwardandresult`
@@ -236,23 +238,22 @@ CREATE TABLE `backwardandresult` (
   PRIMARY KEY (`id`),
   KEY `FKFBAE5431DB7478BC` (`bid`),
   CONSTRAINT `FKFBAE5431DB7478BC` FOREIGN KEY (`bid`) REFERENCES `backward` (`bid`)
-) ENGINE=InnoDB AUTO_INCREMENT=124 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=128 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 -- Records of backwardandresult
 -- ----------------------------
-INSERT INTO `backwardandresult` VALUES ('112', '127', '生化池系列2 (3号生化池)PH', '0', '过高', null);
-INSERT INTO `backwardandresult` VALUES ('113', '128', '生化池系列2 (3号生化池)PH', '0', '过低', null);
-INSERT INTO `backwardandresult` VALUES ('114', '129', '生化池系列2 (3号生化池)水量', '0', '过低', null);
+INSERT INTO `backwardandresult` VALUES ('112', '127', '生化池系列2(3号生化池)PH', '0', '过高', null);
+INSERT INTO `backwardandresult` VALUES ('113', '128', '生化池系列2(3号生化池)PH', '0', '过低', null);
+INSERT INTO `backwardandresult` VALUES ('114', '129', '生化池系列2(3号生化池)水量', '0', '过低', null);
 INSERT INTO `backwardandresult` VALUES ('115', '130', '染料厂酸水溶解氧', '0', '过高', null);
 INSERT INTO `backwardandresult` VALUES ('116', '131', '染料厂酸水COD', '0', '过高', null);
-INSERT INTO `backwardandresult` VALUES ('117', '132', '生化池系列2 (3号生化池)SS', '0', '过高', null);
+INSERT INTO `backwardandresult` VALUES ('117', '132', '生化池系列2(3号生化池)SS', '0', '过高', null);
 INSERT INTO `backwardandresult` VALUES ('118', '133', '电石厂有机水COD', '0', '过高', null);
-INSERT INTO `backwardandresult` VALUES ('119', '134', '生化池系列1 (1号生化池)PH', '0', '过高', null);
-INSERT INTO `backwardandresult` VALUES ('120', '135', '生化池系列1 (2号生化池)PH', '0', '过高', null);
-INSERT INTO `backwardandresult` VALUES ('121', '136', '1、2、4系列排江出口线SS', '0', '过高', null);
-INSERT INTO `backwardandresult` VALUES ('122', '137', '生化池系列1 (1号生化池)PH', '0', '过高', null);
-INSERT INTO `backwardandresult` VALUES ('123', '138', '1、2、4系列排江出口线COD', '0', '过高', null);
+INSERT INTO `backwardandresult` VALUES ('119', '134', '生化池系列1(1号生化池)PH', '0', '过高', null);
+INSERT INTO `backwardandresult` VALUES ('120', '135', '生化池系列1(2号生化池)PH', '0', '过高', null);
+INSERT INTO `backwardandresult` VALUES ('121', '136', '排江出口线SS', '0', '过高', null);
+INSERT INTO `backwardandresult` VALUES ('127', '142', '电石厂有机水溶解氧', '0', '过高', null);
 
 -- ----------------------------
 -- Table structure for `backwardandupper`
@@ -304,61 +305,62 @@ CREATE TABLE `dcsdscrib` (
   `name` varchar(255) DEFAULT NULL,
   `upper` double DEFAULT NULL,
   PRIMARY KEY (`did`)
-) ENGINE=InnoDB AUTO_INCREMENT=1401 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1403 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of dcsdscrib
 -- ----------------------------
-INSERT INTO `dcsdscrib` VALUES ('1083', '2系列生化池', '3号生化池PH', '6', '生化池系列2 (3号生化池)PH', '9');
-INSERT INTO `dcsdscrib` VALUES ('1084', '2系列生化池', '3号生化池COD', '0', '生化池系列2 (3号生化池)COD', '0.5');
-INSERT INTO `dcsdscrib` VALUES ('1332', '2系列生化池', '3号生化池碱度', '8', '生化池系列2 (3号生化池)碱度', '14');
-INSERT INTO `dcsdscrib` VALUES ('1333', '2系列生化池', '3号生化池BOD5', '2', '生化池系列2 (3号生化池)BOD5', '4');
-INSERT INTO `dcsdscrib` VALUES ('1334', '2系列生化池', '3号生化池SS', '100', '生化池系列2 (3号生化池)SS', '500');
-INSERT INTO `dcsdscrib` VALUES ('1335', '2系列生化池', '3号生化池NH3-N', '0', '生化池系列2 (3号生化池)NH3-N', '0.5');
-INSERT INTO `dcsdscrib` VALUES ('1336', '2系列生化池', '3号生化池硝态氮', '100', '生化池系列2 (3号生化池)硝态氮', '500');
-INSERT INTO `dcsdscrib` VALUES ('1337', '2系列生化池', '3号生化池溶解氧', '0', '生化池系列2 (3号生化池)溶解氧', '0.5');
-INSERT INTO `dcsdscrib` VALUES ('1338', '2系列生化池', '3号生化池风量', '0', '生化池系列2 (3号生化池)风量', '50');
-INSERT INTO `dcsdscrib` VALUES ('1339', '2系列生化池', '3号生化池NO-N', '0', '生化池系列2 (3号生化池)NO-N', '0.5');
-INSERT INTO `dcsdscrib` VALUES ('1340', '2系列生化池', '3号生化池水量', '100', '生化池系列2 (3号生化池)水量', '500');
-INSERT INTO `dcsdscrib` VALUES ('1361', '2系列生化池', '4号生化池COD', '0', '生化池系列2 (4号生化池)COD', '0.5');
-INSERT INTO `dcsdscrib` VALUES ('1362', '2系列生化池', '4号生化池碱度', '8', '生化池系列2 (4号生化池)碱度', '14');
-INSERT INTO `dcsdscrib` VALUES ('1363', '2系列生化池', '3号生化池BOD5', '2', '生化池系列2 (4号生化池)BOD5', '4');
-INSERT INTO `dcsdscrib` VALUES ('1364', '2系列生化池', '3号生化池SS', '100', '生化池系列2 (4号生化池)SS', '500');
-INSERT INTO `dcsdscrib` VALUES ('1365', '2系列生化池', '4号生化池NH3-N', '0', '生化池系列2 (4号生化池)NH3-N', '0.5');
-INSERT INTO `dcsdscrib` VALUES ('1366', '2系列生化池', '4号生化池硝态氮', '0', '生化池系列2 (4号生化池)硝态氮', '50');
-INSERT INTO `dcsdscrib` VALUES ('1367', '2系列生化池', '4号生化池溶解氧', '0', '生化池系列2 (4号生化池)溶解氧', '0.5');
-INSERT INTO `dcsdscrib` VALUES ('1368', '2系列生化池', '4号生化池风量', '0', '生化池系列2 (4号生化池)风量', '50');
-INSERT INTO `dcsdscrib` VALUES ('1369', '2系列生化池', '4号生化池NO-N', '0', '生化池系列2 (4号生化池)NO-N', '0.5');
-INSERT INTO `dcsdscrib` VALUES ('1370', '2系列生化池', '4号生化池水量', '100', '生化池系列2 (4号生化池)水量', '500');
-INSERT INTO `dcsdscrib` VALUES ('1371', '2系列生化池', '4号生化池PH', '6', '生化池系列2 (4号生化池)PH', '9');
+INSERT INTO `dcsdscrib` VALUES ('1083', '2系列生化池', '3号生化池PH', '6', '生化池系列2(3号生化池)PH', '9');
+INSERT INTO `dcsdscrib` VALUES ('1084', '2系列生化池', '3号生化池COD', '0', '生化池系列2(3号生化池)COD', '0.5');
+INSERT INTO `dcsdscrib` VALUES ('1332', '2系列生化池', '3号生化池碱度', '8', '生化池系列2(3号生化池)碱度', '14');
+INSERT INTO `dcsdscrib` VALUES ('1333', '2系列生化池', '3号生化池BOD5', '2', '生化池系列2(3号生化池)BOD5', '4');
+INSERT INTO `dcsdscrib` VALUES ('1334', '2系列生化池', '3号生化池SS', '100', '生化池系列2(3号生化池)SS', '500');
+INSERT INTO `dcsdscrib` VALUES ('1335', '2系列生化池', '3号生化池NH3-N', '0', '生化池系列2(3号生化池)NH3-N', '0.5');
+INSERT INTO `dcsdscrib` VALUES ('1336', '2系列生化池', '3号生化池硝态氮', '100', '生化池系列2(3号生化池)硝态氮', '500');
+INSERT INTO `dcsdscrib` VALUES ('1337', '2系列生化池', '3号生化池溶解氧', '0', '生化池系列2(3号生化池)溶解氧', '0.5');
+INSERT INTO `dcsdscrib` VALUES ('1338', '2系列生化池', '3号生化池风量', '0', '生化池系列2(3号生化池)风量', '50');
+INSERT INTO `dcsdscrib` VALUES ('1339', '2系列生化池', '3号生化池NO-N', '0', '生化池系列2(3号生化池)NO-N', '0.5');
+INSERT INTO `dcsdscrib` VALUES ('1340', '2系列生化池', '3号生化池水量', '100', '生化池系列2(3号生化池)水量', '500');
+INSERT INTO `dcsdscrib` VALUES ('1361', '2系列生化池', '4号生化池COD', '0', '生化池系列2(4号生化池)COD', '0.5');
+INSERT INTO `dcsdscrib` VALUES ('1362', '2系列生化池', '4号生化池碱度', '8', '生化池系列2(4号生化池)碱度', '14');
+INSERT INTO `dcsdscrib` VALUES ('1363', '2系列生化池', '3号生化池BOD5', '2', '生化池系列2(4号生化池)BOD5', '4');
+INSERT INTO `dcsdscrib` VALUES ('1364', '2系列生化池', '3号生化池SS', '100', '生化池系列2(4号生化池)SS', '500');
+INSERT INTO `dcsdscrib` VALUES ('1365', '2系列生化池', '4号生化池NH3-N', '0', '生化池系列2(4号生化池)NH3-N', '0.5');
+INSERT INTO `dcsdscrib` VALUES ('1366', '2系列生化池', '4号生化池硝态氮', '0', '生化池系列2(4号生化池)硝态氮', '50');
+INSERT INTO `dcsdscrib` VALUES ('1367', '2系列生化池', '4号生化池溶解氧', '0', '生化池系列2(4号生化池)溶解氧', '0.5');
+INSERT INTO `dcsdscrib` VALUES ('1368', '2系列生化池', '4号生化池风量', '0', '生化池系列2(4号生化池)风量', '50');
+INSERT INTO `dcsdscrib` VALUES ('1369', '2系列生化池', '4号生化池NO-N', '0', '生化池系列2(4号生化池)NO-N', '0.5');
+INSERT INTO `dcsdscrib` VALUES ('1370', '2系列生化池', '4号生化池水量', '100', '生化池系列2(4号生化池)水量', '500');
+INSERT INTO `dcsdscrib` VALUES ('1371', '2系列生化池', '4号生化池PH', '6', '生化池系列2(4号生化池)PH', '9');
 INSERT INTO `dcsdscrib` VALUES ('1372', '染料厂酸水', 'COD', '0', '染料厂酸水COD', '0.5');
 INSERT INTO `dcsdscrib` VALUES ('1373', '电石厂有机水', 'COD', '0', '电石厂有机水COD', '0.5');
-INSERT INTO `dcsdscrib` VALUES ('1374', '1系列生化池', '1号生化池PH', '6', '生化池系列1 (1号生化池)PH', '9');
-INSERT INTO `dcsdscrib` VALUES ('1375', '1系列生化池', '1号生化池COD', '0', '生化池系列1 (1号生化池)COD', '0.5');
-INSERT INTO `dcsdscrib` VALUES ('1376', '1系列生化池', '1号生化池COD', '0', '生化池系列1 (1号生化池)COD', '0.5');
-INSERT INTO `dcsdscrib` VALUES ('1378', '1系列生化池', '1号生化池COD', '0', '生化池系列1 (1号生化池)COD', '0.5');
-INSERT INTO `dcsdscrib` VALUES ('1379', '1系列生化池', '1号生化池碱度', '8', '生化池系列1 (1号生化池)碱度', '14');
-INSERT INTO `dcsdscrib` VALUES ('1380', '1系列生化池', '1号生化池BOD5', '2', '生化池系列1 (1号生化池)BOD5', '4');
-INSERT INTO `dcsdscrib` VALUES ('1381', '1系列生化池', '1号生化池SS', '100', '生化池系列1 (1号生化池)SS', '500');
-INSERT INTO `dcsdscrib` VALUES ('1382', '1系列生化池', '1号生化池NH3-N', '0', '生化池系列1 (1号生化池)NH3-N', '0.5');
-INSERT INTO `dcsdscrib` VALUES ('1383', '1系列生化池', '1号生化池硝态氮', '100', '生化池系列1 (1号生化池)硝态氮', '500');
-INSERT INTO `dcsdscrib` VALUES ('1384', '1系列生化池', '1号生化池溶解氧', '0', '生化池系列1 (1号生化池)溶解氧', '0.5');
-INSERT INTO `dcsdscrib` VALUES ('1385', '1系列生化池', '1号生化池风量', '0', '生化池系列1 (1号生化池)风量', '50');
-INSERT INTO `dcsdscrib` VALUES ('1386', '1系列生化池', '1号生化池NO-N', '0', '生化池系列1 (1号生化池)NO-N', '0.5');
-INSERT INTO `dcsdscrib` VALUES ('1387', '1系列生化池', '1号生化池水量', '100', '生化池系列1 (1号生化池)水量', '500');
-INSERT INTO `dcsdscrib` VALUES ('1388', '1系列生化池', '2号生化池水量', '100', '生化池系列1 (2号生化池)水量', '500');
-INSERT INTO `dcsdscrib` VALUES ('1389', '1系列生化池', '2号生化池PH', '6', '生化池系列1 (2号生化池)PH', '9');
-INSERT INTO `dcsdscrib` VALUES ('1390', '1系列生化池', '2号生化池COD', '0', '生化池系列1 (2号生化池)COD', '0.5');
-INSERT INTO `dcsdscrib` VALUES ('1391', '1系列生化池', '2号生化池碱度', '8', '生化池系列1 (2号生化池)碱度', '14');
-INSERT INTO `dcsdscrib` VALUES ('1392', '1系列生化池', '2号生化池BOD5', '2', '生化池系列1 (2号生化池)BOD5', '4');
-INSERT INTO `dcsdscrib` VALUES ('1393', '1系列生化池', '2号生化池SS', '100', '生化池系列1 (2号生化池)SS', '500');
-INSERT INTO `dcsdscrib` VALUES ('1394', '1系列生化池', '2号生化池NH3-N', '0', '生化池系列1 (2号生化池)NH3-N', '0.5');
-INSERT INTO `dcsdscrib` VALUES ('1395', '1系列生化池', '2号生化池硝态氮', '100', '生化池系列1 (2号生化池)硝态氮', '500');
-INSERT INTO `dcsdscrib` VALUES ('1396', '1系列生化池', '2号生化池溶解氧', '0', '生化池系列1 (2号生化池)溶解氧', '0.5');
-INSERT INTO `dcsdscrib` VALUES ('1397', '1系列生化池', '2号生化池风量', '0', '生化池系列1 (2号生化池)风量', '50');
-INSERT INTO `dcsdscrib` VALUES ('1398', '1系列生化池', '2号生化池NO-N', '0', '生化池系列1 (2号生化池)NO-N', '0.5');
-INSERT INTO `dcsdscrib` VALUES ('1399', '1、2、4系列排江出口线', '出口SS', '0', '1、2、4系列排江出口线SS', '10');
-INSERT INTO `dcsdscrib` VALUES ('1400', '1、2、4系列排江出口线', '出口COD', '70', '1、2、4系列排江出口线COD', '120');
+INSERT INTO `dcsdscrib` VALUES ('1374', '1系列生化池', '1号生化池PH', '6', '生化池系列1(1号生化池)PH', '9');
+INSERT INTO `dcsdscrib` VALUES ('1375', '1系列生化池', '1号生化池COD', '0', '生化池系列1(1号生化池)COD', '0.5');
+INSERT INTO `dcsdscrib` VALUES ('1376', '1系列生化池', '1号生化池COD', '0', '生化池系列1(1号生化池)COD', '0.5');
+INSERT INTO `dcsdscrib` VALUES ('1378', '1系列生化池', '1号生化池COD', '0', '生化池系列1(1号生化池)COD', '0.5');
+INSERT INTO `dcsdscrib` VALUES ('1379', '1系列生化池', '1号生化池碱度', '8', '生化池系列1(1号生化池)碱度', '14');
+INSERT INTO `dcsdscrib` VALUES ('1380', '1系列生化池', '1号生化池BOD5', '2', '生化池系列1(1号生化池)BOD5', '4');
+INSERT INTO `dcsdscrib` VALUES ('1381', '1系列生化池', '1号生化池SS', '100', '生化池系列1(1号生化池)SS', '500');
+INSERT INTO `dcsdscrib` VALUES ('1382', '1系列生化池', '1号生化池NH3-N', '0', '生化池系列1(1号生化池)NH3-N', '0.5');
+INSERT INTO `dcsdscrib` VALUES ('1383', '1系列生化池', '1号生化池硝态氮', '100', '生化池系列1(1号生化池)硝态氮', '500');
+INSERT INTO `dcsdscrib` VALUES ('1384', '1系列生化池', '1号生化池溶解氧', '0', '生化池系列1(1号生化池)溶解氧', '0.5');
+INSERT INTO `dcsdscrib` VALUES ('1385', '1系列生化池', '1号生化池风量', '0', '生化池系列1(1号生化池)风量', '50');
+INSERT INTO `dcsdscrib` VALUES ('1386', '1系列生化池', '1号生化池NO-N', '0', '生化池系列1(1号生化池)NO-N', '0.5');
+INSERT INTO `dcsdscrib` VALUES ('1387', '1系列生化池', '1号生化池水量', '100', '生化池系列1(1号生化池)水量', '500');
+INSERT INTO `dcsdscrib` VALUES ('1388', '1系列生化池', '2号生化池水量', '100', '生化池系列1(2号生化池)水量', '500');
+INSERT INTO `dcsdscrib` VALUES ('1389', '1系列生化池', '2号生化池PH', '6', '生化池系列1(2号生化池)PH', '9');
+INSERT INTO `dcsdscrib` VALUES ('1390', '1系列生化池', '2号生化池COD', '0', '生化池系列1(2号生化池)COD', '0.5');
+INSERT INTO `dcsdscrib` VALUES ('1391', '1系列生化池', '2号生化池碱度', '8', '生化池系列1(2号生化池)碱度', '14');
+INSERT INTO `dcsdscrib` VALUES ('1392', '1系列生化池', '2号生化池BOD5', '2', '生化池系列1(2号生化池)BOD5', '4');
+INSERT INTO `dcsdscrib` VALUES ('1393', '1系列生化池', '2号生化池SS', '100', '生化池系列1(2号生化池)SS', '500');
+INSERT INTO `dcsdscrib` VALUES ('1394', '1系列生化池', '2号生化池NH3-N', '0', '生化池系列1(2号生化池)NH3-N', '0.5');
+INSERT INTO `dcsdscrib` VALUES ('1395', '1系列生化池', '2号生化池硝态氮', '100', '生化池系列1(2号生化池)硝态氮', '500');
+INSERT INTO `dcsdscrib` VALUES ('1396', '1系列生化池', '2号生化池溶解氧', '0', '生化池系列1(2号生化池)溶解氧', '0.5');
+INSERT INTO `dcsdscrib` VALUES ('1397', '1系列生化池', '2号生化池风量', '0', '生化池系列1(2号生化池)风量', '50');
+INSERT INTO `dcsdscrib` VALUES ('1398', '1系列生化池', '2号生化池NO-N', '0', '生化池系列1(2号生化池)NO-N', '0.5');
+INSERT INTO `dcsdscrib` VALUES ('1399', '排江出口线', '出口SS', '0', '排江出口线SS', '10');
+INSERT INTO `dcsdscrib` VALUES ('1400', '排江出口线', '出口COD', '70', '排江出口线COD', '120');
+INSERT INTO `dcsdscrib` VALUES ('1402', '一系列生化池', '1号生化池PH', '6', '生化池系列1(1号生化池)PH', '9');
 
 -- ----------------------------
 -- Table structure for `dcshistory`
@@ -495,12 +497,12 @@ CREATE TABLE `dss_advice` (
   `level` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `FK75158BF323A4A4F1` (`name`)
-) ENGINE=MyISAM AUTO_INCREMENT=521 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=864 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of dss_advice
 -- ----------------------------
-INSERT INTO `dss_advice` VALUES ('520', 'w85.AIRA802', '38.52968', '增加二沉池污水停留时间;加强预处理;', '          910.647778', '20080102125013', '二沉池水停留时间短;中和处理不完全;', '2');
+INSERT INTO `dss_advice` VALUES ('863', 'w85.AIRA802', '38.52968', '1、2、4系列排江出口线SS过高 : 增加二沉池污水停留时间;加强预处理;', '          910.647778', '20080102125013', '二沉池水停留时间短;中和处理不完全;', '2');
 
 -- ----------------------------
 -- Table structure for `dss_history`
@@ -517,7 +519,7 @@ CREATE TABLE `dss_history` (
   `name` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `FKA84AB4F923A4A4F1` (`name`)
-) ENGINE=MyISAM AUTO_INCREMENT=454 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=797 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of dss_history
@@ -749,9 +751,9 @@ INSERT INTO `dss_history` VALUES ('224', '二沉池水停留时间短;中和处�
 INSERT INTO `dss_history` VALUES ('225', '生化池低;', '4', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
 INSERT INTO `dss_history` VALUES ('226', '二沉池水停留时间短;中和处理不完全;', '2', '20111124', '1111.24', '增加二沉池污水停留时间;加强预处理;', '12', 'w85.AIRA802');
 INSERT INTO `dss_history` VALUES ('227', '生化池低;', '4', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('228', null, '0', '20080102125013', '          910.647778', null, '3.9344006e-005', 'w77.AIR202');
+INSERT INTO `dss_history` VALUES ('228', null, '0', '20080102125013', '          910.647778', null, '0.000039344006', 'w77.AIR202');
 INSERT INTO `dss_history` VALUES ('229', null, null, null, null, '一切正常', null, null);
-INSERT INTO `dss_history` VALUES ('230', null, '0', '20080102125013', '          910.647778', null, '3.9298677e-005', 'w78.AIR204');
+INSERT INTO `dss_history` VALUES ('230', null, '0', '20080102125013', '          910.647778', null, '0.000039298677', 'w78.AIR204');
 INSERT INTO `dss_history` VALUES ('231', null, null, null, null, '一切正常', null, null);
 INSERT INTO `dss_history` VALUES ('232', null, '0', '20080102125013', '          910.647778', null, '7', 'w75.AIR229');
 INSERT INTO `dss_history` VALUES ('233', null, null, null, null, '一切正常', null, null);
@@ -794,9 +796,9 @@ INSERT INTO `dss_history` VALUES ('269', null, '0', '20080102125013', '         
 INSERT INTO `dss_history` VALUES ('270', null, '0', '20080102125013', '          910.647778', null, '2.9967136', 'w77.AIRC226');
 INSERT INTO `dss_history` VALUES ('271', null, '0', '20080102125013', '          910.647778', null, '2.985795', 'w78.AIRC227');
 INSERT INTO `dss_history` VALUES ('272', null, '0', '20080102125013', '          910.647778', null, '2.985795', 'w78.AIRC228');
-INSERT INTO `dss_history` VALUES ('273', null, '0', '20080102125013', '          910.647778', null, '3.9344006e-005', 'w77.AIR202');
+INSERT INTO `dss_history` VALUES ('273', null, '0', '20080102125013', '          910.647778', null, '0.000039344006', 'w77.AIR202');
 INSERT INTO `dss_history` VALUES ('274', null, null, null, null, '一切正常', null, null);
-INSERT INTO `dss_history` VALUES ('275', null, '0', '20080102125013', '          910.647778', null, '3.9298677e-005', 'w78.AIR204');
+INSERT INTO `dss_history` VALUES ('275', null, '0', '20080102125013', '          910.647778', null, '0.000039298677', 'w78.AIR204');
 INSERT INTO `dss_history` VALUES ('276', null, null, null, null, '一切正常', null, null);
 INSERT INTO `dss_history` VALUES ('277', null, '0', '20080102125013', '          910.647778', null, '7', 'w75.AIR229');
 INSERT INTO `dss_history` VALUES ('278', null, null, null, null, '一切正常', null, null);
@@ -839,9 +841,9 @@ INSERT INTO `dss_history` VALUES ('314', null, '0', '20080102125013', '         
 INSERT INTO `dss_history` VALUES ('315', null, '0', '20080102125013', '          910.647778', null, '2.9967136', 'w77.AIRC226');
 INSERT INTO `dss_history` VALUES ('316', null, '0', '20080102125013', '          910.647778', null, '2.985795', 'w78.AIRC227');
 INSERT INTO `dss_history` VALUES ('317', null, '0', '20080102125013', '          910.647778', null, '2.985795', 'w78.AIRC228');
-INSERT INTO `dss_history` VALUES ('318', null, '0', '20080102125013', '          910.647778', null, '3.9344006e-005', 'w77.AIR202');
+INSERT INTO `dss_history` VALUES ('318', null, '0', '20080102125013', '          910.647778', null, '0.000039344006', 'w77.AIR202');
 INSERT INTO `dss_history` VALUES ('319', null, null, null, null, '一切正常', null, null);
-INSERT INTO `dss_history` VALUES ('320', null, '0', '20080102125013', '          910.647778', null, '3.9298677e-005', 'w78.AIR204');
+INSERT INTO `dss_history` VALUES ('320', null, '0', '20080102125013', '          910.647778', null, '0.000039298677', 'w78.AIR204');
 INSERT INTO `dss_history` VALUES ('321', null, null, null, null, '一切正常', null, null);
 INSERT INTO `dss_history` VALUES ('322', null, '0', '20080102125013', '          910.647778', null, '7', 'w75.AIR229');
 INSERT INTO `dss_history` VALUES ('323', null, null, null, null, '一切正常', null, null);
@@ -884,9 +886,9 @@ INSERT INTO `dss_history` VALUES ('359', null, '0', '20080102125013', '         
 INSERT INTO `dss_history` VALUES ('360', null, '0', '20080102125013', '          910.647778', null, '2.9967136', 'w77.AIRC226');
 INSERT INTO `dss_history` VALUES ('361', null, '0', '20080102125013', '          910.647778', null, '2.985795', 'w78.AIRC227');
 INSERT INTO `dss_history` VALUES ('362', null, '0', '20080102125013', '          910.647778', null, '2.985795', 'w78.AIRC228');
-INSERT INTO `dss_history` VALUES ('363', null, '0', '20080102125013', '          910.647778', null, '3.9344006e-005', 'w77.AIR202');
+INSERT INTO `dss_history` VALUES ('363', null, '0', '20080102125013', '          910.647778', null, '0.000039344006', 'w77.AIR202');
 INSERT INTO `dss_history` VALUES ('364', null, null, null, null, '一切正常', null, null);
-INSERT INTO `dss_history` VALUES ('365', null, '0', '20080102125013', '          910.647778', null, '3.9298677e-005', 'w78.AIR204');
+INSERT INTO `dss_history` VALUES ('365', null, '0', '20080102125013', '          910.647778', null, '0.000039298677', 'w78.AIR204');
 INSERT INTO `dss_history` VALUES ('366', null, null, null, null, '一切正常', null, null);
 INSERT INTO `dss_history` VALUES ('367', null, '0', '20080102125013', '          910.647778', null, '7', 'w75.AIR229');
 INSERT INTO `dss_history` VALUES ('368', null, null, null, null, '一切正常', null, null);
@@ -975,6 +977,349 @@ INSERT INTO `dss_history` VALUES ('450', '二沉池水停留时间短;中和处�
 INSERT INTO `dss_history` VALUES ('451', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
 INSERT INTO `dss_history` VALUES ('452', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
 INSERT INTO `dss_history` VALUES ('453', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('454', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('455', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('456', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('457', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('458', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('459', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('460', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('461', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('462', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('463', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('464', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('465', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('466', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('467', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('468', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('469', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('470', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('471', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('472', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('473', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('474', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('475', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('476', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('477', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('478', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('479', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('480', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('481', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('482', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('483', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('484', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('485', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('486', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('487', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('488', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('489', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('490', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('491', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('492', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('493', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('494', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('495', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('496', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('497', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('498', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('499', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('500', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('501', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('502', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('503', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('504', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('505', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('506', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('507', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('508', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('509', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('510', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('511', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('512', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('513', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('514', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('515', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('516', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('517', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('518', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('519', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('520', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('521', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('522', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('523', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('524', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('525', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('526', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('527', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('528', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('529', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('530', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('531', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('532', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('533', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('534', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('535', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('536', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('537', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('538', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('539', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('540', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('541', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('542', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('543', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('544', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('545', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('546', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('547', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('548', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('549', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('550', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('551', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('552', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('553', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('554', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('555', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('556', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('557', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('558', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('559', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('560', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('561', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('562', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('563', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('564', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('565', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('566', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('567', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('568', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('569', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('570', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('571', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('572', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('573', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('574', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('575', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('576', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('577', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('578', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('579', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('580', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('581', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('582', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('583', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('584', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('585', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('586', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('587', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('588', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('589', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('590', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('591', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('592', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('593', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('594', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('595', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('596', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('597', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('598', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('599', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('600', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('601', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('602', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('603', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('604', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('605', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('606', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('607', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('608', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('609', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('610', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('611', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('612', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('613', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('614', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('615', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('616', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('617', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('618', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('619', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('620', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('621', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('622', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('623', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('624', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('625', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('626', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('627', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('628', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('629', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('630', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('631', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('632', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('633', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('634', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('635', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('636', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('637', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('638', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('639', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('640', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('641', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('642', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('643', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('644', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('645', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('646', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('647', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('648', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('649', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('650', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('651', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('652', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('653', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('654', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('655', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('656', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('657', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('658', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('659', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('660', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('661', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('662', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('663', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('664', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('665', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('666', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('667', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('668', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('669', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('670', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('671', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('672', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('673', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('674', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('675', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('676', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('677', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('678', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('679', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('680', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('681', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('682', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('683', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('684', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('685', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('686', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('687', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('688', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('689', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('690', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('691', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('692', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('693', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('694', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('695', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('696', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('697', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('698', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('699', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('700', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('701', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('702', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('703', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('704', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('705', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('706', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('707', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('708', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('709', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('710', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('711', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('712', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('713', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('714', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('715', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('716', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('717', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('718', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('719', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('720', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('721', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('722', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('723', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('724', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('725', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('726', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('727', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('728', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('729', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('730', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('731', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('732', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('733', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('734', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('735', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('736', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('737', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('738', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('739', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('740', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('741', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('742', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('743', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('744', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('745', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('746', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('747', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('748', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('749', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('750', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('751', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('752', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('753', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('754', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('755', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('756', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('757', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('758', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('759', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('760', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('761', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('762', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('763', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('764', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('765', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('766', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('767', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('768', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('769', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('770', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('771', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('772', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('773', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('774', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('775', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('776', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('777', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('778', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('779', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('780', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('781', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('782', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('783', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('784', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('785', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('786', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('787', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('788', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('789', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('790', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('791', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('792', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('793', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('794', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('795', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('796', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
 
 -- ----------------------------
 -- Table structure for `errorlog`
@@ -1294,11 +1639,11 @@ INSERT INTO `init_predict` VALUES ('w78.AIRC228', '4系列生化池.8号生化�
 INSERT INTO `init_predict` VALUES ('w78.FR601B', '4系列生化池.4#鼓风机分量');
 INSERT INTO `init_predict` VALUES ('w78.TIR207', '4系列生化池.7号生化池温度');
 INSERT INTO `init_predict` VALUES ('w78.TIR208', '4系列生化池.8号生化池温度');
-INSERT INTO `init_predict` VALUES ('w85.AIRA801', '1、2、4系列排江出口线.出口PH');
-INSERT INTO `init_predict` VALUES ('w85.AIRA802', '1、2、4系列排江出口线.出口SS');
-INSERT INTO `init_predict` VALUES ('w85.AIRA803', '1、2、4系列排江出口线.出口COD');
-INSERT INTO `init_predict` VALUES ('w85.AIRA804', '1、2、4系列排江出口线.出口NH3-N');
-INSERT INTO `init_predict` VALUES ('w85.AIRA805', '1、2、4系列排江出口线.出口DO');
+INSERT INTO `init_predict` VALUES ('w85.AIRA801', '排江出口线.出口PH');
+INSERT INTO `init_predict` VALUES ('w85.AIRA802', '排江出口线.出口SS');
+INSERT INTO `init_predict` VALUES ('w85.AIRA803', '排江出口线.出口COD');
+INSERT INTO `init_predict` VALUES ('w85.AIRA804', '排江出口线.出口NH3-N');
+INSERT INTO `init_predict` VALUES ('w85.AIRA805', '排江出口线.出口DO');
 INSERT INTO `init_predict` VALUES ('w86.FRCQ201', '1系列465回流泵房.1系列465-1回流泵房回流量');
 INSERT INTO `init_predict` VALUES ('w86.FRCQ202', '1系列465回流泵房.2系列465-2回流泵房回流量');
 INSERT INTO `init_predict` VALUES ('w86.FRCQ203', '1系列465回流泵房.1系列465回流泵房剩余量');
@@ -1716,15 +2061,18 @@ CREATE TABLE `user` (
   `email` varchar(100) NOT NULL,
   `phone` varchar(16) NOT NULL,
   `jid` varchar(16) NOT NULL,
+  `isadmin` bit(1) DEFAULT NULL,
+  `isprof` bit(1) DEFAULT NULL,
+  `isuser` bit(1) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('8', '2', '8', '8', '8', '8', '8', '8');
-INSERT INTO `user` VALUES ('123', '3', '123', '张晓明', '123', '123', '123', '123');
-INSERT INTO `user` VALUES ('1', '4', 'squalhan', '1', '1', 'squalhan@gmail.com', '6161170', '1');
+INSERT INTO `user` VALUES ('8', '2', '8', '8', '8', '8', '8', '8', '', '', '');
+INSERT INTO `user` VALUES ('123', '3', '123', '张晓明', '123', '123', '123', '123', '', '\0', '');
+INSERT INTO `user` VALUES ('1', '4', 'squalhan', '1', '1', 'squalhan@gmail.com', '6161170', '1', null, null, null);
 
 -- ----------------------------
 -- Table structure for `wwdcsdata`
