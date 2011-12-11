@@ -21,7 +21,8 @@ public class Dcsdata implements Serializable{
 	private int id;
 	private String equipment;
 	private String item;
-	private Double value;
+	private double value;
+	private boolean isok;
 	public Dcsdata() { 
 		super();
 		
@@ -36,8 +37,15 @@ public class Dcsdata implements Serializable{
 	/**
 	 * 
 	 */
+	
 	public int getId() {
 		return id;
+	}
+	public boolean isIsok() {
+		return isok;
+	}
+	public void setIsok(boolean isok) {
+		this.isok = isok;
 	}
 	public void setId(int id) {
 		this.id = id;

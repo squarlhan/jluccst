@@ -177,28 +177,36 @@ public class DcsdataService {
 				mykey2 = strArray[1].trim();
 				List<DcsDscrib> dcsDscribs = dcsDscribServiceImpl.findbyname(
 						strArray[0], strArray[1]);
-				if (dcsDscribs != null && dcsDscribs.size() > 0) {
-					DcsDscrib db = dcsDscribs.get(0);
-					// do sth...
-					
-				}
+				
 				Dcsdata dd = new Dcsdata();
 				dd.setEquipment(mykey1);
 				dd.setItem(mykey2);
 				dd.setValue(Double.parseDouble(pd.getValue()));
+				dd.setIsok(true);
+				if (dcsDscribs != null && dcsDscribs.size() > 0) {
+					DcsDscrib db = dcsDscribs.get(0);
+					// do sth...
+					if(dd.getValue()>db.getUpper()||dd.getValue()<db.getLower()){
+						dd.setIsok(false);
+					}
+					if (keyword != null) {
+						if(db.getName().contains(keyword)){
+							fliterresults.add(dd);
+						}
+					}
+					
+				}
 				results.add(dd);
 			}
 
 		}
+	
 		if (keyword != null) {
-			for (Dcsdata dd : results) {
-				if(dd.getEquipment().contains(keyword)){
-					fliterresults.add(dd);
-				}
-			}
 			return fliterresults;
-		} 
-		return results;
+			}else{
+				return results;
+			}
+		
 	}
 
 }
