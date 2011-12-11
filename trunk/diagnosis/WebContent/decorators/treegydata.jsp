@@ -4,7 +4,7 @@
 <html>
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>诊断树</title>
+    <title>工艺树</title>
     <link href="/diagnosis/css/css.css" rel="stylesheet" type="text/css" />
     <link href="/diagnosis/css/main.css" rel="stylesheet" type="text/css" />
     <link href="/diagnosis/css/tree.css" rel="stylesheet" type="text/css" />
