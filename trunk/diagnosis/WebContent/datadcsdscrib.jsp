@@ -76,7 +76,12 @@
 					<tr>
 						<td align="right">对应规则参数：</td>
 						<td align="left"><select name="dcsDscribname2" size="1" style="width: 150px">
-								<option>溶解氧</option>
+								<option>A段溶解氧</option>
+								<option>2段溶解氧</option>
+								<option>3段溶解氧</option>
+								<option>4段溶解氧</option>
+								<option>5段溶解氧</option>
+								<option>6段溶解氧</option>
 								<option>PH</option>
 								<option>NH3-N</option>
 								<option>COD</option>
