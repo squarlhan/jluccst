@@ -23,12 +23,14 @@ import cn.edu.jlu.ccst.model.DcsDscrib;
 import cn.edu.jlu.ccst.model.Dcsdata;
 import cn.edu.jlu.ccst.model.Dcshistory;
 import cn.edu.jlu.ccst.model.Errorlog;
+import cn.edu.jlu.ccst.model.Pre_dss;
 import cn.edu.jlu.ccst.model.Wwdcsdata;
 
 import cn.edu.jlu.ccst.model.User;
 import cn.edu.jlu.ccst.service.DcsdataService;
 import cn.edu.jlu.ccst.service.DcshistoryService;
 import cn.edu.jlu.ccst.service.ErrorlogService;
+import cn.edu.jlu.ccst.service.Pre_dssService;
 import cn.edu.jlu.ccst.service.RuleService;
 
 
@@ -47,8 +49,14 @@ public class DcsdataAction extends ActionSupport {
     private List<BackwardandResult> backwardandResult;
     private List<BackwardandReason> reasonlist;
     private RuleService ruleService;
-    
-    
+    private String keyword;
+   
+	public String getKeyword() {
+		return keyword;
+	}
+	public void setKeyword(String keyword) {
+		this.keyword = keyword;
+	}
 	public RuleService getRuleService() {
 		return ruleService;
 	}
@@ -138,7 +146,10 @@ public class DcsdataAction extends ActionSupport {
 			else return "unuserlogin";
 		}
 	
-
+public String showgongyidata(){
+	dcsdatalist = dcsdataService.getallgongyidata(keyword);
+	return "gongyi";
+}
 		
    /* public String alterDcsdata () {
 		User olduser = (User) ActionContext.getContext().getSession()
