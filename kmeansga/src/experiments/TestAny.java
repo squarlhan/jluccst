@@ -133,7 +133,7 @@ public class TestAny {
 		    scopes600.add(sp600);
 		}
 		try {
-			String prefix = "20_";
+			String prefix = "mse2_";
 			List<File> results = new ArrayList();
 			
 			File result0 = new File(prefix+"kmeans_x.txt");
@@ -204,7 +204,7 @@ public class TestAny {
 //            	a1.Calculate(200, 40, 30, scopes512, new WeiMaxFunction(), p_lamda0, p_extra, kmeans_max, kmeans_num, lamda2, output[10]);
 //            	a1.Calculate(200, 40, 30, scopes5, new NonMaxFunction(), p_lamda0, p_extra, kmeans_max, kmeans_num, lamda2, output[11]);
             	           	
-            	a1.Calculate(200, 40, 30, scopes100, new MaxFunction(), p_lamda, p_extra, kmeans_max, kmeans_num, lamda, output[0]);
+//            	a1.Calculate(200, 40, 30, scopes100, new MaxFunction(), p_lamda, p_extra, kmeans_max, kmeans_num, lamda, output[0]);
 //            	a1.Calculate(200, 40, 30, scopes512, new CosMaxFunction(), p_lamda, p_extra, kmeans_max, kmeans_num, lamda, output[1]);
 //            	a1.Calculate(200, 40, 30, scopes32, new AckleyMaxFunction(), p_lamda, p_extra, kmeans_max, kmeans_num, lamda, output[2]);
 //            	a1.Calculate(200, 40, 30, scopes100, new QuardircMaxFunction(), p_lamda, p_extra, kmeans_max, kmeans_num, lamda, output[3]);
@@ -216,7 +216,7 @@ public class TestAny {
 //            	a1.Calculate(200, 40, 30, scopes50, new Penalized2MaxFunction(), p_lamda, p_extra, kmeans_max, kmeans_num, lamda, output[9]);
 //            	a1.Calculate(200, 40, 30, scopes512, new WeiMaxFunction(), p_lamda, p_extra, kmeans_max, kmeans_num, lamda, output[10]);
 //            	a1.Calculate(200, 40, 30, scopes5, new NonMaxFunction(), p_lamda, p_extra, kmeans_max, kmeans_num, lamda, output[11]);
-            	
+//            	
                 	for (BufferedWriter op : output) {
     					   op.write("\n");
     					   op.flush();
@@ -235,7 +235,7 @@ public class TestAny {
 
 		long endTime = System.currentTimeMillis();
 		System.out.println("运行时间 " + (endTime - startTime) + "ms");
-//		System.out.println("x计算次数：" + MaxFunction.counts);
+		System.out.println("x计算次数：" + MaxFunction.counts);
 		try {
 			File popout = new File("kmcounts.txt");
 			if (popout.exists()) {
