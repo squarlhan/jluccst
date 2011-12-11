@@ -104,7 +104,10 @@ public class AutoJob {
 			datatime = datatimes.get(0).trim();
 		}
 		if(advicetimes!=null&&advicetimes.size()>0){
-			advicetime = advicetimes.get(0).trim();
+			if(advicetimes.get(0)!=null){
+				advicetime = advicetimes.get(0).trim();
+			}
+			
 		}
 		if(datatime==""||datatime.equals(advicetime)){
 			return;
