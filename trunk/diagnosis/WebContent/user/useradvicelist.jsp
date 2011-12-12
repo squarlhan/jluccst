@@ -52,7 +52,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <s:iterator id="errors" value="errorlist" status="index1">
        
      <tr  align="center"  bordercolor="#FFFFFF" rules="all" bgcolor="<s:if test="#index1.odd == true">#ffffff</s:if><s:else>#EDEDED</s:else>" style="color: Black; ">
-       <td><s:property value="name¡£name"/>&nbsp;</td>
+       <td><s:property value="name.name"/>&nbsp;</td>
        <td><s:property value="level"/>&nbsp;</td>
        <td><s:property value="simu_time"/>&nbsp;</td>
         <td><s:property value="value"/>&nbsp;</td>
