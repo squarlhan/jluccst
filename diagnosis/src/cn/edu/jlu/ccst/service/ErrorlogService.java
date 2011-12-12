@@ -24,12 +24,18 @@ public class ErrorlogService {
 	private Errorlog errorlog;
 	private ErrorlogInter errorlogImpl;
 	private DcsDscribServiceInter dcsDscribServiceImpl;
+	private String equip;
 	
 	
 	
 	
 	
-	
+	public String getEquip() {
+		return equip;
+	}
+	public void setEquip(String equip) {
+		this.equip = equip;
+	}
 	public DcsDscribServiceInter getDcsDscribServiceImpl() {
 		return dcsDscribServiceImpl;
 	}
@@ -60,7 +66,12 @@ public class ErrorlogService {
 		resultlist = errorlogImpl.findAll();
 		return resultlist;
 	}
-
+  public List<Errorlog> findbyequipment(String equip){
+	  List<Errorlog> resultlist = new ArrayList();
+		resultlist = errorlogImpl.findbyequipment(equip);
+		return resultlist; 
+	  
+  }
 
 
 	public void save(Errorlog errorlog) {

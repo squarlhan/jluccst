@@ -1,5 +1,6 @@
 package cn.edu.jlu.ccst.action;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -22,8 +23,23 @@ public class DssHistoryAction extends ActionSupport {
 	private static final long serialVersionUID = 1L;
 	private List<Dss_history> errorlist;
 	private Dss_historyService dss_historyService;
-
+    private String name;
+    
+    
+    
+    
+    
 	
+
+	public String getName() {
+		return name;
+	}
+
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
 
 	public List<Dss_history> getErrorlist() {
 		return errorlist;
@@ -55,4 +71,15 @@ public class DssHistoryAction extends ActionSupport {
 
 	}
 
+	
+	public String findbyname(){
+		try {
+			String keyword= new String(name.getBytes("ISO-8859-1"),"UTF-8");
+			errorlist = dss_historyService.findbyname(keyword);
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		return "OK";
+	}
 }

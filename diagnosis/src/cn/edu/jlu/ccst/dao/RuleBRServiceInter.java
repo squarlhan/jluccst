@@ -6,6 +6,7 @@ import javax.persistence.Query;
 
 import cn.edu.jlu.ccst.model.Backward;
 import cn.edu.jlu.ccst.model.BackwardandResult;
+import cn.edu.jlu.ccst.model.Errorlog;
 
 public interface RuleBRServiceInter {
 	

@@ -77,6 +77,11 @@ public class Dss_historyService {
 		return resultlist;
 	}
 	
+	public List<Dss_history> findbyname(String name) {
+		List<Dss_history> resultlist = new ArrayList();
+		resultlist = dss_historyServiceImpl.findbyName(name);
+		return resultlist;
+	}
 	
 	
 	public List<Dss_history> findsimu_time() {

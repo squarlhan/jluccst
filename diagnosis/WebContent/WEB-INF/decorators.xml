@@ -26,6 +26,16 @@
 		<pattern>/admin*</pattern>
 	</decorator>
 	
+	<decorator name="dss" page="dssdecorator.jsp">
+		<pattern>/dsshistory*</pattern>
+	</decorator>
+	
+	<decorator name="errorlog" page="errorlogdecorator.jsp">
+	
+	
+		<pattern>/errorlog*</pattern>
+	</decorator>
+	
 	<decorator name="prof" page="profdecorator.jsp">
 	
 		<pattern>/prof*</pattern>
