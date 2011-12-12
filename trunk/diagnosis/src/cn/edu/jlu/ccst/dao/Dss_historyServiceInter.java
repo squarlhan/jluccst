@@ -6,5 +6,5 @@ public interface Dss_historyServiceInter {
 	 public void save(Dss_history dss_history);
 	  public List<Dss_history> findsimu_time();
 	  public List<Dss_history> findAll();
-
+	    public List<Dss_history> findbyName(String name);
 }

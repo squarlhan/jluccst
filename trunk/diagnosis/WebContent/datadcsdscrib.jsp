@@ -65,8 +65,9 @@
                                   '3系列二沉池 ','4系列二沉池','接触氧化池 ','排江出口线','1、2系列465回流泵房 ','3系列465A回流泵房 ','3系列465B回流泵房'}}"  />
 					  <div class="nobr"> 
                     
-             <s:doubleselect list="#foobar.keySet()"
+            dddd <s:doubleselect list="#foobar.keySet()"
                           doubleName="dcsDscribname1"
+                         
                           doubleList="#foobar[top]"
                           theme="simple"/> 
                           </div>             

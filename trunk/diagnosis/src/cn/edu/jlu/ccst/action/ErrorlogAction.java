@@ -1,5 +1,6 @@
 package cn.edu.jlu.ccst.action;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -22,8 +23,23 @@ public class ErrorlogAction extends ActionSupport {
 	private static final long serialVersionUID = 1L;
 	private List<Errorlog> errorlist;
 	private ErrorlogService errorlogService;
-
+   private String equip;
+   
+   
+   
 	
+
+	public String getEquip() {
+	return equip;
+}
+
+
+
+public void setEquip(String equip) {
+	this.equip = equip;
+}
+
+
 
 	public List<Errorlog> getErrorlist() {
 		return errorlist;
@@ -58,6 +74,17 @@ public class ErrorlogAction extends ActionSupport {
 		return "OK";
 		
 
+	}
+	
+	public String findbyequipment(){
+		try {
+			String keyword= new String(equip.getBytes("ISO-8859-1"),"UTF-8");
+			errorlist = errorlogService.findbyequipment(keyword);
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		return "OK";
 	}
 
 }
