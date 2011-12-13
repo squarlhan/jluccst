@@ -208,5 +208,39 @@ public class DcsdataService {
 			}
 		
 	}
+	
+	public List<Dcsdata> getalldcsddata(String keyword) {
+		List<Dcsdata> allresults = new ArrayList();
+		List<Dcsdata> results = new ArrayList();
+		List<Dcsdata> fliterresults = new ArrayList();
+		allresults =  this.findAll();
+		for(Dcsdata dd:allresults){
+			if(!dd.getItem().trim().equals("班次")){
+				dd.setIsok(true);
+				List<DcsDscrib> dcsDscribs = dcsDscribServiceImpl.findbyname(dd.getEquipment().trim(), dd.getItem().trim());
+				if (dcsDscribs != null && dcsDscribs.size() > 0) {
+					DcsDscrib db = dcsDscribs.get(0);
+					// do sth...
+					if(dd.getValue()>db.getUpper()||dd.getValue()<db.getLower()){
+						dd.setIsok(false);
+					}
+					if (keyword != null) {
+						if(db.getName().contains(keyword)){
+							fliterresults.add(dd);
+						}
+					}
+					
+				}
+				results.add(dd);			
+			}
+		}
+	
+		if (fliterresults.size()>0) {
+			return fliterresults;
+			}else{
+				return results;
+			}
+		
+	}
 
 }

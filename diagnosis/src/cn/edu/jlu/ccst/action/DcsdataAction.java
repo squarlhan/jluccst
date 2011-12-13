@@ -17,7 +17,6 @@ import org.springframework.stereotype.Component;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
-
 import cn.edu.jlu.ccst.model.BackwardandReason;
 import cn.edu.jlu.ccst.model.BackwardandResult;
 import cn.edu.jlu.ccst.model.DcsDscrib;
@@ -34,33 +33,33 @@ import cn.edu.jlu.ccst.service.ErrorlogService;
 import cn.edu.jlu.ccst.service.Pre_dssService;
 import cn.edu.jlu.ccst.service.RuleService;
 
-
-
 @Component("dcsdataAction")
 @Scope("prototype")
 public class DcsdataAction extends ActionSupport {
 
-	
 	private List<Dcsdata> equipmentlist;
 	private List<Dcsdata> dcsdatalist;
 	private DcsdataService dcsdataService;
 	private Dcsdata dcsdata;
 	private Dcshistory dcshistory;
-    private DcshistoryService dcshistoryService;
-    private List<BackwardandResult> backwardandResult;
-    private List<BackwardandReason> reasonlist;
-    private RuleService ruleService;
-    private String keyword;
-   
+	private DcshistoryService dcshistoryService;
+	private List<BackwardandResult> backwardandResult;
+	private List<BackwardandReason> reasonlist;
+	private RuleService ruleService;
+	private String keyword;
+
 	public String getKeyword() {
 		return keyword;
 	}
+
 	public void setKeyword(String keyword) {
 		this.keyword = keyword;
 	}
+
 	public RuleService getRuleService() {
 		return ruleService;
 	}
+
 	@Resource
 	public void setRuleService(RuleService ruleService) {
 		this.ruleService = ruleService;
@@ -93,7 +92,8 @@ public class DcsdataAction extends ActionSupport {
 	public DcshistoryService getDcshistoryService() {
 		return dcshistoryService;
 	}
-    @Resource
+
+	@Resource
 	public void setDcshistoryService(DcshistoryService dcshistoryService) {
 		this.dcshistoryService = dcshistoryService;
 	}
@@ -125,77 +125,93 @@ public class DcsdataAction extends ActionSupport {
 	public DcsdataService getDcsdataService() {
 		return dcsdataService;
 	}
-    @Resource
+
+	@Resource
 	public void setDcsdataService(DcsdataService dcsdataService) {
 		this.dcsdataService = dcsdataService;
 	}
 
-	public boolean checkuser(){
+	public boolean checkuser() {
 		ActionContext actionContext = ActionContext.getContext();
-        Map user = actionContext.getSession();
-        User us = (User) user.get("us");
-		if(us!=null){
+		Map user = actionContext.getSession();
+		User us = (User) user.get("us");
+		if (us != null) {
 			return true;
-		}
-		else return false;
+		} else
+			return false;
+	}
+
+	public String equipmentList(String str) {
+		if (checkuser()) {
+			equipmentlist = dcsdataService.findbyequipment(str);
+			return SUCCESS;
+		} else
+			return "unuserlogin";
 	}
 	
-	public String  equipmentList(String str) {
-			if(checkuser()){
-		 equipmentlist = dcsdataService.findbyequipment(str);
-			return SUCCESS;}
-			else return "unuserlogin";
-		}
-	
-public String showgongyidata(){
-	String key = null;
-	try {
-		if(keyword!=null){
-			key = new String(keyword.getBytes("ISO-8859-1"),"UTF-8");
-//			key="3系列生化池";
-		}		
-		dcsdatalist = dcsdataService.getallgongyidata(key);
-	} catch (UnsupportedEncodingException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
-	
-	return "gongyi";
-}
-		
-   /* public String alterDcsdata () {
-		User olduser = (User) ActionContext.getContext().getSession()
-					.get("us");
-			
-			
-      if (olduser.getPassword().equals(currentpassword)) {
-				
-				if(newpassword.isEmpty())
-				{ return "nullpass";}
-				user.setPassword(newpassword);
-				user.setId(olduser.getId());
-				user.setUsername(olduser.getUsername());
-				userService.save(user);
-				
-				
-				ActionContext actionContext = ActionContext.getContext();
-		        Map session = actionContext.getSession();
-		        session.put("us", user);
-				return "altersuccess";
-			} else {
-				
-				return 	"altererror";
+	public String showdcsdata(){
+		String key = null;
+		try {
+			if (keyword != null) {
+				key = new String(keyword.getBytes("ISO-8859-1"), "UTF-8");
+				// key="3系列生化池";
 			}
-			
-			}*/
-	public String save() {
-		/*ActionContext actionContext = ActionContext.getContext();
-        Map session1 = actionContext.getSession();
-        Wwdcsdata wc = (Wwdcsdata) session1.get("wc");*/
-        dcsdataService.save(dcsdata);
-        return "savesuccess";
+			dcsdatalist = dcsdataService.getalldcsddata(key);
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return "dcs";
 	}
-	 public String listsave(){
+
+	public String showgongyidata() {
+		String key = null;
+		try {
+			if (keyword != null) {
+				key = new String(keyword.getBytes("ISO-8859-1"), "UTF-8");
+				// key="3系列生化池";
+			}
+			dcsdatalist = dcsdataService.getallgongyidata(key);
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return "gongyi";
+	}
+
+	/*
+	 * public String alterDcsdata () { User olduser = (User)
+	 * ActionContext.getContext().getSession() .get("us");
+	 * 
+	 * 
+	 * if (olduser.getPassword().equals(currentpassword)) {
+	 * 
+	 * if(newpassword.isEmpty()) { return "nullpass";}
+	 * user.setPassword(newpassword); user.setId(olduser.getId());
+	 * user.setUsername(olduser.getUsername()); userService.save(user);
+	 * 
+	 * 
+	 * ActionContext actionContext = ActionContext.getContext(); Map session =
+	 * actionContext.getSession(); session.put("us", user); return
+	 * "altersuccess"; } else {
+	 * 
+	 * return "altererror"; }
+	 * 
+	 * }
+	 */
+	public String save() {
+		/*
+		 * ActionContext actionContext = ActionContext.getContext(); Map
+		 * session1 = actionContext.getSession(); Wwdcsdata wc = (Wwdcsdata)
+		 * session1.get("wc");
+		 */
+		dcsdataService.save(dcsdata);
+		return "savesuccess";
+	}
+
+	public String listsave() {
 		List<Dcsdata> list = new ArrayList<Dcsdata>();
 		List<Dcshistory> list2 = new ArrayList<Dcshistory>();
 		List<Dcsdata> list1 = new ArrayList<Dcsdata>();
@@ -230,22 +246,22 @@ public String showgongyidata(){
 				if (his.getValue() != null) {
 					list2.add(his);
 					dcshistoryService.save(his);
-					BackwardandResult tempbr = dcsdataService.validateinput(dcsdatalist.get(i));
-					if(tempbr!=null){
+					BackwardandResult tempbr = dcsdataService
+							.validateinput(dcsdatalist.get(i));
+					if (tempbr != null) {
 						backwardandResult.add(tempbr);
 					}
-					
+
 				}
-				
 
 			}
 		}
 
-		if(backwardandResult!=null&&backwardandResult.size()>0){
+		if (backwardandResult != null && backwardandResult.size() > 0) {
 			reasonlist = ruleService.findreasons(backwardandResult);
 			return "saveerror";
 		}
 		return "savelistsuccess";
 	}
-	
+
 }
