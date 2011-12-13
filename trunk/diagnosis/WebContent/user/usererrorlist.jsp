@@ -44,10 +44,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<tr bgcolor="#4A708B">
 		    <th width = "15%">设备名</th>
 			<th width = "15%">参数名</th>
-			<th width = "5%">故障现象</th>
+			<th width = "10%">故障现象</th>
 			<th width = "20%">故障时间</th>
-			<th width = "5%">故障值</th>
-			<th width = "40%">采取的建议</th>
+			<th width = "10%">故障值</th>
+			<th width = "30%">采取的建议</th>
 	  </tr>
     <s:iterator id="errors" value="errorlist" status="index1">
        

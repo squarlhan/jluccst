@@ -25,69 +25,69 @@
 							      
 							       <li class="Child"><a href="/diagnosis/errorlogaction!findbyequipment.action?equip=<%=java.net.URLEncoder.encode("电石厂有机水","UTF-8")%>">电石厂有机水</a></li>
 							      
-							       <li class="Child"><a href="diagnosis/errorlogaction!findbyequipment.action?equip=<%=java.net.URLEncoder.encode("有机合成厂有机水","UTF-8")%>">有机合成厂有机水</a></li>
-							       <li class="Child"><a href="diagnosis/errorlogaction!findbyequipment.action?equip=<%=java.net.URLEncoder.encode("炼油厂有机水","UTF-8")%>">炼油厂有机水</a></li>
-							       <li class="Child"><a href="diagnosis/errorlogaction!findbyequipment.action?equip=<%=java.net.URLEncoder.encode("精细化工厂废水","UTF-8")%>">精细化工厂废水</a></li>
-							       <li class="Child"><a href="diagnosis/errorlogaction!findbyequipment.action?equip=<%=java.net.URLEncoder.encode("乙二醇废水","UTF-8")%>">乙二醇废水</a></li>
-							       <li class="Child"><a href="diagnosis/errorlogaction!findbyequipment.action?equip=<%=java.net.URLEncoder.encode("环氧乙烷废水","UTF-8")%>">环氧乙烷废水</a></li>
+							       <li class="Child"><a href="/diagnosis/errorlogaction!findbyequipment.action?equip=<%=java.net.URLEncoder.encode("有机合成厂有机水","UTF-8")%>">有机合成厂有机水</a></li>
+							       <li class="Child"><a href="/diagnosis/errorlogaction!findbyequipment.action?equip=<%=java.net.URLEncoder.encode("炼油厂有机水","UTF-8")%>">炼油厂有机水</a></li>
+							       <li class="Child"><a href="/diagnosis/errorlogaction!findbyequipment.action?equip=<%=java.net.URLEncoder.encode("精细化工厂废水","UTF-8")%>">精细化工厂废水</a></li>
+							       <li class="Child"><a href="/diagnosis/errorlogaction!findbyequipment.action?equip=<%=java.net.URLEncoder.encode("乙二醇废水","UTF-8")%>">乙二醇废水</a></li>
+							       <li class="Child"><a href="/diagnosis/errorlogaction!findbyequipment.action?equip=<%=java.net.URLEncoder.encode("环氧乙烷废水","UTF-8")%>">环氧乙烷废水</a></li>
 							      
-							       <li class="Child"><a href="diagnosis/errorlogaction!findbyequipment.action?equip=<%=java.net.URLEncoder.encode("农药厂有机水","UTF-8")%>">农药厂有机水</a></li>
-							       <li class="Child"><a href="diagnosis/errorlogaction!findbyequipment.action?equip=<%=java.net.URLEncoder.encode("含氮废水","UTF-8")%>">含氮废水</a></li>
-							       <li class="Child"><a href="diagnosis/errorlogaction!findbyequipment.action?equip=<%=java.net.URLEncoder.encode("103厂碱水","UTF-8")%>">103厂碱水</a></li>
-							       <li class="Child"><a href="diagnosis/errorlogaction!findbyequipment.action?equip=<%=java.net.URLEncoder.encode("化肥厂丁辛醇","UTF-8")%>">化肥厂丁辛醇</a></li>
-							       <li class="Child"><a href="diagnosis/errorlogaction!findbyequipment.action?equip=<%=java.net.URLEncoder.encode("丙烯腈废水","UTF-8")%>">丙烯腈废水</a></li>
-							       <li class="Child"><a href="diagnosis/errorlogaction!findbyequipment.action?equip=<%=java.net.URLEncoder.encode("合成树脂厂有机水","UTF-8")%>">合成树脂厂有机水</a></li>
-							       <li class="Child"><a href="diagnosis/errorlogaction!findbyequipment.action?equip=<%=java.net.URLEncoder.encode("龙潭区生活水","UTF-8")%>">龙潭区生活水</a></li>
+							       <li class="Child"><a href="/diagnosis/errorlogaction!findbyequipment.action?equip=<%=java.net.URLEncoder.encode("农药厂有机水","UTF-8")%>">农药厂有机水</a></li>
+							       <li class="Child"><a href="/diagnosis/errorlogaction!findbyequipment.action?equip=<%=java.net.URLEncoder.encode("含氮废水","UTF-8")%>">含氮废水</a></li>
+							       <li class="Child"><a href="/diagnosis/errorlogaction!findbyequipment.action?equip=<%=java.net.URLEncoder.encode("103厂碱水","UTF-8")%>">103厂碱水</a></li>
+							       <li class="Child"><a href="/diagnosis/errorlogaction!findbyequipment.action?equip=<%=java.net.URLEncoder.encode("化肥厂丁辛醇","UTF-8")%>">化肥厂丁辛醇</a></li>
+							       <li class="Child"><a href="/diagnosis/errorlogaction!findbyequipment.action?equip=<%=java.net.URLEncoder.encode("丙烯腈废水","UTF-8")%>">丙烯腈废水</a></li>
+							       <li class="Child"><a href="/diagnosis/errorlogaction!findbyequipment.action?equip=<%=java.net.URLEncoder.encode("合成树脂厂有机水","UTF-8")%>">合成树脂厂有机水</a></li>
+							       <li class="Child"><a href="/diagnosis/errorlogaction!findbyequipment.action?equip=<%=java.net.URLEncoder.encode("龙潭区生活水","UTF-8")%>">龙潭区生活水</a></li>
 							      
 							    </ul>
 							  </li>
 							  <li class="Closed">中和处理
 							   <ul>
 							      <li class="Child"><a href="/diagnosis/errorlogaction!findbyequipment.action?equip=<%=java.net.URLEncoder.encode("染料厂酸水染料厂酸水","UTF-8")%>">染料厂酸水</a></li>
-							      <li class="Child"><a href="diagnosis/errorlogaction!findbyequipment.action?equip=<%=java.net.URLEncoder.encode("电石厂酸水","UTF-8")%>">电石厂酸水</a></li> 
-							       <li class="Child"><a href="diagnosis/errorlogaction!findbyequipment.action?equip=<%=java.net.URLEncoder.encode("铁运489沉淀池出水","UTF-8")%>">铁运489沉淀池出水</a></li>
+							      <li class="Child"><a href="/diagnosis/errorlogaction!findbyequipment.action?equip=<%=java.net.URLEncoder.encode("电石厂酸水","UTF-8")%>">电石厂酸水</a></li> 
+							       <li class="Child"><a href="/diagnosis/errorlogaction!findbyequipment.action?equip=<%=java.net.URLEncoder.encode("铁运489沉淀池出水","UTF-8")%>">铁运489沉淀池出水</a></li>
 							   </ul>
 							  </li>
 							  <li class="Closed">生活水处理
 							   <ul>
-							    <li class="Child"><a href="diagnosis/errorlogaction!findbyequipment.action?equip=<%=java.net.URLEncoder.encode("14a","UTF-8")%>">14a</a></li>
-							   <li class="Child"><a href="diagnosis/errorlogaction!findbyequipment.action?equip=<%=java.net.URLEncoder.encode("14b","UTF-8")%>">14b</a></li>
+							    <li class="Child"><a href="/diagnosis/errorlogaction!findbyequipment.action?equip=<%=java.net.URLEncoder.encode("14a","UTF-8")%>">14a</a></li>
+							   <li class="Child"><a href="/diagnosis/errorlogaction!findbyequipment.action?equip=<%=java.net.URLEncoder.encode("14b","UTF-8")%>">14b</a></li>
 							    </ul>
 							  </li>
 							  <li class="Closed">预处理
 							    <ul>
-							       <li class="Child"><a href="diagnosis/errorlogaction!findbyequipment.action?equip=<%=java.net.URLEncoder.encode("稳流池(477)进水","UTF-8")%>">稳流池(477)进水</a></li>
-							       <li class="Child"><a href="diagnosis/errorlogaction!findbyequipment.action?equip=<%=java.net.URLEncoder.encode("进水提升泵房(462A)","UTF-8")%>">进水提升泵房(462A)</a></li>
-							       <li class="Child"><a href="diagnosis/errorlogaction!findbyequipment.action?equip=<%=java.net.URLEncoder.encode("巴氏计量槽(499)","UTF-8")%>">巴氏计量槽(499)</a></li>
-							       <li class="Child"><a href="diagnosis/errorlogaction!findbyequipment.action?equip=<%=java.net.URLEncoder.encode("除色池(414","UTF-8")%>">除色池(414)</a></li>
-							       <li class="Child"><a href="diagnosis/errorlogaction!findbyequipment.action?equip=<%=java.net.URLEncoder.encode("沉沙刮沙池(488)","UTF-8")%>">沉沙刮沙池(488)</a></li>
-							       <li class="Child"><a href="diagnosis/errorlogaction!findbyequipment.action?equip=<%=java.net.URLEncoder.encode("初沉池(489B)","UTF-8")%>">初沉池(489B)</a></li>
-							       <li class="Child"><a href="diagnosis/errorlogaction!findbyequipment.action?equip=<%=java.net.URLEncoder.encode("事故池(489)","UTF-8")%>">事故池(489)</a></li>
-							       <li class="Child"><a href="diagnosis/errorlogaction!findbyequipment.action?equip=<%=java.net.URLEncoder.encode("14B生活水","UTF-8")%>">14B生活水</a></li>
-							       <li class="Child"><a href="diagnosis/errorlogaction!findbyequipment.action?equip=<%=java.net.URLEncoder.encode("老水解酸化池","UTF-8")%>">老水解酸化池</a></li>
-							       <li class="Child"><a href="diagnosis/errorlogaction!findbyequipment.action?equip=<%=java.net.URLEncoder.encode("新水解酸化池","UTF-8")%>">新水解酸化池</a></li>
+							       <li class="Child"><a href="/diagnosis/errorlogaction!findbyequipment.action?equip=<%=java.net.URLEncoder.encode("稳流池(477)进水","UTF-8")%>">稳流池(477)进水</a></li>
+							       <li class="Child"><a href="/diagnosis/errorlogaction!findbyequipment.action?equip=<%=java.net.URLEncoder.encode("进水提升泵房(462A)","UTF-8")%>">进水提升泵房(462A)</a></li>
+							       <li class="Child"><a href="/diagnosis/errorlogaction!findbyequipment.action?equip=<%=java.net.URLEncoder.encode("巴氏计量槽(499)","UTF-8")%>">巴氏计量槽(499)</a></li>
+							       <li class="Child"><a href="/diagnosis/errorlogaction!findbyequipment.action?equip=<%=java.net.URLEncoder.encode("除色池(414","UTF-8")%>">除色池(414)</a></li>
+							       <li class="Child"><a href="/diagnosis/errorlogaction!findbyequipment.action?equip=<%=java.net.URLEncoder.encode("沉沙刮沙池(488)","UTF-8")%>">沉沙刮沙池(488)</a></li>
+							       <li class="Child"><a href="/diagnosis/errorlogaction!findbyequipment.action?equip=<%=java.net.URLEncoder.encode("初沉池(489B)","UTF-8")%>">初沉池(489B)</a></li>
+							       <li class="Child"><a href="/diagnosis/errorlogaction!findbyequipment.action?equip=<%=java.net.URLEncoder.encode("事故池(489)","UTF-8")%>">事故池(489)</a></li>
+							       <li class="Child"><a href="/diagnosis/errorlogaction!findbyequipment.action?equip=<%=java.net.URLEncoder.encode("14B生活水","UTF-8")%>">14B生活水</a></li>
+							       <li class="Child"><a href="/diagnosis/errorlogaction!findbyequipment.action?equip=<%=java.net.URLEncoder.encode("老水解酸化池","UTF-8")%>">老水解酸化池</a></li>
+							       <li class="Child"><a href="/diagnosis/errorlogaction!findbyequipment.action?equip=<%=java.net.URLEncoder.encode("新水解酸化池","UTF-8")%>">新水解酸化池</a></li>
 							      
-							       <li class="Child"><a href="diagnosis/errorlogaction!findbyequipment.action?equip=<%=java.net.URLEncoder.encode("污泥泵房(466)","UTF-8")%>">污泥泵房(466)</a></li>
+							       <li class="Child"><a href="/diagnosis/errorlogaction!findbyequipment.action?equip=<%=java.net.URLEncoder.encode("污泥泵房(466)","UTF-8")%>">污泥泵房(466)</a></li>
 							       <li class="Child">浓缩池(491)</li>
-							       <li class="Child"><a href="diagnosis/errorlogaction!findbyequipment.action?equip=<%=java.net.URLEncoder.encode("脱水装置(495)","UTF-8")%>">脱水装置(495)</a></li>
+							       <li class="Child"><a href="/diagnosis/errorlogaction!findbyequipment.action?equip=<%=java.net.URLEncoder.encode("脱水装置(495)","UTF-8")%>">脱水装置(495)</a></li>
 							    </ul>
 							  </li>
 								<li class="Closed">生化处理
 									<ul>
-										 <li class="Child"><a href="diagnosis/errorlogaction!findbyequipment.action?equip=<%=java.net.URLEncoder.encode("1、2系列465回流泵房","UTF-8")%>">1、2系列465回流泵房</a></li>
-								         <li class="Child"><a href="diagnosis/errorlogaction!findbyequipment.action?equip=<%=java.net.URLEncoder.encode("3系列465A回流泵房","UTF-8")%>">3系列465A回流泵房</a></li>
-								         <li class="Child"><a href="diagnosis/errorlogaction!findbyequipment.action?equip=<%=java.net.URLEncoder.encode("3系列465B回流泵房","UTF-8")%>">3系列465B回流泵房</a></li>
-										 <li class="Child"><a href="diagnosis/errorlogaction!findbyequipment.action?equip=<%=java.net.URLEncoder.encode("中间提升泵房(462B)","UTF-8")%>">中间提升泵房(462B)</a></li>
+										 <li class="Child"><a href="/diagnosis/errorlogaction!findbyequipment.action?equip=<%=java.net.URLEncoder.encode("1、2系列465回流泵房","UTF-8")%>">1、2系列465回流泵房</a></li>
+								         <li class="Child"><a href="/diagnosis/errorlogaction!findbyequipment.action?equip=<%=java.net.URLEncoder.encode("3系列465A回流泵房","UTF-8")%>">3系列465A回流泵房</a></li>
+								         <li class="Child"><a href="/diagnosis/errorlogaction!findbyequipment.action?equip=<%=java.net.URLEncoder.encode("3系列465B回流泵房","UTF-8")%>">3系列465B回流泵房</a></li>
+										 <li class="Child"><a href="/diagnosis/errorlogaction!findbyequipment.action?equip=<%=java.net.URLEncoder.encode("中间提升泵房(462B)","UTF-8")%>">中间提升泵房(462B)</a></li>
 										 <li class="Child"><a href="/diagnosis/errorlogaction!findbyequipment.action?equip=<%=java.net.URLEncoder.encode("1系列生化池","UTF-8")%>">生化池系列1</a></li>	
 									     <li class="Child"><a href="/diagnosis/errorlogaction!findbyequipment.action?equip=<%=java.net.URLEncoder.encode("2系列生化池","UTF-8")%>">生化池系列2</a></li>
 										<li class="Child"><a href="/diagnosis/errorlogaction!findbyequipment.action?equip=<%=java.net.URLEncoder.encode("3系列生化池","UTF-8")%>">生化池系列3</a></li>
 										<li class="Child"><a href="/diagnosis/errorlogaction!findbyequipment.action?equip=<%=java.net.URLEncoder.encode("4系列生化池","UTF-8")%>">生化池系列4</a></li>
-										<li class="Child"><a href="diagnosis/errorlogaction!findbyequipment.action?equip=<%=java.net.URLEncoder.encode("1系列二沉池","UTF-8")%>">1系列二沉池</a></li>
-										<li class="Child"><a href="diagnosis/errorlogaction!findbyequipment.action?equip=<%=java.net.URLEncoder.encode("2系列二沉池","UTF-8")%>">2系列二沉池</a></li>
-										<li class="Child"><a href="diagnosis/errorlogaction!findbyequipment.action?equip=<%=java.net.URLEncoder.encode("3系列二沉池","UTF-8")%>">3系列二沉池</a></li>
-										<li class="Child"><a href="diagnosis/errorlogaction!findbyequipment.action?equip=<%=java.net.URLEncoder.encode("4系列二沉池","UTF-8")%>">4系列二沉池</a></li>
-										<li class="Child"><a href="diagnosis/errorlogaction!findbyequipment.action?equip=<%=java.net.URLEncoder.encode("接触氧化池","UTF-8")%>">接触氧化池</a></li>
-										<li class="Child"><a href="diagnosis/errorlogaction!findbyequipment.action?equip=<%=java.net.URLEncoder.encode("排江出口线","UTF-8")%>">排江出口线</a></li>
+										<li class="Child"><a href="/diagnosis/errorlogaction!findbyequipment.action?equip=<%=java.net.URLEncoder.encode("1系列二沉池","UTF-8")%>">1系列二沉池</a></li>
+										<li class="Child"><a href="/diagnosis/errorlogaction!findbyequipment.action?equip=<%=java.net.URLEncoder.encode("2系列二沉池","UTF-8")%>">2系列二沉池</a></li>
+										<li class="Child"><a href="/diagnosis/errorlogaction!findbyequipment.action?equip=<%=java.net.URLEncoder.encode("3系列二沉池","UTF-8")%>">3系列二沉池</a></li>
+										<li class="Child"><a href="/diagnosis/errorlogaction!findbyequipment.action?equip=<%=java.net.URLEncoder.encode("4系列二沉池","UTF-8")%>">4系列二沉池</a></li>
+										<li class="Child"><a href="/diagnosis/errorlogaction!findbyequipment.action?equip=<%=java.net.URLEncoder.encode("接触氧化池","UTF-8")%>">接触氧化池</a></li>
+										<li class="Child"><a href="/diagnosis/errorlogaction!findbyequipment.action?equip=<%=java.net.URLEncoder.encode("排江出口线","UTF-8")%>">排江出口线</a></li>
 										
 									</ul>
 								</li>
