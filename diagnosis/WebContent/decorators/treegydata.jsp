@@ -78,10 +78,10 @@
 								         <li class="Child"><a href="/diagnosis/dcsdataaction!showgongyidata?keyword=<%=java.net.URLEncoder.encode("3系列465A回流泵房","UTF-8")%>">3系列465A回流泵房</a></li>
 								         <li class="Child"><a href="/diagnosis/dcsdataaction!showgongyidata?keyword=<%=java.net.URLEncoder.encode("3系列465B回流泵房","UTF-8")%>">3系列465B回流泵房</a></li>
 										 <li class="Child"><a href="/diagnosis/dcsdataaction!showgongyidata?keyword=<%=java.net.URLEncoder.encode("中间提升泵房(462B)","UTF-8")%>">中间提升泵房(462B)</a></li>
-										 <li class="Child"><a href="/diagnosis/dcsdataaction!showgongyidata?keyword=<%=java.net.URLEncoder.encode("1系列生化池","UTF-8")%>">生化池系列1</a></li>	
-									     <li class="Child"><a href="/diagnosis/dcsdataaction!showgongyidata?keyword=<%=java.net.URLEncoder.encode("2系列生化池","UTF-8")%>">生化池系列2</a></li>
-										<li class="Child"><a href="/diagnosis/dcsdataaction!showgongyidata?keyword=<%=java.net.URLEncoder.encode("3系列生化池","UTF-8")%>">生化池系列3</a></li>
-										<li class="Child"><a href="/diagnosis/dcsdataaction!showgongyidata?keyword=<%=java.net.URLEncoder.encode("4系列生化池","UTF-8")%>">生化池系列4</a></li>
+										 <li class="Child"><a href="/diagnosis/dcsdataaction!showgongyidata?keyword=<%=java.net.URLEncoder.encode("生化池系列1","UTF-8")%>">生化池系列1</a></li>	
+									     <li class="Child"><a href="/diagnosis/dcsdataaction!showgongyidata?keyword=<%=java.net.URLEncoder.encode("生化池系列2","UTF-8")%>">生化池系列2</a></li>
+										<li class="Child"><a href="/diagnosis/dcsdataaction!showgongyidata?keyword=<%=java.net.URLEncoder.encode("生化池系列3","UTF-8")%>">生化池系列3</a></li>
+										<li class="Child"><a href="/diagnosis/dcsdataaction!showgongyidata?keyword=<%=java.net.URLEncoder.encode("生化池系列4","UTF-8")%>">生化池系列4</a></li>
 										<li class="Child"><a href="/diagnosis/dcsdataaction!showgongyidata?keyword=<%=java.net.URLEncoder.encode("1系列二沉池","UTF-8")%>">1系列二沉池</a></li>
 										<li class="Child"><a href="/diagnosis/dcsdataaction!showgongyidata?keyword=<%=java.net.URLEncoder.encode("2系列二沉池","UTF-8")%>">2系列二沉池</a></li>
 										<li class="Child"><a href="/diagnosis/dcsdataaction!showgongyidata?keyword=<%=java.net.URLEncoder.encode("3系列二沉池","UTF-8")%>">3系列二沉池</a></li>
