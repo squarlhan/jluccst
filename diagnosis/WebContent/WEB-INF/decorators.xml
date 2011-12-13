@@ -46,7 +46,9 @@
 	<decorator name="prof1" page="profdecorator1.jsp">
 	
 		<pattern>/prof/proflogin.jsp</pattern>
-	
+		<pattern>/profaction!exitsprof.action</pattern>
+		<pattern>/dcsdscribaction!goadd.action</pattern>
+	    <pattern>/ruleaction!justgo.action</pattern>
 	</decorator>
 	<decorator name="prof2" page="profdecorator2.jsp">
 	<pattern>/dcsdscribaction*</pattern>
