@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50517
 File Encoding         : 65001
 
-Date: 2011-12-11 12:22:41
+Date: 2011-12-13 16:47:37
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -46,7 +46,7 @@ CREATE TABLE `backward` (
   `count` int(10) DEFAULT '0',
   `priror` int(10) DEFAULT '0',
   PRIMARY KEY (`bid`)
-) ENGINE=InnoDB AUTO_INCREMENT=143 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=145 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of backward
@@ -166,6 +166,8 @@ INSERT INTO `backward` VALUES ('134', '', '', '0', '0');
 INSERT INTO `backward` VALUES ('135', '', '', '0', '0');
 INSERT INTO `backward` VALUES ('136', '', '', '0', '0');
 INSERT INTO `backward` VALUES ('142', '电石厂有机水', '溶解氧过高', '0', '0');
+INSERT INTO `backward` VALUES ('143', '排江出口线', 'NH3-N过高', '0', '0');
+INSERT INTO `backward` VALUES ('144', '生化池系列4(8号生化池)', '溶解氧过高', '0', '0');
 
 -- ----------------------------
 -- Table structure for `backwardandlower`
@@ -199,7 +201,7 @@ CREATE TABLE `backwardandreason` (
   PRIMARY KEY (`id`),
   KEY `FKFBA61E58DB7478BC` (`bid`),
   CONSTRAINT `FKFBA61E58DB7478BC` FOREIGN KEY (`bid`) REFERENCES `backward` (`bid`)
-) ENGINE=InnoDB AUTO_INCREMENT=354 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=357 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 -- Records of backwardandreason
@@ -223,6 +225,9 @@ INSERT INTO `backwardandreason` VALUES ('349', '16', '1', '0', '1', '1');
 INSERT INTO `backwardandreason` VALUES ('350', '16', '2', '0', '2', '2');
 INSERT INTO `backwardandreason` VALUES ('351', '16', '3', '0', '3', '3');
 INSERT INTO `backwardandreason` VALUES ('353', '142', '4', '0', '4', '4');
+INSERT INTO `backwardandreason` VALUES ('354', '143', '电石渣', '0', '加的太多', '减少电石渣投放量');
+INSERT INTO `backwardandreason` VALUES ('355', '143', '中和', '0', '错误', '立即上报');
+INSERT INTO `backwardandreason` VALUES ('356', '144', 'op', '0', 'p', 'p');
 
 -- ----------------------------
 -- Table structure for `backwardandresult`
@@ -238,7 +243,7 @@ CREATE TABLE `backwardandresult` (
   PRIMARY KEY (`id`),
   KEY `FKFBAE5431DB7478BC` (`bid`),
   CONSTRAINT `FKFBAE5431DB7478BC` FOREIGN KEY (`bid`) REFERENCES `backward` (`bid`)
-) ENGINE=InnoDB AUTO_INCREMENT=128 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=130 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 -- Records of backwardandresult
@@ -254,6 +259,8 @@ INSERT INTO `backwardandresult` VALUES ('119', '134', '生化池系列1(1号生�
 INSERT INTO `backwardandresult` VALUES ('120', '135', '生化池系列1(2号生化池)PH', '0', '过高', null);
 INSERT INTO `backwardandresult` VALUES ('121', '136', '排江出口线SS', '0', '过高', null);
 INSERT INTO `backwardandresult` VALUES ('127', '142', '电石厂有机水溶解氧', '0', '过高', null);
+INSERT INTO `backwardandresult` VALUES ('128', '143', '排江出口线NH3-N', '0', '过高', null);
+INSERT INTO `backwardandresult` VALUES ('129', '144', '生化池系列4(8号生化池)溶解氧', '0', '过高', null);
 
 -- ----------------------------
 -- Table structure for `backwardandupper`
@@ -282,16 +289,19 @@ CREATE TABLE `dcsdata` (
   `equipment` varchar(255) DEFAULT NULL,
   `item` varchar(255) DEFAULT NULL,
   `value` double DEFAULT NULL,
+  `isok` bit(1) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=107 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=109 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of dcsdata
 -- ----------------------------
-INSERT INTO `dcsdata` VALUES ('86', '2系列生化池', '班次', '0');
-INSERT INTO `dcsdata` VALUES ('87', '2系列生化池', '3号生化池COD', '0.2');
-INSERT INTO `dcsdata` VALUES ('105', '1系列生化池', '班次', '0');
-INSERT INTO `dcsdata` VALUES ('106', '1系列生化池', '1号生化池PH', '10');
+INSERT INTO `dcsdata` VALUES ('86', '2系列生化池', '班次', '0', '\0');
+INSERT INTO `dcsdata` VALUES ('87', '2系列生化池', '3号生化池COD', '0.2', '\0');
+INSERT INTO `dcsdata` VALUES ('105', '1系列生化池', '班次', '0', '\0');
+INSERT INTO `dcsdata` VALUES ('106', '1系列生化池', '1号生化池PH', '10', '\0');
+INSERT INTO `dcsdata` VALUES ('107', '排江出口线', '班次', '0', '\0');
+INSERT INTO `dcsdata` VALUES ('108', '排江出口线', '出口NH3-N', '3', '\0');
 
 -- ----------------------------
 -- Table structure for `dcsdscrib`
@@ -305,7 +315,7 @@ CREATE TABLE `dcsdscrib` (
   `name` varchar(255) DEFAULT NULL,
   `upper` double DEFAULT NULL,
   PRIMARY KEY (`did`)
-) ENGINE=InnoDB AUTO_INCREMENT=1403 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1404 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of dcsdscrib
@@ -361,6 +371,7 @@ INSERT INTO `dcsdscrib` VALUES ('1398', '1系列生化池', '2号生化池NO-N',
 INSERT INTO `dcsdscrib` VALUES ('1399', '排江出口线', '出口SS', '0', '排江出口线SS', '10');
 INSERT INTO `dcsdscrib` VALUES ('1400', '排江出口线', '出口COD', '70', '排江出口线COD', '120');
 INSERT INTO `dcsdscrib` VALUES ('1402', '一系列生化池', '1号生化池PH', '6', '生化池系列1(1号生化池)PH', '9');
+INSERT INTO `dcsdscrib` VALUES ('1403', '排江出口线', '出口NH3-N', '1', '排江出口线NH3-N', '2');
 
 -- ----------------------------
 -- Table structure for `dcshistory`
@@ -373,7 +384,7 @@ CREATE TABLE `dcshistory` (
   `seqno` varchar(255) DEFAULT NULL,
   `value` double DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=104 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=106 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of dcshistory
@@ -481,6 +492,8 @@ INSERT INTO `dcshistory` VALUES ('100', '1系列生化池', '2号生化池PH', '
 INSERT INTO `dcshistory` VALUES ('101', '1系列生化池', '班次', '2011-11-28 13:41:55', '0');
 INSERT INTO `dcshistory` VALUES ('102', '1系列生化池', '班次', '2011-11-28 22:17:11', '0');
 INSERT INTO `dcshistory` VALUES ('103', '1系列生化池', '1号生化池PH', '2011-11-28 22:17:11', '10');
+INSERT INTO `dcshistory` VALUES ('104', '排江出口线', '班次', '2011-12-11 15:53:22', '0');
+INSERT INTO `dcshistory` VALUES ('105', '排江出口线', '出口NH3-N', '2011-12-11 15:53:22', '3');
 
 -- ----------------------------
 -- Table structure for `dss_advice`
@@ -497,12 +510,13 @@ CREATE TABLE `dss_advice` (
   `level` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `FK75158BF323A4A4F1` (`name`)
-) ENGINE=MyISAM AUTO_INCREMENT=864 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=866 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of dss_advice
 -- ----------------------------
-INSERT INTO `dss_advice` VALUES ('863', 'w85.AIRA802', '38.52968', '1、2、4系列排江出口线SS过高 : 增加二沉池污水停留时间;加强预处理;', '          910.647778', '20080102125013', '二沉池水停留时间短;中和处理不完全;', '2');
+INSERT INTO `dss_advice` VALUES ('864', 'w85.AIRA802', '38.52968', '排江出口线SS过高 : 你好222;1;2;4;5;4;', '          910.647778', '20080102125013', '你好你好;11;22;33;55;44;', '2');
+INSERT INTO `dss_advice` VALUES ('865', 'w85.AIRA804', '3.5872424', '排江出口线NH3-N过高 : 减少电石渣投放量;立即上报;', '          910.647778', '20080102125013', '电石渣加的太多;中和错误;', '3');
 
 -- ----------------------------
 -- Table structure for `dss_history`
@@ -519,7 +533,7 @@ CREATE TABLE `dss_history` (
   `name` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `FKA84AB4F923A4A4F1` (`name`)
-) ENGINE=MyISAM AUTO_INCREMENT=797 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=799 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of dss_history
@@ -1320,6 +1334,8 @@ INSERT INTO `dss_history` VALUES ('793', '二沉池水停留时间短;中和处�
 INSERT INTO `dss_history` VALUES ('794', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
 INSERT INTO `dss_history` VALUES ('795', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
 INSERT INTO `dss_history` VALUES ('796', '二沉池水停留时间短;中和处理不完全;', '2', '20080102125013', '          910.647778', '增加二沉池污水停留时间;加强预处理;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('797', '你好你好;11;22;33;55;44;', '2', '20080102125013', '          910.647778', '你好222;1;2;4;5;4;', '38.52968', 'w85.AIRA802');
+INSERT INTO `dss_history` VALUES ('798', '电石渣加的太多;中和错误;', '3', '20080102125013', '          910.647778', '减少电石渣投放量;立即上报;', '3.5872424', 'w85.AIRA804');
 
 -- ----------------------------
 -- Table structure for `errorlog`
@@ -1335,7 +1351,7 @@ CREATE TABLE `errorlog` (
   `error` varchar(255) DEFAULT NULL,
   `sugg` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=42 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of errorlog
@@ -1351,6 +1367,7 @@ INSERT INTO `errorlog` VALUES ('28', '2系列生化池', '3号生化池SS', '过
 INSERT INTO `errorlog` VALUES ('39', '1系列生化池', '1号生化池PH', '过高', '2011-11-28 11:33:26', '11111', '中和池处理不好;', '维修;');
 INSERT INTO `errorlog` VALUES ('40', '1系列生化池', '2号生化池PH', '过高', '2011-11-28 11:34:51', '11111', '中和池处理不好;', '维修;');
 INSERT INTO `errorlog` VALUES ('41', '1系列生化池', '1号生化池PH', '过高', '2011-11-28 22:17:11', '10', '中和池处理不好;酸水的流量增大;酸水的酸度增加;碱液管堵塞;仪表指示不准;', '维修;增加碱液投加量;增加碱液投加量;及时清通，必要时短管清通;用PH试纸实测;');
+INSERT INTO `errorlog` VALUES ('42', '排江出口线', '出口NH3-N', '过高', '2011-12-11 15:53:22', '3', '11;22;33;电石渣加的太多;中和错误;', '1;2;3;减少电石渣投放量;立即上报;');
 
 -- ----------------------------
 -- Table structure for `exceldata`
