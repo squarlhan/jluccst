@@ -299,8 +299,8 @@ public class RuleAction extends ActionSupport {
 			brs.setVerb(reason_verb.get(i).trim());
 			brs.setSugg(sugg.get(i).trim());
 			if (reason_noun.get(i).trim().length() > 0
-					&& reason_verb.get(i).trim().length() > 0
-					&& sugg.get(i).trim().length() > 0) {
+					|| reason_verb.get(i).trim().length() > 0
+					|| sugg.get(i).trim().length() > 0) {
 				breason.add(brs);
 			}
 
