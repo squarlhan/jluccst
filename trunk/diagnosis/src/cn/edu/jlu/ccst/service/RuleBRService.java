@@ -107,6 +107,7 @@ public class RuleBRService {
 			result.put(str, verb);
 		}
 
+		if(result==null||result.size()<1)result=getallnvs();
 		return result;
 	}
 }

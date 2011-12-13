@@ -67,6 +67,7 @@ public class RuleService {
 	public List<Backward> findbyname(String name) {
 		List<Backward> resultlist = new ArrayList();
 		resultlist = ruleServiceImpl.findbyname(name);
+		if(resultlist.size()<1)resultlist=findAll();
 		return resultlist;
 	}
 	public List<BackwardandReason> findreasons(List<BackwardandResult> enters) {

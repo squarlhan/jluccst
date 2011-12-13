@@ -160,7 +160,7 @@ public class DcsDscribAction extends ActionSupport {
 	public String findbyeque(){
 		try {
 			String keyword= new String(eque.getBytes("ISO-8859-1"),"UTF-8");
-			dcsdscriblist = dcsDscribService.findbyeque(keyword);
+			dcsdscriblist = dcsDscribService.findlikename(keyword);
 			System.out.println(dcsdscriblist);
 	} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block

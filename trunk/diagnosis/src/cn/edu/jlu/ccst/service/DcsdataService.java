@@ -201,7 +201,7 @@ public class DcsdataService {
 
 		}
 	
-		if (keyword != null) {
+		if (fliterresults.size()>0) {
 			return fliterresults;
 			}else{
 				return results;

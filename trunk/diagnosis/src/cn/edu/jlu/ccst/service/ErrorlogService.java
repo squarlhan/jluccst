@@ -69,6 +69,7 @@ public class ErrorlogService {
   public List<Errorlog> findbyequipment(String equip){
 	  List<Errorlog> resultlist = new ArrayList();
 		resultlist = errorlogImpl.findbyequipment(equip);
+		if(resultlist.size()<1)resultlist = findAll();
 		return resultlist; 
 	  
   }
