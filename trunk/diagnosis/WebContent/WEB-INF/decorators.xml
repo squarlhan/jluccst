@@ -8,8 +8,8 @@
 		
 		<pattern>/dcs*</pattern>
 		<pattern>/wwdcs*</pattern>
-		<pattern>/monitor*</pattern>
-		<pattern>/interface*</pattern>
+		
+		
 		<pattern>/error*</pattern>
 		<pattern>/bioc*</pattern>
 			<pattern>/dss*</pattern>
@@ -17,6 +17,8 @@
 	</decorator>
 	<decorator name="userlogin" page="logindecorator.jsp">
 		<pattern>/user/userlogin.jsp</pattern>
+		<pattern>/interface*</pattern>
+		<pattern>/monitor*</pattern>
 	</decorator>
 	<decorator name="data" page="datadecorator.jsp">
 		<pattern>/data*</pattern>
@@ -56,8 +58,11 @@
 	<decorator name="user" page="userbrdecorator.jsp">
 	<pattern>/userbr*</pattern>
 	</decorator>
-	<decorator name="dcsdata" page="gydecorator.jsp">
-	<pattern>/dcsdataaction*</pattern>
+	<decorator name="gydata" page="gydecorator.jsp">
+	<pattern>/dcsdataaction!showgongyidata*</pattern>
+	</decorator>
+	<decorator name="dcsdata" page="dcsdecorator.jsp">
+	<pattern>/dcsdataaction!showdcsdata*</pattern>
 	</decorator>
 	
 	<decorator name="panel" page="panel.jsp"/>
