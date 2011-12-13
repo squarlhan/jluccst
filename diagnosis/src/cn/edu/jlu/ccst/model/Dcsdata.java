@@ -21,7 +21,7 @@ public class Dcsdata implements Serializable{
 	private int id;
 	private String equipment;
 	private String item;
-	private double value;
+	private Double value;
 	private boolean isok;
 	public Dcsdata() { 
 		super();

@@ -17,7 +17,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 
    %>  
     
-    <title> 14b</title>
+    <title>14B生活水</title>
     
     
      <script type="text/javascript">
@@ -42,7 +42,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <body>
   <div id="rightmain">
-	  <h2> 14b</h2>
+	  <h2>14B生活水</h2>
 <div id="login">
 <s:form action="dcsdataaction!listsave.action">
 <table width="300" align="center" style="margin-left:30">
@@ -105,14 +105,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 
 
-	<s:hidden   value="14b" name="dcsdatalist[1].equipment" theme="simple" />
-	<s:hidden   value="14b" name="dcsdatalist[2].equipment" theme="simple" />
-	<s:hidden   value="14b" name="dcsdatalist[3].equipment" theme="simple" />
-	<s:hidden   value="14b" name="dcsdatalist[4].equipment" theme="simple" />
-	<s:hidden   value="14b" name="dcsdatalist[5].equipment" theme="simple" />
-	<s:hidden   value="14b" name="dcsdatalist[6].equipment" theme="simple" />
-	<s:hidden   value="14b" name="dcsdatalist[7].equipment" theme="simple" />
-	<s:hidden   value="14b" name="dcsdatalist[0].equipment" theme="simple" />
+	<s:hidden   value="14B生活水" name="dcsdatalist[1].equipment" theme="simple" />
+	<s:hidden   value="14B生活水" name="dcsdatalist[2].equipment" theme="simple" />
+	<s:hidden   value="14B生活水" name="dcsdatalist[3].equipment" theme="simple" />
+	<s:hidden   value="14B生活水" name="dcsdatalist[4].equipment" theme="simple" />
+	<s:hidden   value="14B生活水" name="dcsdatalist[5].equipment" theme="simple" />
+	<s:hidden   value="14B生活水" name="dcsdatalist[6].equipment" theme="simple" />
+	<s:hidden   value="14B生活水" name="dcsdatalist[7].equipment" theme="simple" />
+	<s:hidden   value="14B生活水" name="dcsdatalist[0].equipment" theme="simple" />
 	<s:hidden   value="班次" name="dcsdatalist[0].item" theme="simple" />
 	
 	
