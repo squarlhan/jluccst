@@ -314,7 +314,7 @@ public class RuleAction extends ActionSupport {
 				BackwardandUpper bu = new BackwardandUpper(rule, dd);
 				bus.add(bu);
 				dd.getUppers().add(bu);
-				dcsDscribService.save(dd);
+//				dcsDscribService.save(dd);
 			}
 			rule.setUppers(bus);
 		} else {
@@ -323,7 +323,7 @@ public class RuleAction extends ActionSupport {
 				BackwardandLower bl = new BackwardandLower(rule, dd);
 				bls.add(bl);
 				dd.getLowers().add(bl);
-				dcsDscribService.save(dd);
+//				dcsDscribService.save(dd);
 			}
 			rule.setLowers(bls);
 		}
