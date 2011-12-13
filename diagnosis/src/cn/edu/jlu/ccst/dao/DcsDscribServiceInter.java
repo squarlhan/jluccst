@@ -16,5 +16,5 @@ public interface DcsDscribServiceInter {
 	public DcsDscrib find(int id) ;
 	public void remove(int id);
 	public List<DcsDscrib> findbyeque(String eque);
-
+	public List<DcsDscrib> findlikename(String name);
 }
