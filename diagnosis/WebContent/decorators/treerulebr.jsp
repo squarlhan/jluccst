@@ -43,7 +43,7 @@
 							  </li>
 							  <li class="Closed">中和处理
 							   <ul>
-							      <li class="Child"><a href="//diagnosis/rulebraction!findbynoun?noun=<%=java.net.URLEncoder.encode("染料厂酸水染料厂酸水","UTF-8")%>">染料厂酸水</a></li>
+							      <li class="Child"><a href="/diagnosis/rulebraction!findbynoun?noun=<%=java.net.URLEncoder.encode("染料厂酸水染料厂酸水","UTF-8")%>">染料厂酸水</a></li>
 							      <li class="Child"><a href="/diagnosis/rulebraction!findbynoun?noun=<%=java.net.URLEncoder.encode("电石厂酸水","UTF-8")%>">电石厂酸水</a></li> 
 							       <li class="Child"><a href="/diagnosis/rulebraction!findbynoun?noun=<%=java.net.URLEncoder.encode("铁运489沉淀池出水","UTF-8")%>">铁运489沉淀池出水</a></li>
 							   </ul>
