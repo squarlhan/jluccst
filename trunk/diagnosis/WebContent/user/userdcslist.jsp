@@ -36,11 +36,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
      <div id="rightmain">
 	  <h2>DCS数据</h2>
 	
-  <table bordercolor="#FFFFFF" rules="all"  id="mytable" class="list_table" align="center" width="400" >
+  <table bordercolor="#FFFFFF" id="mytable" class="list_table" align="center" >
 		<tr bgcolor="#4A708B">
-		    <th width = "13%">故障节点</th>
-			<th width = "15%">控制参数</th>
-			<th width = "25%">参数值</th>
+		    <th width = "35%">故障节点</th>
+			<th width = "35%">控制参数</th>
+			<th width = "30%">参数值</th>
 	  </tr>
     <s:iterator id="dcsdata" value="dcsdatalist" status="index1">
      <tr  align="center"  bordercolor="#FFFFFF" bgcolor="<s:if test="#index1.odd == true">#ffffff</s:if><s:else>#EDEDED</s:else>" style="color: Black; ">

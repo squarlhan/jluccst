@@ -120,7 +120,7 @@ background:url(../images/list1.gif) no-repeat 16px 0;
 /***********************************************/			  
 #rightmain{
 float:left;
-width:780px;
+width:800px;
 margin-left:10px;
 padding-left:10px;
 }
@@ -131,7 +131,7 @@ line-height:30px;
 font-family:"Times New Roman", Times, serif;
 font-size:14px;
 border-bottom:1px solid #a2a2a2;
-padding-left:30px;
+padding-left:20px;
 color:#646464;
 background:url(../images/list2.gif) no-repeat 10px 6px;
 }
@@ -175,7 +175,7 @@ border:0;
 
 .list_table{
 width:750px;
-margin-left:15px;
+margin-left:5px;
 text-align:center;
 border-left:1px solid #999999;
 border-top:1px solid #999999;
