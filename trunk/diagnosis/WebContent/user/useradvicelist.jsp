@@ -36,7 +36,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <body>
 
      <div id="rightmain">
-	  <h2>工艺错误日志</h2>
+	  <h2>预警日志</h2>
 	
      
  

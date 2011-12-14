@@ -14,11 +14,11 @@
           <!--<tr align="center"><td><li><a href="/diagnosis/userruleadd.jsp">录入规则</a></li></td></tr>  -->
          <!-- <tr align="center"><td><li><a href="/diagnosis/ruleaction!getall.action">规则维护</a></li></td></tr>
            <tr align="center"><td><li><a href="/diagnosis/dcsdscribaction.action">描述维护</a></li></td></tr>-->
-          <tr align="center"><td><li><a href="/diagnosis/biocpool490/biocpool1.jsp">数据录入</a></li></td></tr>
-         <tr align="center"><td><li><a href="/diagnosis/monitoraction.action">DCS设备推演</a></li></td></tr>
-         <tr align="center"><td><li><a href="/diagnosis/dcsdataaction!showdcsdata.action">DCS数据</a></li></td></tr>
-         <tr align="center"><td><li><a href="/diagnosis/interfaceaction.action">工艺接口</a></li></td></tr>
-         <tr align="center"><td><li><a href="/diagnosis/dcsdataaction!showgongyidata.action">工艺数据</a></li></td></tr>
+          <tr align="center"><td><li><a href="/diagnosis/biocpool490/biocpool1.jsp">手工数据录入</a></li></td></tr>
+         <tr align="center"><td><li><a href="/diagnosis/monitoraction.action">手工数据推理</a></li></td></tr>
+         <tr align="center"><td><li><a href="/diagnosis/dcsdataaction!showdcsdata.action">手工数据查询</a></li></td></tr>
+         <tr align="center"><td><li><a href="/diagnosis/interfaceaction.action">预警数据推理</a></li></td></tr>
+         <tr align="center"><td><li><a href="/diagnosis/dcsdataaction!showgongyidata.action">预警数据查询</a></li></td></tr>
          <!-- <tr align="center"><td><li><a href="/diagnosis/user/usernet.jsp">系统自学</a></li></td></tr> -->
          <tr align="center"><td><li><a href="/diagnosis/userbraction.action">智能诊断</a></li></td></tr>
           <tr align="center"><td><li><a href="/diagnosis/user/usershow.jsp">个人信息</a></li></td></tr>

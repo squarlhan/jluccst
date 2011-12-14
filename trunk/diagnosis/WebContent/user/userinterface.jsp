@@ -75,7 +75,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </table>
    
    <div align="center">
-      <input name="button" type=button onClick="window.location.href('dsshistoryaction.action')" value="故障日志">
+      <input name="button" type=button onClick="window.location.href('dsshistoryaction.action')" value="预警日志查看">
       </div> 
   </body>
 </html>

@@ -49,7 +49,7 @@
 		<s:form action="ruleaction">
 			<table width="500" align="center" >
 			    <tr>
-					<td align = "right">故障设备现象：</td>
+					<td align = "right">水质参数报警现象：</td>
 					<td>
 					    <div class="nobr">
 					    <s:doubleselect theme="simple" name = "result.nouns" list="#session.map.keySet()"  
