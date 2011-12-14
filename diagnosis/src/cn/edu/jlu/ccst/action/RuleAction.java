@@ -307,26 +307,6 @@ public class RuleAction extends ActionSupport {
 		}
 		rule.setReasons(breason);
 		rule.setResults(bresult);
-//		ruleService.save(rule);
-		if (resultv_value == 0) {
-			List<BackwardandUpper> bus = new ArrayList();
-			for (DcsDscrib dd : dcslist) {
-				BackwardandUpper bu = new BackwardandUpper(rule, dd);
-				bus.add(bu);
-				dd.getUppers().add(bu);
-//				dcsDscribService.save(dd);
-			}
-			rule.setUppers(bus);
-		} else {
-			List<BackwardandLower> bls = new ArrayList();
-			for (DcsDscrib dd : dcslist) {
-				BackwardandLower bl = new BackwardandLower(rule, dd);
-				bls.add(bl);
-				dd.getLowers().add(bl);
-//				dcsDscribService.save(dd);
-			}
-			rule.setLowers(bls);
-		}
 
 		ruleService.save(rule);
 		namelist = dcsDscribService.findallname();

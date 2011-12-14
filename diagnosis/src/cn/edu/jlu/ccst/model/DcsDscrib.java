@@ -35,10 +35,7 @@ public class DcsDscrib implements Serializable{
 	private String name;
 	private double upper;
 	private double lower;
-	@OneToMany(mappedBy = "did", cascade = CascadeType.ALL, fetch = FetchType.LAZY, targetEntity = BackwardandUpper.class) 
-	private List<BackwardandUpper> uppers= new ArrayList();
-	@OneToMany(mappedBy = "did", cascade = CascadeType.ALL, fetch = FetchType.LAZY, targetEntity = BackwardandLower.class) 
-	private List<BackwardandLower> lowers= new ArrayList();
+	
 	public int getDid() {
 		return did;
 	}
@@ -75,18 +72,7 @@ public class DcsDscrib implements Serializable{
 	public void setLower(double lower) {
 		this.lower = lower;
 	}
-	public List<BackwardandUpper> getUppers() {
-		return uppers;
-	}
-	public void setUppers(List<BackwardandUpper> uppers) {
-		this.uppers = uppers;
-	}
-	public List<BackwardandLower> getLowers() {
-		return lowers;
-	}
-	public void setLowers(List<BackwardandLower> lowers) {
-		this.lowers = lowers;
-	}
+
 	public DcsDscrib(int did, String item, String eque, String name,
 			double upper, double lower) {
 		super();

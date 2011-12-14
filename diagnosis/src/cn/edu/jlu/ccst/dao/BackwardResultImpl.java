@@ -8,10 +8,8 @@ import javax.persistence.Query;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import cn.edu.jlu.ccst.model.BackwardandLower;
 import cn.edu.jlu.ccst.model.BackwardandResult;
 import cn.edu.jlu.ccst.model.User;
-import cn.edu.jlu.ccst.dao.BackwardLowerInter;
 
 @Component("backwardResultImpl")
 @Transactional
