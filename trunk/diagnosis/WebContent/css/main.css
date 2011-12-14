@@ -16,11 +16,11 @@ list-style:none;
 }
 
 body{
-width:1024px;
+width:1004px;
 margin:auto;
 }
 #container{
-width:1024px;
+width:1004px;
 margin:auto;
 border-right:1px solid #A7A7A7;
 border-left:1px solid #A7A7A7;
@@ -31,7 +31,7 @@ background:#363636;
 }
 /***********************页面顶部样式****************************************/
 #header{
-height:330px;
+height:200px;
 background:url(../images/header.jpg) no-repeat left top;
 border-bottom:1px solid #999999;
 }
