@@ -50,17 +50,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       </div>-->
   <table bordercolor="#FFFFFF" rules="all"  id="mytable" class="list_table" align="center" width="100%" >
 		<tr bgcolor="#4A708B">
-		     <th width = "10%">排号</th>
+		    <!--<th width = "10%">ID</th>-->
 		    <th width = "40%">规则对应故障节点</th>
 			<th width = "30%">规则对应控制参数</th>		
-			<th width = "20%">相关操作</th>
+			<th width = "30%">相关操作</th>
 	  </tr>
     <s:iterator id="backs" value="backlist" status="index1">
      <tr  align="center"  bordercolor="#FFFFFF" bgcolor="<s:if test="#index1.odd == true">#ffffff</s:if><s:else>#EDEDED</s:else>" style="color: Black; ">
-       <td><s:a href="ruleaction!godetail?rule.bid=%{#backs.bid}" ><s:property value="bid"/></s:a></td>
+       <!--<td><s:a href="ruleaction!godetail?rule.bid=%{#backs.bid}" ><s:property value="bid"/></s:a></td>-->
        <td><s:property value="name"/>&nbsp;</td>
        <td><s:property value="memo"/>&nbsp;</td>       
         <td>
+            <s:a href="ruleaction!godetail?rule.bid=%{#backs.bid}">修改</s:a>
+            &nbsp;&nbsp;
 			<s:a href="ruleaction!delRule?rule.bid=%{#backs.bid}" onclick="return confirmDel();">删除</s:a>
 	   </td>
      </tr>
