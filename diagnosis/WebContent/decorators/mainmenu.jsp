@@ -17,8 +17,10 @@
           <tr align="center"><td><li><a href="/diagnosis/biocpool490/biocpool1.jsp">手工数据录入</a></li></td></tr>
          <tr align="center"><td><li><a href="/diagnosis/monitoraction.action">手工数据推理</a></li></td></tr>
          <tr align="center"><td><li><a href="/diagnosis/dcsdataaction!showdcsdata.action">手工数据查询</a></li></td></tr>
+         <tr align="center"><td><li><a href="/diagnosis/errorlogaction.action">手工报警日志</a></li></td></tr>
          <tr align="center"><td><li><a href="/diagnosis/interfaceaction.action">预警数据推理</a></li></td></tr>
          <tr align="center"><td><li><a href="/diagnosis/dcsdataaction!showgongyidata.action">预警数据查询</a></li></td></tr>
+         <tr align="center"><td><li><a href="/diagnosis/dsshistoryaction.action">预警日志查询</a></li></td></tr>
          <!-- <tr align="center"><td><li><a href="/diagnosis/user/usernet.jsp">系统自学</a></li></td></tr> -->
          <tr align="center"><td><li><a href="/diagnosis/userbraction.action">智能诊断</a></li></td></tr>
           <tr align="center"><td><li><a href="/diagnosis/user/usershow.jsp">个人信息</a></li></td></tr>
