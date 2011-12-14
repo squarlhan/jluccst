@@ -19,6 +19,7 @@
 		<pattern>/user/userlogin.jsp</pattern>
 		<pattern>/interface*</pattern>
 		<pattern>/monitor*</pattern>
+		<pattern>/useraction!logoff.action</pattern>
 	</decorator>
 	<decorator name="data" page="datadecorator.jsp">
 	
@@ -46,7 +47,7 @@
 		<pattern>/rule*</pattern>
 	</decorator>
 	<decorator name="prof1" page="profdecorator1.jsp">
-	
+	    <pattern>/profaction!proflogoff.action</pattern>
 		<pattern>/prof/proflogin.jsp</pattern>
 		<pattern>/profaction!exitsprof.action</pattern>
 		<pattern>/dcsdscribaction!goadd.action</pattern>
