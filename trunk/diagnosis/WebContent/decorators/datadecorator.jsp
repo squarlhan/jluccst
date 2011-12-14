@@ -62,7 +62,7 @@
 			<tr>
 				<td id="footer">
 					<div id="footer">
-						<p>使用单位: 中国石油吉林化工公司污水处理厂</p>
+						<p>使用单位: 中国石油吉林石化公司污水处理厂</p>
 						<p>COPYRIGHT&copy;2011 CNPC ALL RIGHT RESERVED</p>
 					</div>
 					<div id="banner"></div>
