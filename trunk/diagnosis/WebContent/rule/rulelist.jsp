@@ -47,9 +47,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	{
     		var tr = mytable.insertRow(1);
     		if(a%2==1){
-    			tr.bgcolor="#ffffff";
+    			tr.style.backgroundColor="#ffffff";
     		}else{
-    			tr.bgcolor="#EDEDED";
+    			tr.style.backgroundColor="#EDEDED";
     		}
     	    var td1 = tr.insertCell(-1);
     	    var td2 = tr.insertCell(-1);
