@@ -174,13 +174,15 @@ public class AutoJob {
 						String sugg = "";
 						if (houjian != null && houjian.size() > 0) {
 							for (BackwardandReason hj : houjian) {
-								error = error + hj.getNouns() + hj.getVerb()
-										+ ";";
+								if(hj.getNouns().trim().length()>0 && hj.getVerb().trim().length()>0){
+									error = error + hj.getNouns() + hj.getVerb()	+ ";";
+								}
+								
 								sugg = sugg + hj.getSugg() + ";";
 							}
 						}
 						da.setError(error);
-						da.setSugg(br.getNouns()+br.getVerb()+" : "+sugg);
+						da.setSugg("报警现象： "+br.getNouns()+br.getVerb()+"\r\n报警原因： "+error+"\r\n建议： "+sugg);
 						dh.setError(error);
 						dh.setSugg(sugg);
 						dss_adviceService.save(da);
