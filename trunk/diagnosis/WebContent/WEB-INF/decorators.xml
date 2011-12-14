@@ -21,6 +21,8 @@
 		<pattern>/monitor*</pattern>
 	</decorator>
 	<decorator name="data" page="datadecorator.jsp">
+	
+	    <pattern>/useraction.action*</pattern>
 		<pattern>/data*</pattern>
 		<pattern>/biocpool490/*</pattern>
 	</decorator>
