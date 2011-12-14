@@ -26,7 +26,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	
     	//下面开始分页
    	 
-        var perpage = 10;
+        var perpage = 13;
         var names = new Array(
     			<s:iterator id="result" value="backlist">
     				"<s:property value='#result.name'/>",
