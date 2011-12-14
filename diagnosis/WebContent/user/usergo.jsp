@@ -43,15 +43,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <table bordercolor="#4A708B" rules="all"  id="mytable" class="list_table" align="center" width="100%">
 		<tr bgcolor="#4A708B">
-		    <th>故障原因</th>
-			<th>相关建议</th>
+		    <th width="35%">报警原因</th>
+			<th width="65%">相关建议</th>
 			
 	  </tr>
     <s:iterator id="reasons" value="reasonlist" status="index1">
        
-     <tr  align="center"  bordercolor="#000000" rules="all" bgcolor="<s:if test="#index1.odd == true">#ffffff</s:if><s:else>#EDEDED</s:else>">
-       <td><s:property value="nouns"/><s:property value="verb"/></td>
-       <td><s:property value="sugg"/></td>
+     <tr  align="left"  bordercolor="#000000" rules="all" bgcolor="<s:if test="#index1.odd == true">#ffffff</s:if><s:else>#EDEDED</s:else>">
+       <td  align="left"><s:property value="nouns"/><s:property value="verb"/></td>
+       <td  align="left"><s:property value="sugg"/></td>
       
      
      </tr>
