@@ -101,9 +101,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			td1.align = "left";
 			td2.align = "left";
 			td3.align = "left";
-    	    td1.innerHTML = eques[a];
-    	    td2.innerHTML = items[a];
-    	    td3.innerHTML = names[a];
+    	    td1.innerHTML = eques[a]+"&nbsp;";;
+    	    td2.innerHTML = items[a]+"&nbsp;";;
+    	    td3.innerHTML = names[a]+"&nbsp;";;
     	    td4.appendChild(lower);
     	    td5.appendChild(upper);
     	    td6.appendChild(ac);

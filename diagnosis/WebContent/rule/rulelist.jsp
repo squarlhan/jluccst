@@ -65,8 +65,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			ad.onclick=confirmDel;
 			td1.align = "left";
 			td2.align = "left";
-    	    td1.innerHTML = names[a];
-    	    td2.innerHTML = memos[a];
+    	    td1.innerHTML = names[a]+"&nbsp;";
+    	    td2.innerHTML = memos[a]+"&nbsp;";
     	    td3.appendChild(ac);
     	    td3.appendChild(ad);
     		}
