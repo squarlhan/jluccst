@@ -78,7 +78,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	<s:textfield  readonly="true" value="碱度" name="dcsdatalist[3].item" theme="simple" style="background:transparent;border:0px"/></td>
 	<td align="center"><s:textfield  name="dcsdatalist[3].value" theme="simple"
-	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td>碱度单位</td>
+	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td>mmol/l</td>
 	
 	</tr>
 	
@@ -87,7 +87,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	<s:textfield  readonly="true" value="BOD5" name="dcsdatalist[4].item" theme="simple" style="background:transparent;border:0px"/></td>
 	<td align="center"><s:textfield name="dcsdatalist[4].value" theme="simple"
-	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td>BOD5单位</td>
+	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td>mg/l</td>
 		</tr>
 	
 	<tr>
@@ -122,12 +122,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<tr>
 	<td align="right"><s:textfield  readonly="true" value="硝态氮" name="dcsdatalist[7].item" theme="simple" style="background:transparent;border:0px"/></td>
 	<td align="center"><s:textfield name="dcsdatalist[7].value" theme="simple"
-	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td>硝态氮单位</td>
+	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td>mg/l</td>
 		</tr>
 		<tr>
 	<td align="right"><s:textfield  readonly="true" value="NO-N" name="dcsdatalist[8].item" theme="simple" style="background:transparent;border:0px"/></td>
 	<td align="center"><s:textfield name="dcsdatalist[8].value" theme="simple"
-	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td>NO-N单位</td>
+	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td>mg/l</td>
 		</tr>
 	
 	
