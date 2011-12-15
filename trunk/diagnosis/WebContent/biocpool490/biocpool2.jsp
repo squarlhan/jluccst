@@ -72,11 +72,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<td align="right">
 	<s:textfield  readonly="true" value="3号生化池COD" name="dcsdatalist[3].item" theme="simple" style="background:transparent;border:0px"/></td>
 	<td align="center"><s:textfield name="dcsdatalist[3].value" theme="simple"
-	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td>PH</td>
+	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td>mgl/l</td>
 	<td align="right">
 	<s:textfield  readonly="true" value="4号生化池COD" name="dcsdatalist[4].item" theme="simple" style="background:transparent;border:0px"/></td>
 	<td align="center"><s:textfield name="dcsdatalist[4].value" theme="simple"
-	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td>PH</td>
+	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td>mg/l</td>
 	</tr>
 	
 	<tr>
@@ -84,12 +84,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	<s:textfield  readonly="true" value="3号生化池碱度" name="dcsdatalist[5].item" theme="simple" style="background:transparent;border:0px"/></td>
 	<td align="center"><s:textfield  name="dcsdatalist[5].value" theme="simple"
-	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td>PH</td>
+	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td>mmol/l</td>
 	<td align="right">
 	
 	<s:textfield  readonly="true" value="4号生化池碱度" name="dcsdatalist[6].item" theme="simple" style="background:transparent;border:0px"/></td>
 	<td align="center"><s:textfield  name="dcsdatalist[6].value" theme="simple"
-	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td>PH</td>
+	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td>mmol/l</td>
 	</tr>
 	
 	<tr>
@@ -116,10 +116,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<tr>
 	<td align="right"><s:textfield  readonly="true" value="3号生化池NH3-N" name="dcsdatalist[11].item" theme="simple" style="background:transparent;border:0px"/></td>
 	<td align="center"><s:textfield name="dcsdatalist[11].value" theme="simple"
-	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td>PH</td>
+	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td>mg/l</td>
 	<td align="right"><s:textfield  readonly="true" value="4号生化池NH3-N" name="dcsdatalist[12].item" theme="simple" style="background:transparent;border:0px"/></td>
 	<td align="center"><s:textfield  name="dcsdatalist[12].value" theme="simple"
-	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td>PH</td>
+	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td>mg/l</td>
 	</tr>
 
 	<tr>
