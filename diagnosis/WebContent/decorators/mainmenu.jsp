@@ -18,6 +18,9 @@
          <tr align="center"><td><li><a href="/diagnosis/monitoraction.action">手工数据推理</a></li></td></tr>
          <tr align="center"><td><li><a href="/diagnosis/dcsdataaction!showdcsdata.action">手工数据查询</a></li></td></tr>
          <tr align="center"><td><li><a href="/diagnosis/errorlogaction.action">手工报警日志</a></li></td></tr>
+         <!--<tr align="center"><td><li><a href="#">DCS数据推理</a></li></td></tr>
+         <tr align="center"><td><li><a href="#">DCS数据查询</a></li></td></tr>
+         <tr align="center"><td><li><a href="#">DCS日志查询</a></li></td></tr>-->
          <tr align="center"><td><li><a href="/diagnosis/interfaceaction.action">预警数据推理</a></li></td></tr>
          <tr align="center"><td><li><a href="/diagnosis/dcsdataaction!showgongyidata.action">预警数据查询</a></li></td></tr>
          <tr align="center"><td><li><a href="/diagnosis/dsshistoryaction.action">预警日志查询</a></li></td></tr>
