@@ -37,7 +37,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-    
+    <div id="rightmain">
   <h2>超标信息页面</h2>
   <table bordercolor="#4A708B" rules="all"  id="mytable" class="list_table" align="center" width="100%">
 		<tr bgcolor="#4A708B">
@@ -47,7 +47,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  </tr>
     <s:iterator id="bandr" value="backwardandResult" status="index1">
        
-     <tr  align="left"  bordercolor="#000000" rules="all" bgcolor="<s:if test="#index1.odd == true">#ffffff</s:if><s:else>#EDEDED</s:else>">
+     <tr  align="left"  bordercolor="#000000" bgcolor="<s:if test="#index1.odd == true">#ffffff</s:if><s:else>#EDEDED</s:else>">
        <td><s:property value="memo"/></td><td><s:property value="nouns"/><s:property value="verb"/></td>
       
       
@@ -65,7 +65,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  </tr>
     <s:iterator id="reasons" value="reasonlist" status="index1">
        
-     <tr  align="left"  bordercolor="#000000" rules="all" bgcolor="<s:if test="#index1.odd == true">#ffffff</s:if><s:else>#EDEDED</s:else>">
+     <tr  align="left"  bordercolor="#000000" bgcolor="<s:if test="#index1.odd == true">#ffffff</s:if><s:else>#EDEDED</s:else>">
        <td><s:property value="nouns"/><s:property value="verb"/>&nbsp;</td>
        <td><s:property value="sugg"/>&nbsp;</td>
       
@@ -77,5 +77,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    <div align="center">
       <input name="button" type=button onClick="window.location.href('dsshistoryaction.action')" value="预警日志查看">
       </div> 
+    </div>  
   </body>
 </html>

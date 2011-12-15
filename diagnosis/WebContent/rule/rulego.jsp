@@ -37,7 +37,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-
+<div id="rightmain">
      <h2><s:property value="result.nouns+result.verb" /></h2>
   
   <table bordercolor="#4A708B" rules="all"  id="mytable" class="list_table" align="center" width="100%">
@@ -48,7 +48,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  </tr>
     <s:iterator id="reasons" value="reasonlist" status="index1">
        
-     <tr  align="left"  bordercolor="#000000" rules="all" bgcolor="<s:if test="#index1.odd == true">#ffffff</s:if><s:else>#EDEDED</s:else>">
+     <tr  align="left"  bordercolor="#000000" bgcolor="<s:if test="#index1.odd == true">#ffffff</s:if><s:else>#EDEDED</s:else>">
        <td  align="left"><s:property value="nouns"/><s:property value="verb"/></td>
        <td  align="left"><s:property value="sugg"/></td>
       
@@ -60,5 +60,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <div align="center">
       <input name="button" type=button onClick="window.location.href('rulebraction.action')" value="Íê³É·µ»Ø">
       </div>
+ </div>
   </body>
 </html>

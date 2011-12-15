@@ -6,7 +6,7 @@
 			+ path + "/";
 %>
 <%@taglib prefix="s" uri="/struts-tags"%>
-<%@ taglib prefix="sx" uri="/struts-dojo-tags"%>
+<%@taglib prefix="sx" uri="/struts-dojo-tags"%>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
@@ -41,7 +41,6 @@
 
 		var td1 = tr.insertCell();
 		var td2 = tr.insertCell();
-		var td3 = tr.insertCell();
 		
 
 		var textfield1 = document.createElement("input");
