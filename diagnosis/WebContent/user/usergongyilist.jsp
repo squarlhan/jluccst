@@ -38,7 +38,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
   <table bordercolor="#FFFFFF" rules="all"  id="mytable" class="list_table" align="center">
 		<tr bgcolor="#4A708B">
-		    <th width = "35%">故障节点</th>
+		    <th width = "35%">预警节点</th>
 			<th width = "35%">控制参数</th>
 			<th width = "30%">参数值</th>
 	  </tr>

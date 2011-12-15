@@ -12,7 +12,7 @@ response.setHeader("Expires","0");//防止被proxy
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title><decorator:title default="吉化污水处理过程模拟与优化系统" /></title>
+<title><decorator:title default="污水处理工艺专家决策支持系统" /></title>
 
 <link href="/diagnosis/css/css.css" rel="stylesheet" type="text/css" />
 <link href="/diagnosis/css/main.css" rel="stylesheet" type="text/css" />
