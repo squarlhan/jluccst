@@ -238,7 +238,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <body>
 
      <div id="rightmain">
-	  <h2>数据描述维护</h2>
+	  <h2>参数描述维护</h2>
 	
     <!-- 
  <div align="right">
