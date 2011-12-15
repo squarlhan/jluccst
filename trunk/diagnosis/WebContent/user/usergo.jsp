@@ -40,7 +40,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <body>
 
     
-  
+  <h2><s:property value="result.nouns"/><s:property value="result.verb"/></h2>
   <table bordercolor="#4A708B" rules="all"  id="mytable" class="list_table" align="center" width="100%">
 		<tr bgcolor="#4A708B">
 		    <th width="35%">±¨¾¯Ô­Òò</th>
