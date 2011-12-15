@@ -16,7 +16,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    
     <base href="<%=basePath%>">
     
-    <title>数据描述维护</title>
+    <title>参数描述维护</title>
     <script type="text/javascript">
     	function confirmDel(){
 			return confirm("确定删除？");	

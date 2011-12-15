@@ -19,7 +19,7 @@
    %>  
 <base href="<%=basePath%>">
 
-<title>规则描述录入</title>
+<title>参数描述录入</title>
 <sx:head />
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
@@ -35,7 +35,7 @@
 
 <body>
 	<div id="rightmain">
-		<h2>规则描述录入</h2>
+		<h2>参数描述录入</h2>
 		
 		<div id="login">
 			<s:form action="dcsdscribaction!addDescrib.action">

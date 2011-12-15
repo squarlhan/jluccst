@@ -13,8 +13,8 @@
     <table align="center" width="100%" id="nav">
           <tr align="center"><td><li><a href="/diagnosis/ruleaction!justgo.action">录入规则</a></li></td></tr>
           <tr align="center"><td><li><a href="/diagnosis/ruleaction!getall.action">规则维护</a></li></td></tr>
-          <tr align="center"><td><li><a href="/diagnosis/dcsdscribaction!goadd.action">录入描述</a></li></td></tr>
-           <tr align="center"><td><li><a href="/diagnosis/dcsdscribaction.action">描述维护</a></li></td></tr>
+          <tr align="center"><td><li><a href="/diagnosis/dcsdscribaction!goadd.action">录入参数</a></li></td></tr>
+           <tr align="center"><td><li><a href="/diagnosis/dcsdscribaction.action">参数维护</a></li></td></tr>
             <tr align="center"><td><li><a href="/diagnosis/rulebraction.action">智能诊断</a></li></td></tr>
            <tr align="center"><td><li><a href="/diagnosis/prof/profshow.jsp">个人信息</a></li></td></tr>
            <tr align="center"><td><li><a href="/diagnosis/user/userlogin.jsp">用户登录</a></li></td></tr>
