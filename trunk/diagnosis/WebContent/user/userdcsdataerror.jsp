@@ -21,7 +21,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    %>  
     <base href="<%=basePath%>">
     
-    <title>结果页面</title>
+    <title>超标信息页面</title>
      
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -37,17 +37,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-    
+    <div id="rightmain">
   <h2>超标信息页面</h2>
   <table bordercolor="#4A708B" rules="all"  id="mytable" class="list_table" align="center" width="100%">
 		<tr bgcolor="#4A708B">
-		    <th style="width:50%">故障设备</th>
-			<th style="width:50%">故障现象</th>
+		    <th style="width:50%">报警节点</th>
+			<th style="width:50%">报警现象</th>
 			
 	  </tr>
     <s:iterator id="bandr" value="backwardandResult" status="index1">
        
-     <tr  align="left"  bordercolor="#000000" rules="all" bgcolor="<s:if test="#index1.odd == true">#ffffff</s:if><s:else>#EDEDED</s:else>">
+     <tr  align="left"  bordercolor="#000000" bgcolor="<s:if test="#index1.odd == true">#ffffff</s:if><s:else>#EDEDED</s:else>">
        <td><s:property value="memo"/></td><td><s:property value="nouns"/><s:property value="verb"/></td>
       
       
@@ -58,13 +58,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       
   <table bordercolor="#4A708B" rules="all"  id="mytable" class="list_table" align="center" width="100%">
 		<tr bgcolor="#4A708B">
-		    <th style="width:50%">故障原因</th>
+		    <th style="width:50%">报警原因</th>
 			<th style="width:50%">相关建议</th>
 			
 	  </tr>
     <s:iterator id="reasons" value="reasonlist" status="index1">
        
-     <tr  align="left"  bordercolor="#000000" rules="all" bgcolor="<s:if test="#index1.odd == true">#ffffff</s:if><s:else>#EDEDED</s:else>">
+     <tr  align="left"  bordercolor="#000000" bgcolor="<s:if test="#index1.odd == true">#ffffff</s:if><s:else>#EDEDED</s:else>">
        <td><s:property value="nouns"/><s:property value="verb"/></td>
        <td><s:property value="sugg"/></td>
       
@@ -75,5 +75,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <div align="center">
       <input name="button" type=button onClick="window.location.href('errorlogaction.action')" value="故障日志">
       </div>
+ </div>
   </body>
 </html>
