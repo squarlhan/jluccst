@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 
 import cn.edu.jlu.ccst.model.BackwardandReason;
 import cn.edu.jlu.ccst.model.BackwardandResult;
+import cn.edu.jlu.ccst.service.AutoJob;
 import cn.edu.jlu.ccst.service.DcsDscribService;
 import cn.edu.jlu.ccst.service.RuleService;
 
@@ -27,6 +28,17 @@ public class MonitorAction extends ActionSupport {
 	private DcsDscribService dcsDscribService;
 	private List<BackwardandReason> reasonlist;
 	private RuleService ruleService;
+	private AutoJob autoJob;
+
+	
+	
+	public AutoJob getAutoJob() {
+		return autoJob;
+	}
+	@Resource
+	public void setAutoJob(AutoJob autoJob) {
+		this.autoJob = autoJob;
+	}
 
 	public List<BackwardandResult> getBackwardandResult() {
 		return backwardandResult;
@@ -71,8 +83,12 @@ public class MonitorAction extends ActionSupport {
 		}else{
 			return "OK";
 		}
-		
 
+	}
+	
+	public String waitingforU(){
+		autoJob.porcessdss();
+		return null;
 	}
 
 }
