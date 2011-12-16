@@ -181,8 +181,15 @@ public class AutoJob {
 								sugg = sugg + hj.getSugg() + ";";
 							}
 						}
+						String all = "报警现象： "+br.getNouns()+br.getVerb();
+						if(error.trim().length()>0){
+							all = all + "\r\n报警原因： "+error;
+						}
+						if(error.trim().length()>0){
+							all = all + "\r\n建议： "+sugg;
+						}
 						da.setError(error);
-						da.setSugg("报警现象： "+br.getNouns()+br.getVerb()+"\r\n报警原因： "+error+"\r\n建议： "+sugg);
+						da.setSugg(all);
 						dh.setError(error);
 						dh.setSugg(sugg);
 						dss_adviceService.save(da);
