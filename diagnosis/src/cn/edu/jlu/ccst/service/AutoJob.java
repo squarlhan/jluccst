@@ -198,6 +198,7 @@ public class AutoJob {
 			Dss_advice da = new Dss_advice();
 //			Dss_history dh = new Dss_history();
 			da.setSugg("一切正常");
+			da.setSimu_time(datatime);
 //			dh.setSugg("一切正常");
 			dss_adviceService.save(da);
 //			dss_historyService.save(dh);
