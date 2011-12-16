@@ -171,9 +171,9 @@ public class UserAction extends ActionSupport {
 	
 	public String execute() {
 		User flag1;
-		namelist=dcsDscribService.findallname();
-		backwardandResultlist = rulebrService.findAll();
-		backlist = ruleService.findAll();
+//		namelist=dcsDscribService.findallname();
+//		backwardandResultlist = rulebrService.findAll();
+//		backlist = ruleService.findAll();
 		flag1=userService.exits(user);
 
 		if(flag1==null){
@@ -184,10 +184,10 @@ public class UserAction extends ActionSupport {
 	        Map session = actionContext.getSession();
 	        session.put("us", flag1);
 	        
-	        nvs = rulebrService.getallnvs();
-			ActionContext actionContext1 = ActionContext.getContext();
-	        Map session1 = actionContext1.getSession();
-	        session1.put("map", nvs);
+//	        nvs = rulebrService.getallnvs();
+//			ActionContext actionContext1 = ActionContext.getContext();
+//	        Map session1 = actionContext1.getSession();
+//	        session1.put("map", nvs);
 	        
 	        
 	        
