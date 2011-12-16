@@ -17,6 +17,7 @@ import cn.edu.jlu.ccst.model.Dss_advice;
 import cn.edu.jlu.ccst.model.Dss_history;
 import cn.edu.jlu.ccst.model.Init_Predict;
 import cn.edu.jlu.ccst.model.Pre_dss;
+import cn.edu.jlu.ccst.service.AutoJob;
 import cn.edu.jlu.ccst.service.DcsDscribService;
 import cn.edu.jlu.ccst.service.Dss_adviceService;
 import cn.edu.jlu.ccst.service.Dss_historyService;
@@ -45,6 +46,17 @@ public class InterfaceAction extends ActionSupport {
 	private List<Dss_history> dss_history;
 	private List<BackwardandReason> reasonlist1;
 	private Dss_historyService dss_historyService;
+    private AutoJob autoJob;
+
+	
+	
+	public AutoJob getAutoJob() {
+		return autoJob;
+	}
+	@Resource
+	public void setAutoJob(AutoJob autoJob) {
+		this.autoJob = autoJob;
+	}
 
 	public List<Dss_history> getDss_history() {
 		return dss_history;
@@ -220,5 +232,8 @@ public class InterfaceAction extends ActionSupport {
 	}
 
 	// @Scheduled(fixedDelay = 1000)
-
+	public String waitingforU(){
+		autoJob.porcessdss();
+		return "done";
+	}
 }

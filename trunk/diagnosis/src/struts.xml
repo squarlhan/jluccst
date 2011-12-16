@@ -66,6 +66,7 @@
 		<action name="interfaceaction" class="interfaceAction">
 			<result name="go">user/userinterface.jsp</result>
 			<result name="OK">user/userinterfaceok.jsp</result>
+			<result name="done">done.jsp</result>
 		</action> 
 	   
 		<action name="rulebraction" class="rulebrAction">
