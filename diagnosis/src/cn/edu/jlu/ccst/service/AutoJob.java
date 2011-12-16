@@ -185,7 +185,7 @@ public class AutoJob {
 						if(error.trim().length()>0){
 							all = all + "\r\n报警原因： "+error;
 						}
-						if(error.trim().length()>0){
+						if(sugg.trim().length()>0){
 							all = all + "\r\n建议： "+sugg;
 						}
 						da.setError(error);

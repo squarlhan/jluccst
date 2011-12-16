@@ -35,10 +35,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <s:form action="useraction!alterUser.action">
 <table width="320" align="center" style="margin-left:30">
 	<tr>
-	 <td ><label>
-	   <s:property value="#session.us.username"/>
-	  
-	    </label></td>
+	 
+	 <td >当前用户:</td>
+	   <td ><s:property value="#session.us.username"/></td>
 	  </tr>
 	<tr>
 	 <td align="center"><label>
@@ -46,14 +45,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    </label></td>
 	  </tr>
 	<tr>
-	  <td >当前密码</td>
+	  <td >当前密码:</td>
 	  <td ><label>
 	    <input type="password" name="currentpassword">
 	  </label></td>
 	  </tr>
 	<tr>
 	<tr>
-	  <td >新密码</td>
+	  <td >新密码:</td>
 	  <td ><label>
 	    <input type="password" name="newpassword">
 	  </label></td>
