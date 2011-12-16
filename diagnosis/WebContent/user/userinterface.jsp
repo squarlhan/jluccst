@@ -41,8 +41,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <h2>超标信息页面</h2>
   <table bordercolor="#4A708B" rules="all"  id="mytable" class="list_table" align="center" width="100%">
 		<tr bgcolor="#4A708B">
-		    <th style="width:50%">故障设备</th>
-			<th style="width:50%">故障现象</th>
+		    <th style="width:50%">预警设备</th>
+			<th style="width:50%">预警现象</th>
 			
 	  </tr>
     <s:iterator id="bandr" value="backwardandResult" status="index1">
@@ -59,7 +59,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <table bordercolor="#4A708B" rules="all"  id="mytable" class="list_table" align="center" width="100%">
 		<tr bgcolor="#4A708B">
-		    <th style="width:50%">故障原因</th>
+		    <th style="width:50%">预警原因</th>
 			<th style="width:50%">相关建议</th>
 			
 	  </tr>
