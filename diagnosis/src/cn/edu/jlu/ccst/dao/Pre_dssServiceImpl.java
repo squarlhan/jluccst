@@ -74,7 +74,7 @@ public class Pre_dssServiceImpl implements Pre_dssServiceInter {
   			em.persist(dcsdata);
   			
   		} else {
-  			System.out.println("哈哈哈");// update
+  			
   		  for(Dcsdata dc:dcs){
   	    	 delete(dc);
   	     }

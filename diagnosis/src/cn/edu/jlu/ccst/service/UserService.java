@@ -36,7 +36,7 @@ public User getUser() {
 	}
 
 	public void save(User user) {
-		System.out.println("USER:"+user.getUsername()+" ; "+user.getPassword());
+		//System.out.println("USER:"+user.getUsername()+" ; "+user.getPassword());
 		userServiceImpl.save(user);
 	}
 	

@@ -128,8 +128,7 @@ public void setBackwardandReasonService(
      rule = (Backward) session.get("rule");
 	 for(int i = 0; i <= reason_noun.size() - 1; i++){
 		 BackwardandReason brs = new BackwardandReason();
-		 System.out.println("我是bid"+rule.getBid());
-		    
+		 
 		    brs.setBid(rule);
 			brs.setNouns(reason_noun.get(i).trim());
 			brs.setVerb(reason_verb.get(i).trim());

@@ -86,7 +86,7 @@ public class DcsdataService {
 	}
 
 	public void save(Dcsdata dcsdata) {
-		System.out.println("equipment:" + dcsdata.getEquipment());
+		
 		dcsdataServiceImpl.save(dcsdata);
 	}
 

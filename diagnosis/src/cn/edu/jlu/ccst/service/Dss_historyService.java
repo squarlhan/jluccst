@@ -66,7 +66,7 @@ public class Dss_historyService {
 
 
 	public void save(Dss_history dss_history) {
-		System.out.println("equipment:"+dss_history.getName());
+		
 		dss_historyServiceImpl.save(dss_history);
 	}
 	

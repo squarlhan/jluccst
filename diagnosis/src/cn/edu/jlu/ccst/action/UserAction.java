@@ -331,7 +331,7 @@ public class UserAction extends ActionSupport {
 			if(checkuser()){
 			ActionContext.getContext().getSession().remove("us");
 			
-			System.out.println("注销成功！");
+			
 			return "logoffusersuccess";}
 			else return "unuserlogin";
 		}
@@ -390,7 +390,7 @@ public class UserAction extends ActionSupport {
 				if(checkadmin()){
 				ActionContext.getContext().getSession().remove("ad");
 				
-				System.out.println("注销成功2！");
+				
 				return "logoffadminsuccess";}
 				else return "unadminlogin";
 			}
@@ -449,7 +449,7 @@ public class UserAction extends ActionSupport {
 				if(checkprof()){
 				ActionContext.getContext().getSession().remove("pr");
 				
-				System.out.println("注销成功3！");
+			
 				return "logoffprofsuccess";}
 				else return "unproflogin";
 			}

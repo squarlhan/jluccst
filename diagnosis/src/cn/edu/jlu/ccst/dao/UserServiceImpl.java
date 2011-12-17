@@ -64,16 +64,16 @@ public class UserServiceImpl implements UserServiceInter {
 		Query query = getEntityManager().createQuery("select u FROM User u where u.username =  '"+user.getUsername()+"'");
 		@SuppressWarnings("unchecked")
 		List<User> results= query.getResultList();
-		System.out.println(results);
+	
 		if(results.size()<1)
 			return null;
 		else{
-			System.out.println(((User) results.get(0)).getId());
+			
 			
 			
 			return (User) results.get(0);//User re=em.find(User.class, user);
 		}
-		//System.out.println(user.getId());
+		
 		//return re;
 		//return em.find(User.class, user);
 		
@@ -83,11 +83,11 @@ public class UserServiceImpl implements UserServiceInter {
 		Query query = getEntityManager().createQuery("select u FROM User u where u.username =  '"+user.getUsername()+"' and u.password='"+ user.getPassword()+"'and u.isuser=1");
 		@SuppressWarnings("unchecked")
 		List<User> results= query.getResultList();
-		System.out.println(results);
+	
 		if(results.size()<1)
 			return null;
 		else{
-			System.out.println(((User) results.get(0)).getId());
+			
 			
 			
 			return (User) results.get(0);
@@ -100,11 +100,11 @@ public class UserServiceImpl implements UserServiceInter {
 		Query query = getEntityManager().createQuery("select u FROM User u where u.username =  '"+user.getUsername()+"' and u.password='"+ user.getPassword()+"'and u.isadmin=1");
 		@SuppressWarnings("unchecked")
 		List<User> results= query.getResultList();
-		System.out.println(results);
+	
 		if(results.size()<1)
 			return null;
 		else{
-			System.out.println(((User) results.get(0)).getId());
+		
 			
 			
 			return (User) results.get(0);
@@ -117,11 +117,11 @@ public class UserServiceImpl implements UserServiceInter {
 		Query query = getEntityManager().createQuery("select u FROM User u where u.username =  '"+user.getUsername()+"' and u.password='"+ user.getPassword()+"'and u.isprof=1");
 		@SuppressWarnings("unchecked")
 		List<User> results= query.getResultList();
-		System.out.println(results);
+		
 		if(results.size()<1)
 			return null;
 		else{
-			System.out.println(((User) results.get(0)).getId());
+		
 			
 			
 			return (User) results.get(0);

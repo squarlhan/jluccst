@@ -43,7 +43,7 @@ public class Dss_adviceService {
 	}
 
 	public void save(Dss_advice dss_advice) {
-		System.out.println("equipment:"+dss_advice.getName());
+	
 		dss_adviceServiceImpl.save(dss_advice);
 	}
 	

@@ -57,7 +57,7 @@ public class InferenceEngine {
 		
 //		ie.Inference("result to reason","fulfill");
 //		Inference("result to reason","step");
-		System.out.print(" ");
+
 	}
 	
 	public  void Inference(String rule,String way){
@@ -68,19 +68,19 @@ public class InferenceEngine {
 		while(step(rule))
 		{
 			if(way.equals("step")){
-				System.out.print("按\"Enter\"键下一步");
+				//System.out.print("按\"Enter\"键下一步");
 				try{
 					temp = bufin.readLine();
 				}
 				catch (IOException E){
-					System.out.println("发生I/O错误!!! ");
+					//System.out.println("发生I/O错误!!! ");
 				}
 			}
 		}
 	}
 	
 	public  boolean step(String rule){
-		System.out.println("--------------------");
+		//System.out.println("--------------------");
 		int count = 0;
 		boolean flag = false;
 		if(rule.equals("reason to result")){
@@ -138,7 +138,7 @@ public class InferenceEngine {
 							newreason.setSugg(backwardrule.get(i).getReasons().get(k).getSugg());
 							process.add(newreason);
 							ending.add(newreason);
-							System.out.println("推出：");
+							//System.out.println("推出：");
 							//System.out.println("名词："+bs[i].getReasons().get(k).getNouns()+"  动词："+bs[i].getReasons().get(k).getVerb());
 							/*System.out.println("名词："+backwardrule.get(i).getReasons().get(k).getNouns()
 									+"  动词："+backwardrule.get(i).getReasons().get(k).getVerb()
