@@ -38,8 +38,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    <p>部门:    <s:property value="#session.pr.dept"/></p>
    <p>姓名 :    <s:property value="#session.pr.name"/></p>
    <p></p>
-   <p><s:a href="ruledsc.jsp"> 
-						   <p><div style="color:red;"><p align="center"><u>返回</u></p></div></p>
+   <p><s:a href="rule/ruledsc.jsp"> 
+						   <p><div style="color:red;"><p align="center"><u>返回首页</u></p></div></p>
 				  </s:a>	
   </body>
 </html>

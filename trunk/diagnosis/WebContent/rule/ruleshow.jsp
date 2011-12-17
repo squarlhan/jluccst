@@ -103,7 +103,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		var textfield3 = document.createElement("input");
 		textfield3.setAttribute("id","sugg["+count2+"]");
 		textfield3.setAttribute("name","sugg["+count2+"]");
-		textfield3.setAttribute("size","40");
+		textfield3.setAttribute("size","60");
 		
 		//td1.innerHTML  = "原因名词： ";
 		td1.appendChild(textfield1);
@@ -115,7 +115,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	}
   
 	function deleteRecord(table){
-		if(table.rows.length>1){
+		if(table.rows.length>2){
 			table.deleteRow(table.rows.length-1);
 			count--;
 		}
