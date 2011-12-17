@@ -58,7 +58,7 @@ public class DcsdataServiceImpl implements DcsdataServiceInter {
   			em.persist(dcsdata);
   			
   		} else {
-  			System.out.println("哈哈哈");// update
+  		
   		  for(Dcsdata dc:dcs){
   	    	 delete(dc);
   	     }

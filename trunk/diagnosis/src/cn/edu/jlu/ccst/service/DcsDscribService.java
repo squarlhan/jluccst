@@ -39,7 +39,7 @@ public class DcsDscribService {
 
 	/*
 	 * public void save(BackwardandResult backward) {
-	 * System.out.println("Rule:"+backward.getName()+" ; "+backward.getMemo());
+	
 	 * ruleServiceImpl.save(backward); }
 	 */
 
@@ -236,7 +236,7 @@ public class DcsDscribService {
 				String[] strArray = temp.split(",");
 
 				// String[] strArray=dd.getName().split(",");
-				System.out.println(strArray[1]);
+				
 				List<DcsDscrib> dcsDscribs = dcsDscribServiceImpl.findbyname(
 						strArray[0], strArray[1]);
 				if (dcsDscribs != null && dcsDscribs.size() > 0) {

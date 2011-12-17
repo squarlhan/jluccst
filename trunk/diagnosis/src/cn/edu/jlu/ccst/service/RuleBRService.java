@@ -74,7 +74,7 @@ public class RuleBRService {
 
 	/*
 	 * public void save(BackwardandResult backward) {
-	 * System.out.println("Rule:"+backward.getName()+" ; "+backward.getMemo());
+	
 	 * ruleServiceImpl.save(backward); }
 	 */
 

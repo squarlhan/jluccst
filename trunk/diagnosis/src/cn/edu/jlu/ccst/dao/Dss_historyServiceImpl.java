@@ -41,7 +41,7 @@ public class Dss_historyServiceImpl implements Dss_historyServiceInter  {
     
     public List<Dss_history> findbyName(String name){
     	Query query = getEntityManager().createQuery("select d FROM Dss_history d WHERE d.name.name like'"+name+"%'");
-		System.out.println(query.getResultList()+"qisile");
+	
     	
     	return query.getResultList();
     }

@@ -165,15 +165,11 @@ public class InterfaceAction extends ActionSupport {
 							backwardandResult1.clear();
 							back = backwardandResult.get(i);
 							backwardandResult1.add(back);
-							System.out.println("hello"
-									+ ruleService
-											.findreasons(backwardandResult1));
-							reasonlist1 = ruleService
-									.findreasons(backwardandResult1);
+							
 							// reasonlist1=ruleService.findreasons((List<BackwardandReason>)backwardandResult.get(i));//有原因推出的reasonlist
 							dss_advice = new ArrayList();
 							for (BackwardandReason reason : reasonlist1) {
-								System.out.println(pre.getName() + "nihao");
+								
 								Dss_advice da = new Dss_advice();
 								da.setName(pre.getName());
 								da.setValue(Double.parseDouble(pre.getValue()));

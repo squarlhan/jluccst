@@ -221,7 +221,7 @@ public class RuleAction extends ActionSupport {
 		
 				
 		reasonlist=rule.getReasons();
-		System.out.println(rule.getReasons());
+	
 		ActionContext actionContext = ActionContext.getContext();
         Map session = actionContext.getSession();
         session.put("rule", rule);

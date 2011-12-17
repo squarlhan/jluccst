@@ -41,7 +41,7 @@ public class Pre_dssService {
 	}
 
 	public void save(Pre_dss pre_dss) {
-		System.out.println("equipment:"+pre_dss.getName());
+	
 		pre_dssServiceImpl.save(pre_dss);
 	}
 	
