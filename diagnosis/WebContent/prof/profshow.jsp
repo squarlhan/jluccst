@@ -32,7 +32,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  <h2>专家修改信息</h2>
 	
       <div id="login">
-<s:form action="adminaction!alterAdmin.action">
+<s:form action="profaction!alterProf.action">
 <table width="200" align="center" style="margin-left:30">
 	<tr>
 	 <td ><label>

@@ -145,30 +145,30 @@ public class UserServiceImpl implements UserServiceInter {
 						&& "".equals(user.getDept()))) {
 			querySentence = "FROM User";
 		} else {
-			querySentence = "FROM User  where";
+			querySentence = "FROM User where";
 			if (user.getUsername() != null && !"".equals(user.getUsername()))
 				querySentence = querySentence + " username like '%"
 						+ user.getUsername() + "%' ";
-			else
+			else {
 				querySentence = querySentence + " username like '%@%' ";
-			if (user.getPhone() != null && !"".equals(user.getPhone()))
+			  if (user.getPhone() != null && !"".equals(user.getPhone()))
 				querySentence = querySentence + " and phone like '%"
 						+ user.getPhone() + "%' ";
-			if (user.getJid() != null && !"".equals(user.getJid()))
+			  if (user.getJid() != null && !"".equals(user.getJid()))
 				querySentence = querySentence + " and jid like '%"
 						+ user.getJid() + "%' ";
-			if (user.getName() != null
+			  if (user.getName() != null
 					&& !"".equals(user.getName()))
 				querySentence = querySentence + " and name like '%"
 						+ user.getName() + "%' ";
-			if (user.getEmail() != null && !"".equals(user.getEmail()))
+			  if (user.getEmail() != null && !"".equals(user.getEmail()))
 				querySentence = querySentence + " and email like '%"
 						+ user.getEmail() + "%' ";
 
 			if (user.getDept() != null && !"".equals(user.getDept()))
 				querySentence = querySentence + " and dept like '%"
 						+ user.getDept() + "%' ";
-		}
+			}}
 		Query query = getEntityManager().createQuery(querySentence);
 
 		

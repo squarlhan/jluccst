@@ -243,6 +243,7 @@ public class UserAction extends ActionSupport {
 		user.setPhone(temp.getPhone());
 		user.setUsername(temp.getUsername());
 		userService.save(user);
+		userlist = userService.findall();
 		return "success";
 		
 	}

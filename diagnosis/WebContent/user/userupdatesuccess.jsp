@@ -40,7 +40,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    <p>部门:    <s:property value="#session.us.dept"/></p>
    <p>姓名 :    <s:property value="#session.us.name"/></p>
    <p></p>
-   <p><s:a href="user/userfindreason.jsp"> 
+   <p><s:a href="biocpool490/biocpool1.jsp"> 
 						   <p><div style="color:red;"><p align="center"><u>返回首页</u></p></div></p>
 				  </s:a>	
   </body>
