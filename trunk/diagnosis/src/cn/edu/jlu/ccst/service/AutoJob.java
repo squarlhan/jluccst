@@ -151,13 +151,11 @@ public class AutoJob {
 						br.setVerb("过低");
 					}
 
-					// List<BackwardandResult> qianjian = new ArrayList();
-					// qianjian.add(br);
-					// List<BackwardandReason> houjian =
-					// ruleService.findreasons(qianjian);
 					if (br.getVerb() != null) {
-						List<BackwardandReason> houjian = backwardandResultService
-								.findbyresult(br);
+						 List<BackwardandResult> qianjian = new ArrayList();
+						 qianjian.add(br);
+						 List<BackwardandReason> houjian = ruleService.findreasons(qianjian);
+//						List<BackwardandReason> houjian = backwardandResultService.findbyresult(br);
 						Dss_advice da = new Dss_advice();
 						Dss_history dh = new Dss_history();
 						da.setLevel(level);

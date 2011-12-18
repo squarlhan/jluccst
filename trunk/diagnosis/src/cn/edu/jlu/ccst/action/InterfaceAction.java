@@ -151,7 +151,7 @@ public class InterfaceAction extends ActionSupport {
 		if (backwardandResult.size() > 0) {
 			int a = backwardandResult.size();
 			reasonlist = ruleService.findreasons(backwardandResult);
-			System.out.println("seqno" + pre_dssService.findsimu_time());
+//			System.out.println("seqno" + pre_dssService.findsimu_time());
 
 			if (!pre_dssService.findsimu_time().equals(
 					dss_adviceService.findsimu_time())) {
