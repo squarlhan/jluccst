@@ -174,14 +174,14 @@ public class DcsdataService {
 					reasons = reasons + bs.getNouns() + bs.getVerb() + ";";
 					suggs = suggs + bs.getSugg() + ";";
 				}
-				err.setItem(dd.getItem());
-				err.setValue(dd.getValue());
-				err.setEquipment(dd.getEquipment());
 				err.setError(reasons);
 				err.setSugg(suggs);
-				err.setTime(mytime);
-				err.setLevel(String.valueOf(level));
 			}
+			err.setItem(dd.getItem());
+			err.setValue(dd.getValue());
+			err.setEquipment(dd.getEquipment());
+			err.setTime(mytime);
+			err.setLevel(String.valueOf(level));
 			if (err.getEquipment() != null) {
 				errorlogImpl.save(err);
 			}
