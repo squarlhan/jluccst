@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50517
 File Encoding         : 65001
 
-Date: 2011-12-19 20:59:52
+Date: 2011-12-19 21:16:30
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -594,15 +594,15 @@ CREATE TABLE `dcsdata` (
   `value` double DEFAULT NULL,
   `isok` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=117 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=119 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of dcsdata
 -- ----------------------------
 INSERT INTO `dcsdata` VALUES ('109', '电石厂有机水', '班次', '0', null);
 INSERT INTO `dcsdata` VALUES ('110', '电石厂有机水', 'COD', '1', '3');
-INSERT INTO `dcsdata` VALUES ('116', '染料厂酸水', 'COD', '6', '0');
-INSERT INTO `dcsdata` VALUES ('115', '染料厂酸水', '班次', '0', null);
+INSERT INTO `dcsdata` VALUES ('117', '染料厂酸水', '班次', '0', null);
+INSERT INTO `dcsdata` VALUES ('118', '染料厂酸水', 'COD', '1', '0');
 
 -- ----------------------------
 -- Table structure for `dcsdscrib`
@@ -678,7 +678,7 @@ CREATE TABLE `dcshistory` (
   `seqno` varchar(255) DEFAULT NULL,
   `value` double DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=114 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=116 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of dcshistory
@@ -796,6 +796,8 @@ INSERT INTO `dcshistory` VALUES ('110', '染料厂酸水', '班次', '2011-12-19
 INSERT INTO `dcshistory` VALUES ('111', '染料厂酸水', 'COD', '2011-12-19 20:45:21', '3');
 INSERT INTO `dcshistory` VALUES ('112', '染料厂酸水', '班次', '2011-12-19 20:47:47', '0');
 INSERT INTO `dcshistory` VALUES ('113', '染料厂酸水', 'COD', '2011-12-19 20:47:47', '6');
+INSERT INTO `dcshistory` VALUES ('114', '染料厂酸水', '班次', '2011-12-19 21:15:35', '0');
+INSERT INTO `dcshistory` VALUES ('115', '染料厂酸水', 'COD', '2011-12-19 21:15:34', '1');
 
 -- ----------------------------
 -- Table structure for `dss_advice`
@@ -1664,23 +1666,24 @@ CREATE TABLE `errorlog` (
   `sugg` varchar(255) DEFAULT NULL,
   `wrong` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=44 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of errorlog
 -- ----------------------------
-INSERT INTO `errorlog` VALUES ('20', '2系列生化池', '3号生化池PH', '过低', '2011-11-27 15:04:02', '2', '中和站控制不好;', '增加测试PH频次，向车间工艺工程师汇报;', null);
-INSERT INTO `errorlog` VALUES ('21', '2系列生化池', '3号生化池PH', '过高', '2011-11-27 15:06:13', '111', '中和站控制不好;', '增加测试PH频次，向车间工艺工程师汇报;', null);
-INSERT INTO `errorlog` VALUES ('22', '2系列生化池', '3号生化池PH', '过高', '2011-11-27 15:10:07', '22', '中和站控制不好;', '增加测试PH频次，向车间工艺工程师汇报;', null);
-INSERT INTO `errorlog` VALUES ('23', '2系列生化池', '3号生化池PH', '过高', '2011-11-27 19:16:12', '213234324', '中和站控制不好;', '增加测试PH频次，向车间工艺工程师汇报;', null);
-INSERT INTO `errorlog` VALUES ('24', '2系列生化池', '3号生化池PH', '过高', '2011-11-27 19:16:33', '1212121', '中和站控制不好;', '增加测试PH频次，向车间工艺工程师汇报;', null);
-INSERT INTO `errorlog` VALUES ('26', '2系列生化池', '3号生化池PH', '过高', '2011-11-27 19:36:21', '32432', '中和站控制不好;', '增加测试PH频次，向车间工艺工程师汇报;', null);
-INSERT INTO `errorlog` VALUES ('27', '2系列生化池', '3号生化池PH', '过高', '2011-11-27 19:45:44', '1111', '中和站控制不好;', '增加测试PH频次，向车间工艺工程师汇报;', null);
-INSERT INTO `errorlog` VALUES ('28', '2系列生化池', '3号生化池SS', '过高', '2011-11-27 19:54:38', '13221342', '进水池控制不好;', '维修;', null);
-INSERT INTO `errorlog` VALUES ('39', '1系列生化池', '1号生化池PH', '过高', '2011-11-28 11:33:26', '11111', '中和池处理不好;', '维修;', null);
-INSERT INTO `errorlog` VALUES ('40', '1系列生化池', '2号生化池PH', '过高', '2011-11-28 11:34:51', '11111', '中和池处理不好;', '维修;', null);
-INSERT INTO `errorlog` VALUES ('41', '1系列生化池', '1号生化池PH', '过高', '2011-11-28 22:17:11', '10', '中和池处理不好;酸水的流量增大;酸水的酸度增加;碱液管堵塞;仪表指示不准;', '维修;增加碱液投加量;增加碱液投加量;及时清通，必要时短管清通;用PH试纸实测;', null);
-INSERT INTO `errorlog` VALUES ('42', '排江出口线', '出口NH3-N', '过高', '2011-12-11 15:53:22', '3', '11;22;33;电石渣加的太多;中和错误;', '1;2;3;减少电石渣投放量;立即上报;', null);
+INSERT INTO `errorlog` VALUES ('20', '2系列生化池', '3号生化池PH', '4', '2011-11-27 15:04:02', '2', '中和站控制不好;', '增加测试PH频次，向车间工艺工程师汇报;', '过低');
+INSERT INTO `errorlog` VALUES ('21', '2系列生化池', '3号生化池PH', '3', '2011-11-27 15:06:13', '111', '中和站控制不好;', '增加测试PH频次，向车间工艺工程师汇报;', '过高');
+INSERT INTO `errorlog` VALUES ('22', '2系列生化池', '3号生化池PH', '5', '2011-11-27 15:10:07', '22', '中和站控制不好;', '增加测试PH频次，向车间工艺工程师汇报;', '过高');
+INSERT INTO `errorlog` VALUES ('23', '2系列生化池', '3号生化池PH', '6', '2011-11-27 19:16:12', '213234324', '中和站控制不好;', '增加测试PH频次，向车间工艺工程师汇报;', '过高');
+INSERT INTO `errorlog` VALUES ('24', '2系列生化池', '3号生化池PH', '7', '2011-11-27 19:16:33', '1212121', '中和站控制不好;', '增加测试PH频次，向车间工艺工程师汇报;', '过高');
+INSERT INTO `errorlog` VALUES ('26', '2系列生化池', '3号生化池PH', '8', '2011-11-27 19:36:21', '32432', '中和站控制不好;', '增加测试PH频次，向车间工艺工程师汇报;', '过高');
+INSERT INTO `errorlog` VALUES ('27', '2系列生化池', '3号生化池PH', '9', '2011-11-27 19:45:44', '1111', '中和站控制不好;', '增加测试PH频次，向车间工艺工程师汇报;', '过高');
+INSERT INTO `errorlog` VALUES ('28', '2系列生化池', '3号生化池SS', '2', '2011-11-27 19:54:38', '13221342', '进水池控制不好;', '维修;', '过高');
+INSERT INTO `errorlog` VALUES ('39', '1系列生化池', '1号生化池PH', '1', '2011-11-28 11:33:26', '11111', '中和池处理不好;', '维修;', '过高');
+INSERT INTO `errorlog` VALUES ('40', '1系列生化池', '2号生化池PH', '4', '2011-11-28 11:34:51', '11111', '中和池处理不好;', '维修;', '过高');
+INSERT INTO `errorlog` VALUES ('41', '1系列生化池', '1号生化池PH', '5', '2011-11-28 22:17:11', '10', '中和池处理不好;酸水的流量增大;酸水的酸度增加;碱液管堵塞;仪表指示不准;', '维修;增加碱液投加量;增加碱液投加量;及时清通，必要时短管清通;用PH试纸实测;', '过高');
+INSERT INTO `errorlog` VALUES ('42', '排江出口线', '出口NH3-N', '6', '2011-12-11 15:53:22', '3', '11;22;33;电石渣加的太多;中和错误;', '1;2;3;减少电石渣投放量;立即上报;', '过高');
+INSERT INTO `errorlog` VALUES ('43', '染料厂酸水', 'COD', '10', '2011-12-19 21:15:35', '1', null, null, '过高');
 
 -- ----------------------------
 -- Table structure for `exceldata`
