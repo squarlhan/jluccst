@@ -100,10 +100,14 @@ public void setEquip(String equip) {
 	}
 	
 	public String findbypara(){
-		
-			errorlist = errorlogService.findbypara(parameter);
-		
-		return "OK";
-	}
-
-}
+//		try {
+//			String keyword= new String(parameter.getBytes("ISO-8859-1"),"UTF-8");
+//			errorlist = errorlogService.findbypara(keyword);
+//		} catch (UnsupportedEncodingException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} 
+//		return "OK";
+		errorlist = errorlogService.findbypara(parameter);
+	    return "OK";
+}}
