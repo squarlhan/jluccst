@@ -18,6 +18,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <base href="<%=basePath%>">
     
     <title>手工数据报警日志</title>
+  
     
     
 	<meta http-equiv="pragma" content="no-cache">
@@ -214,8 +215,24 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
      <div id="rightmain">
 	  <h2>手工数据报警日志</h2>
+	  <s:form action="errorlogaction!findbypara.action">
+
+<tr>
+    
 	
-     
+	<td align="center"> <select name="parameter"   style="width:110px">
+                <option  value="PH">PH</option>
+                <option  value="COD">COD</option>
+                <option  value="碱度">碱度</option>
+                 <option  value="BOD5">BOD5</option>
+                <option  value="SS">SS</option>
+                <option  value="NH3-N">NH3-N</option>
+                <option  value="NO-N">NO-N</option>
+                <option  value="水量">水量</option>
+              </select></td>
+	
+	<td width="20%" align="center"><s:submit value="查询" theme="simple"  /></td>
+    </tr>   </s:form>
  
   <table bordercolor="#FFFFFF" rules="all"  id="mytable" class="list_table" align="center" width="100%" >
 		<tr bgcolor="#4A708B">

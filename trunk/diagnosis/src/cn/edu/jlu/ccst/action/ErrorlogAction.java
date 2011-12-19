@@ -25,9 +25,21 @@ public class ErrorlogAction extends ActionSupport {
 	private ErrorlogService errorlogService;
    private String equip;
    
-   
+   private String parameter;
    
 	
+
+	public String getParameter() {
+	return parameter;
+}
+
+
+
+public void setParameter(String parameter) {
+	this.parameter = parameter;
+}
+
+
 
 	public String getEquip() {
 	return equip;
@@ -84,6 +96,13 @@ public void setEquip(String equip) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} 
+		return "OK";
+	}
+	
+	public String findbypara(){
+		
+			errorlist = errorlogService.findbyequipment(parameter);
+		
 		return "OK";
 	}
 

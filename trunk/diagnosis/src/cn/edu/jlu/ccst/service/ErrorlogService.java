@@ -73,6 +73,14 @@ public class ErrorlogService {
 		return resultlist; 
 	  
   }
+  
+  public List<Errorlog> findbypara(String para){
+	  List<Errorlog> resultlist = new ArrayList();
+		resultlist = errorlogImpl.findbyequipment(para);
+		if(resultlist.size()<1)resultlist = findAll();
+		return resultlist; 
+	  
+  }
 
 
 	public void save(Errorlog errorlog) {

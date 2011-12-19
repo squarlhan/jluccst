@@ -6,6 +6,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+
+
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -41,7 +43,27 @@ public class ErrorlogImpl implements ErrorlogInter  {
 		
 		return query.getResultList();
     }
+    
+    
+   /* public List<Errorlog> findbypara(String para){
+    	
+    
+	        String strSQL="select el FROM Errorlog el WHERE el.item like :name" ;
+	        Query query = session.createQuery(strSQL);   
+  	      query.setParameter("name", "%"+para+"%");   
+  	      List result=query.getResultList();   
+  	    return result;
+    }*/
+    
+
+   public List<Errorlog> findbypara(String para){
+    	Query query = getEntityManager().createQuery("select el FROM Errorlog el WHERE el.item like '%%%"+para+"%'" );
+		
+		
+		return query.getResultList();
+    }
    
+
     
     public void save(Errorlog errorlog) {
 		if (errorlog.getId()<=0) {
