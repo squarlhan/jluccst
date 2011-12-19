@@ -6,14 +6,14 @@
 	<welcome-file-list>
 		<welcome-file>user/userlogin.jsp</welcome-file>
 	</welcome-file-list>
-	<!--  <error-page>
+	<error-page>
 <error-code>500</error-code>
    <location>/user/user500.jsp</location>
 </error-page>
 <error-page>
 <error-code>404</error-code>
    <location>/user/user404.jsp</location>
-</error-page>-->
+</error-page>
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>classpath:applicationContext.xml</param-value>
