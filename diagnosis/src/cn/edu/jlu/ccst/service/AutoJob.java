@@ -120,18 +120,19 @@ public class AutoJob {
 			if (predss.getName().getName() != null) {
 				String temp = predss.getName().getName().replace('.', ',');
 				String[] strArray = temp.split(",");
-				String level = "0";
+				int level = 0;
 				if (predss.getName().getName().contains("COD")) {
-					level = "4";
-				}
-				if (predss.getName().getName().contains("NH3-N")) {
-					level = "3";
-				}
-				if (predss.getName().getName().contains("SS")) {
-					level = "2";
-				}
-				if (predss.getName().getName().contains("BOD")) {
-					level = "1";
+					level = 9;
+				}else if (predss.getName().getName().contains("NH3-N")||predss.getName().getName().contains("NH3N")) {
+					level = 8;
+				}else if (predss.getName().getName().contains("SS")) {
+					level = 7;
+				}else if (predss.getName().getName().contains("PH")) {
+					level = 6;
+				}else if (predss.getName().getName().contains("BOD")) {
+					level = 5;
+				}else{
+					level = 2;
 				}
 
 				List<DcsDscrib> dcsDscribs = dcsDscribServiceImpl.findbyname(
@@ -143,10 +144,24 @@ public class AutoJob {
 					br.setNouns(db.getName());
 					br.setMemo(db.getEque());
 					if (Double.parseDouble(predss.getValue().trim()) > db.getUpper()) {
+						if(Double.parseDouble(predss.getValue().trim()) > db.getUpper2()){
+							level+=3;
+						}else if(Double.parseDouble(predss.getValue().trim()) > db.getUpper1()){
+							level+=2;
+						}else{
+							level++;
+						}
 						flag = false;
 						br.setVerb("过高");
 					}
 					if (Double.parseDouble(predss.getValue().trim()) < db.getLower()) {
+						if(Double.parseDouble(predss.getValue().trim()) < db.getLower2()){
+							level+=3;
+						}else if(Double.parseDouble(predss.getValue().trim()) < db.getLower1()){
+							level+=2;
+						}else{
+							level++;
+						}
 						flag = false;
 						br.setVerb("过低");
 					}
@@ -158,12 +173,12 @@ public class AutoJob {
 //						List<BackwardandReason> houjian = backwardandResultService.findbyresult(br);
 						Dss_advice da = new Dss_advice();
 						Dss_history dh = new Dss_history();
-						da.setLevel(level);
+						da.setLevel(String.valueOf(level));
 						da.setName(predss.getName());
 						da.setSeqno(predss.getSeqno());
 						da.setSimu_time(predss.getSimu_time());
 						da.setValue(Double.parseDouble(predss.getValue().trim()));
-						dh.setLevel(level);
+						dh.setLevel(String.valueOf(level));
 						dh.setName(predss.getName());
 						dh.setSeqno(predss.getSeqno());
 						dh.setSimu_time(predss.getSimu_time());

@@ -41,6 +41,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     				"<s:property value='#result.equipment'/>",
     			</s:iterator>
     		0);
+    	var wrongs = new Array(
+    			<s:iterator id="result" value="errorlist">
+    				"<s:property value='#result.wrong'/>",
+    			</s:iterator>
+    		0);
     	var items = new Array(
     			<s:iterator id="result" value="errorlist">
     				"<s:property value='#result.item'/>",
@@ -81,18 +86,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	    var td4 = tr.insertCell(-1);
     	    var td5 = tr.insertCell(-1);
     	    var td6 = tr.insertCell(-1);
+    	    var td7 = tr.insertCell(-1);
 			td1.align = "left";
 			td2.align = "left";
 			td3.align = "left";
 			td4.align = "left";
 			td5.align = "left";
 			td6.align = "left";
+			td7.align = "left";
     	    td1.innerHTML = eques[a]+"&nbsp;";
     	    td2.innerHTML = items[a]+"&nbsp;";
-    	    td3.innerHTML = levels[a]+"&nbsp;";
+    	    td3.innerHTML = wrongs[a]+"&nbsp;";
     	    td4.innerHTML = times[a]+"&nbsp;";
     	    td5.innerHTML = bids[a]+"&nbsp;";
-    	    td6.innerHTML = suggs[a]+"&nbsp;";
+    	    td6.innerHTML = levels[a]+"&nbsp;";
+    	    td7.innerHTML = suggs[a]+"&nbsp;";
     		}
 
     	function firstpage()
@@ -239,8 +247,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		    <th width = "15%">设备名</th>
 			<th width = "15%">参数名</th>
 			<th width = "10%">报警现象</th>
-			<th width = "20%">报警时间</th>
+			<th width = "15%">报警时间</th>
 			<th width = "10%">报警值</th>
+			<th width = "5%">报警级别</th>
 			<th width = "30%">采取的建议</th>
 	  </tr>
   </table>
