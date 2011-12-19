@@ -76,7 +76,7 @@ public class ErrorlogService {
   
   public List<Errorlog> findbypara(String para){
 	  List<Errorlog> resultlist = new ArrayList();
-		resultlist = errorlogImpl.findbyequipment(para);
+		resultlist = errorlogImpl.findbypara(para);
 		if(resultlist.size()<1)resultlist = findAll();
 		return resultlist; 
 	  

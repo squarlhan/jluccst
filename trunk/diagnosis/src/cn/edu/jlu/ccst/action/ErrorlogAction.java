@@ -101,7 +101,7 @@ public void setEquip(String equip) {
 	
 	public String findbypara(){
 		
-			errorlist = errorlogService.findbyequipment(parameter);
+			errorlist = errorlogService.findbypara(parameter);
 		
 		return "OK";
 	}
