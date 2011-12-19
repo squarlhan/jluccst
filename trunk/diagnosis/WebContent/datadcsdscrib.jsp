@@ -26,6 +26,28 @@
 <meta http-equiv="expires" content="0">
 <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 <meta http-equiv="description" content="This is my page">
+<script language="JavaScript" type="text/javascript">
+    	function confirmChge(){
+    		var upper = document.getElementById("dcsDscrib.upper");
+			var lower = document.getElementById("dcsDscrib.lower");
+			var upper1 = document.getElementById("dcsDscrib.upper1");
+			var lower1 = document.getElementById("dcsDscrib.lower1");
+			var upper2 = document.getElementById("dcsDscrib.upper2");
+			var lower2 = document.getElementById("dcsDscrib.lower2");
+			var upper_value = upper.value-0;
+			var lower_value = lower.value-0;
+			var upper1_value = upper1.value-0;
+			var lower1_value = lower1.value-0;
+			var upper2_value = upper2.value-0;
+			var lower2_value = lower2.value-0;
+			if(upper_value<=upper1_value&&upper1_value<=upper2_value&&lower_value>=lower1_value&&lower1_value>=lower2_value){
+				return confirm("确认添加？"); 
+			}else{
+				 alert("输入错误！");
+			}
+			
+    	}
+ </script>
 <style>
 .nobr br {
 	display: none
@@ -97,14 +119,30 @@
 					</tr>
 					<tr>
 						<td align="right">参数最小值：</td>
-						<td align="left"><s:textfield name="dcsDscrib.lower"  size ="17" theme = "simple" onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td>
+						<td align="left"><s:textfield name="dcsDscrib.lower"  id="dcsDscrib.lower"  size ="17" theme = "simple" onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td>
 					</tr>
 					<tr>
 						<td align="right">参数最大值：</td>
-						<td align="left"><s:textfield name="dcsDscrib.upper"  size ="17" theme = "simple" onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td>
+						<td align="left"><s:textfield name="dcsDscrib.upper"  id="dcsDscrib.upper"  size ="17" theme = "simple" onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td>
 					</tr>
 					<tr>
-						<td align="right"><s:submit value="录入" theme="simple" />
+						<td align="right">黄色警报最小值：</td>
+						<td align="left"><s:textfield name="dcsDscrib.lower1"  id="dcsDscrib.lower1"  size ="17" theme = "simple" onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td>
+					</tr>
+					<tr>
+						<td align="right">黄色警报最大值：</td>
+						<td align="left"><s:textfield name="dcsDscrib.upper1"   id="dcsDscrib.upper1" size ="17" theme = "simple" onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td>
+					</tr>
+					<tr>
+						<td align="right">橙色警报最小值：</td>
+						<td align="left"><s:textfield name="dcsDscrib.lower2"  id="dcsDscrib.lower2"  size ="17" theme = "simple" onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td>
+					</tr>
+					<tr>
+						<td align="right">橙色警报最大值：</td>
+						<td align="left"><s:textfield name="dcsDscrib.upper2"  id="dcsDscrib.upper2"  size ="17" theme = "simple" onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td>
+					</tr>
+					<tr>
+						<td align="right"><s:submit value="录入" theme="simple"  onclick="return confirmChge();"/>
 
 						<td  align="left"><s:reset value="重置" theme="simple" /></td>
 					</tr>

@@ -26,6 +26,7 @@ public class Errorlog implements Serializable{
 	private String level;
 	private String error;
 	private String sugg;
+	private String wrong;
 	
 	
 	
@@ -33,7 +34,9 @@ public class Errorlog implements Serializable{
 		super();
 		
 	}
-	public Errorlog(int id, String equipment, String item, Double value, String time, String level, String error,String sugg) {
+	
+	public Errorlog(int id, String equipment, String item, Double value,
+			String time, String level, String error, String sugg, String wrong) {
 		super();
 		this.id = id;
 		this.equipment = equipment;
@@ -43,7 +46,9 @@ public class Errorlog implements Serializable{
 		this.level = level;
 		this.error = error;
 		this.sugg = sugg;
+		this.wrong = wrong;
 	}
+
 	/**
 	 * 
 	 */
@@ -52,6 +57,12 @@ public class Errorlog implements Serializable{
   
 	public String getLevel() {
 		return level;
+	}
+	public String getWrong() {
+		return wrong;
+	}
+	public void setWrong(String wrong) {
+		this.wrong = wrong;
 	}
 	public String getTime() {
 		return time;

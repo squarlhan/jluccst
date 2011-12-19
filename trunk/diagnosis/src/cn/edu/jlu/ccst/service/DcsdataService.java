@@ -114,25 +114,53 @@ public class DcsdataService {
 		String mytime = formatter.format(new Date());
 		List<DcsDscrib> dcsDscribs = dcsDscribServiceImpl.findbyname(
 				dd.getEquipment(), dd.getItem());
+		int level = 0;
+		if (dd.getItem().contains("COD")) {
+			level = 9;
+		}else if (dd.getItem().contains("NH3-N")||dd.getItem().contains("NH3N")) {
+			level = 8;
+		}else if (dd.getItem().contains("SS")) {
+			level = 7;
+		}else if (dd.getItem().contains("PH")) {
+			level = 6;
+		}else if (dd.getItem().contains("BOD")) {
+			level = 5;
+		}else{
+			level = 2;
+		}
 		if (dcsDscribs != null && dcsDscribs.size() > 0) {
 			DcsDscrib db = dcsDscribs.get(0);
 			if (dd.getValue() > db.getUpper()) {
+				if(dd.getValue() > db.getUpper2()){
+					level+=3;
+				}else if(dd.getValue() > db.getUpper1()){
+					level+=2;
+				}else{
+					level++;
+				}
 				br = new BackwardandResult();
 				br.setNouns(db.getName());
 				br.setVerb("过高");
 				br.setMemo(db.getEque());
 				err = new Errorlog();
-				err.setLevel("过高");
-				errorlogImpl.save(err);
+				err.setWrong("过高");
+//				errorlogImpl.save(err);
 			}
 			if (dd.getValue() < db.getLower()) {
+				if(dd.getValue() < db.getLower2()){
+					level+=3;
+				}else if(dd.getValue() < db.getLower1()){
+					level+=2;
+				}else{
+					level++;
+				}
 				br = new BackwardandResult();
 				br.setNouns(db.getName());
 				br.setMemo(db.getEque());
 				br.setVerb("过低");
 				err = new Errorlog();
-				err.setLevel("过低");
-				errorlogImpl.save(err);
+				err.setWrong("过低");
+//				errorlogImpl.save(err);
 			}
 		}
 		if (br != null) {
@@ -152,6 +180,7 @@ public class DcsdataService {
 				err.setError(reasons);
 				err.setSugg(suggs);
 				err.setTime(mytime);
+				err.setLevel(String.valueOf(level));
 			}
 			if (err.getEquipment() != null) {
 				errorlogImpl.save(err);
@@ -182,12 +211,18 @@ public class DcsdataService {
 				dd.setEquipment(mykey1);
 				dd.setItem(mykey2);
 				dd.setValue(Double.parseDouble(pd.getValue()));
-				dd.setIsok(true);
+				dd.setIsok("0");
 				if (dcsDscribs != null && dcsDscribs.size() > 0) {
 					DcsDscrib db = dcsDscribs.get(0);
 					// do sth...
-					if(dd.getValue()>db.getUpper()||dd.getValue()<db.getLower()){
-						dd.setIsok(false);
+					if(dd.getValue()>db.getUpper2()||dd.getValue()<db.getLower2()){
+						dd.setIsok("3");
+					}else if(dd.getValue()>db.getUpper1()||dd.getValue()<db.getLower1()){
+						dd.setIsok("2");
+					}else if(dd.getValue()>db.getUpper()||dd.getValue()<db.getLower()){
+						dd.setIsok("1");
+					}else{
+						dd.setIsok("0");
 					}
 					if (keyword != null) {
 						if(db.getName().contains(keyword)){
@@ -216,13 +251,19 @@ public class DcsdataService {
 		allresults =  this.findAll();
 		for(Dcsdata dd:allresults){
 			if(!dd.getItem().trim().equals("班次")){
-				dd.setIsok(true);
+				dd.setIsok("0");
 				List<DcsDscrib> dcsDscribs = dcsDscribServiceImpl.findbyname(dd.getEquipment().trim(), dd.getItem().trim());
 				if (dcsDscribs != null && dcsDscribs.size() > 0) {
 					DcsDscrib db = dcsDscribs.get(0);
 					// do sth...
-					if(dd.getValue()>db.getUpper()||dd.getValue()<db.getLower()){
-						dd.setIsok(false);
+					if(dd.getValue()>db.getUpper2()||dd.getValue()<db.getLower2()){
+						dd.setIsok("3");
+					}else if(dd.getValue()>db.getUpper1()||dd.getValue()<db.getLower1()){
+						dd.setIsok("2");
+					}else if(dd.getValue()>db.getUpper()||dd.getValue()<db.getLower()){
+						dd.setIsok("1");
+					}else{
+						dd.setIsok("0");
 					}
 					if (keyword != null) {
 						if(db.getName().contains(keyword)){

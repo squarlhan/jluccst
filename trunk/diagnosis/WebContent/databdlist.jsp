@@ -22,14 +22,30 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			return confirm("确定删除？");	
     	}
     	function confirmChge(did){
-			if(confirm("确认修改？")){
-				var upper = document.getElementById("upper["+did+"]");
-				var lower = document.getElementById("lower["+did+"]");
-				var url = "dcsdscribaction!chDscrib.action?dcsDscrib.lower="+lower.value+"&dcsDscrib.upper="+upper.value+"&dcsDscrib.did="+did;
-				location.href = url; 
-				//return true;
+    		var upper = document.getElementById("upper["+did+"]");
+			var lower = document.getElementById("lower["+did+"]");
+			var upper1 = document.getElementById("upper1["+did+"]");
+			var lower1 = document.getElementById("lower1["+did+"]");
+			var upper2 = document.getElementById("upper2["+did+"]");
+			var lower2 = document.getElementById("lower2["+did+"]");
+			var upper_value = upper.value-0;
+			var lower_value = lower.value-0;
+			var upper1_value = upper1.value-0;
+			var lower1_value = lower1.value-0;
+			var upper2_value = upper2.value-0;
+			var lower2_value = lower2.value-0;
+			if(upper_value<=upper1_value&&upper1_value<=upper2_value&&lower_value>=lower1_value&&lower1_value>=lower2_value){
+				var url = "dcsdscribaction!chDscrib.action?"
+					+"dcsDscrib.lower="+lower.value+"&dcsDscrib.upper="+upper.value
+					+"&dcsDscrib.lower1="+lower1.value+"&dcsDscrib.upper1="+upper1.value
+					+"&dcsDscrib.lower2="+lower2.value+"&dcsDscrib.upper2="+upper2.value
+					+"&dcsDscrib.did="+did;
+			    if(confirm("确认修改？")){
+				    location.href = url; 
+			    }
+			}else{
+				 alert("输入错误！");
 			}
-			//return false;
 			
     	}
     	
@@ -61,6 +77,26 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     				"<s:property value='#result.lower'/>",
     			</s:iterator>
     		0);
+    	var uppers1 = new Array(
+    			<s:iterator id="result" value="dcsdscriblist">
+    				"<s:property value='#result.upper1'/>",
+    			</s:iterator>
+    		0);
+    	var lowers1 = new Array(
+    			<s:iterator id="result" value="dcsdscriblist">
+    				"<s:property value='#result.lower1'/>",
+    			</s:iterator>
+    		0);
+    	var uppers2 = new Array(
+    			<s:iterator id="result" value="dcsdscriblist">
+    				"<s:property value='#result.upper2'/>",
+    			</s:iterator>
+    		0);
+    	var lowers2 = new Array(
+    			<s:iterator id="result" value="dcsdscriblist">
+    				"<s:property value='#result.lower2'/>",
+    			</s:iterator>
+    		0);
     	var bids = new Array(
     		    <s:iterator id="result" value="dcsdscriblist">
     			    "<s:property value='#result.did'/>",
@@ -81,6 +117,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	    var td4 = tr.insertCell(-1);
     	    var td5 = tr.insertCell(-1);
     	    var td6 = tr.insertCell(-1);
+    	    var td7 = tr.insertCell(-1);
+    	    var td8 = tr.insertCell(-1);
+    	    var td9 = tr.insertCell(-1);
+    	    var td10 = tr.insertCell(-1);
     	    var urlc = "javascript:confirmChge("+bids[a]+");";
     	    var urld = "dcsdscribaction!deleteDscrib?dcsDscrib.did="+bids[a];
 			var ac = document.createElement("a");
@@ -92,22 +132,42 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			ad.onclick=confirmDel;
 			var upper = document.createElement("input");
 			upper.setAttribute("id","upper["+bids[a]+"]");
-			upper.setAttribute("size","10");
+			upper.setAttribute("size","5");
 			upper.setAttribute("value",uppers[a]);
 			var lower = document.createElement("input");
 			lower.setAttribute("id","lower["+bids[a]+"]");
-			lower.setAttribute("size","10");
+			lower.setAttribute("size","5");
 			lower.setAttribute("value",lowers[a]);
+			var upper1 = document.createElement("input");
+			upper1.setAttribute("id","upper1["+bids[a]+"]");
+			upper1.setAttribute("size","5");
+			upper1.setAttribute("value",uppers1[a]);
+			var lower1 = document.createElement("input");
+			lower1.setAttribute("id","lower1["+bids[a]+"]");
+			lower1.setAttribute("size","5");
+			lower1.setAttribute("value",lowers1[a]);
+			var upper2 = document.createElement("input");
+			upper2.setAttribute("id","upper2["+bids[a]+"]");
+			upper2.setAttribute("size","5");
+			upper2.setAttribute("value",uppers2[a]);
+			var lower2 = document.createElement("input");
+			lower2.setAttribute("id","lower2["+bids[a]+"]");
+			lower2.setAttribute("size","5");
+			lower2.setAttribute("value",lowers2[a]);
 			td1.align = "left";
 			td2.align = "left";
 			td3.align = "left";
-    	    td1.innerHTML = eques[a]+"&nbsp;";;
-    	    td2.innerHTML = items[a]+"&nbsp;";;
-    	    td3.innerHTML = names[a]+"&nbsp;";;
-    	    td4.appendChild(lower);
-    	    td5.appendChild(upper);
-    	    td6.appendChild(ac);
-    	    td6.appendChild(ad);
+    	    td1.innerHTML = eques[a]+"&nbsp;";
+    	    td2.innerHTML = items[a]+"&nbsp;";
+    	    td3.innerHTML = names[a]+"&nbsp;";
+    	    td4.appendChild(lower2);
+    	    td5.appendChild(lower1);
+    	    td6.appendChild(lower);
+    	    td7.appendChild(upper);
+    	    td8.appendChild(upper1);
+    	    td9.appendChild(upper2);
+    	    td10.appendChild(ac);
+    	    td10.appendChild(ad);
     		}
 
     	function firstpage()
@@ -246,12 +306,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       </div> --> 
   <table bordercolor="#FFFFFF" rules="all"  id="mytable" class="list_table" align="center" width="100%" >
 		<tr bgcolor="#4A708B">
-		    <th width = "13%">报警节点</th>
-			<th width = "15%">控制参数</th>
-			<th width = "25%">对应名称</th>
-			<th width = "10%">最小值</th>
-			<th width = "10%">最大值</th>			
-			<th width = "17%">相关操作</th>
+		    <th width = "11%">报警节点</th>
+			<th width = "11%">控制参数</th>
+			<th width = "20%">对应名称</th>
+			<th width = "7%">红</th>
+			<th width = "7%">橙</th>	
+			<th width = "7%">黄</th>
+			<th width = "7%">黄</th>	
+			<th width = "7%">橙</th>
+			<th width = "7%">红</th>			
+			<th width = "15%">相关操作</th>
 	  </tr>
   </table>
    <div align="center">

@@ -35,6 +35,10 @@ public class DcsDscrib implements Serializable{
 	private String name;
 	private double upper;
 	private double lower;
+	private double upper1;
+	private double lower1;
+	private double upper2;
+	private double lower2;
 	
 	public int getDid() {
 		return did;
@@ -73,8 +77,34 @@ public class DcsDscrib implements Serializable{
 		this.lower = lower;
 	}
 
+	public double getUpper1() {
+		return upper1;
+	}
+	public void setUpper1(double upper1) {
+		this.upper1 = upper1;
+	}
+	public double getLower1() {
+		return lower1;
+	}
+	public void setLower1(double lower1) {
+		this.lower1 = lower1;
+	}
+	public double getUpper2() {
+		return upper2;
+	}
+	public void setUpper2(double upper2) {
+		this.upper2 = upper2;
+	}
+	public double getLower2() {
+		return lower2;
+	}
+	public void setLower2(double lower2) {
+		this.lower2 = lower2;
+	}
+	
 	public DcsDscrib(int did, String item, String eque, String name,
-			double upper, double lower) {
+			double upper, double lower, double upper1, double lower1,
+			double upper2, double lower2) {
 		super();
 		this.did = did;
 		this.item = item;
@@ -82,6 +112,10 @@ public class DcsDscrib implements Serializable{
 		this.name = name;
 		this.upper = upper;
 		this.lower = lower;
+		this.upper1 = upper1;
+		this.lower1 = lower1;
+		this.upper2 = upper2;
+		this.lower2 = lower2;
 	}
 	public DcsDscrib() {
 		super();

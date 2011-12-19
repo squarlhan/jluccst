@@ -66,11 +66,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			td1.align = "left";
 			td2.align = "left";
 			td3.align = "left";
-			if(isoks[a]=="true"){
-				td3.style.color="black";
-    		}else{
-    			td3.style.color="red";
-    		}
+			 if(isoks[a]=="1"){
+	    			td3.style.color="yellow";
+	    		}else if(isoks[a]=="2"){
+	    			td3.style.color="orange";
+	    		}else if(isoks[a]=="3"){
+	    			td3.style.color="red";
+	    		}else{
+	    			td3.style.color="black";
+	    		}
     	    td1.innerHTML = eques[a]+"&nbsp;";
     	    td2.innerHTML = items[a]+"&nbsp;";
     	    td3.innerHTML = bids[a]+"&nbsp;";

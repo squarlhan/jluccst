@@ -140,6 +140,10 @@ public class DcsDscribAction extends ActionSupport {
 		DcsDscrib temp = dcsDscribService.findbyid(dcsDscrib.getDid());
 		temp.setLower(dcsDscrib.getLower());
 		temp.setUpper(dcsDscrib.getUpper());
+		temp.setLower1(dcsDscrib.getLower1());
+		temp.setUpper1(dcsDscrib.getUpper1());
+		temp.setLower2(dcsDscrib.getLower2());
+		temp.setUpper2(dcsDscrib.getUpper2());
 		dcsDscribService.save(temp);
 		dcsdscriblist = dcsDscribService.findall();
 		return "bdsuccess";

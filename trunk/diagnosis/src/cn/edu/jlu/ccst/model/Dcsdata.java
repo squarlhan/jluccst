@@ -22,7 +22,7 @@ public class Dcsdata implements Serializable{
 	private String equipment;
 	private String item;
 	private Double value;
-	private boolean isok;
+	private String isok;
 	public Dcsdata() { 
 		super();
 		
@@ -41,10 +41,10 @@ public class Dcsdata implements Serializable{
 	public int getId() {
 		return id;
 	}
-	public boolean isIsok() {
+	public String getIsok() {
 		return isok;
 	}
-	public void setIsok(boolean isok) {
+	public void setIsok(String isok) {
 		this.isok = isok;
 	}
 	public void setId(int id) {
