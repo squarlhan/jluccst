@@ -246,7 +246,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       </div> --> 
   <table bordercolor="#FFFFFF" rules="all"  id="mytable" class="list_table" align="center" width="100%" >
 		<tr bgcolor="#4A708B">
-		    <th width = "13%">故障节点</th>
+		    <th width = "13%">报警节点</th>
 			<th width = "15%">控制参数</th>
 			<th width = "25%">对应名称</th>
 			<th width = "10%">最小值</th>
