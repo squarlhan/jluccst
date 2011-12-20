@@ -227,9 +227,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	
 	<table> <!-- 大的表 -->
-	 <tr><td style="width: 314px; "> 
+	 <tr><td style="width: 200px; "> 
 	    <s:form action="errorlogaction!findbypara.action">
-            <select name="parameter"   style="width:110px" align="right">
+          <td>  <select name="parameter"   style="width:110px" align="right">
                 <option  value="PH">PH</option>
                 <option  value="COD">COD</option>
                 <option  value="碱度">碱度</option>
@@ -238,7 +238,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <option  value="NH3-N">NH3-N</option>
                 <option  value="NO-N">NO-N</option>
                 <option  value="水量">水量</option>
-             </select>
+             </select></td>
 	         <td width="20%" align="center"><s:submit value="查询" theme="simple"  /></td>
           </s:form>
           </td>
@@ -248,11 +248,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           <td > 
           <s:form theme="simple" action="errorlogaction!findbytime.action">
              <table  align="right"  style="margin-left:30">
-                <td><sx:datetimepicker id="data1" name ="date1" label="请选择开始日期" displayFormat="yyyy-MM-dd" ></sx:datetimepicker>
-                    <sx:datetimepicker  id="data2" name ="date2" label="请选择结束日期" displayFormat="yyyy-MM-dd" ></sx:datetimepicker></td>
-                <s:submit value="查询" theme="simple"  />
-              </table>
-           </td></s:form>
+                <tr><td><sx:datetimepicker id="data1" name ="date1" label="请选择开始日期" displayFormat="yyyy-MM-dd" ></sx:datetimepicker></td>
+                    <td><sx:datetimepicker  id="data2" name ="date2" label="请选择结束日期" displayFormat="yyyy-MM-dd" ></sx:datetimepicker></td>
+                <td><s:submit value="查询" theme="simple"  /></td></tr>
+               </s:form>
+          </table>
+           </td>
       </tr>
           
   <table bordercolor="#FFFFFF" rules="all"  id="mytable" class="list_table" align="center" width="100%" >
