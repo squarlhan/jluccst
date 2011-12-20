@@ -1,6 +1,7 @@
 package cn.edu.jlu.ccst.action;
 
 import java.io.UnsupportedEncodingException;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -27,34 +28,39 @@ public class ErrorlogAction extends ActionSupport {
    
    private String parameter;
    
-   private String data1;
-   private String data2;
+   private Date date1;
+   private Date date2;
    
    
    
    
    
    
-	public String getData1() {
-	return data1;
+	
+
+
+
+
+	public Date getDate1() {
+	return date1;
 }
 
 
 
-public void setData1(String data1) {
-	this.data1 = data1;
+public void setDate1(Date date1) {
+	this.date1 = date1;
 }
 
 
 
-public String getData2() {
-	return data2;
+public Date getDate2() {
+	return date2;
 }
 
 
 
-public void setData2(String data2) {
-	this.data2 = data2;
+public void setDate2(Date date2) {
+	this.date2= date2;
 }
 
 
@@ -141,8 +147,9 @@ public void setEquip(String equip) {
 		errorlist = errorlogService.findbypara(parameter);
 	    return "OK";
 }
+	
        public String findbytime(){
-	   errorlist=errorlogService.findbytime(data1, data2);
+	   errorlist=errorlogService.findbytime(date1, date2);
 	   return "OK";
 }	
 

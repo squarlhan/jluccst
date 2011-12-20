@@ -224,12 +224,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
      <div id="rightmain">
 	  <h2>手工数据报警日志</h2>
-	  <s:form action="errorlogaction!findbypara.action">
-
-<tr>
-    
 	
-	<td align="center"> <select name="parameter"   style="width:110px">
+	
+	<table> <!-- 大的表 -->
+	 <tr><td style="width: 314px; "> 
+	    <s:form action="errorlogaction!findbypara.action">
+            <select name="parameter"   style="width:110px" align="right">
                 <option  value="PH">PH</option>
                 <option  value="COD">COD</option>
                 <option  value="碱度">碱度</option>
@@ -238,22 +238,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <option  value="NH3-N">NH3-N</option>
                 <option  value="NO-N">NO-N</option>
                 <option  value="水量">水量</option>
-              </select></td>
-	
-	<td width="20%" align="center"><s:submit value="查询" theme="simple"  /></td>
-    </tr>   </s:form>
+             </select>
+	         <td width="20%" align="center"><s:submit value="查询" theme="simple"  /></td>
+          </s:form>
+          </td>
     
     
     
-    <s:form theme="simple" action="errorlogaction!findbytime?data1=.action"><tr>
-    <td><sx:datetimepicker id="data1" name ="date1" label="请选择开始日期" displayFormat="yyyy-MM-dd"></sx:datetimepicker><td>
-    <td><sx:datetimepicker  id="data2" name ="date2" label="请选择结束日期" displayFormat="yyyy-MM-dd"></sx:datetimepicker><td>
-      <td width="20%" align="center"><s:submit value="查询" theme="simple"  /></td></tr>
-      
-<%//String data1=request.getElementById("data1"); 
-  // String data2=request.getElementById("data2"); %>
-      
- </s:form>
+          <td > 
+          <s:form theme="simple" action="errorlogaction!findbytime.action">
+             <table  align="right"  style="margin-left:30">
+                <td><sx:datetimepicker id="data1" name ="date1" label="请选择开始日期" displayFormat="yyyy-MM-dd" ></sx:datetimepicker>
+                    <sx:datetimepicker  id="data2" name ="date2" label="请选择结束日期" displayFormat="yyyy-MM-dd" ></sx:datetimepicker></td>
+                <s:submit value="查询" theme="simple"  />
+              </table>
+           </td></s:form>
+      </tr>
+          
   <table bordercolor="#FFFFFF" rules="all"  id="mytable" class="list_table" align="center" width="100%" >
 		<tr bgcolor="#4A708B">
 		    <th width = "15%">设备名</th>
@@ -273,7 +274,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	       第<input align="MIDDLE" type="text" size="2" readonly="readonly" id="current"/>页 &nbsp;
 	       共<input align="MIDDLE" type="text" size="2" readonly="readonly" id="sum"/>页
 	</div>
-</div>
+</div></table>
   <script language="JavaScript" type="text/javascript">
      firstpage();
  </script>
