@@ -217,7 +217,7 @@ public class DcsdataAction extends ActionSupport {
 		List<Dcsdata> list1 = new ArrayList<Dcsdata>();
 		List<Errorlog> list3 = new ArrayList<Errorlog>();
 		backwardandResult = new ArrayList();
-		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 		String mytime = formatter.format(new Date());
 	
 		list1 = dcsdataService.findbyequipment(dcsdatalist.get(0)

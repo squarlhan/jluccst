@@ -81,9 +81,14 @@ public class ErrorlogService {
 		return resultlist; 
 	  
   }
-  public List<Errorlog> findbytime(String data1,String data2){
+  public List<Errorlog> findbytime(Date date1,Date date2){
 	  List<Errorlog> resultlist = new ArrayList();
-		resultlist = errorlogImpl.findbytime(data1, data2);
+	  SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		String a = formatter.format(date1);
+		String b = formatter.format(date2);
+	 //  String a=date1.toString(); 
+	 // String b= date2.toString();
+		resultlist = errorlogImpl.findbytime(a, b);
 		if(resultlist.size()<1)resultlist = findAll();
 		return resultlist; 
 	  
@@ -95,7 +100,7 @@ public class ErrorlogService {
 	
 		
 			Date currentTime = new Date();
-			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 			String dateString = formatter.format(currentTime);
 			errorlog.setTime(dateString);
 	        

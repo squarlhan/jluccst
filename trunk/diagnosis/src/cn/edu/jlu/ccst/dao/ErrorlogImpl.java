@@ -1,6 +1,7 @@
 package cn.edu.jlu.ccst.dao;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -53,8 +54,8 @@ public class ErrorlogImpl implements ErrorlogInter  {
 		return result;
 	}
 
-    public List<Errorlog> findbytime(String data1,String data2){
-    	Query query = getEntityManager().createQuery("select el FROM Errorlog el WHERE el.time between '"+data1+"'and'"+data2+"'");
+    public List<Errorlog> findbytime(String date1,String date2){
+    	Query query = getEntityManager().createQuery("select el FROM Errorlog el WHERE  el.time  between '"+date1+"'and'"+date2+"'");
     	return query.getResultList();  }
     
     
