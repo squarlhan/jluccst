@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*" pageEncoding="GB18030"%>
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -17,7 +17,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    
     <base href="<%=basePath%>">
     
-    <title>¹¤ÒÕ´íÎóÈÕÖ¾</title>
+    <title>å·¥è‰ºé”™è¯¯æ—¥å¿—</title>
     
     
 	<meta http-equiv="pragma" content="no-cache">
@@ -30,7 +30,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	-->
 	<script language="JavaScript" type="text/javascript">
     	
-    	//ÏÂÃæ¿ªÊ¼·ÖÒ³      
+    	//ä¸‹é¢å¼€å§‹åˆ†é¡µ      
         var perpage = 13;
     	
     	var names = new Array(
@@ -211,27 +211,44 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <body>
 
      <div id="rightmain">
-	  <h2>Ô¤¾¯ÈÕÖ¾</h2>
+	  <h2>é¢„è­¦æ—¥å¿—</h2>
+		  <s:form action="dsshistoryaction!findbypara.action">
+
+<tr>
+    
 	
+	<td align="center"> <select name="parameter"   style="width:110px">
+                <option  value="PH">PH</option>
+                <option  value="COD">COD</option>
+                <option  value="ç¢±åº¦">ç¢±åº¦</option>
+                 <option  value="BOD5">BOD5</option>
+                <option  value="SS">SS</option>
+                <option  value="NH3-N">NH3-N</option>
+                <option  value="NO-N">NO-N</option>
+                <option  value="æ°´é‡">æ°´é‡</option>
+              </select></td>
+	
+	<td width="20%" align="center"><s:submit value="æŸ¥è¯¢" theme="simple"  /></td>
+    </tr>   </s:form>
      
  
   <table bordercolor="#FFFFFF" rules="all"  id="mytable" class="list_table" align="center" width="100%" >
 		<tr bgcolor="#4A708B">
-		    <th width = "20%">Éè±¸²ÎÊı</th>
-			<th width = "5%">Ô¤¾¯ÏÖÏó</th>
-			<th width = "20%">Ô¤¾¯Ê±¼ä</th>
-			<th width = "5%">Ô¤¾¯Öµ</th>
-			<th width = "20%">Ô¤¾¯Ô­Òò</th>
-			<th width = "30%">²ÉÈ¡µÄ½¨Òé</th>
+		    <th width = "20%">è®¾å¤‡å‚æ•°</th>
+			<th width = "5%">é¢„è­¦ç°è±¡</th>
+			<th width = "20%">é¢„è­¦æ—¶é—´</th>
+			<th width = "5%">é¢„è­¦å€¼</th>
+			<th width = "20%">é¢„è­¦åŸå› </th>
+			<th width = "30%">é‡‡å–çš„å»ºè®®</th>
 	  </tr>
   </table>
 <div align="center">
-       <input type="button" id="first" value="µÚÒ»Ò³" onclick="javascript:firstpage()"/>
-       <input type="button" id="last" value="ÉÏÒ»Ò³" onclick="javascript:lastpage()"/>
-       <input type="button" id="next" value="ÏÂÒ»Ò³" onclick="javascript:nextpage()"/>
-       <input type="button" id="final" value="×îºóÒ»Ò³" onclick="javascript:finalpage()"/>
-	       µÚ<input align="MIDDLE" type="text" size="2" readonly="readonly" id="current"/>Ò³ &nbsp;
-	       ¹²<input align="MIDDLE" type="text" size="2" readonly="readonly" id="sum"/>Ò³
+       <input type="button" id="first" value="ç¬¬ä¸€é¡µ" onclick="javascript:firstpage()"/>
+       <input type="button" id="last" value="ä¸Šä¸€é¡µ" onclick="javascript:lastpage()"/>
+       <input type="button" id="next" value="ä¸‹ä¸€é¡µ" onclick="javascript:nextpage()"/>
+       <input type="button" id="final" value="æœ€åä¸€é¡µ" onclick="javascript:finalpage()"/>
+	       ç¬¬<input align="MIDDLE" type="text" size="2" readonly="readonly" id="current"/>é¡µ &nbsp;
+	       å…±<input align="MIDDLE" type="text" size="2" readonly="readonly" id="sum"/>é¡µ
 	</div>
 </div>
   <script language="JavaScript" type="text/javascript">

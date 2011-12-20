@@ -90,6 +90,12 @@ public class Dss_historyService {
 		resultlist = dss_historyServiceImpl.findsimu_time();
 		return resultlist;
 	}
-	
+	 public List<Dss_history> findbypara(String para){
+		  List<Dss_history> resultlist = new ArrayList();
+			resultlist = dss_historyServiceImpl.findbypara(para);
+			if(resultlist.size()<1)resultlist = findAll();
+			return resultlist; 
+		  
+	  }
 	
 }

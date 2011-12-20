@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*" pageEncoding="GB18030"%>
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -17,7 +17,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    
     <base href="<%=basePath%>">
     
-    <title>Ç°À¡ĞÍÉñ¾­ÍøÂç</title>
+    <title>å‰é¦ˆå‹ç¥ç»ç½‘ç»œ</title>
     
     
     
@@ -36,30 +36,30 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
    <body>
   <form id="form1" name="form1" method="post" action="">
-  <p align="center"><h2>Ç°À¡ĞÍÉñ¾­ÍøÂç</h2></p>
+  <p align="center"><h2>å‰é¦ˆå‹ç¥ç»ç½‘ç»œ</h2></p>
   <table  width="100%" height="247" border="20" bordercolor="#000000" align="center" cellspacing="0" >
     <tr>
-      <td height="20"><strong>ÇëÊäÈë²ãÊı£º</strong>
+      <td height="20"><strong>è¯·è¾“å…¥å±‚æ•°ï¼š</strong>
         <input type="text" name="textfield" />      </td>
     </tr>
     <tr>
       <td height="114"><table width="100%" height="126" border="0" cellspacing="0">
         <tr>
-          <td height="22" colspan="9" bgcolor="#4A708B"><div align="center"><strong>²ÎÊıÉèÖÃ</strong></div></td>
+          <td height="22" colspan="9" bgcolor="#4A708B"><div align="center"><strong>å‚æ•°è®¾ç½®</strong></div></td>
           </tr>
         <tr>
-          <td><div align="center">ÍøÊı£º            
+          <td><div align="center">ç½‘æ•°ï¼š            
             <input type="text" name="textfield2"  size="5" />
           </div></td>
-          <td>ÑµÁ·Îó²î£º</td>
+          <td>è®­ç»ƒè¯¯å·®ï¼š</td>
           <td height="40"><div align="center">
             <input type="text" name="textfield3" size="18" />          
           </div></td>
-          <td>Ó¦ÓÃÎó²î£º</td>
+          <td>åº”ç”¨è¯¯å·®ï¼š</td>
           <td><div align="center">
             <input type="text" name="textfield32" size="12" />          
           </div></td>
-          <td>a£º</td>
+          <td>aï¼š</td>
           <td><div align="center">
             <input type="text" name="textfield322" size="12" />          
           </div></td>
@@ -70,11 +70,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         </tr>
         <tr>
           <td width="11%">&nbsp;</td>
-          <td width="8%">µü´úÊı£º</td>
+          <td width="8%">è¿­ä»£æ•°ï¼š</td>
           <td width="16%" height="53"><div align="center">
             <input type="text" name="textfield324" size="18" />
           </div></td>
-          <td width="8%">¶¯Ì¬Á¿:</td>
+          <td width="8%">åŠ¨æ€é‡:</td>
           <td width="17%"> <div align="center">
             <input type="text" name="textfield325" size="12" />          
           </div></td>
@@ -92,7 +92,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <tr>
       <td height="77"><table width="100%" height="72" border="0" cellspacing="0">
         <tr>
-          <td height="27" colspan="4" bgcolor="#4A708B"><div align="center"><strong>²Ù×÷&nbsp;&nbsp;
+          <td height="27" colspan="4" bgcolor="#4A708B"><div align="center"><strong>æ“ä½œ&nbsp;&nbsp;
             </strong>
             <select name="select" size="1">
               <option>BP</option>
@@ -101,18 +101,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         </tr>
         <tr>
           <td width="35%"><div align="center">
-            <input type="submit" name="Submit" value="Â¼ÈëĞÅºÅ" />
+            <input type="submit" name="Submit" value="å½•å…¥ä¿¡å·" />
             <input type="submit" name="Submit2" value=".." />
           </div></td>
           <td width="32%"><div align="center">
-            <input type="submit" name="Submit3" value="Â¼ÈëĞÅºÅ" />
+            <input type="submit" name="Submit3" value="å½•å…¥ä¿¡å·" />
             <input type="submit" name="Submit22" value=".." />
           </div></td>
           <td width="18%"><div align="center">
-            <input type="submit" name="Submit32" value="ÑµÁ·" />
+            <input type="submit" name="Submit32" value="è®­ç»ƒ" />
           </div></td>
           <td width="15%"><div align="center">
-            <input type="submit" name="Submit33" value="Ó¦ÓÃ" />
+            <input type="submit" name="Submit33" value="åº”ç”¨" />
           </div></td>
         </tr>
       </table></td>

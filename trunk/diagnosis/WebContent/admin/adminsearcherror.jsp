@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*" pageEncoding="GBK"%>
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
@@ -18,7 +18,7 @@
    %>  
     <base href="<%=basePath%>">
     
-    <title>搜索错误</title>
+    <title>鎼滅储閿欒</title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -32,10 +32,10 @@
   </head>
   
   <body>
-    <div style="color: red;">您所查找的用户不存在</div><br>
+    <div style="color: red;">鎮ㄦ墍鏌ユ壘鐨勭敤鎴蜂笉瀛樺湪</div><br>
    
      
      <s:a href="adminuseraction!userList.action"> 
-						   <div align="center" class="STYLE1"><U>返回用户列表</U></div></s:a>
+						   <div align="center" class="STYLE1"><U>杩斿洖鐢ㄦ埛鍒楄〃</U></div></s:a>
   </body>
 </html>

@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*" pageEncoding="GB18030"%>
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -17,11 +17,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    
     <base href="<%=basePath%>">
     
-    <title>½á¹ûÒ³Ãæ</title>
+    <title>ç»“æœé¡µé¢</title>
     
       <script type="text/javascript">
     	function confirmDel(){
-			return confirm("È·¶¨É¾³ı£¿");
+			return confirm("ç¡®å®šåˆ é™¤ï¼Ÿ");
 			
 			    
 			
@@ -46,19 +46,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <body>
 
      <div id="rightmain">
-	  <h2>ÊµÊ±Êı¾İÏÔÊ¾</h2>
+	  <h2>å®æ—¶æ•°æ®æ˜¾ç¤º</h2>
 	
      
  
   <table bordercolor="#FFFFFF" rules="all"  id="mytable" class="list_table" align="center" width="100%" >
 		<tr bgcolor="#4A708B">
-		    <th>Éè±¸Ãû³Æ</th>
-			<th>ĞÕÃû</th>
-			<th>µç×ÓÓÊÏä</th>
-			<th>µç»°</th>
-			<th>¹¤×÷ºÅ</th>
-			<th>²¿ÃÅ</th>
-			<th>¹ÜÀíÔ±²Ù×÷</th>
+		    <th>è®¾å¤‡åç§°</th>
+			<th>å§“å</th>
+			<th>ç”µå­é‚®ç®±</th>
+			<th>ç”µè¯</th>
+			<th>å·¥ä½œå·</th>
+			<th>éƒ¨é—¨</th>
+			<th>ç®¡ç†å‘˜æ“ä½œ</th>
 	  </tr>
     <s:iterator id="users" value="userlist" status="index1">
        
@@ -71,12 +71,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
        <td><s:property value="dept"/>&nbsp;</td>
       <td width="200" height="35">
 						
-							<s:a href="adminuseraction!chUser?user.id=%{#users.id}" onclick="return confirmReset();">ÖØÖÃÃÜÂë</s:a>
+							<s:a href="adminuseraction!chUser?user.id=%{#users.id}" onclick="return confirmReset();">é‡ç½®å¯†ç </s:a>
 
 						
 						&nbsp;
 						<s:a href="adminuseraction!deleteUser?user.id=%{#users.id}" onclick="return confirmDel();">
-																						É¾³ı</s:a>
+																						åˆ é™¤</s:a>
 
 	   </td>
      </tr>
