@@ -53,6 +53,12 @@ public class ErrorlogImpl implements ErrorlogInter  {
 		return result;
 	}
 
+    public List<Errorlog> findbytime(String data1,String data2){
+    	Query query = getEntityManager().createQuery("select el FROM Errorlog el WHERE el.time between '"+data1+"'and'"+data2+"'");
+    	return query.getResultList();  }
+    
+    
+    
     
     public void save(Errorlog errorlog) {
 		if (errorlog.getId()<=0) {

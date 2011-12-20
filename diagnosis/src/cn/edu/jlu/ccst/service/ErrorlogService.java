@@ -81,6 +81,14 @@ public class ErrorlogService {
 		return resultlist; 
 	  
   }
+  public List<Errorlog> findbytime(String data1,String data2){
+	  List<Errorlog> resultlist = new ArrayList();
+		resultlist = errorlogImpl.findbytime(data1, data2);
+		if(resultlist.size()<1)resultlist = findAll();
+		return resultlist; 
+	  
+  }
+
 
 
 	public void save(Errorlog errorlog) {

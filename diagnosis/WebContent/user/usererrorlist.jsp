@@ -3,6 +3,7 @@
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
+<%@ taglib uri="/struts-dojo-tags" prefix="sx"%>
 <%@taglib prefix="s" uri="/struts-tags" %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
@@ -19,7 +20,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     
     <title>手工数据报警日志</title>
   
-    
+    <sx:head/>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -217,7 +218,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 
 
-  </head>
+</head>
   
   <body>
 
@@ -241,17 +242,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	<td width="20%" align="center"><s:submit value="查询" theme="simple"  /></td>
     </tr>   </s:form>
- 
+    
+    
+    
+    <s:form theme="simple" action="errorlogaction!findbytime?data1=.action"><tr>
+    <td><sx:datetimepicker id="data1" name ="date1" label="请选择开始日期" displayFormat="yyyy-MM-dd"></sx:datetimepicker><td>
+    <td><sx:datetimepicker  id="data2" name ="date2" label="请选择结束日期" displayFormat="yyyy-MM-dd"></sx:datetimepicker><td>
+      <td width="20%" align="center"><s:submit value="查询" theme="simple"  /></td></tr>
+      
+<%//String data1=request.getElementById("data1"); 
+  // String data2=request.getElementById("data2"); %>
+      
+ </s:form>
   <table bordercolor="#FFFFFF" rules="all"  id="mytable" class="list_table" align="center" width="100%" >
 		<tr bgcolor="#4A708B">
-<<<<<<< .mine
-		    <th width = "15%">设备名</th>
-			<th width = "15%">参数名</th>
-			<th width = "10%">报警现象</th>
-			<th width = "20%">报警时间</th>
-			<th width = "10%">报警值</th>
-			<th width = "30%">采取的建议</th>
-=======
 		    <th width = "15%">设备名</th>
 			<th width = "15%">参数名</th>
 			<th width = "10%">报警现象</th>
@@ -259,7 +263,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<th width = "10%">报警值</th>
 			<th width = "5%">报警级别</th>
 			<th width = "30%">采取的建议</th>
->>>>>>> .r635
 	  </tr>
   </table>
   <div align="center">
