@@ -39,30 +39,19 @@ public class ErrorlogImpl implements ErrorlogInter  {
     
     public List<Errorlog> findbyequipment(String equip){
     	Query query = getEntityManager().createQuery("select el FROM Errorlog el WHERE el.equipment like'"+equip+"%'");
-		
-		
 		return query.getResultList();
     }
     
     
- public List<Errorlog> findbypara(String para){
-    	
-    
-	        String strSQL="select el FROM Errorlog el WHERE el.item like :name" ;
-	        Query query = getEntityManager().createQuery(strSQL);   
-  	      query.setParameter("name", "%"+para+"%");   
-  	      List result=query.getResultList();   
-  	    return result;
-    }
-    
+	public List<Errorlog> findbypara(String para) {
 
-//   public List<Errorlog> findbypara(String para){
-//    	Query query = getEntityManager().createQuery("select el FROM Errorlog el WHERE el.item like '%"+para+"%' " );
-//		
-//		
-//		return query.getResultList();
-//    }
-   
+		String hql = "select el FROM Errorlog el WHERE el.item like ? ";
+		String params="%" + para + "%";
+		Query query = getEntityManager().createQuery(hql);
+		query.setParameter(1, params);
+		List result = query.getResultList();
+		return result;
+	}
 
     
     public void save(Errorlog errorlog) {
