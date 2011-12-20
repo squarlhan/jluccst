@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*" pageEncoding="GB18030"%>
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -16,7 +16,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    
     <base href="<%=basePath%>">
     
-    <title>¹¤ÒÕÊı¾İ</title>
+    <title>å·¥è‰ºæ•°æ®</title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -28,7 +28,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	-->
  <script language="JavaScript" type="text/javascript">
     	
-    	//ÏÂÃæ¿ªÊ¼·ÖÒ³      
+    	//ä¸‹é¢å¼€å§‹åˆ†é¡µ      
 
         var perpage = 13;
     	var eques = new Array(
@@ -198,23 +198,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <body>
 
      <div id="rightmain">
-	  <h2>¹¤ÒÕÊı¾İ</h2>
+	  <h2>å·¥è‰ºæ•°æ®</h2>
 	
   <table bordercolor="#FFFFFF" rules="all"  id="mytable" class="list_table" align="center">
 		<tr bgcolor="#4A708B">
-		    <th width = "35%">Ô¤¾¯½Úµã</th>
-			<th width = "35%">¿ØÖÆ²ÎÊı</th>
-			<th width = "30%">²ÎÊıÖµ</th>
+		    <th width = "35%">é¢„è­¦èŠ‚ç‚¹</th>
+			<th width = "35%">æ§åˆ¶å‚æ•°</th>
+			<th width = "30%">å‚æ•°å€¼</th>
 	  </tr>
     
   </table>
  <div align="center">
-       <input type="button" id="first" value="µÚÒ»Ò³" onclick="javascript:firstpage()"/>
-       <input type="button" id="last" value="ÉÏÒ»Ò³" onclick="javascript:lastpage()"/>
-       <input type="button" id="next" value="ÏÂÒ»Ò³" onclick="javascript:nextpage()"/>
-       <input type="button" id="final" value="×îºóÒ»Ò³" onclick="javascript:finalpage()"/>
-	       µÚ<input align="MIDDLE" type="text" size="2" readonly="readonly" id="current"/>Ò³ &nbsp;
-	       ¹²<input align="MIDDLE" type="text" size="2" readonly="readonly" id="sum"/>Ò³
+       <input type="button" id="first" value="ç¬¬ä¸€é¡µ" onclick="javascript:firstpage()"/>
+       <input type="button" id="last" value="ä¸Šä¸€é¡µ" onclick="javascript:lastpage()"/>
+       <input type="button" id="next" value="ä¸‹ä¸€é¡µ" onclick="javascript:nextpage()"/>
+       <input type="button" id="final" value="æœ€åä¸€é¡µ" onclick="javascript:finalpage()"/>
+	       ç¬¬<input align="MIDDLE" type="text" size="2" readonly="readonly" id="current"/>é¡µ &nbsp;
+	       å…±<input align="MIDDLE" type="text" size="2" readonly="readonly" id="sum"/>é¡µ
 	</div>
 </div>
   <script language="JavaScript" type="text/javascript">

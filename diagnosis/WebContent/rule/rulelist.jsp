@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*" pageEncoding="GB18030"%>
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -17,14 +17,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    
     <base href="<%=basePath%>">
     
-    <title>¹æÔòÎ¬»¤</title>
+    <title>è§„åˆ™ç»´æŠ¤</title>
     <script language="JavaScript" type="text/javascript">
     	function confirmDel(){
-			return confirm("È·¶¨É¾³ı£¿");	
+			return confirm("ç¡®å®šåˆ é™¤ï¼Ÿ");	
     	}
     	
     	
-    	//ÏÂÃæ¿ªÊ¼·ÖÒ³
+    	//ä¸‹é¢å¼€å§‹åˆ†é¡µ
    	 
         var perpage = 13;
         var names = new Array(
@@ -58,8 +58,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	    var urld = "ruleaction!delRule?rule.bid="+bids[a];
 			var ac = document.createElement("a");
 			var ad = document.createElement("a");
-			ac.innerHTML = "ĞŞ¸Ä&nbsp;&nbsp;";
-			ad.innerHTML = "&nbsp;&nbsp;É¾³ı";
+			ac.innerHTML = "ä¿®æ”¹&nbsp;&nbsp;";
+			ad.innerHTML = "&nbsp;&nbsp;åˆ é™¤";
 			ac.href = urlc;
 			ad.href = urld;
 			ad.onclick=confirmDel;
@@ -198,28 +198,28 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <body>
 
      <div id="rightmain">
-	  <h2>¹æÔòÎ¬»¤</h2>
+	  <h2>è§„åˆ™ç»´æŠ¤</h2>
 	
     <!-- 
  <div align="right">
-      <input name="button" type=button onClick="window.location.href('ruleaction!justgo.action')" value="ĞÂ½¨¹æÔò">
+      <input name="button" type=button onClick="window.location.href('ruleaction!justgo.action')" value="æ–°å»ºè§„åˆ™">
       </div>-->
   <table bordercolor="#FFFFFF" rules="all"  id="mytable" class="list_table" align="center" width="100%" >
 		<tr bgcolor="#4A708B">
 		    <!--<th width = "10%">ID</th>-->
-		    <th width = "40%">¹æÔò¶ÔÓ¦¹ÊÕÏ½Úµã</th>
-			<th width = "30%">¹æÔò¶ÔÓ¦¿ØÖÆ²ÎÊı</th>		
-			<th width = "30%">Ïà¹Ø²Ù×÷</th>
+		    <th width = "40%">è§„åˆ™å¯¹åº”æ•…éšœèŠ‚ç‚¹</th>
+			<th width = "30%">è§„åˆ™å¯¹åº”æ§åˆ¶å‚æ•°</th>		
+			<th width = "30%">ç›¸å…³æ“ä½œ</th>
 	  </tr>
     
   </table>
    	<div align="center">
-       <input type="button" id="first" value="µÚÒ»Ò³" onclick="javascript:firstpage()"/>
-       <input type="button" id="last" value="ÉÏÒ»Ò³" onclick="javascript:lastpage()"/>
-       <input type="button" id="next" value="ÏÂÒ»Ò³" onclick="javascript:nextpage()"/>
-       <input type="button" id="final" value="×îºóÒ»Ò³" onclick="javascript:finalpage()"/>
-	       µÚ<input align="MIDDLE" type="text" size="2" readonly="readonly" id="current"/>Ò³ &nbsp;
-	       ¹²<input align="MIDDLE" type="text" size="2" readonly="readonly" id="sum"/>Ò³
+       <input type="button" id="first" value="ç¬¬ä¸€é¡µ" onclick="javascript:firstpage()"/>
+       <input type="button" id="last" value="ä¸Šä¸€é¡µ" onclick="javascript:lastpage()"/>
+       <input type="button" id="next" value="ä¸‹ä¸€é¡µ" onclick="javascript:nextpage()"/>
+       <input type="button" id="final" value="æœ€åä¸€é¡µ" onclick="javascript:finalpage()"/>
+	       ç¬¬<input align="MIDDLE" type="text" size="2" readonly="readonly" id="current"/>é¡µ &nbsp;
+	       å…±<input align="MIDDLE" type="text" size="2" readonly="readonly" id="sum"/>é¡µ
 	</div>
 </div>
   <script language="JavaScript" type="text/javascript">

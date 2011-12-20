@@ -24,12 +24,22 @@ public class DssHistoryAction extends ActionSupport {
 	private List<Dss_history> errorlist;
 	private Dss_historyService dss_historyService;
     private String name;
-    
+    private String parameter;
     
     
     
     
 	
+
+	public String getParameter() {
+		return parameter;
+	}
+
+
+	public void setParameter(String parameter) {
+		this.parameter = parameter;
+	}
+
 
 	public String getName() {
 		return name;
@@ -82,4 +92,16 @@ public class DssHistoryAction extends ActionSupport {
 		} 
 		return "OK";
 	}
+	public String findbypara(){
+//		try {
+//			String keyword= new String(parameter.getBytes("ISO-8859-1"),"UTF-8");
+//			errorlist = errorlogService.findbypara(keyword);
+//		} catch (UnsupportedEncodingException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} 
+//		return "OK";
+		errorlist = dss_historyService.findbypara(parameter);
+	    return "OK";
+}
 }

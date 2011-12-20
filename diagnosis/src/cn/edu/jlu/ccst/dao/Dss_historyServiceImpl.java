@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import cn.edu.jlu.ccst.model.Dcshistory;
 import cn.edu.jlu.ccst.model.Dss_history;
+import cn.edu.jlu.ccst.model.Errorlog;
 import cn.edu.jlu.ccst.model.Pre_dss;
 import cn.edu.jlu.ccst.model.User;
 
@@ -63,10 +64,16 @@ public class Dss_historyServiceImpl implements Dss_historyServiceInter  {
 		Query query = getEntityManager().createQuery("select max(u.simu_time) FROM Dss_history u ");
 		return query.getResultList();
 	}
-	}
 	
-
-
+	
+    public List<Dss_history> findbypara(String para){
+    	Query query = getEntityManager().createQuery("select el FROM Dss_history el WHERE el.name.name like '%"+para+"%' " );
+    
+   
+		
+		return query.getResultList();
+  }
+}
 
 	
 

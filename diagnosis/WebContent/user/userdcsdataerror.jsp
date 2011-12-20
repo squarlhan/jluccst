@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*" pageEncoding="GB18030"%>
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -21,7 +21,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    %>  
     <base href="<%=basePath%>">
     
-    <title>超标信息页面</title>
+    <title>瓒呮爣淇℃伅椤甸潰</title>
      
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -38,11 +38,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <body>
     <div id="rightmain">
-  <h2>超标信息页面</h2>
+  <h2>瓒呮爣淇℃伅椤甸潰</h2>
   <table bordercolor="#4A708B" rules="all"  id="mytable" class="list_table" align="center" width="100%">
 		<tr bgcolor="#4A708B">
-		    <th style="width:50%">报警节点</th>
-			<th style="width:50%">报警现象</th>
+		    <th style="width:50%">鎶ヨ鑺傜偣</th>
+			<th style="width:50%">鎶ヨ鐜拌薄</th>
 			
 	  </tr>
     <s:iterator id="bandr" value="backwardandResult" status="index1">
@@ -58,8 +58,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       
   <table bordercolor="#4A708B" rules="all"  id="mytable" class="list_table" align="center" width="100%">
 		<tr bgcolor="#4A708B">
-		    <th style="width:50%">报警原因</th>
-			<th style="width:50%">相关建议</th>
+		    <th style="width:50%">鎶ヨ鍘熷洜</th>
+			<th style="width:50%">鐩稿叧寤鸿</th>
 			
 	  </tr>
     <s:iterator id="reasons" value="reasonlist" status="index1">
@@ -73,7 +73,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
      </s:iterator>
   </table>
     <div align="center">
-      <input name="button" type=button onClick="window.location.href('errorlogaction.action')" value="故障日志">
+      <input name="button" type=button onClick="window.location.href('errorlogaction.action')" value="鏁呴殰鏃ュ織">
       </div>
  </div>
   </body>

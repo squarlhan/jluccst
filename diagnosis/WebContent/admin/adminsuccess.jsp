@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*" pageEncoding="GB18030"%>
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -17,21 +17,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    
     <base href="<%=basePath%>">
     
-    <title>½á¹ûÒ³Ãæ</title>
+    <title>ç»“æœé¡µé¢</title>
     
       <script type="text/javascript">
     	function confirmDel(){
-			return confirm("È·¶¨É¾³ı£¿");
+			return confirm("ç¡®å®šåˆ é™¤ï¼Ÿ");
 			
 			    
 			
     	}
     	function confirmReset(){
-			return confirm("È·ÈÏÖØÖÃÃÜÂë£¿");
+			return confirm("ç¡®è®¤é‡ç½®å¯†ç ï¼Ÿ");
 			
     	}
     	function confirmChge(id){
-    		if(confirm("È·ÈÏĞŞ¸Ä£¿")){
+    		if(confirm("ç¡®è®¤ä¿®æ”¹ï¼Ÿ")){
 				var isuser = document.getElementById("isuser["+id+"]");
 				var isadmin = document.getElementById("isadmin["+id+"]");
 				var isprof = document.getElementById("isprof["+id+"]");
@@ -63,22 +63,22 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <body>
 
      <div id="rightmain">
-	  <h2>¹ÜÀíÓÃ»§</h2>
+	  <h2>ç®¡ç†ç”¨æˆ·</h2>
 	
      
  
   <table bordercolor="#FFFFFF" rules="all"  id="mytable" class="list_table" align="center" width="100%" >
 		<tr bgcolor="#4A708B">
-		    <th>ÓÃ»§Ãû</th>
-			<th>ĞÕÃû</th>
-			<th>µç×ÓÓÊÏä</th>
-			<th>µç»°</th>
-			<th>¹¤×÷ºÅ</th>
-			<th>²¿ÃÅ</th>
-			<th>ÓÃ»§</th>
-			<th>¹ÜÀíÔ±</th>
-			<th>×¨¼Ò</th>
-			<th>¹ÜÀíÔ±²Ù×÷</th>
+		    <th>ç”¨æˆ·å</th>
+			<th>å§“å</th>
+			<th>ç”µå­é‚®ç®±</th>
+			<th>ç”µè¯</th>
+			<th>å·¥ä½œå·</th>
+			<th>éƒ¨é—¨</th>
+			<th>ç”¨æˆ·</th>
+			<th>ç®¡ç†å‘˜</th>
+			<th>ä¸“å®¶</th>
+			<th>ç®¡ç†å‘˜æ“ä½œ</th>
 	  </tr>
     <s:iterator id="users" value="userlist" status="index1">
        
@@ -94,12 +94,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
        <td><s:checkbox name="isprof" fieldValue="%{#user.isprof}" id="isprof[%{#users.id}]" theme="simple"/></td> 
       <td width="200" height="35">
 						
-							<s:a href="adminuseraction!chUser?user.id=%{#users.id}" onclick="return confirmReset();">ÖØÖÃÃÜÂë</s:a>
+							<s:a href="adminuseraction!chUser?user.id=%{#users.id}" onclick="return confirmReset();">é‡ç½®å¯†ç </s:a>
 
-						<s:a id="a[%{#users.id}]"  href="#"  onclick="return confirmChge(%{#users.id});">ĞŞ¸Ä</s:a>
+						<s:a id="a[%{#users.id}]"  href="#"  onclick="return confirmChge(%{#users.id});">ä¿®æ”¹</s:a>
 						
 						<s:a href="adminuseraction!deleteUser?user.id=%{#users.id}" onclick="return confirmDel();">
-																						É¾³ı</s:a>
+																						åˆ é™¤</s:a>
 
 	   </td>
      </tr>

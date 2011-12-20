@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*" pageEncoding="GB18030"%>
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -20,7 +20,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    %>  
     <base href="<%=basePath%>">
     
-    <title>结果页面</title>
+    <title>缁撴灉椤甸潰</title>
      
     
 	<meta http-equiv="pragma" content="no-cache">
@@ -42,8 +42,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <table bordercolor="#4A708B" rules="all"  id="mytable" class="list_table" align="center" width="100%">
 		<tr bgcolor="#4A708B">
-		    <th width="35%">报警原因</th>
-			<th width="65%">相关建议</th>
+		    <th width="35%">鎶ヨ鍘熷洜</th>
+			<th width="65%">鐩稿叧寤鸿</th>
 			
 	  </tr>
     <s:iterator id="reasons" value="reasonlist" status="index1">
@@ -58,7 +58,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </table>
    
     <div align="center">
-      <input name="button" type=button onClick="window.location.href('rulebraction.action')" value="完成返回">
+      <input name="button" type=button onClick="window.location.href('rulebraction.action')" value="瀹屾垚杩斿洖">
       </div>
  </div>
   </body>

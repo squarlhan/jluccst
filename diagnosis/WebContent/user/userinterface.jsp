@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*" pageEncoding="GB18030"%>
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -21,7 +21,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    %>  
     <base href="<%=basePath%>">
     
-    <title>结果页面</title>
+    <title>缁撴灉椤甸潰</title>
      <meta http-equiv="refresh" content="10" />
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -38,11 +38,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <body>
     <div id="rightmain">
-  <h2>超标信息页面</h2>
+  <h2>瓒呮爣淇℃伅椤甸潰</h2>
   <table bordercolor="#4A708B" rules="all"  id="mytable" class="list_table" align="center" width="100%">
 		<tr bgcolor="#4A708B">
-		    <th style="width:50%">预警设备</th>
-			<th style="width:50%">预警现象</th>
+		    <th style="width:50%">棰勮璁惧</th>
+			<th style="width:50%">棰勮鐜拌薄</th>
 			
 	  </tr>
     <s:iterator id="bandr" value="backwardandResult" status="index1">
@@ -59,8 +59,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <table bordercolor="#4A708B" rules="all"  id="mytable" class="list_table" align="center" width="100%">
 		<tr bgcolor="#4A708B">
-		    <th style="width:50%">预警原因</th>
-			<th style="width:50%">相关建议</th>
+		    <th style="width:50%">棰勮鍘熷洜</th>
+			<th style="width:50%">鐩稿叧寤鸿</th>
 			
 	  </tr>
     <s:iterator id="reasons" value="reasonlist" status="index1">
@@ -75,7 +75,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </table>
    
    <div align="center">
-      <input name="button" type=button onClick="window.location.href('dsshistoryaction.action')" value="预警日志查看">
+      <input name="button" type=button onClick="window.location.href('dsshistoryaction.action')" value="棰勮鏃ュ織鏌ョ湅">
       </div> 
     </div>  
   </body>
