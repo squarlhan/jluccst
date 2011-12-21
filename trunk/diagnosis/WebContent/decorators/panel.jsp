@@ -2,19 +2,7 @@
 
 <%@taglib prefix="decorator" uri="http://www.opensymphony.com/sitemesh/decorator"%>
 
-<link href="/diagnosis/css/css.css" rel="stylesheet" type="text/css" />
-<link href="/diagnosis/css/main.css" rel="stylesheet" type="text/css" />
+<link href="/diagnosis/css/CSS1.css" rel="stylesheet" type="text/css" />
 <p>
-  <table width="150" border=0 cellpadding=0 cellspacing=0>
-    <tr >
-      <th class="panelTitle" bgcolor="#CCCCCC" height="25">
-        <font color=ffffff><decorator:title default="侧边栏" /></font>
-      </th>
-    </tr>
-    <tr>
-      <td class="panelBody">
         <decorator:body/>
-      </td>
-    </tr>
-  </table>
 </p>
