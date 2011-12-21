@@ -45,43 +45,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  <h2>添加新用户</h2>
 	
 <div id="login">
-<s:form action="adminuseraction!addUser.action">
+<s:form action="adminuseraction!addUser.action" theme = "simple">
 <table width="200" align="center" style="margin-left:30">
+	<tr><td>用户名:</td><td><s:textfield size="15" label="用户名" name="user.username" /></td></tr>
+	<tr><td>初始密码:</td><td><s:password size="17" label="初始密码" name="user.password" /></td></tr>
+	<tr><td>姓名:</td><td><s:textfield size="17" label="姓名" name="user.name" /></td></tr>
+	<tr><td>电子邮箱:</td><td><s:textfield size="17" label="电子邮箱" name="user.email" /></td></tr>
+	<tr><td>电话:</td><td><s:textfield size="17" label="电话" name="user.phone" /></td></tr>
+	<tr><td>工作号:</td><td><s:textfield size="17" label="工作号" name="user.jid" /></td></tr>
+	<tr><td>部门:</td><td><s:textfield size="17" label="部门" name="user.dept" /></td></tr>
+	 <tr><td>用户:</td><td ><s:checkbox name="user.isuser"     theme="simple"/></td></tr>
+      <tr><td>管理员:</td><td><s:checkbox name="user.isadmin"   theme="simple"/></td></tr>
+       <tr><td>专家:</td><td><s:checkbox name="user.isprof"   theme="simple"/></td></tr> 
 	<tr>
-	<td align="center"><s:textfield size="15" label="用户名" name="user.username" /></td>
+	<td width="80" align="center"><s:submit value="添加用户" onclick="return confirmAdd();" theme="simple" /></td>
+	<td width="80" align="center"> <s:reset value="取消" theme="simple" /></td>
 	</tr>
-	<tr>
-	<td align="center"><s:password size="17" label="初始密码" name="user.password" /></td>
-	</tr>
-	<tr>
-	<td align="center"><s:textfield size="17" label="姓名" name="user.name" /></td>
-	</tr>
-	<tr>
-	<td align="center"><s:textfield size="17" label="电子邮箱" name="user.email" /></td>
-	</tr>
-	<tr>
-	<td align="center"><s:textfield size="17" label="电话" name="user.phone" /></td>
-	</tr>
-	<tr>
-	<td align="center"><s:textfield size="17" label="工作号" name="user.jid" /></td>
-	</tr>
-	<tr>
-	<td align="center"><s:textfield size="17" label="部门" name="user.dept" /></td>
-	</tr>
-	 <tr><td>用户</td><td ><s:checkbox name="user.isuser"     theme="simple"/></td></tr>
-      <tr><td>管理员</td><td><s:checkbox name="user.isadmin"   theme="simple"/></td></tr>
-       <tr><td>专家</td><td><s:checkbox name="user.isprof"   theme="simple"/></td></tr> 
 	</table>
-	<br/>
-	<table width="150" align="center">
-	<tr>
-	<td width="80" align="center"><s:submit value="添加用户" onclick="return confirmAdd();" theme="simple" />
-	
-    
-	</td>
-	
-	<td width="80" align="center"> <s:reset value="取消"
-		theme="simple" /></td></tr></table>
 </s:form></div>
 </div>
    

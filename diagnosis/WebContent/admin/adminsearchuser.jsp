@@ -36,25 +36,25 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  <h2>查找用户</h2>
 	 
 <div id="login">
-<s:form action="adminuseraction!searchUser.action">
+<s:form action="adminuseraction!searchUser.action" theme = "simple">
 <table width="200" align="center" style="margin-left:30">
-	<tr>
+	<tr><td>用户名：</td>
 	<td align="center"><s:textfield size="15" label="用户名" name="user.username" /></td>
 	</tr>
 	
-	<tr>
+	<tr><td>姓名：</td>
 	<td align="center"><s:textfield size="17" label="姓名" name="user.name" /></td>
 	</tr>
-	<tr>
+	<tr><td>电子邮箱：</td>
 	<td align="center"><s:textfield size="17" label="电子邮箱" name="user.email" /></td>
 	</tr>
-	<tr>
+	<tr><td>电话：</td>
 	<td align="center"><s:textfield size="17" label="电话" name="user.phone" /></td>
 	</tr>
-	<tr>
+	<tr><td>工作号：</td>
 	<td align="center"><s:textfield size="17" label="工作号" name="user.jid" /></td>
 	</tr>
-	<tr>
+	<tr><td>部门：</td>
 	<td align="center"><s:textfield size="17" label="部门" name="user.dept" /></td>
 	</tr>
 	</table>

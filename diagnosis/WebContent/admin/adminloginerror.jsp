@@ -28,12 +28,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <div id="rightmain">
 	  <h2>管理员登陆页面</h2>
 <div id="login">
-<s:form action="adminaction!exitsadmin.action">
+<s:form action="adminaction!exitsadmin.action"  theme="simple">
 <table width="200" align="center" style="margin-left:30">
-	<tr>
+	<tr><td>用户名：</td>
 	<td align="center"><s:textfield size="15" label="用户名" name="user.username" /></td>
 	</tr>
-	<tr>
+	<tr><td>密码：</td>
 	<td align="center"><s:password size="17" label="密码" name="user.password" /></td>
 	</tr>
 	</table>
