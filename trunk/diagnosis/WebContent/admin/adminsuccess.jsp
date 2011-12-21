@@ -82,7 +82,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  </tr>
     <s:iterator id="users" value="userlist" status="index1">
        
-     <tr  align="center"  bordercolor="#FFFFFF" rules="all" bgcolor="<s:if test="#index1.odd == true">#ffffff</s:if><s:else>#EDEDED</s:else>" style="color: Black; ">
+     <tr  align="center"  bordercolor="#FFFFFF" bgcolor="<s:if test="#index1.odd == true">#ffffff</s:if><s:else>#EDEDED</s:else>" style="color: Black; ">
        <td><s:property value="username"/>&nbsp;</td>
        <td><s:property value="name"/>&nbsp;</td>
        <td><s:property value="email"/>&nbsp;</td>
@@ -105,6 +105,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
      </tr>
      </s:iterator>
   </table>
-   
+  </div> 
   </body>
 </html>
