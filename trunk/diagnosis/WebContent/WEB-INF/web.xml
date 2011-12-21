@@ -4,16 +4,16 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
 	http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
 	<welcome-file-list>
-		<welcome-file>user/userlogin.jsp</welcome-file>
+		<welcome-file>index.html</welcome-file>
 	</welcome-file-list>
-	<!-- <error-page>
+	<error-page>
 <error-code>500</error-code>
-   <location>/user/user500.jsp</location>
+   <location>/error.html</location>
 </error-page>
 <error-page>
 <error-code>404</error-code>
-   <location>/user/user404.jsp</location>
-</error-page> -->
+   <location>/error.html</location>
+</error-page>
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>classpath:applicationContext.xml</param-value>
