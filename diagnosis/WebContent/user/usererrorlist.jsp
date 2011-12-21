@@ -224,12 +224,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
      <div id="rightmain">
 	  <h2>手工数据报警日志</h2>
-	
-	
-	<table> <!-- 大的表 -->
-	 <tr><td style="width: 200px; "> 
+	  
 	    <s:form action="errorlogaction!findbypara.action" theme = "simple">
-          <td>  <select name="parameter"   style="width:110px" align="right">
+	    <table>
+	    <tr>
+         <td><select name="parameter"   style="width:110px" >
                 <option  value="PH">PH</option>
                 <option  value="COD">COD</option>
                 <option  value="碱度">碱度</option>
@@ -238,24 +237,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <option  value="NH3-N">NH3-N</option>
                 <option  value="NO-N">NO-N</option>
                 <option  value="水量">水量</option>
-             </select></td>
-	         <td width="20%" align="center"><s:submit value="查询" theme="simple"  /></td>
-          </s:form>
-          </td>
-    
-    
-    
-          <td > 
-          <s:form  action="errorlogaction!findbytime.action" theme = "simple">
-             <table  align="right"  style="margin-left:30">
-                <tr><td><sx:datetimepicker id="data1" name ="date1" label="请选择开始日期" displayFormat="yyyy-MM-dd" ></sx:datetimepicker></td>
-                    <td><sx:datetimepicker  id="data2" name ="date2" label="请选择结束日期" displayFormat="yyyy-MM-dd" ></sx:datetimepicker></td>
-                <td><s:submit value="查询" theme="simple"  /></td></tr>
-               </s:form>
-          </table>
-           </td>
-      </tr>
-          
+             </select></td>  
+                <td> <sx:datetimepicker id="data1" name ="date1" label="请选择开始日期" displayFormat="yyyy-MM-dd" ></sx:datetimepicker></td>
+                <td>   <sx:datetimepicker  id="data2" name ="date2" label="请选择结束日期" displayFormat="yyyy-MM-dd" ></sx:datetimepicker></td>
+                <td> <s:submit value="查询" theme="simple"  /></td>
+               </tr>
+           </table>      
+           </s:form>
   <table bordercolor="#FFFFFF" rules="all"  id="mytable" class="list_table" align="center" width="100%" >
 		<tr bgcolor="#4A708B">
 		    <th width = "15%">设备名</th>
@@ -275,7 +263,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	       第<input align="MIDDLE" type="text" size="2" readonly="readonly" id="current"/>页 &nbsp;
 	       共<input align="MIDDLE" type="text" size="2" readonly="readonly" id="sum"/>页
 	</div>
-</div></table>
+</div>
   <script language="JavaScript" type="text/javascript">
      firstpage();
  </script>
