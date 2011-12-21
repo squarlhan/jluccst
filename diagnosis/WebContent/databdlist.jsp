@@ -113,7 +113,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     		}
     	    var td1 = tr.insertCell(-1);
     	    var td2 = tr.insertCell(-1);
-    	    var td3 = tr.insertCell(-1);
+    	    //var td3 = tr.insertCell(-1);
     	    var td4 = tr.insertCell(-1);
     	    var td5 = tr.insertCell(-1);
     	    var td6 = tr.insertCell(-1);
@@ -162,10 +162,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			lower2.onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false";
 			td1.align = "left";
 			td2.align = "left";
-			td3.align = "left";
+			//td3.align = "left";
     	    td1.innerHTML = eques[a]+"&nbsp;";
     	    td2.innerHTML = items[a]+"&nbsp;";
-    	    td3.innerHTML = names[a]+"&nbsp;";
+    	    //td3.innerHTML = names[a]+"&nbsp;";
     	    td4.appendChild(lower2);
     	    td5.appendChild(lower1);
     	    td6.appendChild(lower);
@@ -314,7 +314,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<tr bgcolor="#4A708B">
 		    <th width = "11%">报警节点</th>
 			<th width = "11%">控制参数</th>
-			<th width = "20%">对应名称</th>
+			<th width = "20%"  style="display:none;">对应名称</th>
 			<th width = "7%">红</th>
 			<th width = "7%">橙</th>	
 			<th width = "7%">黄</th>
