@@ -244,7 +244,7 @@ a:active {
 	text-align: center;
 }
 #login td{
-	width:50%;
+	width:40%;
     font-family: "宋体";
 	font-size: 14px;
 	line-height: 20px;
@@ -268,4 +268,25 @@ margin-top:12px;
 }
 #login .button3{
 margin-left:40px;
+}
+
+.table2 {
+	border-top-width: 1px;
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-left-width: 1px;
+	border-top-style: none;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-left-style: none;
+	border-top-color: #cad9ea;
+	border-right-color: #cad9ea;
+	border-bottom-color: #cad9ea;
+	border-left-color: #cad9ea;
+	background-color: #f3f8ff;
+	line-height: 30px;
+	font-family: "宋体";
+	font-size: 14px;
+	color: #1e61a4;
+	text-align: up;
 }
