@@ -30,7 +30,7 @@
 	-->
 	
 	<style> 
-    .nobr br{display:none}   
+    .nobr br{display:none; texe-align: left;}   
     </style>
 
 	
@@ -40,17 +40,13 @@
 	<div id="rightmain">
 
 		  <h2>智能诊断</h2>
-		<p class="STYLE1">
-			<br>
-		</p>
-	</div>
-	<br>
+	
 	<div id="login">
-		<s:form action="ruleaction">
-			<table width="500" align="center" >
+		<s:form action="ruleaction"  theme="simple">
+			<table >
 			    <tr>
 					<td align = "right">水质参数报警现象：</td>
-					<td>
+					<td class = "table2">
 					    <div class="nobr">
 					    <s:doubleselect theme="simple" name = "result.nouns" list="#session.map.keySet()"  
 					    doubleName="result.verb" doubleList="#session.map[top]" ></s:doubleselect>
@@ -62,6 +58,6 @@
 		
 		</s:form>
 	</div>
-
+</div>
 </body>
 </html>
