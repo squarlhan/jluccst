@@ -246,7 +246,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     
     
           <td > 
-          <s:form theme="simple" action="errorlogaction!findbytime.action">
+          <s:form  action="errorlogaction!findbytime.action" theme = "simple">
              <table  align="right"  style="margin-left:30">
                 <tr><td><sx:datetimepicker id="data1" name ="date1" label="请选择开始日期" displayFormat="yyyy-MM-dd" ></sx:datetimepicker></td>
                     <td><sx:datetimepicker  id="data2" name ="date2" label="请选择结束日期" displayFormat="yyyy-MM-dd" ></sx:datetimepicker></td>
