@@ -98,7 +98,7 @@
 							<table border="0" align="center" cellpadding="0" cellspacing="0"
 								class="bg1">
 								<tr>
-								<td height="38" class="table"><page:applyDecorator page="/decorators/treerule.jsp" name="panel" /></td>
+								<td height="38" class="table2"><page:applyDecorator page="/decorators/treerule.jsp" name="panel" /></td>
 									<td height="81" colspan="10" class="table1"><decorator:body /></td>
 								</tr>
 							</table>
