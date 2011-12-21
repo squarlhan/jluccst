@@ -212,7 +212,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
      <div id="rightmain">
 	  <h2>预警日志</h2>
-		  <s:form action="dsshistoryaction!findbypara.action"  theme = "simple">
+		  <s:form action="dsshistoryaction!findbypara.action"  theme ="simple">
 
 <tr>
     

@@ -1,3 +1,6 @@
+
+
+
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%
 String path = request.getContextPath();
@@ -16,7 +19,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    %>  
     <base href="<%=basePath%>">
     
-    <title>用户信息</title>
+    <title>管理员信息</title>
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">    
@@ -29,58 +32,58 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <body>
   <div id="rightmain">
-	  <h2>用户修改信息</h2>
-	  
+	  <h2>管理员修改信息</h2>
+	
       <div id="login">
 <s:form action="useraction!alterUser.action" theme = "simple">
-<table width="320" align="center" style="margin-left:30">
+<table width="200" align="center" style="margin-left:30">
 	<tr>
-	 
-	 <td >当前用户:</td>
-	   <td ><s:property value="#session.us.username"/></td>
+	<td >用户名：</td>
+	 <td ><s:property value="#session.us.username"/></td>
 	  </tr>
 	<tr>
+	<td >姓名：</td>
 	 <td align="center"><label>
 	    <s:textfield name="user.name" key="姓名" value="%{#session.us.name}" />
 	    </label></td>
 	  </tr>
 	<tr>
-	  <td >当前密码:</td>
+	  <td >当前密码：</td>
 	  <td ><label>
 	    <input type="password" name="currentpassword">
 	  </label></td>
 	  </tr>
 	<tr>
 	<tr>
-	  <td >新密码:</td>
+	  <td >新密码：</td>
 	  <td ><label>
 	    <input type="password" name="newpassword">
 	  </label></td>
 	  </tr>
 	<tr>
-	
+	<td >电子邮箱：</td>
 	 <td align="center"><label>
 	    <s:textfield name="user.email" key="电子邮箱" value="%{#session.us.email}" />
 	    </label></td>
 	  </tr>
 	<tr>
+	<td >工作号：</td>
 	 <td align="center"><label>
 	    <s:textfield name="user.jid" key="工作号" value="%{#session.us.jid}" />
 	    </label></td>
 	  </tr>
 	<tr>
+	<td >电话：</td>
 	 <td align="center"><label>
 	    <s:textfield name="user.phone" key="电话" value="%{#session.us.phone}" />
 	    </label></td>
 	  </tr>
 	  <tr>
+	  <td >部门：</td>
 	 <td align="center"><label>
 	    <s:textfield name="user.dept" key="部门" value="%{#session.us.dept}" />
 	    </label></td>
 	  </tr>
-	</table>
-	<br/>
-	<table width="150" align="center">
 	<tr>
 	<td width="80" align="center"><s:submit value="修改" theme="simple" />
 	  <div align="center"></div></td>
