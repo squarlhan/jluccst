@@ -44,7 +44,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <div id="rightmain">
 	  <h2> 3系列生化池</h2>
 <div id="adddata">
-<s:form action="dcsdataaction!listsave.action">
+<s:form action="dcsdataaction!listsave.action" theme="simple">
 <table width="600" align="center" style="margin-left:30">
 <tr>
     <td align="right"></td>

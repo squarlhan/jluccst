@@ -34,7 +34,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  <h2>wwdcs数据录入界面</h2>
 	   
 
-<s:form action="adminaction.action">
+<s:form action="adminaction.action" theme = "simple">
 
    <p>&nbsp;</p>
   <table width=810 border="2"  cellspacing="0" class="list_table" style="color: Gray; ">

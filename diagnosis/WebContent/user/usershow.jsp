@@ -32,7 +32,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  <h2>用户修改信息</h2>
 	  
       <div id="login">
-<s:form action="useraction!alterUser.action">
+<s:form action="useraction!alterUser.action" theme = "simple">
 <table width="320" align="center" style="margin-left:30">
 	<tr>
 	 

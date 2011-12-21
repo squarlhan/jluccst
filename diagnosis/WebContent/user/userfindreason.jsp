@@ -46,7 +46,7 @@
 	</div>
 	<br>
 	<div id="login">
-		<s:form action="userruleaction">
+		<s:form action="userruleaction" theme = "simple">
 			<table width="500" align="center" >
 			    <tr>
 					<td align = "right">水质参数报警现象：</td>
