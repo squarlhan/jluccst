@@ -43,16 +43,14 @@
 	</decorator>
 	
 	<decorator name="prof" page="profdecorator.jsp">
-	
-		<pattern>/prof*</pattern>
 		<pattern>/rule*</pattern>
 	</decorator>
 	<decorator name="prof1" page="profdecorator1.jsp">
-	    <pattern>/profaction!proflogoff.action</pattern>
-		<pattern>/prof/proflogin.jsp</pattern>
-		<pattern>/profaction!exitsprof.action</pattern>
+	    <pattern>/profaction*</pattern>
+		<pattern>/prof/*.jsp</pattern>
 		<pattern>/dcsdscribaction!goadd.action</pattern>
 	    <pattern>/ruleaction!justgo.action</pattern>
+	    <pattern>/ruleaction.action</pattern>
 	</decorator>
 	<decorator name="prof2" page="profdecorator2.jsp">
 	<pattern>/dcsdscribaction*</pattern>

@@ -35,51 +35,53 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  <h2>专家修改信息</h2>
 	  
       <div id="login">
-<s:form action="profaction!alterProf.action">
+<s:form action="profaction!alterProf.action"   theme="simple">
 <table width="320" align="center" style="margin-left:30">
 	<tr>
-	 <td ><label>
-	   <s:property value="#session.pr.username"/>
-	  
-	    </label></td>
+	<td >用户名：</td>
+	 <td ><s:property value="#session.ad.username"/></td>
 	  </tr>
 	<tr>
+	<td >姓名：</td>
 	 <td align="center"><label>
-	    <s:textfield name="user.name" key="姓名" value="%{#session.pr.name}" />
+	    <s:textfield name="user.name" key="姓名" value="%{#session.ad.name}" />
 	    </label></td>
 	  </tr>
 	<tr>
-	  <td >当前密码</td>
+	  <td >当前密码：</td>
 	  <td ><label>
 	    <input type="password" name="currentpassword">
 	  </label></td>
 	  </tr>
 	<tr>
 	<tr>
-	  <td >新密码</td>
+	  <td >新密码：</td>
 	  <td ><label>
 	    <input type="password" name="newpassword">
 	  </label></td>
 	  </tr>
 	<tr>
-	
+	<td >电子邮箱：</td>
 	 <td align="center"><label>
-	    <s:textfield name="user.email" key="电子邮箱" value="%{#session.pr.email}" />
+	    <s:textfield name="user.email" key="电子邮箱" value="%{#session.ad.email}" />
 	    </label></td>
 	  </tr>
 	<tr>
+	<td >工作号：</td>
 	 <td align="center"><label>
-	    <s:textfield name="user.jid" key="工作号" value="%{#session.pr.jid}" />
+	    <s:textfield name="user.jid" key="工作号" value="%{#session.ad.jid}" />
 	    </label></td>
 	  </tr>
 	<tr>
+	<td >电话：</td>
 	 <td align="center"><label>
-	    <s:textfield name="user.phone" key="电话" value="%{#session.pr.phone}" />
+	    <s:textfield name="user.phone" key="电话" value="%{#session.ad.phone}" />
 	    </label></td>
 	  </tr>
-	   <tr>
+	  <tr>
+	  <td >部门：</td>
 	 <td align="center"><label>
-	    <s:textfield name="user.dept" key="部门" value="%{#session.pr.dept}" />
+	    <s:textfield name="user.dept" key="部门" value="%{#session.ad.dept}" />
 	    </label></td>
 	  </tr>
 	</table>

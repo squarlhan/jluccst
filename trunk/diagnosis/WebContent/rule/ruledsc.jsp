@@ -122,7 +122,7 @@
 	<div id="rightmain">
 		<h2>规则录入界面</h2>
 <div id="login">
-		<s:form action="ruleaction!newAdd.action">
+		<s:form action="ruleaction!newAdd.action"  theme="simple">
 			
 					<table width="500" align="center" id="adreasontable" >
 						<tr><td align="right">选件检测节点：</td> 
@@ -142,7 +142,7 @@
 								</div></td>
 						</tr>
 						<tr>
-							<td align="right">选择节点参数：</td><td> <select name="resultn2" size="1" style="width: 150px">
+							<td align="right">选择节点参数：</td><td align="left"> <select name="resultn2" size="1" style="width: 150px">
 									<option>A段溶解氧</option>
 								<option>2段溶解氧</option>
 								<option>3段溶解氧</option>
@@ -163,7 +163,7 @@
 						</tr>
 
 						<tr>
-							<td align="right">选择参数状态：</td><td> <select name="resultv_value" style="width: 150px">
+							<td align="right">选择参数状态：</td><td align="left"> <select name="resultv_value" style="width: 150px">
 									<option value="0">高于最高值</option>
 									<option value="1">低于最低值</option>
 							</select></td>
@@ -171,16 +171,10 @@
 				<tr><td align="right">原因名词：</td><td> <s:textfield name="reason_noun[0]"  id="reason_noun[0]"  theme = "simple" style="{width=300}"/> </td></tr>				
 				<tr>	<td align="right">原因动词：</td><td> <s:textfield name="reason_verb[0]"  id="reason_verb[0]"  theme = "simple" style="{width=300}"/></td>
 				<tr><td align="right">规则建议：</td><td> <s:textfield name="sugg[0]"  id="sugg[0]"  theme = "simple" style="{width=300}"/></td>	</tr>
-			</table>
-			<table>
 				<tr>
-					<td align="right"><input name="addone" type="button" value=" 新建一条 " onClick="insertReason()" /></td>
-					<td align="right">&nbsp;&nbsp;</td>
-					<td align="right"><input name="dele" type="button" value=" 删除一条 " onclick="deleteRecord(adreasontable)" /></td>
-					<td align="right">&nbsp;&nbsp;</td>
-					<td align="right"><input name="Input21" type="submit" value="录入" /></td>
-					<td align="right">&nbsp;&nbsp;</td>
-					<td align="left"><input name="Input22" type="submit" 	value="取消" /></td>
+					<td align="right"><input name="addone" type="button" value=" 新建一条 " onClick="insertReason()" />&nbsp;&nbsp;
+					<input name="dele" type="button" value=" 删除一条 " onclick="deleteRecord(adreasontable)" /></td>
+					<td align="right">&nbsp;&nbsp;<input name="Input21" type="submit" value="录入" />&nbsp;&nbsp;<input name="Input22" type="submit" 	value="取消" /></td>
 				</tr>
 			</table>
 		</s:form>
