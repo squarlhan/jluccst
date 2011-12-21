@@ -39,65 +39,45 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <p align="center"><h2>前馈型神经网络</h2></p>
   <table  width="100%" height="247" border="20" bordercolor="#000000" align="center" cellspacing="0" >
     <tr>
-      <td height="20"><strong>请输入层数：</strong>
+      <td height="20"><strong>应用网络数：</strong>
         <input type="text" name="textfield" />      </td>
     </tr>
     <tr>
       <td height="114"><table width="100%" height="126" border="0" cellspacing="0">
         <tr>
-          <td height="22" colspan="9" bgcolor="#4A708B"><div align="center"><strong>参数设置</strong></div></td>
+          <td height="15" colspan="9" bgcolor="#4A708B"><div align="center"><strong>参数设置</strong></div></td>
           </tr>
         <tr>
-          <td><div align="center">网数：            
-            <input type="text" name="textfield2"  size="5" />
-          </div></td>
+         
           <td>训练误差：</td>
           <td height="40"><div align="center">
             <input type="text" name="textfield3" size="18" />          
           </div></td>
-          <td>应用误差：</td>
+          <td>迭代数：</td>
           <td><div align="center">
             <input type="text" name="textfield32" size="12" />          
           </div></td>
-          <td>a：</td>
+          <td>连接权参数：</td>
           <td><div align="center">
             <input type="text" name="textfield322" size="12" />          
           </div></td>
-          <td>b:</td>
+          <td>阈值参数:</td>
           <td><div align="center">
             <input type="text" name="textfield323" size="12" />
           </div></td>
         </tr>
-        <tr>
-          <td width="11%">&nbsp;</td>
-          <td width="8%">迭代数：</td>
-          <td width="16%" height="53"><div align="center">
-            <input type="text" name="textfield324" size="18" />
-          </div></td>
-          <td width="8%">动态量:</td>
-          <td width="17%"> <div align="center">
-            <input type="text" name="textfield325" size="12" />          
-          </div></td>
-          <td width="3%">X:</td>
-          <td width="17%"><div align="center">
-            <input type="text" name="textfield326" size="12" />
-          </div></td>
-          <td width="3%">Y:</td>
-          <td width="17%"><div align="center">
-            <input type="text" name="textfield327" size="12" />
-          </div></td>
-        </tr>
+       
       </table></td>
     </tr>
     <tr>
       <td height="77"><table width="100%" height="72" border="0" cellspacing="0">
         <tr>
-          <td height="27" colspan="4" bgcolor="#4A708B"><div align="center"><strong>操作&nbsp;&nbsp;
+          <td height="27" colspan="4" bgcolor="#4A708B"><strong>操作&nbsp;&nbsp;
             </strong>
             <select name="select" size="1">
               <option>BP</option>
                                           </select>
-          </div></td>
+          </td>
         </tr>
         <tr>
           <td width="35%"><div align="center">
@@ -105,7 +85,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <input type="submit" name="Submit2" value=".." />
           </div></td>
           <td width="32%"><div align="center">
-            <input type="submit" name="Submit3" value="录入信号" />
+            <input type="submit" name="Submit3" value="教师信号" />
             <input type="submit" name="Submit22" value=".." />
           </div></td>
           <td width="18%"><div align="center">
