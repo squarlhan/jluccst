@@ -1,0 +1,271 @@
+@charset "utf-8";
+/* 首页背景样式 */
+body {
+	background-image: url(../pic/bj.jpg);
+	background-repeat: repeat-x;
+	margin-left: 0px;
+	margin-top: 0px;
+	margin-right: 0px;
+	margin-bottom: 0px;
+}
+/* 导航文字样式 */
+.dht {
+	font-family: "宋体";
+	font-size: 14px;
+	font-weight: bolder;
+	color: #1e61a4;
+	text-decoration: none;
+	text-align: center;
+}
+/* 您所在的位置文字表格样式 */
+.bq {
+	font-family: "宋体";
+	font-size: 14px;
+	font-weight: normal;
+	color: #1e61a4;
+	border-top-width: 1px;
+	border-top-style: none;
+	border-right-style: none;
+	border-bottom-style: solid;
+	border-left-style: none;
+	border-top-color: #1e61a4;
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-left-width: 1px;
+	border-right-color: #1e61a4;
+	border-bottom-color: #1e61a4;
+	border-left-color: #1e61a4;
+	width: 950px;
+	line-height: 20px;
+	text-decoration: none;
+}
+/* 内容页右侧对齐样式 */
+.nr {
+	font-family: "宋体";
+	font-size: 14px;
+	line-height: 20px;
+	color: #00428e;
+	text-decoration: none;
+	text-align: right;
+}
+/* 错误页面文字样式 */
+.nr2 {
+	font-family: "宋体";
+	font-size: 14px;
+	line-height: 20px;
+	color: #00428e;
+	text-decoration: none;
+	text-align: left;
+}
+/* 数据树文字样式 */
+.nr_1 {	font-family: "宋体";
+	font-size: 14px;
+	color: #00428e;
+	text-decoration: none;
+	line-height: 20px;
+}
+/* 蓝色外框表单样式 */
+.bg {	font-family: "宋体";
+	font-size: 14px;
+	text-decoration: none;
+	background-color: #f3f8ff;
+	border: 1px solid #cad9ea;
+}
+/* 文字连接样式 */
+a {
+	font-family: 宋体;
+	font-size: 14px;
+	color: #1e61a4;
+}
+a:link {
+	text-decoration: none;
+}
+a:visited {
+	text-decoration: none;
+	color: #1e61a4;
+}
+a:hover {
+	text-decoration: underline;
+	color: #1e61a4;
+}
+a:active {
+	text-decoration: none;
+	color: #1e61a4;
+}
+/* 蓝色外框表格样式 */
+.bg1 {
+	border-top-width: 1px;
+	border-left-width: 1px;
+	border-top-style: solid;
+	border-left-style: solid;
+	border-top-color: #cad9ea;
+	border-left-color: #cad9ea;
+}
+/* 蓝色内框表格样式 */
+.table{
+	border-top-width: 1px;
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-left-width: 1px;
+	border-top-style: none;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-left-style: none;
+	border-top-color: #cad9ea;
+	border-right-color: #cad9ea;
+	border-bottom-color: #cad9ea;
+	border-left-color: #cad9ea;
+	background-color: #f3f8ff;
+	line-height: 30px;
+	font-family: "宋体";
+	font-size: 14px;
+	color: #1e61a4;
+	text-align: left;
+}
+.table1 H2 {
+	
+	padding-left:30px;
+	font-family: "宋体";
+	font-size: 16px;
+	font-weight: bold;
+	color: #1e61a4;
+	border-top-width: 1px;
+	border-top-style: none;
+	border-right-style: none;
+	border-bottom-style: solid;
+	border-left-style: none;
+	border-top-color: #1e61a4;
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-left-width: 1px;
+	border-right-color: #1e61a4;
+	border-bottom-color: #1e61a4;
+	border-left-color: #1e61a4;
+	width: 950px;
+	line-height: 36px;
+	text-decoration: none;
+	background:url(../pic/list2.gif) no-repeat 6px 10px;
+}
+/* 白色内框表格样式 */
+.table1 {
+	background-color: #ffffff;
+	border-top-width: 1px;
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-left-width: 1px;
+	border-top-style: none;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-left-style: none;
+	border-top-color: #cad9ea;
+	border-right-color: #cad9ea;
+	border-bottom-color: #cad9ea;
+	border-left-color: #cad9ea;
+	line-height: 30px;
+	font-family: "宋体";
+	font-size: 14px;
+	color: #1e61a4;
+	text-align: left;
+}
+
+.list_table{
+    width:950px;
+    text-align:center;
+    border-top-width: 1px;
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-left-width: 1px;
+    border-top-color: #cad9ea;
+	border-right-color: #cad9ea;
+	border-bottom-color: #cad9ea;
+	border-left-color: #cad9ea;
+    cellpadding:0px ;
+    cellspacing:0px ;
+}
+.list_table input{
+    padding-left:2px;
+    margin:2px 6px;
+}
+.list_table select{
+    margin:2px 6px;
+}
+.list_table th{
+    border-top-width: 1px;
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-left-width: 1px;
+	border-top-style: none;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-left-style: none;
+	border-top-color: #cad9ea;
+	border-right-color: #cad9ea;
+	border-bottom-color: #cad9ea;
+	border-left-color: #cad9ea;
+	background-color: #f3f8ff;
+	line-height: 30px;
+	font-family: "宋体";
+	font-size: 14px;
+	color: #1e61a4;
+	text-align: center;
+}
+.list_table td,.list_table tr{
+    background-color: #ffffff;
+	border-top-width: 1px;
+	border-right-width: 1px;
+	border-bottom-width: 1px;
+	border-left-width: 1px;
+	border-top-style: none;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-left-style: none;
+	border-top-color: #cad9ea;
+	border-right-color: #cad9ea;
+	border-bottom-color: #cad9ea;
+	border-left-color: #cad9ea;
+	line-height: 30px;
+	font-family: "宋体";
+	font-size: 14px;
+	color: #1e61a4;
+	text-align: center;
+}
+#rightmain{
+}
+#login{
+    font-family: "宋体";
+	font-size: 14px;
+	text-decoration: none;
+	background-color: #f3f8ff;
+	border: 1px solid #cad9ea;
+	align: center;
+}
+#login table{
+	margin-left:0px;
+	text-align: center;
+}
+#login td{
+	width:50%;
+    font-family: "宋体";
+	font-size: 14px;
+	line-height: 20px;
+	color: #00428e;
+	text-decoration: none;
+	text-align: right;
+}
+#login p{
+height:30px;
+line-height:30px;
+}
+#login input{
+margin-left:8px;
+margin-top:2px;
+width:110px;
+}
+#login button{
+width:45px;
+height:25px;
+margin-top:12px;
+}
+#login .button3{
+margin-left:40px;
+}
