@@ -3,6 +3,8 @@
 	<excludes>
 	    <!-- <pattern>/pages/warehouseadmin/login.jsp</pattern> -->
 	    <pattern>/interfaceaction!waitingforU.action</pattern>
+	    <pattern>/error.html</pattern>
+	    <pattern>/index.html</pattern>
 	</excludes>
 	<decorator name="user" page="maindecorator.jsp">
 		<pattern>/user*</pattern>
