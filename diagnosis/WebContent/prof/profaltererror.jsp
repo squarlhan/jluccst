@@ -36,15 +36,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  
       <div id="login">
 <s:form action="profaction!alterProf.action"  theme="simple">
-<table width="320" align="center" style="margin-left:30">
+<table width="200" align="center" style="margin-left:30">
 	<tr>
 	<td >用户名：</td>
-	 <td ><s:property value="#session.ad.username"/></td>
+	 <td ><s:property value="#session.pr.username"/></td>
 	  </tr>
 	<tr>
 	<td >姓名：</td>
 	 <td align="center"><label>
-	    <s:textfield name="user.name" key="姓名" value="%{#session.ad.name}" />
+	    <s:textfield name="user.name" key="姓名" value="%{#session.pr.name}" />
 	    </label></td>
 	  </tr>
 	<tr>
@@ -63,29 +63,28 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<tr>
 	<td >电子邮箱：</td>
 	 <td align="center"><label>
-	    <s:textfield name="user.email" key="电子邮箱" value="%{#session.ad.email}" />
+	    <s:textfield name="user.email" key="电子邮箱" value="%{#session.pr.email}" />
 	    </label></td>
 	  </tr>
 	<tr>
 	<td >工作号：</td>
 	 <td align="center"><label>
-	    <s:textfield name="user.jid" key="工作号" value="%{#session.ad.jid}" />
+	    <s:textfield name="user.jid" key="工作号" value="%{#session.pr.jid}" />
 	    </label></td>
 	  </tr>
 	<tr>
 	<td >电话：</td>
 	 <td align="center"><label>
-	    <s:textfield name="user.phone" key="电话" value="%{#session.ad.phone}" />
+	    <s:textfield name="user.phone" key="电话" value="%{#session.pr.phone}" />
 	    </label></td>
 	  </tr>
 	  <tr>
 	  <td >部门：</td>
 	 <td align="center"><label>
-	    <s:textfield name="user.dept" key="部门" value="%{#session.ad.dept}" />
+	    <s:textfield name="user.dept" key="部门" value="%{#session.pr.dept}" />
 	    </label></td>
 	  </tr>
 	</table>
-	<br/>
 	<table width="150" align="center">
 	<tr>
 	<td width="80" align="center"><s:submit value="修改" theme="simple" />
