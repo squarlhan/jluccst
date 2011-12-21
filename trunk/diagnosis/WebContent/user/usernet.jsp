@@ -35,7 +35,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
    <body>
-  <form id="form1" name="form1" method="post" action="">
+  <s:form id="form1" name="form1" method="post" action=""  theme = "simple">
   <p align="center"><h2>前馈型神经网络</h2></p>
   <table  width="100%" height="247" border="20" bordercolor="#000000" align="center" cellspacing="0" >
     <tr>
@@ -99,7 +99,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
     </tr>
   </table>
-</form>
+</s:form>
    
   </body>
 </html>

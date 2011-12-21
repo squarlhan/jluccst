@@ -36,7 +36,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  <h2>日志查找</h2>
 	 
 <div id="login">
-<s:form action="adminuseraction!searchUser.action">
+<s:form action="adminuseraction!searchUser.action" theme = "simple">
 <table width="200" align="center" style="margin-left:30">
 	<tr>
 	<td align="center"><s:textfield size="15" label="时间" name="user.username" /></td>

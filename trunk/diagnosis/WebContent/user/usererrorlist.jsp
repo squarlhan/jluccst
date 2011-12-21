@@ -228,7 +228,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	<table> <!-- 大的表 -->
 	 <tr><td style="width: 200px; "> 
-	    <s:form action="errorlogaction!findbypara.action">
+	    <s:form action="errorlogaction!findbypara.action" theme = "simple">
           <td>  <select name="parameter"   style="width:110px" align="right">
                 <option  value="PH">PH</option>
                 <option  value="COD">COD</option>

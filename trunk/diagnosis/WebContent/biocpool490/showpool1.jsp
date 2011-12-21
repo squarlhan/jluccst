@@ -33,7 +33,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <div id="rightmain">
 	  <h2>确定录入？</h2>
 <div id="login">
-<s:form action="wwdcsdataaction!save.action">
+<s:form action="wwdcsdataaction!save.action" theme="simple">
 <table width="200" align="center" style="margin-left:30">
 	<tr>
 	<td >1#鼓风机分量:  <s:property value="#session.wc.ITEM100"/></td>

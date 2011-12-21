@@ -145,12 +145,16 @@ public void setEquip(String equip) {
 //		} 
 //		return "OK";
 		errorlist = errorlogService.findbypara(parameter);
-	    return "OK";
+	  return "OK";
 }
 	
-       public String findbytime(){
+     public String findbytime(){
 	   errorlist=errorlogService.findbytime(date1, date2);
-	   return "OK";
+	  return "OK";
 }	
+	//public String findbyorder(){
+		
+		
+	//}
 
 }
