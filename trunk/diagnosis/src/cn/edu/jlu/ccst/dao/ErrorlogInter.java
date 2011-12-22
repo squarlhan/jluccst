@@ -11,4 +11,5 @@ public interface ErrorlogInter {
 	 public List<Errorlog> findbyequipment(String equip);
 	 public List<Errorlog> findbypara(String para);
 	 public List<Errorlog> findbytime(String date1,String date2);
+	 public List<Errorlog> findbyorder(String para,String date1,String date2);
 }

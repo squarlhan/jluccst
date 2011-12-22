@@ -225,10 +225,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
      <div id="rightmain">
 	  <h2>手工数据报警日志</h2>
 	  
-	    <s:form action="errorlogaction!findbypara.action" theme = "simple">
+	    <s:form action="errorlogaction!findbyorder.action" theme = "simple">
 	    <table>
 	    <tr>
          <td><select name="parameter"   style="width:110px" >
+          <option value="">选择参数</option>
                 <option  value="PH">PH</option>
                 <option  value="COD">COD</option>
                 <option  value="碱度">碱度</option>
