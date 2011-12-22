@@ -121,6 +121,8 @@ a:active {
 	font-size: 14px;
 	color: #1e61a4;
 	text-align: left;
+	vertical-align: top;
+	vertical-align: text-top;
 }
 .table1 H2 {
 	
@@ -166,6 +168,8 @@ a:active {
 	font-size: 14px;
 	color: #1e61a4;
 	text-align: left;
+	vertical-align: top;
+	vertical-align: text-top;
 }
 
 .list_table{
