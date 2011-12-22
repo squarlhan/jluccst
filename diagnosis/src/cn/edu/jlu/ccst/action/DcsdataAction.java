@@ -156,7 +156,7 @@ public class DcsdataAction extends ActionSupport {
 				key = new String(keyword.getBytes("ISO-8859-1"), "UTF-8");
 				// key="3系列生化池";
 			}
-			dcsdatalist = dcsdataService.getalldcsddata(key);
+			//dcsdatalist = dcsdataService.getalldcsddata(key);
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -172,7 +172,7 @@ public class DcsdataAction extends ActionSupport {
 				key = new String(keyword.getBytes("ISO-8859-1"), "UTF-8");
 				// key="3系列生化池";
 			}
-			dcsdatalist = dcsdataService.getallgongyidata(key);
+		//	dcsdatalist = dcsdataService.getallgongyidata(key);
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
