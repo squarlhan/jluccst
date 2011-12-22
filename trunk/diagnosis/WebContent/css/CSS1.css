@@ -98,8 +98,8 @@ a:active {
 	border-left-width: 1px;
 	border-top-style: solid;
 	border-left-style: solid;
-	border-top-color: #cad9ea;
-	border-left-color: #cad9ea;
+	border-top-color: #ffffff;
+	border-left-color: #ffffff;
 }
 /* 蓝色内框表格样式 */
 .table{
@@ -248,7 +248,7 @@ a:active {
 	text-align: center;
 }
 #login td{
-	width:40%;
+	width:50%;
     font-family: "宋体";
 	font-size: 14px;
 	line-height: 20px;

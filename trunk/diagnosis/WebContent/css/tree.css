@@ -97,9 +97,15 @@ p a,p a:visited {
 	padding: 3px;
 }
 
-#
+#CNLTreeMenu {
+	margin-top:36px; 
+	width:180px;
+	margin-left:0px;
+	border:solid #90BADE thin 
+}
 #CNLTreeMenu2 {
 	padding-bottom: 15px;
+	margin-top:40px; 
 }
 
 .ViewCode {
