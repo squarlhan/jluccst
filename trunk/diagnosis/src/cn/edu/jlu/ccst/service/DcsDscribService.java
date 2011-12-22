@@ -102,21 +102,21 @@ public class DcsDscribService {
 	public List<DcsDscrib> findbyname(String name) {
 		List<DcsDscrib> dds = new ArrayList();
 		dds = dcsDscribServiceImpl.findbyname(name);
-		if(dds.size()<1)dds = findall();
+		//if(dds.size()<1)dds = findall();
 		return dds;
 	}
 	
 	public List<DcsDscrib> findlikename(String name) {
 		List<DcsDscrib> dds = new ArrayList();
 		dds = dcsDscribServiceImpl.findlikename(name);
-		if(dds.size()<1)dds = findall();
+		//if(dds.size()<1)dds = findall();
 		return dds;
 	}
 	
 	public List<DcsDscrib> findbyeque(String eque) {
 		List<DcsDscrib> dds = new ArrayList();
 		dds = dcsDscribServiceImpl.findbyeque(eque);
-		if(dds.size()<1)dds = findall();
+		//if(dds.size()<1)dds = findall();
 		return dds;
 	}
 	public List<DcsDscrib> findall() {

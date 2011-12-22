@@ -5,6 +5,7 @@
 	    <pattern>/interfaceaction!waitingforU.action</pattern>
 	    <pattern>/error.html</pattern>
 	    <pattern>/index.html</pattern>
+	  
 	</excludes>
 	<decorator name="user" page="maindecorator.jsp">
 		<pattern>/user*</pattern>
@@ -32,6 +33,7 @@
 	</decorator>
 	<decorator name="admin" page="admindecorator.jsp">
 		<pattern>/admin*</pattern>
+		 <pattern>/save*</pattern>
 	</decorator>
 	
 	<decorator name="dss" page="dssdecorator.jsp">

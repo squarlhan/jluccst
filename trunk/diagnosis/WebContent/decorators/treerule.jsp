@@ -11,7 +11,7 @@
   </head>
   <body>
   
-   <div class="CNLTreeMenu" id="CNLTreeMenu2"  style="   margin-top:36px; width:180px;margin-left:0px ">
+   <div class="CNLTreeMenu" id="CNLTreeMenu2"  style="   margin-top:36px; width:180px;margin-left:0px;overflow:scroll;height: 360px; width: 200px;  ">
 							<p>
 								<a id="AllOpen_2"
 									onclick="MyCNLTreeMenu2.SetNodes(0);Hd(this);Sw('AllClose_2');">全部展开</a><a
