@@ -288,5 +288,6 @@ margin-left:40px;
 	font-family: "宋体";
 	font-size: 14px;
 	color: #1e61a4;
-	text-align: up;
+	vertical-align: top;
+	vertical-align: text-top;
 }
