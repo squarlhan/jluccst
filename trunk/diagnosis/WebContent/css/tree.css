@@ -42,7 +42,7 @@ p a,p a:visited {
 /*CNLTreeMenu Start*/
 .CNLTreeMenu img.s {
 	cursor: pointer;
-	vertical-align: middle;
+	vertical-align: top;
 }
 
 .CNLTreeMenu ul {
