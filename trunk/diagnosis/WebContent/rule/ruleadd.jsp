@@ -77,16 +77,25 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		textfield2.setAttribute("size","12");
 		
 		var textfield3 = document.createElement("input");
-		textfield3.setAttribute("id","sugg["+count2+"]");
-		textfield3.setAttribute("name","sugg["+count2+"]");
+		textfield3.setAttribute("id","cf_reason["+count2+"]");
+		textfield3.setAttribute("name","cf_reason["+count2+"]");
 		textfield3.setAttribute("size","12");
+		textfield3.onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false";
+		textfield3.setAttribute("onKeyPress","if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false");
+		
+		var textfield4 = document.createElement("input");
+		textfield4.setAttribute("id","sugg["+count2+"]");
+		textfield4.setAttribute("name","sugg["+count2+"]");
+		textfield4.setAttribute("size","12");
 		
 		td1.innerHTML  = "原因名词： ";
 		td1.appendChild(textfield1);
 		td2.innerHTML  = "原因动词： ";
 		td2.appendChild(textfield2);
-		td3.innerHTML  = "规则建议： ";
+		td3.innerHTML  = "建议等级： ";
 		td3.appendChild(textfield3);
+		td4.innerHTML  = "规则建议： ";
+		td4.appendChild(textfield4);
 		
 	}
   
@@ -107,7 +116,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
  <s:form action="ruleaction!addRule.action"  theme="simple">
 <table    width="100%"  rules="rows" border="1" bordercolor="#000000" cellpadding="0" cellspacing="0">
     <tr >
-      <td height="54" colspan="2"><h2>规则录入界面</h2></div>
+      <td height="54" colspan="2"><h2>规则录入界面</h2>
        
       
     </tr>
@@ -128,13 +137,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	        <option>  </option>
 	     
 	      </select>
-          </div></td>
+          </td>
           <td width="25%" >控制参数：
             <input name="result_verb[0]" type="text" size="12" />
-          </div></td>
+          </td>
            <td width="25%" >智能诊断：
             <input name="result_verb[0]" type="text" size="12" />
-          </div></td>
+          </td>
           
           <td width="25%"></td>
         </tr>
@@ -145,13 +154,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <tr>
     <td width="25%" height="80%">原因名词：
       <input name="reason_noun[0]" type="text" size="12" />
-    </div></td>
+   </td>
     <td width="25%">原因动词：
       <input name="reason_verb[0]" type="text" size="12" />
-    </div></td>
+    </td>
+    <td width="25%">建议等级：
+      <input name="cf_reason[0]" type="text" size="12" onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/>
+    </td>
     <td width="25%">规则建议：
       <input name="sugg[0]" type="text" size="12" />
-    </div></td>
+    </td>
     <td width="25%"><div align="center">
       <input name="addone" type="button" value="增加" onClick="insertReason()" />
       <input name="dele" type="button" value="删除"  onclick="deleteRecord(adreasontable)" />

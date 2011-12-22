@@ -135,32 +135,45 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			upper.setAttribute("size","5");
 			upper.setAttribute("value",uppers[a]);
 			upper.onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false";
+			upper.setAttribute("onKeyPress","if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false");
+			
 			var lower = document.createElement("input");
 			lower.setAttribute("id","lower["+bids[a]+"]");
 			lower.setAttribute("size","5");
 			lower.setAttribute("value",lowers[a]);
 			lower.onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false";
+			lower.setAttribute("onKeyPress","if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false");
+			
 			var upper1 = document.createElement("input");
 			upper1.setAttribute("id","upper1["+bids[a]+"]");
 			upper1.setAttribute("size","5");
 			upper1.setAttribute("value",uppers1[a]);
 			upper1.onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false";
+			upper1.setAttribute("onKeyPress","if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false");
+			
 			var lower1 = document.createElement("input");
 			lower1.setAttribute("id","lower1["+bids[a]+"]");
 			lower1.setAttribute("size","5");
 			lower1.setAttribute("value",lowers1[a]);
 			lower1.onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false";
+			lower1.setAttribute("onKeyPress","if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false");
+			
 			var upper2 = document.createElement("input");
 			upper2.setAttribute("id","upper2["+bids[a]+"]");
 			upper2.setAttribute("size","5");
 			upper2.setAttribute("value",uppers2[a]);
 			upper2.onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false";
+			upper2.setAttribute("onKeyPress","if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false");
+			
 			var lower2 = document.createElement("input");
 			lower2.setAttribute("id","lower2["+bids[a]+"]");
 			lower2.setAttribute("size","5");
 			lower2.setAttribute("value",lowers2[a]);
 			lower2.onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false";
+			lower2.setAttribute("onKeyPress","if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false");
+			
 			td1.align = "left";
+			
 			td2.align = "left";
 			//td3.align = "left";
     	    td1.innerHTML = eques[a]+"&nbsp;";

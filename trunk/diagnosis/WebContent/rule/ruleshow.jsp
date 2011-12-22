@@ -29,7 +29,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				var nouns = document.getElementById("nouns["+id+"]");
 				var verb = document.getElementById("verb["+id+"]");
 				var sugg = document.getElementById("sugg["+id+"]");
-				var url = "backwardresonaction!update?backwardandReason.id="+id+"&backwardandReason.nouns="+nouns.value+"&backwardandReason.verb="+verb.value+"&backwardandReason.sugg="+sugg.value;
+				var cf_reason = document.getElementById("cf_reason["+id+"]");
+				var url = "backwardresonaction!update?backwardandReason.id="+id+"&backwardandReason.nouns="+nouns.value+"&backwardandReason.verb="+verb.value+"&backwardandReason.sugg="+sugg.value+"&backwardandReason.cf_reason="+cf_reason.value;
 				var a = document.getElementById("a["+id+"]");
 				a.href = url;
 				return true;
@@ -72,6 +73,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		textfield2.setAttribute("name","result_verb["+count1+"]");
 		textfield2.setAttribute("size","12");
 		
+		var textfield3 = document.createElement("input");
+		textfield3.setAttribute("id","cf_result["+count1+"]");
+		textfield3.setAttribute("name","cf_result["+count1+"]");
+		textfield3.setAttribute("size","12");
+		textfield3.onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false";
+		textfield3.setAttribute("onKeyPress","if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false");
+		
 		td1.innerHTML  = "现象名词： ";
 		td1.appendChild(textfield1);
 		td2.innerHTML  = "现象动词： ";
@@ -100,10 +108,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		textfield2.setAttribute("name","reason_verb["+count2+"]");
 		textfield2.setAttribute("size","10");
 		
+		var textfield4 = document.createElement("input");
+		textfield4.setAttribute("id","sugg["+count2+"]");
+		textfield4.setAttribute("name","sugg["+count2+"]");
+		textfield4.setAttribute("size","60");
+		
 		var textfield3 = document.createElement("input");
-		textfield3.setAttribute("id","sugg["+count2+"]");
-		textfield3.setAttribute("name","sugg["+count2+"]");
-		textfield3.setAttribute("size","60");
+		textfield3.setAttribute("id","cf_reason["+count2+"]");
+		textfield3.setAttribute("name","cf_reason["+count2+"]");
+		textfield3.setAttribute("size","10");
+		textfield3.setAttribute("onKeyPress","if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false");
 		
 		//td1.innerHTML  = "原因名词： ";
 		td1.appendChild(textfield1);
@@ -111,6 +125,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		td2.appendChild(textfield2);
 		//td3.innerHTML  = "规则建议： ";
 		td3.appendChild(textfield3);
+		
+		td4.appendChild(textfield4);
 		
 	}
   
@@ -140,14 +156,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 			<th width = "15%">原因名词</th>
 			<th width = "15%">原因动词</th>
-			<th width = "50%">相关建议</th>			
-			<th width = "20%">相关操作</th>	
+			<th width = "10%">建议等级</th>
+			<th width = "45%">相关建议</th>			
+			<th width = "15%">相关操作</th>	
 	  </tr>
     <s:iterator id="reasons" value="reasonlist" status="index1">
      <tr  align="center"  bordercolor="#FFFFFF" bgcolor="<s:if test="#index1.odd == true">#ffffff</s:if><s:else>#EDEDED</s:else>" style="color: Black; ">
     
        <td><s:textfield value="%{nouns}" theme = "simple" size="10" id="nouns[%{#reasons.id}]" style="background:transparent;border:0px" />&nbsp;</td>   
        <td><s:textfield name="backwardandReason.verb" value="%{verb}" theme = "simple" size="10" id="verb[%{#reasons.id}]" style="background:transparent;border:0px" />&nbsp;</td>
+       <td><s:textfield name="backwardandReason.cf_reason" value="%{cf_reason}" theme = "simple" size="10" id="cf_reason[%{#reasons.id}]" style="background:transparent;border:0px" onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/>&nbsp;</td>
        <td><s:textfield   name="backwardandReason.sugg" value="%{sugg}" theme = "simple" size="60" id="sugg[%{#reasons.id}]" style="background:transparent;border:0px"  />&nbsp;</td>
           <td>
           <s:a id="a[%{#reasons.id}]"  href="#"  onclick="return confirmChge(%{#reasons.id});">修改</s:a>
@@ -166,13 +184,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 
   <s:form action="backwardresonaction!save.action"  theme="simple">
- <table bgcolor="#EDEDED" id="adreasontable" id="mytable" class="list_table"  style="margin-left:60" width="100%">
+ <table bgcolor="#EDEDED" id="adreasontable" id="mytable" class="list_table" width="100%">
   <tr bgcolor="#4A708B">
 
 			<th width = "15%">原因名词</th>
 			<th width = "15%">原因动词</th>
-			<th width = "50%">相关建议</th>			
-			<th width = "20%">相关操作</th>	
+			<th width = "10%">建议等级</th>
+			<th width = "45%">相关建议</th>			
+			<th width = "15%">相关操作</th>	
 	  </tr>
   
   <tr>
@@ -182,10 +201,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <td width="15%">
       <input name="reason_verb[0]"  id="reason_verb[0]"  type="text" size="10" />
     </td>
-    <td width="50%">
+    <td width="10%">
+      <input name="cf_reason[0]"  id="cf_reason[0]" onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false" type="text" size="10" />
+    </td>
+    <td width="45%">
       <input name="sugg[0]"  id="sugg[0]"  type="text" size="60" />
     </td>
-    <td width="20%">
+    <td width="15%">
       <input name="addone" type="button" value=" + " onClick="insertReason()" />
       <input name="dele" type="button" value=" - "  onclick="deleteRecord(adreasontable)" />
    </td>

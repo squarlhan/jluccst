@@ -18,7 +18,7 @@ public class BackwardandReason {
 	@JoinColumn(name = "bid")
 	private Backward bid;
 	private String nouns;
-	private float  cf_reason;
+	private double  cf_reason;
 	private String verb;
 	private String sugg;
 	
@@ -27,7 +27,7 @@ public class BackwardandReason {
 	
 
 
-	public BackwardandReason(Backward bid, String nouns, float cf_reason,
+	public BackwardandReason(Backward bid, String nouns, double cf_reason,
 			String verb, String sugg) {
 		super();
 		this.bid = bid;
@@ -54,10 +54,10 @@ public class BackwardandReason {
 	}
 	
 
-	public float getCf_reason() {
+	public double getCf_reason() {
 		return cf_reason;
 	}
-	public void setCf_reason(float cf_reason) {
+	public void setCf_reason(double cf_reason) {
 		this.cf_reason = cf_reason;
 	}
 	public String getNouns() {
