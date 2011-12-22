@@ -67,16 +67,20 @@
 		var tr1 = tb.insertRow(tb.rows.length);
 		var tr2 = tb.insertRow(tb.rows.length);
 		var tr3 = tb.insertRow(tb.rows.length);
+		var tr4 = tb.insertRow(tb.rows.length);
 
 		var td1 = tr1.insertCell(0);
 		var td2 = tr2.insertCell(0);
 		var td3 = tr3.insertCell(0);
+		var td4 = tr4.insertCell(0);
 		var td11 = tr1.insertCell(1);
 		var td21 = tr2.insertCell(1);
 		var td31 = tr3.insertCell(1);
+		var td41 = tr4.insertCell(1);
 		td1.align="right";
 		td2.align="right";
 		td3.align="right";
+		td4.align="right";
 
 		var t1 =  document.getElementById("reason_noun[0]");
 		var textfield1 = t1.cloneNode(true);
@@ -90,18 +94,28 @@
 		textfield2.setAttribute("name", "reason_verb[" + count2 + "]");
 		textfield2.setAttribute("value", "");
 
-		var t3 = document.getElementById("sugg[0]");
+		var t3 = document.getElementById("cf_reason[0]");
 		var textfield3 = t3.cloneNode(true);
-		textfield3.setAttribute("id", "sugg[" + count2 + "]");
-		textfield3.setAttribute("name", "sugg[" + count2 + "]");
+		textfield3.setAttribute("id", "cf_reason[" + count2 + "]");
+		textfield3.setAttribute("name", "cf_reason[" + count2 + "]");
 		textfield3.setAttribute("value", "");
+		textfield3.onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false";
+		textfield3.setAttribute("onKeyPress","if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false");
+		
+		var t4 = document.getElementById("sugg[0]");
+		var textfield4 = t4.cloneNode(true);
+		textfield4.setAttribute("id", "sugg[" + count2 + "]");
+		textfield4.setAttribute("name", "sugg[" + count2 + "]");
+		textfield4.setAttribute("value", "");
 
 		td1.innerHTML = "原因名词： ";
 		td11.appendChild(textfield1);
 		td2.innerHTML = "原因动词： ";
 		td21.appendChild(textfield2);
-		td3.innerHTML = "规则建议： ";
+		td3.innerHTML = "建议等级： ";
 		td31.appendChild(textfield3);
+		td4.innerHTML = "规则建议： ";
+		td41.appendChild(textfield4);
 
 	}
 
@@ -169,14 +183,18 @@
 							</select></td>
 						</tr>
 				<tr><td align="right">原因名词：</td><td> <s:textfield name="reason_noun[0]"  id="reason_noun[0]"  theme = "simple" style="{width=300}"/> </td></tr>				
-				<tr>	<td align="right">原因动词：</td><td> <s:textfield name="reason_verb[0]"  id="reason_verb[0]"  theme = "simple" style="{width=300}"/></td>
+				<tr><td align="right">原因动词：</td><td> <s:textfield name="reason_verb[0]"  id="reason_verb[0]"  theme = "simple" style="{width=300}"/></td>
+				<tr><td align="right">建议等级：</td><td> <s:textfield name="cf_reason[0]"  id="cf_reason[0]"  theme = "simple" style="{width=300}" onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td>	</tr>
 				<tr><td align="right">规则建议：</td><td> <s:textfield name="sugg[0]"  id="sugg[0]"  theme = "simple" style="{width=300}"/></td>	</tr>
+				</table>
+				<table align="center">
 				<tr>
 					<td align="right"><input name="addone" type="button" value=" 新建一条 " onClick="insertReason()" />&nbsp;&nbsp;
 					<input name="dele" type="button" value=" 删除一条 " onclick="deleteRecord(adreasontable)" /></td>
 					<td align="right">&nbsp;&nbsp;<input name="Input21" type="submit" value="录入" />&nbsp;&nbsp;<input name="Input22" type="submit" 	value="取消" /></td>
 				</tr>
-			</table>
+				</table>
+			
 		</s:form>
 		</div>
 	</div>

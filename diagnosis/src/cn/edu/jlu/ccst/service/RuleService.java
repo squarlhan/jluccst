@@ -2,7 +2,10 @@ package cn.edu.jlu.ccst.service;
 
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -84,6 +87,14 @@ public class RuleService {
 		inferenceEngine.setBackwardrule(ruleServiceImpl.findAll());
 		inferenceEngine.Inference("result to reason","fulfill");
 		resultlist = inferenceEngine.getEnding();
+		Collections.sort(resultlist,
+				new Comparator<BackwardandReason>() {
+					public int compare(BackwardandReason mapping1,
+							BackwardandReason mapping2) {
+						return ((Double)mapping2.getCf_reason()).compareTo(
+								(Double)mapping1.getCf_reason());
+					}
+				});
 		return resultlist;
 	}
 }

@@ -36,6 +36,7 @@ public class RuleAction extends ActionSupport {
 	private List<String> reason_verb;
 	private List<String> result_verb;
 	private List<String> sugg;
+	private List<Double> cf_reason;
 	private String resultn1;
 	private String resultn2;
 	private int resultv_value;
@@ -45,6 +46,14 @@ public class RuleAction extends ActionSupport {
 	
 	
 	
+	public List<Double> getCf_reason() {
+		return cf_reason;
+	}
+
+	public void setCf_reason(List<Double> cf_reason) {
+		this.cf_reason = cf_reason;
+	}
+
 	public String getName() {
 		return name;
 	}
@@ -258,8 +267,8 @@ public class RuleAction extends ActionSupport {
 			brs.setNouns(reason_noun.get(i).trim());
 			brs.setVerb(reason_verb.get(i).trim());
 			brs.setSugg(sugg.get(i).trim());
-			if (reason_noun.get(i).trim().length() > 0
-					&& reason_verb.get(i).trim().length() > 0
+			brs.setCf_reason(cf_reason.get(i));
+			if (cf_reason.get(i) >= 0
 					&& sugg.get(i).trim().length() > 0) {
 				breason.add(brs);
 			}
@@ -298,9 +307,9 @@ public class RuleAction extends ActionSupport {
 			brs.setNouns(reason_noun.get(i).trim());
 			brs.setVerb(reason_verb.get(i).trim());
 			brs.setSugg(sugg.get(i).trim());
-			if (reason_noun.get(i).trim().length() > 0
-					|| reason_verb.get(i).trim().length() > 0
-					|| sugg.get(i).trim().length() > 0) {
+			brs.setCf_reason(cf_reason.get(i));
+			if (cf_reason.get(i) >= 0
+					&& sugg.get(i).trim().length() > 0) {
 				breason.add(brs);
 			}
 

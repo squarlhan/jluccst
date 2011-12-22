@@ -36,9 +36,16 @@ public class BackwardReasonAction extends ActionSupport {
  private List<String> reason_noun;
  private List<String> reason_verb;
  private List<String> sugg;
+ private List<Double> cf_reason;
  private Backward rule;
  
  
+public List<Double> getCf_reason() {
+	return cf_reason;
+}
+public void setCf_reason(List<Double> cf_reason) {
+	this.cf_reason = cf_reason;
+}
 public Backward getRule() {
 	return rule;
 }
@@ -133,11 +140,11 @@ public void setBackwardandReasonService(
 			brs.setNouns(reason_noun.get(i).trim());
 			brs.setVerb(reason_verb.get(i).trim());
 			brs.setSugg(sugg.get(i).trim());
+			brs.setCf_reason(cf_reason.get(i));
 //			List<BackwardandReason> aaa = rule.getReasons();
 //			aaa.add(brs);
 //			rule.setReasons(aaa);
-			if (reason_noun.get(i).trim().length() > 0
-					&& reason_verb.get(i).trim().length() > 0
+			if ( cf_reason.get(i) >= 0
 					&& sugg.get(i).trim().length() > 0) { 
 				backwardandReasonService.update(brs);
 				

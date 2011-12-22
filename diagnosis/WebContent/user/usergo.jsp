@@ -50,8 +50,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <s:iterator id="reasons" value="reasonlist" status="index1">
        
      <tr  align="left"  bordercolor="#000000" bgcolor="<s:if test="#index1.odd == true">#ffffff</s:if><s:else>#EDEDED</s:else>">
-       <td  align="left"><s:property value="nouns"/><s:property value="verb"/></td>
-       <td  align="left"><s:property value="sugg"/></td>
+       <td  align="left"><s:property value="nouns"/><s:property value="verb"/>&nbsp;</td>
+       <td  align="left"><s:property value="sugg"/>&nbsp;</td>
       
      
      </tr>
