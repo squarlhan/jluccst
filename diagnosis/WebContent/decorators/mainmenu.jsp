@@ -14,10 +14,12 @@
           <!--<td><a href="/diagnosis/userruleadd.jsp">录入规则</a></td>  -->
          <!-- <td><a href="/diagnosis/ruleaction!getall.action">规则维护</a></td>
            <td><a href="/diagnosis/dcsdscribaction.action">描述维护</a></td>-->
-         <td><a href="/diagnosis/biocpool490/biocpool1.jsp">手工数据录入</a></td>
-        <td><a href="/diagnosis/monitoraction.action">手工数据推理</a></td>
-        <td><a href="/diagnosis/dcsdataaction!showdcsdata.action">手工数据查询</a></td>
+         <td><a href="/diagnosis/biocpool490/biocpool1.jsp">手工数据推理</a></td>
+        
         <td><a href="/diagnosis/errorlogaction.action">手工报警日志</a></td>
+         <td><a href="/diagnosis/dcsdataaction!showdcsdata.action">手工数据查询</a></td>
+        <td><a href="/diagnosis/monitoraction.action">DCS数据推理</a></td>
+       
          <!--<td><a href="#">DCS数据推理</a></td>
         <td><a href="#">DCS数据查询</a></td>
         <td><a href="#">DCS日志查询</a></td>-->

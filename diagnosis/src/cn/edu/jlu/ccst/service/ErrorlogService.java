@@ -74,7 +74,7 @@ public class ErrorlogService {
 	  
   }
   
-  public List<Errorlog> findbypara(String para){
+ /* public List<Errorlog> findbypara(String para){
 	  List<Errorlog> resultlist = new ArrayList();
 		resultlist = errorlogImpl.findbypara(para);
 		if(resultlist.size()<1)resultlist = findAll();
@@ -92,9 +92,23 @@ public class ErrorlogService {
 		if(resultlist.size()<1)resultlist = findAll();
 		return resultlist; 
 	  
+  }*/
+
+  public List<Errorlog> findbyorder(String para,Date date1,Date date2){
+	  List<Errorlog> resultlist1 = new ArrayList();
+	  List<Errorlog> resultlist2 = new ArrayList();
+	  List<Errorlog> resultlist = new ArrayList();
+	  
+	  
+	  if(date1==null||date2==null)
+	    {resultlist = errorlogImpl.findbypara(para);}
+	  else {
+		  SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		  String a = formatter.format(date1);
+		  String b = formatter.format(date2);
+		  resultlist=errorlogImpl.findbyorder(para,a,b);}
+            return resultlist;
   }
-
-
 
 	public void save(Errorlog errorlog) {
 	

@@ -18,7 +18,7 @@
 %>
 <base href="<%=basePath%>">
 
-<title>DCS规则录入</title>
+<title>规则录入</title>
 <sx:head />
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
@@ -106,7 +106,7 @@
 	}
 
 	function deleteRecord(table) {
-		if (table.rows.length > 6) {
+		if (table.rows.length > 7) {
 			table.deleteRow(table.rows.length - 1);
 			table.deleteRow(table.rows.length - 1);
 			table.deleteRow(table.rows.length - 1);
@@ -125,7 +125,7 @@
 		<s:form action="ruleaction!newAdd.action"  theme="simple">
 			
 					<table width="500" align="center" id="adreasontable" >
-						<tr><td align="right">选件检测节点：</td> 
+						<tr><td align="right">选择检测节点：</td> 
 							<td><s:set name="foobar"
 									value="#{'点源':{'电石厂有机水', '有机合成厂有机水', '炼油厂有机水', '精细化工厂废水', '乙二醇废水', '有机合成厂有机水', '炼油厂有机水', '有机合成厂有机水', '炼油厂有机水'
                                  , '环氧乙烷废水', '农药厂有机水', '含氮废水', '103厂碱水', '化肥厂丁辛醇', '丙烯腈废水', '合成树脂厂有机水', '龙潭区生活水'},

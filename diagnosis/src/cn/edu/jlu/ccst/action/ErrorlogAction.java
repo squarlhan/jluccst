@@ -135,7 +135,7 @@ public void setEquip(String equip) {
 		return "OK";
 	}
 	
-	public String findbypara(){
+	//public String findbypara(){
 //		try {
 //			String keyword= new String(parameter.getBytes("ISO-8859-1"),"UTF-8");
 //			errorlist = errorlogService.findbypara(keyword);
@@ -144,17 +144,16 @@ public void setEquip(String equip) {
 //			e.printStackTrace();
 //		} 
 //		return "OK";
-		errorlist = errorlogService.findbypara(parameter);
-	  return "OK";
-}
+		//errorlist = errorlogService.findbypara(parameter);
+	//  return "OK";
+//}
 	
-     public String findbytime(){
-	   errorlist=errorlogService.findbytime(date1, date2);
-	  return "OK";
+     public String findbyorder(){
+	  errorlist=errorlogService.findbyorder(parameter,date1, date2);
+	 return "OK";
 }	
-	//public String findbyorder(){
+	
 		
-		
-	//}
+	
 
 }

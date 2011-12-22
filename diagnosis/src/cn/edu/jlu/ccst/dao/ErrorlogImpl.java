@@ -57,6 +57,9 @@ public class ErrorlogImpl implements ErrorlogInter  {
     public List<Errorlog> findbytime(String date1,String date2){
     	Query query = getEntityManager().createQuery("select el FROM Errorlog el WHERE  el.time  between '"+date1+"'and'"+date2+"'");
     	return query.getResultList();  }
+    public List<Errorlog> findbyorder(String para,String date1,String date2){
+    	Query query = getEntityManager().createQuery("select el FROM Errorlog el WHERE el.item like'%"+para+"%'  and  el.time  between '"+date1+"'and'"+date2+"'");
+    	return query.getResultList();  }
     
     
     
