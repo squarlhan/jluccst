@@ -94,7 +94,7 @@ a:active {
 }
 /* 蓝色外框表格样式 */
 .bg1 {
-	border-top-width: 1px;
+	border-top-width: 0px;
 	border-left-width: 1px;
 	border-top-style: solid;
 	border-left-style: solid;
