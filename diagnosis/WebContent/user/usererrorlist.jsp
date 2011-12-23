@@ -226,7 +226,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  <h2>手工数据报警日志</h2>
 	  
 	    <s:form action="errorlogaction!findbyorder.action" theme = "simple">
-	    <table>
+	    <table theme = "simple">
 	    <tr>
          <td><select name="parameter"   style="width:110px" >
           <option value="">选择参数</option>
