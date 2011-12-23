@@ -22,6 +22,7 @@ import cn.edu.jlu.ccst.model.Pre_dss;
 public class AutoJob {
 
 	private Pre_dssService pre_dssService;
+	private Pre_historyService pre_historyService;
 	private DcsDscribService dcsDscribService;
 	private RuleService ruleService;
 	private Dss_adviceService dss_adviceService;
@@ -37,6 +38,14 @@ public class AutoJob {
 	public void setBackwardandResultService(
 			BackwardandResultService backwardandResultService) {
 		this.backwardandResultService = backwardandResultService;
+	}
+
+	public Pre_historyService getPre_historyService() {
+		return pre_historyService;
+	}
+	@Resource
+	public void setPre_historyService(Pre_historyService pre_historyService) {
+		this.pre_historyService = pre_historyService;
 	}
 
 	public Dss_historyService getDss_historyService() {
@@ -114,6 +123,7 @@ public class AutoJob {
 		}
 		// List<Pre_dss> alldata = pre_dssService.findAll();
 		List<Pre_dss> alldata = pre_dssService.findBysimu_time();
+		pre_historyService.saveall(alldata);
 		dss_adviceService.deleteall();
 		boolean flag = true;
 		for (Pre_dss predss : alldata) {
