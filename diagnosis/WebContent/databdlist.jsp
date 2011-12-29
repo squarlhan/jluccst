@@ -34,7 +34,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			var lower1_value = lower1.value-0;
 			var upper2_value = upper2.value-0;
 			var lower2_value = lower2.value-0;
-			if(upper_value<=upper1_value&&upper1_value<=upper2_value&&lower_value>=lower1_value&&lower1_value>=lower2_value){
+			if(upper_value>=lower_value&&upper_value<=upper1_value&&upper1_value<=upper2_value&&lower_value>=lower1_value&&lower1_value>=lower2_value){
 				var url = "dcsdscribaction!chDscrib.action?"
 						+"dcsDscrib.lower="+lower.value+"&dcsDscrib.upper="+upper.value
 					+"&dcsDscrib.lower1="+lower1.value+"&dcsDscrib.upper1="+upper1.value

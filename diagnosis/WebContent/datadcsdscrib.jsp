@@ -40,7 +40,7 @@
 			var lower1_value = lower1.value-0;
 			var upper2_value = upper2.value-0;
 			var lower2_value = lower2.value-0;
-			if(upper_value<=upper1_value&&upper1_value<=upper2_value&&lower_value>=lower1_value&&lower1_value>=lower2_value){
+			if(upper_value>=lower_value&&upper_value<=upper1_value&&upper1_value<=upper2_value&&lower_value>=lower1_value&&lower1_value>=lower2_value){
 				return confirm("确认添加？"); 
 			}else{
 				 alert("输入错误！");
