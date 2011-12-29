@@ -67,7 +67,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			td2.align = "left";
 			td3.align = "left";
 			 if(isoks[a]=="1"){
-    			td3.style.color="yellow";
+    			td3.style.color="green";
     		}else if(isoks[a]=="2"){
     			td3.style.color="orange";
     		}else if(isoks[a]=="3"){
