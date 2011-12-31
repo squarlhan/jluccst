@@ -50,9 +50,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     
 	<td align="left">请选择班次</td>
 	<td align="center"> <select name="dcsdatalist[0].value"   style="width:110px">
-                <option  value="00">零点班</option>
-                <option  value="08">八点班</option>
-                <option  value="16">十六点班</option>
+                <option  value="00">夜班</option>
+                <option  value="08">白班</option>
+                <option  value="16">中班</option>
               </select></td>
 	</tr>
 	<tr >
@@ -60,7 +60,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<td align="right">
 	<s:textfield size="5" readonly="true" value="PH" name="dcsdatalist[1].item" theme="simple" style="background:transparent;border:0px"/></td>
 	<td align="center"><s:textfield  name="dcsdatalist[1].value" theme="simple"
-	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td>PH</td>
+	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td>pH</td>
 	
 	</tr>
 	
@@ -123,7 +123,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<tr>
 	<td align="right"><s:textfield  readonly="true" value="水量" name="dcsdatalist[7].item" theme="simple" style="background:transparent;border:0px"/></td>
 	<td align="center"><s:textfield name="dcsdatalist[7].value" theme="simple"
-	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td>m3/h</td>
+	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td>m&sup3/h</td>
 		</tr>
 	
 	

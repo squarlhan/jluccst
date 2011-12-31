@@ -10,7 +10,6 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Component;
 
 
-import cn.edu.jlu.ccst.dao.UserServiceImpl;
 import cn.edu.jlu.ccst.dao.UserServiceInter;
 
 import cn.edu.jlu.ccst.model.User;
