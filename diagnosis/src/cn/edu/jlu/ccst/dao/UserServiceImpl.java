@@ -31,6 +31,7 @@ public class UserServiceImpl implements UserServiceInter {
 		if (user.getId() <= 0) {
 			// new
 			em.persist(user);
+		
 		} else {
 			// update
 			em.merge(user);

@@ -50,9 +50,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     
 	<td align="left">请选择班次</td>
 	<td align="center"> <select name="dcsdatalist[0].value"   style="width:110px">   
-                <option  value="00">零点班</option>
-                <option  value="08">八点班</option>
-                <option  value="16">十六点班</option>
+                 <option  value="00">夜班</option>
+                <option  value="08">白班</option>
+                <option  value="16">中班</option>
               </select></td>
 	</tr>
 	<tr >

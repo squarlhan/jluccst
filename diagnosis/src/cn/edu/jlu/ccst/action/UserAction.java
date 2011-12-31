@@ -180,7 +180,7 @@ public class UserAction extends ActionSupport {
 			
 		  return "loginerror";}
 		 else {
-			 ActionContext actionContext = ActionContext.getContext();
+			ActionContext actionContext = ActionContext.getContext();
 	        Map session = actionContext.getSession();
 	        session.put("us", flag1);
 	        
