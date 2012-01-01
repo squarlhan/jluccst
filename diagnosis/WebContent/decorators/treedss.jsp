@@ -20,7 +20,7 @@
 									style="display: none;">全部折叠</a>
 							</p>
 							    <ul>
-							  <li class="Closed">点源处理
+							  <li class="Closed"><a href="/diagnosis/dsshistoryaction!findbyunit?unit=<%=java.net.URLEncoder.encode("点源处理","UTF-8")%>">点源处理</a>
 							    <ul>
 							      
 							       <li class="Child"><a href="/diagnosis/dsshistoryaction!findbyname?name=<%=java.net.URLEncoder.encode("电石厂有机水","UTF-8")%>">电石厂有机水</a></li>
@@ -41,25 +41,25 @@
 							      
 							    </ul>
 							  </li>
-							  <li class="Closed">中和处理
+							  <li class="Closed"><a href="/diagnosis/dsshistoryaction!findbyunit?unit=<%=java.net.URLEncoder.encode("中和处理","UTF-8")%>">中和处理</a>
 							   <ul>
-							      <li class="Child"><a href="/diagnosis/dsshistoryaction!findbyname?name=<%=java.net.URLEncoder.encode("染料厂酸水染料厂酸水","UTF-8")%>">染料厂酸水</a></li>
+							      <li class="Child"><a href="/diagnosis/dsshistoryaction!findbyname?name=<%=java.net.URLEncoder.encode("染料厂酸水","UTF-8")%>">染料厂酸水</a></li>
 							      <li class="Child"><a href="/diagnosis/dsshistoryaction!findbyname?name=<%=java.net.URLEncoder.encode("电石厂酸水","UTF-8")%>">电石厂酸水</a></li> 
 							       <li class="Child"><a href="/diagnosis/dsshistoryaction!findbyname?name=<%=java.net.URLEncoder.encode("铁运489沉淀池出水","UTF-8")%>">铁运489沉淀池出水</a></li>
 							   </ul>
 							  </li>
-							  <li class="Closed">生活水处理
+							  <li class="Closed"><a href="/diagnosis/dsshistoryaction!findbyunit?unit=<%=java.net.URLEncoder.encode("生活水处理","UTF-8")%>">生活水处理</a>
 							   <ul>
 							    <li class="Child"><a href="/diagnosis/dsshistoryaction!findbyname?name=<%=java.net.URLEncoder.encode("14a","UTF-8")%>">14a</a></li>
 							   <li class="Child"><a href="/diagnosis/dsshistoryaction!findbyname?name=<%=java.net.URLEncoder.encode("14b","UTF-8")%>">14b</a></li>
 							    </ul>
 							  </li>
-							  <li class="Closed">预处理
+							  <li class="Closed"><a href="/diagnosis/dsshistoryaction!findbyunit?unit=<%=java.net.URLEncoder.encode("预处理","UTF-8")%>">预处理</a>
 							    <ul>
 							       <li class="Child"><a href="/diagnosis/dsshistoryaction!findbyname?name=<%=java.net.URLEncoder.encode("稳流池(477)进水","UTF-8")%>">稳流池(477)进水</a></li>
 							       <li class="Child"><a href="/diagnosis/dsshistoryaction!findbyname?name=<%=java.net.URLEncoder.encode("进水提升泵房(462A)","UTF-8")%>">进水提升泵房(462A)</a></li>
 							       <li class="Child"><a href="/diagnosis/dsshistoryaction!findbyname?name=<%=java.net.URLEncoder.encode("巴氏计量槽(499)","UTF-8")%>">巴氏计量槽(499)</a></li>
-							       <li class="Child"><a href="/diagnosis/dsshistoryaction!findbyname?name=<%=java.net.URLEncoder.encode("除色池(414","UTF-8")%>">除色池(414)</a></li>
+							       <li class="Child"><a href="/diagnosis/dsshistoryaction!findbyname?name=<%=java.net.URLEncoder.encode("除色池(414)","UTF-8")%>">除色池(414)</a></li>
 							       <li class="Child"><a href="/diagnosis/dsshistoryaction!findbyname?name=<%=java.net.URLEncoder.encode("沉沙刮沙池(488)","UTF-8")%>">沉沙刮沙池(488)</a></li>
 							       <li class="Child"><a href="/diagnosis/dsshistoryaction!findbyname?name=<%=java.net.URLEncoder.encode("初沉池(489B)","UTF-8")%>">初沉池(489B)</a></li>
 							       <li class="Child"><a href="/diagnosis/dsshistoryaction!findbyname?name=<%=java.net.URLEncoder.encode("事故池(489)","UTF-8")%>">事故池(489)</a></li>
@@ -72,7 +72,7 @@
 							       <li class="Child"><a href="/diagnosis/dsshistoryaction!findbyname?name=<%=java.net.URLEncoder.encode("脱水装置(495)","UTF-8")%>">脱水装置(495)</a></li>
 							    </ul>
 							  </li>
-								<li class="Closed">生化处理
+								<li class="Closed"><a href="/diagnosis/dsshistoryaction!findbyunit?unit=<%=java.net.URLEncoder.encode("生化处理","UTF-8")%>">生化处理</a>
 									<ul>
 										 <li class="Child"><a href="/diagnosis/dsshistoryaction!findbyname?name=<%=java.net.URLEncoder.encode("1、2系列465回流泵房","UTF-8")%>">1、2系列465回流泵房</a></li>
 								         <li class="Child"><a href="/diagnosis/dsshistoryaction!findbyname?name=<%=java.net.URLEncoder.encode("3系列465A回流泵房","UTF-8")%>">3系列465A回流泵房</a></li>

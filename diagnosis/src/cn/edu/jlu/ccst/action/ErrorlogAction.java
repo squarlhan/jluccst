@@ -25,7 +25,7 @@ public class ErrorlogAction extends ActionSupport {
 	private List<Errorlog> errorlist;
 	private ErrorlogService errorlogService;
    private String equip;
-   
+   private String unit;
    private String parameter;
    
    private Date date1;
@@ -38,6 +38,18 @@ public class ErrorlogAction extends ActionSupport {
    
 	
 
+
+
+
+	public String getUnit() {
+	return unit;
+}
+
+
+
+public void setUnit(String unit) {
+	this.unit = unit;
+}
 
 
 
@@ -128,6 +140,18 @@ public void setEquip(String equip) {
 		try {
 			String keyword= new String(equip.getBytes("ISO-8859-1"),"UTF-8");
 			errorlist = errorlogService.findbyequipment(keyword);
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		return "OK";
+	}
+	
+	
+	public String findbyunit(){
+		try {
+			String keyword= new String(unit.getBytes("ISO-8859-1"),"UTF-8");
+			errorlist = errorlogService.findbyunit(keyword);
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

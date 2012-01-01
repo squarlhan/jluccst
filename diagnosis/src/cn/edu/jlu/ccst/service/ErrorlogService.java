@@ -18,6 +18,8 @@ import cn.edu.jlu.ccst.dao.ErrorlogInter;
 import cn.edu.jlu.ccst.model.DcsDscrib;
 import cn.edu.jlu.ccst.model.Dcsdata;
 import cn.edu.jlu.ccst.model.Errorlog;
+import cn.edu.jlu.ccst.dao.TreeunitServiceInter;
+import cn.edu.jlu.ccst.model.Treeunit;
 
 @Component("errorlogService")
 public class ErrorlogService {
@@ -25,11 +27,18 @@ public class ErrorlogService {
 	private ErrorlogInter errorlogImpl;
 	private DcsDscribServiceInter dcsDscribServiceImpl;
 	private String equip;
+	private TreeunitServiceInter TreeunitServiceImpl;
 	
 	
 	
 	
-	
+	public TreeunitServiceInter getTreeunitServiceImpl() {
+		return TreeunitServiceImpl;
+	}
+	  @Resource
+	public void setTreeunitServiceImpl(TreeunitServiceInter treeunitServiceImpl) {
+		TreeunitServiceImpl = treeunitServiceImpl;
+	}
 	public String getEquip() {
 		return equip;
 	}
@@ -71,6 +80,27 @@ public class ErrorlogService {
 		resultlist = errorlogImpl.findbyequipment(equip);
 		//if(resultlist.size()<1)resultlist = findAll();
 		return resultlist; 
+	  
+  }
+  
+  public List<Errorlog> findbyunit(String unit){
+	  List<Errorlog> resultlist1 = new ArrayList();
+	  List<String> resultlist2 = new ArrayList();
+	  List<Errorlog> resultlist3 = new ArrayList();
+	  List<Errorlog> resultlist4 = new ArrayList();
+		resultlist2 = TreeunitServiceImpl.findallchild(unit);
+		
+		//int count=0;
+		for(String a:resultlist2){
+			resultlist1=errorlogImpl.findbyequipment(a);
+			
+		//	System.out.println(resultlist1.size());
+				resultlist3.addAll(resultlist3.size(), resultlist1);
+			//	count=count+resultlist1.size();
+		}
+		
+		//if(resultlist.size()<1)resultlist = findAll();
+		return resultlist3; 
 	  
   }
   
