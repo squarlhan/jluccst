@@ -43,7 +43,7 @@
 							  </li>
 							  <li class="Closed">中和处理
 							   <ul>
-							      <li class="Child"><a href="/diagnosis/rulebraction!findbynoun?noun=<%=java.net.URLEncoder.encode("染料厂酸水染料厂酸水","UTF-8")%>">染料厂酸水</a></li>
+							      <li class="Child"><a href="/diagnosis/rulebraction!findbynoun?noun=<%=java.net.URLEncoder.encode("染料厂酸水","UTF-8")%>">染料厂酸水</a></li>
 							      <li class="Child"><a href="/diagnosis/rulebraction!findbynoun?noun=<%=java.net.URLEncoder.encode("电石厂酸水","UTF-8")%>">电石厂酸水</a></li> 
 							       <li class="Child"><a href="/diagnosis/rulebraction!findbynoun?noun=<%=java.net.URLEncoder.encode("铁运489沉淀池出水","UTF-8")%>">铁运489沉淀池出水</a></li>
 							   </ul>
@@ -59,7 +59,7 @@
 							       <li class="Child"><a href="/diagnosis/rulebraction!findbynoun?noun=<%=java.net.URLEncoder.encode("稳流池(477)进水","UTF-8")%>">稳流池(477)进水</a></li>
 							       <li class="Child"><a href="/diagnosis/rulebraction!findbynoun?noun=<%=java.net.URLEncoder.encode("进水提升泵房(462A)","UTF-8")%>">进水提升泵房(462A)</a></li>
 							       <li class="Child"><a href="/diagnosis/rulebraction!findbynoun?noun=<%=java.net.URLEncoder.encode("巴氏计量槽(499)","UTF-8")%>">巴氏计量槽(499)</a></li>
-							       <li class="Child"><a href="/diagnosis/rulebraction!findbynoun?noun=<%=java.net.URLEncoder.encode("除色池(414","UTF-8")%>">除色池(414)</a></li>
+							       <li class="Child"><a href="/diagnosis/rulebraction!findbynoun?noun=<%=java.net.URLEncoder.encode("除色池(414)","UTF-8")%>">除色池(414)</a></li>
 							       <li class="Child"><a href="/diagnosis/rulebraction!findbynoun?noun=<%=java.net.URLEncoder.encode("沉沙刮沙池(488)","UTF-8")%>">沉沙刮沙池(488)</a></li>
 							       <li class="Child"><a href="/diagnosis/rulebraction!findbynoun?noun=<%=java.net.URLEncoder.encode("初沉池(489B)","UTF-8")%>">初沉池(489B)</a></li>
 							       <li class="Child"><a href="/diagnosis/rulebraction!findbynoun?noun=<%=java.net.URLEncoder.encode("事故池(489)","UTF-8")%>">事故池(489)</a></li>

@@ -25,11 +25,21 @@ public class DssHistoryAction extends ActionSupport {
 	private Dss_historyService dss_historyService;
     private String name;
     private String parameter;
-    
+    private String unit;
     
     
     
 	
+
+	public String getUnit() {
+		return unit;
+	}
+
+
+	public void setUnit(String unit) {
+		this.unit = unit;
+	}
+
 
 	public String getParameter() {
 		return parameter;
@@ -104,4 +114,14 @@ public class DssHistoryAction extends ActionSupport {
 		errorlist = dss_historyService.findbypara(parameter);
 	    return "OK";
 }
+	public String findbyunit(){
+		try {
+			String keyword= new String(unit.getBytes("ISO-8859-1"),"UTF-8");
+			errorlist = dss_historyService.findbyunit(keyword);
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		return "OK";
+	}
 }
