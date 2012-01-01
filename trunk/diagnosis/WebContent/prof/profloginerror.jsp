@@ -10,7 +10,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <base href="<%=basePath%>">
     
     <title>ERROR</title>
-    <META HTTP-EQUIV="Refresh" CONTENT="/diagnosis/prof/proflogin.jsp">
+    <META HTTP-EQUIV="Refresh" CONTENT="3;URL=/diagnosis/prof/proflogin.jsp">
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">    
