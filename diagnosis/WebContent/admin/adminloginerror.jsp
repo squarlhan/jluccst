@@ -3,17 +3,14 @@
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
-<%@taglib prefix="s" uri="/struts-tags" %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
     <base href="<%=basePath%>">
     
-    <title>管理员登陆错误</title>
-     <script type="text/javascript">
-    	alert("密码错误，请重新输入！")
-    </script>
+    <title>ERROR</title>
+    <META HTTP-EQUIV="Refresh" CONTENT="/diagnosis/admin/adminlogin.jsp">
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">    
@@ -22,31 +19,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
+
   </head>
   
   <body>
-  <div id="rightmain">
-	  <h2>管理员登陆页面</h2>
-<div id="login">
-<s:form action="adminaction!exitsadmin.action"  theme="simple">
-<table width="200" align="center" style="margin-left:30">
-	<tr><td>用户名：</td>
-	<td align="center"><s:textfield size="15" label="用户名" name="user.username" /></td>
-	</tr>
-	<tr><td>密码：</td>
-	<td align="center"><s:password size="17" label="密码" name="user.password" /></td>
-	</tr>
-	</table>
-	<br/>
-	<table width="150" align="center">
-	<tr>
-	<td width="80" align="center"><s:submit value="登陆" theme="simple" />
-	</td>
-	
-	<td width="80" align="center"> <s:reset value="取消"
-		theme="simple" /></td></tr></table>
-</s:form></div>
-</div>
-   
+    <div style="color: red;">用户名密码错误，请重新输入！</div><br>
   </body>
 </html>

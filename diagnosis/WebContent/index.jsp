@@ -1,4 +1,10 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<%@ page language="java" import="java.util.*" pageEncoding="utf-8"%>
+<%
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
+<%@taglib prefix="s" uri="/struts-tags" %>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -36,7 +42,7 @@ function MM_swapImage() { //v3.0
 </head>
 
 <body onload="MM_preloadImages('pic/an_pt_hui.jpg','pic/an_gl_hui.jpg','pic/an_zj_hui.jpg','pic/dl_an_dl_shen.jpg','pic/dl_an_zc_shen.jpg')">
-<FORM name=loginActionForm  action="useraction.action">
+<s:form action="useraction.action" theme = "simple">
 <table width="1024" border="0" align="center" cellpadding="0" cellspacing="0">
   <tr>
     <td colspan="7"><img src="pic/dl_top.jpg" width="1024" height="516" /></td>
@@ -63,7 +69,7 @@ function MM_swapImage() { //v3.0
       <tr>
         <td align="right"><img src="pic/dl_mm.jpg" width="61" height="20" /></td>
         <td></td>
-        <td><input name="user.password" type="text" id="textfield" size="10" /></td>
+        <td><input name="user.password" type="password" id="textfield" size="11" /></td>
       </tr>
       <tr>
         <td></td>
@@ -87,6 +93,6 @@ function MM_swapImage() { //v3.0
     <td colspan="5"></td>
   </tr>
 </table>
-</FORM>
+</s:form>
 </body>
 </html>

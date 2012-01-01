@@ -4,8 +4,13 @@
 	    <!-- <pattern>/pages/warehouseadmin/login.jsp</pattern> -->
 	    <pattern>/interfaceaction!waitingforU.action</pattern>
 	    <pattern>/error.html</pattern>
-	    <pattern>/index.html</pattern>
-	  
+	    <pattern>/index.jsp</pattern>
+	    <pattern>/user/userlogin.jsp</pattern>
+	    <pattern>/admin/adminlogin.jsp</pattern>
+	    <pattern>/prof/proflogin.jsp</pattern>
+	    <pattern>/useraction!logoff.action</pattern>
+	   <pattern>/profaction!proflogoff.action</pattern>
+	   <pattern>/adminaction!adminlogoff.action</pattern>
 	</excludes>
 	<decorator name="user" page="maindecorator.jsp">
 		<pattern>/user*</pattern>
@@ -20,10 +25,9 @@
 			<pattern>/backward*</pattern>
 	</decorator>
 	<decorator name="userlogin" page="logindecorator.jsp">
-		<pattern>/user/userlogin.jsp</pattern>
 		<pattern>/interface*</pattern>
 		<pattern>/monitor*</pattern>
-		<pattern>/useraction!logoff.action</pattern>
+		
 	</decorator>
 	<decorator name="data" page="datadecorator.jsp">
 	
