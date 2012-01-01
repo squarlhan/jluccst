@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : local
-Source Server Version : 50517
+Source Server         : localhost_3306
+Source Server Version : 50516
 Source Host           : localhost:3306
 Source Database       : wushuichang
 
 Target Server Type    : MYSQL
-Target Server Version : 50517
+Target Server Version : 50516
 File Encoding         : 65001
 
-Date: 2011-12-23 08:36:14
+Date: 2012-01-01 15:47:39
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -1971,6 +1971,25 @@ INSERT INTO `pre_dss` VALUES ('FR501', '13.165882                               
 INSERT INTO `pre_dss` VALUES ('FRQ501', '103394.125                                                      ', '           32.560000', '20111218123004', '126');
 
 -- ----------------------------
+-- Table structure for `pre_history`
+-- ----------------------------
+DROP TABLE IF EXISTS `pre_history`;
+CREATE TABLE `pre_history` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `seqno` varchar(255) DEFAULT NULL,
+  `simu_time` varchar(255) DEFAULT NULL,
+  `value` varchar(255) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK92FB92D823A4A4F1` (`name`),
+  CONSTRAINT `FK92FB92D823A4A4F1` FOREIGN KEY (`name`) REFERENCES `init_predict` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of pre_history
+-- ----------------------------
+
+-- ----------------------------
 -- Table structure for `temp_init_predict`
 -- ----------------------------
 DROP TABLE IF EXISTS `temp_init_predict`;
@@ -2230,6 +2249,65 @@ INSERT INTO `testuser` VALUES ('6', 'wer', '123');
 INSERT INTO `testuser` VALUES ('7', 'qqq', 'qqq');
 INSERT INTO `testuser` VALUES ('8', 'hhh', '123');
 INSERT INTO `testuser` VALUES ('9', 'ghj', '123');
+
+-- ----------------------------
+-- Table structure for `treeunit`
+-- ----------------------------
+DROP TABLE IF EXISTS `treeunit`;
+CREATE TABLE `treeunit` (
+  `id` int(6) NOT NULL AUTO_INCREMENT,
+  `father` varchar(200) DEFAULT NULL,
+  `child` varchar(200) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of treeunit
+-- ----------------------------
+INSERT INTO `treeunit` VALUES ('1', '点源处理', '电石厂有机水');
+INSERT INTO `treeunit` VALUES ('2', '点源处理', '有机合成厂有机水');
+INSERT INTO `treeunit` VALUES ('3', '点源处理', '炼油厂有机水');
+INSERT INTO `treeunit` VALUES ('4', '点源处理', '精细化工厂废水');
+INSERT INTO `treeunit` VALUES ('5', '点源处理', '乙二醇废水');
+INSERT INTO `treeunit` VALUES ('6', '点源处理', '环氧乙烷废水');
+INSERT INTO `treeunit` VALUES ('7', '点源处理', '农药厂有机水');
+INSERT INTO `treeunit` VALUES ('8', '点源处理', '含氮废水');
+INSERT INTO `treeunit` VALUES ('9', '点源处理', '103厂碱水');
+INSERT INTO `treeunit` VALUES ('10', '点源处理', '化肥厂丁辛醇');
+INSERT INTO `treeunit` VALUES ('11', '点源处理', '丙烯腈废水');
+INSERT INTO `treeunit` VALUES ('12', '点源处理', '合成树脂厂有机水');
+INSERT INTO `treeunit` VALUES ('13', '点源处理', '龙潭区生活水');
+INSERT INTO `treeunit` VALUES ('14', '中和处理', '染料厂酸水');
+INSERT INTO `treeunit` VALUES ('15', '中和处理', '电石厂酸水');
+INSERT INTO `treeunit` VALUES ('16', '中和处理', '铁运489沉淀池出水');
+INSERT INTO `treeunit` VALUES ('17', '生活水处理', '14a');
+INSERT INTO `treeunit` VALUES ('18', '生活水处理', '14b');
+INSERT INTO `treeunit` VALUES ('19', '预处理', '稳流池(477)进水');
+INSERT INTO `treeunit` VALUES ('20', '预处理', '进水提升泵房(462A)');
+INSERT INTO `treeunit` VALUES ('21', '预处理', '巴氏计量槽(499)');
+INSERT INTO `treeunit` VALUES ('22', '预处理', '除色池(414)');
+INSERT INTO `treeunit` VALUES ('23', '预处理', '沉沙刮沙池(488)');
+INSERT INTO `treeunit` VALUES ('24', '预处理', '初沉池(489B)');
+INSERT INTO `treeunit` VALUES ('25', '预处理', '初沉池(489B)');
+INSERT INTO `treeunit` VALUES ('26', '预处理', '14B生活水');
+INSERT INTO `treeunit` VALUES ('27', '预处理', '14B生活水');
+INSERT INTO `treeunit` VALUES ('28', '预处理', '14B生活水');
+INSERT INTO `treeunit` VALUES ('29', '预处理', '污泥泵房(466)');
+INSERT INTO `treeunit` VALUES ('30', '预处理', '脱水装置');
+INSERT INTO `treeunit` VALUES ('31', '生化处理', '1、2系列465回流泵房');
+INSERT INTO `treeunit` VALUES ('32', '生化处理', '3系列465A回流泵房');
+INSERT INTO `treeunit` VALUES ('33', '生化处理', '3系列465B回流泵房');
+INSERT INTO `treeunit` VALUES ('34', '生化处理', '中间提升泵房(462B)');
+INSERT INTO `treeunit` VALUES ('35', '生化处理', '1系列生化池');
+INSERT INTO `treeunit` VALUES ('36', '生化处理', '2系列生化池');
+INSERT INTO `treeunit` VALUES ('37', '生化处理', '3系列生化池');
+INSERT INTO `treeunit` VALUES ('38', '生化处理', '4系列生化池');
+INSERT INTO `treeunit` VALUES ('39', '生化处理', '1系列二沉池');
+INSERT INTO `treeunit` VALUES ('40', '生化处理', '2系列二沉池');
+INSERT INTO `treeunit` VALUES ('41', '生化处理', '3系列二沉池');
+INSERT INTO `treeunit` VALUES ('42', '生化处理', '4系列二沉池');
+INSERT INTO `treeunit` VALUES ('43', '生化处理', '接触氧化池');
+INSERT INTO `treeunit` VALUES ('44', '生化处理', '排江出口线');
 
 -- ----------------------------
 -- Table structure for `user`
