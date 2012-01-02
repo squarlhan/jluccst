@@ -6,6 +6,7 @@
 	    <pattern>/error.html</pattern>
 	    <pattern>/index.jsp</pattern>
 	    <pattern>/user/userlogin.jsp</pattern>
+	      <pattern>/user/userdatasuccess.jsp</pattern>
 	    <pattern>/admin/adminlogin.jsp</pattern>
 	    <pattern>/prof/proflogin.jsp</pattern>
 	    <pattern>/useraction!logoff.action</pattern>

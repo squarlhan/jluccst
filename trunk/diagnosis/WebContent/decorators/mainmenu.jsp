@@ -15,9 +15,9 @@
          <!-- <td><a href="/diagnosis/ruleaction!getall.action">规则维护</a></td>
            <td><a href="/diagnosis/dcsdscribaction.action">描述维护</a></td>-->
          <td><a href="/diagnosis/biocpool490/biocpool1.jsp">手工数据推理</a></td>
-        
-        <td><a href="/diagnosis/errorlogaction.action">手工报警日志</a></td>
          <td><a href="/diagnosis/dcsdataaction!showdcsdata.action">手工数据查询</a></td>
+        <td><a href="/diagnosis/errorlogaction.action">手工报警日志</a></td>
+        
         <td><a href="/diagnosis/monitoraction.action">DCS数据推理</a></td>
        
        
@@ -27,7 +27,7 @@
         <td><a href="/diagnosis/dcsdataaction!showgongyidata.action">预警数据查询</a></td>
         <td><a href="/diagnosis/dsshistoryaction.action">预警日志查询</a></td>
          <!--<td><a href="/diagnosis/user/usernet.jsp">系统自学</a></td> -->
-        <td><a href="/diagnosis/userbraction.action">智能诊断</a></td>
+        <!--<td><a href="/diagnosis/userbraction.action">智能诊断</a></td>-->
          <td><a href="/diagnosis/user/usershow.jsp">个人信息</a></td>
         <!--  <td><a href="/diagnosis/admin/adminlogin.jsp">管理员登录</a></td>
           <td><a href="/diagnosis/prof/proflogin.jsp">专家登陆</a></td>--> 

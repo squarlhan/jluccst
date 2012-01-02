@@ -16,7 +16,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    
     <base href="<%=basePath%>">
     
-    <title>手工数据查看</title>
+    <title>DCS数据查看</title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -198,7 +198,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <body>
 
      <div id="rightmain">
-	  <h2>DCS数据</h2>
+	  <h2>DCS数据查询</h2>
 	
   <table bordercolor="#FFFFFF" id="mytable" class="list_table" align="center" >
 		<tr bgcolor="#4A708B">

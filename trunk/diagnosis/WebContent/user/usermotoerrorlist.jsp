@@ -18,7 +18,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    
     <base href="<%=basePath%>">
     
-    <title>dcs数据报警日志</title>
+    <title>DCS数据报警日志</title>
   
     <sx:head/>
     
@@ -223,7 +223,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <body>
 
      <div id="rightmain">
-	  <h2>dcs数据报警日志</h2>
+	  <h2>DCS数据报警日志</h2>
 	  
 	    <s:form action="motoerrorlogaction!findbyorder.action" theme = "simple">
 	    <table theme = "simple">
