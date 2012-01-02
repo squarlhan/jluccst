@@ -31,9 +31,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<td align="center">一切正常!</td>
 	</tr>
 	</table>
-	<div align="center">
+	<!--  <div align="center">
       <input name="button" type=button onClick="window.location.href('errorlogaction.action')" value="手工数据报警日志">
-      </div>
+      </div>-->
 	<br/>
 </div>
 </div>

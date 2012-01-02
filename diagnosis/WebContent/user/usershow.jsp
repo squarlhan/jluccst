@@ -19,7 +19,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    %>  
     <base href="<%=basePath%>">
     
-    <title>管理员信息</title>
+    <title>普通用户信息</title>
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">    
@@ -32,7 +32,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <body>
   <div id="rightmain">
-	  <h2>管理员修改信息</h2>
+	  <h2>用户修改信息</h2>
 	
       <div id="login">
 <s:form action="useraction!alterUser.action" theme = "simple">
