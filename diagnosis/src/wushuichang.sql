@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50516
 File Encoding         : 65001
 
-Date: 2012-01-01 15:47:39
+Date: 2012-01-02 16:30:10
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -1551,6 +1551,199 @@ CREATE TABLE `manualdatahistory` (
 -- ----------------------------
 -- Records of manualdatahistory
 -- ----------------------------
+
+-- ----------------------------
+-- Table structure for `motodcsdata`
+-- ----------------------------
+DROP TABLE IF EXISTS `motodcsdata`;
+CREATE TABLE `motodcsdata` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `equipment` varchar(255) DEFAULT NULL,
+  `item` varchar(255) DEFAULT NULL,
+  `value` double DEFAULT NULL,
+  `isok` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=122 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of motodcsdata
+-- ----------------------------
+INSERT INTO `motodcsdata` VALUES ('109', '电石厂有机水', '班次', '0', null);
+INSERT INTO `motodcsdata` VALUES ('110', '电石厂有机水', 'COD', '1', '3');
+INSERT INTO `motodcsdata` VALUES ('120', '1系列生化池', '班次', '0', null);
+INSERT INTO `motodcsdata` VALUES ('117', '染料厂酸水', '班次', '0', null);
+INSERT INTO `motodcsdata` VALUES ('118', '染料厂酸水', 'COD', '1', '1');
+
+-- ----------------------------
+-- Table structure for `motodcshistory`
+-- ----------------------------
+DROP TABLE IF EXISTS `motodcshistory`;
+CREATE TABLE `motodcshistory` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `equipment` varchar(255) DEFAULT NULL,
+  `item` varchar(255) DEFAULT NULL,
+  `seqno` varchar(255) DEFAULT NULL,
+  `value` double DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=119 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of motodcshistory
+-- ----------------------------
+INSERT INTO `motodcshistory` VALUES ('1', '2系列生化池', '3号生化池PH', null, '33');
+INSERT INTO `motodcshistory` VALUES ('2', '2系列生化池', '4号生化池PH', null, '33');
+INSERT INTO `motodcshistory` VALUES ('3', '2系列生化池', '3号生化池COD', null, '33');
+INSERT INTO `motodcshistory` VALUES ('4', '2系列生化池', '3号生化池碱度', null, '33');
+INSERT INTO `motodcshistory` VALUES ('5', '2系列生化池', '班次', '2011-11-21 00:04:57', '0');
+INSERT INTO `motodcshistory` VALUES ('6', '2系列生化池', '3号生化池PH', null, '22');
+INSERT INTO `motodcshistory` VALUES ('7', '2系列生化池', '3号生化池COD', null, '22');
+INSERT INTO `motodcshistory` VALUES ('8', '2系列生化池', '3号生化池碱度', null, '22');
+INSERT INTO `motodcshistory` VALUES ('9', '2系列生化池', '3号生化池BOD5', null, '22');
+INSERT INTO `motodcshistory` VALUES ('10', '2系列生化池', '班次', '2011-11-21 00:17:16', '0');
+INSERT INTO `motodcshistory` VALUES ('11', '2系列生化池', '3号生化池PH', null, '111');
+INSERT INTO `motodcshistory` VALUES ('12', '2系列生化池', '3号生化池COD', null, '222');
+INSERT INTO `motodcshistory` VALUES ('13', '2系列生化池', '3号生化池碱度', null, '111');
+INSERT INTO `motodcshistory` VALUES ('14', '2系列生化池', '班次', '2011-11-21 00:22:46', '8');
+INSERT INTO `motodcshistory` VALUES ('15', '2系列生化池', '3号生化池PH', null, '7');
+INSERT INTO `motodcshistory` VALUES ('16', '2系列生化池', '班次', '2011-11-21 00:48:29', '8');
+INSERT INTO `motodcshistory` VALUES ('17', '2系列生化池', '3号生化池PH', null, '999');
+INSERT INTO `motodcshistory` VALUES ('18', '2系列生化池', '班次', '2011-11-21 00:49:30', '8');
+INSERT INTO `motodcshistory` VALUES ('19', '2系列生化池', '3号生化池PH', null, '111');
+INSERT INTO `motodcshistory` VALUES ('20', '2系列生化池', '3号生化池溶解氧', null, '999');
+INSERT INTO `motodcshistory` VALUES ('21', '2系列生化池', '班次', '2011-11-21 01:18:06', '0');
+INSERT INTO `motodcshistory` VALUES ('22', '2系列生化池', '3号生化池PH', null, '999');
+INSERT INTO `motodcshistory` VALUES ('23', '2系列生化池', '3号生化池COD', null, '9');
+INSERT INTO `motodcshistory` VALUES ('24', '2系列生化池', '3号生化池碱度', null, '999');
+INSERT INTO `motodcshistory` VALUES ('25', '2系列生化池', '3号生化池溶解氧', null, '999');
+INSERT INTO `motodcshistory` VALUES ('26', '2系列生化池', '班次', '2011-11-21 01:26:30', '0');
+INSERT INTO `motodcshistory` VALUES ('27', '2系列生化池', '3号生化池溶解氧', null, '22222222');
+INSERT INTO `motodcshistory` VALUES ('28', '2系列生化池', '班次', '2011-11-21 01:27:07', '0');
+INSERT INTO `motodcshistory` VALUES ('29', '2系列生化池', '3号生化池PH', null, '333');
+INSERT INTO `motodcshistory` VALUES ('30', '2系列生化池', '3号生化池碱度', null, '3333');
+INSERT INTO `motodcshistory` VALUES ('31', '2系列生化池', '3号生化池溶解氧', null, '3333');
+INSERT INTO `motodcshistory` VALUES ('32', '2系列生化池', '班次', '2011-11-21 01:30:51', '0');
+INSERT INTO `motodcshistory` VALUES ('33', '2系列生化池', '3号生化池PH', null, '7');
+INSERT INTO `motodcshistory` VALUES ('34', '2系列生化池', '班次', '2011-11-21 12:57:34', '0');
+INSERT INTO `motodcshistory` VALUES ('35', '2系列生化池', '3号生化池PH', null, '9999');
+INSERT INTO `motodcshistory` VALUES ('36', '2系列生化池', '班次', '2011-11-21 12:57:50', '0');
+INSERT INTO `motodcshistory` VALUES ('37', '2系列生化池', '3号生化池PH', null, '111');
+INSERT INTO `motodcshistory` VALUES ('38', '2系列生化池', '3号生化池水量', null, '1');
+INSERT INTO `motodcshistory` VALUES ('39', '2系列生化池', '班次', '2011-11-21 13:04:38', '0');
+INSERT INTO `motodcshistory` VALUES ('40', '2系列生化池', '3号生化池PH', null, '1');
+INSERT INTO `motodcshistory` VALUES ('41', '2系列生化池', '3号生化池COD', null, '1');
+INSERT INTO `motodcshistory` VALUES ('42', '2系列生化池', '3号生化池碱度', null, '1');
+INSERT INTO `motodcshistory` VALUES ('43', '2系列生化池', '班次', '2011-11-21 13:08:01', '8');
+INSERT INTO `motodcshistory` VALUES ('44', '2系列生化池', '3号生化池PH', null, '111');
+INSERT INTO `motodcshistory` VALUES ('45', '2系列生化池', '3号生化池COD', null, '1');
+INSERT INTO `motodcshistory` VALUES ('46', '2系列生化池', '3号生化池碱度', null, '1');
+INSERT INTO `motodcshistory` VALUES ('47', '2系列生化池', '班次', '2011-11-21 13:14:12', '0');
+INSERT INTO `motodcshistory` VALUES ('48', '2系列生化池', '3号生化池PH', null, '7');
+INSERT INTO `motodcshistory` VALUES ('49', '2系列生化池', '班次', '2011-11-21 13:15:37', '0');
+INSERT INTO `motodcshistory` VALUES ('50', '2系列生化池', '班次', '2011-11-27 15:04:02', '0');
+INSERT INTO `motodcshistory` VALUES ('51', '2系列生化池', '3号生化池PH', '2011-11-27 15:04:02', '2');
+INSERT INTO `motodcshistory` VALUES ('52', '2系列生化池', '班次', '2011-11-27 15:06:13', '0');
+INSERT INTO `motodcshistory` VALUES ('53', '2系列生化池', '3号生化池PH', '2011-11-27 15:06:13', '111');
+INSERT INTO `motodcshistory` VALUES ('54', '2系列生化池', '班次', '2011-11-27 15:10:07', '0');
+INSERT INTO `motodcshistory` VALUES ('55', '2系列生化池', '3号生化池PH', '2011-11-27 15:10:07', '22');
+INSERT INTO `motodcshistory` VALUES ('56', '1系列生化池', '班次', '2011-11-27 19:15:30', '0');
+INSERT INTO `motodcshistory` VALUES ('57', '1系列生化池', '1号生化池PH', '2011-11-27 19:15:30', '12121212');
+INSERT INTO `motodcshistory` VALUES ('58', '2系列生化池', '班次', '2011-11-27 19:16:12', '0');
+INSERT INTO `motodcshistory` VALUES ('59', '2系列生化池', '3号生化池PH', '2011-11-27 19:16:12', '213234324');
+INSERT INTO `motodcshistory` VALUES ('60', '2系列生化池', '班次', '2011-11-27 19:16:33', '0');
+INSERT INTO `motodcshistory` VALUES ('61', '2系列生化池', '3号生化池PH', '2011-11-27 19:16:33', '1212121');
+INSERT INTO `motodcshistory` VALUES ('62', '1系列生化池', '班次', '2011-11-27 19:31:55', '0');
+INSERT INTO `motodcshistory` VALUES ('63', '2系列生化池', '班次', '2011-11-27 19:33:52', '0');
+INSERT INTO `motodcshistory` VALUES ('64', '2系列生化池', '3号生化池COD', '2011-11-27 19:33:52', '12121212');
+INSERT INTO `motodcshistory` VALUES ('65', '2系列生化池', '班次', '2011-11-27 19:36:21', '0');
+INSERT INTO `motodcshistory` VALUES ('66', '2系列生化池', '3号生化池PH', '2011-11-27 19:36:21', '32432');
+INSERT INTO `motodcshistory` VALUES ('67', '2系列生化池', '班次', '2011-11-27 19:45:44', '0');
+INSERT INTO `motodcshistory` VALUES ('68', '2系列生化池', '3号生化池PH', '2011-11-27 19:45:44', '1111');
+INSERT INTO `motodcshistory` VALUES ('69', '1系列生化池', '班次', '2011-11-27 19:46:32', '0');
+INSERT INTO `motodcshistory` VALUES ('70', '2系列生化池', '班次', '2011-11-27 19:54:38', '0');
+INSERT INTO `motodcshistory` VALUES ('71', '2系列生化池', '3号生化池SS', '2011-11-27 19:54:38', '13221342');
+INSERT INTO `motodcshistory` VALUES ('72', '1系列生化池', '班次', '2011-11-27 20:09:51', '0');
+INSERT INTO `motodcshistory` VALUES ('73', '2系列生化池', '班次', '2011-11-27 20:10:07', '0');
+INSERT INTO `motodcshistory` VALUES ('74', '2系列生化池', '3号生化池COD', '2011-11-27 20:10:07', '432423432');
+INSERT INTO `motodcshistory` VALUES ('75', '2系列生化池', '班次', '2011-11-27 20:12:47', '0');
+INSERT INTO `motodcshistory` VALUES ('76', '2系列生化池', '3号生化池碱度', '2011-11-27 20:12:47', '2311324');
+INSERT INTO `motodcshistory` VALUES ('77', '2系列生化池', '班次', '2011-11-27 20:14:15', '0');
+INSERT INTO `motodcshistory` VALUES ('78', '2系列生化池', '3号生化池COD', '2011-11-27 20:14:15', '243424');
+INSERT INTO `motodcshistory` VALUES ('79', '2系列生化池', '班次', '2011-11-27 20:16:08', '0');
+INSERT INTO `motodcshistory` VALUES ('80', '2系列生化池', '3号生化池COD', '2011-11-27 20:16:08', '243424');
+INSERT INTO `motodcshistory` VALUES ('81', '1系列生化池', '班次', '2011-11-27 23:52:35', '0');
+INSERT INTO `motodcshistory` VALUES ('82', '1系列生化池', '1号生化池PH', '2011-11-27 23:52:35', '11111');
+INSERT INTO `motodcshistory` VALUES ('83', '2系列生化池', '班次', '2011-11-27 23:53:32', '0');
+INSERT INTO `motodcshistory` VALUES ('84', '2系列生化池', '3号生化池COD', '2011-11-27 23:53:32', '0.2');
+INSERT INTO `motodcshistory` VALUES ('85', '1系列生化池', '班次', '2011-11-27 23:55:09', '0');
+INSERT INTO `motodcshistory` VALUES ('86', '1系列生化池', '1号生化池PH', '2011-11-27 23:55:09', '7');
+INSERT INTO `motodcshistory` VALUES ('87', '1系列生化池', '班次', '2011-11-28 10:55:17', '0');
+INSERT INTO `motodcshistory` VALUES ('88', '1系列生化池', '1号生化池SS', '2011-11-28 10:55:17', '1111');
+INSERT INTO `motodcshistory` VALUES ('89', '1系列生化池', '班次', '2011-11-28 10:56:32', '0');
+INSERT INTO `motodcshistory` VALUES ('90', '1系列生化池', '1号生化池SS', '2011-11-28 10:56:32', '1111');
+INSERT INTO `motodcshistory` VALUES ('91', '1系列生化池', '班次', '2011-11-28 10:57:15', '0');
+INSERT INTO `motodcshistory` VALUES ('92', '1系列生化池', '1号生化池SS', '2011-11-28 10:57:15', '1111');
+INSERT INTO `motodcshistory` VALUES ('93', '1系列生化池', '班次', '2011-11-28 10:57:37', '0');
+INSERT INTO `motodcshistory` VALUES ('94', '1系列生化池', '1号生化池SS', '2011-11-28 10:57:37', '1111');
+INSERT INTO `motodcshistory` VALUES ('95', '1系列生化池', '班次', '2011-11-28 11:29:27', '0');
+INSERT INTO `motodcshistory` VALUES ('96', '1系列生化池', '1号生化池PH', '2011-11-28 11:29:27', '121212');
+INSERT INTO `motodcshistory` VALUES ('97', '1系列生化池', '班次', '2011-11-28 11:33:26', '0');
+INSERT INTO `motodcshistory` VALUES ('98', '1系列生化池', '1号生化池PH', '2011-11-28 11:33:26', '11111');
+INSERT INTO `motodcshistory` VALUES ('99', '1系列生化池', '班次', '2011-11-28 11:34:51', '0');
+INSERT INTO `motodcshistory` VALUES ('100', '1系列生化池', '2号生化池PH', '2011-11-28 11:34:51', '11111');
+INSERT INTO `motodcshistory` VALUES ('101', '1系列生化池', '班次', '2011-11-28 13:41:55', '0');
+INSERT INTO `motodcshistory` VALUES ('102', '1系列生化池', '班次', '2011-11-28 22:17:11', '0');
+INSERT INTO `motodcshistory` VALUES ('103', '1系列生化池', '1号生化池PH', '2011-11-28 22:17:11', '10');
+INSERT INTO `motodcshistory` VALUES ('104', '排江出口线', '班次', '2011-12-11 15:53:22', '0');
+INSERT INTO `motodcshistory` VALUES ('105', '排江出口线', '出口NH3-N', '2011-12-11 15:53:22', '3');
+INSERT INTO `motodcshistory` VALUES ('106', '电石厂有机水', '班次', '2011-12-19 20:43:43', '0');
+INSERT INTO `motodcshistory` VALUES ('107', '电石厂有机水', 'COD', '2011-12-19 20:43:16', '1');
+INSERT INTO `motodcshistory` VALUES ('108', '染料厂酸水', '班次', '2011-12-19 20:45:00', '0');
+INSERT INTO `motodcshistory` VALUES ('109', '染料厂酸水', 'COD', '2011-12-19 20:44:57', '1');
+INSERT INTO `motodcshistory` VALUES ('110', '染料厂酸水', '班次', '2011-12-19 20:45:21', '0');
+INSERT INTO `motodcshistory` VALUES ('111', '染料厂酸水', 'COD', '2011-12-19 20:45:21', '3');
+INSERT INTO `motodcshistory` VALUES ('112', '染料厂酸水', '班次', '2011-12-19 20:47:47', '0');
+INSERT INTO `motodcshistory` VALUES ('113', '染料厂酸水', 'COD', '2011-12-19 20:47:47', '6');
+INSERT INTO `motodcshistory` VALUES ('114', '染料厂酸水', '班次', '2011-12-19 21:15:35', '0');
+INSERT INTO `motodcshistory` VALUES ('115', '染料厂酸水', 'COD', '2011-12-19 21:15:34', '1');
+INSERT INTO `motodcshistory` VALUES ('116', '1系列生化池', '班次', '2011-12-22 12:55:00', '0');
+INSERT INTO `motodcshistory` VALUES ('117', '1系列生化池', '班次', '2011-12-22 12:55:52', '0');
+INSERT INTO `motodcshistory` VALUES ('118', '1系列生化池', '1号生化池PH', '2011-12-22', '12');
+
+-- ----------------------------
+-- Table structure for `motoerrorlog`
+-- ----------------------------
+DROP TABLE IF EXISTS `motoerrorlog`;
+CREATE TABLE `motoerrorlog` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `equipment` varchar(255) DEFAULT NULL,
+  `item` varchar(255) DEFAULT NULL,
+  `level` varchar(255) DEFAULT NULL,
+  `time` varchar(255) DEFAULT NULL,
+  `value` double DEFAULT NULL,
+  `error` varchar(255) DEFAULT NULL,
+  `sugg` varchar(255) DEFAULT NULL,
+  `wrong` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of motoerrorlog
+-- ----------------------------
+INSERT INTO `motoerrorlog` VALUES ('20', '2系列生化池', '3号生化池PH', '4', '2011-11-27 15:04:02', '2', '中和站控制不好;', '增加测试PH频次，向车间工艺工程师汇报;', '过低');
+INSERT INTO `motoerrorlog` VALUES ('21', '2系列生化池', '3号生化池PH', '3', '2011-11-27 15:06:13', '111', '中和站控制不好;', '增加测试PH频次，向车间工艺工程师汇报;', '过高');
+INSERT INTO `motoerrorlog` VALUES ('22', '2系列生化池', '3号生化池PH', '5', '2011-11-27 15:10:07', '22', '中和站控制不好;', '增加测试PH频次，向车间工艺工程师汇报;', '过高');
+INSERT INTO `motoerrorlog` VALUES ('23', '2系列生化池', '3号生化池PH', '6', '2011-11-27 19:16:12', '213234324', '中和站控制不好;', '增加测试PH频次，向车间工艺工程师汇报;', '过高');
+INSERT INTO `motoerrorlog` VALUES ('24', '2系列生化池', '3号生化池PH', '7', '2011-11-27 19:16:33', '1212121', '中和站控制不好;', '增加测试PH频次，向车间工艺工程师汇报;', '过高');
+INSERT INTO `motoerrorlog` VALUES ('26', '2系列生化池', '3号生化池PH', '8', '2011-11-27 19:36:21', '32432', '中和站控制不好;', '增加测试PH频次，向车间工艺工程师汇报;', '过高');
+INSERT INTO `motoerrorlog` VALUES ('27', '2系列生化池', '3号生化池PH', '9', '2011-11-27 19:45:44', '1111', '中和站控制不好;', '增加测试PH频次，向车间工艺工程师汇报;', '过高');
+INSERT INTO `motoerrorlog` VALUES ('28', '2系列生化池', '3号生化池SS', '2', '2011-11-27 19:54:38', '13221342', '进水池控制不好;', '维修;', '过高');
+INSERT INTO `motoerrorlog` VALUES ('39', '1系列生化池', '1号生化池PH', '1', '2011-11-28 11:33:26', '11111', '中和池处理不好;', '维修;', '过高');
+INSERT INTO `motoerrorlog` VALUES ('40', '1系列生化池', '2号生化池PH', '4', '2011-11-28 11:34:51', '11111', '中和池处理不好;', '维修;', '过高');
+INSERT INTO `motoerrorlog` VALUES ('41', '1系列生化池', '1号生化池PH', '5', '2011-11-28 22:17:11', '10', '中和池处理不好;酸水的流量增大;酸水的酸度增加;碱液管堵塞;仪表指示不准;', '维修;增加碱液投加量;增加碱液投加量;及时清通，必要时短管清通;用PH试纸实测;', '过高');
+INSERT INTO `motoerrorlog` VALUES ('42', '排江出口线', '出口NH3-N', '6', '2011-12-11 15:53:22', '3', '11;22;33;电石渣加的太多;中和错误;', '1;2;3;减少电石渣投放量;立即上报;', '过高');
+INSERT INTO `motoerrorlog` VALUES ('43', '染料厂酸水', 'COD', '10', '2011-12-19 21:15:35', '1', null, null, '过高');
+INSERT INTO `motoerrorlog` VALUES ('44', '排江出口线', '出口水量', '3', '2011-12-11 15:53:22', '333', '11;22;33;电石渣加的太多;中和错误;', '1;2;3;减少电石渣投放量;立即上报', '过高');
+INSERT INTO `motoerrorlog` VALUES ('45', '1系列生化池', '1号生化池PH', '9', '2011-12-22 12:55:52', '12', ';', '调整进水PH值，加酸（这种情况很少出现，目前工厂没有加酸装置）;', '过高');
 
 -- ----------------------------
 -- Table structure for `olddcsdata`
