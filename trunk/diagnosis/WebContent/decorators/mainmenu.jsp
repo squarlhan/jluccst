@@ -22,7 +22,7 @@
        
        
         <td><a href="#">DCS数据查询</a></td>
-        <td><a href="#">DCS日志查询</a></td>
+        <td><a href="/diagnosis/motoerrorlogaction.action">DCS日志查询</a></td>
         <td><a href="/diagnosis/interfaceaction.action">预警数据推理</a></td>
         <td><a href="/diagnosis/dcsdataaction!showgongyidata.action">预警数据查询</a></td>
         <td><a href="/diagnosis/dsshistoryaction.action">预警日志查询</a></td>

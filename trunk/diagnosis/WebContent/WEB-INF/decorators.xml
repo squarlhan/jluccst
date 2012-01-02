@@ -49,7 +49,11 @@
 	
 		<pattern>/errorlog*</pattern>
 	</decorator>
+	<decorator name="motoerrorlog" page="motoerrorlogdecorator.jsp">
 	
+	
+		<pattern>/motoerrorlog*</pattern>
+	</decorator>
 	<decorator name="prof" page="profdecorator.jsp">
 		<pattern>/rule*</pattern>
 	</decorator>
