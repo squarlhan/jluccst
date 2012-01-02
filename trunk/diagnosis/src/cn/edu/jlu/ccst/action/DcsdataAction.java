@@ -21,6 +21,7 @@ import cn.edu.jlu.ccst.model.BackwardandReason;
 import cn.edu.jlu.ccst.model.BackwardandResult;
 import cn.edu.jlu.ccst.model.DcsDscrib;
 import cn.edu.jlu.ccst.model.Dcsdata;
+import cn.edu.jlu.ccst.model.MotoDcsdata;
 import cn.edu.jlu.ccst.model.Dcshistory;
 import cn.edu.jlu.ccst.model.Errorlog;
 import cn.edu.jlu.ccst.model.Pre_dss;
@@ -28,6 +29,7 @@ import cn.edu.jlu.ccst.model.Wwdcsdata;
 
 import cn.edu.jlu.ccst.model.User;
 import cn.edu.jlu.ccst.service.DcsdataService;
+import cn.edu.jlu.ccst.service.MotoDcsdataService;
 import cn.edu.jlu.ccst.service.DcshistoryService;
 import cn.edu.jlu.ccst.service.ErrorlogService;
 import cn.edu.jlu.ccst.service.Pre_dssService;
@@ -39,14 +41,41 @@ public class DcsdataAction extends ActionSupport {
 
 	private List<Dcsdata> equipmentlist;
 	private List<Dcsdata> dcsdatalist;
+	private List<MotoDcsdata> motodcsdatalist;
 	private DcsdataService dcsdataService;
+	private MotoDcsdataService motodcsdataService;
 	private Dcsdata dcsdata;
+	private MotoDcsdata motodcsdata;
 	private Dcshistory dcshistory;
 	private DcshistoryService dcshistoryService;
 	private List<BackwardandResult> backwardandResult;
 	private List<BackwardandReason> reasonlist;
 	private RuleService ruleService;
 	private String keyword;
+
+	public List<MotoDcsdata> getMotodcsdatalist() {
+		return motodcsdatalist;
+	}
+
+	public void setMotodcsdatalist(List<MotoDcsdata> motodcsdatalist) {
+		this.motodcsdatalist = motodcsdatalist;
+	}
+
+	public MotoDcsdataService getMotodcsdataService() {
+		return motodcsdataService;
+	}
+	@Resource
+	public void setMotodcsdataService(MotoDcsdataService motodcsdataService) {
+		this.motodcsdataService = motodcsdataService;
+	}
+
+	public MotoDcsdata getMotodcsdata() {
+		return motodcsdata;
+	}
+
+	public void setMotodcsdata(MotoDcsdata motodcsdata) {
+		this.motodcsdata = motodcsdata;
+	}
 
 	public String getKeyword() {
 		return keyword;
@@ -163,6 +192,23 @@ public class DcsdataAction extends ActionSupport {
 		}
 
 		return "dcs";
+	}
+	
+	
+	public String showmotodcsdata(){
+		String key = null;
+		try {
+			if (keyword != null) {
+				key = new String(keyword.getBytes("ISO-8859-1"), "UTF-8");
+				// key="3系列生化池";
+			}
+			motodcsdatalist = motodcsdataService.getalldcsddata(key);
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return "motodcs";
 	}
 
 	public String showgongyidata() {
