@@ -50,6 +50,7 @@
 			<result name="savelistsuccess">savesuccess.jsp</result>
 			<result name="gongyi">user/usergongyilist.jsp</result>
 			<result name="dcs">user/userdcslist.jsp</result>
+				<result name="motodcs">user/usermotodcslist.jsp</result>
 		</action> 
 
 		
