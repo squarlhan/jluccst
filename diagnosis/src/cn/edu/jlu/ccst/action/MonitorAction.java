@@ -62,7 +62,7 @@ public class MonitorAction extends ActionSupport {
 	}
 
 	public String execute() {
-		backwardandResult = dcsDscribService.validateinput();
+		backwardandResult = dcsDscribService.validateinput2();
 		if (backwardandResult.size() > 0) {
 			reasonlist = ruleService.findreasons(backwardandResult);
 			

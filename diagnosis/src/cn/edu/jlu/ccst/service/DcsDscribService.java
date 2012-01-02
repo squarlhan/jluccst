@@ -16,6 +16,7 @@ import cn.edu.jlu.ccst.dao.DcsDscribServiceImpl;
 import cn.edu.jlu.ccst.dao.DcsDscribServiceInter;
 import cn.edu.jlu.ccst.dao.Init_PredictServiceInter;
 import cn.edu.jlu.ccst.model.*;
+import cn.edu.jlu.ccst.dao.MotoDcsdataServiceInter;
 
 @Component("dcsDscribService")
 public class DcsDscribService {
@@ -25,6 +26,9 @@ public class DcsDscribService {
 	private DcsdataService dcsdataService;
 	private Pre_dssService pre_dssService;
 	private Init_PredictServiceInter init_predictServiceImpl;
+	private MotoDcsdataServiceInter motoDcsdataServiceImpl;
+	private MotoDcsdata motoDcsdata;
+	private MotoDcsdataService motoDcsdataService;
 	/*
 	 * public Backward getBackward() { return backward; }
 	 * 
@@ -42,9 +46,34 @@ public class DcsDscribService {
 	
 	 * ruleServiceImpl.save(backward); }
 	 */
-
+	
 	public DcsDscrib getdDcsDscrib() {
 		return dDcsDscrib;
+	}
+
+	public MotoDcsdataService getMotoDcsdataService() {
+		return motoDcsdataService;
+	}
+	@Resource
+	public void setMotoDcsdataService(MotoDcsdataService motoDcsdataService) {
+		this.motoDcsdataService = motoDcsdataService;
+	}
+
+	public MotoDcsdataServiceInter getMotoDcsdataServiceImpl() {
+		return motoDcsdataServiceImpl;
+	}
+	@Resource
+	public void setMotoDcsdataServiceImpl(
+			MotoDcsdataServiceInter motoDcsdataServiceImpl) {
+		this.motoDcsdataServiceImpl = motoDcsdataServiceImpl;
+	}
+
+	public MotoDcsdata getMotoDcsdata() {
+		return motoDcsdata;
+	}
+
+	public void setMotoDcsdata(MotoDcsdata motoDcsdata) {
+		this.motoDcsdata = motoDcsdata;
 	}
 
 	public Init_PredictServiceInter getInit_predictServiceImpl() {
@@ -262,4 +291,34 @@ public class DcsDscribService {
 		return results;
 	}
 
+	
+	public List<BackwardandResult> validateinput2() {
+		List<MotoDcsdata> alldata = motoDcsdataService.findAll();
+		List<BackwardandResult> results = new ArrayList();
+		for (MotoDcsdata dd : alldata) {
+
+			List<DcsDscrib> dcsDscribs = dcsDscribServiceImpl.findbyname(
+					dd.getEquipment(), dd.getItem());
+			if (dcsDscribs != null && dcsDscribs.size() > 0) {
+				DcsDscrib db = dcsDscribs.get(0);
+				if (dd.getValue() > db.getUpper()) {
+					BackwardandResult br = new BackwardandResult();
+					br.setNouns(db.getName());
+					br.setVerb("过高");
+					br.setMemo(db.getEque());
+					results.add(br);
+				}
+				if (dd.getValue() < db.getLower()) {
+					BackwardandResult br = new BackwardandResult();
+					br.setNouns(db.getName());
+					br.setMemo(db.getEque());
+					br.setVerb("过低");
+					results.add(br);
+				}
+			}
+
+		}
+
+		return results;
+	}
 }

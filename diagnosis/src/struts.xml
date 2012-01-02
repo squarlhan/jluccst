@@ -125,6 +125,9 @@
 		<action name="errorlogaction" class="errorlogAction">
 			<result name="OK">user/usererrorlist.jsp</result>
 		</action>
+		<action name="motoerrorlogaction" class="motoerrorlogAction">
+			<result name="OK">user/usermotoerrorlist.jsp</result>
+		</action>
 		
 		<action name="dsshistoryaction" class="dsshistoryAction">
 			<result name="OK">user/useradvicelist.jsp</result>
