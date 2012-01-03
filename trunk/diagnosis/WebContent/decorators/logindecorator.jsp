@@ -67,7 +67,7 @@
 //-->
 </script>
 <link href="/diagnosis/css/CSS1.css" rel="stylesheet" type="text/css" />
-<link href="/diagnosis/css/tree.css" rel="stylesheet" type="text/css" />
+
 <decorator:head />
 </head>
 

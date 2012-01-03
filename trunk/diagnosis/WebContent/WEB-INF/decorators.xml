@@ -15,23 +15,22 @@
 	</excludes>
 	<decorator name="user" page="maindecorator.jsp">
 		<pattern>/user*</pattern>
-		
 		<pattern>/dcs*</pattern>
 		<pattern>/wwdcs*</pattern>
-		
-		
 		<pattern>/error*</pattern>
 		<pattern>/bioc*</pattern>
 			<pattern>/dss*</pattern>
 			<pattern>/backward*</pattern>
 	</decorator>
-	<decorator name="userlogin" page="logindecorator.jsp">
+	<decorator name="userlogin" page="logindecorator.jsp"><!--不加树形结构的  -->
 		<pattern>/interface*</pattern>
 		<pattern>/monitor*</pattern>
-		
+		<pattern>/user/usershow*</pattern>
+		<pattern>/useraction!alterUser.action</pattern>
+		<pattern>/dcsdataaction!listsave.action</pattern>
+		<pattern>/user/userdatasuccess*</pattern>
 	</decorator>
 	<decorator name="data" page="datadecorator.jsp">
-	
 	    <pattern>/useraction.action*</pattern>
 		<pattern>/data*</pattern>
 		<pattern>/biocpool490/*</pattern>
