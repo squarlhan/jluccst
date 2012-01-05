@@ -20,7 +20,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     
     <title>手工数据报警日志</title>
   
-    <sx:head/>
+    <sx:head extraLocales="UTF-8" />
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -239,8 +239,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <option  value="NO-N">NO-N</option>
                 <option  value="水量">水量</option>
              </select></td>  
-                <td> <sx:datetimepicker id="data1" name ="date1" label="请选择开始日期" displayFormat="yyyy-MM-dd" ></sx:datetimepicker></td>
-                <td>   <sx:datetimepicker  id="data2" name ="date2" label="请选择结束日期" displayFormat="yyyy-MM-dd" ></sx:datetimepicker></td>
+                <td> &nbsp &nbsp开始日期：<sx:datetimepicker  language="UTF-8"
+                id="data1" name ="date1" displayFormat="yyyy-MM-dd" ></sx:datetimepicker></td>
+                <td> &nbsp &nbsp结束日期：<sx:datetimepicker  language="UTF-8"
+                 id="data2" name ="date2"  displayFormat="yyyy-MM-dd" ></sx:datetimepicker></td>
                 <td> <s:submit value="查询" theme="simple"  /></td>
                </tr>
            </table>      

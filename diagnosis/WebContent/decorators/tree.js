@@ -30,7 +30,7 @@ function Ob(o) {
 				this.ImgUrl = ImgUrl || "/diagnosis/images/s.gif";
 				this.ImgBlankA = "<img src=\"" + this.ImgUrl
 						+ "\" class=\"s\" onclick=\"ExCls(this,'" + ClassName0
-						+ "','" + ClassName1 + "',1);\" alt=\"展开/折叠\" />";
+						+ "','" + ClassName1 + "',1);\" alt=\"open/close\" />";
 				this.ImgBlankB = "<img src=\""+this.ImgUrl+"\" class=\"s\" />";
 				for (i = 0; i < this.AllNodes.length; i++) {
 					this.AllNodes[i].className == "" ? this.AllNodes[i].className = ClassName1
