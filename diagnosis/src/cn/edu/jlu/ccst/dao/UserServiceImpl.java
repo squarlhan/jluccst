@@ -151,7 +151,7 @@ public class UserServiceImpl implements UserServiceInter {
 				querySentence = querySentence + " username like '%"
 						+ user.getUsername() + "%' ";
 			else {
-				querySentence = querySentence + " username like '%@%' ";
+				querySentence = querySentence + " username like '%' ";
 			  if (user.getPhone() != null && !"".equals(user.getPhone()))
 				querySentence = querySentence + " and phone like '%"
 						+ user.getPhone() + "%' ";
@@ -171,7 +171,7 @@ public class UserServiceImpl implements UserServiceInter {
 						+ user.getDept() + "%' ";
 			}}
 		Query query = getEntityManager().createQuery(querySentence);
-
+   System.out.println(querySentence);
 		
 		return  query.getResultList();
 	}
