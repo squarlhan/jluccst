@@ -239,8 +239,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <option  value="NO-N">NO-N</option>
                 <option  value="水量">水量</option>
              </select></td>  
-                <td> &nbsp &nbsp开始日期：<sx:datetimepicker  language="UTF-8" id="data1" name ="date1" displayFormat="yyyy-MM-dd" ></sx:datetimepicker></td>
-                <td> &nbsp &nbsp结束日期：<sx:datetimepicker  language="UTF-8"id="data2" name ="date2"  displayFormat="yyyy-MM-dd" ></sx:datetimepicker></td>
+               <td> &nbsp &nbsp开始日期：<sx:datetimepicker  language="UTF-8"
+                id="data1" name ="date1" displayFormat="yyyy-MM-dd" ></sx:datetimepicker></td>
+                <td> &nbsp &nbsp结束日期：<sx:datetimepicker  language="UTF-8"
+                 id="data2" name ="date2"  displayFormat="yyyy-MM-dd" ></sx:datetimepicker></td>
                 <td> <s:submit value="查询" theme="simple"  /></td>
                </tr>
            </table>      
