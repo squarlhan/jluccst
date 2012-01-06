@@ -33,7 +33,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
       <div id="login">
 <s:form action="adminaction!alterAdmin.action" theme = "simple">
-<table width="200" align="center" style="margin-left:30">
+<table width="200" align="center" style="margin-left:30;width:200px;">
 	<tr>
 	<td >用户名：</td>
 	 <td ><s:property value="#session.ad.username"/></td>
