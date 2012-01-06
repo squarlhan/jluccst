@@ -32,7 +32,7 @@ public class Treeunit implements Serializable{
 		super();
 		
 	}
-	public Treeunit(int id,Init_Predict name, String father) {
+	public Treeunit(int id,String child, String father) {
 		super();
 		this.id = id;
 		this.child = child;
