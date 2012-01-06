@@ -43,16 +43,17 @@
 	
 	<div id="login">
 		<s:form action="ruleaction"  theme="simple">
-			<table >
+			<table width = "1080">
 			    <tr>
-					<td align = "right">水质参数报警现象：</td>
-					<td class = "table2">
+					<td style="align:right;width:400">水质参数报警现象：</td>
+					<td style="align:left;width:300">
 					    <div class="nobr">
 					    <s:doubleselect theme="simple" name = "result.nouns" list="#session.map.keySet()"  
 					    doubleName="result.verb" doubleList="#session.map[top]" ></s:doubleselect>
 					    </div>
 					</td>
-					<td align = "left"><s:submit value="开始推理" theme="simple"/></td>
+					<td style="align:left;width:100"><s:submit value="开始推理" theme="simple"/></td>
+					<td style="align:left;width:380">&nbsp;</td>
 				</tr>
 			</table>
 		

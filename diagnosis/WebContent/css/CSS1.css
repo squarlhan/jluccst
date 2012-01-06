@@ -35,7 +35,7 @@ body {
 	border-right-color: #1e61a4;
 	border-bottom-color: #1e61a4;
 	border-left-color: #1e61a4;
-	width: 950px;
+	width: 1080px;
 	line-height: 20px;
 	text-decoration: none;
 }
@@ -94,6 +94,7 @@ a:active {
 }
 /* 蓝色外框表格样式 */
 .bg1 {
+	width:1280px;
 	border-top-width: 0px;
 	border-left-width: 1px;
 	border-top-style: solid;
@@ -143,7 +144,7 @@ a:active {
 	border-right-color: #1e61a4;
 	border-bottom-color: #1e61a4;
 	border-left-color: #1e61a4;
-	width: 950px;
+	width: 100%;
 	line-height: 36px;
 	text-decoration: none;
 	background:url(../pic/list2.gif) no-repeat 6px 10px;
@@ -173,7 +174,7 @@ a:active {
 }
 
 .list_table{
-    width:950px;
+    width:1080px;
     text-align:center;
     border-top-width: 1px;
 	border-right-width: 1px;
