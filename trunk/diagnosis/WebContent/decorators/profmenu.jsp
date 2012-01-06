@@ -19,7 +19,7 @@
            <td><a href="/diagnosis/prof/profshow.jsp">个人信息</a></td>
            <td><a href="/diagnosis/user/userlogin.jsp">用户登录</a></td>
           <td><a href="/diagnosis/admin/adminlogin.jsp">管理员登录</a></td>
-          <td><a href="/diagnosis/profaction!proflogoff.action">注销登录</a></td>
+          <!--<td><a href="/diagnosis/profaction!proflogoff.action">注销登录</a></td>-->
           </tr>
     </table> 
   </body>
