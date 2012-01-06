@@ -9,7 +9,7 @@
     <link href="/diagnosis/css/CSS1.css" rel="stylesheet" type="text/css" />
   </head>
   <body>
-    <table align="center" width="100%" id="nav">
+    <table align="center" width="1280" id="nav">
      <tr align="center">
           <!--<td><a href="/diagnosis/userruleadd.jsp">录入规则</a></td>  -->
          <!-- <td><a href="/diagnosis/ruleaction!getall.action">规则维护</a></td>
