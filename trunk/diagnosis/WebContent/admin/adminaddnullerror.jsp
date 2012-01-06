@@ -46,7 +46,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 <div id="login">
 <s:form action="adminuseraction!addUser.action" theme = "simple">
-<table width="200" align="center" style="margin-left:30">
+<table width="200" align="center" style="margin-left:30;width:200px;">
 	<tr><td>用户名:</td><td><s:textfield size="15" label="用户名" name="user.username" /></td></tr>
 	<tr><td>初始密码:</td><td><s:password size="17" label="初始密码" name="user.password" /></td></tr>
 	<tr><td>姓名:</td><td><s:textfield size="17" label="姓名" name="user.name" /></td></tr>
