@@ -23,6 +23,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-    <div style="color: red;">error</div><br>
+     <table width="1280">
+  <tr><td align="center">
+    <div style="color: red;">ERROR！</div><br>
+    </td></tr>
+    </table>
   </body>
 </html>
