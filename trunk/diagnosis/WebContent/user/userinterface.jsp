@@ -38,7 +38,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <body>
     <div id="rightmain">
-  <h2>超标信息页面</h2>
+  <h2>模拟推理结果</h2>
   <table bordercolor="#4A708B" rules="all"  id="mytable" class="list_table" align="center" width="100%">
 		<tr bgcolor="#4A708B">
 		    <th style="width:50%">预警设备</th>
@@ -59,13 +59,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <table bordercolor="#4A708B" rules="all"  id="mytable" class="list_table" align="center" width="100%">
 		<tr bgcolor="#4A708B">
-		    <th style="width:50%">预警原因</th>
-			<th style="width:50%">相关建议</th>
+		    <th width="5%">等级</th>
+		    <th width="35%">报警原因</th>
+			<th style="width:60%">相关建议</th>
 			
 	  </tr>
     <s:iterator id="reasons" value="reasonlist" status="index1">
        
      <tr  align="left"  bordercolor="#000000" bgcolor="<s:if test="#index1.odd == true">#ffffff</s:if><s:else>#EDEDED</s:else>">
+       <td  align="left">第<s:property value="#index1.index+1"/>&nbsp;</td>
        <td><s:property value="nouns"/><s:property value="verb"/>&nbsp;</td>
        <td><s:property value="sugg"/>&nbsp;</td>
       

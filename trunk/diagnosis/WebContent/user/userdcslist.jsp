@@ -67,9 +67,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			td2.align = "left";
 			td3.align = "left";
 			 if(isoks[a]=="1"){
-    			td3.style.color="green";
+    			td3.style.color="goldenrod";
     		}else if(isoks[a]=="2"){
-    			td3.style.color="orange";
+    			td3.style.color="chocolate";
     		}else if(isoks[a]=="3"){
     			td3.style.color="red";
     		}else{
@@ -77,7 +77,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     		}
     	    td1.innerHTML = eques[a]+"&nbsp;";
     	    td2.innerHTML = items[a]+"&nbsp;";
-    	    td3.innerHTML = bids[a]+"&nbsp;";
+    	    td3.innerHTML = "<b>"+bids[a]+"&nbsp;</b>";
     		}
 
     	function firstpage()
