@@ -71,21 +71,21 @@
 </head>
 
 <body>
-	<table width="1040" border="0" align="center" cellpadding="0"
+	<table width="1298" border="0" align="center" cellpadding="0"
 		cellspacing="0" bgcolor="#FFFFFF">
 		<tr>
 			<td width="9"><img src="pic/bj_zuo.jpg" width="10" height="890" /></td>
-			<td width="1023" valign="top">
-				<table width="1023" border="0" align="center" cellpadding="0"
+			<td width="1280" valign="top">
+				<table width="1280" border="0" align="center" cellpadding="0"
 					cellspacing="0">
 					<tr>
-						<td><img src="pic/top_gl.jpg" width="1024" height="131" /></td>
+						<td><img src="pic/top_gl.jpg" width="1280" height="131"  border="0" usemap="#Map" /></td>
 					</tr>
 					<tr>
 						<td height="38" background="pic/dht_bj.jpg"><page:applyDecorator page="/decorators/adminmenu.jsp" name="panel" /></td>
 					</tr>
 					<tr>
-						<td><img src="pic/top_gy.jpg" width="1024" height="41" /></td>
+						<td><img src="pic/top_gy.jpg" width="1280" height="41" /></td>
 					</tr>
 					<tr>
 						<td height="612" valign="top">
@@ -103,12 +103,14 @@
 						</td>
 					</tr>
 					<tr>
-						<td><img src="pic/end_logo.jpg" width="1024" height="48" /></td>
+						<td><img src="pic/end_logo.jpg" width="1280" height="48" /></td>
 					</tr>
 				</table>
 			</td>
 			<td width="10"><img src="pic/bj_you.jpg" width="10" height="890" /></td>
 		</tr>
 	</table>
+	<map name="Map" id="Map"><area shape="rect" coords="1165,20,1262,50" href="adminaction!adminlogoff.action" /></map>
+	
 </body>
 </html>
