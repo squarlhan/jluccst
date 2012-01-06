@@ -124,6 +124,7 @@
 			table.deleteRow(table.rows.length - 1);
 			table.deleteRow(table.rows.length - 1);
 			table.deleteRow(table.rows.length - 1);
+			table.deleteRow(table.rows.length - 1);
 			count2= count2-1;
 		}
 
