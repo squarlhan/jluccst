@@ -16,7 +16,7 @@
 			<result name="altersuccess">user/userupdatesuccess.jsp</result>
 			<result name="altererror">user/useraltererror.jsp</result>
 			<result name="nullpass">user/usernullpass.jsp</result>
-			<result name="unuserlogin">user/userlogin.jsp</result>
+			<!-- <result name="unuserlogin">user/userlogin.jsp</result>-->
 		</action>
 			
 			
@@ -29,7 +29,7 @@
 			<result name="logoffadminsuccess">admin/adminlogin.jsp</result>
 			<result name="adminnullpass">admin/adminnullpass.jsp</result>
 		
-			<result name="unadminlogin">admin/adminlogin.jsp</result>
+			<!-- <result name="unadminlogin">admin/adminlogin.jsp</result>-->
 			</action>
 			
 			<!-- 专家操作 -->
@@ -40,7 +40,7 @@
 			<result name="profaltererror">prof/profaltererror.jsp</result>
 			<result name="logoffprofsuccess">prof/proflogin.jsp</result>
 			<result name="profnullpass">prof/profnullpass.jsp</result>
-			<result name="unproflogin">prof/proflogin.jsp</result>
+			<!-- <result name="unproflogin">prof/proflogin.jsp</result>-->
 			</action>
 		
 		
@@ -74,15 +74,14 @@
 			<result name="success">rule/ruleadd.jsp</result>
 			<result name="rulesuccess">rule/rulefindreason.jsp</result>
 			<result name="go">rule/rulego.jsp</result>
-		    <result name="unuserlogin">user/userlogin.jsp</result>
-			<result name="unproflogin">prof/proflogin.jsp</result>
-			<result name="unproflogin">prof/proflogin.jsp</result>
+		    <!-- <result name="unuserlogin">user/userlogin.jsp</result>
+			<result name="unproflogin">prof/proflogin.jsp</result>-->
 		</action>
 		<action name="userbraction" class="userbrAction">
 		  <result name="rulesuccess">user/userfindreason.jsp</result>
 		  <result name="go">user/usergo.jsp</result>
-		    <result name="unuserlogin">user/userlogin.jsp</result>
-			<result name="unproflogin">prof/proflogin.jsp</result>
+		    <!-- <result name="unuserlogin">user/userlogin.jsp</result> 
+			<result name="unproflogin">prof/proflogin.jsp</result>-->
 		  
 	   </action>
 	   <action name="userruleaction" class="ruleAction">
@@ -91,8 +90,8 @@
 	   
 	    <action name="dcsdscribaction" class="dcsDscribAction">
 			<result name="success">datadcsdscrib.jsp</result>
-			<result name="unuserlogin">user/userlogin.jsp</result>
-			<result name="unproflogin">prof/proflogin.jsp</result>
+			<!-- <result name="unuserlogin">user/userlogin.jsp</result>
+			<result name="unproflogin">prof/proflogin.jsp</result>-->
 			<result name="bdsuccess">databdlist.jsp</result>
 	    </action>
 	    
@@ -101,12 +100,12 @@
 			<result name="success">rule/rulesuccess.jsp</result>
 		    <result name="input">rule/rulesuccess.jsp</result>
 			<result name="go">rule/rulego.jsp</result>
-			<result name="gogogo">rule/ruledsc.jsp</result>
-			<result name="unuserlogin">user/userlogin.jsp</result>
+			<result name="gogogo">rule/ruledsc.jsp</result>			
 			<result name="list">rule/rulelist.jsp</result>
 			<result name="show">rule/ruleshow.jsp</result>
+			<!--<result name="unuserlogin">user/userlogin.jsp</result>
 			<result name="unadminlogin">admin/adminlogin.jsp</result>
-			<result name="unproflogin">prof/proflogin.jsp</result>
+			<result name="unproflogin">prof/proflogin.jsp</result>  -->
 		</action>
 		
 		
@@ -119,8 +118,8 @@
 			<result name="searcherror">admin/adminsearcherror.jsp</result>
 			<result name="addnullerror">admin/adminaddnullerror.jsp</result>
 			<result name="adderror">admin/adminadderror.jsp</result>
-			<result name="unuserlogin">user/userlogin.jsp</result>
-			<result name="unadminlogin">admin/adminlogin.jsp</result>
+			<!--  <result name="unuserlogin">user/userlogin.jsp</result>
+			<result name="unadminlogin">admin/adminlogin.jsp</result>-->
 		</action>
 		
 		<action name="errorlogaction" class="errorlogAction">
@@ -135,12 +134,12 @@
 		</action>
 		<action name="backwardresultaction" class="backwardResultAction">
 			<result name="success">user/userdcsdscrib.jsp</result>
-			<result name="unuserlogin">user/userlogin.jsp</result>
+			<!--  <result name="unuserlogin">user/userlogin.jsp</result>-->
 		</action>
 		
 		<action name="backwardresonaction" class="backwardResonAction">
 			<result name="success" type="redirect">ruleaction!godetail?rule.bid=%{rule.getBid()}</result>
-			<result name="unuserlogin">user/userlogin.jsp</result>
+			<!-- <result name="unuserlogin">user/userlogin.jsp</result>-->
 		</action>
 	</package>
 

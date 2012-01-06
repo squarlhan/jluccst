@@ -243,10 +243,12 @@ a:active {
 	background-color: #f3f8ff;
 	border: 1px solid #cad9ea;
 	align: center;
+	width:1080px;
 }
 #login table{
 	margin-left:0px;
 	text-align: center;
+	width:1080px;
 }
 #login td{
 	width:50%;
