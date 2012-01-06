@@ -233,8 +233,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <table bordercolor="#FFFFFF" rules="all"  id="mytable" class="list_table" align="center" width="100%" >
 		<tr bgcolor="#4A708B">
 		    <th width = "20%">设备参数</th>
-			<th width = "5%">预警现象</th>
-			<th width = "20%">预警时间</th>
+			<th width = "10%">预警现象</th>
+			<th width = "15%">预警时间</th>
 			<th width = "5%">预警值</th>
 			<th width = "20%">预警原因</th>
 			<th width = "30%">采取的建议</th>

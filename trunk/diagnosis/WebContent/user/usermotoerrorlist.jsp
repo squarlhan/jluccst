@@ -251,10 +251,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<tr bgcolor="#4A708B">
 		    <th width = "15%">设备名</th>
 			<th width = "15%">参数名</th>
-			<th width = "10%">报警现象</th>
+			<th width = "8%">报警现象</th>
 			<th width = "15%">报警时间</th>
 			<th width = "10%">报警值</th>
-			<th width = "5%">报警级别</th>
+			<th width = "7%">报警级别</th>
 			<th width = "30%">采取的建议</th>
 	  </tr>
   </table>
