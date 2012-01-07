@@ -50,8 +50,8 @@
 							  </li>
 							  <li class="Closed">生活水处理
 							   <ul>
-							    <li class="Child"><a href="/diagnosis/dataadd/data14a.jsp">14a</a></li>
-							   <li class="Child"><a href="/diagnosis/dataadd/data14b.jsp">14b</a></li>
+							    <li class="Child"><a href="/diagnosis/dataadd/data14a.jsp">14a生活水</a></li>
+							   <li class="Child"><a href="/diagnosis/dataadd/data14b.jsp">14b生活水</a></li>
 							    </ul>
 							  </li>
 							  <li class="Closed">预处理

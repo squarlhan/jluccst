@@ -45,6 +45,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  <h2> 初沉池(489B)</h2>                                                           <!-- 标题 -->
 <div id="login">
 <s:form action="dcsdataaction!listsave.action" theme = "simple">
+<table width="1080"><tr><td>
 <table width="300" align="center" style="margin-left:30">
 <tr>
     
@@ -59,95 +60,76 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	<td align="right">                                                               <!-- 向dcsdata录入的每个设备的各项参数，dcsdata中equipment在此设为隐藏的文本；
 	                                                                               item为各项控制参数-->
-	<s:textfield size="5" readonly="true" value="M489-1#周边传动刮泥器" name="dcsdatalist[1].item" theme="simple" style="background:transparent;border:0px"/></td>
+	<s:textfield size="5" readonly="true" value="M489-1号周边传动刮泥器" name="dcsdatalist[1].item" theme="simple" style="width:150px;background:transparent;border:0px"/></td>
 	<td align="center"><s:textfield  name="dcsdatalist[1].value" theme="simple"
 	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td></td>
 	
 	</tr>
 	
+	
 	<tr>
 	<td align="right">
-	<s:textfield  readonly="true" value="M489-1#周边传动刮泥器" name="dcsdatalist[2].item" theme="simple" style="background:transparent;border:0px"/></td>
-	<td align="center"><s:textfield name="dcsdatalist[2].value" theme="simple"
+	
+	<s:textfield  readonly="true" value="M489-2号周边传动刮泥器" name="dcsdatalist[2].item" theme="simple" style="width:150px;background:transparent;border:0px"/></td>
+	<td align="center"><s:textfield  name="dcsdatalist[2].value" theme="simple"
 	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td></td>
 	
 	</tr>
 	
-	<tr>
-	<td align="right">
 	
-	<s:textfield  readonly="true" value="M489-2#周边传动刮泥器" name="dcsdatalist[3].item" theme="simple" style="background:transparent;border:0px"/></td>
+	<tr>
+	<td align="right"><s:textfield  readonly="true" value="M489-3号周边传动刮泥器" name="dcsdatalist[3].item" theme="simple" style="width:150px;background:transparent;border:0px"/></td>
 	<td align="center"><s:textfield  name="dcsdatalist[3].value" theme="simple"
 	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td></td>
-	
 	</tr>
-	
-	<tr>
-	<td align="right">
-	
-	<s:textfield  readonly="true" value="M489-2#周边传动刮泥器" name="dcsdatalist[4].item" theme="simple" style="background:transparent;border:0px"/></td>
-	<td align="center"><s:textfield name="dcsdatalist[4].value" theme="simple"
-	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td></td>
-		</tr>
-	
-	<tr>
-	<td align="right"><s:textfield  readonly="true" value="M489-3#周边传动刮泥器" name="dcsdatalist[5].item" theme="simple" style="background:transparent;border:0px"/></td>
-	<td align="center"><s:textfield  name="dcsdatalist[5].value" theme="simple"
-	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td></td>
-	</tr>
-	
-	<tr>
-	<td align="right"><s:textfield  readonly="true" value="M489-3#周边传动刮泥器" name="dcsdatalist[6].item" theme="simple" style="background:transparent;border:0px"/></td>
-	<td align="center"><s:textfield name="dcsdatalist[6].value" theme="simple"
-	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td></td>
-		</tr>
+
 <tr>
-	<td align="right"><s:textfield  readonly="true" value="PH" name="dcsdatalist[7].item" theme="simple" style="background:transparent;border:0px"/></td>
-	<td align="center"><s:textfield name="dcsdatalist[7].value" theme="simple"
+	<td align="right"><s:textfield  readonly="true" value="PH" name="dcsdatalist[4].item" theme="simple" style="width:150px;background:transparent;border:0px"/></td>
+	<td align="center"><s:textfield name="dcsdatalist[4].value" theme="simple"
 	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td>pH</td>
 		</tr>
 		<tr>
-	<td align="right"><s:textfield  readonly="true" value="COD" name="dcsdatalist[8].item" theme="simple" style="background:transparent;border:0px"/></td>
-	<td align="center"><s:textfield name="dcsdatalist[8].value" theme="simple"
+	<td align="right"><s:textfield  readonly="true" value="COD" name="dcsdatalist[5].item" theme="simple" style="width:150px;background:transparent;border:0px"/></td>
+	<td align="center"><s:textfield name="dcsdatalist[5].value" theme="simple"
 	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td>mg/l</td>
 		</tr>
 	
 	
 	
 	<tr>
-	<td align="right"><s:textfield  readonly="true" value="碱度" name="dcsdatalist[9].item" theme="simple" style="background:transparent;border:0px"/></td>
-	<td align="center"><s:textfield name="dcsdatalist[9].value" theme="simple"
+	<td align="right"><s:textfield  readonly="true" value="碱度" name="dcsdatalist[6].item" theme="simple" style="width:150px;background:transparent;border:0px"/></td>
+	<td align="center"><s:textfield name="dcsdatalist[6].value" theme="simple"
 	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td>mmol/l</td>
 		</tr>
 		
 		<tr>
-	<td align="right"><s:textfield  readonly="true" value="BOD5" name="dcsdatalist[10].item" theme="simple" style="background:transparent;border:0px"/></td>
+	<td align="right"><s:textfield  readonly="true" value="BOD5" name="dcsdatalist[7].item" theme="simple" style="width:150px;background:transparent;border:0px"/></td>
+	<td align="center"><s:textfield name="dcsdatalist[7].value" theme="simple"
+	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td>mg/L</td>
+		</tr>
+		<tr>
+	<td align="right"><s:textfield  readonly="true" value="SS" name="dcsdatalist[8].item" theme="simple" style="width:150px;background:transparent;border:0px"/></td>
+	<td align="center"><s:textfield name="dcsdatalist[8].value" theme="simple"
+	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td>smu</td>
+		</tr>
+				<tr>
+	<td align="right"><s:textfield  readonly="true" value="NH3-N" name="dcsdatalist[9].item" theme="simple" style="width:150px;background:transparent;border:0px"/></td>
+	<td align="center"><s:textfield name="dcsdatalist[9].value" theme="simple"
+	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td>mg/l</td>
+		</tr>
+				<tr>
+	<td align="right"><s:textfield  readonly="true" value="硝态氮" name="dcsdatalist[10].item" theme="simple" style="width:150px;background:transparent;border:0px"/></td>
 	<td align="center"><s:textfield name="dcsdatalist[10].value" theme="simple"
 	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td>mg/L</td>
 		</tr>
 		<tr>
-	<td align="right"><s:textfield  readonly="true" value="SS" name="dcsdatalist[11].item" theme="simple" style="background:transparent;border:0px"/></td>
+	<td align="right"><s:textfield  readonly="true" value="NO-N" name="dcsdatalist[11].item" theme="simple" style="width:150px;background:transparent;border:0px"/></td>
 	<td align="center"><s:textfield name="dcsdatalist[11].value" theme="simple"
-	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td>smu</td>
+	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td>mg/L</td>
 		</tr>
 				<tr>
-	<td align="right"><s:textfield  readonly="true" value="NH3-N" name="dcsdatalist[12].item" theme="simple" style="background:transparent;border:0px"/></td>
+	<td align="right"><s:textfield  readonly="true" value="水量" name="dcsdatalist[12].item" theme="simple" style="width:150px;background:transparent;border:0px"/></td>
 	<td align="center"><s:textfield name="dcsdatalist[12].value" theme="simple"
-	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td>mg/l</td>
-		</tr>
-				<tr>
-	<td align="right"><s:textfield  readonly="true" value="硝态氮" name="dcsdatalist[13].item" theme="simple" style="background:transparent;border:0px"/></td>
-	<td align="center"><s:textfield name="dcsdatalist[13].value" theme="simple"
-	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td>mg/L</td>
-		</tr>
-		<tr>
-	<td align="right"><s:textfield  readonly="true" value="NO-N" name="dcsdatalist[14].item" theme="simple" style="background:transparent;border:0px"/></td>
-	<td align="center"><s:textfield name="dcsdatalist[14].value" theme="simple"
-	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td>mg/L</td>
-		</tr>
-				<tr>
-	<td align="right"><s:textfield  readonly="true" value="水量" name="dcsdatalist[15].item" theme="simple" style="background:transparent;border:0px"/></td>
-	<td align="center"><s:textfield name="dcsdatalist[15].value" theme="simple"
 	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td>m&sup3/h</td>
 		</tr>
 	<s:hidden   value="初沉池(489B)" name="dcsdatalist[1].equipment" theme="simple" />
@@ -162,9 +144,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<s:hidden   value="初沉池(489B)" name="dcsdatalist[10].equipment" theme="simple" />
 	<s:hidden   value="初沉池(489B)" name="dcsdatalist[11].equipment" theme="simple" />
 	<s:hidden   value="初沉池(489B)" name="dcsdatalist[12].equipment" theme="simple" />
-	<s:hidden   value="初沉池(489B)" name="dcsdatalist[13].equipment" theme="simple" />
-	<s:hidden   value="初沉池(489B)" name="dcsdatalist[14].equipment" theme="simple" />
-	<s:hidden   value="初沉池(489B)" name="dcsdatalist[15].equipment" theme="simple" />
 	<s:hidden   value="初沉池(489B)" name="dcsdatalist[0].equipment" theme="simple" />
 	<s:hidden   value="班次" name="dcsdatalist[0].item" theme="simple" />
 	<tr align="center">
@@ -176,6 +155,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	
 	</tr></table>
+	</td></tr></table>
 </s:form></div>
 </div>
    

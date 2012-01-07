@@ -249,8 +249,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
            </s:form>
   <table bordercolor="#FFFFFF" rules="all"  id="mytable" class="list_table" align="center" width="100%" >
 		<tr bgcolor="#4A708B">
-		    <th width = "15%">设备名</th>
-			<th width = "15%">参数名</th>
+		    <th width = "20%">设备名</th>
+			<th width = "10%">参数名</th>
 			<th width = "8%">报警现象</th>
 			<th width = "15%">报警时间</th>
 			<th width = "10%">报警值</th>

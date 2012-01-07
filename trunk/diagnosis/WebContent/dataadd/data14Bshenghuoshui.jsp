@@ -45,6 +45,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  <h2>14B生活水</h2>                                                           <!-- 标题 -->
 <div id="login">
 <s:form action="dcsdataaction!listsave.action" theme = "simple">
+<table width="1080"><tr><td>
 <table width="300" align="center" style="margin-left:30">
 <tr>
     
@@ -123,7 +124,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		<tr>
 	<td align="right"><s:textfield  readonly="true" value="生活水池液位" name="dcsdatalist[10].item" theme="simple" style="background:transparent;border:0px"/></td>
 	<td align="center"><s:textfield name="dcsdatalist[10].value" theme="simple"
-	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td>生活水池液位单位</td>
+	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td>m</td>
 		</tr>
 
 
@@ -148,6 +149,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	
 	</tr></table>
+	</td></tr></table>
 </s:form></div>
 </div>
    

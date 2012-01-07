@@ -50,8 +50,8 @@
 							  </li>
 							  <li class="Closed">生活水处理
 							   <ul>
-							    <li class="Child"><a href="/diagnosis/userbraction!findbynoun?noun=<%=java.net.URLEncoder.encode("14a","UTF-8")%>">14a</a></li>
-							   <li class="Child"><a href="/diagnosis/userbraction!findbynoun?noun=<%=java.net.URLEncoder.encode("14b","UTF-8")%>">14b</a></li>
+							    <li class="Child"><a href="/diagnosis/userbraction!findbynoun?noun=<%=java.net.URLEncoder.encode("14a生活水","UTF-8")%>">14a生活水</a></li>
+							   <li class="Child"><a href="/diagnosis/userbraction!findbynoun?noun=<%=java.net.URLEncoder.encode("14b生活水","UTF-8")%>">14b生活水</a></li>
 							    </ul>
 							  </li>
 							  <li class="Closed">预处理
