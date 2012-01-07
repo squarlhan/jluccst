@@ -33,7 +33,10 @@ public class DcsdataServiceImpl implements DcsdataServiceInter {
 		Query query = getEntityManager().createQuery("select u FROM Dcsdata u WHERE u.equipment='"+equipment+"'");
 		return query.getResultList();
 	}
-    
+    public List<Dcsdata> findByitem(String equipment, String item) {
+		Query query = getEntityManager().createQuery("select u FROM Dcsdata u WHERE u.equipment='"+equipment+"' and u.item = '"+item+"'");
+		return query.getResultList();
+	}
     public void delete(Dcsdata dcsdata) {
     	em.remove(dcsdata);
 		
