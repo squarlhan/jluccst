@@ -100,6 +100,12 @@ public class DcsdataService {
 		resultlist = dcsdataServiceImpl.findByequipment(equipment);
 		return resultlist;
 	}
+	
+	public List<Dcsdata> findbyitem(String equipment, String item) {
+		List<Dcsdata> resultlist = new ArrayList();
+		resultlist = dcsdataServiceImpl.findByitem(equipment, item);
+		return resultlist;
+	}
 
 	public List<Dcsdata> findAll() {
 		List<Dcsdata> resultlist = new ArrayList();

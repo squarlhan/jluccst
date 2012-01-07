@@ -266,11 +266,7 @@ public class DcsdataAction extends ActionSupport {
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 		String mytime = formatter.format(new Date());
 	
-		list1 = dcsdataService.findbyequipment(dcsdatalist.get(0)
-				.getEquipment());
-		for (Dcsdata dc : list1) {
-			dcsdataService.delete(dc);
-		}
+		
 
 		for (int i = 0; i < dcsdatalist.size(); i++) {
 
@@ -281,6 +277,10 @@ public class DcsdataAction extends ActionSupport {
 				dat.setValue(dcsdatalist.get(i).getValue());
 				dat.setEquipment(dcsdatalist.get(i).getEquipment());
 				if (dat.getValue() != null) {
+					list1 = dcsdataService.findbyitem(dat.getEquipment(), dat.getItem());
+					for (Dcsdata dc : list1) {
+						dcsdataService.delete(dc);
+					}
 					list.add(dat);
 					dcsdataService.save(dat);
 				}
