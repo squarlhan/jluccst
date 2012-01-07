@@ -61,10 +61,10 @@
 		
 		<div id="login">
 			<s:form action="dcsdscribaction!addDescrib.action" theme="simple">
-				<table width="500" align="center" style="margin-left: 30">
+				<table width="600" align="center" style="margin-left: 30">
 					<tr><th width="30%"/>
 					<th width="70%"/></tr>
-					<tr>
+					<!-- <tr>
 						<td align="right" >检测节点：</td>
 						<td align="left" >
 							<div class="nobr">
@@ -73,15 +73,14 @@
 									doubleList="#session.map2[top]"  ></s:doubleselect>
 							</div>
 						</td>
-					</tr>
+					</tr> -->
 					<tr>
 					<tr>
-						<td align="right">对应规则节点：</td>
+						<td align="right">检测节点：</td>
 						<td align="left"> <s:set name="foobar"
-               value="#{'点源':{'电石厂有机水', '有机合成厂有机水', '炼油厂有机水', '精细化工厂废水', '乙二醇废水', '有机合成厂有机水', '炼油厂有机水', '有机合成厂有机水', '炼油厂有机水'
-                                 , '环氧乙烷废水', '农药厂有机水', '含氮废水', '103厂碱水', '化肥厂丁辛醇', '丙烯腈废水', '合成树脂厂有机水', '龙潭区生活水'},
+               value="#{'点源':{'电石厂有机水',  '精细化工厂废水', '乙二醇废水',  '炼油厂有机水', '有机合成厂有机水',  '环氧乙烷废水', '农药厂有机水', '含氮废水', '103厂碱水', '化肥厂丁辛醇', '丙烯腈废水', '合成树脂厂有机水', '龙潭区生活水'},
                        '中和处理':{'染料厂酸水', '电石厂酸水', '铁运489沉淀池出水 '}, 
-                       '生活水处理': {'14a', '14b'},
+                       '生活水处理': {'14a生活水', '14b生活水'},
                        '预处理': {'稳流池(477)进水', '进水提升泵房(462A)', '巴氏计量槽(499)', '除色池(414)', 
                                '沉沙刮沙池(488)', '事故池(489)','初沉池(489B)', '14B生活水 ','老水解酸化池 ','新水解酸化池 ','污泥泵房(466)','浓缩池(491)','脱水装置(495)'},
                         '生化处理': {'中间提升泵房(462B)','生化池系列1(1号生化池)','生化池系列1(2号生化池)','生化池系列2(3号生化池)','生化池系列2(4号生化池)',
@@ -113,10 +112,15 @@
 								<option>SS</option>
 								<option>碱度</option>
 								<option>BOD5</option>
-								<option>硝态氮</option>
-								<option>风量</option>
+								<option>硝态氮</option>							
 								<option>NO-N</option>
 								<option>水量</option>
+								<option>鼓风机风量</option>
+								<option>后液位</option>
+								<option>前液位</option>
+								<option>液位</option>
+								<option>前后液位差</option>
+								<option>状态</option>
 						</select></td>
 					</tr>
 					<tr>

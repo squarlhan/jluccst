@@ -42,9 +42,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <body>
   <div id="rightmain">
-	  <h2>污泥池(V466)</h2>                                                           <!-- 标题 -->
+	  <h2>污泥泵房(466)</h2>                                                           <!-- 标题 -->
 <div id="login">
 <s:form action="dcsdataaction!listsave.action" theme = "simple">
+<table width="1080"><tr><td>
 <table width="300" align="center" style="margin-left:30">
 <tr>
     
@@ -59,7 +60,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	<td align="right">                                                               <!-- 向dcsdata录入的每个设备的各项参数，dcsdata中equipment在此设为隐藏的文本；
 	                                                                               item为各项控制参数-->
-	<s:textfield size="5" readonly="true" value="V466污泥池前液位" name="dcsdatalist[1].item" theme="simple" style="background:transparent;border:0px"/></td>
+	<s:textfield size="5" readonly="true" value="前液位" name="dcsdatalist[1].item" theme="simple" style="width:150px;background:transparent;border:0px"/></td>
 	<td align="center"><s:textfield  name="dcsdatalist[1].value" theme="simple"
 	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td>m</td>
 	
@@ -67,7 +68,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	<tr>
 	<td align="right">
-	<s:textfield  readonly="true" value="V466污泥池后液位" name="dcsdatalist[2].item" theme="simple" style="background:transparent;border:0px"/></td>
+	<s:textfield  readonly="true" value="后液位" name="dcsdatalist[2].item" theme="simple" style="width:150px;background:transparent;border:0px"/></td>
 	<td align="center"><s:textfield name="dcsdatalist[2].value" theme="simple"
 	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td>m</td>
 	
@@ -76,7 +77,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<tr>
 	<td align="right">
 	
-	<s:textfield  readonly="true" value="466地沟液位" name="dcsdatalist[3].item" theme="simple" style="background:transparent;border:0px"/></td>
+	<s:textfield  readonly="true" value="地沟液位" name="dcsdatalist[3].item" theme="simple" style="width:150px;background:transparent;border:0px"/></td>
 	<td align="center"><s:textfield  name="dcsdatalist[3].value" theme="simple"
 	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td>m</td>
 	
@@ -85,32 +86,32 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<tr>
 	<td align="right">
 	
-	<s:textfield  readonly="true" value="P466-1~4泵出口干管流量" name="dcsdatalist[4].item" theme="simple" style="background:transparent;border:0px"/></td>
+	<s:textfield  readonly="true" value="P466-1~4泵出口干管流量" name="dcsdatalist[4].item" theme="simple" style="width:150px;background:transparent;border:0px"/></td>
 	<td align="center"><s:textfield name="dcsdatalist[4].value" theme="simple"
 	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td>m</td>
 		</tr>
 	
 	<tr>
-	<td align="right"><s:textfield  readonly="true" value="P466-1~4泵出口干管流量" name="dcsdatalist[5].item" theme="simple" style="background:transparent;border:0px"/></td>
+	<td align="right"><s:textfield  readonly="true" value="P466-1~4泵出口干管流量" name="dcsdatalist[5].item" theme="simple" style="width:150px;background:transparent;border:0px"/></td>
 	<td align="center"><s:textfield  name="dcsdatalist[5].value" theme="simple"
 	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td>m&sup3/h</td>
 	</tr>
 	
 	<tr>
-	<td align="right"><s:textfield  readonly="true" value="清水泵出口干管流量" name="dcsdatalist[6].item" theme="simple" style="background:transparent;border:0px"/></td>
+	<td align="right"><s:textfield  readonly="true" value="清水泵出口干管流量" name="dcsdatalist[6].item" theme="simple" style="width:150px;background:transparent;border:0px"/></td>
 	<td align="center"><s:textfield name="dcsdatalist[6].value" theme="simple"
 	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td>m&sup3/h</td>
 		</tr>
 
 
 
-	<s:hidden   value="污泥池(V466)" name="dcsdatalist[1].equipment" theme="simple" />
-	<s:hidden   value="污泥池(V466)" name="dcsdatalist[2].equipment" theme="simple" />
-	<s:hidden   value="污泥池(V466)" name="dcsdatalist[3].equipment" theme="simple" />
-	<s:hidden   value="污泥池(V466)" name="dcsdatalist[4].equipment" theme="simple" />
-	<s:hidden   value="污泥池(V466)" name="dcsdatalist[5].equipment" theme="simple" />
-	<s:hidden   value="污泥池(V466)" name="dcsdatalist[6].equipment" theme="simple" />
-	<s:hidden   value="污泥池(V466)" name="dcsdatalist[0].equipment" theme="simple" />
+	<s:hidden   value="污泥泵房(466)" name="dcsdatalist[1].equipment" theme="simple" />
+	<s:hidden   value="污泥泵房(466)" name="dcsdatalist[2].equipment" theme="simple" />
+	<s:hidden   value="污泥泵房(466)" name="dcsdatalist[3].equipment" theme="simple" />
+	<s:hidden   value="污泥泵房(466)" name="dcsdatalist[4].equipment" theme="simple" />
+	<s:hidden   value="污泥泵房(466)" name="dcsdatalist[5].equipment" theme="simple" />
+	<s:hidden   value="污泥泵房(466)" name="dcsdatalist[6].equipment" theme="simple" />
+	<s:hidden   value="污泥泵房(466)" name="dcsdatalist[0].equipment" theme="simple" />
 	<s:hidden   value="班次" name="dcsdatalist[0].item" theme="simple" />
 	<tr align="center">
 
@@ -121,6 +122,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	
 	</tr></table>
+	</td></tr></table>
 </s:form></div>
 </div>
    

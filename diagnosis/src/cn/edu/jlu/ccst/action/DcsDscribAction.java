@@ -112,16 +112,18 @@ public class DcsDscribAction extends ActionSupport {
 
 	public String goadd(){
 		if (checkprof()) {
-			nvs = dcsDscribService.getallnvs();
-			ActionContext actionContext = ActionContext.getContext();
-			Map session = actionContext.getSession();
-			session.put("map2", nvs);
+//			nvs = dcsDscribService.getallnvs();
+//			ActionContext actionContext = ActionContext.getContext();
+//			Map session = actionContext.getSession();
+//			session.put("map2", nvs);
 			return "success";
 		}
 		return "unproflogin";
 	}
 	
 	public String addDescrib() {
+		dcsDscrib.setEque(dcsDscribname1);
+		dcsDscrib.setItem(dcsDscribname2);
 		dcsDscrib.setName(dcsDscribname1+dcsDscribname2);
 		dcsDscribService.save(dcsDscrib);
 		dcsdscriblist = dcsDscribService.findall();

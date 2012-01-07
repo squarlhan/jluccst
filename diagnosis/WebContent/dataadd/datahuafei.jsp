@@ -45,6 +45,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  <h2> 化肥厂丁辛醇</h2>
 <div id="login">
 <s:form action="dcsdataaction!listsave.action" theme = "simple">
+<table width="1080"><tr><td>
 <table width="300" align="center" style="margin-left:30">
 <tr>
     
@@ -137,6 +138,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 	
 	</tr></table>
+	</td></tr></table>
 </s:form></div>
 </div>
    

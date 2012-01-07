@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : localhost_3306
-Source Server Version : 50516
+Source Server         : local
+Source Server Version : 50157
 Source Host           : localhost:3306
 Source Database       : wushuichang
 
 Target Server Type    : MYSQL
-Target Server Version : 50516
+Target Server Version : 50157
 File Encoding         : 65001
 
-Date: 2012-01-02 16:30:10
+Date: 2012-01-08 00:18:02
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -46,7 +46,7 @@ CREATE TABLE `backward` (
   `count` int(10) NOT NULL DEFAULT '0',
   `priror` int(10) NOT NULL DEFAULT '0',
   PRIMARY KEY (`bid`)
-) ENGINE=InnoDB AUTO_INCREMENT=77 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=82 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of backward
@@ -114,6 +114,7 @@ INSERT INTO `backward` VALUES ('73', '事故池(489)', 'COD过高', '0', '0');
 INSERT INTO `backward` VALUES ('74', '事故池(489)', 'BOD5过高', '0', '0');
 INSERT INTO `backward` VALUES ('75', '事故池(489)', 'SS过高', '0', '0');
 INSERT INTO `backward` VALUES ('76', '事故池(489)', 'NH3-N过高', '0', '0');
+INSERT INTO `backward` VALUES ('81', '电石厂有机水', 'A段溶解氧过高', '0', '0');
 
 -- ----------------------------
 -- Table structure for `backwardandlower`
@@ -141,13 +142,13 @@ CREATE TABLE `backwardandreason` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `bid` int(10) NOT NULL,
   `nouns` varchar(255) DEFAULT NULL,
-  `cf_reason` float(10,0) DEFAULT '1',
+  `cf_reason` double DEFAULT '1',
   `verb` varchar(255) DEFAULT NULL,
   `sugg` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `FKFBA61E58DB7478BC` (`bid`),
   CONSTRAINT `FKFBA61E58DB7478BC` FOREIGN KEY (`bid`) REFERENCES `backward` (`bid`)
-) ENGINE=InnoDB AUTO_INCREMENT=369 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=379 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 -- Records of backwardandreason
@@ -188,9 +189,9 @@ INSERT INTO `backwardandreason` VALUES ('36', '12', '', '0', '', '调整进水PH
 INSERT INTO `backwardandreason` VALUES ('37', '13', '', '0', '', '调整进水PH值，增加碱液投加量，查找碱液投加装置是否出现故障');
 INSERT INTO `backwardandreason` VALUES ('38', '14', '', '0', '', '调整进水PH值，增加碱液投加量，查找碱液投加装置是否出现故障');
 INSERT INTO `backwardandreason` VALUES ('39', '15', '', '0', '', '调整进水PH值，增加碱液投加量，查找碱液投加装置是否出现故障');
-INSERT INTO `backwardandreason` VALUES ('40', '16', '酸水的流量', '0', '增大', '增加碱液投加量');
-INSERT INTO `backwardandreason` VALUES ('41', '16', '酸水的酸度', '0', '增加', '增加碱液投加量');
-INSERT INTO `backwardandreason` VALUES ('42', '16', '碱液管线', '0', '堵塞', '及时清通，必要时断管逐渐清通');
+INSERT INTO `backwardandreason` VALUES ('40', '16', '酸水的流量', '5', '增大', '增加碱液投加量');
+INSERT INTO `backwardandreason` VALUES ('41', '16', '酸水的酸度', '2.5', '增加', '增加碱液投加量');
+INSERT INTO `backwardandreason` VALUES ('42', '16', '碱液管线', '3.6', '堵塞', '及时清通，必要时断管逐渐清通');
 INSERT INTO `backwardandreason` VALUES ('43', '16', '碱液碱度', '0', '低', '增加两台碱液泵运行');
 INSERT INTO `backwardandreason` VALUES ('44', '16', '仪表指示', '0', '不准', '用PH试纸实测');
 INSERT INTO `backwardandreason` VALUES ('45', '16', 'PH指示表', '0', '损坏', '找仪表人员处理，恢复正常');
@@ -481,6 +482,9 @@ INSERT INTO `backwardandreason` VALUES ('365', '76', '消解用水量', '0', '�
 INSERT INTO `backwardandreason` VALUES ('366', '76', 'DO', '0', '低', '加大曝气量');
 INSERT INTO `backwardandreason` VALUES ('367', '76', 'COD', '0', '高', '降低进水浓度');
 INSERT INTO `backwardandreason` VALUES ('368', '76', '水温', '0', '低', '提高进水水温');
+INSERT INTO `backwardandreason` VALUES ('369', '16', '1', '1', '1', '1');
+INSERT INTO `backwardandreason` VALUES ('377', '81', 'aa', '1.2', 'aa', 'aa');
+INSERT INTO `backwardandreason` VALUES ('378', '81', 'bb', '2.5', 'bb', 'bb');
 
 -- ----------------------------
 -- Table structure for `backwardandresult`
@@ -490,18 +494,18 @@ CREATE TABLE `backwardandresult` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `bid` int(10) NOT NULL,
   `nouns` varchar(255) NOT NULL,
-  `cf_result` float(10,0) NOT NULL DEFAULT '1',
+  `cf_result` float NOT NULL DEFAULT '1',
   `verb` varchar(255) DEFAULT NULL,
   `memo` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `FKFBAE5431DB7478BC` (`bid`),
   CONSTRAINT `FKFBAE5431DB7478BC` FOREIGN KEY (`bid`) REFERENCES `backward` (`bid`)
-) ENGINE=InnoDB AUTO_INCREMENT=77 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=82 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 -- Records of backwardandresult
 -- ----------------------------
-INSERT INTO `backwardandresult` VALUES ('4', '4', '生化池系列1(1号生化池)PH', '0', '过低', null);
+INSERT INTO `backwardandresult` VALUES ('4', '4', '生化池系列1(1号生化池)PH', '0.2', '过低', null);
 INSERT INTO `backwardandresult` VALUES ('5', '5', '生化池系列1(1号生化池)PH', '0', '过高', null);
 INSERT INTO `backwardandresult` VALUES ('6', '6', '生化池系列1(2号生化池)PH', '0', '过高', null);
 INSERT INTO `backwardandresult` VALUES ('7', '7', '生化池系列1(2号生化池)PH', '0', '过低', null);
@@ -564,6 +568,7 @@ INSERT INTO `backwardandresult` VALUES ('73', '73', '事故池(489)COD', '0', '�
 INSERT INTO `backwardandresult` VALUES ('74', '74', '事故池(489)BOD5', '0', '过高', null);
 INSERT INTO `backwardandresult` VALUES ('75', '75', '事故池(489)SS', '0', '过高', null);
 INSERT INTO `backwardandresult` VALUES ('76', '76', '事故池(489)NH3-N', '0', '过高', null);
+INSERT INTO `backwardandresult` VALUES ('81', '81', '电石厂有机水A段溶解氧', '0', '过高', null);
 
 -- ----------------------------
 -- Table structure for `backwardandupper`
@@ -594,17 +599,33 @@ CREATE TABLE `dcsdata` (
   `value` double DEFAULT NULL,
   `isok` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=122 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of dcsdata
 -- ----------------------------
-INSERT INTO `dcsdata` VALUES ('109', '电石厂有机水', '班次', '0', null);
-INSERT INTO `dcsdata` VALUES ('110', '电石厂有机水', 'COD', '1', '3');
-INSERT INTO `dcsdata` VALUES ('120', '1系列生化池', '班次', '0', null);
-INSERT INTO `dcsdata` VALUES ('117', '染料厂酸水', '班次', '0', null);
-INSERT INTO `dcsdata` VALUES ('118', '染料厂酸水', 'COD', '1', '1');
-INSERT INTO `dcsdata` VALUES ('121', '1系列生化池', '1号生化池PH', '12', '0');
+INSERT INTO `dcsdata` VALUES ('6', '生化池系列1(1号生化池)', 'COD', '10', '3');
+INSERT INTO `dcsdata` VALUES ('11', '生化池系列1(1号生化池)', '班次', '0', null);
+INSERT INTO `dcsdata` VALUES ('7', '生化池系列2(3号生化池)', '班次', '0', null);
+INSERT INTO `dcsdata` VALUES ('8', '生化池系列2(3号生化池)', 'PH', '10', '3');
+INSERT INTO `dcsdata` VALUES ('12', '生化池系列1(1号生化池)', '鼓风机风量', '30', '3');
+INSERT INTO `dcsdata` VALUES ('13', '生化池系列4(7号生化池)', '班次', '0', null);
+INSERT INTO `dcsdata` VALUES ('14', '生化池系列4(8号生化池)', 'PH', '9.6', '0');
+
+-- ----------------------------
+-- Table structure for `dcsdataindex`
+-- ----------------------------
+DROP TABLE IF EXISTS `dcsdataindex`;
+CREATE TABLE `dcsdataindex` (
+  `seqno` varchar(20) NOT NULL DEFAULT '',
+  `update_date` char(10) DEFAULT NULL,
+  `update_time` char(8) DEFAULT NULL,
+  PRIMARY KEY (`seqno`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of dcsdataindex
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for `dcsdscrib`
@@ -622,52 +643,50 @@ CREATE TABLE `dcsdscrib` (
   `upper1` double NOT NULL,
   `upper2` double NOT NULL,
   PRIMARY KEY (`did`)
-) ENGINE=InnoDB AUTO_INCREMENT=1402 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of dcsdscrib
 -- ----------------------------
-INSERT INTO `dcsdscrib` VALUES ('1083', '2系列生化池 ', '3号生化池PH', '6', '生化池系列2(3号生化池)PH', '9', '0', '0', '0', '0');
-INSERT INTO `dcsdscrib` VALUES ('1084', '2系列生化池 ', '3号生化池COD', '0', '生化池系列2(3号生化池)COD', '0.5', '0', '0', '0', '0');
-INSERT INTO `dcsdscrib` VALUES ('1332', '2系列生化池 ', '3号生化池碱度', '8', '生化池系列2(3号生化池)碱度', '14', '0', '0', '0', '0');
-INSERT INTO `dcsdscrib` VALUES ('1333', '2系列生化池 ', '3号生化池BOD5', '2', '生化池系列2(3号生化池)BOD5', '4', '0', '0', '0', '0');
-INSERT INTO `dcsdscrib` VALUES ('1334', '2系列生化池', '3号生化池SS', '100', '生化池系列2(3号生化池)SS', '500', '0', '0', '0', '0');
-INSERT INTO `dcsdscrib` VALUES ('1361', '2系列生化池', '4号生化池COD', '0', '生化池系列2(4号生化池)COD', '0.5', '0', '0', '0', '0');
-INSERT INTO `dcsdscrib` VALUES ('1362', '2系列生化池', '4号生化池碱度', '8', '生化池系列2(4号生化池)碱度', '14', '0', '0', '0', '0');
-INSERT INTO `dcsdscrib` VALUES ('1363', '2系列生化池', '3号生化池BOD5', '2', '生化池系列2(4号生化池)BOD5', '4', '0', '0', '0', '0');
-INSERT INTO `dcsdscrib` VALUES ('1364', '2系列生化池', '3号生化池SS', '100', '生化池系列2(4号生化池)SS', '500', '0', '0', '0', '0');
-INSERT INTO `dcsdscrib` VALUES ('1365', '2系列生化池', '4号生化池NH3-N', '0', '生化池系列2(4号生化池)NH3-N', '0.5', '0', '0', '0', '0');
-INSERT INTO `dcsdscrib` VALUES ('1366', '2系列生化池', '4号生化池硝态氮', '0', '生化池系列2(4号生化池)硝态氮', '50', '0', '0', '0', '0');
-INSERT INTO `dcsdscrib` VALUES ('1367', '2系列生化池', '4号生化池溶解氧', '0', '生化池系列2(4号生化池)溶解氧', '0.5', '0', '0', '0', '0');
-INSERT INTO `dcsdscrib` VALUES ('1368', '2系列生化池', '4号生化池风量', '0', '生化池系列2(4号生化池)风量', '50', '0', '0', '0', '0');
-INSERT INTO `dcsdscrib` VALUES ('1369', '2系列生化池', '4号生化池NO-N', '0', '生化池系列2(4号生化池)NO-N', '0.5', '0', '0', '0', '0');
-INSERT INTO `dcsdscrib` VALUES ('1370', '2系列生化池', '4号生化池水量', '100', '生化池系列2(4号生化池)水量', '500', '0', '0', '0', '0');
-INSERT INTO `dcsdscrib` VALUES ('1371', '2系列生化池', '4号生化池PH', '6', '生化池系列2(4号生化池)PH', '9', '0', '0', '0', '0');
-INSERT INTO `dcsdscrib` VALUES ('1372', '染料厂酸水', 'COD', '0', '染料厂酸水COD', '0.5', '0', '0', '2', '5');
-INSERT INTO `dcsdscrib` VALUES ('1373', '电石厂有机水', 'COD', '0', '电石厂有机水COD', '0.5', '0', '0', '0', '0');
-INSERT INTO `dcsdscrib` VALUES ('1374', '1系列生化池', '1号生化池PH', '6', '生化池系列1(1号生化池)PH', '9', '0', '0', '0', '0');
-INSERT INTO `dcsdscrib` VALUES ('1375', '1系列生化池', '1号生化池COD', '0', '生化池系列1(1号生化池)COD', '0.5', '0', '0', '0', '0');
-INSERT INTO `dcsdscrib` VALUES ('1379', '1系列生化池', '1号生化池碱度', '8', '生化池系列1(1号生化池)碱度', '14', '0', '0', '0', '0');
-INSERT INTO `dcsdscrib` VALUES ('1380', '1系列生化池', '1号生化池BOD5', '2', '生化池系列1(1号生化池)BOD5', '4', '0', '0', '0', '0');
-INSERT INTO `dcsdscrib` VALUES ('1381', '1系列生化池', '1号生化池SS', '100', '生化池系列1(1号生化池)SS', '500', '0', '0', '0', '0');
-INSERT INTO `dcsdscrib` VALUES ('1382', '1系列生化池', '1号生化池NH3-N', '0', '生化池系列1(1号生化池)NH3-N', '0.5', '0', '0', '0', '0');
-INSERT INTO `dcsdscrib` VALUES ('1383', '1系列生化池', '1号生化池硝态氮', '100', '生化池系列1(1号生化池)硝态氮', '500', '0', '0', '0', '0');
-INSERT INTO `dcsdscrib` VALUES ('1384', '1系列生化池', '1号生化池溶解氧', '0', '生化池系列1(1号生化池)溶解氧', '0.5', '0', '0', '0', '0');
-INSERT INTO `dcsdscrib` VALUES ('1385', '1系列生化池', '1号生化池风量', '0', '生化池系列1(1号生化池)风量', '50', '0', '0', '0', '0');
-INSERT INTO `dcsdscrib` VALUES ('1386', '1系列生化池', '1号生化池NO-N', '0', '生化池系列1(1号生化池)NO-N', '0.5', '0', '0', '0', '0');
-INSERT INTO `dcsdscrib` VALUES ('1387', '1系列生化池', '1号生化池水量', '100', '生化池系列1(1号生化池)水量', '500', '0', '0', '0', '0');
-INSERT INTO `dcsdscrib` VALUES ('1388', '1系列生化池', '2号生化池水量', '100', '生化池系列1(2号生化池)水量', '500', '0', '0', '0', '0');
-INSERT INTO `dcsdscrib` VALUES ('1389', '1系列生化池', '2号生化池PH', '6', '生化池系列1(2号生化池)PH', '9', '0', '0', '0', '0');
-INSERT INTO `dcsdscrib` VALUES ('1390', '1系列生化池', '2号生化池COD', '0', '生化池系列1(2号生化池)COD', '0.5', '0', '0', '0', '0');
-INSERT INTO `dcsdscrib` VALUES ('1391', '1系列生化池', '2号生化池碱度', '8', '生化池系列1(2号生化池)碱度', '14', '0', '0', '0', '0');
-INSERT INTO `dcsdscrib` VALUES ('1392', '1系列生化池', '2号生化池BOD5', '2', '生化池系列1(2号生化池)BOD5', '4', '0', '0', '0', '0');
-INSERT INTO `dcsdscrib` VALUES ('1393', '1系列生化池', '2号生化池SS', '100', '生化池系列1(2号生化池)SS', '500', '0', '0', '0', '0');
-INSERT INTO `dcsdscrib` VALUES ('1394', '1系列生化池', '2号生化池NH3-N', '0', '生化池系列1(2号生化池)NH3-N', '0.5', '0', '0', '0', '0');
-INSERT INTO `dcsdscrib` VALUES ('1395', '1系列生化池', '2号生化池硝态氮', '100', '生化池系列1(2号生化池)硝态氮', '500', '0', '0', '0', '0');
-INSERT INTO `dcsdscrib` VALUES ('1396', '1系列生化池', '2号生化池溶解氧', '0', '生化池系列1 (2号生化池)溶解氧', '0.5', '0', '0', '0', '0');
-INSERT INTO `dcsdscrib` VALUES ('1397', '1系列生化池', '2号生化池风量', '0', '生化池系列1 (2号生化池)风量', '50', '0', '0', '0', '0');
-INSERT INTO `dcsdscrib` VALUES ('1398', '1系列生化池', '2号生化池NO-N', '0', '生化池系列1 (2号生化池)NO-N', '0.5', '0', '0', '0', '0');
-INSERT INTO `dcsdscrib` VALUES ('1401', '2系列生化池', '3号生化池温度', '5', '电石厂有机水溶解氧', '2', '0', '0', '0', '0');
+INSERT INTO `dcsdscrib` VALUES ('1', '生化池系列2(3号生化池)', 'PH', '6', '生化池系列2(3号生化池)PH', '9', '0', '0', '0', '0');
+INSERT INTO `dcsdscrib` VALUES ('2', '生化池系列2(3号生化池)', 'COD', '0', '生化池系列2(3号生化池)COD', '0.5', '0', '0', '0', '0');
+INSERT INTO `dcsdscrib` VALUES ('3', '生化池系列2(3号生化池)', '碱度', '8', '生化池系列2(3号生化池)碱度', '14', '0', '0', '0', '0');
+INSERT INTO `dcsdscrib` VALUES ('4', '生化池系列2(3号生化池)', 'BOD5', '2', '生化池系列2(3号生化池)BOD5', '4', '0', '0', '0', '0');
+INSERT INTO `dcsdscrib` VALUES ('5', '生化池系列2(3号生化池)', 'SS', '100', '生化池系列2(3号生化池)SS', '500', '0', '0', '0', '0');
+INSERT INTO `dcsdscrib` VALUES ('6', '生化池系列2(4号生化池)', 'COD', '0', '生化池系列2(4号生化池)COD', '0.5', '0', '0', '0', '0');
+INSERT INTO `dcsdscrib` VALUES ('7', '生化池系列2(4号生化池)', '碱度', '8', '生化池系列2(4号生化池)碱度', '14', '0', '0', '0', '0');
+INSERT INTO `dcsdscrib` VALUES ('8', '生化池系列2(4号生化池)', 'BOD5', '2', '生化池系列2(4号生化池)BOD5', '4', '0', '0', '0', '0');
+INSERT INTO `dcsdscrib` VALUES ('9', '生化池系列2(4号生化池)', 'SS', '100', '生化池系列2(4号生化池)SS', '500', '0', '0', '0', '0');
+INSERT INTO `dcsdscrib` VALUES ('10', '生化池系列2(4号生化池)', 'NH3-N', '0', '生化池系列2(4号生化池)NH3-N', '0.5', '0', '0', '0', '0');
+INSERT INTO `dcsdscrib` VALUES ('11', '生化池系列2(4号生化池)', '硝态氮', '0', '生化池系列2(4号生化池)硝态氮', '50', '0', '0', '0', '0');
+INSERT INTO `dcsdscrib` VALUES ('12', '生化池系列2(4号生化池)', '溶解氧', '0', '生化池系列2(4号生化池)溶解氧', '0.5', '0', '0', '0', '0');
+INSERT INTO `dcsdscrib` VALUES ('13', '生化池系列2(3号生化池)', '鼓风机风量', '0', '生化池系列2(3号生化池)鼓风机风量', '50', '0', '0', '0', '0');
+INSERT INTO `dcsdscrib` VALUES ('14', '生化池系列2(4号生化池)', 'NO-N', '0', '生化池系列2(4号生化池)NO-N', '0.5', '0', '0', '0', '0');
+INSERT INTO `dcsdscrib` VALUES ('15', '生化池系列2(4号生化池)', '水量', '100', '生化池系列2(4号生化池)水量', '500', '0', '0', '0', '0');
+INSERT INTO `dcsdscrib` VALUES ('16', '生化池系列2(4号生化池)', 'PH', '6', '生化池系列2(4号生化池)PH', '9', '0', '0', '0', '0');
+INSERT INTO `dcsdscrib` VALUES ('17', '生化池系列1(1号生化池)', 'PH', '6', '生化池系列1(1号生化池)PH', '9', '4', '2', '11', '13');
+INSERT INTO `dcsdscrib` VALUES ('18', '生化池系列1(1号生化池)', 'COD', '0', '生化池系列1(1号生化池)COD', '0.5', '0', '0', '0', '0');
+INSERT INTO `dcsdscrib` VALUES ('19', '生化池系列1(1号生化池)', '碱度', '8', '生化池系列1(1号生化池)碱度', '14', '0', '0', '0', '0');
+INSERT INTO `dcsdscrib` VALUES ('20', '生化池系列1(1号生化池)', 'BOD5', '2', '生化池系列1(1号生化池)BOD5', '4', '0', '0', '0', '0');
+INSERT INTO `dcsdscrib` VALUES ('21', '生化池系列1(1号生化池)', 'SS', '100', '生化池系列1(1号生化池)SS', '500', '0', '0', '0', '0');
+INSERT INTO `dcsdscrib` VALUES ('22', '生化池系列1(1号生化池)', 'NH3-N', '0', '生化池系列1(1号生化池)NH3-N', '0.5', '0', '0', '0', '0');
+INSERT INTO `dcsdscrib` VALUES ('23', '生化池系列1(1号生化池)', '硝态氮', '100', '生化池系列1(1号生化池)硝态氮', '500', '0', '0', '0', '0');
+INSERT INTO `dcsdscrib` VALUES ('24', '生化池系列1(1号生化池)', '溶解氧', '0', '生化池系列1(1号生化池)溶解氧', '0.5', '0', '0', '0', '0');
+INSERT INTO `dcsdscrib` VALUES ('25', '生化池系列1(1号生化池)', '鼓风机风量', '0', '生化池系列1(1号生化池)鼓风机风量', '50', '0', '0', '0', '0');
+INSERT INTO `dcsdscrib` VALUES ('26', '生化池系列1(1号生化池)', 'NO-N', '0', '生化池系列1(1号生化池)NO-N', '0.5', '0', '0', '0', '0');
+INSERT INTO `dcsdscrib` VALUES ('27', '生化池系列1(1号生化池)', '水量', '100', '生化池系列1(1号生化池)水量', '500', '0', '0', '0', '0');
+INSERT INTO `dcsdscrib` VALUES ('28', '生化池系列1(2号生化池)', '水量', '100', '生化池系列1(2号生化池)水量', '500', '0', '0', '0', '0');
+INSERT INTO `dcsdscrib` VALUES ('29', '生化池系列1(2号生化池)', 'PH', '6', '生化池系列1(2号生化池)PH', '9', '0', '0', '0', '0');
+INSERT INTO `dcsdscrib` VALUES ('30', '生化池系列1(2号生化池)', 'COD', '0', '生化池系列1(2号生化池)COD', '0.5', '0', '0', '0', '0');
+INSERT INTO `dcsdscrib` VALUES ('31', '生化池系列1(2号生化池)', '碱度', '8', '生化池系列1(2号生化池)碱度', '14', '0', '0', '0', '0');
+INSERT INTO `dcsdscrib` VALUES ('32', '生化池系列1(2号生化池)', 'BOD5', '2', '生化池系列1(2号生化池)BOD5', '4', '0', '0', '0', '0');
+INSERT INTO `dcsdscrib` VALUES ('33', '生化池系列1(2号生化池)', 'SS', '100', '生化池系列1(2号生化池)SS', '500', '0', '0', '0', '0');
+INSERT INTO `dcsdscrib` VALUES ('34', '生化池系列1(2号生化池)', 'NH3-N', '0', '生化池系列1(2号生化池)NH3-N', '0.5', '0', '0', '0', '0');
+INSERT INTO `dcsdscrib` VALUES ('35', '生化池系列1(2号生化池)', '硝态氮', '100', '生化池系列1(2号生化池)硝态氮', '500', '0', '0', '0', '0');
+INSERT INTO `dcsdscrib` VALUES ('36', '生化池系列1(2号生化池)', '溶解氧', '0', '生化池系列1(2号生化池)溶解氧', '0.5', '0', '0', '0', '0');
+INSERT INTO `dcsdscrib` VALUES ('37', '生化池系列1(2号生化池)', 'NO-N', '0', '生化池系列1(2号生化池)NO-N', '0.5', '0', '0', '0', '0');
+INSERT INTO `dcsdscrib` VALUES ('38', '生化池系列2(3号生化池)', '温度', '2', '生化池系列2(3号生化池)温度', '5', '0', '0', '0', '0');
+INSERT INTO `dcsdscrib` VALUES ('39', '生化池系列4(8号生化池)', 'PH', '6', '生化池系列4(8号生化池)PH', '9', '4', '2', '11', '13');
 
 -- ----------------------------
 -- Table structure for `dcshistory`
@@ -680,129 +699,59 @@ CREATE TABLE `dcshistory` (
   `seqno` varchar(255) DEFAULT NULL,
   `value` double DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=119 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=15 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of dcshistory
 -- ----------------------------
-INSERT INTO `dcshistory` VALUES ('1', '2系列生化池', '3号生化池PH', null, '33');
-INSERT INTO `dcshistory` VALUES ('2', '2系列生化池', '4号生化池PH', null, '33');
-INSERT INTO `dcshistory` VALUES ('3', '2系列生化池', '3号生化池COD', null, '33');
-INSERT INTO `dcshistory` VALUES ('4', '2系列生化池', '3号生化池碱度', null, '33');
-INSERT INTO `dcshistory` VALUES ('5', '2系列生化池', '班次', '2011-11-21 00:04:57', '0');
-INSERT INTO `dcshistory` VALUES ('6', '2系列生化池', '3号生化池PH', null, '22');
-INSERT INTO `dcshistory` VALUES ('7', '2系列生化池', '3号生化池COD', null, '22');
-INSERT INTO `dcshistory` VALUES ('8', '2系列生化池', '3号生化池碱度', null, '22');
-INSERT INTO `dcshistory` VALUES ('9', '2系列生化池', '3号生化池BOD5', null, '22');
-INSERT INTO `dcshistory` VALUES ('10', '2系列生化池', '班次', '2011-11-21 00:17:16', '0');
-INSERT INTO `dcshistory` VALUES ('11', '2系列生化池', '3号生化池PH', null, '111');
-INSERT INTO `dcshistory` VALUES ('12', '2系列生化池', '3号生化池COD', null, '222');
-INSERT INTO `dcshistory` VALUES ('13', '2系列生化池', '3号生化池碱度', null, '111');
-INSERT INTO `dcshistory` VALUES ('14', '2系列生化池', '班次', '2011-11-21 00:22:46', '8');
-INSERT INTO `dcshistory` VALUES ('15', '2系列生化池', '3号生化池PH', null, '7');
-INSERT INTO `dcshistory` VALUES ('16', '2系列生化池', '班次', '2011-11-21 00:48:29', '8');
-INSERT INTO `dcshistory` VALUES ('17', '2系列生化池', '3号生化池PH', null, '999');
-INSERT INTO `dcshistory` VALUES ('18', '2系列生化池', '班次', '2011-11-21 00:49:30', '8');
-INSERT INTO `dcshistory` VALUES ('19', '2系列生化池', '3号生化池PH', null, '111');
-INSERT INTO `dcshistory` VALUES ('20', '2系列生化池', '3号生化池溶解氧', null, '999');
-INSERT INTO `dcshistory` VALUES ('21', '2系列生化池', '班次', '2011-11-21 01:18:06', '0');
-INSERT INTO `dcshistory` VALUES ('22', '2系列生化池', '3号生化池PH', null, '999');
-INSERT INTO `dcshistory` VALUES ('23', '2系列生化池', '3号生化池COD', null, '9');
-INSERT INTO `dcshistory` VALUES ('24', '2系列生化池', '3号生化池碱度', null, '999');
-INSERT INTO `dcshistory` VALUES ('25', '2系列生化池', '3号生化池溶解氧', null, '999');
-INSERT INTO `dcshistory` VALUES ('26', '2系列生化池', '班次', '2011-11-21 01:26:30', '0');
-INSERT INTO `dcshistory` VALUES ('27', '2系列生化池', '3号生化池溶解氧', null, '22222222');
-INSERT INTO `dcshistory` VALUES ('28', '2系列生化池', '班次', '2011-11-21 01:27:07', '0');
-INSERT INTO `dcshistory` VALUES ('29', '2系列生化池', '3号生化池PH', null, '333');
-INSERT INTO `dcshistory` VALUES ('30', '2系列生化池', '3号生化池碱度', null, '3333');
-INSERT INTO `dcshistory` VALUES ('31', '2系列生化池', '3号生化池溶解氧', null, '3333');
-INSERT INTO `dcshistory` VALUES ('32', '2系列生化池', '班次', '2011-11-21 01:30:51', '0');
-INSERT INTO `dcshistory` VALUES ('33', '2系列生化池', '3号生化池PH', null, '7');
-INSERT INTO `dcshistory` VALUES ('34', '2系列生化池', '班次', '2011-11-21 12:57:34', '0');
-INSERT INTO `dcshistory` VALUES ('35', '2系列生化池', '3号生化池PH', null, '9999');
-INSERT INTO `dcshistory` VALUES ('36', '2系列生化池', '班次', '2011-11-21 12:57:50', '0');
-INSERT INTO `dcshistory` VALUES ('37', '2系列生化池', '3号生化池PH', null, '111');
-INSERT INTO `dcshistory` VALUES ('38', '2系列生化池', '3号生化池水量', null, '1');
-INSERT INTO `dcshistory` VALUES ('39', '2系列生化池', '班次', '2011-11-21 13:04:38', '0');
-INSERT INTO `dcshistory` VALUES ('40', '2系列生化池', '3号生化池PH', null, '1');
-INSERT INTO `dcshistory` VALUES ('41', '2系列生化池', '3号生化池COD', null, '1');
-INSERT INTO `dcshistory` VALUES ('42', '2系列生化池', '3号生化池碱度', null, '1');
-INSERT INTO `dcshistory` VALUES ('43', '2系列生化池', '班次', '2011-11-21 13:08:01', '8');
-INSERT INTO `dcshistory` VALUES ('44', '2系列生化池', '3号生化池PH', null, '111');
-INSERT INTO `dcshistory` VALUES ('45', '2系列生化池', '3号生化池COD', null, '1');
-INSERT INTO `dcshistory` VALUES ('46', '2系列生化池', '3号生化池碱度', null, '1');
-INSERT INTO `dcshistory` VALUES ('47', '2系列生化池', '班次', '2011-11-21 13:14:12', '0');
-INSERT INTO `dcshistory` VALUES ('48', '2系列生化池', '3号生化池PH', null, '7');
-INSERT INTO `dcshistory` VALUES ('49', '2系列生化池', '班次', '2011-11-21 13:15:37', '0');
-INSERT INTO `dcshistory` VALUES ('50', '2系列生化池', '班次', '2011-11-27 15:04:02', '0');
-INSERT INTO `dcshistory` VALUES ('51', '2系列生化池', '3号生化池PH', '2011-11-27 15:04:02', '2');
-INSERT INTO `dcshistory` VALUES ('52', '2系列生化池', '班次', '2011-11-27 15:06:13', '0');
-INSERT INTO `dcshistory` VALUES ('53', '2系列生化池', '3号生化池PH', '2011-11-27 15:06:13', '111');
-INSERT INTO `dcshistory` VALUES ('54', '2系列生化池', '班次', '2011-11-27 15:10:07', '0');
-INSERT INTO `dcshistory` VALUES ('55', '2系列生化池', '3号生化池PH', '2011-11-27 15:10:07', '22');
-INSERT INTO `dcshistory` VALUES ('56', '1系列生化池', '班次', '2011-11-27 19:15:30', '0');
-INSERT INTO `dcshistory` VALUES ('57', '1系列生化池', '1号生化池PH', '2011-11-27 19:15:30', '12121212');
-INSERT INTO `dcshistory` VALUES ('58', '2系列生化池', '班次', '2011-11-27 19:16:12', '0');
-INSERT INTO `dcshistory` VALUES ('59', '2系列生化池', '3号生化池PH', '2011-11-27 19:16:12', '213234324');
-INSERT INTO `dcshistory` VALUES ('60', '2系列生化池', '班次', '2011-11-27 19:16:33', '0');
-INSERT INTO `dcshistory` VALUES ('61', '2系列生化池', '3号生化池PH', '2011-11-27 19:16:33', '1212121');
-INSERT INTO `dcshistory` VALUES ('62', '1系列生化池', '班次', '2011-11-27 19:31:55', '0');
-INSERT INTO `dcshistory` VALUES ('63', '2系列生化池', '班次', '2011-11-27 19:33:52', '0');
-INSERT INTO `dcshistory` VALUES ('64', '2系列生化池', '3号生化池COD', '2011-11-27 19:33:52', '12121212');
-INSERT INTO `dcshistory` VALUES ('65', '2系列生化池', '班次', '2011-11-27 19:36:21', '0');
-INSERT INTO `dcshistory` VALUES ('66', '2系列生化池', '3号生化池PH', '2011-11-27 19:36:21', '32432');
-INSERT INTO `dcshistory` VALUES ('67', '2系列生化池', '班次', '2011-11-27 19:45:44', '0');
-INSERT INTO `dcshistory` VALUES ('68', '2系列生化池', '3号生化池PH', '2011-11-27 19:45:44', '1111');
-INSERT INTO `dcshistory` VALUES ('69', '1系列生化池', '班次', '2011-11-27 19:46:32', '0');
-INSERT INTO `dcshistory` VALUES ('70', '2系列生化池', '班次', '2011-11-27 19:54:38', '0');
-INSERT INTO `dcshistory` VALUES ('71', '2系列生化池', '3号生化池SS', '2011-11-27 19:54:38', '13221342');
-INSERT INTO `dcshistory` VALUES ('72', '1系列生化池', '班次', '2011-11-27 20:09:51', '0');
-INSERT INTO `dcshistory` VALUES ('73', '2系列生化池', '班次', '2011-11-27 20:10:07', '0');
-INSERT INTO `dcshistory` VALUES ('74', '2系列生化池', '3号生化池COD', '2011-11-27 20:10:07', '432423432');
-INSERT INTO `dcshistory` VALUES ('75', '2系列生化池', '班次', '2011-11-27 20:12:47', '0');
-INSERT INTO `dcshistory` VALUES ('76', '2系列生化池', '3号生化池碱度', '2011-11-27 20:12:47', '2311324');
-INSERT INTO `dcshistory` VALUES ('77', '2系列生化池', '班次', '2011-11-27 20:14:15', '0');
-INSERT INTO `dcshistory` VALUES ('78', '2系列生化池', '3号生化池COD', '2011-11-27 20:14:15', '243424');
-INSERT INTO `dcshistory` VALUES ('79', '2系列生化池', '班次', '2011-11-27 20:16:08', '0');
-INSERT INTO `dcshistory` VALUES ('80', '2系列生化池', '3号生化池COD', '2011-11-27 20:16:08', '243424');
-INSERT INTO `dcshistory` VALUES ('81', '1系列生化池', '班次', '2011-11-27 23:52:35', '0');
-INSERT INTO `dcshistory` VALUES ('82', '1系列生化池', '1号生化池PH', '2011-11-27 23:52:35', '11111');
-INSERT INTO `dcshistory` VALUES ('83', '2系列生化池', '班次', '2011-11-27 23:53:32', '0');
-INSERT INTO `dcshistory` VALUES ('84', '2系列生化池', '3号生化池COD', '2011-11-27 23:53:32', '0.2');
-INSERT INTO `dcshistory` VALUES ('85', '1系列生化池', '班次', '2011-11-27 23:55:09', '0');
-INSERT INTO `dcshistory` VALUES ('86', '1系列生化池', '1号生化池PH', '2011-11-27 23:55:09', '7');
-INSERT INTO `dcshistory` VALUES ('87', '1系列生化池', '班次', '2011-11-28 10:55:17', '0');
-INSERT INTO `dcshistory` VALUES ('88', '1系列生化池', '1号生化池SS', '2011-11-28 10:55:17', '1111');
-INSERT INTO `dcshistory` VALUES ('89', '1系列生化池', '班次', '2011-11-28 10:56:32', '0');
-INSERT INTO `dcshistory` VALUES ('90', '1系列生化池', '1号生化池SS', '2011-11-28 10:56:32', '1111');
-INSERT INTO `dcshistory` VALUES ('91', '1系列生化池', '班次', '2011-11-28 10:57:15', '0');
-INSERT INTO `dcshistory` VALUES ('92', '1系列生化池', '1号生化池SS', '2011-11-28 10:57:15', '1111');
-INSERT INTO `dcshistory` VALUES ('93', '1系列生化池', '班次', '2011-11-28 10:57:37', '0');
-INSERT INTO `dcshistory` VALUES ('94', '1系列生化池', '1号生化池SS', '2011-11-28 10:57:37', '1111');
-INSERT INTO `dcshistory` VALUES ('95', '1系列生化池', '班次', '2011-11-28 11:29:27', '0');
-INSERT INTO `dcshistory` VALUES ('96', '1系列生化池', '1号生化池PH', '2011-11-28 11:29:27', '121212');
-INSERT INTO `dcshistory` VALUES ('97', '1系列生化池', '班次', '2011-11-28 11:33:26', '0');
-INSERT INTO `dcshistory` VALUES ('98', '1系列生化池', '1号生化池PH', '2011-11-28 11:33:26', '11111');
-INSERT INTO `dcshistory` VALUES ('99', '1系列生化池', '班次', '2011-11-28 11:34:51', '0');
-INSERT INTO `dcshistory` VALUES ('100', '1系列生化池', '2号生化池PH', '2011-11-28 11:34:51', '11111');
-INSERT INTO `dcshistory` VALUES ('101', '1系列生化池', '班次', '2011-11-28 13:41:55', '0');
-INSERT INTO `dcshistory` VALUES ('102', '1系列生化池', '班次', '2011-11-28 22:17:11', '0');
-INSERT INTO `dcshistory` VALUES ('103', '1系列生化池', '1号生化池PH', '2011-11-28 22:17:11', '10');
-INSERT INTO `dcshistory` VALUES ('104', '排江出口线', '班次', '2011-12-11 15:53:22', '0');
-INSERT INTO `dcshistory` VALUES ('105', '排江出口线', '出口NH3-N', '2011-12-11 15:53:22', '3');
-INSERT INTO `dcshistory` VALUES ('106', '电石厂有机水', '班次', '2011-12-19 20:43:43', '0');
-INSERT INTO `dcshistory` VALUES ('107', '电石厂有机水', 'COD', '2011-12-19 20:43:16', '1');
-INSERT INTO `dcshistory` VALUES ('108', '染料厂酸水', '班次', '2011-12-19 20:45:00', '0');
-INSERT INTO `dcshistory` VALUES ('109', '染料厂酸水', 'COD', '2011-12-19 20:44:57', '1');
-INSERT INTO `dcshistory` VALUES ('110', '染料厂酸水', '班次', '2011-12-19 20:45:21', '0');
-INSERT INTO `dcshistory` VALUES ('111', '染料厂酸水', 'COD', '2011-12-19 20:45:21', '3');
-INSERT INTO `dcshistory` VALUES ('112', '染料厂酸水', '班次', '2011-12-19 20:47:47', '0');
-INSERT INTO `dcshistory` VALUES ('113', '染料厂酸水', 'COD', '2011-12-19 20:47:47', '6');
-INSERT INTO `dcshistory` VALUES ('114', '染料厂酸水', '班次', '2011-12-19 21:15:35', '0');
-INSERT INTO `dcshistory` VALUES ('115', '染料厂酸水', 'COD', '2011-12-19 21:15:34', '1');
-INSERT INTO `dcshistory` VALUES ('116', '1系列生化池', '班次', '2011-12-22 12:55:00', '0');
-INSERT INTO `dcshistory` VALUES ('117', '1系列生化池', '班次', '2011-12-22 12:55:52', '0');
-INSERT INTO `dcshistory` VALUES ('118', '1系列生化池', '1号生化池PH', '2011-12-22', '12');
+INSERT INTO `dcshistory` VALUES ('1', '生化池系列1(1号生化池)', '班次', '2012-01-07 23:11:33', '0');
+INSERT INTO `dcshistory` VALUES ('2', '生化池系列1(1号生化池)', '鼓风机风量', '2012-01-07', '60');
+INSERT INTO `dcshistory` VALUES ('3', '生化池系列1(1号生化池)', '班次', '2012-01-07 23:14:03', '0');
+INSERT INTO `dcshistory` VALUES ('4', '生化池系列1(1号生化池)', 'PH', '2012-01-07', '2');
+INSERT INTO `dcshistory` VALUES ('5', '生化池系列1(1号生化池)', '班次', '2012-01-07 23:16:58', '0');
+INSERT INTO `dcshistory` VALUES ('6', '生化池系列1(1号生化池)', 'COD', '2012-01-07', '10');
+INSERT INTO `dcshistory` VALUES ('7', '生化池系列2(3号生化池)', '班次', '2012-01-07 23:19:42', '0');
+INSERT INTO `dcshistory` VALUES ('8', '生化池系列2(3号生化池)', 'PH', '2012-01-07', '10');
+INSERT INTO `dcshistory` VALUES ('9', '生化池系列1(1号生化池)', '班次', '2012-01-07 23:27:22', '0');
+INSERT INTO `dcshistory` VALUES ('10', '生化池系列1(1号生化池)', '鼓风机风量', '2012-01-07', '60');
+INSERT INTO `dcshistory` VALUES ('11', '生化池系列1(1号生化池)', '班次', '2012-01-07 23:27:41', '0');
+INSERT INTO `dcshistory` VALUES ('12', '生化池系列1(1号生化池)', '鼓风机风量', '2012-01-07', '30');
+INSERT INTO `dcshistory` VALUES ('13', '生化池系列4(7号生化池)', '班次', '2012-01-07 23:53:34', '0');
+INSERT INTO `dcshistory` VALUES ('14', '生化池系列4(8号生化池)', 'PH', '2012-01-07', '9.6');
+
+-- ----------------------------
+-- Table structure for `dcs_data`
+-- ----------------------------
+DROP TABLE IF EXISTS `dcs_data`;
+CREATE TABLE `dcs_data` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `equipment` varchar(255) DEFAULT NULL,
+  `isok` varchar(255) DEFAULT NULL,
+  `item` varchar(255) DEFAULT NULL,
+  `value` double DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of dcs_data
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `dcs_history`
+-- ----------------------------
+DROP TABLE IF EXISTS `dcs_history`;
+CREATE TABLE `dcs_history` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `equipment` varchar(255) DEFAULT NULL,
+  `item` varchar(255) DEFAULT NULL,
+  `seqno` varchar(255) DEFAULT NULL,
+  `value` double DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of dcs_history
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for `dss_advice`
@@ -819,12 +768,12 @@ CREATE TABLE `dss_advice` (
   `level` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `FK75158BF323A4A4F1` (`name`)
-) ENGINE=MyISAM AUTO_INCREMENT=877 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of dss_advice
 -- ----------------------------
-INSERT INTO `dss_advice` VALUES ('876', 'w76.TIR203', '37.00377', '报警现象： 电石厂有机水溶解氧过高', '           32.560000', '20111218123004', '', '5');
+INSERT INTO `dss_advice` VALUES ('1', 'w76.TIR203', '37.00377', '报警现象： 生化池系列2(3号生化池)温度过高', '           32.560000', '20111218123004', '', '5');
 
 -- ----------------------------
 -- Table structure for `dss_history`
@@ -841,238 +790,12 @@ CREATE TABLE `dss_history` (
   `name` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `FKA84AB4F923A4A4F1` (`name`)
-) ENGINE=MyISAM AUTO_INCREMENT=810 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of dss_history
 -- ----------------------------
-INSERT INTO `dss_history` VALUES ('1', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('2', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('3', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('4', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('5', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('6', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('7', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('8', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('9', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('10', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('11', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('12', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('13', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('14', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('15', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('16', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('17', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('18', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('19', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('20', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('21', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('22', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('23', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('24', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('25', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('26', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('27', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('28', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('29', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('30', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('31', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('32', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('33', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('34', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('35', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('36', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('37', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('38', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('39', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('40', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('41', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('42', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('43', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('44', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('45', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('46', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('47', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('48', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('49', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('50', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('51', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('52', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('53', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('54', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('55', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('56', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('57', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('58', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('59', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('60', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('61', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('62', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('63', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('64', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('65', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('66', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('67', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('68', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('69', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('70', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('71', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('72', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('73', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('74', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('75', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('76', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('77', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('78', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('79', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('80', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('81', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('82', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('83', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('84', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('85', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('86', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('87', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('88', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('89', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('90', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('91', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('92', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('93', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('94', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('95', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('96', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('97', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('98', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('99', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('100', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('101', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('102', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('103', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('104', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('105', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('106', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('107', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('108', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('109', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('110', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('111', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('112', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('113', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('114', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('115', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('116', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('117', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('118', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('119', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('120', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('121', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('122', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('123', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('124', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('125', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('126', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('127', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('128', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('129', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('130', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('131', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('132', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('133', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('134', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('135', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('136', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('137', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('138', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('139', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('140', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('141', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('142', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('143', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('144', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('145', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('146', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('147', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('148', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('149', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('150', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('151', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('152', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('153', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('154', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('155', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('156', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('157', '生化池低;', '过高', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('158', '二沉池水停留时间短;中和处理不完全;', '2', '20111124', '1111.24', '增加二沉池污水停留时间;加强预处理;', '12', 'w85.AIRA802');
-INSERT INTO `dss_history` VALUES ('159', '生化池低;', '4', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('160', '二沉池水停留时间短;中和处理不完全;', '2', '20111124', '1111.24', '增加二沉池污水停留时间;加强预处理;', '12', 'w85.AIRA802');
-INSERT INTO `dss_history` VALUES ('161', '生化池低;', '4', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('162', '二沉池水停留时间短;中和处理不完全;', '2', '20111124', '1111.24', '增加二沉池污水停留时间;加强预处理;', '12', 'w85.AIRA802');
-INSERT INTO `dss_history` VALUES ('163', '生化池低;', '4', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('164', '二沉池水停留时间短;中和处理不完全;', '2', '20111124', '1111.24', '增加二沉池污水停留时间;加强预处理;', '12', 'w85.AIRA802');
-INSERT INTO `dss_history` VALUES ('165', '生化池低;', '4', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('166', '二沉池水停留时间短;中和处理不完全;', '2', '20111124', '1111.24', '增加二沉池污水停留时间;加强预处理;', '12', 'w85.AIRA802');
-INSERT INTO `dss_history` VALUES ('167', '生化池低;', '4', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('168', '二沉池水停留时间短;中和处理不完全;', '2', '20111124', '1111.24', '增加二沉池污水停留时间;加强预处理;', '12', 'w85.AIRA802');
-INSERT INTO `dss_history` VALUES ('169', '生化池低;', '4', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('170', '二沉池水停留时间短;中和处理不完全;', '2', '20111124', '1111.24', '增加二沉池污水停留时间;加强预处理;', '12', 'w85.AIRA802');
-INSERT INTO `dss_history` VALUES ('171', '生化池低;', '4', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('172', '二沉池水停留时间短;中和处理不完全;', '2', '20111124', '1111.24', '增加二沉池污水停留时间;加强预处理;', '12', 'w85.AIRA802');
-INSERT INTO `dss_history` VALUES ('173', '生化池低;', '4', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('174', '二沉池水停留时间短;中和处理不完全;', '2', '20111124', '1111.24', '增加二沉池污水停留时间;加强预处理;', '12', 'w85.AIRA802');
-INSERT INTO `dss_history` VALUES ('175', '生化池低;', '4', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('176', '二沉池水停留时间短;中和处理不完全;', '2', '20111124', '1111.24', '增加二沉池污水停留时间;加强预处理;', '12', 'w85.AIRA802');
-INSERT INTO `dss_history` VALUES ('177', '生化池低;', '4', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('178', '二沉池水停留时间短;中和处理不完全;', '2', '20111124', '1111.24', '增加二沉池污水停留时间;加强预处理;', '12', 'w85.AIRA802');
-INSERT INTO `dss_history` VALUES ('179', '生化池低;', '4', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('180', '二沉池水停留时间短;中和处理不完全;', '2', '20111124', '1111.24', '增加二沉池污水停留时间;加强预处理;', '12', 'w85.AIRA802');
-INSERT INTO `dss_history` VALUES ('181', '生化池低;', '4', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('182', '二沉池水停留时间短;中和处理不完全;', '2', '20111124', '1111.24', '增加二沉池污水停留时间;加强预处理;', '12', 'w85.AIRA802');
-INSERT INTO `dss_history` VALUES ('183', '生化池低;', '4', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('184', '二沉池水停留时间短;中和处理不完全;', '2', '20111124', '1111.24', '增加二沉池污水停留时间;加强预处理;', '12', 'w85.AIRA802');
-INSERT INTO `dss_history` VALUES ('185', '生化池低;', '4', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('186', '二沉池水停留时间短;中和处理不完全;', '2', '20111124', '1111.24', '增加二沉池污水停留时间;加强预处理;', '12', 'w85.AIRA802');
-INSERT INTO `dss_history` VALUES ('187', '生化池低;', '4', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('188', '二沉池水停留时间短;中和处理不完全;', '2', '20111124', '1111.24', '增加二沉池污水停留时间;加强预处理;', '12', 'w85.AIRA802');
-INSERT INTO `dss_history` VALUES ('189', '生化池低;', '4', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('190', '二沉池水停留时间短;中和处理不完全;', '2', '20111124', '1111.24', '增加二沉池污水停留时间;加强预处理;', '12', 'w85.AIRA802');
-INSERT INTO `dss_history` VALUES ('191', '生化池低;', '4', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('192', '二沉池水停留时间短;中和处理不完全;', '2', '20111124', '1111.24', '增加二沉池污水停留时间;加强预处理;', '12', 'w85.AIRA802');
-INSERT INTO `dss_history` VALUES ('193', '生化池低;', '4', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('194', '二沉池水停留时间短;中和处理不完全;', '2', '20111124', '1111.24', '增加二沉池污水停留时间;加强预处理;', '12', 'w85.AIRA802');
-INSERT INTO `dss_history` VALUES ('195', '生化池低;', '4', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('196', '二沉池水停留时间短;中和处理不完全;', '2', '20111124', '1111.24', '增加二沉池污水停留时间;加强预处理;', '12', 'w85.AIRA802');
-INSERT INTO `dss_history` VALUES ('197', '生化池低;', '4', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('198', '二沉池水停留时间短;中和处理不完全;', '2', '20111124', '1111.24', '增加二沉池污水停留时间;加强预处理;', '12', 'w85.AIRA802');
-INSERT INTO `dss_history` VALUES ('199', '生化池低;', '4', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('200', '二沉池水停留时间短;中和处理不完全;', '2', '20111124', '1111.24', '增加二沉池污水停留时间;加强预处理;', '12', 'w85.AIRA802');
-INSERT INTO `dss_history` VALUES ('201', '生化池低;', '4', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('202', '二沉池水停留时间短;中和处理不完全;', '2', '20111124', '1111.24', '增加二沉池污水停留时间;加强预处理;', '12', 'w85.AIRA802');
-INSERT INTO `dss_history` VALUES ('203', '生化池低;', '4', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('204', '二沉池水停留时间短;中和处理不完全;', '2', '20111124', '1111.24', '增加二沉池污水停留时间;加强预处理;', '12', 'w85.AIRA802');
-INSERT INTO `dss_history` VALUES ('205', '生化池低;', '4', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('206', '二沉池水停留时间短;中和处理不完全;', '2', '20111124', '1111.24', '增加二沉池污水停留时间;加强预处理;', '12', 'w85.AIRA802');
-INSERT INTO `dss_history` VALUES ('207', '生化池低;', '4', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('208', '二沉池水停留时间短;中和处理不完全;', '2', '20111124', '1111.24', '增加二沉池污水停留时间;加强预处理;', '12', 'w85.AIRA802');
-INSERT INTO `dss_history` VALUES ('209', '生化池低;', '4', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('210', '二沉池水停留时间短;中和处理不完全;', '2', '20111124', '1111.24', '增加二沉池污水停留时间;加强预处理;', '12', 'w85.AIRA802');
-INSERT INTO `dss_history` VALUES ('211', '生化池低;', '4', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('212', '二沉池水停留时间短;中和处理不完全;', '2', '20111124', '1111.24', '增加二沉池污水停留时间;加强预处理;', '12', 'w85.AIRA802');
-INSERT INTO `dss_history` VALUES ('213', '生化池低;', '4', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('214', '二沉池水停留时间短;中和处理不完全;', '2', '20111124', '1111.24', '增加二沉池污水停留时间;加强预处理;', '12', 'w85.AIRA802');
-INSERT INTO `dss_history` VALUES ('215', '生化池低;', '4', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('216', '二沉池水停留时间短;中和处理不完全;', '2', '20111124', '1111.24', '增加二沉池污水停留时间;加强预处理;', '12', 'w85.AIRA802');
-INSERT INTO `dss_history` VALUES ('217', '生化池低;', '4', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('218', '二沉池水停留时间短;中和处理不完全;', '2', '20111124', '1111.24', '增加二沉池污水停留时间;加强预处理;', '12', 'w85.AIRA802');
-INSERT INTO `dss_history` VALUES ('219', '生化池低;', '4', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('220', '二沉池水停留时间短;中和处理不完全;', '2', '20111124', '1111.24', '增加二沉池污水停留时间;加强预处理;', '12', 'w85.AIRA802');
-INSERT INTO `dss_history` VALUES ('221', '生化池低;', '4', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('222', '二沉池水停留时间短;中和处理不完全;', '2', '20111124', '1111.24', '增加二沉池污水停留时间;加强预处理;', '12', 'w85.AIRA802');
-INSERT INTO `dss_history` VALUES ('223', '生化池低;', '4', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('224', '二沉池水停留时间短;中和处理不完全;', '2', '20111124', '1111.24', '增加二沉池污水停留时间;加强预处理;', '12', 'w85.AIRA802');
-INSERT INTO `dss_history` VALUES ('225', '生化池低;', '4', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
-INSERT INTO `dss_history` VALUES ('226', '二沉池水停留时间短;中和处理不完全;', '2', '20111124', '1111.24', '增加二沉池污水停留时间;加强预处理;', '12', 'w85.AIRA802');
-INSERT INTO `dss_history` VALUES ('227', '生化池低;', '4', '20111125', '1111.24', '加大风力;', '200', 'w85.AIRA803');
+INSERT INTO `dss_history` VALUES ('1', '', '5', '20111218123004', '           32.560000', '', '37.00377', 'w76.TIR203');
 
 -- ----------------------------
 -- Table structure for `errorlog`
@@ -1089,26 +812,38 @@ CREATE TABLE `errorlog` (
   `sugg` varchar(255) DEFAULT NULL,
   `wrong` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of errorlog
 -- ----------------------------
-INSERT INTO `errorlog` VALUES ('20', '2系列生化池', '3号生化池PH', '4', '2011-11-27 15:04:02', '2', '中和站控制不好;', '增加测试PH频次，向车间工艺工程师汇报;', '过低');
-INSERT INTO `errorlog` VALUES ('21', '2系列生化池', '3号生化池PH', '3', '2011-11-27 15:06:13', '111', '中和站控制不好;', '增加测试PH频次，向车间工艺工程师汇报;', '过高');
-INSERT INTO `errorlog` VALUES ('22', '2系列生化池', '3号生化池PH', '5', '2011-11-27 15:10:07', '22', '中和站控制不好;', '增加测试PH频次，向车间工艺工程师汇报;', '过高');
-INSERT INTO `errorlog` VALUES ('23', '2系列生化池', '3号生化池PH', '6', '2011-11-27 19:16:12', '213234324', '中和站控制不好;', '增加测试PH频次，向车间工艺工程师汇报;', '过高');
-INSERT INTO `errorlog` VALUES ('24', '2系列生化池', '3号生化池PH', '7', '2011-11-27 19:16:33', '1212121', '中和站控制不好;', '增加测试PH频次，向车间工艺工程师汇报;', '过高');
-INSERT INTO `errorlog` VALUES ('26', '2系列生化池', '3号生化池PH', '8', '2011-11-27 19:36:21', '32432', '中和站控制不好;', '增加测试PH频次，向车间工艺工程师汇报;', '过高');
-INSERT INTO `errorlog` VALUES ('27', '2系列生化池', '3号生化池PH', '9', '2011-11-27 19:45:44', '1111', '中和站控制不好;', '增加测试PH频次，向车间工艺工程师汇报;', '过高');
-INSERT INTO `errorlog` VALUES ('28', '2系列生化池', '3号生化池SS', '2', '2011-11-27 19:54:38', '13221342', '进水池控制不好;', '维修;', '过高');
-INSERT INTO `errorlog` VALUES ('39', '1系列生化池', '1号生化池PH', '1', '2011-11-28 11:33:26', '11111', '中和池处理不好;', '维修;', '过高');
-INSERT INTO `errorlog` VALUES ('40', '1系列生化池', '2号生化池PH', '4', '2011-11-28 11:34:51', '11111', '中和池处理不好;', '维修;', '过高');
-INSERT INTO `errorlog` VALUES ('41', '1系列生化池', '1号生化池PH', '5', '2011-11-28 22:17:11', '10', '中和池处理不好;酸水的流量增大;酸水的酸度增加;碱液管堵塞;仪表指示不准;', '维修;增加碱液投加量;增加碱液投加量;及时清通，必要时短管清通;用PH试纸实测;', '过高');
-INSERT INTO `errorlog` VALUES ('42', '排江出口线', '出口NH3-N', '6', '2011-12-11 15:53:22', '3', '11;22;33;电石渣加的太多;中和错误;', '1;2;3;减少电石渣投放量;立即上报;', '过高');
-INSERT INTO `errorlog` VALUES ('43', '染料厂酸水', 'COD', '10', '2011-12-19 21:15:35', '1', null, null, '过高');
-INSERT INTO `errorlog` VALUES ('44', '排江出口线', '出口水量', '3', '2011-12-11 15:53:22', '333', '11;22;33;电石渣加的太多;中和错误;', '1;2;3;减少电石渣投放量;立即上报', '过高');
-INSERT INTO `errorlog` VALUES ('45', '1系列生化池', '1号生化池PH', '9', '2011-12-22 12:55:52', '12', ';', '调整进水PH值，加酸（这种情况很少出现，目前工厂没有加酸装置）;', '过高');
+INSERT INTO `errorlog` VALUES ('1', '生化池系列1(1号生化池)', '鼓风机风量', '5', '2012-01-07 23:11:33', '60', null, null, '过高');
+INSERT INTO `errorlog` VALUES ('2', '生化池系列1(1号生化池)', 'PH', '8', '2012-01-07 23:14:03', '2', '酸水的流量增大;酸水的酸度增加;碱液管线堵塞;碱液碱度低;仪表指示不准;PH指示表损坏;;', '增加碱液投加量;增加碱液投加量;及时清通，必要时断管逐渐清通;增加两台碱液泵运行;用PH试纸实测;找仪表人员处理，恢复正常;调整进水PH值，增加碱液投加量，查找碱液投加装置是否出现故障;', '过低');
+INSERT INTO `errorlog` VALUES ('3', '生化池系列1(1号生化池)', 'COD', '12', '2012-01-07 23:16:58', '10', '进水有机物浓度高;污泥浓度低;污泥沉降性、絮凝性差差;DO不足;水质冲击有毒物质进入;', '调整降低进水浓度;增加回流比;降低进水浓度；增加曝气量；提高水温；提高进水pH值;增加曝气量;检查进水;', '过高');
+INSERT INTO `errorlog` VALUES ('4', '生化池系列2(3号生化池)', 'PH', '9', '2012-01-07 23:19:42', '10', ';', '调整进水PH值，加酸（这种情况很少出现，目前工厂没有加酸装置）;', '过高');
+INSERT INTO `errorlog` VALUES ('5', '生化池系列1(1号生化池)', '鼓风机风量', '5', '2012-01-07 23:27:22', '60', null, null, '过高');
+INSERT INTO `errorlog` VALUES ('6', '生化池系列4(8号生化池)', 'PH', '7', '2012-01-07 23:53:34', '9.6', ';', '调整进水PH值，增加碱液投加量，查找碱液投加装置是否出现故障;', '过高');
+
+-- ----------------------------
+-- Table structure for `error_log`
+-- ----------------------------
+DROP TABLE IF EXISTS `error_log`;
+CREATE TABLE `error_log` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `equipment` varchar(255) DEFAULT NULL,
+  `error` varchar(255) DEFAULT NULL,
+  `item` varchar(255) DEFAULT NULL,
+  `level` varchar(255) DEFAULT NULL,
+  `sugg` varchar(255) DEFAULT NULL,
+  `time` varchar(255) DEFAULT NULL,
+  `value` double DEFAULT NULL,
+  `wrong` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of error_log
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for `exceldata`
@@ -1297,230 +1032,244 @@ CREATE TABLE `init_predict` (
 -- ----------------------------
 -- Records of init_predict
 -- ----------------------------
-INSERT INTO `init_predict` VALUES ('w1.BOD5', '染料厂酸水.BOD5', '');
-INSERT INTO `init_predict` VALUES ('w1.COD', '染料厂酸水.COD', '');
-INSERT INTO `init_predict` VALUES ('w1.NH3N', '染料厂酸水.NH3N', '');
-INSERT INTO `init_predict` VALUES ('w1.PH', '染料厂酸水.PH', '');
-INSERT INTO `init_predict` VALUES ('w1.Q', '染料厂酸水.流量', '');
-INSERT INTO `init_predict` VALUES ('w1.SS', '染料厂酸水.SS', '');
-INSERT INTO `init_predict` VALUES ('w10.BOD5', '铁运489沉淀池出水.BOD5', '');
-INSERT INTO `init_predict` VALUES ('w10.COD', '铁运489沉淀池出水.COD', '');
-INSERT INTO `init_predict` VALUES ('w10.NH3N', '铁运489沉淀池出水.NH3N', '');
-INSERT INTO `init_predict` VALUES ('w10.PH', '铁运489沉淀池出水.PH', '');
-INSERT INTO `init_predict` VALUES ('w10.Q', '铁运489沉淀池出水.流量', '');
-INSERT INTO `init_predict` VALUES ('w10.SS', '铁运489沉淀池出水.SS', '');
-INSERT INTO `init_predict` VALUES ('w11.BOD5', '含氮废水.BOD5', '');
-INSERT INTO `init_predict` VALUES ('w11.COD', '含氮废水.COD', '');
-INSERT INTO `init_predict` VALUES ('w11.NH3N', '含氮废水.NH3N', '');
-INSERT INTO `init_predict` VALUES ('w11.PH', '含氮废水.PH', '');
-INSERT INTO `init_predict` VALUES ('w11.Q', '含氮废水.流量', '');
-INSERT INTO `init_predict` VALUES ('w11.SS', '含氮废水.SS', '');
-INSERT INTO `init_predict` VALUES ('w12.BOD5', '103厂碱水.BOD5', '');
-INSERT INTO `init_predict` VALUES ('w12.COD', '103厂碱水.COD', '');
-INSERT INTO `init_predict` VALUES ('w12.NH3N', '103厂碱水.NH3N', '');
-INSERT INTO `init_predict` VALUES ('w12.PH', '103厂碱水.PH', '');
-INSERT INTO `init_predict` VALUES ('w12.Q', '103厂碱水.流量', '');
-INSERT INTO `init_predict` VALUES ('w12.SS', '103厂碱水.SS', '');
-INSERT INTO `init_predict` VALUES ('w13.BOD5', '化肥厂丁辛醇.BOD5', '');
-INSERT INTO `init_predict` VALUES ('w13.COD', '化肥厂丁辛醇.COD', '');
-INSERT INTO `init_predict` VALUES ('w13.NH3N', '化肥厂丁辛醇.NH3N', '');
-INSERT INTO `init_predict` VALUES ('w13.PH', '化肥厂丁辛醇.PH', '');
-INSERT INTO `init_predict` VALUES ('w13.Q', '化肥厂丁辛醇.流量', '');
-INSERT INTO `init_predict` VALUES ('w13.SS', '化肥厂丁辛醇.SS', '');
-INSERT INTO `init_predict` VALUES ('w14.BOD5', '丙烯腈废水.BOD5', '');
-INSERT INTO `init_predict` VALUES ('w14.COD', '丙烯腈废水.COD', '');
-INSERT INTO `init_predict` VALUES ('w14.NH3N', '丙烯腈废水.NH3N', '');
-INSERT INTO `init_predict` VALUES ('w14.PH', '丙烯腈废水.PH', '');
-INSERT INTO `init_predict` VALUES ('w14.Q', '丙烯腈废水.流量', '');
-INSERT INTO `init_predict` VALUES ('w14.SS', '丙烯腈废水.SS', '');
-INSERT INTO `init_predict` VALUES ('w15.BOD5', '合成树脂厂有机水.BOD5', '');
-INSERT INTO `init_predict` VALUES ('w15.COD', '合成树脂厂有机水.COD', '');
-INSERT INTO `init_predict` VALUES ('w15.NH3N', '合成树脂厂有机水.NH3N', '');
-INSERT INTO `init_predict` VALUES ('w15.PH', '合成树脂厂有机水.PH', '');
-INSERT INTO `init_predict` VALUES ('w15.Q', '合成树脂厂有机水.流量', '');
-INSERT INTO `init_predict` VALUES ('w15.SS', '合成树脂厂有机水.SS', '');
-INSERT INTO `init_predict` VALUES ('w16.BOD5', '龙潭区生活水.BOD5', '');
-INSERT INTO `init_predict` VALUES ('w16.COD', '龙潭区生活水.COD', '');
-INSERT INTO `init_predict` VALUES ('w16.NH3N', '龙潭区生活水.NH3N', '');
-INSERT INTO `init_predict` VALUES ('w16.PH', '龙潭区生活水.PH', '');
-INSERT INTO `init_predict` VALUES ('w16.Q', '龙潭区生活水.流量', '');
-INSERT INTO `init_predict` VALUES ('w16.SS', '龙潭区生活水.SS', '');
-INSERT INTO `init_predict` VALUES ('w2.BOD5', '电石厂酸水.BOD5', '');
-INSERT INTO `init_predict` VALUES ('w2.COD', '电石厂酸水.COD', '');
-INSERT INTO `init_predict` VALUES ('w2.NH3N', '电石厂酸水.NH3N', '');
-INSERT INTO `init_predict` VALUES ('w2.PH', '电石厂酸水.PH', '');
-INSERT INTO `init_predict` VALUES ('w2.Q', '电石厂酸水.流量', '');
-INSERT INTO `init_predict` VALUES ('w2.SS', '电石厂酸水.SS', '');
-INSERT INTO `init_predict` VALUES ('w3.BOD5', '电石厂有机水.BOD5', '');
-INSERT INTO `init_predict` VALUES ('w3.COD', '电石厂有机水.COD', '');
-INSERT INTO `init_predict` VALUES ('w3.NH3N', '电石厂有机水.NH3N', '');
-INSERT INTO `init_predict` VALUES ('w3.PH', '电石厂有机水.PH', '');
-INSERT INTO `init_predict` VALUES ('w3.Q', '电石厂有机水.流量', '');
-INSERT INTO `init_predict` VALUES ('w3.SS', '电石厂有机水.SS', '');
-INSERT INTO `init_predict` VALUES ('w4.BOD5', '电石厂有机水.BOD5', '');
-INSERT INTO `init_predict` VALUES ('w4.COD', '有机合成厂有机水.COD', '');
-INSERT INTO `init_predict` VALUES ('w4.NH3N', '有机合成厂有机水.NH3N', '');
-INSERT INTO `init_predict` VALUES ('w4.PH', '有机合成厂有机水.PH', '');
-INSERT INTO `init_predict` VALUES ('w4.Q', '有机合成厂有机水.流量', '');
-INSERT INTO `init_predict` VALUES ('w4.SS', '有机合成厂有机水.SS', '');
-INSERT INTO `init_predict` VALUES ('w5.BOD5', '炼油厂有机水.BOD5', '');
-INSERT INTO `init_predict` VALUES ('w5.COD', '炼油厂有机水.COD', '');
-INSERT INTO `init_predict` VALUES ('w5.NH3N', '炼油厂有机水.NH3N', '');
-INSERT INTO `init_predict` VALUES ('w5.PH', '炼油厂有机水.PH', '');
-INSERT INTO `init_predict` VALUES ('w5.Q', '炼油厂有机水.流量', '');
-INSERT INTO `init_predict` VALUES ('w5.SS', '炼油厂有机水.SS', '');
-INSERT INTO `init_predict` VALUES ('w6.BOD5', '精细化工厂废水.BOD5', '');
-INSERT INTO `init_predict` VALUES ('w6.COD', '精细化工厂废水.COD', '');
-INSERT INTO `init_predict` VALUES ('w6.NH3N', '精细化工厂废水.NH3N', '');
-INSERT INTO `init_predict` VALUES ('w6.PH', '精细化工厂废水.PH', '');
-INSERT INTO `init_predict` VALUES ('w6.Q', '精细化工厂废水.流量', '');
-INSERT INTO `init_predict` VALUES ('w6.SS', '精细化工厂废水.SS', '');
-INSERT INTO `init_predict` VALUES ('w62.AIRA101', '进水提升泵房(462A).462A进水提升泵房COD', '1');
-INSERT INTO `init_predict` VALUES ('w62.AIRA102', '进水提升泵房(462A).462A进水提升泵房NH3-N', '1');
-INSERT INTO `init_predict` VALUES ('w62.AIRA107', '进水提升泵房(462A).462A.进水提升泵房PH', '1');
-INSERT INTO `init_predict` VALUES ('w62.AIRA108', '进水提升泵房(462A).462A进水提升泵房SS', '0');
-INSERT INTO `init_predict` VALUES ('w62.LDISA101', '进水提升泵房(462A).1#粗格栅前后液位差', '1');
-INSERT INTO `init_predict` VALUES ('w62.LDISA102', '进水提升泵房(462A).2#粗格栅前后液位差', '1');
-INSERT INTO `init_predict` VALUES ('w62.LDISA103', '进水提升泵房(462A).3#粗格栅前后液位差', '1');
-INSERT INTO `init_predict` VALUES ('w62.LISA104', '进水提升泵房(462A).462A吸水池液位', '1');
-INSERT INTO `init_predict` VALUES ('w62.P1STATUS', '进水提升泵房(462A).1#潜水排污泵状态', '1');
-INSERT INTO `init_predict` VALUES ('w62.P2STATUS', '进水提升泵房(462A).2#潜水排污泵状态', '1');
-INSERT INTO `init_predict` VALUES ('w62.P3STATUS', '进水提升泵房(462A).3#潜水排污泵状态', '1');
-INSERT INTO `init_predict` VALUES ('w62.P4STATUS', '进水提升泵房(462A).4#潜水排污泵状态', '1');
-INSERT INTO `init_predict` VALUES ('w62.P5STATUS5', '进水提升泵房(462A).5#潜水排污泵状态', '1');
-INSERT INTO `init_predict` VALUES ('w63.FRQ101', '巴氏计量槽(499).水量', '1');
-INSERT INTO `init_predict` VALUES ('w63.LIR106', '巴氏计量槽(499).巴氏计量槽前液位', '1');
-INSERT INTO `init_predict` VALUES ('w63.LIR107', '巴氏计量槽(499).巴氏计量槽后液位', '1');
-INSERT INTO `init_predict` VALUES ('w65.M4881', '沉沙刮沙池(488).M488-1#刮沙机', '0');
-INSERT INTO `init_predict` VALUES ('w65.M4882', '沉沙刮沙池(488).M488-2#刮沙机', '0');
-INSERT INTO `init_predict` VALUES ('w65.M4883', '沉沙刮沙池(488).M488-3#刮沙机', '0');
-INSERT INTO `init_predict` VALUES ('w65.M4884', '沉沙刮沙池(488).M488-3#刮沙机', '0');
-INSERT INTO `init_predict` VALUES ('w66.M4891S', '初沉池(489B).M489-1#周边传动刮泥机', '0');
-INSERT INTO `init_predict` VALUES ('w66.M4892S', '初沉池(489B).M489-2#周边传动刮泥机', '0');
-INSERT INTO `init_predict` VALUES ('w66.M4893S', '初沉池(489B).M489-3#周边传动刮泥机', '0');
-INSERT INTO `init_predict` VALUES ('w69.LIA114', '老水解酸化池.老水解酸化池液位', '1');
-INSERT INTO `init_predict` VALUES ('w7.BOD5', '乙二醇废水.BOD5', '');
-INSERT INTO `init_predict` VALUES ('w7.COD', '乙二醇废水.COD', '');
-INSERT INTO `init_predict` VALUES ('w7.NH3N', '乙二醇废水.NH3N', '');
-INSERT INTO `init_predict` VALUES ('w7.PH', '乙二醇废水.PH', '');
-INSERT INTO `init_predict` VALUES ('w7.Q', '乙二醇废水.流量', '');
-INSERT INTO `init_predict` VALUES ('w7.SS', '乙二醇废水.SS', '');
-INSERT INTO `init_predict` VALUES ('w70.LIA115', '新水解酸化池.新水解酸化池液位', '1');
-INSERT INTO `init_predict` VALUES ('w71.FRQ103', '污泥池(V466).P466-1-2泵出口干管流量', '');
-INSERT INTO `init_predict` VALUES ('w71.FRQ104', '污泥池(V466).P466-3-4泵出口干管流量', '');
-INSERT INTO `init_predict` VALUES ('w71.LISA119', '污泥泵房(466).V466污泥池前液位', '');
-INSERT INTO `init_predict` VALUES ('w73.FI106', '脱水装置(495).P495A-1流量', '');
-INSERT INTO `init_predict` VALUES ('w73.FI107', '脱水装置(495).P495A-2流量', '');
-INSERT INTO `init_predict` VALUES ('w73.FI108', '脱水装置(495).P495A-3流量', '');
-INSERT INTO `init_predict` VALUES ('w73.FI109', '脱水装置(495).P495A-4流量', '');
-INSERT INTO `init_predict` VALUES ('w73.FI110', '脱水装置(495).P495A-5流量', '');
-INSERT INTO `init_predict` VALUES ('w73.FI111', '脱水装置(495).P495A-6流量', '');
-INSERT INTO `init_predict` VALUES ('w73.LISA122', '脱水装置(495).V495A-5液位', '');
-INSERT INTO `init_predict` VALUES ('w73.LISA123', '脱水装置(495).药剂池V495-3液位', '');
-INSERT INTO `init_predict` VALUES ('w73.LISA124', '脱水装置(495).药剂池V495-4液位', '');
-INSERT INTO `init_predict` VALUES ('w73.R4951', '脱水装置(495).1#带式压榨过滤机状态', '');
-INSERT INTO `init_predict` VALUES ('w73.R4952', '脱水装置(495).2#带式压榨过滤机状态', '');
-INSERT INTO `init_predict` VALUES ('w73.R4953', '脱水装置(495).3#带式压榨过滤机状态', '');
-INSERT INTO `init_predict` VALUES ('w73.R4954', '脱水装置(495).4#带式压榨过滤机状态', '');
-INSERT INTO `init_predict` VALUES ('w73.R4955', '脱水装置(495).5#带式压榨过滤机状态', '');
-INSERT INTO `init_predict` VALUES ('w74.AIRA103', '中间提升泵房(462B).462B吸水池COD', '1');
-INSERT INTO `init_predict` VALUES ('w74.AIRA104', '中间提升泵房(462B).462B吸水池NH3-N', '1');
-INSERT INTO `init_predict` VALUES ('w74.AIRA105', '中间提升泵房(462B).462B吸水池SS', '0');
-INSERT INTO `init_predict` VALUES ('w74.AIRA106', '中间提升泵房(462B).462B吸水池PH', '0');
-INSERT INTO `init_predict` VALUES ('w74.LIS117', '中间提升泵房(462B).V462B-3高位水池液位', '1');
-INSERT INTO `init_predict` VALUES ('w74.LISA116', '中间提升泵房(462B).462B泵房吸水池液位', '1');
-INSERT INTO `init_predict` VALUES ('w74.LISA118', '中间提升泵房(462B).药剂池液位', '3');
-INSERT INTO `init_predict` VALUES ('w74.P462B-10', '中间提升泵房(462B).药剂泵状态', '3');
-INSERT INTO `init_predict` VALUES ('w74.P462B-9', '中间提升泵房(462B).药剂泵状态', '3');
-INSERT INTO `init_predict` VALUES ('w75.AIR209', '1系列生化池.1号生化池3段溶解氧DO', '1');
-INSERT INTO `init_predict` VALUES ('w75.AIR210', '1系列生化池.2号生化池3段溶解氧DO', '1');
-INSERT INTO `init_predict` VALUES ('w75.AIR229', '1系列生化池.1号生化池PH', '1');
-INSERT INTO `init_predict` VALUES ('w75.AIR230', '1系列生化池.2号生化池PH', '1');
-INSERT INTO `init_predict` VALUES ('w75.AIRC205', '1系列生化池.1号生化池2段溶解氧DO', '1');
-INSERT INTO `init_predict` VALUES ('w75.AIRC206', '1系列生化池.2号生化池2段溶解氧DO', '1');
-INSERT INTO `init_predict` VALUES ('w75.AIRC213', '1系列生化池.1号生化池5段溶解氧DO', '1');
-INSERT INTO `init_predict` VALUES ('w75.AIRC214', '1系列生化池.2号生化池5段溶解氧DO', '1');
-INSERT INTO `init_predict` VALUES ('w75.FR601A', '1系列生化池.1#鼓风机分量', '0');
-INSERT INTO `init_predict` VALUES ('w75.TIR201', '1系列生化池.1号生化池温度', '1');
-INSERT INTO `init_predict` VALUES ('w75.TIR202', '1系列生化池.2号生化池温度', '1');
-INSERT INTO `init_predict` VALUES ('w76.AIR211', '2系列生化池.3号生化池3段溶解氧DO', '1');
-INSERT INTO `init_predict` VALUES ('w76.AIR212', '2系列生化池.4号生化池3段溶解氧DO', '1');
-INSERT INTO `init_predict` VALUES ('w76.AIR231', '2系列生化池.3号生化池PH', '1');
-INSERT INTO `init_predict` VALUES ('w76.AIR232', '2系列生化池.4号生化池PH', '1');
-INSERT INTO `init_predict` VALUES ('w76.AIRC207', '2系列生化池.3号生化池2段溶解氧DO', '1');
-INSERT INTO `init_predict` VALUES ('w76.AIRC208', '2系列生化池.4号生化池2段溶解氧DO', '1');
-INSERT INTO `init_predict` VALUES ('w76.AIRC215', '2系列生化池.3号生化池5段溶解氧DO', '1');
-INSERT INTO `init_predict` VALUES ('w76.AIRC216', '2系列生化池.4号生化池5段溶解氧DO', '1');
-INSERT INTO `init_predict` VALUES ('w76.FR601B', '2系列生化池.2#鼓风机分量', '0');
-INSERT INTO `init_predict` VALUES ('w76.TIR203', '2系列生化池.3号生化池温度', '1');
-INSERT INTO `init_predict` VALUES ('w76.TIR204', '2系列生化池.4号生化池温度', '1');
-INSERT INTO `init_predict` VALUES ('w77.AIR201', '3系列生化池.5号生化池A段溶解氧DO', '1');
-INSERT INTO `init_predict` VALUES ('w77.AIR202', '3系列生化池.6号生化池A段溶解氧DO', '1');
-INSERT INTO `init_predict` VALUES ('w77.AIR233', '3系列生化池.5号生化池PH', '1');
-INSERT INTO `init_predict` VALUES ('w77.AIR234', '3系列生化池.6号生化池PH', '1');
-INSERT INTO `init_predict` VALUES ('w77.AIRC217', '3系列生化池.5号生化池2段溶解氧DO', '1');
-INSERT INTO `init_predict` VALUES ('w77.AIRC218', '3系列生化池.6号生化池2段溶解氧DO', '1');
-INSERT INTO `init_predict` VALUES ('w77.AIRC221', '3系列生化池.5号生化池4段溶解氧DO', '1');
-INSERT INTO `init_predict` VALUES ('w77.AIRC222', '3系列生化池.6号生化池4段溶解氧DO', '1');
-INSERT INTO `init_predict` VALUES ('w77.AIRC225', '3系列生化池.5号生化池6段溶解氧DO', '1');
-INSERT INTO `init_predict` VALUES ('w77.AIRC226', '3系列生化池.6号生化池6段溶解氧DO', '1');
-INSERT INTO `init_predict` VALUES ('w77.FR601C', '3系列生化池.3#鼓风机分量', '0');
-INSERT INTO `init_predict` VALUES ('w77.TIR205', '3系列生化池.5号生化池温度', '1');
-INSERT INTO `init_predict` VALUES ('w77.TIR206', '3系列生化池.6号生化池温度', '1');
-INSERT INTO `init_predict` VALUES ('w78.AIR203', '4系列生化池.7号生化池A段溶解氧DO', '1');
-INSERT INTO `init_predict` VALUES ('w78.AIR204', '4系列生化池.8号生化池A段溶解氧DO', '1');
-INSERT INTO `init_predict` VALUES ('w78.AIR235', '4系列生化池.7号生化池PH', '1');
-INSERT INTO `init_predict` VALUES ('w78.AIR236', '4系列生化池.8号生化池PH', '1');
-INSERT INTO `init_predict` VALUES ('w78.AIRC219', '4系列生化池.7号生化池2段溶解氧DO', '1');
-INSERT INTO `init_predict` VALUES ('w78.AIRC220', '4系列生化池.8号生化池2段溶解氧DO', '1');
-INSERT INTO `init_predict` VALUES ('w78.AIRC223', '4系列生化池.7号生化池4段溶解氧DO', '1');
-INSERT INTO `init_predict` VALUES ('w78.AIRC224', '4系列生化池.8号生化池4段溶解氧DO', '1');
-INSERT INTO `init_predict` VALUES ('w78.AIRC227', '4系列生化池.7号生化池6段溶解氧DO', '1');
-INSERT INTO `init_predict` VALUES ('w78.AIRC228', '4系列生化池.8号生化池6段溶解氧DO', '1');
-INSERT INTO `init_predict` VALUES ('w78.FR601B', '4系列生化池.4#鼓风机分量', '0');
-INSERT INTO `init_predict` VALUES ('w78.TIR207', '4系列生化池.7号生化池温度', '1');
-INSERT INTO `init_predict` VALUES ('w78.TIR208', '4系列生化池.8号生化池温度', '1');
-INSERT INTO `init_predict` VALUES ('w8.BOD5', '环氧乙烷废水.BOD5', '');
-INSERT INTO `init_predict` VALUES ('w8.COD', '环氧乙烷废水.COD', '');
-INSERT INTO `init_predict` VALUES ('w8.NH3N', '环氧乙烷废水.NH3N', '');
-INSERT INTO `init_predict` VALUES ('w8.PH', '环氧乙烷废水.PH', '');
-INSERT INTO `init_predict` VALUES ('w8.Q', '环氧乙烷废水.流量', '');
-INSERT INTO `init_predict` VALUES ('w8.SS', '环氧乙烷废水.SS', '');
-INSERT INTO `init_predict` VALUES ('w83.LIR803', '接触氧化池.1-3号池浓度', '3');
-INSERT INTO `init_predict` VALUES ('w83.LIR804', '接触氧化池.4-5号池浓度', '3');
-INSERT INTO `init_predict` VALUES ('w85.AIRA801', '排江出口线.出口PH', '1');
-INSERT INTO `init_predict` VALUES ('w85.AIRA802', '排江出口线.出口SS', '1');
-INSERT INTO `init_predict` VALUES ('w85.AIRA803', '排江出口线.出口COD', '1');
-INSERT INTO `init_predict` VALUES ('w85.AIRA804', '排江出口线.出口NH3-N', '1');
-INSERT INTO `init_predict` VALUES ('w85.AIRA805', '排江出口线.出口DO', '0');
-INSERT INTO `init_predict` VALUES ('w86.FRCQ201', '1系列465回流泵房.回流泵房回流490A3量', '1');
-INSERT INTO `init_predict` VALUES ('w86.FRCQ202', '1系列465回流泵房.回流泵房回流490A4量', '1');
-INSERT INTO `init_predict` VALUES ('w86.FRQ203', '1系列465回流泵房.回流泵房回流467量', '1');
-INSERT INTO `init_predict` VALUES ('w86.LIA201', '1系列465回流泵房.465吸泥池液位', '1');
-INSERT INTO `init_predict` VALUES ('w87.FRCQ204', '2系列465A回流泵房.2系列465A回流泵房回流量', '?');
-INSERT INTO `init_predict` VALUES ('w87.FRQ205', '2系列465A回流泵房.2系列465A回流泵房剩余量', '?');
-INSERT INTO `init_predict` VALUES ('w87.LISA202', '2系列465A回流泵房.465A吸泥池液位', '1');
-INSERT INTO `init_predict` VALUES ('w88.FRCQ206', '3系列465B回流泵房.3系列465B回流泵房回流量', '?');
-INSERT INTO `init_predict` VALUES ('w88.FRQ207', '3系列465B回流泵房.3系列465B回流泵房剩余量', '?');
-INSERT INTO `init_predict` VALUES ('w88.LISA203', '3系列465B回流泵房.465B吸泥池液位', '1');
-INSERT INTO `init_predict` VALUES ('w9.BOD5', '农药厂有机水.BOD5', '');
-INSERT INTO `init_predict` VALUES ('w9.COD', '农药厂有机水.COD', '');
-INSERT INTO `init_predict` VALUES ('w9.NH3N', '农药厂有机水.NH3N', '');
-INSERT INTO `init_predict` VALUES ('w9.PH', '农药厂有机水.PH', '');
-INSERT INTO `init_predict` VALUES ('w9.Q', '农药厂有机水.流量', '');
-INSERT INTO `init_predict` VALUES ('w9.SS', '农药厂有机水.SS', '');
-INSERT INTO `init_predict` VALUES ('WW14A.BOD5', '14A生活水.BOD5', '');
-INSERT INTO `init_predict` VALUES ('WW14A.COD', '14A生活水.COD', '');
-INSERT INTO `init_predict` VALUES ('WW14A.NH3N', '14A生活水.NH3N', '');
-INSERT INTO `init_predict` VALUES ('WW14A.PH', '14A生活水.PH', '');
-INSERT INTO `init_predict` VALUES ('WW14A.Q', '14A生活水.流量', '');
-INSERT INTO `init_predict` VALUES ('WW14A.SS', '14A生活水.SS', '');
-INSERT INTO `init_predict` VALUES ('WW14B.BOD5', '14B生活水.BOD5', '');
-INSERT INTO `init_predict` VALUES ('WW14B.COD', '14B生活水.COD', '');
-INSERT INTO `init_predict` VALUES ('WW14B.NH3N', '14B生活水.NH3N', '');
-INSERT INTO `init_predict` VALUES ('WW14B.PH', '14B生活水.PH', '');
-INSERT INTO `init_predict` VALUES ('WW14B.Q', '14B生活水.流量', '');
-INSERT INTO `init_predict` VALUES ('WW14B.SS', '14B生活水.SS', '');
+INSERT INTO `init_predict` VALUES ('w1.BOD5', '染料厂酸水.BOD5', null);
+INSERT INTO `init_predict` VALUES ('w1.COD', '染料厂酸水.COD', null);
+INSERT INTO `init_predict` VALUES ('w1.NH3-N', '染料厂酸水.NH3-N', null);
+INSERT INTO `init_predict` VALUES ('w1.PH', '染料厂酸水.PH', null);
+INSERT INTO `init_predict` VALUES ('w1.Q', '染料厂酸水.水量', null);
+INSERT INTO `init_predict` VALUES ('w1.SS', '染料厂酸水.SS', null);
+INSERT INTO `init_predict` VALUES ('w10.BOD5', '铁运489沉淀池出水.BOD5', null);
+INSERT INTO `init_predict` VALUES ('w10.COD', '铁运489沉淀池出水.COD', null);
+INSERT INTO `init_predict` VALUES ('w10.NH3-N', '铁运489沉淀池出水.NH3-N', null);
+INSERT INTO `init_predict` VALUES ('w10.PH', '铁运489沉淀池出水.PH', null);
+INSERT INTO `init_predict` VALUES ('w10.Q', '铁运489沉淀池出水.水量', null);
+INSERT INTO `init_predict` VALUES ('w10.SS', '铁运489沉淀池出水.SS', null);
+INSERT INTO `init_predict` VALUES ('w11.BOD5', '含氮废水.BOD5', null);
+INSERT INTO `init_predict` VALUES ('w11.COD', '含氮废水.COD', null);
+INSERT INTO `init_predict` VALUES ('w11.NH3-N', '含氮废水.NH3-N', null);
+INSERT INTO `init_predict` VALUES ('w11.PH', '含氮废水.PH', null);
+INSERT INTO `init_predict` VALUES ('w11.Q', '含氮废水.水量', null);
+INSERT INTO `init_predict` VALUES ('w11.SS', '含氮废水.SS', null);
+INSERT INTO `init_predict` VALUES ('w12.BOD5', '103厂碱水.BOD5', null);
+INSERT INTO `init_predict` VALUES ('w12.COD', '103厂碱水.COD', null);
+INSERT INTO `init_predict` VALUES ('w12.NH3-N', '103厂碱水.NH3-N', null);
+INSERT INTO `init_predict` VALUES ('w12.PH', '103厂碱水.PH', null);
+INSERT INTO `init_predict` VALUES ('w12.Q', '103厂碱水.水量', null);
+INSERT INTO `init_predict` VALUES ('w12.SS', '103厂碱水.SS', null);
+INSERT INTO `init_predict` VALUES ('w13.BOD5', '化肥厂丁辛醇.BOD5', null);
+INSERT INTO `init_predict` VALUES ('w13.COD', '化肥厂丁辛醇.COD', null);
+INSERT INTO `init_predict` VALUES ('w13.NH3-N', '化肥厂丁辛醇.NH3-N', null);
+INSERT INTO `init_predict` VALUES ('w13.PH', '化肥厂丁辛醇.PH', null);
+INSERT INTO `init_predict` VALUES ('w13.Q', '化肥厂丁辛醇.水量', null);
+INSERT INTO `init_predict` VALUES ('w13.SS', '化肥厂丁辛醇.SS', null);
+INSERT INTO `init_predict` VALUES ('w14.BOD5', '丙烯腈废水.BOD5', null);
+INSERT INTO `init_predict` VALUES ('w14.COD', '丙烯腈废水.COD', null);
+INSERT INTO `init_predict` VALUES ('w14.NH3-N', '丙烯腈废水.NH3-N', null);
+INSERT INTO `init_predict` VALUES ('w14.PH', '丙烯腈废水.PH', null);
+INSERT INTO `init_predict` VALUES ('w14.Q', '丙烯腈废水.水量', null);
+INSERT INTO `init_predict` VALUES ('w14.SS', '丙烯腈废水.SS', null);
+INSERT INTO `init_predict` VALUES ('w15.BOD5', '合成树脂厂有机水.BOD5', null);
+INSERT INTO `init_predict` VALUES ('w15.COD', '合成树脂厂有机水.COD', null);
+INSERT INTO `init_predict` VALUES ('w15.NH3-N', '合成树脂厂有机水.NH3-N', null);
+INSERT INTO `init_predict` VALUES ('w15.PH', '合成树脂厂有机水.PH', null);
+INSERT INTO `init_predict` VALUES ('w15.Q', '合成树脂厂有机水.水量', null);
+INSERT INTO `init_predict` VALUES ('w15.SS', '合成树脂厂有机水.SS', null);
+INSERT INTO `init_predict` VALUES ('w16.BOD5', '龙潭区生活水.BOD5', null);
+INSERT INTO `init_predict` VALUES ('w16.COD', '龙潭区生活水.COD', null);
+INSERT INTO `init_predict` VALUES ('w16.NH3-N', '龙潭区生活水.NH3-N', null);
+INSERT INTO `init_predict` VALUES ('w16.PH', '龙潭区生活水.PH', null);
+INSERT INTO `init_predict` VALUES ('w16.Q', '龙潭区生活水.水量', null);
+INSERT INTO `init_predict` VALUES ('w16.SS', '龙潭区生活水.SS', null);
+INSERT INTO `init_predict` VALUES ('w2.BOD5', '电石厂酸水.BOD5', null);
+INSERT INTO `init_predict` VALUES ('w2.COD', '电石厂酸水.COD', null);
+INSERT INTO `init_predict` VALUES ('w2.NH3-N', '电石厂酸水.NH3-N', null);
+INSERT INTO `init_predict` VALUES ('w2.PH', '电石厂酸水.PH', null);
+INSERT INTO `init_predict` VALUES ('w2.Q', '电石厂酸水.水量', null);
+INSERT INTO `init_predict` VALUES ('w2.SS', '电石厂酸水.SS', null);
+INSERT INTO `init_predict` VALUES ('w3.BOD5', '电石厂有机水.BOD5', null);
+INSERT INTO `init_predict` VALUES ('w3.COD', '电石厂有机水.COD', null);
+INSERT INTO `init_predict` VALUES ('w3.NH3-N', '电石厂有机水.NH3-N', null);
+INSERT INTO `init_predict` VALUES ('w3.PH', '电石厂有机水.PH', null);
+INSERT INTO `init_predict` VALUES ('w3.Q', '电石厂有机水.水量', null);
+INSERT INTO `init_predict` VALUES ('w3.SS', '电石厂有机水.SS', null);
+INSERT INTO `init_predict` VALUES ('w4.COD', '有机合成厂有机水.COD', null);
+INSERT INTO `init_predict` VALUES ('w4.NH3-N', '有机合成厂有机水.NH3-N', null);
+INSERT INTO `init_predict` VALUES ('w4.PH', '有机合成厂有机水.PH', null);
+INSERT INTO `init_predict` VALUES ('w4.Q', '有机合成厂有机水.水量', null);
+INSERT INTO `init_predict` VALUES ('w4.SS', '有机合成厂有机水.SS', null);
+INSERT INTO `init_predict` VALUES ('w5.BOD5', '炼油厂有机水.BOD5', null);
+INSERT INTO `init_predict` VALUES ('w5.COD', '炼油厂有机水.COD', null);
+INSERT INTO `init_predict` VALUES ('w5.NH3-N', '炼油厂有机水.NH3-N', null);
+INSERT INTO `init_predict` VALUES ('w5.PH', '炼油厂有机水.PH', null);
+INSERT INTO `init_predict` VALUES ('w5.Q', '炼油厂有机水.水量', null);
+INSERT INTO `init_predict` VALUES ('w5.SS', '炼油厂有机水.SS', null);
+INSERT INTO `init_predict` VALUES ('w6.BOD5', '精细化工厂废水.BOD5', null);
+INSERT INTO `init_predict` VALUES ('w6.COD', '精细化工厂废水.COD', null);
+INSERT INTO `init_predict` VALUES ('w6.NH3-N', '精细化工厂废水.NH3-N', null);
+INSERT INTO `init_predict` VALUES ('w6.PH', '精细化工厂废水.PH', null);
+INSERT INTO `init_predict` VALUES ('w6.Q', '精细化工厂废水.水量', null);
+INSERT INTO `init_predict` VALUES ('w6.SS', '精细化工厂废水.SS', null);
+INSERT INTO `init_predict` VALUES ('w62.AIRA101', '进水提升泵房(462A).COD', null);
+INSERT INTO `init_predict` VALUES ('w62.AIRA102', '进水提升泵房(462A).NH3-N', null);
+INSERT INTO `init_predict` VALUES ('w62.AIRA107', '进水提升泵房(462A).PH', null);
+INSERT INTO `init_predict` VALUES ('w62.AIRA108', '进水提升泵房(462A).SS', null);
+INSERT INTO `init_predict` VALUES ('w62.LDISA101', '进水提升泵房(462A).1号粗格栅前后液位差', null);
+INSERT INTO `init_predict` VALUES ('w62.LDISA102', '进水提升泵房(462A).2号粗格栅前后液位差', null);
+INSERT INTO `init_predict` VALUES ('w62.LDISA103', '进水提升泵房(462A).3号粗格栅前后液位差', null);
+INSERT INTO `init_predict` VALUES ('w62.LISA104', '进水提升泵房(462A).液位', null);
+INSERT INTO `init_predict` VALUES ('w62.P1STATUS', '进水提升泵房(462A).1号潜水排污泵状态', null);
+INSERT INTO `init_predict` VALUES ('w62.P2STATUS', '进水提升泵房(462A).2号潜水排污泵状态', null);
+INSERT INTO `init_predict` VALUES ('w62.P3STATUS', '进水提升泵房(462A).3号潜水排污泵状态', null);
+INSERT INTO `init_predict` VALUES ('w62.P4STATUS', '进水提升泵房(462A).4号潜水排污泵状态', null);
+INSERT INTO `init_predict` VALUES ('w62.P5STATUS5', '进水提升泵房(462A).5号潜水排污泵状态', null);
+INSERT INTO `init_predict` VALUES ('w63.FRQ101', '巴氏计量槽(499).水量', null);
+INSERT INTO `init_predict` VALUES ('w63.LIR106', '巴氏计量槽(499).前液位', null);
+INSERT INTO `init_predict` VALUES ('w63.LIR107', '巴氏计量槽(499).后液位', null);
+INSERT INTO `init_predict` VALUES ('w65.M4881', '沉沙刮沙池(488).M488-1号刮沙机', null);
+INSERT INTO `init_predict` VALUES ('w65.M4882', '沉沙刮沙池(488).M488-2号刮沙机', null);
+INSERT INTO `init_predict` VALUES ('w65.M4883', '沉沙刮沙池(488).M488-3号刮沙机', null);
+INSERT INTO `init_predict` VALUES ('w65.M4884', '沉沙刮沙池(488).M488-4号刮沙机', null);
+INSERT INTO `init_predict` VALUES ('w66.M4891S', '初沉池(489B).M489-1号周边传动刮泥机', null);
+INSERT INTO `init_predict` VALUES ('w66.M4892S', '初沉池(489B).M489-2号周边传动刮泥机', null);
+INSERT INTO `init_predict` VALUES ('w66.M4893S', '初沉池(489B).M489-3号周边传动刮泥机', null);
+INSERT INTO `init_predict` VALUES ('w69.LIA114', '老水解酸化池.液位', null);
+INSERT INTO `init_predict` VALUES ('w7.BOD5', '乙二醇废水.BOD5', null);
+INSERT INTO `init_predict` VALUES ('w7.COD', '乙二醇废水.COD', null);
+INSERT INTO `init_predict` VALUES ('w7.NH3-N', '乙二醇废水.NH3-N', null);
+INSERT INTO `init_predict` VALUES ('w7.PH', '乙二醇废水.PH', null);
+INSERT INTO `init_predict` VALUES ('w7.Q', '乙二醇废水.水量', null);
+INSERT INTO `init_predict` VALUES ('w7.SS', '乙二醇废水.SS', null);
+INSERT INTO `init_predict` VALUES ('w70.LIA115', '新水解酸化池.液位', null);
+INSERT INTO `init_predict` VALUES ('w71.FRQ103', '污泥泵房(466).P466-1-2泵出口干管流量', null);
+INSERT INTO `init_predict` VALUES ('w71.FRQ104', '污泥泵房(466).P466-3-4泵出口干管流量', null);
+INSERT INTO `init_predict` VALUES ('w71.LISA119', '污泥泵房(466).V466污泥池前液位', null);
+INSERT INTO `init_predict` VALUES ('w73.FI106', '脱水装置(495).P495A-1流量', null);
+INSERT INTO `init_predict` VALUES ('w73.FI107', '脱水装置(495).P495A-2流量', null);
+INSERT INTO `init_predict` VALUES ('w73.FI108', '脱水装置(495).P495A-3流量', null);
+INSERT INTO `init_predict` VALUES ('w73.FI109', '脱水装置(495).P495A-4流量', null);
+INSERT INTO `init_predict` VALUES ('w73.FI110', '脱水装置(495).P495A-5流量', null);
+INSERT INTO `init_predict` VALUES ('w73.FI111', '脱水装置(495).P495A-6流量', null);
+INSERT INTO `init_predict` VALUES ('w73.LISA122', '脱水装置(495).V495A-5液位', null);
+INSERT INTO `init_predict` VALUES ('w73.LISA123', '脱水装置(495).药剂池V495-3液位', null);
+INSERT INTO `init_predict` VALUES ('w73.LISA124', '脱水装置(495).药剂池V495-4液位', null);
+INSERT INTO `init_predict` VALUES ('w73.R4951', '脱水装置(495).1号带式压榨过滤机状态', null);
+INSERT INTO `init_predict` VALUES ('w73.R4952', '脱水装置(495).2号带式压榨过滤机状态', null);
+INSERT INTO `init_predict` VALUES ('w73.R4953', '脱水装置(495).3号带式压榨过滤机状态', null);
+INSERT INTO `init_predict` VALUES ('w73.R4954', '脱水装置(495).4号带式压榨过滤机状态', null);
+INSERT INTO `init_predict` VALUES ('w73.R4955', '脱水装置(495).5号带式压榨过滤机状态', null);
+INSERT INTO `init_predict` VALUES ('w74.AIRA103', '中间提升泵房(462B).COD', null);
+INSERT INTO `init_predict` VALUES ('w74.AIRA104', '中间提升泵房(462B).NH3-N', null);
+INSERT INTO `init_predict` VALUES ('w74.AIRA105', '中间提升泵房(462B).SS', null);
+INSERT INTO `init_predict` VALUES ('w74.AIRA106', '中间提升泵房(462B).PH', null);
+INSERT INTO `init_predict` VALUES ('w74.LIS117', '中间提升泵房(462B).V462B-3高位水池液位', null);
+INSERT INTO `init_predict` VALUES ('w74.LISA116', '中间提升泵房(462B).吸水池液位', null);
+INSERT INTO `init_predict` VALUES ('w74.LISA118', '中间提升泵房(462B).药剂池液位', null);
+INSERT INTO `init_predict` VALUES ('w74.P462B-10', '中间提升泵房(462B).药剂泵状态', null);
+INSERT INTO `init_predict` VALUES ('w74.P462B-9', '中间提升泵房(462B).药剂泵状态', null);
+INSERT INTO `init_predict` VALUES ('w75.AIR209', '生化池系列1(1号生化池).3段溶解氧DO', null);
+INSERT INTO `init_predict` VALUES ('w75.AIR210', '生化池系列1(2号生化池).3段溶解氧DO', null);
+INSERT INTO `init_predict` VALUES ('w75.AIR229', '生化池系列1(1号生化池).PH', null);
+INSERT INTO `init_predict` VALUES ('w75.AIR230', '生化池系列1(2号生化池).PH', null);
+INSERT INTO `init_predict` VALUES ('w75.AIRC205', '生化池系列1(1号生化池).2段溶解氧DO', null);
+INSERT INTO `init_predict` VALUES ('w75.AIRC206', '生化池系列1(2号生化池).2段溶解氧DO', null);
+INSERT INTO `init_predict` VALUES ('w75.AIRC213', '生化池系列1(1号生化池).5段溶解氧DO', null);
+INSERT INTO `init_predict` VALUES ('w75.AIRC214', '生化池系列1(2号生化池).5段溶解氧DO', null);
+INSERT INTO `init_predict` VALUES ('w75.FR601A', '生化池系列1(1号生化池).鼓风机风量', null);
+INSERT INTO `init_predict` VALUES ('w75.TIR201', '生化池系列1(1号生化池).温度', null);
+INSERT INTO `init_predict` VALUES ('w75.TIR202', '生化池系列1(2号生化池).温度', null);
+INSERT INTO `init_predict` VALUES ('w76.AIR231', '生化池系列2(3号生化池).PH', null);
+INSERT INTO `init_predict` VALUES ('w76.AIR232', '生化池系列2(4号生化池).PH', null);
+INSERT INTO `init_predict` VALUES ('w76.AIRC207', '生化池系列2(3号生化池).2段溶解氧DO', null);
+INSERT INTO `init_predict` VALUES ('w76.AIRC208', '生化池系列2(4号生化池).2段溶解氧DO', null);
+INSERT INTO `init_predict` VALUES ('w76.AIRC211', '生化池系列2(3号生化池).3段溶解氧DO', null);
+INSERT INTO `init_predict` VALUES ('w76.AIRC212', '生化池系列2(4号生化池).3段溶解氧DO', null);
+INSERT INTO `init_predict` VALUES ('w76.AIRC215', '生化池系列2(3号生化池).5段溶解氧DO', null);
+INSERT INTO `init_predict` VALUES ('w76.AIRC216', '生化池系列2(4号生化池).5段溶解氧DO', null);
+INSERT INTO `init_predict` VALUES ('w76.FR601B', '生化池系列2(3号生化池).鼓风机分量', null);
+INSERT INTO `init_predict` VALUES ('w76.TIR203', '生化池系列2(3号生化池).温度', null);
+INSERT INTO `init_predict` VALUES ('w76.TIR204', '生化池系列2(4号生化池).温度', null);
+INSERT INTO `init_predict` VALUES ('w77.AIR201', '生化池系列3(5号生化池).A段溶解氧DO', null);
+INSERT INTO `init_predict` VALUES ('w77.AIR202', '生化池系列3(6号生化池).A段溶解氧DO', null);
+INSERT INTO `init_predict` VALUES ('w77.AIR233', '生化池系列3(5号生化池).PH', null);
+INSERT INTO `init_predict` VALUES ('w77.AIR234', '生化池系列3(6号生化池).PH', null);
+INSERT INTO `init_predict` VALUES ('w77.AIRC217', '生化池系列3(5号生化池).2段溶解氧DO', null);
+INSERT INTO `init_predict` VALUES ('w77.AIRC218', '生化池系列3(6号生化池).2段溶解氧DO', null);
+INSERT INTO `init_predict` VALUES ('w77.AIRC221', '生化池系列3(5号生化池).4段溶解氧DO', null);
+INSERT INTO `init_predict` VALUES ('w77.AIRC222', '生化池系列3(6号生化池).4段溶解氧DO', null);
+INSERT INTO `init_predict` VALUES ('w77.AIRC225', '生化池系列3(5号生化池).6段溶解氧DO', null);
+INSERT INTO `init_predict` VALUES ('w77.AIRC226', '生化池系列3(6号生化池).6段溶解氧DO', null);
+INSERT INTO `init_predict` VALUES ('w77.FR601C', '生化池系列3(5号生化池).鼓风机分量', null);
+INSERT INTO `init_predict` VALUES ('w77.TIR205', '生化池系列3(5号生化池).温度', null);
+INSERT INTO `init_predict` VALUES ('w77.TIR206', '生化池系列3(6号生化池).温度', null);
+INSERT INTO `init_predict` VALUES ('w78.AIR203', '生化池系列4(7号生化池).A段溶解氧DO', null);
+INSERT INTO `init_predict` VALUES ('w78.AIR204', '生化池系列4(8号生化池).A段溶解氧DO', null);
+INSERT INTO `init_predict` VALUES ('w78.AIR235', '生化池系列4(7号生化池).PH', null);
+INSERT INTO `init_predict` VALUES ('w78.AIR236', '生化池系列4(8号生化池).PH', null);
+INSERT INTO `init_predict` VALUES ('w78.AIRC219', '生化池系列4(7号生化池).2段溶解氧DO', null);
+INSERT INTO `init_predict` VALUES ('w78.AIRC220', '生化池系列4(8号生化池).2段溶解氧DO', null);
+INSERT INTO `init_predict` VALUES ('w78.AIRC223', '生化池系列4(7号生化池).4段溶解氧DO', null);
+INSERT INTO `init_predict` VALUES ('w78.AIRC224', '生化池系列4(8号生化池).4段溶解氧DO', null);
+INSERT INTO `init_predict` VALUES ('w78.AIRC227', '生化池系列4(7号生化池).6段溶解氧DO', null);
+INSERT INTO `init_predict` VALUES ('w78.AIRC228', '生化池系列4(8号生化池).6段溶解氧DO', null);
+INSERT INTO `init_predict` VALUES ('w78.FR601B', '生化池系列4(7号生化池).鼓风机分量', null);
+INSERT INTO `init_predict` VALUES ('w78.TIR207', '生化池系列4(7号生化池).温度', null);
+INSERT INTO `init_predict` VALUES ('w78.TIR208', '生化池系列4(8号生化池).温度', null);
+INSERT INTO `init_predict` VALUES ('w8.BOD5', '环氧乙烷废水.BOD5', null);
+INSERT INTO `init_predict` VALUES ('w8.COD', '环氧乙烷废水.COD', null);
+INSERT INTO `init_predict` VALUES ('w8.NH3-N', '环氧乙烷废水.NH3-N', null);
+INSERT INTO `init_predict` VALUES ('w8.PH', '环氧乙烷废水.PH', null);
+INSERT INTO `init_predict` VALUES ('w8.Q', '环氧乙烷废水.水量', null);
+INSERT INTO `init_predict` VALUES ('w8.SS', '环氧乙烷废水.SS', null);
+INSERT INTO `init_predict` VALUES ('w83.LIR803', '接触氧化池.1-3号池浓度', null);
+INSERT INTO `init_predict` VALUES ('w83.LIR804', '接触氧化池.4-5号池浓度', null);
+INSERT INTO `init_predict` VALUES ('w85.AIRA801', '排江出口线.PH', null);
+INSERT INTO `init_predict` VALUES ('w85.AIRA802', '排江出口线.SS', null);
+INSERT INTO `init_predict` VALUES ('w85.AIRA803', '排江出口线.COD', null);
+INSERT INTO `init_predict` VALUES ('w85.AIRA804', '排江出口线.NH3-N', null);
+INSERT INTO `init_predict` VALUES ('w85.AIRA805', '排江出口线.DO', null);
+INSERT INTO `init_predict` VALUES ('w86.FRCQ201', '1系列465回流泵房.回流泵房回流490A3量', null);
+INSERT INTO `init_predict` VALUES ('w86.FRCQ202', '1系列465回流泵房.回流泵房回流490A4量', null);
+INSERT INTO `init_predict` VALUES ('w86.FRQ203', '1系列465回流泵房.回流泵房回流467量', null);
+INSERT INTO `init_predict` VALUES ('w86.LIA201', '1系列465回流泵房.465吸泥池液位', null);
+INSERT INTO `init_predict` VALUES ('w87.FRCQ204', '2系列465A回流泵房.2系列465A回流泵房回流量', null);
+INSERT INTO `init_predict` VALUES ('w87.FRQ205', '2系列465A回流泵房.2系列465A回流泵房剩余量', null);
+INSERT INTO `init_predict` VALUES ('w87.LISA202', '2系列465A回流泵房.465A吸泥池液位', null);
+INSERT INTO `init_predict` VALUES ('w88.FRCQ206', '3系列465B回流泵房.回流量', null);
+INSERT INTO `init_predict` VALUES ('w88.FRQ207', '3系列465B回流泵房.剩余量', null);
+INSERT INTO `init_predict` VALUES ('w88.LISA203', '3系列465B回流泵房.吸泥池液位', null);
+INSERT INTO `init_predict` VALUES ('w9.BOD5', '农药厂有机水.BOD5', null);
+INSERT INTO `init_predict` VALUES ('w9.COD', '农药厂有机水.COD', null);
+INSERT INTO `init_predict` VALUES ('w9.NH3-N', '农药厂有机水.NH3-N', null);
+INSERT INTO `init_predict` VALUES ('w9.PH', '农药厂有机水.PH', null);
+INSERT INTO `init_predict` VALUES ('w9.Q', '农药厂有机水.水量', null);
+INSERT INTO `init_predict` VALUES ('w9.SS', '农药厂有机水.SS', null);
+INSERT INTO `init_predict` VALUES ('WW14A.BOD5', '14A生活水.BOD5', null);
+INSERT INTO `init_predict` VALUES ('WW14A.COD', '14A生活水.COD', null);
+INSERT INTO `init_predict` VALUES ('WW14A.NH3-N', '14A生活水.NH3-N', null);
+INSERT INTO `init_predict` VALUES ('WW14A.PH', '14A生活水.PH', null);
+INSERT INTO `init_predict` VALUES ('WW14A.Q', '14A生活水.水量', null);
+INSERT INTO `init_predict` VALUES ('WW14A.SS', '14A生活水.SS', null);
+INSERT INTO `init_predict` VALUES ('WW14B.BOD5', '14B生活水.BOD5', null);
+INSERT INTO `init_predict` VALUES ('WW14B.COD', '14B生活水.COD', null);
+INSERT INTO `init_predict` VALUES ('WW14B.NH3-N', '14B生活水.NH3-N', null);
+INSERT INTO `init_predict` VALUES ('WW14B.PH', '14B生活水.PH', null);
+INSERT INTO `init_predict` VALUES ('WW14B.Q', '14B生活水.水量', null);
+INSERT INTO `init_predict` VALUES ('WW14B.SS', '14B生活水.SS', null);
+
+-- ----------------------------
+-- Table structure for `itemdefinition`
+-- ----------------------------
+DROP TABLE IF EXISTS `itemdefinition`;
+CREATE TABLE `itemdefinition` (
+  `name` varchar(48) NOT NULL,
+  `description` varchar(128) DEFAULT NULL,
+  `unit` varchar(32) DEFAULT NULL,
+  PRIMARY KEY (`name`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of itemdefinition
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for `manualdata`
@@ -1559,20 +1308,15 @@ DROP TABLE IF EXISTS `motodcsdata`;
 CREATE TABLE `motodcsdata` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `equipment` varchar(255) DEFAULT NULL,
+  `isok` varchar(255) DEFAULT NULL,
   `item` varchar(255) DEFAULT NULL,
   `value` double DEFAULT NULL,
-  `isok` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=122 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of motodcsdata
 -- ----------------------------
-INSERT INTO `motodcsdata` VALUES ('109', '电石厂有机水', '班次', '0', null);
-INSERT INTO `motodcsdata` VALUES ('110', '电石厂有机水', 'COD', '1', '3');
-INSERT INTO `motodcsdata` VALUES ('120', '1系列生化池', '班次', '0', null);
-INSERT INTO `motodcsdata` VALUES ('117', '染料厂酸水', '班次', '0', null);
-INSERT INTO `motodcsdata` VALUES ('118', '染料厂酸水', 'COD', '1', '1');
 
 -- ----------------------------
 -- Table structure for `motodcshistory`
@@ -1585,129 +1329,11 @@ CREATE TABLE `motodcshistory` (
   `seqno` varchar(255) DEFAULT NULL,
   `value` double DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=119 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of motodcshistory
 -- ----------------------------
-INSERT INTO `motodcshistory` VALUES ('1', '2系列生化池', '3号生化池PH', null, '33');
-INSERT INTO `motodcshistory` VALUES ('2', '2系列生化池', '4号生化池PH', null, '33');
-INSERT INTO `motodcshistory` VALUES ('3', '2系列生化池', '3号生化池COD', null, '33');
-INSERT INTO `motodcshistory` VALUES ('4', '2系列生化池', '3号生化池碱度', null, '33');
-INSERT INTO `motodcshistory` VALUES ('5', '2系列生化池', '班次', '2011-11-21 00:04:57', '0');
-INSERT INTO `motodcshistory` VALUES ('6', '2系列生化池', '3号生化池PH', null, '22');
-INSERT INTO `motodcshistory` VALUES ('7', '2系列生化池', '3号生化池COD', null, '22');
-INSERT INTO `motodcshistory` VALUES ('8', '2系列生化池', '3号生化池碱度', null, '22');
-INSERT INTO `motodcshistory` VALUES ('9', '2系列生化池', '3号生化池BOD5', null, '22');
-INSERT INTO `motodcshistory` VALUES ('10', '2系列生化池', '班次', '2011-11-21 00:17:16', '0');
-INSERT INTO `motodcshistory` VALUES ('11', '2系列生化池', '3号生化池PH', null, '111');
-INSERT INTO `motodcshistory` VALUES ('12', '2系列生化池', '3号生化池COD', null, '222');
-INSERT INTO `motodcshistory` VALUES ('13', '2系列生化池', '3号生化池碱度', null, '111');
-INSERT INTO `motodcshistory` VALUES ('14', '2系列生化池', '班次', '2011-11-21 00:22:46', '8');
-INSERT INTO `motodcshistory` VALUES ('15', '2系列生化池', '3号生化池PH', null, '7');
-INSERT INTO `motodcshistory` VALUES ('16', '2系列生化池', '班次', '2011-11-21 00:48:29', '8');
-INSERT INTO `motodcshistory` VALUES ('17', '2系列生化池', '3号生化池PH', null, '999');
-INSERT INTO `motodcshistory` VALUES ('18', '2系列生化池', '班次', '2011-11-21 00:49:30', '8');
-INSERT INTO `motodcshistory` VALUES ('19', '2系列生化池', '3号生化池PH', null, '111');
-INSERT INTO `motodcshistory` VALUES ('20', '2系列生化池', '3号生化池溶解氧', null, '999');
-INSERT INTO `motodcshistory` VALUES ('21', '2系列生化池', '班次', '2011-11-21 01:18:06', '0');
-INSERT INTO `motodcshistory` VALUES ('22', '2系列生化池', '3号生化池PH', null, '999');
-INSERT INTO `motodcshistory` VALUES ('23', '2系列生化池', '3号生化池COD', null, '9');
-INSERT INTO `motodcshistory` VALUES ('24', '2系列生化池', '3号生化池碱度', null, '999');
-INSERT INTO `motodcshistory` VALUES ('25', '2系列生化池', '3号生化池溶解氧', null, '999');
-INSERT INTO `motodcshistory` VALUES ('26', '2系列生化池', '班次', '2011-11-21 01:26:30', '0');
-INSERT INTO `motodcshistory` VALUES ('27', '2系列生化池', '3号生化池溶解氧', null, '22222222');
-INSERT INTO `motodcshistory` VALUES ('28', '2系列生化池', '班次', '2011-11-21 01:27:07', '0');
-INSERT INTO `motodcshistory` VALUES ('29', '2系列生化池', '3号生化池PH', null, '333');
-INSERT INTO `motodcshistory` VALUES ('30', '2系列生化池', '3号生化池碱度', null, '3333');
-INSERT INTO `motodcshistory` VALUES ('31', '2系列生化池', '3号生化池溶解氧', null, '3333');
-INSERT INTO `motodcshistory` VALUES ('32', '2系列生化池', '班次', '2011-11-21 01:30:51', '0');
-INSERT INTO `motodcshistory` VALUES ('33', '2系列生化池', '3号生化池PH', null, '7');
-INSERT INTO `motodcshistory` VALUES ('34', '2系列生化池', '班次', '2011-11-21 12:57:34', '0');
-INSERT INTO `motodcshistory` VALUES ('35', '2系列生化池', '3号生化池PH', null, '9999');
-INSERT INTO `motodcshistory` VALUES ('36', '2系列生化池', '班次', '2011-11-21 12:57:50', '0');
-INSERT INTO `motodcshistory` VALUES ('37', '2系列生化池', '3号生化池PH', null, '111');
-INSERT INTO `motodcshistory` VALUES ('38', '2系列生化池', '3号生化池水量', null, '1');
-INSERT INTO `motodcshistory` VALUES ('39', '2系列生化池', '班次', '2011-11-21 13:04:38', '0');
-INSERT INTO `motodcshistory` VALUES ('40', '2系列生化池', '3号生化池PH', null, '1');
-INSERT INTO `motodcshistory` VALUES ('41', '2系列生化池', '3号生化池COD', null, '1');
-INSERT INTO `motodcshistory` VALUES ('42', '2系列生化池', '3号生化池碱度', null, '1');
-INSERT INTO `motodcshistory` VALUES ('43', '2系列生化池', '班次', '2011-11-21 13:08:01', '8');
-INSERT INTO `motodcshistory` VALUES ('44', '2系列生化池', '3号生化池PH', null, '111');
-INSERT INTO `motodcshistory` VALUES ('45', '2系列生化池', '3号生化池COD', null, '1');
-INSERT INTO `motodcshistory` VALUES ('46', '2系列生化池', '3号生化池碱度', null, '1');
-INSERT INTO `motodcshistory` VALUES ('47', '2系列生化池', '班次', '2011-11-21 13:14:12', '0');
-INSERT INTO `motodcshistory` VALUES ('48', '2系列生化池', '3号生化池PH', null, '7');
-INSERT INTO `motodcshistory` VALUES ('49', '2系列生化池', '班次', '2011-11-21 13:15:37', '0');
-INSERT INTO `motodcshistory` VALUES ('50', '2系列生化池', '班次', '2011-11-27 15:04:02', '0');
-INSERT INTO `motodcshistory` VALUES ('51', '2系列生化池', '3号生化池PH', '2011-11-27 15:04:02', '2');
-INSERT INTO `motodcshistory` VALUES ('52', '2系列生化池', '班次', '2011-11-27 15:06:13', '0');
-INSERT INTO `motodcshistory` VALUES ('53', '2系列生化池', '3号生化池PH', '2011-11-27 15:06:13', '111');
-INSERT INTO `motodcshistory` VALUES ('54', '2系列生化池', '班次', '2011-11-27 15:10:07', '0');
-INSERT INTO `motodcshistory` VALUES ('55', '2系列生化池', '3号生化池PH', '2011-11-27 15:10:07', '22');
-INSERT INTO `motodcshistory` VALUES ('56', '1系列生化池', '班次', '2011-11-27 19:15:30', '0');
-INSERT INTO `motodcshistory` VALUES ('57', '1系列生化池', '1号生化池PH', '2011-11-27 19:15:30', '12121212');
-INSERT INTO `motodcshistory` VALUES ('58', '2系列生化池', '班次', '2011-11-27 19:16:12', '0');
-INSERT INTO `motodcshistory` VALUES ('59', '2系列生化池', '3号生化池PH', '2011-11-27 19:16:12', '213234324');
-INSERT INTO `motodcshistory` VALUES ('60', '2系列生化池', '班次', '2011-11-27 19:16:33', '0');
-INSERT INTO `motodcshistory` VALUES ('61', '2系列生化池', '3号生化池PH', '2011-11-27 19:16:33', '1212121');
-INSERT INTO `motodcshistory` VALUES ('62', '1系列生化池', '班次', '2011-11-27 19:31:55', '0');
-INSERT INTO `motodcshistory` VALUES ('63', '2系列生化池', '班次', '2011-11-27 19:33:52', '0');
-INSERT INTO `motodcshistory` VALUES ('64', '2系列生化池', '3号生化池COD', '2011-11-27 19:33:52', '12121212');
-INSERT INTO `motodcshistory` VALUES ('65', '2系列生化池', '班次', '2011-11-27 19:36:21', '0');
-INSERT INTO `motodcshistory` VALUES ('66', '2系列生化池', '3号生化池PH', '2011-11-27 19:36:21', '32432');
-INSERT INTO `motodcshistory` VALUES ('67', '2系列生化池', '班次', '2011-11-27 19:45:44', '0');
-INSERT INTO `motodcshistory` VALUES ('68', '2系列生化池', '3号生化池PH', '2011-11-27 19:45:44', '1111');
-INSERT INTO `motodcshistory` VALUES ('69', '1系列生化池', '班次', '2011-11-27 19:46:32', '0');
-INSERT INTO `motodcshistory` VALUES ('70', '2系列生化池', '班次', '2011-11-27 19:54:38', '0');
-INSERT INTO `motodcshistory` VALUES ('71', '2系列生化池', '3号生化池SS', '2011-11-27 19:54:38', '13221342');
-INSERT INTO `motodcshistory` VALUES ('72', '1系列生化池', '班次', '2011-11-27 20:09:51', '0');
-INSERT INTO `motodcshistory` VALUES ('73', '2系列生化池', '班次', '2011-11-27 20:10:07', '0');
-INSERT INTO `motodcshistory` VALUES ('74', '2系列生化池', '3号生化池COD', '2011-11-27 20:10:07', '432423432');
-INSERT INTO `motodcshistory` VALUES ('75', '2系列生化池', '班次', '2011-11-27 20:12:47', '0');
-INSERT INTO `motodcshistory` VALUES ('76', '2系列生化池', '3号生化池碱度', '2011-11-27 20:12:47', '2311324');
-INSERT INTO `motodcshistory` VALUES ('77', '2系列生化池', '班次', '2011-11-27 20:14:15', '0');
-INSERT INTO `motodcshistory` VALUES ('78', '2系列生化池', '3号生化池COD', '2011-11-27 20:14:15', '243424');
-INSERT INTO `motodcshistory` VALUES ('79', '2系列生化池', '班次', '2011-11-27 20:16:08', '0');
-INSERT INTO `motodcshistory` VALUES ('80', '2系列生化池', '3号生化池COD', '2011-11-27 20:16:08', '243424');
-INSERT INTO `motodcshistory` VALUES ('81', '1系列生化池', '班次', '2011-11-27 23:52:35', '0');
-INSERT INTO `motodcshistory` VALUES ('82', '1系列生化池', '1号生化池PH', '2011-11-27 23:52:35', '11111');
-INSERT INTO `motodcshistory` VALUES ('83', '2系列生化池', '班次', '2011-11-27 23:53:32', '0');
-INSERT INTO `motodcshistory` VALUES ('84', '2系列生化池', '3号生化池COD', '2011-11-27 23:53:32', '0.2');
-INSERT INTO `motodcshistory` VALUES ('85', '1系列生化池', '班次', '2011-11-27 23:55:09', '0');
-INSERT INTO `motodcshistory` VALUES ('86', '1系列生化池', '1号生化池PH', '2011-11-27 23:55:09', '7');
-INSERT INTO `motodcshistory` VALUES ('87', '1系列生化池', '班次', '2011-11-28 10:55:17', '0');
-INSERT INTO `motodcshistory` VALUES ('88', '1系列生化池', '1号生化池SS', '2011-11-28 10:55:17', '1111');
-INSERT INTO `motodcshistory` VALUES ('89', '1系列生化池', '班次', '2011-11-28 10:56:32', '0');
-INSERT INTO `motodcshistory` VALUES ('90', '1系列生化池', '1号生化池SS', '2011-11-28 10:56:32', '1111');
-INSERT INTO `motodcshistory` VALUES ('91', '1系列生化池', '班次', '2011-11-28 10:57:15', '0');
-INSERT INTO `motodcshistory` VALUES ('92', '1系列生化池', '1号生化池SS', '2011-11-28 10:57:15', '1111');
-INSERT INTO `motodcshistory` VALUES ('93', '1系列生化池', '班次', '2011-11-28 10:57:37', '0');
-INSERT INTO `motodcshistory` VALUES ('94', '1系列生化池', '1号生化池SS', '2011-11-28 10:57:37', '1111');
-INSERT INTO `motodcshistory` VALUES ('95', '1系列生化池', '班次', '2011-11-28 11:29:27', '0');
-INSERT INTO `motodcshistory` VALUES ('96', '1系列生化池', '1号生化池PH', '2011-11-28 11:29:27', '121212');
-INSERT INTO `motodcshistory` VALUES ('97', '1系列生化池', '班次', '2011-11-28 11:33:26', '0');
-INSERT INTO `motodcshistory` VALUES ('98', '1系列生化池', '1号生化池PH', '2011-11-28 11:33:26', '11111');
-INSERT INTO `motodcshistory` VALUES ('99', '1系列生化池', '班次', '2011-11-28 11:34:51', '0');
-INSERT INTO `motodcshistory` VALUES ('100', '1系列生化池', '2号生化池PH', '2011-11-28 11:34:51', '11111');
-INSERT INTO `motodcshistory` VALUES ('101', '1系列生化池', '班次', '2011-11-28 13:41:55', '0');
-INSERT INTO `motodcshistory` VALUES ('102', '1系列生化池', '班次', '2011-11-28 22:17:11', '0');
-INSERT INTO `motodcshistory` VALUES ('103', '1系列生化池', '1号生化池PH', '2011-11-28 22:17:11', '10');
-INSERT INTO `motodcshistory` VALUES ('104', '排江出口线', '班次', '2011-12-11 15:53:22', '0');
-INSERT INTO `motodcshistory` VALUES ('105', '排江出口线', '出口NH3-N', '2011-12-11 15:53:22', '3');
-INSERT INTO `motodcshistory` VALUES ('106', '电石厂有机水', '班次', '2011-12-19 20:43:43', '0');
-INSERT INTO `motodcshistory` VALUES ('107', '电石厂有机水', 'COD', '2011-12-19 20:43:16', '1');
-INSERT INTO `motodcshistory` VALUES ('108', '染料厂酸水', '班次', '2011-12-19 20:45:00', '0');
-INSERT INTO `motodcshistory` VALUES ('109', '染料厂酸水', 'COD', '2011-12-19 20:44:57', '1');
-INSERT INTO `motodcshistory` VALUES ('110', '染料厂酸水', '班次', '2011-12-19 20:45:21', '0');
-INSERT INTO `motodcshistory` VALUES ('111', '染料厂酸水', 'COD', '2011-12-19 20:45:21', '3');
-INSERT INTO `motodcshistory` VALUES ('112', '染料厂酸水', '班次', '2011-12-19 20:47:47', '0');
-INSERT INTO `motodcshistory` VALUES ('113', '染料厂酸水', 'COD', '2011-12-19 20:47:47', '6');
-INSERT INTO `motodcshistory` VALUES ('114', '染料厂酸水', '班次', '2011-12-19 21:15:35', '0');
-INSERT INTO `motodcshistory` VALUES ('115', '染料厂酸水', 'COD', '2011-12-19 21:15:34', '1');
-INSERT INTO `motodcshistory` VALUES ('116', '1系列生化池', '班次', '2011-12-22 12:55:00', '0');
-INSERT INTO `motodcshistory` VALUES ('117', '1系列生化池', '班次', '2011-12-22 12:55:52', '0');
-INSERT INTO `motodcshistory` VALUES ('118', '1系列生化池', '1号生化池PH', '2011-12-22', '12');
 
 -- ----------------------------
 -- Table structure for `motoerrorlog`
@@ -1716,34 +1342,19 @@ DROP TABLE IF EXISTS `motoerrorlog`;
 CREATE TABLE `motoerrorlog` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `equipment` varchar(255) DEFAULT NULL,
+  `error` varchar(255) DEFAULT NULL,
   `item` varchar(255) DEFAULT NULL,
   `level` varchar(255) DEFAULT NULL,
+  `sugg` varchar(255) DEFAULT NULL,
   `time` varchar(255) DEFAULT NULL,
   `value` double DEFAULT NULL,
-  `error` varchar(255) DEFAULT NULL,
-  `sugg` varchar(255) DEFAULT NULL,
   `wrong` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of motoerrorlog
 -- ----------------------------
-INSERT INTO `motoerrorlog` VALUES ('20', '2系列生化池', '3号生化池PH', '4', '2011-11-27 15:04:02', '2', '中和站控制不好;', '增加测试PH频次，向车间工艺工程师汇报;', '过低');
-INSERT INTO `motoerrorlog` VALUES ('21', '2系列生化池', '3号生化池PH', '3', '2011-11-27 15:06:13', '111', '中和站控制不好;', '增加测试PH频次，向车间工艺工程师汇报;', '过高');
-INSERT INTO `motoerrorlog` VALUES ('22', '2系列生化池', '3号生化池PH', '5', '2011-11-27 15:10:07', '22', '中和站控制不好;', '增加测试PH频次，向车间工艺工程师汇报;', '过高');
-INSERT INTO `motoerrorlog` VALUES ('23', '2系列生化池', '3号生化池PH', '6', '2011-11-27 19:16:12', '213234324', '中和站控制不好;', '增加测试PH频次，向车间工艺工程师汇报;', '过高');
-INSERT INTO `motoerrorlog` VALUES ('24', '2系列生化池', '3号生化池PH', '7', '2011-11-27 19:16:33', '1212121', '中和站控制不好;', '增加测试PH频次，向车间工艺工程师汇报;', '过高');
-INSERT INTO `motoerrorlog` VALUES ('26', '2系列生化池', '3号生化池PH', '8', '2011-11-27 19:36:21', '32432', '中和站控制不好;', '增加测试PH频次，向车间工艺工程师汇报;', '过高');
-INSERT INTO `motoerrorlog` VALUES ('27', '2系列生化池', '3号生化池PH', '9', '2011-11-27 19:45:44', '1111', '中和站控制不好;', '增加测试PH频次，向车间工艺工程师汇报;', '过高');
-INSERT INTO `motoerrorlog` VALUES ('28', '2系列生化池', '3号生化池SS', '2', '2011-11-27 19:54:38', '13221342', '进水池控制不好;', '维修;', '过高');
-INSERT INTO `motoerrorlog` VALUES ('39', '1系列生化池', '1号生化池PH', '1', '2011-11-28 11:33:26', '11111', '中和池处理不好;', '维修;', '过高');
-INSERT INTO `motoerrorlog` VALUES ('40', '1系列生化池', '2号生化池PH', '4', '2011-11-28 11:34:51', '11111', '中和池处理不好;', '维修;', '过高');
-INSERT INTO `motoerrorlog` VALUES ('41', '1系列生化池', '1号生化池PH', '5', '2011-11-28 22:17:11', '10', '中和池处理不好;酸水的流量增大;酸水的酸度增加;碱液管堵塞;仪表指示不准;', '维修;增加碱液投加量;增加碱液投加量;及时清通，必要时短管清通;用PH试纸实测;', '过高');
-INSERT INTO `motoerrorlog` VALUES ('42', '排江出口线', '出口NH3-N', '6', '2011-12-11 15:53:22', '3', '11;22;33;电石渣加的太多;中和错误;', '1;2;3;减少电石渣投放量;立即上报;', '过高');
-INSERT INTO `motoerrorlog` VALUES ('43', '染料厂酸水', 'COD', '10', '2011-12-19 21:15:35', '1', null, null, '过高');
-INSERT INTO `motoerrorlog` VALUES ('44', '排江出口线', '出口水量', '3', '2011-12-11 15:53:22', '333', '11;22;33;电石渣加的太多;中和错误;', '1;2;3;减少电石渣投放量;立即上报', '过高');
-INSERT INTO `motoerrorlog` VALUES ('45', '1系列生化池', '1号生化池PH', '9', '2011-12-22 12:55:52', '12', ';', '调整进水PH值，加酸（这种情况很少出现，目前工厂没有加酸装置）;', '过高');
 
 -- ----------------------------
 -- Table structure for `olddcsdata`
@@ -2174,13 +1785,77 @@ CREATE TABLE `pre_history` (
   `value` varchar(255) DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `FK92FB92D823A4A4F1` (`name`),
-  CONSTRAINT `FK92FB92D823A4A4F1` FOREIGN KEY (`name`) REFERENCES `init_predict` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  KEY `FK92FB92D823A4A4F1` (`name`)
+) ENGINE=MyISAM AUTO_INCREMENT=66 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of pre_history
 -- ----------------------------
+INSERT INTO `pre_history` VALUES ('1', '20111218123004', '           32.560000', '3.3191227E-5                                                    ', 'w77.AIR201');
+INSERT INTO `pre_history` VALUES ('2', '20111218123004', '           32.560000', '3.3191227E-5                                                    ', 'w77.AIR202');
+INSERT INTO `pre_history` VALUES ('3', '20111218123004', '           32.560000', '3.3191824E-5                                                    ', 'w78.AIR203');
+INSERT INTO `pre_history` VALUES ('4', '20111218123004', '           32.560000', '3.3191824E-5                                                    ', 'w78.AIR204');
+INSERT INTO `pre_history` VALUES ('5', '20111218123004', '           32.560000', '1000.00006                                                      ', 'w86.FRCQ201');
+INSERT INTO `pre_history` VALUES ('6', '20111218123004', '           32.560000', '1000.00006                                                      ', 'w86.FRCQ202');
+INSERT INTO `pre_history` VALUES ('7', '20111218123004', '           32.560000', '2.984558                                                        ', 'w76.AIRC211');
+INSERT INTO `pre_history` VALUES ('8', '20111218123004', '           32.560000', '2.984558                                                        ', 'w76.AIRC212');
+INSERT INTO `pre_history` VALUES ('9', '20111218123004', '           32.560000', '3.006699                                                        ', 'w75.AIRC213');
+INSERT INTO `pre_history` VALUES ('10', '20111218123004', '           32.560000', '2.9999924                                                       ', 'w75.AIRC214');
+INSERT INTO `pre_history` VALUES ('11', '20111218123004', '           32.560000', '2.9999926                                                       ', 'w76.AIRC216');
+INSERT INTO `pre_history` VALUES ('12', '20111218123004', '           32.560000', '2.9836466                                                       ', 'w78.AIRC223');
+INSERT INTO `pre_history` VALUES ('13', '20111218123004', '           32.560000', '2.9990299                                                       ', 'w77.AIRC221');
+INSERT INTO `pre_history` VALUES ('14', '20111218123004', '           32.560000', '2.9990299                                                       ', 'w77.AIRC222');
+INSERT INTO `pre_history` VALUES ('15', '20111218123004', '           32.560000', '2.9836466                                                       ', 'w78.AIRC224');
+INSERT INTO `pre_history` VALUES ('16', '20111218123004', '           32.560000', '2.9999986                                                       ', 'w77.AIRC225');
+INSERT INTO `pre_history` VALUES ('17', '20111218123004', '           32.560000', '2.9999986                                                       ', 'w77.AIRC226');
+INSERT INTO `pre_history` VALUES ('18', '20111218123004', '           32.560000', '2.9875658                                                       ', 'w78.AIRC227');
+INSERT INTO `pre_history` VALUES ('19', '20111218123004', '           32.560000', '2.9875658                                                       ', 'w78.AIRC228');
+INSERT INTO `pre_history` VALUES ('20', '20111218123004', '           32.560000', '2.876394                                                        ', 'w77.AIRC217');
+INSERT INTO `pre_history` VALUES ('21', '20111218123004', '           32.560000', '2.876394                                                        ', 'w77.AIRC218');
+INSERT INTO `pre_history` VALUES ('22', '20111218123004', '           32.560000', '2.876436                                                        ', 'w78.AIRC219');
+INSERT INTO `pre_history` VALUES ('23', '20111218123004', '           32.560000', '2.876436                                                        ', 'w78.AIRC220');
+INSERT INTO `pre_history` VALUES ('24', '20111218123004', '           32.560000', '1501.2117                                                       ', 'w87.FRCQ204');
+INSERT INTO `pre_history` VALUES ('25', '20111218123004', '           32.560000', '1500.0767                                                       ', 'w88.FRCQ206');
+INSERT INTO `pre_history` VALUES ('26', '20111218123004', '           32.560000', '0.0                                                             ', 'w62.LDISA101');
+INSERT INTO `pre_history` VALUES ('27', '20111218123004', '           32.560000', '0.0                                                             ', 'w62.LDISA102');
+INSERT INTO `pre_history` VALUES ('28', '20111218123004', '           32.560000', '0.0                                                             ', 'w62.LDISA103');
+INSERT INTO `pre_history` VALUES ('29', '20111218123004', '           32.560000', '3.9999905                                                       ', 'w62.LISA104');
+INSERT INTO `pre_history` VALUES ('30', '20111218123004', '           32.560000', '529.8328                                                        ', 'w62.AIRA101');
+INSERT INTO `pre_history` VALUES ('31', '20111218123004', '           32.560000', '12.061142                                                       ', 'w62.AIRA102');
+INSERT INTO `pre_history` VALUES ('32', '20111218123004', '           32.560000', '2425424.0                                                       ', 'w63.FRQ101');
+INSERT INTO `pre_history` VALUES ('33', '20111218123004', '           32.560000', '6.8999996                                                       ', 'w69.LIA114');
+INSERT INTO `pre_history` VALUES ('34', '20111218123004', '           32.560000', '443.24112                                                       ', 'w74.AIRA103');
+INSERT INTO `pre_history` VALUES ('35', '20111218123004', '           32.560000', '19.471039                                                       ', 'w74.AIRA104');
+INSERT INTO `pre_history` VALUES ('36', '20111218123004', '           32.560000', '7.0                                                             ', 'w74.AIRA106');
+INSERT INTO `pre_history` VALUES ('37', '20111218123004', '           32.560000', '4.3000255                                                       ', 'w71.LISA119');
+INSERT INTO `pre_history` VALUES ('38', '20111218123004', '           32.560000', '0.0                                                             ', 'w73.LISA122');
+INSERT INTO `pre_history` VALUES ('39', '20111218123004', '           32.560000', '0.0                                                             ', 'w73.LISA123');
+INSERT INTO `pre_history` VALUES ('40', '20111218123004', '           32.560000', '0.0                                                             ', 'w73.LISA124');
+INSERT INTO `pre_history` VALUES ('41', '20111218123004', '           32.560000', '36.34194                                                        ', 'w73.FI106');
+INSERT INTO `pre_history` VALUES ('42', '20111218123004', '           32.560000', '36.34194                                                        ', 'w73.FI107');
+INSERT INTO `pre_history` VALUES ('43', '20111218123004', '           32.560000', '36.34194                                                        ', 'w73.FI108');
+INSERT INTO `pre_history` VALUES ('44', '20111218123004', '           32.560000', '36.34194                                                        ', 'w73.FI109');
+INSERT INTO `pre_history` VALUES ('45', '20111218123004', '           32.560000', '36.34194                                                        ', 'w73.FI110');
+INSERT INTO `pre_history` VALUES ('46', '20111218123004', '           32.560000', '36.34194                                                        ', 'w73.FI111');
+INSERT INTO `pre_history` VALUES ('47', '20111218123004', '           32.560000', '551239.8                                                        ', 'w71.FRQ103');
+INSERT INTO `pre_history` VALUES ('48', '20111218123004', '           32.560000', '551241.75                                                       ', 'w71.FRQ104');
+INSERT INTO `pre_history` VALUES ('49', '20111218123004', '           32.560000', '7.0                                                             ', 'w62.AIRA107');
+INSERT INTO `pre_history` VALUES ('50', '20111218123004', '           32.560000', '7.0                                                             ', 'w75.AIR229');
+INSERT INTO `pre_history` VALUES ('51', '20111218123004', '           32.560000', '7.0                                                             ', 'w77.AIR233');
+INSERT INTO `pre_history` VALUES ('52', '20111218123004', '           32.560000', '7.0                                                             ', 'w78.AIR235');
+INSERT INTO `pre_history` VALUES ('53', '20111218123004', '           32.560000', '37.003956                                                       ', 'w75.TIR201');
+INSERT INTO `pre_history` VALUES ('54', '20111218123004', '           32.560000', '36.997948                                                       ', 'w75.TIR202');
+INSERT INTO `pre_history` VALUES ('55', '20111218123004', '           32.560000', '37.00377                                                        ', 'w76.TIR203');
+INSERT INTO `pre_history` VALUES ('56', '20111218123004', '           32.560000', '37.004818                                                       ', 'w76.TIR204');
+INSERT INTO `pre_history` VALUES ('57', '20111218123004', '           32.560000', '37.030212                                                       ', 'w77.TIR205');
+INSERT INTO `pre_history` VALUES ('58', '20111218123004', '           32.560000', '37.030212                                                       ', 'w77.TIR206');
+INSERT INTO `pre_history` VALUES ('59', '20111218123004', '           32.560000', '37.029568                                                       ', 'w78.TIR207');
+INSERT INTO `pre_history` VALUES ('60', '20111218123004', '           32.560000', '37.029568                                                       ', 'w78.TIR208');
+INSERT INTO `pre_history` VALUES ('61', '20111218123004', '           32.560000', '0.077204034                                                     ', 'w87.LISA202');
+INSERT INTO `pre_history` VALUES ('62', '20111218123004', '           32.560000', '7.0                                                             ', 'w85.AIRA801');
+INSERT INTO `pre_history` VALUES ('63', '20111218123004', '           32.560000', '36.37202                                                        ', 'w85.AIRA802');
+INSERT INTO `pre_history` VALUES ('64', '20111218123004', '           32.560000', '70.380936                                                       ', 'w85.AIRA803');
+INSERT INTO `pre_history` VALUES ('65', '20111218123004', '           32.560000', '3.4734836                                                       ', 'w85.AIRA804');
 
 -- ----------------------------
 -- Table structure for `temp_init_predict`
@@ -2448,59 +2123,64 @@ INSERT INTO `testuser` VALUES ('9', 'ghj', '123');
 -- ----------------------------
 DROP TABLE IF EXISTS `treeunit`;
 CREATE TABLE `treeunit` (
-  `id` int(6) NOT NULL AUTO_INCREMENT,
-  `father` varchar(200) DEFAULT NULL,
-  `child` varchar(200) DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `child` varchar(255) DEFAULT NULL,
+  `father` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=45 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=50 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of treeunit
 -- ----------------------------
-INSERT INTO `treeunit` VALUES ('1', '点源处理', '电石厂有机水');
-INSERT INTO `treeunit` VALUES ('2', '点源处理', '有机合成厂有机水');
-INSERT INTO `treeunit` VALUES ('3', '点源处理', '炼油厂有机水');
-INSERT INTO `treeunit` VALUES ('4', '点源处理', '精细化工厂废水');
-INSERT INTO `treeunit` VALUES ('5', '点源处理', '乙二醇废水');
-INSERT INTO `treeunit` VALUES ('6', '点源处理', '环氧乙烷废水');
-INSERT INTO `treeunit` VALUES ('7', '点源处理', '农药厂有机水');
-INSERT INTO `treeunit` VALUES ('8', '点源处理', '含氮废水');
-INSERT INTO `treeunit` VALUES ('9', '点源处理', '103厂碱水');
-INSERT INTO `treeunit` VALUES ('10', '点源处理', '化肥厂丁辛醇');
-INSERT INTO `treeunit` VALUES ('11', '点源处理', '丙烯腈废水');
-INSERT INTO `treeunit` VALUES ('12', '点源处理', '合成树脂厂有机水');
-INSERT INTO `treeunit` VALUES ('13', '点源处理', '龙潭区生活水');
-INSERT INTO `treeunit` VALUES ('14', '中和处理', '染料厂酸水');
-INSERT INTO `treeunit` VALUES ('15', '中和处理', '电石厂酸水');
-INSERT INTO `treeunit` VALUES ('16', '中和处理', '铁运489沉淀池出水');
-INSERT INTO `treeunit` VALUES ('17', '生活水处理', '14a');
-INSERT INTO `treeunit` VALUES ('18', '生活水处理', '14b');
-INSERT INTO `treeunit` VALUES ('19', '预处理', '稳流池(477)进水');
-INSERT INTO `treeunit` VALUES ('20', '预处理', '进水提升泵房(462A)');
-INSERT INTO `treeunit` VALUES ('21', '预处理', '巴氏计量槽(499)');
-INSERT INTO `treeunit` VALUES ('22', '预处理', '除色池(414)');
-INSERT INTO `treeunit` VALUES ('23', '预处理', '沉沙刮沙池(488)');
-INSERT INTO `treeunit` VALUES ('24', '预处理', '初沉池(489B)');
-INSERT INTO `treeunit` VALUES ('25', '预处理', '初沉池(489B)');
-INSERT INTO `treeunit` VALUES ('26', '预处理', '14B生活水');
-INSERT INTO `treeunit` VALUES ('27', '预处理', '14B生活水');
-INSERT INTO `treeunit` VALUES ('28', '预处理', '14B生活水');
-INSERT INTO `treeunit` VALUES ('29', '预处理', '污泥泵房(466)');
-INSERT INTO `treeunit` VALUES ('30', '预处理', '脱水装置');
-INSERT INTO `treeunit` VALUES ('31', '生化处理', '1、2系列465回流泵房');
-INSERT INTO `treeunit` VALUES ('32', '生化处理', '3系列465A回流泵房');
-INSERT INTO `treeunit` VALUES ('33', '生化处理', '3系列465B回流泵房');
-INSERT INTO `treeunit` VALUES ('34', '生化处理', '中间提升泵房(462B)');
-INSERT INTO `treeunit` VALUES ('35', '生化处理', '1系列生化池');
-INSERT INTO `treeunit` VALUES ('36', '生化处理', '2系列生化池');
-INSERT INTO `treeunit` VALUES ('37', '生化处理', '3系列生化池');
-INSERT INTO `treeunit` VALUES ('38', '生化处理', '4系列生化池');
-INSERT INTO `treeunit` VALUES ('39', '生化处理', '1系列二沉池');
-INSERT INTO `treeunit` VALUES ('40', '生化处理', '2系列二沉池');
-INSERT INTO `treeunit` VALUES ('41', '生化处理', '3系列二沉池');
-INSERT INTO `treeunit` VALUES ('42', '生化处理', '4系列二沉池');
-INSERT INTO `treeunit` VALUES ('43', '生化处理', '接触氧化池');
-INSERT INTO `treeunit` VALUES ('44', '生化处理', '排江出口线');
+INSERT INTO `treeunit` VALUES ('1', '1、2系列465回流泵房', '生化处理');
+INSERT INTO `treeunit` VALUES ('2', '103厂碱水', '点源');
+INSERT INTO `treeunit` VALUES ('3', '14a', '生活水处理');
+INSERT INTO `treeunit` VALUES ('4', '14b', '生活水处理');
+INSERT INTO `treeunit` VALUES ('5', '14B生活水', '预处理');
+INSERT INTO `treeunit` VALUES ('6', '1系列二沉池', '生化处理');
+INSERT INTO `treeunit` VALUES ('7', '2系列二沉池', '生化处理');
+INSERT INTO `treeunit` VALUES ('8', '3系列465A回流泵房', '生化处理');
+INSERT INTO `treeunit` VALUES ('9', '3系列465B回流泵房', '生化处理');
+INSERT INTO `treeunit` VALUES ('10', '3系列二沉池', '生化处理');
+INSERT INTO `treeunit` VALUES ('11', '4系列二沉池', '生化处理');
+INSERT INTO `treeunit` VALUES ('12', '巴氏计量槽(499)', '预处理');
+INSERT INTO `treeunit` VALUES ('13', '丙烯腈废水', '点源');
+INSERT INTO `treeunit` VALUES ('14', '沉沙刮沙池(488)', '预处理');
+INSERT INTO `treeunit` VALUES ('15', '初沉池(489B)', '预处理');
+INSERT INTO `treeunit` VALUES ('16', '除色池(414)', '预处理');
+INSERT INTO `treeunit` VALUES ('17', '电石厂酸水', '中和处理');
+INSERT INTO `treeunit` VALUES ('18', '电石厂有机水', '点源');
+INSERT INTO `treeunit` VALUES ('19', '含氮废水', '点源');
+INSERT INTO `treeunit` VALUES ('20', '合成树脂厂有机水', '点源');
+INSERT INTO `treeunit` VALUES ('21', '化肥厂丁辛醇', '点源');
+INSERT INTO `treeunit` VALUES ('22', '环氧乙烷废水', '点源');
+INSERT INTO `treeunit` VALUES ('23', '接触氧化池', '生化处理');
+INSERT INTO `treeunit` VALUES ('24', '进水提升泵房(462A)', '预处理');
+INSERT INTO `treeunit` VALUES ('25', '精细化工厂废水', '点源');
+INSERT INTO `treeunit` VALUES ('26', '老水解酸化池', '预处理');
+INSERT INTO `treeunit` VALUES ('27', '炼油厂有机水', '点源');
+INSERT INTO `treeunit` VALUES ('28', '龙潭区生活水', '点源');
+INSERT INTO `treeunit` VALUES ('29', '农药厂有机水', '点源');
+INSERT INTO `treeunit` VALUES ('30', '浓缩池(491)', '预处理');
+INSERT INTO `treeunit` VALUES ('31', '排江出口线', '生化处理');
+INSERT INTO `treeunit` VALUES ('32', '染料厂酸水', '中和处理');
+INSERT INTO `treeunit` VALUES ('33', '生化池系列1(1号生化池)', '生化处理');
+INSERT INTO `treeunit` VALUES ('34', '生化池系列1(2号生化池)', '生化处理');
+INSERT INTO `treeunit` VALUES ('35', '生化池系列2(3号生化池)', '生化处理');
+INSERT INTO `treeunit` VALUES ('36', '生化池系列2(4号生化池)', '生化处理');
+INSERT INTO `treeunit` VALUES ('37', '生化池系列3(5号生化池)', '生化处理');
+INSERT INTO `treeunit` VALUES ('38', '生化池系列3(6号生化池)', '生化处理');
+INSERT INTO `treeunit` VALUES ('39', '生化池系列4(7号生化池)', '生化处理');
+INSERT INTO `treeunit` VALUES ('40', '生化池系列4(8号生化池)', '生化处理');
+INSERT INTO `treeunit` VALUES ('41', '事故池(489)', '预处理');
+INSERT INTO `treeunit` VALUES ('42', '铁运489沉淀池出水', '中和处理');
+INSERT INTO `treeunit` VALUES ('43', '脱水装置(495)', '预处理');
+INSERT INTO `treeunit` VALUES ('44', '稳流池(477)进水', '预处理');
+INSERT INTO `treeunit` VALUES ('45', '污泥泵房(466)', '预处理');
+INSERT INTO `treeunit` VALUES ('46', '新水解酸化池', '预处理');
+INSERT INTO `treeunit` VALUES ('47', '乙二醇废水', '点源');
+INSERT INTO `treeunit` VALUES ('48', '有机合成厂有机水', '点源');
+INSERT INTO `treeunit` VALUES ('49', '中间提升泵房(462B)', '生化处理');
 
 -- ----------------------------
 -- Table structure for `user`
