@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 
 import cn.edu.jlu.ccst.dao.RuleBRServiceImpl;
 import cn.edu.jlu.ccst.dao.RuleBRServiceInter;
+import cn.edu.jlu.ccst.dao.TreeunitServiceInter;
 import cn.edu.jlu.ccst.model.*;
 
 @Component("rulebrService")
@@ -22,6 +23,17 @@ public class RuleBRService {
 	private BackwardandResult backwardandresult;
 	private RuleBRServiceInter rulebrServiceImpl;
 	private String noun;
+	private TreeunitServiceInter treeunitServiceImpl;
+	
+
+	
+	public TreeunitServiceInter getTreeunitServiceImpl() {
+		return treeunitServiceImpl;
+	}
+	@Resource
+	public void setTreeunitServiceImpl(TreeunitServiceInter treeunitServiceImpl) {
+		this.treeunitServiceImpl = treeunitServiceImpl;
+	}
 	public BackwardandResult getBackwardandresult() {
 		return backwardandresult;
 	}
@@ -95,6 +107,20 @@ public class RuleBRService {
 			result.put(str, verb);
 		}
 
+		return result;
+	}
+	public Map getbynvsp(String unit) {
+		Map result = new HashMap();
+		List<String> jiedians = treeunitServiceImpl.findallchild(unit);
+		for(String jiedian:jiedians){
+			List<String> nounses = rulebrServiceImpl.findbynoun(jiedian);
+
+			for (String str : nounses) {
+				List<String> verb = rulebrServiceImpl.findAllverb(str);
+				result.put(str, verb);
+			}
+		}
+		if(result==null||result.size()<1)result=getallnvs();
 		return result;
 	}
 	public Map getbynvs(String noun) {
