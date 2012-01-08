@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50157
 File Encoding         : 65001
 
-Date: 2012-01-08 00:18:02
+Date: 2012-01-08 21:15:16
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -46,7 +46,7 @@ CREATE TABLE `backward` (
   `count` int(10) NOT NULL DEFAULT '0',
   `priror` int(10) NOT NULL DEFAULT '0',
   PRIMARY KEY (`bid`)
-) ENGINE=InnoDB AUTO_INCREMENT=82 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=121 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of backward
@@ -114,7 +114,48 @@ INSERT INTO `backward` VALUES ('73', '事故池(489)', 'COD过高', '0', '0');
 INSERT INTO `backward` VALUES ('74', '事故池(489)', 'BOD5过高', '0', '0');
 INSERT INTO `backward` VALUES ('75', '事故池(489)', 'SS过高', '0', '0');
 INSERT INTO `backward` VALUES ('76', '事故池(489)', 'NH3-N过高', '0', '0');
-INSERT INTO `backward` VALUES ('81', '电石厂有机水', 'A段溶解氧过高', '0', '0');
+INSERT INTO `backward` VALUES ('77', '老水解酸化池', 'PH过低', '0', '0');
+INSERT INTO `backward` VALUES ('78', '老水解酸化池', 'PH过高', '0', '0');
+INSERT INTO `backward` VALUES ('79', '新水解酸化池', 'PH过低', '0', '0');
+INSERT INTO `backward` VALUES ('80', '新水解酸化池', 'PH过高', '0', '0');
+INSERT INTO `backward` VALUES ('81', '老水解酸化池', 'COD过高', '0', '0');
+INSERT INTO `backward` VALUES ('82', '新水解酸化池', 'COD过高', '0', '0');
+INSERT INTO `backward` VALUES ('83', '老水解酸化池', '碱度过高', '0', '0');
+INSERT INTO `backward` VALUES ('84', '新水解酸化池', '碱度过高', '0', '0');
+INSERT INTO `backward` VALUES ('85', '新水解酸化池', 'BOD5过高', '0', '0');
+INSERT INTO `backward` VALUES ('86', '老水解酸化池', 'SS过高', '0', '0');
+INSERT INTO `backward` VALUES ('87', '新水解酸化池', 'SS过高', '0', '0');
+INSERT INTO `backward` VALUES ('88', '老水解酸化池', 'NH3-N过高', '0', '0');
+INSERT INTO `backward` VALUES ('89', '1系列二沉池', 'PH过低', '0', '0');
+INSERT INTO `backward` VALUES ('91', '1系列二沉池', 'PH过低', '0', '0');
+INSERT INTO `backward` VALUES ('92', '1系列二沉池', 'PH过高', '0', '0');
+INSERT INTO `backward` VALUES ('93', '1系列二沉池', 'COD过高', '0', '0');
+INSERT INTO `backward` VALUES ('94', '1系列二沉池', 'BOD5过高', '0', '0');
+INSERT INTO `backward` VALUES ('95', '1系列二沉池', 'SS过高', '0', '0');
+INSERT INTO `backward` VALUES ('96', '1系列二沉池', 'NH3-N过高', '0', '0');
+INSERT INTO `backward` VALUES ('97', '2系列二沉池', 'PH过低', '0', '0');
+INSERT INTO `backward` VALUES ('98', '2系列二沉池', 'COD过高', '0', '0');
+INSERT INTO `backward` VALUES ('99', '2系列二沉池', 'BOD5过高', '0', '0');
+INSERT INTO `backward` VALUES ('100', '2系列二沉池', 'SS过高', '0', '0');
+INSERT INTO `backward` VALUES ('101', '2系列二沉池', 'NH3-N过高', '0', '0');
+INSERT INTO `backward` VALUES ('102', '3系列二沉池', 'PH过低', '0', '0');
+INSERT INTO `backward` VALUES ('103', '3系列二沉池', 'PH过高', '0', '0');
+INSERT INTO `backward` VALUES ('104', '3系列二沉池', 'COD过高', '0', '0');
+INSERT INTO `backward` VALUES ('105', '3系列二沉池', 'BOD5过高', '0', '0');
+INSERT INTO `backward` VALUES ('106', '3系列二沉池', 'SS过高', '0', '0');
+INSERT INTO `backward` VALUES ('107', '3系列二沉池', 'NH3-N过高', '0', '0');
+INSERT INTO `backward` VALUES ('108', '4系列二沉池', 'PH过低', '0', '0');
+INSERT INTO `backward` VALUES ('109', '4系列二沉池', 'PH过高', '0', '0');
+INSERT INTO `backward` VALUES ('110', '4系列二沉池', 'COD过高', '0', '0');
+INSERT INTO `backward` VALUES ('111', '4系列二沉池', 'BOD5过高', '0', '0');
+INSERT INTO `backward` VALUES ('112', '4系列二沉池', 'SS过高', '0', '0');
+INSERT INTO `backward` VALUES ('113', '4系列二沉池', 'NH3-N过高', '0', '0');
+INSERT INTO `backward` VALUES ('114', '接触氧化池', 'PH过低', '0', '0');
+INSERT INTO `backward` VALUES ('115', '接触氧化池', 'PH过高', '0', '0');
+INSERT INTO `backward` VALUES ('116', '接触氧化池', 'COD过高', '0', '0');
+INSERT INTO `backward` VALUES ('117', '接触氧化池', 'SS过高', '0', '0');
+INSERT INTO `backward` VALUES ('119', '接触氧化池', 'NH3-N过高', '0', '0');
+INSERT INTO `backward` VALUES ('120', '接触氧化池', 'BOD5过高', '0', '0');
 
 -- ----------------------------
 -- Table structure for `backwardandlower`
@@ -148,7 +189,7 @@ CREATE TABLE `backwardandreason` (
   PRIMARY KEY (`id`),
   KEY `FKFBA61E58DB7478BC` (`bid`),
   CONSTRAINT `FKFBA61E58DB7478BC` FOREIGN KEY (`bid`) REFERENCES `backward` (`bid`)
-) ENGINE=InnoDB AUTO_INCREMENT=379 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=587 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 -- Records of backwardandreason
@@ -189,10 +230,6 @@ INSERT INTO `backwardandreason` VALUES ('36', '12', '', '0', '', '调整进水PH
 INSERT INTO `backwardandreason` VALUES ('37', '13', '', '0', '', '调整进水PH值，增加碱液投加量，查找碱液投加装置是否出现故障');
 INSERT INTO `backwardandreason` VALUES ('38', '14', '', '0', '', '调整进水PH值，增加碱液投加量，查找碱液投加装置是否出现故障');
 INSERT INTO `backwardandreason` VALUES ('39', '15', '', '0', '', '调整进水PH值，增加碱液投加量，查找碱液投加装置是否出现故障');
-INSERT INTO `backwardandreason` VALUES ('40', '16', '酸水的流量', '5', '增大', '增加碱液投加量');
-INSERT INTO `backwardandreason` VALUES ('41', '16', '酸水的酸度', '2.5', '增加', '增加碱液投加量');
-INSERT INTO `backwardandreason` VALUES ('42', '16', '碱液管线', '3.6', '堵塞', '及时清通，必要时断管逐渐清通');
-INSERT INTO `backwardandreason` VALUES ('43', '16', '碱液碱度', '0', '低', '增加两台碱液泵运行');
 INSERT INTO `backwardandreason` VALUES ('44', '16', '仪表指示', '0', '不准', '用PH试纸实测');
 INSERT INTO `backwardandreason` VALUES ('45', '16', 'PH指示表', '0', '损坏', '找仪表人员处理，恢复正常');
 INSERT INTO `backwardandreason` VALUES ('46', '16', '', '0', '', '调整进水PH值，增加碱液投加量，查找碱液投加装置是否出现故障');
@@ -482,9 +519,214 @@ INSERT INTO `backwardandreason` VALUES ('365', '76', '消解用水量', '0', '�
 INSERT INTO `backwardandreason` VALUES ('366', '76', 'DO', '0', '低', '加大曝气量');
 INSERT INTO `backwardandreason` VALUES ('367', '76', 'COD', '0', '高', '降低进水浓度');
 INSERT INTO `backwardandreason` VALUES ('368', '76', '水温', '0', '低', '提高进水水温');
-INSERT INTO `backwardandreason` VALUES ('369', '16', '1', '1', '1', '1');
-INSERT INTO `backwardandreason` VALUES ('377', '81', 'aa', '1.2', 'aa', 'aa');
-INSERT INTO `backwardandreason` VALUES ('378', '81', 'bb', '2.5', 'bb', 'bb');
+INSERT INTO `backwardandreason` VALUES ('369', '77', '', '1', '', '调整进水PH值，增加碱液投加量，查找碱液投加装置是否出现故障');
+INSERT INTO `backwardandreason` VALUES ('370', '77', '酸水的流量', '1', '增大', '增加碱液投加量');
+INSERT INTO `backwardandreason` VALUES ('371', '77', '酸水的酸度', '1', '增加', '增加碱液投加量');
+INSERT INTO `backwardandreason` VALUES ('372', '77', '仪表指示', '1', '不准', '用PH试纸是测');
+INSERT INTO `backwardandreason` VALUES ('373', '77', 'PH指示表', '1', '损坏', '找仪表人员处理，恢复正常');
+INSERT INTO `backwardandreason` VALUES ('374', '78', '', '1', '', '调整进水PH值，加酸（这种情况很少出现，目前工厂没有加酸装置）');
+INSERT INTO `backwardandreason` VALUES ('375', '79', '', '1', '', '调整进水PH值，增加碱液投加量，查找碱液投加装置是否出现故障');
+INSERT INTO `backwardandreason` VALUES ('376', '79', '酸水的流量', '1', '增大', '增加碱液投加量');
+INSERT INTO `backwardandreason` VALUES ('377', '79', '酸水的酸度', '1', '增加', '增加碱液投加量');
+INSERT INTO `backwardandreason` VALUES ('378', '79', '仪表指示', '1', '不准', '用PH试纸实测');
+INSERT INTO `backwardandreason` VALUES ('379', '79', 'PH指示表', '1', '损坏', '找仪表人员处理，恢复正常');
+INSERT INTO `backwardandreason` VALUES ('380', '80', '', '1', '', '调整进水PH值，加酸（这种情况很少出现，目前工厂没有加酸装置）');
+INSERT INTO `backwardandreason` VALUES ('381', '81', '含泥量', '1', '高', '加强初沉池排泥');
+INSERT INTO `backwardandreason` VALUES ('382', '81', '含油量', '1', '大', '控制液位');
+INSERT INTO `backwardandreason` VALUES ('383', '81', '污泥沉降性、絮凝性差', '1', '差', '降低进水浓度；增加曝气量；提高水温；提高进水pH值');
+INSERT INTO `backwardandreason` VALUES ('384', '82', '含泥量', '1', '高', '加强初沉池排泥');
+INSERT INTO `backwardandreason` VALUES ('385', '82', '含油量', '1', '大', '控制液位');
+INSERT INTO `backwardandreason` VALUES ('386', '82', '污泥沉降性、絮凝性差', '1', '差', '降低进水浓度；增加曝气量；提高水温；提高进水pH值');
+INSERT INTO `backwardandreason` VALUES ('387', '83', '含量', '1', '高', '加石灰的投加量');
+INSERT INTO `backwardandreason` VALUES ('388', '84', '含量', '1', '高', '加石灰的投加量');
+INSERT INTO `backwardandreason` VALUES ('389', '85', '含泥量', '1', '高', '加强初沉池排泥');
+INSERT INTO `backwardandreason` VALUES ('390', '85', '含油量', '1', '大', '控制液位');
+INSERT INTO `backwardandreason` VALUES ('391', '85', '污泥沉降性、絮凝性差', '1', '差', '降低进水浓度；增加曝气量；提高水温；提高进水pH值');
+INSERT INTO `backwardandreason` VALUES ('392', '85', '重油量', '1', '多', '沉淀池处理或者进入事故池存');
+INSERT INTO `backwardandreason` VALUES ('393', '86', '含泥量', '1', '大', '加强初沉池管理');
+INSERT INTO `backwardandreason` VALUES ('394', '86', '排泥', '1', '不及时', '加大排泥量');
+INSERT INTO `backwardandreason` VALUES ('395', '87', '含泥量', '1', '大', '加强初沉池管理');
+INSERT INTO `backwardandreason` VALUES ('396', '87', '排泥', '1', '不及时', '加大排泥量');
+INSERT INTO `backwardandreason` VALUES ('397', '88', '进水碱度', '1', '低', '增加碱液投加量，或查找消解设备是否出现故障');
+INSERT INTO `backwardandreason` VALUES ('398', '88', '消解机进水进料量', '1', '调解', '1、根据石灰的质量，调整石灰和水的最佳配比量  2、调整喷淋水最佳 流量，保证石灰渣不跑浆，使石灰彻底消解  3、提升碱液时要充分搅拌，防止碱液沉淀');
+INSERT INTO `backwardandreason` VALUES ('399', '88', '生石灰质量', '1', '不好', '保证入库生石灰质量');
+INSERT INTO `backwardandreason` VALUES ('400', '88', '消解效果', '1', '不到位', '调整合适水量加料量和反应温度');
+INSERT INTO `backwardandreason` VALUES ('401', '88', '消解机进口', '1', '堵塞', '用工具清理进料口');
+INSERT INTO `backwardandreason` VALUES ('402', '88', '消解用水量', '1', '不足', '与调度室联系，保证用水量');
+INSERT INTO `backwardandreason` VALUES ('403', '88', 'DO', '1', '低', '加大曝气量');
+INSERT INTO `backwardandreason` VALUES ('404', '88', 'COD', '1', '高', '降低进水浓度');
+INSERT INTO `backwardandreason` VALUES ('405', '88', '水温', '1', '低', '提高进水水温');
+INSERT INTO `backwardandreason` VALUES ('406', '88', '水量', '1', '大', '控制排水');
+INSERT INTO `backwardandreason` VALUES ('407', '89', '', '1', '', '调整进水PH值，增加碱液投加量，查找碱液投加装置是否出现故障');
+INSERT INTO `backwardandreason` VALUES ('408', '89', '酸水的流量', '1', '增大', '增加碱液投加量');
+INSERT INTO `backwardandreason` VALUES ('409', '89', '酸水的酸度', '1', '增加', '增加碱液投加量');
+INSERT INTO `backwardandreason` VALUES ('410', '89', '仪表指示', '1', '不准', '用PH试纸实测');
+INSERT INTO `backwardandreason` VALUES ('411', '89', 'PH指示表', '1', '损坏', '找仪表人员处理，恢复正常');
+INSERT INTO `backwardandreason` VALUES ('413', '91', '', '1', '', '调整进水PH值，增加碱液投加量，查找碱液投加装置是否出现故障');
+INSERT INTO `backwardandreason` VALUES ('414', '91', '酸水的流量', '1', '增大', '增加碱液投加量');
+INSERT INTO `backwardandreason` VALUES ('415', '91', '酸水的酸度', '1', '增加', '增加碱液投加量');
+INSERT INTO `backwardandreason` VALUES ('416', '91', '碱液管线', '1', '堵塞', '及时清通，必要时断管逐渐清通');
+INSERT INTO `backwardandreason` VALUES ('417', '91', '碱液碱度', '1', '低', '增加两台碱液泵运行');
+INSERT INTO `backwardandreason` VALUES ('418', '91', '仪表指示', '1', '不准', '用PH试纸实测');
+INSERT INTO `backwardandreason` VALUES ('419', '91', 'PH指示表', '1', '损坏', '找仪表人员处理，恢复正常');
+INSERT INTO `backwardandreason` VALUES ('420', '92', '', '1', '', '调整进水PH值，加酸（这种情况很少出现，目前工厂没有加酸装置）');
+INSERT INTO `backwardandreason` VALUES ('421', '93', '进水有机物浓度', '1', '高', '调整降低进水浓度');
+INSERT INTO `backwardandreason` VALUES ('422', '93', '污泥浓度', '1', '低', '增加回流比');
+INSERT INTO `backwardandreason` VALUES ('423', '93', '污泥沉降性、絮凝性差', '1', '差', '降低进水浓度；增加曝气量；提高水温；提高进水pH值');
+INSERT INTO `backwardandreason` VALUES ('424', '93', '', '1', '', '加消泡剂，脱色剂');
+INSERT INTO `backwardandreason` VALUES ('425', '94', '加消泡剂，脱色剂', '1', '高', '调整进水浓度');
+INSERT INTO `backwardandreason` VALUES ('426', '94', '水解酸化效果', '1', '差', '检查填料挂膜情况，控制进水浓度');
+INSERT INTO `backwardandreason` VALUES ('427', '94', '生活污水量', '1', '少', '提高生活污水比例');
+INSERT INTO `backwardandreason` VALUES ('428', '94', '污泥浓度', '1', '低', '增加回流比');
+INSERT INTO `backwardandreason` VALUES ('429', '94', '污泥沉降性、絮凝性差', '1', '差', '降低进水浓度；增加曝气量；提高水温；提高进水pH值');
+INSERT INTO `backwardandreason` VALUES ('430', '94', 'DO', '1', '不足', '增加曝气量');
+INSERT INTO `backwardandreason` VALUES ('431', '95', '污泥沉降性、絮凝性差', '1', '污泥膨胀', '降低进水浓度、增加污泥回流比， 增加生化池o段的曝气量；提高进水pH值，提高水温；');
+INSERT INTO `backwardandreason` VALUES ('432', '95', '', '1', '污泥解体', '控制进水指标；调整曝气量；');
+INSERT INTO `backwardandreason` VALUES ('433', '95', '', '1', '污泥上浮', '及时排泥；增加曝气池末端溶解氧');
+INSERT INTO `backwardandreason` VALUES ('434', '95', '', '1', '污泥中毒', '控制进水');
+INSERT INTO `backwardandreason` VALUES ('435', '95', '', '1', '泡沫', '工业水喷淋');
+INSERT INTO `backwardandreason` VALUES ('436', '95', '排泥', '1', '不及时', '加大排泥量');
+INSERT INTO `backwardandreason` VALUES ('437', '96', '进水碱度', '1', '低', '增加碱液投加量，或查找消解设备是否出现故障');
+INSERT INTO `backwardandreason` VALUES ('438', '96', '消解机进水进料量', '1', '调解', '1、根据石灰的质量，调整石灰和水的最佳配比量  2、调整喷淋水最佳 流量，保证石灰渣不跑浆，使石灰彻底消解  3、提升碱液时要充分搅拌，防止碱液沉淀');
+INSERT INTO `backwardandreason` VALUES ('439', '96', '生石灰质量', '1', '不好', '保证入库生石灰质量');
+INSERT INTO `backwardandreason` VALUES ('440', '96', '消解效果', '1', '不到位', '调整合适水量加料量和反应温度');
+INSERT INTO `backwardandreason` VALUES ('441', '96', '消解机进口', '1', '堵塞', '用工具清理进料口');
+INSERT INTO `backwardandreason` VALUES ('442', '96', '消解用水量', '1', '不足', '与调度室联系，保证用水量');
+INSERT INTO `backwardandreason` VALUES ('443', '96', 'DO', '1', '低', '加大曝气量');
+INSERT INTO `backwardandreason` VALUES ('444', '96', 'COD', '1', '高', '降低进水浓度');
+INSERT INTO `backwardandreason` VALUES ('445', '96', '水温', '1', '低', '提高进水水温');
+INSERT INTO `backwardandreason` VALUES ('446', '97', '', '1', '', '调整进水PH值，增加碱液投加量，查找碱液投加装置是否出现故障');
+INSERT INTO `backwardandreason` VALUES ('447', '97', '酸水的流量', '1', '增大', '增加碱液投加量');
+INSERT INTO `backwardandreason` VALUES ('448', '97', '酸水的酸度', '1', '增加', '增加碱液投加量');
+INSERT INTO `backwardandreason` VALUES ('449', '97', '碱液管线', '1', '堵塞', '及时清通，必要时断管逐渐清通');
+INSERT INTO `backwardandreason` VALUES ('450', '97', '碱液碱度', '1', '低', '增加两台碱液泵运行');
+INSERT INTO `backwardandreason` VALUES ('451', '97', '仪表指示', '1', '不准', '用PH试纸实测');
+INSERT INTO `backwardandreason` VALUES ('452', '97', 'PH指示表', '1', '损坏', '找仪表人员处理，恢复正常');
+INSERT INTO `backwardandreason` VALUES ('453', '98', '进水有机物浓度', '1', '高', '调整降低进水浓度');
+INSERT INTO `backwardandreason` VALUES ('454', '98', '污泥浓度', '1', '低', '增加回流比');
+INSERT INTO `backwardandreason` VALUES ('455', '98', '污泥沉降性、絮凝性差', '1', '差', '降低进水浓度；增加曝气量；提高水温；提高进水pH值');
+INSERT INTO `backwardandreason` VALUES ('456', '98', '', '1', '', '加消泡剂，脱色剂');
+INSERT INTO `backwardandreason` VALUES ('457', '99', '进水有机物浓度', '1', '高', '调整进水浓度');
+INSERT INTO `backwardandreason` VALUES ('458', '99', '水解酸化效果', '1', '差', '检查填料挂膜情况，控制进水浓度');
+INSERT INTO `backwardandreason` VALUES ('459', '99', '生活污水量', '1', '少', '提高生活污水比例');
+INSERT INTO `backwardandreason` VALUES ('460', '99', '污泥浓度', '1', '低', '增加回流比');
+INSERT INTO `backwardandreason` VALUES ('461', '99', '污泥沉降性、絮凝性差', '1', '差', '降低进水浓度；增加曝气量；提高水温；提高进水pH值');
+INSERT INTO `backwardandreason` VALUES ('462', '99', 'DO', '1', '不足', '增加曝气量');
+INSERT INTO `backwardandreason` VALUES ('463', '100', '污泥沉降性、絮凝性差', '1', '污泥膨胀', '降低进水浓度、增加污泥回流比， 增加生化池o段的曝气量；提高进水pH值，提高水温');
+INSERT INTO `backwardandreason` VALUES ('464', '100', '', '1', '污泥解体', '控制进水指标；调整曝气量');
+INSERT INTO `backwardandreason` VALUES ('465', '100', '', '1', '污泥上浮', '及时排泥；增加曝气池末端溶解氧');
+INSERT INTO `backwardandreason` VALUES ('466', '100', '', '1', '污泥中毒', '控制进水');
+INSERT INTO `backwardandreason` VALUES ('467', '100', '', '1', '泡沫', '工业水喷淋');
+INSERT INTO `backwardandreason` VALUES ('468', '100', '排泥', '1', '不及时', '加大排泥量');
+INSERT INTO `backwardandreason` VALUES ('469', '101', '进水碱度', '1', '低', '增加碱液投加量，或查找消解设备是否出现故障');
+INSERT INTO `backwardandreason` VALUES ('470', '101', '消解机进水进料量', '1', '调解', '1、根据石灰的质量，调整石灰和水的最佳配比量  2、调整喷淋水最佳 流量，保证石灰渣不跑浆，使石灰彻底消解  3、提升碱液时要充分搅拌，防止碱液沉淀');
+INSERT INTO `backwardandreason` VALUES ('471', '101', '生石灰质量', '1', '不好', '保证入库生石灰质量');
+INSERT INTO `backwardandreason` VALUES ('472', '101', '消解效果', '1', '不到位', '调整合适水量加料量和反应温度');
+INSERT INTO `backwardandreason` VALUES ('473', '101', '消解效果', '1', '不到位', '调整合适水量加料量和反应温度');
+INSERT INTO `backwardandreason` VALUES ('474', '101', '消解机进口', '1', '堵塞', '用工具清理进料口');
+INSERT INTO `backwardandreason` VALUES ('475', '101', '消解用水量', '1', '不足', '与调度室联系，保证用水量');
+INSERT INTO `backwardandreason` VALUES ('476', '101', 'DO', '1', '低', '加大曝气量');
+INSERT INTO `backwardandreason` VALUES ('477', '101', 'COD', '1', '高', '降低进水浓度');
+INSERT INTO `backwardandreason` VALUES ('478', '101', '水温', '1', '低', '提高进水水温');
+INSERT INTO `backwardandreason` VALUES ('479', '102', '', '1', '', '调整进水PH值，增加碱液投加量，查找碱液投加装置是否出现故障');
+INSERT INTO `backwardandreason` VALUES ('480', '102', '酸水的流量', '1', '增大', '增加碱液投加量');
+INSERT INTO `backwardandreason` VALUES ('481', '102', '酸水的酸度', '1', '增加', '增加碱液投加量');
+INSERT INTO `backwardandreason` VALUES ('482', '102', '碱液管线', '1', '堵塞', '及时清通，必要时断管逐渐清通');
+INSERT INTO `backwardandreason` VALUES ('483', '102', '碱液碱度', '1', '低', '增加两台碱液泵运行');
+INSERT INTO `backwardandreason` VALUES ('484', '102', '仪表指示', '1', '不准', '用PH试纸实测');
+INSERT INTO `backwardandreason` VALUES ('485', '102', 'PH指示表', '1', '损坏', '找仪表人员处理，恢复正常');
+INSERT INTO `backwardandreason` VALUES ('486', '103', '', '1', '', '调整进水PH值，加酸（这种情况很少出现，目前工厂没有加酸装置）');
+INSERT INTO `backwardandreason` VALUES ('487', '104', '进水有机物浓度', '1', '高', '调整降低进水浓度');
+INSERT INTO `backwardandreason` VALUES ('488', '104', '污泥浓度', '1', '低', '增加回流比');
+INSERT INTO `backwardandreason` VALUES ('489', '104', '污泥沉降性、絮凝性差', '1', '差', '降低进水浓度；增加曝气量；提高水温；提高进水pH值');
+INSERT INTO `backwardandreason` VALUES ('490', '104', '', '1', '', '加消泡剂，脱色剂');
+INSERT INTO `backwardandreason` VALUES ('491', '105', '进水有机物浓度', '1', '高', '调整进水浓度');
+INSERT INTO `backwardandreason` VALUES ('492', '105', '水解酸化效果', '1', '差', '检查填料挂膜情况，控制进水浓度');
+INSERT INTO `backwardandreason` VALUES ('493', '105', '生活污水量', '1', '少', '提高生活污水比例');
+INSERT INTO `backwardandreason` VALUES ('494', '105', '污泥浓度', '1', '低', '增加回流比');
+INSERT INTO `backwardandreason` VALUES ('495', '105', '污泥沉降性、絮凝性差', '1', '差', '降低进水浓度；增加曝气量；提高水温；提高进水pH值');
+INSERT INTO `backwardandreason` VALUES ('496', '105', 'DO', '1', '不足', '增加曝气量');
+INSERT INTO `backwardandreason` VALUES ('497', '106', '污泥沉降性、絮凝性差', '1', '污泥膨胀', '降低进水浓度、增加污泥回流比， 增加生化池o段的曝气量；提高进水pH值，提高水温；');
+INSERT INTO `backwardandreason` VALUES ('498', '106', '', '1', '污泥解体', '控制进水指标；调整曝气量；');
+INSERT INTO `backwardandreason` VALUES ('499', '106', '', '1', '污泥上浮', '及时排泥；增加曝气池末端溶解氧');
+INSERT INTO `backwardandreason` VALUES ('500', '106', '', '1', '污泥中毒', '控制进水');
+INSERT INTO `backwardandreason` VALUES ('501', '106', '', '1', '泡沫', '工业水喷淋');
+INSERT INTO `backwardandreason` VALUES ('502', '106', '排泥', '1', '不及时', '加大排泥量');
+INSERT INTO `backwardandreason` VALUES ('503', '107', '进水碱度', '1', '低', '增加碱液投加量，或查找消解设备是否出现故障');
+INSERT INTO `backwardandreason` VALUES ('504', '107', '消解机进水进料量', '1', '调解', '1、根据石灰的质量，调整石灰和水的最佳配比量  2、调整喷淋水最佳 流量，保证石灰渣不跑浆，使石灰彻底消解  3、提升碱液时要充分搅拌，防止碱液沉淀');
+INSERT INTO `backwardandreason` VALUES ('505', '107', '生石灰质量', '1', '不好', '保证入库生石灰质量');
+INSERT INTO `backwardandreason` VALUES ('506', '107', '消解效果', '1', '不到位', '调整合适水量加料量和反应温度');
+INSERT INTO `backwardandreason` VALUES ('507', '107', '消解机进口', '1', '堵塞', '用工具清理进料口');
+INSERT INTO `backwardandreason` VALUES ('508', '107', '消解用水量', '1', '不足', '与调度室联系，保证用水量');
+INSERT INTO `backwardandreason` VALUES ('509', '107', 'DO', '1', '低', '加大曝气量');
+INSERT INTO `backwardandreason` VALUES ('510', '107', 'COD', '1', '高', '降低进水浓度');
+INSERT INTO `backwardandreason` VALUES ('511', '107', '水温', '1', '低', '提高进水水温');
+INSERT INTO `backwardandreason` VALUES ('512', '108', '', '1', '', '调整进水PH值，增加碱液投加量，查找碱液投加装置是否出现故障');
+INSERT INTO `backwardandreason` VALUES ('513', '108', '酸水的流量', '1', '增大', '增加碱液投加量');
+INSERT INTO `backwardandreason` VALUES ('514', '108', '酸水的酸度', '1', '增加', '增加碱液投加量');
+INSERT INTO `backwardandreason` VALUES ('515', '108', '碱液管线', '1', '堵塞', '及时清通，必要时断管逐渐清通');
+INSERT INTO `backwardandreason` VALUES ('516', '108', '碱液碱度', '1', '低', '增加两台碱液泵运行');
+INSERT INTO `backwardandreason` VALUES ('517', '108', '仪表指示', '1', '不准', '用PH试纸实测');
+INSERT INTO `backwardandreason` VALUES ('518', '108', 'PH指示表', '1', '损坏', '找仪表人员处理，恢复正常');
+INSERT INTO `backwardandreason` VALUES ('519', '109', '', '1', '', '调整进水PH值，加酸（这种情况很少出现，目前工厂没有加酸装置）');
+INSERT INTO `backwardandreason` VALUES ('520', '110', '进水有机物浓度', '1', '高', '调整降低进水浓度');
+INSERT INTO `backwardandreason` VALUES ('521', '110', '污泥浓度', '1', '低', '增加回流比');
+INSERT INTO `backwardandreason` VALUES ('522', '110', '污泥沉降性、絮凝性差', '1', '差', '降低进水浓度；增加曝气量；提高水温；提高进水pH值');
+INSERT INTO `backwardandreason` VALUES ('523', '110', '', '1', '', '加消泡剂，脱色剂');
+INSERT INTO `backwardandreason` VALUES ('524', '111', '进水有机物浓度', '1', '高', '调整进水浓度');
+INSERT INTO `backwardandreason` VALUES ('525', '111', '水解酸化效果', '1', '差', '检查填料挂膜情况，控制进水浓度');
+INSERT INTO `backwardandreason` VALUES ('526', '111', '生活污水量', '1', '少', '提高生活污水比例');
+INSERT INTO `backwardandreason` VALUES ('527', '111', '污泥浓度', '1', '低', '增加回流比');
+INSERT INTO `backwardandreason` VALUES ('528', '111', '污泥沉降性、絮凝性差', '1', '差', '降低进水浓度；增加曝气量；提高水温；提高进水pH值');
+INSERT INTO `backwardandreason` VALUES ('529', '111', 'DO', '1', '不足', '增加曝气量');
+INSERT INTO `backwardandreason` VALUES ('530', '112', '污泥沉降性、絮凝性差', '1', '污泥膨胀', '降低进水浓度、增加污泥回流比， 增加生化池o段的曝气量；提高进水pH值，提高水温；');
+INSERT INTO `backwardandreason` VALUES ('531', '112', '', '1', '污泥解体', '控制进水指标；调整曝气量');
+INSERT INTO `backwardandreason` VALUES ('532', '112', '', '1', '污泥上浮', '及时排泥；增加曝气池末端溶解氧');
+INSERT INTO `backwardandreason` VALUES ('533', '112', '', '1', '污泥中毒', '控制进水');
+INSERT INTO `backwardandreason` VALUES ('534', '112', '', '1', '泡沫', '工业水喷淋');
+INSERT INTO `backwardandreason` VALUES ('535', '112', '排泥', '1', '不及时', '加大排泥量');
+INSERT INTO `backwardandreason` VALUES ('536', '113', '进水碱度', '1', '低', '增加碱液投加量，或查找消解设备是否出现故障');
+INSERT INTO `backwardandreason` VALUES ('537', '113', '消解机进水进料量', '1', '调解', '1、根据石灰的质量，调整石灰和水的最佳配比量  2、调整喷淋水最佳 流量，保证石灰渣不跑浆，使石灰彻底消解  3、提升碱液时要充分搅拌，防止碱液沉淀');
+INSERT INTO `backwardandreason` VALUES ('538', '113', '生石灰质量', '1', '不好', '保证入库生石灰质量');
+INSERT INTO `backwardandreason` VALUES ('539', '113', '消解效果', '1', '不到位', '调整合适水量加料量和反应温度');
+INSERT INTO `backwardandreason` VALUES ('540', '113', '消解机进口', '1', '堵塞', '用工具清理进料口');
+INSERT INTO `backwardandreason` VALUES ('541', '113', '消解用水量', '1', '不足', '与调度室联系，保证用水量');
+INSERT INTO `backwardandreason` VALUES ('542', '113', 'DO', '1', '低', '加大曝气量');
+INSERT INTO `backwardandreason` VALUES ('543', '113', 'COD', '1', '高', '降低进水浓度，');
+INSERT INTO `backwardandreason` VALUES ('544', '113', '水温', '1', '低', '提高进水水温');
+INSERT INTO `backwardandreason` VALUES ('545', '114', '提高进水水温', '1', '增大', '增加碱液投加量');
+INSERT INTO `backwardandreason` VALUES ('546', '114', '酸水的酸度', '1', '增加', '增加碱液投加量');
+INSERT INTO `backwardandreason` VALUES ('547', '114', '碱液管线', '1', '堵塞', '及时清通，必要时断管逐渐清通');
+INSERT INTO `backwardandreason` VALUES ('548', '114', '碱液碱度', '1', '低', '增加两台碱液泵运行');
+INSERT INTO `backwardandreason` VALUES ('549', '114', '仪表指示', '1', '不准', '用PH试纸实测');
+INSERT INTO `backwardandreason` VALUES ('550', '114', 'PH指示表', '1', '损坏', '找仪表人员处理，恢复正常');
+INSERT INTO `backwardandreason` VALUES ('551', '114', '', '1', '', '调整进水PH值，增加碱液投加量，查找碱液投加装置是否出现故障');
+INSERT INTO `backwardandreason` VALUES ('552', '115', '', '1', '', '调整进水PH值，加酸（这种情况很少出现，目前工厂没有加酸装置）');
+INSERT INTO `backwardandreason` VALUES ('553', '116', '进水有机物浓度', '1', '高', '调整降低进水浓度');
+INSERT INTO `backwardandreason` VALUES ('554', '116', '污泥浓度', '1', '低', '增加回流比');
+INSERT INTO `backwardandreason` VALUES ('555', '116', '污泥沉降性、絮凝性差', '1', '差', '降低进水浓度；增加曝气量；提高水温；提高进水pH值');
+INSERT INTO `backwardandreason` VALUES ('556', '116', '悬浮物', '1', '多', '调整空气量，通过排泥把浮物去掉');
+INSERT INTO `backwardandreason` VALUES ('557', '117', '污泥沉降性、絮凝性差', '1', '污泥膨胀', '降低进水浓度、增加污泥回流比， 增加生化池o段的曝气量；提高进水pH值，提高水温；');
+INSERT INTO `backwardandreason` VALUES ('558', '117', '污泥沉降性、絮凝性差', '1', '污泥解体', '控制进水指标；调整曝气量；');
+INSERT INTO `backwardandreason` VALUES ('559', '117', '污泥沉降性、絮凝性差', '1', '污泥上浮', '及时排泥；增加曝气池末端溶解氧');
+INSERT INTO `backwardandreason` VALUES ('560', '117', '污泥沉降性、絮凝性差', '1', '污泥中毒', '控制进水');
+INSERT INTO `backwardandreason` VALUES ('561', '117', '污泥沉降性、絮凝性差', '1', '泡沫', '工业水喷淋');
+INSERT INTO `backwardandreason` VALUES ('562', '117', '排泥', '1', '不及时', '加大排泥量');
+INSERT INTO `backwardandreason` VALUES ('572', '119', '进水碱度', '1', '低', '增加碱液投加量，或查找消解设备是否出现故障');
+INSERT INTO `backwardandreason` VALUES ('573', '119', '消解机进水进料量', '1', '调解', '1、根据石灰的质量，调整石灰和水的最佳配比量  2、调整喷淋水最佳 流量，保证石灰渣不跑浆，使石灰彻底消解  3、提升碱液时要充分搅拌，防止碱液沉淀');
+INSERT INTO `backwardandreason` VALUES ('574', '119', '生石灰质量', '1', '不好', '保证入库生石灰质量');
+INSERT INTO `backwardandreason` VALUES ('575', '119', '消解效果', '1', '不到位', '调整合适水量加料量和反应温度');
+INSERT INTO `backwardandreason` VALUES ('576', '119', '消解机进口', '1', '堵塞', '用工具清理进料口');
+INSERT INTO `backwardandreason` VALUES ('577', '119', '消解用水量', '1', '不足', '与调度室联系，保证用水量');
+INSERT INTO `backwardandreason` VALUES ('578', '119', 'DO', '1', '低', '加大曝气量');
+INSERT INTO `backwardandreason` VALUES ('579', '119', 'COD', '1', '高', '降低进水浓度，');
+INSERT INTO `backwardandreason` VALUES ('580', '119', '水温', '1', '低', '提高进水水温');
+INSERT INTO `backwardandreason` VALUES ('581', '120', '进水有机物浓度', '1', '高', '调整进水浓度');
+INSERT INTO `backwardandreason` VALUES ('582', '120', '水解酸化效果', '1', '差', '检查填料挂膜情况，控制进水浓度');
+INSERT INTO `backwardandreason` VALUES ('583', '120', '生活污水量', '1', '少', '提高生活污水比例');
+INSERT INTO `backwardandreason` VALUES ('584', '120', '污泥浓度', '1', '低', '增加回流比');
+INSERT INTO `backwardandreason` VALUES ('585', '120', '污泥沉降性、絮凝性差', '1', '差', '降低进水浓度；增加曝气量；提高水温；提高进水pH值');
+INSERT INTO `backwardandreason` VALUES ('586', '120', 'DO', '1', '不足', '增加曝气量');
 
 -- ----------------------------
 -- Table structure for `backwardandresult`
@@ -500,12 +742,12 @@ CREATE TABLE `backwardandresult` (
   PRIMARY KEY (`id`),
   KEY `FKFBAE5431DB7478BC` (`bid`),
   CONSTRAINT `FKFBAE5431DB7478BC` FOREIGN KEY (`bid`) REFERENCES `backward` (`bid`)
-) ENGINE=InnoDB AUTO_INCREMENT=82 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
+) ENGINE=InnoDB AUTO_INCREMENT=121 DEFAULT CHARSET=utf8 ROW_FORMAT=COMPACT;
 
 -- ----------------------------
 -- Records of backwardandresult
 -- ----------------------------
-INSERT INTO `backwardandresult` VALUES ('4', '4', '生化池系列1(1号生化池)PH', '0.2', '过低', null);
+INSERT INTO `backwardandresult` VALUES ('4', '4', '生化池系列1(1号生化池)PH', '0', '过低', null);
 INSERT INTO `backwardandresult` VALUES ('5', '5', '生化池系列1(1号生化池)PH', '0', '过高', null);
 INSERT INTO `backwardandresult` VALUES ('6', '6', '生化池系列1(2号生化池)PH', '0', '过高', null);
 INSERT INTO `backwardandresult` VALUES ('7', '7', '生化池系列1(2号生化池)PH', '0', '过低', null);
@@ -568,7 +810,48 @@ INSERT INTO `backwardandresult` VALUES ('73', '73', '事故池(489)COD', '0', '�
 INSERT INTO `backwardandresult` VALUES ('74', '74', '事故池(489)BOD5', '0', '过高', null);
 INSERT INTO `backwardandresult` VALUES ('75', '75', '事故池(489)SS', '0', '过高', null);
 INSERT INTO `backwardandresult` VALUES ('76', '76', '事故池(489)NH3-N', '0', '过高', null);
-INSERT INTO `backwardandresult` VALUES ('81', '81', '电石厂有机水A段溶解氧', '0', '过高', null);
+INSERT INTO `backwardandresult` VALUES ('77', '77', '老水解酸化池PH', '0', '过低', null);
+INSERT INTO `backwardandresult` VALUES ('78', '78', '老水解酸化池PH', '0', '过高', null);
+INSERT INTO `backwardandresult` VALUES ('79', '79', '新水解酸化池PH', '0', '过低', null);
+INSERT INTO `backwardandresult` VALUES ('80', '80', '新水解酸化池PH', '0', '过高', null);
+INSERT INTO `backwardandresult` VALUES ('81', '81', '老水解酸化池COD', '0', '过高', null);
+INSERT INTO `backwardandresult` VALUES ('82', '82', '新水解酸化池COD', '0', '过高', null);
+INSERT INTO `backwardandresult` VALUES ('83', '83', '老水解酸化池碱度', '0', '过高', null);
+INSERT INTO `backwardandresult` VALUES ('84', '84', '新水解酸化池碱度', '0', '过高', null);
+INSERT INTO `backwardandresult` VALUES ('85', '85', '新水解酸化池BOD5', '0', '过高', null);
+INSERT INTO `backwardandresult` VALUES ('86', '86', '老水解酸化池SS', '0', '过高', null);
+INSERT INTO `backwardandresult` VALUES ('87', '87', '新水解酸化池SS', '0', '过高', null);
+INSERT INTO `backwardandresult` VALUES ('88', '88', '老水解酸化池NH3-N', '0', '过高', null);
+INSERT INTO `backwardandresult` VALUES ('89', '89', '1系列二沉池PH', '0', '过低', null);
+INSERT INTO `backwardandresult` VALUES ('91', '91', '1系列二沉池PH', '0', '过低', null);
+INSERT INTO `backwardandresult` VALUES ('92', '92', '1系列二沉池PH', '0', '过高', null);
+INSERT INTO `backwardandresult` VALUES ('93', '93', '1系列二沉池COD', '0', '过高', null);
+INSERT INTO `backwardandresult` VALUES ('94', '94', '1系列二沉池BOD5', '0', '过高', null);
+INSERT INTO `backwardandresult` VALUES ('95', '95', '1系列二沉池SS', '0', '过高', null);
+INSERT INTO `backwardandresult` VALUES ('96', '96', '1系列二沉池NH3-N', '0', '过高', null);
+INSERT INTO `backwardandresult` VALUES ('97', '97', '2系列二沉池PH', '0', '过低', null);
+INSERT INTO `backwardandresult` VALUES ('98', '98', '2系列二沉池COD', '0', '过高', null);
+INSERT INTO `backwardandresult` VALUES ('99', '99', '2系列二沉池BOD5', '0', '过高', null);
+INSERT INTO `backwardandresult` VALUES ('100', '100', '2系列二沉池SS', '0', '过高', null);
+INSERT INTO `backwardandresult` VALUES ('101', '101', '2系列二沉池NH3-N', '0', '过高', null);
+INSERT INTO `backwardandresult` VALUES ('102', '102', '3系列二沉池PH', '0', '过低', null);
+INSERT INTO `backwardandresult` VALUES ('103', '103', '3系列二沉池PH', '0', '过高', null);
+INSERT INTO `backwardandresult` VALUES ('104', '104', '3系列二沉池COD', '0', '过高', null);
+INSERT INTO `backwardandresult` VALUES ('105', '105', '3系列二沉池BOD5', '0', '过高', null);
+INSERT INTO `backwardandresult` VALUES ('106', '106', '3系列二沉池SS', '0', '过高', null);
+INSERT INTO `backwardandresult` VALUES ('107', '107', '3系列二沉池NH3-N', '0', '过高', null);
+INSERT INTO `backwardandresult` VALUES ('108', '108', '4系列二沉池PH', '0', '过低', null);
+INSERT INTO `backwardandresult` VALUES ('109', '109', '4系列二沉池PH', '0', '过高', null);
+INSERT INTO `backwardandresult` VALUES ('110', '110', '4系列二沉池COD', '0', '过高', null);
+INSERT INTO `backwardandresult` VALUES ('111', '111', '4系列二沉池BOD5', '0', '过高', null);
+INSERT INTO `backwardandresult` VALUES ('112', '112', '4系列二沉池SS', '0', '过高', null);
+INSERT INTO `backwardandresult` VALUES ('113', '113', '4系列二沉池NH3-N', '0', '过高', null);
+INSERT INTO `backwardandresult` VALUES ('114', '114', '接触氧化池PH', '0', '过低', null);
+INSERT INTO `backwardandresult` VALUES ('115', '115', '接触氧化池PH', '0', '过高', null);
+INSERT INTO `backwardandresult` VALUES ('116', '116', '接触氧化池COD', '0', '过高', null);
+INSERT INTO `backwardandresult` VALUES ('117', '117', '接触氧化池SS', '0', '过高', null);
+INSERT INTO `backwardandresult` VALUES ('119', '119', '接触氧化池NH3-N', '0', '过高', null);
+INSERT INTO `backwardandresult` VALUES ('120', '120', '接触氧化池BOD5', '0', '过高', null);
 
 -- ----------------------------
 -- Table structure for `backwardandupper`
@@ -643,50 +926,86 @@ CREATE TABLE `dcsdscrib` (
   `upper1` double NOT NULL,
   `upper2` double NOT NULL,
   PRIMARY KEY (`did`)
-) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1487 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of dcsdscrib
 -- ----------------------------
-INSERT INTO `dcsdscrib` VALUES ('1', '生化池系列2(3号生化池)', 'PH', '6', '生化池系列2(3号生化池)PH', '9', '0', '0', '0', '0');
-INSERT INTO `dcsdscrib` VALUES ('2', '生化池系列2(3号生化池)', 'COD', '0', '生化池系列2(3号生化池)COD', '0.5', '0', '0', '0', '0');
-INSERT INTO `dcsdscrib` VALUES ('3', '生化池系列2(3号生化池)', '碱度', '8', '生化池系列2(3号生化池)碱度', '14', '0', '0', '0', '0');
-INSERT INTO `dcsdscrib` VALUES ('4', '生化池系列2(3号生化池)', 'BOD5', '2', '生化池系列2(3号生化池)BOD5', '4', '0', '0', '0', '0');
-INSERT INTO `dcsdscrib` VALUES ('5', '生化池系列2(3号生化池)', 'SS', '100', '生化池系列2(3号生化池)SS', '500', '0', '0', '0', '0');
-INSERT INTO `dcsdscrib` VALUES ('6', '生化池系列2(4号生化池)', 'COD', '0', '生化池系列2(4号生化池)COD', '0.5', '0', '0', '0', '0');
-INSERT INTO `dcsdscrib` VALUES ('7', '生化池系列2(4号生化池)', '碱度', '8', '生化池系列2(4号生化池)碱度', '14', '0', '0', '0', '0');
-INSERT INTO `dcsdscrib` VALUES ('8', '生化池系列2(4号生化池)', 'BOD5', '2', '生化池系列2(4号生化池)BOD5', '4', '0', '0', '0', '0');
-INSERT INTO `dcsdscrib` VALUES ('9', '生化池系列2(4号生化池)', 'SS', '100', '生化池系列2(4号生化池)SS', '500', '0', '0', '0', '0');
-INSERT INTO `dcsdscrib` VALUES ('10', '生化池系列2(4号生化池)', 'NH3-N', '0', '生化池系列2(4号生化池)NH3-N', '0.5', '0', '0', '0', '0');
-INSERT INTO `dcsdscrib` VALUES ('11', '生化池系列2(4号生化池)', '硝态氮', '0', '生化池系列2(4号生化池)硝态氮', '50', '0', '0', '0', '0');
-INSERT INTO `dcsdscrib` VALUES ('12', '生化池系列2(4号生化池)', '溶解氧', '0', '生化池系列2(4号生化池)溶解氧', '0.5', '0', '0', '0', '0');
-INSERT INTO `dcsdscrib` VALUES ('13', '生化池系列2(3号生化池)', '鼓风机风量', '0', '生化池系列2(3号生化池)鼓风机风量', '50', '0', '0', '0', '0');
-INSERT INTO `dcsdscrib` VALUES ('14', '生化池系列2(4号生化池)', 'NO-N', '0', '生化池系列2(4号生化池)NO-N', '0.5', '0', '0', '0', '0');
-INSERT INTO `dcsdscrib` VALUES ('15', '生化池系列2(4号生化池)', '水量', '100', '生化池系列2(4号生化池)水量', '500', '0', '0', '0', '0');
-INSERT INTO `dcsdscrib` VALUES ('16', '生化池系列2(4号生化池)', 'PH', '6', '生化池系列2(4号生化池)PH', '9', '0', '0', '0', '0');
-INSERT INTO `dcsdscrib` VALUES ('17', '生化池系列1(1号生化池)', 'PH', '6', '生化池系列1(1号生化池)PH', '9', '4', '2', '11', '13');
-INSERT INTO `dcsdscrib` VALUES ('18', '生化池系列1(1号生化池)', 'COD', '0', '生化池系列1(1号生化池)COD', '0.5', '0', '0', '0', '0');
-INSERT INTO `dcsdscrib` VALUES ('19', '生化池系列1(1号生化池)', '碱度', '8', '生化池系列1(1号生化池)碱度', '14', '0', '0', '0', '0');
-INSERT INTO `dcsdscrib` VALUES ('20', '生化池系列1(1号生化池)', 'BOD5', '2', '生化池系列1(1号生化池)BOD5', '4', '0', '0', '0', '0');
-INSERT INTO `dcsdscrib` VALUES ('21', '生化池系列1(1号生化池)', 'SS', '100', '生化池系列1(1号生化池)SS', '500', '0', '0', '0', '0');
-INSERT INTO `dcsdscrib` VALUES ('22', '生化池系列1(1号生化池)', 'NH3-N', '0', '生化池系列1(1号生化池)NH3-N', '0.5', '0', '0', '0', '0');
-INSERT INTO `dcsdscrib` VALUES ('23', '生化池系列1(1号生化池)', '硝态氮', '100', '生化池系列1(1号生化池)硝态氮', '500', '0', '0', '0', '0');
-INSERT INTO `dcsdscrib` VALUES ('24', '生化池系列1(1号生化池)', '溶解氧', '0', '生化池系列1(1号生化池)溶解氧', '0.5', '0', '0', '0', '0');
-INSERT INTO `dcsdscrib` VALUES ('25', '生化池系列1(1号生化池)', '鼓风机风量', '0', '生化池系列1(1号生化池)鼓风机风量', '50', '0', '0', '0', '0');
-INSERT INTO `dcsdscrib` VALUES ('26', '生化池系列1(1号生化池)', 'NO-N', '0', '生化池系列1(1号生化池)NO-N', '0.5', '0', '0', '0', '0');
-INSERT INTO `dcsdscrib` VALUES ('27', '生化池系列1(1号生化池)', '水量', '100', '生化池系列1(1号生化池)水量', '500', '0', '0', '0', '0');
-INSERT INTO `dcsdscrib` VALUES ('28', '生化池系列1(2号生化池)', '水量', '100', '生化池系列1(2号生化池)水量', '500', '0', '0', '0', '0');
-INSERT INTO `dcsdscrib` VALUES ('29', '生化池系列1(2号生化池)', 'PH', '6', '生化池系列1(2号生化池)PH', '9', '0', '0', '0', '0');
-INSERT INTO `dcsdscrib` VALUES ('30', '生化池系列1(2号生化池)', 'COD', '0', '生化池系列1(2号生化池)COD', '0.5', '0', '0', '0', '0');
-INSERT INTO `dcsdscrib` VALUES ('31', '生化池系列1(2号生化池)', '碱度', '8', '生化池系列1(2号生化池)碱度', '14', '0', '0', '0', '0');
-INSERT INTO `dcsdscrib` VALUES ('32', '生化池系列1(2号生化池)', 'BOD5', '2', '生化池系列1(2号生化池)BOD5', '4', '0', '0', '0', '0');
-INSERT INTO `dcsdscrib` VALUES ('33', '生化池系列1(2号生化池)', 'SS', '100', '生化池系列1(2号生化池)SS', '500', '0', '0', '0', '0');
-INSERT INTO `dcsdscrib` VALUES ('34', '生化池系列1(2号生化池)', 'NH3-N', '0', '生化池系列1(2号生化池)NH3-N', '0.5', '0', '0', '0', '0');
-INSERT INTO `dcsdscrib` VALUES ('35', '生化池系列1(2号生化池)', '硝态氮', '100', '生化池系列1(2号生化池)硝态氮', '500', '0', '0', '0', '0');
-INSERT INTO `dcsdscrib` VALUES ('36', '生化池系列1(2号生化池)', '溶解氧', '0', '生化池系列1(2号生化池)溶解氧', '0.5', '0', '0', '0', '0');
-INSERT INTO `dcsdscrib` VALUES ('37', '生化池系列1(2号生化池)', 'NO-N', '0', '生化池系列1(2号生化池)NO-N', '0.5', '0', '0', '0', '0');
-INSERT INTO `dcsdscrib` VALUES ('38', '生化池系列2(3号生化池)', '温度', '2', '生化池系列2(3号生化池)温度', '5', '0', '0', '0', '0');
-INSERT INTO `dcsdscrib` VALUES ('39', '生化池系列4(8号生化池)', 'PH', '6', '生化池系列4(8号生化池)PH', '9', '4', '2', '11', '13');
+INSERT INTO `dcsdscrib` VALUES ('1412', '稳流池(477)进水', 'PH', '6', '稳流池(477)进水PH', '9', '4', '2', '11', '13');
+INSERT INTO `dcsdscrib` VALUES ('1413', '稳流池(477)进水', 'COD', '0', '稳流池(477)进水COD', '120', '0', '0', '150', '180');
+INSERT INTO `dcsdscrib` VALUES ('1414', '稳流池(477)进水', 'COD', '0', '稳流池(477)进水COD', '30', '0', '0', '50', '100');
+INSERT INTO `dcsdscrib` VALUES ('1415', '稳流池(477)进水', 'SS', '0', '稳流池(477)进水SS', '70', '0', '0', '100', '130');
+INSERT INTO `dcsdscrib` VALUES ('1416', '稳流池(477)进水', 'NH3-N', '0', '稳流池(477)进水NH3-N', '15', '0', '0', '20', '50');
+INSERT INTO `dcsdscrib` VALUES ('1417', '初沉池(489B)', 'PH', '6', '初沉池(489B)PH', '9', '4', '2', '11', '13');
+INSERT INTO `dcsdscrib` VALUES ('1418', '初沉池(489B)', 'COD', '0', '初沉池(489B)COD', '120', '0', '0', '150', '180');
+INSERT INTO `dcsdscrib` VALUES ('1419', '初沉池(489B)', 'BOD5', '0', '初沉池(489B)BOD5', '30', '0', '0', '50', '100');
+INSERT INTO `dcsdscrib` VALUES ('1420', '初沉池(489B)', 'SS', '0', '初沉池(489B)SS', '70', '0', '0', '100', '130');
+INSERT INTO `dcsdscrib` VALUES ('1421', '初沉池(489B)', 'NH3-N', '0', '初沉池(489B)NH3-N', '15', '0', '0', '20', '50');
+INSERT INTO `dcsdscrib` VALUES ('1422', '事故池(489)', 'PH', '6', '事故池(489)PH', '9', '4', '2', '11', '13');
+INSERT INTO `dcsdscrib` VALUES ('1423', '事故池(489)', 'COD', '0', '事故池(489)COD', '120', '0', '0', '150', '180');
+INSERT INTO `dcsdscrib` VALUES ('1424', '事故池(489)', 'BOD5', '0', '事故池(489)BOD5', '30', '0', '0', '50', '100');
+INSERT INTO `dcsdscrib` VALUES ('1425', '事故池(489)', 'SS', '0', '事故池(489)SS', '70', '0', '0', '100', '130');
+INSERT INTO `dcsdscrib` VALUES ('1426', '事故池(489)', 'NH3-N', '0', '事故池(489)NH3-N', '15', '0', '0', '50', '100');
+INSERT INTO `dcsdscrib` VALUES ('1427', '老水解酸化池 ', 'A段溶解氧', '6', '老水解酸化池 A段溶解氧', '9', '4', '2', '11', '13');
+INSERT INTO `dcsdscrib` VALUES ('1428', '老水解酸化池 ', 'COD', '0', '老水解酸化池 COD', '120', '0', '0', '150', '180');
+INSERT INTO `dcsdscrib` VALUES ('1429', '老水解酸化池 ', 'BOD5', '0', '老水解酸化池 BOD5', '30', '0', '0', '50', '100');
+INSERT INTO `dcsdscrib` VALUES ('1430', '老水解酸化池 ', 'SS', '0', '老水解酸化池 SS', '70', '0', '0', '100', '130');
+INSERT INTO `dcsdscrib` VALUES ('1431', '老水解酸化池 ', 'NH3-N', '0', '老水解酸化池 NH3-N', '15', '0', '0', '20', '50');
+INSERT INTO `dcsdscrib` VALUES ('1432', '新水解酸化池 ', 'PH', '6', '新水解酸化池 PH', '9', '4', '2', '11', '13');
+INSERT INTO `dcsdscrib` VALUES ('1433', '新水解酸化池 ', 'COD', '0', '新水解酸化池 COD', '120', '0', '0', '150', '180');
+INSERT INTO `dcsdscrib` VALUES ('1434', '新水解酸化池 ', 'BOD5', '0', '新水解酸化池 BOD5', '30', '0', '0', '50', '100');
+INSERT INTO `dcsdscrib` VALUES ('1435', '新水解酸化池 ', 'SS', '0', '新水解酸化池 SS', '70', '0', '0', '100', '130');
+INSERT INTO `dcsdscrib` VALUES ('1436', '新水解酸化池 ', 'NH3-N', '0', '新水解酸化池 NH3-N', '15', '0', '0', '50', '100');
+INSERT INTO `dcsdscrib` VALUES ('1437', '生化池系列1(1号生化池)', 'PH', '6', '生化池系列1(1号生化池)PH', '9', '4', '2', '11', '13');
+INSERT INTO `dcsdscrib` VALUES ('1438', '生化池系列1(1号生化池)', 'COD', '0', '生化池系列1(1号生化池)COD', '120', '0', '0', '150', '180');
+INSERT INTO `dcsdscrib` VALUES ('1439', '生化池系列1(1号生化池)', 'BOD5', '0', '生化池系列1(1号生化池)BOD5', '30', '0', '0', '50', '100');
+INSERT INTO `dcsdscrib` VALUES ('1440', '生化池系列1(1号生化池)', 'SS', '0', '生化池系列1(1号生化池)SS', '70', '0', '0', '100', '130');
+INSERT INTO `dcsdscrib` VALUES ('1441', '生化池系列1(1号生化池)', 'NH3-N', '0', '生化池系列1(1号生化池)NH3-N', '15', '0', '0', '50', '100');
+INSERT INTO `dcsdscrib` VALUES ('1442', '生化池系列1(2号生化池)', 'PH', '6', '生化池系列1(2号生化池)PH', '9', '4', '2', '11', '13');
+INSERT INTO `dcsdscrib` VALUES ('1443', '生化池系列1(2号生化池)', 'COD', '0', '生化池系列1(2号生化池)COD', '120', '0', '0', '150', '180');
+INSERT INTO `dcsdscrib` VALUES ('1444', '生化池系列1(2号生化池)', 'BOD5', '0', '生化池系列1(2号生化池)BOD5', '30', '0', '0', '50', '100');
+INSERT INTO `dcsdscrib` VALUES ('1445', '生化池系列1(2号生化池)', 'SS', '0', '生化池系列1(2号生化池)SS', '70', '0', '0', '100', '130');
+INSERT INTO `dcsdscrib` VALUES ('1446', '生化池系列1(2号生化池)', 'NH3-N', '0', '生化池系列1(2号生化池)NH3-N', '15', '0', '0', '50', '100');
+INSERT INTO `dcsdscrib` VALUES ('1447', '生化池系列2(3号生化池)', 'PH', '6', '生化池系列2(3号生化池)PH', '9', '4', '2', '11', '13');
+INSERT INTO `dcsdscrib` VALUES ('1448', '生化池系列2(3号生化池)', 'PH', '6', '生化池系列2(3号生化池)PH', '9', '4', '2', '11', '13');
+INSERT INTO `dcsdscrib` VALUES ('1449', '生化池系列2(3号生化池)', 'COD', '0', '生化池系列2(3号生化池)COD', '120', '0', '0', '150', '180');
+INSERT INTO `dcsdscrib` VALUES ('1450', '生化池系列2(3号生化池)', 'BOD5', '0', '生化池系列2(3号生化池)BOD5', '30', '0', '0', '50', '100');
+INSERT INTO `dcsdscrib` VALUES ('1451', '生化池系列2(3号生化池)', 'SS', '0', '生化池系列2(3号生化池)SS', '70', '0', '0', '100', '130');
+INSERT INTO `dcsdscrib` VALUES ('1452', '生化池系列2(3号生化池)', 'NH3-N', '0', '生化池系列2(3号生化池)NH3-N', '15', '0', '0', '50', '100');
+INSERT INTO `dcsdscrib` VALUES ('1453', '生化池系列2(4号生化池)', 'PH', '6', '生化池系列2(4号生化池)PH', '9', '4', '2', '11', '13');
+INSERT INTO `dcsdscrib` VALUES ('1454', '生化池系列2(4号生化池)', 'COD', '0', '生化池系列2(4号生化池)COD', '120', '0', '0', '150', '180');
+INSERT INTO `dcsdscrib` VALUES ('1455', '生化池系列2(4号生化池)', 'BOD5', '0', '生化池系列2(4号生化池)BOD5', '30', '0', '0', '50', '100');
+INSERT INTO `dcsdscrib` VALUES ('1456', '生化池系列2(4号生化池)', 'SS', '0', '生化池系列2(4号生化池)SS', '70', '0', '0', '100', '130');
+INSERT INTO `dcsdscrib` VALUES ('1457', '生化池系列2(4号生化池)', 'NH3-N', '0', '生化池系列2(4号生化池)NH3-N', '15', '0', '0', '50', '100');
+INSERT INTO `dcsdscrib` VALUES ('1458', '生化池系列3(5号生化池)', 'PH', '6', '生化池系列3(5号生化池)PH', '9', '4', '2', '11', '13');
+INSERT INTO `dcsdscrib` VALUES ('1459', '生化池系列3(5号生化池)', 'COD', '0', '生化池系列3(5号生化池)COD', '120', '0', '0', '150', '180');
+INSERT INTO `dcsdscrib` VALUES ('1460', '生化池系列3(5号生化池)', 'BOD5', '0', '生化池系列3(5号生化池)BOD5', '30', '0', '0', '50', '100');
+INSERT INTO `dcsdscrib` VALUES ('1461', '生化池系列3(5号生化池)', 'SS', '0', '生化池系列3(5号生化池)SS', '70', '0', '0', '100', '130');
+INSERT INTO `dcsdscrib` VALUES ('1462', '生化池系列3(5号生化池)', 'NH3-N', '0', '生化池系列3(5号生化池)NH3-N', '15', '0', '0', '50', '100');
+INSERT INTO `dcsdscrib` VALUES ('1463', '生化池系列3(6号生化池)', 'PH', '6', '生化池系列3(6号生化池)PH', '9', '4', '2', '11', '13');
+INSERT INTO `dcsdscrib` VALUES ('1464', '生化池系列3(6号生化池)', 'COD', '0', '生化池系列3(6号生化池)COD', '120', '0', '0', '150', '180');
+INSERT INTO `dcsdscrib` VALUES ('1465', '生化池系列3(6号生化池)', 'BOD5', '0', '生化池系列3(6号生化池)BOD5', '30', '0', '0', '50', '100');
+INSERT INTO `dcsdscrib` VALUES ('1466', '生化池系列3(6号生化池)', 'SS', '0', '生化池系列3(6号生化池)SS', '70', '0', '0', '100', '130');
+INSERT INTO `dcsdscrib` VALUES ('1467', '生化池系列3(6号生化池)', 'NH3-N', '0', '生化池系列3(6号生化池)NH3-N', '15', '0', '0', '50', '100');
+INSERT INTO `dcsdscrib` VALUES ('1468', '生化池系列4(7号生化池)', 'PH', '6', '生化池系列4(7号生化池)PH', '9', '4', '2', '11', '13');
+INSERT INTO `dcsdscrib` VALUES ('1469', '生化池系列4(7号生化池)', 'COD', '0', '生化池系列4(7号生化池)COD', '120', '0', '0', '150', '180');
+INSERT INTO `dcsdscrib` VALUES ('1470', '生化池系列4(7号生化池)', 'BOD5', '0', '生化池系列4(7号生化池)BOD5', '30', '0', '0', '50', '100');
+INSERT INTO `dcsdscrib` VALUES ('1471', '生化池系列4(7号生化池)', 'NH3-N', '0', '生化池系列4(7号生化池)NH3-N', '15', '0', '0', '50', '100');
+INSERT INTO `dcsdscrib` VALUES ('1472', '生化池系列4(8号生化池)', 'PH', '6', '生化池系列4(8号生化池)PH', '9', '4', '2', '11', '13');
+INSERT INTO `dcsdscrib` VALUES ('1473', '生化池系列4(8号生化池)', 'COD', '0', '生化池系列4(8号生化池)COD', '120', '0', '0', '150', '180');
+INSERT INTO `dcsdscrib` VALUES ('1474', '生化池系列4(8号生化池)', 'BOD5', '0', '生化池系列4(8号生化池)BOD5', '30', '0', '0', '50', '100');
+INSERT INTO `dcsdscrib` VALUES ('1475', '生化池系列4(8号生化池)', 'SS', '0', '生化池系列4(8号生化池)SS', '70', '0', '0', '100', '130');
+INSERT INTO `dcsdscrib` VALUES ('1476', '生化池系列4(8号生化池)', 'NH3-N', '0', '生化池系列4(8号生化池)NH3-N', '15', '0', '0', '50', '100');
+INSERT INTO `dcsdscrib` VALUES ('1477', '接触氧化池 ', 'PH', '6', '接触氧化池 PH', '9', '4', '2', '11', '13');
+INSERT INTO `dcsdscrib` VALUES ('1478', '接触氧化池 ', 'COD', '0', '接触氧化池 COD', '120', '0', '0', '150', '180');
+INSERT INTO `dcsdscrib` VALUES ('1479', '接触氧化池 ', 'BOD5', '0', '接触氧化池 BOD5', '30', '0', '0', '50', '100');
+INSERT INTO `dcsdscrib` VALUES ('1480', '接触氧化池 ', 'SS', '0', '接触氧化池 SS', '70', '0', '0', '100', '130');
+INSERT INTO `dcsdscrib` VALUES ('1481', '接触氧化池 ', 'NH3-N', '0', '接触氧化池 NH3-N', '15', '0', '0', '50', '100');
+INSERT INTO `dcsdscrib` VALUES ('1482', '排江出口线', 'PH', '6', '排江出口线PH', '9', '4', '2', '11', '13');
+INSERT INTO `dcsdscrib` VALUES ('1483', '排江出口线', 'COD', '0', '排江出口线COD', '120', '0', '0', '150', '180');
+INSERT INTO `dcsdscrib` VALUES ('1484', '排江出口线', 'BOD5', '0', '排江出口线BOD5', '30', '0', '0', '50', '100');
+INSERT INTO `dcsdscrib` VALUES ('1485', '排江出口线', 'SS', '0', '排江出口线SS', '70', '0', '0', '100', '130');
+INSERT INTO `dcsdscrib` VALUES ('1486', '排江出口线', 'NH3-N', '0', '排江出口线NH3-N', '15', '0', '0', '50', '100');
 
 -- ----------------------------
 -- Table structure for `dcshistory`
