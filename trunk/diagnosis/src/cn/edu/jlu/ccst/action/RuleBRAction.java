@@ -136,8 +136,8 @@ public class RuleBRAction extends ActionSupport {
 		// nb=rulebrService.getalloptions();
 		if (checkprof()) {
 			  try {
-				   String unit= new String(noun.getBytes("ISO-8859-1"),"UTF-8");
-			       nvs = rulebrService.getbynvsp(unit);
+				   String tunit= new String(unit.getBytes("ISO-8859-1"),"UTF-8");
+			       nvs = rulebrService.getbynvsp(tunit);
 			
 			       ActionContext actionContext = ActionContext.getContext();
 			       Map session = actionContext.getSession();
