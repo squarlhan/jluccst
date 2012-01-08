@@ -64,16 +64,7 @@
 				<table width="600" align="center" style="margin-left: 30">
 					<tr><th width="30%"/>
 					<th width="70%"/></tr>
-					<!-- <tr>
-						<td align="right" >检测节点：</td>
-						<td align="left" >
-							<div class="nobr">
-								<s:doubleselect theme="simple" name="dcsDscrib.eque" 
-									list="#session.map2.keySet()" doubleName="dcsDscrib.item"
-									doubleList="#session.map2[top]"  ></s:doubleselect>
-							</div>
-						</td>
-					</tr> -->
+
 					<tr>
 					<tr>
 						<td align="right">检测节点：</td>

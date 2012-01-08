@@ -14,6 +14,7 @@ import cn.edu.jlu.ccst.dao.DcsDscribServiceInter;
 import cn.edu.jlu.ccst.dao.DcsdataServiceImpl;
 import cn.edu.jlu.ccst.dao.DcsdataServiceInter;
 import cn.edu.jlu.ccst.dao.ErrorlogInter;
+import cn.edu.jlu.ccst.dao.TreeunitServiceInter;
 import cn.edu.jlu.ccst.model.BackwardandReason;
 import cn.edu.jlu.ccst.model.BackwardandResult;
 import cn.edu.jlu.ccst.model.DcsDscrib;
@@ -29,6 +30,17 @@ public class DcsdataService {
 	private DcsDscribServiceInter dcsDscribServiceImpl;
 	private RuleService ruleService;
 	private Pre_dssService pre_dssService;
+	private TreeunitServiceInter treeunitServiceImpl;
+	
+
+	
+	public TreeunitServiceInter getTreeunitServiceImpl() {
+		return treeunitServiceImpl;
+	}
+	@Resource
+	public void setTreeunitServiceImpl(TreeunitServiceInter treeunitServiceImpl) {
+		this.treeunitServiceImpl = treeunitServiceImpl;
+	}
 
 	public Pre_dssService getPre_dssService() {
 		return pre_dssService;
@@ -197,6 +209,16 @@ public class DcsdataService {
 		return br;
 	}
 
+	public List<Dcsdata> getallgongyidatap(String keyword) {
+		List<Dcsdata> results = new ArrayList();
+		List<String> jiedians = treeunitServiceImpl.findallchild(keyword);
+		for(String jiedian:jiedians){
+			List<Dcsdata> temp =  getallgongyidatan(jiedian);
+			results.addAll(temp);
+		}
+		return results;
+	}
+	
 	public List<Dcsdata> getallgongyidata(String keyword) {
 		List<Dcsdata> results = new ArrayList();
 		List<Dcsdata> fliterresults = new ArrayList();
@@ -230,12 +252,12 @@ public class DcsdataService {
 					}else{
 						dd.setIsok("0");
 					}
-					if (keyword != null) {
-						if(db.getName().contains(keyword)){
-							fliterresults.add(dd);
-						}
-					}
 					
+				}
+				if (keyword != null) {
+					if(dd.getEquipment().contains(keyword)){
+						fliterresults.add(dd);
+					}
 				}
 				results.add(dd);
 			}
@@ -248,6 +270,16 @@ public class DcsdataService {
 				return results;
 			}
 		
+	}
+	
+	public List<Dcsdata> getalldcsddatap(String keyword) {
+		List<Dcsdata> results = new ArrayList();
+		List<String> jiedians = treeunitServiceImpl.findallchild(keyword);
+		for(String jiedian:jiedians){
+			List<Dcsdata> temp =  getalldcsddatan(jiedian);
+			results.addAll(temp);
+		}
+		return results;
 	}
 	
 	public List<Dcsdata> getalldcsddata(String keyword) {
@@ -271,12 +303,12 @@ public class DcsdataService {
 					}else{
 						dd.setIsok("0");
 					}
-					if (keyword != null) {
-						if(db.getName().contains(keyword)){
-							fliterresults.add(dd);
-						}
-					}
 					
+				}
+				if (keyword != null) {
+					if(dd.getEquipment().contains(keyword)){
+						fliterresults.add(dd);
+					}
 				}
 				results.add(dd);			
 			}
@@ -288,6 +320,96 @@ public class DcsdataService {
 				return results;
 			}
 		
+	}
+	
+	
+	
+	
+	
+	
+	public List<Dcsdata> getallgongyidatan(String keyword) {
+		List<Dcsdata> results = new ArrayList();
+		List<Dcsdata> fliterresults = new ArrayList();
+		List<Pre_dss> pds = new ArrayList();
+		pds = pre_dssService.findBysimu_time();
+		for (Pre_dss pd : pds) {
+			String temp = pd.getName().getName().replace('.', ',');
+			String[] strArray = temp.split(",");
+			String mykey1 = "";
+			String mykey2 = "";
+			if (strArray.length > 1) {
+				mykey1 = strArray[0].trim();
+				mykey2 = strArray[1].trim();
+				List<DcsDscrib> dcsDscribs = dcsDscribServiceImpl.findbyname(
+						strArray[0], strArray[1]);
+				
+				Dcsdata dd = new Dcsdata();
+				dd.setEquipment(mykey1);
+				dd.setItem(mykey2);
+				dd.setValue(Double.parseDouble(pd.getValue()));
+				dd.setIsok("0");
+				if (dcsDscribs != null && dcsDscribs.size() > 0) {
+					DcsDscrib db = dcsDscribs.get(0);
+					// do sth...
+					if(dd.getValue()>db.getUpper2()||dd.getValue()<db.getLower2()){
+						dd.setIsok("3");
+					}else if(dd.getValue()>db.getUpper1()||dd.getValue()<db.getLower1()){
+						dd.setIsok("2");
+					}else if(dd.getValue()>db.getUpper()||dd.getValue()<db.getLower()){
+						dd.setIsok("1");
+					}else{
+						dd.setIsok("0");
+					}
+					
+					
+				}
+				if (keyword != null) {
+					if(dd.getEquipment().contains(keyword)){
+						fliterresults.add(dd);
+					}
+				}
+				results.add(dd);
+			}
+
+		}
+	
+			return fliterresults;
+		
+	}
+	
+	public List<Dcsdata> getalldcsddatan(String keyword) {
+		List<Dcsdata> allresults = new ArrayList();
+		List<Dcsdata> results = new ArrayList();
+		List<Dcsdata> fliterresults = new ArrayList();
+		allresults =  this.findAll();
+		for(Dcsdata dd:allresults){
+			if(!dd.getItem().trim().equals("班次")){
+				dd.setIsok("0");
+				List<DcsDscrib> dcsDscribs = dcsDscribServiceImpl.findbyname(dd.getEquipment().trim(), dd.getItem().trim());
+				if (dcsDscribs != null && dcsDscribs.size() > 0) {
+					DcsDscrib db = dcsDscribs.get(0);
+					// do sth...
+					if(dd.getValue()>db.getUpper2()||dd.getValue()<db.getLower2()){
+						dd.setIsok("3");
+					}else if(dd.getValue()>db.getUpper1()||dd.getValue()<db.getLower1()){
+						dd.setIsok("2");
+					}else if(dd.getValue()>db.getUpper()||dd.getValue()<db.getLower()){
+						dd.setIsok("1");
+					}else{
+						dd.setIsok("0");
+					}
+					
+				}
+				if (keyword != null) {
+					if(dd.getEquipment().contains(keyword)){
+						fliterresults.add(dd);
+					}
+				}
+				results.add(dd);			
+			}
+		}
+	
+			return fliterresults;
 	}
 
 }
