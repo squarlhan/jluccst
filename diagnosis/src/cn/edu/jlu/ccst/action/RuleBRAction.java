@@ -34,7 +34,18 @@ public class RuleBRAction extends ActionSupport {
 	private List<String> backwardandResultlist2;
 	private Map nvs;
 	private String noun;
+    private String unit;
 	
+	
+	
+
+	public String getUnit() {
+		return unit;
+	}
+
+	public void setUnit(String unit) {
+		this.unit = unit;
+	}
 	
 	
 
@@ -121,6 +132,33 @@ public class RuleBRAction extends ActionSupport {
 		 */
 	}
 
+	public String findbynounp() {
+		// nb=rulebrService.getalloptions();
+		if (checkprof()) {
+			  try {
+				   String unit= new String(noun.getBytes("ISO-8859-1"),"UTF-8");
+			       nvs = rulebrService.getbynvsp(unit);
+			
+			       ActionContext actionContext = ActionContext.getContext();
+			       Map session = actionContext.getSession();
+			       session.put("map", nvs);
+			       return "rulesuccess";
+		           } catch (UnsupportedEncodingException e) {
+			          // TODO Auto-generated catch block
+			            //e.printStackTrace();
+		                                    } 
+			  }
+	         	return "unuserlogin";
+		/*
+		 * User flag1; backwardandResultlist = rulebrService.findAll();
+		 * Set<String> set1=new HashSet(); Set<String> set2=new HashSet();
+		 * for(BackwardandResult brt:backwardandResultlist){
+		 * set1.add(brt.getNouns()); set2.add(brt.getVerb()); }
+		 * backwardandResultlist1=new ArrayList(); backwardandResultlist2=new
+		 * ArrayList(); backwardandResultlist1.addAll(set1);
+		 * backwardandResultlist2.addAll(set2); return "rulesuccess";
+		 */
+	}
 	
 	public String findbynoun() {
 		// nb=rulebrService.getalloptions();
