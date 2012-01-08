@@ -30,9 +30,17 @@ public class DcsDscribAction extends ActionSupport {
 	private String dcsDscribname1;
 	private String dcsDscribname2;
 	private String eque;
-	
+	private String unit; 
    
 	
+
+	public String getUnit() {
+		return unit;
+	}
+
+	public void setUnit(String unit) {
+		this.unit = unit;
+	}
 
 	public String getEque() {
 		return eque;
@@ -162,6 +170,17 @@ public class DcsDscribAction extends ActionSupport {
 			return "unproflogin";
 	}
 
+	public String findbyequep(){
+		try {
+			String keyword= new String(unit.getBytes("ISO-8859-1"),"UTF-8");
+			dcsdscriblist = dcsDscribService.findlikenamep(keyword);
+			
+	} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			//e.printStackTrace();
+		} 
+		return "bdsuccess";
+	}
 	
 	public String findbyeque(){
 		try {

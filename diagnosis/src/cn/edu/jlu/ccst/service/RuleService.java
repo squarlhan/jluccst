@@ -14,6 +14,7 @@ import org.springframework.stereotype.Component;
 
 import cn.edu.jlu.ccst.dao.RuleServiceImpl;
 import cn.edu.jlu.ccst.dao.RuleServiceInter;
+import cn.edu.jlu.ccst.dao.TreeunitServiceInter;
 import cn.edu.jlu.ccst.model.*;
 @Component("ruleService")
 public class RuleService {
@@ -21,7 +22,14 @@ public class RuleService {
 	private Backward backward;
 	private InferenceEngine inferenceEngine;
 	private RuleServiceInter ruleServiceImpl;
-
+	private TreeunitServiceInter treeunitServiceImpl;
+	public TreeunitServiceInter getTreeunitServiceImpl() {
+		return treeunitServiceImpl;
+	}
+	@Resource
+	public void setTreeunitServiceImpl(TreeunitServiceInter treeunitServiceImpl) {
+		this.treeunitServiceImpl = treeunitServiceImpl;
+	}
 	
 
 	public InferenceEngine getInferenceEngine() {
@@ -67,6 +75,17 @@ public class RuleService {
 		resultlist = ruleServiceImpl.findAll();
 		return resultlist;
 	}
+	
+	public List<Backward> findbynamep(String name) {
+		List<Backward> results = new ArrayList();
+		List<String> jiedians = treeunitServiceImpl.findallchild(name);
+		for(String jiedian:jiedians){
+			List<Backward> temp =  findbyname(jiedian);
+			results.addAll(temp);
+		}
+		return results;
+	}
+	
 	public List<Backward> findbyname(String name) {
 		List<Backward> resultlist = new ArrayList();
 		resultlist = ruleServiceImpl.findbyname(name);

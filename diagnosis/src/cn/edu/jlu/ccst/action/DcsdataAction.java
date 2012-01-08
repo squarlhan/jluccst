@@ -279,8 +279,8 @@ public class DcsdataAction extends ActionSupport {
 	public String showmotodcsdatap(){
 		String key = null;
 		try {
-			if (keyword != null) {
-				key = new String(keyword.getBytes("ISO-8859-1"), "UTF-8");
+			if (papkey != null) {
+				key = new String(papkey.getBytes("ISO-8859-1"), "UTF-8");
 				// key="3系列生化池";
 			}
 			motodcsdatalist = motodcsdataService.getalldcsddatap(key);
@@ -295,8 +295,8 @@ public class DcsdataAction extends ActionSupport {
 	public String showgongyidatap() {
 		String key = null;
 		try {
-			if (keyword != null) {
-				key = new String(keyword.getBytes("ISO-8859-1"), "UTF-8");
+			if (papkey != null) {
+				key = new String(papkey.getBytes("ISO-8859-1"), "UTF-8");
 				// key="3系列生化池";
 			}
 			dcsdatalist = dcsdataService.getallgongyidatap(key);

@@ -15,6 +15,7 @@ import org.springframework.stereotype.Component;
 import cn.edu.jlu.ccst.dao.DcsDscribServiceImpl;
 import cn.edu.jlu.ccst.dao.DcsDscribServiceInter;
 import cn.edu.jlu.ccst.dao.Init_PredictServiceInter;
+import cn.edu.jlu.ccst.dao.TreeunitServiceInter;
 import cn.edu.jlu.ccst.model.*;
 import cn.edu.jlu.ccst.dao.MotoDcsdataServiceInter;
 
@@ -29,6 +30,17 @@ public class DcsDscribService {
 	private MotoDcsdataServiceInter motoDcsdataServiceImpl;
 	private MotoDcsdata motoDcsdata;
 	private MotoDcsdataService motoDcsdataService;
+	private TreeunitServiceInter treeunitServiceImpl;
+	
+
+	
+	public TreeunitServiceInter getTreeunitServiceImpl() {
+		return treeunitServiceImpl;
+	}
+	@Resource
+	public void setTreeunitServiceImpl(TreeunitServiceInter treeunitServiceImpl) {
+		this.treeunitServiceImpl = treeunitServiceImpl;
+	}
 	/*
 	 * public Backward getBackward() { return backward; }
 	 * 
@@ -140,6 +152,16 @@ public class DcsDscribService {
 		dds = dcsDscribServiceImpl.findlikename(name);
 		//if(dds.size()<1)dds = findall();
 		return dds;
+	}
+	
+	public List<DcsDscrib> findlikenamep(String name) {
+		List<DcsDscrib> results = new ArrayList();
+		List<String> jiedians = treeunitServiceImpl.findallchild(name);
+		for(String jiedian:jiedians){
+			List<DcsDscrib> temp =  findbyeque(jiedian);
+			results.addAll(temp);
+		}
+		return results;
 	}
 	
 	public List<DcsDscrib> findbyeque(String eque) {

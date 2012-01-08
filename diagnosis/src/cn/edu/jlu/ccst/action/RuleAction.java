@@ -42,10 +42,17 @@ public class RuleAction extends ActionSupport {
 	private int resultv_value;
 	private String name;
 	private List<String> namelist;
-    
+    private String unit; 
+   
 	
-	
-	
+
+	public String getUnit() {
+		return unit;
+	}
+
+	public void setUnit(String unit) {
+		this.unit = unit;
+	}
 	public List<Double> getCf_reason() {
 		return cf_reason;
 	}
@@ -198,6 +205,17 @@ public class RuleAction extends ActionSupport {
 		}else{
 			return "unproflogin";
 		}
+	}
+	
+	public String findbynamep(){
+		try {
+			String keyword= new String(unit.getBytes("ISO-8859-1"),"UTF-8");
+			backlist = ruleService.findbynamep(keyword);
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
+		return "list";
 	}
 	
 	public String findbyname(){
