@@ -15,16 +15,16 @@
          <!-- <td><a href="/diagnosis/ruleaction!getall.action">规则维护</a></td>
            <td><a href="/diagnosis/dcsdscribaction.action">描述维护</a></td>-->
          <td><a href="/diagnosis/biocpool490/biocpool1.jsp">手工数据推理</a></td>
-         <td><a href="/diagnosis/dcsdataaction!showdcsdata.action">手工数据查询</a></td>
+         <td><a href="/diagnosis/dcsdataaction!showdcsdatas.action">手工数据查询</a></td>
         <td><a href="/diagnosis/errorlogaction.action">手工报警日志</a></td>
         
         <td><a href="/diagnosis/monitoraction.action">DCS数据推理</a></td>
        
        
-        <td><a href="/diagnosis/dcsdataaction!showmotodcsdata.action">DCS数据查询</a></td>
+        <td><a href="/diagnosis/dcsdataaction!showmotodcsdatas.action">DCS数据查询</a></td>
         <td><a href="/diagnosis/motoerrorlogaction.action">DCS日志查询</a></td>
         <td><a href="/diagnosis/interfaceaction.action">预警数据推理</a></td>
-        <td><a href="/diagnosis/dcsdataaction!showgongyidata.action">预警数据查询</a></td>
+        <td><a href="/diagnosis/dcsdataaction!showgongyidatas.action">预警数据查询</a></td>
         <td><a href="/diagnosis/dsshistoryaction.action">预警日志查询</a></td>
          <!--<td><a href="/diagnosis/user/usernet.jsp">系统自学</a></td> -->
         <td><a href="/diagnosis/userbraction.action">智能诊断</a></td>

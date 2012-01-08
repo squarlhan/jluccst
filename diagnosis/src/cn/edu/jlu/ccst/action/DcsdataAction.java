@@ -52,6 +52,17 @@ public class DcsdataAction extends ActionSupport {
 	private List<BackwardandReason> reasonlist;
 	private RuleService ruleService;
 	private String keyword;
+	private String papkey;
+	
+	
+
+	public String getPapkey() {
+		return papkey;
+	}
+
+	public void setPapkey(String papkey) {
+		this.papkey = papkey;
+	}
 
 	public List<MotoDcsdata> getMotodcsdatalist() {
 		return motodcsdatalist;
@@ -178,6 +189,27 @@ public class DcsdataAction extends ActionSupport {
 			return "unuserlogin";
 	}
 	
+	public String showdcsdatas(){
+		String key = null;
+		dcsdatalist = dcsdataService.getalldcsddata(key);
+		return "dcs";
+	}
+	
+	
+	public String showmotodcsdatas(){
+		String key = null;
+			motodcsdatalist = motodcsdataService.getalldcsddata(key);
+
+		return "motodcs";
+	}
+
+	public String showgongyidatas() {
+		String key = null;
+			dcsdatalist = dcsdataService.getallgongyidata(key);
+
+		return "gongyi";
+	}
+	
 	public String showdcsdata(){
 		String key = null;
 		try {
@@ -185,7 +217,7 @@ public class DcsdataAction extends ActionSupport {
 				key = new String(keyword.getBytes("ISO-8859-1"), "UTF-8");
 				// key="3系列生化池";
 			}
-			dcsdatalist = dcsdataService.getalldcsddata(key);
+			dcsdatalist = dcsdataService.getalldcsddatan(key);
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -202,7 +234,7 @@ public class DcsdataAction extends ActionSupport {
 				key = new String(keyword.getBytes("ISO-8859-1"), "UTF-8");
 				// key="3系列生化池";
 			}
-			motodcsdatalist = motodcsdataService.getalldcsddata(key);
+			motodcsdatalist = motodcsdataService.getalldcsddatan(key);
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -218,7 +250,56 @@ public class DcsdataAction extends ActionSupport {
 				key = new String(keyword.getBytes("ISO-8859-1"), "UTF-8");
 				// key="3系列生化池";
 			}
-			dcsdatalist = dcsdataService.getallgongyidata(key);
+			dcsdatalist = dcsdataService.getallgongyidatan(key);
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return "gongyi";
+	}
+	
+	public String showdcsdatap(){
+		String key = null;
+		try {
+			if (papkey != null) {
+				key = new String(papkey.getBytes("ISO-8859-1"), "UTF-8");
+				// key="3系列生化池";
+			}
+			dcsdatalist = dcsdataService.getalldcsddatap(key);
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return "dcs";
+	}
+	
+	
+	public String showmotodcsdatap(){
+		String key = null;
+		try {
+			if (keyword != null) {
+				key = new String(keyword.getBytes("ISO-8859-1"), "UTF-8");
+				// key="3系列生化池";
+			}
+			motodcsdatalist = motodcsdataService.getalldcsddatap(key);
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		return "motodcs";
+	}
+
+	public String showgongyidatap() {
+		String key = null;
+		try {
+			if (keyword != null) {
+				key = new String(keyword.getBytes("ISO-8859-1"), "UTF-8");
+				// key="3系列生化池";
+			}
+			dcsdatalist = dcsdataService.getallgongyidatap(key);
 		} catch (UnsupportedEncodingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

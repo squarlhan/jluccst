@@ -12,8 +12,10 @@ import org.springframework.stereotype.Component;
 
 import cn.edu.jlu.ccst.dao.DcsDscribServiceInter;
 import cn.edu.jlu.ccst.dao.MotoDcsdataServiceInter;
+import cn.edu.jlu.ccst.dao.TreeunitServiceInter;
 
 import cn.edu.jlu.ccst.model.DcsDscrib;
+import cn.edu.jlu.ccst.model.Dcsdata;
 import cn.edu.jlu.ccst.model.MotoDcsdata;
 
 
@@ -23,7 +25,17 @@ public class MotoDcsdataService {
 	private MotoDcsdataServiceInter motodcsdataServiceImpl;
 	private DcsDscribServiceInter dcsDscribServiceImpl;
   // private DcsDscrib dcsDscrib;
+	private TreeunitServiceInter treeunitServiceImpl;
+	
 
+	
+	public TreeunitServiceInter getTreeunitServiceImpl() {
+		return treeunitServiceImpl;
+	}
+	@Resource
+	public void setTreeunitServiceImpl(TreeunitServiceInter treeunitServiceImpl) {
+		this.treeunitServiceImpl = treeunitServiceImpl;
+	}
 	
 
 	public DcsDscribServiceInter getDcsDscribServiceImpl() {
@@ -78,6 +90,17 @@ public class MotoDcsdataService {
 		resultlist = motodcsdataServiceImpl.findAll();
 		return resultlist;
 	}
+	
+	public List<MotoDcsdata> getalldcsddatap(String keyword) {
+		List<MotoDcsdata> results = new ArrayList();
+		List<String> jiedians = treeunitServiceImpl.findallchild(keyword);
+		for(String jiedian:jiedians){
+			List<MotoDcsdata> temp =  getalldcsddatan(jiedian);
+			results.addAll(temp);
+		}
+		return results;
+	}
+	
 	public List<MotoDcsdata> getalldcsddata(String keyword) {
 		List<MotoDcsdata> allresults = new ArrayList();
 		List<MotoDcsdata> results = new ArrayList();
@@ -115,6 +138,42 @@ public class MotoDcsdataService {
 			}else{
 				return results;
 			}
+		
+	}
+	
+	public List<MotoDcsdata> getalldcsddatan(String keyword) {
+		List<MotoDcsdata> allresults = new ArrayList();
+		List<MotoDcsdata> results = new ArrayList();
+		List<MotoDcsdata> fliterresults = new ArrayList();
+		allresults =  this.findAll();
+		for(MotoDcsdata dd:allresults){
+			if(!dd.getItem().trim().equals("班次")){
+				dd.setIsok("0");
+				List<DcsDscrib> dcsDscribs = dcsDscribServiceImpl.findbyname(dd.getEquipment().trim(), dd.getItem().trim());
+				if (dcsDscribs != null && dcsDscribs.size() > 0) {
+					DcsDscrib db = dcsDscribs.get(0);
+					// do sth...
+					if(dd.getValue()>db.getUpper2()||dd.getValue()<db.getLower2()){
+						dd.setIsok("3");
+					}else if(dd.getValue()>db.getUpper1()||dd.getValue()<db.getLower1()){
+						dd.setIsok("2");
+					}else if(dd.getValue()>db.getUpper()||dd.getValue()<db.getLower()){
+						dd.setIsok("1");
+					}else{
+						dd.setIsok("0");
+					}
+					
+				}
+				if (keyword != null) {
+					if(dd.getEquipment().contains(keyword)){
+						fliterresults.add(dd);
+					}
+				}
+				results.add(dd);			
+			}
+		}
+
+			return fliterresults;
 		
 	}
 
