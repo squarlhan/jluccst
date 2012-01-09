@@ -104,31 +104,46 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</tr>
 <tr>
 	<td align="right"><s:textfield  readonly="true" value="1号带式压榨过滤机状态" name="dcsdatalist[7].item" theme="simple" style="width:150px;background:transparent;border:0px"/></td>
-	<td align="center"><s:textfield name="dcsdatalist[7].value" theme="simple"
-	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td></td>
+	<td align="center"><select name="dcsdatalist[7].value"   style="width:110px">   
+                <option  value="0">运转</option>
+                <option  value="1">停止</option>
+                      </select>
+     </td>
 		</tr>
 		<tr>
 	<td align="right"><s:textfield  readonly="true" value="2号带式压榨过滤机状态" name="dcsdatalist[8].item" theme="simple" style="width:150px;background:transparent;border:0px"/></td>
-	<td align="center"><s:textfield name="dcsdatalist[8].value" theme="simple"
-	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td></td>
+	<td align="center"><select name="dcsdatalist[8].value"   style="width:110px">   
+                <option  value="0">运转</option>
+                <option  value="1">停止</option>
+                      </select>
+     </td>
 		</tr>
 	
 	
 	
 	<tr>
 	<td align="right"><s:textfield  readonly="true" value="3号带式压榨过滤机状态" name="dcsdatalist[9].item" theme="simple" style="width:150px;background:transparent;border:0px"/></td>
-	<td align="center"><s:textfield name="dcsdatalist[9].value" theme="simple"
-	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td></td>
+<td align="center"><select name="dcsdatalist[9].value"   style="width:110px">   
+                <option  value="0">运转</option>
+                <option  value="1">停止</option>
+                      </select>
+     </td>
 		</tr>
 		
 		<tr>
 	<td align="right"><s:textfield  readonly="true" value="4号带式压榨过滤机状态" name="dcsdatalist[10].item" theme="simple" style="width:150px;background:transparent;border:0px"/></td>
-	<td align="center"><s:textfield name="dcsdatalist[10].value" theme="simple"
-	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td></td>
+	<td align="center"><select name="dcsdatalist[10].value"   style="width:110px">   
+                <option  value="0">运转</option>
+                <option  value="1">停止</option>
+                      </select>
+     </td>
 		</tr>
 	<td align="right"><s:textfield  readonly="true" value="5号带式压榨过滤机状态" name="dcsdatalist[11].item" theme="simple" style="width:150px;background:transparent;border:0px"/></td>
-	<td align="center"><s:textfield name="dcsdatalist[11].value" theme="simple"
-	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td></td>
+	<td align="center"><select name="dcsdatalist[11].value"   style="width:110px">   
+                <option  value="0">运转</option>
+                <option  value="1">停止</option>
+                      </select>
+     </td>
 		</tr>
 			<td align="right"><s:textfield  readonly="true" value="V495A-5液位" name="dcsdatalist[12].item" theme="simple" style="width:150px;background:transparent;border:0px"/></td>
 	<td align="center"><s:textfield name="dcsdatalist[12].value" theme="simple"

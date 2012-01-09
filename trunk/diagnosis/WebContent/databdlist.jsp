@@ -328,12 +328,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		    <th width = "11%">报警节点</th>
 			<th width = "11%">控制参数</th>
 			<th width = "20%"  style="display:none;">对应名称</th>
-			<th width = "7%">红</th>
-			<th width = "7%">橙</th>	
-			<th width = "7%">黄</th>
-			<th width = "7%">黄</th>	
 			<th width = "7%">橙</th>
-			<th width = "7%">红</th>			
+			<th width = "7%">绿</th>	
+			<th width = "7%">最小值</th>
+			<th width = "7%">最大值</th>	
+			<th width = "7%">绿</th>
+			<th width = "7%">橙</th>			
 			<th width = "15%">相关操作</th>
 	  </tr>
   </table>
