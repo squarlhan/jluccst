@@ -148,11 +148,11 @@
 						<td align="left"><s:textfield name="dcsDscrib.upper"  id="dcsDscrib.upper"  size ="17" theme = "simple" onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td>
 					</tr>
 					<tr>
-						<td align="right">绿色警报最小值：</td>
+						<td align="right">黄色警报最小值：</td>
 						<td align="left"><s:textfield name="dcsDscrib.lower1"  id="dcsDscrib.lower1"  size ="17" theme = "simple" onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td>
 					</tr>
 					<tr>
-						<td align="right">绿色警报最大值：</td>
+						<td align="right">黄色警报最大值：</td>
 						<td align="left"><s:textfield name="dcsDscrib.upper1"   id="dcsDscrib.upper1" size ="17" theme = "simple" onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td>
 					</tr>
 					<tr>
