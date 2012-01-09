@@ -74,8 +74,8 @@
 							  </li>
 								<li class="Closed">生化处理
 									<ul>
-										 <li class="Child"><a href="/diagnosis/dataadd/data465huiliubengfang--1.jsp">1、2系列465回流泵房</a></li>
-								         <li class="Child"><a href="/diagnosis/dataadd/data465Ahuiliubengfang--2.jsp">3系列465A回流泵房</a></li>
+										 <li class="Child"><a href="/diagnosis/dataadd/data465huiliubengfang--1.jsp">1系列465回流泵房</a></li>
+								         <li class="Child"><a href="/diagnosis/dataadd/data465Ahuiliubengfang--2.jsp">2系列465A回流泵房</a></li>
 								         <li class="Child"><a href="/diagnosis/dataadd/data465Bhuiliubengfang--3.jsp">3系列465B回流泵房</a></li>
 										 <li class="Child"><a href="/diagnosis/dataadd/datazhongjiantishengbengfang(462B).jsp">中间提升泵房(462B)</a></li>
 										 <li class="Child"><a href="/diagnosis/biocpool490/biocpool1.jsp">生化池系列1</a></li>	

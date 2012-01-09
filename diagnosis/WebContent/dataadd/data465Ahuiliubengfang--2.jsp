@@ -73,13 +73,20 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td>m&sup3/h</td>
 	
 	</tr>
-
+	<tr>
+	<td align="right">
+	<s:textfield  readonly="true" value="吸泥池液位" name="dcsdatalist[3].item" theme="simple" style="background:transparent;border:0px"/></td>
+	<td align="center"><s:textfield name="dcsdatalist[3].value" theme="simple"
+	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td>m</td>
+	
+	</tr>
 	
 	<s:hidden   value="班次" name="dcsdatalist[0].item" theme="simple" />
 	<s:hidden   value="2系列465A回流泵房" name="dcsdatalist[0].equipment" theme="simple" />
 	
 	<s:hidden   value="2系列465A回流泵房" name="dcsdatalist[1].equipment" theme="simple" />
 	<s:hidden   value="2系列465A回流泵房" name="dcsdatalist[2].equipment" theme="simple" />
+	<s:hidden   value="2系列465A回流泵房" name="dcsdatalist[3].equipment" theme="simple" />
 	
 	
 
