@@ -154,7 +154,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<tr>	
 	<td align="right"><s:textfield  readonly="true" value="液位" name="dcsdatalist[13].item" theme="simple" style="width:150px;background:transparent;border:0px"/></td>
 	<td align="center"><s:textfield name="dcsdatalist[13].value" theme="simple"
-	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td>mg/l</td>
+	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td>m</td>
 		</tr>
 	
     <tr/>

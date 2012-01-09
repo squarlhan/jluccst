@@ -56,6 +56,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 <option  value="16">中班</option>
               </select></td>
 	</tr>
+	<tr >
+	
+	<td align="right"><s:textfield  readonly="true" value="药剂泵状态" name="dcsdatalist[13].item" theme="simple" style="width:150px;background:transparent;border:0px"/></td>
+	<td align="center"><select name="dcsdatalist[13].value"   style="width:110px">   
+                <option  value="0">运转</option>
+                <option  value="1">停止</option>
+               
+              </select>
+
+	</td>
+	</tr>
 	<tr>
 	
 	<td align="right" >                                                               <!-- 向dcsdata录入的每个设备的各项参数，dcsdata中equipment在此设为隐藏的文本；
@@ -138,6 +149,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td>m&sup3/h</td>
 		</tr>		
 
+
+	
 
 	<s:hidden   value="中间提升泵房(462B)" name="dcsdatalist[1].equipment" theme="simple" />
 	<s:hidden   value="中间提升泵房(462B)" name="dcsdatalist[2].equipment" theme="simple" />
