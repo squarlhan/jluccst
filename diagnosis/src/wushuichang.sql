@@ -2,15 +2,15 @@
 Navicat MySQL Data Transfer
 
 Source Server         : local
-Source Server Version : 50157
+Source Server Version : 50517
 Source Host           : localhost:3306
 Source Database       : wushuichang
 
 Target Server Type    : MYSQL
-Target Server Version : 50157
+Target Server Version : 50517
 File Encoding         : 65001
 
-Date: 2012-01-08 21:15:16
+Date: 2012-01-09 16:17:33
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -926,7 +926,7 @@ CREATE TABLE `dcsdscrib` (
   `upper1` double NOT NULL,
   `upper2` double NOT NULL,
   PRIMARY KEY (`did`)
-) ENGINE=InnoDB AUTO_INCREMENT=1487 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=1492 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of dcsdscrib
@@ -1006,6 +1006,7 @@ INSERT INTO `dcsdscrib` VALUES ('1483', '排江出口线', 'COD', '0', '排江�
 INSERT INTO `dcsdscrib` VALUES ('1484', '排江出口线', 'BOD5', '0', '排江出口线BOD5', '30', '0', '0', '50', '100');
 INSERT INTO `dcsdscrib` VALUES ('1485', '排江出口线', 'SS', '0', '排江出口线SS', '70', '0', '0', '100', '130');
 INSERT INTO `dcsdscrib` VALUES ('1486', '排江出口线', 'NH3-N', '0', '排江出口线NH3-N', '15', '0', '0', '50', '100');
+INSERT INTO `dcsdscrib` VALUES ('1491', '生化池系列4(7号生化池)', '4段溶解氧', '1', '生化池系列4(7号生化池)4段溶解氧', '2', '0.2', '0', '2.2', '3');
 
 -- ----------------------------
 -- Table structure for `dcshistory`
@@ -1087,12 +1088,12 @@ CREATE TABLE `dss_advice` (
   `level` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `FK75158BF323A4A4F1` (`name`)
-) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of dss_advice
 -- ----------------------------
-INSERT INTO `dss_advice` VALUES ('1', 'w76.TIR203', '37.00377', '报警现象： 生化池系列2(3号生化池)温度过高', '           32.560000', '20111218123004', '', '5');
+INSERT INTO `dss_advice` VALUES ('2', null, null, '一切正常', '22.660000', null, null, null);
 
 -- ----------------------------
 -- Table structure for `dss_history`
@@ -1411,6 +1412,7 @@ INSERT INTO `init_predict` VALUES ('w3.NH3-N', '电石厂有机水.NH3-N', null)
 INSERT INTO `init_predict` VALUES ('w3.PH', '电石厂有机水.PH', null);
 INSERT INTO `init_predict` VALUES ('w3.Q', '电石厂有机水.水量', null);
 INSERT INTO `init_predict` VALUES ('w3.SS', '电石厂有机水.SS', null);
+INSERT INTO `init_predict` VALUES ('w4.BOD5', '有机合成厂有机水.BOD5', null);
 INSERT INTO `init_predict` VALUES ('w4.COD', '有机合成厂有机水.COD', null);
 INSERT INTO `init_predict` VALUES ('w4.NH3-N', '有机合成厂有机水.NH3-N', null);
 INSERT INTO `init_predict` VALUES ('w4.PH', '有机合成厂有机水.PH', null);
@@ -1441,7 +1443,7 @@ INSERT INTO `init_predict` VALUES ('w62.P2STATUS', '进水提升泵房(462A).2�
 INSERT INTO `init_predict` VALUES ('w62.P3STATUS', '进水提升泵房(462A).3号潜水排污泵状态', null);
 INSERT INTO `init_predict` VALUES ('w62.P4STATUS', '进水提升泵房(462A).4号潜水排污泵状态', null);
 INSERT INTO `init_predict` VALUES ('w62.P5STATUS5', '进水提升泵房(462A).5号潜水排污泵状态', null);
-INSERT INTO `init_predict` VALUES ('w63.FRQ101', '巴氏计量槽(499).水量', null);
+INSERT INTO `init_predict` VALUES ('w63.FR101', '巴氏计量槽(499).水量', null);
 INSERT INTO `init_predict` VALUES ('w63.LIR106', '巴氏计量槽(499).前液位', null);
 INSERT INTO `init_predict` VALUES ('w63.LIR107', '巴氏计量槽(499).后液位', null);
 INSERT INTO `init_predict` VALUES ('w65.M4881', '沉沙刮沙池(488).M488-1号刮沙机', null);
@@ -1485,51 +1487,51 @@ INSERT INTO `init_predict` VALUES ('w74.LISA116', '中间提升泵房(462B).吸�
 INSERT INTO `init_predict` VALUES ('w74.LISA118', '中间提升泵房(462B).药剂池液位', null);
 INSERT INTO `init_predict` VALUES ('w74.P462B-10', '中间提升泵房(462B).药剂泵状态', null);
 INSERT INTO `init_predict` VALUES ('w74.P462B-9', '中间提升泵房(462B).药剂泵状态', null);
-INSERT INTO `init_predict` VALUES ('w75.AIR209', '生化池系列1(1号生化池).3段溶解氧DO', null);
-INSERT INTO `init_predict` VALUES ('w75.AIR210', '生化池系列1(2号生化池).3段溶解氧DO', null);
+INSERT INTO `init_predict` VALUES ('w75.AIR209', '生化池系列1(1号生化池).3段溶解氧', null);
+INSERT INTO `init_predict` VALUES ('w75.AIR210', '生化池系列1(2号生化池).3段溶解氧', null);
 INSERT INTO `init_predict` VALUES ('w75.AIR229', '生化池系列1(1号生化池).PH', null);
 INSERT INTO `init_predict` VALUES ('w75.AIR230', '生化池系列1(2号生化池).PH', null);
-INSERT INTO `init_predict` VALUES ('w75.AIRC205', '生化池系列1(1号生化池).2段溶解氧DO', null);
-INSERT INTO `init_predict` VALUES ('w75.AIRC206', '生化池系列1(2号生化池).2段溶解氧DO', null);
-INSERT INTO `init_predict` VALUES ('w75.AIRC213', '生化池系列1(1号生化池).5段溶解氧DO', null);
-INSERT INTO `init_predict` VALUES ('w75.AIRC214', '生化池系列1(2号生化池).5段溶解氧DO', null);
+INSERT INTO `init_predict` VALUES ('w75.AIRC205', '生化池系列1(1号生化池).2段溶解氧', null);
+INSERT INTO `init_predict` VALUES ('w75.AIRC206', '生化池系列1(2号生化池).2段溶解氧', null);
+INSERT INTO `init_predict` VALUES ('w75.AIRC213', '生化池系列1(1号生化池).5段溶解氧', null);
+INSERT INTO `init_predict` VALUES ('w75.AIRC214', '生化池系列1(2号生化池).5段溶解氧', null);
 INSERT INTO `init_predict` VALUES ('w75.FR601A', '生化池系列1(1号生化池).鼓风机风量', null);
 INSERT INTO `init_predict` VALUES ('w75.TIR201', '生化池系列1(1号生化池).温度', null);
 INSERT INTO `init_predict` VALUES ('w75.TIR202', '生化池系列1(2号生化池).温度', null);
 INSERT INTO `init_predict` VALUES ('w76.AIR231', '生化池系列2(3号生化池).PH', null);
 INSERT INTO `init_predict` VALUES ('w76.AIR232', '生化池系列2(4号生化池).PH', null);
-INSERT INTO `init_predict` VALUES ('w76.AIRC207', '生化池系列2(3号生化池).2段溶解氧DO', null);
-INSERT INTO `init_predict` VALUES ('w76.AIRC208', '生化池系列2(4号生化池).2段溶解氧DO', null);
-INSERT INTO `init_predict` VALUES ('w76.AIRC211', '生化池系列2(3号生化池).3段溶解氧DO', null);
-INSERT INTO `init_predict` VALUES ('w76.AIRC212', '生化池系列2(4号生化池).3段溶解氧DO', null);
-INSERT INTO `init_predict` VALUES ('w76.AIRC215', '生化池系列2(3号生化池).5段溶解氧DO', null);
-INSERT INTO `init_predict` VALUES ('w76.AIRC216', '生化池系列2(4号生化池).5段溶解氧DO', null);
+INSERT INTO `init_predict` VALUES ('w76.AIRC207', '生化池系列2(3号生化池).2段溶解氧', null);
+INSERT INTO `init_predict` VALUES ('w76.AIRC208', '生化池系列2(4号生化池).2段溶解氧', null);
+INSERT INTO `init_predict` VALUES ('w76.AIRC211', '生化池系列2(3号生化池).3段溶解氧', null);
+INSERT INTO `init_predict` VALUES ('w76.AIRC212', '生化池系列2(4号生化池).3段溶解氧', null);
+INSERT INTO `init_predict` VALUES ('w76.AIRC215', '生化池系列2(3号生化池).5段溶解氧', null);
+INSERT INTO `init_predict` VALUES ('w76.AIRC216', '生化池系列2(4号生化池).5段溶解氧', null);
 INSERT INTO `init_predict` VALUES ('w76.FR601B', '生化池系列2(3号生化池).鼓风机分量', null);
 INSERT INTO `init_predict` VALUES ('w76.TIR203', '生化池系列2(3号生化池).温度', null);
 INSERT INTO `init_predict` VALUES ('w76.TIR204', '生化池系列2(4号生化池).温度', null);
-INSERT INTO `init_predict` VALUES ('w77.AIR201', '生化池系列3(5号生化池).A段溶解氧DO', null);
-INSERT INTO `init_predict` VALUES ('w77.AIR202', '生化池系列3(6号生化池).A段溶解氧DO', null);
+INSERT INTO `init_predict` VALUES ('w77.AIR201', '生化池系列3(5号生化池).A段溶解氧', null);
+INSERT INTO `init_predict` VALUES ('w77.AIR202', '生化池系列3(6号生化池).A段溶解氧', null);
 INSERT INTO `init_predict` VALUES ('w77.AIR233', '生化池系列3(5号生化池).PH', null);
 INSERT INTO `init_predict` VALUES ('w77.AIR234', '生化池系列3(6号生化池).PH', null);
-INSERT INTO `init_predict` VALUES ('w77.AIRC217', '生化池系列3(5号生化池).2段溶解氧DO', null);
-INSERT INTO `init_predict` VALUES ('w77.AIRC218', '生化池系列3(6号生化池).2段溶解氧DO', null);
-INSERT INTO `init_predict` VALUES ('w77.AIRC221', '生化池系列3(5号生化池).4段溶解氧DO', null);
-INSERT INTO `init_predict` VALUES ('w77.AIRC222', '生化池系列3(6号生化池).4段溶解氧DO', null);
-INSERT INTO `init_predict` VALUES ('w77.AIRC225', '生化池系列3(5号生化池).6段溶解氧DO', null);
-INSERT INTO `init_predict` VALUES ('w77.AIRC226', '生化池系列3(6号生化池).6段溶解氧DO', null);
+INSERT INTO `init_predict` VALUES ('w77.AIRC217', '生化池系列3(5号生化池).2段溶解氧', null);
+INSERT INTO `init_predict` VALUES ('w77.AIRC218', '生化池系列3(6号生化池).2段溶解氧', null);
+INSERT INTO `init_predict` VALUES ('w77.AIRC221', '生化池系列3(5号生化池).4段溶解氧', null);
+INSERT INTO `init_predict` VALUES ('w77.AIRC222', '生化池系列3(6号生化池).4段溶解氧', null);
+INSERT INTO `init_predict` VALUES ('w77.AIRC225', '生化池系列3(5号生化池).6段溶解氧', null);
+INSERT INTO `init_predict` VALUES ('w77.AIRC226', '生化池系列3(6号生化池).6段溶解氧', null);
 INSERT INTO `init_predict` VALUES ('w77.FR601C', '生化池系列3(5号生化池).鼓风机分量', null);
 INSERT INTO `init_predict` VALUES ('w77.TIR205', '生化池系列3(5号生化池).温度', null);
 INSERT INTO `init_predict` VALUES ('w77.TIR206', '生化池系列3(6号生化池).温度', null);
-INSERT INTO `init_predict` VALUES ('w78.AIR203', '生化池系列4(7号生化池).A段溶解氧DO', null);
-INSERT INTO `init_predict` VALUES ('w78.AIR204', '生化池系列4(8号生化池).A段溶解氧DO', null);
+INSERT INTO `init_predict` VALUES ('w78.AIR203', '生化池系列4(7号生化池).A段溶解氧', null);
+INSERT INTO `init_predict` VALUES ('w78.AIR204', '生化池系列4(8号生化池).A段溶解氧', null);
 INSERT INTO `init_predict` VALUES ('w78.AIR235', '生化池系列4(7号生化池).PH', null);
 INSERT INTO `init_predict` VALUES ('w78.AIR236', '生化池系列4(8号生化池).PH', null);
-INSERT INTO `init_predict` VALUES ('w78.AIRC219', '生化池系列4(7号生化池).2段溶解氧DO', null);
-INSERT INTO `init_predict` VALUES ('w78.AIRC220', '生化池系列4(8号生化池).2段溶解氧DO', null);
-INSERT INTO `init_predict` VALUES ('w78.AIRC223', '生化池系列4(7号生化池).4段溶解氧DO', null);
-INSERT INTO `init_predict` VALUES ('w78.AIRC224', '生化池系列4(8号生化池).4段溶解氧DO', null);
-INSERT INTO `init_predict` VALUES ('w78.AIRC227', '生化池系列4(7号生化池).6段溶解氧DO', null);
-INSERT INTO `init_predict` VALUES ('w78.AIRC228', '生化池系列4(8号生化池).6段溶解氧DO', null);
+INSERT INTO `init_predict` VALUES ('w78.AIRC219', '生化池系列4(7号生化池).2段溶解氧', null);
+INSERT INTO `init_predict` VALUES ('w78.AIRC220', '生化池系列4(8号生化池).2段溶解氧', null);
+INSERT INTO `init_predict` VALUES ('w78.AIRC223', '生化池系列4(7号生化池).4段溶解氧', null);
+INSERT INTO `init_predict` VALUES ('w78.AIRC224', '生化池系列4(8号生化池).4段溶解氧', null);
+INSERT INTO `init_predict` VALUES ('w78.AIRC227', '生化池系列4(7号生化池).6段溶解氧', null);
+INSERT INTO `init_predict` VALUES ('w78.AIRC228', '生化池系列4(8号生化池).6段溶解氧', null);
 INSERT INTO `init_predict` VALUES ('w78.FR601B', '生化池系列4(7号生化池).鼓风机分量', null);
 INSERT INTO `init_predict` VALUES ('w78.TIR207', '生化池系列4(7号生化池).温度', null);
 INSERT INTO `init_predict` VALUES ('w78.TIR208', '生化池系列4(8号生化池).温度', null);
@@ -1539,20 +1541,26 @@ INSERT INTO `init_predict` VALUES ('w8.NH3-N', '环氧乙烷废水.NH3-N', null)
 INSERT INTO `init_predict` VALUES ('w8.PH', '环氧乙烷废水.PH', null);
 INSERT INTO `init_predict` VALUES ('w8.Q', '环氧乙烷废水.水量', null);
 INSERT INTO `init_predict` VALUES ('w8.SS', '环氧乙烷废水.SS', null);
+INSERT INTO `init_predict` VALUES ('w83.BOD5\r\nw83.COD\r\nw83.NH3-N\r\nw83.PH\r\nw83.Q\r\nw83.SS\r\nw83.BOD5', '接触氧化池.BOD5', null);
+INSERT INTO `init_predict` VALUES ('w83.COD', '接触氧化池.COD', null);
 INSERT INTO `init_predict` VALUES ('w83.LIR803', '接触氧化池.1-3号池浓度', null);
 INSERT INTO `init_predict` VALUES ('w83.LIR804', '接触氧化池.4-5号池浓度', null);
+INSERT INTO `init_predict` VALUES ('w83.NH3-N', '接触氧化池.NH3-N', null);
+INSERT INTO `init_predict` VALUES ('w83.PH', '接触氧化池.PH', null);
+INSERT INTO `init_predict` VALUES ('w83.Q', '接触氧化池.水量', null);
+INSERT INTO `init_predict` VALUES ('w83.SS', '接触氧化池.SS', null);
 INSERT INTO `init_predict` VALUES ('w85.AIRA801', '排江出口线.PH', null);
 INSERT INTO `init_predict` VALUES ('w85.AIRA802', '排江出口线.SS', null);
 INSERT INTO `init_predict` VALUES ('w85.AIRA803', '排江出口线.COD', null);
 INSERT INTO `init_predict` VALUES ('w85.AIRA804', '排江出口线.NH3-N', null);
 INSERT INTO `init_predict` VALUES ('w85.AIRA805', '排江出口线.DO', null);
-INSERT INTO `init_predict` VALUES ('w86.FRCQ201', '1系列465回流泵房.回流泵房回流490A3量', null);
-INSERT INTO `init_predict` VALUES ('w86.FRCQ202', '1系列465回流泵房.回流泵房回流490A4量', null);
-INSERT INTO `init_predict` VALUES ('w86.FRQ203', '1系列465回流泵房.回流泵房回流467量', null);
-INSERT INTO `init_predict` VALUES ('w86.LIA201', '1系列465回流泵房.465吸泥池液位', null);
-INSERT INTO `init_predict` VALUES ('w87.FRCQ204', '2系列465A回流泵房.2系列465A回流泵房回流量', null);
-INSERT INTO `init_predict` VALUES ('w87.FRQ205', '2系列465A回流泵房.2系列465A回流泵房剩余量', null);
-INSERT INTO `init_predict` VALUES ('w87.LISA202', '2系列465A回流泵房.465A吸泥池液位', null);
+INSERT INTO `init_predict` VALUES ('w86.FRCQ201', '1系列465回流泵房.回流490A3量', null);
+INSERT INTO `init_predict` VALUES ('w86.FRCQ202', '1系列465回流泵房.回流490A4量', null);
+INSERT INTO `init_predict` VALUES ('w86.FRQ203', '1系列465回流泵房.剩余量', null);
+INSERT INTO `init_predict` VALUES ('w86.LIA201', '1系列465回流泵房.吸泥池液位', null);
+INSERT INTO `init_predict` VALUES ('w87.FRCQ204', '2系列465A回流泵房.回流量', null);
+INSERT INTO `init_predict` VALUES ('w87.FRQ205', '2系列465A回流泵房.剩余量', null);
+INSERT INTO `init_predict` VALUES ('w87.LISA202', '2系列465A回流泵房.吸泥池液位', null);
 INSERT INTO `init_predict` VALUES ('w88.FRCQ206', '3系列465B回流泵房.回流量', null);
 INSERT INTO `init_predict` VALUES ('w88.FRQ207', '3系列465B回流泵房.剩余量', null);
 INSERT INTO `init_predict` VALUES ('w88.LISA203', '3系列465B回流泵房.吸泥池液位', null);
@@ -1966,132 +1974,132 @@ CREATE TABLE `pre_dss` (
 -- ----------------------------
 -- Records of pre_dss
 -- ----------------------------
-INSERT INTO `pre_dss` VALUES ('w77.AIR201', '3.3191227E-5                                                    ', '           32.560000', '20111218123004', '1');
-INSERT INTO `pre_dss` VALUES ('w77.AIR202', '3.3191227E-5                                                    ', '           32.560000', '20111218123004', '2');
-INSERT INTO `pre_dss` VALUES ('w78.AIR203', '3.3191824E-5                                                    ', '           32.560000', '20111218123004', '3');
-INSERT INTO `pre_dss` VALUES ('w78.AIR204', '3.3191824E-5                                                    ', '           32.560000', '20111218123004', '4');
-INSERT INTO `pre_dss` VALUES ('w86.FRCQ201', '1000.00006                                                      ', '           32.560000', '20111218123004', '5');
-INSERT INTO `pre_dss` VALUES ('w86.FRCQ202', '1000.00006                                                      ', '           32.560000', '20111218123004', '6');
-INSERT INTO `pre_dss` VALUES ('w86.FRCQ203', '17.412443                                                       ', '           32.560000', '20111218123004', '7');
-INSERT INTO `pre_dss` VALUES ('w74.AIRC209', '2.9839602                                                       ', '           32.560000', '20111218123004', '8');
-INSERT INTO `pre_dss` VALUES ('w74.AIRC210', '2.9864662                                                       ', '           32.560000', '20111218123004', '9');
-INSERT INTO `pre_dss` VALUES ('w76.AIRC211', '2.984558                                                        ', '           32.560000', '20111218123004', '10');
-INSERT INTO `pre_dss` VALUES ('w76.AIRC212', '2.984558                                                        ', '           32.560000', '20111218123004', '11');
-INSERT INTO `pre_dss` VALUES ('w75.AIRC213', '3.006699                                                        ', '           32.560000', '20111218123004', '12');
-INSERT INTO `pre_dss` VALUES ('w75.AIRC214', '2.9999924                                                       ', '           32.560000', '20111218123004', '13');
-INSERT INTO `pre_dss` VALUES ('w77.AIRC215', '3.0067298                                                       ', '           32.560000', '20111218123004', '14');
-INSERT INTO `pre_dss` VALUES ('w76.AIRC216', '2.9999926                                                       ', '           32.560000', '20111218123004', '15');
-INSERT INTO `pre_dss` VALUES ('w78.AIRC223', '2.9836466                                                       ', '           32.560000', '20111218123004', '16');
-INSERT INTO `pre_dss` VALUES ('w77.AIRC221', '2.9990299                                                       ', '           32.560000', '20111218123004', '17');
-INSERT INTO `pre_dss` VALUES ('w77.AIRC222', '2.9990299                                                       ', '           32.560000', '20111218123004', '18');
-INSERT INTO `pre_dss` VALUES ('w78.AIRC224', '2.9836466                                                       ', '           32.560000', '20111218123004', '19');
-INSERT INTO `pre_dss` VALUES ('w77.AIRC225', '2.9999986                                                       ', '           32.560000', '20111218123004', '20');
-INSERT INTO `pre_dss` VALUES ('w77.AIRC226', '2.9999986                                                       ', '           32.560000', '20111218123004', '21');
-INSERT INTO `pre_dss` VALUES ('w78.AIRC227', '2.9875658                                                       ', '           32.560000', '20111218123004', '22');
-INSERT INTO `pre_dss` VALUES ('w78.AIRC228', '2.9875658                                                       ', '           32.560000', '20111218123004', '23');
-INSERT INTO `pre_dss` VALUES ('w76.AIRC205', '2.89104                                                         ', '           32.560000', '20111218123004', '24');
-INSERT INTO `pre_dss` VALUES ('w76.AIRC206', '3.000001                                                        ', '           32.560000', '20111218123004', '25');
-INSERT INTO `pre_dss` VALUES ('w75.AIRC207', '2.935247                                                        ', '           32.560000', '20111218123004', '26');
-INSERT INTO `pre_dss` VALUES ('w75.AIRC208', '2.935247                                                        ', '           32.560000', '20111218123004', '27');
-INSERT INTO `pre_dss` VALUES ('w77.AIRC217', '2.876394                                                        ', '           32.560000', '20111218123004', '28');
-INSERT INTO `pre_dss` VALUES ('w77.AIRC218', '2.876394                                                        ', '           32.560000', '20111218123004', '29');
-INSERT INTO `pre_dss` VALUES ('w78.AIRC219', '2.876436                                                        ', '           32.560000', '20111218123004', '30');
-INSERT INTO `pre_dss` VALUES ('w78.AIRC220', '2.876436                                                        ', '           32.560000', '20111218123004', '31');
-INSERT INTO `pre_dss` VALUES ('w87.FRCQ204', '1501.2117                                                       ', '           32.560000', '20111218123004', '32');
-INSERT INTO `pre_dss` VALUES ('w88.FRCQ206', '1500.0767                                                       ', '           32.560000', '20111218123004', '33');
-INSERT INTO `pre_dss` VALUES ('FI101', '525.00037                                                       ', '           32.560000', '20111218123004', '34');
-INSERT INTO `pre_dss` VALUES ('FI103', '221.00035                                                       ', '           32.560000', '20111218123004', '35');
-INSERT INTO `pre_dss` VALUES ('w62.LDISA101', '0.0                                                             ', '           32.560000', '20111218123004', '36');
-INSERT INTO `pre_dss` VALUES ('w62.LDISA102', '0.0                                                             ', '           32.560000', '20111218123004', '37');
-INSERT INTO `pre_dss` VALUES ('w62.LDISA103', '0.0                                                             ', '           32.560000', '20111218123004', '38');
-INSERT INTO `pre_dss` VALUES ('w62.LISA104', '3.9999905                                                       ', '           32.560000', '20111218123004', '39');
-INSERT INTO `pre_dss` VALUES ('w62.AIRA101', '529.8328                                                        ', '           32.560000', '20111218123004', '40');
-INSERT INTO `pre_dss` VALUES ('w62.AIRA102', '12.061142                                                       ', '           32.560000', '20111218123004', '41');
-INSERT INTO `pre_dss` VALUES ('LDIR105', '0.0                                                             ', '           32.560000', '20111218123004', '42');
-INSERT INTO `pre_dss` VALUES ('LI2101', '3.2904353E-9                                                    ', '           32.560000', '20111218123004', '43');
-INSERT INTO `pre_dss` VALUES ('LIR106', '6.9999967                                                       ', '           32.560000', '20111218123004', '44');
-INSERT INTO `pre_dss` VALUES ('LIR107', '6.9999967                                                       ', '           32.560000', '20111218123004', '45');
-INSERT INTO `pre_dss` VALUES ('FR101', '3068.1118                                                       ', '           32.560000', '20111218123004', '46');
-INSERT INTO `pre_dss` VALUES ('w63.FRQ101', '2425424.0                                                       ', '           32.560000', '20111218123004', '47');
-INSERT INTO `pre_dss` VALUES ('LDISA108', '0.0                                                             ', '           32.560000', '20111218123004', '48');
-INSERT INTO `pre_dss` VALUES ('LDISA109', '0.0                                                             ', '           32.560000', '20111218123004', '49');
-INSERT INTO `pre_dss` VALUES ('LDISA110', '0.0                                                             ', '           32.560000', '20111218123004', '50');
-INSERT INTO `pre_dss` VALUES ('LDISA111', '0.0                                                             ', '           32.560000', '20111218123004', '51');
-INSERT INTO `pre_dss` VALUES ('LDISA112', '0.0                                                             ', '           32.560000', '20111218123004', '52');
-INSERT INTO `pre_dss` VALUES ('LIA113', '50.0                                                            ', '           32.560000', '20111218123004', '53');
-INSERT INTO `pre_dss` VALUES ('w69.LIA114', '6.8999996                                                       ', '           32.560000', '20111218123004', '54');
-INSERT INTO `pre_dss` VALUES ('LISA115', '5.2                                                             ', '           32.560000', '20111218123004', '55');
-INSERT INTO `pre_dss` VALUES ('LISA116', '1.5000001                                                       ', '           32.560000', '20111218123004', '56');
-INSERT INTO `pre_dss` VALUES ('w74.AIRA103', '443.24112                                                       ', '           32.560000', '20111218123004', '57');
-INSERT INTO `pre_dss` VALUES ('w74.AIRA104', '19.471039                                                       ', '           32.560000', '20111218123004', '58');
-INSERT INTO `pre_dss` VALUES ('AIR105', '119.87818                                                       ', '           32.560000', '20111218123004', '59');
-INSERT INTO `pre_dss` VALUES ('w74.AIRA106', '7.0                                                             ', '           32.560000', '20111218123004', '60');
-INSERT INTO `pre_dss` VALUES ('w76.LIA117', '3.9999998                                                       ', '           32.560000', '20111218123004', '61');
-INSERT INTO `pre_dss` VALUES ('LISA118', '1.5                                                             ', '           32.560000', '20111218123004', '62');
-INSERT INTO `pre_dss` VALUES ('w71.LISA119', '4.3000255                                                       ', '           32.560000', '20111218123004', '63');
-INSERT INTO `pre_dss` VALUES ('LISA120', '4.3000255                                                       ', '           32.560000', '20111218123004', '64');
-INSERT INTO `pre_dss` VALUES ('LISA121', '0.0                                                             ', '           32.560000', '20111218123004', '65');
-INSERT INTO `pre_dss` VALUES ('w73.LISA122', '0.0                                                             ', '           32.560000', '20111218123004', '66');
-INSERT INTO `pre_dss` VALUES ('w73.LISA123', '0.0                                                             ', '           32.560000', '20111218123004', '67');
-INSERT INTO `pre_dss` VALUES ('w73.LISA124', '0.0                                                             ', '           32.560000', '20111218123004', '68');
-INSERT INTO `pre_dss` VALUES ('LISA125', '0.0                                                             ', '           32.560000', '20111218123004', '69');
-INSERT INTO `pre_dss` VALUES ('w73.FI106', '36.34194                                                        ', '           32.560000', '20111218123004', '70');
-INSERT INTO `pre_dss` VALUES ('w73.FI107', '36.34194                                                        ', '           32.560000', '20111218123004', '71');
-INSERT INTO `pre_dss` VALUES ('w73.FI108', '36.34194                                                        ', '           32.560000', '20111218123004', '72');
-INSERT INTO `pre_dss` VALUES ('w73.FI109', '36.34194                                                        ', '           32.560000', '20111218123004', '73');
-INSERT INTO `pre_dss` VALUES ('w73.FI110', '36.34194                                                        ', '           32.560000', '20111218123004', '74');
-INSERT INTO `pre_dss` VALUES ('w73.FI111', '36.34194                                                        ', '           32.560000', '20111218123004', '75');
-INSERT INTO `pre_dss` VALUES ('FRQ102', '1.0668949E7                                                     ', '           32.560000', '20111218123004', '76');
-INSERT INTO `pre_dss` VALUES ('FR102', '1368.6163                                                       ', '           32.560000', '20111218123004', '77');
-INSERT INTO `pre_dss` VALUES ('FR103', '109.04428                                                       ', '           32.560000', '20111218123004', '78');
-INSERT INTO `pre_dss` VALUES ('w71.FRQ103', '551239.8                                                        ', '           32.560000', '20111218123004', '79');
-INSERT INTO `pre_dss` VALUES ('FR104', '109.04428                                                       ', '           32.560000', '20111218123004', '80');
-INSERT INTO `pre_dss` VALUES ('w71.FRQ104', '551241.75                                                       ', '           32.560000', '20111218123004', '81');
-INSERT INTO `pre_dss` VALUES ('FR105', '0.0                                                             ', '           32.560000', '20111218123004', '82');
-INSERT INTO `pre_dss` VALUES ('FRQ105', '0.0                                                             ', '           32.560000', '20111218123004', '83');
-INSERT INTO `pre_dss` VALUES ('w62.AIRA107', '7.0                                                             ', '           32.560000', '20111218123004', '84');
-INSERT INTO `pre_dss` VALUES ('TIA101', '25.0                                                            ', '           32.560000', '20111218123004', '85');
-INSERT INTO `pre_dss` VALUES ('PI101', '0.2                                                             ', '           32.560000', '20111218123004', '86');
-INSERT INTO `pre_dss` VALUES ('PIA102', '0.4                                                             ', '           32.560000', '20111218123004', '87');
-INSERT INTO `pre_dss` VALUES ('PISA103', '0.0                                                             ', '           32.560000', '20111218123004', '88');
-INSERT INTO `pre_dss` VALUES ('w75.AIR229', '7.0                                                             ', '           32.560000', '20111218123004', '89');
-INSERT INTO `pre_dss` VALUES ('w76.AIR230', '7.0                                                             ', '           32.560000', '20111218123004', '90');
-INSERT INTO `pre_dss` VALUES ('w75.AIR231', '7.0                                                             ', '           32.560000', '20111218123004', '91');
-INSERT INTO `pre_dss` VALUES ('w75.AIR232', '7.0                                                             ', '           32.560000', '20111218123004', '92');
-INSERT INTO `pre_dss` VALUES ('w77.AIR233', '7.0                                                             ', '           32.560000', '20111218123004', '93');
-INSERT INTO `pre_dss` VALUES ('w75.AIR234', '7.0                                                             ', '           32.560000', '20111218123004', '94');
-INSERT INTO `pre_dss` VALUES ('w78.AIR235', '7.0                                                             ', '           32.560000', '20111218123004', '95');
-INSERT INTO `pre_dss` VALUES ('TI102', '37.14617                                                        ', '           32.560000', '20111218123004', '96');
-INSERT INTO `pre_dss` VALUES ('w75.TIR201', '37.003956                                                       ', '           32.560000', '20111218123004', '97');
-INSERT INTO `pre_dss` VALUES ('w75.TIR202', '36.997948                                                       ', '           32.560000', '20111218123004', '98');
-INSERT INTO `pre_dss` VALUES ('w76.TIR203', '37.00377                                                        ', '           32.560000', '20111218123004', '99');
-INSERT INTO `pre_dss` VALUES ('w76.TIR204', '37.004818                                                       ', '           32.560000', '20111218123004', '100');
-INSERT INTO `pre_dss` VALUES ('w77.TIR205', '37.030212                                                       ', '           32.560000', '20111218123004', '101');
-INSERT INTO `pre_dss` VALUES ('w77.TIR206', '37.030212                                                       ', '           32.560000', '20111218123004', '102');
-INSERT INTO `pre_dss` VALUES ('w78.TIR207', '37.029568                                                       ', '           32.560000', '20111218123004', '103');
-INSERT INTO `pre_dss` VALUES ('w78.TIR208', '37.029568                                                       ', '           32.560000', '20111218123004', '104');
-INSERT INTO `pre_dss` VALUES ('LIA201', '2.5500157                                                       ', '           32.560000', '20111218123004', '105');
-INSERT INTO `pre_dss` VALUES ('w87.LISA202', '0.077204034                                                     ', '           32.560000', '20111218123004', '106');
-INSERT INTO `pre_dss` VALUES ('LISA203', '0.07714989                                                      ', '           32.560000', '20111218123004', '107');
-INSERT INTO `pre_dss` VALUES ('FRQ201', '1450216.2                                                       ', '           32.560000', '20111218123004', '108');
-INSERT INTO `pre_dss` VALUES ('FRQ202', '1450216.2                                                       ', '           32.560000', '20111218123004', '109');
-INSERT INTO `pre_dss` VALUES ('FR203', '17.412443                                                       ', '           32.560000', '20111218123004', '110');
-INSERT INTO `pre_dss` VALUES ('FRQ203', '87057.17                                                        ', '           32.560000', '20111218123004', '111');
-INSERT INTO `pre_dss` VALUES ('FRQ204', '903036.06                                                       ', '           32.560000', '20111218123004', '112');
-INSERT INTO `pre_dss` VALUES ('FR205', '13.115805                                                       ', '           32.560000', '20111218123004', '113');
-INSERT INTO `pre_dss` VALUES ('FRQ205', '69841.86                                                        ', '           32.560000', '20111218123004', '114');
-INSERT INTO `pre_dss` VALUES ('FRQ206', '922364.56                                                       ', '           32.560000', '20111218123004', '115');
-INSERT INTO `pre_dss` VALUES ('FR207', '13.089564                                                       ', '           32.560000', '20111218123004', '116');
-INSERT INTO `pre_dss` VALUES ('FRQ207', '69827.93                                                        ', '           32.560000', '20111218123004', '117');
-INSERT INTO `pre_dss` VALUES ('LIR803', '50.000214                                                       ', '           32.560000', '20111218123004', '118');
-INSERT INTO `pre_dss` VALUES ('LIR804', '50.000214                                                       ', '           32.560000', '20111218123004', '119');
-INSERT INTO `pre_dss` VALUES ('w85.AIRA801', '7.0                                                             ', '           32.560000', '20111218123004', '120');
-INSERT INTO `pre_dss` VALUES ('w85.AIRA802', '36.37202                                                        ', '           32.560000', '20111218123004', '121');
-INSERT INTO `pre_dss` VALUES ('w85.AIRA803', '70.380936                                                       ', '           32.560000', '20111218123004', '122');
-INSERT INTO `pre_dss` VALUES ('w85.AIRA804', '3.4734836                                                       ', '           32.560000', '20111218123004', '123');
-INSERT INTO `pre_dss` VALUES ('PI501', '0.0                                                             ', '           32.560000', '20111218123004', '124');
-INSERT INTO `pre_dss` VALUES ('FR501', '13.165882                                                       ', '           32.560000', '20111218123004', '125');
-INSERT INTO `pre_dss` VALUES ('FRQ501', '103394.125                                                      ', '           32.560000', '20111218123004', '126');
+INSERT INTO `pre_dss` VALUES ('w77.AIR201', '3.35265E-5                                                      ', '           22.660000', '20120109133156', '1');
+INSERT INTO `pre_dss` VALUES ('w77.AIR202', '3.35265E-5                                                      ', '           22.660000', '20120109133156', '2');
+INSERT INTO `pre_dss` VALUES ('w78.AIR203', '3.3528646E-5                                                    ', '           22.660000', '20120109133156', '3');
+INSERT INTO `pre_dss` VALUES ('w78.AIR204', '3.3528646E-5                                                    ', '           22.660000', '20120109133156', '4');
+INSERT INTO `pre_dss` VALUES ('w86.FRCQ201', '1000.00006                                                      ', '           22.660000', '20120109133156', '5');
+INSERT INTO `pre_dss` VALUES ('w86.FRCQ202', '1000.00006                                                      ', '           22.660000', '20120109133156', '6');
+INSERT INTO `pre_dss` VALUES ('FRCQ203', '17.411297                                                       ', '           22.660000', '20120109133156', '7');
+INSERT INTO `pre_dss` VALUES ('AIRC209', '2.9839644                                                       ', '           22.660000', '20120109133156', '8');
+INSERT INTO `pre_dss` VALUES ('AIRC210', '2.9864707                                                       ', '           22.660000', '20120109133156', '9');
+INSERT INTO `pre_dss` VALUES ('w76.AIRC211', '2.9845626                                                       ', '           22.660000', '20120109133156', '10');
+INSERT INTO `pre_dss` VALUES ('w76.AIRC212', '2.9845626                                                       ', '           22.660000', '20120109133156', '11');
+INSERT INTO `pre_dss` VALUES ('w75.AIRC213', '3.0067062                                                       ', '           22.660000', '20120109133156', '12');
+INSERT INTO `pre_dss` VALUES ('w75.AIRC214', '2.9999928                                                       ', '           22.660000', '20120109133156', '13');
+INSERT INTO `pre_dss` VALUES ('w76.AIRC215', '3.0067372                                                       ', '           22.660000', '20120109133156', '14');
+INSERT INTO `pre_dss` VALUES ('w76.AIRC216', '2.9999926                                                       ', '           22.660000', '20120109133156', '15');
+INSERT INTO `pre_dss` VALUES ('w78.AIRC223', '2.9836617                                                       ', '           22.660000', '20120109133156', '16');
+INSERT INTO `pre_dss` VALUES ('w77.AIRC221', '2.999065                                                        ', '           22.660000', '20120109133156', '17');
+INSERT INTO `pre_dss` VALUES ('w77.AIRC222', '2.999065                                                        ', '           22.660000', '20120109133156', '18');
+INSERT INTO `pre_dss` VALUES ('w78.AIRC224', '2.9836617                                                       ', '           22.660000', '20120109133156', '19');
+INSERT INTO `pre_dss` VALUES ('w77.AIRC225', '3.00001                                                         ', '           22.660000', '20120109133156', '20');
+INSERT INTO `pre_dss` VALUES ('w77.AIRC226', '3.00001                                                         ', '           22.660000', '20120109133156', '21');
+INSERT INTO `pre_dss` VALUES ('w78.AIRC227', '2.9875789                                                       ', '           22.660000', '20120109133156', '22');
+INSERT INTO `pre_dss` VALUES ('w78.AIRC228', '2.9875789                                                       ', '           22.660000', '20120109133156', '23');
+INSERT INTO `pre_dss` VALUES ('w75.AIRC205', '2.8910334                                                       ', '           22.660000', '20120109133156', '24');
+INSERT INTO `pre_dss` VALUES ('w75.AIRC206', '2.9999957                                                       ', '           22.660000', '20120109133156', '25');
+INSERT INTO `pre_dss` VALUES ('w76.AIRC207', '2.935241                                                        ', '           22.660000', '20120109133156', '26');
+INSERT INTO `pre_dss` VALUES ('w76.AIRC208', '2.935241                                                        ', '           22.660000', '20120109133156', '27');
+INSERT INTO `pre_dss` VALUES ('w77.AIRC217', '2.876425                                                        ', '           22.660000', '20120109133156', '28');
+INSERT INTO `pre_dss` VALUES ('w77.AIRC218', '2.876425                                                        ', '           22.660000', '20120109133156', '29');
+INSERT INTO `pre_dss` VALUES ('w78.AIRC219', '2.8764348                                                       ', '           22.660000', '20120109133156', '30');
+INSERT INTO `pre_dss` VALUES ('w78.AIRC220', '2.8764348                                                       ', '           22.660000', '20120109133156', '31');
+INSERT INTO `pre_dss` VALUES ('w87.FRCQ204', '1497.2356                                                       ', '           22.660000', '20120109133156', '32');
+INSERT INTO `pre_dss` VALUES ('w88.FRCQ206', '1497.2734                                                       ', '           22.660000', '20120109133156', '33');
+INSERT INTO `pre_dss` VALUES ('FI101', '525.00037                                                       ', '           22.660000', '20120109133156', '34');
+INSERT INTO `pre_dss` VALUES ('FI103', '221.00035                                                       ', '           22.660000', '20120109133156', '35');
+INSERT INTO `pre_dss` VALUES ('w62.LDISA101', '0.0                                                             ', '           22.660000', '20120109133156', '36');
+INSERT INTO `pre_dss` VALUES ('w62.LDISA102', '0.0                                                             ', '           22.660000', '20120109133156', '37');
+INSERT INTO `pre_dss` VALUES ('w62.LDISA103', '0.0                                                             ', '           22.660000', '20120109133156', '38');
+INSERT INTO `pre_dss` VALUES ('w62.LISA104', '4.000001                                                        ', '           22.660000', '20120109133156', '39');
+INSERT INTO `pre_dss` VALUES ('w62.AIRA101', '529.8328                                                        ', '           22.660000', '20120109133156', '40');
+INSERT INTO `pre_dss` VALUES ('w62.AIRA102', '12.061142                                                       ', '           22.660000', '20120109133156', '41');
+INSERT INTO `pre_dss` VALUES ('LDIR105', '0.0                                                             ', '           22.660000', '20120109133156', '42');
+INSERT INTO `pre_dss` VALUES ('LI2101', '3.2904326E-9                                                    ', '           22.660000', '20120109133156', '43');
+INSERT INTO `pre_dss` VALUES ('w63.LIR106', '7.0                                                             ', '           22.660000', '20120109133156', '44');
+INSERT INTO `pre_dss` VALUES ('w63.LIR107', '7.0                                                             ', '           22.660000', '20120109133156', '45');
+INSERT INTO `pre_dss` VALUES ('w63.FR101', '3067.9314                                                       ', '           22.660000', '20120109133156', '46');
+INSERT INTO `pre_dss` VALUES ('FRQ101', '2394228.5                                                       ', '           22.660000', '20120109133156', '47');
+INSERT INTO `pre_dss` VALUES ('LDISA108', '0.0                                                             ', '           22.660000', '20120109133156', '48');
+INSERT INTO `pre_dss` VALUES ('LDISA109', '0.0                                                             ', '           22.660000', '20120109133156', '49');
+INSERT INTO `pre_dss` VALUES ('LDISA110', '0.0                                                             ', '           22.660000', '20120109133156', '50');
+INSERT INTO `pre_dss` VALUES ('LDISA111', '0.0                                                             ', '           22.660000', '20120109133156', '51');
+INSERT INTO `pre_dss` VALUES ('LDISA112', '0.0                                                             ', '           22.660000', '20120109133156', '52');
+INSERT INTO `pre_dss` VALUES ('LIA113', '50.0                                                            ', '           22.660000', '20120109133156', '53');
+INSERT INTO `pre_dss` VALUES ('w69.LIA114', '6.9                                                             ', '           22.660000', '20120109133156', '54');
+INSERT INTO `pre_dss` VALUES ('LISA115', '5.2000003                                                       ', '           22.660000', '20120109133156', '55');
+INSERT INTO `pre_dss` VALUES ('w74.LISA116', '1.5                                                             ', '           22.660000', '20120109133156', '56');
+INSERT INTO `pre_dss` VALUES ('w74.AIRA103', '443.24115                                                       ', '           22.660000', '20120109133156', '57');
+INSERT INTO `pre_dss` VALUES ('w74.AIRA104', '19.471037                                                       ', '           22.660000', '20120109133156', '58');
+INSERT INTO `pre_dss` VALUES ('AIR105', '119.87819                                                       ', '           22.660000', '20120109133156', '59');
+INSERT INTO `pre_dss` VALUES ('w74.AIRA106', '7.0                                                             ', '           22.660000', '20120109133156', '60');
+INSERT INTO `pre_dss` VALUES ('LIA117', '4.0                                                             ', '           22.660000', '20120109133156', '61');
+INSERT INTO `pre_dss` VALUES ('w74.LISA118', '1.5                                                             ', '           22.660000', '20120109133156', '62');
+INSERT INTO `pre_dss` VALUES ('w71.LISA119', '4.299991                                                        ', '           22.660000', '20120109133156', '63');
+INSERT INTO `pre_dss` VALUES ('LISA120', '4.299991                                                        ', '           22.660000', '20120109133156', '64');
+INSERT INTO `pre_dss` VALUES ('LISA121', '0.0                                                             ', '           22.660000', '20120109133156', '65');
+INSERT INTO `pre_dss` VALUES ('w73.LISA122', '0.0                                                             ', '           22.660000', '20120109133156', '66');
+INSERT INTO `pre_dss` VALUES ('w73.LISA123', '0.0                                                             ', '           22.660000', '20120109133156', '67');
+INSERT INTO `pre_dss` VALUES ('w73.LISA124', '0.0                                                             ', '           22.660000', '20120109133156', '68');
+INSERT INTO `pre_dss` VALUES ('LISA125', '0.0                                                             ', '           22.660000', '20120109133156', '69');
+INSERT INTO `pre_dss` VALUES ('w73.FI106', '36.237938                                                       ', '           22.660000', '20120109133156', '70');
+INSERT INTO `pre_dss` VALUES ('w73.FI107', '36.237938                                                       ', '           22.660000', '20120109133156', '71');
+INSERT INTO `pre_dss` VALUES ('w73.FI108', '36.237938                                                       ', '           22.660000', '20120109133156', '72');
+INSERT INTO `pre_dss` VALUES ('w73.FI109', '36.237938                                                       ', '           22.660000', '20120109133156', '73');
+INSERT INTO `pre_dss` VALUES ('w73.FI110', '36.237938                                                       ', '           22.660000', '20120109133156', '74');
+INSERT INTO `pre_dss` VALUES ('w73.FI111', '36.237938                                                       ', '           22.660000', '20120109133156', '75');
+INSERT INTO `pre_dss` VALUES ('FRQ102', '1.0651123E7                                                     ', '           22.660000', '20120109133156', '76');
+INSERT INTO `pre_dss` VALUES ('FR102', '1368.6163                                                       ', '           22.660000', '20120109133156', '77');
+INSERT INTO `pre_dss` VALUES ('FR103', '108.76379                                                       ', '           22.660000', '20120109133156', '78');
+INSERT INTO `pre_dss` VALUES ('w71.FRQ103', '550125.7                                                        ', '           22.660000', '20120109133156', '79');
+INSERT INTO `pre_dss` VALUES ('FR104', '108.76379                                                       ', '           22.660000', '20120109133156', '80');
+INSERT INTO `pre_dss` VALUES ('w71.FRQ104', '550127.6                                                        ', '           22.660000', '20120109133156', '81');
+INSERT INTO `pre_dss` VALUES ('FR105', '0.0                                                             ', '           22.660000', '20120109133156', '82');
+INSERT INTO `pre_dss` VALUES ('FRQ105', '0.0                                                             ', '           22.660000', '20120109133156', '83');
+INSERT INTO `pre_dss` VALUES ('w62.AIRA107', '7.0                                                             ', '           22.660000', '20120109133156', '84');
+INSERT INTO `pre_dss` VALUES ('TIA101', '25.0                                                            ', '           22.660000', '20120109133156', '85');
+INSERT INTO `pre_dss` VALUES ('PI101', '0.2                                                             ', '           22.660000', '20120109133156', '86');
+INSERT INTO `pre_dss` VALUES ('PIA102', '0.4                                                             ', '           22.660000', '20120109133156', '87');
+INSERT INTO `pre_dss` VALUES ('PISA103', '0.0                                                             ', '           22.660000', '20120109133156', '88');
+INSERT INTO `pre_dss` VALUES ('w75.AIR229', '7.0                                                             ', '           22.660000', '20120109133156', '89');
+INSERT INTO `pre_dss` VALUES ('w75.AIR230', '7.0                                                             ', '           22.660000', '20120109133156', '90');
+INSERT INTO `pre_dss` VALUES ('w76.AIR231', '7.0                                                             ', '           22.660000', '20120109133156', '91');
+INSERT INTO `pre_dss` VALUES ('w76.AIR232', '7.0                                                             ', '           22.660000', '20120109133156', '92');
+INSERT INTO `pre_dss` VALUES ('w77.AIR233', '7.0                                                             ', '           22.660000', '20120109133156', '93');
+INSERT INTO `pre_dss` VALUES ('w77.AIR234', '7.0                                                             ', '           22.660000', '20120109133156', '94');
+INSERT INTO `pre_dss` VALUES ('w78.AIR235', '7.0                                                             ', '           22.660000', '20120109133156', '95');
+INSERT INTO `pre_dss` VALUES ('TI102', '37.14617                                                        ', '           22.660000', '20120109133156', '96');
+INSERT INTO `pre_dss` VALUES ('w75.TIR201', '37.003952                                                       ', '           22.660000', '20120109133156', '97');
+INSERT INTO `pre_dss` VALUES ('w75.TIR202', '36.997948                                                       ', '           22.660000', '20120109133156', '98');
+INSERT INTO `pre_dss` VALUES ('w76.TIR203', '37.00377                                                        ', '           22.660000', '20120109133156', '99');
+INSERT INTO `pre_dss` VALUES ('w76.TIR204', '37.004818                                                       ', '           22.660000', '20120109133156', '100');
+INSERT INTO `pre_dss` VALUES ('w77.TIR205', '37.03022                                                        ', '           22.660000', '20120109133156', '101');
+INSERT INTO `pre_dss` VALUES ('w77.TIR206', '37.03022                                                        ', '           22.660000', '20120109133156', '102');
+INSERT INTO `pre_dss` VALUES ('w78.TIR207', '37.02957                                                        ', '           22.660000', '20120109133156', '103');
+INSERT INTO `pre_dss` VALUES ('w78.TIR208', '37.02957                                                        ', '           22.660000', '20120109133156', '104');
+INSERT INTO `pre_dss` VALUES ('w86.LIA201', '2.5499969                                                       ', '           22.660000', '20120109133156', '105');
+INSERT INTO `pre_dss` VALUES ('w87.LISA202', '0.07699811                                                      ', '           22.660000', '20120109133156', '106');
+INSERT INTO `pre_dss` VALUES ('w88.LISA203', '0.0770004                                                       ', '           22.660000', '20120109133156', '107');
+INSERT INTO `pre_dss` VALUES ('FRQ201', '1440189.1                                                       ', '           22.660000', '20120109133156', '108');
+INSERT INTO `pre_dss` VALUES ('FRQ202', '1440189.1                                                       ', '           22.660000', '20120109133156', '109');
+INSERT INTO `pre_dss` VALUES ('FR203', '17.411297                                                       ', '           22.660000', '20120109133156', '110');
+INSERT INTO `pre_dss` VALUES ('w86.FRQ203', '86917.91                                                        ', '           22.660000', '20120109133156', '111');
+INSERT INTO `pre_dss` VALUES ('FRQ204', '887995.4                                                        ', '           22.660000', '20120109133156', '112');
+INSERT INTO `pre_dss` VALUES ('FR205', '13.03844                                                        ', '           22.660000', '20120109133156', '113');
+INSERT INTO `pre_dss` VALUES ('w87.FRQ205', '69702.59                                                        ', '           22.660000', '20120109133156', '114');
+INSERT INTO `pre_dss` VALUES ('FRQ206', '907323.9                                                        ', '           22.660000', '20120109133156', '115');
+INSERT INTO `pre_dss` VALUES ('FR207', '13.056068                                                       ', '           22.660000', '20120109133156', '116');
+INSERT INTO `pre_dss` VALUES ('w88.FRQ207', '69688.664                                                       ', '           22.660000', '20120109133156', '117');
+INSERT INTO `pre_dss` VALUES ('w83.LIR803', '50.00017                                                        ', '           22.660000', '20120109133156', '118');
+INSERT INTO `pre_dss` VALUES ('w83.LIR804', '50.00017                                                        ', '           22.660000', '20120109133156', '119');
+INSERT INTO `pre_dss` VALUES ('w85.AIRA801', '7.0                                                             ', '           22.660000', '20120109133156', '120');
+INSERT INTO `pre_dss` VALUES ('w85.AIRA802', '36.35987                                                        ', '           22.660000', '20120109133156', '121');
+INSERT INTO `pre_dss` VALUES ('w85.AIRA803', '70.36264                                                        ', '           22.660000', '20120109133156', '122');
+INSERT INTO `pre_dss` VALUES ('w85.AIRA804', '3.473392                                                        ', '           22.660000', '20120109133156', '123');
+INSERT INTO `pre_dss` VALUES ('PI501', '0.0                                                             ', '           22.660000', '20120109133156', '124');
+INSERT INTO `pre_dss` VALUES ('FR501', '13.165741                                                       ', '           22.660000', '20120109133156', '125');
+INSERT INTO `pre_dss` VALUES ('FRQ501', '103254.86                                                       ', '           22.660000', '20120109133156', '126');
 
 -- ----------------------------
 -- Table structure for `pre_history`
@@ -2105,7 +2113,7 @@ CREATE TABLE `pre_history` (
   `name` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `FK92FB92D823A4A4F1` (`name`)
-) ENGINE=MyISAM AUTO_INCREMENT=66 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=151 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of pre_history
@@ -2175,6 +2183,91 @@ INSERT INTO `pre_history` VALUES ('62', '20111218123004', '           32.560000'
 INSERT INTO `pre_history` VALUES ('63', '20111218123004', '           32.560000', '36.37202                                                        ', 'w85.AIRA802');
 INSERT INTO `pre_history` VALUES ('64', '20111218123004', '           32.560000', '70.380936                                                       ', 'w85.AIRA803');
 INSERT INTO `pre_history` VALUES ('65', '20111218123004', '           32.560000', '3.4734836                                                       ', 'w85.AIRA804');
+INSERT INTO `pre_history` VALUES ('66', '20120109133156', '           22.660000', '3.35265E-5                                                      ', 'w77.AIR201');
+INSERT INTO `pre_history` VALUES ('67', '20120109133156', '           22.660000', '3.35265E-5                                                      ', 'w77.AIR202');
+INSERT INTO `pre_history` VALUES ('68', '20120109133156', '           22.660000', '3.3528646E-5                                                    ', 'w78.AIR203');
+INSERT INTO `pre_history` VALUES ('69', '20120109133156', '           22.660000', '3.3528646E-5                                                    ', 'w78.AIR204');
+INSERT INTO `pre_history` VALUES ('70', '20120109133156', '           22.660000', '1000.00006                                                      ', 'w86.FRCQ201');
+INSERT INTO `pre_history` VALUES ('71', '20120109133156', '           22.660000', '1000.00006                                                      ', 'w86.FRCQ202');
+INSERT INTO `pre_history` VALUES ('72', '20120109133156', '           22.660000', '2.9845626                                                       ', 'w76.AIRC211');
+INSERT INTO `pre_history` VALUES ('73', '20120109133156', '           22.660000', '2.9845626                                                       ', 'w76.AIRC212');
+INSERT INTO `pre_history` VALUES ('74', '20120109133156', '           22.660000', '3.0067062                                                       ', 'w75.AIRC213');
+INSERT INTO `pre_history` VALUES ('75', '20120109133156', '           22.660000', '2.9999928                                                       ', 'w75.AIRC214');
+INSERT INTO `pre_history` VALUES ('76', '20120109133156', '           22.660000', '3.0067372                                                       ', 'w76.AIRC215');
+INSERT INTO `pre_history` VALUES ('77', '20120109133156', '           22.660000', '2.9999926                                                       ', 'w76.AIRC216');
+INSERT INTO `pre_history` VALUES ('78', '20120109133156', '           22.660000', '2.9836617                                                       ', 'w78.AIRC223');
+INSERT INTO `pre_history` VALUES ('79', '20120109133156', '           22.660000', '2.999065                                                        ', 'w77.AIRC221');
+INSERT INTO `pre_history` VALUES ('80', '20120109133156', '           22.660000', '2.999065                                                        ', 'w77.AIRC222');
+INSERT INTO `pre_history` VALUES ('81', '20120109133156', '           22.660000', '2.9836617                                                       ', 'w78.AIRC224');
+INSERT INTO `pre_history` VALUES ('82', '20120109133156', '           22.660000', '3.00001                                                         ', 'w77.AIRC225');
+INSERT INTO `pre_history` VALUES ('83', '20120109133156', '           22.660000', '3.00001                                                         ', 'w77.AIRC226');
+INSERT INTO `pre_history` VALUES ('84', '20120109133156', '           22.660000', '2.9875789                                                       ', 'w78.AIRC227');
+INSERT INTO `pre_history` VALUES ('85', '20120109133156', '           22.660000', '2.9875789                                                       ', 'w78.AIRC228');
+INSERT INTO `pre_history` VALUES ('86', '20120109133156', '           22.660000', '2.8910334                                                       ', 'w75.AIRC205');
+INSERT INTO `pre_history` VALUES ('87', '20120109133156', '           22.660000', '2.9999957                                                       ', 'w75.AIRC206');
+INSERT INTO `pre_history` VALUES ('88', '20120109133156', '           22.660000', '2.935241                                                        ', 'w76.AIRC207');
+INSERT INTO `pre_history` VALUES ('89', '20120109133156', '           22.660000', '2.935241                                                        ', 'w76.AIRC208');
+INSERT INTO `pre_history` VALUES ('90', '20120109133156', '           22.660000', '2.876425                                                        ', 'w77.AIRC217');
+INSERT INTO `pre_history` VALUES ('91', '20120109133156', '           22.660000', '2.876425                                                        ', 'w77.AIRC218');
+INSERT INTO `pre_history` VALUES ('92', '20120109133156', '           22.660000', '2.8764348                                                       ', 'w78.AIRC219');
+INSERT INTO `pre_history` VALUES ('93', '20120109133156', '           22.660000', '2.8764348                                                       ', 'w78.AIRC220');
+INSERT INTO `pre_history` VALUES ('94', '20120109133156', '           22.660000', '1497.2356                                                       ', 'w87.FRCQ204');
+INSERT INTO `pre_history` VALUES ('95', '20120109133156', '           22.660000', '1497.2734                                                       ', 'w88.FRCQ206');
+INSERT INTO `pre_history` VALUES ('96', '20120109133156', '           22.660000', '0.0                                                             ', 'w62.LDISA101');
+INSERT INTO `pre_history` VALUES ('97', '20120109133156', '           22.660000', '0.0                                                             ', 'w62.LDISA102');
+INSERT INTO `pre_history` VALUES ('98', '20120109133156', '           22.660000', '0.0                                                             ', 'w62.LDISA103');
+INSERT INTO `pre_history` VALUES ('99', '20120109133156', '           22.660000', '4.000001                                                        ', 'w62.LISA104');
+INSERT INTO `pre_history` VALUES ('100', '20120109133156', '           22.660000', '529.8328                                                        ', 'w62.AIRA101');
+INSERT INTO `pre_history` VALUES ('101', '20120109133156', '           22.660000', '12.061142                                                       ', 'w62.AIRA102');
+INSERT INTO `pre_history` VALUES ('102', '20120109133156', '           22.660000', '7.0                                                             ', 'w63.LIR106');
+INSERT INTO `pre_history` VALUES ('103', '20120109133156', '           22.660000', '7.0                                                             ', 'w63.LIR107');
+INSERT INTO `pre_history` VALUES ('104', '20120109133156', '           22.660000', '3067.9314                                                       ', 'w63.FR101');
+INSERT INTO `pre_history` VALUES ('105', '20120109133156', '           22.660000', '6.9                                                             ', 'w69.LIA114');
+INSERT INTO `pre_history` VALUES ('106', '20120109133156', '           22.660000', '1.5                                                             ', 'w74.LISA116');
+INSERT INTO `pre_history` VALUES ('107', '20120109133156', '           22.660000', '443.24115                                                       ', 'w74.AIRA103');
+INSERT INTO `pre_history` VALUES ('108', '20120109133156', '           22.660000', '19.471037                                                       ', 'w74.AIRA104');
+INSERT INTO `pre_history` VALUES ('109', '20120109133156', '           22.660000', '7.0                                                             ', 'w74.AIRA106');
+INSERT INTO `pre_history` VALUES ('110', '20120109133156', '           22.660000', '1.5                                                             ', 'w74.LISA118');
+INSERT INTO `pre_history` VALUES ('111', '20120109133156', '           22.660000', '4.299991                                                        ', 'w71.LISA119');
+INSERT INTO `pre_history` VALUES ('112', '20120109133156', '           22.660000', '0.0                                                             ', 'w73.LISA122');
+INSERT INTO `pre_history` VALUES ('113', '20120109133156', '           22.660000', '0.0                                                             ', 'w73.LISA123');
+INSERT INTO `pre_history` VALUES ('114', '20120109133156', '           22.660000', '0.0                                                             ', 'w73.LISA124');
+INSERT INTO `pre_history` VALUES ('115', '20120109133156', '           22.660000', '36.237938                                                       ', 'w73.FI106');
+INSERT INTO `pre_history` VALUES ('116', '20120109133156', '           22.660000', '36.237938                                                       ', 'w73.FI107');
+INSERT INTO `pre_history` VALUES ('117', '20120109133156', '           22.660000', '36.237938                                                       ', 'w73.FI108');
+INSERT INTO `pre_history` VALUES ('118', '20120109133156', '           22.660000', '36.237938                                                       ', 'w73.FI109');
+INSERT INTO `pre_history` VALUES ('119', '20120109133156', '           22.660000', '36.237938                                                       ', 'w73.FI110');
+INSERT INTO `pre_history` VALUES ('120', '20120109133156', '           22.660000', '36.237938                                                       ', 'w73.FI111');
+INSERT INTO `pre_history` VALUES ('121', '20120109133156', '           22.660000', '550125.7                                                        ', 'w71.FRQ103');
+INSERT INTO `pre_history` VALUES ('122', '20120109133156', '           22.660000', '550127.6                                                        ', 'w71.FRQ104');
+INSERT INTO `pre_history` VALUES ('123', '20120109133156', '           22.660000', '7.0                                                             ', 'w62.AIRA107');
+INSERT INTO `pre_history` VALUES ('124', '20120109133156', '           22.660000', '7.0                                                             ', 'w75.AIR229');
+INSERT INTO `pre_history` VALUES ('125', '20120109133156', '           22.660000', '7.0                                                             ', 'w75.AIR230');
+INSERT INTO `pre_history` VALUES ('126', '20120109133156', '           22.660000', '7.0                                                             ', 'w76.AIR231');
+INSERT INTO `pre_history` VALUES ('127', '20120109133156', '           22.660000', '7.0                                                             ', 'w76.AIR232');
+INSERT INTO `pre_history` VALUES ('128', '20120109133156', '           22.660000', '7.0                                                             ', 'w77.AIR233');
+INSERT INTO `pre_history` VALUES ('129', '20120109133156', '           22.660000', '7.0                                                             ', 'w77.AIR234');
+INSERT INTO `pre_history` VALUES ('130', '20120109133156', '           22.660000', '7.0                                                             ', 'w78.AIR235');
+INSERT INTO `pre_history` VALUES ('131', '20120109133156', '           22.660000', '37.003952                                                       ', 'w75.TIR201');
+INSERT INTO `pre_history` VALUES ('132', '20120109133156', '           22.660000', '36.997948                                                       ', 'w75.TIR202');
+INSERT INTO `pre_history` VALUES ('133', '20120109133156', '           22.660000', '37.00377                                                        ', 'w76.TIR203');
+INSERT INTO `pre_history` VALUES ('134', '20120109133156', '           22.660000', '37.004818                                                       ', 'w76.TIR204');
+INSERT INTO `pre_history` VALUES ('135', '20120109133156', '           22.660000', '37.03022                                                        ', 'w77.TIR205');
+INSERT INTO `pre_history` VALUES ('136', '20120109133156', '           22.660000', '37.03022                                                        ', 'w77.TIR206');
+INSERT INTO `pre_history` VALUES ('137', '20120109133156', '           22.660000', '37.02957                                                        ', 'w78.TIR207');
+INSERT INTO `pre_history` VALUES ('138', '20120109133156', '           22.660000', '37.02957                                                        ', 'w78.TIR208');
+INSERT INTO `pre_history` VALUES ('139', '20120109133156', '           22.660000', '2.5499969                                                       ', 'w86.LIA201');
+INSERT INTO `pre_history` VALUES ('140', '20120109133156', '           22.660000', '0.07699811                                                      ', 'w87.LISA202');
+INSERT INTO `pre_history` VALUES ('141', '20120109133156', '           22.660000', '0.0770004                                                       ', 'w88.LISA203');
+INSERT INTO `pre_history` VALUES ('142', '20120109133156', '           22.660000', '86917.91                                                        ', 'w86.FRQ203');
+INSERT INTO `pre_history` VALUES ('143', '20120109133156', '           22.660000', '69702.59                                                        ', 'w87.FRQ205');
+INSERT INTO `pre_history` VALUES ('144', '20120109133156', '           22.660000', '69688.664                                                       ', 'w88.FRQ207');
+INSERT INTO `pre_history` VALUES ('145', '20120109133156', '           22.660000', '50.00017                                                        ', 'w83.LIR803');
+INSERT INTO `pre_history` VALUES ('146', '20120109133156', '           22.660000', '50.00017                                                        ', 'w83.LIR804');
+INSERT INTO `pre_history` VALUES ('147', '20120109133156', '           22.660000', '7.0                                                             ', 'w85.AIRA801');
+INSERT INTO `pre_history` VALUES ('148', '20120109133156', '           22.660000', '36.35987                                                        ', 'w85.AIRA802');
+INSERT INTO `pre_history` VALUES ('149', '20120109133156', '           22.660000', '70.36264                                                        ', 'w85.AIRA803');
+INSERT INTO `pre_history` VALUES ('150', '20120109133156', '           22.660000', '3.473392                                                        ', 'w85.AIRA804');
 
 -- ----------------------------
 -- Table structure for `temp_init_predict`
