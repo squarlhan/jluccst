@@ -117,7 +117,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<s:hidden   value="接触氧化池" name="dcsdatalist[7].equipment" theme="simple" />
 	<s:hidden   value="接触氧化池" name="dcsdatalist[8].equipment" theme="simple" />
 	<s:hidden   value="接触氧化池" name="dcsdatalist[9].equipment" theme="simple" />
-	
+	<s:hidden   value="接触氧化池" name="dcsdatalist[10].equipment" theme="simple" />
+	<s:hidden   value="接触氧化池" name="dcsdatalist[11].equipment" theme="simple" />
 	
 	
 	<tr>
@@ -137,6 +138,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<td align="right"><s:textfield  readonly="true" value="水量" name="dcsdatalist[9].item" theme="simple" style="background:transparent;border:0px"/></td>
 	<td align="center"><s:textfield name="dcsdatalist[9].value" theme="simple"
 	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td>m&sup3/h</td>
+		</tr>
+		
+		
+		<tr>
+	<td align="right"><s:textfield  readonly="true" value="1-3号池浓度" name="dcsdatalist[8].item" theme="simple" style="background:transparent;border:0px"/></td>
+	<td align="center"><s:textfield name="dcsdatalist[10].value" theme="simple"
+	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td>mmol/l</td>
+		</tr>
+	
+	
+	
+	<tr>
+	<td align="right"><s:textfield  readonly="true" value="4-5号池浓度" name="dcsdatalist[9].item" theme="simple" style="background:transparent;border:0px"/></td>
+	<td align="center"><s:textfield name="dcsdatalist[11].value" theme="simple"
+	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td>mmol/l</td>
 		</tr>
 		
 	
