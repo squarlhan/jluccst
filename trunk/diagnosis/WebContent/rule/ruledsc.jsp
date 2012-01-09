@@ -149,7 +149,7 @@
                                '沉沙刮沙池(488)', '事故池(489)','初沉池(489B)', '14B生活水 ','老水解酸化池 ','新水解酸化池 ','污泥泵房(466)','浓缩池(491)','脱水装置(495)'},
                         '生化处理': {'中间提升泵房(462B)','生化池系列1(1号生化池)','生化池系列1(2号生化池)','生化池系列2(3号生化池)','生化池系列2(4号生化池)',
                                  '生化池系列3(5号生化池)','生化池系列3(6号生化池)','生化池系列4(7号生化池)','生化池系列4(8号生化池)','1系列二沉池 ','2系列二沉池',
-                                  '3系列二沉池 ','4系列二沉池','接触氧化池 ','排江出口线','1、2系列465回流泵房 ','3系列465A回流泵房 ','3系列465B回流泵房'}}"  />
+                                  '3系列二沉池 ','4系列二沉池','接触氧化池 ','排江出口线','1系列465回流泵房 ','2系列465A回流泵房 ','3系列465B回流泵房'}}"  />
 								<div class="nobr">
 									<s:doubleselect list="#foobar.keySet()" doubleName="resultn1"
 										doubleList="#foobar[top]" theme="simple" />
@@ -157,7 +157,7 @@
 						</tr>
 						<tr>
 							<td align="right">选择节点参数：</td><td align="left"> <select name="resultn2" size="1" style="width: 150px">
-									<option>A段溶解氧</option>
+								<option>A段溶解氧</option>
 								<option>2段溶解氧</option>
 								<option>3段溶解氧</option>
 								<option>4段溶解氧</option>
@@ -176,8 +176,12 @@
 								<option>后液位</option>
 								<option>前液位</option>
 								<option>液位</option>
+								<option>吸泥池液位</option>
 								<option>前后液位差</option>
-								<option>状态</option>
+								<option>回流量</option>
+								<option>回流490A3量</option>
+								<option>回流490A4量</option>
+								<option>剩余量</option>
 							</select></td>
 						</tr>
 

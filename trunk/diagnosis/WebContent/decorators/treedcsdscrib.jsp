@@ -74,8 +74,8 @@
 							  </li>
 								<li class="Closed"><a href="/diagnosis/dcsdscribaction!findbyequep?unit=<%=java.net.URLEncoder.encode("生化处理","UTF-8")%>">生化处理</a>
 									<ul>
-										 <li class="Child"><a href="/diagnosis/dcsdscribaction!findbyeque?eque=<%=java.net.URLEncoder.encode("1、2系列465回流泵房","UTF-8")%>">1、2系列465回流泵房</a></li>
-								         <li class="Child"><a href="/diagnosis/dcsdscribaction!findbyeque?eque=<%=java.net.URLEncoder.encode("3系列465A回流泵房","UTF-8")%>">3系列465A回流泵房</a></li>
+										 <li class="Child"><a href="/diagnosis/dcsdscribaction!findbyeque?eque=<%=java.net.URLEncoder.encode("1系列465回流泵房","UTF-8")%>">1系列465回流泵房</a></li>
+								         <li class="Child"><a href="/diagnosis/dcsdscribaction!findbyeque?eque=<%=java.net.URLEncoder.encode("2系列465A回流泵房","UTF-8")%>">2系列465A回流泵房</a></li>
 								         <li class="Child"><a href="/diagnosis/dcsdscribaction!findbyeque?eque=<%=java.net.URLEncoder.encode("3系列465B回流泵房","UTF-8")%>">3系列465B回流泵房</a></li>
 										 <li class="Child"><a href="/diagnosis/dcsdscribaction!findbyeque?eque=<%=java.net.URLEncoder.encode("中间提升泵房(462B)","UTF-8")%>">中间提升泵房(462B)</a></li>
 										 <li class="Child"><a href="/diagnosis/dcsdscribaction!findbyeque?eque=<%=java.net.URLEncoder.encode("生化池系列1","UTF-8")%>">生化池系列1</a></li>	
