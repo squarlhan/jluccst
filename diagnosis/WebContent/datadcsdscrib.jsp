@@ -28,6 +28,7 @@
 <meta http-equiv="description" content="This is my page">
 <script language="JavaScript" type="text/javascript">
     	function confirmChge(){
+    		var cf = document.getElementById("cf");
     		var upper = document.getElementById("dcsDscrib.upper");
 			var lower = document.getElementById("dcsDscrib.lower");
 			var upper1 = document.getElementById("dcsDscrib.upper1");
@@ -41,9 +42,12 @@
 			var upper2_value = upper2.value-0;
 			var lower2_value = lower2.value-0;
 			if(upper_value>=lower_value&&upper_value<=upper1_value&&upper1_value<=upper2_value&&lower_value>=lower1_value&&lower1_value>=lower2_value){
-				return confirm("确认添加？"); 
+				if(confirm("确认添加？")){
+					cf.action = "dcsdscribaction!addDescrib.action";
+				}
 			}else{
-				 alert("输入错误！");
+				  alert("输入错误！");
+				  window.stop();
 			}
 			
     	}
@@ -60,7 +64,7 @@
 		<h2>参数描述录入</h2>
 		
 		<div id="login">
-			<s:form action="dcsdscribaction!addDescrib.action" theme="simple">
+			<s:form  theme="simple" id = "cf">
 				<table width="600" align="center" style="margin-left: 30">
 					<tr><th width="30%"/>
 					<th width="70%"/></tr>
@@ -160,7 +164,7 @@
 						<td align="left"><s:textfield name="dcsDscrib.upper2"  id="dcsDscrib.upper2"  size ="17" theme = "simple" onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td>
 					</tr>
 					<tr>
-						<td align="right"><s:submit value="录入" theme="simple"  onclick="return confirmChge();"/>
+						<td align="right"><s:submit value="录入" theme="simple"  onclick="javascript:confirmChge();"/>
 
 						<td  align="left"><s:reset value="重置" theme="simple" /></td>
 					</tr>
