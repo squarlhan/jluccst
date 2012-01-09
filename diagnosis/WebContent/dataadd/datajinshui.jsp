@@ -58,43 +58,57 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	</tr>
 	<tr >
 	
-	<td align="right">                                                               <!-- 向dcsdata录入的每个设备的各项参数，dcsdata中equipment在此设为隐藏的文本；
-	                                                                               item为各项控制参数-->
-	<s:textfield size="5" readonly="true" value="1号潜水排污泵" name="dcsdatalist[1].item" theme="simple" style="width:150px;background:transparent;border:0px"/></td>
-	<td align="center"><s:textfield  name="dcsdatalist[1].value" theme="simple"
-	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td></td>
+	<td align="right"><s:textfield  readonly="true" value="1号潜水排污泵状态" name="dcsdatalist[1].item" theme="simple" style="width:150px;background:transparent;border:0px"/></td>
+	<td align="center"><select name="dcsdatalist[1].value"   style="width:110px">   
+                <option  value="0">运转</option>
+                <option  value="1">停止</option>
+               
+              </select>
+
+	</td>
+	</tr>
+	
+	<tr>
+<td align="right"><s:textfield  readonly="true" value="2号潜水排污泵状态" name="dcsdatalist[2].item" theme="simple" style="width:150px;background:transparent;border:0px"/></td>
+	<td align="center"><select name="dcsdatalist[2].value"   style="width:110px">   
+                <option  value="0">运转</option>
+                <option  value="1">停止</option>
+               
+              </select>
+
+	</td>
 	
 	</tr>
 	
 	<tr>
-	<td align="right">
-	<s:textfield  readonly="true" value="2号潜水排污泵" name="dcsdatalist[2].item" theme="simple" style="width:150px;background:transparent;border:0px"/></td>
-	<td align="center"><s:textfield name="dcsdatalist[2].value" theme="simple"
-	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td></td>
-	
-	</tr>
-	
-	<tr>
-	<td align="right">
-	
-	<s:textfield  readonly="true" value="3号潜水排污泵" name="dcsdatalist[3].item" theme="simple" style="width:150px;background:transparent;border:0px"/></td>
-	<td align="center"><s:textfield  name="dcsdatalist[3].value" theme="simple"
-	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td></td>
-	
-	</tr>
+	<td align="right"><s:textfield  readonly="true" value="3号潜水排污泵状态" name="dcsdatalist[3].item" theme="simple" style="width:150px;background:transparent;border:0px"/></td>
+	<td align="center"><select name="dcsdatalist[3].value"   style="width:110px">   
+                <option  value="0">运转</option>
+                <option  value="1">停止</option>
+                      </select>
+     </td>
+   </tr>
 	
 	<tr>
-	<td align="right">
-	
-	<s:textfield  readonly="true" value="4号潜水排污泵" name="dcsdatalist[4].item" theme="simple" style="width:150px;background:transparent;border:0px"/></td>
-	<td align="center"><s:textfield name="dcsdatalist[4].value" theme="simple"
-	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td></td>
+<td align="right"><s:textfield  readonly="true" value="4号潜水排污泵状态" name="dcsdatalist[4].item" theme="simple" style="width:150px;background:transparent;border:0px"/></td>
+	<td align="center"><select name="dcsdatalist[4].value"   style="width:110px">   
+                <option  value="0">运转</option>
+                <option  value="1">停止</option>
+               
+              </select>
+
+	</td>
 		</tr>
 	
 	<tr>
-	<td align="right"><s:textfield  readonly="true" value="5号潜水排污泵" name="dcsdatalist[5].item" theme="simple" style="width:150px;background:transparent;border:0px"/></td>
-	<td align="center"><s:textfield  name="dcsdatalist[5].value" theme="simple"
-	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td></td>
+	<td align="right"><s:textfield  readonly="true" value="5号潜水排污泵状态" name="dcsdatalist[5].item" theme="simple" style="width:150px;background:transparent;border:0px"/></td>
+	<td align="center"><select name="dcsdatalist[5].value"   style="width:110px">   
+                <option  value="0">运转</option>
+                <option  value="1">停止</option>
+               
+              </select>
+
+	</td>
 	</tr>
 	
 	<tr>
