@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50517
 File Encoding         : 65001
 
-Date: 2012-01-09 16:17:33
+Date: 2012-01-09 19:12:17
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -2544,14 +2544,14 @@ CREATE TABLE `treeunit` (
 -- ----------------------------
 -- Records of treeunit
 -- ----------------------------
-INSERT INTO `treeunit` VALUES ('1', '1、2系列465回流泵房', '生化处理');
+INSERT INTO `treeunit` VALUES ('1', '1系列465回流泵房', '生化处理');
 INSERT INTO `treeunit` VALUES ('2', '103厂碱水', '点源');
 INSERT INTO `treeunit` VALUES ('3', '14a', '生活水处理');
 INSERT INTO `treeunit` VALUES ('4', '14b', '生活水处理');
 INSERT INTO `treeunit` VALUES ('5', '14B生活水', '预处理');
 INSERT INTO `treeunit` VALUES ('6', '1系列二沉池', '生化处理');
 INSERT INTO `treeunit` VALUES ('7', '2系列二沉池', '生化处理');
-INSERT INTO `treeunit` VALUES ('8', '3系列465A回流泵房', '生化处理');
+INSERT INTO `treeunit` VALUES ('8', '2系列465A回流泵房', '生化处理');
 INSERT INTO `treeunit` VALUES ('9', '3系列465B回流泵房', '生化处理');
 INSERT INTO `treeunit` VALUES ('10', '3系列二沉池', '生化处理');
 INSERT INTO `treeunit` VALUES ('11', '4系列二沉池', '生化处理');
