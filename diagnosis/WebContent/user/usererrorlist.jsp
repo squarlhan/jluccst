@@ -223,7 +223,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <body>
 
      <div id="rightmain">
-	  <h2>手工数据报警日志</h2>
+	  <h2>模拟数据报警日志</h2>
 	  
 	    <s:form action="errorlogaction!findbyorder.action" theme = "simple">
 	    <table theme = "simple">

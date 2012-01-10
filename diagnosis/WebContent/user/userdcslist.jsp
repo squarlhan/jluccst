@@ -198,7 +198,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <body>
 
      <div id="rightmain">
-	  <h2>手工数据查询</h2>
+	  <h2>模拟数据查询</h2>
 	
   <table bordercolor="#FFFFFF" id="mytable" class="list_table" align="center" >
 		<tr bgcolor="#4A708B">
