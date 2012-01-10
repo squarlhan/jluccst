@@ -172,12 +172,29 @@
 								<option>硝态氮</option>							
 								<option>NO-N</option>
 								<option>水量</option>
+								
+								<option>P495A-1流量</option>
+								<option>P495A-2流量</option>
+								<option>P495A-3流量</option>
+								<option>P495A-4流量</option>
+								<option>P495A-5流量</option>
+								<option>P466-1-2泵出口干管流量</option>
+								<option>P466-3-4泵出口干管流量</option>
+								
 								<option>鼓风机风量</option>
+									
+								<option>液位</option>
 								<option>后液位</option>
 								<option>前液位</option>
-								<option>液位</option>
-								<option>吸泥池液位</option>
+							    <option>吸泥池液位</option>
+								<option>吸水池液位</option>
+								<option>药剂池液位</option>
+								<option>药剂池V495-3液位</option>
+								<option>药剂池V495-4液位</option>
+								<option>V466污泥池前液位</option>
+								<option>V462B-3高位水池液位</option>
 								<option>前后液位差</option>
+								
 								<option>回流量</option>
 								<option>回流490A3量</option>
 								<option>回流490A4量</option>

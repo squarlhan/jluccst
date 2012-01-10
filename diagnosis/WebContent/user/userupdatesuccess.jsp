@@ -31,15 +31,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-    <div style="color: red;">修改成功</div><br>
+   <table width = "200" align="center">
+   <tr><td style="align:center;"> <div style="color: red;">修改成功</div><br></td></tr>
   
-   <p> 用户名:  <s:property value="#session.us.username"/></p>
-   <p>电子邮箱:  <s:property value="#session.us.email"/></p>
-   <p>工作号:   <s:property value="#session.us.jid"/></p>
-   <p>电话 :    <s:property value="#session.us.phone"/></p>
-   <p>部门:    <s:property value="#session.us.dept"/></p>
-   <p>姓名 :    <s:property value="#session.us.name"/></p>
-   <p></p>
+   <tr><td style="align:center;"> 用户名:  <s:property value="#session.us.username"/></td></tr>
+   <tr><td style="align:center;">电子邮箱:  <s:property value="#session.us.email"/></td></tr>
+   <tr><td style="align:center;">工作号:   <s:property value="#session.us.jid"/></td></tr>
+   <tr><td style="align:center;">电话 :    <s:property value="#session.us.phone"/></td></tr>
+   <tr><td style="align:center;">部门:    <s:property value="#session.us.dept"/></td></tr>
+   <tr><td style="align:center;">姓名 :    <s:property value="#session.us.name"/></td></tr>
+
+   </table>
    <p><s:a href="biocpool490/biocpool1.jsp"> 
 						   <p><div style="color:red;"><p align="center"><u>返回首页</u></p></div></p>
 				  </s:a>	

@@ -30,14 +30,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-    <div style="color: red;">修改成功</div><br>
-   <p> 用户名:  <s:property value="#session.pr.username"/></p>
-   <p>电子邮箱:  <s:property value="#session.pr.email"/></p>
-   <p>工作号:   <s:property value="#session.pr.jid"/></p>
-   <p>电话 :    <s:property value="#session.pr.phone"/></p>
-   <p>部门:    <s:property value="#session.pr.dept"/></p>
-   <p>姓名 :    <s:property value="#session.pr.name"/></p>
-   <p></p>
+         <table width = "200" align="center">
+   <tr><td style="align:center;"> <div style="color: red;">修改成功</div><br></td></tr>
+  
+   <tr><td style="align:center;"> 用户名:  <s:property value="#session.pr.username"/></td></tr>
+   <tr><td style="align:center;">电子邮箱:  <s:property value="#session.pr.email"/></td></tr>
+   <tr><td style="align:center;">工作号:   <s:property value="#session.pr.jid"/></td></tr>
+   <tr><td style="align:center;">电话 :    <s:property value="#session.pr.phone"/></td></tr>
+   <tr><td style="align:center;">部门:    <s:property value="#session.pr.dept"/></td></tr>
+   <tr><td style="align:center;">姓名 :    <s:property value="#session.pr.name"/></td></tr>
+
+   </table>
    <p><s:a href="rule/ruledsc.jsp"> 
 						   <p><div style="color:red;"><p align="center"><u>返回首页</u></p></div></p>
 				  </s:a>	

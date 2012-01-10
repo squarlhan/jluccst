@@ -18,7 +18,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    
     <base href="<%=basePath%>">
     
-    <title>手工数据报警日志</title>
+    <title>模拟数据报警日志</title>
   
     <sx:head extraLocales="UTF-8" />
     

@@ -14,9 +14,9 @@
           <!--<td><a href="/diagnosis/userruleadd.jsp">录入规则</a></td>  -->
          <!-- <td><a href="/diagnosis/ruleaction!getall.action">规则维护</a></td>
            <td><a href="/diagnosis/dcsdscribaction.action">描述维护</a></td>-->
-         <td><a href="/diagnosis/biocpool490/biocpool1.jsp">手工数据推理</a></td>
-         <td><a href="/diagnosis/dcsdataaction!showdcsdatas.action">手工数据查询</a></td>
-        <td><a href="/diagnosis/errorlogaction.action">手工报警日志</a></td>
+         <td><a href="/diagnosis/biocpool490/biocpool1.jsp">模拟数据推理</a></td>
+         <td><a href="/diagnosis/dcsdataaction!showdcsdatas.action">模拟数据查询</a></td>
+        <td><a href="/diagnosis/errorlogaction.action">模拟报警日志</a></td>
         
         <td><a href="/diagnosis/monitoraction.action">DCS数据推理</a></td>
        
