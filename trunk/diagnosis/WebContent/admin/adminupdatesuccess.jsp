@@ -30,14 +30,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-    <div style="color: red;">修改成功</div><br>
-   <p> 用户名:  <s:property value="#session.ad.username"/></p>
-   <p>电子邮箱:  <s:property value="#session.ad.email"/></p>
-   <p>工作号:   <s:property value="#session.ad.jid"/></p>
-   <p>电话 :    <s:property value="#session.ad.phone"/></p>
-   <p>部门:    <s:property value="#session.ad.dept"/></p>
-   <p>姓名 :    <s:property value="#session.ad.name"/></p>
-   <p></p>
+     <table width = "200" align="center">
+   <tr><td style="align:center;"> <div style="color: red;">修改成功</div><br></td></tr>
+  
+   <tr><td style="align:center;"> 用户名:  <s:property value="#session.ad.username"/></td></tr>
+   <tr><td style="align:center;">电子邮箱:  <s:property value="#session.ad.email"/></td></tr>
+   <tr><td style="align:center;">工作号:   <s:property value="#session.ad.jid"/></td></tr>
+   <tr><td style="align:center;">电话 :    <s:property value="#session.ad.phone"/></td></tr>
+   <tr><td style="align:center;">部门:    <s:property value="#session.ad.dept"/></td></tr>
+   <tr><td style="align:center;">姓名 :    <s:property value="#session.ad.name"/></td></tr>
+
+   </table>
    <p><s:a href="adminuseraction!userList.action"> 
 						   <p><div style="color:red;"><p align="center"><u>返回首页</u></p></div></p>
 				  </s:a>	

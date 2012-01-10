@@ -81,7 +81,7 @@
 	<pattern>/dcsdataaction!showdcsdata*</pattern>
 	</decorator>
 	
-	<decorator name="dcsdata" page="motodecorator.jsp">
+	<decorator name="motodata" page="motodecorator.jsp">
 	<pattern>/dcsdataaction!showmotodcsdata*</pattern>
 	</decorator>
 	

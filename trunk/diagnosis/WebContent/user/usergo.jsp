@@ -21,7 +21,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    %>  
     <base href="<%=basePath%>">
     
-    <title>模拟推理结果</title>
+    <title>推理结果</title>
      
     
 	<meta http-equiv="pragma" content="no-cache">
