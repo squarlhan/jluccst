@@ -50,7 +50,7 @@
 							  </li>
 							  <li class="Closed"><a href="/diagnosis/dcsdataaction!showgongyidatap?papkey=<%=java.net.URLEncoder.encode("生活水处理","UTF-8")%>">生活水处理</a>
 							   <ul>
-							    <li class="Child"><a href="/diagnosis/dcsdataaction!showgongyidata?keyword=<%=java.net.URLEncoder.encode("14a生活水","UTF-8")%>">14a生活水</a></li>
+							    <li class="Child"><a href="/diagnosis/dcsdataaction!showgongyidata?keyword=<%=java.net.URLEncoder.encode("14a生活水","UTF-8")%>">14a工业水</a></li>
 							   <li class="Child"><a href="/diagnosis/dcsdataaction!showgongyidata?keyword=<%=java.net.URLEncoder.encode("14b生活水","UTF-8")%>">14b生活水</a></li>
 							    </ul>
 							  </li>
