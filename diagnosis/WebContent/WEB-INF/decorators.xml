@@ -62,6 +62,7 @@
 		<pattern>/prof/*.jsp</pattern>
 		<pattern>/dcsdscribaction!goadd.action</pattern>
 	    <pattern>/ruleaction!justgo.action</pattern>
+	    <pattern>/ruleaction!godetail*</pattern>
 	    <pattern>/ruleaction.action</pattern>
 	</decorator>
 	<decorator name="prof2" page="profdecorator2.jsp">
