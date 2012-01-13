@@ -43,8 +43,18 @@ public class Dss_adviceService {
 	}
 
 	public void save(Dss_advice dss_advice) {
-	
-		dss_adviceServiceImpl.save(dss_advice);
+		List<Dss_advice> all = dss_adviceServiceImpl.findAll();
+		if(all!=null&&all.size()>0){
+			if(all.get(0).getLevel()!=null&&all.get(0).getLevel().trim().length()>0){
+			if(Integer.parseInt(all.get(0).getLevel())<Integer.parseInt(dss_advice.getLevel())){
+				deleteall();
+				dss_adviceServiceImpl.save(dss_advice);
+			}
+			}
+		}else{
+			dss_adviceServiceImpl.save(dss_advice);
+		}
+//		dss_adviceServiceImpl.save(dss_advice);
 	}
 	
 	
