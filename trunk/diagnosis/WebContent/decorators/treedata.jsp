@@ -78,6 +78,7 @@
 								         <li class="Child"><a href="/diagnosis/dataadd/data465Ahuiliubengfang--2.jsp">2系列465A回流泵房</a></li>
 								         <li class="Child"><a href="/diagnosis/dataadd/data465Bhuiliubengfang--3.jsp">3系列465B回流泵房</a></li>
 										 <li class="Child"><a href="/diagnosis/dataadd/datazhongjiantishengbengfang(462B).jsp">中间提升泵房(462B)</a></li>
+										  <li class="Child"><a href="/diagnosis/dataadd/datagufengji.jsp">鼓风机</a></li>
 										 <li class="Child"><a href="/diagnosis/biocpool490/biocpool1.jsp">生化池系列1</a></li>	
 									     <li class="Child"><a href="/diagnosis/biocpool490/biocpool2.jsp">生化池系列2</a></li>
 										<li class="Child"><a href="/diagnosis/biocpool490/biocpool3.jsp">生化池系列3</a></li>
