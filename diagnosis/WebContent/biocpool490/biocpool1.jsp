@@ -49,9 +49,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <table width="600" align="center" style="margin-left:30">
 <tr>
     	
-	<td align="right"><s:textfield  readonly="true" value="1号鼓风机风量"  theme="simple" style="width:150px;background:transparent;border:0px"/></td>
-	<td align="center"><s:textfield  name="dcsdatalist[25].value" theme="simple"
-	onKeyPress="if (event.keyCode!=46 && event.keyCode!=45 && (event.keyCode<48 || event.keyCode>57)) event.returnValue=false"/></td><td>m&sup3/h</td>
+	
 	<td align="left">请选择班次</td>
 	<td align="left"> <select name="dcsdatalist[0].value"   style="width:110px">
                 <option  value="00">夜班</option>
@@ -215,7 +213,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<s:hidden   value="NO-N" name="dcsdatalist[22].item" theme="simple" />
     <s:hidden   value="水量" name="dcsdatalist[23].item" theme="simple" />
 	<s:hidden   value="水量" name="dcsdatalist[24].item" theme="simple" />
-	<s:hidden   value="鼓风机风量" name="dcsdatalist[25].item" theme="simple" />
+
 	<tr>
 	<td align="right"><s:textfield  readonly="true" value="1号生化池NO-N"  theme="simple" style="width:150px;background:transparent;border:0px"/></td>
 	<td align="center"><s:textfield name="dcsdatalist[21].value" theme="simple"
