@@ -24,9 +24,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	function confirmAdd(){
 			return confirm("确定录入？");
 			
-			    
-			
-    	}
+			  	}
     	
     	
     </script>

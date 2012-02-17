@@ -130,6 +130,7 @@ public class DcsDscribAction extends ActionSupport {
 	}
 	
 	public String addDescrib() {
+		 
 		dcsDscrib.setEque(dcsDscribname1);
 		dcsDscrib.setItem(dcsDscribname2);
 		dcsDscrib.setName(dcsDscribname1+dcsDscribname2);
