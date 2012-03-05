@@ -1,0 +1,91 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link type="text/css" rel="stylesheet" href="../style.css" />
+<script type="text/javascript" src="../js/jquery-1.4.2.min.js"></script>
+<script type="text/javascript">
+<!--
+	$(document).ready(function() {
+		$("#addBtn").click(function(){
+			parent.parent.parent.tipsWindown("添加数据","iframe:sysmanage/dataadd.html","400","200","true","","true","no");
+		});
+		$("#editBtn").click(function(){
+			parent.parent.parent.tipsWindown("修改数据","iframe:sysmanage/dataedit.html","400","200","true","","true","no");
+		});
+		$("#opengraph").click(function(){
+			parent.parent.parent.tipsWindown("打开设备图","iframe:sysmanage/clickpicture.html","891","604","true","","true","no");
+		});
+		$("#graphopen").click(function(){
+			parent.parent.parent.tipsWindown("查看柱状图","iframe:sysmanage/graphopen.html","570","480","true","","true","no");
+		});
+	});
+//-->
+</script>
+<style type="text/css">
+<!--
+.STYLE1 {
+	color: #FFFFFF;
+	font-weight: bold;
+}
+-->
+</style>
+</head>
+<body>
+<table width="100%" style="height:100%;" border="0" cellspacing="5" cellpadding="0">
+  <tr>
+    <td valign="top"><table width="100%" border="0" cellspacing="5" cellpadding="0">
+    <tr>
+        <td>日期：<select name="">
+    <option value="1">2012年2月</option>
+  </select>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input name="打开设备图" class="btn_4" type="button" value="打开设备图" id="opengraph" />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input name="查看频谱图" class="btn_4" type="button" value="查看柱状图" id="graphopen" />
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input name="button" type="button" class="btn_4" id="addBtn" value="添加">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input name="修改" class="btn_4" type="button" value="修改" id="editBtn"/>
+</td>
+      </tr>
+    </table>
+      <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#d5e4fd">
+        <tr>
+          <td height="26" colspan="2" align="center" background="../images/headerbg.jpg">测点（A）</td>
+          <td colspan="2" align="center" background="../images/headerbg.jpg">测点（B）</td>
+          <td colspan="2" align="center" background="../images/headerbg.jpg">测点（C）</td>
+        </tr>
+        <tr>
+          <td align="center" bgcolor="#FFFFFF">参数</td>
+          <td height="26" align="center" bgcolor="#FFFFFF">数据</td>
+          <td height="26" align="center" bgcolor="#FFFFFF">参数</td>
+          <td height="26" align="center" bgcolor="#FFFFFF">数据</td>
+          <td height="26" align="center" bgcolor="#FFFFFF">参数</td>
+          <td height="26" align="center" bgcolor="#FFFFFF">数据</td>
+        </tr>
+        <tr>
+          <td align="center" bgcolor="#FFFFFF">a</td>
+          <td height="26" align="center" bgcolor="#FFFFFF">6.4</td>
+          <td height="26" align="center" bgcolor="#FFFFFF">a</td>
+          <td height="26" align="center" bgcolor="#FFFFFF">5.5</td>
+          <td height="26" align="center" bgcolor="#FFFFFF">a</td>
+          <td height="26" align="center" bgcolor="#FFFFFF">6.1</td>
+        </tr>
+        <tr>
+          <td align="center" bgcolor="#FFFFFF">v</td>
+          <td height="26" align="center" bgcolor="#FFFFFF">3.8</td>
+          <td height="26" align="center" bgcolor="#FFFFFF">v</td>
+          <td height="26" align="center" bgcolor="#FFFFFF">4.2</td>
+          <td height="26" align="center" bgcolor="#FFFFFF">v</td>
+          <td height="26" align="center" bgcolor="#FFFFFF">4.0</td>
+        </tr>
+        <tr>
+          <td align="center" bgcolor="#FFFFFF">h</td>
+          <td height="26" align="center" bgcolor="#FFFFFF">9.9</td>
+          <td height="26" align="center" bgcolor="#FFFFFF">h</td>
+          <td height="26" align="center" bgcolor="#FFFFFF">10.1</td>
+          <td height="26" align="center" bgcolor="#FFFFFF">h</td>
+          <td height="26" align="center" bgcolor="#FFFFFF">10.0</td>
+        </tr>
+      </table></td>
+  </tr>
+</table>
+</body>
+</html>
