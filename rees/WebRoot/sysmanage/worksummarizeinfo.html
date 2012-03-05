@@ -1,0 +1,84 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link type="text/css" rel="stylesheet" href="../style.css" />
+<script type="text/javascript" src="../js/jquery-1.4.2.min.js"></script>
+<style type="text/css">
+<!--
+.STYLE1 {
+	color: #FFFFFF;
+	font-weight: bold;
+}
+-->
+</style>
+<script type="text/javascript">
+<!--
+	$(function(){
+		$("#addbtn").click(function(){
+			parent.parent.parent.tipsWindown("添加汇报","iframe:sysmanage/worksummarizeinfoedit.html","600","425","true","","true","no");
+		});
+		$("#editbtn").click(function(){
+			parent.parent.parent.tipsWindown("修改汇报","iframe:sysmanage/worksummarizeinfoedit.html","600","425","true","","true","no");
+		});
+	});
+//-->
+</script>
+</head>
+<body>
+<table width="100%" style="height:100%;" border="0" cellspacing="5" cellpadding="0">
+  <tr>
+    <td valign="top"><table width="100%" border="0" cellspacing="5" cellpadding="0">
+      <tr>
+        <td>
+     <!--   
+     		<input name="button" type="button" class="btn_4" id="addbtn" value="添加" onClick="window.open('groupinfo.html')">
+    		<input name="button" type="button" class="btn_4" id="addbtn" value="修改" onClick="window.open('groupinfo.html')">
+            <input name="button" type="button" class="btn_4" id="addbtn" value="修改监控点" onClick="window.open('groupinfoedit.html')">
+      -->
+		    <input name="button" type="button" class="btn_4" id="addbtn" value="添加" >
+    		<input name="button2" type="button" class="btn_4" id="editbtn" value="修改" >
+            <input name="button3" type="button" class="btn_4" id="button2" value="删除所选">
+            <input name="button4" type="button" class="btn_4" id="output" value="导出Word">
+          </td>
+        <td align="right"></td>
+      </tr>
+    </table>
+      <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#d5e4fd">
+        <tr>
+          <td width="8%" height="26" align="center" background="../images/headerbg.jpg">&nbsp;</td>
+          <td width="16%" align="center" background="../images/headerbg.jpg"><strong>汇报类别</strong></td>
+          <td width="16%" align="center" background="../images/headerbg.jpg"><strong>汇报题目</strong></td>
+		  <td width="16%" align="center" background="../images/headerbg.jpg"><strong>汇报人</strong></td>
+		  <td width="16%" align="center" background="../images/headerbg.jpg"><strong>汇报时间</strong></td>
+	    </tr>
+        <tr>
+          <td height="26" align="center" bgcolor="#FFFFFF"><input type="checkbox" name="checkbox" id="checkbox"></td>
+          <td height="26" align="center" bgcolor="#FFFFFF">&nbsp;</td>
+          <td height="26" align="center" bgcolor="#FFFFFF">&nbsp;</td>
+          <td height="26" align="center" bgcolor="#FFFFFF">&nbsp;</td>
+		  <td height="26" align="center" bgcolor="#FFFFFF">&nbsp;</td>
+	    </tr>
+        <tr>
+          <td height="26" align="center" bgcolor="#FFFFFF"><input type="checkbox" name="checkbox" id="checkbox"></td>
+          <td height="26" align="center" bgcolor="#FFFFFF">&nbsp;</td>
+          <td height="26" align="center" bgcolor="#FFFFFF">&nbsp;</td>
+          <td height="26" align="center" bgcolor="#FFFFFF">&nbsp;</td>
+		  <td height="26" align="center" bgcolor="#FFFFFF">&nbsp;</td>
+	    </tr>
+        <tr>
+          <td height="26" align="center" bgcolor="#FFFFFF"><input type="checkbox" name="checkbox" id="checkbox"></td>
+          <td height="26" align="center" bgcolor="#FFFFFF">&nbsp;</td>
+          <td height="26" align="center" bgcolor="#FFFFFF">&nbsp;</td>
+          <td height="26" align="center" bgcolor="#FFFFFF">&nbsp;</td>
+		  <td height="26" align="center" bgcolor="#FFFFFF">&nbsp;</td>
+		  </tr>
+        
+        <tr>
+          <td height="26" colspan="5" align="center" bgcolor="#FFFFFF">共[1]条记录　<a href="#">首　页</a>　<a href="#">上一页</a>　<a href="#">下一页</a>　<a href="#">尾　页</a>　当前[1/1]页</td>
+        </tr>
+      </table></td>
+  </tr>
+</table>
+</body>
+</html>
