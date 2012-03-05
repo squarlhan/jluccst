@@ -7,11 +7,12 @@
  * @(#)DemoServiceImpl.java 1.1 2012-3-5
  */
 
-package com.boan.rees.demo.impl;
+package com.boan.rees.demo.service.impl;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.boan.rees.demo.dao.IDemoDao;
@@ -27,6 +28,7 @@ import com.boan.rees.demo.service.IDemoService;
 public class DemoServiceImpl implements IDemoService {
 	
 	@Autowired
+	@Qualifier("demoDao")
 	private IDemoDao demoDao;
 	
 	@Override

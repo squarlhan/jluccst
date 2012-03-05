@@ -12,6 +12,7 @@ package com.boan.rees.demo.action;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
@@ -31,6 +32,7 @@ public class DemoAction extends ActionSupport {
 	private static final long serialVersionUID = 1L;
 	
 	@Autowired
+	@Qualifier("demoService")
 	private IDemoService demoService;
 	
 	/**
