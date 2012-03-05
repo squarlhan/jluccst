@@ -1,0 +1,129 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link type="text/css" rel="stylesheet" href="../style.css" />
+<link type="text/css" rel="stylesheet" href="../tabs.css" />
+<script type="text/javascript" src="../js/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="../js/jquery.tab.js"></script>
+<script type="text/javascript">
+<!--
+	$(document).ready(function() {
+		$("#addBtn").click(function(){
+			parent.parent.tipsWindown("菜单信息","iframe:sysmanage/menuinfo.html","400","160","true","","true","no");
+		});
+		$(document).find("span[name='setpower']").each(function(index,domEle){
+			$(domEle).click(function(){
+				parent.parent.tipsWindown("菜单权限","iframe:sysmanage/menupower.html","430","220","true","","true","no");
+			});
+		});
+		
+		$("#addBtn").click(function(){
+			parent.parent.tipsWindown("组织机构信息","iframe:sysmanage/groupinfo.html","400","260","true","","true","no");
+		});
+		$("#tt").css("width",$("#groupmain",parent.document).width());
+		$("#tt").css("height",$("#groupmain",parent.document).height());
+		$("#tt").tabs();
+	});
+//-->
+</script>
+<style type="text/css">
+<!--
+.STYLE1 {
+	color: #FFFFFF;
+	font-weight: bold;
+}
+-->
+</style>
+</head>
+<body>
+<div id="tt" class="tabs-container">
+	<div title="C4401乙烯压缩机组"
+		style="padding: 1px; display: none;">
+		<iframe scrolling="auto" frameborder="0" style="width:100%; height:100%"
+			src="dataoperateinfo.html"></iframe>
+	</div>
+	<div title="C4401乙烯压缩机组工艺参数"
+		style="padding: 1px; display: none;">
+		<iframe scrolling="auto" frameborder="0" style="width:100%; height:100%"
+			src="dataoperateinfo.html"></iframe>
+	</div>
+	<div title="C4601丙烯压缩机组"
+		style="padding: 1px; display: none;">
+		<iframe scrolling="auto" frameborder="0" style="width:100%; height:100%"
+			src="dataoperateinfo.html"></iframe>
+	</div>
+	<div title="C4601丙烯压缩机组工艺参数"
+		style="padding: 1px; display: none;">
+		<iframe scrolling="auto" frameborder="0" style="width:100%; height:100%"
+			src="dataoperateinfo.html"></iframe>
+	</div>
+	<div title="C4111乙烯压缩机组"
+		style="padding: 1px; display: none;">
+		<iframe scrolling="auto" frameborder="0" style="width:100%; height:100%"
+			src="dataoperateinfo.html"></iframe>
+	</div>
+	<div title="C4611丙烯压缩机组"
+		style="padding: 1px; display: none;">
+		<iframe scrolling="auto" frameborder="0" style="width:100%; height:100%"
+			src="dataoperateinfo.html"></iframe>
+	</div>
+</div>
+<br>
+<table width="100%" style="height:100%;" border="0" cellspacing="5" cellpadding="0">
+  <tr>
+    <td valign="top"><table width="100%" border="0" cellspacing="5" cellpadding="0">
+    <tr>
+        <td>日期：<select name="">
+    <option value="1">2012年2月</option>
+  </select>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input name="打开设备图" class="btn_4" type="button" value="打开设备图" onClick="window.open('clickpicture.html')"/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input name="查看频谱图" class="btn_4" type="button" value="查看频谱图" onClick="window.open('clickpicture.html')"/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input name="添加" class="btn_4" type="button" value="添加" onClick="window.open('../images/频谱图.jpg')" disabled="disabled" id="添加"/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<input name="修改" class="btn_4" type="button" value="修改" onClick="window.open('../images/频谱图.jpg')" disabled="disabled" id="修改"/>
+</td>
+      </tr>
+    </table>
+      <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#d5e4fd">
+        <tr>
+          <td height="26" colspan="2" align="center" background="../images/headerbg.jpg">测点（A）</td>
+          <td colspan="2" align="center" background="../images/headerbg.jpg">测点（B）</td>
+          <td colspan="2" align="center" background="../images/headerbg.jpg">测点（C）</td>
+        </tr>
+        <tr>
+          <td align="center" bgcolor="#FFFFFF">参数</td>
+          <td height="26" align="center" bgcolor="#FFFFFF">数据</td>
+          <td height="26" align="center" bgcolor="#FFFFFF">参数</td>
+          <td height="26" align="center" bgcolor="#FFFFFF">数据</td>
+          <td height="26" align="center" bgcolor="#FFFFFF">参数</td>
+          <td height="26" align="center" bgcolor="#FFFFFF">数据</td>
+        </tr>
+        <tr>
+          <td align="center" bgcolor="#FFFFFF">a</td>
+          <td height="26" align="center" bgcolor="#FFFFFF">6.4</td>
+          <td height="26" align="center" bgcolor="#FFFFFF">a</td>
+          <td height="26" align="center" bgcolor="#FFFFFF">5.5</td>
+          <td height="26" align="center" bgcolor="#FFFFFF">a</td>
+          <td height="26" align="center" bgcolor="#FFFFFF">6.1</td>
+        </tr>
+        <tr>
+          <td align="center" bgcolor="#FFFFFF">v</td>
+          <td height="26" align="center" bgcolor="#FFFFFF">3.8</td>
+          <td height="26" align="center" bgcolor="#FFFFFF">v</td>
+          <td height="26" align="center" bgcolor="#FFFFFF">4.2</td>
+          <td height="26" align="center" bgcolor="#FFFFFF">v</td>
+          <td height="26" align="center" bgcolor="#FFFFFF">4.0</td>
+        </tr>
+        <tr>
+          <td align="center" bgcolor="#FFFFFF">h</td>
+          <td height="26" align="center" bgcolor="#FFFFFF">9.9</td>
+          <td height="26" align="center" bgcolor="#FFFFFF">h</td>
+          <td height="26" align="center" bgcolor="#FFFFFF">10.1</td>
+          <td height="26" align="center" bgcolor="#FFFFFF">h</td>
+          <td height="26" align="center" bgcolor="#FFFFFF">10.0</td>
+        </tr>
+      </table></td>
+  </tr>
+</table>
+</body>
+</html>
