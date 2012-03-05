@@ -1,0 +1,117 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<link type="text/css" rel="stylesheet" href="../style.css" />
+<link type="text/css" rel="stylesheet" href="../tabs.css" />
+<script type="text/javascript" src="../js/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="../js/jquery.tab.js"></script>
+<script type="text/javascript">
+<!--
+	$(document).ready(function() {
+		$("#addBtn").click(function(){
+			alert("123!!!!");
+			parent.parent.tipsWindown("添加规则","iframe:sysmanage/dataadd.html","400","230","true","","true","no");
+		});
+		$("#editBtn").click(function(){
+			alert("123!!!!");
+			parent.parent.parent.tipsWindown("编辑信息","iframe:sysmanage/dataadd.html","400","230","true","","true","no");
+		});
+		
+		$("#exitBtn").click(function(){
+			parent.parent.parent.tipsWindown("组织机构信息","iframe:sysmanage/dataadd.html","400","260","true","","true","no");
+		});
+		$("#tt").css("width",$("#groupmain",parent.document).width());
+		$("#tt").css("height",$("#groupmain",parent.document).height());
+		$("#tt").tabs();
+	});
+//-->
+</script>
+<style type="text/css">
+<!--
+.STYLE1 {
+	color: #FFFFFF;
+	font-weight: bold;
+}
+.STYLE2 {color: #FF0000}
+-->
+</style>
+</head>
+<body>
+<div id="tt" class="tabs-container">
+	<div title="C4401乙烯压缩机组"
+		style="padding: 1px; display: none;">
+		<iframe scrolling="auto" frameborder="0" style="width:100%; height:100%"
+			src="rulelistinfo.html"></iframe>
+	</div>
+	<div title="C4401乙烯压缩机组工艺参数"
+		style="padding: 1px; display: none;">
+		<iframe scrolling="auto" frameborder="0" style="width:100%; height:100%"
+			src="rulelistinfo.html"></iframe>
+	</div>
+	<div title="C4601丙烯压缩机组"
+		style="padding: 1px; display: none;">
+		<iframe scrolling="auto" frameborder="0" style="width:100%; height:100%"
+			src="rulelistinfo.html"></iframe>
+	</div>
+	<div title="C4601丙烯压缩机组工艺参数"
+		style="padding: 1px; display: none;">
+		<iframe scrolling="auto" frameborder="0" style="width:100%; height:100%"
+			src="rulelistinfo.html"></iframe>
+	</div>
+	<div title="C4111乙烯压缩机组"
+		style="padding: 1px; display: none;">
+		<iframe scrolling="auto" frameborder="0" style="width:100%; height:100%"
+			src="rulelistinfo.html"></iframe>
+	</div>
+	<div title="C4611丙烯压缩机组"
+		style="padding: 1px; display: none;">
+		<iframe scrolling="auto" frameborder="0" style="width:100%; height:100%"
+			src="rulelistinfo.html"></iframe>
+	</div>
+</div>
+<br>
+<table width="100%" style="height:100%;" border="0" cellspacing="5" cellpadding="0">
+  <tr>
+    <td valign="top"><table width="100%" border="0" cellspacing="5" cellpadding="0">
+      <tr>
+        <td><input name="button" type="button" class="btn_2_3" id="addBtn" value="保存">
+          <input name="button3" type="button" class="btn_2_3" id="button" value="修改">
+            <input name="button3" type="button" class="btn_2_3" id="button1" value="删除"></td>
+      </tr>
+    </table>
+      <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#d5e4fd">
+            <tr>
+              <td height="26" align="center" background="../images/headerbg.jpg">&nbsp;</td>
+              <td align="center" background="../images/headerbg.jpg"><strong>规则编号</strong></td>
+              <td align="center" background="../images/headerbg.jpg"><strong>规则名称</strong></td>
+              <td align="center" background="../images/headerbg.jpg"><strong>属性</strong></td>
+              <td align="center" background="../images/headerbg.jpg"><strong>条件</strong></td>
+              <td align="center" background="../images/headerbg.jpg"><strong>备注</strong></td>
+            </tr>
+            <tr>
+              <td height="26" align="center" bgcolor="#FFFFFF"><input type="checkbox" name="checkbox" id="checkbox"></td>
+              <td height="26" align="center" bgcolor="#FFFFFF">00001</td>
+              <td height="26" align="center" bgcolor="#FFFFFF">转速过高</td>
+              <td height="26" align="center" bgcolor="#FFFFFF">转速</td>
+              <td height="26" align="center" bgcolor="#FFFFFF">&gt;=1000</td>
+              <td height="26" align="center" bgcolor="#FFFFFF">&nbsp;</td>
+            </tr>
+            <tr>
+              <td height="26" align="center" bgcolor="#FFFFFF"><input type="checkbox" name="checkbox" id="checkbox"></td>
+              <td height="26" align="center" bgcolor="#FFFFFF">00002</td>
+              <td height="26" align="center" bgcolor="#FFFFFF">功率低</td>
+              <td height="26" align="center" bgcolor="#FFFFFF">功率</td>
+              <td height="26" align="center" bgcolor="#FFFFFF">&lt;3500</td>
+              <td height="26" align="center" bgcolor="#FFFFFF">&nbsp;</td>
+            </tr>
+            <tr>
+              <td height="26" colspan="6" align="center" bgcolor="#FFFFFF">共[2]条记录　<a href="#">首　页</a>　<a href="#">上一页</a>　<a href="#">下一页</a>　<a href="#">尾　页</a>　当前[1/1]页</td>
+              </tr>
+          </table></td>
+        </tr>
+      </table></td>
+  </tr>
+</table>
+</body>
+</html>
