@@ -17,21 +17,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta http-equiv="expires" content="0">    
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
-	<!--
-	<link rel="stylesheet" type="text/css" href="styles.css">
-	-->
+	<link href="<%=basePath%>/style.css"" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" href="<%=basePath%>/tipswindow.css" type="text/css"></link>
   	<script type="text/javascript" src="<%=basePath%>/js/jquery-1.4.2.min.js"></script>
-  	<script type="text/javascript" src="<%=basePath%>/js/jquery-1.4.2.min.js"></script>
-	<script type="text/javascript" src="<%=basePath%>/js/jquery.layout-latest.js"></script>
-	<script type="text/javascript" src="<%=basePath%>/js/external/bgiframe/jquery.bgiframe.js"></script>
 	<script type="text/javascript" src="<%=basePath%>/js/tipswindown.js"></script>
 	<script type="text/javascript" src="<%=basePath%>/js/jmessagebox-1.0.1.js"></script>
 	<script type="text/javascript" src="<%=basePath%>/js/jquery.messager.js"></script>
   	<script type="text/javascript">
   	$(document).ready( function() {
   		$("#btn_add").click(function(){
-  			tipsWindown("添加数据","iframe:sysmanage/dataadd.html","400","200","true","","true","no");
-
+  			tipsWindown("添加设备","iframe:openAddDemoAction.action","460","250","true","","true","no");
+  			//window.location.href="./openAddDemoAction.action";
   			return false;
   		});
   	});
@@ -43,7 +39,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    	<table border="1">
    		<tr>
    			<td colspan="5">
-   				<s:submit id="btn_add" value="添加" theme="simple"></s:submit>
+   				<input type="button" id="btn_add" value="添加" />
    				<s:submit value="修改" theme="simple"></s:submit>
    				<s:submit value="删除所选" theme="simple"></s:submit>
    			</td>
