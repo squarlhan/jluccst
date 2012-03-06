@@ -93,7 +93,7 @@ public class DemoAction extends ActionSupport {
 	 */
 	public String openDemo(){
 		demoModelList = demoService.findAllDemoModel();
-		return SUCCESS;
+		return SUCCESS;          
 	}
 
 	/**
@@ -111,7 +111,7 @@ public class DemoAction extends ActionSupport {
 	 */
 	public String toAddDemo(){
 		demoService.save(demoModel);
-		return SUCCESS;
+		return NONE;
 	}
 	
 	/**
