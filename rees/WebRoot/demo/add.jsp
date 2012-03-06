@@ -16,9 +16,24 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta http-equiv="expires" content="0">    
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
-	<!--
-	<link rel="stylesheet" type="text/css" href="styles.css">
-	-->
+	<link href="<%=basePath%>/style.css"" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" href="<%=basePath%>/tipswindow.css" type="text/css"></link>
+  	<script type="text/javascript" src="<%=basePath%>/js/jquery-1.4.2.min.js"></script>
+	<script type="text/javascript" src="<%=basePath%>/js/tipswindown.js"></script>
+	<script type="text/javascript" src="<%=basePath%>/js/jmessagebox-1.0.1.js"></script>
+	<script type="text/javascript" src="<%=basePath%>/js/jquery.messager.js"></script>
+	<script type="text/javascript">
+  	$(document).ready( function() {
+  		$("#btn_save").click(function(){
+  			parent.$("#windown-close").click();
+  			parent.location.href = parent.location.href;
+  		});
+  		$("#btn_close").click(function(){
+  			parent.$("#windown-close").click();
+  			return false;
+  		});
+  	});
+  	</script>
   </head>
   
   <body>
@@ -49,6 +64,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     		<tr>
     			<td colspan="2">
     				<s:submit id="btn_save" value="保存"></s:submit>
+    				<s:submit id="btn_close" value="关闭"></s:submit>
     			</td>
     		</tr>
     	</table>
