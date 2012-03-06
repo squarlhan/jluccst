@@ -31,6 +31,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   			return false;
   		});
   	});
+  	$.fn.ref=function(){
+  		window.location.href =window.location.href+"?dd";
+  	}
   	</script>
   	</head>
   
