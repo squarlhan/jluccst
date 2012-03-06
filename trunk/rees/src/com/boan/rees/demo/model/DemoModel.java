@@ -11,6 +11,8 @@ package com.boan.rees.demo.model;
 
 import java.io.Serializable;
 
+import javax.persistence.Basic;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -33,8 +35,10 @@ public class DemoModel implements Serializable {
 	@GeneratedValue(generator="system-uuid")
 	private String id;
 
+	@Column(name = "Demo_Name")
 	private String name;
 
+	@Column(name = "Demo_Age")
 	private Integer age;
 	
 	public String getId() {
