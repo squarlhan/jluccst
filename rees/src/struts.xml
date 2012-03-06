@@ -19,7 +19,7 @@
 	<constant name="struts.serve.static.browserCache" value="false" />
 	
 	<!-- 默认后缀名 -->
-	<constant name="struts.action.extension" value="do,action,," />
+	<constant name="struts.action.extension" value="action" />
 	
 	<include file="com/boan/rees/demo/action/struts_dp.xml"></include>
 </struts>
