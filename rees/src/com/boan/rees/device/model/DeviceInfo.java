@@ -38,8 +38,16 @@ public class DeviceInfo implements Serializable {
 	 * 设备实体主键
 	 */
 	private String id;
+	
+	/**
+	 * 设备编号
+	 */
 	@Column(name = "DEVICE _NUM")
 	private String deviceNum;
+	
+	/**
+	 * 设备类型
+	 */
 	@Column(name = "DEVICE_TYPE")
 	private String deviceType;
 	@Column(name = "DEVICE_NAME ")
