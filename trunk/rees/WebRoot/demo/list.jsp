@@ -27,24 +27,68 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   	$(document).ready( function() {
   		$("#btn_add").click(function(){
   			tipsWindown("添加设备","iframe:openAddDemoAction.action","460","250","true","","true","no");
-  			//window.location.href="./openAddDemoAction.action";
   			return false;
   		});
+  		$.fn.CheckBoxAll("cbk_all");
+  		$.fn.UnCheckBoxAll("ids","cbk_all");
   	});
-  	$.fn.ref=function(){
-  		window.location.href =window.location.href+"?dd";
-  	}
+  	
+  	/**
+  	 * 点击选复选框时，执行全选/取消全选功能
+  	 * @param chkallid
+  	 * 执行全选功能的checkbox的id值
+  	 */
+  	$.fn.CheckBoxAll = function (chkallid) {
+  		$("#" + chkallid).click(function () {
+  			var b = ($(this).attr("checked"));
+  			$(":checkbox").each(function () {
+  				if( !$(this).attr("disabled") ){
+  					$(this).attr("checked", b);
+  				}
+  			});
+  		});
+  		if($(":checkbox").length == 1){
+  			$("#" + chkallid).attr("disabled","true");
+  		}
+  	};
+
+  	/**
+  	 * 子复选框有一个处理非选中状态时，执行全选功能的复选框将置为非选中状态
+  	 * @param subchkname
+  	 * 子复选框的name
+  	 * @param chkallid
+  	 * 执行全选功能的复选框id
+  	 */
+  	$.fn.UnCheckBoxAll = function (subchkname, chkallid) {
+  		$(":checkbox[name='" + subchkname + "']").click(function () {
+  			var l = $(":checkbox[name='" + subchkname + "']").length;
+  			if (!$(this).attr("checked")) {
+  				$("#" + chkallid).attr("checked", false);
+  			} else {
+  				var i = 0;
+  				$(":checkbox[name='" + subchkname + "']").each(function () {
+  					if ($(this).attr("checked")) {
+  						i++;
+  					}
+  				});
+  				if (l == i) {
+  					$("#" + chkallid).attr("checked", true);
+  				}
+  			}
+  		});
+  	};
   	</script>
   	</head>
   
   <body>
-  
+  	<s:form>
    	<table border="1">
    		<tr>
    			<td colspan="5">
+   				<s:textfield name="param"></s:textfield>
    				<input type="button" id="btn_add" value="添加" />
    				<s:submit value="修改" theme="simple"></s:submit>
-   				<s:submit value="删除所选" theme="simple"></s:submit>
+   				<s:submit value="删除所选" theme="simple" action="deleteDemoAction"></s:submit>
    			</td>
    		</tr>
 		<tr>
@@ -64,7 +108,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    		<s:iterator value="demoModelList" status="obj">
 		<tr>
   			<td align="center" >  
-				<s:checkbox id="%{#obj.id}" name="ids" fieldValue="%{#obj.id}" value="false" theme="simple"/>
+				<s:checkbox id="%{#obj.id}" name="ids" fieldValue="%{id}" value="false" theme="simple"/>
 			</td>
   				<td>
    				 <s:property value="#obj.index+1"/>
@@ -80,10 +124,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    		<tr>
 			<td colspan="5">
 			<page:pages pageNo="pageNo" total="total" styleClass="page" theme="text">
-				<s:param name="dd">ddd</s:param>
+				<s:param name="param" value="param"></s:param>
 			</page:pages> 
 		   	</td>
 		</tr>
    	</table>
+   	</s:form>
   </body>
 </html>

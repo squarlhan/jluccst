@@ -26,13 +26,44 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   	$(document).ready( function() {
   		$("#btn_save").click(function(){
   			parent.$("#windown-close").click();
-  			parent.location.href = parent.location.href;
+  			parent.location.href = $.fn.change_url(parent.location.href);
   		});
   		$("#btn_close").click(function(){
   			parent.$("#windown-close").click();
-  			return false;
   		});
   	});
+  	
+  	/**
+	 * 在原来url上加上随机时间
+	 */
+  	$.fn.change_url=function(old_url){
+  		var url = old_url;
+		if(url.split("?").length>1){//原来有参数
+			tempArr = url.split("?");
+			//?前的地址
+			var url =  tempArr[0]; 
+			//获取?号以后的参数
+			var tail = tempArr[1];
+        	var paramGroup = tail.split("&");            
+        	for(var i=0, len=paramGroup.length; i<len; i++) {                
+            	tempArr = paramGroup[i].split("=");
+	            if(tempArr[0]!="time"){
+	            	if(url.split("?").length==1)
+	          			url = url + "?"+tempArr[0]+"="+ tempArr[1];
+	          		else
+	          			url = url + "&"+tempArr[0]+"="+ tempArr[1];
+	          	}
+       		}
+       		if(url.split("?").length==1){
+        		url = url+"?time="+(new Date()).getTime();
+        	}else{
+        		url = url+"&time="+(new Date()).getTime();
+        	}
+       		return url;
+		}else{
+			return url+"?time="+(new Date()).getTime();
+		} 
+  	}
   	</script>
   </head>
   
@@ -64,7 +95,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     		<tr>
     			<td colspan="2">
     				<s:submit id="btn_save" value="保存"></s:submit>
-    				<s:submit id="btn_close" value="关闭"></s:submit>
+    				<input type="button" id="btn_close" value="关闭"/>
     			</td>
     		</tr>
     	</table>
