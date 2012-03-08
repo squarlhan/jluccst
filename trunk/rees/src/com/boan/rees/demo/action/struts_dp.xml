@@ -15,10 +15,7 @@
         </action>
         
         <action name="toAddDemoAction" class="demoAction" method="toAddDemo">
-             <result name="success" type="redirectAction">
-             	<param name="actionName">openDemoAction</param>
-             	<param name="namespace">/</param>
-             </result>
+             <result name="success">/demo/add.jsp</result>
             <result name="input">/demo/add.jsp</result>
         </action>
         
