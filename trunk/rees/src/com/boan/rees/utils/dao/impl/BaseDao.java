@@ -60,9 +60,9 @@ public class BaseDao<T, ID extends Serializable> implements IBaseDao<T, ID> {
 	 */
 	public Session getSession() {
 		Statistics statistics = sessionFactory.getStatistics();
-		System.out.println("Hibernate Session:"); 
-		System.out.println("A:"+statistics.getSessionOpenCount()); 
-		System.out.println("B:"+statistics.getSessionCloseCount()); 
+//		System.out.println("Hibernate Session:"); 
+//		System.out.println("A:"+statistics.getSessionOpenCount()); 
+//		System.out.println("B:"+statistics.getSessionCloseCount()); 
 		return sessionFactory.getCurrentSession();
 	}
 
