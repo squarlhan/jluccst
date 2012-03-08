@@ -9,6 +9,7 @@
 
 package com.boan.rees.demo.action;
 
+import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -111,7 +112,7 @@ public class DemoAction extends ActionSupport {
 	 */
 	public String toAddDemo(){
 		demoService.save(demoModel);
-		return NONE;
+		return SUCCESS;
 	}
 	
 	/**
@@ -137,8 +138,9 @@ public class DemoAction extends ActionSupport {
 	 * @return
 	 */
 	public String deleteDemo(){
-		String id = demoModel.getId();
-		demoService.deleteDemoModel(id);
+//		int d = ids.length;
+//		String id = demoModel.getId();
+		demoService.deleteDemoModel(ids);
 		return SUCCESS;
 	}
 	
@@ -150,7 +152,7 @@ public class DemoAction extends ActionSupport {
 	
 	
 	
-	
+	private String param="分页时要传递的参数";
 	
 	private Integer pageNo=1;   
     private Integer total=100;
@@ -169,6 +171,16 @@ public class DemoAction extends ActionSupport {
 
 	public void setTotal(Integer total) {
 		this.total = total;
+	}
+
+	public String getParam() {
+		return param;
+	}
+
+	public void setParam(String param) throws UnsupportedEncodingException {
+		String str=java.net.URLDecoder.decode(param, "utf-8");
+
+		this.param = param;
 	}
 }
 
