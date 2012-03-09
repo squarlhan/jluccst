@@ -22,7 +22,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 /**
  * 设备实体类
- * @author ZhuYF
+ * @author jiangmeidi
  * @version 1.0.0
  */
 @Entity
