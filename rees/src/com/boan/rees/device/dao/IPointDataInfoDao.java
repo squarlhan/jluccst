@@ -13,7 +13,7 @@ import com.boan.rees.utils.dao.IBaseDao;
  * @author jiangmeidi
  * @version 1.0.0
  */
-public interface PointDataInfoDao  extends IBaseDao<PointDataInfo, String> {   
+public interface IPointDataInfoDao  extends IBaseDao<PointDataInfo, String> {   
 
 }
 

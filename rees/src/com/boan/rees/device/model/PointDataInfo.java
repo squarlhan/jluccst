@@ -10,6 +10,7 @@
 package com.boan.rees.device.model;
 
 import java.io.Serializable;
+import java.util.Calendar;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -21,7 +22,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 /**
  * 监测点数据实体类
- * @author jiangmeidi
+ * @author ZhuYF
  * @version 1.0.0
  */
 @Entity
@@ -34,36 +35,51 @@ public class PointDataInfo implements Serializable {
 	@GenericGenerator(name="system-uuid", strategy="uuid")
 	@GeneratedValue(generator="system-uuid")
 	/**
-	 * 监测点数据实体主键
+	 * 参数数据编号
 	 */
 	private String id;
-	
+	/**
+	 * 参数ID
+	 */
 	@Column(name = "PAID")
-	private Integer paid;
+	private String paid;
+	/**
+	 * 参数数据信息
+	 */
 	@Column(name = "DATA_INFO")
-	private Integer dataInfo;
+	private String dataInfo;
+	/**
+	 * 所属周期
+	 */
 	@Column(name = "WEEK_OF_YEAR")
 	private Integer weekofYear;
+	/**
+	 * 录入人ID
+	 */
 	@Column(name = "USER_NAME")
-	private Integer userName;
+	private String userName;
+	/**
+	 * 录入日期
+	 */
 	@Column(name = "CREATE_TIME")
-	private Integer creatTime;
+	private Calendar creatTime;
 	public String getId() {
 		return id;
 	}
 	public void setId(String id) {
 		this.id = id;
 	}
-	public Integer getPaid() {
+	public String getPaid() {
 		return paid;
 	}
-	public void setPaid(Integer paid) {
+	public void setPaid(String paid) {
 		this.paid = paid;
 	}
-	public Integer getDataInfo() {
+	
+	public String getDataInfo() {
 		return dataInfo;
 	}
-	public void setDataInfo(Integer dataInfo) {
+	public void setDataInfo(String dataInfo) {
 		this.dataInfo = dataInfo;
 	}
 	public Integer getWeekofYear() {
@@ -72,16 +88,16 @@ public class PointDataInfo implements Serializable {
 	public void setWeekofYear(Integer weekofYear) {
 		this.weekofYear = weekofYear;
 	}
-	public Integer getUserName() {
+	public String getUserName() {
 		return userName;
 	}
-	public void setUserName(Integer userName) {
+	public void setUserName(String userName) {
 		this.userName = userName;
 	}
-	public Integer getCreatTime() {
+	public Calendar getCreatTime() {
 		return creatTime;
 	}
-	public void setCreatTime(Integer creatTime) {
+	public void setCreatTime(Calendar creatTime) {
 		this.creatTime = creatTime;
 	}
 	

@@ -21,7 +21,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 /**
  * 监测点实体类
- * @author jiangmeidi
+ * @author ZhuYF
  * @version 1.0.0
  */
 @Entity
@@ -38,26 +38,33 @@ public class PointInfo implements Serializable {
 	 * 监测点实体主键
 	 */
 	private String id;
+	/**
+	 * 设备编号，外键
+	 */
 	@Column(name = "DEVICE_ID")
-	private Integer deviceId;
+	private String deviceId;
+	/**
+	 * 监测点名称
+	 */
 	@Column(name = "CONTROL_POINT_NAME")
-	private Integer controlPointName;
+	private String controlPointName;
+	
 	public String getId() {
 		return id;
 	}
 	public void setId(String id) {
 		this.id = id;
 	}
-	public Integer getDeviceId() {
+	public String getDeviceId() {
 		return deviceId;
 	}
-	public void setDeviceId(Integer deviceId) {
+	public void setDeviceId(String deviceId) {
 		this.deviceId = deviceId;
 	}
-	public Integer getControlPointName() {
+	public String getControlPointName() {
 		return controlPointName;
 	}
-	public void setControlPointName(Integer controlPointName) {
+	public void setControlPointName(String controlPointName) {
 		this.controlPointName = controlPointName;
 	}
 	
