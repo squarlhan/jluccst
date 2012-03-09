@@ -19,31 +19,31 @@ import com.boan.rees.report.service.IPersonReportService;
  * @author zhaomengxue
  * @version 1.0.0
  */
-@Service("personreportService")
+@Service("personReportService")
 public class PersonReportServiceImpl implements IPersonReportService {
 	
 	@Autowired
-	@Qualifier("personreportDao")
-	private IPersonReportDao personreportDao;
+	@Qualifier("personReportDao")
+	private IPersonReportDao personReportDao;
 	
 	@Override
 	public List<PersonReport> findAllPersonReport(){
-		return personreportDao.findAll();
+		return personReportDao.findAll();
 	}
 	
 	@Override
 	public void deletePersonReport(String... ids ){
-		personreportDao.delete(ids);
+		personReportDao.delete(ids);
 	}
 
 	@Override
 	public void save(PersonReport table1) {
-		personreportDao.save(table1);
+		personReportDao.save(table1);
 	}
 
 	@Override
 	public PersonReport get(String id) {
-		return personreportDao.get(id);
+		return personReportDao.get(id);
 	}
 }
 
