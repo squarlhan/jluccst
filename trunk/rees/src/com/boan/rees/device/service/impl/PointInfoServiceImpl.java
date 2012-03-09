@@ -2,9 +2,11 @@ package com.boan.rees.device.service.impl;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import com.boan.rees.device.model.PointInfo;
 import com.boan.rees.device.service.IPointInfoService;
-
+@Service("pointInfoService")
 public class PointInfoServiceImpl implements IPointInfoService{
 
 	@Override
