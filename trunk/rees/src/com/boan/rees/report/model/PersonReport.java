@@ -49,7 +49,6 @@ public class PersonReport implements Serializable{
 	 * 汇报人
 	 */
 	@Column(name = "REPORT_PERSON")
-
 	private String reportPerson;
 	/**
 	 * 汇报时间
