@@ -2,7 +2,7 @@ package com.boan.rees.device.service;
 
 import java.util.List;
 
-import com.boan.rees.device.model.DeviceInfo;
+
 import com.boan.rees.device.model.PointDataInfo;
 /**
  * 参数服务类接口
