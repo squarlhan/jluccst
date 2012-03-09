@@ -5,7 +5,7 @@ import java.util.List;
 import com.boan.rees.device.model.DeviceInfo;
 /**
  * 设备服务类接口
- * @author ZhuYF
+ * @author jiangmeidi
  * @version 1.0.0
  */
 
