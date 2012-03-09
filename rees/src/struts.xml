@@ -21,5 +21,14 @@
 	<!-- 默认后缀名 -->
 	<constant name="struts.action.extension" value="action" />
 	
-	<include file="com/boan/rees/demo/action/struts_dp.xml"></include>
+	<!-- 例子配置 -->
+	<include file="com/boan/rees/demo/action/struts_demo.xml"></include>
+	
+	
+	<!-- 设备管理模块配置 -->
+	<include file="com/boan/rees/device/action/struts_device.xml"></include>
+	
+	<!-- 个人报表模块配置 -->
+	<include file="com/boan/rees/report/action/struts_report.xml"></include>
+	
 </struts>
