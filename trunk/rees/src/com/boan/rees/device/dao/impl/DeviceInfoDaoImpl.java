@@ -12,8 +12,11 @@ package com.boan.rees.device.dao.impl;
 import org.springframework.stereotype.Repository;
 
 import com.boan.rees.device.dao.IDeviceInfoDao;
+
 import com.boan.rees.device.model.DeviceInfo;
+
 import com.boan.rees.utils.dao.impl.BaseDao;
+
 
 /**
  * XXX 类
@@ -22,6 +25,5 @@ import com.boan.rees.utils.dao.impl.BaseDao;
  */
 @Repository("deviceInfoDao")
 public class DeviceInfoDaoImpl extends BaseDao<DeviceInfo, String> implements IDeviceInfoDao{
-
 }
 

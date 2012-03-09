@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2012 Changchun CBIT Co. Ltd.
+ * Copyright (c) 2012 jluccst.
  * All right reserved.
  * History
  */
@@ -10,6 +10,7 @@
 package com.boan.rees.device.model;
 
 import java.io.Serializable;
+import java.util.Calendar;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -21,7 +22,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 /**
  * 设备实体类
- * @author jiangmeidi
+ * @author ZhuYF
  * @version 1.0.0
  */
 @Entity
@@ -38,35 +39,66 @@ public class DeviceInfo implements Serializable {
 	 * 设备实体主键
 	 */
 	private String id;
-	
 	/**
 	 * 设备编号
 	 */
 	@Column(name = "DEVICE _NUM")
 	private String deviceNum;
-	
 	/**
 	 * 设备类型
 	 */
 	@Column(name = "DEVICE_TYPE")
 	private String deviceType;
+	/**
+	 * 设备名称
+	 */
 	@Column(name = "DEVICE_NAME ")
 	private String deviceName;
+	/**
+	 * 设备型号
+	 */
 	@Column(name = "DEVICE_MODEL")
 	private String deviceModel;
-
+   /**
+    * 设备厂商
+    */
 	@Column(name = "DEVICE_FACTORY")
 	private String deviceFactory;
+	/**
+	* 设备图片
+	 */
 	@Column(name = "FILE_PATH")
 	private String filePath;
+	/**
+	 *监控点数量
+	 */
 	@Column(name = "CONTROL_POINT")
-	private String contrlPoint;
+	private Integer contrlPoint;
+	/**
+	 *排序号
+	 */
 	@Column(name = "SORT_INDEX")
-	private String sortIndex;
+	private Integer sortIndex;
+	/**
+	 *	创建时间
+	 */
 	@Column(name = "CREATE_TIME")
-	private String createTime;
+	private Calendar createTime;
+	/**
+	 *	删除标识 0：正常 1：已删除
+	 */
 	@Column(name = "ISDELETE")
-	private String isDelete;
+	private Integer isDelete;
+	/**
+	 *	所属部门Id
+	 */
+	@Column(name = "DEPT_ID")
+	private String deptId;
+	/**
+	 *	所属机组Id
+	 */
+	@Column(name = "GROUP_ID")
+	private String groupId;
 	public String getId() {
 		return id;
 	}
@@ -109,30 +141,43 @@ public class DeviceInfo implements Serializable {
 	public void setFilePath(String filePath) {
 		this.filePath = filePath;
 	}
-	public String getContrlPoint() {
+	public Integer getContrlPoint() {
 		return contrlPoint;
 	}
-	public void setContrlPoint(String contrlPoint) {
+	public void setContrlPoint(Integer contrlPoint) {
 		this.contrlPoint = contrlPoint;
 	}
-	public String getSortIndex() {
+	public Integer getSortIndex() {
 		return sortIndex;
 	}
-	public void setSortIndex(String sortIndex) {
+	public void setSortIndex(Integer sortIndex) {
 		this.sortIndex = sortIndex;
 	}
-	public String getCreateTime() {
+	public Calendar getCreateTime() {
 		return createTime;
 	}
-	public void setCreateTime(String createTime) {
+	public void setCreateTime(Calendar createTime) {
 		this.createTime = createTime;
 	}
-	public String getIsDelete() {
+	public Integer getIsDelete() {
 		return isDelete;
 	}
-	public void setIsDelete(String isDelete) {
+	public void setIsDelete(Integer isDelete) {
 		this.isDelete = isDelete;
 	}
+	public String getDeptId() {
+		return deptId;
+	}
+	public void setDeptId(String deptId) {
+		this.deptId = deptId;
+	}
+	public String getGroupId() {
+		return groupId;
+	}
+	public void setGroupId(String groupId) {
+		this.groupId = groupId;
+	}
+	
 	
 }
 

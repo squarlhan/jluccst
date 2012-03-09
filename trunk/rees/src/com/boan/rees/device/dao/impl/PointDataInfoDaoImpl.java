@@ -11,13 +11,18 @@ package com.boan.rees.device.dao.impl;
 
 import org.springframework.stereotype.Repository;
 
+
+import com.boan.rees.device.dao.IPointDataInfoDao;
+import com.boan.rees.device.model.PointDataInfo;
+import com.boan.rees.utils.dao.impl.BaseDao;
+
 /**
  * XXX 类
  * @author jiangmeidi
  * @version 1.0.0
  */
 @Repository("pointDataInfoDao")
-public class PointDataInfoDaoImpl {
+public class PointDataInfoDaoImpl extends BaseDao<PointDataInfo, String> implements IPointDataInfoDao{
 
 }
 
