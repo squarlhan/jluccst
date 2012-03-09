@@ -19,31 +19,31 @@ import com.boan.rees.report.service.ITemplateReportService;
  * @author zhaomengxue
  * @version 1.0.0
  */
-@Service("templatereportService")
+@Service("templateReportService")
 public class TemplateReportServiceImpl implements ITemplateReportService {
 	
 	@Autowired
-	@Qualifier("templatereportDao")
-	private ITemplateReportDao templatereportDao;
+	@Qualifier("templateReportDao")
+	private ITemplateReportDao templateReportDao;
 	
 	@Override
 	public List<TemplateReport> findAllTemplateReport(){
-		return templatereportDao.findAll();
+		return templateReportDao.findAll();
 	}
 	
 	@Override
 	public void deleteTemplateReport(String... ids ){
-		templatereportDao.delete(ids);
+		templateReportDao.delete(ids);
 	}
 
 	@Override
 	public void save(TemplateReport table1) {
-		templatereportDao.save(table1);
+		templateReportDao.save(table1);
 	}
 
 	@Override
 	public TemplateReport get(String id) {
-		return templatereportDao.get(id);
+		return templateReportDao.get(id);
 	}
 }
 
