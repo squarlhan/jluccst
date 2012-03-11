@@ -123,7 +123,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    		</s:iterator>
    		<tr>
 			<td colspan="5">
-			<page:pages currentPage="pagination.currentPage" totalPages="pagination.totalPages" totalRows="pagination.totalRows" styleClass="page" theme="text">
+			<page:pages currentPage="pagination.currentPage" totalPages="pagination.totalPages" totalRows="pagination.totalRows" styleClass="page" theme="text" >
 				<s:param name="param">说三道四</s:param>
 			</page:pages> 
 		   	</td>
