@@ -187,15 +187,23 @@ public class Pages extends Component {
 			// 分页用的javascript脚本
 			str.append( "\r\n " );
 			
-			str.append("<script language=\"javascript\">\r\n");  
-			str.append("  function turnOverPage(no){\r\n");  
-			str.append("    if(no>").append(totalPages).append("){");  
-			str.append("      no=").append(totalPages).append(";}\r\n");  
-			str.append("    if(no<1){no=1;}\r\n");  
+			str.append( "<script language=\"javascript\">\r\n");  
+			str.append( "  function turnOverPage(no){\r\n");  
+			str.append( "    if(no>").append(totalPages).append("){");  
+			str.append( "      no=").append(totalPages).append(";}\r\n");  
+			str.append( "    if(no<1){no=1;}\r\n");  
 			str.append( "document.forms[0].action = '" + url + urlParam + "';\r\n " );
 			str.append( "document.forms[0].target = '';\r\n " );
 			str.append( "document.getElementById(\"currentPage\").value = no;\r\n " );
-			str.append( "document.forms[0].submit();\r\n " );
+			if(validateFunction!=null){
+				str.append( "if(!" + validateFunction + "){\r\n");  
+				str.append( "	return false;\r\n");  
+				str.append( "}else{\r\n");  
+				str.append( "	document.forms[0].submit();\r\n ");  
+				str.append( "}\r\n");  
+			}else{
+				str.append( "document.forms[0].submit();\r\n " );
+			}
 			str.append("  }\r\n");  
 			str.append("</script>\r\n");  
 			str.append("</span>");
