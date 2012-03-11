@@ -24,12 +24,14 @@ import com.opensymphony.xwork2.util.ValueStack;
  */
 public class PageTag extends ComponentTagSupport {   
     
-    private String pageNo;   
-    private String total;   
+    private String currentPage;   
+    private String totalPages;
+	private String totalRows;
     private String styleClass;   
     private String theme;
     private String url;
     private String urlType;
+    private String validateFunction;
        
     public void setUrlType(String urlType) {
        this.urlType = urlType;
@@ -43,15 +45,19 @@ public class PageTag extends ComponentTagSupport {
     public void setStyleClass(String styleClass) {   
         this.styleClass = styleClass;   
     }   
-    public void setPageNo(String pageNo) {   
-        this.pageNo = pageNo;   
-    }   
-    public void setTotal(String total) {   
-        this.total = total;   
-    }   
- 
-   
-    @Override 
+    public void setCurrentPage(String currentPage) {
+		this.currentPage = currentPage;
+	}
+	public void setTotalPages(String totalPages) {
+		this.totalPages = totalPages;
+	}
+	public void setTotalRows(String totalRows) {
+		this.totalRows = totalRows;
+	}
+	public void setValidateFunction(String validateFunction) {
+		this.validateFunction = validateFunction;
+	}
+	@Override 
     public Component getBean(ValueStack arg0, HttpServletRequest arg1, HttpServletResponse arg2) {   
         return new Pages(arg0, arg1);   
     }   
@@ -59,14 +65,15 @@ public class PageTag extends ComponentTagSupport {
     protected void populateParams() {   
         super.populateParams();   
            
-        Pages pages = (Pages)component;   
-        pages.setPageNo(pageNo);     
-        pages.setTotal(total);   
-        pages.setStyleClass(styleClass);   
-        pages.setTheme(theme);   
+        Pages pages = (Pages)component;
+        pages.setCurrentPage(currentPage);
+        pages.setTotalRows(totalRows);
+        pages.setTotalPages(totalPages);
+        pages.setStyleClass(styleClass);
+        pages.setTheme(theme);
         pages.setUrl(url);
         pages.setUrlType(urlType);
- 
+        pages.setValidateFunction(validateFunction);
     }   
 }   
 

@@ -11,6 +11,7 @@ package com.boan.rees.utils.page;
 
 import java.io.IOException;
 import java.io.Writer;
+import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.Map;
 
@@ -29,13 +30,51 @@ import com.opensymphony.xwork2.util.ValueStack;
  * @version 1.0.0
  */
 public class Pages extends Component {
+	
+	/**
+	 * 请求对象
+	 */
 	private HttpServletRequest request;
-	private String pageNo; // 当前页码
-	private String total; // 总页数
-	private String styleClass; // 分页的样式
-	private String theme; // 分页的主题
-	private String url; // action的路径
-	private String urlType; // 路径的类型，主要用于URL重写的扩展
+	
+	/**
+	 * 当前页码
+	 */
+	private String currentPage;
+	
+	/**
+	 * 总行数
+	 */
+	private String totalRows;
+	
+	/**
+	 * 总页数
+	 */
+	private String totalPages;
+	
+	/**
+	 * 分页的样式
+	 */
+	private String styleClass;
+	
+	/**
+	 * 分页的主题
+	 */
+	private String theme;
+	
+	/**
+	 * action的路径
+	 */
+	private String url;
+	
+	/**
+	 * 路径的类型，主要用于URL重写的扩展
+	 */
+	private String urlType;
+	
+	/**
+	 * 表单提交前的验证函数名称
+	 */
+	private String validateFunction;
 
 	public Pages(ValueStack arg0, HttpServletRequest request) {
 		super(arg0);
@@ -47,21 +86,53 @@ public class Pages extends Component {
 		boolean result = super.start(writer);
 		try {
 			// 从ValueStack中取出数值
-			Object obj = this.getStack().findValue(pageNo);
-			pageNo = String.valueOf((Integer) obj);
-			obj = this.getStack().findValue(total);
-			total = String.valueOf((Integer) obj);
+			Object obj = this.getStack().findValue(currentPage);
+			//保存绑定的字符串
+			String currentPageBindStr = currentPage;
+			currentPage = String.valueOf((Integer) obj);
+			obj = this.getStack().findValue(totalPages);
+			totalPages = String.valueOf((Integer) obj);
+			obj = this.getStack().findValue(totalRows);
+			totalRows = String.valueOf((Integer) obj);
+          StringBuilder  urlParamStrB = new StringBuilder();	
+//			Enumeration enumeration = request.getParameterNames();  
+//            String name = null;  
+//            String value = null;  
 
+//            while (enumeration.hasMoreElements()) {  
+//                name = (String) enumeration.nextElement();  
+//                value = request.getParameter(name);  
+//                value = new String( value.getBytes( "ISO8859-1" ), "GB2312" );
+//                
+//                urlParamStrB.append(name).append("=").append(value).append("&");
+//            }
+            
 			StringBuilder str = new StringBuilder();
 			Map cont = this.getStack().getContext();
 			StrutsRequestWrapper req = (StrutsRequestWrapper) cont.get(StrutsStatics.HTTP_REQUEST);
 			if (url == null || "".equals(url)) {
 				url = (String) req.getAttribute("javax.servlet.forward.request_uri");
 			}
-			String pageNoStr = "?pageNo=";
+			
+			//存储Url参数和动态参数
+			String urlParam = urlParamStrB.length()==0 ? "" : "?" + urlParamStrB.substring(0, urlParamStrB.toString().length()-1);
+			
+			//用来处理动态查询的参数，并拼接成url
+			StringBuffer perUrl = new StringBuffer("");
+			if (this.getParameters().size() != 0) {
+				Iterator iter = this.getParameters().keySet().iterator();
+				while (iter.hasNext()) {
+					String key = (String) iter.next();
+					Object o = this.getParameters().get(key);
+					perUrl.append("&").append(key).append("=").append(o);
+				}
+				urlParam = urlParam.contains("?") ? urlParam + perUrl : urlParam + "?" + perUrl.substring(1);
+			}
+			
+			
 			if ("dir".equals(urlType)) {
-				pageNoStr = "";
-				if ("1".equals(pageNo)) {// 第一页时
+				urlParam = "";
+				if ("1".equals(currentPage)) {// 第一页时
 					if (url.lastIndexOf("/") != url.length() - 1) {
 						if (url.lastIndexOf("1") == url.length() - 1) {// 如果有页码1，则去掉1
 							url = url.substring(0, url.length() - 1);
@@ -73,18 +144,8 @@ public class Pages extends Component {
 					url = url.substring(0, url.lastIndexOf("/") + 1);
 				}
 			}
-
-			// 下面这段处理主要是用来处理动态查询的参数，并拼接成url
-			StringBuffer perUrl = new StringBuffer("");
-			if (this.getParameters().size() != 0) {
-				Iterator iter = this.getParameters().keySet().iterator();
-				while (iter.hasNext()) {
-					String key = (String) iter.next();
-					Object o = this.getParameters().get(key);
-					perUrl.append("&").append(key).append("=").append(o);
-				}
-			}
-			Integer cpageInt = Integer.valueOf(pageNo);
+			
+			Integer cpageInt = Integer.valueOf(currentPage);
 			str.append("<span ");
 			if (styleClass != null) {
 				str.append(" class='" + styleClass + "'>");
@@ -94,95 +155,49 @@ public class Pages extends Component {
 			// 文本样式
 			if (theme == null || "text".equals(theme)) {
 				// 当前页与总页数相等
-				str.append(" 共[ " + total + " ]条记录&nbsp;&nbsp;&nbsp;&nbsp;");
-				if (pageNo.equals(total)) {
-					str.append("<a href='" + url + pageNoStr + "1" + perUrl
-							+ "'>首　页&nbsp;&nbsp;&nbsp;&nbsp;</a> ");
-					str.append("<a href='" + url + pageNoStr
-							+ (cpageInt - 1) + perUrl + "'>上一页&nbsp;&nbsp;&nbsp;&nbsp;</a>");
+				str.append(" 共[ " + totalRows + " ]条记录&nbsp;&nbsp;&nbsp;&nbsp;");
+				String hrefStyle = "style=\"cursor:hand\" onmouseover=\"this.style.color='red'\" onmouseout=\"this.style.color='#0e4871'\" ";
+				if (currentPage.equals(totalPages)) {
+					str.append("<a "+ hrefStyle +" onclick='javascript:turnOverPage(1)'>首　页&nbsp;&nbsp;&nbsp;&nbsp;</a> ");
+					str.append("<a "+ hrefStyle +" onclick='javascript:turnOverPage("+ ( cpageInt - 1) + ")'>上一页&nbsp;&nbsp;&nbsp;&nbsp;</a>");
 					str.append("下一页&nbsp;&nbsp;&nbsp;&nbsp;");
 					str.append("尾　页&nbsp;&nbsp;&nbsp;&nbsp;");
-					str.append("当前["+ pageNo + "/" + total + "]页");
+					str.append("当前["+ currentPage + "/" + totalPages + "]页");
 				} else {
 					// 当前页与总页数不相同
-					if ("1".equals(pageNo)) {
+					if ("1".equals(currentPage)) {
 						str.append("首　页&nbsp;&nbsp;&nbsp;&nbsp;");
 						str.append("上一页&nbsp;&nbsp;&nbsp;&nbsp;");
-						str.append("<a href='" + url + pageNoStr
-								+ (cpageInt + 1) + perUrl + "'>下一页&nbsp;&nbsp;&nbsp;&nbsp;</a>");
-						str.append("<a href='" + url + pageNoStr + total
-								+ perUrl + "'>尾　页&nbsp;&nbsp;&nbsp;&nbsp;</a>");
-						str.append("当前["+ pageNo + "/" + total + "]页");
+						str.append("<a "+ hrefStyle +" onclick='javascript:turnOverPage("+ (cpageInt + 1) + ")'>下一页&nbsp;&nbsp;&nbsp;&nbsp;</a>");
+						str.append("<a "+ hrefStyle +" onclick='javascript:turnOverPage("+totalPages + ")'>尾　页&nbsp;&nbsp;&nbsp;&nbsp;</a>");
+						str.append("当前["+ currentPage + "/" + totalPages + "]页");
 					} else {
-						str.append("<a href='" + url + pageNoStr + "1" + perUrl
-								+ "'>首　页&nbsp;&nbsp;&nbsp;&nbsp;</a>");
-						str.append("<a href='" + url + pageNoStr
-								+ (cpageInt - 1) + perUrl + "'>上一页&nbsp;&nbsp;&nbsp;&nbsp;</a>");
-						str.append("<a href='" + url + pageNoStr
-								+ (cpageInt + 1) + perUrl + "'>下一页&nbsp;&nbsp;&nbsp;&nbsp;</a>");
-						str.append("<a href='" + url + pageNoStr + total
-								+ perUrl + "'>尾　页&nbsp;&nbsp;&nbsp;&nbsp;</a>");
-						str.append("当前["+ pageNo + "/" + total + "]页");
+						str.append("<a onclick='javascript:turnOverPage(1)'>首　页&nbsp;&nbsp;&nbsp;&nbsp;</a>");
+						str.append("<a "+ hrefStyle +" onclick='javascript:turnOverPage("+ ( cpageInt - 1) + ")'>上一页&nbsp;&nbsp;&nbsp;&nbsp;</a>");
+						str.append("<a "+ hrefStyle +" onclick='javascript:turnOverPage("+ (cpageInt + 1) + ")'>下一页&nbsp;&nbsp;&nbsp;&nbsp;</a>");
+						str.append("<a onclick='javascript:turnOverPage("+totalPages + "'>尾　页&nbsp;&nbsp;&nbsp;&nbsp;</a>");
+						str.append("当前["+ currentPage + "/" + totalPages + "]页");
 					}
 				}
-			} else if ("number".equals(theme)) { // 数字样式 [1 2 3 4 5 6 7 8 9 10 >
-													// >>]
-				Integer totalInt = Integer.valueOf(total);
-
-				// 如果只有一页，则无需分页
-				str.append("[ ");
-				if (totalInt == 1) {
-					str.append("<strong>1</strong> ");
-				} else {
-					if (cpageInt > 1) {
-						// 当前不是第一组，要显示“<< <”
-						// <<：返回前一组第一页
-						// <：返回前一页
-						str.append("<a href='" + url + pageNoStr + "1" + perUrl
-								+ "'>?</a> ");
-						str.append("<a href='" + url + pageNoStr
-								+ (cpageInt - 1) + perUrl);
-						str.append("'>‹</a> ");
-					} else {
-						str.append("? ‹ ");
-					}
-
-					int v = (cpageInt - 4) > 0 ? (cpageInt - 4) : 1;
-					int v1 = (cpageInt + 4) < totalInt ? (cpageInt + 4)
-							: totalInt;
-					if (v1 == totalInt) {
-						v = totalInt - 10;
-						v = (v <= 0 ? 1 : v); // 如果为负数，则修改为1
-					} else if (v == 1 && v1 < totalInt) {
-						v1 = totalInt > 10 ? 10 : totalInt;
-					}
-					// 10个为一组显示
-					for (int i = v; i <= v1; i++) {
-						if (cpageInt == i) { // 当前页要加粗显示
-							str.append("<strong>" + i + "</strong> ");
-						} else {
-							// str.append("<a href='"+url + i +perUrl+"'>" + i +
-							// "</a> ");
-							str.append("<a href='" + url + pageNoStr + i
-									+ perUrl + "'>" + i + "</a> ");
-						}
-					}
-					// 如果多于1组并且不是最后一组，显示“> >>”
-					if (cpageInt < totalInt) {
-						// >>：返回下一组最后一页
-						// >：返回下一页
-						str.append("<a href='" + url + pageNoStr
-								+ (cpageInt + 1) + perUrl);
-						str.append("'>›</a> ");
-						str.append("<a href='" + url + pageNoStr + totalInt
-								+ perUrl);
-						str.append("'>?</a> ");
-					} else {
-						str.append("› ? ");
-					}
-				}
-				str.append("]");
+			} else if ("number".equals(theme)) {//定义其他样式的分页条
+				
 			}
+			str.append( "\r\n " );
+			str.append( "<input type=\"hidden\" name=\"" + currentPageBindStr + "\" id=\"currentPage\" value=\"" + cpageInt + "\">\r\n " );
+			// 分页用的javascript脚本
+			str.append( "\r\n " );
+			
+			str.append("<script language=\"javascript\">\r\n");  
+			str.append("  function turnOverPage(no){\r\n");  
+			str.append("    if(no>").append(totalPages).append("){");  
+			str.append("      no=").append(totalPages).append(";}\r\n");  
+			str.append("    if(no<1){no=1;}\r\n");  
+			str.append( "document.forms[0].action = '" + url + urlParam + "';\r\n " );
+			str.append( "document.forms[0].target = '';\r\n " );
+			str.append( "document.getElementById(\"currentPage\").value = no;\r\n " );
+			str.append( "document.forms[0].submit();\r\n " );
+			str.append("  }\r\n");  
+			str.append("</script>\r\n");  
 			str.append("</span>");
 
 			writer.write(str.toString());
@@ -201,20 +216,20 @@ public class Pages extends Component {
 		this.request = request;
 	}
 
-	public String getPageNo() {
-		return pageNo;
+	public String getCurrentPage() {
+		return currentPage;
 	}
 
-	public void setPageNo(String pageNo) {
-		this.pageNo = pageNo;
+	public void setCurrentPage(String currentPage) {
+		this.currentPage = currentPage;
 	}
 
-	public String getTotal() {
-		return total;
+	public String getTotalPages() {
+		return totalPages;
 	}
 
-	public void setTotal(String total) {
-		this.total = total;
+	public void setTotalPages(String totalPages) {
+		this.totalPages = totalPages;
 	}
 
 	public String getStyleClass() {
@@ -247,5 +262,21 @@ public class Pages extends Component {
 
 	public void setUrlType(String urlType) {
 		this.urlType = urlType;
+	}
+
+	public String getTotalRows() {
+		return totalRows;
+	}
+
+	public void setTotalRows(String totalRows) {
+		this.totalRows = totalRows;
+	}
+
+	public String getValidateFunction() {
+		return validateFunction;
+	}
+
+	public void setValidateFunction(String validateFunction) {
+		this.validateFunction = validateFunction;
 	}
 }
