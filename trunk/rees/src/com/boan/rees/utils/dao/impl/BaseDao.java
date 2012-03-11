@@ -170,5 +170,27 @@ public class BaseDao<T, ID extends Serializable> implements IBaseDao<T, ID> {
 		}
 		return query.list();
 	}
+
+	@Override
+	public <X> List<X> findForPage(String hql, Map<String, ?> values,int pageNo, int pageSize) {
+		Query query = getSession().createQuery(hql);
+		if (values != null && values.size()>0) {
+			query.setProperties(values);
+		}
+		query.setFirstResult(pageNo);
+		query.setMaxResults(pageSize);
+		return query.list();
+	}
+
+	@Override
+	public int findCountForPage(String hql, Map<String, ?> values) {
+		Query query = getSession().createQuery(hql);
+		if (values != null && values.size()>0) {
+			query.setProperties(values);
+		}
+		Object obj = query.uniqueResult();
+		return obj==null ? 0 : Integer.valueOf(obj.toString());
+	}
+	
 }
 
