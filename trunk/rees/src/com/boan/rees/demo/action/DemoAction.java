@@ -10,6 +10,7 @@
 package com.boan.rees.demo.action;
 
 import java.io.UnsupportedEncodingException;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,6 +20,7 @@ import org.springframework.stereotype.Controller;
 
 import com.boan.rees.demo.model.DemoModel;
 import com.boan.rees.demo.service.IDemoService;
+import com.boan.rees.utils.page.Pagination;
 import com.opensymphony.xwork2.ActionSupport;
 
 /**
@@ -56,6 +58,19 @@ public class DemoAction extends ActionSupport {
 	 */
 	private String initString;
 	
+	/**
+	 * 分页列表
+	 */
+	Pagination<DemoModel> pagination = new Pagination<DemoModel>();
+	
+	public Pagination<DemoModel> getPagination() {
+		return pagination;
+	}
+
+	public void setPagination(Pagination<DemoModel> pagination) {
+		this.pagination = pagination;
+	}
+
 	public DemoModel getDemoModel() {
 		return demoModel;
 	}
@@ -93,7 +108,7 @@ public class DemoAction extends ActionSupport {
 	 * @return
 	 */
 	public String openDemo(){
-		demoModelList = demoService.findAllDemoModel();
+		pagination = demoService.findDemoModelForPage(new HashMap(), pagination);
 		return SUCCESS;          
 	}
 
@@ -153,33 +168,32 @@ public class DemoAction extends ActionSupport {
 	
 	
 	private String param="分页时要传递的参数";
-	
-	private Integer pageNo=1;   
-    private Integer total=100;
-
-	public Integer getPageNo() {
-		return pageNo;
-	}
-
-	public void setPageNo(Integer pageNo) {
-		this.pageNo = pageNo;
-	}
-
-	public Integer getTotal() {
-		return total;
-	}
-
-	public void setTotal(Integer total) {
-		this.total = total;
-	}
-
+//	
+//	private Integer pageNo=1;   
+//    private Integer total=100;
+//
+//	public Integer getPageNo() {
+//		return pageNo;
+//	}
+//
+//	public void setPageNo(Integer pageNo) {
+//		this.pageNo = pageNo;
+//	}
+//
+//	public Integer getTotal() {
+//		return total;
+//	}
+//
+//	public void setTotal(Integer total) {
+//		this.total = total;
+//	}
+//
 	public String getParam() {
 		return param;
 	}
 
 	public void setParam(String param) throws UnsupportedEncodingException {
-		String str=java.net.URLDecoder.decode(param, "utf-8");
-
+		param = new String( param.getBytes( "ISO8859-1" ), "GB2312" );
 		this.param = param;
 	}
 }
