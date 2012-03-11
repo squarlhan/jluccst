@@ -10,8 +10,10 @@
 package com.boan.rees.demo.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.boan.rees.demo.model.DemoModel;
+import com.boan.rees.utils.page.Pagination;
 
 /**
  * 例子服务类接口
@@ -27,5 +29,7 @@ public interface IDemoService {
 	public void deleteDemoModel(String... ids );
 	
 	public void save(DemoModel table1);
+	
+	public Pagination<DemoModel> findDemoModelForPage(Map<String, ?> values,Pagination<DemoModel> pagination);
 }
 
