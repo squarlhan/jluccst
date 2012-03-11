@@ -58,7 +58,7 @@
            <required>false</required>
            <rtexprvalue>true</rtexprvalue>
            <description>
-              	提交表单前的Js验证函数名
+              	提交表单前的Js验证函数名,需要该函数有返回值，true严正通过，false严正没有通过
            </description>
        </attribute>
     </tag>
