@@ -85,7 +85,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    	<table border="1">
    		<tr>
    			<td colspan="5">
-   				<s:textfield name="param"></s:textfield>
+   				<s:textfield name="initString"></s:textfield>
    				<input type="button" id="btn_add" value="添加" />
    				<s:submit value="修改" theme="simple"></s:submit>
    				<s:submit value="删除所选" theme="simple" action="deleteDemoAction"></s:submit>
@@ -105,7 +105,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    				年龄
    			</td>
  		</tr>
-   		<s:iterator value="demoModelList" status="obj">
+   		<s:iterator value="pagination.data" status="obj">
 		<tr>
   			<td align="center" >  
 				<s:checkbox id="%{#obj.id}" name="ids" fieldValue="%{id}" value="false" theme="simple"/>
@@ -123,8 +123,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    		</s:iterator>
    		<tr>
 			<td colspan="5">
-			<page:pages pageNo="pageNo" total="total" styleClass="page" theme="text">
-				<s:param name="param" value="param"></s:param>
+			<page:pages currentPage="pagination.currentPage" totalPages="pagination.totalPages" totalRows="pagination.totalRows" styleClass="page" theme="text">
+				<s:param name="param">说三道四</s:param>
 			</page:pages> 
 		   	</td>
 		</tr>
