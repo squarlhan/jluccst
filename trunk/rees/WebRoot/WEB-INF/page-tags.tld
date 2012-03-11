@@ -13,12 +13,17 @@
        <body-content>jsp</body-content>
        <description>分页标签</description>
        <attribute>
-           <name>pageNo</name>
+           <name>currentPage</name>
            <required>false</required>
            <rtexprvalue>true</rtexprvalue>
        </attribute>
        <attribute>
-           <name>total</name>
+           <name>totalRows</name>
+           <required>false</required>
+           <rtexprvalue>true</rtexprvalue>
+       </attribute>
+       <attribute>
+           <name>totalPages</name>
            <required>false</required>
            <rtexprvalue>true</rtexprvalue>
        </attribute>
@@ -47,7 +52,14 @@
            <description>
               url的类型，现在支持两种url类型，第一种默认的url，这种情况不需要设置；第二种情况是目录型的url，比如http://blog.csdn.net/yongtree，此种情况请配置成dir。此种情况不支持动态查询，故标签体中不能加入参数
            </description>
- 
+       </attribute>
+       <attribute>
+           <name>validateFunction</name>
+           <required>false</required>
+           <rtexprvalue>true</rtexprvalue>
+           <description>
+              	提交表单前的Js验证函数名
+           </description>
        </attribute>
     </tag>
 </taglib>
