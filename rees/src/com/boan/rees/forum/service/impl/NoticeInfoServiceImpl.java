@@ -24,8 +24,12 @@ import com.boan.rees.forum.service.INoticeInfoService;
  * @author YangYJ
  * @version 1.0.0
  */
-@Service("demoService")
+@Service("noticeInfoService")
 public class NoticeInfoServiceImpl implements INoticeInfoService {
+	
+	@Autowired
+	@Qualifier("noticeInfoDao")
+	private INoticeInfoDao noticeInfoDao;
 	
 	@Override
 	public List<NoticeInfo> findAllDemoModel() {
@@ -51,7 +55,5 @@ public class NoticeInfoServiceImpl implements INoticeInfoService {
 		
 	}
 
-	@Autowired
-	@Qualifier("demoDao")
-	private INoticeInfoDao NoticeInfoDao;
+	
 }

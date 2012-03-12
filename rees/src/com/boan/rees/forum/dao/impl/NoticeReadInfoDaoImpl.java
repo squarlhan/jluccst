@@ -20,7 +20,7 @@ import com.boan.rees.utils.dao.impl.BaseDao;
  * @author YangYJ
  * @version 1.0.0
  */
-@Repository("ForumIssueInfoDao")
+@Repository("noticeReadInfoDao")
 public class NoticeReadInfoDaoImpl extends BaseDao<NoticeReadInfo, String> implements INoticeReadInfoDao{
 
 }

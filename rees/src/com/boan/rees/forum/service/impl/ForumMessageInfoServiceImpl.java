@@ -24,12 +24,12 @@ import com.boan.rees.forum.service.IForumMessageInfoService;
  * @author YangYJ
  * @version 1.0.0
  */
-@Service("ForumMessageInfo")
+@Service("forumMessageInfoService")
 public class ForumMessageInfoServiceImpl implements IForumMessageInfoService {
 	
 	@Autowired
-	@Qualifier("demoDao")
-	private IForumMessageInfoDao ForumMessageInfoDao;
+	@Qualifier("forumMessageInfoDao")
+	private IForumMessageInfoDao forumMessageInfoDao;
 
 	@Override
 	public List<ForumMessageInfo> findAllDemoModel() {

@@ -14,8 +14,12 @@ import com.boan.rees.forum.service.IForumIssueInfoService;
  * @author YangYJ
  * @version 1.0.0
  */
-@Service("demoService")
+@Service("forumIssueInfoService")
 public class ForumIssueInfoServiceImpl implements IForumIssueInfoService {
+	
+	@Autowired
+	@Qualifier("forumIssueInfoDao")
+	private IForumIssueInfoDao forumIssueInfoDao;
 	
 	@Override
 	public List<ForumIssueInfo> findAllForumIssueInfo() {
@@ -41,7 +45,5 @@ public class ForumIssueInfoServiceImpl implements IForumIssueInfoService {
 		
 	}
 
-	@Autowired
-	@Qualifier("demoDao")
-	private IForumIssueInfoDao ForumIssueInfo;
+	
 }
