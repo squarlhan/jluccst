@@ -19,7 +19,7 @@ import com.boan.rees.utils.dao.impl.BaseDao;
  * @author Guiyun Yang
  * @version 1.0.0
  */
-@Repository("goupRoleDao")
+@Repository("groupRoleDao")
 public class RoleDaoImpl extends BaseDao<Role,String> implements IRoleDao{
 
 	

@@ -20,7 +20,7 @@ import com.boan.rees.utils.dao.impl.BaseDao;
  * @author YangYJ
  * @version 1.0.0
  */
-@Repository("ForumMessageInfoDao")
+@Repository("forumMessageInfoDao")
 public class ForumMessageInfoDaoImpl extends BaseDao<ForumMessageInfo, String> implements IForumMessageInfoDao{
 
 }

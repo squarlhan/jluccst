@@ -24,8 +24,13 @@ import com.boan.rees.forum.service.INoticeReadInfoService;
  * @author YangYJ
  * @version 1.0.0
  */
-@Service("demoService")
+@Service("noticeReadInfoService")
 public class NoticeReadInfoServiceImpl implements INoticeReadInfoService {
+	
+
+	@Autowired
+	@Qualifier("noticeReadInfoDao")
+	private INoticeReadInfoDao noticeReadInfoDao;
 	
 	@Override
 	public List<NoticeReadInfo> findAllDemoModel() {
@@ -51,7 +56,4 @@ public class NoticeReadInfoServiceImpl implements INoticeReadInfoService {
 		
 	}
 
-	@Autowired
-	@Qualifier("demoDao")
-	private INoticeReadInfoDao NoticeReadInfoDao;
 }
