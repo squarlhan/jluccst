@@ -17,7 +17,7 @@ import org.encog.ml.kmeans.Centroid;
 
 public class KMeans {
 
-	public static List<Integer> runKmeans(double[][] KmeansDataSet, double cluster_number, int max_gen) {
+	public static List<Integer> runKmeans(double[][] KmeansDataSet, double cluster_number, int max_gen, int c) {
 //		int currentPopSize = a_pop.size();
 //		// if  all  of the chromosomes contain constant genes?
 //		int currentChromSize = a_pop.getChromosome(a_pop.size() - 1).size(); 
@@ -41,10 +41,23 @@ public class KMeans {
 		}
 
 		int num =(int)(currentPopSize/cluster_number);
-		final KMeansClustering kmeans = new KMeansClustering(num, set);
-		kmeans.iteration(max_gen);
+		KMeansClustering kmeans = new KMeansClustering(num, set);
+		List<KMeansClustering> kcs = new ArrayList();
+		List<Double> wcs = new ArrayList();
+		for(int i = 0;i<=c-1;i++){
+		     final KMeansClustering tempkmeans = new KMeansClustering(num, set);
+		     tempkmeans.iteration(max_gen);
+		     kcs.add(tempkmeans);
+		     wcs.add(tempkmeans.getWCSS());
+		}
+		int index = 0;
+		for(int i = 0;i<=c-1;i++){
+			if(Math.abs(wcs.get(i))<Math.abs(wcs.get(index))){
+				index = i;
+			}
+		}
+		kmeans = kcs.get(index);
 //		System.out.println("Final WCSS: " + kmeans.getWCSS());
-
 		int[] centroidchrom = new int[kmeans.numClusters()];
 		int[] chromorderflag = new int[kmeans.numClusters()];
 		List<Integer> chromorder = new ArrayList();

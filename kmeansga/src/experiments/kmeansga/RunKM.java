@@ -28,7 +28,7 @@ public class RunKM {
 		
 		double[][] chromatrix = pop2matrix(a_pop);
 		double[][] dis = EucDistance.calcEucMatrix(chromatrix);
-		List<Integer> results = KMeans.runKmeans(chromatrix, kmeans_num, kmeans_max);
+		List<Integer> results = KMeans.runKmeans(chromatrix, kmeans_num, kmeans_max, 10);
 		if(results==null||results.size()==0){
 			for(int i = 0; i<= a_pop.size()-1; i++){
 				results.add(i);
@@ -60,7 +60,7 @@ public class RunKM {
 		double[][] dis = EucDistance.calcEucMatrix(chromatrix);
 		double[][] fullchromatrix = pop2matrix(a_pop);
 		double[][] fulldis = EucDistance.calcEucMatrix(fullchromatrix);
-		List<Integer> tempresults = KMeans.runKmeans(chromatrix, kmeans_num, kmeans_max);
+		List<Integer> tempresults = KMeans.runKmeans(chromatrix, kmeans_num, kmeans_max, 10);
 		
 		int oldpopsize = a_conf.getPopulationSize();
 		Set<Integer> temp = new HashSet();
