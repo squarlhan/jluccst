@@ -24,30 +24,7 @@ import com.boan.rees.utils.dao.impl.BaseDao;
 @Repository("groupWorkshopDao")
 public class WorkshopDaoImpl extends BaseDao<Workshop,String> implements IWorkshopDao{
 
-	@Override
-	protected Class<Workshop> getEntityClass() {
-		// TODO Auto-generated method stub
-		return super.getEntityClass();
-	}
-
-	@Override
-	public Session getSession() {
-		// TODO Auto-generated method stub
-		return super.getSession();
-	}
-
-	@Override
-	public void save(Workshop entity) {
-		// TODO Auto-generated method stub
-		super.save(entity);
-	}
-
-	@Override
-	public void saveOrUpdate(Workshop entity) {
-		// TODO Auto-generated method stub
-		super.saveOrUpdate(entity);
-	}
-
+	
 	@Override
 	public void update(Workshop entity) {
 		// TODO Auto-generated method stub

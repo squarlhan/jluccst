@@ -11,7 +11,6 @@ import com.boan.rees.group.model.*;
  * @author Guiyun Yang
  * @version 1.0.0
  */
-@Repository("groupCompanyDao")
 public interface ICompanyDao extends IBaseDao<Company,String>{
 	
 	

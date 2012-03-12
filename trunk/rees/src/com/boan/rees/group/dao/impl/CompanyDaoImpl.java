@@ -21,30 +21,6 @@ import com.boan.rees.group.model.Company;
 public class CompanyDaoImpl extends BaseDao<Company,String> implements ICompanyDao{
 
 	@Override
-	protected Class<Company> getEntityClass() {
-		// TODO Auto-generated method stub
-		return super.getEntityClass();
-	}
-
-	@Override
-	public Session getSession() {
-		// TODO Auto-generated method stub
-		return super.getSession();
-	}
-
-	@Override
-	public void save(Company entity) {
-		// TODO Auto-generated method stub
-		super.save(entity);
-	}
-
-	@Override
-	public void saveOrUpdate(Company entity) {
-		// TODO Auto-generated method stub
-		super.saveOrUpdate(entity);
-	}
-
-	@Override
 	public void update(Company entity) {
 		// TODO Auto-generated method stub
 		super.update(entity);

@@ -25,32 +25,32 @@ public class UserServiceImpl implements IUserService {
 	
 	
 	@Autowired
-	@Qualifier("GroupUserDao")
-	private IUserDao groupuser;
+	@Qualifier("groupUserService")
+	private IUserDao groupUser;
 
 	@Override
 	public List<User> findAllGroupUser() {
 		// TODO Auto-generated method stub
-		return groupuser.findAll();
+		return groupUser.findAll();
 	}
 
 	@Override
 	public User get(String id) {
 		// TODO Auto-generated method stub
-		return groupuser.get(id);
+		return groupUser.get(id);
 	}
 
 	@Override
 	public void deleteGroupUser(String... ids) {
 		// TODO Auto-generated method stub
-		groupuser.delete(ids);
+		groupUser.delete(ids);
 
 	}
 
 	@Override
 	public void save(User table1) {
 		// TODO Auto-generated method stub
-		groupuser.save(table1);
+		groupUser.save(table1);
 
 	}
 

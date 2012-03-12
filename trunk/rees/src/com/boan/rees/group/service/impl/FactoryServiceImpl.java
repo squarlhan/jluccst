@@ -23,25 +23,25 @@ import com.boan.rees.group.service.IFactoryService;
 public class FactoryServiceImpl implements IFactoryService{
 
 	@Autowired
-	@Qualifier("IGroupFactoryDao")
-	private IFactoryDao groupfactorydao;
+	@Qualifier("groupFactoryService")
+	private IFactoryDao groupFactoryDao;
 	@Override
 	public List<Factory> findAllGroupFactory() {
 		// TODO Auto-generated method stub
-		return groupfactorydao.findAll();
+		return groupFactoryDao.findAll();
 	}
 
 	@Override
 	public Factory get(String id) {
 		// TODO Auto-generated method stub
-		return groupfactorydao.get(id);
+		return groupFactoryDao.get(id);
 	}
 
 	@Override
 	public void deleteGroupFactory(String... ids) {
 		// TODO Auto-generated method stub
 		
-		groupfactorydao.delete(ids);
+		groupFactoryDao.delete(ids);
 		
 	}
 
@@ -49,7 +49,7 @@ public class FactoryServiceImpl implements IFactoryService{
 	public void save(Factory table1) {
 		// TODO Auto-generated method stub
 		
-		groupfactorydao.save(table1);
+		groupFactoryDao.save(table1);
 		
 	}
 

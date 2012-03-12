@@ -12,7 +12,6 @@ import com.boan.rees.utils.dao.IBaseDao;
  * @version 1.0.0
  */
 
-@Repository("groupFactoryDao")
 public interface IFactoryDao extends IBaseDao<Factory,String>{
 
 }

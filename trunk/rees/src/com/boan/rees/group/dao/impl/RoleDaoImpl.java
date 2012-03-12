@@ -22,30 +22,7 @@ import com.boan.rees.utils.dao.impl.BaseDao;
 @Repository("goupRoleDao")
 public class RoleDaoImpl extends BaseDao<Role,String> implements IRoleDao{
 
-	@Override
-	protected Class<Role> getEntityClass() {
-		// TODO Auto-generated method stub
-		return super.getEntityClass();
-	}
-
-	@Override
-	public Session getSession() {
-		// TODO Auto-generated method stub
-		return super.getSession();
-	}
-
-	@Override
-	public void save(Role entity) {
-		// TODO Auto-generated method stub
-		super.save(entity);
-	}
-
-	@Override
-	public void saveOrUpdate(Role entity) {
-		// TODO Auto-generated method stub
-		super.saveOrUpdate(entity);
-	}
-
+	
 	@Override
 	public void update(Role entity) {
 		// TODO Auto-generated method stub
