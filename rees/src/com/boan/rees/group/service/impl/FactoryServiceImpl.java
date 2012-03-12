@@ -23,7 +23,7 @@ import com.boan.rees.group.service.IFactoryService;
 public class FactoryServiceImpl implements IFactoryService{
 
 	@Autowired
-	@Qualifier("groupFactoryService")
+	@Qualifier("groupFactoryDao")
 	private IFactoryDao groupFactoryDao;
 	@Override
 	public List<Factory> findAllGroupFactory() {

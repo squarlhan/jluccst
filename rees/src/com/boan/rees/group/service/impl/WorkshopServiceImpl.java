@@ -24,7 +24,7 @@ import com.boan.rees.group.dao.IWorkshopDao;
 public class WorkshopServiceImpl implements IWorkshopService {
 
 	@Autowired
-	@Qualifier("groupWorkshopService")
+	@Qualifier("groupWorkshopDao")
 	private IWorkshopDao groupWorkshopDao;
 	@Override
 	public List<Workshop> findAllGroupCompany() {

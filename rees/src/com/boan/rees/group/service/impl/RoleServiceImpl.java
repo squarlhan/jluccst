@@ -23,7 +23,7 @@ import com.boan.rees.group.dao.IRoleDao;
 public class RoleServiceImpl implements IRoleService{
 
 	@Autowired
-	@Qualifier("groupRoleService")
+	@Qualifier("groupRoleDao")
 	private IRoleDao groupRoleDao;
 	@Override
 	public List<Role> findAllGroupRole() {
