@@ -23,30 +23,7 @@ import com.boan.rees.group.dao.IUserDao;
 @Repository("groupUserDao")
 public class UserDaoImpl extends BaseDao<User,String> implements IUserDao{
 
-	@Override
-	protected Class<User> getEntityClass() {
-		// TODO Auto-generated method stub
-		return super.getEntityClass();
-	}
-
-	@Override
-	public Session getSession() {
-		// TODO Auto-generated method stub
-		return super.getSession();
-	}
-
-	@Override
-	public void save(User entity) {
-		// TODO Auto-generated method stub
-		super.save(entity);
-	}
-
-	@Override
-	public void saveOrUpdate(User entity) {
-		// TODO Auto-generated method stub
-		super.saveOrUpdate(entity);
-	}
-
+	
 	@Override
 	public void update(User entity) {
 		// TODO Auto-generated method stub

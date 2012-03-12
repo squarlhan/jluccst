@@ -12,7 +12,7 @@ import com.boan.rees.utils.dao.IBaseDao;
  * @version 1.0.0
  */
 
-@Repository("groupPopeRoleDao")
+
 public interface IPopedomRoleDao extends IBaseDao<PopedomRole,String>{
 
 }

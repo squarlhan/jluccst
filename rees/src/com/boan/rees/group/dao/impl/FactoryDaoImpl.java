@@ -24,30 +24,7 @@ import com.boan.rees.utils.dao.impl.BaseDao;
 @Repository("groupFactoryDao")
 public class FactoryDaoImpl extends BaseDao<Factory,String> implements IFactoryDao{
 
-	@Override
-	protected Class<Factory> getEntityClass() {
-		// TODO Auto-generated method stub
-		return super.getEntityClass();
-	}
-
-	@Override
-	public Session getSession() {
-		// TODO Auto-generated method stub
-		return super.getSession();
-	}
-
-	@Override
-	public void save(Factory entity) {
-		// TODO Auto-generated method stub
-		super.save(entity);
-	}
-
-	@Override
-	public void saveOrUpdate(Factory entity) {
-		// TODO Auto-generated method stub
-		super.saveOrUpdate(entity);
-	}
-
+	
 	@Override
 	public void update(Factory entity) {
 		// TODO Auto-generated method stub

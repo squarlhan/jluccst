@@ -26,30 +26,30 @@ public class CompanyServiceImpl implements ICompanyService{
 
 	
 	@Autowired
-	@Qualifier("IGroupCompanyDao")
-	private ICompanyDao groupcompanydao;
+	@Qualifier("groupCompanyService")
+	private ICompanyDao groupCompanyDao;
 	@Override
 	public List<Company> findAllGroupCompany() {
 		// TODO Auto-generated method stub
-		return groupcompanydao.findAll();
+		return groupCompanyDao.findAll();
 	}
 
 	@Override
 	public Company get(String id) {
 		// TODO Auto-generated method stub
-		return groupcompanydao.get(id);
+		return groupCompanyDao.get(id);
 	}
 
 	@Override
 	public void deleteGroupCompany(String... ids) {
 		// TODO Auto-generated method stub
-		groupcompanydao.delete(ids);
+		groupCompanyDao.delete(ids);
 	}
 
 	@Override
 	public void save(Company table1) {
 		// TODO Auto-generated method stub
-		groupcompanydao.save(table1);
+		groupCompanyDao.save(table1);
 	}
 
 }

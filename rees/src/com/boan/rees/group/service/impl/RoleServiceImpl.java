@@ -23,23 +23,23 @@ import com.boan.rees.group.dao.IRoleDao;
 public class RoleServiceImpl implements IRoleService{
 
 	@Autowired
-	@Qualifier("IGroupRoleDao")
-	private IRoleDao grouproledao;
+	@Qualifier("groupRoleService")
+	private IRoleDao groupRoleDao;
 	@Override
 	public List<Role> findAllGroupRole() {
 		// TODO Auto-generated method stub
-		return grouproledao.findAll();
+		return groupRoleDao.findAll();
 	}
 
 	@Override
 	public Role get(String id) {
 		// TODO Auto-generated method stub
-		return grouproledao.get(id);
+		return groupRoleDao.get(id);
 	}
 
 	@Override
 	public void deleteGroupCompany(String... ids) {
-		grouproledao.delete(ids);
+		groupRoleDao.delete(ids);
 		
 	}
 
@@ -47,7 +47,7 @@ public class RoleServiceImpl implements IRoleService{
 	public void save(Role table1) {
 		// TODO Auto-generated method stub
 		
-		grouproledao.save(table1);
+		groupRoleDao.save(table1);
 		
 	}
 

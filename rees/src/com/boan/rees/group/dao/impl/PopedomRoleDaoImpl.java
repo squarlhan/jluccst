@@ -23,30 +23,7 @@ import com.boan.rees.utils.dao.impl.BaseDao;
 @Repository("groupPopeRoleDao")
 public class PopedomRoleDaoImpl extends BaseDao<PopedomRole,String> implements IPopedomRoleDao{
 
-	@Override
-	protected Class<PopedomRole> getEntityClass() {
-		// TODO Auto-generated method stub
-		return super.getEntityClass();
-	}
-
-	@Override
-	public Session getSession() {
-		// TODO Auto-generated method stub
-		return super.getSession();
-	}
-
-	@Override
-	public void save(PopedomRole entity) {
-		// TODO Auto-generated method stub
-		super.save(entity);
-	}
-
-	@Override
-	public void saveOrUpdate(PopedomRole entity) {
-		// TODO Auto-generated method stub
-		super.saveOrUpdate(entity);
-	}
-
+	
 	@Override
 	public void update(PopedomRole entity) {
 		// TODO Auto-generated method stub

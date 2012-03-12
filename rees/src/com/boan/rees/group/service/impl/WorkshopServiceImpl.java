@@ -24,30 +24,30 @@ import com.boan.rees.group.dao.IWorkshopDao;
 public class WorkshopServiceImpl implements IWorkshopService {
 
 	@Autowired
-	@Qualifier("IGroupWorkshopDao")
-	private IWorkshopDao groupworkshopdao;
+	@Qualifier("groupWorkshopService")
+	private IWorkshopDao groupWorkshopDao;
 	@Override
 	public List<Workshop> findAllGroupCompany() {
 		// TODO Auto-generated method stub
-		return groupworkshopdao.findAll();
+		return groupWorkshopDao.findAll();
 	}
 
 	@Override
 	public Workshop get(String id) {
 		// TODO Auto-generated method stub
-		return groupworkshopdao.get(id);
+		return groupWorkshopDao.get(id);
 	}
 
 	@Override
 	public void deleteGroupCompany(String... ids) {
 		// TODO Auto-generated method stub
-        groupworkshopdao.delete(ids);
+        groupWorkshopDao.delete(ids);
 	}
 
 	@Override
 	public void save(Workshop table1) {
 		// TODO Auto-generated method stub
-        groupworkshopdao.save(table1);
+        groupWorkshopDao.save(table1);
 	}
 
 }
