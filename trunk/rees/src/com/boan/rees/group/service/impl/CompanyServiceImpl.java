@@ -26,7 +26,7 @@ public class CompanyServiceImpl implements ICompanyService{
 
 	
 	@Autowired
-	@Qualifier("groupCompanyService")
+	@Qualifier("groupCompanyDao")
 	private ICompanyDao groupCompanyDao;
 	@Override
 	public List<Company> findAllGroupCompany() {

@@ -25,30 +25,30 @@ import com.boan.rees.group.service.IPopedomRoleService;
 public class PopedomRoleServiceImpl implements IPopedomRoleService{
 
 	@Autowired
-	@Qualifier("groupPopedomRoleService")
-	private IPopedomRoleDao groupPoperoleDao;
+	@Qualifier("groupPopeRoleDao")
+	private IPopedomRoleDao groupPopeRoleDao;
 	@Override
 	public List<PopedomRole> findAllGroupPopedomRole() {
 		// TODO Auto-generated method stub
-		return groupPoperoleDao.findAll();
+		return groupPopeRoleDao.findAll();
 	}
 
 	@Override
 	public PopedomRole get(String id) {
 		// TODO Auto-generated method stub
-		return groupPoperoleDao.get(id);
+		return groupPopeRoleDao.get(id);
 	}
 
 	@Override
 	public void deleteGroupPopedomRole(String... ids) {
 		// TODO Auto-generated method stub
-		groupPoperoleDao.delete(ids);
+		groupPopeRoleDao.delete(ids);
 	}
 
 	@Override
 	public void save(PopedomRole table1) {
 		// TODO Auto-generated method stub
-		groupPoperoleDao.save(table1);
+		groupPopeRoleDao.save(table1);
 	}
 
 }
