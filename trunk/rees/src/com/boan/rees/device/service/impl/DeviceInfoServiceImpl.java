@@ -2,6 +2,7 @@ package com.boan.rees.device.service.impl;
 
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -9,9 +10,11 @@ import org.springframework.stereotype.Service;
 
 
 import com.boan.rees.demo.dao.IDemoDao;
+import com.boan.rees.demo.model.DemoModel;
 import com.boan.rees.device.dao.IDeviceInfoDao;
 import com.boan.rees.device.model.DeviceInfo;
 import com.boan.rees.device.service.*;
+import com.boan.rees.utils.page.Pagination;
 @Service("deviceInfoService")
 public class DeviceInfoServiceImpl  implements IDeviceInfoService {
 	@Autowired
@@ -19,27 +22,53 @@ public class DeviceInfoServiceImpl  implements IDeviceInfoService {
 	private IDeviceInfoDao deviceInfoDao;
 	
 	@Override
+	/**
+	 * 查找全部设备
+	 */
 	public List<DeviceInfo> findAllDeviceInfo() {
-		// TODO Auto-generated method stub
-		return null;
+		return deviceInfoDao.findAll();
+		
 	}
-
+	/**
+	 * 根据id查找设备
+	 */
 	@Override
 	public DeviceInfo get(String id) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		return deviceInfoDao.get(id);
 	}
+	/**
+	 * 根据id删除设备
+	 */
 
 	@Override
 	public void deleteDeviceInfo(String... ids) {
-		// TODO Auto-generated method stub
+		deviceInfoDao.delete(ids);
+		
 		
 	}
-
+	/**
+	 * 保存设备
+	 */
 	@Override
 	public void save(DeviceInfo table1) {
-		// TODO Auto-generated method stub
+		deviceInfoDao.save(table1);
 		
+	}
+	/**
+	 * 按分页查询设备
+	 */
+	@Override
+
+	public Pagination<DeviceInfo> findDeviceInfoForPage(Map<String, ?> values,Pagination<DeviceInfo> pagination){
+		
+		String hql = "from DeviceInfo";
+		List<DeviceInfo> data = deviceInfoDao.findForPage(hql, values, pagination.getStartIndex(), pagination.getPageSize());
+		hql = "select count(*) from DemoModel";
+		int totalRows = deviceInfoDao.findCountForPage(hql, values);
+		pagination.setTotalRows(totalRows);
+		pagination.setData(data);
+		return pagination;
 	}
 
 }
