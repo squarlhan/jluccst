@@ -5,8 +5,10 @@
 package com.boan.rees.report.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.boan.rees.report.model.PersonReport;
+import com.boan.rees.utils.page.Pagination;
 
 /**
  * 个人报表服务类接口
@@ -22,6 +24,8 @@ public interface IPersonReportService {
 	public void deletePersonReport(String... ids );
 	
 	public void save(PersonReport table1);
+	
+	public Pagination<PersonReport> findPersonReportForPage(Map<String, ?> values,Pagination<PersonReport> pagination);
 }
 
 

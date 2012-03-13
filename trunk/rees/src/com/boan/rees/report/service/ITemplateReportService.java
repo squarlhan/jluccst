@@ -5,8 +5,11 @@
 package com.boan.rees.report.service;
 
 import java.util.List;
+import java.util.Map;
 
+import com.boan.rees.report.model.PersonReport;
 import com.boan.rees.report.model.TemplateReport;
+import com.boan.rees.utils.page.Pagination;
 
 /**
  * 报表模板服务类接口
@@ -22,6 +25,8 @@ public interface ITemplateReportService {
 	public void deleteTemplateReport(String... ids );
 	
 	public void save(TemplateReport table1);
+	
+	public Pagination<TemplateReport> findTemplateReportForPage(Map<String, ?> values,Pagination<TemplateReport> pagination);	
 }
 
 
