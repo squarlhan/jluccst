@@ -5,8 +5,10 @@
 package com.boan.rees.group.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.boan.rees.group.model.Role;
+import com.boan.rees.utils.page.Pagination;
 
 /**
  * 角色服务类接口
@@ -15,13 +17,30 @@ import com.boan.rees.group.model.Role;
  */
 public interface IRoleService {
 	
-public List<Role> findAllGroupRole();
+	/**
+	 * 查找所有角色对象
+	 */
+	public List<Role> findAllGroupRole();
 	
+	/**
+	 * 获取角色
+	 */
 	public Role get(String id);
 	
+	/**
+	 * 删除角色
+	 */
 	public void deleteGroupCompany(String... ids );
 	
+	/**
+	 * 保存角色
+	 */
 	public void save(Role table1);
+	
+	/**
+	 * 按分页查找角色
+	 */
+	public Pagination<Role> findRoleForPage(Map<String, ?> values,Pagination<Role> pagination);
 
 }
 
