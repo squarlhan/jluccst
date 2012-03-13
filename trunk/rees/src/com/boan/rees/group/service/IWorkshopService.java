@@ -5,8 +5,10 @@
 package com.boan.rees.group.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.boan.rees.group.model.Workshop;
+import com.boan.rees.utils.page.Pagination;
 
 /**
  * 车间服务类接口
@@ -22,6 +24,6 @@ public List<Workshop> findAllGroupCompany();
 	public void deleteGroupCompany(String... ids );
 	
 	public void save(Workshop table1);
-
+	public Pagination<Workshop> findWorkshopForPage(Map<String, ?> values,Pagination<Workshop> pagination);
 }
 
