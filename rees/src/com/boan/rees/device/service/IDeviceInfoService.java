@@ -1,8 +1,11 @@
 package com.boan.rees.device.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.boan.rees.device.model.DeviceInfo;
+
+import com.boan.rees.utils.page.Pagination;
 /**
  * 设备服务类接口
  * @author jiangmeidi
@@ -10,11 +13,24 @@ import com.boan.rees.device.model.DeviceInfo;
  */
 
 public interface IDeviceInfoService {
+	/**
+	 * 查找全部设备
+	 */
     public List<DeviceInfo> findAllDeviceInfo();
-	
+    /**
+	 * 根据id获取设备
+	 */
 	public DeviceInfo get(String id);
-	
+	/**
+	 * 删除设备
+	 */
 	public void deleteDeviceInfo(String... ids );
-	
+	/**
+	 * 保存设备
+	 */
 	public void save(DeviceInfo table1);
+	/**
+	 * 按分页查找设备
+	 */
+	public Pagination<DeviceInfo> findDeviceInfoForPage(Map<String, ?> values,Pagination<DeviceInfo> pagination);
 }
