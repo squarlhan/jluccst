@@ -18,14 +18,29 @@ import com.boan.rees.utils.page.Pagination;
  */
 public interface ITemplateReportService {
 	
+	/**
+	 * 查询全部报表对象
+	 */
 	public List<TemplateReport> findAllTemplateReport();
 	
+	/**
+	 * 获取
+	 */
 	public TemplateReport get(String id);
 	
+	/**
+	 * 删除
+	 */
 	public void deleteTemplateReport(String... ids );
 	
+	/**
+	 * 保存
+	 */
 	public void save(TemplateReport table1);
 	
+	/**
+	 * 按分页查询
+	 */
 	public Pagination<TemplateReport> findTemplateReportForPage(Map<String, ?> values,Pagination<TemplateReport> pagination);	
 }
 
