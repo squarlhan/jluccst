@@ -10,8 +10,6 @@
 package com.boan.rees.forum.model;
 
 import java.io.Serializable;
-
-import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -26,30 +24,45 @@ import org.hibernate.annotations.GenericGenerator;
  * @version 1.0.0
  */
 @Entity
-@Table(name = "Table1")
+@Table(name = "NoticeInfo")
 public class NoticeInfo implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GenericGenerator(name="system-uuid", strategy="uuid")
 	@GeneratedValue(generator="system-uuid")
+	/**
+	 * 通知表实体主键
+	 */
 	private String id;
-
+	/**
+	 * 通知标题
+	 */
 	@Column(name = "NOTICE_TITLE")
 	private String noticeTitle;
-
+	/**
+	 * 通知内容
+	 */
 	@Column(name = "NOTICE_CONTENT")
 	private Integer noticeContent;
-	
+	/**
+	 * 通知发布时间
+	 */
 	@Column(name = "NOTICE_PUBLISHTIME")
 	private String noticePublishtime;
-	
+	/**
+	 * 通知过期时间
+	 */
 	@Column(name = "NOTICE_EXPIREDTIME")
 	private String noticeExpiredtime;
-	
+	/**
+	 * 通知发布人姓名
+	 */
 	@Column(name = "PUBLISHER")
 	private String publisher;
-	
+	/**
+	 * 通知发布人所在组织名称
+	 */
 	@Column(name = "PUBLISHER_DEPT")
 	private String publisherDept;
 

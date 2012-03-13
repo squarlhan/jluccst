@@ -1,5 +1,5 @@
 package com.boan.rees.forum.action;
 
-public class NoticeReadInfo {
+public class ForumIssueInfoAction {
 
 }

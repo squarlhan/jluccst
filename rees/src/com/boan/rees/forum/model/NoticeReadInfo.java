@@ -10,8 +10,6 @@
 package com.boan.rees.forum.model;
 
 import java.io.Serializable;
-
-import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -21,20 +19,25 @@ import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 
 /**
- * 已读通知Model实体
+ * 已读通知实体类
  * @author YangYJ
  * @version 1.0.0
  */
 @Entity
-@Table(name = "Table1")
+@Table(name = "NoticeReadInfo")
 public class NoticeReadInfo implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GenericGenerator(name="system-uuid", strategy="uuid")
 	@GeneratedValue(generator="system-uuid")
+	/**
+	 * 已读通知实体主键
+	 */
 	private String id;
-	
+	/**
+	 * 用户编号
+	 */
 	public String getId() {
 		return id;
 	}
