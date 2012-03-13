@@ -5,8 +5,11 @@
 package com.boan.rees.group.service;
 
 import java.util.List;
+import java.util.Map;
 
+import com.boan.rees.group.model.Company;
 import com.boan.rees.group.model.Factory;
+import com.boan.rees.utils.page.Pagination;
 
 /**
  * 工厂服务类接口
@@ -22,6 +25,9 @@ public List<Factory> findAllGroupFactory();
 	public void deleteGroupFactory(String... ids );
 	
 	public void save(Factory table1);
+
+	Pagination<Factory> findFactoryForPage(Map<String, ?> values,
+			Pagination<Factory> pagination);
 
 }
 

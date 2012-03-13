@@ -23,71 +23,7 @@ import com.boan.rees.utils.dao.impl.BaseDao;
 public class RoleDaoImpl extends BaseDao<Role,String> implements IRoleDao{
 
 	
-	@Override
-	public void update(Role entity) {
-		// TODO Auto-generated method stub
-		super.update(entity);
-	}
-
-	@Override
-	public void delete(Role entity) {
-		// TODO Auto-generated method stub
-		super.delete(entity);
-	}
-
-	@Override
-	public void delete(String id) {
-		// TODO Auto-generated method stub
-		super.delete(id);
-	}
-
-	@Override
-	public void delete(String[] ids) {
-		// TODO Auto-generated method stub
-		super.delete(ids);
-	}
-
-	@Override
-	public Role get(String id) {
-		// TODO Auto-generated method stub
-		return super.get(id);
-	}
-
-	@Override
-	public List<Role> get(Collection<String> ids) {
-		// TODO Auto-generated method stub
-		return super.get(ids);
-	}
-
-	@Override
-	public List<Role> findAll() {
-		// TODO Auto-generated method stub
-		return super.findAll();
-	}
-
-	@Override
-	public List<Role> findAll(String orderByProperty, boolean isAsc) {
-		// TODO Auto-generated method stub
-		return super.findAll(orderByProperty, isAsc);
-	}
-
-	@Override
-	public List<Role> findByProperty(String propertyName, Object value) {
-		// TODO Auto-generated method stub
-		return super.findByProperty(propertyName, value);
-	}
-
-	@Override
-	public <X> List<X> find(String hql, Object... values) {
-		// TODO Auto-generated method stub
-		return super.find(hql, values);
-	}
-
-	@Override
-	public <X> List<X> find(String hql, Map<String, ?> values) {
-		// TODO Auto-generated method stub
-		return super.find(hql, values);
-	}
+	
 
 }
 

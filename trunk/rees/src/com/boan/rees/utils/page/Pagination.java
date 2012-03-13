@@ -11,6 +11,8 @@ package com.boan.rees.utils.page;
 
 import java.util.List;
 
+import com.boan.rees.demo.model.DemoModel;
+
 /**
  * 分页实体
  * 
@@ -72,8 +74,8 @@ public class Pagination<T> {
 		return data;
 	}
 
-	public void setData(List<T> data) {
-		this.data = data;
+	public void setData(List<T> data2) {
+		this.data = data2;
 	}
 
 	/**
