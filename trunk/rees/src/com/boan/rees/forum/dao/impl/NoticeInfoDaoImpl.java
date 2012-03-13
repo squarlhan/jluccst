@@ -9,6 +9,9 @@
 
 package com.boan.rees.forum.dao.impl;
 
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
 import org.springframework.stereotype.Repository;
 
 import com.boan.rees.forum.dao.INoticeInfoDao;
@@ -22,7 +25,6 @@ import com.boan.rees.utils.dao.impl.BaseDao;
  */
 @Repository("noticeInfoDao")
 public class NoticeInfoDaoImpl extends BaseDao<NoticeInfo, String> implements INoticeInfoDao{
-
 }
 
 

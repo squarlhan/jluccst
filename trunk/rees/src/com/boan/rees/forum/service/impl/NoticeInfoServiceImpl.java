@@ -10,6 +10,7 @@
 package com.boan.rees.forum.service.impl;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -18,42 +19,69 @@ import org.springframework.stereotype.Service;
 import com.boan.rees.forum.dao.INoticeInfoDao;
 import com.boan.rees.forum.model.NoticeInfo;
 import com.boan.rees.forum.service.INoticeInfoService;
+import com.boan.rees.utils.page.Pagination;
 
 /**
  * 通知服务类接口实现
- * @author YangYJ
+ * @author yangyj
  * @version 1.0.0
  */
-@Service("noticeInfoService")
-public class NoticeInfoServiceImpl implements INoticeInfoService {
+@Service("NoticeInfoService")
+public abstract  class NoticeInfoServiceImpl implements INoticeInfoService {
 	
-	@Autowired
-	@Qualifier("noticeInfoDao")
+	@Qualifier("NoticeInfoDao")
 	private INoticeInfoDao noticeInfoDao;
 	
+	/**
+	 * 查询全部通知表对象
+	 */
+	
+	@Autowired
+	public List<NoticeInfo> findAllNoticeInfo(){
+		return noticeInfoDao.findAll();
+	}
+	
+	/**
+	 * 删除
+	 */
+	
 	@Override
-	public List<NoticeInfo> findAllDemoModel() {
-		// TODO Auto-generated method stub
-		return null;
+	public void deleteNoticeInfo(String... ids ){
+		noticeInfoDao.delete(ids);
 	}
 
-	@Override
-	public NoticeInfo get(String id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void deleteNoticeInfo(String... ids) {
-		// TODO Auto-generated method stub
-		
-	}
-
+	/**
+	 * 保存
+	 */
+	
 	@Override
 	public void save(NoticeInfo table1) {
-		// TODO Auto-generated method stub
-		
+		noticeInfoDao.save(table1);
 	}
 
+	/**
+	 * 获取主键
+	 */
 	
+	@Override
+	public NoticeInfo get(String id) {
+		return noticeInfoDao.get(id);
+	}
+	
+	/**
+	 * 按分页查询
+	 */
+	
+	@Override
+	public Pagination<NoticeInfo> findNoticeInfoForPage(Map<String, ?> values,Pagination<NoticeInfo> pagination){
+		
+		String hql = "from NoticeInfo";
+		List<NoticeInfo> data = noticeInfoDao.findForPage(hql, values, pagination.getStartIndex(), pagination.getPageSize());
+		hql = "select count(*) from NoticeInfo";
+		int totalRows = noticeInfoDao.findCountForPage(hql, values);
+		pagination.setTotalRows(totalRows);
+		pagination.setData(data);
+		return pagination;
+	}
 }
+

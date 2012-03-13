@@ -10,8 +10,6 @@
 package com.boan.rees.forum.model;
 
 import java.io.Serializable;
-
-import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -21,7 +19,7 @@ import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 
 /**
- * 论坛议题Model实体
+ * 论坛议题实体类
  * @author YangYJ
  * @version 1.0.0
  */
@@ -33,16 +31,35 @@ public class ForumIssueInfo implements Serializable {
 	@Id
 	@GenericGenerator(name="system-uuid", strategy="uuid")
 	@GeneratedValue(generator="system-uuid")
+	
+	/**
+	 * 论坛议题实体主键
+	 */
 	private String id;
 
+	/**
+	 * 议题名称
+	 */
 	@Column(name = "ISSUE_NAME")
 	private String issueName;
+	/**
+	 * 议题内容
+	 */
 	@Column(name = "ISSUE_CONTEIT")
 	private String issueConteit;
+	/**
+	 * 议题状态
+	 */
 	@Column(name = "ISSUE_Status")
 	private String issueStatus;
+	/**
+	 * 议题创建人
+	 */
 	@Column(name = "CREATOR")
 	private String creator;
+	/**
+	 * 议题创建时间
+	 */
 	@Column(name = "CREATE_TIME")
 	private String 	createTime;
 	public String getId() {
