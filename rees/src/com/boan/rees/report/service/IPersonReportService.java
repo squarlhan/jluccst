@@ -17,14 +17,29 @@ import com.boan.rees.utils.page.Pagination;
  */
 public interface IPersonReportService {
 	
+	/**
+	 * 查询全部报表对象
+	 */
 	public List<PersonReport> findAllPersonReport();
 	
+	/**
+	 * 获取
+	 */
 	public PersonReport get(String id);
 	
+	/**
+	 * 删除
+	 */
 	public void deletePersonReport(String... ids );
 	
+	/**
+	 * 保存
+	 */
 	public void save(PersonReport table1);
 	
+	/**
+	 * 按分页查询
+	 */
 	public Pagination<PersonReport> findPersonReportForPage(Map<String, ?> values,Pagination<PersonReport> pagination);
 }
 

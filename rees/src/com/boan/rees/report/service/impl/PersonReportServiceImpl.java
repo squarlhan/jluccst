@@ -54,7 +54,7 @@ public class PersonReportServiceImpl implements IPersonReportService {
 	}
 
 	/**
-	 * 获取主键
+	 * 获取
 	 */
 	@Override
 	public PersonReport get(String id) {

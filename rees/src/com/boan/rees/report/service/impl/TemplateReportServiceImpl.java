@@ -38,7 +38,7 @@ public class TemplateReportServiceImpl implements ITemplateReportService {
 	}
 
 	/**
-	 * 获取主键
+	 * 获取
 	 */
 	@Override
 	public TemplateReport get(String id) {
