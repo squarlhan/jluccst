@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">	
+<struts>
+	<!-- 公司Action -->
+    <package name="group_company" extends="struts-default" namespace="/">
+    	
+    </package>	
+    
+    <!-- 工厂Action -->
+    <package name="group_factory" extends="struts-default" namespace="/">
+    	
+    </package>	
+    
+    <!-- 权限Action -->
+    <package name="group_popedom_role" extends="struts-default" namespace="/">
+    	
+    </package>	
+    
+    <!-- 角色Action -->
+    <package name="group_role" extends="struts-default" namespace="/">
+    	
+    </package>	
+    
+     <!-- 用户Action -->
+    <package name="group_user" extends="struts-default" namespace="/">
+    	
+    </package>	
+    
+    <!-- 车间Action -->
+    <package name="group_workshop" extends="struts-default" namespace="/">
+    	
+    </package>	
+</struts>
