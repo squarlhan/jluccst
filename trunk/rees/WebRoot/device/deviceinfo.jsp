@@ -1,0 +1,111 @@
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib prefix="s" uri="/struts-tags"%>
+<%
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://"
+			+ request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
+%>
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+	<head>
+		<base href="<%=basePath%>">
+
+		<title>My JSP 'deviceinfo.jsp' starting page</title>
+
+		<meta http-equiv="pragma" content="no-cache">
+		<meta http-equiv="cache-control" content="no-cache">
+		<meta http-equiv="expires" content="0">
+		<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+		<meta http-equiv="description" content="This is my page">
+		<link type="text/css" rel="stylesheet" href="../../style.css" />
+		<script type="text/javascript" src="../../js/jquery-1.4.2.min.js"></script>
+		<script type="text/javascript">
+<!--
+	$(document).ready(function() {
+		$(".btn_2_3").click(function() {
+			parent.$("#windown-close").click();
+		});
+	});
+//-->
+</script>
+	</head>
+
+	<body>
+		<s:form id="form1" action="">
+		<table width="100%" border="0" cellspacing="5" cellpadding="0">
+			<tr>
+				<td>
+					<table width="100%" style="height: 100%;" border="0"
+						cellspacing="6" cellpadding="0">
+						<tr>
+							<td style="height: 36px;">
+								<table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#d5e4fd">
+
+									<tr>
+										<td height="26" align="right" bgcolor="#FFFFFF">
+											<strong>设备编号：</strong>
+										</td>
+										<td height="26" align="left" bgcolor="#FFFFFF">
+											<s:textfield id="txt_deviceNum" name="" style="width: 250px;"></s:textfield>
+										</td>
+									</tr>
+									<tr>
+										<td height="26" align="right" bgcolor="#FFFFFF">
+											<strong>设备类型：</strong>
+										</td>
+										<td height="26" align="left" bgcolor="#FFFFFF">
+											<s:textfield id="txt_deviceNum" name="" style="width: 250px;"></s:textfield>
+										</td>
+									</tr>
+									<tr>
+										<td height="26" align="right" bgcolor="#FFFFFF">
+											<strong>设备名称：</strong>
+										</td>
+										<td height="26" align="left" bgcolor="#FFFFFF">
+											<s:textfield id="txt_deviceNum" name="" style="width: 250px;"></s:textfield>
+										</td>
+									</tr>
+									<tr>
+										<td height="26" align="right" bgcolor="#FFFFFF">
+											<strong>设备型号：</strong>
+										</td>
+										<td height="26" align="left" bgcolor="#FFFFFF">
+											<s:textfield id="txt_deviceNum" name="" style="width: 250px;"></s:textfield>
+										</td>
+									</tr>
+									<tr>
+										<td height="26" align="right" bgcolor="#FFFFFF">
+											<strong>设备厂商：</strong>
+										</td>
+										<td height="26" align="left" bgcolor="#FFFFFF">
+											<s:textfield id="txt_deviceNum" name="" style="width: 250px;"></s:textfield>
+										</td>
+									</tr>
+									<tr>
+										<td height="26" align="right" bgcolor="#FFFFFF">
+											<strong>检测点数量：</strong>
+										</td>
+										<td height="26" align="left" bgcolor="#FFFFFF">
+											<s:textfield id="txt_deviceNum" name="" style="width: 250px;"></s:textfield>
+										</td>
+									</tr>
+									<tr>
+										<td height="26" colspan="2" align="center" bgcolor="#FFFFFF">
+											<input name="button" type="submit" class="btn_2_3" id="addBtn" value="确定">
+											&nbsp;&nbsp;
+											<input name="addBtn" type="button" class="btn_2_3" id="closeBtn" value="关闭">
+										</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+
+					</table>
+				</td>
+			</tr>
+		</table>
+		</s:form>
+	</body>
+</html>
