@@ -61,6 +61,9 @@ public class DeviceInfoAction extends ActionSupport{
 	 * @return
 	 */
 	public String toAddDevice(){
+		device.setDeptId("1");
+		device.setGroupId("1");
+	
 		service.save(device);
 		return SUCCESS;
 	}
