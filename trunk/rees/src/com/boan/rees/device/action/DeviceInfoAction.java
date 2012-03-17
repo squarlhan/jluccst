@@ -21,8 +21,21 @@ public class DeviceInfoAction extends ActionSupport{
 	
 	@Autowired
 	@Qualifier("deviceInfoService")
-	private IDeviceInfoService service1;
+	private IDeviceInfoService service;
+	/**
+	 * 页面对象
+	 */
+	private DeviceInfo device;
 	
+	
+	public DeviceInfo getDevice() {
+		return device;
+	}
+
+	public void setDevice(DeviceInfo device) {
+		this.device = device;
+	}
+
 	/**
 	 * 显示设备列表
 	 * @return
@@ -30,7 +43,7 @@ public class DeviceInfoAction extends ActionSupport{
 	public String openDevice(){
 //		Map<String,String> values =new HashMap<String, String>();
 //		values.put("dataInfo","90");
-		pagination = service1.findDeviceInfoForPage(null, pagination);
+		pagination = service.findDeviceInfoForPage(null, pagination);
 		return this.SUCCESS;
 	}
 
@@ -43,6 +56,18 @@ public class DeviceInfoAction extends ActionSupport{
 	}
 
 	
+	/**
+	 * 添加新设备
+	 * @return
+	 */
+	public String toAddDevice(){
+		service.save(device);
+		return SUCCESS;
+	}
+	
+	public String openAddDevice (){
+		return SUCCESS;
+	}
 
 
 }

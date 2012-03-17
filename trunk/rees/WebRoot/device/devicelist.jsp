@@ -32,7 +32,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<!--
 		$(function(){
 			$("#addbtn").click(function(){
-				parent.parent.parent.tipsWindown("添加设备","iframe:device/deviceadd.jsp","460","250","true","","true","no");
+				parent.parent.parent.tipsWindown("添加设备","iframe:openAddDeviceAction.action","460","250","true","","true","no");
 			});
 			$("#editbtn").click(function(){
 				parent.parent.parent.tipsWindown("修改设备","iframe:sysmanage/groupinfo.html","460","250","true","","true","no");
@@ -53,7 +53,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <td valign="top"><table width="100%" border="0" cellspacing="5" cellpadding="0">
       <tr>
         <td>
-		    <input name="button" type="button" class="btn_4" id="addbtn" value="添加" >
+       		<input name="button" type="button" class="btn_4" id="addbtn" value="添加" >
     		<input name="button" type="button" class="btn_4" id="editbtn" value="修改" >
     		<input name="button" type="button" class="btn_4" id="editbtn" value="添加阈值参数" >
             <input name="button" type="button" class="btn_4" id="editpointbtn" value="修改监控点" >
