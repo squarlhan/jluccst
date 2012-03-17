@@ -8,5 +8,13 @@
     		<result name="success">/device/devicelist.jsp</result>
     		<result name="input">/device/devicelist.jsp</result>
     	</action>
+    	<action name="openAddDeviceAction" class="deviceInfoAction" method="openAddDevice ">
+    		<result name="success">/device/deviceadd.jsp</result>
+    		<result name="input">/device/deviceadd.jsp</result>
+    	</action>
+    	 <action name="toAddDeviceAction" class="deviceInfoAction" method="toAddDevice">
+             <result name="success">/device/deviceadd.jsp</result>
+            <result name="input">/device/deviceadd.jsp</result>
+        </action>
     </package>	
 </struts>
