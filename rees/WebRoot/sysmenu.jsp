@@ -1,4 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%@ taglib prefix="j" uri="/script-tags"%>
 <%
@@ -16,89 +17,115 @@
 	 * Modified Time：
 	 * Modified Explain：
 	 */
-	response.setHeader( "Pragma", "No-cache" );
-	response.setHeader( "Cache-Control", "no-cache" );
-	response.setHeader( "Expires", "0" );
-	request.setCharacterEncoding( "utf-8" );
+	response.setHeader("Pragma", "No-cache");
+	response.setHeader("Cache-Control", "no-cache");
+	response.setHeader("Expires", "0");
+	request.setCharacterEncoding("utf-8");
 	String path = request.getContextPath();
 %>
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title></title>
-<j:scriptlink css="true" jquerylib="true"/>
-<script type="text/javascript">
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title></title>
+		<j:scriptlink css="true" jquerylib="true" />
+		<script type="text/javascript">
 <!--
 	$(document).ready(function() {
-		var ifrHeight = $("#leftFrame",parent.parent.document).height();
-		var ifrHeightTemp = ifrHeight - 199;
-		$("#menuArea").height( ifrHeightTemp );
+		var ifrHeight = $("#leftFrame", parent.parent.document).height();
+		var ifrHeightTemp = ifrHeight - 50;
+		$("#menuArea").height(ifrHeightTemp);
 	});
-	$(window).resize(function(){
-		var ifrHeight = $("#leftFrame",parent.parent.document).height();
-		var ifrHeightTemp = ifrHeight - 199;
-		$("#menuArea").height( ifrHeightTemp );
+	$(window).resize(function() {
+		var ifrHeight = $("#leftFrame", parent.parent.document).height();
+		var ifrHeightTemp = ifrHeight - 50;
+		$("#menuArea").height(ifrHeightTemp);
 	});
 //-->
-</script></head>
-<body>
-<table width="100%" border="0" cellspacing="5" cellpadding="0">
-  <tr>
-    <td style="background-image:url(images/jzywcd.jpg); height:35px;"></td>
-  </tr>
-  <tr>
-    <td align="center"><div id="menuArea" style="overflow:auto; display:block; ">
-        <table width="100%" border="0" cellspacing="0" cellpadding="0">
-          <tr>
-            <td height="24" align="left" background="images/menubg.jpg"><table width="100%" border="0" cellspacing="5" cellpadding="0">
-                <tr>
-                  <td width="40" align="right" style="padding-bottom:4px;"><img src="images/up.gif" width="10" height="12" /></td>
-                  <td><strong><a href="sysmanage/datamanage.html" target="mainFrame">数据管理</a></strong></td>
-                </tr>
-              </table></td>
-          </tr>
-          <tr>
-            <td align="left"><table width="100%" border="0" cellspacing="5" cellpadding="0">
-                <tr>
-                  <td width="40" align="right" style="padding-bottom:4px;"><img src="images/menuto.jpg" width="5" height="5" /></td>
-                  <td><a href="sysmanage/datamanage.html" target="mainFrame">数据管理</a></td>
-                </tr>
-                 <tr>
-                  <td width="40" align="right" style="padding-bottom:4px;"><img src="images/menuto.jpg" width="5" height="5" /></td>
-                  <td><a href="sysmanage/datamanageselect.html" target="mainFrame">数据查询</a></td>
-                </tr>
-              </table></td>
-          </tr>
-          <tr>
-            <td height="1" align="left" background="images/menubg2.jpg"></td>
-          </tr>
-          <tr>
-            <td height="1" align="left" background="images/menubg2.jpg"></td>
-          </tr>
-          <tr>
-            <td height="1" align="left" background="images/menubg2.jpg"></td>
-          </tr>
-          <tr>
-            <td height="1" align="left" background="images/menubg2.jpg"></td>
-          </tr>
-          <tr>
-            <td height="1" align="left" background="images/menubg2.jpg"></td>
-          </tr>
-          <tr>
-            <td height="1" align="left" background="images/menubg2.jpg"></td>
-          </tr>
-          <tr>
-            <td height="12" align="left"></td>
-          </tr>
-          <tr>
-            <td height="24" align="left" background="images/menubg.jpg"><table width="100%" border="0" cellspacing="5" cellpadding="0">
-                <tr>
-                  <td width="40" align="right" style="padding-bottom:4px;"><img src="images/up.gif" width="10" height="12" /></td>
-                  <td><strong>专家系统</strong></td>
-                </tr>
-              </table></td>
-          </tr>
-          <!--tr>
+</script>
+	</head>
+	<body>
+		<table width="100%" border="0" cellspacing="5" cellpadding="0">
+			<tr>
+				<td style="background-image: url(images/jzywcd.jpg); height: 35px;"></td>
+			</tr>
+			<tr>
+				<td align="center">
+					<div id="menuArea" style="overflow: auto; display: block;">
+						<table width="100%" border="0" cellspacing="0" cellpadding="0">
+							<tr>
+								<td height="24" align="left" background="images/menubg.jpg">
+									<table width="100%" border="0" cellspacing="5" cellpadding="0">
+										<tr>
+											<td width="40" align="right" style="padding-bottom: 4px;">
+												<img src="images/up.gif" width="10" height="12" />
+											</td>
+											<td>
+												<strong><a href="sysmanage/datamanage.html"
+													target="mainFrame">数据管理</a>
+												</strong>
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							<tr>
+								<td align="left">
+									<table width="100%" border="0" cellspacing="5" cellpadding="0">
+										<tr>
+											<td width="40" align="right" style="padding-bottom: 4px;">
+												<img src="images/menuto.jpg" width="5" height="5" />
+											</td>
+											<td>
+												<a href="sysmanage/datamanage.html" target="mainFrame">数据管理</a>
+											</td>
+										</tr>
+										<tr>
+											<td width="40" align="right" style="padding-bottom: 4px;">
+												<img src="images/menuto.jpg" width="5" height="5" />
+											</td>
+											<td>
+												<a href="sysmanage/datamanageselect.html" target="mainFrame">数据查询</a>
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							<tr>
+								<td height="1" align="left" background="images/menubg2.jpg"></td>
+							</tr>
+							<tr>
+								<td height="1" align="left" background="images/menubg2.jpg"></td>
+							</tr>
+							<tr>
+								<td height="1" align="left" background="images/menubg2.jpg"></td>
+							</tr>
+							<tr>
+								<td height="1" align="left" background="images/menubg2.jpg"></td>
+							</tr>
+							<tr>
+								<td height="1" align="left" background="images/menubg2.jpg"></td>
+							</tr>
+							<tr>
+								<td height="1" align="left" background="images/menubg2.jpg"></td>
+							</tr>
+							<tr>
+								<td height="12" align="left"></td>
+							</tr>
+							<tr>
+								<td height="24" align="left" background="images/menubg.jpg">
+									<table width="100%" border="0" cellspacing="5" cellpadding="0">
+										<tr>
+											<td width="40" align="right" style="padding-bottom: 4px;">
+												<img src="images/up.gif" width="10" height="12" />
+											</td>
+											<td>
+												<strong>专家系统</strong>
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							<!--tr>
             <td align="left"><table width="100%" border="0" cellspacing="5" cellpadding="0">
                 <tr>
                   <td width="40" align="right" style="padding-bottom:4px;"><img src="images/menuto.jpg" width="5" height="5" /></td>
@@ -117,147 +144,281 @@
                 </tr>
               </table></td>
           </tr-->
-          <tr>
-            <td align="left"><table width="100%" border="0" cellspacing="5" cellpadding="0">
-                <tr>
-                  <td width="40" align="right" style="padding-bottom:4px;"><img src="images/menuto.jpg" width="5" height="5" /></td>
-                  <td><a href="sysmanage/rulemanage.html" target="mainFrame">规则设置</a></td>
-                </tr>
-              </table></td>
-          </tr>
-          <tr>
-            <td height="1" align="left" background="images/menubg2.jpg"></td>
-          </tr>
-          <tr>
-            <td align="left"><table width="100%" border="0" cellspacing="5" cellpadding="0">
-                <tr>
-                  <td width="40" align="right" style="padding-bottom:4px;"><img src="images/menuto.jpg" width="5" height="5" /></td>
-                  <td><a href="sysmanage/errordiagnose.html" target="mainFrame">故障诊断</a></td>
-                </tr>
-              </table></td>
-          </tr>
-          <tr>
-            <td height="1" align="left" background="images/menubg2.jpg"></td>
-          </tr>
-          <tr>
-            <td align="left"><table width="100%" border="0" cellspacing="5" cellpadding="0">
-                <tr>
-                  <td width="40" align="right" style="padding-bottom:4px;"><img src="images/menuto.jpg" width="5" height="5" /></td>
-                  <td><a href="sysmanage/errorforecast.html" target="mainFrame">故障预测</a></td>
-                </tr>
-              </table></td>
-          </tr>
-          <tr>
-            <td height="1" align="left" background="images/menubg2.jpg"></td>
-          </tr>
-          <tr>
-            <td height="12" align="left"></td>
-          </tr>
-          <tr>
-            <td height="24" align="left" background="images/menubg.jpg"><table width="100%" border="0" cellspacing="5" cellpadding="0">
-                <tr>
-                  <td width="40" align="right" style="padding-bottom:4px;"><img src="images/up.gif" width="10" height="12" /></td>
-                  <td><strong>报表管理</strong></td>
-                </tr>
-              </table></td>
-          </tr>
-          <tr>
-            <td align="left"><table width="100%" border="0" cellspacing="5" cellpadding="0">
-                <tr>
-                  <td width="40" align="right" style="padding-bottom:4px;"><img src="images/menuto.jpg" width="5" height="5" /></td>
-                  <td><a href="sysmanage/worksummarize.html" target="mainFrame">个人报表</a></td>
-                </tr>
-                <tr>
-                  <td width="40" align="right" style="padding-bottom:4px;"><img src="images/menuto.jpg" width="5" height="5" /></td>
-                  <td><a href="sysmanage/worksummarizeselect.html" target="mainFrame">报表查询</a></td>
-                </tr>
-              </table></td>
-          </tr>
-          
-          <tr>
-            <td height="1" align="left" background="images/menubg2.jpg"></td>
-          </tr>
-          <tr>
-            <td height="12" align="left"></td>
-          </tr>
-          <tr>
-            <td height="24" align="left" background="images/menubg.jpg"><table width="100%" border="0" cellspacing="5" cellpadding="0">
-                <tr>
-                  <td width="40" align="right" style="padding-bottom:4px;"><img src="images/up.gif" width="10" height="12" /></td>
-                  <td><strong>论坛区</strong></td>
-                </tr>
-              </table></td>
-          </tr>
-          <tr>
-            <td align="left"><table width="100%" border="0" cellspacing="5" cellpadding="0">
-                <tr>
-                  <td width="40" align="right" style="padding-bottom:4px;"><img src="images/menuto.jpg" width="5" height="5" /></td>
-                  <td><a href="bbs/bbslist.html" target="mainFrame">论坛区1</a></td>
-                </tr>
-<tr>
-                  <td width="40" align="right" style="padding-bottom:4px;"><img src="images/menuto.jpg" width="5" height="5" /></td>
-                  <td><a href="bbs/bbsinfo.html" target="mainFrame">论坛区2</a></td>
-                </tr>
-              </table></td>
-          </tr>
-          
-          <tr>
-            <td height="1" align="left" background="images/menubg2.jpg"></td>
-          </tr>
-          <tr>
-            <td height="1" align="left" background="images/menubg2.jpg"></td>
-          </tr>
-          <tr>
-            <td height="1" align="left" background="images/menubg2.jpg"></td>
-          </tr>
-          <tr>
-            <td height="1" align="left" background="images/menubg2.jpg"></td>
-          </tr>
-          <tr>
-            <td height="12" align="left"></td>
-          </tr>
-          <tr>
-            <td height="24" align="left" background="images/menubg.jpg"><table width="100%" border="0" cellspacing="5" cellpadding="0">
-                <tr>
-                  <td width="40" align="right" style="padding-bottom:4px;"><img src="images/up.gif" width="10" height="12" /></td>
-                  <td><strong>系统管理</strong></td>
-                </tr>
-              </table></td>
-          </tr>
-          <tr>
-            <td align="left"><table width="100%" border="0" cellspacing="5" cellpadding="0">
-                <tr>
-                  <td width="40" align="right" style="padding-bottom:4px;"><img src="images/menuto.jpg" width="5" height="5" /></td>
-                  <td><a href="sysmanage/groupmanage.html" target="mainFrame">设备管理</a></td>
-                </tr>
-              </table></td>
-          </tr>
-          <tr>
-            <td height="1" align="left" background="images/menubg2.jpg"></td>
-          </tr>
-          <tr>
-            <td align="left"><table width="100%" border="0" cellspacing="5" cellpadding="0">
-                <tr>
-                  <td width="40" align="right" style="padding-bottom:4px;"><img src="images/menuto.jpg" width="5" height="5" /></td>
-                  <td><a href="sysmanage/usermanage.html" target="mainFrame">权限管理</a></td>
-                </tr>
-          
-          
-          
-              </table></td>
-          </tr>
-          <tr>
-            <td height="1" align="left" background="images/menubg2.jpg"></td>
-          </tr>
+							<tr>
+								<td align="left">
+									<table width="100%" border="0" cellspacing="5" cellpadding="0">
+										<tr>
+											<td width="40" align="right" style="padding-bottom: 4px;">
+												<img src="images/menuto.jpg" width="5" height="5" />
+											</td>
+											<td>
+												<a href="sysmanage/rulemanage.html" target="mainFrame">规则设置</a>
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							<tr>
+								<td height="1" align="left" background="images/menubg2.jpg"></td>
+							</tr>
+							<tr>
+								<td align="left">
+									<table width="100%" border="0" cellspacing="5" cellpadding="0">
+										<tr>
+											<td width="40" align="right" style="padding-bottom: 4px;">
+												<img src="images/menuto.jpg" width="5" height="5" />
+											</td>
+											<td>
+												<a href="sysmanage/errordiagnose.html" target="mainFrame">故障诊断</a>
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							<tr>
+								<td height="1" align="left" background="images/menubg2.jpg"></td>
+							</tr>
+							<tr>
+								<td align="left">
+									<table width="100%" border="0" cellspacing="5" cellpadding="0">
+										<tr>
+											<td width="40" align="right" style="padding-bottom: 4px;">
+												<img src="images/menuto.jpg" width="5" height="5" />
+											</td>
+											<td>
+												<a href="sysmanage/errorforecast.html" target="mainFrame">故障预测</a>
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							<tr>
+								<td height="1" align="left" background="images/menubg2.jpg"></td>
+							</tr>
+							<tr>
+								<td height="12" align="left"></td>
+							</tr>
+							<tr>
+								<td height="24" align="left" background="images/menubg.jpg">
+									<table width="100%" border="0" cellspacing="5" cellpadding="0">
+										<tr>
+											<td width="40" align="right" style="padding-bottom: 4px;">
+												<img src="images/up.gif" width="10" height="12" />
+											</td>
+											<td>
+												<strong>报表管理</strong>
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							<tr>
+								<td align="left">
+									<table width="100%" border="0" cellspacing="5" cellpadding="0">
+										<tr>
+											<td width="40" align="right" style="padding-bottom: 4px;">
+												<img src="images/menuto.jpg" width="5" height="5" />
+											</td>
+											<td>
+												<a href="sysmanage/worksummarize.html" target="mainFrame">个人报表</a>
+											</td>
+										</tr>
+										<tr>
+											<td width="40" align="right" style="padding-bottom: 4px;">
+												<img src="images/menuto.jpg" width="5" height="5" />
+											</td>
+											<td>
+												<a href="sysmanage/worksummarizeselect.html"
+													target="mainFrame">报表查询</a>
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
 
-          <tr>
-            <td height="1" align="left" background="images/menubg2.jpg"></td>
-          </tr>
-          <tr>
-            <td height="1" align="left" background="images/menubg2.jpg"></td>
-          </tr>
-          <tr>
-            <td height="24" align="left" background="images/menubg.jpg"></td>
-</table>
-</body>
+							<tr>
+								<td height="1" align="left" background="images/menubg2.jpg"></td>
+							</tr>
+							<tr>
+								<td height="12" align="left"></td>
+							</tr>
+							<tr>
+								<td height="24" align="left" background="images/menubg.jpg">
+									<table width="100%" border="0" cellspacing="5" cellpadding="0">
+										<tr>
+											<td width="40" align="right" style="padding-bottom: 4px;">
+												<img src="images/up.gif" width="10" height="12" />
+											</td>
+											<td>
+												<strong>论坛区</strong>
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							<tr>
+								<td align="left">
+									<table width="100%" border="0" cellspacing="5" cellpadding="0">
+										<tr>
+											<td width="40" align="right" style="padding-bottom: 4px;">
+												<img src="images/menuto.jpg" width="5" height="5" />
+											</td>
+											<td>
+												<a href="bbs/bbslist.html" target="mainFrame">论坛区1</a>
+											</td>
+										</tr>
+										<tr>
+											<td width="40" align="right" style="padding-bottom: 4px;">
+												<img src="images/menuto.jpg" width="5" height="5" />
+											</td>
+											<td>
+												<a href="bbs/bbsinfo.html" target="mainFrame">论坛区2</a>
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+
+							<tr>
+								<td height="1" align="left" background="images/menubg2.jpg"></td>
+							</tr>
+							<tr>
+								<td height="1" align="left" background="images/menubg2.jpg"></td>
+							</tr>
+							<tr>
+								<td height="1" align="left" background="images/menubg2.jpg"></td>
+							</tr>
+							<tr>
+								<td height="1" align="left" background="images/menubg2.jpg"></td>
+							</tr>
+							<tr>
+								<td height="12" align="left"></td>
+							</tr>
+							<tr>
+								<td height="24" align="left" background="images/menubg.jpg">
+									<table width="100%" border="0" cellspacing="5" cellpadding="0">
+										<tr>
+											<td width="40" align="right" style="padding-bottom: 4px;">
+												<img src="images/up.gif" width="10" height="12" />
+											</td>
+											<td>
+												<strong>系统管理</strong>
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							<tr>
+								<td align="left">
+									<table width="100%" border="0" cellspacing="5" cellpadding="0">
+										<tr>
+											<td width="40" align="right" style="padding-bottom: 4px;">
+												<img src="images/menuto.jpg" width="5" height="5" />
+											</td>
+											<td>
+												<a href="sysmanage/usermanage.html" target="mainFrame">公司管理</a>
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							<tr>
+								<td height="1" align="left" background="images/menubg2.jpg"></td>
+							</tr>
+							<tr>
+								<td align="left">
+									<table width="100%" border="0" cellspacing="5" cellpadding="0">
+										<tr>
+											<td width="40" align="right" style="padding-bottom: 4px;">
+												<img src="images/menuto.jpg" width="5" height="5" />
+											</td>
+											<td>
+												<a href="sysmanage/usermanage.html" target="mainFrame">工厂管理</a>
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							<tr>
+								<td height="1" align="left" background="images/menubg2.jpg"></td>
+							</tr>
+							<tr>
+								<td align="left">
+									<table width="100%" border="0" cellspacing="5" cellpadding="0">
+										<tr>
+											<td width="40" align="right" style="padding-bottom: 4px;">
+												<img src="images/menuto.jpg" width="5" height="5" />
+											</td>
+											<td>
+												<a href="sysmanage/usermanage.html" target="mainFrame">车间管理</a>
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							<tr>
+								<td height="1" align="left" background="images/menubg2.jpg"></td>
+							</tr>
+							<tr>
+								<td align="left">
+									<table width="100%" border="0" cellspacing="5" cellpadding="0">
+										<tr>
+											<td width="40" align="right" style="padding-bottom: 4px;">
+												<img src="images/menuto.jpg" width="5" height="5" />
+											</td>
+											<td>
+												<a href="sysmanage/groupmanage.html" target="mainFrame">设备管理</a>
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							<tr>
+								<td height="1" align="left" background="images/menubg2.jpg"></td>
+							</tr>
+							<tr>
+								<td align="left">
+									<table width="100%" border="0" cellspacing="5" cellpadding="0">
+										<tr>
+											<td width="40" align="right" style="padding-bottom: 4px;">
+												<img src="images/menuto.jpg" width="5" height="5" />
+											</td>
+											<td>
+												<a href="sysmanage/usermanage.html" target="mainFrame">用户管理</a>
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							<tr>
+								<td height="1" align="left" background="images/menubg2.jpg"></td>
+							</tr>
+							<tr>
+								<td align="left">
+									<table width="100%" border="0" cellspacing="5" cellpadding="0">
+										<tr>
+											<td width="40" align="right" style="padding-bottom: 4px;">
+												<img src="images/menuto.jpg" width="5" height="5" />
+											</td>
+											<td>
+												<a href="sysmanage/usermanage.html" target="mainFrame">权限分配</a>
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							<tr>
+								<td height="1" align="left" background="images/menubg2.jpg"></td>
+							</tr>
+
+							<tr>
+								<td height="1" align="left" background="images/menubg2.jpg"></td>
+							</tr>
+							<tr>
+								<td height="1" align="left" background="images/menubg2.jpg"></td>
+							</tr>
+							<tr>
+								<td height="24" align="left" background="images/menubg.jpg"></td>
+						</table>
+	</body>
 </html>
