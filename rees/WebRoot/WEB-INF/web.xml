@@ -85,6 +85,6 @@
 	</filter-mapping>
 
 	<welcome-file-list>
-		<welcome-file>login.html</welcome-file>
+		<welcome-file>default.jsp</welcome-file>
 	</welcome-file-list>
 </web-app>
