@@ -1,0 +1,21 @@
+Œª÷√£∫Windows-Preferences-Java-Code Style-Code Tempaltes-New Java files
+
+${filecomment}
+/**
+ * Copyright (c) ${year} Changchun XXX Co. Ltd.
+ * All right reserved.
+ * History
+ */
+/*
+ * @(#)${file_name} 1.1 ${date}
+ */
+
+${package_declaration}
+
+${typecomment}
+/**
+ * XXX ¿‡
+ * @author XXX
+ * @version 1.0.0
+ */
+${type_declaration}
