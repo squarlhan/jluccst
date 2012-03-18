@@ -17,33 +17,34 @@ function Node(id, pid, name, url, title, target, icon, iconOpen, open) {
 };
 
 // Tree object
-function dTree(objName) {
+function dTree(objName, contentPath) {
 	this.config = {
-		target					: null,
-		folderLinks			: true,
-		useSelection		: true,
-		useCookies			: true,
-		useLines				: true,
-		useIcons				: true,
-		useStatusText		: false,
+		target			: null,
+		folderLinks		: true,
+		useSelection	: true,
+		useCookies		: true,
+		useLines		: true,
+		useIcons		: true,
+		useStatusText	: false,
 		closeSameLevel	: false,
-		inOrder					: false
+		inOrder			: false,
+		contentPath		: true
 	}
 	this.icon = {
-		root				: '../js/tree/img/base.gif',
-		folder			: '../js/tree/img/folder.gif',
-		folderOpen	: '../js/tree/img/folderopen.gif',
-		node				: '../js/tree/img/page.gif',
-		empty				: '../js/tree/img/empty.gif',
-		line				: '../js/tree/img/line.gif',
-		join				: '../js/tree/img/join.gif',
-		joinBottom	: '../js/tree/img/joinbottom.gif',
-		plus				: '../js/tree/img/plus.gif',
-		plusBottom	: '../js/tree/img/plusbottom.gif',
-		minus				: '../js/tree/img/minus.gif',
-		minusBottom	: '../js/tree/img/minusbottom.gif',
-		nlPlus			: '../js/tree/img/nolines_plus.gif',
-		nlMinus			: '../js/tree/img/nolines_minus.gif'
+		root			: contentPath+ '/js/tree/img/base.gif',
+		folder			: contentPath+ '/js/tree/img/folder.gif',
+		folderOpen		: contentPath+ '/js/tree/img/folderopen.gif',
+		node			: contentPath+ '/js/tree/img/page.gif',
+		empty			: contentPath+ '/js/tree/img/empty.gif',
+		line			: contentPath+ '/js/tree/img/line.gif',
+		join			: contentPath+ '/js/tree/img/join.gif',
+		joinBottom		: contentPath+ '/js/tree/img/joinbottom.gif',
+		plus			: contentPath+ '/js/tree/img/plus.gif',
+		plusBottom		: contentPath+ '/js/tree/img/plusbottom.gif',
+		minus			: contentPath+ '/js/tree/img/minus.gif',
+		minusBottom		: contentPath+ '/js/tree/img/minusbottom.gif',
+		nlPlus			: contentPath+ '/js/tree/img/nolines_plus.gif',
+		nlMinus			: contentPath+ '/js/tree/img/nolines_minus.gif'
 	};
 	this.obj = objName;
 	this.aNodes = [];
