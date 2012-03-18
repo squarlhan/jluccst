@@ -90,8 +90,7 @@ public class ScriptJsTag extends SimpleTagSupport
 		if( "true".equalsIgnoreCase( tree ))
 		{
 			getJspContext().getOut().write( "<!--css-->\r\n" );
-			getJspContext().getOut().write( "<link rel=\"stylesheet\" type=\"text/css\" href=\"" + contextPath + "/css/style.css\"/>\r\n" );
-			getJspContext().getOut().write( "<link rel=\"stylesheet\" type=\"text/css\" href=\"" + contextPath + "/css/font.css\"/>\r\n" );
+			getJspContext().getOut().write( "<script type=\"text/javascript\" src=\"" + contextPath + "/js/tree/dtree.js\"></script>\r\n" );
 		}
 		
 	}
