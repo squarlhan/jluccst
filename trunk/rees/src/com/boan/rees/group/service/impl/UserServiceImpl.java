@@ -23,46 +23,46 @@ import com.boan.rees.utils.page.Pagination;
  * @version 1.0.0
  */
 
-@Service("groupUserService")
+@Service("userService")
 public class UserServiceImpl implements IUserService {
 	
 	
 	@Autowired
-	@Qualifier("groupUserDao")
-	private IUserDao groupUserDao;
+	@Qualifier("userDao")
+	private IUserDao userDao;
 
 	@Override
 	public List<User> findAllGroupUser() {
 	
-		return groupUserDao.findAll();
+		return userDao.findAll();
 	}
 
 	@Override
 	public User get(String id) {
 		
-		return groupUserDao.get(id);
+		return userDao.get(id);
 	}
 
 	@Override
 	public void deleteGroupUser(String... ids) {
 		
-		groupUserDao.delete(ids);
+		userDao.delete(ids);
 
 	}
 
 	@Override
 	public void save(User table1) {
 		
-		groupUserDao.save(table1);
+		userDao.save(table1);
 
 	}
 	@Override
 	public Pagination<User> findUserForPage(Map<String, ?> values,Pagination<User> pagination){
 		
 		String hql = "from DemoModel";
-		List<User> data = groupUserDao.findForPage(hql, values, pagination.getStartIndex(), pagination.getPageSize());
+		List<User> data = userDao.findForPage(hql, values, pagination.getStartIndex(), pagination.getPageSize());
 		hql = "select count(*) from User";
-		int totalRows = groupUserDao.findCountForPage(hql, values);
+		int totalRows = userDao.findCountForPage(hql, values);
 		pagination.setTotalRows(totalRows);
 		pagination.setData(data);
 		return pagination;
