@@ -83,6 +83,11 @@ public class ScriptJsTag extends SimpleTagSupport
 	 */
 	private String jmessagebox;
 	
+	/**
+	 * jqueryTab插件
+	 */
+	private String tab;
+	
 	@Override
 	public void doTag() throws JspException, IOException
 	{
@@ -158,6 +163,11 @@ public class ScriptJsTag extends SimpleTagSupport
 		if( "true".equalsIgnoreCase( jmessagebox ))
 		{
 			getJspContext().getOut().write( "<script type=\"text/javascript\" src=\"" + contextPath + "/js/jmessagebox-1.0.1.js\"></script>\r\n" );
+		}
+		if( "true".equalsIgnoreCase( tab ))
+		{
+			getJspContext().getOut().write( "<link rel=\"stylesheet\" type=\"text/css\" href=\"" + contextPath + "/js/tab/tabs.css\"/>\r\n" );
+			getJspContext().getOut().write( "<script type=\"text/javascript\" src=\"" + contextPath + "/js/tab/jquery.tab.js\"></script>\r\n" );
 		}
 	}
 
@@ -265,5 +275,13 @@ public class ScriptJsTag extends SimpleTagSupport
 
 	public void setJmessagebox(String jmessagebox) {
 		this.jmessagebox = jmessagebox;
+	}
+
+	public String getTab() {
+		return tab;
+	}
+
+	public void setTab(String tab) {
+		this.tab = tab;
 	}
 }
