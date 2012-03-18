@@ -48,6 +48,40 @@ public class ScriptJsTag extends SimpleTagSupport
 	 */
 	private String tree;
 	
+	/**
+	 * 气泡提示插件
+	 */
+	private String poshytip;
+	
+	/**
+	 * jquery绑定插件
+	 */
+	private String livequery;
+	
+	/**
+	 * jqueryUI
+	 */
+	private String jqueryui;
+	
+	/**
+	 * 右键菜单
+	 */
+	private String contextmenu;
+	
+	/**
+	 * 弹出窗口
+	 */
+	private String tipswindow;
+	
+	/**
+	 * jquery界面布局框架
+	 */
+	private String jquerylayout;
+	
+	/**
+	 * jquery提示插件
+	 */
+	private String jmessagebox;
 	
 	@Override
 	public void doTag() throws JspException, IOException
@@ -71,6 +105,7 @@ public class ScriptJsTag extends SimpleTagSupport
 		{
 			getJspContext().getOut().write( "<!--jquery-lib-->\r\n" );
 			getJspContext().getOut().write( "<script type=\"text/javascript\" src=\"" + contextPath + "/js/jquery-1.4.2.min.js\"></script>\r\n" );
+			getJspContext().getOut().write( "<script type=\"text/javascript\" src=\"" + contextPath + "/js/external/bgiframe/jquery.bgiframe.js\"></script>\r\n" );
 		}
 		if( "true".equalsIgnoreCase( validate ))
 		{
@@ -90,7 +125,40 @@ public class ScriptJsTag extends SimpleTagSupport
 			getJspContext().getOut().write( "<link rel=\"stylesheet\" type=\"text/css\" href=\"" + contextPath + "/js/tree/dtree.css\"/>\r\n" );
 			getJspContext().getOut().write( "<script type=\"text/javascript\" src=\"" + contextPath + "/js/tree/dtree.js\"></script>\r\n" );
 		}
-		
+		if( "true".equalsIgnoreCase( poshytip ))
+		{
+			getJspContext().getOut().write( "<link rel=\"stylesheet\" type=\"text/css\" href=\"" + contextPath + "/js/poshytip/tip-twitter.css\"/>\r\n" );
+			getJspContext().getOut().write( "<script type=\"text/javascript\" src=\"" + contextPath + "/js/poshytip/jquery.poshytip.min.js\"></script>\r\n" );
+		}
+		if( "true".equalsIgnoreCase( livequery ))
+		{
+			getJspContext().getOut().write( "<script type=\"text/javascript\" src=\"" + contextPath + "/js/jquery.livequery.min.js\"></script>\r\n" );
+		}
+		if( "true".equalsIgnoreCase( jqueryui ))
+		{
+			getJspContext().getOut().write( "<script type=\"text/javascript\" src=\"" + contextPath + "/js/ui/jquery.ui.core.js\"></script>\r\n" );
+			getJspContext().getOut().write( "<script type=\"text/javascript\" src=\"" + contextPath + "/js/ui/jquery.ui.widget.js\"></script>\r\n" );
+			getJspContext().getOut().write( "<script type=\"text/javascript\" src=\"" + contextPath + "/js/ui/jquery.ui.mouse.js\"></script>\r\n" );
+			getJspContext().getOut().write( "<script type=\"text/javascript\" src=\"" + contextPath + "/js/ui/jquery.ui.draggable.js\"></script>\r\n" );
+			getJspContext().getOut().write( "<script type=\"text/javascript\" src=\"" + contextPath + "/js/ui/jquery.ui.droppable.js\"></script>\r\n" );
+		}
+		if( "true".equalsIgnoreCase( contextmenu ))
+		{
+			getJspContext().getOut().write( "<script type=\"text/javascript\" src=\"" + contextPath + "/js/jquery.contextmenu.r2.packed.js\"></script>\r\n" );
+		}
+		if( "true".equalsIgnoreCase( tipswindow ))
+		{
+			getJspContext().getOut().write( "<link rel=\"stylesheet\" type=\"text/css\" href=\"" + contextPath + "/js/tipswindow/tipswindow.css\"/>\r\n" );
+			getJspContext().getOut().write( "<script type=\"text/javascript\" src=\"" + contextPath + "/js/tipswindow/tipswindow.js\"></script>\r\n" );
+		}
+		if( "true".equalsIgnoreCase( jquerylayout ))
+		{
+			getJspContext().getOut().write( "<script type=\"text/javascript\" src=\"" + contextPath + "/js/jquery.layout-latest.js\"></script>\r\n" );
+		}
+		if( "true".equalsIgnoreCase( jmessagebox ))
+		{
+			getJspContext().getOut().write( "<script type=\"text/javascript\" src=\"" + contextPath + "/js/jmessagebox-1.0.1.js\"></script>\r\n" );
+		}
 	}
 
 	public String getCss()
@@ -141,5 +209,61 @@ public class ScriptJsTag extends SimpleTagSupport
 	public void setTree( String tree )
 	{
 		this.tree = tree;
+	}
+
+	public String getPoshytip() {
+		return poshytip;
+	}
+
+	public void setPoshytip(String poshytip) {
+		this.poshytip = poshytip;
+	}
+
+	public String getLivequery() {
+		return livequery;
+	}
+
+	public void setLivequery(String livequery) {
+		this.livequery = livequery;
+	}
+
+	public String getJqueryui() {
+		return jqueryui;
+	}
+
+	public void setJqueryui(String jqueryui) {
+		this.jqueryui = jqueryui;
+	}
+
+	public String getContextmenu() {
+		return contextmenu;
+	}
+
+	public void setContextmenu(String contextmenu) {
+		this.contextmenu = contextmenu;
+	}
+
+	public String getTipswindow() {
+		return tipswindow;
+	}
+
+	public void setTipswindow(String tipswindow) {
+		this.tipswindow = tipswindow;
+	}
+
+	public String getJquerylayout() {
+		return jquerylayout;
+	}
+
+	public void setJquerylayout(String jquerylayout) {
+		this.jquerylayout = jquerylayout;
+	}
+
+	public String getJmessagebox() {
+		return jmessagebox;
+	}
+
+	public void setJmessagebox(String jmessagebox) {
+		this.jmessagebox = jmessagebox;
 	}
 }

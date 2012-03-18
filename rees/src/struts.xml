@@ -24,6 +24,8 @@
 	<!-- 例子配置 -->
 	<include file="com/boan/rees/demo/action/struts_demo.xml"></include>
 	
+	<!-- 界面框架 -->
+	<include file="struts_ui.xml"></include>
 	
 	<!-- 设备管理模块配置 -->
 	<include file="com/boan/rees/device/action/struts_device.xml"></include>
