@@ -10,8 +10,6 @@ package com.boan.rees.utils.script;
 
 import java.io.IOException;
 
-import javax.servlet.ServletContext;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.SimpleTagSupport;
 
@@ -20,7 +18,7 @@ import com.boan.rees.utils.path.PathUtil;
 /**
  * 页面中Css，Js库的引用类
  * 
- * @author JiangHY
+ * @author JiangHY, Leon
  * @version 1.0.0
  */
 public class ScriptJsTag extends SimpleTagSupport
@@ -31,9 +29,9 @@ public class ScriptJsTag extends SimpleTagSupport
 	private String css; 
 	
 	/**
-	 * 是否显示jquery-lib支持
+	 * 是否显示jquery支持
 	 */
-	private String jquerylib;
+	private String jquery;
 	
 	/**
 	 * 是否显示validate验证框架
@@ -69,7 +67,7 @@ public class ScriptJsTag extends SimpleTagSupport
 			getJspContext().getOut().write( "<meta http-equiv=\"X-UA-Compatible\" content=\"IE=EmulateIE7\" />\r\n" );
 			getJspContext().getOut().write( "<link rel=\"stylesheet\" type=\"text/css\" href=\"" + contextPath + "/css/style.css\"/>\r\n" );
 		}
-		if( "true".equalsIgnoreCase( jquerylib ))
+		if( "true".equalsIgnoreCase( jquery ))
 		{
 			getJspContext().getOut().write( "<!--jquery-lib-->\r\n" );
 			getJspContext().getOut().write( "<script type=\"text/javascript\" src=\"" + contextPath + "/js/jquery-1.4.2.min.js\"></script>\r\n" );
@@ -84,12 +82,12 @@ public class ScriptJsTag extends SimpleTagSupport
 		if( "true".equalsIgnoreCase( date ))
 		{
 			getJspContext().getOut().write( "<!--css-->\r\n" );
-			getJspContext().getOut().write( "<link rel=\"stylesheet\" type=\"text/css\" href=\"" + contextPath + "/css/style.css\"/>\r\n" );
-			getJspContext().getOut().write( "<link rel=\"stylesheet\" type=\"text/css\" href=\"" + contextPath + "/css/font.css\"/>\r\n" );
+			//getJspContext().getOut().write( "<link rel=\"stylesheet\" type=\"text/css\" href=\"" + contextPath + "/css/style.css\"/>\r\n" );
+			//getJspContext().getOut().write( "<link rel=\"stylesheet\" type=\"text/css\" href=\"" + contextPath + "/css/font.css\"/>\r\n" );
 		}
 		if( "true".equalsIgnoreCase( tree ))
 		{
-			getJspContext().getOut().write( "<!--css-->\r\n" );
+			getJspContext().getOut().write( "<link rel=\"stylesheet\" type=\"text/css\" href=\"" + contextPath + "/js/tree/dtree.css\"/>\r\n" );
 			getJspContext().getOut().write( "<script type=\"text/javascript\" src=\"" + contextPath + "/js/tree/dtree.js\"></script>\r\n" );
 		}
 		
@@ -105,14 +103,14 @@ public class ScriptJsTag extends SimpleTagSupport
 		this.css = css;
 	}
 
-	public String getJquerylib()
+	public String getJquery()
 	{
-		return jquerylib;
+		return jquery;
 	}
 
-	public void setJquerylib( String jquerylib )
+	public void setJquery( String jquery )
 	{
-		this.jquerylib = jquerylib;
+		this.jquery = jquery;
 	}
 
 	public String getValidate()
