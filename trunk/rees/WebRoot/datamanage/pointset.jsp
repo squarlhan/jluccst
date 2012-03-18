@@ -1,22 +1,13 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
+<%@ taglib prefix="j" uri="/script-tags"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html>
 <head>
 	<title>设置设备监测点</title>
 	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-1.4.2.min.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath}/js/poshytip/jquery.poshytip.min.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.livequery.min.js"></script>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/js/ui/jquery.ui.core.js"></script>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/js/ui/jquery.ui.widget.js"></script>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/js/ui/jquery.ui.mouse.js"></script>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/js/ui/jquery.ui.draggable.js"></script>
-    <script type="text/javascript" src="${pageContext.request.contextPath}/js/ui/jquery.ui.droppable.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery.contextmenu.r2.packed.js"></script>
-	<link rel="stylesheet" href="${pageContext.request.contextPath}/js/poshytip/tip-twitter.css" type="text/css" />
+	<j:scriptlink jquery="true" livequery="true" poshytip="true" contextmenu="true" jqueryui="true" />
 	<script type="text/javascript">
-		//<![CDATA[
 		$(function(){
 			//动态绑定检测点
 			$(".pointDiv").livequery(function () {
@@ -99,13 +90,12 @@
 			});
 			
 		});
-		//]]>
 	</script>
 	<style type="text/css">
 		body{ font-size: 12px; }
 		.pointDiv{ width:16px; height:16px; cursor: pointer; }
 		img{ border: none; }
-		#picture{ position:relative; top:0px; width:1280px; height:1024px; margin:0px auto; background:#FFF url('${pageContext.request.contextPath}/uploadfiles/deviceimages/20090818_06277f0092db2d35de230oYpx0YhDCIy.jpg1'); overflow:hidden; }
+		#picture{ position:relative; top:0px; width:1280px; height:1024px; margin:0px auto; background:#FFF url('${pageContext.request.contextPath}/uploadfiles/deviceimages/20090818_06277f0092db2d35de230oYpx0YhDCIy.jpg'); overflow:hidden; }
 		.contextMenu{ display:none; }
 	</style>
 </head>
