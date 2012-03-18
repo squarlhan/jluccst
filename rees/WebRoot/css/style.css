@@ -145,10 +145,10 @@ A:hover {
 	BORDER-LEFT: 0px;
 	BORDER-RIGHT: 0px;
 	BORDER-TOP: 0px;
-	FONT-SIZE: 14px;
+	FONT-SIZE: 12px;
 	HEIGHT: 21px;
 	text-align: center;
-	WIDTH: auto;
+	WIDTH: 66px;
 	padding-top: 4px;
 	background-repeat: no-repeat;
 }
@@ -159,7 +159,7 @@ A:hover {
 	BORDER-LEFT: 0px;
 	BORDER-RIGHT: 0px;
 	BORDER-TOP: 0px;
-	FONT-SIZE: 14px;
+	FONT-SIZE: 12px;
 	HEIGHT: 21px;
 	text-align: center;
 	WIDTH: 79px;
@@ -173,7 +173,7 @@ A:hover {
 	BORDER-LEFT: 0px;
 	BORDER-RIGHT: 0px;
 	BORDER-TOP: 0px;
-	FONT-SIZE: 14px;
+	FONT-SIZE: 12px;
 	HEIGHT: 21px;
 	text-align: center;
 	WIDTH: 103px;
