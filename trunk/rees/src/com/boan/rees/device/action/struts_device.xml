@@ -16,5 +16,22 @@
              <result name="success">/device/deviceadd.jsp</result>
             <result name="input">/device/deviceadd.jsp</result>
         </action>
-    </package>	
+    </package>
+    <package name="pointinfo" extends="struts-default" namespace="/datamanage">
+    	<action name="pointlist" class="pointInfoAction" method="pointInfoListByDeviceId">
+    		<result name="success">/datamanage/pointset.jsp</result>
+    		<result name="input">/datamanage/pointset.jsp</result>
+    	</action>
+    	<action name="positionset" class="com.boan.rees.device.action.PointInfoAction" method="positionSet">
+            <result name="success">/datamanage/pointset.jsp</result>
+        </action>
+    </package>
+    <package name="deviceAjax" extends="json-default" namespace="/datamanage">
+		<action name="positionsetajax" class="com.boan.rees.device.action.PointInfoAction" method="positionSet">
+            <result type="json"></result>
+        </action>
+        <action name="deletepointajax" class="com.boan.rees.device.action.PointInfoAction" method="deletePoint">
+            <result type="json"></result>
+        </action>
+	</package>
 </struts>

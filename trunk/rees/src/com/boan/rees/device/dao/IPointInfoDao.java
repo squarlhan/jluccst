@@ -8,6 +8,8 @@
  */
 
 package com.boan.rees.device.dao;
+import java.util.List;
+
 import com.boan.rees.device.model.PointInfo;
 import com.boan.rees.utils.dao.IBaseDao;
 /**
@@ -16,6 +18,6 @@ import com.boan.rees.utils.dao.IBaseDao;
  * @version 1.0.0
  */
 public interface IPointInfoDao extends IBaseDao<PointInfo, String>{
-
+	public List<PointInfo> findPointInfosByDeviceId(String deviceId);
 }
 

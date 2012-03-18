@@ -31,11 +31,20 @@ public interface IPointInfoService {
 	/**
 	 * 保存监控点
 	 */
-	public void save(PointInfo table1);
+	public void save(PointInfo pointInfo);
 
 	/**
 	 * 分页查找监控点
 	 */
 	public Pagination<PointInfo> findPointInfoForPage(Map<String, ?> values,
 			Pagination<PointInfo> pagination);
+
+	/**
+	 * 根据设备ID获得监测点数据对象列表
+	 * 
+	 * @param deviceId
+	 *            设备ID
+	 * @return
+	 */
+	public List<PointInfo> findPointInfosByDeviceId(String deviceId);
 }
