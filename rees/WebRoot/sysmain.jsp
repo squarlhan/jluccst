@@ -1,39 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
-<%@ taglib prefix="s" uri="/struts-tags"%>
-<%
-	/**
-	 * Copyright (c) 2010 Changchun Boan (BOAN) Co. Ltd.
-	 * All right reserved.
-	 */
-	/**
-	 * @author XXX
-	 * @version 1.0
-	 * @audit  
-	 */
-	/**
-	 * Modified Person：
-	 * Modified Time：
-	 * Modified Explain：
-	 */
-	response.setHeader( "Pragma", "No-cache" );
-	response.setHeader( "Cache-Control", "no-cache" );
-	response.setHeader( "Expires", "0" );
-	request.setCharacterEncoding( "utf-8" );
-	String path = request.getContextPath();
-%>
+<%@ taglib prefix="j" uri="/script-tags"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title></title>
-<link href="style.css"" rel="stylesheet" type="text/css" />
-<link href="tipswindow.css" rel="stylesheet" type="text/css" />
-<script type="text/javascript" src="js/jquery-1.4.2.min.js"></script>
-<script type="text/javascript" src="js/jquery.layout-latest.js"></script>
-<script type="text/javascript" src="js/external/bgiframe/jquery.bgiframe.js"></script>
-<script type="text/javascript" src="js/tipswindown.js"></script>
-<script type="text/javascript" src="js/jmessagebox-1.0.1.js"></script>
-<script type="text/javascript" src="js/jquery.messager.js"></script>
+<j:scriptlink css="true" jquery="true" jquerylayout="true" tipswindow="true" jmessagebox="true" />
 <script type="text/javascript">
 <!--
 var myLayout;
@@ -54,16 +26,15 @@ $( document ).ready( function() {
 		,spacing_closed:		8
 		,spacing_open:			8
 		,initClosed:			false
-		//,west__initClosed:		true
 	});
 });
 //-->
 </script>
 </head>
 <body>
-<iframe id="topFrame" name="topFrame" class="ui-layout-north" src="systop.jsp" frameborder="0" scrolling="no"></iframe>
-<iframe id="leftFrame" name="leftFrame" class="ui-layout-west" src="sysmenu.jsp" width="100%" height="100%" frameborder="0" scrolling="no"></iframe>
-<iframe id="mainFrame" name="mainFrame" class="ui-layout-center" src="sysdesktop.jsp" frameborder="0" scrolling="no"></iframe>
-<iframe id="bottomFrame" name="bottomFrame" class="ui-layout-south" src="sysbottom.jsp" width="100%" height="100%" frameborder="0" scrolling="no"></iframe>
+<iframe id="topFrame" name="topFrame" class="ui-layout-north" src="${pageContext.request.contextPath}/systop.action" frameborder="0" scrolling="no"></iframe>
+<iframe id="leftFrame" name="leftFrame" class="ui-layout-west" src="${pageContext.request.contextPath}/sysmenu.action" width="100%" height="100%" frameborder="0" scrolling="no"></iframe>
+<iframe id="mainFrame" name="mainFrame" class="ui-layout-center" src="${pageContext.request.contextPath}/blank.jsp" frameborder="0" scrolling="no"></iframe>
+<iframe id="bottomFrame" name="bottomFrame" class="ui-layout-south" src="${pageContext.request.contextPath}/sysbottom.action" width="100%" height="100%" frameborder="0" scrolling="no"></iframe>
 </body>
 </html>

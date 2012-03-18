@@ -27,7 +27,7 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<title></title>
-		<j:scriptlink css="true" jquerylib="true" />
+		<j:scriptlink css="true" jquery="true" />
 		<script type="text/javascript">
 <!--
 	$(document).ready(function() {
