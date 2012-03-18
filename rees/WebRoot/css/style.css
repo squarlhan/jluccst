@@ -140,7 +140,7 @@ A:hover {
 }
 .btn_2_3{
 	background-color: transparent;
-	BACKGROUND-IMAGE:  url(images/ico51.gif);
+	BACKGROUND-IMAGE:  url(../images/ico51.gif);
 	BORDER-BOTTOM: 0px;
 	BORDER-LEFT: 0px;
 	BORDER-RIGHT: 0px;
@@ -154,7 +154,7 @@ A:hover {
 }
 .btn_4{
 	background-color: transparent;
-	BACKGROUND-IMAGE:  url(images/ico52.gif);
+	BACKGROUND-IMAGE:  url(../images/ico52.gif);
 	BORDER-BOTTOM: 0px;
 	BORDER-LEFT: 0px;
 	BORDER-RIGHT: 0px;
@@ -168,7 +168,7 @@ A:hover {
 }
 .btn_5{
 	background-color: transparent;
-	BACKGROUND-IMAGE:  url(images/ico54.gif);
+	BACKGROUND-IMAGE:  url(../images/ico54.gif);
 	BORDER-BOTTOM: 0px;
 	BORDER-LEFT: 0px;
 	BORDER-RIGHT: 0px;
