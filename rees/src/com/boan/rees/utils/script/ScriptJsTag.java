@@ -77,9 +77,9 @@ public class ScriptJsTag extends SimpleTagSupport
 		if( "true".equalsIgnoreCase( validate ))
 		{
 			getJspContext().getOut().write( "<!--validate-->\r\n" );
-			getJspContext().getOut().write( "<script type=\"text/javascript\" src=\"" + contextPath + "/js/jquery-validate/jquery.validate.js\"></script>\r\n" );
-			getJspContext().getOut().write( "<script type=\"text/javascript\" src=\"" + contextPath + "/js/jquery-validate/localization/messages_cn.js\"></script>\r\n" );
-			getJspContext().getOut().write( "<script type=\"text/javascript\" src=\"" + contextPath + "/js/jquery-validate/custom-methods.js\"></script>\r\n" );
+			getJspContext().getOut().write( "<script type=\"text/javascript\" src=\"" + contextPath + "/js/jquery-validation-1.9.0/jquery.validate.js\"></script>\r\n" );
+			getJspContext().getOut().write( "<script type=\"text/javascript\" src=\"" + contextPath + "/js/jquery-validation-1.9.0/localization/messages_cn.js\"></script>\r\n" );
+			//getJspContext().getOut().write( "<script type=\"text/javascript\" src=\"" + contextPath + "/js/jquery-validation-1.9.0/custom-methods.js\"></script>\r\n" );
 		}
 		if( "true".equalsIgnoreCase( date ))
 		{
