@@ -39,6 +39,11 @@ public class UserAction extends ActionSupport
 	{
 		return "show-list";
 	}
+	
+	public String save()
+	{
+		return NONE;
+	}
 
 	public User getUser()
 	{
