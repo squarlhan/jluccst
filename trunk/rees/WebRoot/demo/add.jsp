@@ -1,5 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
+<%@ taglib prefix="j" uri="/script-tags"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -16,12 +17,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta http-equiv="expires" content="0">    
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
-	<link href="<%=basePath%>/style.css"" rel="stylesheet" type="text/css" />
-	<link rel="stylesheet" href="<%=basePath%>/tipswindow.css" type="text/css"></link>
-  	<script type="text/javascript" src="<%=basePath%>/js/jquery-1.4.2.min.js"></script>
-	<script type="text/javascript" src="<%=basePath%>/js/tipswindown.js"></script>
-	<script type="text/javascript" src="<%=basePath%>/js/jmessagebox-1.0.1.js"></script>
-	<script type="text/javascript" src="<%=basePath%>/js/jquery.messager.js"></script>
+	<j:scriptlink css="true" jquery="true" validate="true" />
 	<script type="text/javascript">
   	$(document).ready( function() {
   		$("#btn_save").click(function(){
