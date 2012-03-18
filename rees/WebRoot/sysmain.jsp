@@ -1,3 +1,26 @@
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ taglib prefix="s" uri="/struts-tags"%>
+<%
+	/**
+	 * Copyright (c) 2010 Changchun Boan (BOAN) Co. Ltd.
+	 * All right reserved.
+	 */
+	/**
+	 * @author XXX
+	 * @version 1.0
+	 * @audit  
+	 */
+	/**
+	 * Modified Person：
+	 * Modified Time：
+	 * Modified Explain：
+	 */
+	response.setHeader( "Pragma", "No-cache" );
+	response.setHeader( "Cache-Control", "no-cache" );
+	response.setHeader( "Expires", "0" );
+	request.setCharacterEncoding( "utf-8" );
+	String path = request.getContextPath();
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -38,9 +61,9 @@ $( document ).ready( function() {
 </script>
 </head>
 <body>
-<iframe id="topFrame" name="topFrame" class="ui-layout-north" src="systop.html" frameborder="0" scrolling="no"></iframe>
-<iframe id="leftFrame" name="leftFrame" class="ui-layout-west" src="sysmenu.html" width="100%" height="100%" frameborder="0" scrolling="no"></iframe>
-<iframe id="mainFrame" name="mainFrame" class="ui-layout-center" src="sysmanage/groupmanage.html" frameborder="0" scrolling="no"></iframe>
-<iframe id="bottomFrame" name="bottomFrame" class="ui-layout-south" src="sysbottom.html" width="100%" height="100%" frameborder="0" scrolling="no"></iframe>
+<iframe id="topFrame" name="topFrame" class="ui-layout-north" src="systop.jsp" frameborder="0" scrolling="no"></iframe>
+<iframe id="leftFrame" name="leftFrame" class="ui-layout-west" src="sysmenu.jsp" width="100%" height="100%" frameborder="0" scrolling="no"></iframe>
+<iframe id="mainFrame" name="mainFrame" class="ui-layout-center" src="mainpage.html" frameborder="0" scrolling="no"></iframe>
+<iframe id="bottomFrame" name="bottomFrame" class="ui-layout-south" src="sysbottom.jsp" width="100%" height="100%" frameborder="0" scrolling="no"></iframe>
 </body>
 </html>
