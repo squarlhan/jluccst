@@ -5,7 +5,21 @@
 <struts>
 	<!-- 论坛议题Action -->
     <package name="forum_issue" extends="struts-default" namespace="/">
-    	
+    	<!-- 用于打开添加页 -->
+    	<action name="openAddForumIssueInfoAction" class="forumIssueInfoAction" method="openAddForumIssueInfo">
+    		<result name="success">bbs/bbsinfo.jsp</result>
+    		<result name="input">bbs/bbsinfo2.jsp</result>
+    	</action>
+    	<!-- 执行添加 -->
+    	<action name="toAddForumIssueInfoAction" class="forumIssueInfoAction" method="toAddForumIssueInfo">
+    		<result name="success">bbs/bbsinfo.jsp</result>
+    		<result name="input">bbs/bbsinfo.jsp</result>
+    	</action>
+    	<!-- 显示列表页 -->
+    	<action name="openForumIssueInfoAction" class="forumIssueInfoAction" method="openForumIssueInfo">
+    		<result name="success">bbs/bbslist.jsp</result>
+    		<result name="input">bbs/bbslist.jsp</result>
+    	</action>
     </package>	
     
     <!-- 论坛交流信息Action -->
