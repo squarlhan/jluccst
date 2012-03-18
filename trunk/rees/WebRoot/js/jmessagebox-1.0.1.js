@@ -36,13 +36,13 @@ sample 3 :
 (function($){
 	$.extend({
 	jMessageBox : {
-		settings : {width: 300, title : '', bottomText : '', yesButtonText : '', noButtonText : '', cancelButtonText : '', focusOnShow : true},
+		settings : {width: 350, title : '', bottomText : '', yesButtonText : '', noButtonText : '', cancelButtonText : '', focusOnShow : true},
 		_init : function(){
 			var container = $('#jmessagebox_container');
 			if(container.length == 0){
-				$('body').append('<iframe style="display:none;position:absolute;z-index:9999998;top:0px;left:0px;width:100%;height:100%;background-color:#ffffff;filter:alpha(opacity=0);opacity:0"jmlayer="1" jmconverlayer="1"></iframe>');
-				$('body').append('<div style="display:none;position:absolute;z-index:9999998;top:0px;left:0px;width:100%;height:100%;background-color:#000000;filter:alpha(opacity=25);opacity:0.25" jmlayer="1" jmconverlayer="1"></div>');
-				$('body').append('<div id="jmessagebox_container" name="jmessagebox_container" style="display:none;position:absolute;z-index:9999999;" jmlayer="1"><div id="jmessagebox_title"></div><div id="jmessagebox_message"></div><div id="jmessagebox_buttons"><button id="jmessagebox_yesbutton"></button><button id="jmessagebox_nobutton"></button><button id="jmessagebox_cancelbutton"></button></div><div id="jmessagebox_bottom"></div></div>');
+				$('body').append('<iframe style="display:none;position:absolute;z-index:99998;top:0px;left:0px;width:100%;height:100%;background-color:#ffffff;filter:alpha(opacity=0);opacity:0"jmlayer="1" jmconverlayer="1"></iframe>');
+				$('body').append('<div style="display:none;position:absolute;z-index:99999;top:0px;left:0px;width:100%;height:100%;background-color:#000000;filter:alpha(opacity=75);opacity:0.75" jmlayer="1" jmconverlayer="1"></div>');
+				$('body').append('<div id="jmessagebox_container" name="jmessagebox_container" style="display:none;position:absolute;z-index:99999;" jmlayer="1"><div id="jmessagebox_title"></div><div id="jmessagebox_message"></div><div id="jmessagebox_buttons"><button id="jmessagebox_yesbutton"></button><button id="jmessagebox_nobutton"></button><button id="jmessagebox_cancelbutton"></button></div><div id="jmessagebox_bottom"></div></div>');
 				$(window).scroll($.jMessageBox._fixposition);
 				$('#jmessagebox_title').html($.jMessageBox.settings.title);
 				$('#jmessagebox_yesbutton').html($.jMessageBox.settings.yesButtonText);
@@ -136,17 +136,8 @@ sample 3 :
 		hide : function(){
 			$('[jmlayer]').hide();
 		},
-		show : function(arg1, arg2){	
+		show : function(arg1, arg2){			
 			if(arg1 == undefined)return;
-			
-			if($.jMessageBox.settings.title=="")
-				$.jMessageBox.settings.title = "系统提示";
-			if($.jMessageBox.settings.yesButtonText=="")
-				$.jMessageBox.settings.yesButtonText = "确定";
-			if($.jMessageBox.settings.cancelButtonText=="")
-				$.jMessageBox.settings.cancelButtonText = "取消";
-			if($.jMessageBox.settings.width=="")
-				$.jMessageBox.settings.width = "300";
 			var args = arg1;
 			if(typeof(arg1) != 'object'){
 				args = {};				
