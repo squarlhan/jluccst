@@ -277,3 +277,7 @@ A:hover {
 	font-size: 12px;
 	color: #C2C2C2;
 }
+.blackBold {
+	color: #FFFFFF;
+	font-weight: bold;
+}
