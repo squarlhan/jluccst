@@ -1,0 +1,19 @@
+目录命名：
+datamanage	-数据管理
+expertsystem	-专家系统
+reportmanage	-报表管理
+discussregion	-讨论区
+systemmanage	-系统管理
+
+文件命名
+规则:	模块前缀+manage.jsp	-管理页
+	模块前缀+info.jsp	-信息页
+	模块前缀+list.jsp	-列表页
+	模块前缀+tab.jsp	-标签页
+如：
+	usermanage.jsp
+	userinfo.jsp
+	userlist.jsp
+	deptmanage.jsp
+	deptinfo.jsp
+	deptlist.jsp
