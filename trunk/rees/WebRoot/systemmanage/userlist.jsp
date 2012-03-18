@@ -32,7 +32,7 @@
 <!--
 	$(document).ready(function() {
 		$("#addBtn").click(function(){
-			parent.parent.tipsWindown("用户信息","iframe:systemmanage/userinfo.jsp","400","230","true","","true","no");
+			parent.parent.tipsWindown("用户信息","iframe:./userAction!showUser.action","400","430","true","","true","no");
 		});
 	});
 //-->
