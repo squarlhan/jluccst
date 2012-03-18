@@ -60,9 +60,7 @@
 												<img src="images/up.gif" width="10" height="12" />
 											</td>
 											<td>
-												<strong><a href="sysmanage/datamanage.html"
-													target="mainFrame">数据管理</a>
-												</strong>
+												<strong>数据管理</strong>
 											</td>
 										</tr>
 									</table>
@@ -76,7 +74,7 @@
 												<img src="images/menuto.jpg" width="5" height="5" />
 											</td>
 											<td>
-												<a href="sysmanage/datamanage.html" target="mainFrame">数据管理</a>
+												<a href="datamanage/datamanage.jsp" target="mainFrame">数据管理</a>
 											</td>
 										</tr>
 										<tr>
