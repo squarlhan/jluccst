@@ -117,7 +117,7 @@ public class ScriptJsTag extends SimpleTagSupport
 			getJspContext().getOut().write( "<!--validate-->\r\n" );
 			getJspContext().getOut().write( "<script type=\"text/javascript\" src=\"" + contextPath + "/js/jquery-validation-1.9.0/jquery.validate.js\"></script>\r\n" );
 			getJspContext().getOut().write( "<script type=\"text/javascript\" src=\"" + contextPath + "/js/jquery-validation-1.9.0/localization/messages_cn.js\"></script>\r\n" );
-			//getJspContext().getOut().write( "<script type=\"text/javascript\" src=\"" + contextPath + "/js/jquery-validation-1.9.0/custom-methods.js\"></script>\r\n" );
+			getJspContext().getOut().write( "<script type=\"text/javascript\" src=\"" + contextPath + "/js/jquery-validation-1.9.0/custom-methods.js\"></script>\r\n" );
 		}
 		if( "true".equalsIgnoreCase( date ))
 		{
