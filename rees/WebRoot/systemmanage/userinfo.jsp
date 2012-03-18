@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%@ taglib prefix="j" uri="/script-tags"%>
 <%
@@ -32,12 +31,12 @@
 		<!--
 			var _customer_submit = {
 			rules: {
-				"user.userName":{required:true},
+				"user.userName":{required:true,strangecode:true},
 				"user.password":{required:true},
 				"validatePassword":{equalTo:"#userPassword"},
-				"user.userCName":{required:true},
-				"user.officePhone":{required:true},
-				"user.phone":{required:true},
+				"user.userCName":{strangecode:true},
+				"user.officePhone":{strangecode:true},
+				"user.phone":{strangecode:true},
 				"user.email":{email:true}
 				}
 			};
@@ -103,7 +102,7 @@
 												<strong>用 户 名：</strong>
 											</td>
 											<td height="26" align="left" bgcolor="#FFFFFF">
-												<s:textfield name="user.userName" cssStyle="width: 250px;" maxlength="25"></s:textfield>
+												<s:textfield name="user.userName" id="userName" cssStyle="width: 250px;" maxlength="25"></s:textfield>
 											</td>
 										</tr>
 										<tr>
@@ -111,7 +110,7 @@
 												<strong>用户密码：</strong>
 											</td>
 											<td height="26" align="left" bgcolor="#FFFFFF">
-												<s:textfield name="user.password" cssStyle="width: 250px;" maxlength="25"></s:textfield>
+												<s:textfield name="user.password" id="userPassword" cssStyle="width: 250px;" maxlength="25"></s:textfield>
 											</td>
 										</tr>
 										<tr>
@@ -119,7 +118,7 @@
 												<strong>确认密码：</strong>
 											</td>
 											<td height="26" align="left" bgcolor="#FFFFFF">
-												<s:textfield name="userPassword" id="validatePassword" cssStyle="width: 250px;" maxlength="25"></s:textfield>
+												<s:textfield name="validatePassword" id="validatePassword" cssStyle="width: 250px;" maxlength="25"></s:textfield>
 											</td>
 										</tr>
 										<tr>
@@ -127,7 +126,7 @@
 												<strong>中文姓名：</strong>
 											</td>
 											<td height="26" align="left" bgcolor="#FFFFFF">
-												<s:textfield name="user.userCName" cssStyle="width: 250px;" maxlength="25"></s:textfield>
+												<s:textfield name="user.userCName" id="userCName" cssStyle="width: 250px;" maxlength="25"></s:textfield>
 											</td>
 										</tr>
 										<tr>
@@ -135,7 +134,7 @@
 												<strong>办公电话：</strong>
 											</td>
 											<td height="26" align="left" bgcolor="#FFFFFF">
-												<s:textfield name="user.officePhone" cssStyle="width: 250px;" maxlength="25"></s:textfield>
+												<s:textfield name="user.officePhone" id="officePhone" cssStyle="width: 250px;" maxlength="25"></s:textfield>
 											</td>
 										</tr>
 										<tr>
@@ -143,7 +142,7 @@
 												<strong>个人手机：</strong>
 											</td>
 											<td height="26" align="left" bgcolor="#FFFFFF">
-												<s:textfield name="user.phone" cssStyle="width: 250px;" maxlength="25"></s:textfield>
+												<s:textfield name="user.phone" id="phone" cssStyle="width: 250px;" maxlength="25"></s:textfield>
 											</td>
 										</tr>
 										<tr>
@@ -151,7 +150,7 @@
 												<strong>电子邮箱：</strong>
 											</td>
 											<td height="26" align="left" bgcolor="#FFFFFF">
-												<s:textfield name="user.email" cssStyle="width: 250px;" maxlength="100"></s:textfield>
+												<s:textfield name="user.email" id="email" cssStyle="width: 250px;" maxlength="100"></s:textfield>
 											</td>
 										</tr>
 										<tr>
