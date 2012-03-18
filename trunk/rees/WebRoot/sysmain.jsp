@@ -63,7 +63,7 @@ $( document ).ready( function() {
 <body>
 <iframe id="topFrame" name="topFrame" class="ui-layout-north" src="systop.jsp" frameborder="0" scrolling="no"></iframe>
 <iframe id="leftFrame" name="leftFrame" class="ui-layout-west" src="sysmenu.jsp" width="100%" height="100%" frameborder="0" scrolling="no"></iframe>
-<iframe id="mainFrame" name="mainFrame" class="ui-layout-center" src="mainpage.html" frameborder="0" scrolling="no"></iframe>
+<iframe id="mainFrame" name="mainFrame" class="ui-layout-center" src="sysdesktop.jsp" frameborder="0" scrolling="no"></iframe>
 <iframe id="bottomFrame" name="bottomFrame" class="ui-layout-south" src="sysbottom.jsp" width="100%" height="100%" frameborder="0" scrolling="no"></iframe>
 </body>
 </html>

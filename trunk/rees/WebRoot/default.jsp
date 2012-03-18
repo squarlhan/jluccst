@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
+<%@ taglib prefix="j" uri="/script-tags"%>
 <%
 	/**
 	 * Copyright (c) 2010 Changchun Boan (BOAN) Co. Ltd.
@@ -25,7 +26,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title></title>
-<link type="text/css" rel="stylesheet" href="style.css" />
+<j:scriptlink css="true"/>
 <style type="text/css">
 <!--
 .STYLE1 {color: #FFFFFF}
