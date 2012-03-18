@@ -11,11 +11,13 @@ $(document).ready(function() {
 	var ifrHeight = $("#mainFrame",parent.parent.document).height();
 	var ifrHeightTemp = ifrHeight - 57;
 	$("#devicemanage").height( ifrHeightTemp );
+	$("#devicetree").height( ifrHeightTemp );
 });
 $(window).resize(function(){
 	var ifrHeight = $("#mainFrame",parent.parent.document).height();
 	var ifrHeightTemp = ifrHeight - 57;
 	$("#devicemanage").height( ifrHeightTemp );
+	$("#devicetree").height( ifrHeightTemp );
 });
 </script>
 </head>
