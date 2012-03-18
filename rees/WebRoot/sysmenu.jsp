@@ -316,7 +316,7 @@
 												<img src="images/menuto.jpg" width="5" height="5" />
 											</td>
 											<td>
-												<a href="systemmanage/usermanage.html" target="mainFrame">公司管理</a>
+												<a href="systemmanage/companymanage.jsp" target="mainFrame">公司管理</a>
 											</td>
 										</tr>
 									</table>
@@ -333,7 +333,7 @@
 												<img src="images/menuto.jpg" width="5" height="5" />
 											</td>
 											<td>
-												<a href="systemmanage/usermanage.html" target="mainFrame">工厂管理</a>
+												<a href="systemmanage/factorymanage.jsp" target="mainFrame">工厂管理</a>
 											</td>
 										</tr>
 									</table>
@@ -350,7 +350,7 @@
 												<img src="images/menuto.jpg" width="5" height="5" />
 											</td>
 											<td>
-												<a href="systemmanage/usermanage.html" target="mainFrame">车间管理</a>
+												<a href="systemmanage/workshopmanage.jsp" target="mainFrame">车间管理</a>
 											</td>
 										</tr>
 									</table>
@@ -367,7 +367,7 @@
 												<img src="images/menuto.jpg" width="5" height="5" />
 											</td>
 											<td>
-												<a href="systemmanage/groupmanage.html" target="mainFrame">设备管理</a>
+												<a href="systemmanage/devicemanage.jsp" target="mainFrame">设备管理</a>
 											</td>
 										</tr>
 									</table>
@@ -384,7 +384,7 @@
 												<img src="images/menuto.jpg" width="5" height="5" />
 											</td>
 											<td>
-												<a href="systemmanage/usermanage.html" target="mainFrame">用户管理</a>
+												<a href="systemmanage/usermanage.jsp" target="mainFrame">用户管理</a>
 											</td>
 										</tr>
 									</table>
@@ -401,7 +401,7 @@
 												<img src="images/menuto.jpg" width="5" height="5" />
 											</td>
 											<td>
-												<a href="systemmanage/usermanage.html" target="mainFrame">权限分配</a>
+												<a href="systemmanage/popedommanage.jsp" target="mainFrame">权限分配</a>
 											</td>
 										</tr>
 									</table>
