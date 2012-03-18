@@ -153,6 +153,7 @@
 												<s:textfield name="user.email" id="email" cssStyle="width: 250px;" maxlength="100"></s:textfield>
 											</td>
 										</tr>
+										<!-- 
 										<tr>
 											<td height="26" align="right" bgcolor="#FFFFFF">
 												<strong>用户类型：</strong>
@@ -162,6 +163,7 @@
 												选中为锁定
 											</td>
 										</tr>
+										 -->
 										<tr>
 											<td height="26" colspan="2" align="center" bgcolor="#FFFFFF">
 												<input name="button1" type="button" class="btn_2_3"
