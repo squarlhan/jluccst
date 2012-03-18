@@ -71,8 +71,8 @@ public class ScriptJsTag extends SimpleTagSupport
 		}
 		if( "true".equalsIgnoreCase( jquerylib ))
 		{
-			getJspContext().getOut().write( "<!--jquerylib-->\r\n" );
-			getJspContext().getOut().write( "<script type=\"text/javascript\" src=\"" + contextPath + "/js/jquery-validate/lib/jquery.js\"></script>\r\n" );
+			getJspContext().getOut().write( "<!--jquery-lib-->\r\n" );
+			getJspContext().getOut().write( "<script type=\"text/javascript\" src=\"" + contextPath + "/js/jquery-1.4.2.min.js\"></script>\r\n" );
 		}
 		if( "true".equalsIgnoreCase( validate ))
 		{
