@@ -69,7 +69,7 @@ public class User {
 	 * 用户姓名
 	 */
 	@Column(name = "USECNAME")
-	private String usercname;
+	private String userCName;
 	
 	/**
 	 * 办公室电话
@@ -163,13 +163,6 @@ public class User {
 		this.password = password;
 	}
 
-	public String getUsercname() {
-		return usercname;
-	}
-
-	public void setUsercname(String usercname) {
-		this.usercname = usercname;
-	}
 
 	public String getOfficePhone() {
 		return officePhone;
@@ -217,6 +210,16 @@ public class User {
 
 	public void setSortIndex(int sortIndex) {
 		this.sortIndex = sortIndex;
+	}
+
+	public String getUserCName()
+	{
+		return userCName;
+	}
+
+	public void setUserCName( String userCName )
+	{
+		this.userCName = userCName;
 	}
 	
 	
