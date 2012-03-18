@@ -20,7 +20,7 @@ import com.boan.rees.group.dao.IUserDao;
  * @version 1.0.0
  */
 
-@Repository("groupUserDao")
+@Repository("userDao")
 public class UserDaoImpl extends BaseDao<User,String> implements IUserDao{
 
 	
