@@ -34,56 +34,56 @@
   <!--a href="javascript: d.openAll();">展开</a> | <a href="javascript: d.closeAll();">关闭</a-->
   <script type="text/javascript">
 		<!--
-		d = new dTree('d');
+		d = new dTree('d','<%=path%>');
 		d.add(0,-1,'中石油','menulist.html?fatherId=0','','menumain');
 		<!-- 公司级检测 -->
-		d.add(1,0,'公司','userlist.jsp?fatherId=24','','groupmain','../images/tree/img/folder.gif');
+		d.add(1,0,'公司','userlist.jsp?fatherId=24','','groupmain','<%=path%>/js/tree/img/folder.gif');
 		<!-- 下级目录 -->
-		d.add(11,1,'丙烯腈厂','userlist.html?fatherId=24','','groupmain','../images/tree/img/folder.gif');
-		d.add(100,11,'第二丙烯车间','userlist.html?fatherId=24','','groupmain','../images/tree/img/page.gif');
-		d.add(101,11,'第一丙烯车间','userlist.html?fatherId=24','','groupmain','../images/tree/img/page.gif');
+		d.add(11,1,'丙烯腈厂','userlist.jsp?fatherId=24','','groupmain','<%=path%>/js/tree/img/folder.gif');
+		d.add(100,11,'第二丙烯车间','userlist.jsp?fatherId=24','','groupmain','<%=path%>/js/tree/img/page.gif');
+		d.add(101,11,'第一丙烯车间','userlist.jsp?fatherId=24','','groupmain','<%=path%>/js/tree/img/page.gif');
 		<!-- 下级目录 -->
-		d.add(12,1,'电石厂','userlist.html?fatherId=24','','groupmain','../images/tree/img/folder.gif');
-		d.add(102,12,'丙烯酸酯车间','userlist.html?fatherId=24','','groupmain','../images/tree/img/page.gif');
-		d.add(103,12,'水汽车间','userlist.html?fatherId=24','','groupmain','../images/tree/img/page.gif');
-		d.add(104,12,'乙醛车间','userlist.html?fatherId=24','','groupmain','../images/tree/img/page.gif');
+		d.add(12,1,'电石厂','userlist.jsp?fatherId=24','','groupmain','<%=path%>/js/tree/img/folder.gif');
+		d.add(102,12,'丙烯酸酯车间','userlist.jsp?fatherId=24','','groupmain','<%=path%>/js/tree/img/page.gif');
+		d.add(103,12,'水汽车间','userlist.jsp?fatherId=24','','groupmain','<%=path%>/js/tree/img/page.gif');
+		d.add(104,12,'乙醛车间','userlist.jsp?fatherId=24','','groupmain','<%=path%>/js/tree/img/page.gif');
 		<!-- 下级目录 -->
-		d.add(13,1,'动力二厂','userlist.html?fatherId=24','','groupmain','../images/tree/img/folder.gif');
-		d.add(105,13,'汽轮发电机1','userlist.html?fatherId=24','','groupmain','../images/tree/img/page.gif');
-		d.add(106,13,'汽轮发电机2','userlist.html?fatherId=24','','groupmain','../images/tree/img/page.gif');
-		d.add(107,13,'汽轮发电机3','userlist.html?fatherId=24','','groupmain','../images/tree/img/page.gif');
+		d.add(13,1,'动力二厂','userlist.jsp?fatherId=24','','groupmain','<%=path%>/js/tree/img/folder.gif');
+		d.add(105,13,'汽轮发电机1','userlist.jsp?fatherId=24','','groupmain','<%=path%>/js/tree/img/page.gif');
+		d.add(106,13,'汽轮发电机2','userlist.jsp?fatherId=24','','groupmain','<%=path%>/js/tree/img/page.gif');
+		d.add(107,13,'汽轮发电机3','userlist.jsp?fatherId=24','','groupmain','<%=path%>/js/tree/img/page.gif');
 		<!-- 下级目录 -->
-		d.add(14,1,'动力一厂','userlist.html?fatherId=24','','groupmain','../images/tree/img/folder.gif');
-		d.add(108,14,'汽轮发电机1','userlist.html?fatherId=24','','groupmain','../images/tree/img/page.gif');
-		d.add(109,14,'汽轮发电机2','userlist.html?fatherId=24','','groupmain','../images/tree/img/page.gif');
-		d.add(110,14,'汽轮发电机3','userlist.html?fatherId=24','','groupmain','../images/tree/img/page.gif');
+		d.add(14,1,'动力一厂','userlist.jsp?fatherId=24','','groupmain','<%=path%>/js/tree/img/folder.gif');
+		d.add(108,14,'汽轮发电机1','userlist.jsp?fatherId=24','','groupmain','<%=path%>/js/tree/img/page.gif');
+		d.add(109,14,'汽轮发电机2','userlist.jsp?fatherId=24','','groupmain','<%=path%>/js/tree/img/page.gif');
+		d.add(110,14,'汽轮发电机3','userlist.jsp?fatherId=24','','groupmain','<%=path%>/js/tree/img/page.gif');
 		<!-- 下级目录 -->
-		d.add(15,1,'合成树脂厂','userlist.html?fatherId=24','','groupmain','../images/tree/img/folder.gif');
-		d.add(111,15,'冰机AK301-A','userlist.html?fatherId=24','','groupmain','../images/tree/img/page.gif');
-		d.add(112,15,'冰机AK301-B','userlist.html?fatherId=24','','groupmain','../images/tree/img/page.gif');
+		d.add(15,1,'合成树脂厂','userlist.jsp?fatherId=24','','groupmain','<%=path%>/js/tree/img/folder.gif');
+		d.add(111,15,'冰机AK301-A','userlist.jsp?fatherId=24','','groupmain','<%=path%>/js/tree/img/page.gif');
+		d.add(112,15,'冰机AK301-B','userlist.jsp?fatherId=24','','groupmain','<%=path%>/js/tree/img/page.gif');
 		<!-- 下级目录 -->
-		d.add(16,1,'化肥厂','userlist.html?fatherId=24','','groupmain','../images/tree/img/folder.gif');
-		d.add(113,16,'1号空压机','userlist.html?fatherId=24','','groupmain','../images/tree/img/page.gif');
-		d.add(114,16,'2号空压机','userlist.html?fatherId=24','','groupmain','../images/tree/img/page.gif');
-		d.add(115,16,'3号空压机','userlist.html?fatherId=24','','groupmain','../images/tree/img/page.gif');
-		d.add(116,16,'4号空压机','userlist.html?fatherId=24','','groupmain','../images/tree/img/page.gif');
-		d.add(117,16,'5号空压机','userlist.html?fatherId=24','','groupmain','../images/tree/img/page.gif');
-		d.add(118,16,'6号空压机','userlist.html?fatherId=24','','groupmain','../images/tree/img/page.gif');
-		d.add(119,16,'7号空压机','userlist.html?fatherId=24','','groupmain','../images/tree/img/page.gif');
-		d.add(120,16,'氮气压缩机C1101','userlist.html?fatherId=24','','groupmain','../images/tree/img/page.gif');
-		d.add(121,16,'氮气压缩机C0102','userlist.html?fatherId=24','','groupmain','../images/tree/img/page.gif');
-		d.add(122,16,'合成气压缩机C0701','userlist.html?fatherId=24','','groupmain','../images/tree/img/page.gif');
-		d.add(123,16,'空气压缩机C0101','userlist.html?fatherId=24','','groupmain','../images/tree/img/page.gif');
-		d.add(124,16,'氮气压缩机VA-701','userlist.html?fatherId=24','','groupmain','../images/tree/img/page.gif');
-		d.add(125,16,'氧压机1','userlist.html?fatherId=24','','groupmain','../images/tree/img/page.gif');
-		d.add(126,16,'氧压机2','userlist.html?fatherId=24','','groupmain','../images/tree/img/page.gif');
+		d.add(16,1,'化肥厂','userlist.jsp?fatherId=24','','groupmain','<%=path%>/js/tree/img/folder.gif');
+		d.add(113,16,'1号空压机','userlist.jsp?fatherId=24','','groupmain','<%=path%>/js/tree/img/page.gif');
+		d.add(114,16,'2号空压机','userlist.jsp?fatherId=24','','groupmain','<%=path%>/js/tree/img/page.gif');
+		d.add(115,16,'3号空压机','userlist.jsp?fatherId=24','','groupmain','<%=path%>/js/tree/img/page.gif');
+		d.add(116,16,'4号空压机','userlist.jsp?fatherId=24','','groupmain','<%=path%>/js/tree/img/page.gif');
+		d.add(117,16,'5号空压机','userlist.jsp?fatherId=24','','groupmain','<%=path%>/js/tree/img/page.gif');
+		d.add(118,16,'6号空压机','userlist.jsp?fatherId=24','','groupmain','<%=path%>/js/tree/img/page.gif');
+		d.add(119,16,'7号空压机','userlist.jsp?fatherId=24','','groupmain','<%=path%>/js/tree/img/page.gif');
+		d.add(120,16,'氮气压缩机C1101','userlist.jsp?fatherId=24','','groupmain','<%=path%>/js/tree/img/page.gif');
+		d.add(121,16,'氮气压缩机C0102','userlist.jsp?fatherId=24','','groupmain','<%=path%>/js/tree/img/page.gif');
+		d.add(122,16,'合成气压缩机C0701','userlist.jsp?fatherId=24','','groupmain','<%=path%>/js/tree/img/page.gif');
+		d.add(123,16,'空气压缩机C0101','userlist.jsp?fatherId=24','','groupmain','<%=path%>/js/tree/img/page.gif');
+		d.add(124,16,'氮气压缩机VA-701','userlist.jsp?fatherId=24','','groupmain','<%=path%>/js/tree/img/page.gif');
+		d.add(125,16,'氧压机1','userlist.jsp?fatherId=24','','groupmain','<%=path%>/js/tree/img/page.gif');
+		d.add(126,16,'氧压机2','userlist.jsp?fatherId=24','','groupmain','<%=path%>/js/tree/img/page.gif');
 		<!-- 下级目录 -->
-		d.add(17,1,'炼油厂','userlist.html?fatherId=24','','groupmain','../images/tree/img/folder.gif');
-		d.add(127,17,'柴油加氢C-1101','userlist.html?fatherId=24','','groupmain','../images/tree/img/page.gif');
-		d.add(128,17,'催化风机','userlist.html?fatherId=24','','groupmain','../images/tree/img/page.gif');
-		d.add(129,17,'芳烃GB-201','userlist.html?fatherId=24','','groupmain','../images/tree/img/page.gif');
-		d.add(130,17,'加氢裂化C-1101','userlist.html?fatherId=24','','groupmain','../images/tree/img/page.gif');
-		d.add(131,17,'重吹风机','userlist.html?fatherId=24','','groupmain','../images/tree/img/page.gif');
+		d.add(17,1,'炼油厂','userlist.jsp?fatherId=24','','groupmain','<%=path%>/js/tree/img/folder.gif');
+		d.add(127,17,'柴油加氢C-1101','userlist.html?fatherId=24','','groupmain','<%=path%>/js/tree/img/page.gif');
+		d.add(128,17,'催化风机','userlist.html?fatherId=24','','groupmain','<%=path%>/js/tree/img/page.gif');
+		d.add(129,17,'芳烃GB-201','userlist.html?fatherId=24','','groupmain','<%=path%>/js/tree/img/page.gif');
+		d.add(130,17,'加氢裂化C-1101','userlist.html?fatherId=24','','groupmain','<%=path%>/js/tree/img/page.gif');
+		d.add(131,17,'重吹风机','userlist.html?fatherId=24','','groupmain','<%=path%>/js/tree/img/page.gif');
 		<!-- 下级目录 -->
 		d.add(18,1,'染料厂','userlist.html?fatherId=24','','groupmain','../images/tree/img/folder.gif');
 		d.add(132,18,'氮气压缩机C-0105A1','userlist.html?fatherId=24','','groupmain','../images/tree/img/page.gif');
