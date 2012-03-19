@@ -35,20 +35,12 @@
 	<meta http-equiv="description" content="This is my page">
 
 	<j:scriptlink css="true" tipswindow="true" jmessagebox="true" jquery="true" validate="true"/>
-	
-	<style type="text/css">
-		<!--
-		.STYLE1 {
-		color: #FFFFFF;
-		font-weight: bold;
-		}
-		-->
-	</style>
-<script type="text/javascript">
-<!--
+
+	<script type="text/javascript">
+	<!--
 	$(function(){
 		$("#addbtn").click(function(){
-			parent.parent.parent.tipsWindown("添加汇报","iframe:openReportAction.action","600","425","true","","true","no");
+			parent.parent.parent.tipsWindown("添加汇报","iframe:openAddReportAction.action","600","425","true","","true","no");
 		});
 		$("#editbtn").click(function(){
 			parent.parent.parent.tipsWindown("修改汇报","iframe:sysmanage/worksummarizeinfoedit.html","600","425","true","","true","no");
@@ -146,7 +138,7 @@
 			<s:property value="reportPerson"/>&nbsp;
 			</td>
 		  <td height="26" align="center" bgcolor="#FFFFFF">
-		  	<s:property value="reportDate"/>&nbsp;
+		  	<s:date  name="reportDate" format="yyyy-MM-dd HH:mm" />&nbsp;
 		  	</td>
 	    </tr>
 		</s:iterator>
