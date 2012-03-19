@@ -42,7 +42,7 @@
     	var deviceId = $("#hid_deviceId").val();
     	//判断是否有Id，如果有，说明是修改，这改变提交地址
     	if(deviceId!=""){
-    		$("#form1").attr("action","toUpdateDeviceAction.action");
+    		$("#form1").attr("action","toModifyDeviceAction.action");
     	}
     	
     	
