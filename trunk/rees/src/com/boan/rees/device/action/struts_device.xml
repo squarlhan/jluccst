@@ -21,15 +21,16 @@
             <result name="input">/device/deviceinfo.jsp</result>
         </action>
         <!-- 删除设备 -->
-         <action name="deleteDeviceAction" class="deviceInfoAction" method="deleteDevice">
-           	   <result name="success" type="chain">
-             	<param name="actionName">openDeviceAction</param>
-             	<param name="namespace">/</param>
-             	<param name="pageNo">${pageNo}</param>
-            </result>
-        </action>
+        <action name="deleteDeviceAction" class="deviceInfoAction" method="deleteDevice"/>
+        
         <!-- 打开修改设备菜单 -->
     	<action name="openModifyDeviceAction" class="deviceInfoAction" method="openModifyDevice">
+    		<result name="success">/device/deviceinfo.jsp</result>
+    		<result name="input">/device/deviceinfo.jsp</result>
+    	</action>
+    	
+        <!-- 修改设备菜单 -->
+    	<action name="toUpdateDeviceAction" class="deviceInfoAction" method="toUpdateDevice">
     		<result name="success">/device/deviceinfo.jsp</result>
     		<result name="input">/device/deviceinfo.jsp</result>
     	</action>

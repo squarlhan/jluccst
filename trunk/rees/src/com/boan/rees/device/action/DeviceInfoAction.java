@@ -81,7 +81,6 @@ public class DeviceInfoAction extends ActionSupport{
 	public String toAddDevice(){
 		device.setDeptId("1");
 		device.setGroupId("1");
-	
 		service.save(device);
 		return SUCCESS;
 	}
@@ -99,10 +98,8 @@ public class DeviceInfoAction extends ActionSupport{
 	 * @return
 	 */
 	public String deleteDevice(){
-//		int d = ids.length;
-//		String id = demoModel.getId();
 		service.deleteDeviceInfo(ids);
-		return SUCCESS;
+		return NONE;
 	}
 	
 	/**
@@ -112,6 +109,17 @@ public class DeviceInfoAction extends ActionSupport{
 	public String openModifyDevice(){
 		String id = device.getId();
 		device = service.get(id);
+		return SUCCESS;
+	}
+	
+	/**
+	 * 修改设备信息
+	 * @return
+	 */
+	public String toUpdateDevice(){
+		device.setDeptId("1");
+		device.setGroupId("1");
+		service.update(device);
 		return SUCCESS;
 	}
 	
