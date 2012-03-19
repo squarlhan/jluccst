@@ -29,6 +29,12 @@ public interface IDeviceInfoService {
 	 * 保存设备
 	 */
 	public void save(DeviceInfo table1);
+	
+	/**
+	 * 修改设备信息
+	 * @param deviceInfo 设备对象
+	 */
+	public void update(DeviceInfo deviceInfo);
 	/**
 	 * 按分页查找设备
 	 */
