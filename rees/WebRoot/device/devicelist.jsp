@@ -12,7 +12,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     
-    <title>My JSP 'devicelist.jsp' starting page</title>
+    <title>设备管理列表</title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -32,16 +32,49 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 		$(function(){
 			$("#addbtn").click(function(){
-				parent.parent.parent.tipsWindown("添加设备","iframe:openAddDeviceAction.action","460","250","true","","true","no");
+				parent.parent.parent.tipsWindown("添加设备信息","iframe:openAddDeviceAction.action","460","350","true","","true","no");
 			});
 			$("#editbtn").click(function(){
-				parent.parent.parent.tipsWindown("修改设备","iframe:openModifyDeviceAction.action","460","250","true","","true","no");
+				parent.parent.parent.tipsWindown("修改设备信息","iframe:openModifyDeviceAction.action","460","250","true","","true","no");
 			});
 			$("#editpointbtn").click(function(){
 				parent.parent.parent.tipsWindown("修改监控点","iframe:sysmanage/groupinfoedit.html","460","190","true","","true","no");
 			});
 			$.fn.CheckBoxAll("cbk_all");
 	  		$.fn.UnCheckBoxAll("ids","cbk_all");
+
+	  		/**
+	  		 * 修改设备信息
+	  		 */
+	  		$('a[name="edit"]').each(function(){
+	  			$(this).click(function(){
+	  				var url = $(this).attr("url");
+	  				parent.parent.parent.tipsWindown("修改设备信息","iframe:"+url,"460","350","true","","true","no");
+	  			});
+	  		});
+	  		
+	  		/**
+	  		 * 删除单个设备信息
+	  		 */
+	  		$('a[name="delete"]').each(function(){
+	  			$(this).click(function(){
+	  				var url = $(this).attr("url");
+	  				if(window.confirm("您确定要删除这条信息吗？")){
+	  					$.post(url, $('#form1').serialize(), function(data){window.location.href=window.location.href;});
+	  				}
+	  			});
+	  		});
+	  		
+	  		/**
+	  		 * 删除单个设备信息
+	  		 */
+	  		$("#deletepointbtn").click(function(){
+  				var url = "deleteDeviceAction.action";
+  				if(window.confirm("您确定要删除所选信息吗？")){
+  					$.post(url, $('#form1').serialize(), function(data){window.location.href=window.location.href;});
+  				}
+	  		});
+	  		
 		});
 		/**
 	  	 * 点击选复选框时，执行全选/取消全选功能
@@ -95,7 +128,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-  <s:form>
+  <s:form id="form1">
 <table width="100%" style="height:100%;" border="0" cellspacing="5" cellpadding="0">
   <tr>
     <td valign="top"><table width="100%" border="0" cellspacing="5" cellpadding="0">
@@ -105,8 +138,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	
     		<input name="button" type="button" class="btn_4" id="addparambtn" value="添加阈值参数" >
             <input name="button" type="button" class="btn_4" id="editpointbtn" value="修改监控点" >
-             <s:submit value="删除所选" theme="simple" action="deleteDeviceAction"> </s:submit>
-            <!--<input name="button" type="button" class="btn_4" id="addbtn" value="删除所选" onclick="deleteDemoAction.action">-->
+            <input name="button" type="button" class="btn_4" id="deletepointbtn" value="删除所选">
             <input name="button3" type="button" class="btn_2_3" id="button" value="排序"></td>
         <td align="right"></td>
       </tr>
@@ -123,7 +155,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		  <td width="16%" align="center" background="../images/headerbg.jpg"><strong>设备型号</strong></td>
 		  <td width="14%" align="center" background="../images/headerbg.jpg"><strong>设备厂商</strong></td>
 		  <td width="14%" align="center" background="../images/headerbg.jpg"><strong>监控点数量</strong></td>
-      	      <td width="16%" align="center" background="../images/headerbg.jpg"></td>
+		  <td width="14%" align="center" background="../images/headerbg.jpg"><strong>操作</strong></td>
+      	  <td width="16%" align="center" background="../images/headerbg.jpg"></td>
         </tr>
         <s:iterator value="pagination.data" status="obj">
         <tr>
@@ -148,14 +181,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           <td height="26" align="center" bgcolor="#FFFFFF">
           	   <s:property value="controlpoint"/>&nbsp;
           </td> 
-          <td height="26" align="center" bgcolor="#FFFFFF">
-         	<input name="button" type="button" class="btn_4" id="editbtn"  value="修改" >
+          <td height="26" colspan="2" align="center" bgcolor="#FFFFFF">
+          	<s:url id="edit_url" action="openModifyDeviceAction">   
+				<s:param name="device.id" value="id"></s:param>   
+			</s:url>
+			<s:url id="delete_url" action="deleteDeviceAction">   
+				<s:param name="ids" value="id"></s:param>   
+			</s:url>
+         	<a name="edit" href="javascript:void(0);" url="${edit_url}">编辑</a>  
+         	<a name="delete" href="javascript:void(0);" url="${delete_url}">删除</a>  
           </td>
         </tr>
         </s:iterator>
         
         <tr>
-          <td height="26" colspan="5" align="center" bgcolor="#FFFFFF">
+          <td height="26" colspan="9" align="center" bgcolor="#FFFFFF">
 			<page:pages currentPage="pagination.currentPage" totalPages="pagination.totalPages" totalRows="pagination.totalRows" styleClass="page" theme="text" ></page:pages> 
 		   
 		  </td>
