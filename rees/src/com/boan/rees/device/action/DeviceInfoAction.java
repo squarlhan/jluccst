@@ -1,5 +1,7 @@
 package com.boan.rees.device.action;
 
+import java.util.HashMap;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
@@ -32,8 +34,20 @@ public class DeviceInfoAction extends ActionSupport{
 	 * 页面对象
 	 */
 	private DeviceInfo device;
+	/**
+	 * 页面所选行的id
+	 */
+	private String[] ids;
 	
 	
+	public String[] getIds() {
+		return ids;
+	}
+
+	public void setIds(String[] ids) {
+		this.ids = ids;
+	}
+
 	public DeviceInfo getDevice() {
 		return device;
 	}
@@ -55,7 +69,7 @@ public class DeviceInfoAction extends ActionSupport{
 	 * @return
 	 */
 	public String openDevice(){
-		pagination = service.findDeviceInfoForPage(null, pagination);
+		pagination = service.findDeviceInfoForPage(new HashMap(), pagination);
 		return this.SUCCESS;
 	}
 
@@ -80,5 +94,33 @@ public class DeviceInfoAction extends ActionSupport{
 		return SUCCESS;
 	}
 
-
+	/**
+	 * 删除数据
+	 * @return
+	 */
+	public String deleteDevice(){
+//		int d = ids.length;
+//		String id = demoModel.getId();
+		service.deleteDeviceInfo(ids);
+		return SUCCESS;
+	}
+	
+	/**
+	 * 为修改页面做准备
+	 * @return
+	 */
+	public String openModifyDevice(){
+		String id = device.getId();
+		device = service.get(id);
+		return SUCCESS;
+	}
+	
+	/**
+	 * 修改数据
+	 * @return
+	 */
+	public String toModifyDemo(){
+		return toAddDevice();
+	}
+	
 }
