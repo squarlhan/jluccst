@@ -3,19 +3,21 @@
     "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
     "http://struts.apache.org/dtds/struts-2.3.dtd">	
 <struts>
+  <!-- 设备Action -->
     <package name="device" extends="struts-default" namespace="/">
-    	<action name="openDeviceAction" class="deviceInfoAction" method="openDevice">
+        <action name="openDeviceAction" class="deviceInfoAction" method="openDevice">
     		<result name="success">/device/devicelist.jsp</result>
     		<result name="input">/device/devicelist.jsp</result>
     	</action>
     	<action name="openAddDeviceAction" class="deviceInfoAction" method="openAddDevice ">
-    		<result name="success">/device/deviceadd.jsp</result>
-    		<result name="input">/device/deviceadd.jsp</result>
+    		<result name="success">/device/deviceinfo.jsp</result>
+    		<result name="input">/device/deviceinfo.jsp</result>
     	</action>
     	 <action name="toAddDeviceAction" class="deviceInfoAction" method="toAddDevice">
-             <result name="success">/device/deviceadd.jsp</result>
-            <result name="input">/device/deviceadd.jsp</result>
+             <result name="success">/device/deviceinfo.jsp</result>
+            <result name="input">/device/deviceinfo.jsp</result>
         </action>
+  <!-- 监控点Action -->
     </package>
     <package name="pointinfo" extends="struts-default" namespace="/datamanage">
     	<action name="pointlist" class="pointInfoAction" method="pointInfoListByDeviceId">

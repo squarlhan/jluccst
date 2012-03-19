@@ -1,8 +1,4 @@
-/**
- * Copyright (c) 2012 Changchun CBIT Co. Ltd.
- * All right reserved.
- * History
- */
+
 /*
  * @(#)DemoAction.java 1.1 2012-3-5
  */
