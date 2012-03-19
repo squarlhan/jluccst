@@ -64,7 +64,7 @@
 											<strong>设备编号：</strong>
 										</td>
 										<td height="26" align="left" bgcolor="#FFFFFF">
-											<s:textfield id="txt_deviceNum" name="device.deviceNum" style="width: 250px;"></s:textfield>
+											<s:textfield id="txt_deviceNum" name="device.deviceNum" value="%{#device.deviceNum}" style="width: 250px;"></s:textfield>
 										</td>
 									</tr>
 									<tr>
@@ -72,7 +72,7 @@
 											<strong>设备类型：</strong>
 										</td>
 										<td height="26" align="left" bgcolor="#FFFFFF">
-											<s:textfield id="txt_deviceType" name="device.deviceType" style="width: 250px;"></s:textfield>
+											<s:textfield id="txt_deviceType" name="device.deviceType" value="%{#device.deviceType}" style="width: 250px;"></s:textfield>
 										</td>
 									</tr>
 									<tr>
@@ -80,7 +80,7 @@
 											<strong>设备名称：</strong>
 										</td>
 										<td height="26" align="left" bgcolor="#FFFFFF">
-											<s:textfield id="txt_deviceName" name="device.deviceName" style="width: 250px;"></s:textfield>
+											<s:textfield id="txt_deviceName" name="device.deviceName"  value="%{#device.deviceName}" style="width: 250px;"></s:textfield>
 										</td>
 									</tr>
 									<tr>
@@ -88,7 +88,7 @@
 											<strong>设备型号：</strong>
 										</td>
 										<td height="26" align="left" bgcolor="#FFFFFF">
-											<s:textfield id="txt_deviceModel" name="device.deviceModel" style="width: 250px;"></s:textfield>
+											<s:textfield id="txt_deviceModel" name="device.deviceModel" value="%{#device.deviceModel}" width: 250px;"></s:textfield>
 										</td>
 									</tr>
 									<tr>
@@ -96,7 +96,7 @@
 											<strong>设备厂商：</strong>
 										</td>
 										<td height="26" align="left" bgcolor="#FFFFFF">
-											<s:textfield id="txt_deviceFactory" name="device.deviceFactory" style="width: 250px;"></s:textfield>
+											<s:textfield id="txt_deviceFactory" name="device.deviceFactory"  value="%{#device.deviceFactory}" style="width: 250px;"></s:textfield>
 										</td>
 									</tr>
 									<tr>
@@ -104,7 +104,7 @@
 											<strong>检测点数量：</strong>
 										</td>
 										<td height="26" align="left" bgcolor="#FFFFFF">
-											<s:textfield id="txt_controlpoint" name="device.controlpoint" style="width: 250px;"></s:textfield>
+											<s:textfield id="txt_controlpoint" name="device.controlpoint"  value="%{#device.controlpoint}" style="width: 250px;"></s:textfield>
 										</td>
 									</tr>
 									<tr>
@@ -112,7 +112,7 @@
 											<strong>添加设备图片：</strong>
 										</td>
 										<td height="26" align="left" bgcolor="#FFFFFF">
-											<s:textfield id="txt_filePath" name="device.filePath" style="width: 250px;"></s:textfield>
+											<s:textfield id="txt_filePath" name="device.filePath"  value="%{#device.filePath}" style="width: 250px;"></s:textfield>
 										</td>
 									</tr>
 									<tr>
