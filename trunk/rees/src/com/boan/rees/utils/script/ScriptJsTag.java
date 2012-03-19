@@ -108,7 +108,7 @@ public class ScriptJsTag extends SimpleTagSupport
 		}
 		if( "true".equalsIgnoreCase( jquery ))
 		{
-			getJspContext().getOut().write( "<!--jquery-lib-->\r\n" );
+			getJspContext().getOut().write( "<!--jquery-->\r\n" );
 			getJspContext().getOut().write( "<script type=\"text/javascript\" src=\"" + contextPath + "/js/jquery-1.4.2.min.js\"></script>\r\n" );
 			getJspContext().getOut().write( "<script type=\"text/javascript\" src=\"" + contextPath + "/js/external/bgiframe/jquery.bgiframe.js\"></script>\r\n" );
 		}
@@ -121,26 +121,30 @@ public class ScriptJsTag extends SimpleTagSupport
 		}
 		if( "true".equalsIgnoreCase( date ))
 		{
-			getJspContext().getOut().write( "<!--css-->\r\n" );
+			getJspContext().getOut().write( "<!--date-->\r\n" );
 			//getJspContext().getOut().write( "<link rel=\"stylesheet\" type=\"text/css\" href=\"" + contextPath + "/css/style.css\"/>\r\n" );
 			//getJspContext().getOut().write( "<link rel=\"stylesheet\" type=\"text/css\" href=\"" + contextPath + "/css/font.css\"/>\r\n" );
 		}
 		if( "true".equalsIgnoreCase( tree ))
 		{
+			getJspContext().getOut().write( "<!--tree-->\r\n" );
 			getJspContext().getOut().write( "<link rel=\"stylesheet\" type=\"text/css\" href=\"" + contextPath + "/js/tree/dtree.css\"/>\r\n" );
 			getJspContext().getOut().write( "<script type=\"text/javascript\" src=\"" + contextPath + "/js/tree/dtree.js\"></script>\r\n" );
 		}
 		if( "true".equalsIgnoreCase( poshytip ))
 		{
+			getJspContext().getOut().write( "<!--poshytip-->\r\n" );
 			getJspContext().getOut().write( "<link rel=\"stylesheet\" type=\"text/css\" href=\"" + contextPath + "/js/poshytip/tip-twitter.css\"/>\r\n" );
 			getJspContext().getOut().write( "<script type=\"text/javascript\" src=\"" + contextPath + "/js/poshytip/jquery.poshytip.min.js\"></script>\r\n" );
 		}
 		if( "true".equalsIgnoreCase( livequery ))
 		{
+			getJspContext().getOut().write( "<!--livequery-->\r\n" );
 			getJspContext().getOut().write( "<script type=\"text/javascript\" src=\"" + contextPath + "/js/jquery.livequery.min.js\"></script>\r\n" );
 		}
 		if( "true".equalsIgnoreCase( jqueryui ))
 		{
+			getJspContext().getOut().write( "<!--jqueryui-->\r\n" );
 			getJspContext().getOut().write( "<script type=\"text/javascript\" src=\"" + contextPath + "/js/ui/jquery.ui.core.js\"></script>\r\n" );
 			getJspContext().getOut().write( "<script type=\"text/javascript\" src=\"" + contextPath + "/js/ui/jquery.ui.widget.js\"></script>\r\n" );
 			getJspContext().getOut().write( "<script type=\"text/javascript\" src=\"" + contextPath + "/js/ui/jquery.ui.mouse.js\"></script>\r\n" );
@@ -149,23 +153,28 @@ public class ScriptJsTag extends SimpleTagSupport
 		}
 		if( "true".equalsIgnoreCase( contextmenu ))
 		{
+			getJspContext().getOut().write( "<!--contextmenu-->\r\n" );
 			getJspContext().getOut().write( "<script type=\"text/javascript\" src=\"" + contextPath + "/js/jquery.contextmenu.r2.packed.js\"></script>\r\n" );
 		}
 		if( "true".equalsIgnoreCase( tipswindow ))
 		{
+			getJspContext().getOut().write( "<!--tipswindow-->\r\n" );
 			getJspContext().getOut().write( "<link rel=\"stylesheet\" type=\"text/css\" href=\"" + contextPath + "/js/tipswindow/tipswindow.css\"/>\r\n" );
 			getJspContext().getOut().write( "<script type=\"text/javascript\" src=\"" + contextPath + "/js/tipswindow/tipswindow.js\"></script>\r\n" );
 		}
 		if( "true".equalsIgnoreCase( jquerylayout ))
 		{
+			getJspContext().getOut().write( "<!--jquerylayout-->\r\n" );
 			getJspContext().getOut().write( "<script type=\"text/javascript\" src=\"" + contextPath + "/js/jquery.layout-latest.js\"></script>\r\n" );
 		}
 		if( "true".equalsIgnoreCase( jmessagebox ))
 		{
+			getJspContext().getOut().write( "<!--jmessagebox-->\r\n" );
 			getJspContext().getOut().write( "<script type=\"text/javascript\" src=\"" + contextPath + "/js/jmessagebox-1.0.1.js\"></script>\r\n" );
 		}
 		if( "true".equalsIgnoreCase( tab ))
 		{
+			getJspContext().getOut().write( "<!--tab-->\r\n" );
 			getJspContext().getOut().write( "<link rel=\"stylesheet\" type=\"text/css\" href=\"" + contextPath + "/js/tab/tabs.css\"/>\r\n" );
 			getJspContext().getOut().write( "<script type=\"text/javascript\" src=\"" + contextPath + "/js/tab/jquery.tab.js\"></script>\r\n" );
 		}
