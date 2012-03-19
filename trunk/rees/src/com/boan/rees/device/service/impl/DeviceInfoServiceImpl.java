@@ -55,6 +55,15 @@ public class DeviceInfoServiceImpl  implements IDeviceInfoService {
 		deviceInfoDao.save(table1);
 		
 	}
+	
+	/**
+	 * 修改设备信息
+	 * @param deviceInfo 设备对象
+	 */
+	public void update(DeviceInfo deviceInfo){
+		deviceInfoDao.update(deviceInfo);
+	}
+	
 	/**
 	 * 按分页查询设备
 	 */
@@ -64,7 +73,7 @@ public class DeviceInfoServiceImpl  implements IDeviceInfoService {
 		
 		String hql = "from DeviceInfo";
 		List<DeviceInfo> data = deviceInfoDao.findForPage(hql, values, pagination.getStartIndex(), pagination.getPageSize());
-		hql = "select count(*) from DemoModel";
+		hql = "select count(*) from DeviceInfo";
 		int totalRows = deviceInfoDao.findCountForPage(hql, values);
 		pagination.setTotalRows(totalRows);
 		pagination.setData(data);
