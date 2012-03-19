@@ -27,7 +27,7 @@
 	<head>
 		<base href="<%=basePath%>">
 
-		<title>My JSP 'deviceinfo.jsp' starting page</title>
+		<title>设备管理维护</title>
 
 		<meta http-equiv="pragma" content="no-cache">
 		<meta http-equiv="cache-control" content="no-cache">
@@ -37,6 +37,15 @@
 		<j:scriptlink  css="true" jmessagebox="true" jquery="true" tipswindow="true" validate="true"/>
 		<script type="text/javascript">
       $(document).ready( function() {
+    	
+    	
+    	var deviceId = $("#hid_deviceId").val();
+    	//判断是否有Id，如果有，说明是修改，这改变提交地址
+    	if(deviceId!=""){
+    		$("#form1").attr("action","toUpdateDeviceAction.action");
+    	}
+    	
+    	
   		$("#addBtn").click(function(){
   			parent.$("#windown-close").click();
   			parent.location.href = $.fn.change_url(parent.location.href);
@@ -49,7 +58,8 @@
 	</head>
 
 	<body>
-		<s:form id="form1" action="toAddDeviceAction.action"  >
+		<s:form id="form1" action="toAddDeviceAction.action" theme="simple" >
+		<s:hidden id="hid_deviceId" name="device.id"></s:hidden>
 		<table width="100%" border="0" cellspacing="5" cellpadding="0">
 			<tr>
 				<td>
@@ -64,7 +74,7 @@
 											<strong>设备编号：</strong>
 										</td>
 										<td height="26" align="left" bgcolor="#FFFFFF">
-											<s:textfield id="txt_deviceNum" name="device.deviceNum" value="%{#device.deviceNum}" style="width: 250px;"></s:textfield>
+											<s:textfield id="txt_deviceNum" name="device.deviceNum" cssStyle="width: 250px;"></s:textfield>
 										</td>
 									</tr>
 									<tr>
@@ -72,7 +82,7 @@
 											<strong>设备类型：</strong>
 										</td>
 										<td height="26" align="left" bgcolor="#FFFFFF">
-											<s:textfield id="txt_deviceType" name="device.deviceType" value="%{#device.deviceType}" style="width: 250px;"></s:textfield>
+											<s:textfield id="txt_deviceType" name="device.deviceType" cssStyle="width: 250px;"></s:textfield>
 										</td>
 									</tr>
 									<tr>
@@ -80,7 +90,7 @@
 											<strong>设备名称：</strong>
 										</td>
 										<td height="26" align="left" bgcolor="#FFFFFF">
-											<s:textfield id="txt_deviceName" name="device.deviceName"  value="%{#device.deviceName}" style="width: 250px;"></s:textfield>
+											<s:textfield id="txt_deviceName" name="device.deviceName" cssStyle="width: 250px;"></s:textfield>
 										</td>
 									</tr>
 									<tr>
@@ -88,7 +98,7 @@
 											<strong>设备型号：</strong>
 										</td>
 										<td height="26" align="left" bgcolor="#FFFFFF">
-											<s:textfield id="txt_deviceModel" name="device.deviceModel" value="%{#device.deviceModel}" width: 250px;"></s:textfield>
+											<s:textfield id="txt_deviceModel" name="device.deviceModel" cssStyle="width: 250px;"></s:textfield>
 										</td>
 									</tr>
 									<tr>
@@ -96,7 +106,7 @@
 											<strong>设备厂商：</strong>
 										</td>
 										<td height="26" align="left" bgcolor="#FFFFFF">
-											<s:textfield id="txt_deviceFactory" name="device.deviceFactory"  value="%{#device.deviceFactory}" style="width: 250px;"></s:textfield>
+											<s:textfield id="txt_deviceFactory" name="device.deviceFactory" cssStyle="width: 250px;"></s:textfield>
 										</td>
 									</tr>
 									<tr>
@@ -104,7 +114,7 @@
 											<strong>检测点数量：</strong>
 										</td>
 										<td height="26" align="left" bgcolor="#FFFFFF">
-											<s:textfield id="txt_controlpoint" name="device.controlpoint"  value="%{#device.controlpoint}" style="width: 250px;"></s:textfield>
+											<s:textfield id="txt_controlpoint" name="device.controlpoint" cssStyle="width: 250px;"></s:textfield>
 										</td>
 									</tr>
 									<tr>
@@ -112,7 +122,7 @@
 											<strong>添加设备图片：</strong>
 										</td>
 										<td height="26" align="left" bgcolor="#FFFFFF">
-											<s:textfield id="txt_filePath" name="device.filePath"  value="%{#device.filePath}" style="width: 250px;"></s:textfield>
+											<s:textfield id="txt_filePath" name="device.filePath" cssStyle="width: 250px;"></s:textfield>
 										</td>
 									</tr>
 									<tr>
