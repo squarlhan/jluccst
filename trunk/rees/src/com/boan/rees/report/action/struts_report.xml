@@ -8,7 +8,7 @@
     		<result name="success">reportmanage/reportlist.jsp</result>
     		<result name="input">reportmanage/reportlist.jsp</result>
     	</action>
-    	<action name="openAddReportAction" class="reportAction" method="openAddReport ">
+    	<action name="openAddReportAction" class="reportAction" method="openAddReport">
     		<result name="success">/device/deviceinfo.jsp</result>
     		<result name="input">/device/deviceinfo.jsp</result>
     	</action>
