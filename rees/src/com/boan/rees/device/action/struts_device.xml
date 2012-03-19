@@ -30,15 +30,10 @@
     	</action>
     	
         <!-- 修改设备菜单 -->
-    	<action name="toUpdateDeviceAction" class="deviceInfoAction" method="toUpdateDevice">
+    	<action name="toModifyDeviceAction" class="deviceInfoAction" method="toModifyDevice">
     		<result name="success">/device/deviceinfo.jsp</result>
     		<result name="input">/device/deviceinfo.jsp</result>
     	</action>
-    	<!-- 添加设备菜单 -->
-    	 <action name="toModifyDemoAction" class="deviceInfoAction" method="toModifyDDevice">
-             <result name="success">/device/deviceinfo.jsp</result>
-            <result name="input">/device/deviceinfo.jsp</result>
-        </action>
       </package>
      <!-- 监控点Action -->
     <package name="pointinfo" extends="struts-default" namespace="/datamanage">

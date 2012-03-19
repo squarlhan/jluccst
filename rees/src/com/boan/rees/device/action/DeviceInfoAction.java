@@ -116,7 +116,7 @@ public class DeviceInfoAction extends ActionSupport{
 	 * 修改设备信息
 	 * @return
 	 */
-	public String toUpdateDevice(){
+	public String toModifyDevice(){
 		device.setDeptId("1");
 		device.setGroupId("1");
 		service.update(device);
