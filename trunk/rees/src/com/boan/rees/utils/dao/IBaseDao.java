@@ -40,6 +40,13 @@ public interface IBaseDao<T, ID extends Serializable> {
 	public void update(final T entity);
 	
 	/**
+	 * 执行hql语句
+	 * @param hql
+	 * @param values
+	 */
+	public void executeHql( String hql,Map<String, ?> values );
+	
+	/**
 	 * 删除实体对象
 	 * @param entity 待删除的对象
 	 * @return
