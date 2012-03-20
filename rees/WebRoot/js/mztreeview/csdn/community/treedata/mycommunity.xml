@@ -1,33 +1,21 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <nodes>
-    <node id="50201" url="/Expert/member/select_mystyle.asp" text="选择我的配色方案" />
-    <node id="50202" url='/Expert/member/MyForum.asp?typenum=1' text="我的帖子" XMLData="http://localhost:8080/cbfa/XMLNodeServlet">
-        <node text="child node" />
-        <node text="child node" />
-        <node text="child node" />
-        <node text="child node" />
-        <node text="child node" />
-        <node text="child node" />
-        <node text="child node" />
-        <node text="child node" />
-        <node text="child node" />
-        <node text="child node" />
-        <node text="child node" />
-        <node text="child node" />
-        <node text="child node" />
-        <node text="child node" />
-        <node text="child node" />
-        <node text="child node" />
-        <node text="child node" />
+    <node id="50201" text="公司级检测">
+    	<node id="5020101" text="丙烯腈厂">
+    		<node id="502010101" url="devicelist.jsp" text="第二丙烯车间" target="devicemanage" />
+    		<node id="502010102" url="devicelist.jsp" text="第一丙烯车间" target="devicemanage" />
+    	</node>
     </node>
-    <node id="50203" url='/Expert/member/MyForum.asp?typenum=2' text="我参与的讨论" />
-    <node id="50204" url='/Expert/member/MyForum.asp?typenum=3' text="我得分的帖子" />
-    <node id="50213" url='/list/myCommunityPoint.aspx' text="我的社区积分" />
-    <node id="50205" url='/Expert/member/MyExpertPoint.asp' text="我的专家分" />
-    <node id="50206" url='/MyFavorite/My_Favorite.asp' text="我的收藏夹" />
-    <node id="50207" url='http://message.csdn.net/ListMessage.aspx' text="短消息" />
-    <node id="50208" url='http://faq.csdn.net/Manage/ManageDefault.aspx' text="维护ＦＡＱ列表" />
-    <node id="50209" url='/Expert/member/ListCreditPoint.asp' text="我的信誉分变化记录" />
-    <node id="50210" url='/Member/ModifyUserInfo.aspx' text="修改我的社区信息" />
-    <node id="50212" url='http://www.csdn.net/Develop/Add_Article.asp' text="我的博客" />
+    <node id="50202" url='/Expert/member/MyForum.asp?typenum=1' text="工厂级检测" XMLData="">
+        <node id="5020201" text="乙稀厂">
+    		<node id="502020101" url="devicelist.jsp" text="低密度聚乙烯车间" target="devicemanage" />
+    		<node id="502020102" url="devicelist.jsp" text="动力车间" target="devicemanage" />
+    	</node>
+    </node>
+    <node id="50203" url='/Expert/member/MyForum.asp?typenum=2' text="车间级检测">
+    	<node id="5020301" text="电石厂">
+    		<node id="502030101" url="devicelist.jsp" text="AES车间" target="devicemanage" />
+    		<node id="502030102" url="devicelist.jsp" text="丙烯酸酯车间" target="devicemanage" />
+    	</node>
+    </node>
 </nodes>
