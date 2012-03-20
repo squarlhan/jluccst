@@ -88,6 +88,11 @@ public class ScriptJsTag extends SimpleTagSupport
 	 */
 	private String tab;
 	
+	/**
+	 * MzTreeView树
+	 */
+	private String mztreeview;
+	
 	@Override
 	public void doTag() throws JspException, IOException
 	{
@@ -177,6 +182,11 @@ public class ScriptJsTag extends SimpleTagSupport
 			getJspContext().getOut().write( "<!--tab-->\r\n" );
 			getJspContext().getOut().write( "<link rel=\"stylesheet\" type=\"text/css\" href=\"" + contextPath + "/js/tab/tabs.css\"/>\r\n" );
 			getJspContext().getOut().write( "<script type=\"text/javascript\" src=\"" + contextPath + "/js/tab/jquery.tab.js\"></script>\r\n" );
+		}
+		if( "true".equalsIgnoreCase( mztreeview ))
+		{
+			getJspContext().getOut().write( "<!--MzTreeView-->\r\n" );
+			getJspContext().getOut().write( "<script type=\"text/javascript\" src=\"" + contextPath + "/js/mztreeview/jsframework.js\"></script>\r\n" );
 		}
 	}
 
@@ -292,5 +302,13 @@ public class ScriptJsTag extends SimpleTagSupport
 
 	public void setTab(String tab) {
 		this.tab = tab;
+	}
+
+	public String getMztreeview() {
+		return mztreeview;
+	}
+
+	public void setMztreeview(String mztreeview) {
+		this.mztreeview = mztreeview;
 	}
 }
