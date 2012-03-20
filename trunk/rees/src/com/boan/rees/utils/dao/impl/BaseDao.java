@@ -191,6 +191,16 @@ public class BaseDao<T, ID extends Serializable> implements IBaseDao<T, ID> {
 		Object obj = query.uniqueResult();
 		return obj==null ? 0 : Integer.valueOf(obj.toString());
 	}
+
+	@Override
+	public void executeHql( String hql, Map<String, ?> values )
+	{
+		Query query = getSession().createQuery(hql);
+		if (values != null) {
+			query.setProperties(values);
+		}
+		query.executeUpdate();
+	}
 	
 }
 
