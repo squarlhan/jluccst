@@ -52,7 +52,7 @@
 </script>
 </head>
 <body>
-<s:form  name="addReport" action="openAddReportAction.action" theme="simple">
+<s:form  name="repform" action="openAddReportAction.action" theme="simple">
 <table width="100%" border="0" cellspacing="5" cellpadding="0">
   <tr>
     <td><table width="100%" style="height:100%;" border="0" cellspacing="6" cellpadding="0">
