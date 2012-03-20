@@ -6,7 +6,7 @@
 <head>
 	<title>设置设备监测点</title>
 	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-	<j:scriptlink jquery="true" livequery="true" poshytip="true" contextmenu="true" jqueryui="true" />
+	<j:scriptlink jquery="true" livequery="true" poshytip="true" contextmenu="true" jqueryui="true" tipswindow="true"/>
 	<script type="text/javascript">
 		$(function(){
 			//动态绑定检测点
@@ -88,7 +88,6 @@
 					}
 				}
 			});
-			
 		});
 	</script>
 	<style type="text/css">
