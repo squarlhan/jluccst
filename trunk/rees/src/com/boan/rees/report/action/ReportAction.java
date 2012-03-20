@@ -23,6 +23,9 @@ import com.opensymphony.xwork2.ActionSupport;
 @Controller("reportAction")
 @Scope("prototype")
 public class ReportAction extends ActionSupport{
+
+	private static final long serialVersionUID = 1L;
+
 	/**
 	 * 分页列表
 	 */
