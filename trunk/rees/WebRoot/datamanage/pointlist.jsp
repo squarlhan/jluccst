@@ -7,47 +7,14 @@
 	<title></title>
 	<j:scriptlink css="true" jquery="true" />
 	<script type="text/javascript">
-<!--
-	$(document)
-			.ready(
-					function() {
-						$("#addBtn").click(
-								function() {
-									parent.parent.tipsWindown("菜单信息",
-											"iframe:sysmanage/menuinfo.html",
-											"400", "160", "true", "", "true",
-											"no");
-								});
-						$(document)
-								.find("span[name='setpower']")
-								.each(
-										function(index, domEle) {
-											$(domEle)
-													.click(
-															function() {
-																parent.parent
-																		.tipsWindown(
-																				"菜单权限",
-																				"iframe:sysmanage/menupower.html",
-																				"430",
-																				"220",
-																				"true",
-																				"",
-																				"true",
-																				"no");
-															});
-										});
-					});
-//-->
-</script>
-	<style type="text/css">
-<!--
-.STYLE1 {
-	color: #FFFFFF;
-	font-weight: bold;
-}
--->
-</style>
+	<!--
+	$(document).ready(function() {
+		$("#addpointdata").click(function() {
+			parent.parent.parent.tipsWindown("添加监测点数据", "iframe:datamanage/pointdatainfo.jsp", "400", "260", "true", "", "true", "");
+		});
+	});
+	//-->
+	</script>
 	</head>
 	<body>
 		<table width="100%" style="height: 100%;" border="0" cellspacing="5"
@@ -63,27 +30,18 @@
 										2012年2月
 									</option>
 								</select>
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								<input name="打开设备图" class="btn_4" type="button" value="打开设备图"
 									onClick="window.open('clickpicture.html')" />
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 								<input name="查看频谱图" class="btn_4" type="button" value="查看柱状图"
 									onClick="window.open('../images/柱状图样子.png')" />
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								<input name="添加" class="btn_4" type="button" value="添加"
-									onClick="window.open('../images/频谱图.jpg')" disabled="disabled"
-									id="添加" />
-								&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-								<input name="修改" class="btn_4" type="button" value="修改"
-									onClick="window.open('../images/频谱图.jpg')" disabled="disabled"
-									id="修改" />
+								<input class="btn_5" type="button" value="添加监测数据" id="addpointdata" />
 							</td>
 						</tr>
 					</table>
 					<table width="100%" border="0" cellpadding="5" cellspacing="1"
 						bgcolor="#d5e4fd">
 						<tr>
-							<td height="26" colspan="2" align="center"
+							<td colspan="2" align="center"
 								background="../images/headerbg.jpg">
 								测点（A）
 							</td>
@@ -100,19 +58,19 @@
 							<td align="center" bgcolor="#FFFFFF">
 								参数
 							</td>
-							<td height="26" align="center" bgcolor="#FFFFFF">
+							<td align="center" bgcolor="#FFFFFF">
 								数据
 							</td>
-							<td height="26" align="center" bgcolor="#FFFFFF">
+							<td align="center" bgcolor="#FFFFFF">
 								参数
 							</td>
-							<td height="26" align="center" bgcolor="#FFFFFF">
+							<td align="center" bgcolor="#FFFFFF">
 								数据
 							</td>
-							<td height="26" align="center" bgcolor="#FFFFFF">
+							<td align="center" bgcolor="#FFFFFF">
 								参数
 							</td>
-							<td height="26" align="center" bgcolor="#FFFFFF">
+							<td align="center" bgcolor="#FFFFFF">
 								数据
 							</td>
 						</tr>
@@ -120,19 +78,19 @@
 							<td align="center" bgcolor="#FFFFFF">
 								a
 							</td>
-							<td height="26" align="center" bgcolor="#FFFFFF">
+							<td align="center" bgcolor="#FFFFFF">
 								6.4
 							</td>
-							<td height="26" align="center" bgcolor="#FFFFFF">
+							<td align="center" bgcolor="#FFFFFF">
 								a
 							</td>
-							<td height="26" align="center" bgcolor="#FFFFFF">
+							<td align="center" bgcolor="#FFFFFF">
 								5.5
 							</td>
-							<td height="26" align="center" bgcolor="#FFFFFF">
+							<td align="center" bgcolor="#FFFFFF">
 								a
 							</td>
-							<td height="26" align="center" bgcolor="#FFFFFF">
+							<td align="center" bgcolor="#FFFFFF">
 								6.1
 							</td>
 						</tr>
@@ -140,19 +98,19 @@
 							<td align="center" bgcolor="#FFFFFF">
 								v
 							</td>
-							<td height="26" align="center" bgcolor="#FFFFFF">
+							<td align="center" bgcolor="#FFFFFF">
 								3.8
 							</td>
-							<td height="26" align="center" bgcolor="#FFFFFF">
+							<td align="center" bgcolor="#FFFFFF">
 								v
 							</td>
-							<td height="26" align="center" bgcolor="#FFFFFF">
+							<td align="center" bgcolor="#FFFFFF">
 								4.2
 							</td>
-							<td height="26" align="center" bgcolor="#FFFFFF">
+							<td align="center" bgcolor="#FFFFFF">
 								v
 							</td>
-							<td height="26" align="center" bgcolor="#FFFFFF">
+							<td align="center" bgcolor="#FFFFFF">
 								4.0
 							</td>
 						</tr>
@@ -160,19 +118,19 @@
 							<td align="center" bgcolor="#FFFFFF">
 								h
 							</td>
-							<td height="26" align="center" bgcolor="#FFFFFF">
+							<td align="center" bgcolor="#FFFFFF">
 								9.9
 							</td>
-							<td height="26" align="center" bgcolor="#FFFFFF">
+							<td align="center" bgcolor="#FFFFFF">
 								h
 							</td>
-							<td height="26" align="center" bgcolor="#FFFFFF">
+							<td align="center" bgcolor="#FFFFFF">
 								10.1
 							</td>
-							<td height="26" align="center" bgcolor="#FFFFFF">
+							<td align="center" bgcolor="#FFFFFF">
 								h
 							</td>
-							<td height="26" align="center" bgcolor="#FFFFFF">
+							<td align="center" bgcolor="#FFFFFF">
 								10.0
 							</td>
 						</tr>
