@@ -5,8 +5,8 @@
 <struts>
     <package name="person_report" extends="struts-default" namespace="/">
     	<action name="openReportAction" class="reportAction" method="openReport">
-    		<result name="success">reportmanage/reportlist.jsp</result>
-    		<result name="input">reportmanage/reportlist.jsp</result>
+    		<result name="success">/reportmanage/reportlist.jsp</result>
+    		<result name="input">/reportmanage/reportlist.jsp</result>
     	</action>
     	<action name="openAddReportAction" class="reportAction" method="openAddReport">
     		<result name="success">/device/deviceinfo.jsp</result>
