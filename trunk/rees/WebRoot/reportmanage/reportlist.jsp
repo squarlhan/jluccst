@@ -2,6 +2,7 @@
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%@ taglib prefix="j" uri="/script-tags"%>
 <%@ taglib prefix="p" uri="/WEB-INF/page-tags.tld"%>
+
 <%
 	/**
 	 * All right reserved.
@@ -37,7 +38,7 @@
 	<j:scriptlink css="true" tipswindow="true" jmessagebox="true" jquery="true" validate="true"/>
 
 	<script type="text/javascript">
-	<!--
+
 	$(function(){
 		$("#addbtn").click(function(){
 			parent.parent.parent.tipsWindown("添加汇报","iframe:openAddReportAction.action","600","425","true","","true","no");
@@ -99,7 +100,7 @@
   </head>
   
 <body>
-<s:form>
+<s:form action="openReportAction" id="replist">
 <table width="100%" style="height:100%;" border="0" cellspacing="5" cellpadding="0">
   <tr>
     <td valign="top"><table width="100%" border="0" cellspacing="5" cellpadding="0">
