@@ -38,7 +38,7 @@ public class PersonReportServiceImpl implements IPersonReportService {
 	}
 	
 	/**
-	 * 删除
+	 * 根据id删除报表
 	 */
 	@Override
 	public void deletePersonReport(String... ids ){
@@ -46,7 +46,7 @@ public class PersonReportServiceImpl implements IPersonReportService {
 	}
 
 	/**
-	 * 保存
+	 * 保存报表
 	 */
 	@Override
 	public void save(PersonReport table1) {
@@ -54,7 +54,15 @@ public class PersonReportServiceImpl implements IPersonReportService {
 	}
 
 	/**
-	 * 获取
+	 * 修改报表
+	 */
+	@Override
+	public void update(PersonReport reportInfo) {
+		personReportDao.update(reportInfo);
+	}
+
+	/**
+	 * 根据id查找报表
 	 */
 	@Override
 	public PersonReport get(String id) {
@@ -62,7 +70,7 @@ public class PersonReportServiceImpl implements IPersonReportService {
 	}
 
 	/**
-	 * 按分页查询
+	 * 按分页查询报表
 	 */
 	@Override
 	public Pagination<PersonReport> findPersonReportForPage(Map<String, ?> values,Pagination<PersonReport> pagination){
