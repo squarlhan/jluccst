@@ -36,6 +36,9 @@
 		<meta http-equiv="description" content="This is my page">
 		<j:scriptlink  css="true" jmessagebox="true" jquery="true" tipswindow="true" validate="true"/>
 		<script type="text/javascript">
+		/**
+	  	 * 验证条件
+	  	 */
 		var _device_submit = {
 				rules: {
 					//"device.deviceNum":{},
@@ -47,8 +50,12 @@
 					"device.filePath":{url:true}
 					}
 				};
+		/**
+	  	 * 准备工作
+	  	 */
 				$(document).ready(function(){
 			  		$.validator.setDefaults({
+			  			//验证框架的验证器的默认设置区
 						debug: false,onkeyup: false,onfocusout:false,focusCleanup: true,
 					    errorPlacement:function(error, element) {},
 						invalidHandler: function(form, validator) {
@@ -65,6 +72,7 @@
 			  	 * 保存
 			  	 */
 				$.fn.save = function(){
+					//如果有id就说明是修改action
 					var deviceId = $("#hid_deviceId").val();
 					if(deviceId!=""){
 						$("#addBtn").click(function() {
@@ -77,7 +85,7 @@
 		               	form1.submit();
 		           	});
 						}
-			    		
+			    		//如果id为空说明是添加action
 					$("#addBtn").click(function() {
 						var validate_settings_submit = jQuery.extend({}, _device_submit);
 		               	var validator = $("form").validate(validate_settings_submit);
