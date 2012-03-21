@@ -22,13 +22,15 @@
         </action>
     <!-- 打开修改公司信息页面 -->
         <action name="openModifyCompanyAction" class="companyAction" method="openModifyCompany">
-          <result name="success">/systemmanage/companymodify.jsp</result>
-          <result name="input">/systemmanage/companymodify.jsp</result>
+          <result name="success">/systemmanage/companyinfo.jsp</result>
+          <result name="input">/systemmanage/companyinfo.jsp</result>
         </action>
         <action name="toModifyCompanyAction" class="companyAction" method="toModifyCompany">
-          <result name="SUCCESS">/systemmanage/companymodify.jsp</result>
-          <result name="input">/systemmanage/companymodify.jsp</result>
+          <result name="SUCCESS">/systemmanage/companyinfo.jsp</result>
+          <result name="input">/systemmanage/companyinfo.jsp</result>
         </action>
+    <!-- 删除 -->
+        <action name="deleteCompanyAction" class="companyfoAction" method="deleteCompany"/>
     </package>	
     
     <!-- 工厂Action -->
