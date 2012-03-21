@@ -22,7 +22,7 @@ import com.boan.rees.utils.page.Pagination;
  * @version 1.0.0
  */
 
-@Service("groupFactoryService")
+@Service("factoryService")
 public class FactoryServiceImpl implements IFactoryService{
 
 	@Autowired
@@ -73,7 +73,7 @@ public class FactoryServiceImpl implements IFactoryService{
 		
 		String hql = "from Factory";
 		List<Factory> data = groupFactoryDao.findForPage(hql, values, pagination.getStartIndex(), pagination.getPageSize());
-		hql = "select count(*) from Company";
+		hql = "select count(*) from Factory";
 		int totalRows = groupFactoryDao.findCountForPage(hql, values);
 		pagination.setTotalRows(totalRows);
 		pagination.setData(data);
