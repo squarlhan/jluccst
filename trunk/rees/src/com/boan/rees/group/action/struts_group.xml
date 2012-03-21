@@ -5,12 +5,49 @@
 <struts>
 	<!-- 公司Action -->
     <package name="group_company" extends="struts-default" namespace="/">
-    	
+    <!-- 用于分页显示 -->
+    	<action name="openCompanyAction" class="companyAction" method="openCompany">
+    	<result name="success">/systemmanage/companylist.jsp</result>
+    	<result name="input">/systemmanage/companylist.jsp</result>    	
+    	</action>
+    <!-- 用于打开添加页 -->
+    	<action name="openAddCompanyAction" class="companyAction" method="openAddCompany">
+    	  <result name="success">/systemmanage/companyinfo.jsp</result>
+    	  <result name="input">/systemmanage/companyinfo.jsp</result>
+    	</action>
+    <!-- 用于添加一个公司信息 -->
+        <action name="toAddCompanyAction" class="companyAction"  method="toAddCompany">
+          <result name="success">/systemmanage/companyinfo.jsp</result>
+          <result name="input">/systemmanage/companyinfo.jsp</result>
+        </action>
+    <!-- 打开修改公司信息页面 -->
+        <action name="openModifyCompanyAction" class="companyAction" method="openModifyCompany">
+          <result name="success">/systemmanage/companymodify.jsp</result>
+          <result name="input">/systemmanage/companymodify.jsp</result>
+        </action>
+        <action name="toModifyCompanyAction" class="companyAction" method="toModifyCompany">
+          <result name="SUCCESS">/systemmanage/companymodify.jsp</result>
+          <result name="input">/systemmanage/companymodify.jsp</result>
+        </action>
     </package>	
     
     <!-- 工厂Action -->
     <package name="group_factory" extends="struts-default" namespace="/">
-    	
+    <!-- 用于分页显示 -->
+    	<action name="openFactoryAction" class="factoryAction" method="openFactory">
+    	     <result name="success">/systemmanage/factorylist.jsp</result>
+    	     <result name="input">/systemmanage/factorylist.jsp</result>
+    	</action>
+    <!-- 打开添加页 -->
+    	<action name="openAddFactoryAction" class="factoryAction" method="openAddFactory">
+    	     <result name="success">/systemmanage/factoryinfo.jsp</result>
+    	     <result name="input">/systemmanage/factoryinfo.jsp</result>
+    	</action>
+    <!-- 用于添加一个工厂信息 -->
+    	<action name="toAddFactoryAction" class="factoryAction" method="toAddFactory">
+    	     <result name="success">/systemmanage/factoryinfo.jsp</result>
+    	     <result name="input">/systemmanage/factoryinfo.jsp</result>
+    	</action>
     </package>	
     
     <!-- 权限Action -->
