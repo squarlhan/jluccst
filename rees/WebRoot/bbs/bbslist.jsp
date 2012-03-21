@@ -74,21 +74,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               <td align="center" background="../images/headerbg.jpg"><strong>发起人</strong></td>
               <td align="center" background="../images/headerbg.jpg"><strong>状态</strong></td>
             </tr>
-             <s:iterator value="pagination.data" status="obj">
             <tr>
-            <td height="26" align="center" bgcolor="#FFFFFF" >  
-				<s:checkbox id="%{#obj.id}" name="ids" fieldValue="%{id}" value="false" theme="simple"/>
-			</td>
-            <td height="26" bgcolor="#FFFFFF"><a href="javascript:void(0);" id="gotobbs">
-              <s:property value="issueName"/>&nbsp;</a>
-          </td>
-             
- 
+              <td height="26" align="center" bgcolor="#FFFFFF"><input type="checkbox" name="checkbox" id="checkbox"></td>
+              <td height="26" bgcolor="#FFFFFF"><a href="javascript:void(0);" id="gotobbs">关于XXX的议题，希望大踊跃发言...</a></td>
               <td height="26" align="center" bgcolor="#FFFFFF"><A title="点击这里可查看在线人员名单" href="bbslist_">160/160(<span class="STYLE2">满员</span>)</A></td>
          	  <td height="26" align="center" bgcolor="#FFFFFF">管理员</td>
               <td height="26" align="center" bgcolor="#FFFFFF"><span class="STYLE3">进行中</span></td>
             </tr>
-                </s:iterator>
             <s:iterator value="pagination.data" status="obj">
 			<tr>
 	  			
