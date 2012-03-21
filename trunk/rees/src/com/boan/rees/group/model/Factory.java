@@ -50,7 +50,7 @@ public class Factory {
 	 * 工厂负责人
 	 */
 	@Column(name = "PRICIPAL")
-	private String pricipal;
+	private String principal;
 	
 	/**
 	 * 创建时间
@@ -97,11 +97,11 @@ public class Factory {
 	}
 
 	public String getPricipal() {
-		return pricipal;
+		return principal;
 	}
 
-	public void setPricipal(String pricipal) {
-		this.pricipal = pricipal;
+	public void setPricipal(String principal) {
+		this.principal = principal;
 	}
 
 	public Calendar getCreateTime() {

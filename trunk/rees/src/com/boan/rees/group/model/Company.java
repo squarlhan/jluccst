@@ -27,7 +27,7 @@ public class Company {
 	/**
 	 * 公司实体主键
 	 */
-	private String ID;
+	private String id;
 	
 	/**
 	 * 公司电话
@@ -66,41 +66,35 @@ public class Company {
 	@Column(name = "CREATE_TIME")
 	private Calendar createTime;
 
-
-	public String getID() {
-		return ID;
+	
+	
+	public String getId() {
+		return id;
 	}
 
-
-	public void setID(String iD) {
-		ID = iD;
+	public void setId(String id) {
+		this.id = id;
 	}
-
 
 	public String getPhone() {
 		return phone;
 	}
 
-
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
-
 
 	public String getAddress() {
 		return address;
 	}
 
-
-	public void setAddress(String address) {
+    public void setAddress(String address) {
 		this.address = address;
 	}
-
 
 	public String getRootId() {
 		return rootId;
 	}
-
 
 	public void setRootId(String rootId) {
 		this.rootId = rootId;
@@ -111,31 +105,23 @@ public class Company {
 		return companyName;
 	}
 
-
 	public void setCompanyName(String companyName) {
 		this.companyName = companyName;
 	}
-
 
 	public int getSortIndex() {
 		return sortIndex;
 	}
 
-
 	public void setSortIndex(int sortIndex) {
 		this.sortIndex = sortIndex;
 	}
-
 
 	public Calendar getCreateTime() {
 		return createTime;
 	}
 
-
 	public void setCreateTime(Calendar createTime) {
 		this.createTime = createTime;
 	}
-
-	
-
 }
