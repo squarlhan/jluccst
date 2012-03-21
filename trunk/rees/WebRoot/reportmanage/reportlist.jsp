@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%@ taglib prefix="j" uri="/script-tags"%>
-<%@ taglib prefix="p" uri="/WEB-INF/page-tags.tld"%>
+<%@ taglib prefix="page" uri="/WEB-INF/page-tags.tld"%>
 
 <%
 	/**
@@ -22,11 +22,13 @@
 	response.setHeader( "Expires", "0" );
 	request.setCharacterEncoding( "utf-8" );
 	String path = request.getContextPath();
+	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
+    <base href="<%=basePath%>">
     <title>个人报表列表</title>
     
 	<meta http-equiv="pragma" content="no-cache">
@@ -44,12 +46,43 @@
 			parent.parent.parent.tipsWindown("添加汇报","iframe:openAddReportAction.action","600","425","true","","true","no");
 		});
 		$("#editbtn").click(function(){
-			parent.parent.parent.tipsWindown("修改汇报","iframe:sysmanage/worksummarizeinfoedit.html","600","425","true","","true","no");
+			parent.parent.parent.tipsWindown("修改汇报","iframe:openModifyReportAction.action","600","425","true","","true","no");
 		});
 		$.fn.CheckBoxAll("cbk_all");
   		$.fn.UnCheckBoxAll("ids","cbk_all");
   	});
 		
+		/**
+		 * 修改报表
+		 */
+		$('a[name="edit"]').each(function(){
+			$(this).click(function(){
+				var url = $(this).attr("url");
+				parent.parent.parent.tipsWindown("修改报表信息","iframe:"+url,"460","350","true","","true","no");
+			});
+		});
+		
+		/**
+		 * 删除单个报表
+		 */
+		$('a[name="delete"]').each(function(){
+			$(this).click(function(){
+				var url = $(this).attr("url");
+				if(window.confirm("您确定要删除这条信息吗？")){
+					$.post(url, $('#repform').serialize(), function(data){window.location.href=window.location.href;});
+				}
+			});
+		});
+		
+		/**
+		 * 删除所选报表
+		 */
+		$("#deletepointbtn").click(function(){
+			var url = "deleteReportAction.action";
+			if(window.confirm("您确定要删除所选信息吗？")){
+				$.post(url, $('#repform').serialize(), function(data){window.location.href=window.location.href;});
+			}
+		});
 
 	/**
 	 * 点击选复选框时，执行全选/取消全选功能
@@ -96,9 +129,7 @@
 		});
 	};
 </script>
-
   </head>
-  
 <body>
 <s:form action="openReportAction" id="replist">
 <table width="100%" style="height:100%;" border="0" cellspacing="5" cellpadding="0">
@@ -141,12 +172,25 @@
 		  <td height="26" align="center" bgcolor="#FFFFFF">
 		  	<s:date  name="reportDate" format="yyyy-MM-dd HH:mm" />&nbsp;
 		  	</td>
+		  
+		  <td height="26" colspan="2" align="center" bgcolor="#FFFFFF">
+          	<s:url id="edit_url" action="openModifyReportAction">   
+				<s:param name="report.id" value="id"></s:param>   
+			</s:url>
+			<s:url id="delete_url" action="deleteReportAction">   
+				<s:param name="ids" value="id"></s:param>   
+			</s:url>
+			
+         	<a name="edit" href="javascript:void(0);" url="${edit_url}">编辑</a>  
+         	<a name="delete" href="javascript:void(0);" url="${delete_url}">删除</a>  
+          </td>
 	    </tr>
 		</s:iterator>
-        
         <tr>
-			<page:pages currentPage="pagination.currentPage" totalPages="pagination.totalPages" totalRows="pagination.totalRows" styleClass="page" theme="text" >
-			</page:pages>
+        	<td height="26" colspan="9" align="center" bgcolor="#FFFFFF">
+				<page:pages currentPage="pagination.currentPage" totalPages="pagination.totalPages" totalRows="pagination.totalRows" styleClass="page" theme="text" >
+				</page:pages>
+			</td>
         </tr>
       </table></td>
   </tr>
