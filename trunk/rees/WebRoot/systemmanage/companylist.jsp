@@ -22,18 +22,32 @@
 	response.setHeader( "Expires", "0" );
 	request.setCharacterEncoding( "utf-8" );
 	String path = request.getContextPath();
+    String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html >
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title></title>
-<j:scriptlink css="=true" jquery="true" tipswindow="true" validate="true" jmessagebox="true"></j:scriptlink>
+    <base href="<%=basePath%>">   
+    <title>公司信息列表</title>   
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta http-equiv="expires" content="0">    
+	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+	<meta http-equiv="description" content="This is my page">
+	<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+	<j:scriptlink css="true" tipswindow="true" jmessagebox="true" jquery="true" validate="true"/>
+	<style type="text/css"> 
+	<!--
+	.STYLE1 {
+		color: #FFFFFF;
+		font-weight: bold;
+	}
+	-->
+	</style>
 <script type="text/javascript">
-<!--
 	$(document).ready(function() {
 		$("#addBtn").click(function(){
-			parent.parent.tipsWindown("公司信息","iframe:openAddCompanyAction.action","350","1200","true","","true","no");
+			parent.parent.parent.tipsWindown("公司信息","iframe:openAddCompanyAction.action","350","1200","true","","true","no");
 		});
 		$("#editbtn").click(function(){
 				parent.parent.parent.tipsWindown("修改公司信息","iframe:openModifyCompanyAction.action","460","1200","true","","true","no");
@@ -41,13 +55,13 @@
 	});
 	/**
 	  		 * 修改公司信息
-	  		 */
+	  		*/
 	  		$('a[name="edit"]').each(function(){
 	  			$(this).click(function(){
 	  				var url = $(this).attr("url");
-	  				parent.parent.parent.tipsWindown("修改设备信息","iframe:"+url,"460","350","true","","true","no");
+	  				parent.parent.parent.tipsWindown("修改公司信息","iframe:"+url,"460","350","true","","true","no");
 	  			});
-	  		});
+	  		}); 
 	  		
 	  		/**
 	  		 * 删除单个公司信息
@@ -56,7 +70,7 @@
 	  			$(this).click(function(){
 	  				var url = $(this).attr("url");
 	  				if(window.confirm("您确定要删除这条信息吗？")){
-	  					$.post(url, $('#form1').serialize(), function(data){window.location.href=window.location.href;});
+	  					$.post(url, $('#companyForm').serialize(), function(data){window.location.href=window.location.href;});
 	  				}
 	  			});
 	  		});
@@ -70,20 +84,10 @@
   					$.post(url, $('#form1').serialize(), function(data){window.location.href=window.location.href;});
   				}
 	  		});
-//-->
 </script>
-<style type="text/css">
-<!--
-.STYLE1 {
-	color: #FFFFFF;
-	font-weight: bold;
-}
-.STYLE2 {color: #FF0000}
--->
-</style>
 </head>
 <body>
-<s:form id="companyForm" action="openCompanyAction.action">
+<s:form id="companyForm" name="formCompany" action="openCompanyAction.action">
 <table width="100%" style="height:100%;" border="0" cellspacing="5" cellpadding="0">
   <tr>
     <td valign="top"><table width="100%" border="0" cellspacing="5" cellpadding="0">
@@ -118,9 +122,9 @@
               <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="rootId"/></td>
               <td height="26" colspan="2" align="center" bgcolor="#FFFFFF">
           	     <s:url id="edit_url" action="openModifyCompanyAction">   
-				      <s:param name="device.id" value="id"></s:param>   
+				      <s:param name="company.id" value="id"></s:param>   
 			     </s:url>
-			     <s:url id="delete_url" action="deleteCompanyAction">   
+			     <s:url id="delete_url" action="deleteCompanyAction">      
 				      <s:param name="ids" value="id"></s:param>   
 			     </s:url>
          	     <a name="edit" href="javascript:void(0);" url="${edit_url}">编辑</a>  
