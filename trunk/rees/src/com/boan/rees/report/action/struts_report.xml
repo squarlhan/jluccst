@@ -3,16 +3,41 @@
     "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
     "http://struts.apache.org/dtds/struts-2.3.dtd">	
 <struts>
+	<!-- 报表Action -->
     <package name="person_report" extends="struts-default" namespace="/">
+    	
+    	<!-- 打开报表列表 -->
     	<action name="openReportAction" class="reportAction" method="openReport">
     		<result name="success">/reportmanage/reportlist.jsp</result>
     		<result name="input">/reportmanage/reportlist.jsp</result>
     	</action>
-    	<action name="openAddReportAction" class="reportAction" method="openAddReport">
-    		<result name="success">/device/deviceinfo.jsp</result>
-    		<result name="input">/device/deviceinfo.jsp</result>
-    	</action>
-    		
-    </package>
     	
+    	<!-- 打开添加报表页面 -->
+    	<action name="openAddReportAction" class="reportAction" method="openAddReport">
+    		<result name="success">/reportmanage/reportinfo.jsp</result>
+    		<result name="input">/reportmanage/reportinfo.jsp</result>
+    	</action>
+    	
+    	<!-- 添加报表菜单 -->
+    	 <action name="toAddReportAction" class="reportAction" method="toAddReport">
+            <result name="success">/reportmanage/reportinfo.jsp</result>
+            <result name="input">/reportmanage/reportinfo.jsp</result>
+        </action>
+        
+        <!-- 删除报表 -->
+        <action name="deleteReportAction" class="reportAction" method="deleteReport"/>
+        
+        
+        <!-- 打开修改报表菜单 -->
+    	<action name="openModifyReportAction" class="reportAction" method="openModifyReport">
+    		<result name="success">/reportmanage/reportinfo.jsp</result>
+    		<result name="input">/reportmanage/reportinfo.jsp</result>
+    	</action>
+    	
+        <!-- 修改报表菜单 -->
+    	<action name="toModifyReportAction" class="reportAction" method="toModifyReport">
+    		<result name="success">/reportmanage/reportinfo.jsp</result>
+    		<result name="input">/reportmanage/reportinfo.jsp</result>
+    	</action>
+      </package>	    	
 </struts>
