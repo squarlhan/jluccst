@@ -218,7 +218,7 @@
 												<img src="images/menuto.jpg" width="5" height="5" />
 											</td>
 											<td>
-												<a href="sysmanage/worksummarize.html" target="mainFrame">个人报表</a>
+												<a href="reportmanage/reportmanage.jsp" target="mainFrame">个人报表</a>
 											</td>
 										</tr>
 										<tr>
@@ -226,7 +226,7 @@
 												<img src="images/menuto.jpg" width="5" height="5" />
 											</td>
 											<td>
-												<a href="sysmanage/worksummarizeselect.html"
+												<a href="reportmanage/reportsearchmanage.jsp"
 													target="mainFrame">报表查询</a>
 											</td>
 										</tr>
