@@ -23,21 +23,20 @@ import com.boan.rees.utils.page.Pagination;
  * @author Guiyun Yang
  * @version 1.0.0
  */
-
-@Service("groupCompanyService")
+@Service("companyService")
 public class CompanyServiceImpl implements ICompanyService{
 
 	
 	@Autowired
 	@Qualifier("groupCompanyDao")
-	private ICompanyDao groupCompanyDao;
+	private ICompanyDao companyDao;
 	@Override
 	/**
 	 * 查找全部公司
 	 */
 	public List<Company> findAllGroupCompany() {
 		
-		return groupCompanyDao.findAll();
+		return companyDao.findAll();
 	}
 
 	@Override
@@ -47,7 +46,7 @@ public class CompanyServiceImpl implements ICompanyService{
 	 */
 	public Company get(String id) {
 		
-		return groupCompanyDao.get(id);
+		return companyDao.get(id);
 	}
 
 	@Override
@@ -57,7 +56,7 @@ public class CompanyServiceImpl implements ICompanyService{
 	 */
 	public void deleteGroupCompany(String... ids) {
 		
-		groupCompanyDao.delete(ids);
+		companyDao.delete(ids);
 	}
 
 	@Override
@@ -67,7 +66,7 @@ public class CompanyServiceImpl implements ICompanyService{
 	 */
 	public void save(Company table1) {
 	
-		groupCompanyDao.save(table1);
+		companyDao.save(table1);
 	}
 	
 	@Override
@@ -77,9 +76,9 @@ public class CompanyServiceImpl implements ICompanyService{
 	public Pagination<Company> findCompanyForPage(Map<String, ?> values,Pagination<Company> pagination){
 		
 		String hql = "from Company";
-		List<Company> data = groupCompanyDao.findForPage(hql, values, pagination.getStartIndex(), pagination.getPageSize());
+		List<Company> data = companyDao.findForPage(hql, values, pagination.getStartIndex(), pagination.getPageSize());
 		hql = "select count(*) from Company";
-		int totalRows = groupCompanyDao.findCountForPage(hql, values);
+		int totalRows = companyDao.findCountForPage(hql, values);
 		pagination.setTotalRows(totalRows);
 		pagination.setData(data);
 		return pagination;
