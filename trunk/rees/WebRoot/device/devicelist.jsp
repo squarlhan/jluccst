@@ -66,7 +66,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  		});
 	  		
 	  		/**
-	  		 * 删除单个设备信息
+	  		 * 删除所选设备信息
 	  		 */
 	  		$("#deletepointbtn").click(function(){
   				var url = "deleteDeviceAction.action";
@@ -181,6 +181,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           <td height="26" align="center" bgcolor="#FFFFFF">
           	   <s:property value="controlpoint"/>&nbsp;
           </td> 
+         
+          
           <td height="26" colspan="2" align="center" bgcolor="#FFFFFF">
           	<s:url id="edit_url" action="openModifyDeviceAction">   
 				<s:param name="device.id" value="id"></s:param>   
@@ -188,6 +190,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<s:url id="delete_url" action="deleteDeviceAction">   
 				<s:param name="ids" value="id"></s:param>   
 			</s:url>
+			
          	<a name="edit" href="javascript:void(0);" url="${edit_url}">编辑</a>  
          	<a name="delete" href="javascript:void(0);" url="${delete_url}">删除</a>  
           </td>
