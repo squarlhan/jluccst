@@ -36,29 +36,81 @@
 		<meta http-equiv="description" content="This is my page">
 		<j:scriptlink  css="true" jmessagebox="true" jquery="true" tipswindow="true" validate="true"/>
 		<script type="text/javascript">
-      $(document).ready( function() {
-    	
-    	
-    	var deviceId = $("#hid_deviceId").val();
-    	//判断是否有Id，如果有，说明是修改，这改变提交地址
-    	if(deviceId!=""){
-    		$("#form1").attr("action","toModifyDeviceAction.action");
-    	}
-    	
-    	
-  		$("#addBtn").click(function(){
-  			parent.$("#windown-close").click();
-  			parent.location.href = $.fn.change_url(parent.location.href);
-  		});
-  		$("#closeBtn").click(function(){
-  			parent.$("#windown-close").click();
-  		});
-  	});
+		var _device_submit = {
+				rules: {
+					//"device.deviceNum":{},
+					//"device.deviceType":{},
+					"device.deviceName":{required:true},
+					//"device.deviceModel":{},
+					//"device.deviceFactory":{},
+					"device.controlpoint":{digits:true},
+					"device.filePath":{url:true}
+					}
+				};
+				$(document).ready(function(){
+			  		$.validator.setDefaults({
+						debug: false,onkeyup: false,onfocusout:false,focusCleanup: true,
+					    errorPlacement:function(error, element) {},
+						invalidHandler: function(form, validator) {
+				        	$.each(validator.invalid,function(key,value){
+				            	alert(value);document.getElementById(key).focus();return false;
+				        	}); 
+				    	}
+					})
+					$.fn.save();
+			  		$.fn.close();
+			  		$.fn.initpage();
+			  	});
+				/**
+			  	 * 保存
+			  	 */
+				$.fn.save = function(){
+					var deviceId = $("#hid_deviceId").val();
+					if(deviceId!=""){
+						$("#addBtn").click(function() {
+						var validate_settings_submit = jQuery.extend({}, _device_submit);
+		               	var validator = $("form").validate(validate_settings_submit);
+		               	if(!validator.form()){
+							return false;
+						}
+		               	form1.action = "toModifyDeviceAction.action";
+		               	form1.submit();
+		           	});
+						}
+			    		
+					$("#addBtn").click(function() {
+						var validate_settings_submit = jQuery.extend({}, _device_submit);
+		               	var validator = $("form").validate(validate_settings_submit);
+		               	if(!validator.form()){
+							return false;
+						}
+		               	form1.action = "toAddDeviceAction.action";
+		               	form1.submit();
+		           	});
+	          	}
+				
+				/**
+				 * 关闭
+				 */
+			 	$.fn.close = function(){
+			 		$("#closeBtn").click(function(){
+			  			parent.$("#windown-close").click();
+			  		});
+				}
+				/**
+				 * 初始化页面
+				 */
+				$.fn.initpage = function(){
+					$("#txt_deviceNum").focus();
+				}
+		
+     
+
 </script>
 	</head>
 
 	<body>
-		<s:form id="form1" action="toAddDeviceAction.action" theme="simple" >
+		<s:form id="form1" theme="simple" >
 		<s:hidden id="hid_deviceId" name="device.id"></s:hidden>
 		<table width="100%" border="0" cellspacing="5" cellpadding="0">
 			<tr>
