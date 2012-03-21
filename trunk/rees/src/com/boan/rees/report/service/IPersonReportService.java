@@ -23,19 +23,25 @@ public interface IPersonReportService {
 	public List<PersonReport> findAllPersonReport();
 	
 	/**
-	 * 获取
+	 * 根据id查找报表
 	 */
 	public PersonReport get(String id);
 	
 	/**
-	 * 删除
+	 * 根据id删除报表
 	 */
 	public void deletePersonReport(String... ids );
 	
 	/**
-	 * 保存
+	 * 保存报表
 	 */
 	public void save(PersonReport table1);
+
+	/**
+	 * 修改报表信息
+	 * @param reportInfo 报表对象
+	 */
+	public void update(PersonReport reportInfo);
 	
 	/**
 	 * 按分页查询
