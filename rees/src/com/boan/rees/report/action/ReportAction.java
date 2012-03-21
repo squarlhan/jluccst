@@ -2,6 +2,7 @@ package com.boan.rees.report.action;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,35 +24,44 @@ import com.opensymphony.xwork2.ActionSupport;
 @Controller("reportAction")
 @Scope("prototype")
 public class ReportAction extends ActionSupport{
-
-	private static final long serialVersionUID = 1L;
-
+	/**
+	 * 用于调用数据库相关操作
+	 */
+	@Autowired
+	@Qualifier("personReportService")
+	private IPersonReportService service;
 	/**
 	 * 分页列表
 	 */
 	Pagination<PersonReport> pagination = new Pagination<PersonReport>();
-	
-	@Autowired
-	@Qualifier("personReportService")
-	private IPersonReportService personReportService;
-	
 	/**
-	 * 显示设备列表
-	 * @return
+	 * 页面对象
 	 */
-	public String openReport(){
-//		Map<String,String> values =new HashMap<String, String>();
-//		values.put("dataInfo","90");
-		List<PersonReport> li = new ArrayList<PersonReport>();
-		PersonReport p = new PersonReport();
-		p.setReportPerson("eeee");
-		p.setReportDate(Calendar.getInstance());
-		li.add(p);
-		pagination.setData(li);
-		//pagination = personReportService.findPersonReportForPage(null, pagination);
-		return this.SUCCESS;
+	private PersonReport report;
+	/**
+	 * 页面所选行的id
+	 */
+	private String[] ids;
+
+	
+
+	
+	public PersonReport getReport() {
+		return report;
 	}
 
+	public void setReport(PersonReport report) {
+		this.report = report;
+	}
+
+	public String[] getIds() {
+		return ids;
+	}
+
+	public void setIds(String[] ids) {
+		this.ids = ids;
+	}
+	
 	public Pagination<PersonReport> getPagination() {
 		return pagination;
 	}
@@ -61,4 +71,66 @@ public class ReportAction extends ActionSupport{
 	}
 
 
+	/**
+	 * 分页显示报表列表
+	 * @return
+	 */
+	public String openReport(){
+		pagination = service.findPersonReportForPage(new HashMap(), pagination);
+		return this.SUCCESS;
+	}
+
+	
+    /**
+	 * 添加新报表
+	 * @return
+	 */
+	public String toAddReport(){
+		
+		service.save(report);
+		return SUCCESS;
+	}
+	/**
+	 * 打开添加新报表页
+	 * @return
+	 */
+	
+	public String openAddReport (){
+		return SUCCESS;
+	}
+
+	/**
+	 * 删除报表数据
+	 * @return
+	 */
+	public String deleteReport(){
+		service.deletePersonReport(ids);
+		return NONE;
+	}
+	
+	/**
+	 * 为修改报表页面做准备
+	 * @return
+	 */
+	public String openModifyReport(){
+		String id = report.getId();
+		report = service.get(id);
+		return SUCCESS;
+	}
+	
+	/**
+	 * 修改报表信息
+	 * @return 
+	 */
+	public String toModifyReport(){
+		
+		service.update(report);
+		return SUCCESS;
+	}
+	
+
+	
 }
+
+
+
