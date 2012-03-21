@@ -26,7 +26,7 @@ import org.hibernate.annotations.GenericGenerator;
  * @version 1.0.0
  */
 @Entity
-@Table(name = "DATA_INFO")
+@Table(name = "DEVICE_POINT_PARAM")
 public class PointDataInfo implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -38,6 +38,11 @@ public class PointDataInfo implements Serializable {
 	 * 参数数据编号
 	 */
 	private String id;
+	/**
+	 * 所属监控点参数
+	 */
+	@Column(name = "POINT_ID")
+	private String pointId;
 	/**
 	 * 参数ID
 	 */
@@ -68,6 +73,13 @@ public class PointDataInfo implements Serializable {
 	}
 	public void setId(String id) {
 		this.id = id;
+	}
+	
+	public String getPointId() {
+		return pointId;
+	}
+	public void setPointId(String pointId) {
+		this.pointId = pointId;
 	}
 	public String getPaid() {
 		return paid;
