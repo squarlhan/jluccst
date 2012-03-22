@@ -32,32 +32,32 @@ public class BaseActionSupport extends ActionSupport {
 	/**
 	 * 公司ID
 	 */
-	protected String companyId = null;
+	protected String companyId = "companyId";
 
 	/**
 	 * 公司名称
 	 */
-	protected String companyName = null;
+	protected String companyName = "companyName";
 
 	/**
 	 * 工厂ID
 	 */
-	protected String factoryId = null;
+	protected String factoryId = "factoryId";
 
 	/**
 	 * 工厂名称
 	 */
-	protected String factoryName = null;
+	protected String factoryName = "factoryName";
 
 	/**
 	 * 车间ID
 	 */
-	protected String workshopId = null;
+	protected String workshopId = "workshopId";
 
 	/**
 	 * 车间名称
 	 */
-	protected String workshopName = null;
+	protected String workshopName = "workshopName";
 
 	/**
 	 * 用户ID
