@@ -31,7 +31,7 @@
 		<!--
 			var _customer_submit = {
 			rules: {
-				"user.userName":{required:true,strangecode:true},
+				"user.username":{required:true,strangecode:true},
 				"user.password":{required:true},
 				"validatePassword":{equalTo:"#userPassword"},
 				"user.userCName":{strangecode:true},
@@ -84,7 +84,7 @@
 			 * 初始化页面
 			 */
 			$.fn.initpage = function(){
-				$("#userName").focus();
+				$("#username").focus();
 			}
 		//-->
 		</script>
@@ -185,5 +185,6 @@
 				</tr>
 			</table>
 		</s:form>
+		<iframe id="iframe1" name="iframe1" width="1px" height="1px"></iframe>
 	</body>
 </html>
