@@ -17,7 +17,7 @@
 //simpleWindown("例子","text:例子","500","400","true","3000","0","exa")
 //------------------------------------------------------------------------
 var showWindown = true;
-function tipsWindown(title, content, width, height, drag, time, showbg, cssName) {
+function tipsWindown(title, content, width, height, drag, time, showbg, cssName, scrolling) {
 	$("#windown-box").remove(); // 请除内容
 	var width = width >= 950 ? this.width = 950 : this.width = width; // 设置最大窗口宽度
 	var height = height >= 527 ? this.height = 527 : this.height = height; // 设置最大窗口高度
@@ -49,7 +49,7 @@ function tipsWindown(title, content, width, height, drag, time, showbg, cssName)
 		//暂停使用
 		break;
 	case "iframe":
-		$("#windown-content").html("<iframe src=\"" + content + "\" width=\"100%\" height=\"" + parseInt(height) + "px" + "\" scrolling=\"auto\" frameborder=\"0\" marginheight=\"0\" marginwidth=\"0\"></iframe>");
+		$("#windown-content").html("<iframe src=\"" + content + "\" width=\"100%\" height=\"" + parseInt(height) + "px" + "\" scrolling=\"" + scrolling + "\" frameborder=\"0\" marginheight=\"0\" marginwidth=\"0\"></iframe>");
 	}
 	$("#windown-title h2").html(title);
 	if (showbg == "true") {
