@@ -77,12 +77,21 @@
 												<a href="datamanage/datamanage.jsp" target="mainFrame">数据管理</a>
 											</td>
 										</tr>
+									</table>
+								</td>
+							</tr>
+							<tr>
+								<td height="1" align="left" background="images/menubg2.jpg"></td>
+							</tr>
+							<tr>
+								<td align="left">
+									<table width="100%" border="0" cellspacing="5" cellpadding="0">
 										<tr>
 											<td width="40" align="right" style="padding-bottom: 4px;">
 												<img src="images/menuto.jpg" width="5" height="5" />
 											</td>
 											<td>
-												<a href="sysmanage/datamanageselect.html" target="mainFrame">数据查询</a>
+												<a href="systemmanage/companymanage.jsp" target="mainFrame">数据查询</a>
 											</td>
 										</tr>
 									</table>
@@ -92,22 +101,21 @@
 								<td height="1" align="left" background="images/menubg2.jpg"></td>
 							</tr>
 							<tr>
-								<td height="1" align="left" background="images/menubg2.jpg"></td>
+								<td align="left">
+									<table width="100%" border="0" cellspacing="5" cellpadding="0">
+										<tr>
+											<td width="40" align="right" style="padding-bottom: 4px;">
+												<img src="images/menuto.jpg" width="5" height="5" />
+											</td>
+											<td>
+												<a href="datamanage/devicemanage.jsp" target="mainFrame">设备管理</a>
+											</td>
+										</tr>
+									</table>
+								</td>
 							</tr>
 							<tr>
 								<td height="1" align="left" background="images/menubg2.jpg"></td>
-							</tr>
-							<tr>
-								<td height="1" align="left" background="images/menubg2.jpg"></td>
-							</tr>
-							<tr>
-								<td height="1" align="left" background="images/menubg2.jpg"></td>
-							</tr>
-							<tr>
-								<td height="1" align="left" background="images/menubg2.jpg"></td>
-							</tr>
-							<tr>
-								<td height="12" align="left"></td>
 							</tr>
 							<tr>
 								<td height="24" align="left" background="images/menubg.jpg">
@@ -365,7 +373,7 @@
 												<img src="images/menuto.jpg" width="5" height="5" />
 											</td>
 											<td>
-												<a href="openDeviceAction.action" target="mainFrame">设备管理</a>
+												<a href="systemmanage/devicemanage.jsp" target="mainFrame">设备管理</a>
 											</td>
 										</tr>
 									</table>
