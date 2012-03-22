@@ -64,7 +64,11 @@
 	               	if(!validator.form()){
 						return false;
 					}
-	               	form1.action = "./userAction!save.action";
+	               	form1.action = "./saveOrUpdateUserAction.action";
+	               	form1.target = "iframe1";
+	               	<s:if test="user.deleteFlag==1">
+	               		$("#roleId").attr("disabled",false);
+	               	</s:if>
 	               	form1.submit();
 	           	});
           	}
@@ -102,7 +106,7 @@
 												<strong>用 户 名：</strong>
 											</td>
 											<td height="26" align="left" bgcolor="#FFFFFF">
-												<s:textfield name="user.userName" id="userName" cssStyle="width: 250px;" maxlength="25"></s:textfield>
+												<s:textfield name="user.username" id="username" cssStyle="width: 250px;" maxlength="25"></s:textfield>
 											</td>
 										</tr>
 										<tr>

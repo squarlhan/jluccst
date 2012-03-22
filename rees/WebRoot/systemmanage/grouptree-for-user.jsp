@@ -37,7 +37,7 @@
 		d = new dTree('d','<%=path%>');
 		d.add(0,-1,'中石油','menulist.html?fatherId=0','','menumain');
 		<!-- 公司级检测 -->
-		d.add(1,0,'公司','userlist.jsp?fatherId=24','','groupmain','');
+		d.add(1,0,'公司','./userAction!showUserList.action?fatherId=24','','groupmain','');
 		<!-- 下级目录 -->
 		d.add(11,1,'丙烯腈厂','userlist.jsp?fatherId=24','','groupmain','');
 		d.add(100,11,'第二丙烯车间','userlist.jsp?fatherId=24','','groupmain','');

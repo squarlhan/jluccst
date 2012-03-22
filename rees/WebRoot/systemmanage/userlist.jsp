@@ -1,7 +1,7 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%@ taglib prefix="j" uri="/script-tags"%>
+<%@ taglib prefix="p" uri="/page-tags"%>
 <%
 	/**
 	 * Copyright (c) 2010 Changchun Boan (BOAN) Co. Ltd.
@@ -32,7 +32,7 @@
 <!--
 	$(document).ready(function() {
 		$("#addBtn").click(function(){
-			parent.parent.tipsWindown("用户信息","iframe:./userAction!showUser.action","400","430","true","","true","no");
+			parent.parent.tipsWindown("用户信息","iframe:./userAction!showUser.action?user.id=","400","430","true","","true","no");
 		});
 	});
 //-->
@@ -48,6 +48,7 @@
 </style>
 </head>
 <body>
+<s:form id="form1" name="form1" method="post" theme="simple">
 <table width="100%" style="height:100%;" border="0" cellspacing="5" cellpadding="0">
   <tr>
     <td valign="top"><table width="100%" border="0" cellspacing="5" cellpadding="0">
@@ -64,43 +65,32 @@
       <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#d5e4fd">
             <tr>
               <td height="26" align="center" background="../images/headerbg.jpg">&nbsp;</td>
-              <td align="center" background="../images/headerbg.jpg"><strong>用户编号</strong></td>
               <td align="center" background="../images/headerbg.jpg"><strong>用户名</strong></td>
-              <td align="center" background="../images/headerbg.jpg"><strong>所在组</strong></td>
-              <td align="center" background="../images/headerbg.jpg"><strong>所属角色</strong></td>
-              <td align="center" background="../images/headerbg.jpg"><strong>状态</strong></td>
+              <td align="center" background="../images/headerbg.jpg"><strong>中文姓名</strong></td>
+              <td align="center" background="../images/headerbg.jpg"><strong>办公电话</strong></td>
+              <td align="center" background="../images/headerbg.jpg"><strong>个人手机</strong></td>
+              <td align="center" background="../images/headerbg.jpg"><strong>邮箱</strong></td>
             </tr>
+            <s:iterator value="pagination.data" status="obj">
             <tr>
               <td height="26" align="center" bgcolor="#FFFFFF"><input type="checkbox" name="checkbox" id="checkbox"></td>
-              <td height="26" align="center" bgcolor="#FFFFFF">00001</td>
-              <td height="26" align="center" bgcolor="#FFFFFF">admin</td>
-              <td height="26" align="center" bgcolor="#FFFFFF">信息中心</td>
-              <td height="26" align="center" bgcolor="#FFFFFF">管理员</td>
-              <td height="26" align="center" bgcolor="#FFFFFF">正常</td>
+              <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="username"/></td>
+              <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="userCName"/></td>
+              <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="officePhone"/></td>
+              <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="phone"/></td>
+              <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="email"/></td>
             </tr>
+            </s:iterator>
             <tr>
-              <td height="26" align="center" bgcolor="#FFFFFF"><input type="checkbox" name="checkbox" id="checkbox"></td>
-              <td height="26" align="center" bgcolor="#FFFFFF">00001</td>
-              <td height="26" align="center" bgcolor="#FFFFFF">admin</td>
-              <td height="26" align="center" bgcolor="#FFFFFF">信息中心</td>
-              <td height="26" align="center" bgcolor="#FFFFFF">管理员</td>
-              <td height="26" align="center" bgcolor="#FFFFFF"><span class="STYLE2">锁定</span></td>
+              <td height="26" colspan="6" align="center" bgcolor="#FFFFFF">
+              		<p:pages currentPage="pagination.currentPage" totalPages="pagination.totalPages" totalRows="pagination.totalRows" styleClass="page" theme="text" ></p:pages>
+              </td>
             </tr>
-            <tr>
-              <td height="26" align="center" bgcolor="#FFFFFF"><input type="checkbox" name="checkbox" id="checkbox"></td>
-              <td height="26" align="center" bgcolor="#FFFFFF">00001</td>
-              <td height="26" align="center" bgcolor="#FFFFFF">admin</td>
-              <td height="26" align="center" bgcolor="#FFFFFF">信息中心</td>
-              <td height="26" align="center" bgcolor="#FFFFFF">管理员</td>
-              <td height="26" align="center" bgcolor="#FFFFFF"><span class="STYLE2">锁定</span></td>
-            </tr>
-            <tr>
-              <td height="26" colspan="6" align="center" bgcolor="#FFFFFF">共[1]条记录　<a href="#">首　页</a>　<a href="#">上一页</a>　<a href="#">下一页</a>　<a href="#">尾　页</a>　当前[1/1]页</td>
-              </tr>
           </table></td>
         </tr>
       </table></td>
   </tr>
 </table>
+</s:form>
 </body>
 </html>
