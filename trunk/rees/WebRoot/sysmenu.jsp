@@ -365,7 +365,7 @@
 												<img src="images/menuto.jpg" width="5" height="5" />
 											</td>
 											<td>
-												<a href="systemmanage/devicemanage.jsp" target="mainFrame">设备管理</a>
+												<a href="openDeviceAction.action" target="mainFrame">设备管理</a>
 											</td>
 										</tr>
 									</table>
