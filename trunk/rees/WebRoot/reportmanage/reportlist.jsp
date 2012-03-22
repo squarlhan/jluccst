@@ -42,15 +42,12 @@
 	<script type="text/javascript">
 
 	$(function(){
+		/**
+		 * 添加报表
+		 */
 		$("#addbtn").click(function(){
 			parent.parent.parent.tipsWindown("添加汇报","iframe:openAddReportAction.action","600","425","true","","true","no");
 		});
-		$("#editbtn").click(function(){
-			parent.parent.parent.tipsWindown("修改汇报","iframe:openModifyReportAction.action","600","425","true","","true","no");
-		});
-		$.fn.CheckBoxAll("cbk_all");
-  		$.fn.UnCheckBoxAll("ids","cbk_all");
-  	});
 		
 		/**
 		 * 修改报表
@@ -84,6 +81,12 @@
 			}
 		});
 
+
+		$.fn.CheckBoxAll("cbk_all");
+  		$.fn.UnCheckBoxAll("ids","cbk_all");
+  	});
+		
+		
 	/**
 	 * 点击选复选框时，执行全选/取消全选功能
 	 * @param chkallid
@@ -138,7 +141,6 @@
       <tr>
         <td>
 		    <input name="button" type="button" class="btn_4" id="addbtn" value="添加" >
-    		<input name="button2" type="button" class="btn_4" id="editbtn" value="修改" >
             <input name="button3" type="button" class="btn_4" id="button2" value="删除所选">
             <input name="button4" type="button" class="btn_4" id="output" value="导出Word">
           </td>
