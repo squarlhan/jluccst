@@ -92,6 +92,13 @@ public interface IBaseDao<T, ID extends Serializable> {
 	public List<T> findAll();
 	
 	/**
+	 * 通过Hql语句查询一个对象列表
+	 * @param hql
+	 * @return
+	 */
+	public List<T> queryAll(String hql);
+	
+	/**
 	 * 查询所有对象并指定排序字段
 	 * @param orderByProperty 排序字段
 	 * @param isAsc 是否是降序排列

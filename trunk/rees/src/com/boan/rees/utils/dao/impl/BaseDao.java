@@ -130,6 +130,14 @@ public class BaseDao<T, ID extends Serializable> implements IBaseDao<T, ID> {
 		Query query = getSession().createQuery("from " + entityClass.getName());
 		return query.list();
 	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<T> queryAll(String hql) {
+		Query query = getSession().createQuery(hql);
+		return query.list();
+	}
+
 
 	@SuppressWarnings("unchecked")
 	@Override
