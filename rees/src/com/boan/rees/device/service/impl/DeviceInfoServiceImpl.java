@@ -1,6 +1,7 @@
 package com.boan.rees.device.service.impl;
 
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -8,12 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-
-import com.boan.rees.demo.dao.IDemoDao;
-import com.boan.rees.demo.model.DemoModel;
 import com.boan.rees.device.dao.IDeviceInfoDao;
 import com.boan.rees.device.model.DeviceInfo;
-import com.boan.rees.device.service.*;
+import com.boan.rees.device.service.IDeviceInfoService;
 import com.boan.rees.utils.page.Pagination;
 @Service("deviceInfoService")
 public class DeviceInfoServiceImpl  implements IDeviceInfoService {
@@ -26,7 +24,8 @@ public class DeviceInfoServiceImpl  implements IDeviceInfoService {
 	 * 查找全部设备
 	 */
 	public List<DeviceInfo> findAllDeviceInfo() {
-		return deviceInfoDao.findAll();
+		String hql = "from DeviceInfo order by sortIndex,creatTime";
+		return deviceInfoDao.queryAll(hql);
 		
 	}
 	/**
@@ -71,7 +70,7 @@ public class DeviceInfoServiceImpl  implements IDeviceInfoService {
 
 	public Pagination<DeviceInfo> findDeviceInfoForPage(Map<String, ?> values,Pagination<DeviceInfo> pagination){
 		
-		String hql = "from DeviceInfo";
+		String hql = "from DeviceInfo order by sortIndex,creatTime";
 		List<DeviceInfo> data = deviceInfoDao.findForPage(hql, values, pagination.getStartIndex(), pagination.getPageSize());
 		hql = "select count(*) from DeviceInfo";
 		int totalRows = deviceInfoDao.findCountForPage(hql, values);
@@ -80,4 +79,14 @@ public class DeviceInfoServiceImpl  implements IDeviceInfoService {
 		return pagination;
 	}
 
+	/**
+	 * 设备排序
+	 * @param ids 有顺序的设备Id数组
+	 */
+	public void sortDeviceInfo(String... ids){
+		for(int i=0;i<ids.length;i++){
+			String hql = "update DeviceInfo obj set obj.sortIndex="+(i+1)+" where obj.id='"+ids[i]+"'";
+			deviceInfoDao.executeHql(hql, null);
+		}
+	}
 }
