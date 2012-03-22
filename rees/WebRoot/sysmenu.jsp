@@ -373,23 +373,6 @@
 												<img src="images/menuto.jpg" width="5" height="5" />
 											</td>
 											<td>
-												<a href="systemmanage/devicemanage.jsp" target="mainFrame">设备管理</a>
-											</td>
-										</tr>
-									</table>
-								</td>
-							</tr>
-							<tr>
-								<td height="1" align="left" background="images/menubg2.jpg"></td>
-							</tr>
-							<tr>
-								<td align="left">
-									<table width="100%" border="0" cellspacing="5" cellpadding="0">
-										<tr>
-											<td width="40" align="right" style="padding-bottom: 4px;">
-												<img src="images/menuto.jpg" width="5" height="5" />
-											</td>
-											<td>
 												<a href="systemmanage/usermanage.jsp" target="mainFrame">用户管理</a>
 											</td>
 										</tr>
