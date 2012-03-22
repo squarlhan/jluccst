@@ -39,4 +39,10 @@ public interface IDeviceInfoService {
 	 * 按分页查找设备
 	 */
 	public Pagination<DeviceInfo> findDeviceInfoForPage(Map<String, ?> values,Pagination<DeviceInfo> pagination);
+	
+	/**
+	 * 设备排序
+	 * @param ids 有顺序的设备Id数组
+	 */
+	public void sortDeviceInfo(String... ids);
 }
