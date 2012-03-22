@@ -62,14 +62,6 @@
     	
     </package>	
     
-     <!-- 用户Action -->
-    <package name="group_user" extends="struts-default">
-    	<action name="userAction" class="userAction">
-    		<result name="show-info">systemmanage/userinfo.jsp</result>
-    		<result name="show-list">systemmanage/userlist.jsp</result>
-    	</action>
-    </package>	
-    
     <!-- 车间Action -->
     <package name="group_workshop" extends="struts-default" namespace="/">
     	
