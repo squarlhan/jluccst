@@ -34,17 +34,32 @@
     		<result name="success">/device/deviceinfo.jsp</result>
     		<result name="input">/device/deviceinfo.jsp</result>
     	</action>
-      </package>
-     <!-- 监控点Action -->
-    <package name="pointinfo" extends="struts-default" namespace="/datamanage">
-    	<action name="pointlist" class="pointInfoAction" method="pointInfoListByDeviceId">
-    		<result name="success">/datamanage/pointset.jsp</result>
-    		<result name="input">/datamanage/pointset.jsp</result>
+    	
+    	<!-- 打开设备排序 -->
+    	<action name="openSortDeviceAction" class="deviceInfoAction" method="openSortDevice">
+    		<result name="success">/device/devicesort.jsp</result>
+    		<result name="input">/device/devicesort.jsp</result>
     	</action>
-    	<action name="positionset" class="com.boan.rees.device.action.PointInfoAction" method="positionSet">
-            <result name="success">/datamanage/pointset.jsp</result>
-        </action>
-    </package>
+    	
+    	<!-- 设备排序 -->
+    	<action name="toSortDeviceAction" class="deviceInfoAction" method="toSortDevice">
+    		<result name="success">/device/devicesort.jsp</result>
+    		<result name="input">/device/devicesort.jsp</result>
+    	</action>
+	</package>
+	
+	
+    <!-- 监控点Action -->
+	<package name="pointinfo" extends="struts-default" namespace="/datamanage">
+		<action name="pointlist" class="pointInfoAction" method="pointInfoListByDeviceId">
+			<result name="success">/datamanage/pointset.jsp</result>
+			<result name="input">/datamanage/pointset.jsp</result>
+		</action>
+		<action name="positionset" class="com.boan.rees.device.action.PointInfoAction" method="positionSet">
+	        <result name="success">/datamanage/pointset.jsp</result>
+	    </action>
+	</package>
+	
     <package name="deviceAjax" extends="json-default" namespace="/datamanage">
 		<action name="positionsetajax" class="com.boan.rees.device.action.PointInfoAction" method="positionSet">
             <result type="json"></result>
@@ -53,4 +68,5 @@
             <result type="json"></result>
         </action>
 	</package>
+	
 </struts>

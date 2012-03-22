@@ -1,6 +1,8 @@
 package com.boan.rees.device.action;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -26,14 +28,22 @@ public class DeviceInfoAction extends ActionSupport{
 	@Autowired
 	@Qualifier("deviceInfoService")
 	private IDeviceInfoService service;
+	
 	/**
 	 * 分页列表
 	 */
-	Pagination<DeviceInfo> pagination = new Pagination<DeviceInfo>();
+	private Pagination<DeviceInfo> pagination = new Pagination<DeviceInfo>();
+	
+	/**
+	 * 定义一个设备数组，用于排序功能使用
+	 */
+	private List<DeviceInfo> deviceInfoList = new ArrayList<DeviceInfo>();
+	
 	/**
 	 * 页面对象
 	 */
 	private DeviceInfo device;
+	
 	/**
 	 * 页面所选行的id
 	 */
@@ -62,8 +72,16 @@ public class DeviceInfoAction extends ActionSupport{
 	public void setPagination(Pagination<DeviceInfo> pagination) {
 		this.pagination = pagination;
 	}
-//*************************************************************************************
 	
+	public List<DeviceInfo> getDeviceInfoList() {
+		return deviceInfoList;
+	}
+
+	public void setDeviceInfoList(List<DeviceInfo> deviceInfoList) {
+		this.deviceInfoList = deviceInfoList;
+	}
+//*************************************************************************************
+
 	/**
 	 * 分页显示设备列表
 	 * @return
@@ -122,13 +140,22 @@ public class DeviceInfoAction extends ActionSupport{
 		service.update(device);
 		return SUCCESS;
 	}
-	
+
 	/**
-	 * 修改数据
+	 * 打开排序页面
 	 * @return
 	 */
-	public String toModifyDemo(){
-		return toAddDevice();
+	public String openSortDevice(){
+		deviceInfoList = service.findAllDeviceInfo();
+		return SUCCESS;
 	}
 	
+	/**
+	 * 执行排序
+	 * @return
+	 */
+	public String toSortDevice(){
+		service.sortDeviceInfo(ids);
+		return SUCCESS;
+	}
 }
