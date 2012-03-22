@@ -66,4 +66,27 @@
     <package name="group_workshop" extends="struts-default" namespace="/">
     	
     </package>	
+    
+    <package name="group_user" extends="struts-default" namespace="/">
+    	<action name="userAction" class="userAction">
+    		<result name="show-user">/systemmanage/userinfo.jsp</result>
+    		<result name="show-list">/systemmanage/userlist.jsp</result>
+    	</action>
+		<action name="saveOrUpdateUserAction" class="userAction" method="saveOrUpdateUser">
+    		<result name="success">/common/jumppage.jsp</result>
+    		<result name="error">/common/messagenoclose.jsp</result>
+    	</action>
+    	<action name="deleteUserAction" class="userAction" method="deleteUser">
+    		<result name="success">/sysmanage/userlist.jsp</result>
+    	</action>
+    	<action name="showInputUserAction" class="userAction" method="showInputUser">
+    		<result name="success">/sysmanage/userinfo.jsp</result>
+    	</action>
+    	<action name="showMyInfoAction" class="userAction" method="showMyInfo">
+    		<result name="success">/sysmanage/myinfo.jsp</result>
+    	</action>
+    	<action name="saveOrUpdateMyInfoAction" class="userAction" method="saveOrUpdateMyInfo">
+    		<result name="success">/common/messagenoclose.jsp</result>
+    	</action>
+    </package>
 </struts>
