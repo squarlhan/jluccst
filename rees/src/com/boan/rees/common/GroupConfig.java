@@ -15,6 +15,9 @@ package com.boan.rees.common;
  */
 public class GroupConfig
 {
+	/**
+	 * 组织机构默认根节点标识
+	 */
 	public static String ROOT_KEY = "000001";
 }
 
