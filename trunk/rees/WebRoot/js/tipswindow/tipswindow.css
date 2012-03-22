@@ -30,6 +30,7 @@
 	left: 10px;
 	top: 5px;
 	font-size: 14px;
+	color: #ffffff;
 }
 #windown-close {
 	position: absolute;
@@ -65,7 +66,7 @@
 }
 #windown-content {
 	position: relative;
-	overflow: auto;
+	overflow: hidden;
 	text-align: center;
 }
 #windown-content img,#windown-content iframe{
