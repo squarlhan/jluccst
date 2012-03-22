@@ -17,7 +17,7 @@
     	</action>
     	<!-- 添加设备菜单 -->
     	 <action name="toAddDeviceAction" class="deviceInfoAction" method="toAddDevice">
-             <result name="success">/device/deviceinfo.jsp</result>
+             <result name="success">/device/devicelist.jsp</result>
             <result name="input">/device/deviceinfo.jsp</result>
         </action>
         <!-- 删除设备 -->
