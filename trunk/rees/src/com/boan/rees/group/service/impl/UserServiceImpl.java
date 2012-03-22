@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.boan.rees.demo.model.DemoModel;
+import com.boan.rees.device.model.DeviceInfo;
 import com.boan.rees.group.model.User;
 import com.boan.rees.group.service.IUserService;
 import com.boan.rees.group.dao.IUserDao;
@@ -32,30 +33,74 @@ public class UserServiceImpl implements IUserService {
 	private IUserDao userDao;
 
 	@Override
-	public List<User> findAllGroupUser() {
+	public void saveOrUpdateUser( User user ) throws Exception
+	{
+		userDao.saveOrUpdateUser( user );
+	}
+
+	@Override
+	public void saveOrUpdateUserPassword( String userId, String password )
+			throws Exception
+	{
+		userDao.saveOrUpdateUserPassword( userId, password );
+	}
+
+	@Override
+	public User getUserById( String id ) throws Exception
+	{
+		return userDao.getUserById( id );
+	}
+
+	@Override
+	public User queryUserByUsername( String username ) throws Exception
+	{
+		return userDao.queryUserByUsername( username );
+	}
+
+	@Override
+	public void deleteUserById( String id ) throws Exception
+	{
+		userDao.deleteUserById( id );
+	}
+
+	@Override
+	public Pagination<User> queryUserList( String companyId, Pagination<User> pagination ) throws Exception
+	{
+		List<User> list = userDao.queryUserList( companyId, pagination.getStartIndex(), pagination.getPageSize() );
+		int totalRows = userDao.queryUserListCount( companyId );
+		pagination.setTotalRows(totalRows);
+		pagination.setData(list);
+		return pagination;
+	}
+
+	@Override
+	public List<User> queryAllUserListByUnitId( String unitId )
+			throws Exception
+	{
+		return userDao.queryAllUserListByUnitId( unitId );
+	}
+
+	@Override
+	public int queryUserListCount( String deptId ) throws Exception
+	{
+		return userDao.queryUserListCount( deptId );
+	}
+
+	@Override
+	public boolean logonValid( String username, String userPassword )
+			throws Exception
+	{
+		return userDao.logonValid( username, userPassword );
+	}
+
+	@Override
+	public boolean isExistSameUsername( String userId, String username )
+			throws Exception
+	{
+		return userDao.isExistSameUsername( userId, username );
+	}
 	
-		return userDao.findAll();
-	}
-
-	@Override
-	public User get(String id) {
-		
-		return userDao.get(id);
-	}
-
-	@Override
-	public void deleteGroupUser(String... ids) {
-		
-		userDao.delete(ids);
-
-	}
-
-	@Override
-	public void save(User table1) {
-		
-		userDao.save(table1);
-
-	}
+	/*
 	@Override
 	public Pagination<User> findUserForPage(Map<String, ?> values,Pagination<User> pagination){
 		
@@ -67,5 +112,6 @@ public class UserServiceImpl implements IUserService {
 		pagination.setData(data);
 		return pagination;
 	}
+	*/
 }
 
