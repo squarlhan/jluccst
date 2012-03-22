@@ -55,10 +55,12 @@
       <tr>
         <td><input name="button" type="button" class="btn_2_3" id="addBtn" value="添加">
             <input name="button2" type="button" class="btn_4" id="button2" value="删除所选">
+            <!-- 
             <input name="button3" type="button" class="btn_2_3" id="button" value="排序">
             <input name="button3" type="button" class="btn_2_3" id="button" value="锁定">
             <input name="button3" type="button" class="btn_2_3" id="button" value="解锁">
             <input name="button3" type="button" class="btn_4" id="button" value="初始化密码">
+             -->
             </td>
       </tr>
     </table>
