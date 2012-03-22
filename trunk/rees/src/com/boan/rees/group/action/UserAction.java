@@ -53,7 +53,7 @@ public class UserAction extends BaseActionSupport
 
 	private Pagination<User> pagination = new Pagination<User>();
 
-	private Message message = null;
+	private Message message = new Message();
 
 	private User user = null;
 
@@ -111,7 +111,6 @@ public class UserAction extends BaseActionSupport
 		if( b )
 		{
 			message.setContent( "相同用户名已存在，请重新输入！" );
-			jumpUrl = "./showUserListAction.action?deptId=" + deptId;
 			return ERROR;
 		}
 		else
