@@ -106,6 +106,11 @@ public class User {
 	 */
 	@Column(name = "SORT_INDEX")
 	private int sortIndex;
+	
+	/**
+	 * 如果是本人，则本人不能删除本人，不能删除状态置为1
+	 */
+	private int deleteFlag;
 
 	public String getId() {
 		return id;
@@ -220,6 +225,16 @@ public class User {
 	public void setUserCName( String userCName )
 	{
 		this.userCName = userCName;
+	}
+
+	public int getDeleteFlag()
+	{
+		return deleteFlag;
+	}
+
+	public void setDeleteFlag( int deleteFlag )
+	{
+		this.deleteFlag = deleteFlag;
 	}
 	
 	
