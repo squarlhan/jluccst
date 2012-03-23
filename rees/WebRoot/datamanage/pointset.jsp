@@ -4,7 +4,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html>
 <head>
-	<title>设置设备监测点</title>
+	<title>图型方式设备监测点</title>
 	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 	<j:scriptlink jquery="true" livequery="true" poshytip="true" contextmenu="true" jqueryui="true" tipswindow="true"/>
 	<script type="text/javascript">
