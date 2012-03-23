@@ -89,6 +89,11 @@ public class ScriptJsTag extends SimpleTagSupport
 	private String tab;
 	
 	/**
+	 * jfunction方法集合
+	 */
+	private String jfunction;
+	
+	/**
 	 * MzTreeView树
 	 */
 	private String mztreeview;
@@ -116,6 +121,11 @@ public class ScriptJsTag extends SimpleTagSupport
 			getJspContext().getOut().write( "<!--jquery-->\r\n" );
 			getJspContext().getOut().write( "<script type=\"text/javascript\" src=\"" + contextPath + "/js/jquery-1.4.2.min.js\"></script>\r\n" );
 			getJspContext().getOut().write( "<script type=\"text/javascript\" src=\"" + contextPath + "/js/external/bgiframe/jquery.bgiframe.js\"></script>\r\n" );
+		}
+		if( "true".equalsIgnoreCase( jfunction ))
+		{
+			getJspContext().getOut().write( "<!--jfunction-->\r\n" );
+			getJspContext().getOut().write( "<script type=\"text/javascript\" src=\"" + contextPath + "/js/customjs/jfunction.js\"></script>\r\n" );
 		}
 		if( "true".equalsIgnoreCase( validate ))
 		{
@@ -310,5 +320,15 @@ public class ScriptJsTag extends SimpleTagSupport
 
 	public void setMztreeview(String mztreeview) {
 		this.mztreeview = mztreeview;
+	}
+
+	public String getJfunction()
+	{
+		return jfunction;
+	}
+
+	public void setJfunction( String jfunction )
+	{
+		this.jfunction = jfunction;
 	}
 }
