@@ -8,20 +8,20 @@ import org.springframework.stereotype.Controller;
 import com.boan.rees.device.model.DeviceInfo;
 import com.boan.rees.group.model.Company;
 import com.boan.rees.group.service.ICompanyService;
+import com.boan.rees.utils.action.BaseActionSupport;
 import com.boan.rees.utils.page.Pagination;
 import com.opensymphony.xwork2.ActionSupport;
 
 @Controller("companyAction")
 @Scope("prototype")
-public class CompanyAction extends ActionSupport{	
+public class CompanyAction extends BaseActionSupport{	
 	@Autowired
 	@Qualifier("companyService")
 	private ICompanyService service;
 	/**
 	 * 显示分页
 	 */
-	Pagination<Company> pagination = new Pagination<Company>();	
-	
+	Pagination<Company> pagination = new Pagination<Company>();		
 	/**
 	 * 页面对象
 	 */
@@ -30,6 +30,7 @@ public class CompanyAction extends ActionSupport{
 	 * 所选对象的id
 	 */
 	String[] ids;
+	
 	public Company getCompany() {
 		return company;
 	}
@@ -92,7 +93,8 @@ public class CompanyAction extends ActionSupport{
 	 * @return
 	 */
 	public String toModifyCompany(){
-		return toAddCompany();
+		service.update(company);
+		return SUCCESS;
 	}
 	/**
 	 * 删除公司
@@ -100,6 +102,6 @@ public class CompanyAction extends ActionSupport{
 	 */
 	public String deleteCompany(){
 		service.deleteGroupCompany(ids);
-		return SUCCESS;
+		return NONE;
 	}
 }
