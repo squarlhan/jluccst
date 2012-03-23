@@ -28,7 +28,7 @@
   	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>信息提示页</title>
     <script type="text/javascript">
-		alert('<s:property value="message.content" />111');
+		alert('<s:property value="message.content" />');
 		parent.parent.$("#windown-close").click();
 		parent.parent.location.href="<s:property value="jumpUrl"/>";
 	</script>
