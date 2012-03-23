@@ -46,12 +46,12 @@ $.fn.radioCheckedAndUnChecked = function(name,type){
 $.fn.delete_items = function(d_checkbox_name, d_url){
 	var chknum = ($(":checkbox[name='"+ d_checkbox_name +"'][disabled=false]").length );
 	if( chknum == 0 ){
-		$.fn.message("暂无可操作的信息！");
+		alert("暂无可操作的信息！");
 		return false;
 	}
 	var chkchecknum = ($(":checkbox[name='"+d_checkbox_name+"']:checked").length );
 	if( chkchecknum == 0 ){
-		$.fn.message("请选择要操作的信息！");
+		alert("请选择要操作的信息！");
 		return false;
 	}
 	$.fn.confirm("确定要删除所选记录吗？",function(result){
@@ -345,7 +345,7 @@ $.fn.strangecode = function( str,msg )
     if(flag == -1){
     	return false;
     }else{
-    	$.fn.message("【" + msg + "】中存在 \'\"\\/<>*:?|%$#@&~^_ 非法字符， \n\n请更正或以中文符号替换 ！");
+    	alert("【" + msg + "】中存在 \'\"\\/<>*:?|%$#@&~^_ 非法字符， \n\n请更正或以中文符号替换 ！");
     	return true;
     }
 };
@@ -363,7 +363,7 @@ $.fn.timestrangecode = function( str,msg )
     if(flag == -1){
     	return false;
     }else{
-    	$.fn.message("【" + msg + "】中存在 \'\"\\/<>*?|%$#@&~^_ 非法字符， \n\n请更正或以中文符号替换 ！");
+    	alert("【" + msg + "】中存在 \'\"\\/<>*?|%$#@&~^_ 非法字符， \n\n请更正或以中文符号替换 ！");
     	return true;
     }
 };
@@ -399,7 +399,7 @@ $.fn.memostrangecode = function( str,msg )
     if(flag == -1){
     	return false;
     }else{
-    	$.fn.message("【" + msg + "】中存在 \'\"\\/<>*:?|%$#&~_+^_ 非法字符， \n\n请更正或以中文符号替换 ！");
+    	alert("【" + msg + "】中存在 \'\"\\/<>*:?|%$#&~_+^_ 非法字符， \n\n请更正或以中文符号替换 ！");
     	return true;
     }
 };
