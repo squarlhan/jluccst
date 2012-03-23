@@ -54,15 +54,10 @@ $.fn.delete_items = function(d_checkbox_name, d_url){
 		alert("请选择要操作的信息！");
 		return false;
 	}
-	$.fn.confirm("确定要删除所选记录吗？",function(result){
-		if( result ){
-			document.forms[0].action = d_url;
-			document.forms[0].submit();
-		}
-		else{
-			return false;
-		}
-	});
+	if(confirm("确定要删除所选记录吗？")){
+		document.forms[0].action = d_url;
+		document.forms[0].submit();
+	}
 }
 /**
  * 获取当前选择的checkbox对应行的值
