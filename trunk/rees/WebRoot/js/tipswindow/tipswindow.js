@@ -155,9 +155,10 @@ function tipsWindown(title, content, width, height, drag, time, showbg, cssName,
 	if (time == "" || typeof (time) == "undefined") {
 		$("#windown-close").click(function() {
 			$("#windownbg").remove();
-			$("#windown-box").fadeOut("slow", function() {
-				$(this).remove();
-			});
+			$("#windown-box").remove();
+			//$("#windown-box").fadeOut("slow", function() {
+			//	$(this).remove();
+			//});
 		});
 	} else {
 		setTimeout(closeWindown, time);
