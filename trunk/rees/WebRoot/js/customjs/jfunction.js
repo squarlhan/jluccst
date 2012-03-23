@@ -43,13 +43,13 @@ $.fn.radioCheckedAndUnChecked = function(name,type){
 /**
  * 删除所有
  */
-$.fn.delete_items = function(d_checkbox_id, d_url){
-	var chknum = ($(":checkbox[name='"+ d_checkbox_id +"'][disabled=false]").length );
+$.fn.delete_items = function(d_checkbox_name, d_url){
+	var chknum = ($(":checkbox[name='"+ d_checkbox_name +"'][disabled=false]").length );
 	if( chknum == 0 ){
 		$.fn.message("暂无可操作的信息！");
 		return false;
 	}
-	var chkchecknum = ($(":checkbox[name='"+d_checkbox_id+"']:checked").length );
+	var chkchecknum = ($(":checkbox[name='"+d_checkbox_name+"']:checked").length );
 	if( chkchecknum == 0 ){
 		$.fn.message("请选择要操作的信息！");
 		return false;
