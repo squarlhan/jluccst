@@ -17,16 +17,16 @@ public class MzTreeUtil {
 	 * @param treeNodes
 	 * @return
 	 */
-	public static String toTreeXmlString(List<MzTreeNode> treeNodes) {
+	public static String toTreeXmlString(List<MzTree> treeNodes) {
 		StringBuffer sb = new StringBuffer();
 		sb.append("<?xml version=\"1.0\" encoding=\"utf-8\"?>");
 		sb.append("<nodes>");
-		for (MzTreeNode node : treeNodes) {
+		for (MzTree node : treeNodes) {
 			sb.append("<node ");
 			if (StringUtils.trimToNull(node.getId()) != null) {
 				sb.append("id='" + node.getId() + "' ");
 			}
-			if (StringUtils.trimToNull(node.getId()) != null) {
+			if (StringUtils.trimToNull(node.getIcon()) != null) {
 				sb.append("icon='" + node.getIcon() + "' ");
 			}
 			if (StringUtils.trimToNull(node.getText()) != null) {
@@ -47,6 +47,37 @@ public class MzTreeUtil {
 			sb.append(" />");
 		}
 		sb.append("</nodes>");
+		return sb.toString();
+	}
+
+	/**
+	 * 将TreeNode对象值拼成js字符串
+	 * 
+	 * @param treeNodes
+	 * @return
+	 */
+	public static String toTreeJsString(List<MzTree> treeNodes) {
+		StringBuffer sb = new StringBuffer();
+		sb.append("var data={};\r\n");
+		for (MzTree node : treeNodes) {
+			sb.append("data['1_9009'] = '");
+			if (StringUtils.trimToNull(node.getText()) != null) {
+				sb.append("text: " + node.getText() + "; ");
+			}
+			if (StringUtils.trimToNull(node.getUrl()) != null) {
+				sb.append("url:" + node.getUrl() + "; ");
+			}
+			if (StringUtils.trimToNull(node.getData()) != null) {
+				sb.append("data:" + node.getData() + "; ");
+			}
+			if (StringUtils.trimToNull(node.getTarget()) != null) {
+				sb.append("target:" + node.getTarget() + "; ");
+			}
+			if (StringUtils.trimToNull(node.getJsData()) != null) {
+				sb.append("JSData='" + node.getJsData() + "' ");
+			}
+			sb.append("'\r\n");
+		}
 		return sb.toString();
 	}
 }
