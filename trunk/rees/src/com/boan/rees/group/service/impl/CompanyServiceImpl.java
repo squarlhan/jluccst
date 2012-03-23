@@ -68,6 +68,12 @@ public class CompanyServiceImpl implements ICompanyService{
 	
 		companyDao.save(table1);
 	}
+	/**
+	 * 修改公司信息
+	 */
+	public void update(Company company){
+		companyDao.update(company);
+	}
 	
 	@Override
 	/**
