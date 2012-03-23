@@ -60,7 +60,7 @@ public class MzTreeUtil {
 		StringBuffer sb = new StringBuffer();
 		sb.append("var data={};\r\n");
 		for (MzTree node : treeNodes) {
-			sb.append("data['1_9009'] = '");
+			sb.append("data['" + node.getParentId() + "_" + node.getId() + "'] = '");
 			if (StringUtils.trimToNull(node.getText()) != null) {
 				sb.append("text: " + node.getText() + "; ");
 			}
