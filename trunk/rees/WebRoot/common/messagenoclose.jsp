@@ -31,7 +31,7 @@
   </body>
 </html>
 <script type="text/javascript">
-	alert('<s:property value="message.content" />');
+	alert('${message.content}');
 	<s:if test="jumpUrl != ''">
 	window.location.href="<s:property value="jumpUrl"/>";
 	</s:if>
