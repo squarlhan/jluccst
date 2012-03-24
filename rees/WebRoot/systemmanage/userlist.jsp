@@ -45,6 +45,10 @@
 			"&factoryId=" + $("#factoryId").val() +
 			"&workshopId=" + $("#workshopId").val();
 		parent.parent.tipsWindown("用户信息","iframe:./userAction!showUser.action?user.id="+cid + "&" + param,"400","430","true","","true","no");
+		parent.parent.$("#windown-close").bind('click',function(){
+			window.location.href="./userAction!showUserList.action?" + param;
+		});
+
 	}
 	
 	/**
