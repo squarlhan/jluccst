@@ -233,5 +233,4 @@ public class CalendarUtils {
 		c.set(Calendar.SECOND, 59);
 		return c;
 	}
-
 }
