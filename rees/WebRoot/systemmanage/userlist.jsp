@@ -27,14 +27,35 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title></title>
-<j:scriptlink css="true" jquery="true"></j:scriptlink>
+<j:scriptlink css="true" jquery="true" jfunction="true" tipswindow="true"></j:scriptlink>
 <script type="text/javascript">
 <!--
 	$(document).ready(function() {
-		$("#addBtn").click(function(){
-			parent.parent.tipsWindown("用户信息","iframe:./userAction!showUser.action?user.id=","400","430","true","","true","no");
-		});
+		
+		$.fn.checkall("cbkAll");
+		$.fn.uncheckall("userIds","cbkAll");
+  		$.fn.deleteuser();
 	});
+
+	/**
+	 * 添加修改
+	 */
+	$.fn.edit = function(cid){
+		var param = "companyId="+$("#companyId").val() +
+			"&factoryId=" + $("#factoryId").val() +
+			"&workshopId=" + $("#workshopId").val();
+		parent.parent.tipsWindown("用户信息","iframe:./userAction!showUser.action?user.id="+cid + "&" + param,"400","430","true","","true","no");
+	}
+	
+	/**
+	 * 删除用户
+	 */
+	 $.fn.deleteuser = function(){
+		$("#button2").click(function(){
+			$.fn.delete_items("userIds", "./userAction!deleteUser.action");
+		});
+	}
+	
 //-->
 </script>
 <style type="text/css">
@@ -49,11 +70,14 @@
 </head>
 <body>
 <s:form id="form1" name="form1" method="post" theme="simple">
+<s:hidden name="companyId" id="companyId"></s:hidden>
+<s:hidden name="factoryId" id="factoryId"></s:hidden>
+<s:hidden name="workshopId" id="workshopId"></s:hidden>
 <table width="100%" style="height:100%;" border="0" cellspacing="5" cellpadding="0">
   <tr>
     <td valign="top"><table width="100%" border="0" cellspacing="5" cellpadding="0">
       <tr>
-        <td><input name="button" type="button" class="btn_2_3" id="addBtn" value="添加">
+        <td><input name="button1" type="button" class="btn_2_3" id="button1" value="添加" onclick="$.fn.edit('')">
             <input name="button2" type="button" class="btn_4" id="button2" value="删除所选">
             <!-- 
             <input name="button3" type="button" class="btn_2_3" id="button" value="排序">
@@ -66,7 +90,7 @@
     </table>
       <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#d5e4fd">
             <tr>
-              <td height="26" align="center" background="../images/headerbg.jpg">&nbsp;</td>
+              <td height="26" align="center" background="../images/headerbg.jpg"><input type="checkbox" name="cbkAll" value="true" id="cbkAll"/></td>
               <td align="center" background="../images/headerbg.jpg"><strong>用户名</strong></td>
               <td align="center" background="../images/headerbg.jpg"><strong>中文姓名</strong></td>
               <td align="center" background="../images/headerbg.jpg"><strong>办公电话</strong></td>
@@ -75,8 +99,12 @@
             </tr>
             <s:iterator value="pagination.data" status="obj">
             <tr>
-              <td height="26" align="center" bgcolor="#FFFFFF"><input type="checkbox" name="checkbox" id="checkbox"></td>
-              <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="username"/></td>
+              <td height="26" align="center" bgcolor="#FFFFFF"><input type="checkbox" name="userIds" id="userId<s:property value="id"/>" value="<s:property value="id"/>"></td>
+              <td height="26" align="center" bgcolor="#FFFFFF">
+              	<A href="#" onclick="javascript:$.fn.edit('<s:property value="id"/>');">
+              		<s:property value="username"/>
+              	</A>
+              </td>
               <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="userCName"/></td>
               <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="officePhone"/></td>
               <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="phone"/></td>
