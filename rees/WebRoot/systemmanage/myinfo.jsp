@@ -2,6 +2,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%@ taglib prefix="j" uri="/script-tags"%>
+
 <%
 	/**
 	 * Copyright (c) 2010 Changchun Boan (BOAN) Co. Ltd.
