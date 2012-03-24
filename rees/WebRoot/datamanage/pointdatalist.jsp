@@ -10,7 +10,10 @@
 	<!--
 	$(document).ready(function() {
 		$("#addpointdata").click(function() {
-			parent.parent.parent.tipsWindown("添加监测点数据", "iframe:datamanage/pointdatainfo.jsp", "400", "260", "true", "", "true", "");
+			parent.parent.parent.tipsWindown("添加监测点数据", "iframe:datamanage/pointdatainfo.jsp", "400", "260", "true", "", "true", "", "no");
+			parent.parent.parent.$("#windown-close").bind('click',function(){
+				alert("弹出窗口关闭了");
+			});
 		});
 	});
 	//-->
