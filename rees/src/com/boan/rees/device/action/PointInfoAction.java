@@ -13,7 +13,7 @@ import org.springframework.stereotype.Controller;
 
 import com.boan.rees.device.model.PointInfo;
 import com.boan.rees.device.service.IPointInfoService;
-import com.opensymphony.xwork2.ActionSupport;
+import com.boan.rees.utils.action.BaseActionSupport;
 
 /**
  * 设备监测点控制类
@@ -23,7 +23,7 @@ import com.opensymphony.xwork2.ActionSupport;
  */
 @Controller("pointInfoAction")
 @Scope("prototype")
-public class PointInfoAction extends ActionSupport {
+public class PointInfoAction extends BaseActionSupport {
 	private static final long serialVersionUID = -6672679240989229829L;
 
 	@Autowired
