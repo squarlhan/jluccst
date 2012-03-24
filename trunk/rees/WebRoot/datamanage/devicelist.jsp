@@ -33,32 +33,32 @@
 	<div title="C4401乙烯压缩机组"
 		style="padding: 1px; display: none;">
 		<iframe scrolling="auto" frameborder="0" style="width:100%; height:100%"
-			src="about:blank" url="pointdatalist.jsp"></iframe>
+			src="about:blank" url="pointdatalist.action?deviceId=402880f2362fc9b301362fccb9b4000a"></iframe>
 	</div>
 	<div title="C4401乙烯压缩机组工艺参数"
 		style="padding: 1px; display: none;">
 		<iframe scrolling="auto" frameborder="0" style="width:100%; height:100%"
-			src="about:blank" url="pointdatalist.jsp"></iframe>
+			src="about:blank" url="pointdatalist.action?deviceId=402880f2362fc9b301362fccb9b4000a"></iframe>
 	</div>
 	<div title="C4601丙烯压缩机组"
 		style="padding: 1px; display: none;">
 		<iframe scrolling="auto" frameborder="0" style="width:100%; height:100%"
-			src="about:blank" url="pointdatalist.jsp"></iframe>
+			src="about:blank" url="pointdatalist.action?deviceId=402880f2362fc9b301362fccb9b4000a"></iframe>
 	</div>
 	<div title="C4601丙烯压缩机组工艺参数"
 		style="padding: 1px; display: none;">
 		<iframe scrolling="auto" frameborder="0" style="width:100%; height:100%"
-			src="about:blank" url="pointdatalist.jsp"></iframe>
+			src="about:blank" url="pointdatalist.action?deviceId=402880f2362fc9b301362fccb9b4000a"></iframe>
 	</div>
 	<div title="C4111乙烯压缩机组"
 		style="padding: 1px; display: none;">
 		<iframe scrolling="auto" frameborder="0" style="width:100%; height:100%"
-			src="about:blank" url="pointdatalist.jsp"></iframe>
+			src="about:blank" url="pointdatalist.action?deviceId=402880f2362fc9b301362fccb9b4000a"></iframe>
 	</div>
 	<div title="C4611丙烯压缩机组"
 		style="padding: 1px; display: none;">
 		<iframe scrolling="auto" frameborder="0" style="width:100%; height:100%"
-			src="about:blank" url="pointdatalist.jsp"></iframe>
+			src="about:blank" url="pointdatalist.action?deviceId=402880f2362fc9b301362fccb9b4000a"></iframe>
 	</div>
 </div>
 </body>
