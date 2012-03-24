@@ -17,15 +17,15 @@ import org.hibernate.annotations.GenericGenerator;
  * @version 1.0.0
  */
 @Entity
-@Table(name = "DEVICE_POINT_INFO")
-public class PointInfo implements Serializable {
-	private static final long serialVersionUID = -2302949373438233876L;
+@Table(name = "POINT_PARAMETER")
+public class PointParameter implements Serializable {
+	private static final long serialVersionUID = -2114894885947174533L;
 
 	@Id
 	@GenericGenerator(name = "system-uuid", strategy = "uuid")
 	@GeneratedValue(generator = "system-uuid")
 	/**
-	 * 监测点实体主键
+	 * 监测点参数实体主键
 	 */
 	private String id;
 
@@ -34,40 +34,24 @@ public class PointInfo implements Serializable {
 	 */
 	@Column(name = "DEVICE_ID")
 	private String deviceId;
+	
+	/**
+	 * 监测点编号，外键
+	 */
+	@Column(name = "POINT_ID")
+	private String pointId;
 
 	/**
-	 * 监测点名称
+	 * 参数名称
 	 */
-	@Column(name = "CONTROL_POINT_NAME")
-	private String controlPointName;
+	@Column(name = "NAME")
+	private String name;
 
 	/**
-	 * X轴坐标
+	 * 排序号
 	 */
-	@Column(name = "POSITIONX")
-	private int positionX;
-
-	/**
-	 * Y轴坐标
-	 */
-	@Column(name = "POSITIONY")
-	private int positionY;
-
-	public int getPositionX() {
-		return positionX;
-	}
-
-	public void setPositionX(int positionX) {
-		this.positionX = positionX;
-	}
-
-	public int getPositionY() {
-		return positionY;
-	}
-
-	public void setPositionY(int positionY) {
-		this.positionY = positionY;
-	}
+	@Column(name = "SORT_INDEX")
+	private int sortIndex = 0;
 
 	public String getId() {
 		return id;
@@ -85,12 +69,27 @@ public class PointInfo implements Serializable {
 		this.deviceId = deviceId;
 	}
 
-	public String getControlPointName() {
-		return controlPointName;
+	public String getPointId() {
+		return pointId;
 	}
 
-	public void setControlPointName(String controlPointName) {
-		this.controlPointName = controlPointName;
+	public void setPointId(String pointId) {
+		this.pointId = pointId;
 	}
 
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public int getSortIndex() {
+		return sortIndex;
+	}
+
+	public void setSortIndex(int sortIndex) {
+		this.sortIndex = sortIndex;
+	}
 }
