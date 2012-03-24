@@ -120,7 +120,7 @@ public class ScriptJsTag extends SimpleTagSupport
 		{
 			getJspContext().getOut().write( "<!--jquery-->\r\n" );
 			getJspContext().getOut().write( "<script type=\"text/javascript\" src=\"" + contextPath + "/js/jquery-1.4.2.min.js\"></script>\r\n" );
-			getJspContext().getOut().write( "<script type=\"text/javascript\" src=\"" + contextPath + "/js/external/bgiframe/jquery.bgiframe.js\"></script>\r\n" );
+			getJspContext().getOut().write( "<script type=\"text/javascript\" src=\"" + contextPath + "/js/external/jquery.bgiframe-2.1.2.js\"></script>\r\n" );
 		}
 		if( "true".equalsIgnoreCase( jfunction ))
 		{
