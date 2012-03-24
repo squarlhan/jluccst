@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <%@ taglib prefix="j" uri="/script-tags"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -9,10 +10,42 @@
 	<script type="text/javascript">
 	<!--
 	$(document).ready(function() {
+		//添加数据
 		$("#addpointdata").click(function() {
 			parent.parent.parent.tipsWindown("添加监测点数据", "iframe:datamanage/pointdatainfo.jsp", "400", "260", "true", "", "true", "", "no");
 			parent.parent.parent.$("#windown-close").bind('click',function(){
 				alert("弹出窗口关闭了");
+			});
+		});
+		//日期选择
+		$("#yearlist").change(function(){
+			$.post("getweeksajax.action", {selectYear:$("#yearlist").val()},function(json){
+				if(json.weekList.length>0){
+					//清空下拉列表
+					$("#weeklist").empty();
+					for(var i=json.weekList.length-1; i>-1; i--){
+						if(json.selectWeek==json.weekList[i].value)
+							$("#weeklist").prepend("<option value='" + json.weekList[i].value + "' seleced='selected'>" + json.weekList[i].text + "</option>");
+						else
+							$("#weeklist").prepend("<option value='" + json.weekList[i].value + "'>" + json.weekList[i].text + "</option>");
+					}
+				}
+	    	});
+		});
+		//周选择
+		$("#weeklist").change(function(){
+			
+		});
+		//加载数据
+		$(document).find("span[name='dataspan']").each(function(index,domEle){
+			$.getJSON("getdataajax.action",{ paramId:$(this).attr("paramid"), selectWeek:$("#weeklist").val(), selectYear:$("#yearlist").val() }, function(json){
+				alert(json);
+				if(json.pointDataInfo!=null){
+					
+					$(domEle).html(json.pointDataInfo.dataInfo);
+				}else{
+					$(domEle).html("");
+				}
 			});
 		});
 	});
@@ -28,11 +61,9 @@
 						<tr>
 							<td>
 								日期：
-								<select name="">
-									<option value="1">
-										2012年2月
-									</option>
-								</select>
+								<s:select name="yearlist" id="yearlist" list="yearList" cssStyle="width:70px;" listKey="value" listValue="text" value="selectYear"></s:select>
+								<s:select name="weeklist" id="weeklist" list="weekList" cssStyle="width:180px;" listKey="value" listValue="text"></s:select>
+								
 								<input name="打开设备图" class="btn_4" type="button" value="打开设备图"
 									onClick="window.open('clickpicture.html')" />
 								<input name="查看频谱图" class="btn_4" type="button" value="查看柱状图"
@@ -41,104 +72,31 @@
 							</td>
 						</tr>
 					</table>
-					<table width="100%" border="0" cellpadding="5" cellspacing="1"
-						bgcolor="#d5e4fd">
+					<s:iterator value="pointRelations" status="st">
+                    <table width="180" border="0" cellpadding="5" cellspacing="1"
+						bgcolor="#d5e4fd" style="float:left; margin:5px;">
 						<tr>
-							<td colspan="2" align="center"
-								background="../images/headerbg.jpg">
-								测点（A）
-							</td>
-							<td colspan="2" align="center"
-								background="../images/headerbg.jpg">
-								测点（B）
-							</td>
-							<td colspan="2" align="center"
-								background="../images/headerbg.jpg">
-								测点（C）
+							<td colspan="2" align="center" background="../images/headerbg.jpg">
+								<strong><s:property value="pointInfo.controlPointName"/></strong>
 							</td>
 						</tr>
 						<tr>
-							<td align="center" bgcolor="#FFFFFF">
-								参数
-							</td>
-							<td align="center" bgcolor="#FFFFFF">
-								数据
-							</td>
-							<td align="center" bgcolor="#FFFFFF">
-								参数
-							</td>
-							<td align="center" bgcolor="#FFFFFF">
-								数据
-							</td>
-							<td align="center" bgcolor="#FFFFFF">
-								参数
-							</td>
-							<td align="center" bgcolor="#FFFFFF">
-								数据
-							</td>
+							<td align="center" bgcolor="#FFFFFF" style="font-size:12px;">参数</td>
+							<td align="center" bgcolor="#FFFFFF" style="font-size:12px;">数据</td>
 						</tr>
+						<s:iterator value="pointParamInfos">
 						<tr>
 							<td align="center" bgcolor="#FFFFFF">
-								a
+								<s:property value="name"/>
 							</td>
-							<td align="center" bgcolor="#FFFFFF">
-								6.4
-							</td>
-							<td align="center" bgcolor="#FFFFFF">
-								a
-							</td>
-							<td align="center" bgcolor="#FFFFFF">
-								5.5
-							</td>
-							<td align="center" bgcolor="#FFFFFF">
-								a
-							</td>
-							<td align="center" bgcolor="#FFFFFF">
-								6.1
+							<td align="center" bgcolor="#FFFFFF"">
+								<span paramid="<s:property value='id'/>" name="dataspan">loading...</span>
 							</td>
 						</tr>
-						<tr>
-							<td align="center" bgcolor="#FFFFFF">
-								v
-							</td>
-							<td align="center" bgcolor="#FFFFFF">
-								3.8
-							</td>
-							<td align="center" bgcolor="#FFFFFF">
-								v
-							</td>
-							<td align="center" bgcolor="#FFFFFF">
-								4.2
-							</td>
-							<td align="center" bgcolor="#FFFFFF">
-								v
-							</td>
-							<td align="center" bgcolor="#FFFFFF">
-								4.0
-							</td>
-						</tr>
-						<tr>
-							<td align="center" bgcolor="#FFFFFF">
-								h
-							</td>
-							<td align="center" bgcolor="#FFFFFF">
-								9.9
-							</td>
-							<td align="center" bgcolor="#FFFFFF">
-								h
-							</td>
-							<td align="center" bgcolor="#FFFFFF">
-								10.1
-							</td>
-							<td align="center" bgcolor="#FFFFFF">
-								h
-							</td>
-							<td align="center" bgcolor="#FFFFFF">
-								10.0
-							</td>
-						</tr>
+						</s:iterator>
 					</table>
-				</td>
+					</s:iterator>
+			  </td>
 			</tr>
 		</table>
 	</body>
