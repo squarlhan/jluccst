@@ -269,6 +269,11 @@ public class UserAction extends BaseActionSupport
 	{
 		HttpSession session = ServletActionContext.getRequest().getSession();
 		UserSession userSession = ( UserSession ) session.getAttribute( "userSession" );
+		if( userSession == null )
+		{
+			message.setContent( "请重新登录！" );
+			return SUCCESS;
+		}
 		String myUserId = userSession.getUserId();
 		user.setId( myUserId );
 		if( StringUtils.isNotBlank( myUserId ) )
@@ -282,8 +287,9 @@ public class UserAction extends BaseActionSupport
 			else
 			{
 				user.setCreateTime( oldUser.getCreateTime() );
-				//user.setDeptId( oldUser.getDeptId() );
-				//user.setUnitId( oldUser.getUnitId() );
+				user.setCompanyId( oldUser.getCompanyId() );
+				user.setFactoryId( oldUser.getFactoryId() );
+				user.setWorkshopId( oldUser.getWorkshopId() );
 				user.setUserType( oldUser.getUserType() );
 				if( StringUtils.isBlank( newPassword ) )
 				{
