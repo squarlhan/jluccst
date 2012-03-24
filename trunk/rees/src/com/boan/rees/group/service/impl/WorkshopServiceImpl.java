@@ -23,11 +23,11 @@ import com.boan.rees.utils.page.Pagination;
  * @version 1.0.0
  */
 
-@Service("groupWorkshopService")
+@Service("workshopService")
 public class WorkshopServiceImpl implements IWorkshopService {
 
 	@Autowired
-	@Qualifier("groupWorkshopDao")
+	@Qualifier("workshopDao")
 	private IWorkshopDao groupWorkshopDao;
 	/**
 	 * 查找所有车间
