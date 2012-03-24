@@ -33,10 +33,10 @@
 			var _customer_submit = {
 			rules: {
 				"user.username":{required:true,strangecode:true},
+				"user.userCName":{required:true,strangecode:true},
 				<s:if test="null==user.id||user.id.isEmpty">
 				"user.password":{required:true},
 				</s:if>
-				"user.userCName":{required:true,strangecode:true},
 				"user.officePhone":{strangecode:true},
 				"user.phone":{strangecode:true},
 				"user.email":{email:true}
@@ -174,6 +174,15 @@
 										</tr>
 										<tr>
 											<td height="26" align="right" bgcolor="#FFFFFF">
+												<strong>中文姓名：</strong>
+											</td>
+											<td height="26" align="left" bgcolor="#FFFFFF">
+												<s:textfield name="user.userCName" id="userCName" cssStyle="width: 250px;" maxlength="25"></s:textfield>
+												<font color="red">*</font>
+											</td>
+										</tr>
+										<tr>
+											<td height="26" align="right" bgcolor="#FFFFFF">
 												<strong>用户密码：</strong>
 											</td>
 											<td height="26" align="left" bgcolor="#FFFFFF">
@@ -186,15 +195,6 @@
 												<input type="button" name="button3" value="初始化密码" id="button3"
 													class="SkinImg Btn_4" />
 												</s:else>
-											</td>
-										</tr>
-										<tr>
-											<td height="26" align="right" bgcolor="#FFFFFF">
-												<strong>中文姓名：</strong>
-											</td>
-											<td height="26" align="left" bgcolor="#FFFFFF">
-												<s:textfield name="user.userCName" id="userCName" cssStyle="width: 250px;" maxlength="25"></s:textfield>
-												<font color="red">*</font>
 											</td>
 										</tr>
 										<tr>

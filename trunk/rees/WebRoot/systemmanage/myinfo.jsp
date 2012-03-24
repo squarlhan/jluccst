@@ -1,9 +1,10 @@
+<%@page import="com.boan.rees.common.UserConfig"%>
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%@ taglib prefix="j" uri="/script-tags"%>
 <%
 	/**
-	 * Copyright (c) 2005 Changchun Boan (BOAN) Co. Ltd.
+	 * Copyright (c) 2010 Changchun Boan (BOAN) Co. Ltd.
 	 * All right reserved.
 	 */
 	/**
@@ -16,38 +17,30 @@
 	 * Modified Time：
 	 * Modified Explain：
 	 */
-	response.setHeader( "Pragma", "No-cache" );
-	response.setHeader( "Cache-Control", "no-cache" );
-	response.setHeader( "Expires", "0" );
-	request.setCharacterEncoding( "utf-8" );
+	response.setHeader("Pragma", "No-cache");
+	response.setHeader("Cache-Control", "no-cache");
+	response.setHeader("Expires", "0");
+	request.setCharacterEncoding("utf-8");
 	String path = request.getContextPath();
 %>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
-		<title>用户信息</title>
-		<META http-equiv=Content-Type content="text/html; charset=utf-8">
-		<j:scriptlink css="true" jquery="true" validate="true" jfunction="true"></j:scriptlink>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title></title>
+		<j:scriptlink css="true" jquery="true" validate="true"></j:scriptlink>
 		<script type="text/javascript">
+		<!--
 			var _customer_submit = {
-				rules: {
-					"user.userCName":{required:true,strangecode:true},
-					"user.password":{required:true},
-					"newPassword":{equalTo:"#validPassword"},
-					"user.sex":{required:true},
-					"user.officePhone":{strangecode:true},
-					"user.phone":{strangecode:true},
-					"user.roleId":{selectvalidate:true}
-				},
-				messages:{
-					"user.userCName":{required:"用户中文名必须填写！",strangecode:"【用户中文名】中存在 \'\"\\/<>*:?|%$#@&~^ 非法字符， \n\n请更正或以中文符号替换 ！"},
-					"user.password":{required:"用户登录密码必须填写！"},
-					"newPassword":{equalTo:"您两输入的密码不一样，请重新输入！"},
-					"user.sex":{required:"请选择性别！"},
-					"user.phone":{strangecode:"【用户中文名】中存在 \'\"\\/<>*:?|%$#@&~^ 非法字符， \n\n请更正或以中文符号替换 ！"},
-					"user.roleId":{selectvalidate:"请选择角色！"}
+			rules: {
+				"user.userCName":{required:true,strangecode:true},
+				"user.password":{required:true},
+				"newPassword":{equalTo:"#validPassword"},
+				"user.officePhone":{strangecode:true},
+				"user.phone":{strangecode:true},
+				"user.email":{email:true}
 				}
 			};
-		 	$(document).ready(function(){
+			$(document).ready(function(){
 		  		$.validator.setDefaults({
 					debug: false,onkeyup: false,onfocusout:false,focusCleanup: true,
 				    errorPlacement:function(error, element) {},
@@ -58,8 +51,10 @@
 			    	}
 				})
 				$.fn.save();
+		  		$.fn.close();
+		  		$.fn.initpage();
 		  	});
-		  	/**
+			/**
 		  	 * 保存
 		  	 */
 			$.fn.save = function(){
@@ -71,118 +66,155 @@
 					}
 	               	$("#roleId").attr("disabled",false);
 	               	form1.action="./saveOrUpdateMyInfoAction.action"
-	               	form1.target = "iframe1";
+	               	form1.target = "iframe2";
 	               	form1.submit();
 	           	});
           	}
+			/**
+			 * 关闭
+			 */
+		 	$.fn.close = function(){
+			 	$("#button2").click(function() {
+					parent.$("#windown-close").click();
+				});
+			}
+			/**
+			 * 初始化页面
+			 */
+			$.fn.initpage = function(){
+				$("#userCName").focus();
+			}
+		//-->
 		</script>
 	</head>
 	<body>
-		<s:form name="form1" method="post" id="form1" theme="simple">
-			<div class="centerDiv">
-				<table cellpadding="5" cellspacing="5" border="0"
-					style="margin: 0px; width: 600px;">
-					<tr>
-						<td style="width: 175px">
-							登录用户名
-						</td>
-						<td style="width: 499px">
-							<s:textfield name="user.username" id="userName" maxlength="25"
-								readonly="true"></s:textfield>
-							<font style="font-size: 9pt">（不可修改）</font>
-						</td>
-					</tr>
-					<tr>
-						<td style="width: 175px">
-							真实姓名
-						</td>
-						<td style="width: 499px">
-							<s:textfield name="user.userCName" id="userCName" maxlength="25"></s:textfield>
-							<font color="red">*</font>
-						</td>
-					</tr>
+		<s:form name="form1" id="form1" method="post" theme="simple">
+			<s:hidden name="user.id" id="userId"></s:hidden>
+			<s:hidden name="companyId" id="companyId"></s:hidden>
+			<s:hidden name="factoryId" id="factoryId"></s:hidden>
+			<s:hidden name="workshopId" id="workshowId"></s:hidden>
+			<table width="100%" border="0" cellspacing="5" cellpadding="0">
+				<tr>
+					<td>
+						<table width="100%" style="height: 100%;" border="0"
+							cellspacing="6" cellpadding="0">
+							<tr>
+								<td style="height: 36px;">
+									<table width="100%" border="0" cellpadding="5" cellspacing="1"
+										bgcolor="#d5e4fd">
 
-					<tr>
-						<td style="width: 175px">
-							性别
-						</td>
-						<td style="width: 499px">
-							
-						</td>
-					</tr>
+										<tr>
+											<td height="26" align="right" bgcolor="#FFFFFF">
+												<strong>用 户 名：</strong>
+											</td>
+											<td height="26" align="left" bgcolor="#FFFFFF">
+												<s:label name="user.username" id="labelusername" title="用户名不能修改"></s:label>
+												<s:hidden name="user.username" id="username"></s:hidden>
+											</td>
+										</tr>
+										
+										<tr>
+											<td height="26" align="right" bgcolor="#FFFFFF">
+												<strong>中文姓名：</strong>
+											</td>
+											<td height="26" align="left" bgcolor="#FFFFFF">
+												<s:textfield name="user.userCName" id="userCName" cssStyle="width: 250px;" maxlength="25"></s:textfield>
+												<font color="red">*</font>
+											</td>
+										</tr>
+										<tr>
+											<td height="26" align="right" bgcolor="#FFFFFF">
+												<strong>用户密码：</strong>
+											</td>
+											<td height="26" align="left" bgcolor="#FFFFFF">
+												<s:password name="user.password" id="password" maxlength="25" cssStyle="width: 250px;"></s:password>
+												<span style="color: #ff0000">*</span>
+											</td>
+										</tr>
+										<tr>
+											<td height="26" align="right" bgcolor="#FFFFFF">
+												<strong>新 密 码：</strong>
+											</td>
+											<td height="26" align="left" bgcolor="#FFFFFF">
+												<s:password name="newPassword" id="newPassword" maxlength="25" cssStyle="width: 250px;"></s:password>
+											</td>
+										</tr>
+										<tr>
+											<td height="26" align="right" bgcolor="#FFFFFF">
+												<strong>效验密码：</strong>
+											</td>
+											<td height="26" align="left" bgcolor="#FFFFFF">
+												<s:password name="validPassword" id="validPassword" maxlength="25" cssStyle="width: 250px;"></s:password>
+											</td>
+										</tr>
+										<tr>
+											<td height="26" align="right" bgcolor="#FFFFFF">
+												<strong>办公电话：</strong>
+											</td>
+											<td height="26" align="left" bgcolor="#FFFFFF">
+												<s:textfield name="user.officePhone" id="officePhone" cssStyle="width: 250px;" maxlength="25"></s:textfield>
+											</td>
+										</tr>
+										<tr>
+											<td height="26" align="right" bgcolor="#FFFFFF">
+												<strong>个人手机：</strong>
+											</td>
+											<td height="26" align="left" bgcolor="#FFFFFF">
+												<s:textfield name="user.phone" id="phone" cssStyle="width: 250px;" maxlength="25"></s:textfield>
+											</td>
+										</tr>
+										<tr>
+											<td height="26" align="right" bgcolor="#FFFFFF">
+												<strong>电子邮箱：</strong>
+											</td>
+											<td height="26" align="left" bgcolor="#FFFFFF">
+												<s:textfield name="user.email" id="email" cssStyle="width: 250px;" maxlength="100"></s:textfield>
+											</td>
+										</tr>
+										<tr>
+											<td height="26" align="right" bgcolor="#FFFFFF">
+												<strong>用户角色：</strong>
+											</td>
+											<td height="26" align="left" bgcolor="#FFFFFF">
+											</td>
+										</tr>
+										<tr>
+											<td height="26" align="right" bgcolor="#FFFFFF">
+												<strong>权限类型：</strong>
+											</td>
+											<td height="26" align="left" bgcolor="#FFFFFF">
+												<s:if test="user.deleteFlag==1">
+													<span  onMouseMove="this.setCapture();" onMouseOut="this.releaseCapture();" onfocus="this.blur();">
+														<s:radio list="userTypeList" listKey="key" listValue="value" id="userType" name="user.userType" value="user.userType">
+														</s:radio>
+													</span>
+													<br/>
+													<font color="#FF0000" title="不能修改自己的用户类别" style="font-size:9pt;">[ 不能修改自己的用户类别 ]</font>
+												</s:if>
+												<s:else>
+													<s:radio list="userTypeList" listKey="key" listValue="value" id="userType" name="user.userType" value="user.userType">
+													</s:radio>
+												</s:else>
+											</td>
+										</tr>
+										<tr>
+											<td height="26" colspan="2" align="center" bgcolor="#FFFFFF">
+												<font style="font-size: 9pt;color=#FF0000">注：新密码为空时，保存功能不会对原用户密码进行修改。</font>
+												<br/>
+												<input name="button1" type="button" class="btn_2_3"
+													id="button1" value="确定">
+												<input name="button2" type="button" class="btn_2_3"
+													id="button2" value="关闭">
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
 
-					<tr>
-						<td style="width: 175px">
-							登录密码
-						</td>
-						<td style="width: 499px">
-							<s:password name="user.password" id="password" maxlength="25"></s:password>
-							<span style="color: #ff0000">*</span>
-						</td>
-					</tr>
-					<tr>
-						<td style="width: 175px">
-							新密码
-						</td>
-						<td style="width: 499px">
-							<s:password name="newPassword" id="newPassword" maxlength="25"></s:password>
-						</td>
-					</tr>
-					<tr>
-						<td style="width: 175px">
-							校验密码
-						</td>
-						<td style="width: 499px">
-							<s:password name="validPassword" id="validPassword"
-								maxlength="25"></s:password>
-						</td>
-					</tr>
-					<tr>
-						<td style="width: 175px">
-							单位电话
-						</td>
-						<td style="width: 499px">
-							<s:textfield name="user.officePhone" id="officePhone"
-								cssStyle="width:100%" maxlength="100"></s:textfield>
-						</td>
-					</tr>
-					<tr>
-						<td style="width: 175px">
-							联系方式
-						</td>
-						<td style="width: 499px">
-							<s:textfield name="user.phone" id="phone" cssStyle="width:100%"
-								maxlength="100"></s:textfield>
-						</td>
-					</tr>
-					<tr>
-						<td style="width: 175px">
-							角色
-						</td>
-						<td style="width: 499px">
-						</td>
-					</tr>
-					<tr>
-						<td style="width: 175px">
-							用户类别
-						</td>
-						<td style="width: 499px">
-						</td>
-					</tr>
-					<tr>
-						<td align="center" class="FooterStyle" colspan="2">
-							<div style="margin-bottom: 3px">
-								<font style="font-size: 9pt;color:red">注：新密码为空时，保存功能不会对原用户密码进行修改。</font>
-								<br>
-								<input type="button" name="button1" value="保 存" id="button1"
-									class="SkinImg Btn_2" />
-								<input type="reset" name="button2" value="重 置" id="button2"
-									class="SkinImg Btn_2" />
-							</div>
-						</td>
-					</tr>
-				</table>
-			</div>
+						</table>
+					</td>
+				</tr>
+			</table>
 		</s:form>
 		<iframe id="iframe1" name="iframe1" width="1px" height="1px"></iframe>
 	</body>
