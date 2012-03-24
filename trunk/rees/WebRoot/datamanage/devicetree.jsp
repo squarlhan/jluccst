@@ -17,8 +17,8 @@
 	        Using("System.Web.UI.WebControls.MzTreeView");
 	        var a = new MzTreeView();
 	        a.dataSource = data
-	        var xmlPage = "${pageContext.request.contextPath}/js/mztreeview/csdn/community/treedata/mycommunity.xml";
-	        a.loadXmlData(xmlPage, 1);
+	        var jsPage = "${pageContext.request.contextPath}/js/mztreeview/csdn/community/treedata/jsdemo.js";
+	        a.loadJsData(jsPage);
 	        
 	        //把指定节点id做为根节点显示
 	        a.rootId="1";
