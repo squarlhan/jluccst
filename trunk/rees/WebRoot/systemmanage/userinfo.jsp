@@ -1,3 +1,4 @@
+<%@page import="com.boan.rees.common.UserConfig"%>
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%@ taglib prefix="j" uri="/script-tags"%>
@@ -32,9 +33,10 @@
 			var _customer_submit = {
 			rules: {
 				"user.username":{required:true,strangecode:true},
+				<s:if test="null==user.id||user.id.isEmpty">
 				"user.password":{required:true},
-				"validatePassword":{equalTo:"#userPassword"},
-				"user.userCName":{strangecode:true},
+				</s:if>
+				"user.userCName":{required:true,strangecode:true},
 				"user.officePhone":{strangecode:true},
 				"user.phone":{strangecode:true},
 				"user.email":{email:true}
@@ -52,7 +54,9 @@
 				})
 				$.fn.save();
 		  		$.fn.close();
+		  		$.fn.configpasswod();
 		  		$.fn.initpage();
+		  		$.fn.initpassword();
 		  	});
 			/**
 		  	 * 保存
@@ -86,11 +90,69 @@
 			$.fn.initpage = function(){
 				$("#username").focus();
 			}
+			/**
+          	 * 设置初始密码，如果是新增加用户，则默认为初始密码，否则为空
+          	 */
+          	$.fn.configpasswod = function(){
+          		if( $.trim($("#userId").val()) == "" )
+          		{
+	          		$("#password").val( "<%=UserConfig.DEFAULT_PASSWORD%>" );
+          		}
+          		else
+          		{
+          			$("#password").val( "" );
+          		}
+          	}
+			/**
+          	 * 初始化密码
+          	 */
+          	$.fn.initpassword = function(){
+          		$("#button3").click(function(){
+	          		if( confirm("确定要将密码初始化为[ <%=UserConfig.DEFAULT_PASSWORD%> ]吗？ ") )
+	          		{
+	          			$.fn.commitinitpassword();
+	          		}
+          		});
+          	}
+			/**
+          	 * 异步初始化密码
+          	 */
+          	$.fn.commitinitpassword = function(){
+				var myData;
+				$.ajax({
+					type: "post",
+					dataType: "json",
+					url: "./initUserPasswordAction.action",
+					data: {"user.id": $("#userId").val() }, 
+					beforeSend: function(XMLHttpRequest){
+						;
+					},
+					success: function(data, textStatus){
+						myData= eval('('+data+')');
+					},
+					complete: function(XMLHttpRequest, textStatus){ 
+					     if(myData.jsonData=="success"){
+					     	alert("密码初始化成功！");
+					     }
+					     else
+					     {
+					     	alert("无此用户，请联系管理员！");
+					     }
+					},
+					error: function(){
+						alert("异步请求处理出错！");
+					}
+				});
+			}
 		//-->
 		</script>
 	</head>
 	<body>
 		<s:form name="form1" id="form1" method="post" theme="simple">
+			<s:hidden name="user.id" id="userId"></s:hidden>
+			<s:hidden name="companyId" id="companyId"></s:hidden>
+			<s:hidden name="factoryId" id="factoryId"></s:hidden>
+			<s:hidden name="workshopId" id="workshowId"></s:hidden>
 			<table width="100%" border="0" cellspacing="5" cellpadding="0">
 				<tr>
 					<td>
@@ -107,6 +169,7 @@
 											</td>
 											<td height="26" align="left" bgcolor="#FFFFFF">
 												<s:textfield name="user.username" id="username" cssStyle="width: 250px;" maxlength="25"></s:textfield>
+												<font color="red">*</font>
 											</td>
 										</tr>
 										<tr>
@@ -114,15 +177,15 @@
 												<strong>用户密码：</strong>
 											</td>
 											<td height="26" align="left" bgcolor="#FFFFFF">
-												<s:textfield name="user.password" id="userPassword" cssStyle="width: 250px;" maxlength="25"></s:textfield>
-											</td>
-										</tr>
-										<tr>
-											<td height="26" align="right" bgcolor="#FFFFFF">
-												<strong>确认密码：</strong>
-											</td>
-											<td height="26" align="left" bgcolor="#FFFFFF">
-												<s:textfield name="validatePassword" id="validatePassword" cssStyle="width: 250px;" maxlength="25"></s:textfield>
+												<s:textfield name="user.password" id="password" maxlength="25"
+													cssStyle="width:150px;" value=""></s:textfield>
+												<s:if test="null==user.id||user.id.isEmpty">
+													<span style="color: #ff0000">*</span>
+												</s:if>
+												<s:else>
+												<input type="button" name="button3" value="初始化密码" id="button3"
+													class="SkinImg Btn_4" />
+												</s:else>
 											</td>
 										</tr>
 										<tr>
@@ -131,6 +194,7 @@
 											</td>
 											<td height="26" align="left" bgcolor="#FFFFFF">
 												<s:textfield name="user.userCName" id="userCName" cssStyle="width: 250px;" maxlength="25"></s:textfield>
+												<font color="red">*</font>
 											</td>
 										</tr>
 										<tr>
@@ -157,19 +221,36 @@
 												<s:textfield name="user.email" id="email" cssStyle="width: 250px;" maxlength="100"></s:textfield>
 											</td>
 										</tr>
-										<!-- 
 										<tr>
 											<td height="26" align="right" bgcolor="#FFFFFF">
-												<strong>用户类型：</strong>
+												<strong>用户角色：</strong>
 											</td>
 											<td height="26" align="left" bgcolor="#FFFFFF">
-												<input type="checkbox" name="checkbox" id="checkbox">
-												选中为锁定
 											</td>
 										</tr>
-										 -->
+										<tr>
+											<td height="26" align="right" bgcolor="#FFFFFF">
+												<strong>权限类型：</strong>
+											</td>
+											<td height="26" align="left" bgcolor="#FFFFFF">
+												<s:if test="user.deleteFlag==1">
+													<span  onMouseMove="this.setCapture();" onMouseOut="this.releaseCapture();" onfocus="this.blur();">
+														<s:radio list="userTypeList" listKey="key" listValue="value" id="userType" name="user.userType" value="user.userType">
+														</s:radio>
+													</span>
+													<br/>
+													<font color="#FF0000" title="不能修改自己的用户类别" style="font-size:9pt;">[ 不能修改自己的用户类别 ]</font>
+												</s:if>
+												<s:else>
+													<s:radio list="userTypeList" listKey="key" listValue="value" id="userType" name="user.userType" value="user.userType">
+													</s:radio>
+												</s:else>
+											</td>
+										</tr>
 										<tr>
 											<td height="26" colspan="2" align="center" bgcolor="#FFFFFF">
+												<font style="font-size: 9pt;color=#FF0000">注：用户密码为空时，保存功能不会对原用户密码进行修改。</font>
+												<br/>
 												<input name="button1" type="button" class="btn_2_3"
 													id="button1" value="确定">
 												<input name="button2" type="button" class="btn_2_3"
