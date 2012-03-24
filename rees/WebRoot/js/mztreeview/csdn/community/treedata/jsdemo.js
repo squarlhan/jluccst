@@ -1,4 +1,4 @@
 var data={};
-data['1_9009'] = 'text: 开发语言; url:/Expert/ForumsList.asp?typenum=1&roomid=1 ; JSData: /rees/js/mztreeview/csdn/community/treedata/language.js ';
-data['1_54'] = 'text: Java 技术; url:/Expert/ForumsList.asp?typenum=1&roomid=54 ; JSData: /rees/js/mztreeview//csdn/community/treedata/java.js ';
-data['1_52'] = 'text: .Net 技术; url:/Expert/ForumsList.asp?typenum=1&roomid=52 ; JSData: /rees/js/mztreeview//csdn/community/treedata/donnet.js ';
+data['1_2'] = 'text: 公司; JSData: /rees/js/mztreeview/csdn/community/treedata/data.js ';
+data['1_3'] = 'text: 工厂; JSData: /rees/js/mztreeview//csdn/community/treedata/data.js ';
+data['1_4'] = 'text: 车间; JSData: /rees/js/mztreeview//csdn/community/treedata/data.js ';
