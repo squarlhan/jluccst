@@ -87,23 +87,23 @@
     	</action>
     </package>
     <package name="userlogon" extends="struts-default" namespace="/">
-    	<action name="logonValidAction" class="logonAction" method="logonValid">
+    	<action name="logonValidAction" class="userLogonAction" method="logonValid">
     		<result name="success">/loginok.jsp</result>
     		<result name="error">/common/messagenoclose.jsp</result>
     	</action>
-    	<action name="logonMainAction" class="logonAction" method="logonMain">
+    	<action name="logonMainAction" class="userLogonAction" method="logonMain">
     		<result name="success">/main.jsp</result>
     	</action>
-    	<action name="logonTopAction" class="logonAction" method="logonTop">
+    	<action name="logonTopAction" class="userLogonAction" method="logonTop">
     		<result name="success">/top.jsp</result>
     	</action>
-    	<action name="logoutAction" class="logonAction" method="logout">
+    	<action name="logoutAction" class="userLogonAction" method="logout">
     		<result name="success">/default.jsp</result>
     	</action>
-    	<action name="showModifyAction" class="logonAction" method="showModify">
+    	<action name="showModifyAction" class="userLogonAction" method="showModify">
     		<result name="success">/sysmanage/usermodify.jsp</result>
     	</action>
-    	<action name="modifyAction" class="logonAction" method="modify">
+    	<action name="modifyAction" class="userLogonAction" method="modify">
     		<result name="success">/common/message.jsp</result>
     		<result name="error">/common/messagenoclose.jsp</result>
     	</action>

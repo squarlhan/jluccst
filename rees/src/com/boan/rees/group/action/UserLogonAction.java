@@ -19,6 +19,8 @@ import org.apache.commons.lang.StringUtils;
 import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
@@ -42,6 +44,8 @@ import com.opensymphony.xwork2.ActionSupport;
  * @author XXX
  * @version 1.0.0
  */
+@Controller("userLogonAction")
+@Scope("prototype")
 public class UserLogonAction extends ActionSupport
 {
 	/**
