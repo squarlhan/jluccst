@@ -10,5 +10,12 @@ import com.boan.rees.utils.dao.IBaseDao;
  * @version 1.0.0
  */
 public interface IPointDataInfoDao extends IBaseDao<PointDataInfo, String> {
-
+	/**
+	 * 获得年度指定周日期的监测点数据
+	 * @param year
+	 * @param week
+	 * @param paramId
+	 * @return
+	 */
+	public PointDataInfo get(String year, String week, String paramId);
 }

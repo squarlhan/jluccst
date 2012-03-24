@@ -60,6 +60,22 @@
 	    </action>
 	</package>
 	
+	<!-- 监测点数据Action -->
+	<package name="pointdatainfo" extends="struts-default" namespace="/datamanage">
+		<action name="pointdatalist" class="pointDataInfoAction" method="pointDataInfoList">
+			<result name="success">/datamanage/pointdatalist.jsp</result>
+			<result name="input">/datamanage/pointdatalist.jsp</result>
+		</action>
+	</package>
+	<package name="pointdatajax" extends="json-default" namespace="/datamanage">
+		<action name="getweeksajax" class="pointDataInfoAction" method="loadWeekList">
+            <result type="json"></result>
+        </action>
+        <action name="getdataajax" class="pointDataInfoAction" method="loadDataInfo">
+            <result type="json"></result>
+        </action>
+	</package>
+	
     <package name="deviceAjax" extends="json-default" namespace="/datamanage">
 		<action name="positionsetajax" class="com.boan.rees.device.action.PointInfoAction" method="positionSet">
             <result type="json"></result>

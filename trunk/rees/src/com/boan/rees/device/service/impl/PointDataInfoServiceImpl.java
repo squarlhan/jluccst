@@ -7,9 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import com.boan.rees.demo.dao.IDemoDao;
 import com.boan.rees.device.dao.IPointDataInfoDao;
-import com.boan.rees.device.model.DeviceInfo;
 import com.boan.rees.device.model.PointDataInfo;
 import com.boan.rees.device.service.IPointDataInfoService;
 import com.boan.rees.utils.page.Pagination;
@@ -65,6 +63,10 @@ public class PointDataInfoServiceImpl implements IPointDataInfoService{
 		pagination.setTotalRows(totalRows);
 		pagination.setData(data);
 		return pagination;
+	}
+	@Override
+	public PointDataInfo get(String year, String week, String paramId) {
+		return pointDataInfoDao.get(year, week, paramId);
 	}
 
 }
