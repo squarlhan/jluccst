@@ -239,20 +239,23 @@ public class UserAction extends BaseActionSupport
 	{
 		HttpSession session = ServletActionContext.getRequest().getSession();
 		UserSession userSession = ( UserSession ) session.getAttribute( "userSession" );
-		String myUserId = userSession.getUserId();
-		if( StringUtils.isNotBlank( myUserId ) )
+		if(userSession != null)
 		{
+			String myUserId = userSession.getUserId();
+			if( StringUtils.isNotBlank( myUserId ) )
+			{
+				//TODO
+				//user = userService.getUserById( userId );
+				//unitId = user.getUnitId();
+				//deptId = user.getDeptId();
+			}
 			//TODO
-			//user = userService.getUserById( userId );
-			//unitId = user.getUnitId();
-			//deptId = user.getDeptId();
+			//roleList = roleService.queryAllRoleList();
+			//if( roleList == null )
+			//{
+			//	roleList = new ArrayList<Role>();
+			//}
 		}
-		//TODO
-		//roleList = roleService.queryAllRoleList();
-		//if( roleList == null )
-		//{
-		//	roleList = new ArrayList<Role>();
-		//}
 		return SUCCESS;
 	}
 
