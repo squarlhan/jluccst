@@ -17,8 +17,8 @@ import org.hibernate.annotations.GenericGenerator;
  * @version 1.0.0
  */
 @Entity
-@Table(name = "POINT_PARAMETER")
-public class PointParameter implements Serializable {
+@Table(name = "DEVICE_POINT_PARAM")
+public class PointParamInfo implements Serializable {
 	private static final long serialVersionUID = -2114894885947174533L;
 
 	@Id
