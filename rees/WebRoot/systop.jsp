@@ -43,12 +43,18 @@
     <td width="138"><img src="images/top_03.jpg" width="138" height="85" alt=""></td>
   </tr>
   <tr>
-    <td height="36" colspan="3" background="images/top_bg2.jpg" style="padding-left:20px;"><table width="234" border="0" cellspacing="0" cellpadding="0">
-      <tr>
-        <td width="19" style="padding-bottom:2px;"><img src="images/user.gif" width="16" height="16" /></td>
-        <td width="218" style="padding-top:2px;"><span class="STYLE1">当前用户：系统管理员</span></td>
-      </tr>
-    </table>
+    <td height="36" colspan="3" background="images/top_bg2.jpg" style="padding-left:20px;">
+	    <table width="870" border="0" cellspacing="0" cellpadding="0">
+	      <tr>
+	        <td width="20" style="padding-bottom:2px;"><img src="images/user.gif" width="16" height="16" /></td>
+	        <td width="850" style="padding-top:2px;">
+	        	<span class="STYLE1">
+	        		今天是2012年12月12日 星期三  欢迎您：系统管理员, 您的部门：动力一砀-》第二柄烯车间-》动力一砀-》第二柄烯车间
+	        		个人资料 退出
+	        	</span>
+	        </td>
+	      </tr>
+	    </table>
     </td>
   </tr>
 </table>
