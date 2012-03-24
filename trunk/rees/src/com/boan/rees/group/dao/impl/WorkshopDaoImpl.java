@@ -21,7 +21,7 @@ import com.boan.rees.utils.dao.impl.BaseDao;
  * @version 1.0.0
  */
 
-@Repository("groupWorkshopDao")
+@Repository("workshopDao")
 public class WorkshopDaoImpl extends BaseDao<Workshop,String> implements IWorkshopDao{
 
 	
