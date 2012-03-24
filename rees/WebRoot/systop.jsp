@@ -27,8 +27,17 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title></title>
-<link type="text/css" rel="stylesheet" href="style.css" />
-<j:scriptlink css="true"/>
+<j:scriptlink css="true" jquery="true" jfunction="true" tipswindow="true"></j:scriptlink>
+<SCRIPT language=javascript type=text/javascript>
+	  function logout()
+	  {
+	     top.location.href="./logoutAction.action";
+	  }
+	  function myinfo()
+	  {
+		  parent.parent.tipsWindown("个人资料","iframe:./showMyInfoAction.action","400","430","true","","true","no");
+	  }
+</SCRIPT>
 <style type="text/css">
 <!--
 .STYLE1 {color: #FFFFFF}
@@ -44,13 +53,14 @@
   </tr>
   <tr>
     <td height="36" colspan="3" background="images/top_bg2.jpg" style="padding-left:20px;">
-	    <table width="870" border="0" cellspacing="0" cellpadding="0">
+	    <table width="890" border="0" cellspacing="0" cellpadding="0">
 	      <tr>
 	        <td width="20" style="padding-bottom:2px;"><img src="images/user.gif" width="16" height="16" /></td>
-	        <td width="850" style="padding-top:2px;">
+	        <td width="870" style="padding-top:2px;">
 	        	<span class="STYLE1">
 	        		今天是2012年12月12日 星期三  欢迎您：系统管理员, 您的部门：动力一砀-》第二柄烯车间-》动力一砀-》第二柄烯车间
-	        		个人资料 退出
+	        		[<A href="javascript:myinfo();" style="color:yellow">个人资料</A>]
+	        		[<A href="javascript:logout();" style="color:yellow">退出</A>]
 	        	</span>
 	        </td>
 	      </tr>
