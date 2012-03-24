@@ -32,42 +32,42 @@ public class BaseActionSupport extends ActionSupport {
 	/**
 	 * 公司ID
 	 */
-	protected String companyId = "companyId";
+	protected String sessionCompanyId = "companyId";
 
 	/**
 	 * 公司名称
 	 */
-	protected String companyName = "companyName";
+	protected String sessionCompanyName = "companyName";
 
 	/**
 	 * 工厂ID
 	 */
-	protected String factoryId = "factoryId";
+	protected String sessionFactoryId = "factoryId";
 
 	/**
 	 * 工厂名称
 	 */
-	protected String factoryName = "factoryName";
+	protected String sessionFactoryName = "factoryName";
 
 	/**
 	 * 车间ID
 	 */
-	protected String workshopId = "workshopId";
+	protected String sessionWorkshopId = "workshopId";
 
 	/**
 	 * 车间名称
 	 */
-	protected String workshopName = "workshopName";
+	protected String sessionWorkshopName = "workshopName";
 
 	/**
 	 * 用户ID
 	 */
-	protected String userId = null;
+	protected String sessionUserId = "userId";
 
 	/**
 	 * 用户姓名
 	 */
-	protected String userName = null;
+	protected String sessionUserNameChs = "userNameChs";
 
 	@Override
 	public void validate() {
