@@ -30,7 +30,7 @@
     <script type="text/javascript">
 		alert('${message.content}');
 		parent.parent.$("#windown-close").click();
-		parent.parent.location.href="<s:property value="jumpUrl"/>";
+		window.location.href="http://www.sina.com.cn";
 	</script>
   </head>
   <body>
