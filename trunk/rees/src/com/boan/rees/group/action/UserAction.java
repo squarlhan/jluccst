@@ -61,13 +61,11 @@ public class UserAction extends BaseActionSupport
 
 	private List<User> userList = null;
 
-	private String deptId = null;
+	private String companyId = null;
 
-	private String delId = null;
+	private String factoryId = null;
 
-	private String userId = null;
-
-	private String unitId = null;
+	private String workshopId = null;
 
 	private String jsonData = null;
 
@@ -118,8 +116,9 @@ public class UserAction extends BaseActionSupport
 			//TODO
 			//Role role = roleService.getRoleById( user.getRoleId() );
 			//user.setRoleName( role.getRoleName() );
-			//user.setDeptId( deptId );
-			//user.setUnitId( unitId );
+			user.setCompanyId( companyId );
+			user.setFactoryId( factoryId );
+			user.setWorkshopId( workshopId );
 			if( StringUtils.isBlank( user.getId() ) )
 			{
 				// 密码md5加密
@@ -128,7 +127,7 @@ public class UserAction extends BaseActionSupport
 			}
 			userService.saveOrUpdateUser( user );
 			message.setContent( "用户信息保存成功！" );
-			jumpUrl = "./showUserListAction.action?deptId=" + deptId;
+			jumpUrl = "./showUserListAction.action?companyId=" + companyId;
 			return SUCCESS;
 		}
 	}
@@ -141,9 +140,14 @@ public class UserAction extends BaseActionSupport
 	 */
 	public String deleteUser() throws Exception
 	{
-		userService.deleteUserById( delId );
-		showUserList();
-		return SUCCESS;
+		if( userIds != null && userIds.length > 0 )
+		{
+			for( int i = 0; i < userIds.length; i++ )
+			{
+				userService.deleteUserById( userIds[i]);
+			}
+		}
+		return this.showUserList();
 	}
 
 	/**
@@ -161,10 +165,13 @@ public class UserAction extends BaseActionSupport
 			//deptId = user.getDeptId();
 			HttpSession session = ServletActionContext.getRequest().getSession();
 			UserSession userSession = ( UserSession ) session.getAttribute( "userSession" );
-			String curUserId = userSession.getUserId();
-			if( curUserId.equals( user.getId() ) )
+			if( userSession != null )
 			{
-				user.setDeleteFlag( 1 );
+				String curUserId = userSession.getUserId();
+				if( curUserId.equals( user.getId() ) )
+				{
+					user.setDeleteFlag( 1 );
+				}
 			}
 		}
 		//TODO
@@ -210,10 +217,10 @@ public class UserAction extends BaseActionSupport
 	 */
 	public String initUserPassword() throws Exception
 	{
-		if( StringUtils.isNotBlank( userId ) )
+		if( StringUtils.isNotBlank( user.getId() ) )
 		{
 			String md5Password = MakeMd5.MD5( UserConfig.DEFAULT_PASSWORD );
-			userService.saveOrUpdateUserPassword( userId, md5Password );
+			userService.saveOrUpdateUserPassword( user.getId(), md5Password );
 			this.jsonData = "{jsonData:\"success\"}";
 		}
 		else
@@ -232,8 +239,8 @@ public class UserAction extends BaseActionSupport
 	{
 		HttpSession session = ServletActionContext.getRequest().getSession();
 		UserSession userSession = ( UserSession ) session.getAttribute( "userSession" );
-		userId = userSession.getUserId();
-		if( StringUtils.isNotBlank( userId ) )
+		String myUserId = userSession.getUserId();
+		if( StringUtils.isNotBlank( myUserId ) )
 		{
 			//TODO
 			//user = userService.getUserById( userId );
@@ -259,11 +266,11 @@ public class UserAction extends BaseActionSupport
 	{
 		HttpSession session = ServletActionContext.getRequest().getSession();
 		UserSession userSession = ( UserSession ) session.getAttribute( "userSession" );
-		userId = userSession.getUserId();
-		user.setId( userId );
-		if( StringUtils.isNotBlank( userId ) )
+		String myUserId = userSession.getUserId();
+		user.setId( myUserId );
+		if( StringUtils.isNotBlank( myUserId ) )
 		{
-			User oldUser = userService.getUserById( userId );
+			User oldUser = userService.getUserById( myUserId );
 			// 判断原密码是否正确
 			if( !MakeMd5.MD5( user.getPassword() ).equals( oldUser.getPassword() ) )
 			{
@@ -362,26 +369,6 @@ public class UserAction extends BaseActionSupport
 		this.roleList = roleList;
 	}
 
-	public String getDeptId()
-	{
-		return deptId;
-	}
-
-	public void setDeptId( String deptId )
-	{
-		this.deptId = deptId;
-	}
-
-	public String getDelId()
-	{
-		return delId;
-	}
-
-	public void setDelId( String delId )
-	{
-		this.delId = delId;
-	}
-
 	public String getJumpUrl()
 	{
 		return jumpUrl;
@@ -390,26 +377,6 @@ public class UserAction extends BaseActionSupport
 	public void setJumpUrl( String jumpUrl )
 	{
 		this.jumpUrl = jumpUrl;
-	}
-
-	public String getUnitId()
-	{
-		return unitId;
-	}
-
-	public void setUnitId( String unitId )
-	{
-		this.unitId = unitId;
-	}
-
-	public String getUserId()
-	{
-		return userId;
-	}
-
-	public void setUserId( String userId )
-	{
-		this.userId = userId;
 	}
 
 	public String getJsonData()
@@ -450,5 +417,35 @@ public class UserAction extends BaseActionSupport
 	public void setPagination( Pagination<User> pagination )
 	{
 		this.pagination = pagination;
+	}
+
+	public String getCompanyId()
+	{
+		return companyId;
+	}
+
+	public void setCompanyId( String companyId )
+	{
+		this.companyId = companyId;
+	}
+
+	public String getFactoryId()
+	{
+		return factoryId;
+	}
+
+	public void setFactoryId( String factoryId )
+	{
+		this.factoryId = factoryId;
+	}
+
+	public String getWorkshopId()
+	{
+		return workshopId;
+	}
+
+	public void setWorkshopId( String workshopId )
+	{
+		this.workshopId = workshopId;
 	}
 }

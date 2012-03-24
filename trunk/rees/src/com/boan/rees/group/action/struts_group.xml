@@ -76,9 +76,6 @@
     		<result name="success">/common/message.jsp</result>
     		<result name="error">/common/messagenoclose.jsp</result>
     	</action>
-    	<action name="deleteUserAction" class="userAction" method="deleteUser">
-    		<result name="success">/sysmanage/userlist.jsp</result>
-    	</action>
     	<action name="showInputUserAction" class="userAction" method="showInputUser">
     		<result name="success">/sysmanage/userinfo.jsp</result>
     	</action>
@@ -87,6 +84,14 @@
     	</action>
     	<action name="saveOrUpdateMyInfoAction" class="userAction" method="saveOrUpdateMyInfo">
     		<result name="success">/common/messagenoclose.jsp</result>
+    	</action>
+    </package>
+    <package name="ajax" extends="json-default">
+        <!-- 初始化用户密码 -->
+        <action name="initUserPasswordAction" class="userAction" method="initUserPassword">
+    		<result type="json">
+    			<param name="root">jsonData</param>
+    		</result>
     	</action>
     </package>
 </struts>
