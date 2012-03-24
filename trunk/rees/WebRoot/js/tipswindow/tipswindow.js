@@ -1,5 +1,5 @@
 ///-------------------------------------------------------------------------
-//jQuery弹出窗口 By Await [2009-11-22]
+//jQuery弹出窗口 By Leon修改
 //--------------------------------------------------------------------------
 /*参数：[可选参数在调用时可写可不写,其他为必写]
  ----------------------------------------------------------------------------
@@ -54,6 +54,7 @@ function tipsWindown(title, content, width, height, drag, time, showbg, cssName,
 	$("#windown-title h2").html(title);
 	if (showbg == "true") {
 		$("#windownbg").show();
+		$("#windownbg").bgiframe();
 	} else {
 		$("#windownbg").remove();
 	}
