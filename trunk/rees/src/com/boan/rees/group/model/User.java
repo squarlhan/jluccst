@@ -112,6 +112,11 @@ public class User {
 	 */
 	private int deleteFlag;
 
+	public User()
+	{
+		this.id="";
+	}
+
 	public String getId() {
 		return id;
 	}
