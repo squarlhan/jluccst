@@ -16,7 +16,7 @@ import org.hibernate.annotations.GenericGenerator;
  */
 @Entity
 @Table(name = "GROUP_FACTORY")
-public class PopedomRole {
+public class Popedom {
 	
 	@Id
 	@GenericGenerator(name="system-uuid", strategy="uuid")
@@ -37,7 +37,7 @@ public class PopedomRole {
 	 * 资源KEY标识
 	 */
 	@Column(name = "KEYWORD")
-	private String keyWord;
+	private String keyword;
 
 	public String getId() {
 		return id;
@@ -55,14 +55,15 @@ public class PopedomRole {
 		this.roleId = roleId;
 	}
 
-	public String getKeyWord() {
-		return keyWord;
+	public String getKeyword()
+	{
+		return keyword;
 	}
 
-	public void setKeyWord(String keyWord) {
-		this.keyWord = keyWord;
+	public void setKeyword( String keyword )
+	{
+		this.keyword = keyword;
 	}
 
-	
 
 }
