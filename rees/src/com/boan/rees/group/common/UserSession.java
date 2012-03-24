@@ -76,11 +76,6 @@ public class UserSession implements java.io.Serializable
 	private int userType;
 	
 	/**
-	 * 组类别名称，用于top页显示
-	 */
-	private String groupTypeName;
-	
-	/**
 	 * 用户登录时，所拥有的所有权限key值
 	 */
 	private String[] popedomKeys;
@@ -160,14 +155,64 @@ public class UserSession implements java.io.Serializable
 		this.userType = userType;
 	}
 
-	public String getGroupTypeName()
+	public String getCompanyId()
 	{
-		return groupTypeName;
+		return companyId;
 	}
 
-	public void setGroupTypeName( String groupTypeName )
+	public void setCompanyId( String companyId )
 	{
-		this.groupTypeName = groupTypeName;
+		this.companyId = companyId;
+	}
+
+	public String getCompanyName()
+	{
+		return companyName;
+	}
+
+	public void setCompanyName( String companyName )
+	{
+		this.companyName = companyName;
+	}
+
+	public String getFactoryId()
+	{
+		return factoryId;
+	}
+
+	public void setFactoryId( String factoryId )
+	{
+		this.factoryId = factoryId;
+	}
+
+	public String getFactoryName()
+	{
+		return factoryName;
+	}
+
+	public void setFactoryName( String factoryName )
+	{
+		this.factoryName = factoryName;
+	}
+
+	public String getWorkshopId()
+	{
+		return workshopId;
+	}
+
+	public void setWorkshopId( String workshopId )
+	{
+		this.workshopId = workshopId;
+	}
+
+	public String getWorkshopName()
+	{
+		return workshopName;
+	}
+
+	public void setWorkshopName( String workshopName )
+	{
+		this.workshopName = workshopName;
 	}
 
 }
