@@ -27,10 +27,10 @@
   <head>
   	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>信息提示页</title>
+    <j:scriptlink jquery="true"></j:scriptlink>
     <script type="text/javascript">
 		alert('${message.content}');
 		parent.parent.$("#windown-close").click();
-		window.location.href="http://www.sina.com.cn";
 	</script>
   </head>
   <body>
