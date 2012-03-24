@@ -22,11 +22,11 @@ import com.boan.rees.utils.page.Pagination;
  * @version 1.0.0
  */
 
-@Service("groupRoleService")
+@Service("roleService")
 public class RoleServiceImpl implements IRoleService{
 
 	@Autowired
-	@Qualifier("groupRoleDao")
+	@Qualifier("roleDao")
 	private IRoleDao groupRoleDao;
 
 	/**
