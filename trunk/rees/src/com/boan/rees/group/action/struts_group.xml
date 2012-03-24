@@ -80,10 +80,32 @@
     		<result name="success">/sysmanage/userinfo.jsp</result>
     	</action>
     	<action name="showMyInfoAction" class="userAction" method="showMyInfo">
-    		<result name="success">/sysmanage/myinfo.jsp</result>
+    		<result name="success">/systemmanage/myinfo.jsp</result>
     	</action>
     	<action name="saveOrUpdateMyInfoAction" class="userAction" method="saveOrUpdateMyInfo">
     		<result name="success">/common/messagenoclose.jsp</result>
+    	</action>
+    </package>
+    <package name="userlogon" extends="struts-default" namespace="/">
+    	<action name="logonValidAction" class="logonAction" method="logonValid">
+    		<result name="success">/loginok.jsp</result>
+    		<result name="error">/common/messagenoclose.jsp</result>
+    	</action>
+    	<action name="logonMainAction" class="logonAction" method="logonMain">
+    		<result name="success">/main.jsp</result>
+    	</action>
+    	<action name="logonTopAction" class="logonAction" method="logonTop">
+    		<result name="success">/top.jsp</result>
+    	</action>
+    	<action name="logoutAction" class="logonAction" method="logout">
+    		<result name="success">/default.jsp</result>
+    	</action>
+    	<action name="showModifyAction" class="logonAction" method="showModify">
+    		<result name="success">/sysmanage/usermodify.jsp</result>
+    	</action>
+    	<action name="modifyAction" class="logonAction" method="modify">
+    		<result name="success">/common/message.jsp</result>
+    		<result name="error">/common/messagenoclose.jsp</result>
     	</action>
     </package>
     <package name="ajax" extends="json-default">
