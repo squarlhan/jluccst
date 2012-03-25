@@ -73,26 +73,21 @@
 			  	 */
 				$.fn.save = function(){
 					//如果有id就说明是修改action
-					var deviceId = $("#hid_deviceId").val();
-					if(deviceId!=""){
-						$("#addBtn").click(function() {
-						var validate_settings_submit = jQuery.extend({}, _device_submit);
-		               	var validator = $("form").validate(validate_settings_submit);
-		               	if(!validator.form()){
-							return false;
-						}
-		               	form1.action = "toModifyDeviceAction.action";
-		               	form1.submit();
-		           	});
-						}
-			    		//如果id为空说明是添加action
 					$("#addBtn").click(function() {
 						var validate_settings_submit = jQuery.extend({}, _device_submit);
 		               	var validator = $("form").validate(validate_settings_submit);
 		               	if(!validator.form()){
 							return false;
 						}
-		               	form1.action = "toAddDeviceAction.action";
+		               	var deviceId = $("#hid_deviceId").val();
+		               	if( $.trim(deviceId) == "" )
+		               	{
+		               		form1.action = "toAddDeviceAction.action";
+		               	}
+		               	else
+		               	{
+			               	form1.action = "toModifyDeviceAction.action";
+		               	}
 		               	form1.submit();
 		           	});
 	          	}
