@@ -73,6 +73,12 @@ public class PointDataInfoAction extends BaseActionSupport {
 	//监测数据对象
 	private PointDataInfo pointDataInfo = null;
 	
+	//监测数据字符串
+	private String datas;
+	
+	//处理结果
+	private String result;
+	
 	/**
 	 * 获得监测数据列表
 	 * @return
@@ -110,6 +116,29 @@ public class PointDataInfoAction extends BaseActionSupport {
 		}
 		
 		
+		//获得监测点信息
+		if(StringUtils.trimToNull(deviceId)!=null){
+			pointInfos = pointInfoService.findPointInfosByDeviceId(deviceId);
+			if(pointInfos!=null && pointInfos.size()>0){
+				PointRelation pr = null;
+				pointRelations = new ArrayList<PointRelation>();
+				for (PointInfo pointInfo : pointInfos) {
+					pr = new PointRelation();
+					pr.setPointInfo(pointInfo);
+					pr.setPointParamInfos(pointParamInfoService.findPointParamInfoByPointId(pointInfo.getId()));
+					pointRelations.add(pr);
+				}
+			}
+			
+		}
+		return SUCCESS;
+	}
+	
+	/**
+	 * 显示监测点数据信息
+	 * @return
+	 */
+	public String pointDataInfo(){
 		//获得监测点信息
 		if(StringUtils.trimToNull(deviceId)!=null){
 			pointInfos = pointInfoService.findPointInfosByDeviceId(deviceId);
@@ -167,6 +196,44 @@ public class PointDataInfoAction extends BaseActionSupport {
 		if(StringUtils.trimToNull(selectWeek)!=null && StringUtils.trimToNull(selectWeek)!=null && StringUtils.trimToNull(paramId)!=null){
 			pointDataInfo = pointDataInfoService.get(selectYear, selectWeek, paramId);
 		}
+		return SUCCESS;
+	}
+	
+	/**
+	 * 保存信息
+	 * @return
+	 */
+	public String saveDataInfo(){
+		PointDataInfo pdi = null;
+		//解析字符串
+		if (StringUtils.trimToNull(datas) != null) {
+			//清除之前填写记录
+			pointDataInfoService.delete(deviceId, selectYear, selectWeek);
+			String[] tempDatas = datas.split(",");
+			if (tempDatas.length > 0) {
+				String[] tempDatas1 = null;
+				PointInfo pi = null;
+				for (int i = 0; i < tempDatas.length; i++) {
+					tempDatas1 = tempDatas[i].split("\\|");
+					if (tempDatas1.length > 0) {
+						pdi = new PointDataInfo();
+						pdi.setDeviceId(deviceId);
+						pdi.setPointId(StringUtils.trimToNull(tempDatas1[0]));
+						pdi.setParamId(StringUtils.trimToNull(tempDatas1[1]));
+						if(tempDatas1.length==3)
+							pdi.setDataInfo(StringUtils.trimToEmpty(tempDatas1[2]));
+						else
+							pdi.setDataInfo("");
+						pdi.setDataYear(Integer.valueOf(selectYear));
+						pdi.setWeekofYear(Integer.valueOf(selectWeek));
+						pdi.setCreatTime(Calendar.getInstance());
+						pdi.setUpdateTime(Calendar.getInstance());
+						pointDataInfoService.save(pdi);
+					}
+				}
+			}
+		}
+		result = "OK";
 		return SUCCESS;
 	}
 	public String getDeviceId() {
@@ -248,5 +315,20 @@ public class PointDataInfoAction extends BaseActionSupport {
 	public void setPointDataInfo(PointDataInfo pointDataInfo) {
 		this.pointDataInfo = pointDataInfo;
 	}
-	
+
+	public String getDatas() {
+		return datas;
+	}
+
+	public void setDatas(String datas) {
+		this.datas = datas;
+	}
+
+	public String getResult() {
+		return result;
+	}
+
+	public void setResult(String result) {
+		this.result = result;
+	}
 }
