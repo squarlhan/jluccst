@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 
 import com.boan.rees.device.model.DeviceInfo;
 import com.boan.rees.device.service.IDeviceInfoService;
+import com.boan.rees.utils.action.BaseActionSupport;
 import com.boan.rees.utils.page.Pagination;
 import com.opensymphony.xwork2.ActionSupport;
 /**
@@ -20,7 +21,7 @@ import com.opensymphony.xwork2.ActionSupport;
  */
 @Controller("deviceInfoAction")
 @Scope("prototype")
-public class DeviceInfoAction extends ActionSupport{
+public class DeviceInfoAction extends BaseActionSupport{
 
 	/**
 	 * 用于调用数据库相关操作
@@ -97,7 +98,7 @@ public class DeviceInfoAction extends ActionSupport{
 	 * @return
 	 */
 	public String toAddDevice(){
-		device.setDeptId("1");
+		device.setDeptId(workshopId);
 		device.setGroupId("1");
 		service.save(device);
 		return SUCCESS;

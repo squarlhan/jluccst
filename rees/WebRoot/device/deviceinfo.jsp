@@ -26,20 +26,14 @@
 <html>
 	<head>
 		<base href="<%=basePath%>">
-
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<title>设备管理维护</title>
-
-		<meta http-equiv="pragma" content="no-cache">
-		<meta http-equiv="cache-control" content="no-cache">
-		<meta http-equiv="expires" content="0">
-		<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-		<meta http-equiv="description" content="This is my page">
 		<j:scriptlink  css="true" jmessagebox="true" jquery="true" tipswindow="true" validate="true"/>
 		<script type="text/javascript">
-		/**
-	  	 * 验证条件
-	  	 */
-		var _device_submit = {
+			/**
+		  	 * 验证条件
+		  	 */
+			var _device_submit = {
 				rules: {
 					//"device.deviceNum":{},
 					//"device.deviceType":{},
@@ -48,72 +42,69 @@
 					//"device.deviceFactory":{},
 					"device.controlpoint":{digits:true},
 					"device.filePath":{url:true}
+				}
+			};
+			/**
+		  	 * 准备工作
+		  	 */
+			$(document).ready(function(){
+		  		$.validator.setDefaults({
+		  			//验证框架的验证器的默认设置区
+					debug: false,onkeyup: false,onfocusout:false,focusCleanup: true,
+				    errorPlacement:function(error, element) {},
+					invalidHandler: function(form, validator) {
+			        	$.each(validator.invalid,function(key,value){
+			            	alert(value);document.getElementById(key).focus();return false;
+			        	}); 
+			    	}
+				})
+				$.fn.save();
+		  		$.fn.close();
+		  		$.fn.initpage();
+		  	});
+			/**
+		  	 * 保存
+		  	 */
+			$.fn.save = function(){
+				//如果有id就说明是修改action
+				$("#addBtn").click(function() {
+					var validate_settings_submit = jQuery.extend({}, _device_submit);
+	               	var validator = $("form").validate(validate_settings_submit);
+	               	if(!validator.form()){
+						return false;
 					}
-				};
-		/**
-	  	 * 准备工作
-	  	 */
-				$(document).ready(function(){
-			  		$.validator.setDefaults({
-			  			//验证框架的验证器的默认设置区
-						debug: false,onkeyup: false,onfocusout:false,focusCleanup: true,
-					    errorPlacement:function(error, element) {},
-						invalidHandler: function(form, validator) {
-				        	$.each(validator.invalid,function(key,value){
-				            	alert(value);document.getElementById(key).focus();return false;
-				        	}); 
-				    	}
-					})
-					$.fn.save();
-			  		$.fn.close();
-			  		$.fn.initpage();
-			  	});
-				/**
-			  	 * 保存
-			  	 */
-				$.fn.save = function(){
-					//如果有id就说明是修改action
-					$("#addBtn").click(function() {
-						var validate_settings_submit = jQuery.extend({}, _device_submit);
-		               	var validator = $("form").validate(validate_settings_submit);
-		               	if(!validator.form()){
-							return false;
-						}
-		               	var deviceId = $("#hid_deviceId").val();
-		               	if( $.trim(deviceId) == "" )
-		               	{
-		               		form1.action = "toAddDeviceAction.action";
-		               	}
-		               	else
-		               	{
-			               	form1.action = "toModifyDeviceAction.action";
-		               	}
-		               	form1.submit();
-		           	});
-	          	}
-				
-				/**
-				 * 关闭
-				 */
-			 	$.fn.close = function(){
-			 		$("#closeBtn").click(function(){
-			  			parent.$("#windown-close").click();
-			  		});
-				}
-				/**
-				 * 初始化页面
-				 */
-				$.fn.initpage = function(){
-					$("#txt_deviceNum").focus();
-				}
-		
-     
-
-</script>
+	               	var deviceId = $("#hid_deviceId").val();
+	               	if( $.trim(deviceId) == "" )
+	               	{
+	               		form1.action = "toAddDeviceAction.action";
+	               	}
+	               	else
+	               	{
+		               	form1.action = "toModifyDeviceAction.action";
+	               	}
+	               	form1.submit();
+	           	});
+          	}
+			
+			/**
+			 * 关闭
+			 */
+		 	$.fn.close = function(){
+		 		$("#closeBtn").click(function(){
+		  			parent.$("#windown-close").click();
+		  		});
+			}
+			/**
+			 * 初始化页面
+			 */
+			$.fn.initpage = function(){
+				$("#txt_deviceNum").focus();
+			}
+		</script>
 	</head>
 
 	<body>
-		<s:form id="form1" theme="simple" >
+		<s:form id="form1" name="form1" method="post" theme="simple" >
 		<s:hidden id="hid_deviceId" name="device.id"></s:hidden>
 		<table width="100%" border="0" cellspacing="5" cellpadding="0">
 			<tr>
@@ -182,15 +173,14 @@
 									</tr>
 									<tr>
 										<td height="26" colspan="2" align="center" bgcolor="#FFFFFF">
-											<input name="button" type="submit" class="btn_2_3" id="addBtn" value="确定">
+											<input name="addBtn" type="button" class="btn_2_3" id="addBtn" value="确定">
 											&nbsp;&nbsp;
-											<input name="addBtn" type="button" class="btn_2_3" id="closeBtn" value="关闭">
+											<input name="closeBtn" type="button" class="btn_2_3" id="closeBtn" value="关闭">
 										</td>
 									</tr>
 								</table>
 							</td>
 						</tr>
-
 					</table>
 				</td>
 			</tr>
