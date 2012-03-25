@@ -9,6 +9,7 @@
 	<j:scriptlink jquery="true" livequery="true" poshytip="true" contextmenu="true" jqueryui="true" tipswindow="true"/>
 	<script type="text/javascript">
 		$(function(){
+			$("#picture").width("600px").height("473px").css("background","url(" + $("#picture").attr("devicePic") + ")");
 			//动态绑定检测点
 			$(".pointDiv").livequery(function () {
 				//注册提示
@@ -30,7 +31,6 @@
                         var obj = this;
                         var x = $(obj).position().left;
                         var y = $(obj).position().top;
-						$("#debug").html("X:" + x + ",Y:" + y);
 						$(this).poshytip('show');
                     },
                     start: function () {
@@ -94,7 +94,7 @@
 		body{ font-size: 12px; }
 		.pointDiv{ width:16px; height:16px; cursor: pointer; }
 		img{ border: none; }
-		#picture{ position:relative; top:0px; width:1280px; height:1024px; margin:0px auto; background:#FFF url('${pageContext.request.contextPath}/uploadfiles/deviceimages/20090818_06277f0092db2d35de230oYpx0YhDCIy.jpg'); overflow:hidden; }
+		#picture{ position:relative; top:0px; left:0px; margin:0px; background:#ffffff; overflow:hidden; }
 		.contextMenu{ display:none; }
 	</style>
 </head>
@@ -111,10 +111,9 @@
 		<li id="save"><img src="${pageContext.request.contextPath}/images/menu/save.png" />&nbsp;保存检测点</li>
       </ul>
     </div>
-	<div id="picture" deviceId="222" devicePic="">
-		<div id="debug" style="color:white"></div>
+	<div id="picture" deviceId="<s:property value='deviceId'/>" devicePic="${pageContext.request.contextPath}/<s:property value='deviceInfo.filePath' />">
 		<s:iterator value="pointInfoList" status="st">
-			<div id="<s:property value="id"/>" class="pointDiv" style="position:absolute; top:<s:property value='positionY'/>px; left:<s:property value='positionX'/>px" title="<div><s:property value='controlPointName'/></div><div>no data</div>">
+			<div id="<s:property value="id"/>" class="pointDiv" style="position:absolute; top:<s:property value='positionY'/>px; left:<s:property value='positionX'/>px" title="<div><s:property value='controlPointName'/></div>">
 				<img src="${pageContext.request.contextPath}/images/ico/point.png"/>
 			</div>
    		</s:iterator>

@@ -18,6 +18,13 @@
 			});
 		});
 		//监测点数据维护
+		$("#setdevicepic").click(function() {
+			parent.parent.parent.tipsWindown("设置设置监测点", "iframe:datamanage/pointlist.action?deviceId=<s:property value='deviceId'/>", "600", "473", "true", "", "true", "", "auto");
+			parent.parent.parent.$("#windown-close").bind('click',function(){
+				window.location.href="pointdatalist.action?deviceId=<s:property value='deviceId'/>&selectYear=" + $("#yearlist").val() + "&selectWeek=" + $("#weeklist").val();
+			});
+		});
+		//监测点数据维护
 		$("#showdevicepic").click(function() {
 			parent.parent.parent.tipsWindown("设备图", "iframe:datamanage/deviceimage.action?deviceId=<s:property value='deviceId'/>&selectYear=" + $("#yearlist").val() + "&selectWeek=" + $("#weeklist").val(), "600", "473", "true", "", "true", "", "auto");
 		});
@@ -69,6 +76,7 @@
 								日期：
 								<s:select name="yearlist" id="yearlist" list="yearList" cssStyle="width:70px;" listKey="value" listValue="text" value="selectYear"></s:select>
 								<s:select name="weeklist" id="weeklist" list="weekList" cssStyle="width:180px;" listKey="value" listValue="text" value="selectWeek"></s:select>
+								<input id="setdevicepic" class="btn_5" type="button" value="设置设备监测点" />
 								<input id="showdevicepic" class="btn_4" type="button" value="打开设备图" />
 								<input id="showstat" class="btn_4" type="button" value="查看柱状图"  />
 								<input class="btn_5" type="button" value="监测点数据维护" id="addpointdata" />

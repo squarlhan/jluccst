@@ -6,7 +6,7 @@
 <head>
 	<title>设备图</title>
 	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-	<j:scriptlink css="true" jquery="true" livequery="true" poshytip="true" contextmenu="true" jqueryui="true" tipswindow="true"/>
+	<j:scriptlink jquery="true" livequery="true" poshytip="true" contextmenu="true" jqueryui="true" tipswindow="true"/>
 	<script type="text/javascript">
 		$(function(){
 			$("#picture").width("600px").height("473px").css("background","url(" + $("#picture").attr("devicePic") + ")");
@@ -49,7 +49,7 @@
 <body>
 	<div id="picture" deviceId="<s:property value='deviceId'/>" devicePic="${pageContext.request.contextPath}/<s:property value='deviceInfo.filePath' />">
 		<s:iterator value="pointRelations" status="st">
-			<div id="<s:property value="pointInfo.id"/>" class="pointDiv" style="position:absolute; top:<s:property value='pointInfo.positionY'/>px; left:<s:property value='pointInfo.positionX'/>px" title="<div><s:property value='pointInfo.controlPointName'/></div><s:iterator value="pointParamInfos">
+			<div id="<s:property value="pointInfo.id"/>" class="pointDiv" style="position:absolute; top:<s:property value='pointInfo.positionY'/>px; left:<s:property value='pointInfo.positionX'/>px" title="<div style='font-size:14px;'><s:property value='pointInfo.controlPointName'/></div><s:iterator value="pointParamInfos">
 						<div><s:property value="name"/>:<span paramid='<s:property value="id"/>' name='dataspan'>...</span></div>
 						</s:iterator>">
 				<img src="${pageContext.request.contextPath}/images/ico/point.png"/>
