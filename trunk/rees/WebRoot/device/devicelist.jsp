@@ -1,7 +1,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <%@ taglib prefix="j" uri="/script-tags"%>
-<%@ taglib prefix="page" uri="/WEB-INF/page-tags.tld"%> 
+<%@ taglib prefix="page" uri="/page-tags"%> 
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
