@@ -7,13 +7,17 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.apache.commons.lang.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.boan.rees.common.SelectList;
+import com.boan.rees.device.model.DeviceInfo;
 import com.boan.rees.device.model.PointDataInfo;
 import com.boan.rees.device.model.PointInfo;
 import com.boan.rees.device.model.PointRelation;
+import com.boan.rees.device.service.IDeviceInfoService;
 import com.boan.rees.device.service.IPointDataInfoService;
 import com.boan.rees.device.service.IPointInfoService;
 import com.boan.rees.device.service.IPointParamInfoService;
@@ -42,6 +46,10 @@ public class PointDataInfoAction extends BaseActionSupport {
 	@Resource
 	// 监测点数据接口类
 	private IPointDataInfoService pointDataInfoService;
+	
+	@Resource
+	//用于调用数据库相关操作
+	private IDeviceInfoService deviceInfoService;
 	
 	//设备ID
 	private String deviceId = null;
@@ -79,6 +87,9 @@ public class PointDataInfoAction extends BaseActionSupport {
 	//处理结果
 	private String result;
 	
+	//设备对象
+	private DeviceInfo deviceInfo = null;
+	
 	/**
 	 * 获得监测数据列表
 	 * @return
@@ -87,8 +98,10 @@ public class PointDataInfoAction extends BaseActionSupport {
 		//初始化下拉列表
 		int thisYear = Calendar.getInstance().get(Calendar.YEAR);
 		int thisWeek = CalendarUtils.getWeekOfYear(Calendar.getInstance());
-		selectYear = String.valueOf(thisYear);
-		selectWeek = String.valueOf(thisWeek);
+		if(StringUtils.trimToNull(selectYear)==null)
+			selectYear = String.valueOf(thisYear);
+		if(StringUtils.trimToNull(selectWeek)==null)
+			selectWeek = String.valueOf(thisWeek);
 		SelectList sl = null;
 		yearList = new ArrayList<SelectList>();
 		for(int i=2011; i<thisYear+1; i++){
@@ -236,6 +249,36 @@ public class PointDataInfoAction extends BaseActionSupport {
 		result = "OK";
 		return SUCCESS;
 	}
+	
+	/**
+	 * 显示设备图片
+	 * @return
+	 */
+	public String deviceImage(){
+		//获得设备信息
+		if(StringUtils.trimToNull(deviceId)!=null)
+			deviceInfo = deviceInfoService.get(deviceId);
+		else
+			deviceInfo = new DeviceInfo();
+		//获得监测点信息
+		if(StringUtils.trimToNull(deviceId)!=null){
+			pointInfos = pointInfoService.findPointInfosByDeviceId(deviceId);
+			if(pointInfos!=null && pointInfos.size()>0){
+				PointRelation pr = null;
+				pointRelations = new ArrayList<PointRelation>();
+				for (PointInfo pointInfo : pointInfos) {
+					pr = new PointRelation();
+					pr.setPointInfo(pointInfo);
+					pr.setPointParamInfos(pointParamInfoService.findPointParamInfoByPointId(pointInfo.getId()));
+					pointRelations.add(pr);
+				}
+			}
+			
+		}
+		
+		return SUCCESS;
+	}
+	
 	public String getDeviceId() {
 		return deviceId;
 	}
@@ -330,5 +373,13 @@ public class PointDataInfoAction extends BaseActionSupport {
 
 	public void setResult(String result) {
 		this.result = result;
+	}
+
+	public DeviceInfo getDeviceInfo() {
+		return deviceInfo;
+	}
+
+	public void setDeviceInfo(DeviceInfo deviceInfo) {
+		this.deviceInfo = deviceInfo;
 	}
 }
