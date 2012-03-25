@@ -12,9 +12,9 @@
 	$(document).ready(function() {
 		//添加数据
 		$("#addpointdata").click(function() {
-			parent.parent.parent.tipsWindown("添加监测点数据", "iframe:datamanage/pointdatainfo.jsp", "400", "260", "true", "", "true", "", "no");
+			parent.parent.parent.tipsWindown("监测点数据维护", "iframe:datamanage/pointdatainfo.action?deviceId=<s:property value='deviceId'/>&selectYear=" + $("#yearlist").val() + "&selectWeek=" + $("#weeklist").val(), "480", "320", "true", "", "true", "", "auto");
 			parent.parent.parent.$("#windown-close").bind('click',function(){
-				alert("弹出窗口关闭了");
+				window.location.href="pointdatalist.action?deviceId=402880f2362fc9b301362fccb9b4000a";
 			});
 		});
 		//日期选择
@@ -30,24 +30,26 @@
 							$("#weeklist").prepend("<option value='" + json.weekList[i].value + "'>" + json.weekList[i].text + "</option>");
 					}
 				}
+				reloadList();
 	    	});
 		});
 		//周选择
 		$("#weeklist").change(function(){
-			
+			reloadList();
 		});
+		reloadList();
 		//加载数据
-		$(document).find("span[name='dataspan']").each(function(index,domEle){
-			$.getJSON("getdataajax.action",{ paramId:$(this).attr("paramid"), selectWeek:$("#weeklist").val(), selectYear:$("#yearlist").val() }, function(json){
-				alert(json);
-				if(json.pointDataInfo!=null){
-					
-					$(domEle).html(json.pointDataInfo.dataInfo);
-				}else{
-					$(domEle).html("");
-				}
+		function reloadList(){
+			$(document).find("span[name='dataspan']").each(function(index,domEle){
+				$.getJSON("getdataajax.action",{ paramId:$(this).attr("paramid"), selectWeek:$("#weeklist").val(), selectYear:$("#yearlist").val() }, function(json){
+					if(json.pointDataInfo!=null){
+						$(domEle).html(json.pointDataInfo.dataInfo);
+					}else{
+						$(domEle).html("");
+					}
+				});
 			});
-		});
+		}
 	});
 	//-->
 	</script>
@@ -62,13 +64,13 @@
 							<td>
 								日期：
 								<s:select name="yearlist" id="yearlist" list="yearList" cssStyle="width:70px;" listKey="value" listValue="text" value="selectYear"></s:select>
-								<s:select name="weeklist" id="weeklist" list="weekList" cssStyle="width:180px;" listKey="value" listValue="text"></s:select>
+								<s:select name="weeklist" id="weeklist" list="weekList" cssStyle="width:180px;" listKey="value" listValue="text" value="selectWeek"></s:select>
 								
 								<input name="打开设备图" class="btn_4" type="button" value="打开设备图"
 									onClick="window.open('clickpicture.html')" />
 								<input name="查看频谱图" class="btn_4" type="button" value="查看柱状图"
 									onClick="window.open('../images/柱状图样子.png')" />
-								<input class="btn_5" type="button" value="添加监测数据" id="addpointdata" />
+								<input class="btn_5" type="button" value="监测点数据维护" id="addpointdata" />
 							</td>
 						</tr>
 					</table>
