@@ -1,6 +1,9 @@
 package com.boan.rees.device.action;
 
+import java.util.ArrayList;
 import java.util.List;
+
+import javax.annotation.Resource;
 
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
@@ -11,7 +14,9 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
+import com.boan.rees.device.model.DeviceInfo;
 import com.boan.rees.device.model.PointInfo;
+import com.boan.rees.device.service.IDeviceInfoService;
 import com.boan.rees.device.service.IPointInfoService;
 import com.boan.rees.utils.action.BaseActionSupport;
 
@@ -30,6 +35,10 @@ public class PointInfoAction extends BaseActionSupport {
 	@Qualifier("pointInfoService")
 	// 监测点接口类
 	private IPointInfoService pointInfoService;
+	
+	@Resource
+	//用于调用数据库相关操作
+	private IDeviceInfoService deviceInfoService;
 
 	// 监测点对象列表
 	private List<PointInfo> pointInfoList;
@@ -49,6 +58,9 @@ public class PointInfoAction extends BaseActionSupport {
 	private String datas;
 
 	private String result;
+	
+	//设备对象
+	private DeviceInfo deviceInfo = null;
 
 	/**
 	 * 根据设备ID，获得设备监测点数据
@@ -56,7 +68,15 @@ public class PointInfoAction extends BaseActionSupport {
 	 * @return
 	 */
 	public String pointInfoListByDeviceId() {
-		pointInfoList = pointInfoService.findPointInfosByDeviceId(deviceId);
+		//获得设备信息
+		if(StringUtils.trimToNull(deviceId)!=null)
+			deviceInfo = deviceInfoService.get(deviceId);
+		else
+			deviceInfo = new DeviceInfo();
+		if(StringUtils.trimToNull(deviceId)!=null)
+			pointInfoList = pointInfoService.findPointInfosByDeviceId(deviceId);
+		else
+			pointInfoList = new ArrayList<PointInfo>();
 		return SUCCESS;
 	}
 
@@ -163,6 +183,14 @@ public class PointInfoAction extends BaseActionSupport {
 
 	public void setResult(String result) {
 		this.result = result;
+	}
+
+	public DeviceInfo getDeviceInfo() {
+		return deviceInfo;
+	}
+
+	public void setDeviceInfo(DeviceInfo deviceInfo) {
+		this.deviceInfo = deviceInfo;
 	}
 	// ************************************************************************************
 }
