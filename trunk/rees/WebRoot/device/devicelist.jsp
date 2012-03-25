@@ -34,9 +34,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			$("#addbtn").click(function(){
 				parent.parent.parent.tipsWindown("添加设备信息","iframe:openAddDeviceAction.action","460","350","true","","true","no");
 			});
-			$("#editbtn").click(function(){
-				parent.parent.parent.tipsWindown("修改设备信息","iframe:openModifyDeviceAction.action","460","250","true","","true","no");
-			});
+
 			$("#editpointbtn").click(function(){
 				parent.parent.parent.tipsWindown("修改监控点","iframe:sysmanage/groupinfoedit.html","460","190","true","","true","no");
 			});
@@ -60,7 +58,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  			$(this).click(function(){
 	  				var url = $(this).attr("url");
 	  				if(window.confirm("您确定要删除这条信息吗？")){
-	  					$.post(url, $('#form1').serialize(), function(data){window.location.href=window.location.href;});
+	  					$.post(url, "", function(data){window.location.href=window.location.href;});
 	  				}
 	  			});
 	  		});
@@ -75,7 +73,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   				}
 	  		});
 	  		
+	  		$("#sortbtn").click(function(){
+	  			parent.parent.parent.tipsWindown("设备排序","iframe:openSortDeviceAction.action","350","420","true","","true","no");
+	  		});
 		});
+		
+		
+		/******************************************************************************************/
 		/**
 	  	 * 点击选复选框时，执行全选/取消全选功能
 	  	 * @param chkallid
@@ -120,7 +124,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  			}
 	  		});
 	  	};
-	
+	  /******************************************************************************************/
 	
 	//-->
 	</script>
@@ -139,7 +143,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     		<input name="button" type="button" class="btn_4" id="addparambtn" value="添加阈值参数" >
             <input name="button" type="button" class="btn_4" id="editpointbtn" value="修改监控点" >
             <input name="button" type="button" class="btn_4" id="deletepointbtn" value="删除所选">
-            <input name="button3" type="button" class="btn_2_3" id="button" value="排序"></td>
+            <input name="button3" type="button" class="btn_2_3" id="sortbtn" value="排序"></td>
         <td align="right"></td>
       </tr>
     </table>
