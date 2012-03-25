@@ -66,12 +66,19 @@
 			<result name="success">/datamanage/pointdatalist.jsp</result>
 			<result name="input">/datamanage/pointdatalist.jsp</result>
 		</action>
+		<action name="pointdatainfo" class="pointDataInfoAction" method="pointDataInfo">
+			<result name="success">/datamanage/pointdatainfo.jsp</result>
+			<result name="input">/datamanage/pointdatainfo.jsp</result>
+		</action>
 	</package>
 	<package name="pointdatajax" extends="json-default" namespace="/datamanage">
 		<action name="getweeksajax" class="pointDataInfoAction" method="loadWeekList">
             <result type="json"></result>
         </action>
         <action name="getdataajax" class="pointDataInfoAction" method="loadDataInfo">
+            <result type="json"></result>
+        </action>
+        <action name="savedatainfoajax" class="pointDataInfoAction" method="saveDataInfo">
             <result type="json"></result>
         </action>
 	</package>

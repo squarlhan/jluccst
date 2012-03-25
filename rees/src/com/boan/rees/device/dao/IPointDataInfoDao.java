@@ -18,4 +18,12 @@ public interface IPointDataInfoDao extends IBaseDao<PointDataInfo, String> {
 	 * @return
 	 */
 	public PointDataInfo get(String year, String week, String paramId);
+	
+	/**
+	 * 删除指定设备某年第X星期的数据
+	 * @param deviceId
+	 * @param year
+	 * @param week
+	 */
+	public void delete(String deviceId, String year, String week);
 }

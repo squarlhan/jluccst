@@ -68,5 +68,9 @@ public class PointDataInfoServiceImpl implements IPointDataInfoService{
 	public PointDataInfo get(String year, String week, String paramId) {
 		return pointDataInfoDao.get(year, week, paramId);
 	}
+	@Override
+	public void delete(String deviceId, String year, String week) {
+		pointDataInfoDao.delete(deviceId, year, week);
+	}
 
 }

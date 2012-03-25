@@ -1,6 +1,8 @@
 package com.boan.rees.device.dao.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.stereotype.Repository;
 
@@ -21,11 +23,21 @@ public class PointDataInfoDaoImpl extends BaseDao<PointDataInfo, String>
 	@Override
 	public PointDataInfo get(String year, String week, String paramId) {
 		String hql = "from PointDataInfo where paramId=? and dataYear=? and weekofYear=?";
-		List<PointDataInfo> list = this.find(hql, new String[] { paramId, year, week });
+		List<PointDataInfo> list = this.find(hql, new Object[] { paramId, Integer.parseInt(year), Integer.parseInt(week) });
 		if(list!=null&&list.size()==1)
 			return list.get(0);
 		else
 			return null;
+	}
+
+	@Override
+	public void delete(String deviceId, String year, String week) {
+		String hql = "delete PointDataInfo where deviceId=:deviceId and dataYear=:year and weekofYear=:week";
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put( "deviceId", deviceId );
+		map.put( "year", Integer.parseInt(year) );
+		map.put( "week", Integer.parseInt(week) );
+		this.executeHql(hql, map);
 	}
 
 }
