@@ -10,12 +10,16 @@
 	<script type="text/javascript">
 	<!--
 	$(document).ready(function() {
-		//添加数据
+		//监测点数据维护
 		$("#addpointdata").click(function() {
 			parent.parent.parent.tipsWindown("监测点数据维护", "iframe:datamanage/pointdatainfo.action?deviceId=<s:property value='deviceId'/>&selectYear=" + $("#yearlist").val() + "&selectWeek=" + $("#weeklist").val(), "480", "320", "true", "", "true", "", "auto");
 			parent.parent.parent.$("#windown-close").bind('click',function(){
-				window.location.href="pointdatalist.action?deviceId=402880f2362fc9b301362fccb9b4000a";
+				window.location.href="pointdatalist.action?deviceId=<s:property value='deviceId'/>&selectYear=" + $("#yearlist").val() + "&selectWeek=" + $("#weeklist").val();
 			});
+		});
+		//监测点数据维护
+		$("#showdevicepic").click(function() {
+			parent.parent.parent.tipsWindown("设备图", "iframe:datamanage/deviceimage.action?deviceId=<s:property value='deviceId'/>&selectYear=" + $("#yearlist").val() + "&selectWeek=" + $("#weeklist").val(), "600", "473", "true", "", "true", "", "auto");
 		});
 		//日期选择
 		$("#yearlist").change(function(){
@@ -65,11 +69,8 @@
 								日期：
 								<s:select name="yearlist" id="yearlist" list="yearList" cssStyle="width:70px;" listKey="value" listValue="text" value="selectYear"></s:select>
 								<s:select name="weeklist" id="weeklist" list="weekList" cssStyle="width:180px;" listKey="value" listValue="text" value="selectWeek"></s:select>
-								
-								<input name="打开设备图" class="btn_4" type="button" value="打开设备图"
-									onClick="window.open('clickpicture.html')" />
-								<input name="查看频谱图" class="btn_4" type="button" value="查看柱状图"
-									onClick="window.open('../images/柱状图样子.png')" />
+								<input id="showdevicepic" class="btn_4" type="button" value="打开设备图" />
+								<input id="showstat" class="btn_4" type="button" value="查看柱状图"  />
 								<input class="btn_5" type="button" value="监测点数据维护" id="addpointdata" />
 							</td>
 						</tr>
