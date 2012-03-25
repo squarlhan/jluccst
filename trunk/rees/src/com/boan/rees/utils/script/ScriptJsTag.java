@@ -98,6 +98,11 @@ public class ScriptJsTag extends SimpleTagSupport
 	 */
 	private String mztreeview;
 	
+	/**
+	 * jquery圆角插件
+	 */
+	private String corner;
+	
 	@Override
 	public void doTag() throws JspException, IOException
 	{
@@ -197,6 +202,11 @@ public class ScriptJsTag extends SimpleTagSupport
 		{
 			getJspContext().getOut().write( "<!--MzTreeView-->\r\n" );
 			getJspContext().getOut().write( "<script type=\"text/javascript\" src=\"" + contextPath + "/js/mztreeview/jsframework.js\"></script>\r\n" );
+		}
+		if( "true".equalsIgnoreCase( corner ))
+		{
+			getJspContext().getOut().write( "<!--corner-->\r\n" );
+			getJspContext().getOut().write( "<script type=\"text/javascript\" src=\"" + contextPath + "/js/corner/jquery.corner.js\"></script>\r\n" );
 		}
 	}
 
@@ -330,5 +340,13 @@ public class ScriptJsTag extends SimpleTagSupport
 	public void setJfunction( String jfunction )
 	{
 		this.jfunction = jfunction;
+	}
+
+	public String getCorner() {
+		return corner;
+	}
+
+	public void setCorner(String corner) {
+		this.corner = corner;
 	}
 }
