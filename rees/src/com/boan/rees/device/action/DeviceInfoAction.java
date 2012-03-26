@@ -13,7 +13,6 @@ import com.boan.rees.device.model.DeviceInfo;
 import com.boan.rees.device.service.IDeviceInfoService;
 import com.boan.rees.utils.action.BaseActionSupport;
 import com.boan.rees.utils.page.Pagination;
-import com.opensymphony.xwork2.ActionSupport;
 /**
  * 设备管理Action
  * @author JiangMD
@@ -98,7 +97,7 @@ public class DeviceInfoAction extends BaseActionSupport{
 	 * @return
 	 */
 	public String toAddDevice(){
-		device.setDeptId(workshopId);
+		device.setDeptId("");
 		device.setGroupId("1");
 		service.save(device);
 		return SUCCESS;

@@ -104,6 +104,7 @@ public class DemoAction extends ActionSupport {
 	 * @return
 	 */
 	public String openDemo(){
+		//分页显示
 		pagination = demoService.findDemoModelForPage(new HashMap(), pagination);
 		return SUCCESS;          
 	}

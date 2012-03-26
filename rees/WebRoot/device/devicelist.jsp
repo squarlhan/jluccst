@@ -165,7 +165,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <s:iterator value="pagination.data" status="obj">
         <tr>
         <td height="26" align="center" bgcolor="#FFFFFF" >  
-				<s:checkbox id="%{#obj.id}" name="ids" fieldValue="%{id}" value="false" theme="simple"/>
+				<s:checkbox id="%{id}" name="ids" fieldValue="%{id}" value="false" theme="simple"/>
 			</td>
            <td height="26" align="center" bgcolor="#FFFFFF">
               <s:property value="deviceNum"/>&nbsp;
