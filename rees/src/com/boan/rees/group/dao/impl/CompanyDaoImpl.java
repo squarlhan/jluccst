@@ -17,7 +17,7 @@ import com.boan.rees.group.model.Company;
 * @version 1.0.0
 */
 
-@Repository("groupCompanyDao")
+@Repository("companyDao")
 public class CompanyDaoImpl extends BaseDao<Company,String> implements ICompanyDao{
 
 	

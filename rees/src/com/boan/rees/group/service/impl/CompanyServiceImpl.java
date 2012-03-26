@@ -4,7 +4,6 @@
 
 package com.boan.rees.group.service.impl;
 
-import com.boan.rees.demo.model.DemoModel;
 import com.boan.rees.group.dao.ICompanyDao;
 import java.util.List;
 import java.util.Map;
@@ -13,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import com.boan.rees.group.dao.IFactoryDao;
 import com.boan.rees.group.model.Company;
 import com.boan.rees.group.service.ICompanyService;
 import com.boan.rees.utils.page.Pagination;
@@ -28,7 +26,7 @@ public class CompanyServiceImpl implements ICompanyService{
 
 	
 	@Autowired
-	@Qualifier("groupCompanyDao")
+	@Qualifier("companyDao")
 	private ICompanyDao companyDao;
 	@Override
 	/**

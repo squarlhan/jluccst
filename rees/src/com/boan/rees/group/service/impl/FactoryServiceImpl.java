@@ -64,7 +64,14 @@ public class FactoryServiceImpl implements IFactoryService{
 		groupFactoryDao.save(table1);
 		
 	}
-	
+	/**
+	 * 修改信息
+	 */
+	@Override
+	public void update(Factory factory) {
+		groupFactoryDao.update(factory);
+		
+	}
 	@Override
 	/**
 	 * 分页查找工厂
@@ -79,6 +86,7 @@ public class FactoryServiceImpl implements IFactoryService{
 		pagination.setData(data);
 		return pagination;
 	}
+
 
 }
 

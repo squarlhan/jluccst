@@ -57,14 +57,14 @@ public class Company {
 	 * 公司排序号
 	 */
 	@Column(name = "SORT_INDEX")
-	private int sortIndex;
+	private int sortIndex = 99;
 	
 	
 	/**
 	 * 创建时间
 	 */
 	@Column(name = "CREATE_TIME")
-	private Calendar createTime;
+	private Calendar createTime = Calendar.getInstance();
 
 	
 	
