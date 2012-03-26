@@ -66,4 +66,19 @@ public class FactoryAction extends ActionSupport{
 		service.save(factory);
 		return SUCCESS;
 	}
+	/**
+	 * 打开修改信息页面
+	 * @return
+	 */
+	public String openModifyFactory(){
+		return SUCCESS;
+	}
+	/**
+	 * 修改页面
+	 * @return
+	 */
+	public String toModifyFactory(){
+		service.update(factory);
+		return SUCCESS;
+	}
 }

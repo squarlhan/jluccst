@@ -1,61 +1,48 @@
+/**
+ * Copyright (c) 2012 Changchun Boan Co. Ltd.
+ * All right reserved.
+ * History
+ */
+/*
+ * @(#)PointDataInfo.java 1.1 2012-3-6
+ */
 package com.boan.rees.group.action;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
-
-import com.boan.rees.device.model.DeviceInfo;
 import com.boan.rees.group.model.Company;
 import com.boan.rees.group.service.ICompanyService;
 import com.boan.rees.utils.action.BaseActionSupport;
 import com.boan.rees.utils.page.Pagination;
-import com.opensymphony.xwork2.ActionSupport;
-
+/**
+ * 公司管理Action
+ * @author YangGY
+ * @version 1.0.0
+ */
 @Controller("companyAction")
 @Scope("prototype")
 public class CompanyAction extends BaseActionSupport{	
+	/**
+	 * 公司Service
+	 */
 	@Autowired
 	@Qualifier("companyService")
-	private ICompanyService service;
+	private ICompanyService service = null;
 	/**
 	 * 显示分页
 	 */
-	Pagination<Company> pagination = new Pagination<Company>();		
+	private Pagination<Company> pagination = new Pagination<Company>();		
 	/**
 	 * 页面对象
 	 */
-	private Company company;
+	private Company company = null;
 	/**
 	 * 所选对象的id
 	 */
-	String[] ids;
+	private String[] ids = null;
 	
-	public Company getCompany() {
-		return company;
-	}
-
-	public void setCompany(Company company) {
-		this.company = company;
-	}
-
-	public Pagination<Company> getPagination() {
-		return pagination;
-	}
-
-	public void setPagination(Pagination<Company> pagination) {
-		this.pagination = pagination;
-	}	
-	
-	public String[] getIds() {
-		return ids;
-	}
-
-	public void setIds(String[] ids) {
-		this.ids = ids;
-	}
-
-	//*********************操作*************************************
 	/**
 	 * 显示公司列表
 	 * @return
@@ -103,5 +90,29 @@ public class CompanyAction extends BaseActionSupport{
 	public String deleteCompany(){
 		service.deleteGroupCompany(ids);
 		return NONE;
+	}
+	
+	public Company getCompany() {
+		return company;
+	}
+
+	public void setCompany(Company company) {
+		this.company = company;
+	}
+
+	public Pagination<Company> getPagination() {
+		return pagination;
+	}
+
+	public void setPagination(Pagination<Company> pagination) {
+		this.pagination = pagination;
+	}	
+	
+	public String[] getIds() {
+		return ids;
+	}
+
+	public void setIds(String[] ids) {
+		this.ids = ids;
 	}
 }
