@@ -55,7 +55,7 @@
 		$('a[name="edit"]').each(function(){
 			$(this).click(function(){
 				var url = $(this).attr("url");
-				parent.parent.parent.tipsWindown("修改报表信息","iframe:"+url,"460","350","true","","true","no");
+				parent.parent.parent.tipsWindown("修改报表信息","iframe:"+url,"600","425","true","","true","no");
 			});
 		});
 		
@@ -77,7 +77,7 @@
 		$("#deletepointbtn").click(function(){
 			var url = "deleteReportAction.action";
 			if(window.confirm("您确定要删除所选信息吗？")){
-				$.post(url, $('#repform').serialize(), function(data){window.location.href=window.location.href;});
+				$.post(url, $('#replist').serialize(), function(data){window.location.href=window.location.href;});
 			}
 		});
 
@@ -140,9 +140,9 @@
     <td valign="top"><table width="100%" border="0" cellspacing="5" cellpadding="0">
       <tr>
         <td>
-		    <input name="button" type="button" class="btn_4" id="addbtn" value="添加" >
-            <input name="button3" type="button" class="btn_4" id="button2" value="删除所选">
-            <input name="button4" type="button" class="btn_4" id="output" value="导出Word">
+		    <input name="addbtn" type="button" class="btn_4" id="addbtn" value="添加" >
+            <input name="deletepointbtn" type="button" class="btn_4" id="deletepointbtn" value="删除所选">
+
           </td>
         <td align="right"></td>
       </tr>
@@ -182,7 +182,6 @@
 			<s:url id="delete_url" action="deleteReportAction">   
 				<s:param name="ids" value="id"></s:param>   
 			</s:url>
-			
          	<a name="edit" href="javascript:void(0);" url="${edit_url}">编辑</a>  
          	<a name="delete" href="javascript:void(0);" url="${delete_url}">删除</a>  
           </td>
@@ -190,7 +189,10 @@
 		</s:iterator>
         <tr>
         	<td height="26" colspan="9" align="center" bgcolor="#FFFFFF">
-				<page:pages currentPage="pagination.currentPage" totalPages="pagination.totalPages" totalRows="pagination.totalRows" styleClass="page" theme="text" >
+				<page:pages currentPage="pagination.currentPage"
+					totalPages="pagination.totalPages"
+					totalRows="pagination.totalRows" styleClass="page"
+					theme="text">
 				</page:pages>
 			</td>
         </tr>
