@@ -73,26 +73,21 @@
 				
 				//如果有id就说明是修改action
 				var reportId = $("#hid_reportId").val();
-				if(reportId!=""){
+				
 					$("#addBtn").click(function() {
 					var validate_settings_submit = jQuery.extend({}, _report_submit);
 	               	var validator = $("form").validate(validate_settings_submit);
 	               	if(!validator.form()){
 						return false;
 					}
-	               	repform.action = "toModifyReportAction.action";
-	               	repform.submit();
-	           	});
-					}
-		    		
-				//如果id为空说明是添加action
-				$("#addBtn").click(function() {
-					var validate_settings_submit = jQuery.extend({}, _report_submit);
-	               	var validator = $("form").validate(validate_settings_submit);
-	               	if(!validator.form()){
-						return false;
-					}
-	               	repform.action = "toAddReportAction.action";
+	               	if( $.trim(reportId) == "" )
+	               	{
+	               		repform.action = "toAddReportAction.action";
+	               	}
+	               	else
+	               	{
+		               	repform.action = "toModifyReportAction.action";
+	               	}
 	               	repform.submit();
 	           	});
           	}
@@ -108,7 +103,7 @@
 </script>
 </head>
 <body>
-<s:form  name="repform"  theme="simple">
+<s:form  id="repform"  theme="simple">
 <s:hidden id="hid_reportId" name="report.id"></s:hidden>
 <table width="100%" border="0" cellspacing="5" cellpadding="0">
   <tr>
@@ -144,19 +139,20 @@
              <tr>
               <td height="147" align="right" bgcolor="#FFFFFF"><strong>汇报内容：</strong></td>
               <td height="147" align="left" bgcolor="#FFFFFF">
-              	<s:textfield id="txt_reportContent" name="report.reportContent"/>
+              	<s:textarea id="txt_reportContent" name="report.reportContent" cssStyle="width:250px;height:100px; resize: none;" />
               </td>
             </tr>
             <tr>
-              <td height="26" colspan="2" align="left" bgcolor="#FFFFFF">
-				<input name="保存模板" type="button" value="保存模板" class="btn_2_3" />&nbsp;&nbsp;
-				<input name="读取模板" type="button" value="读取模板" class="btn_2_3"/>&nbsp;&nbsp;
-	  			<input name="提交" type="button" value="保存" class="btn_2_3" />&nbsp;&nbsp;
-	  			<input name="提交" type="button" value="提交" class="btn_2_3" id="addBtn"/>&nbsp;&nbsp;
- 				<input name="导出到Word" type="button" value="导出Word" class="btn_2_3"/>&nbsp;&nbsp;
-				<input name="退出" type="button" value="退出" class="btn_2_3" id="closeBtn"/>
-              </td>
-            </tr>
+				<td height="26" colspan="2" align="left" bgcolor="#FFFFFF">
+				<input name="读取模板" type="button" value="读取模板" class="btn_2_3" />
+				&nbsp;&nbsp;
+				<input name="保存" type="button" value="保存" class="btn_2_3" id="addBtn"/>
+				&nbsp;&nbsp;
+                <input name="导出到Word" type="button" value="导出Word" class="btn_2_3" />
+				&nbsp;&nbsp;
+				<input name="退出" type="button" value="退出" class="btn_2_3" id="closeBtn" />
+			    </td>
+				</tr>
           </table>
           </td>
         </tr>     
