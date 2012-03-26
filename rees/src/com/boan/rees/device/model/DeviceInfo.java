@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2012 Changchun CBIT Co. Ltd.
+ * Copyright (c) 2012 Boan Co. Ltd.
  * All right reserved.
  * History
  */

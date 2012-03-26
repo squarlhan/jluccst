@@ -5,6 +5,24 @@
 <link type="text/css" rel="stylesheet" href="../style.css" />
 <script type="text/javascript" src="../js/jquery-1.4.2.min.js"></script>
 <script type="text/javascript">
+<%
+/**
+ * Copyright (c) 2010 Changchun Boan (BOAN) Co. Ltd.
+ * All right reserved.
+ */
+/**
+ * @author JiangMD
+ * @version 1.0
+ * @audit  
+ */
+/**
+ * Modified Person：
+ * Modified Time：
+ * Modified Explain：
+ */
+String path = request.getContextPath();
+String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+%>
 <!--
 	$(document).ready(function() {
 		$(".btn_2_3").click(function(){

@@ -1,3 +1,9 @@
+/**
+ * Copyright (c) 2012 Boan Co. Ltd.
+ * All right reserved.
+ * History
+ */
+
 package com.boan.rees.device.action;
 
 import java.util.ArrayList;
