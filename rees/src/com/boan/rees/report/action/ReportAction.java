@@ -12,8 +12,10 @@ import org.springframework.stereotype.Controller;
 
 import com.boan.rees.report.model.PersonReport;
 import com.boan.rees.report.service.IPersonReportService;
+import com.boan.rees.utils.action.BaseActionSupport;
 import com.boan.rees.utils.page.Pagination;
-import com.opensymphony.xwork2.ActionSupport;
+
+
 
 /**
  * 报表Action
@@ -23,7 +25,7 @@ import com.opensymphony.xwork2.ActionSupport;
 
 @Controller("reportAction")
 @Scope("prototype")
-public class ReportAction extends ActionSupport{
+public class ReportAction extends BaseActionSupport{
 	/**
 	 * 用于调用数据库相关操作
 	 */
