@@ -1,7 +1,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <%@ taglib prefix="j" uri="/script-tags"%>
-<%@ taglib prefix="page" uri="/WEB-INF/page-tags.tld"%> 
+<%@ taglib prefix="page" uri="/page-tags"%> 
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -12,16 +12,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     
-    <title>公司信息列表</title>
+    <title>公司管理列表</title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">    
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
-	<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
-	<j:scriptlink css="true" tipswindow="true" jmessagebox="true" jquery="true" validate="true"/>
-	<style type="text/css"> 
+	<j:scriptlink css="true" tipswindow="true" jmessagebox="true" jquery="true" validate="true" jfunction="true"/>
+	<style type="text/css">
 	<!--
 	.STYLE1 {
 		color: #FFFFFF;
@@ -34,9 +33,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		$(function(){
 			$("#addbtn").click(function(){
 				parent.parent.parent.tipsWindown("添加公司信息","iframe:openAddCompanyAction.action","460","350","true","","true","no");
-			});
-			$("#editbtn").click(function(){
-				parent.parent.parent.tipsWindown("修改公司信息","iframe:openModifyCompanyAction.action","460","250","true","","true","no");
+			
+		
 			});
 			$.fn.CheckBoxAll("cbk_all");
 	  		$.fn.UnCheckBoxAll("ids","cbk_all");
@@ -52,28 +50,30 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  		});
 	  		
 	  		/**
-	  		 * 删除单个公司信息
+	  		 * 删除单个设备信息
 	  		 */
 	  		$('a[name="delete"]').each(function(){
 	  			$(this).click(function(){
 	  				var url = $(this).attr("url");
 	  				if(window.confirm("您确定要删除这条信息吗？")){
-	  					$.post(url, $('#form1').serialize(), function(data){window.location.href=window.location.href;});
+	  					$.post(url, "", function(data){window.location.href=window.location.href;});
 	  				}
 	  			});
 	  		});
 	  		
 	  		/**
-	  		 * 删除单个公司信息
+	  		 * 删除所选设备信息
 	  		 */
 	  		$("#deletepointbtn").click(function(){
-  				var url = "deleteDeviceAction.action";
+  				var url = "deleteCompanyAction.action";
   				if(window.confirm("您确定要删除所选信息吗？")){
   					$.post(url, $('#form1').serialize(), function(data){window.location.href=window.location.href;});
   				}
 	  		});
-	  		
 		});
+		
+		
+		/******************************************************************************************/
 		/**
 	  	 * 点击选复选框时，执行全选/取消全选功能
 	  	 * @param chkallid
@@ -117,23 +117,21 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  				}
 	  			}
 	  		});
-	  	};
-	
-	
-	//-->
+}; 
 	</script>
 
   </head>
   
+  
   <body>
-  <s:form id="form1">
+ <s:form id="form1" name="form1" method="post" theme="simple">
 <table width="100%" style="height:100%;" border="0" cellspacing="5" cellpadding="0">
   <tr>
     <td valign="top"><table width="100%" border="0" cellspacing="5" cellpadding="0">
       <tr>
         <td>
-       		<input name="button" type="button" class="btn_4" id="addbtn" value="添加" >
-            <input name="button" type="button" class="btn_4" id="deletepointbtn" value="删除所选">
+       		<input name="addbtn" type="button" class="btn_4" id="addbtn" value="添加" >
+            <input name="deletepointbtn" type="button" class="btn_4" id="deletepointbtn" value="删除所选">
         <td align="right"></td>
       </tr>
     </table>
@@ -142,13 +140,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
          <td align="center" >  
    				<s:checkbox theme="simple" id="cbk_all" name="all"></s:checkbox>
    			</td>
-   
-           <td align="center" background="../images/headerbg.jpg"><strong>公司编号</strong></td>
               <td align="center" background="../images/headerbg.jpg"><strong>公司名称</strong></td>
               <td align="center" background="../images/headerbg.jpg"><strong>公司地址</strong></td>
               <td align="center" background="../images/headerbg.jpg"><strong>公司电话</strong></td>
-              <td align="center" background="../images/headerbg.jpg"><strong>排序号</strong></td>
-              <td align="center" background="../images/headerbg.jpg"><strong>根节点标识</strong></td>
               <td align="center" background="../images/headerbg.jpg"><strong>操作</strong></td>
         </tr>
         <s:iterator value="pagination.data" status="obj">
@@ -156,12 +150,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <td height="26" align="center" bgcolor="#FFFFFF" >  
 				<s:checkbox id="%{#obj.id}" name="ids" fieldValue="%{id}" value="false" theme="simple"/>
 			</td>
-           <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="id"/></td>
               <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="companyName"/></td>
               <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="address"/></td>
               <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="phone"/></td>
-              <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="sortIndex"/></td>             
-              <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="rootId"/></td>
           <td height="26" colspan="2" align="center" bgcolor="#FFFFFF">
           	<s:url id="edit_url" action="openModifyCompanyAction">   
 				<s:param name="company.id" value="id"></s:param>   
@@ -173,8 +164,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
          	<a name="delete" href="javascript:void(0);" url="${delete_url}">删除</a>  
           </td>
         </tr>
-        </s:iterator>
-        
+        </s:iterator>        
         <tr>
           <td height="26" colspan="9" align="center" bgcolor="#FFFFFF">
 			<page:pages currentPage="pagination.currentPage" totalPages="pagination.totalPages" totalRows="pagination.totalRows" styleClass="page" theme="text" ></page:pages> 

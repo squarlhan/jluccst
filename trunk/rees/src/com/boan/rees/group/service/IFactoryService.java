@@ -25,6 +25,8 @@ public List<Factory> findAllGroupFactory();
 	public void deleteGroupFactory(String... ids );
 	
 	public void save(Factory table1);
+	
+	public void update(Factory factory);
 
 	Pagination<Factory> findFactoryForPage(Map<String, ?> values,
 			Pagination<Factory> pagination);
