@@ -3,6 +3,20 @@
 <%@ taglib prefix="j" uri="/script-tags"%>
 <%@ taglib prefix="page" uri="/page-tags"%> 
 <%
+/**
+ * Copyright (c) 2010 Changchun Boan (BOAN) Co. Ltd.
+ * All right reserved.
+ */
+/**
+ * @author JiangMD
+ * @version 1.0
+ * @audit  
+ */
+/**
+ * Modified Person：
+ * Modified Time：
+ * Modified Explain：
+ */
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
