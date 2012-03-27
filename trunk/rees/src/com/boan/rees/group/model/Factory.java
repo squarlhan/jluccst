@@ -32,7 +32,7 @@ public class Factory {
 	 * 工厂所属公司编号，外键
 	 */
 	@Column(name = "COMPANY_ID")
-	private String companyId;
+	private String companyId="1";
 	
 	/**
 	 * 工厂名称
@@ -56,7 +56,7 @@ public class Factory {
 	 * 创建时间
 	 */
 	@Column(name = "CREATE_TIME")
-	private Calendar createTime;
+	private Calendar createTime= Calendar.getInstance();
 	
 	/**
 	 * 工厂排序号
