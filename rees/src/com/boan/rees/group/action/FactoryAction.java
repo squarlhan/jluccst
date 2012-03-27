@@ -6,15 +6,15 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import com.boan.rees.group.model.Factory;
 import com.boan.rees.group.service.IFactoryService;
+import com.boan.rees.utils.action.BaseActionSupport;
 import com.boan.rees.utils.page.Pagination;
-import com.opensymphony.xwork2.ActionSupport;
 
 @Controller("factoryAction")
 @Scope("prototype")
-public class FactoryAction extends ActionSupport{
+public class FactoryAction extends BaseActionSupport{
 	@Autowired
 	@Qualifier("factoryService")
-	private IFactoryService service;
+	private IFactoryService service=null;
 	
 	/**
 	 * 显示分页
@@ -24,7 +24,7 @@ public class FactoryAction extends ActionSupport{
 	/**
 	 * 页面对象
 	 */
-	private Factory factory;
+	private Factory factory=null;
 	//**************get and set method*********************************
 
 	public Pagination<Factory> getPagination() {
@@ -74,7 +74,7 @@ public class FactoryAction extends ActionSupport{
 		return SUCCESS;
 	}
 	/**
-	 * 修改页面
+	 * 修改
 	 * @return
 	 */
 	public String toModifyFactory(){
