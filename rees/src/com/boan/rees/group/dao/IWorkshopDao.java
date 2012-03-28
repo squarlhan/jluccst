@@ -14,4 +14,5 @@ import com.boan.rees.utils.dao.IBaseDao;
 
 public interface IWorkshopDao extends IBaseDao<Workshop,String>{
 
+	public void deleteWorkshopById(String id);
 }

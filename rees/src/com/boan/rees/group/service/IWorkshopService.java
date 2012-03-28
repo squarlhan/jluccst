@@ -21,9 +21,12 @@ public List<Workshop> findAllGroupCompany();
 	
 	public Workshop get(String id);
 	
-	public void deleteGroupCompany(String... ids );
+	public void deleteGroupWorkshop(String... ids );
+	public void deleteWorkshopById(String id);
 	
 	public void save(Workshop table1);
 	public Pagination<Workshop> findWorkshopForPage(Map<String, ?> values,Pagination<Workshop> pagination);
+
+	public void update(Workshop workshop);
 }
 

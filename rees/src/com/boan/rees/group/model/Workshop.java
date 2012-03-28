@@ -62,7 +62,7 @@ public class Workshop {
 	 * 创建时间
 	 */
 	@Column(name="CREATE_TIME")
-	private Calendar createTime;
+	private Calendar createTime= Calendar.getInstance();
 
 	public String getId() {
 		return id;

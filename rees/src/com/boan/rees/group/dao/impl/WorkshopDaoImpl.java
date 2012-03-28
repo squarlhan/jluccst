@@ -24,6 +24,12 @@ import com.boan.rees.utils.dao.impl.BaseDao;
 @Repository("workshopDao")
 public class WorkshopDaoImpl extends BaseDao<Workshop,String> implements IWorkshopDao{
 
+	@Override
+	public void deleteWorkshopById(String id) {
+		super.delete(id);
+		
+	}
+
 	
 	
 }

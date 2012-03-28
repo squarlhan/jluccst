@@ -26,6 +26,7 @@ import com.boan.rees.utils.page.Pagination;
 @Service("workshopService")
 public class WorkshopServiceImpl implements IWorkshopService {
 
+	
 	@Autowired
 	@Qualifier("workshopDao")
 	private IWorkshopDao groupWorkshopDao;
@@ -45,11 +46,15 @@ public class WorkshopServiceImpl implements IWorkshopService {
 		
 		return groupWorkshopDao.get(id);
 	}
+	@Override
+	public void deleteWorkshopById(String id) {
+		groupWorkshopDao.deleteWorkshopById(id);
+	}
 	/**
 	 * 删除车间
 	 */
 	@Override
-	public void deleteGroupCompany(String... ids) {
+	public void deleteGroupWorkshop(String... ids) {
 		
         groupWorkshopDao.delete(ids);
 	}
@@ -61,7 +66,8 @@ public class WorkshopServiceImpl implements IWorkshopService {
 		
         groupWorkshopDao.save(table1);
 	}
-
+	
+	
 	/**
 	 * 分页查找车间
 	 */
@@ -70,11 +76,19 @@ public class WorkshopServiceImpl implements IWorkshopService {
 			
 			String hql = "from Workshop";
 			List<Workshop> data = groupWorkshopDao.findForPage(hql, values, pagination.getStartIndex(), pagination.getPageSize());
-			hql = "select count(*) from PointInfo";
+			hql = "select count(*) from Workshop";
 			int totalRows = groupWorkshopDao.findCountForPage(hql, values);
 			pagination.setTotalRows(totalRows);
 			pagination.setData(data);
 			return pagination;
 		}
+	/**
+	 * 更新数据
+	 */
+	@Override
+	public void update(Workshop workshop) {
+		groupWorkshopDao.update(workshop);
+		
+	}
 }
 
