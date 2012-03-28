@@ -33,7 +33,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta http-equiv="expires" content="0">    
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
-	<j:scriptlink css="true" tipswindow="true" jmessagebox="true" jquery="true" validate="true"/>
+	<j:scriptlink css="true" tipswindow="true" jmessagebox="true" jquery="true" validate="true"  jfunction="true"/>
 	<style type="text/css">
 	<!--
 	.STYLE1 {
@@ -146,7 +146,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-  <s:form id="form1">
+  	<s:form id="form1" name="form1" method="post" theme="simple" >
 <table width="100%" style="height:100%;" border="0" cellspacing="5" cellpadding="0">
   <tr>
     <td valign="top"><table width="100%" border="0" cellspacing="5" cellpadding="0">
