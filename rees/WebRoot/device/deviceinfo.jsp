@@ -28,7 +28,7 @@
 		<base href="<%=basePath%>">
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<title>设备管理维护</title>
-		<j:scriptlink  css="true" jmessagebox="true" jquery="true" tipswindow="true" validate="true"/>
+		<j:scriptlink  css="true" jmessagebox="true" jquery="true" tipswindow="true" validate="true" jfunction="true"/>
 		<script type="text/javascript">
 			/**
 		  	 * 验证条件
@@ -120,7 +120,7 @@
 											<strong>设备编号：</strong>
 										</td>
 										<td height="26" align="left" bgcolor="#FFFFFF">
-											<s:textfield id="txt_deviceNum" name="device.deviceNum" cssStyle="width: 250px;"></s:textfield>
+											<s:textfield id="txt_deviceNum" name="device.deviceNum" cssStyle="width: 250px;" maxlength=""></s:textfield>
 										</td>
 									</tr>
 									<tr>
