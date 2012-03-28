@@ -6,6 +6,7 @@
 <%
 	/**
 	 * All right reserved.
+	 * Copyright (c) 2010 Changchun Boan (BOAN) Co. Ltd.
 	 */
 	/**
 	 * @author zhaomengxue
@@ -30,13 +31,11 @@
   <head>
     <base href="<%=basePath%>">
     <title>个人报表列表</title>
-    
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">    
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
-
 	<j:scriptlink css="true" tipswindow="true" jmessagebox="true" jquery="true" validate="true"/>
 
 	<script type="text/javascript">
@@ -81,12 +80,10 @@
 			}
 		});
 
-
 		$.fn.CheckBoxAll("cbk_all");
   		$.fn.UnCheckBoxAll("ids","cbk_all");
   	});
-		
-		
+	
 	/**
 	 * 点击选复选框时，执行全选/取消全选功能
 	 * @param chkallid
@@ -132,7 +129,7 @@
 		});
 	};
 </script>
-  </head>
+</head>
 <body>
 <s:form action="openReportAction" id="replist">
 <table width="100%" style="height:100%;" border="0" cellspacing="5" cellpadding="0">
