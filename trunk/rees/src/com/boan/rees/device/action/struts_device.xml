@@ -68,54 +68,22 @@
     		<result name="success">/device/devicesort.jsp</result>
     		<result name="input">/device/devicesort.jsp</result>
     	</action>
+    	
+    	<!-- 打开设备检测点维护页 -->
+    	<action name="openAddPointAction" class="deviceInfoAction" method="openAddPoint">
+    		<result name="success">/device/devicepointinfo.jsp</result>
+    		<result name="input">/device/devicepointinfo.jsp</result>
+    	</action>
+    	<!-- 添加设备检测点 -->
+    	<action name="toAddPointAction" class="deviceInfoAction" method="toAddPoint">
+    		<result name="success">/device/devicepointinfo.jsp</result>
+    		<result name="input">/device/devicepointinfo.jsp</result>
+    	</action>
+    	<!-- 删除设备检测点 -->
+    	<action name="toDeletePointAction" class="deviceInfoAction" method="toDeletePoint"/>
 	</package>
 	
 	
-    <!-- 监控点Action -->
-	<package name="pointinfo" extends="struts-default" namespace="/datamanage">
-		<action name="pointlist" class="pointInfoAction" method="pointInfoListByDeviceId">
-			<result name="success">/datamanage/pointset.jsp</result>
-			<result name="input">/datamanage/pointset.jsp</result>
-		</action>
-		<action name="positionset" class="com.boan.rees.device.action.PointInfoAction" method="positionSet">
-	        <result name="success">/datamanage/pointset.jsp</result>
-	    </action>
-	</package>
-	
-	<!-- 监测点数据Action -->
-	<package name="pointdatainfo" extends="struts-default" namespace="/datamanage">
-		<action name="pointdatalist" class="pointDataInfoAction" method="pointDataInfoList">
-			<result name="success">/datamanage/pointdatalist.jsp</result>
-			<result name="input">/datamanage/pointdatalist.jsp</result>
-		</action>
-		<action name="pointdatainfo" class="pointDataInfoAction" method="pointDataInfo">
-			<result name="success">/datamanage/pointdatainfo.jsp</result>
-			<result name="input">/datamanage/pointdatainfo.jsp</result>
-		</action>
-		<action name="deviceimage" class="pointDataInfoAction" method="deviceImage">
-			<result name="success">/datamanage/deviceimage.jsp</result>
-			<result name="input">/datamanage/deviceimage.jsp</result>
-		</action>
-	</package>
-	<package name="pointdatajax" extends="json-default" namespace="/datamanage">
-		<action name="getweeksajax" class="pointDataInfoAction" method="loadWeekList">
-            <result type="json"></result>
-        </action>
-        <action name="getdataajax" class="pointDataInfoAction" method="loadDataInfo">
-            <result type="json"></result>
-        </action>
-        <action name="savedatainfoajax" class="pointDataInfoAction" method="saveDataInfo">
-            <result type="json"></result>
-        </action>
-	</package>
-	
-    <package name="deviceAjax" extends="json-default" namespace="/datamanage">
-		<action name="positionsetajax" class="com.boan.rees.device.action.PointInfoAction" method="positionSet">
-            <result type="json"></result>
-        </action>
-        <action name="deletepointajax" class="com.boan.rees.device.action.PointInfoAction" method="deletePoint">
-            <result type="json"></result>
-        </action>
-	</package>
+    
 	
 </struts>

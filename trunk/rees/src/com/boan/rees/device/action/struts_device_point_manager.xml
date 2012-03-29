@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">	
+<struts>
+    <!-- 监控点Action -->
+	<package name="pointinfo" extends="struts-default" namespace="/datamanage">
+		<action name="pointlist" class="pointInfoAction" method="pointInfoListByDeviceId">
+			<result name="success">/datamanage/pointset.jsp</result>
+			<result name="input">/datamanage/pointset.jsp</result>
+		</action>
+		<action name="positionset" class="pointInfoAction" method="positionSet">
+	        <result name="success">/datamanage/pointset.jsp</result>
+	    </action>
+	</package>
+	
+	<!-- 监测点数据Action -->
+	<package name="pointdatainfo" extends="struts-default" namespace="/datamanage">
+		<action name="pointdatalist" class="pointDataInfoAction" method="pointDataInfoList">
+			<result name="success">/datamanage/pointdatalist.jsp</result>
+			<result name="input">/datamanage/pointdatalist.jsp</result>
+		</action>
+		<action name="pointdatainfo" class="pointDataInfoAction" method="pointDataInfo">
+			<result name="success">/datamanage/pointdatainfo.jsp</result>
+			<result name="input">/datamanage/pointdatainfo.jsp</result>
+		</action>
+		<action name="deviceimage" class="pointDataInfoAction" method="deviceImage">
+			<result name="success">/datamanage/deviceimage.jsp</result>
+			<result name="input">/datamanage/deviceimage.jsp</result>
+		</action>
+	</package>
+	<package name="pointdatajax" extends="json-default" namespace="/datamanage">
+		<action name="getweeksajax" class="pointDataInfoAction" method="loadWeekList">
+            <result type="json"></result>
+        </action>
+        <action name="getdataajax" class="pointDataInfoAction" method="loadDataInfo">
+            <result type="json"></result>
+        </action>
+        <action name="savedatainfoajax" class="pointDataInfoAction" method="saveDataInfo">
+            <result type="json"></result>
+        </action>
+	</package>
+	
+    <package name="deviceAjax" extends="json-default" namespace="/datamanage">
+		<action name="positionsetajax" class="pointInfoAction" method="positionSet">
+            <result type="json"></result>
+        </action>
+        <action name="deletepointajax" class="pointInfoAction" method="deletePoint">
+            <result type="json"></result>
+        </action>
+	</package>
+	
+</struts>

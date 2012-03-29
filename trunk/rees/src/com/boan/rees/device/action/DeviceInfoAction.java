@@ -29,7 +29,9 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.boan.rees.device.model.DeviceInfo;
+import com.boan.rees.device.model.PointInfo;
 import com.boan.rees.device.service.IDeviceInfoService;
+import com.boan.rees.device.service.IPointInfoService;
 import com.boan.rees.utils.action.BaseActionSupport;
 import com.boan.rees.utils.page.Pagination;
 /**
@@ -99,6 +101,28 @@ public class DeviceInfoAction extends BaseActionSupport{
 	 * 下载时用的文件名
 	 */
 	private String downloadFileName;
+	
+	/**
+	 * 设备检测点数组
+	 */
+	private List<PointInfo> pointInfoList;
+	
+	/**
+	 * 设备检测点Id
+	 */
+	private String id;
+	
+	/**
+	 * 设备检测点
+	 */
+	private String controlPointName;
+	
+	/**
+	 * 监测点接口类
+	 */
+	@Autowired
+	@Qualifier("pointInfoService")
+	private IPointInfoService pointInfoService;
 	
 	//***************************属性get set 方法**********************************************	
 	
@@ -173,8 +197,31 @@ public class DeviceInfoAction extends BaseActionSupport{
 		return downloadFileName;
 	}
 	
-	//*************************************************************************************
+	public List<PointInfo> getPointInfoList() {
+		return pointInfoList;
+	}
 
+	public void setPointInfoList(List<PointInfo> pointInfoList) {
+		this.pointInfoList = pointInfoList;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getControlPointName() {
+		return controlPointName;
+	}
+
+	public void setControlPointName(String controlPointName) {
+		this.controlPointName = controlPointName;
+	}
+
+	//*************************************************************************************
 	/**
 	 * 初始化设备类别下拉框数据
 	 * @return
@@ -341,5 +388,48 @@ public class DeviceInfoAction extends BaseActionSupport{
 	public String toSortDevice(){
 		service.sortDeviceInfo(ids);
 		return SUCCESS;
+	}
+	
+	/**
+	 * 打开设备添加监测点页面
+	 * @return
+	 */
+	public String openAddPoint(){
+		String deviceId = device.getId();
+		pointInfoList =  pointInfoService.findPointInfosByDeviceId(deviceId);
+		if(pointInfoList.size()==0){
+			pointInfoList.add(new PointInfo());
+		}
+		return SUCCESS;
+	}
+	
+	/**
+	 * 添加设备监测点
+	 * @return
+	 */
+	public String toAddPoint(){
+		String deviceId = device.getId();
+		String[] pointIds = id.split(",");
+		String[] pointNames = controlPointName.split(",");
+		for(int i=0;i<pointNames.length;i++){
+			PointInfo point = new PointInfo();
+			String pointId = pointIds[i].trim();
+			if(!pointId.equals("")){
+				point.setId(pointId);
+			}
+			point.setDeviceId(deviceId);
+			point.setControlPointName(pointNames[i].trim());
+			pointInfoService.save(point);
+		}
+		return SUCCESS;
+	}
+	
+	/**
+	 * 删除设备监控点
+	 * @return
+	 */
+	public String toDeletePoint(){
+		pointInfoService.deletePointInfo(id);
+		return NONE;
 	}
 }
