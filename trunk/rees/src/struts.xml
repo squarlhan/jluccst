@@ -36,6 +36,9 @@
 	<!-- 设备管理模块配置 -->
 	<include file="com/boan/rees/device/action/struts_device.xml"></include>
 	
+	<!-- 数据管理模块配置 -->
+	<include file="com/boan/rees/device/action/struts_point_data_manager.xml"></include>
+	
 	<!-- 个人报表模块配置 -->
 	<include file="com/boan/rees/report/action/struts_report.xml"></include>
 	
