@@ -47,7 +47,7 @@
 		};
 		
 		$(function(){
-			
+			$.fn.initPage();
 			$.validator.setDefaults({
 	  			//验证框架的验证器的默认设置区
 				debug: false,onkeyup: false,onfocusout:false,focusCleanup: true,
@@ -62,8 +62,6 @@
 			/**
 		  	 * 保存
 		  	 */
-			
-			//如果有id就说明是修改action
 			$("#addBtn").click(function() {
 				var validate_settings_submit = jQuery.extend({}, _device_submit);
                	var validator = $("form").validate(validate_settings_submit);
@@ -90,14 +88,19 @@
                	}
            	});
 			
+			/**
+			 * 动态添加检测点
+			 */
 			$("#addOtherBtn").click(function(){
 				var row = $("#table1 tr:last").prev().clone();
 				var i = $("#table1 tr").length-1;
 				row.find("strong").replaceWith("<strong>检测点"+i+"名称：</strong>");
 				$("#txt_pointNum").val(i);
 				
-				var newBtn ='<img id="delOtherBtn" name="delOtherBtn" onclick="$.fn.option3($(this))" src="<%=basePath%>/images/symbol-remove.png" height="18px" width="20px"></img>';
+				var newBtn ='<img id="delOtherBtn" name="delOtherBtn" onclick="$.fn.dynamicRemove($(this))" src="<%=basePath%>/images/symbol-remove.png" style="height:18px;width:20px;cursor:pointer" title="删除"></img>';
 				row.find("img[id='firstDelBtn']").remove();
+				row.find("img[name='setPositionBtn']").remove();
+				row.find("img[name='setParamBtn']").remove();
 				row.find("img").replaceWith(newBtn); 
 				row.find("input[type='hidden']").val("");
 				row.find("input[type='text']").val("");
@@ -112,45 +115,76 @@
 	  		});
 		});
 		
-		$.fn.option = function(id,obj){
-			$("#txt_pointNum").val($("#txt_pointNum").val()-1);
-			$.post("toDeletePointAction.action", {id:id}, function(data){});
-			obj.parent().parent().remove();
-			/*
-			if($("input[name='delOtherBtn']").length==0){
-				$("#addOtherBtn").parent().append('<img id="firstDelBtn" name="firstDelBtn" onclick="$.fn.option2($(this))" src="<%=basePath%>/images/symbol-remove.png" height="18px" width="20px"></img>');
-			};
-			//*/
-		}
-		
-		$.fn.option2 = function(obj){
+		/**
+		 * 初始化页面元素
+		 */
+		$.fn.initPage = function(){
+			var message = $("#lb_message").html();
+			if(message!=null && $.trim(message)!="" ){
+				alert(message);
+			}
 			var hiddenIdObj=$("#addOtherBtn").parent().children("input:first-child");
 			var id=hiddenIdObj.val();
-			hiddenIdObj.val("");
-			$("#controlPointName").val("");
-			$.post("toDeletePointAction.action", {id:id}, function(data){});
-			$("#txt_pointNum").val(1);
-			obj.remove();
+			if(id==""){
+				$("#txt_pointNum").val(0);
+			}
 		}
 		
-		$.fn.option3 = function(obj){
-			$("#txt_pointNum").val($("#txt_pointNum").val()-1);
-			obj.parent().parent().remove();
-			/*
-			if($("input[name='delOtherBtn']").length==0){
+		/**
+		 * 删除原有非第一个检测点并移除页面元素
+		 */
+		$.fn.dynamicRemoveOther = function(id,obj){
+			if(window.confirm("您确定要删除此检测点吗？")){
+				$("#txt_pointNum").val($("#txt_pointNum").val()-1);
+				$.post("toDeletePointAction.action", {id:id}, function(data){});
+				obj.parent().parent().remove();
+			}
+		}
+		
+		/**
+		 * 删除原有的第一个检测点并移除页面元素
+		 */
+		$.fn.dynamicRemoveFirst = function(obj){
+			if(window.confirm("您确定要删除此检测点吗？")){
 				var hiddenIdObj=$("#addOtherBtn").parent().children("input:first-child");
 				var id=hiddenIdObj.val();
-				if(id!=""){
-					//$("#addOtherBtn").parent().append('<img id="firstDelBtn" name="firstDelBtn" onclick="$.fn.option2($(this))" src="<%=basePath%>/images/symbol-remove.png" height="18px" width="20px"></img>');
-				}
-			};
-			//*/
+				$("#addOtherBtn").parent().children("input[type='hidden']").val("");
+				$("#controlPointName").val("");
+				$.post("toDeletePointAction.action", {id:id}, function(data){});
+				$("#txt_pointNum").val($("#txt_pointNum").val()-1);
+				obj.remove();
+			}
+		}
+		
+		/**
+		 * 动态添加的元素动态移除
+		 */
+		$.fn.dynamicRemove = function(obj){
+			if(window.confirm("您确定要删除此检测点吗？")){
+				$("#txt_pointNum").val($("#txt_pointNum").val()-1);
+				obj.parent().parent().remove();
+			}
+		}
+		
+		/**
+		 * 检测点定位
+		 */
+		$.fn.setPosition =function(pointId,obj){
+			alert("定位检测点: 检测点id="+pointId);
+		}
+		
+		/**
+		 * 设置检测点参数
+		 */
+		$.fn.setParam =function(pointId,obj){
+			alert("设置检测点参数"+pointId);
 		}
 		</script>
 	</head>
 
 	<body>
 		<s:form id="form1" name="form1" method="post" theme="simple" action="toAddPointAction.action">
+		<s:label id="lb_message" name="message" cssStyle="display:none"></s:label>
 		<s:hidden id="hid_deviceId" name="device.id"></s:hidden>
 		<table width="100%" border="0" cellspacing="5" cellpadding="0">
 			<tr>
@@ -166,7 +200,7 @@
 											<strong>监测点数量：</strong>
 										</td>
 										<td height="26" align="left" bgcolor="#FFFFFF">
-											<s:textfield id="txt_pointNum" name="device.deviceNum" cssStyle="width: 250px;" maxlength="10" readonly="true" value="1"></s:textfield>
+											<s:textfield id="txt_pointNum" value="%{pointInfoList.size}" cssStyle="width: 230px;" maxlength="10" readonly="true"></s:textfield>
 										</td>
 									</tr>
 									
@@ -177,15 +211,23 @@
 										</td>
 										<td height="26" align="left" bgcolor="#FFFFFF" nowrap>
 											<s:hidden name="id"></s:hidden>
-											<s:textfield id="controlPointName" name="controlPointName" cssStyle="width: 250px;" maxlength="15"></s:textfield><font color="red">*</font>
+											<s:hidden name="positionX"></s:hidden>
+											<s:hidden name="positionY"></s:hidden>
+											<s:textfield id="controlPointName" name="controlPointName" cssStyle="width: 230px;" maxlength="15"></s:textfield><font color="red">*</font>
 											<s:if test="#pointInfo.index+1==1">
-												<img id="addOtherBtn"  name="addOtherBtn" src="<%=basePath%>/images/symbol-add.png"  height="18px" width="20px"></img>
 												<s:if test='id!=null'>
-													<img id="firstDelBtn" name="firstDelBtn" onclick="$.fn.option2($(this))" src="<%=basePath%>/images/symbol-remove.png" height="18px" width="20px"></img>
+													<img name="setPositionBtn" src="<%=basePath%>/images/pin_blue.png" style="height:18px;width:20px;cursor:pointer" title="定位" onclick="$.fn.setPosition('${id}',$(this))"></img>
+													<img name="setParamBtn" src="<%=basePath%>/images/item.png" style="height:18px;width:20px;cursor:pointer" title="参数" onclick="$.fn.setParam('${id}',$(this))"></img>
+												</s:if>
+												<img id="addOtherBtn"  name="addOtherBtn" src="<%=basePath%>/images/symbol-add.png" style="height:18px;width:20px;cursor:pointer" title="添加"></img>
+												<s:if test='id!=null'>
+													<img id="firstDelBtn" name="firstDelBtn" onclick="$.fn.dynamicRemoveFirst($(this))" src="<%=basePath%>/images/symbol-remove.png" style="height:18px;width:20px;cursor:pointer" title="删除"></img>
 												</s:if>
 											</s:if>
 											<s:else>
-												<img id="addOtherBtn" name="delOtherBtn" onclick="$.fn.option('${id}',$(this));" src="<%=basePath%>/images/symbol-remove.png" height="18px" width="20px"></img>
+												<img name="setPositionBtn" src="<%=basePath%>/images/pin_blue.png" style="height:18px;width:20px;cursor:pointer" title="定位" onclick="$.fn.setPosition('${id}',$(this))"></img>
+												<img name="setParamBtn" src="<%=basePath%>/images/item.png" style="height:18px;width:20px;cursor:pointer" title="参数" onclick="$.fn.setParam('${id}',$(this))"></img>
+												<img name="delOtherBtn" onclick="$.fn.dynamicRemoveOther('${id}',$(this));" src="<%=basePath%>/images/symbol-remove.png" style="height:18px;width:20px;cursor:pointer" title="删除"></img>
 											</s:else>
 										</td>
 									</tr>
