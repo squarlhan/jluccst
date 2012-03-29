@@ -45,15 +45,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script type="text/javascript">
 	
 		$(function(){
+			
+			$.fn.checkall("cbk_all");
+			$.fn.uncheckall("ids","cbk_all");
+			
+			/**
+	  		 * 添加设备信息
+	  		 */
 			$("#addbtn").click(function(){
 				parent.parent.parent.tipsWindown("添加设备信息","iframe:openAddDeviceAction.action","460","350","true","","true","no");
 			});
-
-			$("#editpointbtn").click(function(){
-				parent.parent.parent.tipsWindown("修改监控点","iframe:sysmanage/groupinfoedit.html","460","190","true","","true","no");
-			});
-			$.fn.CheckBoxAll("cbk_all");
-	  		$.fn.UnCheckBoxAll("ids","cbk_all");
 
 	  		/**
 	  		 * 修改设备信息
@@ -78,68 +79,34 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  		});
 	  		
 	  		/**
+	  		 * 检查点维护
+	  		 */
+	  		$('a[name="edit_point"]').each(function(){
+	  			$(this).click(function(){
+	  				var url = $(this).attr("url");
+	  				parent.parent.parent.tipsWindown("监测点信息","iframe:"+url,"500","350","true","","true","no");
+	  			});
+	  		});
+	  		
+	  		/**
 	  		 * 删除所选设备信息
 	  		 */
-	  		$("#deletepointbtn").click(function(){
+	  		$("#deleteselectedbtn").click(function(){
   				var url = "deleteDeviceAction.action";
   				if(window.confirm("您确定要删除所选信息吗？")){
   					$.post(url, $('#form1').serialize(), function(data){window.location.href=window.location.href;});
   				}
 	  		});
 	  		
+	  		/**
+	  		 * 打开设备排序窗口
+	  		 */
 	  		$("#sortbtn").click(function(){
 	  			parent.parent.parent.tipsWindown("设备排序","iframe:openSortDeviceAction.action","350","420","true","","true","no");
 	  		});
+	  		
 		});
 		
-		
-		/******************************************************************************************/
-		/**
-	  	 * 点击选复选框时，执行全选/取消全选功能
-	  	 * @param chkallid
-	  	 * 执行全选功能的checkbox的id值
-	  	 */
-	  	$.fn.CheckBoxAll = function (chkallid) {
-	  		$("#" + chkallid).click(function () {
-	  			var b = ($(this).attr("checked"));
-	  			$(":checkbox").each(function () {
-	  				if( !$(this).attr("disabled") ){
-	  					$(this).attr("checked", b);
-	  				}
-	  			});
-	  		});
-	  		if($(":checkbox").length == 1){
-	  			$("#" + chkallid).attr("disabled","true");
-	  		}
-	  	};
-
-	  	/**
-	  	 * 子复选框有一个处理非选中状态时，执行全选功能的复选框将置为非选中状态
-	  	 * @param subchkname
-	  	 * 子复选框的name
-	  	 * @param chkallid
-	  	 * 执行全选功能的复选框id
-	  	 */
-	  	$.fn.UnCheckBoxAll = function (subchkname, chkallid) {
-	  		$(":checkbox[name='" + subchkname + "']").click(function () {
-	  			var l = $(":checkbox[name='" + subchkname + "']").length;
-	  			if (!$(this).attr("checked")) {
-	  				$("#" + chkallid).attr("checked", false);
-	  			} else {
-	  				var i = 0;
-	  				$(":checkbox[name='" + subchkname + "']").each(function () {
-	  					if ($(this).attr("checked")) {
-	  						i++;
-	  					}
-	  				});
-	  				if (l == i) {
-	  					$("#" + chkallid).attr("checked", true);
-	  				}
-	  			}
-	  		});
-	  	};
-	  /******************************************************************************************/
-	
 	//-->
 	</script>
 
@@ -153,10 +120,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <tr>
         <td>
        		<input name="button" type="button" class="btn_4" id="addbtn" value="添加" >
-    	
     		<input name="button" type="button" class="btn_4" id="addparambtn" value="添加阈值参数" >
-            <input name="button" type="button" class="btn_4" id="editpointbtn" value="修改监控点" >
-            <input name="button" type="button" class="btn_4" id="deletepointbtn" value="删除所选">
+            <input name="button" type="button" class="btn_4" id="deleteselectedbtn" value="删除所选">
             <input name="button3" type="button" class="btn_2_3" id="sortbtn" value="排序"></td>
         <td align="right"></td>
       </tr>
@@ -201,16 +166,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           </td> 
          
           
-          <td height="26" colspan="2" align="center" bgcolor="#FFFFFF">
+          <td height="26" colspan="2" align="center" bgcolor="#FFFFFF" nowrap>
           	<s:url id="edit_url" action="openModifyDeviceAction">   
 				<s:param name="device.id" value="id"></s:param>   
 			</s:url>
 			<s:url id="delete_url" action="deleteDeviceAction">   
 				<s:param name="ids" value="id"></s:param>   
 			</s:url>
-			
+			<s:url id="edit_point_url" action="openAddPointAction">   
+				<s:param name="device.id" value="id"></s:param>   
+			</s:url>
          	<a name="edit" href="javascript:void(0);" url="${edit_url}">编辑</a>  
          	<a name="delete" href="javascript:void(0);" url="${delete_url}">删除</a>  
+         	<a name="edit_point" href="javascript:void(0);" url="${edit_point_url}">监测点</a>  
           </td>
         </tr>
         </s:iterator>
