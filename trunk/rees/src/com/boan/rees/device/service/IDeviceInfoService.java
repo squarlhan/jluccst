@@ -45,4 +45,10 @@ public interface IDeviceInfoService {
 	 * @param ids 有顺序的设备Id数组
 	 */
 	public void sortDeviceInfo(String... ids);
+	
+	/**
+	 * 删除设备图片
+	 * @param deviceId 设备Id
+	 */
+	public void deleteDeviceImage(String deviceId);
 }
