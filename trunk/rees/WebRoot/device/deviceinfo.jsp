@@ -49,12 +49,6 @@
 		  	 */
 			$(document).ready(function(){
 				
-				//回显上传时的错误信息
-				var uploadErr = $("#lb_error").html();
-				if(uploadErr!=null && $.trim("uploadErr")!="" ){
-					alert(uploadErr);
-				}
-				
 		  		$.validator.setDefaults({
 		  			//验证框架的验证器的默认设置区
 					debug: false,onkeyup: false,onfocusout:false,focusCleanup: true,
@@ -99,7 +93,12 @@
 			 */
 		 	$.fn.close = function(){
 		 		$("#closeBtn").click(function(){
-		  			parent.$("#windown-close").click();
+		  			var message = $("#lb_message").html();
+					if(message!=null && $.trim(message)!="" ){
+						//刷新
+						//parent.window.location.href=parent.window.location.href;
+					}
+					parent.$("#windown-close").click();
 		  		});
 			}
 			/**
@@ -107,6 +106,16 @@
 			 */
 			$.fn.initpage = function(){
 				$("#txt_deviceNum").focus();
+				//回显上传时的错误信息
+				var uploadErr = $("#lb_error").html();
+				if(uploadErr!=null && $.trim(uploadErr)!="" ){
+					alert(uploadErr);
+				}
+				
+				var message = $("#lb_message").html();
+				if(message!=null && $.trim(message)!="" ){
+					alert(message);
+				}
 			}
 			
 			/**
@@ -115,10 +124,24 @@
 			$.fn.download = function(){
 				$("#download").click(function(){
 					var oldAction = form1.action;
-					form1.action = "toDownloadDeviceImage.action";
+					form1.action = "toDownloadDeviceImageAction.action";
 					form1.submit();
 					form1.action = oldAction;
 				});
+			}
+			
+			/**
+			 * 删除设备图片
+			 */
+			$.fn.delImg = function(id){
+				
+				if(window.confirm("您确定要删除设备图片吗？")){
+					$.post("toDeleteDeviceImageAction.action", {"device.id":id}, function(data){});
+					var row = $("#table1 tr:last").prev();
+					row.find("strong").replaceWith("<strong>添加设备图片：</strong>");
+					row.find("a:first").remove();
+					row.find("a:first").replaceWith('<input type="file" name="files" value="" id="form1_files" style="width: 250px;"/>');
+				}
 			}
 			
 		</script>
@@ -126,6 +149,7 @@
 
 	<body>
 		<s:form id="form1" name="form1" method="post" theme="simple" enctype="multipart/form-data">
+		<s:label id="lb_message" name="message" cssStyle="display:none"></s:label>
 		<s:hidden id="hid_deviceId" name="device.id"></s:hidden>
 		<s:hidden id="hid_deviceFilePath" name="device.filePath"></s:hidden>
 		<table width="100%" border="0" cellspacing="5" cellpadding="0">
@@ -135,7 +159,7 @@
 						cellspacing="6" cellpadding="0">
 						<tr>
 							<td style="height: 36px;">
-								<table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#d5e4fd">
+								<table id="table1" width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#d5e4fd">
 
 									<tr>
 										<td height="26" align="right" bgcolor="#FFFFFF">
@@ -192,8 +216,8 @@
 										<strong>设备图片：</strong>
 										</td>
 										<td height="26" align="left" bgcolor="#FFFFFF">
-											<a id="download" href="javascript:void(0);">查看</a>
-											<a id="delImg" href="javascript:void(0);">删除</a>
+											<a id="download" href="javascript:void(0);"><img src="<%=basePath%>/images/picture_link.png" style="height:32px;width:32px;cursor:pointer" title="查看"></img></a>
+											<a id="delImg" href="javascript:void(0);" onclick="$.fn.delImg('${device.id}')"><img src="<%=basePath%>/images/cross.png" style="height:32px;width:32px;cursor:pointer" title="删除"></img></a>
 										</td>
 									</tr>	
 									</s:if>

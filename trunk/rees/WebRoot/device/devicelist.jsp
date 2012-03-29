@@ -138,8 +138,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		  <td width="16%" align="center" background="../images/headerbg.jpg"><strong>设备型号</strong></td>
 		  <td width="14%" align="center" background="../images/headerbg.jpg"><strong>设备厂商</strong></td>
 		  <td width="14%" align="center" background="../images/headerbg.jpg"><strong>监控点数量</strong></td>
+		  <td width="14%" align="center" background="../images/headerbg.jpg"><strong>监控点</strong></td>
 		  <td width="14%" align="center" background="../images/headerbg.jpg"><strong>操作</strong></td>
-      	  <td width="16%" align="center" background="../images/headerbg.jpg"></td>
         </tr>
         <s:iterator value="pagination.data" status="obj">
         <tr>
@@ -164,6 +164,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           <td height="26" align="center" bgcolor="#FFFFFF">
           	   <s:property value="controlpoint"/>&nbsp;
           </td> 
+          
+          <td height="26" align="center" bgcolor="#FFFFFF">
+          		<s:url id="edit_point_url" action="openAddPointAction">   
+					<s:param name="device.id" value="id"></s:param>   
+				</s:url>
+				<a name="edit_point" href="javascript:void(0);" url="${edit_point_url}">维护</a> 
+          </td> 
          
           
           <td height="26" colspan="2" align="center" bgcolor="#FFFFFF" nowrap>
@@ -173,18 +180,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			<s:url id="delete_url" action="deleteDeviceAction">   
 				<s:param name="ids" value="id"></s:param>   
 			</s:url>
-			<s:url id="edit_point_url" action="openAddPointAction">   
-				<s:param name="device.id" value="id"></s:param>   
-			</s:url>
          	<a name="edit" href="javascript:void(0);" url="${edit_url}">编辑</a>  
          	<a name="delete" href="javascript:void(0);" url="${delete_url}">删除</a>  
-         	<a name="edit_point" href="javascript:void(0);" url="${edit_point_url}">监测点</a>  
           </td>
         </tr>
         </s:iterator>
         
         <tr>
-          <td height="26" colspan="9" align="center" bgcolor="#FFFFFF">
+          <td height="26" colspan="10" align="center" bgcolor="#FFFFFF">
 			<page:pages currentPage="pagination.currentPage" totalPages="pagination.totalPages" totalRows="pagination.totalRows" styleClass="page" theme="text" ></page:pages> 
 		   
 		  </td>
