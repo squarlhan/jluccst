@@ -12,6 +12,8 @@ package com.boan.rees.forum.service.impl;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Resource;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -27,17 +29,16 @@ import com.boan.rees.utils.page.Pagination;
  * @version 1.0.0
  */
 @Service("forumMessageInfoService")
-public abstract class ForumMessageInfoServiceImpl implements IForumMessageInfoService {
+public class ForumMessageInfoServiceImpl implements IForumMessageInfoService {
 	
 
+	@Resource
 	@Qualifier("forumMessageInfoDao")
 	private IForumMessageInfoDao forumMessageInfoDao;
 
 	/**
 	 * 查询全部论坛交流信息表对象
 	 */
-	
-	@Autowired
 	public List<ForumMessageInfo> findAllForumMessageInfo(){
 		return forumMessageInfoDao.findAll();
 	}
@@ -78,11 +79,17 @@ public abstract class ForumMessageInfoServiceImpl implements IForumMessageInfoSe
 		
 		String hql = "from ForumIssueInfo";
 		List<ForumMessageInfo> data = forumMessageInfoDao.findForPage(hql, values, pagination.getStartIndex(), pagination.getPageSize());
-		hql = "select count(*) from forumMessageInfo";
+		hql = "select count(*) from ForumMessageInfo";
 		int totalRows = forumMessageInfoDao.findCountForPage(hql, values);
 		pagination.setTotalRows(totalRows);
 		pagination.setData(data);
 		return pagination;
+	}
+
+	@Override
+	public List<ForumMessageInfo> findAllDemoModel() {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 

@@ -12,6 +12,7 @@ package com.boan.rees.forum.service;
 import java.util.List;
 import java.util.Map;
 
+import com.boan.rees.device.model.DeviceInfo;
 import com.boan.rees.forum.model.ForumIssueInfo;
 import com.boan.rees.utils.page.Pagination;
 
@@ -45,6 +46,11 @@ public interface IForumIssueInfoService {
 	 */
 	
 	public void save(ForumIssueInfo table1);
+	/**
+	 * 修改话题信息
+	 * @param forumIssueInfo 话题对象
+	 */
+	public void update(ForumIssueInfo forumIssueInfo);
 	/**
 	 * 按分页查询
 	 */

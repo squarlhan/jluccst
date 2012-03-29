@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import com.boan.rees.device.model.DeviceInfo;
 import com.boan.rees.forum.dao.IForumIssueInfoDao;
 import com.boan.rees.forum.model.ForumIssueInfo;
 import com.boan.rees.forum.service.IForumIssueInfoService;
@@ -70,6 +71,14 @@ public class ForumIssueInfoServiceImpl implements IForumIssueInfoService {
 		return forumIssueInfoDao.get(id);
 	}
 	
+	
+	/**
+	 * 修改设备信息
+	 * @param forumIssueInfo 设备对象
+	 */
+	public void update(ForumIssueInfo forumIssueInfo){
+		forumIssueInfoDao.update(forumIssueInfo);
+	}
 	/**
 	 * 按分页查询
 	 */
@@ -79,7 +88,7 @@ public class ForumIssueInfoServiceImpl implements IForumIssueInfoService {
 		
 		String hql = "from ForumIssueInfo";
 		List<ForumIssueInfo> data = forumIssueInfoDao.findForPage(hql, values, pagination.getStartIndex(), pagination.getPageSize());
-		hql = "select count(*) from DemoModel";
+		hql = "select count(*) from ForumIssueInfo";
 		int totalRows = forumIssueInfoDao.findCountForPage(hql, values);
 		pagination.setTotalRows(totalRows);
 		pagination.setData(data);
