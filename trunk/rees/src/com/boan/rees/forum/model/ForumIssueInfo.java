@@ -51,21 +51,21 @@ public class ForumIssueInfo implements Serializable {
 	 * 议题状态
 	 */
 	@Column(name = "ISSUE_Status")
-	private String issueStatus;
+	private int issueStatus;
 	/**
 	 * 议题创建人
 	 */
 	@Column(name = "CREATOR")
 	private String creator;
 	/**
-	 * 议题创建时间
+	 * 议题创建时间     
 	 */
 	@Column(name = "CREATE_TIME")
 	private String 	createTime;
 	public String getId() {
 		return id;
 	}
-	public void setId(String id) {
+	public  void setId(String id) {
 		this.id = id;
 	}
 	public String getIssueName() {
@@ -80,10 +80,10 @@ public class ForumIssueInfo implements Serializable {
 	public void setIssueConteit(String issueConteit) {
 		this.issueConteit = issueConteit;
 	}
-	public String getIssueStatus() {
+	public int getIssueStatus() {
 		return issueStatus;
 	}
-	public void setIssueStatus(String issueStatus) {
+	public void setIssueStatus(int issueStatus) {
 		this.issueStatus = issueStatus;
 	}
 	public String getCreator() {
@@ -97,6 +97,12 @@ public class ForumIssueInfo implements Serializable {
 	}
 	public void setCreateTIME(String createTIME) {
 		this.createTime = createTIME;
-	}
 	
+	}
+	public void update(ForumIssueInfo forumIssueInfo) {
+		
+	}
+
 }
+
+
