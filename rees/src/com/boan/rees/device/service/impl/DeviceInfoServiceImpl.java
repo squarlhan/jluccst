@@ -89,4 +89,13 @@ public class DeviceInfoServiceImpl  implements IDeviceInfoService {
 			deviceInfoDao.executeHql(hql, null);
 		}
 	}
+	
+	/**
+	 * 删除设备图片
+	 * @param deviceId 设备Id
+	 */
+	public void deleteDeviceImage(String deviceId){
+		String hql = "update DeviceInfo obj set obj.filePath=null where obj.id='"+deviceId+"'";
+		deviceInfoDao.executeHql(hql, null);
+	}
 }
