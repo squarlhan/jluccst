@@ -16,10 +16,32 @@
     		<result name="input">/device/deviceinfo.jsp</result>
     	</action>
     	<!-- 添加设备菜单 -->
-    	 <action name="toAddDeviceAction" class="deviceInfoAction" method="toAddDevice">
-             <result name="success">/device/devicelist.jsp</result>
+    	<action name="toAddDeviceAction" class="deviceInfoAction" method="toAddDevice">
+    	 	<!-- 配置fileUpload的拦截器 -->
+            <interceptor-ref name="fileUpload">
+		    	<!-- 配置允许上传的文件类型 -->
+		        <param name="allowedTypes">image/gif,image/png,image/bmp,image/pjpeg,image/jpg,image/jpeg</param>
+		    	<!-- 配置允许上传的文件大小 1MB = 1024KB = 1024*1024 = 1048576-->
+				<param name="maximumSize">20971520</param> 
+			</interceptor-ref> 
+	        <interceptor-ref name="defaultStack"/>
+	        <interceptor-ref name="fileUploadStack"/>
+	   		<!-- 动态设置Action的属性值 -->
+			<param name="savePath">/upload</param>
+            <result name="success">/device/devicelist.jsp</result>
             <result name="input">/device/deviceinfo.jsp</result>
         </action>
+        
+        <!-- 文件下载，支持中文附件名 -->  
+        <action name="toDownloadDeviceImage" class="deviceInfoAction" method="downloadDeviceImage">  
+            <result name="success" type="stream">  
+                <param name="contentType">image/jpeg</param>  
+                <param name="inputName">inputStream</param>  
+                <param name="contentDisposition">attachment;filename="${downloadFileName}"</param>  
+                <param name="bufferSize">4096</param>  
+            </result>  
+        </action>  
+        
         <!-- 删除设备 -->
         <action name="deleteDeviceAction" class="deviceInfoAction" method="deleteDevice"/>
         
