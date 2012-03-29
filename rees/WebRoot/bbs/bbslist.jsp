@@ -1,6 +1,8 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <%@ taglib prefix="page" uri="/WEB-INF/page-tags.tld"%> 
+<%@ taglib prefix="j" uri="/script-tags"%>
+
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -11,15 +13,16 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     
-    <title>My JSP 'devicelist.jsp' starting page</title>
+    <title>My JSP 'bbslist.jsp' starting page</title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">    
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
-	<link type="text/css" rel="stylesheet" href="../../style.css" />
-	<script type="text/javascript" src="../../js/jquery-1.4.2.min.js"></script>
+	
+	<j:scriptlink css="true" tipswindow="true" jmessagebox="true" jquery="true" validate="true"/>
+	
 	<style type="text/css">
 	<!--
 	.STYLE1 {
@@ -29,69 +32,160 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	-->
 	</style>
 	<script type="text/javascript">
-	<!--
+
 		$(function(){
 			$("#addbtn").click(function(){
-				parent.parent.parent.tipsWindown("添加设备","iframe:device/deviceadd.jsp","460","250","true","","true","no");
+				parent.parent.parent.tipsWindown("添加话题","iframe:openAddForumIssueInfoAction.action","460","250","true","","true","no");
+			});			
+            $("#gotobtn").click(function(){
+				parent.parent.parent.tipsWindown("进入聊天室","iframe:openAddForumMessageInfoAction.action","460","250","true","","true","no");
 			});
-			$("#editbtn").click(function(){
-				parent.parent.parent.tipsWindown("修改设备","iframe:sysmanage/groupinfo.html","460","250","true","","true","no");
-			});
-			$("#editpointbtn").click(function(){
-				parent.parent.parent.tipsWindown("修改监控点","iframe:sysmanage/groupinfoedit.html","460","190","true","","true","no");
-			});
+			$.fn.CheckBoxAll("cbk_all");
+	  		$.fn.UnCheckBoxAll("ids","cbk_all");
+
+	  		/**
+	  		 * 修改话题信息
+	  		 */
+	  		$('a[name="edit"]').each(function(){
+	  			$(this).click(function(){
+	  				var url = $(this).attr("url");
+	  				parent.parent.parent.tipsWindown("修改话题","iframe:"+url,"460","350","true","","true","no");
+	  			});
+	  		});
+	  		
+	  		/**
+	  		 * 删除话题信息
+	  		 */
+	  		$('a[name="delete"]').each(function(){
+	  			$(this).click(function(){
+	  				var url = $(this).attr("url");
+	  				if(window.confirm("您确定要删除这条信息吗？")){
+	  					$.post(url, $('#form1').serialize(), function(data){window.location.href=window.location.href;});
+	  				}
+	  			});
+	  		});
+	  		
+	  		/**
+	  		 * 删除话题信息
+	  		 */
+	  		$("#deletepointbtn").click(function(){
+  				var url = "deleteForumIssueInfoAction.action";
+  				if(window.confirm("您确定要删除所选信息吗？")){
+  					$.post(url, $('#form1').serialize(), function(data){window.location.href=window.location.href;});
+  				}
+	  		});
+	  		
 		});
-	//-->
+		/**
+	  	 * 点击选复选框时，执行全选/取消全选功能
+	  	 * @param chkallid
+	  	 * 执行全选功能的checkbox的id值
+	  	 */
+	  	$.fn.CheckBoxAll = function (chkallid) {
+	  		$("#" + chkallid).click(function () {
+	  			var b = ($(this).attr("checked"));
+	  			$(":checkbox").each(function () {
+	  				if( !$(this).attr("disabled") ){
+	  					$(this).attr("checked", b);
+	  				}
+	  			});
+	  		});
+	  		if($(":checkbox").length == 1){
+	  			$("#" + chkallid).attr("disabled","true");
+	  		}
+	  	};
+
+	  	/**
+	  	 * 子复选框有一个处理非选中状态时，执行全选功能的复选框将置为非选中状态
+	  	 * @param subchkname
+	  	 * 子复选框的name
+	  	 * @param chkallid
+	  	 * 执行全选功能的复选框id
+	  	 */
+	  	$.fn.UnCheckBoxAll = function (subchkname, chkallid) {
+	  		$(":checkbox[name='" + subchkname + "']").click(function () {
+	  			var l = $(":checkbox[name='" + subchkname + "']").length;
+	  			if (!$(this).attr("checked")) {
+	  				$("#" + chkallid).attr("checked", false);
+	  			} else {
+	  				var i = 0;
+	  				$(":checkbox[name='" + subchkname + "']").each(function () {
+	  					if ($(this).attr("checked")) {
+	  						i++;
+	  					}
+	  				});
+	  				if (l == i) {
+	  					$("#" + chkallid).attr("checked", true);
+	  				}
+	  			}
+	  		});
+	  	};
+		
+		
+
 	</script>
 
   </head>
   
   <body>
  
- <s:form> 
+ <s:form id="form1"> 
   
-<table width="100%" style="height:100%;" border="0" cellspacing="5" cellpadding="0">
+<table width="100%" border="0" cellspacing="5" cellpadding="0">
   	
   	
   	
   	
   	<tr><td valign="top"><table width="100%" border="0" cellspacing="5" cellpadding="0">
       <tr>
-        	<td><input name="button" type="button" class="btn_4" id="addBtn" value="发起话题">
-          		<input name="button3" type="button" class="btn_4" id="button" value="删除话题"></td>
+        	<td><input name="button" type="button" class="btn_4" id="addbtn" value="发起话题">
+          		<input name="button3" type="button" class="btn_4" id="deletepointbtn" value="删除话题"></td>
       </tr>
     </table></td></tr>
     
     
     
-    <tr><td><table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#d5e4fd">
+    <tr><td><table width="821" border="0" cellpadding="5" cellspacing="1" bgcolor="#d5e4fd" height="173">
             
             
             <tr>
-              <td height="26" align="center" background="../images/headerbg.jpg">&nbsp;</td>
+               <td align="center" >  
+   				<s:checkbox theme="simple" id="cbk_all" name="all"></s:checkbox>
+   			</td>
+              
               <td align="center" background="../images/headerbg.jpg"><strong>话题名称</strong></td>
-              <td align="center" background="../images/headerbg.jpg"><strong>在线人数</strong></td>
+              <td align="center" background="../images/headerbg.jpg"><strong>参与人数</strong></td>
               <td align="center" background="../images/headerbg.jpg"><strong>发起人</strong></td>
               <td align="center" background="../images/headerbg.jpg"><strong>状态</strong></td>
             </tr>
-            <tr>
-              <td height="26" align="center" bgcolor="#FFFFFF"><input type="checkbox" name="checkbox" id="checkbox"></td>
-              <td height="26" bgcolor="#FFFFFF"><a href="javascript:void(0);" id="gotobbs">关于XXX的议题，希望大踊跃发言...</a></td>
-              <td height="26" align="center" bgcolor="#FFFFFF"><A title="点击这里可查看在线人员名单" href="bbslist_">160/160(<span class="STYLE2">满员</span>)</A></td>
-         	  <td height="26" align="center" bgcolor="#FFFFFF">管理员</td>
-              <td height="26" align="center" bgcolor="#FFFFFF"><span class="STYLE3">进行中</span></td>
-            </tr>
+            
             <s:iterator value="pagination.data" status="obj">
-			<tr>
-	  			
-	   			<td>
-	   				<s:property value="issueConteit"/>&nbsp;
-	   			</td>
-			</tr>
-	   		</s:iterator>
             <tr>
-			<td colspan="5">
-			<page:pages currentPage="pagination.currentPage" totalPages="pagination.totalPages" totalRows="pagination.totalRows" styleClass="page" theme="text" ></page:pages> 
+            <td height="26" align="center" bgcolor="#FFFFFF" >  
+			<s:checkbox id="%{#obj.id}" name="ids" fieldValue="%{id}" value="false" theme="simple"/>
+			</td>
+           <td height="26" bgcolor="#FFFFFF"><a href="openAddForumMessageInfoAction.action" id="gotobbs">
+              <s:property value="issueName"/>&nbsp;</a>
+          </td>
+               <td height="26" align="center" bgcolor="#FFFFFF"><A title="点击这里可查看参与人员名单" href="bbslist_">160/160(<span class="STYLE2">满员</span>)</A></td> 
+               <td height="26" align="center" bgcolor="#FFFFFF">
+          	   <s:property value="issueStatus"/>&nbsp;
+          </td>
+            <td height="26" align="center" bgcolor="#FFFFFF">
+          	   <s:property value="issueStatus"/>&nbsp;
+          </td>
+                <td height="26" colspan="2" align="center" bgcolor="#FFFFFF">
+          	<s:url id="edit_url" action="openModifyForumIssueInfoAction">   
+				<s:param name="forumIssueInfo.id" value="id"></s:param>   
+			</s:url>
+         	<a name="edit" href="javascript:void(0);" url="${edit_url}">编辑</a>  
+         	
+          </td>
+            </tr>
+              </s:iterator>
+            <tr>
+			<td colspan="5" align="center">
+			<page:pages currentPage="pagination.currentPage" totalPages="	pagination.totalPages" totalRows="pagination.totalRows" styleClass="page" theme="text" ></page:pages> 
 		   	</td>
 		</tr>
     

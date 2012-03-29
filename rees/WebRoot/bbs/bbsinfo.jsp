@@ -25,7 +25,7 @@
 <html>
   <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>添加论坛信息</title>
+<title>进入聊天窗口</title>
 <link type="text/css" rel="stylesheet" href="../style.css" />
 <script type="text/javascript" src="../js/jquery-1.4.2.min.js"></script>
 <script type="text/javascript">
