@@ -14,13 +14,18 @@
 	<constant name="struts.i18n.reload" value="true" />
 	<!-- 指定每次配置文件更改后，自动重新加载 -->
 	<constant name="struts.configuration.xml.reload" value="true" />
+	<!-- 上传文件时的临时目录-->
+	<constant name="struts.multipart.saveDir" value="c:/temp"/>
+	<!-- 上传组件最大上传文件大小 1G-->
+	<constant name="struts.multipart.maxSize" value="1073741824" /> 
+	
 	<!-- 国际化资源文件 -->
-	<constant name="struts.custom.i18n.resources" value="content/Language" />
+	<!-- <constant name="struts.custom.i18n.resources" value="message" /-->
 	<!-- 浏览器缓存 -->
 	<constant name="struts.serve.static.browserCache" value="false" />
 	
 	<!-- 默认后缀名 -->
-	<constant name="struts.action.extension" value="action" />
+	<!-- constant name="struts.action.extension" value="action" /-->
 	
 	<!-- 例子配置 -->
 	<include file="com/boan/rees/demo/action/struts_demo.xml"></include>
@@ -39,5 +44,7 @@
 	
 	<!-- 组织机构模块配置 -->
 	<include file="com/boan/rees/group/action/struts_group.xml"></include>
+	
+	<include file="com/boan/rees/report/action/struts_template.xml"></include>
 	
 </struts>
