@@ -6,10 +6,23 @@
 
 package com.boan.rees.device.action;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Properties;
+import java.util.UUID;
 
+import javax.servlet.ServletContext;
+
+import org.apache.commons.io.IOUtils;
+import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
@@ -27,6 +40,8 @@ import com.boan.rees.utils.page.Pagination;
 @Controller("deviceInfoAction")
 @Scope("prototype")
 public class DeviceInfoAction extends BaseActionSupport{
+
+	private static final long serialVersionUID = 1L;
 
 	/**
 	 * 用于调用数据库相关操作
@@ -55,6 +70,37 @@ public class DeviceInfoAction extends BaseActionSupport{
 	 */
 	private String[] ids;
 	
+	/**
+	 * 上传的文件
+	 */
+	private File[] files;
+
+	/**
+	 * 上传的文件名称
+	 */
+	private String[] filesFileName;
+
+	/**
+	 * 上传的文件类型
+	 */
+	private String[] filesContentType;
+
+	/**
+	 * 上传文件保存路径
+	 */
+	private String savePath;
+	
+	/**
+	 * 下载文件时的文件流
+	 */
+	private InputStream inputStream;
+	
+	/**
+	 * 下载时用的文件名
+	 */
+	private String downloadFileName;
+	
+	//***************************属性get set 方法**********************************************	
 	
 	public String[] getIds() {
 		return ids;
@@ -86,8 +132,63 @@ public class DeviceInfoAction extends BaseActionSupport{
 	public void setDeviceInfoList(List<DeviceInfo> deviceInfoList) {
 		this.deviceInfoList = deviceInfoList;
 	}
-//*************************************************************************************
+	
+	public File[] getFiles() {
+		return files;
+	}
 
+	public void setFiles(File[] files) {
+		this.files = files;
+	}
+
+	public String[] getFilesFileName() {
+		return filesFileName;
+	}
+
+	public void setFilesFileName(String[] filesFileName) {
+		this.filesFileName = filesFileName;
+	}
+
+	public String[] getFilesContentType() {
+		return filesContentType;
+	}
+
+	public void setFilesContentType(String[] filesContentType) {
+		this.filesContentType = filesContentType;
+	}
+
+	public String getSavePath() {
+		return savePath;
+	}
+
+	public void setSavePath(String savePath) {
+		this.savePath = savePath;
+	}
+	
+	public InputStream getInputStream() {
+		return inputStream;
+	}
+
+	public String getDownloadFileName() {
+		return downloadFileName;
+	}
+	
+	//*************************************************************************************
+
+	/**
+	 * 初始化设备类别下拉框数据
+	 * @return
+	 * @throws IOException 
+	 * @throws FileNotFoundException 
+	 */
+	public Properties getDeviceTypeMap() throws FileNotFoundException, IOException {
+		Properties property = new Properties();
+		//读取配置文件
+		InputStream in = getClass().getResourceAsStream("/divece_type_config.properties");
+		property.load(in);
+		return property;
+	}
+	
 	/**
 	 * 分页显示设备列表
 	 * @return
@@ -97,17 +198,94 @@ public class DeviceInfoAction extends BaseActionSupport{
 		return this.SUCCESS;
 	}
 
-	
     /**
 	 * 添加新设备
 	 * @return
 	 */
 	public String toAddDevice(){
+		try {
+			ServletContext servletContext = ServletActionContext.getServletContext();
+			//根据配置在服务器上查找指定目录，如果不存在则创建
+			String dataDir = servletContext.getRealPath(savePath);
+			File dir = new File(dataDir);
+			if(!dir.exists()){
+				dir.mkdirs();
+			}
+			if(files!=null){
+				for (int i = 0; i < files.length; i++) {
+					//生成随机文件名
+					String fileName = UUID.randomUUID().toString();
+					//获取文件名后缀
+					String suffix = filesFileName[i].substring(filesFileName[i].lastIndexOf('.'));
+					FileOutputStream fos = new FileOutputStream(dataDir + File.separator + fileName + suffix);
+					//构建保存到数据库中的图片针对服务器的相对路径
+					String filePath = savePath + File.separator + fileName+ suffix;
+					device.setFilePath(filePath.replace("/", File.separator));
+					FileInputStream fis = new FileInputStream(files[i]);
+					//上传
+					IOUtils.copy(fis, fos);
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
 		device.setDeptId("");
 		device.setGroupId("1");
+		//保存设备对象
 		service.save(device);
 		return SUCCESS;
 	}
+	
+	/**
+	 * 请求执行方法前验证
+	 */
+	public void validateToAddDevice() {
+		if(files == null){
+            addFieldError("files", "请选择上传的文件");
+        }
+	}
+	
+	/**
+	 * 重写字段错误信息添加方法，对错误信息进行从新构造
+	 * @param fieldName
+	 * @param errorMessage
+	 */
+	@Override
+	public void addFieldError(String fieldName, String errorMessage) {
+		if(errorMessage.startsWith("File too large: files")){
+			//档文件过大时提示
+			errorMessage= this.getText("struts.messages.error.file.too.large");
+		}else if(errorMessage.startsWith("Content-Type not allowed: files")){
+			//当文件类型不允许时提示
+			errorMessage=  this.getText("struts.messages.error.content.type.not.allowed");
+		}
+		super.addFieldError(fieldName, errorMessage);
+	}
+	
+	/**
+	 * 下载设备图片
+	 * @return
+	 * @throws UnsupportedEncodingException 
+	 * @throws FileNotFoundException 
+	 */
+	public String downloadDeviceImage() throws UnsupportedEncodingException, FileNotFoundException{
+		ServletContext servletContext = ServletActionContext.getServletContext();
+		//获取服务器上图片的保存路径
+		String fileAllName = servletContext.getRealPath(device.getFilePath());
+		File file = new File(fileAllName);
+		if(file.exists()){
+			inputStream = new FileInputStream(file);
+			//获取图片后缀名
+			String suffix    = fileAllName.substring(fileAllName.lastIndexOf('.'));
+			//已设备名称加编号的形式构建下载时的文件名
+			downloadFileName =device.getDeviceName()+"_"+device.getDeviceNum() + suffix;
+			//处理中文乱码
+			downloadFileName = new String(downloadFileName.getBytes(), "ISO8859-1");   
+		}
+		return SUCCESS;
+	}
+	
 	/**
 	 * 打开添加新设备页
 	 * @return
