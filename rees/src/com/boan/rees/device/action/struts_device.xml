@@ -76,7 +76,11 @@
     	</action>
     	<!-- 添加设备检测点 -->
     	<action name="toAddPointAction" class="deviceInfoAction" method="toAddPoint">
-    		<result name="success">/device/devicepointinfo.jsp</result>
+    		<result name="success" type="chain">
+             	<param name="actionName">openAddPointAction</param>
+             	<param name="namespace">/</param>
+             	<param name="device.id">${device.getId()}</param>
+            </result>
     		<result name="input">/device/devicepointinfo.jsp</result>
     	</action>
     	<!-- 删除设备检测点 -->
