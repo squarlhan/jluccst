@@ -48,6 +48,13 @@
 		  	 * 准备工作
 		  	 */
 			$(document).ready(function(){
+				
+				//回显上传时的错误信息
+				var uploadErr = $("#lb_error").html();
+				if(uploadErr!=null && $.trim("uploadErr")!="" ){
+					alert(uploadErr);
+				}
+				
 		  		$.validator.setDefaults({
 		  			//验证框架的验证器的默认设置区
 					debug: false,onkeyup: false,onfocusout:false,focusCleanup: true,
@@ -61,6 +68,7 @@
 				$.fn.save();
 		  		$.fn.close();
 		  		$.fn.initpage();
+		  		$.fn.download();
 		  	});
 			/**
 		  	 * 保存
@@ -100,12 +108,26 @@
 			$.fn.initpage = function(){
 				$("#txt_deviceNum").focus();
 			}
+			
+			/**
+			 * 下载图片
+			 */
+			$.fn.download = function(){
+				$("#download").click(function(){
+					var oldAction = form1.action;
+					form1.action = "toDownloadDeviceImage.action";
+					form1.submit();
+					form1.action = oldAction;
+				});
+			}
+			
 		</script>
 	</head>
 
 	<body>
-		<s:form id="form1" name="form1" method="post" theme="simple" >
+		<s:form id="form1" name="form1" method="post" theme="simple" enctype="multipart/form-data">
 		<s:hidden id="hid_deviceId" name="device.id"></s:hidden>
+		<s:hidden id="hid_deviceFilePath" name="device.filePath"></s:hidden>
 		<table width="100%" border="0" cellspacing="5" cellpadding="0">
 			<tr>
 				<td>
@@ -128,7 +150,7 @@
 											<strong>设备类型：</strong>
 										</td>
 										<td height="26" align="left" bgcolor="#FFFFFF">
-											<s:textfield id="txt_deviceType" name="device.deviceType" cssStyle="width: 250px;"></s:textfield>
+											<s:select id="sel_deviceType" list="deviceTypeMap" listKey="key" listValue="value" headerKey="" headerValue="---请选择---" name="device.deviceType" cssStyle="width: 250px;"></s:select>
 										</td>
 									</tr>
 									<tr>
@@ -163,14 +185,29 @@
 											<s:textfield id="txt_controlpoint" name="device.controlpoint" cssStyle="width: 250px;"></s:textfield>
 										</td>
 									</tr>
+									
+									<s:if test='device.filePath!=null && device.filePath!=""'>
+									<tr>
+										<td height="26" align="right" bgcolor="#FFFFFF">
+										<strong>设备图片：</strong>
+										</td>
+										<td height="26" align="left" bgcolor="#FFFFFF">
+											<a id="download" href="javascript:void(0);">查看</a>
+											<a id="delImg" href="javascript:void(0);">删除</a>
+										</td>
+									</tr>	
+									</s:if>
+									<s:else>
 									<tr>
 										<td height="26" align="right" bgcolor="#FFFFFF">
 											<strong>添加设备图片：</strong>
 										</td>
 										<td height="26" align="left" bgcolor="#FFFFFF">
-											<s:textfield id="txt_filePath" name="device.filePath" cssStyle="width: 250px;"></s:textfield>
+											<s:file name="files" cssStyle="width: 250px;"></s:file>
 										</td>
 									</tr>
+									</s:else>
+									
 									<tr>
 										<td height="26" colspan="2" align="center" bgcolor="#FFFFFF">
 											<input name="addBtn" type="button" class="btn_2_3" id="addBtn" value="确定">
@@ -185,6 +222,11 @@
 				</td>
 			</tr>
 		</table>
+		<s:if test="hasFieldErrors()">
+			<s:iterator value="fieldErrors">
+				<s:label id="lb_error" name="value[0]" cssStyle="display:none"></s:label>
+			</s:iterator>
+		</s:if>
 		</s:form>
 	</body>
 </html>
