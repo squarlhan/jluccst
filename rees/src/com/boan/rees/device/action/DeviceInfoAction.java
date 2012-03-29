@@ -113,10 +113,24 @@ public class DeviceInfoAction extends BaseActionSupport{
 	private String id;
 	
 	/**
+	 * 设备检测点X坐标
+	 */
+	private String positionX;
+	
+	/**
+	 * 设备检测点Y坐标
+	 */
+	private String positionY;
+	
+	/**
 	 * 设备检测点
 	 */
 	private String controlPointName;
 	
+	/**
+	 * 操作提示
+	 */
+	private String message;
 	/**
 	 * 监测点接口类
 	 */
@@ -221,6 +235,30 @@ public class DeviceInfoAction extends BaseActionSupport{
 		this.controlPointName = controlPointName;
 	}
 
+	public String getPositionX() {
+		return positionX;
+	}
+
+	public void setPositionX(String positionX) {
+		this.positionX = positionX;
+	}
+
+	public String getPositionY() {
+		return positionY;
+	}
+
+	public void setPositionY(String positionY) {
+		this.positionY = positionY;
+	}
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+
 	//*************************************************************************************
 	/**
 	 * 初始化设备类别下拉框数据
@@ -251,6 +289,25 @@ public class DeviceInfoAction extends BaseActionSupport{
 	 */
 	public String toAddDevice(){
 		try {
+			saveImageToDevice(device);
+			device.setDeptId(sessionFactoryId);
+			device.setGroupId(sessionWorkshopId);
+			//保存设备对象
+			service.save(device);
+			message="保存成功！";
+		} catch (Exception e) {
+			e.printStackTrace();
+			message="保存失败！";
+		}
+		return SUCCESS;
+	}
+
+	/**
+	 * 为设备添加图片信息
+	 * @param device
+	 */
+	private void saveImageToDevice(DeviceInfo device) {
+		try {
 			ServletContext servletContext = ServletActionContext.getServletContext();
 			//根据配置在服务器上查找指定目录，如果不存在则创建
 			String dataDir = servletContext.getRealPath(savePath);
@@ -276,12 +333,6 @@ public class DeviceInfoAction extends BaseActionSupport{
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
-		device.setDeptId("");
-		device.setGroupId("1");
-		//保存设备对象
-		service.save(device);
-		return SUCCESS;
 	}
 	
 	/**
@@ -334,6 +385,16 @@ public class DeviceInfoAction extends BaseActionSupport{
 	}
 	
 	/**
+	 * 删除设备图片
+	 * @return
+	 */
+	public String toDeleteDeviceImage(){
+		String deviceId = device.getId();
+		service.deleteDeviceImage(deviceId);
+		return NONE;
+	}
+	
+	/**
 	 * 打开添加新设备页
 	 * @return
 	 */
@@ -366,9 +427,16 @@ public class DeviceInfoAction extends BaseActionSupport{
 	 * @return
 	 */
 	public String toModifyDevice(){
-		device.setDeptId("1");
-		device.setGroupId("1");
-		service.update(device);
+		try {
+			saveImageToDevice(device);
+			device.setDeptId(sessionFactoryId);
+			device.setGroupId(sessionWorkshopId);
+			service.update(device);
+			message="保存成功！";
+		} catch (Exception e) {
+			e.printStackTrace();
+			message="保存失败！";
+		}
 		return SUCCESS;
 	}
 
@@ -400,6 +468,7 @@ public class DeviceInfoAction extends BaseActionSupport{
 		if(pointInfoList.size()==0){
 			pointInfoList.add(new PointInfo());
 		}
+		System.out.println(message);
 		return SUCCESS;
 	}
 	
@@ -408,20 +477,39 @@ public class DeviceInfoAction extends BaseActionSupport{
 	 * @return
 	 */
 	public String toAddPoint(){
-		String deviceId = device.getId();
-		String[] pointIds = id.split(",");
-		String[] pointNames = controlPointName.split(",");
-		for(int i=0;i<pointNames.length;i++){
-			PointInfo point = new PointInfo();
-			String pointId = pointIds[i].trim();
-			if(!pointId.equals("")){
-				point.setId(pointId);
+		try {
+			String deviceId = device.getId();
+			String[] pointIds = id.split(",");
+			String[] pointNames = controlPointName.split(",");
+			String[] positionXs = positionX.split(",");
+			String[] positionYs = positionY.split(",");
+			for(int i=0;i<pointNames.length;i++){
+				PointInfo point = new PointInfo();
+				String pointId = pointIds[i].trim();
+				if(!pointId.equals("")){
+					point.setId(pointId);
+				}
+				String x = positionXs[i].trim();
+				String y = positionYs[i].trim();
+				if(!x.equals("")){
+					point.setPositionX(Integer.parseInt(x));
+				}
+				if(!y.equals("")){
+					point.setPositionY(Integer.parseInt(y));
+				}
+				point.setDeviceId(deviceId);
+				point.setControlPointName(pointNames[i].trim());
+				pointInfoService.save(point);
 			}
-			point.setDeviceId(deviceId);
-			point.setControlPointName(pointNames[i].trim());
-			pointInfoService.save(point);
+			message = "保存成功！";
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			message = "保存失败！";
+			return INPUT;
 		}
 		return SUCCESS;
+		
 	}
 	
 	/**
