@@ -34,6 +34,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<script type="text/javascript">
 
 		$(function(){
+		
 			$("#addbtn").click(function(){
 				parent.parent.parent.tipsWindown("添加话题","iframe:openAddForumIssueInfoAction.action","460","250","true","","true","no");
 			});			
@@ -116,91 +117,66 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  				});
 	  				if (l == i) {
 	  					$("#" + chkallid).attr("checked", true);
-	  				}
-	  			}
+	  				    }
+	  			     }
 	  		});
 	  	};
-		
-		
-
-	</script>
+		</script>
 
   </head>
-  
   <body>
- 
  <s:form id="form1"> 
   
 <table width="100%" border="0" cellspacing="5" cellpadding="0">
-  	
-  	
-  	
-  	
   	<tr><td valign="top"><table width="100%" border="0" cellspacing="5" cellpadding="0">
-      <tr>
+          <tr>
         	<td><input name="button" type="button" class="btn_4" id="addbtn" value="发起话题">
           		<input name="button3" type="button" class="btn_4" id="deletepointbtn" value="删除话题"></td>
-      </tr>
+          </tr>
     </table></td></tr>
-    
-    
-    
     <tr><td><table width="821" border="0" cellpadding="5" cellspacing="1" bgcolor="#d5e4fd" height="173">
-            
-            
-            <tr>
+             <tr>
                <td align="center" >  
    				<s:checkbox theme="simple" id="cbk_all" name="all"></s:checkbox>
-   			</td>
+   			   </td>
               
               <td align="center" background="../images/headerbg.jpg"><strong>话题名称</strong></td>
               <td align="center" background="../images/headerbg.jpg"><strong>参与人数</strong></td>
               <td align="center" background="../images/headerbg.jpg"><strong>发起人</strong></td>
               <td align="center" background="../images/headerbg.jpg"><strong>状态</strong></td>
             </tr>
-            
             <s:iterator value="pagination.data" status="obj">
             <tr>
             <td height="26" align="center" bgcolor="#FFFFFF" >  
-			<s:checkbox id="%{#obj.id}" name="ids" fieldValue="%{id}" value="false" theme="simple"/>
-			</td>
-           <td height="26" bgcolor="#FFFFFF"><a href="openAddForumMessageInfoAction.action" id="gotobbs">
-              <s:property value="issueName"/>&nbsp;</a>
-          </td>
+			           <s:checkbox id="%{#obj.id}" name="ids" fieldValue="%{id}" value="false" theme="simple"/>
+			  </td>
+              <td height="26" bgcolor="#FFFFFF"><a href="openAddForumMessageInfoAction.action" id="gotobbs">
+                       <s:property value="issueName"/>&nbsp;</a>
+              </td>
                <td height="26" align="center" bgcolor="#FFFFFF"><A title="点击这里可查看参与人员名单" href="bbslist_">160/160(<span class="STYLE2">满员</span>)</A></td> 
                <td height="26" align="center" bgcolor="#FFFFFF">
-          	   <s:property value="issueStatus"/>&nbsp;
-          </td>
-            <td height="26" align="center" bgcolor="#FFFFFF">
-          	   <s:property value="issueStatus"/>&nbsp;
-          </td>
+          	            <s:property value="creator"/>&nbsp;
+               </td>
+               <td height="26" align="center" bgcolor="#FFFFFF">
+          	            <s:property value="issueStatus"/>&nbsp;
+                </td>
                 <td height="26" colspan="2" align="center" bgcolor="#FFFFFF">
-          	<s:url id="edit_url" action="openModifyForumIssueInfoAction">   
+          	       <s:url id="edit_url" action="openModifyForumIssueInfoAction">   
 				<s:param name="forumIssueInfo.id" value="id"></s:param>   
-			</s:url>
-         	<a name="edit" href="javascript:void(0);" url="${edit_url}">编辑</a>  
-         	
-          </td>
-            </tr>
+			      </s:url>
+         	  <a name="edit" href="javascript:void(0);" url="${edit_url}">编辑</a>  
+         	 </td>
+             </tr>
               </s:iterator>
             <tr>
 			<td colspan="5" align="center">
 			<page:pages currentPage="pagination.currentPage" totalPages="	pagination.totalPages" totalRows="pagination.totalRows" styleClass="page" theme="text" ></page:pages> 
 		   	</td>
-		</tr>
-    
-    
-    </table></td></tr>
-   
-     
+		  </tr>
+   </table></td></tr>
 </table>
-  
-  
-  
-  
-  
 </s:form>  
-  </body>
+</body>
 </html>
   
   

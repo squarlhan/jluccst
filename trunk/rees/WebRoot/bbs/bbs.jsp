@@ -76,11 +76,11 @@
 	               	var forumIssueInfoId = $("#hid_forumIssueInfoId").val();
 	               	if( $.trim(forumIssueInfoId) == "" )
 	               	{
-	               		form1.action = "toAddforumIssueInfoAction.action";
+	               		form1.action = "toAddForumIssueInfoAction.action";
 	               	}
 	               	else
 	               	{
-		               	form1.action = "toModifyforumIssueInfoAction.action";
+		               	form1.action = "toModifyForumIssueInfoAction.action";
 	               	}
 	               	form1.submit();
 	           	});
@@ -104,7 +104,7 @@
 	</head>
 
 	<body>
-		<s:form id="form1"  action ="toAddForumIssueInfoAction.action" theme="simple" >
+		<s:form id="form1"   theme="simple" >
 		<s:hidden id="hid_forumIssueInfoId" name="forumIssueInfo.id"></s:hidden>
 		<table width="100%" border="0" cellspacing="5" cellpadding="0">
 			<tr>
@@ -142,23 +142,18 @@
 									<tr>
 										<td height="26" align="right" bgcolor="#FFFFFF">
 											<strong>话题状态：</strong>
-										</td>
+											
+                                        </td>
 										<td height="26" align="left" bgcolor="#FFFFFF">
-											<s:textfield id="txt_forumIssueInfoModel" name="forumIssueInfo.issueStatus" cssStyle="width: 250px;"></s:textfield>
+											<select name="forumIssueInfo.issueStatus"   style="width:110px">
+											   <option  value="1">进行中</option>
+                                                <option  value="0">已结束</option>
+                                                
+                                               </select>
 										</td>
-									</tr>
-									<tr>
-										<td height="26" align="right" bgcolor="#FFFFFF">
-											<strong>话题创建时间：</strong>
-										</td>
-										<td height="26" align="left" bgcolor="#FFFFFF">
-											<s:textfield id="txt_forumIssueInfoFactory" name="forumIssueInfo.createTime" cssStyle="width: 250px;"></s:textfield>
-										</td>
-									</tr>
-									
 									<tr>
 										<td height="26" colspan="2" align="center" bgcolor="#FFFFFF">
-											<input name="button" type="submit" class="btn_2_3" id="addBtn" value="确定">
+											<input name="button" type="button" class="btn_2_3" id="addBtn" value="确定">
 											&nbsp;&nbsp;
 											<input name="close" type="button" class="btn_2_3" id="closeBtn" value="关闭">
 										</td>
