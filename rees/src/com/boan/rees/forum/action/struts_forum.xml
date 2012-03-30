@@ -23,13 +23,13 @@
     	  <!-- 删除设备 -->
         <action name="deleteForumIssueInfoAction" class="forumIssueInfoAction" method="deleteForumIssueInfo"/>
         <!-- 打开修改话题菜单 -->
-    	<action name="openModifyforumIssueInfoAction" class="forumIssueInfoAction" method="openModifyforumIssueInfo">
+    	<action name="openModifyForumIssueInfoAction" class="forumIssueInfoAction" method="openModifyforumIssueInfo">
     		<result name="success">/bbs/bbs.jsp</result>
     		<result name="input">/bbs/bbs.jsp</result>
     	</action>
     	
         <!-- 修改话题菜单 -->
-    	<action name="toModifyforumIssueInfoAction" class="forumIssueInfoAction" method="toModifyforumIssueInfo">
+    	<action name="toModifyForumIssueInfoAction" class="forumIssueInfoAction" method="toModifyforumIssueInfo">
     		<result name="success">/bbs/bbs.jsp</result>
     		<result name="input">/bbs/bbs.jsp</result>
     	</action>
@@ -48,7 +48,7 @@
     		<result name="input">bbs/bbsinfo.jsp</result>
     	</action>
     	<!-- 显示列表页 -->
-    	<action name="openforumMessageInfoAction" class="forumMessageInfoAction" method="openForumMessageInfo">
+    	<action name="openForumMessageInfoAction" class="forumMessageInfoAction" method="openForumMessageInfo">
     		<result name="success">bbs/bbslist.jsp</result>
     		<result name="input">bbs/bbslist.jsp</result>
     		</action>
