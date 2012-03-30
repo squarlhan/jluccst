@@ -130,8 +130,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <table width="100%" border="0" cellspacing="5" cellpadding="0">
   	<tr><td valign="top"><table width="100%" border="0" cellspacing="5" cellpadding="0">
           <tr>
-        	<td><input name="button" type="button" class="btn_4" id="addbtn" value="发起话题">
-          		<input name="button3" type="button" class="btn_4" id="deletepointbtn" value="删除话题"></td>
+        	<td><input name="addbtn" type="button" class="btn_4" id="addbtn" value="发起话题">
+          		<input name="deletepointbtn" type="button" class="btn_4" id="deletepointbtn" value="删除话题"></td>
           </tr>
     </table></td></tr>
     <tr><td><table width="821" border="0" cellpadding="5" cellspacing="1" bgcolor="#d5e4fd" height="173">
