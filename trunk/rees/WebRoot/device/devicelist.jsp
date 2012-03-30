@@ -84,7 +84,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  		$('a[name="edit_point"]').each(function(){
 	  			$(this).click(function(){
 	  				var url = $(this).attr("url");
-	  				parent.parent.parent.tipsWindown("监测点信息","iframe:"+url,"500","350","true","","true","no");
+	  				parent.parent.parent.tipsWindown("监测点信息","iframe:"+url,"520","350","true","","true","no");
 	  			});
 	  		});
 	  		
@@ -104,7 +104,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  		$("#sortbtn").click(function(){
 	  			parent.parent.parent.tipsWindown("设备排序","iframe:openSortDeviceAction.action","350","420","true","","true","no");
 	  		});
-	  		
 		});
 		
 	//-->
@@ -132,39 +131,39 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
    				<s:checkbox theme="simple" id="cbk_all" name="all"></s:checkbox>
    			</td>
    
-          <td width="16%" align="center" background="../images/headerbg.jpg"><strong>设备编号</strong></td>
-          <td width="16%" align="center" background="../images/headerbg.jpg"><strong>设备类型</strong></td>
-		  <td width="16%" align="center" background="../images/headerbg.jpg"><strong>设备名称</strong></td>
-		  <td width="16%" align="center" background="../images/headerbg.jpg"><strong>设备型号</strong></td>
-		  <td width="14%" align="center" background="../images/headerbg.jpg"><strong>设备厂商</strong></td>
-		  <td width="14%" align="center" background="../images/headerbg.jpg"><strong>监控点数量</strong></td>
-		  <td width="14%" align="center" background="../images/headerbg.jpg"><strong>监控点</strong></td>
-		  <td width="14%" align="center" background="../images/headerbg.jpg"><strong>操作</strong></td>
+		  <td width="15%" align="center" background="../images/headerbg.jpg"><strong>设备名称</strong></td>
+          <td width="20%" align="center" background="../images/headerbg.jpg"><strong>设备编号</strong></td>
+          <td width="10%" align="center" background="../images/headerbg.jpg"><strong>设备类型</strong></td>
+		  <td width="20%" align="center" background="../images/headerbg.jpg"><strong>设备型号</strong></td>
+		  <td width="20%" align="center" background="../images/headerbg.jpg"><strong>设备厂商</strong></td>
+		  <td width="8%" align="center" background="../images/headerbg.jpg"><strong>监控点</strong></td>
+		  <td width="10%" align="center" background="../images/headerbg.jpg"><strong>操作</strong></td>
         </tr>
         <s:iterator value="pagination.data" status="obj">
         <tr>
-        <td height="26" align="center" bgcolor="#FFFFFF" >  
+        	<td height="26" align="center" bgcolor="#FFFFFF" >  
 				<s:checkbox id="%{id}" name="ids" fieldValue="%{id}" value="false" theme="simple"/>
 			</td>
-           <td height="26" align="center" bgcolor="#FFFFFF">
+			<td height="26" align="center" bgcolor="#FFFFFF" nowrap>
+          	   <s:property value="deviceName"/>&nbsp;
+           </td>
+           <td height="26" align="center" bgcolor="#FFFFFF" nowrap>
               <s:property value="deviceNum"/>&nbsp;
           </td>
-          <td height="26" align="center" bgcolor="#FFFFFF">
-          	   <s:property value="deviceType"/>&nbsp;
+          <td height="26" align="center" bgcolor="#FFFFFF" nowrap>
+          	<s:iterator value="deviceTypeMap" status="type">
+          		<s:if test="deviceType==key">
+          			<s:property value="value"/>&nbsp;
+          		</s:if>
+          	</s:iterator>
           </td>
-           <td height="26" align="center" bgcolor="#FFFFFF">
-          	   <s:property value="deviceName"/>&nbsp;
-          </td> 
-          <td height="26" align="center" bgcolor="#FFFFFF">
+            
+          <td height="26" align="center" bgcolor="#FFFFFF" nowrap>
           	   <s:property value="deviceModel"/>&nbsp;
           </td>
-           <td height="26" align="center" bgcolor="#FFFFFF">
+           <td height="26" align="center" bgcolor="#FFFFFF" nowrap>
           	     <s:property value="deviceFactory"/>&nbsp;
           </td> 
-          <td height="26" align="center" bgcolor="#FFFFFF">
-          	   <s:property value="controlpoint"/>&nbsp;
-          </td> 
-          
           <td height="26" align="center" bgcolor="#FFFFFF">
           		<s:url id="edit_point_url" action="openAddPointAction">   
 					<s:param name="device.id" value="id"></s:param>   
@@ -187,7 +186,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         </s:iterator>
         
         <tr>
-          <td height="26" colspan="10" align="center" bgcolor="#FFFFFF">
+          <td height="26" colspan="9" align="center" bgcolor="#FFFFFF">
 			<page:pages currentPage="pagination.currentPage" totalPages="pagination.totalPages" totalRows="pagination.totalRows" styleClass="page" theme="text" ></page:pages> 
 		   
 		  </td>

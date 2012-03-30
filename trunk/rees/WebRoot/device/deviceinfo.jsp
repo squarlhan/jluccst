@@ -96,7 +96,8 @@
 		  			var message = $("#lb_message").html();
 					if(message!=null && $.trim(message)!="" ){
 						//刷新
-						//parent.window.location.href=parent.window.location.href;
+						//parent.$("iframe[name='mainFrame']").attr("src","datamanage/devicemanage.jsp");
+						alert("先手动刷新列表吧！！！");
 					}
 					parent.$("#windown-close").click();
 		  		});
@@ -152,6 +153,12 @@
 		<s:label id="lb_message" name="message" cssStyle="display:none"></s:label>
 		<s:hidden id="hid_deviceId" name="device.id"></s:hidden>
 		<s:hidden id="hid_deviceFilePath" name="device.filePath"></s:hidden>
+		<s:hidden id="hid_controlpoint" name="device.controlpoint"></s:hidden>
+		<s:hidden id="hid_sortIndex" name="device.sortIndex"></s:hidden>
+		<s:hidden id="hid_creatTime" name="device.creatTime"></s:hidden>
+		<s:hidden id="hid_isDelete" name="device.isDelete"></s:hidden>
+		<s:hidden id="hid_deptId" name="device.deptId"></s:hidden>
+		<s:hidden id="hid_groupId" name="device.groupId"></s:hidden>
 		<table width="100%" border="0" cellspacing="5" cellpadding="0">
 			<tr>
 				<td>
@@ -201,6 +208,7 @@
 											<s:textfield id="txt_deviceFactory" name="device.deviceFactory" cssStyle="width: 250px;"></s:textfield>
 										</td>
 									</tr>
+									<!-- 
 									<tr>
 										<td height="26" align="right" bgcolor="#FFFFFF">
 											<strong>检测点数量：</strong>
@@ -209,7 +217,7 @@
 											<s:textfield id="txt_controlpoint" name="device.controlpoint" cssStyle="width: 250px;"></s:textfield>
 										</td>
 									</tr>
-									
+									-->
 									<s:if test='device.filePath!=null && device.filePath!=""'>
 									<tr>
 										<td height="26" align="right" bgcolor="#FFFFFF">

@@ -27,7 +27,7 @@
 	<head>
 		<base href="<%=basePath%>">
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<title>设备管理维护</title>
+		<title>监测点参数维护</title>
 		<j:scriptlink  css="true" jmessagebox="true" jquery="true" tipswindow="true" validate="true" jfunction="true"/>
 		<script type="text/javascript">
 	
@@ -36,12 +36,12 @@
 	  	 */
 		var _device_submit = {
 			rules: {
-				"controlPointName":{required:true,maxlength:10}
+				"name":{required:true,maxlength:10}
 			},messages:{
-				"controlPointName":
+				"name":
 				{
-					required:"检测点1名称为必填项!",
-					maxlength:"检测点1名称最多输入10个字符!"
+					required:"参数1名称为必填项!",
+					maxlength:"参数1名称最多输入10个字符!"
 				}
 			}
 		};
@@ -69,15 +69,15 @@
 					return false;
 				}
                	var flag = true;
-               	$("input[name='controlPointName']").each(function(i){
+               	$("input[name='name']").each(function(i){
                		if($(this).val()==""){
-               			alert("检测点"+(i+1)+"名称为必填项!");
+               			alert("参数"+(i+1)+"名称为必填项!");
                			$(this).focus();
                			flag = false;
                			return false;
                		}
                		if($.trim($(this).val()).length>10){
-               			alert("检测点"+(i+1)+"名称最多输入10个字符!");
+               			alert("参数"+(i+1)+"名称最多输入10个字符!");
                			$(this).focus();
                			flag = false;
                			return false;
@@ -92,15 +92,13 @@
 			 * 动态添加检测点
 			 */
 			$("#addOtherBtn").click(function(){
-				var row = $("#table1 tr:last").prev().clone();
-				var i = $("#table1 tr").length-1;
-				row.find("strong").replaceWith("<strong>检测点"+i+"名称：</strong>");
+				var row = $("#table1 tr:first").clone();
+				var i = $("#table1 tr").length;
+				row.find("strong").replaceWith("<strong>参数"+i+"名称：</strong>");
 				$("#txt_pointNum").val(i);
 				
 				var newBtn ='<img id="delOtherBtn" name="delOtherBtn" onclick="$.fn.dynamicRemove($(this))" src="<%=basePath%>/images/symbol-remove.png" style="height:18px;width:20px;cursor:pointer" title="删除"></img>';
 				row.find("img[id='firstDelBtn']").remove();
-				row.find("img[name='setPositionBtn']").remove();
-				row.find("img[name='setParamBtn']").remove();
 				row.find("img").replaceWith(newBtn); 
 				row.find("input[type='hidden']").val("");
 				row.find("input[type='text']").val("");
@@ -123,20 +121,14 @@
 			if(message!=null && $.trim(message)!="" ){
 				alert(message);
 			}
-			var hiddenIdObj=$("#addOtherBtn").parent().children("input:first-child");
-			var id=hiddenIdObj.val();
-			if(id==""){
-				$("#txt_pointNum").val(0);
-			}
 		}
 		
 		/**
 		 * 删除原有非第一个检测点并移除页面元素
 		 */
 		$.fn.dynamicRemoveOther = function(id,obj){
-			if(window.confirm("您确定要删除此检测点吗？")){
-				$("#txt_pointNum").val($("#txt_pointNum").val()-1);
-				$.post("toDeletePointAction.action", {id:id}, function(data){});
+			if(window.confirm("您确定要删除此参数吗？")){
+				$.post("toDeletePointParamAction.action", {pointId:id}, function(data){});
 				obj.parent().parent().remove();
 				$.fn.columnRename();
 			}
@@ -146,13 +138,12 @@
 		 * 删除原有的第一个检测点并移除页面元素
 		 */
 		$.fn.dynamicRemoveFirst = function(obj){
-			if(window.confirm("您确定要删除此检测点吗？")){
+			if(window.confirm("您确定要删除此参数吗？")){
 				var hiddenIdObj=$("#addOtherBtn").parent().children("input:first-child");
 				var id=hiddenIdObj.val();
 				$("#addOtherBtn").parent().children("input[type='hidden']").val("");
-				$("#controlPointName").val("");
-				$.post("toDeletePointAction.action", {id:id}, function(data){});
-				$("#txt_pointNum").val($("#txt_pointNum").val()-1);
+				$("#name").val("");
+				$.post("toDeletePointParamAction.action", {pointId:id}, function(data){});
 				obj.remove();
 				$.fn.columnRename();
 			}
@@ -162,44 +153,27 @@
 		 * 动态添加的元素动态移除
 		 */
 		$.fn.dynamicRemove = function(obj){
-			if(window.confirm("您确定要删除此检测点吗？")){
-				$("#txt_pointNum").val($("#txt_pointNum").val()-1);
+			if(window.confirm("您确定要删除此参数吗？")){
 				obj.parent().parent().remove();
 				$.fn.columnRename();
 			}
 		}
-		
 		/**
 		 * form列头重命名
 		 */
 		$.fn.columnRename = function(){
 			$("#table1 tr").each(function(i){
-				if(i>0){
-					$(this).find("strong").replaceWith("<strong>检测点"+i+"名称：</strong>");
-				}
+				$(this).find("strong").replaceWith("<strong>参数"+(i+1)+"名称：</strong>");
 			});
-		}
-		/**
-		 * 检测点定位
-		 */
-		$.fn.setPosition =function(pointId,obj){
-			alert("定位检测点: 检测点id="+pointId);
-		}
-		
-		/**
-		 * 设置检测点参数
-		 */
-		$.fn.setParam =function(pointId,obj){
-			var deviceId = $("#hid_deviceId").val();
-			tipsWindown("参数信息","iframe:openAddPointParamAction.action?device.id="+deviceId+"&pointId="+pointId,"430","260","true","","true","no");
 		}
 		</script>
 	</head>
 
 	<body>
-		<s:form id="form1" name="form1" method="post" theme="simple" action="toAddPointAction">
+		<s:form id="form1" name="form1" method="post" theme="simple" action="toAddPointParamAction">
 		<s:label id="lb_message" name="message" cssStyle="display:none"></s:label>
 		<s:hidden id="hid_deviceId" name="device.id"></s:hidden>
+		<s:hidden id="hid_pointId" name="pointId"></s:hidden>
 		<table width="100%" border="0" cellspacing="5" cellpadding="0">
 			<tr>
 				<td>
@@ -208,39 +182,21 @@
 						<tr>
 							<td style="height: 36px;">
 								<table id="table1" width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#d5e4fd">
-
-									<tr>
-										<td height="26" align="right" bgcolor="#FFFFFF">
-											<strong>监测点数量：</strong>
-										</td>
-										<td height="26" align="left" bgcolor="#FFFFFF">
-											</font><s:textfield id="txt_pointNum" value="%{pointInfoList.size}" cssStyle="width: 230px;color:red;" maxlength="10" readonly="true"></s:textfield>
-										</td>
-									</tr>
-									
-									<s:iterator value="pointInfoList" status="pointInfo" step="1">
+									<s:iterator value="pointParamInfoList" status="paramInfo" step="1">
 									<tr>
 										<td height="26" align="right" bgcolor="#FFFFFF" nowrap>
-											<strong>检测点<s:property value="#pointInfo.index+1"/>名称：</strong>
+											<strong>参数<s:property value="#paramInfo.index+1"/>名称：</strong>
 										</td>
 										<td height="26" align="left" bgcolor="#FFFFFF" nowrap>
 											<s:hidden name="id"></s:hidden>
-											<s:hidden name="positionX"></s:hidden>
-											<s:hidden name="positionY"></s:hidden>
-											<s:textfield id="controlPointName" name="controlPointName" cssStyle="width: 230px;" maxlength="15"></s:textfield><font color="red">*</font>
-											<s:if test="#pointInfo.index+1==1">
-												<s:if test='id!=null'>
-													<img name="setPositionBtn" src="<%=basePath%>/images/pin_blue.png" style="height:18px;width:20px;cursor:pointer" title="定位" onclick="$.fn.setPosition('${id}',$(this))"></img>
-													<img name="setParamBtn" src="<%=basePath%>/images/item.png" style="height:18px;width:20px;cursor:pointer" title="参数" onclick="$.fn.setParam('${id}',$(this))"></img>
-												</s:if>
+											<s:textfield id="name" name="name" cssStyle="width: 200px;" maxlength="15"></s:textfield><font color="red">*</font>
+											<s:if test="#paramInfo.index+1==1">
 												<img id="addOtherBtn"  name="addOtherBtn" src="<%=basePath%>/images/symbol-add.png" style="height:18px;width:20px;cursor:pointer" title="添加"></img>
 												<s:if test='id!=null'>
 													<img id="firstDelBtn" name="firstDelBtn" onclick="$.fn.dynamicRemoveFirst($(this))" src="<%=basePath%>/images/symbol-remove.png" style="height:18px;width:20px;cursor:pointer" title="删除"></img>
 												</s:if>
 											</s:if>
 											<s:else>
-												<img name="setPositionBtn" src="<%=basePath%>/images/pin_blue.png" style="height:18px;width:20px;cursor:pointer" title="定位" onclick="$.fn.setPosition('${id}',$(this))"></img>
-												<img name="setParamBtn" src="<%=basePath%>/images/item.png" style="height:18px;width:20px;cursor:pointer" title="参数" onclick="$.fn.setParam('${id}',$(this))"></img>
 												<img name="delOtherBtn" onclick="$.fn.dynamicRemoveOther('${id}',$(this));" src="<%=basePath%>/images/symbol-remove.png" style="height:18px;width:20px;cursor:pointer" title="删除"></img>
 											</s:else>
 										</td>
