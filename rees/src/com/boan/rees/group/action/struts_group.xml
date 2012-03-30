@@ -30,7 +30,7 @@
           <result name="input">/systemmanage/companyinfo.jsp</result>
         </action>
     <!-- 删除 -->
-        <action name="deleteCompanyAction" class="companyfoAction" method="deleteCompany"/>
+        <action name="deleteCompanyAction" class="companyAction" method="deleteCompany"/>
     </package>	
     
     <!-- 工厂Action -->
