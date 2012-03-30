@@ -29,7 +29,7 @@ public class Pagination<T> {
 	/**
 	 * 每页要显示的记录数
 	 */
-	private int pageSize = 2;
+	private int pageSize = 10;
 
 	/**
 	 * 总记录数
