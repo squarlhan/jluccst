@@ -10,6 +10,8 @@
 package com.boan.rees.forum.model;
 
 import java.io.Serializable;
+import java.util.Calendar;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -61,7 +63,7 @@ public class ForumIssueInfo implements Serializable {
 	 * 议题创建时间     
 	 */
 	@Column(name = "CREATE_TIME")
-	private String 	createTime;
+	private Calendar createTime;
 	public String getId() {
 		return id;
 	}
@@ -92,12 +94,12 @@ public class ForumIssueInfo implements Serializable {
 	public void setCreator(String creator) {
 		this.creator = creator;
 	}
-	public String getCreateTIME() {
+	
+	public Calendar getCreateTime() {
 		return createTime;
 	}
-	public void setCreateTIME(String createTIME) {
-		this.createTime = createTIME;
-	
+	public void setCreateTime(Calendar createTime) {
+		this.createTime = createTime;
 	}
 	public void update(ForumIssueInfo forumIssueInfo) {
 		
