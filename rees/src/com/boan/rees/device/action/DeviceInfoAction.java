@@ -524,7 +524,6 @@ public class DeviceInfoAction extends BaseActionSupport{
 		if(pointInfoList.size()==0){
 			pointInfoList.add(new PointInfo());
 		}
-		System.out.println(message);
 		return SUCCESS;
 	}
 	
@@ -585,7 +584,6 @@ public class DeviceInfoAction extends BaseActionSupport{
 		if(pointParamInfoList.size()==0){
 			pointParamInfoList.add(new PointParamInfo());
 		}
-		System.out.println(message);
 		return SUCCESS;
 	}
 	
