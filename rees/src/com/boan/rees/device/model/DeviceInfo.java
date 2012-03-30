@@ -72,7 +72,7 @@ public class DeviceInfo implements Serializable {
 	 *监控点数量
 	 */
 	@Column(name = "CONTROL_POINT")
-	private Integer controlpoint;
+	private Integer controlPoint;
 	
 	/**
 	 * 排序号
@@ -141,11 +141,12 @@ public class DeviceInfo implements Serializable {
 	public void setFilePath(String filePath) {
 		this.filePath = filePath;
 	}
-	public Integer getControlpoint() {
-		return controlpoint;
+
+	public Integer getControlPoint() {
+		return controlPoint;
 	}
-	public void setControlpoint(Integer controlpoint) {
-		this.controlpoint = controlpoint;
+	public void setControlPoint(Integer controlPoint) {
+		this.controlPoint = controlPoint;
 	}
 	public Integer getSortIndex() {
 		return sortIndex;
