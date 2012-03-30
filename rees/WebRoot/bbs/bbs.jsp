@@ -37,11 +37,12 @@
 				rules: {
 					//"forumIssueInfo.forumIssueInfoNum":{},
 					//"forumIssueInfo.forumIssueInfoType":{},
-					"forumIssueInfo.forumIssueInfoName":{required:true},
+					"forumIssueInfo.issueName":{required:true},
+					"forumIssueInfo.creator":{required:true}
 					//"forumIssueInfo.forumIssueInfoModel":{},
 					//"forumIssueInfo.forumIssueInfoFactory":{},
-					"forumIssueInfo.controlpoint":{digits:true},
-					"forumIssueInfo.filePath":{url:true}
+					//"forumIssueInfo.controlpoint":{digits:true}
+				
 				}
 			};
 			/**
@@ -120,7 +121,7 @@
 											<strong>话题名称：</strong>
 										</td>
 										<td height="26" align="left" bgcolor="#FFFFFF">
-											<s:textfield id="txt_forumIssueInfoNum" name="forumIssueInfo.issueName" cssStyle="width: 250px;"></s:textfield>
+											<s:textfield id="forumIssueInfo.issueName" name="forumIssueInfo.issueName" cssStyle="width: 250px;"></s:textfield>
 										</td>
 									</tr>
 									<tr>
@@ -128,7 +129,7 @@
 											<strong>话题内容：</strong>
 										</td>
 										<td height="26" align="left" bgcolor="#FFFFFF">
-											<s:textfield id="txt_forumIssueInfoType" name="forumIssueInfo.issueConteit" cssStyle="width: 250px;"></s:textfield>
+											<s:textfield id="forumIssueInfo.issueConteit" name="forumIssueInfo.issueConteit" cssStyle="width: 250px;"></s:textfield>
 										</td>
 									</tr>
 									<tr>
@@ -136,7 +137,7 @@
 											<strong>话题创建人：</strong>
 										</td>
 										<td height="26" align="left" bgcolor="#FFFFFF">
-											<s:textfield id="txt_forumIssueInfoName" name="forumIssueInfo.creator" cssStyle="width: 250px;"></s:textfield>
+											<s:textfield id="forumIssueInfo.creator" name="forumIssueInfo.creator" cssStyle="width: 250px;"></s:textfield>
 										</td>
 									</tr>
 									<tr>
@@ -153,9 +154,9 @@
 										</td>
 									<tr>
 										<td height="26" colspan="2" align="center" bgcolor="#FFFFFF">
-											<input name="button" type="button" class="btn_2_3" id="addBtn" value="确定">
+											<input name="addBtn" type="button" class="btn_2_3" id="addBtn" value="确定">
 											&nbsp;&nbsp;
-											<input name="close" type="button" class="btn_2_3" id="closeBtn" value="关闭">
+											<input name="closeBtn" type="button" class="btn_2_3" id="closeBtn" value="关闭">
 										</td>
 									</tr>
 								</table>
