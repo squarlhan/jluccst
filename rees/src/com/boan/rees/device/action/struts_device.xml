@@ -103,9 +103,30 @@
     	</action>
     	<!-- 删除设备检测点 -->
     	<action name="toDeletePointAction" class="deviceInfoAction" method="toDeletePoint"/>
+    	
+    	<!-- 打开设备检测点参数维护页 -->
+    	<action name="openAddPointParamAction" class="deviceInfoAction" method="openAddPointParam">
+    		<result name="success">/device/devicepointparam.jsp</result>
+    		<result name="input">/device/devicepointparam.jsp</result>
+    	</action>
+    	
+    	<!-- 添加设备检测点参数 -->
+    	<action name="toAddPointParamAction" class="deviceInfoAction" method="toAddPointParam">
+    		<result name="success" type="chain">
+             	<param name="actionName">openAddPointParamAction</param>
+             	<param name="namespace">/</param>
+             	<param name="device.id">${device.getId()}</param>
+             	<param name="pointId">${pointId}</param>
+            </result>
+    		<result name="input" type="chain">
+				<param name="actionName">openAddPointParamAction</param>
+             	<param name="namespace">/</param>
+             	<param name="device.id">${device.getId()}</param>
+             	<param name="pointId">${pointId}</param>
+			</result>
+    	</action>
+    	
+    	<!-- 删除设备检测点参数  -->
+    	<action name="toDeletePointParamAction" class="deviceInfoAction" method="toDeletePointParam"/>
 	</package>
-	
-	
-    
-	
 </struts>

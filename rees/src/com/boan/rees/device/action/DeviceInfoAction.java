@@ -30,8 +30,10 @@ import org.springframework.stereotype.Controller;
 
 import com.boan.rees.device.model.DeviceInfo;
 import com.boan.rees.device.model.PointInfo;
+import com.boan.rees.device.model.PointParamInfo;
 import com.boan.rees.device.service.IDeviceInfoService;
 import com.boan.rees.device.service.IPointInfoService;
+import com.boan.rees.device.service.IPointParamInfoService;
 import com.boan.rees.utils.action.BaseActionSupport;
 import com.boan.rees.utils.page.Pagination;
 /**
@@ -108,7 +110,12 @@ public class DeviceInfoAction extends BaseActionSupport{
 	private List<PointInfo> pointInfoList;
 	
 	/**
-	 * 设备检测点Id
+	 * 操作提示
+	 */
+	private String message;
+	
+	/**
+	 * 用于传递设备检测点Id和传递监测点参数Id
 	 */
 	private String id;
 	
@@ -128,9 +135,26 @@ public class DeviceInfoAction extends BaseActionSupport{
 	private String controlPointName;
 	
 	/**
-	 * 操作提示
+	 * 设备检测点参数数组
 	 */
-	private String message;
+	private List<PointParamInfo> pointParamInfoList;
+	
+	/**
+	 * 检测点参数名称
+	 */
+	private String name;
+	
+	/**
+	 * 监测点Id
+	 */
+	private String pointId;
+	/**
+	 * 监测点接口类
+	 */
+	@Autowired
+	@Qualifier("pointParamInfoService")
+	private IPointParamInfoService pointParamInfoService; 
+	
 	/**
 	 * 监测点接口类
 	 */
@@ -211,6 +235,14 @@ public class DeviceInfoAction extends BaseActionSupport{
 		return downloadFileName;
 	}
 	
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+	
 	public List<PointInfo> getPointInfoList() {
 		return pointInfoList;
 	}
@@ -251,12 +283,28 @@ public class DeviceInfoAction extends BaseActionSupport{
 		this.positionY = positionY;
 	}
 
-	public String getMessage() {
-		return message;
+	public List<PointParamInfo> getPointParamInfoList() {
+		return pointParamInfoList;
 	}
 
-	public void setMessage(String message) {
-		this.message = message;
+	public void setPointParamInfoList(List<PointParamInfo> pointParamInfoList) {
+		this.pointParamInfoList = pointParamInfoList;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getPointId() {
+		return pointId;
+	}
+
+	public void setPointId(String pointId) {
+		this.pointId = pointId;
 	}
 
 	//*************************************************************************************
@@ -454,7 +502,15 @@ public class DeviceInfoAction extends BaseActionSupport{
 	 * @return
 	 */
 	public String toSortDevice(){
-		service.sortDeviceInfo(ids);
+		try{
+			service.sortDeviceInfo(ids);
+			message = "保存成功！";
+			deviceInfoList = service.findAllDeviceInfo();
+		}catch(Exception e){
+			e.printStackTrace();
+			message = "保存失败！";
+			return INPUT;
+		}
 		return SUCCESS;
 	}
 	
@@ -509,7 +565,6 @@ public class DeviceInfoAction extends BaseActionSupport{
 			return INPUT;
 		}
 		return SUCCESS;
-		
 	}
 	
 	/**
@@ -518,6 +573,58 @@ public class DeviceInfoAction extends BaseActionSupport{
 	 */
 	public String toDeletePoint(){
 		pointInfoService.deletePointInfo(id);
+		return NONE;
+	}
+	
+	/**
+	 * 打开设备监测点参数页面
+	 * @return
+	 */
+	public String openAddPointParam(){
+		pointParamInfoList =  pointParamInfoService.findPointParamInfoByPointId(pointId);
+		if(pointParamInfoList.size()==0){
+			pointParamInfoList.add(new PointParamInfo());
+		}
+		System.out.println(message);
+		return SUCCESS;
+	}
+	
+	/**
+	 * 添加设备监测点
+	 * @return
+	 */
+	public String toAddPointParam(){
+		try {
+			String deviceId = device.getId();
+			String[] paramNames = name.split(",");
+			String[] paramIds = id.split(",");
+			for(int i=0;i<paramNames.length;i++){
+				PointParamInfo paramInfo = new PointParamInfo();
+				String paramId = paramIds[i].trim();
+				if(!paramId.equals("")){
+					paramInfo.setId(paramId);
+				}
+				paramInfo.setName(paramNames[i].trim());
+				paramInfo.setDeviceId(deviceId);
+				paramInfo.setPointId(pointId);
+				pointParamInfoService.save(paramInfo);
+			}
+			message = "保存成功！";
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			message = "保存失败！";
+			return INPUT;
+		}
+		return SUCCESS;
+	}
+	
+	/**
+	 * 删除设备监控点
+	 * @return
+	 */
+	public String toDeletePointParam(){
+		pointParamInfoService.delete(pointId);
 		return NONE;
 	}
 }
