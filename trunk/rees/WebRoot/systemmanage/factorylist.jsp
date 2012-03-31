@@ -164,7 +164,8 @@
         <tr>
         <td height="26" align="center" bgcolor="#FFFFFF" >  
 				<s:checkbox id="%{#obj.id}" name="ids" fieldValue="%{id}" value="false" theme="simple"/>
-			</td>			
+			</td>	
+			  <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="id"/></td>		
               <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="factoryName"/></td>
               <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="phone"/></td>
               <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="pricipal"/></td>
