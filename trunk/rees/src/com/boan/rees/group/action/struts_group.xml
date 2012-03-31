@@ -82,12 +82,12 @@
     	     <result name="input">/systemmanage/workshoplist.jsp</result>
     	</action>
      <!-- 打开添加页 -->
-    	<action name="openAddWorkshop" class="workshopAction" method="openAddWorkshop">
+    	<action name="openAddWorkshopAction" class="workshopAction" method="openAddWorkshop">
     	     <result name="success">/systemmanage/workshopinfo.jsp</result>
     	      <result name="input">/systemmanage/workshopinfo.jsp</result>
     	</action>
     	<!-- 用于添加一个车间信息 -->
-    	<action name="toAddWorkshop" class="workshopAction" method="toAddWorkshopAction">
+    	<action name="toAddWorkshopAction" class="workshopAction" method="toAddWorkshop">
     	     <result name="success">/systemmanage/workshopinfo.jsp</result>
     	     <result name="input">/systemmanage/workshopinfo.jsp</result>
     	</action>
