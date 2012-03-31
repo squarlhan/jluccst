@@ -76,7 +76,33 @@
     
     <!-- 车间Action -->
     <package name="group_workshop" extends="struts-default" namespace="/">
-    	
+    <!-- 用于分页显示 -->
+    	<action name="openWorkshopAction" class="workshopAction" method="openWorkshop">
+    	     <result name="success">/systemmanage/workshoplist.jsp</result>
+    	     <result name="input">/systemmanage/workshoplist.jsp</result>
+    	</action>
+     <!-- 打开添加页 -->
+    	<action name="openAddWorkshop" class="workshopAction" method="openAddWorkshop">
+    	     <result name="success">/systemmanage/workshopinfo.jsp</result>
+    	      <result name="input">/systemmanage/workshopinfo.jsp</result>
+    	</action>
+    	<!-- 用于添加一个车间信息 -->
+    	<action name="toAddWorkshop" class="workshopAction" method="toAddWorkshopAction">
+    	     <result name="success">/systemmanage/workshopinfo.jsp</result>
+    	     <result name="input">/systemmanage/workshopinfo.jsp</result>
+    	</action>
+    	<!-- 用于打开修改车间信息页面 -->
+    	<action name="openModifyWorkshopAction" class="workshopAction" method="openModifyWorkshop">
+    	     <result name="success">/systemmanage/workshopinfo.jsp</result>
+    	     <result name="input">/systemmange/workshopinfo.jsp</result>
+    	</action>
+    	<!-- 用于修改车间信息 -->
+    	<action name="toModifyWorkshopAction" class="workshopAction" method="toModifyWorkshop">
+    	     <result name="success">/systemmanage/workshopinfo.jsp</result>
+    	     <result name="input">/systemmanage/workshopinfo.jsp</result>
+    	</action>
+    	<!-- 删除车间 -->
+    	<action name="deleteWorkshopAction" class="workshopAction" method="deleteWorkshop"></action>
     </package>	
     
     <package name="group_user" extends="struts-default" namespace="/">
