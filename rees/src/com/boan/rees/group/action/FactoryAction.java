@@ -25,7 +25,19 @@ public class FactoryAction extends BaseActionSupport{
 	 * 页面对象
 	 */
 	private Factory factory=null;
+	/**
+	 * 所选对象的id
+	 */
+	private String[] ids = null;
 	//**************get and set method*********************************
+
+	public String[] getIds() {
+		return ids;
+	}
+
+	public void setIds(String[] ids) {
+		this.ids = ids;
+	}
 
 	public Pagination<Factory> getPagination() {
 		return pagination;
@@ -80,5 +92,12 @@ public class FactoryAction extends BaseActionSupport{
 	public String toModifyFactory(){
 		service.update(factory);
 		return SUCCESS;
+	}
+	/**
+	 * 删除
+	 */
+	public String deleteFactory(){
+		service.deleteGroupFactory(ids);
+		return NONE;
 	}
 }

@@ -75,14 +75,8 @@ public class WorkshopAction extends BaseActionSupport{
 	 * @return
 	 */
 	public String deleteWorkshop(){
-		if(ids!=null&&ids.length>0)
-		{
-			for(int i=0;i<ids.length;i++)
-			{
-				service.deleteWorkshopById(ids[i]);
-			}
-		}
-		return SUCCESS;
+		service.deleteGroupWorkshop(ids);
+		return NONE;
 	}
 	//**************get and set method*********************************
 	public Pagination<Workshop> getPagination() {
