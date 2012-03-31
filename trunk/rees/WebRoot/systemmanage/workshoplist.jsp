@@ -62,7 +62,7 @@
 	  		});
 	  		
 	  		/**
-	  		 * 删除单个设备信息
+	  		 * 删除单个车间信息
 	  		 */
 	  		$('a[name="delete"]').each(function(){
 	  			$(this).click(function(){
@@ -74,7 +74,7 @@
 	  		});
 	  		
 	  		/**
-	  		 * 删除所选设备信息
+	  		 * 删除所选车间信息
 	  		 */
 	  		$("#deletepointbtn").click(function(){
   				var url = "deleteWorkshopAction.action";
