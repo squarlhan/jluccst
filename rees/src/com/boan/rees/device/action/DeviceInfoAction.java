@@ -71,17 +71,7 @@ public class DeviceInfoAction extends BaseActionSupport{
 	@Autowired
 	@Qualifier("deviceTypeService")
 	private IDeviceTypeService deviceTypeService;
-	
-	/**
-	 * 下拉设备列表事件传递过来的设备类型Id
-	 */
-	private String deviceTypeId;
-	
-	/**
-	 * 设备类型实体
-	 */
-	private DeviceType deviceTypeInfo;
-	
+
 	/**
 	 * 页面对象
 	 */
@@ -189,22 +179,6 @@ public class DeviceInfoAction extends BaseActionSupport{
 
 	public void setIds(String[] ids) {
 		this.ids = ids;
-	}
-
-	public String getDeviceTypeId() {
-		return deviceTypeId;
-	}
-
-	public void setDeviceTypeId(String deviceTypeId) {
-		this.deviceTypeId = deviceTypeId;
-	}
-
-	public DeviceType getDeviceTypeInfo() {
-		return deviceTypeInfo;
-	}
-
-	public void setDeviceTypeInfo(DeviceType deviceTypeInfo) {
-		this.deviceTypeInfo = deviceTypeInfo;
 	}
 
 	public DeviceInfo getDevice() {
@@ -476,14 +450,6 @@ public class DeviceInfoAction extends BaseActionSupport{
 		return NONE;
 	}
 	
-	/**
-	 * 查询设备类型信息，用于异步事件
-	 * @return
-	 */
-	public String toGetDeviceTypeInfo(){
-		deviceTypeInfo = this.deviceTypeService.get(deviceTypeId);
-		return SUCCESS;
-	}
 	/**
 	 * 打开添加新设备页
 	 * @return
