@@ -8,20 +8,20 @@
     	
     	<!-- 打开设备类型列表 -->
     	<action name="openDeviceTypeAction" class="deviceTypeAction" method="openDeviceType">
-    		<result name="success">/device/devicetypelist.jsp</result>
-    		<result name="input">/device/devicetypelist.jsp</result>
+    		<result name="success">/base/devicetype/devicetypelist.jsp</result>
+    		<result name="input">/base/devicetype/devicetypelist.jsp</result>
     	</action>
     	
     	<!-- 打开添加设备类型页面 -->
     	<action name="openAddDeviceTypeAction" class="deviceTypeAction" method="openAddDeviceType">
-    		<result name="success">/device/devicetypeinfo.jsp</result>
-    		<result name="input">/device/devicetypeinfo.jsp</result>
+    		<result name="success">/base/devicetype/devicetypeinfo.jsp</result>
+    		<result name="input">/base/devicetype/devicetypeinfo.jsp</result>
     	</action>
     	
     	<!-- 添加设备类型菜单 -->
     	 <action name="toAddDeviceTypeAction" class="deviceTypeAction" method="toAddDeviceType">
-            <result name="success">/device/devicetypeinfo.jsp</result>
-            <result name="input">/device/devicetypeinfo.jsp</result>
+            <result name="success">/base/devicetype/devicetypeinfo.jsp</result>
+            <result name="input">/base/devicetype/devicetypeinfo.jsp</result>
         </action>
         
         <!-- 删除设备类型 -->
@@ -30,14 +30,20 @@
         
         <!-- 打开修改设备类型菜单 -->
     	<action name="openModifyDeviceTypeAction" class="deviceTypeAction" method="openModifyDeviceType">
-    		<result name="success">/device/devicetypeinfo.jsp</result>
-    		<result name="input">/device/devicetypeinfo.jsp</result>
+    		<result name="success">/base/devicetype/devicetypeinfo.jsp</result>
+    		<result name="input">/base/devicetype/devicetypeinfo.jsp</result>
     	</action>
     	
         <!-- 修改设备类型菜单 -->
     	<action name="toModifyDeviceTypeAction" class="deviceTypeAction" method="toModifyDeviceType">
-    		<result name="success">/device/devicetypeinfo.jsp</result>
-    		<result name="input">/device/devicetypeinfo.jsp</result>
+    		<result name="success">/base/devicetype/devicetypeinfo.jsp</result>
+    		<result name="input">/base/devicetype/devicetypeinfo.jsp</result>
     	</action>
-      </package>	    	
+      </package>	    
+      <!-- ajax异步调用返回Action为json对象 -->
+      <package name="device_type_ajax" extends="json-default" namespace="/">
+		<action name="toGetDeviceTypeInfoAction" class="deviceTypeAction" method="toGetDeviceTypeInfo">
+            <result type="json"></result>
+        </action>
+	</package>	
 </struts>
