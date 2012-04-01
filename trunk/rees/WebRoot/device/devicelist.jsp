@@ -53,7 +53,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  		 * 添加设备信息
 	  		 */
 			$("#addbtn").click(function(){
-				parent.parent.parent.tipsWindown("添加设备信息","iframe:openAddDeviceAction.action","460","350","true","","true","no");
+				parent.parent.parent.tipsWindown("添加设备信息","iframe:openAddDeviceAction.action","460","380","true","","true","no");
 			});
 
 	  		/**
@@ -62,7 +62,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  		$('a[name="edit"]').each(function(){
 	  			$(this).click(function(){
 	  				var url = $(this).attr("url");
-	  				parent.parent.parent.tipsWindown("修改设备信息","iframe:"+url,"460","350","true","","true","no");
+	  				parent.parent.parent.tipsWindown("修改设备信息","iframe:"+url,"460","380","true","","true","no");
 	  			});
 	  		});
 	  		
@@ -119,7 +119,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
       <tr>
         <td>
        		<input name="button" type="button" class="btn_4" id="addbtn" value="添加" >
-    		<input name="button" type="button" class="btn_4" id="addparambtn" value="添加阈值参数" >
             <input name="button" type="button" class="btn_4" id="deleteselectedbtn" value="删除所选">
             <input name="button3" type="button" class="btn_2_3" id="sortbtn" value="排序"></td>
         <td align="right"></td>
@@ -151,9 +150,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               <s:property value="deviceNum"/>&nbsp;
           </td>
           <td height="26" align="center" bgcolor="#FFFFFF" nowrap>
-          	<s:iterator value="deviceTypeMap" status="type">
-          		<s:if test="deviceType==key">
-          			<s:property value="value"/>&nbsp;
+          	<s:iterator value="deviceTypeList" status="type">
+          		<s:if test="deviceTypeId==id">
+          			<s:property value="typeName"/>&nbsp;
           		</s:if>
           	</s:iterator>
           </td>

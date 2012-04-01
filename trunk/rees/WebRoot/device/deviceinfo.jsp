@@ -35,13 +35,45 @@
 		  	 */
 			var _device_submit = {
 				rules: {
-					//"device.deviceNum":{},
-					//"device.deviceType":{},
-					"device.deviceName":{required:true},
-					//"device.deviceModel":{},
-					//"device.deviceFactory":{},
+					"device.deviceNum":{required:true,maxlength:20},
+					"device.deviceName":{required:true,maxlength:20},
+					"device.deviceModel":{maxlength:20},
+					"device.deviceFactory":{maxlength:50},
 					"device.controlpoint":{digits:true},
-					"device.filePath":{url:true}
+	                "device.centerHeight":{number:true},
+	                "device.speed":{number:true},
+	                "device.power":{number:true}
+				},messages:{
+					"device.deviceNum":
+					{
+					    required:"设备编号为必填项！",
+						maxlength:"设备编号最多输入20个字符！"
+					},
+					"device.deviceModel":
+					{
+						maxlength:"设备型号最多输入20个字符！"
+					},
+					"device.deviceFactory":
+					{
+						maxlength:"设备厂商最多输入20个字符！"
+					},
+					"device.deviceName":
+					{
+						number:"设备名称为必填项！",
+						maxlength:"设备名称最多输入20个字符！"
+					},
+					"device.centerHeight":
+					{
+						number:"中心高必须为数字！"
+					},
+					"device.speed":
+					{
+						number:"转速必须为数字！"
+					},
+					"device.power":
+					{
+						number:"功率必须为数字！"
+					}
 				}
 			};
 			/**
@@ -63,6 +95,7 @@
 		  		$.fn.close();
 		  		$.fn.initpage();
 		  		$.fn.download();
+		  		$.fn.deviceTypeChange();
 		  	});
 			/**
 		  	 * 保存
@@ -73,6 +106,11 @@
 					var validate_settings_submit = jQuery.extend({}, _device_submit);
 	               	var validator = $("form").validate(validate_settings_submit);
 	               	if(!validator.form()){
+						return false;
+					}
+					if($("#hid_deviceTypeId").val()==""){
+						alert("请选择设备类型！");
+						$('#sel_deviceType').focus();
 						return false;
 					}
 	               	var deviceId = $("#hid_deviceId").val();
@@ -106,6 +144,8 @@
 			 * 初始化页面
 			 */
 			$.fn.initpage = function(){
+				//在设备类别中增加一个其他选项
+				//$("#sel_deviceType option:last").after("<option value='other'>其他</option>");
 				$("#txt_deviceNum").focus();
 				//回显上传时的错误信息
 				var uploadErr = $("#lb_error").html();
@@ -145,6 +185,62 @@
 				}
 			}
 			
+			/**
+			 * 选择设备类别
+			 */
+			$.fn.deviceTypeChange = function(){
+				$("#sel_deviceType").change(function(){
+					var deviceTypeId =$('#sel_deviceType option:selected').attr("value");
+					var deviceTypeName =$('#sel_deviceType option:selected').attr("text");
+					$("#hid_deviceTypeId").val(deviceTypeId);
+					$("#hid_deviceType").val(deviceTypeName);
+					if(deviceTypeId=="other" || deviceTypeId=="nothing"){
+						if(deviceTypeId=="nothing"){
+							$("#hid_deviceTypeId").val("");
+							$("#hid_deviceType").val("");
+						}
+						$("#txt_centerHeight").val("");
+						$("#txt_speed").val("");
+						$("#txt_power").val("");
+					}else{
+						var url = "toGetDeviceTypeInfoAction.action";
+						$.post(url, {deviceTypeId:deviceTypeId}, function(data){
+							if(data!=null ){
+								if( data.deviceType.id!=null){
+									var typeId = data.deviceType.id;
+									var typeName = data.deviceType.typeName;
+									var centerHeight = data.deviceType.centerHeight;
+									var speed = data.deviceType.speed;
+									var power = data.deviceType.power;
+
+									$("#txt_centerHeight").val(centerHeight);
+									$("#txt_speed").val(speed);
+									$("#txt_power").val(power);
+								}
+							}
+						});
+					}
+					
+					if(deviceTypeId=="other"){
+						$("#txt_centerHeight").attr("readonly","");
+						$("#txt_centerHeight").attr("title","");
+						$("#txt_speed").attr("readonly","");
+						$("#txt_speed").attr("title","");
+						$("#txt_power").attr("readonly","");
+						$("#txt_power").attr("title","");
+						$("#txt_speed").focus();
+					}else{
+						$("#txt_centerHeight").attr("readonly","readonly");
+						$("#txt_centerHeight").attr("title","不能修改！");
+						$("#txt_speed").attr("readonly","readonly");
+						$("#txt_speed").attr("title","不能修改！");
+						$("#txt_power").attr("readonly","readonly");
+						$("#txt_power").attr("title","不能修改！");
+						$("#txt_deviceFactory").focus();
+					}
+				});
+			}
+			
 		</script>
 	</head>
 
@@ -152,6 +248,7 @@
 		<s:form id="form1" name="form1" method="post" theme="simple" enctype="multipart/form-data">
 		<s:label id="lb_message" name="message" cssStyle="display:none"></s:label>
 		<s:hidden id="hid_deviceId" name="device.id"></s:hidden>
+		<s:hidden id="hid_deviceType" name="device.deviceType"></s:hidden>
 		<s:hidden id="hid_deviceFilePath" name="device.filePath"></s:hidden>
 		<s:hidden id="hid_controlpoint" name="device.controlpoint"></s:hidden>
 		<s:hidden id="hid_sortIndex" name="device.sortIndex"></s:hidden>
@@ -173,15 +270,7 @@
 											<strong>设备编号：</strong>
 										</td>
 										<td height="26" align="left" bgcolor="#FFFFFF">
-											<s:textfield id="txt_deviceNum" name="device.deviceNum" cssStyle="width: 250px;" maxlength=""></s:textfield>
-										</td>
-									</tr>
-									<tr>
-										<td height="26" align="right" bgcolor="#FFFFFF">
-											<strong>设备类型：</strong>
-										</td>
-										<td height="26" align="left" bgcolor="#FFFFFF">
-											<s:select id="sel_deviceType" list="deviceTypeMap" listKey="key" listValue="value" headerKey="" headerValue="---请选择---" name="device.deviceType" cssStyle="width: 250px;"></s:select>
+											<s:textfield id="txt_deviceNum" name="device.deviceNum"  maxlength="25" cssStyle="width: 250px;"></s:textfield><font color="red">*</font>
 										</td>
 									</tr>
 									<tr>
@@ -189,7 +278,7 @@
 											<strong>设备名称：</strong>
 										</td>
 										<td height="26" align="left" bgcolor="#FFFFFF">
-											<s:textfield id="txt_deviceName" name="device.deviceName" cssStyle="width: 250px;"></s:textfield>
+											<s:textfield id="txt_deviceName" name="device.deviceName" maxlength="25" cssStyle="width: 250px;"></s:textfield><font color="red">*</font>
 										</td>
 									</tr>
 									<tr>
@@ -197,7 +286,41 @@
 											<strong>设备型号：</strong>
 										</td>
 										<td height="26" align="left" bgcolor="#FFFFFF">
-											<s:textfield id="txt_deviceModel" name="device.deviceModel" cssStyle="width: 250px;"></s:textfield>
+											<s:textfield id="txt_deviceModel" name="device.deviceModel"  maxlength="25" cssStyle="width: 250px;"></s:textfield>
+										</td>
+									</tr>
+									
+									<tr>
+										<td height="26" align="right" bgcolor="#FFFFFF">
+											<strong>设备类型：</strong>
+										</td>
+										<td height="26" align="left" bgcolor="#FFFFFF">
+											<s:select id="sel_deviceType" list="deviceTypeList" listKey="id" listValue="typeName" headerKey="nothing" headerValue="---请选择---" name="device.deviceTypeId" cssStyle="width: 250px;"></s:select>
+										</td>
+									</tr>
+									
+									<tr>
+										<td height="26" align="right" bgcolor="#FFFFFF">
+											<strong>转速：</strong>
+										</td>
+										<td height="26" align="left" bgcolor="#FFFFFF">
+											<s:textfield id="txt_speed" name="device.speed" cssStyle="width: 250px;" readonly="true"></s:textfield>
+										</td>
+									</tr>
+									<tr>
+										<td height="26" align="right" bgcolor="#FFFFFF">
+											<strong>功率：</strong>
+										</td>
+										<td height="26" align="left" bgcolor="#FFFFFF">
+											<s:textfield id="txt_power" name="device.power" cssStyle="width: 250px;" readonly="true"></s:textfield>
+										</td>
+									</tr>
+									<tr>
+										<td height="26" align="right" bgcolor="#FFFFFF">
+											<strong>中心高：</strong>
+										</td>
+										<td height="26" align="left" bgcolor="#FFFFFF">
+											<s:textfield id="txt_centerHeight" name="device.centerHeight" cssStyle="width: 250px;" readonly="true"></s:textfield>
 										</td>
 									</tr>
 									<tr>
@@ -205,7 +328,7 @@
 											<strong>设备厂商：</strong>
 										</td>
 										<td height="26" align="left" bgcolor="#FFFFFF">
-											<s:textfield id="txt_deviceFactory" name="device.deviceFactory" cssStyle="width: 250px;"></s:textfield>
+											<s:textfield id="txt_deviceFactory" name="device.deviceFactory"  maxlength="20" cssStyle="width: 250px;"></s:textfield>
 										</td>
 									</tr>
 									<!-- 
