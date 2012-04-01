@@ -37,8 +37,8 @@
 				rules: {
 					//"forumIssueInfo.forumIssueInfoNum":{},
 					//"forumIssueInfo.forumIssueInfoType":{},
-					"forumIssueInfo.issueName":{required:true},
-					"forumIssueInfo.creator":{required:true}
+					//"forumIssueInfo.issueName":{required:true},
+					//"forumIssueInfo.creator":{required:true}
 					//"forumIssueInfo.forumIssueInfoModel":{},
 					//"forumIssueInfo.forumIssueInfoFactory":{},
 					//"forumIssueInfo.controlpoint":{digits:true}
