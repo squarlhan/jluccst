@@ -4,7 +4,7 @@
  * History
  */
 /*
- * @(#)DemoServiceImpl.java 1.1 2012-3-5
+ * @(#)ForumIssueInfoServiceImpl.java 1.1 2012-3-5
  */
 
 package com.boan.rees.forum.service.impl;
@@ -17,7 +17,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import com.boan.rees.device.model.DeviceInfo;
 import com.boan.rees.forum.dao.IForumIssueInfoDao;
 import com.boan.rees.forum.model.ForumIssueInfo;
 import com.boan.rees.forum.service.IForumIssueInfoService;
