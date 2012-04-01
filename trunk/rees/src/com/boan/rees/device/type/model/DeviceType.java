@@ -5,6 +5,7 @@
 package com.boan.rees.device.type.model;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,6 +17,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 /**
  * 设备分类实体
+ * 
  * @author jiangmeidi
  * @version 1.0.0
  */
@@ -24,71 +26,76 @@ import org.hibernate.annotations.GenericGenerator;
 public class DeviceType implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	/**
 	 * 主键
 	 */
 	@Id
-	@GenericGenerator(name="system-uuid", strategy="uuid")
-	@GeneratedValue(generator="system-uuid")
+	@GenericGenerator(name = "system-uuid", strategy = "uuid")
+	@GeneratedValue(generator = "system-uuid")
 	private String id;
-	
+
 	/**
-	 * 设备名称
+	 * 设备类别名称
 	 */
 	@Column(name = "DEVICE_TYPE")
 	private String typeName;
+	
 	/**
 	 * 中心高
 	 */
-     @Column(name="CENTER_HEIGHT")
-     private int centerHeight;
-     /**
- 	 * 转速
- 	 */
-      @Column(name="SPEED")
-      private int speed;
-      /**
-  	 * 功率
-  	 */
-       @Column(name="POWER")
-       private int power;
-       
-       
+	@Column(name = "CENTER_HEIGHT")
+	private BigDecimal centerHeight;
+	
+	/**
+	 * 转速
+	 */
+	@Column(name = "SPEED")
+	private BigDecimal speed;
+	
+	/**
+	 * 功率
+	 */
+	@Column(name = "POWER")
+	private BigDecimal power;
+
 	public String getId() {
 		return id;
 	}
+
 	public void setId(String id) {
 		this.id = id;
 	}
+
 	public String getTypeName() {
 		return typeName;
 	}
+
 	public void setTypeName(String typeName) {
 		this.typeName = typeName;
 	}
-	public int getCenterHeight() {
+
+	public BigDecimal getCenterHeight() {
 		return centerHeight;
 	}
-	public void setCenterHeight(int centerHeight) {
+
+	public void setCenterHeight(BigDecimal centerHeight) {
 		this.centerHeight = centerHeight;
 	}
-	public int getSpeed() {
+
+	public BigDecimal getSpeed() {
 		return speed;
 	}
-	public void setSpeed(int speed) {
+
+	public void setSpeed(BigDecimal speed) {
 		this.speed = speed;
 	}
-	public int getPower() {
+
+	public BigDecimal getPower() {
 		return power;
 	}
-	public void setPower(int power) {
+
+	public void setPower(BigDecimal power) {
 		this.power = power;
 	}
-	
-       
-       
-       
-     
 }
-
