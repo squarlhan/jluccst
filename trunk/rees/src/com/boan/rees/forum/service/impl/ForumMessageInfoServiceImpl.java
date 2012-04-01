@@ -14,7 +14,6 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
@@ -77,7 +76,7 @@ public class ForumMessageInfoServiceImpl implements IForumMessageInfoService {
 	@Override
 	public Pagination<ForumMessageInfo> findForumMessageInfoForPage(Map<String, ?> values,Pagination<ForumMessageInfo> pagination){
 		
-		String hql = "from ForumIssueInfo";
+		String hql = "select new ForumIssueInfo(f.id,f.issueName,f.issuecontent,f.issueState,f.creator,f.createTime, count(s.id)) from ForumIssueInfo f left join ForumMessage s on f.id = s.issueId";
 		List<ForumMessageInfo> data = forumMessageInfoDao.findForPage(hql, values, pagination.getStartIndex(), pagination.getPageSize());
 		hql = "select count(*) from ForumMessageInfo";
 		int totalRows = forumMessageInfoDao.findCountForPage(hql, values);
