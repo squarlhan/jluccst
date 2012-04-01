@@ -10,6 +10,7 @@
 package com.boan.rees.device.model;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Calendar;
 
 import javax.persistence.Column;
@@ -43,6 +44,13 @@ public class DeviceInfo implements Serializable {
 	 */
 	@Column(name = "DEVICE_NUM")
 	private String deviceNum;
+	
+	/**
+	 * 设备类型ID
+	 */
+	@Column(name = "DEVICE_TYPE_ID")
+	private String deviceTypeId;
+	
 	/**
 	 * 设备类型
 	 */
@@ -99,6 +107,25 @@ public class DeviceInfo implements Serializable {
 	 */
 	@Column(name = "GROUP_ID")
 	private String groupId;
+	
+	/**
+	 * 中心高
+	 */
+	@Column(name = "CENTER_HEIGHT")
+	private BigDecimal centerHeight;
+	
+	/**
+	 * 转速
+	 */
+	@Column(name = "SPEED")
+	private BigDecimal speed;
+	
+	/**
+	 * 功率
+	 */
+	@Column(name = "POWER")
+	private BigDecimal power;
+	
 	public String getId() {
 		return id;
 	}
@@ -178,14 +205,29 @@ public class DeviceInfo implements Serializable {
 	public void setGroupId(String groupId) {
 		this.groupId = groupId;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	public BigDecimal getCenterHeight() {
+		return centerHeight;
+	}
+	public void setCenterHeight(BigDecimal centerHeight) {
+		this.centerHeight = centerHeight;
+	}
+	public BigDecimal getSpeed() {
+		return speed;
+	}
+	public void setSpeed(BigDecimal speed) {
+		this.speed = speed;
+	}
+	public BigDecimal getPower() {
+		return power;
+	}
+	public void setPower(BigDecimal power) {
+		this.power = power;
+	}
+	public String getDeviceTypeId() {
+		return deviceTypeId;
+	}
+	public void setDeviceTypeId(String deviceTypeId) {
+		this.deviceTypeId = deviceTypeId;
+	}
 }
 
