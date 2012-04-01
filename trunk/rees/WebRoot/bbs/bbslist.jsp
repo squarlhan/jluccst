@@ -153,12 +153,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               <td height="26" bgcolor="#FFFFFF"><a href="openAddForumMessageInfoAction.action" id="gotobbs">
                        <s:property value="issueName"/>&nbsp;</a>
               </td>
-               <td height="26" align="center" bgcolor="#FFFFFF"><A title="点击这里可查看参与人员名单" href="bbslist_">160/160(<span class="STYLE2">满员</span>)</A></td> 
+               <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="joinPersonCount"/></td>
                <td height="26" align="center" bgcolor="#FFFFFF">
-          	            <s:property value="creator"/>&nbsp;
+          	      <s:property value="creator"/>&nbsp;
                </td>
                <td height="26" align="center" bgcolor="#FFFFFF">
-          	            <s:property value="issueStatus"/>&nbsp;
+          	      <s:property value="issueStatus"/>&nbsp;
                 </td>
                 <td height="26" colspan="2" align="center" bgcolor="#FFFFFF">
           	       <s:url id="edit_url" action="openModifyForumIssueInfoAction">   
@@ -170,7 +170,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               </s:iterator>
             <tr>
 			<td colspan="5" align="center">
-			<page:pages currentPage="pagination.currentPage" totalPages="	pagination.totalPages" totalRows="pagination.totalRows" styleClass="page" theme="text" ></page:pages> 
+			<page:pages currentPage="pagination.currentPage" totalPages="pagination.totalPages" totalRows="pagination.totalRows" styleClass="page" theme="text" ></page:pages> 
 		   	</td>
 		  </tr>
    </table></td></tr>
