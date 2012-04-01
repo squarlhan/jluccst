@@ -129,4 +129,10 @@
     	<!-- 删除设备检测点参数  -->
     	<action name="toDeletePointParamAction" class="deviceInfoAction" method="toDeletePointParam"/>
 	</package>
+	
+	<package name="device_type_ajax" extends="json-default" namespace="/">
+		<action name="toGetDeviceTypeInfoAction" class="deviceInfoAction" method="toGetDeviceTypeInfo">
+            <result type="json"></result>
+        </action>
+	</package>
 </struts>

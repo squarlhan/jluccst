@@ -10,13 +10,11 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Properties;
 import java.util.UUID;
 
 import javax.servlet.ServletContext;
@@ -34,6 +32,8 @@ import com.boan.rees.device.model.PointParamInfo;
 import com.boan.rees.device.service.IDeviceInfoService;
 import com.boan.rees.device.service.IPointInfoService;
 import com.boan.rees.device.service.IPointParamInfoService;
+import com.boan.rees.device.type.model.DeviceType;
+import com.boan.rees.device.type.service.IDeviceTypeService;
 import com.boan.rees.utils.action.BaseActionSupport;
 import com.boan.rees.utils.page.Pagination;
 /**
@@ -52,7 +52,7 @@ public class DeviceInfoAction extends BaseActionSupport{
 	 */
 	@Autowired
 	@Qualifier("deviceInfoService")
-	private IDeviceInfoService service;
+	private IDeviceInfoService deviceInfoService;
 	
 	/**
 	 * 分页列表
@@ -63,6 +63,24 @@ public class DeviceInfoAction extends BaseActionSupport{
 	 * 定义一个设备数组，用于排序功能使用
 	 */
 	private List<DeviceInfo> deviceInfoList = new ArrayList<DeviceInfo>();
+	
+	
+	/**
+	 * 用于调用数据库相关操作
+	 */
+	@Autowired
+	@Qualifier("deviceTypeService")
+	private IDeviceTypeService deviceTypeService;
+	
+	/**
+	 * 下拉设备列表事件传递过来的设备类型Id
+	 */
+	private String deviceTypeId;
+	
+	/**
+	 * 设备类型实体
+	 */
+	private DeviceType deviceTypeInfo;
 	
 	/**
 	 * 页面对象
@@ -148,6 +166,7 @@ public class DeviceInfoAction extends BaseActionSupport{
 	 * 监测点Id
 	 */
 	private String pointId;
+	
 	/**
 	 * 监测点接口类
 	 */
@@ -170,6 +189,22 @@ public class DeviceInfoAction extends BaseActionSupport{
 
 	public void setIds(String[] ids) {
 		this.ids = ids;
+	}
+
+	public String getDeviceTypeId() {
+		return deviceTypeId;
+	}
+
+	public void setDeviceTypeId(String deviceTypeId) {
+		this.deviceTypeId = deviceTypeId;
+	}
+
+	public DeviceType getDeviceTypeInfo() {
+		return deviceTypeInfo;
+	}
+
+	public void setDeviceTypeInfo(DeviceType deviceTypeInfo) {
+		this.deviceTypeInfo = deviceTypeInfo;
 	}
 
 	public DeviceInfo getDevice() {
@@ -308,18 +343,17 @@ public class DeviceInfoAction extends BaseActionSupport{
 	}
 
 	//*************************************************************************************
-	/**
-	 * 初始化设备类别下拉框数据
-	 * @return
-	 * @throws IOException 
-	 * @throws FileNotFoundException 
-	 */
-	public Properties getDeviceTypeMap() throws FileNotFoundException, IOException {
-		Properties property = new Properties();
-		//读取配置文件
-		InputStream in = getClass().getResourceAsStream("/divece_type_config.properties");
-		property.load(in);
-		return property;
+	
+	//初始化设备类型下拉列表
+	public List<DeviceType> getDeviceTypeList() {
+		List<DeviceType> tempList = deviceTypeService.findAllDeviceType();
+		if(tempList!=null){
+			DeviceType info = new DeviceType();
+			info.setId("other");
+			info.setTypeName("其他");
+			tempList.add(info);
+		}
+		return tempList;
 	}
 	
 	/**
@@ -327,7 +361,7 @@ public class DeviceInfoAction extends BaseActionSupport{
 	 * @return
 	 */
 	public String openDevice(){
-		pagination = service.findDeviceInfoForPage(new HashMap(), pagination);
+		pagination = deviceInfoService.findDeviceInfoForPage(new HashMap(), pagination);
 		return this.SUCCESS;
 	}
 
@@ -341,7 +375,7 @@ public class DeviceInfoAction extends BaseActionSupport{
 			device.setDeptId(sessionFactoryId);
 			device.setGroupId(sessionWorkshopId);
 			//保存设备对象
-			service.save(device);
+			deviceInfoService.save(device);
 			message="保存成功！";
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -438,10 +472,18 @@ public class DeviceInfoAction extends BaseActionSupport{
 	 */
 	public String toDeleteDeviceImage(){
 		String deviceId = device.getId();
-		service.deleteDeviceImage(deviceId);
+		deviceInfoService.deleteDeviceImage(deviceId);
 		return NONE;
 	}
 	
+	/**
+	 * 查询设备类型信息，用于异步事件
+	 * @return
+	 */
+	public String toGetDeviceTypeInfo(){
+		deviceTypeInfo = this.deviceTypeService.get(deviceTypeId);
+		return SUCCESS;
+	}
 	/**
 	 * 打开添加新设备页
 	 * @return
@@ -456,7 +498,7 @@ public class DeviceInfoAction extends BaseActionSupport{
 	 * @return
 	 */
 	public String deleteDevice(){
-		service.deleteDeviceInfo(ids);
+		deviceInfoService.deleteDeviceInfo(ids);
 		return NONE;
 	}
 	
@@ -466,7 +508,7 @@ public class DeviceInfoAction extends BaseActionSupport{
 	 */
 	public String openModifyDevice(){
 		String id = device.getId();
-		device = service.get(id);
+		device = deviceInfoService.get(id);
 		return SUCCESS;
 	}
 	
@@ -479,7 +521,7 @@ public class DeviceInfoAction extends BaseActionSupport{
 			saveImageToDevice(device);
 			device.setDeptId(sessionFactoryId);
 			device.setGroupId(sessionWorkshopId);
-			service.update(device);
+			deviceInfoService.update(device);
 			message="保存成功！";
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -493,7 +535,7 @@ public class DeviceInfoAction extends BaseActionSupport{
 	 * @return
 	 */
 	public String openSortDevice(){
-		deviceInfoList = service.findAllDeviceInfo();
+		deviceInfoList = deviceInfoService.findAllDeviceInfo();
 		return SUCCESS;
 	}
 	
@@ -503,9 +545,9 @@ public class DeviceInfoAction extends BaseActionSupport{
 	 */
 	public String toSortDevice(){
 		try{
-			service.sortDeviceInfo(ids);
+			deviceInfoService.sortDeviceInfo(ids);
 			message = "保存成功！";
-			deviceInfoList = service.findAllDeviceInfo();
+			deviceInfoList = deviceInfoService.findAllDeviceInfo();
 		}catch(Exception e){
 			e.printStackTrace();
 			message = "保存失败！";
