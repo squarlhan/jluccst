@@ -30,10 +30,21 @@ import org.hibernate.annotations.GenericGenerator;
 public class ForumIssueInfo implements Serializable {
 
 	private static final long serialVersionUID = 1L;
+	public ForumIssueInfo(){}
+	public ForumIssueInfo(String id,String issueName ,String issueContent,int issueStatus,String creator,Calendar createTime,int joinPersonCount)
+	{
+		this.id = id;
+		this.issueName = issueName;
+		this.issueContent = issueContent;
+		this.issueStatus = issueStatus;
+		this.creator = creator;
+		this.createTime = createTime;
+		this.joinPersonCount = joinPersonCount;
+	}
+	
 	@Id
 	@GenericGenerator(name="system-uuid", strategy="uuid")
 	@GeneratedValue(generator="system-uuid")
-	
 	/**
 	 * 论坛议题实体主键
 	 */
@@ -47,8 +58,8 @@ public class ForumIssueInfo implements Serializable {
 	/**
 	 * 议题内容
 	 */
-	@Column(name = "ISSUE_CONTEIT")
-	private String issueConteit;
+	@Column(name = "ISSUE_CONTENT")
+	private String issueContent;
 	/**
 	 * 议题状态
 	 */
@@ -63,7 +74,23 @@ public class ForumIssueInfo implements Serializable {
 	 * 议题创建时间     
 	 */
 	@Column(name = "CREATE_TIME")
-	private Calendar createTime;
+	private Calendar createTime = Calendar.getInstance();
+	
+	/**
+	 * 话题参与人数
+	 */
+	private int joinPersonCount = 0;
+	
+	
+	
+	public int getJoinPersonCount()
+	{
+		return joinPersonCount;
+	}
+	public void setJoinPersonCount( int joinPersonCount )
+	{
+		this.joinPersonCount = joinPersonCount;
+	}
 	public String getId() {
 		return id;
 	}
@@ -77,10 +104,10 @@ public class ForumIssueInfo implements Serializable {
 		this.issueName = issueName;
 	}
 	public String getIssueConteit() {
-		return issueConteit;
+		return issueContent;
 	}
 	public void setIssueConteit(String issueConteit) {
-		this.issueConteit = issueConteit;
+		this.issueContent = issueConteit;
 	}
 	public int getIssueStatus() {
 		return issueStatus;

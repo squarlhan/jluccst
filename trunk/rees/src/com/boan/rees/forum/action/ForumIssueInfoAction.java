@@ -21,6 +21,11 @@ import com.opensymphony.xwork2.ActionSupport;
 public class ForumIssueInfoAction extends ActionSupport {
 
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -2343028207546084327L;
+
+	/**
 	 * 用于调用数据库相关操作
 	 */
 	@Autowired
