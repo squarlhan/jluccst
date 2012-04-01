@@ -37,13 +37,21 @@ public class DeviceTypeAction extends BaseActionSupport{
 	 * 页面对象
 	 */
 	private DeviceType deviceType;
+	
+	/**
+	 * 下拉设备列表事件传递过来的设备类型Id
+	 */
+	private String deviceTypeId;
+	
 	/**
 	 * 页面所选行的id
 	 */
 	private String[] ids;
-
 	
-
+	/**
+	 * 操作提示
+	 */
+	private String message;
 	
 	public DeviceType getDeviceType() {
 		return deviceType;
@@ -53,6 +61,13 @@ public class DeviceTypeAction extends BaseActionSupport{
 		this.deviceType = deviceType;
 	}
 
+	public String getDeviceTypeId() {
+		return deviceTypeId;
+	}
+
+	public void setDeviceTypeId(String deviceTypeId) {
+		this.deviceTypeId = deviceTypeId;
+	}
 
 	public String[] getIds() {
 		return ids;
@@ -70,6 +85,13 @@ public class DeviceTypeAction extends BaseActionSupport{
 		this.pagination = pagination;
 	}
 
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
 
 	/**
 	 * 分页显示报表列表
@@ -80,14 +102,19 @@ public class DeviceTypeAction extends BaseActionSupport{
 		return this.SUCCESS;
 	}
 
-	
     /**
 	 * 添加新报表
 	 * @return
 	 */
 	public String toAddDeviceType(){
-		
-		service.save(deviceType);
+		try {
+			//保存设备对象
+			service.save(deviceType);
+			message="保存成功！";
+		} catch (Exception e) {
+			e.printStackTrace();
+			message="保存失败！";
+		}
 		return SUCCESS;
 	}
 	/**
@@ -96,6 +123,7 @@ public class DeviceTypeAction extends BaseActionSupport{
 	 */
 	
 	public String openAddDeviceType(){
+		deviceType = new DeviceType();
 		return SUCCESS;
 	}
 
@@ -123,13 +151,24 @@ public class DeviceTypeAction extends BaseActionSupport{
 	 * @return 
 	 */
 	public String toModifyDeviceType(){
-		
-		service.update(deviceType);
+		try {
+			service.update(deviceType);
+			message="保存成功！";
+		} catch (Exception e) {
+			e.printStackTrace();
+			message="保存失败！";
+		}
 		return SUCCESS;
 	}
 	
-
-	
+	/**
+	 * 查询设备类型信息，用于异步事件
+	 * @return
+	 */
+	public String toGetDeviceTypeInfo(){
+		deviceType = this.service.get(deviceTypeId);
+		return SUCCESS;
+	}
 }
 
 
