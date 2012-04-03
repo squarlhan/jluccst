@@ -134,7 +134,7 @@
 										<td height="26" colspan="2" align="center" bgcolor="#FFFFFF">
 											<input name="addBtn" type="button" class="btn_2_3" id="addBtn" value="确定">
 											&nbsp;&nbsp;
-											<input name="closeBtn" type="button" class="btn_2_3" id="closeBtn" value="关闭">
+											<input name="closeBtn" type="button" class="btn_2_3" id="closeBtn" value="取消">
 										</td>
 									</tr>
 								</table>
