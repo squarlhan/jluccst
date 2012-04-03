@@ -88,5 +88,11 @@ public class CompanyServiceImpl implements ICompanyService{
 		return pagination;
 	}
 
+	@Override
+	public boolean isExistSameName( String id, String name )
+	{
+		return companyDao.isExistSameName( id, name );
+	}
+
 }
 
