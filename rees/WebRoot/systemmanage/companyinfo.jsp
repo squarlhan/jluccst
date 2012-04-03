@@ -33,23 +33,18 @@
 			/**
 		  	 * 验证条件
 		  	 */
-			var _company_submit = {
+			var _customer_submit = {
 				rules: {
-					//"device.deviceNum":{},
-					//"device.deviceType":{},
-					//"company.id":{required:true},
-					//"device.deviceModel":{},
-					//"device.deviceFactory":{},
-					//"device.controlpoint":{digits:true},
-					//"device.filePath":{url:true}
+					"company.companyName":{required:true,strangecode:true},
+					"company.address":{strangecode:true},
+					"company.phone":{strangecode:true}
 				}
 			};
 			/**
 		  	 * 准备工作
 		  	 */
 			$(document).ready(function(){
-		  		$.validator.setDefaults({
-		  			//验证框架的验证器的默认设置区
+				$.validator.setDefaults({
 					debug: false,onkeyup: false,onfocusout:false,focusCleanup: true,
 				    errorPlacement:function(error, element) {},
 					invalidHandler: function(form, validator) {
@@ -67,7 +62,7 @@
 		  	 */
 			$.fn.save = function(){
 				$("#addBtn").click(function() {
-					var validate_settings_submit = jQuery.extend({}, _company_submit);
+					var validate_settings_submit = jQuery.extend({}, _customer_submit);
 	               	var validator = $("form").validate(validate_settings_submit);
 	               	if(!validator.form()){
 						return false;
@@ -77,6 +72,7 @@
 					}else{
 		               	form1.action = "toAddCompanyAction.action";					
 					}
+					form1.target = "iframe1";
 	               	form1.submit();
           		});
           	}
@@ -109,15 +105,6 @@
 						<tr>
 							<td style="height: 36px;">
 								<table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#d5e4fd">
-
-									<!-- tr>
-										<td height="26" align="right" bgcolor="#FFFFFF">
-											<strong>公司编号：</strong>
-										</td>
-										<td height="26" align="left" bgcolor="#FFFFFF">
-											<s:textfield id="txt_companyid" name="company.id" cssStyle="width: 250px;"></s:textfield>
-										</td>
-									</tr> -->
 									<tr>
 										<td height="26" align="right" bgcolor="#FFFFFF">
 											<strong>公司名称：</strong>
@@ -140,7 +127,7 @@
 											<strong>公司电话：</strong>
 										</td>
 										<td height="26" align="left" bgcolor="#FFFFFF">
-											<s:textfield id="txt_phone" name="company.phone" cssStyle="width: 250px;"></s:textfield>
+											<s:textfield id="txt_phone" name="company.phone" cssStyle="width: 250px;" maxlength="100"></s:textfield>
 										</td>
 									</tr>
 									<tr>
@@ -157,6 +144,7 @@
 				</td>
 			</tr>
 		</table>
+		<iframe id="iframe1" name="iframe1" width="1px" height="1px"></iframe>
 		</s:form>
 	</body>
 </html>
