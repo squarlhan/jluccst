@@ -29,6 +29,11 @@ public class Company {
 	 */
 	private String id;
 	
+	public Company()
+	{
+		this.id = "";
+	}
+
 	/**
 	 * 公司电话
 	 */

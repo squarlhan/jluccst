@@ -17,8 +17,8 @@
     	</action>
     <!-- 用于添加一个公司信息 -->
         <action name="toAddCompanyAction" class="companyAction"  method="toAddCompany">
-          <result name="success">/systemmanage/companyinfo.jsp</result>
-          <result name="input">/systemmanage/companyinfo.jsp</result>
+           <result name="success">/common/message.jsp</result>
+    	   <result name="error">/common/messagenoclose.jsp</result>
         </action>
     <!-- 打开修改公司信息页面 -->
         <action name="openModifyCompanyAction" class="companyAction" method="openModifyCompany">
@@ -26,8 +26,8 @@
           <result name="input">/systemmanage/companyinfo.jsp</result>
         </action>
         <action name="toModifyCompanyAction" class="companyAction" method="toModifyCompany">
-          <result name="success">/systemmanage/companyinfo.jsp</result>
-          <result name="input">/systemmanage/companyinfo.jsp</result>
+           <result name="success">/common/message.jsp</result>
+    	   <result name="error">/common/messagenoclose.jsp</result>
         </action>
     <!-- 删除 -->
         <action name="deleteCompanyAction" class="companyAction" method="deleteCompany"/>
