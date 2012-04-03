@@ -100,6 +100,7 @@
               <td align="center" background="../images/headerbg.jpg"><strong>办公电话</strong></td>
               <td align="center" background="../images/headerbg.jpg"><strong>个人手机</strong></td>
               <td align="center" background="../images/headerbg.jpg"><strong>邮箱</strong></td>
+              <td align="center" background="../images/headerbg.jpg"><strong>操作</strong></td>
             </tr>
             <s:iterator value="pagination.data" status="obj">
             <tr>
@@ -113,10 +114,11 @@
               <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="officePhone"/></td>
               <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="phone"/></td>
               <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="email"/></td>
+               <td height="26" align="center" bgcolor="#FFFFFF">编辑 删除</td>
             </tr>
             </s:iterator>
             <tr>
-              <td height="26" colspan="6" align="center" bgcolor="#FFFFFF">
+              <td height="26" colspan="7" align="center" bgcolor="#FFFFFF">
               		<p:pages currentPage="pagination.currentPage" totalPages="pagination.totalPages" totalRows="pagination.totalRows" styleClass="page" theme="text" ></p:pages>
               </td>
             </tr>
