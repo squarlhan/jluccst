@@ -25,6 +25,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
+  	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>信息提示页</title>
   </head>
   <body>
@@ -32,7 +33,4 @@
 </html>
 <script type="text/javascript">
 	alert('${message.content}');
-	<s:if test="jumpUrl != ''">
-	window.location.href="<s:property value="jumpUrl"/>";
-	</s:if>
 </script>
