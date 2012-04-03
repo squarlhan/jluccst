@@ -13,6 +13,11 @@ import com.boan.rees.group.model.*;
  */
 public interface ICompanyDao extends IBaseDao<Company,String>{
 	
-	
-
+	/**
+	 * 判断是否重名
+	 * @param id
+	 * @param name
+	 * @return
+	 */
+	public boolean isExistSameName( String id, String name );
 }
