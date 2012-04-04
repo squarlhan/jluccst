@@ -32,8 +32,6 @@
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">    
-	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-	<meta http-equiv="description" content="This is my page">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<j:scriptlink css="true" tipswindow="true" jmessagebox="true" jquery="true" validate="true" jfunction="true"/>
 	<style type="text/css">
@@ -48,12 +46,13 @@
 	
 		$(function(){
 			$("#addbtn").click(function(){
-				parent.parent.parent.tipsWindown("添加工厂信息","iframe:openAddFactoryAction.action","460","350","true","","true","no");
-			
-		
+				parent.parent.tipsWindown("添加工厂信息","iframe:openAddFactoryAction.action?companyId=" + $("#companyId").val(),"460","200","true","","true","no");
+				parent.parent.$("#windown-close").bind('click',function(){
+					window.location.href="./openFactoryAction.action?companyId=" + $("#companyId").val();
+				});
 			});
-			$.fn.CheckBoxAll("cbk_all");
-	  		$.fn.UnCheckBoxAll("ids","cbk_all");
+			$.fn.checkall("cbk_all");
+	  		$.fn.uncheckall("ids","cbk_all");
 
 	  		/**
 	  		 * 修改公司信息
@@ -61,7 +60,11 @@
 	  		$('a[name="edit"]').each(function(){
 	  			$(this).click(function(){
 	  				var url = $(this).attr("url");
-	  				parent.parent.parent.tipsWindown("修改工厂信息","iframe:"+url,"460","350","true","","true","no");
+	  				url += "&companyId=" + $("#companyId").val();
+	  				parent.parent.parent.tipsWindown("修改工厂信息","iframe:"+url,"460","200","true","","true","no");
+	  				parent.parent.$("#windown-close").bind('click',function(){
+	  					window.location.href="./openFactoryAction.action?companyId=" + $("#companyId").val();
+	  				});
 	  			});
 	  		});
 	  		
@@ -87,60 +90,12 @@
   				}
 	  		});
 		});
-		
-		
-		/******************************************************************************************/
-		/**
-	  	 * 点击选复选框时，执行全选/取消全选功能
-	  	 * @param chkallid
-	  	 * 执行全选功能的checkbox的id值
-	  	 */
-	  	$.fn.CheckBoxAll = function (chkallid) {
-	  		$("#" + chkallid).click(function () {
-	  			var b = ($(this).attr("checked"));
-	  			$(":checkbox").each(function () {
-	  				if( !$(this).attr("disabled") ){
-	  					$(this).attr("checked", b);
-	  				}
-	  			});
-	  		});
-	  		if($(":checkbox").length == 1){
-	  			$("#" + chkallid).attr("disabled","true");
-	  		}
-	  	};
-
-	  	/**
-	  	 * 子复选框有一个处理非选中状态时，执行全选功能的复选框将置为非选中状态
-	  	 * @param subchkname
-	  	 * 子复选框的name
-	  	 * @param chkallid
-	  	 * 执行全选功能的复选框id
-	  	 */
-	  	$.fn.UnCheckBoxAll = function (subchkname, chkallid) {
-	  		$(":checkbox[name='" + subchkname + "']").click(function () {
-	  			var l = $(":checkbox[name='" + subchkname + "']").length;
-	  			if (!$(this).attr("checked")) {
-	  				$("#" + chkallid).attr("checked", false);
-	  			} else {
-	  				var i = 0;
-	  				$(":checkbox[name='" + subchkname + "']").each(function () {
-	  					if ($(this).attr("checked")) {
-	  						i++;
-	  					}
-	  				});
-	  				if (l == i) {
-	  					$("#" + chkallid).attr("checked", true);
-	  				}
-	  			}
-	  		});
-}; 
 	</script>
-
   </head>
-  
   
 <body>
 <s:form id="form1" name="form1" method="post" theme="simple">
+<s:hidden name="companyId" id="companyId"></s:hidden>
 <table width="100%" style="height:100%;" border="0" cellspacing="5" cellpadding="0">
   <tr>
     <td valign="top"><table width="100%" border="0" cellspacing="5" cellpadding="0">
@@ -166,7 +121,6 @@
         <td height="26" align="center" bgcolor="#FFFFFF" >  
 				<s:checkbox id="%{#obj.id}" name="ids" fieldValue="%{id}" value="false" theme="simple"/>
 			</td>	
-			  <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="id"/></td>		
               <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="factoryName"/></td>
               <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="phone"/></td>
               <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="pricipal"/></td>
