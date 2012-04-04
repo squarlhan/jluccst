@@ -12,113 +12,127 @@ import org.hibernate.annotations.GenericGenerator;
 
 /**
  * 车间实体类
+ * 
  * @author Guiyun Yang
  * @version 1.0.0
  */
 @Entity
-@Table(name = "GROUP_FACTORY")
-public class Workshop {
-	
+@Table( name = "GROUP_WORKSHOP" )
+public class Workshop
+{
+
 	@Id
-	@GenericGenerator(name="system-uuid", strategy="uuid")
-	@GeneratedValue(generator="system-uuid")
-	
+	@GenericGenerator( name = "system-uuid", strategy = "uuid" )
+	@GeneratedValue( generator = "system-uuid" )
 	/**
 	 * 车间实体主键
 	 */
 	private String id;
-	
+
 	/**
 	 * 工厂编号
 	 */
-	@Column(name = "FACTORY_ID")
+	@Column( name = "FACTORY_ID" )
 	private String factoryId;
-	
+
 	/**
 	 * 车间名称
 	 */
-	@Column(name="WORKSHOP_NAME")
+	@Column( name = "WORKSHOP_NAME" )
 	private String workshopName;
-	
+
 	/**
 	 * 车间电话
 	 */
-	@Column(name="PHONE")
+	@Column( name = "PHONE" )
 	private String phone;
-	
+
 	/**
 	 * 车间负责人
 	 */
-	@Column(name="PRICIPAL")
+	@Column( name = "PRICIPAL" )
 	private String pricipal;
-	
+
 	/**
 	 * 排序号
 	 */
-	@Column(name = "SORT_INDEX")
+	@Column( name = "SORT_INDEX" )
 	private int sortIndex;
-	
+
 	/**
 	 * 创建时间
 	 */
-	@Column(name="CREATE_TIME")
-	private Calendar createTime= Calendar.getInstance();
+	@Column( name = "CREATE_TIME" )
+	private Calendar createTime = Calendar.getInstance();
 
-	public String getId() {
+	public String getId()
+	{
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId( String id )
+	{
 		this.id = id;
 	}
 
-	public String getFactoryId() {
+	public String getFactoryId()
+	{
 		return factoryId;
 	}
 
-	public void setFactoryId(String factoryId) {
+	public void setFactoryId( String factoryId )
+	{
 		this.factoryId = factoryId;
 	}
 
-	public String getWorkshopName() {
+	public String getWorkshopName()
+	{
 		return workshopName;
 	}
 
-	public void setWorkshopName(String workshopName) {
+	public void setWorkshopName( String workshopName )
+	{
 		this.workshopName = workshopName;
 	}
 
-	public String getPhone() {
+	public String getPhone()
+	{
 		return phone;
 	}
 
-	public void setPhone(String phone) {
+	public void setPhone( String phone )
+	{
 		this.phone = phone;
 	}
 
-	public String getPricipal() {
+	public String getPricipal()
+	{
 		return pricipal;
 	}
 
-	public void setPricipal(String pricipal) {
+	public void setPricipal( String pricipal )
+	{
 		this.pricipal = pricipal;
 	}
 
-	public int getSortIndex() {
+	public int getSortIndex()
+	{
 		return sortIndex;
 	}
 
-	public void setSortIndex(int sortIndex) {
+	public void setSortIndex( int sortIndex )
+	{
 		this.sortIndex = sortIndex;
 	}
 
-	public Calendar getCreateTime() {
+	public Calendar getCreateTime()
+	{
 		return createTime;
 	}
 
-	public void setCreateTime(Calendar createTime) {
+	public void setCreateTime( Calendar createTime )
+	{
 		this.createTime = createTime;
 	}
 
-	
 }
