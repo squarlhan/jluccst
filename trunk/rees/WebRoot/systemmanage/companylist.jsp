@@ -25,15 +25,11 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
-    <base href="<%=basePath%>">
-    
     <title>公司管理列表</title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">    
-	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-	<meta http-equiv="description" content="This is my page">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<j:scriptlink css="true" tipswindow="true" jmessagebox="true" jquery="true" validate="true" jfunction="true"/>
 	<style type="text/css">
@@ -111,7 +107,7 @@
     </table>
       <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#d5e4fd">
         <tr>
-         <td align="center" >  
+         <td align="center" background="../images/headerbg.jpg">  
    				<s:checkbox theme="simple" id="cbk_all" name="all"></s:checkbox>
    			</td>
               <td align="center" background="../images/headerbg.jpg"><strong>公司名称</strong></td>
