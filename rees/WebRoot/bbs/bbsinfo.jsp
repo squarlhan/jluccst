@@ -6,7 +6,7 @@
 	 * All right reserved.
 	 */
 	/**
-	 * @author XXX
+	 * @author 
 	 * @version 1.0
 	 * @audit  
 	 */
@@ -88,25 +88,13 @@
                   <td height="28" background="../images/bottombg.jpg"><strong>--通知公告--</strong></td>
                   </tr>
                 <tr>
-                  <td height="87" align="left" valign="top" style="padding:5px;"><p>请大家踊跃发言</p>                    </td>
+                  <td height="87" align="left" valign="top" style="padding:5px;"><s:property value="issueName"/></td>
                   </tr>
                 <tr>
-                  <td height="28" background="../images/bottombg.jpg"><strong>--在线用户--</strong></td>
+                  <td height="28" background="../images/bottombg.jpg"><strong>--在线用户--</strong>&nbsp;</td>
                 </tr>
                 <tr>
-                  <td height="205" valign="top" style="padding:5px;"><table width="100%" border="0">
-                    <tr>
-                      <td><span class="STYLE2"><strong>张三</strong>--一厂厂长</span></td>
-                    </tr>
-                    <tr>
-                      <td><span class="STYLE2"><strong>李四</strong>--二厂厂长</span></td>
-                    </tr>
-                    <tr>
-                      <td><span class="STYLE2"><strong>王五</strong>--三厂厂长</span></td>
-                    </tr>
-                    <tr>
-                      <td><span class="STYLE2"><strong>沈六</strong>--四厂厂长</span></td>
-                    </tr>
+                  <td height="205" valign="top" style="padding:5px;"><table width="78" border="0" height="140"><s:property value="joinPerson"/>
                   </table></td>
                 </tr>
               </table></td>
