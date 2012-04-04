@@ -1,6 +1,8 @@
 package com.boan.rees.group.dao;
 
 
+import java.util.List;
+
 import com.boan.rees.group.model.Factory;
 import com.boan.rees.utils.dao.IBaseDao;
 
@@ -21,4 +23,11 @@ public interface IFactoryDao extends IBaseDao<Factory, String>
 	 * @return
 	 */
 	public boolean isExistSameName( String id, String name );
+	
+	/**
+	 * 公司id
+	 * @param companyId
+	 * @return
+	 */
+	public List<Factory> queryFactoriesByCompanyId( String companyId );
 }
