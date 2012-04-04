@@ -24,13 +24,11 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
-    <base href="<%=basePath%>">   
     <title>车间管理列表</title>   
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
-	<meta http-equiv="expires" content="0">    
-	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-	<meta http-equiv="description" content="This is my page">
+	<meta http-equiv="expires" content="0">   
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" /> 
 	<j:scriptlink css="true" tipswindow="true" jmessagebox="true" jquery="true" validate="true" jfunction="true"/>
 	<style type="text/css">
 	<!--
@@ -44,9 +42,10 @@
 	
 		$(function(){
 			$("#addbtn").click(function(){
-				parent.parent.parent.tipsWindown("添加车间信息","iframe:openAddWorkshopAction.action","460","350","true","","true","no");
-			
-		
+				parent.parent.tipsWindown("添加车间信息","iframe:openAddWorkshopAction.action?factoryId="+$("#factoryId").val(),"460","200","true","","true","no");
+				parent.parent.$("#windown-close").bind('click',function(){
+					window.location.href="./openWorkshopAction.action?factoryId="+$("#factoryId").val();
+				});
 			});
 			$.fn.checkall("cbk_all");
 	  		$.fn.uncheckall("ids","cbk_all");
@@ -57,7 +56,11 @@
 	  		$('a[name="edit"]').each(function(){
 	  			$(this).click(function(){
 	  				var url = $(this).attr("url");
-	  				parent.parent.parent.tipsWindown("修改车间信息","iframe:"+url,"460","350","true","","true","no");
+	  				url += "&factoryId="+$("#factoryId").val();
+	  				parent.parent.tipsWindown("修改车间信息","iframe:"+url,"460","200","true","","true","no");
+	  				parent.parent.$("#windown-close").bind('click',function(){
+						window.location.href="./openWorkshopAction.action?factoryId="+$("#factoryId").val();
+					});
 	  			});
 	  		});
 	  		
@@ -90,6 +93,7 @@
   
   <body>
  <s:form id="form1" name="form1" method="post" theme="simple">
+ <s:hidden name="factoryId" id="factoryId"></s:hidden>
 <table width="100%" style="height:100%;" border="0" cellspacing="5" cellpadding="0">
   <tr>
     <td valign="top"><table width="100%" border="0" cellspacing="5" cellpadding="0">
@@ -102,11 +106,11 @@
     </table>
       <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#d5e4fd">
         <tr>
-         <td align="center" >  
+         <td align="center" background="../images/headerbg.jpg">  
    				<s:checkbox theme="simple" id="cbk_all" name="all"></s:checkbox>
    			</td>
               <td align="center" background="../images/headerbg.jpg"><strong>车间名称</strong></td>
-              <td align="center" background="../images/headerbg.jpg"><strong>负责人</strong></td>
+              <td align="center" background="../images/headerbg.jpg"><strong>车间负责人</strong></td>
               <td align="center" background="../images/headerbg.jpg"><strong>车间电话</strong></td>
               <td align="center" background="../images/headerbg.jpg"><strong>操作</strong></td>
         </tr>

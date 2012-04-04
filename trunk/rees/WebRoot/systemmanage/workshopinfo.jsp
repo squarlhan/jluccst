@@ -33,15 +33,11 @@
 			/**
 		  	 * 验证条件
 		  	 */
-			var _company_submit = {
+		  	var _customer_submit = {
 				rules: {
-					//"device.deviceNum":{},
-					//"device.deviceType":{},
-					//"company.id":{required:true},
-					//"device.deviceModel":{},
-					//"device.deviceFactory":{},
-					//"device.controlpoint":{digits:true},
-					//"device.filePath":{url:true}
+					"workshop.workshopName":{required:true,strangecode:true},
+					"workshop.principal":{strangecode:true},
+					"workshop.phone":{strangecode:true}
 				}
 			};
 			/**
@@ -67,7 +63,7 @@
 		  	 */
 			$.fn.save = function(){
 				$("#addBtn").click(function() {
-					var validate_settings_submit = jQuery.extend({}, _company_submit);
+					var validate_settings_submit = jQuery.extend({}, _customer_submit);
 	               	var validator = $("form").validate(validate_settings_submit);
 	               	if(!validator.form()){
 						return false;
@@ -77,6 +73,7 @@
 					}else{
 		               	form1.action = "toAddWorkshopAction.action";					
 					}
+					form1.target = "iframe1";
 	               	form1.submit();
           		});
           	}
@@ -140,7 +137,7 @@
 										<td height="26" colspan="2" align="center" bgcolor="#FFFFFF">
 											<input name="addBtn" type="button" class="btn_2_3" id="addBtn" value="确定">
 											&nbsp;&nbsp;
-											<input name="closeBtn" type="button" class="btn_2_3" id="closeBtn" value="关闭">
+											<input name="closeBtn" type="button" class="btn_2_3" id="closeBtn" value="取消">
 										</td>
 									</tr>
 								</table>
@@ -150,6 +147,7 @@
 				</td>
 			</tr>
 		</table>
+		<iframe id="iframe1" name="iframe1" width="1px" height="1px"></iframe>
 		</s:form>
 	</body>
 </html>
