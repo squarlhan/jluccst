@@ -87,6 +87,12 @@ public class FactoryServiceImpl implements IFactoryService{
 		return pagination;
 	}
 
+	@Override
+	public boolean isExistSameName( String id, String name )
+	{
+		return groupFactoryDao.isExistSameName( id, name );
+	}
+
 
 }
 

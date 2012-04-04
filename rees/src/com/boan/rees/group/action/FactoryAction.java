@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
+
+import com.boan.rees.common.Message;
 import com.boan.rees.group.model.Factory;
 import com.boan.rees.group.service.IFactoryService;
 import com.boan.rees.utils.action.BaseActionSupport;
@@ -36,6 +38,11 @@ public class FactoryAction extends BaseActionSupport
 	 * 公司ID
 	 */
 	private String companyId = null;
+	
+	/**
+	 * 提示
+	 */
+	private Message message = new Message();
 
 	/**
 	 * 显示工厂列表
@@ -65,8 +72,21 @@ public class FactoryAction extends BaseActionSupport
 	 */
 	public String toAddFactory()
 	{
-		service.save( factory );
-		return SUCCESS;
+		// 验证用户名是否重复
+		boolean b = service.isExistSameName( factory.getId(), factory.getFactoryName() );
+		// 如果存在，则提示
+		if( b )
+		{
+			message.setContent( "相同公司名称已存在，请重新输入！" );
+			return ERROR;
+		}
+		else
+		{
+			factory.setCompanyId( companyId );
+			service.save( factory );
+			message.setContent( "工厂信息保存成功！" );
+			return SUCCESS;
+		}
 	}
 
 	/**
@@ -88,8 +108,21 @@ public class FactoryAction extends BaseActionSupport
 	 */
 	public String toModifyFactory()
 	{
-		service.update( factory );
-		return SUCCESS;
+		// 验证用户名是否重复
+		boolean b = service.isExistSameName( factory.getId(), factory.getFactoryName() );
+		// 如果存在，则提示
+		if( b )
+		{
+			message.setContent( "相同工厂名称已存在，请重新输入！" );
+			return ERROR;
+		}
+		else
+		{
+			factory.setCompanyId( companyId );
+			service.update( factory );
+			message.setContent( "工厂信息保存成功！" );
+			return SUCCESS;
+		}
 	}
 
 	/**
@@ -139,5 +172,15 @@ public class FactoryAction extends BaseActionSupport
 	public void setCompanyId( String companyId )
 	{
 		this.companyId = companyId;
+	}
+
+	public Message getMessage()
+	{
+		return message;
+	}
+
+	public void setMessage( Message message )
+	{
+		this.message = message;
 	}
 }

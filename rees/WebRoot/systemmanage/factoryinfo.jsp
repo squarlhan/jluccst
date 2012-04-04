@@ -33,15 +33,11 @@
 			/**
 		  	 * 验证条件
 		  	 */
-			var _company_submit = {
+		  	var _customer_submit = {
 				rules: {
-					//"device.deviceNum":{},
-					//"device.deviceType":{},
-					//"company.id":{required:true},
-					//"device.deviceModel":{},
-					//"device.deviceFactory":{},
-					//"device.controlpoint":{digits:true},
-					//"device.filePath":{url:true}
+					"factory.factoryName":{required:true,strangecode:true},
+					"factory.phone":{strangecode:true},
+					"factory.principal":{strangecode:true}
 				}
 			};
 			/**
@@ -67,7 +63,7 @@
 		  	 */
 			$.fn.save = function(){
 				$("#addBtn").click(function() {
-					var validate_settings_submit = jQuery.extend({}, _company_submit);
+					var validate_settings_submit = jQuery.extend({}, _customer_submit);
 	               	var validator = $("form").validate(validate_settings_submit);
 	               	if(!validator.form()){
 						return false;
@@ -77,6 +73,7 @@
 					}else{
 		               	form1.action = "toAddFactoryAction.action";					
 					}
+					form1.target = "iframe1";
 	               	form1.submit();
           		});
           	}
@@ -101,6 +98,7 @@
 	<body>
 		<s:form id="form1" name="form1" method="post" theme="simple">
 		<s:hidden id="factoryId" name="factory.id"></s:hidden>
+		<s:hidden id="companyId" name="companyId"></s:hidden>
 		<table width="100%" border="0" cellspacing="5" cellpadding="0">
 			<tr>
 				<td>
@@ -120,7 +118,7 @@
 									</tr>
 									<tr>
 										<td height="26" align="right" bgcolor="#FFFFFF">
-											<strong>电话：</strong>
+											<strong>工厂电话：</strong>
 										</td>
 										<td height="26" align="left" bgcolor="#FFFFFF">
 											<s:textfield id="phone" name="factory.phone" cssStyle="width: 250px;" maxlength="100"></s:textfield>
@@ -128,17 +126,17 @@
 									</tr>
 									<tr>
 										<td height="26" align="right" bgcolor="#FFFFFF">
-											<strong>负责人：</strong>
+											<strong>工厂负责人：</strong>
 										</td>
 										<td height="26" align="left" bgcolor="#FFFFFF">
-											<s:textfield id="pricipal" name="factory.principal" cssStyle="width: 250px;"></s:textfield>
+											<s:textfield id="pricipal" name="factory.principal" cssStyle="width: 250px;" maxlength="25"></s:textfield>
 										</td>
 									</tr>
 									<tr>
 										<td height="26" colspan="2" align="center" bgcolor="#FFFFFF">
 											<input name="addBtn" type="button" class="btn_2_3" id="addBtn" value="确定">
 											&nbsp;&nbsp;
-											<input name="closeBtn" type="button" class="btn_2_3" id="closeBtn" value="关闭">
+											<input name="closeBtn" type="button" class="btn_2_3" id="closeBtn" value="取消">
 										</td>
 									</tr>
 								</table>
@@ -148,6 +146,7 @@
 				</td>
 			</tr>
 		</table>
+		<iframe id="iframe1" name="iframe1" width="1px" height="1px"></iframe>
 		</s:form>
 	</body>
 </html>

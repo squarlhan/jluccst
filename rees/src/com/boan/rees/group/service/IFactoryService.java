@@ -13,23 +13,31 @@ import com.boan.rees.utils.page.Pagination;
 
 /**
  * 工厂服务类接口
+ * 
  * @author Guiyun Yang
  * @version 1.0.0
  */
-public interface IFactoryService {
-	
-public List<Factory> findAllGroupFactory();
-	
-	public Factory get(String id);
-	
-	public void deleteGroupFactory(String... ids );
-	
-	public void save(Factory table1);
-	
-	public void update(Factory factory);
+public interface IFactoryService
+{
 
-	Pagination<Factory> findFactoryForPage(Map<String, ?> values,
-			Pagination<Factory> pagination);
+	public List<Factory> findAllGroupFactory();
 
+	public Factory get( String id );
+
+	public void deleteGroupFactory( String... ids );
+
+	public void save( Factory table1 );
+
+	public void update( Factory factory );
+
+	public Pagination<Factory> findFactoryForPage( Map<String, ?> values, Pagination<Factory> pagination );
+
+	/**
+	 * 判断是否重名
+	 * 
+	 * @param id
+	 * @param name
+	 * @return
+	 */
+	public boolean isExistSameName( String id, String name );
 }
-
