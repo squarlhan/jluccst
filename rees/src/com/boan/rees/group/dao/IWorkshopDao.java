@@ -1,5 +1,7 @@
 package com.boan.rees.group.dao;
 
+import java.util.List;
+
 import org.springframework.stereotype.Repository;
 
 import com.boan.rees.group.model.Workshop;
@@ -24,4 +26,11 @@ public interface IWorkshopDao extends IBaseDao<Workshop,String>{
 	 * @return
 	 */
 	public boolean isExistSameName( String factoryId, String id, String name );
+	
+	/**
+	 * 根据工厂id取车间
+	 * @param factoryId
+	 * @return
+	 */
+	public List<Workshop> queryAllWorkshopsByFactoryId( String factoryId );
 }

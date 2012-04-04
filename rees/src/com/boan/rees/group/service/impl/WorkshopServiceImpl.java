@@ -95,5 +95,10 @@ public class WorkshopServiceImpl implements IWorkshopService {
 	{
 		return groupWorkshopDao.isExistSameName( factoryId, id, name );
 	}
+	@Override
+	public List<Workshop> queryAllWorkshopsByFactoryId( String factoryId )
+	{
+		return groupWorkshopDao.queryAllWorkshopsByFactoryId( factoryId );
+	}
 }
 

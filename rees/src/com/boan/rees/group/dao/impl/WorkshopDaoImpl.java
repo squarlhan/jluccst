@@ -65,4 +65,13 @@ public class WorkshopDaoImpl extends BaseDao<Workshop, String> implements
 		return b;
 	}
 
+	@Override
+	public List<Workshop> queryAllWorkshopsByFactoryId( String factoryId )
+	{
+		String hql = "from Workshop where factoryId = :factoryId order by sortIndex asc, createTime asc";
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put( "factoryId", factoryId );
+		return super.find( hql, map );
+	}
+
 }

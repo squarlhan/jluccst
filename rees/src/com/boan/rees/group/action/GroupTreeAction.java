@@ -19,8 +19,10 @@ import org.springframework.stereotype.Controller;
 import com.boan.rees.common.GroupConfig;
 import com.boan.rees.group.model.Company;
 import com.boan.rees.group.model.Factory;
+import com.boan.rees.group.model.Workshop;
 import com.boan.rees.group.service.ICompanyService;
 import com.boan.rees.group.service.IFactoryService;
+import com.boan.rees.group.service.IWorkshopService;
 import com.boan.rees.utils.action.BaseActionSupport;
 
 /**
@@ -44,6 +46,11 @@ public class GroupTreeAction extends BaseActionSupport
 	
 	private List<Factory> factoryList = null;
 	
+	@Autowired
+	@Qualifier("workshopService")
+	private IWorkshopService workshopService = null;
+	
+	private List<Workshop> workshopList = null;
 	/**
 	 * 显示组织机构树为工厂
 	 * @return
@@ -76,6 +83,40 @@ public class GroupTreeAction extends BaseActionSupport
 		}
 		return "group-tree-for-workshop";
 	}
+	/**
+	 * 显示组织机构树,带公司、工厂、车间
+	 * @return
+	 */
+	public String showGroupTreeForDevice()
+	{
+		companyList = companyService.queryAllCompanysByRootId( GroupConfig.ROOT_ID );
+		List<Factory> list = null;
+		List<Workshop> lt = null;
+		if( companyList != null && companyList.size() > 0 )
+		{
+			factoryList = new ArrayList<Factory>();
+			workshopList = new ArrayList<Workshop>();
+			for( int i = 0; i < companyList.size(); i++ )
+			{
+				list = factoryService.queryFactoriesByCompanyId( companyList.get( i ).getId() );
+				if( list != null && list.size() > 0)
+				{
+					factoryList.addAll( list );
+					
+					for( int k = 0; k < factoryList.size(); k++ )
+					{
+						lt = workshopService.queryAllWorkshopsByFactoryId( factoryList.get( k ).getId() );
+						if( lt != null && lt.size() > 0 )
+						{
+							workshopList.addAll( lt );
+						}
+					}
+					
+				}
+			}
+		}
+		return "group-tree-for-device";
+	}
 	
 	public List<Company> getCompanyList()
 	{
@@ -95,6 +136,16 @@ public class GroupTreeAction extends BaseActionSupport
 	public void setFactoryList( List<Factory> factoryList )
 	{
 		this.factoryList = factoryList;
+	}
+
+	public List<Workshop> getWorkshopList()
+	{
+		return workshopList;
+	}
+
+	public void setWorkshopList( List<Workshop> workshopList )
+	{
+		this.workshopList = workshopList;
 	}
 }
 
