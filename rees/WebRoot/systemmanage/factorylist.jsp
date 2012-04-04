@@ -109,8 +109,8 @@
    				<s:checkbox theme="simple" id="cbk_all" name="all"></s:checkbox>
    			</td>
               <td align="center" background="../images/headerbg.jpg"><strong>工厂名称</strong></td>
-              <td align="center" background="../images/headerbg.jpg"><strong>电话</strong></td>
-              <td align="center" background="../images/headerbg.jpg"><strong>负责人</strong></td>
+              <td align="center" background="../images/headerbg.jpg"><strong>工厂电话</strong></td>
+              <td align="center" background="../images/headerbg.jpg"><strong>工厂负责人</strong></td>
               <td align="center" background="../images/headerbg.jpg"><strong>操作</strong></td>
         </tr>
         <s:iterator value="pagination.data" status="obj">
