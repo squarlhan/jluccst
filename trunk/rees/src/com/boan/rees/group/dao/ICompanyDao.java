@@ -1,5 +1,7 @@
 package com.boan.rees.group.dao;
 
+import java.util.List;
+
 import org.springframework.stereotype.Repository;
 
 import com.boan.rees.utils.dao.IBaseDao;
@@ -20,4 +22,11 @@ public interface ICompanyDao extends IBaseDao<Company,String>{
 	 * @return
 	 */
 	public boolean isExistSameName( String id, String name );
+	
+	/**
+	 * 查找所有公司列表
+	 * @param rootId
+	 * @return
+	 */
+	public List<Company> queryAllCompanysByRootId( String rootId );
 }

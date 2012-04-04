@@ -28,14 +28,6 @@ public class CompanyServiceImpl implements ICompanyService{
 	@Autowired
 	@Qualifier("companyDao")
 	private ICompanyDao companyDao;
-	@Override
-	/**
-	 * 查找全部公司
-	 */
-	public List<Company> findAllGroupCompany() {
-		
-		return companyDao.findAll();
-	}
 
 	@Override
 	
@@ -79,7 +71,7 @@ public class CompanyServiceImpl implements ICompanyService{
 	 */
 	public Pagination<Company> findCompanyForPage(Map<String, ?> values,Pagination<Company> pagination){
 		
-		String hql = "from Company";
+		String hql = "from Company order by sortIndex asc, createTime asc";
 		List<Company> data = companyDao.findForPage(hql, values, pagination.getStartIndex(), pagination.getPageSize());
 		hql = "select count(*) from Company";
 		int totalRows = companyDao.findCountForPage(hql, values);
@@ -92,6 +84,12 @@ public class CompanyServiceImpl implements ICompanyService{
 	public boolean isExistSameName( String id, String name )
 	{
 		return companyDao.isExistSameName( id, name );
+	}
+
+	@Override
+	public List<Company> queryAllCompanysByRootId( String rootId )
+	{
+		return companyDao.queryAllCompanysByRootId( rootId );
 	}
 
 }

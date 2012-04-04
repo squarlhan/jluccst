@@ -16,11 +16,6 @@ import com.boan.rees.utils.page.Pagination;
    * @version 1.0.0
    */
    public interface ICompanyService {
-	/**
-	 * 查找所有的公司信息
-	 * @return
-	 */
-   public List<Company> findAllGroupCompany();
    /**
    * 获得某个公司的编号
    * @return
@@ -54,5 +49,12 @@ import com.boan.rees.utils.page.Pagination;
 	 * @return
 	 */
 	public boolean isExistSameName( String id, String name );
+	
+	/**
+	 * 查找所有公司列表
+	 * @param rootId
+	 * @return
+	 */
+	public List<Company> queryAllCompanysByRootId( String rootId );
 }
 

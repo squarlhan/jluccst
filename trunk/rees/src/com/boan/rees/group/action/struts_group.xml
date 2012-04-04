@@ -56,16 +56,6 @@
 		<action name="deleteFactoryAction" class="factoryAction" method="deleteFactory"></action>
 	</package>
 
-	<!-- 权限Action -->
-	<package name="group_popedom_role" extends="struts-default" namespace="/">
-
-	</package>
-
-	<!-- 角色Action -->
-	<package name="group_role" extends="struts-default" namespace="/">
-
-	</package>
-
 	<!-- 车间Action -->
 	<package name="group_workshop" extends="struts-default"
 		namespace="/">
@@ -104,6 +94,22 @@
 			method="deleteWorkshop"></action>
 	</package>
 
+	<!-- 组织机构树 -->
+	<package name="group_tree" extends="struts-default" namespace="/">
+		<action name="groupTreeAction" class="groupTreeAction">
+			<result name="group-tree-for-factory">/systemmanage/group-tree-for-factory.jsp</result>
+		</action>
+	</package>
+	
+	<!-- 权限Action -->
+	<package name="group_popedom_role" extends="struts-default" namespace="/">
+
+	</package>
+
+	<!-- 角色Action -->
+	<package name="group_role" extends="struts-default" namespace="/">
+
+	</package>
 	<package name="group_user" extends="struts-default" namespace="/">
 		<action name="userAction" class="userAction">
 			<result name="show-user">/systemmanage/userinfo.jsp</result>

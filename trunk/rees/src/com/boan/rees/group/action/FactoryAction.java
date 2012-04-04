@@ -1,5 +1,8 @@
 package com.boan.rees.group.action;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
@@ -51,7 +54,9 @@ public class FactoryAction extends BaseActionSupport
 	 */
 	public String openFactory()
 	{
-		pagination = service.findFactoryForPage( null, pagination );
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put( "companyId", companyId );
+		pagination = service.findFactoryForPage( map, pagination );
 		return SUCCESS;
 	}
 
