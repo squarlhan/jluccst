@@ -100,7 +100,8 @@
 
 	<body>
 		<s:form id="form1" name="form1" method="post" theme="simple">
-		<s:hidden id="WorkshopId" name="workshop.id"></s:hidden>
+		<s:hidden id="workshopId" name="workshop.id"></s:hidden>
+		<s:hidden id="factoryId" name="factoryId"></s:hidden>
 		<table width="100%" border="0" cellspacing="5" cellpadding="0">
 			<tr>
 				<td>
@@ -121,10 +122,10 @@
 									</tr>
 									<tr>
 										<td height="26" align="right" bgcolor="#FFFFFF">
-											<strong>负责人：</strong>
+											<strong>车间负责人：</strong>
 										</td>
 										<td height="26" align="left" bgcolor="#FFFFFF">
-											<s:textfield id="txt_adress" name="workshop.pricipal" cssStyle="width: 250px;" maxlength="25"></s:textfield>
+											<s:textfield id="txt_adress" name="workshop.principal" cssStyle="width: 250px;" maxlength="25"></s:textfield>
 										</td>
 									</tr>
 									<tr>

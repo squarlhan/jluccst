@@ -48,8 +48,8 @@
 			
 		
 			});
-			$.fn.CheckBoxAll("cbk_all");
-	  		$.fn.UnCheckBoxAll("ids","cbk_all");
+			$.fn.checkall("cbk_all");
+	  		$.fn.uncheckall("ids","cbk_all");
 
 	  		/**
 	  		 * 修改公司信息
@@ -83,53 +83,6 @@
   				}
 	  		});
 		});
-		
-		
-		/******************************************************************************************/
-		/**
-	  	 * 点击选复选框时，执行全选/取消全选功能
-	  	 * @param chkallid
-	  	 * 执行全选功能的checkbox的id值
-	  	 */
-	  	$.fn.CheckBoxAll = function (chkallid) {
-	  		$("#" + chkallid).click(function () {
-	  			var b = ($(this).attr("checked"));
-	  			$(":checkbox").each(function () {
-	  				if( !$(this).attr("disabled") ){
-	  					$(this).attr("checked", b);
-	  				}
-	  			});
-	  		});
-	  		if($(":checkbox").length == 1){
-	  			$("#" + chkallid).attr("disabled","true");
-	  		}
-	  	};
-
-	  	/**
-	  	 * 子复选框有一个处理非选中状态时，执行全选功能的复选框将置为非选中状态
-	  	 * @param subchkname
-	  	 * 子复选框的name
-	  	 * @param chkallid
-	  	 * 执行全选功能的复选框id
-	  	 */
-	  	$.fn.UnCheckBoxAll = function (subchkname, chkallid) {
-	  		$(":checkbox[name='" + subchkname + "']").click(function () {
-	  			var l = $(":checkbox[name='" + subchkname + "']").length;
-	  			if (!$(this).attr("checked")) {
-	  				$("#" + chkallid).attr("checked", false);
-	  			} else {
-	  				var i = 0;
-	  				$(":checkbox[name='" + subchkname + "']").each(function () {
-	  					if ($(this).attr("checked")) {
-	  						i++;
-	  					}
-	  				});
-	  				if (l == i) {
-	  					$("#" + chkallid).attr("checked", true);
-	  				}
-	  			}
-	  		});
-}; 
 	</script>
 
   </head>
@@ -163,7 +116,7 @@
 				<s:checkbox id="%{#obj.id}" name="ids" fieldValue="%{id}" value="false" theme="simple"/>
 			</td>
               <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="workshopName"/></td>
-              <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="pricipal"/></td>
+              <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="principal"/></td>
               <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="phone"/></td>
           <td height="26" colspan="2" align="center" bgcolor="#FFFFFF">
           	<s:url id="edit_url" action="openModifyWorkshopAction">   
