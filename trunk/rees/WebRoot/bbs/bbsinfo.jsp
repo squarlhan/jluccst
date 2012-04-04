@@ -56,20 +56,7 @@
               <td width="69%" valign="top" bgcolor="#FFFFFF"><table width="100%" border="0">
                 <tr>
                   <td height="321" colspan="2" valign="top" style="padding:5px;"><table width="100%" border="0" style="margin-top:10px;">
-                    <tr>
-                      <td class="STYLE1">这是一个技术问题，希望厂家能够派从来解决</td>
-                    </tr>
-                    <tr>
-                      <td class="STYLE1"><strong>李四</strong>--二厂厂长　2012-2-16 11:12:25</td>
-                    </tr>
-                  </table>                    
-                    <table width="100%" border="0" style="margin-top:10px;">
-                      <tr>
-                        <td class="STYLE1">这是一个技术问题，希望厂家能够派从来解决</td>
-                      </tr>
-                      <tr>
-                        <td class="STYLE1"><strong>李四</strong>--二厂厂长　2012-2-16 11:12:25</td>
-                      </tr>
+                  
                     </table>                    <p class="STYLE1">&nbsp;</p>                    </td>
                   </tr>
                 <tr>
