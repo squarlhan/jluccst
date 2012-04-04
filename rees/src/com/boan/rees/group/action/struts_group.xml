@@ -4,8 +4,7 @@
     "http://struts.apache.org/dtds/struts-2.3.dtd">
 <struts>
 	<!-- 公司Action -->
-	<package name="group_company" extends="struts-default"
-		namespace="/">
+	<package name="group_company" extends="struts-default" namespace="/">
 		<action name="openCompanyAction" class="companyAction" method="openCompany">
 			<result name="success">/systemmanage/companylist.jsp</result>
 			<result name="input">/systemmanage/companylist.jsp</result>
@@ -26,13 +25,11 @@
 			<result name="success">/common/message.jsp</result>
 			<result name="error">/common/messagenoclose.jsp</result>
 		</action>
-		<action name="deleteCompanyAction" class="companyAction"
-			method="deleteCompany" />
+		<action name="deleteCompanyAction" class="companyAction" method="deleteCompany" />
 	</package>
 
 	<!-- 工厂Action -->
-	<package name="group_factory" extends="struts-default"
-		namespace="/">
+	<package name="group_factory" extends="struts-default" namespace="/">
 		<action name="openFactoryAction" class="factoryAction" method="openFactory">
 			<result name="success">/systemmanage/factorylist.jsp</result>
 			<result name="input">/systemmanage/factorylist.jsp</result>
@@ -57,41 +54,28 @@
 	</package>
 
 	<!-- 车间Action -->
-	<package name="group_workshop" extends="struts-default"
-		namespace="/">
-		<!-- 用于分页显示 -->
-		<action name="openWorkshopAction" class="workshopAction"
-			method="openWorkshop">
+	<package name="group_workshop" extends="struts-default" namespace="/">
+		<action name="openWorkshopAction" class="workshopAction" method="openWorkshop">
 			<result name="success">/systemmanage/workshoplist.jsp</result>
 			<result name="input">/systemmanage/workshoplist.jsp</result>
 		</action>
-		<!-- 打开添加页 -->
-		<action name="openAddWorkshopAction" class="workshopAction"
-			method="openAddWorkshop">
+		<action name="openAddWorkshopAction" class="workshopAction" method="openAddWorkshop">
 			<result name="success">/systemmanage/workshopinfo.jsp</result>
 			<result name="input">/systemmanage/workshopinfo.jsp</result>
 		</action>
-		<!-- 用于添加一个车间信息 -->
-		<action name="toAddWorkshopAction" class="workshopAction"
-			method="toAddWorkshop">
-			<result name="success">/systemmanage/workshopinfo.jsp</result>
-			<result name="input">/systemmanage/workshopinfo.jsp</result>
+		<action name="toAddWorkshopAction" class="workshopAction" method="toAddWorkshop">
+			<result name="success">/common/message.jsp</result>
+			<result name="error">/common/messagenoclose.jsp</result>
 		</action>
-		<!-- 用于打开修改车间信息页面 -->
-		<action name="openModifyWorkshopAction" class="workshopAction"
-			method="openModifyWorkshop">
+		<action name="openModifyWorkshopAction" class="workshopAction" method="openModifyWorkshop">
 			<result name="success">/systemmanage/workshopinfo.jsp</result>
 			<result name="input">/systemmange/workshopinfo.jsp</result>
 		</action>
-		<!-- 用于修改车间信息 -->
-		<action name="toModifyWorkshopAction" class="workshopAction"
-			method="toModifyWorkshop">
-			<result name="success">/systemmanage/workshopinfo.jsp</result>
-			<result name="input">/systemmanage/workshopinfo.jsp</result>
+		<action name="toModifyWorkshopAction" class="workshopAction" method="toModifyWorkshop">
+			<result name="success">/common/message.jsp</result>
+			<result name="error">/common/messagenoclose.jsp</result>
 		</action>
-		<!-- 删除车间 -->
-		<action name="deleteWorkshopAction" class="workshopAction"
-			method="deleteWorkshop"></action>
+		<action name="deleteWorkshopAction" class="workshopAction" method="deleteWorkshop"></action>
 	</package>
 
 	<!-- 组织机构树 -->

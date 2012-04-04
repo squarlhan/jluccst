@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
+import com.boan.rees.common.Message;
 import com.boan.rees.group.model.Workshop;
 import com.boan.rees.group.service.IWorkshopService;
 import com.boan.rees.utils.action.BaseActionSupport;
@@ -29,6 +30,8 @@ public class WorkshopAction extends BaseActionSupport
 	private String[] ids = null;
 
 	private String factoryId = null;
+	
+	private Message message = new Message();
 
 	/**
 	 * 显示车间列表
@@ -60,9 +63,21 @@ public class WorkshopAction extends BaseActionSupport
 	 */
 	public String toAddWorkshop()
 	{
-		workshop.setFactoryId( factoryId );
-		service.save( workshop );
-		return SUCCESS;
+		// 验证用户名是否重复
+		boolean b = service.isExistSameName( factoryId, workshop.getId(), workshop.getWorkshopName() );
+		// 如果存在，则提示
+		if( b )
+		{
+			message.setContent( "相同车间名称已存在，请重新输入！" );
+			return ERROR;
+		}
+		else
+		{
+			workshop.setFactoryId( factoryId );
+			service.save( workshop );
+			message.setContent( "车间信息保存成功！" );
+			return SUCCESS;
+		}
 	}
 
 	/**
@@ -72,6 +87,8 @@ public class WorkshopAction extends BaseActionSupport
 	 */
 	public String openModifyWorkshop()
 	{
+		String id = workshop.getId();
+		workshop = service.get( id );
 		return SUCCESS;
 	}
 
@@ -82,8 +99,21 @@ public class WorkshopAction extends BaseActionSupport
 	 */
 	public String toModifyWorkshop()
 	{
-		service.update( workshop );
-		return SUCCESS;
+		// 验证用户名是否重复
+		boolean b = service.isExistSameName(factoryId, workshop.getId(), workshop.getWorkshopName() );
+		// 如果存在，则提示
+		if( b )
+		{
+			message.setContent( "相同车间名称已存在，请重新输入！" );
+			return ERROR;
+		}
+		else
+		{
+			workshop.setFactoryId( factoryId );
+			service.update( workshop );
+			message.setContent( "车间信息保存成功！" );
+			return SUCCESS;
+		}
 	}
 
 	/**
@@ -145,5 +175,15 @@ public class WorkshopAction extends BaseActionSupport
 	public void setIds( String[] ids )
 	{
 		this.ids = ids;
+	}
+
+	public Message getMessage()
+	{
+		return message;
+	}
+
+	public void setMessage( Message message )
+	{
+		this.message = message;
 	}
 }

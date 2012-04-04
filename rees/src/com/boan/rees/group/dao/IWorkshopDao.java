@@ -15,4 +15,13 @@ import com.boan.rees.utils.dao.IBaseDao;
 public interface IWorkshopDao extends IBaseDao<Workshop,String>{
 
 	public void deleteWorkshopById(String id);
+	
+	/**
+	 * 判断是否重名
+	 * @param factoryId
+	 * @param id
+	 * @param name
+	 * @return
+	 */
+	public boolean isExistSameName( String factoryId, String id, String name );
 }
