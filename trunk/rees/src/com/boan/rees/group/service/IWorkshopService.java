@@ -41,4 +41,11 @@ public interface IWorkshopService
 	 * @return
 	 */
 	public boolean isExistSameName( String factoryId, String id, String name );
+	
+	/**
+	 * 根据工厂id取车间
+	 * @param factoryId
+	 * @return
+	 */
+	public List<Workshop> queryAllWorkshopsByFactoryId( String factoryId );
 }
