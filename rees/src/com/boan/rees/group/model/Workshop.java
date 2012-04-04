@@ -50,8 +50,8 @@ public class Workshop
 	/**
 	 * 车间负责人
 	 */
-	@Column( name = "PRICIPAL" )
-	private String pricipal;
+	@Column( name = "PRINCIPAL" )
+	private String principal;
 
 	/**
 	 * 排序号
@@ -105,16 +105,6 @@ public class Workshop
 		this.phone = phone;
 	}
 
-	public String getPricipal()
-	{
-		return pricipal;
-	}
-
-	public void setPricipal( String pricipal )
-	{
-		this.pricipal = pricipal;
-	}
-
 	public int getSortIndex()
 	{
 		return sortIndex;
@@ -133,6 +123,16 @@ public class Workshop
 	public void setCreateTime( Calendar createTime )
 	{
 		this.createTime = createTime;
+	}
+
+	public String getPrincipal()
+	{
+		return principal;
+	}
+
+	public void setPrincipal( String principal )
+	{
+		this.principal = principal;
 	}
 
 }
