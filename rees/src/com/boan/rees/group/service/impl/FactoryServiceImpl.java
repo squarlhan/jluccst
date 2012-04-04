@@ -78,9 +78,9 @@ public class FactoryServiceImpl implements IFactoryService{
 	 */
 	public Pagination<Factory> findFactoryForPage(Map<String, ?> values,Pagination<Factory> pagination){
 		
-		String hql = "from Factory";
+		String hql = "from Factory where companyId = :companyId order by sortIndex asc, createTime asc";
 		List<Factory> data = groupFactoryDao.findForPage(hql, values, pagination.getStartIndex(), pagination.getPageSize());
-		hql = "select count(*) from Factory";
+		hql = "select count(*) from Factory where companyId = :companyId";
 		int totalRows = groupFactoryDao.findCountForPage(hql, values);
 		pagination.setTotalRows(totalRows);
 		pagination.setData(data);

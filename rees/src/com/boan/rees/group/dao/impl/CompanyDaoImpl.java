@@ -49,4 +49,13 @@ public class CompanyDaoImpl extends BaseDao<Company,String> implements ICompanyD
 		return b;
 	}
 
+	@Override
+	public List<Company> queryAllCompanysByRootId( String rootId )
+	{
+		String hql = "from Company where rootId = :rootId order by sortIndex asc, createTime asc";
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put( "rootId", rootId );
+		return super.find( hql, map );
+	}
+
 }
