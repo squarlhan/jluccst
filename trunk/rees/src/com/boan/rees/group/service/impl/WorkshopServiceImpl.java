@@ -74,9 +74,9 @@ public class WorkshopServiceImpl implements IWorkshopService {
 	@Override
 	  public Pagination<Workshop> findWorkshopForPage(Map<String, ?> values,Pagination<Workshop> pagination){
 			
-			String hql = "from Workshop";
+			String hql = "from Workshop where factoryId = :factoryId order by sortIndex asc, createTime asc";
 			List<Workshop> data = groupWorkshopDao.findForPage(hql, values, pagination.getStartIndex(), pagination.getPageSize());
-			hql = "select count(*) from Workshop";
+			hql = "select count(*) from Workshop where factoryId = :factoryId";
 			int totalRows = groupWorkshopDao.findCountForPage(hql, values);
 			pagination.setTotalRows(totalRows);
 			pagination.setData(data);
