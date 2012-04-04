@@ -74,7 +74,7 @@
 								style="border-left: 1px solid #54a4e3; border-bottom: 1px solid #54a4e3; border-right: 1px solid #54a4e3; padding: 5px;">
 								<iframe width="100%" height="100%" id="groupmain"
 									name="groupmain" frameborder="0" scrolling="no"
-									src="<%=path %>/device/openDeviceAction.action"></iframe>
+									src="about:blank"></iframe>
 							</td>
 						</tr>
 					</table>
