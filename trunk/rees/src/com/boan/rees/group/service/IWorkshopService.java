@@ -12,21 +12,33 @@ import com.boan.rees.utils.page.Pagination;
 
 /**
  * 车间服务类接口
+ * 
  * @author Guiyun Yang
  * @version 1.0.0
  */
-public interface IWorkshopService {
-	
-public List<Workshop> findAllGroupCompany();
-	
-	public Workshop get(String id);
-	
-	public void deleteGroupWorkshop(String... ids );
-	public void deleteWorkshopById(String id);
-	
-	public void save(Workshop table1);
-	public Pagination<Workshop> findWorkshopForPage(Map<String, ?> values,Pagination<Workshop> pagination);
+public interface IWorkshopService
+{
 
-	public void update(Workshop workshop);
+	public List<Workshop> findAllGroupCompany();
+
+	public Workshop get( String id );
+
+	public void deleteGroupWorkshop( String... ids );
+
+	public void deleteWorkshopById( String id );
+
+	public void save( Workshop table1 );
+
+	public Pagination<Workshop> findWorkshopForPage( Map<String, ?> values, Pagination<Workshop> pagination );
+
+	public void update( Workshop workshop );
+	
+	/**
+	 * 判断是否重名
+	 * @param factoryId
+	 * @param id
+	 * @param name
+	 * @return
+	 */
+	public boolean isExistSameName( String factoryId, String id, String name );
 }
-

@@ -90,5 +90,10 @@ public class WorkshopServiceImpl implements IWorkshopService {
 		groupWorkshopDao.update(workshop);
 		
 	}
+	@Override
+	public boolean isExistSameName( String factoryId, String id, String name )
+	{
+		return groupWorkshopDao.isExistSameName( factoryId, id, name );
+	}
 }
 
