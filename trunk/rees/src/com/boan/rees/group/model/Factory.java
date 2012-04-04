@@ -49,7 +49,7 @@ public class Factory {
 	/**
 	 * 工厂负责人
 	 */
-	@Column(name = "PRICIPAL")
+	@Column(name = "PRINCIPAL")
 	private String principal;
 	
 	/**
@@ -118,6 +118,16 @@ public class Factory {
 
 	public void setSortIndex(int sortIndex) {
 		this.sortIndex = sortIndex;
+	}
+
+	public String getPrincipal()
+	{
+		return principal;
+	}
+
+	public void setPrincipal( String principal )
+	{
+		this.principal = principal;
 	}
 
 	
