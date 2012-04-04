@@ -153,12 +153,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               <td height="26" bgcolor="#FFFFFF"><a href="openAddForumMessageInfoAction.action" id="gotobbs">
                        <s:property value="issueName"/>&nbsp;</a>
               </td>
-               <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="joinPersonCount"/></td>
                <td height="26" align="center" bgcolor="#FFFFFF">
-          	      <s:property value="creator"/>&nbsp;
+               <s:property value="joinPersonCount"/>
                </td>
                <td height="26" align="center" bgcolor="#FFFFFF">
-          	      <s:property value="issueStatus"/>&nbsp;
+          	     <s:property value="creator"/>&nbsp;      
+               </td>
+               <td height="26" align="center" bgcolor="#FFFFFF">
+          	           <s:property value="issueStatus"/>&nbsp;
                 </td>
                 <td height="26" colspan="2" align="center" bgcolor="#FFFFFF">
           	       <s:url id="edit_url" action="openModifyForumIssueInfoAction">   
