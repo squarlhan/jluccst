@@ -151,7 +151,7 @@ public class ForumIssueInfoAction extends ActionSupport {
 	 * 修改信息
 	 * @return
 	 */
-	public String toModifyDemo(){
+	public String toModifyForumIssueInfo(){
 		return toAddForumIssueInfo();
 	}
 	
