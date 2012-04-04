@@ -56,4 +56,13 @@ public class FactoryDaoImpl extends BaseDao<Factory, String> implements
 		return b;
 	}
 
+	@Override
+	public List<Factory> queryFactoriesByCompanyId( String companyId )
+	{
+		String hql = "from Factory where companyId = :companyId order by sortIndex asc, createTime asc";
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put( "companyId", companyId );
+		return super.find( hql, map );
+	}
+
 }

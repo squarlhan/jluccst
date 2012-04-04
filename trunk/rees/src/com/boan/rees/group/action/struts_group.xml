@@ -98,6 +98,7 @@
 	<package name="group_tree" extends="struts-default" namespace="/">
 		<action name="groupTreeAction" class="groupTreeAction">
 			<result name="group-tree-for-factory">/systemmanage/group-tree-for-factory.jsp</result>
+			<result name="group-tree-for-workshop">/systemmanage/group-tree-for-workshop.jsp</result>
 		</action>
 	</package>
 	

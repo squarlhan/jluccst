@@ -20,8 +20,6 @@ import com.boan.rees.utils.page.Pagination;
 public interface IFactoryService
 {
 
-	public List<Factory> findAllGroupFactory();
-
 	public Factory get( String id );
 
 	public void deleteGroupFactory( String... ids );
@@ -40,4 +38,11 @@ public interface IFactoryService
 	 * @return
 	 */
 	public boolean isExistSameName( String id, String name );
+	
+	/**
+	 * 公司id
+	 * @param companyId
+	 * @return
+	 */
+	public List<Factory> queryFactoriesByCompanyId( String companyId );
 }
