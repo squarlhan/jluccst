@@ -85,8 +85,8 @@ public class ForumIssueInfoServiceImpl implements IForumIssueInfoService {
 	@Override
 	public Pagination<ForumIssueInfo> findForumIssueInfoForPage(Map<String, ?> values,Pagination<ForumIssueInfo> pagination){
 		
-		String hql = "from ForumIssueInfo";
-		List<ForumIssueInfo> data = forumIssueInfoDao.findForPage(hql, values, pagination.getStartIndex(), pagination.getPageSize());
+		String hql = " from ForumIssueInfo order by createTime desc";
+		List<ForumIssueInfo> data = forumIssueInfoDao.findForPage( hql, values, pagination.getStartIndex(), pagination.getPageSize());
 		hql = "select count(*) from ForumIssueInfo";
 		int totalRows = forumIssueInfoDao.findCountForPage(hql, values);
 		pagination.setTotalRows(totalRows);
