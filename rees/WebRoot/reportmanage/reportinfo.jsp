@@ -144,13 +144,11 @@
             </tr>
             <tr>
 				<td height="26" colspan="2" align="left" bgcolor="#FFFFFF">
-				<input name="读取模板" type="button" value="读取模板" class="btn_2_3" />
+				<input name="addBtn" type="button" value="确认" class="btn_2_3" id="addBtn"/>
 				&nbsp;&nbsp;
-				<input name="保存" type="button" value="保存" class="btn_2_3" id="addBtn"/>
+                <input name="exportBtn" type="button" value="导出" class="btn_2_3" id="exportBtn" />
 				&nbsp;&nbsp;
-                <input name="导出到Word" type="button" value="导出Word" class="btn_2_3" />
-				&nbsp;&nbsp;
-				<input name="退出" type="button" value="退出" class="btn_2_3" id="closeBtn" />
+				<input name="closeBtn" type="button" value="关闭" class="btn_2_3" id="closeBtn" />
 			    </td>
 				</tr>
           </table>
