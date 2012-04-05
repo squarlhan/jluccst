@@ -45,7 +45,7 @@ http://www.springframework.org/schema/aop/spring-aop-3.0.xsd"
 			<props>
 				<prop key="hibernate.dialect">${hibernate.dialect}</prop>
 				<prop key="hibernate.show_sql">true</prop>
-				<prop key="hibernate.hbm2ddl.auto">update</prop>
+				<prop key="hibernate.hbm2ddl.auto">none</prop>
 				<prop key="hibernate.generate_statistics">true</prop>
 			</props>
 		</property>
