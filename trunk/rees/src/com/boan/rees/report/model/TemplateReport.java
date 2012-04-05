@@ -5,6 +5,7 @@
 package com.boan.rees.report.model;
 
 import java.io.Serializable;
+import java.util.Calendar;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -32,11 +33,40 @@ public class TemplateReport implements Serializable{
 	 * 设备实体主键
 	 */
 	private String id;
+	
+	/**
+	 * 汇报类型
+	 */
+	@Column(name = "REPORT_TYPE")
+
+	private String reportType;
+	/**
+	 * 汇报题目
+	 */
+	@Column(name = "REPORT_SUBJECT")
+	private String reportSubject;
+	
+	/**
+	 * 汇报人
+	 */
+	@Column(name = "REPORT_PERSON")
+	private String reportPerson;
+	
+	/**
+	 * 汇报时间
+	 */
+	@Column(name = "REPORT_DATE")
+	private Calendar reportDate;
+	/**
+	 * 汇报内容
+	 */
+	@Column(name = "REPORT_CONTENT")
+	private String reportContent;
+	
 	/**
 	 * 模板名称
 	 */
 	@Column(name = "TEMPLATE_NAME")
-
 	private String templateName;
 	/**
 	 * 模板保存的相对路径
@@ -83,9 +113,36 @@ public class TemplateReport implements Serializable{
 	public void setIsDelete(Integer isDelete) {
 		this.isDelete = isDelete;
 	}
-	
-	
-
+	public String getReportType() {
+		return reportType;
+	}
+	public void setReportType(String reportType) {
+		this.reportType = reportType;
+	}
+	public String getReportSubject() {
+		return reportSubject;
+	}
+	public void setReportSubject(String reportSubject) {
+		this.reportSubject = reportSubject;
+	}
+	public String getReportPerson() {
+		return reportPerson;
+	}
+	public void setReportPerson(String reportPerson) {
+		this.reportPerson = reportPerson;
+	}
+	public Calendar getReportDate() {
+		return reportDate;
+	}
+	public void setReportDate(Calendar reportDate) {
+		this.reportDate = reportDate;
+	}
+	public String getReportContent() {
+		return reportContent;
+	}
+	public void setReportContent(String reportContent) {
+		this.reportContent = reportContent;
+	}
 }
 
 
