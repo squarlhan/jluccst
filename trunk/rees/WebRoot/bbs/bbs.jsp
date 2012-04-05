@@ -107,6 +107,7 @@
 	<body>
 		<s:form id="form1"   theme="simple" >
 		<s:hidden id="hid_forumIssueInfoId" name="forumIssueInfo.id"></s:hidden>
+		<s:hidden id="hid_forumIssueCreator" name="forumIssueInfo.creator"></s:hidden>
 		<table width="100%" border="0" cellspacing="5" cellpadding="0">
 			<tr>
 				<td>
@@ -129,17 +130,17 @@
 											<strong>话题内容：</strong>
 										</td>
 										<td height="26" align="left" bgcolor="#FFFFFF">
-											<s:textfield id="forumIssueInfo.issueConteit" name="forumIssueInfo.issueConteit" cssStyle="width: 250px;"></s:textfield>
+											<s:textfield id="forumIssueInfo.issueContent" name="forumIssueInfo.issueContent" cssStyle="width: 250px;"></s:textfield>
 										</td>
 									</tr>
-									<tr>
+									<!-- tr>
 										<td height="26" align="right" bgcolor="#FFFFFF">
 											<strong>话题创建人：</strong>
 										</td>
 										<td height="26" align="left" bgcolor="#FFFFFF">
-											<s:textfield id="forumIssueInfo.creator" name="forumIssueInfo.creator" cssStyle="width: 250px;"></s:textfield>
+											<s:textfield id="forumIssueInfo.creator" name="forumIssueInfo.creator" cssStyle="width: 250px;" readOnly= "true"></s:textfield>
 										</td>
-									</tr>
+									</tr> -->
 									<tr>
 										<td height="26" align="right" bgcolor="#FFFFFF">
 											<strong>话题状态：</strong>
