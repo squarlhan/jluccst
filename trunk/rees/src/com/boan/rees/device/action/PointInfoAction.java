@@ -10,9 +10,6 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import net.sf.json.JSONArray;
-import net.sf.json.JSONObject;
-
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -130,6 +127,15 @@ public class PointInfoAction extends BaseActionSupport {
 		if(StringUtils.trimToNull(pointId)!=null){
 			pointInfoService.deletePointInfo(pointId);
 		}
+		return SUCCESS;
+	}
+	
+	/**
+	 * 显示设备列表
+	 * @return
+	 */
+	public String deviceListForData(){
+		//deviceInfoService.findDeviceInfoForPage(values, pagination);
 		return SUCCESS;
 	}
 
