@@ -41,8 +41,13 @@ public class WorkshopAction extends BaseActionSupport
 	public String openWorkshop()
 	{
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put( "factoryId", factoryId );
-		pagination = service.findWorkshopForPage( map, pagination );
+		if( factoryId==null){
+			System.out.println("工厂id没有传递 ！");
+		}else{
+			map.put( "factoryId", factoryId );
+			pagination = service.findWorkshopForPage( map, pagination );
+		}
+		
 		return SUCCESS;
 	}
 
