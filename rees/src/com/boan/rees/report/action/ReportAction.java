@@ -1,7 +1,5 @@
 package com.boan.rees.report.action;
 
-import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 
@@ -11,7 +9,9 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.boan.rees.report.model.PersonReport;
+import com.boan.rees.report.model.TemplateReport;
 import com.boan.rees.report.service.IPersonReportService;
+import com.boan.rees.report.service.ITemplateReportService;
 import com.boan.rees.utils.action.BaseActionSupport;
 import com.boan.rees.utils.page.Pagination;
 
@@ -32,6 +32,11 @@ public class ReportAction extends BaseActionSupport{
 	@Autowired
 	@Qualifier("personReportService")
 	private IPersonReportService service;
+	
+	@Autowired
+	@Qualifier("templateReportService")
+	ITemplateReportService templateReportService ;
+	
 	/**
 	 * 分页列表
 	 */
@@ -45,9 +50,6 @@ public class ReportAction extends BaseActionSupport{
 	 */
 	private String[] ids;
 
-	
-
-	
 	public PersonReport getReport() {
 		return report;
 	}
@@ -98,6 +100,16 @@ public class ReportAction extends BaseActionSupport{
 	 */
 	
 	public String openAddReport (){
+		List<TemplateReport>  templateList= templateReportService.findAllTemplateReport();
+		if(templateList.size()>0){
+			TemplateReport template = templateList.get(0);
+			if(template!=null){
+				//获取管理员初始化的汇报题目信息
+				String subject = template.getReportSubject();
+				report.setReportSubject(subject);
+				//......
+			}
+		}
 		return SUCCESS;
 	}
 
@@ -129,9 +141,6 @@ public class ReportAction extends BaseActionSupport{
 		service.update(report);
 		return SUCCESS;
 	}
-	
-
-	
 }
 
 
