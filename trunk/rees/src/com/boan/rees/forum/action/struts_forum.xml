@@ -20,7 +20,7 @@
     		<result name="success">bbs/bbslist.jsp</result>
     		<result name="input">bbs/bbslist.jsp</result>
     	</action>
-    	  <!-- 删除设备 -->
+    	<!-- 删除设备 -->
         <action name="deleteForumIssueInfoAction" class="forumIssueInfoAction" method="deleteForumIssueInfo"/>
         <!-- 打开修改话题菜单 -->
     	<action name="openModifyForumIssueInfoAction" class="forumIssueInfoAction" method="openModifyforumIssueInfo">
