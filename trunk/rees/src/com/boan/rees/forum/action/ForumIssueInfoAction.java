@@ -7,8 +7,8 @@ import org.springframework.stereotype.Controller;
 
 import com.boan.rees.forum.model.ForumIssueInfo;
 import com.boan.rees.forum.service.IForumIssueInfoService;
+import com.boan.rees.utils.action.BaseActionSupport;
 import com.boan.rees.utils.page.Pagination;
-import com.opensymphony.xwork2.ActionSupport;
 
 
 /**
@@ -18,7 +18,7 @@ import com.opensymphony.xwork2.ActionSupport;
  */
 @Controller("forumIssueInfoAction")
 @Scope("prototype")
-public class ForumIssueInfoAction extends ActionSupport {
+public class ForumIssueInfoAction extends BaseActionSupport {
 
 	/**
 	 * 
@@ -98,6 +98,7 @@ public class ForumIssueInfoAction extends ActionSupport {
 	 */
 	public String openAddForumIssueInfo(){
 		//System.out.println("如果添加页需要做一些初始化操作 ，在这写代码！");
+		//forumIssueInfo.setCreator( sessionUserNameChs );
 		return this.SUCCESS;
 	}
 
@@ -106,11 +107,10 @@ public class ForumIssueInfoAction extends ActionSupport {
 	 * @return success：添加页（带成功提示）   input ： 跳转到添加页并带着错误信息
 	 */
 	public String toAddForumIssueInfo(){
-		System.out.println(forumIssueInfo.getIssueConteit());
+		//System.out.println(forumIssueInfo.getIssueContent());
 		try{
 			//调用service保存方法向数据库保存信息
-			
-			
+			forumIssueInfo.setCreator( sessionUserNameChs );
 			forumIssueInfoService.save(forumIssueInfo);
 			message = "保存成功！";
 		}catch(Exception e){
@@ -143,7 +143,7 @@ public class ForumIssueInfoAction extends ActionSupport {
 	 * @return
 	 */
 	public String toModifyforumIssueInfo(){
-		forumIssueInfo.update(forumIssueInfo);
+		forumIssueInfoService.update(forumIssueInfo);
 		return SUCCESS;
 	}
 	
