@@ -11,7 +11,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
-    <base href="<%=basePath%>">
     
     <title>My JSP 'bbslist.jsp' starting page</title>
     
@@ -134,16 +133,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           		<input name="deletepointbtn" type="button" class="btn_4" id="deletepointbtn" value="删除话题"></td>
           </tr>
     </table></td></tr>
-    <tr><td><table width="821" border="0" cellpadding="5" cellspacing="1" bgcolor="#d5e4fd" height="173">
+    <tr><td><table width="821" border="0" cellpadding="5" cellspacing="1" bgcolor="#d5e4fd">
              <tr>
-               <td align="center" >  
+               <td align="center" background="images/headerbg.jpg">  
    				<s:checkbox theme="simple" id="cbk_all" name="all"></s:checkbox>
    			   </td>
-              
-              <td align="center" background="../images/headerbg.jpg"><strong>话题名称</strong></td>
-              <td align="center" background="../images/headerbg.jpg"><strong>参与人数</strong></td>
-              <td align="center" background="../images/headerbg.jpg"><strong>发起人</strong></td>
-              <td align="center" background="../images/headerbg.jpg"><strong>状态</strong></td>
+              <td align="center" background="images/headerbg.jpg"><strong>话题名称</strong></td>
+              <td align="center" background="images/headerbg.jpg"><strong>参与人数</strong></td>
+              <td align="center" background="images/headerbg.jpg"><strong>发起人</strong></td>
+              <td align="center" background="images/headerbg.jpg"><strong>发起时间</strong></td>
+              <td align="center" background="images/headerbg.jpg"><strong>状态</strong></td>
+              <td align="center" background="images/headerbg.jpg"><strong>&nbsp;</strong></td>
             </tr>
             <s:iterator value="pagination.data" status="obj">
             <tr>
@@ -160,7 +160,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           	     <s:property value="creator"/>&nbsp;      
                </td>
                <td height="26" align="center" bgcolor="#FFFFFF">
-          	           <s:property value="issueStatus"/>&nbsp;
+          	     <s:property value="createTimeStr"/>&nbsp;      
+               </td>
+               <td height="26" align="center" bgcolor="#FFFFFF">
+               <s:if test="issueStatus==1">进行中</s:if>
+               <s:if test="issueStatus==0">已结束</s:if>&nbsp;
                 </td>
                 <td height="26" colspan="2" align="center" bgcolor="#FFFFFF">
           	       <s:url id="edit_url" action="openModifyForumIssueInfoAction">   
@@ -171,7 +175,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
              </tr>
               </s:iterator>
             <tr>
-			<td colspan="5" align="center">
+			<td colspan="8" align="center"  background="images/headerbg.jpg">
 			<page:pages currentPage="pagination.currentPage" totalPages="pagination.totalPages" totalRows="pagination.totalRows" styleClass="page" theme="text" ></page:pages> 
 		   	</td>
 		  </tr>
