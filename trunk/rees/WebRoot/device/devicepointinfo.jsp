@@ -22,7 +22,7 @@
 			+ path + "/";
 %>
 
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html>
 	<head>
 		<base href="<%=basePath%>">
@@ -99,7 +99,6 @@
 				
 				var newBtn ='<img id="delOtherBtn" name="delOtherBtn" onclick="$.fn.dynamicRemove($(this))" src="<%=basePath%>/images/symbol-remove.png" style="height:18px;width:20px;cursor:pointer" title="删除"></img>';
 				row.find("img[id='firstDelBtn']").remove();
-				row.find("img[name='setPositionBtn']").remove();
 				row.find("img[name='setParamBtn']").remove();
 				row.find("img").replaceWith(newBtn); 
 				row.find("input[type='hidden']").val("");
@@ -182,8 +181,9 @@
 		/**
 		 * 检测点定位
 		 */
-		$.fn.setPosition =function(pointId,obj){
-			alert("定位检测点: 检测点id="+pointId);
+		$.fn.setPosition =function(){
+			var deviceId = $("#hid_deviceId").val();
+			parent.tipsWindown("监测点定位", "iframe:datamanage/pointlist.action?deviceId=" + deviceId, "600", "473", "true", "", "true", "", "auto");
 		}
 		
 		/**
@@ -214,7 +214,7 @@
 											<strong>监测点数量：</strong>
 										</td>
 										<td height="26" align="left" bgcolor="#FFFFFF">
-											</font><s:textfield id="txt_pointNum" value="%{pointInfoList.size}" cssStyle="width: 230px;color:red;" maxlength="10" readonly="true"></s:textfield>
+											</font><s:textfield id="txt_pointNum" value="%{pointInfoList.size}" cssStyle="width: 280px;color:red;" maxlength="10" readonly="true"></s:textfield>
 										</td>
 									</tr>
 									
@@ -227,10 +227,9 @@
 											<s:hidden name="id"></s:hidden>
 											<s:hidden name="positionX"></s:hidden>
 											<s:hidden name="positionY"></s:hidden>
-											<s:textfield id="controlPointName" name="controlPointName" cssStyle="width: 230px;" maxlength="15"></s:textfield><font color="red">*</font>
+											<s:textfield id="controlPointName" name="controlPointName" cssStyle="width: 280px;" maxlength="15"></s:textfield><font color="red">*</font>
 											<s:if test="#pointInfo.index+1==1">
 												<s:if test='id!=null'>
-													<img name="setPositionBtn" src="<%=basePath%>/images/pin_blue.png" style="height:18px;width:20px;cursor:pointer" title="定位" onclick="$.fn.setPosition('${id}',$(this))"></img>
 													<img name="setParamBtn" src="<%=basePath%>/images/item.png" style="height:18px;width:20px;cursor:pointer" title="参数" onclick="$.fn.setParam('${id}',$(this))"></img>
 												</s:if>
 												<img id="addOtherBtn"  name="addOtherBtn" src="<%=basePath%>/images/symbol-add.png" style="height:18px;width:20px;cursor:pointer" title="添加"></img>
@@ -239,7 +238,6 @@
 												</s:if>
 											</s:if>
 											<s:else>
-												<img name="setPositionBtn" src="<%=basePath%>/images/pin_blue.png" style="height:18px;width:20px;cursor:pointer" title="定位" onclick="$.fn.setPosition('${id}',$(this))"></img>
 												<img name="setParamBtn" src="<%=basePath%>/images/item.png" style="height:18px;width:20px;cursor:pointer" title="参数" onclick="$.fn.setParam('${id}',$(this))"></img>
 												<img name="delOtherBtn" onclick="$.fn.dynamicRemoveOther('${id}',$(this));" src="<%=basePath%>/images/symbol-remove.png" style="height:18px;width:20px;cursor:pointer" title="删除"></img>
 											</s:else>
@@ -249,7 +247,7 @@
 									<tr>
 										<td height="26" colspan="2" align="center" bgcolor="#FFFFFF">
 											<input name="saveBtn" type="button" class="btn_2_3" id="addBtn" value="确定">
-											&nbsp;&nbsp;
+											<input name="positionBtn" type="button" class="btn_2_3" id="positionBtn" value="定位" onclick="$.fn.setPosition()">
 											<input name="closeBtn" type="button" class="btn_2_3" id="closeBtn" value="关闭">
 										</td>
 									</tr>
