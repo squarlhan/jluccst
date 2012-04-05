@@ -146,6 +146,16 @@ public interface IBaseDao<T, ID extends Serializable> {
 	/**
 	 * 查询列表，用于分页
 	 * @param <X> 返回的数组类型
+	 * @param sql sql语句
+	 * @param values hql参数
+	 * @param pageNo 当前页码
+	 * @param pageSize 每页行数
+	 * @return
+	 */
+	public <X> List<X> findForPageBySQL(String sql, Map<String, ?> values,int pageNo, int pageSize);
+	/**
+	 * 查询列表，用于分页
+	 * @param <X> 返回的数组类型
 	 * @param hql hql语句
 	 * @param values hql参数
 	 * @return
