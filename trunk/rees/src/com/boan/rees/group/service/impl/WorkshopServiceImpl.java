@@ -11,11 +11,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import com.boan.rees.device.model.PointInfo;
-import com.boan.rees.group.dao.IPopedomDao;
+import com.boan.rees.group.dao.IWorkshopDao;
 import com.boan.rees.group.model.Workshop;
 import com.boan.rees.group.service.IWorkshopService;
-import com.boan.rees.group.dao.IWorkshopDao;
 import com.boan.rees.utils.page.Pagination;
 
 /**
