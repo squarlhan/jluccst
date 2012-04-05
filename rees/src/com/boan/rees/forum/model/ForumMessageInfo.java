@@ -24,7 +24,7 @@ import org.hibernate.annotations.GenericGenerator;
  * @version 1.0.0
  */
 @Entity
-@Table(name = "forum_issue_info")
+@Table(name = "forum_message_info")
 public class ForumMessageInfo implements Serializable {
 
 	private static final long serialVersionUID = 1L;
