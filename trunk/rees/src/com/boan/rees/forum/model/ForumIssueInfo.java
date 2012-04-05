@@ -10,7 +10,9 @@
 package com.boan.rees.forum.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -18,7 +20,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import org.hibernate.annotations.Formula;
 import org.hibernate.annotations.GenericGenerator;
+
+import com.boan.rees.utils.calendar.CalendarUtils;
 
 /**
  * 论坛议题实体类
@@ -40,6 +45,7 @@ public class ForumIssueInfo implements Serializable {
 		this.creator = creator;
 		this.createTime = createTime;
 		this.joinPersonCount = joinPersonCount;
+		this.createTimeStr = CalendarUtils.toString( createTime );
 	}
 	
 	@Id
@@ -75,13 +81,23 @@ public class ForumIssueInfo implements Serializable {
 	 */
 	@Column(name = "CREATE_TIME")
 	private Calendar createTime = Calendar.getInstance();
-	
+	/**
+	 * 议题创建时间 字符串   
+	 */
+	private String createTimeStr ;
 	/**
 	 * 话题参与人数
 	 */
 	private int joinPersonCount = 0;
 	
-	
+	public String getCreateTimeStr()
+	{
+		return createTimeStr;
+	}
+	public void setCreateTimeStr( String createTimeStr )
+	{
+		this.createTimeStr = createTimeStr;
+	}
 	
 	public int getJoinPersonCount()
 	{
@@ -103,11 +119,11 @@ public class ForumIssueInfo implements Serializable {
 	public void setIssueName(String issueName) {
 		this.issueName = issueName;
 	}
-	public String getIssueConteit() {
+	public String getIssueContent() {
 		return issueContent;
 	}
-	public void setIssueConteit(String issueConteit) {
-		this.issueContent = issueConteit;
+	public void setIssueContent(String issueContent) {
+		this.issueContent = issueContent;
 	}
 	public int getIssueStatus() {
 		return issueStatus;
@@ -127,6 +143,7 @@ public class ForumIssueInfo implements Serializable {
 	}
 	public void setCreateTime(Calendar createTime) {
 		this.createTime = createTime;
+		this.createTimeStr = CalendarUtils.toString( this.createTime );
 	}
 	public void update(ForumIssueInfo forumIssueInfo) {
 		
