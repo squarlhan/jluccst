@@ -236,6 +236,14 @@
 											<td>
 												<a href="reportmanage/reportsearchmanage.jsp"
 													target="mainFrame">报表查询</a>
+										<tr>
+											<td width="40" align="right" style="padding-bottom: 4px;">
+												<img src="images/menuto.jpg" width="5" height="5" />
+											</td>
+											<td>
+												<a href="reportmanage/templatemanage.jsp" target="mainFrame">模板维护</a>
+											</td>
+										</tr>
 											</td>
 										</tr>
 									</table>
