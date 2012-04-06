@@ -76,8 +76,14 @@ public class PersonReportServiceImpl implements IPersonReportService {
 	public Pagination<PersonReport> findPersonReportForPage(Map<String, ?> values,Pagination<PersonReport> pagination){
 		
 		String hql = "from PersonReport";
+		if(values.containsKey("beginTime") && values.containsKey("endTime")){
+			hql= hql + " where reportDate>:beginTime and reportDate<:endTime";
+		}
 		List<PersonReport> data = personReportDao.findForPage(hql, values, pagination.getStartIndex(), pagination.getPageSize());
 		hql = "select count(*) from PersonReport";
+		if(values.containsKey("beginTime") && values.containsKey("endTime")){
+			hql= hql + " where reportDate>:beginTime and reportDate<:endTime";
+		}
 		int totalRows = personReportDao.findCountForPage(hql, values);
 		pagination.setTotalRows(totalRows);
 		pagination.setData(data);
