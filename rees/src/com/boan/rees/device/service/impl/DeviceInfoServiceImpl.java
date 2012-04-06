@@ -105,8 +105,8 @@ public class DeviceInfoServiceImpl  implements IDeviceInfoService {
 	 */
 	@Override
 	public List<DeviceInfo> findDeviceInfoByWorkshopId(String workshopId) {
-		String hql = "from DeviceInfo where workshopId=:workshopId order by sortIndex,creatTime";
-		List<DeviceInfo> list = deviceInfoDao.find(hql, workshopId);
+		String hql = "from DeviceInfo where workshopId=? order by sortIndex,creatTime";
+		List<DeviceInfo> list = deviceInfoDao.find(hql, new String[]{workshopId});
 		return list;
 	}
 }
