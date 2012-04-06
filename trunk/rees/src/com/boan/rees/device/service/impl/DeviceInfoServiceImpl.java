@@ -67,7 +67,6 @@ public class DeviceInfoServiceImpl  implements IDeviceInfoService {
 	 * 按分页查询设备
 	 */
 	@Override
-
 	public Pagination<DeviceInfo> findDeviceInfoForPage(Map<String, ?> values,Pagination<DeviceInfo> pagination){
 		
 		String hql = "from DeviceInfo order by sortIndex,creatTime";
@@ -97,5 +96,17 @@ public class DeviceInfoServiceImpl  implements IDeviceInfoService {
 	public void deleteDeviceImage(String deviceId){
 		String hql = "update DeviceInfo obj set obj.filePath=null where obj.id='"+deviceId+"'";
 		deviceInfoDao.executeHql(hql, null);
+	}
+	
+	/**
+	 * 查找根据车间Id查询设备
+	 * @param workshopId 车间Id
+	 * @return 设备列表
+	 */
+	@Override
+	public List<DeviceInfo> findDeviceInfoByWorkshopId(String workshopId) {
+		String hql = "from DeviceInfo where workshopId=:workshopId order by sortIndex,creatTime";
+		List<DeviceInfo> list = deviceInfoDao.find(hql, workshopId);
+		return list;
 	}
 }
