@@ -39,5 +39,17 @@
     		<result name="success">/reportmanage/reportinfo.jsp</result>
     		<result name="input">/reportmanage/reportinfo.jsp</result>
     	</action>
+    	
+    	<!-- 打开模板维护页面 -->
+    	<action name="openAddTemplateAction" class="reportAction" method="openAddTemplate">
+    		<result name="success">/reportmanage/templateinfo.jsp</result>
+    		<result name="input">/reportmanage/templateinfo.jsp</result>
+    	</action>
+    	
+    	<!-- 保存模板 -->
+    	<action name="toAddTemplateAction" class="reportAction" method="toAddTemplate">
+    		<result name="success">/reportmanage/templateinfo.jsp</result>
+    		<result name="input">/reportmanage/templateinfo.jsp</result>
+    	</action>
       </package>	    	
 </struts>
