@@ -103,6 +103,11 @@ public class ScriptJsTag extends SimpleTagSupport
 	 */
 	private String corner;
 	
+	/**
+	 * FusionCharts图表
+	 */
+	private String chart;
+	
 	@Override
 	public void doTag() throws JspException, IOException
 	{
@@ -207,6 +212,11 @@ public class ScriptJsTag extends SimpleTagSupport
 		{
 			getJspContext().getOut().write( "<!--corner-->\r\n" );
 			getJspContext().getOut().write( "<script type=\"text/javascript\" src=\"" + contextPath + "/js/corner/jquery.corner.js\"></script>\r\n" );
+		}
+		if( "true".equalsIgnoreCase( chart ))
+		{
+			getJspContext().getOut().write( "<!--FusionCharts-->\r\n" );
+			getJspContext().getOut().write( "<script type=\"text/javascript\" src=\"" + contextPath + "/js/FusionCharts/FusionCharts.js\"></script>\r\n" );
 		}
 	}
 
@@ -349,4 +359,13 @@ public class ScriptJsTag extends SimpleTagSupport
 	public void setCorner(String corner) {
 		this.corner = corner;
 	}
+
+	public String getChart() {
+		return chart;
+	}
+
+	public void setChart(String chart) {
+		this.chart = chart;
+	}
+	
 }
