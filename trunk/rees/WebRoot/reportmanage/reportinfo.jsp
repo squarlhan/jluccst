@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%@ taglib prefix="j" uri="/script-tags"%>
 <%
@@ -22,6 +21,7 @@
 	response.setHeader("Expires", "0");
 	request.setCharacterEncoding("utf-8");
 	String path = request.getContextPath();
+	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -36,14 +36,13 @@
 		<meta http-equiv="description" content="This is my page">
 		<j:scriptlink css="true" tipswindow="true" jmessagebox="true"
 			jquery="true" validate="true" />
-	 	<script type="text/javascript" src="js/My97DatePicker/WdatePicker.js"></script>
+	 	<script type="text/javascript" src="<%=basePath%>js/My97DatePicker/WdatePicker.js"></script>
 		<script type="text/javascript">
 	/**
 	 * 验证条件
 	 */
 	var _report_submit = {
 		rules : {
-			"report.reportDate" : {date : true},
 			"report.reportType":{required:true,maxlength:20},
 			"report.reportSubject":{required:true,maxlength:20},
 			"report.reportPerson":{required:true,maxlength:20},
@@ -66,7 +65,7 @@
 				},
 				"report.reportContent":
 				{
-					maxlength:"汇报内容最多输入20个字符！"
+					maxlength:"汇报内容最多输入500个字符！"
 				}
 				}
 			};
@@ -130,81 +129,73 @@
 </script>
 </head>
 <body>
-		<s:form id="repform" theme="simple">
-			<s:hidden id="hid_reportId" name="report.id"></s:hidden>
-			<table width="100%" border="0" cellspacing="5" cellpadding="0">
-				<tr>
-					<td>
-						<table width="100%" style="height: 100%;" border="0"
-							cellspacing="6" cellpadding="0">
-							<tr>
-								<td style="height: 36px;">
-									<table width="100%" border="0" cellpadding="5" cellspacing="1"
-										bgcolor="#d5e4fd">
-										<tr>
-											<td height="26" align="right" bgcolor="#FFFFFF">
-												<strong>汇报类别：</strong>
-											</td>
-											<td height="26" align="left" bgcolor="#FFFFFF">
-												<s:textfield id="txt_reportType" 
-													name="report.reportType" />
-											</td>
-										</tr>
-										<tr>
-											<td height="26" align="right" bgcolor="#FFFFFF">
-												<strong>汇报题目：</strong>
-											</td>
-											<td height="26" align="left" bgcolor="#FFFFFF">
-												<s:textfield id="txt_reportSubject"
-													name="report.reportSubject" />
-											</td>
-										</tr>
-										<tr>
-											<td height="26" align="right" bgcolor="#FFFFFF">
-												<strong>汇报人：</strong>
-											</td>
-											<td height="26" align="left" bgcolor="#FFFFFF">
-												<s:textfield id="txt_reportPerson"
-													name="report.reportPerson" />
-											</td>
-										</tr>
-										<tr>
-											<td height="26" align="right" bgcolor="#FFFFFF">
-												<strong>汇报时间：</strong>
-											</td>
-											<td height="26" align="left" bgcolor="#FFFFFF">
-												<s:textfield id="txt_reportDate" 
-													name="report.reportDate" />
-											</td>
-										</tr>
-										<tr>
-											<td height="147" align="right" bgcolor="#FFFFFF">
-												<strong>汇报内容：</strong>
-											</td>
-											<td height="147" align="left" bgcolor="#FFFFFF">
-												<s:textarea id="txt_reportContent"
-													name="report.reportContent"
-													cssStyle="width:250px;height:100px; resize: none;" />
-											</td>
-										</tr>
-										<tr>
-											<td height="26" colspan="2" align="left" bgcolor="#FFFFFF">
-												&nbsp;&nbsp;
-												<input name="addBtn" type="button" value="确定" class="btn_2_3" id="addBtn" />
-												&nbsp;&nbsp;
-												<input name="exreportBtn" type="button" value="导出" class="btn_2_3" id="exreportBtn"/>
-												&nbsp;&nbsp;
-												<input name="closeBtn" type="button" value="关闭" class="btn_2_3" id="closeBtn" />
-											</td>
-										</tr>
-									</table>
-								</td>
-							</tr>
-						</table>
-					</td>
-				</tr>
-			</table>
-		</s:form>
+	<s:form id="repform" theme="simple">
+	<s:hidden id="hid_reportId" name="report.id"></s:hidden>
+	<table width="100%" border="0" cellspacing="5" cellpadding="0">
+		<tr>
+			<td>
+				<table width="100%" style="height: 100%;" border="0" cellspacing="6" cellpadding="0">
+					<tr>
+						<td style="height: 36px;">
+							<table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#d5e4fd">
+								<tr>
+									<td height="26" align="right" bgcolor="#FFFFFF">
+										<strong>汇报类别：</strong>
+									</td>
+									<td height="26" align="left" bgcolor="#FFFFFF">
+										<s:textfield id="txt_reportType" name="report.reportType" maxlength="25" cssStyle="width: 250px;"/><font color="red">*</font>
+									</td>
+								</tr>
+								<tr>
+									<td height="26" align="right" bgcolor="#FFFFFF">
+										<strong>汇报题目：</strong>
+									</td>
+									<td height="26" align="left" bgcolor="#FFFFFF">
+										<s:textfield id="txt_reportSubject" name="report.reportSubject" maxlength="25" cssStyle="width: 250px;"/><font color="red">*</font>
+									</td>
+								</tr>
+								<tr>
+									<td height="26" align="right" bgcolor="#FFFFFF">
+										<strong>汇报人：</strong>
+									</td>
+									<td height="26" align="left" bgcolor="#FFFFFF">
+										<s:textfield id="txt_reportPerson" name="report.reportPerson" maxlength="25" cssStyle="width: 250px;"/><font color="red">*</font>
+									</td>
+								</tr>
+								<tr>
+									<td height="26" align="right" bgcolor="#FFFFFF">
+										<strong>汇报时间：</strong>
+									</td>
+									<td height="26" align="left" bgcolor="#FFFFFF">
+										<s:textfield id="txt_reportDate" name="report.reportDate" onClick="WdatePicker()" maxlength="25" cssClass="Wdate" cssStyle="width: 250px;"/>
+									</td>
+								</tr>
+								<tr>
+									<td height="147" align="right" bgcolor="#FFFFFF">
+										<strong>汇报内容：</strong>
+									</td>
+									<td height="147" align="left" bgcolor="#FFFFFF">
+										<s:textarea id="txt_reportContent" name="report.reportContent" maxlength="510" cssStyle="width:250px;height:100px; resize: none;" />
+									</td>
+								</tr>
+								<tr>
+									<td height="26" colspan="2" align="center" bgcolor="#FFFFFF">
+										&nbsp;&nbsp;
+										<input name="addBtn" type="button" value="确定" class="btn_2_3" id="addBtn" />
+										&nbsp;&nbsp;
+										<input name="exreportBtn" type="button" value="导出" class="btn_2_3" id="exreportBtn"/>
+										&nbsp;&nbsp;
+										<input name="closeBtn" type="button" value="关闭" class="btn_2_3" id="closeBtn" />
+									</td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+	</table>
+	</s:form>
 </body>
 </html>
 
