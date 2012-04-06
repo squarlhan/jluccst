@@ -42,7 +42,7 @@
 			d.add("<s:property value="id"/>","<s:property value="companyId"/>",'<s:property value="factoryName"/>','','','','');
 		</s:iterator>
 		<s:iterator value="workshopList">
-			d.add("<s:property value="id"/>","<s:property value="factoryId"/>",'<s:property value="workshopName"/>','<%=path%>/datamanage/deviceDataList.action?factoryId=<s:property value="factoryId"/>&workshopId=<s:property value="id"/>','','devicemanage','');
+			d.add("<s:property value="id"/>","<s:property value="factoryId"/>",'<s:property value="workshopName"/>','<%=path%>/datamanage/devicelist.action?factoryId=<s:property value="factoryId"/>&workshopId=<s:property value="id"/>','','devicemanage','');
 		</s:iterator>
 		document.write(d);
 		//-->
