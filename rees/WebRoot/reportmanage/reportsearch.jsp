@@ -1,15 +1,35 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ taglib prefix="s" uri="/struts-tags"%>
+<%@ taglib prefix="j" uri="/script-tags"%>
+<%@ taglib prefix="page" uri="/WEB-INF/page-tags.tld"%>
+
 <%
-String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+	/**
+	 * All right reserved.
+	 * Copyright (c) 2010 Changchun Boan (BOAN) Co. Ltd.
+	 */
+	/**
+	 * @author zhaomengxue
+	 * @version 1.0
+	 * @audit  
+	 */
+	/**
+	 * Modified Person：
+	 * Modified Time：
+	 * Modified Explain：
+	 */
+	response.setHeader( "Pragma", "No-cache" );
+	response.setHeader( "Cache-Control", "no-cache" );
+	response.setHeader( "Expires", "0" );
+	request.setCharacterEncoding( "utf-8" );
+	String path = request.getContextPath();
+	String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
-    <base href="<%=basePath%>">
-    
-    <title>My JSP 'reportsearch.jsp' starting page</title>
+    <title>报表查询</title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -19,10 +39,104 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
-
+	<j:scriptlink css="true" tipswindow="true" jmessagebox="true" jquery="true" validate="true"/>
+	<script type="text/javascript" src="<%=basePath%>js/My97DatePicker/WdatePicker.js"></script>
+	<script type="text/javascript">
+	$(function(){
+		$("#beginTime").click(function(){WdatePicker({el:'beginTime',dateFmt:'yyyy年MM月dd日'});});
+		$("#endTime").click(function(){WdatePicker({el:'endTime',dateFmt:'yyyy年MM月dd日'});});
+		
+		$("#selectWay").change(function(){
+			var i = eval($("#selectWay").val());
+			switch(i){
+				case 1:
+					$("#beginTime").unbind("click");
+					$("#endTime").unbind("click");
+					$("#beginTime").val("");
+					$("#endTime").val("");
+					$("#beginTime").click(function(){WdatePicker({skin:'whyGreen',dateFmt:'yyyy年'});});
+					$("#endTime").click(function(){WdatePicker({skin:'whyGreen',dateFmt:'yyyy年'});});
+					break;
+				case 2:
+					$("#beginTime").unbind("click");
+					$("#endTime").unbind("click");
+					$("#beginTime").val("");
+					$("#endTime").val("");
+					$("#beginTime").click(function(){WdatePicker({skin:'whyGreen',dateFmt:'yyyy年MM月'});});
+					$("#endTime").click(function(){WdatePicker({skin:'whyGreen',dateFmt:'yyyy年MM月'});});
+					break;
+				case 3:
+					$("#beginTime").unbind("click");
+					$("#endTime").unbind("click");
+					$("#beginTime").val("");
+					$("#endTime").val("");
+					$("#beginTime").click(function(){WdatePicker({el:'beginTime',dateFmt:'yyyy年MM月dd日'});});
+					$("#endTime").click(function(){WdatePicker({el:'endTime',dateFmt:'yyyy年MM月dd日'});});
+					break;
+				default:break;
+			}
+		});
+		
+		$("#selectBtn").click(function(){
+			$("#form1").submit();
+		});
+	});
+	</script>
   </head>
   
   <body>
-    This is my JSP page. <br>
-  </body>
+   <s:form action="openReportSearchAction" id="form1">
+<table width="100%" style="height:100%;" border="0" cellspacing="5" cellpadding="0">
+  <tr>
+    <td valign="top"><table width="100%" border="0" cellspacing="5" cellpadding="0">
+      <tr>
+        <td>
+			查询方式：
+	        <s:select id="selectWay" list="selectWayList" listKey="key" listValue="value" name="selectWay"></s:select>
+			开始日期: 
+			<s:textfield id="beginTime" name="beginTime" cssStyle="Wdate"/>
+			结束日期: 
+			<s:textfield id="endTime" name="endTime" cssStyle="Wdate"/>
+			<input name="selectBtn" id="selectBtn" type="button" class="btn_2_3" value="查询">
+        </td>
+        <td align="right"></td>
+      </tr>
+    </table>
+      <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#d5e4fd">
+        <tr>
+          <td width="16%" align="center" background="../images/headerbg.jpg"><strong>汇报类别</strong></td>
+          <td width="16%" align="center" background="../images/headerbg.jpg"><strong>汇报题目</strong></td>
+		  <td width="16%" align="center" background="../images/headerbg.jpg"><strong>汇报人</strong></td>
+		  <td width="16%" align="center" background="../images/headerbg.jpg"><strong>汇报时间</strong></td>
+	    </tr>
+	    <s:iterator value="pagination.data" status="obj">
+        <tr>
+          <td height="26" align="center" bgcolor="#FFFFFF">
+          	<s:property value="reportType"/>&nbsp;
+          	</td>
+          <td height="26" align="center" bgcolor="#FFFFFF">
+          	<s:property value="reportSubject"/>&nbsp;
+          	</td>
+          <td height="26" align="center" bgcolor="#FFFFFF">
+			<s:property value="reportPerson"/>&nbsp;
+			</td>
+		  <td height="26" align="center" bgcolor="#FFFFFF"><!-- format="yyyy-MM-dd HH:mm" -->
+		  	<s:date  name="reportDate" format="yyyy-MM-dd" />&nbsp;
+		  	</td>
+	    </tr>
+		</s:iterator>
+        <tr>
+        	<td height="26" colspan="9" align="center" bgcolor="#FFFFFF">
+				<page:pages currentPage="pagination.currentPage"
+					totalPages="pagination.totalPages"
+					totalRows="pagination.totalRows" styleClass="page"
+					theme="text">
+				</page:pages>
+			</td>
+        </tr>
+      </table></td>
+  </tr>
+</table>
+</s:form>
+</body>
 </html>
