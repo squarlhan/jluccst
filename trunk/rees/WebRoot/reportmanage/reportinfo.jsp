@@ -35,7 +35,7 @@
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
 	<j:scriptlink css="true" tipswindow="true" jmessagebox="true" jquery="true" validate="true"/>
-
+	<script type="text/javascript" src="js/My97DatePicker/WdatePicker.js"></script>
 	<script type="text/javascript">
 
 	/**
@@ -43,8 +43,30 @@
   	 */
 	var _report_submit = {
 			rules: {
-				"report.reportDate":{date:true}
-				}
+				"report.reportType":{required:true,maxlength:20},
+				"report.reportSubject":{required:true,maxlength:20},
+				"report.reportPerson":{required:true,maxlength:20},
+				"report.reportContent":{maxlength:500}
+				},messages:{
+				"report.reportType":
+				{
+				    required:"汇报类别为必填项！",
+					maxlength:"汇报类别最多输入20个字符！"
+				},
+				"report.reportSubject":
+				{
+					required:"汇报题目为必填项！",
+					maxlength:"汇报题目最多输入20个字符！"
+				},
+				"report.reportPerson":
+				{
+					required:"汇报人为必填项！",
+					maxlength:"汇报人最多输入20个字符！"
+				},
+				"report.reportContent":
+				{
+					maxlength:"汇报内容最多输入20个字符！"
+				}}
 			};
 	
 			/**
@@ -115,36 +137,37 @@
             <tr>
               <td height="26" align="right" bgcolor="#FFFFFF"><strong>汇报类别：</strong></td>
               <td height="26" align="left" bgcolor="#FFFFFF">
-                <s:textfield id="txt_reportType" name="report.reportType"/>
+                <s:textfield id="txt_reportType" name="report.reportType" cssStyle="width: 250px;" maxlength="25" /><font color="red">*</font>
               </td>
             </tr>
             <tr>
               <td height="26" align="right" bgcolor="#FFFFFF"><strong>汇报题目：</strong></td>
               <td height="26" align="left" bgcolor="#FFFFFF">
-              	<s:textfield id="txt_reportSubject" name="report.reportSubject"/>
+              	<s:textfield id="txt_reportSubject" name="report.reportSubject" cssStyle="width: 250px;" maxlength="25"/><font color="red">*</font>
               </td>
             </tr>
             <tr>
               <td height="26" align="right" bgcolor="#FFFFFF"><strong>汇报人：</strong></td>
               <td height="26" align="left" bgcolor="#FFFFFF">
-              	<s:textfield id="txt_reportPerson" name="report.reportPerson"/>
+              	<s:textfield id="txt_reportPerson" name="report.reportPerson" cssStyle="width: 250px;" maxlength="25"/><font color="red">*</font>
               </td>
             </tr>
             <tr>
               <td height="26" align="right" bgcolor="#FFFFFF"><strong>汇报时间：</strong></td>
               <td height="26" align="left" bgcolor="#FFFFFF">
-              	<s:textfield id="txt_reportDate" name="report.reportDate"/>
+              	<s:textfield id="txt_reportDate" name="report.reportDate" cssStyle="width: 250px;" />
+              	<img onclick="WdatePicker({el:'txt_reportDate'})" src="js/My97DatePicker/skin/datePicker.gif" width="16" height="22" align="absmiddle">
               </td>
             </tr>
              <tr>
               <td height="147" align="right" bgcolor="#FFFFFF"><strong>汇报内容：</strong></td>
               <td height="147" align="left" bgcolor="#FFFFFF">
-              	<s:textarea id="txt_reportContent" name="report.reportContent" cssStyle="width:250px;height:100px; resize: none;" />
+              	<s:textarea id="txt_reportContent" name="report.reportContent" cssStyle="width:250px;height:100px; resize: none;" maxlength="510"/>
               </td>
             </tr>
             <tr>
-				<td height="26" colspan="2" align="left" bgcolor="#FFFFFF">
-				<input name="addBtn" type="button" value="确认" class="btn_2_3" id="addBtn"/>
+				<td height="26" colspan="2" align="center" bgcolor="#FFFFFF">
+				<input name="addBtn" type="button" value="确定" class="btn_2_3" id="addBtn"/>
 				&nbsp;&nbsp;
                 <input name="exportBtn" type="button" value="导出" class="btn_2_3" id="exportBtn" />
 				&nbsp;&nbsp;
