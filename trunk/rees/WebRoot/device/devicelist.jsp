@@ -84,7 +84,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  		$('a[name="edit_point"]').each(function(){
 	  			$(this).click(function(){
 	  				var url = $(this).attr("url");
-	  				parent.parent.parent.tipsWindown("监测点信息","iframe:"+url,"520","350","true","","true","no");
+	  				parent.parent.parent.tipsWindown("监测点信息","iframe:"+url,"550","350","true","","true","no");
 	  			});
 	  		});
 	  		
