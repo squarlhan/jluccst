@@ -15,6 +15,7 @@ import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.ServletContext;
@@ -72,6 +73,16 @@ public class DeviceInfoAction extends BaseActionSupport{
 	@Qualifier("deviceTypeService")
 	private IDeviceTypeService deviceTypeService;
 
+	/**
+	 * 树传过来的工厂Id
+	 */
+	private String factoryId;
+	
+	/**
+	 * 树传过来的车间Id
+	 */
+	private String workshopId;
+	
 	/**
 	 * 页面对象
 	 */
@@ -179,6 +190,22 @@ public class DeviceInfoAction extends BaseActionSupport{
 
 	public void setIds(String[] ids) {
 		this.ids = ids;
+	}
+
+	public String getFactoryId() {
+		return factoryId;
+	}
+
+	public void setFactoryId(String factoryId) {
+		this.factoryId = factoryId;
+	}
+
+	public String getWorkshopId() {
+		return workshopId;
+	}
+
+	public void setWorkshopId(String workshopId) {
+		this.workshopId = workshopId;
 	}
 
 	public DeviceInfo getDevice() {
@@ -335,7 +362,12 @@ public class DeviceInfoAction extends BaseActionSupport{
 	 * @return
 	 */
 	public String openDevice(){
-		pagination = deviceInfoService.findDeviceInfoForPage(new HashMap(), pagination);
+		Map<String,String> param = new HashMap<String,String>();
+		if(factoryId!=null && workshopId!=null){
+			param.put("factoryId", factoryId);
+			param.put("workshopId", workshopId);
+		}
+		pagination = deviceInfoService.findDeviceInfoForPage(param, pagination);
 		return this.SUCCESS;
 	}
 
@@ -346,8 +378,9 @@ public class DeviceInfoAction extends BaseActionSupport{
 	public String toAddDevice(){
 		try {
 			saveImageToDevice(device);
-			device.setFactoryId(sessionFactoryId);
-			device.setWorkshopId(sessionWorkshopId);
+//			device.setFactoryId(sessionFactoryId);
+//			device.setWorkshopId(sessionWorkshopId);
+
 			//保存设备对象
 			deviceInfoService.save(device);
 			message="保存成功！";
@@ -456,6 +489,11 @@ public class DeviceInfoAction extends BaseActionSupport{
 	 */
 	
 	public String openAddDevice (){
+		if(device==null){
+			device = new DeviceInfo();
+		}
+		device.setFactoryId(factoryId);
+		device.setWorkshopId(workshopId);
 		return SUCCESS;
 	}
 
@@ -485,8 +523,8 @@ public class DeviceInfoAction extends BaseActionSupport{
 	public String toModifyDevice(){
 		try {
 			saveImageToDevice(device);
-			device.setFactoryId(sessionFactoryId);
-			device.setWorkshopId(sessionWorkshopId);
+//			device.setFactoryId(sessionFactoryId);
+//			device.setWorkshopId(sessionWorkshopId);
 			deviceInfoService.update(device);
 			message="保存成功！";
 		} catch (Exception e) {
@@ -501,7 +539,10 @@ public class DeviceInfoAction extends BaseActionSupport{
 	 * @return
 	 */
 	public String openSortDevice(){
-		deviceInfoList = deviceInfoService.findAllDeviceInfo();
+		if(workshopId==null){
+			workshopId="";
+		}
+		deviceInfoList = deviceInfoService.findDeviceInfoByWorkshopId(workshopId);
 		return SUCCESS;
 	}
 	
