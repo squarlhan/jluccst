@@ -43,28 +43,28 @@
 		 */
 		var _report_submit = {
 			rules : {
-				"report.reportDate" : {date : true},
-				"report.reportType":{required:true,maxlength:20},
-				"report.reportSubject":{required:true,maxlength:20},
-				"report.reportPerson":{required:true,maxlength:20},
-				"report.reportContent":{maxlength:500}
+				"template.reportDate" : {date : true},
+				"template.reportType":{required:true,maxlength:20},
+				"template.reportSubject":{required:true,maxlength:20},
+				"template.reportPerson":{required:true,maxlength:20},
+				"template.reportContent":{maxlength:500}
 				},messages:{
-					"report.reportType":
+					"template.reportType":
 					{
 					    required:"汇报类别为必填项！",
 						maxlength:"汇报类别最多输入20个字符！"
 					},
-					"report.reportSubject":
+					"template.reportSubject":
 					{
 						required:"汇报题目为必填项！",
 						maxlength:"汇报题目最多输入20个字符！"
 					},
-					"report.reportPerson":
+					"template.reportPerson":
 					{
 						required:"汇报人为必填项！",
 						maxlength:"汇报人最多输入20个字符！"
 					},
-					"report.reportContent":
+					"template.reportContent":
 					{
 						maxlength:"汇报内容最多输入20个字符！"
 					}
@@ -110,11 +110,10 @@
 				if (!validator.form()) {
 					return false;
 				}
-				if ($.trim(reportId) == "") {
-					repform.action = "toAddReportAction.action";
-				} else {
-					repform.action = "toModifyReportAction.action";
-				}
+	
+				repform.action = "toAddTemplateAction.action";
+			
+
 				repform.submit();
 			});
 		}
