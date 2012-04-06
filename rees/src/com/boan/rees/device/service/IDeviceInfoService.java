@@ -51,4 +51,11 @@ public interface IDeviceInfoService {
 	 * @param deviceId 设备Id
 	 */
 	public void deleteDeviceImage(String deviceId);
+	
+	/**
+	 * 查找根据车间Id查询设备
+	 * @param workshopId 车间Id
+	 * @return 设备列表
+	 */
+    public List<DeviceInfo> findDeviceInfoByWorkshopId(String workshopId);
 }
