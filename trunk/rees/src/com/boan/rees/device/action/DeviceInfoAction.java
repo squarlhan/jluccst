@@ -346,8 +346,8 @@ public class DeviceInfoAction extends BaseActionSupport{
 	public String toAddDevice(){
 		try {
 			saveImageToDevice(device);
-			device.setDeptId(sessionFactoryId);
-			device.setGroupId(sessionWorkshopId);
+			device.setFactoryId(sessionFactoryId);
+			device.setWorkshopId(sessionWorkshopId);
 			//保存设备对象
 			deviceInfoService.save(device);
 			message="保存成功！";
@@ -485,8 +485,8 @@ public class DeviceInfoAction extends BaseActionSupport{
 	public String toModifyDevice(){
 		try {
 			saveImageToDevice(device);
-			device.setDeptId(sessionFactoryId);
-			device.setGroupId(sessionWorkshopId);
+			device.setFactoryId(sessionFactoryId);
+			device.setWorkshopId(sessionWorkshopId);
 			deviceInfoService.update(device);
 			message="保存成功！";
 		} catch (Exception e) {
