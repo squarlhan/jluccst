@@ -69,9 +69,9 @@ public class DeviceInfoServiceImpl  implements IDeviceInfoService {
 	@Override
 	public Pagination<DeviceInfo> findDeviceInfoForPage(Map<String, ?> values,Pagination<DeviceInfo> pagination){
 		
-		String hql = "from DeviceInfo order by sortIndex,creatTime";
+		String hql = "from DeviceInfo where factoryId=:factoryId and workshopId=:workshopId order by sortIndex,creatTime";
 		List<DeviceInfo> data = deviceInfoDao.findForPage(hql, values, pagination.getStartIndex(), pagination.getPageSize());
-		hql = "select count(*) from DeviceInfo";
+		hql = "select count(*) from DeviceInfo where factoryId=:factoryId and workshopId=:workshopId";
 		int totalRows = deviceInfoDao.findCountForPage(hql, values);
 		pagination.setTotalRows(totalRows);
 		pagination.setData(data);
