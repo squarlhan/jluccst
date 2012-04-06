@@ -91,7 +91,7 @@
 												<img src="images/menuto.jpg" width="5" height="5" />
 											</td>
 											<td>
-												<a href="systemmanage/companymanage.jsp" target="mainFrame">数据查询</a>
+												<a href="datamanage/dataview.jsp" target="mainFrame">数据查询</a>
 											</td>
 										</tr>
 									</table>
