@@ -53,25 +53,64 @@ public class UserDaoImpl extends BaseDao<User,String> implements IUserDao{
 		}
 		return user;
 	}
-	public List<User> queryUserList(String companyId, int startIndex, int maxResults ) throws Exception
+	public List<User> queryUserList(String companyId, String factoryId, String workshopId, int startIndex, int maxResults ) throws Exception
 	{
-		String hql = "from User where companyId = :companyId order by createTime";
+		String hql = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put( "companyId", companyId );
+		if( StringUtils.isNotBlank( companyId ) )
+		{
+			hql = "from User where companyId = :companyId order by createTime";
+			map.put( "companyId", companyId );
+		}
+		else if( StringUtils.isNotBlank( factoryId ) )
+		{
+			hql = "from User where factoryId = :factoryId order by createTime";
+			map.put( "factoryId", factoryId );
+
+		}
+		else if( StringUtils.isNotBlank( workshopId ) )
+		{
+			hql = "from User where workshopId = :workshopId order by createTime";
+			map.put( "workshopId", workshopId );
+
+		}
 		return super.findForPage( hql, map, startIndex, maxResults );
 	}
 
-	public int queryUserListCount(String companyId) throws Exception
+	public int queryUserListCount(String companyId, String factoryId, String workshopId) throws Exception
 	{
-		String hql = "select count(id) from User where companyId = :companyId";
+		String hql = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put( "companyId", companyId );
+		if( StringUtils.isNotBlank( companyId ) )
+		{
+			hql = "select count(id) from User where companyId = :companyId";
+			map.put( "companyId", companyId );
+		}
+		else if( StringUtils.isNotBlank( factoryId ) )
+		{
+			hql = "select count(id) from User where factoryId = :factoryId";
+			map.put( "factoryId", factoryId );
+
+		}
+		else if( StringUtils.isNotBlank( workshopId ) )
+		{
+			hql = "select count(id) from User where workshopId = :workshopId";
+			map.put( "workshopId", workshopId );
+
+		}
 		return super.findCountForPage( hql, map );
 	}
 
 	public void saveOrUpdateUser( User user ) throws Exception
 	{
-		super.saveOrUpdate( user );
+		if( StringUtils.isNotBlank( user.getId() ) )
+		{
+			super.update( user );
+		}
+		else
+		{
+			super.save( user );
+		}
 	}
 
 	public void saveOrUpdateUserPassword( String userId, String password ) throws Exception

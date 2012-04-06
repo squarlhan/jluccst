@@ -117,6 +117,41 @@ public class GroupTreeAction extends BaseActionSupport
 		}
 		return "group-tree-for-device";
 	}
+	/**
+	 * 显示组织机构树,带公司、工厂、车间
+	 * @return
+	 */
+	public String showGroupTreeForUser()
+	{
+		companyList = companyService.queryAllCompanysByRootId( GroupConfig.ROOT_ID );
+		List<Factory> list = null;
+		List<Workshop> lt = null;
+		if( companyList != null && companyList.size() > 0 )
+		{
+			factoryList = new ArrayList<Factory>();
+			workshopList = new ArrayList<Workshop>();
+			for( int i = 0; i < companyList.size(); i++ )
+			{
+				list = factoryService.queryFactoriesByCompanyId( companyList.get( i ).getId() );
+				if( list != null && list.size() > 0)
+				{
+					factoryList.addAll( list );
+					
+					for( int k = 0; k < factoryList.size(); k++ )
+					{
+						lt = workshopService.queryAllWorkshopsByFactoryId( factoryList.get( k ).getId() );
+						if( lt != null && lt.size() > 0 )
+						{
+							workshopList.addAll( lt );
+						}
+					}
+					
+				}
+			}
+		}
+		return "group-tree-for-user";
+	}
+	
 	
 	/**
 	 * 显示组织机构树,带公司、工厂、车间
