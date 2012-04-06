@@ -94,9 +94,9 @@
 			查询方式：
 	        <s:select id="selectWay" list="selectWayList" listKey="key" listValue="value" name="selectWay"></s:select>
 			开始日期: 
-			<s:textfield id="beginTime" name="beginTime" cssStyle="Wdate"/>
+			<s:textfield id="beginTime" name="beginTime" cssClass="Wdate"/>
 			结束日期: 
-			<s:textfield id="endTime" name="endTime" cssStyle="Wdate"/>
+			<s:textfield id="endTime" name="endTime" cssClass="Wdate"/>
 			<input name="selectBtn" id="selectBtn" type="button" class="btn_2_3" value="查询">
         </td>
         <td align="right"></td>
