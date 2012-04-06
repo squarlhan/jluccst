@@ -51,5 +51,11 @@
     		<result name="success">/reportmanage/templateinfo.jsp</result>
     		<result name="input">/reportmanage/templateinfo.jsp</result>
     	</action>
+    	
+    	<!-- 打开报表查询列表 -->
+    	<action name="openReportSearchAction" class="reportAction" method="openReportSearch">
+    		<result name="success">/reportmanage/reportsearch.jsp</result>
+    		<result name="input">/reportmanage/reportsearch.jsp</result>
+    	</action>
       </package>	    	
 </struts>
