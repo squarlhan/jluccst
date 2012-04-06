@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib prefix="j" uri="/script-tags"%>
+<%@ taglib prefix="s" uri="/struts-tags" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -30,36 +31,13 @@
 <body>
 <!-- tab开始 -->
 <div id="tt" class="tabs-container">
-	<div title="C4401乙烯压缩机组"
+	<s:iterator value="deviceInfos" status="st">
+	<div title="<s:property value='deviceName'/>"
 		style="padding: 1px; display: none;">
 		<iframe scrolling="auto" frameborder="0" style="width:100%; height:100%"
-			src="about:blank" url="pointdatalist.action?deviceId=402880f2362fc9b301362fccb9b4000a"></iframe>
+			src="about:blank" url="pointdatalist.action?deviceId=<s:property value='id'/>"></iframe>
 	</div>
-	<div title="C4401乙烯压缩机组工艺参数"
-		style="padding: 1px; display: none;">
-		<iframe scrolling="auto" frameborder="0" style="width:100%; height:100%"
-			src="about:blank" url="pointdatalist.action?deviceId=402880f2362fc9b301362fccb9b4000a"></iframe>
-	</div>
-	<div title="C4601丙烯压缩机组"
-		style="padding: 1px; display: none;">
-		<iframe scrolling="auto" frameborder="0" style="width:100%; height:100%"
-			src="about:blank" url="pointdatalist.action?deviceId=402880f2362fc9b301362fccb9b4000a"></iframe>
-	</div>
-	<div title="C4601丙烯压缩机组工艺参数"
-		style="padding: 1px; display: none;">
-		<iframe scrolling="auto" frameborder="0" style="width:100%; height:100%"
-			src="about:blank" url="pointdatalist.action?deviceId=402880f2362fc9b301362fccb9b4000a"></iframe>
-	</div>
-	<div title="C4111乙烯压缩机组"
-		style="padding: 1px; display: none;">
-		<iframe scrolling="auto" frameborder="0" style="width:100%; height:100%"
-			src="about:blank" url="pointdatalist.action?deviceId=402880f2362fc9b301362fccb9b4000a"></iframe>
-	</div>
-	<div title="C4611丙烯压缩机组"
-		style="padding: 1px; display: none;">
-		<iframe scrolling="auto" frameborder="0" style="width:100%; height:100%"
-			src="about:blank" url="pointdatalist.action?deviceId=402880f2362fc9b301362fccb9b4000a"></iframe>
-	</div>
+	</s:iterator>
 </div>
 </body>
 </html>
