@@ -5,7 +5,7 @@
 <struts>
     <!-- 监控点Action -->
 	<package name="pointinfo" extends="struts-default" namespace="/datamanage">
-		<action name="pointdatalist" class="pointInfoAction" method="deviceListForData">
+		<action name="devicelist" class="pointInfoAction" method="deviceListForData">
 			<result name="success">/datamanage/devicedatalist.jsp</result>
 			<result name="input">/datamanage/devicedatalist.jsp</result>
 		</action>
