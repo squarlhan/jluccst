@@ -45,7 +45,7 @@
 		 * 添加报表
 		 */
 		$("#addbtn").click(function(){
-			parent.parent.parent.tipsWindown("添加汇报","iframe:openAddReportAction.action","600","425","true","","true","no");
+			parent.parent.parent.tipsWindown("添加汇报","iframe:openAddReportAction.action","450","400","true","","true","no");
 		});
 		
 		/**
@@ -54,7 +54,7 @@
 		$('a[name="edit"]').each(function(){
 			$(this).click(function(){
 				var url = $(this).attr("url");
-				parent.parent.parent.tipsWindown("修改报表信息","iframe:"+url,"600","425","true","","true","no");
+				parent.parent.parent.tipsWindown("修改报表信息","iframe:"+url,"450","400","true","","true","no");
 			});
 		});
 		
@@ -147,7 +147,7 @@
       <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#d5e4fd">
         <tr>
           <td width="8%" height="26" align="center" background="../images/headerbg.jpg">
-          	<s:checkbox theme="simple" id="cbk_all" name="all"></s:checkbox>&nbsp;
+          	<s:checkbox theme="simple" id="cbk_all" name="all"></s:checkbox>
           </td>
           <td width="16%" align="center" background="../images/headerbg.jpg"><strong>汇报类别</strong></td>
           <td width="16%" align="center" background="../images/headerbg.jpg"><strong>汇报题目</strong></td>
@@ -168,8 +168,8 @@
           <td height="26" align="center" bgcolor="#FFFFFF">
 			<s:property value="reportPerson"/>&nbsp;
 			</td>
-		  <td height="26" align="center" bgcolor="#FFFFFF">
-		  	<s:date  name="reportDate" format="yyyy-MM-dd HH:mm" />&nbsp;
+		  <td height="26" align="center" bgcolor="#FFFFFF"><!-- format="yyyy-MM-dd HH:mm" -->
+		  	<s:date  name="reportDate" format="yyyy-MM-dd" />&nbsp;
 		  	</td>
 		  
 		  <td height="26" colspan="2" align="center" bgcolor="#FFFFFF">
