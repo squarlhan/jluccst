@@ -98,15 +98,15 @@ public class DeviceInfo implements Serializable {
 	@Column(name = "ISDELETE")
 	private Integer isDelete;
 	/**
-	 * 所属部门Id
+	 * 所属工厂Id
 	 */
-	@Column(name = "DEPT_ID")
-	private String deptId;
+	@Column(name = "FACTORY_ID")
+	private String factoryId;
 	/**
-	 *所属机组Id
+	 *所属车间Id
 	 */
-	@Column(name = "GROUP_ID")
-	private String groupId;
+	@Column(name = "WORKSHOP_ID")
+	private String workshopId;
 	
 	/**
 	 * 中心高
@@ -193,17 +193,18 @@ public class DeviceInfo implements Serializable {
 	public void setIsDelete(Integer isDelete) {
 		this.isDelete = isDelete;
 	}
-	public String getDeptId() {
-		return deptId;
+
+	public String getFactoryId() {
+		return factoryId;
 	}
-	public void setDeptId(String deptId) {
-		this.deptId = deptId;
+	public void setFactoryId(String factoryId) {
+		this.factoryId = factoryId;
 	}
-	public String getGroupId() {
-		return groupId;
+	public String getWorkshopId() {
+		return workshopId;
 	}
-	public void setGroupId(String groupId) {
-		this.groupId = groupId;
+	public void setWorkshopId(String workshopId) {
+		this.workshopId = workshopId;
 	}
 	public BigDecimal getCenterHeight() {
 		return centerHeight;
