@@ -1,6 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%@ taglib prefix="j" uri="/script-tags"%>
+
 <%
 	/**
 	 * All right reserved.
@@ -53,7 +55,7 @@
 										</td>
 										<td background="../images/header_02.jpg">
 											<p class="STYLE1">
-												您当前的位置：报表管理&gt;&gt;&gt;个人报表
+												您当前的位置：报表管理&gt;&gt;&gt;模板维护
 											</p>
 										</td>
 										<td width="12">
@@ -68,13 +70,13 @@
 							<td width="200" valign="top"
 								style="border-left: 1px solid #54a4e3; border-bottom: 1px solid #54a4e3; border-right: 1px solid #54a4e3; padding: 5px;">
 								<iframe width="100%" height="100%" id="menutree" name="menutree"
-									frameborder="0" scrolling="auto" src="grouptree7.html"></iframe>
+									frameborder="0" scrolling="auto" src="grouptree9.html"></iframe>
 							</td>
 							<td valign="top"
 								style="border-left: 1px solid #54a4e3; border-bottom: 1px solid #54a4e3; border-right: 1px solid #54a4e3; padding: 5px;">
 								<iframe width="100%" height="100%" id="groupmain"
 									name="groupmain" frameborder="0" scrolling="no"
-									src="./openReportAction.action"></iframe>
+									src="./openAddTemplateAction.action"></iframe>
 							</td>
 						</tr>
 					</table>

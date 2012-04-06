@@ -28,7 +28,7 @@
 <html>
 	<head>
 
-		<title>添加个人报表</title>
+		<title>报表模板维护</title>
 		<meta http-equiv="pragma" content="no-cache">
 		<meta http-equiv="cache-control" content="no-cache">
 		<meta http-equiv="expires" content="0">
@@ -38,95 +38,95 @@
 			jquery="true" validate="true" />
 	 	<script type="text/javascript" src="js/My97DatePicker/WdatePicker.js"></script>
 		<script type="text/javascript">
-	/**
-	 * 验证条件
-	 */
-	var _report_submit = {
-		rules : {
-			"report.reportDate" : {date : true},
-			"report.reportType":{required:true,maxlength:20},
-			"report.reportSubject":{required:true,maxlength:20},
-			"report.reportPerson":{required:true,maxlength:20},
-			"report.reportContent":{maxlength:500}
-			},messages:{
-				"report.reportType":
-				{
-				    required:"汇报类别为必填项！",
-					maxlength:"汇报类别最多输入20个字符！"
-				},
-				"report.reportSubject":
-				{
-					required:"汇报题目为必填项！",
-					maxlength:"汇报题目最多输入20个字符！"
-				},
-				"report.reportPerson":
-				{
-					required:"汇报人为必填项！",
-					maxlength:"汇报人最多输入20个字符！"
-				},
-				"report.reportContent":
-				{
-					maxlength:"汇报内容最多输入20个字符！"
-				}
-				}
-			};
-	
+		/**
+		 * 验证条件
+		 */
+		var _report_submit = {
+			rules : {
+				"report.reportDate" : {date : true},
+				"report.reportType":{required:true,maxlength:20},
+				"report.reportSubject":{required:true,maxlength:20},
+				"report.reportPerson":{required:true,maxlength:20},
+				"report.reportContent":{maxlength:500}
+				},messages:{
+					"report.reportType":
+					{
+					    required:"汇报类别为必填项！",
+						maxlength:"汇报类别最多输入20个字符！"
+					},
+					"report.reportSubject":
+					{
+						required:"汇报题目为必填项！",
+						maxlength:"汇报题目最多输入20个字符！"
+					},
+					"report.reportPerson":
+					{
+						required:"汇报人为必填项！",
+						maxlength:"汇报人最多输入20个字符！"
+					},
+					"report.reportContent":
+					{
+						maxlength:"汇报内容最多输入20个字符！"
+					}
+					}
+				};
+		
 
 
-	/**
-	 * 准备工作
-	 */
-	$(document).ready(function() {
-		$.validator.setDefaults({
-			//验证框架的验证器的默认设置区
-			debug : false,
-			onkeyup : false,
-			onfocusout : false,
-			focusCleanup : true,
-			errorPlacement : function(error, element) {
-			},
-			invalidHandler : function(form, validator) {
-				$.each(validator.invalid, function(key, value) {
-					alert(value);
-					document.getElementById(key).focus();
+		/**
+		 * 准备工作
+		 */
+		$(document).ready(function() {
+			$.validator.setDefaults({
+				//验证框架的验证器的默认设置区
+				debug : false,
+				onkeyup : false,
+				onfocusout : false,
+				focusCleanup : true,
+				errorPlacement : function(error, element) {
+				},
+				invalidHandler : function(form, validator) {
+					$.each(validator.invalid, function(key, value) {
+						alert(value);
+						document.getElementById(key).focus();
+						return false;
+					});
+				}
+			})
+			$.fn.save();
+			$.fn.close();
+	  	});
+
+
+		/**
+		 * 保存
+		 */
+		$.fn.save = function() {
+			//如果有id就说明是修改action
+			var reportId = $("#hid_reportId").val();
+			$("#addBtn").click(function() {
+				var validate_settings_submit = jQuery.extend({}, _report_submit);
+				var validator = $("form").validate(validate_settings_submit);
+				if (!validator.form()) {
 					return false;
-				});
-			}
-		})
-		$.fn.save();
-		$.fn.close();
-  	});
+				}
+				if ($.trim(reportId) == "") {
+					repform.action = "toAddReportAction.action";
+				} else {
+					repform.action = "toModifyReportAction.action";
+				}
+				repform.submit();
+			});
+		}
 
-
-	/**
-	 * 保存
-	 */
-	$.fn.save = function() {
-		//如果有id就说明是修改action
-		var reportId = $("#hid_reportId").val();
-		$("#addBtn").click(function() {
-			var validate_settings_submit = jQuery.extend({}, _report_submit);
-			var validator = $("form").validate(validate_settings_submit);
-			if (!validator.form()) {
-				return false;
-			}
-			if ($.trim(reportId) == "") {
-				repform.action = "toAddReportAction.action";
-			} else {
-				repform.action = "toModifyReportAction.action";
-			}
-			repform.submit();
-		});
-	}
-
-	/**
-	 * 关闭
-	 */
-	$.fn.close = function() {
-		$("#closeBtn").click(function() {
-			parent.$("#windown-close").click();
-		});
-	}
+		/**
+		 * 关闭
+		 */
+		$.fn.close = function() {
+			$("#closeBtn").click(function() {
+				parent.$("#windown-close").click();
+			});
+		}
 </script>
 </head>
 <body>
@@ -146,8 +146,7 @@
 												<strong>汇报类别：</strong>
 											</td>
 											<td height="26" align="left" bgcolor="#FFFFFF">
-												<s:textfield id="txt_reportType" 
-													name="report.reportType" />
+												<s:textfield id="txt_reportType" name="report.reportType" />
 											</td>
 										</tr>
 										<tr>
@@ -173,8 +172,7 @@
 												<strong>汇报时间：</strong>
 											</td>
 											<td height="26" align="left" bgcolor="#FFFFFF">
-												<s:textfield id="txt_reportDate" 
-													name="report.reportDate" />
+												<s:textfield id="txt_reportDate" name="report.reportDate" />
 											</td>
 										</tr>
 										<tr>
@@ -189,12 +187,9 @@
 										</tr>
 										<tr>
 											<td height="26" colspan="2" align="left" bgcolor="#FFFFFF">
+												<input name="addBtn" type="button" value="确定" class="btn_2_3"
+													id="addBtn" />
 												&nbsp;&nbsp;
-												<input name="addBtn" type="button" value="确定" class="btn_2_3" id="addBtn" />
-												&nbsp;&nbsp;
-												<input name="exreportBtn" type="button" value="导出" class="btn_2_3" id="exreportBtn"/>
-												&nbsp;&nbsp;
-												<input name="closeBtn" type="button" value="关闭" class="btn_2_3" id="closeBtn" />
 											</td>
 										</tr>
 									</table>
@@ -205,6 +200,6 @@
 				</tr>
 			</table>
 		</s:form>
-</body>
+	</body>
 </html>
 
