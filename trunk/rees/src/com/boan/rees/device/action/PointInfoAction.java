@@ -63,6 +63,9 @@ public class PointInfoAction extends BaseActionSupport {
 	
 	//设备对象
 	private DeviceInfo deviceInfo = null;
+	
+	private String workshopId = null;
+	private List<DeviceInfo> deviceInfos = null;
 
 	/**
 	 * 根据设备ID，获得设备监测点数据
@@ -135,7 +138,7 @@ public class PointInfoAction extends BaseActionSupport {
 	 * @return
 	 */
 	public String deviceListForData(){
-		//deviceInfoService.findDeviceInfoForPage(values, pagination);
+		deviceInfos = deviceInfoService.findDeviceInfoByWorkshopId(workshopId);
 		return SUCCESS;
 	}
 
@@ -203,5 +206,22 @@ public class PointInfoAction extends BaseActionSupport {
 	public void setDeviceInfo(DeviceInfo deviceInfo) {
 		this.deviceInfo = deviceInfo;
 	}
+
+	public String getWorkshopId() {
+		return workshopId;
+	}
+
+	public void setWorkshopId(String workshopId) {
+		this.workshopId = workshopId;
+	}
+
+	public List<DeviceInfo> getDeviceInfos() {
+		return deviceInfos;
+	}
+
+	public void setDeviceInfos(List<DeviceInfo> deviceInfos) {
+		this.deviceInfos = deviceInfos;
+	}
+	
 	// ************************************************************************************
 }

@@ -32,6 +32,10 @@
 			<result name="success">/datamanage/deviceimage.jsp</result>
 			<result name="input">/datamanage/deviceimage.jsp</result>
 		</action>
+		<action name="devicestat" class="pointDataInfoAction" method="deviceStat">
+			<result name="success">/datamanage/devicestat.jsp</result>
+			<result name="input">/datamanage/devicestat.jsp</result>
+		</action>
 	</package>
 	<package name="pointdatajax" extends="json-default" namespace="/datamanage">
 		<action name="getweeksajax" class="pointDataInfoAction" method="loadWeekList">

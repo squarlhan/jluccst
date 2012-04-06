@@ -285,6 +285,15 @@ public class PointDataInfoAction extends BaseActionSupport {
 		return SUCCESS;
 	}
 	
+	/**
+	 * 统计
+	 * @return
+	 */
+	public String deviceStat(){
+		//
+		return SUCCESS;
+	}
+	
 	public String getDeviceId() {
 		return deviceId;
 	}
