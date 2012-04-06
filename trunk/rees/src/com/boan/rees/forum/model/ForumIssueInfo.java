@@ -19,6 +19,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.Formula;
 import org.hibernate.annotations.GenericGenerator;
@@ -84,10 +85,12 @@ public class ForumIssueInfo implements Serializable {
 	/**
 	 * 议题创建时间 字符串   
 	 */
+	@Transient
 	private String createTimeStr ;
 	/**
 	 * 话题参与人数
 	 */
+	@Transient
 	private int joinPersonCount = 0;
 	
 	public String getCreateTimeStr()
