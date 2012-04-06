@@ -69,8 +69,6 @@ public class UserAction extends BaseActionSupport
 
 	private String jsonData = null;
 
-	private String jumpUrl = null;
-	
 	private String newPassword = null;
 
 	private List<UserType> userTypeList = UserType.getUserTypeList();
@@ -127,7 +125,6 @@ public class UserAction extends BaseActionSupport
 			}
 			userService.saveOrUpdateUser( user );
 			message.setContent( "用户信息保存成功！" );
-			jumpUrl = "./showUserListAction.action?companyId=" + companyId;
 			return SUCCESS;
 		}
 	}
@@ -191,7 +188,7 @@ public class UserAction extends BaseActionSupport
 	 */
 	public String showUserList() throws Exception
 	{
-		pagination = userService.queryUserList( companyId,pagination );
+		pagination = userService.queryUserList( companyId,factoryId,workshopId,pagination );
 		if( pagination != null && pagination.getData().size() > 0 )
 		{
 			HttpSession session = ServletActionContext.getRequest().getSession();
@@ -376,16 +373,6 @@ public class UserAction extends BaseActionSupport
 	public void setRoleList( List<Role> roleList )
 	{
 		this.roleList = roleList;
-	}
-
-	public String getJumpUrl()
-	{
-		return jumpUrl;
-	}
-
-	public void setJumpUrl( String jumpUrl )
-	{
-		this.jumpUrl = jumpUrl;
 	}
 
 	public String getJsonData()

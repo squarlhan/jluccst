@@ -73,8 +73,9 @@ public interface IUserDao extends IBaseDao<User,String>{
 	/**
 	 * 获取用户列表
 	 * 
-	 * @param deptId
-	 *            所在组id
+	 * @param companyId
+	 * @param factoryId
+	 * @param workshopId
 	 * @param startIndex
 	 *            页标
 	 * @param maxResults
@@ -82,7 +83,7 @@ public interface IUserDao extends IBaseDao<User,String>{
 	 * @return 用户列表
 	 * @throws Exception
 	 */
-	public List<User> queryUserList( String deptId, int startIndex, int maxResults ) throws Exception;
+	public List<User> queryUserList( String companyId, String factoryId, String workshopId, int startIndex, int maxResults ) throws Exception;
 
 	/**
 	 * 根据集团id，取得集团下可以登录的用户，用于登录时显示
@@ -99,7 +100,7 @@ public interface IUserDao extends IBaseDao<User,String>{
 	 * @return 列表总数
 	 * @throws Exception
 	 */
-	public int queryUserListCount( String companyId ) throws Exception;
+	public int queryUserListCount( String companyId, String factoryId, String workshopId ) throws Exception;
 
 	/**
 	 * 判断用户及密码是否正确

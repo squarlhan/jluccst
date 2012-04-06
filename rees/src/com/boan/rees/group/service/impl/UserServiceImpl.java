@@ -64,10 +64,10 @@ public class UserServiceImpl implements IUserService {
 	}
 
 	@Override
-	public Pagination<User> queryUserList( String companyId, Pagination<User> pagination ) throws Exception
+	public Pagination<User> queryUserList( String companyId, String factoryId, String workshopId, Pagination<User> pagination ) throws Exception
 	{
-		List<User> list = userDao.queryUserList( companyId, pagination.getStartIndex(), pagination.getPageSize() );
-		int totalRows = userDao.queryUserListCount( companyId );
+		List<User> list = userDao.queryUserList( companyId,factoryId, workshopId, pagination.getStartIndex(), pagination.getPageSize() );
+		int totalRows = userDao.queryUserListCount(  companyId,factoryId, workshopId );
 		pagination.setTotalRows(totalRows);
 		pagination.setData(list);
 		return pagination;
@@ -81,9 +81,9 @@ public class UserServiceImpl implements IUserService {
 	}
 
 	@Override
-	public int queryUserListCount( String deptId ) throws Exception
+	public int queryUserListCount( String companyId, String factoryId, String workshopId ) throws Exception
 	{
-		return userDao.queryUserListCount( deptId );
+		return userDao.queryUserListCount(  companyId,factoryId, workshopId );
 	}
 
 	@Override
