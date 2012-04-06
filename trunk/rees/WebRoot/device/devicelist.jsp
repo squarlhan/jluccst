@@ -53,7 +53,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  		 * 添加设备信息
 	  		 */
 			$("#addbtn").click(function(){
-				parent.parent.parent.tipsWindown("添加设备信息","iframe:openAddDeviceAction.action","460","380","true","","true","no");
+				parent.parent.parent.tipsWindown("添加设备信息","iframe:openAddDeviceAction.action","480","400","true","","true","no");
 			});
 
 	  		/**
@@ -62,7 +62,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  		$('a[name="edit"]').each(function(){
 	  			$(this).click(function(){
 	  				var url = $(this).attr("url");
-	  				parent.parent.parent.tipsWindown("修改设备信息","iframe:"+url,"460","380","true","","true","no");
+	  				parent.parent.parent.tipsWindown("修改设备信息","iframe:"+url,"480","400","true","","true","no");
 	  			});
 	  		});
 	  		
