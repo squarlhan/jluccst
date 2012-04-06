@@ -60,6 +60,13 @@
 		});
 	}
 	
+	 /**
+	 * 删除用户
+	 */
+	 $.fn.deleteitem = function(){
+		$.fn.delete_items("userIds", "./userAction!deleteUser.action");
+	}
+	
 //-->
 </script>
 <style type="text/css">
@@ -105,16 +112,15 @@
             <s:iterator value="pagination.data" status="obj">
             <tr>
               <td height="26" align="center" bgcolor="#FFFFFF"><input type="checkbox" name="userIds" id="userId<s:property value="id"/>" value="<s:property value="id"/>"></td>
-              <td height="26" align="center" bgcolor="#FFFFFF">
-              	<A href="#" onclick="javascript:$.fn.edit('<s:property value="id"/>');">
-              		<s:property value="username"/>
-              	</A>
-              </td>
+              <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="username"/></td>
               <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="userCName"/></td>
               <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="officePhone"/></td>
               <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="phone"/></td>
               <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="email"/></td>
-               <td height="26" align="center" bgcolor="#FFFFFF">编辑 删除</td>
+               <td height="26" align="center" bgcolor="#FFFFFF">
+               	<A href="#" onclick="javascript:$.fn.edit('<s:property value="id"/>');">编辑</A>
+               	 删除
+               </td>
             </tr>
             </s:iterator>
             <tr>
