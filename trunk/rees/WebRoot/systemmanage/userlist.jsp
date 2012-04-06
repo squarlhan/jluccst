@@ -63,8 +63,12 @@
 	 /**
 	 * 删除用户
 	 */
-	 $.fn.deleteitem = function(){
-		$.fn.delete_items("userIds", "./userAction!deleteUser.action");
+	 $.fn.deleteitem = function(cid){
+		if(confirm("确定要删除所选记录吗？")){
+			$("#deleteId").val(cid);
+			document.forms[0].action = "./userAction!delete.action";
+			document.forms[0].submit();
+		}
 	}
 	
 //-->
@@ -84,6 +88,7 @@
 <s:hidden name="companyId" id="companyId"></s:hidden>
 <s:hidden name="factoryId" id="factoryId"></s:hidden>
 <s:hidden name="workshopId" id="workshopId"></s:hidden>
+<s:hidden name="deleteId" id="deleteId" value=""></s:hidden>
 <table width="100%" style="height:100%;" border="0" cellspacing="5" cellpadding="0">
   <tr>
     <td valign="top"><table width="100%" border="0" cellspacing="5" cellpadding="0">
@@ -119,7 +124,7 @@
               <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="email"/></td>
                <td height="26" align="center" bgcolor="#FFFFFF">
                	<A href="#" onclick="javascript:$.fn.edit('<s:property value="id"/>');">编辑</A>
-               	 删除
+               	<A href="#" onclick="javascript:$.fn.deleteitem('<s:property value="id"/>');">删除</A>
                </td>
             </tr>
             </s:iterator>
