@@ -53,7 +53,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  		 * 添加设备信息
 	  		 */
 			$("#addbtn").click(function(){
-				parent.parent.parent.tipsWindown("添加设备信息","iframe:openAddDeviceAction.action","480","400","true","","true","no");
+				var factoryId = $("#hid_factoryId").val();
+	  			var workshopId = $("#hid_workshopId").val();
+				parent.parent.parent.tipsWindown("添加设备信息","iframe:openAddDeviceAction.action?factoryId="+factoryId+"&workshopId="+workshopId,"480","400","true","","true","no");
 			});
 
 	  		/**
@@ -61,7 +63,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  		 */
 	  		$('a[name="edit"]').each(function(){
 	  			$(this).click(function(){
-	  				var url = $(this).attr("url");
+	  				var factoryId = $("#hid_factoryId").val();
+		  			var workshopId = $("#hid_workshopId").val();
+	  				var url = $(this).attr("url")+"&factoryId="+factoryId+"&workshopId="+workshopId;
 	  				parent.parent.parent.tipsWindown("修改设备信息","iframe:"+url,"480","400","true","","true","no");
 	  			});
 	  		});
@@ -102,7 +106,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  		 * 打开设备排序窗口
 	  		 */
 	  		$("#sortbtn").click(function(){
-	  			parent.parent.parent.tipsWindown("设备排序","iframe:openSortDeviceAction.action","350","420","true","","true","no");
+	  			var factoryId = $("#hid_factoryId").val();
+	  			var workshopId = $("#hid_workshopId").val();
+	  			parent.parent.parent.tipsWindown("设备排序","iframe:openSortDeviceAction.action?factoryId="+factoryId+"&workshopId="+workshopId,"350","420","true","","true","no");
 	  		});
 		});
 		
@@ -112,7 +118,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   </head>
   
   <body>
-  	<s:form id="form1" name="form1" method="post" theme="simple" >
+	<s:form id="form1" name="form1" method="post" theme="simple" >
+	<s:hidden id="hid_factoryId" name="factoryId"></s:hidden>
+	<s:hidden id="hid_workshopId" name="workshopId"></s:hidden>
 <table width="100%" style="height:100%;" border="0" cellspacing="5" cellpadding="0">
   <tr>
     <td valign="top"><table width="100%" border="0" cellspacing="5" cellpadding="0">
