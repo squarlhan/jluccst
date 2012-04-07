@@ -80,7 +80,7 @@ public class SessionValidationFilter implements Filter
 		try
 		{
 			//String inErrStr = new String("\u83b7\u53d6\u767b\u5f55\u4fe1\u606f\u5931\u8d25\uff0c\u8bf7\u91cd\u65b0\u767b\u5f55\uff01".getBytes("utf-8"),"iso-8859-1");//获取登录信息失败，请重新登录！
-			String inErrStr = "session is null !";
+			String inErrStr = "\u7528\u6237\u4F1A\u8BDD\u8D85\u65F6\uFF0C\u8BF7\u91CD\u65B0\u767B\u5F55\uFF01";
 			PrintWriter out = response.getWriter();
 			response.setContentType( "text/html;charset=utf-8" );
 			response.addHeader( "Cache-Control", "no-store,no-cache,must-revalidate" );
@@ -90,7 +90,7 @@ public class SessionValidationFilter implements Filter
 			response.setCharacterEncoding( "utf-8" );
 			out.println( "<html><head>" );
 			out.println( "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-8\">" );
-			out.println( "<title>Session is null</title></head>" );
+			out.println( "<title>" + inErrStr + "</title></head>" );
 			out.println( "<script language=javascript>" );
 			out.println( "alert(\'"+ inErrStr +"\');" );
 			out.println( "top.location.href=\"" + loginURL + "\"" );
