@@ -28,6 +28,10 @@ public class Role
 	 * 角色实体主键
 	 */
 	private String id;
+	public Role()
+	{
+		this.id="";
+	}
 
 	/**
 	 * 角色名称

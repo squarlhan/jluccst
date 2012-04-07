@@ -49,7 +49,7 @@ public class RoleServiceImpl implements IRoleService{
 	 * 删除角色
 	 */
 	@Override
-	public void deleteGroupCompany(String... ids) {
+	public void deleteGroupRole(String... ids) {
 		groupRoleDao.delete(ids);
 		
 	}
@@ -75,6 +75,17 @@ public class RoleServiceImpl implements IRoleService{
 		pagination.setTotalRows(totalRows);
 		pagination.setData(data);
 		return pagination;
+	}
+
+	@Override
+	public boolean isExistSameName(String id, String roleName) {
+		return groupRoleDao.isExistSameName( id, roleName );
+	}
+
+	@Override
+	public void update(Role role) {
+		groupRoleDao.update(role);
+		
 	}
 
 	
