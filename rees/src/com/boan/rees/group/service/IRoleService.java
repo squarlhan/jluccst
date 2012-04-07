@@ -30,7 +30,7 @@ public interface IRoleService {
 	/**
 	 * 删除角色
 	 */
-	public void deleteGroupCompany(String... ids );
+	public void deleteGroupRole(String... ids );
 	
 	/**
 	 * 保存角色
@@ -41,6 +41,10 @@ public interface IRoleService {
 	 * 按分页查找角色
 	 */
 	public Pagination<Role> findRoleForPage(Map<String, ?> values,Pagination<Role> pagination);
+
+	public boolean isExistSameName(String id, String roleName);
+
+	public void update(Role role);
 
 }
 

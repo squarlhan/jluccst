@@ -14,4 +14,6 @@ import com.boan.rees.utils.dao.IBaseDao;
 
 public interface IRoleDao extends IBaseDao<Role,String>{
 
+	boolean isExistSameName(String id, String roleName);
+
 }
