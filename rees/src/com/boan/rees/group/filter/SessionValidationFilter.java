@@ -32,10 +32,8 @@ import com.boan.rees.group.common.UserSession;
 public class SessionValidationFilter implements Filter
 {
 	private String logon_page;
-	private String logon_page_admin;
 	private String logon_action;
 	private String logout_action;
-	private String check_action;
 	protected FilterConfig filterConfig;   
 	private String targetEncoding="utf-8";   
 	public void init( FilterConfig filterconfig ) throws ServletException
@@ -57,9 +55,7 @@ public class SessionValidationFilter implements Filter
 		String ctxPath = httpReq.getContextPath();
 		String uri = request_uri.substring( ctxPath.length() );
 		if( !logon_page.equalsIgnoreCase( uri ) &&  !logon_action.equalsIgnoreCase( uri ) 
-					&& !"/".equalsIgnoreCase( uri ) && !logout_action.equalsIgnoreCase( uri )
-					&& !check_action.equalsIgnoreCase( uri )
-					&& !logon_page_admin.equalsIgnoreCase( uri ))
+					&& !"/".equalsIgnoreCase( uri ) && !logout_action.equalsIgnoreCase( uri ) )
 		{
 			if( session == null )
 			{

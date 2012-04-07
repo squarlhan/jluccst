@@ -70,6 +70,8 @@ public class UserAction extends BaseActionSupport
 	private String jsonData = null;
 
 	private String newPassword = null;
+	
+	private String deleteId = null;
 
 	private List<UserType> userTypeList = UserType.getUserTypeList();
 
@@ -143,6 +145,21 @@ public class UserAction extends BaseActionSupport
 			{
 				userService.deleteUserById( userIds[i]);
 			}
+		}
+		return this.showUserList();
+	}
+	
+	/**
+	 * 删除用户信息
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public String delete() throws Exception
+	{
+		if( StringUtils.isNotBlank( deleteId ) )
+		{
+			userService.deleteUserById( deleteId );
 		}
 		return this.showUserList();
 	}
@@ -443,5 +460,15 @@ public class UserAction extends BaseActionSupport
 	public void setWorkshopId( String workshopId )
 	{
 		this.workshopId = workshopId;
+	}
+
+	public String getDeleteId()
+	{
+		return deleteId;
+	}
+
+	public void setDeleteId( String deleteId )
+	{
+		this.deleteId = deleteId;
 	}
 }

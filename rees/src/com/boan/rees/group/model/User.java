@@ -68,7 +68,7 @@ public class User {
 	/**
 	 * 用户姓名
 	 */
-	@Column(name = "USECNAME")
+	@Column(name = "USERCNAME")
 	private String userCName;
 	
 	/**

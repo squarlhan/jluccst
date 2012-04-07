@@ -82,7 +82,7 @@ public class UserLogonAction extends ActionSupport
 	@Qualifier("workshopService")
 	private IWorkshopService workshopService = null;
 	
-	private Message message = null;
+	private Message message = new Message();
 
 	private String username = null;
 
@@ -119,7 +119,8 @@ public class UserLogonAction extends ActionSupport
 			{
 				// 获取权限串
 				String roleId = user.getRoleId();
-				String[] popedomKeys = popedomService.queryPopedomsByRoleId( roleId );
+				//TODO
+				String[] popedomKeys = null;// popedomService.queryPopedomsByRoleId( roleId );
 				// 创建userSession对象
 				UserSession userSession = new UserSession();
 				userSession.setUserId( user.getId() );
