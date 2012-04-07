@@ -67,7 +67,7 @@
 					}
 	               	$("#roleId").attr("disabled",false);
 	               	form1.action="./saveOrUpdateMyInfoAction.action"
-	               	form1.target = "iframe2";
+	               	form1.target = "iframe1";
 	               	form1.submit();
 	           	});
           	}
