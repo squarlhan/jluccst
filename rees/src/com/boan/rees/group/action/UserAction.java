@@ -210,8 +210,7 @@ public class UserAction extends BaseActionSupport
 		{
 			HttpSession session = ServletActionContext.getRequest().getSession();
 			UserSession userSession = ( UserSession ) session.getAttribute( "userSession" );
-			//TODO
-			String curUserId = "myUserId";//userSession.getUserId();
+			String curUserId = userSession.getUserId();
 			for( int i = 0; i < pagination.getData().size(); i++ )
 			{
 				if( curUserId.equals( pagination.getData().get( i ).getId() ) )
@@ -258,10 +257,10 @@ public class UserAction extends BaseActionSupport
 			String myUserId = userSession.getUserId();
 			if( StringUtils.isNotBlank( myUserId ) )
 			{
-				//TODO
-				//user = userService.getUserById( userId );
-				//unitId = user.getUnitId();
-				//deptId = user.getDeptId();
+				user = userService.getUserById( sessionUserId );
+				companyId = user.getCompanyId();
+				factoryId = user.getFactoryId();
+				workshopId = user.getWorkshopId();
 			}
 			//TODO
 			//roleList = roleService.queryAllRoleList();
