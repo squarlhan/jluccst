@@ -121,14 +121,14 @@
 	</package>
 	<package name="userlogon" extends="struts-default" namespace="/">
 		<action name="logonValidAction" class="userLogonAction" method="logonValid">
-			<result name="success">/loginok.jsp</result>
+			<result name="success">/sysloginsuccess.jsp</result>
 			<result name="error">/common/messagenoclose.jsp</result>
 		</action>
 		<action name="logonMainAction" class="userLogonAction" method="logonMain">
-			<result name="success">/main.jsp</result>
+			<result name="success">/sysmain.jsp</result>
 		</action>
 		<action name="logonTopAction" class="userLogonAction" method="logonTop">
-			<result name="success">/top.jsp</result>
+			<result name="success">/systop.jsp</result>
 		</action>
 		<action name="logoutAction" class="userLogonAction" method="logout">
 			<result name="success">/default.jsp</result>
