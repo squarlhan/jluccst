@@ -96,7 +96,27 @@
 
 	<!-- 角色Action -->
 	<package name="group_role" extends="struts-default" namespace="/">
-
+        <action name="openRoleAction" class="roleAction" method="openRole">
+            <result name="success">/systemmanage/rolelist.jsp</result>
+            <result name="input">/systemmanage/rolelist.jsp</result>
+        </action>
+        <action name="openAddRoleAction" class="roleAction" method="openAddRole" >
+            <result name="success">/systemmanage/roleinfo.jsp</result>
+            <result name="input">/systemmanage/roleinfo.jsp</result>
+        </action>
+        <action name="toAddRoleAction" class="roleAction" method="toAddRole">
+            <result name="success">/systemmanage/roleinfo.jsp</result>
+            <result name="input">/systemmanage/roleinfo.jsp</result>
+        </action>
+        <action name="openModifyRoleAction" class="roleAction" method="openModifyRole">
+            <result name="success">/systemmanage/roleinfo.jsp</result>
+            <result name="input">/systemmanage/roleinfo.jsp</result>
+        </action>
+        <action name="toModifyRoleAction" class="roleAction" method="toModifyRole">
+            <result name="success">/systemmanage/roleinfo.jsp</result>
+            <result name="input">/systemmanage/roleinfo.jsp</result>
+        </action>
+        <action name="deleteRoleAction" class="roleAction" method="deleteRole"></action>
 	</package>
 	<package name="group_user" extends="struts-default" namespace="/">
 		<action name="userAction" class="userAction">
