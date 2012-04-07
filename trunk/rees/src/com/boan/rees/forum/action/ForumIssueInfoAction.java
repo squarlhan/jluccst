@@ -110,7 +110,7 @@ public class ForumIssueInfoAction extends BaseActionSupport {
 		//System.out.println(forumIssueInfo.getIssueContent());
 		try{
 			//调用service保存方法向数据库保存信息
-			forumIssueInfo.setCreator( sessionUserNameChs );
+			forumIssueInfo.setCreator( sessionUserCName);
 			forumIssueInfoService.save(forumIssueInfo);
 			message = "保存成功！";
 		}catch(Exception e){
