@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.lang.StringUtils;
 import org.apache.struts2.ServletActionContext;
 
+import com.boan.rees.group.common.UserSession;
 import com.opensymphony.xwork2.ActionSupport;
 
 /**
@@ -22,7 +23,8 @@ import com.opensymphony.xwork2.ActionSupport;
  * @author XXX
  * @version 1.0.0
  */
-public class BaseActionSupport extends ActionSupport {
+public class BaseActionSupport extends ActionSupport
+{
 
 	/**
 	 * serialVersionUID
@@ -67,20 +69,20 @@ public class BaseActionSupport extends ActionSupport {
 	/**
 	 * 用户姓名
 	 */
-	protected String sessionUserNameChs = "userNameChs";
+	protected String sessionUserCName = "userCName";
 
 	@Override
-	public void validate() {
+	public void validate()
+	{
 		HttpSession session = ServletActionContext.getRequest().getSession();
-		/*
-		 * UserSession userSession = ( UserSession )session.getAttribute(
-		 * "userSession" ); unitId = StringUtils.trimToEmpty(
-		 * userSession.getUnitId() ); unitName = StringUtils.trimToEmpty(
-		 * userSession.getUnitName() ); deptId = StringUtils.trimToEmpty(
-		 * userSession.getDeptId() ); deptName = StringUtils.trimToEmpty(
-		 * userSession.getDeptName() ); userId = StringUtils.trimToEmpty(
-		 * userSession.getUserId() ); userName = StringUtils.trimToEmpty(
-		 * userSession.getUserCName() );
-		 */
+		UserSession userSession = ( UserSession ) session.getAttribute( "userSession" );
+		sessionUserId = StringUtils.trimToEmpty( userSession.getUserId() );
+		sessionUserCName = StringUtils.trimToEmpty( userSession.getUserCName() );
+		sessionCompanyId = StringUtils.trimToEmpty( userSession.getCompanyId() );
+		sessionFactoryId = StringUtils.trimToEmpty( userSession.getFactoryId() );
+		sessionWorkshopId = StringUtils.trimToEmpty( userSession.getWorkshopId() );
+		sessionCompanyName = StringUtils.trimToEmpty( userSession.getCompanyName() );
+		sessionFactoryName = StringUtils.trimToEmpty( userSession.getFactoryName() );
+		sessionWorkshopName = StringUtils.trimToEmpty( userSession.getWorkshopName() );
 	}
 }
