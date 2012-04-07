@@ -29,7 +29,7 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<title></title>
-		<j:scriptlink css="true" />
+		<j:scriptlink css="true" jquery="true"/>
 		<style type="text/css">
 		<!--
 		.STYLE1 {
@@ -49,11 +49,37 @@
 		}
 		-->
 		</style>
+		<script type="text/javascript">
+			$(document).ready(function() {
+				$("#username").focus();
+			});
+			function logon() {
+				if ($.trim($("#username").val()) == "") {
+					alert("请输入用户名！");
+					$("#username").focus();
+					return false;
+				}
+				if ($("#password").val() == "") {
+					alert("请输入密码！");
+					$("#password").focus();
+					return false;
+				}
+				form1.action = "./logonValidAction.action";
+				form1.target = "iframe1";
+				form1.submit();
+			}
+			function mykeypress() {
+				if (event.keyCode == 13) {
+					logon();
+				}
+			}
+		</script>
 	</head>
 	<body>
+		<form id="form1" name="form1" method="post">
 		<table width="1003" border="0" align="center" cellpadding="0" cellspacing="0"
 			style="height: 613px;">
-	  <tr>
+	  		<tr>
 				<td align="center" valign="middle">
 					<table id="__01" width="1003" height="614" border="0"
 						cellpadding="0" cellspacing="0">
@@ -62,32 +88,35 @@
 					  </tr>
 						<tr>
 							<td height="90" colspan="3" rowspan="4" background="images/login_02.png">&nbsp;</td>
-							<td height="22" colspan="3" background="images/login_03.png"><input type="text" name="textfield" id="textfield" style="width:100px; height:13px;" /></td>
-<td height="90" colspan="3" rowspan="4" background="images/login_04.png">&nbsp;</td>
+							<td height="22" colspan="3" background="images/login_03.png"><input type="text" name="username" id="username" value="admin"
+										style="width:100px;height:13px;" maxlength="20"  onkeypress="mykeypress();"></td>
+							<td height="90" colspan="3" rowspan="4" background="images/login_04.png">&nbsp;</td>
 					  </tr>
 						<tr>
 							<td height="22" colspan="3" background="images/login_05.png">&nbsp;</td>
 					  </tr>
 						<tr>
-							<td height="22" colspan="3" background="images/login_06.png"><input type="password" name="textfield2" id="textfield2" style="width:100px; height:13px;" /></td>
+							<td height="22" colspan="3" background="images/login_06.png"><input type="password" name="password" id="password" value="1111"
+										style="width:100px;height:13px;" maxlength="20" onkeypress="mykeypress();"></td>
 					  </tr>
 						<tr>
 							<td height="24" colspan="3" background="images/login_07.png">&nbsp;</td>
 					  </tr>
 						<tr>
 							<td height="159" colspan="2" rowspan="2" background="images/login_08.png">&nbsp;</td>
-<td height="28" colspan="2"><img src="images/login_09.png" width="68" height="28" alt="登录" style="cursor:pointer;" onclick="window.location.href='sysmain.action'"></td>
-			  <td height="159" rowspan="2" background="images/login_10.png">&nbsp;</td>
+							<td height="28" colspan="2"><img src="images/login_09.png" width="68" height="28" 
+								alt="登录" style="cursor:pointer;" onclick="logon();"></td>
+			  				<td height="159" rowspan="2" background="images/login_10.png">&nbsp;</td>
 							<td height="28" colspan="2"><img src="images/login_11.png" width="68" height="28" alt="重置"></td>
 							<td height="159" colspan="2" rowspan="2" background="images/login_12.png">&nbsp;</td>
 					  </tr>
 						<tr>
 							<td height="131" colspan="2" background="images/login_13.png">&nbsp;</td>
-<td height="131" colspan="2" background="images/login_14.png">&nbsp;</td>
+							<td height="131" colspan="2" background="images/login_14.png">&nbsp;</td>
 					  </tr>
 						<tr>
 							<td width="352" height="74" rowspan="2" background="images/login_15.png">&nbsp;</td>
-<td height="25" colspan="7" background="images/login_16.png">&nbsp;</td>
+							<td height="25" colspan="7" background="images/login_16.png">&nbsp;</td>
 							<td width="319" height="74" rowspan="2" background="images/login_17.png">&nbsp;</td>
 					  </tr>
 						<tr>
@@ -126,6 +155,7 @@
 				</td>
 			</tr>
 		</table>
-
+		<iframe width="1px" height="1px" id="iframe1" name="iframe1"></iframe>
+	</form>
 </body>
 </html>
