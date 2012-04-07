@@ -89,6 +89,8 @@ public class UserLogonAction extends ActionSupport
 	private String password = null;
 
 	private String userCName = null;
+	
+	private String fullGroupName = null;
 
 	private String oldPassword = null;
 
@@ -212,7 +214,7 @@ public class UserLogonAction extends ActionSupport
 		HttpSession session = ServletActionContext.getRequest().getSession();
 		if( session != null && session.getAttribute( "userSession" ) != null )
 		{
-
+			fullGroupName = "→";
 			if( StringUtils.isNotBlank( ( ( UserSession ) session.getAttribute( "userSession" ) ).getUserCName() ) )
 			{
 				userCName = ( ( UserSession ) session.getAttribute( "userSession" ) ).getUserCName();
@@ -220,15 +222,24 @@ public class UserLogonAction extends ActionSupport
 			if( StringUtils.isNotBlank( ( ( UserSession ) session.getAttribute( "userSession" ) ).getCompanyName() ) )
 			{
 				companyName = ( ( UserSession ) session.getAttribute( "userSession" ) ).getCompanyName();
+				fullGroupName += companyName + "→"; 
 			}
 			if( StringUtils.isNotBlank( ( ( UserSession ) session.getAttribute( "userSession" ) ).getFactoryName() ) )
 			{
 				factoryName = ( ( UserSession ) session.getAttribute( "userSession" ) ).getFactoryName();
+				fullGroupName += factoryName + "→";
 			}
 			if( StringUtils.isNotBlank( ( ( UserSession ) session.getAttribute( "userSession" ) ).getWorkshopName() ) )
 			{
 				workshopName = ( ( UserSession ) session.getAttribute( "userSession" ) ).getWorkshopName();
+				fullGroupName += workshopName + "→";
 			}
+			fullGroupName = fullGroupName.substring( 1, fullGroupName.length() );
+			if( fullGroupName.length() > 0 )
+			{
+				fullGroupName = fullGroupName.substring( fullGroupName.length() -1 );
+			}
+			fullGroupName  = StringUtils.defaultIfEmpty( fullGroupName, "超级管理组" );
 			
 		}
 		return SUCCESS;
@@ -427,6 +438,16 @@ public class UserLogonAction extends ActionSupport
 	public void setWorkshopService( IWorkshopService workshopService )
 	{
 		this.workshopService = workshopService;
+	}
+
+	public String getFullGroupName()
+	{
+		return fullGroupName;
+	}
+
+	public void setFullGroupName( String fullGroupName )
+	{
+		this.fullGroupName = fullGroupName;
 	}
 
 }
