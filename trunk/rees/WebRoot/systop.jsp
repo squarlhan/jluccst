@@ -58,7 +58,7 @@
 	        <td width="20" style="padding-bottom:2px;"><img src="images/user.gif" width="16" height="16" /></td>
 	        <td width="870" style="padding-top:2px;">
 	        	<span class="STYLE1">
-	        		今天是2012年12月12日 星期三  欢迎您：系统管理员, 您的部门：动力一砀-》第二柄烯车间-》动力一砀-》第二柄烯车间
+	        		今天是2012年12月12日 星期三  欢迎您：<s:property value="userCName"/>, 您的部门：<s:property value="fullGroupName"/>
 	        		[<A href="javascript:myinfo();" style="color:yellow">个人资料</A>]
 	        		[<A href="javascript:logout();" style="color:yellow">退出</A>]
 	        	</span>
