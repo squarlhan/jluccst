@@ -1,3 +1,4 @@
+<%@page import="com.boan.rees.utils.calendar.CurrentDateTime"%>
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%@ taglib prefix="j" uri="/script-tags"%>
@@ -21,6 +22,11 @@
 	response.setHeader( "Expires", "0" );
 	request.setCharacterEncoding( "utf-8" );
 	String path = request.getContextPath();
+	//2011年5月12日 星期六 四月初五
+	StringBuffer sb = new StringBuffer();
+	sb.append( CurrentDateTime.getCurrentDate());
+	sb.append( "&nbsp;&nbsp;" );
+	sb.append( CurrentDateTime.getCurrentWeek() );
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -58,7 +64,7 @@
 	        <td width="20" style="padding-bottom:2px;"><img src="images/user.gif" width="16" height="16" /></td>
 	        <td width="870" style="padding-top:2px;">
 	        	<span class="STYLE1">
-	        		今天是2012年12月12日 星期三  欢迎您：<s:property value="userCName"/>, 您的部门：<s:property value="fullGroupName"/>
+	        		今天是<%=sb.toString() %>  欢迎您：<s:property value="userCName"/>, 您的部门：<s:property value="fullGroupName"/>
 	        		[<A href="javascript:myinfo();" style="color:yellow">个人资料</A>]
 	        		[<A href="javascript:logout();" style="color:yellow">退出</A>]
 	        	</span>
