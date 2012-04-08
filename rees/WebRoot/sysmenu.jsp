@@ -209,7 +209,8 @@
 												<img src="images/menuto.jpg" width="5" height="5" />
 											</td>
 											<td>
-												<a href="reportmanage/reportmanage.jsp" target="mainFrame">个人报表</a>
+												<!-- a href="reportmanage/reportmanage.jsp" target="mainFrame">个人报表</a> -->
+												<a href="reportmanage/openReportAction.action" target="mainFrame">个人报表</a>
 											</td>
 										</tr>
 										<tr>
@@ -219,6 +220,9 @@
 											<td>
 												<a href="reportmanage/reportsearchmanage.jsp"
 													target="mainFrame">报表查询</a>
+											</td>
+										</tr>
+										<!-- 
 										<tr>
 											<td width="40" align="right" style="padding-bottom: 4px;">
 												<img src="images/menuto.jpg" width="5" height="5" />
@@ -227,8 +231,7 @@
 												<a href="reportmanage/templatemanage.jsp" target="mainFrame">模板维护</a>
 											</td>
 										</tr>
-											</td>
-										</tr>
+										 -->
 									</table>
 								</td>
 							</tr>
@@ -399,6 +402,34 @@
 											</td>
 											<td>
 												<a href="systemmanage/popedommanage.jsp" target="mainFrame">权限分配</a>
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							<tr>
+								<td align="left">
+									<table width="100%" border="0" cellspacing="5" cellpadding="0">
+										<tr>
+											<td width="40" align="right" style="padding-bottom: 4px;">
+												<img src="images/menuto.jpg" width="5" height="5" />
+											</td>
+											<td>
+												<a href="openAddTemplateAction.action" target="mainFrame">报表模板</a>
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							<tr>
+								<td align="left">
+									<table width="100%" border="0" cellspacing="5" cellpadding="0">
+										<tr>
+											<td width="40" align="right" style="padding-bottom: 4px;">
+												<img src="images/menuto.jpg" width="5" height="5" />
+											</td>
+											<td>
+												<a href="openDeviceTypeAction.action" target="mainFrame">设备类型</a>
 											</td>
 										</tr>
 									</table>
