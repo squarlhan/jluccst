@@ -5,7 +5,10 @@
 <struts>
 	<!-- 报表Action -->
     <package name="person_report" extends="struts-default" namespace="/">
-    	
+    	<!-- 添加一个streamx插件，防止下载取消时后台抛异常现象 -->
+    	<result-types> 
+    		<result-type name="streamx" class="com.sunspoter.lib.web.struts2.dispatcher.StreamResultX"/> 
+    	</result-types>
     	<!-- 打开报表列表 -->
     	<action name="openReportAction" class="reportAction" method="openReport">
     		<result name="success">/reportmanage/reportlist.jsp</result>
@@ -40,6 +43,23 @@
     		<result name="input">/reportmanage/reportinfo.jsp</result>
     	</action>
     	
+    	<!-- 导出报表，支持中文附件名 -->  
+        <action name="toExportReportAction" class="reportAction" method="toExportReport">
+            <result name="success" type="streamx">  
+                <param name="contentType">application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document</param>  
+                <param name="inputName">inputStream</param>
+                <param name="contentDisposition">attachment;filename="${downloadFileName}"</param>  
+                <param name="bufferSize">4096</param>  
+            </result>
+            <result name="input">/reportmanage/reportinfo.jsp</result>
+        </action> 
+    	
+    	
+    	
+    	
+    	
+    	
+    	
     	<!-- 打开模板维护页面 -->
     	<action name="openAddTemplateAction" class="reportAction" method="openAddTemplate">
     		<result name="success">/reportmanage/templateinfo.jsp</result>
@@ -48,9 +68,37 @@
     	
     	<!-- 保存模板 -->
     	<action name="toAddTemplateAction" class="reportAction" method="toAddTemplate">
+    		<!-- 配置fileUpload的拦截器 -->
+            <interceptor-ref name="fileUpload">
+		    	<!-- 配置允许上传的文件类型 -->
+		        <param name="allowedTypes">application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document</param> 
+		    	<!-- 配置允许上传的文件大小 1MB = 1024KB = 1024*1024 = 1048576-->
+				<param name="maximumSize">20971520</param> 
+			</interceptor-ref> 
+	        <interceptor-ref name="defaultStack"/>
+	        <interceptor-ref name="fileUploadStack"/>
+	   		<!-- 动态设置Action的属性值 -->
+			<param name="savePath">/upload/template</param>
     		<result name="success">/reportmanage/templateinfo.jsp</result>
     		<result name="input">/reportmanage/templateinfo.jsp</result>
     	</action>
+    	
+    	<!-- 文件下载，支持中文附件名 -->  
+        <action name="toDownloadTempleFileAction" class="reportAction" method="toDownloadTempleFile">
+            <result name="success" type="streamx">  
+                <param name="contentType">application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document</param>  
+                <param name="inputName">inputStream</param>
+                <param name="contentDisposition">attachment;filename="${downloadFileName}"</param>  
+                <param name="bufferSize">4096</param>  
+            </result>
+            <result name="input">/reportmanage/templateinfo.jsp</result>
+        </action> 
+    	
+    	<!-- 删除个人报表模板文件-->  
+        <action name="toDeleteTemplateReportTempleFileAction" class="reportAction" method="toDeleteTemplateReportTempleFile"/>  
+    	
+    	
+    	
     	
     	<!-- 打开报表查询列表 -->
     	<action name="openReportSearchAction" class="reportAction" method="openReportSearch">
