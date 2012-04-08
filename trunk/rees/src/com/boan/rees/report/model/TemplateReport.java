@@ -38,7 +38,6 @@ public class TemplateReport implements Serializable{
 	 * 模板汇报类型
 	 */
 	@Column(name = "REPORT_TYPE")
-
 	private String reportType;
 	/**
 	 * 模板汇报题目
@@ -66,9 +65,29 @@ public class TemplateReport implements Serializable{
 	/**
 	 * 模板保存的相对路径
 	 */
+	@Column(name = "TEMPLATE_NAME")
+	private String templateName;
+	
+	/**
+	 * 模板保存的相对路径
+	 */
 	@Column(name = "TEMPLATE_PATH")
 	private String templatePath;
+	
+	/**
+	 * 创建时间
+	 */
+	@Column(name = "CREATE_TIME")
+	private Calendar createTime;
 
+	public Calendar getCreateTime() {
+		createTime= Calendar.getInstance();
+		return createTime;
+	}
+	public void setCreateTime(Calendar createTime) {
+		this.createTime = createTime;
+	}
+	
 	public String getId() {
 		return id;
 	}
@@ -125,7 +144,13 @@ public class TemplateReport implements Serializable{
 		this.templatePath = templatePath;
 	}
 
+	public String getTemplateName() {
+		return templateName;
+	}
 
+	public void setTemplateName(String templateName) {
+		this.templateName = templateName;
+	}
 }
 
 
