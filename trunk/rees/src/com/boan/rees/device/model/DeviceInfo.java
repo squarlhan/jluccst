@@ -54,8 +54,8 @@ public class DeviceInfo implements Serializable {
 	/**
 	 * 设备类型
 	 */
-	@Column(name = "DEVICE_TYPE")
-	private String deviceType;
+	@Column(name = "DEVICE_TYPE_NAME")
+	private String deviceTypeName;
 	/**
 	 * 设备名称
 	 */
@@ -91,7 +91,7 @@ public class DeviceInfo implements Serializable {
 	 * 创建时间
 	 */
 	@Column(name = "CREATE_TIME")
-	private Calendar creatTime;
+	private Calendar createTime;
 	/**
 	 * 删除标识0：正常 1：已删除
 	 */
@@ -138,11 +138,12 @@ public class DeviceInfo implements Serializable {
 	public void setDeviceNum(String deviceNum) {
 		this.deviceNum = deviceNum;
 	}
-	public String getDeviceType() {
-		return deviceType;
+	
+	public String getDeviceTypeName() {
+		return deviceTypeName;
 	}
-	public void setDeviceType(String deviceType) {
-		this.deviceType = deviceType;
+	public void setDeviceTypeName(String deviceTypeName) {
+		this.deviceTypeName = deviceTypeName;
 	}
 	public String getDeviceName() {
 		return deviceName;
@@ -181,11 +182,12 @@ public class DeviceInfo implements Serializable {
 	public void setSortIndex(Integer sortIndex) {
 		this.sortIndex = sortIndex;
 	}
-	public Calendar getCreatTime() {
-		return creatTime;
+	
+	public Calendar getCreateTime() {
+		return createTime;
 	}
-	public void setCreatTime(Calendar creatTime) {
-		this.creatTime = creatTime;
+	public void setCreateTime(Calendar createTime) {
+		this.createTime = createTime;
 	}
 	public Integer getIsDelete() {
 		return isDelete;
