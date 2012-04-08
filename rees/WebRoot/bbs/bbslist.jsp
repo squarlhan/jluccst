@@ -143,7 +143,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               <td align="center" background="images/headerbg.jpg"><strong>发起人</strong></td>
               <td align="center" background="images/headerbg.jpg"><strong>发起时间</strong></td>
               <td align="center" background="images/headerbg.jpg"><strong>状态</strong></td>
-              <td align="center" background="images/headerbg.jpg"><strong>&nbsp;</strong></td>
+              <td align="center" background="images/headerbg.jpg"><strong>操作</strong></td>
             </tr>
             <s:iterator value="pagination.data" status="obj">
             <tr>
@@ -163,8 +163,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           	     <s:property value="createTimeStr"/>&nbsp;      
                </td>
                <td height="26" align="center" bgcolor="#FFFFFF">
-               <s:if test="issueStatus==1">进行中</s:if>
-               <s:if test="issueStatus==0">已结束</s:if>&nbsp;
+               <s:if test="issueStatus==1">进行中</s:if><s:if test="issueStatus==0">已结束</s:if>&nbsp;
                 </td>
                 <td height="26" colspan="2" align="center" bgcolor="#FFFFFF">
           	       <s:url id="edit_url" action="openModifyForumIssueInfoAction">   
