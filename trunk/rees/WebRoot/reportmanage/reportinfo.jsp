@@ -70,12 +70,11 @@
 				}
 			};
 	
-
-
 	/**
 	 * 准备工作
 	 */
 	$(document).ready(function() {
+		$.fn.initpage();
 		$.validator.setDefaults({
 			//验证框架的验证器的默认设置区
 			debug : false,
@@ -93,9 +92,19 @@
 			}
 		})
 		$.fn.save();
+		$.fn.exportReport();
 		$.fn.close();
   	});
 
+	/**
+	 * 初始化页面
+	 */
+	$.fn.initpage = function(){
+		var message = $("#lb_message").html();
+		if(message!=null && $.trim(message)!="" ){
+			alert(message);
+		}
+	}
 
 	/**
 	 * 保存
@@ -117,6 +126,16 @@
 			repform.submit();
 		});
 	}
+	
+	/**
+	 * 导出
+	 */
+	$.fn.exportReport = function(){
+		$("#exportBtn").click(function(){
+			$("#repform").attr("action","toExportReportAction.action");
+			repform.submit();
+		});
+	}
 
 	/**
 	 * 关闭
@@ -130,7 +149,13 @@
 </head>
 <body>
 	<s:form id="repform" theme="simple">
+	<s:label id="lb_message" name="message" cssStyle="display:none"></s:label>
 	<s:hidden id="hid_reportId" name="report.id"></s:hidden>
+	<s:hidden id="hid_templateId" name="report.templateId"></s:hidden>
+	<s:hidden id="hid_reportState" name="report.reportState"></s:hidden>
+	<s:hidden id="hid_isDelete" name="report.isDelete"></s:hidden>
+	<s:hidden id="hid_deptId" name="report.deptId"></s:hidden>
+	<s:hidden id="hid_creatTime" name="report.creatTime"></s:hidden>
 	<table width="100%" border="0" cellspacing="5" cellpadding="0">
 		<tr>
 			<td>
@@ -182,8 +207,10 @@
 									<td height="26" colspan="2" align="center" bgcolor="#FFFFFF">
 										&nbsp;&nbsp;
 										<input name="addBtn" type="button" value="确定" class="btn_2_3" id="addBtn" />
-										&nbsp;&nbsp;
-										<input name="exreportBtn" type="button" value="导出" class="btn_2_3" id="exreportBtn"/>
+										<s:if test="report.id!=null && report.id!=''">
+											&nbsp;&nbsp;
+											<input name="exportBtn" type="button" value="导出" class="btn_2_3" id="exportBtn"/>
+										</s:if>
 										&nbsp;&nbsp;
 										<input name="closeBtn" type="button" value="关闭" class="btn_2_3" id="closeBtn" />
 									</td>

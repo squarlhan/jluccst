@@ -167,13 +167,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               <s:property value="deviceNum"/>&nbsp;
           </td>
           <td height="26" align="center" bgcolor="#FFFFFF" nowrap>
-          	<s:iterator value="deviceTypeList" status="type">
-          		<s:if test="deviceTypeId==id">
-          			<s:property value="typeName"/>&nbsp;
-          		</s:if>
-          	</s:iterator>
+          	<s:property value="deviceTypeName"/>&nbsp;
           </td>
-            
           <td height="26" align="center" bgcolor="#FFFFFF" nowrap>
           	   <s:property value="deviceModel"/>&nbsp;
           </td>
@@ -204,7 +199,6 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
         <tr>
           <td height="26" colspan="9" align="center" bgcolor="#FFFFFF">
 			<page:pages currentPage="pagination.currentPage" totalPages="pagination.totalPages" totalRows="pagination.totalRows" styleClass="page" theme="text" ></page:pages> 
-		   
 		  </td>
         </tr>
       </table></td>

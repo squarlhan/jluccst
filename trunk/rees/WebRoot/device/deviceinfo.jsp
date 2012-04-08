@@ -172,9 +172,9 @@
 			 * 删除设备图片
 			 */
 			$.fn.delImg = function(id){
-				
 				if(window.confirm("您确定要删除设备图片吗？")){
 					$.post("toDeleteDeviceImageAction.action", {"device.id":id}, function(data){});
+					$("#hid_deviceFilePath").val("");
 					var row = $("#table1 tr:last").prev();
 					row.find("strong").replaceWith("<strong>添加设备图片：</strong>");
 					row.find("a:first").remove();
@@ -190,11 +190,11 @@
 					var deviceTypeId =$('#sel_deviceType option:selected').attr("value");
 					var deviceTypeName =$('#sel_deviceType option:selected').attr("text");
 					$("#hid_deviceTypeId").val(deviceTypeId);
-					$("#hid_deviceType").val(deviceTypeName);
+					$("#hid_deviceTypeName").val(deviceTypeName);
 					if(deviceTypeId=="other" || deviceTypeId=="nothing"){
 						if(deviceTypeId=="nothing"){
 							$("#hid_deviceTypeId").val("");
-							$("#hid_deviceType").val("");
+							$("#hid_deviceTypeName").val("");
 						}
 						$("#txt_centerHeight").val("");
 						$("#txt_speed").val("");
@@ -245,11 +245,11 @@
 		<s:form id="form1" name="form1" method="post" theme="simple" enctype="multipart/form-data">
 		<s:label id="lb_message" name="message" cssStyle="display:none"></s:label>
 		<s:hidden id="hid_deviceId" name="device.id"></s:hidden>
-		<s:hidden id="hid_deviceType" name="device.deviceType"></s:hidden>
+		<s:hidden id="hid_deviceTypeName" name="device.deviceTypeName"></s:hidden>
 		<s:hidden id="hid_deviceFilePath" name="device.filePath"></s:hidden>
 		<s:hidden id="hid_controlpoint" name="device.controlpoint"></s:hidden>
 		<s:hidden id="hid_sortIndex" name="device.sortIndex"></s:hidden>
-		<s:hidden id="hid_creatTime" name="device.creatTime"></s:hidden>
+		<s:hidden id="hid_createTime" name="device.createTime"></s:hidden>
 		<s:hidden id="hid_isDelete" name="device.isDelete"></s:hidden>
 		<s:hidden id="hid_factoryId" name="device.factoryId"></s:hidden>
 		<s:hidden id="hid_workshopId" name="device.workshopId"></s:hidden>
@@ -261,7 +261,6 @@
 						<tr>
 							<td style="height: 36px;">
 								<table id="table1" width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#d5e4fd">
-
 									<tr>
 										<td height="26" align="right" bgcolor="#FFFFFF">
 											<strong>设备编号：</strong>

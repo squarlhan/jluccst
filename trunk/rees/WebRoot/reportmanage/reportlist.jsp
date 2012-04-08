@@ -36,7 +36,7 @@
 	<meta http-equiv="expires" content="0">    
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
-	<j:scriptlink css="true" tipswindow="true" jmessagebox="true" jquery="true" validate="true"/>
+	<j:scriptlink css="true" tipswindow="true" jmessagebox="true" jquery="true" validate="true"  jfunction="true"/>
 
 	<script type="text/javascript">
 
@@ -45,7 +45,10 @@
 		 * 添加报表
 		 */
 		$("#addbtn").click(function(){
-			parent.parent.parent.tipsWindown("添加汇报","iframe:openAddReportAction.action","450","400","true","","true","no");
+			parent.parent.tipsWindown("添加汇报","iframe:openAddReportAction.action","450","400","true","","true","no");
+			parent.parent.$("#windown-close").bind('click',function(){
+				window.location.href=window.location.href;
+			});
 		});
 		
 		/**
@@ -54,7 +57,10 @@
 		$('a[name="edit"]').each(function(){
 			$(this).click(function(){
 				var url = $(this).attr("url");
-				parent.parent.parent.tipsWindown("修改报表信息","iframe:"+url,"450","400","true","","true","no");
+				parent.parent.tipsWindown("修改报表信息","iframe:"+url,"450","400","true","","true","no");
+				parent.parent.$("#windown-close").bind('click',function(){
+					window.location.href=window.location.href;
+				});
 			});
 		});
 		
@@ -80,54 +86,9 @@
 			}
 		});
 
-		$.fn.CheckBoxAll("cbk_all");
-  		$.fn.UnCheckBoxAll("ids","cbk_all");
+		$.fn.checkall("cbk_all");
+		$.fn.uncheckall("ids","cbk_all");
   	});
-	
-	/**
-	 * 点击选复选框时，执行全选/取消全选功能
-	 * @param chkallid
-	 * 执行全选功能的checkbox的id值
-	 */
-	$.fn.CheckBoxAll = function (chkallid) {
-		$("#" + chkallid).click(function () {
-			var b = ($(this).attr("checked"));
-			$(":checkbox").each(function () {
-				if( !$(this).attr("disabled") ){
-					$(this).attr("checked", b);
-				}
-			});
-		});
-		if($(":checkbox").length == 1){
-			$("#" + chkallid).attr("disabled","true");
-		}
-	};
-
-	/**
-	 * 子复选框有一个处理非选中状态时，执行全选功能的复选框将置为非选中状态
-	 * @param subchkname
-	 * 子复选框的name
-	 * @param chkallid
-	 * 执行全选功能的复选框id
-	 */
-	$.fn.UnCheckBoxAll = function (subchkname, chkallid) {
-		$(":checkbox[name='" + subchkname + "']").click(function () {
-			var l = $(":checkbox[name='" + subchkname + "']").length;
-			if (!$(this).attr("checked")) {
-				$("#" + chkallid).attr("checked", false);
-			} else {
-				var i = 0;
-				$(":checkbox[name='" + subchkname + "']").each(function () {
-					if ($(this).attr("checked")) {
-						i++;
-					}
-				});
-				if (l == i) {
-					$("#" + chkallid).attr("checked", true);
-				}
-			}
-		});
-	};
 </script>
 </head>
 <body>
