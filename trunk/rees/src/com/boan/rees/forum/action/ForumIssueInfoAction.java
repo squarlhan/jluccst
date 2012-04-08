@@ -89,6 +89,7 @@ public class ForumIssueInfoAction extends BaseActionSupport {
 	 */
 	public String openForumIssueInfo(){
 		pagination = forumIssueInfoService.findForumIssueInfoForPage(null, pagination);
+		
 		return this.SUCCESS;
 	}
 	
