@@ -24,6 +24,11 @@ public interface ITemplateReportService {
 	public List<TemplateReport> findAllTemplateReport();
 	
 	/**
+	 * 查询最后一个报表对象
+	 */
+	public TemplateReport findLastTemplateReport();
+	
+	/**
 	 * 获取
 	 */
 	public TemplateReport get(String id);
@@ -39,9 +44,21 @@ public interface ITemplateReportService {
 	public void save(TemplateReport table1);
 	
 	/**
+	 * 保存/更新
+	 * @param obj
+	 */
+	public void saveOrUpdate(TemplateReport obj);
+	
+	/**
 	 * 按分页查询
 	 */
 	public Pagination<TemplateReport> findTemplateReportForPage(Map<String, ?> values,Pagination<TemplateReport> pagination);	
+	
+	/**
+	 * 删除个人报表模板文件
+	 * @param templateReportId
+	 */
+	public void deleteTemplateReportTempleFile(String templateReportId);
 }
 
 
