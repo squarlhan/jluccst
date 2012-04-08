@@ -80,6 +80,19 @@
 		$("#selectBtn").click(function(){
 			$("#form1").submit();
 		});
+		
+		/**
+  		 * 下载
+  		 */
+  		$('a[name="download"]').each(function(){
+  			$(this).click(function(){
+  				var url = $(this).attr("url");
+  				var oldAction = form1.action;
+  				form1.action = url;
+  				form1.submit();
+  				form1.action = oldAction;
+  			});
+  		});
 	});
 	</script>
   </head>
@@ -108,6 +121,7 @@
           <td width="16%" align="center" background="../images/headerbg.jpg"><strong>汇报题目</strong></td>
 		  <td width="16%" align="center" background="../images/headerbg.jpg"><strong>汇报人</strong></td>
 		  <td width="16%" align="center" background="../images/headerbg.jpg"><strong>汇报时间</strong></td>
+		  <td width="10%" align="center" background="../images/headerbg.jpg"><strong>操作</strong></td>
 	    </tr>
 	    <s:iterator value="pagination.data" status="obj">
         <tr>
@@ -123,6 +137,13 @@
 		  <td height="26" align="center" bgcolor="#FFFFFF"><!-- format="yyyy-MM-dd HH:mm" -->
 		  	<s:date  name="reportDate" format="yyyy-MM-dd" />&nbsp;
 		  	</td>
+		  <td height="26" colspan="2" align="center" bgcolor="#FFFFFF" nowrap>
+          	<s:url id="download_url" action="toExportReportAction">   
+				<s:param name="report.id" value="id"></s:param>   
+				<s:param name="report.templateId" value="templateId"></s:param>   
+			</s:url>
+         	<a name="download" href="javascript:void(0);" url="${download_url}">下载</a>  
+          </td>
 	    </tr>
 		</s:iterator>
         <tr>

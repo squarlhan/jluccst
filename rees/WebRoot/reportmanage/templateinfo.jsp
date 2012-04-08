@@ -34,8 +34,7 @@
 		<meta http-equiv="expires" content="0">
 		<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 		<meta http-equiv="description" content="This is my page">
-		<j:scriptlink css="true" tipswindow="true" jmessagebox="true"
-			jquery="true" validate="true" />
+		<j:scriptlink  css="true" jmessagebox="true" jquery="true" tipswindow="true" validate="true" jfunction="true"/>
 	 	<script type="text/javascript" src="<%=basePath%>js/My97DatePicker/WdatePicker.js"></script>
 		<script type="text/javascript">
 	/**
@@ -76,6 +75,7 @@
 	 * 准备工作
 	 */
 	$(document).ready(function() {
+		$.fn.initpage();
 		$.validator.setDefaults({
 			//验证框架的验证器的默认设置区
 			debug : false,
@@ -94,8 +94,25 @@
 		})
 		$.fn.save();
 		$.fn.close();
+		$.fn.downloadTemplate();
   	});
 
+	/**
+	 * 初始化页面
+	 */
+	$.fn.initpage = function(){
+		$("#txt_reportType").focus();
+		//回显上传时的错误信息
+		var uploadErr = $("#lb_error").html();
+		if(uploadErr!=null && $.trim(uploadErr)!="" ){
+			alert(uploadErr);
+		}
+		
+		var message = $("#lb_message").html();
+		if(message!=null && $.trim(message)!="" ){
+			alert(message);
+		}
+	}
 
 	/**
 	 * 保存
@@ -104,15 +121,45 @@
 		//如果有id就说明是修改action
 		var templateId = $("#hid_templateId").val();
 		$("#addBtn").click(function() {
-			var validate_settings_submit = jQuery.extend({}, _report_submit);
+			try{
+			var validate_settings_submit = jQuery.extend({}, _template_submit);
 			var validator = $("form").validate(validate_settings_submit);
 			if (!validator.form()) {
 				return false;
 			}
 			repform.submit();
+			}catch(e){
+				alert(e.description);
+			}
 		});
 	}
+	
+	/**
+	 * 删除模板文件 
+	 */
+	$.fn.delTemplate = function(id){
+		if(window.confirm("您确定要删除模板吗？")){
+			$.post("toDeleteTemplateReportTempleFileAction.action", {"template.id":id}, function(data){});
+			$("#hid_templatePath").val("");
+			var row = $("#table1 tr:last").prev();
+			row.find("strong").replaceWith("<strong>添加模板文件：</strong>");
+			row.find("a:first").remove();
+			row.find("a:first").replaceWith('<input type="file" name="files" value="" id="form1_files" style="width: 250px;"/>');
+		}
+	}
 
+	/**
+	 * 下载模板文件 
+	 */
+	$.fn.downloadTemplate = function(){
+		$("#download").click(function(){
+			var oldAction = repform.action;
+			repform.action = "toDownloadTempleFileAction.action";
+			repform.submit();
+			repform.action = oldAction;
+		});
+	}
+	
 	/**
 	 * 关闭
 	 */
@@ -121,26 +168,29 @@
 			parent.$("#windown-close").click();
 		});
 	}
-</script>
+	</script>
 </head>
 <body>
 	<center>
-	<s:form id="repform" theme="simple" action="toAddTemplateAction">
+	<s:form id="repform" theme="simple" action="toAddTemplateAction"  enctype="multipart/form-data">
 	<s:hidden id="hid_templateId" name="template.id"></s:hidden>
-	<table width="450px" border="0" cellspacing="5" cellpadding="0">
+	<s:hidden id="hid_templatePath" name="template.templatePath"></s:hidden>
+	<s:hidden id="hid_templateName" name="template.templateName"></s:hidden>
+	<s:hidden id="hid_createTime" name="template.createTime"></s:hidden>
+	<table width="100%" border="0" cellspacing="5" cellpadding="0">
 		<tr>
 			<td>
 				<table width="100%" style="height: 100%;" border="0" cellspacing="6" cellpadding="0">
 					<tr>
 						<td style="height: 36px;">
-							<table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#d5e4fd">
+							<table id="table1" width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#d5e4fd">
 								<tr>
 									<td height="26" align="center" bgcolor="#d5e4fd" colspan="2">
 										<strong>人报表模板管理</strong>
 									</td>
 								</tr>
 								<tr>
-									<td height="26" align="right" bgcolor="#FFFFFF">
+									<td height="26" width="40%" align="right" bgcolor="#FFFFFF">
 										<strong>汇报类别：</strong>
 									</td>
 									<td height="26" align="left" bgcolor="#FFFFFF">
@@ -179,14 +229,27 @@
 										<s:textarea id="txt_reportContent" name="template.reportContent" maxlength="510" cssStyle="width:250px;height:100px; resize: none;" />
 									</td>
 								</tr>
-								<tr>
-									<td height="26" align="right" bgcolor="#FFFFFF">
+								<s:if test='template.templatePath!=null && template.templatePath!=""'>
+									<tr>
+										<td height="26" align="right" bgcolor="#FFFFFF">
 										<strong>添加模板文件：</strong>
-									</td>
-									<td height="26" align="left" bgcolor="#FFFFFF">
-										<s:file name="files" cssStyle="width: 250px;"></s:file>
-									</td>
-								</tr>
+										</td>
+										<td height="26" align="left" bgcolor="#FFFFFF">
+											<a id="download" href="javascript:void(0);"><img src="<%=basePath%>/images/Files-Word.png" style="height:32px;width:32px;cursor:pointer" title="查看"></img></a>
+											<a id="delTemplate" href="javascript:void(0);" onclick="$.fn.delTemplate('${template.id}')"><img src="<%=basePath%>/images/cross.png" style="height:32px;width:32px;cursor:pointer" title="删除"></img></a>
+										</td>
+									</tr>	
+									</s:if>
+									<s:else>
+									<tr>
+										<td height="26" align="right" bgcolor="#FFFFFF">
+											<strong>添加模板文件：</strong>
+										</td>
+										<td height="26" align="left" bgcolor="#FFFFFF">
+											<s:file name="files" cssStyle="width: 250px;"></s:file>
+										</td>
+									</tr>
+									</s:else>
 								<tr>
 									<td height="26" colspan="2" align="center" bgcolor="#FFFFFF">
 										&nbsp;&nbsp;
@@ -202,6 +265,11 @@
 			</td>
 		</tr>
 	</table>
+	<s:if test="hasFieldErrors()">
+		<s:iterator value="fieldErrors">
+			<s:label id="lb_error" name="value[0]" cssStyle="display:none"></s:label>
+		</s:iterator>
+	</s:if>
 	</s:form>
 	</center>
 </body>
