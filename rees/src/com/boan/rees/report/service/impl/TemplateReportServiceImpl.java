@@ -38,6 +38,17 @@ public class TemplateReportServiceImpl implements ITemplateReportService {
 	}
 
 	/**
+	 * 查询最后一个报表对象
+	 */
+	@Override
+	public TemplateReport findLastTemplateReport() {
+		String hql = "from TemplateReport order by createTime desc";
+		Map<String, ?> values = null;
+		List<TemplateReport> list = templateReportDao.findForPage(hql, values, 0, 1);
+		return (list!=null && list.size()>0) ? list.get(0) : null;
+	}
+	
+	/**
 	 * 获取
 	 */
 	@Override
@@ -62,6 +73,14 @@ public class TemplateReportServiceImpl implements ITemplateReportService {
 	}
 	
 	/**
+	 * 保存/更新
+	 */
+	@Override
+	public void saveOrUpdate(TemplateReport obj) {
+		templateReportDao.saveOrUpdate(obj);
+	}
+	
+	/**
 	 * 按分页查询
 	 */
 	@Override
@@ -76,6 +95,13 @@ public class TemplateReportServiceImpl implements ITemplateReportService {
 		return pagination;
 	}
 	
-
+	/**
+	 * 删除个人报表模板文件
+	 * @param templateReportId
+	 */
+	public void deleteTemplateReportTempleFile(String templateReportId){
+		String hql = "update TemplateReport obj set obj.templatePath=null,obj.templateName=null where obj.id='"+templateReportId+"'";
+		templateReportDao.executeHql(hql, null);
+	}
 }
 
