@@ -24,7 +24,7 @@ public class DeviceInfoServiceImpl  implements IDeviceInfoService {
 	 * 查找全部设备
 	 */
 	public List<DeviceInfo> findAllDeviceInfo() {
-		String hql = "from DeviceInfo order by sortIndex,creatTime";
+		String hql = "from DeviceInfo isDelete<>1 and order by sortIndex,createTime";
 		return deviceInfoDao.queryAll(hql);
 		
 	}
@@ -42,9 +42,11 @@ public class DeviceInfoServiceImpl  implements IDeviceInfoService {
 
 	@Override
 	public void deleteDeviceInfo(String... ids) {
-		deviceInfoDao.delete(ids);
-		
-		
+		String hql = "update DeviceInfo obj set obj.isDelete=1 where id in (:id)";
+		Map<String, String[]> values = new HashMap<String,String[]>();
+		values.put("id", ids);
+		deviceInfoDao.executeHql(hql, values );
+//		deviceInfoDao.delete(ids);
 	}
 	/**
 	 * 保存设备
@@ -52,7 +54,6 @@ public class DeviceInfoServiceImpl  implements IDeviceInfoService {
 	@Override
 	public void save(DeviceInfo table1) {
 		deviceInfoDao.save(table1);
-		
 	}
 	
 	/**
@@ -69,9 +70,9 @@ public class DeviceInfoServiceImpl  implements IDeviceInfoService {
 	@Override
 	public Pagination<DeviceInfo> findDeviceInfoForPage(Map<String, ?> values,Pagination<DeviceInfo> pagination){
 		
-		String hql = "from DeviceInfo where factoryId=:factoryId and workshopId=:workshopId order by sortIndex,creatTime";
+		String hql = "from DeviceInfo where isDelete is null and factoryId=:factoryId and workshopId=:workshopId order by sortIndex,createTime";
 		List<DeviceInfo> data = deviceInfoDao.findForPage(hql, values, pagination.getStartIndex(), pagination.getPageSize());
-		hql = "select count(*) from DeviceInfo where factoryId=:factoryId and workshopId=:workshopId";
+		hql = "select count(*) from DeviceInfo where isDelete is null and factoryId=:factoryId and workshopId=:workshopId";
 		int totalRows = deviceInfoDao.findCountForPage(hql, values);
 		pagination.setTotalRows(totalRows);
 		pagination.setData(data);
@@ -105,7 +106,7 @@ public class DeviceInfoServiceImpl  implements IDeviceInfoService {
 	 */
 	@Override
 	public List<DeviceInfo> findDeviceInfoByWorkshopId(String workshopId) {
-		String hql = "from DeviceInfo where workshopId=? order by sortIndex,creatTime";
+		String hql = "from DeviceInfo where (isDelete=0 or isDelete is null) and workshopId=? order by sortIndex,createTime";
 		List<DeviceInfo> list = deviceInfoDao.find(hql, new String[]{workshopId});
 		return list;
 	}
