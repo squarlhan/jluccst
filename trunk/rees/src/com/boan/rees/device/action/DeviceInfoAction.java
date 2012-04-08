@@ -456,7 +456,7 @@ public class DeviceInfoAction extends BaseActionSupport{
 	 * @throws UnsupportedEncodingException 
 	 * @throws FileNotFoundException 
 	 */
-	public String downloadDeviceImage() throws UnsupportedEncodingException, FileNotFoundException{
+	public String toDownloadDeviceImage() throws UnsupportedEncodingException, FileNotFoundException{
 		ServletContext servletContext = ServletActionContext.getServletContext();
 		//获取服务器上图片的保存路径
 		String fileAllName = servletContext.getRealPath(device.getFilePath());
@@ -471,6 +471,19 @@ public class DeviceInfoAction extends BaseActionSupport{
 			downloadFileName = new String(downloadFileName.getBytes(), "ISO8859-1");   
 		}
 		return SUCCESS;
+	}
+	
+	/**
+	 * 下载前服务器端验证
+	 */
+	public void validateDownloadDeviceImage(){
+		ServletContext servletContext = ServletActionContext.getServletContext();
+		//获取服务器上图片的保存路径
+		String fileAllName = servletContext.getRealPath(device.getFilePath());
+		File file = new File(fileAllName);
+		if(!file.exists()){
+			addFieldError("","设备图片不存在，请联系管理员！");
+		}
 	}
 	
 	/**

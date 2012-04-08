@@ -5,7 +5,11 @@
 <struts>
   <!-- 设备Action -->
     <package name="device" extends="struts-default" namespace="/">
-         <!-- 打开设备列表 -->
+    	<!-- 添加一个streamx插件，防止下载取消时后台抛异常现象 -->
+    	<result-types> 
+    		<result-type name="streamx" class="com.sunspoter.lib.web.struts2.dispatcher.StreamResultX"/> 
+    	</result-types>
+        <!-- 打开设备列表 -->
         <action name="openDeviceAction" class="deviceInfoAction" method="openDevice">
     		<result name="success">/device/devicelist.jsp</result>
     		<result name="input">/device/devicelist.jsp</result>
@@ -27,19 +31,20 @@
 	        <interceptor-ref name="defaultStack"/>
 	        <interceptor-ref name="fileUploadStack"/>
 	   		<!-- 动态设置Action的属性值 -->
-			<param name="savePath">/upload</param>
+			<param name="savePath">/upload/deviceImg</param>
             <result name="success">/device/deviceinfo.jsp</result>
             <result name="input">/device/deviceinfo.jsp</result>
         </action>
         
         <!-- 文件下载，支持中文附件名 -->  
-        <action name="toDownloadDeviceImageAction" class="deviceInfoAction" method="downloadDeviceImage">  
-            <result name="success" type="stream">  
+        <action name="toDownloadDeviceImageAction" class="deviceInfoAction" method="toDownloadDeviceImage">
+            <result name="success" type="streamx">  
                 <param name="contentType">image/jpeg</param>  
-                <param name="inputName">inputStream</param>  
+                <param name="inputName">inputStream</param>
                 <param name="contentDisposition">attachment;filename="${downloadFileName}"</param>  
                 <param name="bufferSize">4096</param>  
-            </result>  
+            </result>
+            <result name="input">/device/deviceinfo.jsp</result>
         </action>  
         
         <!-- 删除设备图片 -->  
