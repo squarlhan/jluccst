@@ -10,6 +10,7 @@
 package com.boan.rees.forum.service.impl;
 
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -20,8 +21,9 @@ import org.springframework.stereotype.Service;
 import com.boan.rees.forum.dao.IForumIssueInfoDao;
 import com.boan.rees.forum.model.ForumIssueInfo;
 import com.boan.rees.forum.service.IForumIssueInfoService;
+import com.boan.rees.utils.calendar.CalendarUtils;
 import com.boan.rees.utils.page.Pagination;
-
+ 
 /**
  * 论坛议题服务类接口实现
  * @author yangyj
@@ -85,10 +87,25 @@ public class ForumIssueInfoServiceImpl implements IForumIssueInfoService {
 	@Override
 	public Pagination<ForumIssueInfo> findForumIssueInfoForPage(Map<String, ?> values,Pagination<ForumIssueInfo> pagination){
 		
-		String hql = " from ForumIssueInfo order by createTime desc";
+		String hql = " from ForumIssueInfo a order by a.createTime desc";
 		List<ForumIssueInfo> data = forumIssueInfoDao.findForPage( hql, values, pagination.getStartIndex(), pagination.getPageSize());
 		hql = "select count(*) from ForumIssueInfo";
 		int totalRows = forumIssueInfoDao.findCountForPage(hql, values);
+		int joinPersonCount = 0;
+		if (totalRows > 0)
+		{
+			//取参与人数
+			Map<String,String> params = new HashMap<String,String>();
+			for(ForumIssueInfo obj :  data)
+			{
+				hql = "select count(id) from ForumMessageInfo where issueId = :issueId";
+				params.put( "issueId", obj.getId() );
+				joinPersonCount = forumIssueInfoDao.findCountForPage(hql,params);
+				obj.setJoinPersonCount( joinPersonCount );
+				obj.setCreateTimeStr( CalendarUtils.toString( obj.getCreateTime() ) );
+			}
+		}
+		
 		pagination.setTotalRows(totalRows);
 		pagination.setData(data);
 		return pagination;
