@@ -55,7 +55,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			$("#addbtn").click(function(){
 				var factoryId = $("#hid_factoryId").val();
 	  			var workshopId = $("#hid_workshopId").val();
-				parent.parent.parent.tipsWindown("添加设备信息","iframe:openAddDeviceAction.action?factoryId="+factoryId+"&workshopId="+workshopId,"480","400","true","","true","no");
+				parent.parent.tipsWindown("添加设备信息","iframe:openAddDeviceAction.action?factoryId="+factoryId+"&workshopId="+workshopId,"480","400","true","","true","no");
+				parent.parent.$("#windown-close").bind('click',function(){
+					window.location.href=window.location.href;
+				});
 			});
 
 	  		/**
@@ -66,7 +69,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  				var factoryId = $("#hid_factoryId").val();
 		  			var workshopId = $("#hid_workshopId").val();
 	  				var url = $(this).attr("url")+"&factoryId="+factoryId+"&workshopId="+workshopId;
-	  				parent.parent.parent.tipsWindown("修改设备信息","iframe:"+url,"480","400","true","","true","no");
+	  				parent.parent.tipsWindown("修改设备信息","iframe:"+url,"480","400","true","","true","no");
+	  				parent.parent.$("#windown-close").bind('click',function(){
+						window.location.href=window.location.href;
+					});
 	  			});
 	  		});
 	  		
@@ -88,7 +94,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  		$('a[name="edit_point"]').each(function(){
 	  			$(this).click(function(){
 	  				var url = $(this).attr("url");
-	  				parent.parent.parent.tipsWindown("监测点信息","iframe:"+url,"550","350","true","","true","no");
+	  				parent.parent.tipsWindown("监测点信息","iframe:"+url,"550","350","true","","true","no");
 	  			});
 	  		});
 	  		
@@ -108,7 +114,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  		$("#sortbtn").click(function(){
 	  			var factoryId = $("#hid_factoryId").val();
 	  			var workshopId = $("#hid_workshopId").val();
-	  			parent.parent.parent.tipsWindown("设备排序","iframe:openSortDeviceAction.action?factoryId="+factoryId+"&workshopId="+workshopId,"350","420","true","","true","no");
+	  			parent.parent.tipsWindown("设备排序","iframe:openSortDeviceAction.action?factoryId="+factoryId+"&workshopId="+workshopId,"350","420","true","","true","no");
+	  			parent.parent.$("#windown-close").bind('click',function(){
+					window.location.href=window.location.href;
+				});
 	  		});
 		});
 		

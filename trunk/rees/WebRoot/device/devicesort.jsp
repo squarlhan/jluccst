@@ -108,11 +108,7 @@
 			 */
 			$("#closeBtn").click(function(){
 				var message = $("#lb_message").html();
-				
 				if(message!=null && $.trim(message)!="" ){
-					//刷新
-					//parent.$("iframe[name='mainFrame']").attr("src","datamanage/devicemanage.jsp");
-					alert("先手动刷新列表吧！！！");
 				}
 				parent.$("#windown-close").click();
 			});
