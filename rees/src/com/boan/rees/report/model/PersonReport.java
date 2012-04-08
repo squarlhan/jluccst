@@ -37,13 +37,11 @@ public class PersonReport implements Serializable{
 	 * 汇报类型
 	 */
 	@Column(name = "REPORT_TYPE")
-
 	private String reportType;
 	/**
 	 * 汇报题目
 	 */
 	@Column(name = "REPORT_SUBJECT")
-
 	private String reportSubject;
 	/**
 	 * 汇报人
@@ -80,6 +78,12 @@ public class PersonReport implements Serializable{
 	 */
 	@Column(name = "DEPT_ID")
 	private String deptId;
+	/**
+	 * 创建时间
+	 */
+	@Column(name = "CREATE_TIME")
+	private Calendar creatTime;
+	
 	public String getId() {
 		return id;
 	}
@@ -140,9 +144,13 @@ public class PersonReport implements Serializable{
 	public void setDeptId(String deptId) {
 		this.deptId = deptId;
 	}
-
-	
-
+	public Calendar getCreatTime() {
+		creatTime = Calendar.getInstance();
+		return creatTime;
+	}
+	public void setCreatTime(Calendar creatTime) {
+		this.creatTime = creatTime;
+	}
 }
 
 
