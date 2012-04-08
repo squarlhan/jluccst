@@ -50,7 +50,5 @@
 	
 	<!-- 组织机构模块配置 -->
 	<include file="com/boan/rees/group/action/struts_group.xml"></include>
-	
-	<include file="com/boan/rees/report/action/struts_template.xml"></include>
-	
+
 </struts>
