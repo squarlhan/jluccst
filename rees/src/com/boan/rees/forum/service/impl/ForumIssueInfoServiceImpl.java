@@ -98,7 +98,7 @@ public class ForumIssueInfoServiceImpl implements IForumIssueInfoService {
 			Map<String,String> params = new HashMap<String,String>();
 			for(ForumIssueInfo obj :  data)
 			{
-				hql = "select count(id) from ForumMessageInfo where issueId = :issueId";
+				hql = "select count(distinct publisherDept,publisher) from ForumMessageInfo where issueId = :issueId";
 				params.put( "issueId", obj.getId() );
 				joinPersonCount = forumIssueInfoDao.findCountForPage(hql,params);
 				obj.setJoinPersonCount( joinPersonCount );
