@@ -76,13 +76,16 @@ public class BaseActionSupport extends ActionSupport
 	{
 		HttpSession session = ServletActionContext.getRequest().getSession();
 		UserSession userSession = ( UserSession ) session.getAttribute( "userSession" );
-		sessionUserId = StringUtils.trimToEmpty( userSession.getUserId() );
-		sessionUserCName = StringUtils.trimToEmpty( userSession.getUserCName() );
-		sessionCompanyId = StringUtils.trimToEmpty( userSession.getCompanyId() );
-		sessionFactoryId = StringUtils.trimToEmpty( userSession.getFactoryId() );
-		sessionWorkshopId = StringUtils.trimToEmpty( userSession.getWorkshopId() );
-		sessionCompanyName = StringUtils.trimToEmpty( userSession.getCompanyName() );
-		sessionFactoryName = StringUtils.trimToEmpty( userSession.getFactoryName() );
-		sessionWorkshopName = StringUtils.trimToEmpty( userSession.getWorkshopName() );
+		if(userSession != null)
+		{
+			sessionUserId = StringUtils.trimToEmpty( userSession.getUserId() );
+			sessionUserCName = StringUtils.trimToEmpty( userSession.getUserCName() );
+			sessionCompanyId = StringUtils.trimToEmpty( userSession.getCompanyId() );
+			sessionFactoryId = StringUtils.trimToEmpty( userSession.getFactoryId() );
+			sessionWorkshopId = StringUtils.trimToEmpty( userSession.getWorkshopId() );
+			sessionCompanyName = StringUtils.trimToEmpty( userSession.getCompanyName() );
+			sessionFactoryName = StringUtils.trimToEmpty( userSession.getFactoryName() );
+			sessionWorkshopName = StringUtils.trimToEmpty( userSession.getWorkshopName() );
+		}
 	}
 }
