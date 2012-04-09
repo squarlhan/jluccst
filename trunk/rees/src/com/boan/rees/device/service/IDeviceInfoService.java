@@ -58,4 +58,14 @@ public interface IDeviceInfoService {
 	 * @return 设备列表
 	 */
     public List<DeviceInfo> findDeviceInfoByWorkshopId(String workshopId);
+    
+    /**
+     * 判断指定Id的设备是否存在指定属性和属性值的记录
+     * @param id 设备Id
+     * @param workshopId 车间Id
+     * @param propertyName 设备属性
+     * @param propertyValue 设备属性值
+     * @return true：存在 false：不存在
+     */
+    public boolean isExistDeviceInfoProperty(String id,String workshopId ,String propertyName,String propertyValue);
 }
