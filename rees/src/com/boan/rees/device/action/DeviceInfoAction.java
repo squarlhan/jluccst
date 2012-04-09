@@ -428,9 +428,14 @@ public class DeviceInfoAction extends BaseActionSupport{
 	 * 请求执行方法前验证
 	 */
 	public void validateToAddDevice() {
-		if(files == null){
-            addFieldError("files", "请选择上传的文件");
-        }
+//		if(files == null){
+//            addFieldError("files", "请选择上传的文件");
+//        }
+		
+		boolean flag = deviceInfoService.isExistDeviceInfoProperty(device.getId(),device.getWorkshopId(),"deviceName",device.getDeviceName());
+		if(flag){
+			addFieldError("", "同一车间下不能存在相同的设备名称！");
+		}
 	}
 	
 	/**
@@ -545,6 +550,15 @@ public class DeviceInfoAction extends BaseActionSupport{
 			message="保存失败！";
 		}
 		return SUCCESS;
+	}
+	/**
+	 * 执行修改前验证
+	 */
+	public void validateToModifyDevice(){
+		boolean flag = deviceInfoService.isExistDeviceInfoProperty(device.getId(),device.getWorkshopId(),"deviceName",device.getDeviceName());
+		if(flag){
+			addFieldError("", "同一车间下不能存在相同的设备名称！");
+		}
 	}
 
 	/**
