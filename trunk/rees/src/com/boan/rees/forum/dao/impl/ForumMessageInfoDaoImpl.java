@@ -9,9 +9,6 @@
 
 package com.boan.rees.forum.dao.impl;
 
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
 import org.springframework.stereotype.Repository;
 
 import com.boan.rees.forum.dao.IForumMessageInfoDao;
@@ -25,5 +22,5 @@ import com.boan.rees.utils.dao.impl.BaseDao;
  */
 @Repository("forumMessageInfoDao")
 public class ForumMessageInfoDaoImpl extends BaseDao<ForumMessageInfo, String> implements IForumMessageInfoDao{
-
+	
 }
