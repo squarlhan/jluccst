@@ -67,10 +67,10 @@
               </table></td>
               <td width="31%" valign="top" bgcolor="#FFFFFF"><table width="100%" height="396" border="0">
                 <tr>
-                  <td height="28" background="../images/bottombg.jpg"><strong>--通知公告--</strong></td>
+                  <td height="28" background="../images/bottombg.jpg"><strong>--<s:property value="forumIssueInfo.issueName"/>--</strong></td>
                   </tr>
                 <tr>
-                  <td height="87" align="left" valign="top" style="padding:5px;"><s:property value="issueName"/></td>
+                  <td height="87" align="left" valign="top" style="padding:5px;"><s:property value="forumIssueInfo.issueContent"/></td>
                   </tr>
                 <tr>
                   <td height="28" background="../images/bottombg.jpg"><strong>--在线用户--</strong>&nbsp;</td>

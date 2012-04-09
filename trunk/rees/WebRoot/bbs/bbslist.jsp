@@ -19,9 +19,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta http-equiv="expires" content="0">    
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
-	
 	<j:scriptlink css="true" tipswindow="true" jmessagebox="true" jquery="true" validate="true"/>
-	
 	<style type="text/css">
 	<!--
 	.STYLE1 {
@@ -50,6 +48,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  			$(this).click(function(){
 	  				var url = $(this).attr("url");
 	  				parent.parent.parent.tipsWindown("修改话题","iframe:"+url,"460","350","true","","true","no");
+	  				window.location.href=window.location.href;
 	  			});
 	  		});
 	  		
@@ -150,7 +149,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <td height="26" align="center" bgcolor="#FFFFFF" >  
 			           <s:checkbox id="%{#obj.id}" name="ids" fieldValue="%{id}" value="false" theme="simple"/>
 			  </td>
-              <td height="26" bgcolor="#FFFFFF"><a href="openAddForumMessageInfoAction.action?" id="gotobbs">
+              <td height="26" bgcolor="#FFFFFF"><a href="openAddForumMessageInfoAction.action?issueId=%{#obj.id}" id="gotobbs">
                        <s:property value="issueName"/>&nbsp;</a>
               </td>
                <td height="26" align="center" bgcolor="#FFFFFF">
