@@ -150,7 +150,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <td height="26" align="center" bgcolor="#FFFFFF" >  
 			           <s:checkbox id="%{#obj.id}" name="ids" fieldValue="%{id}" value="false" theme="simple"/>
 			  </td>
-              <td height="26" bgcolor="#FFFFFF"><a href="openAddForumMessageInfoAction.action" id="gotobbs">
+              <td height="26" bgcolor="#FFFFFF"><a href="openAddForumMessageInfoAction.action?" id="gotobbs">
                        <s:property value="issueName"/>&nbsp;</a>
               </td>
                <td height="26" align="center" bgcolor="#FFFFFF">
