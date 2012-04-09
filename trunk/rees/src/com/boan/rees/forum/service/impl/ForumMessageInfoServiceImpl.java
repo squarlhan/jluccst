@@ -76,10 +76,22 @@ public class ForumMessageInfoServiceImpl implements IForumMessageInfoService {
 	@Override
 	public Pagination<ForumMessageInfo> findForumMessageInfoForPage(Map<String, ?> values,Pagination<ForumMessageInfo> pagination){
 		
-		String hql = "select new ForumIssueInfo(f.id,f.issueName,f.issuecontent,f.issueState,f.creator,f.createTime, count(s.id)) from ForumIssueInfo f left join ForumMessage s on f.id = s.issueId";
-		List<ForumMessageInfo> data = forumMessageInfoDao.findForPage(hql, values, pagination.getStartIndex(), pagination.getPageSize());
-		hql = "select count(*) from ForumMessageInfo";
-		int totalRows = forumMessageInfoDao.findCountForPage(hql, values);
+		StringBuilder hql = new StringBuilder();
+		hql.append( " from ForumMessageInfo where issueId = :issueId ");
+		if(values.get( "beginTime" ) != null)
+		{
+			hql.append( " and messageTime between :beginTime and :endTime" );
+		}
+		hql.append( " order by messageTime asc" );
+		
+		List<ForumMessageInfo> data = forumMessageInfoDao.findForPage(hql.toString(), values, pagination.getStartIndex(), pagination.getPageSize());
+		hql.delete( 0, hql.length() );
+		hql.append( "select count(*) from ForumMessageInfo where issueId = :issueId ");
+		if(values.get( "beginTime" ) != null)
+		{
+			hql.append( " and messageTime between :beginTime and :endTime" );
+		}
+		int totalRows = forumMessageInfoDao.findCountForPage(hql.toString(), values);
 		pagination.setTotalRows(totalRows);
 		pagination.setData(data);
 		return pagination;
