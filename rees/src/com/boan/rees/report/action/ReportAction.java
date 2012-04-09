@@ -102,6 +102,18 @@ public class ReportAction extends BaseActionSupport{
 	 * 已选的查询方式
 	 */
 	private String selectWay;
+	/**
+	 * 公司Id
+	 */
+	private String companyId;
+	/**
+	 * 工厂Id
+	 */
+	private String factoryId;
+	/**
+	 * 车间Id
+	 */
+	private String workshopId;
 	
 	/**
 	 * 操作提示
@@ -202,6 +214,30 @@ public class ReportAction extends BaseActionSupport{
 		this.selectWay = selectWay;
 	}
 	
+	public String getCompanyId() {
+		return companyId;
+	}
+
+	public void setCompanyId(String companyId) {
+		this.companyId = companyId;
+	}
+
+	public String getFactoryId() {
+		return factoryId;
+	}
+
+	public void setFactoryId(String factoryId) {
+		this.factoryId = factoryId;
+	}
+
+	public String getWorkshopId() {
+		return workshopId;
+	}
+
+	public void setWorkshopId(String workshopId) {
+		this.workshopId = workshopId;
+	}
+
 	public String getMessage() {
 		return message;
 	}
@@ -263,7 +299,9 @@ public class ReportAction extends BaseActionSupport{
 	 * @return
 	 */
 	public String openReport(){
-		pagination = service.findPersonReportForPage(new HashMap(), pagination);
+		Map<String,String> param = new HashMap<String, String>();
+		param.put("deptId", sessionWorkshopId);
+		pagination = service.findPersonReportForPage(param, pagination);
 		return this.SUCCESS;
 	}
 
@@ -573,7 +611,7 @@ public class ReportAction extends BaseActionSupport{
 		selectWayList.put("1", "年查询");
 		selectWayList.put("2", "月查询");
 		selectWayList.put("3", "自定义");
-		Map<String,Calendar> param = new HashMap<String, Calendar>();
+		Map<String,Object> param = new HashMap<String, Object>();
 		//处理日期查询条件
 		dateOperator(param);
 		pagination = service.findPersonReportForPage(param, pagination);
@@ -585,7 +623,7 @@ public class ReportAction extends BaseActionSupport{
 	 * @param param
 	 * @throws ParseException
 	 */
-	private void dateOperator(Map<String, Calendar> param) throws ParseException {
+	private void dateOperator(Map<String,Object> param) throws ParseException {
 		
 		if(beginTime!=null && endTime!=null && !beginTime.equals("") && !endTime.equals("")){
 			String strBeginTime = beginTime;
@@ -627,6 +665,18 @@ public class ReportAction extends BaseActionSupport{
 			end.setTime( date2 );
 			param.put("beginTime", begin);
 			param.put("endTime", end);
+		}
+		companyId = companyId!=null ?companyId:""; 
+		if(companyId!=null){
+			param.put("deptId", companyId);
+		}
+		factoryId = factoryId!=null ?factoryId:""; 
+		if(factoryId!=null){
+			param.put("deptId", factoryId);
+		}
+		workshopId = workshopId!=null ?workshopId:""; 
+		if(workshopId!=null){
+			param.put("deptId", workshopId);
 		}
 	}
 }
