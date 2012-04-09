@@ -72,7 +72,6 @@ public class ForumIssueInfoServiceImpl implements IForumIssueInfoService {
 		return forumIssueInfoDao.get(id);
 	}
 	
-	
 	/**
 	 * 修改设备信息
 	 * @param forumIssueInfo 设备对象
@@ -83,10 +82,8 @@ public class ForumIssueInfoServiceImpl implements IForumIssueInfoService {
 	/**
 	 * 按分页查询
 	 */
-	
 	@Override
 	public Pagination<ForumIssueInfo> findForumIssueInfoForPage(Map<String, ?> values,Pagination<ForumIssueInfo> pagination){
-		
 		String hql = " from ForumIssueInfo a order by a.createTime desc";
 		List<ForumIssueInfo> data = forumIssueInfoDao.findForPage( hql, values, pagination.getStartIndex(), pagination.getPageSize());
 		hql = "select count(*) from ForumIssueInfo";
