@@ -221,5 +221,9 @@ public class BaseDao<T, ID extends Serializable> implements IBaseDao<T, ID> {
 		query.executeUpdate();
 	}
 	
+	@Override
+	public void clearSession(){
+		sessionFactory.getCurrentSession().clear();
+	}
 }
 

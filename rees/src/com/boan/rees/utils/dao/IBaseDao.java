@@ -161,6 +161,11 @@ public interface IBaseDao<T, ID extends Serializable> {
 	 * @return
 	 */
 	public int findCountForPage(String hql, Map<String, ?> values);
+	
+	/**
+	 * 清空当前session
+	 */
+	public void clearSession();
 }
 
 
