@@ -10,6 +10,8 @@
 package com.boan.rees.forum.model;
 
 import java.io.Serializable;
+import java.util.Calendar;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -59,7 +61,7 @@ public class ForumMessageInfo implements Serializable {
 	 * 消息发出时间
 	 */
 	@Column(name = "MESSAGE_TIME")
-	private String 	messageTime;
+	private Calendar messageTime = Calendar.getInstance();
 	public String getId() {
 		return id;
 	}
@@ -90,10 +92,10 @@ public class ForumMessageInfo implements Serializable {
 	public void setPublisher(String publisher) {
 		this.publisher = publisher;
 	}
-	public String getMessageTime() {
+	public Calendar getMessageTime() {
 		return messageTime;
 	}
-	public void setMessageTime(String messageTime) {
+	public void setMessageTime(Calendar messageTime) {
 		this.messageTime = messageTime;
 	}
 }
