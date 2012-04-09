@@ -118,6 +118,15 @@ public class DeviceTypeAction extends BaseActionSupport{
 		return SUCCESS;
 	}
 	/**
+	 * 保存前验证
+	 */
+	public void validateToAddDeviceType(){
+		boolean flag = service.isExistDeviceTypeProperty(deviceType.getId(),"typeName",deviceType.getTypeName());
+		if(flag){
+			addFieldError("", "系统在已存在相同名称的设备类型！");
+		}
+	}
+	/**
 	 * 打开添加新报表页
 	 * @return
 	 */
@@ -159,6 +168,15 @@ public class DeviceTypeAction extends BaseActionSupport{
 			message="保存失败！";
 		}
 		return SUCCESS;
+	}
+	/**
+	 * 保存前验证
+	 */
+	public void validateToModifyDeviceType(){
+		boolean flag = service.isExistDeviceTypeProperty(deviceType.getId(),"typeName",deviceType.getTypeName());
+		if(flag){
+			addFieldError("", "系统在已存在相同名称的设备类型！");
+		}
 	}
 	
 	/**
