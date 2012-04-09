@@ -41,7 +41,14 @@ public interface IDeviceTypeService {
 		 */
 		public Pagination<DeviceType> findDeviceTypeForPage(Map<String, ?> values,Pagination<DeviceType> pagination);
 		
-		
+		/**
+		 * 判断指定Id的设备类型是否存在指定属性和属性值的记录
+		 * @param id Id
+		 * @param propertyName 属性
+		 * @param propertyValue 属性值
+		 * @return true：存在 false：不存在
+		 */
+	    public boolean isExistDeviceTypeProperty(String id, String propertyName,String propertyValue);
 
 }
 
