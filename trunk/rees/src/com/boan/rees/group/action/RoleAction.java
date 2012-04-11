@@ -94,6 +94,7 @@ public class RoleAction extends BaseActionSupport
 		role=service.get(id);
 		return SUCCESS;
 	}
+	
 	/**
 	 * 修改角色
 	 * 
@@ -114,6 +115,7 @@ public class RoleAction extends BaseActionSupport
 			return SUCCESS;
 		}
 	}
+	
 	/**
 	 * 删除角色
 	 * 
@@ -126,33 +128,25 @@ public class RoleAction extends BaseActionSupport
 	public Pagination<Role> getPagination() {
 		return pagination;
 	}
-
 	public void setPagination(Pagination<Role> pagination) {
 		this.pagination = pagination;
 	}
-
 	public Role getRole() {
 		return role;
 	}
-
 	public void setRole(Role role) {
 		this.role = role;
 	}
-
 	public String[] getIds() {
 		return ids;
 	}
-
 	public void setIds(String[] ids) {
 		this.ids = ids;
 	}
-
 	public Message getMessage() {
 		return message;
 	}
-
 	public void setMessage(Message message) {
 		this.message = message;
-	}
-	
+	}	
 }
