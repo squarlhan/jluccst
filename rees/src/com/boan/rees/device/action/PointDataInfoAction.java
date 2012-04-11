@@ -6,15 +6,18 @@
 
 package com.boan.rees.device.action;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
 import org.apache.commons.lang.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
@@ -22,6 +25,7 @@ import com.boan.rees.common.SelectList;
 import com.boan.rees.device.model.DeviceInfo;
 import com.boan.rees.device.model.PointDataInfo;
 import com.boan.rees.device.model.PointInfo;
+import com.boan.rees.device.model.PointParamInfo;
 import com.boan.rees.device.model.PointRelation;
 import com.boan.rees.device.service.IDeviceInfoService;
 import com.boan.rees.device.service.IPointDataInfoService;
@@ -95,6 +99,9 @@ public class PointDataInfoAction extends BaseActionSupport {
 	
 	//设备对象
 	private DeviceInfo deviceInfo = null;
+	
+	private InputStream xmlStream;
+	private String caption;
 	
 	/**
 	 * 获得监测数据列表
@@ -212,7 +219,7 @@ public class PointDataInfoAction extends BaseActionSupport {
 	 * @return
 	 */
 	public String loadDataInfo(){
-		if(StringUtils.trimToNull(selectWeek)!=null && StringUtils.trimToNull(selectWeek)!=null && StringUtils.trimToNull(paramId)!=null){
+		if(StringUtils.trimToNull(selectYear)!=null && StringUtils.trimToNull(selectWeek)!=null && StringUtils.trimToNull(paramId)!=null){
 			pointDataInfo = pointDataInfoService.get(selectYear, selectWeek, paramId);
 		}
 		return SUCCESS;
@@ -292,6 +299,107 @@ public class PointDataInfoAction extends BaseActionSupport {
 	public String deviceStat(){
 		//
 		return SUCCESS;
+	}
+	
+	public InputStream getXmlStream() {
+		int natural=9; //正常
+		int warn=27;    //警告
+		List<Data> dataList= new ArrayList<Data>();
+		if(StringUtils.trimToNull(deviceId)!=null && StringUtils.trimToNull(selectYear)!=null && StringUtils.trimToNull(selectWeek)!=null){
+			//获得监测点
+			pointInfos = pointInfoService.findPointInfosByDeviceId(deviceId);
+			List<PointParamInfo> ppis = null;
+			PointDataInfo pdi = null;
+			if(pointInfos!=null && pointInfos.size()>0){
+				for (PointInfo pointInfo : pointInfos) {
+					//获得监测点参数
+					ppis = pointParamInfoService.findPointParamInfoByPointId(pointInfo.getId());
+					for(PointParamInfo pointParamInfo:ppis){
+						pdi = pointDataInfoService.get(selectYear, selectWeek, pointParamInfo.getId());
+						dataList.add(new Data(pointInfo.getControlPointName()+pointParamInfo.getName(), Float.parseFloat(pdi.getDataInfo())));
+					}
+				}
+			}
+			
+		}
+		
+		StringBuffer strCategories = new StringBuffer("<categories fontColor=''>");
+		StringBuffer strNatural = new StringBuffer("<dataset seriesName='正常' color='7CFC00'>");
+		StringBuffer strAlert = new StringBuffer("<dataset seriesName='警告' color='FFD700'>");
+		StringBuffer strWarn = new StringBuffer("<dataset seriesName='预警' color='FF0000'>");
+		for(Data entry : dataList ){
+			strCategories.append("<category label='"+entry.getColumnName()+"' />");
+			float value = entry.getColumnValue();
+			String str = "";
+			if(value>=natural){
+				str= ""+natural;
+			}else if(value==0){
+				str = "";
+			}else{
+				str =""+ value;
+			}
+			strNatural.append("<set value='"+str+"'/>");
+			if(value>natural && value<warn){
+				str = ""+ (value-natural);
+			}else if(value>=warn){
+				str = ""+(warn-natural);
+			}else{
+				str = "";
+			}
+			strAlert.append("<set value='"+str+"'/>");
+			if(value>warn){
+				str = ""+(value-warn);
+			}else{
+				str = "";
+			}
+			strWarn.append("<set value='"+str+"'/>");
+		}
+		strCategories.append("</categories>");
+		strNatural.append("</dataset>");
+		strAlert.append("</dataset>");
+		strWarn.append("</dataset>");
+		
+		
+		String str= "<chart caption='主标题' subCaption='副标题' yAxisMinValue='0' yAxisMaxValue='90' " +
+				"showValues='1' rotateNames='0' numdivlines='9' divlinecolor='FF0000' " +
+				"xAxisName='实时数据' yAxisName='运作状态' baseFontSize='12' outCnvBaseFontColor='#000000' " +
+				"plotFillAlpha='100' formatNumberScale='0'>"+
+				strCategories.toString()+
+				strNatural.toString()+
+				strAlert.toString()+
+				strWarn.toString()+
+        "</chart>";
+		xmlStream = new ByteArrayInputStream(str.getBytes(Charset.forName("UTF-8")));
+		return xmlStream;
+	}
+	
+	class Data{
+		private String columnName;
+		private float columnValue;
+		public Data(String columnName,float columnValue ){
+			this.columnName=columnName;
+			this.columnValue=columnValue;
+		}
+		public String getColumnName() {
+			return columnName;
+		}
+		public void setColumnName(String columnName) {
+			this.columnName = columnName;
+		}
+		public float getColumnValue() {
+			return columnValue;
+		}
+		public void setColumnValue(float columnValue) {
+			this.columnValue = columnValue;
+		}
+	}
+
+	public void setXmlStream(InputStream xmlStream) {
+		xmlStream = xmlStream;
+	}
+	
+	public void setCaption(String caption) {
+		this.caption = caption;
 	}
 	
 	public String getDeviceId() {
