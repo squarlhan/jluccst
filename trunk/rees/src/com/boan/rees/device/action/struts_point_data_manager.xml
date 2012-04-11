@@ -36,6 +36,13 @@
 			<result name="success">/datamanage/devicestat.jsp</result>
 			<result name="input">/datamanage/devicestat.jsp</result>
 		</action>
+		<action name="devicestatxml" class="pointDataInfoAction">
+			<param name="caption">交流交流</param>
+			<result name="success"  type="stream">
+				<param name="contentType">application/xml;charset=UTF-8</param>
+				<param name="inputName">xmlStream</param>
+			</result>
+		</action>
 	</package>
 	<package name="pointdatajax" extends="json-default" namespace="/datamanage">
 		<action name="getweeksajax" class="pointDataInfoAction" method="loadWeekList">
