@@ -55,7 +55,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			$("#addbtn").click(function(){
 				var factoryId = $("#hid_factoryId").val();
 	  			var workshopId = $("#hid_workshopId").val();
-				parent.parent.tipsWindown("添加设备信息","iframe:openAddDeviceAction.action?factoryId="+factoryId+"&workshopId="+workshopId,"480","400","true","","true","no");
+				parent.parent.tipsWindown("添加设备信息","iframe:openAddDeviceAction.action?factoryId="+factoryId+"&workshopId="+workshopId,"480","480","true","","true","no");
 				parent.parent.$("#windown-close").bind('click',function(){
 					window.location.href=window.location.href;
 				});
@@ -69,7 +69,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  				var factoryId = $("#hid_factoryId").val();
 		  			var workshopId = $("#hid_workshopId").val();
 	  				var url = $(this).attr("url")+"&factoryId="+factoryId+"&workshopId="+workshopId;
-	  				parent.parent.tipsWindown("修改设备信息","iframe:"+url,"480","400","true","","true","no");
+	  				parent.parent.tipsWindown("修改设备信息","iframe:"+url,"480","480","true","","true","no");
 	  				parent.parent.$("#windown-close").bind('click',function(){
 						window.location.href=window.location.href;
 					});
