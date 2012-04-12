@@ -36,7 +36,7 @@
 			<result name="success">/datamanage/devicestat.jsp</result>
 			<result name="input">/datamanage/devicestat.jsp</result>
 		</action>
-		<action name="devicestatxml" class="pointDataInfoAction">
+		<action name="deviceColumnStatAction" class="pointDataInfoAction" method="deviceColumnStat">
 			<param name="caption">交流交流</param>
 			<result name="success"  type="stream">
 				<param name="contentType">application/xml;charset=UTF-8</param>
