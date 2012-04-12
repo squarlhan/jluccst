@@ -126,6 +126,18 @@ public class DeviceInfo implements Serializable {
 	@Column(name = "POWER")
 	private BigDecimal power;
 	
+	/**
+	 * 监测点正常值 
+	 */
+	@Column(name = "POINT_NATURAL_VALUE")
+	private BigDecimal pointNaturalValue;
+	
+	/**
+	 * 监测点警告值
+	 */
+	@Column(name = "POINT_WARN_VALUE")
+	private BigDecimal pointWarnValue;
+	
 	public String getId() {
 		return id;
 	}
@@ -231,6 +243,18 @@ public class DeviceInfo implements Serializable {
 	}
 	public void setDeviceTypeId(String deviceTypeId) {
 		this.deviceTypeId = deviceTypeId;
+	}
+	public BigDecimal getPointNaturalValue() {
+		return pointNaturalValue;
+	}
+	public void setPointNaturalValue(BigDecimal pointNaturalValue) {
+		this.pointNaturalValue = pointNaturalValue;
+	}
+	public BigDecimal getPointWarnValue() {
+		return pointWarnValue;
+	}
+	public void setPointWarnValue(BigDecimal pointWarnValue) {
+		this.pointWarnValue = pointWarnValue;
 	}
 }
 
