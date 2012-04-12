@@ -12,9 +12,8 @@
 <body>
 	<div id="chartdiv" align="center"></div>
 	<script type="text/javascript">
-		var chart = new FusionCharts("${pageContext.request.contextPath}/js/FusionCharts/Charts/StackedColumn3D.swf", "ChartId", "560", "400", "0", "0");
-		chart.setXMLData( "devicestatxml.action?deviceId=<s:property value='deviceId'/>a&selectYear=<s:property value='selectYear'/>&selectWeek=<s:property value='selectWeek'/>" );		   
-		chart.render("chartdiv");
+		var chart = FusionCharts.render( "${pageContext.request.contextPath}/js/FusionCharts/Charts/StackedColumn3D.swf", 
+		           "ChartId", "100%", "100%", "chartdiv", "datamanage/deviceColumnStatAction.action?deviceId=<s:property value='deviceId'/>a&selectYear=<s:property value='selectYear'/>&selectWeek=<s:property value='selectWeek'/>" );
 	</script>
 </body>
 </html>
