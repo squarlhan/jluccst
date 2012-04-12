@@ -46,7 +46,9 @@
                "deviceType.typeName":{required:true,maxlength:20},
                "deviceType.centerHeight":{number:true},
                "deviceType.speed":{number:true},
-               "deviceType.power":{number:true}
+               "deviceType.power":{number:true},
+               "deviceType.pointNaturalValue":{number:true},
+               "deviceType.pointWarnValue":{number:true}
 			},messages:{
 				"deviceType.typeName":
 				{
@@ -64,6 +66,14 @@
 				"deviceType.power":
 				{
 					number:"功率必须为数字！"
+				},
+				"deviceType.pointNaturalValue":
+				{
+					number:"监测点标准值为数字！"
+				},
+				"deviceType.pointWarnValue":
+				{
+					number:"监测点警告值必须为数字！"
 				}
 			}
 		};
@@ -128,6 +138,7 @@
 		 * 初始化页面元素
 		 */
 		$.fn.initPage = function(){
+			$("#txt_typeName").focus();
 			var err = $("#lb_error").html();
 			if(err!=null && $.trim(err)!="" ){
 				alert(err);
@@ -183,6 +194,22 @@
 										</td>
 										<td height="26" align="left" bgcolor="#FFFFFF">
 											<s:textfield id="txt_centerHeight" name="deviceType.centerHeight" maxlength="8" cssStyle="width: 250px;"/>
+										</td>
+									</tr>
+									<tr>
+										<td height="26" align="right" bgcolor="#FFFFFF">
+											<strong>监测点标准值：</strong>
+										</td>
+										<td height="26" align="left" bgcolor="#FFFFFF">
+											<s:textfield id="txt_pointNaturalValue" name="deviceType.pointNaturalValue" maxlength="8" cssStyle="width: 250px;"/>
+										</td>
+									</tr>
+									<tr>
+										<td height="26" align="right" bgcolor="#FFFFFF">
+											<strong>监测点警告值：</strong>
+										</td>
+										<td height="26" align="left" bgcolor="#FFFFFF">
+											<s:textfield id="txt_pointWarnValue" name="deviceType.pointWarnValue" maxlength="8" cssStyle="width: 250px;"/>
 										</td>
 									</tr>
 									<tr>
