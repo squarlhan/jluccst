@@ -37,15 +37,17 @@
 		<meta http-equiv="expires" content="0">
 		<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 		<meta http-equiv="description" content="This is my page">
-		<j:scriptlink css="true" tipswindow="true" jmessagebox="true" jquery="true" validate="true" />
-
+		<j:scriptlink  css="true" jmessagebox="true" jquery="true" tipswindow="true" validate="true" jfunction="true"/>
 		<script type="text/javascript">
 		$(function(){
 			/**
 			 * 添加设备类型
 			 */
 			$("#addbtn").click(function(){
-				parent.parent.parent.tipsWindown("添加设备类型","iframe:openAddDeviceTypeAction.action","400","200","true","","true","no");
+				parent.parent.tipsWindown("添加设备类型","iframe:openAddDeviceTypeAction.action","440","300","true","","true","no");
+				parent.parent.$("#windown-close").bind('click',function(){
+					window.location.href=window.location.href;
+				});
 			});
 			
 			/**
@@ -54,7 +56,10 @@
 			$('a[name="edit"]').each(function(){
 				$(this).click(function(){
 					var url = $(this).attr("url");
-					parent.parent.parent.tipsWindown("修改设备类型","iframe:"+url,"400","200","true","","true","no");
+					parent.parent.tipsWindown("修改设备类型","iframe:"+url,"440","300","true","","true","no");
+					parent.parent.$("#windown-close").bind('click',function(){
+						window.location.href=window.location.href;
+					});
 				});
 			});
 			
@@ -99,22 +104,28 @@
 						</table>
 						<table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#d5e4fd">
 							<tr>
-								<td width="8%" height="26" align="center" background="../images/headerbg.jpg">
+								<td width="5%" height="26" align="center" background="../images/headerbg.jpg">
 									<s:checkbox theme="simple" id="cbk_all" name="all"></s:checkbox>
 								</td>
-								<td width="22%" align="center" background="../images/headerbg.jpg">
+								<td align="center" background="../images/headerbg.jpg">
 									<strong>名称</strong>
 								</td>
-								<td width="15%" align="center" background="../images/headerbg.jpg">
+								<td width="10%" align="center" background="../images/headerbg.jpg">
 									<strong>转速</strong>
 								</td>
-								<td width="15%" align="center" background="../images/headerbg.jpg">
+								<td width="10%" align="center" background="../images/headerbg.jpg">
 									<strong>功率</strong>
 								</td>
-								<td width="15%" align="center" background="../images/headerbg.jpg">
+								<td width="10%" align="center" background="../images/headerbg.jpg">
 									<strong>中心高</strong>
 								</td>
-								<td width="15%" align="center" background="../images/headerbg.jpg">
+								<td width="10%" align="center" background="../images/headerbg.jpg">
+									<strong>监测点正常值 </strong>
+								</td>
+								<td width="10%" align="center" background="../images/headerbg.jpg">
+									<strong>监测点警告值</strong>
+								</td>
+								<td width="12%" align="center" background="../images/headerbg.jpg">
 									<strong>操作</strong>
 								</td>
 							</tr>
@@ -138,6 +149,14 @@
 									</td>
 									<td height="26" align="center" bgcolor="#FFFFFF">
 										<s:property value="centerHeight" />
+										&nbsp;
+									</td>
+									<td height="26" align="center" bgcolor="#FFFFFF">
+										<s:property value="pointNaturalValue" />
+										&nbsp;
+									</td>
+									<td height="26" align="center" bgcolor="#FFFFFF">
+										<s:property value="pointWarnValue" />
 										&nbsp;
 									</td>
 									<td height="26" colspan="2" align="center" bgcolor="#FFFFFF">
