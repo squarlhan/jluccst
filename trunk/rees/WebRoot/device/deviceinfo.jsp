@@ -40,9 +40,11 @@
 					"device.deviceModel":{maxlength:20},
 					"device.deviceFactory":{maxlength:50},
 					"device.controlpoint":{digits:true},
-	                "device.centerHeight":{number:true},
-	                "device.speed":{number:true},
-	                "device.power":{number:true}
+	                "device.centerHeight":{required:true,number:true},
+	                "device.speed":{required:true,number:true},
+	                "device.pointNaturalValue":{required:true,number:true},
+	                "device.pointWarnValue":{required:true,number:true},
+	                "device.power":{required:true,number:true}
 				},messages:{
 					"device.deviceNum":
 					{
@@ -64,15 +66,28 @@
 					},
 					"device.centerHeight":
 					{
+						required:"中心高为必填项！",
 						number:"中心高必须为数字！"
 					},
 					"device.speed":
 					{
+						required:"转速为必填项！",
 						number:"转速必须为数字！"
 					},
 					"device.power":
 					{
+						required:"功率为必填项！",
 						number:"功率必须为数字！"
+					},
+					"device.pointNaturalValue":
+					{
+						required:"监测点标准值为必填项！",
+						number:"监测点标准值为数字！"
+					},
+					"device.pointWarnValue":
+					{
+						required:"监测点警告值为必填项！",
+						number:"监测点警告值必须为数字！"
 					}
 				}
 			};
@@ -199,6 +214,8 @@
 						$("#txt_centerHeight").val("");
 						$("#txt_speed").val("");
 						$("#txt_power").val("");
+						$("#txt_pointNaturalValue").val("");
+						$("#txt_pointWarnValue").val("");
 					}else{
 						var url = "toGetDeviceTypeInfoAction.action";
 						$.post(url, {deviceTypeId:deviceTypeId}, function(data){
@@ -209,10 +226,14 @@
 									var centerHeight = data.deviceType.centerHeight;
 									var speed = data.deviceType.speed;
 									var power = data.deviceType.power;
+									var pointNaturalValue = data.deviceType.pointNaturalValue;
+									var pointWarnValue = data.deviceType.pointWarnValue;
 
 									$("#txt_centerHeight").val(centerHeight);
 									$("#txt_speed").val(speed);
 									$("#txt_power").val(power);
+									$("#txt_pointNaturalValue").val(pointNaturalValue);
+									$("#txt_pointWarnValue").val(pointWarnValue);
 								}
 							}
 						});
@@ -225,6 +246,10 @@
 						$("#txt_speed").attr("title","");
 						$("#txt_power").attr("readonly","");
 						$("#txt_power").attr("title","");
+						$("#txt_pointNaturalValue").attr("readonly","");
+						$("#txt_pointNaturalValue").attr("title","");
+						$("#txt_pointWarnValue").attr("readonly","");
+						$("#txt_pointWarnValue").attr("title","");
 						$("#txt_speed").focus();
 					}else{
 						$("#txt_centerHeight").attr("readonly","readonly");
@@ -233,6 +258,10 @@
 						$("#txt_speed").attr("title","不能修改！");
 						$("#txt_power").attr("readonly","readonly");
 						$("#txt_power").attr("title","不能修改！");
+						$("#txt_pointNaturalValue").attr("readonly","readonly");
+						$("#txt_pointNaturalValue").attr("title","不能修改！");
+						$("#txt_pointWarnValue").attr("readonly","readonly");
+						$("#txt_pointWarnValue").attr("title","不能修改！");
 						$("#txt_deviceFactory").focus();
 					}
 				});
@@ -300,7 +329,7 @@
 											<strong>转速：</strong>
 										</td>
 										<td height="26" align="left" bgcolor="#FFFFFF">
-											<s:textfield id="txt_speed" name="device.speed" cssStyle="width: 250px;" readonly="true"></s:textfield>
+											<s:textfield id="txt_speed" name="device.speed" cssStyle="width: 250px;" readonly="true"></s:textfield><font color="red">*</font>
 										</td>
 									</tr>
 									<tr>
@@ -308,7 +337,7 @@
 											<strong>功率：</strong>
 										</td>
 										<td height="26" align="left" bgcolor="#FFFFFF">
-											<s:textfield id="txt_power" name="device.power" cssStyle="width: 250px;" readonly="true"></s:textfield>
+											<s:textfield id="txt_power" name="device.power" cssStyle="width: 250px;" readonly="true"></s:textfield><font color="red">*</font>
 										</td>
 									</tr>
 									<tr>
@@ -316,7 +345,23 @@
 											<strong>中心高：</strong>
 										</td>
 										<td height="26" align="left" bgcolor="#FFFFFF">
-											<s:textfield id="txt_centerHeight" name="device.centerHeight" cssStyle="width: 250px;" readonly="true"></s:textfield>
+											<s:textfield id="txt_centerHeight" name="device.centerHeight" cssStyle="width: 250px;" readonly="true"></s:textfield><font color="red">*</font>
+										</td>
+									</tr>
+									<tr>
+										<td height="26" align="right" bgcolor="#FFFFFF">
+											<strong>监测点标准值：</strong>
+										</td>
+										<td height="26" align="left" bgcolor="#FFFFFF">
+											<s:textfield id="txt_pointNaturalValue" name="device.pointNaturalValue" cssStyle="width: 250px;" readonly="true"></s:textfield><font color="red">*</font>
+										</td>
+									</tr>
+									<tr>
+										<td height="26" align="right" bgcolor="#FFFFFF">
+											<strong>监测点警告值：</strong>
+										</td>
+										<td height="26" align="left" bgcolor="#FFFFFF">
+											<s:textfield id="txt_pointWarnValue" name="device.pointWarnValue" cssStyle="width: 250px;" readonly="true"></s:textfield><font color="red">*</font>
 										</td>
 									</tr>
 									<tr>
@@ -355,6 +400,8 @@
 										</td>
 										<td height="26" align="left" bgcolor="#FFFFFF">
 											<s:file name="files" cssStyle="width: 250px;"></s:file>
+											<br/>
+											<font size="1px" color="red">建议图片尺寸为200X200</font>
 										</td>
 									</tr>
 									</s:else>
