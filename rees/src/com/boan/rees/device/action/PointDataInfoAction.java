@@ -23,6 +23,7 @@ import com.boan.rees.common.SelectList;
 import com.boan.rees.device.model.DeviceInfo;
 import com.boan.rees.device.model.PointDataInfo;
 import com.boan.rees.device.model.PointInfo;
+import com.boan.rees.device.model.PointParamInfo;
 import com.boan.rees.device.model.PointRelation;
 import com.boan.rees.device.service.IDeviceInfoService;
 import com.boan.rees.device.service.IPointDataInfoService;
@@ -99,6 +100,7 @@ public class PointDataInfoAction extends BaseActionSupport {
 	
 	private InputStream xmlStream;
 	private String caption;
+	private String chart;
 	
 	/**
 	 * 获得监测数据列表
@@ -302,104 +304,49 @@ public class PointDataInfoAction extends BaseActionSupport {
 	 * @return
 	 */
 	public String deviceColumnStat(){
+		if(StringUtils.trimToNull(chart)!=null){
+			deviceId = chart.split("\\|")[0];
+			selectYear = chart.split("\\|")[1];
+			selectWeek = chart.split("\\|")[2];
+		}
+		List<PointInfo> pis= null;
+		if(StringUtils.trimToNull(deviceId)!=null){
+			//获得监测点
+			pis = pointInfoService.findPointInfosByDeviceId(deviceId);
+		}
+		
+		StringBuffer sb = new StringBuffer();
+		sb.append("<?xml version='1.0' encoding='gb2312'?>");
+		sb.append("<graph xAxisName='( 超过N警告，超过M报警 )' yAxisName='threshold' baseFontSize='12' subCaption='监测点运行数据'");
+		sb.append(" rotateNames='1' numDivLines='4'>");
+		if(pis!=null && pis.size()>0){
+			List<PointParamInfo> ppis = null;
+			PointDataInfo pdi = null;
+			for (PointInfo pointInfo : pis) {
+				
+				//获得监测点参数
+				ppis = pointParamInfoService.findPointParamInfoByPointId(pointInfo.getId());
+				if(ppis!=null && ppis.size()>0){
+					for(PointParamInfo ppi:ppis){
+						if(StringUtils.trimToNull(selectYear)!=null && StringUtils.trimToNull(selectWeek)!=null){
+							pdi = pointDataInfoService.get(selectYear, selectWeek, ppi.getId());
+							if(pdi!=null){
+								sb.append("<set name='" + pointInfo.getControlPointName() + ppi.getName() + "' value='" + pdi.getDataInfo() + "' />");
+							}else{
+								sb.append("<set name='" + pointInfo.getControlPointName() + ppi.getName() + "' value='0' />");
+							}
+						}
+					}
+				}
+			}
+		}		
+		sb.append("</graph>");
+		xmlStream = new ByteArrayInputStream(sb.toString().getBytes(Charset.forName("gb2312")));
 		return SUCCESS;
 	}
 	
-	public InputStream getXmlStream() {
-		int natural=9; //正常
-		int warn=27;    //警告
-		List<Data> dataList= new ArrayList<Data>();
-//		if(StringUtils.trimToNull(deviceId)!=null && StringUtils.trimToNull(selectYear)!=null && StringUtils.trimToNull(selectWeek)!=null){
-//			//获得监测点
-//			pointInfos = pointInfoService.findPointInfosByDeviceId(deviceId);
-//			List<PointParamInfo> ppis = null;
-//			PointDataInfo pdi = null;
-//			if(pointInfos!=null && pointInfos.size()>0){
-//				for (PointInfo pointInfo : pointInfos) {
-//					//获得监测点参数
-//					ppis = pointParamInfoService.findPointParamInfoByPointId(pointInfo.getId());
-//					for(PointParamInfo pointParamInfo:ppis){
-//						pdi = pointDataInfoService.get(selectYear, selectWeek, pointParamInfo.getId());
-//						dataList.add(new Data(pointInfo.getControlPointName()+pointParamInfo.getName(), Float.parseFloat(pdi.getDataInfo())));
-//					}
-//				}
-//			}
-//		}
-		
-		dataList.add(new Data("监测点一", 8));
-		dataList.add(new Data("监测点二", 20));
-		dataList.add(new Data("监测点三", 30));
-		dataList.add(new Data("监测点四", 40));
-		dataList.add(new Data("监测点五", 28));
-		
-		StringBuffer strCategories = new StringBuffer("<categories fontColor=''>\n");
-		StringBuffer strNatural = new StringBuffer("<dataset seriesName='正常' color='7CFC00'>\n");
-		StringBuffer strAlert = new StringBuffer("<dataset seriesName='预警' color='FFD700'>\n");
-		StringBuffer strWarn = new StringBuffer("<dataset seriesName='警告' color='FF0000'>\n");
-		for(Data entry : dataList ){
-			strCategories.append("<category label='"+entry.getColumnName()+"' />\n");
-			float value = entry.getColumnValue();
-			String str = "";
-			if(value>=natural){
-				str= ""+natural;
-			}else if(value==0){
-				str = "";
-			}else{
-				str =""+ value;
-			}
-			strNatural.append("<set value='"+str+"' toolText='正常值"+str+"'/>\n");
-			if(value>natural && value<warn){
-				str = ""+ (value-natural);
-			}else if(value>=warn){
-				str = ""+(warn-natural);
-			}else{
-				str = "";
-			}
-			strAlert.append("<set value='"+str+"' toolText='预警值"+str+"'/>\n");
-			if(value>warn){
-				str = ""+(value-warn);
-			}else{
-				str = "";
-			}
-			strWarn.append("<set value='"+str+"' toolText='警告值"+str+"'/>\n");
-		}
-		strCategories.append("</categories>\n");
-		strNatural.append("</dataset>\n");
-		strAlert.append("</dataset>\n");
-		strWarn.append("</dataset>\n");
-		
-		String str= "<chart caption='"+caption+"' yAxisMinValue='0' yAxisMaxValue='90' " +
-				"showValues='0' rotateNames='0' numdivlines='9' divlinecolor='FF0000' " +
-				"xAxisName='实时数据' yAxisName='运作状态' baseFontSize='12' outCnvBaseFontColor='#000000' " +
-				"plotFillAlpha='100' formatNumberScale='0'>\n"+
-				strCategories.toString()+
-				strNatural.toString()+
-				strAlert.toString()+
-				strWarn.toString()+
-        "</chart>\n";
-		xmlStream = new ByteArrayInputStream(str.getBytes(Charset.forName("UTF-8")));
+	public InputStream getXmlStream() {		
 		return xmlStream;
-	}
-	
-	class Data{
-		private String columnName;
-		private float columnValue;
-		public Data(String columnName,float columnValue ){
-			this.columnName=columnName;
-			this.columnValue=columnValue;
-		}
-		public String getColumnName() {
-			return columnName;
-		}
-		public void setColumnName(String columnName) {
-			this.columnName = columnName;
-		}
-		public float getColumnValue() {
-			return columnValue;
-		}
-		public void setColumnValue(float columnValue) {
-			this.columnValue = columnValue;
-		}
 	}
 
 	public void setXmlStream(InputStream xmlStream) {
@@ -512,5 +459,13 @@ public class PointDataInfoAction extends BaseActionSupport {
 
 	public void setDeviceInfo(DeviceInfo deviceInfo) {
 		this.deviceInfo = deviceInfo;
+	}
+
+	public String getChart() {
+		return chart;
+	}
+
+	public void setChart(String chart) {
+		this.chart = chart;
 	}
 }
