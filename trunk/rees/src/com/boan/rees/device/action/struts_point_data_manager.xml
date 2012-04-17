@@ -38,7 +38,7 @@
 		</action>
 		<action name="deviceColumnStatAction" class="pointDataInfoAction" method="deviceColumnStat">
 			<param name="caption">交流交流</param>
-			<result name="success"  type="stream">
+			<result name="success" type="stream">
 				<param name="contentType">application/xml;charset=UTF-8</param>
 				<param name="inputName">xmlStream</param>
 			</result>
