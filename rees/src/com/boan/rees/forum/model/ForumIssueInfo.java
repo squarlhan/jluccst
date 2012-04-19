@@ -43,7 +43,7 @@ public class ForumIssueInfo implements Serializable {
 		this.creator = creator;
 		this.createTime = createTime;
 		this.joinPersonCount = joinPersonCount;
-		this.createTimeStr = CalendarUtils.toString( createTime );
+		this.createTimeStr = CalendarUtils.toLongString( createTime );
 	}
 	
 	@Id

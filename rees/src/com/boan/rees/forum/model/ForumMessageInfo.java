@@ -17,6 +17,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -62,6 +63,19 @@ public class ForumMessageInfo implements Serializable {
 	 */
 	@Column(name = "MESSAGE_TIME")
 	private Calendar messageTime = Calendar.getInstance();
+	/**
+	 * 消息发出时间 字符串   
+	 */
+	@Transient
+	private String messageTimeStr ;
+	public String getMessageTimeStr()
+	{
+		return messageTimeStr;
+	}
+	public void setMessageTimeStr( String messageTimeStr )
+	{
+		this.messageTimeStr = messageTimeStr;
+	}
 	public String getId() {
 		return id;
 	}
