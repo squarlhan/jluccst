@@ -25,7 +25,7 @@
 <html>
   <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>进入聊天窗口</title>
+<title>进入论坛窗口</title>
 <link type="text/css" rel="stylesheet" href="../style.css" />
 <script type="text/javascript" src="../js/jquery-1.4.2.min.js"></script>
 <script type="text/javascript">
@@ -40,7 +40,8 @@
 </style>
 </head>
 <body>
-<s:form id="form1" action="toAddForumIssueInfoAction.action">
+<s:debug/>
+<s:form id="form1" action="toAddForumMessageInfoAction.action">
 <table width="100%" border="0" cellspacing="5" cellpadding="0">
   <tr>
     <td><table width="100%" style="height:100%;" border="0" cellspacing="6" cellpadding="0">
@@ -50,16 +51,26 @@
             <tr>
               <td width="69%" valign="top" bgcolor="#FFFFFF"><table width="100%" border="0">
                 <tr>
-                  <td height="321" colspan="2" valign="top" style="padding:5px;"><table width="100%" border="0" style="margin-top:10px;">
-                  
-                    </table>                    <p class="STYLE1">&nbsp;</p>                    </td>
+                  <td height="321" colspan="2" valign="top" style="padding:5px;">
+                  <table width="100%" border="0" style="margin-top:10px;">
+                  <s:iterator value="pagination.data" status="obj">
+                  <tr>
+              			<td height="26" bgcolor="#FFFFFF">
+	                       <s:property value="messageContent"/>&nbsp;
+	                       <br> <s:property value="publisherDept"/>&nbsp;
+	                       <s:property value="publisher"/>&nbsp;
+	                       <s:property value="messageTime"/>&nbsp;
+             			 </td>
+                  </tr>
+                  </s:iterator>
+                    </table><p class="STYLE1">&nbsp;</p></td>
                   </tr>
                 <tr>
                   <td height="28" colspan="2" background="../images/bottombg.jpg">&nbsp;</td>
                   </tr>
                 <tr>
                   <td>
-                  	<s:textarea id="issueConteit" name="forumIssueInfo.issueConteit" cols="45" rows="3" theme="simple"></s:textarea>
+                  	<s:textarea id="messageContent" name="messageContent" cols="45" rows="3" theme="simple"></s:textarea>
                   </td>
                   <td align="center"><input name="addBtn2" type="submit" class="btn_4" id="addBtn2" value="提交">
                     <input name="addBtn3" type="reset" class="btn_4" id="addBtn3" value="清空" style="margin-top:5px"></td>
@@ -73,10 +84,11 @@
                   <td height="87" align="left" valign="top" style="padding:5px;"><s:property value="forumIssueInfo.issueContent"/></td>
                   </tr>
                 <tr>
-                  <td height="28" background="../images/bottombg.jpg"><strong>--在线用户--</strong>&nbsp;</td>
+                  <td height="28" background="../images/bottombg.jpg"><strong>--参与用户列表--</strong>&nbsp;</td>
                 </tr>
                 <tr>
-                  <td height="205" valign="top" style="padding:5px;"><table width="78" border="0" height="140"><s:property value="joinPerson"/>
+                  <td height="205" valign="top" style="padding:5px;"><table width="78" border="0" height="140">
+                  <%--<s:property value="joinPerson"/>--%>
                   </table></td>
                 </tr>
               </table></td>
