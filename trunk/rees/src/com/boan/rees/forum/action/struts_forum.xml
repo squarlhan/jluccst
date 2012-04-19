@@ -16,6 +16,11 @@
     		<result name="input">bbs/bbs.jsp</result>
     	</action>
     	<!-- 显示列表页 -->
+    	<action name="openForumIssueInfoManageAction" class="forumIssueInfoAction" method="openForumIssueInfoManage">
+    		<result name="success">bbs/bbsmanagelist.jsp</result>
+    		<result name="input">bbs/bbsmanagelist.jsp</result>
+    	</action>
+    	<!-- 显示列表页 -->
     	<action name="openForumIssueInfoAction" class="forumIssueInfoAction" method="openForumIssueInfo">
     		<result name="success">bbs/bbslist.jsp</result>
     		<result name="input">bbs/bbslist.jsp</result>

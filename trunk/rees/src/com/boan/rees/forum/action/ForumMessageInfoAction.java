@@ -1,6 +1,5 @@
 package com.boan.rees.forum.action;
 
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -12,7 +11,6 @@ import com.boan.rees.forum.model.ForumIssueInfo;
 import com.boan.rees.forum.model.ForumMessageInfo;
 import com.boan.rees.forum.service.IForumIssueInfoService;
 import com.boan.rees.forum.service.IForumMessageInfoService;
-import com.boan.rees.utils.calendar.CalendarUtils;
 import com.boan.rees.utils.page.Pagination;
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -54,24 +52,17 @@ public class ForumMessageInfoAction extends ActionSupport {
 	 * 话题Id
 	 */
 	private String issueId = "";
-	/**
-	 * 查询开始时间
-	 */
-	private Calendar queryBeginTime = null;
-	/**
-	 * 查询结束时间
-	 */
-	private Calendar queryEndTime = null;
 	
 
 	/**
 	 * 话题对象信息
 	 */
-	private ForumIssueInfo forumIssueInfo = null;
+	private ForumIssueInfo forumIssueInfo = new ForumIssueInfo();
 	//********************************************************************************************
 	public void setForumMessageInfo(ForumMessageInfo forumMessageInfo) {
 		this.forumMessageInfo = forumMessageInfo;
 	}
+	
 	/**
 	 * 显示列表页
 	 * @return
@@ -88,14 +79,13 @@ public class ForumMessageInfoAction extends ActionSupport {
 		//System.out.println("如果添加页需要做一些初始化操作 ，在这写代码！");
 		
 		forumIssueInfo = forumIssueInfoService.get( issueId );
+		
 		Map<String,String> values = new HashMap<String,String>();
 		values.put( "issueId", issueId );
-		if(queryBeginTime == null)
-		{
-			values.put("beginTime",CalendarUtils.toString( Calendar.getInstance() ) + " 00:00:00");
-			values.put("endTime",CalendarUtils.toString( Calendar.getInstance() ) + " 23:59:59");
-		}
+		pagination.setCurrentPage( 1 );
+		pagination.setPageSize( 100 );
 		pagination = forumMessageInfoService.findForumMessageInfoForPage( values, pagination );
+		
 		
 		return this.SUCCESS;
 	}
@@ -105,7 +95,6 @@ public class ForumMessageInfoAction extends ActionSupport {
  * @return success：添加页（带成功提示）   input ： 跳转到添加页并带着错误信息
  */
 public String toAddForumIssueInfo(){
-	System.out.println(forumMessageInfo.getMessageContent());
 	try{
 		//调用service保存方法向数据库保存信息
 		forumMessageInfoService.save(forumMessageInfo);
@@ -152,21 +141,13 @@ public void setIssueId( String issueId )
 {
 	this.issueId = issueId;
 }
-public Calendar getQueryBeginTime()
+public ForumIssueInfo getForumIssueInfo()
 {
-	return queryBeginTime;
+	return forumIssueInfo;
 }
-public void setQueryBeginTime( Calendar queryBeginTime )
+public void setForumIssueInfo( ForumIssueInfo forumIssueInfo )
 {
-	this.queryBeginTime = queryBeginTime;
-}
-public Calendar getQueryEndTime()
-{
-	return queryEndTime;
-}
-public void setQueryEndTime( Calendar queryEndTime )
-{
-	this.queryEndTime = queryEndTime;
+	this.forumIssueInfo = forumIssueInfo;
 }
 }
 

@@ -93,6 +93,19 @@ public class ForumIssueInfoAction extends BaseActionSupport {
 		return this.SUCCESS;
 	}
 	
+	
+	/**
+	 * 显示话题管理列表页
+	 * @return
+	 */
+	public String openForumIssueInfoManage()
+	{
+		pagination = forumIssueInfoService.findForumIssueInfoForPage(null, pagination);
+		
+		return this.SUCCESS;
+	}
+	
+	
 	/**
 	 * 打开添加页面
 	 * @return success：跳转到添加页   input ： 跳转到添加页并带着错误信息
