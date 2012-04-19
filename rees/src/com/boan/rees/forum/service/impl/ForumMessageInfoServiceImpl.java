@@ -9,6 +9,8 @@
 
 package com.boan.rees.forum.service.impl;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -78,19 +80,19 @@ public class ForumMessageInfoServiceImpl implements IForumMessageInfoService {
 		
 		StringBuilder hql = new StringBuilder();
 		hql.append( " from ForumMessageInfo where issueId = :issueId ");
-		if(values.get( "beginTime" ) != null)
-		{
-			hql.append( " and messageTime between :beginTime and :endTime" );
-		}
+//		if(values.get( "beginTime" ) != null)
+//		{
+//			hql.append( " and messageTime between :beginTime and :endTime" );
+//		}
 		hql.append( " order by messageTime asc" );
 		
 		List<ForumMessageInfo> data = forumMessageInfoDao.findForPage(hql.toString(), values, pagination.getStartIndex(), pagination.getPageSize());
 		hql.delete( 0, hql.length() );
 		hql.append( "select count(*) from ForumMessageInfo where issueId = :issueId ");
-		if(values.get( "beginTime" ) != null)
-		{
-			hql.append( " and messageTime between :beginTime and :endTime" );
-		}
+//		if(values.get( "beginTime" ) != null)
+//		{
+//			hql.append( " and messageTime between :beginTime and :endTime" );
+//		}
 		int totalRows = forumMessageInfoDao.findCountForPage(hql.toString(), values);
 		pagination.setTotalRows(totalRows);
 		pagination.setData(data);
@@ -102,6 +104,19 @@ public class ForumMessageInfoServiceImpl implements IForumMessageInfoService {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	
+	/**
+	 * 根据话题取参与人
+	 */
+	public List<String> joinPerson( String issueId )
+	{
+		List<String> list = new ArrayList<String>();
+		StringBuilder hql = new StringBuilder();
+		hql.append( "select distinct publisherDept,publisher  from ForumMessageInfo where issueId = :issueId ");
+		Map<String,String> values = new HashMap<String,String>();
+		values.put( "issueId", issueId );
+		forumMessageInfoDao.find(hql.toString(),values);
+		return list;
+	}
 
 }
