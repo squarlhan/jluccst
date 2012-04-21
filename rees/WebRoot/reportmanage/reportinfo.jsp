@@ -100,6 +100,10 @@
 	 * 初始化页面
 	 */
 	$.fn.initpage = function(){
+		var err = $("#lb_error").html();
+		if(err!=null && $.trim(err)!="" ){
+			alert(err);
+		}
 		var message = $("#lb_message").html();
 		if(message!=null && $.trim(message)!="" ){
 			alert(message);
@@ -223,6 +227,11 @@
 		</tr>
 	</table>
 	</s:form>
+	<s:if test="hasFieldErrors()">
+		<s:iterator value="fieldErrors">
+			<s:label id="lb_error" name="value[0]" cssStyle="display:none"></s:label>
+		</s:iterator>
+	</s:if>
 </body>
 </html>
 
