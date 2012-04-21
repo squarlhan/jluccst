@@ -53,16 +53,16 @@ public class DeviceType implements Serializable {
 	@Column(name = "SPEED")
 	private BigDecimal speed;
 	
-	/**
-	 * 监测点正常值 
-	 */
-	@Column(name = "POINT_NATURAL_VALUE")
-	private BigDecimal pointNaturalValue;
-	/**
-	 * 监测点警告值
-	 */
-	@Column(name = "POINT_WARN_VALUE")
-	private BigDecimal pointWarnValue;
+//	/**
+//	 * 监测点正常值 
+//	 */
+//	@Column(name = "POINT_NATURAL_VALUE")
+//	private BigDecimal pointNaturalValue;
+//	/**
+//	 * 监测点警告值
+//	 */
+//	@Column(name = "POINT_WARN_VALUE")
+//	private BigDecimal pointWarnValue;
 	
 	/**
 	 * 功率
@@ -110,19 +110,19 @@ public class DeviceType implements Serializable {
 		this.power = power;
 	}
 
-	public BigDecimal getPointNaturalValue() {
-		return pointNaturalValue;
-	}
-
-	public void setPointNaturalValue(BigDecimal pointNaturalValue) {
-		this.pointNaturalValue = pointNaturalValue;
-	}
-
-	public BigDecimal getPointWarnValue() {
-		return pointWarnValue;
-	}
-
-	public void setPointWarnValue(BigDecimal pointWarnValue) {
-		this.pointWarnValue = pointWarnValue;
-	}
+//	public BigDecimal getPointNaturalValue() {
+//		return pointNaturalValue;
+//	}
+//
+//	public void setPointNaturalValue(BigDecimal pointNaturalValue) {
+//		this.pointNaturalValue = pointNaturalValue;
+//	}
+//
+//	public BigDecimal getPointWarnValue() {
+//		return pointWarnValue;
+//	}
+//
+//	public void setPointWarnValue(BigDecimal pointWarnValue) {
+//		this.pointWarnValue = pointWarnValue;
+//	}
 }
