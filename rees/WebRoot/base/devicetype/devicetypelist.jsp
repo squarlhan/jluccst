@@ -44,7 +44,7 @@
 			 * 添加设备类型
 			 */
 			$("#addbtn").click(function(){
-				parent.parent.tipsWindown("添加设备类型","iframe:openAddDeviceTypeAction.action","440","300","true","","true","no");
+				parent.parent.tipsWindown("添加设备类型","iframe:openAddDeviceTypeAction.action","440","250","true","","true","no");
 				parent.parent.$("#windown-close").bind('click',function(){
 					window.location.href=window.location.href;
 				});
@@ -56,7 +56,7 @@
 			$('a[name="edit"]').each(function(){
 				$(this).click(function(){
 					var url = $(this).attr("url");
-					parent.parent.tipsWindown("修改设备类型","iframe:"+url,"440","300","true","","true","no");
+					parent.parent.tipsWindown("修改设备类型","iframe:"+url,"440","250","true","","true","no");
 					parent.parent.$("#windown-close").bind('click',function(){
 						window.location.href=window.location.href;
 					});
@@ -110,22 +110,24 @@
 								<td align="center" background="../images/headerbg.jpg">
 									<strong>名称</strong>
 								</td>
-								<td width="10%" align="center" background="../images/headerbg.jpg">
+								<td width="15%" align="center" background="../images/headerbg.jpg">
 									<strong>转速</strong>
 								</td>
-								<td width="10%" align="center" background="../images/headerbg.jpg">
+								<td width="15%" align="center" background="../images/headerbg.jpg">
 									<strong>功率</strong>
 								</td>
-								<td width="10%" align="center" background="../images/headerbg.jpg">
+								<td width="15%" align="center" background="../images/headerbg.jpg">
 									<strong>中心高</strong>
 								</td>
+								<!-- 
 								<td width="10%" align="center" background="../images/headerbg.jpg">
 									<strong>监测点正常值 </strong>
 								</td>
 								<td width="10%" align="center" background="../images/headerbg.jpg">
 									<strong>监测点警告值</strong>
 								</td>
-								<td width="12%" align="center" background="../images/headerbg.jpg">
+								 -->
+								<td width="15%" align="center" background="../images/headerbg.jpg">
 									<strong>操作</strong>
 								</td>
 							</tr>
@@ -151,6 +153,7 @@
 										<s:property value="centerHeight" />
 										&nbsp;
 									</td>
+									<!-- 
 									<td height="26" align="center" bgcolor="#FFFFFF">
 										<s:property value="pointNaturalValue" />
 										&nbsp;
@@ -159,6 +162,7 @@
 										<s:property value="pointWarnValue" />
 										&nbsp;
 									</td>
+									 -->
 									<td height="26" colspan="2" align="center" bgcolor="#FFFFFF">
 										<s:url id="edit_url" action="openModifyDeviceTypeAction">
 											<s:param name="deviceType.id" value="id"></s:param>

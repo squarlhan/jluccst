@@ -46,9 +46,9 @@
                "deviceType.typeName":{required:true,maxlength:20},
                "deviceType.centerHeight":{number:true},
                "deviceType.speed":{number:true},
-               "deviceType.power":{number:true},
-               "deviceType.pointNaturalValue":{number:true},
-               "deviceType.pointWarnValue":{number:true}
+               "deviceType.power":{number:true}//,
+               //"deviceType.pointNaturalValue":{number:true},
+               //"deviceType.pointWarnValue":{number:true}
 			},messages:{
 				"deviceType.typeName":
 				{
@@ -66,7 +66,8 @@
 				"deviceType.power":
 				{
 					number:"功率必须为数字！"
-				},
+				}
+				/*,
 				"deviceType.pointNaturalValue":
 				{
 					number:"监测点标准值为数字！"
@@ -75,6 +76,7 @@
 				{
 					number:"监测点警告值必须为数字！"
 				}
+				//*/
 			}
 		};
 
@@ -196,6 +198,7 @@
 											<s:textfield id="txt_centerHeight" name="deviceType.centerHeight" maxlength="8" cssStyle="width: 250px;"/>
 										</td>
 									</tr>
+									<!-- 
 									<tr>
 										<td height="26" align="right" bgcolor="#FFFFFF">
 											<strong>监测点标准值：</strong>
@@ -212,6 +215,7 @@
 											<s:textfield id="txt_pointWarnValue" name="deviceType.pointWarnValue" maxlength="8" cssStyle="width: 250px;"/>
 										</td>
 									</tr>
+									 -->
 									<tr>
 										<td height="26" colspan="2" align="center" bgcolor="#FFFFFF">
 											<input name="addBtn" type="button" class="btn_2_3" id="addBtn" value="确定">
