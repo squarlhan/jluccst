@@ -455,6 +455,14 @@ public class ReportAction extends BaseActionSupport{
 		if(report!=null){
 			report = service.get(report.getId());
 			templateId = report.getTemplateId();
+			TemplateReport template = templateReportService.get(templateId);
+			ServletContext servletContext = ServletActionContext.getServletContext();
+			//获取服务器上模板文件的保存路径
+			String fileAllName = servletContext.getRealPath(template.getTemplatePath());
+			File file = new File(fileAllName);
+			if(!file.exists()){
+				addFieldError("", "系统没有找到模板文件，请联系管理员！");
+			}
 		}else{
 			addFieldError("", "没有指定个人报表！");
 		}
@@ -580,7 +588,7 @@ public class ReportAction extends BaseActionSupport{
 	/**
 	 * 下载前服务器端验证
 	 */
-	public void validateDownloadTempleFile(){
+	public void validateToDownloadTempleFile(){
 		ServletContext servletContext = ServletActionContext.getServletContext();
 		//获取服务器上模板文件的保存路径
 		String fileAllName = servletContext.getRealPath(template.getTemplatePath());
