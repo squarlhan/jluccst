@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+	<item id="" text="振动" unit="">
+		<threshold>
+			<param name="a">
+				<eq value=""></eq><!-- 等于 -->
+				<ne value=""></ne><!-- 不等于 -->
+				<gt value=""></gt><!-- 大于 -->
+				<ge value=""></ge><!-- 等于等于 -->
+				<lt value=""></lt><!-- 小于 -->
+				<le value=""></le><!-- 小于等于 -->
+				<between value1="" value2=""></between><!-- 大于等于1并且小于等于2 -->
+				<nobetween value1="" value2=""></nobetween><!-- 大于等于1或者小于等于2 -->
+			</param>
+			<param name="v">
+				<eq value=""></eq><!-- 等于 -->
+				<ne value=""></ne><!-- 不等于 -->
+				<gt value=""></gt><!-- 大于 -->
+				<ge value=""></ge><!-- 等于等于 -->
+				<lt value=""></lt><!-- 小于 -->
+				<le value=""></le><!-- 小于等于 -->
+				<between value1="" value2=""></between><!-- 大于等于1并且小于等于2 -->
+				<nobetween value1="" value2=""></nobetween><!-- 大于等于1或者小于等于2 -->
+			</param>
+			<param name="h">
+				<eq value=""></eq><!-- 等于 -->
+				<ne value=""></ne><!-- 不等于 -->
+				<gt value=""></gt><!-- 大于 -->
+				<ge value=""></ge><!-- 等于等于 -->
+				<lt value=""></lt><!-- 小于 -->
+				<le value=""></le><!-- 小于等于 -->
+				<between value1="" value2=""></between><!-- 大于等于1并且小于等于2 -->
+				<nobetween value1="" value2=""></nobetween><!-- 大于等于1或者小于等于2 -->
+			</param>
+		</threshold>
+	</item>
+	<item id="" text="温度" unit="摄氏度">
+		<threshold>
+			<param name="">
+				<eq value=""></eq><!-- 等于 -->
+				<ne value=""></ne><!-- 不等于 -->
+				<gt value=""></gt><!-- 大于 -->
+				<ge value=""></ge><!-- 等于等于 -->
+				<lt value=""></lt><!-- 小于 -->
+				<le value=""></le><!-- 小于等于 -->
+				<between value1="" value2=""></between><!-- 大于等于1并且小于等于2 -->
+				<nobetween value1="" value2=""></nobetween><!-- 大于等于1或者小于等于2 -->
+			</param>
+		</threshold>
+	</item>
+	<item id="" text="声音" unit="">
+		<threshold>
+			<param name="">
+				<eq value=""></eq><!-- 等于 -->
+				<ne value=""></ne><!-- 不等于 -->
+				<gt value=""></gt><!-- 大于 -->
+				<ge value=""></ge><!-- 等于等于 -->
+				<lt value=""></lt><!-- 小于 -->
+				<le value=""></le><!-- 小于等于 -->
+				<between value1="" value2=""></between><!-- 大于等于1并且小于等于2 -->
+				<nobetween value1="" value2=""></nobetween><!-- 大于等于1或者小于等于2 -->
+			</param>
+		</threshold>
+	</item>
+</config>
+
