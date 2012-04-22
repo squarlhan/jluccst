@@ -23,10 +23,13 @@ import com.boan.rees.utils.page.Pagination;
 public interface INoticeInfoService {
 
 	/**
-	 * 查询全部报表对象
+	 * 查询全部对象
 	 */
 	public List<NoticeInfo> findAllDemoModel();
-
+	/**
+	 * 查询全部对象
+	 */
+	public List<NoticeInfo> findAllNoticeInfo();
 	/**
 	 * 获取
 	 */

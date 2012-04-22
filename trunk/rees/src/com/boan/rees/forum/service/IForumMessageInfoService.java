@@ -47,4 +47,8 @@ public interface IForumMessageInfoService {
 	 */
 	public Pagination<ForumMessageInfo> findForumMessageInfoForPage(Map<String, ?> values,Pagination<ForumMessageInfo> pagination);
 
+	/**
+	 * 根据话题取参与人
+	 */
+	public List<Object[]> joinPerson( String issueId );
 }
