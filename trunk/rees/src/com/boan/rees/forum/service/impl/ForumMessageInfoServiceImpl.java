@@ -22,6 +22,7 @@ import org.springframework.stereotype.Service;
 import com.boan.rees.forum.dao.IForumMessageInfoDao;
 import com.boan.rees.forum.model.ForumMessageInfo;
 import com.boan.rees.forum.service.IForumMessageInfoService;
+import com.boan.rees.utils.calendar.CalendarUtils;
 import com.boan.rees.utils.page.Pagination;
 
 /**
@@ -80,19 +81,15 @@ public class ForumMessageInfoServiceImpl implements IForumMessageInfoService {
 		
 		StringBuilder hql = new StringBuilder();
 		hql.append( " from ForumMessageInfo where issueId = :issueId ");
-//		if(values.get( "beginTime" ) != null)
-//		{
-//			hql.append( " and messageTime between :beginTime and :endTime" );
-//		}
 		hql.append( " order by messageTime asc" );
 		
 		List<ForumMessageInfo> data = forumMessageInfoDao.findForPage(hql.toString(), values, pagination.getStartIndex(), pagination.getPageSize());
+		for(int i = 0;i<data.size() ;i++)
+		{
+			data.get( i ).setMessageTimeStr( CalendarUtils.toLongString( data.get( i ).getMessageTime() ));
+		}
 		hql.delete( 0, hql.length() );
 		hql.append( "select count(*) from ForumMessageInfo where issueId = :issueId ");
-//		if(values.get( "beginTime" ) != null)
-//		{
-//			hql.append( " and messageTime between :beginTime and :endTime" );
-//		}
 		int totalRows = forumMessageInfoDao.findCountForPage(hql.toString(), values);
 		pagination.setTotalRows(totalRows);
 		pagination.setData(data);
@@ -108,14 +105,14 @@ public class ForumMessageInfoServiceImpl implements IForumMessageInfoService {
 	/**
 	 * 根据话题取参与人
 	 */
-	public List<String> joinPerson( String issueId )
+	public List<Object[]> joinPerson( String issueId )
 	{
-		List<String> list = new ArrayList<String>();
+		List<Object[]> list = new ArrayList<Object[]>();
 		StringBuilder hql = new StringBuilder();
-		hql.append( "select distinct publisherDept,publisher  from ForumMessageInfo where issueId = :issueId ");
+		hql.append( "select distinct publisherDept , publisher  from ForumMessageInfo where issueId = :issueId order by messageTime asc");
 		Map<String,String> values = new HashMap<String,String>();
 		values.put( "issueId", issueId );
-		forumMessageInfoDao.find(hql.toString(),values);
+		list = forumMessageInfoDao.find(hql.toString(),values);
 		return list;
 	}
 

@@ -26,17 +26,23 @@ import com.boan.rees.utils.page.Pagination;
  * @author yangyj
  * @version 1.0.0
  */
-@Service("NoticeInfoService")
-public abstract  class NoticeInfoServiceImpl implements INoticeInfoService {
-	
-	@Qualifier("NoticeInfoDao")
+@Service("noticeInfoService")
+public class NoticeInfoServiceImpl implements INoticeInfoService {
+	@Autowired
+	@Qualifier("noticeInfoDao")
 	private INoticeInfoDao noticeInfoDao;
-	
+	/**
+	 * 查询全部报表对象
+	 */
+	public List<NoticeInfo> findAllDemoModel()
+	{
+		return null;
+	}
 	/**
 	 * 查询全部通知表对象
 	 */
 	
-	@Autowired
+	@Override
 	public List<NoticeInfo> findAllNoticeInfo(){
 		return noticeInfoDao.findAll();
 	}
