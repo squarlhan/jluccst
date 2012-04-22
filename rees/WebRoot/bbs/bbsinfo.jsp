@@ -39,41 +39,46 @@
 -->
 </style>
 </head>
-<body>
-<s:debug/>
+<body onload="document.getElementById('msg_end').click();">
 <s:form id="form1" action="toAddForumMessageInfoAction.action">
 <table width="100%" border="0" cellspacing="5" cellpadding="0">
   <tr>
     <td><table width="100%" style="height:100%;" border="0" cellspacing="6" cellpadding="0">
         <tr>
           <td style="height:36px;"><table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#d5e4fd">
-
             <tr>
               <td width="69%" valign="top" bgcolor="#FFFFFF"><table width="100%" border="0">
                 <tr>
-                  <td height="321" colspan="2" valign="top" style="padding:5px;">
-                  <table width="100%" border="0" style="margin-top:10px;">
-                  <s:iterator value="pagination.data" status="obj">
-                  <tr>
-              			<td height="26" bgcolor="#FFFFFF">
-	                       <s:property value="messageContent"/>&nbsp;
-	                       <br> <s:property value="publisherDept"/>&nbsp;
-	                       <s:property value="publisher"/>&nbsp;
-	                       <s:property value="messageTime"/>&nbsp;
-             			 </td>
-                  </tr>
-                  </s:iterator>
-                    </table><p class="STYLE1">&nbsp;</p></td>
+                  <td height="421" colspan="2" valign="top" style="padding:5px;">
+                  <div style="height:420px;overflow-y:scroll;">
+	                  <table width="100%" border="0" style="margin-top:10px;">
+	                  <s:iterator value="pagination.data" status="obj">
+	                  <tr>
+	              			<td height="26" bgcolor="#FFFFFF">
+		                       [<s:property value="messageTimeStr"/>]&nbsp;
+		                       [<s:property value="publisherDept"/>]&nbsp;
+		                       [<s:property value="publisher"/>]说：
+		                       &nbsp; <s:property value="messageContent"/>
+	             			 </td>
+	                  </tr>
+	                  </s:iterator>
+	                  <tr><td>
+	                  <a id="msg_end" name="1" href="#1">&nbsp;</a></td></tr>
+	                    </table>
+					</div>
+				</td>
                   </tr>
                 <tr>
                   <td height="28" colspan="2" background="../images/bottombg.jpg">&nbsp;</td>
                   </tr>
                 <tr>
                   <td>
-                  	<s:textarea id="messageContent" name="messageContent" cols="45" rows="3" theme="simple"></s:textarea>
+                  	<s:hidden id="hid_forumMessageInfoId" name="forumMessageInfo.issueId" value="%{issueId}"></s:hidden>
+                  	<s:hidden id="hid_forumMessageInfoId" name="issueId" value="%{issueId}"></s:hidden>
+                  	<s:textarea id="forumMessageInfo.messageContent" name="forumMessageInfo.messageContent" cols="85" rows="5" theme="simple"></s:textarea>
                   </td>
-                  <td align="center"><input name="addBtn2" type="submit" class="btn_4" id="addBtn2" value="提交">
-                    <input name="addBtn3" type="reset" class="btn_4" id="addBtn3" value="清空" style="margin-top:5px"></td>
+                  <td align="center"><input name="addBtn2" type="submit" class="btn_4" id="addBtn2" value="提交" onclick="if(document.all('forumMessageInfo.messageContent').value == '') return false;">
+                    <input name="addBtn3" type="reset" class="btn_4" id="addBtn3" value="清空" style="margin-top:5px" onclick="document.all('forumMessageInfo.messageContent').value = '';"></td>
                 </tr>
               </table></td>
               <td width="31%" valign="top" bgcolor="#FFFFFF"><table width="100%" height="396" border="0">
@@ -88,7 +93,9 @@
                 </tr>
                 <tr>
                   <td height="205" valign="top" style="padding:5px;"><table width="78" border="0" height="140">
-                  <%--<s:property value="joinPerson"/>--%>
+                   <s:iterator value="joinPersonList" status="of">  
+			          <s:iterator value="top"><s:property />&nbsp;&nbsp;&nbsp;&nbsp;</s:iterator><br/>  
+                    </s:iterator>  
                   </table></td>
                 </tr>
               </table></td>
@@ -100,7 +107,6 @@
     </table></td>
   </tr>
 </table>
-<s:property value="message"/>
 </s:form>
 </body>
 </html>

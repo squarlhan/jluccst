@@ -51,7 +51,18 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  				//window.location.href=window.location.href;
 	  			});
 	  		});
-	  		
+	  		/**
+	  		 * 发送通知
+	  		 */
+	  		$('a[name="notice"]').each(function(){
+	  			$(this).click(function(){
+	  				var url = $(this).attr("url");
+	  				alert(url);
+	  				if(window.confirm("您确定要发送通知吗？")){
+	  					$.post(url, $('#form1').serialize(), function(data){window.location.href=window.location.href;});
+	  				}
+	  			});
+	  		});
 	  		/**
 	  		 * 删除话题信息
 	  		 */
@@ -169,6 +180,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 				<s:param name="forumIssueInfo.id" value="id"></s:param>   
 			      </s:url>
          	  <a name="edit" href="javascript:void(0);" url="${edit_url}">编辑</a>  
+         	  <s:url id="notice_url" action="sendNotice">   
+				<s:param name="issueId" value="id"></s:param>   
+			      </s:url>
+         	  <a name="notice" href="javascript:void(0);" url="${notice_url}">发送通知</a>
          	 </td>
              </tr>
               </s:iterator>
