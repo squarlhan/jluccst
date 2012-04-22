@@ -10,6 +10,8 @@
 package com.boan.rees.forum.model;
 
 import java.io.Serializable;
+import java.util.Calendar;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -24,7 +26,7 @@ import org.hibernate.annotations.GenericGenerator;
  * @version 1.0.0
  */
 @Entity
-@Table(name = "NoticeInfo")
+@Table(name = "Notice_Info")
 public class NoticeInfo implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -44,12 +46,12 @@ public class NoticeInfo implements Serializable {
 	 * 通知内容
 	 */
 	@Column(name = "NOTICE_CONTENT")
-	private Integer noticeContent;
+	private String noticeContent;
 	/**
 	 * 通知发布时间
 	 */
 	@Column(name = "NOTICE_PUBLISHTIME")
-	private String noticePublishtime;
+	private Calendar noticePublishtime;
 	/**
 	 * 通知过期时间
 	 */
@@ -82,19 +84,19 @@ public class NoticeInfo implements Serializable {
 		this.noticeTitle = noticeTitle;
 	}
 
-	public Integer getNoticeContent() {
+	public String getNoticeContent() {
 		return noticeContent;
 	}
 
-	public void setNoticeContent(Integer noticeContent) {
+	public void setNoticeContent(String noticeContent) {
 		this.noticeContent = noticeContent;
 	}
 
-	public String getNoticePublishtime() {
+	public Calendar getNoticePublishtime() {
 		return noticePublishtime;
 	}
 
-	public void setNoticePublishtime(String noticePublishtime) {
+	public void setNoticePublishtime(Calendar noticePublishtime) {
 		this.noticePublishtime = noticePublishtime;
 	}
 
