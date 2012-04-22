@@ -1,6 +1,8 @@
 package com.boan.rees.forum.action;
 
+import java.util.Calendar;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,8 +13,8 @@ import com.boan.rees.forum.model.ForumIssueInfo;
 import com.boan.rees.forum.model.ForumMessageInfo;
 import com.boan.rees.forum.service.IForumIssueInfoService;
 import com.boan.rees.forum.service.IForumMessageInfoService;
+import com.boan.rees.utils.action.BaseActionSupport;
 import com.boan.rees.utils.page.Pagination;
-import com.opensymphony.xwork2.ActionSupport;
 
 /**
  * 论坛议题Action
@@ -21,7 +23,7 @@ import com.opensymphony.xwork2.ActionSupport;
  */
 @Controller("forumMessageInfoAction")
 @Scope("prototype")
-public class ForumMessageInfoAction extends ActionSupport {
+public class ForumMessageInfoAction extends BaseActionSupport {
 
 	/**
 	 * 
@@ -52,17 +54,14 @@ public class ForumMessageInfoAction extends ActionSupport {
 	 * 话题Id
 	 */
 	private String issueId = "";
-	
-
 	/**
 	 * 话题对象信息
 	 */
 	private ForumIssueInfo forumIssueInfo = new ForumIssueInfo();
-	//********************************************************************************************
-	public void setForumMessageInfo(ForumMessageInfo forumMessageInfo) {
-		this.forumMessageInfo = forumMessageInfo;
-	}
-	
+	/**
+	 * 参与人
+	 */
+	private List<Object[]> joinPersonList = null;
 	/**
 	 * 显示列表页
 	 * @return
@@ -86,6 +85,7 @@ public class ForumMessageInfoAction extends ActionSupport {
 		pagination.setPageSize( 100 );
 		pagination = forumMessageInfoService.findForumMessageInfoForPage( values, pagination );
 		
+		joinPersonList = forumMessageInfoService.joinPerson(issueId);
 		
 		return this.SUCCESS;
 	}
@@ -94,11 +94,42 @@ public class ForumMessageInfoAction extends ActionSupport {
  * 执行添加论坛信息业务操作
  * @return success：添加页（带成功提示）   input ： 跳转到添加页并带着错误信息
  */
-public String toAddForumIssueInfo(){
+public String toAddForumMessageInfo(){
 	try{
 		//调用service保存方法向数据库保存信息
+		forumMessageInfo.setMessageTime( Calendar.getInstance() );
+		
+		forumMessageInfo.setPublisher( sessionUserCName );
+		String dept = "";
+		if(sessionCompanyName != null && sessionCompanyName.length() > 0)
+		{
+			dept = sessionCompanyName;
+		}
+		if(sessionFactoryName != null && sessionFactoryName.length() > 0)
+		{
+			dept = dept + " " +sessionFactoryName;
+		}
+		if(sessionWorkshopName != null && sessionWorkshopName.length() > 0)
+		{
+			dept = dept + " " +sessionWorkshopName;
+		}
+		forumMessageInfo.setPublisherDept( dept.trim() );
+		
 		forumMessageInfoService.save(forumMessageInfo);
 		message = "保存成功！";
+		
+		forumMessageInfo = null;
+		forumIssueInfo = forumIssueInfoService.get( issueId );
+		
+		Map<String,String> values = new HashMap<String,String>();
+		values.put( "issueId", issueId );
+		pagination.setCurrentPage( 1 );
+		pagination.setPageSize( 100 );
+		pagination = forumMessageInfoService.findForumMessageInfoForPage( values, pagination );
+		
+		joinPersonList = forumMessageInfoService.joinPerson(issueId);
+		
+		//return NONE;
 	}catch(Exception e){
 		e.printStackTrace();
 		message = "保存失败！";
@@ -148,6 +179,20 @@ public ForumIssueInfo getForumIssueInfo()
 public void setForumIssueInfo( ForumIssueInfo forumIssueInfo )
 {
 	this.forumIssueInfo = forumIssueInfo;
+}
+public List<Object[]> getJoinPersonList()
+{
+	return joinPersonList;
+}
+
+public void setJoinPersonList( List<Object[]> joinPersonList )
+{
+	this.joinPersonList = joinPersonList;
+}
+
+//********************************************************************************************
+public void setForumMessageInfo(ForumMessageInfo forumMessageInfo) {
+	this.forumMessageInfo = forumMessageInfo;
 }
 }
 
