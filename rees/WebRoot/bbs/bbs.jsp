@@ -151,9 +151,20 @@
 											<select name="forumIssueInfo.issueStatus"   style="width:110px">
 											   <option  value="1">进行中</option>
                                                 <option  value="0">已结束</option>
-                                                
                                                </select>
+										</td></tr>
+										<s:if test="forumIssueInfo.id != ''">
+									</s:if>
+									<s:else>
+									<tr>
+										<td height="26" align="right" bgcolor="#FFFFFF">
+											<strong>发送通知：</strong>
 										</td>
+										<td height="26" align="left" bgcolor="#FFFFFF">
+											<s:checkbox id="isSendNotice" name="isSendNotice" checked="true" value="1" />是否立即发送通知
+										</td>
+									</tr>
+									</s:else>
 									<tr>
 										<td height="26" colspan="2" align="center" bgcolor="#FFFFFF">
 											<input name="addBtn" type="button" class="btn_2_3" id="addBtn" value="确定">

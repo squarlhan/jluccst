@@ -28,6 +28,12 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	}
 	-->
 	</style>
+	<style type="text/css">
+	<!--
+	.STYLE2 {color: #FF0000}
+	.STYLE3 {color: #00FF00}
+	-->
+	</style>
 	<script type="text/javascript">
 
 		$(function(){
@@ -164,7 +170,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           	     <s:property value="createTimeStr"/>&nbsp;      
                </td>
                <td height="26" align="center" bgcolor="#FFFFFF">
-               <s:if test="issueStatus==1">进行中</s:if><s:if test="issueStatus==0">已结束</s:if>&nbsp;
+               <s:if test="issueStatus==1"><span class="STYLE3">进行中</span></s:if><s:if test="issueStatus==0"><span class="STYLE2">已结束</span></s:if>&nbsp;
                 </td>
              </tr>
               </s:iterator>

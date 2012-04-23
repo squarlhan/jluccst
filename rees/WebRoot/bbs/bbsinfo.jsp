@@ -49,9 +49,15 @@
             <tr>
               <td width="69%" valign="top" bgcolor="#FFFFFF"><table width="100%" border="0">
                 <tr>
-                  <td height="270px" colspan="2" valign="top" style="padding:5px;">
+                <s:if test="forumIssueInfo.issueStatus != 1">
+                  <td height="390px" colspan="2" valign="top" style="padding:3px;">
+                  <div style="height:390px;overflow-y:scroll;">
+                  </s:if>
+                  <s:else>
+                  <td height="270px" colspan="2" valign="top" style="padding:3px;">
                   <div style="height:270px;overflow-y:scroll;">
-	                  <table width="100%" border="0" style="margin-top:10px;">
+                  </s:else>
+	                  <table width="100%" border="0" style="margin-top:5px;">
 	                  <s:iterator value="pagination.data" status="obj">
 	                  <tr>
 	              			<td height="26" bgcolor="#FFFFFF">
@@ -67,6 +73,7 @@
 					</div>
 				</td>
                   </tr>
+                  <s:if test="forumIssueInfo.issueStatus == 1">
                 <tr>
                   <td height="28" colspan="2" background="images/bottombg.jpg">&nbsp;</td>
                   </tr>
@@ -79,6 +86,7 @@
                   <td align="center"><input name="addBtn2" type="submit" class="btn_4" id="addBtn2" value="提交" onclick="if(document.all('forumMessageInfo.messageContent').value == '') return false;">
                     <input name="addBtn3" type="reset" class="btn_4" id="addBtn3" value="清空" style="margin-top:5px" onclick="document.all('forumMessageInfo.messageContent').value = '';"></td>
                 </tr>
+                </s:if>
               </table></td>
               <td width="31%" valign="top" bgcolor="#FFFFFF"><table width="100%" height="396" border="0">
                 <tr>
