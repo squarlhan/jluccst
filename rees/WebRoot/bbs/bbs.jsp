@@ -131,7 +131,7 @@
 											<strong>话题内容：</strong>
 										</td>
 										<td height="26" align="left" bgcolor="#FFFFFF">
-											<s:textfield id="forumIssueInfo.issueContent" name="forumIssueInfo.issueContent" cssStyle="width: 250px;"></s:textfield>
+											<s:textarea id="forumIssueInfo.issueContent" name="forumIssueInfo.issueContent" cssStyle="width: 250px;"></s:textarea>
 										</td>
 									</tr>
 									<!-- tr>
