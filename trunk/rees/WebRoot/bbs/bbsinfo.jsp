@@ -26,7 +26,7 @@
   <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>进入论坛窗口</title>
-<link type="text/css" rel="stylesheet" href="../style.css" />
+<link type="text/css" rel="stylesheet" href="css/style.css" />
 <script type="text/javascript" src="../js/jquery-1.4.2.min.js"></script>
 <script type="text/javascript">
 <!--
@@ -49,16 +49,15 @@
             <tr>
               <td width="69%" valign="top" bgcolor="#FFFFFF"><table width="100%" border="0">
                 <tr>
-                  <td height="421" colspan="2" valign="top" style="padding:5px;">
-                  <div style="height:420px;overflow-y:scroll;">
+                  <td height="270px" colspan="2" valign="top" style="padding:5px;">
+                  <div style="height:270px;overflow-y:scroll;">
 	                  <table width="100%" border="0" style="margin-top:10px;">
 	                  <s:iterator value="pagination.data" status="obj">
 	                  <tr>
 	              			<td height="26" bgcolor="#FFFFFF">
-		                       [<s:property value="messageTimeStr"/>]&nbsp;
-		                       [<s:property value="publisherDept"/>]&nbsp;
-		                       [<s:property value="publisher"/>]说：
-		                       &nbsp; <s:property value="messageContent"/>
+	              				<s:property value="messageContent"/><br/>
+	              				<b><s:property value="publisher"/></b>--<s:property value="publisherDept"/>
+	              				&nbsp;&nbsp;<s:property value="messageTimeStr"/>
 	             			 </td>
 	                  </tr>
 	                  </s:iterator>
@@ -69,13 +68,13 @@
 				</td>
                   </tr>
                 <tr>
-                  <td height="28" colspan="2" background="../images/bottombg.jpg">&nbsp;</td>
+                  <td height="28" colspan="2" background="images/bottombg.jpg">&nbsp;</td>
                   </tr>
                 <tr>
                   <td>
                   	<s:hidden id="hid_forumMessageInfoId" name="forumMessageInfo.issueId" value="%{issueId}"></s:hidden>
                   	<s:hidden id="hid_forumMessageInfoId" name="issueId" value="%{issueId}"></s:hidden>
-                  	<s:textarea id="forumMessageInfo.messageContent" name="forumMessageInfo.messageContent" cols="85" rows="5" theme="simple"></s:textarea>
+                  	<s:textarea id="forumMessageInfo.messageContent" name="forumMessageInfo.messageContent" cols="85" rows="4" theme="simple"></s:textarea>
                   </td>
                   <td align="center"><input name="addBtn2" type="submit" class="btn_4" id="addBtn2" value="提交" onclick="if(document.all('forumMessageInfo.messageContent').value == '') return false;">
                     <input name="addBtn3" type="reset" class="btn_4" id="addBtn3" value="清空" style="margin-top:5px" onclick="document.all('forumMessageInfo.messageContent').value = '';"></td>
@@ -83,24 +82,23 @@
               </table></td>
               <td width="31%" valign="top" bgcolor="#FFFFFF"><table width="100%" height="396" border="0">
                 <tr>
-                  <td height="28" background="../images/bottombg.jpg"><strong>--<s:property value="forumIssueInfo.issueName"/>--</strong></td>
+                  <td height="28" background="images/bottombg.jpg"><strong>--<s:property value="forumIssueInfo.issueName"/>--</strong></td>
                   </tr>
                 <tr>
                   <td height="87" align="left" valign="top" style="padding:5px;"><s:property value="forumIssueInfo.issueContent"/></td>
                   </tr>
                 <tr>
-                  <td height="28" background="../images/bottombg.jpg"><strong>--参与用户列表--</strong>&nbsp;</td>
+                  <td height="28" background="images/bottombg.jpg"><strong>--参与用户列表--</strong>&nbsp;</td>
                 </tr>
                 <tr>
-                  <td height="205" valign="top" style="padding:5px;"><table width="78" border="0" height="140">
+                  <td height="205" valign="top" style="padding:5px;"><table width="100%" border="0" height="140">
                    <s:iterator value="joinPersonList" status="of">  
-			          <s:iterator value="top"><s:property />&nbsp;&nbsp;&nbsp;&nbsp;</s:iterator><br/>  
+			          <s:iterator value="top"><s:property />--</s:iterator><br/>  
                     </s:iterator>  
                   </table></td>
                 </tr>
               </table></td>
             </tr>
-            
           </table></td>
         </tr>
         

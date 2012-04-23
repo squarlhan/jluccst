@@ -143,7 +143,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
           		<input name="deletepointbtn" type="button" class="btn_4" id="deletepointbtn" value="删除话题"></td>
           </tr>
     </table></td></tr>
-    <tr><td><table width="821" border="0" cellpadding="5" cellspacing="1" bgcolor="#d5e4fd">
+    <tr><td><table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#d5e4fd">
              <tr>
                <td align="center" background="images/headerbg.jpg">  
    				<s:checkbox theme="simple" id="cbk_all" name="all"></s:checkbox>
