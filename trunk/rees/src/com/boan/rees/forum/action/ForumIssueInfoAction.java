@@ -1,12 +1,16 @@
 package com.boan.rees.forum.action;
 
+import java.util.Calendar;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.boan.rees.forum.model.ForumIssueInfo;
+import com.boan.rees.forum.model.NoticeInfo;
 import com.boan.rees.forum.service.IForumIssueInfoService;
+import com.boan.rees.forum.service.INoticeInfoService;
 import com.boan.rees.utils.action.BaseActionSupport;
 import com.boan.rees.utils.page.Pagination;
 
@@ -31,7 +35,12 @@ public class ForumIssueInfoAction extends BaseActionSupport {
 	@Autowired
 	@Qualifier("forumIssueInfoService")
 	private IForumIssueInfoService forumIssueInfoService;
-	
+	/**
+	 * 用于调用数据库相关操作
+	 */
+	@Autowired
+	@Qualifier("noticeInfoService")
+	private INoticeInfoService noticeInfoService;
 	/**
 	 * 定义一个实体用于添加/修改页的数据绑定和显示
 	 */
@@ -47,41 +56,10 @@ public class ForumIssueInfoAction extends BaseActionSupport {
 	 * 页面所选行的id
 	 */
 	private String[] ids;
-	
-
-	public String[] getIds() {
-		return ids;
-	}
-
-	public void setIds(String[] ids) {
-		this.ids = ids;
-	}
-
-	public String getMessage() {
-		return message;
-	}
-
-	public void setMessage(String message) {
-		this.message = message;
-	}
-
-	public ForumIssueInfo getForumIssueInfo() {
-		return forumIssueInfo;
-	}
-
-	public void setForumIssueInfo(ForumIssueInfo forumIssueInfo) {
-		this.forumIssueInfo = forumIssueInfo;
-	}
-
-	public Pagination<ForumIssueInfo> getPagination() {
-		return pagination;
-	}
-
-	public void setPagination(Pagination<ForumIssueInfo> pagination) {
-		this.pagination = pagination;
-	}
-	
-	
+	/**
+	 * 是否立即发送通知
+	 */
+	private String isSendNotice;
 	//*******************************************************************************************
 	/**
 	 * 显示列表页
@@ -126,6 +104,40 @@ public class ForumIssueInfoAction extends BaseActionSupport {
 			//调用service保存方法向数据库保存信息
 			forumIssueInfo.setCreator( sessionUserCName);
 			forumIssueInfoService.save(forumIssueInfo);
+			
+			if(isSendNotice.equals( "true" ))
+			{
+				NoticeInfo noticeInfo = new NoticeInfo();
+				noticeInfo.setPublisher( sessionUserCName ); 
+				String dept = "";
+				if(sessionCompanyName != null && sessionCompanyName.length() > 0)
+				{
+					dept = sessionCompanyName;
+				}
+				if(sessionFactoryName != null && sessionFactoryName.length() > 0)
+				{
+					dept = dept + " " +sessionFactoryName;
+				}
+				if(sessionWorkshopName != null && sessionWorkshopName.length() > 0)
+				{
+					dept = dept + " " +sessionWorkshopName;
+				}
+				noticeInfo.setPublisherDept( dept );
+				
+				noticeInfo.setNoticeTitle( "论坛中：["+forumIssueInfo.getIssueName()+"]需要您参与！" );
+				noticeInfo.setNoticeContent( "论坛中：["+forumIssueInfo.getIssueName()+"]需要您参与！<br/>内容：" +forumIssueInfo.getIssueContent() );
+				
+				noticeInfo.setNoticePublishtime( Calendar.getInstance() );
+				try{
+					noticeInfoService.save( noticeInfo );
+				}catch(Exception e)
+				{
+					e.printStackTrace();
+					message= "保存失败";
+					return this.INPUT;
+				}
+				
+			}
 			message = "保存成功！";
 		}catch(Exception e){
 			e.printStackTrace();
@@ -168,7 +180,47 @@ public class ForumIssueInfoAction extends BaseActionSupport {
 	public String toModifyForumIssueInfo(){
 		return toAddForumIssueInfo();
 	}
-	
+	public String getIsSendNotice()
+	{
+		return isSendNotice;
+	}
+
+	public void setIsSendNotice( String isSendNotice )
+	{
+		this.isSendNotice = isSendNotice;
+	}
+
+	public String[] getIds() {
+		return ids;
+	}
+
+	public void setIds(String[] ids) {
+		this.ids = ids;
+	}
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+
+	public ForumIssueInfo getForumIssueInfo() {
+		return forumIssueInfo;
+	}
+
+	public void setForumIssueInfo(ForumIssueInfo forumIssueInfo) {
+		this.forumIssueInfo = forumIssueInfo;
+	}
+
+	public Pagination<ForumIssueInfo> getPagination() {
+		return pagination;
+	}
+
+	public void setPagination(Pagination<ForumIssueInfo> pagination) {
+		this.pagination = pagination;
+	}
 }
 
 
