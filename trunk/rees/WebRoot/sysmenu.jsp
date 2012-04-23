@@ -264,7 +264,7 @@
 												<img src="images/menuto.jpg" width="5" height="5" />
 											</td>
 											<td>
-												<a href="openForumIssueInfoManageAction.action" target="mainFrame">论坛管理</a>
+												<a href="bbs/bbsmanage.jsp" target="mainFrame">论坛管理</a>
 											</td>
 										</tr>
 										<tr>
@@ -272,7 +272,7 @@
 												<img src="images/menuto.jpg" width="5" height="5" />
 											</td>
 											<td>
-												<a href="openForumIssueInfoAction.action" target="mainFrame">论坛</a>
+												<a href="bbs/bbsinfolist.jsp" target="mainFrame">论坛</a>
 											</td>
 										</tr>
 									</table>
