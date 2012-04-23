@@ -78,7 +78,7 @@ public class ForumMessageInfoAction extends BaseActionSupport {
 		//System.out.println("如果添加页需要做一些初始化操作 ，在这写代码！");
 		
 		forumIssueInfo = forumIssueInfoService.get( issueId );
-		
+		forumIssueInfo.setIssueContent( forumIssueInfo.getIssueContent().replaceAll( "\r\n", "<br/>" ) );
 		Map<String,String> values = new HashMap<String,String>();
 		values.put( "issueId", issueId );
 		pagination.setCurrentPage( 1 );
