@@ -92,7 +92,8 @@
 			 */
 		 	$.fn.close = function(){
 		 		$("#closeBtn").click(function(){
-		  			//parent.$("#windown-close").click();
+		  			parent.$("#windown-close").click();
+		  			parent.window.location.href=parent.window.location.href;
 		  		});
 			}
 			/**
