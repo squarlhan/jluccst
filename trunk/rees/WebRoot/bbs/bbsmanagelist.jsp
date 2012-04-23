@@ -34,9 +34,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		
 			$("#addbtn").click(function(){
 				parent.parent.parent.tipsWindown("添加话题","iframe:openAddForumIssueInfoAction.action","460","250","true","","true","no");
+				parent.parent.$("#windown-close").bind('click',function(){
+					window.location.href=window.location.href;
+				});
 			});			
             $("#gotobtn").click(function(){
 				parent.parent.parent.tipsWindown("进入聊天室","iframe:openAddForumMessageInfoAction.action","460","250","true","","true","no");
+				parent.parent.$("#windown-close").bind('click',function(){
+					window.location.href=window.location.href;
+				});
 			});
 			$.fn.CheckBoxAll("cbk_all");
 	  		$.fn.UnCheckBoxAll("ids","cbk_all");
@@ -49,6 +55,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  				var url = $(this).attr("url");
 	  				parent.parent.parent.tipsWindown("修改话题","iframe:"+url,"460","350","true","","true","no");
 	  				//window.location.href=window.location.href;
+	  				parent.parent.$("#windown-close").bind('click',function(){
+						window.location.href=window.location.href;
+					});
 	  			});
 	  		});
 	  		/**
@@ -57,7 +66,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  		$('a[name="notice"]').each(function(){
 	  			$(this).click(function(){
 	  				var url = $(this).attr("url");
-	  				alert(url);
+	  				parent.parent.$("#windown-close").bind('click',function(){
+						window.location.href=window.location.href;
+					});
 	  				if(window.confirm("您确定要发送通知吗？")){
 	  					$.post(url, $('#form1').serialize(), function(data){window.location.href=window.location.href;});
 	  				}
@@ -72,6 +83,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  				if(window.confirm("您确定要删除这条信息吗？")){
 	  					$.post(url, $('#form1').serialize(), function(data){window.location.href=window.location.href;});
 	  				}
+	  				parent.parent.$("#windown-close").bind('click',function(){
+						window.location.href=window.location.href;
+					});
 	  			});
 	  		});
 	  		
@@ -83,6 +97,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   				if(window.confirm("您确定要删除所选信息吗？")){
   					$.post(url, $('#form1').serialize(), function(data){window.location.href=window.location.href;});
   				}
+  				parent.parent.$("#windown-close").bind('click',function(){
+					window.location.href=window.location.href;
+				});
 	  		});
 	  		
 		});
