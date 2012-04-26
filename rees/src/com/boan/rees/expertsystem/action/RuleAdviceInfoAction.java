@@ -170,6 +170,7 @@ public class RuleAdviceInfoAction extends BaseActionSupport{
 	 * @return
 	 */
 	public String openModifyRuleAdviceInfo(){
+		deviceTypeList=deviceTypeService.findAllDeviceType();
 		int id = ruleAdviceInfo.getId();
 		ruleAdviceInfo = service.get(id);
 		return SUCCESS;

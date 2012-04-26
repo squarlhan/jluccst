@@ -41,7 +41,7 @@ public class AdviceView  implements Serializable {
 	 * 设备类型对应ID，
 	 */
 	@Column(name = "DEVICE_TYPE_ID")
-	private int deviceTypeId;
+	private String deviceTypeId;
 	/**
 	 * 设备类型
 	 */
@@ -71,12 +71,13 @@ public class AdviceView  implements Serializable {
 	public void setAdvice(String advice) {
 		this.advice = advice;
 	}
-	public int getDeviceTypeId() {
+	public String getDeviceTypeId() {
 		return deviceTypeId;
 	}
-	public void setDeviceTypeId(int deviceTypeId) {
+	public void setDeviceTypeId(String deviceTypeId) {
 		this.deviceTypeId = deviceTypeId;
 	}
+
 
 }
 

@@ -19,6 +19,22 @@
     		<result name="success">/expertsystem/expertinfo.jsp</result>
     		<result name="input">/expertsystem/expertinfo.jsp</result>
     	</action>
+    	<action name="openAdviceAction" class="ruleAdviceInfoAction" method="openModifyRuleAdviceInfo">
+    		<result name="success">/expertsystem/expertinfo.jsp</result>
+    		<result name="input">/expertsystem/expertinfo.jsp</result>
+    	</action>
+    	
+    	<action name="openModifyAdviceAction" class="ruleAdviceInfoAction" method="openModifyRuleAdviceInfo">
+    		<result name="success">/expertsystem/expertinfo.jsp</result>
+    		<result name="input">/expertsystem/expertinfo.jsp</result>
+    	</action>
+    	<action name="toModifyRuleAdviceInfoAction" class="ruleAdviceInfoAction" method="toModifyRuleAdviceInfo">
+    		<result name="success">/expertsystem/expertinfo.jsp</result>
+    		<result name="input">/expertsystem/expertinfo.jsp</result>
+    	</action>
+    	<action name="deleteAdviceAction" class="ruleAdviceInfoAction" method="deleteRuleAdviceInfo">
+    	</action>
+    	
       </package>	    
       
 	

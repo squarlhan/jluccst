@@ -90,7 +90,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  		 * 删除所选建议信息
 	  		 */
 	  		$("#deleteselectedbtn").click(function(){
-  				var url = "deleteDeviceAction.action";
+  				var url = "deleteAdviceAction.action";
   				if(window.confirm("您确定要删除所选信息吗？")){
   					$.post(url, $('#form1').serialize(), function(data){window.location.href=window.location.href;});
   				}
@@ -145,10 +145,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
          
           
           <td height="26" colspan="2" align="center" bgcolor="#FFFFFF" nowrap>
-          	<s:url id="edit_url" action="openModifyDeviceAction">   
-				<s:param name="device.id" value="id"></s:param>   
+          	<s:url id="edit_url" action="openModifyAdviceAction">   
+				<s:param name="ruleAdviceInfo.id" value="id"></s:param>   
 			</s:url>
-			<s:url id="delete_url" action="deleteDeviceAction">   
+			<s:url id="delete_url" action="deleteAdviceAction">   
 				<s:param name="ids" value="id"></s:param>   
 			</s:url>
          	<a name="edit" href="javascript:void(0);" url="${edit_url}">编辑</a>  
