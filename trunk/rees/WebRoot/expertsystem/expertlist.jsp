@@ -94,9 +94,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   					$.post(url, $('#form1').serialize(), function(data){window.location.href=window.location.href;});
   				}
 	  		});
-	  	
 	  		
-		
+		});
 	//-->
 	</script>
 
