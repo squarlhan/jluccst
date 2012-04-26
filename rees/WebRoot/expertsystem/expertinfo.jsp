@@ -29,55 +29,25 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   		});
   	});
   	
-  	/**
-	 * 在原来url上加上随机时间
-	 */
-  	$.fn.change_url=function(old_url){
-  		var url = old_url;
-		if(url.split("?").length>1){//原来有参数
-			tempArr = url.split("?");
-			//?前的地址
-			var url =  tempArr[0]; 
-			//获取?号以后的参数
-			var tail = tempArr[1];
-        	var paramGroup = tail.split("&");            
-        	for(var i=0, len=paramGroup.length; i<len; i++) {                
-            	tempArr = paramGroup[i].split("=");
-	            if(tempArr[0]!="time"){
-	            	if(url.split("?").length==1)
-	          			url = url + "?"+tempArr[0]+"="+ tempArr[1];
-	          		else
-	          			url = url + "&"+tempArr[0]+"="+ tempArr[1];
-	          	}
-       		}
-       		if(url.split("?").length==1){
-        		url = url+"?time="+(new Date()).getTime();
-        	}else{
-        		url = url+"&time="+(new Date()).getTime();
-        	}
-       		return url;
-		}else{
-			return url+"?time="+(new Date()).getTime();
-		} 
-  	}
+
   	</script>
   </head>
   
   <body>
-    <s:form name="editForm" action="toAddDemoAction.action" theme="simple">
+    <s:form name="editForm" action="toAddRuleAdviceInfoAction.action" theme="simple">
     	<table border="1">
     		<tr>
     			<td colspan="2" style="color:red">
 	    			<s:property value="initString"/>
     			</td>
     		</tr>
-    		<tr>
+    		<tr>请选择设备类型
     			<td>
-    			名称：
+    			
     			</td>
-    			<td>
-    			<s:textfield id="txt_name" name="demoModel.name"/>
-    			</td>
+    			<td height="26" align="left" bgcolor="#FFFFFF">
+				<s:select id="sel_deviceType" list="deviceTypeList" listKey="id" listValue="typeName" headerKey="nothing" headerValue="---请选择---" name="ruleAdviceInfo.deviceTypeId" cssStyle="width: 250px;"></s:select>
+				</td>
     		</tr>
     		
     		<tr> 

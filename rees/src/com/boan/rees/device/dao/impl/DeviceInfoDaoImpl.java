@@ -19,7 +19,7 @@ import com.boan.rees.utils.dao.impl.BaseDao;
 
 
 /**
- * XXX 类
+ * 设备信息Dao实现 类
  * @author jiangmeidi
  * @version 1.0.0
  */
