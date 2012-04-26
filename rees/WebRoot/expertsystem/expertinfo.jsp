@@ -41,9 +41,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    			<s:property value="initString"/>
     			</td>
     		</tr>
-    		<tr>请选择设备类型
+    		<tr>
     			<td>
-    			
+    			请选择设备类型
     			</td>
     			<td height="26" align="left" bgcolor="#FFFFFF">
 				<s:select id="sel_deviceType" list="deviceTypeList" listKey="id" listValue="typeName" headerKey="nothing" headerValue="---请选择---" name="ruleAdviceInfo.deviceTypeId" cssStyle="width: 250px;"></s:select>
@@ -52,10 +52,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     		
     		<tr> 
     			<td>
-    			年龄：
+    			建议：
     			</td>
     			<td>
-    			<s:textfield id="txt_age" name="demoModel.age"/>
+    			<s:textfield id="txt_age" name="ruleAdviceInfo.advice"/>
     			</td>
     		</tr>
     		<tr>
