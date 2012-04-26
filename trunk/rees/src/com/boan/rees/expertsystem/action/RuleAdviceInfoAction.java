@@ -127,21 +127,7 @@ public class RuleAdviceInfoAction extends BaseActionSupport{
 		return this.SUCCESS;
 	}
 
-    /**
-	 * 添加新建议
-	 * @return
-	 */
-	public String toAddRuleAdviceInfo(){
-		try {
-			//保存设备对象
-			service.save(ruleAdviceInfo);
-			message="保存成功！";
-		} catch (Exception e) {
-			e.printStackTrace();
-			message="保存失败！";
-		}
-		return SUCCESS;
-	}
+    
 
 	/**
 	 * 打开添加新建议页
@@ -151,6 +137,22 @@ public class RuleAdviceInfoAction extends BaseActionSupport{
 	public String openAddRuleAdviceInfo(){
 		deviceTypeList=deviceTypeService.findAllDeviceType();
 		ruleAdviceInfo = new RuleAdviceInfo();
+		return SUCCESS;
+	}
+	/**
+	 * 添加新建议
+	 * @return
+	 */
+	public String toAddRuleAdviceInfo(){
+		try {
+			//保存设备对象
+			
+			service.save(ruleAdviceInfo);
+			message="保存成功！";
+		} catch (Exception e) {
+			e.printStackTrace();
+			message="保存失败！";
+		}
 		return SUCCESS;
 	}
 

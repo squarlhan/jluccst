@@ -1,4 +1,5 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+	pageEncoding="utf-8"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <%@ taglib prefix="j" uri="/script-tags"%>
 <%@ taglib prefix="page" uri="/page-tags"%> 
@@ -46,7 +47,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	
 		$(function(){
 			/**
-	  		 * 添加设备信息
+	  		 * 添加建议信息
 	  		 */
 			$("#addbtn").click(function(){
 				
@@ -59,7 +60,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  		$.fn.uncheckall("ids","cbk_all");
 
 	  		/**
-	  		 * 修改设备信息
+	  		 * 修改建议信息
 	  		 */
 	  		$('a[name="edit"]').each(function(){
 	  			$(this).click(function(){
@@ -72,7 +73,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  		});
 	  		
 	  		/**
-	  		 * 删除单个设备信息
+	  		 * 删除单个建议信息
 	  		 */
 	  		$('a[name="delete"]').each(function(){
 	  			$(this).click(function(){
@@ -86,7 +87,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 
 	  		
 	  		/**
-	  		 * 删除所选设备信息
+	  		 * 删除所选建议信息
 	  		 */
 	  		$("#deleteselectedbtn").click(function(){
   				var url = "deleteDeviceAction.action";
