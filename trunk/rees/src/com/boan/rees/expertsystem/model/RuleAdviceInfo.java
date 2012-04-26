@@ -21,7 +21,7 @@ import org.hibernate.annotations.GenericGenerator;
  * @version 1.0.0
  */
 @Entity
-@Table(name = "rule_advice")
+@Table(name = "rule_advice_info")
 public class RuleAdviceInfo  implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
@@ -41,7 +41,7 @@ public class RuleAdviceInfo  implements Serializable {
 	 * 设备类型对应ID，
 	 */
 	@Column(name = "DEVICE_TYPE_ID")
-	private int deviceTypeId;
+	private String deviceTypeId;
 	
 	
 	
@@ -60,12 +60,13 @@ public class RuleAdviceInfo  implements Serializable {
 	public void setAdvice(String advice) {
 		this.advice = advice;
 	}
-	public int getDeviceTypeId() {
+	public String getDeviceTypeId() {
 		return deviceTypeId;
 	}
-	public void setDeviceTypeId(int deviceTypeId) {
+	public void setDeviceTypeId(String deviceTypeId) {
 		this.deviceTypeId = deviceTypeId;
 	}
+	
 
 }
 

@@ -19,23 +19,107 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<meta http-equiv="description" content="This is my page">
 	<j:scriptlink css="true" jquery="true" validate="true" />
 	<script type="text/javascript">
-  	$(document).ready( function() {
-  		$("#btn_save").click(function(){
-  		
-  			parent.location.href = $.fn.change_url(parent.location.href);
-  		});
-  		$("#btn_close").click(function(){
+	
+
+	/**
+  	 * 验证条件
+  	 */
+	var _devicetype_submit = {
+		rules: {
+           "ruleAdviceInfo.advice":{required:true}
+         
+          
+		},messages:{
+			"ruleAdviceInfo.advice":
+			{
+				required:" 建议为必填项！"
+				
+			}
+			
+		}
+	};
+
+	/**
+		* 准备工作
+		*/
+	$(document).ready(function(){
+		$.fn.initPage();
+		
+  		$.validator.setDefaults({
+  			//验证框架的验证器的默认设置区
+			debug: false,onkeyup: false,onfocusout:false,focusCleanup: true,
+		    errorPlacement:function(error, element) {},
+			invalidHandler: function(form, validator) {
+	        	$.each(validator.invalid,function(key,value){
+	            	alert(value);document.getElementById(key).focus();return false;
+	        	}); 
+	    	}
+		})
+		$.fn.save();
+  		$.fn.close();
+
+  	});
+	
+	/**
+  	 * 保存
+  	 */
+	$.fn.save = function(){
+		
+		//如果有id就说明是修改action
+		var devicetype = $("#hid_adviceId").val();
+		
+			$("#btn_save").click(function() {
+			var validate_settings_submit = jQuery.extend({}, _devicetype_submit);
+           	var validator = $("form").validate(validate_settings_submit);
+           	if(!validator.form()){
+				return false;
+			}
+           	if( $.trim(devicetype) == "" )
+           	{
+           		form1.action = "toAddRuleAdviceInfoAction.action";
+           	}
+           	else
+           	{
+           		form1.action = "toModifyRuleAdviceInfoAction.action";
+           	}
+           	form1.submit();
+       	});
+     	}
+	
+	/**
+	 * 关闭
+	 */
+ 	$.fn.close = function(){
+ 		$("#btn_close").click(function(){
   			parent.$("#windown-close").click();
   		});
-  	});
-  	
+	}
+	
+ 	/**
+	 * 初始化页面元素
+	 */
+	$.fn.initPage = function(){
+		$("#txt_typeName").focus();
+		var err = $("#lb_error").html();
+		if(err!=null && $.trim(err)!="" ){
+			alert(err);
+		}
+		var message = $("#lb_message").html();
+		if(message!=null && $.trim(message)!="" ){
+			alert(message);
+			parent.$("#windown-close").click();
+		}
+	}
+</script>
 
-  	</script>
+  
   </head>
   
   <body>
-    <s:form name="editForm" action="toAddRuleAdviceInfoAction.action" theme="simple">
-    	<table border="1">
+    <s:form id="form1" name="form1" method="post"  theme="simple">
+    <s:label id="lb_message" name="message" cssStyle="display:none"></s:label>
+		<s:hidden id="hid_adviceId" name="ruleAdviceInfo.id"></s:hidden>
+    	<table width="100%" border="0" cellspacing="5" cellpadding="0">
     		<tr>
     			<td colspan="2" style="color:red">
 	    			<s:property value="initString"/>
