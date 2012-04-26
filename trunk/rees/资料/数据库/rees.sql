@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50516
 File Encoding         : 65001
 
-Date: 2012-04-22 16:00:32
+Date: 2012-04-26 21:10:43
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -140,6 +140,7 @@ CREATE TABLE `device_type` (
 -- ----------------------------
 -- Records of device_type
 -- ----------------------------
+INSERT INTO `device_type` VALUES ('1', 'aaaa', '2', '2', '2', null, null);
 INSERT INTO `device_type` VALUES ('2', '11', '2', '2', '2', null, null);
 INSERT INTO `device_type` VALUES ('402881e8366c496101366c4999110000', '1', '1', '1', '1', null, null);
 INSERT INTO `device_type` VALUES ('402881e8368291e601368293a92a0000', '22', '22', '22', '22', null, null);
@@ -414,34 +415,22 @@ CREATE TABLE `report_template` (
 -- ----------------------------
 
 -- ----------------------------
--- Table structure for `rule_ result _info`
--- ----------------------------
-DROP TABLE IF EXISTS `rule_ result _info`;
-CREATE TABLE `rule_ result _info` (
-  `RESULT_ID` int(50) NOT NULL,
-  `RESULT` varchar(500) DEFAULT NULL,
-  `DEVICE_TYPE_ID` int(11) NOT NULL,
-  PRIMARY KEY (`RESULT_ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of rule_ result _info
--- ----------------------------
-
--- ----------------------------
 -- Table structure for `rule_advice_info`
 -- ----------------------------
 DROP TABLE IF EXISTS `rule_advice_info`;
 CREATE TABLE `rule_advice_info` (
-  `ADVICE_ID` int(50) NOT NULL,
+  `ADVICE_ID` int(50) NOT NULL AUTO_INCREMENT,
   `ADVICE` varchar(500) DEFAULT NULL,
-  `DEVICE_TYPE_ID` int(11) NOT NULL,
+  `DEVICE_TYPE_ID` varchar(50) NOT NULL,
   PRIMARY KEY (`ADVICE_ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=126 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of rule_advice_info
 -- ----------------------------
+INSERT INTO `rule_advice_info` VALUES ('22', 'fdsf', '2');
+INSERT INTO `rule_advice_info` VALUES ('123', '12321', '2');
+INSERT INTO `rule_advice_info` VALUES ('125', 'rerrrrrr', '402881e8368291e601368293a92a0000');
 
 -- ----------------------------
 -- Table structure for `rule_device_info`
@@ -482,14 +471,29 @@ CREATE TABLE `rule_info` (
 -- ----------------------------
 DROP TABLE IF EXISTS `rule_reason_info`;
 CREATE TABLE `rule_reason_info` (
-  `REASON_ID` int(50) NOT NULL,
+  `REASON_ID` int(50) NOT NULL AUTO_INCREMENT,
   `REASON` varchar(500) DEFAULT NULL,
-  `DEVICE_TYPE_ID` int(11) NOT NULL,
+  `DEVICE_TYPE_ID` varchar(11) NOT NULL,
   PRIMARY KEY (`REASON_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of rule_reason_info
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `rule_result_info`
+-- ----------------------------
+DROP TABLE IF EXISTS `rule_result_info`;
+CREATE TABLE `rule_result_info` (
+  `RESULT_ID` int(50) NOT NULL AUTO_INCREMENT,
+  `RESULT` varchar(500) DEFAULT NULL,
+  `DEVICE_TYPE_ID` varchar(11) NOT NULL,
+  PRIMARY KEY (`RESULT_ID`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of rule_result_info
 -- ----------------------------
 
 -- ----------------------------
@@ -525,3 +529,9 @@ CREATE TABLE `template_report` (
 -- ----------------------------
 -- Records of template_report
 -- ----------------------------
+
+-- ----------------------------
+-- View structure for `advice_view`
+-- ----------------------------
+DROP VIEW IF EXISTS `advice_view`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `advice_view` AS select `rule_advice_info`.`ADVICE_ID` AS `ADVICE_ID`,`rule_advice_info`.`ADVICE` AS `ADVICE`,`rule_advice_info`.`DEVICE_TYPE_ID` AS `DEVICE_TYPE_ID`,`device_type`.`DEVICE_TYPE` AS `DEVICE_TYPE`,`device_type`.`ID` AS `ID` from (`rule_advice_info` join `device_type`) where (`device_type`.`ID` = `rule_advice_info`.`DEVICE_TYPE_ID`);
