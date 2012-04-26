@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">	
+<struts>
+	<!-- 设备分类管理 -->
+     <package name="rule_advice" extends="struts-default" namespace="/">
+    	
+    	<!-- 打开设备类型列表 -->
+    	<action name="openRuleAdviceAction" class="ruleAdviceInfoAction" method="openRuleAdviceInfo">
+    		<result name="success">/expertsystem/expertlist.jsp</result>
+    		<result name="input">/expertsystem/expertlist.jsp</result>
+    	</action>
+    	<action name="openAddAdviceAction" class="ruleAdviceInfoAction" method="openAddRuleAdviceInfo">
+    		<result name="success">/expertsystem/expertinfo.jsp</result>
+    		<result name="input">/expertsystem/expertinfo.jsp</result>
+    	</action>
+    	<action name="toAddRuleAdviceInfoAction" class="ruleAdviceInfoAction" method="toAddRuleAdviceInfo">
+    		<result name="success">/expertsystem/expertinfo.jsp</result>
+    		<result name="input">/expertsystem/expertinfo.jsp</result>
+    	</action>
+      </package>	    
+      
+	
+</struts>

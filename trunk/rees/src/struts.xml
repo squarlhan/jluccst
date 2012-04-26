@@ -29,6 +29,9 @@
 	
 	<!-- 例子配置 -->
 	<include file="com/boan/rees/demo/action/struts_demo.xml"></include>
+	<!-- 规则建议表配置 -->
+	<include file="com/boan/rees/expertsystem/action/struts_rule_advice.xml"></include>
+	
 	
 	<!-- 界面框架 -->
 	<include file="struts_ui.xml"></include>
@@ -38,6 +41,7 @@
 	
 	<!-- 设备管理模块配置 -->
 	<include file="com/boan/rees/device/action/struts_device.xml"></include>
+	
 	
 	<!-- 数据管理模块配置 -->
 	<include file="com/boan/rees/device/action/struts_point_data_manager.xml"></include>

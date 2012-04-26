@@ -31,5 +31,19 @@
              	<param name="pageNo">${pageNo}</param>
             </result>
         </action>
-    </package>	
+    </package>
+    <package name="user1" extends="struts-default" namespace="/">	
+    <action name="openDemo1Action" class="demo1Action" method="openDemo1">
+    <result name="success" >/demo/index1.jsp</result>
+    </action>
+    
+    <action name="openAddDemo1Action" class="demo1Action" method="openAddDemo1">
+    <result name="success" >/demo/info.jsp</result>
+    </action>
+    
+    <action name="toAddDemo1Action" class="demo1Action" method="toAddDemo1">
+    <result name="success" >/demo/info.jsp</result>
+    <result name="input" >/demo/error.jsp</result>
+    </action>
+    </package>
 </struts>
