@@ -145,8 +145,8 @@ public class RuleAdviceInfoAction extends BaseActionSupport{
 	 */
 	public String toAddRuleAdviceInfo(){
 		try {
+			deviceTypeList=deviceTypeService.findAllDeviceType();
 			//保存设备对象
-			
 			service.save(ruleAdviceInfo);
 			message="保存成功！";
 		} catch (Exception e) {
@@ -182,6 +182,7 @@ public class RuleAdviceInfoAction extends BaseActionSupport{
 	 */
 	public String toModifyRuleAdviceInfo(){
 		try {
+			deviceTypeList=deviceTypeService.findAllDeviceType();
 			service.update(ruleAdviceInfo);
 			message="保存成功！";
 		} catch (Exception e) {
