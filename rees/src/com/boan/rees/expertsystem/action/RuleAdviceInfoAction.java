@@ -60,7 +60,7 @@ public class RuleAdviceInfoAction extends BaseActionSupport{
 	/**
 	 * 页面所选行的id
 	 */
-	private String[] ids;
+	private Integer[] ids;
 	
 	/**
 	 * 操作提示
@@ -102,11 +102,13 @@ public class RuleAdviceInfoAction extends BaseActionSupport{
 		this.ruleAdviceInfo = ruleAdviceInfo;
 	}
 
-	public String[] getIds() {
+	
+
+	public Integer[] getIds() {
 		return ids;
 	}
 
-	public void setIds(String[] ids) {
+	public void setIds(Integer[] ids) {
 		this.ids = ids;
 	}
 

@@ -16,7 +16,7 @@ import com.boan.rees.utils.dao.impl.BaseDao;
  * @version 1.0.0
  */
 @Repository("ruleAdviceInfoDao")
-public class RuleAdviceInfoDaoImpl extends BaseDao<RuleAdviceInfo, String> implements IRuleAdviceInfoDao {
+public class RuleAdviceInfoDaoImpl extends BaseDao<RuleAdviceInfo, Integer> implements IRuleAdviceInfoDao {
 	@SuppressWarnings("unchecked")
 	@Override
 	public RuleAdviceInfo get(int id) {

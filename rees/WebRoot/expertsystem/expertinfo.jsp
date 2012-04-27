@@ -66,15 +66,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	$.fn.save = function(){
 		
 		//如果有id就说明是修改action
-		var adviceId = $("#hid_adviceId").val();
+		var devicetype = $("#hid_adviceId").val();
 		
 			$("#btn_save").click(function() {
 			var validate_settings_submit = jQuery.extend({}, _devicetype_submit);
-           	var validator = $("form1").validate(validate_settings_submit);
+           	var validator = $("form").validate(validate_settings_submit);
            	if(!validator.form()){
 				return false;
 			}
-           	if( $.trim(adviceId) == "0" )
+           	if( $.trim(devicetype) == "0" )
            	{
            		form1.action = "toAddRuleAdviceInfoAction.action";
            	}

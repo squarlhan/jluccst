@@ -42,7 +42,7 @@ public class RuleAdviceInfoServiceImpl implements IRuleAdviceInfoService{
 	}
 
 	@Override
-	public void deleteRuleAdviceInfo(String... ids ){
+	public void deleteRuleAdviceInfo(Integer... ids ){
 		ruleAdviceInfoDao.delete(ids);
 	}
 	@Override
