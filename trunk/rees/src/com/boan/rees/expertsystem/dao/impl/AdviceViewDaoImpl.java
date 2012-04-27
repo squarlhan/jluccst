@@ -16,7 +16,7 @@ import com.boan.rees.utils.dao.impl.BaseDao;
  * @version 1.0.0
  */
 @Repository("adviceViewDao")
-public class AdviceViewDaoImpl extends BaseDao<AdviceView, String> implements IAdviceViewDao {
+public class AdviceViewDaoImpl extends BaseDao<AdviceView, Integer> implements IAdviceViewDao {
 	@SuppressWarnings("unchecked")
 	@Override
 	public AdviceView get(int id) {

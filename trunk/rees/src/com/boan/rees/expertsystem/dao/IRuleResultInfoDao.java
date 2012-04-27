@@ -4,6 +4,7 @@
 
 package com.boan.rees.expertsystem.dao;
 
+import com.boan.rees.expertsystem.model.RuleAdviceInfo;
 import com.boan.rees.expertsystem.model.RuleResultInfo;
 import com.boan.rees.utils.dao.IBaseDao;
 
@@ -12,7 +13,7 @@ import com.boan.rees.utils.dao.IBaseDao;
  * @author jiangmeidi
  * @version 1.0.0
  */
-public interface IRuleResultInfoDao extends IBaseDao<RuleResultInfo, String>{
-
+public interface IRuleResultInfoDao extends IBaseDao<RuleResultInfo, Integer>{
+	public RuleResultInfo get(int id);
 }
 

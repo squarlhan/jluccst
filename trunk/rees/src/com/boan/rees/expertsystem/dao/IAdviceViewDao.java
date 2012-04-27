@@ -9,11 +9,11 @@ import com.boan.rees.expertsystem.model.RuleAdviceInfo;
 import com.boan.rees.utils.dao.IBaseDao;
 
 /**
- * XXX 类
+ * 建议视图dao接口 类
  * @author jiangmeidi
  * @version 1.0.0
  */
-public interface IAdviceViewDao extends IBaseDao<AdviceView, String>{
+public interface IAdviceViewDao extends IBaseDao<AdviceView, Integer>{
 	public AdviceView get(int id);
 }
 
