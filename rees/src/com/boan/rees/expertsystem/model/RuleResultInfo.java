@@ -29,17 +29,18 @@ public class RuleResultInfo {
 	 */
 	@Column(name = "RESULT_ID")
 	private int id;
-    
-	 /**
-     * 设备类型对应ID 
-     */
-	@Column(name = "RESULT")
-	private String result;
 	/**
      * 现象描述
      */
+	
+	@Column(name = "RESULT")
+	private String result;
+	
+	/**
+	 * 设备类型对应ID
+	 */
 	@Column(name = "DEVICE_TYPE_ID")
-	private int deviceTypeId;
+	private String deviceTypeId;
 	
 	public int getId() {
 		return id;
@@ -53,12 +54,13 @@ public class RuleResultInfo {
 	public void setResult(String result) {
 		this.result = result;
 	}
-	public int getDeviceTypeId() {
+	public String getDeviceTypeId() {
 		return deviceTypeId;
 	}
-	public void setDeviceTypeId(int deviceTypeId) {
+	public void setDeviceTypeId(String deviceTypeId) {
 		this.deviceTypeId = deviceTypeId;
 	}
+	
 	
 	
 	

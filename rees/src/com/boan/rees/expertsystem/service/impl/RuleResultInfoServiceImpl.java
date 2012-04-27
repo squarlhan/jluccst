@@ -4,12 +4,66 @@
 
 package com.boan.rees.expertsystem.service.impl;
 
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
+
+import com.boan.rees.expertsystem.dao.IRuleResultInfoDao;
+import com.boan.rees.expertsystem.model.RuleResultInfo;
+import com.boan.rees.expertsystem.service.IRuleResultInfoService;
+import com.boan.rees.utils.page.Pagination;
+
 /**
- * XXX 类
+ * 现象Service接口实现 类
  * @author jiangmeidi
  * @version 1.0.0
  */
-public class RuleResultInfoServiceImpl {
+@Service("ruleResultInfoService")
+public class RuleResultInfoServiceImpl implements IRuleResultInfoService{
+	@Autowired
+	@Qualifier("ruleResultInfoDao")
+	private IRuleResultInfoDao ruleResultInfoDao;
+
+	
+	@Override
+	public List<RuleResultInfo> findAllRuleResultInfo(){
+		return ruleResultInfoDao.findAll();
+	}
+	
+	@Override
+	public RuleResultInfo get(int id){
+		return ruleResultInfoDao.get(id);
+	}
+
+	@Override
+	public void deleteRuleResultInfo(Integer... ids ){
+		ruleResultInfoDao.delete(ids);
+	}
+	@Override
+	public void save(RuleResultInfo table1){
+		ruleResultInfoDao.save(table1);
+	}
+	@Override
+	public void update(RuleResultInfo ruleResultInfoInfo){
+		ruleResultInfoDao.update(ruleResultInfoInfo);
+	}
+	@Override
+	public Pagination<RuleResultInfo> findRuleResultInfoForPage(Map<String, ?> values,Pagination<RuleResultInfo> pagination){
+		
+		String hql = "from RuleResultInfo";
+		List<RuleResultInfo> data = ruleResultInfoDao.findForPage(hql, values, pagination.getStartIndex(), pagination.getPageSize());
+		hql = "select count(*) from RuleResultInfo";
+		int totalRows = ruleResultInfoDao.findCountForPage(hql, values);
+		pagination.setTotalRows(totalRows);
+		pagination.setData(data);
+		return pagination;
+	}
+	//public RuleResultInfo findbyDeviceTypeId(String id){
+		
+	//}
 
 }
 

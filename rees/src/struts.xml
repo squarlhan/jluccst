@@ -31,8 +31,12 @@
 	<include file="com/boan/rees/demo/action/struts_demo.xml"></include>
 	<!-- 规则建议表配置 -->
 	<include file="com/boan/rees/expertsystem/action/struts_rule_advice.xml"></include>
-	
-	
+		
+		<!-- 规则原因表配置 -->
+	<include file="com/boan/rees/expertsystem/action/struts_rule_reason.xml"></include>
+		
+		<!-- 规则现象表配置 -->
+	<include file="com/boan/rees/expertsystem/action/struts_rule_result.xml"></include>
 	<!-- 界面框架 -->
 	<include file="struts_ui.xml"></include>
 	

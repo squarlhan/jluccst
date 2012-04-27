@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">	
+<struts>
+	<!-- 现象分类管理 -->
+     <package name="rule_result" extends="struts-default" namespace="/">
+    	
+    	<!-- 打开现象类型列表 -->
+    	<action name="openRuleResultAction" class="ruleResultInfoAction" method="openRuleResultInfo">
+    		<result name="success">/expertsystem/expertresultlist.jsp</result>
+    		<result name="input">/expertsystem/expertresultlist.jsp</result>
+    	</action>
+    	<!-- 打开添加现象类型列表 -->
+    	<action name="openAddResultAction" class="ruleResultInfoAction" method="openAddRuleResultInfo">
+    		<result name="success">/expertsystem/expertresultinfo.jsp</result>
+    		<result name="input">/expertsystem/expertresultinfo.jsp</result>
+    	</action>
+    	<!-- 添加现象类型列表 -->
+    	<action name="toAddRuleResultInfoAction" class="ruleResultInfoAction" method="toAddRuleResultInfo">
+    		<result name="success">/expertsystem/expertresultinfo.jsp</result>
+    		<result name="input">/expertsystem/expertresultinfo.jsp</result>
+    	</action>
+    	<!-- 打开修改现象类型列表 -->
+    	
+    	<action name="openModifyResultAction" class="ruleResultInfoAction" method="openModifyRuleResultInfo">
+    		<result name="success">/expertsystem/expertresultinfo.jsp</result>
+    		<result name="input">/expertsystem/expertresultinfo.jsp</result>
+    	</action>
+    	<!-- 修改现象类型列表 -->
+    	<action name="toModifyRuleResultInfoAction" class="ruleResultInfoAction" method="toModifyRuleResultInfo">
+    		<result name="success">/expertsystem/expertresultinfo.jsp</result>
+    		<result name="input">/expertsystem/expertresultinfo.jsp</result>
+    	</action>
+    	<action name="deleteResultAction" class="ruleResultInfoAction" method="deleteRuleResultInfo">
+    	</action>
+    	
+      </package>	    
+      
+	
+</struts>

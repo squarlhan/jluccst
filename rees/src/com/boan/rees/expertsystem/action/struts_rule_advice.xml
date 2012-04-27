@@ -3,34 +3,35 @@
     "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
     "http://struts.apache.org/dtds/struts-2.3.dtd">	
 <struts>
-	<!-- 设备分类管理 -->
+	<!-- 建议分类管理 -->
      <package name="rule_advice" extends="struts-default" namespace="/">
     	
-    	<!-- 打开设备类型列表 -->
+    	<!-- 打开建议类型列表 -->
     	<action name="openRuleAdviceAction" class="ruleAdviceInfoAction" method="openRuleAdviceInfo">
-    		<result name="success">/expertsystem/expertlist.jsp</result>
-    		<result name="input">/expertsystem/expertlist.jsp</result>
+    		<result name="success">/expertsystem/expertadvicelist.jsp</result>
+    		<result name="input">/expertsystem/expertadvicelist.jsp</result>
     	</action>
+    	<!-- 打开添加建议类型列表 -->
     	<action name="openAddAdviceAction" class="ruleAdviceInfoAction" method="openAddRuleAdviceInfo">
-    		<result name="success">/expertsystem/expertinfo.jsp</result>
-    		<result name="input">/expertsystem/expertinfo.jsp</result>
+    		<result name="success">/expertsystem/expertadviceinfo.jsp</result>
+    		<result name="input">/expertsystem/expertadviceinfo.jsp</result>
     	</action>
+    	<!-- 添加建议类型 -->
     	<action name="toAddRuleAdviceInfoAction" class="ruleAdviceInfoAction" method="toAddRuleAdviceInfo">
-    		<result name="success">/expertsystem/expertinfo.jsp</result>
-    		<result name="input">/expertsystem/expertinfo.jsp</result>
-    	</action>
-    	<action name="openAdviceAction" class="ruleAdviceInfoAction" method="openModifyRuleAdviceInfo">
-    		<result name="success">/expertsystem/expertinfo.jsp</result>
-    		<result name="input">/expertsystem/expertinfo.jsp</result>
+    		<result name="success">/expertsystem/expertadviceinfo.jsp</result>
+    		<result name="input">/expertsystem/expertadviceinfo.jsp</result>
     	</action>
     	
+    	
+    	<!-- 打开修改建议类型列表 -->
     	<action name="openModifyAdviceAction" class="ruleAdviceInfoAction" method="openModifyRuleAdviceInfo">
-    		<result name="success">/expertsystem/expertinfo.jsp</result>
-    		<result name="input">/expertsystem/expertinfo.jsp</result>
+    		<result name="success">/expertsystem/expertadviceinfo.jsp</result>
+    		<result name="input">/expertsystem/expertadviceinfo.jsp</result>
     	</action>
+    	<!-- 修改建议类型列表 -->
     	<action name="toModifyRuleAdviceInfoAction" class="ruleAdviceInfoAction" method="toModifyRuleAdviceInfo">
-    		<result name="success">/expertsystem/expertinfo.jsp</result>
-    		<result name="input">/expertsystem/expertinfo.jsp</result>
+    		<result name="success">/expertsystem/expertadviceinfo.jsp</result>
+    		<result name="input">/expertsystem/expertadviceinfo.jsp</result>
     	</action>
     	<action name="deleteAdviceAction" class="ruleAdviceInfoAction" method="deleteRuleAdviceInfo">
     	</action>

@@ -31,6 +31,14 @@ public class RuleAdviceInfoServiceImpl implements IRuleAdviceInfoService{
 	private IRuleAdviceInfoDao ruleAdviceInfoDao;
 
 	
+	public IRuleAdviceInfoDao getRuleAdviceInfoDao() {
+		return ruleAdviceInfoDao;
+	}
+
+	public void setRuleAdviceInfoDao(IRuleAdviceInfoDao ruleAdviceInfoDao) {
+		this.ruleAdviceInfoDao = ruleAdviceInfoDao;
+	}
+
 	@Override
 	public List<RuleAdviceInfo> findAllRuleAdviceInfo(){
 		return ruleAdviceInfoDao.findAll();

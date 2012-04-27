@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">	
+<struts>
+	<!-- 原因分类管理 -->
+     <package name="rule_reason" extends="struts-default" namespace="/">
+    	
+    	<!-- 打开原因类型列表 -->
+    	<action name="openRuleReasonAction" class="ruleReasonInfoAction" method="openRuleReasonInfo">
+    		<result name="success">/expertsystem/expertreasonlist.jsp</result>
+    		<result name="input">/expertsystem/expertreasonlist.jsp</result>
+    	</action>
+    	<!-- 打开添加原因类型列表 -->
+    	<action name="openAddReasonAction" class="ruleReasonInfoAction" method="openAddRuleReasonInfo">
+    		<result name="success">/expertsystem/expertreasoninfo.jsp</result>
+    		<result name="input">/expertsystem/expertreasoninfo.jsp</result>
+    	</action>
+    	<!-- 添加原因类型列表 -->
+    	<action name="toAddRuleReasonInfoAction" class="ruleReasonInfoAction" method="toAddRuleReasonInfo">
+    		<result name="success">/expertsystem/expertreasoninfo.jsp</result>
+    		<result name="input">/expertsystem/expertreasoninfo.jsp</result>
+    	</action>
+    	
+    	<!-- 打开修改原因类型列表 -->
+    	<action name="openModifyReasonAction" class="ruleReasonInfoAction" method="openModifyRuleReasonInfo">
+    		<result name="success">/expertsystem/expertreasoninfo.jsp</result>
+    		<result name="input">/expertsystem/expertreasoninfo.jsp</result>
+    	</action>
+    	<!-- 修改原因类型列表 -->
+    	<action name="toModifyRuleReasonInfoAction" class="ruleReasonInfoAction" method="toModifyRuleReasonInfo">
+    		<result name="success">/expertsystem/expertreasoninfo.jsp</result>
+    		<result name="input">/expertsystem/expertreasoninfo.jsp</result>
+    	</action>
+    	<action name="deleteReasonAction" class="ruleReasonInfoAction" method="deleteRuleReasonInfo">
+    	</action>
+    	
+      </package>	    
+      
+	
+</struts>

@@ -12,7 +12,7 @@ import com.boan.rees.utils.dao.IBaseDao;
  * @author jiangmeidi
  * @version 1.0.0
  */
-public interface IRuleReasonInfoDao extends IBaseDao<RuleReasonInfo, String>{
-
+public interface IRuleReasonInfoDao extends IBaseDao<RuleReasonInfo, Integer>{
+	public RuleReasonInfo get(int id);
 }
 

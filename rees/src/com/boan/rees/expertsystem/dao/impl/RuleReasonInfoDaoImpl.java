@@ -7,6 +7,7 @@ package com.boan.rees.expertsystem.dao.impl;
 import org.springframework.stereotype.Repository;
 
 import com.boan.rees.expertsystem.dao.IRuleReasonInfoDao;
+import com.boan.rees.expertsystem.model.RuleAdviceInfo;
 import com.boan.rees.expertsystem.model.RuleReasonInfo;
 import com.boan.rees.utils.dao.impl.BaseDao;
 
@@ -16,7 +17,11 @@ import com.boan.rees.utils.dao.impl.BaseDao;
  * @version 1.0.0
  */
 @Repository("ruleReasonInfoDao")
-public class RuleReasonInfoDaoImpl extends BaseDao<RuleReasonInfo,String> implements IRuleReasonInfoDao {
-
+public class RuleReasonInfoDaoImpl extends BaseDao<RuleReasonInfo,Integer> implements IRuleReasonInfoDao {
+	@SuppressWarnings("unchecked")
+	@Override
+	public RuleReasonInfo get(int id) {
+		return (RuleReasonInfo) getSession().load(entityClass, id);
+	}
 }
 
