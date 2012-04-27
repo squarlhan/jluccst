@@ -74,7 +74,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
            	if(!validator.form()){
 				return false;
 			}
-           	if( $.trim(devicetype) == "" )
+           	if( $.trim(devicetype) == "0" )
            	{
            		form1.action = "toAddRuleAdviceInfoAction.action";
            	}
