@@ -28,7 +28,7 @@ public interface IRuleAdviceInfoService {
 	/**
 	 * 根据id删除建议
 	 */
-	public void deleteRuleAdviceInfo(String... ids );
+	public void deleteRuleAdviceInfo(Integer... ids );
 	
 	/**
 	 * 保存建议
