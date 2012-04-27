@@ -39,7 +39,8 @@
 				</s:if>
 				"user.officePhone":{strangecode:true},
 				"user.phone":{strangecode:true},
-				"user.email":{email:true}
+				"user.email":{email:true},
+				"user.roleId":{selectvalidate:true}
 				}
 			};
 			$(document).ready(function(){
@@ -226,6 +227,17 @@
 												<strong>用户角色：</strong>
 											</td>
 											<td height="26" align="left" bgcolor="#FFFFFF">
+											<s:if test="user.deleteFlag==1">
+												<span  onMouseMove="this.setCapture();" onMouseOut="this.releaseCapture();" onfocus="this.blur();">
+												<s:select title="您不能修改自己的角色" list="roleList" listKey="id" listValue="roleName" value="user.roleId" 
+													id="roleId" name="user.roleId" cssStyle="width:250px" headerKey="" headerValue="--请选择角色--"></s:select>
+												</span>
+												<font color="#FF0000" title="不能修改自己的角色" style="font-size:9pt;">[ 不能修改自己的角色 ]</font>
+											</s:if>
+											<s:else>
+												<s:select list="roleList" listKey="id" listValue="roleName" value="user.roleId" 
+													id="roleId" name="user.roleId" cssStyle="width:250px" headerKey="" headerValue="--请选择角色--"></s:select>
+											</s:else>
 											</td>
 										</tr>
 										<tr>

@@ -10,6 +10,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.dao.support.DaoSupport;
 import org.springframework.stereotype.Service;
 
 import com.boan.rees.group.model.Role;
@@ -86,6 +87,12 @@ public class RoleServiceImpl implements IRoleService{
 	public void update(Role role) {
 		groupRoleDao.update(role);
 		
+	}
+
+	@Override
+	public List<Role> queryAllRoleList() throws Exception
+	{
+		return groupRoleDao.queryAllRoleList();
 	}
 
 	

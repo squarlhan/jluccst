@@ -1,3 +1,4 @@
+<%@page import="com.boan.rees.group.common.MenuKey"%>
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%@ taglib prefix="j" uri="/script-tags"%>
@@ -21,12 +22,14 @@
 	response.setHeader( "Expires", "0" );
 	request.setCharacterEncoding( "utf-8" );
 	String path = request.getContextPath();
+	String url="./showAllPopedomListAction.action";
 %>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title></title>
-<j:scriptlink css="true" tree="true"></j:scriptlink>
+<j:scriptlink css="true" tipswindow="true" jmessagebox="true"
+			jquery="true" validate="true" jfunction="true" tree="true"/>
 </head>
 <body style="padding:5px;">
 <div class="dtree">
@@ -34,16 +37,16 @@
   <script type="text/javascript">
 		<!--
 		d = new dTree('d','<%=path%>');
-		d.add(0,-1,'中石油','','','menumain');
-		<s:iterator value="companyList">
-			d.add("<s:property value="id"/>",0,'<s:property value="companyName"/>','./userAction!showUserList.action?companyId=<s:property value="id"/>','','groupmain','');
-		</s:iterator>
-		<s:iterator value="factoryList">
-			d.add("<s:property value="id"/>","<s:property value="companyId"/>",'<s:property value="factoryName"/>','./userAction!showUserList.action?factoryId=<s:property value="id"/>','','groupmain','');
-		</s:iterator>
-		<s:iterator value="workshopList">
-			d.add("<s:property value="id"/>","<s:property value="factoryId"/>",'<s:property value="workshopName"/>','./userAction!showUserList.action?workshopId=<s:property value="id"/>','','groupmain','');
-		</s:iterator>
+		d.add(0,-1,'菜单资源列表','','','Menu');
+		d.add(101,0,'数据管理','<%=url%>?menuKey=<%=MenuKey.SHU_JU_GUAN_LI%>','','groupmain');
+		d.add(102,0,'专家系统','<%=url%>?menuKey=<%=MenuKey.ZHUAN_JIA_XI_TONG%>','','groupmain');
+		d.add(103,0,'报表管理','<%=url%>?menuKey=<%=MenuKey.BAO_BIAO_GUAN_LI%>','','groupmain');
+		d.add(104,0,'论坛区','<%=url%>?menuKey=<%=MenuKey.LUN_TAN_QU%>','','groupmain');
+		d.add(105,0,'系统管理','<%=url%>?menuKey=<%=MenuKey.XI_TONG_GUAN_LI%>','','groupmain');
+		d.add(1,-1,'组织机构树型','','','Menu');
+		d.add(201,1,'显示所有机构','<%=url%>?menuKey=<%=MenuKey.SHOW_ALL_GROUP%>','','groupmain');
+		d.add(202,1,'显示当前机构','<%=url%>?menuKey=<%=MenuKey.SHOW_CURRENT_GROUP%>','','groupmain');
+		d.add(203,1,'显示当前及以下机构','<%=url%>?menuKey=<%=MenuKey.SHOW_CURRENT_AND_SUB_GROUP%>','','groupmain');
 		document.write(d);
 		//-->
 	</script>

@@ -111,7 +111,7 @@
               <td align="center" background="../images/headerbg.jpg"><strong>中文姓名</strong></td>
               <td align="center" background="../images/headerbg.jpg"><strong>办公电话</strong></td>
               <td align="center" background="../images/headerbg.jpg"><strong>个人手机</strong></td>
-              <td align="center" background="../images/headerbg.jpg"><strong>邮箱</strong></td>
+              <td align="center" background="../images/headerbg.jpg"><strong>角色</strong></td>
               <td align="center" background="../images/headerbg.jpg"><strong>操作</strong></td>
             </tr>
             <s:iterator value="pagination.data" status="obj">
@@ -121,7 +121,7 @@
               <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="userCName"/></td>
               <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="officePhone"/></td>
               <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="phone"/></td>
-              <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="email"/></td>
+              <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="roleName"/></td>
                <td height="26" align="center" bgcolor="#FFFFFF">
                	<A href="#" onclick="javascript:$.fn.edit('<s:property value="id"/>');">编辑</A>
                	<A href="#" onclick="javascript:$.fn.deleteitem('<s:property value="id"/>');">删除</A>

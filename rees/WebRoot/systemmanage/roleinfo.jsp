@@ -36,8 +36,6 @@
 			var _customer_submit = {
 				rules: {
 					"role.roleName":{required:true,strangecode:true}
-					//"company.address":{strangecode:true},
-					//"company.phone":{strangecode:true}
 				}
 			};
 			/**
@@ -89,7 +87,7 @@
 			 * 初始化页面
 			 */
 			$.fn.initpage = function(){
-				$("#txt_companyName").focus();
+				$("#roleName").focus();
 			}
 		</script>
 	</head>
@@ -110,7 +108,7 @@
 											<strong>角色名称：</strong>
 										</td>
 										<td height="26" align="left" bgcolor="#FFFFFF">
-											<s:textfield id="txt_companyName" name="company.companyName" cssStyle="width: 250px;" maxlength="25"></s:textfield>
+											<s:textfield id="roleName" name="role.roleName" cssStyle="width: 250px;" maxlength="25"></s:textfield>
 											<font color="red">*</font>
 										</td>
 									</tr>

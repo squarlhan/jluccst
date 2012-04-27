@@ -45,6 +45,12 @@ public interface IRoleService {
 	public boolean isExistSameName(String id, String roleName);
 
 	public void update(Role role);
-
+	/**
+	 * 取得所有角色列表
+	 * 
+	 * @return 角色列表
+	 * @throws Exception
+	 */
+	public List<Role> queryAllRoleList() throws Exception;
 }
 

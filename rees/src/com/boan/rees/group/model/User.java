@@ -54,6 +54,12 @@ public class User {
 	private String roleId;
 	
 	/**
+	 * 角色名称
+	 */
+	@Column(name = "ROLE_NAME")
+	private String roleName;
+	
+	/**
 	 * 用户名
 	 */
 	@Column(name = "USERNAME")
@@ -241,8 +247,61 @@ public class User {
 	{
 		this.deleteFlag = deleteFlag;
 	}
+
+	public String getRoleName()
+	{
+		return roleName;
+	}
+
+	public void setRoleName( String roleName )
+	{
+		this.roleName = roleName;
+	}
 	
-	
+	public static void convertToUser( User oldUser, User newUser )
+	{
+		oldUser.id = newUser.id;
+		oldUser.companyId = newUser.companyId;
+		oldUser.factoryId = newUser.factoryId;
+		oldUser.workshopId = newUser.workshopId;
+		oldUser.roleId = newUser.roleId;
+		oldUser.roleName = newUser.roleName;
+		oldUser.username = newUser.username;
+		oldUser.password = newUser.password;
+		oldUser.userCName = newUser.userCName;
+		oldUser.officePhone = newUser.officePhone;
+		oldUser.phone = newUser.phone;
+		oldUser.email = newUser.email;
+		oldUser.userType = newUser.userType;
+		oldUser.createTime = newUser.createTime;
+		oldUser.sortIndex = newUser.sortIndex;
+		oldUser.deleteFlag = newUser.deleteFlag;
+	}
+
+	public User( String id, String companyId, String factoryId,
+			String workshopId, String roleId, String roleName, String username,
+			String password, String userCName, String officePhone,
+			String phone, String email, int userType, Calendar createTime,
+			int sortIndex, int deleteFlag )
+	{
+		super();
+		this.id = id;
+		this.companyId = companyId;
+		this.factoryId = factoryId;
+		this.workshopId = workshopId;
+		this.roleId = roleId;
+		this.roleName = roleName;
+		this.username = username;
+		this.password = password;
+		this.userCName = userCName;
+		this.officePhone = officePhone;
+		this.phone = phone;
+		this.email = email;
+		this.userType = userType;
+		this.createTime = createTime;
+		this.sortIndex = sortIndex;
+		this.deleteFlag = deleteFlag;
+	}
 	
 	
 }

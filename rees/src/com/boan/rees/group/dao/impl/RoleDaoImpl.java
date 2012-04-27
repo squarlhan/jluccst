@@ -14,6 +14,7 @@ import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 
 import com.boan.rees.group.model.Role;
+import com.boan.rees.group.model.User;
 import com.boan.rees.group.dao.IRoleDao;
 import com.boan.rees.utils.dao.impl.BaseDao;
 /**
@@ -49,9 +50,10 @@ public class RoleDaoImpl extends BaseDao<Role,String> implements IRoleDao{
 		}
 		return b;
 	}
-
-	
-	
-
-}
+	public List<Role> queryAllRoleList() throws Exception
+	{
+		String hql = "from Role order by createTime";
+		List<Role> list = super.find( hql );
+		return list;
+	}}
 

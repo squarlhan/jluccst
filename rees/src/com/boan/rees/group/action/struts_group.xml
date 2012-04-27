@@ -92,7 +92,18 @@
 	
 	<!-- 权限Action -->
 	<package name="group_popedom_role" extends="struts-default" namespace="/">
-
+		<action name="showAllRoleListAction" class="popedomAction" method="showAllRoleList">
+        	<result name="success">/systemmanage/popedomchooserole.jsp</result>
+        </action>
+        <action name="saveOrUpdatePopedomAction" class="popedomAction" method="saveOrUpdatePopedom">
+        	<result name="success">/common/messagemodaldialog.jsp</result>
+        </action>
+        <action name="showAllPopedomListAction" class="popedomAction" method="showAllPopedomList">
+        	<result name="success">/systemmanage/popedomlist.jsp</result>
+        </action>
+        <action name="deletePopedomAction" class="popedomAction" method="deletePopedom">
+        	<result name="success">/systemmanage/popedomlist.jsp</result>
+        </action>
 	</package>
 
 	<!-- 角色Action -->
@@ -106,16 +117,16 @@
             <result name="input">/systemmanage/roleinfo.jsp</result>
         </action>
         <action name="toAddRoleAction" class="roleAction" method="toAddRole">
-            <result name="success">/systemmanage/roleinfo.jsp</result>
-            <result name="input">/systemmanage/roleinfo.jsp</result>
+           <result name="success">/common/message.jsp</result>
+			<result name="error">/common/messagenoclose.jsp</result>
         </action>
         <action name="openModifyRoleAction" class="roleAction" method="openModifyRole">
             <result name="success">/systemmanage/roleinfo.jsp</result>
             <result name="input">/systemmanage/roleinfo.jsp</result>
         </action>
         <action name="toModifyRoleAction" class="roleAction" method="toModifyRole">
-            <result name="success">/systemmanage/roleinfo.jsp</result>
-            <result name="input">/systemmanage/roleinfo.jsp</result>
+           <result name="success">/common/message.jsp</result>
+			<result name="error">/common/messagenoclose.jsp</result>
         </action>
         <action name="deleteRoleAction" class="roleAction" method="deleteRole"></action>
 	</package>
@@ -130,7 +141,7 @@
 			<result name="error">/common/messagenoclose.jsp</result>
 		</action>
 		<action name="showInputUserAction" class="userAction" method="showInputUser">
-			<result name="success">/sysmanage/userinfo.jsp</result>
+			<result name="success">/systemmanage/userinfo.jsp</result>
 		</action>
 		<action name="showMyInfoAction" class="userAction" method="showMyInfo">
 			<result name="success">/systemmanage/myinfo.jsp</result>
@@ -155,7 +166,7 @@
 			<result name="success">/default.jsp</result>
 		</action>
 		<action name="showModifyAction" class="userLogonAction" method="showModify">
-			<result name="success">/sysmanage/usermodify.jsp</result>
+			<result name="success">/systemmanage/usermodify.jsp</result>
 		</action>
 		<action name="modifyAction" class="userLogonAction" method="modify">
 			<result name="success">/common/message.jsp</result>
