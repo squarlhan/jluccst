@@ -32,7 +32,6 @@ import com.boan.rees.group.service.IUserService;
 import com.boan.rees.utils.action.BaseActionSupport;
 import com.boan.rees.utils.md5.MakeMd5;
 import com.boan.rees.utils.page.Pagination;
-import com.opensymphony.xwork2.ActionSupport;
 
 /**
  * XXX 类
@@ -83,14 +82,18 @@ public class UserAction extends BaseActionSupport
 	 */
 	public String saveOrUpdateUser() throws Exception
 	{
+		User oldUser = null;
 		if( StringUtils.isBlank( user.getId() ) )
 		{
 			user.setCreateTime( Calendar.getInstance() );
 		}
 		else
 		{
-			User oldUser = userService.getUserById( user.getId() );
+			oldUser = userService.getUserById( user.getId() );
 			user.setCreateTime( oldUser.getCreateTime() );
+			user.setCompanyId( oldUser.getCompanyId() );
+			user.setFactoryId( oldUser.getFactoryId() );
+			user.setWorkshopId( oldUser.getWorkshopId() );
 			// 如果修改时，登录密码为空，则不修改原密码
 			if( StringUtils.isBlank( user.getPassword() ) )
 			{
@@ -102,6 +105,10 @@ public class UserAction extends BaseActionSupport
 				String md5 = MakeMd5.MD5( user.getPassword() );
 				user.setPassword( md5 );
 			}
+			Role role = roleService.get( user.getRoleId() );
+			user.setRoleName( role.getRoleName() );
+			//转换
+			User.convertToUser(oldUser, user);
 		}
 		// 验证用户名是否重复
 		boolean b = userService.isExistSameUsername( user.getId(), user.getUsername() );
@@ -113,9 +120,8 @@ public class UserAction extends BaseActionSupport
 		}
 		else
 		{
-			//TODO
-			//Role role = roleService.getRoleById( user.getRoleId() );
-			//user.setRoleName( role.getRoleName() );
+			Role role = roleService.get( user.getRoleId() );
+			user.setRoleName( role.getRoleName() );
 			user.setCompanyId( companyId );
 			user.setFactoryId( factoryId );
 			user.setWorkshopId( workshopId );
@@ -125,7 +131,14 @@ public class UserAction extends BaseActionSupport
 				String md5 = MakeMd5.MD5( user.getPassword() );
 				user.setPassword( md5 );
 			}
-			userService.saveOrUpdateUser( user );
+			if( StringUtils.isBlank( user.getId() ) )
+			{
+				userService.saveOrUpdateUser( user );
+			}
+			else
+			{
+				userService.saveOrUpdateUser( oldUser );
+			}
 			message.setContent( "用户信息保存成功！" );
 			return SUCCESS;
 		}
@@ -188,12 +201,11 @@ public class UserAction extends BaseActionSupport
 				}
 			}
 		}
-		//TODO
-		//roleList = roleService.queryAllRoleList();
-		//if( roleList == null )
-		//{
-		//	roleList = new ArrayList<Role>();
-		//}
+		roleList = roleService.queryAllRoleList();
+		if( roleList == null )
+		{
+			roleList = new ArrayList<Role>();
+		}
 		return "show-user";
 	}
 
@@ -262,12 +274,11 @@ public class UserAction extends BaseActionSupport
 				factoryId = user.getFactoryId();
 				workshopId = user.getWorkshopId();
 			}
-			//TODO
-			//roleList = roleService.queryAllRoleList();
-			//if( roleList == null )
-			//{
-			//	roleList = new ArrayList<Role>();
-			//}
+			roleList = roleService.queryAllRoleList();
+			if( roleList == null )
+			{
+				roleList = new ArrayList<Role>();
+			}
 		}
 		return SUCCESS;
 	}
@@ -304,6 +315,8 @@ public class UserAction extends BaseActionSupport
 				user.setFactoryId( oldUser.getFactoryId() );
 				user.setWorkshopId( oldUser.getWorkshopId() );
 				user.setUserType( oldUser.getUserType() );
+				user.setRoleId( oldUser.getRoleId() );
+				user.setRoleName( oldUser.getRoleName() );
 				if( StringUtils.isBlank( newPassword ) )
 				{
 					user.setPassword( oldUser.getPassword() );
@@ -313,7 +326,10 @@ public class UserAction extends BaseActionSupport
 					String md5 = MakeMd5.MD5( newPassword );
 					user.setPassword( md5 );
 				}
-				userService.saveOrUpdateUser( user );
+				
+				//复制
+				User.convertToUser( oldUser, user );
+				userService.saveOrUpdateUser( oldUser );
 				message.setContent( "个人资料保存成功！" );
 			}
 			

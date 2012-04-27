@@ -121,8 +121,7 @@ public class UserLogonAction extends ActionSupport
 			{
 				// 获取权限串
 				String roleId = user.getRoleId();
-				//TODO
-				String[] popedomKeys = null;// popedomService.queryPopedomsByRoleId( roleId );
+				String[] popedomKeys =  popedomService.queryPopedomsByRoleId( roleId );
 				// 创建userSession对象
 				UserSession userSession = new UserSession();
 				userSession.setUserId( user.getId() );

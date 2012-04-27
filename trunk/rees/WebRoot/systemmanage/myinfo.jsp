@@ -177,6 +177,13 @@
 												<strong>用户角色：</strong>
 											</td>
 											<td height="26" align="left" bgcolor="#FFFFFF">
+											<span  onMouseMove="this.setCapture();" onMouseOut="this.releaseCapture();" onfocus="this.blur();">
+												<s:select title="您不能修改自己的角色" list="roleList"
+													listKey="id" listValue="roleName" value="user.roleId"
+													id="roleId" name="user.roleId" cssStyle="width:100%"
+													headerKey="" headerValue="--请选择角色--"></s:select>
+											</span>
+											<font color="#FF0000" title="不能修改自己的角色" style="font-size:9pt;">[ 不能修改自己的角色 ]</font>
 											</td>
 										</tr>
 										<tr>
@@ -184,18 +191,12 @@
 												<strong>权限类型：</strong>
 											</td>
 											<td height="26" align="left" bgcolor="#FFFFFF">
-												<s:if test="user.deleteFlag==1">
-													<span  onMouseMove="this.setCapture();" onMouseOut="this.releaseCapture();" onfocus="this.blur();">
-														<s:radio list="userTypeList" listKey="key" listValue="value" id="userType" name="user.userType" value="user.userType">
-														</s:radio>
-													</span>
-													<br/>
-													<font color="#FF0000" title="不能修改自己的用户类别" style="font-size:9pt;">[ 不能修改自己的用户类别 ]</font>
-												</s:if>
-												<s:else>
+												<span  onMouseMove="this.setCapture();" onMouseOut="this.releaseCapture();" onfocus="this.blur();">
 													<s:radio list="userTypeList" listKey="key" listValue="value" id="userType" name="user.userType" value="user.userType">
 													</s:radio>
-												</s:else>
+												</span>
+												<br/>
+												<font color="#FF0000" title="不能修改自己的用户类别" style="font-size:9pt;">[ 不能修改自己的用户类别 ]</font>
 											</td>
 										</tr>
 										<tr>

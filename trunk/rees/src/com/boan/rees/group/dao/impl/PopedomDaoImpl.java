@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang.StringUtils;
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 
@@ -104,7 +105,15 @@ public class PopedomDaoImpl extends BaseDao<Popedom, String> implements IPopedom
 	public String[] queryPopedomsByRoleId( String roleId ) throws Exception
 	{
 		String[] popedoms = null;
-		String hql = "from Popedom where roleId = :roleId";
+		String hql = null;
+		if( StringUtils.isNotBlank( roleId ) )
+		{
+			hql = "from Popedom where roleId = :roleId";
+		}
+		else
+		{
+			hql = "from Popedom ";
+		}
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put( "roleId", roleId );
 		List<Popedom> list = super.find( hql, map );

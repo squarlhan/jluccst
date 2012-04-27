@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
-import com.boan.rees.common.GroupConfig;
 import com.boan.rees.common.Message;
 import com.boan.rees.group.model.Role;
 import com.boan.rees.group.service.IRoleService;
@@ -22,6 +21,10 @@ import com.boan.rees.utils.page.Pagination;
 @Scope( "prototype" )
 public class RoleAction extends BaseActionSupport
 {
+	/**
+	 * serialVersionUID
+	 */
+	private static final long serialVersionUID = 944641051926536918L;
 	/**
 	 * 角色Service
 	 */
