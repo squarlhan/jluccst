@@ -66,15 +66,15 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	$.fn.save = function(){
 		
 		//如果有id就说明是修改action
-		var devicetype = $("#hid_adviceId").val();
+		var adviceId = $("#hid_adviceId").val();
 		
 			$("#btn_save").click(function() {
 			var validate_settings_submit = jQuery.extend({}, _devicetype_submit);
-           	var validator = $("form").validate(validate_settings_submit);
+           	var validator = $("form1").validate(validate_settings_submit);
            	if(!validator.form()){
 				return false;
 			}
-           	if( $.trim(devicetype) == "0" )
+           	if( $.trim(adviceId) == "0" )
            	{
            		form1.action = "toAddRuleAdviceInfoAction.action";
            	}
@@ -144,7 +144,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     		</tr>
     		<tr>
     			<td colspan="2">
-    				<s:submit id="btn_save" value="保存"></s:submit>
+    				<input type="button" id="btn_save" value="保存"/>
     				<input type="button" id="btn_close" value="关闭"/>
     			</td>
     		</tr>
