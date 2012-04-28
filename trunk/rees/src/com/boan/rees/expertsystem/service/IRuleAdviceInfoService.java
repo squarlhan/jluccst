@@ -39,7 +39,7 @@ public interface IRuleAdviceInfoService {
 	 * 修改建议信息
 	 * @param reportInfo 报表对象
 	 */
-	public void update(RuleAdviceInfo RuleAdviceInfo);
+	public void update(RuleAdviceInfo ruleAdviceInfo);
 	
 	/**
 	 * 按分页查询

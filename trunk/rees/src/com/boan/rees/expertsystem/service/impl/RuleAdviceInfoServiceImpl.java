@@ -58,8 +58,8 @@ public class RuleAdviceInfoServiceImpl implements IRuleAdviceInfoService{
 		ruleAdviceInfoDao.save(table1);
 	}
 	@Override
-	public void update(RuleAdviceInfo ruleAdviceInfoInfo){
-		ruleAdviceInfoDao.update(ruleAdviceInfoInfo);
+	public void update(RuleAdviceInfo ruleAdviceInfo){
+		ruleAdviceInfoDao.update(ruleAdviceInfo);
 	}
 	@Override
 	public Pagination<RuleAdviceInfo> findRuleAdviceInfoForPage(Map<String, ?> values,Pagination<RuleAdviceInfo> pagination){
