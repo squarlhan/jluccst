@@ -55,8 +55,8 @@ public class RuleReasonInfoServiceImpl implements IRuleReasonInfoService{
 		ruleReasonInfoDao.save(table1);
 	}
 	@Override
-	public void update(RuleReasonInfo ruleReasonInfoInfo){
-		ruleReasonInfoDao.update(ruleReasonInfoInfo);
+	public void update(RuleReasonInfo ruleReasonInfo){
+		ruleReasonInfoDao.update(ruleReasonInfo);
 	}
 	@Override
 	public Pagination<RuleReasonInfo> findRuleReasonInfoForPage(Map<String, ?> values,Pagination<RuleReasonInfo> pagination){

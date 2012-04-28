@@ -47,8 +47,8 @@ public class RuleResultInfoServiceImpl implements IRuleResultInfoService{
 		ruleResultInfoDao.save(table1);
 	}
 	@Override
-	public void update(RuleResultInfo ruleResultInfoInfo){
-		ruleResultInfoDao.update(ruleResultInfoInfo);
+	public void update(RuleResultInfo ruleResultInfo){
+		ruleResultInfoDao.update(ruleResultInfo);
 	}
 	@Override
 	public Pagination<RuleResultInfo> findRuleResultInfoForPage(Map<String, ?> values,Pagination<RuleResultInfo> pagination){

@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">	
+<struts>
+	<!-- 规则分类管理 -->
+     <package name="rule" extends="struts-default" namespace="/">
+    	
+    	<!-- 打开规则类型列表 -->
+    	<action name="openRuleInfoAction" class="ruleInfoAction" method="openRuleInfo">
+    		<result name="success">/expertsystem/expertrulelist.jsp</result>
+    		<result name="input">/expertsystem/expertrulelist.jsp</result>
+    	</action>
+    	<!-- 打开添加规则类型列表 -->
+    	<action name="openAddRuleInfoAction" class="ruleInfoAction" method="openAddRuleInfo">
+    		<result name="success">/expertsystem/expertruleinfo.jsp</result>
+    		<result name="input">/expertsystem/expertruleinfo.jsp</result>
+    	</action>
+    	<!-- 添加规则类型 -->
+    	<action name="toAddRuleInfoAction" class="ruleInfoAction" method="toAddRuleInfo">
+    		<result name="success">/expertsystem/expertruleinfo.jsp</result>
+    		<result name="input">/expertsystem/expertruleinfo.jsp</result>
+    	</action>
+    	
+    	
+    	<!-- 打开修改规则类型列表 -->
+    	<action name="openModifyRuleInfoAction" class="ruleInfoAction" method="openModifyRuleInfo">
+    		<result name="success">/expertsystem/expertruleinfo.jsp</result>
+    		<result name="input">/expertsystem/expertruleinfo.jsp</result>
+    	</action>
+    	<!-- 修改规则类型列表 -->
+    	<action name="toModifyRuleInfoAction" class="ruleInfoAction" method="toModifyRuleInfo">
+    		<result name="success">/expertsystem/expertruleinfo.jsp</result>
+    		<result name="input">/expertsystem/expertruleinfo.jsp</result>
+    	</action>
+    	<action name="deleteAction" class="ruleInfoAction" method="deleteRuleInfo">
+    	</action>
+    	
+      </package>	    
+      
+	
+</struts>
