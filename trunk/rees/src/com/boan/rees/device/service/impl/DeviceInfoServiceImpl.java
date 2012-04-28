@@ -24,7 +24,7 @@ public class DeviceInfoServiceImpl  implements IDeviceInfoService {
 	 * 查找全部设备
 	 */
 	public List<DeviceInfo> findAllDeviceInfo() {
-		String hql = "from DeviceInfo isDelete<>1 and order by sortIndex,createTime";
+		String hql = "from DeviceInfo where (isDelete is not null  and isDelete<>1 ) order by sortIndex,createTime";
 		return deviceInfoDao.queryAll(hql);
 		
 	}
