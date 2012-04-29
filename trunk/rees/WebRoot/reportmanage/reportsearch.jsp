@@ -117,11 +117,11 @@
     </table>
       <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#d5e4fd">
         <tr>
-          <td width="16%" align="center" background="../images/headerbg.jpg"><strong>汇报类别</strong></td>
-          <td width="16%" align="center" background="../images/headerbg.jpg"><strong>汇报题目</strong></td>
-		  <td width="16%" align="center" background="../images/headerbg.jpg"><strong>汇报人</strong></td>
-		  <td width="16%" align="center" background="../images/headerbg.jpg"><strong>汇报时间</strong></td>
-		  <td width="10%" align="center" background="../images/headerbg.jpg"><strong>操作</strong></td>
+          <td width="16%" align="center" background="<%=path %>/images/headerbg.jpg" ><strong>汇报类别</strong></td>
+          <td width="16%" align="center" background="<%=path %>/images/headerbg.jpg"><strong>汇报题目</strong></td>
+		  <td width="16%" align="center" background="<%=path %>/images/headerbg.jpg"><strong>汇报人</strong></td>
+		  <td width="16%" align="center" background="<%=path %>/images/headerbg.jpg"><strong>汇报时间</strong></td>
+		  <td width="10%" align="center" background="<%=path %>/images/headerbg.jpg"><strong>操作</strong></td>
 	    </tr>
 	    <s:iterator value="pagination.data" status="obj">
         <tr>
