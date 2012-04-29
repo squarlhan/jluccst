@@ -6,7 +6,7 @@ package com.boan.rees.expertsystem.threshold.service;
 
 import java.util.List;
 
-import com.boan.rees.expertsystem.threshold.ThresholdCategory;
+import com.boan.rees.expertsystem.threshold.model.ThresholdCategory;
 
 /**
  * 阈值类别服务接口
