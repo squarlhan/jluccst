@@ -30,7 +30,6 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 	<head>
-		<base href="<%=basePath%>">
 		<title>设备类型列表</title>
 		<meta http-equiv="pragma" content="no-cache">
 		<meta http-equiv="cache-control" content="no-cache">
@@ -104,30 +103,30 @@
 						</table>
 						<table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#d5e4fd">
 							<tr>
-								<td width="5%" height="26" align="center" background="../images/headerbg.jpg">
+								<td width="5%" height="26" align="center" background="../../images/headerbg.jpg">
 									<s:checkbox theme="simple" id="cbk_all" name="all"></s:checkbox>
 								</td>
-								<td align="center" background="../images/headerbg.jpg">
+								<td align="center" background="../../images/headerbg.jpg">
 									<strong>名称</strong>
 								</td>
-								<td width="15%" align="center" background="../images/headerbg.jpg">
+								<td width="15%" align="center" background="../../images/headerbg.jpg">
 									<strong>转速</strong>
 								</td>
-								<td width="15%" align="center" background="../images/headerbg.jpg">
+								<td width="15%" align="center" background="../../images/headerbg.jpg">
 									<strong>功率</strong>
 								</td>
-								<td width="15%" align="center" background="../images/headerbg.jpg">
+								<td width="15%" align="center" background="../../images/headerbg.jpg">
 									<strong>中心高</strong>
 								</td>
 								<!-- 
-								<td width="10%" align="center" background="../images/headerbg.jpg">
+								<td width="10%" align="center" background="../../images/headerbg.jpg">
 									<strong>监测点正常值 </strong>
 								</td>
-								<td width="10%" align="center" background="../images/headerbg.jpg">
+								<td width="10%" align="center" background="../../images/headerbg.jpg">
 									<strong>监测点警告值</strong>
 								</td>
 								 -->
-								<td width="15%" align="center" background="../images/headerbg.jpg">
+								<td width="15%" align="center" background="../../images/headerbg.jpg">
 									<strong>操作</strong>
 								</td>
 							</tr>
