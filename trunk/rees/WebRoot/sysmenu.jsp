@@ -316,7 +316,7 @@
 												<img src="images/menuto.jpg" width="5" height="5" />
 											</td>
 											<td>
-												<a href="systemmanage/companymanage.jsp" target="mainFrame">公司管理</a>
+												<a href="systemmanage/companymanage.jsp" target="mainFrame">级别管理</a>
 											</td>
 										</tr>
 									</table>
