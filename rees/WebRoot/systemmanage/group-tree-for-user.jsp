@@ -39,10 +39,10 @@
 			d.add("<s:property value="id"/>",0,'<s:property value="companyName"/>','./userAction!showUserList.action?companyId=<s:property value="id"/>','','groupmain','');
 		</s:iterator>
 		<s:iterator value="factoryList">
-			d.add("<s:property value="id"/>","<s:property value="companyId"/>",'<s:property value="factoryName"/>','./userAction!showUserList.action?factoryId=<s:property value="id"/>','','groupmain','');
+			d.add("<s:property value="id"/>","<s:property value="companyId"/>",'<s:property value="factoryName"/>','./userAction!showUserList.action?companyId=<s:property value="companyId"/>&factoryId=<s:property value="id"/>','','groupmain','');
 		</s:iterator>
 		<s:iterator value="workshopList">
-			d.add("<s:property value="id"/>","<s:property value="factoryId"/>",'<s:property value="workshopName"/>','./userAction!showUserList.action?workshopId=<s:property value="id"/>','','groupmain','');
+			d.add("<s:property value="id"/>","<s:property value="factoryId"/>",'<s:property value="workshopName"/>','./userAction!showUserList.action?companyId=<s:property value="companyId"/>&factoryId=<s:property value="factoryId"/>&workshopId=<s:property value="id"/>','','groupmain','');
 		</s:iterator>
 		document.write(d);
 		//-->

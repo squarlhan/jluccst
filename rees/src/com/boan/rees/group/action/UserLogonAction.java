@@ -152,7 +152,7 @@ public class UserLogonAction extends ActionSupport
 						Factory factory = factoryService.get( user.getFactoryId() );
 						if( factory != null )
 						{
-							userSession.setFactoryName( user.getFactoryId());
+							userSession.setFactoryName( factory.getFactoryName());
 						}
 					}
 				}
@@ -164,7 +164,7 @@ public class UserLogonAction extends ActionSupport
 						Workshop workshop = workshopService.get( user.getWorkshopId() );
 						if( workshop != null )
 						{
-							userSession.setWorkshopName( user.getWorkshopId() );
+							userSession.setWorkshopName( workshop.getWorkshopName() );
 						}
 					}
 				}
@@ -236,7 +236,7 @@ public class UserLogonAction extends ActionSupport
 			fullGroupName = fullGroupName.substring( 1, fullGroupName.length() );
 			if( fullGroupName.length() > 0 )
 			{
-				fullGroupName = fullGroupName.substring( fullGroupName.length() -1 );
+				fullGroupName = fullGroupName.substring( 0,fullGroupName.length() -1 );
 			}
 			fullGroupName  = StringUtils.defaultIfEmpty( fullGroupName, "超级管理组" );
 			

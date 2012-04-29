@@ -34,42 +34,42 @@ public class BaseActionSupport extends ActionSupport
 	/**
 	 * 公司ID
 	 */
-	protected String sessionCompanyId = "companyId";
+	protected String sessionCompanyId = null;
 
 	/**
 	 * 公司名称
 	 */
-	protected String sessionCompanyName = "companyName";
+	protected String sessionCompanyName = null;
 
 	/**
 	 * 工厂ID
 	 */
-	protected String sessionFactoryId = "factoryId";
+	protected String sessionFactoryId = null;
 
 	/**
 	 * 工厂名称
 	 */
-	protected String sessionFactoryName = "factoryName";
+	protected String sessionFactoryName = null;
 
 	/**
 	 * 车间ID
 	 */
-	protected String sessionWorkshopId = "workshopId";
+	protected String sessionWorkshopId = null;
 
 	/**
 	 * 车间名称
 	 */
-	protected String sessionWorkshopName = "workshopName";
+	protected String sessionWorkshopName = null;
 
 	/**
 	 * 用户ID
 	 */
-	protected String sessionUserId = "userId";
+	protected String sessionUserId = null;
 
 	/**
 	 * 用户姓名
 	 */
-	protected String sessionUserCName = "userCName";
+	protected String sessionUserCName = null;
 
 	@Override
 	public void validate()
