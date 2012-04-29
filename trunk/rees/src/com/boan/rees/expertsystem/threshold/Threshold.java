@@ -58,7 +58,7 @@ public class Threshold implements Serializable{
     private ThresholdCategory thresholdCategory;
 	
 	/**
-	 * 阈值
+	 * 阈值项
 	 */
 	@OneToMany(mappedBy="threshold",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private List<ThresholdItem> thresholdItems;
