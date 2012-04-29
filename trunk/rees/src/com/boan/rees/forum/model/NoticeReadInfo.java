@@ -24,7 +24,7 @@ import org.hibernate.annotations.GenericGenerator;
  * @version 1.0.0
  */
 @Entity
-@Table(name = "NoticeReadInfo")
+@Table(name = "Notice_Read_Info")
 public class NoticeReadInfo implements Serializable {
 
 	private static final long serialVersionUID = 1L;
