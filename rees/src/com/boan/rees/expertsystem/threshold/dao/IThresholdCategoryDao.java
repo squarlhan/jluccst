@@ -6,7 +6,7 @@ package com.boan.rees.expertsystem.threshold.dao;
 
 import java.util.List;
 
-import com.boan.rees.expertsystem.threshold.ThresholdCategory;
+import com.boan.rees.expertsystem.threshold.model.ThresholdCategory;
 import com.boan.rees.utils.dao.IBaseDao;
 
 
