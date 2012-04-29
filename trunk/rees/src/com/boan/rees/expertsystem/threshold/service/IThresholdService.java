@@ -5,9 +5,12 @@
 package com.boan.rees.expertsystem.threshold.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.boan.rees.expertsystem.threshold.model.Threshold;
+import com.boan.rees.expertsystem.threshold.model.ThresholdCategory;
 import com.boan.rees.expertsystem.threshold.model.ThresholdItem;
+import com.boan.rees.utils.page.Pagination;
 
 
 /**
@@ -80,6 +83,23 @@ public interface IThresholdService {
 	public Threshold queryThresholdByName(String name);
 	
 	/**
+	 * 分页查询阈值
+	 * @param values 查询参数
+	 * @param pagination 分页对象
+	 * @return
+	 */
+	public Pagination<Threshold> findThresholdForPage(Map<String, ?> values,Pagination<Threshold> pagination);
+	
+	/**
+	 * 判断指定Id的阈值是否存在指定属性和属性值的记录
+	 * @param id Id
+	 * @param propertyName 属性
+	 * @param propertyValue 属性值
+	 * @return true：存在 false：不存在
+	 */
+   public boolean isExistThreshold(String id, String propertyName,String propertyValue);
+   
+   /**
 	 * 根据中心高和转速获取阈值
 	 * @param centerHeight 中心高
 	 * @param speed 转速
