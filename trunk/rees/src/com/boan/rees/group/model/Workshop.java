@@ -28,6 +28,11 @@ public class Workshop
 	 * 车间实体主键
 	 */
 	private String id;
+	/**
+	 * 公司编号，外键
+	 */
+	@Column(name = "COMPANY_ID")
+	private String companyId;
 
 	/**
 	 * 工厂编号
@@ -133,6 +138,16 @@ public class Workshop
 	public void setPrincipal( String principal )
 	{
 		this.principal = principal;
+	}
+
+	public String getCompanyId()
+	{
+		return companyId;
+	}
+
+	public void setCompanyId( String companyId )
+	{
+		this.companyId = companyId;
 	}
 
 }

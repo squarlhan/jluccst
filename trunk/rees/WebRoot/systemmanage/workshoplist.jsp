@@ -42,7 +42,8 @@
 	
 		$(function(){
 			$("#addbtn").click(function(){
-				parent.parent.tipsWindown("添加车间信息","iframe:openAddWorkshopAction.action?factoryId="+$("#factoryId").val(),"460","200","true","","true","no");
+				parent.parent.tipsWindown("添加车间信息","iframe:openAddWorkshopAction.action?companyId="+ $("#companyId").val()
+						+ "&factoryId="+$("#factoryId").val(),"460","200","true","","true","no");
 				parent.parent.$("#windown-close").bind('click',function(){
 					window.location.href="./openWorkshopAction.action?factoryId="+$("#factoryId").val();
 				});
@@ -57,9 +58,10 @@
 	  			$(this).click(function(){
 	  				var url = $(this).attr("url");
 	  				url += "&factoryId="+$("#factoryId").val();
+	  				url += "&companyId="+$("#companyId").val();
 	  				parent.parent.tipsWindown("修改车间信息","iframe:"+url,"460","200","true","","true","no");
 	  				parent.parent.$("#windown-close").bind('click',function(){
-						window.location.href="./openWorkshopAction.action?factoryId="+$("#factoryId").val();
+						window.location.href="./openWorkshopAction.action?companyId="+ $("#companyId").val() +"&factoryId="+$("#factoryId").val();
 					});
 	  			});
 	  		});
@@ -94,6 +96,7 @@
   <body>
  <s:form id="form1" name="form1" method="post" theme="simple">
  <s:hidden name="factoryId" id="factoryId"></s:hidden>
+ <s:hidden name="companyId" id="companyId"></s:hidden>
 <table width="100%" style="height:100%;" border="0" cellspacing="5" cellpadding="0">
   <tr>
     <td valign="top"><table width="100%" border="0" cellspacing="5" cellpadding="0">

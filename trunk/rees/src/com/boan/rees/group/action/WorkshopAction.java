@@ -28,6 +28,8 @@ public class WorkshopAction extends BaseActionSupport
 	private Workshop workshop = null;
 
 	private String[] ids = null;
+	
+	private String companyId = null;
 
 	private String factoryId = null;
 	
@@ -78,6 +80,7 @@ public class WorkshopAction extends BaseActionSupport
 		}
 		else
 		{
+			workshop.setCompanyId( companyId );
 			workshop.setFactoryId( factoryId );
 			service.save( workshop );
 			message.setContent( "车间信息保存成功！" );
@@ -114,6 +117,7 @@ public class WorkshopAction extends BaseActionSupport
 		}
 		else
 		{
+			workshop.setCompanyId( companyId );
 			workshop.setFactoryId( factoryId );
 			service.update( workshop );
 			message.setContent( "车间信息保存成功！" );
@@ -190,5 +194,15 @@ public class WorkshopAction extends BaseActionSupport
 	public void setMessage( Message message )
 	{
 		this.message = message;
+	}
+
+	public String getCompanyId()
+	{
+		return companyId;
+	}
+
+	public void setCompanyId( String companyId )
+	{
+		this.companyId = companyId;
 	}
 }
