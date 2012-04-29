@@ -46,7 +46,7 @@
 		$(function(){
 			
 			$("#addbtn").click(function(){
-				parent.parent.tipsWindown("添加公司信息","iframe:openAddCompanyAction.action","460","200","true","","true","no");
+				parent.parent.tipsWindown("添加级别信息","iframe:openAddCompanyAction.action","460","200","true","","true","no");
 				parent.parent.$("#windown-close").bind('click',function(){
 					window.location.href="./openCompanyAction.action";
 				});
@@ -61,7 +61,7 @@
 	  		$('a[name="edit"]').each(function(){
 	  			$(this).click(function(){
 	  				var url = $(this).attr("url");
-	  				parent.parent.tipsWindown("修改公司信息","iframe:"+url,"460","200","true","","true","no");
+	  				parent.parent.tipsWindown("修改级别信息","iframe:"+url,"460","200","true","","true","no");
 	  				parent.parent.$("#windown-close").bind('click',function(){
 						window.location.href="./openCompanyAction.action";
 					});
@@ -112,9 +112,11 @@
          <td align="center" background="../images/headerbg.jpg">  
    				<s:checkbox theme="simple" id="cbk_all" name="all"></s:checkbox>
    			</td>
-              <td align="center" background="../images/headerbg.jpg"><strong>公司名称</strong></td>
+              <td align="center" background="../images/headerbg.jpg"><strong>级别名称</strong></td>
+              <!-- 
               <td align="center" background="../images/headerbg.jpg"><strong>公司地址</strong></td>
               <td align="center" background="../images/headerbg.jpg"><strong>公司电话</strong></td>
+               -->
               <td align="center" background="../images/headerbg.jpg"><strong>操作</strong></td>
         </tr>
         <s:iterator value="pagination.data" status="obj">
@@ -123,8 +125,10 @@
 				<s:checkbox id="%{#obj.id}" name="ids" fieldValue="%{id}" value="false" theme="simple"/>
 			</td>
               <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="companyName"/></td>
+              <!-- 
               <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="address"/></td>
               <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="phone"/></td>
+               -->
           <td height="26" colspan="2" align="center" bgcolor="#FFFFFF">
           	<s:url id="edit_url" action="openModifyCompanyAction">   
 				<s:param name="company.id" value="id"></s:param>   
