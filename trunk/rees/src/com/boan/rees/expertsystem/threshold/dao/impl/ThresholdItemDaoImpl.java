@@ -8,8 +8,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Repository;
 
-import com.boan.rees.expertsystem.threshold.ThresholdItem;
 import com.boan.rees.expertsystem.threshold.dao.IThresholdItemDao;
+import com.boan.rees.expertsystem.threshold.model.ThresholdItem;
 import com.boan.rees.utils.dao.impl.BaseDao;
 
 /**
