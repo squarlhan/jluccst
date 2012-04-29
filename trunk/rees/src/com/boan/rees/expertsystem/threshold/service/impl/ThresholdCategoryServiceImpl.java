@@ -4,20 +4,27 @@
 
 package com.boan.rees.expertsystem.threshold.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
 
+import com.boan.rees.device.type.model.DeviceType;
 import com.boan.rees.expertsystem.threshold.dao.IThresholdCategoryDao;
 import com.boan.rees.expertsystem.threshold.model.ThresholdCategory;
+import com.boan.rees.expertsystem.threshold.service.IThresholdCategoryService;
+import com.boan.rees.utils.page.Pagination;
 
 /**
  * 阈值类别服务接口实现
  * @author ZhuYF
  * @version 1.0.0
  */
-public class ThresholdCategoryServiceImpl {
+@Service("thresholdCategoryService")
+public class ThresholdCategoryServiceImpl implements IThresholdCategoryService{
 	
 	@Autowired
 	@Qualifier("thresholdCategoryDao")
@@ -102,5 +109,45 @@ public class ThresholdCategoryServiceImpl {
 	public ThresholdCategory queryThresholdCategoryByName(String name){
 		return dao.queryThresholdCategoryByName(name);
 	}
+	
+	/**
+	 * 分页查询阈值类别
+	 * @param values 查询参数
+	 * @param pagination 分页对象
+	 * @return
+	 */
+	public Pagination<ThresholdCategory> findThresholdCategoryForPage(Map<String, ?> values,Pagination<ThresholdCategory> pagination){
+		String hql = "from ThresholdCategory order by createTime desc";
+		List<ThresholdCategory> data = dao.findForPage(hql, values, pagination.getStartIndex(), pagination.getPageSize());
+		hql = "select count(*) from ThresholdCategory";
+		int totalRows = dao.findCountForPage(hql, values);
+		pagination.setTotalRows(totalRows);
+		pagination.setData(data);
+		return pagination;
+	}
+	
+	/**
+	 * 判断指定Id的阈值类别是否存在指定属性和属性值的记录
+	 * @param id Id
+	 * @param propertyName 属性
+	 * @param propertyValue 属性值
+	 * @return true：存在 false：不存在
+	 */
+   public boolean isExistThresholdCategory(String id, String propertyName,String propertyValue){
+	   String hql = "from ThresholdCategory where "+propertyName+"=:"+propertyName+")";
+		Map<String, Object> values = new HashMap<String,Object>();
+		values.put(propertyName,propertyValue);
+		List<ThresholdCategory> list = dao.find(hql,values);
+		dao.clearSession();
+		if(list!=null && list.size()>0){
+			if(list.get(0).getId().toString().equals(id)){
+				return false;
+			}else{
+				return true;
+			}
+		}else{
+			return false;
+		}
+   }
 }
 

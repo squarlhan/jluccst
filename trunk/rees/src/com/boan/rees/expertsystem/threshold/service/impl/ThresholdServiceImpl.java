@@ -4,7 +4,9 @@
 
 package com.boan.rees.expertsystem.threshold.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -12,8 +14,10 @@ import org.springframework.stereotype.Service;
 
 import com.boan.rees.expertsystem.threshold.dao.IThresholdDao;
 import com.boan.rees.expertsystem.threshold.model.Threshold;
+import com.boan.rees.expertsystem.threshold.model.ThresholdCategory;
 import com.boan.rees.expertsystem.threshold.model.ThresholdItem;
 import com.boan.rees.expertsystem.threshold.service.IThresholdService;
+import com.boan.rees.utils.page.Pagination;
 
 /**
  * 阈值服务接口实现
@@ -106,6 +110,46 @@ public class ThresholdServiceImpl implements IThresholdService {
 		return dao.queryThresholdByName(name);
 	}
 	
+	/**
+	 * 分页查询阈值类别
+	 * @param values 查询参数
+	 * @param pagination 分页对象
+	 * @return
+	 */
+	public Pagination<Threshold> findThresholdForPage(Map<String, ?> values,Pagination<Threshold> pagination){
+		String hql = "from Threshold order by createTime desc";
+		List<Threshold> data = dao.findForPage(hql, values, pagination.getStartIndex(), pagination.getPageSize());
+		hql = "select count(*) from Threshold";
+		int totalRows = dao.findCountForPage(hql, values);
+		pagination.setTotalRows(totalRows);
+		pagination.setData(data);
+		return pagination;
+	}
+	
+	/**
+	 * 判断指定Id的阈值类别是否存在指定属性和属性值的记录
+	 * @param id Id
+	 * @param propertyName 属性
+	 * @param propertyValue 属性值
+	 * @return true：存在 false：不存在
+	 */
+   public boolean isExistThreshold(String id, String propertyName,String propertyValue){
+	   String hql = "from Threshold where "+propertyName+"=:"+propertyName+")";
+		Map<String, Object> values = new HashMap<String,Object>();
+		values.put(propertyName,propertyValue);
+		List<ThresholdCategory> list = dao.find(hql,values);
+		dao.clearSession();
+		if(list!=null && list.size()>0){
+			if(list.get(0).getId().toString().equals(id)){
+				return false;
+			}else{
+				return true;
+			}
+		}else{
+			return false;
+		}
+   }
+   
 	/**
 	 * 根据中心高和转速获取阈值
 	 * @param centerHeight 中心高
