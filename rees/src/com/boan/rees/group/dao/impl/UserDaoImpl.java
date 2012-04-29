@@ -57,22 +57,26 @@ public class UserDaoImpl extends BaseDao<User,String> implements IUserDao{
 	{
 		String hql = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		if( StringUtils.isNotBlank( companyId ) )
+		//表示公司用户
+		if( StringUtils.isNotBlank( companyId ) && StringUtils.isBlank( factoryId ) && StringUtils.isBlank( workshopId ) )
 		{
-			hql = "from User where companyId = :companyId order by createTime";
+			hql = "from User where companyId = :companyId and (factoryId is null or factoryId = '') and ( workshopId is null or workshopId = '' ) order by createTime";
 			map.put( "companyId", companyId );
 		}
-		else if( StringUtils.isNotBlank( factoryId ) )
+		//表示工厂用户
+		else if( StringUtils.isNotBlank( companyId ) && StringUtils.isNotBlank( factoryId ) && StringUtils.isBlank( workshopId ) )
 		{
-			hql = "from User where factoryId = :factoryId order by createTime";
+			hql = "from User where companyId = :companyId and factoryId = :factoryId and (workshopId is null or workshopId = '') order by createTime";
+			map.put( "companyId", companyId );
 			map.put( "factoryId", factoryId );
-
 		}
-		else if( StringUtils.isNotBlank( workshopId ) )
+		//表示车间用户
+		else if( StringUtils.isNotBlank( companyId ) && StringUtils.isNotBlank( factoryId ) && StringUtils.isNotBlank( workshopId ) )
 		{
-			hql = "from User where workshopId = :workshopId order by createTime";
+			hql = "from User where companyId = :companyId and factoryId = :factoryId and workshopId = :workshopId order by createTime";
+			map.put( "companyId", companyId );
+			map.put( "factoryId", factoryId );
 			map.put( "workshopId", workshopId );
-
 		}
 		return super.findForPage( hql, map, startIndex, maxResults );
 	}
@@ -81,22 +85,24 @@ public class UserDaoImpl extends BaseDao<User,String> implements IUserDao{
 	{
 		String hql = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		if( StringUtils.isNotBlank( companyId ) )
+		//表示公司用户
+		if( StringUtils.isNotBlank( companyId ) && StringUtils.isBlank( factoryId ) && StringUtils.isBlank( workshopId ) )
 		{
-			hql = "select count(id) from User where companyId = :companyId";
+			hql = " select count(id) from User where companyId = :companyId and (factoryId is null or factoryId = '') and (workshopId is null or workshopId = '' ) ";
 			map.put( "companyId", companyId );
 		}
-		else if( StringUtils.isNotBlank( factoryId ) )
+		else if( StringUtils.isNotBlank( companyId ) && StringUtils.isNotBlank( factoryId ) && StringUtils.isBlank( workshopId ) )
 		{
-			hql = "select count(id) from User where factoryId = :factoryId";
+			hql = "select count(id) from User where companyId = :companyId and factoryId = :factoryId and (workshopId is null or workshopId = '')";
+			map.put( "companyId", companyId );
 			map.put( "factoryId", factoryId );
-
 		}
-		else if( StringUtils.isNotBlank( workshopId ) )
+		else if( StringUtils.isNotBlank( companyId ) && StringUtils.isNotBlank( factoryId ) && StringUtils.isNotBlank( workshopId ) )
 		{
-			hql = "select count(id) from User where workshopId = :workshopId";
+			hql = "select count(id) from User where companyId = :companyId and factoryId = :factoryId and workshopId = :workshopId";
+			map.put( "companyId", companyId );
+			map.put( "factoryId", factoryId );
 			map.put( "workshopId", workshopId );
-
 		}
 		return super.findCountForPage( hql, map );
 	}
