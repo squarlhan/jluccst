@@ -4,8 +4,13 @@
 
 package com.boan.rees.expertsystem.threshold.action;
 
+import java.util.Calendar;
+import java.util.HashMap;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Scope;
+import org.springframework.stereotype.Controller;
 
 import com.boan.rees.expertsystem.threshold.model.ThresholdCategory;
 import com.boan.rees.expertsystem.threshold.service.IThresholdCategoryService;
@@ -17,10 +22,12 @@ import com.opensymphony.xwork2.ActionSupport;
  * @author ZhuYF
  * @version 1.0.0
  */
+ @Controller("thresholdCategoryAction")
+ @Scope("prototype")
 public class ThresholdCategoryAction extends ActionSupport{
 
 	/**
-	 * 用于调用数据库相关操作
+	 * 阈值类别服务接口
 	 */
 	@Autowired
 	@Qualifier("thresholdCategoryService")
@@ -49,18 +56,19 @@ public class ThresholdCategoryAction extends ActionSupport{
 	 * 分页显示报表列表
 	 * @return
 	 */
-	public String openDeviceType(){
-//		pagination = service.findDeviceTypeForPage(new HashMap(), pagination);
+	public String openThresholdCategory(){
+		pagination = service.findThresholdCategoryForPage(new HashMap(), pagination);
 		return this.SUCCESS;
 	}
 
     /**
-	 * 添加新报表
+	 * 添加新阈值类别
 	 * @return
 	 */
 	public String toAddThresholdCategory(){
 		try {
-			//保存设备对象
+			//保存阈值对象
+			thresholdCategory.setCreateTime(Calendar.getInstance());
 			service.saveThresholdCategory(thresholdCategory);
 			message="保存成功！";
 		} catch (Exception e) {
@@ -73,9 +81,11 @@ public class ThresholdCategoryAction extends ActionSupport{
 	 * 保存前验证
 	 */
 	public void validateToAddThresholdCategory(){
-		boolean flag =false;//= service.isExistDeviceTypeProperty(thresholdCategory.getId(),"typeName",thresholdCategory.getCategoryName());
-		if(flag){
-			addFieldError("", "系统在已存在相同名称的设备类型！");
+		if(thresholdCategory.getId()!=null){
+			boolean flag =service.isExistThresholdCategory(thresholdCategory.getId().toString(),"categoryName",thresholdCategory.getCategoryName());
+			if(flag){
+				addFieldError("", "系统在已存在相同名称的类别！");
+			}
 		}
 	}
 	/**
@@ -89,16 +99,16 @@ public class ThresholdCategoryAction extends ActionSupport{
 	}
 
 	/**
-	 * 删除报表数据
+	 * 删除阈值类别数据
 	 * @return
 	 */
-	public String deleteDeviceType(){
+	public String deleteThresholdCategory(){
 		service.deleteThresholdCategoryByIds(ids);
 		return NONE;
 	}
 	
 	/**
-	 * 为修改报表页面做准备
+	 * 为修改阈值类别页面做准备
 	 * @return
 	 */
 	public String openModifyThresholdCategory(){
@@ -108,7 +118,7 @@ public class ThresholdCategoryAction extends ActionSupport{
 	}
 	
 	/**
-	 * 修改报表信息
+	 * 修改阈值类别信息
 	 * @return 
 	 */
 	public String toModifyThresholdCategory(){
@@ -124,11 +134,51 @@ public class ThresholdCategoryAction extends ActionSupport{
 	/**
 	 * 保存前验证
 	 */
-	public void validateToModifyDeviceType(){
-//		boolean flag = service.isExistDeviceTypeProperty(thresholdCategory.getId(),"typeName",thresholdCategory.getTypeName());
-//		if(flag){
-//			addFieldError("", "系统在已存在相同名称的设备类型！");
-//		}
+	public void validateToModifyThresholdCategory(){
+		boolean flag =service.isExistThresholdCategory(thresholdCategory.getId().toString(),"categoryName",thresholdCategory.getCategoryName());
+		if(flag){
+			addFieldError("", "系统在已存在相同名称的类别！");
+		}
+	}
+
+	public IThresholdCategoryService getService() {
+		return service;
+	}
+
+	public void setService(IThresholdCategoryService service) {
+		this.service = service;
+	}
+
+	public Pagination<ThresholdCategory> getPagination() {
+		return pagination;
+	}
+
+	public void setPagination(Pagination<ThresholdCategory> pagination) {
+		this.pagination = pagination;
+	}
+
+	public ThresholdCategory getThresholdCategory() {
+		return thresholdCategory;
+	}
+
+	public void setThresholdCategory(ThresholdCategory thresholdCategory) {
+		this.thresholdCategory = thresholdCategory;
+	}
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+
+	public String[] getIds() {
+		return ids;
+	}
+
+	public void setIds(String[] ids) {
+		this.ids = ids;
 	}
 }
 
