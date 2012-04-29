@@ -5,6 +5,7 @@
 package com.boan.rees.expertsystem.threshold.model;
 
 import java.io.Serializable;
+import java.util.Calendar;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -60,6 +61,12 @@ public class ThresholdItem implements Serializable {
     @JoinColumn(name = "Threshold_Id")
     private Threshold threshold;
 
+    /**
+	 * 创建时间
+	 */
+	@Column(name = "CREATE_TIME")
+	private Calendar createTime;
+	
 	public Integer getId() {
 		return id;
 	}
@@ -106,5 +113,13 @@ public class ThresholdItem implements Serializable {
 
 	public void setThreshold(Threshold threshold) {
 		this.threshold = threshold;
+	}
+
+	public Calendar getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(Calendar createTime) {
+		this.createTime = createTime;
 	}
 }
