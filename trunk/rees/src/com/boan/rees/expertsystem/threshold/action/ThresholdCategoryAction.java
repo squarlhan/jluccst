@@ -7,7 +7,7 @@ package com.boan.rees.expertsystem.threshold.action;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
-import com.boan.rees.expertsystem.threshold.ThresholdCategory;
+import com.boan.rees.expertsystem.threshold.model.ThresholdCategory;
 import com.boan.rees.expertsystem.threshold.service.IThresholdCategoryService;
 import com.boan.rees.utils.page.Pagination;
 import com.opensymphony.xwork2.ActionSupport;
