@@ -108,7 +108,7 @@ public class DeviceTypeAction extends BaseActionSupport{
 	 */
 	public String toAddDeviceType(){
 		try {
-			//保存设备对象
+			//保存设备类型对象
 			service.save(deviceType);
 			message="保存成功！";
 		} catch (Exception e) {
