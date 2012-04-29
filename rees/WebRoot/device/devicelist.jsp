@@ -143,17 +143,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     </table>
       <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#d5e4fd">
         <tr>
-         <td align="center" >  
+         <td align="center"  background="<%=path %>/images/headerbg.jpg">  
    				<s:checkbox theme="simple" id="cbk_all" name="all"></s:checkbox>
    			</td>
    
-		  <td width="15%" align="center" background="../images/headerbg.jpg"><strong>设备名称</strong></td>
-          <td width="20%" align="center" background="../images/headerbg.jpg"><strong>设备编号</strong></td>
-          <td width="10%" align="center" background="../images/headerbg.jpg"><strong>设备类型</strong></td>
-		  <td width="20%" align="center" background="../images/headerbg.jpg"><strong>设备型号</strong></td>
-		  <td width="20%" align="center" background="../images/headerbg.jpg"><strong>设备厂商</strong></td>
-		  <td width="8%" align="center" background="../images/headerbg.jpg"><strong>监控点</strong></td>
-		  <td width="10%" align="center" background="../images/headerbg.jpg"><strong>操作</strong></td>
+		  <td width="15%" align="center" background="<%=path %>/images/headerbg.jpg"><strong>设备名称</strong></td>
+          <td width="20%" align="center" background="<%=path %>/images/headerbg.jpg"><strong>设备编号</strong></td>
+          <td width="10%" align="center" background="<%=path %>/images/headerbg.jpg"><strong>设备类型</strong></td>
+		  <td width="20%" align="center" background="<%=path %>/images/headerbg.jpg"><strong>设备型号</strong></td>
+		  <td width="20%" align="center" background="<%=path %>/images/headerbg.jpg"><strong>设备厂商</strong></td>
+		  <td width="8%" align="center" background="<%=path %>/images/headerbg.jpg"><strong>监控点</strong></td>
+		  <td width="10%" align="center" background="<%=path %>/images/headerbg.jpg"><strong>操作</strong></td>
         </tr>
         <s:iterator value="pagination.data" status="obj">
         <tr>
