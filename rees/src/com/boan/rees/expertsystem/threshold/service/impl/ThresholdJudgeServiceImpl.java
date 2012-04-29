@@ -13,8 +13,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import com.boan.rees.expertsystem.threshold.Threshold;
-import com.boan.rees.expertsystem.threshold.ThresholdItem;
+import com.boan.rees.expertsystem.threshold.model.Threshold;
+import com.boan.rees.expertsystem.threshold.model.ThresholdItem;
 import com.boan.rees.expertsystem.threshold.service.IThresholdJudgeService;
 import com.boan.rees.expertsystem.threshold.service.IThresholdService;
 

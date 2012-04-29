@@ -9,8 +9,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 
-import com.boan.rees.expertsystem.threshold.ThresholdItem;
 import com.boan.rees.expertsystem.threshold.dao.IThresholdItemDao;
+import com.boan.rees.expertsystem.threshold.model.ThresholdItem;
 
 /**
  * 阈值项服务接口实现
