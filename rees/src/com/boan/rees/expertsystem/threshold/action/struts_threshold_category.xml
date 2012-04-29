@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">	
+<struts>
+	<!-- 阈值类别管理 -->
+     <package name="threshold_category" extends="struts-default" namespace="/">
+    	
+    	<!-- 打开阈值类别列表 -->
+    	<action name="openThresholdCategoryAction" class="thresholdCategoryAction" method="openThresholdCategory">
+    		<result name="success">/expertsystem/threshold/thresholdcategorylist.jsp</result>
+    		<result name="input">/expertsystem/threshold/thresholdcategorylist.jsp</result>
+    	</action>
+    	<!-- 打开添加阈值类别页面 -->
+    	<action name="openAddDeviceTypeAction" class="deviceTypeAction" method="openAddDeviceType">
+    		<result name="success">/expertsystem/threshold/thresholdcategoryinfo.jsp</result>
+    		<result name="input">/expertsystem/threshold/thresholdcategoryinfo.jsp</result>
+    	</action>
+    	
+    	<!-- 添加阈值类别 -->
+    	 <action name="toAddDeviceTypeAction" class="deviceTypeAction" method="toAddDeviceType">
+            <result name="success">/base/devicetype/devicetypeinfo.jsp</result>
+            <result name="input">/base/devicetype/devicetypeinfo.jsp</result>
+        </action>
+        
+        <!-- 删除阈值类别 -->
+        <action name="deleteDeviceTypeAction" class="deviceTypeAction" method="deleteDeviceType"/>
+        
+        
+        <!-- 打开修改阈值类别页面 -->
+    	<action name="openModifyDeviceTypeAction" class="deviceTypeAction" method="openModifyDeviceType">
+    		<result name="success">/base/devicetype/devicetypeinfo.jsp</result>
+    		<result name="input">/base/devicetype/devicetypeinfo.jsp</result>
+    	</action>
+    	
+        <!-- 修改阈值类别 -->
+    	<action name="toModifyDeviceTypeAction" class="deviceTypeAction" method="toModifyDeviceType">
+    		<result name="success">/base/devicetype/devicetypeinfo.jsp</result>
+    		<result name="input">/base/devicetype/devicetypeinfo.jsp</result>
+    	</action>
+      </package>	    
+      <!-- ajax异步调用返回Action为json对象 -->
+      <package name="device_type_ajax" extends="json-default" namespace="/">
+		<action name="toGetDeviceTypeInfoAction" class="deviceTypeAction" method="toGetDeviceTypeInfo">
+            <result type="json"></result>
+        </action>
+	</package>	
+</struts>
