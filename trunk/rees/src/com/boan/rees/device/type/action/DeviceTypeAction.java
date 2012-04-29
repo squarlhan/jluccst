@@ -15,7 +15,7 @@ import com.boan.rees.utils.page.Pagination;
 
 
 /**
- * 报表Action
+ * 设备类型Action
  * @author Jiangmeidi
  * @version 1.0.0
  */
@@ -94,7 +94,7 @@ public class DeviceTypeAction extends BaseActionSupport{
 	}
 
 	/**
-	 * 分页显示报表列表
+	 * 分页显示设备类型列表
 	 * @return
 	 */
 	public String openDeviceType(){
@@ -103,7 +103,7 @@ public class DeviceTypeAction extends BaseActionSupport{
 	}
 
     /**
-	 * 添加新报表
+	 * 添加新设备类型
 	 * @return
 	 */
 	public String toAddDeviceType(){
@@ -127,7 +127,7 @@ public class DeviceTypeAction extends BaseActionSupport{
 		}
 	}
 	/**
-	 * 打开添加新报表页
+	 * 打开添加新设备类型页
 	 * @return
 	 */
 	
@@ -137,7 +137,7 @@ public class DeviceTypeAction extends BaseActionSupport{
 	}
 
 	/**
-	 * 删除报表数据
+	 * 删除设备类型数据
 	 * @return
 	 */
 	public String deleteDeviceType(){
@@ -146,7 +146,7 @@ public class DeviceTypeAction extends BaseActionSupport{
 	}
 	
 	/**
-	 * 为修改报表页面做准备
+	 * 为修改设备类型页面做准备
 	 * @return
 	 */
 	public String openModifyDeviceType(){
@@ -156,7 +156,7 @@ public class DeviceTypeAction extends BaseActionSupport{
 	}
 	
 	/**
-	 * 修改报表信息
+	 * 修改设备类型信息
 	 * @return 
 	 */
 	public String toModifyDeviceType(){
