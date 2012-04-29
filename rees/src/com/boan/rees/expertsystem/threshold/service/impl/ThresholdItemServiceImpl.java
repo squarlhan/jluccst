@@ -11,13 +11,14 @@ import org.springframework.beans.factory.annotation.Qualifier;
 
 import com.boan.rees.expertsystem.threshold.dao.IThresholdItemDao;
 import com.boan.rees.expertsystem.threshold.model.ThresholdItem;
+import com.boan.rees.expertsystem.threshold.service.IThresholdItemService;
 
 /**
  * 阈值项服务接口实现
  * @author ZhuYF
  * @version 1.0.0
  */
-public class ThresholdItemServiceImpl {
+public class ThresholdItemServiceImpl implements IThresholdItemService{
 	
 	@Autowired
 	@Qualifier("thresholdItemDao")
