@@ -403,7 +403,7 @@
 										<td height="26" align="left" bgcolor="#FFFFFF">
 											<s:file name="files" cssStyle="width: 250px;"></s:file>
 											<br/>
-											<font size="1px" color="red">建议图片尺寸为200X200</font>
+											<font size="1px" color="red">建议图片尺寸为长600px，宽473px</font>
 										</td>
 									</tr>
 									</s:else>
