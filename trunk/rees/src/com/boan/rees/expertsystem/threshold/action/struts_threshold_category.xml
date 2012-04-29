@@ -12,37 +12,30 @@
     		<result name="input">/expertsystem/threshold/thresholdcategorylist.jsp</result>
     	</action>
     	<!-- 打开添加阈值类别页面 -->
-    	<action name="openAddDeviceTypeAction" class="deviceTypeAction" method="openAddDeviceType">
+    	<action name="openAddThresholdCategoryAction" class="thresholdCategoryAction" method="openAddThresholdCategory">
     		<result name="success">/expertsystem/threshold/thresholdcategoryinfo.jsp</result>
     		<result name="input">/expertsystem/threshold/thresholdcategoryinfo.jsp</result>
     	</action>
     	
     	<!-- 添加阈值类别 -->
-    	 <action name="toAddDeviceTypeAction" class="deviceTypeAction" method="toAddDeviceType">
-            <result name="success">/base/devicetype/devicetypeinfo.jsp</result>
-            <result name="input">/base/devicetype/devicetypeinfo.jsp</result>
+    	 <action name="toAddThresholdCategoryAction" class="thresholdCategoryAction" method="toAddThresholdCategory">
+            <result name="success">/expertsystem/threshold/thresholdcategoryinfo.jsp</result>
+    		<result name="input">/expertsystem/threshold/thresholdcategoryinfo.jsp</result>
         </action>
         
         <!-- 删除阈值类别 -->
-        <action name="deleteDeviceTypeAction" class="deviceTypeAction" method="deleteDeviceType"/>
-        
+        <action name="deleteThresholdCategoryAction" class="thresholdCategoryAction" method="deleteThresholdCategory"/>
         
         <!-- 打开修改阈值类别页面 -->
-    	<action name="openModifyDeviceTypeAction" class="deviceTypeAction" method="openModifyDeviceType">
-    		<result name="success">/base/devicetype/devicetypeinfo.jsp</result>
-    		<result name="input">/base/devicetype/devicetypeinfo.jsp</result>
+    	<action name="openModifyThresholdCategoryAction" class="thresholdCategoryAction" method="openModifyThresholdCategory">
+    		<result name="success">/expertsystem/threshold/thresholdcategoryinfo.jsp</result>
+    		<result name="input">/expertsystem/threshold/thresholdcategoryinfo.jsp</result>
     	</action>
     	
         <!-- 修改阈值类别 -->
-    	<action name="toModifyDeviceTypeAction" class="deviceTypeAction" method="toModifyDeviceType">
-    		<result name="success">/base/devicetype/devicetypeinfo.jsp</result>
-    		<result name="input">/base/devicetype/devicetypeinfo.jsp</result>
+    	<action name="toModifyThresholdCategoryAction" class="thresholdCategoryAction" method="toModifyThresholdCategory">
+    		<result name="success">/expertsystem/threshold/thresholdcategoryinfo.jsp</result>
+    		<result name="input">/expertsystem/threshold/thresholdcategoryinfo.jsp</result>
     	</action>
       </package>	    
-      <!-- ajax异步调用返回Action为json对象 -->
-      <package name="device_type_ajax" extends="json-default" namespace="/">
-		<action name="toGetDeviceTypeInfoAction" class="deviceTypeAction" method="toGetDeviceTypeInfo">
-            <result type="json"></result>
-        </action>
-	</package>	
 </struts>

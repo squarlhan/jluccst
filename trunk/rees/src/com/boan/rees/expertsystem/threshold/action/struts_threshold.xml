@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">	
+<struts>
+	<!-- 阈值管理 -->
+     <package name="threshold" extends="struts-default" namespace="/">
+    	
+    	<!-- 打开阈值列表 -->
+    	<action name="openThresholdAction" class="thresholdAction" method="openThreshold">
+    		<result name="success">/expertsystem/threshold/thresholdlist.jsp</result>
+    		<result name="input">/expertsystem/threshold/thresholdlist.jsp</result>
+    	</action>
+    	<!-- 打开添加阈值页面 -->
+    	<action name="openAddThresholdAction" class="thresholdAction" method="openAddThreshold">
+    		<result name="success">/expertsystem/threshold/thresholdinfo.jsp</result>
+    		<result name="input">/expertsystem/threshold/thresholdinfo.jsp</result>
+    	</action>
+    	
+    	<!-- 添加阈值 -->
+    	 <action name="toAddThresholdAction" class="thresholdAction" method="toAddThreshold">
+            <result name="success">/expertsystem/threshold/thresholdinfo.jsp</result>
+    		<result name="input">/expertsystem/threshold/thresholdinfo.jsp</result>
+        </action>
+        
+        <!-- 删除阈值 -->
+        <action name="deleteThresholdAction" class="thresholdAction" method="deleteThreshold"/>
+        
+        <!-- 打开修改阈值页面 -->
+    	<action name="openModifyThresholdAction" class="thresholdAction" method="openModifyThreshold">
+    		<result name="success">/expertsystem/threshold/thresholdinfo.jsp</result>
+    		<result name="input">/expertsystem/threshold/thresholdinfo.jsp</result>
+    	</action>
+    	
+        <!-- 修改阈值 -->
+    	<action name="toModifyThresholdAction" class="thresholdAction" method="toModifyThreshold">
+    		<result name="success">/expertsystem/threshold/thresholdinfo.jsp</result>
+    		<result name="input">/expertsystem/threshold/thresholdinfo.jsp</result>
+    	</action>
+      </package>	    
+</struts>
