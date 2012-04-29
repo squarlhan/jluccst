@@ -418,7 +418,7 @@
 												<img src="images/menuto.jpg" width="5" height="5" />
 											</td>
 											<td>
-												<a href="openAddTemplateAction.action" target="mainFrame">报表模板</a>
+												<a href="reportmanage/templatemanage.jsp" target="mainFrame">报表模板</a>
 											</td>
 										</tr>
 									</table>
