@@ -5,8 +5,11 @@
 package com.boan.rees.expertsystem.threshold.service;
 
 import java.util.List;
+import java.util.Map;
 
+import com.boan.rees.device.type.model.DeviceType;
 import com.boan.rees.expertsystem.threshold.model.ThresholdCategory;
+import com.boan.rees.utils.page.Pagination;
 
 /**
  * 阈值类别服务接口
@@ -75,5 +78,22 @@ public interface IThresholdCategoryService {
 	 * @return
 	 */
 	public ThresholdCategory queryThresholdCategoryByName(String name);
+	
+	/**
+	 * 分页查询阈值类别
+	 * @param values 查询参数
+	 * @param pagination 分页对象
+	 * @return
+	 */
+	public Pagination<ThresholdCategory> findThresholdCategoryForPage(Map<String, ?> values,Pagination<ThresholdCategory> pagination);
+	
+	/**
+	 * 判断指定Id的阈值类别是否存在指定属性和属性值的记录
+	 * @param id Id
+	 * @param propertyName 属性
+	 * @param propertyValue 属性值
+	 * @return true：存在 false：不存在
+	 */
+   public boolean isExistThresholdCategory(String id, String propertyName,String propertyValue);
 }
 
