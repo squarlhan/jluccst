@@ -435,7 +435,7 @@
 												<img src="images/menuto.jpg" width="5" height="5" />
 											</td>
 											<td>
-												<a href="openDeviceTypeAction.action" target="mainFrame">设备类型</a>
+												<a href="base/devicetype/devicemanage.jsp" target="mainFrame">设备类型</a>
 											</td>
 										</tr>
 									</table>
