@@ -186,7 +186,7 @@
 							<table id="table1" width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#d5e4fd">
 								<tr>
 									<td height="26" align="center" bgcolor="#d5e4fd" colspan="2">
-										<strong>人报表模板管理</strong>
+										<strong>报表模板信息维护</strong>
 									</td>
 								</tr>
 								<tr>
