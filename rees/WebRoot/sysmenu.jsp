@@ -210,7 +210,7 @@
 												<img src="images/menuto.jpg" width="5" height="5" />
 											</td>
 											<td>
-												<a href="reportmanage/openReportAction.action"
+												<a href="reportmanage/reportmanage.jsp"
 													target="mainFrame">个人报表</a>
 											</td>
 										</tr>
