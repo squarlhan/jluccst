@@ -266,7 +266,7 @@
 												<input name="button1" type="button" class="btn_2_3"
 													id="button1" value="确定">
 												<input name="button2" type="button" class="btn_2_3"
-													id="button2" value="关闭">
+													id="button2" value="取消">
 											</td>
 										</tr>
 									</table>
