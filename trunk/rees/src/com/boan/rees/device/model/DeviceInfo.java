@@ -98,6 +98,11 @@ public class DeviceInfo implements Serializable {
 	@Column(name = "ISDELETE")
 	private Integer isDelete;
 	/**
+	 * 所属公司Id
+	 */
+	@Column(name = "COMPANY_ID")
+	private String companyId;
+	/**
 	 * 所属工厂Id
 	 */
 	@Column(name = "FACTORY_ID")
@@ -256,5 +261,13 @@ public class DeviceInfo implements Serializable {
 //	public void setPointWarnValue(BigDecimal pointWarnValue) {
 //		this.pointWarnValue = pointWarnValue;
 //	}
+	public String getCompanyId()
+	{
+		return companyId;
+	}
+	public void setCompanyId( String companyId )
+	{
+		this.companyId = companyId;
+	}
 }
 
