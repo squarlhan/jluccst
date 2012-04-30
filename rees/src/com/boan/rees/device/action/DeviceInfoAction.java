@@ -74,6 +74,11 @@ public class DeviceInfoAction extends BaseActionSupport{
 	private IDeviceTypeService deviceTypeService;
 
 	/**
+	 * 树传过来的公司id
+	 */
+	private String companyId;
+	
+	/**
 	 * 树传过来的工厂Id
 	 */
 	private String factoryId;
@@ -363,10 +368,9 @@ public class DeviceInfoAction extends BaseActionSupport{
 	 */
 	public String openDevice(){
 		Map<String,String> param = new HashMap<String,String>();
-		if(factoryId!=null && workshopId!=null){
-			param.put("factoryId", factoryId);
-			param.put("workshopId", workshopId);
-		}
+		param.put("companyId", companyId);
+		param.put("factoryId", factoryId);
+		param.put("workshopId", workshopId);
 		pagination = deviceInfoService.findDeviceInfoForPage(param, pagination);
 		return this.SUCCESS;
 	}
@@ -510,6 +514,7 @@ public class DeviceInfoAction extends BaseActionSupport{
 		if(device==null){
 			device = new DeviceInfo();
 		}
+		device.setCompanyId( companyId );
 		device.setFactoryId(factoryId);
 		device.setWorkshopId(workshopId);
 		return SUCCESS;
@@ -700,5 +705,15 @@ public class DeviceInfoAction extends BaseActionSupport{
 	public String toDeletePointParam(){
 		pointParamInfoService.delete(pointId);
 		return NONE;
+	}
+
+	public String getCompanyId()
+	{
+		return companyId;
+	}
+
+	public void setCompanyId( String companyId )
+	{
+		this.companyId = companyId;
 	}
 }
