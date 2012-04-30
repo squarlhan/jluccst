@@ -4,7 +4,9 @@ package com.boan.rees.device.service.impl;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -70,10 +72,38 @@ public class DeviceInfoServiceImpl  implements IDeviceInfoService {
 	@Override
 	public Pagination<DeviceInfo> findDeviceInfoForPage(Map<String, ?> values,Pagination<DeviceInfo> pagination){
 		
-		String hql = "from DeviceInfo where isDelete is null and factoryId=:factoryId and workshopId=:workshopId order by sortIndex,createTime";
-		List<DeviceInfo> data = deviceInfoDao.findForPage(hql, values, pagination.getStartIndex(), pagination.getPageSize());
-		hql = "select count(*) from DeviceInfo where isDelete is null and factoryId=:factoryId and workshopId=:workshopId";
-		int totalRows = deviceInfoDao.findCountForPage(hql, values);
+		String hql = null;
+		String hqlCount = null;
+		String companyId = (String)values.get( "companyId" );
+		String factoryId = (String)values.get( "factoryId" );
+		String workshopId = (String)values.get( "workshopId" );
+		Map<String, Object > map = new HashMap<String ,Object>();
+		//表示公司
+		if( StringUtils.isNotBlank( companyId ) && StringUtils.isBlank( factoryId ) && StringUtils.isBlank( workshopId ))
+		{
+			hql = "from DeviceInfo where isDelete is null and companyId = :companyId and ( factoryId is null or factoryId = '' ) and ( workshopId is null or workshopId = '') order by sortIndex,createTime";
+			hqlCount = "select count(*) from DeviceInfo where isDelete is null and companyId = :companyId and ( factoryId is null or factoryId = '' ) and ( workshopId is null or workshopId = '') ";
+			map.put( "companyId", companyId );
+		}
+		//表示工厂
+		else if( StringUtils.isNotBlank( companyId ) && StringUtils.isNotBlank( factoryId ) && StringUtils.isBlank( workshopId ))
+		{
+			hql = "from DeviceInfo where isDelete is null and companyId = :companyId and factoryId = :factoryId and ( workshopId is null or workshopId = '') order by sortIndex,createTime";
+			hqlCount = "select count(*) from DeviceInfo where isDelete is null and companyId = :companyId and  factoryId = :factoryId  and ( workshopId is null or workshopId = '') ";
+			map.put( "companyId", companyId );
+			map.put( "factoryId", factoryId );
+		}
+		//表示车间
+		else if( StringUtils.isNotBlank( companyId ) && StringUtils.isNotBlank( factoryId ) && StringUtils.isNotBlank( workshopId ))
+		{
+			hql = "from DeviceInfo where isDelete is null and companyId = :companyId and factoryId = :factoryId and workshopId = :workshopId order by sortIndex,createTime";
+			hqlCount = "select count(*) from DeviceInfo where isDelete is null and companyId = :companyId and  factoryId = :factoryId  and workshopId = :workshopId ";
+			map.put( "companyId", companyId );
+			map.put( "factoryId", factoryId );
+			map.put( "workshopId", workshopId );
+		}
+		List<DeviceInfo> data = deviceInfoDao.findForPage(hql, map, pagination.getStartIndex(), pagination.getPageSize());
+		int totalRows = deviceInfoDao.findCountForPage(hqlCount, map);
 		pagination.setTotalRows(totalRows);
 		pagination.setData(data);
 		return pagination;
