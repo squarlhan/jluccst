@@ -64,6 +64,15 @@ public class RuleResultInfoServiceImpl implements IRuleResultInfoService{
 	//public RuleResultInfo findbyDeviceTypeId(String id){
 		
 	//}
+	
+	/**
+	 * 根据设备类型Id查询所包含的故障信息
+	 */
+	public List<RuleResultInfo> findRuleResultInfoByDeviceTypeId(String deviceTypeId){
+		String hql = "from RuleResultInfo where deviceTypeId=:deviceTypeId";
+		List<RuleResultInfo> list = ruleResultInfoDao.find( hql , deviceTypeId);
+		return list;
+	}
 
 }
 
