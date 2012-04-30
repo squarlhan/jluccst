@@ -280,6 +280,7 @@
 		<s:hidden id="hid_sortIndex" name="device.sortIndex"></s:hidden>
 		<s:hidden id="hid_createTime" name="device.createTime"></s:hidden>
 		<s:hidden id="hid_isDelete" name="device.isDelete"></s:hidden>
+		<s:hidden id="hid_companyId" name="device.companyId"></s:hidden>
 		<s:hidden id="hid_factoryId" name="device.factoryId"></s:hidden>
 		<s:hidden id="hid_workshopId" name="device.workshopId"></s:hidden>
 		<table width="100%" border="0" cellspacing="5" cellpadding="0">
