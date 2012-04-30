@@ -4,6 +4,7 @@
 
 package com.boan.rees.expertsystem.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -70,7 +71,9 @@ public class RuleResultInfoServiceImpl implements IRuleResultInfoService{
 	 */
 	public List<RuleResultInfo> findRuleResultInfoByDeviceTypeId(String deviceTypeId){
 		String hql = "from RuleResultInfo where deviceTypeId=:deviceTypeId";
-		List<RuleResultInfo> list = ruleResultInfoDao.find( hql , deviceTypeId);
+		Map<String,String> params = new HashMap<String,String>();
+		params.put("deviceTypeId", deviceTypeId);
+		List<RuleResultInfo> list = ruleResultInfoDao.find( hql , params);
 		return list;
 	}
 
