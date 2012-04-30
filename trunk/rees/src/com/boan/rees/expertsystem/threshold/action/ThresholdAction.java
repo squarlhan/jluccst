@@ -155,14 +155,6 @@ public class ThresholdAction extends ActionSupport{
 		}
 	}
 
-	public IThresholdService getService() {
-		return service;
-	}
-
-	public void setService(IThresholdService service) {
-		this.service = service;
-	}
-
 	public Pagination<Threshold> getPagination() {
 		return pagination;
 	}

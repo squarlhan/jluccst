@@ -137,7 +137,7 @@ public class ThresholdServiceImpl implements IThresholdService {
 	   String hql = "from Threshold where "+propertyName+"=:"+propertyName+")";
 		Map<String, Object> values = new HashMap<String,Object>();
 		values.put(propertyName,propertyValue);
-		List<ThresholdCategory> list = dao.find(hql,values);
+		List<Threshold> list = dao.find(hql,values);
 		dao.clearSession();
 		if(list!=null && list.size()>0){
 			if(list.get(0).getId().toString().equals(id)){

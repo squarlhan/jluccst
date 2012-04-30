@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">	
+<struts>
+	<!-- 阈值项管理 -->
+     <package name="threshold_item" extends="struts-default" namespace="/">
+    	
+    	<!-- 打开阈值项列表 -->
+    	<action name="openThresholdItemAction" class="thresholdItemAction" method="openThresholdItem">
+    		<result name="success">/expertsystem/threshold/thresholditemlist.jsp</result>
+    		<result name="input">/expertsystem/threshold/thresholditemlist.jsp</result>
+    	</action>
+    	<!-- 打开添加阈值项页面 -->
+    	<action name="openAddThresholdItemAction" class="thresholdItemAction" method="openAddThresholdItem">
+    		<result name="success">/expertsystem/threshold/thresholditeminfo.jsp</result>
+    		<result name="input">/expertsystem/threshold/thresholditeminfo.jsp</result>
+    	</action>
+    	
+    	<!-- 添加阈值项 -->
+    	 <action name="toAddThresholdItemAction" class="thresholdItemAction" method="toAddThresholdItem">
+            <result name="success">/expertsystem/threshold/thresholditeminfo.jsp</result>
+    		<result name="input">/expertsystem/threshold/thresholditeminfo.jsp</result>
+        </action>
+        
+        <!-- 删除阈值项 -->
+        <action name="deleteThresholdItemAction" class="thresholdItemAction" method="deleteThresholdItem"/>
+        
+        <!-- 打开修改阈值项页面 -->
+    	<action name="openModifyThresholdItemAction" class="thresholdItemAction" method="openModifyThresholdItem">
+    		<result name="success">/expertsystem/threshold/thresholditeminfo.jsp</result>
+    		<result name="input">/expertsystem/threshold/thresholditeminfo.jsp</result>
+    	</action>
+    	
+        <!-- 修改阈值项 -->
+    	<action name="toModifyThresholdItemAction" class="thresholdItemAction" method="toModifyThresholdItem">
+    		<result name="success">/expertsystem/threshold/thresholditeminfo.jsp</result>
+    		<result name="input">/expertsystem/threshold/thresholditeminfo.jsp</result>
+    	</action>
+      </package>	    
+</struts>
