@@ -36,13 +36,13 @@
 		d = new dTree('d','<%=path%>');
 		d.add(0,-1,'中石油','','','menumain');
 		<s:iterator value="companyList">
-			d.add("<s:property value="id"/>",0,'<s:property value="companyName"/>','','','groupmain','');
+			d.add("<s:property value="id"/>",0,'<s:property value="companyName"/>','<%=path%>/device/openDeviceAction.action?companyId=<s:property value="id"/>','','groupmain','');
 		</s:iterator>
 		<s:iterator value="factoryList">
-			d.add("<s:property value="id"/>","<s:property value="companyId"/>",'<s:property value="factoryName"/>','','','groupmain','');
+			d.add("<s:property value="id"/>","<s:property value="companyId"/>",'<s:property value="factoryName"/>','<%=path%>/device/openDeviceAction.action?companyId=<s:property value="companyId"/>&factoryId=<s:property value="id"/>','','groupmain','');
 		</s:iterator>
 		<s:iterator value="workshopList">
-			d.add("<s:property value="id"/>","<s:property value="factoryId"/>",'<s:property value="workshopName"/>','<%=path%>/device/openDeviceAction.action?factoryId=<s:property value="factoryId"/>&workshopId=<s:property value="id"/>','','groupmain','');
+			d.add("<s:property value="id"/>","<s:property value="factoryId"/>",'<s:property value="workshopName"/>','<%=path%>/device/openDeviceAction.action?companyId=<s:property value="companyId"/>&factoryId=<s:property value="factoryId"/>&workshopId=<s:property value="id"/>','','groupmain','');
 		</s:iterator>
 		document.write(d);
 		//-->
