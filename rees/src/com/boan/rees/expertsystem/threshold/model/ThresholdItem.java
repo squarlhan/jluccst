@@ -5,7 +5,9 @@
 package com.boan.rees.expertsystem.threshold.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -14,8 +16,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
+
+import com.boan.rees.expertsystem.model.RuleResultInfo;
 
 /**
  * 阈值项参数
@@ -46,12 +53,6 @@ public class ThresholdItem implements Serializable {
 	private String thresholdItemExpression;
 	
 	/**
-	 * 故障Id
-	 */
-	@Column(name = "Trouble_Id")
-	private String troubleId;
-	
-	/**
 	 * 阈值标识（0：正常，1：报警）
 	 */
 	@Column(name = "Threshold_Sign")
@@ -64,8 +65,21 @@ public class ThresholdItem implements Serializable {
     /**
 	 * 创建时间
 	 */
-	@Column(name = "CREATE_TIME")
+	@Column(name = "Create_Time")
 	private Calendar createTime;
+	
+	/**
+	 * 故障对象
+	 */
+	@OneToMany
+	@JoinTable(name="Threshold_Item_Trouble_Relation",joinColumns = { @JoinColumn( name="Threshold_Item_Id") },inverseJoinColumns = @JoinColumn( name="Rule_Result_Info_Id"))
+	private List<RuleResultInfo> troubles;
+	
+	/**
+	 * 故障Id
+	 */
+	@Transient
+	private List<String> troubleIds;
 	
 	public Integer getId() {
 		return id;
@@ -90,15 +104,15 @@ public class ThresholdItem implements Serializable {
 	public void setThresholdItemExpression(String thresholdItemExpression) {
 		this.thresholdItemExpression = thresholdItemExpression;
 	}
-
-	public String getTroubleId() {
-		return troubleId;
-	}
-
-	public void setTroubleId(String troubleId) {
-		this.troubleId = troubleId;
-	}
 	
+	public List<RuleResultInfo> getTroubles() {
+		return troubles;
+	}
+
+	public void setTroubles(List<RuleResultInfo> troubles) {
+		this.troubles = troubles;
+	}
+
 	public int getSign() {
 		return sign;
 	}
@@ -121,5 +135,19 @@ public class ThresholdItem implements Serializable {
 
 	public void setCreateTime(Calendar createTime) {
 		this.createTime = createTime;
+	}
+
+	public List<String> getTroubleIds() {
+		if(troubles!=null){
+			troubleIds = new ArrayList<String>();
+			for(RuleResultInfo trouble : troubles){
+				troubleIds.add(""+trouble.getId());
+			}
+		}
+		return troubleIds;
+	}
+
+	public void setTroubleIds(List<String> troubleIds) {
+		this.troubleIds = troubleIds;
 	}
 }

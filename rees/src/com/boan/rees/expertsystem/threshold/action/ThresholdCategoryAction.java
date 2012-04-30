@@ -53,7 +53,7 @@ public class ThresholdCategoryAction extends ActionSupport{
 	
 	
 	/**
-	 * 分页显示报表列表
+	 * 分页显示阈值类别列表
 	 * @return
 	 */
 	public String openThresholdCategory(){
@@ -139,14 +139,6 @@ public class ThresholdCategoryAction extends ActionSupport{
 		if(flag){
 			addFieldError("", "系统在已存在相同名称的类别！");
 		}
-	}
-
-	public IThresholdCategoryService getService() {
-		return service;
-	}
-
-	public void setService(IThresholdCategoryService service) {
-		this.service = service;
 	}
 
 	public Pagination<ThresholdCategory> getPagination() {

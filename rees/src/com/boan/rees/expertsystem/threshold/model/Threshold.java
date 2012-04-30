@@ -67,7 +67,7 @@ public class Threshold implements Serializable{
 	/**
 	 * 创建时间
 	 */
-	@Column(name = "CREATE_TIME")
+	@Column(name = "Create_Time")
 	private Calendar createTime;
 
 	public Integer getId() {

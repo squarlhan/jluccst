@@ -17,7 +17,7 @@ import com.boan.rees.utils.dao.impl.BaseDao;
  * @author ZhuYF
  * @version 1.0.0
  */
-@Repository("ThresholdItemDao")
+@Repository("thresholdItemDao")
 public class ThresholdItemDaoImpl  extends BaseDao<ThresholdItem, Integer> implements IThresholdItemDao{
 
 	/**
