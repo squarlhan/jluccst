@@ -55,7 +55,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			$("#addbtn").click(function(){
 				var factoryId = $("#hid_factoryId").val();
 	  			var workshopId = $("#hid_workshopId").val();
-				parent.parent.tipsWindown("添加设备信息","iframe:openAddDeviceAction.action?factoryId="+factoryId+"&workshopId="+workshopId,"480","420","true","","true","no");
+				parent.parent.tipsWindown("添加设备信息","iframe:openAddDeviceAction.action?factoryId="+factoryId+"&workshopId="+workshopId +"&companyId=" + $("#hid_companyId").val(),"480","420","true","","true","no");
 				parent.parent.$("#windown-close").bind('click',function(){
 					window.location.href=window.location.href;
 				});
@@ -66,9 +66,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  		 */
 	  		$('a[name="edit"]').each(function(){
 	  			$(this).click(function(){
+	  				
 	  				var factoryId = $("#hid_factoryId").val();
 		  			var workshopId = $("#hid_workshopId").val();
-	  				var url = $(this).attr("url")+"&factoryId="+factoryId+"&workshopId="+workshopId;
+	  				var url = $(this).attr("url")+"&factoryId="+factoryId+"&workshopId="+workshopId + "&companyId=" + $("#hid_companyId").val();
 	  				parent.parent.tipsWindown("修改设备信息","iframe:"+url,"480","420","true","","true","no");
 	  				parent.parent.$("#windown-close").bind('click',function(){
 						window.location.href=window.location.href;
@@ -128,6 +129,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   
   <body>
 	<s:form id="form1" name="form1" method="post" theme="simple" >
+	<s:hidden id="hid_companyId" name="companyId"></s:hidden>
 	<s:hidden id="hid_factoryId" name="factoryId"></s:hidden>
 	<s:hidden id="hid_workshopId" name="workshopId"></s:hidden>
 <table width="100%" style="height:100%;" border="0" cellspacing="5" cellpadding="0">
