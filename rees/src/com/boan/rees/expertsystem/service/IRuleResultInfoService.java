@@ -49,6 +49,11 @@ public interface IRuleResultInfoService {
 	 * 根据设备类型id查找现象
 	 */
 	//public RuleInfo findbyDeviceTypeId(String id);
+	
+	/**
+	 * 根据设备类型Id查询所包含的故障信息
+	 */
+	public List<RuleResultInfo> findRuleResultInfoByDeviceTypeId(String deviceTypeId);
 }
 
 
