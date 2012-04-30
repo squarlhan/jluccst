@@ -100,7 +100,7 @@ public class DeviceInfo implements Serializable {
 	/**
 	 * 所属公司Id
 	 */
-	@Column(name = "COMPANY_ID")
+	@Column(name = "COMPANY_ID", length=50)
 	private String companyId;
 	/**
 	 * 所属工厂Id
