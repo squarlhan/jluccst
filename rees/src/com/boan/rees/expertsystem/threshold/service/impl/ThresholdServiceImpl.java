@@ -13,9 +13,12 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.boan.rees.expertsystem.threshold.dao.IThresholdDao;
+import com.boan.rees.expertsystem.threshold.model.CenterHeightAndSpeed;
 import com.boan.rees.expertsystem.threshold.model.Threshold;
 import com.boan.rees.expertsystem.threshold.service.IThresholdService;
 import com.boan.rees.utils.page.Pagination;
+
+import expression.ExpressionCompare;
 
 /**
  * 阈值服务接口实现
@@ -156,10 +159,26 @@ public class ThresholdServiceImpl implements IThresholdService {
 	 */
 	public Threshold getThresholdByCenterHeightAndSpeed(String centerHeight,String speed){
 		List<Threshold> allThreshold= dao.findAll();
+		Threshold result=null;
+		boolean flag= false;
 		for(Threshold threshold : allThreshold){
-			
+			if(flag){
+				break;
+			}
+			List<CenterHeightAndSpeed> centerHeightAndSpeedList = threshold.getCenterHeightAndSpeeds();
+			for(CenterHeightAndSpeed obj : centerHeightAndSpeedList){
+				String centerHeightExpression = obj.getCenterHeightExpression();
+				String cpeedExpression = obj.getSpeedExpression();
+				boolean h = ExpressionCompare.compare(centerHeightExpression, "H", centerHeight);
+				boolean s= ExpressionCompare.compare(cpeedExpression, "S", speed);
+				if( h&&s ){
+					result = threshold;
+					flag=true;
+					break ;
+				}
+			}
 		}
-		return null;
+		return result;
 	}
 	
 	/**
