@@ -158,7 +158,7 @@
 												<img src="images/menuto.jpg" width="5" height="5" />
 											</td>
 											<td>
-												<a href="sysmanage/errordiagnose.html" target="mainFrame">故障诊断</a>
+												<a href="expertsystem/failurediagnosismanage.jsp" target="mainFrame">故障诊断</a>
 											</td>
 										</tr>
 									</table>
