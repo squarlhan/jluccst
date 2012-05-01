@@ -9,6 +9,7 @@
 
 package com.boan.rees.forum.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -88,6 +89,21 @@ public class NoticeInfoServiceImpl implements INoticeInfoService {
 		pagination.setTotalRows(totalRows);
 		pagination.setData(data);
 		return pagination;
+	}
+	
+	/**
+	 * 判断是否有新通知
+	 * @param userId 用户编号
+	 */
+	@Override
+	public int getNewNoticeCountsByUserId(String userId)
+	{
+		int result = 0;
+		String hql = "select count(*) from NoticeInfo where id not in (select noticeId from NoticeReadInfo where userId = :userId)";
+		Map<String,String> values = new HashMap<String,String>();
+		values.put( "userId", userId );
+		result = noticeInfoDao.findCountForPage(hql, values);
+		return result;
 	}
 }
 
