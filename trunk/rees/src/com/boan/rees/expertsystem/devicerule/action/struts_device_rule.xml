@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">	
+<struts>
+	<!-- 设备分类管理 -->
+     <package name="device_rule" extends="struts-default" namespace="/">
+    	
+    	<!-- 打开设备类型列表 -->
+    	<action name="openDeviceRuleAction" class="deviceRuleAction" method="openDeviceRule">
+    		<result name="success">/expertsystem/devicerule/devicerulelist.jsp</result>
+    		<result name="input">/expertsystem/devicerule/devicerulelist.jsp</result>
+    	</action>
+    	
+    	<!-- 打开添加设备规则页面 -->
+    	<action name="openAddDeviceRuleAction" class="deviceRuleAction" method="openAddDeviceRule">
+    		<result name="success">/expertsystem/devicerule/deviceruleinfo.jsp</result>
+    		<result name="input">/expertsystem/devicerule/deviceruleinfo.jsp</result>
+    	</action>
+    	
+    	<!-- 添加设备类型菜单 -->
+    	 <action name="toAddDeviceRuleAction" class="deviceRuleAction" method="toAddDeviceRule">
+            <result name="success">/expertsystem/devicerule/deviceruleinfo.jsp</result>
+    		<result name="input">/expertsystem/devicerule/deviceruleinfo.jsp</result>
+        </action>
+        
+        <!-- 删除设备类型 -->
+        <action name="deleteDeviceRuleAction" class="deviceRuleAction" method="deleteDeviceRule"/>
+        
+        
+        <!-- 打开修改设备类型菜单 -->
+    	<action name="openModifyDeviceRuleAction" class="deviceRuleAction" method="openModifyDeviceRule">
+    		<result name="success">/expertsystem/devicerule/deviceruleinfo.jsp</result>
+    		<result name="input">/expertsystem/devicerule/deviceruleinfo.jsp</result>
+    	</action>
+    	
+        <!-- 修改设备类型菜单 -->
+    	<action name="toModifyDeviceRuleAction" class="deviceRuleAction" method="toModifyDeviceRule">
+    		<result name="success">/expertsystem/devicerule/deviceruleinfo.jsp</result>
+    		<result name="input">/expertsystem/devicerule/deviceruleinfo.jsp</result>
+    	</action>
+      </package>	
+      
+       <!-- ajax异步调用返回Action为json对象 -->
+      <package name="device_rule_ajax" extends="json-default" namespace="/">
+		<action name="toGetRuleResultInfoAction" class="deviceRuleAction" method="toGetRuleResultInfo">
+            <result name="ruleResultInfoList" type="json"></result>
+        </action>
+		<action name="toGetThresholdAction" class="deviceRuleAction" method="toGetThreshold">
+            <result name="thresholdList" type="json"></result>
+        </action>
+		<action name="toGetThresholdItemAction" class="deviceRuleAction" method="toGetThresholdItem">
+            <result name="thresholdItemList" type="json"></result>
+        </action>
+	  </package>	    
+</struts>
