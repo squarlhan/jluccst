@@ -345,8 +345,10 @@ public class PointDataInfoAction extends BaseActionSupport {
 				if(ppis!=null && ppis.size()>0){
 					for(PointParamInfo ppi:ppis){
 						if(StringUtils.trimToNull(selectYear)!=null && StringUtils.trimToNull(selectWeek)!=null){
+							//获得监测点参数数据
 							pdi = pointDataInfoService.get(selectYear, selectWeek, ppi.getId());
 							if(pdi!=null){
+								//判断监测点参数数据是否超出境界值
 								if(judgeIfAlarm(threshold, Double.parseDouble(pdi.getDataInfo())))
 									alarmSb.append(pointInfo.getControlPointName() + ppi.getName() + ",");
 								tempSb.append("<set name='" + pointInfo.getControlPointName() + ppi.getName() + "' value='" + pdi.getDataInfo() + "' />");
