@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+<beans>
+ <!-- Job Bean -->
+ 
+ <!-- Job由于以上job bean具有相同的触发规则，所以统一集中在这个管理器执行-->
+ <bean id="timerJobManagerJob"  class="com.boan.rees.timer.task.Diagnosis"  >
+ </bean>
+
+ <bean id="timerJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean" >
+        <property name="targetObject" ref="timerJobManagerJob" />
+        <property name="targetMethod" value="work" />
+ </bean>
+
+ <bean id="timerCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean" >
+        <property name="jobDetail" ref="timerJobDetail" />
+        <property name="cronExpression">
+               <value>0 * 9 * * ?</value>
+        </property>
+ </bean>
+
+ <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean" >
+        <property name="triggers">
+              <list>
+                <ref bean="timerCronTrigger" />
+              </list>
+        </property>
+ </bean>
+</beans>
+
