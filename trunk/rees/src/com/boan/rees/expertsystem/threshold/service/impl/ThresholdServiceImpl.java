@@ -14,8 +14,6 @@ import org.springframework.stereotype.Service;
 
 import com.boan.rees.expertsystem.threshold.dao.IThresholdDao;
 import com.boan.rees.expertsystem.threshold.model.Threshold;
-import com.boan.rees.expertsystem.threshold.model.ThresholdCategory;
-import com.boan.rees.expertsystem.threshold.model.ThresholdItem;
 import com.boan.rees.expertsystem.threshold.service.IThresholdService;
 import com.boan.rees.utils.page.Pagination;
 
@@ -157,7 +155,28 @@ public class ThresholdServiceImpl implements IThresholdService {
 	 * @return 包含阈值项的阈值对象
 	 */
 	public Threshold getThresholdByCenterHeightAndSpeed(String centerHeight,String speed){
+		List<Threshold> allThreshold= dao.findAll();
+		for(Threshold threshold : allThreshold){
+			
+		}
 		return null;
+	}
+	
+	/**
+	 * 中心高转速
+	 * @param ids id
+	 * @return
+	 */
+	public boolean deleteCenterHeightAndSpeedByIds(String id){
+		Map<String, Integer> values = new HashMap<String,Integer>();
+		values.put("id", Integer.parseInt(id));
+		try{
+			dao.executeHql("delete from CenterHeightAndSpeed where id =:id", values );
+			return true;
+		}catch(Exception e){
+			e.printStackTrace();
+			return false;
+		}
 	}
 }
 

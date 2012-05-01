@@ -25,6 +25,8 @@
         
         <!-- 删除阈值 -->
         <action name="deleteThresholdAction" class="thresholdAction" method="deleteThreshold"/>
+        <!-- 删除阈值对应的中心高转速数据 -->
+        <action name="toDeleteCenterHeightAndSpeed" class="thresholdAction" method="deleteCenterHeightAndSpeed"/>
         
         <!-- 打开修改阈值页面 -->
     	<action name="openModifyThresholdAction" class="thresholdAction" method="openModifyThreshold">
