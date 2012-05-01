@@ -105,4 +105,12 @@ public class PointInfo implements Serializable {
 		this.controlPointName = controlPointName;
 	}
 
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
+	}
+
 }

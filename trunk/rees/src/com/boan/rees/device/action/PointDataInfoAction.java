@@ -35,6 +35,7 @@ import com.boan.rees.expertsystem.threshold.service.IThresholdJudgeService;
 import com.boan.rees.expertsystem.threshold.service.IThresholdService;
 import com.boan.rees.utils.action.BaseActionSupport;
 import com.boan.rees.utils.calendar.CalendarUtils;
+import com.boan.rees.utils.expression.ExpressionCompare;
 
 /**
  * 设备监测点数据Action类
@@ -336,6 +337,7 @@ public class PointDataInfoAction extends BaseActionSupport {
 		StringBuffer sb = new StringBuffer();
 		StringBuffer tempSb = new StringBuffer();
 		StringBuffer alarmSb = new StringBuffer();
+		String alarm = "";
 		if(pis!=null && pis.size()>0){
 			List<PointParamInfo> ppis = null;
 			PointDataInfo pdi = null;
@@ -349,8 +351,17 @@ public class PointDataInfoAction extends BaseActionSupport {
 							pdi = pointDataInfoService.get(selectYear, selectWeek, ppi.getId());
 							if(pdi!=null){
 								//判断监测点参数数据是否超出境界值
-								if(judgeIfAlarm(threshold, Double.parseDouble(pdi.getDataInfo())))
-									alarmSb.append(pointInfo.getControlPointName() + ppi.getName() + ",");
+								List<ThresholdItem> thresholdItem = threshold.getThresholdItems();
+								String expression = null;
+								for (ThresholdItem item : thresholdItem) {
+									expression = item.getThresholdItemExpression();
+									if(item.getSign()==1){
+										if(ExpressionCompare.compare(expression, "V", pdi.getDataInfo())){
+											alarmSb.append(pointInfo.getControlPointName() + ppi.getName() + ",");
+											alarm = expression;
+										}
+									}
+								}
 								tempSb.append("<set name='" + pointInfo.getControlPointName() + ppi.getName() + "' value='" + pdi.getDataInfo() + "' />");
 							}else{
 								tempSb.append("<set name='" + pointInfo.getControlPointName() + ppi.getName() + "' value='0' />");
@@ -362,7 +373,7 @@ public class PointDataInfoAction extends BaseActionSupport {
 		}		
 		sb.append("<?xml version='1.0' encoding='gb2312'?>");
 		if(StringUtils.trimToNull(alarmSb.toString())!=null)
-			sb.append("<graph xAxisName='( " + alarmSb.toString() + "超出警报范围 )' yAxisName='threshold' baseFontSize='12' subCaption='监测点运行数据'");
+			sb.append("<graph xAxisName='" + alarmSb.toString() + "超出警报范围 ( " + alarm + " )' yAxisName='threshold' baseFontSize='12' subCaption='监测点运行数据'");
 		else
 			sb.append("<graph xAxisName='( 一切正常运行 )' yAxisName='threshold' baseFontSize='12' subCaption='监测点运行数据'");
 		sb.append(" rotateNames='1' numDivLines='4'>");
@@ -370,27 +381,6 @@ public class PointDataInfoAction extends BaseActionSupport {
 		sb.append("</graph>");
 		xmlStream = new ByteArrayInputStream(sb.toString().getBytes(Charset.forName("gb2312")));
 		return SUCCESS;
-	}
-	
-	/**
-	 * 根据数据判断是报警
-	 * @param threshold
-	 * @param paramValue
-	 * @return
-	 */
-	private boolean judgeIfAlarm(Threshold threshold, double paramValue){
-		boolean result = false;
-		if(threshold!=null){
-			List<ThresholdItem> thresholdItem = threshold.getThresholdItems();
-			String expression = null;
-			for (ThresholdItem item : thresholdItem) {
-				expression = item.getThresholdItemExpression();
-				if(item.getSign()==1){
-					result = thresholdJudgeService.judgeInAlarmArea(expression, paramValue);
-				}
-			}
-		}
-		return result;
 	}
 	
 	public InputStream getXmlStream() {		
