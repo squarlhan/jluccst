@@ -66,11 +66,13 @@
     		<result name="success">bbs/bbsmanagelist.jsp</result>
     		<result name="input">bbs/bbsmanagelist.jsp</result>
     	</action>
+    	<action name="getNewNoticeCounts" class="noticeInfoAction" method="getNewNoticeCountsByUserId">
+    		<result name="success">notice/newnoticetipservice.jsp</result>
+    	</action>
     </package>	
-    
     <!-- 已读通知信息Action -->
     <package name="forum_notice_read" extends="struts-default" namespace="/">
-    	
+    	<action name="readNoticeInfo" class="NoticeReadInfoAction" method="readNoticeInfo">
+    	</action>
     </package>	
-    
 </struts>
