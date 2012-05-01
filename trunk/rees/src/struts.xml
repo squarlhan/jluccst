@@ -38,7 +38,8 @@
 	<include file="com/boan/rees/expertsystem/action/struts_rule_reason.xml"></include>
 	<!-- 规则现象表配置 -->
 	<include file="com/boan/rees/expertsystem/action/struts_rule_result.xml"></include>
-	
+	<!-- 故障诊断 -->
+	<include file="com/boan/rees/expertsystem/action/struts_failure_diagnosis.xml"/>
 	<!-- 界面框架 -->
 	<include file="struts_ui.xml"></include>
 	
