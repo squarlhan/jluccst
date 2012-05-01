@@ -379,6 +379,57 @@ public class PointDataInfoAction extends BaseActionSupport {
 		return SUCCESS;
 	}
 	
+	/**
+	 * 任务实现DEMO
+	 * @return
+	 */
+	public String taskDemo(){
+		if(StringUtils.trimToNull(deviceId)!=null){
+			//获得设备对象
+			DeviceInfo deviceInfo =	deviceInfoService.get(deviceId);
+			//根据设备ID获得所有未执行任务的监测点对象数组
+			List<PointInfo> pis = pointInfoService.findPointInfosByDeviceId(deviceId, 0);
+			//根据设备中心高和转速获得对应的阈值项实体类
+			Threshold threshold = thresholdService.getThresholdByCenterHeightAndSpeed(deviceInfo.getCenterHeight().toString(), deviceInfo.getSpeed().toString());
+			if(pis!=null && pis.size()>0){
+				//监测点参数
+				List<PointParamInfo> ppis = null;
+				//监测点参数对象
+				PointDataInfo pdi = null;
+				for (PointInfo pointInfo : pis) {
+					//获得监测点参数
+					ppis = pointParamInfoService.findPointParamInfoByPointId(pointInfo.getId());
+					if(ppis!=null && ppis.size()>0){
+						for(PointParamInfo ppi:ppis){
+							if(StringUtils.trimToNull(selectYear)!=null && StringUtils.trimToNull(selectWeek)!=null){
+								//获得监测点参数数据
+								pdi = pointDataInfoService.get(selectYear, selectWeek, ppi.getId());
+								if(pdi!=null){
+									//判断监测点参数数据是否超出境界值
+									List<ThresholdItem> thresholdItem = threshold.getThresholdItems();
+									String expression = null;
+									for (ThresholdItem item : thresholdItem) {
+										expression = item.getThresholdItemExpression();
+										if(item.getSign()==1){
+											//判断是否在报警区间
+											if(ExpressionCompare.compare(expression, "V", pdi.getDataInfo())){
+												//LUOJX TO DO
+												//送推理机
+												//问题ID朱好像说是item.getTroubleIds(),你再确定一下
+												
+											}
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		return SUCCESS;
+	}
+	
 	public InputStream getXmlStream() {		
 		return xmlStream;
 	}
