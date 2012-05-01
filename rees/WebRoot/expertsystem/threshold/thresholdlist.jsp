@@ -44,7 +44,7 @@
 			 * 添加阈值
 			 */
 			$("#addbtn").click(function(){
-				parent.parent.tipsWindown("添加阈值","iframe:openAddThresholdAction.action","400","250","true","","true","no");
+				parent.parent.tipsWindown("添加阈值","iframe:openAddThresholdAction.action","450","400","true","","true","no");
 				parent.parent.$("#windown-close").bind('click',function(){
 					window.location.href=window.location.href;
 				});
@@ -56,7 +56,7 @@
 			$('a[name="edit"]').each(function(){
 				$(this).click(function(){
 					var url = $(this).attr("url");
-					parent.parent.tipsWindown("修改阈值","iframe:"+url,"400","250","true","","true","no");
+					parent.parent.tipsWindown("修改阈值","iframe:"+url,"450","400","true","","true","no");
 					parent.parent.$("#windown-close").bind('click',function(){
 						window.location.href=window.location.href;
 					});
