@@ -26,8 +26,8 @@ import com.boan.rees.device.type.model.DeviceType;
  * @author jiangmeidi
  * @version 1.0.0
  */
-@Entity
-@Table(name = "rule_device_info")
+//@Entity
+//@Table(name = "rule_device_info")
 public class RuleDeviceInfo {
 	private static final long serialVersionUID = 1L;
 	@Id
@@ -102,8 +102,5 @@ public class RuleDeviceInfo {
 	public void setResuleId(int resuleId) {
 		this.resuleId = resuleId;
 	}
-	
-	
-
 }
 
