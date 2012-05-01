@@ -39,14 +39,16 @@ public interface INoticeInfoService {
 	 * 删除
 	 */
 	public void deleteNoticeInfo(String... ids );
-
 	/**
 	 * 保存
 	 */
 	public void save(NoticeInfo table1);
-
 	/**
 	 * 按分页查询
 	 */
 	public Pagination<NoticeInfo> findNoticeInfoForPage(Map<String, ?> values,Pagination<NoticeInfo> pagination);
+	/**
+	 * 判断是否有新通知
+	 */
+	public int getNewNoticeCountsByUserId(String userId);
 }
