@@ -67,4 +67,8 @@
 	<include file="com/boan/rees/expertsystem/threshold/action/struts_threshold.xml"></include>
 	<include file="com/boan/rees/expertsystem/threshold/action/struts_threshold_item.xml"></include>
 
+	
+	<!-- 设备规则模块配置 -->
+	<include file="com/boan/rees/expertsystem/devicerule/action/struts_device_rule.xml"></include>
+
 </struts>
