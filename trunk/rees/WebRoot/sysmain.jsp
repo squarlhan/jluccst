@@ -1,11 +1,82 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ taglib prefix="s" uri="/struts-tags"%>
 <%@ taglib prefix="j" uri="/script-tags"%>
+<%
+	/**
+	 * Copyright (c) 2010 Changchun Boan (BOAN) Co. Ltd.
+	 * All right reserved.
+	 */
+	/**
+	 * @author XXX
+	 * @version 1.0
+	 * @audit  
+	 */
+	/**
+	 * Modified Person：
+	 * Modified Time：
+	 * Modified Explain：
+	 */
+	response.setHeader( "Pragma", "No-cache" );
+	response.setHeader( "Cache-Control", "no-cache" );
+	response.setHeader( "Expires", "0" );
+	request.setCharacterEncoding( "utf-8" );
+	String path = "http://"+request.getLocalAddr() + ":" + request.getLocalPort() + request.getContextPath();
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>旋转设备离线专家系统</title>
 <j:scriptlink css="true" jquery="true" jquerylayout="true" tipswindow="true" jmessagebox="true" />
+<SCRIPT language=javascript type=text/javascript src="notice/js/jquery.XYTipsWindow.min.2.8.js"></SCRIPT>
+<SCRIPT language=javascript type=text/javascript>
+/**
+ * 准备工作
+ */
+$(document).ready(function() {
+	$.fn.initpage();
+	//需要定时触发
+	$.fn.noticepage();
+});
+/**
+ * 初始化页面
+ */
+$.fn.initpage = function(){
+	var err = $("#lb_error").html();
+	if(err!=null && $.trim(err)!="" ){
+		alert(err);
+	}
+	var message = $("#lb_message").html();
+	if(message!=null && $.trim(message)!="" ){
+		alert(message);
+	}
+};
+/**
+ * 调用通知页面
+ */
+$.fn.noticepage = function(){
+$.ajax({
+	type: "get",
+	url: document.getElementById("path").value + "/getNewNoticeCounts",
+	beforeSend: function(XMLHttpRequest){
+	//ShowLoading();
+	},
+	success: function(data, textStatus){
+		alert(data);
+		if(data > 0)
+		{
+			$.XYTipsWindow({___offsets:"right-bottom"});//右上角
+		}
+	},
+	complete: function(XMLHttpRequest, textStatus){
+	//HideLoading();
+	},
+	error: function(){
+	//请求出错处理
+	}
+	});
+};
+</SCRIPT>
 <script type="text/javascript">
 <!--
 var myLayout;
@@ -32,6 +103,7 @@ $( document ).ready( function() {
 </script>
 </head>
 <body>
+<input type="hidden" name="path" id="path" value="<%=path%>"/>
 <iframe id="topFrame" name="topFrame" class="ui-layout-north" src="${pageContext.request.contextPath}/logonTopAction.action" frameborder="0" scrolling="no"></iframe>
 <iframe id="leftFrame" name="leftFrame" class="ui-layout-west" src="${pageContext.request.contextPath}/sysmenu.action" width="100%" height="100%" frameborder="0" scrolling="no"></iframe>
 <iframe id="mainFrame" name="mainFrame" class="ui-layout-center" src="${pageContext.request.contextPath}/blank.jsp" frameborder="0" scrolling="no"></iframe>
