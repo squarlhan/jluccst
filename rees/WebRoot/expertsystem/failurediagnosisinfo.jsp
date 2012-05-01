@@ -101,6 +101,10 @@
 			parent.$("#windown-close").click();
 		});
 	}
+	$.fn.selectdevicetype = function(){
+		form1.action = "./failureDiagnosisAction!showFailureDiagnosisInfo.action";
+		form1.submit();
+	}
 </script>
 	</head>
 
@@ -126,7 +130,8 @@
 												<strong>设备类型：</strong>
 											</td>
 											<td height="26" align="left" bgcolor="#FFFFFF">
-												<select style="width:250px;"></select>
+												<s:select list="deviceTypeList" listKey="id" listValue="typeName" name="deviceTypeId" id="deviceTypeId"
+												value="deviceTypeId" headerKey="" headerValue="==请选择设备类型==" cssStyle="width:250px;" onchange="$.fn.selectdevicetype();"></s:select>
 												<font color="red">*</font>
 											</td>
 										</tr>
