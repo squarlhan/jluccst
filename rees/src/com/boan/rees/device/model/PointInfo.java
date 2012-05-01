@@ -58,6 +58,12 @@ public class PointInfo implements Serializable {
 	 */
 	@Column(name = "POSITIONY")
 	private int positionY;
+	
+	/**
+	 *监测点状态，0表示未执行系统任务，1表示已执行（下次执行系统任务时不取这条数据） 
+	 */
+	@Column(name= "STATUS")
+	private int status = 0;
 
 	public int getPositionX() {
 		return positionX;
