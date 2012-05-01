@@ -122,15 +122,6 @@
 											</td>
 										</tr>
 										<tr>
-											<td height="26" align="right" bgcolor="#FFFFFF" width="40%">
-												<strong>设备类型：</strong>
-											</td>
-											<td height="26" align="left" bgcolor="#FFFFFF">
-												<select style="width:250px;"></select>
-												<font color="red">*</font>
-											</td>
-										</tr>
-										<tr>
 											<td height="26" align="right" bgcolor="#FFFFFF">
 												<strong>设备类型：</strong>
 											</td>
