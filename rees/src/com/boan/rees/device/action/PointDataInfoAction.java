@@ -31,7 +31,6 @@ import com.boan.rees.device.service.IPointInfoService;
 import com.boan.rees.device.service.IPointParamInfoService;
 import com.boan.rees.expertsystem.threshold.model.Threshold;
 import com.boan.rees.expertsystem.threshold.model.ThresholdItem;
-import com.boan.rees.expertsystem.threshold.service.IThresholdJudgeService;
 import com.boan.rees.expertsystem.threshold.service.IThresholdService;
 import com.boan.rees.utils.action.BaseActionSupport;
 import com.boan.rees.utils.calendar.CalendarUtils;
@@ -67,9 +66,6 @@ public class PointDataInfoAction extends BaseActionSupport {
 	@Resource
 	//阈值服务接口
 	private IThresholdService thresholdService;
-	@Resource
-	//阈值范围判断接口
-	private IThresholdJudgeService thresholdJudgeService;
 	
 	//设备ID
 	private String deviceId = null;
