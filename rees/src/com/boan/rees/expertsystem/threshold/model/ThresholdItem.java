@@ -68,12 +68,12 @@ public class ThresholdItem implements Serializable {
 	@Column(name = "Create_Time")
 	private Calendar createTime;
 	
-	/**
-	 * 故障对象
-	 */
-	@OneToMany
-	@JoinTable(name="Threshold_Item_Trouble_Relation",joinColumns = { @JoinColumn( name="Threshold_Item_Id") },inverseJoinColumns = @JoinColumn( name="Rule_Result_Info_Id"))
-	private List<RuleResultInfo> troubles;
+//	/**
+//	 * 故障对象
+//	 */
+//	@OneToMany
+//	@JoinTable(name="Threshold_Item_Trouble_Relation",joinColumns = { @JoinColumn( name="Threshold_Item_Id") },inverseJoinColumns = @JoinColumn( name="Rule_Result_Info_Id"))
+//	private List<RuleResultInfo> troubles;
 	
 	/**
 	 * 故障Id
@@ -105,13 +105,13 @@ public class ThresholdItem implements Serializable {
 		this.thresholdItemExpression = thresholdItemExpression;
 	}
 	
-	public List<RuleResultInfo> getTroubles() {
-		return troubles;
-	}
-
-	public void setTroubles(List<RuleResultInfo> troubles) {
-		this.troubles = troubles;
-	}
+//	public List<RuleResultInfo> getTroubles() {
+//		return troubles;
+//	}
+//
+//	public void setTroubles(List<RuleResultInfo> troubles) {
+//		this.troubles = troubles;
+//	}
 
 	public int getSign() {
 		return sign;
@@ -138,12 +138,12 @@ public class ThresholdItem implements Serializable {
 	}
 
 	public List<String> getTroubleIds() {
-		if(troubles!=null){
-			troubleIds = new ArrayList<String>();
-			for(RuleResultInfo trouble : troubles){
-				troubleIds.add(""+trouble.getId());
-			}
-		}
+//		if(troubles!=null){
+//			troubleIds = new ArrayList<String>();
+//			for(RuleResultInfo trouble : troubles){
+//				troubleIds.add(""+trouble.getId());
+//			}
+//		}
 		return troubleIds;
 	}
 

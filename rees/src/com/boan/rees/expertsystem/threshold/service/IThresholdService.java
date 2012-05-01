@@ -60,7 +60,7 @@ public interface IThresholdService {
 	 * @param obj
 	 * @return
 	 */
-	public boolean cascadeDeleteThresholdByIds(String... ids);
+//	public boolean cascadeDeleteThresholdByIds(String... ids);
 	
 	/**
 	 * 通过Id获取阈值
@@ -106,5 +106,12 @@ public interface IThresholdService {
 	 * @return 包含阈值项的阈值对象
 	 */
 	public Threshold getThresholdByCenterHeightAndSpeed(String centerHeight,String speed);
+	
+	/**
+	 * 中心高转速
+	 * @param ids id
+	 * @return
+	 */
+	public boolean deleteCenterHeightAndSpeedByIds(String id);
 }
 

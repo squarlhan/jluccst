@@ -57,7 +57,7 @@ public interface IThresholdCategoryService {
 	 * @param obj
 	 * @return
 	 */
-	public boolean cascadeDeleteThresholdCategoryByIds(String... ids);
+//	public boolean cascadeDeleteThresholdCategoryByIds(String... ids);
 	
 	/**
 	 * 通过Id获取阈值项类别

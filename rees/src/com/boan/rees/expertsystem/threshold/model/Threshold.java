@@ -16,6 +16,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinColumns;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -61,8 +62,16 @@ public class Threshold implements Serializable{
 	/**
 	 * 阈值项
 	 */
-	@OneToMany(mappedBy="threshold",cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+	@OneToMany(mappedBy="threshold",cascade = CascadeType.REFRESH, fetch = FetchType.LAZY)
     private List<ThresholdItem> thresholdItems;
+	
+	/**
+	 * 中心高转速区间
+	 */
+	
+	@OneToMany(fetch = FetchType.EAGER,cascade = {CascadeType.ALL})
+	@JoinColumns(value={@JoinColumn(name="Threshold_Id",referencedColumnName="Threshold_Id")})
+	private List<CenterHeightAndSpeed> centerHeightAndSpeeds;
 	
 	/**
 	 * 创建时间
@@ -116,5 +125,14 @@ public class Threshold implements Serializable{
 
 	public void setCreateTime(Calendar createTime) {
 		this.createTime = createTime;
+	}
+
+	public List<CenterHeightAndSpeed> getCenterHeightAndSpeeds() {
+		return centerHeightAndSpeeds;
+	}
+
+	public void setCenterHeightAndSpeeds(
+			List<CenterHeightAndSpeed> centerHeightAndSpeeds) {
+		this.centerHeightAndSpeeds = centerHeightAndSpeeds;
 	}
 }
