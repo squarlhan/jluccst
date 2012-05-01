@@ -23,6 +23,7 @@ public class NoticeInfoAction extends BaseActionSupport {
 	
 	private static final long serialVersionUID = -8890204064921452148L;
 	private String issueId = "";
+	private String userId = this.sessionUserId;
 	private NoticeInfo noticeInfo = new NoticeInfo();
 	private String message;
 	/**
@@ -43,6 +44,15 @@ public class NoticeInfoAction extends BaseActionSupport {
 	@Autowired
 	@Qualifier("noticeInfoService")
 	private INoticeInfoService noticeInfoService;
+	/**
+	 * 判断是否有新通知
+	 */
+	public String getNewNoticeCountsByUserId()
+	{
+		int recordCount = noticeInfoService.getNewNoticeCountsByUserId( this.sessionUserId );
+		message = String.valueOf( recordCount );
+		return SUCCESS;
+	}
 	/**
 	 * 论坛处发送通知
 	 */
@@ -121,5 +131,14 @@ public class NoticeInfoAction extends BaseActionSupport {
 	public void setPagination( Pagination<ForumIssueInfo> pagination )
 	{
 		this.pagination = pagination;
+	}
+	
+	public String getUserId()
+	{
+		return userId;
+	}
+	public void setUserId( String userId )
+	{
+		this.userId = userId;
 	}
 }
