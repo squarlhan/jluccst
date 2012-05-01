@@ -29,6 +29,10 @@ import com.boan.rees.device.service.IDeviceInfoService;
 import com.boan.rees.device.service.IPointDataInfoService;
 import com.boan.rees.device.service.IPointInfoService;
 import com.boan.rees.device.service.IPointParamInfoService;
+import com.boan.rees.expertsystem.threshold.model.Threshold;
+import com.boan.rees.expertsystem.threshold.model.ThresholdItem;
+import com.boan.rees.expertsystem.threshold.service.IThresholdJudgeService;
+import com.boan.rees.expertsystem.threshold.service.IThresholdService;
 import com.boan.rees.utils.action.BaseActionSupport;
 import com.boan.rees.utils.calendar.CalendarUtils;
 
@@ -58,6 +62,13 @@ public class PointDataInfoAction extends BaseActionSupport {
 	@Resource
 	//用于调用数据库相关操作
 	private IDeviceInfoService deviceInfoService;
+	
+	@Resource
+	//阈值服务接口
+	private IThresholdService thresholdService;
+	@Resource
+	//阈值范围判断接口
+	private IThresholdJudgeService thresholdJudgeService;
 	
 	//设备ID
 	private String deviceId = null;
@@ -299,6 +310,7 @@ public class PointDataInfoAction extends BaseActionSupport {
 		//
 		return SUCCESS;
 	}
+	
 	/**
 	 * 显示柱状图
 	 * @return
@@ -309,21 +321,25 @@ public class PointDataInfoAction extends BaseActionSupport {
 			selectYear = chart.split("\\|")[1];
 			selectWeek = chart.split("\\|")[2];
 		}
+		
 		List<PointInfo> pis= null;
+		Threshold threshold = null;
 		if(StringUtils.trimToNull(deviceId)!=null){
 			//获得监测点
 			pis = pointInfoService.findPointInfosByDeviceId(deviceId);
+			//获得设置对象
+			DeviceInfo deviceInfo =	deviceInfoService.get(deviceId);
+			//根据设备中心高和转速获得阈值区间列表
+			threshold = thresholdService.getThresholdByCenterHeightAndSpeed(deviceInfo.getCenterHeight().toString(), deviceInfo.getSpeed().toString());
 		}
 		
 		StringBuffer sb = new StringBuffer();
-		sb.append("<?xml version='1.0' encoding='gb2312'?>");
-		sb.append("<graph xAxisName='( 超过N警告，超过M报警 )' yAxisName='threshold' baseFontSize='12' subCaption='监测点运行数据'");
-		sb.append(" rotateNames='1' numDivLines='4'>");
+		StringBuffer tempSb = new StringBuffer();
+		StringBuffer alarmSb = new StringBuffer();
 		if(pis!=null && pis.size()>0){
 			List<PointParamInfo> ppis = null;
 			PointDataInfo pdi = null;
 			for (PointInfo pointInfo : pis) {
-				
 				//获得监测点参数
 				ppis = pointParamInfoService.findPointParamInfoByPointId(pointInfo.getId());
 				if(ppis!=null && ppis.size()>0){
@@ -331,18 +347,48 @@ public class PointDataInfoAction extends BaseActionSupport {
 						if(StringUtils.trimToNull(selectYear)!=null && StringUtils.trimToNull(selectWeek)!=null){
 							pdi = pointDataInfoService.get(selectYear, selectWeek, ppi.getId());
 							if(pdi!=null){
-								sb.append("<set name='" + pointInfo.getControlPointName() + ppi.getName() + "' value='" + pdi.getDataInfo() + "' />");
+								if(judgeIfAlarm(threshold, Double.parseDouble(pdi.getDataInfo())))
+									alarmSb.append(pointInfo.getControlPointName() + ppi.getName() + ",");
+								tempSb.append("<set name='" + pointInfo.getControlPointName() + ppi.getName() + "' value='" + pdi.getDataInfo() + "' />");
 							}else{
-								sb.append("<set name='" + pointInfo.getControlPointName() + ppi.getName() + "' value='0' />");
+								tempSb.append("<set name='" + pointInfo.getControlPointName() + ppi.getName() + "' value='0' />");
 							}
 						}
 					}
 				}
 			}
 		}		
+		sb.append("<?xml version='1.0' encoding='gb2312'?>");
+		if(StringUtils.trimToNull(alarmSb.toString())!=null)
+			sb.append("<graph xAxisName='( " + alarmSb.toString() + "超出警报范围 )' yAxisName='threshold' baseFontSize='12' subCaption='监测点运行数据'");
+		else
+			sb.append("<graph xAxisName='( 一切正常运行 )' yAxisName='threshold' baseFontSize='12' subCaption='监测点运行数据'");
+		sb.append(" rotateNames='1' numDivLines='4'>");
+		sb.append(tempSb);
 		sb.append("</graph>");
 		xmlStream = new ByteArrayInputStream(sb.toString().getBytes(Charset.forName("gb2312")));
 		return SUCCESS;
+	}
+	
+	/**
+	 * 根据数据判断是报警
+	 * @param threshold
+	 * @param paramValue
+	 * @return
+	 */
+	private boolean judgeIfAlarm(Threshold threshold, double paramValue){
+		boolean result = false;
+		if(threshold!=null){
+			List<ThresholdItem> thresholdItem = threshold.getThresholdItems();
+			String expression = null;
+			for (ThresholdItem item : thresholdItem) {
+				expression = item.getThresholdItemExpression();
+				if(item.getSign()==1){
+					result = thresholdJudgeService.judgeInAlarmArea(expression, paramValue);
+				}
+			}
+		}
+		return result;
 	}
 	
 	public InputStream getXmlStream() {		

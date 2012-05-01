@@ -47,4 +47,14 @@ public interface IPointInfoService {
 	 * @return
 	 */
 	public List<PointInfo> findPointInfosByDeviceId(String deviceId);
+	
+	/**
+	 * 根据设备ID和监测点状态获得监测点数据对象列表
+	 * 
+	 * @param deviceId
+	 *            设备ID
+	 * @param status 监测点状态
+	 * @return
+	 */
+	public List<PointInfo> findPointInfosByDeviceId(String deviceId, int status);
 }

@@ -23,4 +23,11 @@ public class PointInfoDaoImpl extends BaseDao<PointInfo, String> implements
 		List<PointInfo> list = this.find(hql, new String[] { deviceId });
 		return list;
 	}
+
+	@Override
+	public List<PointInfo> findPointInfosByDeviceId(String deviceId, int status) {
+		String hql = "from PointInfo where deviceId=? and status=?";
+		List<PointInfo> list = this.find(hql, new Object[] { deviceId,1 });
+		return list;
+	}
 }
