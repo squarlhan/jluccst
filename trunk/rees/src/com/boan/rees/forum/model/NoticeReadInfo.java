@@ -54,11 +54,11 @@ public class NoticeReadInfo implements Serializable {
 		this.noticeId = noticeId;
 	}
 
-	public Integer getUserId() {
+	public String getUserId() {
 		return userId;
 	}
 
-	public void setUserId(Integer userId) {
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 
@@ -66,7 +66,7 @@ public class NoticeReadInfo implements Serializable {
 	private String noticeId;
 
 	@Column(name = "USER_ID")
-	private Integer userId;
+	private String userId;
 }
 	
 	
