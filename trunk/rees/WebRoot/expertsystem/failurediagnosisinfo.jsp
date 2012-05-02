@@ -140,7 +140,8 @@
 												<strong>设备名称：</strong>
 											</td>
 											<td height="26" align="left" bgcolor="#FFFFFF">
-												<select style="width:250px;"></select>
+												<s:select list="deviceInfoList" listKey="id" listValue="deviceName" name="deviceInfoId" id="deviceInfoId"
+												value="deviceInfoId" headerKey="" headerValue="==请选择设备名称==" cssStyle="width:250px;"></s:select>
 												<font color="red">*</font>
 											</td>
 										</tr>
@@ -149,7 +150,8 @@
 												<strong>故障现象：</strong>
 											</td>
 											<td height="26" align="left" bgcolor="#FFFFFF">
-												<select style="width:250px;"></select>
+												<s:select list="ruleResultInfoList" listKey="id" listValue="result" name="ruleResultInfoId" id="ruleResultInfoId"
+												value="ruleResultInfoId" headerKey="" headerValue="==请选择故障现象==" cssStyle="width:250px;"></s:select>
 												<font color="red">*</font>
 											</td>
 										</tr>
@@ -158,7 +160,7 @@
 												<strong>振动方向：</strong>
 											</td>
 											<td height="26" align="left" bgcolor="#FFFFFF">
-												<s:textfield id="txt_companyName" name="company.companyName"
+												<s:textfield id="vibrationDirection" name="vibrationDirection"
 													cssStyle="width: 250px;" maxlength="25"></s:textfield>
 												<font color="red">*</font>
 											</td>
