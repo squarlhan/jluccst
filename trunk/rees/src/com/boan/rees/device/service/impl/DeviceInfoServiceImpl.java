@@ -141,6 +141,17 @@ public class DeviceInfoServiceImpl  implements IDeviceInfoService {
 		return list;
 	}
 	
+    /**
+     * 查找根据设备类型Id查询设备
+     * @param deviceTypeId 设备类型Id
+     * @return 设备列表
+     */
+    public List<DeviceInfo> findDeviceInfoByDeviceTypeId(String deviceTypeId){
+    	String hql = "from DeviceInfo where (isDelete=0 or isDelete is null) and deviceTypeId=? order by sortIndex,createTime";
+		List<DeviceInfo> list = deviceInfoDao.find(hql, new String[]{deviceTypeId});
+		return list;
+    }
+	
 	/**
      * 判断指定Id的设备是否存在指定属性和属性值的记录
      * @param id 设备Id

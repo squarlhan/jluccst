@@ -60,6 +60,13 @@ public interface IDeviceInfoService {
     public List<DeviceInfo> findDeviceInfoByWorkshopId(String workshopId);
     
     /**
+     * 查找根据设备类型Id查询设备
+     * @param deviceTypeId 设备类型Id
+     * @return 设备列表
+     */
+    public List<DeviceInfo> findDeviceInfoByDeviceTypeId(String deviceTypeId);
+    
+    /**
      * 判断指定Id的设备是否存在指定属性和属性值的记录
      * @param id 设备Id
      * @param workshopId 车间Id
