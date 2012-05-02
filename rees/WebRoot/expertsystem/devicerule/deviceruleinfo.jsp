@@ -40,6 +40,7 @@
  		* 准备工作
  		*/
 		$(document).ready(function(){
+			$.fn.initPage();
 			$("#sel_deviceType").change(function(){
 				var url = "toGetRuleResultInfoAction.action";
 				var deviceTypeId=$("#sel_deviceType").val();
@@ -92,7 +93,7 @@
 		$.fn.save = function(){
 			
 			//如果有id就说明是修改action
-			var deviceRuleId = $("#hid_deviceRuleId").val();
+			var deviceRuleId = $("#hid_deviceRuleInfoId").val();
 			
 			$("#addBtn").click(function() {
                	if( $.trim(deviceRuleId) == "" || $.trim(deviceRuleId) == "0" )
@@ -120,6 +121,20 @@
 		 * 初始化页面元素
 		 */
 		$.fn.initPage = function(){
+			var deviceRuleId = $("#hid_deviceRuleInfoId").val();
+			if( $.trim(deviceRuleId) != "" && $.trim(deviceRuleId) != "0" ){
+				//得到checkboxlist的td,自定义td的id为checktd 
+				var checktd = document.getElementById("checkboxlist_td"); 
+				//得到一个checkbox数组 
+				var checkboxs = checktd.getElementsByTagName("input"); 
+				//最前面不需要br 从1开始 
+				for ( var i = 1; i < checkboxs.length; i++) { 
+					//每个br只能用一次,所以在循环内创建 
+					var br = document.createElement("br"); 
+					//checkbos前插入br 
+					checktd.insertBefore(br, checkboxs[i]); 
+				} 
+	 		}
 			var err = $("#lb_error").html();
 			if(err!=null && $.trim(err)!="" ){
 				alert(err);
@@ -135,7 +150,7 @@
 <body>
 	<s:form  id="form1"  theme="simple" >
 		<s:label id="lb_message" name="message" cssStyle="display:none"></s:label>
-		<s:hidden id="hid_deviceRuleId" name="threshold.id"></s:hidden>
+		<s:hidden id="hid_deviceRuleInfoId" name="deviceRuleInfo.id"></s:hidden>
 		<table width="100%" border="0" cellspacing="5" cellpadding="0">
 			<tr>
 				<td>
@@ -166,10 +181,10 @@
 										</td>
 										<td height="26" align="left" colspan="3" bgcolor="#FFFFFF">
 											<s:if test="thresholdList!=null">
-												<s:select id="sel_threshold" list="thresholdList" listKey="id" listValue="thresholdName" headerKey="" headerValue="---请选择---" name="thresholdId" cssStyle="width: 250px;"></s:select><font color="red">*</font>
+												<s:select id="sel_threshold" list="thresholdList" listKey="id" listValue="thresholdName" headerKey="" headerValue="---请选择---" name="deviceRuleInfo.thresholdId" cssStyle="width: 250px;"></s:select><font color="red">*</font>
 											</s:if>
 											<s:else>
-												<select id="sel_threshold" name="threshold" style="width: 250px;">
+												<select id="sel_threshold" name="deviceRuleInfo.thresholdId" style="width: 250px;">
 													<option value="">---请选择---</option> 
 												</select>&nbsp;<font color="red">*</font>
 											</s:else>

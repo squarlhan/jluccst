@@ -128,25 +128,41 @@
 										<s:checkbox id="%{#obj.id}" name="ids" fieldValue="%{id}" value="false" theme="simple" />
 									</td>
 									<td height="26" align="center" bgcolor="#FFFFFF">
-										<s:property value="deviceTypeId" />
+										<s:iterator value="deviceTypeList" status="type">
+											<s:if test="id==deviceTypeId">
+												<s:property value="typeName" />
+											</s:if>
+										</s:iterator>
 										&nbsp;
 									</td>
 									
 									<td height="26" align="center" bgcolor="#FFFFFF">
-										<s:property value="thresholdCategoryId" />
+										<s:iterator value="thresholdCategoryList" status="category">
+											<s:if test="id==thresholdCategoryId">
+												<s:property value="categoryName" />
+											</s:if>
+										</s:iterator>
 										&nbsp;
 									</td>
 									<td height="26" align="center" bgcolor="#FFFFFF">
-										<s:property value="power" />
+										<s:iterator value="thresholdList" status="threshold">
+											<s:if test="id==thresholdId">
+												<s:property value="thresholdName" />
+											</s:if>
+										</s:iterator>
 										&nbsp;
 									</td>
 									<td height="26" align="center" bgcolor="#FFFFFF">
-										<s:property value="thresholdItemId" />
+										<s:iterator value="thresholdItemList" status="thresholdItem">
+											<s:if test="id==thresholdItemId">
+												<s:property value="thresholdItemName" />
+											</s:if>
+										</s:iterator>
 										&nbsp;
 									</td>
 									<td height="26" colspan="2" align="center" bgcolor="#FFFFFF">
 										<s:url id="edit_url" action="openModifyDeviceRuleAction">
-											<s:param name="deviceRule.id" value="id"></s:param>
+											<s:param name="deviceRuleInfo.id" value="id"></s:param>
 										</s:url>
 										<s:url id="delete_url" action="deleteDeviceRuleAction">
 											<s:param name="ids" value="id"></s:param>
