@@ -48,7 +48,7 @@
 						if( data.ruleResultInfoList!=null){
 							$("#checkboxlist_td").html("");
 							$.each(data.ruleResultInfoList,function(i,obj){
-								$("#checkboxlist_td").append('<input type="checkbox" name="thresholdItem.troubleIds" value="'+obj.id+'" id="thresholdItem.troubleIds-'+obj.id+'"/>'+'<label for="thresholdItem.troubleIds-1" class="checkboxLabel">'+obj.result+'</label><br>');
+								$("#checkboxlist_td").append('<input type="checkbox" name="troubleIds" value="'+obj.id+'" id="troubleIds-'+obj.id+'"/><label for="troubleIds-'+obj.id+'" class="checkboxLabel">'+obj.result+'</label><br>');
 							});
 						}
 					}
@@ -83,6 +83,7 @@
 			});
 			
 			$.fn.save();
+			$.fn.close();
 		});
 		
 		/**
@@ -94,7 +95,7 @@
 			var deviceRuleId = $("#hid_deviceRuleId").val();
 			
 			$("#addBtn").click(function() {
-               	if( $.trim(deviceRuleId) == "0" )
+               	if( $.trim(deviceRuleId) == "" || $.trim(deviceRuleId) == "0" )
                	{
                		form1.action = "toAddDeviceRuleAction.action";
                	}
@@ -183,7 +184,7 @@
 												<s:select id="sel_thresholdItem" list="thresholdItemList" listKey="id" listValue="thresholdItemName" headerKey="" headerValue="---请选择---" name="deviceRuleInfo.thresholdItemId" cssStyle="width: 250px;"></s:select><font color="red">*</font>
 											</s:if>
 											<s:else>
-												<select id="sel_thresholdItem" name="threshold" style="width: 250px;">
+												<select id="sel_thresholdItem" name="deviceRuleInfo.thresholdItemId" style="width: 250px;">
 													<option value="">---请选择---</option> 
 												</select>&nbsp;<font color="red">*</font>
 											</s:else>
@@ -196,8 +197,11 @@
 										<td height="26" align="left" colspan="3" bgcolor="#FFFFFF">
 											<div id="checkboxlist_td" style="width:250px;height:100px; overflow:auto; border:0px solid;">
 												<s:if test="ruleResultInfoList!=null">
-													<s:checkboxlist list="ruleResultInfoList" listKey="id" listValue="result" name="thresholdItem.troubleIds" value="thresholdItem.troubleIds"></s:checkboxlist>
+													<s:checkboxlist list="ruleResultInfoList" listKey="id" listValue="result" name="troubleIds" value="troubleIds"></s:checkboxlist>
 												</s:if>
+												<s:else>
+													<input type="hidden" id="__multiselect_form1_troubleIds" name="__multiselect_troubleIds" value=""/>
+												</s:else>
 											</div>
 										</td>
 									</tr>
