@@ -50,6 +50,12 @@ public class DeviceRuleInfo {
 	private String thresholdItemId;
 	
 	/**
+	 * 阈值
+	 */
+	@Column(name = "threshold_Id")
+	private String thresholdId;
+	
+	/**
 	 * 现象对应ID
 	 */
 	@Column(name = "RESULT_ID")
@@ -93,6 +99,14 @@ public class DeviceRuleInfo {
 
 	public void setRuleResultInfoId(int ruleResultInfoId) {
 		this.ruleResultInfoId = ruleResultInfoId;
+	}
+
+	public String getThresholdId() {
+		return thresholdId;
+	}
+
+	public void setThresholdId(String thresholdId) {
+		this.thresholdId = thresholdId;
 	}
 }
 
