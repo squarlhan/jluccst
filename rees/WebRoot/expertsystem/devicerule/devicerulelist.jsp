@@ -69,7 +69,7 @@
 				$(this).click(function(){
 					var url = $(this).attr("url");
 					if(window.confirm("您确定要删除这条信息吗？")){
-						$.post(url, $('').serialize(), function(data){window.location.href=window.location.href;});
+						$.post(url,{}, function(data){window.location.href=window.location.href;});
 					}
 				});
 			});
@@ -80,7 +80,7 @@
 			$("#deletepointbtn").click(function(){
 				var url = "deleteDeviceRuleAction.action";
 				if(window.confirm("您确定要删除所选信息吗？")){
-					$.post(url, $('#dtplist').serialize(), function(data){window.location.href=window.location.href;});
+					$.post(url, $('#form1').serialize(), function(data){window.location.href=window.location.href;});
 				}
 			});
 	  		$.fn.checkall("cbk_all");
@@ -128,12 +128,12 @@
 										<s:checkbox id="%{#obj.id}" name="ids" fieldValue="%{id}" value="false" theme="simple" />
 									</td>
 									<td height="26" align="center" bgcolor="#FFFFFF">
-										<s:property value="typeName" />
+										<s:property value="deviceTypeId" />
 										&nbsp;
 									</td>
 									
 									<td height="26" align="center" bgcolor="#FFFFFF">
-										<s:property value="speed" />
+										<s:property value="thresholdCategoryId" />
 										&nbsp;
 									</td>
 									<td height="26" align="center" bgcolor="#FFFFFF">
@@ -141,7 +141,7 @@
 										&nbsp;
 									</td>
 									<td height="26" align="center" bgcolor="#FFFFFF">
-										<s:property value="centerHeight" />
+										<s:property value="thresholdItemId" />
 										&nbsp;
 									</td>
 									<td height="26" colspan="2" align="center" bgcolor="#FFFFFF">
