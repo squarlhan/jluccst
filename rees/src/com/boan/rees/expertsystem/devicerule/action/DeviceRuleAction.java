@@ -139,6 +139,11 @@ public class DeviceRuleAction extends ActionSupport {
 	private String[] ids;
 	
 	/**
+	 * 故障Id
+	 */
+	private String[] troubleIds;
+	
+	/**
 	 * 操作提示
 	 */
 	private String message;
@@ -187,6 +192,9 @@ public class DeviceRuleAction extends ActionSupport {
 	public String openAddDeviceRule(){
 		deviceTypeList = deviceTypeService.findAllDeviceType();
 		thresholdCategoryList = thresholdCategoryService.queryAllThresholdCategory();
+		
+		
+//		ruleResultInfoList = ruleResultInfoService.findRuleResultInfoByDeviceTypeId("402880e4366ecb1701366ecd38f90001");
 		return SUCCESS;
 	}
 	
@@ -197,8 +205,18 @@ public class DeviceRuleAction extends ActionSupport {
 	public String toAddDeviceRule(){
 		try {
 			//保存设备规则对象
-			deviceRuleService.save(deviceRuleInfo);
+			for(String troubleId :troubleIds){
+				DeviceRuleInfo obj = new DeviceRuleInfo();
+				obj.setDeviceTypeId(deviceRuleInfo.getDeviceTypeId());
+				obj.setRuleResultInfoId(Integer.parseInt(troubleId.trim()));
+				obj.setThresholdCategoryId(deviceRuleInfo.getThresholdCategoryId());
+				obj.setThresholdItemId(deviceRuleInfo.getThresholdItemId());
+				deviceRuleService.save(obj);
+			}
+			
 			message="保存成功！";
+			deviceTypeList = deviceTypeService.findAllDeviceType();
+			thresholdCategoryList = thresholdCategoryService.queryAllThresholdCategory();
 		} catch (Exception e) {
 			e.printStackTrace();
 			message="保存失败！";
@@ -209,6 +227,9 @@ public class DeviceRuleAction extends ActionSupport {
 	 * 保存前验证
 	 */
 	public void validateToAddDeviceRule(){
+		System.out.println(troubleIds);
+		deviceTypeList = deviceTypeService.findAllDeviceType();
+		thresholdCategoryList = thresholdCategoryService.queryAllThresholdCategory();
 	}
 
 	/**
@@ -353,6 +374,14 @@ public class DeviceRuleAction extends ActionSupport {
 
 	public void setMessage(String message) {
 		this.message = message;
+	}
+
+	public String[] getTroubleIds() {
+		return troubleIds;
+	}
+
+	public void setTroubleIds(String[] troubleIds) {
+		this.troubleIds = troubleIds;
 	}
 }
 
