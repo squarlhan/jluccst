@@ -181,6 +181,12 @@ public class DeviceRuleAction extends ActionSupport {
 	 */
 	public String openDeviceRule(){
 		pagination = deviceRuleService.findDeviceRuleInfoForPage(new HashMap(), pagination);
+		
+		deviceTypeList = deviceTypeService.findAllDeviceType();
+		thresholdCategoryList = thresholdCategoryService.queryAllThresholdCategory();
+		ruleResultInfoList = ruleResultInfoService.findAllRuleResultInfo();
+		thresholdList = thresholdService.queryAllThreshold();
+		thresholdItemList =thresholdItemService.queryAllThresholdItem();
 		return this.SUCCESS;
 	}
 	
@@ -192,7 +198,6 @@ public class DeviceRuleAction extends ActionSupport {
 	public String openAddDeviceRule(){
 		deviceTypeList = deviceTypeService.findAllDeviceType();
 		thresholdCategoryList = thresholdCategoryService.queryAllThresholdCategory();
-		
 		
 //		ruleResultInfoList = ruleResultInfoService.findRuleResultInfoByDeviceTypeId("402880e4366ecb1701366ecd38f90001");
 		return SUCCESS;
@@ -211,12 +216,20 @@ public class DeviceRuleAction extends ActionSupport {
 				obj.setRuleResultInfoId(Integer.parseInt(troubleId.trim()));
 				obj.setThresholdCategoryId(deviceRuleInfo.getThresholdCategoryId());
 				obj.setThresholdItemId(deviceRuleInfo.getThresholdItemId());
+				obj.setThresholdId(deviceRuleInfo.getThresholdId());
 				deviceRuleService.save(obj);
 			}
 			
 			message="保存成功！";
 			deviceTypeList = deviceTypeService.findAllDeviceType();
 			thresholdCategoryList = thresholdCategoryService.queryAllThresholdCategory();
+//			deviceTypeId =deviceRuleInfo.getDeviceTypeId();
+//			thresholdCategoryId =deviceRuleInfo.getThresholdCategoryId();
+//			thresholdId = deviceRuleInfo.getThresholdId();
+//			ruleResultInfoList = ruleResultInfoService.findRuleResultInfoByDeviceTypeId(deviceTypeId);
+//			thresholdList = thresholdCategoryService.getThresholdCategoryById(thresholdCategoryId).getThresholds();
+//			thresholdItemList = thresholdService.getThresholdById(thresholdId).getThresholdItems();
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 			message="保存失败！";
@@ -246,8 +259,15 @@ public class DeviceRuleAction extends ActionSupport {
 	 * @return
 	 */
 	public String openModifyDeviceRule(){
-//		String id = deviceType.getId();
-//		deviceType = service.get(id);
+		deviceTypeList = deviceTypeService.findAllDeviceType();
+		thresholdCategoryList = thresholdCategoryService.queryAllThresholdCategory();
+		deviceRuleInfo=deviceRuleService.get(""+deviceRuleInfo.getId());
+		deviceTypeId =deviceRuleInfo.getDeviceTypeId();
+		thresholdCategoryId =deviceRuleInfo.getThresholdCategoryId();
+		thresholdId = deviceRuleInfo.getThresholdId();
+		ruleResultInfoList = ruleResultInfoService.findRuleResultInfoByDeviceTypeId(deviceTypeId);
+		thresholdList = thresholdCategoryService.getThresholdCategoryById(thresholdCategoryId).getThresholds();
+		thresholdItemList = thresholdService.getThresholdById(thresholdId).getThresholdItems();
 		return SUCCESS;
 	}
 	
