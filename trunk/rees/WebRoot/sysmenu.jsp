@@ -158,6 +158,23 @@
 												<img src="images/menuto.jpg" width="5" height="5" />
 											</td>
 											<td>
+												<a href="base/devicerulemanage.jsp" target="mainFrame">设备规则</a>
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							<tr>
+								<td height="1" align="left" background="images/menubg2.jpg"></td>
+							</tr>
+							<tr>
+								<td align="left">
+									<table width="100%" border="0" cellspacing="5" cellpadding="0">
+										<tr>
+											<td width="40" align="right" style="padding-bottom: 4px;">
+												<img src="images/menuto.jpg" width="5" height="5" />
+											</td>
+											<td>
 												<a href="expertsystem/failurediagnosismanage.jsp" target="mainFrame">故障诊断</a>
 											</td>
 										</tr>
@@ -410,6 +427,24 @@
 							<tr>
 								<td height="1" align="left" background="images/menubg2.jpg"></td>
 							</tr>
+							<%} %>
+							<%
+							b = popedomService.isHasPopedom(us.getUserId(), String.valueOf(us.getUserType()), MenuKey.SHU_JU_ZI_DIAN, us.getPopedomKeys() );
+							if ( b ){%>
+							<tr>
+								<td height="24" align="left" background="images/menubg.jpg">
+									<table width="100%" border="0" cellspacing="5" cellpadding="0">
+										<tr>
+											<td width="40" align="right" style="padding-bottom: 4px;">
+												<img src="images/up.gif" width="10" height="12" />
+											</td>
+											<td>
+												<strong>数据字典</strong>
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
 							<tr>
 								<td align="left">
 									<table width="100%" border="0" cellspacing="5" cellpadding="0">
@@ -436,6 +471,57 @@
 											</td>
 											<td>
 												<a href="base/devicetype/devicemanage.jsp" target="mainFrame">设备类型</a>
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							<tr>
+								<td height="1" align="left" background="images/menubg2.jpg"></td>
+							</tr>
+							<tr>
+								<td align="left">
+									<table width="100%" border="0" cellspacing="5" cellpadding="0">
+										<tr>
+											<td width="40" align="right" style="padding-bottom: 4px;">
+												<img src="images/menuto.jpg" width="5" height="5" />
+											</td>
+											<td>
+												<a href="base/devicetype/devicemanage.jsp" target="mainFrame">阈值类别</a>
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							<tr>
+								<td height="1" align="left" background="images/menubg2.jpg"></td>
+							</tr>
+							<tr>
+								<td align="left">
+									<table width="100%" border="0" cellspacing="5" cellpadding="0">
+										<tr>
+											<td width="40" align="right" style="padding-bottom: 4px;">
+												<img src="images/menuto.jpg" width="5" height="5" />
+											</td>
+											<td>
+												<a href="base/devicetype/devicemanage.jsp" target="mainFrame">阈值设置</a>
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							<tr>
+								<td height="1" align="left" background="images/menubg2.jpg"></td>
+							</tr>
+							<tr>
+								<td align="left">
+									<table width="100%" border="0" cellspacing="5" cellpadding="0">
+										<tr>
+											<td width="40" align="right" style="padding-bottom: 4px;">
+												<img src="images/menuto.jpg" width="5" height="5" />
+											</td>
+											<td>
+												<a href="base/devicetype/devicemanage.jsp" target="mainFrame">阈值项</a>
 											</td>
 										</tr>
 									</table>
