@@ -45,6 +45,29 @@ public class DeviceRuleServiceImpl implements IDeviceRuleService{
 	}
 
 	/**
+	 * 根据阈值项id获取设备规则
+	 */
+	public List<Integer> getRuleResultInfoIdByThresholdItemId(String thresholdItemId){
+		String hql = "select ruleResultInfoId from DeviceRuleInfo where thresholdItemId=:thresholdItemId";
+		Map<String, Object> values = new HashMap<String,Object>();
+		values.put("thresholdItemId",thresholdItemId);
+		List<Integer> list = deviceRuleDao.find(hql, values);
+		return list;
+	}
+	
+	/**
+	 * 根据阈值项id和故障Id获取设备规则Id
+	 */
+	public List<Integer> getRuleIdByThresholdItemIdAndTroubleId(String thresholdItemId,int troubleId){
+		String hql = "select id from DeviceRuleInfo where thresholdItemId=:thresholdItemId and ruleResultInfoId=:troubleId";
+		Map<String, Object> values = new HashMap<String,Object>();
+		values.put("thresholdItemId",thresholdItemId);
+		values.put("troubleId",troubleId);
+		List<Integer> list = deviceRuleDao.find(hql, values);
+		return list;
+	}
+	
+	/**
 	 * 删除设备规则
 	 */
 	public void deleteDeviceRuleInfo(String... ids){
@@ -74,7 +97,7 @@ public class DeviceRuleServiceImpl implements IDeviceRuleService{
 	 * 按分页查找设备规则
 	 */
 	public Pagination<DeviceRuleInfo> findDeviceRuleInfoForPage(Map<String, ?> values, Pagination<DeviceRuleInfo> pagination){
-		String hql = "from DeviceRuleInfo";
+		String hql = "from DeviceRuleInfo order by thresholdId";
 		List<DeviceRuleInfo> data = deviceRuleDao.findForPage(hql, values, pagination.getStartIndex(), pagination.getPageSize());
 		hql = "select count(*) from DeviceRuleInfo";
 		int totalRows = deviceRuleDao.findCountForPage(hql, values);
