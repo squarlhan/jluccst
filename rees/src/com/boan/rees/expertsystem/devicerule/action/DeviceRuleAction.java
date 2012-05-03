@@ -4,6 +4,7 @@
 
 package com.boan.rees.expertsystem.devicerule.action;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -144,6 +145,11 @@ public class DeviceRuleAction extends ActionSupport {
 	private String[] troubleIds;
 	
 	/**
+	 * 用于回显
+	 */
+	private int[] _troubleIds;
+	
+	/**
 	 * 操作提示
 	 */
 	private String message;
@@ -221,14 +227,24 @@ public class DeviceRuleAction extends ActionSupport {
 			}
 			
 			message="保存成功！";
+			
 			deviceTypeList = deviceTypeService.findAllDeviceType();
 			thresholdCategoryList = thresholdCategoryService.queryAllThresholdCategory();
-//			deviceTypeId =deviceRuleInfo.getDeviceTypeId();
-//			thresholdCategoryId =deviceRuleInfo.getThresholdCategoryId();
-//			thresholdId = deviceRuleInfo.getThresholdId();
-//			ruleResultInfoList = ruleResultInfoService.findRuleResultInfoByDeviceTypeId(deviceTypeId);
-//			thresholdList = thresholdCategoryService.getThresholdCategoryById(thresholdCategoryId).getThresholds();
-//			thresholdItemList = thresholdService.getThresholdById(thresholdId).getThresholdItems();
+			deviceTypeId =deviceRuleInfo.getDeviceTypeId();
+			thresholdCategoryId =deviceRuleInfo.getThresholdCategoryId();
+			thresholdId = deviceRuleInfo.getThresholdId();
+			ruleResultInfoList = ruleResultInfoService.findRuleResultInfoByDeviceTypeId(deviceTypeId);
+			thresholdList = thresholdCategoryService.getThresholdCategoryById(thresholdCategoryId).getThresholds();
+			thresholdItemList = thresholdService.getThresholdById(thresholdId).getThresholdItems();
+			//获取阈值项对应的故障id
+			List<Integer> ruleResultIds = deviceRuleService.getRuleResultInfoIdByThresholdItemId(deviceRuleInfo.getThresholdItemId());
+			if(ruleResultIds!=null){
+				//为页面回显赋值
+				_troubleIds = new int[ruleResultIds.size()];
+				for(int i=0;i<ruleResultIds.size();i++){
+					_troubleIds[i] = ruleResultIds.get(i);
+				}
+			}
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -240,7 +256,6 @@ public class DeviceRuleAction extends ActionSupport {
 	 * 保存前验证
 	 */
 	public void validateToAddDeviceRule(){
-		System.out.println(troubleIds);
 		deviceTypeList = deviceTypeService.findAllDeviceType();
 		thresholdCategoryList = thresholdCategoryService.queryAllThresholdCategory();
 	}
@@ -268,6 +283,16 @@ public class DeviceRuleAction extends ActionSupport {
 		ruleResultInfoList = ruleResultInfoService.findRuleResultInfoByDeviceTypeId(deviceTypeId);
 		thresholdList = thresholdCategoryService.getThresholdCategoryById(thresholdCategoryId).getThresholds();
 		thresholdItemList = thresholdService.getThresholdById(thresholdId).getThresholdItems();
+		//获取阈值项对应的故障id
+		List<Integer> ruleResultIds = deviceRuleService.getRuleResultInfoIdByThresholdItemId(deviceRuleInfo.getThresholdItemId());
+		if(ruleResultIds!=null){
+			//为页面回显赋值
+			_troubleIds = new int[ruleResultIds.size()];
+			for(int i=0;i<ruleResultIds.size();i++){
+				_troubleIds[i] = ruleResultIds.get(i);
+			}
+		}
+		
 		return SUCCESS;
 	}
 	
@@ -277,8 +302,57 @@ public class DeviceRuleAction extends ActionSupport {
 	 */
 	public String toModifyDeviceRule(){
 		try {
-			deviceRuleService.update(deviceRuleInfo);
+			
+			//获取阈值项对应的故障id
+			List<Integer> oldRuleResultIds = deviceRuleService.getRuleResultInfoIdByThresholdItemId(deviceRuleInfo.getThresholdItemId());
+			List<Integer> newRuleResultIds = new ArrayList<Integer>();
+			for(String troubleId :troubleIds){
+				newRuleResultIds.add(Integer.parseInt(troubleId));
+			}
+			
+			for(Integer troubleId :newRuleResultIds){
+				//找出需要添加的
+				if(!oldRuleResultIds.contains(troubleId)){
+					DeviceRuleInfo obj = new DeviceRuleInfo();
+					obj.setDeviceTypeId(deviceRuleInfo.getDeviceTypeId());
+					obj.setRuleResultInfoId(troubleId);
+					obj.setThresholdCategoryId(deviceRuleInfo.getThresholdCategoryId());
+					obj.setThresholdItemId(deviceRuleInfo.getThresholdItemId());
+					obj.setThresholdId(deviceRuleInfo.getThresholdId());
+					deviceRuleService.save(obj);
+				}
+			}
+			
+			for(Integer troubleId : oldRuleResultIds){
+				//找出需要删除的
+				if(!newRuleResultIds.contains(troubleId)){
+					String thresholdItemId =deviceRuleInfo.getThresholdItemId();
+					List<Integer> ruleIds =deviceRuleService.getRuleIdByThresholdItemIdAndTroubleId(thresholdItemId,troubleId);
+					for(Integer id : ruleIds){
+						deviceRuleService.deleteDeviceRuleInfo(id.toString());
+					}
+				}
+			}
+			
 			message="保存成功！";
+			
+			deviceTypeList = deviceTypeService.findAllDeviceType();
+			thresholdCategoryList = thresholdCategoryService.queryAllThresholdCategory();
+			deviceTypeId =deviceRuleInfo.getDeviceTypeId();
+			thresholdCategoryId =deviceRuleInfo.getThresholdCategoryId();
+			thresholdId = deviceRuleInfo.getThresholdId();
+			ruleResultInfoList = ruleResultInfoService.findRuleResultInfoByDeviceTypeId(deviceTypeId);
+			thresholdList = thresholdCategoryService.getThresholdCategoryById(thresholdCategoryId).getThresholds();
+			thresholdItemList = thresholdService.getThresholdById(thresholdId).getThresholdItems();
+			//获取阈值项对应的故障id
+			List<Integer> ruleResultIds = deviceRuleService.getRuleResultInfoIdByThresholdItemId(deviceRuleInfo.getThresholdItemId());
+			if(ruleResultIds!=null){
+				//为页面回显赋值
+				_troubleIds = new int[ruleResultIds.size()];
+				for(int i=0;i<ruleResultIds.size();i++){
+					_troubleIds[i] = ruleResultIds.get(i);
+				}
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			message="保存失败！";
@@ -402,6 +476,14 @@ public class DeviceRuleAction extends ActionSupport {
 
 	public void setTroubleIds(String[] troubleIds) {
 		this.troubleIds = troubleIds;
+	}
+
+	public int[] get_troubleIds() {
+		return _troubleIds;
+	}
+
+	public void set_troubleIds(int[] _troubleIds) {
+		this._troubleIds = _troubleIds;
 	}
 }
 
