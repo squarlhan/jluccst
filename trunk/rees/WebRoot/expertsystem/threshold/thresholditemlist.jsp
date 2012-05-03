@@ -104,22 +104,22 @@
 						</table>
 						<table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#d5e4fd">
 							<tr>
-								<td width="5%" height="26" align="center" background="../images/headerbg.jpg">
+								<td width="5%" height="26" align="center" background="<%=path %>/images/headerbg.jpg">
 									<s:checkbox theme="simple" id="cbk_all" name="all"></s:checkbox>
 								</td>
-								<td align="center" background="../images/headerbg.jpg">
+								<td align="center" background="<%=path %>/images/headerbg.jpg">
 									<strong>阈值项名称</strong>
 								</td>
-								<td align="center" background="../images/headerbg.jpg">
+								<td align="center" background="<%=path %>/images/headerbg.jpg">
 									<strong>所属阈值</strong>
 								</td>
-								<td align="center" background="../images/headerbg.jpg">
+								<td align="center" background="<%=path %>/images/headerbg.jpg">
 									<strong>阈值项区间</strong>
 								</td>
-								<td align="center" background="../images/headerbg.jpg">
+								<td align="center" background="<%=path %>/images/headerbg.jpg">
 									<strong>是否报警</strong>
 								</td>
-								<td width="15%" align="center" background="../images/headerbg.jpg">
+								<td width="15%" align="center" background="<%=path %>/images/headerbg.jpg">
 									<strong>操作</strong>
 								</td>
 							</tr>
