@@ -269,6 +269,7 @@ public class TestAny {
 			popoutput.write(WeiMaxFunction.counts+"\n");
 			popoutput.write(NonMaxFunction.counts+"\n");
 			popoutput.flush();
+			popoutput.close();
 	} catch (IOException e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();

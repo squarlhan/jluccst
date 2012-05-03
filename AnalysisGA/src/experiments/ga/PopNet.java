@@ -1,11 +1,17 @@
 package experiments.ga;
 
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 import org.jgap.Population;
+
+import experiments.MaxFunction;
 
 public class PopNet {
 	
@@ -60,6 +66,49 @@ public class PopNet {
 			}
 		}
 		
+	}
+	
+	public void writepython(int progress){
+		try {
+			String p = String.valueOf(progress);
+			while(p.length()<3){
+				p = "0"+p;
+			}
+			File py = new File("py/"+p+".py");
+			if (py.exists()) {
+				py.delete();
+				if (py.createNewFile()) {
+					System.out.println("py  file create success!");
+				} else {
+					System.out.println("py file create failed!");
+				}
+			} else {
+				if (py.createNewFile()) {
+					System.out.println("py file create success!");
+				} else {
+					System.out.println("py file create failed!");
+				}
+				
+				BufferedWriter pyoutput = new BufferedWriter(new FileWriter(py));
+				pyoutput.write("import networkx as nx     "+"\n");
+				pyoutput.write("import matplotlib.pyplot as plt   "+"\n");
+				pyoutput.write("G = nx.Graph()"+"\n");
+				pyoutput.flush();
+				for(Edge ed:edges){
+					pyoutput.write("G.add_edge(\""+ed.getNode1()+"\",\""+ed.getNode2()+"\")"+"\n"); 
+				}
+				pyoutput.flush();
+				pyoutput.write("nx.draw(G) "+"\n");                      
+				pyoutput.write("plt.savefig(\""+p+".png\")        "+"\n"); 
+				pyoutput.write("#plt.show()  "+"\n");
+				pyoutput.flush();
+				
+				pyoutput.close();
+			}	
+			}catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}	
 	}
 	
 	public List<Node> getNodes() {
