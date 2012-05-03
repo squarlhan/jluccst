@@ -44,6 +44,11 @@ public class MenuKey
 	public static final String XI_TONG_GUAN_LI = "XI_TONG_GUAN_LI";
 	
 	/**
+	 * 数据字典
+	 */
+	public static final String SHU_JU_ZI_DIAN = "SHU_JU_ZI_DIAN";
+	
+	/**
 	 * 显示所有机构
 	 */
 	public static final String SHOW_ALL_GROUP = "SHOW_ALL_GROUP";
