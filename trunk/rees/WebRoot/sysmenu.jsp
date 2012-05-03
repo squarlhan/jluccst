@@ -487,7 +487,7 @@
 												<img src="images/menuto.jpg" width="5" height="5" />
 											</td>
 											<td>
-												<a href="base/devicetype/devicemanage.jsp" target="mainFrame">阈值类别</a>
+												<a href="base/thresholdcategorymanage.jsp" target="mainFrame">阈值类别</a>
 											</td>
 										</tr>
 									</table>
@@ -504,7 +504,7 @@
 												<img src="images/menuto.jpg" width="5" height="5" />
 											</td>
 											<td>
-												<a href="base/devicetype/devicemanage.jsp" target="mainFrame">阈值设置</a>
+												<a href="base/thresholdconfigmanage.jsp" target="mainFrame">阈值设置</a>
 											</td>
 										</tr>
 									</table>
@@ -521,7 +521,7 @@
 												<img src="images/menuto.jpg" width="5" height="5" />
 											</td>
 											<td>
-												<a href="base/devicetype/devicemanage.jsp" target="mainFrame">阈值项</a>
+												<a href="base/thresholditemmanage.jsp" target="mainFrame">阈值项</a>
 											</td>
 										</tr>
 									</table>
