@@ -96,6 +96,27 @@
 			var deviceRuleId = $("#hid_deviceRuleInfoId").val();
 			
 			$("#addBtn").click(function() {
+				var deviceType = $("#sel_deviceType").val();
+				var thresholdCategory =$("#sel_thresholdCategory").val();
+				var threshold =$("#sel_threshold").val();
+				var thresholdItem =$("#sel_thresholdItem").val();
+				
+				if(deviceType==""){
+					alert("请选择设备类别！");
+					return false;
+				}
+				if(thresholdCategory==""){
+					alert("请选择参考参数！");
+					return false;
+				}
+				if(threshold==""){
+					alert("请选择阈值！");
+					return false;
+				}
+				if(thresholdItem==""){
+					alert("请选择阈值范围！");
+					return false;
+				}
                	if( $.trim(deviceRuleId) == "" || $.trim(deviceRuleId) == "0" )
                	{
                		form1.action = "toAddDeviceRuleAction.action";
@@ -133,6 +154,9 @@
 					//checkbos前插入br 
 					checktd.insertBefore(br, checkboxs[i]); 
 				} 
+				$("#readOnly").mousemove(function(){this.setCapture();});
+				$("#readOnly").mouseout(function(){this.releaseCapture();});
+				$("#readOnly").focus(function(){this.blur();});
 			}
 			var err = $("#lb_error").html();
 			if(err!=null && $.trim(err)!="" ){
@@ -158,6 +182,7 @@
 						<tr>
 							<td style="height: 36px;">
 								<table id="table1" width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#d5e4fd">
+									<span id="readOnly">
 									<tr>
 										<td height="26" align="right" bgcolor="#FFFFFF">
 											<strong>设备类别：</strong>
@@ -204,6 +229,7 @@
 											</s:else>
 										</td>
 									</tr>
+									</span>
 									<tr>
 										<td height="26" align="right" bgcolor="#FFFFFF">
 											<strong>设备故障：</strong>
