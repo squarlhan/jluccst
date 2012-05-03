@@ -97,7 +97,7 @@ public class DeviceRuleServiceImpl implements IDeviceRuleService{
 	 * 按分页查找设备规则
 	 */
 	public Pagination<DeviceRuleInfo> findDeviceRuleInfoForPage(Map<String, ?> values, Pagination<DeviceRuleInfo> pagination){
-		String hql = "from DeviceRuleInfo order by thresholdId";
+		String hql = "from DeviceRuleInfo order by thresholdItemId";
 		List<DeviceRuleInfo> data = deviceRuleDao.findForPage(hql, values, pagination.getStartIndex(), pagination.getPageSize());
 		hql = "select count(*) from DeviceRuleInfo";
 		int totalRows = deviceRuleDao.findCountForPage(hql, values);
