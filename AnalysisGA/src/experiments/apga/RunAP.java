@@ -13,6 +13,8 @@ import org.jgap.FitnessFunction;
 import org.jgap.IChromosome;
 import org.jgap.Population;
 
+import experiments.ga.PopNet;
+
 import affinitymain.InteractionData;
 import affinitymain.RunAlgorithm;
 import algorithm.abs.AffinityPropagationAlgorithm.AffinityConnectingMethod;
@@ -76,6 +78,8 @@ private  void runordinary(Population a_pop, Configuration a_conf, APGA obj, Fitn
 					if(resarray[a].equals(b))counts[a]++;
 				}
 			}
+			PopNet pnet = new PopNet();
+			pnet.transtonet(results, a_pop);
 			output.write(counts.length+"\t");
 			maoPao(counts);
 			for(int a : counts){
