@@ -28,6 +28,16 @@ public interface IDeviceRuleService {
 	 * 根据id获取设备规则
 	 */
 	public DeviceRuleInfo get(String id);
+	
+	/**
+	 * 根据阈值项id获取设备规则
+	 */
+	public List<Integer> getRuleResultInfoIdByThresholdItemId(String thresholdItemId);
+	
+	/**
+	 * 根据阈值项id和故障Id获取设备规则Id
+	 */
+	public List<Integer> getRuleIdByThresholdItemIdAndTroubleId(String thresholdItemId,int troubleId);
 
 	/**
 	 * 删除设备规则
