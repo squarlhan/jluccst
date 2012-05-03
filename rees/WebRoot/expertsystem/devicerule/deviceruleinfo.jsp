@@ -121,8 +121,7 @@
 		 * 初始化页面元素
 		 */
 		$.fn.initPage = function(){
-			var deviceRuleId = $("#hid_deviceRuleInfoId").val();
-			if( $.trim(deviceRuleId) != "" && $.trim(deviceRuleId) != "0" ){
+			if($(".look").length>0){
 				//得到checkboxlist的td,自定义td的id为checktd 
 				var checktd = document.getElementById("checkboxlist_td"); 
 				//得到一个checkbox数组 
@@ -134,7 +133,7 @@
 					//checkbos前插入br 
 					checktd.insertBefore(br, checkboxs[i]); 
 				} 
-	 		}
+			}
 			var err = $("#lb_error").html();
 			if(err!=null && $.trim(err)!="" ){
 				alert(err);
@@ -212,7 +211,7 @@
 										<td height="26" align="left" colspan="3" bgcolor="#FFFFFF">
 											<div id="checkboxlist_td" style="width:250px;height:100px; overflow:auto; border:0px solid;">
 												<s:if test="ruleResultInfoList!=null">
-													<s:checkboxlist list="ruleResultInfoList" listKey="id" listValue="result" name="troubleIds" value="troubleIds"></s:checkboxlist>
+													<s:checkboxlist list="ruleResultInfoList" listKey="id" listValue="result" name="troubleIds" value="_troubleIds" cssClass="look"></s:checkboxlist>
 												</s:if>
 												<s:else>
 													<input type="hidden" id="__multiselect_form1_troubleIds" name="__multiselect_troubleIds" value=""/>
