@@ -80,6 +80,7 @@ private  void runordinary(Population a_pop, Configuration a_conf, APGA obj, Fitn
 			}
 			PopNet pnet = new PopNet();
 			pnet.transtonet(results, a_pop);
+			pnet.writepython(obj.getProgress());
 			output.write(counts.length+"\t");
 			maoPao(counts);
 			for(int a : counts){
