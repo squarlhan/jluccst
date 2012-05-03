@@ -43,6 +43,7 @@
 		d.add(103,0,'报表管理','<%=url%>?menuKey=<%=MenuKey.BAO_BIAO_GUAN_LI%>','','groupmain');
 		d.add(104,0,'论坛区','<%=url%>?menuKey=<%=MenuKey.LUN_TAN_QU%>','','groupmain');
 		d.add(105,0,'系统管理','<%=url%>?menuKey=<%=MenuKey.XI_TONG_GUAN_LI%>','','groupmain');
+		d.add(106,0,'数据字典','<%=url%>?menuKey=<%=MenuKey.SHU_JU_ZI_DIAN%>','','groupmain');
 		d.add(1,-1,'组织机构树型','','','Menu');
 		d.add(201,1,'显示所有机构','<%=url%>?menuKey=<%=MenuKey.SHOW_ALL_GROUP%>','','groupmain');
 		d.add(202,1,'显示当前机构','<%=url%>?menuKey=<%=MenuKey.SHOW_CURRENT_GROUP%>','','groupmain');
