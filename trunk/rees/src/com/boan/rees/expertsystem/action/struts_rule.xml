@@ -33,7 +33,7 @@
     		<result name="success">/expertsystem/expertruleinfo.jsp</result>
     		<result name="input">/expertsystem/expertruleinfo.jsp</result>
     	</action>
-    	<action name="deleteAction" class="ruleInfoAction" method="deleteRuleInfo">
+    	<action name="deleteRuleInfoAction" class="ruleInfoAction" method="deleteRuleInfo">
     	</action>
     	
       </package>	    
