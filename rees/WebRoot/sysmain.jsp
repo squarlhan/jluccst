@@ -36,7 +36,7 @@
 $(document).ready(function() {
 	$.fn.initpage();
 	//需要定时触发
-	$.fn.noticepage();
+	//$.fn.noticepage();
 });
 /**
  * 初始化页面

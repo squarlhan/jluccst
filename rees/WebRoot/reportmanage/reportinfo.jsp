@@ -100,6 +100,8 @@
 	 * 初始化页面
 	 */
 	$.fn.initpage = function(){
+		
+		$("#txt_reportType").focus();
 		var err = $("#lb_error").html();
 		if(err!=null && $.trim(err)!="" ){
 			alert(err);
