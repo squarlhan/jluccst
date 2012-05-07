@@ -70,5 +70,7 @@
 	
 	<!-- 设备规则模块配置 -->
 	<include file="com/boan/rees/expertsystem/devicerule/action/struts_device_rule.xml"></include>
-
+	
+	<!-- 故障日志模块配置 -->
+	<include file="com/boan/rees/error/action/struts_errorLog.xml"></include>
 </struts>
