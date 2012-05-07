@@ -27,56 +27,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>旋转设备离线专家系统</title>
-<j:scriptlink css="true" jquery="true" jquerylayout="true" tipswindow="true" jmessagebox="true" />
-<SCRIPT language=javascript type=text/javascript src="notice/js/jquery.XYTipsWindow.min.2.8.js"></SCRIPT>
-<SCRIPT language=javascript type=text/javascript>
-/**
- * 准备工作
- */
-$(document).ready(function() {
-	$.fn.initpage();
-	//需要定时触发
-	//$.fn.noticepage();
-});
-/**
- * 初始化页面
- */
-$.fn.initpage = function(){
-	var err = $("#lb_error").html();
-	if(err!=null && $.trim(err)!="" ){
-		alert(err);
-	}
-	var message = $("#lb_message").html();
-	if(message!=null && $.trim(message)!="" ){
-		alert(message);
-	}
-};
-/**
- * 调用通知页面
- */
-$.fn.noticepage = function(){
-$.ajax({
-	type: "get",
-	url: document.getElementById("path").value + "/getNewNoticeCounts",
-	beforeSend: function(XMLHttpRequest){
-	//ShowLoading();
-	},
-	success: function(data, textStatus){
-		alert(data);
-		if(data > 0)
-		{
-			$.XYTipsWindow({___offsets:"right-bottom"});//右上角
-		}
-	},
-	complete: function(XMLHttpRequest, textStatus){
-	//HideLoading();
-	},
-	error: function(){
-	//请求出错处理
-	}
-	});
-};
-</SCRIPT>
+<j:scriptlink css="true" jquery="true" jquerylayout="true" tipswindow="true" jmessagebox="true" jmessager="true" />
 <script type="text/javascript">
 <!--
 var myLayout;
@@ -98,7 +49,35 @@ $( document ).ready( function() {
 		,spacing_open:			8
 		,initClosed:			false
 	});
+	
+	$.fn.initpage();
+	//需要定时触发
+	$.fn.notice();
+	//定时获得通知
+	window.setInterval("$.fn.notice()",15000);
 });
+/**
+ * 初始化页面
+ */
+$.fn.initpage = function(){
+	var err = $("#lb_error").html();
+	if(err!=null && $.trim(err)!="" ){
+		alert(err);
+	}
+	var message = $("#lb_message").html();
+	if(message!=null && $.trim(message)!="" ){
+		alert(message);
+	}
+};
+/**
+* 论坛通知
+**/
+$.fn.notice = function(){
+	$.post("getNewNoticeCounts.action", function(text){
+		if(text!=0)
+			$.messager.show('<font color=red><strong>论坛通知</strong></font>', '<font color=green style="font-size:12px;font-weight:bold;">有新的通知，请注意查看！！！</font>');
+	});
+};
 //-->
 </script>
 </head>
