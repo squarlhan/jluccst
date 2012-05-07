@@ -113,7 +113,7 @@
 		 * 初始化页面元素
 		 */
 		$.fn.initPage = function(){
-			$("#txt_typeName").focus();
+			$("#txt_categoryName").focus();
 			var err = $("#lb_error").html();
 			if(err!=null && $.trim(err)!="" ){
 				alert(err);
