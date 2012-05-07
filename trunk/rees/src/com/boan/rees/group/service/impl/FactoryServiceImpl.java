@@ -92,9 +92,9 @@ public class FactoryServiceImpl implements IFactoryService
 	}
 
 	@Override
-	public boolean isExistSameName( String id, String name )
+	public boolean isExistSameName( String id, String companyId, String name )
 	{
-		return groupFactoryDao.isExistSameName( id, name );
+		return groupFactoryDao.isExistSameName( id, companyId, name );
 	}
 
 	@Override
