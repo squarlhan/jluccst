@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">	
+<struts>
+    <package name="errorLog" extends="struts-default" namespace="/">
+    	<action name="openErrorLogAction" class="errorLogAction" method="openErrorLog">
+            <result name="success">/errorLog/errorloglist.jsp</result>
+        </action>
+        <action name="openAddErrorLogAction" class="errorLogAction" method="openAddErrorLog">
+            <result name="success">/errorLog/errorloginfo.jsp</result>
+        </action>
+        <action name="toAddErrorLogAction" class="errorLogAction" method="toAddErrorLog">
+             <result name="success">/errorLog/errorloginfo.jsp</result>
+        </action>
+        <action name="toSetIsRemoveAction" class="errorLogAction" method="toSetIsRemove"/>
+
+    </package>
+</struts>
