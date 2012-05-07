@@ -34,10 +34,11 @@ public interface IFactoryService
 	 * 判断是否重名
 	 * 
 	 * @param id
+	 * @param companyId
 	 * @param name
 	 * @return
 	 */
-	public boolean isExistSameName( String id, String name );
+	public boolean isExistSameName( String id, String companyId, String name );
 	
 	/**
 	 * 公司id
