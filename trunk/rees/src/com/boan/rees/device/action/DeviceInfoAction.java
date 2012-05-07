@@ -353,12 +353,12 @@ public class DeviceInfoAction extends BaseActionSupport{
 	//初始化设备类型下拉列表
 	public List<DeviceType> getDeviceTypeList() {
 		List<DeviceType> tempList = deviceTypeService.findAllDeviceType();
-		if(tempList!=null){
-			DeviceType info = new DeviceType();
-			info.setId("other");
-			info.setTypeName("其他");
-			tempList.add(info);
-		}
+//		if(tempList!=null){
+//			DeviceType info = new DeviceType();
+//			info.setId("other");
+//			info.setTypeName("其他");
+//			tempList.add(info);
+//		}
 		return tempList;
 	}
 	
