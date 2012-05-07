@@ -42,8 +42,6 @@
 					"device.controlpoint":{digits:true},
 	                "device.centerHeight":{required:true,number:true},
 	                "device.speed":{required:true,number:true},
-	                //"device.pointNaturalValue":{required:true,number:true},
-	                //"device.pointWarnValue":{required:true,number:true},
 	                "device.power":{required:true,number:true}
 				},messages:{
 					"device.deviceNum":
@@ -238,7 +236,7 @@
 							}
 						});
 					}
-					
+					/*
 					if(deviceTypeId=="other"){
 						$("#txt_centerHeight").attr("readonly","");
 						$("#txt_centerHeight").attr("title","");
@@ -264,6 +262,7 @@
 						$("#txt_pointWarnValue").attr("title","不能修改！");
 						$("#txt_deviceFactory").focus();
 					}
+					//*/
 				});
 			}
 			
@@ -330,7 +329,7 @@
 											<strong>转速：</strong>
 										</td>
 										<td height="26" align="left" bgcolor="#FFFFFF">
-											<s:textfield id="txt_speed" name="device.speed" cssStyle="width: 250px;" readonly="true"></s:textfield><font color="red">*</font>
+											<s:textfield id="txt_speed" name="device.speed" cssStyle="width: 250px;" ></s:textfield><font color="red">*</font>
 										</td>
 									</tr>
 									<tr>
@@ -338,7 +337,7 @@
 											<strong>功率：</strong>
 										</td>
 										<td height="26" align="left" bgcolor="#FFFFFF">
-											<s:textfield id="txt_power" name="device.power" cssStyle="width: 250px;" readonly="true"></s:textfield><font color="red">*</font>
+											<s:textfield id="txt_power" name="device.power" cssStyle="width: 250px;" ></s:textfield><font color="red">*</font>
 										</td>
 									</tr>
 									<tr>
@@ -346,27 +345,9 @@
 											<strong>中心高：</strong>
 										</td>
 										<td height="26" align="left" bgcolor="#FFFFFF">
-											<s:textfield id="txt_centerHeight" name="device.centerHeight" cssStyle="width: 250px;" readonly="true"></s:textfield><font color="red">*</font>
+											<s:textfield id="txt_centerHeight" name="device.centerHeight" cssStyle="width: 250px;" ></s:textfield><font color="red">*</font>
 										</td>
 									</tr>
-									<!--  
-									<tr>
-										<td height="26" align="right" bgcolor="#FFFFFF">
-											<strong>监测点标准值：</strong>
-										</td>
-										<td height="26" align="left" bgcolor="#FFFFFF">
-											<s:textfield id="txt_pointNaturalValue" name="device.pointNaturalValue" cssStyle="width: 250px;" readonly="true"></s:textfield><font color="red">*</font>
-										</td>
-									</tr>
-									<tr>
-										<td height="26" align="right" bgcolor="#FFFFFF">
-											<strong>监测点警告值：</strong>
-										</td>
-										<td height="26" align="left" bgcolor="#FFFFFF">
-											<s:textfield id="txt_pointWarnValue" name="device.pointWarnValue" cssStyle="width: 250px;" readonly="true"></s:textfield><font color="red">*</font>
-										</td>
-									</tr>
-									-->
 									<tr>
 										<td height="26" align="right" bgcolor="#FFFFFF">
 											<strong>设备厂商：</strong>
