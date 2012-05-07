@@ -78,7 +78,7 @@ public class FactoryAction extends BaseActionSupport
 	public String toAddFactory()
 	{
 		// 验证用户名是否重复
-		boolean b = service.isExistSameName( factory.getId(), factory.getFactoryName() );
+		boolean b = service.isExistSameName( factory.getId(),companyId, factory.getFactoryName() );
 		// 如果存在，则提示
 		if( b )
 		{
@@ -114,7 +114,7 @@ public class FactoryAction extends BaseActionSupport
 	public String toModifyFactory()
 	{
 		// 验证用户名是否重复
-		boolean b = service.isExistSameName( factory.getId(), factory.getFactoryName() );
+		boolean b = service.isExistSameName( factory.getId(),companyId, factory.getFactoryName() );
 		// 如果存在，则提示
 		if( b )
 		{
