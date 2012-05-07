@@ -108,6 +108,11 @@ public class ScriptJsTag extends SimpleTagSupport
 	 */
 	private String chart;
 	
+	/**
+	 * 右下角提示插件
+	 */
+	private String jmessager;
+	
 	@Override
 	public void doTag() throws JspException, IOException
 	{
@@ -217,6 +222,11 @@ public class ScriptJsTag extends SimpleTagSupport
 		{
 			getJspContext().getOut().write( "<!--FusionCharts-->\r\n" );
 			getJspContext().getOut().write( "<script type=\"text/javascript\" src=\"" + contextPath + "/js/FusionCharts/FusionCharts.js\"></script>\r\n" );
+		}
+		if( "true".equalsIgnoreCase( jmessager ))
+		{
+			getJspContext().getOut().write( "<!--jmessager-->\r\n" );
+			getJspContext().getOut().write( "<script type=\"text/javascript\" src=\"" + contextPath + "/js/jquery.messager.js\"></script>\r\n" );
 		}
 	}
 
@@ -366,6 +376,14 @@ public class ScriptJsTag extends SimpleTagSupport
 
 	public void setChart(String chart) {
 		this.chart = chart;
+	}
+
+	public String getJmessager() {
+		return jmessager;
+	}
+
+	public void setJmessager(String jmessager) {
+		this.jmessager = jmessager;
 	}
 	
 }
