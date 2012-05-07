@@ -30,7 +30,7 @@ public class FactoryDaoImpl extends BaseDao<Factory, String> implements
 {
 
 	@Override
-	public boolean isExistSameName( String id, String name )
+	public boolean isExistSameName( String id,String companyId, String name )
 	{
 		id = StringUtils.trimToEmpty( id );
 		name = StringUtils.trimToEmpty( name );
@@ -39,14 +39,15 @@ public class FactoryDaoImpl extends BaseDao<Factory, String> implements
 		String hql = null;
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put( "factoryName", name );
+		map.put( "companyId", companyId );
 		if( StringUtils.isNotBlank( id ) )
 		{
-			hql = "select count(id) from Factory where id <> :factoryId and factoryName= :factoryName";
+			hql = "select count(id) from Factory where companyId = :companyId and id <> :factoryId and factoryName= :factoryName";
 			map.put( "factoryId", id );
 		}
 		else
 		{
-			hql = "select count(id) from Factory where factoryName = :factoryName";
+			hql = "select count(id) from Factory where companyId = :companyId and factoryName = :factoryName";
 		}
 		rowCount = super.findCountForPage( hql, map );			
 		if( rowCount > 0 )
