@@ -36,15 +36,15 @@ public class RuleInfo {
 	@Column(name = "DEVICE_TYPE_ID")
 	private String deviceTypeId;
 	/**
-	 * 现象ID,可以多个以分隔符“|”分隔
+	 * 现象ID,可以多个以分隔符“_”分隔
 	 */
 	@Column(name = "RESULT_ID")
-	private int resultId;
+	private String resultId;
 	/**
 	 * 原因ID
 	 */
 	@Column(name = "REASON_ID")
-	private int reasonId;
+	private String reasonId;
 	/**
 	 * 对应建议ID
 	 */
@@ -64,16 +64,17 @@ public class RuleInfo {
 	public void setDeviceTypeId(String deviceTypeId) {
 		this.deviceTypeId = deviceTypeId;
 	}
-	public int getResultId() {
+	
+	public String getResultId() {
 		return resultId;
 	}
-	public void setResultId(int resultId) {
+	public void setResultId(String resultId) {
 		this.resultId = resultId;
 	}
-	public int getReasonId() {
+	public String getReasonId() {
 		return reasonId;
 	}
-	public void setReasonId(int reasonId) {
+	public void setReasonId(String reasonId) {
 		this.reasonId = reasonId;
 	}
 	public int getAdviceId() {

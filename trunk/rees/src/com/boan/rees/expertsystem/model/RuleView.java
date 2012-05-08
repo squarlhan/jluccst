@@ -16,14 +16,9 @@ import javax.persistence.Table;
  * @author jiangmeidi
  * @version 1.0.0
  */
-@Entity
-@Table(name = "rule_view")
-
+//@Entity
 public class RuleView {
-	private static final long serialVersionUID = 1L;
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-
+	
 	
 	/**
 	 * 主键
@@ -33,42 +28,42 @@ public class RuleView {
 	/**
 	 * 设备特征对应ID
 	 */
-	@Column(name = "DEVICE_TYPE_ID")
-		private String deviceTypeId;
+	
+	private String deviceTypeId;
 	/**
 	 * 现象ID,可以多个以分隔符“|”分隔
 	 */
-	@Column(name = "RESULT_ID")
-	private int resultId;
+
+	private String resultId;
 	/**
 	 * 原因ID
 	 */
-	@Column(name = "REASON_ID")
-	private int reasonId;
+
+	private String reasonId;
 	/**
 	 * 对应建议ID
 	 */
-	@Column(name = "ADVICE_ID")
+
 	private int adviceId;
 	/**
 	 * 建议描述
 	 */
-	@Column(name = "ADVICE")
+	
 	private String advice;
 	/**
 	 * 原因描述
 	 */
-	@Column(name = "REASON")
+
 	private String reason;
 	/**
      * 现象描述
      */
-	@Column(name = "RESULT")
+
 	private String result;
 	/**
 	 * 设备类型
 	 */
-	@Column(name = "DEVICE_TYPE")
+
 	private String typeName;
 	
 	public int getId() {
@@ -78,16 +73,17 @@ public class RuleView {
 		this.id = id;
 	}
 
-	public int getResultId() {
+	
+	public String getResultId() {
 		return resultId;
 	}
-	public void setResultId(int resultId) {
+	public void setResultId(String resultId) {
 		this.resultId = resultId;
 	}
-	public int getReasonId() {
+	public String getReasonId() {
 		return reasonId;
 	}
-	public void setReasonId(int reasonId) {
+	public void setReasonId(String reasonId) {
 		this.reasonId = reasonId;
 	}
 	public int getAdviceId() {
@@ -126,9 +122,24 @@ public class RuleView {
 	public void setTypeName(String typeName) {
 		this.typeName = typeName;
 	}
-	
+	public RuleView(int id, String deviceTypeId, String resultId,
+			String reasonId, int adviceId, String advice, String reason,
+			String result, String typeName) {
+		super();
+		this.id = id;
+		this.deviceTypeId = deviceTypeId;
+		this.resultId = resultId;
+		this.reasonId = reasonId;
+		this.adviceId = adviceId;
+		this.advice = advice;
+		this.reason = reason;
+		this.result = result;
+		this.typeName = typeName;
+	}
+	public RuleView(){
+		super();
+	}
 
-	
 
     
 }
