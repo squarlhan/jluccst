@@ -17,6 +17,7 @@ import org.springframework.stereotype.Component;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 
+import cn.edu.jlu.ccst.model.Backward;
 import cn.edu.jlu.ccst.model.BackwardandReason;
 import cn.edu.jlu.ccst.model.BackwardandResult;
 import cn.edu.jlu.ccst.model.DcsDscrib;
@@ -49,12 +50,21 @@ public class DcsdataAction extends ActionSupport {
 	private Dcshistory dcshistory;
 	private DcshistoryService dcshistoryService;
 	private List<BackwardandResult> backwardandResult;
-	private List<BackwardandReason> reasonlist;
+	private  List<BackwardandReason> reasonlist1;
+	private  List<List<BackwardandReason>> reasonlist;
 	private RuleService ruleService;
 	private String keyword;
 	private String papkey;
+	private List<Backward> rule;
 	
-	
+
+	public List<Backward> getRule() {
+		return rule;
+	}
+	@Resource
+	public void setRule(List<Backward> rule) {
+		this.rule = rule;
+	}
 
 	public String getPapkey() {
 		return papkey;
@@ -113,11 +123,25 @@ public class DcsdataAction extends ActionSupport {
 		this.backwardandResult = backwardandResult;
 	}
 
-	public List<BackwardandReason> getReasonlist() {
+	
+
+	
+
+	
+
+	public List<BackwardandReason> getReasonlist1() {
+		return reasonlist1;
+	}
+
+	public void setReasonlist1(List<BackwardandReason> reasonlist1) {
+		this.reasonlist1 = reasonlist1;
+	}
+
+	public List<List<BackwardandReason>> getReasonlist() {
 		return reasonlist;
 	}
 
-	public void setReasonlist(List<BackwardandReason> reasonlist) {
+	public void setReasonlist(List<List<BackwardandReason>> reasonlist) {
 		this.reasonlist = reasonlist;
 	}
 
@@ -342,7 +366,7 @@ public class DcsdataAction extends ActionSupport {
 		List<Dcsdata> list = new ArrayList<Dcsdata>();
 		List<Dcshistory> list2 = new ArrayList<Dcshistory>();
 		List<Dcsdata> list1 = new ArrayList<Dcsdata>();
-		List<Errorlog> list3 = new ArrayList<Errorlog>();
+	
 		backwardandResult = new ArrayList();
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
 		String mytime = formatter.format(new Date());
@@ -373,8 +397,7 @@ public class DcsdataAction extends ActionSupport {
 				if (his.getValue() != null) {
 					list2.add(his);
 					dcshistoryService.save(his);
-					BackwardandResult tempbr = dcsdataService
-							.validateinput(dcsdatalist.get(i));
+					BackwardandResult tempbr = dcsdataService.validateinput(dcsdatalist.get(i));
 					if (tempbr != null) {
 						backwardandResult.add(tempbr);
 					}
@@ -383,12 +406,26 @@ public class DcsdataAction extends ActionSupport {
 
 			}
 		}
-
-		if (backwardandResult != null && backwardandResult.size() > 0) {
-			reasonlist = ruleService.findreasons(backwardandResult);
-			return "saveerror";
+		if (backwardandResult != null && backwardandResult.size() > 0){
+			for(int j = 0; j < backwardandResult.size();j++){
+				Backward backward=new Backward();
+				List<BackwardandResult> tempb =new ArrayList<BackwardandResult>();
+				tempb.clear();
+				tempb.add(backwardandResult.get(j));
+				reasonlist1= ruleService.findreasons(tempb);
+				//System.out.println(reasonlist1);
+				backward.setReasons(reasonlist1);
+				backward.setResults(backwardandResult);
+			
+			    rule.add(backward);
+			    System.out.print(rule);
+		}return "saveerror";	
 		}
+//		if (backwardandResult != null && backwardandResult.size() > 0) {
+//			reasonlist = ruleService.findreasons(backwardandResult);
+//			return "saveerror";
+//		}
 		return "savelistsuccess";
 	}
 
-}
+	}
