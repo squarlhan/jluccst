@@ -99,6 +99,8 @@ public class PointDataInfoAction extends BaseActionSupport {
 	
 	//监测数据字符串
 	private String datas;
+	//监测点状态，0表示未录入完成，1表示已录入完成，2表示已执行任务
+	private String status;
 	
 	//处理结果
 	private String result;
@@ -264,6 +266,22 @@ public class PointDataInfoAction extends BaseActionSupport {
 						pointDataInfoService.save(pdi);
 					}
 				}
+			}
+		}
+		if(StringUtils.trimToNull(status)!=null){
+			//设置监测点参数
+			List<PointInfo> pis = pointInfoService.findPointInfosByDeviceId(deviceId);
+			if(pis!=null && pis.size()>0){
+				for(PointInfo tempPi:pis){
+					if(status.equals("0")){
+						tempPi.setStatus(0);
+					}
+					if(status.equals("1")){
+						tempPi.setStatus(1);
+					}
+					pointInfoService.save(tempPi);
+				}
+				
 			}
 		}
 		result = "OK";
@@ -553,4 +571,13 @@ public class PointDataInfoAction extends BaseActionSupport {
 	public void setChart(String chart) {
 		this.chart = chart;
 	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	
 }
