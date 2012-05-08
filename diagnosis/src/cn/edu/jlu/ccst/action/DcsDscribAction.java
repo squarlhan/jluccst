@@ -18,18 +18,44 @@ import cn.edu.jlu.ccst.model.User;
 import cn.edu.jlu.ccst.service.DcsDscribService;
 import cn.edu.jlu.ccst.service.RuleService;
 
+/**
+ * 规则描述相关操作,用来和用户交互
+ * @author Woden
+ *
+ */
+
 @Component("dcsDscribAction")
 @Scope("prototype")
 public class DcsDscribAction extends ActionSupport {
-
+/**
+ * 描述相关服务类
+ */
 	private DcsDscribService dcsDscribService;
+	/**
+	 * 与用户交互的一个描述实例
+	 */
 	private DcsDscrib dcsDscrib;
+	/**
+	 * 规则相关服务类
+	 */
 	private RuleService ruleService;
+	/**
+	 * 与用户交互的描述列表
+	 */
 	private List<DcsDscrib> dcsdscriblist;
+	/**
+	 * 联动下俩框需要的数据
+	 */
 	private Map nvs;
 	private String dcsDscribname1;
 	private String dcsDscribname2;
+	/**
+	 * 从界面得到的设备
+	 */
 	private String eque;
+	/**
+	 * 从界面得到的分组
+	 */
 	private String unit; 
    
 	
@@ -107,7 +133,10 @@ public class DcsDscribAction extends ActionSupport {
 	public void setDcsDscrib(DcsDscrib dcsDscrib) {
 		this.dcsDscrib = dcsDscrib;
 	}
-
+/**
+ * 检查用户是否合法
+ * @return 合法返回true 否则返回false
+ */
 	public boolean checkprof() {
 		ActionContext actionContext = ActionContext.getContext();
 		Map user = actionContext.getSession();
@@ -117,7 +146,10 @@ public class DcsDscribAction extends ActionSupport {
 		} else
 			return false;
 	}
-
+/**
+ * 页面跳转到描述添加页面
+ * @return 描述添加页面
+ */
 	public String goadd(){
 		if (checkprof()) {
 //			nvs = dcsDscribService.getallnvs();
@@ -128,7 +160,10 @@ public class DcsDscribAction extends ActionSupport {
 		}
 		return "unproflogin";
 	}
-	
+	/**
+	 * 添加描述操作
+	 * @return 添加成功页面
+	 */
 	public String addDescrib() {
 		 
 		dcsDscrib.setEque(dcsDscribname1);
@@ -138,7 +173,10 @@ public class DcsDscribAction extends ActionSupport {
 		dcsdscriblist = dcsDscribService.findall();
 		return "bdsuccess";
 	}
-
+/**
+ * 删除描述操作
+ * @return 描述列表页面
+ */
 	public String deleteDscrib() {
 		dcsDscrib = dcsDscribService.findbyid(dcsDscrib.getDid());
 		dcsDscribService.removebyid(dcsDscrib.getDid());
@@ -146,7 +184,10 @@ public class DcsDscribAction extends ActionSupport {
 		return "bdsuccess";
 
 	}
-
+/**
+ * 更改描述操作
+ * @return 描述列表页面
+ */
 	public String chDscrib() {
 		DcsDscrib temp = dcsDscribService.findbyid(dcsDscrib.getDid());
 		temp.setLower(dcsDscrib.getLower());
@@ -160,7 +201,9 @@ public class DcsDscribAction extends ActionSupport {
 		return "bdsuccess";
 
 	}
-
+/**
+ * 页面跳转到描述列表页面
+ */
 	public String execute() {
 
 		if (checkprof()) {
@@ -170,7 +213,10 @@ public class DcsDscribAction extends ActionSupport {
 		} else
 			return "unproflogin";
 	}
-
+/**
+ * 通过设备分组得到相关描述
+ * @return 描述列表页面
+ */
 	public String findbyequep(){
 		try {
 			String keyword= new String(unit.getBytes("ISO-8859-1"),"UTF-8");
@@ -182,7 +228,10 @@ public class DcsDscribAction extends ActionSupport {
 		} 
 		return "bdsuccess";
 	}
-	
+	/**
+	 * 通过设备得到相关描述
+	 * @return 描述列表页面
+	 */
 	public String findbyeque(){
 		try {
 			String keyword= new String(eque.getBytes("ISO-8859-1"),"UTF-8");

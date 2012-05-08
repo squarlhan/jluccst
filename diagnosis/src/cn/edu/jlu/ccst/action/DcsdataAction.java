@@ -35,26 +35,78 @@ import cn.edu.jlu.ccst.service.DcshistoryService;
 import cn.edu.jlu.ccst.service.ErrorlogService;
 import cn.edu.jlu.ccst.service.Pre_dssService;
 import cn.edu.jlu.ccst.service.RuleService;
+/**
+ * DCS数据相关操作.与用户的交互相关类
+ * @author Woden
+ *
+ */
 
 @Component("dcsdataAction")
 @Scope("prototype")
 public class DcsdataAction extends ActionSupport {
-
+/**
+ * 设备列表
+ */
 	private List<Dcsdata> equipmentlist;
+	/**
+	 * DCS数据列表
+	 */
 	private List<Dcsdata> dcsdatalist;
+	/**
+	 * 自动获得的DCS数据列表
+	 */
 	private List<MotoDcsdata> motodcsdatalist;
+	/**
+	 * DCS相关服务类
+	 */
 	private DcsdataService dcsdataService;
+/**
+ * 自动DCS相关服务
+ */
 	private MotoDcsdataService motodcsdataService;
+	/**
+	 * 与用户交互使用的一个实例
+	 */
 	private Dcsdata dcsdata;
+	/**
+	 * 与用户交互使用的一个实例
+	 */
 	private MotoDcsdata motodcsdata;
+	/**
+	 * 与用户交互使用的一个日志实例
+	 */
 	private Dcshistory dcshistory;
+	/**
+	 * DCS日志相关服务
+	 */
 	private DcshistoryService dcshistoryService;
+	/**
+	 * 与用户交互使用的规则与结果对应表
+	 */
 	private List<BackwardandResult> backwardandResult;
+	/**
+	 * 与用户交互使用的规则与结果对应表
+	 */
 	private  List<BackwardandReason> reasonlist1;
+	/**
+	 * 与用户交互使用的规则与结果对应表
+	 */
 	private  List<List<BackwardandReason>> reasonlist;
+	/**
+	 * 规则相关服务
+	 */
 	private RuleService ruleService;
+	/**
+	 * 从用户界面得到的信息
+	 */
 	private String keyword;
+	/**
+	 * 从用户界面得到的信息
+	 */
 	private String papkey;
+	/**
+	 * 与用户交互使用的规则表
+	 */
 	private List<Backward> rule;
 	
 
@@ -194,7 +246,10 @@ public class DcsdataAction extends ActionSupport {
 	public void setDcsdataService(DcsdataService dcsdataService) {
 		this.dcsdataService = dcsdataService;
 	}
-
+/**
+ * 检查该用户是否合法
+ * @return 合法返回true, 否则返回false
+ */
 	public boolean checkuser() {
 		ActionContext actionContext = ActionContext.getContext();
 		Map user = actionContext.getSession();
@@ -204,7 +259,11 @@ public class DcsdataAction extends ActionSupport {
 		} else
 			return false;
 	}
-
+/**
+ * 按照设备名得到相关数据
+ * @param str 设备名
+ * @return 数据列表页面
+ */
 	public String equipmentList(String str) {
 		if (checkuser()) {
 			equipmentlist = dcsdataService.findbyequipment(str);
@@ -212,28 +271,40 @@ public class DcsdataAction extends ActionSupport {
 		} else
 			return "unuserlogin";
 	}
-	
+	/**
+	 * 得到所有的dcs数据
+	 * @return 数据列表
+	 */
 	public String showdcsdatas(){
 		String key = null;
 		dcsdatalist = dcsdataService.getalldcsddata(key);
 		return "dcs";
 	}
 	
-	
+	/**
+	 * 得到所有自动采集的dcs数据
+	 * @return 数据列表
+	 */
 	public String showmotodcsdatas(){
 		String key = null;
 			motodcsdatalist = motodcsdataService.getalldcsddata(key);
 
 		return "motodcs";
 	}
-
+/**
+ * 得到工艺模拟所有数据
+ * @return 数据列表
+ */
 	public String showgongyidatas() {
 		String key = null;
 			dcsdatalist = dcsdataService.getallgongyidata(key);
 
 		return "gongyi";
 	}
-	
+	/**
+	 * 根据设备名得到其数据
+	 * @return 数据列表
+	 */
 	public String showdcsdata(){
 		String key = null;
 		try {
@@ -250,7 +321,10 @@ public class DcsdataAction extends ActionSupport {
 		return "dcs";
 	}
 	
-	
+	/**
+	 * 根据设备名得到其数据
+	 * @return 数据列表
+	 */
 	public String showmotodcsdata(){
 		String key = null;
 		try {
@@ -266,7 +340,10 @@ public class DcsdataAction extends ActionSupport {
 
 		return "motodcs";
 	}
-
+	/**
+	 * 根据设备名得到其数据
+	 * @return 数据列表
+	 */
 	public String showgongyidata() {
 		String key = null;
 		try {
@@ -282,7 +359,10 @@ public class DcsdataAction extends ActionSupport {
 
 		return "gongyi";
 	}
-	
+	/**
+	 * 根据设备分组得到其数据
+	 * @return 数据列表
+	 */
 	public String showdcsdatap(){
 		String key = null;
 		try {
@@ -299,7 +379,10 @@ public class DcsdataAction extends ActionSupport {
 		return "dcs";
 	}
 	
-	
+	/**
+	 * 根据设备分组得到其数据
+	 * @return 数据列表
+	 */
 	public String showmotodcsdatap(){
 		String key = null;
 		try {
@@ -315,7 +398,10 @@ public class DcsdataAction extends ActionSupport {
 
 		return "motodcs";
 	}
-
+	/**
+	 * 根据设备分组得到其数据
+	 * @return 数据列表
+	 */
 	public String showgongyidatap() {
 		String key = null;
 		try {
@@ -352,6 +438,10 @@ public class DcsdataAction extends ActionSupport {
 	 * 
 	 * }
 	 */
+	/**
+	 * 保存一个dcs数据
+	 * @return 成功页面
+	 */
 	public String save() {
 		/*
 		 * ActionContext actionContext = ActionContext.getContext(); Map
@@ -361,7 +451,10 @@ public class DcsdataAction extends ActionSupport {
 		dcsdataService.save(dcsdata);
 		return "savesuccess";
 	}
-
+	/**
+	 * 保存一组数据集，并验证数据合法行，不合法则得到解决方案
+	 * @return 成功页面
+	 */
 	public String listsave() {
 		List<Dcsdata> list = new ArrayList<Dcsdata>();
 		List<Dcshistory> list2 = new ArrayList<Dcshistory>();
