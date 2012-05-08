@@ -30,7 +30,7 @@
 				});
 			}
 			$("#saveBtn").click(function() {
-				if(confirm("确定要保存数据吗？")){
+				if(confirm("确定要保存监测点数据吗？")){
 					var str = "";
 					$(document).find("input[name='datainput']").each(function(index,domEle){
 						if (index == 0)
@@ -38,7 +38,23 @@
 						else
 							str = str + ',' + $(domEle).attr("pointid") + '|' + $(domEle).attr("paramid") + '|' + $(domEle).val();
 					});
-					$.post("savedatainfoajax.action", {deviceId:$("#deviceId").val(), selectWeek:$("#selectWeek").val(), selectYear:$("#selectYear").val(), datas:str },function(json){
+					$.post("savedatainfoajax.action", {status:0, deviceId:$("#deviceId").val(), selectWeek:$("#selectWeek").val(), selectYear:$("#selectYear").val(), datas:str },function(json){
+						if(json.result=="OK"){
+							alert("保存成功！");
+						}
+			    	});
+				};
+			});
+			$("#saveOverBtn").click(function() {
+				if(confirm("确定要录入完成监测点数据了吗？")){
+					var str = "";
+					$(document).find("input[name='datainput']").each(function(index,domEle){
+						if (index == 0)
+							str = str + $(domEle).attr("pointid") + '|' + $(domEle).attr("paramid") + '|' + $(domEle).val();
+						else
+							str = str + ',' + $(domEle).attr("pointid") + '|' + $(domEle).attr("paramid") + '|' + $(domEle).val();
+					});
+					$.post("savedatainfoajax.action", {status:1, deviceId:$("#deviceId").val(), selectWeek:$("#selectWeek").val(), selectYear:$("#selectYear").val(), datas:str },function(json){
 						if(json.result=="OK"){
 							alert("保存成功！");
 						}
@@ -84,6 +100,7 @@
 				<s:hidden name="selectYear" id="selectYear" />
 				<s:hidden name="selectWeek" id="selectWeek" />
 				<input id="saveBtn" type="button" value="保存" class="btn_2_3" />
+				<input id="saveOverBtn" type="button" value="录入完毕" class="btn_4" />
 				<input id="closeBtn" type="button" value="关闭" class="btn_2_3" />
 			</center>
 		</form>
