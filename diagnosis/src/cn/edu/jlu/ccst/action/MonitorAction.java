@@ -13,7 +13,11 @@ import cn.edu.jlu.ccst.service.DcsDscribService;
 import cn.edu.jlu.ccst.service.RuleService;
 
 import com.opensymphony.xwork2.ActionSupport;
-
+/**
+ * 实时监控DCS数据相关
+ * @author Woden
+ *
+ */
 @Component("monitorAction")
 @Scope("prototype")
 public class MonitorAction extends ActionSupport {
@@ -22,9 +26,21 @@ public class MonitorAction extends ActionSupport {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	/**
+	 * 与用户交互用的规则和结果对应表
+	 */
 	private List<BackwardandResult> backwardandResult;
+	/**
+	 * 规则描述相关服务
+	 */
 	private DcsDscribService dcsDscribService;
+	/**
+	 * 与用户交互用的规则和原因对应表
+	 */
 	private List<BackwardandReason> reasonlist;
+	/**
+	 * 规则相关服务
+	 */
 	private RuleService ruleService;
 	
 	public List<BackwardandResult> getBackwardandResult() {
@@ -61,6 +77,9 @@ public class MonitorAction extends ActionSupport {
 		this.ruleService = ruleService;
 	}
 
+	/**
+	 * 根据目前DCS数据状态得到推理结果
+	 */
 	public String execute() {
 		backwardandResult = dcsDscribService.validateinput2();
 		if (backwardandResult.size() > 0) {

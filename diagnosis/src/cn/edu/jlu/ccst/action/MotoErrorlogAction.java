@@ -13,7 +13,9 @@ import org.springframework.stereotype.Component;
 import cn.edu.jlu.ccst.model.MotoErrorlog;
 import cn.edu.jlu.ccst.service.MotoErrorlogService;
 import com.opensymphony.xwork2.ActionSupport;
-
+/**
+ * 自动采集DSC数据错误日志相关操作，业用户交互并返回相应页面
+ */
 @Component("motoerrorlogAction")
 @Scope("prototype")
 public class MotoErrorlogAction extends ActionSupport {
@@ -22,13 +24,33 @@ public class MotoErrorlogAction extends ActionSupport {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	/**
+	 * 与用户交互的错误日志列表
+	 */
 	private List<MotoErrorlog> motoerrorlist;
+	/**
+	 * 错误日志相关服务
+	 */
 	private MotoErrorlogService motoerrorlogService;
+	/**
+	 * 从用户页面得到的设备名
+	 */
    private String equip;
+   /**
+    * 从用户页面得到的设备分组
+    */
    private String unit;
+   /**
+    * 从用户页面得到的设备参数
+    */
    private String parameter;
-   
+   /**
+    * 从用户页面得到的时间起点
+    */
    private Date date1;
+   /**
+    * 从用户页面得到的时间起点
+    */
    private Date date2;
    
    
@@ -123,7 +145,9 @@ public MotoErrorlogService getMotoerrorlogService() {
 public void setMotoerrorlogService(MotoErrorlogService motoerrorlogService) {
 	this.motoerrorlogService = motoerrorlogService;
 }
-
+/**
+ * 得到所有错误日志
+ */
 public String execute() {
 	motoerrorlist = motoerrorlogService.findAll();
 	
@@ -131,7 +155,10 @@ public String execute() {
 	
 
 }
-
+/**
+ * 通过设备名得到相关错误日志
+ * @return 错误日志列表
+ */
 	public String findbyequipment(){
 		try {
 			String keyword= new String(equip.getBytes("ISO-8859-1"),"UTF-8");
@@ -143,7 +170,10 @@ public String execute() {
 		return "OK";
 	}
 	
-	
+	/**
+	 * 通过设备分组名得到相关错误日志
+	 * @return 错误日志列表
+	 */
 	public String findbyunit(){
 		try {
 			String keyword= new String(unit.getBytes("ISO-8859-1"),"UTF-8");
@@ -156,7 +186,10 @@ public String execute() {
 	}
 	
 	
-	
+	/**
+	 * 通过时间段得到相关错误日志
+	 * @return 错误日志列表
+	 */
      public String findbyorder(){
     	 motoerrorlist=motoerrorlogService.findbyorder(parameter,date1, date2);
 	 return "OK";

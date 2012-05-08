@@ -25,7 +25,11 @@ import cn.edu.jlu.ccst.service.Pre_dssService;
 import cn.edu.jlu.ccst.service.RuleService;
 
 import com.opensymphony.xwork2.ActionSupport;
-
+/**
+ * 工艺对接相关操作
+ * @author Woden
+ *
+ */
 //@Service 
 @Component("interfaceAction")
 @Scope("prototype")
@@ -35,17 +39,49 @@ public class InterfaceAction extends ActionSupport {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
+	/**
+	 * 与用户交互用的规则和结果对应表
+	 */
 	private List<BackwardandResult> backwardandResult;
-
+/**
+ * 规则描述相关服务
+ */
 	private DcsDscribService dcsDscribService;
+	/**
+	 * 与用户交互用的规则和原因对应表
+	 */
 	private List<BackwardandReason> reasonlist;
+	/**
+	 * 规则相关服务
+	 */
 	private RuleService ruleService;
+	/**
+	 * 工艺数据预处理相关服务
+	 */
 	private Pre_dssService pre_dssService;
+	/**
+	 * 规则建议相关服务
+	 */
 	private Dss_adviceService dss_adviceService;
+	/**
+	 * 与用户交互用的规则建议表
+	 */
 	private List<Dss_advice> dss_advice;
+	/**
+	 * 与用户交互用的错误日志表
+	 */
 	private List<Dss_history> dss_history;
+	/**
+	 * 与用户交互用的规则和原因对应表
+	 */
 	private List<BackwardandReason> reasonlist1;
+	/**
+	 * 错误日志相关服务
+	 */
 	private Dss_historyService dss_historyService;
+	/**
+	 * 自动执行任务
+	 */
     private AutoJob autoJob;
 
 	
@@ -143,6 +179,10 @@ public class InterfaceAction extends ActionSupport {
 		this.ruleService = ruleService;
 	}
 
+	
+	/**
+	 * 验证工艺数据, 有问题则返回意见
+	 */
 	public String execute() {
 		List<Pre_dss> alldata = pre_dssService.findBysimu_time();
 		List<BackwardandResult> backwardandResult1 = new ArrayList();
@@ -227,6 +267,10 @@ public class InterfaceAction extends ActionSupport {
 		}
 	}
 
+	/**
+	 * 等待工艺请求, 之后验证数据并返回相关建议
+	 * @return
+	 */
 	// @Scheduled(fixedDelay = 1000)
 	public String waitingforU(){
 		autoJob.porcessdss();
