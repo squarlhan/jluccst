@@ -35,7 +35,8 @@
     	</action>
     	<action name="deleteRuleInfoAction" class="ruleInfoAction" method="deleteRuleInfo">
     	</action>
-    	
+    	<!-- 删除现象 -->
+    	<action name="toDeleteResultAction" class="ruleInfoAction" method="toDeleteResult"/>
       </package>	    
       
 	

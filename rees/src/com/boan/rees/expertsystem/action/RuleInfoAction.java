@@ -4,8 +4,10 @@
 
 package com.boan.rees.expertsystem.action;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -71,6 +73,8 @@ public class RuleInfoAction extends BaseActionSupport{
 	private List<RuleReasonInfo> reasonList;
 	private List<RuleResultInfo> resultList;
 	
+	private Map<String,Integer> resultMap;
+	
 	/**
 	 * 下拉设备列表事件传递过来的设备类型Id
 	 */
@@ -85,6 +89,11 @@ public class RuleInfoAction extends BaseActionSupport{
 	 * 操作提示
 	 */
 	private String message;
+	
+	/**
+	 * ajax传过来要删除的故障Id
+	 */
+	private String resultId;
 	
 	
 	public List<RuleAdviceInfo> getAdviceList() {
@@ -160,6 +169,22 @@ public class RuleInfoAction extends BaseActionSupport{
 		this.message = message;
 	}
 
+	public String getResultId() {
+		return resultId;
+	}
+
+	public void setResultId(String resultId) {
+		this.resultId = resultId;
+	}
+
+	public Map<String, Integer> getResultMap() {
+		return resultMap;
+	}
+
+	public void setResultMap(Map<String, Integer> resultMap) {
+		this.resultMap = resultMap;
+	}
+
 	/**
 	 * 分页显示建议列表
 	 * @return
@@ -181,7 +206,10 @@ public class RuleInfoAction extends BaseActionSupport{
 		adviceList=ruleAdviceInfoService.findAllRuleAdviceInfo();
 		reasonList=ruleReasonInfoService.findAllRuleReasonInfo();
 		resultList=ruleResultInfoService.findAllRuleResultInfo();
-		ruleInfo = new RuleInfo();
+//		resultList=new ArrayList<RuleResultInfo>();
+//		resultList.add(new RuleResultInfo());
+//		ruleInfo = new RuleInfo();
+		ruleInfo = service.get(11);
 		return SUCCESS;
 	}
 	/**
@@ -222,6 +250,15 @@ public class RuleInfoAction extends BaseActionSupport{
 		adviceList=ruleAdviceInfoService.findAllRuleAdviceInfo();
 		reasonList=ruleReasonInfoService.findAllRuleReasonInfo();
 		resultList=ruleResultInfoService.findAllRuleResultInfo();
+		
+		ruleInfo = service.get(11);
+		resultMap = new HashMap<String,Integer>();
+		String resultStr = ruleInfo.getResultId();
+		String[] temp = resultStr.split("_");
+		for(String str : temp){
+			resultMap.put(str, Integer.parseInt(str.substring(1)));
+		}
+		
 		int id = ruleInfo.getId();
 		ruleInfo = service.get(id);
 		return SUCCESS;
@@ -246,7 +283,33 @@ public class RuleInfoAction extends BaseActionSupport{
 		return SUCCESS;
 	}
 	
-	
+	/**
+	 * 删除规则现象
+	 * @return
+	 */
+	public String toDeleteResult(){
+		ruleInfo = service.get(ruleInfo.getId());
+		String resultStr = ruleInfo.getResultId();
+		String[] temp = resultStr.split("_");
+		//去掉要删除现象
+		List<String> results =null ;
+		if(temp.length>0){
+			results = new ArrayList<String>();
+		}
+		for(String str : temp){
+			if(!str.equals("b"+resultId)){
+				results.add(str);
+			}
+		}
+		StringBuffer sbr =new StringBuffer();
+		for(String res : results){
+			sbr.append(res).append("_");
+		}
+		String newStr = sbr.substring(0, sbr.lastIndexOf("_"));
+		ruleInfo.setResultId(newStr);
+		service.update(ruleInfo);
+		return NONE;
+	}
 	
 }
 
