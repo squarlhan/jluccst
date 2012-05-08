@@ -25,18 +25,46 @@ import com.opensymphony.xwork2.ActionSupport;
 import java.util.Map;
 
 
-
+/**
+ * 后向规则原因相关操作，从jsp页面得到请求，调用相应的服务完成请求并返回页面
+ * @author Woden
+ *
+ */
 
 @Component("backwardResonAction")
 @Scope("prototype")
 public class BackwardReasonAction extends ActionSupport {
+	/**
+	 * 调用的后向规则原则相关服务
+	 */
  private  BackwardandReasonService backwardandReasonService;
+ /**
+  * 规则通用服务
+  */
  private RuleService ruleService;
+/**
+ * 后向规则实例
+ */
  private  BackwardandReason backwardandReason;
+ /**
+  * 与jsp交互用的原因名词列表
+  */
  private List<String> reason_noun;
+ /**
+  * 与jsp交互用的原因动词列表
+  */
  private List<String> reason_verb;
+ /**
+  * 与jsp交互用的建议列表
+  */
  private List<String> sugg;
+ /**
+  * 与jsp交互用的原因等级列表
+  */
  private List<Double> cf_reason;
+ /**
+  * 与jsp交互用的后向规则
+  */
  private Backward rule;
  
  
@@ -92,7 +120,10 @@ public void setBackwardandReasonService(
 		BackwardandReasonService backwardandReasonService) {
 	this.backwardandReasonService = backwardandReasonService;
 }
-
+	/**
+	 * 更改一个规则与原因对应关系
+	 * @return 返回到保存成功页面
+	 */
  public String update(){
 	 
 	 BackwardandReason temp = backwardandReasonService.findbyid(backwardandReason.getId());
@@ -119,6 +150,10 @@ public void setBackwardandReasonService(
 	 return "error";
 	 
  }
+ /**
+  * 删除一个规则与原因对应关系
+  * @return 返回删除成功页面
+  */
  public String delete() {
 	 
 	 backwardandReason = backwardandReasonService.findbyid(backwardandReason.getId());
@@ -128,7 +163,10 @@ public void setBackwardandReasonService(
 		return "success";
 
 	}
-	
+	/**
+	 * 持久化一个规则与原因对应关系
+	 * @return 返回到保存成功页面
+	 */
  public String save(){
 	 ActionContext actionContext = ActionContext.getContext();
      Map session = actionContext.getSession();

@@ -20,16 +20,35 @@ import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import java.util.Map;
 
-
+/**
+ * 规则和结果对应关系相关操作, 从jsp得到用户请求,本类调用相应服务实现该请求,并返回成功页面
+ * @author Woden
+ *
+ */
 
 
 @Component("backwardResultAction")
 @Scope("prototype")
 public class BackwardResultAction extends ActionSupport {
+	/**
+	 * 用户相关服务
+	 */
 	private UserService userService; 
+	/**
+	 * 得到的用户实例
+	 */
 	private User user;
+	/**
+	 * 实现联动下拉框需要的映射对象
+	 */
 	private Map nvs;
+	/**
+	 * 与jsp交互用的规则和结果对应关系表
+	 */
 	private List<BackwardandResult> backwardandResultlist;
+	/**
+	 * 规则和结果对应关系相关服务类
+	 */
 	private BackwardandResultService backwardandResultService;
 	
 	
@@ -86,7 +105,10 @@ public class BackwardResultAction extends ActionSupport {
 		this.backwardandResultService = backwardandResultService;
 	}
 
-
+	/**
+	 * 该action默认方法, 返回所有规则和结果对应关系
+	 * @return 关系列表
+	 */
 	public String execute() {
 		if(checkuser()){
 			backwardandResultlist =backwardandResultService.findall();
@@ -94,7 +116,10 @@ public class BackwardResultAction extends ActionSupport {
 			else return "unuserlogin";
 	}
 	
-	
+	/**
+	 * 检查请求该页面的用户是否合法
+	 * @return 合法返回正常页面, 否则返回错误页面
+	 */
 	public boolean checkuser(){
 		ActionContext actionContext = ActionContext.getContext();
         Map user = actionContext.getSession();
