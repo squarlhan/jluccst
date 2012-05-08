@@ -19,4 +19,5 @@ import com.boan.rees.utils.dao.IBaseDao;
 public interface IPointInfoDao extends IBaseDao<PointInfo, String> {
 	public List<PointInfo> findPointInfosByDeviceId(String deviceId);
 	public List<PointInfo> findPointInfosByDeviceId(String deviceId, int status);
+	public void changeStatus(String deviceId, int status);
 }

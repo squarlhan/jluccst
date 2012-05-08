@@ -57,4 +57,11 @@ public interface IPointInfoService {
 	 * @return
 	 */
 	public List<PointInfo> findPointInfosByDeviceId(String deviceId, int status);
+	
+	/**
+	 * 设置监测点状态
+	 * @param deviceId
+	 * @param status
+	 */
+	public void changeStatus(String deviceId, int status);
 }

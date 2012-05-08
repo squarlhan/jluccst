@@ -94,4 +94,9 @@ public class PointInfoServiceImpl implements IPointInfoService {
 	public List<PointInfo> findPointInfosByDeviceId(String deviceId, int status) {
 		return pointInfoDao.findPointInfosByDeviceId(deviceId, status);
 	}
+
+	@Override
+	public void changeStatus(String deviceId, int status) {
+		pointInfoDao.changeStatus(deviceId, status);
+	}
 }
