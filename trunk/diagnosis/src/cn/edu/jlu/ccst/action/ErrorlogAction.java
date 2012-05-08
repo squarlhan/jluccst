@@ -19,16 +19,36 @@ import com.opensymphony.xwork2.ActionSupport;
 public class ErrorlogAction extends ActionSupport {
 
 	/**
-	 * 
+	 * 错误日志相关操作，业用户交互并返回相应页面
 	 */
 	private static final long serialVersionUID = 1L;
+	/**
+	 * 与用户交互的错误日志列表
+	 */
 	private List<Errorlog> errorlist;
+	/**
+	 * 错误日志相关服务
+	 */
 	private ErrorlogService errorlogService;
+	/**
+	 * 从用户页面得到的设备名
+	 */
    private String equip;
+   /**
+    * 从用户页面得到的设备分组
+    */
    private String unit;
+   /**
+    * 从用户页面得到的设备参数
+    */
    private String parameter;
-   
+   /**
+    * 从用户页面得到的时间起点
+    */
    private Date date1;
+   /**
+    * 从用户页面得到的时间起点
+    */
    private Date date2;
    
    
@@ -127,7 +147,9 @@ public void setEquip(String equip) {
 
 	
 	
-
+	/**
+	 * 得到所有错误日志
+	 */
 	public String execute() {
 		errorlist = errorlogService.findAll();
 		
@@ -135,7 +157,10 @@ public void setEquip(String equip) {
 		
 
 	}
-	
+	/**
+	 * 通过设备名得到相关错误日志
+	 * @return 错误日志列表
+	 */
 	public String findbyequipment(){
 		try {
 			String keyword= new String(equip.getBytes("ISO-8859-1"),"UTF-8");
@@ -147,7 +172,10 @@ public void setEquip(String equip) {
 		return "OK";
 	}
 	
-	
+	/**
+	 * 通过设备分组名得到相关错误日志
+	 * @return 错误日志列表
+	 */
 	public String findbyunit(){
 		try {
 			String keyword= new String(unit.getBytes("ISO-8859-1"),"UTF-8");
@@ -171,7 +199,10 @@ public void setEquip(String equip) {
 		//errorlist = errorlogService.findbypara(parameter);
 	//  return "OK";
 //}
-	
+	/**
+	 * 通过时间段得到相关错误日志
+	 * @return 错误日志列表
+	 */
      public String findbyorder(){
 	  errorlist=errorlogService.findbyorder(parameter,date1, date2);
 	 return "OK";
