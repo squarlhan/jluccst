@@ -58,6 +58,23 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		$.fn.save();
   		$.fn.close();
 
+  		/**
+  		 * 动态添加检测点
+  		 */
+  		$("#addOtherBtn").click(function(){
+  			$(".resultTr").eq(0).find("strong").replaceWith("<strong>现象1：</strong>");
+  			var row = $(".resultTr").eq(0).clone();
+  			var i = $(".resultTr").length;
+  			row.find("strong").replaceWith("<strong>现象"+(i+1)+"：</strong>");
+  			
+  			var newBtn ='<img id="delOtherBtn" name="delOtherBtn" onclick="$.fn.dynamicRemove($(this))" src="<%=basePath%>/images/symbol-remove.png" style="height:18px;width:20px;cursor:pointer" title="删除"></img>';
+  			row.find("img[id='firstDelBtn']").remove();
+  			row.find("img").replaceWith(newBtn); 
+  			row.find("input[type='hidden']").val("");
+  			
+  			$(".resultTr").eq(i-1).after(row);
+  		});
+  		
   	});
 	
 	/**
@@ -109,6 +126,54 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 			alert(message);
 			parent.$("#windown-close").click();
 		}
+	};
+	
+	
+	
+
+	/**
+	 * 删除原有非第一个检测点并移除页面元素
+	 */
+	$.fn.dynamicRemoveOther = function(id,obj){
+		if(window.confirm("您确定要删除此参数吗？")){
+			var ruleId = $("#hid_ruleId").val();
+			$.post("toDeleteResultAction.action", {"resultId":id,"ruleInfo.id":ruleId}, function(data){});
+			obj.parent().parent().remove();
+			$.fn.columnRename();
+		}
+	};
+	
+	/**
+	 * 删除原有的第一个检测点并移除页面元素
+	 */
+	$.fn.dynamicRemoveFirst = function(obj){
+		if(window.confirm("您确定要删除此参数吗？")){
+			var hiddenIdObj=$("#addOtherBtn").parent().children("input:first-child");
+			var id=hiddenIdObj.val();
+			$("#addOtherBtn").parent().children("input[type='hidden']").val("");
+			$("#sel_resultType").val("");
+			$.post("toDeleteResultAction.action", {"resultId":id,"ruleInfo.id":ruleId}, function(data){});
+			obj.remove();
+			$.fn.columnRename();
+		}
+	};
+	
+	/**
+	 * 动态添加的元素动态移除
+	 */
+	$.fn.dynamicRemove = function(obj){
+		if(window.confirm("您确定要删除此参数吗？")){
+			obj.parent().parent().remove();
+			$.fn.columnRename();
+		}
+	}
+	/**
+	 * form列头重命名
+	 */
+	$.fn.columnRename = function(){
+		$(".resultTr").each(function(i){
+			$(this).find("strong").replaceWith("<strong>现象"+(i+1)+":</strong>");
+		});
 	}
 </script>
 
@@ -127,23 +192,53 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     		</tr>
     		<tr>
     			<td>
-    			请选择设备类型
+    			设备类型
     			</td>
     			<td height="26" align="left" bgcolor="#FFFFFF">
 				<s:select id="sel_deviceType" list="deviceTypeList" listKey="id" listValue="typeName" headerKey="nothing" headerValue="---请选择---" name="ruleInfo.deviceTypeId" cssStyle="width: 250px;"></s:select>
 				</td>
     		</tr>
+    		
+    		<s:if test='ruleInfo.resultId==null || ruleInfo.resultId.equals("")'>
+    			<tr class="resultTr">
+	    			<td>
+	    			<strong>现象<s:property value="#result.index+1"/>：</strong>
+	    			</td>
+	    			<td height="26" align="left" bgcolor="#FFFFFF">
+						<s:select id="sel_resultType" list="resultList" listKey="id" listValue="result" headerKey="" headerValue="---请选择---" name="ruleInfo.resultId" cssStyle="width: 250px;"></s:select>
+						<s:hidden name="id"></s:hidden>
+						<font color="red">*</font>
+						<img id="addOtherBtn"  name="addOtherBtn" src="<%=basePath%>/images/symbol-add.png" style="height:18px;width:20px;cursor:pointer" title="添加"></img>
+					</td>
+	    		</tr>
+    		</s:if>
+    		<s:else>
+	    		<s:iterator value="resultMap" status="result" step="1">
+	    		<tr class="resultTr">
+	    			<td>
+	    			<strong>现象<s:property value="#result.index+1"/>：</strong>
+	    			</td>
+	    			<td height="26" align="left" bgcolor="#FFFFFF">
+	    			
+					<s:select id="sel_resultType" list="resultList" listKey="id" listValue="result" headerKey="" headerValue="---请选择---" name="ruleInfo.resultId" cssStyle="width: 250px;"></s:select>
+					<font color="red">*</font>
+					<s:hidden name="id"></s:hidden>
+					<s:if test="#result.index+1==1">
+						<img id="addOtherBtn"  name="addOtherBtn" src="<%=basePath%>/images/symbol-add.png" style="height:18px;width:20px;cursor:pointer" title="添加"></img>
+						<s:if test='id!=null'>
+							<img id="firstDelBtn" name="firstDelBtn" onclick="$.fn.dynamicRemoveFirst($(this))" src="<%=basePath%>/images/symbol-remove.png" style="height:18px;width:20px;cursor:pointer" title="删除"></img>
+						</s:if>
+					</s:if>
+					<s:else>
+						<img name="delOtherBtn" onclick="$.fn.dynamicRemoveOther('${id}',$(this));" src="<%=basePath%>/images/symbol-remove.png" style="height:18px;width:20px;cursor:pointer" title="删除"></img>
+					</s:else>
+					</td>
+	    		</tr>
+	    		</s:iterator>
+			</s:else>
     		<tr>
     			<td>
-    			请选择现象
-    			</td>
-    			<td height="26" align="left" bgcolor="#FFFFFF">
-				<s:select id="sel_resultType" list="resultList" listKey="id" listValue="result" headerKey="nothing" headerValue="---请选择---" name="ruleInfo.resultId" cssStyle="width: 250px;"></s:select>
-				</td>
-    		</tr>
-    		<tr>
-    			<td>
-    			请选择原因
+    			原因
     			</td>
     			<td height="26" align="left" bgcolor="#FFFFFF">
 				<s:select id="sel_reasonType" list="reasonList" listKey="id" listValue="reason" headerKey="nothing" headerValue="---请选择---" name="ruleInfo.reasonId" cssStyle="width: 250px;"></s:select>
@@ -151,7 +246,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     		</tr>
     		<tr>
     			<td>
-    			请选择建议
+    			建议
     			</td>
     			<td height="26" align="left" bgcolor="#FFFFFF">
 				<s:select id="sel_adviceType" list="adviceList" listKey="id" listValue="advice" headerKey="nothing" headerValue="---请选择---" name="ruleInfo.adviceId" cssStyle="width: 250px;"></s:select>
