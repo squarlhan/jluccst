@@ -9,7 +9,7 @@ import com.boan.rees.utils.page.Pagination;
 /**
  * 监控点服务类接口
  * 
- * @author ZhuYF
+ * @author ZhuYF,leon
  * @version 1.0.0
  */
 public interface IPointInfoService {
