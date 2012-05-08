@@ -41,37 +41,19 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <h2>超标信息页面</h2>
   <table bordercolor="#4A708B" rules="all"  id="mytable" class="list_table" align="center" width="100%">
 		<tr bgcolor="#4A708B">
-		    <th style="width:50%">报警节点</th>
-			<th style="width:50%">报警现象</th>
-			
-	  </tr>
-    <s:iterator id="bandr" value="backwardandResult" status="index1">
-       
-     <tr  align="left"  bordercolor="#000000" bgcolor="<s:if test="#index1.odd == true">#ffffff</s:if><s:else>#EDEDED</s:else>">
-       <td><s:property value="memo"/></td><td><s:property value="nouns"/><s:property value="verb"/></td>
-      
-      
-     
-     </tr>
-     </s:iterator>
-  </table>
-      
-  <table bordercolor="#4A708B" rules="all"  id="mytable" class="list_table" align="center" width="100%">
-		<tr bgcolor="#4A708B">
-		    <th width="5%">等级</th>
+		   
+			 <th width="35%">报警现象</th>		
 		    <th width="35%">报警原因</th>
 			<th style="width:60%">相关建议</th>
 			
-	  </tr>
-    <s:iterator id="reasons" value="reasonlist" status="index1">
-       
-     <tr  align="left"  bordercolor="#000000" bgcolor="<s:if test="#index1.odd == true">#ffffff</s:if><s:else>#EDEDED</s:else>">
-       <td  align="left">第<s:property value="#index1.index+1"/>&nbsp;</td>
-       <td><s:property value="nouns"/><s:property value="verb"/>&nbsp;</td>
-       <td><s:property value="sugg"/>&nbsp;</td>
+	  </tr><!--怎么写一个for循环 让每一个resonlist元素内部迭代？  -->
+    <s:iterator id="reasons" value="rule" status="index1">
       
-     
-     </tr>
+         <tr  align="left"  bordercolor="#000000" bgcolor="<s:if test="#index1.odd == true">#ffffff</s:if><s:else>#EDEDED</s:else>">
+       <td><s:property value="results.nouns"/><s:property value="results.verb"/>&nbsp;</td>
+       <td><s:property value="reasons.nouns"/><s:property value="reasons.verb"/>&nbsp;</td>
+       <td><s:property value="reasons.sugg"/>&nbsp;</td>
+      </tr> 
      </s:iterator>
   </table>
    </div>

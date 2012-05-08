@@ -10,7 +10,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
   <head>
     <base href="<%=basePath%>">
     
-    <title>吉化污水处理过程模拟与优化系统</title>
+    <title>污水处理工艺专家决策系统</title>
     <meta http-equiv="refresh" content="10" />
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
