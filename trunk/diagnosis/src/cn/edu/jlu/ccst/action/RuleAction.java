@@ -19,29 +19,85 @@ import cn.edu.jlu.ccst.model.*;
 import cn.edu.jlu.ccst.service.DcsDscribService;
 import cn.edu.jlu.ccst.service.RuleService;
 import cn.edu.jlu.ccst.service.UserService;
-
+/**
+ * 规则相关操作, 与用户交互并返回相应页面
+ * @author Woden
+ *
+ */
 @Component("ruleAction")
 @Scope("prototype")
 public class RuleAction extends ActionSupport {
-
+	/**
+	 * 规则描述相关服务
+	 */
 	private DcsDscribService dcsDscribService;
+	/**
+	 * 规则相关服务
+	 */
 	private RuleService ruleService;
+	/**
+	 * 与用户交互用的规则和结果对应实例
+	 */
 	private BackwardandResult result;
+	/**
+	 * 与用户交互用的规则和原因对应表
+	 */
 	private List<BackwardandReason> reasonlist;
-	
+	/**
+	 * 与用户交互用的规则表
+	 */
 	private List<Backward> backlist;
+	/**
+	 * 与用户交互用的规则实例
+	 */
 	private Backward rule;
+	/**
+	 * 从用页面得到的原因名词列表
+	 */
 	private List<String> reason_noun;
+	/**
+	 * 从用页面得到的结果名词列表
+	 */
 	private List<String> result_noun;
+	/**
+	 * 从用页面得到的原因动词列表
+	 */
 	private List<String> reason_verb;
+	/**
+	 * 从用页面得到的结果动词列表
+	 */
 	private List<String> result_verb;
+	/**
+	 * 从用页面得到的建议列表
+	 */
 	private List<String> sugg;
+	/**
+	 * 从用页面得到的等级列表
+	 */
 	private List<Double> cf_reason;
+	/**
+	 * 从用页面得到的结果名词
+	 */
 	private String resultn1;
+	/**
+	 * 从用页面得到的结果名词
+	 */
 	private String resultn2;
+	/**
+	 * 从用页面得到的结果动词数值
+	 */
 	private int resultv_value;
+	/**
+	 * 从用页面得到的设备名
+	 */
 	private String name;
+	/**
+	 * 从用页面得到的规则名列表
+	 */
 	private List<String> namelist;
+	/**
+	 * 从用页面得到的设备分组列表
+	 */
     private String unit; 
    
 	
@@ -190,14 +246,19 @@ public class RuleAction extends ActionSupport {
 	public void setSugg(List<String> sugg) {
 		this.sugg = sugg;
 	}
-
+/**
+ * 通过现象得到所有原因并显示
+ */
 	public String execute() {
 		List<BackwardandResult> temp = new ArrayList();
 		temp.add(result);
 		reasonlist = ruleService.findreasons(temp);
 		return "go";
 	}
-
+/**
+ * 得到所有规则
+ * @return
+ */
 	public String getall() {
 		if (checkprof()) {
 			backlist = ruleService.findAll();
@@ -206,7 +267,10 @@ public class RuleAction extends ActionSupport {
 			return "unproflogin";
 		}
 	}
-	
+	/**
+	 * 通过设备分组名得到相关规则
+	 * @return 规则列表
+	 */
 	public String findbynamep(){
 		try {
 			String keyword= new String(unit.getBytes("ISO-8859-1"),"UTF-8");
@@ -217,7 +281,10 @@ public class RuleAction extends ActionSupport {
 		} 
 		return "list";
 	}
-	
+	/**
+	 * 通过设备名得到相关规则
+	 * @return 规则列表
+	 */
 	public String findbyname(){
 		try {
 			String keyword= new String(name.getBytes("ISO-8859-1"),"UTF-8");
@@ -228,18 +295,27 @@ public class RuleAction extends ActionSupport {
 		} 
 		return "list";
 	}
-
+/**
+ * 删除规则操作
+ * @return 规则列表
+ */
 	public String delRule() {
 		ruleService.delete(rule);
 		backlist = ruleService.findAll();
 		return "list";
 	}
 
-
+/**
+ * 跳转到添加页面
+ * @return
+ */
 	public String justgo() {
 		return "gogogo";
 	}
-	
+	/**
+	 * 跳转到查看规则详细信息页面
+	 * @return
+	 */
 	public String godetail() {
 		rule = ruleService.find(rule);
 		if(rule.getResults()!=null&&rule.getResults().size()>0){
@@ -254,7 +330,10 @@ public class RuleAction extends ActionSupport {
         session.put("rule", rule);
 		return "show";
 	}
-
+/**
+ * 检查用户是否合法
+ * @return 是返回true,否则返回false
+ */
 	public boolean checkprof() {
 		ActionContext actionContext = ActionContext.getContext();
 		Map user = actionContext.getSession();
@@ -264,7 +343,10 @@ public class RuleAction extends ActionSupport {
 		} else
 			return false;
 	}
-
+/**
+ * 添加规则操作
+ * @return 规则列表
+ */
 	public String addRule() {
 		List<BackwardandReason> breason = new ArrayList();
 		List<BackwardandResult> bresult = new ArrayList();
@@ -298,7 +380,10 @@ public class RuleAction extends ActionSupport {
 		backlist = ruleService.findAll();
 		return SUCCESS;
 	}
-
+	/**
+	 * 添加规则操作, 根据下拉框
+	 * @return 规则列表
+	 */
 	public String newAdd() {
 		rule = new Backward();
 		String resultv = resultv_value == 0 ? "过高" : "过低";

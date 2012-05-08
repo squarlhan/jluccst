@@ -28,33 +28,78 @@ import cn.edu.jlu.ccst.service.RuleBRService;
 import java.util.Map;
 
 
-
+/**
+ * 用户相关操作, 与用户交互并返回相应页面
+ * @author Woden
+ *
+ */
 @Component("userAction")
 @Scope("prototype")
 public class UserAction extends ActionSupport {
-
+	/**
+	 * 用户相关服务
+	 */
 	private UserService userService; 
+	/**
+	 * 与用户交互用的用户实例
+	 */
 	private User user;
+	/**
+	 * 与用户交互用的用户列表
+	 */
 	private List<User> userlist;
+	/**
+	 * 与用户交互用的用户集合
+	 */
 	private Set set1;
+	/**
+	 * 规则描述相关服务
+	 */
 	private DcsDscribService dcsDscribService;
 	
-	
+	/**
+	 * 规则与结果相关服务
+	 */
 	private RuleBRService rulebrService; 
-	
+	/**
+	 * 与用户交互用的规则和结果对应列表
+	 */
 	private List<BackwardandResult> backwardandResultlist;
-	
+	/**
+	 * 与用户交互用的规则结果名词列表
+	 */
 	private List<String> backwardandResultlist1;
+	/**
+	 * 与用户交互用的规则结果动词列表
+	 */
 	private List<String> backwardandResultlist2;
-	
+	/**
+	 * 规则相关服务
+	 */
 	private RuleService ruleService; 
+	/**
+	 *  从用页面得到的规则名列表
+	 */
 	private List<String> namelist;
+	/**
+	 * 与用户交互用的规则列表
+	 */
 	private List<Backward> backlist;
-	
+	/**
+	 *  从用页面得到新密码
+	 */
 	private String newpassword;
+	/**
+	 *  从用页面得到新密码
+	 */
     private String renewpassword;
+    /**
+	 *  从用页面得到老密码
+	 */
 	private String currentpassword;
-	
+	/**
+	 * 用户页面需要的联动下拉框数据
+	 */
 	private Map nvs;
 	
 	
@@ -168,7 +213,9 @@ public class UserAction extends ActionSupport {
 			List<BackwardandResult> backwardandResultlist) {
 		this.backwardandResultlist = backwardandResultlist;
 	}
-	
+	/**
+	 * 普通用户登录操作
+	 */
 	public String execute() {
 		User flag1;
 //		namelist=dcsDscribService.findallname();
@@ -195,7 +242,10 @@ public class UserAction extends ActionSupport {
 		
 		}
 	
-	
+	/**
+	 * 检查用户是否是普通用户
+	 * @return 是返回true,否则返回false
+	 */
 	public boolean checkuser(){
 		ActionContext actionContext = ActionContext.getContext();
         Map user = actionContext.getSession();
@@ -205,6 +255,10 @@ public class UserAction extends ActionSupport {
 		}
 		else return false;
 	}
+	/**
+	 * 检查用户是否是管理员用户
+	 * @return 是返回true,否则返回false
+	 */
 	public boolean checkadmin(){
 		ActionContext actionContext = ActionContext.getContext();
         Map user = actionContext.getSession();
@@ -214,7 +268,10 @@ public class UserAction extends ActionSupport {
 		}
 		else return false;
 	}
-	
+	/**
+	 * 检查用户是否是专家用户
+	 * @return 是返回true,否则返回false
+	 */
 	public boolean checkprof(){
 		ActionContext actionContext = ActionContext.getContext();
         Map user = actionContext.getSession();
@@ -224,7 +281,10 @@ public class UserAction extends ActionSupport {
 		}
 		else return false;
 	}
-
+/**
+ * 删除一个用户
+ * @return 用户列表
+ */
 	public String deleteUser() {
 		    
 		   user =this.userService.findbyid(user.getId());
@@ -233,6 +293,10 @@ public class UserAction extends ActionSupport {
 			return "deletesuccess";
 
 		}
+	/**
+	 * 管理员更新一个用户
+	 * @return 用户列表
+	 */
 	public String update()	{
 		User temp =this.userService.findbyid(user.getId());
 		user.setDept(temp.getDept());
@@ -247,7 +311,10 @@ public class UserAction extends ActionSupport {
 		return "success";
 		
 	}
-
+	/**
+	 * 用户密码重置
+	 * @return 用户列表
+	 */
 	public String chUser() {                   //密码重置
 			user = this.userService.findbyid(user.getId());
 			user.setPassword((user.getJid()));
@@ -257,6 +324,10 @@ public class UserAction extends ActionSupport {
 			return "resetsuccess";
 
 		}
+	/**
+	 * 查找用户
+	 * @return 用户列表
+	 */
 	public String searchUser() {
 			userlist = userService.findall();
 			userlist = this.userService.search(user);
@@ -268,7 +339,10 @@ public class UserAction extends ActionSupport {
 			}
 		}
 
-
+	/**
+	 * 新建一个用户
+	 * @return 用户列表
+	 */
 	public String  addUser() {
 			
 		
@@ -289,14 +363,20 @@ public class UserAction extends ActionSupport {
 			 
 			
 		
-		
+	/**
+	 * 得到所有用户
+	 * @return 用户列表
+	 */
 		public String  userList() {
 			if(checkadmin()){
 			userlist = userService.findall();
 			return SUCCESS;}
 			else return "unadminlogin";
 		}
-		
+		/**
+		 * 普通用户更改自己信息
+		 * @return 用户列表
+		 */
 		public String alterUser () {
 			User olduser = (User) ActionContext.getContext().getSession()
 					.get("us");
@@ -326,7 +406,10 @@ public class UserAction extends ActionSupport {
 			
 			}
 		
-		
+		/**
+		 * 普通用户注销
+		 * @return 登录页面
+		 */
 		public String logoff() {
 			
 			if(checkuser()){
@@ -342,7 +425,10 @@ public class UserAction extends ActionSupport {
 		
 		
 		
-		
+		/**
+		 * 管理员用户登陆操作
+		 * @return 用户管理页面
+		 */
 		public String exitsadmin() {
 			User flag1;
 			userlist = userService.findall();
@@ -358,6 +444,10 @@ public class UserAction extends ActionSupport {
 		        return "adminsuccess";}
 			
 			}
+		/**
+		 *管理员用户更改自己信息
+		 * @return 用户列表
+		 */
 	public String alterAdmin () {
 				User olduser = (User) ActionContext.getContext().getSession()
 						.get("ad");
@@ -386,6 +476,10 @@ public class UserAction extends ActionSupport {
 				}
 				
 				}
+	/**
+	 * 管理员用户注销
+	 * @return 登录页面
+	 */
 	 public String adminlogoff() {
 				
 				if(checkadmin()){
@@ -400,7 +494,10 @@ public class UserAction extends ActionSupport {
 		
 		
 		
-		
+		/**
+		 * 专家用户登陆操作
+		 * @return 规则管理页面
+		 */
 	 public String exitsprof() {
 			User flag1;
 			userlist = userService.findall();
@@ -416,7 +513,10 @@ public class UserAction extends ActionSupport {
 		        return "profsuccess";}
 			
 			}
-		
+	 /**
+		 * 专家用户更改自己信息
+		 * @return 用户列表
+		 */
 	public String alterProf () {
 				User olduser = (User) ActionContext.getContext().getSession()
 						.get("pr");
@@ -445,6 +545,10 @@ public class UserAction extends ActionSupport {
 				}
 				
 				}
+	/**
+	 * 专家用户注销
+	 * @return 登录页面
+	 */
 	 public String proflogoff() {
 				
 				if(checkprof()){

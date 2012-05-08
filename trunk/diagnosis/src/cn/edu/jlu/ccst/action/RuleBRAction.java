@@ -21,19 +21,41 @@ import cn.edu.jlu.ccst.service.UserService;
 import cn.edu.jlu.ccst.model.BackwardandResult;
 import cn.edu.jlu.ccst.service.RuleBRService;
 import java.util.Map;
-
+/**
+ * 专家使用的规则和结果对应表相关操作
+ * @author Woden
+ *
+ */
 @Component("rulebrAction")
 @Scope("prototype")
 public class RuleBRAction extends ActionSupport {
-
+	/**
+	 * 规则与结果相关服务
+	 */
 	private RuleBRService rulebrService;
-
+	/**
+	 * 与用户交互用的规则和结果对应列表
+	 */
 	private List<BackwardandResult> backwardandResultlist;
-
+	/**
+	 * 与用户交互用的规则结果名词列表
+	 */
 	private List<String> backwardandResultlist1;
+	/**
+	 * 与用户交互用的规则结果动词列表
+	 */
 	private List<String> backwardandResultlist2;
+	/**
+	 * 用户页面需要的联动下拉框数据
+	 */
 	private Map nvs;
+	/**
+	 * 从用户页面得到的规则结果名词
+	 */
 	private String noun;
+	/**
+	 * 从用页面得到的设备分组列表
+	 */
     private String unit;
 	
 	
@@ -99,7 +121,10 @@ public class RuleBRAction extends ActionSupport {
 		this.backwardandResultlist = backwardandResultlist;
 	}
 
-	
+	/**
+	 * 检查是否是是专家用户
+	 * @return 是返回true,否则返回false
+	 */
 	public boolean checkprof() {
 		ActionContext actionContext = ActionContext.getContext();
 		Map user = actionContext.getSession();
@@ -109,7 +134,9 @@ public class RuleBRAction extends ActionSupport {
 		} else
 			return false;
 	}
-
+/**
+ * 跳转到规则推理页面
+ */
 	public String execute() {
 		// nb=rulebrService.getalloptions();
 		if (checkprof()) {
@@ -131,7 +158,10 @@ public class RuleBRAction extends ActionSupport {
 		 * backwardandResultlist2.addAll(set2); return "rulesuccess";
 		 */
 	}
-
+	/**
+	 * 通过设备分组过滤规则
+	 * @return 规则列表
+	 */
 	public String findbynounp() {
 		// nb=rulebrService.getalloptions();
 		if (checkprof()) {
@@ -159,7 +189,10 @@ public class RuleBRAction extends ActionSupport {
 		 * backwardandResultlist2.addAll(set2); return "rulesuccess";
 		 */
 	}
-	
+	/**
+	 * 通过现象名词过滤规则
+	 * @return 规则列表
+	 */
 	public String findbynoun() {
 		// nb=rulebrService.getalloptions();
 		if (checkprof()) {
