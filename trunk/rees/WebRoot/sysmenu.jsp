@@ -141,7 +141,7 @@
 												<img src="images/menuto.jpg" width="5" height="5" />
 											</td>
 											<td>
-												<a href="sysmanage/rulemanage.html" target="mainFrame">规则设置</a>
+												<a href="expertsystem/expertmanage.jsp" target="mainFrame">规则设置</a>
 											</td>
 										</tr>
 									</table>
