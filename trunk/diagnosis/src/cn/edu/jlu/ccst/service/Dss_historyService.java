@@ -15,21 +15,26 @@ import cn.edu.jlu.ccst.dao.Dss_historyServiceInter;
 import cn.edu.jlu.ccst.dao.TreeunitServiceInter;
 import cn.edu.jlu.ccst.model.Dss_history;
 import cn.edu.jlu.ccst.model.Errorlog;
-
+/**
+ * 工艺历史数据服务类
+ */
 @Component("dss_historyService")
 public class Dss_historyService {
+	/**
+	 * 工艺历史数据实例
+	 */
 	private Dss_history dss_history;
+	/**
+	 * 工艺历史数据服务类
+	 */
 	private Dss_historyServiceInter dss_historyServiceImpl;
-
+	/**
+	 * 树形菜单服务类
+	 */
 	private TreeunitServiceInter TreeunitServiceImpl;
 
 	
-
-	
-
-	
-
-	public TreeunitServiceInter getTreeunitServiceImpl() {
+public TreeunitServiceInter getTreeunitServiceImpl() {
 		return TreeunitServiceImpl;
 	}
 
@@ -59,13 +64,19 @@ public class Dss_historyService {
 		
 		dss_historyServiceImpl.save(dss_history);
 	}
-	
+    /**
+     * 查找所有工艺历史数据
+     * @return 工艺历史数据列表
+     */
     public List<Dss_history> findAll() {
 		List<Dss_history> resultlist = new ArrayList();
 		resultlist = dss_historyServiceImpl.findAll();
 		return resultlist;
 	}
-	
+    /**
+     * 根据名称查找工艺历史数据服务类
+     * @return 工艺历史数据列表 
+     */
 	public List<Dss_history> findbyname(String name) {
 		List<Dss_history> resultlist = new ArrayList();
 		resultlist = dss_historyServiceImpl.findbyName(name);
@@ -73,12 +84,19 @@ public class Dss_historyService {
 		return resultlist;
 	}
 	
-	
+	/**
+     * 根据批次查找工艺历史数据服务类
+     * @return 工艺历史数据列表 
+     */
 	public List<Dss_history> findsimu_time() {
 		List<Dss_history> resultlist = new ArrayList();
 		resultlist = dss_historyServiceImpl.findsimu_time();
 		return resultlist;
 	}
+	/**
+     * 根据参数查找工艺历史数据服务类
+     * @return 工艺历史数据列表 
+     */
 	 public List<Dss_history> findbypara(String para){
 		  List<Dss_history> resultlist = new ArrayList();
 			resultlist = dss_historyServiceImpl.findbypara(para);
@@ -86,7 +104,10 @@ public class Dss_historyService {
 			return resultlist; 
 		  
 	  }
-	 
+	 /**
+	     * 根据树形节点名称查找工艺历史数据服务类
+	     * @return 工艺历史数据列表 
+	     */
 	 public List<Dss_history> findbyunit(String unit){
 		  List<Dss_history> resultlist1 = new ArrayList();
 		  List<String> resultlist2 = new ArrayList();

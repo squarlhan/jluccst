@@ -20,13 +20,30 @@ import cn.edu.jlu.ccst.model.MotoDcsdata;
 import cn.edu.jlu.ccst.model.MotoErrorlog;
 import cn.edu.jlu.ccst.dao.TreeunitServiceInter;
 import cn.edu.jlu.ccst.model.Treeunit;
-
+/**
+*实时数据故障日志服务类
+*/
 @Component("motoerrorlogService")
 public class MotoErrorlogService {
+	/**
+	*实时数据故障日志实例
+	*/
 	private MotoErrorlog motoerrorlog;
+	/**
+	*实时数据故障日志接口
+	*/
 	private MotoErrorlogInter motoerrorlogImpl;
+	/**
+	*dcs描述数据服务类
+	*/
 	private DcsDscribServiceInter dcsDscribServiceImpl;
+	/**
+	*设备临时变量
+	*/
 	private String equip;
+	/**
+	*树形菜单服务
+	*/
 	private TreeunitServiceInter TreeunitServiceImpl;
 	
 	
@@ -68,11 +85,19 @@ public class MotoErrorlogService {
 	public void setMotoerrorlogImpl(MotoErrorlogInter motoerrorlogImpl) {
 		this.motoerrorlogImpl = motoerrorlogImpl;
 	}
+	/**
+	 * 找到所有实时数据故障日志
+	 * @return 故障日志列表
+	 */
 	public List<MotoErrorlog> findAll() {
 		List<MotoErrorlog> resultlist = new ArrayList();
 		resultlist = motoerrorlogImpl.findAll();
 		return resultlist;
 	}
+	/**
+	 * 根据设备名称找到所有实时数据故障日志
+	 * @return 故障日志列表
+	 */
   public List<MotoErrorlog> findbyequipment(String equip){
 	  List<MotoErrorlog> resultlist = new ArrayList();
 		resultlist = motoerrorlogImpl.findbyequipment(equip);
@@ -80,7 +105,10 @@ public class MotoErrorlogService {
 		return resultlist; 
 	  
   }
-  
+  /**
+	 * 根据树形节点找到所有实时数据故障日志
+	 * @return 故障日志列表
+	 */
   public List<MotoErrorlog> findbyunit(String unit){
 	  List<MotoErrorlog> resultlist1 = new ArrayList();
 	  List<String> resultlist2 = new ArrayList();
@@ -100,7 +128,10 @@ public class MotoErrorlogService {
 	  
   }
 
-
+  /**
+	 * 根据参数、日期找到所有实时数据故障日志
+	 * @return 故障日志列表
+	 */
   public List<MotoErrorlog> findbyorder(String para,Date date1,Date date2){
 	  List<MotoErrorlog> resultlist1 = new ArrayList();
 	  List<MotoErrorlog> resultlist2 = new ArrayList();
@@ -116,7 +147,10 @@ public class MotoErrorlogService {
 		  resultlist=motoerrorlogImpl.findbyorder(para,a,b);}
             return resultlist;
   }
-
+  /**
+	 * 保存实时数据故障日志
+	 * 
+	 */
 	public void save(MotoErrorlog errorlog) {
 	
 		
@@ -127,7 +161,10 @@ public class MotoErrorlogService {
 	        
 			motoerrorlogImpl.save(errorlog);
 	}
-	
+	/**
+	 *根据实时数据故障日志进行规则转化
+	 * @return 故障名词
+	 */
 	public String validateinput(MotoDcsdata motocsdata) {
 		List<DcsDscrib> dcsDscribs = dcsDscribServiceImpl.findbyname(motocsdata.getEquipment(), motocsdata.getItem());
 		if (dcsDscribs != null && dcsDscribs.size() > 0) {

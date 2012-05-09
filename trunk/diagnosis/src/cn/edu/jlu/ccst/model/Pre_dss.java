@@ -12,7 +12,9 @@ import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 
 import org.springframework.stereotype.Component;
-
+/**
+ * 工艺实时数据表
+ */
 @Entity
 @Component("pre_dss")
 public class Pre_dss implements Serializable{

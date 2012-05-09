@@ -20,13 +20,30 @@ import cn.edu.jlu.ccst.model.Dcsdata;
 import cn.edu.jlu.ccst.model.Errorlog;
 import cn.edu.jlu.ccst.dao.TreeunitServiceInter;
 import cn.edu.jlu.ccst.model.Treeunit;
-
+/**
+ * 故障日志服务类
+ */
 @Component("errorlogService")
 public class ErrorlogService {
+	/**
+     *故障日志实例
+     */
 	private Errorlog errorlog;
+	/**
+    *故障日志接口
+    */
 	private ErrorlogInter errorlogImpl;
+	/**
+    *dcs描述服务类
+    */
 	private DcsDscribServiceInter dcsDscribServiceImpl;
-	private String equip;
+	/**
+    *设备名称历史变量
+    */
+    private String equip;
+    /**
+    *树形菜单服务类
+    */
 	private TreeunitServiceInter TreeunitServiceImpl;
 	
 	
@@ -69,12 +86,19 @@ public class ErrorlogService {
 		this.errorlogImpl = errorlogImpl;
 	}
 
-
+    /**
+    *查找所有故障日志
+    *@return 故障日志列表
+    */
     public List<Errorlog> findAll() {
 		List<Errorlog> resultlist = new ArrayList();
 		resultlist = errorlogImpl.findAll();
 		return resultlist;
 	}
+    /**
+    *根据设备查找故障日志
+    *@return 故障日志列表
+    */
   public List<Errorlog> findbyequipment(String equip){
 	  List<Errorlog> resultlist = new ArrayList();
 		resultlist = errorlogImpl.findbyequipment(equip);
@@ -82,7 +106,10 @@ public class ErrorlogService {
 		return resultlist; 
 	  
   }
-  
+  /**
+   *根据树形节点查找故障日志
+   *@return 故障日志列表
+   */
   public List<Errorlog> findbyunit(String unit){
 	  List<Errorlog> resultlist1 = new ArrayList();
 	  List<String> resultlist2 = new ArrayList();
@@ -123,7 +150,10 @@ public class ErrorlogService {
 		return resultlist; 
 	  
   }*/
-
+  /**
+   *根据参数、日期查找故障日志
+   *@return 故障日志列表
+   */
   public List<Errorlog> findbyorder(String para,Date date1,Date date2){
 	  List<Errorlog> resultlist1 = new ArrayList();
 	  List<Errorlog> resultlist2 = new ArrayList();
@@ -139,7 +169,10 @@ public class ErrorlogService {
 		  resultlist=errorlogImpl.findbyorder(para,a,b);}
             return resultlist;
   }
-
+  /**
+   *保存故障日志
+  
+   */
 	public void save(Errorlog errorlog) {
 	
 		
@@ -150,7 +183,9 @@ public class ErrorlogService {
 	        
 			errorlogImpl.save(errorlog);
 	}
-	
+	 /**
+	    *将规则转化存入故障日志中
+	    */
 	public String validateinput(Dcsdata Dcsdata) {
 		List<DcsDscrib> dcsDscribs = dcsDscribServiceImpl.findbyname(Dcsdata.getEquipment(), Dcsdata.getItem());
 		if (dcsDscribs != null && dcsDscribs.size() > 0) {

@@ -16,13 +16,26 @@ import cn.edu.jlu.ccst.dao.RuleBRServiceImpl;
 import cn.edu.jlu.ccst.dao.RuleBRServiceInter;
 import cn.edu.jlu.ccst.dao.TreeunitServiceInter;
 import cn.edu.jlu.ccst.model.*;
-
+/**
+ * 规则后件服务类
+ */
 @Component("rulebrService")
 public class RuleBRService {
-
+	/**
+	 * 规则现象实例
+	 */
 	private BackwardandResult backwardandresult;
+	/**
+	 * 规则通用服务类接口
+	 */
 	private RuleBRServiceInter rulebrServiceImpl;
+	/**
+	 * 规则名词临时变量
+	 */
 	private String noun;
+	/**
+	* 树形菜单服务接口
+	 */
 	private TreeunitServiceInter treeunitServiceImpl;
 	
 
@@ -89,13 +102,20 @@ public class RuleBRService {
 	
 	 * ruleServiceImpl.save(backward); }
 	 */
-
+	/**
+	 *查找所有规则现象
+	 *@return 现象列表
+	 */
 	public List<BackwardandResult> findAll() {
 		List<BackwardandResult> resultlist = new ArrayList();
 		resultlist = rulebrServiceImpl.findAll();
 
 		return resultlist;
 	}
+	/**
+	 * 查找根据名词查找现象
+	 * @return 相应名词
+	 */
 
 	public Map getallnvs() {
 		Map result = new HashMap();
@@ -109,6 +129,10 @@ public class RuleBRService {
 
 		return result;
 	}
+	/**
+	 * 查找对应名词预处理
+	 *  @return 相应名词
+	 */
 	public Map getbynvsp(String unit) {
 		Map result = new HashMap();
 		List<String> jiedians = treeunitServiceImpl.findallchild(unit);
@@ -123,6 +147,10 @@ public class RuleBRService {
 		if(result==null||result.size()<1)result=getallnvs();
 		return result;
 	}
+	/**
+	 * 查找对应名词
+	 *  @return 相应名词
+	 */
 	public Map getbynvs(String noun) {
 		Map result = new HashMap();
 

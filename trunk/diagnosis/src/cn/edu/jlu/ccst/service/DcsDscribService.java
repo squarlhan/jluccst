@@ -18,18 +18,46 @@ import cn.edu.jlu.ccst.dao.Init_PredictServiceInter;
 import cn.edu.jlu.ccst.dao.TreeunitServiceInter;
 import cn.edu.jlu.ccst.model.*;
 import cn.edu.jlu.ccst.dao.MotoDcsdataServiceInter;
-
+/**
+ * dcs描述服务类
+ */
 @Component("dcsDscribService")
 public class DcsDscribService {
-
+	/**
+	 * dcs描述实例
+	 */
 	private DcsDscrib dDcsDscrib;
+	/**
+	 * dcs描述服务类
+	 */
 	private DcsDscribServiceInter dcsDscribServiceImpl;
+	/**
+	 * dcs数据服务类
+	 */
 	private DcsdataService dcsdataService;
+	/**
+	 * 工艺预处理服务类
+	 */
 	private Pre_dssService pre_dssService;
+	/**
+	 * 工艺预处理对照服务类
+	 */
 	private Init_PredictServiceInter init_predictServiceImpl;
+	/**
+	 * 实时监控dcs数据服务类
+	 */
 	private MotoDcsdataServiceInter motoDcsdataServiceImpl;
+	/**
+	 * 实时监控工艺数据实例
+	 */
 	private MotoDcsdata motoDcsdata;
+	/**
+	 * 实时监控数据服务类
+	 */
 	private MotoDcsdataService motoDcsdataService;
+	/**
+	 * 树形菜单服务类
+	 */
 	private TreeunitServiceInter treeunitServiceImpl;
 	
 
@@ -129,7 +157,10 @@ public class DcsDscribService {
 			DcsDscribServiceInter dcsDscribServiceImpl) {
 		this.dcsDscribServiceImpl = dcsDscribServiceImpl;
 	}
-
+	/**
+	 * 找到所有现象名称
+	 * @return 名称列表
+	 */
 	public List<String> findallname() {
 		List<String> name = dcsDscribServiceImpl.findAllname();
 		List<String> result = new ArrayList();
@@ -139,21 +170,30 @@ public class DcsDscribService {
 		}
 		return result;
 	}
-
+	/**
+	 * 根据名称查找dcs描述数据
+	 * @return 数据列表
+	 */
 	public List<DcsDscrib> findbyname(String name) {
 		List<DcsDscrib> dds = new ArrayList();
 		dds = dcsDscribServiceImpl.findbyname(name);
 		//if(dds.size()<1)dds = findall();
 		return dds;
 	}
-	
+	/**
+	 * 根据名称相似查找dcs描述数据
+	 * @return 数据列表
+	 */
 	public List<DcsDscrib> findlikename(String name) {
 		List<DcsDscrib> dds = new ArrayList();
 		dds = dcsDscribServiceImpl.findlikename(name);
 		//if(dds.size()<1)dds = findall();
 		return dds;
 	}
-	
+	/**
+	 * 根据名称详细查找dcs描述数据预处理
+	 * @return 数据列表
+	 */
 	public List<DcsDscrib> findlikenamep(String name) {
 		List<DcsDscrib> results = new ArrayList();
 		List<String> jiedians = treeunitServiceImpl.findallchild(name);
@@ -163,31 +203,47 @@ public class DcsDscribService {
 		}
 		return results;
 	}
-	
+	/**
+	 * 根据设备查找dcs描述数据
+	 * @return 数据列表
+	 */
 	public List<DcsDscrib> findbyeque(String eque) {
 		List<DcsDscrib> dds = new ArrayList();
 		dds = dcsDscribServiceImpl.findbyeque(eque);
 		//if(dds.size()<1)dds = findall();
 		return dds;
 	}
+	/**
+	 * 查找所有dcs描述数据
+	 * @return  数据列表
+	 */
 	public List<DcsDscrib> findall() {
 		List<DcsDscrib> dcsDscriblist = dcsDscribServiceImpl.findAll();
 
 		return dcsDscriblist;
 	}
-	
+	/**
+	 * 根据id查找dcs描述数据
+	 * @return dcs数据
+	 */
 	public DcsDscrib findbyid(int id){
 		 return dcsDscribServiceImpl.find(id);
     } 
-
+	/**
+	 * 根据id删除dcs数据
+	 */
 	public void removebyid(int id){
 		dcsDscribServiceImpl.remove(id);
 	 }
-
+	/**
+	 * 保存dcs数据
+	 */
 	public void save(DcsDscrib dcsDscrib) {
 		dcsDscribServiceImpl.save(dcsDscrib);
 	}
-	
+	/**
+	 * 获得所有树形菜单节点
+	 */
 	public Map getallnvs() {
 		Map result = new HashMap();
 
@@ -215,7 +271,10 @@ public class DcsDscribService {
 
 		return result;
 	}
-
+	/**
+	 * 根据dcs描述将输入数据转化成规则现象
+	 * @return 现象列表
+	 */
 	public List<BackwardandResult> validateinput(Map map) {
 		Iterator iter = map.entrySet().iterator();
 		List<BackwardandResult> results = new ArrayList();
@@ -247,6 +306,10 @@ public class DcsDscribService {
 		}
 		return results;
 	}
+	/**
+	 * 将输入数据转化成规则现象
+	 * @return 现象列表
+	 */
 
 	public List<BackwardandResult> validateinput() {
 		List<Dcsdata> alldata = dcsdataService.findAll();
@@ -277,7 +340,10 @@ public class DcsDscribService {
 
 		return results;
 	}
-
+	/**
+	 * 将输入固定批次数据转化成规则现象1
+	 * @return 现象列表
+	 */
 	public List<BackwardandResult> validateinput1() {
 		List<Pre_dss> alldata = pre_dssService.findBysimu_time();
 		List<BackwardandResult> results = new ArrayList();
@@ -312,7 +378,10 @@ public class DcsDscribService {
 		}
 		return results;
 	}
-
+	/**
+	 * 将输入固定批次数据转化成规则现象2
+	 * @return 现象列表
+	 */
 	
 	public List<BackwardandResult> validateinput2() {
 		List<MotoDcsdata> alldata = motoDcsdataService.findAll();

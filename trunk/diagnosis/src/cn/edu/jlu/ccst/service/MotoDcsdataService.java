@@ -18,12 +18,27 @@ import cn.edu.jlu.ccst.model.DcsDscrib;
 import cn.edu.jlu.ccst.model.Dcsdata;
 import cn.edu.jlu.ccst.model.MotoDcsdata;
 
-
+/**
+*实时数据监控服务类
+*@author catherine
+*/
 @Component("motodcsdataService")
 public class MotoDcsdataService {
+	/**
+	*实时数据监控实例
+	*/
 	private MotoDcsdata motodcsdata;
+	/**
+	*实时数据监控服务类
+	*/
 	private MotoDcsdataServiceInter motodcsdataServiceImpl;
+	/**
+	*dcs描述数据监控服务类
+	*/
 	private DcsDscribServiceInter dcsDscribServiceImpl;
+	/**
+	*树形节点服务类
+	*/
   // private DcsDscrib dcsDscrib;
 	private TreeunitServiceInter treeunitServiceImpl;
 	
@@ -84,13 +99,19 @@ public class MotoDcsdataService {
 
 
 
-
+	/**
+	*查找所有实时数据
+	*@return 实时数据列表
+	*/
 	public List<MotoDcsdata> findAll() {
 		List<MotoDcsdata> resultlist = new ArrayList();
 		resultlist = motodcsdataServiceImpl.findAll();
 		return resultlist;
 	}
-	
+	/**
+	*查找所有实时数据预处理
+	*@return 实时数据列表
+	*/
 	public List<MotoDcsdata> getalldcsddatap(String keyword) {
 		List<MotoDcsdata> results = new ArrayList();
 		List<String> jiedians = treeunitServiceImpl.findallchild(keyword);
@@ -100,7 +121,10 @@ public class MotoDcsdataService {
 		}
 		return results;
 	}
-	
+	/**
+	*查找所有实时数据预处理进行规则转化
+	*@return 实时数据列表
+	*/
 	public List<MotoDcsdata> getalldcsddata(String keyword) {
 		List<MotoDcsdata> allresults = new ArrayList();
 		List<MotoDcsdata> results = new ArrayList();
@@ -140,6 +164,10 @@ public class MotoDcsdataService {
 			}
 		
 	}
+	/**
+	*查找所有实时数据预处理进行规则转化
+	*@return 实时数据列表
+	*/
 	
 	public List<MotoDcsdata> getalldcsddatan(String keyword) {
 		List<MotoDcsdata> allresults = new ArrayList();

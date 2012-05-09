@@ -13,10 +13,20 @@ import org.springframework.stereotype.Component;
 import cn.edu.jlu.ccst.dao.Dss_adviceServiceImpl;
 import cn.edu.jlu.ccst.dao.Dss_adviceServiceInter;
 import cn.edu.jlu.ccst.model.Dss_advice;
-
+/**
+ * 工艺对接建议服务类
+ * @author catherine
+ *
+ */
 @Component("dss_adviceService")
 public class Dss_adviceService {
+	/**
+	 *  工艺对接建议实例
+	 */
 	private Dss_advice dss_advice;
+	/**
+	 *  工艺对接服务类
+	 */
 	private Dss_adviceServiceInter dss_adviceServiceImpl;
 
 	
@@ -41,7 +51,9 @@ public class Dss_adviceService {
 			Dss_adviceServiceInter dss_adviceServiceImpl) {
 		this.dss_adviceServiceImpl = dss_adviceServiceImpl;
 	}
-
+	 /**
+	 *  保存工艺对接建议
+		 */
 	public void save(Dss_advice dss_advice) {
 		List<Dss_advice> all = dss_adviceServiceImpl.findAll();
 		if(all!=null&&all.size()>0){
@@ -58,12 +70,17 @@ public class Dss_adviceService {
 	}
 	
 	
-	
+	/**
+	 *  删除所有工艺对接建议
+	 */
 	public void deleteall(){
 		dss_adviceServiceImpl.deleteall();
 	}
 	
-	
+	/**
+	 *  根据批次查找工艺对接建议
+	 *  @return 返回工艺对接建议列表
+	 */
 	public List<String> findsimu_time() {
 		List<String> resultlist = new ArrayList();
 		resultlist = dss_adviceServiceImpl.findsimu_time();
