@@ -14,5 +14,6 @@ import com.boan.rees.utils.dao.IBaseDao;
  */
 public interface IRuleReasonInfoDao extends IBaseDao<RuleReasonInfo, Integer>{
 	public RuleReasonInfo get(int id);
+	public RuleReasonInfo getbyid(int id) ;
 }
 

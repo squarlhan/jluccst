@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.boan.rees.expertsystem.model.RuleAdviceInfo;
+import com.boan.rees.expertsystem.model.RuleReasonInfo;
 import com.boan.rees.report.model.PersonReport;
 import com.boan.rees.utils.page.Pagination;
 
@@ -50,7 +51,12 @@ public interface IRuleAdviceInfoService {
 	 * 根据设备类型id查找建议
 	 */
 	//public RuleAdviceInfo findbyDeviceTypeId(String id);
+	/**
+	 * 根据id查找建议(HQL)
+	 */
+	public RuleAdviceInfo getbyId(int id);
 }
+
 
 
 

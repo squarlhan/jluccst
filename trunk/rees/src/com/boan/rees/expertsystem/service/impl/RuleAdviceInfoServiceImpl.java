@@ -15,6 +15,7 @@ import com.boan.rees.demo.model.DemoModel;
 import com.boan.rees.device.model.PointDataInfo;
 import com.boan.rees.expertsystem.dao.IRuleAdviceInfoDao;
 import com.boan.rees.expertsystem.model.RuleAdviceInfo;
+import com.boan.rees.expertsystem.model.RuleReasonInfo;
 import com.boan.rees.expertsystem.service.IRuleAdviceInfoService;
 import com.boan.rees.report.model.PersonReport;
 import com.boan.rees.utils.page.Pagination;
@@ -75,6 +76,9 @@ public class RuleAdviceInfoServiceImpl implements IRuleAdviceInfoService{
 	//public RuleAdviceInfo findbyDeviceTypeId(String id){
 		
 	//}
-
+	@Override
+	public RuleAdviceInfo getbyId(int id){
+		return ruleAdviceInfoDao.getbyid(id);
+	}
 }
 

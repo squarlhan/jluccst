@@ -7,6 +7,7 @@ package com.boan.rees.expertsystem.service;
 import java.util.List;
 import java.util.Map;
 
+import com.boan.rees.expertsystem.model.RuleReasonInfo;
 import com.boan.rees.expertsystem.model.RuleResultInfo;
 import com.boan.rees.utils.page.Pagination;
 
@@ -54,7 +55,14 @@ public interface IRuleResultInfoService {
 	 * 根据设备类型Id查询所包含的故障信息
 	 */
 	public List<RuleResultInfo> findRuleResultInfoByDeviceTypeId(String deviceTypeId);
-}
+
+
+
+	/**
+	 * 根据id查找现象(HQL)
+	 */
+	public RuleResultInfo getbyId(int id);
+	}
 
 
 
