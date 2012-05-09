@@ -56,8 +56,6 @@ public class Diagnosis
 	@Qualifier("deviceInfoService")
 	private IDeviceInfoService deviceInfoService;
 	//推理机服务接口
-	@Autowired
-	@Qualifier("inferenceEngine")
 	private InferenceEngine inferenceEngine;
 	//规则服务接口
 	@Autowired
@@ -77,7 +75,7 @@ public class Diagnosis
 	private IPointParamInfoService pointParamInfoService;
 	// 监测点数据接口类
 	@Autowired
-	@Qualifier("pointParamInfoService")
+	@Qualifier("pointDataInfoService")
 	private IPointDataInfoService pointDataInfoService;
 	//规则现象服务接口
 	@Autowired
