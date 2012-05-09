@@ -9,11 +9,18 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import cn.edu.jlu.ccst.model.User;
-
+/**
+ * 用户数据库操作实现类
+ * @author Woden
+ *
+ */
 
 @Component("userServiceImpl")
 @Transactional
 public class UserServiceImpl implements UserServiceInter {
+	/**
+	 * 关系映射管理对象
+	 */
 	private EntityManager em; 
 
 	@PersistenceContext

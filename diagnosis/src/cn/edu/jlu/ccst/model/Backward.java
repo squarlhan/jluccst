@@ -14,6 +14,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 import org.springframework.stereotype.Component;
+
 /**
  * 规则实体类
  *  @author alapapang
@@ -28,6 +29,9 @@ public class Backward implements Serializable{
 	private static final long serialVersionUID = -4761095751458248560L;
 	@Id
 	@GeneratedValue
+	/**
+	 * 
+	 */
 	private int bid;
 	/**
 	 * 规则简介

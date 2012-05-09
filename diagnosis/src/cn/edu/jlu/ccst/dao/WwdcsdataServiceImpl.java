@@ -11,10 +11,17 @@ import org.springframework.transaction.annotation.Transactional;
 import cn.edu.jlu.ccst.model.User;
 import cn.edu.jlu.ccst.model.Wwdcsdata;
 import cn.edu.jlu.ccst.dao.WwdcsdataServiceInter;
-
+/**
+ * 古老的DCS数据数据库操作实现类
+ * @author Woden
+ *
+ */
 @Component("wwdcsServiceImpl")
 @Transactional
 public class WwdcsdataServiceImpl implements WwdcsdataServiceInter {
+	/**
+	 * 关系映射管理对象
+	 */
 	private EntityManager em; 
 
 	@PersistenceContext

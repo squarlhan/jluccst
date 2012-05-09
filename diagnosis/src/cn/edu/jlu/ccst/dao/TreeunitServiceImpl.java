@@ -19,10 +19,17 @@ import cn.edu.jlu.ccst.model.Treeunit;
 
 
 import cn.edu.jlu.ccst.dao.DcsdataServiceInter;
-
+/**
+ * 树形结构数据库操作类
+ * @author Woden
+ *
+ */
 @Component("treeunitServiceImpl")
 @Transactional
 public class TreeunitServiceImpl implements TreeunitServiceInter  {
+	/**
+	 * 关系映射管理对象
+	 */
 	private EntityManager em; 
 
 	@PersistenceContext
