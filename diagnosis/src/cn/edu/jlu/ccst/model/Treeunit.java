@@ -12,26 +12,39 @@ import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 
 import org.springframework.stereotype.Component;
-
+/**
+ * 树形菜单节点实体类
+ */
 @Entity
 @Component("treeunit")
 public class Treeunit implements Serializable{
 
 	/**
-	 * 
+	 * 主键
 	 */
 	private static final long serialVersionUID = -6305660104857386885L;
 	@Id
 	@GeneratedValue
 	private int id;
 	
-	
+	/**
+	 * 父亲节点
+	 */
 	private String father;
+	/**
+	 * 子节点
+	 */
 	private String child;
+	/**
+	 * 构造函数
+	 */
 	public Treeunit() { 
 		super();
 		
 	}
+	/**
+	 * 构造函数
+	 */
 	public Treeunit(int id,String child, String father) {
 		super();
 		this.id = id;

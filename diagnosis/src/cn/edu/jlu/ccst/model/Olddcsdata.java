@@ -11,19 +11,27 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 import org.springframework.stereotype.Component;
-
+/**
+ * dcs数据实体类（旧）
+ */
 @Entity
 @Component("olddcsdata")
 public class Olddcsdata implements Serializable {
 
 	/**
-	 * 
+	 * 主键
 	 */
 	private static final long serialVersionUID = -4761095751458248560L;
 	@Id
 	@GeneratedValue
 	private int id;
+	/**
+	 * 批次时间
+	 */
 	private String ORGTIME;
+	/**
+	 * 相关参数
+	 */
 	private float ITEM1;
 	private float ITEM2;
 	private float ITEM3;

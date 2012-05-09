@@ -7,34 +7,64 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 import org.springframework.stereotype.Component;
-
+/**
+ *实时数据故障日志实体类
+ */
 @Entity
 @Component("motoerrorlog")
 public class MotoErrorlog implements Serializable{
 
 	/**
-	 * 
+	 * 主键
 	 */
 	private static final long serialVersionUID = -6305660104857386885L;
 	@Id
 	@GeneratedValue
 	private int id;
+	/**
+	 * 设备名称
+	 */
 	private String equipment;
+	/**
+	 * 设备参数
+	 */
 	private String item;
+	/**
+	 * 参数值
+	 */
 	private Double value;
-	private String time;//故障时间
+	/**
+	 * 故障时间
+	 */
+	private String time;
+	/**
+	 * 报警级别
+	 */
 	private String level;
+	/**
+	 * 相关故障
+	 */
 	private String error;
+	/**
+	 * 相关建议
+	 */
 	private String sugg;
+	/**
+	 * 故障动词
+	 */
 	private String wrong;
 	
 	
-	
+	/**
+	 * 构造函数
+	 */
 	public MotoErrorlog() { 
 		super();
 		
 	}
-	
+	/**
+	 * 构造函数
+	 */
 	public MotoErrorlog(int id, String equipment, String item, Double value,
 			String time, String level, String error, String sugg, String wrong) {
 		super();

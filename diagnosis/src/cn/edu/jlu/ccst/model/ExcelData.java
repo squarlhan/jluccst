@@ -4,13 +4,24 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 import org.springframework.stereotype.Component;
-
+/**
+ * 位号对照表实体类
+ */
 @Entity
 @Component("exceldata")
 public class ExcelData {
+	/**
+	 * 主键，工艺位号
+	 */
 	@Id
 	private String id;
+	/**
+	 * 对应名称
+	 */
 	private String name;
+	/**
+	 * 参数值
+	 */
 	private String value;
 	
 	

@@ -7,27 +7,44 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 import org.springframework.stereotype.Component;
-
+/**
+ * dcs历史数据实体类
+ */
 @Entity
 @Component("dcshistory")
 public class Dcshistory implements Serializable{
 
 	
 	/**
-	 * 
+	 * 主键
 	 */
 	private static final long serialVersionUID = 499290511105257682L;
 	@Id
 	@GeneratedValue
 	private int id;
+	/**
+	 * 设备名称
+	 */
 	private String equipment;
+	/**
+	 * 参数
+	 */
 	private String item;
+	/**
+	 * 参数值
+	 */
 	private Double value;
+	/**
+	 * 记录批次时间
+	 */
 	private String seqno;
 	public Dcshistory() { 
 		super();
 		
 	}
+	/**
+	 * 构造函数
+	 */
 	public Dcshistory(int id, String equipment, String item, Double value, String seqno) {
 		super();
 		this.id = id;

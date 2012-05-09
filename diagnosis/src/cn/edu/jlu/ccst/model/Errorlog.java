@@ -7,25 +7,51 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 import org.springframework.stereotype.Component;
-
+/**
+ * 故障日志实体类
+ */
 @Entity
 @Component("errorlog")
 public class Errorlog implements Serializable{
 
 	/**
-	 * 
+	 * 主键
 	 */
 	private static final long serialVersionUID = -6305660104857386885L;
 	@Id
 	@GeneratedValue
 	private int id;
+	/**
+	 * 设备名称
+	 */
 	private String equipment;
+	/**
+	 * 参数名称
+	 */
 	private String item;
+	/**
+	 * 参数值
+	 */
 	private Double value;
-	private String time;//故障时间
+	/**
+	 * 故障时间
+	 */
+	private String time;
+	/**
+	 * 报警级别
+	 */
 	private String level;
+	/**
+	 * 相关故障
+	 */
 	private String error;
+	/**
+	 * 相关建议
+	 */
 	private String sugg;
+	/**
+	 * 故障动词
+	 */
 	private String wrong;
 	
 	
@@ -34,7 +60,9 @@ public class Errorlog implements Serializable{
 		super();
 		
 	}
-	
+	/**
+	 * 构造函数
+	 */
 	public Errorlog(int id, String equipment, String item, Double value,
 			String time, String level, String error, String sugg, String wrong) {
 		super();

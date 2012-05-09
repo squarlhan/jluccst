@@ -11,7 +11,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 import org.springframework.stereotype.Component;
-
+/**
+ * dcs数据表（旧）
+ */
 @Entity
 @Component("wwdcsdata")
 public class Wwdcsdata implements Serializable {

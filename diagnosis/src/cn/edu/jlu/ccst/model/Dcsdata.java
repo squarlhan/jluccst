@@ -7,26 +7,44 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 import org.springframework.stereotype.Component;
-
+/**
+ * Dcs数据实体类
+ * @author alapapang 
+ */
 @Entity
 @Component("dcsdata")
 public class Dcsdata implements Serializable{
 
 	/**
-	 * 
+	 * 主键
 	 */
 	private static final long serialVersionUID = -6305660104857386885L;
 	@Id
 	@GeneratedValue
 	private int id;
+	/**
+	 * 设备名称
+	 */
 	private String equipment;
+	/**
+	 * 设备参数
+	 */
 	private String item;
+	/**
+	 * Dcs参数值
+	 */
 	private Double value;
+	/**
+	 * 优先级别
+	 */
 	private String isok;
 	public Dcsdata() { 
 		super();
 		
 	}
+	/**
+	 * 构造函数
+	 */
 	public Dcsdata(int id, String equipment, String item, Double value) {
 		super();
 		this.id = id;

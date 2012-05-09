@@ -7,27 +7,47 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 import org.springframework.stereotype.Component;
-
+/**
+ * 实时数据历史表实体类
+ */
 @Entity
 @Component("motodcshistory")
 public class MotoDcshistory implements Serializable{
 
 	
 	/**
-	 * 
+	 * 主键
 	 */
 	private static final long serialVersionUID = 499290511105257682L;
 	@Id
 	@GeneratedValue
 	private int id;
+	/**
+	 * 设备名称
+	 */
 	private String equipment;
+	/**
+	 * 设备参数
+	 */
 	private String item;
+	/**
+	 * 参数值
+	 */
 	private Double value;
+	/**
+	 * 记录时间
+	 */
 	private String seqno;
+	/**
+	 * 构造函数
+	 */
 	public MotoDcshistory() { 
 		super();
 		
 	}
+	/**
+	 * 构造函数
+	 */
 	public MotoDcshistory(int id, String equipment, String item, Double value, String seqno) {
 		super();
 		this.id = id;

@@ -18,7 +18,7 @@ import org.springframework.stereotype.Component;
 public class Pre_dss implements Serializable{
 
 	/**
-	 * 
+	 * 工艺实时数据表
 	 */
 	private static final long serialVersionUID = -6305660104857386885L;
 	@Id
@@ -26,9 +26,21 @@ public class Pre_dss implements Serializable{
 	private int id;
 	@OneToOne(cascade={CascadeType.ALL})
 	@JoinColumn(name="name")
+	/**
+	 * 工艺位号名称
+	 */
 	private Init_Predict name;
+	/**
+	 * 批次号
+	 */
 	private String simu_time;
+	/**
+	 * 批次时间
+	 */
 	private String seqno;
+	/**
+	 * 参数值
+	 */
 	private String value;
 	public Pre_dss() { 
 		super();
