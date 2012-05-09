@@ -25,10 +25,10 @@ import com.boan.rees.utils.page.Pagination;
  * @author yangyj
  * @version 1.0.0
  */
-@Service("NoticeReadInfoService")
-public abstract class NoticeReadInfoServiceImpl implements INoticeReadInfoService {
+@Service("noticeReadInfoService")
+public class NoticeReadInfoServiceImpl implements INoticeReadInfoService {
 	
-
+	@Autowired
 	@Qualifier("noticeReadInfoDao")
 	private INoticeReadInfoDao noticeReadInfoDao;
 
@@ -36,7 +36,7 @@ public abstract class NoticeReadInfoServiceImpl implements INoticeReadInfoServic
 	 * 查询全部论坛议题表对象
 	 */
 	
-	@Autowired
+	@Override
 	public List<NoticeReadInfo> findAllNoticeReadInfo(){
 		return noticeReadInfoDao.findAll();
 	}
@@ -44,7 +44,7 @@ public abstract class NoticeReadInfoServiceImpl implements INoticeReadInfoServic
 	/**
 	 * 删除
 	 */
-	
+	@Override
 	public void deleteNoticeReadInfo(String... ids ){
 		noticeReadInfoDao.delete(ids);
 	}
@@ -70,15 +70,8 @@ public abstract class NoticeReadInfoServiceImpl implements INoticeReadInfoServic
 	/**
 	 * 按分页查询
 	 */
-	
+	@Override
 	public Pagination<NoticeReadInfo> findNoticeReadInfoForPage(Map<String, ?> values,Pagination<NoticeReadInfo> pagination){
-		
-		String hql = "from DemoModel";
-		List<NoticeReadInfo> data = noticeReadInfoDao.findForPage(hql, values, pagination.getStartIndex(), pagination.getPageSize());
-		hql = "select count(*) from DemoModel";
-		int totalRows = noticeReadInfoDao.findCountForPage(hql, values);
-		pagination.setTotalRows(totalRows);
-		pagination.setData(data);
 		return pagination;
 	}
 }
