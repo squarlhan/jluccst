@@ -16,10 +16,17 @@ import cn.edu.jlu.ccst.model.User;
 
 
 import cn.edu.jlu.ccst.dao.DcsdataServiceInter;
-
+/**
+ *DCS历史数据数据库操作实现类
+ * @author Woden
+ *
+ */
 @Component("dcshistoryImpl")
 @Transactional
 public class DcshistoryImpl implements DcshistoryInter {
+	/**
+	 * 关系映射管理对象
+	 */
 	private EntityManager em; 
 
 	@PersistenceContext

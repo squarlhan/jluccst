@@ -16,10 +16,17 @@ import cn.edu.jlu.ccst.model.User;
 
 
 import cn.edu.jlu.ccst.dao.Pre_dssServiceInter;
-
+/**
+ * 从工艺对接得到的数据数据库相关操作服务类
+ * @author Woden
+ *
+ */
 @Component("Pre_dssServiceImpl")
 @Transactional
 public class Pre_dssServiceImpl implements Pre_dssServiceInter {
+	/**
+	 * 关系映射管理对象
+	 */
 	private EntityManager em; 
 
 	@PersistenceContext

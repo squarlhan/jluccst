@@ -19,10 +19,17 @@ import cn.edu.jlu.ccst.model.MotoErrorlog;
 
 
 import cn.edu.jlu.ccst.dao.DcsdataServiceInter;
-
+/**
+ * 自动采集的DCS数据错误日志数据库操作服务类
+ * @author Woden
+ *
+ */
 @Component("motoerrorlogImpl")
 @Transactional
 public class MotoErrorlogImpl implements MotoErrorlogInter  {
+	/**
+	 * 关系映射管理对象
+	 */
 	private EntityManager em; 
 
 	@PersistenceContext

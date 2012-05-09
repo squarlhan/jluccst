@@ -13,10 +13,17 @@ import cn.edu.jlu.ccst.model.BackwardandReason;
 import cn.edu.jlu.ccst.model.BackwardandResult;
 import cn.edu.jlu.ccst.model.DcsDscrib;
 import cn.edu.jlu.ccst.model.User;
-
+/**
+ * 规则与原因关联表数据库操作实现类
+ * @author Woden
+ *
+ */
 @Component("backwardReasonImpl")
 @Transactional
 public class BackwardReasonImpl implements BackwardReasonInter {
+	/**
+	 * 关系映射管理对象
+	 */
 	private EntityManager em; 
 
 	@PersistenceContext

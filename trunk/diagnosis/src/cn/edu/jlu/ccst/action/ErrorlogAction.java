@@ -13,7 +13,11 @@ import cn.edu.jlu.ccst.model.Errorlog;
 import cn.edu.jlu.ccst.service.ErrorlogService;
 
 import com.opensymphony.xwork2.ActionSupport;
-
+/**
+ * 错误日志操作相关类
+ * @author Woden
+ *
+ */
 @Component("errorlogAction")
 @Scope("prototype")
 public class ErrorlogAction extends ActionSupport {
