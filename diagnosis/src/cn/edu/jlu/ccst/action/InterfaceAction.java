@@ -269,7 +269,7 @@ public class InterfaceAction extends ActionSupport {
 
 	/**
 	 * 等待工艺请求, 之后验证数据并返回相关建议
-	 * @return
+	 * @return 建议和错误页面
 	 */
 	// @Scheduled(fixedDelay = 1000)
 	public String waitingforU(){

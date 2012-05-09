@@ -12,7 +12,7 @@ import cn.edu.jlu.ccst.model.Errorlog;
 public interface ErrorlogInter {
 	/**
 	 * 存储或更改一个错误日志
-	 * @param dcshistory 待持久化错误日志
+	 * @param errorlog 待持久化错误日志
 	 */
 	 public void save(Errorlog errorlog);
 	 /**

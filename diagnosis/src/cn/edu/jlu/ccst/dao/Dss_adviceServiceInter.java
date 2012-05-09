@@ -10,7 +10,7 @@ import cn.edu.jlu.ccst.model.Dss_advice;
 public interface Dss_adviceServiceInter {
 	/**
 	 * 存储或更改一个工艺对接数据
-	 * @param backwardandReason 要持久化的工艺对接数据
+	 * @param dss_advice 要持久化的工艺对接数据
 	 */
 	 public void save(Dss_advice dss_advice);
 	 /**
