@@ -11,10 +11,17 @@ import org.springframework.transaction.annotation.Transactional;
 import cn.edu.jlu.ccst.model.Backward;
 import cn.edu.jlu.ccst.model.BackwardandResult;
 
-
+/**
+ * 规则数据库操作实现类
+ * @author Woden
+ *
+ */
 @Component("ruleServiceImpl")
 @Transactional
 public class RuleServiceImpl implements RuleServiceInter{
+	/**
+	 * 关系映射管理对象
+	 */
 	private EntityManager em;
 
 	@PersistenceContext
