@@ -14,21 +14,36 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 import org.springframework.stereotype.Component;
-
+/**
+ * 规则实体类
+ *  @author alapapang
+ */
 @Entity
 @Component("backward")
 public class Backward implements Serializable{
 
 	/**
-	 * 
+	 * 主键
 	 */
 	private static final long serialVersionUID = -4761095751458248560L;
 	@Id
 	@GeneratedValue
 	private int bid;
+	/**
+	 * 规则简介
+	 */
 	private String memo = "";
+	/**
+	 * 规则名称
+	 */
 	private String name = "";
+	/**
+	 * 确定因子
+	 */
 	private int count;
+	/**
+	 * 优先级别
+	 */
 	private int priror;
 	@OneToMany(mappedBy = "bid", cascade = CascadeType.ALL, fetch = FetchType.LAZY, targetEntity = BackwardandReason.class) 
 	private List<BackwardandReason> reasons= new ArrayList();

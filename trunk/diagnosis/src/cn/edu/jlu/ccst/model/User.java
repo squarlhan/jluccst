@@ -7,26 +7,55 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
 import org.springframework.stereotype.Component;
-
+/**
+ * 用户实体类
+ */
 @Entity
 @Component("user")
 public class User implements Serializable{
 
 	/**
-	 * 
+	 * 主键
 	 */
 	private static final long serialVersionUID = -4761095751458248560L;
 	@Id
 	@GeneratedValue
 	private int id;
+	/**
+	 * 用户名
+	 */
 	private String username;
+	/**
+	 * 用户密码
+	 */
 	private String password;
+	/**
+	 * 电子邮箱
+	 */
 	private String email;
+	/**
+	 * 电话号码
+	 */
 	private String phone;
+	/**
+	 * 真实姓名
+	 */
 	private String name;
+	/**
+	 * 所属部门
+	 */
 	private String dept;
+	/**
+	 * 是否为用户
+	 */
 	private Boolean isuser;
+	/**
+	 * 是否为管理员
+	 */
 	private Boolean isadmin;
+	/**
+	 * 是否为专家
+	 */
 	private Boolean isprof;
 	
 	
@@ -34,7 +63,9 @@ public class User implements Serializable{
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
+	/**
+	 * 构造函数
+	 */
 	public User(String username, String password, String email,
 			String phone, String name, String jid, String dept,Boolean isuser,Boolean isadmin,Boolean isprof) {
 		super();

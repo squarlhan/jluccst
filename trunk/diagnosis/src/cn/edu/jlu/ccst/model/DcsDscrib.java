@@ -14,30 +14,56 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
 import org.springframework.stereotype.Component;
-
+/**
+ * Dcs参数描述 实体类
+ */
 @Entity
 @Component("dcsdescrib")
 public class DcsDscrib implements Serializable{
 
 	/**
-	 * 
+	 * 主键
 	 */
 	private static final long serialVersionUID = 1318500835674165200L;
-	/**
-	 * 
-	 */
-
+	
 	@Id
 	@GeneratedValue
 	private int did;
+	/**
+	 * 参数
+	 */
 	private String item;
+	/**
+	 * 设备名称
+	 */
 	private String eque;
+	/**
+	 * 设备参数名称
+	 */
 	private String name;
+	/**
+	 * 参数上限范围
+	 */
 	private double upper;
+	/**
+	 * 参数下限范围
+	 */
 	private double lower;
+	/**
+	 * 参数红色报警上限
+	 */
 	private double upper1;
+	/**
+	 * 参数红色报警下限
+	 */
 	private double lower1;
+	/**
+	 * 参数橙色报警上限
+	 */
 	private double upper2;
+	/**
+	 * 参数橙色报警下限
+	 */
 	private double lower2;
 	
 	public int getDid() {
@@ -101,7 +127,9 @@ public class DcsDscrib implements Serializable{
 	public void setLower2(double lower2) {
 		this.lower2 = lower2;
 	}
-	
+	/**
+	 * 构造函数
+	 */
 	public DcsDscrib(int did, String item, String eque, String name,
 			double upper, double lower, double upper1, double lower1,
 			double upper2, double lower2) {

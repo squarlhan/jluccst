@@ -1,6 +1,7 @@
 package cn.edu.jlu.ccst.model;
 
 import javax.persistence.CascadeType;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -8,18 +9,40 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 import org.springframework.stereotype.Component;
+/**
+ * 规则现象实体类
+ * @author alapapang
+ */
 @Entity
 @Component("backwardandresult")
 public class BackwardandResult {
+	/**
+	 * 主键
+	 */
 	@Id
 	@GeneratedValue
 	private int id;
+	/**
+	 * 对应规则外键
+	 */
 	@ManyToOne (cascade = { CascadeType.MERGE }) 
 	@JoinColumn(name = "bid")
 	private Backward bid;
+	/**
+	 * 现象名词
+	 */
 	private String nouns;
+	/**
+	 * 优先级别
+	 */
 	private float  cf_result;
+	/**
+	 * 现象动词
+	 */
 	private String verb;
+	/**
+	 * 现象简介
+	 */
 	private String memo;
 	
 	
@@ -32,6 +55,9 @@ public class BackwardandResult {
 	public void setMemo(String memo) {
 		this.memo = memo;
 	}
+	/**
+	 * 现象构造函数
+	 */
 	public BackwardandResult(Backward bid, String nouns, float cf_result,
 			String verb) {
 		super();

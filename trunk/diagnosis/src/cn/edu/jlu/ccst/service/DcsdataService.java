@@ -21,15 +21,38 @@ import cn.edu.jlu.ccst.model.DcsDscrib;
 import cn.edu.jlu.ccst.model.Dcsdata;
 import cn.edu.jlu.ccst.model.Errorlog;
 import cn.edu.jlu.ccst.model.Pre_dss;
-
+/**
+ * dcs数据服务类
+ */
 @Component("dcsdataService")
 public class DcsdataService {
+	/**
+	 * dcs数据实例
+	 */
 	private Dcsdata dcsdata;
+	/**
+	 * dcs服务类
+	 */
 	private DcsdataServiceInter dcsdataServiceImpl;
+	/**
+	 *  故障日志实例
+	 */
 	private ErrorlogInter errorlogImpl;
+	/**
+	 *dcs描述服务类 
+	 */
 	private DcsDscribServiceInter dcsDscribServiceImpl;
+	/**
+	 * 规则通用服务类
+	 */
 	private RuleService ruleService;
+	/**
+	 * 预处理服务类
+	 */
 	private Pre_dssService pre_dssService;
+	/**
+	 * 树节点服务类
+	 */
 	private TreeunitServiceInter treeunitServiceImpl;
 	
 
@@ -96,29 +119,41 @@ public class DcsdataService {
 	public void setErrorlogImpl(ErrorlogInter errorlogImpl) {
 		this.errorlogImpl = errorlogImpl;
 	}
-
+	/**
+	 * 保存dcs数据
+	 */
 	public void save(Dcsdata dcsdata) {
 		
 		dcsdataServiceImpl.save(dcsdata);
 	}
-
+	/**
+	 * 删除dcs数据
+	 */
 	public void delete(Dcsdata dcsdata) {
 
 		dcsdataServiceImpl.delete(dcsdata);
 	}
-
+	/**
+	 * 根据设备名称查找dcs数据
+	 * @return dcs数据列表
+	 */
 	public List<Dcsdata> findbyequipment(String equipment) {
 		List<Dcsdata> resultlist = new ArrayList();
 		resultlist = dcsdataServiceImpl.findByequipment(equipment);
 		return resultlist;
 	}
-	
+	/**
+	 * 根据参数超找dcs数据
+	 * @return dcs数据列表
+	 */
 	public List<Dcsdata> findbyitem(String equipment, String item) {
 		List<Dcsdata> resultlist = new ArrayList();
 		resultlist = dcsdataServiceImpl.findByitem(equipment, item);
 		return resultlist;
 	}
-
+	/**
+	 * 查找所有的dcs数据
+	 */
 	public List<Dcsdata> findAll() {
 		List<Dcsdata> resultlist = new ArrayList();
 		resultlist = dcsdataServiceImpl.findAll();

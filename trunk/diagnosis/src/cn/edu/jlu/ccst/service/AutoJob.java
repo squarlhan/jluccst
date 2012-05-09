@@ -16,18 +16,43 @@ import cn.edu.jlu.ccst.model.DcsDscrib;
 import cn.edu.jlu.ccst.model.Dss_advice;
 import cn.edu.jlu.ccst.model.Dss_history;
 import cn.edu.jlu.ccst.model.Pre_dss;
-
+/**
+ * 实时监测数据服务类
+ */
 @Service
 @Component("autoJob")
 public class AutoJob {
-
+	/**
+	 * 工艺实时数据服务类
+	 */
 	private Pre_dssService pre_dssService;
+	/**
+	 * 工艺实时历史服务类
+	 */
 	private Pre_historyService pre_historyService;
+	/**
+	 * Dcs描述服务类
+	 */
 	private DcsDscribService dcsDscribService;
+	/**
+	 * 规则通用服务类
+	 */
 	private RuleService ruleService;
+	/**
+	 * 工艺对接建议服务类
+	 */
 	private Dss_adviceService dss_adviceService;
+	/**
+	 * 工艺对接历史实体类
+	 */
 	private Dss_historyService dss_historyService;
+	/**
+	 * dcs描述服务类
+	 */
 	private DcsDscribServiceInter dcsDscribServiceImpl;
+	/**
+	 * 规则现象服务类
+	 */
 	private BackwardandResultService backwardandResultService;
 
 	public BackwardandResultService getBackwardandResultService() {
@@ -102,7 +127,11 @@ public class AutoJob {
 	public void setDss_adviceService(Dss_adviceService dss_adviceService) {
 		this.dss_adviceService = dss_adviceService;
 	}
-
+	/**
+	 * 实时检测处理过程：将输入数据与dcs参数描述进行判断，若超出正常范围则转化成相应故障规则并进行输出显示。
+	 * 若不超出则显示一切正常
+	 * 
+	 */
 //	@Scheduled(fixedDelay = 10000)
 	public void porcessdss() {
 		List<String> datatimes = pre_dssService.findsimu_time();
