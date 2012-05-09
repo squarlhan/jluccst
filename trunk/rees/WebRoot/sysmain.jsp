@@ -75,7 +75,7 @@ $.fn.initpage = function(){
 $.fn.notice = function(){
 	$.post("getNewNoticeCounts.action", function(text){
 		if(text!=0)
-			$.messager.show('<font color=red><strong>论坛通知</strong></font>', '<font color=green style="font-size:12px;font-weight:bold;">有新的通知，请注意查看！！！</font>');
+			$.messager.show('<font color=red><strong>论坛通知</strong></font>', '<font color=green style="font-size:12px;font-weight:bold;"><a href="notice/noticemanage.jsp" target="mainFrame">有'+text+' 条新的通知，请注意查看！！！</a></font>');
 	});
 };
 //-->
