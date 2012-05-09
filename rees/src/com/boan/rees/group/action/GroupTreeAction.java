@@ -196,7 +196,13 @@ public class GroupTreeAction extends BaseActionSupport
 							lt = workshopService.queryAllWorkshopsByFactoryId( factoryList.get( k ).getId() );
 							if( lt != null && lt.size() > 0 )
 							{
-								workshopList.addAll( lt );
+								
+								//由于原来的这句缺少公司Id说以注释掉了，用下面的for循环处理
+								//workshopList.addAll( lt );
+								for( Workshop temp :lt ){
+									temp.setCompanyId(factoryList.get( k ).getCompanyId());
+									workshopList.add(temp);
+								}
 							}
 						}
 						
