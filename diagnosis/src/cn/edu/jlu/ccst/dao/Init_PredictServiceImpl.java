@@ -10,10 +10,17 @@ import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
 import cn.edu.jlu.ccst.model.Init_Predict;
-
+/**
+ * 设备名和设备id关联表数据库操作实现类
+ * @author Woden
+ *
+ */
 @Component("init_predictServiceImpl")
 @Transactional
 public class Init_PredictServiceImpl implements Init_PredictServiceInter {
+	/**
+	 * 关系映射管理对象
+	 */
 	private EntityManager em;
 
 	@PersistenceContext

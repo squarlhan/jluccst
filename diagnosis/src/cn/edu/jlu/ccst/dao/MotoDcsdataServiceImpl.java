@@ -16,10 +16,17 @@ import cn.edu.jlu.ccst.model.MotoDcsdata;
 
 
 import cn.edu.jlu.ccst.dao.DcsdataServiceInter;
-
+/**
+ * 自动采集的DCS数据数据库操作实现类
+ * @author Woden
+ *
+ */
 @Component("motodcsServiceImpl")
 @Transactional
 public class MotoDcsdataServiceImpl implements MotoDcsdataServiceInter {
+	/**
+	 * 关系映射管理对象
+	 */
 	private EntityManager em; 
 
 	@PersistenceContext

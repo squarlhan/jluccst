@@ -10,10 +10,17 @@ import org.springframework.transaction.annotation.Transactional;
 
 import cn.edu.jlu.ccst.model.BackwardandResult;
 import cn.edu.jlu.ccst.model.User;
-
+/**
+ * 规则与结果关联表数据库操作实现类
+ * @author Woden
+ *
+ */
 @Component("backwardResultImpl")
 @Transactional
 public class BackwardResultImpl implements BackwardResultInter {
+	/**
+	 * 关系映射管理对象
+	 */
 	private EntityManager em; 
 
 	@PersistenceContext

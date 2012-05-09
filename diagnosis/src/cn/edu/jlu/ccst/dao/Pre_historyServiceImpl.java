@@ -16,10 +16,17 @@ import cn.edu.jlu.ccst.model.User;
 
 
 import cn.edu.jlu.ccst.dao.Pre_historyServiceInter;
-
+/**
+ * 工艺对接数据错误日志数据库操作服务类
+ * @author Woden
+ *
+ */
 @Component("pre_historyServiceImpl")
 @Transactional
 public class Pre_historyServiceImpl implements Pre_historyServiceInter {
+	/**
+	 * 关系映射管理对象
+	 */
 	private EntityManager em; 
 
 	@PersistenceContext

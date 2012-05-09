@@ -11,10 +11,17 @@ import org.springframework.transaction.annotation.Transactional;
 import cn.edu.jlu.ccst.model.DcsDscrib;
 import cn.edu.jlu.ccst.model.User;
 
-
+/**
+ * 参数描述数据库操作实现类
+ * @author Woden
+ *
+ */
 @Component("dcsDscribServiceImpl")
 @Transactional
 public class DcsDscribServiceImpl implements DcsDscribServiceInter{
+	/**
+	 * 关系映射管理对象
+	 */
 	private EntityManager em;
 	
 	

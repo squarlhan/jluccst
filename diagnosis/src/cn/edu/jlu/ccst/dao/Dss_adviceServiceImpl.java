@@ -19,10 +19,17 @@ import cn.edu.jlu.ccst.model.User;
 
 
 import cn.edu.jlu.ccst.dao.DcsdataServiceInter;
-
+/**
+ * 工艺对接数据数据库操作实现类
+ * @author Woden
+ *
+ */
 @Component("dss_adviceServiceImpl")
 @Transactional
 public class Dss_adviceServiceImpl implements Dss_adviceServiceInter  {
+	/**
+	 * 关系映射管理对象
+	 */
 	private EntityManager em; 
 
 	@PersistenceContext
