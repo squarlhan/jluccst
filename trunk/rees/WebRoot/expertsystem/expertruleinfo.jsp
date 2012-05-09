@@ -110,12 +110,42 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
  		$("#btn_close").click(function(){
   			parent.$("#windown-close").click();
   		});
-	}
+	};
 	
  	/**
 	 * 初始化页面元素
 	 */
 	$.fn.initPage = function(){
+ 		
+ 		//下拉列表分组
+		$("select[name='ruleInfo.resultId']").each(function(){
+			var groupA="<option value=''>---请选择---</option><optgroup label='规则现象'>";
+			var groupB="<optgroup label='规则原因'>";
+			if($(this).prev().attr("name")=="hid_selectedResultItem"){
+				 $('#'+$(this).attr("id")+' option').each(function(){
+					if($(this).val().substring(0,1)=="a"){
+						groupA = groupA+"<option value='"+$(this).val()+"'>"+$(this).html()+"</option>";
+					}else if($(this).val().substring(0,1)=="b"){
+						groupB = groupB+"<option value='"+$(this).val()+"'>"+$(this).html()+"</option>";
+					}
+				 });
+				 $(this).children().remove();
+				 $(this).append(groupA);
+				 $(this).append(groupB);
+			}
+		});
+ 		
+ 		//下拉列表回显数据
+		$("select[name='ruleInfo.resultId']").each(function(){
+			if($(this).prev().attr("name")=="hid_selectedResultItem"){
+				 $('#'+$(this).attr("id")+' option').each(function(){
+					if($(this).val()==$("input[name='hid_selectedResultItem']").val()){
+						$(this).attr("selected","selected");
+					}
+				 });
+			}
+		});
+ 		
 		$("#txt_typeName").focus();
 		var err = $("#lb_error").html();
 		if(err!=null && $.trim(err)!="" ){
@@ -205,7 +235,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    			<strong>现象<s:property value="#result.index+1"/>：</strong>
 	    			</td>
 	    			<td height="26" align="left" bgcolor="#FFFFFF">
-						<s:select id="sel_resultType" list="resultList" listKey="id" listValue="result" headerKey="" headerValue="---请选择---" name="ruleInfo.resultId" cssStyle="width: 250px;"></s:select>
+						<s:select id="sel_resultType" list="newResultMap" listKey="key" listValue="value" headerKey="" headerValue="---请选择---" name="ruleInfo.resultId" cssStyle="width: 250px;"></s:select>
 						<s:hidden name="id"></s:hidden>
 						<font color="red">*</font>
 						<img id="addOtherBtn"  name="addOtherBtn" src="<%=basePath%>/images/symbol-add.png" style="height:18px;width:20px;cursor:pointer" title="添加"></img>
@@ -219,8 +249,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	    			<strong>现象<s:property value="#result.index+1"/>：</strong>
 	    			</td>
 	    			<td height="26" align="left" bgcolor="#FFFFFF">
-	    			
-					<s:select id="sel_resultType" list="resultList" listKey="id" listValue="result" headerKey="" headerValue="---请选择---" name="ruleInfo.resultId" cssStyle="width: 250px;"></s:select>
+	    			<input type="hidden" name="hid_selectedResultItem" value='${key}'/>
+					<s:select id="sel_resultType" list="newResultMap" listKey="key" listValue="value" headerKey="" headerValue="---请选择---" name="ruleInfo.resultId" cssStyle="width: 250px;"></s:select>
 					<font color="red">*</font>
 					<s:hidden name="id"></s:hidden>
 					<s:if test="#result.index+1==1">
@@ -230,7 +260,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 						</s:if>
 					</s:if>
 					<s:else>
-						<img name="delOtherBtn" onclick="$.fn.dynamicRemoveOther('${id}',$(this));" src="<%=basePath%>/images/symbol-remove.png" style="height:18px;width:20px;cursor:pointer" title="删除"></img>
+						<img name="delOtherBtn" onclick="$.fn.dynamicRemoveOther('${value}',$(this));" src="<%=basePath%>/images/symbol-remove.png" style="height:18px;width:20px;cursor:pointer" title="删除"></img>
 					</s:else>
 					</td>
 	    		</tr>

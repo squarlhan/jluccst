@@ -75,6 +75,8 @@ public class RuleInfoAction extends BaseActionSupport{
 	
 	private Map<String,Integer> resultMap;
 	
+	Map<String,String> newResultMap = new HashMap<String,String>();
+	
 	/**
 	 * 下拉设备列表事件传递过来的设备类型Id
 	 */
@@ -185,6 +187,14 @@ public class RuleInfoAction extends BaseActionSupport{
 		this.resultMap = resultMap;
 	}
 
+	public Map<String, String> getNewResultMap() {
+		return newResultMap;
+	}
+
+	public void setNewResultMap(Map<String, String> newResultMap) {
+		this.newResultMap = newResultMap;
+	}
+
 	/**
 	 * 分页显示建议列表
 	 * @return
@@ -251,6 +261,12 @@ public class RuleInfoAction extends BaseActionSupport{
 		reasonList=ruleReasonInfoService.findAllRuleReasonInfo();
 		resultList=ruleResultInfoService.findAllRuleResultInfo();
 		
+		for(RuleResultInfo obj :resultList){
+			newResultMap.put("b"+obj.getId(), obj.getResult());
+		}
+		for(RuleReasonInfo obj :reasonList){
+			newResultMap.put("a"+obj.getId(), obj.getReason());
+		}
 		ruleInfo = service.get(11);
 		resultMap = new HashMap<String,Integer>();
 		String resultStr = ruleInfo.getResultId();
@@ -274,6 +290,11 @@ public class RuleInfoAction extends BaseActionSupport{
 			adviceList=ruleAdviceInfoService.findAllRuleAdviceInfo();
 			reasonList=ruleReasonInfoService.findAllRuleReasonInfo();
 			resultList=ruleResultInfoService.findAllRuleResultInfo();
+			
+			String results=ruleInfo.getResultId();
+			results=results.replaceAll(" ","");
+			results=results.replaceAll(",","_");
+			ruleInfo.setResultId(results);
 			service.update(ruleInfo);
 			message="保存成功！";
 		} catch (Exception e) {
