@@ -96,6 +96,7 @@ public class MotoErrorlogService {
 	}
 	/**
 	 * 根据设备名称找到所有实时数据故障日志
+	 * @param equip 设备名称
 	 * @return 故障日志列表
 	 */
   public List<MotoErrorlog> findbyequipment(String equip){
@@ -107,6 +108,7 @@ public class MotoErrorlogService {
   }
   /**
 	 * 根据树形节点找到所有实时数据故障日志
+	 * @param unit 树形节点名称
 	 * @return 故障日志列表
 	 */
   public List<MotoErrorlog> findbyunit(String unit){
@@ -130,6 +132,9 @@ public class MotoErrorlogService {
 
   /**
 	 * 根据参数、日期找到所有实时数据故障日志
+	  *@param para 参数名称
+   *@param date1 开始日期
+   *@param date2 结束日期
 	 * @return 故障日志列表
 	 */
   public List<MotoErrorlog> findbyorder(String para,Date date1,Date date2){
@@ -149,8 +154,8 @@ public class MotoErrorlogService {
   }
   /**
 	 * 保存实时数据故障日志
-	 * 
-	 */
+	 * @param errorlog 故障日志实体
+	 */ 
 	public void save(MotoErrorlog errorlog) {
 	
 		
@@ -163,6 +168,7 @@ public class MotoErrorlogService {
 	}
 	/**
 	 *根据实时数据故障日志进行规则转化
+	 *@param motocsdata 实时dcs实体
 	 * @return 故障名词
 	 */
 	public String validateinput(MotoDcsdata motocsdata) {

@@ -58,6 +58,7 @@ public class WwdcsdataService {
 	 */
 	/**
 	 * 根据时间查找dcs数据（旧）
+	 * @param wwdcsdata dcs数据实体
 	 * @return dcs数据
 	 */
 	public Wwdcsdata findbytime(Wwdcsdata wwdcsdata) {
@@ -65,6 +66,7 @@ public class WwdcsdataService {
 	}
 	/**
 	 * 保存dcs数据
+	 *  @param wwdcsdata dcs数据实体
 	 
 	 */
 	public void save(Wwdcsdata wwdcsdata) {

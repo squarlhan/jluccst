@@ -110,6 +110,7 @@ public class MotoDcsdataService {
 	}
 	/**
 	*查找所有实时数据预处理
+	*@param keyword 关键字
 	*@return 实时数据列表
 	*/
 	public List<MotoDcsdata> getalldcsddatap(String keyword) {
@@ -123,6 +124,7 @@ public class MotoDcsdataService {
 	}
 	/**
 	*查找所有实时数据预处理进行规则转化
+	*@param keyword 关键字
 	*@return 实时数据列表
 	*/
 	public List<MotoDcsdata> getalldcsddata(String keyword) {
@@ -166,6 +168,7 @@ public class MotoDcsdataService {
 	}
 	/**
 	*查找所有实时数据预处理进行规则转化
+	*@param keyword 关键字
 	*@return 实时数据列表
 	*/
 	

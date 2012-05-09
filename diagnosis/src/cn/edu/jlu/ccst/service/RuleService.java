@@ -71,6 +71,7 @@ public class RuleService {
 	}
 	/**
 	 * 删除规则
+	 * @param backward 规则实体
 	 */
 	public void delete(Backward backward){
 		if(backward.getBid()>0){
@@ -79,12 +80,14 @@ public class RuleService {
 	}
 	/**
 	 * 保存规则
+	 * @param backward 规则实体
 	 */
 	public void save(Backward backward) {
 		     ruleServiceImpl.save(backward);
 	}
 	/**
 	 * 查找规则
+	 * @param backward 规则实体
 	 * @return 规则
 	 */
 	public Backward find(Backward backward){
@@ -104,6 +107,7 @@ public class RuleService {
 	}
 	/**
 	 * 根据名称查找规则预处理
+	 * @param name 设备名称
 	 * @return 规则列表
 	 */
 	public List<Backward> findbynamep(String name) {
@@ -117,6 +121,7 @@ public class RuleService {
 	}
 	/**
 	 * 查找规则
+	 * @param name 设备名称
 	 * @return 规则列表
 	 */
 	public List<Backward> findbyname(String name) {
@@ -127,7 +132,8 @@ public class RuleService {
 	}
 	/**
 	 * 根据现象查找原因
-	 * @return 现象列表
+	 * @param enters 现象列表
+	 * @return 原因列表
 	 */
 	public List<BackwardandReason> findreasons(List<BackwardandResult> enters) {
 		List<BackwardandReason> resultlist = new ArrayList();

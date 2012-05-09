@@ -62,6 +62,7 @@ public class Pre_historyService {
 	}
 	/**
 	 * 根据名称查找工艺实时数据历史
+	 *@param name 设备名称
 	 * @return 工艺实时数据历史列表
 	 */
 	public List<Pre_history> findbyname(String name) {
@@ -98,6 +99,7 @@ public class Pre_historyService {
 	}
 	/**
 	 * 保存工艺实时数据历史
+	 * @param pds 工艺实时数据历史列表
 	
 	 */
 	public void saveall(List<Pre_dss> pds){

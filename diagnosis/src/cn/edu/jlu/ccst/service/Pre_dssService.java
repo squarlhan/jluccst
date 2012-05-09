@@ -59,6 +59,7 @@ public class Pre_dssService {
 	}
 	/**
 	 * 根据名称查找工艺实时数据
+	 * @param name 设备名称
 	 * @return 工艺实时数据列表
 	 */
 	public List<Pre_dss> findbyname(String name) {

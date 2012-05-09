@@ -97,6 +97,7 @@ public class ErrorlogService {
 	}
     /**
     *根据设备查找故障日志
+    *@param equip 设备参数名称
     *@return 故障日志列表
     */
   public List<Errorlog> findbyequipment(String equip){
@@ -108,6 +109,7 @@ public class ErrorlogService {
   }
   /**
    *根据树形节点查找故障日志
+   *@param unit 树形节点名称
    *@return 故障日志列表
    */
   public List<Errorlog> findbyunit(String unit){
@@ -152,7 +154,11 @@ public class ErrorlogService {
   }*/
   /**
    *根据参数、日期查找故障日志
+   *@param para 参数名称
+   *@param date1 开始日期
+   *@param date2 结束日期
    *@return 故障日志列表
+   
    */
   public List<Errorlog> findbyorder(String para,Date date1,Date date2){
 	  List<Errorlog> resultlist1 = new ArrayList();
@@ -171,7 +177,7 @@ public class ErrorlogService {
   }
   /**
    *保存故障日志
-  
+   *@param errorlog 故障日志实体
    */
 	public void save(Errorlog errorlog) {
 	
@@ -185,6 +191,7 @@ public class ErrorlogService {
 	}
 	 /**
 	    *将规则转化存入故障日志中
+	    *@param errorlog 故障日志实体
 	    */
 	public String validateinput(Dcsdata Dcsdata) {
 		List<DcsDscrib> dcsDscribs = dcsDscribServiceImpl.findbyname(Dcsdata.getEquipment(), Dcsdata.getItem());

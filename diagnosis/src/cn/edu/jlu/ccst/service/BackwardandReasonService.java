@@ -31,18 +31,21 @@ public class BackwardandReasonService {
 	}
 	/**
 	 * 更新规则原因
+	 *  @param backwardandReason 原因实体
 	 */
 	public void update(BackwardandReason backwardandReason){
 		backwardReasonImpl.save(backwardandReason);
 	}
 	/**
 	 * 根据id删除规则原因
+	 * @param id id名
 	 */
 	public void removebyid(int id){
 		backwardReasonImpl.remove(id);
 	 }
 	/**
 	 * 根据id查找规则原因
+	 * @param id id名
 	 * @return 规则原因
 	 */
 	public BackwardandReason findbyid(int id){

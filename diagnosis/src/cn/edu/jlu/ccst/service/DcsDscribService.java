@@ -172,6 +172,7 @@ public class DcsDscribService {
 	}
 	/**
 	 * 根据名称查找dcs描述数据
+	 *  @param name 设备参数名称
 	 * @return 数据列表
 	 */
 	public List<DcsDscrib> findbyname(String name) {
@@ -182,6 +183,7 @@ public class DcsDscribService {
 	}
 	/**
 	 * 根据名称相似查找dcs描述数据
+	 * @param name 设备参数名称
 	 * @return 数据列表
 	 */
 	public List<DcsDscrib> findlikename(String name) {
@@ -192,6 +194,7 @@ public class DcsDscribService {
 	}
 	/**
 	 * 根据名称详细查找dcs描述数据预处理
+	 * @param name 设备参数名称
 	 * @return 数据列表
 	 */
 	public List<DcsDscrib> findlikenamep(String name) {
@@ -205,6 +208,7 @@ public class DcsDscribService {
 	}
 	/**
 	 * 根据设备查找dcs描述数据
+	 * @param eque 设备参数名称
 	 * @return 数据列表
 	 */
 	public List<DcsDscrib> findbyeque(String eque) {
@@ -224,6 +228,7 @@ public class DcsDscribService {
 	}
 	/**
 	 * 根据id查找dcs描述数据
+	 * @param id id号
 	 * @return dcs数据
 	 */
 	public DcsDscrib findbyid(int id){
@@ -231,12 +236,14 @@ public class DcsDscribService {
     } 
 	/**
 	 * 根据id删除dcs数据
+	 *  @param id id号
 	 */
 	public void removebyid(int id){
 		dcsDscribServiceImpl.remove(id);
 	 }
 	/**
 	 * 保存dcs数据
+	 *  @param id id号
 	 */
 	public void save(DcsDscrib dcsDscrib) {
 		dcsDscribServiceImpl.save(dcsDscrib);
@@ -273,6 +280,7 @@ public class DcsDscribService {
 	}
 	/**
 	 * 根据dcs描述将输入数据转化成规则现象
+	 * @param map映射实体
 	 * @return 现象列表
 	 */
 	public List<BackwardandResult> validateinput(Map map) {
