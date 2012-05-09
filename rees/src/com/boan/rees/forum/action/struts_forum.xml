@@ -69,6 +69,12 @@
     	<action name="getNewNoticeCounts" class="noticeInfoAction" method="getNewNoticeCountsByUserId">
     		<result name="success">notice/newnoticetipservice.jsp</result>
     	</action>
+    	<action name="openNoticeInfoManageAction" class="noticeInfoAction" method="openNoticeList">
+    		<result name="success">notice/noticemanagelist.jsp</result>
+    	</action>
+    	<action name="openAddNoticeInfoAction" class="noticeInfoAction" method="openNoticeInfo">
+    		<result name="success">notice/noticeinfo.jsp</result>
+    	</action>
     </package>	
     <!-- 已读通知信息Action -->
     <package name="forum_notice_read" extends="struts-default" namespace="/">
