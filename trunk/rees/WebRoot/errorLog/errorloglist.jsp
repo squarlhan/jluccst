@@ -103,7 +103,7 @@
           	<s:date  name="errorTime" format="yyyy-MM-dd" />&nbsp;
           </td>
           <td height="26" align="center" bgcolor="#FFFFFF">
-          	<s:property value="isRemove"/>&nbsp;
+            <s:if test="isRemove==1"><span class="STYLE3">已解除</span></s:if><s:if test="isRemove==0"><span class="STYLE2">未解除</span></s:if>&nbsp;
           </td>
           <td height="26" align="center" bgcolor="#FFFFFF">
           	<s:date  name="removeTime" format="yyyy-MM-dd" />&nbsp;
