@@ -25,7 +25,7 @@ public interface INoticeReadInfoService {
 	/**
 	 * 查询全部报表对象
 	 */
-	public List<NoticeReadInfo> findAllDemoModel();
+	public List<NoticeReadInfo> findAllNoticeReadInfo();
 
 	/**
 	 * 获取
@@ -35,8 +35,7 @@ public interface INoticeReadInfoService {
 	/**
 	 * 删除
 	 */
-	public void deleteNoticeInfo(String... ids );
-
+	public void deleteNoticeReadInfo(String... ids );
 	/**
 	 * 保存
 	 */
