@@ -78,13 +78,12 @@ public class NoticeInfoServiceImpl implements INoticeInfoService {
 	/**
 	 * 按分页查询
 	 */
-	
 	@Override
 	public Pagination<NoticeInfo> findNoticeInfoForPage(Map<String, ?> values,Pagination<NoticeInfo> pagination){
 		
-		String hql = "from NoticeInfo";
+		String hql = "from NoticeInfo where id not in (select noticeId from NoticeReadInfo where userId = :userId)";
 		List<NoticeInfo> data = noticeInfoDao.findForPage(hql, values, pagination.getStartIndex(), pagination.getPageSize());
-		hql = "select count(*) from NoticeInfo";
+		hql = "select count(*) from NoticeInfo where id not in (select noticeId from NoticeReadInfo where userId = :userId)";
 		int totalRows = noticeInfoDao.findCountForPage(hql, values);
 		pagination.setTotalRows(totalRows);
 		pagination.setData(data);
