@@ -3,6 +3,7 @@ package cn.edu.jlu.ccst.service;
 
 import java.util.ArrayList;
 
+
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -14,10 +15,20 @@ import cn.edu.jlu.ccst.dao.Pre_historyServiceInter;
 import cn.edu.jlu.ccst.dao.Pre_historyServiceImpl;
 import cn.edu.jlu.ccst.model.Pre_dss;
 import cn.edu.jlu.ccst.model.Pre_history;
+/**
+ * 工艺实时数据历史服务类
 
+ */
 @Component("pre_historyService")
 public class Pre_historyService {
+	/**
+	 * 工艺实时数据历史实例
+
+	 */
 	private Pre_history pre_history;
+	/**
+	 * 工艺实时数据历史接口
+	 */
 	private Pre_historyServiceInter pre_historyServiceImpl;
 
 	
@@ -49,29 +60,46 @@ public class Pre_historyService {
 		
 		pre_historyServiceImpl.delete(pre_history);
 	}
-	
+	/**
+	 * 根据名称查找工艺实时数据历史
+	 * @return 工艺实时数据历史列表
+	 */
 	public List<Pre_history> findbyname(String name) {
 		List<Pre_history> resultlist = new ArrayList();
 		resultlist = pre_historyServiceImpl.findByname(name);
 		return resultlist;
 	}
-	
+	/**
+	 * 查找工艺实时数据历史
+	 * @return 工艺实时数据历史列表
+	 */
 	public List<Pre_history> findAll() {
 		List<Pre_history> resultlist = new ArrayList();
 		resultlist = pre_historyServiceImpl.findAll();
 		return resultlist;
 	}
+	/**
+	 * 根据批次查找工艺实时数据历史
+	 * @return 工艺实时数据历史列表
+	 */
 	public List<Pre_history> findBysimu_time() {
 		List<Pre_history> resultlist = new ArrayList();
 		resultlist = pre_historyServiceImpl.findBysimu_time();
 		return resultlist;
 	}
+	/**
+	 * 查找批次时间
+	 * @return 批次时间列表
+	 */
 	public List<String> findsimu_time() {
 		List<String> resultlist = new ArrayList();
 		resultlist = pre_historyServiceImpl.findsimu_time();
 		return resultlist;
 	}
+	/**
+	 * 保存工艺实时数据历史
 	
+	 */
 	public void saveall(List<Pre_dss> pds){
 		String simtime = "";
 		if(pds!=null&&pds.size()>0){

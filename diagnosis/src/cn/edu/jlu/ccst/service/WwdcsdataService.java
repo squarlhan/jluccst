@@ -15,10 +15,18 @@ import org.springframework.stereotype.Component;
 import cn.edu.jlu.ccst.dao.WwdcsdataServiceInter;
 import cn.edu.jlu.ccst.dao.WwdcsdataServiceImpl;
 import cn.edu.jlu.ccst.model.Wwdcsdata;
-
+/**
+ * dcs数据服务（旧）
+ */
 @Component("wwdcsService")
 public class WwdcsdataService {
+	/**
+	 * dcs数据实例
+	 */
 	private Wwdcsdata wwdcsdata;
+	/**
+	 * dcs数据服务接口
+	 */
 	private WwdcsdataServiceInter wwdcsServiceImpl;
 
 	public Wwdcsdata getWwdcsdata() {
@@ -48,10 +56,17 @@ public class WwdcsdataService {
 	 * 
 	 * @Resource public void setUser(User user) { this.user = user; }
 	 */
+	/**
+	 * 根据时间查找dcs数据（旧）
+	 * @return dcs数据
+	 */
 	public Wwdcsdata findbytime(Wwdcsdata wwdcsdata) {
 		return wwdcsServiceImpl.findbytime(wwdcsdata);
 	}
-
+	/**
+	 * 保存dcs数据
+	 
+	 */
 	public void save(Wwdcsdata wwdcsdata) {
 		// System.out.println("USER:"+user.getUsername()+" ; "+user.getPassword());
 		Date currentTime = new Date();

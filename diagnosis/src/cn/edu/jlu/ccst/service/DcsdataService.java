@@ -159,7 +159,10 @@ public class DcsdataService {
 		resultlist = dcsdataServiceImpl.findAll();
 		return resultlist;
 	}
-
+	/**
+	 * 根据dcs描述范围将输入参数数据更改为系统所用规则，如有超出正常范围，则根据俄条件显示相关故障报警以及建议原因，
+	 * 并且存入历史表以及故障日志中
+	 */
 	public BackwardandResult validateinput(Dcsdata dd) {
 		BackwardandResult br = null;
 		Errorlog err = null;
@@ -243,7 +246,10 @@ public class DcsdataService {
 
 		return br;
 	}
-
+	/**
+	 * 根据关键字获得所有工艺数据预处理
+	 * @return dcs数据列表
+	 */
 	public List<Dcsdata> getallgongyidatap(String keyword) {
 		List<Dcsdata> results = new ArrayList();
 		List<String> jiedians = treeunitServiceImpl.findallchild(keyword);
@@ -253,6 +259,10 @@ public class DcsdataService {
 		}
 		return results;
 	}
+	/**
+	 * 根据关键字获得所有工艺数据
+	 * @return 数据列表
+	 */
 	
 	public List<Dcsdata> getallgongyidata(String keyword) {
 		List<Dcsdata> results = new ArrayList();
@@ -306,7 +316,10 @@ public class DcsdataService {
 			}
 		
 	}
-	
+	/**
+	 * 根据关键字获得所有dcs数据预处理
+	 * @return 数据列表
+	 */
 	public List<Dcsdata> getalldcsddatap(String keyword) {
 		List<Dcsdata> results = new ArrayList();
 		List<String> jiedians = treeunitServiceImpl.findallchild(keyword);
@@ -316,7 +329,10 @@ public class DcsdataService {
 		}
 		return results;
 	}
-	
+	/**
+	 * 根据关键字获得所有dcs数据
+	 * @return 数据列表
+	 */
 	public List<Dcsdata> getalldcsddata(String keyword) {
 		List<Dcsdata> allresults = new ArrayList();
 		List<Dcsdata> results = new ArrayList();
@@ -359,7 +375,10 @@ public class DcsdataService {
 	
 	
 	
-	
+	/**
+	 * 根据关键字获得所有手动输入数据预处理
+	 * @return 数据列表
+	 */
 	
 	
 	public List<Dcsdata> getallgongyidatan(String keyword) {
@@ -411,7 +430,10 @@ public class DcsdataService {
 			return fliterresults;
 		
 	}
-	
+	/**
+	 * 根据关键字获得所有手动输入数据
+	 * @return 数据列表
+	 */
 	public List<Dcsdata> getalldcsddatan(String keyword) {
 		List<Dcsdata> allresults = new ArrayList();
 		List<Dcsdata> results = new ArrayList();

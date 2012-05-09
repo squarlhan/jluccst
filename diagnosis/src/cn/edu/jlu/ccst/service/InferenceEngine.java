@@ -1,6 +1,9 @@
 package cn.edu.jlu.ccst.service;
 
 import java.io.BufferedReader;
+/**
+ * 推理机服务类
+ */
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
@@ -15,9 +18,21 @@ import cn.edu.jlu.ccst.model.BackwardandReason;
 import cn.edu.jlu.ccst.model.BackwardandResult;
 @Component("inferenceEngine")
 public class InferenceEngine {
+	 /**
+	    *输入现象列表
+	    */
 	private  List<BackwardandResult> enter;
+	/**
+    *原因列表
+    */
 	private  List<BackwardandReason> process;
+	/**
+    *规则列表
+    */
 	private  List<Backward> backwardrule;
+	/**
+    *输出现象列表
+    */
 	private  List<BackwardandReason> ending;
 	
 
@@ -59,7 +74,9 @@ public class InferenceEngine {
 //		Inference("result to reason","step");
 
 	}
-	
+	/**
+    *推理过程主函数：选择推理方式进行推理
+    */
 	public  void Inference(String rule,String way){
 	ending = new ArrayList();
 		String temp;
@@ -78,7 +95,9 @@ public class InferenceEngine {
 			}
 		}
 	}
-	
+	/**
+    *单步推理过程：查找规则库进行规则匹配
+    */
 	public  boolean step(String rule){
 		//System.out.println("--------------------");
 		int count = 0;
