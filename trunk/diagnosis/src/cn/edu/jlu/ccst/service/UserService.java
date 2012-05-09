@@ -45,6 +45,7 @@ public User getUser() {
 	}
 	/**
 	 * 保存用户
+	 * @param user 用户实体
 	 */
 	public void save(User user) {
 		//System.out.println("USER:"+user.getUsername()+" ; "+user.getPassword());
@@ -61,6 +62,7 @@ public User getUser() {
 	}
 	/**
 	 * 判断用户是否存在
+	 * @param user 用户实体
 	 * @return 用户
 	 */
 	public User exits(User user){
@@ -72,6 +74,7 @@ public User getUser() {
 	}
 	/**
 	 * 判断管理员是否存在
+	 * @param user 用户实体
 	 * @return 管理员
 	 */
 	public User exitsadmin(User user){
@@ -83,6 +86,7 @@ public User getUser() {
 	}
 	/**
 	 * 判断专家是否存在
+	 * @param user 用户实体
 	 * @return 专家
 	 */
 	public User exitsprof(User user){
@@ -94,6 +98,7 @@ public User getUser() {
 	}
 	/**
 	 * 根据id查找用户
+	 * @param id id号
 	 * @return 用户
 	 */
 	public User findbyid(int id){
@@ -101,6 +106,7 @@ public User getUser() {
     }
 	/**
 	 * 根据用户名查找用户
+	 * @param user 用户实体
 	 * @return 用户
 	 */
 	public User findbyusername(User user){
@@ -108,6 +114,7 @@ public User getUser() {
 	}
 	/**
 	 * 根据id删除用户
+	 * @param id id号
 	 
 	 */
 	 public void removebyid(int id){
@@ -115,6 +122,7 @@ public User getUser() {
 	 }
 	 /**
 		 * 更新用户
+		 * @param user 用户实体
 		 * @return 用户
 		 */
 	 public void updateuser(User user){
@@ -122,6 +130,7 @@ public User getUser() {
 	 }
 	 /**
 		 * 搜索用户
+		 * @param user 用户实体
 		 * @return 用户
 		 */
 	 public List<User> search(User user) {

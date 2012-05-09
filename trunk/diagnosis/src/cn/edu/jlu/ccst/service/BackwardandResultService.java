@@ -43,6 +43,7 @@ public class BackwardandResultService {
 	}
 	/**
 	 * 根据现象查找规则原因
+	 * @param br 现象实体
 	 * @return 原因列表
 	 */
 	public List<BackwardandReason> findbyresult(BackwardandResult br){

@@ -76,6 +76,8 @@ public class InferenceEngine {
 	}
 	/**
     *推理过程主函数：选择推理方式进行推理
+    *@param rule 推理规则
+    *@param way 推理方式
     */
 	public  void Inference(String rule,String way){
 	ending = new ArrayList();
@@ -97,6 +99,7 @@ public class InferenceEngine {
 	}
 	/**
     *单步推理过程：查找规则库进行规则匹配
+    *@param rule 要匹配规则
     */
 	public  boolean step(String rule){
 		//System.out.println("--------------------");

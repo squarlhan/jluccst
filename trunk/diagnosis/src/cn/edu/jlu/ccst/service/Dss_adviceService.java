@@ -53,6 +53,7 @@ public class Dss_adviceService {
 	}
 	 /**
 	 *  保存工艺对接建议
+	 *  @param dss_advice 工艺对接建议实体
 		 */
 	public void save(Dss_advice dss_advice) {
 		List<Dss_advice> all = dss_adviceServiceImpl.findAll();

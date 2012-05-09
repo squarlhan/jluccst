@@ -121,6 +121,7 @@ public class DcsdataService {
 	}
 	/**
 	 * 保存dcs数据
+	 * @param dcsdata dcs数据实体
 	 */
 	public void save(Dcsdata dcsdata) {
 		
@@ -128,6 +129,7 @@ public class DcsdataService {
 	}
 	/**
 	 * 删除dcs数据
+	 *  @param dcsdata dcs数据实体
 	 */
 	public void delete(Dcsdata dcsdata) {
 
@@ -135,6 +137,7 @@ public class DcsdataService {
 	}
 	/**
 	 * 根据设备名称查找dcs数据
+	 * @param equipment 设备名称
 	 * @return dcs数据列表
 	 */
 	public List<Dcsdata> findbyequipment(String equipment) {
@@ -143,7 +146,9 @@ public class DcsdataService {
 		return resultlist;
 	}
 	/**
-	 * 根据参数超找dcs数据
+	 * 根据参数查找dcs数据
+	 * @param equipment 设备名称 
+	 * @param item 参数名称
 	 * @return dcs数据列表
 	 */
 	public List<Dcsdata> findbyitem(String equipment, String item) {
@@ -153,6 +158,7 @@ public class DcsdataService {
 	}
 	/**
 	 * 查找所有的dcs数据
+     * @return dcs数据列表
 	 */
 	public List<Dcsdata> findAll() {
 		List<Dcsdata> resultlist = new ArrayList();
@@ -162,8 +168,10 @@ public class DcsdataService {
 	/**
 	 * 根据dcs描述范围将输入参数数据更改为系统所用规则，如有超出正常范围，则根据俄条件显示相关故障报警以及建议原因，
 	 * 并且存入历史表以及故障日志中
+	 * @param dd dcs参数数据
+	 * @return 规则现象
 	 */
-	public BackwardandResult validateinput(Dcsdata dd) {
+	 	public BackwardandResult validateinput(Dcsdata dd) {
 		BackwardandResult br = null;
 		Errorlog err = null;
 		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -248,6 +256,7 @@ public class DcsdataService {
 	}
 	/**
 	 * 根据关键字获得所有工艺数据预处理
+	 * @param keyword 关键字
 	 * @return dcs数据列表
 	 */
 	public List<Dcsdata> getallgongyidatap(String keyword) {
@@ -260,7 +269,8 @@ public class DcsdataService {
 		return results;
 	}
 	/**
-	 * 根据关键字获得所有工艺数据
+	 * 根据关键字获得所有工艺数据	 
+	 *  @param keyword 关键字
 	 * @return 数据列表
 	 */
 	
@@ -318,6 +328,7 @@ public class DcsdataService {
 	}
 	/**
 	 * 根据关键字获得所有dcs数据预处理
+	 * @param keyword 关键字
 	 * @return 数据列表
 	 */
 	public List<Dcsdata> getalldcsddatap(String keyword) {
@@ -331,6 +342,7 @@ public class DcsdataService {
 	}
 	/**
 	 * 根据关键字获得所有dcs数据
+	 *  @param keyword 关键字
 	 * @return 数据列表
 	 */
 	public List<Dcsdata> getalldcsddata(String keyword) {
@@ -377,6 +389,7 @@ public class DcsdataService {
 	
 	/**
 	 * 根据关键字获得所有手动输入数据预处理
+	 *  @param keyword 关键字
 	 * @return 数据列表
 	 */
 	
@@ -432,6 +445,7 @@ public class DcsdataService {
 	}
 	/**
 	 * 根据关键字获得所有手动输入数据
+	 *  @param keyword 关键字
 	 * @return 数据列表
 	 */
 	public List<Dcsdata> getalldcsddatan(String keyword) {

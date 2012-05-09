@@ -130,7 +130,8 @@ public class RuleBRService {
 		return result;
 	}
 	/**
-	 * 查找对应名词预处理
+	 * 根据树形节点查找对应名词预处理
+	 * @param unit 树形节点
 	 *  @return 相应名词
 	 */
 	public Map getbynvsp(String unit) {
@@ -149,7 +150,8 @@ public class RuleBRService {
 	}
 	/**
 	 * 查找对应名词
-	 *  @return 相应名词
+	 * @param noun 规则名词
+	 *  @return 相应名词对照
 	 */
 	public Map getbynvs(String noun) {
 		Map result = new HashMap();

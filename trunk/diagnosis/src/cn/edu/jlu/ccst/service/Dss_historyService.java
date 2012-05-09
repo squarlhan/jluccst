@@ -75,6 +75,7 @@ public TreeunitServiceInter getTreeunitServiceImpl() {
 	}
     /**
      * 根据名称查找工艺历史数据服务类
+     * @param name 设备名称
      * @return 工艺历史数据列表 
      */
 	public List<Dss_history> findbyname(String name) {
@@ -95,6 +96,7 @@ public TreeunitServiceInter getTreeunitServiceImpl() {
 	}
 	/**
      * 根据参数查找工艺历史数据服务类
+     * @param para 参数名称
      * @return 工艺历史数据列表 
      */
 	 public List<Dss_history> findbypara(String para){
@@ -106,6 +108,7 @@ public TreeunitServiceInter getTreeunitServiceImpl() {
 	  }
 	 /**
 	     * 根据树形节点名称查找工艺历史数据服务类
+	     * @param unit 树形节点名称
 	     * @return 工艺历史数据列表 
 	     */
 	 public List<Dss_history> findbyunit(String unit){

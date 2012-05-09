@@ -47,6 +47,7 @@ public class DcshistoryService {
 	}
     /**
      * 保存dcs历史数据 
+     * @param dcshistory dcs历史数据实体
      */
 	public void save(Dcshistory dcshistory) {
 	
