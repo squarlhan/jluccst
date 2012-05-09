@@ -191,7 +191,7 @@ public class ErrorlogService {
 	}
 	 /**
 	    *将规则转化存入故障日志中
-	    *@param errorlog 故障日志实体
+	    *@param Dcsdata 故障日志实体
 	    */
 	public String validateinput(Dcsdata Dcsdata) {
 		List<DcsDscrib> dcsDscribs = dcsDscribServiceImpl.findbyname(Dcsdata.getEquipment(), Dcsdata.getItem());

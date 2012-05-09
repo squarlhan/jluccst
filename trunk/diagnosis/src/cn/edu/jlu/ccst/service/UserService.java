@@ -123,7 +123,6 @@ public User getUser() {
 	 /**
 		 * 更新用户
 		 * @param user 用户实体
-		 * @return 用户
 		 */
 	 public void updateuser(User user){
 		  userServiceImpl.updateUser(user);

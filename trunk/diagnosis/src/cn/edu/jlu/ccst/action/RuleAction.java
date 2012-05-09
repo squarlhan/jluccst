@@ -257,7 +257,7 @@ public class RuleAction extends ActionSupport {
 	}
 /**
  * 得到所有规则
- * @return
+ * @return 规则列表页面
  */
 	public String getall() {
 		if (checkprof()) {
@@ -307,14 +307,14 @@ public class RuleAction extends ActionSupport {
 
 /**
  * 跳转到添加页面
- * @return
+ * @return 添加规则页面
  */
 	public String justgo() {
 		return "gogogo";
 	}
 	/**
 	 * 跳转到查看规则详细信息页面
-	 * @return
+	 * @return 查看规则详细信息页面
 	 */
 	public String godetail() {
 		rule = ruleService.find(rule);

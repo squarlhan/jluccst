@@ -243,7 +243,7 @@ public class DcsDscribService {
 	 }
 	/**
 	 * 保存dcs数据
-	 *  @param id id号
+	 *  @param dcsDscrib id号
 	 */
 	public void save(DcsDscrib dcsDscrib) {
 		dcsDscribServiceImpl.save(dcsDscrib);
@@ -280,7 +280,7 @@ public class DcsDscribService {
 	}
 	/**
 	 * 根据dcs描述将输入数据转化成规则现象
-	 * @param map映射实体
+	 * @param map 映射实体
 	 * @return 现象列表
 	 */
 	public List<BackwardandResult> validateinput(Map map) {

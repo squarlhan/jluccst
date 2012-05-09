@@ -34,7 +34,7 @@ public interface DcsDscribServiceInter {
 	public List<DcsDscrib> findbyitem(int item) ;
 	/**
 	 * 通过设备名和参数名查找参数描述
-	 * @param name 设备名
+	 * @param eque 设备名
 	 * @param item 参数名
 	 * @return 参数描述列表
 	 */
