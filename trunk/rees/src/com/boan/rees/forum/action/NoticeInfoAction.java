@@ -57,12 +57,12 @@ public class NoticeInfoAction extends BaseActionSupport {
 	@Qualifier("noticeInfoService")
 	private INoticeInfoService noticeInfoService;
 	
-//	/**
-//	 * 用于调用数据库相关操作
-//	 */
-//	@Autowired
-//	@Qualifier("noticeReadInfoService")
-//	private INoticeReadInfoService noticeReadInfoService;
+	/**
+	 * 用于调用数据库相关操作
+	 */
+	@Autowired
+	@Qualifier("noticeReadInfoService")
+	private INoticeReadInfoService noticeReadInfoService;
 	
 	
 	/**
@@ -135,7 +135,7 @@ public class NoticeInfoAction extends BaseActionSupport {
 		noticeReadInfo.setNoticeId( noticeId );
 		noticeReadInfo.setUserId( this.sessionUserId );
 		
-		//noticeReadInfoService.save( noticeReadInfo );
+		noticeReadInfoService.save( noticeReadInfo );
 		//显示通知内容
 		noticeInfo = noticeInfoService.get( noticeId );
 		return SUCCESS;
