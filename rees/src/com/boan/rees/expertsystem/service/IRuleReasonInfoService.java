@@ -46,9 +46,9 @@ public interface IRuleReasonInfoService {
 	public Pagination<RuleReasonInfo> findRuleReasonInfoForPage(Map<String, ?> values,Pagination<RuleReasonInfo> pagination);
 	
 	/**
-	 * 根据设备类型id查找原因
+	 * 根据id查找原因(HQL)
 	 */
-	//public RuleReasonInfo findbyDeviceTypeId(String id);
+	public RuleReasonInfo getbyId(int id);
 }
 
 

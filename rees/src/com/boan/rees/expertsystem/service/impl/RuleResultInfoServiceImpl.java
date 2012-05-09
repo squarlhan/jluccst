@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.boan.rees.expertsystem.dao.IRuleResultInfoDao;
+import com.boan.rees.expertsystem.model.RuleReasonInfo;
 import com.boan.rees.expertsystem.model.RuleResultInfo;
 import com.boan.rees.expertsystem.service.IRuleResultInfoService;
 import com.boan.rees.utils.page.Pagination;
@@ -75,6 +76,11 @@ public class RuleResultInfoServiceImpl implements IRuleResultInfoService{
 		params.put("deviceTypeId", deviceTypeId);
 		List<RuleResultInfo> list = ruleResultInfoDao.find( hql , params);
 		return list;
+	}
+	
+	@Override
+	public RuleResultInfo getbyId(int id){
+		return ruleResultInfoDao.getbyid(id);
 	}
 
 }

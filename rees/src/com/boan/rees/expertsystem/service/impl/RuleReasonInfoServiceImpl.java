@@ -70,8 +70,11 @@ public class RuleReasonInfoServiceImpl implements IRuleReasonInfoService{
 		return pagination;
 	}
 	//public RuleReasonInfo findbyDeviceTypeId(String id){
-		
-	//}
+	@Override
+	public RuleReasonInfo getbyId(int id){
+		return ruleReasonInfoDao.getbyid(id);
+	}
+	
 
 }
 

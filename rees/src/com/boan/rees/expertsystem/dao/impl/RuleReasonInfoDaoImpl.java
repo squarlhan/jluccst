@@ -4,10 +4,10 @@
 
 package com.boan.rees.expertsystem.dao.impl;
 
+import org.hibernate.Query;
 import org.springframework.stereotype.Repository;
 
 import com.boan.rees.expertsystem.dao.IRuleReasonInfoDao;
-import com.boan.rees.expertsystem.model.RuleAdviceInfo;
 import com.boan.rees.expertsystem.model.RuleReasonInfo;
 import com.boan.rees.utils.dao.impl.BaseDao;
 
@@ -23,5 +23,16 @@ public class RuleReasonInfoDaoImpl extends BaseDao<RuleReasonInfo,Integer> imple
 	public RuleReasonInfo get(int id) {
 		return (RuleReasonInfo) getSession().load(entityClass, id);
 	}
-}
+	/**
+	 * 根据id查找原因
+	 * @param id id号
+	 * @return 原因实体
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public RuleReasonInfo getbyid(int id) {
+	Query query = getSession().createQuery("from  RuleReasonInfo  where id =:id");
+	query.setParameter("id", id);
+	return (RuleReasonInfo)query.uniqueResult();
+}}
 

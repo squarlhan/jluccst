@@ -4,10 +4,12 @@
 
 package com.boan.rees.expertsystem.dao.impl;
 
+import org.hibernate.Query;
 import org.springframework.stereotype.Repository;
 
 import com.boan.rees.expertsystem.dao.IRuleResultInfoDao;
 import com.boan.rees.expertsystem.model.RuleAdviceInfo;
+import com.boan.rees.expertsystem.model.RuleReasonInfo;
 import com.boan.rees.expertsystem.model.RuleResultInfo;
 import com.boan.rees.utils.dao.impl.BaseDao;
 
@@ -23,5 +25,17 @@ public class RuleResultInfoDaoImpl extends BaseDao<RuleResultInfo, Integer> impl
 	public RuleResultInfo get(int id) {
 		return (RuleResultInfo) getSession().load(entityClass, id);
 	}
+	/**
+	 * 根据id查找现象
+	 * @param id id号
+	 * @return 现象实体
+	 */
+	@SuppressWarnings("unchecked")
+	@Override
+	public RuleResultInfo getbyid(int id) {
+	Query query = getSession().createQuery("from  RuleResultInfo  where id =:id");
+	query.setParameter("id", id);
+	return (RuleResultInfo)query.uniqueResult();
+}
 }
 
