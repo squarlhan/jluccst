@@ -55,6 +55,9 @@ $( document ).ready( function() {
 	$.fn.notice();
 	//定时获得通知
 	window.setInterval("$.fn.notice()",15000);
+	$("#message_close").click(function(){
+		$("#message").hide();
+	});
 });
 /**
  * 初始化页面
@@ -74,8 +77,11 @@ $.fn.initpage = function(){
 **/
 $.fn.notice = function(){
 	$.post("getNewNoticeCounts.action", function(text){
-		if(text!=0)
-			$.messager.show('<font color=red><strong>论坛通知</strong></font>', '<font color=green style="font-size:12px;font-weight:bold;"><a href="notice/noticemanage.jsp" target="mainFrame">有'+text+' 条新的通知，请注意查看！！！</a></font>');
+		if(text!=0){
+			$("#message_title").html('论坛通知');
+			$("#message_content").html('<font color=green style="font-size:12px;font-weight:bold;"><a href="notice/noticemanage.jsp" target="mainFrame">有'+text+' 条新的通知，请注意查看！！！</a></font>');
+			$("#message").show();
+		}
 	});
 };
 //-->
@@ -83,6 +89,16 @@ $.fn.notice = function(){
 </head>
 <body>
 <input type="hidden" name="path" id="path" value="<%=path%>"/>
+<div id="message" style="border:#b9c9ef 1px solid;z-index:999999;width:200px;position:absolute; display:none; background:#cfdef4; bottom:0; right:0; overflow:hidden;">
+	<div style="border:1px solid #fff;border-bottom:none;width:100%;height:25px;font-size:12px;overflow:hidden;color:#1f336b;">
+		<span id="message_close" style="float:right;padding:5px 0 5px 0;width:16px;line-height:auto;color:red;font-size:12px;font-weight:bold;text-align:center;cursor:pointer;overflow:hidden;">×</span>
+		<div id="message_title" style="padding:5px 0 5px 5px;width:100px;line-height:18px;text-align:left;overflow:hidden;">#title</div>
+		<div style="clear:both;"></div>
+	</div>
+	<div style="padding-bottom:5px;border:1px solid #fff;border-top:none;width:100%;height:auto;font-size:12px;">
+		<div id="message_content" style="margin:0 5px 0 5px;border:#b9c9ef 1px solid;padding:10px 0 10px 5px;font-size:12px;width:'+(200-17)+'px;height:'+(100-50)+'px;color:#1f336b;text-align:left;overflow:hidden;">#text</div>
+	</div>
+</div>
 <iframe id="topFrame" name="topFrame" class="ui-layout-north" src="${pageContext.request.contextPath}/logonTopAction.action" frameborder="0" scrolling="no"></iframe>
 <iframe id="leftFrame" name="leftFrame" class="ui-layout-west" src="${pageContext.request.contextPath}/sysmenu.action" width="100%" height="100%" frameborder="0" scrolling="no"></iframe>
 <iframe id="mainFrame" name="mainFrame" class="ui-layout-center" src="${pageContext.request.contextPath}/blank.jsp" frameborder="0" scrolling="no"></iframe>
