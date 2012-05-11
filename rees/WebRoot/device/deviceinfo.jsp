@@ -221,9 +221,9 @@
 								if( data.deviceType.id!=null){
 									var typeId = data.deviceType.id;
 									var typeName = data.deviceType.typeName;
-									var centerHeight = data.deviceType.centerHeight;
-									var speed = data.deviceType.speed;
-									var power = data.deviceType.power;
+									var centerHeight = data.deviceType.centerHeight==null ? "" :data.deviceType.centerHeight;
+									var speed = data.deviceType.speed==null ? "" :data.deviceType.speed;
+									var power = data.deviceType.power==null ? "" :data.deviceType.power;
 									var pointNaturalValue = data.deviceType.pointNaturalValue;
 									var pointWarnValue = data.deviceType.pointWarnValue;
 
