@@ -255,7 +255,7 @@
 										</td>
 										<td bgcolor="#FFFFFF">
 											<s:hidden id="centerHeightAndSpeedId" name="centerHeightAndSpeedId"></s:hidden>
-											<s:textfield id="txt_centerHeight" name="centerHeightExpression" maxlength="25" cssStyle="width: 150px;" title="格式为：10<H<=100"/>
+											<s:textfield id="txt_centerHeight" name="centerHeightExpression" maxlength="25" cssStyle="width: 150px;ime-mode:disabled;" title="格式为：10<H<=100"/>
 										</td>
 										<td rowspan="2" bgcolor="#FFFFFF">
 											<s:if test="#centerHeightAndSpeed.index+1==1">
@@ -274,7 +274,7 @@
 											<strong>转速(S)：</strong>
 										</td>
 										<td bgcolor="#FFFFFF">
-											<s:textfield id="txt_speed" name="speedExpression" maxlength="25" cssStyle="width: 150px;"  title="格式为：10<S<=100"/>
+											<s:textfield id="txt_speed" name="speedExpression" maxlength="25" cssStyle="width: 150px;ime-mode:disabled;"  title="格式为：10<S<=100"/>
 										</td>
 									</tr>
 									</s:iterator>

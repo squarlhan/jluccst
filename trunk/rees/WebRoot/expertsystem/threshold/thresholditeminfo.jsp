@@ -166,7 +166,7 @@
 											<strong>阈值项区间：</strong>
 										</td>
 										<td height="26" align="left" bgcolor="#FFFFFF">
-											<s:textfield id="txt_thresholdItemExpression" name="thresholdItem.thresholdItemExpression" maxlength="25" cssStyle="width: 250px;" title="区间格式如： 0<X<100 ,X为阈值项名称"/><font color="red">*</font>
+											<s:textfield id="txt_thresholdItemExpression" name="thresholdItem.thresholdItemExpression" maxlength="25" cssStyle="width: 250px;ime-mode:disabled;" title="区间格式如： 0<X<100 ,X为阈值项名称"/><font color="red">*</font>
 											<br>
 											<font size="1px" color="red">区间格式如： 0&lt; X&lt; 100 ,X为阈值项名称</font>
 										</td>
