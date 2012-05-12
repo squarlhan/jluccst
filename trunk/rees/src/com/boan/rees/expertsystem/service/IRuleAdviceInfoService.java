@@ -50,7 +50,8 @@ public interface IRuleAdviceInfoService {
 	/**
 	 * 根据设备类型id查找建议
 	 */
-	//public RuleAdviceInfo findbyDeviceTypeId(String id);
+	public List<RuleAdviceInfo> findRuleAdviceInfoByDeviceTypeId(String deviceTypeId);
+	
 	/**
 	 * 根据id查找建议(HQL)
 	 */

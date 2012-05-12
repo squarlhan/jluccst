@@ -7,6 +7,7 @@ package com.boan.rees.expertsystem.service;
 import java.util.List;
 import java.util.Map;
 
+import com.boan.rees.expertsystem.model.RuleAdviceInfo;
 import com.boan.rees.expertsystem.model.RuleReasonInfo;
 import com.boan.rees.utils.page.Pagination;
 
@@ -49,6 +50,11 @@ public interface IRuleReasonInfoService {
 	 * 根据id查找原因(HQL)
 	 */
 	public RuleReasonInfo getbyId(int id);
+	
+	/**
+	 * 根据设备类型id查找原因
+	 */
+	public List<RuleReasonInfo> findRuleReasonInfoByDeviceTypeId(String deviceTypeId);
 }
 
 
