@@ -4,6 +4,7 @@
 
 package com.boan.rees.expertsystem.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -11,13 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import com.boan.rees.demo.model.DemoModel;
-import com.boan.rees.device.model.PointDataInfo;
 import com.boan.rees.expertsystem.dao.IRuleAdviceInfoDao;
 import com.boan.rees.expertsystem.model.RuleAdviceInfo;
-import com.boan.rees.expertsystem.model.RuleReasonInfo;
 import com.boan.rees.expertsystem.service.IRuleAdviceInfoService;
-import com.boan.rees.report.model.PersonReport;
 import com.boan.rees.utils.page.Pagination;
 
 /**
@@ -79,6 +76,15 @@ public class RuleAdviceInfoServiceImpl implements IRuleAdviceInfoService{
 	@Override
 	public RuleAdviceInfo getbyId(int id){
 		return ruleAdviceInfoDao.getbyid(id);
+	}
+
+	@Override
+	public List<RuleAdviceInfo> findRuleAdviceInfoByDeviceTypeId(String deviceTypeId) {
+		String hql = "from RuleAdviceInfo where deviceTypeId=:deviceTypeId";
+		Map<String, String>  values = new HashMap<String, String>();
+		values.put("deviceTypeId", deviceTypeId);
+		List<RuleAdviceInfo> data = ruleAdviceInfoDao.find(hql, values);
+		return data;
 	}
 }
 

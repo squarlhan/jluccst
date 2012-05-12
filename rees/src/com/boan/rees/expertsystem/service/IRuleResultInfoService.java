@@ -56,8 +56,6 @@ public interface IRuleResultInfoService {
 	 */
 	public List<RuleResultInfo> findRuleResultInfoByDeviceTypeId(String deviceTypeId);
 
-
-
 	/**
 	 * 根据id查找现象(HQL)
 	 */

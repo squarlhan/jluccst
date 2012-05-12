@@ -4,6 +4,7 @@
 
 package com.boan.rees.expertsystem.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.boan.rees.expertsystem.dao.IRuleReasonInfoDao;
+import com.boan.rees.expertsystem.model.RuleAdviceInfo;
 import com.boan.rees.expertsystem.model.RuleReasonInfo;
 import com.boan.rees.expertsystem.service.IRuleReasonInfoService;
 import com.boan.rees.utils.page.Pagination;
@@ -73,6 +75,16 @@ public class RuleReasonInfoServiceImpl implements IRuleReasonInfoService{
 	@Override
 	public RuleReasonInfo getbyId(int id){
 		return ruleReasonInfoDao.getbyid(id);
+	}
+
+	@Override
+	public List<RuleReasonInfo> findRuleReasonInfoByDeviceTypeId(
+			String deviceTypeId) {
+		String hql = "from RuleReasonInfo where deviceTypeId=:deviceTypeId";
+		Map<String, String>  values = new HashMap<String, String>();
+		values.put("deviceTypeId", deviceTypeId);
+		List<RuleReasonInfo> data = ruleReasonInfoDao.find(hql, values);
+		return data;
 	}
 	
 
