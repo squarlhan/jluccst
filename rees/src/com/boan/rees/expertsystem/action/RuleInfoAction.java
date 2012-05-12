@@ -221,6 +221,7 @@ public class RuleInfoAction extends BaseActionSupport{
 	 */
 	public String openRuleInfo(){
 		pagination = service.findRuleInfoForPage( new HashMap(), pagination);
+		
 		List<RuleInfo> temp = pagination.getData();
 		for(int i=0;i<temp.size();i++){
 			RuleInfo obj = temp.get(i);

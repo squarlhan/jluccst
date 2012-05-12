@@ -39,5 +39,11 @@
     	<action name="toDeleteResultAction" class="ruleInfoAction" method="toDeleteResult"/>
       </package>	    
       
+      <!-- ajax异步调用返回Action为json对象 -->
+      <package name="rule_info_ajax" extends="json-default" namespace="/">
+		<action name="getDeviceTypeCascadeInfoAction" class="ruleInfoAction" method="getDeviceTypeCascadeInfo">
+            <result type="json" name="deviceTypeCascadeInfo"></result>
+        </action>
+	</package>	
 	
 </struts>
