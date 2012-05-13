@@ -74,7 +74,7 @@ public class ErrorLog implements Serializable{
 	 * 故障阈值
 	 */
 	@Column(name="ERROR_THRESH")
-	private Float errorThresh;
+	private String errorThresh;
 	
 	/**
 	 * 故障现象
@@ -94,11 +94,27 @@ public class ErrorLog implements Serializable{
 	@Column(name="OPINION")
 	private String opinion;
 	
-	 /**
+	/**
 	  * 解除标识 0：未解除1：已解除
 	  */
 	@Column(name="ISREMOVE")
 	private Integer isRemove;
+	
+	/**
+	  * 解除标识 0：未解除1：已解除
+	  */
+	@Column(name="ISALARM")
+	private Integer isAlarm = 0;
+	
+	public Integer getIsAlarm()
+	{
+		return isAlarm;
+	}
+
+	public void setIsAlarm( Integer isAlarm )
+	{
+		this.isAlarm = isAlarm;
+	}
 
 	public Integer getIsRemove() {
 		return isRemove;
@@ -164,11 +180,11 @@ public class ErrorLog implements Serializable{
 		this.errorData = errorData;
 	}
 
-	public Float getErrorThresh() {
+	public String getErrorThresh() {
 		return errorThresh;
 	}
 
-	public void setErrorThresh(Float errorThresh) {
+	public void setErrorThresh(String errorThresh) {
 		this.errorThresh = errorThresh;
 	}
 
