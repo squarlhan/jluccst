@@ -41,7 +41,7 @@
 		<script type="text/javascript">
  		$(document).ready(function(){
 			$("#addBtn").click(function(){
-				form1.action = "toAddErrorLogAction.action";
+				form1.action = "toSetIsRemoveAction.action";
 				form1.submit();		
 			});
 		});
@@ -60,48 +60,48 @@
 							<table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#d5e4fd">
 								<tr>
 									<td height="26" align="right" bgcolor="#FFFFFF">
-										<strong>设备编号：</strong>
+										<strong>报警数据：</strong>
 									</td>
 									<td height="26" align="left" bgcolor="#FFFFFF">
-										<s:textfield id="txt_deviceNum" name="errorLog.deviceNum" maxlength="25" cssStyle="width: 250px;"/>
+										<s:textfield id="txt_deviceNum" name="errorLog.errorData" maxlength="25" cssStyle="width: 250px;"/>
 									</td>
 								</tr>
 								<tr>
 									<td height="26" align="right" bgcolor="#FFFFFF">
-										<strong>设备名称：</strong>
+										<strong>故障阈值：</strong>
 									</td>
 									<td height="26" align="left" bgcolor="#FFFFFF">
-										<s:textfield id="txt_deviceName" name="errorLog.deviceName" maxlength="25" cssStyle="width: 250px;"/>
+										<s:textfield id="txt_deviceName" name="errorLog.errorThresh" maxlength="25" cssStyle="width: 250px;"/>
 									</td>
 								</tr>
 								<tr>
 									<td height="26" align="right" bgcolor="#FFFFFF">
-										<strong>部门名称：</strong>
+										<strong>故障现象：</strong>
 									</td>
 									<td height="26" align="left" bgcolor="#FFFFFF">
-										<s:textfield id="txt_deptName" name="errorLog.deptName" maxlength="25" cssStyle="width: 250px;"/>
+										<s:textfield id="txt_deptName" name="errorLog.errorPhen" maxlength="25" cssStyle="width: 250px;"/>
 									</td>
 								</tr>
 								<tr>
 									<td height="26" align="right" bgcolor="#FFFFFF">
-										<strong>故障时间：</strong>
+										<strong>故障原因：</strong>
 									</td>
 									<td height="26" align="left" bgcolor="#FFFFFF">
-										<s:textfield id="txt_errorTime" name="errorLog.errorTime" onClick="WdatePicker()" maxlength="25" cssClass="Wdate" cssStyle="width: 250px;"/>
+										<s:textfield id="txt_errorTime" name="errorLog.errorReason" cssStyle="width: 250px;"/>
 									</td>
 								</tr>
 								<tr>
 									<td height="26" align="right" bgcolor="#FFFFFF">
-										<strong>是否解除：</strong>
+										<strong>专家意见：</strong>
 									</td>
 									<td height="26" align="left" bgcolor="#FFFFFF">
-										<s:textfield id="txt_isRemove" name="errorLog.isRemove" maxlength="25" cssStyle="width: 250px;"/>
+										<s:textfield id="txt_errorTime" name="errorLog.opinion" cssStyle="width: 250px;"/>
 									</td>
 								</tr>
 								<tr>
 									<td height="26" colspan="2" align="center" bgcolor="#FFFFFF">
 										&nbsp;&nbsp;
-										<input id="addBtn" name="addBtn" type="button" value="确定" class="btn_2_3"/>
+										<input id="addBtn" name="addBtn" type="button" value="解除报警" class="btn_2_3"/>
 									</td>
 								</tr>
 							</table>

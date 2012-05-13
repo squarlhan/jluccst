@@ -61,6 +61,19 @@
 				}
 			});
 		});
+		/**
+  		 * 查看信息
+  		 */
+  		$('a[name="edit"]').each(function(){
+  			$(this).click(function(){
+  				var url = $(this).attr("url");
+  				parent.parent.parent.tipsWindown("查看报警信息","iframe:"+url,"460","350","true","","true","no");
+  				//window.location.href=window.location.href;
+  				parent.parent.$("#windown-close").bind('click',function(){
+					window.location.href=window.location.href;
+				});
+  			});
+  		});
   	});
 		</script>
 
@@ -70,14 +83,14 @@
 <table width="100%" style="height:100%;" border="0" cellspacing="5" cellpadding="0">
   <tr>
     <td valign="top">
-    <table width="100%" border="0" cellspacing="5" cellpadding="0">
+    <!-- table width="100%" border="0" cellspacing="5" cellpadding="0">
       <tr>
         <td>
 		    <input name="addbtn" type="button" class="btn_4" id="addbtn" value="添加" >
         </td>
         <td align="right"></td>
       </tr>
-    </table>
+    </table> -->
       <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#d5e4fd">
         <tr>
           <td width="16%" align="center" background="../images/headerbg.jpg"><strong>设备编号</strong></td>
@@ -108,7 +121,11 @@
           <td height="26" align="center" bgcolor="#FFFFFF">
           	<s:date  name="removeTime" format="yyyy-MM-dd" />&nbsp;
           </td>
-		  <td height="26" colspan="2" align="center" bgcolor="#FFFFFF">			
+		  <td height="26" colspan="2" align="center" bgcolor="#FFFFFF">
+		  	 <s:url id="edit_url" action="openAddErrorLogAction">   
+				<s:param name="errorLog.id" value="id"></s:param>   
+			      </s:url>
+         	  <a name="edit" href="javascript:void(0);" url="${edit_url}">查看警报</a>
 			<s:url id="remove_url" action="toSetIsRemoveAction">   
 				<s:param name="errorLog.id" value="id"></s:param>   
 			</s:url>
