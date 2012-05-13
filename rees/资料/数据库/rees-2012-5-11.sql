@@ -324,3 +324,8 @@
 
     INSERT INTO `GROUP_USER` VALUES ('1', NULL, NULL, 0, NULL, NULL, NULL, 'b59c67bf196a4758191e42f76670ceba', NULL, NULL, NULL, 0, '超级管理员', 9, 'admin', NULL);
     
+    CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `advice_view` AS select `rule_advice_info`.`ADVICE_ID` AS `ADVICE_ID`,`rule_advice_info`.`ADVICE` AS `ADVICE`,`rule_advice_info`.`DEVICE_TYPE_ID` AS `DEVICE_TYPE_ID`,`device_type`.`DEVICE_TYPE` AS `DEVICE_TYPE`,`device_type`.`ID` AS `ID` from (`rule_advice_info` join `device_type`) where (`device_type`.`ID` = `rule_advice_info`.`DEVICE_TYPE_ID`);
+    CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `reason_view` AS select `rule_reason_info`.`REASON_ID` AS `REASON_ID`,`rule_reason_info`.`REASON` AS `REASON`,`rule_reason_info`.`DEVICE_TYPE_ID` AS `DEVICE_TYPE_ID`,`device_type`.`DEVICE_TYPE` AS `DEVICE_TYPE` from (`rule_reason_info` join `device_type`) where (`device_type`.`ID` = `rule_reason_info`.`DEVICE_TYPE_ID`);
+    CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `result_view` AS select `rule_result_info`.`RESULT_ID` AS `RESULT_ID`,`rule_result_info`.`RESULT` AS `RESULT`,`rule_result_info`.`DEVICE_TYPE_ID` AS `DEVICE_TYPE_ID`,`device_type`.`DEVICE_TYPE` AS `DEVICE_TYPE` from (`rule_result_info` join `device_type`) where (`device_type`.`ID` = `rule_result_info`.`DEVICE_TYPE_ID`);
+    
+    
