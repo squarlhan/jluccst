@@ -192,7 +192,7 @@
 												<img src="images/menuto.jpg" width="5" height="5" />
 											</td>
 											<td>
-												<a href="errorLog/errorlogmanage.jsp?category=1" target="mainFrame">报警管理</a>
+												<a href="errorlog/errorlogmanage.jsp?category=1" target="mainFrame">报警管理</a>
 											</td>
 										</tr>
 									</table>
@@ -206,7 +206,7 @@
 												<img src="images/menuto.jpg" width="5" height="5" />
 											</td>
 											<td>
-												<a href="errorLog/errorlogmanage.jsp?category=2" target="mainFrame">报警日志</a>
+												<a href="errorlog/errorlogmanage.jsp?category=2" target="mainFrame">报警日志</a>
 											</td>
 										</tr>
 									</table>
