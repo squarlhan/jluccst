@@ -10,10 +10,28 @@ Target Server Type    : MYSQL
 Target Server Version : 50516
 File Encoding         : 65001
 
-Date: 2012-04-26 21:10:43
+Date: 2012-05-13 15:19:57
 */
 
 SET FOREIGN_KEY_CHECKS=0;
+-- ----------------------------
+-- Table structure for `centerheight_and_speed`
+-- ----------------------------
+DROP TABLE IF EXISTS `centerheight_and_speed`;
+CREATE TABLE `centerheight_and_speed` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
+  `Center_Height_Expression` varchar(255) DEFAULT NULL,
+  `Speed_Expression` varchar(255) DEFAULT NULL,
+  `Threshold_Id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`Id`),
+  KEY `FKB691091C2B29C763` (`Threshold_Id`),
+  CONSTRAINT `FKB691091C2B29C763` FOREIGN KEY (`Threshold_Id`) REFERENCES `threshold` (`Threshold_Id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of centerheight_and_speed
+-- ----------------------------
+
 -- ----------------------------
 -- Table structure for `device_info`
 -- ----------------------------
@@ -41,20 +59,21 @@ CREATE TABLE `device_info` (
   `POINT_NATURAL_VALUE` decimal(19,2) DEFAULT NULL,
   `POINT_WARN_VALUE` decimal(19,2) DEFAULT NULL,
   `WORKSHOP_ID` varchar(255) DEFAULT NULL,
+  `COMPANY_ID` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of device_info
 -- ----------------------------
-INSERT INTO `device_info` VALUES ('402881e4363922bf01363923943b0000', '', '6', '6', '6', '6', '', '6', null, null, null, '1', '1', null, null, null, null, null, null, null, null, null);
-INSERT INTO `device_info` VALUES ('402881e4363922bf0136392394440001', '6', '6', '6', '6', '6', 'http://6.com', '6', null, null, null, '1', '1', null, null, null, null, null, null, null, null, null);
-INSERT INTO `device_info` VALUES ('402881e436477c8e0136477e18d20000', '', '6', '6', '6', '6', 'http://6.com', '6', null, null, null, '1', '1', null, null, null, null, null, null, null, null, null);
-INSERT INTO `device_info` VALUES ('402881e436477c8e0136477e18d20001', '', '6', '6', '6', '6', 'http://6.com', '6', null, null, null, '1', '1', null, null, null, null, null, null, null, null, null);
-INSERT INTO `device_info` VALUES ('402881e436477c8e01364780a1050002', '4', '4', '4', '4', '4', '', '0', null, null, null, '1', '1', null, null, null, null, null, null, null, null, null);
-INSERT INTO `device_info` VALUES ('402881e436477c8e01364780a1150003', '4', '4', '4', '4', '4', '', '0', null, null, null, '1', '1', null, null, null, null, null, null, null, null, null);
-INSERT INTO `device_info` VALUES ('402881f636249bff013624a666eb0000', '33', '33', '33', '3', '3', '3', '3', null, null, null, '1', '1', null, null, null, null, null, null, null, null, null);
-INSERT INTO `device_info` VALUES ('402881f63628b41a013628c0d4320000', '1', '1', '1', '1', '1', '1', '1', null, null, null, '1', '1', null, null, null, null, null, null, null, null, null);
+INSERT INTO `device_info` VALUES ('402881e4363922bf01363923943b0000', '', '6', '6', '6', '6', '', '6', null, null, null, '1', '1', null, null, null, null, null, null, null, null, null, null);
+INSERT INTO `device_info` VALUES ('402881e4363922bf0136392394440001', '6', '6', '6', '6', '6', 'http://6.com', '6', null, null, null, '1', '1', null, null, null, null, null, null, null, null, null, null);
+INSERT INTO `device_info` VALUES ('402881e436477c8e0136477e18d20000', '', '6', '6', '6', '6', 'http://6.com', '6', null, null, null, '1', '1', null, null, null, null, null, null, null, null, null, null);
+INSERT INTO `device_info` VALUES ('402881e436477c8e0136477e18d20001', '', '6', '6', '6', '6', 'http://6.com', '6', null, null, null, '1', '1', null, null, null, null, null, null, null, null, null, null);
+INSERT INTO `device_info` VALUES ('402881e436477c8e01364780a1050002', '4', '4', '4', '4', '4', '', '0', null, null, null, '1', '1', null, null, null, null, null, null, null, null, null, null);
+INSERT INTO `device_info` VALUES ('402881e436477c8e01364780a1150003', '4', '4', '4', '4', '4', '', '0', null, null, null, '1', '1', null, null, null, null, null, null, null, null, null, null);
+INSERT INTO `device_info` VALUES ('402881f636249bff013624a666eb0000', '33', '33', '33', '3', '3', '3', '3', null, null, null, '1', '1', null, null, null, null, null, null, null, null, null, null);
+INSERT INTO `device_info` VALUES ('402881f63628b41a013628c0d4320000', '1', '1', '1', '1', '1', '1', '1', null, null, null, '1', '1', null, null, null, null, null, null, null, null, null, null);
 
 -- ----------------------------
 -- Table structure for `device_point_data`
@@ -89,6 +108,7 @@ CREATE TABLE `device_point_info` (
   `CONTROL_POINT_NAME` varchar(100) DEFAULT NULL,
   `POSITIONX` int(11) DEFAULT NULL,
   `POSITIONY` int(11) DEFAULT NULL,
+  `STATUS` int(11) DEFAULT NULL,
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -144,6 +164,30 @@ INSERT INTO `device_type` VALUES ('1', 'aaaa', '2', '2', '2', null, null);
 INSERT INTO `device_type` VALUES ('2', '11', '2', '2', '2', null, null);
 INSERT INTO `device_type` VALUES ('402881e8366c496101366c4999110000', '1', '1', '1', '1', null, null);
 INSERT INTO `device_type` VALUES ('402881e8368291e601368293a92a0000', '22', '22', '22', '22', null, null);
+
+-- ----------------------------
+-- Table structure for `error_log`
+-- ----------------------------
+DROP TABLE IF EXISTS `error_log`;
+CREATE TABLE `error_log` (
+  `id` varchar(255) NOT NULL,
+  `DEPT_NAME` varchar(255) DEFAULT NULL,
+  `DEVICE_NAME` varchar(255) DEFAULT NULL,
+  `DEVICE_NUM` varchar(255) DEFAULT NULL,
+  `ERROR_TIME` datetime DEFAULT NULL,
+  `ISREMOVE` int(11) DEFAULT NULL,
+  `REMOVE_TIME` datetime DEFAULT NULL,
+  `ERROR_DATA` float DEFAULT NULL,
+  `ERROR_PHEN` varchar(255) DEFAULT NULL,
+  `ERROR_REASON` varchar(255) DEFAULT NULL,
+  `ERROR_THRESH` float DEFAULT NULL,
+  `OPINION` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of error_log
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for `forum_issue_info`
@@ -285,13 +329,14 @@ CREATE TABLE `group_user` (
   `CREATE_TIME` datetime DEFAULT NULL,
   `SORT_INDEX` int(4) DEFAULT NULL,
   `deleteFlag` int(11) NOT NULL,
+  `ROLE_NAME` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of group_user
 -- ----------------------------
-INSERT INTO `group_user` VALUES ('1', null, null, null, null, 'admin', 'b59c67bf196a4758191e42f76670ceba', '超级管理员', null, null, null, '9', '2012-04-03 15:24:33', '0', '0');
+INSERT INTO `group_user` VALUES ('1', null, null, null, null, 'admin', 'b59c67bf196a4758191e42f76670ceba', '超级管理员', null, null, null, '9', '2012-04-03 15:24:33', '0', '0', null);
 
 -- ----------------------------
 -- Table structure for `group_workshop`
@@ -305,6 +350,7 @@ CREATE TABLE `group_workshop` (
   `PRINCIPAL` varchar(50) DEFAULT NULL,
   `CREATE_TIME` datetime DEFAULT NULL,
   `SORT_INDEX` int(4) DEFAULT NULL,
+  `COMPANY_ID` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -339,6 +385,7 @@ DROP TABLE IF EXISTS `notice_read_info`;
 CREATE TABLE `notice_read_info` (
   `NOTICE_ID` varchar(50) CHARACTER SET utf8 NOT NULL,
   `USER_ID` varchar(50) CHARACTER SET utf8 NOT NULL,
+  `id` varchar(255) NOT NULL,
   PRIMARY KEY (`NOTICE_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -423,14 +470,22 @@ CREATE TABLE `rule_advice_info` (
   `ADVICE` varchar(500) DEFAULT NULL,
   `DEVICE_TYPE_ID` varchar(50) NOT NULL,
   PRIMARY KEY (`ADVICE_ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=126 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=137 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of rule_advice_info
 -- ----------------------------
-INSERT INTO `rule_advice_info` VALUES ('22', 'fdsf', '2');
-INSERT INTO `rule_advice_info` VALUES ('123', '12321', '2');
+INSERT INTO `rule_advice_info` VALUES ('1', 'ddd', '2');
+INSERT INTO `rule_advice_info` VALUES ('2', 'eee', '1');
 INSERT INTO `rule_advice_info` VALUES ('125', 'rerrrrrr', '402881e8368291e601368293a92a0000');
+INSERT INTO `rule_advice_info` VALUES ('127', 'dr', '2');
+INSERT INTO `rule_advice_info` VALUES ('128', 'ee', '2');
+INSERT INTO `rule_advice_info` VALUES ('129', 'sss', '2');
+INSERT INTO `rule_advice_info` VALUES ('130', 'sss', '2');
+INSERT INTO `rule_advice_info` VALUES ('131', '666', '2');
+INSERT INTO `rule_advice_info` VALUES ('133', 'eeee', '2');
+INSERT INTO `rule_advice_info` VALUES ('135', '222', '1');
+INSERT INTO `rule_advice_info` VALUES ('136', 'ssssssssssssssssssssss', '1');
 
 -- ----------------------------
 -- Table structure for `rule_device_info`
@@ -442,7 +497,10 @@ CREATE TABLE `rule_device_info` (
   `DEVICE_TYPE_ID` int(50) NOT NULL,
   `DEVICE_VAR` varchar(100) DEFAULT NULL,
   `RESULT_ID` int(11) NOT NULL,
-  PRIMARY KEY (`DEVICE_ID`)
+  `threshold_Id` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`DEVICE_ID`),
+  KEY `FK666FE034C503C38` (`RESULT_ID`),
+  CONSTRAINT `FK666FE034C503C38` FOREIGN KEY (`RESULT_ID`) REFERENCES `rule_result_info` (`RESULT_ID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
@@ -454,13 +512,13 @@ CREATE TABLE `rule_device_info` (
 -- ----------------------------
 DROP TABLE IF EXISTS `rule_info`;
 CREATE TABLE `rule_info` (
-  `ID` int(50) NOT NULL,
-  `DEVICE_TYPE_ID` int(50) NOT NULL,
-  `RESULT_ID` int(50) NOT NULL,
-  `REASON_ID` int(50) NOT NULL,
+  `ID` int(50) NOT NULL AUTO_INCREMENT,
+  `DEVICE_TYPE_ID` varchar(50) NOT NULL,
+  `RESULT_ID` varchar(500) NOT NULL,
+  `REASON_ID` varchar(500) NOT NULL,
   `ADVICE_ID` int(50) NOT NULL,
   PRIMARY KEY (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of rule_info
@@ -473,9 +531,9 @@ DROP TABLE IF EXISTS `rule_reason_info`;
 CREATE TABLE `rule_reason_info` (
   `REASON_ID` int(50) NOT NULL AUTO_INCREMENT,
   `REASON` varchar(500) DEFAULT NULL,
-  `DEVICE_TYPE_ID` varchar(11) NOT NULL,
+  `DEVICE_TYPE_ID` varchar(50) NOT NULL,
   PRIMARY KEY (`REASON_ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of rule_reason_info
@@ -488,9 +546,9 @@ DROP TABLE IF EXISTS `rule_result_info`;
 CREATE TABLE `rule_result_info` (
   `RESULT_ID` int(50) NOT NULL AUTO_INCREMENT,
   `RESULT` varchar(500) DEFAULT NULL,
-  `DEVICE_TYPE_ID` varchar(11) NOT NULL,
+  `DEVICE_TYPE_ID` varchar(50) NOT NULL,
   PRIMARY KEY (`RESULT_ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of rule_result_info
@@ -531,7 +589,73 @@ CREATE TABLE `template_report` (
 -- ----------------------------
 
 -- ----------------------------
+-- Table structure for `threshold`
+-- ----------------------------
+DROP TABLE IF EXISTS `threshold`;
+CREATE TABLE `threshold` (
+  `Threshold_Id` int(11) NOT NULL AUTO_INCREMENT,
+  `Create_Time` datetime DEFAULT NULL,
+  `Threshold_Name` varchar(255) DEFAULT NULL,
+  `Threshold_Unit` varchar(255) DEFAULT NULL,
+  `Threshold_Category_Id` int(11) NOT NULL,
+  PRIMARY KEY (`Threshold_Id`),
+  KEY `FK49F9F44B538AA93A` (`Threshold_Category_Id`),
+  CONSTRAINT `FK49F9F44B538AA93A` FOREIGN KEY (`Threshold_Category_Id`) REFERENCES `threshold_category` (`Category_Id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of threshold
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `threshold_category`
+-- ----------------------------
+DROP TABLE IF EXISTS `threshold_category`;
+CREATE TABLE `threshold_category` (
+  `Category_Id` int(11) NOT NULL AUTO_INCREMENT,
+  `Category_Name` varchar(255) DEFAULT NULL,
+  `Create_Time` datetime DEFAULT NULL,
+  PRIMARY KEY (`Category_Id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of threshold_category
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `threshold_item`
+-- ----------------------------
+DROP TABLE IF EXISTS `threshold_item`;
+CREATE TABLE `threshold_item` (
+  `Threshold_Item_Id` int(11) NOT NULL AUTO_INCREMENT,
+  `Create_Time` datetime DEFAULT NULL,
+  `Threshold_Sign` int(11) DEFAULT NULL,
+  `Threshold_Item_Expression` varchar(255) DEFAULT NULL,
+  `Threshold_Item_Name` varchar(255) DEFAULT NULL,
+  `Threshold_Id` int(11) NOT NULL,
+  PRIMARY KEY (`Threshold_Item_Id`),
+  KEY `FKED772E872B29C763` (`Threshold_Id`),
+  CONSTRAINT `FKED772E872B29C763` FOREIGN KEY (`Threshold_Id`) REFERENCES `threshold` (`Threshold_Id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of threshold_item
+-- ----------------------------
+
+-- ----------------------------
 -- View structure for `advice_view`
 -- ----------------------------
 DROP VIEW IF EXISTS `advice_view`;
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `advice_view` AS select `rule_advice_info`.`ADVICE_ID` AS `ADVICE_ID`,`rule_advice_info`.`ADVICE` AS `ADVICE`,`rule_advice_info`.`DEVICE_TYPE_ID` AS `DEVICE_TYPE_ID`,`device_type`.`DEVICE_TYPE` AS `DEVICE_TYPE`,`device_type`.`ID` AS `ID` from (`rule_advice_info` join `device_type`) where (`device_type`.`ID` = `rule_advice_info`.`DEVICE_TYPE_ID`);
+
+-- ----------------------------
+-- View structure for `reason_view`
+-- ----------------------------
+DROP VIEW IF EXISTS `reason_view`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `reason_view` AS select `rule_reason_info`.`REASON_ID` AS `REASON_ID`,`rule_reason_info`.`REASON` AS `REASON`,`rule_reason_info`.`DEVICE_TYPE_ID` AS `DEVICE_TYPE_ID`,`device_type`.`DEVICE_TYPE` AS `DEVICE_TYPE` from (`rule_reason_info` join `device_type`) where (`device_type`.`ID` = `rule_reason_info`.`DEVICE_TYPE_ID`);
+
+-- ----------------------------
+-- View structure for `result_view`
+-- ----------------------------
+DROP VIEW IF EXISTS `result_view`;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `result_view` AS select `rule_result_info`.`RESULT_ID` AS `RESULT_ID`,`rule_result_info`.`RESULT` AS `RESULT`,`rule_result_info`.`DEVICE_TYPE_ID` AS `DEVICE_TYPE_ID`,`device_type`.`DEVICE_TYPE` AS `DEVICE_TYPE` from (`rule_result_info` join `device_type`) where (`device_type`.`ID` = `rule_result_info`.`DEVICE_TYPE_ID`);
