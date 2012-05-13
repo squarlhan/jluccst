@@ -74,8 +74,13 @@ public class ErrorLogAction extends BaseActionSupport{
 		values.put( "category", category );
 		
 		pagination = errorLogService.findErrorLogForPage(values, pagination);
-		
-		return SUCCESS;          
+		if(category.equals( "1" ))
+		{
+			return "alarmsuccess";
+		}else
+		{
+			return SUCCESS;         
+		}
 	}
 	
 	/**

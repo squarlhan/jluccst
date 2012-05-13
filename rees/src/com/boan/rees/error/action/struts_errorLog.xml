@@ -6,6 +6,7 @@
     <package name="errorLog" extends="struts-default" namespace="/">
     	<action name="openErrorLogAction" class="errorLogAction" method="openErrorLog">
             <result name="success">/errorLog/errorloglist.jsp</result>
+            <result name="alarmsuccess">/errorLog/alarmlist.jsp</result>
         </action>
         <action name="openAddErrorLogAction" class="errorLogAction" method="openAddErrorLog">
             <result name="success">/errorLog/errorloginfo.jsp</result>
