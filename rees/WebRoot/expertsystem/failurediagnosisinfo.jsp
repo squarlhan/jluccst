@@ -155,7 +155,7 @@
 												<font color="red">*</font>
 											</td>
 										</tr>
-										<tr>
+										<!-- tr>
 											<td height="26" align="right" bgcolor="#FFFFFF">
 												<strong>振动方向：</strong>
 											</td>
@@ -164,11 +164,11 @@
 													cssStyle="width: 250px;" maxlength="25"></s:textfield>
 												<font color="red">*</font>
 											</td>
-										</tr>
+										</tr> -->
 										<tr>
 											<td height="26" colspan="2" align="center" bgcolor="#FFFFFF">
 												<input name="addBtn" type="button" class="btn_2_3"
-													id="addBtn" value="看结果">
+													id="addBtn" value="故障诊断">
 												&nbsp;&nbsp;
 												<input name="closeBtn" type="button" class="btn_2_3"
 													id="closeBtn" value="重置">
