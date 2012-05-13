@@ -91,7 +91,7 @@
           <td width="16%" align="center" background="../images/headerbg.jpg"><strong>故障时间</strong></td>
           <td width="16%" align="center" background="../images/headerbg.jpg"><strong>是否报警</strong></td>
           <td width="16%" align="center" background="../images/headerbg.jpg"><strong>是否解除</strong></td>
-          <td width="16%" align="center" background="../images/headerbg.jpg"><strong>解除时间</strong></td>
+          <td width="16%" align="center" background="../images/headerbg.jpg" nowrap><strong>解除时间</strong></td>
 	    </tr>
 	    <s:iterator value="pagination.data" status="obj">
         <tr>
