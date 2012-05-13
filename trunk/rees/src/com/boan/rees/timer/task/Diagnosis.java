@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import javax.annotation.Resource;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,7 +55,7 @@ public class Diagnosis
 	@Qualifier("deviceInfoService")
 	private IDeviceInfoService deviceInfoService;
 	//推理机服务接口
-	private InferenceEngine inferenceEngine;
+	private InferenceEngine inferenceEngine = new InferenceEngine();
 	//规则服务接口
 	@Autowired
 	@Qualifier("ruleInfoService")
@@ -130,7 +129,7 @@ public class Diagnosis
 				String sTemp = listRule.get( i ).getResultId().split( "_" )[j];
 				if(sTemp.indexOf( "a" ) != -1)	//原因
 				{
-					RuleReasonInfo ruleReason = ruleReasonInfoService.get( Integer.parseInt( sTemp.substring( 1, sTemp.length() )));
+					RuleReasonInfo ruleReason = ruleReasonInfoService.getbyId( Integer.parseInt( sTemp.substring( 1, sTemp.length() )));
 					if( ruleReason != null)
 					{
 						BackwardandResult backwardandResult = new BackwardandResult();
@@ -141,7 +140,7 @@ public class Diagnosis
 					}
 				}else if(sTemp.indexOf( "b" ) != -1)  //现象
 				{
-					RuleResultInfo ruleResult = ruleResultInfoService.get( Integer.parseInt( sTemp.substring( 1, sTemp.length() )));
+					RuleResultInfo ruleResult = ruleResultInfoService.getbyId( Integer.parseInt( sTemp.substring( 1, sTemp.length() )));
 					if( ruleResult != null)
 					{
 						BackwardandResult backwardandResult = new BackwardandResult();
@@ -161,7 +160,7 @@ public class Diagnosis
 			//封装规则下的原因
 			//推理机规则包括原因属性
 			BackwardandReason backwardandReason = new BackwardandReason();
-			RuleReasonInfo ruleReasonTemp  = ruleReasonInfoService.get( Integer.parseInt( listRule.get( i ).getReasonId()));
+			RuleReasonInfo ruleReasonTemp  = ruleReasonInfoService.getbyId( Integer.parseInt( listRule.get( i ).getReasonId()));
 			if(ruleReasonTemp != null)
 			{
 				backwardandReason.setId( ruleReasonTemp.getId() );
@@ -173,7 +172,7 @@ public class Diagnosis
 			//封装规则下的建议
 			//推理机规则包括建议属性
 			BackwardandSuggestion backwardandSuggestion = new BackwardandSuggestion();
-			RuleAdviceInfo ruleAdviceInfo  = ruleAdviceInfoService.get( listRule.get( i ).getAdviceId() );
+			RuleAdviceInfo ruleAdviceInfo  = ruleAdviceInfoService.getbyId( listRule.get( i ).getAdviceId() );
 			if(ruleAdviceInfo != null)
 			{
 				backwardandSuggestion.setId( ruleAdviceInfo.getId() );
@@ -233,9 +232,6 @@ public class Diagnosis
 												if(item.getSign()==1){
 													System.out.println("＝＝＝＝＝2.报警区间内，报警＝＝＝＝＝");
 													//判断是否在报警区间
-													//LUOJX TO DO
-													//送推理机
-													//问题ID朱好像说是item.getTroubleIds(),你再确定一下
 													List<BackwardandResult> listEnters = new ArrayList<BackwardandResult>();
 													for(int kk = 0;kk<item.getTroubleIds().size();kk++)
 													{
@@ -248,6 +244,33 @@ public class Diagnosis
 													inferenceEngine.Inference("result to reason","fulfill");
 													
 													List<BackwardandReason> resultlist = inferenceEngine.getEnding();
+													
+													String errorPhen = "";
+													String errorReason = "";
+													String opinion = "";
+													for(int m=0;m<item.getTroubles().size();m++)
+													{
+														if(errorPhen.length() == 0)
+														{
+															errorPhen = item.getTroubles().get( m ).getResult();
+														}else
+														{
+															errorPhen = errorPhen + "," + item.getTroubles().get( m ).getResult();
+														}
+													}
+													for(int n=0;n<resultlist.size();n++)
+													{
+														if(errorReason.length() == 0)
+														{
+															errorReason = resultlist.get( n ).getReasonName();
+															opinion = resultlist.get( n ).getSuggestion().getSuggName();
+														}else
+														{
+															errorReason = errorReason + "," + resultlist.get( n ).getReasonName();
+															opinion = opinion + "," + resultlist.get( n ).getSuggestion().getSuggName();
+														}
+													}
+													
 													//返回结果，记录报警日志
 													ErrorLog errorLog = new ErrorLog();
 													errorLog.setDeptName( listDeviceInfo.get( i ).getCompanyId() );
@@ -255,7 +278,12 @@ public class Diagnosis
 													errorLog.setIsRemove( 0 );
 													errorLog.setDeviceNum( listDeviceInfo.get( i ).getDeviceNum() );
 													errorLog.setErrorTime( Calendar.getInstance() );
-													
+													errorLog.setErrorData( Float.parseFloat( pdi.getDataInfo() ) );
+													errorLog.setErrorThresh( expression );
+													errorLog.setErrorPhen( errorPhen );
+													errorLog.setErrorReason( errorReason );
+													errorLog.setOpinion( opinion );
+													errorLog.setIsAlarm( 1 );
 													errorLogService.save( errorLog );
 													
 												}else
@@ -268,6 +296,7 @@ public class Diagnosis
 													errorLog.setIsRemove( 1 );
 													errorLog.setDeviceNum( listDeviceInfo.get( i ).getDeviceNum() );
 													errorLog.setErrorTime( Calendar.getInstance() );
+													errorLog.setIsAlarm( 0 );
 													errorLogService.save( errorLog );
 												}
 											}else
@@ -280,6 +309,7 @@ public class Diagnosis
 												errorLog.setIsRemove( 1 );
 												errorLog.setDeviceNum( listDeviceInfo.get( i ).getDeviceNum() );
 												errorLog.setErrorTime( Calendar.getInstance() );
+												errorLog.setIsAlarm( 0 );
 												errorLogService.save( errorLog );
 											}
 											
