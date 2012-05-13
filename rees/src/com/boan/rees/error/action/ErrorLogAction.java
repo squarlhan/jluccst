@@ -4,7 +4,6 @@
 
 package com.boan.rees.error.action;
 
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -55,7 +54,12 @@ public class ErrorLogAction extends BaseActionSupport{
 	 * 查询方式列表初始化数据
 	 */
 	private Map<String,String> selectWayList = new HashMap<String, String>();
+	/**
+	 * 类别：１为报警管理，２为故障日志
+	 */
+	private String category = "";
 	
+
 	/**
 	 * 打开列表方法
 	 * @return success
@@ -65,7 +69,11 @@ public class ErrorLogAction extends BaseActionSupport{
 		selectWayList.put("1", "全部");
 		selectWayList.put("2", "已解除");
 		selectWayList.put("3", "报警中");
-		pagination = errorLogService.findErrorLogForPage(new HashMap(), pagination);
+		
+		Map<String,String> values = new HashMap<String,String>();
+		values.put( "category", category );
+		
+		pagination = errorLogService.findErrorLogForPage(values, pagination);
 		
 		return SUCCESS;          
 	}
@@ -75,6 +83,7 @@ public class ErrorLogAction extends BaseActionSupport{
 	 * @return success
 	 */
 	public String openAddErrorLog(){
+		errorLog = errorLogService.get( errorLog.getId() );
 		return SUCCESS;
 	}
 	
@@ -83,6 +92,14 @@ public class ErrorLogAction extends BaseActionSupport{
 	 * @return success
 	 */
 	public String toAddErrorLog(){
+		errorLogService.save(errorLog);
+		return SUCCESS;
+	}
+	/**
+	 * 添加新对象方法
+	 * @return success
+	 */
+	public String toOpenErrorLog(){
 		errorLogService.save(errorLog);
 		return SUCCESS;
 	}
@@ -134,6 +151,16 @@ public class ErrorLogAction extends BaseActionSupport{
 
 	public void setSelectWayList(Map<String, String> selectWayList) {
 		this.selectWayList = selectWayList;
+	}
+	
+	public String getCategory()
+	{
+		return category;
+	}
+
+	public void setCategory( String category )
+	{
+		this.category = category;
 	}
 	
 }

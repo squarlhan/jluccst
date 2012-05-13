@@ -85,9 +85,20 @@ public class ErrorLogServiceImpl implements IErrorLogService {
 			Pagination<ErrorLog> pagination) {
 
 		String hql = "from ErrorLog";
+		if(values.get( "category" ).equals( "1" ))
+		{
+			hql = hql + " where isRemove = 0";
+		}else if(values.get( "category" ).equals( "2" ))
+		{
+			
+		}
 		List<ErrorLog> data = errorLogDao.findForPage(hql, values,
 				pagination.getStartIndex(), pagination.getPageSize());
 		hql = "select count(*) from ErrorLog";
+		if(values.get( "category" ).equals( "1" ))
+		{
+			hql = hql + " where isRemove = 0";
+		}
 		int totalRows = errorLogDao.findCountForPage(hql, values);
 		pagination.setTotalRows(totalRows);
 		pagination.setData(data);
