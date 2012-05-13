@@ -1,28 +1,28 @@
 	
-	drop database rees;
+	DROP DATABASE REES;
 	
-	create database rees;
+	CREATE DATABASE REES;
 	
-	use rees;
+	USE REES;
 	
-	create table `rees`.`advice_view`(
-        `ADVICE_ID` INT not null auto_increment,
+	CREATE TABLE `REES`.`ADVICE_VIEW`(
+        `ADVICE_ID` INT NOT NULL AUTO_INCREMENT,
        `ADVICE` VARCHAR(255),
        `DEVICE_TYPE_ID` VARCHAR(255),
        `DEVICE_TYPE` VARCHAR(255),
-        primary key (`ADVICE_ID`)
+        PRIMARY KEY (`ADVICE_ID`)
     );
 
-    create table `rees`.`centerheight_and_speed`(
-        `Id` INT not null auto_increment,
-       `Center_Height_Expression` VARCHAR(255),
-       `Speed_Expression` VARCHAR(255),
-       `Threshold_Id` INT,
-        primary key (`Id`)
+    CREATE TABLE `REES`.`CENTERHEIGHT_AND_SPEED`(
+        `ID` INT NOT NULL AUTO_INCREMENT,
+       `CENTER_HEIGHT_EXPRESSION` VARCHAR(255),
+       `SPEED_EXPRESSION` VARCHAR(255),
+       `THRESHOLD_ID` INT,
+        PRIMARY KEY (`ID`)
     );
     
-    create table `rees`.`device_info`(
-        `id` VARCHAR(255) not null,
+    CREATE TABLE `REES`.`DEVICE_INFO`(
+        `ID` VARCHAR(255) NOT NULL,
        `CENTER_HEIGHT` DECIMAL(19,2),
        `COMPANY_ID` VARCHAR(50),
        `CONTROL_POINT` INT,
@@ -40,11 +40,11 @@
        `SORT_INDEX` INT,
        `SPEED` DECIMAL(19,2),
        `WORKSHOP_ID` VARCHAR(255),
-        primary key (`id`)
+        PRIMARY KEY (`ID`)
     );
     
-     create table `rees`.`device_point_data`(
-        `id` VARCHAR(255) not null,
+     CREATE TABLE `REES`.`DEVICE_POINT_DATA`(
+        `ID` VARCHAR(255) NOT NULL,
        `CREATE_TIME` DATETIME,
        `DATA_INFO` VARCHAR(255),
        `DATA_YEAR` INT,
@@ -55,116 +55,118 @@
        `USER_ID` VARCHAR(255),
        `USER_NAME` VARCHAR(255),
        `WEEK_OF_YEAR` INT,
-        primary key (`id`)
+        PRIMARY KEY (`ID`)
     );
 
-	create table `rees`.`device_point_info`(
-        `id` VARCHAR(255) not null,
+	CREATE TABLE `REES`.`DEVICE_POINT_INFO`(
+        `ID` VARCHAR(255) NOT NULL,
        `CONTROL_POINT_NAME` VARCHAR(255),
        `DEVICE_ID` VARCHAR(255),
        `POSITIONX` INT,
        `POSITIONY` INT,
        `STATUS` INT,
-        primary key (`id`)
+        PRIMARY KEY (`ID`)
     );
     
-    create table `rees`.`device_point_param`(
-        `id` VARCHAR(255) not null,
+    CREATE TABLE `REES`.`DEVICE_POINT_PARAM`(
+        `ID` VARCHAR(255) NOT NULL,
        `DEVICE_ID` VARCHAR(255),
        `NAME` VARCHAR(255),
        `POINT_ID` VARCHAR(255),
        `SORT_INDEX` INT,
-        primary key (`id`)
+        PRIMARY KEY (`ID`)
     );
     
-    create table `rees`.`device_type`(
-        `id` VARCHAR(255) not null,
+    CREATE TABLE `REES`.`DEVICE_TYPE`(
+        `ID` VARCHAR(255) NOT NULL,
        `CENTER_HEIGHT` DECIMAL(19,2),
        `POWER` DECIMAL(19,2),
        `SPEED` DECIMAL(19,2),
        `DEVICE_TYPE` VARCHAR(255),
-        primary key (`id`)
+        PRIMARY KEY (`ID`)
     );
     
-    create table `rees`.`error_log`(
-        `id` VARCHAR(255) not null,
-       `DEPT_NAME` VARCHAR(255),
-       `DEVICE_NAME` VARCHAR(255),
-       `DEVICE_NUM` VARCHAR(255),
-       `ERROR_DATA` FLOAT,
-       `ERROR_PHEN` VARCHAR(255),
-       `ERROR_REASON` VARCHAR(255),
-       `ERROR_THRESH` FLOAT,
-       `ERROR_TIME` DATETIME,
-       `ISREMOVE` INT,
-       `OPINION` VARCHAR(255),
-       `REMOVE_TIME` DATETIME,
-        primary key (`id`)
-    );
+    CREATE TABLE `ERROR_LOG` (
+	  `ID` VARCHAR(255) NOT NULL,
+	  `DEVICE_NUM` VARCHAR(50) DEFAULT NULL,
+	  `DEVICE_NAME` VARCHAR(200) DEFAULT NULL,
+	  `DEPT_NAME` VARCHAR(200) DEFAULT NULL,
+	  `ERROR_TIME` DATETIME DEFAULT NULL,
+	  `REMOVE_TIME` DATETIME DEFAULT NULL,
+	  `ISREMOVE` INT(1) DEFAULT '1',
+	  `ISALARM` INT(1) DEFAULT '0',
+	  `ERROR_DATA` FLOAT(7,0) DEFAULT NULL,
+	  `ERROR_THRESH` VARCHAR(200) DEFAULT NULL,
+	  `ERROR_PHEN` VARCHAR(1000) DEFAULT NULL,
+	  `ERROR_REASON` VARCHAR(1000) DEFAULT NULL,
+	  `OPINION` VARCHAR(1000) DEFAULT NULL,
+	  PRIMARY KEY (`ID`)
+	);
+
     
-    create table `rees`.`forum_issue_info`(
-        `id` VARCHAR(255) not null,
+    CREATE TABLE `REES`.`FORUM_ISSUE_INFO`(
+        `ID` VARCHAR(255) NOT NULL,
        `CREATE_TIME` DATETIME,
        `CREATOR` VARCHAR(255),
        `ISSUE_CONTENT` VARCHAR(255),
        `ISSUE_NAME` VARCHAR(255),
-       `ISSUE_Status` INT,
-        primary key (`id`)
+       `ISSUE_STATUS` INT,
+        PRIMARY KEY (`ID`)
     );
     
-    create table `rees`.`forum_message_info`(
-        `id` VARCHAR(255) not null,
+    CREATE TABLE `REES`.`FORUM_MESSAGE_INFO`(
+        `ID` VARCHAR(255) NOT NULL,
        `ISSUE_ID` VARCHAR(255),
        `MESSAGE_CONTENT` VARCHAR(255),
        `MESSAGE_TIME` DATETIME,
        `PUBLISHER` VARCHAR(255),
        `PUBLISHER_DEPT` VARCHAR(255),
-        primary key (`id`)
+        PRIMARY KEY (`ID`)
     );
     
     
-     create table `rees`.`group_company`(
-        `id` VARCHAR(255) not null,
+     CREATE TABLE `REES`.`GROUP_COMPANY`(
+        `ID` VARCHAR(255) NOT NULL,
        `ADDRESS` VARCHAR(255),
        `COMPANY_NAME` VARCHAR(255),
        `CREATE_TIME` DATETIME,
        `PHONE` VARCHAR(255),
        `ROOT_ID` VARCHAR(255),
        `SORT_INDEX` INT,
-        primary key (`id`)
+        PRIMARY KEY (`ID`)
     );
 
-	create table `rees`.`group_factory`(
-        `id` VARCHAR(255) not null,
+	CREATE TABLE `REES`.`GROUP_FACTORY`(
+        `ID` VARCHAR(255) NOT NULL,
        `COMPANY_ID` VARCHAR(255),
        `CREATE_TIME` DATETIME,
        `FACTORY_NAME` VARCHAR(255),
        `PHONE` VARCHAR(255),
        `PRINCIPAL` VARCHAR(255),
        `SORT_INDEX` INT,
-        primary key (`id`)
+        PRIMARY KEY (`ID`)
     );
     
-    create table `rees`.`group_popedom_role`(
-        `id` VARCHAR(255) not null,
+    CREATE TABLE `REES`.`GROUP_POPEDOM_ROLE`(
+        `ID` VARCHAR(255) NOT NULL,
        `KEYWORD` VARCHAR(255),
        `ROLE_ID` VARCHAR(255),
-        primary key (`id`)
+        PRIMARY KEY (`ID`)
     );
     
-    create table `rees`.`group_role`(
-        `id` VARCHAR(255) not null,
+    CREATE TABLE `REES`.`GROUP_ROLE`(
+        `ID` VARCHAR(255) NOT NULL,
        `CREATE_TIME` DATETIME,
        `ROLE_NAME` VARCHAR(255),
        `SORT_INDEX` INT,
-        primary key (`id`)
+        PRIMARY KEY (`ID`)
     );
     
-    create table `rees`.`group_user`(
-        `id` VARCHAR(255) not null,
+    CREATE TABLE `REES`.`GROUP_USER`(
+        `ID` VARCHAR(255) NOT NULL,
        `COMPANY_ID` VARCHAR(255),
        `CREATE_TIME` DATETIME,
-       `deleteFlag` INT not null,
+       `DELETEFLAG` INT NOT NULL,
        `EMAIL` VARCHAR(255),
        `FACTORY_ID` VARCHAR(255),
        `OFFICE_PHONE` VARCHAR(255),
@@ -177,11 +179,11 @@
        `USER_TYPE` INT,
        `USERNAME` VARCHAR(255),
        `WORKSHOP_ID` VARCHAR(255),
-        primary key (`id`)
+        PRIMARY KEY (`ID`)
     );
     
-    create table `rees`.`group_workshop`(
-        `id` VARCHAR(255) not null,
+    CREATE TABLE `REES`.`GROUP_WORKSHOP`(
+        `ID` VARCHAR(255) NOT NULL,
        `COMPANY_ID` VARCHAR(255),
        `CREATE_TIME` DATETIME,
        `FACTORY_ID` VARCHAR(255),
@@ -189,37 +191,37 @@
        `PRINCIPAL` VARCHAR(255),
        `SORT_INDEX` INT,
        `WORKSHOP_NAME` VARCHAR(255),
-        primary key (`id`)
+        PRIMARY KEY (`ID`)
     );
     
-     create table `rees`.`notice_info`(
-        `id` VARCHAR(255) not null,
+     CREATE TABLE `REES`.`NOTICE_INFO`(
+        `ID` VARCHAR(255) NOT NULL,
        `NOTICE_CONTENT` VARCHAR(255),
        `NOTICE_EXPIREDTIME` VARCHAR(255),
        `NOTICE_PUBLISHTIME` DATETIME,
        `NOTICE_TITLE` VARCHAR(255),
        `PUBLISHER` VARCHAR(255),
        `PUBLISHER_DEPT` VARCHAR(255),
-        primary key (`id`)
+        PRIMARY KEY (`ID`)
     );
     
-    create table `rees`.`notice_read_info`(
-        `id` VARCHAR(255) not null,
+    CREATE TABLE `REES`.`NOTICE_READ_INFO`(
+        `ID` VARCHAR(255) NOT NULL,
        `NOTICE_ID` VARCHAR(255),
        `USER_ID` VARCHAR(255),
-        primary key (`id`)
+        PRIMARY KEY (`ID`)
     );
 	
-	create table `rees`.`reason_view`(
-        `REASON_ID` INT not null auto_increment,
+	CREATE TABLE `REES`.`REASON_VIEW`(
+        `REASON_ID` INT NOT NULL AUTO_INCREMENT,
        `DEVICE_TYPE_ID` VARCHAR(255),
        `REASON` VARCHAR(255),
        `DEVICE_TYPE` VARCHAR(255),
-        primary key (`REASON_ID`)
+        PRIMARY KEY (`REASON_ID`)
     );
     
-    create table `rees`.`report_person`(
-        `id` VARCHAR(255) not null,
+    CREATE TABLE `REES`.`REPORT_PERSON`(
+        `ID` VARCHAR(255) NOT NULL,
        `CREATE_TIME` DATETIME,
        `DEPT_ID` VARCHAR(255),
        `ISDELETE` INT,
@@ -230,11 +232,11 @@
        `REPORT_SUBJECT` VARCHAR(255),
        `REPORT_TYPE` VARCHAR(255),
        `TEMPLATE_ID` VARCHAR(255),
-        primary key (`id`)
+        PRIMARY KEY (`ID`)
     );
     
-    create table `rees`.`report_template`(
-        `id` VARCHAR(255) not null,
+    CREATE TABLE `REES`.`REPORT_TEMPLATE`(
+        `ID` VARCHAR(255) NOT NULL,
        `CREATE_TIME` DATETIME,
        `REPORT_CONTENT` VARCHAR(255),
        `REPORT_DATE` DATETIME,
@@ -243,82 +245,82 @@
        `REPORT_TYPE` VARCHAR(255),
        `TEMPLATE_NAME` VARCHAR(255),
        `TEMPLATE_PATH` VARCHAR(255),
-        primary key (`id`)
+        PRIMARY KEY (`ID`)
     );
     
-    create table `rees`.`result_view`(
-        `RESULT_ID` INT not null auto_increment,
+    CREATE TABLE `REES`.`RESULT_VIEW`(
+        `RESULT_ID` INT NOT NULL AUTO_INCREMENT,
        `DEVICE_TYPE_ID` VARCHAR(255),
        `RESULT` VARCHAR(255),
        `DEVICE_TYPE` VARCHAR(255),
-        primary key (`RESULT_ID`)
+        PRIMARY KEY (`RESULT_ID`)
     );
     
-    create table `rees`.`rule_advice_info`(
-        `ADVICE_ID` INT not null auto_increment,
+    CREATE TABLE `REES`.`RULE_ADVICE_INFO`(
+        `ADVICE_ID` INT NOT NULL AUTO_INCREMENT,
        `ADVICE` VARCHAR(255),
        `DEVICE_TYPE_ID` VARCHAR(255),
-        primary key (`ADVICE_ID`)
+        PRIMARY KEY (`ADVICE_ID`)
     );
     
-    create table `rees`.`rule_device_info`(
-        `DEVICE_ID` INT not null auto_increment,
+    CREATE TABLE `REES`.`RULE_DEVICE_INFO`(
+        `DEVICE_ID` INT NOT NULL AUTO_INCREMENT,
        `DEVICE_TYPE_ID` VARCHAR(255),
-       `RESULT_ID` INT unique,
+       `RESULT_ID` INT UNIQUE,
        `DEVICE_PARAM` VARCHAR(255),
-       `threshold_Id` VARCHAR(255),
+       `THRESHOLD_ID` VARCHAR(255),
        `DEVICE_VAR` VARCHAR(255),
-        primary key (`DEVICE_ID`)
+        PRIMARY KEY (`DEVICE_ID`)
     );
     
-     create table `rees`.`rule_info`(
-        `id` INT not null auto_increment,
+     CREATE TABLE `REES`.`RULE_INFO`(
+        `ID` INT NOT NULL AUTO_INCREMENT,
        `ADVICE_ID` INT,
        `DEVICE_TYPE_ID` VARCHAR(255),
        `REASON_ID` VARCHAR(255),
        `RESULT_ID` VARCHAR(255),
-        primary key (`id`)
+        PRIMARY KEY (`ID`)
     );
     
-    create table `rees`.`rule_reason_info`(
-        `REASON_ID` INT not null auto_increment,
+    CREATE TABLE `REES`.`RULE_REASON_INFO`(
+        `REASON_ID` INT NOT NULL AUTO_INCREMENT,
        `DEVICE_TYPE_ID` VARCHAR(255),
        `REASON` VARCHAR(255),
-        primary key (`REASON_ID`)
+        PRIMARY KEY (`REASON_ID`)
     );
     
-    create table `rees`.`rule_result_info`(
-        `RESULT_ID` INT not null auto_increment,
+    CREATE TABLE `REES`.`RULE_RESULT_INFO`(
+        `RESULT_ID` INT NOT NULL AUTO_INCREMENT,
        `DEVICE_TYPE_ID` VARCHAR(255),
        `RESULT` VARCHAR(255),
-        primary key (`RESULT_ID`)
+        PRIMARY KEY (`RESULT_ID`)
     );
     
-    create table `rees`.`threshold_category`(
-        `Category_Id` INT not null auto_increment,
-       `Category_Name` VARCHAR(255),
-       `Create_Time` DATETIME,
-        primary key (`Category_Id`)
+    CREATE TABLE `REES`.`THRESHOLD_CATEGORY`(
+        `CATEGORY_ID` INT NOT NULL AUTO_INCREMENT,
+       `CATEGORY_NAME` VARCHAR(255),
+       `CREATE_TIME` DATETIME,
+        PRIMARY KEY (`CATEGORY_ID`)
     );
 
-	create table `rees`.`threshold_item`(
-        `Threshold_Item_Id` INT not null auto_increment,
-       `Create_Time` DATETIME,
-       `Threshold_Sign` INT,
-       `Threshold_Item_Expression` VARCHAR(255),
-       `Threshold_Item_Name` VARCHAR(255),
-       `Threshold_Id` INT not null,
-        primary key (`Threshold_Item_Id`)
+	CREATE TABLE `REES`.`THRESHOLD_ITEM`(
+        `THRESHOLD_ITEM_ID` INT NOT NULL AUTO_INCREMENT,
+       `CREATE_TIME` DATETIME,
+       `THRESHOLD_SIGN` INT,
+       `THRESHOLD_ITEM_EXPRESSION` VARCHAR(255),
+       `THRESHOLD_ITEM_NAME` VARCHAR(255),
+       `THRESHOLD_ID` INT NOT NULL,
+        PRIMARY KEY (`THRESHOLD_ITEM_ID`)
     );
     
-    create table `rees`.`threshold`(
-        `Threshold_Id` INT not null auto_increment,
-       `Create_Time` DATETIME,
-       `Threshold_Name` VARCHAR(255),
-       `Threshold_Unit` VARCHAR(255),
-       `Threshold_Category_Id` INT not null,
-        primary key (`Threshold_Id`)
+    CREATE TABLE `REES`.`THRESHOLD`(
+        `THRESHOLD_ID` INT NOT NULL AUTO_INCREMENT,
+       `CREATE_TIME` DATETIME,
+       `THRESHOLD_NAME` VARCHAR(255),
+       `THRESHOLD_UNIT` VARCHAR(255),
+       `THRESHOLD_CATEGORY_ID` INT NOT NULL,
+        PRIMARY KEY (`THRESHOLD_ID`)
     );
 
-    INSERT INTO `group_user` VALUES ('1', NULL, NULL, 0, NULL, NULL, NULL, 'b59c67bf196a4758191e42f76670ceba', NULL, NULL, NULL, 0, '超级管理员', 9, 'admin', NULL);
+    INSERT INTO `GROUP_USER` VALUES ('1', NULL, NULL, 0, NULL, NULL, NULL, 'b59c67bf196a4758191e42f76670ceba', NULL, NULL, NULL, 0, '超级管理员', 9, 'admin', NULL);
     
