@@ -61,5 +61,5 @@ public interface IPointInfoService {
 	 * @param deviceId 设备Id
 	 * @param status 监测点状态，0表示未执行系统任务，1表示已执行
 	 */
-	public void changeStatus(String deviceId, int status);
+	public void updateStatus(String deviceId, int status);
 }

@@ -15,7 +15,7 @@
  <bean id="timerCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean" >
         <property name="jobDetail" ref="timerJobDetail" />
         <property name="cronExpression">
-               <value>0 * 9 * * ?</value>
+               <value>0 * 18 * * ?</value>
         </property>
  </bean>
 
