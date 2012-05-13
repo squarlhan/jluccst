@@ -30,6 +30,10 @@
 	}else if(category != null && category.equals("2"))
 	{
 		cur_function = "故障日志";
+	}else
+	{
+		out.println("参数错误！请从正常程序入口进入！");
+		return ;
 	}
 %>
 <html xmlns="http://www.w3.org/1999/xhtml">
