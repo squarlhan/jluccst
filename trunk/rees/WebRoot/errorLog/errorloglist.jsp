@@ -121,7 +121,7 @@
           <td height="26" align="center" bgcolor="#FFFFFF">
           	<s:date  name="removeTime" format="yyyy-MM-dd" />&nbsp;
           </td>
-		  <td height="26" colspan="2" align="center" bgcolor="#FFFFFF">
+		  <td height="26" nowrap colspan="2" align="center" bgcolor="#FFFFFF">
 		  	 <s:url id="edit_url" action="openAddErrorLogAction">   
 				<s:param name="errorLog.id" value="id"></s:param>   
 			      </s:url>

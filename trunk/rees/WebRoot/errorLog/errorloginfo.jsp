@@ -44,13 +44,25 @@
 				form1.action = "toSetIsRemoveAction.action";
 				form1.submit();		
 			});
+			
+			$.fn.close();
 		});
+ 		/**
+		 * 关闭
+		 */
+	 	$.fn.close = function(){
+	 		$("#closeBtn").click(function(){
+	  			parent.$("#windown-close").click();
+	  			parent.window.location.href=parent.window.location.href;
+	  		});
+		}
   	</script>
   	</head>
   
   
   <body>
     <s:form name="form1" id="form1" theme="simple" method="post">
+    <s:hidden name="errorLog.id"></s:hidden>
 	<table width="100%" border="0" cellspacing="5" cellpadding="0">
 		<tr>
 			<td>
@@ -79,7 +91,7 @@
 										<strong>故障现象：</strong>
 									</td>
 									<td height="26" align="left" bgcolor="#FFFFFF">
-										<s:textfield id="txt_deptName" name="errorLog.errorPhen" maxlength="25" cssStyle="width: 250px;"/>
+										<s:textarea id="txt_deptName" name="errorLog.errorPhen" maxlength="25" cssStyle="width: 250px;"/>
 									</td>
 								</tr>
 								<tr>
@@ -87,7 +99,7 @@
 										<strong>故障原因：</strong>
 									</td>
 									<td height="26" align="left" bgcolor="#FFFFFF">
-										<s:textfield id="txt_errorTime" name="errorLog.errorReason" cssStyle="width: 250px;"/>
+										<s:textarea id="txt_errorTime" name="errorLog.errorReason" cssStyle="width: 250px;"/>
 									</td>
 								</tr>
 								<tr>
@@ -95,13 +107,15 @@
 										<strong>专家意见：</strong>
 									</td>
 									<td height="26" align="left" bgcolor="#FFFFFF">
-										<s:textfield id="txt_errorTime" name="errorLog.opinion" cssStyle="width: 250px;"/>
+										<s:textarea id="txt_errorTime" name="errorLog.opinion" cssStyle="width: 250px;"/>
 									</td>
 								</tr>
 								<tr>
 									<td height="26" colspan="2" align="center" bgcolor="#FFFFFF">
 										&nbsp;&nbsp;
 										<input id="addBtn" name="addBtn" type="button" value="解除报警" class="btn_2_3"/>
+										&nbsp;&nbsp;
+										<input name="closeBtn" type="button" class="btn_2_3" id="closeBtn" value="关闭">
 									</td>
 								</tr>
 							</table>
