@@ -89,9 +89,9 @@
           <td width="16%" align="center" background="../images/headerbg.jpg"><strong>设备名称</strong></td>
           <td width="16%" align="center" background="../images/headerbg.jpg"><strong>所属单位</strong></td>
           <td width="16%" align="center" background="../images/headerbg.jpg"><strong>故障时间</strong></td>
-          <td width="16%" align="center" background="../images/headerbg.jpg"><strong>是否报警</strong></td>
           <td width="16%" align="center" background="../images/headerbg.jpg"><strong>是否解除</strong></td>
           <td width="16%" align="center" background="../images/headerbg.jpg"><strong>解除时间</strong></td>
+	      <td width="16%" align="center" background="../images/headerbg.jpg"><strong>操作</strong></td>
 	    </tr>
 	    <s:iterator value="pagination.data" status="obj">
         <tr>
@@ -107,28 +107,21 @@
           <td height="26" align="center" bgcolor="#FFFFFF">     	
           	<s:date  name="errorTime" format="yyyy-MM-dd" />&nbsp;
           </td>
-           <td height="26" align="center" bgcolor="#FFFFFF">
-            <s:if test="isAlarm==1">
-            <span class="STYLE3">
-            <s:url id="edit_url" action="openAddErrorLogAction">   
-				<s:param name="errorLog.id" value="id"></s:param>   
-			      </s:url>
-         	  <a name="edit" href="javascript:void(0);" url="${edit_url}">
-            	报警</a>
-            	</span>
-            	
-            	
-            	</s:if><s:if test="isAlarm==0"><span class="STYLE2">正常</span></s:if>&nbsp;
+          <td height="26" align="center" bgcolor="#FFFFFF">
+            <s:if test="isRemove==1"><span class="STYLE3">已解除</span></s:if><s:if test="isRemove==0"><span class="STYLE2">未解除</span></s:if>&nbsp;
           </td>
           <td height="26" align="center" bgcolor="#FFFFFF">
-          	 <s:if test="isAlarm==1">
-            <s:if test="isRemove==1"><span class="STYLE3">已解除</span></s:if><s:if test="isRemove==0"><span class="STYLE2">未解除</span></s:if>&nbsp;
-            </s:if>
-          </td>
-          <td height="26" align="center" bgcolor="#FFFFFF" nowrap>
-          <s:if test="isAlarm==1">
           	<s:date  name="removeTime" format="yyyy-MM-dd" />&nbsp;
-          	</s:if>
+          </td>
+		  <td height="26" nowrap colspan="2" align="center" bgcolor="#FFFFFF">
+		  	 <s:url id="edit_url" action="openAddErrorLogAction">   
+				<s:param name="errorLog.id" value="id"></s:param>   
+			      </s:url>
+         	  <a name="edit" href="javascript:void(0);" url="${edit_url}">查看警报</a>
+			<s:url id="remove_url" action="toSetIsRemoveAction">   
+				<s:param name="errorLog.id" value="id"></s:param>   
+			</s:url>
+         	<a name="remove" href="javascript:void(0);" url="${remove_url}">解除警报</a>  
           </td>
 	    </tr>
 		</s:iterator>

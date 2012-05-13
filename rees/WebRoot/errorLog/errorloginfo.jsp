@@ -112,8 +112,10 @@
 								</tr>
 								<tr>
 									<td height="26" colspan="2" align="center" bgcolor="#FFFFFF">
+										<s:if test="errorLog.isRemove==0">
 										&nbsp;&nbsp;
 										<input id="addBtn" name="addBtn" type="button" value="解除报警" class="btn_2_3"/>
+										</s:if>
 										&nbsp;&nbsp;
 										<input name="closeBtn" type="button" class="btn_2_3" id="closeBtn" value="关闭">
 									</td>
