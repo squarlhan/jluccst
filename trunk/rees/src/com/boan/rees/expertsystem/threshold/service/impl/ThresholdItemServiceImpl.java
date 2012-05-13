@@ -139,5 +139,14 @@ public class ThresholdItemServiceImpl implements IThresholdItemService{
 			return false;
 		}
    }
+
+	@Override
+	public List<ThresholdItem> queryThresholdItemByThresholdId(String thresholdId){
+//		String hql = "from ThresholdItem order by createTime desc";
+//		Map<String, Object> values = new HashMap<String,Object>();
+//		values.put("thresholdId",thresholdId);
+//		List<ThresholdItem> data = dao.find( hql, values );
+		return null;
+	}
 }
 

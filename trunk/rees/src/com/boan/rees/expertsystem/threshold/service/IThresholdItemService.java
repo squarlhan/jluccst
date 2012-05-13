@@ -65,6 +65,12 @@ public interface IThresholdItemService {
 	public List<ThresholdItem> queryAllThresholdItem();
 	
 	/**
+	 * 根据阈值ID获取所有阈值项
+	 * @return
+	 */
+	public List<ThresholdItem> queryThresholdItemByThresholdId(String thresholdId);
+	
+	/**
 	 * 根据阈值项名称获取阈值项信息
 	 * @param name
 	 * @return

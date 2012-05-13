@@ -96,7 +96,7 @@ public class PointInfoServiceImpl implements IPointInfoService {
 	}
 
 	@Override
-	public void changeStatus(String deviceId, int status) {
-		pointInfoDao.changeStatus(deviceId, status);
+	public void updateStatus(String deviceId, int status) {
+		pointInfoDao.updateStatus(deviceId, status);
 	}
 }

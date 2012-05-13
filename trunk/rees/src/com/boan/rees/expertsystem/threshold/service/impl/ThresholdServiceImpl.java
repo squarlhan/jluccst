@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import com.boan.rees.expertsystem.threshold.dao.IThresholdDao;
 import com.boan.rees.expertsystem.threshold.model.CenterHeightAndSpeed;
 import com.boan.rees.expertsystem.threshold.model.Threshold;
+import com.boan.rees.expertsystem.threshold.model.ThresholdItem;
 import com.boan.rees.expertsystem.threshold.service.IThresholdService;
 import com.boan.rees.utils.expression.ExpressionCompare;
 import com.boan.rees.utils.page.Pagination;
@@ -162,6 +163,11 @@ public class ThresholdServiceImpl implements IThresholdService {
 		Threshold result=null;
 		boolean flag= false;
 		for(Threshold threshold : allThreshold){
+			//由于延迟所以调用一下以便获取数据
+			List<ThresholdItem> tempList = threshold.getThresholdItems();
+			for(ThresholdItem o : tempList){
+				o.getTroubles().size();
+			}
 			if(flag){
 				break;
 			}

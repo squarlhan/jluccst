@@ -34,7 +34,7 @@ public class PointInfoDaoImpl extends BaseDao<PointInfo, String> implements
 	}
 
 	@Override
-	public void changeStatus(String deviceId, int status) {
+	public void updateStatus(String deviceId, int status) {
 		String hql = "update PointInfo set status=:status where deviceId=:deviceId";
 		Map<String, Object> values = new HashMap<String,Object>();
 		values.put("deviceId", deviceId);

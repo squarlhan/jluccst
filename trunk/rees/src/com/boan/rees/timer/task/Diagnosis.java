@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -38,6 +37,7 @@ import com.boan.rees.expertsystem.service.IRuleResultInfoService;
 import com.boan.rees.expertsystem.service.InferenceEngine;
 import com.boan.rees.expertsystem.threshold.model.Threshold;
 import com.boan.rees.expertsystem.threshold.model.ThresholdItem;
+import com.boan.rees.expertsystem.threshold.service.IThresholdItemService;
 import com.boan.rees.expertsystem.threshold.service.IThresholdService;
 import com.boan.rees.utils.calendar.CalendarUtils;
 import com.boan.rees.utils.expression.ExpressionCompare;
@@ -64,6 +64,11 @@ public class Diagnosis
 	@Autowired
 	@Qualifier("thresholdService")
 	private IThresholdService thresholdService;
+	
+	//阈值服务接口
+	@Autowired
+	@Qualifier("thresholdItemService")
+	private IThresholdItemService thresholdItemService;
 	// 监测点信息接口类
 	@Autowired
 	@Qualifier("pointInfoService")
@@ -127,7 +132,7 @@ public class Diagnosis
 			{
 				//解析现象数据串，分割符："_"，a+数字:表示原因+原因Id，b+数字:表示现象+现象Id，
 				String sTemp = listRule.get( i ).getResultId().split( "_" )[j];
-				if(sTemp.indexOf( "a" ) != -1)	//原因
+				if(sTemp.indexOf( "A" ) != -1)	//原因
 				{
 					RuleReasonInfo ruleReason = ruleReasonInfoService.getbyId( Integer.parseInt( sTemp.substring( 1, sTemp.length() )));
 					if( ruleReason != null)
@@ -138,7 +143,7 @@ public class Diagnosis
 						
 						listResult.add( backwardandResult );
 					}
-				}else if(sTemp.indexOf( "b" ) != -1)  //现象
+				}else if(sTemp.indexOf( "B" ) != -1)  //现象
 				{
 					RuleResultInfo ruleResult = ruleResultInfoService.getbyId( Integer.parseInt( sTemp.substring( 1, sTemp.length() )));
 					if( ruleResult != null)
@@ -160,7 +165,8 @@ public class Diagnosis
 			//封装规则下的原因
 			//推理机规则包括原因属性
 			BackwardandReason backwardandReason = new BackwardandReason();
-			RuleReasonInfo ruleReasonTemp  = ruleReasonInfoService.getbyId( Integer.parseInt( listRule.get( i ).getReasonId()));
+			String sTempReasonId = listRule.get( i ).getReasonId();
+			RuleReasonInfo ruleReasonTemp  = ruleReasonInfoService.getbyId( Integer.parseInt( sTempReasonId.substring( 1, sTempReasonId.length() )));
 			if(ruleReasonTemp != null)
 			{
 				backwardandReason.setId( ruleReasonTemp.getId() );
@@ -199,40 +205,43 @@ public class Diagnosis
 			//获得设备对象
 			DeviceInfo deviceInfo =	deviceInfoService.get(listDeviceInfo.get( i ).getId());
 			//根据设备ID获得所有未执行任务的监测点对象数组
-			List<PointInfo> pis = pointInfoService.findPointInfosByDeviceId(listDeviceInfo.get( i ).getId(), 0);
+			List<PointInfo> pis = pointInfoService.findPointInfosByDeviceId(listDeviceInfo.get( i ).getId(), 1);
 			//根据设备中心高和转速获得对应的阈值项实体类
 			Threshold threshold = thresholdService.getThresholdByCenterHeightAndSpeed(deviceInfo.getCenterHeight().toString(), deviceInfo.getSpeed().toString());
 			System.out.println("＝＝＝＝＝2.取某个设备的阈值 ＝＝＝＝＝");
 			if(pis!=null && pis.size()>0){
+				boolean findAllItemFlag = false;
 				//监测点参数
 				List<PointParamInfo> ppis = null;
 				//监测点参数对象
 				PointDataInfo pdi = null;
 				for (PointInfo pointInfo : pis) {
-					//判断是否执行过服务调度：1未执行
-					if( pointInfo.getStatus() == 1 )
-					{
-						//获得监测点参数
-						System.out.println("＝＝＝＝＝2.取某个设备的监测点参数 ＝＝＝＝＝");
-						ppis = pointParamInfoService.findPointParamInfoByPointId(pointInfo.getId());
-						if(ppis!=null && ppis.size()>0){
-							for(PointParamInfo ppi:ppis){
-								if(StringUtils.trimToNull(String.valueOf( week ))!=null && StringUtils.trimToNull(String.valueOf( year ))!=null){
-									//获得监测点参数数据
-									System.out.println("＝＝＝＝＝2.取某个设备的监测点数据值 ＝＝＝＝＝");
-									pdi = pointDataInfoService.get(String.valueOf( year ), String.valueOf( week ), ppi.getId());
-									if(pdi!=null){
-										//判断监测点参数数据是否超出境界值
-										System.out.println("＝＝＝＝＝2.判断某个设备的监测点是否超出阈值 ＝＝＝＝＝");
-										List<ThresholdItem> thresholdItem = threshold.getThresholdItems();
-										String expression = null;
-										for (ThresholdItem item : thresholdItem) {
-											expression = item.getThresholdItemExpression();
-											if(ExpressionCompare.compare(expression, "V", pdi.getDataInfo())){
-												if(item.getSign()==1){
-													System.out.println("＝＝＝＝＝2.报警区间内，报警＝＝＝＝＝");
+					//获得监测点参数
+					System.out.println("＝＝＝＝＝2.取某个设备的监测点参数 ＝＝＝＝＝");
+					ppis = pointParamInfoService.findPointParamInfoByPointId(pointInfo.getId());
+					if(ppis!=null && ppis.size()>0){
+						for(PointParamInfo ppi:ppis){
+							if(StringUtils.trimToNull(String.valueOf( week ))!=null && StringUtils.trimToNull(String.valueOf( year ))!=null){
+								//获得监测点参数数据
+								System.out.println("＝＝＝＝＝2.取某个设备的监测点数据值 ＝＝＝＝＝");
+								pdi = pointDataInfoService.get(String.valueOf( year ), String.valueOf( week ), ppi.getId());
+								if(pdi!=null){
+									//判断监测点参数数据是否超出境界值
+									System.out.println("＝＝＝＝＝2.判断某个设备的监测点是否超出阈值 ＝＝＝＝＝");
+									List<ThresholdItem> thresholdItem = threshold.getThresholdItems();
+									String expression = null;
+									
+									for (ThresholdItem item : thresholdItem) {
+										expression = item.getThresholdItemExpression();
+										if(ExpressionCompare.compare(expression, item.getThresholdItemName(), pdi.getDataInfo())){
+											if(item.getSign()==1){
+												findAllItemFlag = true;
+												System.out.println("＝＝＝＝＝2.报警区间内，报警＝＝＝＝＝");
+												if (item.getTroubleIds() != null && item.getTroubleIds().size() > 0)
+												{
 													//判断是否在报警区间
 													List<BackwardandResult> listEnters = new ArrayList<BackwardandResult>();
+													
 													for(int kk = 0;kk<item.getTroubleIds().size();kk++)
 													{
 														BackwardandResult enter = new BackwardandResult();
@@ -284,37 +293,11 @@ public class Diagnosis
 													errorLog.setErrorReason( errorReason );
 													errorLog.setOpinion( opinion );
 													errorLog.setIsAlarm( 1 );
-													errorLogService.save( errorLog );
 													
-												}else
-												{
-													System.out.println("＝＝＝＝＝2.报警区间内，但不报警，是正常状态＝＝＝＝＝");
-													//记录日志
-													ErrorLog errorLog = new ErrorLog();
-													errorLog.setDeptName( listDeviceInfo.get( i ).getCompanyId() );
-													errorLog.setDeviceName( listDeviceInfo.get( i ).getDeviceName() );
-													errorLog.setIsRemove( 1 );
-													errorLog.setDeviceNum( listDeviceInfo.get( i ).getDeviceNum() );
-													errorLog.setErrorTime( Calendar.getInstance() );
-													errorLog.setIsAlarm( 0 );
 													errorLogService.save( errorLog );
+													break;
 												}
-											}else
-											{
-												System.out.println("＝＝＝＝＝2.正常＝＝＝＝＝");
-												//记录日志
-												ErrorLog errorLog = new ErrorLog();
-												errorLog.setDeptName( listDeviceInfo.get( i ).getCompanyId() );
-												errorLog.setDeviceName( listDeviceInfo.get( i ).getDeviceName() );
-												errorLog.setIsRemove( 1 );
-												errorLog.setDeviceNum( listDeviceInfo.get( i ).getDeviceNum() );
-												errorLog.setErrorTime( Calendar.getInstance() );
-												errorLog.setIsAlarm( 0 );
-												errorLogService.save( errorLog );
 											}
-											
-											//处理完毕后，将设备监测点状态置为2
-											pointInfoService.changeStatus(listDeviceInfo.get( i ).getId(),2);
 										}
 									}
 								}
@@ -322,6 +305,21 @@ public class Diagnosis
 						}
 					}
 				}
+				if(!findAllItemFlag)
+				{
+					System.out.println("＝＝＝＝＝2.正常＝＝＝＝＝");
+					//记录日志
+					ErrorLog errorLog = new ErrorLog();
+					errorLog.setDeptName( listDeviceInfo.get( i ).getCompanyId() );
+					errorLog.setDeviceName( listDeviceInfo.get( i ).getDeviceName() );
+					errorLog.setIsRemove( 1 );
+					errorLog.setDeviceNum( listDeviceInfo.get( i ).getDeviceNum() );
+					errorLog.setErrorTime( Calendar.getInstance() );
+					errorLog.setIsAlarm( 0 );
+					errorLogService.save( errorLog );
+				}
+				//处理完毕后，将设备监测点状态置为2
+				pointInfoService.updateStatus(listDeviceInfo.get( i ).getId(),2);
 			}
 	    }
 	}
