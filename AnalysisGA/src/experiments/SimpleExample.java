@@ -9,12 +9,28 @@
  */
 package experiments;
 
+import java.awt.BorderLayout;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.List;
 
+import javax.swing.JFrame;
+
+import org.jfree.chart.ChartFactory;
+import org.jfree.chart.JFreeChart;
+import org.jfree.chart.axis.ValueAxis;
+import org.jfree.chart.plot.CategoryPlot;
+import org.jfree.chart.plot.PlotOrientation;
+import org.jfree.chart.plot.XYPlot;
+import org.jfree.data.category.CategoryDataset;
+import org.jfree.data.general.DatasetUtilities;
+import org.jfree.data.time.Millisecond;
+import org.jfree.data.time.TimeSeries;
+import org.jfree.data.time.TimeSeriesCollection;
 import org.jgap.*;
 import org.jgap.impl.*;
 
@@ -28,6 +44,7 @@ import org.jgap.impl.*;
 public class SimpleExample {
 	/** String containing the CVS revision. Read out via reflection! */
 	private static final String CVS_REVISION = "$Revision: 1.9 $";
+	List<Double> fitlist = new ArrayList();
 	
 	public void runga(int ng, int chromeSize, int popsize, double left, double right, FitnessFunction fitnessfun, BufferedWriter output){
 		long startTime = System.currentTimeMillis();
@@ -36,6 +53,15 @@ public class SimpleExample {
 		gaConf.reset();
 		gaConf.setPreservFittestIndividual(true);
 		gaConf.setKeepPopulationSizeConstant(false);
+		gaConf.getGeneticOperators().clear();
+		try {
+			gaConf.addGeneticOperator(new MutationOperator(gaConf, new DynamicMutationRateCalc(gaConf, 10, 100)));
+			gaConf.addGeneticOperator(new CrossoverOperator(gaConf, new DynamicCrossoverRateCalc(gaConf, 0.7, 0.99)));
+		} catch (InvalidConfigurationException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
 		Genotype genotype = null;			
 		
 		try {
@@ -58,12 +84,13 @@ public class SimpleExample {
 		int percentEvolution = numEvolutions / 10;
 		for (int i = 0; i < numEvolutions; i++) {
 			genotype.evolve();
+			IChromosome fittest = genotype.getFittestChromosome();
+			double fitness = fittest.getFitnessValue();
+			fitlist.add(fitness);
 			// Print progress.
 			// ---------------
 			if (percentEvolution > 0 && i % percentEvolution == 0) {
 				progress++;
-				IChromosome fittest = genotype.getFittestChromosome();
-				double fitness = fittest.getFitnessValue();
 				System.out.println("Currently fittest Chromosome has fitness "+ fitness);
 			}
 		}
@@ -94,6 +121,42 @@ public class SimpleExample {
 		System.out.println("运行时间 " + (endTime - startTime) + "ms");
 		System.out.println("sum counts:  "+ MaxFunction.counts);
 	}
+	
+    public  JFreeChart createChart(){  
+    	String[] rowKeys = { "Fitness Line" };     
+        String[] colKeys = new String[fitlist.size()];     
+        double[][] data = new double[1][fitlist.size()];  
+        for(int i =0;i<=fitlist.size()-1;i++){
+        	colKeys[i] = String.valueOf(i+1);
+        	data[0][i] = fitlist.get(i);
+        }
+        CategoryDataset dataset = DatasetUtilities.createCategoryDataset(rowKeys, colKeys, data);
+        //创建时序图对象  
+        JFreeChart jfreechart = ChartFactory.createLineChart("Line Chart Demo", // 标题     
+                "Iteration", // categoryAxisLabel （category轴，横轴，X轴标签）     
+                "FitnessValue", // valueAxisLabel（value轴，纵轴，Y轴的标签）     
+                dataset, // dataset     
+                PlotOrientation.VERTICAL, true, // legend     
+                false, // tooltips     
+                false); // URLs     
+    
+        // 使用CategoryPlot设置各种参数。以下设置可以省略。     
+        CategoryPlot plot = (CategoryPlot) jfreechart.getPlot();      
+        // 前景色 透明度     
+        plot.setBackgroundAlpha(0.5f); 
+        plot.setForegroundAlpha(0.5f);     
+        XYPlot xyplot = jfreechart.getXYPlot();  
+        //纵坐标设定  
+        ValueAxis valueaxis = xyplot.getDomainAxis();  
+        //自动设置数据轴数据范围  
+        valueaxis.setAutoRange(false);  
+        valueaxis.setRange(0, 1000);
+  
+        valueaxis = xyplot.getRangeAxis();  
+        valueaxis.setRange(0.0D,200D);  
+  
+        return jfreechart;  
+      }  
 
 	/**
 	 * Starts the example.
@@ -137,7 +200,10 @@ public class SimpleExample {
 				}
 				output[i] = new BufferedWriter(new FileWriter(result[i]));
 			}
-			
+			JFrame frame=new JFrame("Test Chart");  
+		    frame.getContentPane().add(se.createChart(),new BorderLayout().CENTER);  
+		    frame.pack();  
+		    frame.setVisible(true);  
 			for(int a=0; a<=0;a++){
 //				se.runga(100, 30, 40, -100,  100, new MaxFunction(), output[0]);
 				se.runga(200, 30, 40, -100,  100, new MaxFunction(), output[0]);
