@@ -21,7 +21,9 @@ import java.util.List;
 import javax.swing.JFrame;
 
 import org.jfree.chart.ChartFactory;
+import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
+import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.ValueAxis;
 import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
@@ -31,6 +33,9 @@ import org.jfree.data.general.DatasetUtilities;
 import org.jfree.data.time.Millisecond;
 import org.jfree.data.time.TimeSeries;
 import org.jfree.data.time.TimeSeriesCollection;
+import org.jfree.data.xy.XYDataset;
+import org.jfree.data.xy.XYSeries;
+import org.jfree.data.xy.XYSeriesCollection;
 import org.jgap.*;
 import org.jgap.impl.*;
 
@@ -80,6 +85,11 @@ public class SimpleExample {
 			e.printStackTrace();
 			System.exit(-2);
 		}
+		JFreeChart jfc = createChart();
+		JFrame frame=new JFrame("Test Chart");  
+	    frame.getContentPane().add(new ChartPanel(jfc),new BorderLayout().CENTER);  
+	    frame.pack();  
+	    frame.setVisible(true); 
 		int progress = 0;
 		int percentEvolution = numEvolutions / 10;
 		for (int i = 0; i < numEvolutions; i++) {
@@ -87,6 +97,11 @@ public class SimpleExample {
 			IChromosome fittest = genotype.getFittestChromosome();
 			double fitness = fittest.getFitnessValue();
 			fitlist.add(fitness);
+			jfc = createChart();
+			frame.getContentPane().removeAll();
+			frame.getContentPane().add(new ChartPanel(jfc),new BorderLayout().CENTER);  
+		    frame.pack();  
+		    frame.setVisible(true); 
 			// Print progress.
 			// ---------------
 			if (percentEvolution > 0 && i % percentEvolution == 0) {
@@ -122,38 +137,36 @@ public class SimpleExample {
 		System.out.println("sum counts:  "+ MaxFunction.counts);
 	}
 	
-    public  JFreeChart createChart(){  
-    	String[] rowKeys = { "Fitness Line" };     
-        String[] colKeys = new String[fitlist.size()];     
-        double[][] data = new double[1][fitlist.size()];  
-        for(int i =0;i<=fitlist.size()-1;i++){
-        	colKeys[i] = String.valueOf(i+1);
-        	data[0][i] = fitlist.get(i);
+    public  JFreeChart createChart(){ 
+    	XYSeries xyseries = new XYSeries("Fitness Line");
+    	xyseries.add(0.0D, 0.0D); 
+        for(int i =1;i<=fitlist.size();i++){
+        	xyseries.add(i, fitlist.get(i-1)); 
         }
-        CategoryDataset dataset = DatasetUtilities.createCategoryDataset(rowKeys, colKeys, data);
+        XYSeriesCollection xyseriescollection = new XYSeriesCollection(); //再用XYSeriesCollection添加入XYSeries 对象 
+        xyseriescollection.addSeries(xyseries);
         //创建时序图对象  
-        JFreeChart jfreechart = ChartFactory.createLineChart("Line Chart Demo", // 标题     
+        JFreeChart jfreechart = ChartFactory.createXYLineChart("Line Chart Demo", // 标题     
                 "Iteration", // categoryAxisLabel （category轴，横轴，X轴标签）     
                 "FitnessValue", // valueAxisLabel（value轴，纵轴，Y轴的标签）     
-                dataset, // dataset     
+                xyseriescollection, // dataset     
                 PlotOrientation.VERTICAL, true, // legend     
                 false, // tooltips     
                 false); // URLs     
     
         // 使用CategoryPlot设置各种参数。以下设置可以省略。     
-        CategoryPlot plot = (CategoryPlot) jfreechart.getPlot();      
+        XYPlot plot = jfreechart.getXYPlot();      
         // 前景色 透明度     
         plot.setBackgroundAlpha(0.5f); 
         plot.setForegroundAlpha(0.5f);     
-        XYPlot xyplot = jfreechart.getXYPlot();  
+//        XYPlot xyplot = jfreechart.getXYPlot();  
         //纵坐标设定  
-        ValueAxis valueaxis = xyplot.getDomainAxis();  
+        ValueAxis xx = plot.getDomainAxis();  
         //自动设置数据轴数据范围  
-        valueaxis.setAutoRange(false);  
-        valueaxis.setRange(0, 1000);
+        xx.setRange(0.0, 200);
   
-        valueaxis = xyplot.getRangeAxis();  
-        valueaxis.setRange(0.0D,200D);  
+        ValueAxis yy = plot.getRangeAxis();  
+        yy.setRange(700.0,1000);  
   
         return jfreechart;  
       }  
@@ -200,10 +213,7 @@ public class SimpleExample {
 				}
 				output[i] = new BufferedWriter(new FileWriter(result[i]));
 			}
-			JFrame frame=new JFrame("Test Chart");  
-		    frame.getContentPane().add(se.createChart(),new BorderLayout().CENTER);  
-		    frame.pack();  
-		    frame.setVisible(true);  
+			 
 			for(int a=0; a<=0;a++){
 //				se.runga(100, 30, 40, -100,  100, new MaxFunction(), output[0]);
 				se.runga(200, 30, 40, -100,  100, new MaxFunction(), output[0]);
