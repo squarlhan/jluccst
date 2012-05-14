@@ -51,7 +51,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  		 */
 			$("#addbtn").click(function(){
 				
-				parent.parent.tipsWindown("添加建议","iframe:openAddAdviceAction.action","480","420","true","","true","no");
+				parent.parent.tipsWindown("添加建议","iframe:openAddAdviceAction.action","480","220","true","","true","no");
 				parent.parent.$("#windown-close").bind('click',function(){
 					window.location.href="./openRuleAdviceAction";
 				});
@@ -65,7 +65,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  		$('a[name="edit"]').each(function(){
 	  			$(this).click(function(){
 	  				var url = $(this).attr("url");
-	  				parent.parent.tipsWindown("修改建议","iframe:"+url,"480","420","true","","true","no");
+	  				parent.parent.tipsWindown("修改建议","iframe:"+url,"480","220","true","","true","no");
 	  				parent.parent.$("#windown-close").bind('click',function(){
 						window.location.href=window.location.href;
 					});

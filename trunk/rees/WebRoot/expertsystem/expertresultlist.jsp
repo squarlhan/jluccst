@@ -51,7 +51,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  		 */
 			$("#addbtn").click(function(){
 				
-				parent.parent.tipsWindown("添加现象","iframe:openAddResultAction.action","480","420","true","","true","no");
+				parent.parent.tipsWindown("添加现象","iframe:openAddResultAction.action","480","220","true","","true","no");
 				parent.parent.$("#windown-close").bind('click',function(){
 					window.location.href="./openRuleResultAction";
 				});
@@ -65,7 +65,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  		$('a[name="edit"]').each(function(){
 	  			$(this).click(function(){
 	  				var url = $(this).attr("url");
-	  				parent.parent.tipsWindown("修改现象","iframe:"+url,"480","420","true","","true","no");
+	  				parent.parent.tipsWindown("修改现象","iframe:"+url,"480","220","true","","true","no");
 	  				parent.parent.$("#windown-close").bind('click',function(){
 						window.location.href=window.location.href;
 					});

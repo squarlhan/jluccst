@@ -27,13 +27,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	var _devicetype_submit = {
 		rules: {
            "ruleAdviceInfo.advice":{required:true}
-         
-          
 		},messages:{
 			"ruleAdviceInfo.advice":
 			{
 				required:" 建议为必填项！"
-				
 			}
 			
 		}
@@ -68,9 +65,13 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		//如果有id就说明是修改action
 		var devicetype = $("#hid_adviceId").val();
 		
-			$("#btn_save").click(function() {
+			$("#addBtn").click(function() {
 			var validate_settings_submit = jQuery.extend({}, _devicetype_submit);
            	var validator = $("form").validate(validate_settings_submit);
+           	if($("#sel_deviceType").val()==""){
+           		alert("请选择设备类型！");
+           		return false;
+           	}
            	if(!validator.form()){
 				return false;
 			}
@@ -90,7 +91,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	 * 关闭
 	 */
  	$.fn.close = function(){
- 		$("#btn_close").click(function(){
+ 		$("#closeBtn").click(function(){
   			parent.$("#windown-close").click();
   		});
 	}
@@ -99,7 +100,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	 * 初始化页面元素
 	 */
 	$.fn.initPage = function(){
-		$("#txt_typeName").focus();
+		$("#sel_deviceType").focus();
 		var err = $("#lb_error").html();
 		if(err!=null && $.trim(err)!="" ){
 			alert(err);
@@ -119,36 +120,45 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <s:form id="form1" name="form1" method="post"  theme="simple">
     <s:label id="lb_message" name="message" cssStyle="display:none"></s:label>
 		<s:hidden id="hid_adviceId" name="ruleAdviceInfo.id"></s:hidden>
-    	<table width="100%" border="0" cellspacing="5" cellpadding="0">
-    		<tr>
-    			<td colspan="2" style="color:red">
-	    			<s:property value="initString"/>
-    			</td>
-    		</tr>
-    		<tr>
-    			<td>
-    			请选择设备类型
-    			</td>
-    			<td height="26" align="left" bgcolor="#FFFFFF">
-				<s:select id="sel_deviceType" list="deviceTypeList" listKey="id" listValue="typeName" headerKey="nothing" headerValue="---请选择---" name="ruleAdviceInfo.deviceTypeId" cssStyle="width: 250px;"></s:select>
+		
+		<table width="100%" border="0" cellspacing="5" cellpadding="0">
+			<tr>
+				<td>
+					<table width="100%" style="height: 100%;" border="0"
+						cellspacing="6" cellpadding="0">
+						<tr>
+							<td style="height: 36px;">
+								<table id="table1" width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#d5e4fd">
+									<tr>
+										<td height="26" align="right" bgcolor="#FFFFFF">
+											<strong>设备类型：</strong>
+										</td>
+										<td height="26" align="left" bgcolor="#FFFFFF">
+											<s:select id="sel_deviceType" list="deviceTypeList" listKey="id" listValue="typeName" headerKey="" headerValue="---请选择---" name="ruleAdviceInfo.deviceTypeId" cssStyle="width: 250px;"></s:select><font color="red">*</font>
+										</td>
+									</tr>
+									<tr>
+										<td height="26" align="right" bgcolor="#FFFFFF">
+											<strong>建议：</strong>
+										</td>
+										<td height="26" align="left" bgcolor="#FFFFFF">
+											<s:textarea id="txt_age" name="ruleAdviceInfo.advice" rows="6" cssStyle="width:250px;"/><font color="red">*</font>
+										</td>
+									</tr>
+									<tr>
+										<td height="26" colspan="2" align="center" bgcolor="#FFFFFF">
+											<input name="addBtn" type="button" class="btn_2_3" id="addBtn" value="确定">
+											&nbsp;&nbsp;
+											<input name="closeBtn" type="button" class="btn_2_3" id="closeBtn" value="关闭">
+										</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+					</table>
 				</td>
-    		</tr>
-    		
-    		<tr> 
-    			<td>
-    			建议：
-    			</td>
-    			<td>
-    			<s:textfield id="txt_age" name="ruleAdviceInfo.advice"/>
-    			</td>
-    		</tr>
-    		<tr>
-    			<td colspan="2">
-    				<input type="button" id="btn_save" value="保存"/>
-    				<input type="button" id="btn_close" value="关闭"/>
-    			</td>
-    		</tr>
-    	</table>
+			</tr>
+		</table>
 	</s:form>
   </body>
 </html>
