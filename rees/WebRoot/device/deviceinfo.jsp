@@ -137,7 +137,7 @@
 	               	}
 	               	form1.submit();
 	           	});
-          	}
+          	};
 			
 			/**
 			 * 关闭
@@ -149,7 +149,7 @@
 					}
 					parent.$("#windown-close").click();
 		  		});
-			}
+			};
 			/**
 			 * 初始化页面
 			 */
@@ -167,7 +167,7 @@
 				if(message!=null && $.trim(message)!="" ){
 					alert(message);
 				}
-			}
+			};
 			
 			/**
 			 * 下载图片
@@ -179,7 +179,7 @@
 					form1.submit();
 					form1.action = oldAction;
 				});
-			}
+			};
 			
 			/**
 			 * 删除设备图片
@@ -191,9 +191,9 @@
 					var row = $("#table1 tr:last").prev();
 					row.find("strong").replaceWith("<strong>添加设备图片：</strong>");
 					row.find("a:first").remove();
-					row.find("a:first").replaceWith('<input type="file" name="files" value="" id="form1_files" style="width: 250px;"/>');
+					row.find("a:first").replaceWith('<input type="file" name="files" value="" id="form1_files" style="width: 250px;"/><br/><font size="1px" color="red">建议图片尺寸为长600px，宽473px</font>');
 				}
-			}
+			};
 			
 			/**
 			 * 选择设备类别
@@ -264,7 +264,7 @@
 					}
 					//*/
 				});
-			}
+			};
 			
 		</script>
 	</head>
