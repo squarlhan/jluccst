@@ -100,7 +100,7 @@ public class ExpressionCompare {
 		if(expression==null ||expression.equals("")){
 			result = true;
 		} else if(expression.contains(paramName)){
-			expression = expression.replaceAll("<=", "≤").replaceAll(">=", "≥").replaceAll("!=", "≠").replaceAll("<>", "≠");
+			expression = expression.replaceAll("＝", "=").replaceAll("＞", ">").replaceAll("＜", "<").replaceAll("<=", "≤").replaceAll(">=", "≥").replaceAll("!=", "≠").replaceAll("<>", "≠");
 			//获取参数位置
 			int index = expression.indexOf(paramName);
 			//截取左边的表达式
