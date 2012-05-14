@@ -113,7 +113,8 @@ public class GABreeder
           IEvolutionMonitor.MONITOR_EVENT_BEFORE_UPDATE_CHROMOSOMES1,
           a_conf.getGenerationNr(), new Object[]{pop});
     }
-    updateChromosomes(pop, a_conf);
+//    updateChromosomes(pop, a_conf);
+    updateChromosomes(pop, a_conf, obj, fitness, ap_num, ap_lamda, fit_lamda, cutoff, extra, output);
     if (monitorActive) {
       // Monitor that fitness value of chromosomes is being updated.
       // -----------------------------------------------------------
@@ -192,7 +193,8 @@ public class GABreeder
           IEvolutionMonitor.MONITOR_EVENT_BEFORE_UPDATE_CHROMOSOMES2,
           a_conf.getGenerationNr(), new Object[]{pop});
     }
-    updateChromosomes(pop, a_conf, obj, fitness, ap_num, ap_lamda, fit_lamda, cutoff, extra, output);
+    updateChromosomes(pop, a_conf);
+//    updateChromosomes(pop, a_conf, obj, fitness, ap_num, ap_lamda, fit_lamda, cutoff, extra, output);
     //去掉重复的个体
     /*pop.sortByFitness();
     Population tempop = (Population) pop.clone();
