@@ -43,7 +43,7 @@ public class GroupServiceImpl implements IGroupService
 	private IWorkshopService workshopService = null;
 
 	@Override
-	public String getGroupFullName( String companyId, String factoryId, String workshopId ) throws Exception
+	public String getGroupFullName( String companyId, String factoryId, String workshopId )
 	{
 		StringBuffer sb = new StringBuffer();
 		// 表示车间
