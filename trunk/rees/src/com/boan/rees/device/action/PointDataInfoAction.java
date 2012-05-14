@@ -364,15 +364,17 @@ public class PointDataInfoAction extends BaseActionSupport {
 							//获得监测点参数数据
 							pdi = pointDataInfoService.get(selectYear, selectWeek, ppi.getId());
 							if(pdi!=null){
-								//判断监测点参数数据是否超出境界值
-								List<ThresholdItem> thresholdItem = threshold.getThresholdItems();
-								String expression = null;
-								for (ThresholdItem item : thresholdItem) {
-									expression = item.getThresholdItemExpression();
-									if(item.getSign()==1){
-										if(ExpressionCompare.compare(expression, "V", pdi.getDataInfo())){
-											alarmSb.append(pointInfo.getControlPointName() + ppi.getName() + ",");
-											alarm = expression;
+								if(threshold!=null){
+									//判断监测点参数数据是否超出境界值
+									List<ThresholdItem> thresholdItem = threshold.getThresholdItems();
+									String expression = null;
+									for (ThresholdItem item : thresholdItem) {
+										expression = item.getThresholdItemExpression();
+										if(item.getSign()==1){
+											if(ExpressionCompare.compare(expression, "V", pdi.getDataInfo())){
+												alarmSb.append(pointInfo.getControlPointName() + ppi.getName() + ",");
+												alarm = expression;
+											}
 										}
 									}
 								}
