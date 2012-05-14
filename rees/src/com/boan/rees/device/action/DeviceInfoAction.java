@@ -13,6 +13,7 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -382,9 +383,10 @@ public class DeviceInfoAction extends BaseActionSupport{
 	public String toAddDevice(){
 		try {
 			saveImageToDevice(device);
-//			device.setFactoryId(sessionFactoryId);
-//			device.setWorkshopId(sessionWorkshopId);
-
+			device.setControlPoint(0);//监测点数量为0
+			device.setIsDelete(0);
+			device.setSortIndex(0);
+			device.setCreateTime(Calendar.getInstance());
 			//保存设备对象
 			deviceInfoService.save(device);
 			message="保存成功！";
@@ -546,8 +548,6 @@ public class DeviceInfoAction extends BaseActionSupport{
 	public String toModifyDevice(){
 		try {
 			saveImageToDevice(device);
-//			device.setFactoryId(sessionFactoryId);
-//			device.setWorkshopId(sessionWorkshopId);
 			deviceInfoService.update(device);
 			message="保存成功！";
 		} catch (Exception e) {
