@@ -142,6 +142,7 @@
 		 * 初始化页面元素
 		 */
 		$.fn.initPage = function(){
+	 		$("#sel_deviceType").focus();
 			if($(".look").length>0){
 				//得到checkboxlist的td,自定义td的id为checktd 
 				var checktd = document.getElementById("checkboxlist_td"); 
