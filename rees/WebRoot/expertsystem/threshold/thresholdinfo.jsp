@@ -43,7 +43,7 @@
 		var _ThresholdCategory_submit = {
 			rules: {
                "threshold.thresholdName":{required:true,maxlength:20},
-               "threshold.unit":{required:true,maxlength:20}
+               "threshold.unit":{maxlength:20}
 			},messages:{
 				"threshold.thresholdName":
 				{
@@ -52,7 +52,7 @@
 				},
 				"threshold.unit":
 				{
-					required:"阈值单位为必填项！",
+					//required:"阈值单位为必填项！",
 					maxlength:"阈值单位最多输入20个字符！"
 				}
 			}
@@ -240,7 +240,7 @@
 											<strong>阈值单位：</strong>
 										</td>
 										<td height="26" align="left" colspan="3" bgcolor="#FFFFFF">
-											<s:textfield id="txt_thresholdUnit" name="threshold.unit" maxlength="25" cssStyle="width: 250px;"/><font color="red">*</font>
+											<s:textfield id="txt_thresholdUnit" name="threshold.unit" maxlength="25" cssStyle="width: 250px;"/>
 										</td>
 									</tr>
 									
