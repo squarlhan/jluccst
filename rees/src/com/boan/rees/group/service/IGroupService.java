@@ -23,6 +23,6 @@ public interface IGroupService
 	 * @return
 	 * @throws Exception
 	 */
-	public String getGroupFullName(String companyId, String factoryId, String workshopId ) throws Exception;
+	public String getGroupFullName(String companyId, String factoryId, String workshopId );
 }
 

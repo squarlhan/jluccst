@@ -39,6 +39,7 @@ import com.boan.rees.expertsystem.threshold.model.Threshold;
 import com.boan.rees.expertsystem.threshold.model.ThresholdItem;
 import com.boan.rees.expertsystem.threshold.service.IThresholdItemService;
 import com.boan.rees.expertsystem.threshold.service.IThresholdService;
+import com.boan.rees.group.service.IGroupService;
 import com.boan.rees.utils.calendar.CalendarUtils;
 import com.boan.rees.utils.expression.ExpressionCompare;
 
@@ -98,6 +99,10 @@ public class Diagnosis
 	@Qualifier("errorLogService")
 	private IErrorLogService errorLogService;
 	
+	//故障日志服务接口
+	@Autowired
+	@Qualifier("groupService")
+	private IGroupService groupService;
 	/**
 	 * 服务工作过程
 	 * 1.封装所有规则
@@ -282,7 +287,10 @@ public class Diagnosis
 													
 													//返回结果，记录报警日志
 													ErrorLog errorLog = new ErrorLog();
-													errorLog.setDeptName( listDeviceInfo.get( i ).getCompanyId() );
+													String companyId = listDeviceInfo.get( i ).getCompanyId();
+													String factoryId =  listDeviceInfo.get( i ).getFactoryId();
+													String workshopId = listDeviceInfo.get( i ).getWorkshopId();
+													errorLog.setDeptName( groupService.getGroupFullName( companyId, factoryId, workshopId ) );
 													errorLog.setDeviceName( listDeviceInfo.get( i ).getDeviceName() );
 													errorLog.setIsRemove( 0 );
 													errorLog.setDeviceNum( listDeviceInfo.get( i ).getDeviceNum() );
@@ -310,7 +318,11 @@ public class Diagnosis
 					System.out.println("＝＝＝＝＝2.正常＝＝＝＝＝");
 					//记录日志
 					ErrorLog errorLog = new ErrorLog();
-					errorLog.setDeptName( listDeviceInfo.get( i ).getCompanyId() );
+					String companyId = listDeviceInfo.get( i ).getCompanyId();
+					String factoryId =  listDeviceInfo.get( i ).getFactoryId();
+					String workshopId = listDeviceInfo.get( i ).getWorkshopId();
+					
+					errorLog.setDeptName( groupService.getGroupFullName( companyId, factoryId, workshopId ) );
 					errorLog.setDeviceName( listDeviceInfo.get( i ).getDeviceName() );
 					errorLog.setIsRemove( 1 );
 					errorLog.setDeviceNum( listDeviceInfo.get( i ).getDeviceNum() );
