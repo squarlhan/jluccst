@@ -15,7 +15,7 @@
 		$("#addpointdata").click(function() {
 			parent.parent.parent.tipsWindown("监测点数据维护", "iframe:datamanage/pointdatainfo.action?deviceId=<s:property value='deviceId'/>&selectYear=" + $("#yearlist").val() + "&selectWeek=" + $("#weeklist").val(), "480", "320", "true", "", "true", "", "auto");
 			parent.parent.parent.$("#windown-close").bind('click',function(){
-				window.location.href="pointdatalist.action?deviceId=<s:property value='deviceId'/>&selectYear=" + $("#yearlist").val() + "&selectWeek=" + $("#weeklist").val();
+				window.location.href="datamanage/pointdatalist.action?deviceId=<s:property value='deviceId'/>&selectYear=" + $("#yearlist").val() + "&selectWeek=" + $("#weeklist").val();
 			});
 		});
 		//监测点数据维护
