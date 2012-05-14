@@ -81,23 +81,23 @@ public class DeviceInfoServiceImpl  implements IDeviceInfoService {
 		//表示公司
 		if( StringUtils.isNotBlank( companyId ) && StringUtils.isBlank( factoryId ) && StringUtils.isBlank( workshopId ))
 		{
-			hql = "from DeviceInfo where isDelete is null and companyId = :companyId and ( factoryId is null or factoryId = '' ) and ( workshopId is null or workshopId = '') order by sortIndex,createTime";
-			hqlCount = "select count(*) from DeviceInfo where isDelete is null and companyId = :companyId and ( factoryId is null or factoryId = '' ) and ( workshopId is null or workshopId = '') ";
+			hql = "from DeviceInfo where (isDelete is null or isDelete=0) and companyId = :companyId and ( factoryId is null or factoryId = '' ) and ( workshopId is null or workshopId = '') order by sortIndex,createTime";
+			hqlCount = "select count(*) from DeviceInfo where (isDelete is null or isDelete=0) and companyId = :companyId and ( factoryId is null or factoryId = '' ) and ( workshopId is null or workshopId = '') ";
 			map.put( "companyId", companyId );
 		}
 		//表示工厂
 		else if( StringUtils.isNotBlank( companyId ) && StringUtils.isNotBlank( factoryId ) && StringUtils.isBlank( workshopId ))
 		{
-			hql = "from DeviceInfo where isDelete is null and companyId = :companyId and factoryId = :factoryId and ( workshopId is null or workshopId = '') order by sortIndex,createTime";
-			hqlCount = "select count(*) from DeviceInfo where isDelete is null and companyId = :companyId and  factoryId = :factoryId  and ( workshopId is null or workshopId = '') ";
+			hql = "from DeviceInfo where(isDelete is null or isDelete=0) and companyId = :companyId and factoryId = :factoryId and ( workshopId is null or workshopId = '') order by sortIndex,createTime";
+			hqlCount = "select count(*) from DeviceInfo where (isDelete is null or isDelete=0) and companyId = :companyId and  factoryId = :factoryId  and ( workshopId is null or workshopId = '') ";
 			map.put( "companyId", companyId );
 			map.put( "factoryId", factoryId );
 		}
 		//表示车间
 		else if( StringUtils.isNotBlank( companyId ) && StringUtils.isNotBlank( factoryId ) && StringUtils.isNotBlank( workshopId ))
 		{
-			hql = "from DeviceInfo where isDelete is null and companyId = :companyId and factoryId = :factoryId and workshopId = :workshopId order by sortIndex,createTime";
-			hqlCount = "select count(*) from DeviceInfo where isDelete is null and companyId = :companyId and  factoryId = :factoryId  and workshopId = :workshopId ";
+			hql = "from DeviceInfo where (isDelete is null or isDelete=0) and companyId = :companyId and factoryId = :factoryId and workshopId = :workshopId order by sortIndex,createTime";
+			hqlCount = "select count(*) from DeviceInfo where (isDelete is null or isDelete=0) and companyId = :companyId and  factoryId = :factoryId  and workshopId = :workshopId ";
 			map.put( "companyId", companyId );
 			map.put( "factoryId", factoryId );
 			map.put( "workshopId", workshopId );
