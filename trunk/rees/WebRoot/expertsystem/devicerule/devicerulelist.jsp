@@ -120,7 +120,7 @@
 			 * 添加设备规则
 			 */
 			$("#addbtn").click(function(){
-				parent.parent.tipsWindown("添加设备规则","iframe:openAddDeviceRuleAction.action","440","300","true","","true","no");
+				parent.parent.tipsWindown("添加设备规则","iframe:openAddDeviceRuleAction.action","440","320","true","","true","no");
 				parent.parent.$("#windown-close").bind('click',function(){
 					window.location.href=window.location.href;
 				});
@@ -132,7 +132,7 @@
 			$('a[name="edit"]').each(function(){
 				$(this).click(function(){
 					var url = $(this).attr("url");
-					parent.parent.tipsWindown("修改设备规则","iframe:"+url,"440","300","true","","true","no");
+					parent.parent.tipsWindown("修改设备规则","iframe:"+url,"440","320","true","","true","no");
 					parent.parent.$("#windown-close").bind('click',function(){
 						window.location.href=window.location.href;
 					});
