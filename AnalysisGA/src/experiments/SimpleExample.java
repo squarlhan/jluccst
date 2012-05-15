@@ -54,6 +54,7 @@ public class SimpleExample {
 	private static final String CVS_REVISION = "$Revision: 1.9 $";
 	List<Double> fitlist = new ArrayList();
 	boolean flag = true;
+	boolean flag2 = true;
 	JFrame frame;
 	
 	public void runga(int ng, int chromeSize, int popsize, double left, double right, FitnessFunction fitnessfun, BufferedWriter output){
@@ -90,7 +91,8 @@ public class SimpleExample {
 			e.printStackTrace();
 			System.exit(-2);
 		}
-		
+//		JOptionPane.showMessageDialog(frame.getContentPane(),
+//      	       "暂停ing!", "系统信息", JOptionPane.INFORMATION_MESSAGE);
 		
 		JFreeChart jfc = createChart();
 		frame=new JFrame("Test Chart");  
@@ -102,8 +104,7 @@ public class SimpleExample {
                 int ch = e.getKeyCode();
                 switch(ch){
                 case KeyEvent.VK_ENTER : flag = false; break;
-                case KeyEvent.VK_SPACE : JOptionPane.showMessageDialog(frame.getContentPane(),
-             	       "暂停ing!", "系统信息", JOptionPane.INFORMATION_MESSAGE);break;
+                case KeyEvent.VK_SPACE : flag2 = !flag2;break;
                 case 37: Older.downc();break;
                 case 38: Older.downm();break;
                 case 39: Older.upc();break;
@@ -121,25 +122,30 @@ public class SimpleExample {
 		int i = 0;
 		while(flag){
 //		for (int i = 0; i < numEvolutions; i++) {
-			genotype.evolve();
-			IChromosome fittest = genotype.getFittestChromosome();
-			double fitness = fittest.getFitnessValue();
-			fitlist.add(fitness);
-			jfc = createChart();
-			frame.getContentPane().removeAll();
-			frame.getContentPane().add(new ChartPanel(jfc),new BorderLayout().CENTER);  
-		    frame.pack();  
-		    frame.setVisible(true); 
-		    System.out.println("mutation: "+ Older.old_mutation);
-		    System.out.println("crossover: "+ Older.old_crossover);
-			// Print progress.
-			// ---------------
-			if (percentEvolution > 0 && i % percentEvolution == 0) {
-				progress++;
-				System.out.println("Currently fittest Chromosome has fitness "+ fitness);
+			if (flag2) {
+				genotype.evolve();
+				IChromosome fittest = genotype.getFittestChromosome();
+				double fitness = fittest.getFitnessValue();
+				fitlist.add(fitness);
+				jfc = createChart();
+				frame.getContentPane().removeAll();
+				frame.getContentPane().add(new ChartPanel(jfc),
+						new BorderLayout().CENTER);
+				frame.pack();
+				frame.setVisible(true);
+				System.out.println("mutation: " + Older.old_mutation);
+				System.out.println("crossover: " + Older.old_crossover);
+				// Print progress.
+				// ---------------
+				if (percentEvolution > 0 && i % percentEvolution == 0) {
+					progress++;
+					System.out
+							.println("Currently fittest Chromosome has fitness "
+									+ fitness);
+				}
 			}
 			i++;
-			if(i>15000)break;
+//			if(i>15000)break;
 		}
 		// Print summary.
 		// --------------
