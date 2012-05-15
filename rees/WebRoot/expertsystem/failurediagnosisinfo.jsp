@@ -87,6 +87,10 @@
 				form1.action = "toAddCompanyAction.action";
 			}
 			*/
+			var sTemp = "设备类型:【"+document.getElementById("deviceTypeId").options[document.getElementById("deviceTypeId").selectedIndex].text;
+			sTemp = sTemp + "】，设备名称:【"+document.getElementById("deviceInfoId").options[document.getElementById("deviceInfoId").selectedIndex].text;
+			sTemp = sTemp + "】，故障现象:【"+document.getElementById("ruleResultInfoId").options[document.getElementById("ruleResultInfoId").selectedIndex].text+ "】";
+			document.getElementById("condition").value  = sTemp;
 			form1.action = "./failureDiagnosisAction!showFailureDiagnosisResult.action";
 			//form1.target = "iframe1";
 			form1.submit();
@@ -111,6 +115,7 @@
 	<body>
 		<s:form id="form1" name="form1" method="post" theme="simple">
 			<s:hidden id="companyId" name="company.id"></s:hidden>
+			<s:hidden id="condition" name="condition"></s:hidden>
 			<table width="100%" border="0" cellspacing="5" cellpadding="0">
 				<tr>
 					<td>
