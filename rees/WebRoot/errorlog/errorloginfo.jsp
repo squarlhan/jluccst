@@ -42,7 +42,8 @@
  		$(document).ready(function(){
 			$("#addBtn").click(function(){
 				form1.action = "toSetIsRemoveAction.action";
-				form1.submit();		
+				form1.submit();	
+				parent.$("#windown-close").click();
 			});
 			
 			$.fn.close();
