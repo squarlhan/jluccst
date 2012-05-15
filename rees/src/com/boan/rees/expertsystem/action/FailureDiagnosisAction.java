@@ -89,7 +89,16 @@ public class FailureDiagnosisAction extends BaseActionSupport
 	
 	private String vibrationDirection = null; 
 	
+	private String condition = null;
 	
+
+	/**
+	 * 推理结果
+	 */
+	private List<BackwardandReason> backwardReasonlist = null;
+	
+	
+
 	/**
 	 * 显示故障诊断的查询页面
 	 * 
@@ -169,7 +178,7 @@ public class FailureDiagnosisAction extends BaseActionSupport
 					}
 				}else 
 				{
-					System.out.println("错误数据：规则表中，现象字段存储格式有误，不符合[a+数字]或[b+数字]，分隔符使用‘_’！");
+					System.out.println("错误数据：规则表中，现象字段存储格式有误，不符合[A+数字]或[B+数字]，分隔符使用‘_’！");
 				}
 				
 			}
@@ -201,24 +210,27 @@ public class FailureDiagnosisAction extends BaseActionSupport
 			backward.setSuggestion( backwardandSuggestion );
 			
 			listBackward.add( backward );
+			inferenceEngine.setBackwardrule( listBackward );
 			
 			List<BackwardandResult> listEnters = new ArrayList<BackwardandResult>();
 			BackwardandResult enter = new BackwardandResult();
 			enter.setId( "result" + ruleResultInfoId );
 			listEnters.add( enter );
 			
+			//送推理机
 			inferenceEngine.setEnter(listEnters);
 			inferenceEngine.setProcess(listEnters);
 			inferenceEngine.Inference("result to reason","fulfill");
 			
-			List<BackwardandReason> resultlist = inferenceEngine.getEnding();
+			backwardReasonlist = inferenceEngine.getEnding();
 			
-			
+//			for(int kk = 0;kk<resultlist.size();kk++)
+//			{
+//				System.out.println(resultlist.get( kk ).getReasonName());
+//			}
 			
 		}
 		
-		//送入推理机
-		inferenceEngine.setBackwardrule( listBackward );
 		
 		return "show-failure-diagnosis-result";
 	}
@@ -322,5 +334,22 @@ public class FailureDiagnosisAction extends BaseActionSupport
 	public void setVibrationDirection( String vibrationDirection )
 	{
 		this.vibrationDirection = vibrationDirection;
+	}
+	public List<BackwardandReason> getBackwardReasonlist()
+	{
+		return backwardReasonlist;
+	}
+
+	public void setBackwardReasonlist( List<BackwardandReason> backwardReasonlist )
+	{
+		this.backwardReasonlist = backwardReasonlist;
+	}
+	public String getCondition()
+	{
+		return condition;
+	}
+	public void setCondition( String condition )
+	{
+		this.condition = condition;
 	}
 }
