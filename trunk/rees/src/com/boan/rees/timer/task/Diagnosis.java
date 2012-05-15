@@ -66,10 +66,6 @@ public class Diagnosis
 	@Qualifier("thresholdService")
 	private IThresholdService thresholdService;
 	
-	//阈值服务接口
-	@Autowired
-	@Qualifier("thresholdItemService")
-	private IThresholdItemService thresholdItemService;
 	// 监测点信息接口类
 	@Autowired
 	@Qualifier("pointInfoService")
