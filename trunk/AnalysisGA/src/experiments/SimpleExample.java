@@ -10,6 +10,8 @@
 package experiments;
 
 import java.awt.BorderLayout;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
@@ -19,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
@@ -50,6 +53,8 @@ public class SimpleExample {
 	/** String containing the CVS revision. Read out via reflection! */
 	private static final String CVS_REVISION = "$Revision: 1.9 $";
 	List<Double> fitlist = new ArrayList();
+	boolean flag = true;
+	JFrame frame;
 	
 	public void runga(int ng, int chromeSize, int popsize, double left, double right, FitnessFunction fitnessfun, BufferedWriter output){
 		long startTime = System.currentTimeMillis();
@@ -60,8 +65,8 @@ public class SimpleExample {
 		gaConf.setKeepPopulationSizeConstant(false);
 		gaConf.getGeneticOperators().clear();
 		try {
-			gaConf.addGeneticOperator(new MutationOperator(gaConf, new DynamicMutationRateCalc(gaConf, 10, 100)));
-			gaConf.addGeneticOperator(new CrossoverOperator(gaConf, new DynamicCrossoverRateCalc(gaConf, 0.7, 0.99)));
+			gaConf.addGeneticOperator(new MutationOperator(gaConf, new KeyboardMutationRateCalc(gaConf, 0.01, 0.1, 0.05, chromeSize)));
+			gaConf.addGeneticOperator(new CrossoverOperator(gaConf, new KeyboardCrossoverRateCalc(gaConf, 0.7, 0.99, 0.8, chromeSize)));
 		} catch (InvalidConfigurationException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -85,14 +90,37 @@ public class SimpleExample {
 			e.printStackTrace();
 			System.exit(-2);
 		}
+		
+		
 		JFreeChart jfc = createChart();
-		JFrame frame=new JFrame("Test Chart");  
+		frame=new JFrame("Test Chart");  
 	    frame.getContentPane().add(new ChartPanel(jfc),new BorderLayout().CENTER);  
+	    frame.addKeyListener(new KeyAdapter()  {
+
+            @Override
+            public void keyReleased(KeyEvent e) {
+                int ch = e.getKeyCode();
+                switch(ch){
+                case KeyEvent.VK_ENTER : flag = false; break;
+                case KeyEvent.VK_SPACE : JOptionPane.showMessageDialog(frame.getContentPane(),
+             	       "暂停ing!", "系统信息", JOptionPane.INFORMATION_MESSAGE);break;
+                case 37: Older.downc();break;
+                case 38: Older.downm();break;
+                case 39: Older.upc();break;
+                case 40: Older.upm();break;
+                default: break;
+                }
+            }
+            
+        });
 	    frame.pack();  
 	    frame.setVisible(true); 
 		int progress = 0;
 		int percentEvolution = numEvolutions / 10;
-		for (int i = 0; i < numEvolutions; i++) {
+		
+		int i = 0;
+		while(flag){
+//		for (int i = 0; i < numEvolutions; i++) {
 			genotype.evolve();
 			IChromosome fittest = genotype.getFittestChromosome();
 			double fitness = fittest.getFitnessValue();
@@ -102,12 +130,16 @@ public class SimpleExample {
 			frame.getContentPane().add(new ChartPanel(jfc),new BorderLayout().CENTER);  
 		    frame.pack();  
 		    frame.setVisible(true); 
+		    System.out.println("mutation: "+ Older.old_mutation);
+		    System.out.println("crossover: "+ Older.old_crossover);
 			// Print progress.
 			// ---------------
 			if (percentEvolution > 0 && i % percentEvolution == 0) {
 				progress++;
 				System.out.println("Currently fittest Chromosome has fitness "+ fitness);
 			}
+			i++;
+			if(i>15000)break;
 		}
 		// Print summary.
 		// --------------
@@ -118,11 +150,11 @@ public class SimpleExample {
 			output.write(fittest.getFitnessValue() + "\t");
 
 			DecimalFormat myformat = new DecimalFormat("#0.00");
-			for (int i = 0; i < chromeSize; i++) {
+			for (int ii = 0; ii < chromeSize; ii++) {
 
 				// System.out.println(myformat.format(((DoubleGene)fittest.getGene(i)).doubleValue()));
 				System.out.print(myformat
-						.format(fittest.getGene(i).getAllele()) + "	");
+						.format(fittest.getGene(ii).getAllele()) + "	");
 //				output.write(myformat
 //						.format(fittest.getGene(i).getAllele()) + "	");
 			}
@@ -163,10 +195,11 @@ public class SimpleExample {
         //纵坐标设定  
         ValueAxis xx = plot.getDomainAxis();  
         //自动设置数据轴数据范围  
-        xx.setRange(0.0, 200);
+        xx.setAutoRange(true);
+//        xx.setRange(0.0, 2000);
   
         ValueAxis yy = plot.getRangeAxis();  
-        yy.setRange(700.0,1000);  
+        yy.setRange(600.0,1000);  
   
         return jfreechart;  
       }  
@@ -216,11 +249,11 @@ public class SimpleExample {
 			 
 			for(int a=0; a<=0;a++){
 //				se.runga(100, 30, 40, -100,  100, new MaxFunction(), output[0]);
-				se.runga(200, 30, 40, -100,  100, new MaxFunction(), output[0]);
+//				se.runga(200, 30, 40, -100,  100, new MaxFunction(), output[0]);
 //				se.runga(120, 30, 40, -5.12,  5.12, new CosMaxFunction(), output[1]);
 //				se.runga(200, 30, 40, -5.12,  5.12, new CosMaxFunction(), output[1]);
 //				se.runga(120, 30, 40, -32,  32, new AckleyMaxFunction(), output[2]);
-//				se.runga(200, 30, 40, -32,  32, new AckleyMaxFunction(), output[2]);
+				se.runga(2000, 30, 40, -32,  32, new AckleyMaxFunction(), output[2]);
 //				se.runga(120, 30, 40, -100,  100, new QuardircMaxFunction(), output[3]);
 //				se.runga(200, 30, 40, -100,  100, new QuardircMaxFunction(), output[3]);
 //				se.runga(120, 30, 40, -100,  100, new StepMaxFunction(), output[4]);

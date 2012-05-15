@@ -204,8 +204,8 @@ public class TestAny {
 //            	a1.Calculate(200, 40, 30, scopes512, new WeiMaxFunction(), p_lamda0, p_extra0, ap_max, ap_lamda, lamda2, output[10]);
 //            	a1.Calculate(200, 40, 30, scopes5, new NonMaxFunction(), p_lamda0, p_extra0, ap_max, ap_lamda, lamda2, output[11]);
             	           	
-            	a1.Calculate(200, 40, 30, scopes100, new MaxFunction(), p_lamda, p_extra, ap_max, ap_lamda, lamda, output[0]);
-//            	a1.Calculate(200, 40, 30, scopes512, new CosMaxFunction(), p_lamda, p_extra, ap_max, ap_lamda, lamda, output[1]);
+//            	a1.Calculate(200, 40, 30, scopes100, new MaxFunction(), p_lamda, p_extra, ap_max, ap_lamda, lamda, output[0]);
+            	a1.Calculate(200, 40, 30, scopes512, new CosMaxFunction(), p_lamda, p_extra, ap_max, ap_lamda, lamda, output[1]);
 //            	a1.Calculate(200, 40, 30, scopes32, new AckleyMaxFunction(), p_lamda, p_extra, ap_max, ap_lamda, lamda, output[2]);
 //            	a1.Calculate(200, 40, 30, scopes100, new QuardircMaxFunction(), p_lamda, p_extra, ap_max, ap_lamda, lamda, output[3]);
 //            	a1.Calculate(200, 40, 30, scopes100, new StepMaxFunction(), p_lamda, p_extra, ap_max, ap_lamda, lamda, output[4]);
