@@ -142,7 +142,7 @@
 		 * 初始化页面元素
 		 */
 		$.fn.initPage = function(){
-	 		$("#sel_deviceType").focus();
+	 		
 			if($(".look").length>0){
 				//得到checkboxlist的td,自定义td的id为checktd 
 				var checktd = document.getElementById("checkboxlist_td"); 
@@ -158,6 +158,12 @@
 				$("#readOnly").mousemove(function(){this.setCapture();});
 				$("#readOnly").mouseout(function(){this.releaseCapture();});
 				$("#readOnly").focus(function(){this.blur();});
+				$("#readOnly").attr("title","此处信息已经不能修改！");
+				$("select").each(function(){
+					$(this).attr( "tabindex","-1" );
+				});
+			}else{
+				$("#sel_deviceType").focus();
 			}
 			var err = $("#lb_error").html();
 			if(err!=null && $.trim(err)!="" ){
