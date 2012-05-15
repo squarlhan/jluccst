@@ -66,52 +66,28 @@
 											</td>
 										</tr>
 										<tr>
-											<td colspan="2" height="26" align="left" bgcolor="#FFFFFF" width="40%">
-												<strong>诊断条件：</strong>压机类-》硝酸泵-》，故障现象：转子不对中，振动方向：xxxxx
+											<td colspan="2" height="56" align="left" bgcolor="#FFFFFF" width="40%">
+												<strong>诊断条件：</strong><s:property value="condition" />
 											</td>
 										</tr>
 										<tr>
-											<td height="26" align="center" bgcolor="#FFFFFF" width="40%">
+											<td height="26" align="center" bgcolor="#FFFFFF" width="40%" background="<%=path %>/images/headerbg.jpg">
 												<strong>故障原因</strong>
 											</td>
-											<td height="26" align="center" bgcolor="#FFFFFF">
+											<td height="26" align="center" bgcolor="#FFFFFF" background="<%=path %>/images/headerbg.jpg">
 												<strong>故障结果</strong>
 											</td>
 										</tr>
+										<s:iterator value="backwardReasonlist" status="obj">
 										<tr>
-											<td height="26" align="left" bgcolor="#FFFFFF" width="40%">
-												1. 转子不平衡
+											<td height="30" align="left" bgcolor="#FFFFFF" width="40%">
+												<s:property value="reasonName"/>
 											</td>
-											<td height="26" align="left" bgcolor="#FFFFFF">
-												1.建议更换转子
+											<td height="30" align="left" bgcolor="#FFFFFF">
+												<s:property value="suggestion.suggName"/>
 											</td>
 										</tr>
-										<tr>
-											<td height="26" align="left" bgcolor="#FFFFFF" width="40%">
-												1. 转子不平衡
-											</td>
-											<td height="26" align="left" bgcolor="#FFFFFF">
-												1.建议更换转子
-											</td>
-										</tr>
-										<tr>
-											<td height="26" align="left" bgcolor="#FFFFFF" width="40%">
-												1. 转子不平衡
-											</td>
-											<td height="26" align="left" bgcolor="#FFFFFF">
-												1.建议更换转子
-											</td>
-										</tr>
-										<tr>
-											<td height="26" align="left" bgcolor="#FFFFFF" width="40%">
-												1. 转子不平衡
-											</td>
-											<td height="26" align="left" bgcolor="#FFFFFF">
-												1.建议更换转子
-												1.建议更换转子
-												1.建议更换转子
-											</td>
-										</tr>
+										</s:iterator>
 										<tr>
 											<td height="26" colspan="2" align="center" bgcolor="#FFFFFF">
 												&nbsp;&nbsp;
