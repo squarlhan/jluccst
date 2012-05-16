@@ -18,6 +18,15 @@ public class Netest {
 		if(node2.equals(node3)){
 			System.out.println("OK!");
 		}
+		
+		
+		for(int i = 0;i<=199;i++){
+			String si = String.valueOf(i);
+			while(si.length()<3){
+				si = "0"+si;
+			}
+			System.out.println("python "+si+".py");
+		}
 	}
 
 }
