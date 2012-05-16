@@ -126,11 +126,16 @@ public class PopNet {
 				pyoutput.write("import matplotlib.pyplot as plt   "+"\n");
 				pyoutput.write("G = nx.Graph()"+"\n");
 				pyoutput.flush();
+				for(Node no:nodes){
+					pyoutput.write("G.add_node(\""+no+"\")"+"\n");
+				}
 				for(Edge ed:edges){
 					pyoutput.write("G.add_edge(\""+ed.getNode1()+"\",\""+ed.getNode2()+"\")"+"\n"); 
 				}
 				pyoutput.flush();
-				pyoutput.write("nx.draw(G) "+"\n");                      
+				pyoutput.write("pos = nx.circular_layout(G) "+"\n"); 
+				pyoutput.write("plt.title(nx.average_clustering(G)) "+"\n"); 
+				pyoutput.write("nx.draw(G, pos) "+"\n");                      
 				pyoutput.write("plt.savefig(\""+p+".png\")        "+"\n"); 
 				pyoutput.write("#plt.show()  "+"\n");
 				pyoutput.flush();
