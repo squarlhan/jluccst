@@ -5,8 +5,10 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.jgap.Population;
@@ -64,6 +66,36 @@ public class PopNet {
 					edges.add(temp);
 				}
 			}
+		}
+		
+	}
+	
+	public void transtonet(Population pop, int size){
+		for(int a = 0;a<=size-1;a++){
+			Node temp = new Node(String.valueOf(pop.getChromosome(a).getIndex()),0);
+			nodes.add(temp);
+		}
+		
+		Map<Edge, Integer> eandd = new HashMap();
+		
+		for(int b = size; b<=pop.size()-1;b++){
+			int pap =  pop.getChromosome(b).getPap();
+			int mom = pop.getChromosome(b).getMom();
+			if(pap==mom){
+				nodes.get(pap).setWeight(nodes.get(pap).getWeight()+1);
+			}else{
+				Edge edge = new Edge(nodes.get(pap), nodes.get(mom));
+				if(!eandd.containsKey(edge)){
+					eandd.put(edge, 1);
+				}else{
+					eandd.put(edge, eandd.get(edge)+1);
+				}
+				edges.add(edge);				
+			}
+		}
+		
+		for(Edge edge : edges){
+			edge.setDistance(eandd.get(edge));
 		}
 		
 	}
