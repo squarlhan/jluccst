@@ -438,9 +438,10 @@ public class DeviceInfoAction extends BaseActionSupport{
 //            addFieldError("files", "请选择上传的文件");
 //        }
 		
-		boolean flag = deviceInfoService.isExistDeviceInfoProperty(device.getId(),device.getWorkshopId(),"deviceName",device.getDeviceName());
+//		boolean flag = deviceInfoService.isExistDeviceInfoProperty(device.getId(),device.getWorkshopId(),"deviceName",device.getDeviceName());
+		boolean flag = deviceInfoService.isExistDeviceInfoProperty(device.getId(),device.getWorkshopId(),"deviceNum",device.getDeviceNum());
 		if(flag){
-			addFieldError("", "同一车间下不能存在相同的设备名称！");
+			addFieldError("", "同一组织机构下不能存在相同的设备编号！");
 		}
 	}
 	
