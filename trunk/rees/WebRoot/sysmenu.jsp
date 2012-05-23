@@ -82,7 +82,7 @@
 								</td>
 							</tr>
 								<%
-									sub == popedomService.isHasPopedom( us.getUserId(), String.valueOf( us.getUserType() ), MenuKey.SUB_SHU_JU_GUAN_LI, us.getPopedomKeys() );
+									sub = popedomService.isHasPopedom( us.getUserId(), String.valueOf( us.getUserType() ), MenuKey.SUB_SHU_JU_GUAN_LI, us.getPopedomKeys() );
 									if( b && sub )
 									{
 								%>
@@ -105,7 +105,7 @@
 							</tr>
 								<%} %>
 								<%
-									sub == popedomService.isHasPopedom( us.getUserId(), String.valueOf( us.getUserType() ), MenuKey.SUB_SHE_BEI_GUAN_LI, us.getPopedomKeys() );
+									sub = popedomService.isHasPopedom( us.getUserId(), String.valueOf( us.getUserType() ), MenuKey.SUB_SHE_BEI_GUAN_LI, us.getPopedomKeys() );
 									if( b && sub )
 									{
 								%>
