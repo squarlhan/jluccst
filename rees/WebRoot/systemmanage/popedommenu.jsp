@@ -39,6 +39,8 @@
 		d = new dTree('d','<%=path%>');
 		d.add(0,-1,'菜单资源列表','','','Menu');
 		d.add(101,0,'数据管理','<%=url%>?menuKey=<%=MenuKey.SHU_JU_GUAN_LI%>','','groupmain');
+		d.add(1011,101,'数据管理','<%=url%>?menuKey=<%=MenuKey.SUB_SHU_JU_GUAN_LI%>','','groupmain');
+		d.add(1012,101,'设备管理','<%=url%>?menuKey=<%=MenuKey.SUB_SHE_BEI_GUAN_LI%>','','groupmain');
 		d.add(102,0,'专家系统','<%=url%>?menuKey=<%=MenuKey.ZHUAN_JIA_XI_TONG%>','','groupmain');
 		d.add(103,0,'报表管理','<%=url%>?menuKey=<%=MenuKey.BAO_BIAO_GUAN_LI%>','','groupmain');
 		d.add(104,0,'论坛区','<%=url%>?menuKey=<%=MenuKey.LUN_TAN_QU%>','','groupmain');
@@ -49,6 +51,7 @@
 		d.add(202,1,'显示当前机构','<%=url%>?menuKey=<%=MenuKey.SHOW_CURRENT_GROUP%>','','groupmain');
 		d.add(203,1,'显示当前及以下机构','<%=url%>?menuKey=<%=MenuKey.SHOW_CURRENT_AND_SUB_GROUP%>','','groupmain');
 		document.write(d);
+		d.openAll();
 		//-->
 	</script>
 </div>
