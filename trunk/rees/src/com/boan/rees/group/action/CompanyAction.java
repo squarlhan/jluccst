@@ -90,14 +90,14 @@ public class CompanyAction extends BaseActionSupport
 		// 如果存在，则提示
 		if( b )
 		{
-			message.setContent( "相同公司名称已存在，请重新输入！" );
+			message.setContent( "相同级别名称已存在，请重新输入！" );
 			return ERROR;
 		}
 		else
 		{
 			company.setRootId( GroupConfig.ROOT_ID );
 			service.save( company );
-			message.setContent( "公司信息保存成功！" );
+			message.setContent( "级别信息保存成功！" );
 			return SUCCESS;
 		}
 	}
@@ -126,14 +126,14 @@ public class CompanyAction extends BaseActionSupport
 		// 如果存在，则提示
 		if( b )
 		{
-			message.setContent( "相同公司名称已存在，请重新输入！" );
+			message.setContent( "相同级别名称已存在，请重新输入！" );
 			return ERROR;
 		}
 		else
 		{
 			company.setRootId( GroupConfig.ROOT_ID );
 			service.update( company );
-			message.setContent( "公司信息保存成功！" );
+			message.setContent( "级别信息保存成功！" );
 			return SUCCESS;
 		}
 	}
