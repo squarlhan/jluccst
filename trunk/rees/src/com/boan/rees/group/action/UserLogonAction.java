@@ -110,7 +110,16 @@ public class UserLogonAction extends ActionSupport
 	public String logonValid() throws Exception
 	{
 		String md5 = MakeMd5.MD5( password );
-		boolean b = userService.logonValid( username, md5 );
+		boolean b = false;
+		try
+		{
+			b = userService.logonValid( username, md5 );
+		}
+		catch( Exception e )
+		{
+			message.setContent( "数据库连接失败，请联系管理员！" );
+			return ERROR;
+		}
 		if( b )
 		{
 			HttpSession session = ServletActionContext.getRequest().getSession();
