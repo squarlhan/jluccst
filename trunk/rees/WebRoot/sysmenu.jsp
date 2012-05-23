@@ -21,19 +21,16 @@
 	 * Modified Time：
 	 * Modified Explain：
 	 */
-	response.setHeader("Pragma", "No-cache");
-	response.setHeader("Cache-Control", "no-cache");
-	response.setHeader("Expires", "0");
-	request.setCharacterEncoding("utf-8");
+	response.setHeader( "Pragma", "No-cache" );
+	response.setHeader( "Cache-Control", "no-cache" );
+	response.setHeader( "Expires", "0" );
+	request.setCharacterEncoding( "utf-8" );
 	String path = request.getContextPath();
-	UserSession us = (UserSession) session.getAttribute("userSession");
-	WebApplicationContext context = (WebApplicationContext) this
-			.getServletContext()
-			.getAttribute(
-					WebApplicationContext.ROOT_WEB_APPLICATION_CONTEXT_ATTRIBUTE);
-	IPopedomService popedomService = (IPopedomService) context
-			.getBean("popedomService");
+	UserSession us = ( UserSession ) session.getAttribute( "userSession" );
+	WebApplicationContext context = ( WebApplicationContext ) this.getServletContext().getAttribute( WebApplicationContext.ROOT_WEB_APPLICATION_CONTEXT_ATTRIBUTE );
+	IPopedomService popedomService = ( IPopedomService ) context.getBean( "popedomService" );
 	boolean b = false;
+	boolean sub = false;
 %>
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
@@ -41,7 +38,7 @@
 		<title></title>
 		<j:scriptlink css="true" jquery="true" />
 		<script type="text/javascript">
-<!--
+
 	$(document).ready(function() {
 		var ifrHeight = $("#leftFrame", parent.parent.document).height();
 		var ifrHeightTemp = ifrHeight - 50;
@@ -64,9 +61,12 @@
 				<td align="center">
 					<div id="menuArea" style="overflow: auto; display: block;">
 						<table width="100%" border="0" cellspacing="0" cellpadding="0">
-						<%
-							b = popedomService.isHasPopedom(us.getUserId(), String.valueOf(us.getUserType()), MenuKey.SHU_JU_GUAN_LI, us.getPopedomKeys() );
-							if ( b ){%>
+							<%
+								b = popedomService.isHasPopedom( us.getUserId(), String.valueOf( us.getUserType() ), MenuKey.SHU_JU_GUAN_LI, us.getPopedomKeys() );
+								if( b )
+								{
+							%>
+							
 							<tr>
 								<td height="24" align="left" background="images/menubg.jpg">
 									<table width="100%" border="0" cellspacing="5" cellpadding="0">
@@ -81,6 +81,11 @@
 									</table>
 								</td>
 							</tr>
+								<%
+									sub == popedomService.isHasPopedom( us.getUserId(), String.valueOf( us.getUserType() ), MenuKey.SUB_SHU_JU_GUAN_LI, us.getPopedomKeys() );
+									if( b && sub )
+									{
+								%>
 							<tr>
 								<td align="left">
 									<table width="100%" border="0" cellspacing="5" cellpadding="0">
@@ -98,6 +103,12 @@
 							<tr>
 								<td height="1" align="left" background="images/menubg2.jpg"></td>
 							</tr>
+								<%} %>
+								<%
+									sub == popedomService.isHasPopedom( us.getUserId(), String.valueOf( us.getUserType() ), MenuKey.SUB_SHE_BEI_GUAN_LI, us.getPopedomKeys() );
+									if( b && sub )
+									{
+								%>
 							<tr>
 								<td align="left">
 									<table width="100%" border="0" cellspacing="5" cellpadding="0">
@@ -115,10 +126,15 @@
 							<tr>
 								<td height="1" align="left" background="images/menubg2.jpg"></td>
 							</tr>
-							<%} %>
+								<%} %>
 							<%
-							b = popedomService.isHasPopedom(us.getUserId(), String.valueOf(us.getUserType()), MenuKey.ZHUAN_JIA_XI_TONG, us.getPopedomKeys() );
-							if ( b ){%>
+								}
+							%>
+							<%
+								b = popedomService.isHasPopedom( us.getUserId(), String.valueOf( us.getUserType() ), MenuKey.ZHUAN_JIA_XI_TONG, us.getPopedomKeys() );
+								if( b )
+								{
+							%>
 							<tr>
 								<td height="24" align="left" background="images/menubg.jpg">
 									<table width="100%" border="0" cellspacing="5" cellpadding="0">
@@ -226,7 +242,8 @@
 												<img src="images/menuto.jpg" width="5" height="5" />
 											</td>
 											<td>
-												<a href="expertsystem/failurediagnosismanage.jsp" target="mainFrame">故障诊断</a>
+												<a href="expertsystem/failurediagnosismanage.jsp"
+													target="mainFrame">故障诊断</a>
 											</td>
 										</tr>
 									</table>
@@ -243,7 +260,8 @@
 												<img src="images/menuto.jpg" width="5" height="5" />
 											</td>
 											<td>
-												<a href="errorlog/errorlogmanage.jsp?category=1" target="mainFrame">报警管理</a>
+												<a href="errorlog/errorlogmanage.jsp?category=1"
+													target="mainFrame">报警管理</a>
 											</td>
 										</tr>
 									</table>
@@ -257,7 +275,8 @@
 												<img src="images/menuto.jpg" width="5" height="5" />
 											</td>
 											<td>
-												<a href="errorlog/errorlogmanage.jsp?category=2" target="mainFrame">报警日志</a>
+												<a href="errorlog/errorlogmanage.jsp?category=2"
+													target="mainFrame">报警日志</a>
 											</td>
 										</tr>
 									</table>
@@ -266,10 +285,14 @@
 							<tr>
 								<td height="1" align="left" background="images/menubg2.jpg"></td>
 							</tr>
-							<%} %>
 							<%
-							b = popedomService.isHasPopedom(us.getUserId(), String.valueOf(us.getUserType()), MenuKey.BAO_BIAO_GUAN_LI, us.getPopedomKeys() );
-							if ( b ){%>
+								}
+							%>
+							<%
+								b = popedomService.isHasPopedom( us.getUserId(), String.valueOf( us.getUserType() ), MenuKey.BAO_BIAO_GUAN_LI, us.getPopedomKeys() );
+								if( b )
+								{
+							%>
 							<tr>
 								<td height="24" align="left" background="images/menubg.jpg">
 									<table width="100%" border="0" cellspacing="5" cellpadding="0">
@@ -292,14 +315,13 @@
 												<img src="images/menuto.jpg" width="5" height="5" />
 											</td>
 											<td>
-												<a href="reportmanage/reportmanage.jsp"
-													target="mainFrame">个人报表</a>
+												<a href="reportmanage/reportmanage.jsp" target="mainFrame">个人报表</a>
 											</td>
 										</tr>
 									</table>
 								</td>
 							</tr>
-								<tr>
+							<tr>
 								<td height="1" align="left" background="images/menubg2.jpg"></td>
 							</tr>
 							<tr>
@@ -320,10 +342,14 @@
 							<tr>
 								<td height="1" align="left" background="images/menubg2.jpg"></td>
 							</tr>
-							<%} %>
 							<%
-							b = popedomService.isHasPopedom(us.getUserId(), String.valueOf(us.getUserType()), MenuKey.LUN_TAN_QU, us.getPopedomKeys() );
-							if ( b ){%>
+								}
+							%>
+							<%
+								b = popedomService.isHasPopedom( us.getUserId(), String.valueOf( us.getUserType() ), MenuKey.LUN_TAN_QU, us.getPopedomKeys() );
+								if( b )
+								{
+							%>
 							<tr>
 								<td height="24" align="left" background="images/menubg.jpg">
 									<table width="100%" border="0" cellspacing="5" cellpadding="0">
@@ -372,10 +398,14 @@
 							<tr>
 								<td height="1" align="left" background="images/menubg2.jpg"></td>
 							</tr>
-							<%} %>
 							<%
-							b = popedomService.isHasPopedom(us.getUserId(), String.valueOf(us.getUserType()), MenuKey.XI_TONG_GUAN_LI, us.getPopedomKeys() );
-							if ( b ){%>
+								}
+							%>
+							<%
+								b = popedomService.isHasPopedom( us.getUserId(), String.valueOf( us.getUserType() ), MenuKey.XI_TONG_GUAN_LI, us.getPopedomKeys() );
+								if( b )
+								{
+							%>
 							<tr>
 								<td height="24" align="left" background="images/menubg.jpg">
 									<table width="100%" border="0" cellspacing="5" cellpadding="0">
@@ -492,10 +522,14 @@
 							<tr>
 								<td height="1" align="left" background="images/menubg2.jpg"></td>
 							</tr>
-							<%} %>
 							<%
-							b = popedomService.isHasPopedom(us.getUserId(), String.valueOf(us.getUserType()), MenuKey.SHU_JU_ZI_DIAN, us.getPopedomKeys() );
-							if ( b ){%>
+								}
+							%>
+							<%
+								b = popedomService.isHasPopedom( us.getUserId(), String.valueOf( us.getUserType() ), MenuKey.SHU_JU_ZI_DIAN, us.getPopedomKeys() );
+								if( b )
+								{
+							%>
 							<tr>
 								<td height="24" align="left" background="images/menubg.jpg">
 									<table width="100%" border="0" cellspacing="5" cellpadding="0">
@@ -535,7 +569,8 @@
 												<img src="images/menuto.jpg" width="5" height="5" />
 											</td>
 											<td>
-												<a href="base/devicetype/devicemanage.jsp" target="mainFrame">设备类型</a>
+												<a href="base/devicetype/devicemanage.jsp"
+													target="mainFrame">设备类型</a>
 											</td>
 										</tr>
 									</table>
@@ -552,7 +587,8 @@
 												<img src="images/menuto.jpg" width="5" height="5" />
 											</td>
 											<td>
-												<a href="base/thresholdcategorymanage.jsp" target="mainFrame">阈值类别</a>
+												<a href="base/thresholdcategorymanage.jsp"
+													target="mainFrame">阈值类别</a>
 											</td>
 										</tr>
 									</table>
@@ -595,7 +631,9 @@
 							<tr>
 								<td height="1" align="left" background="images/menubg2.jpg"></td>
 							</tr>
-							<%} %>
+							<%
+								}
+							%>
 						</table>
 					</div>
 				</td>
