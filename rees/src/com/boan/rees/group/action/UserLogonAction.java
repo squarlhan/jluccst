@@ -117,6 +117,7 @@ public class UserLogonAction extends ActionSupport
 		}
 		catch( Exception e )
 		{
+			e.printStackTrace();
 			message.setContent( "数据库连接失败，请联系管理员！" );
 			return ERROR;
 		}
