@@ -61,5 +61,13 @@ public class MenuKey
 	/**
 	 * 列出当前及以下部门
 	 */
-	public static final String SHOW_CURRENT_AND_SUB_GROUP = "SHOW_CURRENT_AND_SUB_GROUP"; 
+	public static final String SHOW_CURRENT_AND_SUB_GROUP = "SHOW_CURRENT_AND_SUB_GROUP";
+	/**
+	 * 数据管理-》数据管理
+	 */
+	public static final String SUB_SHU_JU_GUAN_LI = "SUB_SHU_JU_GUAN_LI";
+	/**
+	 * 数据管理-》设备管理
+	 */
+	public static final String SUB_SHE_BEI_GUAN_LI = "SUB_SHE_BEI_GUAN_LI";
 }
