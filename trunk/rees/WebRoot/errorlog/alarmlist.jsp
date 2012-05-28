@@ -57,7 +57,7 @@
 			$(this).click(function(){
 				var url = $(this).attr("url");
 				if(window.confirm("您确定要解除警报？")){
-					$.post(url, $('#form1').serialize(), function(data){window.location.href=window.location.href;});
+					$.post(url, $('#form1').serialize(), function(data){window.location.href="openErrorLogAction.action?category=1";});
 				}
 			});
 		});
@@ -70,7 +70,7 @@
   				parent.parent.parent.tipsWindown("查看报警信息","iframe:"+url,"460","350","true","","true","no");
   				//window.location.href=window.location.href;
   				parent.parent.$("#windown-close").bind('click',function(){
-					window.location.href=window.location.href;
+					window.location.href="openErrorLogAction.action?category=1";
 				});
   			});
   		});
@@ -80,6 +80,7 @@
   </head>
 <body> 
 <s:form id="form1" name="form1" >
+<s:hidden name="category"></s:hidden>
 <table width="100%" style="height:100%;" border="0" cellspacing="5" cellpadding="0">
   <tr>
     <td valign="top">
@@ -105,7 +106,7 @@
           	<s:property value="deptName"/>&nbsp;
           </td>
           <td height="26" align="center" bgcolor="#FFFFFF">     	
-          	<s:date  name="errorTime" format="yyyy-MM-dd" />&nbsp;
+          	<s:date  name="errorTime" format="yyyy-MM-dd H:m:ss" />&nbsp;
           </td>
           <td height="26" align="center" bgcolor="#FFFFFF">
             <s:if test="isRemove==1"><span class="STYLE3">已解除</span></s:if><s:if test="isRemove==0"><span class="STYLE2">未解除</span></s:if>&nbsp;

@@ -57,7 +57,9 @@
 			$(this).click(function(){
 				var url = $(this).attr("url");
 				if(window.confirm("您确定要解除警报？")){
-					$.post(url, $('#form1').serialize(), function(data){window.location.href=window.location.href;});
+					$.post(url, $('#form1').serialize(), function(data){
+						window.location.href="openErrorLogAction.action?category=2";
+					});
 				}
 			});
 		});
@@ -70,7 +72,7 @@
   				parent.parent.parent.tipsWindown("查看报警信息","iframe:"+url,"460","350","true","","true","no");
   				//window.location.href=window.location.href;
   				parent.parent.$("#windown-close").bind('click',function(){
-					window.location.href=window.location.href;
+					window.location.href="openErrorLogAction.action?category=2";
 				});
   			});
   		});
@@ -80,6 +82,7 @@
   </head>
 <body> 
 <s:form id="form1" name="form1" >
+<s:hidden name="category"></s:hidden>
 <table width="100%" style="height:100%;" border="0" cellspacing="5" cellpadding="0">
   <tr>
     <td valign="top">
@@ -105,7 +108,7 @@
           	<s:property value="deptName"/>&nbsp;
           </td>
           <td height="26" align="center" bgcolor="#FFFFFF">     	
-          	<s:date  name="errorTime" format="yyyy-MM-dd" />&nbsp;
+          	<s:date  name="errorTime" format="yyyy-MM-dd H:m:ss" />&nbsp;
           </td>
            <td height="26" align="center" bgcolor="#FFFFFF">
             <s:if test="isAlarm==1">
@@ -116,8 +119,6 @@
          	  <a name="edit" href="javascript:void(0);" url="${edit_url}">
             	报警</a>
             	</span>
-            	
-            	
             	</s:if><s:if test="isAlarm==0"><span class="STYLE2">正常</span></s:if>&nbsp;
           </td>
           <td height="26" align="center" bgcolor="#FFFFFF">
@@ -127,7 +128,7 @@
           </td>
           <td height="26" align="center" bgcolor="#FFFFFF" nowrap>
           <s:if test="isAlarm==1">
-          	<s:date  name="removeTime" format="yyyy-MM-dd" />&nbsp;
+          	<s:date  name="removeTime" format="yyyy-MM-dd H:m:ss" />&nbsp;
           	</s:if>
           </td>
 	    </tr>
