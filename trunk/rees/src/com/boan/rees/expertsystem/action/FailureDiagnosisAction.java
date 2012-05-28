@@ -8,7 +8,9 @@
  */
 package com.boan.rees.expertsystem.action;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
@@ -146,7 +148,6 @@ public class FailureDiagnosisAction extends BaseActionSupport
 		BackwardandResult enter = new BackwardandResult();
 		enter.setId( "result" + ruleResultInfoId );
 		listEnters.add( enter );
-		
 		for(int i=0;i < listRule.size();i++)
 		{
 			//封装推理机规则
@@ -161,26 +162,26 @@ public class FailureDiagnosisAction extends BaseActionSupport
 				String sTemp = listRule.get( i ).getResultId().split( "_" )[j];
 				if(sTemp.indexOf( "A" ) != -1)	//原因
 				{
-					RuleReasonInfo ruleReason = ruleReasonInfoService.getbyId( Integer.parseInt( sTemp.substring( 1, sTemp.length() )));
-					if( ruleReason != null)
-					{
+//					RuleReasonInfo ruleReason = ruleReasonInfoService.getbyId( Integer.parseInt( sTemp.substring( 1, sTemp.length() )));
+//					if( ruleReason != null)
+//					{
 						BackwardandResult backwardandResult = new BackwardandResult();
-						backwardandResult.setId( "reason" + ruleReason.getId());
-						backwardandResult.setResultName( ruleReason.getReason() );
+						backwardandResult.setId( "reason" + Integer.parseInt( sTemp.substring( 1, sTemp.length() )));
+						backwardandResult.setResultName( "" );
 						
 						listResult.add( backwardandResult );
-					}
+					//}
 				}else if(sTemp.indexOf( "B" ) != -1)  //现象
 				{
-					RuleResultInfo ruleResult = ruleResultInfoService.getbyId( Integer.parseInt( sTemp.substring( 1, sTemp.length() )));
-					if( ruleResult != null)
-					{
+//					RuleResultInfo ruleResult = ruleResultInfoService.getbyId( Integer.parseInt( sTemp.substring( 1, sTemp.length() )));
+//					if( ruleResult != null)
+//					{
 						BackwardandResult backwardandResult = new BackwardandResult();
-						backwardandResult.setId( "result" + ruleResult.getId());
-						backwardandResult.setResultName( ruleResult.getResult() );
+						backwardandResult.setId( "result" + Integer.parseInt( sTemp.substring( 1, sTemp.length() )));
+						backwardandResult.setResultName( "" );
 						
 						listResult.add( backwardandResult );
-					}
+//					}
 				}else 
 				{
 					System.out.println("错误数据：规则表中，现象字段存储格式有误，不符合[A+数字]或[B+数字]，分隔符使用‘_’！");
@@ -193,37 +194,41 @@ public class FailureDiagnosisAction extends BaseActionSupport
 			//推理机规则包括原因属性
 			BackwardandReason backwardandReason = new BackwardandReason();
 			String sTempReasonId = listRule.get( i ).getReasonId();
-			RuleReasonInfo ruleReasonTemp  = ruleReasonInfoService.getbyId( Integer.parseInt( sTempReasonId.substring( 1, sTempReasonId.length() )));
-			if(ruleReasonTemp != null)
-			{
-				backwardandReason.setId( ruleReasonTemp.getId() );
-				backwardandReason.setReasonName( ruleReasonTemp.getReason() );
-			}
+//			RuleReasonInfo ruleReasonTemp  = ruleReasonInfoService.getbyId( Integer.parseInt( sTempReasonId.substring( 1, sTempReasonId.length() )));
+//			if(ruleReasonTemp != null)
+//			{
+				backwardandReason.setId( Integer.parseInt( sTempReasonId.substring( 1, sTempReasonId.length() )) );
+				backwardandReason.setReasonName( "" );
+//			}
 			
 			backward.setReason( backwardandReason );
 			
 			//封装规则下的建议
 			//推理机规则包括建议属性
 			BackwardandSuggestion backwardandSuggestion = new BackwardandSuggestion();
-			RuleAdviceInfo ruleAdviceInfo  = ruleAdviceInfoService.getbyId( listRule.get( i ).getAdviceId() );
-			if(ruleAdviceInfo != null)
-			{
-				backwardandSuggestion.setId( ruleAdviceInfo.getId() );
-				backwardandSuggestion.setSuggName( ruleAdviceInfo.getAdvice() );
-			}
+//			RuleAdviceInfo ruleAdviceInfo  = ruleAdviceInfoService.getbyId( listRule.get( i ).getAdviceId() );
+//			if(ruleAdviceInfo != null)
+//			{
+				backwardandSuggestion.setId( listRule.get( i ).getAdviceId() );
+				backwardandSuggestion.setSuggName( "" );
+			//}
 			backward.setSuggestion( backwardandSuggestion );
 			listBackward.add( backward );
 			
 		}
-		
 		//送推理机
 		inferenceEngine.setBackwardrule( listBackward );
 		inferenceEngine.setEnter(listEnters);
 		inferenceEngine.setProcess(listEnters);
 		inferenceEngine.Inference("result to reason","fulfill");
 		
-		backwardReasonlist = inferenceEngine.getEnding();
 		
+		backwardReasonlist = inferenceEngine.getEnding();
+		for(int k = 0;k<backwardReasonlist.size();k++)
+		{
+			backwardReasonlist.get( k ).setReasonName(  ruleReasonInfoService.getbyId(backwardReasonlist.get( k ).getId()).getReason() );
+			backwardReasonlist.get( k ).getSuggestion().setSuggName( ruleAdviceInfoService.getbyId(backwardReasonlist.get( k ).getSuggestion().getId()).getAdvice() );
+		}
 		return "show-failure-diagnosis-result";
 	}
 
