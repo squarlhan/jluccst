@@ -106,7 +106,7 @@ public class ExpressionCompare {
 			//截取左边的表达式
 			String left_expression = expression.substring(index).equals(paramName) ? "" : expression.substring(index);
 			//截取右边的表达式
-			String right_expression = expression.substring(0,index+1).equals(paramName) ? "" : expression.substring(0,index+1);
+			String right_expression = expression.substring(0,index+paramName.length()).equals(paramName) ? "" : expression.substring(0,index+paramName.length());
 			//替换左边表达式中的变量
 			left_expression = left_expression.replaceAll(paramName, paramValue);
 			//替换右边表达式中的变量
