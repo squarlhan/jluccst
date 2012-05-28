@@ -141,13 +141,18 @@ public class FailureDiagnosisAction extends BaseActionSupport
 		InferenceEngine inferenceEngine = new InferenceEngine();
 		List<RuleInfo> listRule = ruleInfoService.findAllRuleInfo();
 		List<Backward> listBackward = new ArrayList<Backward>();
-		List<BackwardandResult> listResult = new ArrayList<BackwardandResult>();
+		
+		List<BackwardandResult> listEnters = new ArrayList<BackwardandResult>();
+		BackwardandResult enter = new BackwardandResult();
+		enter.setId( "result" + ruleResultInfoId );
+		listEnters.add( enter );
+		
 		for(int i=0;i < listRule.size();i++)
 		{
 			//封装推理机规则
 			Backward backward = new Backward();
 			backward.setBid( listRule.get( i ).getId() );
-			
+			List<BackwardandResult> listResult = new ArrayList<BackwardandResult>();
 			//封装规则下的现象
 			//推理机规则包括现象list属性
 			for(int j= 0;j<listRule.get( i ).getResultId().split( "_" ).length; j++)
@@ -206,31 +211,18 @@ public class FailureDiagnosisAction extends BaseActionSupport
 				backwardandSuggestion.setId( ruleAdviceInfo.getId() );
 				backwardandSuggestion.setSuggName( ruleAdviceInfo.getAdvice() );
 			}
-			
 			backward.setSuggestion( backwardandSuggestion );
-			
 			listBackward.add( backward );
-			inferenceEngine.setBackwardrule( listBackward );
-			
-			List<BackwardandResult> listEnters = new ArrayList<BackwardandResult>();
-			BackwardandResult enter = new BackwardandResult();
-			enter.setId( "result" + ruleResultInfoId );
-			listEnters.add( enter );
-			
-			//送推理机
-			inferenceEngine.setEnter(listEnters);
-			inferenceEngine.setProcess(listEnters);
-			inferenceEngine.Inference("result to reason","fulfill");
-			
-			backwardReasonlist = inferenceEngine.getEnding();
-			
-//			for(int kk = 0;kk<resultlist.size();kk++)
-//			{
-//				System.out.println(resultlist.get( kk ).getReasonName());
-//			}
 			
 		}
 		
+		//送推理机
+		inferenceEngine.setBackwardrule( listBackward );
+		inferenceEngine.setEnter(listEnters);
+		inferenceEngine.setProcess(listEnters);
+		inferenceEngine.Inference("result to reason","fulfill");
+		
+		backwardReasonlist = inferenceEngine.getEnding();
 		
 		return "show-failure-diagnosis-result";
 	}
