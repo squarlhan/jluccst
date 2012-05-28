@@ -119,14 +119,13 @@ public class Diagnosis
 		//规则对象命名：RuleInfo，现象对象命名：RuleResultInfo，原因对象命名：RuleReasonInfo，建议对象命名：RuleAdviceInfo
 		List<RuleInfo> listRule = ruleInfoService.findAllRuleInfo();
 		List<Backward> listBackward = new ArrayList<Backward>();
-		List<BackwardandResult> listResult = new ArrayList<BackwardandResult>(); 
 		System.out.println("＝＝＝＝＝1.封装所有规则 ....begin＝＝＝＝＝！");
 		for(int i=0;i < listRule.size();i++)
 		{
 			//封装推理机规则
 			Backward backward = new Backward();
 			backward.setBid( listRule.get( i ).getId() );
-			
+			List<BackwardandResult> listResult = new ArrayList<BackwardandResult>(); 
 			//封装规则下的现象
 			//推理机规则包括现象list属性
 			for(int j= 0;j<listRule.get( i ).getResultId().split( "_" ).length; j++)
@@ -265,7 +264,7 @@ public class Diagnosis
 															errorPhen = item.getTroubles().get( m ).getResult();
 														}else
 														{
-															errorPhen = errorPhen + "," + item.getTroubles().get( m ).getResult();
+															errorPhen = errorPhen + ";" + item.getTroubles().get( m ).getResult();
 														}
 													}
 													for(int n=0;n<resultlist.size();n++)
@@ -276,8 +275,8 @@ public class Diagnosis
 															opinion = resultlist.get( n ).getSuggestion().getSuggName();
 														}else
 														{
-															errorReason = errorReason + "," + resultlist.get( n ).getReasonName();
-															opinion = opinion + "," + resultlist.get( n ).getSuggestion().getSuggName();
+															errorReason = errorReason + ";" + resultlist.get( n ).getReasonName();
+															opinion = opinion + ";" + resultlist.get( n ).getSuggestion().getSuggName();
 														}
 													}
 													
