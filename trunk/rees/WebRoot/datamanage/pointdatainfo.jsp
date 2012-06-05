@@ -46,6 +46,16 @@
 				};
 			});
 			$("#saveOverBtn").click(function() {
+				var flag = false;
+				$(document).find("input[name='datainput']").each(function(index,domEle){
+					if($(domEle).val()==""){
+						alert("监测点数据不能为空！");
+						$(domEle).focus();
+						flag = true;
+					}
+				});
+				if(flag)
+					return false;
 				if(confirm("确定要录入完成监测点数据了吗？")){
 					var str = "";
 					$(document).find("input[name='datainput']").each(function(index,domEle){
