@@ -203,11 +203,16 @@ public class Diagnosis
 	    for(int i=0;i<listDeviceInfo.size();i++)
 	    {
 			//获得设备对象
-			DeviceInfo deviceInfo =	deviceInfoService.get(listDeviceInfo.get( i ).getId());
+			DeviceInfo deviceInfo =	listDeviceInfo.get( i );
 			//根据设备ID获得所有未执行任务的监测点对象数组
 			List<PointInfo> pis = pointInfoService.findPointInfosByDeviceId(listDeviceInfo.get( i ).getId(), 1);
 			//根据设备中心高和转速获得对应的阈值项实体类
 			Threshold threshold = thresholdService.getThresholdByCenterHeightAndSpeed(deviceInfo.getCenterHeight().toString(), deviceInfo.getSpeed().toString());
+			if(threshold == null)
+			{
+				System.out.println("根据设备中心高和转速未找到对应的阈值项实体类！");
+				continue;
+			}
 			System.out.println("＝＝＝＝＝2.取某个设备的阈值 ＝＝＝＝＝");
 			if(pis!=null && pis.size()>0){
 				boolean findAllItemFlag = false;
