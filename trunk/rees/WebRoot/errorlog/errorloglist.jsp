@@ -58,7 +58,7 @@
 				var url = $(this).attr("url");
 				if(window.confirm("您确定要解除警报？")){
 					$.post(url, $('#form1').serialize(), function(data){
-						window.location.href="openErrorLogAction.action?category=2";
+						turnOverPage(document.getElementById("currentPage").value);
 					});
 				}
 			});
@@ -72,7 +72,7 @@
   				parent.parent.parent.tipsWindown("查看报警信息","iframe:"+url,"460","350","true","","true","no");
   				//window.location.href=window.location.href;
   				parent.parent.$("#windown-close").bind('click',function(){
-					window.location.href="openErrorLogAction.action?category=2";
+  					turnOverPage(document.getElementById("currentPage").value);
 				});
   			});
   		});

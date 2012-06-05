@@ -37,7 +37,6 @@
 		<meta http-equiv="description" content="This is my page">
 		<j:scriptlink css="true" tipswindow="true" jmessagebox="true"
 			jquery="true" validate="true" />
-	 	<script type="text/javascript" src="<%=basePath%>js/My97DatePicker/WdatePicker.js"></script>
 		<script type="text/javascript">
 		$(document).ready( function() {
 		
@@ -57,7 +56,7 @@
 			$(this).click(function(){
 				var url = $(this).attr("url");
 				if(window.confirm("您确定要解除警报？")){
-					$.post(url, $('#form1').serialize(), function(data){window.location.href="openErrorLogAction.action?category=1";});
+					$.post(url, $('#form1').serialize(), function(data){turnOverPage(document.getElementById("currentPage").value);});
 				}
 			});
 		});
@@ -70,7 +69,8 @@
   				parent.parent.parent.tipsWindown("查看报警信息","iframe:"+url,"460","350","true","","true","no");
   				//window.location.href=window.location.href;
   				parent.parent.$("#windown-close").bind('click',function(){
-					window.location.href="openErrorLogAction.action?category=1";
+					//window.location.href="openErrorLogAction.action?category=1";
+  					turnOverPage(document.getElementById("currentPage").value);
 				});
   			});
   		});
