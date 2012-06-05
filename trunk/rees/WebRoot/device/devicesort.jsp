@@ -118,6 +118,9 @@
 
 	<body>
 		<s:form id="form1" theme="simple" action="toSortDeviceAction" >
+		<s:hidden id="hid_companyId" name="companyId"></s:hidden>
+		<s:hidden id="hid_factoryId" name="factoryId"></s:hidden>
+		<s:hidden id="hid_workshopId" name="workshopId"></s:hidden>
 		<s:label id="lb_message" name="message" cssStyle="display:none"></s:label>
 		<center>
 		<table width="250px" border="0" cellspacing="5" cellpadding="0">

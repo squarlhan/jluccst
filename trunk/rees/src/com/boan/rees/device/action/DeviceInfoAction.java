@@ -439,10 +439,9 @@ public class DeviceInfoAction extends BaseActionSupport{
 //        }
 		
 //		boolean flag = deviceInfoService.isExistDeviceInfoProperty(device.getId(),device.getWorkshopId(),"deviceName",device.getDeviceName());
-		boolean flag = deviceInfoService.isExistDeviceInfoProperty(device.getId(),device.getWorkshopId(),"deviceNum",device.getDeviceNum());
-		if(flag){
-			addFieldError("", "同一组织机构下不能存在相同的设备编号！");
-		}
+//		if(flag){
+//			addFieldError("", "同一车间下不能存在相同的设备名称！");
+//		}
 	}
 	
 	/**
@@ -561,10 +560,10 @@ public class DeviceInfoAction extends BaseActionSupport{
 	 * 执行修改前验证
 	 */
 	public void validateToModifyDevice(){
-		boolean flag = deviceInfoService.isExistDeviceInfoProperty(device.getId(),device.getWorkshopId(),"deviceName",device.getDeviceName());
-		if(flag){
-			addFieldError("", "同一车间下不能存在相同的设备名称！");
-		}
+//		boolean flag = deviceInfoService.isExistDeviceInfoProperty(device.getId(),device.getWorkshopId(),"deviceName",device.getDeviceName());
+//		if(flag){
+//			addFieldError("", "同一车间下不能存在相同的设备名称！");
+//		}
 	}
 
 	/**
@@ -572,10 +571,11 @@ public class DeviceInfoAction extends BaseActionSupport{
 	 * @return
 	 */
 	public String openSortDevice(){
-		if(workshopId==null){
-			workshopId="";
-		}
-		deviceInfoList = deviceInfoService.findDeviceInfoByWorkshopId(workshopId);
+		Map<String,String> param = new HashMap<String,String>();
+		param.put("companyId", companyId);
+		param.put("factoryId", factoryId);
+		param.put("workshopId", workshopId);
+		deviceInfoList = deviceInfoService.findDeviceInfoByOrgan(companyId, factoryId, workshopId);
 		return SUCCESS;
 	}
 	
@@ -587,7 +587,7 @@ public class DeviceInfoAction extends BaseActionSupport{
 		try{
 			deviceInfoService.sortDeviceInfo(ids);
 			message = "保存成功！";
-			deviceInfoList = deviceInfoService.findAllDeviceInfo();
+			deviceInfoList = deviceInfoService.findDeviceInfoByOrgan(companyId, factoryId, workshopId);
 		}catch(Exception e){
 			e.printStackTrace();
 			message = "保存失败！";
