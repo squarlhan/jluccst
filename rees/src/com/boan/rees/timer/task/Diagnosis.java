@@ -286,7 +286,7 @@ public class Diagnosis
 													String factoryId =  listDeviceInfo.get( i ).getFactoryId();
 													String workshopId = listDeviceInfo.get( i ).getWorkshopId();
 													errorLog.setDeptName( groupService.getGroupFullName( companyId, factoryId, workshopId ) );
-													errorLog.setDeviceName( listDeviceInfo.get( i ).getDeviceName() + ":" + pointInfo.getControlPointName());
+													errorLog.setDeviceName( listDeviceInfo.get( i ).getDeviceName() + ":监测点[" + pointInfo.getControlPointName()+"]");
 													errorLog.setIsRemove( 0 );
 													errorLog.setDeviceNum( listDeviceInfo.get( i ).getDeviceNum() );
 													errorLog.setErrorTime( Calendar.getInstance() );
