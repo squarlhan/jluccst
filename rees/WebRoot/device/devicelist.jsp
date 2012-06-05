@@ -113,9 +113,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  		 * 打开设备排序窗口
 	  		 */
 	  		$("#sortbtn").click(function(){
+	  			var companyId = $("#hid_companyId").val();
 	  			var factoryId = $("#hid_factoryId").val();
 	  			var workshopId = $("#hid_workshopId").val();
-	  			parent.parent.tipsWindown("设备排序","iframe:openSortDeviceAction.action?factoryId="+factoryId+"&workshopId="+workshopId,"350","420","true","","true","no");
+	  			parent.parent.tipsWindown("设备排序","iframe:openSortDeviceAction.action?companyId="+companyId+"&factoryId="+factoryId+"&workshopId="+workshopId,"350","420","true","","true","no");
 	  			parent.parent.$("#windown-close").bind('click',function(){
 					window.location.href=window.location.href;
 				});

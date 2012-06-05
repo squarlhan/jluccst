@@ -108,6 +108,44 @@ public class DeviceInfoServiceImpl  implements IDeviceInfoService {
 		pagination.setData(data);
 		return pagination;
 	}
+	/**
+	 * 根据组织机构查询组织机构下的设备
+	 * @param companyId 公司Id
+	 * @param factoryId 工厂Id
+	 * @param workshopId 车间Id
+	 * @return
+	 */
+	public List<DeviceInfo> findDeviceInfoByOrgan(String companyId,String factoryId,String workshopId ){
+		
+		String hql = null;
+		companyId  = companyId==null ? "" : companyId;
+		factoryId  = factoryId==null ? "" : factoryId;
+		workshopId = workshopId==null ? "" : workshopId;
+		Map<String, Object > map = new HashMap<String ,Object>();
+		//表示公司
+		if( StringUtils.isNotBlank( companyId ) && StringUtils.isBlank( factoryId ) && StringUtils.isBlank( workshopId ))
+		{
+			hql = "from DeviceInfo where (isDelete is null or isDelete=0) and companyId = :companyId and ( factoryId is null or factoryId = '' ) and ( workshopId is null or workshopId = '') order by sortIndex,createTime";
+			map.put( "companyId", companyId );
+		}
+		//表示工厂
+		else if( StringUtils.isNotBlank( companyId ) && StringUtils.isNotBlank( factoryId ) && StringUtils.isBlank( workshopId ))
+		{
+			hql = "from DeviceInfo where(isDelete is null or isDelete=0) and companyId = :companyId and factoryId = :factoryId and ( workshopId is null or workshopId = '') order by sortIndex,createTime";
+			map.put( "companyId", companyId );
+			map.put( "factoryId", factoryId );
+		}
+		//表示车间
+		else if( StringUtils.isNotBlank( companyId ) && StringUtils.isNotBlank( factoryId ) && StringUtils.isNotBlank( workshopId ))
+		{
+			hql = "from DeviceInfo where (isDelete is null or isDelete=0) and companyId = :companyId and factoryId = :factoryId and workshopId = :workshopId order by sortIndex,createTime";
+			map.put( "companyId", companyId );
+			map.put( "factoryId", factoryId );
+			map.put( "workshopId", workshopId );
+		}
+		List<DeviceInfo> data = deviceInfoDao.find(hql, map);
+		return data;
+	}
 
 	/**
 	 * 设备排序

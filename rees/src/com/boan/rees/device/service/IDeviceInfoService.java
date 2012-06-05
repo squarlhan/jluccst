@@ -41,6 +41,15 @@ public interface IDeviceInfoService {
 	public Pagination<DeviceInfo> findDeviceInfoForPage(Map<String, ?> values,Pagination<DeviceInfo> pagination);
 	
 	/**
+	 * 根据组织机构查询组织机构下的设备
+	 * @param companyId 公司Id
+	 * @param factoryId 工厂Id
+	 * @param workshopId 车间Id
+	 * @return
+	 */
+	public List<DeviceInfo> findDeviceInfoByOrgan(String companyId,String factoryId,String workshopId );
+	
+	/**
 	 * 设备排序
 	 * @param ids 有顺序的设备Id数组
 	 */
