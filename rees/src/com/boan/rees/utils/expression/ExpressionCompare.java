@@ -114,7 +114,7 @@ public class ExpressionCompare {
 			//逻辑计算
 			result = compare(left_expression) && compare(right_expression);
 			expression = expression.replaceAll(paramName, paramValue);
-			System.out.println(expression + " : " + result );
+			//System.out.println(expression + " : " + result );
 		}else{
 			System.out.println("表达式 ：" + expression + " 错误！" );
 		}
