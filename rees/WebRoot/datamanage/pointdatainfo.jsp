@@ -20,7 +20,7 @@
 				$(document).find("input[name='datainput']").each(function(index,domEle){
 					if(index==0)
 						$(domEle).focus();
-					$.getJSON("getdataajax.action",{ paramId:$(domEle).attr("paramid"), selectWeek:$("#selectWeek").val(), selectYear:$("#selectYear").val() }, function(json){
+					$.getJSON("getdataajax.action?rnd=" + Math.random(),{ paramId:$(domEle).attr("paramid"), selectWeek:$("#selectWeek").val(), selectYear:$("#selectYear").val() }, function(json){
 						if(json.pointDataInfo!=null){
 							$(domEle).val(json.pointDataInfo.dataInfo);
 						}else{
