@@ -110,7 +110,7 @@ public class Diagnosis
 	 */
 	public void work()
 	{
-		System.out.println("＝＝＝＝＝执行服务任务＝＝＝＝＝！");
+		System.out.println("＝＝＝＝＝执行服务任务开始＝＝＝＝＝！");
 		//执行具体操作
 		//1.封装所有规则
 		//推理机:
@@ -119,7 +119,7 @@ public class Diagnosis
 		//规则对象命名：RuleInfo，现象对象命名：RuleResultInfo，原因对象命名：RuleReasonInfo，建议对象命名：RuleAdviceInfo
 		List<RuleInfo> listRule = ruleInfoService.findAllRuleInfo();
 		List<Backward> listBackward = new ArrayList<Backward>();
-		System.out.println("＝＝＝＝＝1.封装所有规则 ....begin＝＝＝＝＝！");
+		//System.out.println("＝＝＝＝＝1.封装所有规则 ....begin＝＝＝＝＝！");
 		for(int i=0;i < listRule.size();i++)
 		{
 			//封装推理机规则
@@ -193,8 +193,8 @@ public class Diagnosis
 		//送入推理机
 		inferenceEngine.setBackwardrule( listBackward );
 		
-		System.out.println("＝＝＝＝＝1.封装所有规则 ....end＝＝＝＝＝！");
-		System.out.println("＝＝＝＝＝2.遍历设备....begin＝＝＝＝＝！");
+		//System.out.println("＝＝＝＝＝1.封装所有规则 ....end＝＝＝＝＝！");
+//		System.out.println("＝＝＝＝＝2.遍历设备....begin＝＝＝＝＝！");
 		//获取当前是第多少周
 		int year = Calendar.getInstance().get( Calendar.YEAR );
 		int week = CalendarUtils.getWeekOfYear(Calendar.getInstance());
@@ -213,7 +213,7 @@ public class Diagnosis
 				System.out.println("根据设备中心高和转速未找到对应的阈值项实体类！");
 				continue;
 			}
-			System.out.println("＝＝＝＝＝2.取某个设备的阈值 ＝＝＝＝＝");
+			//System.out.println("＝＝＝＝＝2.取某个设备的阈值 ＝＝＝＝＝");
 			if(pis!=null && pis.size()>0){
 				boolean findAllItemFlag = false;
 				//监测点参数
@@ -222,17 +222,17 @@ public class Diagnosis
 				PointDataInfo pdi = null;
 				for (PointInfo pointInfo : pis) {
 					//获得监测点参数
-					System.out.println("＝＝＝＝＝2.取某个设备的监测点参数 ＝＝＝＝＝");
+					//System.out.println("＝＝＝＝＝2.取某个设备的监测点参数 ＝＝＝＝＝");
 					ppis = pointParamInfoService.findPointParamInfoByPointId(pointInfo.getId());
 					if(ppis!=null && ppis.size()>0){
 						for(PointParamInfo ppi:ppis){
 							if(StringUtils.trimToNull(String.valueOf( week ))!=null && StringUtils.trimToNull(String.valueOf( year ))!=null){
 								//获得监测点参数数据
-								System.out.println("＝＝＝＝＝2.取某个设备的监测点数据值 ＝＝＝＝＝");
+								//System.out.println("＝＝＝＝＝2.取某个设备的监测点数据值 ＝＝＝＝＝");
 								pdi = pointDataInfoService.get(String.valueOf( year ), String.valueOf( week ), ppi.getId());
 								if(pdi!=null){
 									//判断监测点参数数据是否超出境界值
-									System.out.println("＝＝＝＝＝2.判断某个设备的监测点是否超出阈值 ＝＝＝＝＝");
+									//System.out.println("＝＝＝＝＝2.判断某个设备的监测点是否超出阈值 ＝＝＝＝＝");
 									List<ThresholdItem> thresholdItem = threshold.getThresholdItems();
 									String expression = null;
 									
@@ -241,7 +241,7 @@ public class Diagnosis
 										if(ExpressionCompare.compare(expression, item.getThresholdItemName(), pdi.getDataInfo())){
 											if(item.getSign()==1){
 												findAllItemFlag = true;
-												System.out.println("＝＝＝＝＝2.报警区间内，报警＝＝＝＝＝");
+												System.out.println("＝＝＝＝＝1.报警区间内，报警＝＝＝＝＝");
 												if (item.getTroubleIds() != null && item.getTroubleIds().size() > 0)
 												{
 													//判断是否在报警区间
@@ -334,6 +334,7 @@ public class Diagnosis
 				pointInfoService.updateStatus(listDeviceInfo.get( i ).getId(),2);
 			}
 	    }
+	    System.out.println("＝＝＝＝＝执行服务任务结束！＝＝＝＝＝！");
 	}
 }
 
