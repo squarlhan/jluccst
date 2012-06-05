@@ -26,7 +26,7 @@
 				//直接显示提示
 				$(this).poshytip('show');
 				$(document).find("span[name='dataspan']").each(function(index,domEle){
-					$.getJSON("getdataajax.action",{ paramId:$(this).attr("paramid"), selectWeek:$("#selectWeek").val(), selectYear:$("#selectYear").val() }, function(json){
+					$.getJSON("getdataajax.action?rnd=" + Math.random(),{ paramId:$(this).attr("paramid"), selectWeek:$("#selectWeek").val(), selectYear:$("#selectYear").val() }, function(json){
 						if(json.pointDataInfo!=null){
 							$(domEle).html(json.pointDataInfo.dataInfo);
 						}else{
