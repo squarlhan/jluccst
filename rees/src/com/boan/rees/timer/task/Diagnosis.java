@@ -210,7 +210,7 @@ public class Diagnosis
 			Threshold threshold = thresholdService.getThresholdByCenterHeightAndSpeed(deviceInfo.getCenterHeight().toString(), deviceInfo.getSpeed().toString());
 			if(threshold == null)
 			{
-				System.out.println("根据设备中心高和转速未找到对应的阈值项实体类！");
+				System.out.println(deviceInfo.getDeviceName()+"["+deviceInfo.getDeviceNum()+"],根据设备中心高和转速未找到对应的阈值项实体类！");
 				continue;
 			}
 			//System.out.println("＝＝＝＝＝2.取某个设备的阈值 ＝＝＝＝＝");
