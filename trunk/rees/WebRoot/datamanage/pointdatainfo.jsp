@@ -87,7 +87,7 @@
 						</tr>
 						<tr>
 							<td align="center" valign="top">
-								<input name="datainput" type="text" size="10" maxlength="10" pointid="<s:property value='pointInfo.id'/>" paramid="<s:property value='id'/>" />
+								<input name="datainput" type="text" size="10" maxlength="10" pointid="<s:property value='pointInfo.id'/>" paramid="<s:property value='id'/>" onKeyPress="if((event.keyCode<48 || event.keyCode>57) && event.keyCode!=46 || /\.\d\d$/.test(value))event.returnValue=false" />
 							</td>
 						</tr>
 					</table>
