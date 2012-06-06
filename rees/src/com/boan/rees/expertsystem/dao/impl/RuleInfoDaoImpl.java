@@ -23,5 +23,6 @@ public class RuleInfoDaoImpl extends BaseDao<RuleInfo, Integer> implements IRule
 		return (RuleInfo) getSession().load(entityClass, id);
 	}
 	
+	
 }
 
