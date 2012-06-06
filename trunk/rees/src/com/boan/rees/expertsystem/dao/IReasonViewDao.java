@@ -14,5 +14,6 @@ import com.boan.rees.utils.dao.IBaseDao;
  */
 public interface IReasonViewDao extends IBaseDao<ReasonView, Integer>{
 	public ReasonView get(int id);
+	
 }
 

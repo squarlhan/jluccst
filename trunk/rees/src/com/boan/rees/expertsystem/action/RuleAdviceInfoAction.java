@@ -4,6 +4,7 @@
 
 package com.boan.rees.expertsystem.action;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -16,8 +17,10 @@ import com.boan.rees.device.type.model.DeviceType;
 import com.boan.rees.device.type.service.IDeviceTypeService;
 import com.boan.rees.expertsystem.model.AdviceView;
 import com.boan.rees.expertsystem.model.RuleAdviceInfo;
+import com.boan.rees.expertsystem.model.RuleInfo;
 import com.boan.rees.expertsystem.service.IAdviceViewService;
 import com.boan.rees.expertsystem.service.IRuleAdviceInfoService;
+import com.boan.rees.expertsystem.service.IRuleInfoService;
 import com.boan.rees.utils.action.BaseActionSupport;
 import com.boan.rees.utils.page.Pagination;
 
@@ -35,6 +38,9 @@ public class RuleAdviceInfoAction extends BaseActionSupport{
 	@Autowired
 	@Qualifier("ruleAdviceInfoService")
 	private IRuleAdviceInfoService service;
+	@Autowired
+	@Qualifier("ruleInfoService")
+	private IRuleInfoService ruleservice;
 	@Autowired
 	@Qualifier("adviceViewService")
 	private IAdviceViewService viewservice;
@@ -163,8 +169,16 @@ public class RuleAdviceInfoAction extends BaseActionSupport{
 	 * @return
 	 */
 	public String deleteRuleAdviceInfo(){
+		String propertyName="adviceId";
+		List<RuleInfo> rules=new ArrayList();
+		for(int id:ids){
+			rules=ruleservice.findbyProperties(propertyName, id);}
+		if(rules==null){
 		service.deleteRuleAdviceInfo(ids);
-		return NONE;
+		return NONE;}
+		else 
+			System.out.println("删除失败！");
+			return "input";
 	}
 	
 	/**

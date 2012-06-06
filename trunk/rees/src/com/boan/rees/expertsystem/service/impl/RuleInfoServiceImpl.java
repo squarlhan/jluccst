@@ -72,6 +72,13 @@ public class RuleInfoServiceImpl implements IRuleInfoService{
 	//public RuleInfo findbyDeviceTypeId(String id){
 		
 	//}
+	
+	public List<RuleInfo> findbyProperties(String propertyName,String value){
+	return	ruleInfoDao.findByProperty(propertyName, value);
+	}
+	public List<RuleInfo> findbyProperties(String propertyName,int value){
+		return	ruleInfoDao.findByProperty(propertyName, value);
+		}
 
 }
 

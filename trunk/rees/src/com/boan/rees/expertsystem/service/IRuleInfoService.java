@@ -49,6 +49,13 @@ public interface IRuleInfoService {
 	 * 根据设备类型id查找规则
 	 */
 	//public RuleInfo findbyDeviceTypeId(String id);
+	/**
+	 * 查找规则表中有关属性值
+	 * @param propertyName 属性名字，value 属性值
+	 * @return 查找到的规则列表
+	 */
+	public List<RuleInfo> findbyProperties(String propertyName,String value);
+	public List<RuleInfo> findbyProperties(String propertyName,int value);
 }
 
 
