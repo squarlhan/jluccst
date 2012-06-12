@@ -456,16 +456,20 @@ public class ReportAction extends BaseActionSupport{
 			report = service.get(report.getId());
 			templateId = report.getTemplateId();
 			TemplateReport template = templateReportService.get(templateId);
-			ServletContext servletContext = ServletActionContext.getServletContext();
-			//获取服务器上模板文件的保存路径
-			String fileAllName = servletContext.getRealPath(template.getTemplatePath());
-			if(fileAllName==null || fileAllName.equals("")){
-				addFieldError("", "系统没有找到模板文件，请联系管理员！");
-			}else{
-				File file = new File(fileAllName);
-				if(!file.exists() || file.isDirectory()){
+			if(template!=null){
+				ServletContext servletContext = ServletActionContext.getServletContext();
+				//获取服务器上模板文件的保存路径
+				String fileAllName = servletContext.getRealPath(template.getTemplatePath());
+				if(fileAllName==null || fileAllName.equals("")){
 					addFieldError("", "系统没有找到模板文件，请联系管理员！");
+				}else{
+					File file = new File(fileAllName);
+					if(!file.exists() || file.isDirectory()){
+						addFieldError("", "系统没有找到模板文件，请联系管理员！");
+					}
 				}
+			}else{
+				addFieldError("", "系统没有设置报表模板信息，请联系管理员！");
 			}
 		}else{
 			addFieldError("", "没有指定个人报表！");
@@ -473,10 +477,11 @@ public class ReportAction extends BaseActionSupport{
 		if(templateId!=null && !templateId.equals("")){
 			TemplateReport template = templateReportService.get(templateId);
 			if(template==null){
-				addFieldError("", "系统没有报表模板信息，请联系管理员！");
+				addFieldError("", "系统没有设置报表模板信息，请联系管理员！");
 			}
 		}else{
-			addFieldError("", "个人报表没有对应的模板！");
+//			addFieldError("", "个人报表没有对应的模板！");
+			addFieldError("", "系统没有设置报表模板信息，请联系管理员！");
 		}
 	}
 	
