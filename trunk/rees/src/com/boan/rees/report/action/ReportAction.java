@@ -463,7 +463,7 @@ public class ReportAction extends BaseActionSupport{
 				addFieldError("", "系统没有找到模板文件，请联系管理员！");
 			}else{
 				File file = new File(fileAllName);
-				if(!file.exists()){
+				if(!file.exists() || file.isDirectory()){
 					addFieldError("", "系统没有找到模板文件，请联系管理员！");
 				}
 			}
