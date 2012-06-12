@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">  	
+<struts>
+	<constant name="struts.ui.theme" value="simple"/>
+	<!-- 开启使用开发模式，详细错误提示 -->
+	<constant name="struts.devMode" value="true" />
+	<!-- 将对象交给spring管理 -->
+	<constant name="struts.objectFactory" value="spring" />
+	<!-- 指定资源编码类型 -->
+	<constant name="struts.i18n.encoding" value="UTF-8" />
+	<!-- 指定每次请求到达，重新加载资源文件 -->
+	<constant name="struts.i18n.reload" value="true" />
+	<!-- 指定每次配置文件更改后，自动重新加载 -->
+	<constant name="struts.configuration.xml.reload" value="true" />
+	<!-- 上传文件时的临时目录-->
+	<constant name="struts.multipart.saveDir" value="c:/temp"/>
+	<!-- 上传组件最大上传文件大小 1G-->
+	<constant name="struts.multipart.maxSize" value="1073741824" /> 
+	
+	<!-- 国际化资源文件 -->
+	<!-- <constant name="struts.custom.i18n.resources" value="message" /-->
+	<!-- 浏览器缓存 -->
+	<constant name="struts.serve.static.browserCache" value="false" />
+	
+	<!-- 默认后缀名 -->
+	<!-- constant name="struts.action.extension" value="action" /-->
+	
+	<!-- 例子配置 -->
+	<!--include file="com/boan/rees/demo/action/struts_demo.xml"></include-->
+</struts>
