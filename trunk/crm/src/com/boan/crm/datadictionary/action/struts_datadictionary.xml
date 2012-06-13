@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">	
+<struts>
+    <!-- 客户类别Action -->
+	<package name="customerType" extends="struts-default" namespace="/datadictionary">
+		<action name="customertypelist" class="customerTypeAction" method="customerTypeList">
+			<result name="success">/datadictionary/customer_type_list.jsp</result>
+			<result name="input">/datadictionary/customer_type_list.jsp</result>
+		</action>
+		<action name="customertype" class="customerTypeAction" method="customerTypeInfo">
+			<result name="success">/datadictionary/customer_type_info.jsp</result>
+			<result name="input">/datadictionary/customer_type_info.jsp</result>
+		</action>
+		<action name="savecustomertype" class="customerTypeAction" method="saveCustomerType">
+			<result name="success">/datadictionary/customer_type_info.jsp</result>
+			<result name="input">/datadictionary/customer_type_info.jsp</result>
+		</action>
+    	<action name="delcustomertype" class="customerTypeAction" method="deleteCustomerType"/>
+	</package>
+</struts>
