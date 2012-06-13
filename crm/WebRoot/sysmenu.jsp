@@ -337,6 +337,76 @@
 									</table>
 								</td>
 							</tr>
+							<tr>
+								<td height="24" align="left" background="images/menubg.jpg">
+									<table width="100%" border="0" cellspacing="5" cellpadding="0">
+										<tr>
+											<td width="40" align="right" style="padding-bottom: 4px;">
+												<img src="images/up.gif" width="10" height="12" />
+											</td>
+											<td>
+												<strong>数据字典</strong>
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							<tr>
+								<td align="left">
+									<table width="100%" border="0" cellspacing="5" cellpadding="0">
+										<tr>
+											<td width="40" align="right" style="padding-bottom: 4px;">
+												<img src="images/menuto.jpg" width="5" height="5" />
+											</td>
+											<td>
+												<a href="datadictionary/customertypelist.action" target="mainFrame">客户分类</a>
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							<tr>
+								<td align="left">
+									<table width="100%" border="0" cellspacing="5" cellpadding="0">
+										<tr>
+											<td width="40" align="right" style="padding-bottom: 4px;">
+												<img src="images/menuto.jpg" width="5" height="5" />
+											</td>
+											<td>
+												<a href="datadictionary/customerstatelist.action" target="mainFrame">客户状态</a>
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							<tr>
+								<td align="left">
+									<table width="100%" border="0" cellspacing="5" cellpadding="0">
+										<tr>
+											<td width="40" align="right" style="padding-bottom: 4px;">
+												<img src="images/menuto.jpg" width="5" height="5" />
+											</td>
+											<td>
+												<a href="datadictionary/customersourcelist.action" target="mainFrame">客户来源</a>
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							<tr>
+								<td align="left">
+									<table width="100%" border="0" cellspacing="5" cellpadding="0">
+										<tr>
+											<td width="40" align="right" style="padding-bottom: 4px;">
+												<img src="images/menuto.jpg" width="5" height="5" />
+											</td>
+											<td>
+												<a href="datadictionary/mainindustrylist.action" target="mainFrame">主营行业</a>
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
 						</table>
 					</div>
 				</td>
