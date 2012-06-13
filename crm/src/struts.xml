@@ -27,6 +27,7 @@
 	<!-- 默认后缀名 -->
 	<!-- constant name="struts.action.extension" value="action" /-->
 	
+	<include file="struts_ui.xml"></include>
 	<!-- 例子配置 -->
 	<!--include file="com/boan/rees/demo/action/struts_demo.xml"></include-->
 </struts>
