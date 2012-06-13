@@ -6,24 +6,21 @@
 	response.setHeader( "Cache-Control", "no-cache" );
 	response.setHeader( "Expires", "0" );
 	request.setCharacterEncoding( "utf-8" );
-	String path = request.getContextPath();
+	String path = "http://"+request.getLocalAddr() + ":" + request.getLocalPort() + request.getContextPath();
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title></title>
-<j:scriptlink css="true" jquery="true" jfunction="true" tipswindow="true"></j:scriptlink>
-<style type="text/css">
-<!--
-.STYLE1 {color: #FFFFFF}
--->
-</style>
+<j:scriptlink css="true" jquery="true" jfunction="true"></j:scriptlink>
+
 </head>
 <body>
-<table width="100%" height="100%" border="0" cellpadding="0" cellspacing="0" id="__01">
+<input type="hidden" name="path" id="path" value="<%=path%>"/>
+<table width="100%" border="0" cellpadding="0" cellspacing="0" id="__01">
   <tr>
-    <td align="center"><!--img src="images/desktop.jpg"/--></td>
+    <td height="26" background="images/bottombg.jpg" style="padding-left:10px;"><p><strong>版权所有：吉林大学　技术支持：吉林大学</strong></p></td>
   </tr>
 </table>
 </body>
