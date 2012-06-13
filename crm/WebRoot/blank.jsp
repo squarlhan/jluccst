@@ -2,20 +2,6 @@
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%@ taglib prefix="j" uri="/script-tags"%>
 <%
-	/**
-	 * Copyright (c) 2010 Changchun Boan (BOAN) Co. Ltd.
-	 * All right reserved.
-	 */
-	/**
-	 * @author XXX
-	 * @version 1.0
-	 * @audit  
-	 */
-	/**
-	 * Modified Person：
-	 * Modified Time：
-	 * Modified Explain：
-	 */
 	response.setHeader( "Pragma", "No-cache" );
 	response.setHeader( "Cache-Control", "no-cache" );
 	response.setHeader( "Expires", "0" );
