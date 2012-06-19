@@ -60,7 +60,7 @@
 											</td>
 											<td>
 												<strong><a href="sysmanage/datamanage.html"
-													target="mainFrame">系统设置</a>
+													target="mainFrame">组织机构</a>
 												</strong>
 											</td>
 										</tr>
@@ -75,7 +75,7 @@
 												<img src="images/menuto.jpg" width="5" height="5" />
 											</td>
 											<td>
-												<a href="organ.html" target="mainFrame">组织机构维护</a>
+												<a href="organ.html" target="mainFrame">部门管理</a>
 											</td>
 										</tr>
 										<tr>
@@ -83,7 +83,7 @@
 												<img src="images/menuto.jpg" width="5" height="5" />
 											</td>
 											<td>
-												<a href="tab.html" target="mainFrame">基本数据维护</a>
+												<a href="tab.html" target="mainFrame">用户管理</a>
 											</td>
 										</tr>
 										<tr>
@@ -91,7 +91,7 @@
 												<img src="images/menuto.jpg" width="5" height="5" />
 											</td>
 											<td>
-												<a href="user.html" target="mainFrame">用户管理</a>
+												<a href="user.html" target="mainFrame">职务管理</a>
 											</td>
 										</tr>
 										<tr>
@@ -99,7 +99,35 @@
 												<img src="images/menuto.jpg" width="5" height="5" />
 											</td>
 											<td>
-												<a href="systab.html" target="mainFrame">系统管理</a>
+												<a href="systab.html" target="mainFrame">权限管理</a>
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							<tr>
+								<td height="24" align="left" background="images/menubg.jpg">
+									<table width="100%" border="0" cellspacing="5" cellpadding="0">
+										<tr>
+											<td width="40" align="right" style="padding-bottom: 4px;">
+												<img src="images/up.gif" width="10" height="12" />
+											</td>
+											<td>
+												<strong>系统管理</strong>
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							<tr>
+								<td align="left">
+									<table width="100%" border="0" cellspacing="5" cellpadding="0">
+										<tr>
+											<td width="40" align="right" style="padding-bottom: 4px;">
+												<img src="images/menuto.jpg" width="5" height="5" />
+											</td>
+											<td>
+												<a href="customerReaserch.html" target="mainFrame">公司档案</a>
 											</td>
 										</tr>
 										<tr>
@@ -107,7 +135,7 @@
 												<img src="images/menuto.jpg" width="5" height="5" />
 											</td>
 											<td>
-												<a href="systemLog.html" target="mainFrame">系统日志管理</a>
+												<a href="customerReaserch.html" target="mainFrame">公司用户</a>
 											</td>
 										</tr>
 										<tr>
@@ -115,7 +143,15 @@
 												<img src="images/menuto.jpg" width="5" height="5" />
 											</td>
 											<td>
-												<a href="companyInfo.html" target="mainFrame">公司档案管理</a>
+												<a href="customerReaserch.html" target="mainFrame">权限分配</a>
+											</td>
+										</tr>
+										<tr>
+											<td width="40" align="right" style="padding-bottom: 4px;">
+												<img src="images/menuto.jpg" width="5" height="5" />
+											</td>
+											<td>
+												<a href="customerReaserch.html" target="mainFrame">系统日志</a>
 											</td>
 										</tr>
 									</table>
