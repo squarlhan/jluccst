@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<!-- 公司Action -->
+	<package name="group_company" extends="struts-default" namespace="/">
+		<action name="openCompanyAction" class="companyAction" method="openCompany">
+			<result name="success">/systemmanage/companylist.jsp</result>
+			<result name="input">/systemmanage/companylist.jsp</result>
+		</action>
+		<action name="openAddCompanyAction" class="companyAction" method="openAddCompany">
+			<result name="success">/systemmanage/companyinfo.jsp</result>
+			<result name="input">/systemmanage/companyinfo.jsp</result>
+		</action>
+		<action name="toAddCompanyAction" class="companyAction" method="toAddCompany">
+			<result name="success">/common/message.jsp</result>
+			<result name="error">/common/messagenoclose.jsp</result>
+		</action>
+		<action name="openModifyCompanyAction" class="companyAction" method="openModifyCompany">
+			<result name="success">/systemmanage/companyinfo.jsp</result>
+			<result name="input">/systemmanage/companyinfo.jsp</result>
+		</action>
+		<action name="toModifyCompanyAction" class="companyAction" method="toModifyCompany">
+			<result name="success">/common/message.jsp</result>
+			<result name="error">/common/messagenoclose.jsp</result>
+		</action>
+		<action name="deleteCompanyAction" class="companyAction" method="deleteCompany" />
+	</package>
+
+	<!-- 工厂Action -->
+	<package name="group_factory" extends="struts-default" namespace="/">
+		<action name="openFactoryAction" class="factoryAction" method="openFactory">
+			<result name="success">/systemmanage/factorylist.jsp</result>
+			<result name="input">/systemmanage/factorylist.jsp</result>
+		</action>
+		<action name="openAddFactoryAction" class="factoryAction" method="openAddFactory">
+			<result name="success">/systemmanage/factoryinfo.jsp</result>
+			<result name="input">/systemmanage/factoryinfo.jsp</result>
+		</action>
+		<action name="toAddFactoryAction" class="factoryAction" method="toAddFactory">
+			<result name="success">/common/message.jsp</result>
+			<result name="error">/common/messagenoclose.jsp</result>
+		</action>
+		<action name="openModifyFactoryAction" class="factoryAction" method="openModifyFactory">
+			<result name="success">/systemmanage/factoryinfo.jsp</result>
+			<result name="input">/systemmanage/factoryinfo.jsp</result>
+		</action>
+		<action name="toModifyFactoryAction" class="factoryAction" method="toModifyFactory">
+			<result name="success">/common/message.jsp</result>
+			<result name="error">/common/messagenoclose.jsp</result>
+		</action>
+		<action name="deleteFactoryAction" class="factoryAction" method="deleteFactory"></action>
+	</package>
+
+	<!-- 车间Action -->
+	<package name="group_workshop" extends="struts-default" namespace="/">
+		<action name="openWorkshopAction" class="workshopAction" method="openWorkshop">
+			<result name="success">/systemmanage/workshoplist.jsp</result>
+			<result name="input">/systemmanage/workshoplist.jsp</result>
+		</action>
+		<action name="openAddWorkshopAction" class="workshopAction" method="openAddWorkshop">
+			<result name="success">/systemmanage/workshopinfo.jsp</result>
+			<result name="input">/systemmanage/workshopinfo.jsp</result>
+		</action>
+		<action name="toAddWorkshopAction" class="workshopAction" method="toAddWorkshop">
+			<result name="success">/common/message.jsp</result>
+			<result name="error">/common/messagenoclose.jsp</result>
+		</action>
+		<action name="openModifyWorkshopAction" class="workshopAction" method="openModifyWorkshop">
+			<result name="success">/systemmanage/workshopinfo.jsp</result>
+			<result name="input">/systemmange/workshopinfo.jsp</result>
+		</action>
+		<action name="toModifyWorkshopAction" class="workshopAction" method="toModifyWorkshop">
+			<result name="success">/common/message.jsp</result>
+			<result name="error">/common/messagenoclose.jsp</result>
+		</action>
+		<action name="deleteWorkshopAction" class="workshopAction" method="deleteWorkshop"></action>
+	</package>
+
+	<!-- 组织机构树 -->
+	<package name="group_tree" extends="struts-default" namespace="/">
+		<action name="groupTreeAction" class="groupTreeAction">
+			<result name="group-tree-for-factory">/systemmanage/group-tree-for-factory.jsp</result>
+			<result name="group-tree-for-workshop">/systemmanage/group-tree-for-workshop.jsp</result>
+			<result name="group-tree-for-device">/systemmanage/group-tree-for-device.jsp</result>
+			<result name="group-tree-for-pointdata">/systemmanage/group-tree-for-pointdata.jsp</result>
+			<result name="group-tree-for-user">/systemmanage/group-tree-for-user.jsp</result>
+			<result name="group-tree-for-report">/systemmanage/group-tree-for-report.jsp</result>
+		</action>
+	</package>
+	
+	<!-- 权限Action -->
+	<package name="group_popedom_role" extends="struts-default" namespace="/">
+		<action name="showAllRoleListAction" class="popedomAction" method="showAllRoleList">
+        	<result name="success">/systemmanage/popedomchooserole.jsp</result>
+        </action>
+        <action name="saveOrUpdatePopedomAction" class="popedomAction" method="saveOrUpdatePopedom">
+        	<result name="success">/common/messagemodaldialog.jsp</result>
+        </action>
+        <action name="showAllPopedomListAction" class="popedomAction" method="showAllPopedomList">
+        	<result name="success">/systemmanage/popedomlist.jsp</result>
+        </action>
+        <action name="deletePopedomAction" class="popedomAction" method="deletePopedom">
+        	<result name="success">/systemmanage/popedomlist.jsp</result>
+        </action>
+	</package>
+
+	<!-- 角色Action -->
+	<package name="group_role" extends="struts-default" namespace="/">
+        <action name="openRoleAction" class="roleAction" method="openRole">
+            <result name="success">/systemmanage/rolelist.jsp</result>
+            <result name="input">/systemmanage/rolelist.jsp</result>
+        </action>
+        <action name="openAddRoleAction" class="roleAction" method="openAddRole" >
+            <result name="success">/systemmanage/roleinfo.jsp</result>
+            <result name="input">/systemmanage/roleinfo.jsp</result>
+        </action>
+        <action name="toAddRoleAction" class="roleAction" method="toAddRole">
+           <result name="success">/common/message.jsp</result>
+			<result name="error">/common/messagenoclose.jsp</result>
+        </action>
+        <action name="openModifyRoleAction" class="roleAction" method="openModifyRole">
+            <result name="success">/systemmanage/roleinfo.jsp</result>
+            <result name="input">/systemmanage/roleinfo.jsp</result>
+        </action>
+        <action name="toModifyRoleAction" class="roleAction" method="toModifyRole">
+           <result name="success">/common/message.jsp</result>
+			<result name="error">/common/messagenoclose.jsp</result>
+        </action>
+        <action name="deleteRoleAction" class="roleAction" method="deleteRole"></action>
+	</package>
+	<package name="group_user" extends="struts-default" namespace="/">
+		<action name="userAction" class="userAction">
+			<result name="show-user">/systemmanage/userinfo.jsp</result>
+			<result name="show-list">/systemmanage/userlist.jsp</result>
+		</action>
+		<action name="saveOrUpdateUserAction" class="userAction"
+			method="saveOrUpdateUser">
+			<result name="success">/common/message.jsp</result>
+			<result name="error">/common/messagenoclose.jsp</result>
+		</action>
+		<action name="showInputUserAction" class="userAction" method="showInputUser">
+			<result name="success">/systemmanage/userinfo.jsp</result>
+		</action>
+		<action name="showMyInfoAction" class="userAction" method="showMyInfo">
+			<result name="success">/systemmanage/myinfo.jsp</result>
+		</action>
+		<action name="saveOrUpdateMyInfoAction" class="userAction"
+			method="saveOrUpdateMyInfo">
+			<result name="success">/common/messagenoclose.jsp</result>
+		</action>
+	</package>
+	<package name="userlogon" extends="struts-default" namespace="/">
+		<action name="logonValidAction" class="userLogonAction" method="logonValid">
+			<result name="success">/sysloginsuccess.jsp</result>
+			<result name="error">/common/messagenoclose.jsp</result>
+		</action>
+		<action name="logonMainAction" class="userLogonAction" method="logonMain">
+			<result name="success">/sysmain.jsp</result>
+		</action>
+		<action name="logonTopAction" class="userLogonAction" method="logonTop">
+			<result name="success">/systop.jsp</result>
+		</action>
+		<action name="logoutAction" class="userLogonAction" method="logout">
+			<result name="success">/default.jsp</result>
+		</action>
+		<action name="showModifyAction" class="userLogonAction" method="showModify">
+			<result name="success">/systemmanage/usermodify.jsp</result>
+		</action>
+		<action name="modifyAction" class="userLogonAction" method="modify">
+			<result name="success">/common/message.jsp</result>
+			<result name="error">/common/messagenoclose.jsp</result>
+		</action>
+	</package>
+	<package name="ajax" extends="json-default">
+		<!-- 初始化用户密码 -->
+		<action name="initUserPasswordAction" class="userAction"
+			method="initUserPassword">
+			<result type="json">
+				<param name="root">jsonData</param>
+			</result>
+		</action>
+	</package>
+</struts>
