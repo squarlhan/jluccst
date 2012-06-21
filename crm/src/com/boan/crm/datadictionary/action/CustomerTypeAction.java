@@ -6,9 +6,7 @@
 
 package com.boan.crm.datadictionary.action;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -41,6 +39,8 @@ public class CustomerTypeAction extends BaseActionSupport {
 	List<CustomerType> customerTypes = null;
 	
 	private String typeId;
+	private String typeName;
+	private String remark;
 	
 	private String[] typeIds;
 	
@@ -70,6 +70,13 @@ public class CustomerTypeAction extends BaseActionSupport {
 	 * @return
 	 */
 	public String saveCustomerType(){
+		if(StringUtils.trimToNull(typeId)!=null)
+			customerType = customerTypeService.get(typeId);
+		else
+			customerType = new CustomerType();
+		customerType.setTypeName(typeName);
+		customerType.setRemark(remark);
+		customerTypeService.save(customerType);
 		return SUCCESS;
 	}
 	
@@ -80,6 +87,31 @@ public class CustomerTypeAction extends BaseActionSupport {
 	public String deleteCustomerType(){
 		if(typeIds!=null){
 			customerTypeService.deleteCustomerType(typeIds);
+		}
+		return SUCCESS;
+	}
+	
+	/**
+	 * 排序
+	 * @return
+	 */
+	public String customerTypeSort(){
+		customerTypes = customerTypeService.findAllCustomerType();
+		return SUCCESS;
+	}
+	
+	/**
+	 * 保存排序
+	 * @return
+	 */
+	public String saveCustomerTypeSort(){
+		if(typeIds!=null&&typeIds.length>0){
+			CustomerType ct = null;
+			for(int i=0; i<typeIds.length; i++){
+				customerType = customerTypeService.get(typeIds[i]);
+				customerType.setSortIndex(i);
+				customerTypeService.save(customerType);
+			}
 		}
 		return SUCCESS;
 	}
@@ -114,6 +146,22 @@ public class CustomerTypeAction extends BaseActionSupport {
 
 	public void setTypeIds(String[] typeIds) {
 		this.typeIds = typeIds;
+	}
+
+	public String getTypeName() {
+		return typeName;
+	}
+
+	public void setTypeName(String typeName) {
+		this.typeName = typeName;
+	}
+
+	public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark;
 	}
 	
 }
