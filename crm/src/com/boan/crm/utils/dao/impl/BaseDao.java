@@ -163,8 +163,10 @@ public class BaseDao<T, ID extends Serializable> implements IBaseDao<T, ID> {
 	@Override
 	public <X> List<X> find(String hql, Object... values) {
 		Query query = getSession().createQuery(hql);
-		for(int i=0 ;i<values.length;i++){
-			query.setParameter(i, values[i]);
+		if(values!=null&&values.length>0){
+			for(int i=0 ;i<values.length;i++){
+				query.setParameter(i, values[i]);
+			}
 		}
 		return query.list();
 	}
