@@ -26,15 +26,15 @@ public class CustomerTypeServiceImpl implements ICustomerTypeService{
 
 	@Override
 	public List<CustomerType> findAllCustomerType() {
-		return customerTypeDao.findAll();
+		return customerTypeDao.find("from CustomerType order by sortIndex asc", new Object[0]);
 	}
 
 	@Override
 	public Pagination<CustomerType> findCustomerTypeForPage(
 			Map<String, ?> values, Pagination<CustomerType> pagination) {
-		String hql = "from CustomerType";
+		String hql = "from CustomerType order by sortIndex asc";
 		List<CustomerType> data = customerTypeDao.findForPage(hql, values, pagination.getStartIndex(), pagination.getPageSize());
-		hql = "select count(*) from CustomerType";
+		hql = "select count(*) from CustomerType order by sortIndex asc";
 		int totalRows = customerTypeDao.findCountForPage(hql, values);
 		pagination.setTotalRows(totalRows);
 		pagination.setData(data);

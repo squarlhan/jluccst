@@ -39,6 +39,12 @@ public class CustomerType implements Serializable {
 	 */
 	@Column(name = "TYPE_NAME" , length = 50)
 	private String typeName;
+	
+	/**
+	 * 排序号
+	 */
+	@Column(name = "SORT_INDEX")
+	private Integer sortIndex = 0;
 
 	/**
 	 * 类别说明
@@ -68,6 +74,14 @@ public class CustomerType implements Serializable {
 
 	public void setRemark(String remark) {
 		this.remark = remark;
+	}
+
+	public Integer getSortIndex() {
+		return sortIndex;
+	}
+
+	public void setSortIndex(Integer sortIndex) {
+		this.sortIndex = sortIndex;
 	}
 	
 }

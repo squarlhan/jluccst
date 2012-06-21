@@ -14,9 +14,23 @@
 			<result name="input">/datadictionary/customer_type_info.jsp</result>
 		</action>
 		<action name="savecustomertype" class="customerTypeAction" method="saveCustomerType">
-			<result name="success">/datadictionary/customer_type_info.jsp</result>
-			<result name="input">/datadictionary/customer_type_info.jsp</result>
+			<result name="success" type="chain">
+             	<param name="actionName">customertype</param>
+            </result>
 		</action>
-    	<action name="delcustomertype" class="customerTypeAction" method="deleteCustomerType"/>
+    	<action name="delcustomertype" class="customerTypeAction" method="deleteCustomerType">
+    		<result name="success" type="chain">
+             	<param name="actionName">customertypelist</param>
+            </result>
+    	</action>
+    	<action name="customertypesort" class="customerTypeAction" method="customerTypeSort">
+    		<result name="success">/datadictionary/customer_type_sort.jsp</result>
+			<result name="input">/datadictionary/customer_type_sort.jsp</result>
+    	</action>
+    	<action name="savecustomertypesort" class="customerTypeAction" method="saveCustomerTypeSort">
+    		<result name="success" type="chain">
+             	<param name="actionName">customertypesort</param>
+            </result>
+    	</action>
 	</package>
 </struts>
