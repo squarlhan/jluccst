@@ -60,11 +60,7 @@ public class UserAction extends BaseActionSupport
 
 	private List<User> userList = null;
 
-	private String companyId = null;
-
-	private String factoryId = null;
-
-	private String workshopId = null;
+	private String deptId = null;
 
 	private String jsonData = null;
 
@@ -91,9 +87,7 @@ public class UserAction extends BaseActionSupport
 		{
 			oldUser = userService.getUserById( user.getId() );
 			user.setCreateTime( oldUser.getCreateTime() );
-			user.setCompanyId( oldUser.getCompanyId() );
-			user.setFactoryId( oldUser.getFactoryId() );
-			user.setWorkshopId( oldUser.getWorkshopId() );
+			user.setDeptId( oldUser.getDeptId() );
 			// 如果修改时，登录密码为空，则不修改原密码
 			if( StringUtils.isBlank( user.getPassword() ) )
 			{
@@ -122,9 +116,7 @@ public class UserAction extends BaseActionSupport
 		{
 			Role role = roleService.get( user.getRoleId() );
 			user.setRoleName( role.getRoleName() );
-			user.setCompanyId( companyId );
-			user.setFactoryId( factoryId );
-			user.setWorkshopId( workshopId );
+			user.setDeptId( deptId );
 			if( StringUtils.isBlank( user.getId() ) )
 			{
 				// 密码md5加密
@@ -217,7 +209,7 @@ public class UserAction extends BaseActionSupport
 	 */
 	public String showUserList() throws Exception
 	{
-		pagination = userService.queryUserList( companyId,factoryId,workshopId,pagination );
+		pagination = userService.queryUserList( deptId,pagination );
 		if( pagination != null && pagination.getData().size() > 0 )
 		{
 			HttpSession session = ServletActionContext.getRequest().getSession();
@@ -270,9 +262,7 @@ public class UserAction extends BaseActionSupport
 			if( StringUtils.isNotBlank( myUserId ) )
 			{
 				user = userService.getUserById( sessionUserId );
-				companyId = user.getCompanyId();
-				factoryId = user.getFactoryId();
-				workshopId = user.getWorkshopId();
+				deptId = user.getDeptId();
 			}
 			roleList = roleService.queryAllRoleList();
 			if( roleList == null )
@@ -311,9 +301,7 @@ public class UserAction extends BaseActionSupport
 			else
 			{
 				user.setCreateTime( oldUser.getCreateTime() );
-				user.setCompanyId( oldUser.getCompanyId() );
-				user.setFactoryId( oldUser.getFactoryId() );
-				user.setWorkshopId( oldUser.getWorkshopId() );
+				user.setDeptId( oldUser.getDeptId() );
 				user.setUserType( oldUser.getUserType() );
 				user.setRoleId( oldUser.getRoleId() );
 				user.setRoleName( oldUser.getRoleName() );
@@ -447,36 +435,6 @@ public class UserAction extends BaseActionSupport
 		this.pagination = pagination;
 	}
 
-	public String getCompanyId()
-	{
-		return companyId;
-	}
-
-	public void setCompanyId( String companyId )
-	{
-		this.companyId = companyId;
-	}
-
-	public String getFactoryId()
-	{
-		return factoryId;
-	}
-
-	public void setFactoryId( String factoryId )
-	{
-		this.factoryId = factoryId;
-	}
-
-	public String getWorkshopId()
-	{
-		return workshopId;
-	}
-
-	public void setWorkshopId( String workshopId )
-	{
-		this.workshopId = workshopId;
-	}
-
 	public String getDeleteId()
 	{
 		return deleteId;
@@ -485,5 +443,13 @@ public class UserAction extends BaseActionSupport
 	public void setDeleteId( String deleteId )
 	{
 		this.deleteId = deleteId;
+	}
+
+	public String getDeptId() {
+		return deptId;
+	}
+
+	public void setDeptId(String deptId) {
+		this.deptId = deptId;
 	}
 }
