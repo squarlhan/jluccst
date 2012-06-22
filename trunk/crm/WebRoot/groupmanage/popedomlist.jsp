@@ -53,7 +53,7 @@
 												<input type="button" name="deleteSelect" value="删除所选"
 													class="btn_4" onClick="delinfo(0);">
 												<input type="button" name="selectAll" value="全选"
-													class="btn_4" onClick="checkall(this,0);">
+													class="btn_2_3" onClick="checkall(this,0);">
 											</td>
 										</tr>
 									</table>

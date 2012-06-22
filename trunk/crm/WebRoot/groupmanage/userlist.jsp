@@ -41,9 +41,7 @@
 	 * 添加修改
 	 */
 	$.fn.edit = function(cid){
-		var param = "companyId="+$("#companyId").val() +
-			"&factoryId=" + $("#factoryId").val() +
-			"&workshopId=" + $("#workshopId").val();
+		var param = "deptId="+$("#deptId").val() ;
 		parent.parent.tipsWindown("用户信息","iframe:./userAction!showUser.action?user.id="+cid + "&" + param,"400","430","true","","true","no");
 		parent.parent.$("#windown-close").bind('click',function(){
 			window.location.href="./userAction!showUserList.action?" + param;
@@ -85,9 +83,7 @@
 </head>
 <body>
 <s:form id="form1" name="form1" method="post" theme="simple">
-<s:hidden name="companyId" id="companyId"></s:hidden>
-<s:hidden name="factoryId" id="factoryId"></s:hidden>
-<s:hidden name="workshopId" id="workshopId"></s:hidden>
+<s:hidden name="deptId" id="deptId"></s:hidden>
 <s:hidden name="deleteId" id="deleteId" value=""></s:hidden>
 <table width="100%" style="height:100%;" border="0" cellspacing="5" cellpadding="0">
   <tr>

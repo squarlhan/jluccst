@@ -1,4 +1,4 @@
-<%@page import="com.boan.rees.common.UserConfig"%>
+<%@page import="com.boan.crm.common.UserConfig"%>
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%@ taglib prefix="j" uri="/script-tags"%>
@@ -151,9 +151,7 @@
 	<body>
 		<s:form name="form1" id="form1" method="post" theme="simple">
 			<s:hidden name="user.id" id="userId"></s:hidden>
-			<s:hidden name="companyId" id="companyId"></s:hidden>
-			<s:hidden name="factoryId" id="factoryId"></s:hidden>
-			<s:hidden name="workshopId" id="workshowId"></s:hidden>
+			<s:hidden name="deptId" id="deptId"></s:hidden>
 			<table width="100%" border="0" cellspacing="5" cellpadding="0">
 				<tr>
 					<td>
