@@ -33,4 +33,34 @@
             </result>
     	</action>
 	</package>
+	<!-- 客户状态Action -->
+	<package name="customerState" extends="struts-default" namespace="/datadictionary">
+		<action name="customerstatelist" class="customerStateAction" method="customerStateList">
+			<result name="success">/datadictionary/customer_state_list.jsp</result>
+			<result name="input">/datadictionary/customer_state_list.jsp</result>
+		</action>
+		<action name="customerstate" class="customerStateAction" method="customerStateInfo">
+			<result name="success">/datadictionary/customer_state_info.jsp</result>
+			<result name="input">/datadictionary/customer_state_info.jsp</result>
+		</action>
+		<action name="savecustomerstate" class="customerStateAction" method="saveCustomerState">
+			<result name="success" type="chain">
+             	<param name="actionName">customerstate</param>
+            </result>
+		</action>
+    	<action name="delcustomerstate" class="customerStateAction" method="deleteCustomerState">
+    		<result name="success" type="chain">
+             	<param name="actionName">customerstatelist</param>
+            </result>
+    	</action>
+    	<action name="customerstatesort" class="customerStateAction" method="customerStateSort">
+    		<result name="success">/datadictionary/customer_state_sort.jsp</result>
+			<result name="input">/datadictionary/customer_state_sort.jsp</result>
+    	</action>
+    	<action name="savecustomerstatesort" class="customerStateAction" method="saveCustomerStateSort">
+    		<result name="success" type="chain">
+             	<param name="actionName">customerstatesort</param>
+            </result>
+    	</action>
+	</package>
 </struts>
