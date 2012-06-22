@@ -26,7 +26,7 @@
 <html>
 	<head>
 		<base href="<%=basePath%>">
-		<title>公司信息管理</title>
+		<title>部门信息管理</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<j:scriptlink  css="true" jmessagebox="true" jquery="true" tipswindow="true" validate="true"/>
 		<script type="text/javascript">
@@ -35,9 +35,9 @@
 		  	 */
 			var _customer_submit = {
 				rules: {
-					"company.companyName":{required:true,strangecode:true},
-					"company.address":{strangecode:true},
-					"company.phone":{strangecode:true}
+					"deptment.deptName":{required:true,strangecode:true},
+					"deptment.principal":{strangecode:true},
+					"deptment.phone":{strangecode:true}
 				}
 			};
 			/**
@@ -67,10 +67,10 @@
 	               	if(!validator.form()){
 						return false;
 					}
-					if( $.trim( $("#companyId").val() ) != ""){
-						form1.action = "toModifyCompanyAction.action";
+					if( $.trim( $("#deptId").val() ) != ""){
+						form1.action = "toModifyDeptmentAction.action";
 					}else{
-		               	form1.action = "toAddCompanyAction.action";					
+		               	form1.action = "toAddDeptmentAction.action";					
 					}
 					form1.target = "iframe1";
 	               	form1.submit();
@@ -89,14 +89,14 @@
 			 * 初始化页面
 			 */
 			$.fn.initpage = function(){
-				$("#txt_companyName").focus();
+				$("#txt_deptName").focus();
 			}
 		</script>
 	</head>
 
 	<body>
 		<s:form id="form1" name="form1" method="post" theme="simple">
-		<s:hidden id="companyId" name="company.id"></s:hidden>
+		<s:hidden id="deptId" name="deptment.id"></s:hidden>
 		<table width="100%" border="0" cellspacing="5" cellpadding="0">
 			<tr>
 				<td>
@@ -107,31 +107,29 @@
 								<table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#d5e4fd">
 									<tr>
 										<td height="26" align="right" bgcolor="#FFFFFF">
-											<strong>级别名称：</strong>
+											<strong>部门名称：</strong>
 										</td>
 										<td height="26" align="left" bgcolor="#FFFFFF">
-											<s:textfield id="txt_companyName" name="company.companyName" cssStyle="width: 250px;" maxlength="25"></s:textfield>
+											<s:textfield id="txt_deptName" name="deptment.deptName" cssStyle="width: 250px;" maxlength="25"></s:textfield>
 											<font color="red">*</font>
 										</td>
 									</tr>
-									<!-- 
 									<tr>
 										<td height="26" align="right" bgcolor="#FFFFFF">
-											<strong>公司地址：</strong>
+											<strong>负责人：</strong>
 										</td>
 										<td height="26" align="left" bgcolor="#FFFFFF">
-											<s:textfield id="txt_adress" name="company.address" cssStyle="width: 250px;" maxlength="100"></s:textfield>
+											<s:textfield id="txt_principal" name="deptment.principal" cssStyle="width: 250px;" maxlength="100"></s:textfield>
 										</td>
 									</tr>
 									<tr>
 										<td height="26" align="right" bgcolor="#FFFFFF">
-											<strong>公司电话：</strong>
+											<strong>部门电话：</strong>
 										</td>
 										<td height="26" align="left" bgcolor="#FFFFFF">
-											<s:textfield id="txt_phone" name="company.phone" cssStyle="width: 250px;" maxlength="100"></s:textfield>
+											<s:textfield id="txt_deptment" name="deptment.phone" cssStyle="width: 250px;" maxlength="100"></s:textfield>
 										</td>
 									</tr>
-									 -->
 									<tr>
 										<td height="26" colspan="2" align="center" bgcolor="#FFFFFF">
 											<input name="addBtn" type="button" class="btn_2_3" id="addBtn" value="确定">
