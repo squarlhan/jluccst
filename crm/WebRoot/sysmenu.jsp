@@ -113,7 +113,7 @@
 												<img src="images/up.gif" width="10" height="12" />
 											</td>
 											<td>
-												<strong>系统管理</strong>
+												<strong>后台管理</strong>
 											</td>
 										</tr>
 									</table>
