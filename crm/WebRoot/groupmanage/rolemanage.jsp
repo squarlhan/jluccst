@@ -1,4 +1,3 @@
-<%@page import="com.boan.rees.common.UserConfig"%>
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%@ taglib prefix="j" uri="/script-tags"%>

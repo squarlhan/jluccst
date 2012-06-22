@@ -1,4 +1,5 @@
-<%@page import="com.boan.rees.group.common.MenuKey"%>
+
+<%@page import="com.boan.crm.groupmanage.common.MenuKey"%>
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%@ taglib prefix="j" uri="/script-tags"%>
