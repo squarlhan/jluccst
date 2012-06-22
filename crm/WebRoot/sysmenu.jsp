@@ -75,7 +75,7 @@
 												<img src="images/menuto.jpg" width="5" height="5" />
 											</td>
 											<td>
-												<a href="organ.html" target="mainFrame">部门管理</a>
+												<a href="groupmanage/deptmentmanage.jsp" target="mainFrame">部门管理</a>
 											</td>
 										</tr>
 										<tr>
@@ -83,7 +83,7 @@
 												<img src="images/menuto.jpg" width="5" height="5" />
 											</td>
 											<td>
-												<a href="tab.html" target="mainFrame">用户管理</a>
+												<a href="groupmanage/usermanage.jsp" target="mainFrame">用户管理</a>
 											</td>
 										</tr>
 										<tr>
@@ -91,7 +91,7 @@
 												<img src="images/menuto.jpg" width="5" height="5" />
 											</td>
 											<td>
-												<a href="user.html" target="mainFrame">职务管理</a>
+												<a href="groupmanage/rolemanage.jsp" target="mainFrame">职务管理</a>
 											</td>
 										</tr>
 										<tr>
@@ -99,7 +99,7 @@
 												<img src="images/menuto.jpg" width="5" height="5" />
 											</td>
 											<td>
-												<a href="systab.html" target="mainFrame">权限管理</a>
+												<a href="groupmanage/popedommanage.jsp" target="mainFrame">权限管理</a>
 											</td>
 										</tr>
 									</table>
