@@ -25,7 +25,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
-    <title>公司管理列表</title>
+    <title>部门管理列表</title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -46,9 +46,9 @@
 		$(function(){
 			
 			$("#addbtn").click(function(){
-				parent.parent.tipsWindown("添加级别信息","iframe:openAddCompanyAction.action","460","200","true","","true","no");
+				parent.parent.tipsWindown("添加部门信息","iframe:openAddDeptmentAction.action","460","200","true","","true","no");
 				parent.parent.$("#windown-close").bind('click',function(){
-					window.location.href="./openCompanyAction.action";
+					window.location.href="./openDeptmentAction.action";
 				});
 		
 			});
@@ -56,14 +56,14 @@
 	  		$.fn.uncheckall("ids","cbk_all");
 
 	  		/**
-	  		 * 修改公司信息
+	  		 * 修改部门信息
 	  		 */
 	  		$('a[name="edit"]').each(function(){
 	  			$(this).click(function(){
 	  				var url = $(this).attr("url");
-	  				parent.parent.tipsWindown("修改级别信息","iframe:"+url,"460","200","true","","true","no");
+	  				parent.parent.tipsWindown("修改部门信息","iframe:"+url,"460","200","true","","true","no");
 	  				parent.parent.$("#windown-close").bind('click',function(){
-						window.location.href="./openCompanyAction.action";
+						window.location.href="./openDeptmentAction.action";
 					});
 	  			});
 	  		});
@@ -84,7 +84,7 @@
 	  		 * 删除所选设备信息
 	  		 */
 	  		$("#deletepointbtn").click(function(){
-  				var url = "deleteCompanyAction.action";
+  				var url = "deleteDeptmentAction.action";
   				if(window.confirm("您确定要删除所选信息吗？")){
   					$.post(url, $('#form1').serialize(), function(data){window.location.href=window.location.href;});
   				}
@@ -102,7 +102,7 @@
     <td valign="top"><table width="100%" border="0" cellspacing="5" cellpadding="0">
       <tr>
         <td>
-       		<input name="addbtn" type="button" class="btn_4" id="addbtn" value="添加" >
+       		<input name="addbtn" type="button" class="btn_2_3" id="addbtn" value="添加" >
             <input name="deletepointbtn" type="button" class="btn_4" id="deletepointbtn" value="删除所选">
         <td align="right"></td>
       </tr>
@@ -112,7 +112,7 @@
          <td align="center" background="../images/headerbg.jpg">  
    				<s:checkbox theme="simple" id="cbk_all" name="all"></s:checkbox>
    			</td>
-              <td align="center" background="../images/headerbg.jpg"><strong>级别名称</strong></td>
+              <td align="center" background="../images/headerbg.jpg"><strong>部门名称</strong></td>
               <!-- 
               <td align="center" background="../images/headerbg.jpg"><strong>公司地址</strong></td>
               <td align="center" background="../images/headerbg.jpg"><strong>公司电话</strong></td>
@@ -124,16 +124,16 @@
         <td height="26" align="center" bgcolor="#FFFFFF" >  
 				<s:checkbox id="%{#obj.id}" name="ids" fieldValue="%{id}" value="false" theme="simple"/>
 			</td>
-              <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="companyName"/></td>
+              <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="deptName"/></td>
               <!-- 
               <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="address"/></td>
               <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="phone"/></td>
                -->
           <td height="26" colspan="2" align="center" bgcolor="#FFFFFF">
-          	<s:url id="edit_url" action="openModifyCompanyAction">   
-				<s:param name="company.id" value="id"></s:param>   
+          	<s:url id="edit_url" action="openModifyDeptmentAction">   
+				<s:param name="deptment.id" value="id"></s:param>   
 			</s:url>
-			<s:url id="delete_url" action="deleteCompanyAction">   
+			<s:url id="delete_url" action="deleteDeptmentAction">   
 				<s:param name="ids" value="id"></s:param>   
 			</s:url>
          	<a name="edit" href="javascript:void(0);" url="${edit_url}">编辑</a>  
