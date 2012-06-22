@@ -13,7 +13,7 @@ import org.hibernate.annotations.GenericGenerator;
 
 /**
  * 用户实体类
- * @author Guiyun Yang
+ * @author XXX
  * @version 1.0.0
  */
 @Entity
