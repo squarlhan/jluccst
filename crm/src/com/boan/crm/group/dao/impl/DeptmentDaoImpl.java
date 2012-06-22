@@ -1,17 +1,14 @@
 package com.boan.crm.group.dao.impl;
 
-import java.io.Serializable;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
-import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 
-import com.boan.crm.group.dao.ICompanyDao;
-import com.boan.crm.group.model.Company;
+import com.boan.crm.group.dao.IDeptmentDao;
+import com.boan.crm.group.model.Deptment;
 import com.boan.crm.utils.dao.impl.BaseDao;
 
 /**
@@ -20,8 +17,8 @@ import com.boan.crm.utils.dao.impl.BaseDao;
 * @version 1.0.0
 */
 
-@Repository("companyDao")
-public class CompanyDaoImpl extends BaseDao<Company,String> implements ICompanyDao{
+@Repository("deptDao")
+public class DeptmentDaoImpl extends BaseDao<Deptment,String> implements IDeptmentDao{
 
 	@Override
 	public boolean isExistSameName( String id, String name )
@@ -32,15 +29,15 @@ public class CompanyDaoImpl extends BaseDao<Company,String> implements ICompanyD
 		int rowCount = 0;
 		String hql = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put( "companyName", name );
+		map.put( "deptName", name );
 		if( StringUtils.isNotBlank( id ) )
 		{
-			hql = "select count(id) from Company where id <> :companyId and companyName= :companyName";
-			map.put( "companyId", id );
+			hql = "select count(id) from Deptment where id <> :deptId and deptName= :deptName";
+			map.put( "deptId", id );
 		}
 		else
 		{
-			hql = "select count(id) from Company where companyName = :companyName";
+			hql = "select count(id) from Deptment where deptName = :deptName";
 		}
 		rowCount = super.findCountForPage( hql, map );			
 		if( rowCount > 0 )
@@ -51,9 +48,9 @@ public class CompanyDaoImpl extends BaseDao<Company,String> implements ICompanyD
 	}
 
 	@Override
-	public List<Company> queryAllCompanysByRootId( String rootId )
+	public List<Deptment> queryAllDeptmentsByRootId( String rootId )
 	{
-		String hql = "from Company where rootId = :rootId order by sortIndex asc, createTime asc";
+		String hql = "from Deptment where rootId = :rootId order by sortIndex asc, createTime asc";
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put( "rootId", rootId );
 		return super.find( hql, map );
