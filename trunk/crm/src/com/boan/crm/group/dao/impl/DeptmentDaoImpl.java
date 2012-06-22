@@ -12,8 +12,8 @@ import com.boan.crm.group.model.Deptment;
 import com.boan.crm.utils.dao.impl.BaseDao;
 
 /**
-* 公司Dao接口实现
-* @author Guiyun Yang
+* 部门Dao接口实现
+* @author XXX
 * @version 1.0.0
 */
 

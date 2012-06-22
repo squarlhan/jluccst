@@ -7,7 +7,7 @@ import com.boan.crm.utils.dao.IBaseDao;
 
 
 /**
- * 公司Dao接口
+ * 部门Dao接口
  * @author XXX
  * @version 1.0.0
  */
