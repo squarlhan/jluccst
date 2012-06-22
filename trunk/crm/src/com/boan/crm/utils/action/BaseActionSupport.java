@@ -30,34 +30,14 @@ public class BaseActionSupport extends ActionSupport {
 	private static final long serialVersionUID = -2675305291334757631L;
 
 	/**
-	 * 公司ID
+	 * 部门ID
 	 */
-	protected String sessionCompanyId = null;
+	protected String sessionDeptId = null;
 
 	/**
-	 * 公司名称
+	 * 部门名称
 	 */
-	protected String sessionCompanyName = null;
-
-	/**
-	 * 工厂ID
-	 */
-	protected String sessionFactoryId = null;
-
-	/**
-	 * 工厂名称
-	 */
-	protected String sessionFactoryName = null;
-
-	/**
-	 * 车间ID
-	 */
-	protected String sessionWorkshopId = null;
-
-	/**
-	 * 车间名称
-	 */
-	protected String sessionWorkshopName = null;
+	protected String sessionDeptName = null;
 
 	/**
 	 * 用户ID
