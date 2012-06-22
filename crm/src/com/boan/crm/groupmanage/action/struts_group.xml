@@ -6,20 +6,20 @@
 	<!-- 部门Action -->
 	<package name="group_dept" extends="struts-default" namespace="/">
 		<action name="openDeptmentAction" class="deptmentAction" method="openDeptment">
-			<result name="success">/systemmanage/deptmentlist.jsp</result>
-			<result name="input">/systemmanage/deptmentlist.jsp</result>
+			<result name="success">/groupmanage/deptmentlist.jsp</result>
+			<result name="input">/groupmanage/deptmentlist.jsp</result>
 		</action>
 		<action name="openAddDeptmentAction" class="deptmentAction" method="openAddDeptment">
-			<result name="success">/systemmanage/deptmentinfo.jsp</result>
-			<result name="input">/systemmanage/deptmentinfo.jsp</result>
+			<result name="success">/groupmanage/deptmentinfo.jsp</result>
+			<result name="input">/groupmanage/deptmentinfo.jsp</result>
 		</action>
 		<action name="toAddDeptmentAction" class="deptmentAction" method="toAddDeptment">
 			<result name="success">/common/message.jsp</result>
 			<result name="error">/common/messagenoclose.jsp</result>
 		</action>
 		<action name="openModifyDeptmentAction" class="deptmentAction" method="openModifyDeptment">
-			<result name="success">/systemmanage/deptmentinfo.jsp</result>
-			<result name="input">/systemmanage/deptmentinfo.jsp</result>
+			<result name="success">/groupmanage/deptmentinfo.jsp</result>
+			<result name="input">/groupmanage/deptmentinfo.jsp</result>
 		</action>
 		<action name="toModifyDeptmentAction" class="deptmentAction" method="toModifyDeptment">
 			<result name="success">/common/message.jsp</result>
@@ -32,48 +32,48 @@
 	<!-- 组织机构树 -->
 	<package name="group_tree" extends="struts-default" namespace="/">
 		<action name="groupTreeAction" class="groupTreeAction">
-			<result name="group-tree-for-factory">/systemmanage/group-tree-for-factory.jsp</result>
-			<result name="group-tree-for-workshop">/systemmanage/group-tree-for-workshop.jsp</result>
-			<result name="group-tree-for-device">/systemmanage/group-tree-for-device.jsp</result>
-			<result name="group-tree-for-pointdata">/systemmanage/group-tree-for-pointdata.jsp</result>
-			<result name="group-tree-for-user">/systemmanage/group-tree-for-user.jsp</result>
-			<result name="group-tree-for-report">/systemmanage/group-tree-for-report.jsp</result>
+			<result name="group-tree-for-factory">/groupmanage/group-tree-for-factory.jsp</result>
+			<result name="group-tree-for-workshop">/groupmanage/group-tree-for-workshop.jsp</result>
+			<result name="group-tree-for-device">/groupmanage/group-tree-for-device.jsp</result>
+			<result name="group-tree-for-pointdata">/groupmanage/group-tree-for-pointdata.jsp</result>
+			<result name="group-tree-for-user">/groupmanage/group-tree-for-user.jsp</result>
+			<result name="group-tree-for-report">/groupmanage/group-tree-for-report.jsp</result>
 		</action>
 	</package>
 	
 	<!-- 权限Action -->
 	<package name="group_popedom_role" extends="struts-default" namespace="/">
 		<action name="showAllRoleListAction" class="popedomAction" method="showAllRoleList">
-        	<result name="success">/systemmanage/popedomchooserole.jsp</result>
+        	<result name="success">/groupmanage/popedomchooserole.jsp</result>
         </action>
         <action name="saveOrUpdatePopedomAction" class="popedomAction" method="saveOrUpdatePopedom">
         	<result name="success">/common/messagemodaldialog.jsp</result>
         </action>
         <action name="showAllPopedomListAction" class="popedomAction" method="showAllPopedomList">
-        	<result name="success">/systemmanage/popedomlist.jsp</result>
+        	<result name="success">/groupmanage/popedomlist.jsp</result>
         </action>
         <action name="deletePopedomAction" class="popedomAction" method="deletePopedom">
-        	<result name="success">/systemmanage/popedomlist.jsp</result>
+        	<result name="success">/groupmanage/popedomlist.jsp</result>
         </action>
 	</package>
 
 	<!-- 角色Action -->
 	<package name="group_role" extends="struts-default" namespace="/">
         <action name="openRoleAction" class="roleAction" method="openRole">
-            <result name="success">/systemmanage/rolelist.jsp</result>
-            <result name="input">/systemmanage/rolelist.jsp</result>
+            <result name="success">/groupmanage/rolelist.jsp</result>
+            <result name="input">/groupmanage/rolelist.jsp</result>
         </action>
         <action name="openAddRoleAction" class="roleAction" method="openAddRole" >
-            <result name="success">/systemmanage/roleinfo.jsp</result>
-            <result name="input">/systemmanage/roleinfo.jsp</result>
+            <result name="success">/groupmanage/roleinfo.jsp</result>
+            <result name="input">/groupmanage/roleinfo.jsp</result>
         </action>
         <action name="toAddRoleAction" class="roleAction" method="toAddRole">
            <result name="success">/common/message.jsp</result>
 			<result name="error">/common/messagenoclose.jsp</result>
         </action>
         <action name="openModifyRoleAction" class="roleAction" method="openModifyRole">
-            <result name="success">/systemmanage/roleinfo.jsp</result>
-            <result name="input">/systemmanage/roleinfo.jsp</result>
+            <result name="success">/groupmanage/roleinfo.jsp</result>
+            <result name="input">/groupmanage/roleinfo.jsp</result>
         </action>
         <action name="toModifyRoleAction" class="roleAction" method="toModifyRole">
            <result name="success">/common/message.jsp</result>
@@ -83,8 +83,8 @@
 	</package>
 	<package name="group_user" extends="struts-default" namespace="/">
 		<action name="userAction" class="userAction">
-			<result name="show-user">/systemmanage/userinfo.jsp</result>
-			<result name="show-list">/systemmanage/userlist.jsp</result>
+			<result name="show-user">/groupmanage/userinfo.jsp</result>
+			<result name="show-list">/groupmanage/userlist.jsp</result>
 		</action>
 		<action name="saveOrUpdateUserAction" class="userAction"
 			method="saveOrUpdateUser">
@@ -92,10 +92,10 @@
 			<result name="error">/common/messagenoclose.jsp</result>
 		</action>
 		<action name="showInputUserAction" class="userAction" method="showInputUser">
-			<result name="success">/systemmanage/userinfo.jsp</result>
+			<result name="success">/groupmanage/userinfo.jsp</result>
 		</action>
 		<action name="showMyInfoAction" class="userAction" method="showMyInfo">
-			<result name="success">/systemmanage/myinfo.jsp</result>
+			<result name="success">/groupmanage/myinfo.jsp</result>
 		</action>
 		<action name="saveOrUpdateMyInfoAction" class="userAction"
 			method="saveOrUpdateMyInfo">
@@ -117,7 +117,7 @@
 			<result name="success">/default.jsp</result>
 		</action>
 		<action name="showModifyAction" class="userLogonAction" method="showModify">
-			<result name="success">/systemmanage/usermodify.jsp</result>
+			<result name="success">/groupmanage/usermodify.jsp</result>
 		</action>
 		<action name="modifyAction" class="userLogonAction" method="modify">
 			<result name="success">/common/message.jsp</result>
