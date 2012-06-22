@@ -23,10 +23,10 @@ import com.boan.crm.utils.page.Pagination;
 /**
  * 公司管理Action
  * 
- * @author YangGY
+ * @author XXX
  * @version 1.0.0
  */
-@Controller( "deptAction" )
+@Controller( "deptmentAction" )
 @Scope( "prototype" )
 public class DeptmentAction extends BaseActionSupport
 {
@@ -34,7 +34,7 @@ public class DeptmentAction extends BaseActionSupport
 	 * 公司Service
 	 */
 	@Autowired
-	@Qualifier( "companyService" )
+	@Qualifier( "deptService" )
 	private IDeptmentService service = null;
 
 	/**
