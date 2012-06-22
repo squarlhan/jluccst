@@ -26,15 +26,11 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import com.boan.crm.common.Message;
 import com.boan.crm.group.common.UserSession;
-import com.boan.crm.group.model.Company;
-import com.boan.crm.group.model.Factory;
+import com.boan.crm.group.model.Deptment;
 import com.boan.crm.group.model.User;
-import com.boan.crm.group.model.Workshop;
-import com.boan.crm.group.service.ICompanyService;
-import com.boan.crm.group.service.IFactoryService;
+import com.boan.crm.group.service.IDeptmentService;
 import com.boan.crm.group.service.IPopedomService;
 import com.boan.crm.group.service.IUserService;
-import com.boan.crm.group.service.IWorkshopService;
 import com.boan.crm.utils.md5.MakeMd5;
 import com.opensymphony.xwork2.ActionSupport;
 
@@ -65,23 +61,9 @@ public class UserLogonAction extends ActionSupport
 	 * 获取公司名称
 	 */
 	@Autowired
-	@Qualifier("companyService")
-	private ICompanyService companyService = null;
+	@Qualifier("deptService")
+	private IDeptmentService deptService = null;
 
-	/**
-	 * 获取工厂名称
-	 */
-	@Autowired
-	@Qualifier("factoryService")
-	private IFactoryService factoryService = null;
-	
-	/**
-	 * 获取车间名称
-	 */
-	@Autowired
-	@Qualifier("workshopService")
-	private IWorkshopService workshopService = null;
-	
 	private Message message = new Message();
 
 	private String username = null;
@@ -137,44 +119,18 @@ public class UserLogonAction extends ActionSupport
 				userSession.setUserId( user.getId() );
 				userSession.setUsername( user.getUsername() );
 				userSession.setUserCName( user.getUserCName() );
-				userSession.setCompanyId( user.getCompanyId() );
-				userSession.setFactoryId( user.getFactoryId() );
-				userSession.setWorkshopId( user.getWorkshopId());
+				userSession.setDeptId( user.getDeptId() );
 				userSession.setUserType( user.getUserType() );
 				userSession.setPopedomKeys( popedomKeys );
 				
-				if( companyService != null )
+				if( deptService != null )
 				{
-					if( StringUtils.isNotBlank(user.getCompanyId() ))
+					if( StringUtils.isNotBlank(user.getDeptId() ))
 					{
-						Company company = companyService.get( user.getCompanyId() );
-						if( company != null )
+						Deptment  deptment = deptService.get( user.getDeptId() );
+						if( deptment != null )
 						{
-							userSession.setCompanyName( company.getCompanyName() );
-						}
-					}
-				}
-				
-				if( factoryService != null )
-				{
-					if( StringUtils.isNotBlank(user.getFactoryId() ) )
-					{
-						Factory factory = factoryService.get( user.getFactoryId() );
-						if( factory != null )
-						{
-							userSession.setFactoryName( factory.getFactoryName());
-						}
-					}
-				}
-				
-				if( workshopService != null )
-				{
-					if( StringUtils.isNotBlank(user.getWorkshopId() ) )
-					{
-						Workshop workshop = workshopService.get( user.getWorkshopId() );
-						if( workshop != null )
-						{
-							userSession.setWorkshopName( workshop.getWorkshopName() );
+							userSession.setDeptName( deptment.getDeptName() );
 						}
 					}
 				}
@@ -228,20 +184,10 @@ public class UserLogonAction extends ActionSupport
 			{
 				userCName = ( ( UserSession ) session.getAttribute( "userSession" ) ).getUserCName();
 			}
-			if( StringUtils.isNotBlank( ( ( UserSession ) session.getAttribute( "userSession" ) ).getCompanyName() ) )
+			if( StringUtils.isNotBlank( ( ( UserSession ) session.getAttribute( "userSession" ) ).getDeptName() ) )
 			{
-				companyName = ( ( UserSession ) session.getAttribute( "userSession" ) ).getCompanyName();
+				companyName = ( ( UserSession ) session.getAttribute( "userSession" ) ).getDeptName();
 				fullGroupName += companyName + "→"; 
-			}
-			if( StringUtils.isNotBlank( ( ( UserSession ) session.getAttribute( "userSession" ) ).getFactoryName() ) )
-			{
-				factoryName = ( ( UserSession ) session.getAttribute( "userSession" ) ).getFactoryName();
-				fullGroupName += factoryName + "→";
-			}
-			if( StringUtils.isNotBlank( ( ( UserSession ) session.getAttribute( "userSession" ) ).getWorkshopName() ) )
-			{
-				workshopName = ( ( UserSession ) session.getAttribute( "userSession" ) ).getWorkshopName();
-				fullGroupName += workshopName + "→";
 			}
 			fullGroupName = fullGroupName.substring( 1, fullGroupName.length() );
 			if( fullGroupName.length() > 0 )
@@ -417,36 +363,6 @@ public class UserLogonAction extends ActionSupport
 	public void setWorkshopName( String workshopName )
 	{
 		this.workshopName = workshopName;
-	}
-
-	public ICompanyService getCompanyService()
-	{
-		return companyService;
-	}
-
-	public void setCompanyService( ICompanyService companyService )
-	{
-		this.companyService = companyService;
-	}
-
-	public IFactoryService getFactoryService()
-	{
-		return factoryService;
-	}
-
-	public void setFactoryService( IFactoryService factoryService )
-	{
-		this.factoryService = factoryService;
-	}
-
-	public IWorkshopService getWorkshopService()
-	{
-		return workshopService;
-	}
-
-	public void setWorkshopService( IWorkshopService workshopService )
-	{
-		this.workshopService = workshopService;
 	}
 
 	public String getFullGroupName()

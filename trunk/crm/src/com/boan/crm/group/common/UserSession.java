@@ -43,33 +43,13 @@ public class UserSession implements java.io.Serializable
 	/**
 	 * 公司id
 	 */
-	private String companyId;
+	private String deptId;
 	
 	/**
 	 * 公司名称
 	 */
-	private String companyName;
+	private String deptName;
 
-	/**
-	 * 工厂id
-	 */
-	private String factoryId;
-	
-	/**
-	 * 工厂名称
-	 */
-	private String factoryName;
-	
-	/**
-	 * 车间id
-	 */
-	private String workshopId;
-	
-	/**
-	 * 车间名称
-	 */
-	private String workshopName;
-	
 	/**
 	 * 用户类型
 	 */
@@ -127,6 +107,7 @@ public class UserSession implements java.io.Serializable
 
 	public String getDeptFullName()
 	{
+		/*
 		String fullName = this.companyName;
 		
 		if( StringUtils.isNotBlank( this.factoryName ) )
@@ -136,8 +117,9 @@ public class UserSession implements java.io.Serializable
 		if( StringUtils.isNotBlank( this.workshopName ) )
 		{
 			fullName +=  "→" + this.workshopName;
-		}
-		return fullName;
+		}*/
+		
+		return this.deptName;
 	}
 
 	public static long getSerialversionuid()
@@ -155,64 +137,20 @@ public class UserSession implements java.io.Serializable
 		this.userType = userType;
 	}
 
-	public String getCompanyId()
-	{
-		return companyId;
+	public String getDeptId() {
+		return deptId;
 	}
 
-	public void setCompanyId( String companyId )
-	{
-		this.companyId = companyId;
+	public void setDeptId(String deptId) {
+		this.deptId = deptId;
 	}
 
-	public String getCompanyName()
-	{
-		return companyName;
+	public String getDeptName() {
+		return deptName;
 	}
 
-	public void setCompanyName( String companyName )
-	{
-		this.companyName = companyName;
-	}
-
-	public String getFactoryId()
-	{
-		return factoryId;
-	}
-
-	public void setFactoryId( String factoryId )
-	{
-		this.factoryId = factoryId;
-	}
-
-	public String getFactoryName()
-	{
-		return factoryName;
-	}
-
-	public void setFactoryName( String factoryName )
-	{
-		this.factoryName = factoryName;
-	}
-
-	public String getWorkshopId()
-	{
-		return workshopId;
-	}
-
-	public void setWorkshopId( String workshopId )
-	{
-		this.workshopId = workshopId;
-	}
-
-	public String getWorkshopName()
-	{
-		return workshopName;
-	}
-
-	public void setWorkshopName( String workshopName )
-	{
-		this.workshopName = workshopName;
+	public void setDeptName(String deptName) {
+		this.deptName = deptName;
 	}
 
 }

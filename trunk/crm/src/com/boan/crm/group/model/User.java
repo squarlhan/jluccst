@@ -32,20 +32,8 @@ public class User {
 	/**
 	 * 公司编号
 	 */
-	@Column(name = "COMPANY_ID")
-	private String companyId;
-	
-	/**
-	 * 工厂编号
-	 */
-	@Column(name = "FACTORY_ID")
-	private String factoryId;
-	
-	/**
-	 * 车间编号
-	 */
-	@Column(name = "WORKSHOP_ID")
-	private String workshopId;
+	@Column(name = "DEPT_ID")
+	private String deptId;
 	
 	/**
 	 * 角色编号
@@ -129,30 +117,6 @@ public class User {
 
 	public void setId(String id) {
 		this.id = id;
-	}
-
-	public String getCompanyId() {
-		return companyId;
-	}
-
-	public void setCompanyId(String companyId) {
-		this.companyId = companyId;
-	}
-
-	public String getFactoryId() {
-		return factoryId;
-	}
-
-	public void setFactoryId(String factoryId) {
-		this.factoryId = factoryId;
-	}
-
-	public String getWorkshopId() {
-		return workshopId;
-	}
-
-	public void setWorkshopId(String workshopId) {
-		this.workshopId = workshopId;
 	}
 
 	public String getRoleId() {
@@ -261,9 +225,7 @@ public class User {
 	public static void convertToUser( User oldUser, User newUser )
 	{
 		oldUser.id = newUser.id;
-		oldUser.companyId = newUser.companyId;
-		oldUser.factoryId = newUser.factoryId;
-		oldUser.workshopId = newUser.workshopId;
+		oldUser.deptId = newUser.deptId;
 		oldUser.roleId = newUser.roleId;
 		oldUser.roleName = newUser.roleName;
 		oldUser.username = newUser.username;
@@ -278,17 +240,14 @@ public class User {
 		oldUser.deleteFlag = newUser.deleteFlag;
 	}
 
-	public User( String id, String companyId, String factoryId,
-			String workshopId, String roleId, String roleName, String username,
+	public User( String id, String deptId, String roleId, String roleName, String username,
 			String password, String userCName, String officePhone,
 			String phone, String email, int userType, Calendar createTime,
 			int sortIndex, int deleteFlag )
 	{
 		super();
 		this.id = id;
-		this.companyId = companyId;
-		this.factoryId = factoryId;
-		this.workshopId = workshopId;
+		this.deptId = deptId;
 		this.roleId = roleId;
 		this.roleName = roleName;
 		this.username = username;
@@ -301,6 +260,14 @@ public class User {
 		this.createTime = createTime;
 		this.sortIndex = sortIndex;
 		this.deleteFlag = deleteFlag;
+	}
+
+	public String getDeptId() {
+		return deptId;
+	}
+
+	public void setDeptId(String deptId) {
+		this.deptId = deptId;
 	}
 	
 	

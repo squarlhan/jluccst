@@ -24,13 +24,9 @@ import com.boan.crm.common.GroupConfig;
 import com.boan.crm.group.common.GroupCategory;
 import com.boan.crm.group.common.MenuKey;
 import com.boan.crm.group.common.UserSession;
-import com.boan.crm.group.model.Company;
-import com.boan.crm.group.model.Factory;
-import com.boan.crm.group.model.Workshop;
-import com.boan.crm.group.service.ICompanyService;
-import com.boan.crm.group.service.IFactoryService;
+import com.boan.crm.group.model.Deptment;
+import com.boan.crm.group.service.IDeptmentService;
 import com.boan.crm.group.service.IPopedomService;
-import com.boan.crm.group.service.IWorkshopService;
 import com.boan.crm.utils.action.BaseActionSupport;
 
 /**
@@ -43,58 +39,25 @@ import com.boan.crm.utils.action.BaseActionSupport;
 public class GroupTreeAction extends BaseActionSupport
 {
 	@Autowired
-	@Qualifier("companyService")
-	private ICompanyService companyService = null;
+	@Qualifier("deptService")
+	private IDeptmentService deptService = null;
 	
-	private List<Company> companyList = null;
-	
-	@Autowired
-	@Qualifier("factoryService")
-	private IFactoryService factoryService = null;
-	
-	private List<Factory> factoryList = null;
-	
-	@Autowired
-	@Qualifier("workshopService")
-	private IWorkshopService workshopService = null;
+	private List<Deptment> deptList = null;
 	
 	@Autowired
 	@Qualifier("popedomService")
 	private IPopedomService popedomService = null;
 	
-	private List<Workshop> workshopList = null;
 	/**
 	 * 显示组织机构树为工厂
 	 * @return
 	 */
 	public String showGroupTreeForFactory()
 	{
-		companyList = companyService.queryAllCompanysByRootId( GroupConfig.ROOT_ID );
+		deptList = deptService.queryAllDeptmentsByRootId( GroupConfig.ROOT_ID );
 		return "group-tree-for-factory";
 	}
 
-	/**
-	 * 显示组织机构树为车间
-	 * @return
-	 */
-	public String showGroupTreeForWorkshop()
-	{
-		companyList = companyService.queryAllCompanysByRootId( GroupConfig.ROOT_ID );
-		List<Factory> list = null;
-		if( companyList != null && companyList.size() > 0 )
-		{
-			factoryList = new ArrayList<Factory>();
-			for( int i = 0; i < companyList.size(); i++ )
-			{
-				list = factoryService.queryFactoriesByCompanyId( companyList.get( i ).getId() );
-				if( list != null )
-				{
-					factoryList.addAll( list );
-				}
-			}
-		}
-		return "group-tree-for-workshop";
-	}
 	/**
 	 * 显示组织机构树,带公司、工厂、车间
 	 * @return
@@ -134,36 +97,16 @@ public class GroupTreeAction extends BaseActionSupport
 		this.showTreeAllNodes();
 		return "group-tree-for-report";
 	}
-	public List<Company> getCompanyList()
+	public List<Deptment> getDeptList ()
 	{
-		return companyList;
+		return deptList ;
 	}
 
-	public void setCompanyList( List<Company> companyList )
+	public void setDeptList ( List<Deptment> deptList  )
 	{
-		this.companyList = companyList;
+		this.deptList  = deptList ;
 	}
 
-	public List<Factory> getFactoryList()
-	{
-		return factoryList;
-	}
-
-	public void setFactoryList( List<Factory> factoryList )
-	{
-		this.factoryList = factoryList;
-	}
-
-	public List<Workshop> getWorkshopList()
-	{
-		return workshopList;
-	}
-
-	public void setWorkshopList( List<Workshop> workshopList )
-	{
-		this.workshopList = workshopList;
-	}
-	
 	/**
 	 * 显示带有公司、工厂、机构节点的完整树型
 	 */
@@ -174,73 +117,6 @@ public class GroupTreeAction extends BaseActionSupport
 		boolean showCurrentAndSubTreeFlag = this.isHavePopedom( MenuKey.SHOW_CURRENT_AND_SUB_GROUP );
 		boolean showCurrentTreeFlag = this.isHavePopedom( MenuKey.SHOW_CURRENT_GROUP );
 		
-		//（1）显示树所有节点
-		if(showAllTreeFlag)
-		{
-			companyList = companyService.queryAllCompanysByRootId( GroupConfig.ROOT_ID );
-			List<Factory> list = null;
-			List<Workshop> lt = null;
-			if( companyList != null && companyList.size() > 0 )
-			{
-				factoryList = new ArrayList<Factory>();
-				workshopList = new ArrayList<Workshop>();
-				for( int i = 0; i < companyList.size(); i++ )
-				{
-					list = factoryService.queryFactoriesByCompanyId( companyList.get( i ).getId() );
-					if( list != null && list.size() > 0)
-					{
-						factoryList.addAll( list );
-						
-						for( int k = 0; k < factoryList.size(); k++ )
-						{
-							lt = workshopService.queryAllWorkshopsByFactoryId( factoryList.get( k ).getId() );
-							if( lt != null && lt.size() > 0 )
-							{
-								
-								//由于原来的这句缺少公司Id说以注释掉了，用下面的for循环处理
-								//workshopList.addAll( lt );
-								for( Workshop temp :lt ){
-									temp.setCompanyId(factoryList.get( k ).getCompanyId());
-									workshopList.add(temp);
-								}
-							}
-						}
-						
-					}
-				}
-			}
-		}
-		//（2）显示树当前节点
-		if( !showAllTreeFlag && showCurrentTreeFlag )
-		{
-			HttpSession session = ServletActionContext.getRequest().getSession();
-			UserSession userSession = ( UserSession ) session.getAttribute( "userSession" );
-			if(userSession != null)
-			{
-				String cId = userSession.getCompanyId();
-				String fId = userSession.getFactoryId();
-				String wId = userSession.getWorkshopId();
-				
-				if( StringUtils.isNotBlank( cId ))
-				{
-					//表示公司级
-					companyList = new ArrayList<Company>(); 
-					companyList.add( companyService.get( cId ) );
-				}
-				if( StringUtils.isNotBlank( fId ) )
-				{
-					//表示是工厂级
-					factoryList = new ArrayList<Factory>();
-					factoryList.add( factoryService.get( fId ) );
-				}
-				if( StringUtils.isNotBlank( wId ))
-				{
-					//表示车间级
-					workshopList = new ArrayList<Workshop>(); 
-					workshopList.add( workshopService.get( wId ) );
-				}
-			}
-		}
 		//（3）显示当前节点及子节点
 		if( !showAllTreeFlag && !showCurrentTreeFlag && showCurrentAndSubTreeFlag )
 		{
@@ -248,58 +124,13 @@ public class GroupTreeAction extends BaseActionSupport
 			UserSession userSession = ( UserSession ) session.getAttribute( "userSession" );
 			if(userSession != null)
 			{
-				String cId = userSession.getCompanyId();
-				String fId = userSession.getFactoryId();
-				String wId = userSession.getWorkshopId();
+				String cId = userSession.getDeptId();
 				
 				//表示公司级
 				if( GroupCategory.COMPANY.equals( this.getGroupCategory() ) )
 				{
-					List<Factory> list = null;
-					List<Workshop> lt = null;
-					companyList = new ArrayList<Company>(); 
-					companyList.add( companyService.get( cId ) );
-					list = factoryService.queryFactoriesByCompanyId( cId );
-					if( list != null && list.size() > 0)
-					{
-						factoryList = new ArrayList<Factory>();
-						factoryList.addAll( list );
-						workshopList = new ArrayList<Workshop>();
-						for( int k = 0; k < factoryList.size(); k++ )
-						{
-							lt = workshopService.queryAllWorkshopsByFactoryId( factoryList.get( k ).getId() );
-							if( lt != null && lt.size() > 0 )
-							{
-								workshopList.addAll( lt );
-							}
-						}
-					}
-				}
-				//表示是工厂级
-				if( GroupCategory.FACTORY.equals( this.getGroupCategory() ) )
-				{
-					companyList = new ArrayList<Company>(); 
-					companyList.add( companyService.get( cId ) );
-					factoryList = new ArrayList<Factory>();
-					factoryList.add( factoryService.get( fId ) );
-					List<Workshop> lt = workshopService.queryAllWorkshopsByFactoryId( fId );
-					if( lt != null && lt.size() > 0 )
-					{
-						workshopList = new ArrayList<Workshop>();
-						workshopList.addAll( lt );
-					}
-				}
-				//表示车间级
-				if( GroupCategory.WORKSHOP.equals( this.getGroupCategory() ) )
-				{
-					companyList = new ArrayList<Company>(); 
-					companyList.add( companyService.get( cId ) );
-					
-					factoryList = new ArrayList<Factory>();
-					factoryList.add( factoryService.get( fId ) );
-					
-					workshopList = new ArrayList<Workshop>(); 
-					workshopList.add( workshopService.get( wId ) );
+					deptList  = new ArrayList<Deptment>(); 
+					deptList .add( deptService.get( cId ) );
 				}
 			}
 		}
@@ -333,24 +164,12 @@ public class GroupTreeAction extends BaseActionSupport
 		UserSession userSession = ( UserSession ) session.getAttribute( "userSession" );
 		if(userSession != null)
 		{
-			String cId = userSession.getCompanyId();
-			String fId = userSession.getFactoryId();
-			String wId = userSession.getWorkshopId();
+			String cId = userSession.getDeptId();
 			
-			if( StringUtils.isNotBlank( cId ) &&  StringUtils.isNotBlank( fId ) && StringUtils.isNotBlank( wId ))
+			if( StringUtils.isNotBlank( cId )  )
 			{
 				//表示车间级
 				return GroupCategory.WORKSHOP;
-			}
-			else if( StringUtils.isNotBlank( cId ) &&  StringUtils.isNotBlank( fId ) && StringUtils.isBlank( wId ))
-			{
-				//表示是工厂级
-				return GroupCategory.FACTORY;
-			}
-			else if( StringUtils.isNotBlank( cId ) &&  StringUtils.isBlank( fId ) && StringUtils.isBlank( wId ))
-			{
-				//表示公司级
-				return GroupCategory.COMPANY;
 			}
 			else
 			{
