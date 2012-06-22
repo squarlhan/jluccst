@@ -90,14 +90,14 @@ public class DeptmentAction extends BaseActionSupport
 		// 如果存在，则提示
 		if( b )
 		{
-			message.setContent( "相同级别名称已存在，请重新输入！" );
+			message.setContent( "相同部门名称已存在，请重新输入！" );
 			return ERROR;
 		}
 		else
 		{
 			deptment.setRootId( GroupConfig.ROOT_ID );
 			service.save( deptment );
-			message.setContent( "级别信息保存成功！" );
+			message.setContent( "部门信息保存成功！" );
 			return SUCCESS;
 		}
 	}
@@ -126,14 +126,14 @@ public class DeptmentAction extends BaseActionSupport
 		// 如果存在，则提示
 		if( b )
 		{
-			message.setContent( "相同级别名称已存在，请重新输入！" );
+			message.setContent( "相同部门名称已存在，请重新输入！" );
 			return ERROR;
 		}
 		else
 		{
 			deptment.setRootId( GroupConfig.ROOT_ID );
 			service.update( deptment );
-			message.setContent( "级别信息保存成功！" );
+			message.setContent( "部门信息保存成功！" );
 			return SUCCESS;
 		}
 	}
