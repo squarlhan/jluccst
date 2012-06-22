@@ -395,7 +395,7 @@
 												<img src="images/menuto.jpg" width="5" height="5" />
 											</td>
 											<td>
-												<a href="datadictionary/customertypelist.action" target="mainFrame">客户分类</a>
+												<a href="datadictionary/typemanage.jsp" target="mainFrame">客户分类</a>
 											</td>
 										</tr>
 									</table>
@@ -409,7 +409,7 @@
 												<img src="images/menuto.jpg" width="5" height="5" />
 											</td>
 											<td>
-												<a href="datadictionary/customerstatelist.action" target="mainFrame">客户状态</a>
+												<a href="datadictionary/statemanage.jsp" target="mainFrame">客户状态</a>
 											</td>
 										</tr>
 									</table>
