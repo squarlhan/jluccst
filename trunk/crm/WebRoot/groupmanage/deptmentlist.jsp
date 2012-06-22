@@ -113,10 +113,8 @@
    				<s:checkbox theme="simple" id="cbk_all" name="all"></s:checkbox>
    			</td>
               <td align="center" background="../images/headerbg.jpg"><strong>部门名称</strong></td>
-              <!-- 
-              <td align="center" background="../images/headerbg.jpg"><strong>公司地址</strong></td>
-              <td align="center" background="../images/headerbg.jpg"><strong>公司电话</strong></td>
-               -->
+              <td align="center" background="../images/headerbg.jpg"><strong>负责人</strong></td>
+              <td align="center" background="../images/headerbg.jpg"><strong>部门电话</strong></td>
               <td align="center" background="../images/headerbg.jpg"><strong>操作</strong></td>
         </tr>
         <s:iterator value="pagination.data" status="obj">
@@ -125,10 +123,8 @@
 				<s:checkbox id="%{#obj.id}" name="ids" fieldValue="%{id}" value="false" theme="simple"/>
 			</td>
               <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="deptName"/></td>
-              <!-- 
-              <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="address"/></td>
+              <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="principal"/></td>
               <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="phone"/></td>
-               -->
           <td height="26" colspan="2" align="center" bgcolor="#FFFFFF">
           	<s:url id="edit_url" action="openModifyDeptmentAction">   
 				<s:param name="deptment.id" value="id"></s:param>   
