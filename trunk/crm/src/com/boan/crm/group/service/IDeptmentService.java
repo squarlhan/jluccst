@@ -1,5 +1,5 @@
 /*
- * @(#)IGroupCompanyService.java 1.1 2012-3-8
+ * @(#)IGroupDeptmentService.java 1.1 2012-3-8
  */
 
 package com.boan.crm.group.service;
@@ -7,40 +7,40 @@ package com.boan.crm.group.service;
 import java.util.List;
 import java.util.Map;
 
-import com.boan.crm.group.model.Company;
+import com.boan.crm.group.model.Deptment;
 import com.boan.crm.utils.page.Pagination;
 
    /**
-   * 公司服务接口类
-   * @author Guiyun Yang
+   * 部门服务接口类
+   * @author XXX
    * @version 1.0.0
    */
-   public interface ICompanyService {
+   public interface IDeptmentService {
    /**
-   * 获得某个公司的编号
+   * 获得某个部门的编号
    * @return
    */
-	public Company get(String id);
+	public Deptment get(String id);
 	/**
 	   * 删除
 	   * @return
 	   */
-	public void deleteGroupCompany(String... ids );
+	public void deleteGroupDeptment(String... ids );
 	/**
 	   * 保存信息
 	   * @return
 	   */
-	public void save(Company table1);
+	public void save(Deptment table1);
 	/**
 	   * 更新信息
 	   * @return
 	   */
-    public void update(Company company);
+    public void update(Deptment deptment);
     /**
      * 实现分页
      * @return
      */
-	public Pagination<Company> findCompanyForPage(Map<String, ?> values, Pagination<Company> pagination);
+	public Pagination<Deptment> findDeptmentForPage(Map<String, ?> values, Pagination<Deptment> pagination);
 
 	/**
 	 * 判断是否重名
@@ -51,10 +51,10 @@ import com.boan.crm.utils.page.Pagination;
 	public boolean isExistSameName( String id, String name );
 	
 	/**
-	 * 查找所有公司列表
+	 * 查找所有部门列表
 	 * @param rootId
 	 * @return
 	 */
-	public List<Company> queryAllCompanysByRootId( String rootId );
+	public List<Deptment> queryAllDeptmentsByRootId( String rootId );
 }
 
