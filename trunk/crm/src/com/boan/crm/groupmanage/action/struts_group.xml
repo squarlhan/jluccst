@@ -32,12 +32,7 @@
 	<!-- 组织机构树 -->
 	<package name="group_tree" extends="struts-default" namespace="/">
 		<action name="groupTreeAction" class="groupTreeAction">
-			<result name="group-tree-for-factory">/groupmanage/group-tree-for-factory.jsp</result>
-			<result name="group-tree-for-workshop">/groupmanage/group-tree-for-workshop.jsp</result>
-			<result name="group-tree-for-device">/groupmanage/group-tree-for-device.jsp</result>
-			<result name="group-tree-for-pointdata">/groupmanage/group-tree-for-pointdata.jsp</result>
 			<result name="group-tree-for-user">/groupmanage/group-tree-for-user.jsp</result>
-			<result name="group-tree-for-report">/groupmanage/group-tree-for-report.jsp</result>
 		</action>
 	</package>
 	
@@ -81,6 +76,7 @@
         </action>
         <action name="deleteRoleAction" class="roleAction" method="deleteRole"></action>
 	</package>
+	<!-- 用户 -->
 	<package name="group_user" extends="struts-default" namespace="/">
 		<action name="userAction" class="userAction">
 			<result name="show-user">/groupmanage/userinfo.jsp</result>
@@ -102,6 +98,7 @@
 			<result name="success">/common/messagenoclose.jsp</result>
 		</action>
 	</package>
+	<!-- 登录 -->
 	<package name="userlogon" extends="struts-default" namespace="/">
 		<action name="logonValidAction" class="userLogonAction" method="logonValid">
 			<result name="success">/sysloginsuccess.jsp</result>

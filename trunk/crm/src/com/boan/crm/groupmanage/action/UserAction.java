@@ -214,7 +214,11 @@ public class UserAction extends BaseActionSupport
 		{
 			HttpSession session = ServletActionContext.getRequest().getSession();
 			UserSession userSession = ( UserSession ) session.getAttribute( "userSession" );
-			String curUserId = userSession.getUserId();
+			String curUserId = null;
+			if( userSession != null )
+			{
+				curUserId = userSession.getUserId();
+			}
 			for( int i = 0; i < pagination.getData().size(); i++ )
 			{
 				if( curUserId.equals( pagination.getData().get( i ).getId() ) )
