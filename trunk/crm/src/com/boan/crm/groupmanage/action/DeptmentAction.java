@@ -21,7 +21,7 @@ import com.boan.crm.utils.action.BaseActionSupport;
 import com.boan.crm.utils.page.Pagination;
 
 /**
- * 公司管理Action
+ * 部门管理Action
  * 
  * @author XXX
  * @version 1.0.0
