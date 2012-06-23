@@ -19,14 +19,14 @@
 			function btnSave_OnClick()
 			{
 				
-					var oListbox = document.getElementById( "typeIds" );
+					var oListbox = document.getElementById( "dictIds" );
 					if( oListbox.length >0 )
 					{
 						for( var i = 0; i < oListbox.length; i++ )
 						{
 							oListbox.options[i].selected = true;
 						}
-						document.forms[0].action="savecustomertypesort.action";
+						document.forms[0].action="savedatadictionarysort.action";
 						document.forms[0].submit();
 						
 					}
@@ -38,7 +38,7 @@
 			}
 			function btnTop_OnClick()
 			{
-				var oListbox = document.getElementById( "typeIds" );
+				var oListbox = document.getElementById( "dictIds" );
 				for( var i = 0; i < oListbox.length; i++ ) 
 				{
 					if( oListbox.options[i].selected )
@@ -53,7 +53,7 @@
 			}
 			function btnUp_OnClick()
 			{
-				var oListbox = document.getElementById( "typeIds" );
+				var oListbox = document.getElementById( "dictIds" );
 	
 				for( var i = 0; i < oListbox.length; i++ ) 
 				{
@@ -69,7 +69,7 @@
 			}
 			function btnDown_OnClick()
 			{
-				var oListbox = document.getElementById( "typeIds" );
+				var oListbox = document.getElementById( "dictIds" );
 				for( i = oListbox.length -1; i >= 0; i-- ) 
 				{
 					if( oListbox.options[i].selected )
@@ -85,7 +85,7 @@
 			}
 			function btnBottom_OnClick()
 			{
-				var oListbox = document.getElementById( "typeIds" );
+				var oListbox = document.getElementById( "dictIds" );
 				for( i = oListbox.length -1; i >= 0; i-- ) 
 				{
 					if( oListbox.options[i].selected )
@@ -167,6 +167,7 @@
 	<body>
 		<s:form id="form1" name="form1" method="post" theme="simple">
 			<s:label id="lb_message" name="message" cssStyle="display:none"></s:label>
+			<s:hidden id="typeFlag" name="typeFlag"></s:hidden>
 			<table width="100%" border="0" cellspacing="0" cellpadding="0">
 				<tr>
 					<td style="padding: 0px;">
@@ -178,10 +179,10 @@
 											<tr>
 												<td align="right" nowrap>
 													<span class="shadow"> 
-													  <select id="typeIds" name="typeIds" size="17" style="width: 250;" multiple="multiple">
-															<s:iterator id="info" value="customerTypes"	status="stat">
+													  <select id="dictIds" name="dictIds" size="17" style="width: 250;" multiple="multiple">
+															<s:iterator id="info" value="dataDictionarys" status="stat">
 																<option value="<s:property value='#info.id'/>">
-																	<s:property value="#info.typeName" />
+																	<s:property value="#info.name" />
 																</option>
 															</s:iterator>
 													  </select> 

@@ -26,15 +26,14 @@
 		<script type="text/javascript">
 		$(function(){
 			$.fn.checkall("cbk_all");
-			$.fn.uncheckall("ids","cbk_all");
+			$.fn.uncheckall("dictIds","cbk_all");
 			
 			/**
-	  		 * 添加设备信息
 	  		 */
 			$("#addbtn").click(function(){
-				parent.parent.tipsWindown("添加客户类别","iframe:datadictionary/customertype.action","470","320","true","","true","no");
+				parent.parent.tipsWindown("添加字典","iframe:datadictionary/datadictionary.action?typeFlag=" + $("#typeFlag").val(),"470","320","true","","true","no");
 				parent.parent.$("#windown-close").bind('click',function(){
-					window.location.href=window.location.href;
+					window.location.href="datadictionarylist.action?typeFlag=" + $("#typeFlag").val();
 				});
 			});
 			
@@ -42,16 +41,16 @@
 	  		 * 排序
 	  		 */
 			$("#sortbtn").click(function(){
-				parent.parent.tipsWindown("客户类别排序","iframe:datadictionary/customertypesort.action","370","320","true","","true","no");
+				parent.parent.tipsWindown("字典排序","iframe:datadictionary/datadictionarysort.action?typeFlag=" + $("#typeFlag").val(),"370","320","true","","true","no");
 				parent.parent.$("#windown-close").bind('click',function(){
-					window.location.href=window.location.href;
+					window.location.href="datadictionarylist.action?typeFlag=" + $("#typeFlag").val();
 				});
 			});
 			
 			$(".showInfo").css("cursor","hand").click(function(){
-				parent.parent.tipsWindown("修改客户类别","iframe:datadictionary/customertype.action?typeId=" + $(this).attr("tid"),"470","320","true","","true","no");
+				parent.parent.tipsWindown("修改字典","iframe:datadictionary/datadictionary.action?dictId=" + $(this).attr("tid") + "&typeFlag=" + $("#typeFlag").val(),"470","320","true","","true","no");
 				parent.parent.$("#windown-close").bind('click',function(){
-					window.location.href=window.location.href;
+					window.location.href="datadictionarylist.action?typeFlag=" + $("#typeFlag").val();
 				});
 			});
 			/**
@@ -59,7 +58,7 @@
 	  		 */
 	  		$("#deletebtn").click(function(){
   				if(window.confirm("您确定要删除所选信息吗？")){
-  					document.forms[0].action = "delcustomertype.action";
+  					document.forms[0].action = "deldatadictionary.action";
 					document.forms[0].submit();
   				}
 	  		});
@@ -69,6 +68,7 @@
 	</head>
 	<body>
 		<s:form id="form1" name="form1" method="post" theme="simple">
+			<s:hidden id="typeFlag" name="typeFlag"></s:hidden>
 			<table width="100%" style="height: 100%;" border="0" cellspacing="5"
 				cellpadding="0">
 				<tr>
@@ -95,21 +95,21 @@
 
 								<td align="center"
 									background="<%=path%>/images/headerbg.jpg">
-									<strong>类别名称</strong>
+									<strong>字典名称</strong>
 								</td>
 								<td align="center"
 									background="<%=path%>/images/headerbg.jpg">
-									<strong>类别说明</strong>
+									<strong>字典说明</strong>
 								</td>
 							</tr>
-							<s:iterator value="customerTypes" status="obj">
+							<s:iterator value="dataDictionarys" status="obj">
 								<tr>
 									<td height="26" align="center" bgcolor="#FFFFFF">
-										<s:checkbox id="%{id}" name="typeIds" fieldValue="%{id}"
+										<s:checkbox id="%{id}" name="dictIds" fieldValue="%{id}"
 											value="false" theme="simple" />
 									</td>
 									<td height="26" align="center" bgcolor="#FFFFFF">
-										<span class="showInfo" tid="<s:property value='id' />"><s:property value="typeName" /></span>
+										<span class="showInfo" tid="<s:property value='id' />"><s:property value="name" /></span>
 										&nbsp;
 									</td>
 									<td height="26" align="left" bgcolor="#FFFFFF">
