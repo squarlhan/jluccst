@@ -105,7 +105,7 @@
 								<table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#d5e4fd">
 									<tr>
 										<td height="26" align="right" bgcolor="#FFFFFF">
-											<strong>角色名称：</strong>
+											<strong>职务名称：</strong>
 										</td>
 										<td height="26" align="left" bgcolor="#FFFFFF">
 											<s:textfield id="roleName" name="role.roleName" cssStyle="width: 250px;" maxlength="25"></s:textfield>

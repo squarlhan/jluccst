@@ -222,19 +222,19 @@
 										</tr>
 										<tr>
 											<td height="26" align="right" bgcolor="#FFFFFF">
-												<strong>用户角色：</strong>
+												<strong>用户职务：</strong>
 											</td>
 											<td height="26" align="left" bgcolor="#FFFFFF">
 											<s:if test="user.deleteFlag==1">
 												<span  onMouseMove="this.setCapture();" onMouseOut="this.releaseCapture();" onfocus="this.blur();">
-												<s:select title="您不能修改自己的角色" list="roleList" listKey="id" listValue="roleName" value="user.roleId" 
-													id="roleId" name="user.roleId" cssStyle="width:250px" headerKey="" headerValue="--请选择角色--"></s:select>
+												<s:select title="您不能修改自己的职务" list="roleList" listKey="id" listValue="roleName" value="user.roleId" 
+													id="roleId" name="user.roleId" cssStyle="width:250px" headerKey="" headerValue="--请选择职务--"></s:select>
 												</span>
-												<font color="#FF0000" title="不能修改自己的角色" style="font-size:9pt;">[ 不能修改自己的角色 ]</font>
+												<font color="#FF0000" title="不能修改自己的职务" style="font-size:9pt;">[ 不能修改自己的职务 ]</font>
 											</s:if>
 											<s:else>
 												<s:select list="roleList" listKey="id" listValue="roleName" value="user.roleId" 
-													id="roleId" name="user.roleId" cssStyle="width:250px" headerKey="" headerValue="--请选择角色--"></s:select>
+													id="roleId" name="user.roleId" cssStyle="width:250px" headerKey="" headerValue="--请选择职务--"></s:select>
 											</s:else>
 											</td>
 										</tr>

@@ -44,10 +44,10 @@
 									<table width="100%" border="0" cellspacing="0" cellpadding="0" bgcolor="#d5e4fd">
 										<tr>
 											<td background="../images/headerbg.jpg" height="26">
-												&nbsp;拥有该操作权限的角色
+												&nbsp;拥有该操作权限的职务
 											</td>
 											<td align="right" style="padding: 3px;" background="../images/headerbg.jpg">
-												<input type="button" name="selectRole" value="选择角色"
+												<input type="button" name="selectRole" value="选择职务"
 													class="btn_4"
 													onClick="popedomOpen('./showAllRoleListAction.action?menuKey=<s:property value="menuKey"/>','350','460')">
 												<input type="button" name="deleteSelect" value="删除所选"

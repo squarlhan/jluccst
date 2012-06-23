@@ -37,7 +37,7 @@
             function gosubmit()
             {
 				if((form1.roleIds.value)==""){
-					alert("请选择要添加的角色！");
+					alert("请选择要添加的职务！");
 					return false;
 				}
 				form1.action="./saveOrUpdatePopedomAction.action";
@@ -59,7 +59,7 @@
 										<tr>
 											<td align="center" nowrap background="../images/headerbg.jpg" height="22px">
 												<DIV class="fLe textDiv" style="padding-left: 5px;">
-													<SPAN class=titleB id=Label1>请选择角色</SPAN>
+													<SPAN class=titleB id=Label1>请选择职务</SPAN>
 												</DIV>
 											</td>
 										</tr>
