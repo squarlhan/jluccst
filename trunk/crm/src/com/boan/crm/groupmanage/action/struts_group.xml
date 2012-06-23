@@ -95,7 +95,7 @@
 		</action>
 		<action name="saveOrUpdateMyInfoAction" class="userAction"
 			method="saveOrUpdateMyInfo">
-			<result name="success">/common/messagenoclose.jsp</result>
+			<result name="success">/common/message.jsp</result>
 		</action>
 	</package>
 	<!-- 登录 -->
