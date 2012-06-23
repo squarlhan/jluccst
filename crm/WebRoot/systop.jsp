@@ -23,11 +23,11 @@
 <SCRIPT language=javascript type=text/javascript>
 	  function logout()
 	  {
-	      //top.location.href="./logoutAction.action";
+	      top.location.href="./logoutAction.action";
 	  }
 	  function myinfo()
 	  {
-		  //parent.parent.tipsWindown("个人资料","iframe:./showMyInfoAction.action","400","460","true","","true","no");
+		  parent.parent.tipsWindown("个人资料","iframe:./showMyInfoAction.action","400","460","true","","true","no");
 	  }
 </SCRIPT>
 <style type="text/css">
