@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<!-- 公司Action -->
+	<package name="group_company" extends="struts-default" namespace="/">
+		<action name="openCompanyAction" class="companyAction" method="openCompany">
+			<result name="success">/backstagemanage/companylist.jsp</result>
+			<result name="input">/backstagemanage/companylist.jsp</result>
+		</action>
+		<action name="openAddCompanyAction" class="companyAction" method="openAddCompany">
+			<result name="success">/backstagemanage/companyinfo.jsp</result>
+			<result name="input">/backstagemanage/companyinfo.jsp</result>
+		</action>
+		<action name="toAddCompanyAction" class="companyAction" method="toAddCompany">
+			<result name="success">/common/message.jsp</result>
+			<result name="error">/common/messagenoclose.jsp</result>
+		</action>
+		<action name="openModifyCompanyAction" class="companyAction" method="openModifyCompany">
+			<result name="success">/backstagemanage/companyinfo.jsp</result>
+			<result name="input">/backstagemanage/companyinfo.jsp</result>
+		</action>
+		<action name="toModifyCompanyAction" class="companyAction" method="toModifyCompany">
+			<result name="success">/common/message.jsp</result>
+			<result name="error">/common/messagenoclose.jsp</result>
+		</action>
+		<action name="deleteCompanyAction" class="companyAction" method="deleteCompany" />
+	</package>
+</struts>
