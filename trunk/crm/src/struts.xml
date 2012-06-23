@@ -32,4 +32,6 @@
 	<include file="com/boan/crm/datadictionary/action/struts_datadictionary.xml"></include>
 	<!-- 组织机构 -->
 	<include file="com/boan/crm/groupmanage/action/struts_group.xml"></include>
+	<!-- 后台管理 -->
+	<include file="com/boan/crm/backstagemanage/action/struts_backstage.xml"></include>
 </struts>
