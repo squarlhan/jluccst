@@ -45,7 +45,7 @@
 	$(function() {
 		$("#addbtn").click(
 				function() {
-					parent.parent.tipsWindown("添加角色信息",
+					parent.parent.tipsWindown("添加职务信息",
 							"iframe:openAddRoleAction.action", "460", "150",
 							"true", "", "true", "no");
 					parent.parent.$("#windown-close").bind('click', function() {
@@ -67,7 +67,7 @@
 											function() {
 												var url = $(this).attr("url");
 												parent.parent.tipsWindown(
-														"修改角色信息", "iframe:"
+														"修改职务信息", "iframe:"
 																+ url, "460",
 														"150", "true", "",
 														"true", "no");
@@ -135,7 +135,7 @@
 									<s:checkbox theme="simple" id="cbk_all" name="all"></s:checkbox>
 								</td>
 								<td align="center" background="../images/headerbg.jpg">
-									<strong>角色名称</strong>
+									<strong>职务名称</strong>
 								</td>
 								<td align="center" background="../images/headerbg.jpg">
 									<strong>操作</strong>

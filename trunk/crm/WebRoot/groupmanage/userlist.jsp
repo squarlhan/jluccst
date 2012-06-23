@@ -107,7 +107,7 @@
               <td align="center" background="../images/headerbg.jpg"><strong>中文姓名</strong></td>
               <td align="center" background="../images/headerbg.jpg"><strong>办公电话</strong></td>
               <td align="center" background="../images/headerbg.jpg"><strong>个人手机</strong></td>
-              <td align="center" background="../images/headerbg.jpg"><strong>角色</strong></td>
+              <td align="center" background="../images/headerbg.jpg"><strong>职务</strong></td>
               <td align="center" background="../images/headerbg.jpg"><strong>操作</strong></td>
             </tr>
             <s:iterator value="pagination.data" status="obj">

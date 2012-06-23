@@ -173,16 +173,16 @@
 										</tr>
 										<tr>
 											<td height="26" align="right" bgcolor="#FFFFFF">
-												<strong>用户角色：</strong>
+												<strong>用户职务：</strong>
 											</td>
 											<td height="26" align="left" bgcolor="#FFFFFF">
 											<span  onMouseMove="this.setCapture();" onMouseOut="this.releaseCapture();" onfocus="this.blur();">
-												<s:select title="您不能修改自己的角色" list="roleList"
+												<s:select title="您不能修改自己的职务" list="roleList"
 													listKey="id" listValue="roleName" value="user.roleId"
 													id="roleId" name="user.roleId" cssStyle="width:100%"
-													headerKey="" headerValue="--请选择角色--"></s:select>
+													headerKey="" headerValue="--请选择职务--"></s:select>
 											</span>
-											<font color="#FF0000" title="不能修改自己的角色" style="font-size:9pt;">[ 不能修改自己的角色 ]</font>
+											<font color="#FF0000" title="不能修改自己的职务" style="font-size:9pt;">[ 不能修改自己的职务]</font>
 											</td>
 										</tr>
 										<tr>
