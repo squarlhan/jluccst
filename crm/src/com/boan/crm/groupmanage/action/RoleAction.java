@@ -77,13 +77,13 @@ public class RoleAction extends BaseActionSupport
 		// 如果存在，则提示
 		if( b )
 		{
-			message.setContent( "相同角色名称已存在，请重新输入！" );
+			message.setContent( "相同职务名称已存在，请重新输入！" );
 			return ERROR;
 		}
 		else
 		{
 			service.save( role );
-			message.setContent( "角色信息保存成功！" );
+			message.setContent( "职务信息保存成功！" );
 			return SUCCESS;
 		}
 	}
@@ -108,13 +108,13 @@ public class RoleAction extends BaseActionSupport
 		// 如果存在，则提示
 		if( b )
 		{
-			message.setContent( "相同角色名称已存在，请重新输入！" );
+			message.setContent( "相同职务名称已存在，请重新输入！" );
 			return ERROR;
 		}
 		else
 		{
 			service.update(role);
-			message.setContent( "角色信息保存成功！" );
+			message.setContent( "职务信息保存成功！" );
 			return SUCCESS;
 		}
 	}
