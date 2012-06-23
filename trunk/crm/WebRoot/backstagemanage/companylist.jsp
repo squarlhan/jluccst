@@ -102,7 +102,7 @@
     <td valign="top"><table width="100%" border="0" cellspacing="5" cellpadding="0">
       <tr>
         <td>
-       		<input name="addbtn" type="button" class="btn_4" id="addbtn" value="添加" >
+       		<input name="addbtn" type="button" class="btn_2_3" id="addbtn" value="添加" >
             <input name="deletepointbtn" type="button" class="btn_4" id="deletepointbtn" value="删除所选">
         <td align="right"></td>
       </tr>
