@@ -127,7 +127,7 @@
 												<img src="images/menuto.jpg" width="5" height="5" />
 											</td>
 											<td>
-												<a href="customerReaserch.html" target="mainFrame">公司档案</a>
+												<a href="backstagemanage/companymanage.jsp" target="mainFrame">公司档案</a>
 											</td>
 										</tr>
 										<tr>
