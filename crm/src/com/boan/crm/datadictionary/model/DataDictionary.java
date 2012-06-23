@@ -16,15 +16,15 @@ import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 
 /**
- * 客户类别实体类
+ * 数据字典实体类
  * 
  * @author leon
  * @version 1.0.0
  */
 @Entity
-@Table(name = "CUSTOMER_TYPE")
-public class CustomerType implements Serializable {
-	private static final long serialVersionUID = 7197292703142337721L;
+@Table(name = "DATA_DICTIONARY")
+public class DataDictionary implements Serializable {
+	private static final long serialVersionUID = 7414878704057469157L;
 
 	@Id
 	@GenericGenerator(name = "system-uuid", strategy = "uuid")
@@ -33,12 +33,18 @@ public class CustomerType implements Serializable {
 	 * 编号
 	 */
 	private String id;
+	
+	/**
+	 * 类别
+	 */
+	@Column(name = "TYPE_FLAG")
+	private Integer typeFlag = 0;
 
 	/**
-	 * 类别名称
+	 * 名称
 	 */
-	@Column(name = "TYPE_NAME" , length = 50)
-	private String typeName;
+	@Column(name = "NAME" , length = 50)
+	private String name;
 	
 	/**
 	 * 排序号
@@ -47,7 +53,7 @@ public class CustomerType implements Serializable {
 	private Integer sortIndex = 0;
 
 	/**
-	 * 类别说明
+	 * 状态说明
 	 */
 	@Column(name = "REMARK", length = 200)
 	private String remark;
@@ -60,12 +66,28 @@ public class CustomerType implements Serializable {
 		this.id = id;
 	}
 
-	public String getTypeName() {
-		return typeName;
+	public Integer getTypeFlag() {
+		return typeFlag;
 	}
 
-	public void setTypeName(String typeName) {
-		this.typeName = typeName;
+	public void setTypeFlag(Integer typeFlag) {
+		this.typeFlag = typeFlag;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public Integer getSortIndex() {
+		return sortIndex;
+	}
+
+	public void setSortIndex(Integer sortIndex) {
+		this.sortIndex = sortIndex;
 	}
 
 	public String getRemark() {
@@ -76,12 +98,4 @@ public class CustomerType implements Serializable {
 		this.remark = remark;
 	}
 
-	public Integer getSortIndex() {
-		return sortIndex;
-	}
-
-	public void setSortIndex(Integer sortIndex) {
-		this.sortIndex = sortIndex;
-	}
-	
 }

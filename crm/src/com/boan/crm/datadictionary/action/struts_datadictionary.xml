@@ -3,63 +3,34 @@
     "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
     "http://struts.apache.org/dtds/struts-2.3.dtd">	
 <struts>
-    <!-- 客户类别Action -->
-	<package name="customerType" extends="struts-default" namespace="/datadictionary">
-		<action name="customertypelist" class="customerTypeAction" method="customerTypeList">
-			<result name="success">/datadictionary/customer_type_list.jsp</result>
-			<result name="input">/datadictionary/customer_type_list.jsp</result>
+	<!-- 数据字典Action -->
+	<package name="dataDictionary" extends="struts-default" namespace="/datadictionary">
+		<action name="datadictionarylist" class="dataDictionaryAction" method="dataDictionaryList">
+			<result name="success">/datadictionary/data_dictionary_list.jsp</result>
+			<result name="input">/datadictionary/data_dictionary_list.jsp</result>
 		</action>
-		<action name="customertype" class="customerTypeAction" method="customerTypeInfo">
-			<result name="success">/datadictionary/customer_type_info.jsp</result>
-			<result name="input">/datadictionary/customer_type_info.jsp</result>
+		<action name="datadictionary" class="dataDictionaryAction" method="dataDictionaryInfo">
+			<result name="success">/datadictionary/data_dictionary_info.jsp</result>
+			<result name="input">/datadictionary/data_dictionary_info.jsp</result>
 		</action>
-		<action name="savecustomertype" class="customerTypeAction" method="saveCustomerType">
-			<result name="success" type="chain">
-             	<param name="actionName">customertype</param>
-            </result>
+		<action name="savedatadictionary" class="dataDictionaryAction" method="saveDataDictionary">
+			<result name="success">/datadictionary/data_dictionary_info.jsp</result>
+			<result name="input">/datadictionary/data_dictionary_info.jsp</result>
 		</action>
-    	<action name="delcustomertype" class="customerTypeAction" method="deleteCustomerType">
+    	<action name="deldatadictionary" class="dataDictionaryAction" method="deleteDataDictionary">
     		<result name="success" type="chain">
-             	<param name="actionName">customertypelist</param>
+             	<param name="actionName">datadictionarylist</param>
+             	<param name="typeFlag">${typeFlag}</param>
             </result>
     	</action>
-    	<action name="customertypesort" class="customerTypeAction" method="customerTypeSort">
-    		<result name="success">/datadictionary/customer_type_sort.jsp</result>
-			<result name="input">/datadictionary/customer_type_sort.jsp</result>
+    	<action name="datadictionarysort" class="dataDictionaryAction" method="dataDictionarySort">
+    		<result name="success">/datadictionary/data_dictionary_sort.jsp</result>
+			<result name="input">/datadictionary/data_dictionary_sort.jsp</result>
     	</action>
-    	<action name="savecustomertypesort" class="customerTypeAction" method="saveCustomerTypeSort">
+    	<action name="savedatadictionarysort" class="dataDictionaryAction" method="saveDataDictionarySort">
     		<result name="success" type="chain">
-             	<param name="actionName">customertypesort</param>
-            </result>
-    	</action>
-	</package>
-	<!-- 客户状态Action -->
-	<package name="customerState" extends="struts-default" namespace="/datadictionary">
-		<action name="customerstatelist" class="customerStateAction" method="customerStateList">
-			<result name="success">/datadictionary/customer_state_list.jsp</result>
-			<result name="input">/datadictionary/customer_state_list.jsp</result>
-		</action>
-		<action name="customerstate" class="customerStateAction" method="customerStateInfo">
-			<result name="success">/datadictionary/customer_state_info.jsp</result>
-			<result name="input">/datadictionary/customer_state_info.jsp</result>
-		</action>
-		<action name="savecustomerstate" class="customerStateAction" method="saveCustomerState">
-			<result name="success" type="chain">
-             	<param name="actionName">customerstate</param>
-            </result>
-		</action>
-    	<action name="delcustomerstate" class="customerStateAction" method="deleteCustomerState">
-    		<result name="success" type="chain">
-             	<param name="actionName">customerstatelist</param>
-            </result>
-    	</action>
-    	<action name="customerstatesort" class="customerStateAction" method="customerStateSort">
-    		<result name="success">/datadictionary/customer_state_sort.jsp</result>
-			<result name="input">/datadictionary/customer_state_sort.jsp</result>
-    	</action>
-    	<action name="savecustomerstatesort" class="customerStateAction" method="saveCustomerStateSort">
-    		<result name="success" type="chain">
-             	<param name="actionName">customerstatesort</param>
+             	<param name="actionName">datadictionarysort</param>
+             	<param name="typeFlag">${typeFlag}</param>
             </result>
     	</action>
 	</package>
