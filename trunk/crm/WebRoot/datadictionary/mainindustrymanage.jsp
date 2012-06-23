@@ -30,14 +30,14 @@
           <td colspan="2" style="height:36px;"><table id="__01" width="100%" height="36" border="0" cellpadding="0" cellspacing="0">
               <tr>
                 <td width="11"><img src="../images/header_01.jpg" width="11" height="36" alt=""></td>
-                <td background="../images/header_02.jpg"><span class="STYLE1">您当前的位置：数据字典&gt;&gt;&gt;客户状态</span></td>
+                <td background="../images/header_02.jpg"><span class="STYLE1">您当前的位置：数据字典&gt;&gt;&gt;主营行业</span></td>
                 <td width="12"><img src="../images/header_03.jpg" width="12" height="36" alt=""></td>
               </tr>
             </table></td>
         </tr>
         <tr>
           <td valign="top" style="border-left:1px solid #54a4e3; border-bottom:1px solid #54a4e3; border-right:1px solid #54a4e3; padding:5px;"><iframe width="100%" height="100%"
-          	 id="groupmain" name="groupmain" frameborder="0" scrolling="auto" src="datadictionarylist.action?typeFlag=1"></iframe></td>
+          	 id="groupmain" name="groupmain" frameborder="0" scrolling="auto" src="datadictionarylist.action?typeFlag=3"></iframe></td>
         </tr>
     </table></td>
   </tr>

@@ -21,17 +21,17 @@
 		  	 */
 			var _device_submit = {
 				rules: {
-					"customerType.typeName":{required:true,maxlength:25},
-					"customerType.remark":{maxlength:50}
+					"dataDictionary.name":{required:true,maxlength:25},
+					"dataDictionary.remark":{maxlength:50}
 				},messages:{
-					"customerType.typeName":
+					"dataDictionary.name":
 					{
-					    required:"类别名称为必填项！",
-						maxlength:"类别名称最多输入25个汉字！"
+					    required:"字典名称为必填项！",
+						maxlength:"字典名称最多输入25个汉字！"
 					},
-					"customerType.remark":
+					"dataDictionary.remark":
 					{
-						maxlength:"类别说明最多50个汉字！"
+						maxlength:"字典说明最多50个汉字！"
 					}
 				}
 			};
@@ -65,9 +65,9 @@
 	               	if(!validator.form()){
 						return false;
 					}
-					form1.typeName.value = $("#typeName_t").val();
+					form1.name.value = $("#dictName_t").val();
 					form1.remark.value = $("#remark_t").val(); 
-					form1.action = "datadictionary/savecustomertype.action";
+					form1.action = "datadictionary/savedatadictionary.action";
 	               	form1.submit();
 	           	});
           	};
@@ -87,7 +87,7 @@
 			 * 初始化页面
 			 */
 			$.fn.initpage = function(){
-				$("#typeName_t").focus();
+				$("#dictName_t").focus();
 				//回显上传时的错误信息
 				var uploadErr = $("#lb_error").html();
 				if(uploadErr!=null && $.trim(uploadErr)!="" ){
@@ -106,8 +106,9 @@
 	<body>
 		<s:form id="form1" name="form1" method="post" theme="simple">
 			<s:label id="lb_message" name="message" cssStyle="display:none"></s:label>
-			<s:hidden id="typeId" name="typeId"></s:hidden>
-			<input type="hidden" name="typeName" value="" />
+			<s:hidden id="dictId" name="dictId"></s:hidden>
+			<s:hidden id="typeFlag" name="typeFlag"></s:hidden>
+			<input type="hidden" name="name" value="" />
 			<input type="hidden" name="remark" value="" />
 			<table width="100%" border="0" cellspacing="5" cellpadding="0">
 				<tr>
@@ -120,20 +121,20 @@
 										cellspacing="1" bgcolor="#d5e4fd">
 										<tr>
 											<td height="26" align="right" bgcolor="#FFFFFF">
-												<strong>类别名称：</strong>
+												<strong>字典名称：</strong>
 											</td>
 											<td height="26" align="left" bgcolor="#FFFFFF">
-												<s:textfield id="typeName_t" name="customerType.typeName"
+												<s:textfield id="dictName_t" name="dataDictionary.name"
 													maxlength="25" cssStyle="width: 300px;"></s:textfield>
 												<font color="red">*</font>
 											</td>
 										</tr>
 										<tr>
 											<td height="26" align="right" bgcolor="#FFFFFF">
-												<strong>类别说明：</strong>
+												<strong>字典说明：</strong>
 											</td>
 											<td height="26" align="left" bgcolor="#FFFFFF">
-												<s:textarea id="remark_t" name="customerType.remark" style="width:300px; height:200px;"></s:textarea>
+												<s:textarea id="remark_t" name="dataDictionary.remark" style="width:300px; height:200px;"></s:textarea>
 											</td>
 										</tr>
 										<tr>
