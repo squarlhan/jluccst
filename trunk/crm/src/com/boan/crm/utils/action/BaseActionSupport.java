@@ -14,6 +14,7 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.lang.StringUtils;
 import org.apache.struts2.ServletActionContext;
 
+import com.boan.crm.groupmanage.common.UserSession;
 import com.opensymphony.xwork2.ActionSupport;
 
 /**
@@ -52,25 +53,12 @@ public class BaseActionSupport extends ActionSupport {
 	@Override
 	public void validate() {
 		HttpSession session = ServletActionContext.getRequest().getSession();
-		// UserSession userSession = ( UserSession ) session.getAttribute(
-		// "userSession" );
-		// if(userSession != null)
-		// {
-		// sessionUserId = StringUtils.trimToEmpty( userSession.getUserId() );
-		// sessionUserCName = StringUtils.trimToEmpty(
-		// userSession.getUserCName() );
-		// sessionCompanyId = StringUtils.trimToEmpty(
-		// userSession.getCompanyId() );
-		// sessionFactoryId = StringUtils.trimToEmpty(
-		// userSession.getFactoryId() );
-		// sessionWorkshopId = StringUtils.trimToEmpty(
-		// userSession.getWorkshopId() );
-		// sessionCompanyName = StringUtils.trimToEmpty(
-		// userSession.getCompanyName() );
-		// sessionFactoryName = StringUtils.trimToEmpty(
-		// userSession.getFactoryName() );
-		// sessionWorkshopName = StringUtils.trimToEmpty(
-		// userSession.getWorkshopName() );
-		// }
+		UserSession userSession = (UserSession) session.getAttribute("userSession");
+		if (userSession != null) {
+			sessionUserId = StringUtils.trimToEmpty(userSession.getUserId());
+			sessionUserCName = StringUtils.trimToEmpty(userSession.getUserCName());
+			sessionDeptId = StringUtils.trimToEmpty(userSession.getDeptId());
+			sessionDeptName = StringUtils.trimToEmpty(userSession.getDeptName());
+		}
 	}
 }
