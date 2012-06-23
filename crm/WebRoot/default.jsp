@@ -40,7 +40,6 @@
 				$("#username").focus();
 			});
 			function logon() {
-				/**
 				if ($.trim($("#username").val()) == "") {
 					alert("请输入用户名！");
 					$("#username").focus();
@@ -54,8 +53,7 @@
 				form1.action = "./logonValidAction.action";
 				form1.target = "iframe1";
 				form1.submit();
-				**/
-				window.location.href="sysmain.action";
+				//window.location.href="sysmain.action";
 			}
 			function mykeypress() {
 				if (event.keyCode == 13) {
