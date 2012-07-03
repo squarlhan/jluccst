@@ -2,6 +2,7 @@ package cn.edu.jlu.ccst.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Molecular {
@@ -96,8 +97,12 @@ public class Molecular {
 	}
 	
 	public void validate(){
+		
+	}
+	
+	public void findatom(List<String> atom_names ,List<Integer> atom_counts, String initstr ){
 		atoms = new ArrayList();
-		String strname = name;
+		String strname = initstr;
 		while(strname.length()>=1){
 			String str = "";
 			if(strname.length()>=2){
@@ -111,8 +116,8 @@ public class Molecular {
 				strname = strname.substring(len);
 				String a_count_str = getnumber(strname);
 				int a_count = Integer.parseInt(a_count_str);
-				Atom a = new Atom(str, a_count);
-				atoms.add(a);
+				atom_names.add(str);
+				atom_counts.add(a_count);
 				if(a_count!=1){
 					strname = strname.substring(a_count_str.length());
 				}
@@ -122,8 +127,8 @@ public class Molecular {
 				strname = strname.substring(1);
 				String a_count_str = getnumber(strname);
 				int a_count = Integer.parseInt(a_count_str);
-				Atom a = new Atom(str, a_count);
-				atoms.add(a);
+				atom_names.add(str);
+				atom_counts.add(a_count);
 				if(a_count!=1){
 					strname = strname.substring(a_count_str.length());
 				}
@@ -137,6 +142,24 @@ public class Molecular {
 			System.out.print(a.getName()+a.getCount());
 		}
 		System.out.println("\n"+m.getAtoms().size());
+		
+		String str = "H2(Ca(NaOH)2)2O2";
+		String tempstr = str;
+		List<String> atom_names = new ArrayList();
+		List<Integer> atom_counts = new ArrayList();
+		while (tempstr.indexOf("(") > -1) {
+			int index1 = tempstr.indexOf("(");
+			int index2 = tempstr.lastIndexOf(")");
+			String leftstr = tempstr.substring(0, index1);
+			String innerstr = tempstr.substring(index1 + 1, index2);
+			String rightstr = tempstr.substring(index2 + 1);
+			System.out.println(leftstr);
+			System.out.println(innerstr);
+			System.out.println(rightstr);
+			m.findatom(atom_names, atom_counts, leftstr);
+			m.findatom(atom_names, atom_counts, rightstr);
+			tempstr = innerstr;
+		}
 	}
 	
 
