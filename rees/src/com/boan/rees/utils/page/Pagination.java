@@ -11,8 +11,6 @@ package com.boan.rees.utils.page;
 
 import java.util.List;
 
-import com.boan.rees.demo.model.DemoModel;
-
 /**
  * 分页实体
  * 

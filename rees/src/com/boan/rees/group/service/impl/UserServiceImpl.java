@@ -5,17 +5,14 @@
 package com.boan.rees.group.service.impl;
 
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import com.boan.rees.demo.model.DemoModel;
-import com.boan.rees.device.model.DeviceInfo;
+import com.boan.rees.group.dao.IUserDao;
 import com.boan.rees.group.model.User;
 import com.boan.rees.group.service.IUserService;
-import com.boan.rees.group.dao.IUserDao;
 import com.boan.rees.utils.page.Pagination;
 
 /**
