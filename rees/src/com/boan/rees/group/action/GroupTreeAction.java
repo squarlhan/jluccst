@@ -197,7 +197,7 @@ public class GroupTreeAction extends BaseActionSupport
 							if( lt != null && lt.size() > 0 )
 							{
 								
-								//由于原来的这句缺少公司Id说以注释掉了，用下面的for循环处理
+								//由于原来的这句缺少公司Id所以注释掉了，用下面的for循环处理
 								//workshopList.addAll( lt );
 								for( Workshop temp :lt ){
 									temp.setCompanyId(factoryList.get( k ).getCompanyId());
@@ -237,7 +237,12 @@ public class GroupTreeAction extends BaseActionSupport
 				{
 					//表示车间级
 					workshopList = new ArrayList<Workshop>(); 
-					workshopList.add( workshopService.get( wId ) );
+					//workshopList.add( workshopService.get( wId ) );
+					Workshop obj =workshopService.get( wId );
+					if(  StringUtils.isBlank( obj.getCompanyId() )){
+						obj.setCompanyId(cId);
+					}
+					workshopList.add(obj);
 				}
 			}
 		}
@@ -270,7 +275,13 @@ public class GroupTreeAction extends BaseActionSupport
 							lt = workshopService.queryAllWorkshopsByFactoryId( factoryList.get( k ).getId() );
 							if( lt != null && lt.size() > 0 )
 							{
-								workshopList.addAll( lt );
+								//workshopList.addAll( lt );
+								for(Workshop obj : lt){
+									if(  StringUtils.isBlank( obj.getCompanyId() )){
+										obj.setCompanyId(cId);
+									}
+									workshopList.add(obj);
+								}
 							}
 						}
 					}
@@ -286,7 +297,13 @@ public class GroupTreeAction extends BaseActionSupport
 					if( lt != null && lt.size() > 0 )
 					{
 						workshopList = new ArrayList<Workshop>();
-						workshopList.addAll( lt );
+						//workshopList.addAll( lt );
+						for(Workshop obj : lt){
+							if(  StringUtils.isBlank( obj.getCompanyId() )){
+								obj.setCompanyId(cId);
+							}
+							workshopList.add(obj);
+						}
 					}
 				}
 				//表示车间级
@@ -299,7 +316,12 @@ public class GroupTreeAction extends BaseActionSupport
 					factoryList.add( factoryService.get( fId ) );
 					
 					workshopList = new ArrayList<Workshop>(); 
-					workshopList.add( workshopService.get( wId ) );
+					//workshopList.add( workshopService.get( wId ) );
+					Workshop obj =workshopService.get( wId );
+					if(  StringUtils.isBlank( obj.getCompanyId() )){
+						obj.setCompanyId(cId);
+					}
+					workshopList.add(obj);
 				}
 			}
 		}
