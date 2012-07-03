@@ -17,7 +17,8 @@ public class Test {
 		String rstr3 = "Fe+H2O=Fe3O4+H2";
 		String rstr4 = " AI2(SO4)3£«Na2CO3 = AI(OH)3£«CO2£«Na2SO4";
 		String rstr5 = "C2H2+ KMnO4+ H2SO4= K2SO4+ MnSO4+ HCOOH+ H2O";
-		Reaction r = new Reaction(rstr3);
+		String rstr6 = "K2Cr2O7+ Fe3O4+ H2SO4=K2SO4+ Fe2(SO4)3+ Cr2(SO4)3+ H2O";
+		Reaction r = new Reaction(rstr6);
         for(Molecular m: r.getLeft()){
         	for(Atom a:m.getAtoms()){
     			System.out.print(a.getName()+a.getCount());
