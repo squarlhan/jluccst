@@ -5,6 +5,11 @@
 	http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
 	<display-name>旋转设备专家系统</display-name>
 
+	<!-- 防止当在tomcate中发布多个同根的应用时异常 -->
+	<context-param> 
+		<param-name>webAppRootKey</param-name> 
+		<param-value>reet.root</param-value>
+	</context-param> 
 	<!-- 日志配置参数 -->
 	<context-param>
 		<param-name>log4jConfigLocation</param-name>

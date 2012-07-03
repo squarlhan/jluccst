@@ -487,7 +487,7 @@ public class DeviceInfoAction extends BaseActionSupport{
 	/**
 	 * 下载前服务器端验证
 	 */
-	public void validateDownloadDeviceImage(){
+	public void validateToDownloadDeviceImage(){
 		ServletContext servletContext = ServletActionContext.getServletContext();
 		//获取服务器上图片的保存路径
 		String fileAllName = servletContext.getRealPath(device.getFilePath());
