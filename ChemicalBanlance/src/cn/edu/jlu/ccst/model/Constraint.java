@@ -9,13 +9,32 @@ public class Constraint {
 	public int currentAssignCount = 0;
 	public int weight = 1;
 	public Predicate predicate;
-	public long revisedTime = 0;
 	public int[] testTuple;
 	public String expression;
-	
+
+	public int[] varOrderForGetTuple;
+
 	public Arc[] arcs;
 
 	public static long checkTime = 0;
+	
+	
+	public int[] getNextValidTuple(int varIndex, int varValue,
+			int[] currentTuple) {
+		for (int i = arity - 1; i >= 0; i--) {
+			if (varOrderForGetTuple[i] != varIndex) {
+				int value = vars[varOrderForGetTuple[i]].next[currentTuple[varOrderForGetTuple[i]]];
+				if (value == -1)
+					currentTuple[varOrderForGetTuple[i]] = vars[varOrderForGetTuple[i]].head;
+				else {
+					currentTuple[varOrderForGetTuple[i]] = value;
+					return currentTuple;
+				}
+			}
+		}
+
+		return null;
+	}
 
 	public int[] getFirstValidTuple(int varIndex, int varValue) {
 		int[] result = new int[arity];
@@ -27,23 +46,6 @@ public class Constraint {
 			result[i] = vars[i].head;
 		}
 		return result;
-	}
-	
-	public int[] getNextValidTuple(int varIndex, int varValue,
-			int[] currentTuple) {
-		for (int i = arity - 1; i >= 0; i--) {
-			if (i != varIndex) {
-				int value = vars[i].next[currentTuple[i]];
-				if (value == -1)
-					currentTuple[i] = vars[i].head;
-				else {
-					currentTuple[i] = value;
-					return currentTuple;
-				}
-			}
-		}
-
-		return null;
 	}
 
 
@@ -59,7 +61,6 @@ public class Constraint {
 		return arity - currentAssignCount;
 	}
 
-	
 	public boolean test(int[] tuple) {
 		checkTime++;
 		for (int i = 0; i < arity; i++) {
@@ -77,17 +78,6 @@ public class Constraint {
 		return true;
 	}
 
-
-
-
-	public boolean sameTuple(int[] a, int[] b) {
-		for (int i = 0; i < a.length; i++) {
-			if (a[i] != b[i])
-				return false;
-		}
-		return true;
-	}
-
 	public int computeVarIndex(Variable var) {
 		for (int i = 0; i < arity; i++) {
 			if (vars[i].id == var.id) {
@@ -95,18 +85,6 @@ public class Constraint {
 			}
 		}
 		return -1;
-	}
-
-
-	public Variable[] getothers(Variable var) {
-		Variable[] results = new Variable[arity - 1];
-		int count = 0;
-		for (int i = 0; i < arity; i++) {
-			if (var.id != vars[i].id)
-				results[count++] = vars[i];
-		}
-		return results;
-
 	}
 
 	public Constraint() {
@@ -122,6 +100,4 @@ public class Constraint {
 		return false;
 	}
 
-
 }
-

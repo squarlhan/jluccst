@@ -18,8 +18,8 @@ public class Test {
 		String rstr4 = " AI2(SO4)3£«Na2CO3 = AI(OH)3£«CO2£«Na2SO4";
 		String rstr5 = "C2H2+ KMnO4+ H2SO4= K2SO4+ MnSO4+ HCOOH+ H2O";
 		String rstr6 = "K2Cr2O7+ Fe3O4+ H2SO4=K2SO4+ Fe2(SO4)3+ Cr2(SO4)3+ H2O";
-		String rstr7 = "FeSO4+ KNO3+ H2SO4= K2SO4+ Fe2(SO4)3+ NO+ H2O ";
-		Reaction r = new Reaction(rstr6);
+		String rstr7="NaBiO3+MnSO4+H2SO4=Na2SO4+Bi2(SO4)3+NaMnO4+H2O";
+		Reaction r = new Reaction(rstr7);
         for(Molecular m: r.getLeft()){
         	for(Atom a:m.getAtoms()){
     			System.out.print(a.getName()+a.getCount());
@@ -42,7 +42,7 @@ public class Test {
 			}
 			
 		}
-		int[] step = { 10, 50, 100 };
+		int[] step = {10,20,30,40,50,60,70,80,90,100,300,500,1000,5000,10000 };
 		int[] result = Solver.compute(matrix, step);
 		System.out.println();
 		for(int i=0;i<= r.getLeft().size()-1;i++){
