@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import cn.edu.jlu.ccst.model.pdt.Predicate;
 import cn.edu.jlu.ccst.constraint.ArrayTool;
+import cn.edu.jlu.ccst.constraint.SimplifiedMatrix;
 
 public class Csp {
 	public String name;
@@ -12,18 +13,45 @@ public class Csp {
 	public Arc[] arcs;
 	public Predicate[] predicates;
 
-	public int[][][] supportList;
+	public int[][] matrix;
 	public boolean solutionExist = false;
 
 	public int varNum;
 	public int cstNum;
+	public int arcNum = 0;
 
-	public Csp(int[][] source, int domSize) {
-		varNum = source[0].length;
-		cstNum = source.length;
+	public int[] varAssignOrder;
+
+	public void update(int newDomSize) {
+		for (int i = 0; i < varNum; i++) {
+			variables[i].domain = ArrayTool.fill(1, newDomSize + 1);
+			variables[i].initDomain();
+		}
+		for (int i = 0; i < arcNum; i++) {
+			arcs[i].setPosition(-1);
+			arcs[i].currentNary = new int[arcs[i].var.initDomainSize][];
+		}
+	}
+
+	public Csp(SimplifiedMatrix source, int domSize) {
+		matrix = source.matrix;
+		varNum = source.varNum;
+		cstNum = source.cstNum;
 		createVariables(varNum, domSize);
-		createConstraints(source);
+		createConstraints(matrix);
+		varAssignOrder = source.varOrderForSearch;
+		for (int i = 0; i < cstNum; i++) {
+			constraints[i].varOrderForGetTuple = source.varOrderForGetTuple[i];
+		}
+		init();
+	}
 
+	public void init() {
+		for (int i = 0; i < varNum; i++) {
+			variables[i].generateRelatedCons();
+			variables[i].initDomain();
+		}
+		createArcs();
 	}
 
 	public void createConstraints(int[][] source) {
@@ -38,34 +66,49 @@ public class Csp {
 
 	}
 
+
 	public Constraint createConstraint(int id, int[] source) {
 		Constraint con = new Constraint();
 		con.id = id;
-		String expression = "";
+		String positiveExp = "";
+		String negativeExp = "";
 		ArrayList<Integer> tempVarsId = new ArrayList<Integer>();
-		int varLocation=0;
+		int varLocation = 0;
 		for (int i = 0; i < source.length; i++) {
-			if (source[i] != 0) {
-				expression = addParameter(expression, source[i], varLocation);
+			if (source[i] > 0) {
+				positiveExp = addParameter(positiveExp, source[i],
+						varLocation);
 				varLocation++;
 				tempVarsId.add(i);
 				variables[i].tempRels.add(con);
 			}
 		}
-		expression="eq("+expression+","+0+")";
+		for (int i = 0; i < source.length; i++) {
+			if (source[i] < 0) {
+				negativeExp = addParameter(negativeExp, 0-source[i],
+						varLocation);
+				varLocation++;
+				tempVarsId.add(i);
+				variables[i].tempRels.add(con);
+			}
+		}
+		String expression = "eq(" + positiveExp + "," + negativeExp + ")";
 		con.expression = expression;
 		con.arity = tempVarsId.size();
 		con.vars = new Variable[con.arity];
 		for (int i = 0; i < con.arity; i++) {
 			con.vars[i] = variables[tempVarsId.get(i)];
 		}
-//		System.out.println(expression);
+	
+		
+		
 		con.predicate = Predicate.parse(expression);
-		con.predicate.vars=con.vars;
-		con.testTuple=new int[con.arity];
+		con.predicate.vars = con.vars;
+		con.testTuple = new int[con.arity];
 		return con;
 	}
 
+	
 	public String addParameter(String old, int param, int varLocation) {
 		if (old.trim().equals("")) {
 			if (param == 1) {
@@ -74,24 +117,12 @@ public class Csp {
 			if (param > 1) {
 				old = "mul(" + param + "," + "X" + varLocation + ")";
 			}
-			if (param == -1) {
-				old = "neg(X" + varLocation + ")";
-			}
-			if (param < -1) {
-				old = "neg(mul(" + param + "," + "X" + varLocation + "))";
-			}
 		} else {
 			if (param == 1) {
 				old = "add(" + old + ",X" + varLocation + ")";
 			}
 			if (param > 1) {
-				old = "add(" + old + ",mul(" + param + "," + "X" + varLocation + "))";
-			}
-			if (param == -1) {
-				old = "sub(" + old + ",X" + varLocation + ")";
-			}
-			if (param < -1) {
-				old = "sub(" + old + ",mul(" + (0 - param) + "," + "X" + varLocation
+				old = "add(" + old + ",mul(" + param + "," + "X" + varLocation
 						+ "))";
 			}
 		}
@@ -100,26 +131,17 @@ public class Csp {
 
 	public void createVariables(int varNum, int domSize) {
 		variables = new Variable[varNum];
-		int[] domain = ArrayTool.fill(1, domSize+1);
+		int[] domain = ArrayTool.fill(1, domSize + 1);
 		for (int i = 0; i < varNum; i++) {
 			variables[i] = new Variable(i, domain);
 		}
 	}
 
-	public void init() {
-		for (int i = 0; i < varNum; i++) {
-			variables[i].generateRelatedCons();
-			variables[i].initDomain();
-		}
-		createArcs();
-	}
-
 	public void createArcs() {
-		int count = 0;
 		for (int i = 0; i < constraints.length; i++) {
-			count += constraints[i].arity;
+			arcNum += constraints[i].arity;
 		}
-		arcs = new Arc[count];
+		arcs = new Arc[arcNum];
 		int index = 0;
 		for (int i = 0; i < constraints.length; i++) {
 			Constraint con = constraints[i];
@@ -127,7 +149,6 @@ public class Csp {
 			con.arcs = new Arc[con.arity];
 			for (int j = 0; j < con.arity; j++) {
 				arcs[index] = new Arc(con, con.vars[j], index);
-
 				arcs[index].csp = this;
 				con.arcs[j] = arcs[index];
 				index++;
@@ -141,7 +162,7 @@ public class Csp {
 
 	}
 
-	public void recordArcRelation( Constraint con, int start, int end) {
+	public void recordArcRelation(Constraint con, int start, int end) {
 		for (int i = start; i <= end; i++) {
 			Arc arc = arcs[i];
 			int index = 0;
@@ -182,8 +203,9 @@ public class Csp {
 	public Csp() {
 
 	}
+
 	public void printSolution() {
-		if(solutionExist){
+		if (solutionExist) {
 			System.out.print("solution:");
 			for (int i = 0; i < this.variables.length; i++) {
 				if (this.variables[i].currentValue == -1) {
@@ -198,9 +220,9 @@ public class Csp {
 				}
 			}
 			System.out.println();
-		}else{
+		} else {
 			System.out.print("no solution");
 		}
-		
+
 	}
 }
