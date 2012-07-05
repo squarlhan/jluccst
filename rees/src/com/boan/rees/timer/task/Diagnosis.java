@@ -242,6 +242,7 @@ public class Diagnosis
 											if(item.getSign()==1){
 												findAllItemFlag = true;
 												System.out.println("＝＝＝＝＝1.报警区间内，报警＝＝＝＝＝");
+												
 												if (item.getTroubleIds() != null && item.getTroubleIds().size() > 0)
 												{
 													//判断是否在报警区间
@@ -249,61 +250,65 @@ public class Diagnosis
 													
 													for(int kk = 0;kk<item.getTroubleIds().size();kk++)
 													{
-														BackwardandResult enter = new BackwardandResult();
-														enter.setId( "result" + item.getTroubleIds().get( kk ) );
-														listEnters.add( enter );
-													}
-													inferenceEngine.setEnter(listEnters);
-													inferenceEngine.setProcess(listEnters);
-													inferenceEngine.Inference("result to reason","fulfill");
-													
-													List<BackwardandReason> resultlist = inferenceEngine.getEnding();
-													
-													String errorPhen = "";
-													String errorReason = "";
-													String opinion = "";
-													for(int m=0;m<item.getTroubles().size();m++)
-													{
-														if(errorPhen.length() == 0)
+														if (item.getTroubles().get(kk).getDeviceTypeId().equals(deviceInfo.getDeviceTypeId()))
 														{
-															errorPhen = item.getTroubles().get( m ).getResult();
-														}else
-														{
-															errorPhen = errorPhen + ";" + item.getTroubles().get( m ).getResult();
+															BackwardandResult enter = new BackwardandResult();
+															enter.setId( "result" + item.getTroubleIds().get( kk ) );
+															listEnters.add( enter );
+															
+															inferenceEngine.setEnter(listEnters);
+															inferenceEngine.setProcess(listEnters);
+															inferenceEngine.Inference("result to reason","fulfill");
+															
+															List<BackwardandReason> resultlist = inferenceEngine.getEnding();
+															
+															String errorPhen = "";
+															String errorReason = "";
+															String opinion = "";
+															for(int m=0;m<item.getTroubles().size();m++)
+															{
+																if(errorPhen.length() == 0)
+																{
+																	errorPhen = item.getTroubles().get( m ).getResult();
+																}else
+																{
+																	errorPhen = errorPhen + ";" + item.getTroubles().get( m ).getResult();
+																}
+															}
+															for(int n=0;n<resultlist.size();n++)
+															{
+																if(errorReason.length() == 0)
+																{
+																	errorReason = resultlist.get( n ).getReasonName();
+																	opinion = resultlist.get( n ).getSuggestion().getSuggName();
+																}else
+																{
+																	errorReason = errorReason + ";" + resultlist.get( n ).getReasonName();
+																	opinion = opinion + ";" + resultlist.get( n ).getSuggestion().getSuggName();
+																}
+															}
+															
+															//返回结果，记录报警日志
+															ErrorLog errorLog = new ErrorLog();
+															String companyId = listDeviceInfo.get( i ).getCompanyId();
+															String factoryId =  listDeviceInfo.get( i ).getFactoryId();
+															String workshopId = listDeviceInfo.get( i ).getWorkshopId();
+															errorLog.setDeptName( groupService.getGroupFullName( companyId, factoryId, workshopId ) );
+															errorLog.setDeviceName( listDeviceInfo.get( i ).getDeviceName() + ":监测点[" + pointInfo.getControlPointName()+"]");
+															errorLog.setIsRemove( 0 );
+															errorLog.setDeviceNum( listDeviceInfo.get( i ).getDeviceNum() );
+															errorLog.setErrorTime( Calendar.getInstance() );
+															errorLog.setErrorData( Float.parseFloat( pdi.getDataInfo() ) );
+															errorLog.setErrorThresh( expression );
+															errorLog.setErrorPhen( errorPhen );
+															errorLog.setErrorReason( errorReason );
+															errorLog.setOpinion( opinion );
+															errorLog.setIsAlarm( 1 );
+															
+															errorLogService.save( errorLog );
+															break;
 														}
 													}
-													for(int n=0;n<resultlist.size();n++)
-													{
-														if(errorReason.length() == 0)
-														{
-															errorReason = resultlist.get( n ).getReasonName();
-															opinion = resultlist.get( n ).getSuggestion().getSuggName();
-														}else
-														{
-															errorReason = errorReason + ";" + resultlist.get( n ).getReasonName();
-															opinion = opinion + ";" + resultlist.get( n ).getSuggestion().getSuggName();
-														}
-													}
-													
-													//返回结果，记录报警日志
-													ErrorLog errorLog = new ErrorLog();
-													String companyId = listDeviceInfo.get( i ).getCompanyId();
-													String factoryId =  listDeviceInfo.get( i ).getFactoryId();
-													String workshopId = listDeviceInfo.get( i ).getWorkshopId();
-													errorLog.setDeptName( groupService.getGroupFullName( companyId, factoryId, workshopId ) );
-													errorLog.setDeviceName( listDeviceInfo.get( i ).getDeviceName() + ":监测点[" + pointInfo.getControlPointName()+"]");
-													errorLog.setIsRemove( 0 );
-													errorLog.setDeviceNum( listDeviceInfo.get( i ).getDeviceNum() );
-													errorLog.setErrorTime( Calendar.getInstance() );
-													errorLog.setErrorData( Float.parseFloat( pdi.getDataInfo() ) );
-													errorLog.setErrorThresh( expression );
-													errorLog.setErrorPhen( errorPhen );
-													errorLog.setErrorReason( errorReason );
-													errorLog.setOpinion( opinion );
-													errorLog.setIsAlarm( 1 );
-													
-													errorLogService.save( errorLog );
-													break;
 												}
 											}
 										}
