@@ -88,7 +88,7 @@
 					  </tr>
 						<tr>
 							<td height="90" colspan="3" rowspan="4" background="images/login_02.png">&nbsp;</td>
-							<td height="22" colspan="3" background="images/login_03.png"><input type="text" name="username" id="username" value="admin"
+							<td height="22" colspan="3" background="images/login_03.png"><input type="text" name="username" id="username" 
 										style="width:100px;height:13px;" maxlength="20"  onkeypress="mykeypress();"></td>
 							<td height="90" colspan="3" rowspan="4" background="images/login_04.png">&nbsp;</td>
 					  </tr>
@@ -96,7 +96,7 @@
 							<td height="22" colspan="3" background="images/login_05.png">&nbsp;</td>
 					  </tr>
 						<tr>
-							<td height="22" colspan="3" background="images/login_06.png"><input type="password" name="password" id="password" value="1111"
+							<td height="22" colspan="3" background="images/login_06.png"><input type="password" name="password" id="password"
 										style="width:100px;height:13px;" maxlength="20" onkeypress="mykeypress();"></td>
 					  </tr>
 						<tr>
