@@ -5,6 +5,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import Jama.Matrix;
+
 public class Reaction {
 	
 	String name;
@@ -117,6 +119,19 @@ public class Reaction {
     		}
     	}
     	return matrix;
+    }
+    
+    public int rank(int[][] matrix){
+    	int m = matrix.length;
+    	int n = matrix[0].length;
+    	double[][] dma = new double[m][n];
+    	for(int i= 0;i<=m-1;i++){
+    		for(int j= 0;j<=n-1;j++){
+    			dma[i][j] = matrix[i][j];
+    		}
+    	}
+    	Matrix ma = new Matrix(dma);
+    	return ma.rank();
     }
 
 	/**
