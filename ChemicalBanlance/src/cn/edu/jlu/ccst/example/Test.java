@@ -21,6 +21,7 @@ public class Test {
 		String rstr7="NaBiO3+MnSO4+H2SO4=Na2SO4+Bi2(SO4)3+NaMnO4+H2O";
 		String rstr8 = "CO+CO2+H2=CH4+H2O";
 		Reaction r = new Reaction(rstr8);
+
         for(Molecular m: r.getLeft()){
         	for(Atom a:m.getAtoms()){
     			System.out.print(a.getName()+a.getCount());

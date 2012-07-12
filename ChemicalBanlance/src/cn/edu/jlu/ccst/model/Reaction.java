@@ -90,7 +90,8 @@ public class Reaction {
 		}
 	}
 
-    public int[][] generatematrix(){
+	
+	public int[][] generatematrix(){
     	int m_num = left.size()+right.size();
 //    	map<String , Integer>
     	Set<String> atom_set= new HashSet();
