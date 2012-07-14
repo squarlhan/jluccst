@@ -1,5 +1,7 @@
 package cn.edu.jlu.ccst.constraint;
 
+import java.util.ArrayList;
+
 import cn.edu.jlu.ccst.model.Csp;
 
 public class Solver {
@@ -7,85 +9,50 @@ public class Solver {
 	public static void main(String[] args) {
 
 		// int[][] source=randomMatrix(2, 10,15);
-		int[][] source = { { 7, 6, -14, 3, 12, 1, 11, -1, -13, -10 },
-				{ 9, -5, -1, -14, 9, 3, 11, -9, -3, 9 }, };
-		int[] step = { 2, 4, 8, 10 };
-		int[] result = Solver.compute(source, step);
+		// int[][] source = { { 7, 6, -14, 3, 12, 1, 11, -1, -13, -10 },
+		// { 9, -5, -1, -14, 9, 3, 11, -9, -3, 9 }, };
+		// int[] step = { 2, 4, 8, 10 };
+		// int[] result = Solver.compute(source, step);
+		// for (int i = 0; i < result.length; i++) {
+		// System.out.print(result[i] + " ");
+		// }
+
+		int[][] source = { { 1, 1, 0, 0, 0, -1, 0, 0, 0, 0, 0 },
+				{ 0, 1, 0, 2, 0, -2, -1, -3, 0, -2,-2 },
+				{ 0, 0, 2, 0, 0, 0, -2, 0, -2, 0, -2 },
+				{ 0, 0, 0, 0, 1, 0, 0, 0, -1, -1, 0 }, };
+
+		int[][] result = Solver.computeValidSubReactions(source);
 		for (int i = 0; i < result.length; i++) {
 			System.out.print(result[i] + " ");
 		}
 
 	}
 
-//	/**
-//	 * 
-//	 * @param source输入的int初始矩阵
-//	 * @param step一个int数组
-//	 *            ，是求解范围， 从第一个开始，以step[i]作为X的取值范围，
-//	 *            如果step[i]范围内无解，则到step[i+1]范围内继续求解。
-//	 * 
-//	 * @return 一个int数组，是求得的解，如果返回结果长度为0，则无解。
-//	 */
-//	public static int[] compute(int[][] source, int step[]) {
-//		long head = System.nanoTime();
-//		SimplifiedMatrix simplifiedMatrix=new SimplifiedMatrix(source);
-//		simplifiedMatrix.init();
-//		System.out.println();
-//		simplifiedMatrix.printSource();
-//		int[] result = new int[0];
-//		for (int i = 0; i < step.length; i++) {
-//			result = compute(simplifiedMatrix, step[i]);
-//			if (result.length > 0) {
-//				break;
-//			} 
-//		}
-//		long end = System.nanoTime();
-//		System.out.println("totally cost "
-//				+ TimeTool.getSecondDoubleResult(head, end) + " seconds");
-//
-//		return result;
-//
-//	}
-//	
-//	private static int[] compute(SimplifiedMatrix matrix,int domSize) {
-//		Csp csp = new Csp(matrix,domSize);
-//		Mac mac;
-//		// if (solveRange > 100 || source[0].length > 5) {
-//		// mac = new FC(csp);
-//		// } else {
-//		mac = new Mac(csp);
-//		// }
-//		System.out.print("range= 1..." + domSize+" | ");
-//		return compute(mac);
-//
-//	}
-	
+
 	/**
 	 * 
-	 * @param source输入的int初始矩阵
-	 * @param step一个int数组
-	 *            ，是求解范围， 从第一个开始，以step[i]作为X的取值范围，
-	 *            如果step[i]范围内无解，则到step[i+1]范围内继续求解。
-	 * 
-	 * @return 一个int数组，是求得的解，如果返回结果长度为0，则无解。
+	 * @param source
+	 * @param step
+	 * @return
 	 */
-	public static int[] compute(int[][] source, int step[]) {
+	public static int[] computeBalance(int[][] source, int step[]) {
 		long head = System.nanoTime();
-		SimplifiedMatrix simplifiedMatrix=new SimplifiedMatrix(source);
+		SimplifiedMatrix simplifiedMatrix = new SimplifiedMatrix(source);
 		simplifiedMatrix.init();
 		System.out.println();
 		simplifiedMatrix.printSource();
 		int[] result = new int[0];
-		Csp csp=new Csp(simplifiedMatrix,step[0]);
+		Csp csp = new Csp(simplifiedMatrix, step[0]);
 		for (int i = 0; i < step.length; i++) {
-			if(i>0){
+			if (i > 0) {
 				csp.update(step[i]);
 			}
-			System.out.print("range= 1..." + step[i]+" | ");
-			result = compute(csp);
+			System.out.print("range= 1..." + step[i] + " | ");
+			result = computeBalance(csp);
 			if (result.length > 0) {
 				break;
-			} 
+			}
 		}
 		long end = System.nanoTime();
 		System.out.println("totally cost "
@@ -95,21 +62,13 @@ public class Solver {
 
 	}
 	
-	private static int[] compute(Csp csp) {
+	private static int[] computeBalance(Csp csp) {
 		Mac mac;
-		// if (solveRange > 100 || source[0].length > 5) {
-		// mac = new FC(csp);
-		// } else {
 		mac = new Mac(csp);
-		// }
-		
-		return compute(mac);
+		return computeBalance(mac);
 
 	}
-	
-	
-	
-	private static int[] compute(Mac mac){
+	private static int[] computeBalance(Mac mac){
 		mac.testMAC();
 		if (mac.success) {
 			System.out.print(" find solution ");
@@ -137,5 +96,38 @@ public class Solver {
 		}
 		return result;
 	}
+
+	public static int[][] computeValidSubReactions(int[][] source) {
+		long head = System.nanoTime();
+		Csp csp = new Csp(source);
+		int[][] result = computeValidSubReactions(csp);
+		long end = System.nanoTime();
+		System.out.println("totally cost "
+				+ TimeTool.getSecondDoubleResult(head, end) + " seconds");
+
+		return result;
+
+	}
+
+	private static int[][] computeValidSubReactions(Csp csp) {
+		Mac mac;
+		mac = new Mac(csp);
+		return computeSubReactions(mac);
+
+	}
+
+	private static int[][] computeSubReactions(Mac mac) {
+		ArrayList<int[]> resultList=mac.searchForAll();
+		mac.showResult();
+		int[][] result = new int[resultList.size()][];
+		for(int i=0;i<result.length;i++){
+			result[i]=new int[resultList.get(i).length]; 
+			for(int j=0;j<result[i].length;j++){
+				result[i][j]=mac.csp.variables[j].domain[resultList.get(i)[j]];
+			}
+		}
+		return result;
+	}
+
 
 }

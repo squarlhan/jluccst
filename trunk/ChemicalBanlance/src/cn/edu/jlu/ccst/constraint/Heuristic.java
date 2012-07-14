@@ -13,6 +13,7 @@ public class Heuristic {
 		csp = c;
 		variables = csp.variables;
 		fixedOrder=csp.varAssignOrder;
+		fixedOrder=ArrayTool.fill(0, csp.varNum);
 	}
 	
 	public int getIndex(int assignCount) {// dom-min
@@ -74,7 +75,7 @@ public class Heuristic {
 //	 if (currentDomainSize == 1)
 //	 continue;
 //	 if (!var.assigned) {
-//	 if (var.relatedCons.length == 0)// Éú³ÉÍ¼²»ÊÇÁ¬Í¨Í¼Ê±¿ÉÄÜ±¨´í
+//	 if (var.relatedCons.length == 0)// ï¿½ï¿½ï¿½Í¼ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¨Í¼Ê±ï¿½ï¿½ï¿½Ü±ï¿½ï¿½ï¿½
 //	 return i;
 //	 int currentDegree = 0;
 //	 for (int j = 0; j < var.relatedCons.length; j++) {

@@ -37,8 +37,8 @@ public class Csp {
 		matrix = source.matrix;
 		varNum = source.varNum;
 		cstNum = source.cstNum;
-		createVariables(varNum, domSize);
-		createConstraints(matrix);
+		createVariables(varNum, 1, domSize);
+		createConstraints(matrix, FOR_BALANCE);
 		varAssignOrder = source.varOrderForSearch;
 		for (int i = 0; i < cstNum; i++) {
 			constraints[i].varOrderForGetTuple = source.varOrderForGetTuple[i];
@@ -54,20 +54,23 @@ public class Csp {
 		createArcs();
 	}
 
-	public void createConstraints(int[][] source) {
+	public static final int FOR_BALANCE = 0;
+	public static final int FOR_SUB_REACTION = 1;
+
+	public void createConstraints(int[][] source, int conKind) {
 		constraints = new Constraint[cstNum];
 		for (int i = 0; i < cstNum; i++) {
 			int[] array = new int[varNum];
 			for (int j = 0; j < varNum; j++) {
 				array[j] = source[i][j];
 			}
-			constraints[i] = createConstraint(i, array);
+			constraints[i] = createConstraint(i, array, conKind);
 		}
 
 	}
 
-
-	public Constraint createConstraint(int id, int[] source) {
+	public Constraint createConstraint(int id, int[] source,
+			int conKind) {
 		Constraint con = new Constraint();
 		con.id = id;
 		String positiveExp = "";
@@ -76,7 +79,7 @@ public class Csp {
 		int varLocation = 0;
 		for (int i = 0; i < source.length; i++) {
 			if (source[i] > 0) {
-				positiveExp = addParameter(positiveExp, source[i],
+				positiveExp = addParameter(conKind, positiveExp, source[i],
 						varLocation);
 				varLocation++;
 				tempVarsId.add(i);
@@ -85,12 +88,16 @@ public class Csp {
 		}
 		for (int i = 0; i < source.length; i++) {
 			if (source[i] < 0) {
-				negativeExp = addParameter(negativeExp, 0-source[i],
+				negativeExp = addParameter(conKind, negativeExp, 0 - source[i],
 						varLocation);
 				varLocation++;
 				tempVarsId.add(i);
 				variables[i].tempRels.add(con);
 			}
+		}
+		if (conKind == FOR_SUB_REACTION) {
+			positiveExp = "eq(" + positiveExp + "," + 0 + ")";
+			negativeExp = "eq(" + negativeExp + "," + 0 + ")";
 		}
 		String expression = "eq(" + positiveExp + "," + negativeExp + ")";
 		con.expression = expression;
@@ -99,39 +106,51 @@ public class Csp {
 		for (int i = 0; i < con.arity; i++) {
 			con.vars[i] = variables[tempVarsId.get(i)];
 		}
-	
-		
-		
+
 		con.predicate = Predicate.parse(expression);
 		con.predicate.vars = con.vars;
 		con.testTuple = new int[con.arity];
 		return con;
 	}
 
-	
-	public String addParameter(String old, int param, int varLocation) {
+
+	public String addParameter(int conKind, String old, int param,
+			int varLocation) {
 		if (old.trim().equals("")) {
 			if (param == 1) {
 				old = "X" + varLocation;
 			}
 			if (param > 1) {
-				old = "mul(" + param + "," + "X" + varLocation + ")";
+				if (conKind == FOR_BALANCE) {
+					old = "mul(" + param + "," + "X" + varLocation + ")";
+				} else {
+					if (conKind == FOR_SUB_REACTION) {
+						old = "X" + varLocation;
+					}
+				}
 			}
 		} else {
 			if (param == 1) {
 				old = "add(" + old + ",X" + varLocation + ")";
 			}
 			if (param > 1) {
-				old = "add(" + old + ",mul(" + param + "," + "X" + varLocation
-						+ "))";
+				if (conKind == FOR_BALANCE) {
+					old = "add(" + old + ",mul(" + param + "," + "X"
+							+ varLocation + "))";
+				} else {
+					if (conKind == FOR_SUB_REACTION) {
+						old = "add(" + old +  ",X"
+								+ varLocation + ")";
+					}
+				}
 			}
 		}
 		return old;
 	}
 
-	public void createVariables(int varNum, int domSize) {
+	public void createVariables(int varNum, int start, int domSize) {
 		variables = new Variable[varNum];
-		int[] domain = ArrayTool.fill(1, domSize + 1);
+		int[] domain = ArrayTool.fill(start, domSize + start);
 		for (int i = 0; i < varNum; i++) {
 			variables[i] = new Variable(i, domain);
 		}
@@ -176,18 +195,15 @@ public class Csp {
 
 	public boolean testSolution() {
 		if (!this.solutionExist) {
-			// System.out.println("问题无解，无法测试解正确性");
 			return true;
 		}
 		for (int i = 0; i < this.variables.length; i++)
 			if (this.variables[i].currentValue == -1) {
-				System.out.println("变量" + i + "未赋值");
 				return false;
 			}
 		for (int i = 0; i < this.constraints.length; i++) {
 			Constraint con = this.constraints[i];
 			if (!con.testSatisfy()) {
-				System.out.print("不满足方程" + i + " : ");
 				for (int j = 0; j < con.arity; j++) {
 					System.out.print("X" + con.vars[j].id + "="
 							+ con.vars[j].getSolutionValue() + " ,");
@@ -209,10 +225,10 @@ public class Csp {
 			System.out.print("solution:");
 			for (int i = 0; i < this.variables.length; i++) {
 				if (this.variables[i].currentValue == -1) {
-					System.out.println("X" + i + "未赋值");
+					System.out.println("X" + i + "未锟斤拷值");
 				} else {
 					System.out
-							.print("变量"
+							.print("锟斤拷锟斤拷"
 									+ i
 									+ "="
 									+ this.variables[i].domain[this.variables[i].currentValue]
@@ -225,4 +241,15 @@ public class Csp {
 		}
 
 	}
+
+	public Csp(int[][] source) {// 缂╁噺璁＄畻瀛愬弽搴旇寖鍥寸敤
+		matrix = source;
+		varNum = source[0].length;
+		cstNum = source.length;
+		createVariables(varNum, 0, 2);
+		createConstraints(matrix,FOR_SUB_REACTION);
+		init();
+	}
+
+
 }
