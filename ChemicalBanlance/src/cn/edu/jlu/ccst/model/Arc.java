@@ -4,7 +4,6 @@ package cn.edu.jlu.ccst.model;
 
 
 public class Arc {
-	public Arc next;
 	public final Constraint con;
 	public final Variable var;
 	public final int id;
