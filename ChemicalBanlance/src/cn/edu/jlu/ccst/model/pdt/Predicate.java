@@ -12,6 +12,7 @@ public abstract class Predicate {
 	public static final String DIV = "div";
 	public static final String EQ = "eq";
 
+
 	public static final int TRUE = 1;
 	public static final int FALSE = -1;
 
