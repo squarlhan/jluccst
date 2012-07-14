@@ -49,7 +49,7 @@ public class Test {
 		System.out.println("rank: "+rk);
 		System.out.println("number of solutions: "+(matrix[0].length-rk));
 		int[] step = {10,20,30,40,50,60,70,80,90,100,300,500,1000,5000,10000 };
-		int[] result = Solver.compute(matrix, step);
+		int[] result = Solver.computeBalance(matrix, step);
 		System.out.println();
 		for(int i=0;i<= r.getLeft().size()-1;i++){
 			Molecular m =r.getLeft().get(i);
