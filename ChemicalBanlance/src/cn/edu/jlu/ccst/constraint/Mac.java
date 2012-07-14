@@ -1,5 +1,9 @@
 package cn.edu.jlu.ccst.constraint;
 
+import java.util.ArrayList;
+
+import Jama.Matrix;
+
 import cn.edu.jlu.ccst.model.Arc;
 import cn.edu.jlu.ccst.model.Constraint;
 import cn.edu.jlu.ccst.model.Csp;
@@ -33,12 +37,12 @@ public class Mac {
 	public Mac(Csp c) {
 		level = 0;
 		csp = c;
-		
+
 		totalLevel = csp.variables.length;
 		assignedIndexs = new int[totalLevel + 1];
 		level = 0;
 		stack = new Stack(c);
-//		csp.init();
+		// csp.init();
 		queue = new Queue(csp.arcs.length);
 		heuristic = new Heuristic(csp);
 	}
@@ -92,8 +96,6 @@ public class Mac {
 	}
 
 	public boolean propagate(Variable var, int index) {
-//		 if (var.next[var.head] == -1)
-//		 return true;
 		var.reduceTo(index, level);
 		addAllOutArcs(var);
 		return ac(level);
@@ -121,6 +123,7 @@ public class Mac {
 		initQueue();
 		return ac(0);
 	}
+
 	public boolean ac(int deleteLevel) {
 		while (queue.getSize() != 0) {
 			Arc arc = queue.selectArc();
@@ -134,9 +137,9 @@ public class Mac {
 				} else {
 					for (int i = 0; i < current.outArcs.length; i++) {
 						if (current.outArcs[i].con.id != arc.con.id)
-//							if (current.outArcs[i].con.arity <= 3) {
-								queue.add(current.outArcs[i]);
-//							}
+							// if (current.outArcs[i].con.arity <= 3) {
+							queue.add(current.outArcs[i]);
+						// }
 					}
 				}
 			}
@@ -157,6 +160,7 @@ public class Mac {
 			queue.add(csp.arcs[i]);
 		}
 	}
+
 	public void testMAC() {
 		long head = 0, end = 0;
 		head = System.nanoTime();
@@ -164,7 +168,7 @@ public class Mac {
 		end = System.nanoTime();
 		if (success) {
 			if (!csp.testSolution()) {
-				System.out.println("!!!!!!!´íÎó½â, ");
+				System.out.println("!!!!!!!é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿï¿½ ");
 			}
 		}
 		checkTimes = Constraint.checkTime;
@@ -184,4 +188,130 @@ public class Mac {
 		return resultString;
 	}
 
+	public ArrayList<int[]> searchForAll() {
+		ArrayList<int[]> result = new ArrayList<int[]>();
+		if (!initAC()) {
+			return result;
+		}
+		level++;
+		stack.init();
+		while (level > 0) {
+			visitedNodes++;
+			Variable current = csp.variables[heuristic.getIndex(level)];
+			int value = current.getAValue();
+			stack.push(level);
+			current.currentValue = value;
+			if (!propagate(current, value)) {
+				if (level == 1) {
+					if (!propagateAbolishment(current)) {
+						return result;
+					}
+				} else {
+					boolean loop = propagateAbolishment(current);
+					while (!loop) {
+						level--;
+						backCount++;
+						if (level < 1)
+							return result;
+						current = csp.variables[assignedIndexs[level]];
+						for (int i = 0; i < current.relatedCons.length; i++) {
+							current.relatedCons[i].currentAssignCount--;
+						}
+						loop = propagateAbolishment(current);
+
+					}
+				}
+			} else {
+				assignedIndexs[level] = current.id;
+				current.assigned = true;
+				level++;
+				for (int i = 0; i < current.relatedCons.length; i++) {
+					current.relatedCons[i].currentAssignCount++;
+				}
+				if (level > totalLevel) {
+					int[] solution = new int[totalLevel];
+					for (int i = 0; i < totalLevel; i++) {
+						solution[i] = csp.variables[i].currentValue;
+					}
+					if (testValid(solution) ) {
+						result.add(solution);
+					}
+
+					for (int i = 0; i < current.relatedCons.length; i++) {
+						current.relatedCons[i].currentAssignCount--;
+					}
+					level--;
+					boolean loop = propagateAbolishment(current);
+					while (!loop) {
+						level--;
+						backCount++;
+						if (level < 1)
+							return result;
+						current = csp.variables[assignedIndexs[level]];
+						for (int i = 0; i < current.relatedCons.length; i++) {
+							current.relatedCons[i].currentAssignCount--;
+						}
+						loop = propagateAbolishment(current);
+
+					}
+
+				}
+
+			}
+
+		}
+
+		return result;
+	}
+	
+	public boolean testValid(int[] tempSol) {
+		ArrayList<Integer> sol=new ArrayList<Integer>(tempSol.length);
+		for(int i=0;i<tempSol.length;i++){
+			if(tempSol[i]!=0){
+				sol.add(i);
+			}
+		}
+		if(sol.size()==0){
+			return false;
+		}
+		int[][] source = csp.matrix;
+		int[][] testMatrix = new int[csp.matrix.length][sol.size()];
+		for (int j = 0; j < sol.size(); j++) {
+			for (int i = 0; i < csp.matrix.length; i++) {
+				testMatrix[i][j] = source[i][sol.get(j)];
+			}
+		}
+		Matrix ma=getMatrix(testMatrix);
+		int rank=ma.rank();
+		int result=sol.size()-rank;
+		return result==1;
+	}
+
+	public Matrix getMatrix(int[][] matrix){
+		int m = matrix.length;
+		int n = matrix[0].length;
+		double[][] dma = new double[m][n];
+		for (int i = 0; i <= m - 1; i++) {
+			for (int j = 0; j <= n - 1; j++) {
+				dma[i][j] = matrix[i][j];
+			}
+		}
+		Matrix ma = new Matrix(dma);
+		return ma;
+	}
+	
+	public int rank(int[][] matrix) {
+		int m = matrix.length;
+		int n = matrix[0].length;
+		
+		double[][] dma = new double[m][n];
+		for (int i = 0; i <= m - 1; i++) {
+			for (int j = 0; j <= n - 1; j++) {
+				dma[i][j] = matrix[i][j];
+			}
+		}
+		Matrix ma = new Matrix(dma);
+		
+		return ma.rank();
+	}
 }

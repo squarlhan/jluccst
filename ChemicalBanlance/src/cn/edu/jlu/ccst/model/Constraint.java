@@ -19,7 +19,7 @@ public class Constraint {
 	public static long checkTime = 0;
 	
 	
-	public int[] getNextValidTuple(int varIndex, int varValue,
+	public int[] getNextValidTuple1(int varIndex, int varValue,
 			int[] currentTuple) {
 		for (int i = arity - 1; i >= 0; i--) {
 			if (varOrderForGetTuple[i] != varIndex) {
@@ -35,6 +35,24 @@ public class Constraint {
 
 		return null;
 	}
+	
+	public int[] getNextValidTuple(int varIndex, int varValue,
+			int[] currentTuple) {
+		for (int i = arity - 1; i >= 0; i--) {
+			if (i != varIndex) {
+				int value = vars[i].next[currentTuple[i]];
+				if (value == -1)
+					currentTuple[i] = vars[i].head;
+				else {
+					currentTuple[i] = value;
+					return currentTuple;
+				}
+			}
+		}
+
+		return null;
+	}
+
 
 	public int[] getFirstValidTuple(int varIndex, int varValue) {
 		int[] result = new int[arity];
