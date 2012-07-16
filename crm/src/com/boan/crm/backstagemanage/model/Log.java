@@ -11,7 +11,15 @@ package com.boan.crm.backstagemanage.model;
 
 import java.util.Calendar;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
 import org.apache.commons.lang.StringUtils;
+import org.hibernate.annotations.GenericGenerator;
+import org.springframework.beans.factory.annotation.Qualifier;
 
 import com.boan.crm.backstagemanage.common.LogType;
 import com.boan.crm.utils.calendar.CurrentDateTime;
@@ -22,15 +30,14 @@ import com.boan.crm.utils.calendar.CurrentDateTime;
  * @author XXX
  * @version 1.0.0
  */
-public class Log implements java.io.Serializable
-{
+@Entity
+@Table(name = "SYS_LOG")
+public class Log implements java.io.Serializable {
 
-	public Log()
-	{
+	public Log() {
 	}
 
-	public Log( int logDate )
-	{
+	public Log(int logDate) {
 		this.logDate = logDate;
 	}
 
@@ -42,204 +49,192 @@ public class Log implements java.io.Serializable
 	/**
 	 * 主键ID
 	 */
+	@Id
+	@GenericGenerator(name = "system-uuid", strategy = "uuid")
+	@GeneratedValue(generator = "system-uuid")
 	private String id = null;
 
 	/**
 	 * 日志类别0表示信息；1表示警告；2表示错误
 	 */
+	@Column(name = "LOG_TYPE")
 	private int logType = 0;
 
 	/**
 	 * 日志内容
 	 */
+	@Column(name = "LOG_CONTENT")
 	private String logContent = null;
 
 	/**
 	 * 创建时间
 	 */
+	@Column(name = "CREATE_TIME")
 	private Calendar createTime = Calendar.getInstance();
-	
+
 	/**
 	 * 集团名称
 	 */
+	@Column(name = "UNIT_NAME")
 	private String unitName = null;
-	
+
 	/**
 	 * 集团id
 	 */
+	@Column(name = "UNIT_ID")
 	private String unitId = null;
 
 	/**
-	 * 组id 
+	 * 组id
 	 */
+	@Column(name = "DEPT_ID")
 	private String deptId = null;
-	
+
 	/**
 	 * 所在组名
 	 */
+	@Column(name = "DEPT_NAME")
 	private String deptName = null;
-	
+
 	/**
 	 * 用户id
 	 */
+	@Column(name = "USER_ID")
 	private String userId = null;
 	/**
 	 * 用户姓名
 	 */
+	@Column(name = "USER_NAME")
 	private String userName = null;
 
 	/**
 	 * 用户IP
 	 */
+	@Column(name = "USER_IP")
 	private String userIp = null;
 
 	/**
 	 * 日期格式如20090115，用于过滤某一天的日志，便于日志归档
 	 */
+	@Column(name = "LOG_DATE")
 	private int logDate = 0;
-	
-	public String getId()
-	{
+
+	public String getId() {
 		return id;
 	}
 
-	public void setId( String id )
-	{
+	public void setId(String id) {
 		this.id = id;
 	}
 
-	public int getLogType()
-	{
+	public int getLogType() {
 		return logType;
 	}
-	public String getLogTypeMean()
-	{
-		return LogType.getMean( logType );
+
+	public String getLogTypeMean() {
+		return LogType.getMean(logType);
 	}
-	public void setLogType( int logType )
-	{
+
+	public void setLogType(int logType) {
 		this.logType = logType;
 	}
 
-	public String getLogContent()
-	{
+	public String getLogContent() {
 		return logContent;
 	}
 
-	public void setLogContent( String logContent )
-	{
+	public void setLogContent(String logContent) {
 		this.logContent = logContent;
 	}
 
-	public Calendar getCreateTime()
-	{
+	public Calendar getCreateTime() {
 		return createTime;
 	}
 
-	public String getCreateTimeEn()
-	{
-		return CurrentDateTime.getCurrentDateTime( createTime );
+	public String getCreateTimeEn() {
+		return CurrentDateTime.getCurrentDateTime(createTime);
 	}
-	public void setCreateTime( Calendar createTime )
-	{
+
+	public void setCreateTime(Calendar createTime) {
 		this.createTime = createTime;
 	}
 
-	public String getUserName()
-	{
+	public String getUserName() {
 		return userName;
 	}
 
-	public void setUserName( String userName )
-	{
+	public void setUserName(String userName) {
 		this.userName = userName;
 	}
 
-	public String getUserIp()
-	{
+	public String getUserIp() {
 		return userIp;
 	}
 
-	public void setUserIp( String userIp )
-	{
+	public void setUserIp(String userIp) {
 		this.userIp = userIp;
 	}
 
-	public static long getSerialversionuid()
-	{
+	public static long getSerialversionuid() {
 		return serialVersionUID;
 	}
 
-
-	public int getLogDate()
-	{
+	public int getLogDate() {
 		return logDate;
 	}
 
-	public void setLogDate( int logDate )
-	{
+	public void setLogDate(int logDate) {
 		this.logDate = logDate;
 	}
 
-	public String getDeptId()
-	{
+	public String getDeptId() {
 		return deptId;
 	}
 
-	public void setDeptId( String deptId )
-	{
+	public void setDeptId(String deptId) {
 		this.deptId = deptId;
 	}
 
-	public String getDeptName()
-	{
+	public String getDeptName() {
 		return deptName;
 	}
 
-	public void setDeptName( String deptName )
-	{
+	public void setDeptName(String deptName) {
 		this.deptName = deptName;
 	}
 
-	public String getUserId()
-	{
+	public String getUserId() {
 		return userId;
 	}
 
-	public void setUserId( String userId )
-	{
+	public void setUserId(String userId) {
 		this.userId = userId;
 	}
 
-	public String getUnitName()
-	{
+	public String getUnitName() {
 		return unitName;
 	}
 
-	public void setUnitName( String unitName )
-	{
+	public void setUnitName(String unitName) {
 		this.unitName = unitName;
 	}
 
-	public String getUnitId()
-	{
+	public String getUnitId() {
 		return unitId;
 	}
 
-	public void setUnitId( String unitId )
-	{
+	public void setUnitId(String unitId) {
 		this.unitId = unitId;
 	}
+
 	/**
 	 * 包括集团在内的组的全名
 	 */
-	public String getDeptFullName()
-	{
+	public String getDeptFullName() {
 		String fullName = this.unitName;
-		
-		if( StringUtils.isNotBlank( this.deptName ) )
-		{
-			fullName +=  "→" + this.deptName;
+
+		if (StringUtils.isNotBlank(this.deptName)) {
+			fullName += "→" + this.deptName;
 		}
 		return fullName;
 	}
