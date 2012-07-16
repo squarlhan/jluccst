@@ -59,6 +59,18 @@ public class Company {
 	private String companyName;
 	
 	/**
+	 * 传真
+	 */
+	@Column(name="FAX")
+	private String fax;
+	
+	/**
+	 * 法人
+	 */
+	@Column(name="CORPORATION")
+	private String corporation;
+	
+	/**
 	 * 公司排序号
 	 */
 	@Column(name = "SORT_INDEX")
@@ -128,5 +140,21 @@ public class Company {
 
 	public void setCreateTime(Calendar createTime) {
 		this.createTime = createTime;
+	}
+
+	public String getFax() {
+		return fax;
+	}
+
+	public void setFax(String fax) {
+		this.fax = fax;
+	}
+
+	public String getCorporation() {
+		return corporation;
+	}
+
+	public void setCorporation(String corporation) {
+		this.corporation = corporation;
 	}
 }
