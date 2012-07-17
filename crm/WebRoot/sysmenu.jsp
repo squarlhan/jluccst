@@ -151,7 +151,7 @@
 												<img src="images/menuto.jpg" width="5" height="5" />
 											</td>
 											<td>
-												<a href="customerReaserch.html" target="mainFrame">系统日志</a>
+												<a href="backstagemanage/logmanage.jsp" target="mainFrame">系统日志</a>
 											</td>
 										</tr>
 									</table>
