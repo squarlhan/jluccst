@@ -3,6 +3,7 @@ package cn.edu.jlu.ccst.example;
 import cn.edu.jlu.ccst.constraint.Solver;
 import cn.edu.jlu.ccst.model.Atom;
 import cn.edu.jlu.ccst.model.MatrixOperation;
+import cn.edu.jlu.ccst.model.MatrixSolver;
 import cn.edu.jlu.ccst.model.Molecular;
 import cn.edu.jlu.ccst.model.Reaction;
 
@@ -39,6 +40,7 @@ public class Test {
         
         int[][] matrix = r.generatematrix();
         MatrixOperation mop = new MatrixOperation(matrix);
+        MatrixSolver ms = new MatrixSolver(matrix);
         
 		for (int i = 0; i < matrix.length; i++) {
 			System.out.println();
@@ -48,8 +50,8 @@ public class Test {
 			
 		}
 		System.out.println();
-		int rk = mop.rank();
-		double[] ans = mop.solve();
+		int rk =  ms.getRank();
+		int[][] ans = ms.solve();
 		System.out.println("rank: "+rk);
 		System.out.println("number of solutions: "+(matrix[0].length-rk));
 		int[] step = {10,20,30,40,50,60,70,80,90,100,300,500,1000,5000,10000 };
@@ -76,9 +78,11 @@ public class Test {
 		}
 		
 		System.out.println();
-		for (int i = 0; i < ans.length; i++) {
-			System.out.println(ans[i]);
+		for (int i = 0; i <= ans.length-1; i++) {
+			for(int j = 0;j<=ans[0].length-1;j++)
+			System.out.print(ans[i][j]+"\t");
 		}
+		System.out.println();
 	}
 
 }
