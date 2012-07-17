@@ -44,30 +44,6 @@
 	<script type="text/javascript">
 	
 		$(function(){
-			
-			$("#addbtn").click(function(){
-				parent.parent.tipsWindown("添加公司档案","iframe:openAddCompanyAction.action","460","280","true","","true","no");
-				parent.parent.$("#windown-close").bind('click',function(){
-					window.location.href="./openCompanyAction.action";
-				});
-		
-			});
-			$.fn.checkall("cbk_all");
-	  		$.fn.uncheckall("ids","cbk_all");
-
-	  		/**
-	  		 * 修改公司信息
-	  		 */
-	  		$('a[name="edit"]').each(function(){
-	  			$(this).click(function(){
-	  				var url = $(this).attr("url");
-	  				parent.parent.tipsWindown("修改公司档案","iframe:"+url,"460","280","true","","true","no");
-	  				parent.parent.$("#windown-close").bind('click',function(){
-						window.location.href="./openCompanyAction.action";
-					});
-	  			});
-	  		});
-	  		
 	  		/**
 	  		 * 删除单个设备信息
 	  		 */
@@ -102,43 +78,30 @@
     <td valign="top"><table width="100%" border="0" cellspacing="5" cellpadding="0">
       <tr>
         <td>
-       		<input name="addbtn" type="button" class="btn_2_3" id="addbtn" value="添加" >
-            <input name="deletepointbtn" type="button" class="btn_4" id="deletepointbtn" value="删除所选">
+            <input name="deletepointbtn" type="button" class="btn_4" id="deletepointbtn" value="清空日志">
         <td align="right"></td>
       </tr>
     </table>
       <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#d5e4fd">
         <tr>
-         <td align="center" background="<%=path %>/images/headerbg.jpg">  
-   				<s:checkbox theme="simple" id="cbk_all" name="all"></s:checkbox>
-   			</td>
+              <td align="center" background="<%=path %>/images/headerbg.jpg"><strong>类型</strong></td>
               <td align="center" background="<%=path %>/images/headerbg.jpg"><strong>公司名称</strong></td>
-              <td align="center" background="<%=path %>/images/headerbg.jpg"><strong>法人</strong></td>
-              <td align="center" background="<%=path %>/images/headerbg.jpg"><strong>公司地址</strong></td>
-              <td align="center" background="<%=path %>/images/headerbg.jpg"><strong>公司电话</strong></td>
-               <td align="center" background="<%=path %>/images/headerbg.jpg"><strong>传真</strong></td>
-              <td align="center" background="<%=path %>/images/headerbg.jpg"><strong>操作</strong></td>
+              <td align="center" background="<%=path %>/images/headerbg.jpg"><strong>部门名称</strong></td>
+              <td align="center" background="<%=path %>/images/headerbg.jpg"><strong>操作人</strong></td>
+              <td align="center" background="<%=path %>/images/headerbg.jpg"><strong>操作内容</strong></td>
+               <td align="center" background="<%=path %>/images/headerbg.jpg"><strong>记录时间</strong></td>
         </tr>
         <s:iterator value="pagination.data" status="obj">
         <tr>
-        <td height="26" align="center" bgcolor="#FFFFFF" >  
-				<s:checkbox id="%{#obj.id}" name="ids" fieldValue="%{id}" value="false" theme="simple"/>
-			</td>
+				 <td height="26" align="center" bgcolor="#FFFFFF">
+				 	<img width="16px" height="16px" src="<%=path %>/images/log/log<s:property value="logType" />.gif">
+					<s:property value="logTypeMean" />
+				</td>
               <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="companyName"/></td>
-              <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="corporation"/></td>
-              <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="address"/></td>
-                <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="phone"/></td>
-                <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="fax"/></td>
-          <td height="26" colspan="2" align="center" bgcolor="#FFFFFF">
-          	<s:url id="edit_url" action="openModifyCompanyAction">   
-				<s:param name="company.id" value="id"></s:param>   
-			</s:url>
-			<s:url id="delete_url" action="deleteCompanyAction">   
-				<s:param name="ids" value="id"></s:param>   
-			</s:url>
-         	<a name="edit" href="javascript:void(0);" url="${edit_url}">编辑</a>  
-         	<a name="delete" href="javascript:void(0);" url="${delete_url}">删除</a>  
-          </td>
+              <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="deptName"/></td>
+              <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="userName"/></td>
+                <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="logContent"/></td>
+                <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="createTimeEn"/></td>
         </tr>
         </s:iterator>        
         <tr>
