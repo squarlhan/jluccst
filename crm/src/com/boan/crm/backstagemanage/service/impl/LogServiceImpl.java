@@ -9,16 +9,18 @@
 
 package com.boan.crm.backstagemanage.service.impl;
 
-import java.io.File;
 import java.util.Calendar;
 import java.util.List;
 
-import org.hibernate.criterion.DetachedCriteria;
-import org.hibernate.criterion.Property;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
 
 import com.boan.crm.backstagemanage.dao.ILogDao;
+import com.boan.crm.backstagemanage.model.Company;
 import com.boan.crm.backstagemanage.model.Log;
 import com.boan.crm.backstagemanage.service.ILogService;
+import com.boan.crm.utils.page.Pagination;
 
 /**
  * 日志ServiceImpl类
@@ -26,68 +28,43 @@ import com.boan.crm.backstagemanage.service.ILogService;
  * @author XXX
  * @version 1.0.0
  */
-public class LogServiceImpl implements ILogService
-{
-
+@Service("logService")
+public class LogServiceImpl implements ILogService {
+	@Autowired
+	@Qualifier("logDao")
 	private ILogDao dao = null;
 
-	public void deleteLog( Calendar beginTime, Calendar endTime )
-			throws Exception
-	{
-		dao.deleteLog( beginTime, endTime );
+	public void deleteLog(Calendar beginTime, Calendar endTime) throws Exception {
+		dao.deleteLog(beginTime, endTime);
 	}
 
-	public List<Log> queryLogList( Calendar beginTime, Calendar endTime )
-			throws Exception
-	{
-		return dao.queryLogList( beginTime, endTime );
+	public List<Log> queryLogList(Calendar beginTime, Calendar endTime) throws Exception {
+		return dao.queryLogList(beginTime, endTime);
 	}
 
-	public List<Log> queryLogListByPage( Log log,Calendar beginTime, Calendar endTime, int begin, int maxResult ) throws Exception
-	{
-		return dao.queryLogListByPage( log, beginTime, endTime, begin, maxResult );
+	public Pagination<Log>  queryLogListByPage(Log log, Calendar beginTime, Calendar endTime,Pagination<Log> pagination) throws Exception {
+		 
+		 String hql = "from Log order by  createTime asc";
+		List<Log> data = dao.findForPage(hql, null, pagination.getStartIndex(), pagination.getPageSize());
+		hql = "select count(*) from Log";
+		int totalRows = dao.findCountForPage(hql, null);
+		pagination.setTotalRows(totalRows);
+		pagination.setData(data);
+		return pagination;
+		 
+		//return dao.queryLogListByPage(log, beginTime, endTime, begin, maxResult);
+		
 	}
 
-	public int queryLogListCount( Calendar beginTime, Calendar endTime ) throws Exception
-	{
-		return dao.queryLogListCount( beginTime, endTime );
+	public int queryLogListCount(Calendar beginTime, Calendar endTime) throws Exception {
+		return dao.queryLogListCount(beginTime, endTime);
 	}
 
-	public int queryLogListCountByPage( Log log, Calendar beginTime, Calendar endTime ) throws Exception
-	{
-		return dao.queryLogListCountByPage( log, beginTime, endTime );
+	public int queryLogListCountByPage(Log log, Calendar beginTime, Calendar endTime) throws Exception {
+		return dao.queryLogListCountByPage(log, beginTime, endTime);
 	}
 
-	public void saveLog( Log log ) throws Exception
-	{
-		dao.saveLog( log );
-	}
-
-	public ILogDao getDao()
-	{
-		return dao;
-	}
-
-	public void setDao( ILogDao dao )
-	{
-		this.dao = dao;
-	}
-
-
-	private List<Log> queryLogDateList( Calendar endTime ) throws Exception
-	{
-		return dao.queryLogDateList( endTime );
-	}
-	/**
-	 * 创建日志目录
-	 * @param logDir
-	 */
-	private void createLogDir( String logDir )
-	{
-		File file = new File(logDir);
-		if (!file.exists()) 
-		{
-			file.mkdirs();
-		}
+	public void saveLog(Log log) throws Exception {
+		dao.saveLog(log);
 	}
 }

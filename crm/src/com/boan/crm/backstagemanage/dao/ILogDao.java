@@ -14,7 +14,9 @@ import java.util.List;
 
 import org.hibernate.criterion.DetachedCriteria;
 
+import com.boan.crm.backstagemanage.model.Company;
 import com.boan.crm.backstagemanage.model.Log;
+import com.boan.crm.utils.dao.IBaseDao;
 
 
 /**
@@ -23,7 +25,8 @@ import com.boan.crm.backstagemanage.model.Log;
  * @author XXX
  * @version 1.0.0
  */
-public interface ILogDao {
+public interface ILogDao extends IBaseDao<Log,String>
+{
 
 	/**
 	 * 保存日志
