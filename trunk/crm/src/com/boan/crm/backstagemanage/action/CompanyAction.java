@@ -140,6 +140,23 @@ public class CompanyAction extends BaseActionSupport {
 	 * @return
 	 */
 	public String deleteCompany() {
+		// 保存日志开始
+		if( ids != null && ids.length > 0 )
+		{
+			Company com = null;
+			Log log = null;
+			for( int i = 0; i < ids.length; i++ ){
+				com = service.get(ids[i]);
+				if(  com != null )
+				{
+					log = new Log();
+					log.setLogType(LogType.INFO);
+					log.setLogContent("[" + com.getCompanyName() + "]" + "公司信息删除成功");
+					super.saveLog(log);
+				}
+			}
+		}
+		//保存日志结束
 		service.deleteGroupCompany(ids);
 		return NONE;
 	}
