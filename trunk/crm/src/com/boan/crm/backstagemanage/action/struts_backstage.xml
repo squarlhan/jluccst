@@ -27,4 +27,9 @@
 		</action>
 		<action name="deleteCompanyAction" class="companyAction" method="deleteCompany" />
 	</package>
+	    <package name="log" extends="struts-default">
+    	<action name="logAction" class="logAction">
+    		<result name="log-list">/backstagemanage/loglist.jsp</result>
+    	</action>
+    </package>
 </struts>

@@ -13,6 +13,7 @@ import java.util.Calendar;
 import java.util.List;
 
 import com.boan.crm.backstagemanage.model.Log;
+import com.boan.crm.utils.page.Pagination;
 
 
 /**
@@ -62,7 +63,7 @@ public interface ILogService {
 	 * @return
 	 * @throws Exception
 	 */
-	public List<Log> queryLogListByPage( Log log, Calendar beginTime, Calendar endTime, int begin, int maxResult ) throws Exception;
+	public Pagination<Log>  queryLogListByPage( Log log, Calendar beginTime, Calendar endTime, Pagination<Log> pagination) throws Exception;
 	/**
 	 * 用于显示指定时间段内的日志列表总数
 	 * 

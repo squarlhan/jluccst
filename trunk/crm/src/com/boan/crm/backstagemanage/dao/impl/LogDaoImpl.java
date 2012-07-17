@@ -18,6 +18,7 @@ import java.util.Map;
 import org.apache.commons.lang.StringUtils;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
+import org.springframework.stereotype.Repository;
 
 import com.boan.crm.backstagemanage.dao.ILogDao;
 import com.boan.crm.backstagemanage.model.Company;
@@ -31,6 +32,7 @@ import com.boan.crm.utils.dao.impl.BaseDao;
  * @author XXX
  * @version 1.0.0
  */
+@Repository("logDao")
 public class LogDaoImpl  extends BaseDao<Log,String> implements ILogDao 
 {
 	public void saveLog( Log log ) throws Exception
