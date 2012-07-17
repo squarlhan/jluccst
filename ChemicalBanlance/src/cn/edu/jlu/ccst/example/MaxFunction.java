@@ -45,7 +45,7 @@ public class MaxFunction
 	}
     
 //	total = Math.exp(-1*Math.abs(total));
-	total = 1/(total*total+1);
+	total = 1/(total+1);
     return total;
   }
 
