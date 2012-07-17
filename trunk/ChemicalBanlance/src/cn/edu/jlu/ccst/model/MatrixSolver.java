@@ -99,7 +99,7 @@ public class MatrixSolver {
 	private boolean validate(){
 		boolean flag = true;
 		int index = m-1;
-		while(valizero(index)){
+		while(index>=0&&valizero(index)){
 			index--;
 		}
 		for (int i = 0; i <= index ; i++) {
