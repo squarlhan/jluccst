@@ -102,8 +102,8 @@ public class MatrixSolver {
 		while(valizero(index)){
 			index--;
 		}
-		for (int i = 0; i <= index - 1; i++) {
-			for (int j = 0; j <= index - 1; j++) {
+		for (int i = 0; i <= index ; i++) {
+			for (int j = 0; j <= index ; j++) {
 				if(i == j){
 					if(this.solvedmatrix[i][j].getNumerator() != 1)return false;
 				}else{
@@ -121,6 +121,7 @@ public class MatrixSolver {
 		Fraction mone = new Fraction(-1,1);
 		for(int i = 0;i<=m-1;i++){
 			if(validate())return;
+			rank = i+1;
 			if(solvedmatrix[i][i].getNumerator()==0){
 				for(int ii = i+1;ii<=m-1;ii++){
 					if(solvedmatrix[ii][i].getNumerator()!=0){
@@ -192,7 +193,8 @@ public class MatrixSolver {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		int[][] m = {{1, 2, 3, 4},{-2, 3, 1, 2},{-1, 5, 4, 6}};
+		int[][] m = {{1, 0, -3, 0},{0, 1, -4, 0},{0, 2, 0, -2}};
+//		int[][] m = {{1, 2, 3, 4},{-2, 3, 1, 2},{-1, 5, 4, 6}};
 		MatrixSolver ms = new MatrixSolver(m);
 		
 		for (int i = 0; i <= ms.getM() - 1; i++) {
