@@ -57,7 +57,7 @@ public class GATest {
 	        IChromosome fittest = genotype.getFittestChromosome();
 	        double fitnessvalue = fittest.getFitnessValue();
 	        System.out.println("Currently fittest Chromosome has fitness " +
-	                           fitness);
+	        		fitnessvalue);
 	        if (fitnessvalue >= maxFitness) {
 	          break;
 	        }
@@ -87,7 +87,7 @@ public class GATest {
 		String rstr5 = "C2H2+ KMnO4+ H2SO4= K2SO4+ MnSO4+ HCOOH+ H2O";
 		String rstr6 = "K2Cr2O7+ Fe3O4+ H2SO4=K2SO4+ Fe2(SO4)3+ Cr2(SO4)3+ H2O";
 		String rstr7="NaBiO3+MnSO4+H2SO4=Na2SO4+Bi2(SO4)3+NaMnO4+H2O";
-		Reaction r = new Reaction(rstr6);
+		Reaction r = new Reaction(rstr3);
         for(Molecular m: r.getLeft()){
         	for(Atom a:m.getAtoms()){
     			System.out.print(a.getName()+a.getCount());
@@ -111,7 +111,7 @@ public class GATest {
 			
 		}
 
-		int[] result = gasolution(100, matrix, 2000, 50);
+		int[] result = gasolution(50, matrix, 2000, 50);
 		System.out.println();
 		for(int i=0;i<= r.getLeft().size()-1;i++){
 			Molecular m =r.getLeft().get(i);
