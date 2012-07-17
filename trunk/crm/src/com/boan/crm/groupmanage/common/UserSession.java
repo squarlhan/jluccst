@@ -41,14 +41,24 @@ public class UserSession implements java.io.Serializable
 	private String userCName;
 
 	/**
-	 * 公司id
+	 * 部门id
 	 */
 	private String deptId;
 	
 	/**
-	 * 公司名称
+	 * 部门名称
 	 */
 	private String deptName;
+	
+	/**
+	 * 公司id
+	 */
+	private String companyId;
+	
+	/**
+	 * 公司名称
+	 */
+	private String companyName;
 
 	/**
 	 * 用户类型
@@ -151,6 +161,22 @@ public class UserSession implements java.io.Serializable
 
 	public void setDeptName(String deptName) {
 		this.deptName = deptName;
+	}
+
+	public String getCompanyId() {
+		return companyId;
+	}
+
+	public void setCompanyId(String companyId) {
+		this.companyId = companyId;
+	}
+
+	public String getCompanyName() {
+		return companyName;
+	}
+
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
 	}
 
 }

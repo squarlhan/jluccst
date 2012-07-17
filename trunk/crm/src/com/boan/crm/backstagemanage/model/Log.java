@@ -73,16 +73,16 @@ public class Log implements java.io.Serializable {
 	private Calendar createTime = Calendar.getInstance();
 
 	/**
-	 * 集团名称
+	 * 公司名称
 	 */
-	@Column(name = "UNIT_NAME")
-	private String unitName = null;
+	@Column(name = "COMPANY_NAME")
+	private String companyName = null;
 
 	/**
-	 * 集团id
+	 * 公司id
 	 */
-	@Column(name = "UNIT_ID")
-	private String unitId = null;
+	@Column(name = "COMPANY_ID")
+	private String companyId = null;
 
 	/**
 	 * 组id
@@ -211,31 +211,32 @@ public class Log implements java.io.Serializable {
 		this.userId = userId;
 	}
 
-	public String getUnitName() {
-		return unitName;
-	}
-
-	public void setUnitName(String unitName) {
-		this.unitName = unitName;
-	}
-
-	public String getUnitId() {
-		return unitId;
-	}
-
-	public void setUnitId(String unitId) {
-		this.unitId = unitId;
-	}
 
 	/**
 	 * 包括集团在内的组的全名
 	 */
 	public String getDeptFullName() {
-		String fullName = this.unitName;
+		String fullName = this.companyName;
 
 		if (StringUtils.isNotBlank(this.deptName)) {
 			fullName += "→" + this.deptName;
 		}
 		return fullName;
+	}
+
+	public String getCompanyName() {
+		return companyName;
+	}
+
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
+	}
+
+	public String getCompanyId() {
+		return companyId;
+	}
+
+	public void setCompanyId(String companyId) {
+		this.companyId = companyId;
 	}
 }
