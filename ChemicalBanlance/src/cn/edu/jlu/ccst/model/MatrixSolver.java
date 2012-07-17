@@ -68,9 +68,18 @@ public class MatrixSolver {
 	private void changerow(int a, int b) {	
 		Fraction temp = new Fraction();
 		for(int j = 0;j<=n-1;j++){
+//			temp.setDenominator(solvedmatrix[a][j].getDenominator());
+//			temp.setNumerator(solvedmatrix[a][j].getNumerator());
+//			
+//			solvedmatrix[a][j].setDenominator(solvedmatrix[b][j].getDenominator());
+//			solvedmatrix[a][j].setNumerator(solvedmatrix[b][j].getNumerator());
+//			
+//			solvedmatrix[b][j].setDenominator(temp.getDenominator());
+//			solvedmatrix[b][j].setNumerator(temp.getNumerator());
+			
 			temp = solvedmatrix[a][j];
 			solvedmatrix[a][j] = solvedmatrix[b][j];
-			solvedmatrix[a][j] = temp;
+			solvedmatrix[b][j] = temp;
 		}
 	}
 	
@@ -137,6 +146,16 @@ public class MatrixSolver {
 				}
 			}
 		}
+		
+		System.out.println("tttttttttttttttttttttttttttttt");
+		for (int i = 0; i <= m - 1; i++) {
+			for (int j = 0; j <= n - 1; j++) {
+				System.out.print(solvedmatrix[i][j]+"\t");
+			}
+			System.out.println();
+		}
+		
+		System.out.println("tttttttttttttttttttttttttttttt");
 
 	}
 	
@@ -145,7 +164,7 @@ public class MatrixSolver {
 		for(int j=0;j<=n-1;j++){
 			gb = Fraction.gB(gb, fs[j].getDenominator());
 		}		
-		return gb;
+		return Math.abs(gb);
 	}
 
 	public int[][] solve(){
@@ -168,6 +187,7 @@ public class MatrixSolver {
 				}
 			}
 		}
+		System.out.println("*****************************");
 		for (int i = 0; i <= fresults.length - 1; i++) {
 			for (int j = 0; j <= n - 1; j++) {
 				System.out.print(fresults[i][j]+"\t");
@@ -193,18 +213,10 @@ public class MatrixSolver {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		int[][] m = {{1, 0, -3, 0},{0, 1, -4, 0},{0, 2, 0, -2}};
-//		int[][] m = {{1, 2, 3, 4},{-2, 3, 1, 2},{-1, 5, 4, 6}};
+//		int[][] m = {{1, 0, -3, 0},{0, 1, -4, 0},{0, 2, 0, -2}};
+		int[][] m = {{1, 2, 3, 4},{-2, 3, 1, 2},{-1, 5, 4, 6}};
 		MatrixSolver ms = new MatrixSolver(m);
 		
-		for (int i = 0; i <= ms.getM() - 1; i++) {
-			for (int j = 0; j <= ms.getN() - 1; j++) {
-				System.out.print(ms.getSolvedmatrix()[i][j]+"\t");
-			}
-			System.out.println();
-		}
-		
-		System.out.println("*****************************");
 		
 		ms.solve();
 
