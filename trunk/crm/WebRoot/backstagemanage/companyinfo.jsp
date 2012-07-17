@@ -36,8 +36,10 @@
 			var _customer_submit = {
 				rules: {
 					"company.companyName":{required:true,strangecode:true},
+					"company.corporation":{strangecode:true},
 					"company.address":{strangecode:true},
-					"company.phone":{strangecode:true}
+					"company.phone":{strangecode:true},
+					"company.fax":{strangecode:true}
 				}
 			};
 			/**
@@ -107,14 +109,21 @@
 								<table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#d5e4fd">
 									<tr>
 										<td height="26" align="right" bgcolor="#FFFFFF">
-											<strong>级别名称：</strong>
+											<strong>公司名称：</strong>
 										</td>
 										<td height="26" align="left" bgcolor="#FFFFFF">
 											<s:textfield id="txt_companyName" name="company.companyName" cssStyle="width: 250px;" maxlength="25"></s:textfield>
 											<font color="red">*</font>
 										</td>
 									</tr>
-									<!-- 
+									<tr>
+										<td height="26" align="right" bgcolor="#FFFFFF">
+											<strong>法人：</strong>
+										</td>
+										<td height="26" align="left" bgcolor="#FFFFFF">
+											<s:textfield id="txt_phone" name="company.corporation" cssStyle="width: 250px;" maxlength="100"></s:textfield>
+										</td>
+									</tr>
 									<tr>
 										<td height="26" align="right" bgcolor="#FFFFFF">
 											<strong>公司地址：</strong>
@@ -131,7 +140,14 @@
 											<s:textfield id="txt_phone" name="company.phone" cssStyle="width: 250px;" maxlength="100"></s:textfield>
 										</td>
 									</tr>
-									 -->
+									<tr>
+										<td height="26" align="right" bgcolor="#FFFFFF">
+											<strong>传真：</strong>
+										</td>
+										<td height="26" align="left" bgcolor="#FFFFFF">
+											<s:textfield id="txt_phone" name="company.fax" cssStyle="width: 250px;" maxlength="100"></s:textfield>
+										</td>
+									</tr>
 									<tr>
 										<td height="26" colspan="2" align="center" bgcolor="#FFFFFF">
 											<input name="addBtn" type="button" class="btn_2_3" id="addBtn" value="确定">
