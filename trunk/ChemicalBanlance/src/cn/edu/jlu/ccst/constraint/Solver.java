@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import cn.edu.jlu.ccst.model.Csp;
 
 public class Solver {
+	
+	public static ArrayList<int[]> solutions=new ArrayList<int[]>();
+	public static ArrayList<int[]> elements=new ArrayList<int[]>();
 
 	public static void main(String[] args) {
 
@@ -117,13 +120,14 @@ public class Solver {
 	}
 
 	private static int[][] computeSubReactions(Mac mac) {
-		ArrayList<int[]> resultList=mac.searchForAll();
+		elements=mac.searchForAll();
+		solutions=mac.solutions;
 		mac.showResult();
-		int[][] result = new int[resultList.size()][];
+		int[][] result = new int[elements.size()][];
 		for(int i=0;i<result.length;i++){
-			result[i]=new int[resultList.get(i).length]; 
+			result[i]=new int[elements.get(i).length]; 
 			for(int j=0;j<result[i].length;j++){
-				result[i][j]=mac.csp.variables[j].domain[resultList.get(i)[j]];
+				result[i][j]=mac.csp.variables[j].domain[elements.get(i)[j]];
 			}
 		}
 		return result;
