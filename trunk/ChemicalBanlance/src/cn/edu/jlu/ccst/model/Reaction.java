@@ -149,7 +149,7 @@ public class Reaction {
 		
 		return result;
 	}
-    
+   //首先利用约束分解方程式，之后利用线性代数来求解
 	public List<Reaction> banlance(){
 		List<Reaction> results = new ArrayList();
 		
@@ -202,6 +202,20 @@ public class Reaction {
 		}
 		
 		return results;
+	}
+	//利用约束直接求解
+	public void justbanlance(int[] step){
+		int[] result = Solver.computeBalance(generatematrix(), step);
+		int ls = left.size();
+		int n = result.length;
+		
+		for(int i = 0;i<=n-1;i++){
+			if(i<=ls-1){
+				left.get(i).setCount(result[i]);
+			}else{
+				right.get(i-ls).setCount(result[i]);
+			}
+		}
 	}
 	
 	/**
