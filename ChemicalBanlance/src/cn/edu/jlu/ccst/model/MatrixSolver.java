@@ -128,10 +128,13 @@ public class MatrixSolver {
 		
 		Fraction one = new Fraction(1,1);
 		Fraction mone = new Fraction(-1,1);
-		for(int i = 0;i<=m-1;i++){
+		int mm = m<n?m:n;
+		for(int i = 0;i<=mm-1;i++){
 			if(validate())return;
+			
 			rank = i+1;
 			if(solvedmatrix[i][i].getNumerator()==0){
+				
 				for(int ii = i+1;ii<=m-1;ii++){
 					if(solvedmatrix[ii][i].getNumerator()!=0){
 						changerow(ii, i);
@@ -213,8 +216,8 @@ public class MatrixSolver {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-//		int[][] m = {{1, 0, -3, 0},{0, 1, -4, 0},{0, 2, 0, -2}};
-		int[][] m = {{1, 2, 3, 4},{-2, 3, 1, 2},{-1, 5, 4, 6}};
+		int[][] m = {{1, 0, -1, 0, 0},{1, 0, -2, -3,-2},{0, 1, 0, 0,-1},{0, 0, 0, 0,0}};
+//		int[][] m = {{1, 2, 3, 4},{-2, 3, 1, 2},{-1, 5, 4, 6}};
 		MatrixSolver ms = new MatrixSolver(m);
 		
 		
