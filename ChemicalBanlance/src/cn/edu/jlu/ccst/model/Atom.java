@@ -49,6 +49,10 @@ public class Atom {
 		return flag;
 	}
 	
+	public String toString() {
+		return name+count;
+	}
+	
 	public static void main(String[] args){
 		Atom a = new Atom("C");
 		System.out.print(a.checkatom(a.getName()));

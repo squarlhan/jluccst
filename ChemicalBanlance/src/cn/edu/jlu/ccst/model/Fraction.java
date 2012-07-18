@@ -105,6 +105,16 @@ class Fraction implements Comparable {
 			return false;
 	}
 
+	//把所有为0的规约成0/1，并去掉分子分母符号
+	private void validate(){
+		if(numerator == 0){
+			denominator = 1;
+		}
+		if(numerator<0&&denominator<0){
+			numerator = -1*numerator;
+			denominator = -1* denominator;
+		}
+	}
 	// 约分函数
 	private void reduct() {
 		// 求分子和分母的最小值
@@ -126,6 +136,7 @@ class Fraction implements Comparable {
 		fraction.numerator = numerator * f.denominator + f.numerator
 				* denominator;
 		fraction.denominator = denominator * f.denominator;
+		fraction.validate();
 		fraction.reduct();
 		return fraction;
 	}
@@ -136,6 +147,7 @@ class Fraction implements Comparable {
 		fraction.numerator = numerator * f.denominator - f.numerator
 				* denominator;
 		fraction.denominator = denominator * f.denominator;
+		fraction.validate();
 		fraction.reduct();
 		return fraction;
 	}
@@ -145,6 +157,7 @@ class Fraction implements Comparable {
 		Fraction fraction = new Fraction();
 		fraction.numerator = numerator * f.numerator;
 		fraction.denominator = denominator * f.denominator;
+		fraction.validate();
 		fraction.reduct();
 		return fraction;
 	}
@@ -154,6 +167,7 @@ class Fraction implements Comparable {
 		Fraction fraction = new Fraction();
 		fraction.numerator = numerator * f.denominator;
 		fraction.denominator = denominator * f.numerator;
+		fraction.validate();
 		fraction.reduct();
 		return fraction;
 	}
