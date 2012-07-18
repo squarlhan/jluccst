@@ -3,12 +3,11 @@ package cn.edu.jlu.ccst.constraint;
 import java.util.ArrayList;
 
 import Jama.Matrix;
-
 import cn.edu.jlu.ccst.model.Arc;
 import cn.edu.jlu.ccst.model.Constraint;
 import cn.edu.jlu.ccst.model.Csp;
+import cn.edu.jlu.ccst.model.MatrixSolver;
 import cn.edu.jlu.ccst.model.Variable;
-import cn.edu.jlu.ccst.constraint.TimeTool;
 
 public class Mac {
 	public Queue queue;
@@ -263,7 +262,7 @@ public class Mac {
 
 		return result;
 	}
-	
+	public ArrayList<int[]> solutions=new ArrayList<int[]>();
 	public boolean testValid(int[] tempSol) {
 		ArrayList<Integer> sol=new ArrayList<Integer>(tempSol.length);
 		for(int i=0;i<tempSol.length;i++){
@@ -281,11 +280,53 @@ public class Mac {
 				testMatrix[i][j] = source[i][sol.get(j)];
 			}
 		}
-		Matrix ma=getMatrix(testMatrix);
-		int rank=ma.rank();
+		for(int i=0;i<testMatrix.length;i++){
+			for(int j=0;j<testMatrix[i].length;j++){
+				System.out.print(testMatrix[i][j]+" ");
+			}
+			System.out.println();
+		}
+		System.out.println("============");
+		MatrixSolver ms=new MatrixSolver(testMatrix);
+		int rank=ms.getRank();
 		int result=sol.size()-rank;
-		return result==1;
+		if(result!=1){
+			return false;
+		}
+		int[][] basicSolution=ms.solve();
+		int[] basic=basicSolution[0];
+		for(int i=0;i<basic.length;i++){
+			if(basic[i]<=0){
+				return false;
+			}
+		}
+		solutions.add(basic);
+		return true;
 	}
+
+	
+//	public boolean testValid(int[] tempSol) {
+//		ArrayList<Integer> sol=new ArrayList<Integer>(tempSol.length);
+//		for(int i=0;i<tempSol.length;i++){
+//			if(tempSol[i]!=0){
+//				sol.add(i);
+//			}
+//		}
+//		if(sol.size()==0){
+//			return false;
+//		}
+//		int[][] source = csp.matrix;
+//		int[][] testMatrix = new int[csp.matrix.length][sol.size()];
+//		for (int j = 0; j < sol.size(); j++) {
+//			for (int i = 0; i < csp.matrix.length; i++) {
+//				testMatrix[i][j] = source[i][sol.get(j)];
+//			}
+//		}
+//		Matrix ma=getMatrix(testMatrix);
+//		int rank=ma.rank();
+//		int result=sol.size()-rank;
+//		return result==1;
+//	}
 
 	public Matrix getMatrix(int[][] matrix){
 		int m = matrix.length;
