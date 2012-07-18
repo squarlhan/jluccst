@@ -22,7 +22,8 @@ public class Test {
 		String rstr6 = "K2Cr2O7+ Fe3O4+ H2SO4=K2SO4+ Fe2(SO4)3+ Cr2(SO4)3+ H2O";
 		String rstr7="NaBiO3+MnSO4+H2SO4=Na2SO4+Bi2(SO4)3+NaMnO4+H2O";
 		String rstr8 = "CO+CO2+H2=CH4+H2O";
-		Reaction r = new Reaction(rstr6);
+		String rstr9="C+CO+H2+O2+S=CO2+H2O+O3+H2S+SO2+H2O2";
+		Reaction r = new Reaction(rstr8);
 		
         for(Molecular m: r.getLeft()){
         	for(Atom a:m.getAtoms()){
