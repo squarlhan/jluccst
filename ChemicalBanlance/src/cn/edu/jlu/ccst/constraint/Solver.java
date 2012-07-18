@@ -20,6 +20,7 @@ public class Solver {
 		// System.out.print(result[i] + " ");
 		// }
 
+		String tstr9="C+CO+H2+O2+S=CO2+H2O+O3+H2S+SO2+H2O2";
 		int[][] source = { { 1, 1, 0, 0, 0, -1, 0, 0, 0, 0, 0 },
 				{ 0, 1, 0, 2, 0, -2, -1, -3, 0, -2,-2 },
 				{ 0, 0, 2, 0, 0, 0, -2, 0, -2, 0, -2 },
