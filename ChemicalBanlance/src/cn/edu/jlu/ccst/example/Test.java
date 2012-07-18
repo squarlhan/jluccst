@@ -20,7 +20,7 @@ public class Test {
 		String rstr7="NaBiO3+MnSO4+H2SO4=Na2SO4+Bi2(SO4)3+NaMnO4+H2O";
 		String rstr8 = "CO+CO2+H2=CH4+H2O";
 		String rstr9="C+CO+H2+O2+S=CO2+H2O+O3+H2S+SO2+H2O2";
-		Reaction r = new Reaction(rstr8);
+		Reaction r = new Reaction(rstr1);
 		
         int[][] matrix = r.generatematrix();
         
@@ -43,7 +43,8 @@ public class Test {
 		 }
 		
 //		int[] step = {10,20,30,40,50,60,70,80,90,100,300,500,1000,5000,10000 };
-//		int[] result = Solver.computeBalance(matrix, step);
+//		 r.justbanlance(step);
+//		 System.out.println(r);
 		
 
 	}
