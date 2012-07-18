@@ -5,7 +5,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import Jama.Matrix;
+import cn.edu.jlu.ccst.constraint.Solver;
 
 public class Reaction {
 	
@@ -25,6 +25,8 @@ public class Reaction {
 
 	public Reaction() {
 		super();
+		left = new ArrayList();
+		right = new ArrayList();
 		// TODO Auto-generated constructor stub
 	}
 	
@@ -122,19 +124,86 @@ public class Reaction {
     	return matrix;
     }
     
-    public int rank(int[][] matrix){
-    	int m = matrix.length;
-    	int n = matrix[0].length;
-    	double[][] dma = new double[m][n];
-    	for(int i= 0;i<=m-1;i++){
-    		for(int j= 0;j<=n-1;j++){
-    			dma[i][j] = matrix[i][j];
-    		}
-    	}
-    	Matrix ma = new Matrix(dma);
-    	return ma.rank();
-    }
-
+	public String toString() {
+		String result = "";
+		
+		for(int i=0;i<=left.size()-1;i++){
+			Molecular m =left.get(i);
+			if(i == left.size()-1){
+				result = result+m.getCount()+m.getName();
+			}else{
+				result = result+m.getCount()+m.getName()+"+";
+			}
+		}
+		
+		result = result+"=";
+		
+		for(int i=0;i<=right.size()-1;i++){
+			Molecular m =right.get(i);
+			if(i == right.size()-1){
+				result = result+m.getCount()+m.getName();
+			}else{
+				result = result+m.getCount()+m.getName()+"+";
+			}
+		}
+		
+		return result;
+	}
+    
+	public List<Reaction> banlance(){
+		List<Reaction> results = new ArrayList();
+		
+		int[][] matrix = generatematrix();
+		MatrixSolver ms = new MatrixSolver(matrix);
+		int n = ms.getN();
+		int rk = ms.getRank();
+		if(n-rk<1){
+			System.err.println("No Solution!");
+		}else if(n-rk ==1){
+			int[][] ans = ms.solve();
+			boolean flag = true;
+			for(int i=0;i<=n-1;i++){
+				if(ans[0][i]<=0){
+					System.err.println("Rank = 1 BUT No Solution!");
+					flag = false;
+					break;
+				}else{
+					if(i<=left.size()-1){
+						left.get(i).setCount(ans[0][i]);
+					}else{
+						right.get(i-left.size()).setCount(ans[0][i]);
+					}					
+				}				
+			}
+			if(flag)results.add(this);
+		}else{
+			Solver.computeValidSubReactions(matrix);
+			int ls = left.size();
+			for(int a=0;a<=Solver.elements.size()-1;a++){
+				Reaction rtemp = new Reaction();
+				for(int b=0;b<=n-1;b++){
+					if(Solver.elements.get(a)[b]==1){
+						if(b<=ls-1){
+							rtemp.left.add(left.get(b));
+						}else{
+							rtemp.right.add(right.get(b-ls));
+						}
+					}
+				}
+				for(int c = 0;c<=Solver.solutions.get(a).length-1;c++){
+					if(c<=rtemp.getLeft().size()-1){
+						rtemp.getLeft().get(c).setCount(Solver.solutions.get(a)[c]);
+					}else{
+						rtemp.getRight().get(c-rtemp.getLeft().size()).setCount(Solver.solutions.get(a)[c]);
+					}			
+				}
+				results.add(rtemp);
+			}
+		}
+		
+		return results;
+	}
+	
 	/**
 	 * @param args
 	 */

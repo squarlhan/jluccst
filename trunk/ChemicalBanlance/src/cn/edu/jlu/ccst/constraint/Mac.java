@@ -2,7 +2,6 @@ package cn.edu.jlu.ccst.constraint;
 
 import java.util.ArrayList;
 
-import Jama.Matrix;
 import cn.edu.jlu.ccst.model.Arc;
 import cn.edu.jlu.ccst.model.Constraint;
 import cn.edu.jlu.ccst.model.Csp;
@@ -328,31 +327,31 @@ public class Mac {
 //		return result==1;
 //	}
 
-	public Matrix getMatrix(int[][] matrix){
-		int m = matrix.length;
-		int n = matrix[0].length;
-		double[][] dma = new double[m][n];
-		for (int i = 0; i <= m - 1; i++) {
-			for (int j = 0; j <= n - 1; j++) {
-				dma[i][j] = matrix[i][j];
-			}
-		}
-		Matrix ma = new Matrix(dma);
-		return ma;
-	}
+//	public Matrix getMatrix(int[][] matrix){
+//		int m = matrix.length;
+//		int n = matrix[0].length;
+//		double[][] dma = new double[m][n];
+//		for (int i = 0; i <= m - 1; i++) {
+//			for (int j = 0; j <= n - 1; j++) {
+//				dma[i][j] = matrix[i][j];
+//			}
+//		}
+//		Matrix ma = new Matrix(dma);
+//		return ma;
+//	}
 	
-	public int rank(int[][] matrix) {
-		int m = matrix.length;
-		int n = matrix[0].length;
-		
-		double[][] dma = new double[m][n];
-		for (int i = 0; i <= m - 1; i++) {
-			for (int j = 0; j <= n - 1; j++) {
-				dma[i][j] = matrix[i][j];
-			}
-		}
-		Matrix ma = new Matrix(dma);
-		
-		return ma.rank();
-	}
+//	public int rank(int[][] matrix) {
+//		int m = matrix.length;
+//		int n = matrix[0].length;
+//		
+//		double[][] dma = new double[m][n];
+//		for (int i = 0; i <= m - 1; i++) {
+//			for (int j = 0; j <= n - 1; j++) {
+//				dma[i][j] = matrix[i][j];
+//			}
+//		}
+//		Matrix ma = new Matrix(dma);
+//		
+//		return ma.rank();
+//	}
 }

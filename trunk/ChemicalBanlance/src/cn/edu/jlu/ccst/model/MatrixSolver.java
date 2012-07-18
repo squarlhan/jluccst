@@ -168,6 +168,7 @@ public class MatrixSolver {
 		}
 		
 		System.out.println("tttttttttttttttttttttttttttttt");
+		System.out.println("Solved Matrix is: ");
 		for (int i = 0; i <= m - 1; i++) {
 			for (int j = 0; j <= n - 1; j++) {
 				System.out.print(solvedmatrix[i][j]+"\t");
@@ -208,6 +209,7 @@ public class MatrixSolver {
 			}
 		}
 		System.out.println("*****************************");
+		System.out.println("Fraction Solutions are: ");
 		for (int i = 0; i <= fresults.length - 1; i++) {
 			for (int j = 0; j <= n - 1; j++) {
 				System.out.print(fresults[i][j]+"\t");
@@ -215,7 +217,7 @@ public class MatrixSolver {
 			System.out.println();
 		}
 		System.out.println("*****************************");
-		
+		System.out.println("Integer Solutions are: ");
 		for (int i = 0; i <= fresults.length - 1; i++) {
 			int gb = getGB(fresults[i]);
 			for (int j = 0; j <= n - 1; j++) {
@@ -233,7 +235,8 @@ public class MatrixSolver {
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		int[][] m = {{1, 0, -1, 0, 0},{1, 0, -2, -3,-2},{0, 1, 0, 0,-1},{0, 0, 0, 0,0}};
+//		int[][] m = {{1, 0, -1, 0, 0},{1, 0, -2, -3,-2},{0, 1, 0, 0,-1},{0, 0, 0, 0,0}};
+		int[][] m = {{1, 0, 0, -1, 0},{1, 0, 0, -2, 0},{0, 2, 0, 0, -2},{0, 0, 1, 0, -1}};
 //		int[][] m = {{1, 2, 3, 4},{-2, 3, 1, 2},{-1, 5, 4, 6}};
 		MatrixSolver ms = new MatrixSolver(m);
 		
