@@ -1,5 +1,8 @@
 package cn.edu.jlu.ccst.model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class MatrixSolver {
 
 	private Fraction[][] matrix;
@@ -52,14 +55,28 @@ public class MatrixSolver {
 
 	public MatrixSolver(int[][] matrix) {
 		super();
-		this.m = matrix.length;
+		int mm = matrix.length;
 		this.n = matrix[0].length;
+		List<Integer> flags = new ArrayList();
+		
+		for (int i = 0; i <= mm - 1; i++) {
+			for (int j = 0; j <= n - 1; j++) {
+				if(matrix[i][j]!=0){
+					flags.add(i);
+					break;
+				}
+			}
+		}
+		this.m = flags.size();
+		
+		
+		
 		this.matrix = new Fraction[m][n];
 		this.solvedmatrix = new Fraction[m][n];
-		for (int i = 0; i <= m - 1; i++) {
+		for (int i = 0;i<=flags.size()-1;i++) {
 			for (int j = 0; j <= n - 1; j++) {
-				this.matrix[i][j] = new Fraction(matrix[i][j], 1);
-				this.solvedmatrix[i][j] = new Fraction(matrix[i][j], 1);
+				this.matrix[i][j] = new Fraction(matrix[flags.get(i)][j], 1);
+				this.solvedmatrix[i][j] = new Fraction(matrix[flags.get(i)][j], 1);
 			}
 		}
 		tansform();
