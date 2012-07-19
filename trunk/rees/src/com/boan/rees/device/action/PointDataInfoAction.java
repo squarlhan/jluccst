@@ -627,6 +627,120 @@ public class PointDataInfoAction extends BaseActionSupport {
 	}
 	
 	/**
+	 * 线状图
+	 * @return
+	 */
+	public String deviceStatLine(){
+		//
+		return SUCCESS;
+	}
+	
+	/**
+	 * 显示线状图
+	 * @return
+	 */
+	public String deviceColumnStatLine(){
+		if(StringUtils.trimToNull(chart)!=null){
+			deviceId = chart.split("\\|")[0];
+			selectYear = chart.split("\\|")[1];
+			selectWeek = chart.split("\\|")[2];
+		}
+		
+		List<PointInfo> pis= null;
+		Threshold threshold = null;
+		if(StringUtils.trimToNull(deviceId)!=null){
+			//获得监测点
+			pis = pointInfoService.findPointInfosByDeviceId(deviceId);
+		}
+		
+		StringBuffer sb = new StringBuffer();
+		StringBuffer tempSb = new StringBuffer();
+		StringBuffer alarmSb = new StringBuffer();
+		String alarm = "";
+		if(pis!=null && pis.size()>0){
+			List<PointParamInfo> ppis = null;
+			PointDataInfo pdi = null;
+			for (PointInfo pointInfo : pis) {
+				//获得监测点参数
+				ppis = pointParamInfoService.findPointParamInfoByPointId(pointInfo.getId());
+				if(ppis!=null && ppis.size()>0){
+					for(PointParamInfo ppi:ppis){
+						if(StringUtils.trimToNull(selectYear)!=null && StringUtils.trimToNull(selectWeek)!=null){
+							//获得监测点参数数据
+							pdi = pointDataInfoService.get(selectYear, selectWeek, ppi.getId());
+							if(pdi!=null){
+								if(threshold!=null){
+									//判断监测点参数数据是否超出境界值
+									List<ThresholdItem> thresholdItem = threshold.getThresholdItems();
+									String expression = null;
+									for (ThresholdItem item : thresholdItem) {
+										expression = item.getThresholdItemExpression();
+										if(item.getSign()==1){
+											if(ExpressionCompare.compare(expression, "V", pdi.getDataInfo())){
+												alarmSb.append(pointInfo.getControlPointName() + ppi.getName() + ",");
+												alarm = expression;
+											}
+										}
+									}
+								}
+								//tempSb.append("<set name='" + pointInfo.getControlPointName() + ppi.getName() + "' value='" + pdi.getDataInfo() + "' />");
+							}else{
+								//tempSb.append("<set name='" + pointInfo.getControlPointName() + ppi.getName() + "' value='0' />");
+							}
+						}
+					}
+				}
+			}
+		}
+		tempSb.append("<categories >");
+		tempSb.append("<category name='8/6/2006' />");
+		tempSb.append("<category name='8/7/2006' />");
+		tempSb.append("<category name='8/8/2006' />");
+		tempSb.append("<category name='8/9/2006' />");
+		tempSb.append("<category name='8/10/2006' />");
+		tempSb.append("<category name='8/11/2006' />");
+		tempSb.append("<category name='8/12/2006' />");
+		tempSb.append("</categories>");
+		
+		tempSb.append("<dataset seriesName='参数a' color='1D8BD1' anchorBorderColor='1D8BD1' anchorBgColor='1D8BD1'>");
+		tempSb.append("<set value='1327' />");
+		tempSb.append("<set value='1826' />");
+		tempSb.append("<set value='1699' />");
+		tempSb.append("<set value='1511' />");
+		tempSb.append("<set value='1904' />");
+		tempSb.append("<set value='1957' />");
+		tempSb.append("<set value='1296' />");
+		tempSb.append("</dataset>");
+		
+		tempSb.append("<dataset seriesName='参数v' color='F1683C' anchorBorderColor='F1683C' anchorBgColor='F1683C'>");
+		tempSb.append("<set value='2042' />");
+		tempSb.append("<set value='3210' />");
+		tempSb.append("<set value='2994' />");
+		tempSb.append("<set value='3115' />");
+		tempSb.append("<set value='2844' />");
+		tempSb.append("<set value='3576' />");
+		tempSb.append("<set value='1862' />");
+		tempSb.append("</dataset>");
+		
+		tempSb.append("<dataset seriesName='参数h' color='2AD62A' anchorBorderColor='2AD62A' anchorBgColor='2AD62A'>");
+		tempSb.append("<set value='850' />");
+		tempSb.append("<set value='1010' />");
+		tempSb.append("<set value='1116' />");
+		tempSb.append("<set value='1234' />");
+		tempSb.append("<set value='2844' />");
+		tempSb.append("<set value='1210' />");
+		tempSb.append("<set value='802' />");
+		tempSb.append("</dataset>");
+
+		sb.append("<?xml version='1.0' encoding='gb2312'?>");
+		sb.append("<graph caption='监测点参数运行曲线图' subcaption='(from 8/6/2006 to 8/12/2006)' hovercapbg='FFECAA' hovercapborder='F47E00' formatNumberScale='0' decimalPrecision='0' showvalues='0' numdivlines='3' numVdivlines='0' yaxisminvalue='1000' yaxismaxvalue='1800'  rotateNames='1' baseFontSize='12'>");
+		sb.append(tempSb);
+		sb.append("</graph>");
+		xmlStream = new ByteArrayInputStream(sb.toString().getBytes(Charset.forName("gb2312")));
+		return SUCCESS;
+	}
+	
+	/**
 	 * 任务实现DEMO
 	 * @return
 	 */
