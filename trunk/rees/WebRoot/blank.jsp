@@ -35,9 +35,11 @@
 </style>
 </head>
 <body>
-<table width="100%" height="100%" border="0" cellpadding="0" cellspacing="0" id="__01">
-  <tr>
-    <td align="center"><img src="images/desktop.jpg"/></td>
+<table id="__01" width="100%" height="505" border="0" cellpadding="0" cellspacing="0">
+<tr>
+		<td width="841">
+			<img src="images/desktop_01.jpg" width="841" height="505" alt=""></td>
+		<td background="images/desktop_02.jpg">&nbsp;</td>
   </tr>
 </table>
 </body>
