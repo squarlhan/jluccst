@@ -28,7 +28,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<title>旋转设备专家系统</title>
+		<title>设备状态监测系统</title>
 		<j:scriptlink css="true" jquery="true"/>
 		<style type="text/css">
 		<!--
