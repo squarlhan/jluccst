@@ -36,7 +36,18 @@
 			<result name="success">/datamanage/devicestat.jsp</result>
 			<result name="input">/datamanage/devicestat.jsp</result>
 		</action>
+		<action name="devicestatline" class="pointDataInfoAction" method="deviceStatLine">
+			<result name="success">/datamanage/devicestat_line.jsp</result>
+			<result name="input">/datamanage/devicestat_line.jsp</result>
+		</action>
 		<action name="deviceColumnStatAction" class="pointDataInfoAction" method="deviceColumnStat">
+			<param name="caption">交流交流</param>
+			<result name="success" type="stream">
+				<param name="contentType">application/xml;charset=UTF-8</param>
+				<param name="inputName">xmlStream</param>
+			</result>
+		</action>
+		<action name="deviceColumnStatLineAction" class="pointDataInfoAction" method="deviceColumnStatLine">
 			<param name="caption">交流交流</param>
 			<result name="success" type="stream">
 				<param name="contentType">application/xml;charset=UTF-8</param>
