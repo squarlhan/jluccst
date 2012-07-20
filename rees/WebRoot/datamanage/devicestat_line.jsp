@@ -6,23 +6,31 @@
 <head>
 	<title>柱状图</title>
 	<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-	<j:scriptlink jquery="true" chart="true"/>
+	<j:scriptlink css="true" jquery="true" chart="true"/>
+	<script type="text/javascript">
+	<!--
+	$(document).ready(function() {
+		$("#gotoBtn").click(function() {
+			window.location.href="devicestatline.action?deviceId=" + $("#deviceId").val() + "&pointId=" + $("#pointlist").val() + "&selectYear=" + $("#yearlist").val() + "&selectFromWeek=" + $("#weekfromlist").val() + "&selectWeek=" + $("#weektolist").val() + "";
+		});
+	});
+	//-->
+	</script>
 </head>
 
 <body>
 	<div id="pointdiv" align="center" style="padding:5px;">
-		<input type="text" name="textfield" id="textfield" style="width:80px" />
-		<input type="text" name="textfield2" id="textfield2" style="width:80px" />
-		<select id="pointselect">
-					<option value="fdasf">监测点一</option>
-					<option value="fdasf">监测点二</option>
-					<option value="fdasf">监测点三</option>
-		</select>
+		<s:hidden name="deviceId" />
+		<s:select name="yearlist" id="yearlist" list="yearList" cssStyle="width:80px;" listKey="value" listValue="text" value="selectYear"></s:select>
+		<s:select name="weekfromlist" id="weekfromlist" list="weekList" cssStyle="width:80px;" listKey="value" listValue="text" value="selectFromWeek"></s:select>
+		<s:select name="weektolist" id="weektolist" list="weekList" cssStyle="width:80px;" listKey="value" listValue="text" value="selectWeek"></s:select>
+		<s:select name="pointlist" id="pointlist" list="pointInfos" cssStyle="width:120px;" listKey="id" listValue="controlPointName"  value="pointId"></s:select>
+		<input id="gotoBtn" class="btn_4" type="button" value="查看"  />
 	</div>
 	<div id="chartdiv" align="center"></div>
 	<script type="text/javascript">
-		var chart = new FusionCharts("../js/FusionCharts/Charts/FCF_MSLine.swf", "ChartId", "650", "490");
-		chart.setDataURL("datamanage/deviceColumnStatLineAction.action?chart=<s:property value='deviceId'/>|<s:property value='selectYear'/>|<s:property value='selectWeek'/>");
+		var chart = new FusionCharts("../js/FusionCharts/Charts/FCF_MSLine.swf", "ChartId", "820", "490");
+		chart.setDataURL("datamanage/deviceColumnStatLineAction.action?chart=<s:property value='pointId'/>|<s:property value='selectYear'/>|<s:property value='selectFromWeek'/>|<s:property value='selectWeek'/>");
 		chart.render("chartdiv");
 	</script>
 </body>
