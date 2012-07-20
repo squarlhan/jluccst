@@ -26,6 +26,10 @@
 		$("#showstat").click(function(){
 			parent.parent.parent.tipsWindown("柱状图", "iframe:datamanage/devicestat.action?deviceId=<s:property value='deviceId'/>&selectYear=" + $("#yearlist").val() + "&selectWeek=" + $("#weeklist").val(), "700", "673", "true", "", "true", "", "auto");
 		});
+		//打开线状图
+		$("#showstatline").click(function(){
+			parent.parent.parent.tipsWindown("线状图", "iframe:datamanage/devicestatline.action?deviceId=<s:property value='deviceId'/>", "870", "673", "true", "", "true", "", "auto");
+		});
 		//日期选择
 		$("#yearlist").change(function(){
 			$.post("getweeksajax.action", {selectYear:$("#yearlist").val()},function(json){
@@ -76,6 +80,7 @@
 								<s:select name="weeklist" id="weeklist" list="weekList" cssStyle="width:180px;" listKey="value" listValue="text" value="selectWeek"></s:select>
 								<input id="showdevicepic" class="btn_4" type="button" value="打开设备图" />
 								<input id="showstat" class="btn_4" type="button" value="查看柱状图"  />
+								<input id="showstatline" class="btn_4" type="button" value="查看线状图"  />
 								<input class="btn_5" type="button" value="监测点数据维护" id="addpointdata" />
 							</td>
 						</tr>
