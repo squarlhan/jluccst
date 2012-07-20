@@ -51,6 +51,58 @@
 				<td align="center">
 					<div id="menuArea" style="overflow: auto; display: block;">
 						<table width="100%" border="0" cellspacing="0" cellpadding="0">
+						<tr>
+								<td height="24" align="left" background="images/menubg.jpg">
+									<table width="100%" border="0" cellspacing="5" cellpadding="0">
+										<tr>
+											<td width="40" align="right" style="padding-bottom: 4px;">
+												<img src="images/up.gif" width="10" height="12" />
+											</td>
+											<td>
+												<strong>后台管理</strong>
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							<tr>
+								<td align="left">
+									<table width="100%" border="0" cellspacing="5" cellpadding="0">
+										<tr>
+											<td width="40" align="right" style="padding-bottom: 4px;">
+												<img src="images/menuto.jpg" width="5" height="5" />
+											</td>
+											<td>
+												<a href="backstagemanage/companymanage.jsp" target="mainFrame">公司档案</a>
+											</td>
+										</tr>
+										<tr>
+											<td width="40" align="right" style="padding-bottom: 4px;">
+												<img src="images/menuto.jpg" width="5" height="5" />
+											</td>
+											<td>
+												<a href="customerReaserch.html" target="mainFrame">公司用户</a>
+											</td>
+										</tr>
+										<tr>
+											<td width="40" align="right" style="padding-bottom: 4px;">
+												<img src="images/menuto.jpg" width="5" height="5" />
+											</td>
+											<td>
+												<a href="customerReaserch.html" target="mainFrame">权限分配</a>
+											</td>
+										</tr>
+										<tr>
+											<td width="40" align="right" style="padding-bottom: 4px;">
+												<img src="images/menuto.jpg" width="5" height="5" />
+											</td>
+											<td>
+												<a href="backstagemanage/logmanage.jsp" target="mainFrame">系统日志</a>
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
 							<tr>
 								<td height="24" align="left" background="images/menubg.jpg">
 									<table width="100%" border="0" cellspacing="5" cellpadding="0">
@@ -105,58 +157,7 @@
 									</table>
 								</td>
 							</tr>
-							<tr>
-								<td height="24" align="left" background="images/menubg.jpg">
-									<table width="100%" border="0" cellspacing="5" cellpadding="0">
-										<tr>
-											<td width="40" align="right" style="padding-bottom: 4px;">
-												<img src="images/up.gif" width="10" height="12" />
-											</td>
-											<td>
-												<strong>后台管理</strong>
-											</td>
-										</tr>
-									</table>
-								</td>
-							</tr>
-							<tr>
-								<td align="left">
-									<table width="100%" border="0" cellspacing="5" cellpadding="0">
-										<tr>
-											<td width="40" align="right" style="padding-bottom: 4px;">
-												<img src="images/menuto.jpg" width="5" height="5" />
-											</td>
-											<td>
-												<a href="backstagemanage/companymanage.jsp" target="mainFrame">公司档案</a>
-											</td>
-										</tr>
-										<tr>
-											<td width="40" align="right" style="padding-bottom: 4px;">
-												<img src="images/menuto.jpg" width="5" height="5" />
-											</td>
-											<td>
-												<a href="customerReaserch.html" target="mainFrame">公司用户</a>
-											</td>
-										</tr>
-										<tr>
-											<td width="40" align="right" style="padding-bottom: 4px;">
-												<img src="images/menuto.jpg" width="5" height="5" />
-											</td>
-											<td>
-												<a href="customerReaserch.html" target="mainFrame">权限分配</a>
-											</td>
-										</tr>
-										<tr>
-											<td width="40" align="right" style="padding-bottom: 4px;">
-												<img src="images/menuto.jpg" width="5" height="5" />
-											</td>
-											<td>
-												<a href="backstagemanage/logmanage.jsp" target="mainFrame">系统日志</a>
-											</td>
-										</tr>
-									</table>
-								</td>
-							</tr>
+							
 							<tr>
 								<td height="24" align="left" background="images/menubg.jpg">
 									<table width="100%" border="0" cellspacing="5" cellpadding="0">
