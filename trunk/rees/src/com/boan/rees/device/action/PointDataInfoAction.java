@@ -523,7 +523,7 @@ public class PointDataInfoAction extends BaseActionSupport {
 	
 	/**
 	 * 显示设备图片
-	 * @return
+	 * @return 
 	 */
 	public String deviceImage(){
 		//获得设备信息
