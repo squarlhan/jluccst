@@ -119,6 +119,12 @@ public class PointDataInfoAction extends BaseActionSupport {
 	//当前选择的周日期
 	private String selectWeek = null;
 	
+	//当前选择的开始周日期
+	private String selectFromWeek = null;
+	
+	//监测点ID
+	private String pointId = null;
+	
 	//参数ID
 	private String paramId = null;
 	
@@ -631,7 +637,52 @@ public class PointDataInfoAction extends BaseActionSupport {
 	 * @return
 	 */
 	public String deviceStatLine(){
-		//
+		//初始化下拉列表
+		int thisYear = Calendar.getInstance().get(Calendar.YEAR);
+		int thisWeek = CalendarUtils.getWeekOfYear(Calendar.getInstance());
+		if(StringUtils.trimToNull(selectYear)==null)
+			selectYear = String.valueOf(thisYear);
+		if(StringUtils.trimToNull(selectWeek)==null)
+			selectWeek = String.valueOf(thisWeek);
+		SelectList sl = null;
+		yearList = new ArrayList<SelectList>();
+		for(int i=2011; i<thisYear+1; i++){
+			sl = new SelectList();
+			sl.setText(String.valueOf(i));
+			sl.setValue(String.valueOf(i));
+			yearList.add(sl);
+		}
+		
+		weekList = new ArrayList<SelectList>();
+		sl = null;
+		Calendar calBegin = null;
+		Calendar calEnd = null;
+		int maxWeek = CalendarUtils.getMaxWeekNumOfYear(thisYear);
+		
+		for(int i=0; i<maxWeek; i++){
+			calBegin = CalendarUtils.getFirstDayOfWeek(thisYear, i+1);
+			calEnd = CalendarUtils.getLastDayOfWeek(thisYear, i+1);
+			sl = new SelectList();
+			sl.setText("第" + (i+1) + "周");
+			sl.setValue(String.valueOf(i+1));
+			weekList.add(sl);
+			if(i==thisWeek-1)
+				break;
+		}
+		
+		if(StringUtils.trimToNull(selectFromWeek)==null)
+			selectFromWeek = "1";
+		
+		
+		//获得监测点信息
+		if(StringUtils.trimToNull(deviceId)!=null){
+			pointInfos = pointInfoService.findPointInfosByDeviceId(deviceId);
+			if(StringUtils.trimToNull(pointId)==null){
+				if(pointInfos!=null && pointInfos.size()>0){
+					pointId = pointInfos.get(0).getId();
+				}
+			}
+		}
 		return SUCCESS;
 	}
 	
@@ -639,101 +690,55 @@ public class PointDataInfoAction extends BaseActionSupport {
 	 * 显示线状图
 	 * @return
 	 */
-	public String deviceColumnStatLine(){
+	public String deviceColumnStatLine(){				
 		if(StringUtils.trimToNull(chart)!=null){
-			deviceId = chart.split("\\|")[0];
+			pointId = chart.split("\\|")[0];
 			selectYear = chart.split("\\|")[1];
-			selectWeek = chart.split("\\|")[2];
+			selectFromWeek = chart.split("\\|")[2];
+			selectWeek = chart.split("\\|")[3];
 		}
-		
-		List<PointInfo> pis= null;
-		Threshold threshold = null;
-		if(StringUtils.trimToNull(deviceId)!=null){
-			//获得监测点
-			pis = pointInfoService.findPointInfosByDeviceId(deviceId);
-		}
-		
+		int fromYear = Integer.parseInt(selectFromWeek);
+		int toYear = Integer.parseInt(selectWeek);
 		StringBuffer sb = new StringBuffer();
 		StringBuffer tempSb = new StringBuffer();
-		StringBuffer alarmSb = new StringBuffer();
-		String alarm = "";
-		if(pis!=null && pis.size()>0){
-			List<PointParamInfo> ppis = null;
-			PointDataInfo pdi = null;
-			for (PointInfo pointInfo : pis) {
-				//获得监测点参数
-				ppis = pointParamInfoService.findPointParamInfoByPointId(pointInfo.getId());
-				if(ppis!=null && ppis.size()>0){
-					for(PointParamInfo ppi:ppis){
-						if(StringUtils.trimToNull(selectYear)!=null && StringUtils.trimToNull(selectWeek)!=null){
-							//获得监测点参数数据
-							pdi = pointDataInfoService.get(selectYear, selectWeek, ppi.getId());
-							if(pdi!=null){
-								if(threshold!=null){
-									//判断监测点参数数据是否超出境界值
-									List<ThresholdItem> thresholdItem = threshold.getThresholdItems();
-									String expression = null;
-									for (ThresholdItem item : thresholdItem) {
-										expression = item.getThresholdItemExpression();
-										if(item.getSign()==1){
-											if(ExpressionCompare.compare(expression, "V", pdi.getDataInfo())){
-												alarmSb.append(pointInfo.getControlPointName() + ppi.getName() + ",");
-												alarm = expression;
-											}
-										}
-									}
-								}
-								//tempSb.append("<set name='" + pointInfo.getControlPointName() + ppi.getName() + "' value='" + pdi.getDataInfo() + "' />");
-							}else{
-								//tempSb.append("<set name='" + pointInfo.getControlPointName() + ppi.getName() + "' value='0' />");
-							}
-						}
-					}
-				}
-			}
-		}
+		List<PointParamInfo> ppis = null;
+		PointDataInfo pdi = null;
+		//获得监测点参数
+		ppis = pointParamInfoService.findPointParamInfoByPointId(pointId);
+
 		tempSb.append("<categories >");
-		tempSb.append("<category name='8/6/2006' />");
-		tempSb.append("<category name='8/7/2006' />");
-		tempSb.append("<category name='8/8/2006' />");
-		tempSb.append("<category name='8/9/2006' />");
-		tempSb.append("<category name='8/10/2006' />");
-		tempSb.append("<category name='8/11/2006' />");
-		tempSb.append("<category name='8/12/2006' />");
+		for(int i=0; i<(toYear-fromYear + 1); i++){
+			tempSb.append("<category name='" + (fromYear + i) + "' />");
+		}
 		tempSb.append("</categories>");
 		
-		tempSb.append("<dataset seriesName='参数a' color='1D8BD1' anchorBorderColor='1D8BD1' anchorBgColor='1D8BD1'>");
-		tempSb.append("<set value='1327' />");
-		tempSb.append("<set value='1826' />");
-		tempSb.append("<set value='1699' />");
-		tempSb.append("<set value='1511' />");
-		tempSb.append("<set value='1904' />");
-		tempSb.append("<set value='1957' />");
-		tempSb.append("<set value='1296' />");
-		tempSb.append("</dataset>");
+		if(ppis!=null && ppis.size()>0){
+			int count = 1;
+			String color = "1D8BD1";
+			for(PointParamInfo ppi:ppis){
+				if(count==2)
+					color = "F1683C";
+				if(count==3)
+					color = "2AD62A";
+				if(count==4)
+					color = "DBDC25";
+				
+				tempSb.append("<dataset seriesName='参数" + ppi.getName() + "' color='" + color + "' anchorBorderColor='" + color + "' anchorBgColor='" + color + "'>");
+				for(int i=0; i<(toYear-fromYear+1); i++){
+					pdi = pointDataInfoService.get(selectYear, String.valueOf(fromYear+i), ppi.getId());
+					if(pdi!=null){
+						tempSb.append("<set value='" + pdi.getDataInfo() + "' />");
+					}else{
+						tempSb.append("<set value='0' />");
+					}
+				}
+				tempSb.append("</dataset>");
+				count++;
+			}
+		}
 		
-		tempSb.append("<dataset seriesName='参数v' color='F1683C' anchorBorderColor='F1683C' anchorBgColor='F1683C'>");
-		tempSb.append("<set value='2042' />");
-		tempSb.append("<set value='3210' />");
-		tempSb.append("<set value='2994' />");
-		tempSb.append("<set value='3115' />");
-		tempSb.append("<set value='2844' />");
-		tempSb.append("<set value='3576' />");
-		tempSb.append("<set value='1862' />");
-		tempSb.append("</dataset>");
-		
-		tempSb.append("<dataset seriesName='参数h' color='2AD62A' anchorBorderColor='2AD62A' anchorBgColor='2AD62A'>");
-		tempSb.append("<set value='850' />");
-		tempSb.append("<set value='1010' />");
-		tempSb.append("<set value='1116' />");
-		tempSb.append("<set value='1234' />");
-		tempSb.append("<set value='2844' />");
-		tempSb.append("<set value='1210' />");
-		tempSb.append("<set value='802' />");
-		tempSb.append("</dataset>");
-
 		sb.append("<?xml version='1.0' encoding='gb2312'?>");
-		sb.append("<graph caption='监测点参数运行曲线图' subcaption='(from 8/6/2006 to 8/12/2006)' hovercapbg='FFECAA' hovercapborder='F47E00' formatNumberScale='0' decimalPrecision='0' showvalues='0' numdivlines='3' numVdivlines='0' yaxisminvalue='1000' yaxismaxvalue='1800'  rotateNames='1' baseFontSize='12'>");
+		sb.append("<graph caption='监测点参数运行曲线图' subcaption='(从" + selectYear + "年第" + selectFromWeek + "周到第" + selectWeek + "周)' hovercapbg='FFECAA' hovercapborder='F47E00' formatNumberScale='0' decimalPrecision='0' showvalues='0' numVdivlines='0' rotateNames='0' baseFontSize='12'>");
 		sb.append(tempSb);
 		sb.append("</graph>");
 		xmlStream = new ByteArrayInputStream(sb.toString().getBytes(Charset.forName("gb2312")));
@@ -921,6 +926,34 @@ public class PointDataInfoAction extends BaseActionSupport {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	/**
+	 * @return the selectFromWeek
+	 */
+	public String getSelectFromWeek() {
+		return selectFromWeek;
+	}
+
+	/**
+	 * @param selectFromWeek the selectFromWeek to set
+	 */
+	public void setSelectFromWeek(String selectFromWeek) {
+		this.selectFromWeek = selectFromWeek;
+	}
+
+	/**
+	 * @return the pointId
+	 */
+	public String getPointId() {
+		return pointId;
+	}
+
+	/**
+	 * @param pointId the pointId to set
+	 */
+	public void setPointId(String pointId) {
+		this.pointId = pointId;
 	}
 	
 }
