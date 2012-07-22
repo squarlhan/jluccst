@@ -272,6 +272,7 @@ public class SMSAtion extends ActionSupport{
 				//创建短信实体对象并赋值
 				SMSInfo info = new SMSInfo();
 				info.setCustomerInfo(obj);
+				info.setOrganId(obj.getOrganId());
 				info.setPhone(obj.getPhone());
 				info.setInfo(allContent.toString());
 				Calendar time = Calendar.getInstance();
@@ -345,7 +346,7 @@ public class SMSAtion extends ActionSupport{
 				
 				SMSInfo info = new SMSInfo();
 				//info.setCustomerInfo(obj);
-				
+				info.setOrganId(obj.getOrganId());
 				String currentUserName = "张三";           //当前用户的名字
 				String currentUserPhone = "13514318022";//当前用户的手机号
 				Calendar time = Calendar.getInstance();
