@@ -32,11 +32,11 @@ public class SMSCustomerInfo {
 	@Column(name = "ID", length=50)
 	private String id;
 
-//	/**
-//	 * 所属销售人员Id
-//	 */
-//	@Column(name = "SALESMAN_ID" , length = 50)
-//	private String salesmanId;
+	/**
+	 * 所属销售人员Id
+	 */
+	@Column(name = "SALESMAN_ID" , length = 50)
+	private String salesmanId;
 	
 	/**
 	 * 人员所属机构或公司Id
@@ -310,5 +310,13 @@ public class SMSCustomerInfo {
 
 	public void setOrganName(String organName) {
 		this.organName = organName;
+	}
+
+	public String getSalesmanId() {
+		return salesmanId;
+	}
+
+	public void setSalesmanId(String salesmanId) {
+		this.salesmanId = salesmanId;
 	}
 }
