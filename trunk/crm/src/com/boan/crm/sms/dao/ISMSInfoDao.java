@@ -8,6 +8,6 @@ import com.boan.crm.utils.dao.IBaseDao;
  * @author Administrator
  *
  */
-public interface ISMSDao extends IBaseDao<SMSInfo, String> {
+public interface ISMSInfoDao extends IBaseDao<SMSInfo, String> {
 	
 }

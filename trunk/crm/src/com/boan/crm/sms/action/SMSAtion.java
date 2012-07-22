@@ -1,7 +1,26 @@
 package com.boan.crm.sms.action;
 
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
+
+import com.boan.crm.groupmanage.model.Role;
+import com.boan.crm.sms.model.SMSCustomerInfo;
+import com.boan.crm.sms.model.SMSInfo;
+import com.boan.crm.sms.service.ISMSCustomerInfoService;
+import com.boan.crm.sms.service.ISMSInfoService;
+import com.boan.crm.sms.service.ISMSManageService;
+import com.boan.crm.utils.calendar.LunarCalendarUtils;
+import com.boan.crm.utils.page.Pagination;
+import com.boan.crm.utils.pinyin.PinYin4J;
+import com.opensymphony.xwork2.ActionSupport;
 
 /**
  * 短信管理
@@ -10,6 +29,548 @@ import org.springframework.stereotype.Controller;
  */
 @Controller("SMSAtion")
 @Scope("prototype")
-public class SMSAtion {
+public class SMSAtion extends ActionSupport{
 
+	private static final long serialVersionUID = -1280440304213417041L;
+
+	@Autowired
+	@Qualifier("SMSCustomerInfoService")
+	private ISMSCustomerInfoService bookerService;
+	
+	@Autowired
+	@Qualifier("SMSInfoService")
+	private ISMSInfoService smsInfoService;
+	
+	@Autowired
+	@Qualifier("SMSManageService")
+	private ISMSManageService smsManageService;
+	/**
+	 * 返回给页面的可供选择的短信接受者json字符串
+	 */
+	private String customersJsonStr;
+	/**
+	 * 返回给页面的可供选择的短信接受者类型json字符串
+	 */
+	private String customersTypeJsonStr;
+	/**
+	 * 返回给页面的可供选择的短信接受者数量json字符串
+	 */
+	private String customersCountJsonStr;
+	/**
+	 * 前台选择的人员类型ID
+	 */
+	private String typeId;
+	/**
+	 * ajax选择人员控件分页基数
+	 */
+	private String pageSize;
+	/**
+	 * ajax选择人员控件分页当前页
+	 */
+	private String p;
+	/**
+	 * 人员选择中模糊查询条件
+	 */
+	private String name;
+	
+	/**
+	 * 接收页面ajax提供的人员Id
+	 */
+	private String personIds;
+	
+	/**
+	 * 人员数组
+	 */
+	private List<SMSCustomerInfo> customerInfoList;
+	
+	/**
+	 * 信息头类型
+	 */
+	private String headType;
+	
+	/**
+	 * 信息头缀
+	 */
+	private String headSuffix;
+	
+	/**
+	 * 信息头问候
+	 */
+	private String headHello;
+	
+	/**
+	 * 信息内容
+	 */
+	private String infoContent;
+	
+	/**
+	 * 信息尾
+	 */
+	private String footContent;
+	
+	/**
+	 * 发送类型（IMMEDIATELY：立即发送；SCHEDULED：定时发送；BIRTHDAY：按生日发送）
+	 */
+	private String sendType;
+	
+	/**
+	 * 短信接收者id
+	 */
+	private String[] selectedIds;
+	
+	/**
+	 * 发送日期
+	 */
+	private String sendDay;
+	
+	/**
+	 * 发送时间
+	 */
+	private String sendTime;
+	
+	/**
+	 * 显示分页
+	 */
+	private Pagination<SMSInfo> pagination = new Pagination<SMSInfo>();
+	
+	/**
+	 * 添加人员时，是否只添加客户（no：不是  yes：是）
+	 */
+	private String onlycustomer = "no";
+	
+	/**
+	 * 提前发送时间
+	 */
+	private String beforeTime;
+	
+	/**
+	 * 查询供选择接收短信的人员信息
+	 * @return
+	 */
+	public String loadCustomers(){
+		try {
+			
+			
+			pageSize=(pageSize==null || pageSize.trim().equals("")) ? "0" : pageSize;
+			p=(p==null || p.trim().equals("")) ? "1" : p;
+			name=name==null ? "" : name;
+			name = new String(name.getBytes("iso8859-1"));
+			
+			Map<String,Object> params = new HashMap<String,Object>();
+			
+			if(!name.equals("")){
+				params.put("nameSpell", PinYin4J.makeStringByStringSet(PinYin4J.getPinyin(name)));
+			}
+			if(typeId!=null && !typeId.equals("") && !typeId.equals("-1")){
+				params.put("categoryId", typeId);
+			}
+			customersTypeJsonStr="[{name:'客户',id:'1'},{name:'销售人员',id:'2'}]";
+			if(onlycustomer.equals("yes")){
+				params.put("categoryId", "1");
+				customersTypeJsonStr="[{name:'客户',id:'1'}]";
+			}
+			
+			List<SMSCustomerInfo> list = bookerService.findSMSCustomerInfoForPage(params,Integer.parseInt(p)-1,Integer.parseInt(pageSize));
+			customersJsonStr= "[";
+			for(SMSCustomerInfo person : list){
+				//1为客户 2为销售人员
+				if(person.getCategoryId().equals("1")){
+					customersJsonStr=customersJsonStr+"{fUid:'"+person.getId()+"',friendUserName:'"+person.getName()+"',friendHeadPic:'../js/friendsuggest/images/man.png'},";
+				}else{
+					customersJsonStr=customersJsonStr+"{fUid:'"+person.getId()+"',friendUserName:'"+person.getName()+"',friendHeadPic:'../js/friendsuggest/images/woman.png'},";
+				}
+			}
+			if(customersJsonStr.length()>1){
+				customersJsonStr = customersJsonStr.substring(0, customersJsonStr.lastIndexOf(","));
+			}
+			customersJsonStr=customersJsonStr+ "]";
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return SUCCESS;
+	}
+
+	/**
+	 * 查询供选择接收短信的人员数量
+	 * @return
+	 */
+	public String loadCustomersCount(){
+		try {
+			pageSize=(pageSize==null || pageSize.trim().equals("")) ? "0" : pageSize;
+			p=(p==null || p.trim().equals("")) ? "1" : p;
+			name=name==null ? "" : name;
+			name = new String(name.getBytes("iso8859-1"));
+			
+			Map<String,Object> params = new HashMap<String,Object>();
+			
+			if(!name.equals("")){
+				params.put("nameSpell", PinYin4J.makeStringByStringSet(PinYin4J.getPinyin(name)));
+			}
+			if(typeId!=null && !typeId.equals("") && !typeId.equals("-1")){
+				params.put("categoryId", typeId);
+			}
+			if(onlycustomer.equals("yes")){
+				params.put("categoryId", "1");
+			}
+			customersCountJsonStr=""+bookerService.findSMSCustomerInfoCountForPage(params);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return SUCCESS;
+	}
+	
+	/**
+	 * 查询客户信息，返回信息数组给ajax请求页面
+	 * @return
+	 */
+	public String loadCustomerInfoForAjax(){
+		String[] ids = personIds.split(",");
+		customerInfoList = bookerService.findSMSCustomerInfoByIds(ids);
+		return "customerInfoList";
+	}
+	
+	/**
+	 * 发送信息
+	 * @return
+	 */
+	public String sendInfo(){
+		//初始化短信发送接口
+		//smsManageService.initClient("3SDK-ECQ-0130-LGWLM","17725","key-177259");
+		//存放短信的完整信息
+		StringBuffer allContent = null;
+		if(selectedIds.length>0){
+			List<SMSCustomerInfo> personList = bookerService.findSMSCustomerInfoByIds(selectedIds);
+			for(SMSCustomerInfo obj : personList){
+				//根据id查询人，根据人名截取姓氏
+				String lastName = obj.getName().substring(0,1);
+				//根据id查询人，根据获取昵称
+				String nickname = obj.getNickname();
+				allContent = new StringBuffer();
+				if(headType!=null && !headType.equals("")){
+					if(headType.equals("姓氏")){
+						allContent.append(" "+lastName);
+					}
+					if(headType.equals("昵称")){
+						allContent.append(" "+nickname);
+					}
+				}
+				//拼接发送内容体
+				if(headSuffix!=null && !headSuffix.equals("")){
+					allContent.append(headSuffix);
+				}
+				if(headHello!=null && !headHello.equals("")){
+					allContent.append(headHello+" ");
+				}
+				if(infoContent!=null && !infoContent.equals("")){
+					allContent.append(infoContent+"   ");
+				}
+				if(footContent!=null && !footContent.equals("")){
+					allContent.append(footContent);
+				}
+				//创建短信实体对象并赋值
+				SMSInfo info = new SMSInfo();
+				info.setCustomerInfo(obj);
+				info.setPhone(obj.getPhone());
+				info.setInfo(allContent.toString());
+				Calendar time = Calendar.getInstance();
+				if(sendType.equals("SCHEDULED")){
+					if(sendDay!=null && sendTime!=null && !sendDay.equals("") && !sendTime.equals("")){
+						String[] dayArray = sendDay.split("-");
+						String[] timeArray = sendTime.split(":");
+						if(dayArray.length>0 && timeArray.length>0){
+							time.set(Calendar.YEAR, Integer.parseInt(dayArray[0]));
+							time.set(Calendar.MONTH, Integer.parseInt(dayArray[1]));
+							time.set(Calendar.DATE, Integer.parseInt(dayArray[2]));
+							time.set(Calendar.HOUR_OF_DAY, Integer.parseInt(timeArray[0]));
+							time.set(Calendar.MINUTE, Integer.parseInt(timeArray[1]));
+						}
+						//定时发送
+						info.setIsImmediately(1);
+						info.setSendTime(time);
+						smsInfoService.saveSMSInfo(info);
+					}
+				}else if(sendType.equals("BIRTHDAY")){
+					//如果发送日期和发送时间不为空，表示是定时发送
+					if(sendTime!=null && !sendTime.equals("")){
+						Calendar birthday = Calendar.getInstance();
+						String[] timeArray = sendTime.split(":");
+						if(obj.getBirthday()!=null){
+							if(obj.getIsLunarCalender()==0){//阴历
+								Date temp = LunarCalendarUtils.getGregorianCalendar(birthday.get(Calendar.YEAR)+"-"+(obj.getBirthday().get(Calendar.MONTH)+1)+"-"+ obj.getBirthday().get(Calendar.DATE));
+								time.setTime(temp);
+								System.out.println(LunarCalendarUtils.toLongString(time));
+							}else{ //阳历
+								birthday = obj.getBirthday();
+								time.set(Calendar.YEAR, birthday.get(Calendar.YEAR));
+								time.set(Calendar.MONTH,  birthday.get(Calendar.MONTH));
+								time.set(Calendar.DATE, birthday.get(Calendar.DATE));
+							}
+							if( timeArray.length>0){
+								time.set(Calendar.HOUR_OF_DAY, Integer.parseInt(timeArray[0]));
+								time.set(Calendar.MINUTE, Integer.parseInt(timeArray[1]));
+							}
+							//定时发送
+							info.setIsImmediately(1);
+							info.setSendTime(time);
+							smsInfoService.saveSMSInfo(info);
+						}
+					}
+				}else{
+					//立即发送
+					info.setIsImmediately(0);
+					info.setSendTime(time);
+					//调用短信发送接口
+					int flag = 0;//smsManageService.sendSMS(info.getInfo(), info.getPhone());
+					//保存记录到数据库
+					if(flag==0){
+						smsInfoService.saveSMSInfo(info);
+					}
+				}
+			}
+		}
+		return NONE;
+	}
+
+	/**
+	 * 提前发送天数发送
+	 * @return
+	 */
+	public String sendInfoBeforeTime(){
+		if(selectedIds.length>0){
+			StringBuffer allContent = null;
+			List<SMSCustomerInfo> personList = bookerService.findSMSCustomerInfoByIds(selectedIds);
+			for(SMSCustomerInfo obj : personList){
+				
+				SMSInfo info = new SMSInfo();
+				//info.setCustomerInfo(obj);
+				
+				String currentUserName = "张三";           //当前用户的名字
+				String currentUserPhone = "13514318022";//当前用户的手机号
+				Calendar time = Calendar.getInstance();
+				Calendar birthday = Calendar.getInstance();
+				String[] timeArray = sendTime.split(":");
+				if(obj.getBirthday()!=null){
+					if(obj.getIsLunarCalender()==0){//阴历
+						Date temp = LunarCalendarUtils.getGregorianCalendar(birthday.get(Calendar.YEAR)+"-"+(obj.getBirthday().get(Calendar.MONTH)+1)+"-"+ obj.getBirthday().get(Calendar.DATE));
+						time.setTime(temp);
+						System.out.println(LunarCalendarUtils.toLongString(time));
+					}else{ //阳历
+						birthday = obj.getBirthday();
+						time.set(Calendar.YEAR, birthday.get(Calendar.YEAR));
+						time.set(Calendar.MONTH,  birthday.get(Calendar.MONTH));
+						time.set(Calendar.DATE, birthday.get(Calendar.DATE));
+					}
+					if( timeArray.length>0){
+						time.set(Calendar.HOUR_OF_DAY, Integer.parseInt(timeArray[0]));
+						time.set(Calendar.MINUTE, Integer.parseInt(timeArray[1]));
+					}
+				}
+				
+				info.setPhone(currentUserPhone);
+				allContent= new StringBuffer();
+				allContent.append(currentUserName + ", 您的客户"+obj.getName());
+				if(obj.getNickname()!=null && !obj.getNickname().trim().equals("")){
+					allContent.append("("+obj.getNickname()+")");
+				}
+
+				allContent.append("将于"+time.get(Calendar.YEAR)+"-"+time.get(Calendar.MONTH)+"-"+time.get(Calendar.DATE));
+				allContent.append("过生日，记得送去祝福！");
+				
+				info.setInfo(allContent.toString());
+				
+				if(beforeTime.equals("ONE_DAY")){
+					time.add(Calendar.DATE, 1);
+				}
+				if(beforeTime.equals("TWO_DAY")){
+					time.add(Calendar.DATE, 2);
+				}
+				if(beforeTime.equals("ONT_WEEK")){
+					time.add(Calendar.DATE, 7);
+				}
+				if(beforeTime.equals("FIFTEEN_DAY")){
+					time.add(Calendar.DATE, 15);
+				}
+				//定时发送
+				info.setIsImmediately(1);
+				info.setSendTime(time);
+				smsInfoService.saveSMSInfo(info);
+			}
+		}
+		return NONE;
+	}
+
+	/**
+	 * 查询发送记录
+	 * @return
+	 */
+	public String loadSendedRecord(){
+		pagination =  smsInfoService.findSMSInfoForPage(null,pagination);
+		return SUCCESS;
+	}
+	
+	public String getCustomersJsonStr() {
+		return customersJsonStr;
+	}
+
+	public void setCustomersJsonStr(String customersJsonStr) {
+		this.customersJsonStr = customersJsonStr;
+	}
+
+	public String getCustomersTypeJsonStr() {
+		return customersTypeJsonStr;
+	}
+
+	public void setCustomersTypeJsonStr(String customersTypeJsonStr) {
+		this.customersTypeJsonStr = customersTypeJsonStr;
+	}
+
+	public String getCustomersCountJsonStr() {
+		return customersCountJsonStr;
+	}
+
+	public void setCustomersCountJsonStr(String customersCountJsonStr) {
+		this.customersCountJsonStr = customersCountJsonStr;
+	}
+
+	public String getTypeId() {
+		return typeId;
+	}
+
+	public void setTypeId(String typeId) {
+		this.typeId = typeId;
+	}
+
+	public String getPageSize() {
+		return pageSize;
+	}
+
+	public void setPageSize(String pageSize) {
+		this.pageSize = pageSize;
+	}
+
+	public String getP() {
+		return p;
+	}
+
+	public void setP(String p) {
+		this.p = p;
+	}
+	
+	public String getName() {
+		return name;
+	}
+	public void setName(String name) {
+		this.name = name;
+	}
+	public String getPersonIds() {
+		return personIds;
+	}
+	public void setPersonIds(String personIds) {
+		this.personIds = personIds;
+	}
+	public List<SMSCustomerInfo> getCustomerInfoList() {
+		return customerInfoList;
+	}
+	public void setCustomerInfoList(List<SMSCustomerInfo> customerInfoList) {
+		this.customerInfoList = customerInfoList;
+	}
+
+	public String getFootContent() {
+		return footContent;
+	}
+
+	public void setFootContent(String footContent) {
+		this.footContent = footContent;
+	}
+
+	public String getHeadHello() {
+		return headHello;
+	}
+
+	public void setHeadHello(String headHello) {
+		this.headHello = headHello;
+	}
+
+	public String getSendDay() {
+		return sendDay;
+	}
+
+	public void setSendDay(String sendDay) {
+		this.sendDay = sendDay;
+	}
+
+	public String getSendTime() {
+		return sendTime;
+	}
+
+	public void setSendTime(String sendTime) {
+		this.sendTime = sendTime;
+	}
+
+	public String getHeadType() {
+		return headType;
+	}
+
+	public void setHeadType(String headType) {
+		this.headType = headType;
+	}
+
+	public String getHeadSuffix() {
+		return headSuffix;
+	}
+
+	public void setHeadSuffix(String headSuffix) {
+		this.headSuffix = headSuffix;
+	}
+
+	public String[] getSelectedIds() {
+		return selectedIds;
+	}
+
+	public void setSelectedIds(String[] selectedIds) {
+		this.selectedIds = selectedIds;
+	}
+
+	public String getInfoContent() {
+		return infoContent;
+	}
+
+	public void setInfoContent(String infoContent) {
+		this.infoContent = infoContent;
+	}
+
+	public String getSendType() {
+		return sendType;
+	}
+
+	public void setSendType(String sendType) {
+		this.sendType = sendType;
+	}
+
+	
+	public Pagination<SMSInfo> getPagination() {
+		return pagination;
+	}
+
+	public void setPagination(Pagination<SMSInfo> pagination) {
+		this.pagination = pagination;
+	}
+
+	public String getOnlycustomer() {
+		return onlycustomer;
+	}
+
+	public String getBeforeTime() {
+		return beforeTime;
+	}
+
+	public void setBeforeTime(String beforeTime) {
+		this.beforeTime = beforeTime;
+	}
+
+	public void setOnlycustomer(String onlycustomer) {
+		this.onlycustomer = onlycustomer;
+	}
 }

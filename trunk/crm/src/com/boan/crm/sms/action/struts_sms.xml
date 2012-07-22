@@ -5,6 +5,22 @@
 <struts>
 	<!-- 短信Action -->
 	<package name="sms" extends="struts-default" namespace="/">
-		
+		<action name="sendInfoAction" class="SMSAtion" method="sendInfo"></action>
+		<action name="sendInfoBeforeTimeAction" class="SMSAtion" method="sendInfoBeforeTime"></action>
+		<action name="loadSendedRecordAction" class="SMSAtion" method="loadSendedRecord">
+			<result name="success">/sms/smssendrecord.jsp</result>
+			<result name="input">/sms/smssendrecord.jsp</result>
+		</action>
+	</package>
+	<package name="smsAjax" extends="json-default" namespace="/">
+		<action name="loadCustomersAction" class="SMSAtion" method="loadCustomers">
+            <result type="json"></result>
+        </action>
+		<action name="loadCustomersCountAction" class="SMSAtion" method="loadCustomersCount">
+            <result type="json"></result>
+        </action>
+		<action name="loadCustomerInfoForAjaxAction" class="SMSAtion" method="loadCustomerInfoForAjax">
+            <result type="json" name="customerInfoList"></result>
+        </action>
 	</package>
 </struts>
