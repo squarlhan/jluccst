@@ -79,12 +79,13 @@ public class SMSInfoServiceImpl implements ISMSInfoService{
 	
 	/**
 	 * 查询指定时间段内没有发送的短信
-	 * @param beginTime
-	 * @param endTime
+	 * @param beginTime 开始时间
+	 * @param endTime 结束时间
+	 * @param organId 短信所属公司
 	 * @return
 	 */
-	public List<SMSInfo> findSMSInfoByTime(Calendar beginTime,Calendar endTime){
-		String hql = " from SMSInfo where sendTime  :beginTime <=sendTime<= :endTime and state =1 order by sendTime asc";
+	public List<SMSInfo> findSMSInfoByTime(Calendar beginTime,Calendar endTime,String organId){
+		String hql = " from SMSInfo where :beginTime <=sendTime and sendTime<= :endTime and state =1 and organId='"+organId+"' order by sendTime asc";
 		Map<String, Calendar> values = new HashMap();
 		values.put("beginTime",beginTime);
 		values.put("endTime",endTime);
