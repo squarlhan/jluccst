@@ -39,6 +39,12 @@ public class SMSInfo {
 	private SMSCustomerInfo customerInfo;
 	
 	/**
+	 * 发短信的机构或公司Id
+	 */
+	@Column(name = "ORGAN_ID", length=50)
+	private String organId;
+	
+	/**
 	 * 電話號
 	 */
 	@Column(name = "PHONE" , length = 50)
@@ -109,5 +115,11 @@ public class SMSInfo {
 	}
 	public void setState(int state) {
 		this.state = state;
+	}
+	public String getOrganId() {
+		return organId;
+	}
+	public void setOrganId(String organId) {
+		this.organId = organId;
 	}
 }
