@@ -10,6 +10,8 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import com.boan.crm.customer.model.CustomerInfo;
+
 /***
  * 短信名片信息实体
  * @author Administrator
@@ -27,7 +29,26 @@ public class SMSCustomerInfo {
 	@Id
 	@GenericGenerator(name = "system-uuid", strategy = "uuid")
 	@GeneratedValue(generator = "system-uuid")
+	@Column(name = "ID", length=50)
 	private String id;
+
+//	/**
+//	 * 所属销售人员Id
+//	 */
+//	@Column(name = "SALESMAN_ID" , length = 50)
+//	private String salesmanId;
+	
+	/**
+	 * 人员所属机构或公司Id
+	 */
+	@Column(name = "ORGAN_ID", length=50)
+	private String organId;
+	
+	/**
+	 * 人员所属机构或公司名称
+	 */
+	@Column(name = "ORGAN_NAME", length=200)
+	private String organName;
 
 	/**
 	 * 電話號
@@ -40,6 +61,12 @@ public class SMSCustomerInfo {
 	 */
 	@Column(name = "NAME" , length = 20)
 	private String name;
+	
+	/**
+	 * 姓名全拼
+	 */
+	@Column(name = "NAME_SPELL" , length = 20)
+	private String nameSpell;
 	
 	/**
 	 * 昵称
@@ -259,5 +286,29 @@ public class SMSCustomerInfo {
 
 	public void setCreateTime(Calendar createTime) {
 		this.createTime = createTime;
+	}
+
+	public String getNameSpell() {
+		return nameSpell;
+	}
+
+	public void setNameSpell(String nameSpell) {
+		this.nameSpell = nameSpell;
+	}
+	
+	public String getOrganId() {
+		return organId;
+	}
+
+	public void setOrganId(String organId) {
+		this.organId = organId;
+	}
+
+	public String getOrganName() {
+		return organName;
+	}
+
+	public void setOrganName(String organName) {
+		this.organName = organName;
 	}
 }

@@ -1,5 +1,6 @@
 package com.boan.crm.sms.service.impl;
 
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,10 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import com.boan.crm.backstagemanage.model.Company;
-import com.boan.crm.sms.dao.ISMSDao;
+import com.boan.crm.sms.dao.ISMSInfoDao;
 import com.boan.crm.sms.model.SMSInfo;
-import com.boan.crm.sms.service.ISMSService;
+import com.boan.crm.sms.service.ISMSInfoService;
 import com.boan.crm.utils.page.Pagination;
 
 /**
@@ -19,12 +19,12 @@ import com.boan.crm.utils.page.Pagination;
  * @author Administrator
  *
  */
-@Service("SMSService")
-public class SMSServiceImpl implements ISMSService{
+@Service("SMSInfoService")
+public class SMSInfoServiceImpl implements ISMSInfoService{
 
 	@Autowired
-	@Qualifier("SMSDao")
-	private ISMSDao dao;
+	@Qualifier("SMSInfoDao")
+	private ISMSInfoDao dao;
 	
 	/**
 	 * 保存短信信息
@@ -75,5 +75,20 @@ public class SMSServiceImpl implements ISMSService{
 		pagination.setTotalRows(totalRows);
 		pagination.setData(data);
 		return pagination;
+	}
+	
+	/**
+	 * 查询指定时间段内没有发送的短信
+	 * @param beginTime
+	 * @param endTime
+	 * @return
+	 */
+	public List<SMSInfo> findSMSInfoByTime(Calendar beginTime,Calendar endTime){
+		String hql = " from SMSInfo where sendTime  :beginTime <=sendTime<= :endTime and state =1 order by sendTime asc";
+		Map<String, Calendar> values = new HashMap();
+		values.put("beginTime",beginTime);
+		values.put("endTime",endTime);
+		List<SMSInfo> list = dao.find(hql, values);
+		return list;
 	}
 }

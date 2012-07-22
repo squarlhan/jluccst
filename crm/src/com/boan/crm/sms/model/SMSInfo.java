@@ -3,7 +3,6 @@ package com.boan.crm.sms.model;
 import java.util.Calendar;
 
 import javax.persistence.Column;
-import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -31,13 +30,19 @@ public class SMSInfo {
 	@GenericGenerator(name = "system-uuid", strategy = "uuid")
 	@GeneratedValue(generator = "system-uuid")
 	private String id;
-
+	
 	/**
 	 * 名片信息
 	 */
 	@ManyToOne(targetEntity=SMSCustomerInfo.class)
 	@JoinColumn(name="CUSTOMER_ID")
 	private SMSCustomerInfo customerInfo;
+	
+	/**
+	 * 電話號
+	 */
+	@Column(name = "PHONE" , length = 50)
+	private String phone;
 	
 	/**
 	 *  短信内容
@@ -57,7 +62,7 @@ public class SMSInfo {
 	@Column(name = "IS_IMMEDIATELY", length=1)
 	private int isImmediately;
 	/**
-	 * 发送状态（0：等待    1：成功  2：失败）
+	 * 发送状态（0：准备    1：等待   2：成功 3：失败）
 	 */
 	@Column(name = "STATE", length=1)
 	private int state;
@@ -74,6 +79,12 @@ public class SMSInfo {
 	}
 	public void setCustomerInfo(SMSCustomerInfo customerInfo) {
 		this.customerInfo = customerInfo;
+	}
+	public String getPhone() {
+		return phone;
+	}
+	public void setPhone(String phone) {
+		this.phone = phone;
 	}
 	public String getInfo() {
 		return info;
