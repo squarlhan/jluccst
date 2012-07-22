@@ -42,11 +42,12 @@ public interface ISMSInfoService {
 	
 	/**
 	 * 查询指定时间段内没有发送的短信
-	 * @param beginTime
-	 * @param endTime
+	 * @param beginTime 开始时间
+	 * @param endTime 结束时间
+	 * @param organId 短信所属公司
 	 * @return
 	 */
-	public List<SMSInfo> findSMSInfoByTime(Calendar beginTime,Calendar endTime);
+	public List<SMSInfo> findSMSInfoByTime(Calendar beginTime,Calendar endTime,String organId);
 	
 	/**
      * 分页查询短信记录
