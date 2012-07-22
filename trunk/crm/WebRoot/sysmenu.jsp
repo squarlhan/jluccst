@@ -270,7 +270,7 @@
 												<img src="images/menuto.jpg" width="5" height="5" />
 											</td>
 											<td>
-												<a href="smstab.html" target="mainFrame">短信平台</a>
+												<a href="sms/smstab.jsp" target="mainFrame">短信平台</a>
 											</td>
 										</tr>
 									</table>
