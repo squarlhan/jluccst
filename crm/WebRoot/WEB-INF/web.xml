@@ -5,10 +5,16 @@
 	http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
 	<display-name>客户关系管理系统</display-name>
 
+	<!-- 防止当在tomcate中发布多个同根的应用时异常 -->
+	<context-param> 
+		<param-name>webAppRootKey</param-name> 
+		<param-value>crm.root</param-value>
+	</context-param> 
+	
 	<!-- Spring配置文件参数 -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>/WEB-INF/applicationContext-*.xml,classpath*:applicationContext-*.xml,classpath*:applicationContext*.xml</param-value>
+		<param-value>/WEB-INF/applicationContext-*.xml,classpath*:applicationContext-*.xml,classpath*:applicationContext.xml</param-value>
 	</context-param>
 	
 	<!-- Spring监听 -->
