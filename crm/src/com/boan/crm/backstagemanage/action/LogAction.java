@@ -73,6 +73,17 @@ public class LogAction extends BaseActionSupport {
 		return "log-list";
 	}
 
+	/**
+	 * 清空日志
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public String clearAllLog() throws Exception {
+		logService.deleteAllLog();
+		return this.showLogList();
+	}
+
 	public List<LogType> getLogTypeList() {
 		return logTypeList;
 	}
