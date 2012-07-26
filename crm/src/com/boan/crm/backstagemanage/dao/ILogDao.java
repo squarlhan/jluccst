@@ -96,4 +96,9 @@ public interface ILogDao extends IBaseDao<Log,String>
 	 * @throws Exception
 	 */
 	public List<Log> queryLogDateList( Calendar endTime ) throws Exception;
+	/**
+	 * 清空日志
+	 * @throws Exception
+	 */
+	public void deleteAllLog() throws Exception;
 }

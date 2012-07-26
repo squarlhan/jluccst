@@ -42,18 +42,19 @@ public class LogServiceImpl implements ILogService {
 		return dao.queryLogList(beginTime, endTime);
 	}
 
-	public Pagination<Log>  queryLogListByPage(Log log, Calendar beginTime, Calendar endTime,Pagination<Log> pagination) throws Exception {
-		 
-		 String hql = "from Log order by  createTime asc";
+	public Pagination<Log> queryLogListByPage(Log log, Calendar beginTime, Calendar endTime, Pagination<Log> pagination) throws Exception {
+
+		String hql = "from Log order by  createTime asc";
 		List<Log> data = dao.findForPage(hql, null, pagination.getStartIndex(), pagination.getPageSize());
 		hql = "select count(*) from Log";
 		int totalRows = dao.findCountForPage(hql, null);
 		pagination.setTotalRows(totalRows);
 		pagination.setData(data);
 		return pagination;
-		 
-		//return dao.queryLogListByPage(log, beginTime, endTime, begin, maxResult);
-		
+
+		// return dao.queryLogListByPage(log, beginTime, endTime, begin,
+		// maxResult);
+
 	}
 
 	public int queryLogListCount(Calendar beginTime, Calendar endTime) throws Exception {
@@ -66,5 +67,10 @@ public class LogServiceImpl implements ILogService {
 
 	public void saveLog(Log log) throws Exception {
 		dao.saveLog(log);
+	}
+
+	@Override
+	public void deleteAllLog() throws Exception {
+		dao.deleteAllLog();
 	}
 }

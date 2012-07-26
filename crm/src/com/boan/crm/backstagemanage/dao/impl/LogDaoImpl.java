@@ -211,5 +211,18 @@ public class LogDaoImpl  extends BaseDao<Log,String> implements ILogDao
 		}
 		return list;
 	}
+	@Override
+	public void deleteAllLog() throws Exception {
+		try
+		{
+			String hql = "delete from Log";
+			super.executeHql(hql,null);
+		}
+		catch( Exception ex )
+		{
+			ex.printStackTrace();
+			throw ex;
+		}
+	}
 	
 }

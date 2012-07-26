@@ -82,4 +82,9 @@ public interface ILogService {
 	 * @throws Exception
 	 */
 	public void deleteLog( Calendar beginTime, Calendar endTime ) throws Exception;
+	/**
+	 * 清空日志
+	 * @throws Excepiton
+	 */
+	public void deleteAllLog() throws Exception;
 }
