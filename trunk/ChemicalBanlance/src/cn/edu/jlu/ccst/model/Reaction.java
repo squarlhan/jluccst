@@ -183,10 +183,17 @@ public class Reaction {
 				Reaction rtemp = new Reaction();
 				for(int b=0;b<=n-1;b++){
 					if(Solver.elements.get(a)[b]==1){
+						Molecular m = new Molecular();
 						if(b<=ls-1){
-							rtemp.left.add(left.get(b));
+							m.setAtoms(left.get(b).getAtoms()) ;
+							m.setName(left.get(b).getName());
+							m.setCount(1);
+							rtemp.left.add(m);
 						}else{
-							rtemp.right.add(right.get(b-ls));
+							m.setAtoms(right.get(b-ls).getAtoms()) ;
+							m.setName(right.get(b-ls).getName());
+							m.setCount(1);
+							rtemp.right.add(m);
 						}
 					}
 				}
