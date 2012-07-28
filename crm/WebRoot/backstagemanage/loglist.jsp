@@ -43,29 +43,12 @@
 	</style>
 	<script type="text/javascript">
 	
-		$(function(){
-	  		/**
-	  		 * 删除单个设备信息
-	  		 */
-	  		$('a[name="delete"]').each(function(){
-	  			$(this).click(function(){
-	  				var url = $(this).attr("url");
-	  				if(window.confirm("您确定要删除这条信息吗？")){
-	  					$.post(url, "", function(data){window.location.href=window.location.href;});
-	  				}
-	  			});
-	  		});
-	  		
-	  		/**
-	  		 * 删除所选设备信息
-	  		 */
-	  		$("#deletepointbtn").click(function(){
-  				var url = "deleteCompanyAction.action";
-  				if(window.confirm("您确定要删除所选信息吗？")){
-  					$.post(url, $('#form1').serialize(), function(data){window.location.href=window.location.href;});
-  				}
-	  		});
-		});
+	function clearLog_click(){
+ 				if(window.confirm("您确定要清空日志吗？")){
+ 					var url = "./logAction!clearAllLog.action"
+ 					$.post(url, $('#form1').serialize(), function(data){window.location.href=window.location.href;});
+ 				}
+	}
 	</script>
 
   </head>
@@ -78,7 +61,7 @@
     <td valign="top"><table width="100%" border="0" cellspacing="5" cellpadding="0">
       <tr>
         <td>
-            <input name="deletepointbtn" type="button" class="btn_4" id="deletepointbtn" value="清空日志">
+            <input name="clearLog" type="button" class="btn_4" id="clearLog" value="清空日志"  onclick="clearLog_click();">
         <td align="right"></td>
       </tr>
     </table>
