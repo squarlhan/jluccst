@@ -5,7 +5,10 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
+import com.boan.crm.backstagemanage.common.LogType;
+import com.boan.crm.backstagemanage.model.Log;
 import com.boan.crm.common.Message;
+import com.boan.crm.groupmanage.model.Deptment;
 import com.boan.crm.groupmanage.model.Role;
 import com.boan.crm.groupmanage.service.IRoleService;
 import com.boan.crm.utils.action.BaseActionSupport;
@@ -84,6 +87,12 @@ public class RoleAction extends BaseActionSupport
 		{
 			service.save( role );
 			message.setContent( "职务信息保存成功！" );
+			// 保存日志开始
+			Log log = new Log();
+			log.setLogType(LogType.INFO);
+			log.setLogContent("[" + role.getRoleName() + "]" + "职务信息添加成功");
+			super.saveLog(log);
+			// 保存日志结束
 			return SUCCESS;
 		}
 	}
@@ -115,6 +124,12 @@ public class RoleAction extends BaseActionSupport
 		{
 			service.update(role);
 			message.setContent( "职务信息保存成功！" );
+			// 保存日志开始
+			Log log = new Log();
+			log.setLogType(LogType.INFO);
+			log.setLogContent("[" + role.getRoleName() + "]" + "职务信息保存成功");
+			super.saveLog(log);
+			// 保存日志结束
 			return SUCCESS;
 		}
 	}
@@ -125,6 +140,19 @@ public class RoleAction extends BaseActionSupport
 	 * @return
 	 */
 	public String deleteRole(){
+		if (ids != null && ids.length > 0) {
+			Role  rl= null;
+			Log log = null;
+			for (int i = 0; i < ids.length; i++) {
+				rl = service.get(ids[i]);
+				if (rl != null) {
+					log = new Log();
+					log.setLogType(LogType.INFO);
+					log.setLogContent("[" + rl.getRoleName() + "]" + "职务信息删除成功");
+					super.saveLog(log);
+				}
+			}
+		}
 		service.deleteGroupRole(ids);
 		return NONE;
 	}
