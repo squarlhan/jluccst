@@ -16,7 +16,7 @@ import org.hibernate.annotations.GenericGenerator;
  * @version 1.0.0
  */
 @Entity
-@Table(name = "COM_COMPANY")
+@Table(name = "GROUP_COMPANY")
 public class Company {
 	
 	
