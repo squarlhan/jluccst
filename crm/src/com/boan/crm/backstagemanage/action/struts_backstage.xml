@@ -26,6 +26,10 @@
 			<result name="error">/common/messagenoclose.jsp</result>
 		</action>
 		<action name="deleteCompanyAction" class="companyAction" method="deleteCompany" />
+		<action name="companyAction"  class="companyAction">
+			<result name="company-tree-for-user">/backstagemanage/companytreeforuser.jsp</result>
+			<result name="company-tree-for-dept">/backstagemanage/companytreefordept.jsp</result>
+		</action>
 	</package>
 	    <package name="log" extends="struts-default">
     	<action name="logAction" class="logAction">

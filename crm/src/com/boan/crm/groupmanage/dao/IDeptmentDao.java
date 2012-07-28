@@ -26,5 +26,5 @@ public interface IDeptmentDao extends IBaseDao<Deptment,String>{
 	 * @param rootId
 	 * @return
 	 */
-	public List<Deptment> queryAllDeptmentsByRootId( String rootId );
+	public List<Deptment> queryAllDeptmentsByCompanyId( String companyId );
 }

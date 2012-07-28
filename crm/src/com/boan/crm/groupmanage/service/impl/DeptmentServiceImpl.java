@@ -71,9 +71,9 @@ public class DeptmentServiceImpl implements IDeptmentService{
 	 */
 	public Pagination<Deptment> findDeptmentForPage(Map<String, ?> values,Pagination<Deptment> pagination){
 		
-		String hql = "from Deptment order by sortIndex asc, createTime asc";
+		String hql = "from Deptment where companyId = :companyId order by sortIndex asc, createTime asc";
 		List<Deptment> data = deptDao.findForPage(hql, values, pagination.getStartIndex(), pagination.getPageSize());
-		hql = "select count(*) from Deptment";
+		hql = "select count(*) from Deptment  where companyId = :companyId ";
 		int totalRows = deptDao.findCountForPage(hql, values);
 		pagination.setTotalRows(totalRows);
 		pagination.setData(data);
@@ -87,9 +87,9 @@ public class DeptmentServiceImpl implements IDeptmentService{
 	}
 
 	@Override
-	public List<Deptment> queryAllDeptmentsByRootId( String rootId )
+	public List<Deptment> queryAllDeptmentsByCompanyId( String companyId )
 	{
-		return deptDao.queryAllDeptmentsByRootId( rootId );
+		return deptDao.queryAllDeptmentsByCompanyId( companyId );
 	}
 
 }

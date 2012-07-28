@@ -87,9 +87,9 @@ public class CompanyServiceImpl implements ICompanyService{
 	}
 
 	@Override
-	public List<Company> queryAllCompanysByRootId( String rootId )
+	public List<Company> queryAllCompanys( )
 	{
-		return companyDao.queryAllCompanysByRootId( rootId );
+		return companyDao.queryAllCompanys( );
 	}
 
 }

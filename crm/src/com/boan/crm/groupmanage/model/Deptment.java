@@ -47,8 +47,8 @@ public class Deptment implements java.io.Serializable {
 	/**
 	 * 根节点标示
 	 */
-	@Column(name = "ROOT_ID")
-	private String rootId;
+	@Column(name = "COMPANY_ID")
+	private String companyId;
 
 	/**
 	 * 排序号
@@ -101,14 +101,6 @@ public class Deptment implements java.io.Serializable {
 		this.phone = phone;
 	}
 
-	public String getRootId() {
-		return rootId;
-	}
-
-	public void setRootId(String rootId) {
-		this.rootId = rootId;
-	}
-
 	public int getSortIndex() {
 		return sortIndex;
 	}
@@ -127,5 +119,13 @@ public class Deptment implements java.io.Serializable {
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	public String getCompanyId() {
+		return companyId;
+	}
+
+	public void setCompanyId(String companyId) {
+		this.companyId = companyId;
 	}
 }

@@ -24,8 +24,7 @@ public interface ICompanyDao extends IBaseDao<Company,String>{
 	
 	/**
 	 * 查找所有公司列表
-	 * @param rootId
 	 * @return
 	 */
-	public List<Company> queryAllCompanysByRootId( String rootId );
+	public List<Company> queryAllCompanys( );
 }

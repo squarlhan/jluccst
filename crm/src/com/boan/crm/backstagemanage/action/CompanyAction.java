@@ -8,6 +8,8 @@
  */
 package com.boan.crm.backstagemanage.action;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
@@ -17,8 +19,8 @@ import com.boan.crm.backstagemanage.common.LogType;
 import com.boan.crm.backstagemanage.model.Company;
 import com.boan.crm.backstagemanage.model.Log;
 import com.boan.crm.backstagemanage.service.ICompanyService;
-import com.boan.crm.common.GroupConfig;
 import com.boan.crm.common.Message;
+import com.boan.crm.groupmanage.service.IDeptmentService;
 import com.boan.crm.utils.action.BaseActionSupport;
 import com.boan.crm.utils.page.Pagination;
 
@@ -37,6 +39,12 @@ public class CompanyAction extends BaseActionSupport {
 	@Autowired
 	@Qualifier("companyService")
 	private ICompanyService service = null;
+	/**
+	 * 部门Service
+	 */
+	@Autowired
+	@Qualifier( "deptService" )
+	private IDeptmentService deptService = null;
 
 	/**
 	 * 显示分页
@@ -57,6 +65,11 @@ public class CompanyAction extends BaseActionSupport {
 	 * 提示
 	 */
 	private Message message = new Message();
+	
+	/**
+	 * 公司列表
+	 */
+	private List<Company> companyList = null;
 
 	/**
 	 * 显示公司列表
@@ -90,7 +103,6 @@ public class CompanyAction extends BaseActionSupport {
 			message.setContent("相同公司名称已存在，请重新输入！");
 			return ERROR;
 		} else {
-			company.setRootId(GroupConfig.ROOT_ID);
 			service.save(company);
 			message.setContent("公司信息保存成功！");
 			return SUCCESS;
@@ -121,7 +133,6 @@ public class CompanyAction extends BaseActionSupport {
 			message.setContent("相同公司名称已存在，请重新输入！");
 			return ERROR;
 		} else {
-			company.setRootId(GroupConfig.ROOT_ID);
 			service.update(company);
 			message.setContent("公司信息保存成功！");
 			// 保存日志开始
@@ -160,7 +171,32 @@ public class CompanyAction extends BaseActionSupport {
 		service.deleteGroupCompany(ids);
 		return NONE;
 	}
-
+	/**
+	 * 获取所有公司列表
+	 * @return
+	 */
+	public String showCompanyTreeForUser()
+	{
+		companyList = service.queryAllCompanys();
+		return "company-tree-for-user";
+	}
+	/**
+	 * 获取所有公司列表以及部门列表
+	 * @return
+	 */
+	public String showCompanyTreeForDept()
+	{
+		companyList = service.queryAllCompanys();
+		if( companyList != null && companyList.size() > 0 )
+		{
+			for( int i = 0; i < companyList.size(); i++ )
+			{
+				deptService.queryAllDeptmentsByCompanyId(companyList.get(i).getId());
+				
+			}
+		}
+		return "company-tree-for-dept";
+	}
 	public Company getCompany() {
 		return company;
 	}
@@ -191,5 +227,13 @@ public class CompanyAction extends BaseActionSupport {
 
 	public void setMessage(Message message) {
 		this.message = message;
+	}
+
+	public List<Company> getCompanyList() {
+		return companyList;
+	}
+
+	public void setCompanyList(List<Company> companyList) {
+		this.companyList = companyList;
 	}
 }

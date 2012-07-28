@@ -52,9 +52,8 @@ import com.boan.crm.utils.page.Pagination;
 	
 	/**
 	 * 查找所有公司列表
-	 * @param rootId
 	 * @return
 	 */
-	public List<Company> queryAllCompanysByRootId( String rootId );
+	public List<Company> queryAllCompanys( );
 }
 
