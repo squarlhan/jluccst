@@ -77,7 +77,10 @@ public class Company {
 	@Column(name = "CREATE_TIME")
 	private Calendar createTime = Calendar.getInstance();
 
-	
+	/**
+	 * 如果公司下有部门或有人，则不能删除
+	 */
+	private int deleteFlag = 0;
 	
 	public String getId() {
 		return id;
@@ -141,5 +144,13 @@ public class Company {
 
 	public void setCorporation(String corporation) {
 		this.corporation = corporation;
+	}
+
+	public int getDeleteFlag() {
+		return deleteFlag;
+	}
+
+	public void setDeleteFlag(int deleteFlag) {
+		this.deleteFlag = deleteFlag;
 	}
 }

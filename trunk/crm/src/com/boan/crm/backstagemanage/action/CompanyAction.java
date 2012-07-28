@@ -23,6 +23,7 @@ import com.boan.crm.backstagemanage.service.ICompanyService;
 import com.boan.crm.common.Message;
 import com.boan.crm.groupmanage.model.Deptment;
 import com.boan.crm.groupmanage.service.IDeptmentService;
+import com.boan.crm.groupmanage.service.IUserService;
 import com.boan.crm.utils.action.BaseActionSupport;
 import com.boan.crm.utils.page.Pagination;
 
@@ -47,6 +48,12 @@ public class CompanyAction extends BaseActionSupport {
 	@Autowired
 	@Qualifier("deptService")
 	private IDeptmentService deptService = null;
+	/**
+	 * 用户Service
+	 */
+	@Autowired
+	@Qualifier("userService")
+	private IUserService userService = null;
 
 	/**
 	 * 显示分页
@@ -82,8 +89,27 @@ public class CompanyAction extends BaseActionSupport {
 	 * 
 	 * @return
 	 */
-	public String openCompany() {
+	public String openCompany() throws Exception {
 		pagination = service.findCompanyForPage(null, pagination);
+		// 判断组下是否有部门
+		if (pagination != null && pagination.getData() != null && pagination.getData().size() > 0) {
+			List<Deptment> ls = null;
+			int count = 0;
+			for (int i = 0; i < pagination.getData().size(); i++) {
+				ls = deptService.queryAllDeptmentsByCompanyId(pagination.getData().get(i).getId());
+				if (ls != null && ls.size() > 0) {
+					// 判断部门
+					pagination.getData().get(i).setDeleteFlag(1);
+				} else {
+					// 判断公司下是否有直属用户
+					count = userService.queryUserListCount(pagination.getData().get(i).getId(), null);
+					if (count > 0) {
+						pagination.getData().get(i).setDeleteFlag(1);
+
+					}
+				}
+			}
+		}
 		return SUCCESS;
 	}
 

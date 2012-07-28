@@ -22,6 +22,7 @@ import com.boan.crm.backstagemanage.model.Log;
 import com.boan.crm.common.Message;
 import com.boan.crm.groupmanage.model.Deptment;
 import com.boan.crm.groupmanage.service.IDeptmentService;
+import com.boan.crm.groupmanage.service.IUserService;
 import com.boan.crm.utils.action.BaseActionSupport;
 import com.boan.crm.utils.page.Pagination;
 
@@ -41,6 +42,12 @@ public class DeptmentAction extends BaseActionSupport
 	@Autowired
 	@Qualifier( "deptService" )
 	private IDeptmentService service = null;
+	/**
+	 * 用户Service
+	 */
+	@Autowired
+	@Qualifier( "userService" )
+	private IUserService userService = null;
 
 	/**
 	 * 显示分页
@@ -76,7 +83,7 @@ public class DeptmentAction extends BaseActionSupport
 	 * 
 	 * @return
 	 */
-	public String openDeptment()
+	public String openDeptment() throws Exception
 	{
 		//表示是公司里的管理员维护的用户,此时companyId要从session中获取
 		if( "session".equals(who) ){
@@ -85,6 +92,18 @@ public class DeptmentAction extends BaseActionSupport
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put( "companyId", companyId );
 		pagination = service.findDeptmentForPage( map, pagination );
+		//判断组下是否有用户
+		if( pagination  != null && pagination.getData() != null && pagination .getData().size() > 0 )
+		{
+			int count = 0;
+			for( int i = 0; i < pagination .getData().size(); i++ )
+			{
+				count = userService.queryUserListCount(companyId, pagination .getData().get(i).getId());
+				if( count  > 0 ){
+					pagination .getData().get(i).setDeleteFlag(1);
+				}
+			}
+		}
 		return SUCCESS;
 	}
 
