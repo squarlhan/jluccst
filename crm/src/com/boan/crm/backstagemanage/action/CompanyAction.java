@@ -111,6 +111,12 @@ public class CompanyAction extends BaseActionSupport {
 		} else {
 			service.save(company);
 			message.setContent("公司信息保存成功！");
+			// 保存日志开始
+			Log log = new Log();
+			log.setLogType(LogType.INFO);
+			log.setLogContent("[" + company.getCompanyName() + "]" + "公司信息添加成功");
+			super.saveLog(log);
+			// 保存日志结束
 			return SUCCESS;
 		}
 	}
