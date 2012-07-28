@@ -81,7 +81,15 @@
 												<img src="images/menuto.jpg" width="5" height="5" />
 											</td>
 											<td>
-												<a href="customerReaserch.html" target="mainFrame">公司用户</a>
+												<a href="backstagemanage/companydeptmanage.jsp" target="mainFrame">公司部门</a>
+											</td>
+										</tr>
+										<tr>
+											<td width="40" align="right" style="padding-bottom: 4px;">
+												<img src="images/menuto.jpg" width="5" height="5" />
+											</td>
+											<td>
+												<a href="backstagemanage/companyusermanage.jsp" target="mainFrame">公司用户</a>
 											</td>
 										</tr>
 										<tr>

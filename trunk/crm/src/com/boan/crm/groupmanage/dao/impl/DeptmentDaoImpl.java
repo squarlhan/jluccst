@@ -48,11 +48,11 @@ public class DeptmentDaoImpl extends BaseDao<Deptment,String> implements IDeptme
 	}
 
 	@Override
-	public List<Deptment> queryAllDeptmentsByRootId( String rootId )
+	public List<Deptment> queryAllDeptmentsByCompanyId( String companyId )
 	{
-		String hql = "from Deptment where rootId = :rootId order by sortIndex asc, createTime asc";
+		String hql = "from Deptment where companyId = :companyId order by sortIndex asc, createTime asc";
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put( "rootId", rootId );
+		map.put( "companyId", companyId );
 		return super.find( hql, map );
 	}
 

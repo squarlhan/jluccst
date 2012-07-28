@@ -47,12 +47,6 @@ public class Company {
 	private String address;
 	
 	/**
-	 * 根节点标示
-	 */
-	@Column(name = "ROOT_ID")
-	private String rootId;
-	
-	/**
 	 * 公司名称
 	 */
 	@Column(name = "COMPANY_NAME")
@@ -108,15 +102,6 @@ public class Company {
     public void setAddress(String address) {
 		this.address = address;
 	}
-
-	public String getRootId() {
-		return rootId;
-	}
-
-	public void setRootId(String rootId) {
-		this.rootId = rootId;
-	}
-
 
 	public String getCompanyName() {
 		return companyName;

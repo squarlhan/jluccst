@@ -52,9 +52,9 @@ import com.boan.crm.utils.page.Pagination;
 	
 	/**
 	 * 查找所有部门列表
-	 * @param rootId
+	 * @param companyId
 	 * @return
 	 */
-	public List<Deptment> queryAllDeptmentsByRootId( String rootId );
+	public List<Deptment> queryAllDeptmentsByCompanyId( String companyId );
 }
 

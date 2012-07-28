@@ -8,12 +8,14 @@
  */
 package com.boan.crm.groupmanage.action;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
-import com.boan.crm.common.GroupConfig;
 import com.boan.crm.common.Message;
 import com.boan.crm.groupmanage.model.Deptment;
 import com.boan.crm.groupmanage.service.IDeptmentService;
@@ -31,7 +33,7 @@ import com.boan.crm.utils.page.Pagination;
 public class DeptmentAction extends BaseActionSupport
 {
 	/**
-	 * 公司Service
+	 * 部门Service
 	 */
 	@Autowired
 	@Qualifier( "deptService" )
@@ -56,6 +58,11 @@ public class DeptmentAction extends BaseActionSupport
 	 * 提示
 	 */
 	private Message message = new Message();
+	
+	/**
+	 * 公司id
+	 */
+	private String companyId = null;
 
 	/**
 	 * 显示公司列表
@@ -64,7 +71,9 @@ public class DeptmentAction extends BaseActionSupport
 	 */
 	public String openDeptment()
 	{
-		pagination = service.findDeptmentForPage( null, pagination );
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put( "companyId", companyId );
+		pagination = service.findDeptmentForPage( map, pagination );
 		return SUCCESS;
 	}
 
@@ -95,7 +104,7 @@ public class DeptmentAction extends BaseActionSupport
 		}
 		else
 		{
-			deptment.setRootId( GroupConfig.ROOT_ID );
+			deptment.setCompanyId( companyId );
 			service.save( deptment );
 			message.setContent( "部门信息保存成功！" );
 			return SUCCESS;
@@ -131,7 +140,7 @@ public class DeptmentAction extends BaseActionSupport
 		}
 		else
 		{
-			deptment.setRootId( GroupConfig.ROOT_ID );
+			deptment.setCompanyId( companyId );
 			service.update( deptment );
 			message.setContent( "部门信息保存成功！" );
 			return SUCCESS;
@@ -187,5 +196,13 @@ public class DeptmentAction extends BaseActionSupport
 	public void setMessage( Message message )
 	{
 		this.message = message;
+	}
+
+	public String getCompanyId() {
+		return companyId;
+	}
+
+	public void setCompanyId(String companyId) {
+		this.companyId = companyId;
 	}
 }
