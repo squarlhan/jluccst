@@ -103,6 +103,21 @@
 		<filter-name>encodingFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
+	<!-- 验证SESSION -->
+	<filter>
+		<filter-name>validationSessionFilter</filter-name>
+		<filter-class>
+			com.boan.crm.groupmanage.filter.SessionValidationFilter
+		</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>validationSessionFilter</filter-name>
+		<url-pattern>*.jsp</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>validationSessionFilter</filter-name>
+		<url-pattern>*.action</url-pattern>
+	</filter-mapping>
 	<!-- 验证SESSION完毕 -->
 	<welcome-file-list>
 		<welcome-file>default.jsp</welcome-file>
