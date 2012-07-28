@@ -69,6 +69,8 @@ public class UserAction extends BaseActionSupport
 	private String deleteId = null;
 	
 	private String companyId = null;
+	//标识是哪个用户维护的用户
+	private String who = null;
 
 	private List<UserType> userTypeList = UserType.getUserTypeList();
 
@@ -211,6 +213,10 @@ public class UserAction extends BaseActionSupport
 	 */
 	public String showUserList() throws Exception
 	{
+		//表示是公司里的管理员维护的用户,此时companyId要从session中获取
+		if( "session".equals(who) ){
+			companyId = sessionCompanyId;
+		}
 		pagination = userService.queryUserList( companyId, deptId,pagination );
 		if( pagination != null && pagination.getData().size() > 0 )
 		{
@@ -465,5 +471,13 @@ public class UserAction extends BaseActionSupport
 
 	public void setCompanyId(String companyId) {
 		this.companyId = companyId;
+	}
+
+	public String getWho() {
+		return who;
+	}
+
+	public void setWho(String who) {
+		this.who = who;
 	}
 }

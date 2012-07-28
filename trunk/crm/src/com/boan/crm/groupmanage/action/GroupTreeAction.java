@@ -36,13 +36,17 @@ public class GroupTreeAction extends BaseActionSupport
 	
 	private String companyId = null;
 	
+	private String companyName = null;
+	
 	/**
 	 * 显示组织机构树,带公司、工厂、车间
 	 * @return
 	 */
 	public String showGroupTreeForUser() throws Exception
 	{
-		deptList = deptService.queryAllDeptmentsByCompanyId( companyId );
+		companyId = sessionCompanyId;
+		companyName = sessionCompanyName;
+		deptList = deptService.queryAllDeptmentsByCompanyId( sessionCompanyId );
 		return "group-tree-for-user";
 	}
 	
@@ -62,6 +66,14 @@ public class GroupTreeAction extends BaseActionSupport
 
 	public void setCompanyId(String companyId) {
 		this.companyId = companyId;
+	}
+
+	public String getCompanyName() {
+		return companyName;
+	}
+
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
 	}
 }
 

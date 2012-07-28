@@ -24,6 +24,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
+import com.boan.crm.backstagemanage.model.Company;
+import com.boan.crm.backstagemanage.service.ICompanyService;
 import com.boan.crm.common.Message;
 import com.boan.crm.groupmanage.common.UserSession;
 import com.boan.crm.groupmanage.model.Deptment;
@@ -56,9 +58,14 @@ public class UserLogonAction extends ActionSupport
 	@Autowired
 	@Qualifier("popedomService")
 	private IPopedomService popedomService = null;
-	
 	/**
 	 * 获取公司名称
+	 */
+	@Autowired
+	@Qualifier("companyService")
+	private ICompanyService companyService = null;
+	/**
+	 * 获取部门名称
 	 */
 	@Autowired
 	@Qualifier("deptService")
@@ -79,6 +86,8 @@ public class UserLogonAction extends ActionSupport
 	private String newPassword = null;
 	
 	private String companyName = null;
+	
+	private String deptName = null;
 	
 	private String factoryName = null;
 
@@ -120,9 +129,21 @@ public class UserLogonAction extends ActionSupport
 				userSession.setUsername( user.getUsername() );
 				userSession.setUserCName( user.getUserCName() );
 				userSession.setDeptId( user.getDeptId() );
+				userSession.setCompanyId(user.getCompanyId());
 				userSession.setUserType( user.getUserType() );
 				userSession.setPopedomKeys( popedomKeys );
 				
+				if( companyService != null )
+				{
+					if( StringUtils.isNotBlank(user.getCompanyId() ))
+					{
+						Company  company = companyService.get( user.getCompanyId() );
+						if( company != null )
+						{
+							userSession.setCompanyName( company.getCompanyName());
+						}
+					}
+				}
 				if( deptService != null )
 				{
 					if( StringUtils.isNotBlank(user.getDeptId() ))
@@ -184,10 +205,15 @@ public class UserLogonAction extends ActionSupport
 			{
 				userCName = ( ( UserSession ) session.getAttribute( "userSession" ) ).getUserCName();
 			}
+			if( StringUtils.isNotBlank( ( ( UserSession ) session.getAttribute( "userSession" ) ).getCompanyName() ) )
+			{
+				companyName = ( ( UserSession ) session.getAttribute( "userSession" ) ).getCompanyName();
+				fullGroupName += companyName + "→"; 
+			}
 			if( StringUtils.isNotBlank( ( ( UserSession ) session.getAttribute( "userSession" ) ).getDeptName() ) )
 			{
-				companyName = ( ( UserSession ) session.getAttribute( "userSession" ) ).getDeptName();
-				fullGroupName += companyName + "→"; 
+				deptName = ( ( UserSession ) session.getAttribute( "userSession" ) ).getDeptName();
+				fullGroupName += deptName + "→"; 
 			}
 			fullGroupName = fullGroupName.substring( 1, fullGroupName.length() );
 			if( fullGroupName.length() > 0 )
@@ -373,6 +399,14 @@ public class UserLogonAction extends ActionSupport
 	public void setFullGroupName( String fullGroupName )
 	{
 		this.fullGroupName = fullGroupName;
+	}
+
+	public String getDeptName() {
+		return deptName;
+	}
+
+	public void setDeptName(String deptName) {
+		this.deptName = deptName;
 	}
 
 }

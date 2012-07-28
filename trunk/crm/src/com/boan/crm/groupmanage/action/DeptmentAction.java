@@ -63,6 +63,10 @@ public class DeptmentAction extends BaseActionSupport
 	 * 公司id
 	 */
 	private String companyId = null;
+	/**
+	 * 维护人标识，是超级管理员还是公司内部人员维护的
+	 */
+	private String who = null;
 
 	/**
 	 * 显示公司列表
@@ -71,6 +75,10 @@ public class DeptmentAction extends BaseActionSupport
 	 */
 	public String openDeptment()
 	{
+		//表示是公司里的管理员维护的用户,此时companyId要从session中获取
+		if( "session".equals(who) ){
+			companyId = sessionCompanyId;
+		}
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put( "companyId", companyId );
 		pagination = service.findDeptmentForPage( map, pagination );
@@ -204,5 +212,13 @@ public class DeptmentAction extends BaseActionSupport
 
 	public void setCompanyId(String companyId) {
 		this.companyId = companyId;
+	}
+
+	public String getWho() {
+		return who;
+	}
+
+	public void setWho(String who) {
+		this.who = who;
 	}
 }
