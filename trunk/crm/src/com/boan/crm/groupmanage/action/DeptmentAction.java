@@ -16,6 +16,9 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
+import com.boan.crm.backstagemanage.common.LogType;
+import com.boan.crm.backstagemanage.model.Company;
+import com.boan.crm.backstagemanage.model.Log;
 import com.boan.crm.common.Message;
 import com.boan.crm.groupmanage.model.Deptment;
 import com.boan.crm.groupmanage.service.IDeptmentService;
@@ -115,6 +118,12 @@ public class DeptmentAction extends BaseActionSupport
 			deptment.setCompanyId( companyId );
 			service.save( deptment );
 			message.setContent( "部门信息保存成功！" );
+			// 保存日志开始
+			Log log = new Log();
+			log.setLogType(LogType.INFO);
+			log.setLogContent("[" + deptment.getDeptName() + "]" + "部门信息添加成功");
+			super.saveLog(log);
+			// 保存日志结束
 			return SUCCESS;
 		}
 	}
@@ -151,6 +160,12 @@ public class DeptmentAction extends BaseActionSupport
 			deptment.setCompanyId( companyId );
 			service.update( deptment );
 			message.setContent( "部门信息保存成功！" );
+			// 保存日志开始
+			Log log = new Log();
+			log.setLogType(LogType.INFO);
+			log.setLogContent("[" + deptment.getDeptName() + "]" + "部门信息添加成功");
+			super.saveLog(log);
+			// 保存日志结束
 			return SUCCESS;
 		}
 	}
@@ -162,6 +177,19 @@ public class DeptmentAction extends BaseActionSupport
 	 */
 	public String deleteDeptment()
 	{
+		if (ids != null && ids.length > 0) {
+			Deptment  deptment = null;
+			Log log = null;
+			for (int i = 0; i < ids.length; i++) {
+				deptment = service.get(ids[i]);
+				if (deptment != null) {
+					log = new Log();
+					log.setLogType(LogType.INFO);
+					log.setLogContent("[" + deptment.getDeptName() + "]" + "部门信息删除成功");
+					super.saveLog(log);
+				}
+			}
+		}
 		service.deleteGroupDeptment( ids );
 		return NONE;
 	}
