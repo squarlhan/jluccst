@@ -98,7 +98,15 @@
 												<img src="images/menuto.jpg" width="5" height="5" />
 											</td>
 											<td>
-												<a href="customerReaserch.html" target="mainFrame">权限分配</a>
+												<a href="groupmanage/rolemanage.jsp" target="mainFrame">职务管理</a>
+											</td>
+										</tr>
+										<tr>
+											<td width="40" align="right" style="padding-bottom: 4px;">
+												<img src="images/menuto.jpg" width="5" height="5" />
+											</td>
+											<td>
+												<a href="groupmanage/popedommanage.jsp" target="mainFrame">权限管理</a>
 											</td>
 										</tr>
 										<tr>
@@ -145,22 +153,6 @@
 											</td>
 											<td>
 												<a href="groupmanage/usermanage.jsp" target="mainFrame">用户管理</a>
-											</td>
-										</tr>
-										<tr>
-											<td width="40" align="right" style="padding-bottom: 4px;">
-												<img src="images/menuto.jpg" width="5" height="5" />
-											</td>
-											<td>
-												<a href="groupmanage/rolemanage.jsp" target="mainFrame">职务管理</a>
-											</td>
-										</tr>
-										<tr>
-											<td width="40" align="right" style="padding-bottom: 4px;">
-												<img src="images/menuto.jpg" width="5" height="5" />
-											</td>
-											<td>
-												<a href="groupmanage/popedommanage.jsp" target="mainFrame">权限管理</a>
 											</td>
 										</tr>
 									</table>

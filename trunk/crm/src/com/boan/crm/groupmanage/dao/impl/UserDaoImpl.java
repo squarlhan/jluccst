@@ -54,29 +54,38 @@ public class UserDaoImpl extends BaseDao<User,String> implements IUserDao{
 		}
 		return user;
 	}
-	public List<User> queryUserList(String deptId , int startIndex, int maxResults ) throws Exception
+	public List<User> queryUserList(String companyId,String deptId , int startIndex, int maxResults ) throws Exception
 	{
 		String hql = null;
 		Map<String, Object> map = new HashMap<String, Object>();
 		//表示公司用户
 		if( StringUtils.isNotBlank( deptId )  )
 		{
-			hql = "from User where deptId = :deptId  order by createTime";
+			hql = "from User where companyId = :companyId and deptId = :deptId  order by createTime";
 			map.put( "deptId", deptId );
 		}
+		else{
+			hql = "from User where companyId = :companyId and deptId = '' order by createTime";
+		}
+		map.put( "companyId", companyId );
 		return super.findForPage( hql, map, startIndex, maxResults );
 	}
 
-	public int queryUserListCount(String deptId ) throws Exception
+	public int queryUserListCount(String companyId, String deptId ) throws Exception
 	{
 		String hql = null;
 		Map<String, Object> map = new HashMap<String, Object>();
 		//表示公司用户
 		if( StringUtils.isNotBlank( deptId )   )
 		{
-			hql = " select count(id) from User where deptId = :deptId  ";
+			hql = " select count(id) from User where  companyId = :companyId  and deptId = :deptId  ";
 			map.put( "deptId", deptId );
 		}
+		else
+		{
+			hql = " select count(id) from User where  companyId = :companyId  and deptId =''  ";
+		}
+		map.put( "companyId", companyId );
 		return super.findCountForPage( hql, map );
 	}
 

@@ -36,8 +36,11 @@
 		d = new dTree('d','<%=path%>');
 		d.add(0,-1,'公司列表','','','menumain');
 		<s:iterator value="companyList">
-			d.add("<s:property value="id"/>",0,'<s:property value="companyName"/>','./userAction!showUserList.action?deptId=<s:property value="id"/>','','groupmain','');
+			d.add("<s:property value="id"/>",0,'<s:property value="companyName"/>','./userAction!showUserList.action?companyId=<s:property value="id"/>','','groupmain','');
 		</s:iterator>
+		<s:iterator value="deptList">
+		  d.add("<s:property value="id"/>",'<s:property value="companyId"/>','<s:property value="deptName"/>','./userAction!showUserList.action?companyId=<s:property value="companyId"/>&deptId=<s:property value="id"/>','','groupmain','');
+	   </s:iterator>
 		document.write(d);
 		//-->
 	</script>

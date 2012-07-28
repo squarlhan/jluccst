@@ -71,7 +71,7 @@ public interface IUserService {
 	 * @return
 	 * @throws Exception
 	 */
-	public Pagination<User> queryUserList( String deptId, Pagination<User> pagination) throws Exception;
+	public Pagination<User> queryUserList( String companyId, String deptId, Pagination<User> pagination) throws Exception;
 
 	/**
 	 * 根据集团id，取得集团下可以登录的用户，用于登录时显示
@@ -87,7 +87,7 @@ public interface IUserService {
 	 * @return 列表总数
 	 * @throws Exception
 	 */
-	public int queryUserListCount( String deptId ) throws Exception;
+	public int queryUserListCount(String companyId, String deptId ) throws Exception;
 
 	/**
 	 * 判断用户及密码是否正确

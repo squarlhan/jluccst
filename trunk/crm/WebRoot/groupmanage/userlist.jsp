@@ -42,6 +42,7 @@
 	 */
 	$.fn.edit = function(cid){
 		var param = "deptId="+$("#deptId").val() ;
+		param += "&companyId="+$("#companyId").val();
 		parent.parent.tipsWindown("用户信息","iframe:./userAction!showUser.action?user.id="+cid + "&" + param,"400","430","true","","true","no");
 		parent.parent.$("#windown-close").bind('click',function(){
 			window.location.href="./userAction!showUserList.action?" + param;
@@ -83,6 +84,7 @@
 </head>
 <body>
 <s:form id="form1" name="form1" method="post" theme="simple">
+<s:hidden name="companyId" id="companyId"></s:hidden>
 <s:hidden name="deptId" id="deptId"></s:hidden>
 <s:hidden name="deleteId" id="deleteId" value=""></s:hidden>
 <table width="100%" style="height:100%;" border="0" cellspacing="5" cellpadding="0">
@@ -102,13 +104,13 @@
     </table>
       <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#d5e4fd">
             <tr>
-              <td height="26" align="center" background="../images/headerbg.jpg"><input type="checkbox" name="cbkAll" value="true" id="cbkAll"/></td>
-              <td align="center" background="../images/headerbg.jpg"><strong>用户名</strong></td>
-              <td align="center" background="../images/headerbg.jpg"><strong>中文姓名</strong></td>
-              <td align="center" background="../images/headerbg.jpg"><strong>办公电话</strong></td>
-              <td align="center" background="../images/headerbg.jpg"><strong>个人手机</strong></td>
-              <td align="center" background="../images/headerbg.jpg"><strong>职务</strong></td>
-              <td align="center" background="../images/headerbg.jpg"><strong>操作</strong></td>
+              <td height="26" align="center" background="<%=path %>/images/headerbg.jpg"><input type="checkbox" name="cbkAll" value="true" id="cbkAll"/></td>
+              <td align="center" background="<%=path %>/images/headerbg.jpg"><strong>用户名</strong></td>
+              <td align="center" background="<%=path %>/images/headerbg.jpg"><strong>中文姓名</strong></td>
+              <td align="center" background="<%=path %>/images/headerbg.jpg"><strong>办公电话</strong></td>
+              <td align="center" background="<%=path %>/images/headerbg.jpg"><strong>个人手机</strong></td>
+              <td align="center" background="<%=path %>/images/headerbg.jpg"><strong>职务</strong></td>
+              <td align="center" background="<%=path %>/images/headerbg.jpg"><strong>操作</strong></td>
             </tr>
             <s:iterator value="pagination.data" status="obj">
             <tr>

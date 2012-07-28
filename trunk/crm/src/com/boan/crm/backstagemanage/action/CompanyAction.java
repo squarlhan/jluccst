@@ -183,6 +183,16 @@ public class CompanyAction extends BaseActionSupport {
 	 */
 	public String showCompanyTreeForUser() {
 		companyList = service.queryAllCompanys();
+		deptList = new ArrayList<Deptment>();
+		if (companyList != null && companyList.size() > 0) {
+			List<Deptment> ls = null;
+			for (int i = 0; i < companyList.size(); i++) {
+				ls = deptService.queryAllDeptmentsByCompanyId(companyList.get(i).getId());
+				if (ls != null && ls.size() > 0) {
+					deptList.addAll(ls);
+				}
+			}
+		}
 		return "company-tree-for-user";
 	}
 

@@ -22,8 +22,7 @@
 			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
 %>
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml">
   <head>
     <title>公司管理列表</title>
     
@@ -32,7 +31,7 @@
 	<meta http-equiv="expires" content="0">    
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-	<j:scriptlink css="true" tipswindow="true" jmessagebox="true" jquery="true" validate="true" jfunction="true"/>
+	<j:scriptlink css="true" jquery="true" jfunction="true" tipswindow="true"></j:scriptlink>
 	<style type="text/css">
 	<!--
 	.STYLE1 {
@@ -67,7 +66,7 @@
     </table>
       <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#d5e4fd">
         <tr>
-              <td align="center" background="<%=path %>/images/headerbg.jpg"><strong>类型</strong></td>
+              <td align="center" background="<%=path %>/images/headerbg.jpg"   height="29" ><strong>类型</strong></td>
               <td align="center" background="<%=path %>/images/headerbg.jpg"><strong>公司名称</strong></td>
               <td align="center" background="<%=path %>/images/headerbg.jpg"><strong>部门名称</strong></td>
               <td align="center" background="<%=path %>/images/headerbg.jpg"><strong>操作人</strong></td>
