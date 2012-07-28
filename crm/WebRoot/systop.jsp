@@ -50,7 +50,7 @@
 	        <td width="20" style="padding-bottom:2px;"><img src="images/user.gif" width="16" height="16" /></td>
 	        <td width="870" style="padding-top:2px;">
 	        	<span class="STYLE1">
-	        		今天是<%=sb.toString() %>  欢迎您：<s:property value="userCName"/>, 您的部门：<s:property value="fullGroupName"/>
+	        		今天是<%=sb.toString() %>  欢迎您：<s:property value="userCName"/>, 您的部门信息：<s:property value="fullGroupName"/>
 	        		[<A href="javascript:myinfo();" style="color:yellow">个人资料</A>]
 	        		[<A href="javascript:logout();" style="color:yellow">退出</A>]
 	        	</span>
