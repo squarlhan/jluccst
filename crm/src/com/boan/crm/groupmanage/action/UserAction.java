@@ -67,6 +67,8 @@ public class UserAction extends BaseActionSupport
 	private String newPassword = null;
 	
 	private String deleteId = null;
+	
+	private String companyId = null;
 
 	private List<UserType> userTypeList = UserType.getUserTypeList();
 
@@ -123,6 +125,7 @@ public class UserAction extends BaseActionSupport
 				String md5 = MakeMd5.MD5( user.getPassword() );
 				user.setPassword( md5 );
 			}
+			user.setCompanyId(companyId);
 			if( StringUtils.isBlank( user.getId() ) )
 			{
 				userService.saveOrUpdateUser( user );
@@ -180,8 +183,7 @@ public class UserAction extends BaseActionSupport
 		if( StringUtils.isNotBlank( user.getId() ) )
 		{
 			user = userService.getUserById( user.getId() );
-			//unitId = user.getUnitId();
-			//deptId = user.getDeptId();
+			companyId = user.getCompanyId();
 			HttpSession session = ServletActionContext.getRequest().getSession();
 			UserSession userSession = ( UserSession ) session.getAttribute( "userSession" );
 			if( userSession != null )
@@ -209,7 +211,7 @@ public class UserAction extends BaseActionSupport
 	 */
 	public String showUserList() throws Exception
 	{
-		pagination = userService.queryUserList( deptId,pagination );
+		pagination = userService.queryUserList( companyId, deptId,pagination );
 		if( pagination != null && pagination.getData().size() > 0 )
 		{
 			HttpSession session = ServletActionContext.getRequest().getSession();
@@ -455,5 +457,13 @@ public class UserAction extends BaseActionSupport
 
 	public void setDeptId(String deptId) {
 		this.deptId = deptId;
+	}
+
+	public String getCompanyId() {
+		return companyId;
+	}
+
+	public void setCompanyId(String companyId) {
+		this.companyId = companyId;
 	}
 }

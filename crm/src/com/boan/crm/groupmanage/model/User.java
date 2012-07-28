@@ -32,6 +32,11 @@ public class User {
 	/**
 	 * 公司编号
 	 */
+	@Column(name = "COMPANY_ID")
+	private String companyId;
+	/**
+	 * 部门编号
+	 */
 	@Column(name = "DEPT_ID")
 	private String deptId;
 	
@@ -268,6 +273,14 @@ public class User {
 
 	public void setDeptId(String deptId) {
 		this.deptId = deptId;
+	}
+
+	public String getCompanyId() {
+		return companyId;
+	}
+
+	public void setCompanyId(String companyId) {
+		this.companyId = companyId;
 	}
 	
 	

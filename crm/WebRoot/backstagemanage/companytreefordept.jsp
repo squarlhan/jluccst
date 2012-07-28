@@ -36,10 +36,10 @@
 		d = new dTree('d','<%=path%>');
 		d.add(0,-1,'公司列表','','','menumain');
 		<s:iterator value="companyList">
-			d.add("<s:property value="id"/>",0,'<s:property value="companyName"/>','./openDeptmentAction.action?companyId=<s:property value="id"/>','','groupmain','');
+			d.add("<s:property value="id"/>",0,'<s:property value="companyName"/>','./openDeptmentAction.action?companyId=<s:property value="id"/>','','groupmain','<%=path%>/js/tree/img/imgfolder.gif');
 		</s:iterator>
 		<s:iterator value="deptList">
-			d.add("<s:property value="id"/>",'<s:property value="companyId"/>','<s:property value="deptName"/>','./openDeptmentAction.action?companyId=<s:property value="companyId"/>&deptId=<s:property value="id"/>','','groupmain','');
+			//d.add("<s:property value="id"/>",'<s:property value="companyId"/>','<s:property value="deptName"/>','','','groupmain','');
 		</s:iterator>
 		document.write(d);
 		//-->
