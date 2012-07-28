@@ -8,6 +8,7 @@
  */
 package com.boan.crm.backstagemanage.action;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,7 @@ import com.boan.crm.backstagemanage.model.Company;
 import com.boan.crm.backstagemanage.model.Log;
 import com.boan.crm.backstagemanage.service.ICompanyService;
 import com.boan.crm.common.Message;
+import com.boan.crm.groupmanage.model.Deptment;
 import com.boan.crm.groupmanage.service.IDeptmentService;
 import com.boan.crm.utils.action.BaseActionSupport;
 import com.boan.crm.utils.page.Pagination;
@@ -43,7 +45,7 @@ public class CompanyAction extends BaseActionSupport {
 	 * 部门Service
 	 */
 	@Autowired
-	@Qualifier( "deptService" )
+	@Qualifier("deptService")
 	private IDeptmentService deptService = null;
 
 	/**
@@ -65,11 +67,15 @@ public class CompanyAction extends BaseActionSupport {
 	 * 提示
 	 */
 	private Message message = new Message();
-	
+
 	/**
 	 * 公司列表
 	 */
 	private List<Company> companyList = null;
+	/**
+	 * 部门列表
+	 */
+	private List<Deptment> deptList = null;
 
 	/**
 	 * 显示公司列表
@@ -140,7 +146,7 @@ public class CompanyAction extends BaseActionSupport {
 			log.setLogType(LogType.INFO);
 			log.setLogContent("[" + company.getCompanyName() + "]" + "公司信息保存成功");
 			super.saveLog(log);
-			//保存日志结束
+			// 保存日志结束
 			return SUCCESS;
 		}
 	}
@@ -152,14 +158,12 @@ public class CompanyAction extends BaseActionSupport {
 	 */
 	public String deleteCompany() {
 		// 保存日志开始
-		if( ids != null && ids.length > 0 )
-		{
+		if (ids != null && ids.length > 0) {
 			Company com = null;
 			Log log = null;
-			for( int i = 0; i < ids.length; i++ ){
+			for (int i = 0; i < ids.length; i++) {
 				com = service.get(ids[i]);
-				if(  com != null )
-				{
+				if (com != null) {
 					log = new Log();
 					log.setLogType(LogType.INFO);
 					log.setLogContent("[" + com.getCompanyName() + "]" + "公司信息删除成功");
@@ -167,36 +171,41 @@ public class CompanyAction extends BaseActionSupport {
 				}
 			}
 		}
-		//保存日志结束
+		// 保存日志结束
 		service.deleteGroupCompany(ids);
 		return NONE;
 	}
+
 	/**
 	 * 获取所有公司列表
+	 * 
 	 * @return
 	 */
-	public String showCompanyTreeForUser()
-	{
+	public String showCompanyTreeForUser() {
 		companyList = service.queryAllCompanys();
 		return "company-tree-for-user";
 	}
+
 	/**
 	 * 获取所有公司列表以及部门列表
+	 * 
 	 * @return
 	 */
-	public String showCompanyTreeForDept()
-	{
+	public String showCompanyTreeForDept() {
 		companyList = service.queryAllCompanys();
-		if( companyList != null && companyList.size() > 0 )
-		{
-			for( int i = 0; i < companyList.size(); i++ )
-			{
-				deptService.queryAllDeptmentsByCompanyId(companyList.get(i).getId());
-				
+		deptList = new ArrayList<Deptment>();
+		if (companyList != null && companyList.size() > 0) {
+			List<Deptment> ls = null;
+			for (int i = 0; i < companyList.size(); i++) {
+				ls = deptService.queryAllDeptmentsByCompanyId(companyList.get(i).getId());
+				if (ls != null && ls.size() > 0) {
+					deptList.addAll(ls);
+				}
 			}
 		}
 		return "company-tree-for-dept";
 	}
+
 	public Company getCompany() {
 		return company;
 	}
@@ -235,5 +244,13 @@ public class CompanyAction extends BaseActionSupport {
 
 	public void setCompanyList(List<Company> companyList) {
 		this.companyList = companyList;
+	}
+
+	public List<Deptment> getDeptList() {
+		return deptList;
+	}
+
+	public void setDeptList(List<Deptment> deptList) {
+		this.deptList = deptList;
 	}
 }
