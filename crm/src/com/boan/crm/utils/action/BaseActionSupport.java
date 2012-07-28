@@ -110,4 +110,40 @@ public class BaseActionSupport extends ActionSupport {
 			e.printStackTrace();
 		}
 	}
+	public String getSessionCompanyId() {
+		return sessionCompanyId;
+	}
+	public void setSessionCompanyId(String sessionCompanyId) {
+		this.sessionCompanyId = sessionCompanyId;
+	}
+	public String getSessionCompanyName() {
+		return sessionCompanyName;
+	}
+	public void setSessionCompanyName(String sessionCompanyName) {
+		this.sessionCompanyName = sessionCompanyName;
+	}
+	public String getSessionDeptId() {
+		return sessionDeptId;
+	}
+	public void setSessionDeptId(String sessionDeptId) {
+		this.sessionDeptId = sessionDeptId;
+	}
+	public String getSessionDeptName() {
+		return sessionDeptName;
+	}
+	public void setSessionDeptName(String sessionDeptName) {
+		this.sessionDeptName = sessionDeptName;
+	}
+	public String getSessionUserId() {
+		return sessionUserId;
+	}
+	public void setSessionUserId(String sessionUserId) {
+		this.sessionUserId = sessionUserId;
+	}
+	public String getSessionUserCName() {
+		return sessionUserCName;
+	}
+	public void setSessionUserCName(String sessionUserCName) {
+		this.sessionUserCName = sessionUserCName;
+	}
 }
