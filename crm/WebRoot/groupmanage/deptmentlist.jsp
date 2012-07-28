@@ -46,9 +46,9 @@
 		$(function(){
 			
 			$("#addbtn").click(function(){
-				parent.parent.tipsWindown("添加部门信息","iframe:openAddDeptmentAction.action","460","200","true","","true","no");
+				parent.parent.tipsWindown("添加部门信息","iframe:openAddDeptmentAction.action?companyId="+$("#companyId").val(),"460","200","true","","true","no");
 				parent.parent.$("#windown-close").bind('click',function(){
-					window.location.href="./openDeptmentAction.action";
+					window.location.href="./openDeptmentAction.action?companyId="+$("#companyId").val();
 				});
 		
 			});
@@ -61,9 +61,9 @@
 	  		$('a[name="edit"]').each(function(){
 	  			$(this).click(function(){
 	  				var url = $(this).attr("url");
-	  				parent.parent.tipsWindown("修改部门信息","iframe:"+url,"460","200","true","","true","no");
+	  				parent.parent.tipsWindown("修改部门信息","iframe:"+url +"&companyId="+$("#companyId").val(),"460","200","true","","true","no");
 	  				parent.parent.$("#windown-close").bind('click',function(){
-						window.location.href="./openDeptmentAction.action";
+						window.location.href="./openDeptmentAction.action?companyId="+$("#companyId").val()
 					});
 	  			});
 	  		});
@@ -97,6 +97,7 @@
   
   <body>
  <s:form id="form1" name="form1" method="post" theme="simple">
+ <s:hidden name="companyId" id="companyId"></s:hidden>
 <table width="100%" style="height:100%;" border="0" cellspacing="5" cellpadding="0">
   <tr>
     <td valign="top"><table width="100%" border="0" cellspacing="5" cellpadding="0">
@@ -109,13 +110,13 @@
     </table>
       <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#d5e4fd">
         <tr>
-         <td align="center" background="../images/headerbg.jpg">  
+         <td align="center" background="<%=path %>/images/headerbg.jpg">  
    				<s:checkbox theme="simple" id="cbk_all" name="all"></s:checkbox>
    			</td>
-              <td align="center" background="../images/headerbg.jpg"><strong>部门名称</strong></td>
-              <td align="center" background="../images/headerbg.jpg"><strong>负责人</strong></td>
-              <td align="center" background="../images/headerbg.jpg"><strong>部门电话</strong></td>
-              <td align="center" background="../images/headerbg.jpg"><strong>操作</strong></td>
+              <td align="center" background="<%=path %>/images/headerbg.jpg"><strong>部门名称</strong></td>
+              <td align="center" background="<%=path %>/images/headerbg.jpg"><strong>负责人</strong></td>
+              <td align="center" background="<%=path %>/images/headerbg.jpg"><strong>部门电话</strong></td>
+              <td align="center" background="<%=path %>/images/headerbg.jpg"><strong>操作</strong></td>
         </tr>
         <s:iterator value="pagination.data" status="obj">
         <tr>
