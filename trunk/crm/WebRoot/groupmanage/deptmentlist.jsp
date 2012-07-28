@@ -121,7 +121,12 @@
         <s:iterator value="pagination.data" status="obj">
         <tr>
         <td height="26" align="center" bgcolor="#FFFFFF" >  
-				<s:checkbox id="%{#obj.id}" name="ids" fieldValue="%{id}" value="false" theme="simple"/>
+        		<s:if test="id==sessionDeptId">
+        			<s:checkbox id="%{#obj.id}" name="ids" fieldValue="%{id}" value="false" theme="simple" disabled="true" title="不能删除自己所属的部门"/>
+        		</s:if>
+        		<s:else>
+					<s:checkbox id="%{#obj.id}" name="ids" fieldValue="%{id}" value="false" theme="simple"/>
+				</s:else>
 			</td>
               <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="deptName"/></td>
               <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="principal"/></td>
@@ -134,7 +139,12 @@
 				<s:param name="ids" value="id"></s:param>   
 			</s:url>
          	<a name="edit" href="javascript:void(0);" url="${edit_url}">编辑</a>  
-         	<a name="delete" href="javascript:void(0);" url="${delete_url}">删除</a>  
+         	<s:if test="id==sessionDeptId">
+         		<font color="#FF0000" title="不能删除自己所属的部门">禁止删除</font>
+         	</s:if>
+         	<s:else>
+         		<a name="delete" href="javascript:void(0);" url="${delete_url}">删除</a>
+         	</s:else>  
           </td>
         </tr>
         </s:iterator>        
