@@ -124,6 +124,9 @@
         		<s:if test="id==sessionDeptId">
         			<s:checkbox id="%{#obj.id}" name="ids" fieldValue="%{id}" value="false" theme="simple" disabled="true" title="不能删除自己所属的部门"/>
         		</s:if>
+        	<s:elseif test="deleteFlag==1">
+         			<s:checkbox id="%{#obj.id}" name="ids" fieldValue="%{id}" value="false" theme="simple" disabled="true" title="部门下有用户，不能删除"/>
+         	</s:elseif>
         		<s:else>
 					<s:checkbox id="%{#obj.id}" name="ids" fieldValue="%{id}" value="false" theme="simple"/>
 				</s:else>
@@ -142,6 +145,9 @@
          	<s:if test="id==sessionDeptId">
          		<font color="#FF0000" title="不能删除自己所属的部门">禁止删除</font>
          	</s:if>
+         	<s:elseif test="deleteFlag==1">
+         	<font color="#FF0000" title="部门下有用户，不能删除">禁止删除</font>
+         	</s:elseif>
          	<s:else>
          		<a name="delete" href="javascript:void(0);" url="${delete_url}">删除</a>
          	</s:else>  

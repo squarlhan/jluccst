@@ -61,6 +61,11 @@ public class Deptment implements java.io.Serializable {
 	 */
 	@Column(name = "CREATE_TIME")
 	private Calendar createTime = Calendar.getInstance();
+	
+	/**
+	 * 如果组下有人，则不能删除
+	 */
+	private int deleteFlag = 0;
 
 	/**
 	 * 构造器
@@ -127,5 +132,13 @@ public class Deptment implements java.io.Serializable {
 
 	public void setCompanyId(String companyId) {
 		this.companyId = companyId;
+	}
+
+	public int getDeleteFlag() {
+		return deleteFlag;
+	}
+
+	public void setDeleteFlag(int deleteFlag) {
+		this.deleteFlag = deleteFlag;
 	}
 }
