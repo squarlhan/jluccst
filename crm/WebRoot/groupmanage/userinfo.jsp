@@ -230,7 +230,7 @@
 												<span  onMouseMove="this.setCapture();" onMouseOut="this.releaseCapture();" onfocus="this.blur();">
 												<s:select title="您不能修改自己的职务" list="roleList" listKey="id" listValue="roleName" value="user.roleId" 
 													id="roleId" name="user.roleId" cssStyle="width:250px" headerKey="" headerValue="--请选择职务--"></s:select>
-												</span>
+												</span><br/>
 												<font color="#FF0000" title="不能修改自己的职务" style="font-size:9pt;">[ 不能修改自己的职务 ]</font>
 											</s:if>
 											<s:else>

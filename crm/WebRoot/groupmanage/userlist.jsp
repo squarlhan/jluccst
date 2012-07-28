@@ -114,7 +114,14 @@
             </tr>
             <s:iterator value="pagination.data" status="obj">
             <tr>
-              <td height="26" align="center" bgcolor="#FFFFFF"><input type="checkbox" name="userIds" id="userId<s:property value="id"/>" value="<s:property value="id"/>"></td>
+              <td height="26" align="center" bgcolor="#FFFFFF">
+               	<s:if test="id==sessionUserId">
+         			<input type="checkbox" name="userIds" id="userId<s:property value="id"/>" value="<s:property value="id"/>" disabled="true" title="不能删除自己">
+         		</s:if>
+         		<s:else>
+              		<input type="checkbox" name="userIds" id="userId<s:property value="id"/>" value="<s:property value="id"/>">
+              	</s:else>
+              </td>
               <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="username"/></td>
               <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="userCName"/></td>
               <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="officePhone"/></td>
@@ -122,7 +129,12 @@
               <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="roleName"/></td>
                <td height="26" align="center" bgcolor="#FFFFFF">
                	<A href="#" onclick="javascript:$.fn.edit('<s:property value="id"/>');">编辑</A>
-               	<A href="#" onclick="javascript:$.fn.deleteitem('<s:property value="id"/>');">删除</A>
+               	<s:if test="id==sessionUserId">
+         			<font color="#FF0000" title="不能删除自己">禁止删除</font>
+         		</s:if>
+         		<s:else>
+               		<A href="#" onclick="javascript:$.fn.deleteitem('<s:property value="id"/>');">删除</A>
+               	</s:else>
                </td>
             </tr>
             </s:iterator>
