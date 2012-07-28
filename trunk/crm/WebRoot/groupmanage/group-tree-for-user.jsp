@@ -34,9 +34,9 @@
   <script type="text/javascript">
 		<!--
 		d = new dTree('d','<%=path%>');
-		d.add(0,-1,'部门列表','','','menumain');
+		d.add(0,-1,'<s:property value="commpanyName"/>部门列表','./userAction!showUserList.action?companyId=<s:property value="commpanyId"/>&deptId=<s:property value="id"/>&who=session','','groupmain');
 		<s:iterator value="deptList">
-			d.add("<s:property value="id"/>",0,'<s:property value="deptName"/>','./userAction!showUserList.action?deptId=<s:property value="id"/>','','groupmain','');
+			d.add("<s:property value="id"/>",0,'<s:property value="deptName"/>','./userAction!showUserList.action?companyId=<s:property value="commpanyId"/>&deptId=<s:property value="id"/>&who=session','','groupmain','');
 		</s:iterator>
 		document.write(d);
 		//-->
