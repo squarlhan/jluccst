@@ -21,10 +21,13 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
+import com.boan.crm.backstagemanage.common.LogType;
+import com.boan.crm.backstagemanage.model.Log;
 import com.boan.crm.common.Message;
 import com.boan.crm.common.UserConfig;
 import com.boan.crm.common.UserType;
 import com.boan.crm.groupmanage.common.UserSession;
+import com.boan.crm.groupmanage.model.Deptment;
 import com.boan.crm.groupmanage.model.Role;
 import com.boan.crm.groupmanage.model.User;
 import com.boan.crm.groupmanage.service.IRoleService;
@@ -137,6 +140,12 @@ public class UserAction extends BaseActionSupport
 				userService.saveOrUpdateUser( oldUser );
 			}
 			message.setContent( "用户信息保存成功！" );
+			// 保存日志开始
+			Log log = new Log();
+			log.setLogType(LogType.INFO);
+			log.setLogContent("[" + user.getUserCName() + "]" + "用户信息保存成功");
+			super.saveLog(log);
+			// 保存日志结束
 			return SUCCESS;
 		}
 	}
@@ -151,6 +160,19 @@ public class UserAction extends BaseActionSupport
 	{
 		if( userIds != null && userIds.length > 0 )
 		{
+			if (userIds != null && userIds.length > 0) {
+				User  us= null;
+				Log log = null;
+				for (int i = 0; i < userIds.length; i++) {
+					 us = userService.getUserById(userIds[i]);
+					if ( us != null) {
+						log = new Log();
+						log.setLogType(LogType.INFO);
+						log.setLogContent("[" +  us.getUserCName() + "]" + "用户信息删除成功");
+						super.saveLog(log);
+					}
+				}
+			}
 			for( int i = 0; i < userIds.length; i++ )
 			{
 				userService.deleteUserById( userIds[i]);
