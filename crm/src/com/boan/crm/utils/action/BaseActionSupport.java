@@ -65,6 +65,11 @@ public class BaseActionSupport extends ActionSupport {
 	 * 用户姓名
 	 */
 	protected String sessionUserCName = null;
+	
+	/**
+	 * 用户手机号
+	 */
+	protected String sessionUserPhone = null;
 
 	@Override
 	public void validate() {
@@ -77,6 +82,7 @@ public class BaseActionSupport extends ActionSupport {
 			sessionDeptName = StringUtils.trimToEmpty(userSession.getDeptName());
 			sessionCompanyId = StringUtils.trimToEmpty(userSession.getCompanyId());
 			sessionCompanyName = StringUtils.trimToEmpty(userSession.getCompanyName());
+			sessionUserPhone = StringUtils.trimToEmpty(userSession.getUserPhone());
 		}
 	}
 	/**
@@ -145,5 +151,11 @@ public class BaseActionSupport extends ActionSupport {
 	}
 	public void setSessionUserCName(String sessionUserCName) {
 		this.sessionUserCName = sessionUserCName;
+	}
+	public String getSessionUserPhone() {
+		return sessionUserPhone;
+	}
+	public void setSessionUserPhone(String sessionUserPhone) {
+		this.sessionUserPhone = sessionUserPhone;
 	}
 }
