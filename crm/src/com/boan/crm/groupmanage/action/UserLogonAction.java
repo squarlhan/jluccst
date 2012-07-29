@@ -132,6 +132,7 @@ public class UserLogonAction extends ActionSupport
 				userSession.setCompanyId(user.getCompanyId());
 				userSession.setUserType( user.getUserType() );
 				userSession.setPopedomKeys( popedomKeys );
+				userSession.setUserPhone(user.getPhone());
 				
 				if( companyService != null )
 				{
