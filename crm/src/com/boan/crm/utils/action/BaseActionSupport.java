@@ -36,7 +36,7 @@ public class BaseActionSupport extends ActionSupport {
 	 * serialVersionUID
 	 */
 	private static final long serialVersionUID = -2675305291334757631L;
-	
+
 	/**
 	 * 部门ID
 	 */
@@ -65,7 +65,7 @@ public class BaseActionSupport extends ActionSupport {
 	 * 用户姓名
 	 */
 	protected String sessionUserCName = null;
-	
+
 	/**
 	 * 用户手机号
 	 */
@@ -85,76 +85,97 @@ public class BaseActionSupport extends ActionSupport {
 			sessionUserPhone = StringUtils.trimToEmpty(userSession.getUserPhone());
 		}
 	}
+
+	/**
+	 * 返回UserSession
+	 * 
+	 * @return
+	 */
+	public UserSession getSession() {
+		HttpSession session = ServletActionContext.getRequest().getSession();
+		UserSession userSession = (UserSession) session.getAttribute("userSession");
+		return userSession;
+	}
+
 	/**
 	 * 存储日志
 	 * 
 	 * @param log
 	 */
-	protected void saveLog( Log log )
-	{
+	protected void saveLog(Log log) {
 		HttpSession session = ServletActionContext.getRequest().getSession();
 		ServletContext servletContext = session.getServletContext();
 		WebApplicationContext context = WebApplicationContextUtils.getRequiredWebApplicationContext(servletContext);
-		ILogService ls = (ILogService)context.getBean( "logService" );
-		try
-		{
-			if( ls != null )
-			{
+		ILogService ls = (ILogService) context.getBean("logService");
+		try {
+			if (ls != null) {
 				HttpServletRequest req = ServletActionContext.getRequest();
-				log.setUserIp( IPUtil.getIpAddr( req ) );
-				log.setCompanyId( sessionCompanyId );
-				log.setCompanyName( sessionCompanyName );
-				log.setDeptId( sessionDeptId );
-				log.setDeptName( sessionDeptName);
-				log.setUserId( sessionUserId );
-				log.setUserName( sessionUserCName );
-				ls.saveLog( log );
+				log.setUserIp(IPUtil.getIpAddr(req));
+				log.setCompanyId(sessionCompanyId);
+				log.setCompanyName(sessionCompanyName);
+				log.setDeptId(sessionDeptId);
+				log.setDeptName(sessionDeptName);
+				log.setUserId(sessionUserId);
+				log.setUserName(sessionUserCName);
+				ls.saveLog(log);
 			}
-		}
-		catch( Exception e )
-		{
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
+
 	public String getSessionCompanyId() {
 		return sessionCompanyId;
 	}
+
 	public void setSessionCompanyId(String sessionCompanyId) {
 		this.sessionCompanyId = sessionCompanyId;
 	}
+
 	public String getSessionCompanyName() {
 		return sessionCompanyName;
 	}
+
 	public void setSessionCompanyName(String sessionCompanyName) {
 		this.sessionCompanyName = sessionCompanyName;
 	}
+
 	public String getSessionDeptId() {
 		return sessionDeptId;
 	}
+
 	public void setSessionDeptId(String sessionDeptId) {
 		this.sessionDeptId = sessionDeptId;
 	}
+
 	public String getSessionDeptName() {
 		return sessionDeptName;
 	}
+
 	public void setSessionDeptName(String sessionDeptName) {
 		this.sessionDeptName = sessionDeptName;
 	}
+
 	public String getSessionUserId() {
 		return sessionUserId;
 	}
+
 	public void setSessionUserId(String sessionUserId) {
 		this.sessionUserId = sessionUserId;
 	}
+
 	public String getSessionUserCName() {
 		return sessionUserCName;
 	}
+
 	public void setSessionUserCName(String sessionUserCName) {
 		this.sessionUserCName = sessionUserCName;
 	}
+
 	public String getSessionUserPhone() {
 		return sessionUserPhone;
 	}
+
 	public void setSessionUserPhone(String sessionUserPhone) {
 		this.sessionUserPhone = sessionUserPhone;
 	}
