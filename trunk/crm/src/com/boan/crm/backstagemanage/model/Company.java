@@ -65,6 +65,21 @@ public class Company {
 	private String corporation;
 	
 	/**
+	 * 公司短信序号列
+	 */
+	private String smsSN;
+	
+	/**
+	 * 公司短信密码
+	 */
+	private String  smsPassword;
+	
+	/**
+	 * 公司短信Key
+	 */
+	private String smsKey;
+	
+	/**
 	 * 公司排序号
 	 */
 	@Column(name = "SORT_INDEX")
@@ -152,5 +167,29 @@ public class Company {
 
 	public void setDeleteFlag(int deleteFlag) {
 		this.deleteFlag = deleteFlag;
+	}
+
+	public String getSmsSN() {
+		return smsSN;
+	}
+
+	public void setSmsSN(String smsSN) {
+		this.smsSN = smsSN;
+	}
+
+	public String getSmsPassword() {
+		return smsPassword;
+	}
+
+	public void setSmsPassword(String smsPassword) {
+		this.smsPassword = smsPassword;
+	}
+
+	public String getSmsKey() {
+		return smsKey;
+	}
+
+	public void setSmsKey(String smsKey) {
+		this.smsKey = smsKey;
 	}
 }
