@@ -59,6 +59,11 @@ public class UserSession implements java.io.Serializable
 	 * 公司名称
 	 */
 	private String companyName;
+	
+	/**
+	 * 用户手机号
+	 */
+	private String userPhone;
 
 	/**
 	 * 用户类型
@@ -177,6 +182,14 @@ public class UserSession implements java.io.Serializable
 
 	public void setCompanyName(String companyName) {
 		this.companyName = companyName;
+	}
+
+	public String getUserPhone() {
+		return userPhone;
+	}
+
+	public void setUserPhone(String userPhone) {
+		this.userPhone = userPhone;
 	}
 
 }
