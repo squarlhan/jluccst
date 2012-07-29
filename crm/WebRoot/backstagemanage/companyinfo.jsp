@@ -39,7 +39,10 @@
 					"company.corporation":{strangecode:true},
 					"company.address":{strangecode:true},
 					"company.phone":{strangecode:true},
-					"company.fax":{strangecode:true}
+					"company.fax":{strangecode:true},
+					"company.smsSN":{strangecode:true},
+					"company.smsPassword":{strangecode:true},
+					"company.smsKey":{strangecode:true}
 				}
 			};
 			/**
@@ -146,6 +149,30 @@
 										</td>
 										<td height="26" align="left" bgcolor="#FFFFFF">
 											<s:textfield id="txt_phone" name="company.fax" cssStyle="width: 250px;" maxlength="100"></s:textfield>
+										</td>
+									</tr>
+										<tr>
+										<td height="26" align="right" bgcolor="#FFFFFF">
+											<strong>短信序列号：</strong>
+										</td>
+										<td height="26" align="left" bgcolor="#FFFFFF">
+											<s:textfield id="smsSN" name="company.smsSN" cssStyle="width: 250px;" maxlength="100"></s:textfield>
+										</td>
+									</tr>
+										<tr>
+										<td height="26" align="right" bgcolor="#FFFFFF">
+											<strong>短信密码：</strong>
+										</td>
+										<td height="26" align="left" bgcolor="#FFFFFF">
+											<s:textfield id="smsPassword" name="company.smsPassword" cssStyle="width: 250px;" maxlength="100"></s:textfield>
+										</td>
+									</tr>
+										<tr>
+										<td height="26" align="right" bgcolor="#FFFFFF">
+											<strong>短信Key值：</strong>
+										</td>
+										<td height="26" align="left" bgcolor="#FFFFFF">
+											<s:textfield id="smsKey" name="company.smsKey" cssStyle="width: 250px;" maxlength="100"></s:textfield>
 										</td>
 									</tr>
 									<tr>
