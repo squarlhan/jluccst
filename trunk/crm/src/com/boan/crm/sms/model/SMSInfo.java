@@ -45,10 +45,22 @@ public class SMSInfo {
 	private String organId;
 	
 	/**
+	 * 接收人名称
+	 */
+	@Column(name = "PERSON_NAME" , length = 50)
+	private String personName;
+	
+	/**
 	 * 電話號
 	 */
 	@Column(name = "PHONE" , length = 50)
 	private String phone;
+	
+	/**
+	 * 接收人单位
+	 */
+	@Column(name = "PERSON_COMPANY" , length = 50)
+	private String personCompany;
 	
 	/**
 	 *  短信内容
@@ -121,5 +133,17 @@ public class SMSInfo {
 	}
 	public void setOrganId(String organId) {
 		this.organId = organId;
+	}
+	public String getPersonName() {
+		return personName;
+	}
+	public void setPersonName(String personName) {
+		this.personName = personName;
+	}
+	public String getPersonCompany() {
+		return personCompany;
+	}
+	public void setPersonCompany(String personCompany) {
+		this.personCompany = personCompany;
 	}
 }

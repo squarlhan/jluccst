@@ -5,14 +5,38 @@
 <struts>
 	<!-- 短信Action -->
 	<package name="sms" extends="struts-default" namespace="/">
-		<action name="sendInfoAction" class="SMSAtion" method="sendInfo"></action>
-		<action name="sendInfoBeforeTimeAction" class="SMSAtion" method="sendInfoBeforeTime"></action>
+		<action name="openSendInfoAction" class="SMSAtion" method="openSendInfo">
+			<result name="success">/sms/smsinfo.jsp</result>
+			<result name="input">/sms/smsinfo.jsp</result>
+		</action>
+		<action name="openSendInfoBeforeTimeAction" class="SMSAtion" method="openSendInfoBeforeTime">
+			<result name="success">/sms/smsbirthdayalert.jsp</result>
+			<result name="input">/sms/smsbirthdayalert.jsp</result>
+		</action>
 		<action name="loadSendedRecordAction" class="SMSAtion" method="loadSendedRecord">
 			<result name="success">/sms/smssendrecord.jsp</result>
 			<result name="input">/sms/smssendrecord.jsp</result>
 		</action>
+		<action name="reSendSMSInfoAction" class="SMSAtion" method="reSendSMSInfo">
+			<result name="success" type="redirectAction">
+				<param name="actionName">loadSendedRecordAction</param>
+			</result>
+			<result name="input">/sms/smssendrecord.jsp</result>
+		</action>
+		<action name="deleteSMSInfoAction" class="SMSAtion" method="deleteSMSInfo">
+			<result name="success" type="redirectAction">
+				<param name="actionName">loadSendedRecordAction</param>
+			</result>
+			<result name="input">/sms/smssendrecord.jsp</result>
+		</action>
 	</package>
 	<package name="smsAjax" extends="json-default" namespace="/">
+		<action name="sendInfoAction" class="SMSAtion" method="sendInfo">
+            <result type="json"></result>
+        </action>
+		<action name="sendInfoBeforeTimeAction" class="SMSAtion" method="sendInfoBeforeTime">
+            <result type="json"></result>
+        </action>
 		<action name="loadCustomersAction" class="SMSAtion" method="loadCustomers">
             <result type="json"></result>
         </action>

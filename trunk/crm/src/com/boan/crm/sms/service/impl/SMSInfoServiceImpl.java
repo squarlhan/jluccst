@@ -35,6 +35,14 @@ public class SMSInfoServiceImpl implements ISMSInfoService{
 	}
 	
 	/**
+	 *  获取单个短信信息
+	 * @param id
+	 */
+	public SMSInfo getSMSInfo(String id){
+		return dao.get(id);
+	}
+	
+	/**
 	 * 修改短信信息
 	 * @param info
 	 */
@@ -68,9 +76,34 @@ public class SMSInfoServiceImpl implements ISMSInfoService{
 	 */
 	public Pagination<SMSInfo> findSMSInfoForPage(Map<String, ?> values,Pagination<SMSInfo> pagination){
 		
-		String hql = " from SMSInfo order by sendTime desc";
+		StringBuffer param = new StringBuffer();
+		if(values.containsKey("organId")){
+			param.append(" and organId='"+values.get("organId")+"'");
+		}
+		if(values.containsKey("personCompany")){
+			param.append(" and personCompany like '%"+values.get("personCompany")+"%'");
+		}
+		if(values.containsKey("phone")){
+			param.append(" and phone like '%"+values.get("phone")+"%'");
+		}
+		if(values.containsKey("sendBeginTime")){
+			param.append(" and sendTime >='"+values.get("sendBeginTime")+"'");
+		}
+		if(values.containsKey("sendEndTime")){
+			param.append(" and sendTime <='"+values.get("sendEndTime")+"'");
+		}
+		
+		if(values.containsKey("queryType")){
+			param.append(" and isImmediately ='"+values.get("queryType")+"'");
+		}
+		if(values.containsKey("queryState")){
+			param.append(" and state ='"+values.get("sendEndTime")+"'");
+		}
+		
+		
+		String hql = " from SMSInfo where 1=1 "+param.toString()+"order by sendTime desc";
 		List<SMSInfo> data = dao.findForPage(hql, values, pagination.getStartIndex(), pagination.getPageSize());
-		hql = "select count(*) from SMSInfo";
+		hql = "select count(*) from SMSInfo where 1=1 "+param.toString();
 		int totalRows = dao.findCountForPage(hql, values);
 		pagination.setTotalRows(totalRows);
 		pagination.setData(data);

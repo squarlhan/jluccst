@@ -28,14 +28,14 @@ public class EmaySDKClient {
 	 * @param key
 	 * @return
 	 */
-	public synchronized Client getClient(String softwareSerialNo,String key){
-		if(client==null){
+	public  Client getClient(String softwareSerialNo,String key){
+//		if(client==null){
 			try {
 				client=new Client(softwareSerialNo,key);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
-		}
+//		}
 		return client;
 	}
 	
