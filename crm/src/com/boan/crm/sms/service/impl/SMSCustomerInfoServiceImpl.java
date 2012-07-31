@@ -65,7 +65,15 @@ public class SMSCustomerInfoServiceImpl implements ISMSCustomerInfoService {
 	 * @return
 	 */
 	public int findSMSCustomerInfoCountForPage( Map<String, ?> values){
-		String hql = "select count(*) from SMSCustomerInfo order by createTime asc";
+		String nameSpell="";
+		if(values.containsKey("nameSpell")){
+			nameSpell=" and nameSpell like '%"+values.get("nameSpell")+"%'";
+		}
+		String categoryId="";
+		if(values.containsKey("categoryId")){
+			categoryId=" and categoryId=:categoryId ";
+		}
+		String hql = "select count(*)  from SMSCustomerInfo where 1=1 "+nameSpell+categoryId+" and salesmanId=:salesmanId order by createTime desc";
 		int totalRows = dao.findCountForPage(hql, values);
 		return totalRows;
 	}
@@ -86,7 +94,7 @@ public class SMSCustomerInfoServiceImpl implements ISMSCustomerInfoService {
 		if(values.containsKey("categoryId")){
 			categoryId=" and categoryId=:categoryId ";
 		}
-		String hql = "from SMSCustomerInfo where 1=1 "+nameSpell+categoryId+" order by createTime desc";
+		String hql = "from SMSCustomerInfo where 1=1 "+nameSpell+categoryId+" and salesmanId=:salesmanId order by createTime desc";
 		List<SMSCustomerInfo> data = dao.findForPage(hql, values, currentlyPage, pageSize);
 		return data;
 	}

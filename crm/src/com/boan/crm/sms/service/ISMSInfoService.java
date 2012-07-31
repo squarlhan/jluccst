@@ -22,6 +22,12 @@ public interface ISMSInfoService {
 	public void saveSMSInfo(SMSInfo info);
 	
 	/**
+	 *  获取单个短信信息
+	 * @param id
+	 */
+	public SMSInfo getSMSInfo(String id);
+	
+	/**
 	 * 修改短信信息
 	 * @param info
 	 */
