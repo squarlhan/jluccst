@@ -338,7 +338,8 @@
   					},
   					success: function(data, textStatus){
   						try{
-  							
+  							data = eval("("+data+")");
+  							$("#balance").html(data.SMSBalance+"元");
   						}catch(e){
   							alert(e.description);
   						}
@@ -387,12 +388,15 @@
 											</span>
 											<table width="100%">
 												<tr>
-													<td>
+													<td colspan="2">
 														<s:textarea id="SMSContent" name= "infoContent" cssStyle="width:100%;height:120px"></s:textarea>
 														<span id="tips" class="tips"> 最多输入500字，已输入约 <strong>0</strong> 个字</span> </div>
 													</td>
 												</tr>
 												<tr>
+													<td>
+														<font color="red">&nbsp;&nbsp;当前短信余额：</font><font color="red"><strong  id="balance"><s:property value="SMSBalance"/>元</strong>，每条短信费用为0.1元。</font>
+													</td>
 													<td align="right">
 														<span>
 															<s:textfield id="txt_company" name="footContent" maxlength="50" cssStyle="width: 200px;" value="XXXXX公司" disabled="true"/>
@@ -423,7 +427,7 @@
 											
 											<span>
 												<input name="btn_AddPerson" type="button" class="btn_2_3" id="btn_AddPerson" value="添加人员">
-												<input name="btn_export" type="button" class="btn_2_3" id="btn_export" value="导入号码">
+												<!-- input name="btn_export" type="button" class="btn_2_3" id="btn_export" value="导入号码"> -->
 												<input name="btn_send" type="button" class="btn_2_3" id="btn_send" disabled="true" value="发送">
 											</span>
 										</td>

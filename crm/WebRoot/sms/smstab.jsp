@@ -9,12 +9,13 @@
 <script type="text/javascript">
 <!--
 	$(document).ready(function() {
-		$("#addBtn").click(function(){
-			parent.parent.tipsWindown("组织机构信息","iframe:sysmanage/groupinfo.html","400","260","true","","true","exa","no");
-		});
 		$("#tt").css("width",$("#groupmain",parent.document).width());
 		$("#tt").css("height",$("#groupmain",parent.document).height());
 		$("#tt").tabs();
+		$('.selector').tabs({ ajaxOptions: { async: false } });
+		$("#tt").click(function(){
+			$("#iframe3").attr("src","loadSendedRecordAction.action");
+		});
 	});
 //-->
 </script>
@@ -30,20 +31,14 @@
 <body>
 <!-- tab开始 -->
 <div id="tt" class="tabs-container">
-	<div title="短信群发"
-		style="padding: 1px; display: none;">
-		<iframe scrolling="auto" frameborder="0" style="width:100%; height:100%"
-			src="smsinfo.jsp" ></iframe>
+	<div title="短信群发"  style="padding: 1px; display: none;">
+		<iframe id="iframe1" scrolling="auto" frameborder="0" style="width:100%; height:100%" src="openSendInfoAction.action" ></iframe>
 	</div>
-	<div title="生日提醒"
-		style="padding: 1px; display: none;">
-		<iframe scrolling="auto" frameborder="0" style="width:100%; height:100%"
-			src="smsbirthdayalert.jsp" ></iframe>
+	<div title="生日提醒"  style="padding: 1px; display: none;">
+		<iframe id="iframe2"  scrolling="auto" frameborder="0" style="width:100%; height:100%" src="openSendInfoBeforeTimeAction.action" ></iframe>
 	</div>
-	<div title="发送记录"
-		style="padding: 1px; display: none;">
-		<iframe scrolling="auto" frameborder="0" style="width:100%; height:100%"
-			src="loadSendedRecordAction.action" ></iframe>
+	<div id="a"  title="发送记录" style="padding: 1px; display: none;">
+		<iframe id="iframe3"  scrolling="auto" frameborder="0" style="width:100%; height:100%" src="" ></iframe>
 	</div>
 </div>
 </body>

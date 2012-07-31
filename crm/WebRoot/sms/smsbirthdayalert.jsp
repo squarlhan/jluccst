@@ -215,7 +215,8 @@
   					},
   					success: function(data, textStatus){
   						try{
-  							
+  							data = eval("("+data+")");
+  							$("#balance").html(data.SMSBalance+"元");
   						}catch(e){
   							alert(e.description);
   						}
@@ -253,11 +254,14 @@
 													<option value="FIFTEEN_DAY">15天</option>
 												</select>
 												<s:textfield id="txt_sendTime" name="sendTime" maxlength="25" cssStyle="width: 80px;" value="09:00"/>
-												通知
+												通知销售人员
 												&nbsp;&nbsp;&nbsp;
-												<input name="btn_AddPerson" type="button" class="btn_2_3" id="btn_AddPerson" value="添加人员">
+												<input name="btn_AddPerson" type="button" class="btn_2_3" id="btn_AddPerson" value="选择客户">
 												<input name="btn_send" type="button" class="btn_2_3" id="btn_send" value="确定">
 											</span>
+											<br/>
+											<br/>
+											<font color="red">;当前短信余额：</font><font color="red"><strong  id="balance"><s:property value="SMSBalance"/>元</strong>，每条短信费用为0.1元。</font>
 										</td>
 									</tr>
 								</table>
