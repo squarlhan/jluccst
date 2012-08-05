@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -67,16 +68,19 @@ public class Company {
 	/**
 	 * 公司短信序号列
 	 */
+	@Column(name="SMS_SN")
 	private String smsSN;
 	
 	/**
 	 * 公司短信密码
 	 */
+	@Column(name="SMS_PASSWORD")
 	private String  smsPassword;
 	
 	/**
 	 * 公司短信Key
 	 */
+	@Column(name="SMS_KEY")
 	private String smsKey;
 	
 	/**
@@ -95,6 +99,7 @@ public class Company {
 	/**
 	 * 如果公司下有部门或有人，则不能删除
 	 */
+	@Transient
 	private int deleteFlag = 0;
 	
 	public String getId() {
