@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -109,6 +110,7 @@ public class User {
 	/**
 	 * 如果是本人，则本人不能删除本人，不能删除状态置为1
 	 */
+	@Transient
 	private int deleteFlag;
 
 	public User()

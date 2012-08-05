@@ -7,6 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -65,6 +66,7 @@ public class Deptment implements java.io.Serializable {
 	/**
 	 * 如果组下有人，则不能删除
 	 */
+	@Transient
 	private int deleteFlag = 0;
 
 	/**
