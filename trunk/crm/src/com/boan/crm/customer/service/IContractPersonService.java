@@ -33,7 +33,12 @@ public interface IContractPersonService {
 	 * @param ids
 	 */
 	public void deleteContractPersonInfo(String... ids);
-
+	
+	/**
+	 * 根据客户id删除联系人
+	 * @param ids
+	 */
+	public void deleteContractPersonInfoByCustomerIds(String... ids);
 	/**
 	 * 保存联系人
 	 * @param contractPersonInfo
