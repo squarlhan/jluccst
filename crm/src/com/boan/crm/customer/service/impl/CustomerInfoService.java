@@ -37,10 +37,21 @@ public class CustomerInfoService implements ICustomerInfoService{
 	@Override
 	public Pagination<CustomerInfo> findCustomerInfoForPage(
 			Map<String, ?> values, Pagination<CustomerInfo> pagination) {
-		String hql = "from CustomerInfo order by registerTime asc";
-		List<CustomerInfo> data = customerInfoDao.findForPage(hql, values, pagination.getStartIndex(), pagination.getPageSize());
-		hql = "select count(*) from CustomerInfo order by registerTime asc";
-		int totalRows = customerInfoDao.findCountForPage(hql, values);
+		StringBuilder hql = new StringBuilder();
+		hql.append( "from CustomerInfo where 1=1");
+		if(values.get("companyId") != null)
+		{
+			hql.append(" and company = :company ");
+		}else if(values.get("salesmanId") != null)
+		{
+			hql.append(" and salesmanId = :salesmanId ");
+		}
+		
+		hql.append("order by registerTime asc");
+		List<CustomerInfo> data = customerInfoDao.findForPage(hql.toString(), values, pagination.getStartIndex(), pagination.getPageSize());
+		hql.delete(0, hql.length());
+		hql.append(" select count(*) from CustomerInfo order by registerTime asc" );
+		int totalRows = customerInfoDao.findCountForPage(hql.toString(), values);
 		pagination.setTotalRows(totalRows);
 		pagination.setData(data);
 		return pagination;

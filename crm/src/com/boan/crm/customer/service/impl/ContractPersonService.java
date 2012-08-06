@@ -3,6 +3,7 @@
  */
 package com.boan.crm.customer.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -30,7 +31,20 @@ public class ContractPersonService implements IContractPersonService {
 	public void deleteContractPersonInfo(String... ids) {
 		contractPersonDao.delete(ids);
 	}
-
+	/**
+	 * 根据客户id删除联系人
+	 * @param ids
+	 */
+	@Override
+	public void deleteContractPersonInfoByCustomerIds(String... ids)
+	{	
+		for(int i=0;i<ids.length;i++)
+		{
+			Map<String,String> idMap = new HashMap<String,String>();
+			idMap.put("customerId", ids[i]);
+			contractPersonDao.executeHql("delete from ContractPersonInfo where customerId = :customerId",idMap);
+		}
+	}
 	@Override
 	public List<ContractPersonInfo> findAllContractPersonInfoByCustomerId(String customerId) {
 		return contractPersonDao.find("from ContractPersonInfo where customerId = :customerId order by sortIndex asc", customerId);

@@ -79,6 +79,10 @@ public class CustomerInfo implements Serializable
 	private String address = "";
 	@Column(name = "CREATE_TIME")
 	private Calendar createTime;
+	@Column(name = "CREATORID")
+	private String creatorId;
+	@Column(name = "COMPANYID")
+	private String companyId;
 	@Transient
 	private List<ContractPersonInfo> contractPersonList = null;
 	/**
@@ -481,5 +485,33 @@ public class CustomerInfo implements Serializable
 	public void setCreateTime( Calendar createTime )
 	{
 		this.createTime = createTime;
-	}	
+	}
+	/**
+	 * 创建人Id
+	 * @return String
+	 */
+	public String getCreatorId() {
+		return creatorId;
+	}
+	/**
+	 * 创建人Id
+	 * @param creatorId
+	 */
+	public void setCreatorId(String creatorId) {
+		this.creatorId = creatorId;
+	}
+	/**
+	 * 单位Id
+	 * @return String
+	 */
+	public String getCompanyId() {
+		return companyId;
+	}
+	/**
+	 * 单位Id
+	 * @param companyId
+	 */
+	public void setCompanyId(String companyId) {
+		this.companyId = companyId;
+	}
 }

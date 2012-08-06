@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">	
+<struts>
+	<!-- 客户Action -->
+	<package name="customer" extends="struts-default" namespace="/customer">
+		<action name="customerList" class="customerInfoAction" method="customerList">
+			<result name="success">/customer/customer_list.jsp</result>
+			<result name="input">/customer/customer_list.jsp</result>
+		</action>
+		<action name="customerInfo" class="customerInfoAction" method="customerInfo">
+			<result name="success">/customer/customer_info.jsp</result>
+			<result name="input">/customer/customer_info.jsp</result>
+		</action>
+		<action name="saveCustomer" class="customerInfoAction" method="saveCustomer">
+			<result name="success">/customer/customer_info.jsp</result>
+			<result name="input">/customer/customer_info.jsp</result>
+		</action>
+    	<action name="deleteCustomer" class="customerInfoAction" method="deleteCustomer">
+    		<result name="success" type="chain">
+             	<param name="actionName">datadictionarylist</param>
+             	<param name="typeFlag">${typeFlag}</param>
+            </result>
+    	</action>
+	</package>
+</struts>
