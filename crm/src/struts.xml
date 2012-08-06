@@ -34,4 +34,6 @@
 	<include file="com/boan/crm/groupmanage/action/struts_group.xml"></include>
 	<!-- 后台管理 -->
 	<include file="com/boan/crm/backstagemanage/action/struts_backstage.xml"></include>
+	<!-- 客户管理 -->
+	<include file="com/boan/crm/customer/action/struts_customer.xml"></include>
 </struts>
