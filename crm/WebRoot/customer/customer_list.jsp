@@ -50,7 +50,7 @@
 				parent.parent.$("#windown-close").bind('click',function(){
 					window.location.href="./customerList.action";
 				});*/
-				window.location.href = "customertabinfo.jsp";
+				window.parent.location.href = "customertabinfo.jsp";
 		
 			});
 			$.fn.checkall("cbk_all");
@@ -67,7 +67,7 @@
 						window.location.href="./customerList.action";
 					});*/
 					
-	  				window.location.href = "customertabinfo.jsp";
+	  				window.parent.location.href = "customertabinfo.jsp";
 	  			});
 	  		});
 	  		
