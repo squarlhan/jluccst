@@ -10,6 +10,8 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import org.apache.commons.lang.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
@@ -17,6 +19,8 @@ import com.boan.crm.customer.model.CustomerInfo;
 import com.boan.crm.customer.service.IContractPersonService;
 import com.boan.crm.customer.service.ICustomerInfoService;
 import com.boan.crm.datadictionary.model.DataDictionary;
+import com.boan.crm.datadictionary.service.IDataDictionaryService;
+import com.boan.crm.groupmanage.service.IPopedomService;
 import com.boan.crm.utils.action.BaseActionSupport;
 import com.boan.crm.utils.page.Pagination;
 
@@ -34,8 +38,16 @@ public class CustomerInfoAction extends BaseActionSupport{
 	private static final long serialVersionUID = -4140371188076904836L;
 	
 	@Resource
-	// 客户状态接口类
+	//客户状态接口类
 	private ICustomerInfoService customerInfoService;
+	
+	/**
+	 * 权限接口
+	 */
+	@Autowired
+	@Qualifier("dataDictionaryService")
+	private IDataDictionaryService dataDictionaryService = null;
+	
 	// 客户状态接口类
 	private IContractPersonService contractpersonInfoService;
 	//客户信息类
@@ -48,7 +60,11 @@ public class CustomerInfoAction extends BaseActionSupport{
 	private Pagination<CustomerInfo> pagination = new Pagination<CustomerInfo>();
 	
 	
-	//private Pagination<CustomerInfo> listCustomer = null;
+	private List<DataDictionary> listCategory = null;
+	private List<DataDictionary> listSource = null;
+	private List<DataDictionary> listProgress = null;
+	private List<DataDictionary> listMaturity = null;
+	private List<DataDictionary> listLevel = null;
 	/**
 	 * 客户列表
 	 * @return String
@@ -69,6 +85,18 @@ public class CustomerInfoAction extends BaseActionSupport{
 			customerInfo = customerInfoService.get(id);
 		else
 			customerInfo = new CustomerInfo();
+		
+		//客户来源：传2
+		listSource = dataDictionaryService.findDataDictionaryByType(2);
+		//客户分类： 传0
+		listCategory = dataDictionaryService.findDataDictionaryByType(0);
+		//业务进展：传2
+		listProgress = dataDictionaryService.findDataDictionaryByType(0);
+		//成熟度：传4
+		listMaturity = dataDictionaryService.findDataDictionaryByType(4);
+		//开发程度
+		listLevel = dataDictionaryService.findDataDictionaryByType(0);
+		
 		return SUCCESS;
 	}
 	/**
