@@ -27,10 +27,10 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>无标题文档</title>
-<link type="text/css" rel="stylesheet" href="../style.css">
-<link type="text/css" rel="stylesheet" href="../tabs.css">
+<link type="text/css" rel="stylesheet" href="../css/style.css">
+<link type="text/css" rel="stylesheet" href="../css/tabs.css">
 <script type="text/javascript" src="../js/jquery-1.4.2.min.js"></script>
-<script type="text/javascript" src="../js/jquery.tab.js"></script>
+<script type="text/javascript" src="../js/tab/jquery.tab.js"></script>
 <script type="text/javascript">
 <!--
 	$(document).ready(function() {
@@ -117,7 +117,7 @@ function go(page,obj){
 	<div title="基本信息"
 		style="padding: 1px; display: none;">
 		<iframe scrolling="auto" frameborder="0" style="width:100%; height:100%"
-			src="customertabInfo.html"></iframe>
+			src="customerinfo.jsp"></iframe>
 	</div>
 	<div title="客户跟进"
 		style="padding: 1px; display: none;">
