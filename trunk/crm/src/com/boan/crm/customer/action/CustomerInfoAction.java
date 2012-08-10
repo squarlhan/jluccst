@@ -60,6 +60,7 @@ public class CustomerInfoAction extends BaseActionSupport{
 	private Pagination<CustomerInfo> pagination = new Pagination<CustomerInfo>();
 	
 	
+	
 	private List<DataDictionary> listCategory = null;
 	private List<DataDictionary> listSource = null;
 	private List<DataDictionary> listProgress = null;
@@ -90,7 +91,7 @@ public class CustomerInfoAction extends BaseActionSupport{
 		listSource = dataDictionaryService.findDataDictionaryByType(2);
 		//客户分类： 传0
 		listCategory = dataDictionaryService.findDataDictionaryByType(0);
-		//业务进展：传2
+		//业务进展：传
 		listProgress = dataDictionaryService.findDataDictionaryByType(0);
 		//成熟度：传4
 		listMaturity = dataDictionaryService.findDataDictionaryByType(4);
@@ -143,5 +144,35 @@ public class CustomerInfoAction extends BaseActionSupport{
 	}
 	public void setPagination(Pagination<CustomerInfo> pagination) {
 		this.pagination = pagination;
+	}
+	public List<DataDictionary> getListCategory() {
+		return listCategory;
+	}
+	public void setListCategory(List<DataDictionary> listCategory) {
+		this.listCategory = listCategory;
+	}
+	public List<DataDictionary> getListSource() {
+		return listSource;
+	}
+	public void setListSource(List<DataDictionary> listSource) {
+		this.listSource = listSource;
+	}
+	public List<DataDictionary> getListProgress() {
+		return listProgress;
+	}
+	public void setListProgress(List<DataDictionary> listProgress) {
+		this.listProgress = listProgress;
+	}
+	public List<DataDictionary> getListMaturity() {
+		return listMaturity;
+	}
+	public void setListMaturity(List<DataDictionary> listMaturity) {
+		this.listMaturity = listMaturity;
+	}
+	public List<DataDictionary> getListLevel() {
+		return listLevel;
+	}
+	public void setListLevel(List<DataDictionary> listLevel) {
+		this.listLevel = listLevel;
 	}
 }
