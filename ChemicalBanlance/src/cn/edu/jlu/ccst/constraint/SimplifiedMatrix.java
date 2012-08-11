@@ -17,10 +17,10 @@ public class SimplifiedMatrix {
 	
 	public void init(){
 		simplifySource(matrix);
-		checkSource(matrix);
-		System.out.println();
-		varOrderForSearch=computeVarOrder(matrix);
-		varOrderForGetTuple=computeOrderForGetTuple(matrix);
+//		checkSource(matrix);
+//		System.out.println();
+//		varOrderForSearch=computeVarOrder(matrix);//由于变量个数较少，计算一个固定的变量赋值顺序，连接约束元数较小的变量优先
+//		varOrderForGetTuple=computeOrderForGetTuple(matrix);
 	}
 	private static int[][] computeOrderForGetTuple(int[][] source){
 		int[][] result=new int[source.length][];

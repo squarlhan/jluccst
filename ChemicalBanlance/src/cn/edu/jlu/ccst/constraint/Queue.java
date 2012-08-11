@@ -117,7 +117,9 @@ public class Queue {
 //	}
 //
 //	public void clear() {
-//		list.clear();
+//		while(list.size()>0){
+//			list.removeFirst().setPosition(-1);
+//		}
 //	}
 //
 //	public void add(Arc arc) {

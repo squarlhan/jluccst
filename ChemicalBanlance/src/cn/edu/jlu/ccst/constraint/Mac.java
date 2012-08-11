@@ -166,7 +166,7 @@ public class Mac {
 		end = System.nanoTime();
 		if (success) {
 			if (!csp.testSolution()) {
-				System.out.println("!!!!!!!é”Ÿæ–¤æ‹·é”Ÿæ–¤æ‹·é”Ÿï¿½ ");
+				System.out.println("!!!!!!!´íÎó½â");
 			}
 		}
 		checkTimes = Constraint.checkTime;
