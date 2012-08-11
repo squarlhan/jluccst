@@ -40,9 +40,9 @@ public class Csp {
 		createVariables(varNum, 1, domSize);
 		createConstraints(matrix, FOR_BALANCE);
 		varAssignOrder = source.varOrderForSearch;
-		for (int i = 0; i < cstNum; i++) {
-			constraints[i].varOrderForGetTuple = source.varOrderForGetTuple[i];
-		}
+//		for (int i = 0; i < cstNum; i++) {
+//			constraints[i].varOrderForGetTuple = source.varOrderForGetTuple[i];
+//		}
 		init();
 	}
 
