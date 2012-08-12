@@ -50,7 +50,7 @@
 				parent.parent.$("#windown-close").bind('click',function(){
 					window.location.href="./customerList.action";
 				});*/
-				window.parent.location.href = "customertabinfo.jsp";
+				window.parent.location.href = "customertabinfo.jsp?id=";
 		
 			});
 			$.fn.checkall("cbk_all");
@@ -67,7 +67,7 @@
 						window.location.href="./customerList.action";
 					});*/
 					
-	  				window.parent.location.href = "customertabinfo.jsp";
+	  				window.parent.location.href = "customertabinfo.jsp?id=";
 	  			});
 	  		});
 	  		
@@ -87,7 +87,7 @@
 	  		 * 删除所选客户信息
 	  		 */
 	  		$("#deletepointbtn").click(function(){
-  				var url = "deleteCompanyAction.action";
+  				var url = "deleteCustomer.action";
   				if(window.confirm("您确定要删除所选信息吗？")){
   					$.post(url, $('#form1').serialize(), function(data){window.location.href=window.location.href;});
   				}
@@ -180,7 +180,7 @@
         </tr>
         </s:iterator>        
         <tr>
-          <td height="26" colspan="9" align="center" bgcolor="#FFFFFF">
+          <td height="26" colspan="11" align="center" bgcolor="#FFFFFF">
 			<page:pages currentPage="pagination.currentPage" totalPages="pagination.totalPages" totalRows="pagination.totalRows" styleClass="page" theme="text" ></page:pages> 
 		  </td>
         </tr>
