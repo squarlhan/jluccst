@@ -15,10 +15,15 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
+import com.boan.crm.customer.model.ContractPersonInfo;
 import com.boan.crm.customer.model.CustomerInfo;
 import com.boan.crm.customer.service.IContractPersonService;
 import com.boan.crm.customer.service.ICustomerInfoService;
+import com.boan.crm.datadictionary.model.AreaInfo;
+import com.boan.crm.datadictionary.model.CityInfo;
 import com.boan.crm.datadictionary.model.DataDictionary;
+import com.boan.crm.datadictionary.model.ProvinceInfo;
+import com.boan.crm.datadictionary.service.IAreaService;
 import com.boan.crm.datadictionary.service.IDataDictionaryService;
 import com.boan.crm.groupmanage.service.IPopedomService;
 import com.boan.crm.utils.action.BaseActionSupport;
@@ -32,6 +37,7 @@ import com.boan.crm.utils.page.Pagination;
 @Scope("prototype")
 public class CustomerInfoAction extends BaseActionSupport{
 
+	
 	/**
 	 * 
 	 */
@@ -48,24 +54,30 @@ public class CustomerInfoAction extends BaseActionSupport{
 	@Qualifier("dataDictionaryService")
 	private IDataDictionaryService dataDictionaryService = null;
 	
+	/**
+	 * 权限接口
+	 */
+	@Autowired
+	@Qualifier("areaService")
+	private IAreaService areaService = null;
+	
 	// 客户状态接口类
 	private IContractPersonService contractpersonInfoService;
 	//客户信息类
 	private CustomerInfo customerInfo ;
-	
 	private String id = "";
-	
 	private String[] ids = null;
-	
 	private Pagination<CustomerInfo> pagination = new Pagination<CustomerInfo>();
-	
-	
-	
 	private List<DataDictionary> listCategory = null;
 	private List<DataDictionary> listSource = null;
 	private List<DataDictionary> listProgress = null;
 	private List<DataDictionary> listMaturity = null;
 	private List<DataDictionary> listLevel = null;
+	private List<ContractPersonInfo> listPerson = null;
+	private List<ProvinceInfo> listProvince = null;
+	private List<CityInfo> listCity = null;
+	private List<AreaInfo> listArea = null;
+	
 	/**
 	 * 客户列表
 	 * @return String
@@ -86,7 +98,6 @@ public class CustomerInfoAction extends BaseActionSupport{
 			customerInfo = customerInfoService.get(id);
 		else
 			customerInfo = new CustomerInfo();
-		
 		//客户来源：传2
 		listSource = dataDictionaryService.findDataDictionaryByType(2);
 		//客户分类： 传0
@@ -98,6 +109,11 @@ public class CustomerInfoAction extends BaseActionSupport{
 		//开发程度
 		listLevel = dataDictionaryService.findDataDictionaryByType(0);
 		
+		listProvince = areaService.findAllProvinceInfo();
+		
+		if(id != null && id.length() > 0)
+			listPerson = contractpersonInfoService.findAllContractPersonInfoByCustomerId(id);
+		
 		return SUCCESS;
 	}
 	/**
@@ -106,8 +122,11 @@ public class CustomerInfoAction extends BaseActionSupport{
 	 */
 	public String saveCustomer()
 	{
-		customerInfoService.save(customerInfo);
+		customerInfo.setCompanyId(sessionCompanyId);
+		customerInfo.setCreatorId(sessionUserId);
 		
+		customerInfoService.save(customerInfo);
+		id = customerInfo.getId();
 		return SUCCESS;
 	}
 	/**
@@ -174,5 +193,29 @@ public class CustomerInfoAction extends BaseActionSupport{
 	}
 	public void setListLevel(List<DataDictionary> listLevel) {
 		this.listLevel = listLevel;
+	}
+	public List<CityInfo> getListCity() {
+		return listCity;
+	}
+	public void setListCity(List<CityInfo> listCity) {
+		this.listCity = listCity;
+	}
+	public List<AreaInfo> getListArea() {
+		return listArea;
+	}
+	public void setListArea(List<AreaInfo> listArea) {
+		this.listArea = listArea;
+	}
+	public List<ContractPersonInfo> getListPerson() {
+		return listPerson;
+	}
+	public void setListPerson(List<ContractPersonInfo> listPerson) {
+		this.listPerson = listPerson;
+	}
+	public List<ProvinceInfo> getListProvince() {
+		return listProvince;
+	}
+	public void setListProvince(List<ProvinceInfo> listProvince) {
+		this.listProvince = listProvince;
 	}
 }

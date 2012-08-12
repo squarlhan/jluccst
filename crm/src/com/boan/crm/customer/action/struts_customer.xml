@@ -14,13 +14,31 @@
 			<result name="input">/customer/customer_info.jsp</result>
 		</action>
 		<action name="saveCustomer" class="customerInfoAction" method="saveCustomer">
-			<result name="success">/customer/customer_info.jsp</result>
-			<result name="input">/customer/customer_info.jsp</result>
+			<result name="success" type="chain">
+             	<param name="actionName">customerInfo</param>
+             	<param name="id">${id}</param>
+            </result>
 		</action>
     	<action name="deleteCustomer" class="customerInfoAction" method="deleteCustomer">
     		<result name="success" type="chain">
-             	<param name="actionName">datadictionarylist</param>
-             	<param name="typeFlag">${typeFlag}</param>
+             	<param name="actionName">customerList</param>
+            </result>
+    	</action>
+    	<action name="contractPersonList" class="contractPersonInfoAction" method="contractPersonList">
+			<result name="success">/customer/customer_list.jsp</result>
+			<result name="input">/customer/customer_list.jsp</result>
+		</action>
+		<action name="contractPersonInfo" class="contractPersonInfoAction" method="contractPerson">
+			<result name="success">/customer/contractperson_info.jsp</result>
+			<result name="input">/customer/contractperson_info.jsp</result>
+		</action>
+		<action name="saveContractPerson" class="contractPersonInfoAction" method="saveContractPerson">
+			<result name="success">/customer/contractperson_info.jsp</result>
+			<result name="input">/customer/contractperson_info.jsp</result>
+		</action>
+    	<action name="deleteContractPerson" class="contractPersonInfoAction" method="deleteContractPerson">
+    		<result name="success" type="chain">
+             	<param name="actionName">customerInfo</param>
             </result>
     	</action>
 	</package>
