@@ -68,7 +68,7 @@ public class CustomerInfo implements Serializable
 	@Column(name = "OTHER_SALESMANID" , length = 50)
 	private String otherSalesmanId = "";
 	@Column(name = "REGISTER_TIME")
-	private Calendar registerTime;
+	private Calendar registerTime = Calendar.getInstance();
 	@Column(name = "PROVINCE" , length = 50)
 	private String province = "";
 	@Column(name = "CITY" , length = 50)
