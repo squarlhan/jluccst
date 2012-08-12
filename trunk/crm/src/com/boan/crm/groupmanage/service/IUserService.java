@@ -111,5 +111,15 @@ public interface IUserService {
 	 * @return 如果存在则返回true,否则返回false
 	 * @throws Exception
 	 */
-	public boolean isExistSameUsername( String userId, String username ) throws Exception;}
+	public boolean isExistSameUsername( String userId, String username ) throws Exception;
+
+	/**
+	 * 取公司下指定角色的用户列表
+	 * @param companyId
+	 * @param roleKey
+	 * @return
+	 * @throws Exception
+	 */
+	public List<User> queryUserListByCompanyIdRoleKey(  String companyId, String roleKey ) throws Exception;
+}
 
