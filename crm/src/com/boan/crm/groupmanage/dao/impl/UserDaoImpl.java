@@ -165,6 +165,15 @@ public class UserDaoImpl extends BaseDao<User,String> implements IUserDao{
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put( "unitId", unitId );
 		return super.find( hql, map );
+	}
+
+	@Override
+	public List<User> queryUserListByCompanyIdRoleKey(String companyId, String roleKey) throws Exception {
+		String hql = "from User where companyId = :companyId and roleId in ( select id from Role where roleKey = :rokeKey ) order by createTime";
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put( "companyId", companyId );
+		map.put( "roleKey", roleKey );
+		return super.find( hql, map );
 	}	
 }
 

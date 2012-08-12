@@ -97,6 +97,11 @@ public class UserServiceImpl implements IUserService {
 	{
 		return userDao.isExistSameUsername( userId, username );
 	}
+
+	@Override
+	public List<User> queryUserListByCompanyIdRoleKey(String companyId, String roleKey) throws Exception {
+		return userDao.queryUserListByCompanyIdRoleKey( companyId,  roleKey);
+	}
 	
 	/*
 	@Override
