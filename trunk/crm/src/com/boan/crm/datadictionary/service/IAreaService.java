@@ -21,7 +21,7 @@ public interface IAreaService {
 	 * 查找全部省信息
 	 */
 	public List<ProvinceInfo> findAllProvinceInfo();
-	
+	public List<CityInfo>  findAllCityInfo();
 	/**
 	 * 根据省查找市信息
 	 */
