@@ -37,6 +37,14 @@
 			<result name="success">/datadictionary/province_list.jsp</result>
 			<result name="input">/datadictionary/province_list.jsp</result>
 		</action>
+		<action name="provincetree" class="areaAction" method="provinceList">
+			<result name="success">/datadictionary/provincetree.jsp</result>
+			<result name="input">/datadictionary/provincetree.jsp</result>
+		</action>
+		<action name="provincecitytree" class="areaAction" method="provinceCityList">
+			<result name="success">/datadictionary/provincecitytree.jsp</result>
+			<result name="input">/datadictionary/provincecitytree.jsp</result>
+		</action>
 		<action name="citylist" class="areaAction" method="cityList">
 			<result name="success">/datadictionary/city_list.jsp</result>
 			<result name="input">/datadictionary/city_list.jsp</result>
@@ -44,6 +52,14 @@
 		<action name="arealist" class="areaAction" method="areaList">
 			<result name="success">/datadictionary/area_list.jsp</result>
 			<result name="input">/datadictionary/area_list.jsp</result>
+		</action>
+		<action name="cityinfoservice" class="areaAction" method="cityList">
+			<result name="success">/datadictionary/getcityservice.jsp</result>
+			<result name="input">/datadictionary/getcityservice.jsp</result>
+		</action>
+		<action name="areainfoservice" class="areaAction" method="areaList">
+			<result name="success">/datadictionary/getareaservice.jsp</result>
+			<result name="input">/datadictionary/getareaservice.jsp</result>
 		</action>
 		<action name="provinceinfo" class="areaAction" method="provinceInfo">
 			<result name="success">/datadictionary/province_info.jsp</result>
@@ -101,12 +117,16 @@
 			<result name="input">/datadictionary/province_sort.jsp</result>
     	</action>
     	<action name="saveCitySort" class="areaAction" method="saveCitySort">
-    		<result name="success">/datadictionary/city_sort.jsp</result>
-			<result name="input">/datadictionary/city_sort.jsp</result>
+    		<result name="success" type="chain">
+             	<param name="actionName">citysort</param>
+             	<param name="provinceId">${provinceId}</param>
+            </result>
     	</action>
     	<action name="saveAreaSort" class="areaAction" method="saveAreaSort">
-    		<result name="success">/datadictionary/area_sort.jsp</result>
-			<result name="input">/datadictionary/area_sort.jsp</result>
+    		<result name="success" type="chain">
+             	<param name="actionName">areasort</param>
+             	<param name="cityId">${cityId}</param>
+            </result>
     	</action>
 	</package>
 </struts>

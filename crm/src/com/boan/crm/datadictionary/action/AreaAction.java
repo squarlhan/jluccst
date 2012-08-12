@@ -66,6 +66,12 @@ public class AreaAction extends BaseActionSupport {
 		provinceList = areaService.findAllProvinceInfo();
 		return SUCCESS;
 	}
+	public String provinceCityList()
+	{
+		provinceList = areaService.findAllProvinceInfo();
+		cityList = areaService.findAllCityInfo();
+		return SUCCESS;
+	}
 	public String cityList(){
 		cityList = areaService.findCityInfoByProvinceId(provinceId);
 		return SUCCESS;
@@ -147,7 +153,7 @@ public class AreaAction extends BaseActionSupport {
 	}
 	public String deleteCity(){
 		if(cityIds!=null){
-			areaService.deleteProvince(cityIds);
+			areaService.deleteCity(cityIds);
 		}
 		return SUCCESS;
 	}
