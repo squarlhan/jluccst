@@ -35,9 +35,16 @@
 		  	 */
 			var _customer_submit = {
 				rules: {
-					"company.companyName":{required:true,strangecode:true},
-					"company.address":{strangecode:true},
-					"company.phone":{strangecode:true}
+					"customerInfo.customerName":{required:true,strangecode:true},
+					"customerInfo.companyFullName":{strangecode:true},
+					"customerInfo.fax":{strangecode:true},
+					"customerInfo.sourceId":{required:true},
+					"customerInfo.categoryId":{required:true},
+					//customerInfo.progressId
+					//customerInfo.maturityId
+					//customerInfo.levelId
+					"customerInfo.address":{required:true,strangecode:true}
+					
 				}
 			};
 			/**
@@ -56,6 +63,48 @@
 				$.fn.save();
 		  		$.fn.close();
 		  		$.fn.initpage();
+		  		
+		  		$("#province").change(function() {
+	                loadCity($("#province").val());
+	            });
+		  		$("#city").change(function() {
+	                loadArea($("#city").val());
+	            });
+		  		 function loadCity(parentid) {
+		                $.ajax({
+		                    url:"<%=basePath%>datadictionary/cityinfoservice.action?provinceId=" + parentid,
+		                    type: 'POST',
+		                    dataType: 'JSON',
+		                    timeout: 5000,
+		                    error: function() { alert('Error loading data!'); },
+		                    success: function(msg) {
+		                        $("#city").empty();
+		                        $.each(eval(msg), function(i, item) {
+		                            $("<option value='" + item.id + "'>" + item.name + "</option>").appendTo($("#city"));
+		                        });
+		                        
+		                        loadArea($("#city").val());
+		                    }
+		                });
+		                
+		                
+		            }
+		  		function loadArea(parentid) {
+	                $.ajax({
+	                    url:"<%=basePath%>datadictionary/areainfoservice.action?cityId=" + parentid,
+	                    type: 'POST',
+	                    dataType: 'JSON',
+	                    timeout: 5000,
+	                    error: function() { alert('Error loading data!'); },
+	                    success: function(msg) {
+	                        $("#area").empty();
+	                        $.each(eval(msg), function(i, item) {
+	                            $("<option value='" + item.id + "'>" + item.name + "</option>").appendTo($("#area"));
+	                        });
+	                    }
+	                });
+	            }
+
 		  	});
 			/**
 		  	 * 保存
@@ -67,15 +116,25 @@
 	               	if(!validator.form()){
 						return false;
 					}
-					if( $.trim( $("#companyId").val() ) != ""){
-						form1.action = "toModifyCompanyAction.action";
-					}else{
-		               	form1.action = "toAddCompanyAction.action";					
-					}
-					form1.target = "iframe1";
-	               	form1.submit();
+					//if( $.trim( $("#companyId").val() ) != ""){
+						form1.action = "customer/saveCustomer.action";
+					//}else{
+		             //  	form1.action = "saveCustomer.action";					
+					//}
+					//form1.target = "iframe1";
+					form1.sourceName.value = $("#sourceId").text();
+	               	//form1.submit();
           		});
           	}
+			
+			$("#addPersonBtn").click(function(){
+				parent.parent.tipsWindown("添加联系人信息","iframe:openAddPersonAction.action","460","200","true","","true","no");
+				parent.parent.$("#windown-close").bind('click',function(){
+					window.location.href="./customerList.action";
+				});
+				window.parent.location.href = "customertabinfo.jsp?id=";
+		
+			});
 			
 			/**
 			 * 关闭
@@ -107,7 +166,8 @@
 
 	<body>
 		<s:form id="form1" name="form1" method="post" theme="simple">
-		<s:hidden id="customerId" name="customerInfo.id"></s:hidden>
+		<s:hidden id="id" name="customerInfo.id"></s:hidden>
+		<s:hidden id="sourceName" name="customerInfo.source"></s:hidden>
 		<table width="100%" border="0" cellspacing="5" cellpadding="0">
 			<tr><td style="width: 10px"></td><td style="height: 50px"><table>
 	<tr><td style="width: 600px; height: 21px"></td></tr>
@@ -132,7 +192,7 @@
 		<td align="center">客户来源</td>
 		<td>
 			<s:select list="listSource" listKey="id" listValue="name" value="customerInfo.sourceId" 
-			id="sourceId" name="customerInfo.sourceId" cssStyle="width:250px" headerKey="" headerValue="--请选择客户来源--"></s:select>
+			id="sourceId" name="customerInfo.sourceId" cssStyle="width:150px" headerKey="" headerValue="--请选择客户来源--"></s:select>
 			</td>
 	</tr>
 	<tr>
@@ -140,7 +200,7 @@
 		<td align="center">客户分类</td>
 		<td>
 			<s:select list="listCategory" listKey="id" listValue="name" value="customerInfo.categoryId" 
-			id="categoryId" name="customerInfo.categoryId" cssStyle="width:250px" headerKey="" headerValue="--请选择客户分类--"></s:select>
+			id="categoryId" name="customerInfo.categoryId" cssStyle="width:150px" headerKey="" headerValue="--请选择客户分类--"></s:select>
 			</td>
 		<td align="center">业务进展</td>
 		<td><select name="customerInfo.progressId"  style="width:100%">
@@ -149,11 +209,8 @@
 			<option value="新建客户">新建客户</option>
 			<option value="成熟客户">成熟客户</option></select></td>
 		<td align="center">成熟度</td>
-		<td><select name="customerInfo.maturityId" style="width:100%">
-			<option value=""></option>
-			<option value="A+">A+</option>
-			<option value="A-">A-</option>
-			<option value="B+">B+</option></select></td>
+		<td><s:select list="listMaturity" listKey="id" listValue="name" value="customerInfo.maturityId" 
+			id="categoryId" name="customerInfo.maturityId" cssStyle="width:150px" headerKey="" headerValue="--请选择成熟度--"></s:select></td>
 		<td align="center">开发程度</td>
 		<td style="width:150px"><select name="customerInfo.levelId" style="width:100%">
 			<option value=""></option>
@@ -183,81 +240,70 @@
 			<option value="小蒋">小蒋</option>
 			<option value="小张小刘">小张小刘</option></select></td>
 		<td align="center">建档时间</td>
-		<td><input type="text" style="width:100%" /></td>
+		<td><s:textfield type="text" style="width:100%" name="customerInfo.registerTime" id="registerTime"></s:textfield></td>
 	</tr>
 </table></td></tr>
 		
 <tr><td><table cellpadding="5" cellspacing="3">
 	<tr>
 		<td></td>
-		<td align="center">客户公司所在地</td>
-		<td><select style="width: 100px">
-			<option value=""></option>
-			<option value="吉林省">吉林省</option>
-			<option value="辽宁省">辽宁省</option>
-			<option value="北京市">北京市</option></select></td>
-		<td><select style="width: 100px">
-			<option value=""></option>
-			<option value="四平市">四平市</option>
-			<option value="长春市">长春市</option>
-			<option value="吉林市">吉林市</option></select></td>
-		<td><select style="width: 100px">
-			<option value=""></option>
-			<option value="梨树县">梨树县</option>
-			<option value="山门镇">山门镇</option>
-			<option value="铁西区">铁西区</option></select></td>
-		<td style="width: 510px"><input type="text"style="width: 100%" value="公司具体地址" /></td>
+		<td align="center">公司所在地</td>
+		<td><s:select list="listProvince" listKey="id" listValue="provinceName" value="customerInfo.province" 
+			id="province" name="customerInfo.province" cssStyle="width:100px" headerKey="" headerValue="请选择省份"></s:select>
+			</td>
+		<td><select value="customerInfo.city" 
+			id="city" name="customerInfo.city" style="width:100px" ></select></td>
+		<td><select  value="customerInfo.district"  
+			id="area" name="customerInfo.district" style="width:100px"  ></select></td>
+		<td style="width: 510px">具体地址：<s:textfield type="text" style="width:60%" name="customerInfo.address" id="registerTime"></s:textfield></td>
 	</tr>
 </table></td></tr>
 
 </table></fieldset></td></tr>
-
 <tr><td style="height: 20px"></td></tr>
-
+<s:if test='id!=null && id.length > 0'>
 <tr><td style="width: 20px"></td><td><fieldset><legend><span>联系人信息</span></legend><table>
-
+<s:iterator value="listPerson" status="obj">
 <tr><td><table cellpadding="5" cellspacing="3">
 	<tr>
 		<td></td>
 		<td align="center">姓 名</td>
-		<td><input type="text" style="width:160px" /></td>
+		<td><s:property value="personName"/></td>
 		<td align="center">部门/职务</td>
-		<td><input type="text" style="width:160px" /></td>
+		<td><s:property value="deptOrDuty"/></td>
 		<td align="center">手 机</td>
-		<td><input type="text" style="width:160px" /></td>
+		<td><s:property value="phone"/></td>
 		<td align="center">固定电话</td>
-		<td><input type="text" style="width:160px" /></td>
+		<td><s:property value="tel"/></td>
 	</tr>
 	<tr>
 		<td></td>
 		<td align="center">昵 称</td>
-		<td><input type="text" style="width:100%" /></td>
+		<td><s:property value="nickName"/></td>
 		<td align="center">生 日</td>
-		<td><input type="text" style="width:100%" /></td>
+		<td><s:property value="birthday"/></td>
 		<td align="center">Q Q</td>
-		<td><input type="text" style="width:100%" /></td>
+		<td><s:property value="qq"/></td>
 		<td align="center">邮 箱</td>
-		<td><input type="text" style="width:100%" /></td>
-		<td>&nbsp&nbsp&nbsp<input type="button" value="+" /></td>
+		<td><s:property value="email"/></td>
+		</td>
 	</tr>
 </table></td></tr>
-
+</s:iterator>
 </table></fieldset></td></tr>
-
-<tr><td></td><td><table>
+</s:if>
+<tr><td></td><td align="center"><table>
 	<tr><td style="height: 10px"></td></tr>
 	<tr>
-		<td style="width: 900px"></td>
-		<td><input type="button" onclick="window.history.go(-1)" value="保存" style="width: 50px"/></td>
-		<td style="width: 8px"></td>
-		<td><input type="button" onclick="window.history.go(-1)" value="关闭" style="width: 50px"/></td>
-		<td></td>
+		<td align="center">
+		<input type="button" name="addBtn" id="addBtn" value="保存" style="width: 50px"/>
+		<s:if test='id!=null&& id.length > 0'>
+		<input type="button" name="addPersonBtn" value="添加联系人" style="width: 100px"/>
+		</s:if>
+		<input type="button" onclick="window.history.go(-1)" value="关闭" style="width: 50px"/></td>
 	</tr>
 </table></td></tr>
-
-
 		</table>
-		<iframe id="iframe1" name="iframe1" width="1px" height="1px"></iframe>
 		</s:form>
 	</body>
 </html>

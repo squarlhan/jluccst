@@ -20,6 +20,7 @@
 	String basePath = request.getScheme() + "://"
 			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
+	String id = request.getParameter("id");
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -117,8 +118,9 @@ function go(page,obj){
 	<div title="基本信息"
 		style="padding: 1px; display: none;">
 		<iframe scrolling="auto" frameborder="0" style="width:100%; height:100%"
-			src="customerinfo.jsp"></iframe>
+			src="customerInfo.action?id=<%=id%>"></iframe>
 	</div>
+	<%if(id != null && id.length() > 0){%>
 	<div title="客户跟进"
 		style="padding: 1px; display: none;">
 		<iframe scrolling="auto" frameborder="0" style="width:100%; height:100%"
@@ -139,6 +141,7 @@ function go(page,obj){
 		<iframe scrolling="auto" frameborder="0" style="width:100%; height:100%"
 			src="customertabService.html"></iframe>
 	</div>
+	<%}%>
 </div>
 </body>
 </html>
