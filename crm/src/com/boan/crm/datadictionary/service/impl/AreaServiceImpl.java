@@ -49,6 +49,12 @@ public class AreaServiceImpl implements IAreaService{
 	public List<ProvinceInfo> findAllProvinceInfo() {
 		return provinceInfoDao.find("from ProvinceInfo order by sortIndex asc", new Object[0]);
 	}
+	
+	@Override
+	public List<CityInfo> findAllCityInfo() {
+		return cityInfoDao.find("from CityInfo order by sortIndex asc", new Object[0]);
+	}
+	
 	@Override
 	public List<AreaInfo> findAreaInfoByCityId(String cityId) {
 		Map<String, String> values = new HashMap<String, String>();
