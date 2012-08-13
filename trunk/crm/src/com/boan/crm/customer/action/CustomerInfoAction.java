@@ -27,6 +27,7 @@ import com.boan.crm.datadictionary.model.ProvinceInfo;
 import com.boan.crm.datadictionary.service.IAreaService;
 import com.boan.crm.datadictionary.service.IDataDictionaryService;
 import com.boan.crm.groupmanage.service.IPopedomService;
+import com.boan.crm.groupmanage.service.IUserService;
 import com.boan.crm.utils.action.BaseActionSupport;
 import com.boan.crm.utils.page.Pagination;
 
@@ -67,6 +68,11 @@ public class CustomerInfoAction extends BaseActionSupport{
 	@Autowired
 	@Qualifier("contractPersonService")
 	private IContractPersonService contractpersonInfoService;
+	
+	@Autowired
+	@Qualifier("userService")
+	private IUserService userService;
+	
 	//客户信息类
 	private CustomerInfo customerInfo ;
 	private String id = "";
@@ -81,6 +87,12 @@ public class CustomerInfoAction extends BaseActionSupport{
 	private List<ProvinceInfo> listProvince = null;
 	private List<CityInfo> listCity = null;
 	private List<AreaInfo> listArea = null;
+	private String customerName = "";
+	private String contractorName = "";
+	private String customerCategory = "";
+	private String salesmanId = "";
+	
+	
 	
 	/**
 	 * 客户列表
@@ -88,7 +100,33 @@ public class CustomerInfoAction extends BaseActionSupport{
 	 */
 	public String customerList()
 	{
-		Map<String,CustomerInfo> values = new HashMap<String,CustomerInfo>();
+		//客户分类： 传0
+		listCategory = dataDictionaryService.findDataDictionaryByType(0);
+		
+		
+		
+		Map<String,String> values = new HashMap<String,String>();
+		
+		if(customerName != null && customerName.length() > 0)
+		{
+			values.put("customerName", "%"+customerName+"%");
+		}
+		if(contractorName != null && contractorName.length() > 0)
+		{
+			values.put("contractorName", "%"+contractorName+"%");
+		}
+		if(customerCategory != null && customerCategory.length() > 0)
+		{
+			values.put("customerCategory", customerCategory);
+		}
+		if(salesmanId != null && salesmanId.length() > 0)
+		{
+			values.put("salesmanId", salesmanId);
+		}
+		
+		values.put("companyId", sessionCompanyId);
+		
+		
 		pagination = customerInfoService.findCustomerInfoForPage(values, pagination);
 		return SUCCESS;
 	}
@@ -254,5 +292,29 @@ public class CustomerInfoAction extends BaseActionSupport{
 	}
 	public void setListProvince(List<ProvinceInfo> listProvince) {
 		this.listProvince = listProvince;
+	}
+	public String getCustomerName() {
+		return customerName;
+	}
+	public void setCustomerName(String customerName) {
+		this.customerName = customerName;
+	}
+	public String getContractorName() {
+		return contractorName;
+	}
+	public void setContractorName(String contractorName) {
+		this.contractorName = contractorName;
+	}
+	public String getCustomerCategory() {
+		return customerCategory;
+	}
+	public void setCustomerCategory(String customerCategory) {
+		this.customerCategory = customerCategory;
+	}
+	public String getSalesmanId() {
+		return salesmanId;
+	}
+	public void setSalesmanId(String salesmanId) {
+		this.salesmanId = salesmanId;
 	}
 }
