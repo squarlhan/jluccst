@@ -251,7 +251,7 @@
 									<tr>
 										<td width="40" align="right" style="padding-bottom: 4px;"><img src="images/menuto.jpg" width="5" height="5" />
 										</td>
-										<td><a href="clientInformationlist.html" target="mainFrame">客户信息</a>
+										<td><a href="customer/customermanage.jsp" target="mainFrame">客户信息</a>
 										</td>
 									</tr>
 								</table>
@@ -501,6 +501,42 @@
 										<td width="40" align="right" style="padding-bottom: 4px;"><img src="images/menuto.jpg" width="5" height="5" />
 										</td>
 										<td><a href="datadictionary/maturitymanage.jsp" target="mainFrame">客户成熟度</a>
+										</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+						<tr>
+							<td align="left">
+								<table width="100%" border="0" cellspacing="5" cellpadding="0">
+									<tr>
+										<td width="40" align="right" style="padding-bottom: 4px;"><img src="images/menuto.jpg" width="5" height="5" />
+										</td>
+										<td><a href="datadictionary/provincemanage.jsp" target="mainFrame">省份信息</a>
+										</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+						<tr>
+							<td align="left">
+								<table width="100%" border="0" cellspacing="5" cellpadding="0">
+									<tr>
+										<td width="40" align="right" style="padding-bottom: 4px;"><img src="images/menuto.jpg" width="5" height="5" />
+										</td>
+										<td><a href="datadictionary/citymanage.jsp" target="mainFrame">城市信息</a>
+										</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+						<tr>
+							<td align="left">
+								<table width="100%" border="0" cellspacing="5" cellpadding="0">
+									<tr>
+										<td width="40" align="right" style="padding-bottom: 4px;"><img src="images/menuto.jpg" width="5" height="5" />
+										</td>
+										<td><a href="datadictionary/areamanage.jsp" target="mainFrame">地区信息</a>
 										</td>
 									</tr>
 								</table>
