@@ -220,7 +220,7 @@
 									<tr>
 										<td width="40" align="right" style="padding-bottom: 4px;"><img src="images/menuto.jpg" width="5" height="5" />
 										</td>
-										<td><a href="customerReaserch.html" target="mainFrame">客户查找</a>
+										<td><a href="customer/customerreaserch.jsp" target="mainFrame">客户查找</a>
 										</td>
 									</tr>
 								</table>
@@ -342,7 +342,7 @@
 									<tr>
 										<td width="40" align="right" style="padding-bottom: 4px;"><img src="images/menuto.jpg" width="5" height="5" />
 										</td>
-										<td><a href="staffManagement.html" target="mainFrame">时间管理</a>
+										<td><a href="openTimePlanListAction.action" target="mainFrame">时间管理</a>
 										</td>
 									</tr>
 								</table>
@@ -354,7 +354,7 @@
 									<tr>
 										<td width="40" align="right" style="padding-bottom: 4px;"><img src="images/menuto.jpg" width="5" height="5" />
 										</td>
-										<td><a href="marketSurvey.html" target="mainFrame">市场调查</a>
+										<td><a href="openMarketInquiryListAction.action" target="mainFrame">市场调查</a>
 										</td>
 									</tr>
 								</table>
