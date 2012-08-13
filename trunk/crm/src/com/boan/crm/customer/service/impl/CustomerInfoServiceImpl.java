@@ -20,7 +20,7 @@ import com.boan.crm.utils.page.Pagination;
  * 客户信息服务接口实现类
  */
 @Service("customerInfoService")
-public class CustomerInfoService implements ICustomerInfoService{
+public class CustomerInfoServiceImpl implements ICustomerInfoService{
 	@Autowired
 	@Qualifier("customerInfoDao")
 	private ICustomerInfoDAO customerInfoDao;
@@ -41,16 +41,42 @@ public class CustomerInfoService implements ICustomerInfoService{
 		hql.append( "from CustomerInfo where 1=1");
 		if(values.get("companyId") != null)
 		{
-			hql.append(" and company = :company ");
-		}else if(values.get("salesmanId") != null)
+			hql.append(" and companyId = :companyId ");
+		}
+		if(values.get("salesmanId") != null)
 		{
 			hql.append(" and salesmanId = :salesmanId ");
 		}
+		if(values.get("customerName") != null)
+		{
+			hql.append(" and id in ( select customerId from ContractPersonInfo where personName like :contractorName) ");
+		}
+		if(values.get("customerCategory") != null)
+		{
+			hql.append(" and categoryId = :customerCategory ");
+		}
 		
-		hql.append("order by registerTime asc");
+		hql.append(" order by registerTime asc");
 		List<CustomerInfo> data = customerInfoDao.findForPage(hql.toString(), values, pagination.getStartIndex(), pagination.getPageSize());
 		hql.delete(0, hql.length());
-		hql.append(" select count(*) from CustomerInfo order by registerTime asc" );
+		hql.append(" select count(*) from CustomerInfo where 1=1 " );
+		if(values.get("companyId") != null)
+		{
+			hql.append(" and companyId = :companyId ");
+		}
+		if(values.get("salesmanId") != null)
+		{
+			hql.append(" and salesmanId = :salesmanId ");
+		}
+		if(values.get("customerName") != null)
+		{
+			hql.append(" and id in ( select customerId from ContractPersonInfo where personName like :contractorName) ");
+		}
+		if(values.get("customerCategory") != null)
+		{
+			hql.append(" and categoryId = :customerCategory ");
+		}
+		
 		int totalRows = customerInfoDao.findCountForPage(hql.toString(), values);
 		pagination.setTotalRows(totalRows);
 		pagination.setData(data);
