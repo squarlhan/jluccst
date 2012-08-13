@@ -26,6 +26,7 @@ public class ContractPersonInfo implements Serializable
 	 * 
 	 */
 	private static final long serialVersionUID = 9165746092571541443L;
+	public ContractPersonInfo(){ this.id = ""; }
 	@Id
 	@GenericGenerator(name = "system-uuid", strategy = "uuid")
 	@GeneratedValue(generator = "system-uuid")
