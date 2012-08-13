@@ -36,4 +36,10 @@
 	<include file="com/boan/crm/backstagemanage/action/struts_backstage.xml"></include>
 	<!-- 客户管理 -->
 	<include file="com/boan/crm/customer/action/struts_customer.xml"></include>
+	<!-- 短信管理 -->
+	<include file="com/boan/crm/sms/action/struts_sms.xml"></include>
+	<!-- 时间管理 -->
+	<include file="com/boan/crm/timemanage/action/struts_time_plan.xml"></include>
+	<!-- 市场调查 -->
+	<include file="com/boan/crm/marketinquiry/action/struts_market_inquiry.xml"></include>
 </struts>
