@@ -21,9 +21,9 @@
 		  	 */
 			var _device_submit = {
 				rules: {
-					"cityInfo.cityName":{required:true,maxlength:10}
+					"contractPersonInfo.cityName":{required:true,maxlength:10}
 				},messages:{
-					"cityInfo.cityName":
+					"contractPersonInfo.cityName":
 					{
 					    required:"姓名为必填项！",
 						maxlength:"姓名最多输入10个汉字！"
@@ -60,7 +60,7 @@
 	               	if(!validator.form()){
 						return false;
 					}
-					form1.cityName.value = $("#dictName_t").val();
+					form1.personName.value = $("#dictName_t").val();
 					form1.action = "customer/saveContractPerson.action";
 	               	form1.submit();
 	           	});
@@ -100,9 +100,9 @@
 	<body>
 		<s:form id="form1" name="form1" method="post" theme="simple">
 			<s:label id="lb_message" name="message" cssStyle="display:none"></s:label>
-			<s:hidden id="provinceId" name="provinceId"></s:hidden>
-			<s:hidden id="cityId" name="cityId"></s:hidden>
-			<input type="hidden" name="cityName" value="" />
+			<s:hidden id="customerId" name="contractPersonInfo.customerId"></s:hidden>
+			<s:hidden id="personId" name="contractPersonInfo.id"></s:hidden>
+			<input type="hidden" name="personName" value="" />
 			<table width="100%" border="0" cellspacing="5" cellpadding="0">
 				<tr>
 					<td>
@@ -130,6 +130,60 @@
 												<s:textfield id="dept" name="contractPersonInfo.deptOrDuty"
 													maxlength="25" cssStyle="width: 300px;"></s:textfield>
 												<font color="red">*</font>
+											</td>
+										</tr>
+										<tr>
+											<td height="26" align="right" bgcolor="#FFFFFF">
+												<strong>手 机</strong>
+											</td>
+											<td height="26" align="left" bgcolor="#FFFFFF">
+												<s:textfield id="phone" name="contractPersonInfo.phone"
+													maxlength="25" cssStyle="width: 300px;"></s:textfield>
+											</td>
+										</tr>
+										<tr>
+											<td height="26" align="right" bgcolor="#FFFFFF">
+												<strong>固定电话</strong>
+											</td>
+											<td height="26" align="left" bgcolor="#FFFFFF">
+												<s:textfield id="tel" name="contractPersonInfo.tel"
+													maxlength="25" cssStyle="width: 300px;"></s:textfield>
+											</td>
+										</tr>
+										<tr>
+											<td height="26" align="right" bgcolor="#FFFFFF">
+												<strong>昵 称</strong>
+											</td>
+											<td height="26" align="left" bgcolor="#FFFFFF">
+												<s:textfield id="nickName" name="contractPersonInfo.nickName"
+													maxlength="25" cssStyle="width: 300px;"></s:textfield>
+											</td>
+										</tr>
+										<tr>
+											<td height="26" align="right" bgcolor="#FFFFFF">
+												<strong>生 日</strong>
+											</td>
+											<td height="26" align="left" bgcolor="#FFFFFF">
+												<s:textfield id="birthday" name="contractPersonInfo.birthday"
+													maxlength="25" cssStyle="width: 300px;"></s:textfield>
+											</td>
+										</tr>
+										<tr>
+											<td height="26" align="right" bgcolor="#FFFFFF">
+												<strong>QQ</strong>
+											</td>
+											<td height="26" align="left" bgcolor="#FFFFFF">
+												<s:textfield id="qq" name="contractPersonInfo.qq"
+													maxlength="25" cssStyle="width: 300px;"></s:textfield>
+											</td>
+										</tr>
+										<tr>
+											<td height="26" align="right" bgcolor="#FFFFFF">
+												<strong>E-MAIL</strong>
+											</td>
+											<td height="26" align="left" bgcolor="#FFFFFF">
+												<s:textfield id="email" name="contractPersonInfo.email"
+													maxlength="25" cssStyle="width: 300px;"></s:textfield>
 											</td>
 										</tr>
 										<tr>

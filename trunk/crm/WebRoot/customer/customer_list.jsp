@@ -50,7 +50,7 @@
 				parent.parent.$("#windown-close").bind('click',function(){
 					window.location.href="./customerList.action";
 				});*/
-				window.parent.location.href = "customertabinfo.jsp?id=";
+				window.parent.location.href = "customerTabInfo.action";
 		
 			});
 			$.fn.checkall("cbk_all");
@@ -61,13 +61,13 @@
 	  		 */
 	  		$('a[name="edit"]').each(function(){
 	  			$(this).click(function(){
-	  				/*var url = $(this).attr("url");
-	  				parent.parent.tipsWindown("修改客户信息","iframe:"+url,"460","200","true","","true","no");
+	  				var url = $(this).attr("url");
+	  				/*parent.parent.tipsWindown("修改客户信息","iframe:"+url,"460","200","true","","true","no");
 	  				parent.parent.$("#windown-close").bind('click',function(){
 						window.location.href="./customerList.action";
 					});*/
 					
-	  				window.parent.location.href = "customertabinfo.jsp?id=";
+	  				window.parent.location.href = url;
 	  			});
 	  		});
 	  		
@@ -168,8 +168,8 @@
               <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="phone"/></td>
                -->
           <td height="26" colspan="2" align="center" bgcolor="#FFFFFF">
-          	<s:url id="edit_url" action="openModifyCompanyAction">   
-				<s:param name="customerInfo.id" value="id"></s:param>   
+          	<s:url id="edit_url" action="customerTabInfo.action">   
+				<s:param name="id" value="id"></s:param>   
 			</s:url>
 			<s:url id="delete_url" action="deleteCompanyAction">   
 				<s:param name="ids" value="id"></s:param>   
