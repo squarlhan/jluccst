@@ -17,6 +17,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.boan.crm.servicemanage.model.MemberInfo;
+import com.boan.crm.servicemanage.model.ServiceLog;
 import com.boan.crm.servicemanage.service.IMemberInfoService;
 import com.boan.crm.utils.action.BaseActionSupport;
 import com.boan.crm.utils.page.Pagination;
@@ -83,6 +84,17 @@ public class MemberInfoAction extends BaseActionSupport {
 		return SUCCESS;
 	}
 
+	/**
+	 * 获得会员对象信息
+	 * @return
+	 */
+	public String saveMemberInfo(){
+		if(StringUtils.trimToNull(memberInfo.getId())==null)
+			memberInfo.setId(null);
+		memberInfoService.updateInfo(memberInfo);
+		return SUCCESS;
+	}
+	
 	/**
 	 * 删除会员信息
 	 * @return
