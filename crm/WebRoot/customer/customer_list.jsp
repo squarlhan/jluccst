@@ -113,21 +113,16 @@
       <tr><td><table border="0" cellpadding="5" cellspacing="0">
 	<tr>  		
 		<td></td>
-		<td align="center">客户名称</td>
-		<td style="width: 120px">
-		<select style="width: 100%">
-			<option value=""></option>
-			<option value="">按拼音显示所有客户</option>
-			<option value="">也可以拼音模糊查询</option></select></td>
-		<td align="center">联 系 人</td>
-		<td><input type="text" style="width:120px"/></td>
-		<td align="center">客户分类</td>
-		<td style="width:120px"><select name="name" style="width:100%">
-			<option value=""></option>
-			<option value="散户">散户</option>
-			<option value="大客户">大客户</option></select></td>
-		<td>所属业务员</td/>
-		<td style="width:120px"><select name="name" style="width:100%">
+		<td align="center">客户名称：</td>
+		<td >
+		<s:textfield name="customerName" id="customerName" style="width: 100px"></s:textfield></td>
+		<td align="center">联 系 人：</td>
+		<td><s:textfield name="contractorName" id="contractorName" style="width: 100px"></s:textfield></td>
+		<td align="center">客户分类：</td>
+		<td style="width:120px"><s:select list="listCategory" listKey="id" listValue="name" value="customerInfo.categoryId" 
+			id="categoryId" name="customerCategory" cssStyle="width:150px" headerKey="" headerValue="--请选择客户分类--"></s:select></td>
+		<td>所属业务员：</td/>
+		<td style="width:120px"><select name="name" style="width: 120px">
 			<option value=""></option>
 			<option value="小薛">小薛</option>
 			<option value="小蒋">小蒋</option>
@@ -162,7 +157,15 @@
         <td height="26" align="center" bgcolor="#FFFFFF" >  
 				<s:checkbox id="%{#obj.id}" name="ids" fieldValue="%{id}" value="false" theme="simple"/>
 			</td>
-              <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="customerName"/></td>
+            <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="customerName"/></td>
+            <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="customerName"/></td>
+            <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="customerName"/></td>
+            <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="customerName"/></td>
+            <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="customerName"/></td>
+            <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="customerName"/></td>
+            <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="customerName"/></td>
+            <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="customerName"/></td>
+            <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="customerName"/></td>
               <!-- 
               <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="address"/></td>
               <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="phone"/></td>
