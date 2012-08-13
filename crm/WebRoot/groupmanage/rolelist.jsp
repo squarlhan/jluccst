@@ -131,13 +131,16 @@
 						<table width="100%" border="0" cellpadding="5" cellspacing="1"
 							bgcolor="#d5e4fd">
 							<tr>
-								<td align="center" background="../images/headerbg.jpg">
+								<td align="center" background="<%=path %>/images/headerbg.jpg">
 									<s:checkbox theme="simple" id="cbk_all" name="all"></s:checkbox>
 								</td>
-								<td align="center" background="../images/headerbg.jpg">
+								<td align="center" background="<%=path %>/images/headerbg.jpg">
 									<strong>职务名称</strong>
 								</td>
-								<td align="center" background="../images/headerbg.jpg">
+									<td align="center" background="<%=path %>/images/headerbg.jpg">
+									<strong>职务标识</strong>
+								</td>
+								<td align="center" background="<%=path %>/images/headerbg.jpg">
 									<strong>操作</strong>
 								</td>
 							</tr>
@@ -149,6 +152,9 @@
 									</td>
 									<td height="26" align="center" bgcolor="#FFFFFF">
 										<s:property value="roleName" />
+									</td>
+									<td height="26" align="center" bgcolor="#FFFFFF">
+										<s:property value="roleKey" />
 									</td>
 									<td height="26" colspan="2" align="center" bgcolor="#FFFFFF">
 										<s:url id="edit_url" action="openModifyRoleAction">
