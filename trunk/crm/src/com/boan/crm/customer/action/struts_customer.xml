@@ -13,9 +13,12 @@
 			<result name="success">/customer/customer_info.jsp</result>
 			<result name="input">/customer/customer_info.jsp</result>
 		</action>
+		<action name="customerTabInfo" class="customerInfoAction" method="customerTabInfo">
+			<result name="success">/customer/customertabinfo.jsp</result>
+		</action>
 		<action name="saveCustomer" class="customerInfoAction" method="saveCustomer">
 			<result name="success" type="chain">
-             	<param name="actionName">customerInfo</param>
+             	<param name="actionName">customerTabInfo</param>
              	<param name="id">${id}</param>
             </result>
 		</action>

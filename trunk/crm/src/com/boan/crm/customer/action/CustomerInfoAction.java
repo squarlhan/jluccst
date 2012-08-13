@@ -3,6 +3,7 @@
  */
 package com.boan.crm.customer.action;
 
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -43,7 +44,8 @@ public class CustomerInfoAction extends BaseActionSupport{
 	 */
 	private static final long serialVersionUID = -4140371188076904836L;
 	
-	@Resource
+	@Autowired
+	@Qualifier("customerInfoService")
 	//客户状态接口类
 	private ICustomerInfoService customerInfoService;
 	
@@ -62,6 +64,8 @@ public class CustomerInfoAction extends BaseActionSupport{
 	private IAreaService areaService = null;
 	
 	// 客户状态接口类
+	@Autowired
+	@Qualifier("contractPersonService")
 	private IContractPersonService contractpersonInfoService;
 	//客户信息类
 	private CustomerInfo customerInfo ;
@@ -116,6 +120,10 @@ public class CustomerInfoAction extends BaseActionSupport{
 		
 		return SUCCESS;
 	}
+	public String customerTabInfo()
+	{
+		return SUCCESS;
+	}
 	/**
 	 * 保存客户信息
 	 * @return String
@@ -124,9 +132,38 @@ public class CustomerInfoAction extends BaseActionSupport{
 	{
 		customerInfo.setCompanyId(sessionCompanyId);
 		customerInfo.setCreatorId(sessionUserId);
+		customerInfo.setCreateTime(Calendar.getInstance());
+		CustomerInfo obj = null;
+		if(id != null && id.length() > 0)
+		{
+			obj =  customerInfoService.get(id);
+		}else
+		{
+			obj = new CustomerInfo();
+		}
 		
-		customerInfoService.save(customerInfo);
-		id = customerInfo.getId();
+		obj.setAddress(customerInfo.getAddress());
+		obj.setCategoryId(customerInfo.getCategoryId());
+		obj.setCity(customerInfo.getCity());
+		obj.setCompanyFullName(customerInfo.getCompanyFullName());
+		obj.setCompanyId(customerInfo.getCompanyId());
+		obj.setCreateTime(customerInfo.getCreateTime());
+		obj.setCreatorId(customerInfo.getCreatorId());
+		obj.setCustomerName(customerInfo.getCustomerName());
+		obj.setDistrict(customerInfo.getDistrict());
+		obj.setFax(customerInfo.getFax());
+		obj.setLevelId(customerInfo.getLevelId());
+		obj.setMaturityId(customerInfo.getMaturityId());
+		obj.setOtherSalesmanId(customerInfo.getOtherSalesmanId());
+		obj.setProgressId(customerInfo.getProgressId());
+		obj.setProvince(customerInfo.getProvince());
+		obj.setRegisterTime(customerInfo.getRegisterTime());
+		obj.setSalesmanId(customerInfo.getSalesmanId());
+		obj.setSourceId(customerInfo.getSourceId());
+		obj.setMainIndustry(customerInfo.getMainIndustry());
+		
+		customerInfoService.save(obj);
+		id = obj.getId();
 		return SUCCESS;
 	}
 	/**
