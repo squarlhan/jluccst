@@ -23,7 +23,7 @@ import com.boan.crm.utils.page.Pagination;
  *　联系人服务接口实现类
  */
 @Service("contractPersonService")
-public class ContractPersonService implements IContractPersonService {
+public class ContractPersonServiceImpl implements IContractPersonService {
 	@Autowired
 	@Qualifier("contractPersonDao")
 	private IContractPersonDAO contractPersonDao;
