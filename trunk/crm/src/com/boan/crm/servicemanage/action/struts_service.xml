@@ -33,11 +33,7 @@
 			<result name="success">/service/member_info_info.jsp</result>
 			<result name="input">/service/member_info_info.jsp</result>
 		</action>
-		<action name="savememberinfo" class="memberInfoAction" method="saveMemberInfo">
-			<result name="success">/service/member_info_info.jsp</result>
-			<result name="input">/service/member_info_info.jsp</result>
-		</action>
-    	<action name="deletememberinfo" class="memberInfoAction" method="deleteMemberInfo">
+    	<action name="cancelmemberinfo" class="memberInfoAction" method="cancelInfo">
     		<result name="success" type="chain">
              	<param name="actionName">memberinfolist</param>
             </result>

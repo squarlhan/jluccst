@@ -48,9 +48,9 @@ public class MemberInfoAction extends BaseActionSupport {
 	private Pagination<MemberInfo> pagination = new Pagination<MemberInfo>();
 	
 	//会员ID
-	private String logId;
+	private String infoId;
 	
-	private String[] logIds;
+	private String[] infoIds;
 	
 	private String companyId;
 	private String companyName;
@@ -76,33 +76,20 @@ public class MemberInfoAction extends BaseActionSupport {
 	 * @return
 	 */
 	public String memberInfoInfo(){
-		if(StringUtils.trimToNull(logId)!=null)
-			memberInfo = memberInfoService.get(logId);
+		if(StringUtils.trimToNull(infoId)!=null)
+			memberInfo = memberInfoService.getById(infoId);
 		else
 			memberInfo = new MemberInfo();
 		return SUCCESS;
 	}
-	
-	/**
-	 * 保存信息
-	 * @return
-	 */
-	public String saveMemberInfo(){
-		if(StringUtils.trimToNull(memberInfo.getId())==null)
-			memberInfo.setId(null);
-		memberInfo.setCompanyId(companyId);
-		memberInfo.setCompanyName(companyName);
-		memberInfoService.saveOrUpdate(memberInfo);
-		return SUCCESS;
-	}
-	
+
 	/**
 	 * 删除会员信息
 	 * @return
 	 */
-	public String deleteMemberInfo(){
-		if(logIds!=null){
-			memberInfoService.deleteMemberInfo(logIds);
+	public String cancelInfo(){
+		if(infoIds!=null){
+			memberInfoService.cancelInfo(infoIds);
 		}
 		return SUCCESS;
 	}
@@ -150,31 +137,31 @@ public class MemberInfoAction extends BaseActionSupport {
 	}
 
 	/**
-	 * @return the logId
+	 * @return the infoId
 	 */
-	public String getLogId() {
-		return logId;
+	public String getInfoId() {
+		return infoId;
 	}
 
 	/**
-	 * @param logId the logId to set
+	 * @param infoId the infoId to set
 	 */
-	public void setLogId(String logId) {
-		this.logId = logId;
+	public void setInfoId(String infoId) {
+		this.infoId = infoId;
 	}
 
 	/**
-	 * @return the logIds
+	 * @return the infoIds
 	 */
-	public String[] getLogIds() {
-		return logIds;
+	public String[] getInfoIds() {
+		return infoIds;
 	}
 
 	/**
-	 * @param logIds the logIds to set
+	 * @param infoIds the infoIds to set
 	 */
-	public void setLogIds(String[] logIds) {
-		this.logIds = logIds;
+	public void setInfoIds(String[] infoIds) {
+		this.infoIds = infoIds;
 	}
 
 	/**
