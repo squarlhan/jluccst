@@ -29,7 +29,7 @@ public class ContractPersonInfo implements Serializable
 	@Id
 	@GenericGenerator(name = "system-uuid", strategy = "uuid")
 	@GeneratedValue(generator = "system-uuid")
-	private String id = "";
+	private String id;
 	@Column(name = "CUSTOMER_ID" , length = 50)
 	private String customerId = "";
 	@Column(name = "PERSON_NAME" , length = 50)

@@ -32,10 +32,10 @@ public class CustomerInfo implements Serializable
 	@Id
 	@GenericGenerator(name = "system-uuid", strategy = "uuid")
 	@GeneratedValue(generator = "system-uuid")
-	private String id = "";
+	private String id;
 	@Column(name = "CUSTOMER_NAME" , length = 50)
 	private String customerName = "";
-	@Column(name = "COMPANY_FULL_NAME" , length = 500)
+	@Column(name = "COMPANY_FULL_NAME" , length = 255)
 	private String companyFullName = "";
 	@Column(name = "FAX" , length = 50)
 	private String fax = "";
@@ -75,7 +75,7 @@ public class CustomerInfo implements Serializable
 	private String city = "";
 	@Column(name = "DISTRICT" , length = 50)
 	private String district = "";
-	@Column(name = "ADDRESS" , length = 500)
+	@Column(name = "ADDRESS" , length = 255)
 	private String address = "";
 	@Column(name = "CREATE_TIME")
 	private Calendar createTime;
@@ -85,6 +85,14 @@ public class CustomerInfo implements Serializable
 	private String companyId;
 	@Transient
 	private List<ContractPersonInfo> contractPersonList = null;
+	@Column(name = "MAININDUSTRY")
+	private String mainIndustry = null;
+	public String getMainIndustry() {
+		return mainIndustry;
+	}
+	public void setMainIndustry(String mainIndustry) {
+		this.mainIndustry = mainIndustry;
+	}
 	/**
 	 * 编号
 	 * @return String
