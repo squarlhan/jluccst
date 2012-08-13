@@ -35,7 +35,8 @@
 		  	 */
 			var _customer_submit = {
 				rules: {
-					"role.roleName":{required:true,strangecode:true}
+					"role.roleName":{required:true,strangecode:true},
+					"role.roleKey":{strangecode:true}
 				}
 			};
 			/**
@@ -110,6 +111,14 @@
 										<td height="26" align="left" bgcolor="#FFFFFF">
 											<s:textfield id="roleName" name="role.roleName" cssStyle="width: 250px;" maxlength="25"></s:textfield>
 											<font color="red">*</font>
+										</td>
+									</tr>
+									<tr>
+										<td height="26" align="right" bgcolor="#FFFFFF">
+											<strong>职务标识：</strong>
+										</td>
+										<td height="26" align="left" bgcolor="#FFFFFF">
+											<s:textfield id="roleKey" name="role.roleKey" cssStyle="width: 250px;" maxlength="25"></s:textfield>
 										</td>
 									</tr>
 									<tr>
