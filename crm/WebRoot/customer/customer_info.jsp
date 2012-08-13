@@ -40,9 +40,9 @@
 					"customerInfo.fax":{strangecode:true},
 					"customerInfo.sourceId":{required:true},
 					"customerInfo.categoryId":{required:true},
-					//customerInfo.progressId
-					//customerInfo.maturityId
-					//customerInfo.levelId
+					"customerInfo.progressId":{required:true},
+					"customerInfo.maturityId":{required:true},
+					"customerInfo.levelId":{required:true},
 					"customerInfo.address":{required:true,strangecode:true}
 					
 				}
@@ -104,6 +104,15 @@
 	                    }
 	                });
 	            }
+		  		
+		  		$("#addPersonBtn").click(function(){
+					parent.parent.parent.tipsWindown("添加联系人信息","iframe:customer/contractPersonInfo.action?customerId=" + form1.customerId.value,"460","600","true","","true","no");
+					parent.parent.parent.$("#windown-close").bind('click',function(){
+						window.location.href="./customerList.action";
+					});
+					//window.parent.location.href = "customertabinfo.action?id="+ form1.customerId.value;
+			
+				});
 
 		  	});
 			/**
@@ -117,24 +126,21 @@
 						return false;
 					}
 					//if( $.trim( $("#companyId").val() ) != ""){
-						form1.action = "customer/saveCustomer.action";
+					form1.action = "customer/saveCustomer.action";
 					//}else{
 		             //  	form1.action = "saveCustomer.action";					
 					//}
-					//form1.target = "iframe1";
+					form1.target = "_parent";
 					form1.sourceName.value = $("#sourceId").text();
-	               	//form1.submit();
+					form1.categoryName.value = $("#categoryId").text();
+					form1.progressName.value = $("#progressId").text();
+					form1.maturityName.value = $("#maturityId").text();
+					form1.levelName.value = $("#levelId").text();
+	               	form1.submit();
           		});
           	}
 			
-			$("#addPersonBtn").click(function(){
-				parent.parent.tipsWindown("添加联系人信息","iframe:openAddPersonAction.action","460","200","true","","true","no");
-				parent.parent.$("#windown-close").bind('click',function(){
-					window.location.href="./customerList.action";
-				});
-				window.parent.location.href = "customertabinfo.jsp?id=";
-		
-			});
+			
 			
 			/**
 			 * 关闭
@@ -166,8 +172,12 @@
 
 	<body>
 		<s:form id="form1" name="form1" method="post" theme="simple">
-		<s:hidden id="id" name="customerInfo.id"></s:hidden>
+		<s:hidden id="customerId" name="customerInfo.id"></s:hidden>
 		<s:hidden id="sourceName" name="customerInfo.source"></s:hidden>
+		<s:hidden id="categoryName" name="customerInfo.category"></s:hidden>
+		<s:hidden id="progressName" name="customerInfo.progress"></s:hidden>
+		<s:hidden id="maturityName" name="customerInfo.maturity"></s:hidden>
+		<s:hidden id="levelName" name="customerInfo.level"></s:hidden>
 		<table width="100%" border="0" cellspacing="5" cellpadding="0">
 			<tr><td style="width: 10px"></td><td style="height: 50px"><table>
 	<tr><td style="width: 600px; height: 21px"></td></tr>
@@ -183,13 +193,13 @@
 <tr><td><table cellpadding="5" cellspacing="3">
 	<tr>
 		<td></td>
-		<td align="center">客户名称</td>
-		<td><s:textfield style="width:160px" name="customerInfo.customerName"></s:textfield></td>
-		<td align="center">公司全名</td>
-		<td><s:textfield style="width:160px" name="customerInfo.companyFullName"></s:textfield></td>
-		<td align="center">公司传真</td>
-		<td><s:textfield style="width:160px"  name="customerInfo.fax"></s:textfield></td>
-		<td align="center">客户来源</td>
+		<td align="center" nowrap>客户名称：</td>
+		<td><s:textfield style="width:150px" name="customerInfo.customerName"></s:textfield></td>
+		<td align="center" nowrap>公司全名：</td>
+		<td><s:textfield style="width:150px" name="customerInfo.companyFullName"></s:textfield></td>
+		<td align="center" nowrap>公司传真：</td>
+		<td><s:textfield style="width:150px"  name="customerInfo.fax"></s:textfield></td>
+		<td align="center" nowrap>客户来源：</td>
 		<td>
 			<s:select list="listSource" listKey="id" listValue="name" value="customerInfo.sourceId" 
 			id="sourceId" name="customerInfo.sourceId" cssStyle="width:150px" headerKey="" headerValue="--请选择客户来源--"></s:select>
@@ -197,22 +207,22 @@
 	</tr>
 	<tr>
 		<td></td>
-		<td align="center">客户分类</td>
+		<td align="center">客户分类：</td>
 		<td>
 			<s:select list="listCategory" listKey="id" listValue="name" value="customerInfo.categoryId" 
 			id="categoryId" name="customerInfo.categoryId" cssStyle="width:150px" headerKey="" headerValue="--请选择客户分类--"></s:select>
 			</td>
-		<td align="center">业务进展</td>
-		<td><select name="customerInfo.progressId"  style="width:100%">
+		<td align="center">业务进展：</td>
+		<td><select name="customerInfo.progressId"  style="width:150px">
 			<option value=""></option>
 			<option value="潜在客户">潜在客户</option>
 			<option value="新建客户">新建客户</option>
 			<option value="成熟客户">成熟客户</option></select></td>
-		<td align="center">成熟度</td>
+		<td align="center">成熟度：</td>
 		<td><s:select list="listMaturity" listKey="id" listValue="name" value="customerInfo.maturityId" 
 			id="categoryId" name="customerInfo.maturityId" cssStyle="width:150px" headerKey="" headerValue="--请选择成熟度--"></s:select></td>
-		<td align="center">开发程度</td>
-		<td style="width:150px"><select name="customerInfo.levelId" style="width:100%">
+		<td align="center">开发程度：</td>
+		<td style="width:150px"><select name="customerInfo.levelId" style="width:150px">
 			<option value=""></option>
 			<option value="10%">10%</option>
 			<option value="20%">20%</option>
@@ -227,41 +237,49 @@
 	</tr>
 	<tr>
 		<td></td>
-		<td align="center">业务员</td>
-		<td><select name="name" style="width:100%">
+		<td align="center">业务员：</td>
+		<td><select name="name" style="width:150px">
 			<option value=""></option>
 			<option value="小薛">小薛</option>
 			<option value="小蒋">小蒋</option>
 			<option value="小张小刘">小张小刘</option></select></td>
-		<td align="center">其他业务员</td>
-		<td><select name="name" style="width:100%">
+		<td align="center" nowrap>其他业务员：</td>
+		<td><select name="name" style="width:150px">
 			<option value=""></option>
 			<option value="小薛">小薛</option>
 			<option value="小蒋">小蒋</option>
 			<option value="小张小刘">小张小刘</option></select></td>
-		<td align="center">建档时间</td>
-		<td><s:textfield type="text" style="width:100%" name="customerInfo.registerTime" id="registerTime"></s:textfield></td>
+		<td align="center">建档时间：</td>
+		<td><s:textfield type="text" style="width:150px" name="customerInfo.registerTime" id="registerTime"></s:textfield></td>
 	</tr>
+	
 </table></td></tr>
 		
 <tr><td><table cellpadding="5" cellspacing="3">
 	<tr>
 		<td></td>
-		<td align="center">公司所在地</td>
+		<td align="center">所 在 地：</td>
 		<td><s:select list="listProvince" listKey="id" listValue="provinceName" value="customerInfo.province" 
-			id="province" name="customerInfo.province" cssStyle="width:100px" headerKey="" headerValue="请选择省份"></s:select>
+			id="province" name="customerInfo.province" cssStyle="width:130px" headerKey="" headerValue="请选择省份"></s:select>
 			</td>
 		<td><select value="customerInfo.city" 
-			id="city" name="customerInfo.city" style="width:100px" ></select></td>
+			id="city" name="customerInfo.city" style="width:126px" ></select></td>
 		<td><select  value="customerInfo.district"  
-			id="area" name="customerInfo.district" style="width:100px"  ></select></td>
-		<td style="width: 510px">具体地址：<s:textfield type="text" style="width:60%" name="customerInfo.address" id="registerTime"></s:textfield></td>
+			id="area" name="customerInfo.district" style="width:126px"  ></select></td>
+		<td>具体地址：</td>
+		<td><s:textfield type="text" style="width:395px" name="customerInfo.address" id="registerTime"></s:textfield></td>
 	</tr>
 </table></td></tr>
-
+<tr><td><table cellpadding="5" cellspacing="3">
+	<tr>
+		<td></td>
+		<td align="center">主营行业：</td>
+		<td><s:textfield type="text" style="width:410px" name="customerInfo.mainIndustry" id="mainIndustry"></s:textfield></td></tr>
+		</table>
+		</td></tr>
 </table></fieldset></td></tr>
 <tr><td style="height: 20px"></td></tr>
-<s:if test='id!=null && id.length > 0'>
+<s:if test='listPerson != null && listPerson.size() > 0'>
 <tr><td style="width: 20px"></td><td><fieldset><legend><span>联系人信息</span></legend><table>
 <s:iterator value="listPerson" status="obj">
 <tr><td><table cellpadding="5" cellspacing="3">
@@ -297,8 +315,8 @@
 	<tr>
 		<td align="center">
 		<input type="button" name="addBtn" id="addBtn" value="保存" style="width: 50px"/>
-		<s:if test='id!=null&& id.length > 0'>
-		<input type="button" name="addPersonBtn" value="添加联系人" style="width: 100px"/>
+		<s:if test='id != null && id.length() > 0'>
+		<input type="button" name="addPersonBtn" id="addPersonBtn" value="添加联系人" style="width: 100px"/>
 		</s:if>
 		<input type="button" onclick="window.history.go(-1)" value="关闭" style="width: 50px"/></td>
 	</tr>
