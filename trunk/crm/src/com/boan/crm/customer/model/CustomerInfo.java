@@ -28,7 +28,7 @@ public class CustomerInfo implements Serializable
 	 */
 	private static final long serialVersionUID = -6407278513107210750L;
 
-	public CustomerInfo(){}
+	public CustomerInfo(){ this.id = ""; }
 	@Id
 	@GenericGenerator(name = "system-uuid", strategy = "uuid")
 	@GeneratedValue(generator = "system-uuid")
