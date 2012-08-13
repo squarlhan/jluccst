@@ -12,23 +12,43 @@ import com.boan.crm.utils.page.Pagination;
  */
 public interface IMemberInfoService {
 	/**
+	 * 根据单位ID判断是否为会员
+	 * @param companyId 单位ID
+	 * @return true：是会员，false：不是会员
+	 */
+	public boolean isMember(String companyId);
+	
+	/**
+	 * 根据单位ID获得会员实现信息
+	 * @param companyId 单位ID
+	 * @return 会员信息对象
+	 */
+	public MemberInfo getByCompanyId(String companyId);
+	
+	/**
+	 * 成为会员
+	 * @param obj 会员对象
+	 */
+	public void toMemberInfo(MemberInfo obj);
+	
+	/**
 	 * 获得根据会员ID，获得会员对象
 	 * @param id 会员ID
 	 * @return 会员对象
 	 */
-	public MemberInfo get(String id);
+	public MemberInfo getById(String id);
 
 	/**
-	 * 删除会员
+	 * 取消会员状态
 	 * @param ids 会员ID
 	 */
-	public void deleteMemberInfo(String... ids);
+	public void cancelInfo(String... ids);
 
 	/**
 	 * 保存会员信息
 	 * @param obj 会员对象
 	 */
-	public void saveOrUpdate(MemberInfo obj);
+	public void updateInfo(MemberInfo obj);
 
 	/**
 	 * 分页显示会员

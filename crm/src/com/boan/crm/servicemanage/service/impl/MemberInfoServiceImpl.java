@@ -26,16 +26,6 @@ public class MemberInfoServiceImpl extends BaseDao<MemberInfo,String> implements
 	private IMemberInfoDao memberInfoDao;
 
 	@Override
-	public void deleteMemberInfo(String... ids) {
-		memberInfoDao.delete(ids);
-	}
-
-	@Override
-	public void saveOrUpdate(MemberInfo obj) {
-		memberInfoDao.saveOrUpdate(obj);
-	}
-
-	@Override
 	public Pagination<MemberInfo> findForPage(Map<String, ?> values,
 			Pagination<MemberInfo> pagination) {
 		String hql = "from MemberInfo where 1=1";
@@ -56,6 +46,36 @@ public class MemberInfoServiceImpl extends BaseDao<MemberInfo,String> implements
 		pagination.setTotalRows(totalRows);
 		pagination.setData(data);
 		return pagination;
+	}
+
+	@Override
+	public boolean isMember(String companyId) {
+		return memberInfoDao.isMember(companyId);
+	}
+
+	@Override
+	public MemberInfo getByCompanyId(String companyId) {
+		return memberInfoDao.getByCompanyId(companyId);
+	}
+
+	@Override
+	public void toMemberInfo(MemberInfo obj) {
+		memberInfoDao.save(obj);
+	}
+
+	@Override
+	public MemberInfo getById(String id) {
+		return memberInfoDao.get(id);
+	}
+
+	@Override
+	public void cancelInfo(String... ids) {
+		memberInfoDao.delete(ids);
+	}
+
+	@Override
+	public void updateInfo(MemberInfo obj) {
+		memberInfoDao.update(obj);
 	}
 
 }
