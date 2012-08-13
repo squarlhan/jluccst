@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">	
+<struts>
+	<!-- 服务记录 -->
+	<package name="servicelog" extends="struts-default" namespace="/service">
+		<action name="serviceloglist" class="serviceLogAction" method="serviceLogList">
+			<result name="success">/service/service_log_list.jsp</result>
+			<result name="input">/service/service_log_list.jsp</result>
+		</action>
+		<action name="servicelog" class="serviceLogAction" method="serviceLogInfo">
+			<result name="success">/service/service_log_info.jsp</result>
+			<result name="input">/service/service_log_info.jsp</result>
+		</action>
+		<action name="saveservicelog" class="serviceLogAction" method="saveServiceLog">
+			<result name="success">/service/service_log_info.jsp</result>
+			<result name="input">/service/service_log_info.jsp</result>
+		</action>
+    	<action name="deleteservicelog" class="serviceLogAction" method="deleteServiceLog">
+    		<result name="success" type="chain">
+             	<param name="actionName">serviceloglist</param>
+            </result>
+    	</action>
+	</package>
+	<!-- 会员管理 -->
+	<package name="memberinfo" extends="struts-default" namespace="/service">
+		<action name="memberinfolist" class="memberInfoAction" method="memberInfoList">
+			<result name="success">/service/member_info_list.jsp</result>
+			<result name="input">/service/member_info_list.jsp</result>
+		</action>
+		<action name="memberinfo" class="memberInfoAction" method="memberInfoInfo">
+			<result name="success">/service/member_info_info.jsp</result>
+			<result name="input">/service/member_info_info.jsp</result>
+		</action>
+		<action name="savememberinfo" class="memberInfoAction" method="saveMemberInfo">
+			<result name="success">/service/member_info_info.jsp</result>
+			<result name="input">/service/member_info_info.jsp</result>
+		</action>
+    	<action name="deletememberinfo" class="memberInfoAction" method="deleteMemberInfo">
+    		<result name="success" type="chain">
+             	<param name="actionName">memberinfolist</param>
+            </result>
+    	</action>
+	</package>
+</struts>
