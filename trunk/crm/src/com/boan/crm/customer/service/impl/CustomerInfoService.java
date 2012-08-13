@@ -63,7 +63,7 @@ public class CustomerInfoService implements ICustomerInfoService{
 	}
 
 	@Override
-	public void save(CustomerInfo table1) {
-		customerInfoDao.saveOrUpdate(table1);
+	public void save(CustomerInfo customerInfo) {
+		customerInfoDao.save(customerInfo);
 	}
 }

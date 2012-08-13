@@ -47,7 +47,9 @@ public class ContractPersonService implements IContractPersonService {
 	}
 	@Override
 	public List<ContractPersonInfo> findAllContractPersonInfoByCustomerId(String customerId) {
-		return contractPersonDao.find("from ContractPersonInfo where customerId = :customerId order by sortIndex asc", customerId);
+		Map<String,String> idMap = new HashMap<String,String>();
+		idMap.put("customerId", customerId);
+		return contractPersonDao.find("from ContractPersonInfo where customerId = :customerId order by sort_index asc", idMap);
 	}
 
 	@Override
