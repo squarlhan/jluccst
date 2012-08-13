@@ -31,9 +31,7 @@
 	$.fn.save = function() {
 		//如果有id就说明是修改action
 		$("#saveBtn").click(function() {
-			form1.companyId.value = $("#selCompany").val();
-			form1.companyName.value = $("#selCompany").find("option:selected").text();
-			form1.action = "saveservicelog.action";
+			form1.action = "savememberinfo.action";
 			form1.submit();
 		});
 	};
@@ -53,7 +51,7 @@
 	 * 初始化页面
 	 */
 	$.fn.initpage = function() {
-		$("#txt_contact").focus();
+		$("#txt_companyName").focus();
 		//回显上传时的错误信息
 		var uploadErr = $("#lb_error").html();
 		if (uploadErr != null && $.trim(uploadErr) != "") {
@@ -70,7 +68,7 @@
 <body>
 	<form id="form1" name="form1" method="post">
 		<label id="lb_message" style="display:none"></label>
-		<s:hidden id="logId" name="serviceLog.id"></s:hidden>
+		<s:hidden id="logId" name="memberInfo.id"></s:hidden>
 		<s:hidden id="hdCompanyId" name="companyId"></s:hidden>
 		<s:hidden id="hdCompanyName" name="companyName"></s:hidden>
 		<center>
@@ -80,7 +78,7 @@
 							<tr>
 								<td style="padding:10px;"><fieldset>
 										<legend>
-											<span>服务记录编辑</span>
+											<span>会员信息</span>
 										</legend>
 										<table>
 
@@ -88,50 +86,33 @@
 												<td><table cellpadding="3" cellspacing="3">
 														<tr>
 															<td align="center" nowrap="nowrap">客户名称</td>
-															<td>
-															<select id="selCompany" name="name" style="width:150px">
-																	<option value="cbit">长白信息科技</option>
-																	<option value="easy">易得信息科技</option>
-															</select></td>
-															<td align="center" nowrap="nowrap">联系人</td>
-															<td align="left"><s:textfield id="txt_contact"
-																	name="serviceLog.contact" cssStyle="width:150px;" /></td>
-															<td align="center" nowrap="nowrap">联系人手机</td>
-															<td align="left"><s:textfield id="txt_mobilePhone"
-																	name="serviceLog.mobilePhone" cssStyle="width:150px;" />
+															<td><s:textfield id="txt_companyName"
+																	name="memberInfo.companyName" cssStyle="width:150px;" /></td>
+															<td align="center" nowrap="nowrap">会员类别</td>
+															<td align="left"><s:textfield id="txt_memberType"
+																	name="memberInfo.memberType" cssStyle="width:150px;" /></td>
+															<td align="center" nowrap="nowrap">业务员 </td>
+															<td align="left"><s:textfield id="txt_salespeople"
+																	name="memberInfo.salespeople" cssStyle="width:150px;" />
 															</td>
 														</tr>
 														<tr>
-															<td align="center" nowrap="nowrap">服务日期</td>
-															<td align="left"><s:textfield id="txt_serviceTime"
-																	name="serviceLog.serviceTime" cssStyle="width:150px;" readonly="true" onClick="WdatePicker()"/>
+															<td align="center" nowrap="nowrap">成为时间</td>
+															<td align="left"><s:textfield id="txt_createTime"
+																	name="memberInfo.createTime" cssStyle="width:150px;" readonly="true" onClick="WdatePicker()"/>
 															</td>
-															<td align="center" nowrap="nowrap">到达时间</td>
-															<td align="left"><s:textfield id="txt_arriveTime"
-																	name="serviceLog.arriveTime" cssStyle="width:150px;" readonly="true" onClick="WdatePicker()"/>
+															<td align="center" nowrap="nowrap">消费总额</td>
+															<td align="left"><s:textfield id="txt_consumptionAmount"
+																	name="memberInfo.consumptionAmount" cssStyle="width:150px;"/>
 															</td>
-															<td align="center" nowrap="nowrap">完成时间</td>
-															<td align="left"><s:textfield id="txt_finishTime"
-																	name="serviceLog.finishTime" cssStyle="width:150px;" readonly="true" onClick="WdatePicker()"/></td>
+															<td align="center" nowrap="nowrap">总积分</td>
+															<td align="left"><s:textfield id="txt_totalPoint"
+																	name="memberInfo.totalPoint" cssStyle="width:150px;"/></td>
 														</tr>
 														<tr>
-															<td align="center" nowrap="nowrap">品牌型号</td>
-															<td align="left"><s:textfield id="txt_brandModel"
-																	name="serviceLog.brandModel" cssStyle="width:150px;" /></td>
-															<td align="center" nowrap="nowrap">维修员</td>
-															<td align="left" colspan="3"><s:textfield id="txt_repairman"
-																	name="serviceLog.repairman" cssStyle="width:150px;" /></td>
-														</tr>
-														<tr>
-															<td align="center" nowrap="nowrap">故障情况</td>
-															<td colspan="5" align="left"><s:textarea id="txt_malfunction"
-																	name="serviceLog.malfunction" cssStyle="width:648px; height:60px"/>
-															</td>
-														</tr>
-														<tr>
-															<td align="center" nowrap="nowrap">解决措施</td>
-															<td colspan="5" align="left"><s:textarea id="txt_solutions"
-																	name="serviceLog.solutions" cssStyle="width:648px; height:60px"/>
+															<td align="center" nowrap="nowrap">备注</td>
+															<td colspan="5" align="left"><s:textarea id="txt_remark"
+																	name="memberInfo.remark" cssStyle="width:648px; height:120px"/>
 															</td>
 														</tr>
 													</table></td>
