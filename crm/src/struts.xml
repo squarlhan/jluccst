@@ -30,6 +30,8 @@
 	<include file="struts_ui.xml"></include>
 	<!-- 数据字典 -->
 	<include file="com/boan/crm/datadictionary/action/struts_datadictionary.xml"></include>
+	<!-- 服务管理 -->
+	<include file="com/boan/crm/servicemanage/action/struts_service.xml"></include>
 	<!-- 组织机构 -->
 	<include file="com/boan/crm/groupmanage/action/struts_group.xml"></include>
 	<!-- 后台管理 -->
