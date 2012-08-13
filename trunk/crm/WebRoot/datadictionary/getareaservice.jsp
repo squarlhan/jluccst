@@ -29,6 +29,5 @@
 	{
 		sb.append( "{root:[]}" );
 	}
-   	System.out.println(sb.toString());
 	response.getWriter().write( sb.toString() );
 %>
