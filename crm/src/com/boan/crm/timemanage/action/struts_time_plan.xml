@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<!--  时间管理Action -->
+	<package name="time_plan" extends="struts-default" namespace="/">
+		<action name="openTimePlanListAction" class="timePlanAction" method="openTimePlanList">
+			<result name="success">/timemanage/timeplanlist.jsp</result>
+			<result name="input">/timemanage/timeplanlist.jsp</result>
+		</action>
+		<action name="openAddTimePlanAction" class="timePlanAction" method="openAddTimePlan">
+			<result name="success">/timemanage/timeplaninfo.jsp</result>
+			<result name="input">/timemanage/timeplaninfo.jsp</result>
+		</action>
+		<action name="openModifyTimePlanAction" class="timePlanAction" method="openModifyTimePlan">
+			<result name="success">/timemanage/timeplaninfo.jsp</result>
+			<result name="input">/timemanage/timeplaninfo.jsp</result>
+		</action>
+		<action name="addTimePlanAction" class="timePlanAction" method="addTimePlan">
+			<result name="success">/timemanage/timeplaninfo.jsp</result>
+			<result name="input">/timemanage/timeplaninfo.jsp</result>
+		</action>
+		<action name="modifyTimePlanAction" class="timePlanAction" method="modifyTimePlan">
+			<result name="success">/timemanage/timeplaninfo.jsp</result>
+			<result name="input">/timemanage/timeplaninfo.jsp</result>
+		</action>
+		<action name="deleteTimePlanAction" class="timePlanAction" method="deleteTimePlan"/>
+	</package>
+</struts>
