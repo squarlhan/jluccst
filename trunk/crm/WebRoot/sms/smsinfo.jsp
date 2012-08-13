@@ -45,7 +45,7 @@
 	<script type="text/javascript">
 	
 	  	$(function(){
-	  		$('#txt_sendDay').val((new Date()).getYear()+"-"+(((new Date()).getMonth()+1)<10 ? "0"+((new Date()).getMonth()+1) : (new Date()).getMonth()+1)+"-"+((new Date()).getDate()<10 ? "0"+(new Date()).getDate() : (new Date()).getDate()));
+	  		$('#txt_sendDay').val((new Date()).getFullYear()+"-"+(((new Date()).getMonth()+1)<10 ? "0"+((new Date()).getMonth()+1) : (new Date()).getMonth()+1)+"-"+((new Date()).getDate()<10 ? "0"+(new Date()).getDate() : (new Date()).getDate()));
 	  		//日期控件
 			$('#txt_sendDay').datetimepicker({showTimepicker: false});
 	  		//时间控件
