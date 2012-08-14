@@ -119,19 +119,19 @@
        <td colspan="2">
       <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#d5e4fd">
 	      <tr>
-				<td height="26" width = "80px" align="left" bgcolor="#FFFFFF">
+				<td height="26" width = "80px" align="left" bgcolor="#FFFFFF" nowrap="nowrap">
 					<strong>员工姓名：</strong>
 				</td>
 				<td height="26" width = "80px"  align="left" bgcolor="#FFFFFF">
 					<s:textfield id="txt_query_employee_name" name="employeeName" cssStyle="width:120px"></s:textfield>
 				</td>
-				<td height="26" width = "80px"  align="left" bgcolor="#FFFFFF">
+				<td height="26" width = "80px"  align="left" bgcolor="#FFFFFF" nowrap="nowrap">
 					<strong>计划类型：</strong>
 				</td>
 				<td height="26" width = "80px"  align="left" bgcolor="#FFFFFF">
 					<s:select id="sel_query_planType"  name="planType"  list="#{-1:'--全部--',0:'日计划',1:'周计划',2:'月计划' }"  cssStyle="width: 120px;" ></s:select>
 				</td>
-				<td height="26" width = "80px"  align="left" bgcolor="#FFFFFF">
+				<td height="26" width = "80px"  align="left" bgcolor="#FFFFFF" nowrap="nowrap">
 					<strong>提交时间：</strong>
 				</td>
 				<td height="26" width = "270px"  align="left" bgcolor="#FFFFFF">

@@ -41,21 +41,23 @@
 		  	 */
 			var _customer_submit = {
 				rules: {
-					"timePlan.submitTime":{required:true,strangecode:true},
-					"timePlan.planContent":{required:true,strangecode:true},
-					"timePlan.memo":{strangecode:true}
+					"marketInquiry.inquiryPersonName":{required:true,strangecode:true},
+					"marketInquiry.inquiryTime" :{required:true,strangecode:true},
+					"marketInquiry.inquiryAddress"  :{required:true,strangecode:true},
+					"marketInquiry.goodsName"   :{required:true,strangecode:true},
+					"marketInquiry.goodsPrice"  :{required:true,strangecode:true}
 				}
 			};
 			/**
 		  	 * 准备工作
 		  	 */
 			$(document).ready(function(){
-				if($("#hid_message").val()!="" && $("#hid_timePlanId").val()!=null){
+				if($("#hid_message").val()!="" && $("#hid_marketInquiryId").val()!=null){
 					alert($("#hid_message").val());
 				}
-				$('#txt_submitTime').val((new Date()).getFullYear()+"-"+(((new Date()).getMonth()+1)<10 ? "0"+((new Date()).getMonth()+1) : (new Date()).getMonth()+1)+"-"+((new Date()).getDate()<10 ? "0"+(new Date()).getDate() : (new Date()).getDate()));
+				$('#txt_inquiryTime').val((new Date()).getFullYear()+"-"+(((new Date()).getMonth()+1)<10 ? "0"+((new Date()).getMonth()+1) : (new Date()).getMonth()+1)+"-"+((new Date()).getDate()<10 ? "0"+(new Date()).getDate() : (new Date()).getDate()));
 		  		//日期控件
-				$('#txt_submitTime').datetimepicker({showTimepicker: false});
+				$('#txt_inquiryTime').datetimepicker({showTimepicker: false});
 				$.validator.setDefaults({
 					debug: false,onkeyup: false,onfocusout:false,focusCleanup: true,
 				    errorPlacement:function(error, element) {},
@@ -78,10 +80,10 @@
 	               	if(!validator.form()){
 						return false;
 					}
-					if( $.trim( $("#hid_timePlanId").val() ) != ""){
-						form1.action = "modifyTimePlanAction.action";
+					if( $.trim( $("#hid_marketInquiryId").val() ) != ""){
+						form1.action = "modifyMarketInquiryAction.action";
 					}else{
-		               	form1.action = "addTimePlanAction.action";					
+		               	form1.action = "addMarketInquiryAction.action";					
 					}
 	               	form1.submit();
           		});
@@ -101,10 +103,10 @@
 <body>
 	<s:form id="form1" name="form1" method="post" theme="simple">
 		<s:hidden id="hid_message" name="message"></s:hidden>
-		<s:hidden id="hid_timePlanId" name="timePlan.id"></s:hidden>
-		<s:hidden id="hid_employeeName" name="timePlan.employeeName"></s:hidden>
-		<s:hidden id="hid_deptName" name="timePlan.deptName"></s:hidden>
-		<s:hidden id="hid_timePlanCreateTime" name="timePlan.createTime"></s:hidden>
+		<s:hidden id="hid_marketInquiryId" name="marketInquiry.id"></s:hidden>
+		<s:hidden id="hid_marketInquiryCreateTime" name="marketInquiry.createTime"></s:hidden>
+		<s:hidden id="hid_personId" name="marketInquiry.personId"></s:hidden>
+		<s:hidden id="hid_organId" name="marketInquiry.organId"></s:hidden>
 		<table width="100%" border="0" cellspacing="5" cellpadding="0">
 			<tr>
 				<td>
@@ -115,48 +117,53 @@
 								<table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#d5e4fd">
 									<tr>
 										<td height="26" align="right" bgcolor="#FFFFFF">
-											<strong>员工姓名：</strong>
+											<strong>调查人：</strong>
 										</td>
 										<td height="26" align="left" bgcolor="#FFFFFF">
-											<s:select id="sel_employee"   name="timePlan.employeeId" list="userList"  listKey="id"  listValue="userCName"  cssStyle="width: 160px;" ></s:select>
+											<s:textfield id="txt_inquiryPersonName" name="marketInquiry.inquiryPersonName" cssStyle="width: 160px;" maxlength="25"></s:textfield><font color="red" title="必填项">*</font>
 										</td>
 										<td height="26" align="right" bgcolor="#FFFFFF">
-											<strong>所属部门：</strong>
+											<strong>调查日期：</strong>
 										</td>
 										<td height="26" align="left" bgcolor="#FFFFFF">
-											<s:select id="sel_dept"  name="timePlan.deptId" list="deptList" listKey="id"  listValue="deptName" cssStyle="width: 160px;" ></s:select>
+											<s:textfield id="txt_inquiryTime" name="marketInquiry.inquiryTime" cssStyle="width: 160px;" maxlength="25"></s:textfield><font color="red" title="必填项">*</font>
 										</td>
 									</tr>
 									<tr>
 										<td height="26" align="right" bgcolor="#FFFFFF">
-											<strong>计划类型：</strong>
-										</td>
-										<td height="26" align="left" bgcolor="#FFFFFF">
-											<s:select id="sel_planType"  name="timePlan.planType"  list="#{0:'日计划',1:'周计划',2:'月计划' }"  cssStyle="width: 160px;" ></s:select>
-										</td>
-										<td height="26" align="right" bgcolor="#FFFFFF">
-											<strong>提交日期：</strong>
-										</td>
-										<td height="26" align="left" bgcolor="#FFFFFF">
-											<s:textfield id="txt_submitTime" name="timePlan.submitTime" cssStyle="width: 160px;" maxlength="25"></s:textfield>
-											<font color="red">*</font>
-										</td>
-									</tr>
-									<tr>
-										<td height="26" align="right" bgcolor="#FFFFFF">
-											<strong>计划内容：</strong>
+											<strong>调查地点：</strong>
 										</td>
 										<td height="26" align="left" bgcolor="#FFFFFF" colspan="3">
-											<s:textarea  id="txt_planContent" name="timePlan.planContent" cssStyle="width: 438px;height:100px;resize:none;" maxlength="500"></s:textarea>
-											<font color="red">*</font>
+											<s:textfield id="txt_inquiryAddress" name="marketInquiry.inquiryAddress" cssStyle="width: 440px;" maxlength="25"></s:textfield><font color="red" title="必填项">*</font>
+										</td>
+									</tr>
+									
+									<tr>
+										<td height="26" align="right" bgcolor="#FFFFFF">
+											<strong>商品名称：</strong>
+										</td>
+										<td height="26" align="left" bgcolor="#FFFFFF">
+											<s:textfield id="txt_goodsName" name="marketInquiry.goodsName" cssStyle="width: 160px;" maxlength="25"></s:textfield><font color="red" title="必填项">*</font>
+										</td>
+										<td height="26" align="right" bgcolor="#FFFFFF">
+											<strong>商品规格：</strong>
+										</td>
+										<td height="26" align="left" bgcolor="#FFFFFF">
+											<s:textfield id="txt_goodsStandard" name="marketInquiry.goodsStandard" cssStyle="width: 160px;" maxlength="25"></s:textfield>
 										</td>
 									</tr>
 									<tr>
 										<td height="26" align="right" bgcolor="#FFFFFF">
-											<strong>备注：</strong>
+											<strong>克 重：</strong>
 										</td>
-										<td height="26" align="left" bgcolor="#FFFFFF" colspan="3">
-											<s:textarea  id="txt_memo" name="timePlan.memo" cssStyle="width: 438px;height:100px;resize:none;" maxlength="500"></s:textarea>
+										<td height="26" align="left" bgcolor="#FFFFFF">
+											<s:textfield id="txt_goodsWeight" name="marketInquiry.goodsWeight" cssStyle="width: 160px;" maxlength="25"></s:textfield>
+										</td>
+										<td height="26" align="right" bgcolor="#FFFFFF">
+											<strong>价 格：</strong>
+										</td>
+										<td height="26" align="left" bgcolor="#FFFFFF">
+											<s:textfield id="txt_goodsPrice" name="marketInquiry.goodsPrice" cssStyle="width: 160px;" maxlength="25"></s:textfield><font color="red" title="必填项">*</font>
 										</td>
 									</tr>
 									

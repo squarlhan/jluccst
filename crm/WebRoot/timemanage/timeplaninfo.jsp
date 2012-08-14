@@ -105,6 +105,8 @@
 		<s:hidden id="hid_employeeName" name="timePlan.employeeName"></s:hidden>
 		<s:hidden id="hid_deptName" name="timePlan.deptName"></s:hidden>
 		<s:hidden id="hid_timePlanCreateTime" name="timePlan.createTime"></s:hidden>
+		<s:hidden id="hid_personId" name="timePlan.personId"></s:hidden>
+		<s:hidden id="hid_organId" name="timePlan.organId"></s:hidden>
 		<table width="100%" border="0" cellspacing="5" cellpadding="0">
 			<tr>
 				<td>
