@@ -21,14 +21,13 @@
 		  	 */
 			var _device_submit = {
 				rules: {
-					"contractPersonInfo.cityName":{required:true,maxlength:10}
-				},messages:{
-					"contractPersonInfo.cityName":
-					{
-					    required:"姓名为必填项！",
-						maxlength:"姓名最多输入10个汉字！"
-					}
+					"contractPersonInfo.personName":{required:true,maxlength:10},
+					"contractPersonInfo.email":{email:true},
+					"contractPersonInfo.deptOrDuty":{required:true}//,
+					//"contractPersonInfo.birthday":{date:true}
+					
 				}
+				
 			};
 			/**
 		  	 * 准备工作
@@ -61,6 +60,7 @@
 						return false;
 					}
 					form1.personName.value = $("#dictName_t").val();
+					form1.customerId_t.value = form1.customerId.value;
 					form1.action = "customer/saveContractPerson.action";
 	               	form1.submit();
 	           	});
@@ -100,7 +100,8 @@
 	<body>
 		<s:form id="form1" name="form1" method="post" theme="simple">
 			<s:label id="lb_message" name="message" cssStyle="display:none"></s:label>
-			<s:hidden id="customerId" name="contractPersonInfo.customerId"></s:hidden>
+			<s:hidden id="customerId" name="customerId"></s:hidden>
+			<s:hidden id="customerId_t" name="contractPersonInfo.customerId"></s:hidden>
 			<s:hidden id="personId" name="contractPersonInfo.id"></s:hidden>
 			<input type="hidden" name="personName" value="" />
 			<table width="100%" border="0" cellspacing="5" cellpadding="0">
@@ -161,7 +162,7 @@
 										</tr>
 										<tr>
 											<td height="26" align="right" bgcolor="#FFFFFF">
-												<strong>生 日</strong>
+												<strong>生 日<br>(1970-01-01)</strong>
 											</td>
 											<td height="26" align="left" bgcolor="#FFFFFF">
 												<s:textfield id="birthday" name="contractPersonInfo.birthday"

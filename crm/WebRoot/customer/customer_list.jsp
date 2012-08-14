@@ -53,6 +53,16 @@
 				window.parent.location.href = "customerTabInfo.action";
 		
 			});
+			$("#searchBtn").click(function(){
+				/*parent.parent.tipsWindown("添加客户信息","iframe:openAddCompanyAction.action","460","200","true","","true","no");
+				parent.parent.$("#windown-close").bind('click',function(){
+					window.location.href="./customerList.action";
+				});*/
+				//window.parent.location.href = "customerTabInfo.action";
+				form1.action = "customerList.action";
+				form1.submit();
+		
+			});
 			$.fn.checkall("cbk_all");
 	  		$.fn.uncheckall("ids","cbk_all");
 
@@ -119,16 +129,13 @@
 		<td align="center">联 系 人：</td>
 		<td><s:textfield name="contractorName" id="contractorName" style="width: 100px"></s:textfield></td>
 		<td align="center">客户分类：</td>
-		<td style="width:120px"><s:select list="listCategory" listKey="id" listValue="name" value="customerInfo.categoryId" 
+		<td style="width:120px"><s:select list="listCategory" listKey="id" listValue="name" value="customerCategory" 
 			id="categoryId" name="customerCategory" cssStyle="width:150px" headerKey="" headerValue="--请选择客户分类--"></s:select></td>
 		<td>所属业务员：</td/>
-		<td style="width:120px"><select name="name" style="width: 120px">
-			<option value=""></option>
-			<option value="小薛">小薛</option>
-			<option value="小蒋">小蒋</option>
-			<option value="小张小刘">小张小刘</option></select></td>
+		<td style="width:120px"><s:select list="userList" listKey="id" listValue="userCName" value="salesmanId" 
+			id="salesmanId" name="salesmanId" cssStyle="width:150px" headerKey="" headerValue="--请选择业务员--"></s:select></td>
 		<td></td>
-		<td style="width: 80px"><input type="button" style="width: 80px;" class="btn_4" id="addBtn" value="快速查询" /></td>
+		<td style="width: 80px"><input type="button" style="width: 80px;" class="btn_4" id="searchBtn" value="快速查询" /></td>
 	</tr>
 </table></td></tr>
     </table>
@@ -145,7 +152,7 @@
 			<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">业务进展</td>
 			<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">成熟度</td>
 			<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">开发程度</td>
-			<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">合作历史</td>
+			<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">客户来源</td>
               <!-- 
               <td align="center" background="../images/headerbg.jpg"><strong>公司地址</strong></td>
               <td align="center" background="../images/headerbg.jpg"><strong>公司电话</strong></td>
@@ -158,14 +165,21 @@
 				<s:checkbox id="%{#obj.id}" name="ids" fieldValue="%{id}" value="false" theme="simple"/>
 			</td>
             <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="customerName"/></td>
-            <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="customerName"/></td>
-            <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="customerName"/></td>
-            <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="customerName"/></td>
-            <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="customerName"/></td>
-            <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="customerName"/></td>
-            <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="customerName"/></td>
-            <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="customerName"/></td>
-            <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="customerName"/></td>
+            <td height="26" align="center" bgcolor="#FFFFFF">
+            <s:iterator value="contractPersonList" status="obj1">
+            <s:property value="personName"/>&nbsp;
+            </s:iterator></td>
+            <td height="26" align="center" bgcolor="#FFFFFF">
+			<s:iterator value="contractPersonList" status="obj1">
+            <s:property value="phone"/>&nbsp;<s:property value="tel"/>
+            </s:iterator>
+			</td>
+            <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="salesman"/></td>
+            <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="category"/></td>
+            <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="progressId"/></td>
+            <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="maturity"/></td>
+            <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="levelId"/></td>
+            <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="source"/></td>
               <!-- 
               <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="address"/></td>
               <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="phone"/></td>
