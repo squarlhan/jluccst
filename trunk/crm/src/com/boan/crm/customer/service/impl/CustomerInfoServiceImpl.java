@@ -12,7 +12,11 @@ import org.springframework.stereotype.Service;
 
 import com.boan.crm.customer.dao.ICustomerInfoDAO;
 import com.boan.crm.customer.model.CustomerInfo;
+import com.boan.crm.customer.service.IContractPersonService;
 import com.boan.crm.customer.service.ICustomerInfoService;
+import com.boan.crm.datadictionary.service.IAreaService;
+import com.boan.crm.datadictionary.service.IDataDictionaryService;
+import com.boan.crm.groupmanage.service.IUserService;
 import com.boan.crm.utils.page.Pagination;
 
 /**
@@ -24,6 +28,24 @@ public class CustomerInfoServiceImpl implements ICustomerInfoService{
 	@Autowired
 	@Qualifier("customerInfoDao")
 	private ICustomerInfoDAO customerInfoDao;
+	/**
+	 * 权限接口
+	 */
+	@Autowired
+	@Qualifier("dataDictionaryService")
+	private IDataDictionaryService dataDictionaryService = null;
+	
+	/**
+	 * 权限接口
+	 */
+	@Autowired
+	@Qualifier("contractPersonService")
+	private IContractPersonService contractPersonService = null;
+	
+	@Autowired
+	@Qualifier("userService")
+	private IUserService userService;
+	
 	@Override
 	public void deleteCustomerInfo(String... ids) {
 		customerInfoDao.delete(ids);
@@ -49,6 +71,10 @@ public class CustomerInfoServiceImpl implements ICustomerInfoService{
 		}
 		if(values.get("customerName") != null)
 		{
+			hql.append(" and customerName like :customerName ");
+		}
+		if(values.get("contractorName") != null)
+		{
 			hql.append(" and id in ( select customerId from ContractPersonInfo where personName like :contractorName) ");
 		}
 		if(values.get("customerCategory") != null)
@@ -70,6 +96,10 @@ public class CustomerInfoServiceImpl implements ICustomerInfoService{
 		}
 		if(values.get("customerName") != null)
 		{
+			hql.append(" and customerName like :customerName ");
+		}
+		if(values.get("contractorName") != null)
+		{
 			hql.append(" and id in ( select customerId from ContractPersonInfo where personName like :contractorName) ");
 		}
 		if(values.get("customerCategory") != null)
@@ -80,6 +110,27 @@ public class CustomerInfoServiceImpl implements ICustomerInfoService{
 		int totalRows = customerInfoDao.findCountForPage(hql.toString(), values);
 		pagination.setTotalRows(totalRows);
 		pagination.setData(data);
+		
+		List<CustomerInfo> list = pagination.getData();
+		if(list != null && list.size() > 0)
+		{
+			for(int i=0;i< list.size();i++)
+			{
+				CustomerInfo customerInfo = list.get(i);
+				customerInfo.setCategory(dataDictionaryService.get(customerInfo.getCategoryId()).getName());
+				customerInfo.setMaturity(dataDictionaryService.get(customerInfo.getMaturityId()).getName());
+				customerInfo.setSource(dataDictionaryService.get(customerInfo.getSourceId()).getName());
+				try
+				{
+					customerInfo.setSalesman(userService.getUserById(customerInfo.getSalesmanId()).getUserCName());
+				}catch(Exception e)
+				{
+					e.printStackTrace();
+				}
+				customerInfo.setContractPersonList(contractPersonService.findAllContractPersonInfoByCustomerId(customerInfo.getId()));
+				
+			}
+		}
 		return pagination;
 	}
 
