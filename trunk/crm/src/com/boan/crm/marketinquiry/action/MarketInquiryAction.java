@@ -64,14 +64,18 @@ public class MarketInquiryAction extends BaseActionSupport{
 	 */
 	private String[] ids;
 	/**
-	 * 查询条件 员工名
+	 * 查询条件 商品名称
 	 */
-	private String employeeName;
+	private String goodsName;
 	
 	/**
-	 * 查询条件 计划类型
+	 * 查询条件 调查人
 	 */
-	private String planType;
+	private String inquiryPersonName;
+	/**
+	 * 查询条件 规格
+	 */
+	private String goodsStandard;
 	
 	/**
 	 * 查询条件 提交开始时间
@@ -94,9 +98,13 @@ public class MarketInquiryAction extends BaseActionSupport{
 			endTime = Calendar.getInstance();
 		}
 		Map<String,Object> params = new HashMap<String, Object>();
-		params.put("employeeName", employeeName);
-		params.put("planType", planType);
-		params.put("beginTime", beginTime);
+		params.put("personId", this.sessionUserId);
+		params.put("organId", this.sessionCompanyId);
+		params.put("goodsName", goodsName);
+		params.put("inquiryPersonName", inquiryPersonName);
+		params.put("inquiryPersonName", inquiryPersonName);
+		params.put("goodsStandard", goodsStandard);
+		params.put("beginTime", beginTime); 
 		params.put("endTime", endTime); 
 		pagination = marketInquiryService.findMarketInquiryForPage(params,pagination);
 		
@@ -117,11 +125,41 @@ public class MarketInquiryAction extends BaseActionSupport{
 	 * @throws Exception 
 	 */
 	public String addMarketInquiry() throws Exception {
-		//修改
+		marketInquiry.setCreateTime(Calendar.getInstance());
+		//保存
+		marketInquiry.setId(null);
+		marketInquiry.setPersonId(sessionUserId);
+		marketInquiry.setOrganId(sessionCompanyId);
 		marketInquiryService.saveOrUpdateMarketInquiry(marketInquiry);
 		message="保存成功！";
 		return SUCCESS;
 	}
+	
+	/**
+	 * 打开修改页
+	 * @return
+	 * @throws Exception 
+	 */
+	public String openModifyMarketInquiry() throws Exception {
+		if(marketInquiry!=null){
+			marketInquiry = marketInquiryService.getMarketInquiryById(marketInquiry.getId());
+		}
+		return SUCCESS;
+	}
+	/**
+	 * 修改计划
+	 * @return
+	 * @throws Exception 
+	 */
+	public String modifyMarketInquiry() throws Exception {
+		if(marketInquiry!=null){
+			//修改
+			marketInquiryService.saveOrUpdateMarketInquiry(marketInquiry);
+			message="保存成功！";
+		}
+		return SUCCESS;
+	}
+
 
 	/**
 	 * 删除时间计划
@@ -161,17 +199,23 @@ public class MarketInquiryAction extends BaseActionSupport{
 	public void setIds(String[] ids) {
 		this.ids = ids;
 	}
-	public String getEmployeeName() {
-		return employeeName;
+	public String getGoodsName() {
+		return goodsName;
 	}
-	public void setEmployeeName(String employeeName) {
-		this.employeeName = employeeName;
+	public void setGoodsName(String goodsName) {
+		this.goodsName = goodsName;
 	}
-	public String getPlanType() {
-		return planType;
+	public String getInquiryPersonName() {
+		return inquiryPersonName;
 	}
-	public void setPlanType(String planType) {
-		this.planType = planType;
+	public void setInquiryPersonName(String inquiryPersonName) {
+		this.inquiryPersonName = inquiryPersonName;
+	}
+	public String getGoodsStandard() {
+		return goodsStandard;
+	}
+	public void setGoodsStandard(String goodsStandard) {
+		this.goodsStandard = goodsStandard;
 	}
 	public Calendar getBeginTime() {
 		return beginTime;
