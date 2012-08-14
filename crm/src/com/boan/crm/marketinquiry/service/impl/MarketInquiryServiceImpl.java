@@ -51,20 +51,38 @@ public class MarketInquiryServiceImpl implements IMarketInquiryService {
 	 */
 	public Pagination<MarketInquiry> findMarketInquiryForPage( Map<String, ?> values, Pagination<MarketInquiry> pagination){
 		StringBuffer strb = new StringBuffer( " where 1=1 ");
-		if(values.containsKey("employeeName")){
-			if(values.get("employeeName")!=null ){
-				strb.append(" And employeeName like '%"+values.get("employeeName")+"%'");
+
+		if(values.containsKey("personId")){
+			if(values.get("personId")!=null ){
+				strb.append(" And  personId=:personId");
 			}
 		}
-		if(values.containsKey("planType")){
-			if(values.get("planType")!=null && !values.get("planType").equals("-1")){
-				strb.append(" And  planType=:planType");
+		if(values.containsKey("organId")){
+			if(values.get("organId")!=null ){
+				strb.append(" And organId=:organId");
 			}
 		}
-		if(values.containsKey("beginTime") && values.containsKey("endTime")){
-			strb.append(" And  submitTime>=:beginTime And submitTime<=:endTime");
+	
+		if(values.containsKey("goodsName")){
+			if(values.get("goodsName")!=null ){
+				strb.append(" And goodsName like '%"+values.get("goodsName")+"%'");
+			}
+		}
+		if(values.containsKey("inquiryPersonName")){
+			if(values.get("inquiryPersonName")!=null ){
+				strb.append(" And inquiryPersonName like '%"+values.get("inquiryPersonName")+"%'");
+			}
+		}
+		if(values.containsKey("goodsStandard")){
+			if(values.get("goodsStandard")!=null ){
+				strb.append(" And goodsStandard like '%"+values.get("goodsStandard")+"%'");
+			}
 		}
 
+		if(values.containsKey("beginTime") && values.containsKey("endTime")){
+			strb.append(" And  inquiryTime>=:beginTime And inquiryTime<=:endTime");
+		}
+		
 		String hql = "from MarketInquiry "+strb.toString()+" order by createTime desc";
 		List<MarketInquiry> data = marketInquiryDao.findForPage(hql, values, pagination.getStartIndex(), pagination.getPageSize());
 		hql = "select count(*) from MarketInquiry" +strb.toString();

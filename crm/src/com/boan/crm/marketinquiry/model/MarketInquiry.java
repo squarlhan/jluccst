@@ -30,6 +30,12 @@ public class MarketInquiry implements Serializable{
 	@Column(name = "INQUIRY_PERSON_NAME" , length = 50)
 	private String inquiryPersonName;
 	
+	@Column(name = "PERSON_ID" , length = 50)
+	private String personId;
+	
+	@Column(name = "ORGAN_ID" , length = 50)
+	private String organId;
+	
 	@Column(name = "INQUIRY_ADDRESS" , length = 50)
 	private String inquiryAddress;
 	
@@ -121,5 +127,21 @@ public class MarketInquiry implements Serializable{
 
 	public void setCreateTime(Calendar createTime) {
 		this.createTime = createTime;
+	}
+
+	public String getPersonId() {
+		return personId;
+	}
+
+	public void setPersonId(String personId) {
+		this.personId = personId;
+	}
+
+	public String getOrganId() {
+		return organId;
+	}
+
+	public void setOrganId(String organId) {
+		this.organId = organId;
 	}
 }

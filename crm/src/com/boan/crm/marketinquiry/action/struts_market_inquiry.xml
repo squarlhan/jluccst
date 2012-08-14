@@ -6,24 +6,24 @@
 	<!--  市场调查Action -->
 	<package name="market_inquiry" extends="struts-default" namespace="/">
 		<action name="openMarketInquiryListAction" class="marketInquiryAction" method="openMarketInquiryList">
-			<result name="success">/marketInquiry/marketInquirylist.jsp</result>
-			<result name="input">/marketInquiry/marketInquirylist.jsp</result>
+			<result name="success">/marketinquiry/marketinquirylist.jsp</result>
+			<result name="input">/marketinquiry/marketinquirylist.jsp</result>
 		</action>
 		<action name="openAddMarketInquiryAction" class="marketInquiryAction" method="openAddMarketInquiry">
-			<result name="success">/marketInquiry/marketInquiryinfo.jsp</result>
-			<result name="input">/marketInquiry/marketInquiryinfo.jsp</result>
+			<result name="success">/marketinquiry/marketinquiryinfo.jsp</result>
+			<result name="input">/marketinquiry/marketinquiryinfo.jsp</result>
 		</action>
 		<action name="openModifyMarketInquiryAction" class="marketInquiryAction" method="openModifyMarketInquiry">
-			<result name="success">/marketInquiry/marketInquiryinfo.jsp</result>
-			<result name="input">/marketInquiry/marketInquiryinfo.jsp</result>
+			<result name="success">/marketinquiry/marketinquiryinfo.jsp</result>
+			<result name="input">/marketinquiry/marketinquiryinfo.jsp</result>
 		</action>
 		<action name="addMarketInquiryAction" class="marketInquiryAction" method="addMarketInquiry">
-			<result name="success">/marketInquiry/marketInquiryinfo.jsp</result>
-			<result name="input">/marketInquiry/marketInquiryinfo.jsp</result>
+			<result name="success">/marketinquiry/marketinquiryinfo.jsp</result>
+			<result name="input">/marketinquiry/marketinquiryinfo.jsp</result>
 		</action>
 		<action name="modifyMarketInquiryAction" class="marketInquiryAction" method="modifyMarketInquiry">
-			<result name="success">/marketInquiry/marketInquiryinfo.jsp</result>
-			<result name="input">/marketInquiry/marketInquiryinfo.jsp</result>
+			<result name="success">/marketinquiry/marketinquiryinfo.jsp</result>
+			<result name="input">/marketinquiry/marketinquiryinfo.jsp</result>
 		</action>
 		<action name="deleteMarketInquiryAction" class="marketInquiryAction" method="deleteMarketInquiry"/>
 	</package>
