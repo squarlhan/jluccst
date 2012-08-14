@@ -39,10 +39,8 @@
 			<result name="success">/customer/contractperson_info.jsp</result>
 			<result name="input">/customer/contractperson_info.jsp</result>
 		</action>
-    	<action name="deleteContractPerson" class="contractPersonInfoAction" method="deleteContractPerson">
-    		<result name="success" type="chain">
-             	<param name="actionName">customerInfo</param>
-            </result>
+    	<action name="deletePersonInfo" class="contractPersonInfoAction" method="deletePersonInfo">
+    		
     	</action>
 	</package>
 </struts>
