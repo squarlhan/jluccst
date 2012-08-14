@@ -54,9 +54,9 @@
 			$('#txt_query_endTime').datetimepicker({showTimepicker: false});
 			
 			$("#addbtn").click(function(){
-				parent.parent.tipsWindown("添加时间计划","iframe:openAddTimePlanAction.action","580","380","true","","true","no");
+				parent.parent.tipsWindown("添加市场调查","iframe:openAddMarketInquiryAction.action","580","250","true","","true","no");
 				parent.parent.$("#windown-close").bind('click',function(){
-					window.location.href="./openTimePlanListAction.action";
+					window.location.href="./openMarketInquiryListAction.action";
 				});
 		
 			});
@@ -64,14 +64,14 @@
 	  		$.fn.uncheckall("ids","cbk_all");
 
 	  		/**
-	  		 * 修改公司信息
+	  		 * 修改市场调查
 	  		 */
 	  		$('a[name="edit"]').each(function(){
 	  			$(this).click(function(){
 	  				var url = $(this).attr("url");
-	  				parent.parent.tipsWindown("修改时间计划","iframe:"+url,"580","380","true","","true","no");
+	  				parent.parent.tipsWindown("修改市场调查","iframe:"+url,"580","250","true","","true","no");
 	  				parent.parent.$("#windown-close").bind('click',function(){
-						window.location.href="./openTimePlanListAction.action";
+						window.location.href="./openMarketInquiryListAction.action";
 					});
 	  			});
 	  		});
@@ -92,7 +92,7 @@
 	  		 * 删除所选设备信息
 	  		 */
 	  		$("#deletepointbtn").click(function(){
-  				var url = "deleteTimePlanAction.action";
+  				var url = "deleteMarketInquiryAction.action";
   				if(window.confirm("您确定要删除所选信息吗？")){
   					$.post(url, $('#form1').serialize(), function(data){window.location.href=window.location.href;});
   				}
@@ -104,7 +104,7 @@
   
   
   <body>
- <s:form id="form1" name="form1" method="post" theme="simple" action="openTimePlanListAction.action">
+ <s:form id="form1" name="form1" method="post" theme="simple" action="openMarketInquiryListAction.action">
 <table width="100%" style="height:100%;" border="0" cellspacing="5" cellpadding="0">
   <tr>
     <td valign="top">
@@ -119,24 +119,30 @@
        <td colspan="2">
       <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#d5e4fd">
 	      <tr>
-				<td height="26" width = "80px" align="left" bgcolor="#FFFFFF">
-					<strong>员工姓名：</strong>
+				<td height="26" width = "90px" align="left" bgcolor="#FFFFFF" nowrap="nowrap">
+					<strong>商品名称：</strong>
 				</td>
 				<td height="26" width = "80px"  align="left" bgcolor="#FFFFFF">
-					<s:textfield id="txt_query_employee_name" name="employeeName" cssStyle="width:120px"></s:textfield>
+					<s:textfield id="txt_query_goods_name" name="goodsName" cssStyle="width:100px"></s:textfield>
+				</td>
+				<td height="26" width = "80px" align="left" bgcolor="#FFFFFF" nowrap="nowrap">
+					<strong>调查人：</strong>
 				</td>
 				<td height="26" width = "80px"  align="left" bgcolor="#FFFFFF">
-					<strong>计划类型：</strong>
+					<s:textfield id="txt_query_inquiryPersonName" name="inquiryPersonName" cssStyle="width:100px"></s:textfield>
+				</td>
+				<td height="26" width = "80px"  align="left" bgcolor="#FFFFFF" nowrap="nowrap">
+					<strong>规 格：</strong>
 				</td>
 				<td height="26" width = "80px"  align="left" bgcolor="#FFFFFF">
-					<s:select id="sel_query_planType"  name="planType"  list="#{-1:'--全部--',0:'日计划',1:'周计划',2:'月计划' }"  cssStyle="width: 120px;" ></s:select>
+					<s:textfield id="sel_query_goodsStandard"  name="goodsStandard"  cssStyle="width: 100px;" />
 				</td>
-				<td height="26" width = "80px"  align="left" bgcolor="#FFFFFF">
-					<strong>提交时间：</strong>
+				<td height="26" width = "90px"  align="left" bgcolor="#FFFFFF" nowrap="nowrap">
+					<strong>调查日期：</strong>
 				</td>
-				<td height="26" width = "270px"  align="left" bgcolor="#FFFFFF">
-					<s:textfield id="txt_query_beginTime" name="beginTime" cssStyle="width:120px"></s:textfield> -
-					<s:textfield id="txt_query_endTime" name="endTime" cssStyle="width:120px"></s:textfield>
+				<td height="26" width = "270px"  align="left" bgcolor="#FFFFFF" nowrap="nowrap">
+					<s:textfield id="txt_query_beginTime" name="beginTime" cssStyle="width:100px"></s:textfield> -
+					<s:textfield id="txt_query_endTime" name="endTime" cssStyle="width:100px"></s:textfield>
 				</td>
 				<td height="26"  align="left" bgcolor="#FFFFFF">
 					<input name="queryBtn" type="submit" class="btn_2_3" id="queryBtn" value="查询">
@@ -151,11 +157,13 @@
          <td align="center" background="<%=path %>/images/headerbg.jpg">  
    				<s:checkbox theme="simple" id="cbk_all" name="all"></s:checkbox>
    			</td>
-              <td align="center" background="<%=path %>/images/headerbg.jpg"><strong>业务员</strong></td>
-              <td align="center" background="<%=path %>/images/headerbg.jpg"><strong>提交日期</strong></td>
-              <td align="center" background="<%=path %>/images/headerbg.jpg"><strong>计划类型</strong></td>
-               <td align="center" background="<%=path %>/images/headerbg.jpg"><strong>计划内容</strong></td>
-               <td align="center" background="<%=path %>/images/headerbg.jpg"><strong>备注</strong></td>
+              <td align="center" background="<%=path %>/images/headerbg.jpg"><strong>商品名称</strong></td>
+              <td align="center" background="<%=path %>/images/headerbg.jpg"><strong>规 格</strong></td>
+              <td align="center" background="<%=path %>/images/headerbg.jpg"><strong>克 重</strong></td>
+               <td align="center" background="<%=path %>/images/headerbg.jpg"><strong>价 格</strong></td>
+               <td align="center" background="<%=path %>/images/headerbg.jpg"><strong>调查地点</strong></td>
+               <td align="center" background="<%=path %>/images/headerbg.jpg"><strong>调查人</strong></td>
+               <td align="center" background="<%=path %>/images/headerbg.jpg"><strong>调查日期</strong></td>
               <td align="center" background="<%=path %>/images/headerbg.jpg"><strong>操作</strong></td>
         </tr>
         <s:iterator value="pagination.data" status="obj">
@@ -163,26 +171,18 @@
         <td height="26" align="center" bgcolor="#FFFFFF" >  
         	<s:checkbox id="%{#obj.id}" name="ids" fieldValue="%{id}" value="false" theme="simple"/>
 		</td>
-              <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="employeeName"/></td>
-              <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="submitTime"/></td>
-              <td height="26" align="center" bgcolor="#FFFFFF">
-              	<s:if test="planType==0">
-	              	日计划
-	              	</s:if>
-	              	<s:elseif test="planType==1">
-	              	周计划
-	              	</s:elseif>
-	              	<s:else>
-	              	月计划
-	              	</s:else>
-              	</td>
-                <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="planContent"/></td>
-                <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="memo"/></td>
+              <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="inquiryPersonName"/></td>
+              <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="goodsStandard"/></td>
+                <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="goodsWeight"/></td>
+                <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="goodsPrice"/></td>
+                <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="inquiryAddress"/></td>
+                <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="inquiryPersonName"/></td>
+                <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="inquiryTime"/></td>
           <td height="26" colspan="2" align="center" bgcolor="#FFFFFF">
-          	<s:url id="edit_url" action="openModifyTimePlanAction">   
-				<s:param name="timePlan.id" value="id"></s:param>   
+          	<s:url id="edit_url" action="openModifyMarketInquiryAction">   
+				<s:param name="marketInquiry.id" value="id"></s:param>   
 			</s:url>
-			<s:url id="delete_url" action="deleteTimePlanAction">   
+			<s:url id="delete_url" action="deleteMarketInquiryAction">   
 				<s:param name="ids" value="id"></s:param>   
 			</s:url>
          	<a name="edit" href="javascript:void(0);" url="${edit_url}">编辑</a>  
