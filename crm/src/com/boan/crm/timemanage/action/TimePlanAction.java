@@ -100,6 +100,8 @@ public class TimePlanAction extends BaseActionSupport{
 			endTime = Calendar.getInstance();
 		}
 		Map<String,Object> params = new HashMap<String, Object>();
+		params.put("personId", this.sessionUserId);
+		params.put("organId", this.sessionCompanyId);
 		params.put("employeeName", employeeName);
 		params.put("planType", planType);
 		params.put("beginTime", beginTime);
@@ -144,6 +146,8 @@ public class TimePlanAction extends BaseActionSupport{
 			timePlan.setCreateTime(Calendar.getInstance());
 			//保存
 			timePlan.setId(null);
+			timePlan.setPersonId(sessionUserId);
+			timePlan.setOrganId(sessionCompanyId);
 			timePlanService.saveOrUpdateTimePlan(timePlan);
 			message="保存成功！";
 		}
