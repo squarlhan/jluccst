@@ -52,6 +52,18 @@ public class TimePlanServiceImpl implements ITimePlanService {
 	 */
 	public Pagination<TimePlan> findTimePlanForPage( Map<String, ?> values, Pagination<TimePlan> pagination){
 		StringBuffer strb = new StringBuffer( " where 1=1 ");
+		
+		if(values.containsKey("personId")){
+			if(values.get("personId")!=null ){
+				strb.append(" And  personId=:personId");
+			}
+		}
+		if(values.containsKey("organId")){
+			if(values.get("organId")!=null ){
+				strb.append(" And organId=:organId");
+			}
+		}
+		
 		if(values.containsKey("employeeName")){
 			if(values.get("employeeName")!=null ){
 				strb.append(" And employeeName like '%"+values.get("employeeName")+"%'");

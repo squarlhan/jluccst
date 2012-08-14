@@ -27,6 +27,12 @@ public class TimePlan implements Serializable{
 	@GeneratedValue(generator = "system-uuid")
 	private String id;
 	
+	@Column(name = "PERSON_ID" , length = 50)
+	private String personId;
+	
+	@Column(name = "ORGAN_ID" , length = 50)
+	private String organId;
+	
 	@Column(name = "EMPLOYEE_ID" , length = 50)
 	private String employeeId;
 	
@@ -210,5 +216,21 @@ public class TimePlan implements Serializable{
 	 */
 	public void setCreateTime(Calendar createTime) {
 		this.createTime = createTime;
+	}
+
+	public String getPersonId() {
+		return personId;
+	}
+
+	public void setPersonId(String personId) {
+		this.personId = personId;
+	}
+
+	public String getOrganId() {
+		return organId;
+	}
+
+	public void setOrganId(String organId) {
+		this.organId = organId;
 	}
 }
