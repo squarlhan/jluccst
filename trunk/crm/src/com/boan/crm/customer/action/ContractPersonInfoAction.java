@@ -72,6 +72,12 @@ public class ContractPersonInfoAction extends BaseActionSupport{
 		return SUCCESS;
 	}
 	
+	public String deletePersonInfo()
+	{
+		contractpersonInfoService.deleteContractPersonInfo(personId);
+		return NONE;
+	}
+	
 	public ContractPersonInfo getContractPersonInfo() {
 		return contractPersonInfo;
 	}
