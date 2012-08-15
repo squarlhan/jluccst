@@ -60,7 +60,8 @@ public class MemberInfoServiceImpl extends BaseDao<MemberInfo,String> implements
 
 	@Override
 	public void toMemberInfo(MemberInfo obj) {
-		memberInfoDao.save(obj);
+		obj.setId(null);
+		memberInfoDao.saveOrUpdate(obj);
 	}
 
 	@Override
@@ -75,7 +76,7 @@ public class MemberInfoServiceImpl extends BaseDao<MemberInfo,String> implements
 
 	@Override
 	public void updateInfo(MemberInfo obj) {
-		memberInfoDao.update(obj);
+		memberInfoDao.saveOrUpdate(obj);
 	}
 
 }

@@ -4,10 +4,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Repository;
 
-import com.boan.crm.groupmanage.model.User;
 import com.boan.crm.servicemanage.dao.IMemberInfoDao;
 import com.boan.crm.servicemanage.model.MemberInfo;
 import com.boan.crm.utils.dao.impl.BaseDao;
