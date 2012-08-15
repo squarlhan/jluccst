@@ -89,8 +89,6 @@ public class MemberInfoAction extends BaseActionSupport {
 	 * @return
 	 */
 	public String saveMemberInfo(){
-		if(StringUtils.trimToNull(memberInfo.getId())==null)
-			memberInfo.setId(null);
 		memberInfoService.toMemberInfo(memberInfo);
 		return SUCCESS;
 	}
