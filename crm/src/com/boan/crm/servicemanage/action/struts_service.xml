@@ -43,4 +43,28 @@
             </result>
     	</action>
 	</package>
+	<!-- 积分管理 -->
+	<package name="pointinfo" extends="struts-default" namespace="/service">
+		<action name="pointmemberinfolist" class="pointInfoAction" method="memberInfoList">
+			<result name="success">/service/point_member_list.jsp</result>
+			<result name="input">/service/point_member_list.jsp</result>
+		</action>
+		<action name="pointinfolist" class="pointInfoAction" method="pointInfoList">
+			<result name="success">/service/point_info_list.jsp</result>
+			<result name="input">/service/point_info_list.jsp</result>
+		</action>
+		<action name="pointinfo" class="pointInfoAction" method="pointInfoInfo">
+			<result name="success">/service/point_info_info.jsp</result>
+			<result name="input">/service/point_info_info.jsp</result>
+		</action>
+		<action name="savepointinfo" class="pointInfoAction" method="savePointInfo">
+			<result name="success">/service/point_info_info.jsp</result>
+			<result name="input">/service/point_info_info.jsp</result>
+		</action>
+    	<action name="cancelpointinfo" class="pointInfoAction" method="cancelInfo">
+    		<result name="success" type="chain">
+             	<param name="actionName">pointinfolist</param>
+            </result>
+    	</action>
+	</package>
 </struts>

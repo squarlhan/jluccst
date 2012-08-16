@@ -12,6 +12,24 @@ import com.boan.crm.utils.page.Pagination;
  */
 public interface IPointInfoService {
 	/**
+	 * 获得总积分
+	 * @param companyId 单位ID
+	 * @return 总积分
+	 */
+	public int getTotalPoint(String companyId);
+	/**
+	 * 获得消费总额
+	 * @param companyId 单位ID
+	 * @return 消费总额
+	 */
+	public float getConsumptionAmount(String companyId);
+	/**
+	 * 根据消费ID获得积分对象 
+	 * @param consumptionId 消费ID
+	 * @return 积分对象
+	 */
+	public PointInfo getByConsumptionId(String consumptionId);
+	/**
 	 * 获得根据积分记录ID，获得积分对象
 	 * @param id 积分记录ID
 	 * @return 积分对象
