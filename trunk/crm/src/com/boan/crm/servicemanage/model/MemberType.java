@@ -41,10 +41,16 @@ public class MemberType implements Serializable {
 	private String typeName;
 	
 	/**
-	 * 积分标准
+	 * 最低标准
 	 */
-	@Column(name = "POINT_STANDARD")
-	private float pointStandard = 0;
+	@Column(name = "MIN_STANDARD")
+	private int minStandard = 0;
+	
+	/**
+	 * 最高标准
+	 */
+	@Column(name = "MAX_STANDARD")
+	private int maxStandard = 0;
 
 	/**
 	 * 排序号
@@ -80,18 +86,34 @@ public class MemberType implements Serializable {
 		this.typeName = typeName;
 	}
 
+	
+
 	/**
-	 * @return the pointStandard
+	 * @return the minStandard
 	 */
-	public float getPointStandard() {
-		return pointStandard;
+	public int getMinStandard() {
+		return minStandard;
 	}
 
 	/**
-	 * @param pointStandard the pointStandard to set
+	 * @param minStandard the minStandard to set
 	 */
-	public void setPointStandard(float pointStandard) {
-		this.pointStandard = pointStandard;
+	public void setMinStandard(int minStandard) {
+		this.minStandard = minStandard;
+	}
+
+	/**
+	 * @return the maxStandard
+	 */
+	public int getMaxStandard() {
+		return maxStandard;
+	}
+
+	/**
+	 * @param maxStandard the maxStandard to set
+	 */
+	public void setMaxStandard(int maxStandard) {
+		this.maxStandard = maxStandard;
 	}
 
 	/**

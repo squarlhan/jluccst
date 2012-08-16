@@ -6,6 +6,7 @@
 package com.boan.crm.servicemanage.model;
 
 import java.io.Serializable;
+import java.util.Calendar;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -35,6 +36,12 @@ public class PointInfo implements Serializable {
 	private String id;
 	
 	/**
+	 * 销售记录ID
+	 */
+	@Column(name = "CONSUMPTION_ID")
+	private String consumptionId;
+	
+	/**
 	 * 客户编号
 	 */
 	@Column(name = "COMPANY_ID", length = 50)
@@ -47,28 +54,22 @@ public class PointInfo implements Serializable {
 	private String companyName;
 	
 	/**
-	 * 会员类别
+	 * 消费金额
 	 */
-	@Column(name = "MEMBER_TYPE", length = 50)
-	private String memberType;
-
-	/**
-	 * 消费总额
-	 */
-	@Column(name = "CONSUMPTION_AMOUNT")
-	private float consumptionAmount = 0;
+	@Column(name = "CONSUMPTION_MONEY")
+	private float consumptionMoney = 0;
 	
 	/**
-	 * 总积分 
+	 * 积分 
 	 */
-	@Column(name = "TOTAL_INTEGRAL")
-	private int totalIntegral = 0;
+	@Column(name = "POINT")
+	private int point = 0;
 	
 	/**
-	 * 消费次数 
+	 * 消费时间
 	 */
-	@Column(name = "CONSUMPTION_COUNT")
-	private int consumptionCount = 0;
+	@Column(name = "CONSUMPTION_TIME")
+	private Calendar consumptionTime;
 
 	/**
 	 * @return the id
@@ -113,58 +114,59 @@ public class PointInfo implements Serializable {
 	}
 
 	/**
-	 * @return the memberType
+	 * @return the consumptionMoney
 	 */
-	public String getMemberType() {
-		return memberType;
+	public float getConsumptionMoney() {
+		return consumptionMoney;
 	}
 
 	/**
-	 * @param memberType the memberType to set
+	 * @param consumptionMoney the consumptionMoney to set
 	 */
-	public void setMemberType(String memberType) {
-		this.memberType = memberType;
+	public void setConsumptionMoney(float consumptionMoney) {
+		this.consumptionMoney = consumptionMoney;
 	}
 
 	/**
-	 * @return the consumptionAmount
+	 * @return the point
 	 */
-	public float getConsumptionAmount() {
-		return consumptionAmount;
+	public int getPoint() {
+		return point;
 	}
 
 	/**
-	 * @param consumptionAmount the consumptionAmount to set
+	 * @param point the point to set
 	 */
-	public void setConsumptionAmount(float consumptionAmount) {
-		this.consumptionAmount = consumptionAmount;
+	public void setPoint(int point) {
+		this.point = point;
 	}
 
 	/**
-	 * @return the totalIntegral
+	 * @return the consumptionTime
 	 */
-	public int getTotalIntegral() {
-		return totalIntegral;
+	public Calendar getConsumptionTime() {
+		return consumptionTime;
 	}
 
 	/**
-	 * @param totalIntegral the totalIntegral to set
+	 * @param consumptionTime the consumptionTime to set
 	 */
-	public void setTotalIntegral(int totalIntegral) {
-		this.totalIntegral = totalIntegral;
+	public void setConsumptionTime(Calendar consumptionTime) {
+		this.consumptionTime = consumptionTime;
 	}
 
 	/**
-	 * @return the consumptionCount
+	 * @return the consumptionId
 	 */
-	public int getConsumptionCount() {
-		return consumptionCount;
+	public String getConsumptionId() {
+		return consumptionId;
 	}
 
 	/**
-	 * @param consumptionCount the consumptionCount to set
+	 * @param consumptionId the consumptionId to set
 	 */
-	public void setConsumptionCount(int consumptionCount) {
-		this.consumptionCount = consumptionCount;
+	public void setConsumptionId(String consumptionId) {
+		this.consumptionId = consumptionId;
 	}
+
 }
