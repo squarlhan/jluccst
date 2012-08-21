@@ -10,6 +10,8 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import com.boan.crm.groupmanage.common.RoleFlag;
+
 /**
  * 角色实体类
  * 
@@ -94,6 +96,11 @@ public class Role {
 
 	public void setRoleKey(String roleKey) {
 		this.roleKey = roleKey;
+	}
+	
+	public String getRoleKeyCn()
+	{
+		return RoleFlag.getRoleCnByRoleEn(this.roleKey);
 	}
 
 }

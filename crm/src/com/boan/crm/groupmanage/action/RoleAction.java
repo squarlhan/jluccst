@@ -1,5 +1,7 @@
 package com.boan.crm.groupmanage.action;
 
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
@@ -8,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import com.boan.crm.backstagemanage.common.LogType;
 import com.boan.crm.backstagemanage.model.Log;
 import com.boan.crm.common.Message;
+import com.boan.crm.groupmanage.common.RoleFlag;
 import com.boan.crm.groupmanage.model.Deptment;
 import com.boan.crm.groupmanage.model.Role;
 import com.boan.crm.groupmanage.service.IRoleService;
@@ -17,7 +20,7 @@ import com.boan.crm.utils.page.Pagination;
 /**
  * 角色管理Action
  * 
- * @author YangGY
+ * @author XXX
  * @version 1.0.0
  */
 @Controller( "roleAction" )
@@ -51,6 +54,11 @@ public class RoleAction extends BaseActionSupport
 	 * 提示
 	 */
 	private Message message = new Message();
+	
+	/**
+	 * 角色标识列表
+	 */
+	private Map<String, String > roleFlagList = RoleFlag.getRoleFlagList();
 	
 	/**
 	 * 显示角色列表
@@ -179,5 +187,11 @@ public class RoleAction extends BaseActionSupport
 	}
 	public void setMessage(Message message) {
 		this.message = message;
+	}
+	public Map<String, String> getRoleFlagList() {
+		return roleFlagList;
+	}
+	public void setRoleFlagList(Map<String, String> roleFlagList) {
+		this.roleFlagList = roleFlagList;
 	}	
 }
