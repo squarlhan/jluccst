@@ -118,7 +118,13 @@
 											<strong>职务标识：</strong>
 										</td>
 										<td height="26" align="left" bgcolor="#FFFFFF">
+										<!--
 											<s:textfield id="roleKey" name="role.roleKey" cssStyle="width: 250px;" maxlength="25"></s:textfield>
+										-->
+											<s:select   list="roleFlagList"
+													listKey="key" listValue="value" value="role.roleKey"
+													id="roleKey" name="role.roleKey" cssStyle="width:250px"
+													headerKey="" headerValue="--可选择标识--"></s:select>
 										</td>
 									</tr>
 									<tr>

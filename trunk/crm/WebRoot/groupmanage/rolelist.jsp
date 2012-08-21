@@ -154,7 +154,7 @@
 										<s:property value="roleName" />
 									</td>
 									<td height="26" align="center" bgcolor="#FFFFFF">
-										<s:property value="roleKey" />
+										<s:property value="roleKeyCn" />
 									</td>
 									<td height="26" colspan="2" align="center" bgcolor="#FFFFFF">
 										<s:url id="edit_url" action="openModifyRoleAction">
