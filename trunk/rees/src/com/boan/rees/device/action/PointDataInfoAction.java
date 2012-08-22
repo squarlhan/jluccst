@@ -597,6 +597,7 @@ public class PointDataInfoAction extends BaseActionSupport {
 							//获得监测点参数数据
 							pdi = pointDataInfoService.get(selectYear, selectWeek, ppi.getId());
 							if(pdi!=null){
+								boolean isAlarm = false;
 								if(threshold!=null){
 									//判断监测点参数数据是否超出境界值
 									List<ThresholdItem> thresholdItem = threshold.getThresholdItems();
@@ -605,15 +606,19 @@ public class PointDataInfoAction extends BaseActionSupport {
 										expression = item.getThresholdItemExpression();
 										if(item.getSign()==1){
 											if(ExpressionCompare.compare(expression, "V", pdi.getDataInfo())){
+												isAlarm = true;
 												alarmSb.append(pointInfo.getControlPointName() + ppi.getName() + ",");
 												alarm = expression;
 											}
 										}
 									}
 								}
-								tempSb.append("<set name='" + pointInfo.getControlPointName() + ppi.getName() + "' value='" + pdi.getDataInfo() + "' />");
+								if(isAlarm)
+									tempSb.append("<set name='" + pointInfo.getControlPointName() + ppi.getName() + "' value='" + pdi.getDataInfo() + "' color='ff0000' />");
+								else
+									tempSb.append("<set name='" + pointInfo.getControlPointName() + ppi.getName() + "' value='" + pdi.getDataInfo() + "' color='8BBA00' />");
 							}else{
-								tempSb.append("<set name='" + pointInfo.getControlPointName() + ppi.getName() + "' value='0' />");
+								tempSb.append("<set name='" + pointInfo.getControlPointName() + ppi.getName() + "' value='0' color='8BBA00' />");
 							}
 						}
 					}
