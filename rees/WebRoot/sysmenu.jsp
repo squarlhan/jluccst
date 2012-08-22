@@ -105,6 +105,29 @@
 							</tr>
 								<%} %>
 								<%
+									sub = popedomService.isHasPopedom( us.getUserId(), String.valueOf( us.getUserType() ), MenuKey.SHU_JU_CHA_KAN, us.getPopedomKeys() );
+									if( b && sub )
+									{
+								%>
+							<tr>
+								<td align="left">
+									<table width="100%" border="0" cellspacing="5" cellpadding="0">
+										<tr>
+											<td width="40" align="right" style="padding-bottom: 4px;">
+												<img src="images/menuto.jpg" width="5" height="5" />
+											</td>
+											<td>
+												<a href="datamanage/datamanageview.jsp" target="mainFrame">数据查看</a>
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							<tr>
+								<td height="1" align="left" background="images/menubg2.jpg"></td>
+							</tr>
+								<%} %>
+								<%
 									sub = popedomService.isHasPopedom( us.getUserId(), String.valueOf( us.getUserType() ), MenuKey.SUB_SHE_BEI_GUAN_LI, us.getPopedomKeys() );
 									if( b && sub )
 									{
