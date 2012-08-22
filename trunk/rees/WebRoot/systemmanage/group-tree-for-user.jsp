@@ -34,7 +34,7 @@
   <script type="text/javascript">
 		<!--
 		d = new dTree('d','<%=path%>');
-		d.add(0,-1,'中石油','','','menumain');
+		d.add(0,-1,'中石油吉林石化公司','','','menumain');
 		<s:iterator value="companyList">
 			d.add("<s:property value="id"/>",0,'<s:property value="companyName"/>','./userAction!showUserList.action?companyId=<s:property value="id"/>','','groupmain','');
 		</s:iterator>
