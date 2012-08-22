@@ -129,6 +129,16 @@ public class GroupTreeAction extends BaseActionSupport
 	 * 显示组织机构树,带公司、工厂、车间
 	 * @return
 	 */
+	public String showGroupTreeForPointDataView() throws Exception
+	{
+		this.showTreeAllNodes();
+		return "group-tree-for-pointdata-view";
+	}
+	
+	/**
+	 * 显示组织机构树,带公司、工厂、车间
+	 * @return
+	 */
 	public String showGroupTreeForReport() throws Exception
 	{
 		this.showTreeAllNodes();

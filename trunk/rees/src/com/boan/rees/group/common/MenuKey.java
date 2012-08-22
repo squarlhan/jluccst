@@ -22,6 +22,11 @@ public class MenuKey
 	 * 数据管理
 	 */
 	public static final String SHU_JU_GUAN_LI = "SHU_JU_GUAN_LI";
+	
+	/**
+	 * 数据查看
+	 */
+	public static final String SHU_JU_CHA_KAN = "SHU_JU_CHA_KAN";
 
 	/**
 	 * 专家系统
