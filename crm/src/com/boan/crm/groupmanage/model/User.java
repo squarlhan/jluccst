@@ -11,6 +11,8 @@ import javax.persistence.Transient;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import com.boan.crm.common.UserType;
+
 
 /**
  * 用户实体类
@@ -285,5 +287,8 @@ public class User {
 		this.companyId = companyId;
 	}
 	
-	
+	public String getUserTypeName()
+	{
+		return UserType.getUserTypeName(this.userType);
+	}
 }
