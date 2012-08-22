@@ -110,6 +110,7 @@
               <td align="center" background="<%=path %>/images/headerbg.jpg"><strong>办公电话</strong></td>
               <td align="center" background="<%=path %>/images/headerbg.jpg"><strong>个人手机</strong></td>
               <td align="center" background="<%=path %>/images/headerbg.jpg"><strong>职务</strong></td>
+              <td align="center" background="<%=path %>/images/headerbg.jpg"><strong>用户类型</strong></td>
               <td align="center" background="<%=path %>/images/headerbg.jpg"><strong>操作</strong></td>
             </tr>
             <s:iterator value="pagination.data" status="obj">
@@ -127,6 +128,7 @@
               <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="officePhone"/></td>
               <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="phone"/></td>
               <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="roleName"/></td>
+              <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="userTypeName"/></td>
                <td height="26" align="center" bgcolor="#FFFFFF">
                	<A href="#" onclick="javascript:$.fn.edit('<s:property value="id"/>');">编辑</A>
                	<s:if test="id==sessionUserId">
@@ -139,7 +141,7 @@
             </tr>
             </s:iterator>
             <tr>
-              <td height="26" colspan="7" align="center" bgcolor="#FFFFFF">
+              <td height="26" colspan="8" align="center" bgcolor="#FFFFFF">
               		<p:pages currentPage="pagination.currentPage" totalPages="pagination.totalPages" totalRows="pagination.totalRows" styleClass="page" theme="text" ></p:pages>
               </td>
             </tr>
