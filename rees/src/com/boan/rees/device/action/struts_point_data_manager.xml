@@ -9,6 +9,10 @@
 			<result name="success">/datamanage/devicedatalist.jsp</result>
 			<result name="input">/datamanage/devicedatalist.jsp</result>
 		</action>
+		<action name="devicelistview" class="pointInfoAction" method="deviceListForData">
+			<result name="success">/datamanage/devicedatalistview.jsp</result>
+			<result name="input">/datamanage/devicedatalistview.jsp</result>
+		</action>
 		<action name="pointlist" class="pointInfoAction" method="pointInfoListByDeviceId">
 			<result name="success">/datamanage/pointset.jsp</result>
 			<result name="input">/datamanage/pointset.jsp</result>
@@ -23,6 +27,10 @@
 		<action name="pointdatalist" class="pointDataInfoAction" method="pointDataInfoList">
 			<result name="success">/datamanage/pointdatalist.jsp</result>
 			<result name="input">/datamanage/pointdatalist.jsp</result>
+		</action>
+		<action name="pointdatalistview" class="pointDataInfoAction" method="pointDataInfoList">
+			<result name="success">/datamanage/pointdatalistview.jsp</result>
+			<result name="input">/datamanage/pointdatalistview.jsp</result>
 		</action>
 		<action name="pointdatainfo" class="pointDataInfoAction" method="pointDataInfo">
 			<result name="success">/datamanage/pointdatainfo.jsp</result>
