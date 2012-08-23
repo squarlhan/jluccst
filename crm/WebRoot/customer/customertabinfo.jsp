@@ -124,7 +124,7 @@ function go(page,obj){
 	<div title="客户跟进"
 		style="padding: 1px; display: none;">
 		<iframe scrolling="auto" frameborder="0" style="width:100%; height:100%"
-			src="customertabFollowing.html"></iframe>
+			src="customerTraceList.action?customerId=<s:property value='id'/>"></iframe>
 	</div>
 	<div title="销售记录"
 		style="padding: 1px; display: none;">
@@ -134,7 +134,7 @@ function go(page,obj){
 	<div title="客户回访"
 		style="padding: 1px; display: none;">
 		<iframe scrolling="auto" frameborder="0" style="width:100%; height:100%"
-			src="customertabVisiting.html"></iframe>
+			src="customerVisitList.action?customerId=<s:property value='id'/>"></iframe>
 	</div>
 	<div title="服务记录"
 		style="padding: 1px; display: none;">
