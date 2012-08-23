@@ -31,6 +31,10 @@
 			<result name="success">/customer/customer_list.jsp</result>
 			<result name="input">/customer/customer_list.jsp</result>
 		</action>
+		<action name="personservice" class="contractPersonInfoAction" method="personService">
+			<result name="success">/customer/getcontractpersonservice.jsp</result>
+		</action>
+		
 		<action name="contractPersonInfo" class="contractPersonInfoAction" method="contractPerson">
 			<result name="success">/customer/contractperson_info.jsp</result>
 			<result name="input">/customer/contractperson_info.jsp</result>
@@ -42,5 +46,39 @@
     	<action name="deletePersonInfo" class="contractPersonInfoAction" method="deletePersonInfo">
     		
     	</action>
+    	<action name="customerTraceList" class="customerTraceInfoAction" method="customerTraceList">
+			<result name="success">/customer/customertrace_list.jsp</result>
+			<result name="input">/customer/customertrace_list.jsp</result>
+		</action>
+		<action name="customerTraceInfo" class="customerTraceInfoAction" method="customerTraceInfo">
+			<result name="success">/customer/customertrace_info.jsp</result>
+			<result name="input">/customer/customertrace_info.jsp</result>
+		</action>
+		<action name="saveTraceInfo" class="customerTraceInfoAction" method="saveTraceInfo">
+			<result name="success" type="chain">
+             	<param name="actionName">customerTraceInfo</param>
+             	<param name="id">${id}</param>
+            </result>
+		</action>
+		<action name="deleteCustomerTrace" class="customerTraceInfoAction" method="deleteCustomerTrace">
+    	</action>
+    	
+    	<action name="customerVisitList" class="customerVisitInfoAction" method="customerVisitList">
+			<result name="success">/customer/customertrace_list.jsp</result>
+			<result name="input">/customer/customertrace_list.jsp</result>
+		</action>
+		<action name="customerVisitInfo" class="customerVisitInfoAction" method="customerVisitInfo">
+			<result name="success">/customer/customertrace_info.jsp</result>
+			<result name="input">/customer/customertrace_info.jsp</result>
+		</action>
+		<action name="saveVisitInfo" class="customerVisitInfoAction" method="saveVisitInfo">
+			<result name="success" type="chain">
+             	<param name="actionName">customerVisitInfo</param>
+             	<param name="id">${id}</param>
+            </result>
+		</action>
+		<action name="deleteCustomerVisit" class="customerVisitInfoAction" method="deleteCustomerVisit">
+    	</action>
+    	
 	</package>
 </struts>
