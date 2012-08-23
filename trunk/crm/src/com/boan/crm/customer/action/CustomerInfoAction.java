@@ -250,9 +250,9 @@ public class CustomerInfoAction extends BaseActionSupport{
 		customerInfo.setSalesman(sessionUserCName);
 		customerInfo.setCreateTime(Calendar.getInstance());
 		CustomerInfo obj = null;
-		if(id != null && id.length() > 0)
+		if(customerInfo.getId() != null && customerInfo.getId().length() > 0)
 		{
-			obj =  customerInfoService.get(id);
+			obj =  customerInfoService.get(customerInfo.getId());
 		}else
 		{
 			obj = new CustomerInfo();

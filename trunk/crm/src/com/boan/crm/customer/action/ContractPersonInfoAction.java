@@ -71,7 +71,11 @@ public class ContractPersonInfoAction extends BaseActionSupport{
 		contractpersonInfoService.save(contractPersonInfo);
 		return SUCCESS;
 	}
-	
+	public String personService()
+	{
+		contractPersonInfo = contractpersonInfoService.get(personId);
+		return SUCCESS;
+	}
 	public String deletePersonInfo()
 	{
 		contractpersonInfoService.deleteContractPersonInfo(personId);
