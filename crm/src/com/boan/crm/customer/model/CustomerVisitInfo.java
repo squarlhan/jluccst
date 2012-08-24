@@ -62,6 +62,14 @@ public class CustomerVisitInfo implements Serializable
 	private String contentResult = "";
 	@Column(name = "REMARK" , length = 255)
 	private String remark = "";
+	@Transient
+	private String progress = "";
+	public String getProgress() {
+		return progress;
+	}
+	public void setProgress(String progress) {
+		this.progress = progress;
+	}
 	/**
 	 * 编号
 	 * @return String

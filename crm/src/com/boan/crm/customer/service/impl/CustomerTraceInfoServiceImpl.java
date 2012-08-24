@@ -12,9 +12,11 @@ import org.springframework.stereotype.Service;
 
 import com.boan.crm.customer.dao.ICustomerInfoDAO;
 import com.boan.crm.customer.dao.ICustomerTraceInfoDAO;
+import com.boan.crm.customer.model.CustomerInfo;
 import com.boan.crm.customer.model.CustomerTraceInfo;
 import com.boan.crm.customer.service.IContractPersonService;
 import com.boan.crm.customer.service.ICustomerTraceInfoService;
+import com.boan.crm.datadictionary.service.IDataDictionaryService;
 import com.boan.crm.groupmanage.service.IUserService;
 import com.boan.crm.utils.page.Pagination;
 
@@ -39,6 +41,12 @@ public class CustomerTraceInfoServiceImpl implements ICustomerTraceInfoService{
 	@Autowired
 	@Qualifier("contractPersonService")
 	private IContractPersonService contractPersonService;
+	/**
+	 * 权限接口
+	 */
+	@Autowired
+	@Qualifier("dataDictionaryService")
+	private IDataDictionaryService dataDictionaryService = null;
 	
 	@Override
 	public void deleteCustomerTraceInfo(String... ids) {
@@ -125,9 +133,11 @@ public class CustomerTraceInfoServiceImpl implements ICustomerTraceInfoService{
 				CustomerTraceInfo customerTraceInfo = list.get(i);
 				try
 				{
-					customerTraceInfo.setCustomerName(customerInfoDao.get(customerTraceInfo.getCustomerId()).getCustomerName());
+					CustomerInfo customer = customerInfoDao.get(customerTraceInfo.getCustomerId());
+					customerTraceInfo.setCustomerName(customer.getCustomerName());
 					customerTraceInfo.setSalesman(userService.getUserById(customerTraceInfo.getSalesmanId()).getUserCName());
 					customerTraceInfo.setPerson(contractPersonService.get(customerTraceInfo.getTracePersonId()));
+					customerTraceInfo.setProgress(customer.getProgressId());
 				}catch(Exception e)
 				{
 					e.printStackTrace();
