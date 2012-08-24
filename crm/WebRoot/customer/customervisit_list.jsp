@@ -42,17 +42,35 @@
 	-->
 	</style>
 	<script type="text/javascript">
-	
+		var _customer_submit = {
+			rules: {
+				"beginDate":{dateISO:true},
+				"endDate":{dateISO:true}
+			}
+		};
 		$(function(){
-			
+			$.validator.setDefaults({
+				debug: false,onkeyup: false,onfocusout:false,focusCleanup: true,
+			    errorPlacement:function(error, element) {},
+				invalidHandler: function(form, validator) {
+		        	$.each(validator.invalid,function(key,value){
+		            	alert(value);document.getElementById(key).focus();return false;
+		        	}); 
+		    	}
+			})
 			$("#addbtn").click(function(){
-				parent.parent.parent.tipsWindown("添加回访信息","iframe:customer/customerTraceInfo.action?customerId=" + $("#customerId_t").val(),"800","500","true","","true","no");
+				parent.parent.parent.tipsWindown("添加回访信息","iframe:customer/customerVisitInfo.action?customerId=" + $("#customerId_t").val(),"800","500","true","","true","no");
 				parent.parent.parent.$("#windown-close").bind('click',function(){
 					window.location.href= window.location.href;
 				});
 			});
 			$("#searchBtn").click(function(){
-				form1.action = "customerTraceList.action";
+				var validate_settings_submit = jQuery.extend({}, _customer_submit);
+               	var validator = $("form").validate(validate_settings_submit);
+               	if(!validator.form()){
+					return false;
+				}
+				form1.action = "customerVisitList.action";
 				form1.submit();
 		
 			});
@@ -125,7 +143,7 @@
   
   <body>
  <s:form id="form1" name="form1" method="post" theme="simple">
- <s:hidden id="customerId" name="customerTraceInfo.customerId"></s:hidden>
+ <s:hidden id="customerId" name="customerVisitInfo.customerId"></s:hidden>
  <s:hidden id="customerId_t" name="customerId"></s:hidden>
 <table width="100%" style="height:100%;" border="0" cellspacing="5" cellpadding="0">
   <tr>
@@ -146,7 +164,7 @@
 		<td align="center">查询结束日期：</td>
 		<td><s:textfield name="endDate" id="endDate" style="width: 100px"></s:textfield></td>
 		<td align="center">回访类型：</td>
-		<td style="width:120px"><s:select list="listTraceOption" listKey="id" listValue="name" value="visitOption" 
+		<td style="width:120px"><s:select list="listVisitOption" listKey="id" listValue="name" value="visitOption" 
 			id="visitOption" name="visitOption" cssStyle="width:150px" headerKey="" headerValue="--请选择回访类型--"></s:select></td>
 		<td style="width: 80px"><input type="button" style="width: 80px;" class="btn_4" id="searchBtn" value="快速查询" /></td>
 	</tr>
@@ -163,8 +181,8 @@
 			<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">业务进展</td>
 			<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">受访人</td>
 			<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">联系方式</td>
-			<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">兴趣度</td>
-			<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">异议点</td>
+			<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">了解内容及结果</td>
+			<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">备 注</td>
               <td align="center" background="../images/headerbg.jpg"><strong>操作</strong></td>
         </tr>
         <s:iterator value="pagination.data" status="obj">
@@ -175,14 +193,14 @@
             <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="visitTime"/></td>
             <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="customerName"/></td>
             <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="salesman"/></td>
-            <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="salesman"/></td>
+            <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="progress"/></td>
             <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="person.personName"/>
 			</td>
             <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="tel"/></td>
-            <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="interest"/></td>
-            <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="objection"/></td>
+            <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="contentResult"/></td>
+            <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="remark"/></td>
           <td height="26" colspan="2" align="center" bgcolor="#FFFFFF">
-          	<s:url id="edit_url" action="customer/customerTraceInfo.action">   
+          	<s:url id="edit_url" action="customer/customerVisitInfo.action">   
 				<s:param name="id" value="id"></s:param>   
 			</s:url>
 			<s:url id="delete_url" action="customer/deleteCustomerVisit.action">   

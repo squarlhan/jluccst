@@ -42,9 +42,22 @@
 	-->
 	</style>
 	<script type="text/javascript">
-	
+	var _customer_submit = {
+			rules: {
+				"beginDate":{dateISO:true},
+				"endDate":{dateISO:true}
+			}
+		};
 		$(function(){
-			
+			$.validator.setDefaults({
+				debug: false,onkeyup: false,onfocusout:false,focusCleanup: true,
+			    errorPlacement:function(error, element) {},
+				invalidHandler: function(form, validator) {
+		        	$.each(validator.invalid,function(key,value){
+		            	alert(value);document.getElementById(key).focus();return false;
+		        	}); 
+		    	}
+			})
 			$("#addbtn").click(function(){
 				parent.parent.parent.tipsWindown("添加跟进信息","iframe:customer/customerTraceInfo.action?customerId=" + $("#customerId_t").val(),"800","500","true","","true","no");
 				parent.parent.parent.$("#windown-close").bind('click',function(){
@@ -52,6 +65,11 @@
 				});
 			});
 			$("#searchBtn").click(function(){
+				var validate_settings_submit = jQuery.extend({}, _customer_submit);
+               	var validator = $("form").validate(validate_settings_submit);
+               	if(!validator.form()){
+					return false;
+				}
 				form1.action = "customerTraceList.action";
 				form1.submit();
 		
@@ -94,29 +112,7 @@
   				}
 	  		});
 	  		
-	  		
-	  		/*$("#beginDate").datepicker({
-                dateFormat: 'yy-mm-dd',
-                showOn: 'button',
-                changeMonth: true,
-                changeYear: true,
-                buttonText: "选择",
-                onClose: function () {
-                    $(this).focusin();
-                    $(this).focusout();
-                }
-            });
-            $("#endDate").datepicker({
-                dateFormat: 'yy-mm-dd',
-                showOn: 'button',
-                changeMonth: true,
-                changeYear: true,
-                buttonText: "选择",
-                onClose: function () {
-                    $(this).focusin();
-                    $(this).focusout();
-                }
-            });*/
+	  	
 		});
 	</script>
 
@@ -175,7 +171,7 @@
             <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="traceTime"/></td>
             <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="customerName"/></td>
             <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="salesman"/></td>
-            <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="salesman"/></td>
+            <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="progress"/></td>
             <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="person.personName"/>
 			</td>
             <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="tel"/></td>

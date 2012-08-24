@@ -42,8 +42,8 @@
 					"customerVisitInfo.qq":{strangecode:true},
 					"customerVisitInfo.email":{email:true},
 					"customerVisitInfo.task":{strangecode:true},
-					"customerVisitInfo.interest":{required:true},
-					"customerVisitInfo.objection":{required:true}
+					"customerVisitInfo.contentResult":{strangecode:true},
+					"customerVisitInfo.remark":{strangecode:true}
 				}
 			};
 			/**
@@ -97,7 +97,7 @@
 	               	if(!validator.form()){
 						return false;
 					}
-					form1.action = "customer/saveTraceInfo.action";
+					form1.action = "customer/saveVisitInfo.action";
 					form1.customerId.value  = form1.customerId_t.value;
 	               	form1.submit();
           		});
@@ -153,7 +153,7 @@
 		<td><s:select list="userList" listKey="id" listValue="userCName" value="customerVisitInfo.salesmanId" 
 			id="salesmanId" name="customerVisitInfo.salesmanId" cssStyle="width:150px" headerKey="" headerValue="--请选择--"></s:select></td>
 		<td align="center" nowrap>回访方式：</td>
-		<td style="width: 150px"><s:select list="listTraceOption" listKey="id" listValue="name" value="customerVisitInfo.visitOption" 
+		<td style="width: 150px"><s:select list="listVisitOption" listKey="id" listValue="name" value="customerVisitInfo.visitOption" 
 			id="visitOption" name="customerVisitInfo.visitOption" cssStyle="width:150px" headerKey="" headerValue="--请选择--"></s:select></td>
 	</tr>
 	<tr>
@@ -184,19 +184,19 @@
 	<tr>
 		<td></td>
 		<td rowspan="2"><table>
-			<tr><td align="center">兴趣点：</td></tr>
+			<tr><td align="center">了解内容及结果：</td></tr>
 			<tr><td style="color:white">占行：</td></tr></table></td>
 		<td rowspan="2"><table>
-			<tr><td><s:textarea type="text" style="width:550px;height:70px" name="customerVisitInfo.interest" id="interest"></s:textarea></td></tr></table></td>
+			<tr><td><s:textarea type="text" style="width:550px;height:70px" name="customerVisitInfo.contentResult" id="contentResult"></s:textarea></td></tr></table></td>
 	</tr>
 	<tr><td></td></tr>
 	<tr>
 		<td></td>
 		<td rowspan="2"><table>
-			<tr><td align="center">异议点：</td></tr>
+			<tr><td align="center">备 注：</td></tr>
 			<tr><td style="color:white">占行</td></tr></table></td>
 		<td rowspan="2"><table>
-			<tr><td><s:textarea type="text" style="width:550px;height:70px" name="customerVisitInfo.objection" id="objection"></s:textarea></td></tr></table></td>
+			<tr><td><s:textarea type="text" style="width:550px;height:70px" name="customerVisitInfo.remark" id="remark"></s:textarea></td></tr></table></td>
 	</tr>
 	<tr><td></td></tr>
 </table></td></tr>
