@@ -42,8 +42,8 @@
 					"customerTraceInfo.qq":{strangecode:true},
 					"customerTraceInfo.email":{email:true},
 					"customerTraceInfo.task":{strangecode:true},
-					"customerTraceInfo.interest":{required:true},
-					"customerTraceInfo.objection":{required:true}
+					"customerTraceInfo.interest":{strangecode:true},
+					"customerTraceInfo.objection":{strangecode:true}
 				}
 			};
 			/**
