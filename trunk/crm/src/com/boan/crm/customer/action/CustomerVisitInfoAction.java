@@ -61,6 +61,7 @@ public class CustomerVisitInfoAction extends BaseActionSupport{
 	private String[] ids = null;
 	private Pagination<CustomerVisitInfo> pagination = new Pagination<CustomerVisitInfo>();
 	private List<DataDictionary> listVisitOption = null;
+	
 	private List<ContractPersonInfo> listPerson = null;
 	
 	private String salesmanId = "";
@@ -69,7 +70,6 @@ public class CustomerVisitInfoAction extends BaseActionSupport{
 	private Calendar beginDate;
 	private Calendar endDate;
 	private String visitOption = "";
-	
 	/**
 	 * 客户跟进信息列表
 	 * @return String
@@ -224,5 +224,108 @@ public class CustomerVisitInfoAction extends BaseActionSupport{
 	{
 		customerVisitInfoService.deleteCustomerVisitInfo(ids);
 		return NONE;
+	}
+	public CustomerVisitInfo getCustomerVisitInfo() {
+		return customerVisitInfo;
+	}
+
+	public void setCustomerVisitInfo(CustomerVisitInfo customerVisitInfo) {
+		this.customerVisitInfo = customerVisitInfo;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getCustomerId() {
+		return customerId;
+	}
+
+	public void setCustomerId(String customerId) {
+		this.customerId = customerId;
+	}
+
+	public String[] getIds() {
+		return ids;
+	}
+
+	public void setIds(String[] ids) {
+		this.ids = ids;
+	}
+
+	public Pagination<CustomerVisitInfo> getPagination() {
+		return pagination;
+	}
+
+	public void setPagination(Pagination<CustomerVisitInfo> pagination) {
+		this.pagination = pagination;
+	}
+
+	public List<DataDictionary> getListVisitOption() {
+		return listVisitOption;
+	}
+
+	public void setListVisitOption(List<DataDictionary> listVisitOption) {
+		this.listVisitOption = listVisitOption;
+	}
+
+	public List<ContractPersonInfo> getListPerson() {
+		return listPerson;
+	}
+
+	public void setListPerson(List<ContractPersonInfo> listPerson) {
+		this.listPerson = listPerson;
+	}
+
+	public String getSalesmanId() {
+		return salesmanId;
+	}
+
+	public void setSalesmanId(String salesmanId) {
+		this.salesmanId = salesmanId;
+	}
+
+	public List<User> getUserList() {
+		return userList;
+	}
+
+	public void setUserList(List<User> userList) {
+		this.userList = userList;
+	}
+
+	public String getCustomerName() {
+		return customerName;
+	}
+
+	public void setCustomerName(String customerName) {
+		this.customerName = customerName;
+	}
+
+	public Calendar getBeginDate() {
+		return beginDate;
+	}
+
+	public void setBeginDate(Calendar beginDate) {
+		this.beginDate = beginDate;
+	}
+
+	public Calendar getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(Calendar endDate) {
+		this.endDate = endDate;
+	}
+
+	public String getVisitOption() {
+		return visitOption;
+	}
+
+	public void setVisitOption(String visitOption) {
+		this.visitOption = visitOption;
 	}
 }

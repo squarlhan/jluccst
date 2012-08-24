@@ -46,6 +46,8 @@ public class CustomerTraceInfo implements Serializable
 	private String qq = "";
 	@Column(name = "email" , length = 50)
 	private String email = "";
+	@Transient
+	private String progress = "";
 	
 	@Transient
 	private String salesman = "";
@@ -161,5 +163,11 @@ public class CustomerTraceInfo implements Serializable
 	}
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	public String getProgress() {
+		return progress;
+	}
+	public void setProgress(String progress) {
+		this.progress = progress;
 	}
 }

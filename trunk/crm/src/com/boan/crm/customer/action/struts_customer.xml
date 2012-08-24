@@ -64,12 +64,12 @@
     	</action>
     	
     	<action name="customerVisitList" class="customerVisitInfoAction" method="customerVisitList">
-			<result name="success">/customer/customertrace_list.jsp</result>
-			<result name="input">/customer/customertrace_list.jsp</result>
+			<result name="success">/customer/customervisit_list.jsp</result>
+			<result name="input">/customer/customervisit_list.jsp</result>
 		</action>
 		<action name="customerVisitInfo" class="customerVisitInfoAction" method="customerVisitInfo">
-			<result name="success">/customer/customertrace_info.jsp</result>
-			<result name="input">/customer/customertrace_info.jsp</result>
+			<result name="success">/customer/customervisit_info.jsp</result>
+			<result name="input">/customer/customervisit_info.jsp</result>
 		</action>
 		<action name="saveVisitInfo" class="customerVisitInfoAction" method="saveVisitInfo">
 			<result name="success" type="chain">

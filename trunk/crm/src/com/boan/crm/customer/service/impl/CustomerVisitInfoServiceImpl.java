@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.boan.crm.customer.dao.ICustomerInfoDAO;
 import com.boan.crm.customer.dao.ICustomerVisitInfoDAO;
+import com.boan.crm.customer.model.CustomerInfo;
 import com.boan.crm.customer.model.CustomerVisitInfo;
 import com.boan.crm.customer.service.IContractPersonService;
 import com.boan.crm.customer.service.ICustomerVisitInfoService;
@@ -58,7 +59,7 @@ public class CustomerVisitInfoServiceImpl implements ICustomerVisitInfoService{
 	public Pagination<CustomerVisitInfo> findCustomerVisitInfoForPage(
 			Map<String, ?> values, Pagination<CustomerVisitInfo> pagination) {
 		StringBuilder hql = new StringBuilder();
-		hql.append( "from CustomerTraceInfo where 1=1");
+		hql.append( "from CustomerVisitInfo where 1=1");
 		if(values.get("customerId") != null)
 		{
 			hql.append(" and customerId = :customerId ");
@@ -84,7 +85,7 @@ public class CustomerVisitInfoServiceImpl implements ICustomerVisitInfoService{
 			hql.append(" and visitTime <= :endDate ");
 		}
 		
-		hql.append(" order by traceTime asc");
+		hql.append(" order by visitTime asc");
 		List<CustomerVisitInfo> data = customerVisitInfoDao.findForPage(hql.toString(), values, pagination.getStartIndex(), pagination.getPageSize());
 		hql.delete(0, hql.length());
 		hql.append(" select count(*) from CustomerVisitInfo where 1=1 " );
@@ -106,11 +107,11 @@ public class CustomerVisitInfoServiceImpl implements ICustomerVisitInfoService{
 		}
 		if(values.get("beginDate") != null)
 		{
-			hql.append(" and traceTime >= :beginDate ");
+			hql.append(" and visitTime >= :beginDate ");
 		}
 		if(values.get("endDate") != null)
 		{
-			hql.append(" and traceTime <= :endDate ");
+			hql.append(" and visitTime <= :endDate ");
 		}
 		int totalRows = customerVisitInfoDao.findCountForPage(hql.toString(), values);
 		pagination.setTotalRows(totalRows);
@@ -124,9 +125,11 @@ public class CustomerVisitInfoServiceImpl implements ICustomerVisitInfoService{
 				CustomerVisitInfo customerVisitInfo = list.get(i);
 				try
 				{
-					customerVisitInfo.setCustomerName(customerInfoDao.get(customerVisitInfo.getCustomerId()).getCustomerName());
+					CustomerInfo customer = customerInfoDao.get(customerVisitInfo.getCustomerId());
+					customerVisitInfo.setCustomerName(customer.getCustomerName());
 					customerVisitInfo.setSalesman(userService.getUserById(customerVisitInfo.getSalesmanId()).getUserCName());
 					customerVisitInfo.setPerson(contractPersonService.get(customerVisitInfo.getVisitPersonId()));
+					customerVisitInfo.setProgress(customer.getProgressId());
 				}catch(Exception e)
 				{
 					e.printStackTrace();
