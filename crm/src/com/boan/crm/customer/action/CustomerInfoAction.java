@@ -3,6 +3,9 @@
  */
 package com.boan.crm.customer.action;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -12,6 +15,11 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
@@ -32,7 +40,10 @@ import com.boan.crm.groupmanage.model.User;
 import com.boan.crm.groupmanage.service.IPopedomService;
 import com.boan.crm.groupmanage.service.IUserService;
 import com.boan.crm.utils.action.BaseActionSupport;
+import com.boan.crm.utils.io.impl.FileCopyAndDeleteUtilsAdaptor;
 import com.boan.crm.utils.page.Pagination;
+import com.boan.crm.utils.path.PathUtil;
+import com.boan.crm.utils.uuid.MyUUIDGenerator;
 
 /**
  * @author luojx
@@ -53,16 +64,10 @@ public class CustomerInfoAction extends BaseActionSupport{
 	//客户状态接口类
 	private ICustomerInfoService customerInfoService;
 	
-	/**
-	 * 权限接口
-	 */
 	@Autowired
 	@Qualifier("dataDictionaryService")
 	private IDataDictionaryService dataDictionaryService = null;
 	
-	/**
-	 * 权限接口
-	 */
 	@Autowired
 	@Qualifier("areaService")
 	private IAreaService areaService = null;
@@ -95,8 +100,13 @@ public class CustomerInfoAction extends BaseActionSupport{
 	private String customerCategory = "";
 	private String salesmanId = "";
 	private List<User> userList = null;
-	
-	
+	private int iSearchMaxRecord = 10;
+	private File uploadFile;
+	private String uploadFileContentType = null;
+	/**
+	 * 上传导入文件的名称
+	 */
+	private String uploadFileFileName = null;
 	/**
 	 * 客户列表
 	 * @return String
@@ -133,9 +143,20 @@ public class CustomerInfoAction extends BaseActionSupport{
 		
 		values.put("companyId", sessionCompanyId);
 		
-		
 		pagination = customerInfoService.findCustomerInfoForPage(values, pagination);
 		return SUCCESS;
+	}
+	public String getUploadFileContentType() {
+		return uploadFileContentType;
+	}
+	public void setUploadFileContentType(String uploadFileContentType) {
+		this.uploadFileContentType = uploadFileContentType;
+	}
+	public String getUploadFileFileName() {
+		return uploadFileFileName;
+	}
+	public void setUploadFileFileName(String uploadFileFileName) {
+		this.uploadFileFileName = uploadFileFileName;
 	}
 	public List<User> getUserList() {
 		return userList;
@@ -143,6 +164,210 @@ public class CustomerInfoAction extends BaseActionSupport{
 	public void setUserList(List<User> userList) {
 		this.userList = userList;
 	}
+	
+	public String getCustomerByName()
+	{
+		Map<String,String> values = new HashMap<String,String>();
+		
+		if(customerName != null && customerName.length() > 0)
+		{
+			values.put("customerName", "%"+customerName+"%");
+		}
+		
+		values.put("companyId", sessionCompanyId);
+		
+		pagination.setPageSize(iSearchMaxRecord);
+		pagination = customerInfoService.findCustomerInfoForPage(values, pagination);
+		return SUCCESS;
+	}
+	
+	public String importCustomer()
+	{
+		return SUCCESS;
+	}
+	
+	public String importCustomerSave()
+	{
+		if(uploadFile != null)
+		{
+			try
+			{
+				String baseDirectory = PathUtil.getInstance().getWebRoot()+"uploadfiles/importcustomer/";
+				String extendName = null;
+				if( StringUtils.isNotBlank( uploadFileFileName ) && uploadFileFileName.lastIndexOf( "." ) != -1 )
+					extendName = uploadFileFileName.substring( uploadFileFileName.lastIndexOf("."), uploadFileFileName.length() );
+				File newFile = new File(baseDirectory);
+				if( !newFile.exists() )
+					newFile.mkdirs();
+				
+				String fileStorePath = MyUUIDGenerator.getInstance().generate().toString() + extendName;
+				FileCopyAndDeleteUtilsAdaptor fileUtils = new FileCopyAndDeleteUtilsAdaptor();
+				fileUtils.copySimpleFile( uploadFile, new File( baseDirectory, fileStorePath ), 1024 );
+				
+				Workbook wb = null;
+				InputStream is = null;
+				Sheet sheet = null;
+				try
+				{
+					is = new FileInputStream( new File( baseDirectory + fileStorePath ) );
+//					is = new FileInputStream( new File( grantsRecordMeta.getImportFileStorePath() ) );
+					wb = WorkbookFactory.create( is );
+					is.close();
+					
+					sheet = wb.getSheetAt( 0 );
+					int totalRecord = ( sheet.getLastRowNum() + 1 ) - 1;
+					if( totalRecord == 0 )
+					{
+						
+					}else
+					{
+						for( int i = 1; i < totalRecord + 1; i++ )
+						{
+							Row row = sheet.getRow( i );
+							try
+							{
+								if( row != null )
+								{
+									Cell customerNameCell = row.getCell( 0 );
+									Cell customerTelCell = row.getCell( 1 );
+									Cell customerFaxCell = row.getCell( 2 );
+									Cell customerPhoneCell = row.getCell( 3 );
+									Cell customerContractPersonNameCell = row.getCell( 4 );
+									Cell customerContractDeptCell = row.getCell( 5 );
+									Cell customerAddressCell = row.getCell( 6 );
+									Cell customerPostCodeCell = row.getCell( 7 );
+									Cell customerEmailCell = row.getCell( 8 );
+									Cell customerMainIndustryCell = row.getCell( 9 );
+									String customerName = "";
+									String customerTel = "";
+									String customerFax = "";
+									String customerPhone = "";
+									String customerContractPersonName = "";
+									String customerContractDept = "";
+									String customerAddress = "";
+									String customerPostCode = "";
+									String customerEmail = "";
+									String customerMainIndustry = "";
+									if( customerNameCell != null )
+									{
+										customerName = customerNameCell.getStringCellValue() ;
+									}
+									if( customerTelCell != null )
+									{
+										customerTel = customerTelCell.getStringCellValue() ;
+									}
+									if( customerFaxCell != null )
+									{
+										customerFax = customerFaxCell.getStringCellValue() ;
+									}
+									if( customerPhoneCell != null )
+									{
+										customerPhone = customerPhoneCell.getStringCellValue() ;
+									}
+									if( customerContractPersonNameCell != null )
+									{
+										customerContractPersonName = customerContractPersonNameCell.getStringCellValue() ;
+									}
+									if( customerContractDeptCell != null )
+									{
+										customerContractDept = customerContractDeptCell.getStringCellValue() ;
+									}
+									if( customerAddressCell != null )
+									{
+										customerAddress = customerAddressCell.getStringCellValue() ;
+									}
+									if( customerPostCodeCell != null )
+									{
+										customerPostCode = customerPostCodeCell.getStringCellValue() ;
+									}
+									if( customerEmailCell != null )
+									{
+										customerEmail = customerEmailCell.getStringCellValue() ;
+									}
+									if( customerMainIndustryCell != null )
+									{
+										customerMainIndustry = customerMainIndustryCell.getStringCellValue() ;
+									}
+									
+									
+									CustomerInfo customer = new CustomerInfo();
+									if(customerName.length() > 255)
+									{
+										customerName = customerName.substring(0,254);
+									}
+									customer.setCustomerName(customerName);
+									customer.setAddress(customerAddress);
+									customer.setMainIndustry(customerMainIndustry);
+									customer.setFax(customerFax);
+									customer.setPostCode(customerPostCode);
+									customer.setCreateTime(Calendar.getInstance());
+									customer.setCompanyId( sessionCompanyId );
+									customer.setCompanyFullName(customerName);
+
+									String customerAddressTemp = customerAddress.replaceAll("-", " ");
+									customerAddressTemp = customerAddressTemp.replaceAll("市", "市 ");
+									customerAddressTemp = customerAddressTemp.replaceAll("区", "区 ");
+									customerAddressTemp = customerAddressTemp.replaceAll("  ", " ");
+									String[] customerAddressArray = customerAddressTemp.split(" ");
+									for(int kk=0;kk<customerAddressArray.length - 1;kk++)
+									{
+										if(!customerAddressArray[kk].equals("中国"))
+										{
+											ProvinceInfo province = areaService.getProvinceByName(customerAddressArray[kk]);
+											if(province != null)
+											{
+												customer.setProvince(province.getId());
+												continue;
+											}
+											
+											CityInfo city = areaService.getCityByName(customerAddressArray[kk]);
+											if(city != null)
+											{
+												customer.setCity(city.getId());
+												continue;
+											}
+											
+											AreaInfo area = areaService.getAreaByName(customerAddressArray[kk]);
+											if(area != null)
+											{
+												customer.setDistrict(area.getId());
+												continue;
+											}
+										}
+									}
+									
+									customerInfoService.save(customer);
+									
+									ContractPersonInfo contractPerson = new ContractPersonInfo();
+									contractPerson.setCustomerId(customer.getId());
+									contractPerson.setPersonName(customerContractPersonName);
+									contractPerson.setTel(customerTel);
+									contractPerson.setPhone(customerPhone);
+									contractPerson.setDeptOrDuty(customerContractDept);
+									contractPerson.setEmail(customerEmail);
+
+									contractpersonInfoService.save(contractPerson);
+									
+									
+								}
+							}catch(Exception ex)
+							{}
+						}
+					}
+				}
+				catch( Exception ex )
+				{
+					
+				}
+				
+			}catch(Exception ex)
+			{
+				
+			}
+		}
+		return SUCCESS;
+	}
+	
 	/**
 	 * 客户信息
 	 * @return String
@@ -395,5 +620,17 @@ public class CustomerInfoAction extends BaseActionSupport{
 	}
 	public void setSalesmanId(String salesmanId) {
 		this.salesmanId = salesmanId;
+	}
+	public int getiSearchMaxRecord() {
+		return iSearchMaxRecord;
+	}
+	public void setiSearchMaxRecord(int iSearchMaxRecord) {
+		this.iSearchMaxRecord = iSearchMaxRecord;
+	}
+	public File getUploadFile() {
+		return uploadFile;
+	}
+	public void setUploadFile(File uploadFile) {
+		this.uploadFile = uploadFile;
 	}
 }

@@ -13,6 +13,28 @@
 			<result name="success">/customer/customer_info.jsp</result>
 			<result name="input">/customer/customer_info.jsp</result>
 		</action>
+		<action name="importCustomer" class="customerInfoAction" method="importCustomer">
+			<result name="success">/customer/importcustomer.jsp</result>
+			<result name="input">/customer/importcustomer.jsp</result>
+		</action>
+		<action name="importCustomerSave" class="customerInfoAction" method="importCustomerSave">
+			<interceptor-ref name="defaultStack">
+				<param name="fileUpload.maximumSize">524288000</param>
+				<param name="fileUpload.allowedTypes">
+					application/octet-stream,application/msexcel,application/vnd.ms-excel
+					,application/excel,application/x-excel
+					,vnd.ms-excel.addin.macroEnabled.12
+					,vnd.ms-excel.sheet.binary.macroEnabled.12
+					,vnd.ms-excel.sheet.macroEnabled.12
+					,vnd.ms-excel.template.macroEnabled.12
+				</param>
+			</interceptor-ref>
+			<result name="success">/customer/importcustomer.jsp</result>
+			<result name="input">/customer/importcustomer.jsp</result>
+		</action>
+		<action name="getCustomerByName" class="customerInfoAction" method="getCustomerByName">
+			<result name="success">/customer/getcustomerinfoservice.jsp</result>
+		</action>
 		<action name="customerTabInfo" class="customerInfoAction" method="customerTabInfo">
 			<result name="success">/customer/customertabinfo.jsp</result>
 		</action>
@@ -46,6 +68,14 @@
     	<action name="deletePersonInfo" class="contractPersonInfoAction" method="deletePersonInfo">
     		
     	</action>
+    	<action name="allCustomerTraceList" class="customerTraceInfoAction" method="customerTraceList">
+			<result name="success">/customer/allcustomertrace_list.jsp</result>
+			<result name="input">/customer/allcustomertrace_list.jsp</result>
+		</action>
+		<action name="allCustomerTraceInfo" class="customerTraceInfoAction" method="customerTraceInfo">
+			<result name="success">/customer/allcustomertrace_info.jsp</result>
+			<result name="input">/customer/allcustomertrace_info.jsp</result>
+		</action>
     	<action name="customerTraceList" class="customerTraceInfoAction" method="customerTraceList">
 			<result name="success">/customer/customertrace_list.jsp</result>
 			<result name="input">/customer/customertrace_list.jsp</result>
