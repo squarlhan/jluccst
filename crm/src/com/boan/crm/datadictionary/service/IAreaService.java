@@ -37,6 +37,13 @@ public interface IAreaService {
 	public CityInfo getCity(String cityId);
 	
 	public AreaInfo getArea(String areaId);
+	
+	public ProvinceInfo getProvinceByName(String name);
+	
+	public CityInfo getCityByName(String name);
+	
+	public AreaInfo getAreaByName(String name);
+	
 	/**
 	 * 根据id删除数据字典
 	 */

@@ -46,6 +46,42 @@ public class AreaServiceImpl implements IAreaService{
 		areaInfoDao.delete(ids);
 	}
 	@Override
+	public ProvinceInfo getProvinceByName(String name)
+	{
+		Map<String, String> values = new HashMap<String, String>();
+		values.put("provinceName", "%"+name+"%");
+		List<ProvinceInfo> list =  provinceInfoDao.find("from ProvinceInfo where provinceName like :provinceName", values);
+		if(list != null && list.size() > 0)
+		{
+			return list.get(0);
+		}
+		return null;
+	}
+	@Override
+	public CityInfo getCityByName(String name)
+	{
+		Map<String, String> values = new HashMap<String, String>();
+		values.put("cityName", "%"+name+"%");
+		List<CityInfo> list =  provinceInfoDao.find("from CityInfo where cityName like :cityName", values);
+		if(list != null && list.size() > 0)
+		{
+			return list.get(0);
+		}
+		return null;
+	}
+	@Override
+	public AreaInfo getAreaByName(String name)
+	{
+		Map<String, String> values = new HashMap<String, String>();
+		values.put("areaName", "%"+name+"%");
+		List<AreaInfo> list =  provinceInfoDao.find("from AreaInfo where areaName like :areaName", values);
+		if(list != null && list.size() > 0)
+		{
+			return list.get(0);
+		}
+		return null;
+	}
+	@Override
 	public List<ProvinceInfo> findAllProvinceInfo() {
 		return provinceInfoDao.find("from ProvinceInfo order by sortIndex asc", new Object[0]);
 	}
