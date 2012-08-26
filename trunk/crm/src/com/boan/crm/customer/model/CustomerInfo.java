@@ -87,6 +87,15 @@ public class CustomerInfo implements Serializable
 	private List<ContractPersonInfo> contractPersonList = null;
 	@Column(name = "MAININDUSTRY")
 	private String mainIndustry = null;
+	@Column(name = "POSTCODE")
+	private String postCode = null;
+	
+	public String getPostCode() {
+		return postCode;
+	}
+	public void setPostCode(String postCode) {
+		this.postCode = postCode;
+	}
 	public String getMainIndustry() {
 		return mainIndustry;
 	}
