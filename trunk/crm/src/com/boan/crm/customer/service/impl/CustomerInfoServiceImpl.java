@@ -14,8 +14,10 @@ import com.boan.crm.customer.dao.ICustomerInfoDAO;
 import com.boan.crm.customer.model.CustomerInfo;
 import com.boan.crm.customer.service.IContractPersonService;
 import com.boan.crm.customer.service.ICustomerInfoService;
+import com.boan.crm.datadictionary.model.DataDictionary;
 import com.boan.crm.datadictionary.service.IAreaService;
 import com.boan.crm.datadictionary.service.IDataDictionaryService;
+import com.boan.crm.groupmanage.model.User;
 import com.boan.crm.groupmanage.service.IUserService;
 import com.boan.crm.utils.page.Pagination;
 
@@ -117,12 +119,30 @@ public class CustomerInfoServiceImpl implements ICustomerInfoService{
 			for(int i=0;i< list.size();i++)
 			{
 				CustomerInfo customerInfo = list.get(i);
-				customerInfo.setCategory(dataDictionaryService.get(customerInfo.getCategoryId()).getName());
-				customerInfo.setMaturity(dataDictionaryService.get(customerInfo.getMaturityId()).getName());
-				customerInfo.setSource(dataDictionaryService.get(customerInfo.getSourceId()).getName());
+				DataDictionary d1 = dataDictionaryService.get(customerInfo.getCategoryId());
+				if(d1 != null)
+				{
+					customerInfo.setCategory(d1.getName());
+				}
+				
+				d1 = dataDictionaryService.get(customerInfo.getMaturityId());
+				if(d1 != null)
+				{
+					customerInfo.setMaturity(d1.getName());
+				}
+				d1 = dataDictionaryService.get(customerInfo.getSourceId());
+				if(d1 != null)
+				{
+					customerInfo.setSource(d1.getName());
+				}
+				
 				try
 				{
-					customerInfo.setSalesman(userService.getUserById(customerInfo.getSalesmanId()).getUserCName());
+					User salesman = userService.getUserById(customerInfo.getSalesmanId());
+					if(salesman != null)
+					{
+						customerInfo.setSalesman(salesman.getUserCName());
+					}
 				}catch(Exception e)
 				{
 					e.printStackTrace();
