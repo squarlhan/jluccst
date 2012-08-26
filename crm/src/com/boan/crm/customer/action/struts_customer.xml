@@ -22,6 +22,7 @@
 				<param name="fileUpload.maximumSize">524288000</param>
 				<param name="fileUpload.allowedTypes">
 					application/octet-stream,application/msexcel,application/vnd.ms-excel
+					,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
 					,application/excel,application/x-excel
 					,vnd.ms-excel.addin.macroEnabled.12
 					,vnd.ms-excel.sheet.binary.macroEnabled.12
