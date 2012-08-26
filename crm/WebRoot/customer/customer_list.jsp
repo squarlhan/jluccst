@@ -53,6 +53,15 @@
 				window.parent.location.href = "customerTabInfo.action";
 		
 			});
+			$("#importbtn").click(function(){
+				parent.parent.tipsWindown("导入客户信息","iframe:customer/importcustomer.jsp","460","200","true","","true","no");
+				parent.parent.$("#windown-close").bind('click',function(){
+					window.location.href="./customerList.action";
+				});
+				//window.parent.location.href = "customerTabInfo.action";
+		
+			});
+			
 			$("#searchBtn").click(function(){
 				/*parent.parent.tipsWindown("添加客户信息","iframe:openAddCompanyAction.action","460","200","true","","true","no");
 				parent.parent.$("#windown-close").bind('click',function(){
@@ -117,6 +126,7 @@
         <td>
        		<input name="addbtn" type="button" class="btn_4" id="addbtn" value="添加客户" >
             <input name="deletepointbtn" type="button" class="btn_4" id="deletepointbtn" value="删除所选">
+            <input name="importbtn" type="button" class="btn_4" id="importbtn" value="导入客户" >
         <td align="right"></td>
       </tr>
       
