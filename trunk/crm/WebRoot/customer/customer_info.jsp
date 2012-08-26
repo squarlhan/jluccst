@@ -303,7 +303,10 @@
 	<tr>
 		<td></td>
 		<td align="center">主营行业：</td>
-		<td><s:textfield type="text" style="width:410px" name="customerInfo.mainIndustry" id="mainIndustry"></s:textfield></td></tr>
+		<td><s:textfield type="text" style="width:410px" name="customerInfo.mainIndustry" id="mainIndustry"></s:textfield></td>
+		<td align="center">邮　　编：</td>
+		<td><s:textfield type="text" style="width:395px" name="customerInfo.postCode" id="postCode"></s:textfield></td>
+		</tr>
 		</table>
 		</td></tr>
 </table></fieldset></td></tr>
