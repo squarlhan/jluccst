@@ -304,6 +304,8 @@ public class CustomerInfoAction extends BaseActionSupport{
 									customer.setPostCode(customerPostCode);
 									customer.setCreateTime(Calendar.getInstance());
 									customer.setCompanyId( sessionCompanyId );
+									customer.setCreatorId(sessionUserId);
+									
 									customer.setCompanyFullName(customerName);
 
 									String customerAddressTemp = customerAddress.replaceAll("-", " ");
@@ -514,7 +516,7 @@ public class CustomerInfoAction extends BaseActionSupport{
 		obj.setSalesman(customerInfo.getSalesman());
 		obj.setSourceId(customerInfo.getSourceId());
 		obj.setMainIndustry(customerInfo.getMainIndustry());
-		
+		obj.setPostCode(customerInfo.getPostCode());
 		customerInfoService.save(obj);
 		id = obj.getId();
 		return SUCCESS;
