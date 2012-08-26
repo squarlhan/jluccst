@@ -33,7 +33,7 @@ public class CustomerInfo implements Serializable
 	@GenericGenerator(name = "system-uuid", strategy = "uuid")
 	@GeneratedValue(generator = "system-uuid")
 	private String id;
-	@Column(name = "CUSTOMER_NAME" , length = 50)
+	@Column(name = "CUSTOMER_NAME" , length = 255)
 	private String customerName = "";
 	@Column(name = "COMPANY_FULL_NAME" , length = 255)
 	private String companyFullName = "";
