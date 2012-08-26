@@ -103,6 +103,8 @@ public class CustomerInfoAction extends BaseActionSupport{
 	private int iSearchMaxRecord = 10;
 	private File uploadFile;
 	private String uploadFileContentType = null;
+	private String message = "";
+	
 	/**
 	 * 上传导入文件的名称
 	 */
@@ -309,24 +311,32 @@ public class CustomerInfoAction extends BaseActionSupport{
 									customerAddressTemp = customerAddressTemp.replaceAll("区", "区 ");
 									customerAddressTemp = customerAddressTemp.replaceAll("  ", " ");
 									String[] customerAddressArray = customerAddressTemp.split(" ");
+									boolean bProvinceFlag = false;
+									boolean bCityFlag = false;
 									for(int kk=0;kk<customerAddressArray.length - 1;kk++)
 									{
 										if(!customerAddressArray[kk].equals("中国"))
 										{
-											ProvinceInfo province = areaService.getProvinceByName(customerAddressArray[kk]);
-											if(province != null)
+											if(!bProvinceFlag)
 											{
-												customer.setProvince(province.getId());
-												continue;
+												ProvinceInfo province = areaService.getProvinceByName(customerAddressArray[kk]);
+												if(province != null)
+												{
+													customer.setProvince(province.getId());
+													bProvinceFlag = true;
+													continue;
+												}
 											}
-											
-											CityInfo city = areaService.getCityByName(customerAddressArray[kk]);
-											if(city != null)
+											if(!bCityFlag)
 											{
-												customer.setCity(city.getId());
-												continue;
+												CityInfo city = areaService.getCityByName(customerAddressArray[kk]);
+												if(city != null)
+												{
+													customer.setCity(city.getId());
+													bCityFlag = true;
+													continue;
+												}
 											}
-											
 											AreaInfo area = areaService.getAreaByName(customerAddressArray[kk]);
 											if(area != null)
 											{
@@ -365,6 +375,7 @@ public class CustomerInfoAction extends BaseActionSupport{
 				
 			}
 		}
+		message = "保存成功！";
 		return SUCCESS;
 	}
 	
@@ -632,5 +643,11 @@ public class CustomerInfoAction extends BaseActionSupport{
 	}
 	public void setUploadFile(File uploadFile) {
 		this.uploadFile = uploadFile;
+	}
+	public String getMessage() {
+		return message;
+	}
+	public void setMessage(String message) {
+		this.message = message;
 	}
 }
