@@ -52,41 +52,54 @@
 				}
 			};
 			$(function() {
-				$( "#customerName" ).autocomplete({
-					source: function( request, response ) {
-					$.ajax({
-						url: "customer/getCustomerByName.action",
-						dataType: "jsonp",
-						data: {
-							customerName: $( "#customerName" ).val(),
-							iSearchMaxRecord: 12,
-							name_startsWith: request.term
-						},
-						success: function( data ) {
-							alert(data);
-							response( $.map( data.customernames, function( item ) {
-								return {
-									label: item.id + (item.customerName ? ", " + item.contractPerson : "") + ", " + item.phone,
-									value: item.id
-								}
-							}));
-						}
-					});
-				},
-				minLength: 2,
-				select: function( event, ui ) {
-				//	log( ui.item ?
-				//		"Selected: " + ui.item.label :
-				//		"Nothing selected, input was " + this.value);
-				},
-				open: function() {
-					$( this ).removeClass( "ui-corner-all" ).addClass( "ui-corner-top" );
-				},
-				close: function() {
-					$( this ).removeClass( "ui-corner-top" ).addClass( "ui-corner-all" );
-				}
+				$("#customerName").keydown(function() {
+					if($("#customerName").val().length > 2)
+					{
+						$.ajax({
+		                    url:"<%=basePath%>customer/getCustomerByName.action?customerName=" + $( "#customerName" ).val(),
+		                    type: 'POST',
+		                    dataType: 'JSON',
+		                    timeout: 5000,
+		                    error: function() { alert('Error loading data!'); },
+		                    success: function(msg) {
+		                    	var datas = eval('(' + msg + ')');
+		                    	$("#customerName").autocomplete(datas, {
+		                    		 formatItem: function (row, i, max) {
+		                    			 alert("aaaa");
+				                         return "<table width='400px'><tr><td align='left'>" + row.key + "</td><td align='right'><font style='color: #009933; font-family: 黑体; font-style: italic'>" + row.values + "</font>&nbsp;&nbsp;</td></tr></table>";
+				                     },
+				                    formatMatch: function(row, i, max){
+				                    	alert("bbbb");
+				                      return row.key;
+		                    	 }
+		                    	 });
+		                    }
+		                });
+					 	/*$.ajax({
+				            type: "POST",
+				            contentType: "application/json",
+				            url: "customer/getCustomerByName.action",
+				            data: {
+								customerName: $( "#customerName" ).val(),
+								iSearchMaxRecord: 12
+							},
+				             dataType: "json",
+				             success: function (msg) {
+				            	alert(msg);
+				                var datas = eval('(' + msg.root + ')');
+				                $("#customerName").autocomplete(datas, {
+				                    formatItem: function (row, i, max) {
+				                         return "<table width='400px'><tr><td align='left'>" + row.Key + "</td><td align='right'><font style='color: #009933; font-family: 黑体; font-style: italic'>约" + row.Value + "个宝贝</font>&nbsp;&nbsp;</td></tr></table>";
+				                     },
+				                    formatMatch: function(row, i, max){
+				                      return row.Key;
+				                  }
+				              });
+				           }
+				       });*/
+					}
 				});
-			
+
 				$.validator.setDefaults({
 					debug: false,onkeyup: false,onfocusout:false,focusCleanup: true,
 				    errorPlacement:function(error, element) {},
