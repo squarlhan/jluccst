@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<!--  销售记录管理Action -->
+	<package name="sell_record" extends="struts-default" namespace="/">
+		<action name="openSellRecordListAction" class="sellRecordAction" method="openSellRecordList">
+			<result name="success">/sellrecord/sellrecordlist.jsp</result>
+			<result name="input">/sellrecord/sellrecordlist.jsp</result>
+		</action>
+		<action name="openAddSellRecordAction" class="sellRecordAction" method="openAddSellRecord">
+			<result name="success">/sellrecord/sellrecordinfo.jsp</result>
+			<result name="input">/sellrecord/sellrecordinfo.jsp</result>
+		</action>
+		<action name="openModifySellRecordAction" class="sellRecordAction" method="openModifySellRecord">
+			<result name="success">/sellrecord/sellrecordinfo.jsp</result>
+			<result name="input">/sellrecord/sellrecordinfo.jsp</result>
+		</action>
+		<action name="modifySellRecordAction" class="sellRecordAction" method="modifySellRecord">
+			<result name="success">/sellrecord/sellrecordinfo.jsp</result>
+			<result name="input">/sellrecord/sellrecordinfo.jsp</result>
+		</action>
+		<action name="deleteSellRecordAction" class="sellRecordAction" method="deleteSellRecord"/>
+		
+		<action name="openAddSellRecordDetialAction" class="sellRecordAction" method="openAddSellRecordDetial">
+			<result name="success">/sellrecord/sellrecorddetial.jsp</result>
+			<result name="input">/sellrecord/sellrecorddetial.jsp</result>
+		</action>
+	</package>
+	<package name="sellRecordAjax" extends="json-default" namespace="/">
+		<action name="addSellRecordAction" class="sellRecordAction" method="addSellRecord">
+            <result type="json" name="message">message</result>
+        </action>
+	</package>
+</struts>
