@@ -75,6 +75,7 @@ public class SellRecordAction extends BaseActionSupport{
 		return SUCCESS;
 	}
 	public String openModifySellRecord(){
+		sellRecord = sellRecordService.getSellRecordById(sellRecord.getId());
 		return SUCCESS;
 	}
 	
