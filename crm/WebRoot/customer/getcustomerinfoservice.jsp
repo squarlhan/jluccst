@@ -11,11 +11,12 @@
 	StringBuffer sb = new StringBuffer();
    	if( list != null && list.size()> 0 )
    	{
-   		sb.append( "{customernames:[" );
+   		sb.append( "{" );
+		sb.append( "root:[" );
    		for(int i=0;i<list.size();i++)
    		{
-			if(i>0)
-				sb.append(",");
+   			if( i > 0 )
+				sb.append( "," );
 
 			obj = list.get( i );
 			
@@ -66,7 +67,7 @@
    	}
    	else
 	{
-		sb.append( "{customernames:[]}" );
+		sb.append( "{root:[]}" );
 	}
    	System.out.println(sb.toString());
 	response.getWriter().write( sb.toString());
