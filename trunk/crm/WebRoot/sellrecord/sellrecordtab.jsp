@@ -19,9 +19,11 @@
 		});
 	});
 	$.fn.selectTab = function(index){
-		var selected = $("#tt").tabs('selected',"1"); 
-		alert(selected);
-		$("#tab"+index).click();
+		$(document).find(".tabs-inner").each(function(index,domEle){
+			if(index==1){
+				$(domEle).click();
+			}
+		});
 	};
 //-->
 </script>
