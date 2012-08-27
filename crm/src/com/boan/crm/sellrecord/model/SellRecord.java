@@ -46,6 +46,12 @@ public class SellRecord implements Serializable {
 	private Set goodsDetials;
 	
 	/**
+	 * 产品种类
+	 */
+	@Column(name = "GOODS_TYPE")
+	private String goodsType;
+	
+	/**
 	 * 客户Id
 	 */
 	@Column(name = "CUSTOMER_ID")
@@ -233,5 +239,13 @@ public class SellRecord implements Serializable {
 
 	public void setSalesmanName(String salesmanName) {
 		this.salesmanName = salesmanName;
+	}
+
+	public String getGoodsType() {
+		return goodsType;
+	}
+
+	public void setGoodsType(String goodsType) {
+		this.goodsType = goodsType;
 	}
 }
