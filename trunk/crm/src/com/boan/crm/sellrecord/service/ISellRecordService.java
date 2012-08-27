@@ -9,4 +9,11 @@ public interface ISellRecordService {
 	 * @param record
 	 */
 	public void saveOrUpdate(SellRecord record);
+	
+	/**
+	 * 根据销售记录Id查询销售记录信息
+	 * @param id
+	 * @return
+	 */
+	public SellRecord getSellRecordById(String id);
 }
