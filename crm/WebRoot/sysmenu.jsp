@@ -366,7 +366,7 @@
 									<tr>
 										<td width="40" align="right" style="padding-bottom: 4px;"><img src="images/menuto.jpg" width="5" height="5" />
 										</td>
-										<td><a href="salesRecord.html" target="mainFrame">销售记录</a>
+										<td><a href="sellrecord/sellrecordtab.jsp" target="mainFrame">销售记录</a>
 										</td>
 									</tr>
 								</table>
