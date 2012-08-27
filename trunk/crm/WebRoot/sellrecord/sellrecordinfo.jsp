@@ -166,19 +166,25 @@
 									<strong>客户名称：</strong>
 								</td>
 								<td height="26" align="left" bgcolor="#FFFFFF">
-									<s:select id="sel_customer"  name ="customer.id"  list="customerInfos" listKey="id"  listValue="customerName" cssStyle="width:250px" headerKey="" headerValue="--- 请选择客户 ---"></s:select>
+									<s:select id="sel_customer"  name ="customer.id"  list="customerInfos" listKey="id"  listValue="customerName" cssStyle="width:200px" headerKey="" headerValue="--- 请选择客户 ---"></s:select>
 								</td>
 								<td height="26" align="right" bgcolor="#FFFFFF">
 									<strong>交易日期：</strong>
 								</td>
 								<td height="26" align="left" bgcolor="#FFFFFF">
-									<s:textfield id="txt_bargainTime" name="sellRecord.bargainTime" cssStyle="width:200px" ></s:textfield>
+									<s:textfield id="txt_bargainTime" name="sellRecord.bargainTime" cssStyle="width:100px" ></s:textfield>
+								</td>
+								<td height="26" align="right" bgcolor="#FFFFFF">
+									<strong>产品种类：</strong>
+								</td>
+								<td height="26" align="left" bgcolor="#FFFFFF">
+									<s:textfield id="txt_goodsType" name="sellRecord.goodsType" cssStyle="width:100px" ></s:textfield>
 								</td>
 								<td height="26" align="right" bgcolor="#FFFFFF">
 									<strong>销售单号：</strong>
 								</td>
 								<td height="26" align="left" bgcolor="#FFFFFF">
-									<s:textfield id="txt_orderID" name="sellRecord.orderID" cssStyle="width:200px" ></s:textfield>
+									<s:textfield id="txt_orderID" name="sellRecord.orderID" cssStyle="width:100px" ></s:textfield>
 								</td>
 							</tr>
 						</table>
