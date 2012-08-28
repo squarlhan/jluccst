@@ -33,9 +33,6 @@
 			<result name="success">/customer/importcustomer.jsp</result>
 			<result name="input">/customer/importcustomer.jsp</result>
 		</action>
-		<action name="getCustomerByName" class="customerInfoAction" method="getCustomerByName">
-			<result name="success">/customer/getcustomerinfoservice.jsp</result>
-		</action>
 		<action name="customerTabInfo" class="customerInfoAction" method="customerTabInfo">
 			<result name="success">/customer/customertabinfo.jsp</result>
 		</action>
@@ -111,5 +108,10 @@
 		<action name="deleteCustomerVisit" class="customerVisitInfoAction" method="deleteCustomerVisit">
     	</action>
     	
+	</package>
+	<package name="ssss" extends="json-default" namespace="/customer">
+			<action name="getCustomerByName" class="customerInfoAction" method="getCustomerByName">
+				<result name="success" type="json" >/customer/getcustomerinfoservice.jsp</result>
+			</action>
 	</package>
 </struts>
