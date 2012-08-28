@@ -65,11 +65,11 @@
 		                    	var datas = eval('(' + msg + ')');
 		                    	$("#customerName").autocomplete(datas, {
 		                    		 formatItem: function (row, i, max) {
-		                    			 alert("aaaa");
+		                    			 alert("a");
 				                         return "<table width='400px'><tr><td align='left'>" + row.key + "</td><td align='right'><font style='color: #009933; font-family: 黑体; font-style: italic'>" + row.values + "</font>&nbsp;&nbsp;</td></tr></table>";
 				                     },
 				                    formatMatch: function(row, i, max){
-				                    	alert("bbbb");
+				                    	alert("b");
 				                      return row.key;
 		                    	 }
 		                    	 });
