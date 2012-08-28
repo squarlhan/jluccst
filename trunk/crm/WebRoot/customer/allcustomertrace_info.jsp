@@ -29,10 +29,10 @@
 		<title>客户跟进信息</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<j:scriptlink  css="true" jmessagebox="true" jquery="true" tipswindow="true" validate="true"/>
-		<script src="/crm/js/ui/jquery.ui.core.js"></script>
-		<script src="/crm/js/ui/jquery.ui.widget.js"></script>
-		<script src="/crm/js/ui/jquery.ui.position.js"></script>
-		<script src="/crm/js/ui/jquery.ui.autocomplete.js"></script>
+		<script src="<%=path %>/js/ui/jquery.ui.core.js"></script>
+		<script src="<%=path %>/js/ui/jquery.ui.widget.js"></script>
+		<script src="<%=path %>/js/ui/jquery.ui.position.js"></script>
+		<script src="<%=path %>/js/ui/jquery.ui.autocomplete.js"></script>
 		<script type="text/javascript">
 		
 			/**
@@ -63,6 +63,7 @@
 		                    error: function() { alert('Error loading data!'); },
 		                    success: function(msg) {
 		                    	var datas = eval('(' + msg + ')');
+		                    	alert(msg);
 		                    	$("#customerName").autocomplete(datas, {
 		                    		 formatItem: function (row, i, max) {
 		                    			 alert("a");
