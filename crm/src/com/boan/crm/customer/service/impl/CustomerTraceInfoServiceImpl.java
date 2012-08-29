@@ -41,12 +41,6 @@ public class CustomerTraceInfoServiceImpl implements ICustomerTraceInfoService{
 	@Autowired
 	@Qualifier("contractPersonService")
 	private IContractPersonService contractPersonService;
-	/**
-	 * 权限接口
-	 */
-	@Autowired
-	@Qualifier("dataDictionaryService")
-	private IDataDictionaryService dataDictionaryService = null;
 	
 	@Override
 	public void deleteCustomerTraceInfo(String... ids) {
