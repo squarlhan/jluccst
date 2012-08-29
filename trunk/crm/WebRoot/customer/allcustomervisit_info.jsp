@@ -29,10 +29,10 @@
 		<title>客户跟进信息</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<j:scriptlink  css="true" jmessagebox="true" jquery="true" tipswindow="true" validate="true"/>
-		<script src="<%=path %>/js/ui/jquery.ui.core.js"></script>
-		<script src="<%=path %>/js/ui/jquery.ui.widget.js"></script>
-		<script src="<%=path %>/js/ui/jquery.ui.position.js"></script>
-		<script src="<%=path %>/js/ui/jquery.autocomplete.js"></script>
+		<script src="/crm/js/ui/jquery.ui.core.js"></script>
+		<script src="/crm/js/ui/jquery.ui.widget.js"></script>
+		<script src="/crm/js/ui/jquery.ui.position.js"></script>
+		<script src="/crm/js/ui/jquery.ui.autocomplete.js"></script>
 		<script type="text/javascript">
 		
 			/**
@@ -51,107 +51,55 @@
 					"customerTraceInfo.objection":{strangecode:true}
 				}
 			};
-			
-			var allData;
 			$(function() {
-				<s:if test='%{customerTraceInfo.id.equals("")}'>
-				$("#customerName").autocomplete("customer/getCustomerByName.action",
-			     {
-		           minChars: 3,
-		           max:5,
-		           width: 150, 
-		           matchContains: true,
-		           autoFill: false,
-		           extraParams: 
-		           {   
-		        	 customerName: function() 
-	                 {
-	                  	 return $("#customerName").val(); 
-	                 }   
-	               },
-		           parse: function(test) 
-		           {
-		               data = test.listCustomer;
-		               allData = test.listCustomer;
-		               var rows = [];
-		               for(var i=0; i<data.length; i++)
-			           {
-			              rows[rows.length] = 
-			              {
-			                   data: data[i].customerName,
-			                   value:data[i],
-			                   result:data[i].customerName
-			               };
-			            }           
-			            return rows;
-		           },
-		           formatItem:function(item)
-		           {
-	                   return item;
-		           }
+				$("#customerName").keydown(function() {
+					if($("#customerName").val().length > 2)
+					{
+						$.ajax({
+		                    url:"<%=basePath%>customer/getCustomerByName.action?customerName=" + $( "#customerName" ).val(),
+		                    type: 'POST',
+		                    dataType: 'JSON',
+		                    timeout: 5000,
+		                    error: function() { alert('Error loading data!'); },
+		                    success: function(msg) {
+		                    	var datas = eval('(' + msg + ')');
+		                    	$("#customerName").autocomplete(datas, {
+		                    		 formatItem: function (row, i, max) {
+		                    			 alert("a");
+				                         return "<table width='400px'><tr><td align='left'>" + row.key + "</td><td align='right'><font style='color: #009933; font-family: 黑体; font-style: italic'>" + row.values + "</font>&nbsp;&nbsp;</td></tr></table>";
+				                     },
+				                    formatMatch: function(row, i, max){
+				                    	alert("b");
+				                      return row.key;
+		                    	 }
+		                    	 });
+		                    }
+		                });
+					 	/*$.ajax({
+				            type: "POST",
+				            contentType: "application/json",
+				            url: "customer/getCustomerByName.action",
+				            data: {
+								customerName: $( "#customerName" ).val(),
+								iSearchMaxRecord: 12
+							},
+				             dataType: "json",
+				             success: function (msg) {
+				            	alert(msg);
+				                var datas = eval('(' + msg.root + ')');
+				                $("#customerName").autocomplete(datas, {
+				                    formatItem: function (row, i, max) {
+				                         return "<table width='400px'><tr><td align='left'>" + row.Key + "</td><td align='right'><font style='color: #009933; font-family: 黑体; font-style: italic'>约" + row.Value + "个宝贝</font>&nbsp;&nbsp;</td></tr></table>";
+				                     },
+				                    formatMatch: function(row, i, max){
+				                      return row.Key;
+				                  }
+				              });
+				           }
+				       });*/
+					}
+				});
 
-			     });
-				$("#customerName").result(function(event, itemname, formatted) {
-					  //如选择后给其他控件赋值，触发别的事件等等
-					  for(var i=0; i<allData.length; i++)
-					  {
-						  if(allData[i].customerName == itemname)
-						  {
-							  $("#customerId").val(allData[i].id);
-							  $("#customerId_t").val(allData[i].id);
-				  			  $("#salesman").val(allData[i].salesman);
-			  				  $("#progressId").val(allData[i].progressId);
-			  				  $("#category").val(allData[i].category);
-			  				  var contractPerson = "";
-			  				  var tel = "";
-			  				  for(var j= 0;j<allData[i].contractPersonList.length; j++)
-			  				  {
-			  					  if(contractPerson == "")
-			  					  {
-			  						  contractPerson = allData[i].contractPersonList[j].personName;
-			  					  }else
-			  					  {
-			  						contractPerson = contractPerson + "," + allData[i].contractPersonList[j].personName;
-			  					  }
-			  					  
-			  					  
-			  						  if(allData[i].contractPersonList[j].phone != "")
-			  						  {
-			  							if(tel == "")
-					  					  {
-					  					  	tel = allData[i].contractPersonList[j].phone;
-					  					  }else
-					  					  {
-					  						tel = tel + "," + allData[i].contractPersonList[j].phone;
-					  					  }
-			  						  }
-			  						if(allData[i].contractPersonList[j].tel != "")
-			  						  {
-			  							if(tel == "")
-					  					  {
-					  					  	tel = allData[i].contractPersonList[j].tel;
-					  					  }else
-					  					  {
-					  						tel = tel + "," + allData[i].contractPersonList[j].tel;
-					  					  }
-			  						  }
-			  					  
-			  				  }
-			  				$("#contractPerson").val(contractPerson);
-			  				$("#phone").val(tel);
-			  				
-			  				$("#personId").empty();
-			  				for(var j= 0;j<allData[i].contractPersonList.length; j++)
-			  				{
-	                            $("<option value='" + allData[i].contractPersonList[j].id + "'>" + allData[i].contractPersonList[j].personName + "</option>").appendTo($("#personId"));
-	                        }
-			  				$("#personId").change();
-						  }
-					  }
-					 });
-				</s:if> 
-					
-				
 				$.validator.setDefaults({
 					debug: false,onkeyup: false,onfocusout:false,focusCleanup: true,
 				    errorPlacement:function(error, element) {},
@@ -199,7 +147,7 @@
 	               	if(!validator.form()){
 						return false;
 					}
-					form1.action = "customer/saveAllTraceInfo.action";
+					form1.action = "customer/saveTraceInfo.action";
 					form1.customerId.value  = form1.customerId_t.value;
 	               	form1.submit();
           		});
@@ -236,7 +184,6 @@
 		}
 		.ui-autocomplete-loading { background: white url('images/ui-anim_basic_16x16.gif') right center no-repeat; }
 		</style>
-		<link rel='stylesheet' type='text/css'  href='<%=path %>/css/jquery.autocomplete.css' />
 	</head>
 
 	<body>
@@ -256,7 +203,7 @@
 		<s:textfield type="text" style="width:150px" name="customerInfo.customerName" id="customerName"></s:textfield>
 		</td>
 		<td align="right">业务员：</td>
-		<td><s:textfield type="text" readOnly="true" style="width:150px" name="customerInfo.salesman" id="salesman"></s:textfield></td>
+		<td><s:textfield type="text" readOnly="true" style="width:150px" name="customerInfo.salesmanName" id="salesmanName"></s:textfield></td>
 		<td align="right">业务进展：</td>
 		<td style="width: 150px">
 		<s:textfield type="text" readOnly="true" style="width:150px" name="customerInfo.progressId" id="progressId"></s:textfield>
@@ -265,10 +212,10 @@
 	<tr>
 		<td></td>
 		<td align="right" style="width: 72px">联系人：</td>
-		<td><s:textfield type="text" readOnly="true" style="width:150px" name="contractPerson" id="contractPerson"></s:textfield></td>
+		<td><s:textfield type="text" readOnly="true" style="width:150px" name="customerInfo.contractPerson" id="contractPerson"></s:textfield></td>
 		<td align="center">手　机：</td>
 		<td>
-		<s:textfield type="text" readOnly="true" style="width:150px" name="contractTel" id="phone"></s:textfield>
+		<s:textfield type="text" readOnly="true" style="width:150px" name="customerInfo.phone" id="phone"></s:textfield>
 		</td>
 		<td align="right">客户分类：</td>
 		<td style="width: 150px">
