@@ -66,6 +66,14 @@
     	<action name="deletePersonInfo" class="contractPersonInfoAction" method="deletePersonInfo">
     		
     	</action>
+    	<action name="allCustomerVisitList" class="customerVisitInfoAction" method="customerVisitList">
+			<result name="success">/customer/allcustomervisit_list.jsp</result>
+			<result name="input">/customer/allcustomervisit_list.jsp</result>
+		</action>
+		<action name="allCustomerVisitInfo" class="customerVisitInfoAction" method="customerVisitInfo">
+			<result name="success">/customer/allcustomervisit_info.jsp</result>
+			<result name="input">/customer/allcustomervisit_info.jsp</result>
+		</action>
     	<action name="allCustomerTraceList" class="customerTraceInfoAction" method="customerTraceList">
 			<result name="success">/customer/allcustomertrace_list.jsp</result>
 			<result name="input">/customer/allcustomertrace_list.jsp</result>
@@ -85,6 +93,12 @@
 		<action name="saveTraceInfo" class="customerTraceInfoAction" method="saveTraceInfo">
 			<result name="success" type="chain">
              	<param name="actionName">customerTraceInfo</param>
+             	<param name="id">${id}</param>
+            </result>
+		</action>
+		<action name="saveAllTraceInfo" class="customerTraceInfoAction" method="saveTraceInfo">
+			<result name="success" type="chain">
+             	<param name="actionName">allCustomerTraceInfo</param>
              	<param name="id">${id}</param>
             </result>
 		</action>
@@ -111,7 +125,7 @@
 	</package>
 	<package name="ssss" extends="json-default" namespace="/customer">
 			<action name="getCustomerByName" class="customerInfoAction" method="getCustomerByName">
-				<result name="success" type="json" >/customer/getcustomerinfoservice.jsp</result>
+				<result name="success" type="json"></result>
 			</action>
 	</package>
 </struts>

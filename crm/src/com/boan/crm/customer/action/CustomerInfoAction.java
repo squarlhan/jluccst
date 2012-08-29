@@ -104,7 +104,14 @@ public class CustomerInfoAction extends BaseActionSupport{
 	private File uploadFile;
 	private String uploadFileContentType = null;
 	private String message = "";
+	private List<CustomerInfo> listCustomer = null;
 	
+	public List<CustomerInfo> getListCustomer() {
+		return listCustomer;
+	}
+	public void setListCustomer(List<CustomerInfo> listCustomer) {
+		this.listCustomer = listCustomer;
+	}
 	/**
 	 * 上传导入文件的名称
 	 */
@@ -170,7 +177,10 @@ public class CustomerInfoAction extends BaseActionSupport{
 	public String getCustomerByName()
 	{
 		Map<String,String> values = new HashMap<String,String>();
-		
+		try
+		{
+			customerName = new String(customerName.getBytes("ISO-8859-1"), "UTF-8");
+		}catch(Exception ex){}
 		if(customerName != null && customerName.length() > 0)
 		{
 			values.put("customerName", "%"+customerName+"%");
@@ -180,6 +190,7 @@ public class CustomerInfoAction extends BaseActionSupport{
 		
 		pagination.setPageSize(iSearchMaxRecord);
 		pagination = customerInfoService.findCustomerInfoForPage(values, pagination);
+		listCustomer = pagination.getData();
 		return SUCCESS;
 	}
 	
