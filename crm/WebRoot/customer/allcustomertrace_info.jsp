@@ -194,6 +194,11 @@
 		  	 */
 			$.fn.save = function(){
 				$("#addBtn").click(function() {
+					if($("#customerId_t").val() == "")
+					{
+						alert("请选择客户！");
+						return false;
+					}
 					var validate_settings_submit = jQuery.extend({}, _customer_submit);
 	               	var validator = $("form").validate(validate_settings_submit);
 	               	if(!validator.form()){
