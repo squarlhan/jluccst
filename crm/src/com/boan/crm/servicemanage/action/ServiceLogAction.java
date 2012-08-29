@@ -58,6 +58,21 @@ public class ServiceLogAction extends BaseActionSupport {
 	private String searchCompanyName;
 	
 	/**
+	 * 根据电话号码获得服务记录对象集合
+	 * @return 结果
+	 */
+	public String serviceLogListByTel(){
+		String tempCompanyId = "cbit";
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put( "companyId", tempCompanyId );
+		if(searchCompanyName!=null)
+			pagination = serviceLogService.findForPage(map, pagination );
+		else
+			pagination = serviceLogService.findForPage(null, pagination );
+		return SUCCESS;
+	}
+	
+	/**
 	 * 服务记录对象集合
 	 * @return 结果
 	 */

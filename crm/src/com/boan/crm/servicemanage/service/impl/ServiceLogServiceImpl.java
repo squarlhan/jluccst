@@ -43,6 +43,9 @@ public class ServiceLogServiceImpl extends BaseDao<ServiceLog,String> implements
 			if(values.containsKey("companyName")){
 				hql= hql + " and companyName like :companyName";
 			}
+			if(values.containsKey("companyId")){
+				hql= hql + " and companyId = :companyId";
+			}
 		}
 		hql= hql + " order by serviceTime asc";
 		List<ServiceLog> data = serviceLogDao.findForPage(hql, values, pagination.getStartIndex(), pagination.getPageSize());
@@ -50,6 +53,9 @@ public class ServiceLogServiceImpl extends BaseDao<ServiceLog,String> implements
 		if(values!=null){
 			if(values.containsKey("companyName")){
 				hql= hql + " and companyName like :companyName";
+			}
+			if(values.containsKey("companyId")){
+				hql= hql + " and companyId = :companyId";
 			}
 		}
 		int totalRows = serviceLogDao.findCountForPage(hql, values);

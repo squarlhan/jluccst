@@ -5,6 +5,10 @@
 <struts>
 	<!-- 服务记录 -->
 	<package name="servicelog" extends="struts-default" namespace="/service">
+		<action name="serviceloglistbytel" class="serviceLogAction" method="serviceLogListByTel">
+			<result name="success">/service/service_log_list_for_client.jsp</result>
+			<result name="input">/service/service_log_list_for_client.jsp</result>
+		</action>
 		<action name="serviceloglist" class="serviceLogAction" method="serviceLogList">
 			<result name="success">/service/service_log_list.jsp</result>
 			<result name="input">/service/service_log_list.jsp</result>
