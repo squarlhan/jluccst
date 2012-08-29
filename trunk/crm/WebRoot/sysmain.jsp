@@ -27,8 +27,8 @@ $( document ).ready( function() {
 		,south__resizable:		false
 		,west__size:			201
 		,west__minSize:			201
-		,west__togglerLength_closed: 28
-		,west__togglerLength_open:	 28
+		,west__togglerLength_closed: 30
+		,west__togglerLength_open:	 30
 		,center__minHeight:		200
 		,center__minWidth:		'30%'
 		,spacing_closed:		8
