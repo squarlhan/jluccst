@@ -59,7 +59,7 @@
 		    	}
 			})
 			$("#addbtn").click(function(){
-				parent.parent.parent.tipsWindown("添加回访信息","iframe:customer/allCustomerTraceInfo.action?customerId=" + $("#customerId_t").val(),"800","500","true","","true","no");
+				parent.parent.parent.tipsWindown("添加回访信息","iframe:customer/allCustomerVisitInfo.action?customerId=" + $("#customerId_t").val(),"800","500","true","","true","no");
 				parent.parent.parent.$("#windown-close").bind('click',function(){
 					window.location.href= window.location.href;
 				});
@@ -70,7 +70,7 @@
                	if(!validator.form()){
 					return false;
 				}
-				form1.action = "allCustomerTraceList.action";
+				form1.action = "allCustomerVisitList.action";
 				form1.submit();
 		
 			});
@@ -106,7 +106,7 @@
 	  		 * 删除所选客户回访信息
 	  		 */
 	  		$("#deletepointbtn").click(function(){
-  				var url = "customer/deleteCustomerTrace.action";
+  				var url = "customer/deleteCustomerVisit.action";
   				if(window.confirm("您确定要删除所选信息吗？")){
   					$.post(url, $('#form1').serialize(), function(data){window.location.href=window.location.href;});
   				}
@@ -121,7 +121,7 @@
   
   <body>
  <s:form id="form1" name="form1" method="post" theme="simple">
- <s:hidden id="customerId" name="customerTraceInfo.customerId"></s:hidden>
+ <s:hidden id="customerId" name="customerVisitInfo.customerId"></s:hidden>
  <s:hidden id="customerId_t" name="customerId"></s:hidden>
 <table width="100%" style="height:100%;" border="0" cellspacing="5" cellpadding="0">
   <tr>
@@ -147,8 +147,8 @@
 		<td align="center">查询结束日期：</td>
 		<td><s:textfield name="endDate" id="endDate" style="width: 80px"></s:textfield></td>
 		<td align="center">类型：</td>
-		<td style="width:120px"><s:select list="listTraceOption" listKey="id" listValue="name" value="traceOption" 
-			id="traceOption" name="traceOption" cssStyle="width:120px" headerKey="" headerValue="--请选择--"></s:select></td>
+		<td style="width:120px"><s:select list="listVisitOption" listKey="id" listValue="name" value="visitOption" 
+			id="visitOption" name="visitOption" cssStyle="width:120px" headerKey="" headerValue="--请选择--"></s:select></td>
 		<td style="width: 80px"><input type="button" style="width: 80px;" class="btn_4" id="searchBtn" value="查询" /></td>
 	</tr>
 </table></td></tr>
@@ -173,20 +173,20 @@
         <td height="26" align="center" bgcolor="#FFFFFF" >  
 				<s:checkbox id="%{#obj.id}" name="ids" fieldValue="%{id}" value="false" theme="simple"/>
 			</td>
-            <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="traceTime"/></td>
+            <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="visitTime"/></td>
             <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="customerName"/></td>
             <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="salesman"/></td>
             <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="progress"/></td>
             <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="person.personName"/>
 			</td>
             <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="tel"/></td>
-            <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="interest"/></td>
-            <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="objection"/></td>
+            <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="contentResult"/></td>
+            <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="remark"/></td>
           <td height="26" colspan="2" align="center" bgcolor="#FFFFFF">
-          	<s:url id="edit_url" action="customer/allCustomerTraceInfo.action">   
+          	<s:url id="edit_url" action="customer/allCustomerVisitInfo.action">   
 				<s:param name="id" value="id"></s:param>   
 			</s:url>
-			<s:url id="delete_url" action="customer/deleteCustomerTrace.action">   
+			<s:url id="delete_url" action="customer/deleteCustomerVisit.action">   
 				<s:param name="ids" value="id"></s:param>   
 			</s:url>
          	<a name="edit" href="javascript:void(0);" url="${edit_url}">编辑</a>  

@@ -29,10 +29,10 @@
 		<title>客户跟进信息</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<j:scriptlink  css="true" jmessagebox="true" jquery="true" tipswindow="true" validate="true"/>
-		<script src="/crm/js/ui/jquery.ui.core.js"></script>
-		<script src="/crm/js/ui/jquery.ui.widget.js"></script>
-		<script src="/crm/js/ui/jquery.ui.position.js"></script>
-		<script src="/crm/js/ui/jquery.ui.autocomplete.js"></script>
+		<script src="<%=path %>/js/ui/jquery.ui.core.js"></script>
+		<script src="<%=path %>/js/ui/jquery.ui.widget.js"></script>
+		<script src="<%=path %>/js/ui/jquery.ui.position.js"></script>
+		<script src="<%=path %>/js/ui/jquery.autocomplete.js"></script>
 		<script type="text/javascript">
 		
 			/**
@@ -40,66 +40,121 @@
 		  	 */
 			var _customer_submit = {
 				rules: {
-					"customerTraceInfo.personId":{required:true},
-					"customerTraceInfo.salesmanId":{required:true},
-					"customerTraceInfo.traceOption":{required:true},
-					"customerTraceInfo.tel":{strangecode:true},
-					"customerTraceInfo.qq":{strangecode:true},
-					"customerTraceInfo.email":{email:true},
-					"customerTraceInfo.task":{strangecode:true},
-					"customerTraceInfo.interest":{strangecode:true},
-					"customerTraceInfo.objection":{strangecode:true}
+					"customerVisitInfo.personId":{required:true},
+					"customerVisitInfo.salesmanId":{required:true},
+					"customerVisitInfo.visitOption":{required:true},
+					"customerVisitInfo.tel":{strangecode:true},
+					"customerVisitInfo.qq":{strangecode:true},
+					"customerVisitInfo.email":{email:true},
+					"customerVisitInfo.task":{strangecode:true},
+					"customerVisitInfo.contentResult":{strangecode:true},
+					"customerVisitInfo.remark":{strangecode:true}
 				}
 			};
+			
+			var allData;
 			$(function() {
-				$("#customerName").keydown(function() {
-					if($("#customerName").val().length > 2)
-					{
-						$.ajax({
-		                    url:"<%=basePath%>customer/getCustomerByName.action?customerName=" + $( "#customerName" ).val(),
-		                    type: 'POST',
-		                    dataType: 'JSON',
-		                    timeout: 5000,
-		                    error: function() { alert('Error loading data!'); },
-		                    success: function(msg) {
-		                    	var datas = eval('(' + msg + ')');
-		                    	$("#customerName").autocomplete(datas, {
-		                    		 formatItem: function (row, i, max) {
-		                    			 alert("a");
-				                         return "<table width='400px'><tr><td align='left'>" + row.key + "</td><td align='right'><font style='color: #009933; font-family: 黑体; font-style: italic'>" + row.values + "</font>&nbsp;&nbsp;</td></tr></table>";
-				                     },
-				                    formatMatch: function(row, i, max){
-				                    	alert("b");
-				                      return row.key;
-		                    	 }
-		                    	 });
-		                    }
-		                });
-					 	/*$.ajax({
-				            type: "POST",
-				            contentType: "application/json",
-				            url: "customer/getCustomerByName.action",
-				            data: {
-								customerName: $( "#customerName" ).val(),
-								iSearchMaxRecord: 12
-							},
-				             dataType: "json",
-				             success: function (msg) {
-				            	alert(msg);
-				                var datas = eval('(' + msg.root + ')');
-				                $("#customerName").autocomplete(datas, {
-				                    formatItem: function (row, i, max) {
-				                         return "<table width='400px'><tr><td align='left'>" + row.Key + "</td><td align='right'><font style='color: #009933; font-family: 黑体; font-style: italic'>约" + row.Value + "个宝贝</font>&nbsp;&nbsp;</td></tr></table>";
-				                     },
-				                    formatMatch: function(row, i, max){
-				                      return row.Key;
-				                  }
-				              });
-				           }
-				       });*/
-					}
-				});
+				<s:if test='%{customerVisitInfo.id.equals("")}'>
+				$("#customerName").autocomplete("customer/getCustomerByName.action",
+			     {
+		           minChars: 1,
+		           max:5,
+		           width: 150, 
+		           matchContains: true,
+		           autoFill: false,
+		           extraParams: 
+		           {   
+		        	 customerName: function() 
+	                 {
+	                  	 return $("#customerName").val(); 
+	                 }   
+	               },
+		           parse: function(test) 
+		           {
+		               data = test.listCustomer;
+		               var rows = [];
+		               if(data != null)
+		               {
+		            	   allData = test.listCustomer;
+			               for(var i=0; i<data.length; i++)
+				           {
+				              rows[rows.length] = 
+				              {
+				                   data: data[i].customerName,
+				                   value:data[i],
+				                   result:data[i].customerName
+				               };
+				            }
+		           		}
+			            return rows;
+		           },
+		           formatItem:function(item)
+		           {
+	                   return item;
+		           }
 
+			     });
+				$("#customerName").result(function(event, itemname, formatted) {
+					  //如选择后给其他控件赋值，触发别的事件等等
+					  for(var i=0; i<allData.length; i++)
+					  {
+						  if(allData[i].customerName == itemname)
+						  {
+							  $("#customerId").val(allData[i].id);
+							  $("#customerId_t").val(allData[i].id);
+				  			  $("#salesman").val(allData[i].salesman);
+			  				  $("#progressId").val(allData[i].progressId);
+			  				  $("#category").val(allData[i].category);
+			  				  var contractPerson = "";
+			  				  var tel = "";
+			  				  for(var j= 0;j<allData[i].contractPersonList.length; j++)
+			  				  {
+			  					  if(contractPerson == "")
+			  					  {
+			  						  contractPerson = allData[i].contractPersonList[j].personName;
+			  					  }else
+			  					  {
+			  						contractPerson = contractPerson + "," + allData[i].contractPersonList[j].personName;
+			  					  }
+			  					  
+			  					  
+			  						  if(allData[i].contractPersonList[j].phone != "")
+			  						  {
+			  							if(tel == "")
+					  					  {
+					  					  	tel = allData[i].contractPersonList[j].phone;
+					  					  }else
+					  					  {
+					  						tel = tel + "," + allData[i].contractPersonList[j].phone;
+					  					  }
+			  						  }
+			  						if(allData[i].contractPersonList[j].tel != "")
+			  						  {
+			  							if(tel == "")
+					  					  {
+					  					  	tel = allData[i].contractPersonList[j].tel;
+					  					  }else
+					  					  {
+					  						tel = tel + "," + allData[i].contractPersonList[j].tel;
+					  					  }
+			  						  }
+			  					  
+			  				  }
+			  				$("#contractPerson").val(contractPerson);
+			  				$("#phone").val(tel);
+			  				
+			  				$("#personId").empty();
+			  				for(var j= 0;j<allData[i].contractPersonList.length; j++)
+			  				{
+	                            $("<option value='" + allData[i].contractPersonList[j].id + "'>" + allData[i].contractPersonList[j].personName + "</option>").appendTo($("#personId"));
+	                        }
+			  				$("#personId").change();
+						  }
+					  }
+					 });
+				</s:if> 
+					
+				
 				$.validator.setDefaults({
 					debug: false,onkeyup: false,onfocusout:false,focusCleanup: true,
 				    errorPlacement:function(error, element) {},
@@ -142,12 +197,17 @@
 		  	 */
 			$.fn.save = function(){
 				$("#addBtn").click(function() {
+					if($("#customerId_t").val() == "")
+					{
+						alert("请选择客户！");
+						return false;
+					}
 					var validate_settings_submit = jQuery.extend({}, _customer_submit);
 	               	var validator = $("form").validate(validate_settings_submit);
 	               	if(!validator.form()){
 						return false;
 					}
-					form1.action = "customer/saveTraceInfo.action";
+					form1.action = "customer/saveAllVisitInfo.action";
 					form1.customerId.value  = form1.customerId_t.value;
 	               	form1.submit();
           		});
@@ -184,12 +244,13 @@
 		}
 		.ui-autocomplete-loading { background: white url('images/ui-anim_basic_16x16.gif') right center no-repeat; }
 		</style>
+		<link rel='stylesheet' type='text/css'  href='<%=path %>/css/jquery.autocomplete.css' />
 	</head>
 
 	<body>
 		<s:form id="form1" name="form1" method="post" theme="simple">
-		<s:hidden id="id" name="customerTraceInfo.id"></s:hidden>
-		<s:hidden id="customerId" name="customerTraceInfo.customerId"></s:hidden>
+		<s:hidden id="id" name="customerVisitInfo.id"></s:hidden>
+		<s:hidden id="customerId" name="customerVisitInfo.customerId"></s:hidden>
 		<s:hidden id="customerId_t" name="customerId"></s:hidden>
 		<table width="100%" border="0" cellspacing="5" cellpadding="0">
 			<tr><td><table><tr><td style="height: 12px"></td></tr>
@@ -203,7 +264,7 @@
 		<s:textfield type="text" style="width:150px" name="customerInfo.customerName" id="customerName"></s:textfield>
 		</td>
 		<td align="right">业务员：</td>
-		<td><s:textfield type="text" readOnly="true" style="width:150px" name="customerInfo.salesmanName" id="salesmanName"></s:textfield></td>
+		<td><s:textfield type="text" readOnly="true" style="width:150px" name="customerInfo.salesman" id="salesman"></s:textfield></td>
 		<td align="right">业务进展：</td>
 		<td style="width: 150px">
 		<s:textfield type="text" readOnly="true" style="width:150px" name="customerInfo.progressId" id="progressId"></s:textfield>
@@ -212,10 +273,10 @@
 	<tr>
 		<td></td>
 		<td align="right" style="width: 72px">联系人：</td>
-		<td><s:textfield type="text" readOnly="true" style="width:150px" name="customerInfo.contractPerson" id="contractPerson"></s:textfield></td>
+		<td><s:textfield type="text" readOnly="true" style="width:150px" name="contractPerson" id="contractPerson"></s:textfield></td>
 		<td align="center">手　机：</td>
 		<td>
-		<s:textfield type="text" readOnly="true" style="width:150px" name="customerInfo.phone" id="phone"></s:textfield>
+		<s:textfield type="text" readOnly="true" style="width:150px" name="contractTel" id="phone"></s:textfield>
 		</td>
 		<td align="right">客户分类：</td>
 		<td style="width: 150px">
@@ -227,35 +288,35 @@
 </table></td></tr>
 <tr><td><table>
 <tr><td style="height: 15px"></td></tr>			
-<tr><td><fieldset><legend><span>添写跟进记录</span></legend><table>
+<tr><td><fieldset><legend><span>添写回访记录</span></legend><table>
 <tr><td><table cellpadding="5" cellspacing="3">
 	<tr>
 		<td></td>
 		<td align="right" nowrap>受访人：</td>
-		<td ><s:select list="listPerson" listKey="id" listValue="personName" value="customerTraceInfo.tracePersonId" 
-			id="personId" name="customerTraceInfo.tracePersonId" cssStyle="width:150px" headerKey="" headerValue="--请选择--"></s:select></td>
-		<td align="right" nowrap>跟进人：</td>
-		<td><s:select list="userList" listKey="id" listValue="userCName" value="customerTraceInfo.salesmanId" 
-			id="salesmanId" name="customerTraceInfo.salesmanId" cssStyle="width:150px" headerKey="" headerValue="--请选择--"></s:select></td>
-		<td align="right" nowrap>跟进方式：</td>
-		<td ><s:select list="listTraceOption" listKey="id" listValue="name" value="customerTraceInfo.traceOption" 
-			id="traceOption" name="customerTraceInfo.traceOption" cssStyle="width:150px" headerKey="" headerValue="--请选择--"></s:select></td>
+		<td ><s:select list="listPerson" listKey="id" listValue="personName" value="customerVisitInfo.visitPersonId" 
+			id="personId" name="customerVisitInfo.visitPersonId" cssStyle="width:150px" headerKey="" headerValue="--请选择--"></s:select></td>
+		<td align="right" nowrap>回访人：</td>
+		<td><s:select list="userList" listKey="id" listValue="userCName" value="customerVisitInfo.salesmanId" 
+			id="salesmanId" name="customerVisitInfo.salesmanId" cssStyle="width:150px" headerKey="" headerValue="--请选择--"></s:select></td>
+		<td align="right" nowrap>回访方式：</td>
+		<td ><s:select list="listVisitOption" listKey="id" listValue="name" value="customerVisitInfo.visitOption" 
+			id="visitOption" name="customerVisitInfo.visitOption" cssStyle="width:150px" headerKey="" headerValue="--请选择--"></s:select></td>
 	</tr>
 	<tr>
 		<td></td>
 		<td align="right" nowrap>联系电话：</td>
-		<td><s:textfield type="text" style="width:150px" name="customerTraceInfo.tel" id="tel"></s:textfield></td>
+		<td><s:textfield type="text" style="width:150px" name="customerVisitInfo.tel" id="tel"></s:textfield></td>
 		<td align="right" nowrap>Q Q：</td>
-		<td ><s:textfield type="text" style="width:150px" name="customerTraceInfo.qq" id="qq"></s:textfield></td>
+		<td ><s:textfield type="text" style="width:150px" name="customerVisitInfo.qq" id="qq"></s:textfield></td>
 		<td align="right" nowrap>邮 箱：</td>
-		<td ><s:textfield type="text" style="width:150px" name="customerTraceInfo.email" id="email"></s:textfield></td>
+		<td ><s:textfield type="text" style="width:150px" name="customerVisitInfo.email" id="email"></s:textfield></td>
 	</tr>
 	<tr>
 		<td></td>
-		<td align="right" nowrap>跟进时间：</td>
-		<td><s:textfield type="text" style="width:150px" name="customerTraceInfo.traceTime" id="traceTime"></s:textfield></td>
+		<td align="right" nowrap>回访时间：</td>
+		<td><s:textfield type="text" style="width:150px" name="customerVisitInfo.visitTime" id="visitTime"></s:textfield></td>
 		<td align="right">任务：</td>
-		<td colspan="3"><s:textarea type="text" style="width:400px;height:60px" name="customerTraceInfo.task" id="task"></s:textarea></td>
+		<td colspan="3"><s:textarea type="text" style="width:400px;height:60px" name="customerVisitInfo.task" id="task"></s:textarea></td>
 	</tr>
 	</table></td></tr>
 </table></fieldset></td></tr>
@@ -263,17 +324,17 @@
 
 <tr><td><table>
 <tr><td style="height: 15px"></td></tr>
-<tr><td><fieldset><legend><span>填写跟进结果：</span></legend><table>
+<tr><td><fieldset><legend><span>填写回访结果：</span></legend><table>
 <tr><td><table cellpadding="5" cellspacing="3">
 	<tr>
 		<td></td>
-		<td align="right" nowrap>兴趣点：</td>
-		<td ><s:textarea type="text" style="width:646px;height:70px" name="customerTraceInfo.interest" id="interest"></s:textarea></td>
+		<td align="right" nowrap>了解内容<br/>及结果：</td>
+		<td ><s:textarea type="text" style="width:646px;height:70px" name="customerVisitInfo.contentResult" id="contentResult"></s:textarea></td>
 	</tr>
 	<tr>
 		<td></td>
-		<td align="right" nowrap>异议点：</td>
-		<td ><s:textarea type="text" style="width:646px;height:70px" name="customerTraceInfo.objection" id="objection"></s:textarea></td>
+		<td align="right" nowrap>备 注：</td>
+		<td ><s:textarea type="text" style="width:646px;height:70px" name="customerVisitInfo.remark" id="remark"></s:textarea></td>
 	</tr>
 	<tr><td></td></tr>
 </table></td></tr>

@@ -57,11 +57,12 @@
 				<s:if test='%{customerTraceInfo.id.equals("")}'>
 				$("#customerName").autocomplete("customer/getCustomerByName.action",
 			     {
-		           minChars: 3,
+		           minChars: 1,
 		           max:5,
 		           width: 150, 
 		           matchContains: true,
 		           autoFill: false,
+		           dataType: "json",
 		           extraParams: 
 		           {   
 		        	 customerName: function() 
@@ -72,17 +73,20 @@
 		           parse: function(test) 
 		           {
 		               data = test.listCustomer;
-		               allData = test.listCustomer;
 		               var rows = [];
-		               for(var i=0; i<data.length; i++)
-			           {
-			              rows[rows.length] = 
-			              {
-			                   data: data[i].customerName,
-			                   value:data[i],
-			                   result:data[i].customerName
-			               };
-			            }           
+		               if(data != null)
+		               {
+		            	   allData = test.listCustomer;
+			               for(var i=0; i<data.length; i++)
+				           {
+				              rows[rows.length] = 
+				              {
+				                   data: data[i].customerName,
+				                   value:data[i],
+				                   result:data[i].customerName
+				               };
+				            }
+		           		}
 			            return rows;
 		           },
 		           formatItem:function(item)
