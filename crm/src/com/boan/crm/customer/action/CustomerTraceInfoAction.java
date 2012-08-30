@@ -127,7 +127,7 @@ public class CustomerTraceInfoAction extends BaseActionSupport{
 		DataDictionary d3 = new DataDictionary();
 		d3.setId("邮件沟通");
 		d3.setName("邮件沟通");
-		listTraceOption.add(d2);
+		listTraceOption.add(d3);
 		
 		try
 		{
@@ -244,7 +244,7 @@ public class CustomerTraceInfoAction extends BaseActionSupport{
 		DataDictionary d3 = new DataDictionary();
 		d3.setId("邮件沟通");
 		d3.setName("邮件沟通");
-		listTraceOption.add(d2);
+		listTraceOption.add(d3);
 		
 		listPerson = contractPersonService.findAllContractPersonInfoByCustomerId(customerId);
 		
