@@ -17,13 +17,26 @@
 		$("#tt").click(function(){
 			$("#iframe1").attr("src","openSellRecordListAction.action");
 		});
+		$.fn.showOrHideTab(1,false);
 	});
-	$.fn.selectTab = function(index){
-		$(document).find(".tabs-inner").each(function(index,domEle){
-			if(index==1){
+	$.fn.selectTab = function(index,url){
+		$(document).find(".tabs-inner").each(function(i,domEle){
+			if(index==i){
 				$(domEle).click();
+				$("#iframe"+(i+1)).attr("src",url);
 			}
 		});
+	};
+	$.fn.showOrHideTab = function (index,flag){
+		$(document).find(".tabs-inner").each(function(i,domEle){
+			if(index==i){
+				if(!flag){
+					$(domEle).hide();
+				}else{
+					$(domEle).show();
+				}
+			}
+		});	
 	};
 //-->
 </script>
