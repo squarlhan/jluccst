@@ -188,7 +188,7 @@ public class CustomerInfoAction extends BaseActionSupport{
 		
 		values.put("companyId", sessionCompanyId);
 		
-		pagination.setPageSize(iSearchMaxRecord);
+		pagination.setPageSize(5);
 		pagination = customerInfoService.findCustomerInfoForPage(values, pagination);
 		listCustomer = pagination.getData();
 		return SUCCESS;

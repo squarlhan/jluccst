@@ -102,6 +102,12 @@
              	<param name="id">${id}</param>
             </result>
 		</action>
+		<action name="saveAllVisitInfo" class="customerVisitInfoAction" method="saveVisitInfo">
+			<result name="success" type="chain">
+             	<param name="actionName">allCustomerVisitInfo</param>
+             	<param name="id">${id}</param>
+            </result>
+		</action>
 		<action name="deleteCustomerTrace" class="customerTraceInfoAction" method="deleteCustomerTrace">
     	</action>
     	

@@ -17,10 +17,13 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.boan.crm.customer.model.ContractPersonInfo;
+import com.boan.crm.customer.model.CustomerInfo;
 import com.boan.crm.customer.model.CustomerVisitInfo;
 import com.boan.crm.customer.service.IContractPersonService;
+import com.boan.crm.customer.service.ICustomerInfoService;
 import com.boan.crm.customer.service.ICustomerVisitInfoService;
 import com.boan.crm.datadictionary.model.DataDictionary;
+import com.boan.crm.datadictionary.service.IDataDictionaryService;
 import com.boan.crm.groupmanage.common.RoleFlag;
 import com.boan.crm.groupmanage.model.User;
 import com.boan.crm.groupmanage.service.IUserService;
@@ -46,6 +49,11 @@ public class CustomerVisitInfoAction extends BaseActionSupport{
 	private ICustomerVisitInfoService customerVisitInfoService;
 	
 	@Autowired
+	@Qualifier("customerInfoService")
+	//客户状态接口类
+	private ICustomerInfoService customerInfoService;
+	
+	@Autowired
 	@Qualifier("contractPersonService")
 	//客户状态接口类
 	private IContractPersonService contractPersonService;
@@ -53,8 +61,11 @@ public class CustomerVisitInfoAction extends BaseActionSupport{
 	@Autowired
 	@Qualifier("userService")
 	private IUserService userService;
+	@Autowired
+	@Qualifier("dataDictionaryService")
+	private IDataDictionaryService dataDictionaryService = null;
 	
-	//客户跟进信息类
+	//客户回访信息类
 	private CustomerVisitInfo customerVisitInfo ;
 	private String id = "";
 	private String customerId = "";
@@ -70,8 +81,13 @@ public class CustomerVisitInfoAction extends BaseActionSupport{
 	private Calendar beginDate;
 	private Calendar endDate;
 	private String visitOption = "";
+	private CustomerInfo customerInfo = null;
+	private String contractPerson = "";
+	private String contractTel  = "";
+	
+
 	/**
-	 * 客户跟进信息列表
+	 * 客户回访信息列表
 	 * @return String
 	 */
 	public String customerVisitList()
@@ -84,8 +100,8 @@ public class CustomerVisitInfoAction extends BaseActionSupport{
 		d.setName("登门拜访");
 		listVisitOption.add(d);
 		DataDictionary d1 = new DataDictionary();
-		d1.setId("电话跟进");
-		d1.setName("电话跟进");
+		d1.setId("电话回访");
+		d1.setName("电话回访");
 		listVisitOption.add(d1);
 		
 		DataDictionary d2 = new DataDictionary();
@@ -96,7 +112,7 @@ public class CustomerVisitInfoAction extends BaseActionSupport{
 		DataDictionary d3 = new DataDictionary();
 		d3.setId("邮件沟通");
 		d3.setName("邮件沟通");
-		listVisitOption.add(d2);
+		listVisitOption.add(d3);
 		
 		try
 		{
@@ -111,13 +127,13 @@ public class CustomerVisitInfoAction extends BaseActionSupport{
 		{
 			values.put("customerName", "%"+customerName+"%");
 		}
-		if(salesmanId != null && salesmanId.length() > 0)
-		{
-			values.put("salesmanId", salesmanId);
-		}
 		if(customerId != null && customerId.length() > 0)
 		{
 			values.put("customerId", customerId);
+		}
+		if(salesmanId != null && salesmanId.length() > 0)
+		{
+			values.put("salesmanId", salesmanId);
 		}
 		if(visitOption != null && visitOption.length() > 0)
 		{
@@ -136,7 +152,7 @@ public class CustomerVisitInfoAction extends BaseActionSupport{
 	}
 	
 	/**
-	 * 客户跟进信息
+	 * 客户回访信息
 	 * @return String
 	 */
 	public String customerVisitInfo()
@@ -145,6 +161,52 @@ public class CustomerVisitInfoAction extends BaseActionSupport{
 		{
 			customerVisitInfo = customerVisitInfoService.get(id);
 			customerId = customerVisitInfo.getCustomerId();
+			customerInfo = customerInfoService.get(customerId);
+			try
+			{
+				customerInfo.setSalesman(userService.getUserById(customerInfo.getSalesmanId()).getUserCName());
+			}catch(Exception ex){}
+			DataDictionary d = dataDictionaryService.get(customerInfo.getCategoryId());
+			if(d != null)
+				customerInfo.setCategory(d.getName());
+			
+			List<ContractPersonInfo> listPerson = contractPersonService.findAllContractPersonInfoByCustomerId(customerId);
+			if(listPerson != null)
+			{
+				for(int i=0;i<listPerson.size();i++)
+				{
+					if(contractPerson.length() == 0)
+					{
+						contractPerson = listPerson.get(i).getPersonName();
+					}else
+					{
+						contractPerson = contractPerson + "," +listPerson.get(i).getPersonName();
+					}
+					
+					if(listPerson.get(i).getPhone() != null && listPerson.get(i).getPhone().length() > 0)
+					{
+						if(contractTel.length() == 0)
+						{
+							contractTel = listPerson.get(i).getPhone();
+						}else
+						{
+							contractTel = contractTel + "," +listPerson.get(i).getPhone();
+						}
+					}
+					
+					if(listPerson.get(i).getTel() != null && listPerson.get(i).getTel().length() > 0)
+					{
+						if(contractTel.length() == 0)
+						{
+							contractTel = listPerson.get(i).getTel();
+						}else
+						{
+							contractTel = contractTel + "," +listPerson.get(i).getTel();
+						}
+					}
+					
+				}
+			}
 		}
 		else
 			customerVisitInfo = new CustomerVisitInfo();
@@ -155,8 +217,8 @@ public class CustomerVisitInfoAction extends BaseActionSupport{
 		d.setName("登门拜访");
 		listVisitOption.add(d);
 		DataDictionary d1 = new DataDictionary();
-		d1.setId("电话跟进");
-		d1.setName("电话跟进");
+		d1.setId("电话回访");
+		d1.setName("电话回访");
 		listVisitOption.add(d1);
 		
 		DataDictionary d2 = new DataDictionary();
@@ -167,7 +229,7 @@ public class CustomerVisitInfoAction extends BaseActionSupport{
 		DataDictionary d3 = new DataDictionary();
 		d3.setId("邮件沟通");
 		d3.setName("邮件沟通");
-		listVisitOption.add(d2);
+		listVisitOption.add(d3);
 		
 		listPerson = contractPersonService.findAllContractPersonInfoByCustomerId(customerId);
 		
@@ -182,7 +244,7 @@ public class CustomerVisitInfoAction extends BaseActionSupport{
 		return SUCCESS;
 	}
 	/**
-	 * 保存客户跟进信息
+	 * 保存客户回访信息
 	 * @return String
 	 */
 	public String saveVisitInfo()
@@ -217,7 +279,7 @@ public class CustomerVisitInfoAction extends BaseActionSupport{
 		return SUCCESS;
 	}
 	/**
-	 * 删除客户跟进信息
+	 * 删除客户回访信息
 	 * @return String
 	 */
 	public String deleteCustomerVisit()
@@ -327,5 +389,28 @@ public class CustomerVisitInfoAction extends BaseActionSupport{
 
 	public void setVisitOption(String visitOption) {
 		this.visitOption = visitOption;
+	}
+	public CustomerInfo getCustomerInfo() {
+		return customerInfo;
+	}
+
+	public void setCustomerInfo(CustomerInfo customerInfo) {
+		this.customerInfo = customerInfo;
+	}
+
+	public String getContractPerson() {
+		return contractPerson;
+	}
+
+	public void setContractPerson(String contractPerson) {
+		this.contractPerson = contractPerson;
+	}
+
+	public String getContractTel() {
+		return contractTel;
+	}
+
+	public void setContractTel(String contractTel) {
+		this.contractTel = contractTel;
 	}
 }
