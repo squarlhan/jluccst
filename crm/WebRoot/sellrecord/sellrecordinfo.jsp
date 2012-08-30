@@ -66,7 +66,7 @@
 			  			row=row+"<td align='center' bgcolor='#FFFFFF'>"+info[3]+"</td>";
 			  			row=row+"<td align='center' bgcolor='#FFFFFF'>"+info[4]+"</td>";
 			  			row=row+"<td align='center' bgcolor='#FFFFFF'>"+info[5]+"</td>";
-			  			row=row+"<td align='center' bgcolor='#FFFFFF'><a id='del_one' href='javascript:void(0);'>删除</a></td>";
+			  			row=row+"<td align='center' bgcolor='#FFFFFF'><a name='del_one' href='javascript:void(0);' onclick='$.fn.deletetemp($(this));'>删除</a></td>";
 			  			row=row+"</tr>";
 			  			$("#no_data").hide();
 			  		    $("#goodsList tr:eq(2)").append(row);
@@ -76,9 +76,20 @@
 				});
 	  		});
 	  		
+	  		/**
+	  		 *ajax删除数据库行
+	  		*/
+	  		$("a[name='del_one']").each(function(){
+	  			$(this).click(function(){
+	  				var url = $(this).attr("url");
+	  				$.post(url, null, function(data){});
+	  				$(this).parent().parent().remove();
+	  			});
+	  		});
+	  		
+	  		
 	  		$("#btn_save").click(function(){
-	  			parent.window.location.href = parent.window.location.href;
-	  			return false;
+	  			/*
 	  			$.ajax({
   					type:"post",
   					url: "addSellRecordAction.action",
@@ -90,7 +101,8 @@
   						try{
   							data = eval("("+data+")");
   							alert(data.message);
-  							
+  							parent.$.fn.selectTab(0);
+  							parent.$.fn.showOrHideTab(1,false);
   						}catch(e){
   							alert(e.description);
   						}
@@ -100,6 +112,9 @@
   					error: function(){
   					}
 				});
+	  			//*/
+	  			$("#form1").attr("action","addSellRecordAction.action");
+	  			$("#form1").submit();
 	  		});
 		});
 			
@@ -147,6 +162,13 @@
 	  				}
 	  			}
 	  		});
+	  	};
+		/**
+	  	 * 删除临时行
+	  	 * @param obj 元素本身
+	  	 */
+	  	$.fn.deletetemp = function(obj){
+	  		obj.parent().parent().remove();
 	  	};
 		
 	</script>
@@ -219,9 +241,33 @@
 		              			<td align="center" background="<%=basePath%>/images/headerbg.jpg"><strong>预 付</strong></td>
 		              			<td align="center" background="<%=basePath%>/images/headerbg.jpg"><strong>操作</strong></td>
 							</tr>
+							<s:if test="sellRecord!=null">
+							<s:iterator value="sellRecord.goodsDetials" status="obj">
+								<tr>
+									 <td height="26" align="center" bgcolor="#FFFFFF" >  
+										<s:checkbox id="%{#obj.id}" name="ids" fieldValue="%{id}" value="false" theme="simple"/>
+									</td>
+						            <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="goodsName"/></td>
+						            <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="standard"/></td>
+						            <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="weight"/></td>
+						            <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="price"/></td>
+						            <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="number"/></td>
+						            <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="allPrice"/></td>
+						            <td height="26" align="center" bgcolor="#FFFFFF">
+										<s:url id="delete_url" action="deleteSellRecordDetialsAction">   
+											<s:param name="ids" value="id"></s:param>   
+										</s:url>
+							         	<a name="del_one" href="javascript:void(0);" url="${delete_url}">删除</a>  
+									</td>
+					            </tr>
+							</s:iterator>
+							</s:if>
+							<s:else>
 							<tr id="no_data">
 		              			<td align="center" bgcolor="#FFFFFF" colspan="8" >暂无记录</td>
 		        			</tr>
+							</s:else>
+							
 						</table>
 					</fieldset>
 					<fieldset >

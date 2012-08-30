@@ -46,8 +46,8 @@
 		$(function(){
 			$("#btn_add").click(function(){
 				try{
-					//var $tabs = parent.$('#tt').tabs(); // 选中第一个标签
-					parent.$.fn.selectTab(2);
+					parent.$.fn.showOrHideTab(1,true);
+					parent.$.fn.selectTab(1);
 				}catch(e){
 					alert(e.description);
 				}
@@ -124,7 +124,6 @@
  							<s:checkbox theme="simple" id="cbk_all" name="all"></s:checkbox>
  						</td>
             			<td align="center" background="<%=basePath%>/images/headerbg.jpg"><strong>客户名称</strong></td>
-            			<td align="center" background="<%=basePath%>/images/headerbg.jpg"><strong>联系人</strong></td>
             			<td align="center" background="<%=basePath%>/images/headerbg.jpg"><strong>业务员</strong></td>
             			<td align="center" background="<%=basePath%>/images/headerbg.jpg"><strong>成交日期</strong></td>
             			<td align="center" background="<%=basePath%>/images/headerbg.jpg"><strong>产品种类</strong></td>
@@ -134,6 +133,22 @@
             			<td align="center" background="<%=basePath%>/images/headerbg.jpg"><strong>交回款情况</strong></td>
             			<td align="center" background="<%=basePath%>/images/headerbg.jpg"><strong>操作</strong></td>
 			</tr>
+			 <s:iterator value="pagination.data" status="obj">
+	        	<tr>
+	        		<td height="26" align="center" bgcolor="#FFFFFF" >  
+						<s:checkbox id="%{#obj.id}" name="ids" fieldValue="%{id}" value="false" theme="simple"/>
+					</td>
+           			<td height="26" align="center" bgcolor="#FFFFFF"><s:property value="customerName"/></td>
+            		<td height="26" align="center" bgcolor="#FFFFFF"><s:property value="salesmanName"/></td>
+            		<td height="26" align="center" bgcolor="#FFFFFF"><s:property value="bargainTime"/></td>
+            		<td height="26" align="center" bgcolor="#FFFFFF"><s:property value="goodsType"/></td>
+            		<td height="26" align="center" bgcolor="#FFFFFF"><s:property value="receivable"/></td>
+            		<td height="26" align="center" bgcolor="#FFFFFF"><s:property value="realCollection"/></td>
+            		<td height="26" align="center" bgcolor="#FFFFFF"><s:property value="debt"/></td>
+            		<td height="26" align="center" bgcolor="#FFFFFF"><s:property value="receivable/realCollection"/>%</td>
+            		<td height="26" align="center" bgcolor="#FFFFFF"><s:property value="salesman"/></td>
+            </tr>
+            </s:iterator>
 			 <tr>
 	          <td height="26" colspan="11" align="center" bgcolor="#FFFFFF">
 				<page:pages currentPage="pagination.currentPage" totalPages="pagination.totalPages" totalRows="pagination.totalRows" styleClass="page" theme="text" ></page:pages> 
