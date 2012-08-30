@@ -275,7 +275,7 @@
 									<tr>
 										<td width="40" align="right" style="padding-bottom: 4px;"><img src="images/menuto.jpg" width="5" height="5" />
 										</td>
-										<td><a href="customerVisiting.html" target="mainFrame">客户回访</a>
+										<td><a href="customer/allcustomervisitmanage.jsp" target="mainFrame">客户回访</a>
 										</td>
 									</tr>
 								</table>
