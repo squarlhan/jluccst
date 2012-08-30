@@ -2,8 +2,10 @@ package com.boan.crm.sellrecord.action;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,8 +18,8 @@ import com.boan.crm.customer.service.ICustomerInfoService;
 import com.boan.crm.groupmanage.common.UserSession;
 import com.boan.crm.sellrecord.model.GoodsInfo;
 import com.boan.crm.sellrecord.model.SellRecord;
+import com.boan.crm.sellrecord.service.IGoodsInfoService;
 import com.boan.crm.sellrecord.service.ISellRecordService;
-import com.boan.crm.sms.model.SMSInfo;
 import com.boan.crm.utils.action.BaseActionSupport;
 import com.boan.crm.utils.page.Pagination;
 
@@ -48,6 +50,11 @@ public class SellRecordAction extends BaseActionSupport{
 	@Autowired
 	@Qualifier("sellRecordService")
 	private ISellRecordService sellRecordService;
+	
+	@Autowired
+	@Qualifier("goodsInfoService")
+	private IGoodsInfoService goodsInfoService;
+	
 	/**
 	 * 销售员所有的客户
 	 */
@@ -62,29 +69,32 @@ public class SellRecordAction extends BaseActionSupport{
 	 * 显示分页
 	 */
 	private Pagination<SellRecord> pagination = new Pagination<SellRecord>();
+
+	private String[] ids;
 	
 	public String openSellRecordList(){
+		Map<String, String> params = new HashMap<String, String>();
+		pagination = sellRecordService.findSellRecordForPage(params ,pagination);
 		return SUCCESS;
 	}
 	
 	public String openAddSellRecord(){
-		CustomerInfo obj  =   new CustomerInfo();
-		obj.setId("11");
-		obj.setCustomerName("张三");
-		customerInfos.add(obj);
+		customerInfos= customerInfoService.findAllCustomerInfo();
 		return SUCCESS;
 	}
 	public String openModifySellRecord(){
+		customerInfos= customerInfoService.findAllCustomerInfo();
 		sellRecord = sellRecordService.getSellRecordById(sellRecord.getId());
 		return SUCCESS;
 	}
 	
 	public String addSellRecord(){
+		customerInfos= customerInfoService.findAllCustomerInfo();
 		//查找客户信息
-//		customer = customerInfoService.get(customer.getId());
+		customer = customerInfoService.get(customer.getId());
 		sellRecord.setCustomer(customer);
-//		sellRecord.setCustomerId(customer.getId());//设置客户Id
-//		sellRecord.setCustomerName(customer.getCustomerName());
+		sellRecord.setCustomerId(customer.getId());//设置客户Id
+		sellRecord.setCustomerName(customer.getCustomerName());
 		UserSession userSession = this.getSession();
 		sellRecord.setSalesmanId(userSession.getUserId());//设置销售员Id
 		sellRecord.setSalesmanName(userSession.getUserCName());
@@ -111,7 +121,8 @@ public class SellRecordAction extends BaseActionSupport{
 			message="保存失败！";
 			e.printStackTrace();
 		}
-		return "message";
+//		return "message";
+		return SUCCESS;
 	}
 	
 	public String modifySellRecord(){
@@ -136,6 +147,11 @@ public class SellRecordAction extends BaseActionSupport{
 	
 	public String modifySellRecordDetial(){
 		return SUCCESS;
+	}
+	
+	public String deleteSellRecordDetials(){
+		goodsInfoService.deleteGoodsInfoByIds(ids);
+		return NONE;
 	}
 
 	public List<String> getDetials() {
@@ -184,5 +200,13 @@ public class SellRecordAction extends BaseActionSupport{
 
 	public void setPagination(Pagination<SellRecord> pagination) {
 		this.pagination = pagination;
+	}
+
+	public String[] getIds() {
+		return ids;
+	}
+
+	public void setIds(String[] ids) {
+		this.ids = ids;
 	}
 }

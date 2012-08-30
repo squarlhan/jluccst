@@ -17,6 +17,10 @@
 			<result name="success">/sellrecord/sellrecordinfo.jsp</result>
 			<result name="input">/sellrecord/sellrecordinfo.jsp</result>
 		</action>
+		<action name="addSellRecordAction" class="sellRecordAction" method="addSellRecord">
+			<result name="success">/sellrecord/sellrecordinfo.jsp</result>
+			<result name="input">/sellrecord/sellrecordinfo.jsp</result>
+		</action>
 		<action name="modifySellRecordAction" class="sellRecordAction" method="modifySellRecord">
 			<result name="success">/sellrecord/sellrecordinfo.jsp</result>
 			<result name="input">/sellrecord/sellrecordinfo.jsp</result>
@@ -27,10 +31,12 @@
 			<result name="success">/sellrecord/sellrecorddetial.jsp</result>
 			<result name="input">/sellrecord/sellrecorddetial.jsp</result>
 		</action>
+		
+		<action name="deleteSellRecordDetialsAction" class="sellRecordAction" method="deleteSellRecordDetials"/>
 	</package>
-	<package name="sellRecordAjax" extends="json-default" namespace="/">
+	<!-- package name="sellRecordAjax" extends="json-default" namespace="/">
 		<action name="addSellRecordAction" class="sellRecordAction" method="addSellRecord">
             <result type="json" name="message">message</result>
         </action>
-	</package>
+	</package> -->
 </struts>

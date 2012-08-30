@@ -27,6 +27,26 @@ public class SellRecord implements Serializable {
 
 	private static final long serialVersionUID = 7500240948621330774L;
 	
+	public SellRecord(){
+		
+	}
+	
+	public SellRecord(String id,String goodsType,String customerId,String customerName,String salesmanId,String salesmanName,String orderID,BigDecimal rate,BigDecimal receivable,BigDecimal realCollection,BigDecimal debt,BigDecimal advance,int invoice,Calendar  bargainTime){
+		this.id=id;
+		this.goodsType=goodsType;
+		this.customerId=customerId;
+		this.customerName=customerName;
+		this.salesmanId=salesmanId;
+		this.salesmanName= salesmanName;
+		this.orderID=orderID;
+		this.rate=rate;
+		this.receivable=receivable;
+		this.realCollection=realCollection;
+		this.debt=debt;
+		this.advance=advance;
+		this. invoice=invoice;
+		this.bargainTime=bargainTime;
+	}
 	@Id
 	@GenericGenerator(name = "system-uuid", strategy = "uuid")
 	@GeneratedValue(generator = "system-uuid")

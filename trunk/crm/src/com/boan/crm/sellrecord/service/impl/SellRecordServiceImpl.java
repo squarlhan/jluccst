@@ -1,7 +1,10 @@
 package com.boan.crm.sellrecord.service.impl;
 
+import java.math.BigDecimal;
+import java.util.Calendar;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +18,7 @@ import com.boan.crm.sellrecord.model.GoodsInfo;
 import com.boan.crm.sellrecord.model.SellRecord;
 import com.boan.crm.sellrecord.service.IGoodsInfoService;
 import com.boan.crm.sellrecord.service.ISellRecordService;
+import com.boan.crm.utils.page.Pagination;
 
 @Service("sellRecordService")
 public class SellRecordServiceImpl implements ISellRecordService {
@@ -68,5 +72,47 @@ public class SellRecordServiceImpl implements ISellRecordService {
 			record.setCustomer(customer);
 		}
 		return record;
+	}
+	
+	/**
+     * 分页查询销售记录
+     * @return 记录数组
+     */
+	public Pagination<SellRecord> findSellRecordForPage(Map<String, ?> values, Pagination<SellRecord> pagination){
+		StringBuffer param = new StringBuffer();
+		
+		String hql = "select new SellRecord" +
+				"(record.id,record. goodsType,record. customerId,record. customerName," +
+				"record. salesmanId,record. salesmanName,record. orderID,record. rate," +
+				"record. receivable,record. realCollection,record. debt,record. advance," +
+				"record. invoice,record. bargainTime) " +
+				"from SellRecord as record,CustomerInfo as customer where 1=1 " +
+				"and record.customerId=customer.id "+param.toString()+"order by record.bargainTime desc";
+		List<SellRecord> data =sellRecordDao.findForPage(hql, values, pagination.getStartIndex(), pagination.getPageSize());
+		for(int i=0;i<data.size();i++){
+			SellRecord temp  = data.get(i);
+			String id = temp.getCustomerId();
+			if(id!=null){
+				CustomerInfo customer = customerInfoService.get(id);
+				customer.setSalesman("222222");
+				temp.setCustomer(customer);
+			}
+			List<GoodsInfo> detials= goodsInfoService.queryGoodsInfoByRecordId(temp.getId());
+			
+			if(detials!=null){
+				Set<GoodsInfo> setTemp = new HashSet<GoodsInfo>();
+				for(GoodsInfo goods : detials){
+					setTemp.add(goods);
+				}
+				temp.setGoodsDetials(setTemp);
+			}
+			data.set(i, temp);
+		}
+		hql = "select count(*)from SellRecord as record,CustomerInfo as customer where 1=1 " +
+				"and record.customerId=customer.id "+param.toString()+"order by record.bargainTime desc";
+		int totalRows = sellRecordDao.findCountForPage(hql, values);
+		pagination.setTotalRows(totalRows);
+		pagination.setData(data);
+		return pagination;
 	}
 }
