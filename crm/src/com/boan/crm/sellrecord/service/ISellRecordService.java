@@ -1,6 +1,9 @@
 package com.boan.crm.sellrecord.service;
 
+import java.util.Map;
+
 import com.boan.crm.sellrecord.model.SellRecord;
+import com.boan.crm.utils.page.Pagination;
 
 public interface ISellRecordService {
 
@@ -16,4 +19,10 @@ public interface ISellRecordService {
 	 * @return
 	 */
 	public SellRecord getSellRecordById(String id);
+	
+	/**
+     * 分页查询销售记录
+     * @return 记录数组
+     */
+	public Pagination<SellRecord> findSellRecordForPage(Map<String, ?> values, Pagination<SellRecord> pagination);
 }

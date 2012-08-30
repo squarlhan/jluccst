@@ -29,4 +29,8 @@ public class GoodsInfoServiceImpl implements IGoodsInfoService {
 		String hql = "from GoodsInfo obj where obj. sellRecordId=:sellRecordId";
 		return goodsInfoDao.find( hql , values);
 	}
+	
+	public void deleteGoodsInfoByIds(String... ids){
+		goodsInfoDao.delete(ids);
+	}
 }

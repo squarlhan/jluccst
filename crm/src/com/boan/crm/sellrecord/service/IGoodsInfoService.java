@@ -9,4 +9,6 @@ public interface IGoodsInfoService {
 	public void saveOrUpdate(GoodsInfo goodsInfo);
 	
 	public List<GoodsInfo> queryGoodsInfoByRecordId(String recordId);
+	
+	public void deleteGoodsInfoByIds(String... ids);
 }
