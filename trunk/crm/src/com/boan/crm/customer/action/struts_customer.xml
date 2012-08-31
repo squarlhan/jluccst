@@ -131,7 +131,9 @@
 	</package>
 	<package name="ssss" extends="json-default" namespace="/customer">
 			<action name="getCustomerByName" class="customerInfoAction" method="getCustomerByName">
-				<result name="success" type="json"></result>
+				<result name="success" type="json">
+				<param name="root">listCustomer</param>
+				</result>
 			</action>
 	</package>
 </struts>
