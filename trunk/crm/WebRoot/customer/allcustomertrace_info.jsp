@@ -72,7 +72,7 @@
 	               },
 		           parse: function(test) 
 		           {
-		               data = test.listCustomer;
+		               data = test;
 		               var rows = [];
 		               if(data != null)
 		               {
