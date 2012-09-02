@@ -80,6 +80,18 @@ public class SellRecordServiceImpl implements ISellRecordService {
      */
 	public Pagination<SellRecord> findSellRecordForPage(Map<String, ?> values, Pagination<SellRecord> pagination){
 		StringBuffer param = new StringBuffer();
+		if(values.containsKey("queryCustomerName")){
+			param = param.append("  and customer.customerName like '%"+values.get("queryCustomerName")+"%'  ");
+		}
+		if(values.containsKey("querySalesman")){
+			param = param.append("  and  record. salesmanId='"+values.get("querySalesman")+"'" );
+		}
+		if(values.containsKey("queryBargainTimeBegin")){
+			param.append(" and record. bargainTime >='"+values.get("queryBargainTimeBegin")+"'" );
+		}
+		if(values.containsKey("queryBargainTimeEnd")){
+			param.append(" and record. bargainTime <='"+values.get("queryBargainTimeEnd")+"'" );
+		}
 		
 		String hql = "select new SellRecord" +
 				"(record.id,record. goodsType,record. customerId,record. customerName," +
@@ -94,7 +106,6 @@ public class SellRecordServiceImpl implements ISellRecordService {
 			String id = temp.getCustomerId();
 			if(id!=null){
 				CustomerInfo customer = customerInfoService.get(id);
-				customer.setSalesman("222222");
 				temp.setCustomer(customer);
 			}
 			List<GoodsInfo> detials= goodsInfoService.queryGoodsInfoByRecordId(temp.getId());
@@ -114,5 +125,13 @@ public class SellRecordServiceImpl implements ISellRecordService {
 		pagination.setTotalRows(totalRows);
 		pagination.setData(data);
 		return pagination;
+	}
+	
+	/**
+	 * 根据销售记录Id删除销售记录
+	 * @param ids
+	 */
+	public void deleteSellRecordByIds(String... ids){
+		sellRecordDao.delete(ids);
 	}
 }

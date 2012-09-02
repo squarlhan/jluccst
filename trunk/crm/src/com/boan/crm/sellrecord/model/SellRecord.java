@@ -103,30 +103,43 @@ public class SellRecord implements Serializable {
 	/**
 	 * 税率
 	 */
-	@Column(name = "RATE")
+	@Column(name = "RATE", precision=12, scale=2)
 	private BigDecimal rate ;
 	
 	/**
 	 * 应收金额
 	 */
-	@Column(name = "RECEIVABLE")
+	@Column(name = "RECEIVABLE", precision=12, scale=2)
 	private BigDecimal receivable;
 	
 	/**
 	 * 实收
 	 */
-	@Column(name = "REAL_COLLECTION")
+	@Column(name = "REAL_COLLECTION", precision=12, scale=2)
 	private BigDecimal realCollection;
 	
 	/**
+	 * 实收
+	 */
+	@Column(name = "RETURNED_MONEY", precision=12, scale=2)
+	private BigDecimal returnedMoney;
+	
+	public BigDecimal getReturnedMoney() {
+		return realCollection.divideToIntegralValue(receivable); 
+	}
+
+	public void setReturnedMoney(BigDecimal returnedMoney) {
+		this.returnedMoney =returnedMoney; 
+	}
+	/**
 	 * 欠款
 	 */
-	@Column(name = "DEBT")
+	@Column(name = "DEBT", precision=12, scale=2)
 	private BigDecimal debt;
 	/**
 	 * 预付
 	 */
-	@Column(name = "ADVANCE")
+	@Column(name = "ADVANCE", precision=12, scale=2)
 	private BigDecimal advance;
 	
 	/**
