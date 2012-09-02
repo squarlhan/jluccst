@@ -5,6 +5,10 @@
 <struts>
 	<!-- 客户Action -->
 	<package name="customer_search" extends="struts-default" namespace="/">
+		<action name="openCustomerSearchAction" class="customerSearchAction" method="openCustomerSearch">
+			<result name="success">/customer/customerreaserch.jsp</result>
+			<result name="input">/customer/customerreaserch.jsp</result>
+		</action>
 		<action name="customerSearchAction" class="customerSearchAction" method="customerSearch">
 			<result name="success">/customer/customerreaserch.jsp</result>
 			<result name="input">/customer/customerreaserch.jsp</result>
