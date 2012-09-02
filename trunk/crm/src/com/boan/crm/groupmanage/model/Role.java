@@ -41,6 +41,12 @@ public class Role {
 	 */
 	@Column(name = "ROLE_KEY")
 	private String roleKey;
+	
+	/**
+	 * 公司标识
+	 */
+	@Column(name = "COMPANY_ID")
+	private String companyId;
 
 	/**
 	 * 角色创建时间
