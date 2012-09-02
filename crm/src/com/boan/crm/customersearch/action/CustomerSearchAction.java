@@ -25,6 +25,7 @@ import com.boan.crm.datadictionary.model.CityInfo;
 import com.boan.crm.datadictionary.model.ProvinceInfo;
 import com.boan.crm.datadictionary.service.IAreaService;
 import com.boan.crm.utils.action.BaseActionSupport;
+import com.boan.crm.utils.converter.ParseBeanUtil;
 import com.boan.crm.utils.page.Pagination;
 
 @Controller("customerSearchAction")
@@ -152,12 +153,20 @@ public class CustomerSearchAction  extends BaseActionSupport{
 	public String toCustomer(){
 		customerLibInfo = customerInfoService.get(customerLibInfo.getId());
 		List<ContractPersonLibInfo> contractPersonInfoList = contractpersonService.findAllContractPersonLibInfoByCustomerId(customerLibInfo.getId());
-		
-		CustomerInfo customerInfo = new CustomerInfo();
-		customerService.save(customerInfo);
-		for(ContractPersonLibInfo temp : contractPersonInfoList){
-			ContractPersonInfo contractPersonInfo = new ContractPersonInfo();
-			contractpersonInfoService.save(contractPersonInfo);
+		if(customerLibInfo!=null){
+			CustomerInfo customerInfo =(CustomerInfo)ParseBeanUtil.parseBean(customerLibInfo, CustomerInfo.class);
+			customerInfo.setId(null);
+			customerInfo.setCompanyId(sessionCompanyId);
+			customerInfo.setCompanyFullName(sessionCompanyName);
+			customerInfo.setSalesman(sessionUserCName);
+			customerInfo.setSalesmanId(sessionUserId);
+			customerService.save(customerInfo);
+			for(ContractPersonLibInfo temp : contractPersonInfoList){
+				ContractPersonInfo contractPersonInfo = (ContractPersonInfo)ParseBeanUtil.parseBean(temp, ContractPersonInfo.class);
+				contractPersonInfo.setId(null);
+				contractPersonInfo.setCustomerId(customerInfo.getId());
+				contractpersonInfoService.save(contractPersonInfo);
+			}
 		}
 		return SUCCESS;
 	}
