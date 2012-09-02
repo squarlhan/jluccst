@@ -76,7 +76,21 @@
 					});
 				}
 			});
+			
+			/**
+	  		 * 修改客户信息
+	  		 */
+	  		$('a[name="edit"]').each(function(){
+	  			$(this).click(function(){
+	  				var url = $(this).attr("url");
+	  				$.post(url, {}, function(data){
+						
+					});
+	  				window.parent.location.href = url;
+	  			});
+	  		});
 		});
+		
 		</script>
 
   </head>
@@ -109,12 +123,12 @@
 					<td height="26" align="left" bgcolor="#FFFFFF"  >
 						<s:select id="sel_city"  name ="cityId"  list="cityList" listKey="id"  listValue="cityName" cssStyle="width:100px" headerKey="" headerValue="--- 请选择 ---"></s:select>
 					</td>
-					<td height="26" align="right" bgcolor="#FFFFFF">
-						<strong>地区：</strong>
-					</td>
-					<td height="26" align="left" bgcolor="#FFFFFF"  >
-						<s:select id="sel_area"  name ="areaId"  list="areaList" listKey="id"  listValue="areaName" cssStyle="width:100px" headerKey="" headerValue="--- 请选择 ---"></s:select>
-					</td>
+<%--					<td height="26" align="right" bgcolor="#FFFFFF">--%>
+<%--						<strong>地区：</strong>--%>
+<%--					</td>--%>
+<%--					<td height="26" align="left" bgcolor="#FFFFFF"  >--%>
+<%--						<s:select id="sel_area"  name ="areaId"  list="areaList" listKey="id"  listValue="areaName" cssStyle="width:100px" headerKey="" headerValue="--- 请选择 ---"></s:select>--%>
+<%--					</td>--%>
 					<td height="26" align="right" bgcolor="#FFFFFF" rowspan="2">
 						<input name="queryBtn" type="submit" class="btn_2_3" id="queryBtn" value="查询">
 					</td>
@@ -157,8 +171,8 @@
             <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="fax"/></td>
             <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="address"/></td>
 	          <td height="26" colspan="2" align="center" bgcolor="#FFFFFF"  nowrap="nowrap">
-	          	<s:url id="edit_url" action="customerTabInfo.action">   
-					<s:param name="id" value="id"></s:param>   
+	          	<s:url id="edit_url" action="toCustomerAction.action">   
+					<s:param name="customerLibInfo.id" value="id"></s:param>   
 				</s:url>
 	         	<a name="edit" href="javascript:void(0);" url="${edit_url}"><font color="green"><strong>转为客户</strong></font></a>  
 	          </td>
