@@ -134,4 +134,26 @@ public class SellRecordServiceImpl implements ISellRecordService {
 	public void deleteSellRecordByIds(String... ids){
 		sellRecordDao.delete(ids);
 	}
+	
+	/**
+	 * 根据客户Id获取消费次数
+	 * @param customerId
+	 * @return
+	 */
+	public  int getConsumptionCount(String customerId){
+		String hql ="select count(record.id) from SellRecord as record where record. customerId='"+customerId+"' ";
+		List list = sellRecordDao.find(hql, "");
+		return list!=null && list.size()>0 ? Integer.parseInt( list.get(0).toString()) : 0;
+	}
+	
+	/**
+	 * 根据客户Id获取消费金额
+	 * @param customerId
+	 * @return
+	 */
+	public  BigDecimal getConsumptionMoney(String customerId){
+		String hql ="select sum(record.receivable) from SellRecord as record where record. customerId='"+customerId+"' ";
+		List list = sellRecordDao.find(hql, "");
+		return list!=null && list.size()>0 ? new BigDecimal( list.get(0).toString()) : new BigDecimal(0);
+	}
 }
