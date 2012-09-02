@@ -290,14 +290,16 @@ public class SMSAtion extends BaseActionSupport{
 		UserSession userSession = this.getSession();
 		String organId = userSession.getCompanyId();
 		//初始化短信发送接口
-		Company  company = companyService.get(organId);
-		String serialNo =company.getSmsSN();
-		String password = company.getSmsPassword();
-		String key = company.getSmsKey();
-		if(serialNo!=null && password!=null && key!=null && !serialNo.trim().equals("") && !password.trim().equals("") && !key.trim().equals("")){
-			//初始化短信发送接口
-			smsManageService.initClient( serialNo,password,key);
-			SMSBalance = smsManageService.getBalance();
+		if(organId!=null){
+			Company  company = companyService.get(organId);
+			String serialNo =company.getSmsSN();
+			String password = company.getSmsPassword();
+			String key = company.getSmsKey();
+			if(serialNo!=null && password!=null && key!=null && !serialNo.trim().equals("") && !password.trim().equals("") && !key.trim().equals("")){
+				//初始化短信发送接口
+				smsManageService.initClient( serialNo,password,key);
+				SMSBalance = smsManageService.getBalance();
+			}
 		}
 		return SUCCESS;
 	}
@@ -434,14 +436,16 @@ public class SMSAtion extends BaseActionSupport{
 		UserSession userSession = this.getSession();
 		String organId = userSession.getCompanyId();
 		//初始化短信发送接口
-		Company  company = companyService.get(organId);
-		String serialNo =company.getSmsSN();
-		String password = company.getSmsPassword();
-		String key = company.getSmsKey();
-		if(serialNo!=null && password!=null && key!=null && !serialNo.trim().equals("") && !password.trim().equals("") && !key.trim().equals("")){
-			//初始化短信发送接口
-			smsManageService.initClient( serialNo,password,key);
-			SMSBalance = smsManageService.getBalance();
+		if(organId!=null){
+			Company  company = companyService.get(organId);
+			String serialNo =company.getSmsSN();
+			String password = company.getSmsPassword();
+			String key = company.getSmsKey();
+			if(serialNo!=null && password!=null && key!=null && !serialNo.trim().equals("") && !password.trim().equals("") && !key.trim().equals("")){
+				//初始化短信发送接口
+				smsManageService.initClient( serialNo,password,key);
+				SMSBalance = smsManageService.getBalance();
+			}
 		}
 		return SUCCESS;
 	}
