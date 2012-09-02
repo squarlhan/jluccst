@@ -84,9 +84,8 @@
 	  			$(this).click(function(){
 	  				var url = $(this).attr("url");
 	  				$.post(url, {}, function(data){
-						
+						alert(data);
 					});
-	  				window.parent.location.href = url;
 	  			});
 	  		});
 		});
