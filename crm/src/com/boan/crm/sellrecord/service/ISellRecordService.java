@@ -25,4 +25,10 @@ public interface ISellRecordService {
      * @return 记录数组
      */
 	public Pagination<SellRecord> findSellRecordForPage(Map<String, ?> values, Pagination<SellRecord> pagination);
+	
+	/**
+	 * 根据销售记录Id删除销售记录
+	 * @param ids
+	 */
+	public void deleteSellRecordByIds(String... ids);
 }
