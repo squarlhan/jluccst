@@ -1,5 +1,6 @@
 package com.boan.crm.sellrecord.service;
 
+import java.math.BigDecimal;
 import java.util.Map;
 
 import com.boan.crm.sellrecord.model.SellRecord;
@@ -31,4 +32,18 @@ public interface ISellRecordService {
 	 * @param ids
 	 */
 	public void deleteSellRecordByIds(String... ids);
+	
+	/**
+	 * 根据客户Id获取消费次数
+	 * @param customerId
+	 * @return
+	 */
+	public  int getConsumptionCount(String customerId);
+	
+	/**
+	 * 根据客户Id获取消费金额
+	 * @param customerId
+	 * @return
+	 */
+	public  BigDecimal getConsumptionMoney(String customerId);
 }
