@@ -21,5 +21,10 @@
 				<param name="root">areaList</param>
 				</result>
 			</action>
+			<action name="toCustomerAction" class="customerSearchAction" method="toCustomer">
+				<result name="success" type="json">
+				<param name="root">message</param>
+				</result>
+			</action>
 	</package>
 </struts>
