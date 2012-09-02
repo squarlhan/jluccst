@@ -12,8 +12,13 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
+import com.boan.crm.customer.model.ContractPersonInfo;
 import com.boan.crm.customer.model.CustomerInfo;
+import com.boan.crm.customer.service.IContractPersonService;
+import com.boan.crm.customer.service.ICustomerInfoService;
+import com.boan.crm.customersearch.model.ContractPersonLibInfo;
 import com.boan.crm.customersearch.model.CustomerLibInfo;
+import com.boan.crm.customersearch.service.IContractPersonLibService;
 import com.boan.crm.customersearch.service.ICustomerLibInfoService;
 import com.boan.crm.datadictionary.model.AreaInfo;
 import com.boan.crm.datadictionary.model.CityInfo;
@@ -31,12 +36,30 @@ public class CustomerSearchAction  extends BaseActionSupport{
 	//客户状态接口类
 	private ICustomerLibInfoService customerInfoService;
 	
+	@Autowired
+	@Qualifier("customerInfoService")
+	//客户状态接口类
+	private ICustomerInfoService customerService;
+	
+	// 客户状态接口类
+	@Autowired
+	@Qualifier("contractPersonService")
+	private IContractPersonService contractpersonInfoService;
+	
+	// 客户状态接口类
+	@Autowired
+	@Qualifier("contractPersonLibService")
+	private IContractPersonLibService contractpersonService;
+		
 	@Resource
 	// 客户状态接口类
 	private IAreaService areaService;
 	
+	private CustomerLibInfo customerLibInfo;
+	
 	private Pagination<CustomerLibInfo> pagination = new Pagination<CustomerLibInfo>();
 	
+	private String message;
 	private String mainIndustry;
 	List<ProvinceInfo> provinceList   = new ArrayList();
 	List<CityInfo> cityList  = new ArrayList();
@@ -93,6 +116,10 @@ public class CustomerSearchAction  extends BaseActionSupport{
 		this.areaId = areaId;
 	}
 
+	/**
+	 * 查询客户
+	 * @return
+	 */
 	public String customerSearch(){
 		
 		provinceList = areaService.findAllProvinceInfo();
@@ -107,11 +134,31 @@ public class CustomerSearchAction  extends BaseActionSupport{
 		if(cityId!=null && !cityId.trim().equals("")){
 			values.put("cityId", cityId);
 		}
-		if(areaId!=null && !areaId.trim().equals("")){
-			values.put("areaId", areaId);
-		}
 		
 		pagination = customerInfoService.findCustomerLibInfoForPage(values, pagination);
+		if(provinceId!=null){
+			cityList = areaService.findCityInfoByProvinceId(provinceId);
+		}
+		if(cityId!=null){
+			areaList = areaService.findAreaInfoByCityId(cityId);
+		}
+		return SUCCESS;
+	}
+	
+	/**
+	 * 转为客户
+	 * @return
+	 */
+	public String toCustomer(){
+		customerLibInfo = customerInfoService.get(customerLibInfo.getId());
+		List<ContractPersonLibInfo> contractPersonInfoList = contractpersonService.findAllContractPersonLibInfoByCustomerId(customerLibInfo.getId());
+		
+		CustomerInfo customerInfo = new CustomerInfo();
+		customerService.save(customerInfo);
+		for(ContractPersonLibInfo temp : contractPersonInfoList){
+			ContractPersonInfo contractPersonInfo = new ContractPersonInfo();
+			contractpersonInfoService.save(contractPersonInfo);
+		}
 		return SUCCESS;
 	}
 	
@@ -138,5 +185,21 @@ public class CustomerSearchAction  extends BaseActionSupport{
 
 	public void setMainIndustry(String mainIndustry) {
 		this.mainIndustry = mainIndustry;
+	}
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+
+	public CustomerLibInfo getCustomerLibInfo() {
+		return customerLibInfo;
+	}
+
+	public void setCustomerLibInfo(CustomerLibInfo customerLibInfo) {
+		this.customerLibInfo = customerLibInfo;
 	}
 }
