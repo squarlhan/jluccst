@@ -121,6 +121,14 @@ public class CustomerSearchAction  extends BaseActionSupport{
 	 * 查询客户
 	 * @return
 	 */
+	public String openCustomerSearch(){
+		provinceList = areaService.findAllProvinceInfo();
+		return SUCCESS;
+	}
+	/**
+	 * 查询客户
+	 * @return
+	 */
 	public String customerSearch(){
 		
 		provinceList = areaService.findAllProvinceInfo();
@@ -168,6 +176,7 @@ public class CustomerSearchAction  extends BaseActionSupport{
 				contractpersonInfoService.save(contractPersonInfo);
 			}
 		}
+		message = "转入成功!";
 		return SUCCESS;
 	}
 	
