@@ -220,7 +220,7 @@
 									<tr>
 										<td width="40" align="right" style="padding-bottom: 4px;"><img src="images/menuto.jpg" width="5" height="5" />
 										</td>
-										<td><a href="customer/customerreaserch.jsp" target="mainFrame">客户查找</a>
+										<td><a href="customerSearchAction.action" target="mainFrame">客户查找</a>
 										</td>
 									</tr>
 								</table>
