@@ -322,6 +322,7 @@ public class CustomerInfoAction extends BaseActionSupport{
 									String customerAddressTemp = customerAddress.replaceAll("-", " ");
 									customerAddressTemp = customerAddressTemp.replaceAll("市", "市 ");
 									customerAddressTemp = customerAddressTemp.replaceAll("区", "区 ");
+									customerAddressTemp = customerAddressTemp.replaceAll("县", "县 ");
 									customerAddressTemp = customerAddressTemp.replaceAll("  ", " ");
 									String[] customerAddressArray = customerAddressTemp.split(" ");
 									boolean bProvinceFlag = false;
@@ -346,6 +347,7 @@ public class CustomerInfoAction extends BaseActionSupport{
 												if(city != null)
 												{
 													customer.setCity(city.getId());
+													customer.setProvince(city.getProvinceId());
 													bCityFlag = true;
 													continue;
 												}
@@ -354,6 +356,7 @@ public class CustomerInfoAction extends BaseActionSupport{
 											if(area != null)
 											{
 												customer.setDistrict(area.getId());
+												customer.setCity(area.getCityId());
 												continue;
 											}
 										}
