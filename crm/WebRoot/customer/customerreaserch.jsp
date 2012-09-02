@@ -88,6 +88,14 @@
 					});
 	  			});
 	  		});
+			$("#queryBtn").click(function(){
+				if($.trim($("#txt_mainIndustry").val())==""){
+					alert("请输入您要查询的主营行业信息！");
+					return false;
+				}else{
+					$("#form1").submit();
+				}
+			});
 		});
 		
 		</script>
@@ -129,7 +137,7 @@
 <%--						<s:select id="sel_area"  name ="areaId"  list="areaList" listKey="id"  listValue="areaName" cssStyle="width:100px" headerKey="" headerValue="--- 请选择 ---"></s:select>--%>
 <%--					</td>--%>
 					<td height="26" align="right" bgcolor="#FFFFFF" rowspan="2">
-						<input name="queryBtn" type="submit" class="btn_2_3" id="queryBtn" value="查询">
+						<input name="queryBtn" type="button" class="btn_2_3" id="queryBtn" value="查询">
 					</td>
 				</tr>
 			</table>
