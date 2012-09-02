@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">	
+<struts>
+	<!-- 客户Action -->
+	<package name="fuzzy" extends="struts-default" namespace="/fuzzy">
+		<action name="fuzzyList" class="fuzzyInfoAction" method="fuzzyList">
+			<result name="success">/fuzzy/fuzzy_list.jsp</result>
+			<result name="input">/fuzzy/fuzzy_list.jsp</result>
+		</action>
+		<action name="fuzzyinfoservice" class="fuzzyInfoAction" method="fuzzyList">
+			<result name="success">/fuzzy/getfuzzyinfoservice.jsp</result>
+			<result name="input">/fuzzy/getfuzzyinfoservice.jsp</result>
+		</action>
+		<action name="fuzzyCategoryList" class="fuzzyInfoAction" method="fuzzyCategoryList">
+			<result name="success">/fuzzy/fuzzycategorytree.jsp</result>
+			<result name="input">/fuzzy/fuzzycategorytree.jsp</result>
+		</action>
+		<action name="fuzzyInfo" class="fuzzyInfoAction" method="fuzzyInfo">
+			<result name="success">/fuzzy/fuzzy_info.jsp</result>
+			<result name="input">/fuzzy/fuzzy_info.jsp</result>
+		</action>
+		<action name="saveFuzzy" class="fuzzyInfoAction" method="saveFuzzy">
+			<result name="success" type="chain">
+             	<param name="actionName">fuzzyInfo</param>
+             	<param name="id">${id}</param>
+            </result>
+		</action>
+    	<action name="deleteFuzzy" class="fuzzyInfoAction" method="deleteFuzzy">
+    		<result name="success" type="chain">
+             	<param name="actionName">fuzzyList</param>
+            </result>
+    	</action>
+    	<action name="fuzzyRuleList" class="fuzzyRuleInfoAction" method="fuzzyRuleList">
+			<result name="success">/fuzzy/fuzzyrule_list.jsp</result>
+			<result name="input">/fuzzy/fuzzyrule_list.jsp</result>
+		</action>
+		<action name="fuzzyRuleInfo" class="fuzzyRuleInfoAction" method="fuzzyRuleInfo">
+			<result name="success">/fuzzy/fuzzyrule_info.jsp</result>
+			<result name="input">/fuzzy/fuzzyrule_info.jsp</result>
+		</action>
+		<action name="saveRule" class="fuzzyRuleInfoAction" method="saveRule">
+			<result name="success" type="chain">
+             	<param name="actionName">fuzzyRuleInfo</param>
+             	<param name="id">${id}</param>
+            </result>
+		</action>
+    	<action name="deleteFuzzyRule" class="fuzzyRuleInfoAction" method="deleteFuzzyRule">
+    		<result name="success" type="chain">
+             	<param name="actionName">fuzzyRuleList</param>
+            </result>
+    	</action>
+	</package>
+</struts>
