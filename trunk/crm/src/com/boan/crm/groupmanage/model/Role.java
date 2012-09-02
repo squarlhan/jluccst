@@ -109,4 +109,12 @@ public class Role {
 		return RoleFlag.getRoleCnByRoleEn(this.roleKey);
 	}
 
+	public String getCompanyId() {
+		return companyId;
+	}
+
+	public void setCompanyId(String companyId) {
+		this.companyId = companyId;
+	}
+
 }
