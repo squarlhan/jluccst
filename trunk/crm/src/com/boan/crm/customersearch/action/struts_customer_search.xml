@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">	
+<struts>
+	<!-- 客户Action -->
+	<package name="customer_search" extends="struts-default" namespace="/">
+		<action name="customerSearchAction" class="customerSearchAction" method="customerSearch">
+			<result name="success">/customer/customerreaserch.jsp</result>
+			<result name="input">/customer/customerreaserch.jsp</result>
+		</action>
+	</package>
+	<package name="customer_search_ajax" extends="json-default" namespace="/">
+			<action name="getCityAction" class="customerSearchAction" method="getCity">
+				<result name="success" type="json">
+				<param name="root">cityList</param>
+				</result>
+			</action>
+			<action name="getAreaAction" class="customerSearchAction" method="getArea">
+				<result name="success" type="json">
+				<param name="root">areaList</param>
+				</result>
+			</action>
+	</package>
+</struts>
