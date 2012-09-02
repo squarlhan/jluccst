@@ -16,6 +16,8 @@ import org.springframework.stereotype.Controller;
 import com.boan.crm.customer.model.CustomerInfo;
 import com.boan.crm.customer.service.ICustomerInfoService;
 import com.boan.crm.groupmanage.common.UserSession;
+import com.boan.crm.groupmanage.model.User;
+import com.boan.crm.groupmanage.service.IUserService;
 import com.boan.crm.sellrecord.model.GoodsInfo;
 import com.boan.crm.sellrecord.model.SellRecord;
 import com.boan.crm.sellrecord.service.IGoodsInfoService;
@@ -55,10 +57,19 @@ public class SellRecordAction extends BaseActionSupport{
 	@Qualifier("goodsInfoService")
 	private IGoodsInfoService goodsInfoService;
 	
+	@Autowired
+	@Qualifier("userService")
+	private IUserService userService = null;
+	
 	/**
 	 * 销售员所有的客户
 	 */
 	private List<CustomerInfo> customerInfos = new ArrayList<CustomerInfo>();
+	
+	/**
+	 * 员工数组
+	 */
+	private List<User> userList = null;
 	
 	/**
 	 * 提示信息
@@ -72,8 +83,35 @@ public class SellRecordAction extends BaseActionSupport{
 
 	private String[] ids;
 	
-	public String openSellRecordList(){
+	//--------------查询条件-------------------------//
+	private String queryCustomerName;
+	
+	private String queryLinkman;
+	
+	private String querySalesman;
+	
+	private String queryReturnedMoney;
+	
+	private String queryBargainTimeBegin;
+	
+	private String queryBargainTimeEnd;
+	//--------------查询条件-------------------------//
+	
+	public String openSellRecordList() throws Exception{
+		userList =userService.queryUserList( sessionCompanyId, sessionDeptId, new Pagination<User>()).getData();
 		Map<String, String> params = new HashMap<String, String>();
+		if(queryCustomerName!=null  && !queryCustomerName.trim().equals("")){
+			params.put("queryCustomerName", queryCustomerName);
+		}
+		if(querySalesman!=null && !querySalesman.trim().equals("")){
+			params.put("querySalesman", querySalesman);
+		}
+		if(queryBargainTimeBegin!=null && !queryBargainTimeBegin.trim().equals("")){
+			params.put("queryBargainTimeBegin", queryBargainTimeBegin);
+		}
+		if(queryBargainTimeBegin!=null  && !queryBargainTimeBegin.trim().equals("")){
+			params.put("queryBargainTimeEnd", queryBargainTimeEnd);
+		}
 		pagination = sellRecordService.findSellRecordForPage(params ,pagination);
 		return SUCCESS;
 	}
@@ -91,7 +129,7 @@ public class SellRecordAction extends BaseActionSupport{
 	public String addSellRecord(){
 		customerInfos= customerInfoService.findAllCustomerInfo();
 		//查找客户信息
-		customer = customerInfoService.get(customer.getId());
+		customer = customerInfoService.get(sellRecord.getCustomerId());
 		sellRecord.setCustomer(customer);
 		sellRecord.setCustomerId(customer.getId());//设置客户Id
 		sellRecord.setCustomerName(customer.getCustomerName());
@@ -121,6 +159,7 @@ public class SellRecordAction extends BaseActionSupport{
 			message="保存失败！";
 			e.printStackTrace();
 		}
+		sellRecord = sellRecordService.getSellRecordById(sellRecord.getId());
 //		return "message";
 		return SUCCESS;
 	}
@@ -130,6 +169,7 @@ public class SellRecordAction extends BaseActionSupport{
 	}
 	
 	public String deleteSellRecord(){
+		sellRecordService.deleteSellRecordByIds(ids);
 		return NONE;
 	}
 	
@@ -208,5 +248,61 @@ public class SellRecordAction extends BaseActionSupport{
 
 	public void setIds(String[] ids) {
 		this.ids = ids;
+	}
+
+	public String getQueryCustomerName() {
+		return queryCustomerName;
+	}
+
+	public void setQueryCustomerName(String queryCustomerName) {
+		this.queryCustomerName = queryCustomerName;
+	}
+
+	public String getQueryLinkman() {
+		return queryLinkman;
+	}
+
+	public void setQueryLinkman(String queryLinkman) {
+		this.queryLinkman = queryLinkman;
+	}
+
+	public String getQuerySalesman() {
+		return querySalesman;
+	}
+
+	public void setQuerySalesman(String querySalesman) {
+		this.querySalesman = querySalesman;
+	}
+
+	public String getQueryReturnedMoney() {
+		return queryReturnedMoney;
+	}
+
+	public void setQueryReturnedMoney(String queryReturnedMoney) {
+		this.queryReturnedMoney = queryReturnedMoney;
+	}
+
+	public String getQueryBargainTimeBegin() {
+		return queryBargainTimeBegin;
+	}
+
+	public void setQueryBargainTimeBegin(String queryBargainTimeBegin) {
+		this.queryBargainTimeBegin = queryBargainTimeBegin;
+	}
+
+	public String getQueryBargainTimeEnd() {
+		return queryBargainTimeEnd;
+	}
+
+	public void setQueryBargainTimeEnd(String queryBargainTimeEnd) {
+		this.queryBargainTimeEnd = queryBargainTimeEnd;
+	}
+
+	public List<User> getUserList() {
+		return userList;
+	}
+
+	public void setUserList(List<User> userList) {
+		this.userList = userList;
 	}
 }
