@@ -33,6 +33,13 @@
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<j:scriptlink css="true" tipswindow="true" jmessagebox="true" jquery="true" validate="true" jfunction="true"/>
+	<link rel="stylesheet" media="all" type="text/css" href="<%=basePath%>js/timepicke/jquery-ui-1.7.3.custom.css" />
+	<link rel="stylesheet" media="all" type="text/css" href="<%=basePath%>js/timepicke/jquery-ui-timepicker-addon.css" />
+	<script type="text/javascript" src="<%=basePath%>js/timepicke/jquery-1.3.2.min.js"></script>
+	<script type="text/javascript" src="<%=basePath%>js/timepicke/jquery-ui-1.7.3.custom.min.js"></script>
+	<script type="text/javascript" src="<%=basePath%>js/timepicke/jquery-ui-timepicker-addon.js"></script>
+	<script type="text/javascript" src="<%=basePath%>js/timepicke/jquery-ui-timepicker-zh-CN.js"></script>
+	<script type="text/javascript" src="<%=basePath%>js/timepicke/jquery-ui-sliderAccess.js"></script>
 	<style type="text/css">
 	<!--
 	.STYLE1 {
@@ -44,15 +51,99 @@
 	<script type="text/javascript">
 	
 		$(function(){
+			$.fn.CheckBoxAll("ids","cbk_all");
+			$.fn.UnCheckBoxAll("ids","cbk_all");
+			//日期控件
+			$('#txt_queryBargainTimeBegin').datetimepicker({showTimepicker: false});
+			$('#txt_queryBargainTimeEnd').datetimepicker({showTimepicker: false});
 			$("#btn_add").click(function(){
 				try{
 					parent.$.fn.showOrHideTab(1,true);
-					parent.$.fn.selectTab(1);
+					parent.$.fn.selectTab(1,'openAddSellRecordAction.action');
 				}catch(e){
 					alert(e.description);
 				}
 			});
+			$("#btn_delAll").click(function(){
+				var url = "deleteSellRecordAction.action";
+  				if(window.confirm("您确定要删除所选信息吗？")){
+  					$.post(url, $('#form1').serialize(), function(data){window.location.href=window.location.href;});
+  				}
+			});
+			
+			
+			/**
+	  		 * 修改信息
+	  		 */
+	  		$('a[name="edit"]').each(function(){
+	  			$(this).click(function(){
+	  				var url = $(this).attr("url");
+	  				try{
+						parent.$.fn.showOrHideTab(1,true);
+						parent.$.fn.selectTab(1,url);
+					}catch(e){
+						alert(e.description);
+					}
+	  			});
+	  		});
+	  		
+	  		/**
+	  		 * 删除单个信息
+	  		 */
+	  		$('a[name="delete"]').each(function(){
+	  			$(this).click(function(){
+	  				var url = $(this).attr("url");
+	  				if(window.confirm("您确定要删除这条信息吗？")){
+	  					$.post(url, "", function(data){window.location.href=window.location.href;});
+	  				}
+	  			});
+	  		});
 		});
+		/**
+	  	 * 点击选复选框时，执行全选/取消全选功能
+	  	 * @param chkallid
+	  	 * 执行全选功能的checkbox的id值
+	  	 */
+	  	$.fn.CheckBoxAll = function (subchkname,chkallid) {
+	  		$("#" + chkallid).click(function () {
+	  			var b = ($(this).attr("checked"));
+	  			$(":checkbox[name='" + subchkname + "']").each(function () {
+	  				if( !$(this).attr("disabled") ){
+	  					$(this).attr("checked", b);
+	  				}
+	  			});
+	  		});
+	  		if($(":checkbox[name='" + subchkname + "']").length ==0){
+	  			$("#" + chkallid).attr("checked", false);
+	  			$("#" + chkallid).attr("disabled",true);
+	  		}
+	  	};
+
+	  	/**
+	  	 * 子复选框有一个处理非选中状态时，执行全选功能的复选框将置为非选中状态
+	  	 * @param subchkname
+	  	 * 子复选框的name
+	  	 * @param chkallid
+	  	 * 执行全选功能的复选框id
+	  	 */
+	  	$.fn.UnCheckBoxAll = function (subchkname, chkallid) {
+	  		$(":checkbox[name='" + subchkname + "']").live("click",function () {
+	  			var l = $(":checkbox[name='" + subchkname + "']").length;
+	  			if (!$(this).attr("checked")) {
+	  				$("#" + chkallid).attr("checked", false);
+	  			} else {
+	  				var i = 0;
+	  				$(":checkbox[name='" + subchkname + "']").each(function () {
+	  					if ($(this).attr("checked")) {
+	  						i++;
+	  					}
+	  				});
+	  				if (l == i) {
+	  					$("#" + chkallid).attr("checked", true);
+	  				}
+	  			}
+	  		});
+	  	};
 	</script>
 	</head>
   <body>
@@ -82,37 +173,23 @@
 						<strong>客户名称：</strong>
 					</td>
 					<td height="26" align="left" bgcolor="#FFFFFF">
-						<s:textfield id="txt_bargainTime" name="sellRecord.bargainTime" cssStyle="width:200px" ></s:textfield>
-					</td>
-					<td height="26" align="right" bgcolor="#FFFFFF">
-						<strong>联 系 人：</strong>
-					</td>
-					<td height="26" align="left" bgcolor="#FFFFFF">
-						<s:textfield id="txt_bargainTime" name="sellRecord.bargainTime" cssStyle="width:200px" ></s:textfield>
+						<s:textfield id="txt_queryCustomerName" name="queryCustomerName" cssStyle="width:212px" ></s:textfield>
 					</td>
 					<td height="26" align="right" bgcolor="#FFFFFF">
 						<strong>所属业务员：</strong>
 					</td>
 					<td height="26" align="left" bgcolor="#FFFFFF">
-						<s:textfield id="txt_bargainTime" name="sellRecord.bargainTime" cssStyle="width:200px" ></s:textfield>
-					</td>
-					<td height="26" align="right" bgcolor="#FFFFFF" rowspan="2">
-						<input name="queryBtn" type="submit" class="btn_2_3" id="queryBtn" value="查询">
-					</td>
-				</tr>
-				<tr>
-					<td height="26" align="right" bgcolor="#FFFFFF">
-						<strong>回款情况：</strong>
-					</td>
-					<td height="26" align="left" bgcolor="#FFFFFF">
-						<s:textfield id="txt_bargainTime" name="sellRecord.bargainTime" cssStyle="width:200px" ></s:textfield>
+						<s:select id="sel_querySalesman"   name="querySalesman" list="userList"  listKey="id"  listValue="userCName"  headerKey="" headerValue="---全部---" cssStyle="width: 212px;" ></s:select>
 					</td>
 					<td height="26" align="right" bgcolor="#FFFFFF">
 						<strong>成交日期：</strong>
 					</td>
-					<td height="26" align="left" bgcolor="#FFFFFF" colspan="3">
-						<s:textfield id="txt_orderID" name="sellRecord.orderID" cssStyle="width:200px" ></s:textfield>
-						— <s:textfield id="txt_orderID" name="sellRecord.orderID" cssStyle="width:200px" ></s:textfield>
+					<td height="26" align="left" bgcolor="#FFFFFF"  >
+						<s:textfield id="txt_queryBargainTimeBegin" name="queryBargainTimeBegin" cssStyle="width:100px" ></s:textfield>
+						- <s:textfield id="txt_queryBargainTimeEnd" name="queryBargainTimeEnd" cssStyle="width:100px" ></s:textfield>
+					</td>
+					<td height="26" align="right" bgcolor="#FFFFFF" rowspan="2">
+						<input name="queryBtn" type="submit" class="btn_2_3" id="queryBtn" value="查询">
 					</td>
 				</tr>
 			</table>
@@ -127,9 +204,9 @@
             			<td align="center" background="<%=basePath%>/images/headerbg.jpg"><strong>业务员</strong></td>
             			<td align="center" background="<%=basePath%>/images/headerbg.jpg"><strong>成交日期</strong></td>
             			<td align="center" background="<%=basePath%>/images/headerbg.jpg"><strong>产品种类</strong></td>
-            			<td align="center" background="<%=basePath%>/images/headerbg.jpg"><strong>交易总额</strong></td>
-            			<td align="center" background="<%=basePath%>/images/headerbg.jpg"><strong>实 收</strong></td>
-            			<td align="center" background="<%=basePath%>/images/headerbg.jpg"><strong>欠 款</strong></td>
+            			<td align="center" background="<%=basePath%>/images/headerbg.jpg"><strong>交易总额（元）</strong></td>
+            			<td align="center" background="<%=basePath%>/images/headerbg.jpg"><strong>实 收（元）</strong></td>
+            			<td align="center" background="<%=basePath%>/images/headerbg.jpg"><strong>欠 款（元）</strong></td>
             			<td align="center" background="<%=basePath%>/images/headerbg.jpg"><strong>交回款情况</strong></td>
             			<td align="center" background="<%=basePath%>/images/headerbg.jpg"><strong>操作</strong></td>
 			</tr>
@@ -146,7 +223,16 @@
             		<td height="26" align="center" bgcolor="#FFFFFF"><s:property value="realCollection"/></td>
             		<td height="26" align="center" bgcolor="#FFFFFF"><s:property value="debt"/></td>
             		<td height="26" align="center" bgcolor="#FFFFFF"><s:property value="receivable/realCollection"/>%</td>
-            		<td height="26" align="center" bgcolor="#FFFFFF"><s:property value="salesman"/></td>
+            		<td height="26" align="center" bgcolor="#FFFFFF">
+							<s:url id="edit_url" action="openModifySellRecordAction">   
+								<s:param name="sellRecord.id" value="id"></s:param>   
+							</s:url>
+							<s:url id="delete_url" action="deleteSellRecordAction">   
+								<s:param name="ids" value="id"></s:param>   
+							</s:url>
+				         	<a name="edit" href="javascript:void(0);" url="${edit_url}">编辑</a>  
+				         	<a name="delete" href="javascript:void(0);" url="${delete_url}">删除</a>
+					</td>
             </tr>
             </s:iterator>
 			 <tr>

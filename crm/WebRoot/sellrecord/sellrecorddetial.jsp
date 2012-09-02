@@ -55,13 +55,14 @@
 				"goods.goodsName":{required:true,strangecode:true},
 				"goods.standard":{strangecode:true},
 				"goods.weight":{strangecode:true,number:true},
-				"goods.allPrice":{strangecode:true,number:true},
-				"goods.number":{strangecode:true,number:true},
-				"goods.price":{strangecode:true,number:true},
+				"goods.allPrice":{required:true,strangecode:true,number:true},
+				"goods.number":{required:true,strangecode:true,number:true},
+				"goods.price":{required:true,strangecode:true,number:true},
 				"goods.memo":{strangecode:true}
 			}
 		};
 	  	$(function(){
+	  		$("#txt_goodsName").focus();
 	  		try{
 	  		$.validator.setDefaults({
 				debug: false,onkeyup: false,onfocusout:false,focusCleanup: true,
@@ -71,7 +72,7 @@
 		            	alert(value);document.getElementById(key).focus();return false;
 		        	}); 
 		    	}
-			})
+			});
 	  		
 	  		$("#btn_add").click(function(){
 	  			var validate_settings_submit = jQuery.extend({}, _customer_submit);
@@ -143,19 +144,19 @@
 											<strong>单价：</strong>
 										</td>
 										<td height="26" align="left" bgcolor="#FFFFFF">
-											<s:textfield id="txt_price" name="goods.price" cssStyle="width: 160px;" maxlength="25"></s:textfield>
+											<s:textfield id="txt_price" name="goods.price" cssStyle="width: 160px;" maxlength="25"></s:textfield>元<font color="red">*</font>
 										</td>
 										<td height="26" align="right" bgcolor="#FFFFFF">
 											<strong>数量：</strong>
 										</td>
 										<td height="26" align="left" bgcolor="#FFFFFF">
-											<s:textfield id="txt_number" name="goods.number" cssStyle="width: 160px;" maxlength="25"></s:textfield>
+											<s:textfield id="txt_number" name="goods.number" cssStyle="width: 160px;" maxlength="25"></s:textfield><font color="red">*</font>
 										</td>
 										<td height="26" align="right" bgcolor="#FFFFFF">
 											<strong>预付：</strong>
 										</td>
 										<td height="26" align="left" bgcolor="#FFFFFF">
-											<s:textfield id="txt_allPrice" name="goods.allPrice" cssStyle="width: 160px;" maxlength="25"></s:textfield>
+											<s:textfield id="txt_allPrice" name="goods.allPrice" cssStyle="width: 160px;" maxlength="25"></s:textfield>元<font color="red">*</font>
 										</td>
 									</tr>
 									<tr>
