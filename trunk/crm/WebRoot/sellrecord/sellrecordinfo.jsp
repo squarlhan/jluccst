@@ -29,7 +29,6 @@
 	<j:scriptlink  css="true" jmessagebox="true" jquery="true" tipswindow="true" validate="true"/>
 	<link rel="stylesheet" media="all" type="text/css" href="<%=basePath%>js/timepicke/jquery-ui-1.7.3.custom.css" />
 	<link rel="stylesheet" media="all" type="text/css" href="<%=basePath%>js/timepicke/jquery-ui-timepicker-addon.css" />
-	<script type="text/javascript" src="<%=basePath%>js/timepicke/jquery-1.3.2.min.js"></script>
 	<script type="text/javascript" src="<%=basePath%>js/timepicke/jquery-ui-1.7.3.custom.min.js"></script>
 	<script type="text/javascript" src="<%=basePath%>js/timepicke/jquery-ui-timepicker-addon.js"></script>
 	<script type="text/javascript" src="<%=basePath%>js/timepicke/jquery-ui-timepicker-zh-CN.js"></script>
@@ -43,79 +42,149 @@
 		textarea.text { width:474px; }	
 	</style> 
 	<script type="text/javascript">
-	
+		/**
+	  	 * 验证条件
+	  	 */
+		var _customer_submit = {
+			rules: {
+				"customer.id":{required:true,strangecode:true},
+				"sellRecord.bargainTime":{required:true,strangecode:true},
+				"sellRecord.goodsType":{required:true,strangecode:true},
+				"sellRecord.orderID":{required:true,strangecode:true},
+				"sellRecord.receivable":{strangecode:true,number:true},
+				"sellRecord.realCollection":{required:true,strangecode:true,number:true},
+				"sellRecord.debt":{strangecode:true,number:true}
+			}
+		};
 	  	$(function(){
-	  		//日期控件
-			$('#txt_bargainTime').datetimepicker({showTimepicker: false});
-	  		$("#btn_add").click(function(){
-				parent.parent.parent.tipsWindown("商品明细","iframe:openAddSellRecordDetialAction.action","750","300","true","","true","no");
-				parent.parent.parent.$("#windown-close").bind('click',function(){
-					var detials = $.cookie('detial'); // 读取 cookie中的被选择的人员Id
-		  			$.cookie('detial', '', { expires: -1 }); //读取完毕后删除cookie
-  					if(detials!=null){
-  						var info = detials.split("☆");//☆
-			  			var row="";
-						row=row+"<tr>";
-			  			row=row+"<td align='center' bgcolor='#FFFFFF' >";  
-			  			row=row+"<input type='checkbox' name='ids'/>";
-			  			row=row+"<input type='hidden' id='"+1+"' name='detials' value='"+detials+"'/>";
-			  			row=row+"</td>";
-			  			row=row+"<td align='center' bgcolor='#FFFFFF'>"+info[0]+"</td>";
-			  			row=row+"<td align='center' bgcolor='#FFFFFF'>"+info[1]+"</td>";
-			  			row=row+"<td align='center' bgcolor='#FFFFFF'>"+info[2]+"</td>";
-			  			row=row+"<td align='center' bgcolor='#FFFFFF'>"+info[3]+"</td>";
-			  			row=row+"<td align='center' bgcolor='#FFFFFF'>"+info[4]+"</td>";
-			  			row=row+"<td align='center' bgcolor='#FFFFFF'>"+info[5]+"</td>";
-			  			row=row+"<td align='center' bgcolor='#FFFFFF'><a name='del_one' href='javascript:void(0);' onclick='$.fn.deletetemp($(this));'>删除</a></td>";
-			  			row=row+"</tr>";
-			  			$("#no_data").hide();
-			  		    $("#goodsList tr:eq(2)").append(row);
-			  		    $("#cbk_all").attr("checked", false);
-		  			    $("#cbk_all").attr("disabled",false);
-  					}
+	  		$.fn.CheckBoxAll("ids","cbk_all");
+			$.fn.UnCheckBoxAll("ids","cbk_all");
+	  		try{
+		  		$.validator.setDefaults({
+					debug: false,onkeyup: false,onfocusout:false,focusCleanup: true,
+				    errorPlacement:function(error, element) {},
+					invalidHandler: function(form, validator) {
+			        	$.each(validator.invalid,function(key,value){
+			            	alert(value);document.getElementById(key).focus();return false;
+			        	}); 
+			    	}
 				});
-	  		});
 	  		
-	  		/**
-	  		 *ajax删除数据库行
-	  		*/
-	  		$("a[name='del_one']").each(function(){
-	  			$(this).click(function(){
-	  				var url = $(this).attr("url");
-	  				$.post(url, null, function(data){});
-	  				$(this).parent().parent().remove();
+		  		//日期控件
+				$('#txt_bargainTime').datetimepicker({showTimepicker: false});
+		  		$("#btn_add").click(function(){
+					parent.parent.parent.tipsWindown("商品明细","iframe:openAddSellRecordDetialAction.action","780","300","true","","true","no");
+					parent.parent.parent.$("#windown-close").bind('click',function(){
+						var detials = $.cookie('detial'); // 读取 cookie中的被选择的人员Id
+			  			$.cookie('detial', '', { expires: -1 }); //读取完毕后删除cookie
+	  					if(detials!=null){
+	  						var info = detials.split("☆");//☆
+				  			var row="";
+							row=row+"<tr>";
+				  			row=row+"<td align='center' bgcolor='#FFFFFF' >";  
+				  			row=row+"<input type='checkbox' name='ids'/>";
+				  			row=row+"<input type='hidden' id='"+1+"' name='detials' value='"+detials+"'/>";
+				  			row=row+"</td>";
+				  			row=row+"<td align='center' bgcolor='#FFFFFF'>"+info[0]+"</td>";
+				  			row=row+"<td align='center' bgcolor='#FFFFFF'>"+info[1]+"</td>";
+				  			row=row+"<td align='center' bgcolor='#FFFFFF'>"+info[2]+"</td>";
+				  			row=row+"<td align='center' bgcolor='#FFFFFF'>"+info[3]+"</td>";
+				  			row=row+"<td align='center' bgcolor='#FFFFFF'>"+info[4]+"</td>";
+				  			row=row+"<td align='center' bgcolor='#FFFFFF'>"+info[5]+"</td>";
+				  			row=row+"<td align='center' bgcolor='#FFFFFF'><a name='del_one' href='javascript:void(0);' onclick='$.fn.deletetemp($(this));'>删除</a></td>";
+				  			row=row+"</tr>";
+				  			$("#no_data").hide();
+				  		    $("#goodsList tr:eq(2)").append(row);
+				  		    $("#cbk_all").attr("checked", false);
+			  			    $("#cbk_all").attr("disabled",false);
+			  			    var receivable=$("#txt_receivable").val() * 1;
+			  			    var temp =info[3]*info[4];
+			  				receivable=temp+receivable;
+			  				 $("#txt_receivable").val(receivable);
+			  				 
+			  				 
+			  				var realCollection=$("#txt_realCollection").val() * 1;
+			  			    var temp2 =info[5]*1;
+			  			  	realCollection=temp2+realCollection;
+			  				$("#txt_realCollection").val(realCollection);
+			  				$("#txt_debt").val(receivable-realCollection);
+			  			  	$("#txt_receivable").focus();
+	  					}
+					});
+		  		});
+		  		
+		  		/**
+		  		 *ajax删除数据库行
+		  		*/
+		  		$("a[name='del_one']").each(function(){
+		  			$(this).click(function(){
+		  				var url = $(this).attr("url");
+		  				$.post(url, null, function(data){});
+		  				$(this).parent().parent().remove();
+		  			});
+		  		});
+		  		
+		  		/**
+		  		 *ajax删除数据库行
+		  		*/
+	  			$("#btn_delAll").click(function(){
+
+	  				$(":checkbox[name='ids']:checked").each(function(){
+	  					if($(this).parent().parent().find("a")){
+	  						var url = $(this).parent().parent().find("a").attr("url")
+	  		  				$.post(url, null, function(data){});
+	  					}
+	  					$(this).parent().parent().remove();
+	  				});
+
+	  				$(":checkbox[name='ids']:checked").parent().parent().remove();
+		  			$.fn.CheckBoxAll("ids","cbk_all");
+		  			if($("#goodsList tr:has(input[type='checkbox'])").length==1){
+		  				$("#no_data").show();
+		  			}
+		  			$(this).parent().parent().remove();
 	  			});
-	  		});
+		  		
+		  		$("#btn_save").click(function(){
+		  			var validate_settings_submit = jQuery.extend({}, _customer_submit);
+	               	var validator = $("#form1").validate(validate_settings_submit);
+	               	if(!validator.form()){
+						return false;
+					}
+		  			/*
+		  			$.ajax({
+	  					type:"post",
+	  					url: "addSellRecordAction.action",
+	  					data:$("#form1").serialize(),
+	  					beforeSend: function(XMLHttpRequest){
+	  						
+	  					},
+	  					success: function(data, textStatus){
+	  						try{
+	  							data = eval("("+data+")");
+	  							alert(data.message);
+	  							parent.$.fn.selectTab(0);
+	  							parent.$.fn.showOrHideTab(1,false);
+	  						}catch(e){
+	  							alert(e.description);
+	  						}
+	  					},
+	  					complete: function(XMLHttpRequest, textStatus){
+	  					},
+	  					error: function(){
+	  					}
+					});
+		  			//*/
+		  			$("input[type=text]").each(function(){
+		  				$(this).val($.trim($(this).val()));
+		  			});
+		  			$("#form1").attr("action","addSellRecordAction.action");
+		  			$("#form1").submit();
+		  		});
+	  		}catch(e){
+	  			alert(e.description);
+	  		}
 	  		
-	  		
-	  		$("#btn_save").click(function(){
-	  			/*
-	  			$.ajax({
-  					type:"post",
-  					url: "addSellRecordAction.action",
-  					data:$("#form1").serialize(),
-  					beforeSend: function(XMLHttpRequest){
-  						
-  					},
-  					success: function(data, textStatus){
-  						try{
-  							data = eval("("+data+")");
-  							alert(data.message);
-  							parent.$.fn.selectTab(0);
-  							parent.$.fn.showOrHideTab(1,false);
-  						}catch(e){
-  							alert(e.description);
-  						}
-  					},
-  					complete: function(XMLHttpRequest, textStatus){
-  					},
-  					error: function(){
-  					}
-				});
-	  			//*/
-	  			$("#form1").attr("action","addSellRecordAction.action");
-	  			$("#form1").submit();
-	  		});
 		});
 			
 	  	/**
@@ -176,6 +245,7 @@
   
   <body>
     <s:form id="form1" name="form1" method="post" theme="simple" action="">
+    	<s:hidden id="recordId"  name="sellRecord.id"></s:hidden>
 		<table width="100%" border="0" cellspacing="5" cellpadding="0">
 			<tr>
 				<td>
@@ -188,25 +258,25 @@
 									<strong>客户名称：</strong>
 								</td>
 								<td height="26" align="left" bgcolor="#FFFFFF">
-									<s:select id="sel_customer"  name ="customer.id"  list="customerInfos" listKey="id"  listValue="customerName" cssStyle="width:200px" headerKey="" headerValue="--- 请选择客户 ---"></s:select>
+									<s:select id="sel_customer"  name ="sellRecord.customerId"  list="customerInfos" listKey="id"  listValue="customerName" cssStyle="width:200px" headerKey="" headerValue="--- 请选择客户 ---"></s:select><font color="red">*</font>
 								</td>
 								<td height="26" align="right" bgcolor="#FFFFFF">
 									<strong>交易日期：</strong>
 								</td>
 								<td height="26" align="left" bgcolor="#FFFFFF">
-									<s:textfield id="txt_bargainTime" name="sellRecord.bargainTime" cssStyle="width:100px" ></s:textfield>
+									<s:textfield id="txt_bargainTime" name="sellRecord.bargainTime" cssStyle="width:100px" ></s:textfield><font color="red">*</font>
 								</td>
 								<td height="26" align="right" bgcolor="#FFFFFF">
 									<strong>产品种类：</strong>
 								</td>
 								<td height="26" align="left" bgcolor="#FFFFFF">
-									<s:textfield id="txt_goodsType" name="sellRecord.goodsType" cssStyle="width:100px" ></s:textfield>
+									<s:textfield id="txt_goodsType" name="sellRecord.goodsType" cssStyle="width:100px" ></s:textfield><font color="red">*</font>
 								</td>
 								<td height="26" align="right" bgcolor="#FFFFFF">
 									<strong>销售单号：</strong>
 								</td>
 								<td height="26" align="left" bgcolor="#FFFFFF">
-									<s:textfield id="txt_orderID" name="sellRecord.orderID" cssStyle="width:100px" ></s:textfield>
+									<s:textfield id="txt_orderID" name="sellRecord.orderID" cssStyle="width:100px" ></s:textfield><font color="red">*</font>
 								</td>
 							</tr>
 						</table>
@@ -279,19 +349,19 @@
 									<strong>应收总计：</strong>
 								</td>
 								<td height="26" align="left" bgcolor="#FFFFFF">
-									<s:textfield id="txt_receivable" name="sellRecord.receivable" cssStyle="width:250px" ></s:textfield>
+									<s:textfield id="txt_receivable" name="sellRecord.receivable" cssStyle="width:240px" ></s:textfield>元
 								</td>
 								<td height="26" align="right" bgcolor="#FFFFFF">
 									<strong>实 收：</strong>
 								</td>
 								<td height="26" align="left" bgcolor="#FFFFFF">
-									<s:textfield id="txt_realCollection" name="sellRecord.realCollection" cssStyle="width:250px" ></s:textfield>
+									<s:textfield id="txt_realCollection" name="sellRecord.realCollection" cssStyle="width:240px" ></s:textfield>元<font color="red">*</font>
 								</td>
 								<td height="26" align="right" bgcolor="#FFFFFF">
 									<strong>欠 款：</strong>
 								</td>
 								<td height="26" align="left" bgcolor="#FFFFFF">
-									<s:textfield  id="txt_debt" name="sellRecord.debt" cssStyle="width:250px" ></s:textfield>
+									<s:textfield  id="txt_debt" name="sellRecord.debt" cssStyle="width:240px" ></s:textfield>元
 								</td>
 							</tr>
 						</table>
