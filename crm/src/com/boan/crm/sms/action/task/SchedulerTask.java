@@ -45,24 +45,29 @@ public class SchedulerTask {
 			String key = obj.getSmsKey();
 			String companyId =obj.getId();
 			if(serialNo!=null && password!=null && key!=null && !serialNo.trim().equals("") && !password.trim().equals("") && !key.trim().equals("")){
-				//初始化短信发送接口
-				smsManageService.initClient( serialNo,password,key);
+				
 				
 				List<SMSInfo> infoList = smsInfoService.findSMSInfoByTime(Calendar.getInstance(), endTime , companyId );
-				for(SMSInfo info : infoList){
-					//格式为：年年年年月月日日时时分分秒秒，例如2009 08 01 12 30 30 表示2009年8月1日12点30分30秒
-					StringBuffer time  = new StringBuffer();
-					time.append(info.getSendTime().get(Calendar.YEAR));
-					time.append(info.getSendTime().get(Calendar.MONTH)<10 ? "0"+(info.getSendTime().get(Calendar.MONTH)+1) : info.getSendTime().get(Calendar.MONTH)+1);
-					time.append(info.getSendTime().get(Calendar.DATE )<10 ? "0"+info.getSendTime().get(Calendar.DATE ) : info.getSendTime().get(Calendar.DATE ));
-					time.append(info.getSendTime().get(Calendar.HOUR_OF_DAY)<10 ? "0"+info.getSendTime().get(Calendar.HOUR_OF_DAY ) : info.getSendTime().get(Calendar.HOUR_OF_DAY ));
-					time.append(info.getSendTime().get(Calendar.MINUTE)<10 ? "0"+info.getSendTime().get(Calendar.MINUTE ) : info.getSendTime().get(Calendar.MINUTE ));
-					time.append(info.getSendTime().get(Calendar.SECOND)<10 ? "0"+info.getSendTime().get(Calendar.SECOND ) : info.getSendTime().get(Calendar.SECOND ));
-					int flag = smsManageService.sendScheduledSMS(info.getInfo(), time.toString() , info.getPhone());
-					if(flag==0){
-						smsInfoService.updateSMSInfoState(info.getId(), 2);
+				if(infoList != null && infoList.size() > 0)
+				{
+					//初始化短信发送接口
+					smsManageService.initClient( serialNo,password,key);
+					
+					for(SMSInfo info : infoList){
+						//格式为：年年年年月月日日时时分分秒秒，例如2009 08 01 12 30 30 表示2009年8月1日12点30分30秒
+						StringBuffer time  = new StringBuffer();
+						time.append(info.getSendTime().get(Calendar.YEAR));
+						time.append(info.getSendTime().get(Calendar.MONTH)<10 ? "0"+(info.getSendTime().get(Calendar.MONTH)+1) : info.getSendTime().get(Calendar.MONTH)+1);
+						time.append(info.getSendTime().get(Calendar.DATE )<10 ? "0"+info.getSendTime().get(Calendar.DATE ) : info.getSendTime().get(Calendar.DATE ));
+						time.append(info.getSendTime().get(Calendar.HOUR_OF_DAY)<10 ? "0"+info.getSendTime().get(Calendar.HOUR_OF_DAY ) : info.getSendTime().get(Calendar.HOUR_OF_DAY ));
+						time.append(info.getSendTime().get(Calendar.MINUTE)<10 ? "0"+info.getSendTime().get(Calendar.MINUTE ) : info.getSendTime().get(Calendar.MINUTE ));
+						time.append(info.getSendTime().get(Calendar.SECOND)<10 ? "0"+info.getSendTime().get(Calendar.SECOND ) : info.getSendTime().get(Calendar.SECOND ));
+						int flag = smsManageService.sendScheduledSMS(info.getInfo(), time.toString() , info.getPhone());
+						if(flag==0){
+							smsInfoService.updateSMSInfoState(info.getId(), 2);
+						}
+						System.out.println("预期发送时间[" + time.toString() +"]");
 					}
-					System.out.println("预期发送时间[" + time.toString() +"]");
 				}
 				infoList = null;
 			}
