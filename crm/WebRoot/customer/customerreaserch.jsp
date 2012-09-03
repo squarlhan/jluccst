@@ -130,12 +130,12 @@
 					<td height="26" align="left" bgcolor="#FFFFFF"  >
 						<s:select id="sel_city"  name ="cityId"  list="cityList" listKey="id"  listValue="cityName" cssStyle="width:100px" headerKey="" headerValue="--- 请选择 ---"></s:select>
 					</td>
-<%--					<td height="26" align="right" bgcolor="#FFFFFF">--%>
-<%--						<strong>地区：</strong>--%>
-<%--					</td>--%>
-<%--					<td height="26" align="left" bgcolor="#FFFFFF"  >--%>
-<%--						<s:select id="sel_area"  name ="areaId"  list="areaList" listKey="id"  listValue="areaName" cssStyle="width:100px" headerKey="" headerValue="--- 请选择 ---"></s:select>--%>
-<%--					</td>--%>
+					<td height="26" align="right" bgcolor="#FFFFFF">
+						<strong>地区：</strong>
+					</td>
+					<td height="26" align="left" bgcolor="#FFFFFF"  >
+						<s:select id="sel_area"  name ="areaId"  list="areaList" listKey="id"  listValue="areaName" cssStyle="width:100px" headerKey="" headerValue="--- 请选择 ---"></s:select>
+					</td>
 					<td height="26" align="right" bgcolor="#FFFFFF" rowspan="2">
 						<input name="queryBtn" type="button" class="btn_2_3" id="queryBtn" value="查询">
 					</td>
