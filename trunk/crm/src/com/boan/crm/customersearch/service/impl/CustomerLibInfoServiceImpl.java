@@ -77,7 +77,7 @@ public class CustomerLibInfoServiceImpl implements ICustomerLibInfoService{
 		}
 		if(values.get("areaId") != null)
 		{
-			hql.append(" and area = :areaId ");
+			hql.append(" and district = :areaId ");
 		}
 		
 		hql.append(" order by registerTime asc");
