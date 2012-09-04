@@ -43,7 +43,8 @@
 					"customerInfo.progressId":{required:true},
 					"customerInfo.maturityId":{required:true},
 					"customerInfo.levelId":{required:true},
-					"customerInfo.address":{required:true,strangecode:true}
+					"customerInfo.address":{required:true,strangecode:true},
+					"customerInfo.introduceTimes":{number:true}
 					
 				}
 			};
