@@ -62,6 +62,10 @@ public class CustomerTraceInfoServiceImpl implements ICustomerTraceInfoService{
 			Map<String, ?> values, Pagination<CustomerTraceInfo> pagination) {
 		StringBuilder hql = new StringBuilder();
 		hql.append( "from CustomerTraceInfo where 1=1");
+		if(values.get("companyId") != null)
+		{
+			hql.append(" and companyId = :companyId ");
+		}
 		if(values.get("customerId") != null)
 		{
 			hql.append(" and customerId = :customerId ");
@@ -91,6 +95,10 @@ public class CustomerTraceInfoServiceImpl implements ICustomerTraceInfoService{
 		List<CustomerTraceInfo> data = customerTraceInfoDao.findForPage(hql.toString(), values, pagination.getStartIndex(), pagination.getPageSize());
 		hql.delete(0, hql.length());
 		hql.append(" select count(*) from CustomerTraceInfo where 1=1 " );
+		if(values.get("companyId") != null)
+		{
+			hql.append(" and companyId = :companyId ");
+		}
 		if(values.get("customerId") != null)
 		{
 			hql.append(" and customerId = :customerId ");
