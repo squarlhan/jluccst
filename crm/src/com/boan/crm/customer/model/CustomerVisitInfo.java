@@ -43,7 +43,14 @@ public class CustomerVisitInfo implements Serializable
 	private String salesmanId = "";
 	@Column(name = "VISITPERSONID" , length = 50)
 	private String visitPersonId = "";
-	
+	@Column(name = "COMPANY_ID" , length = 50)
+	private String companyId = "";
+	public String getCompanyId() {
+		return companyId;
+	}
+	public void setCompanyId(String companyId) {
+		this.companyId = companyId;
+	}
 	@Transient
 	private ContractPersonInfo person = new ContractPersonInfo();
 	@Column(name = "tel" , length = 50)
