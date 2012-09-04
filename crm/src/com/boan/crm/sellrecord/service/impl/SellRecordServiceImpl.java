@@ -80,6 +80,9 @@ public class SellRecordServiceImpl implements ISellRecordService {
      */
 	public Pagination<SellRecord> findSellRecordForPage(Map<String, ?> values, Pagination<SellRecord> pagination){
 		StringBuffer param = new StringBuffer();
+		if(values.containsKey("customerId")){
+			param = param.append("  and customer.id ='"+values.get("customerId")+"'  ");
+		}
 		if(values.containsKey("queryCustomerName")){
 			param = param.append("  and customer.customerName like '%"+values.get("queryCustomerName")+"%'  ");
 		}
