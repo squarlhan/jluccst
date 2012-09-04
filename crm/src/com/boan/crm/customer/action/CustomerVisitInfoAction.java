@@ -92,27 +92,8 @@ public class CustomerVisitInfoAction extends BaseActionSupport{
 	 */
 	public String customerVisitList()
 	{
-		//客户分类： 传0
-		//listCategory = dataDictionaryService.findDataDictionaryByType(0);
-		listVisitOption = new ArrayList<DataDictionary>();
-		DataDictionary d = new DataDictionary();
-		d.setId("登门拜访");
-		d.setName("登门拜访");
-		listVisitOption.add(d);
-		DataDictionary d1 = new DataDictionary();
-		d1.setId("电话回访");
-		d1.setName("电话回访");
-		listVisitOption.add(d1);
-		
-		DataDictionary d2 = new DataDictionary();
-		d2.setId("QQ聊天");
-		d2.setName("QQ聊天");
-		listVisitOption.add(d2);
-		
-		DataDictionary d3 = new DataDictionary();
-		d3.setId("邮件沟通");
-		d3.setName("邮件沟通");
-		listVisitOption.add(d3);
+		//回访方式： 传5
+		listVisitOption = dataDictionaryService.findDataDictionaryByType(5);
 		
 		try
 		{
@@ -147,6 +128,7 @@ public class CustomerVisitInfoAction extends BaseActionSupport{
 		{
 			values.put("endDate", endDate);
 		}
+		values.put( "companyId", sessionCompanyId );
 		pagination = customerVisitInfoService.findCustomerVisitInfoForPage(values, pagination);
 		return SUCCESS;
 	}
@@ -211,25 +193,7 @@ public class CustomerVisitInfoAction extends BaseActionSupport{
 		else
 			customerVisitInfo = new CustomerVisitInfo();
 		
-		listVisitOption = new ArrayList<DataDictionary>();
-		DataDictionary d = new DataDictionary();
-		d.setId("登门拜访");
-		d.setName("登门拜访");
-		listVisitOption.add(d);
-		DataDictionary d1 = new DataDictionary();
-		d1.setId("电话回访");
-		d1.setName("电话回访");
-		listVisitOption.add(d1);
-		
-		DataDictionary d2 = new DataDictionary();
-		d2.setId("QQ聊天");
-		d2.setName("QQ聊天");
-		listVisitOption.add(d2);
-		
-		DataDictionary d3 = new DataDictionary();
-		d3.setId("邮件沟通");
-		d3.setName("邮件沟通");
-		listVisitOption.add(d3);
+		listVisitOption = dataDictionaryService.findDataDictionaryByType(5);
 		
 		listPerson = contractPersonService.findAllContractPersonInfoByCustomerId(customerId);
 		
@@ -273,7 +237,7 @@ public class CustomerVisitInfoAction extends BaseActionSupport{
 		obj.setEmail(customerVisitInfo.getEmail());
 		obj.setQq(customerVisitInfo.getQq());
 		obj.setTel(customerVisitInfo.getTel());
-		
+		obj.setCompanyId(customerVisitInfo.getCompanyId());
 		customerVisitInfoService.save(obj);
 		id = obj.getId();
 		return SUCCESS;
