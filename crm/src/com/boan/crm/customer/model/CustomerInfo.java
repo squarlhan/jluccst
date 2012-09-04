@@ -89,7 +89,14 @@ public class CustomerInfo implements Serializable
 	private String mainIndustry = null;
 	@Column(name = "POSTCODE")
 	private String postCode = null;
-	
+	@Column(name = "INTRODUCE_TIMES")
+	private int introduceTimes = 0;
+	public int getIntroduceTimes() {
+		return introduceTimes;
+	}
+	public void setIntroduceTimes(int introduceTimes) {
+		this.introduceTimes = introduceTimes;
+	}
 	public String getPostCode() {
 		return postCode;
 	}
