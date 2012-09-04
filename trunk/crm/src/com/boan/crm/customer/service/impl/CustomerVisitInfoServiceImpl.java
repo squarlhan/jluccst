@@ -60,6 +60,10 @@ public class CustomerVisitInfoServiceImpl implements ICustomerVisitInfoService{
 			Map<String, ?> values, Pagination<CustomerVisitInfo> pagination) {
 		StringBuilder hql = new StringBuilder();
 		hql.append( "from CustomerVisitInfo where 1=1");
+		if(values.get("companyId") != null)
+		{
+			hql.append(" and companyId = :companyId ");
+		}
 		if(values.get("customerId") != null)
 		{
 			hql.append(" and customerId = :customerId ");
@@ -89,6 +93,10 @@ public class CustomerVisitInfoServiceImpl implements ICustomerVisitInfoService{
 		List<CustomerVisitInfo> data = customerVisitInfoDao.findForPage(hql.toString(), values, pagination.getStartIndex(), pagination.getPageSize());
 		hql.delete(0, hql.length());
 		hql.append(" select count(*) from CustomerVisitInfo where 1=1 " );
+		if(values.get("companyId") != null)
+		{
+			hql.append(" and companyId = :companyId ");
+		}
 		if(values.get("customerId") != null)
 		{
 			hql.append(" and customerId = :customerId ");
