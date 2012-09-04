@@ -31,7 +31,7 @@
 			/**
 	  		 */
 			$("#addbtn").click(function(){
-				parent.parent.tipsWindown("添加模糊项","iframe:fuzzy/fuzzyInfo.action?fuzzyCategory=<s:property value='fuzzyCategory' />","470","320","true","","true","no");
+				parent.parent.tipsWindown("添加模糊项","iframe:fuzzy/fuzzyInfo.action?fuzzyCategory=<s:property value='fuzzyCategory' />","470","350","true","","true","no");
 				parent.parent.$("#windown-close").bind('click',function(){
 					window.location.href="fuzzy/fuzzyList.action?fuzzyCategory=<s:property value='fuzzyCategory' />";
 				});
@@ -41,14 +41,14 @@
 	  		 * 排序
 	  		 */
 			$("#sortbtn").click(function(){
-				parent.parent.tipsWindown("模糊项排序","iframe:fuzzy/citysort.action?fuzzyCategory=<s:property value='fuzzyCategory' />","370","320","true","","true","no");
+				parent.parent.tipsWindown("模糊项排序","iframe:fuzzy/citysort.action?fuzzyCategory=<s:property value='fuzzyCategory' />","370","350","true","","true","no");
 				parent.parent.$("#windown-close").bind('click',function(){
 					window.location.href="fuzzy/fuzzyList.action?fuzzyCategory=<s:property value='fuzzyCategory' />";
 				});
 			});
 			
 			$(".showInfo").css("cursor","hand").click(function(){
-				parent.parent.tipsWindown("修改模糊项","iframe:fuzzy/fuzzyInfo.action?fuzzyCategory=<s:property value='fuzzyCategory' />&id=" + $(this).attr("tid") ,"470","320","true","","true","no");
+				parent.parent.tipsWindown("修改模糊项","iframe:fuzzy/fuzzyInfo.action?fuzzyCategory=<s:property value='fuzzyCategory' />&id=" + $(this).attr("tid") ,"470","350","true","","true","no");
 				parent.parent.$("#windown-close").bind('click',function(){
 					window.location.href="fuzzy/fuzzyList.action?fuzzyCategory=<s:property value='fuzzyCategory' />";
 				});
