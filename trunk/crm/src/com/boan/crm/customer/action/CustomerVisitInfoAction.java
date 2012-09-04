@@ -237,7 +237,7 @@ public class CustomerVisitInfoAction extends BaseActionSupport{
 		obj.setEmail(customerVisitInfo.getEmail());
 		obj.setQq(customerVisitInfo.getQq());
 		obj.setTel(customerVisitInfo.getTel());
-		obj.setCompanyId(customerVisitInfo.getCompanyId());
+		obj.setCompanyId( sessionCompanyId );
 		customerVisitInfoService.save(obj);
 		id = obj.getId();
 		return SUCCESS;
