@@ -21,7 +21,9 @@
 		  	 */
 			var _device_submit = {
 				rules: {
-					"analysisResult.result":{required:true,maxlength:25}
+					"analysisResult.result":{required:true,maxlength:25},
+					"analysisResult.beginValue":{required:true,number:true},
+					"analysisResult.endValue":{required:true,number:true}
 				},messages:{
 					"analysisResult.result":
 					{
