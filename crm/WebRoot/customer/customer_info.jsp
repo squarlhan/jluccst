@@ -45,7 +45,6 @@
 					"customerInfo.levelId":{required:true},
 					"customerInfo.address":{required:true,strangecode:true},
 					"customerInfo.introduceTimes":{number:true}
-					
 				}
 			};
 			/**
