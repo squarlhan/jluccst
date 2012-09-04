@@ -26,7 +26,8 @@
 					"fuzzyInfo.firstValue":{required:true,number:true},
 					"fuzzyInfo.secondValue":{required:true,number:true},
 					"fuzzyInfo.thirdValue":{required:true,number:true},
-					"fuzzyInfo.fourthValue":{number:true}
+					"fuzzyInfo.fourthValue":{number:true},
+					"fuzzyInfo.sugeno":{number:true}
 				},messages:{
 					"fuzzyInfo.fuzzyName":
 					{
@@ -182,6 +183,15 @@
 											</td>
 											<td height="26" align="left" bgcolor="#FFFFFF">
 												<s:textfield id="fourthValue" name="fuzzyInfo.fourthValue"
+													maxlength="25" cssStyle="width: 300px;"></s:textfield>
+											</td>
+										</tr>
+										<tr>
+											<td height="26" align="right" bgcolor="#FFFFFF">
+												<strong>sugeno：</strong>
+											</td>
+											<td height="26" align="left" bgcolor="#FFFFFF">
+												<s:textfield id="sugeno" name="fuzzyInfo.sugeno"
 													maxlength="25" cssStyle="width: 300px;"></s:textfield>
 											</td>
 										</tr>
