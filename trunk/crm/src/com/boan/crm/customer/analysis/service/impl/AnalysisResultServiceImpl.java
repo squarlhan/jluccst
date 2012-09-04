@@ -34,7 +34,21 @@ public class AnalysisResultServiceImpl implements IAnalysisResultService{
 	{
 		return analysisResultDao.find("from AnalysisResult order by id asc", new Object[0]);
 	}
-
+	/**
+	 * 根据值获取结论　
+	 */
+	public AnalysisResult findAnalysisResult(double result)
+	{
+		Map<String,Double> idMap = new HashMap<String,Double>();
+		idMap.put("result", result);
+		
+		List<AnalysisResult> list= analysisResultDao.find("from AnalysisResult where :result > beginValue and :result < endValue", idMap);
+		if(list != null && list.size() > 0)
+		{
+			return list.get(0);
+		}
+		return null;
+	}
 	/**
 	 * 根据id获取模糊项
 	 */
