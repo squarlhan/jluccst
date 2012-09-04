@@ -18,7 +18,7 @@ public interface IFuzzyRuleInfoService {
 	/**
 	 * 根据分类获取规则
 	 */
-	public List<RuleInfo> findAllFuzzyRuleInfo();
+	public List<IdCaption> findAllFuzzyRuleInfo();
 	/**
 	 * 根据分类获取规则
 	 */

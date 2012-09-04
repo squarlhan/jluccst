@@ -17,7 +17,7 @@ public class AnalysisCustomer {
 	private int introduceCustomerTime = 0;
 	private int paymentsTimes = 0;
 	private BigDecimal payments;
-	private String developDegree = "";
+	private double developDegree = 0;
 	public String getId() {
 		return id;
 	}
@@ -60,10 +60,10 @@ public class AnalysisCustomer {
 	public void setPayments(BigDecimal payments) {
 		this.payments = payments;
 	}
-	public String getDevelopDegree() {
+	public double getDevelopDegree() {
 		return developDegree;
 	}
-	public void setDevelopDegree(String developDegree) {
+	public void setDevelopDegree(double developDegree) {
 		this.developDegree = developDegree;
 	}
 }

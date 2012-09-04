@@ -11,7 +11,13 @@ public class AnalysisFuzzyValue {
 	private String id = "";
 	private int fuzzyId = 0;
 	private double fuzzyValue = 0;
-	
+	private double sugeno = 0;
+	public double getSugeno() {
+		return sugeno;
+	}
+	public void setSugeno(double sugeno) {
+		this.sugeno = sugeno;
+	}
 	public String getId() {
 		return id;
 	}
