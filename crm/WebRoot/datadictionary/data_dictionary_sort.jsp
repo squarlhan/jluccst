@@ -145,7 +145,7 @@
 		  	 * 准备工作
 		  	 */
 			$(document).ready(function(){
-				
+				$.fn.initpage();
 				$.fn.close();
 		  	});
 			
@@ -160,7 +160,22 @@
 					parent.$("#windown-close").click();
 		  		});
 			};
-			
+			/**
+			 * 初始化页面
+			 */
+			$.fn.initpage = function(){
+				$("#dictName_t").focus();
+				//回显上传时的错误信息
+				var uploadErr = $("#lb_error").html();
+				if(uploadErr!=null && $.trim(uploadErr)!="" ){
+					alert(uploadErr);
+				}
+				
+				var message = $("#lb_message").html();
+				if(message!=null && $.trim(message)!="" ){
+					alert(message);
+				}
+			};
 		</script>
 	</head>
 
