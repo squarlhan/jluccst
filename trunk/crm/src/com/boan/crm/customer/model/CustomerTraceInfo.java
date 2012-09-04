@@ -48,7 +48,14 @@ public class CustomerTraceInfo implements Serializable
 	private String email = "";
 	@Transient
 	private String progress = "";
-	
+	@Column(name = "COMPANY_ID" , length = 50)
+	private String companyId = "";
+	public String getCompanyId() {
+		return companyId;
+	}
+	public void setCompanyId(String companyId) {
+		this.companyId = companyId;
+	}
 	@Transient
 	private String salesman = "";
 	@Column(name = "SALESMANID" , length = 50)
