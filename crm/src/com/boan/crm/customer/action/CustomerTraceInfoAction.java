@@ -252,7 +252,7 @@ public class CustomerTraceInfoAction extends BaseActionSupport{
 		obj.setEmail(customerTraceInfo.getEmail());
 		obj.setQq(customerTraceInfo.getQq());
 		obj.setTel(customerTraceInfo.getTel());
-		obj.setCompanyId(customerTraceInfo.getCompanyId());
+		obj.setCompanyId( sessionCompanyId );
 		customerTraceInfoService.save(obj);
 		id = obj.getId();
 		return SUCCESS;
