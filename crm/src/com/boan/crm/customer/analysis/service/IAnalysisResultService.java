@@ -17,6 +17,10 @@ public interface IAnalysisResultService {
 	 * 根据分类获取分析结论
 	 */
 	public List<AnalysisResult> findAllAnalysisResult();
+	/**
+	 * 根据值获取分析结论
+	 */
+	public AnalysisResult findAnalysisResult(double result);
 
 	/**
 	 * 根据id获取分析结论
