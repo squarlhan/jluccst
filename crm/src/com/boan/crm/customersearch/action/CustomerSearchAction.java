@@ -1,12 +1,22 @@
 package com.boan.crm.customersearch.action;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.lang.StringUtils;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.WorkbookFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
@@ -26,7 +36,10 @@ import com.boan.crm.datadictionary.model.ProvinceInfo;
 import com.boan.crm.datadictionary.service.IAreaService;
 import com.boan.crm.utils.action.BaseActionSupport;
 import com.boan.crm.utils.converter.ParseBeanUtil;
+import com.boan.crm.utils.io.impl.FileCopyAndDeleteUtilsAdaptor;
 import com.boan.crm.utils.page.Pagination;
+import com.boan.crm.utils.path.PathUtil;
+import com.boan.crm.utils.uuid.MyUUIDGenerator;
 
 @Controller("customerSearchAction")
 @Scope("prototype")
@@ -68,6 +81,13 @@ public class CustomerSearchAction  extends BaseActionSupport{
 	private String provinceId;
 	private String cityId;
 	private String areaId;
+	
+	private File uploadFile;
+	private String uploadFileContentType = null;
+	/**
+	 * 上传导入文件的名称
+	 */
+	private String uploadFileFileName = null;
 	
 	public List<ProvinceInfo> getProvinceList() {
 		return provinceList;
@@ -180,6 +200,227 @@ public class CustomerSearchAction  extends BaseActionSupport{
 		return SUCCESS;
 	}
 	
+	public String importCustomerLib()
+	{
+		if(uploadFile != null)
+		{
+			try
+			{
+				String baseDirectory = PathUtil.getInstance().getWebRoot()+"uploadfiles/importcustomer/";
+				String extendName = null;
+				if( StringUtils.isNotBlank( uploadFileFileName ) && uploadFileFileName.lastIndexOf( "." ) != -1 )
+					extendName = uploadFileFileName.substring( uploadFileFileName.lastIndexOf("."), uploadFileFileName.length() );
+				File newFile = new File(baseDirectory);
+				if( !newFile.exists() )
+					newFile.mkdirs();
+				
+				String fileStorePath = MyUUIDGenerator.getInstance().generate().toString() + extendName;
+				FileCopyAndDeleteUtilsAdaptor fileUtils = new FileCopyAndDeleteUtilsAdaptor();
+				fileUtils.copySimpleFile( uploadFile, new File( baseDirectory, fileStorePath ), 1024 );
+				
+				Workbook wb = null;
+				InputStream is = null;
+				Sheet sheet = null;
+				try
+				{
+					is = new FileInputStream( new File( baseDirectory + fileStorePath ) );
+//					is = new FileInputStream( new File( grantsRecordMeta.getImportFileStorePath() ) );
+					wb = WorkbookFactory.create( is );
+					is.close();
+					
+					sheet = wb.getSheetAt( 0 );
+					int totalRecord = ( sheet.getLastRowNum() + 1 ) - 1;
+					if( totalRecord == 0 )
+					{
+						
+					}else
+					{
+						for( int i = 1; i < totalRecord + 1; i++ )
+						{
+							Row row = sheet.getRow( i );
+							try
+							{
+								if( row != null )
+								{
+									Cell customerNameCell = row.getCell( 0 );
+									Cell customerTelCell = row.getCell( 1 );
+									Cell customerFaxCell = row.getCell( 2 );
+									Cell customerPhoneCell = row.getCell( 3 );
+									Cell customerContractPersonNameCell = row.getCell( 4 );
+									Cell customerContractDeptCell = row.getCell( 5 );
+									Cell customerAddressCell = row.getCell( 6 );
+									Cell customerPostCodeCell = row.getCell( 7 );
+									Cell customerEmailCell = row.getCell( 8 );
+									Cell customerMainIndustryCell = row.getCell( 9 );
+									String customerName = "";
+									String customerTel = "";
+									String customerFax = "";
+									String customerPhone = "";
+									String customerContractPersonName = "";
+									String customerContractDept = "";
+									String customerAddress = "";
+									String customerPostCode = "";
+									String customerEmail = "";
+									String customerMainIndustry = "";
+									if( customerNameCell != null )
+									{
+										customerName = customerNameCell.getStringCellValue() ;
+									}
+									if( customerTelCell != null )
+									{
+										customerTel = customerTelCell.getStringCellValue() ;
+									}
+									if( customerFaxCell != null )
+									{
+										customerFax = customerFaxCell.getStringCellValue() ;
+									}
+									if( customerPhoneCell != null )
+									{
+										customerPhone = customerPhoneCell.getStringCellValue() ;
+									}
+									if( customerContractPersonNameCell != null )
+									{
+										customerContractPersonName = customerContractPersonNameCell.getStringCellValue() ;
+									}
+									if( customerContractDeptCell != null )
+									{
+										customerContractDept = customerContractDeptCell.getStringCellValue() ;
+									}
+									if( customerAddressCell != null )
+									{
+										customerAddress = customerAddressCell.getStringCellValue() ;
+									}
+									if( customerPostCodeCell != null )
+									{
+										customerPostCode = customerPostCodeCell.getStringCellValue() ;
+									}
+									if( customerEmailCell != null )
+									{
+										customerEmail = customerEmailCell.getStringCellValue() ;
+									}
+									if( customerMainIndustryCell != null )
+									{
+										customerMainIndustry = customerMainIndustryCell.getStringCellValue() ;
+									}
+									
+									
+									CustomerLibInfo customer = new CustomerLibInfo();
+									if(customerName.length() > 255)
+									{
+										customerName = customerName.substring(0,254);
+									}
+									customer.setCustomerName(customerName);
+									customer.setAddress(customerAddress);
+									customer.setMainIndustry(customerMainIndustry);
+									customer.setFax(customerFax);
+									customer.setPostCode(customerPostCode);
+									customer.setCreateTime(Calendar.getInstance());
+									customer.setCompanyId( sessionCompanyId );
+									customer.setCreatorId(sessionUserId);
+									
+									customer.setCompanyFullName(customerName);
+
+									String customerAddressTemp = customerAddress.replaceAll("-", " ");
+									customerAddressTemp = customerAddressTemp.replaceAll("市", "市 ");
+									customerAddressTemp = customerAddressTemp.replaceAll("区", "区 ");
+									customerAddressTemp = customerAddressTemp.replaceAll("县", "县 ");
+									customerAddressTemp = customerAddressTemp.replaceAll("  ", " ");
+									String[] customerAddressArray = customerAddressTemp.split(" ");
+									boolean bProvinceFlag = false;
+									boolean bCityFlag = false;
+									for(int kk=0;kk<customerAddressArray.length - 1;kk++)
+									{
+										if(!customerAddressArray[kk].equals("中国"))
+										{
+											if(!bProvinceFlag)
+											{
+												ProvinceInfo province = areaService.getProvinceByName(customerAddressArray[kk]);
+												if(province != null)
+												{
+													customer.setProvince(province.getId());
+													bProvinceFlag = true;
+													continue;
+												}
+											}
+											if(!bCityFlag)
+											{
+												CityInfo city = areaService.getCityByName(customerAddressArray[kk]);
+												if(city != null)
+												{
+													customer.setCity(city.getId());
+													customer.setProvince(city.getProvinceId());
+													bCityFlag = true;
+													continue;
+												}
+											}
+											AreaInfo area = areaService.getAreaByName(customerAddressArray[kk]);
+											if(area != null)
+											{
+												customer.setDistrict(area.getId());
+												customer.setCity(area.getCityId());
+												continue;
+											}
+										}
+									}
+									
+									customerInfoService.save(customer);
+									
+									ContractPersonLibInfo contractPerson = new ContractPersonLibInfo();
+									contractPerson.setCustomerId(customer.getId());
+									contractPerson.setPersonName(customerContractPersonName);
+									contractPerson.setTel(customerTel);
+									contractPerson.setPhone(customerPhone);
+									contractPerson.setDeptOrDuty(customerContractDept);
+									contractPerson.setEmail(customerEmail);
+
+									contractpersonService.save(contractPerson);
+									
+									
+								}
+							}catch(Exception ex)
+							{}
+						}
+					}
+				}
+				catch( Exception ex )
+				{
+					
+				}
+				
+			}catch(Exception ex)
+			{
+				
+			}
+		}
+		message = "保存成功！";
+		return SUCCESS;
+	}
+	
+	
+	public File getUploadFile() {
+		return uploadFile;
+	}
+
+	public void setUploadFile(File uploadFile) {
+		this.uploadFile = uploadFile;
+	}
+
+	public String getUploadFileContentType() {
+		return uploadFileContentType;
+	}
+
+	public void setUploadFileContentType(String uploadFileContentType) {
+		this.uploadFileContentType = uploadFileContentType;
+	}
+
+	public String getUploadFileFileName() {
+		return uploadFileFileName;
+	}
+
+	public void setUploadFileFileName(String uploadFileFileName) {
+		this.uploadFileFileName = uploadFileFileName;
+	}
+
 	public String getCity(){
 		cityList = areaService.findCityInfoByProvinceId(provinceId);
 		return SUCCESS;
