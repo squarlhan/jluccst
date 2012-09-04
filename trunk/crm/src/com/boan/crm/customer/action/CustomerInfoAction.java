@@ -12,8 +12,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.annotation.Resource;
-
 import org.apache.commons.lang.StringUtils;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
@@ -37,7 +35,6 @@ import com.boan.crm.datadictionary.service.IAreaService;
 import com.boan.crm.datadictionary.service.IDataDictionaryService;
 import com.boan.crm.groupmanage.common.RoleFlag;
 import com.boan.crm.groupmanage.model.User;
-import com.boan.crm.groupmanage.service.IPopedomService;
 import com.boan.crm.groupmanage.service.IUserService;
 import com.boan.crm.utils.action.BaseActionSupport;
 import com.boan.crm.utils.io.impl.FileCopyAndDeleteUtilsAdaptor;
@@ -531,6 +528,7 @@ public class CustomerInfoAction extends BaseActionSupport{
 		obj.setSourceId(customerInfo.getSourceId());
 		obj.setMainIndustry(customerInfo.getMainIndustry());
 		obj.setPostCode(customerInfo.getPostCode());
+		obj.setIntroduceTimes(customerInfo.getIntroduceTimes());
 		customerInfoService.save(obj);
 		id = obj.getId();
 		return SUCCESS;
