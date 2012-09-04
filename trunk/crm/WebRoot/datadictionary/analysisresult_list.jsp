@@ -31,7 +31,7 @@
 			/**
 	  		 */
 			$("#addbtn").click(function(){
-				parent.parent.tipsWindown("添加分析结论","iframe:fuzzy/analysisResult.action","470","320","true","","true","no");
+				parent.parent.tipsWindown("添加分析结论","iframe:fuzzy/analysisResult.action","500","320","true","","true","no");
 				parent.parent.$("#windown-close").bind('click',function(){
 					window.location.href="fuzzy/analysisResultList.action";
 				});
@@ -41,14 +41,14 @@
 	  		 * 排序
 	  		 */
 			$("#sortbtn").click(function(){
-				parent.parent.tipsWindown("分析结论排序","iframe:datadictionary/provincesort.action","370","320","true","","true","no");
+				parent.parent.tipsWindown("分析结论排序","iframe:datadictionary/provincesort.action","500","320","true","","true","no");
 				parent.parent.$("#windown-close").bind('click',function(){
 					window.location.href="fuzzy/analysisResultList.action";
 				});
 			});
 			
 			$(".showInfo").css("cursor","hand").click(function(){
-				parent.parent.tipsWindown("修改分析结论","iframe:fuzzy/analysisResult.action?id=" + $(this).attr("tid") ,"470","320","true","","true","no");
+				parent.parent.tipsWindown("修改分析结论","iframe:fuzzy/analysisResult.action?id=" + $(this).attr("tid") ,"500","320","true","","true","no");
 				parent.parent.$("#windown-close").bind('click',function(){
 					window.location.href="fuzzy/analysisResultList.action";
 				});
@@ -80,8 +80,6 @@
 										value="添加">
 									<input name="button" type="button" class="btn_4"
 										id="deletebtn" value="删除所选">
-									<input name="sortbtn" type="button" class="btn_2_3"
-										id="sortbtn" value="排序">
 								</td>
 								<td align="right"></td>
 							</tr>
