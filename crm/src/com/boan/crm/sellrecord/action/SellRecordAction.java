@@ -82,7 +82,7 @@ public class SellRecordAction extends BaseActionSupport{
 	private Pagination<SellRecord> pagination = new Pagination<SellRecord>();
 
 	private String[] ids;
-	
+	private String customerId;
 	//--------------查询条件-------------------------//
 	private String queryCustomerName;
 	
@@ -115,6 +115,26 @@ public class SellRecordAction extends BaseActionSupport{
 		pagination = sellRecordService.findSellRecordForPage(params ,pagination);
 		return SUCCESS;
 	}
+	
+	public String openSellRecordListForCustomer() throws Exception{
+		userList =userService.queryUserList( sessionCompanyId, sessionDeptId, new Pagination<User>()).getData();
+		Map<String, String> params = new HashMap<String, String>();
+		if(customerId!=null ){
+			customerId=customerId.split(",")[0];
+			if(customerId!=null  && !customerId.trim().equals("")){
+				params.put("customerId", customerId);
+			}
+			if(queryBargainTimeBegin!=null && !queryBargainTimeBegin.trim().equals("")){
+				params.put("queryBargainTimeBegin", queryBargainTimeBegin);
+			}
+			if(queryBargainTimeBegin!=null  && !queryBargainTimeBegin.trim().equals("")){
+				params.put("queryBargainTimeEnd", queryBargainTimeEnd);
+			}
+		}
+		pagination = sellRecordService.findSellRecordForPage(params ,pagination);
+		return SUCCESS;
+	}
+	
 	
 	public String openAddSellRecord(){
 		customerInfos= customerInfoService.findAllCustomerInfo();
@@ -153,6 +173,9 @@ public class SellRecordAction extends BaseActionSupport{
 		
 		try {
 			//保存或更新销售记录
+			if(sellRecord.getId().equals("")){
+				sellRecord.setId(null);
+			}
 			sellRecordService.saveOrUpdate(sellRecord);
 			message="保存成功！";
 		} catch (Exception e) {
@@ -304,5 +327,13 @@ public class SellRecordAction extends BaseActionSupport{
 
 	public void setUserList(List<User> userList) {
 		this.userList = userList;
+	}
+
+	public String getCustomerId() {
+		return customerId;
+	}
+
+	public void setCustomerId(String customerId) {
+		this.customerId = customerId;
 	}
 }
