@@ -107,27 +107,8 @@ public class CustomerTraceInfoAction extends BaseActionSupport{
 	 */
 	public String customerTraceList()
 	{
-		//客户分类： 传0
-		//listCategory = dataDictionaryService.findDataDictionaryByType(0);
-		listTraceOption = new ArrayList<DataDictionary>();
-		DataDictionary d = new DataDictionary();
-		d.setId("登门拜访");
-		d.setName("登门拜访");
-		listTraceOption.add(d);
-		DataDictionary d1 = new DataDictionary();
-		d1.setId("电话跟进");
-		d1.setName("电话跟进");
-		listTraceOption.add(d1);
-		
-		DataDictionary d2 = new DataDictionary();
-		d2.setId("QQ聊天");
-		d2.setName("QQ聊天");
-		listTraceOption.add(d2);
-		
-		DataDictionary d3 = new DataDictionary();
-		d3.setId("邮件沟通");
-		d3.setName("邮件沟通");
-		listTraceOption.add(d3);
+		//跟进方式： 传6
+		listTraceOption = dataDictionaryService.findDataDictionaryByType(6);
 		
 		try
 		{
@@ -162,6 +143,7 @@ public class CustomerTraceInfoAction extends BaseActionSupport{
 		{
 			values.put("endDate", endDate);
 		}
+		values.put( "companyId", sessionCompanyId );
 		pagination = customerTraceInfoService.findCustomerTraceInfoForPage(values, pagination);
 		return SUCCESS;
 	}
@@ -226,25 +208,7 @@ public class CustomerTraceInfoAction extends BaseActionSupport{
 		else
 			customerTraceInfo = new CustomerTraceInfo();
 		
-		listTraceOption = new ArrayList<DataDictionary>();
-		DataDictionary d = new DataDictionary();
-		d.setId("登门拜访");
-		d.setName("登门拜访");
-		listTraceOption.add(d);
-		DataDictionary d1 = new DataDictionary();
-		d1.setId("电话跟进");
-		d1.setName("电话跟进");
-		listTraceOption.add(d1);
-		
-		DataDictionary d2 = new DataDictionary();
-		d2.setId("QQ聊天");
-		d2.setName("QQ聊天");
-		listTraceOption.add(d2);
-		
-		DataDictionary d3 = new DataDictionary();
-		d3.setId("邮件沟通");
-		d3.setName("邮件沟通");
-		listTraceOption.add(d3);
+		listTraceOption = dataDictionaryService.findDataDictionaryByType(6);
 		
 		listPerson = contractPersonService.findAllContractPersonInfoByCustomerId(customerId);
 		
@@ -288,7 +252,7 @@ public class CustomerTraceInfoAction extends BaseActionSupport{
 		obj.setEmail(customerTraceInfo.getEmail());
 		obj.setQq(customerTraceInfo.getQq());
 		obj.setTel(customerTraceInfo.getTel());
-		
+		obj.setCompanyId(customerTraceInfo.getCompanyId());
 		customerTraceInfoService.save(obj);
 		id = obj.getId();
 		return SUCCESS;
