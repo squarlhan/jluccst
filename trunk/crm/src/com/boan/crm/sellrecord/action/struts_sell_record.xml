@@ -9,6 +9,10 @@
 			<result name="success">/sellrecord/sellrecordlist.jsp</result>
 			<result name="input">/sellrecord/sellrecordlist.jsp</result>
 		</action>
+		<action name="openSellRecordListForCustomerAction" class="sellRecordAction" method="openSellRecordListForCustomer">
+			<result name="success">/sellrecord/sellrecordlistforcustomer.jsp</result>
+			<result name="input">/sellrecord/sellrecordlistforcustomer.jsp</result>
+		</action>
 		<action name="openAddSellRecordAction" class="sellRecordAction" method="openAddSellRecord">
 			<result name="success">/sellrecord/sellrecordinfo.jsp</result>
 			<result name="input">/sellrecord/sellrecordinfo.jsp</result>
