@@ -51,7 +51,7 @@ public class AnalysisResultAction extends BaseActionSupport{
 	 * 分析结论列表
 	 * @return String
 	 */
-	public String fuzzyList()
+	public String analysisResultList()
 	{
 		//分析结论分类： 传0
 		analysisResultList = analysisResultService.findAllAnalysisResult();
