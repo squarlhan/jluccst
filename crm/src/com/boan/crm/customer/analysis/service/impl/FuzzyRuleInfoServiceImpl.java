@@ -34,9 +34,28 @@ public class FuzzyRuleInfoServiceImpl implements IFuzzyRuleInfoService{
 	/**
 	 * 根据分类获取模糊项
 	 */
-	public List<RuleInfo> findAllFuzzyRuleInfo()
+	public List<IdCaption> findAllFuzzyRuleInfo()
 	{
-		return fuzzyRuleInfoDao.find("from RuleInfo ", new Object[0]);
+		StringBuilder hql = new StringBuilder();
+		hql.append( "select new com.boan.crm.customer.analysis.model.IdCaption(t.resultFuzzyId,t.resultFuzzyName) from RuleInfo t group by t.resultFuzzyId,t.resultFuzzyName ");
+		hql.append(" order by resultFuzzyId asc");
+		List<IdCaption> data = fuzzyRuleInfoDao.find(hql.toString(),new Object[0]);
+		if(data != null && data.size() > 0)
+		{
+			for(int i=0;i<data.size();i++)
+			{
+				List<RuleInfo> list = findAllFuzzyRuleInfoByResultId(data.get(i).getIId());
+				if(list != null && list.size() >0)
+				{
+					for(int j=0;j<list.size();j++)
+					{
+						list.get(j).setFuzzyCategoryName(FuzzyCategory.getCategoryNameById(list.get(j).getFuzzyCategory()));
+					}
+				}
+				data.get(i).setAttachObject(list);
+			}
+		}
+		return data;
 	}
 	/**
 	 * 根据分类获取规则
