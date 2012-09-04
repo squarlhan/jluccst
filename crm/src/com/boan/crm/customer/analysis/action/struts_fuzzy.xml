@@ -51,5 +51,24 @@
              	<param name="actionName">fuzzyRuleList</param>
             </result>
     	</action>
+    	<action name="analysisResultList" class="analysisResultAction" method="analysisResultList">
+			<result name="success">/datadictionary/analysisresult_list.jsp</result>
+			<result name="input">/datadictionary/analysisresult_list.jsp</result>
+		</action>
+		<action name="analysisResult" class="analysisResultAction" method="analysisResult">
+			<result name="success">/datadictionary/analysisresult_info.jsp</result>
+			<result name="input">/datadictionary/analysisresult_info.jsp</result>
+		</action>
+		<action name="saveAnalysisResult" class="analysisResultAction" method="saveAnalysisResult">
+			<result name="success" type="chain">
+             	<param name="actionName">analysisResult</param>
+             	<param name="id">${id}</param>
+            </result>
+		</action>
+    	<action name="deleteAnalysisResult" class="analysisResultAction" method="deleteAnalysisResult">
+    		<result name="success" type="chain">
+             	<param name="actionName">analysisResultList</param>
+            </result>
+    	</action>
 	</package>
 </struts>
