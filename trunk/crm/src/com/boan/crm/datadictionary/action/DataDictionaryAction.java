@@ -48,6 +48,7 @@ public class DataDictionaryAction extends BaseActionSupport {
 	private String remark;
 	
 	private String[] dictIds;
+	private String message;
 	
 	private List<DictionaryType> loadDictionaryTypes(){
 		List<DictionaryType> list = new ArrayList<DictionaryType>();
@@ -90,10 +91,13 @@ public class DataDictionaryAction extends BaseActionSupport {
 	 * @return
 	 */
 	public String saveDataDictionary(){
-		if(StringUtils.trimToNull(dictId)!=null)
+		if(StringUtils.trimToNull(dictId)!=null){
 			dataDictionary = dataDictionaryService.get(dictId);
-		else
+			this.message = "保存成功！";
+		}else{
 			dataDictionary = new DataDictionary();
+			this.message = "添加成功！";
+		}
 		dataDictionary.setTypeFlag(typeFlag);
 		dataDictionary.setName(name);
 		dataDictionary.setRemark(remark);
@@ -134,6 +138,7 @@ public class DataDictionaryAction extends BaseActionSupport {
 				dataDictionary.setSortIndex(i);
 				dataDictionaryService.save(dataDictionary);
 			}
+			this.message = "排序成功！";
 		}
 		return SUCCESS;
 	}
@@ -224,6 +229,20 @@ public class DataDictionaryAction extends BaseActionSupport {
 
 	public void setDictionaryTypes(List<DictionaryType> dictionaryTypes) {
 		this.dictionaryTypes = dictionaryTypes;
+	}
+
+	/**
+	 * @return the message
+	 */
+	public String getMessage() {
+		return message;
+	}
+
+	/**
+	 * @param message the message to set
+	 */
+	public void setMessage(String message) {
+		this.message = message;
 	}
 	
 }
