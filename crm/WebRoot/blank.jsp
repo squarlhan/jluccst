@@ -23,7 +23,7 @@
 <body>
 <table width="100%" height="100%" border="0" cellpadding="0" cellspacing="0" id="__01">
   <tr>
-    <td align="center"><!--img src="images/desktop.jpg"/--></td>
+    <td align="center"><img src="images/20110222-150712-81872.jpg" /></td>
   </tr>
 </table>
 </body>
