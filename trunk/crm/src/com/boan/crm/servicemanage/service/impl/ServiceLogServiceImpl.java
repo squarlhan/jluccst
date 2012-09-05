@@ -40,17 +40,23 @@ public class ServiceLogServiceImpl extends BaseDao<ServiceLog,String> implements
 			Pagination<ServiceLog> pagination) {
 		String hql = "from ServiceLog where 1=1";
 		if(values!=null){
+			if(values.containsKey("myCompanyId")){
+				hql= hql + " and myCompanyId =:myCompanyId";
+			}
 			if(values.containsKey("companyName")){
 				hql= hql + " and companyName like :companyName";
 			}
 			if(values.containsKey("companyId")){
-				hql= hql + " and companyId = :companyId";
+				hql= hql + " and companyId =:companyId";
 			}
 		}
 		hql= hql + " order by serviceTime asc";
 		List<ServiceLog> data = serviceLogDao.findForPage(hql, values, pagination.getStartIndex(), pagination.getPageSize());
 		hql = "select count(*) from ServiceLog where 1=1";
 		if(values!=null){
+			if(values.containsKey("myCompanyId")){
+				hql= hql + " and myCompanyId =:myCompanyId";
+			}
 			if(values.containsKey("companyName")){
 				hql= hql + " and companyName like :companyName";
 			}

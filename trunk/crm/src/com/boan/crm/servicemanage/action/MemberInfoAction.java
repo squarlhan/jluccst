@@ -64,11 +64,10 @@ public class MemberInfoAction extends BaseActionSupport {
 	 */
 	public String memberInfoList(){
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put( "companyName", "%" + searchCompanyName + "%" );
+		map.put("myCompanyId", sessionCompanyId);
 		if(searchCompanyName!=null)
-			pagination = memberInfoService.findForPage(map, pagination );
-		else
-			pagination = memberInfoService.findForPage(null, pagination );
+			map.put( "companyName", "%" + searchCompanyName + "%" );
+		pagination = memberInfoService.findForPage(map, pagination );
 		return SUCCESS;
 	}
 	

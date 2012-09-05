@@ -40,9 +40,26 @@ public class PointInfoServiceImpl extends BaseDao<PointInfo,String> implements I
 	@Override
 	public Pagination<PointInfo> findForPage(Map<String, ?> values,
 			Pagination<PointInfo> pagination) {
-		String hql = "from PointInfo where companyId = :companyId order by consumptionTime asc";
+		String hql = "from PointInfo where 1=1";
+		if(values!=null){
+			if(values.containsKey("myCompanyId")){
+				hql= hql + " and myCompanyId =:myCompanyId";
+			}
+			if(values.containsKey("companyId")){
+				hql= hql + " and companyId =:companyId";
+			}
+		}
+		hql= hql + " order by consumptionTime asc";
 		List<PointInfo> data = pointInfoDao.findForPage(hql, values, pagination.getStartIndex(), pagination.getPageSize());
-		hql = "select count(*) from PointInfo  where companyId = :companyId ";
+		hql = "select count(*) from PointInfo where 1=1";
+		if(values!=null){
+			if(values.containsKey("myCompanyId")){
+				hql= hql + " and myCompanyId =:myCompanyId";
+			}
+			if(values.containsKey("companyId")){
+				hql= hql + " and companyId = :companyId";
+			}
+		}
 		int totalRows = pointInfoDao.findCountForPage(hql, values);
 		pagination.setTotalRows(totalRows);
 		pagination.setData(data);

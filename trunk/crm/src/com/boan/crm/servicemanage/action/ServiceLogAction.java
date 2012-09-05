@@ -65,10 +65,7 @@ public class ServiceLogAction extends BaseActionSupport {
 		String tempCompanyId = "cbit";
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put( "companyId", tempCompanyId );
-		if(searchCompanyName!=null)
-			pagination = serviceLogService.findForPage(map, pagination );
-		else
-			pagination = serviceLogService.findForPage(null, pagination );
+		pagination = serviceLogService.findForPage(map, pagination );
 		return SUCCESS;
 	}
 	
@@ -78,11 +75,10 @@ public class ServiceLogAction extends BaseActionSupport {
 	 */
 	public String serviceLogList(){
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put( "companyName", "%" + searchCompanyName + "%" );
+		map.put("myCompanyId", sessionCompanyId);
 		if(searchCompanyName!=null)
-			pagination = serviceLogService.findForPage(map, pagination );
-		else
-			pagination = serviceLogService.findForPage(null, pagination );
+			map.put( "companyName", "%" + searchCompanyName + "%" );
+		pagination = serviceLogService.findForPage(map, pagination );
 		return SUCCESS;
 	}
 	
