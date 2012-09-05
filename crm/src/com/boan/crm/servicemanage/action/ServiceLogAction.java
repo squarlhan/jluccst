@@ -6,6 +6,7 @@
 
 package com.boan.crm.servicemanage.action;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -16,6 +17,8 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
+import com.boan.crm.customer.model.CustomerInfo;
+import com.boan.crm.customer.service.ICustomerInfoService;
 import com.boan.crm.servicemanage.model.ServiceLog;
 import com.boan.crm.servicemanage.service.IServiceLogService;
 import com.boan.crm.utils.action.BaseActionSupport;
@@ -34,15 +37,21 @@ public class ServiceLogAction extends BaseActionSupport {
 
 	private static final long serialVersionUID = 1890924579127721010L;
 
-	@Resource
 	//服务记录接口类
+	@Resource
 	private IServiceLogService serviceLogService;
+	//客户状态接口类
+	@Resource
+	private ICustomerInfoService customerInfoService;
 	
 	//服务记录对象
 	private ServiceLog serviceLog = null;
 	
 	//服务记录对象集合
 	private List<ServiceLog> serviceLogs = null;
+	
+	//销售员所有的客户
+	private List<CustomerInfo> customerInfos = null;
 	
 	//显示分页
 	private Pagination<ServiceLog> pagination = new Pagination<ServiceLog>();
@@ -87,6 +96,9 @@ public class ServiceLogAction extends BaseActionSupport {
 	 * @return
 	 */
 	public String serviceLogInfo(){
+		customerInfos= customerInfoService.findAllCustomerInfo();
+		if(customerInfos==null)
+			customerInfos = new ArrayList<CustomerInfo>();
 		if(StringUtils.trimToNull(logId)!=null)
 			serviceLog = serviceLogService.get(logId);
 		else
@@ -99,8 +111,12 @@ public class ServiceLogAction extends BaseActionSupport {
 	 * @return
 	 */
 	public String saveServiceLog(){
+		customerInfos= customerInfoService.findAllCustomerInfo();
+		if(customerInfos==null)
+			customerInfos = new ArrayList<CustomerInfo>();
 		if(StringUtils.trimToNull(serviceLog.getId())==null)
 			serviceLog.setId(null);
+		serviceLog.setMyCompanyId(sessionCompanyId);
 		serviceLog.setCompanyId(companyId);
 		serviceLog.setCompanyName(companyName);
 		serviceLogService.saveOrUpdate(serviceLog);
@@ -116,6 +132,20 @@ public class ServiceLogAction extends BaseActionSupport {
 			serviceLogService.deleteServiceLog(logIds);
 		}
 		return SUCCESS;
+	}
+
+	/**
+	 * @return the customerInfos
+	 */
+	public List<CustomerInfo> getCustomerInfos() {
+		return customerInfos;
+	}
+
+	/**
+	 * @param customerInfos the customerInfos to set
+	 */
+	public void setCustomerInfos(List<CustomerInfo> customerInfos) {
+		this.customerInfos = customerInfos;
 	}
 
 	/**
