@@ -89,10 +89,8 @@
 														<tr>
 															<td align="center" nowrap="nowrap">客户名称</td>
 															<td>
-															<select id="selCompany" name="name" style="width:150px">
-																	<option value="cbit">长白信息科技</option>
-																	<option value="easy">易得信息科技</option>
-															</select></td>
+																<s:select id="selCompany" list="customerInfos" listKey="id" listValue="customerName" cssStyle="width:150px"></s:select>
+															</td>
 															<td align="center" nowrap="nowrap">联系人</td>
 															<td align="left"><s:textfield id="txt_contact"
 																	name="serviceLog.contact" cssStyle="width:150px;" /></td>
