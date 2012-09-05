@@ -2,11 +2,14 @@ package com.boan.crm.sellrecord.action;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -22,6 +25,12 @@ import com.boan.crm.sellrecord.model.GoodsInfo;
 import com.boan.crm.sellrecord.model.SellRecord;
 import com.boan.crm.sellrecord.service.IGoodsInfoService;
 import com.boan.crm.sellrecord.service.ISellRecordService;
+import com.boan.crm.servicemanage.model.MemberInfo;
+import com.boan.crm.servicemanage.model.MemberType;
+import com.boan.crm.servicemanage.model.PointInfo;
+import com.boan.crm.servicemanage.service.IMemberInfoService;
+import com.boan.crm.servicemanage.service.IMemberTypeService;
+import com.boan.crm.servicemanage.service.IPointInfoService;
 import com.boan.crm.utils.action.BaseActionSupport;
 import com.boan.crm.utils.page.Pagination;
 
@@ -38,6 +47,15 @@ public class SellRecordAction extends BaseActionSupport{
 	@Qualifier("customerInfoService")
 	//客户状态接口类
 	private ICustomerInfoService customerInfoService;
+	@Resource
+	//积分接口类
+	private IPointInfoService pointInfoService;
+	@Resource
+	//会员接口类
+	private IMemberInfoService memberInfoService;
+	@Resource
+	//会员类别接口类
+	private IMemberTypeService memberTypeService;
 	
 	/**
 	 * 商品明细
@@ -157,6 +175,7 @@ public class SellRecordAction extends BaseActionSupport{
 		sellRecord.setSalesmanId(userSession.getUserId());//设置销售员Id
 		sellRecord.setSalesmanName(userSession.getUserCName());
 		Set<GoodsInfo> goodsDetials = new HashSet<GoodsInfo>();
+		BigDecimal thisPrice = new BigDecimal(0);
 		for(String str  : detials){
 			String[] array = str.split("☆");
 			System.out.println(array[0]);
@@ -168,6 +187,7 @@ public class SellRecordAction extends BaseActionSupport{
 			goods.setNumber(Integer.parseInt(array[4]));
 			goods.setAllPrice(new BigDecimal(array[5]));
 			goodsDetials.add(goods );
+			thisPrice = thisPrice.add(goods.getAllPrice());
 		}
 		sellRecord.setGoodsDetials(goodsDetials );
 		
@@ -177,6 +197,7 @@ public class SellRecordAction extends BaseActionSupport{
 				sellRecord.setId(null);
 			}
 			sellRecordService.saveOrUpdate(sellRecord);
+			serviceData(sellRecord.getCustomerId(), sellRecord.getCustomerName(), sellRecord.getBargainTime(), sellRecord.getId(), sellRecord.getRealCollection().floatValue());
 			message="保存成功！";
 		} catch (Exception e) {
 			message="保存失败！";
@@ -215,6 +236,53 @@ public class SellRecordAction extends BaseActionSupport{
 	public String deleteSellRecordDetials(){
 		goodsInfoService.deleteGoodsInfoByIds(ids);
 		return NONE;
+	}
+	
+	/**
+	 * 为服务模块生成数据
+	 * @param companyId 单位ID
+	 * @param companyName 单位名称
+	 * @param consumptionId 销售ID
+	 * @param money 销售金额
+	 */
+	private void serviceData(String companyId, String companyName, Calendar createTime, String consumptionId, float money){
+		PointInfo pi = pointInfoService.getByConsumptionId(consumptionId);
+		if(pi==null){
+			pi = new PointInfo();
+			pi.setConsumptionId(consumptionId);
+		}
+		pi.setMyCompanyId(sessionCompanyId);
+		pi.setCompanyId(companyId);
+		pi.setCompanyName(companyName);
+		pi.setConsumptionTime(createTime);//消费时间
+		pi.setConsumptionMoney(money);//消费金额
+		pi.setPoint((int)pi.getConsumptionMoney());//消费积分
+		pointInfoService.saveOrUpdate(pi);
+		//更新会员积分信息
+		MemberInfo mi = memberInfoService.getByCompanyId(companyId);//客户ID
+		if(mi==null){
+			mi = new MemberInfo();
+			mi.setCreateTime(createTime);
+		}
+		mi.setMyCompanyId(sessionCompanyId);
+		mi.setCompanyId(companyId);
+		mi.setCompanyName(companyName);
+		mi.setConsumptionAmount(pointInfoService.getConsumptionAmount(companyId));//消费总额
+		mi.setTotalPoint(pointInfoService.getTotalPoint(companyId));//总积分
+		
+		//设置会员类别
+		List<MemberType> memberTypes = memberTypeService.memberTypeList(sessionCompanyId);
+		if(memberTypes!=null&&memberTypes.size()>0){
+			for (MemberType memberType : memberTypes) {
+				if(mi.getTotalPoint()>=memberType.getMinStandard() && mi.getTotalPoint()<=memberType.getMaxStandard()){
+					mi.setMemberType(memberType.getTypeName());
+					break;
+				}
+			}
+		}else{
+			mi.setMemberType("普通会员");
+		}
+		memberInfoService.updateInfo(mi);
 	}
 
 	public List<String> getDetials() {
