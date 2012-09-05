@@ -46,6 +46,21 @@
 		var ifrHeight = $("#leftFrame", parent.parent.document).height();
 		var ifrHeightTemp = ifrHeight - 50;
 		$("#menuArea").height(ifrHeightTemp);
+		
+		$(document).find("strong[name='menus']").each(function(index,domEle){
+			if(index==0){
+				$("tbody[name='submenus']:first").css("display","block");
+			}
+			$(domEle).css("cursor","hand").click(function(){
+				$(document).find("tbody[name='submenus']").each(function(indexSub,domEleSub){
+					if(index==indexSub){
+						$(domEleSub).css("display","block");
+					}else{
+						$(domEleSub).css("display","none");
+					}
+				});
+			});
+		});
 	});
 	$(window).resize(function() {
 		var ifrHeight = $("#leftFrame", parent.parent.document).height();
@@ -74,12 +89,13 @@
 									<tr>
 										<td width="40" align="right" style="padding-bottom: 4px;"><img src="images/up.gif" width="10" height="12" />
 										</td>
-										<td><strong>后台管理</strong>
+										<td><strong name="menus">后台管理</strong>
 										</td>
 									</tr>
 								</table>
 							</td>
 						</tr>
+						<tbody name="submenus" style="display:none">
 						<tr>
 							<td align="left">
 								<table width="100%" border="0" cellspacing="5" cellpadding="0">
@@ -152,6 +168,7 @@
 								</table>
 							</td>
 						</tr>
+						</tbody>
 						<%
 							}
 						%>
@@ -165,12 +182,13 @@
 									<tr>
 										<td width="40" align="right" style="padding-bottom: 4px;"><img src="images/up.gif" width="10" height="12" />
 										</td>
-										<td><strong>组织机构</strong>
+										<td><strong name="menus">组织机构</strong>
 										</td>
 									</tr>
 								</table>
 							</td>
 						</tr>
+						<tbody name="submenus" style="display:none">
 						<tr>
 							<td align="left">
 								<table width="100%" border="0" cellspacing="5" cellpadding="0">
@@ -195,6 +213,7 @@
 								</table>
 							</td>
 						</tr>
+						</tbody>
 						<%
 							}
 						%>
@@ -208,12 +227,13 @@
 									<tr>
 										<td width="40" align="right" style="padding-bottom: 4px;"><img src="images/up.gif" width="10" height="12" />
 										</td>
-										<td><strong>客户查找</strong>
+										<td><strong name="menus">客户查找</strong>
 										</td>
 									</tr>
 								</table>
 							</td>
 						</tr>
+						<tbody name="submenus" style="display:none">
 						<tr>
 							<td align="left">
 								<table width="100%" border="0" cellspacing="5" cellpadding="0">
@@ -238,6 +258,7 @@
 								</table>
 							</td>
 						</tr>
+						</tbody>
 						<%
 							}
 						%>
@@ -251,12 +272,13 @@
 									<tr>
 										<td width="40" align="right" style="padding-bottom: 4px;"><img src="images/up.gif" width="10" height="12" />
 										</td>
-										<td><strong>客户管理</strong>
+										<td><strong name="menus">客户管理</strong>
 										</td>
 									</tr>
 								</table>
 							</td>
 						</tr>
+						<tbody name="submenus" style="display:none">
 						<tr>
 							<td align="left">
 								<table width="100%" border="0" cellspacing="5" cellpadding="0">
@@ -299,7 +321,7 @@
 									<tr>
 										<td width="40" align="right" style="padding-bottom: 4px;"><img src="images/menuto.jpg" width="5" height="5" />
 										</td>
-										<td><a href="customer/customeranalysismanage.jsp" target="mainFrame">客户评估</a>
+										<td><a href="customerAssemessment.html" target="mainFrame">客户评估</a>
 										</td>
 									</tr>
 								</table>
@@ -311,12 +333,13 @@
 									<tr>
 										<td width="40" align="right" style="padding-bottom: 4px;"><img src="images/menuto.jpg" width="5" height="5" />
 										</td>
-										<td><a href="customer/customeranalysisresultmanage.jsp" target="mainFrame">评估分析</a>
+										<td><a href="resultAnlysis.html" target="mainFrame">评估分析</a>
 										</td>
 									</tr>
 								</table>
 							</td>
 						</tr>
+						</tbody>
 						<%
 							}
 						%>
@@ -330,12 +353,13 @@
 									<tr>
 										<td width="40" align="right" style="padding-bottom: 4px;"><img src="images/up.gif" width="10" height="12" />
 										</td>
-										<td><strong>销售管理</strong>
+										<td><strong name="menus">销售管理</strong>
 										</td>
 									</tr>
 								</table>
 							</td>
 						</tr>
+						<tbody name="submenus" style="display:none">
 						<tr>
 							<td align="left">
 								<table width="100%" border="0" cellspacing="5" cellpadding="0">
@@ -384,6 +408,7 @@
 								</table>
 							</td>
 						</tr>
+						</tbody>
 						<%
 							}
 						%>
@@ -397,12 +422,13 @@
 									<tr>
 										<td width="40" align="right" style="padding-bottom: 4px;"><img src="images/up.gif" width="10" height="12" />
 										</td>
-										<td><strong>服务管理</strong>
+										<td><strong name="menus">服务管理</strong>
 										</td>
 									</tr>
 								</table>
 							</td>
 						</tr>
+						<tbody name="submenus" style="display:none">
 						<tr>
 							<td align="left">
 								<table width="100%" border="0" cellspacing="5" cellpadding="0">
@@ -439,6 +465,7 @@
 								</table>
 							</td>
 						</tr>
+						</tbody>
 						<%
 							}
 						%>
@@ -452,12 +479,13 @@
 									<tr>
 										<td width="40" align="right" style="padding-bottom: 4px;"><img src="images/up.gif" width="10" height="12" />
 										</td>
-										<td><strong>数据字典</strong>
+										<td><strong name="menus">数据字典</strong>
 										</td>
 									</tr>
 								</table>
 							</td>
 						</tr>
+						<tbody name="submenus" style="display:none">
 						<tr>
 							<td align="left">
 								<table width="100%" border="0" cellspacing="5" cellpadding="0">
@@ -542,6 +570,7 @@
 								</table>
 							</td>
 						</tr>
+						</tbody>
 						<%
 							}
 						%>
