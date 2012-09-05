@@ -120,7 +120,7 @@ public class CustomerInfoAction extends BaseActionSupport{
 	public String customerList()
 	{
 		//客户分类： 传0
-		listCategory = dataDictionaryService.findDataDictionaryByType(0);
+		listCategory = dataDictionaryService.findDataDictionaryByType(sessionCompanyId, 0);
 		try
 		{
 			userList = userService.queryUserListByCompanyIdRoleKey(sessionCompanyId,RoleFlag.YE_WU_YUAN);
@@ -403,9 +403,9 @@ public class CustomerInfoAction extends BaseActionSupport{
 		else
 			customerInfo = new CustomerInfo();
 		//客户来源：传2
-		listSource = dataDictionaryService.findDataDictionaryByType(2);
+		listSource = dataDictionaryService.findDataDictionaryByType(sessionCompanyId, 2);
 		//客户分类： 传0
-		listCategory = dataDictionaryService.findDataDictionaryByType(0);
+		listCategory = dataDictionaryService.findDataDictionaryByType(sessionCompanyId, 0);
 		//业务进展：传
 		//listProgress = dataDictionaryService.findDataDictionaryByType(0);
 		listProgress = new ArrayList<DataDictionary>();
@@ -422,7 +422,7 @@ public class CustomerInfoAction extends BaseActionSupport{
 		d2.setName("成熟客户");
 		listProgress.add(d2);
 		//成熟度：传4
-		listMaturity = dataDictionaryService.findDataDictionaryByType(4);
+		listMaturity = dataDictionaryService.findDataDictionaryByType(sessionCompanyId, 4);
 		//开发程度
 		//listLevel = dataDictionaryService.findDataDictionaryByType(0);
 		listLevel = new ArrayList<DataDictionary>();
