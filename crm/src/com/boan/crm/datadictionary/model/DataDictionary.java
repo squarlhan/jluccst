@@ -35,6 +35,12 @@ public class DataDictionary implements Serializable {
 	private String id;
 	
 	/**
+	 * 所属单位ID
+	 */
+	@Column(name = "COMPANY_ID" , length = 50)
+	private String companyId;
+	
+	/**
 	 * 类别
 	 */
 	@Column(name = "TYPE_FLAG")
@@ -64,6 +70,14 @@ public class DataDictionary implements Serializable {
 
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	public String getCompanyId() {
+		return companyId;
+	}
+
+	public void setCompanyId(String companyId) {
+		this.companyId = companyId;
 	}
 
 	public Integer getTypeFlag() {

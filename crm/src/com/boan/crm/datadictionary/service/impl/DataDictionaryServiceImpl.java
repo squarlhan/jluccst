@@ -25,8 +25,8 @@ public class DataDictionaryServiceImpl implements IDataDictionaryService{
 	}
 
 	@Override
-	public List<DataDictionary> findAllDataDictionary() {
-		return dataDictionaryDao.find("from DataDictionary order by sortIndex asc", new Object[0]);
+	public List<DataDictionary> findAllDataDictionaryByCompanyId(String companyId) {
+		return dataDictionaryDao.find("from DataDictionary where companyId=? order by sortIndex asc", new Object[]{companyId});
 	}
 
 	@Override
@@ -52,8 +52,8 @@ public class DataDictionaryServiceImpl implements IDataDictionaryService{
 	}
 
 	@Override
-	public List<DataDictionary> findDataDictionaryByType(Integer typeFlag) {
-		return dataDictionaryDao.find("from DataDictionary where typeFlag=? order by sortIndex asc", new Object[]{typeFlag});
+	public List<DataDictionary> findDataDictionaryByType(String companyId, Integer typeFlag) {
+		return dataDictionaryDao.find("from DataDictionary where companyId=? and typeFlag=? order by sortIndex asc", new Object[]{companyId, typeFlag});
 	}
 	
 }
