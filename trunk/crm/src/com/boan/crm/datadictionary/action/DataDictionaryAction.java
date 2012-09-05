@@ -70,7 +70,7 @@ public class DataDictionaryAction extends BaseActionSupport {
 	 * @return
 	 */
 	public String dataDictionaryList(){
-		dataDictionarys = dataDictionaryService.findDataDictionaryByType(typeFlag);
+		dataDictionarys = dataDictionaryService.findDataDictionaryByType(sessionCompanyId, typeFlag);
 		return SUCCESS;
 	}
 	
@@ -98,6 +98,7 @@ public class DataDictionaryAction extends BaseActionSupport {
 			dataDictionary = new DataDictionary();
 			this.message = "添加成功！";
 		}
+		dataDictionary.setCompanyId(sessionCompanyId);
 		dataDictionary.setTypeFlag(typeFlag);
 		dataDictionary.setName(name);
 		dataDictionary.setRemark(remark);
@@ -122,7 +123,7 @@ public class DataDictionaryAction extends BaseActionSupport {
 	 * @return
 	 */
 	public String dataDictionarySort(){
-		dataDictionarys = dataDictionaryService.findDataDictionaryByType(typeFlag);
+		dataDictionarys = dataDictionaryService.findDataDictionaryByType(sessionCompanyId, typeFlag);
 		return SUCCESS;
 	}
 	

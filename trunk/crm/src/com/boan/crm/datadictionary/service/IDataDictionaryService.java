@@ -15,14 +15,14 @@ import com.boan.crm.utils.page.Pagination;
  */
 public interface IDataDictionaryService {
 	/**
-	 * 查找全部数据字典
+	 * 根据客户ID查找全部数据字典
 	 */
-	public List<DataDictionary> findAllDataDictionary();
+	public List<DataDictionary> findAllDataDictionaryByCompanyId(String companyId);
 	
 	/**
-	 * 查找类别查找数据字典
+	 * 根据客户ID查找类别查找数据字典
 	 */
-	public List<DataDictionary> findDataDictionaryByType(Integer typeFlag);
+	public List<DataDictionary> findDataDictionaryByType(String companyId, Integer typeFlag);
 
 	/**
 	 * 根据id获取数据字典
