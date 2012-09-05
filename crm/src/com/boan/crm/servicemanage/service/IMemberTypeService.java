@@ -31,7 +31,8 @@ public interface IMemberTypeService {
 
 	/**
 	 * 显示会员类别对象集合
+	 * @param myCompanyId 所属单位ID
 	 * @return 会员类别对象集合
 	 */
-	public List<MemberType> memberTypeList();
+	public List<MemberType> memberTypeList(String myCompanyId);
 }

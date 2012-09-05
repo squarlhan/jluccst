@@ -35,6 +35,12 @@ public class MemberType implements Serializable {
 	private String id;
 	
 	/**
+	 * 数据对应的单位ID
+	 */
+	@Column(name = "MY_COMPANY_ID")
+	private String myCompanyId;
+	
+	/**
 	 * 类别名称
 	 */
 	@Column(name = "TYPE_NAME", length = 50)
@@ -70,6 +76,20 @@ public class MemberType implements Serializable {
 	 */
 	public void setId(String id) {
 		this.id = id;
+	}
+	
+	/**
+	 * @return the myCompanyId
+	 */
+	public String getMyCompanyId() {
+		return myCompanyId;
+	}
+
+	/**
+	 * @param myCompanyId the myCompanyId to set
+	 */
+	public void setMyCompanyId(String myCompanyId) {
+		this.myCompanyId = myCompanyId;
 	}
 
 	/**

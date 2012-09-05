@@ -81,62 +81,69 @@ public class PointInfoAction extends BaseActionSupport {
 	 */
 	public String memberInfoList(){
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put( "companyName", "%" + searchCompanyName + "%" );
-		if(searchCompanyName!=null)
-			memberPagination = memberInfoService.findForPage(map, memberPagination );
-		else
-			memberPagination = memberInfoService.findForPage(null, memberPagination );
+		map.put("myCompanyId", sessionCompanyId);
+		if(searchCompanyName!=null){
+			map.put( "companyName", "%" + searchCompanyName + "%" );
+		}
+		memberPagination = memberInfoService.findForPage(map, memberPagination );
 		return SUCCESS;
 	}
 	
+	/**
+	 * 为服务模块生成数据
+	 * @param companyId 单位ID
+	 * @param companyName 单位名称
+	 * @param consumptionId 销售ID
+	 * @param money 销售金额
+	 */
+	public void serviceData(String companyId, String companyName, String consumptionId, float money){
+		PointInfo pi = pointInfoService.getByConsumptionId(consumptionId);
+		if(pi==null){
+			pi = new PointInfo();
+			pi.setConsumptionId(consumptionId);
+		}
+		pi.setMyCompanyId(sessionCompanyId);
+		pi.setCompanyId(companyId);
+		pi.setCompanyName(companyName);
+		pi.setConsumptionTime(Calendar.getInstance());//消费时间
+		pi.setConsumptionMoney(money);//消费金额
+		pi.setPoint((int)pi.getConsumptionMoney());//消费积分
+		pointInfoService.saveOrUpdate(pi);
+		//更新会员积分信息
+		MemberInfo mi = memberInfoService.getByCompanyId(companyId);//客户ID
+		if(mi==null){
+			mi = new MemberInfo();
+			mi.setCreateTime(Calendar.getInstance());
+		}
+		mi.setMyCompanyId(sessionCompanyId);
+		mi.setCompanyId(companyId);
+		mi.setCompanyName(companyName);
+		mi.setConsumptionAmount(pointInfoService.getConsumptionAmount(companyId));//消费总额
+		mi.setTotalPoint(pointInfoService.getTotalPoint(companyId));//总积分
+		
+		//设置会员类别
+		List<MemberType> memberTypes = memberTypeService.memberTypeList(sessionCompanyId);
+		if(memberTypes!=null&&memberTypes.size()>0){
+			for (MemberType memberType : memberTypes) {
+				if(mi.getTotalPoint()>=memberType.getMinStandard() && mi.getTotalPoint()<=memberType.getMaxStandard()){
+					mi.setMemberType(memberType.getTypeName());
+					break;
+				}
+			}
+		}else{
+			mi.setMemberType("普通会员");
+		}
+		memberInfoService.updateInfo(mi);
+	}
 	
 	/**
 	 * 会员对象集合
 	 * @return 结果
 	 */
 	public String pointInfoList(){
-		//		//测试增加记录
-		//		String tempCompanyId = "cbit1";//客户ID
-		//		String tempCompanyName = "易得信息科技";//客户名称
-		//		String consumptionId = "111111";//销售记录ID
-		//		PointInfo pi = pointInfoService.getByConsumptionId(consumptionId);
-		//		if(pi==null){
-		//			pi = new PointInfo();
-		//			pi.setConsumptionId(consumptionId);
-		//		}
-		//		pi.setCompanyId(tempCompanyId);
-		//		pi.setCompanyName(tempCompanyName);
-		//		pi.setConsumptionTime(Calendar.getInstance());//消费时间
-		//		pi.setConsumptionMoney(Float.parseFloat("55.88"));//消费金额
-		//		pi.setPoint((int)pi.getConsumptionMoney());//消费积分
-		//		pointInfoService.saveOrUpdate(pi);
-		//		//更新会员积分信息
-		//		MemberInfo mi = memberInfoService.getByCompanyId(tempCompanyId);//客户ID
-		//		if(mi==null){
-		//			mi = new MemberInfo();
-		//			mi.setCreateTime(Calendar.getInstance());
-		//		}
-		//		mi.setCompanyId(tempCompanyId);
-		//		mi.setCompanyName(tempCompanyName);
-		//		mi.setConsumptionAmount(pointInfoService.getConsumptionAmount(tempCompanyId));//消费总额
-		//		mi.setTotalPoint(pointInfoService.getTotalPoint(tempCompanyId));//总积分
-		//		
-		//		//设置会员类别
-		//		List<MemberType> memberTypes = memberTypeService.memberTypeList();
-		//		if(memberTypes!=null&&memberTypes.size()>0){
-		//			for (MemberType memberType : memberTypes) {
-		//				if(mi.getTotalPoint()>=memberType.getMinStandard() && mi.getTotalPoint()<=memberType.getMaxStandard()){
-		//					mi.setMemberType(memberType.getTypeName());
-		//					break;
-		//				}
-		//			}
-		//		}else{
-		//			mi.setMemberType("普通会员");
-		//		}
-		//		memberInfoService.updateInfo(mi);
-		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put( "companyId", companyId );
+		map.put("myCompanyId", sessionCompanyId);
 		if(companyId!=null)
 			pagination = pointInfoService.findForPage(map, pagination );
 		return SUCCESS;

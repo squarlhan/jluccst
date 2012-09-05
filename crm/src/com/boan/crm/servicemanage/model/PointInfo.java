@@ -36,6 +36,12 @@ public class PointInfo implements Serializable {
 	private String id;
 	
 	/**
+	 * 数据对应的单位ID
+	 */
+	@Column(name = "MY_COMPANY_ID")
+	private String myCompanyId;
+	
+	/**
 	 * 销售记录ID
 	 */
 	@Column(name = "CONSUMPTION_ID")
@@ -76,6 +82,20 @@ public class PointInfo implements Serializable {
 	 */
 	public String getId() {
 		return id;
+	}
+
+	/**
+	 * @return the myCompanyId
+	 */
+	public String getMyCompanyId() {
+		return myCompanyId;
+	}
+
+	/**
+	 * @param myCompanyId the myCompanyId to set
+	 */
+	public void setMyCompanyId(String myCompanyId) {
+		this.myCompanyId = myCompanyId;
 	}
 
 	/**

@@ -30,6 +30,9 @@ public class MemberInfoServiceImpl extends BaseDao<MemberInfo,String> implements
 			Pagination<MemberInfo> pagination) {
 		String hql = "from MemberInfo where 1=1";
 		if(values!=null){
+			if(values.containsKey("myCompanyId")){
+				hql= hql + " and myCompanyId =:myCompanyId";
+			}
 			if(values.containsKey("companyName")){
 				hql= hql + " and companyName like :companyName";
 			}
@@ -38,6 +41,9 @@ public class MemberInfoServiceImpl extends BaseDao<MemberInfo,String> implements
 		List<MemberInfo> data = memberInfoDao.findForPage(hql, values, pagination.getStartIndex(), pagination.getPageSize());
 		hql = "select count(*) from MemberInfo where 1=1";
 		if(values!=null){
+			if(values.containsKey("myCompanyId")){
+				hql= hql + " and myCompanyId =:myCompanyId";
+			}
 			if(values.containsKey("companyName")){
 				hql= hql + " and companyName like :companyName";
 			}
