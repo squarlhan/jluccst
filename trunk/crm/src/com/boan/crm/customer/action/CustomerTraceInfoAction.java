@@ -108,7 +108,7 @@ public class CustomerTraceInfoAction extends BaseActionSupport{
 	public String customerTraceList()
 	{
 		//跟进方式： 传6
-		listTraceOption = dataDictionaryService.findDataDictionaryByType(6);
+		listTraceOption = dataDictionaryService.findDataDictionaryByType(sessionCompanyId, 6);
 		
 		try
 		{
@@ -208,7 +208,7 @@ public class CustomerTraceInfoAction extends BaseActionSupport{
 		else
 			customerTraceInfo = new CustomerTraceInfo();
 		
-		listTraceOption = dataDictionaryService.findDataDictionaryByType(6);
+		listTraceOption = dataDictionaryService.findDataDictionaryByType(sessionCompanyId, 6);
 		
 		listPerson = contractPersonService.findAllContractPersonInfoByCustomerId(customerId);
 		

@@ -93,7 +93,7 @@ public class CustomerVisitInfoAction extends BaseActionSupport{
 	public String customerVisitList()
 	{
 		//回访方式： 传5
-		listVisitOption = dataDictionaryService.findDataDictionaryByType(5);
+		listVisitOption = dataDictionaryService.findDataDictionaryByType(sessionCompanyId, 5);
 		
 		try
 		{
@@ -193,7 +193,7 @@ public class CustomerVisitInfoAction extends BaseActionSupport{
 		else
 			customerVisitInfo = new CustomerVisitInfo();
 		
-		listVisitOption = dataDictionaryService.findDataDictionaryByType(5);
+		listVisitOption = dataDictionaryService.findDataDictionaryByType(sessionCompanyId, 5);
 		
 		listPerson = contractPersonService.findAllContractPersonInfoByCustomerId(customerId);
 		
