@@ -35,7 +35,8 @@ public class MemberTypeServiceImpl extends BaseDao<MemberType,String> implements
 
 	@Override
 	public List<MemberType> memberTypeList(String myCompanyId) {
-		return memberTypeDao.find("from MemberType where myCompanyId=? order by sortIndex asc", new Object[]{myCompanyId});
+		//return memberTypeDao.find("from MemberType where myCompanyId=? order by sortIndex asc", new Object[]{myCompanyId});
+		return memberTypeDao.find("from MemberType order by sortIndex asc", new Object[0]);
 	}
 
 }
