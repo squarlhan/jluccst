@@ -144,8 +144,8 @@ public class SellRecordServiceImpl implements ISellRecordService {
 	 * @return
 	 */
 	public  int getConsumptionCount(String customerId){
-		String hql ="select count(record.id) from SellRecord as record where record. customerId='"+customerId+"' ";
-		List list = sellRecordDao.find(hql, "");
+		String hql ="select count(record.id) from SellRecord as record where record. customerId=:customerId ";
+		List list = sellRecordDao.find(hql, customerId);
 		return list!=null && list.size()>0 ? Integer.parseInt( list.get(0).toString()) : 0;
 	}
 	
@@ -155,8 +155,8 @@ public class SellRecordServiceImpl implements ISellRecordService {
 	 * @return
 	 */
 	public  BigDecimal getConsumptionMoney(String customerId){
-		String hql ="select sum(record.receivable) from SellRecord as record where record. customerId='"+customerId+"' ";
-		List list = sellRecordDao.find(hql, "");
+		String hql ="select sum(record.receivable) from SellRecord as record where record. customerId=:customerId";
+		List list = sellRecordDao.find(hql,customerId);
 		return list!=null && list.size()>0 ? new BigDecimal( list.get(0).toString()) : new BigDecimal(0);
 	}
 }
