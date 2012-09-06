@@ -43,19 +43,23 @@ public class CustomerAssessmentAction extends BaseActionSupport{
 	@Resource
 	private ISellRecordService sellRecordService;
 	
-	private String[] customerIds = null;
+	private String customerIds = null;
 	private	List<CustomerAssessment> listResult = null;
-	
+	private String totalComsumption = "";
+	private String consumptionTimes = "";
+	private String introduceTimes = "";
+	private String payments = "";
+	private String level = "";
 	public List<CustomerAssessment> getListResult() {
 		return listResult;
 	}
 	public void setListResult(List<CustomerAssessment> listResult) {
 		this.listResult = listResult;
 	}
-	public String[] getCustomerIds() {
+	public String getCustomerIds() {
 		return customerIds;
 	}
-	public void setCustomerIds(String[] customerIds) {
+	public void setCustomerIds(String customerIds) {
 		this.customerIds = customerIds;
 	}
 	public String customerAnalysisList()
@@ -66,28 +70,70 @@ public class CustomerAssessmentAction extends BaseActionSupport{
 	public String customerAnalysis()
 	{
 		List<AnalysisCustomer> customerList = new ArrayList<AnalysisCustomer>();
-		for(int i=0;i<customerIds.length;i++)
+		String[] customerArray = customerIds.split(",");
+		for(int i=0;i<customerArray.length;i++)
 		{
 			AnalysisCustomer analysisCustomer = new AnalysisCustomer();
-			CustomerInfo customer = customerInfoService.get(customerIds[i]);
+			CustomerInfo customer = customerInfoService.get(customerArray[i]);
 			analysisCustomer.setId(customer.getId());
 			analysisCustomer.setCustomerName(customer.getCustomerName());
-			
-			analysisCustomer.setTotalConsumption(sellRecordService.getConsumptionMoney(customer.getId()));
-			analysisCustomer.setConsumptionTimes(sellRecordService.getConsumptionCount(customer.getId()));
-			if(customer.getLevelId() != null && customer.getLevelId().length() > 0)
+			if(totalComsumption.equals("1"))
 			{
-				analysisCustomer.setDevelopDegree(Double.parseDouble(customer.getLevelId()));
+				analysisCustomer.setTotalConsumption(sellRecordService.getConsumptionMoney(customer.getId()));
 			}
-			analysisCustomer.setIntroduceCustomerTime(customer.getIntroduceTimes());
+			if(consumptionTimes.equals("1"))
+			{
+				analysisCustomer.setConsumptionTimes(sellRecordService.getConsumptionCount(customer.getId()));
+			}
+			if(level.equals("1"))
+			{
+				if(customer.getLevelId() != null && customer.getLevelId().length() > 0)
+				{
+					analysisCustomer.setDevelopDegree(Double.parseDouble(customer.getLevelId()));
+				}
+			}
+			if(introduceTimes.equals("1"))
+			{
+				analysisCustomer.setIntroduceCustomerTime(customer.getIntroduceTimes());
+			}
 			
 			customerList.add(analysisCustomer);
 		}
 		
-		List<CustomerAssessment> listResult = customerAssessmentService.customerAssessmentByCustomerList(customerList);
+		listResult = customerAssessmentService.customerAssessmentByCustomerList(customerList);
 		
 		
 		return SUCCESS;
+	}
+	public String getTotalComsumption() {
+		return totalComsumption;
+	}
+	public void setTotalComsumption(String totalComsumption) {
+		this.totalComsumption = totalComsumption;
+	}
+	public String getConsumptionTimes() {
+		return consumptionTimes;
+	}
+	public void setConsumptionTimes(String consumptionTimes) {
+		this.consumptionTimes = consumptionTimes;
+	}
+	public String getIntroduceTimes() {
+		return introduceTimes;
+	}
+	public void setIntroduceTimes(String introduceTimes) {
+		this.introduceTimes = introduceTimes;
+	}
+	public String getPayments() {
+		return payments;
+	}
+	public void setPayments(String payments) {
+		this.payments = payments;
+	}
+	public String getLevel() {
+		return level;
+	}
+	public void setLevel(String level) {
+		this.level = level;
 	}
 	
 }
