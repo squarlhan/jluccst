@@ -76,7 +76,7 @@
 		               var rows = [];
 		               if(data != null)
 		               {
-		            	   allData = test.listCustomer;
+		            	   allData = data;
 			               for(var i=0; i<data.length; i++)
 				           {
 				              rows[rows.length] = 
