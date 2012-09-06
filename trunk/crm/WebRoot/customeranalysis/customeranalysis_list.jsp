@@ -114,27 +114,79 @@ $(function() {
 			});
 			
 			$("#addbtn").click(function(){
-				for(var i=0;i<5;i++)
+				var customerIds= "";
+				for(var i=1;i<6;i++)
 				{
-					
+					if($("#chk"+i).checked)
+					{
+						if(customerIds == "")
+						{
+							customerIds = $("#chk"+i).val();
+						}else
+						{
+							customerIds = customerIds + "," + $("#chk"+i).val();
+						}
+					}
 				}
-				
+				var totalComsumption = "";
+				var consumptionTimes = "";
+				var introduceTimes = "";
+				var payments = "";
+				var level = "";
+				if($("#chkTotalComsumption").checked)
+				{
+					totalComsumption = 1;
+				}
+				if($("#chkConsumptionTimes").checked)
+				{
+					consumptionTimes = 1;
+				}
+				if($("#chkIntroduceTimes").checked)
+				{
+					introduceTimes = 1;
+				}
+				if($("#chkPayments").checked)
+				{
+					payments = 1;
+				}
+				if($("#chkLevel").checked)
+				{
+					level = 1;
+				}
 				$.ajax({
-                    url:"<%=basePath%>customerassessment/customerAnalysis.action",
+                    url:"<%=basePath%>customerassessment/customerAnalysis.action?customerIds="+customerIds+"&totalComsumption="+totalComsumption+"&consumptionTimes="+consumptionTimes+"&introduceTimes="+introduceTimes+"&payments="+payments+"&level="+level,
                     type: 'POST',
                     dataType: 'JSON',
                     timeout: 5000,
                     error: function() { alert('Error loading data!'); },
                     success: function(msg) {
-                        //$("#city").empty();
                         $.each(eval(msg), function(i, item) {
-                           // $("#tel").val(item.phone + " " +item.tel);
-                            //$("#qq").val(item.qq);
-                           // $("#email").val(item.email);
+                           for(var i=1;i<6;i++)
+							{
+								if($("#chk"+i).val() == item.id)
+								{
+									$("#result"+i).html("评估值："+item.resultValue + "，结论：" + item.result);
+								}
+							}
                         });
                         
                     }
                 });
+			});
+			$("#delbtn").click(function(){
+				for(var i=1;i<6;i++)
+				{
+					if($("#chk"+i).checked)
+					{
+						  $("#chk"+g_number).val("");
+						  $("#customerName"+g_number).html("");
+			  			  $("#salesman"+g_number).html("");
+						  $("#levelId"+g_number).html("");
+						  $("#maturity"+g_number).html("");
+						  $("#category"+g_number).html("");
+						  $("#contractPerson"+g_number).html("");
+					}
+				}
 			});
 });
 </script>
@@ -151,7 +203,7 @@ $(function() {
 		<td align="center">添加客户</td>
 		<td style="width: 160px;"><s:textfield type="text" style="width:150px" name="customerInfo.customerName" id="customerName"></s:textfield></td>
 		<td><input type="button" style="width: 67px;" class="btn_2_3" id="addbtn" value="添加" /></td>
-		<td style="width: 80px"><input type="button" style="width: 80px;" class="btn_4" id="addbtn" value="删除所选" /></td>
+		<td style="width: 80px"><input type="button" style="width: 80px;" class="btn_4" id="delbtn" value="删除所选" /></td>
 	</tr>
 </table></td></tr>
 <tr><td style="width: 20px"></td><td style="width: 100%"><table width="100%" border="0" cellpadding="0" cellspacing="1" style="background-color: #d5e4fd">
@@ -163,6 +215,7 @@ $(function() {
 		<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">客户分类</td>
 		<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">成熟度</td>
 		<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">开发程度</td>
+		<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">评估结论</td>
 	</tr>
 	<tr>
 		<td align="center" style="height: 26px; background-color:#FFFFFF"><input type="checkbox" name="checkbox" id="chk1" /></td>
@@ -172,6 +225,7 @@ $(function() {
 		<td align="center" style="height: 26px; background-color:#FFFFFF" id="category1"></td>
 		<td align="center" style="height: 26px; background-color:#FFFFFF" id="maturity1"></td>
 		<td align="center" style="height: 26px; background-color:#FFFFFF" id="levelId1"></td>
+		<td align="center" style="height: 26px; background-color:#FFFFFF" id="result1"></td>
 	</tr>
 	<tr>
 		<td align="center" style="height: 26px; background-color:#FFFFFF"><input type="checkbox" name="checkbox" id="chk2" /></td>
@@ -181,6 +235,7 @@ $(function() {
 		<td align="center" style="height: 26px; background-color:#FFFFFF" id="category2"></td>
 		<td align="center" style="height: 26px; background-color:#FFFFFF" id="maturity2"></td>
 		<td align="center" style="height: 26px; background-color:#FFFFFF" id="levelId2"></td>
+		<td align="center" style="height: 26px; background-color:#FFFFFF" id="result2"></td>
 	</tr>
 	<tr>
 		<td align="center" style="height: 26px; background-color:#FFFFFF"><input type="checkbox" name="checkbox" id="chk3" /></td>
@@ -190,6 +245,7 @@ $(function() {
 		<td align="center" style="height: 26px; background-color:#FFFFFF" id="category3"></td>
 		<td align="center" style="height: 26px; background-color:#FFFFFF" id="maturity3"></td>
 		<td align="center" style="height: 26px; background-color:#FFFFFF" id="levelId3"></td>
+		<td align="center" style="height: 26px; background-color:#FFFFFF" id="result3"></td>
 	</tr>
 	<tr>
 		<td align="center" style="height: 26px; background-color:#FFFFFF"><input type="checkbox" name="checkbox" id="chk4" /></td>
@@ -199,6 +255,7 @@ $(function() {
 		<td align="center" style="height: 26px; background-color:#FFFFFF" id="category4"></td>
 		<td align="center" style="height: 26px; background-color:#FFFFFF" id="maturity4"></td>
 		<td align="center" style="height: 26px; background-color:#FFFFFF" id="levelId4"></td>
+		<td align="center" style="height: 26px; background-color:#FFFFFF" id="result4"></td>
 	</tr>
 	<tr>
 		<td align="center" style="height: 26px; background-color:#FFFFFF"><input type="checkbox" name="checkbox" id="chk5" /></td>
@@ -208,6 +265,7 @@ $(function() {
 		<td align="center" style="height: 26px; background-color:#FFFFFF" id="category5"></td>
 		<td align="center" style="height: 26px; background-color:#FFFFFF" id="maturity5"></td>
 		<td align="center" style="height: 26px; background-color:#FFFFFF" id="levelId5"></td>
+		<td align="center" style="height: 26px; background-color:#FFFFFF" id="result5"></td>
 	</tr>
 </table></td></tr>
 
