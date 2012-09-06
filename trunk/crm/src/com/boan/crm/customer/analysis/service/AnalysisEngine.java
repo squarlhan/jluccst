@@ -36,9 +36,9 @@ public class AnalysisEngine {
 	@Autowired
 	@Qualifier("analysisResultService")
 	private IAnalysisResultService analysisResultService;
-	public String analysisResult()
+	
+	public double analysisResult()
 	{
-		String result = "";
 		if(enter != null)
 		{
 			List<AnalysisFuzzyValue> listFuzzyValue = new ArrayList<AnalysisFuzzyValue>();
@@ -67,73 +67,82 @@ public class AnalysisEngine {
 					listFuzzyValue.add(fuzzy);
 			}
 			//模糊化:消费次数
-			double consumptionTimes = Double.parseDouble(String.valueOf(enter.getConsumptionTimes()));
-			List<FuzzyInfo> listConsumptionTimes =  fuzzyInfoService.findAllFuzzyInfoByCategory(FuzzyCategory.TOTAL_CONSUMPTION);
-			for(int i=0;i<listConsumptionTimes.size();i++)
+			if(enter.getConsumptionTimes() > 0)
 			{
-				FuzzyInfo obj = listConsumptionTimes.get(i);
-				AnalysisFuzzyValue fuzzy = new AnalysisFuzzyValue();
-				fuzzy.setFuzzyId(obj.getId());
-				fuzzy.setId(FuzzyCategory.CONSUMPTION_TIMERS);
-				fuzzy.setSugeno(obj.getSugeno());
-				double fuzzyValue = 0;
-				if(obj.getFunctionName().equals(MathFunction.TRIANGLE))
+				double consumptionTimes = Double.parseDouble(String.valueOf(enter.getConsumptionTimes()));
+				List<FuzzyInfo> listConsumptionTimes =  fuzzyInfoService.findAllFuzzyInfoByCategory(FuzzyCategory.TOTAL_CONSUMPTION);
+				for(int i=0;i<listConsumptionTimes.size();i++)
 				{
-					fuzzyValue = MathFunction.triangle(consumptionTimes, obj.getFirstValue(), obj.getSecondValue(), obj.getThirdValue());
-				}else if(obj.getFunctionName().equals(MathFunction.TRAPEZOID))
-				{
-					fuzzyValue = MathFunction.trapezoid(consumptionTimes, obj.getFirstValue(), obj.getSecondValue(), obj.getThirdValue(),obj.getFourthValue());
+					FuzzyInfo obj = listConsumptionTimes.get(i);
+					AnalysisFuzzyValue fuzzy = new AnalysisFuzzyValue();
+					fuzzy.setFuzzyId(obj.getId());
+					fuzzy.setId(FuzzyCategory.CONSUMPTION_TIMERS);
+					fuzzy.setSugeno(obj.getSugeno());
+					double fuzzyValue = 0;
+					if(obj.getFunctionName().equals(MathFunction.TRIANGLE))
+					{
+						fuzzyValue = MathFunction.triangle(consumptionTimes, obj.getFirstValue(), obj.getSecondValue(), obj.getThirdValue());
+					}else if(obj.getFunctionName().equals(MathFunction.TRAPEZOID))
+					{
+						fuzzyValue = MathFunction.trapezoid(consumptionTimes, obj.getFirstValue(), obj.getSecondValue(), obj.getThirdValue(),obj.getFourthValue());
+					}
+					fuzzy.setFuzzyValue(fuzzyValue);
+					
+					if(fuzzyValue != 0)
+						listFuzzyValue.add(fuzzy);
 				}
-				fuzzy.setFuzzyValue(fuzzyValue);
-				
-				if(fuzzyValue != 0)
-					listFuzzyValue.add(fuzzy);
 			}
 			//模糊化:转介绍客户数
-			double introduceTimes = Double.parseDouble(String.valueOf(enter.getIntroduceCustomerTime()));
-			List<FuzzyInfo> listIntroduceTimes =  fuzzyInfoService.findAllFuzzyInfoByCategory(FuzzyCategory.INTRODUCE_COSTOMER);
-			for(int i=0;i<listIntroduceTimes.size();i++)
+			if(enter.getIntroduceCustomerTime() > 0)
 			{
-				FuzzyInfo obj = listIntroduceTimes.get(i);
-				AnalysisFuzzyValue fuzzy = new AnalysisFuzzyValue();
-				fuzzy.setFuzzyId(obj.getId());
-				fuzzy.setId(FuzzyCategory.INTRODUCE_COSTOMER);
-				double fuzzyValue = 0;
-				fuzzy.setSugeno(obj.getSugeno());
-				if(obj.getFunctionName().equals(MathFunction.TRIANGLE))
+				double introduceTimes = Double.parseDouble(String.valueOf(enter.getIntroduceCustomerTime()));
+				List<FuzzyInfo> listIntroduceTimes =  fuzzyInfoService.findAllFuzzyInfoByCategory(FuzzyCategory.INTRODUCE_COSTOMER);
+				for(int i=0;i<listIntroduceTimes.size();i++)
 				{
-					fuzzyValue = MathFunction.triangle(introduceTimes, obj.getFirstValue(), obj.getSecondValue(), obj.getThirdValue());
-				}else if(obj.getFunctionName().equals(MathFunction.TRAPEZOID))
-				{
-					fuzzyValue = MathFunction.trapezoid(introduceTimes, obj.getFirstValue(), obj.getSecondValue(), obj.getThirdValue(),obj.getFourthValue());
+					FuzzyInfo obj = listIntroduceTimes.get(i);
+					AnalysisFuzzyValue fuzzy = new AnalysisFuzzyValue();
+					fuzzy.setFuzzyId(obj.getId());
+					fuzzy.setId(FuzzyCategory.INTRODUCE_COSTOMER);
+					double fuzzyValue = 0;
+					fuzzy.setSugeno(obj.getSugeno());
+					if(obj.getFunctionName().equals(MathFunction.TRIANGLE))
+					{
+						fuzzyValue = MathFunction.triangle(introduceTimes, obj.getFirstValue(), obj.getSecondValue(), obj.getThirdValue());
+					}else if(obj.getFunctionName().equals(MathFunction.TRAPEZOID))
+					{
+						fuzzyValue = MathFunction.trapezoid(introduceTimes, obj.getFirstValue(), obj.getSecondValue(), obj.getThirdValue(),obj.getFourthValue());
+					}
+					fuzzy.setFuzzyValue(fuzzyValue);
+					fuzzy.setSugeno(obj.getSugeno());
+					if(fuzzyValue != 0)
+						listFuzzyValue.add(fuzzy);
 				}
-				fuzzy.setFuzzyValue(fuzzyValue);
-				fuzzy.setSugeno(obj.getSugeno());
-				if(fuzzyValue != 0)
-					listFuzzyValue.add(fuzzy);
 			}
 			//模糊化:开发程度
-			double devopDegree = Double.parseDouble(String.valueOf(enter.getIntroduceCustomerTime()));
-			List<FuzzyInfo> listDevopDegree =  fuzzyInfoService.findAllFuzzyInfoByCategory(FuzzyCategory.DEVOLOP_DEGREE);
-			for(int i=0;i<listDevopDegree.size();i++)
+			if(enter.getDevelopDegree() > 0)
 			{
-				FuzzyInfo obj = listDevopDegree.get(i);
-				AnalysisFuzzyValue fuzzy = new AnalysisFuzzyValue();
-				fuzzy.setFuzzyId(obj.getId());
-				fuzzy.setId(FuzzyCategory.DEVOLOP_DEGREE);
-				fuzzy.setSugeno(obj.getSugeno());
-				double fuzzyValue = 0;
-				if(obj.getFunctionName().equals(MathFunction.TRIANGLE))
+				double devopDegree = Double.parseDouble(String.valueOf(enter.getDevelopDegree()));
+				List<FuzzyInfo> listDevopDegree =  fuzzyInfoService.findAllFuzzyInfoByCategory(FuzzyCategory.DEVOLOP_DEGREE);
+				for(int i=0;i<listDevopDegree.size();i++)
 				{
-					fuzzyValue = MathFunction.triangle(devopDegree, obj.getFirstValue(), obj.getSecondValue(), obj.getThirdValue());
-				}else if(obj.getFunctionName().equals(MathFunction.TRAPEZOID))
-				{
-					fuzzyValue = MathFunction.trapezoid(devopDegree, obj.getFirstValue(), obj.getSecondValue(), obj.getThirdValue(),obj.getFourthValue());
+					FuzzyInfo obj = listDevopDegree.get(i);
+					AnalysisFuzzyValue fuzzy = new AnalysisFuzzyValue();
+					fuzzy.setFuzzyId(obj.getId());
+					fuzzy.setId(FuzzyCategory.DEVOLOP_DEGREE);
+					fuzzy.setSugeno(obj.getSugeno());
+					double fuzzyValue = 0;
+					if(obj.getFunctionName().equals(MathFunction.TRIANGLE))
+					{
+						fuzzyValue = MathFunction.triangle(devopDegree, obj.getFirstValue(), obj.getSecondValue(), obj.getThirdValue());
+					}else if(obj.getFunctionName().equals(MathFunction.TRAPEZOID))
+					{
+						fuzzyValue = MathFunction.trapezoid(devopDegree, obj.getFirstValue(), obj.getSecondValue(), obj.getThirdValue(),obj.getFourthValue());
+					}
+					fuzzy.setFuzzyValue(fuzzyValue);
+					
+					if(fuzzyValue != 0)
+						listFuzzyValue.add(fuzzy);
 				}
-				fuzzy.setFuzzyValue(fuzzyValue);
-				
-				if(fuzzyValue != 0)
-					listFuzzyValue.add(fuzzy);
 			}
 			//模糊化结束
 			//对比规则
@@ -153,12 +162,24 @@ public class AnalysisEngine {
 			//根据重心法取值
 			double finalValue = MathFunction.GravityOut(fuzzyValue, sugeno);
 			
-			//取结论
-			AnalysisResult analysisResult = analysisResultService.findAnalysisResult(finalValue);
-			if(analysisResult != null)
-			{
-				result =  analysisResult.getResult();
-			}
+			return finalValue;
+		}
+		return 0;
+	}
+	/**
+	 * 根据计算出的值，取结论
+	 * @param value
+	 * @return　String
+	 */
+	public String getResultByValue(double value)
+	{
+		String result = "";
+		
+		//取结论
+		AnalysisResult analysisResult = analysisResultService.findAnalysisResult(value);
+		if(analysisResult != null)
+		{
+			result =  analysisResult.getResult();
 		}
 		return result;
 	}

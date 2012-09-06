@@ -5,10 +5,6 @@
 <struts>
 	<!-- 客户Action -->
 	<package name="customer" extends="struts-default" namespace="/customer">
-		<action name="customerAnalysisList" class="customerInfoAction" method="customerAnalysisList">
-			<result name="success">/customer/customeranalysis_list.jsp</result>
-			<result name="input">/customer/customeranalysis_list.jsp</result>
-		</action>
 		<action name="customerList" class="customerInfoAction" method="customerList">
 			<result name="success">/customer/customer_list.jsp</result>
 			<result name="input">/customer/customer_list.jsp</result>
