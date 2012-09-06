@@ -177,15 +177,18 @@ $(function() {
 			$("#delbtn").click(function(){
 				for(var i=1;i<6;i++)
 				{
-					if($("#chk"+i).checked)
+					if($("#chk"+i).attr("checked"))
 					{
-						  $("#chk"+g_number).val("");
-						  $("#customerName"+g_number).html("");
-			  			  $("#salesman"+g_number).html("");
-						  $("#levelId"+g_number).html("");
-						  $("#maturity"+g_number).html("");
-						  $("#category"+g_number).html("");
-						  $("#contractPerson"+g_number).html("");
+						  $("#chk"+i).val("");
+						  $("#customerName"+i).html("");
+			  			  $("#salesman"+i).html("");
+						  $("#levelId"+i).html("");
+						  $("#maturity"+i).html("");
+						  $("#category"+i).html("");
+						  $("#contractPerson"+i).html("");
+						  $("#result"+i).html("");
+						  
+						  g_number = g_number - 1;
 					}
 				}
 			});
@@ -203,7 +206,6 @@ $(function() {
 	<tr>
 		<td align="center">添加客户</td>
 		<td style="width: 160px;"><s:textfield type="text" style="width:150px" name="customerInfo.customerName" id="customerName"></s:textfield></td>
-		<td><input type="button" style="width: 67px;" class="btn_2_3" id="addbtn" value="添加" /></td>
 		<td style="width: 80px"><input type="button" style="width: 80px;" class="btn_4" id="delbtn" value="删除所选" /></td>
 	</tr>
 </table></td></tr>
