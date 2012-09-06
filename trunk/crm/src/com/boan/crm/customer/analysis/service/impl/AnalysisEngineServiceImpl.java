@@ -1,13 +1,15 @@
 /**
  * 
  */
-package com.boan.crm.customer.analysis.service;
+package com.boan.crm.customer.analysis.service.impl;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.stereotype.Service;
 
 import com.boan.crm.customer.analysis.model.AnalysisCustomer;
 import com.boan.crm.customer.analysis.model.AnalysisFuzzyValue;
@@ -16,12 +18,18 @@ import com.boan.crm.customer.analysis.model.FuzzyCategory;
 import com.boan.crm.customer.analysis.model.FuzzyInfo;
 import com.boan.crm.customer.analysis.model.IdCaption;
 import com.boan.crm.customer.analysis.model.RuleInfo;
+import com.boan.crm.customer.analysis.service.IAnalysisEngineService;
+import com.boan.crm.customer.analysis.service.IAnalysisResultService;
+import com.boan.crm.customer.analysis.service.IFuzzyInfoService;
+import com.boan.crm.customer.analysis.service.IFuzzyRuleInfoService;
 import com.boan.crm.customer.analysis.utils.MathFunction;
+
 /**
  * @author luojx
  *
  */
-public class AnalysisEngine {
+@Service("analysisEngineService")
+public class AnalysisEngineServiceImpl implements IAnalysisEngineService{
 	private AnalysisCustomer enter = null;
 	private List<FuzzyInfo> resultList = null;
 	
@@ -44,27 +52,31 @@ public class AnalysisEngine {
 			List<AnalysisFuzzyValue> listFuzzyValue = new ArrayList<AnalysisFuzzyValue>();
 			//模糊化开始
 			//模糊化:消费总额
-			double totalConsumption = Double.parseDouble(enter.getTotalConsumption().toString());
-			List<FuzzyInfo> listTotalConsumption =  fuzzyInfoService.findAllFuzzyInfoByCategory(FuzzyCategory.TOTAL_CONSUMPTION);
-			for(int i=0;i<listTotalConsumption.size();i++)
+			//模糊化:消费次数
+			if(enter.getTotalConsumption() != null && !enter.getTotalConsumption().equals(BigDecimal.ZERO)) //是否等于0)
 			{
-				FuzzyInfo obj = listTotalConsumption.get(i);
-				AnalysisFuzzyValue fuzzy = new AnalysisFuzzyValue();
-				fuzzy.setFuzzyId(obj.getId());
-				fuzzy.setId(FuzzyCategory.TOTAL_CONSUMPTION);
-				fuzzy.setSugeno(obj.getSugeno());
-				double fuzzyValue = 0;
-				if(obj.getFunctionName().equals(MathFunction.TRIANGLE))
+				double totalConsumption = Double.parseDouble(enter.getTotalConsumption().toString());
+				List<FuzzyInfo> listTotalConsumption =  fuzzyInfoService.findAllFuzzyInfoByCategory(FuzzyCategory.TOTAL_CONSUMPTION);
+				for(int i=0;i<listTotalConsumption.size();i++)
 				{
-					fuzzyValue = MathFunction.triangle(totalConsumption, obj.getFirstValue(), obj.getSecondValue(), obj.getThirdValue());
-				}else if(obj.getFunctionName().equals(MathFunction.TRAPEZOID))
-				{
-					fuzzyValue = MathFunction.trapezoid(totalConsumption, obj.getFirstValue(), obj.getSecondValue(), obj.getThirdValue(),obj.getFourthValue());
+					FuzzyInfo obj = listTotalConsumption.get(i);
+					AnalysisFuzzyValue fuzzy = new AnalysisFuzzyValue();
+					fuzzy.setFuzzyId(obj.getId());
+					fuzzy.setId(FuzzyCategory.TOTAL_CONSUMPTION);
+					fuzzy.setSugeno(obj.getSugeno());
+					double fuzzyValue = 0;
+					if(obj.getFunctionName().equals(MathFunction.TRIANGLE))
+					{
+						fuzzyValue = MathFunction.triangle(totalConsumption, obj.getFirstValue(), obj.getSecondValue(), obj.getThirdValue());
+					}else if(obj.getFunctionName().equals(MathFunction.TRAPEZOID))
+					{
+						fuzzyValue = MathFunction.trapezoid(totalConsumption, obj.getFirstValue(), obj.getSecondValue(), obj.getThirdValue(),obj.getFourthValue());
+					}
+					fuzzy.setFuzzyValue(fuzzyValue);
+					
+					if(fuzzyValue != 0)
+						listFuzzyValue.add(fuzzy);
 				}
-				fuzzy.setFuzzyValue(fuzzyValue);
-				
-				if(fuzzyValue != 0)
-					listFuzzyValue.add(fuzzy);
 			}
 			//模糊化:消费次数
 			if(enter.getConsumptionTimes() > 0)
@@ -107,7 +119,7 @@ public class AnalysisEngine {
 					fuzzy.setSugeno(obj.getSugeno());
 					if(obj.getFunctionName().equals(MathFunction.TRIANGLE))
 					{
-						fuzzyValue = MathFunction.triangle(introduceTimes, obj.getFirstValue(), obj.getSecondValue(), obj.getThirdValue());
+						fuzzyValue = MathFunction.triangle(introduceTimes, obj.getThirdValue(), obj.getFirstValue(), obj.getSecondValue() );
 					}else if(obj.getFunctionName().equals(MathFunction.TRAPEZOID))
 					{
 						fuzzyValue = MathFunction.trapezoid(introduceTimes, obj.getFirstValue(), obj.getSecondValue(), obj.getThirdValue(),obj.getFourthValue());
@@ -146,22 +158,25 @@ public class AnalysisEngine {
 			}
 			//模糊化结束
 			//对比规则
-			List<IdCaption> listRule = fuzzyRuleInfoService.findAllFuzzyRuleInfo();
-			
-			List<AnalysisFuzzyValue> list = calculate(listFuzzyValue,listRule);
-			
-			double[] fuzzyValue = new double[list.size()];
-			double[] sugeno = new double[list.size()];
-			
-			for(int n=0;n<list.size();n++)
+			double finalValue = 0;
+			if(listFuzzyValue != null && listFuzzyValue.size() > 0)
 			{
-				fuzzyValue[n] = list.get(n).getFuzzyValue();
-				sugeno[n] = list.get(n).getSugeno();
+				List<IdCaption> listRule = fuzzyRuleInfoService.findAllFuzzyRuleInfo();
+				
+				List<AnalysisFuzzyValue> list = calculate(listFuzzyValue,listRule);
+				
+				double[] fuzzyValue = new double[list.size()];
+				double[] sugeno = new double[list.size()];
+				
+				for(int n=0;n<list.size();n++)
+				{
+					fuzzyValue[n] = list.get(n).getFuzzyValue();
+					sugeno[n] = list.get(n).getSugeno();
+				}
+				
+				//根据重心法取值
+				finalValue = MathFunction.GravityOut(fuzzyValue, sugeno);
 			}
-			
-			//根据重心法取值
-			double finalValue = MathFunction.GravityOut(fuzzyValue, sugeno);
-			
 			return finalValue;
 		}
 		return 0;
@@ -250,7 +265,6 @@ public class AnalysisEngine {
 								tempObj.setFuzzyValue(value);
 								tempObj.setSugeno(resultList.get(k).getSugeno());
 								calculateResultList.add(tempObj);
-								//listFuzzy.get(j).setSugeno(resultList.get(k).getSugeno());
 								break;
 							}
 						}
@@ -268,17 +282,13 @@ public class AnalysisEngine {
 
 	public void setEnter(AnalysisCustomer enter) {
 		this.enter = enter;
-	}
-
-	public AnalysisEngine(){
 		resultList = fuzzyInfoService.findAllFuzzyInfoByCategory(FuzzyCategory.RESULT);
 	}
-	
+
 	public List<FuzzyInfo> getResultList() {
 		return resultList;
 	}
 	public void setResultList(List<FuzzyInfo> resultList) {
 		this.resultList = resultList;
 	}
-	
 }
