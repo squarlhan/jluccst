@@ -113,11 +113,16 @@ $(function() {
 				  }
 			});
 			
-			$("#addbtn").click(function(){
+			$("#assessmentbtn").click(function(){
 				var customerIds= "";
+				var totalComsumption = "";
+				var consumptionTimes = "";
+				var introduceTimes = "";
+				var payments = "";
+				var level = "";
 				for(var i=1;i<6;i++)
 				{
-					if($("#chk"+i).checked)
+					if($("#chk"+i).attr("checked"))
 					{
 						if(customerIds == "")
 						{
@@ -128,28 +133,24 @@ $(function() {
 						}
 					}
 				}
-				var totalComsumption = "";
-				var consumptionTimes = "";
-				var introduceTimes = "";
-				var payments = "";
-				var level = "";
-				if($("#chkTotalComsumption").checked)
+				
+				if($("#chkTotalComsumption").attr("checked"))
 				{
 					totalComsumption = 1;
 				}
-				if($("#chkConsumptionTimes").checked)
+				if($("#chkConsumptionTimes").attr("checked"))
 				{
 					consumptionTimes = 1;
 				}
-				if($("#chkIntroduceTimes").checked)
+				if($("#chkIntroduceTimes").attr("checked"))
 				{
 					introduceTimes = 1;
 				}
-				if($("#chkPayments").checked)
+				if($("#chkPayments").attr("checked"))
 				{
 					payments = 1;
 				}
-				if($("#chkLevel").checked)
+				if($("#chkLevel").attr("checked"))
 				{
 					level = 1;
 				}
@@ -161,13 +162,13 @@ $(function() {
                     error: function() { alert('Error loading data!'); },
                     success: function(msg) {
                         $.each(eval(msg), function(i, item) {
-                           for(var i=1;i<6;i++)
-							{
-								if($("#chk"+i).val() == item.id)
+                        	for(var j = 0 ;j< 6;j++)
+                        	{
+								if($("#chk"+j).val() == item.id)
 								{
-									$("#result"+i).html("评估值："+item.resultValue + "，结论：" + item.result);
+									$("#result"+j).html("评估值："+item.resultValue + "，结论：" + item.result);
 								}
-							}
+                        	}
                         });
                         
                     }
@@ -302,7 +303,7 @@ $(function() {
 <tr><td colspan="3"><table>
 	<tr>
 		<td style="width: 240px"></td>
-		<td style="width: 80px"><input type="button" style="width: 80px;" class="btn_4" id="addbtn" value="开始评估" /></td>
+		<td style="width: 80px"><input type="button" style="width: 80px;" class="btn_4" id="assessmentbtn" value="开始评估" /></td>
 	</tr>
 </table></td></tr>
 
