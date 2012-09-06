@@ -1,7 +1,7 @@
 package com.boan.crm.sellrecord.service.impl;
 
 import java.math.BigDecimal;
-import java.util.Calendar;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
@@ -145,7 +145,9 @@ public class SellRecordServiceImpl implements ISellRecordService {
 	 */
 	public  int getConsumptionCount(String customerId){
 		String hql ="select count(record.id) from SellRecord as record where record. customerId=:customerId ";
-		List list = sellRecordDao.find(hql, customerId);
+		Map<String, String> param = new HashMap<String,String>();
+		param.put("customerId",customerId);
+		List list = sellRecordDao.find(hql, param);
 		return list!=null && list.size()>0 ? Integer.parseInt( list.get(0).toString()) : 0;
 	}
 	
@@ -156,7 +158,9 @@ public class SellRecordServiceImpl implements ISellRecordService {
 	 */
 	public  BigDecimal getConsumptionMoney(String customerId){
 		String hql ="select sum(record.receivable) from SellRecord as record where record. customerId=:customerId";
-		List list = sellRecordDao.find(hql,customerId);
+		Map<String, String> param = new HashMap<String,String>();
+		param.put("customerId",customerId);
+		List list = sellRecordDao.find(hql, param);
 		return list!=null && list.size()>0 ? new BigDecimal( list.get(0).toString()) : new BigDecimal(0);
 	}
 }
