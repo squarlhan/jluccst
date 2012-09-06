@@ -6,10 +6,12 @@ package com.boan.crm.customerassessment.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.Resource;
+
 import org.springframework.stereotype.Service;
 
 import com.boan.crm.customer.analysis.model.AnalysisCustomer;
-import com.boan.crm.customer.analysis.service.AnalysisEngine;
+import com.boan.crm.customer.analysis.service.IAnalysisEngineService;
 import com.boan.crm.customerassessment.model.CustomerAssessment;
 import com.boan.crm.customerassessment.service.ICustomerAssessmentService;
 
@@ -19,6 +21,8 @@ import com.boan.crm.customerassessment.service.ICustomerAssessmentService;
  */
 @Service("customerAssessmentService")
 public class CustomerAssessmentServiceImpl implements ICustomerAssessmentService{
+	@Resource
+	private IAnalysisEngineService analysisEngineService;
 	/**
 	 * 根据客户Id评估结果
 	 * @param customer
@@ -27,10 +31,9 @@ public class CustomerAssessmentServiceImpl implements ICustomerAssessmentService
 	public CustomerAssessment customerAssessmentById(AnalysisCustomer customer)
 	{
 		CustomerAssessment assessment =  new CustomerAssessment();
-		AnalysisEngine engine = new AnalysisEngine();
-		engine.setEnter(customer);
-		double value = engine.analysisResult();
-		String result = engine.getResultByValue(value);
+		analysisEngineService.setEnter(customer);
+		double value = analysisEngineService.analysisResult();
+		String result = analysisEngineService.getResultByValue(value);
 		
 		assessment.setCustomerId(customer.getId());
 		assessment.setCustomerName(customer.getCustomerName());
@@ -52,10 +55,9 @@ public class CustomerAssessmentServiceImpl implements ICustomerAssessmentService
 		{
 			CustomerAssessment assessment = new CustomerAssessment();
 			AnalysisCustomer customer = customerList.get(i);
-			AnalysisEngine engine = new AnalysisEngine();
-			engine.setEnter(customer);
-			double value = engine.analysisResult();
-			String result = engine.getResultByValue(value);
+			analysisEngineService.setEnter(customer);
+			double value = analysisEngineService.analysisResult();
+			String result = analysisEngineService.getResultByValue(value);
 			
 			assessment.setCustomerId(customer.getId());
 			assessment.setCustomerName(customer.getCustomerName());
