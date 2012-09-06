@@ -148,7 +148,7 @@ public class SellRecordServiceImpl implements ISellRecordService {
 		Map<String, String> param = new HashMap<String,String>();
 		param.put("customerId",customerId);
 		List list = sellRecordDao.find(hql, param);
-		return list!=null && list.size()>0 ? Integer.parseInt( list.get(0).toString()) : 0;
+		return  (list!=null &&  list.size()>0 && list.get(0)!=null )?Integer.parseInt( list.get(0).toString()) : 0;
 	}
 	
 	/**
@@ -161,6 +161,6 @@ public class SellRecordServiceImpl implements ISellRecordService {
 		Map<String, String> param = new HashMap<String,String>();
 		param.put("customerId",customerId);
 		List list = sellRecordDao.find(hql, param);
-		return list!=null && list.size()>0 ? new BigDecimal( list.get(0).toString()) : new BigDecimal(0);
+		return (list!=null &&  list.size()>0 && list.get(0)!=null )? new BigDecimal( list.get(0).toString()) : new BigDecimal(0);
 	}
 }
