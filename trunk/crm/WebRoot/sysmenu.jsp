@@ -327,7 +327,7 @@
 								</table>
 							</td>
 						</tr>
-						<tr>
+						<!-- tr>
 							<td align="left">
 								<table width="100%" border="0" cellspacing="5" cellpadding="0">
 									<tr>
@@ -338,7 +338,7 @@
 									</tr>
 								</table>
 							</td>
-						</tr>
+						</tr> -->
 						</tbody>
 						<%
 							}
