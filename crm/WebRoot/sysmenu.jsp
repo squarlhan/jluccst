@@ -321,7 +321,7 @@
 									<tr>
 										<td width="40" align="right" style="padding-bottom: 4px;"><img src="images/menuto.jpg" width="5" height="5" />
 										</td>
-										<td><a href="customerAssemessment.html" target="mainFrame">客户评估</a>
+										<td><a href="customeranalysis/customeranalysismanage.jsp" target="mainFrame">客户评估</a>
 										</td>
 									</tr>
 								</table>
