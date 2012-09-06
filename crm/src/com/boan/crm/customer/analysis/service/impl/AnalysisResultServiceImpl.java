@@ -42,7 +42,7 @@ public class AnalysisResultServiceImpl implements IAnalysisResultService{
 		Map<String,Double> idMap = new HashMap<String,Double>();
 		idMap.put("result", result);
 		
-		List<AnalysisResult> list= analysisResultDao.find("from AnalysisResult where :result > beginValue and :result < endValue", idMap);
+		List<AnalysisResult> list= analysisResultDao.find("from AnalysisResult where :result >= beginValue and :result < endValue", idMap);
 		if(list != null && list.size() > 0)
 		{
 			return list.get(0);
