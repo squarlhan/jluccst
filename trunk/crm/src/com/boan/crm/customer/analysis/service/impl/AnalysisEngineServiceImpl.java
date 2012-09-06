@@ -164,18 +164,23 @@ public class AnalysisEngineServiceImpl implements IAnalysisEngineService{
 				List<IdCaption> listRule = fuzzyRuleInfoService.findAllFuzzyRuleInfo();
 				
 				List<AnalysisFuzzyValue> list = calculate(listFuzzyValue,listRule);
-				
-				double[] fuzzyValue = new double[list.size()];
-				double[] sugeno = new double[list.size()];
-				
-				for(int n=0;n<list.size();n++)
+				if(list != null && list.size() > 0)
 				{
-					fuzzyValue[n] = list.get(n).getFuzzyValue();
-					sugeno[n] = list.get(n).getSugeno();
+					double[] fuzzyValue = new double[list.size()];
+					double[] sugeno = new double[list.size()];
+					
+					for(int n=0;n<list.size();n++)
+					{
+						fuzzyValue[n] = list.get(n).getFuzzyValue();
+						sugeno[n] = list.get(n).getSugeno();
+					}
+					
+					//根据重心法取值
+					finalValue = MathFunction.GravityOut(fuzzyValue, sugeno);
+				}else
+				{
+					finalValue = 0;
 				}
-				
-				//根据重心法取值
-				finalValue = MathFunction.GravityOut(fuzzyValue, sugeno);
 			}
 			return finalValue;
 		}
