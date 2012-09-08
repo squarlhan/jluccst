@@ -55,7 +55,7 @@ public class PopedomServiceImpl implements IPopedomService{
 		// userId=1,userType=9,表示超级管理员,啥权限都有
 		if( "1".equals( userId )||"9".equals( userType ) )
 		{
-			b = false;
+			b = true;
 		}
 		else
 		{
