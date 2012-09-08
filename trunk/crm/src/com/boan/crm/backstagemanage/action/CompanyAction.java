@@ -9,6 +9,7 @@
 package com.boan.crm.backstagemanage.action;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
@@ -23,7 +24,9 @@ import com.boan.crm.backstagemanage.model.Log;
 import com.boan.crm.backstagemanage.service.ICompanyService;
 import com.boan.crm.common.Message;
 import com.boan.crm.groupmanage.model.Deptment;
+import com.boan.crm.groupmanage.model.Role;
 import com.boan.crm.groupmanage.service.IDeptmentService;
+import com.boan.crm.groupmanage.service.IRoleService;
 import com.boan.crm.groupmanage.service.IUserService;
 import com.boan.crm.utils.action.BaseActionSupport;
 import com.boan.crm.utils.page.Pagination;
@@ -56,6 +59,12 @@ public class CompanyAction extends BaseActionSupport {
 	@Qualifier("userService")
 	private IUserService userService = null;
 
+	/**
+	 * 角色Service
+	 */
+	@Autowired
+	@Qualifier("roleService")
+	private IRoleService roleService = null;
 	/**
 	 * 显示分页
 	 */
@@ -138,6 +147,13 @@ public class CompanyAction extends BaseActionSupport {
 		} else {
 			service.save(company);
 			message.setContent("公司信息保存成功！");
+			//为新建的公司建一个公司管理员角色
+			Role role = new Role();
+			role.setCompanyId(company.getId());
+			role.setCreateTime(Calendar.getInstance());
+			role.setRoleName("公司管理员");
+			role.setSortIndex(0);
+			roleService.save(role);
 			// 保存日志开始
 			Log log = new Log();
 			log.setLogType(LogType.INFO);
