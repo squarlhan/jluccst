@@ -41,7 +41,7 @@
 <body>
 <table width="100%" style="height:100%;" border="0" cellspacing="5" cellpadding="0">
   <tr>
-    <td><table width="100%" style="height:100%;" border="1" cellspacing="0" cellpadding="0">
+    <td><table width="100%" style="height:100%;" border="0" cellspacing="0" cellpadding="0">
         <tr>
           <td colspan="3" style="height:36px;"><table id="__01" width="100%" height="36" border="0" cellpadding="0" cellspacing="0">
               <tr>
