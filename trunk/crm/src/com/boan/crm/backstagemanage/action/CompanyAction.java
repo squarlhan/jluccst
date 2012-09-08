@@ -281,6 +281,14 @@ public class CompanyAction extends BaseActionSupport {
 		return "company-tree-for-role";
 	}
 	/**
+	 * 获取所有公司列表，用于权限分配
+	 * @return
+	 */
+	public String showCompanyTreeForPopedom() {
+		companyList = service.queryAllCompanys();
+		return "company-tree-for-popedom";
+	}
+	/**
 	 * 修改自己的公司档案
 	 * @return
 	 */

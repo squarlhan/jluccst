@@ -34,9 +34,9 @@ public class PopedomServiceImpl implements IPopedomService{
 		popedomDao.deletePopedomByIds( keyword, roleIds );
 	}
 
-	public List<Role> queryPopedomRoleList( String keyword ) throws Exception
+	public List<Role> queryPopedomRoleList( String keyword, String companyId ) throws Exception
 	{
-		return popedomDao.queryPopedomRoleList( keyword );
+		return popedomDao.queryPopedomRoleList( keyword, companyId );
 	}
 
 	public void saveOrUpdatePopedom( String keyword, String[] roleIds ) throws Exception

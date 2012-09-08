@@ -38,11 +38,12 @@ public class PopedomDaoImpl extends BaseDao<Popedom, String> implements IPopedom
 		super.executeHql( hql, map );
 	}
 
-	public List<Role> queryPopedomRoleList( String keyword ) throws Exception
+	public List<Role> queryPopedomRoleList( String keyword, String companyId ) throws Exception
 	{
-		String hql = "select r from Role r,Popedom p where p.keyword = :keyword and r.id = p.roleId";
+		String hql = "select r from Role r,Popedom p where p.keyword = :keyword and r.id = p.roleId and r.companyId = :companyId";
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put( "keyword", keyword );
+		map.put( "companyId", companyId );
 		List<Role> list = super.find( hql, map );
 		return list;
 	}
