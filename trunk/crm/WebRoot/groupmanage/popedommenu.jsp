@@ -1,4 +1,5 @@
 
+<%@page import="org.apache.commons.lang.StringUtils"%>
 <%@page import="com.boan.crm.groupmanage.common.MenuKey"%>
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
@@ -22,7 +23,7 @@
 	response.setHeader( "Cache-Control", "no-cache" );
 	response.setHeader( "Expires", "0" );
 	request.setCharacterEncoding( "utf-8" );
-	String companyId = request.getParameter("companyId");
+	String companyId = StringUtils.defaultIfEmpty(request.getParameter("companyId"),"");
 	String path = request.getContextPath();
 	String url="./showAllPopedomListAction.action";
 %>
