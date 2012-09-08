@@ -79,7 +79,7 @@ public boolean isHasPopedom( String userId, String userType, String keyword, Str
  * @return
  * @throws Exception
  */
-public boolean isCompanyAdministrator( String userId, String userType, String keyword, String[] popedomKeys ) throws Exception;
+public boolean isCompanyAdministrator( String userId, String userType) throws Exception;
 
 /**
  *  是否是超级管理员
@@ -90,7 +90,7 @@ public boolean isCompanyAdministrator( String userId, String userType, String ke
  * @return
  * @throws Exception
  */
-public boolean isSuperAdministrator( String userId, String userType, String keyword, String[] popedomKeys ) throws Exception;
+public boolean isSuperAdministrator( String userId, String userType ) throws Exception;
 
 /**
  * 当角色删除的时候，权限记录也要删除
