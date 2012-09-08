@@ -47,7 +47,7 @@ public interface IPopedomDao extends IBaseDao<Popedom,String>{
 	 * @return 权限列表
 	 * @throws Exception
 	 */
-	public List<Role> queryPopedomRoleList( String keyword ) throws Exception;
+	public List<Role> queryPopedomRoleList( String keyword, String companyId ) throws Exception;
 
 	/**
 	 * 根据角色id，获取这个角色所有的权限Key

@@ -93,7 +93,10 @@ public class PopedomRoleAction extends BaseActionSupport
 	 */
 	public String showAllPopedomList() throws Exception
 	{
-		roleList = popedomService.queryPopedomRoleList( menuKey );
+		if (StringUtils.isBlank(companyId)) {
+			companyId = sessionCompanyId;
+		} 
+		roleList = popedomService.queryPopedomRoleList( menuKey, companyId);
 		if( roleList == null )
 		{
 			roleList = new ArrayList<Role>();
