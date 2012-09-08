@@ -1,3 +1,4 @@
+<%@page import="org.apache.commons.lang.StringUtils"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
@@ -22,7 +23,7 @@
 	response.setHeader( "Expires", "0" );
 	request.setCharacterEncoding( "utf-8" );
 	String path = request.getContextPath();
-	String companyId = request.getParameter("companyId");
+	String companyId = StringUtils.defaultIfEmpty(request.getParameter("companyId"),"");
 %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html xmlns="http://www.w3.org/1999/xhtml">
