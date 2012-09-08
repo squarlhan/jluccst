@@ -71,6 +71,28 @@ public String[] queryPopedomsByRoleId( String roleId ) throws Exception;
  */
 public boolean isHasPopedom( String userId, String userType, String keyword, String[] popedomKeys ) throws Exception;
 /**
+ * 是否是公司管理员
+ * @param userId
+ * @param userType
+ * @param keyword
+ * @param popedomKeys
+ * @return
+ * @throws Exception
+ */
+public boolean isCompanyAdministrator( String userId, String userType, String keyword, String[] popedomKeys ) throws Exception;
+
+/**
+ *  是否是超级管理员
+ * @param userId
+ * @param userType
+ * @param keyword
+ * @param popedomKeys
+ * @return
+ * @throws Exception
+ */
+public boolean isSuperAdministrator( String userId, String userType, String keyword, String[] popedomKeys ) throws Exception;
+
+/**
  * 当角色删除的时候，权限记录也要删除
  * @param roleIds
  * 角色id
