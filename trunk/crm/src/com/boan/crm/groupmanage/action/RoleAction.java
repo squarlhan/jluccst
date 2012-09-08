@@ -1,5 +1,6 @@
 package com.boan.crm.groupmanage.action;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,7 +67,9 @@ public class RoleAction extends BaseActionSupport
 	 * @return
 	 */
 	public String openRole(){
-		pagination =service.findRoleForPage(null, pagination);
+		Map<String, Object> map = new HashMap<String,Object>();
+		map.put("companyId", sessionCompanyId);
+		pagination =service.findRoleForPage(map, pagination);
 		return SUCCESS;
 	}
 	/**
@@ -93,6 +96,7 @@ public class RoleAction extends BaseActionSupport
 		}
 		else
 		{
+			role.setCompanyId(sessionCompanyId);
 			service.save( role );
 			message.setContent( "职务信息保存成功！" );
 			// 保存日志开始

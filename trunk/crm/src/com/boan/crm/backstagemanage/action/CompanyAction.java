@@ -11,6 +11,7 @@ package com.boan.crm.backstagemanage.action;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
@@ -247,7 +248,26 @@ public class CompanyAction extends BaseActionSupport {
 		}
 		return "company-tree-for-dept";
 	}
-
+	/**
+	 * 获取所有公司列表，用于维护角色
+	 * @return
+	 */
+	public String showCompanyTreeForRole() {
+		companyList = service.queryAllCompanys();
+		return "company-tree-for-role";
+	}
+	/**
+	 * 修改自己的公司档案
+	 * @return
+	 */
+	public String openMyCompanyAction(){
+		if(StringUtils.isNotBlank(sessionCompanyId))
+		{
+			company = service.get(sessionCompanyId);
+			return "show-my-company";
+		}
+		return NONE;
+	}
 	public Company getCompany() {
 		return company;
 	}

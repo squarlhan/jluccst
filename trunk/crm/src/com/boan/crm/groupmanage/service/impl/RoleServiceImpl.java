@@ -72,7 +72,7 @@ public class RoleServiceImpl implements IRoleService{
 		
 		String hql = "from Role";
 		List<Role> data = groupRoleDao.findForPage(hql, values, pagination.getStartIndex(), pagination.getPageSize());
-		hql = "select count(*) from Role";
+		hql = "select count(*) from Role ";
 		int totalRows = groupRoleDao.findCountForPage(hql, values);
 		pagination.setTotalRows(totalRows);
 		pagination.setData(data);
