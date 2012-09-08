@@ -34,6 +34,11 @@ public class UserType
 	 * 超级管理员
 	 */
 	public static int ADMINISTRATOR = 9;
+	
+	/**
+	 * 公司管理员
+	 */
+	public static int COMPANY_ADMINISTRATOR = 8;
 
 
 	/**
@@ -44,12 +49,12 @@ public class UserType
 	/**
 	 * key值字典
 	 */
-	private static int[] keys = { COMMON_USER, ADMINISTRATOR };
+	private static int[] keys = { COMMON_USER,COMPANY_ADMINISTRATOR, ADMINISTRATOR };
 
 	/**
 	 * value值字典
 	 */
-	private static String[] values = { "普通用户",  "超级管理员" };
+	private static String[] values = { "普通用户", " 公司管理员", "超级管理员" };
 
 	/**
 	 * 返回用户类别列表
