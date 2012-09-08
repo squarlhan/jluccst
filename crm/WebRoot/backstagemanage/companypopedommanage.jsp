@@ -1,3 +1,4 @@
+<%@page import="org.apache.commons.lang.StringUtils"%>
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%@ taglib prefix="j" uri="/script-tags"%>
@@ -21,7 +22,7 @@
 	response.setHeader("Expires", "0");
 	request.setCharacterEncoding("utf-8");
 	String path = request.getContextPath();
-	String companyId = request.getParameter("companyId");
+	String companyId = StringUtils.defaultIfEmpty(request.getParameter("companyId"),"");
 %>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -45,7 +46,7 @@
           <td colspan="3" style="height:36px;"><table id="__01" width="100%" height="36" border="0" cellpadding="0" cellspacing="0">
               <tr>
                 <td width="11"><img src="../images/header_01.jpg" width="11" height="36" alt=""></td>
-                <td background="../images/header_02.jpg"><span class="STYLE1">您当前的位置：后台管理&gt;&gt;&gt;权限管理</span></td>
+                <td background="../images/header_02.jpg"><span class="STYLE1">您当前的位置：后台管理&gt;&gt;&gt;公司权限</span></td>
                 <td width="12"><img src="../images/header_03.jpg" width="12" height="36" alt=""></td>
               </tr>
             </table></td>
