@@ -138,7 +138,7 @@
 									<tr>
 										<td width="40" align="right" style="padding-bottom: 4px;"><img src="images/menuto.jpg" width="5" height="5" />
 										</td>
-										<td><a href="groupmanage/rolemanage.jsp" target="mainFrame">职务管理</a>
+										<td><a href="backstagemanage/companydeptmanage.jsp" target="mainFrame">公司部门</a>
 										</td>
 									</tr>
 								</table>
