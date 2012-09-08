@@ -27,9 +27,12 @@
 		</action>
 		<action name="deleteCompanyAction" class="companyAction" method="deleteCompany" />
 		<action name="companyAction"  class="companyAction">
+			<result name="show-my-company">/backstagemanage/mycompanyinfo.jsp</result>
 			<result name="company-tree-for-user">/backstagemanage/companytreeforuser.jsp</result>
 			<result name="company-tree-for-dept">/backstagemanage/companytreefordept.jsp</result>
+			<result name="company-tree-for-role">/backstagemanage/companytreeforrole.jsp</result>
 		</action>
+		
 	</package>
 	    <package name="log" extends="struts-default">
     	<action name="logAction" class="logAction">
