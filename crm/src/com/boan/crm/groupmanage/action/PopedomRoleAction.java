@@ -36,6 +36,8 @@ public class PopedomRoleAction extends BaseActionSupport
 	private String[] roleIds = null;
 
 	private List<Popedom> popedomList = null;
+	
+	private String companyId = null;
 
 	/**
 	 * 保存权限
@@ -71,7 +73,7 @@ public class PopedomRoleAction extends BaseActionSupport
 	 */
 	public String showAllRoleList() throws Exception
 	{
-		roleList = roleService.queryAllRoleList();
+		roleList = roleService.queryAllRoleList(companyId);
 		if( roleList == null )
 		{
 			roleList = new ArrayList<Role>();
@@ -163,5 +165,13 @@ public class PopedomRoleAction extends BaseActionSupport
 	public void setRoleList( List<Role> roleList )
 	{
 		this.roleList = roleList;
+	}
+
+	public String getCompanyId() {
+		return companyId;
+	}
+
+	public void setCompanyId(String companyId) {
+		this.companyId = companyId;
 	}
 }
