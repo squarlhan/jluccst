@@ -22,6 +22,7 @@
 	response.setHeader( "Cache-Control", "no-cache" );
 	response.setHeader( "Expires", "0" );
 	request.setCharacterEncoding( "utf-8" );
+	String companyId = request.getParameter("companyId");
 	String path = request.getContextPath();
 	String url="./showAllPopedomListAction.action";
 %>
@@ -39,26 +40,26 @@
 		<!--
 		d = new dTree('d','<%=path%>');
 		d.add(0,-1,'菜单资源列表','','','Menu');
-		//d.add(101,0,'后台管理','<%=url%>?menuKey=<%=MenuKey.HOU_TAI_GUAN_LI%>','','groupmain','<%=path%>/js/tree/img/imgfolder.gif');
-		//d.add(102,0,'组织机构','<%=url%>?menuKey=<%=MenuKey.ZU_ZHI_JI_GOU%>','','groupmain');
-		//d.add(107,0,'数据字典','<%=url%>?menuKey=<%=MenuKey.SHU_JU_ZI_DIAN%>','','groupmain');
-		d.add(103,0,'客户查找','<%=url%>?menuKey=<%=MenuKey.KE_HU_CHA_ZHAO%>','','groupmain');
-				d.add(1031,103,'客户查找','<%=url%>?menuKey=<%=MenuKey.SUB_KE_HU_CHA_ZHAO%>','','groupmain');
-				d.add(1032,103,'导入客户库','<%=url%>?menuKey=<%=MenuKey.SUB_DAO_RU_KE_HU%>','','groupmain');
-		d.add(104,0,'客户管理','<%=url%>?menuKey=<%=MenuKey.KE_HU_GUAN_LI%>','','groupmain');
-				d.add(1041,104,'客户信息','<%=url%>?menuKey=<%=MenuKey.SUB_KE_HU_XIN_XI%>','','groupmain');
-				d.add(1042,104,'客户跟进','<%=url%>?menuKey=<%=MenuKey.SUB_KE_HU_GEN_JIN%>','','groupmain');
-				d.add(1043,104,'客户回访','<%=url%>?menuKey=<%=MenuKey.SUB_KE_HU_HUI_FANG%>','','groupmain');
-				d.add(1044,104,'客户评估','<%=url%>?menuKey=<%=MenuKey.SUB_KE_HU_PING_GU%>','','groupmain');
-		d.add(105,0,'销售管理','<%=url%>?menuKey=<%=MenuKey.XIAO_SHOU_GUAN_LI%>','','groupmain');
-				d.add(1051,105,'短信平台','<%=url%>?menuKey=<%=MenuKey.SUB_DUAN_XIN_PING_TAI%>','','groupmain');
-				d.add(1052,105,'时间管理','<%=url%>?menuKey=<%=MenuKey.SUB_SHI_JIAN_GUAN_LI%>','','groupmain');
-				d.add(1053,105,'市场调查','<%=url%>?menuKey=<%=MenuKey.SUB_SHI_CHANG_DIAO_CHA%>','','groupmain');
-				d.add(1054,105,'销售记录','<%=url%>?menuKey=<%=MenuKey.SUB_XIAO_SHOU_JI_LU%>','','groupmain');
-		d.add(106,0,'服务管理','<%=url%>?menuKey=<%=MenuKey.FU_WU_GUAN_LI%>','','groupmain');
-				d.add(1061,106,'服务记录','<%=url%>?menuKey=<%=MenuKey.SUB_FU_WU_JI_LU%>','','groupmain');
-				d.add(1062,106,'会员管理','<%=url%>?menuKey=<%=MenuKey.SUB_HUI_YUAN_GUAN_LI%>','','groupmain');
-				d.add(1063,106,'积分管理','<%=url%>?menuKey=<%=MenuKey.SUB_JI_FEN_GUAN_LI%>','','groupmain');
+		//d.add(101,0,'后台管理','<%=url%>?menuKey=<%=MenuKey.HOU_TAI_GUAN_LI%>&companyId=<%=companyId%>','','groupmain','<%=path%>/js/tree/img/imgfolder.gif');
+		//d.add(102,0,'组织机构','<%=url%>?menuKey=<%=MenuKey.ZU_ZHI_JI_GOU%>&companyId=<%=companyId%>','','groupmain');
+		//d.add(107,0,'数据字典','<%=url%>?menuKey=<%=MenuKey.SHU_JU_ZI_DIAN%>&companyId=<%=companyId%>','','groupmain');
+		d.add(103,0,'客户查找','<%=url%>?menuKey=<%=MenuKey.KE_HU_CHA_ZHAO%>&companyId=<%=companyId%>','','groupmain');
+				d.add(1031,103,'客户查找','<%=url%>?menuKey=<%=MenuKey.SUB_KE_HU_CHA_ZHAO%>&companyId=<%=companyId%>','','groupmain');
+				d.add(1032,103,'导入客户库','<%=url%>?menuKey=<%=MenuKey.SUB_DAO_RU_KE_HU%>&companyId=<%=companyId%>','','groupmain');
+		d.add(104,0,'客户管理','<%=url%>?menuKey=<%=MenuKey.KE_HU_GUAN_LI%>&companyId=<%=companyId%>','','groupmain');
+				d.add(1041,104,'客户信息','<%=url%>?menuKey=<%=MenuKey.SUB_KE_HU_XIN_XI%>&companyId=<%=companyId%>','','groupmain');
+				d.add(1042,104,'客户跟进','<%=url%>?menuKey=<%=MenuKey.SUB_KE_HU_GEN_JIN%>&companyId=<%=companyId%>','','groupmain');
+				d.add(1043,104,'客户回访','<%=url%>?menuKey=<%=MenuKey.SUB_KE_HU_HUI_FANG%>&companyId=<%=companyId%>','','groupmain');
+				d.add(1044,104,'客户评估','<%=url%>?menuKey=<%=MenuKey.SUB_KE_HU_PING_GU%>&companyId=<%=companyId%>','','groupmain');
+		d.add(105,0,'销售管理','<%=url%>?menuKey=<%=MenuKey.XIAO_SHOU_GUAN_LI%>&companyId=<%=companyId%>','','groupmain');
+				d.add(1051,105,'短信平台','<%=url%>?menuKey=<%=MenuKey.SUB_DUAN_XIN_PING_TAI%>&companyId=<%=companyId%>','','groupmain');
+				d.add(1052,105,'时间管理','<%=url%>?menuKey=<%=MenuKey.SUB_SHI_JIAN_GUAN_LI%>&companyId=<%=companyId%>','','groupmain');
+				d.add(1053,105,'市场调查','<%=url%>?menuKey=<%=MenuKey.SUB_SHI_CHANG_DIAO_CHA%>&companyId=<%=companyId%>','','groupmain');
+				d.add(1054,105,'销售记录','<%=url%>?menuKey=<%=MenuKey.SUB_XIAO_SHOU_JI_LU%>&companyId=<%=companyId%>','','groupmain');
+		d.add(106,0,'服务管理','<%=url%>?menuKey=<%=MenuKey.FU_WU_GUAN_LI%>&companyId=<%=companyId%>','','groupmain');
+				d.add(1061,106,'服务记录','<%=url%>?menuKey=<%=MenuKey.SUB_FU_WU_JI_LU%>&companyId=<%=companyId%>','','groupmain');
+				d.add(1062,106,'会员管理','<%=url%>?menuKey=<%=MenuKey.SUB_HUI_YUAN_GUAN_LI%>&companyId=<%=companyId%>','','groupmain');
+				d.add(1063,106,'积分管理','<%=url%>?menuKey=<%=MenuKey.SUB_JI_FEN_GUAN_LI%>&companyId=<%=companyId%>','','groupmain');
 		document.write(d);
 		d.openAll();
 		//-->

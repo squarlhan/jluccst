@@ -26,12 +26,8 @@
 	request.setCharacterEncoding("utf-8");
 	String path = request.getContextPath();
 	UserSession us = (UserSession) session.getAttribute("userSession");
-	WebApplicationContext context = (WebApplicationContext) this
-			.getServletContext()
-			.getAttribute(
-					WebApplicationContext.ROOT_WEB_APPLICATION_CONTEXT_ATTRIBUTE);
-	IPopedomService popedomService = (IPopedomService) context
-			.getBean("popedomService");
+	WebApplicationContext context = (WebApplicationContext) this.getServletContext().getAttribute(WebApplicationContext.ROOT_WEB_APPLICATION_CONTEXT_ATTRIBUTE);
+	IPopedomService popedomService = (IPopedomService) context.getBean("popedomService");
 	boolean b = false;
 	boolean sub = false;
 %>
@@ -144,20 +140,18 @@
 								</table>
 							</td>
 						</tr>
-						<!-- 
 						<tr>
 							<td align="left">
 								<table width="100%" border="0" cellspacing="5" cellpadding="0">
 									<tr>
 										<td width="40" align="right" style="padding-bottom: 4px;"><img src="images/menuto.jpg" width="5" height="5" />
 										</td>
-										<td><a href="groupmanage/popedommanage.jsp" target="mainFrame">权限管理</a>
+										<td><a href="backstagemanage/companypopedommanage.jsp" target="mainFrame">权限管理</a>
 										</td>
 									</tr>
 								</table>
 							</td>
 						</tr>
-						 -->
 						<tr>
 							<td align="left">
 								<table width="100%" border="0" cellspacing="5" cellpadding="0">
