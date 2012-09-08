@@ -3,6 +3,7 @@ package com.boan.crm.groupmanage.action;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
@@ -73,6 +74,9 @@ public class PopedomRoleAction extends BaseActionSupport
 	 */
 	public String showAllRoleList() throws Exception
 	{
+		if (StringUtils.isBlank(companyId)) {
+			companyId = sessionCompanyId;
+		} 
 		roleList = roleService.queryAllRoleList(companyId);
 		if( roleList == null )
 		{
