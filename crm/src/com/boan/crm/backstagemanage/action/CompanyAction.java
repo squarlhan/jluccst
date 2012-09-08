@@ -23,6 +23,7 @@ import com.boan.crm.backstagemanage.model.Company;
 import com.boan.crm.backstagemanage.model.Log;
 import com.boan.crm.backstagemanage.service.ICompanyService;
 import com.boan.crm.common.Message;
+import com.boan.crm.groupmanage.common.RoleFlag;
 import com.boan.crm.groupmanage.model.Deptment;
 import com.boan.crm.groupmanage.model.Role;
 import com.boan.crm.groupmanage.service.IDeptmentService;
@@ -154,6 +155,13 @@ public class CompanyAction extends BaseActionSupport {
 			role.setRoleName("公司管理员");
 			role.setSortIndex(0);
 			roleService.save(role);
+			Role businessRole = new Role();
+			businessRole.setCompanyId(company.getId());
+			businessRole.setCreateTime(Calendar.getInstance());
+			businessRole.setRoleName("系统业务员");
+			businessRole.setRoleKey(RoleFlag.YE_WU_YUAN);
+			businessRole.setSortIndex(0);
+			roleService.save(businessRole);
 			// 保存日志开始
 			Log log = new Log();
 			log.setLogType(LogType.INFO);
