@@ -31,6 +31,7 @@
 	<body>
 		<s:form id="form1" name="form1" method="post" theme="simple">
 			<s:hidden name="menuKey" id="menuKey"></s:hidden>
+			<s:hidden name="companyId" id="companyId"></s:hidden>
 			<table width="100%" border="0" cellspacing="0" cellpadding="0">
 				<tr>
 					<td style="padding: 5px;">
@@ -49,7 +50,7 @@
 											<td align="right" style="padding: 3px;" background="../images/headerbg.jpg">
 												<input type="button" name="selectRole" value="选择职务"
 													class="btn_4"
-													onClick="popedomOpen('./showAllRoleListAction.action?menuKey=<s:property value="menuKey"/>','350','460')">
+													onClick="popedomOpen('./showAllRoleListAction.action?menuKey=<s:property value="menuKey"/>&companyId=<s:property value="companyId"/>','350','460')">
 												<input type="button" name="deleteSelect" value="删除所选"
 													class="btn_4" onClick="delinfo(0);">
 												<input type="button" name="selectAll" value="全选"
@@ -114,7 +115,7 @@ function delinfo(n){
 function popedomOpen(url,iwidth,iheight){
 	var result = window.showModalDialog(url,'','status=no;dialogWidth=' + iwidth + 'px;dialogHeight=' + iheight + 'px;center=yes;help=no;')
 	if(typeof(result)=="string"){
-		window.location.href = "./showAllPopedomListAction.action?menuKey=<s:property value="menuKey"/>";
+		window.location.href = "./showAllPopedomListAction.action?menuKey=<s:property value="menuKey"/>&companyId=<s:property value="companyId"/>";
 	}
 }
 
