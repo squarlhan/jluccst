@@ -46,7 +46,7 @@
 			"report.reportType":{required:true,maxlength:20},
 			"report.reportSubject":{required:true,maxlength:20},
 			"report.reportPerson":{required:true,maxlength:20},
-			"report.reportContent":{maxlength:500}
+			"report.reportContent":{maxlength:4000}
 			},messages:{
 				"report.reportType":
 				{
@@ -65,7 +65,7 @@
 				},
 				"report.reportContent":
 				{
-					maxlength:"汇报内容最多输入500个字符！"
+					maxlength:"汇报内容最多输入4000个字符！"
 				}
 				}
 			};
@@ -94,6 +94,7 @@
 		$.fn.save();
 		$.fn.exportReport();
 		$.fn.close();
+		$.fn.download();
   	});
 
 	/**
@@ -150,11 +151,37 @@
 		$("#closeBtn").click(function() {
 			parent.$("#windown-close").click();
 		});
-	}
+	};
+	
+	/**
+	 * 删除附件
+	 */
+	$.fn.delAttachment = function(id){
+		if(window.confirm("您确定要删除附件吗？")){
+			$.post("toDeleteReportAttachmentAction.action", {"report.id":id}, function(data){});
+			$("#hid_attachmentFilePath").val("");
+			var row = $("#table1 tr:last").prev();
+			row.find("strong").replaceWith("<strong>添加附件：</strong>");
+			row.find("a:first").remove();
+			row.find("a:first").replaceWith('<input type="file" name="files" value="" id="form1_files" style="width: 250px;"/>');
+		}
+	};
+	
+	/**
+	 * 下载附件
+	 */
+	$.fn.download = function(){
+		$("#download").click(function(){
+			var oldAction = repform.action;
+			repform.action = "toDownloadReportAttachmentAction.action";
+			repform.submit();
+			repform.action = oldAction;
+		});
+	};
 </script>
 </head>
 <body>
-	<s:form id="repform" theme="simple">
+	<s:form id="repform" theme="simple"  enctype="multipart/form-data" >
 	<s:label id="lb_message" name="message" cssStyle="display:none"></s:label>
 	<s:hidden id="hid_reportId" name="report.id"></s:hidden>
 	<s:hidden id="hid_templateId" name="report.templateId"></s:hidden>
@@ -162,13 +189,15 @@
 	<s:hidden id="hid_isDelete" name="report.isDelete"></s:hidden>
 	<s:hidden id="hid_deptId" name="report.deptId"></s:hidden>
 	<s:hidden id="hid_creatTime" name="report.creatTime"></s:hidden>
+	<s:hidden id="hid_attachmentFilePath" name="report.filePath"></s:hidden>
+	<s:hidden id="hid_attachmentFileName" name="report.fileName"></s:hidden>
 	<table width="100%" border="0" cellspacing="5" cellpadding="0">
 		<tr>
 			<td>
 				<table width="100%" style="height: 100%;" border="0" cellspacing="6" cellpadding="0">
 					<tr>
 						<td style="height: 36px;">
-							<table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#d5e4fd">
+							<table id="table1"  width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#d5e4fd">
 								<tr>
 									<td height="26" align="right" bgcolor="#FFFFFF">
 										<strong>汇报类别：</strong>
@@ -206,9 +235,31 @@
 										<strong>汇报内容：</strong>
 									</td>
 									<td height="147" align="left" bgcolor="#FFFFFF">
-										<s:textarea id="txt_reportContent" name="report.reportContent" maxlength="510" cssStyle="width:250px;height:100px; resize: none;" />
+										<s:textarea id="txt_reportContent" name="report.reportContent" maxlength="4001" cssStyle="width:250px;height:100px; resize: none;" />
 									</td>
 								</tr>
+								
+								<s:if test='report.filePath!=null && report.filePath!=""'>
+									<tr>
+										<td height="26" align="right" bgcolor="#FFFFFF">
+										<strong>附件：</strong>
+										</td>
+										<td height="26" align="left" bgcolor="#FFFFFF">
+											<a id="download" href="javascript:void(0);"><img src="<%=basePath%>/images/picture_link.png" style="height:32px;width:32px;cursor:pointer" border="0" title="查看"></img></a>
+											<a id="delAttachment" href="javascript:void(0);" onclick="$.fn.delAttachment('${report.id}')"><img src="<%=basePath%>/images/cross.png" style="height:32px;width:32px;cursor:pointer" border="0" title="删除"></img></a>
+										</td>
+									</tr>	
+									</s:if>
+									<s:else>
+									<tr>
+										<td height="26" align="right" bgcolor="#FFFFFF">
+											<strong>添加附件：</strong>
+										</td>
+										<td height="26" align="left" bgcolor="#FFFFFF">
+											<s:file name="files" cssStyle="width: 250px;"></s:file>
+										</td>
+									</tr>
+									</s:else>
 								<tr>
 									<td height="26" colspan="2" align="center" bgcolor="#FFFFFF">
 										&nbsp;&nbsp;

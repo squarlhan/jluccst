@@ -84,6 +84,18 @@ public class PersonReport implements Serializable{
 	@Column(name = "CREATE_TIME")
 	private Calendar creatTime;
 	
+	/**
+	 * 附件文件路径
+	 */
+	@Column(name = "FILE_PATH")
+	private String filePath;
+	
+	/**
+	 * 附件文件路径
+	 */
+	@Column(name = "FILE_NAME")
+	private String fileName;
+	
 	public String getId() {
 		return id;
 	}
@@ -150,6 +162,18 @@ public class PersonReport implements Serializable{
 	}
 	public void setCreatTime(Calendar creatTime) {
 		this.creatTime = creatTime;
+	}
+	public String getFilePath() {
+		return filePath;
+	}
+	public void setFilePath(String filePath) {
+		this.filePath = filePath;
+	}
+	public String getFileName() {
+		return fileName;
+	}
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
 	}
 }
 

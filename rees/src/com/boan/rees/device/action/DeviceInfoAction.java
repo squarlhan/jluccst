@@ -604,7 +604,9 @@ public class DeviceInfoAction extends BaseActionSupport{
 		String deviceId = device.getId();
 		pointInfoList =  pointInfoService.findPointInfosByDeviceId(deviceId);
 		if(pointInfoList.size()==0){
-			pointInfoList.add(new PointInfo());
+			PointInfo temp= new PointInfo();
+			temp.setControlPointName("A");
+			pointInfoList.add(temp);
 		}
 		return SUCCESS;
 	}
@@ -664,7 +666,12 @@ public class DeviceInfoAction extends BaseActionSupport{
 	public String openAddPointParam(){
 		pointParamInfoList =  pointParamInfoService.findPointParamInfoByPointId(pointId);
 		if(pointParamInfoList.size()==0){
-			pointParamInfoList.add(new PointParamInfo());
+			PointParamInfo a = new PointParamInfo("a");
+			PointParamInfo v = new PointParamInfo("v");
+			PointParamInfo h = new PointParamInfo("h");
+			pointParamInfoList.add(a);
+			pointParamInfoList.add(v);
+			pointParamInfoList.add(h);
 		}
 		return SUCCESS;
 	}
