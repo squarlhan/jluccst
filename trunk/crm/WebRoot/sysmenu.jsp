@@ -256,7 +256,9 @@
 							}
 						%>
 						<%
-							b = popedomService.isHasPopedom(us.getUserId(), String.valueOf(us.getUserType()), MenuKey.KE_HU_CHA_ZHAO, us.getPopedomKeys());
+							b = popedomService.isHasPopedom(us.getUserId(), String.valueOf(us.getUserType()), MenuKey.KE_HU_CHA_ZHAO, us.getPopedomKeys()) 
+									||popedomService.isHasPopedom(us.getUserId(), String.valueOf(us.getUserType()), MenuKey.SUB_KE_HU_CHA_ZHAO, us.getPopedomKeys())
+									||popedomService.isHasPopedom(us.getUserId(), String.valueOf(us.getUserType()), MenuKey.SUB_DAO_RU_KE_HU, us.getPopedomKeys());
 							if (b) {
 						%>
 						<tr>
@@ -272,6 +274,10 @@
 							</td>
 						</tr>
 						<tbody name="submenus" style="display:none">
+						<%
+							b = popedomService.isHasPopedom(us.getUserId(), String.valueOf(us.getUserType()), MenuKey.SUB_KE_HU_CHA_ZHAO, us.getPopedomKeys());
+							if (b) {
+						%>
 						<tr>
 							<td align="left">
 								<table width="100%" border="0" cellspacing="5" cellpadding="0">
@@ -284,6 +290,11 @@
 								</table>
 							</td>
 						</tr>
+						<%} %>
+						<%
+							b = popedomService.isHasPopedom(us.getUserId(), String.valueOf(us.getUserType()), MenuKey.SUB_DAO_RU_KE_HU, us.getPopedomKeys());
+							if (b) {
+						%>
 						<tr>
 							<td align="left">
 								<table width="100%" border="0" cellspacing="5" cellpadding="0">
@@ -296,12 +307,17 @@
 								</table>
 							</td>
 						</tr>
+						<%} %>
 						</tbody>
 						<%
 							}
 						%>
 						<%
-							b = popedomService.isHasPopedom(us.getUserId(), String.valueOf(us.getUserType()), MenuKey.KE_HU_GUAN_LI, us.getPopedomKeys());
+							b = popedomService.isHasPopedom(us.getUserId(), String.valueOf(us.getUserType()), MenuKey.KE_HU_GUAN_LI, us.getPopedomKeys())
+									||popedomService.isHasPopedom(us.getUserId(), String.valueOf(us.getUserType()), MenuKey.SUB_KE_HU_XIN_XI, us.getPopedomKeys())
+									||popedomService.isHasPopedom(us.getUserId(), String.valueOf(us.getUserType()), MenuKey.SUB_KE_HU_GEN_JIN, us.getPopedomKeys())
+									||popedomService.isHasPopedom(us.getUserId(), String.valueOf(us.getUserType()), MenuKey.SUB_KE_HU_HUI_FANG, us.getPopedomKeys())
+									||popedomService.isHasPopedom(us.getUserId(), String.valueOf(us.getUserType()), MenuKey.SUB_KE_HU_PING_GU, us.getPopedomKeys());
 							if (b) {
 						%>
 						<tr>
@@ -317,6 +333,10 @@
 							</td>
 						</tr>
 						<tbody name="submenus" style="display:none">
+						<%
+							b = popedomService.isHasPopedom(us.getUserId(), String.valueOf(us.getUserType()), MenuKey.SUB_KE_HU_XIN_XI, us.getPopedomKeys());
+							if (b) {
+						%>
 						<tr>
 							<td align="left">
 								<table width="100%" border="0" cellspacing="5" cellpadding="0">
@@ -329,6 +349,11 @@
 								</table>
 							</td>
 						</tr>
+						<%} %>
+						<%
+							b = popedomService.isHasPopedom(us.getUserId(), String.valueOf(us.getUserType()), MenuKey.SUB_KE_HU_GEN_JIN, us.getPopedomKeys());
+							if (b) {
+						%>
 						<tr>
 							<td align="left">
 								<table width="100%" border="0" cellspacing="5" cellpadding="0">
@@ -341,6 +366,11 @@
 								</table>
 							</td>
 						</tr>
+						<%} %>
+						<%
+							b = popedomService.isHasPopedom(us.getUserId(), String.valueOf(us.getUserType()), MenuKey.SUB_KE_HU_HUI_FANG, us.getPopedomKeys());
+							if (b) {
+						%>
 						<tr>
 							<td align="left">
 								<table width="100%" border="0" cellspacing="5" cellpadding="0">
@@ -353,6 +383,11 @@
 								</table>
 							</td>
 						</tr>
+						<%} %>
+						<%
+							b = popedomService.isHasPopedom(us.getUserId(), String.valueOf(us.getUserType()), MenuKey.SUB_KE_HU_PING_GU, us.getPopedomKeys());
+							if (b) {
+						%>
 						<tr>
 							<td align="left">
 								<table width="100%" border="0" cellspacing="5" cellpadding="0">
@@ -365,24 +400,17 @@
 								</table>
 							</td>
 						</tr>
-						<!-- tr>
-							<td align="left">
-								<table width="100%" border="0" cellspacing="5" cellpadding="0">
-									<tr>
-										<td width="40" align="right" style="padding-bottom: 4px;"><img src="images/menuto.jpg" width="5" height="5" />
-										</td>
-										<td><a href="resultAnlysis.html" target="mainFrame">评估分析</a>
-										</td>
-									</tr>
-								</table>
-							</td>
-						</tr> -->
+						<%} %>
 						</tbody>
 						<%
 							}
 						%>
 						<%
-							b = popedomService.isHasPopedom(us.getUserId(), String.valueOf(us.getUserType()), MenuKey.XIAO_SHOU_GUAN_LI, us.getPopedomKeys());
+							b = popedomService.isHasPopedom(us.getUserId(), String.valueOf(us.getUserType()), MenuKey.XIAO_SHOU_GUAN_LI, us.getPopedomKeys())
+									||popedomService.isHasPopedom(us.getUserId(), String.valueOf(us.getUserType()), MenuKey.SUB_DUAN_XIN_PING_TAI, us.getPopedomKeys())
+									||popedomService.isHasPopedom(us.getUserId(), String.valueOf(us.getUserType()), MenuKey.SUB_SHI_JIAN_GUAN_LI, us.getPopedomKeys())
+									||popedomService.isHasPopedom(us.getUserId(), String.valueOf(us.getUserType()), MenuKey.SUB_SHI_CHANG_DIAO_CHA, us.getPopedomKeys())
+									||popedomService.isHasPopedom(us.getUserId(), String.valueOf(us.getUserType()), MenuKey.SUB_XIAO_SHOU_JI_LU, us.getPopedomKeys());
 							if (b) {
 						%>
 						<tr>
@@ -398,6 +426,10 @@
 							</td>
 						</tr>
 						<tbody name="submenus" style="display:none">
+						<%
+							b = popedomService.isHasPopedom(us.getUserId(), String.valueOf(us.getUserType()), MenuKey.SUB_DUAN_XIN_PING_TAI, us.getPopedomKeys());
+							if (b) {
+						%>
 						<tr>
 							<td align="left">
 								<table width="100%" border="0" cellspacing="5" cellpadding="0">
@@ -410,6 +442,11 @@
 								</table>
 							</td>
 						</tr>
+						<%} %>
+						<%
+							b = popedomService.isHasPopedom(us.getUserId(), String.valueOf(us.getUserType()), MenuKey.SUB_SHI_JIAN_GUAN_LI, us.getPopedomKeys());
+							if (b) {
+						%>
 						<tr>
 							<td align="left">
 								<table width="100%" border="0" cellspacing="5" cellpadding="0">
@@ -422,6 +459,11 @@
 								</table>
 							</td>
 						</tr>
+						<%} %>
+						<%
+							b = popedomService.isHasPopedom(us.getUserId(), String.valueOf(us.getUserType()), MenuKey.SUB_SHI_CHANG_DIAO_CHA, us.getPopedomKeys());
+							if (b) {
+						%>
 						<tr>
 							<td align="left">
 								<table width="100%" border="0" cellspacing="5" cellpadding="0">
@@ -434,6 +476,11 @@
 								</table>
 							</td>
 						</tr>
+						<%} %>
+						<%
+							b = popedomService.isHasPopedom(us.getUserId(), String.valueOf(us.getUserType()), MenuKey.SUB_XIAO_SHOU_JI_LU, us.getPopedomKeys());
+							if (b) {
+						%>
 						<tr>
 							<td align="left">
 								<table width="100%" border="0" cellspacing="5" cellpadding="0">
@@ -446,12 +493,16 @@
 								</table>
 							</td>
 						</tr>
+						<%} %>
 						</tbody>
 						<%
 							}
 						%>
 						<%
-							b = popedomService.isHasPopedom(us.getUserId(), String.valueOf(us.getUserType()), MenuKey.FU_WU_GUAN_LI, us.getPopedomKeys());
+							b = popedomService.isHasPopedom(us.getUserId(), String.valueOf(us.getUserType()), MenuKey.FU_WU_GUAN_LI, us.getPopedomKeys())
+									||popedomService.isHasPopedom(us.getUserId(), String.valueOf(us.getUserType()), MenuKey.SUB_FU_WU_JI_LU, us.getPopedomKeys())
+									||popedomService.isHasPopedom(us.getUserId(), String.valueOf(us.getUserType()), MenuKey.SUB_HUI_YUAN_GUAN_LI, us.getPopedomKeys())
+									||popedomService.isHasPopedom(us.getUserId(), String.valueOf(us.getUserType()), MenuKey.SUB_JI_FEN_GUAN_LI, us.getPopedomKeys());
 							if (b) {
 						%>
 						<tr>
@@ -467,6 +518,10 @@
 							</td>
 						</tr>
 						<tbody name="submenus" style="display:none">
+						<%
+							b = popedomService.isHasPopedom(us.getUserId(), String.valueOf(us.getUserType()), MenuKey.SUB_FU_WU_JI_LU, us.getPopedomKeys());
+							if (b) {
+						%>
 						<tr>
 							<td align="left">
 								<table width="100%" border="0" cellspacing="5" cellpadding="0">
@@ -479,6 +534,11 @@
 								</table>
 							</td>
 						</tr>
+						<%} %>
+						<%
+							b = popedomService.isHasPopedom(us.getUserId(), String.valueOf(us.getUserType()), MenuKey.SUB_HUI_YUAN_GUAN_LI, us.getPopedomKeys());
+							if (b) {
+						%>
 						<tr>
 							<td align="left">
 								<table width="100%" border="0" cellspacing="5" cellpadding="0">
@@ -491,6 +551,11 @@
 								</table>
 							</td>
 						</tr>
+						<%} %>
+						<%
+							b = popedomService.isHasPopedom(us.getUserId(), String.valueOf(us.getUserType()), MenuKey.SUB_JI_FEN_GUAN_LI, us.getPopedomKeys());
+							if (b) {
+						%>
 						<tr>
 							<td align="left">
 								<table width="100%" border="0" cellspacing="5" cellpadding="0">
@@ -503,6 +568,7 @@
 								</table>
 							</td>
 						</tr>
+						<%} %>
 						</tbody>
 						<%
 							}
