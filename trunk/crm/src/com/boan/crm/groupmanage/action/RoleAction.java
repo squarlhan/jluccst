@@ -3,6 +3,7 @@ package com.boan.crm.groupmanage.action;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
@@ -24,10 +25,9 @@ import com.boan.crm.utils.page.Pagination;
  * @author XXX
  * @version 1.0.0
  */
-@Controller( "roleAction" )
-@Scope( "prototype" )
-public class RoleAction extends BaseActionSupport
-{
+@Controller("roleAction")
+@Scope("prototype")
+public class RoleAction extends BaseActionSupport {
 	/**
 	 * serialVersionUID
 	 */
@@ -36,8 +36,8 @@ public class RoleAction extends BaseActionSupport
 	 * 角色Service
 	 */
 	@Autowired
-	@Qualifier( "roleService" )
-	private IRoleService service=null;
+	@Qualifier("roleService")
+	private IRoleService service = null;
 	/**
 	 * 显示分页
 	 */
@@ -45,60 +45,73 @@ public class RoleAction extends BaseActionSupport
 	/**
 	 * 页面对象
 	 */
-	private Role role=null;
+	private Role role = null;
 	/**
 	 * 所选对象的id
 	 */
 	private String[] ids = null;
-	
+
 	/**
 	 * 提示
 	 */
 	private Message message = new Message();
-	
+
 	/**
 	 * 角色标识列表
 	 */
-	private Map<String, String > roleFlagList = RoleFlag.getRoleFlagList();
-	
+	private Map<String, String> roleFlagList = RoleFlag.getRoleFlagList();
+
+	/**
+	 * 公司id
+	 */
+	private String companyId = null;
+
 	/**
 	 * 显示角色列表
 	 * 
 	 * @return
 	 */
-	public String openRole(){
-		Map<String, Object> map = new HashMap<String,Object>();
-		map.put("companyId", sessionCompanyId);
-		pagination =service.findRoleForPage(map, pagination);
+	public String openRole() {
+		Map<String, Object> map = new HashMap<String, Object>();
+		if (StringUtils.isNotBlank(companyId)) {
+			map.put("companyId", companyId);
+		} else {
+			map.put("companyId", sessionCompanyId);
+		}
+		pagination = service.findRoleForPage(map, pagination);
 		return SUCCESS;
 	}
+
 	/**
 	 * 打开添加页面
 	 * 
 	 * @return
 	 */
-	public String openAddRole(){
+	public String openAddRole() {
+		role = new Role();
+		if (StringUtils.isNotBlank(companyId)) {
+			role.setCompanyId(companyId);
+		} else {
+			role.setCompanyId(sessionCompanyId);
+		}
 		return SUCCESS;
 	}
+
 	/**
 	 * 添加角色
 	 * 
 	 * @return
 	 */
-	public String toAddRole(){
+	public String toAddRole() {
 		// 验证用户名是否重复
-		boolean b = service.isExistSameName( role.getId(), role.getRoleName() );
+		boolean b = service.isExistSameName(role.getId(), role.getRoleName(), role.getCompanyId());
 		// 如果存在，则提示
-		if( b )
-		{
-			message.setContent( "相同职务名称已存在，请重新输入！" );
+		if (b) {
+			message.setContent("相同职务名称已存在，请重新输入！");
 			return ERROR;
-		}
-		else
-		{
-			role.setCompanyId(sessionCompanyId);
-			service.save( role );
-			message.setContent( "职务信息保存成功！" );
+		} else {
+			service.save(role);
+			message.setContent("职务信息保存成功！");
 			// 保存日志开始
 			Log log = new Log();
 			log.setLogType(LogType.INFO);
@@ -108,34 +121,32 @@ public class RoleAction extends BaseActionSupport
 			return SUCCESS;
 		}
 	}
+
 	/**
 	 * 打开修改角色页面
 	 * 
 	 * @return
 	 */
-	public String openModifyRole(){
-		String id=role.getId();
-		role=service.get(id);
+	public String openModifyRole() {
+		String id = role.getId();
+		role = service.get(id);
 		return SUCCESS;
 	}
-	
+
 	/**
 	 * 修改角色
 	 * 
 	 * @return
 	 */
-	public String toModifyRole(){
-		boolean b = service.isExistSameName( role.getId(), role.getRoleName() );
+	public String toModifyRole() {
+		boolean b = service.isExistSameName(role.getId(),  role.getRoleName(), role.getCompanyId());
 		// 如果存在，则提示
-		if( b )
-		{
-			message.setContent( "相同职务名称已存在，请重新输入！" );
+		if (b) {
+			message.setContent("相同职务名称已存在，请重新输入！");
 			return ERROR;
-		}
-		else
-		{
+		} else {
 			service.update(role);
-			message.setContent( "职务信息保存成功！" );
+			message.setContent("职务信息保存成功！");
 			// 保存日志开始
 			Log log = new Log();
 			log.setLogType(LogType.INFO);
@@ -145,15 +156,15 @@ public class RoleAction extends BaseActionSupport
 			return SUCCESS;
 		}
 	}
-	
+
 	/**
 	 * 删除角色
 	 * 
 	 * @return
 	 */
-	public String deleteRole(){
+	public String deleteRole() {
 		if (ids != null && ids.length > 0) {
-			Role  rl= null;
+			Role rl = null;
 			Log log = null;
 			for (int i = 0; i < ids.length; i++) {
 				rl = service.get(ids[i]);
@@ -168,34 +179,52 @@ public class RoleAction extends BaseActionSupport
 		service.deleteGroupRole(ids);
 		return NONE;
 	}
+
 	public Pagination<Role> getPagination() {
 		return pagination;
 	}
+
 	public void setPagination(Pagination<Role> pagination) {
 		this.pagination = pagination;
 	}
+
 	public Role getRole() {
 		return role;
 	}
+
 	public void setRole(Role role) {
 		this.role = role;
 	}
+
 	public String[] getIds() {
 		return ids;
 	}
+
 	public void setIds(String[] ids) {
 		this.ids = ids;
 	}
+
 	public Message getMessage() {
 		return message;
 	}
+
 	public void setMessage(Message message) {
 		this.message = message;
 	}
+
 	public Map<String, String> getRoleFlagList() {
 		return roleFlagList;
 	}
+
 	public void setRoleFlagList(Map<String, String> roleFlagList) {
 		this.roleFlagList = roleFlagList;
-	}	
+	}
+
+	public String getCompanyId() {
+		return companyId;
+	}
+
+	public void setCompanyId(String companyId) {
+		this.companyId = companyId;
+	}
 }

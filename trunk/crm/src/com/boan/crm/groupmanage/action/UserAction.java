@@ -219,7 +219,7 @@ public class UserAction extends BaseActionSupport
 				}
 			}
 		}
-		roleList = roleService.queryAllRoleList();
+		roleList = roleService.queryAllRoleList(companyId);
 		if( roleList == null )
 		{
 			roleList = new ArrayList<Role>();
@@ -298,7 +298,7 @@ public class UserAction extends BaseActionSupport
 				user = userService.getUserById( sessionUserId );
 				deptId = user.getDeptId();
 			}
-			roleList = roleService.queryAllRoleList();
+			roleList = roleService.queryAllRoleList(companyId);
 			if( roleList == null )
 			{
 				roleList = new ArrayList<Role>();

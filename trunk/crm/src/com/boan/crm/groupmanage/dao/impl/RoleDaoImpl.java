@@ -26,7 +26,7 @@ import com.boan.crm.utils.dao.impl.BaseDao;
 public class RoleDaoImpl extends BaseDao<Role,String> implements IRoleDao{
 
 	@Override
-	public boolean isExistSameName(String id, String roleName) {
+	public boolean isExistSameName(String id, String roleName, String companyId) {
 		id = StringUtils.trimToEmpty( id );
 		roleName = StringUtils.trimToEmpty( roleName );
 		boolean b = false;
@@ -34,15 +34,17 @@ public class RoleDaoImpl extends BaseDao<Role,String> implements IRoleDao{
 		String hql = null;
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put( "roleName", roleName );
+		map.put( "companyId", companyId );
 		if( StringUtils.isNotBlank( id ) )
 		{
-			hql = "select count(id) from Role where id <> :roleId and roleName= :roleName";
+			hql = "select count(id) from Role where id <> :roleId and roleName= :roleName and companyId = :companyId";
 			map.put( "roleId", id );
 		}
 		else
 		{
-			hql = "select count(id) from Role where roleName = :roleName";
+			hql = "select count(id) from Role where roleName = :roleName and companyId = :companyId";
 		}
+		
 		rowCount = super.findCountForPage( hql, map );			
 		if( rowCount > 0 )
 		{
@@ -50,10 +52,12 @@ public class RoleDaoImpl extends BaseDao<Role,String> implements IRoleDao{
 		}
 		return b;
 	}
-	public List<Role> queryAllRoleList() throws Exception
+	public List<Role> queryAllRoleList(String companyId) throws Exception
 	{
-		String hql = "from Role order by createTime";
-		List<Role> list = super.find( hql );
+		String hql = "from Role where companyId = :companyId order by createTime";
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put( "companyId", companyId );
+		List<Role> list = super.find( hql ,map);
 		return list;
 	}}
 

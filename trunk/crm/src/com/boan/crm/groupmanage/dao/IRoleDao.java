@@ -16,12 +16,12 @@ import com.boan.crm.utils.dao.IBaseDao;
 
 public interface IRoleDao extends IBaseDao<Role,String>{
 
-	boolean isExistSameName(String id, String roleName);
+	boolean isExistSameName(String id, String roleName, String companyId);
 	/**
 	 * 取得所有角色列表
 	 * 
 	 * @return 角色列表
 	 * @throws Exception
 	 */
-	public List<Role> queryAllRoleList() throws Exception;
+	public List<Role> queryAllRoleList(String companyId) throws Exception;
 }

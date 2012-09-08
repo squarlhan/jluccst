@@ -70,9 +70,9 @@ public class RoleServiceImpl implements IRoleService{
 	@Override
 	public Pagination<Role> findRoleForPage(Map<String, ?> values,Pagination<Role> pagination) {
 		
-		String hql = "from Role";
+		String hql = "from Role where companyId = :companyId ";
 		List<Role> data = groupRoleDao.findForPage(hql, values, pagination.getStartIndex(), pagination.getPageSize());
-		hql = "select count(*) from Role ";
+		hql = "select count(*) from Role where companyId = :companyId";
 		int totalRows = groupRoleDao.findCountForPage(hql, values);
 		pagination.setTotalRows(totalRows);
 		pagination.setData(data);
@@ -80,8 +80,8 @@ public class RoleServiceImpl implements IRoleService{
 	}
 
 	@Override
-	public boolean isExistSameName(String id, String roleName) {
-		return groupRoleDao.isExistSameName( id, roleName );
+	public boolean isExistSameName(String id, String roleName, String companyId ) {
+		return groupRoleDao.isExistSameName( id, roleName, companyId );
 	}
 
 	@Override
@@ -91,9 +91,9 @@ public class RoleServiceImpl implements IRoleService{
 	}
 
 	@Override
-	public List<Role> queryAllRoleList() throws Exception
+	public List<Role> queryAllRoleList(String companyId) throws Exception
 	{
-		return groupRoleDao.queryAllRoleList();
+		return groupRoleDao.queryAllRoleList(companyId);
 	}
 
 	
