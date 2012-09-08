@@ -45,11 +45,9 @@
 	$(function() {
 		$("#addbtn").click(
 				function() {
-					parent.parent.tipsWindown("添加职务信息",
-							"iframe:openAddRoleAction.action", "460", "150",
-							"true", "", "true", "no");
+					parent.parent.tipsWindown("添加职务信息","iframe:openAddRoleAction.action?companyId=<s:property value="companyId"/>", "460", "150", "true", "", "true", "no");
 					parent.parent.$("#windown-close").bind('click', function() {
-						window.location.href = "./openRoleAction.action";
+						window.location.href = "./openRoleAction.action?companyId=<s:property value="companyId"/>";
 					});
 
 				});
@@ -76,7 +74,7 @@
 														.bind(
 																'click',
 																function() {
-																	window.location.href = "./openRoleAction.action";
+																	window.location.href = "./openRoleAction.action?companyId=<s:property value="companyId"/>";
 																});
 											});
 						});
@@ -159,6 +157,7 @@
 									<td height="26" colspan="2" align="center" bgcolor="#FFFFFF">
 										<s:url id="edit_url" action="openModifyRoleAction">
 											<s:param name="role.id" value="id"></s:param>
+											<s:param name="role.companyId" value="companyId"></s:param>
 										</s:url>
 										<s:url id="delete_url" action="deleteRoleAction">
 											<s:param name="ids" value="id"></s:param>
