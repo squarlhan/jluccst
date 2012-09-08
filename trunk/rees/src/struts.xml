@@ -27,9 +27,6 @@
 	<!-- 默认后缀名 -->
 	<!-- constant name="struts.action.extension" value="action" /-->
 	
-	<!-- 例子配置 -->
-	<include file="com/boan/rees/demo/action/struts_demo.xml"></include>
-	
 	<!-- 规则表配置 -->
 	<include file="com/boan/rees/expertsystem/action/struts_rule.xml"></include>
 	<!-- 规则建议表配置 -->
