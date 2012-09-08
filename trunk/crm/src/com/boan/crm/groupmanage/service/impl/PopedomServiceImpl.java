@@ -90,10 +90,10 @@ public class PopedomServiceImpl implements IPopedomService{
 	}
 
 	@Override
-	public boolean isCompanyAdministrator(String userId, String userType, String keyword, String[] popedomKeys) throws Exception {
+	public boolean isCompanyAdministrator(String userId, String userType) throws Exception {
 		boolean b = false;
 		// userType=8,表示公司管理员
-		if( "1".equals( userId )||"8".equals( userType ) )
+		if( "8".equals( userType ) )
 		{
 			b = true;
 		}
@@ -105,7 +105,7 @@ public class PopedomServiceImpl implements IPopedomService{
 	}
 
 	@Override
-	public boolean isSuperAdministrator(String userId, String userType, String keyword, String[] popedomKeys) throws Exception {
+	public boolean isSuperAdministrator(String userId, String userType) throws Exception {
 		boolean b = false;
 		// userId=1,userType=9,表示超级管理员
 		if( "1".equals( userId )||"9".equals( userType ) )
