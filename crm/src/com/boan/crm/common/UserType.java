@@ -74,6 +74,24 @@ public class UserType
 
 		return list;
 	}
+	/**
+	 * 返回公司用户类别列表
+	 */
+
+	public static List<UserType> getCompanyUserTypeList()
+	{
+		List<UserType> list = new ArrayList();
+		UserType type = null;
+		for( int i = 0; i < keys.length-1; i++ )
+		{
+			type = new UserType();
+			type.setKey( keys[i] );
+			type.setValue( values[i] );
+			list.add( type );
+		}
+
+		return list;
+	}
 
 	/**
 	 * 根据传入的值，获取对应的名称

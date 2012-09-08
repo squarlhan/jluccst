@@ -75,7 +75,7 @@ public class UserAction extends BaseActionSupport
 	//标识是哪个用户维护的用户
 	private String who = null;
 
-	private List<UserType> userTypeList = UserType.getUserTypeList();
+	private List<UserType> userTypeList = UserType.getCompanyUserTypeList();
 
 	/**
 	 * 保存更新用户信息
