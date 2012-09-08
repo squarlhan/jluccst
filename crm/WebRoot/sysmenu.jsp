@@ -80,7 +80,7 @@
 				<div id="menuArea" style="overflow: auto; display: block;">
 					<table width="100%" border="0" cellspacing="0" cellpadding="0">
 						<%
-							b = popedomService.isHasPopedom(us.getUserId(), String.valueOf(us.getUserType()), MenuKey.HOU_TAI_GUAN_LI, us.getPopedomKeys());
+							b = popedomService.isSuperAdministrator(us.getUserId(), String.valueOf(us.getUserType()));
 							if (b) {
 						%>
 						<tr>
@@ -144,6 +144,7 @@
 								</table>
 							</td>
 						</tr>
+						<!-- 
 						<tr>
 							<td align="left">
 								<table width="100%" border="0" cellspacing="5" cellpadding="0">
@@ -156,6 +157,7 @@
 								</table>
 							</td>
 						</tr>
+						 -->
 						<tr>
 							<td align="left">
 								<table width="100%" border="0" cellspacing="5" cellpadding="0">
@@ -173,7 +175,7 @@
 							}
 						%>
 						<%
-							b = popedomService.isHasPopedom(us.getUserId(), String.valueOf(us.getUserType()), MenuKey.ZU_ZHI_JI_GOU, us.getPopedomKeys());
+							b = popedomService.isCompanyAdministrator(us.getUserId(), String.valueOf(us.getUserType()) );
 							if (b) {
 						%>
 						<tr>
@@ -208,6 +210,30 @@
 										<td width="40" align="right" style="padding-bottom: 4px;"><img src="images/menuto.jpg" width="5" height="5" />
 										</td>
 										<td><a href="groupmanage/usermanage.jsp" target="mainFrame">用户管理</a>
+										</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+						<tr>
+							<td align="left">
+								<table width="100%" border="0" cellspacing="5" cellpadding="0">
+									<tr>
+										<td width="40" align="right" style="padding-bottom: 4px;"><img src="images/menuto.jpg" width="5" height="5" />
+										</td>
+										<td><a href="groupmanage/rolemanage.jsp" target="mainFrame">职务管理</a>
+										</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+						<tr>
+							<td align="left">
+								<table width="100%" border="0" cellspacing="5" cellpadding="0">
+									<tr>
+										<td width="40" align="right" style="padding-bottom: 4px;"><img src="images/menuto.jpg" width="5" height="5" />
+										</td>
+										<td><a href="groupmanage/popedommanage.jsp" target="mainFrame">权限管理</a>
 										</td>
 									</tr>
 								</table>
@@ -470,7 +496,7 @@
 							}
 						%>
 						<%
-							b = popedomService.isHasPopedom(us.getUserId(), String.valueOf(us.getUserType()), MenuKey.SHU_JU_ZI_DIAN, us.getPopedomKeys());
+							b = popedomService.isSuperAdministrator( us.getUserId(), String.valueOf(us.getUserType()) );
 							if (b) {
 						%>
 						<tr>
