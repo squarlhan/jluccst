@@ -197,6 +197,18 @@
 									<tr>
 										<td width="40" align="right" style="padding-bottom: 4px;"><img src="images/menuto.jpg" width="5" height="5" />
 										</td>
+										<td><a href="backstagemanage/mycompanymanage.jsp" target="mainFrame">公司档案</a>
+										</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+						<tr>
+							<td align="left">
+								<table width="100%" border="0" cellspacing="5" cellpadding="0">
+									<tr>
+										<td width="40" align="right" style="padding-bottom: 4px;"><img src="images/menuto.jpg" width="5" height="5" />
+										</td>
 										<td><a href="groupmanage/deptmentmanage.jsp" target="mainFrame">部门管理</a>
 										</td>
 									</tr>
