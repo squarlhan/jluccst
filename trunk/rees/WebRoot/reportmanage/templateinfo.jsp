@@ -45,7 +45,7 @@
 			"template.reportType":{required:true,maxlength:20},
 			"template.reportSubject":{required:true,maxlength:20},
 			"template.reportPerson":{required:true,maxlength:20},
-			"template.reportContent":{maxlength:500}
+			"template.reportContent":{maxlength:4000}
 			},messages:{
 				"template.reportType":
 				{
@@ -64,7 +64,7 @@
 				},
 				"template.reportContent":
 				{
-					maxlength:"汇报内容最多输入500个字符！"
+					maxlength:"汇报内容最多输入4000个字符！"
 				}
 				}
 			};
@@ -226,7 +226,7 @@
 										<strong>汇报内容：</strong>
 									</td>
 									<td height="147" align="left" bgcolor="#FFFFFF">
-										<s:textarea id="txt_reportContent" name="template.reportContent" maxlength="510" cssStyle="width:250px;height:100px; resize: none;" />
+										<s:textarea id="txt_reportContent" name="template.reportContent" maxlength="4001" cssStyle="width:250px;height:100px; resize: none;" />
 									</td>
 								</tr>
 								<s:if test='template.templatePath!=null && template.templatePath!=""'>

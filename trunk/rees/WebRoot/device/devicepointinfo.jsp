@@ -96,13 +96,14 @@
 				var i = $("#table1 tr").length-1;
 				row.find("strong").replaceWith("<strong>检测点"+i+"名称：</strong>");
 				$("#txt_pointNum").val(i);
-				
+				var previousVal = row.find("input[type='text']").val();
+				var thisVal = String.fromCharCode(previousVal.charCodeAt(0)+1);
 				var newBtn ='<img id="delOtherBtn" name="delOtherBtn" onclick="$.fn.dynamicRemove($(this))" src="<%=basePath%>/images/symbol-remove.png" style="height:18px;width:20px;cursor:pointer" title="删除"></img>';
 				row.find("img[id='firstDelBtn']").remove();
 				row.find("img[name='setParamBtn']").remove();
 				row.find("img").replaceWith(newBtn); 
 				row.find("input[type='hidden']").val("");
-				row.find("input[type='text']").val("");
+				row.find("input[type='text']").val(thisVal);
 				$("#table1 tr:last").before(row);
 			});
 			
@@ -125,7 +126,7 @@
 			var hiddenIdObj=$("#addOtherBtn").parent().children("input:first-child");
 			var id=hiddenIdObj.val();
 			if(id==""){
-				$("#txt_pointNum").val(0);
+				$("#txt_pointNum").val(1);
 			}
 		}
 		

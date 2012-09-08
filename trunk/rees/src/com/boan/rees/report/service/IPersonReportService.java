@@ -47,6 +47,12 @@ public interface IPersonReportService {
 	 * 按分页查询
 	 */
 	public Pagination<PersonReport> findPersonReportForPage(Map<String, ?> values,Pagination<PersonReport> pagination);
+	
+	/**
+	 * 删除报表附件
+	 * @param reportId 报表Id
+	 */
+	public void deleteReportAttachment(String reportId);
 }
 
 

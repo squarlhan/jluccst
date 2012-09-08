@@ -22,8 +22,17 @@
     	</action>
     	
     	<!-- 添加报表菜单 -->
-    	 <action name="toAddReportAction" class="reportAction" method="toAddReport">
-            <result name="success">/reportmanage/reportinfo.jsp</result>
+        <action name="toAddReportAction" class="reportAction" method="toAddReport">
+    	 	<!-- 配置fileUpload的拦截器 -->
+            <interceptor-ref name="fileUpload">
+		    	<!-- 配置允许上传的文件大小 1MB = 1024KB = 1024*1024 = 1048576-->
+				<param name="maximumSize">20971520</param> 
+			</interceptor-ref> 
+	        <interceptor-ref name="defaultStack"/>
+	        <interceptor-ref name="fileUploadStack"/>
+	   		<!-- 动态设置Action的属性值 -->
+			<param name="savePath">/upload/report/attachment</param>
+             <result name="success">/reportmanage/reportinfo.jsp</result>
             <result name="input">/reportmanage/reportinfo.jsp</result>
         </action>
         
@@ -39,9 +48,33 @@
     	
         <!-- 修改报表菜单 -->
     	<action name="toModifyReportAction" class="reportAction" method="toModifyReport">
-    		<result name="success">/reportmanage/reportinfo.jsp</result>
+    		<!-- 配置fileUpload的拦截器 -->
+            <interceptor-ref name="fileUpload">
+		    	<!-- 配置允许上传的文件大小 1MB = 1024KB = 1024*1024 = 1048576-->
+				<param name="maximumSize">20971520</param> 
+			</interceptor-ref> 
+	        <interceptor-ref name="defaultStack"/>
+	        <interceptor-ref name="fileUploadStack"/>
+	   		<!-- 动态设置Action的属性值 -->
+			<param name="savePath">/upload/report/attachment</param>
+            <result name="success">/reportmanage/reportinfo.jsp</result>
     		<result name="input">/reportmanage/reportinfo.jsp</result>
     	</action>
+    	
+    	
+    	
+    	<!-- 文件下载，支持中文附件名 -->  
+        <action name="toDownloadReportAttachmentAction" class="reportAction" method="toDownloadReportAttachment">
+            <result name="success" type="streamx">  
+                <param name="inputName">inputStream</param>
+                <param name="contentDisposition">attachment;filename="${downloadFileName}"</param>  
+                <param name="bufferSize">4096</param>  
+            </result>
+            <result name="input">/reportmanage/reportinfo.jsp</result>
+        </action>  
+        
+        <!-- 删除设备图片 -->  
+        <action name="toDeleteReportAttachmentAction" class="reportAction" method="toDeleteReportAttachment"/>  
     	
     	<!-- 导出报表，支持中文附件名 -->  
         <action name="toExportReportAction" class="reportAction" method="toExportReport">
@@ -53,12 +86,6 @@
             </result>
             <result name="input">/reportmanage/reportinfo.jsp</result>
         </action> 
-    	
-    	
-    	
-    	
-    	
-    	
     	
     	<!-- 打开模板维护页面 -->
     	<action name="openAddTemplateAction" class="reportAction" method="openAddTemplate">

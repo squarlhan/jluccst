@@ -31,6 +31,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
+import com.boan.rees.device.model.DeviceInfo;
 import com.boan.rees.report.model.PersonReport;
 import com.boan.rees.report.model.TemplateReport;
 import com.boan.rees.report.service.IPersonReportService;
@@ -341,6 +342,7 @@ public class ReportAction extends BaseActionSupport{
 	 */
 	public String toAddReport(){
 		try {
+			saveAttachmentToDevice(report);
 			service.save(report);
 			message="保存成功！";
 		} catch (Exception e) {
@@ -350,6 +352,61 @@ public class ReportAction extends BaseActionSupport{
 		return SUCCESS;
 	}
 
+	/**
+	 * 重写字段错误信息添加方法，对错误信息进行从新构造
+	 * @param fieldName
+	 * @param errorMessage
+	 */
+	@Override
+	public void addFieldError(String fieldName, String errorMessage) {
+		if(errorMessage.startsWith("File too large: files")){
+			//档文件过大时提示
+			errorMessage= this.getText("struts.messages.error.file.too.large");
+		}else if(errorMessage.startsWith("Content-Type not allowed: files")){
+			//当文件类型不允许时提示
+			errorMessage=  this.getText("struts.messages.error.content.type.not.allowed");
+		}
+		super.addFieldError(fieldName, errorMessage);
+	}
+	
+	/**
+	 * 为设备添加图片信息
+	 * @param device
+	 */
+	private void saveAttachmentToDevice(PersonReport report) {
+		try {
+			ServletContext servletContext = ServletActionContext.getServletContext();
+			//根据配置在服务器上查找指定目录，如果不存在则创建
+			String dataDir = servletContext.getRealPath(savePath);
+			File dir = new File(dataDir);
+			if(!dir.exists()){
+				dir.mkdirs();
+			}
+			if(files!=null){
+				for (int i = 0; i < files.length; i++) {
+					//生成随机文件名
+					String fileName = UUID.randomUUID().toString();
+					//获取文件名后缀
+					String suffix = filesFileName[i].substring(filesFileName[i].lastIndexOf('.'));
+					FileOutputStream fos = new FileOutputStream(dataDir + File.separator + fileName + suffix);
+					//构建保存到数据库中的图片针对服务器的相对路径
+					String filePath = savePath + File.separator + fileName+ suffix;
+					report.setFilePath(filePath.replace("/", File.separator));
+					report.setFileName( filesFileName[i]);
+					FileInputStream fis = new FileInputStream(files[i]);
+					//上传
+					IOUtils.copy(fis, fos);
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	
+	
+	
+	
 	/**
 	 * 删除报表数据
 	 * @return
@@ -375,6 +432,7 @@ public class ReportAction extends BaseActionSupport{
 	 */
 	public String toModifyReport(){
 		try {
+			saveAttachmentToDevice(report);
 			service.update(report);
 			message="保存成功！";
 		} catch (Exception e) {
@@ -382,6 +440,52 @@ public class ReportAction extends BaseActionSupport{
 			message="保存失败！";
 		}
 		return SUCCESS;
+	}
+	
+	
+	/**
+	 * 删除附件
+	 * @return
+	 */
+	public String toDeleteReportAttachment(){
+		String reportId = report.getId();
+		service.deleteReportAttachment(reportId);
+		return NONE;
+	}
+	
+	/**
+	 * 下载设备图片
+	 * @return
+	 * @throws UnsupportedEncodingException 
+	 * @throws FileNotFoundException 
+	 */
+	public String toDownloadReportAttachment() throws UnsupportedEncodingException, FileNotFoundException{
+		ServletContext servletContext = ServletActionContext.getServletContext();
+		//获取服务器上图片的保存路径
+		String fileAllName = servletContext.getRealPath(report.getFilePath());
+		File file = new File(fileAllName);
+		if(file.exists()){
+			inputStream = new FileInputStream(file);
+			//获取图片后缀名
+			String suffix    = fileAllName.substring(fileAllName.lastIndexOf('.'));
+			downloadFileName =report.getFileName();
+			//处理中文乱码
+			downloadFileName = new String(downloadFileName.getBytes(), "ISO8859-1");   
+		}
+		return SUCCESS;
+	}
+	
+	/**
+	 * 下载前服务器端验证
+	 */
+	public void validateToDownloadReportAttachment(){
+		ServletContext servletContext = ServletActionContext.getServletContext();
+		//获取服务器上图片的保存路径
+		String fileAllName = servletContext.getRealPath(report.getFilePath());
+		File file = new File(fileAllName);
+		if(!file.exists()){
+			addFieldError("","设备图片不存在，请联系管理员！");
+		}
 	}
 	
 	
@@ -554,24 +658,7 @@ public class ReportAction extends BaseActionSupport{
 		if(files == null){
         }
 	}
-	
-	/**
-	 * 重写字段错误信息添加方法，对错误信息进行从新构造
-	 * @param fieldName
-	 * @param errorMessage
-	 */
-	@Override
-	public void addFieldError(String fieldName, String errorMessage) {
-		if(errorMessage.startsWith("File too large: files")){
-			//档文件过大时提示
-			errorMessage= this.getText("struts.messages.error.file.too.large");
-		}else if(errorMessage.startsWith("Content-Type not allowed: files")){
-			//当文件类型不允许时提示
-			errorMessage=  this.getText("struts.messages.error.content.type.not.allowed");
-		}
-		super.addFieldError(fieldName, errorMessage);
-	}
-	
+
 	/**
 	 * 下载个人报表模板文件
 	 * @return

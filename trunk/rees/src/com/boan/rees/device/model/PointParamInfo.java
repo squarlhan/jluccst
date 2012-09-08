@@ -27,6 +27,18 @@ import org.hibernate.annotations.GenericGenerator;
 public class PointParamInfo implements Serializable {
 	private static final long serialVersionUID = -2114894885947174533L;
 
+	/**
+	 * 构造方法
+	 * @param name
+	 */
+	public PointParamInfo(){}
+	/**
+	 * 构造方法
+	 * @param name 检查点名称
+	 */
+	public PointParamInfo(String name){
+		this.name = name;
+	}
 	@Id
 	@GenericGenerator(name = "system-uuid", strategy = "uuid")
 	@GeneratedValue(generator = "system-uuid")

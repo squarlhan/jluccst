@@ -89,4 +89,13 @@ public class PersonReportServiceImpl implements IPersonReportService {
 		pagination.setData(data);
 		return pagination;
 	}
+	
+	/**
+	 * 删除报表附件
+	 * @param reportId 报表Id
+	 */
+	public void deleteReportAttachment(String reportId){
+		String hql = "update PersonReport obj set obj.filePath=null,obj.fileName=null where obj.id='"+reportId+"'";
+		personReportDao.executeHql(hql, null);
+	}
 }
