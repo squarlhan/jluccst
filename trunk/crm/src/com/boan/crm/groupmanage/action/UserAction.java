@@ -298,7 +298,17 @@ public class UserAction extends BaseActionSupport
 				user = userService.getUserById( sessionUserId );
 				deptId = user.getDeptId();
 			}
-			roleList = roleService.queryAllRoleList(companyId);
+			if( StringUtils.isBlank(companyId ) )
+			{
+				companyId = sessionCompanyId;
+			}
+			if( StringUtils.isBlank(companyId ) )
+			{
+				companyId = "";
+			}
+			if( StringUtils.isNotBlank(companyId) ){
+				roleList = roleService.queryAllRoleList(companyId);
+			}
 			if( roleList == null )
 			{
 				roleList = new ArrayList<Role>();
