@@ -146,7 +146,7 @@
 									<tr>
 										<td width="40" align="right" style="padding-bottom: 4px;"><img src="images/menuto.jpg" width="5" height="5" />
 										</td>
-										<td><a href="backstagemanage/companypopedommanage.jsp" target="mainFrame">权限管理</a>
+										<td><a href="backstagemanage/companypopedommanage.jsp" target="mainFrame">公司权限</a>
 										</td>
 									</tr>
 								</table>
