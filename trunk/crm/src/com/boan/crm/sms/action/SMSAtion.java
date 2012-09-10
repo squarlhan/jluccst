@@ -287,6 +287,9 @@ public class SMSAtion extends BaseActionSupport{
 	 * @return
 	 */
 	public String openSendInfo(){
+		//需要保证表没有外键，删除外键才能执行deleteSMSCustomerInfoFoCustomer方法
+		//ALTER TABLE sms_info DROP FOREIGN KEY FK2A40AFF46D4294D0;  
+		//bookerService.deleteSMSCustomerInfoFoCustomer("1111111");
 		UserSession userSession = this.getSession();
 		String organId = userSession.getCompanyId();
 		//初始化短信发送接口
