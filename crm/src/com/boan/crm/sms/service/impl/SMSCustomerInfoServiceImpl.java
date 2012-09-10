@@ -1,6 +1,7 @@
 package com.boan.crm.sms.service.impl;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -52,6 +53,16 @@ public class SMSCustomerInfoServiceImpl implements ISMSCustomerInfoService {
 		dao.delete(ids);
 	}
 	
+	/**
+	 * 删除短信通讯录信息（此方法用于客户删除是，删除短信客户表里面相应信息的）
+	 * @param customerIds 客户表Id
+	 */
+	public void deleteSMSCustomerInfoFoCustomer(String... customerIds){
+		Map<String, Object> values = new HashMap<String, Object>();
+		values.put("customerIds", customerIds);
+		String hql="delete from SMSCustomerInfo where customerId in (:customerIds)";
+		dao.executeHql(hql, values);
+	}
 	/**
 	 * 查询所有短信通讯录信息
 	 * @return

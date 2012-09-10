@@ -38,6 +38,12 @@ public interface ISMSCustomerInfoService {
 	public void deleteSMSCustomerInfo(String... ids);
 	
 	/**
+	 * 删除短信通讯录信息（此方法用于客户删除是，删除短信客户表里面相应信息的）
+	 * @param customerIds 客户表Id
+	 */
+	public void deleteSMSCustomerInfoFoCustomer(String... customerIds);
+	
+	/**
 	 * 查询所有短信通讯录信息
 	 * @return
 	 */
