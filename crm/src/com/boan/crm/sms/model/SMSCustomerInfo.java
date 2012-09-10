@@ -31,6 +31,12 @@ public class SMSCustomerInfo {
 	@GeneratedValue(generator = "system-uuid")
 	@Column(name = "ID", length=50)
 	private String id;
+	
+	/**
+	 * 客户Id（用于将客户保存时保存为SMSCustomerInfo对象，在客户删除时使用这个Id删除）
+	 */
+	@Column(name = "CUSTOMER_ID" , length = 50)
+	private String customerId;
 
 	/**
 	 * 所属销售人员Id
@@ -318,5 +324,13 @@ public class SMSCustomerInfo {
 
 	public void setSalesmanId(String salesmanId) {
 		this.salesmanId = salesmanId;
+	}
+
+	public String getCustomerId() {
+		return customerId;
+	}
+
+	public void setCustomerId(String customerId) {
+		this.customerId = customerId;
 	}
 }
