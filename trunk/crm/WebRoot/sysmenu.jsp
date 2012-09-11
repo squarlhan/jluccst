@@ -632,6 +632,25 @@
 								</table>
 							</td>
 						</tr>
+						</tbody>
+					<%} %>
+					<%
+						b = popedomService.isCompanyAdministrator( us.getUserId(), String.valueOf(us.getUserType()) );
+						if (b) {
+					%>
+						<tr>
+							<td height="24" align="left" background="images/menubg.jpg">
+								<table width="100%" border="0" cellspacing="5" cellpadding="0">
+									<tr>
+										<td width="40" align="right" style="padding-bottom: 4px;"><img src="images/up.gif" width="10" height="12" />
+										</td>
+										<td><strong name="menus">数据字典</strong>
+										</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+						<tbody name="submenus" style="display:none">
 						<tr>
 							<td align="left">
 								<table width="100%" border="0" cellspacing="5" cellpadding="0">
