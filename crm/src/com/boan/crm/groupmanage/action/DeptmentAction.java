@@ -125,7 +125,7 @@ public class DeptmentAction extends BaseActionSupport
 	public String toAddDeptment()
 	{
 		// 验证用户名是否重复
-		boolean b = service.isExistSameName( deptment.getId(), deptment.getDeptName() );
+		boolean b = service.isExistSameName( deptment.getId(), deptment.getDeptName(), companyId );
 		// 如果存在，则提示
 		if( b )
 		{
@@ -167,7 +167,7 @@ public class DeptmentAction extends BaseActionSupport
 	public String toModifyDeptment()
 	{
 		// 验证用户名是否重复
-		boolean b = service.isExistSameName( deptment.getId(), deptment.getDeptName() );
+		boolean b = service.isExistSameName( deptment.getId(), deptment.getDeptName(),companyId );
 		// 如果存在，则提示
 		if( b )
 		{
