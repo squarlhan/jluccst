@@ -81,9 +81,9 @@ public class DeptmentServiceImpl implements IDeptmentService{
 	}
 
 	@Override
-	public boolean isExistSameName( String id, String name )
+	public boolean isExistSameName( String id, String name , String companyId)
 	{
-		return deptDao.isExistSameName( id, name );
+		return deptDao.isExistSameName( id, name , companyId);
 	}
 
 	@Override

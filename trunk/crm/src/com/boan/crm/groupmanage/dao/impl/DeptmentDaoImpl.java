@@ -21,7 +21,7 @@ import com.boan.crm.utils.dao.impl.BaseDao;
 public class DeptmentDaoImpl extends BaseDao<Deptment,String> implements IDeptmentDao{
 
 	@Override
-	public boolean isExistSameName( String id, String name )
+	public boolean isExistSameName( String id, String name, String companyId )
 	{
 		id = StringUtils.trimToEmpty( id );
 		name = StringUtils.trimToEmpty( name );
@@ -30,14 +30,15 @@ public class DeptmentDaoImpl extends BaseDao<Deptment,String> implements IDeptme
 		String hql = null;
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put( "deptName", name );
+		map.put( "companyId", companyId );
 		if( StringUtils.isNotBlank( id ) )
 		{
-			hql = "select count(id) from Deptment where id <> :deptId and deptName= :deptName";
+			hql = "select count(id) from Deptment where id <> :deptId and deptName= :deptName and companyId = :companyId";
 			map.put( "deptId", id );
 		}
 		else
 		{
-			hql = "select count(id) from Deptment where deptName = :deptName";
+			hql = "select count(id) from Deptment where deptName = :deptName and companyId = :companyId";
 		}
 		rowCount = super.findCountForPage( hql, map );			
 		if( rowCount > 0 )

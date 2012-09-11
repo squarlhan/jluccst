@@ -48,7 +48,7 @@ import com.boan.crm.utils.page.Pagination;
 	 * @param name
 	 * @return
 	 */
-	public boolean isExistSameName( String id, String name );
+	public boolean isExistSameName( String id, String name , String companyId);
 	
 	/**
 	 * 查找所有部门列表
