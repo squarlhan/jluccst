@@ -25,6 +25,13 @@ public interface ISMSCustomerInfoService {
 	public void updateSMSCustomerInfo(SMSCustomerInfo info);
 	
 	/**
+	 * 修改客户联系人时调用
+	 * @param customerId
+	 * @param info
+	 */
+	public void updateSMSCustomerInfoForCustomer(String customerId , SMSCustomerInfo info);
+	
+	/**
 	 * 修改短信通讯录信息状态
 	 * @param id
 	 * @param state
