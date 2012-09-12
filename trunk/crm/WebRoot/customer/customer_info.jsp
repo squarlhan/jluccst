@@ -370,24 +370,25 @@
 									</table>
 								</td>
 							</tr>
+							<tr>
+								<td><table cellpadding="5" cellspacing="3">
+										<tr>
+											<td></td>
+											<td align="center">介绍客户次数：</td>
+											<td><s:textfield type="text" style="width:150px"
+													name="customerInfo.introduceTimes" id="introduceTimes"></s:textfield>
+											</td>
+											<td align="center"></td>
+											<td></td>
+										</tr>
+									</table>
+								</td>
+							</tr>
 						</table>
 					</fieldset>
 				</td>
 			</tr>
-			<tr>
-				<td><table cellpadding="5" cellspacing="3">
-						<tr>
-							<td></td>
-							<td align="center">介绍客户次数：</td>
-							<td><s:textfield type="text" style="width:150px"
-									name="customerInfo.introduceTimes" id="introduceTimes"></s:textfield>
-							</td>
-							<td align="center"></td>
-							<td></td>
-						</tr>
-					</table>
-				</td>
-			</tr>
+			
 			<tr>
 				<td>
 					<table>
