@@ -37,12 +37,31 @@ public class SMSCustomerInfoServiceImpl implements ISMSCustomerInfoService {
 	}
 	
 	/**
+	 * 修改客户联系人时调用
+	 * @param customerId
+	 * @param info
+	 */
+	public void updateSMSCustomerInfoForCustomer(String customerId , SMSCustomerInfo info){
+		Map<String, Object> values = new HashMap<String, Object>();
+		values.put("customerId", customerId);
+		String hql ="from SMSCustomerInfo where customerId=:customerId ";
+		List<SMSCustomerInfo> temp = dao.find(hql, values);
+		String id=null;
+		if(temp!=null && temp.size()>0 ){
+			if(temp.get(0)!=null){
+				id = temp.get(0).getId();
+			}
+		}
+		info.setId(id);
+		dao.update(info);
+	}
+	
+	/**
 	 * 修改短信通讯录信息状态
 	 * @param id
 	 * @param state
 	 */
 	public void updateSMSCustomerInfoState(String id,int state){
-		
 	}
 	
 	/**
