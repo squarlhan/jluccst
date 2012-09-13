@@ -461,7 +461,7 @@ public class DeviceInfoAction extends BaseActionSupport{
 		super.addFieldError(fieldName, errorMessage);
 	}
 	
-	/**
+	/**deviceTypeList
 	 * 下载设备图片
 	 * @return
 	 * @throws UnsupportedEncodingException 
