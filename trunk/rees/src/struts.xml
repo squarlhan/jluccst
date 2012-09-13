@@ -26,7 +26,6 @@
 	
 	<!-- 默认后缀名 -->
 	<!-- constant name="struts.action.extension" value="action" /-->
-	
 	<!-- 规则表配置 -->
 	<include file="com/boan/rees/expertsystem/action/struts_rule.xml"></include>
 	<!-- 规则建议表配置 -->
@@ -35,6 +34,11 @@
 	<include file="com/boan/rees/expertsystem/action/struts_rule_reason.xml"></include>
 	<!-- 规则现象表配置 -->
 	<include file="com/boan/rees/expertsystem/action/struts_rule_result.xml"></include>
+	
+	<!--特殊设备规则配置 -->
+	<include file="com/boan/rees/expertsystem/action/struts_special_device_rule.xml"></include>
+	
+	
 	<!-- 故障诊断 -->
 	<include file="com/boan/rees/expertsystem/action/struts_failure_diagnosis.xml"/>
 	<!-- 界面框架 -->
