@@ -104,6 +104,16 @@ public class GroupTreeAction extends BaseActionSupport
 		this.showTreeAllNodes();
 		return "group-tree-for-device";
 	}
+	
+	/**
+	 * 显示组织机构树,带公司、工厂、车间
+	 * @return
+	 */
+	public String showGroupTreeForSpecialDeviceRule() throws Exception
+	{
+		this.showTreeAllNodes();
+		return "group-tree-for-special-device-rule";
+	}
 	/**
 	 * 显示组织机构树,带公司、工厂、车间
 	 * @return
