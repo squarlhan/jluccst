@@ -4,6 +4,8 @@
 
 package com.boan.rees.expertsystem.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,7 +22,7 @@ import org.hibernate.annotations.GenericGenerator;
  */
 @Entity
 @Table(name = "RULE_REASON_INFO")
-public class RuleReasonInfo {
+public class RuleReasonInfo  implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	@Id
