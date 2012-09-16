@@ -29,7 +29,7 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<title>设备规则管理维护</title>
 		<j:scriptlink  css="true" jmessagebox="true" jquery="true" tipswindow="true" validate="true" jfunction="true"/>
-	<script type="text/javascript">
+		<script type="text/javascript">
 		/**
 			* 准备工作
 			*/
@@ -39,52 +39,78 @@
 	  		$.fn.close();
 	  		$.fn.deviceTypeChange();
 	  		$.fn.dynamicAddOther();
+	  		$.fn.pointSetControl ();
 	  	});
 		
 		/**
 	  	 * 保存
 	  	 */
 		$.fn.save = function(){
+			
 			//如果有id就说明是修改action
-			var devicetype = $("#hid_ruleId").val();
+			var id = $("#hid_ruleId").val();
 				$("#addBtn").click(function() {
-					var arry = new Array(); 
-					var flag=true;
-					$("select[name='ruleInfo.resultId']").each(function(i){
-						if($(this).val()!=""){
-							for(var j=0;j<arry.length;j++){
-								if($(this).val()==arry[j]){
-									alert("重复选择现象！");
-									$(this).focus();
-									flag=false;
-									return false;
-								}
+					var flag = true;
+					var str="";
+					$("fieldset").each(function(){
+						var temp = $(this);
+						temp.find(":checkbox[name='params']").each(function(){
+							if ($(this).attr("checked")) {
+								var point = $.trim(temp.find("legend").text());
+								var param = $.trim($(this).next().text());
+								str= str+point +"" +param+"_";
 							}
-							arry[i]=$(this).val();
-						}else{
-							alert("请选择现象！");
-							$(this).focus();
-							flag=false;
-							return false;
-						}
+						});
 					});
-					for(var j=0;j<arry.length;j++){
-						if("A"+$("#sel_reasonType").val()==arry[j]){
-							alert("原因已作为现象，请重新选择原因！");
-							$("#sel_reasonType").focus();
-							flag=false;
+					str = str.substring(0,str.length-1);
+					if(str.length==0){
+						alert( "请选择监测点或监测点参数！");
+						flag=false;
+					}else{
+						$("#hid_pointStr").val(str);
+					}
+					
+					if(flag){
+						var arry = new Array(); 
+						var flag=true;
+						$("select[name='ruleInfo.resultId']").each(function(i){
+							if($(this).val()!=""){
+								for(var j=0;j<arry.length;j++){
+									if($(this).val()==arry[j]){
+										alert("重复选择现象！");
+										$(this).focus();
+										flag=false;
+										return false;
+									}
+								}
+								arry[i]=$(this).val();
+							}else{
+								alert("请选择现象！");
+								$(this).focus();
+								flag=false;
+								return false;
+							}
+						});
+						for(var j=0;j<arry.length;j++){
+							if("A"+$("#sel_reasonType").val()==arry[j]){
+								alert("原因已作为现象，请重新选择原因！");
+								$("#sel_reasonType").focus();
+								flag=false;
+							}
 						}
 					}
 					if(!flag){
 						return false;
 					}
-		           	if( $.trim(devicetype) == "0" ){
-		           		form1.action = "toAddRuleInfoAction.action";
+		           	if( $.trim(id) == "" ){
+		           		form1.action = "toAddDeviceRuleInfoAction.action";
 		           	}
 		           	else{
-		           		form1.action = "toModifyRuleInfoAction.action";
+		           		form1.action = "toModifyDeviceRuleInfoAction.action";
 		           	}
 		           	$("#hid_reasonType").remove();
+		           	
+		           
 		           	form1.submit();
 		       	});
 	     };
@@ -137,6 +163,48 @@
 				}
 			 });
 	 		
+			
+			var pointStr=$("#hid_pointStr").val();
+			if(pointStr!=""){
+				var array = pointStr.split("_");
+				for(var i=0 ;i<array.length;i++){
+					var pointName = array[i].substring(0,1);
+					var paramName =array[i].substring(1,2);
+					
+					$("fieldset").each(function(){
+						var temp = $(this);
+						if ($.trim(temp.find("legend").text())==pointName) {
+							temp.find(":checkbox[name='params']").each(function(){
+									if($.trim($(this).next().text())==paramName){
+										$(this).attr("checked",true);
+									}
+							});
+							
+							var n=0;
+							temp.find(":checkbox[name='params']").each(function(){
+								if ($(this).attr("checked")) {
+									n=n+1;
+								}
+							});
+							if(n==temp.find(":checkbox[name='params']").length){
+								temp.find(":checkbox[name='key']").attr("checked",true);
+								temp.find(":checkbox").attr("disabled","disabled");
+								temp.find(":checkbox[name='key']").attr("disabled","");
+							}
+						}
+					});
+				}
+			}
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
 			var err = $("#lb_error").html();
 			if(err!=null && $.trim(err)!="" ){
 				alert(err);
@@ -153,6 +221,7 @@
 		 */
 		$.fn.deviceTypeChange = function(){
 			$("#sel_deviceType").change(function(){
+				$("#hid_deviceTypeName").val($('#sel_deviceType option:selected').attr("text"));
 				var deviceTypeId =$('#sel_deviceType option:selected').attr("value");
 				var url = "getDeviceTypeCascadeInfoAction.action";
 				$.post(url, {deviceTypeId:deviceTypeId}, function(data){
@@ -239,7 +308,7 @@
 		$.fn.dynamicRemoveOther = function(id,obj){
 			if(window.confirm("您确定要删除此参数吗？")){
 				var ruleId = $("#hid_ruleId").val();
-				$.post("toDeleteResultAction.action", {"resultId":id,"ruleInfo.id":ruleId}, function(data){});
+				$.post("toDeleteResult4SpecialDeviceRuleAction.action", {"resultId":id,"ruleInfo.id":ruleId}, function(data){});
 				obj.parent().parent().remove();
 				$.fn.columnRename();
 			}
@@ -255,7 +324,7 @@
 				var ruleId = $("#hid_ruleId").val();
 				$("#addOtherBtn").parent().children("input[type='hidden']").val("");
 				$("#sel_resultType").val("");
-				$.post("toDeleteResultAction.action", {"resultId":id,"ruleInfo.id":ruleId}, function(data){});
+				$.post("toDeleteResult4SpecialDeviceRuleAction.action", {"resultId":id,"ruleInfo.id":ruleId}, function(data){});
 				obj.remove();
 				$.fn.columnRename();
 			}
@@ -278,19 +347,57 @@
 				$(this).find("strong").replaceWith("<strong>现象"+(i+1)+"：</strong>");
 			});
 		};
+		
+		/**
+		 * 控制监测点多选框
+		 */
+		$.fn.pointSetControl = function(){
+			$("fieldset").each(function(){
+				var temp = $(this);
+				temp.find(":checkbox[name='key']").click(function(){
+					if ($(this).attr("checked")) {
+						temp.find(":checkbox").attr("checked",true);
+						temp.find(":checkbox").attr("disabled","disabled");
+						$(this).attr("disabled","");
+					}else{
+						temp.find(":checkbox").attr("checked",false);
+						temp.find(":checkbox").attr("disabled","");
+					}
+				});
+				$(":checkbox[name='params']").click(function(){
+					if ($(this).attr("checked")) {
+						var set = $(this).parent().parent();
+						var n=0;
+						set.find(":checkbox[name='params']").each(function(){
+							if ($(this).attr("checked")) {
+								n=n+1;
+							}
+						});
+						if(n==set.find(":checkbox[name='params']").length){
+							set.find(":checkbox[name='key']").attr("checked",true);
+							set.find(":checkbox").attr("disabled","disabled");
+							set.find(":checkbox[name='key']").attr("disabled","");
+						}
+					}
+				});
+			});
+
+		};
 	</script>
 	</head>
 
 	<body>
-		<s:form id="form1" name="form1" method="post" theme="simple" enctype="multipart/form-data">
-		<s:label id="lb_message" name="message" cssStyle="display:none"></s:label>
-		<s:hidden id="hid_companyId" name="device.companyId"></s:hidden>
-		<s:hidden id="hid_factoryId" name="device.factoryId"></s:hidden>
-		<s:hidden id="hid_workshopId" name="device.workshopId"></s:hidden>
+	<s:form id="form1" name="form1" method="post"  theme="simple">
+    	<s:label id="lb_message" name="message" cssStyle="display:none"></s:label>
+		<s:hidden id="hid_ruleId" name="ruleInfo.id"></s:hidden>
+		<s:hidden id="hid_deviceId" name="ruleInfo.deviceId"></s:hidden>
+		<s:hidden id="hid_deviceTypeName" name="ruleInfo.deviceTypeName"></s:hidden>
+		<s:hidden id="hid_pointStr" name="ruleInfo.pointStr"></s:hidden>
 		<table width="100%" border="0" cellspacing="5" cellpadding="0">
 			<tr>
 				<td>
-					<table width="100%" style="height: 100%;" border="0" cellspacing="6" cellpadding="0">
+					<table width="100%" style="height: 100%;" border="0"
+						cellspacing="6" cellpadding="0">
 						<tr>
 							<td style="height: 36px;">
 								<table id="table1" width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#d5e4fd">
@@ -299,7 +406,7 @@
 											<strong>设备名称：</strong>
 										</td>
 										<td height="26" align="left" bgcolor="#FFFFFF">
-											<s:textfield id="txt_deviceName" name="device.deviceName" maxlength="25" cssStyle="width: 250px;"></s:textfield>
+											<s:textfield id="txt_deviceName" name="ruleInfo.deviceName" maxlength="25" cssStyle="width: 250px;"></s:textfield>
 										</td>
 									</tr>
 									<tr>
@@ -307,28 +414,28 @@
 											<strong>设备类型：</strong>
 										</td>
 										<td height="26" align="left" bgcolor="#FFFFFF">
-											<s:select id="sel_deviceType" list="deviceTypeList" listKey="id" listValue="typeName" headerKey="nothing" headerValue="---请选择---" name="device.deviceTypeId" cssStyle="width: 250px;"></s:select>
+											<s:select id="sel_deviceType" list="deviceTypeList" listKey="id" listValue="typeName" headerKey="" headerValue="---请选择---" name="ruleInfo.deviceTypeId" cssStyle="width: 250px;"></s:select><font color="red">*</font>
 										</td>
 									</tr>
+									
 									<tr>
 										<td height="26" align="right" bgcolor="#FFFFFF">
 											<strong>监测点：</strong>
 										</td>
 										<td height="26" align="left" bgcolor="#FFFFFF">
-											<fieldset  style="width:250px;">
-												<legend>A<s:checkbox name="aa"></s:checkbox></legend>
-												<span width="20px">
-													<s:checkboxlist name="sds"  list="{'a','v','h'}" label="请选择你所喜欢的圣斗士"></s:checkboxlist>
-												</span>
-											</fieldset>
-											<fieldset  style="width:250px;">
-												<legend>B<s:checkbox name="aa"></s:checkbox></legend>
-												<s:checkboxlist name="sds"  list="{'a','v','h'}" label="请选择你所喜欢的圣斗士"></s:checkboxlist>
-											</fieldset>
+											<s:iterator value="pointInfoMap" status="pointInfo" >
+												<fieldset  style="width:250px;">
+													<legend><s:property value="key"/> <s:checkbox name="key" ></s:checkbox></legend>
+													<span width="20px">
+														<s:checkboxlist name="params"  list="value" ></s:checkboxlist>
+													</span>
+												</fieldset>
+											</s:iterator>
 										</td>
 									</tr>
 									
-									<s:if test='true'>
+									
+									<s:if test='ruleInfo.resultId==null || ruleInfo.resultId.equals("")'>
 						    			<tr class="resultTr">
 							    			<td height="26" align="right" bgcolor="#FFFFFF">
 							    				<strong>现象<s:property value="#result.index+1"/>：</strong>

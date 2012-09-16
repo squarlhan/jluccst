@@ -16,6 +16,7 @@ import java.util.List;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.boan.rees.device.model.DeviceInfo;
@@ -44,6 +45,7 @@ import com.boan.rees.utils.action.BaseActionSupport;
  * @version 1.1, May 1, 2012
  */
 @Controller( "failureDiagnosisAction" )
+@Scope("prototype")
 public class FailureDiagnosisAction extends BaseActionSupport
 {
 

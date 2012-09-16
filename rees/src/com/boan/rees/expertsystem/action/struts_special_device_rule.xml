@@ -11,11 +11,30 @@
     		<result name="success">/expertsystem/devicerule/special_device_rule_list.jsp</result>
     		<result name="input">/expertsystem/devicerule/special_device_rule_list.jsp</result>
     	</action>
-    	<action name="openAddSpecialDeviceRuleAction" class="specialDeviceRuleAction" method="openAddDeviceRule">
+    	<action name="openAddSpecialDeviceRuleAction" class="specialDeviceRuleAction" method="openAddDeviceRuleInfo">
     		<result name="success">/expertsystem/devicerule/special_device_rule_info.jsp</result>
     		<result name="input">/expertsystem/devicerule/special_device_rule_info.jsp</result>
     	</action>
-      </package>	    
+    	
+    	<!-- 添加规则类型 -->
+    	<action name="toAddDeviceRuleInfoAction"  class="specialDeviceRuleAction" method="toAddDeviceRuleInfo">
+    		<result name="success">/expertsystem/devicerule/special_device_rule_info.jsp</result>
+    		<result name="input">/expertsystem/devicerule/special_device_rule_info.jsp</result>
+    	</action>
       
-	
+    	<!-- 打开修改规则类型列表 -->
+    	<action name="openModifyDeviceRuleInfoAction" class="specialDeviceRuleAction" method="openModifyDeviceRuleInfo">
+    		<result name="success">/expertsystem/devicerule/special_device_rule_info.jsp</result>
+    		<result name="input">/expertsystem/devicerule/special_device_rule_info.jsp</result>
+    	</action>
+    	<!-- 修改规则类型列表 -->
+    	<action name="toModifyDeviceRuleInfoAction" class="specialDeviceRuleAction" method="toModifyDeviceRuleInfo">
+    		<result name="success">/expertsystem/devicerule/special_device_rule_info.jsp</result>
+    		<result name="input">/expertsystem/devicerule/special_device_rule_info.jsp</result>
+    	</action>
+    	<action name="deleteDeviceRuleInfoAction" class="specialDeviceRuleAction" method="deleteDeviceRuleInfo">
+    	</action>
+    	<!-- 删除现象 -->
+    	<action name="toDeleteResult4SpecialDeviceRuleAction" class="specialDeviceRuleAction" method="toDeleteResult4SpecialDeviceRule"/>
+      </package>	    
 </struts>
