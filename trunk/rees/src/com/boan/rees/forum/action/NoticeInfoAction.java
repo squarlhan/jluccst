@@ -99,10 +99,11 @@ public class NoticeInfoAction extends BaseActionSupport {
 		if(forumInfo != null)
 		{
 			noticeInfo.setNoticeTitle( "论坛中：["+forumInfo.getIssueName()+"]需要您参与！" );
-			noticeInfo.setNoticeContent( "论坛中：["+forumInfo.getIssueName()+"]需要您参与！<br/>内容：" +forumInfo.getIssueContent() );
+			noticeInfo.setNoticeContent( "论坛中：["+forumInfo.getIssueName()+"]需要您参与！内容：" +forumInfo.getIssueContent() );
 		}
 		
 		noticeInfo.setNoticePublishtime( Calendar.getInstance() );
+		noticeInfo.setForumIssueId( issueId );
 		try{
 			noticeInfoService.save( noticeInfo );
 			
