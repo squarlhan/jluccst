@@ -67,6 +67,17 @@ public class NoticeInfo implements Serializable {
 	 */
 	@Column(name = "PUBLISHER_DEPT")
 	private String publisherDept;
+	@Column(name = "FORUMISSUEID")
+	private String forumIssueId = "";
+	public String getForumIssueId()
+	{
+		return forumIssueId;
+	}
+
+	public void setForumIssueId( String forumIssueId )
+	{
+		this.forumIssueId = forumIssueId;
+	}
 
 	public String getId() {
 		return id;
