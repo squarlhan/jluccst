@@ -146,6 +146,12 @@
 									</table>
 								</td>
 							</tr>
+								<%} %>
+								<%
+									sub = popedomService.isHasPopedom( us.getUserId(), String.valueOf( us.getUserType() ), MenuKey.SUB_TE_SHU_SHE_BEI_GUI_ZE, us.getPopedomKeys() );
+									if( b && sub )
+									{
+								%>
 							<tr>
 								<td align="left">
 									<table width="100%" border="0" cellspacing="5" cellpadding="0">
@@ -186,6 +192,11 @@
 									</table>
 								</td>
 							</tr>
+							<%
+									sub = popedomService.isHasPopedom( us.getUserId(), String.valueOf( us.getUserType() ), MenuKey.SUB_GUI_ZE_XIAN_XIANG, us.getPopedomKeys() );
+									if( b && sub )
+									{
+								%>
 							<tr>
 								<td align="left">
 									<table width="100%" border="0" cellspacing="5" cellpadding="0">
@@ -203,6 +214,12 @@
 							<tr>
 								<td height="1" align="left" background="images/menubg2.jpg"></td>
 							</tr>
+							<%} %>
+							<%
+									sub = popedomService.isHasPopedom( us.getUserId(), String.valueOf( us.getUserType() ), MenuKey.SUB_GUI_ZE_YUAN_YIN, us.getPopedomKeys() );
+									if( b && sub )
+									{
+								%>
 							<tr>
 								<td align="left">
 									<table width="100%" border="0" cellspacing="5" cellpadding="0">
@@ -220,6 +237,12 @@
 							<tr>
 								<td height="1" align="left" background="images/menubg2.jpg"></td>
 							</tr>
+							<%} %>
+							<%
+									sub = popedomService.isHasPopedom( us.getUserId(), String.valueOf( us.getUserType() ), MenuKey.SUB_GUI_ZE_JIAN_YI, us.getPopedomKeys() );
+									if( b && sub )
+									{
+								%>
 							<tr>
 								<td align="left">
 									<table width="100%" border="0" cellspacing="5" cellpadding="0">
@@ -237,6 +260,12 @@
 							<tr>
 								<td height="1" align="left" background="images/menubg2.jpg"></td>
 							</tr>
+							<%} %>
+							<%
+									sub = popedomService.isHasPopedom( us.getUserId(), String.valueOf( us.getUserType() ), MenuKey.SUB_GUI_ZE_SHE_ZHI, us.getPopedomKeys() );
+									if( b && sub )
+									{
+								%>
 							<tr>
 								<td align="left">
 									<table width="100%" border="0" cellspacing="5" cellpadding="0">
@@ -254,6 +283,12 @@
 							<tr>
 								<td height="1" align="left" background="images/menubg2.jpg"></td>
 							</tr>
+							<%} %>
+							<%
+									sub = popedomService.isHasPopedom( us.getUserId(), String.valueOf( us.getUserType() ), MenuKey.SUB_SHE_BEI_GUI_ZE, us.getPopedomKeys() );
+									if( b && sub )
+									{
+								%>
 							<tr>
 								<td align="left">
 									<table width="100%" border="0" cellspacing="5" cellpadding="0">
@@ -271,6 +306,12 @@
 							<tr>
 								<td height="1" align="left" background="images/menubg2.jpg"></td>
 							</tr>
+							<%} %>
+							<%
+									sub = popedomService.isHasPopedom( us.getUserId(), String.valueOf( us.getUserType() ), MenuKey.SUB_GU_ZHANG_ZHEN_DUAN, us.getPopedomKeys() );
+									if( b && sub )
+									{
+								%>
 							<tr>
 								<td align="left">
 									<table width="100%" border="0" cellspacing="5" cellpadding="0">
@@ -289,6 +330,12 @@
 							<tr>
 								<td height="1" align="left" background="images/menubg2.jpg"></td>
 							</tr>
+							<%} %>
+							<%
+									sub = popedomService.isHasPopedom( us.getUserId(), String.valueOf( us.getUserType() ), MenuKey.SUB_BAO_JING_GUAN_LI, us.getPopedomKeys() );
+									if( b && sub )
+									{
+								%>
 							<tr>
 								<td align="left">
 									<table width="100%" border="0" cellspacing="5" cellpadding="0">
@@ -304,6 +351,15 @@
 									</table>
 								</td>
 							</tr>
+							<tr>
+								<td height="1" align="left" background="images/menubg2.jpg"></td>
+							</tr>
+							<%} %>
+							<%
+									sub = popedomService.isHasPopedom( us.getUserId(), String.valueOf( us.getUserType() ), MenuKey.SUB_BAO_JING_RI_ZHI, us.getPopedomKeys() );
+									if( b && sub )
+									{
+								%>
 							<tr>
 								<td align="left">
 									<table width="100%" border="0" cellspacing="5" cellpadding="0">
@@ -322,6 +378,7 @@
 							<tr>
 								<td height="1" align="left" background="images/menubg2.jpg"></td>
 							</tr>
+							<%} %>
 							<%
 								}
 							%>
