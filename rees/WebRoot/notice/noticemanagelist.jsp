@@ -43,11 +43,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	  		$('a[name="edit"]').each(function(){
 	  			$(this).click(function(){
 	  				var url = $(this).attr("url");
-	  				parent.parent.parent.tipsWindown("查看通知","iframe:"+url,"460","350","true","","true","no");
+	  				//parent.parent.parent.tipsWindown("查看通知","iframe:"+url,"460","350","true","","true","no");
 	  				//window.location.href=window.location.href;
-	  				parent.parent.$("#windown-close").bind('click',function(){
-						window.location.href=window.location.href;
-					});
+	  				//parent.parent.$("#windown-close").bind('click',function(){
+						parent.location.href=url;
+					//});
 	  			});
 	  		});	
 	  		
@@ -68,8 +68,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             <s:iterator value="paginationNotice.data" status="obj">
             <tr>
               <td height="26" bgcolor="#FFFFFF">
-               <s:url id="edit_url" action="openAddNoticeInfoAction">   
-				<s:param name="noticeId" value="id"></s:param>   
+               <s:url id="edit_url" action="openAddForumMessageInfoAction.action">   
+				<s:param name="issueId" value="forumIssueId"></s:param>   
 			      </s:url>
          	  <a name="edit" href="javascript:void(0);" url="${edit_url}"><s:property value="noticeTitle"/></a>  
               </td>
