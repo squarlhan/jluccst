@@ -40,6 +40,7 @@
 	  		$.fn.deviceTypeChange();
 	  		$.fn.dynamicAddOther();
 	  		$.fn.pointSetControl ();
+	  		$.fn.factorTypeControl();
 	  	});
 		
 		/**
@@ -62,6 +63,20 @@
 							}
 						});
 					});
+					
+					$(":radio[name='ruleInfo.factorType']").each(function(){
+						if($(this).attr("checked") && $(this).val()==0){
+							str="";
+							$("fieldset").each(function(){
+								var temp = $(this);
+								if(temp.find(":checkbox[name='key']").attr("checked")){
+									var point = $.trim(temp.find("legend").text());
+									str= str+point+"_";
+								}
+							});
+						}
+					});
+					
 					str = str.substring(0,str.length-1);
 					if(str.length==0){
 						alert( "请选择监测点或监测点参数！");
@@ -69,7 +84,6 @@
 					}else{
 						$("#hid_pointStr").val(str);
 					}
-					
 					if(flag){
 						var arry = new Array(); 
 						var flag=true;
@@ -102,6 +116,7 @@
 					if(!flag){
 						return false;
 					}
+					
 		           	if( $.trim(id) == "" ){
 		           		form1.action = "toAddDeviceRuleInfoAction.action";
 		           	}
@@ -163,45 +178,55 @@
 				}
 			 });
 	 		
-			
-			var pointStr=$("#hid_pointStr").val();
-			if(pointStr!=""){
-				var array = pointStr.split("_");
-				for(var i=0 ;i<array.length;i++){
-					var pointName = array[i].substring(0,1);
-					var paramName =array[i].substring(1,2);
-					
-					$("fieldset").each(function(){
-						var temp = $(this);
-						if ($.trim(temp.find("legend").text())==pointName) {
-							temp.find(":checkbox[name='params']").each(function(){
-									if($.trim($(this).next().text())==paramName){
-										$(this).attr("checked",true);
-									}
-							});
-							
-							var n=0;
-							temp.find(":checkbox[name='params']").each(function(){
-								if ($(this).attr("checked")) {
-									n=n+1;
+			$(":radio[name='ruleInfo.factorType']").each(function(){
+				if($(this).attr("checked") && $(this).val()==0){
+					var pointStr=$("#hid_pointStr").val();
+					if(pointStr!=""){
+						var array = pointStr.split("_");
+						for(var i=0 ;i<array.length;i++){
+							var pointName = array[i];
+							$("fieldset").each(function(){
+								var temp = $(this);
+								if ($.trim(temp.find("legend").text())==pointName) {
+									temp.find(":checkbox[name='key']").attr("checked",true); 
 								}
 							});
-							if(n==temp.find(":checkbox[name='params']").length){
-								temp.find(":checkbox[name='key']").attr("checked",true);
-								temp.find(":checkbox").attr("disabled","disabled");
-								temp.find(":checkbox[name='key']").attr("disabled","");
-							}
 						}
-					});
+					}
+				}else{
+					var pointStr=$("#hid_pointStr").val();
+					if(pointStr!=""){
+						var array = pointStr.split("_");
+						for(var i=0 ;i<array.length;i++){
+							var pointName = array[i].substring(0,1);
+							var paramName =array[i].substring(1,2);
+							
+							$("fieldset").each(function(){
+								var temp = $(this);
+								if ($.trim(temp.find("legend").text())==pointName) {
+									temp.find(":checkbox[name='params']").each(function(){
+											if($.trim($(this).next().text())==paramName){
+												$(this).attr("checked",true);
+											}
+									});
+									
+									var n=0;
+									temp.find(":checkbox[name='params']").each(function(){
+										if ($(this).attr("checked")) {
+											n=n+1;
+										}
+									});
+									if(n==temp.find(":checkbox[name='params']").length){
+										temp.find(":checkbox[name='key']").attr("checked",true);
+										temp.find(":checkbox").attr("disabled","disabled");
+										temp.find(":checkbox[name='key']").attr("disabled","");
+									}
+								}
+							});
+						}
+					}
 				}
-			}
-			
-			
-			
-			
-			
-			
-			
+			});
 			
 			
 			
@@ -347,11 +372,33 @@
 				$(this).find("strong").replaceWith("<strong>现象"+(i+1)+"：</strong>");
 			});
 		};
-		
+		/**
+		 * 控制因子类型
+		 */
+		$.fn.factorTypeControl = function(){
+			$(":radio[name='ruleInfo.factorType']").click(function(){
+				if ($(this).val()==0) {
+					$(":checkbox[name='key']").attr("disabled","");
+					$(":checkbox[name='key']").attr("checked",false);
+					$(":checkbox[name='params']").attr("checked",false);
+					$(":checkbox[name='params']").attr("disabled","disabled");
+				}else{
+					$(":checkbox[name='params']").attr("disabled","");
+					$(":checkbox[name='params']").attr("checked",false);
+					$(":checkbox[name='key']").attr("checked",false);
+					$(":checkbox[name='key']").attr("disabled","disabled");
+				}
+			});
+			var id = $("#hid_ruleId").val();
+           	if( $.trim(id) == "" ){
+				$(":radio[name='ruleInfo.factorType']").get(0).click();
+           	}
+		};
 		/**
 		 * 控制监测点多选框
 		 */
 		$.fn.pointSetControl = function(){
+			/*
 			$("fieldset").each(function(){
 				var temp = $(this);
 				temp.find(":checkbox[name='key']").click(function(){
@@ -364,6 +411,7 @@
 						temp.find(":checkbox").attr("disabled","");
 					}
 				});
+				
 				$(":checkbox[name='params']").click(function(){
 					if ($(this).attr("checked")) {
 						var set = $(this).parent().parent();
@@ -381,7 +429,7 @@
 					}
 				});
 			});
-
+			//*/
 		};
 	</script>
 	</head>
@@ -417,7 +465,14 @@
 											<s:select id="sel_deviceType" list="deviceTypeList" listKey="id" listValue="typeName" headerKey="" headerValue="---请选择---" name="ruleInfo.deviceTypeId" cssStyle="width: 250px;"></s:select><font color="red">*</font>
 										</td>
 									</tr>
-									
+									<tr>
+										<td height="26" align="right" bgcolor="#FFFFFF">
+											<strong>因子类型：</strong>
+										</td>
+										<td height="26" align="left" bgcolor="#FFFFFF">
+											<s:radio name="ruleInfo.factorType" list="#{0:'监测点',1:'监测点参数'}" listKey="key" listValue="value" />
+										</td>
+									</tr>
 									<tr>
 										<td height="26" align="right" bgcolor="#FFFFFF">
 											<strong>监测点：</strong>
