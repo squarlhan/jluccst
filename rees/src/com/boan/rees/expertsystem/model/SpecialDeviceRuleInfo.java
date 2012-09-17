@@ -98,6 +98,12 @@ public class SpecialDeviceRuleInfo  implements Serializable {
 	
 	
 	/**
+	 * 因子类型（0：监测点 1：监测点参数）
+	 */
+	@Column(name = "factor_Type")
+	private int factorType;
+	
+	/**
 	 * 建议描述
 	 */
 	@Transient
@@ -213,6 +219,14 @@ public class SpecialDeviceRuleInfo  implements Serializable {
 	}
 	public void setWorkshopId(String workshopId) {
 		this.workshopId = workshopId;
+	}
+
+	public int getFactorType() {
+		return factorType;
+	}
+
+	public void setFactorType(int factorType) {
+		this.factorType = factorType;
 	}
 }
 
