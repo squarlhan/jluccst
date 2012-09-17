@@ -454,7 +454,7 @@
 											<strong>设备名称：</strong>
 										</td>
 										<td height="26" align="left" bgcolor="#FFFFFF">
-											<s:textfield id="txt_deviceName" name="ruleInfo.deviceName" maxlength="25" cssStyle="width: 250px;"></s:textfield>
+											<s:textfield id="txt_deviceName" name="ruleInfo.deviceName" maxlength="25" cssStyle="width: 250px;" readonly="true"></s:textfield>
 										</td>
 									</tr>
 									<tr>
