@@ -28,23 +28,7 @@ import org.hibernate.annotations.GenericGenerator;
 public class NoticeReadInfo implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	@Id
-	@GenericGenerator(name="system-uuid", strategy="uuid")
-	@GeneratedValue(generator="system-uuid")
-	/**
-	 * 已读通知实体主键
-	 */
-	private String id;
-	/**
-	 * 用户编号
-	 */
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
+	
 
 	public String getNoticeId() {
 		return noticeId;
@@ -62,10 +46,10 @@ public class NoticeReadInfo implements Serializable {
 		this.userId = userId;
 	}
 
-	@Column(name = "NOTICE_ID")
+	@Id
 	private String noticeId;
 
-	@Column(name = "USER_ID")
+	@Id
 	private String userId;
 }
 	
