@@ -48,6 +48,13 @@ public class ThresholdItem implements Serializable {
 	private String thresholdItemName;
 	
 	/**
+	 * 阈值项数据类型 （S：速度  D:位移  A：加速度）
+	 */
+	@Column(name = "DATA_TYPE")
+	private String dataType;
+	
+	
+	/**
 	 * 阈值取值范围表达式（如 ： 20<v<30   其中v为阈值参数名称）
 	 */
 	@Column(name = "Threshold_Item_Expression")
@@ -147,6 +154,14 @@ public class ThresholdItem implements Serializable {
 			}
 		}
 		return troubleIds;
+	}
+
+	public String getDataType() {
+		return dataType;
+	}
+
+	public void setDataType(String dataType) {
+		this.dataType = dataType;
 	}
 
 	public void setTroubleIds(List<String> troubleIds) {
