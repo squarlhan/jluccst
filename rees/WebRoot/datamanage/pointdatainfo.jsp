@@ -67,6 +67,9 @@
 					$.post("savedatainfoajax.action", {status:1, deviceId:$("#deviceId").val(), selectWeek:$("#selectWeek").val(), selectYear:$("#selectYear").val(), datas:str },function(json){
 						if(json.result=="OK"){
 							alert("保存成功！");
+						}else
+						{
+							alert(json.result);
 						}
 			    	});
 				};
