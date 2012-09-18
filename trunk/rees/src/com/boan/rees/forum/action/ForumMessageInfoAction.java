@@ -11,8 +11,10 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 import com.boan.rees.forum.model.ForumIssueInfo;
 import com.boan.rees.forum.model.ForumMessageInfo;
+import com.boan.rees.forum.model.NoticeReadInfo;
 import com.boan.rees.forum.service.IForumIssueInfoService;
 import com.boan.rees.forum.service.IForumMessageInfoService;
+import com.boan.rees.forum.service.INoticeReadInfoService;
 import com.boan.rees.utils.action.BaseActionSupport;
 import com.boan.rees.utils.page.Pagination;
 
@@ -42,6 +44,10 @@ public class ForumMessageInfoAction extends BaseActionSupport {
 	@Autowired
 	@Qualifier("forumIssueInfoService")
 	private IForumIssueInfoService forumIssueInfoService;
+	
+	@Autowired
+	@Qualifier("noticeReadInfoService")
+	private INoticeReadInfoService noticeReadInfoService;
 	/**
 	 * 定义一个实体用于添加/修改页的数据绑定和显示
 	 */
@@ -54,6 +60,20 @@ public class ForumMessageInfoAction extends BaseActionSupport {
 	 * 话题Id
 	 */
 	private String issueId = "";
+	/**
+	 * 通知Id
+	 */
+	private String noticeId = "";
+	
+	public String getNoticeId()
+	{
+		return noticeId;
+	}
+	public void setNoticeId( String noticeId )
+	{
+		this.noticeId = noticeId;
+	}
+
 	/**
 	 * 话题对象信息
 	 */
@@ -76,6 +96,16 @@ public class ForumMessageInfoAction extends BaseActionSupport {
 	 */
 	public String openAddForumMessageInfo(){
 		//System.out.println("如果添加页需要做一些初始化操作 ，在这写代码！");
+		
+		if(noticeId != null && noticeId.length() > 0)
+		{
+			NoticeReadInfo noticeReadInfo = new NoticeReadInfo();
+			noticeReadInfo.setNoticeId( noticeId );
+			noticeReadInfo.setUserId( sessionUserId );
+			
+			noticeReadInfoService.save( noticeReadInfo );
+		}
+		
 		
 		forumIssueInfo = forumIssueInfoService.get( issueId );
 		forumIssueInfo.setIssueContent( forumIssueInfo.getIssueContent().replaceAll( "\r\n", "<br/>" ) );
