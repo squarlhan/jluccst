@@ -146,6 +146,9 @@
 									</table>
 								</td>
 							</tr>
+							<tr>
+								<td height="1" align="left" background="images/menubg2.jpg"></td>
+							</tr>
 								<%} %>
 								<%
 									sub = popedomService.isHasPopedom( us.getUserId(), String.valueOf( us.getUserType() ), MenuKey.SUB_TE_SHU_SHE_BEI_GUI_ZE, us.getPopedomKeys() );
