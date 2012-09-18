@@ -44,7 +44,7 @@
 			 * 添加阈值项
 			 */
 			$("#addbtn").click(function(){
-				parent.parent.tipsWindown("添加阈值项","iframe:openAddThresholdItemAction.action","450","250","true","","true","no");
+				parent.parent.tipsWindown("添加阈值项","iframe:openAddThresholdItemAction.action","480","250","true","","true","no");
 				parent.parent.$("#windown-close").bind('click',function(){
 					window.location.href=window.location.href;
 				});
@@ -56,7 +56,7 @@
 			$('a[name="edit"]').each(function(){
 				$(this).click(function(){
 					var url = $(this).attr("url");
-					parent.parent.tipsWindown("修改阈值项","iframe:"+url,"450","250","true","","true","no");
+					parent.parent.tipsWindown("修改阈值项","iframe:"+url,"480","250","true","","true","no");
 					parent.parent.$("#windown-close").bind('click',function(){
 						window.location.href=window.location.href;
 					});
@@ -117,6 +117,9 @@
 									<strong>阈值项区间</strong>
 								</td>
 								<td align="center" background="<%=path %>/images/headerbg.jpg">
+									<strong>数据类型</strong>
+								</td>
+								<td align="center" background="<%=path %>/images/headerbg.jpg">
 									<strong>是否报警</strong>
 								</td>
 								<td width="15%" align="center" background="<%=path %>/images/headerbg.jpg">
@@ -138,6 +141,12 @@
 									</td>
 									<td height="26" align="center" bgcolor="#FFFFFF">
 										<s:property value="thresholdItemExpression" />
+										&nbsp;
+									</td>
+									<td height="26" align="center" bgcolor="#FFFFFF">
+										<s:if test='dataType=="S"' >速度</s:if>
+										<s:if test='dataType=="D"' >位移</s:if>
+										<s:if test='dataType=="A"'  >加速度</s:if>
 										&nbsp;
 									</td>
 									<td height="26" align="center" bgcolor="#FFFFFF">

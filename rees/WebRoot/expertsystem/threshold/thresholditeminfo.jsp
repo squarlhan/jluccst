@@ -43,12 +43,17 @@
 	  	 */
 		var _thresholdItem_submit = {
 			rules: {
-               "thresholdItem.thresholdItemName":{required:true,maxlength:20}
+               "thresholdItem.thresholdItemName":{required:true,maxlength:20},
+               "thresholdItem.dataType":{required:true}
 			},messages:{
 				"thresholdItem.thresholdItemName":
 				{
 					required:"阈值项名称为必填项！",
 					maxlength:"阈值项名称最多输入20个字符！"
+				},
+				"thresholdItem.dataType":
+				{
+					required:"请选择数据类型！"
 				}
 			}
 		};
@@ -71,6 +76,30 @@
 			})
 			$.fn.save();
 	  		$.fn.close();
+	  		if($("#sel_dataType").val()=="S"){
+	  			$("#unit").html("mm/s");
+	  		}else if($("#sel_dataType").val()=="D"){
+	  			$("#unit").html("mm");
+	  		}else if($("#sel_dataType").val()=="A"){
+	  			$("#unit").html("mm/s2");
+	  		}else{
+	  			$("#unit").html("");
+	  		}
+	  		
+	  		$("#sel_dataType").change(function(){
+	  			if($(this).val()=="S"){
+	  				$("#unit").html("mm/s");
+	  			}
+	  			if($(this).val()=="D"){
+	  				$("#unit").html("mm");
+	  			}
+	  			if($(this).val()=="A"){
+	  				$("#unit").html("mm/s2");
+	  			}
+	  			if($(this).val()==""){
+	  				$("#unit").html("");
+	  			}
+	  		});
 
 	  	});
 		
@@ -152,7 +181,15 @@
 											<s:textfield id="txt_thresholdItemName" name="thresholdItem.thresholdItemName" maxlength="25" cssStyle="width: 250px;"/><font color="red">*</font>
 										</td>
 									</tr>
-									
+									<tr>
+										<td height="26" align="right" bgcolor="#FFFFFF">
+											<strong>数据类型：</strong>
+										</td>
+										<td height="26" align="left" bgcolor="#FFFFFF" nowrap="nowrap">
+												<s:select id="sel_dataType" list="#{'S':'速度','D':'位移','A':'加速度'}"  headerKey="" headerValue="---请选择---" name="thresholdItem.dataType" cssStyle="width: 250px;"></s:select><font color="red">*</font>
+												<b id='unit'></b>
+										</td>
+									</tr>
 									<tr>
 										<td height="26" align="right" bgcolor="#FFFFFF">
 											<strong>所属阈值：</strong>
