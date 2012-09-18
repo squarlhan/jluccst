@@ -70,7 +70,8 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
               <td height="26" bgcolor="#FFFFFF">
                <s:url id="edit_url" action="openAddForumMessageInfoAction.action">   
 				<s:param name="issueId" value="forumIssueId"></s:param>   
-			      </s:url>
+				<s:param name="noticeId" value="id"></s:param>  
+			  </s:url>
          	  <a name="edit" href="javascript:void(0);" url="${edit_url}"><s:property value="noticeTitle"/></a>  
               </td>
                <td height="26" align="center" bgcolor="#FFFFFF">
