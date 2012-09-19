@@ -42,7 +42,8 @@
 					"device.controlpoint":{digits:true},
 	                "device.centerHeight":{required:true,number:true},
 	                "device.speed":{required:true,number:true},
-	                "device.power":{required:true,number:true}
+	                "device.power":{required:true,number:true},
+	                "device.dataType":{required:true}
 				},messages:{
 					"device.deviceNum":
 					{
@@ -56,6 +57,10 @@
 					"device.deviceFactory":
 					{
 						maxlength:"设备厂商最多输入20个字符！"
+					},
+					"device.dataType":
+					{
+						required:"请选择数据类型！"
 					},
 					"device.deviceName":
 					{
