@@ -12,13 +12,6 @@
 	<!--
 	$(document).ready(function() {
 		//监测点数据维护
-		$("#addpointdata").click(function() {
-			parent.parent.parent.tipsWindown("监测点数据维护", "iframe:datamanage/pointdatainfo.action?deviceId=<s:property value='deviceId'/>&selectYear=" + $("#yearlist").val() + "&selectWeek=" + $("#weeklist").val(), "480", "320", "true", "", "true", "", "auto");
-			parent.parent.parent.$("#windown-close").bind('click',function(){
-				window.location.href="datamanage/pointdatalist.action?deviceId=<s:property value='deviceId'/>&selectYear=" + $("#yearlist").val() + "&selectWeek=" + $("#weeklist").val();
-			});
-		});
-		//监测点数据维护
 		$("#showdevicepic").click(function() {
 			parent.parent.parent.tipsWindown("设备图", "iframe:datamanage/deviceimage.action?deviceId=<s:property value='deviceId'/>&selectYear=" + $("#yearlist").val() + "&selectWeek=" + $("#weeklist").val(), "600", "473", "true", "", "true", "", "auto");
 		});
@@ -81,6 +74,9 @@
 								<input id="showdevicepic" class="btn_4" type="button" value="打开设备图" />
 								<input id="showstat" class="btn_4" type="button" value="查看柱状图"  />
 								<input id="showstatline" class="btn_4" type="button" value="查看线状图"  />
+							</td>
+							<td align="right">
+								（<s:property value="dataTypeString"/>）
 							</td>
 						</tr>
 					</table>

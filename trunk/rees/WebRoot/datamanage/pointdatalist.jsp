@@ -83,6 +83,9 @@
 								<input id="showstatline" class="btn_4" type="button" value="查看线状图"  />
 								<input class="btn_5" type="button" value="监测点数据维护" id="addpointdata" />
 							</td>
+							<td align="right">
+								（<s:property value="dataTypeString"/>）
+							</td>
 						</tr>
 					</table>
 					<s:iterator value="pointRelations" status="st">
