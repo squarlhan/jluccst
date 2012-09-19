@@ -109,6 +109,31 @@
 		  		$.fn.initpage();
 		  		$.fn.download();
 		  		$.fn.deviceTypeChange();
+		  		
+		  		if($("#sel_dataType").val()=="S"){
+		  			$("#unit").html("mm/s");
+		  		}else if($("#sel_dataType").val()=="D"){
+		  			$("#unit").html("mm");
+		  		}else if($("#sel_dataType").val()=="A"){
+		  			$("#unit").html("mm/s2");
+		  		}else{
+		  			$("#unit").html("");
+		  		}
+		  		
+		  		$("#sel_dataType").change(function(){
+		  			if($(this).val()=="S"){
+		  				$("#unit").html("mm/s");
+		  			}
+		  			if($(this).val()=="D"){
+		  				$("#unit").html("mm");
+		  			}
+		  			if($(this).val()=="A"){
+		  				$("#unit").html("mm/s2");
+		  			}
+		  			if($(this).val()==""){
+		  				$("#unit").html("");
+		  			}
+		  		});
 		  	});
 			/**
 		  	 * 保存
@@ -314,7 +339,15 @@
 											<s:textfield id="txt_deviceModel" name="device.deviceModel"  maxlength="25" cssStyle="width: 250px;"></s:textfield>
 										</td>
 									</tr>
-									
+									<tr>
+										<td height="26" align="right" bgcolor="#FFFFFF">
+											<strong>数据类型：</strong>
+										</td>
+										<td height="26" align="left" bgcolor="#FFFFFF" nowrap="nowrap">
+												<s:select id="sel_dataType" list="#{'S':'速度','D':'位移','A':'加速度'}"  headerKey="" headerValue="---请选择---" name="device.dataType" cssStyle="width: 250px;"></s:select><font color="red">*</font>
+												<b id='unit'></b>
+										</td>
+									</tr>
 									<tr>
 										<td height="26" align="right" bgcolor="#FFFFFF">
 											<strong>设备类型：</strong>
