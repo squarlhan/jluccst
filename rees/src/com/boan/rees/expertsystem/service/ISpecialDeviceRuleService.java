@@ -30,5 +30,6 @@ public interface ISpecialDeviceRuleService {
 	 * @return
 	 */
 	public List<String> findSpecialDeviceRuleStrByDeviceId(String deviceId);
+	public List<SpecialDeviceRuleInfo> findSpecialDeviceRuleByDeviceId(String deviceId);
 }
 
