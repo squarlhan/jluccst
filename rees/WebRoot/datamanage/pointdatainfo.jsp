@@ -85,6 +85,8 @@
 	</head>
 	<body style="padding: 5px;">
 		<form name="form1" method="post">
+			<div style="float:right">（<s:property value="dataTypeString"/>）</div>
+			<div style="clear:both;"></div>
 			<s:iterator value="pointRelations" status="st">
 			<fieldset style="margin:3px;">
 				<legend>
