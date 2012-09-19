@@ -131,6 +131,12 @@ public class DeviceInfo implements Serializable {
 	@Column(name = "POWER")
 	private BigDecimal power;
 	
+	/**
+	 * 数据类型 （S：速度  D:位移  A：加速度）
+	 */
+	@Column(name = "DATA_TYPE")
+	private String dataType;
+	
 //	/**
 //	 * 监测点正常值 
 //	 */
@@ -268,6 +274,12 @@ public class DeviceInfo implements Serializable {
 	public void setCompanyId( String companyId )
 	{
 		this.companyId = companyId;
+	}
+	public String getDataType() {
+		return dataType;
+	}
+	public void setDataType(String dataType) {
+		this.dataType = dataType;
 	}
 }
 
