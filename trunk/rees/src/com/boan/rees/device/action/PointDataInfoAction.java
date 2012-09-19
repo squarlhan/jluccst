@@ -146,11 +146,21 @@ public class PointDataInfoAction extends BaseActionSupport {
 	private String caption;
 	private String chart;
 	
+	private String dataTypeString;
+	
 	/**
 	 * 获得监测数据列表
 	 * @return
 	 */
 	public String pointDataInfoList(){
+		DeviceInfo deviceInfo = deviceInfoService.get( deviceId );
+		String dataType = deviceInfo.getDataType();
+		if("S".equalsIgnoreCase(dataType))
+			dataTypeString = "速度 mm/s";
+		if("D".equalsIgnoreCase(dataType))
+			dataTypeString = "位移 mm";
+		if("A".equalsIgnoreCase(dataType))
+			dataTypeString = "加速度 mm/s2";
 		//初始化下拉列表
 		int thisYear = Calendar.getInstance().get(Calendar.YEAR);
 		int thisWeek = CalendarUtils.getWeekOfYear(Calendar.getInstance());
@@ -210,6 +220,14 @@ public class PointDataInfoAction extends BaseActionSupport {
 	public String pointDataInfo(){
 		//获得监测点信息
 		if(StringUtils.trimToNull(deviceId)!=null){
+			DeviceInfo deviceInfo = deviceInfoService.get( deviceId );
+			String dataType = deviceInfo.getDataType();
+			if("S".equalsIgnoreCase(dataType))
+				dataTypeString = "速度 mm/s";
+			if("D".equalsIgnoreCase(dataType))
+				dataTypeString = "位移 mm";
+			if("A".equalsIgnoreCase(dataType))
+				dataTypeString = "加速度 mm/s2";
 			pointInfos = pointInfoService.findPointInfosByDeviceId(deviceId);
 			if(pointInfos!=null && pointInfos.size()>0){
 				PointRelation pr = null;
@@ -959,6 +977,20 @@ public class PointDataInfoAction extends BaseActionSupport {
 	 */
 	public void setPointId(String pointId) {
 		this.pointId = pointId;
+	}
+
+	/**
+	 * @return the dataTypeString
+	 */
+	public String getDataTypeString() {
+		return dataTypeString;
+	}
+
+	/**
+	 * @param dataTypeString the dataTypeString to set
+	 */
+	public void setDataTypeString(String dataTypeString) {
+		this.dataTypeString = dataTypeString;
 	}
 	
 }
