@@ -36,8 +36,8 @@
 <body>
 <table id="__01" width="100%" height="100%" border="0" cellpadding="0" cellspacing="0">
 <tr>
-		<td align="center">
-			<img src="images/desktop_01.jpg" width="700" height="420" alt=""></td>
+		<td align="center" style="background-color: #f1f1f1">
+			<img src="images/desktop_01.jpg" width="790" height="420" alt=""></td>
 		<td>&nbsp;</td>
   </tr>
 </table>
