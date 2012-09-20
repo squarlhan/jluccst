@@ -22,7 +22,6 @@
 	request.setCharacterEncoding( "utf-8" );
 	String path = request.getContextPath();
 %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -35,11 +34,11 @@
 </style>
 </head>
 <body>
-<table id="__01" width="100%" height="505" border="0" cellpadding="0" cellspacing="0">
+<table id="__01" width="100%" height="100%" border="0" cellpadding="0" cellspacing="0">
 <tr>
-		<td width="841">
-			<img src="images/desktop_01.jpg" width="841" height="505" alt=""></td>
-		<td background="images/desktop_02.jpg">&nbsp;</td>
+		<td align="center">
+			<img src="images/desktop_01.jpg" width="700" height="420" alt=""></td>
+		<td>&nbsp;</td>
   </tr>
 </table>
 </body>
