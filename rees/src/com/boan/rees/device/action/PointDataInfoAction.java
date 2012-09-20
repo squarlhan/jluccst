@@ -371,7 +371,7 @@ public class PointDataInfoAction extends BaseActionSupport {
 								List<ThresholdItem> thresholdItem = threshold.getThresholdItems();
 								String expression = null;
 								for (ThresholdItem item : thresholdItem) {
-									if(!item.getDataType().equals( dataType ))
+									if(dataType == null || !item.getDataType().equals( dataType ))
 									{
 										break;
 									}
