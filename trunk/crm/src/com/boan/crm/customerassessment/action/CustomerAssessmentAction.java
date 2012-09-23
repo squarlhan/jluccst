@@ -97,6 +97,8 @@ public class CustomerAssessmentAction extends BaseActionSupport{
 				analysisCustomer.setIntroduceCustomerTime(customer.getIntroduceTimes());
 			}
 			
+			analysisCustomer.setCompanyId(sessionCompanyId);
+			
 			customerList.add(analysisCustomer);
 		}
 		
