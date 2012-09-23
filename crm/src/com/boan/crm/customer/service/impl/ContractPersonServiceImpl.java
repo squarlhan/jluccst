@@ -16,6 +16,7 @@ import com.boan.crm.customer.dao.ICustomerInfoDAO;
 import com.boan.crm.customer.model.ContractPersonInfo;
 import com.boan.crm.customer.model.CustomerInfo;
 import com.boan.crm.customer.service.IContractPersonService;
+import com.boan.crm.sms.service.ISMSCustomerInfoService;
 import com.boan.crm.utils.page.Pagination;
 
 /**
@@ -27,6 +28,10 @@ public class ContractPersonServiceImpl implements IContractPersonService {
 	@Autowired
 	@Qualifier("contractPersonDao")
 	private IContractPersonDAO contractPersonDao;
+	@Autowired
+	@Qualifier("SMSCustomerInfoService")
+	private ISMSCustomerInfoService  smsCustomerService ;
+	
 	@Override
 	public void deleteContractPersonInfo(String... ids) {
 		contractPersonDao.delete(ids);
@@ -70,7 +75,7 @@ public class ContractPersonServiceImpl implements IContractPersonService {
 	}
 
 	@Override
-	public void save(ContractPersonInfo table1) {
-		contractPersonDao.saveOrUpdate(table1);
+	public void save(ContractPersonInfo person) {
+		contractPersonDao.saveOrUpdate(person);
 	}
 }
