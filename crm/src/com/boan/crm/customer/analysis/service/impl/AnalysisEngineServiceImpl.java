@@ -32,7 +32,7 @@ import com.boan.crm.customer.analysis.utils.MathFunction;
 public class AnalysisEngineServiceImpl implements IAnalysisEngineService{
 	private AnalysisCustomer enter = null;
 	private List<FuzzyInfo> resultList = null;
-	
+	private String companyId = "";
 
 	@Autowired
 	@Qualifier("fuzzyInfoService")
@@ -56,7 +56,7 @@ public class AnalysisEngineServiceImpl implements IAnalysisEngineService{
 			if(enter.getTotalConsumption() != null && !enter.getTotalConsumption().equals(BigDecimal.ZERO)) //是否等于0)
 			{
 				double totalConsumption = Double.parseDouble(enter.getTotalConsumption().toString());
-				List<FuzzyInfo> listTotalConsumption =  fuzzyInfoService.findAllFuzzyInfoByCategory(FuzzyCategory.TOTAL_CONSUMPTION);
+				List<FuzzyInfo> listTotalConsumption =  fuzzyInfoService.findAllFuzzyInfoByCategory(FuzzyCategory.TOTAL_CONSUMPTION,companyId);
 				for(int i=0;i<listTotalConsumption.size();i++)
 				{
 					FuzzyInfo obj = listTotalConsumption.get(i);
@@ -82,7 +82,7 @@ public class AnalysisEngineServiceImpl implements IAnalysisEngineService{
 			if(enter.getConsumptionTimes() > 0)
 			{
 				double consumptionTimes = Double.parseDouble(String.valueOf(enter.getConsumptionTimes()));
-				List<FuzzyInfo> listConsumptionTimes =  fuzzyInfoService.findAllFuzzyInfoByCategory(FuzzyCategory.TOTAL_CONSUMPTION);
+				List<FuzzyInfo> listConsumptionTimes =  fuzzyInfoService.findAllFuzzyInfoByCategory(FuzzyCategory.TOTAL_CONSUMPTION,companyId);
 				for(int i=0;i<listConsumptionTimes.size();i++)
 				{
 					FuzzyInfo obj = listConsumptionTimes.get(i);
@@ -108,7 +108,7 @@ public class AnalysisEngineServiceImpl implements IAnalysisEngineService{
 			if(enter.getIntroduceCustomerTime() > 0)
 			{
 				double introduceTimes = Double.parseDouble(String.valueOf(enter.getIntroduceCustomerTime()));
-				List<FuzzyInfo> listIntroduceTimes =  fuzzyInfoService.findAllFuzzyInfoByCategory(FuzzyCategory.INTRODUCE_COSTOMER);
+				List<FuzzyInfo> listIntroduceTimes =  fuzzyInfoService.findAllFuzzyInfoByCategory(FuzzyCategory.INTRODUCE_COSTOMER,companyId);
 				for(int i=0;i<listIntroduceTimes.size();i++)
 				{
 					FuzzyInfo obj = listIntroduceTimes.get(i);
@@ -134,7 +134,7 @@ public class AnalysisEngineServiceImpl implements IAnalysisEngineService{
 			if(enter.getDevelopDegree() > 0)
 			{
 				double devopDegree = Double.parseDouble(String.valueOf(enter.getDevelopDegree()));
-				List<FuzzyInfo> listDevopDegree =  fuzzyInfoService.findAllFuzzyInfoByCategory(FuzzyCategory.DEVOLOP_DEGREE);
+				List<FuzzyInfo> listDevopDegree =  fuzzyInfoService.findAllFuzzyInfoByCategory(FuzzyCategory.DEVOLOP_DEGREE,companyId);
 				for(int i=0;i<listDevopDegree.size();i++)
 				{
 					FuzzyInfo obj = listDevopDegree.get(i);
@@ -281,13 +281,20 @@ public class AnalysisEngineServiceImpl implements IAnalysisEngineService{
 		return calculateResultList;
 	}
 
+	public String getCompanyId() {
+		return companyId;
+	}
+	public void setCompanyId(String companyId) {
+		this.companyId = companyId;
+	}
 	public AnalysisCustomer getEnter() {
 		return enter;
 	}
 
 	public void setEnter(AnalysisCustomer enter) {
 		this.enter = enter;
-		resultList = fuzzyInfoService.findAllFuzzyInfoByCategory(FuzzyCategory.RESULT);
+		this.companyId = enter.getCompanyId();
+		resultList = fuzzyInfoService.findAllFuzzyInfoByCategory(FuzzyCategory.RESULT,companyId);
 	}
 
 	public List<FuzzyInfo> getResultList() {

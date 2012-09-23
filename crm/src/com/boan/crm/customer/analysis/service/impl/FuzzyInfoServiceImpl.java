@@ -27,11 +27,12 @@ public class FuzzyInfoServiceImpl implements IFuzzyInfoService{
 	/**
 	 * 根据分类获取模糊项
 	 */
-	public List<FuzzyInfo> findAllFuzzyInfoByCategory(String category)
+	public List<FuzzyInfo> findAllFuzzyInfoByCategory(String category,String companyId)
 	{
 		Map<String,String> idMap = new HashMap<String,String>();
 		idMap.put("fuzzyCategory", category);
-		return fuzzyInfoDao.find("from FuzzyInfo where fuzzyCategory = :fuzzyCategory", idMap);
+		idMap.put("companyId", companyId);
+		return fuzzyInfoDao.find("from FuzzyInfo where fuzzyCategory = :fuzzyCategory and companyId = :companyId", idMap);
 	}
 
 	/**
