@@ -117,7 +117,7 @@ public class FuzzyRuleInfoAction extends BaseActionSupport{
 		
 		categoryList = FuzzyCategory.getFuzzyCatetoryNoResult();
 
-		listResultFuzzy = fuzzyInfoService.findAllFuzzyInfoByCategory(FuzzyCategory.getResultFuzzyCatetory().get(0).getId());
+		listResultFuzzy = fuzzyInfoService.findAllFuzzyInfoByCategory(FuzzyCategory.getResultFuzzyCatetory().get(0).getId(),sessionCompanyId);
 		
 		
 		

@@ -113,7 +113,7 @@ public class FuzzyInfoAction extends BaseActionSupport{
 	public String fuzzyList()
 	{
 		//模糊项分类： 传0
-		listFuzzyInfo = fuzzyInfoService.findAllFuzzyInfoByCategory(fuzzyCategory);
+		listFuzzyInfo = fuzzyInfoService.findAllFuzzyInfoByCategory(fuzzyCategory,sessionCompanyId);
 		return SUCCESS;
 	}
 	
