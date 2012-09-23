@@ -15,7 +15,7 @@ public interface IFuzzyInfoService {
 	/**
 	 * 根据分类获取模糊项
 	 */
-	public List<FuzzyInfo> findAllFuzzyInfoByCategory(String category);
+	public List<FuzzyInfo> findAllFuzzyInfoByCategory(String category,String companyId);
 
 	/**
 	 * 根据id获取模糊项

@@ -18,6 +18,13 @@ public class AnalysisCustomer {
 	private int paymentsTimes = 0;
 	private BigDecimal payments;
 	private double developDegree = 0;
+	private String companyId = "";
+	public String getCompanyId() {
+		return companyId;
+	}
+	public void setCompanyId(String companyId) {
+		this.companyId = companyId;
+	}
 	public String getId() {
 		return id;
 	}

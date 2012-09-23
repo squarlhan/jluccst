@@ -52,7 +52,14 @@ public class FuzzyInfo implements Serializable
 	private double fourthValue = 0;
 	@Column(name = "SUGENO")
 	private double sugeno = 0;
-	
+	@Column(name = "COMPANY_ID")
+	private String companyId = "";
+	public String getCompanyId() {
+		return companyId;
+	}
+	public void setCompanyId(String companyId) {
+		this.companyId = companyId;
+	}
 	public double getSugeno() {
 		return sugeno;
 	}
