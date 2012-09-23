@@ -39,7 +39,6 @@ public class CustomerAssessmentServiceImpl implements ICustomerAssessmentService
 		assessment.setCustomerName(customer.getCustomerName());
 		assessment.setResultValue(value);
 		assessment.setResult(result);
-		
 		return assessment;
 	}
 	
