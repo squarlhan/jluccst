@@ -34,11 +34,13 @@
 </style>
 </head>
 <body>
-<table id="__01" width="100%" height="100%" border="0" cellpadding="0" cellspacing="0">
-<tr>
-		<td align="center" style="background-color: #f1f1f1">
-			<img src="images/desktop_01.jpg" width="790" height="420" alt=""></td>
-		<td>&nbsp;</td>
+<table width="100%" height="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td style="background-image:url(images/desktop_01_4_02.jpg); background-repeat:repeat-x; background-position:left bottom; background-color:#549de0;"><table id="__01" width="100%" height="100%" border="0" cellpadding="0" cellspacing="0">
+      <tr>
+        <td align="center" style="background-image:url(images/desktop_01_4_01.jpg); background-repeat:no-repeat; background-position:left bottom;">&nbsp;</td>
+      </tr>
+    </table></td>
   </tr>
 </table>
 </body>
