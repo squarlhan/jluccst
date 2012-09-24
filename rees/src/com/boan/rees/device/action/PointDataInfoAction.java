@@ -509,7 +509,7 @@ public class PointDataInfoAction extends BaseActionSupport {
 							//如果特殊规则未匹配上，但还是有报警数据，则需要走通用规则库
 							if(!bSpecialRuleMatch && bSpecialRuleError)
 							{
-								Inference(pointDataList,threshold,dataType);
+								Inference(pointDataList,threshold,dataType,deviceInfo);
 							}else
 							{
 								if(!findAllItemFlag)
@@ -539,7 +539,7 @@ public class PointDataInfoAction extends BaseActionSupport {
 						return SUCCESS;
 					}else
 					{
-						Inference(pointDataList,threshold,dataType);
+						Inference(pointDataList,threshold,dataType,deviceInfo);
 					}
 				}
 			}
@@ -552,9 +552,10 @@ public class PointDataInfoAction extends BaseActionSupport {
 	 * @param pointDataList
 	 * @param threshold
 	 * @param dataType
+	 * @param device
 	 * @return　String
 	 */
-	private String Inference(List<PointDataInfo> pointDataList, Threshold threshold,String dataType)
+	private String Inference(List<PointDataInfo> pointDataList, Threshold threshold,String dataType,DeviceInfo device)
 	{
 		String returnStr = "";
 		List<RuleInfo> listRule = ruleInfoService.findAllRuleInfo();
@@ -641,7 +642,7 @@ public class PointDataInfoAction extends BaseActionSupport {
 								
 								for(int kk = 0;kk<item.getTroubles().size();kk++)
 								{
-									if (item.getTroubles().get(kk).getDeviceTypeId().equals(deviceInfo.getDeviceTypeId()))
+									if (item.getTroubles().get(kk).getDeviceTypeId().equals(device.getDeviceTypeId()))
 									{
 										BackwardandResult enter = new BackwardandResult();
 										enter.setId( "result" + item.getTroubleIds().get( kk ) );
@@ -693,16 +694,16 @@ public class PointDataInfoAction extends BaseActionSupport {
 										}
 										//返回结果，记录报警日志
 										ErrorLog errorLog = new ErrorLog();
-										String companyId = deviceInfo.getCompanyId();
-										String factoryId =  deviceInfo.getFactoryId();
-										String workshopId = deviceInfo.getWorkshopId();
+										String companyId = device.getCompanyId();
+										String factoryId =  device.getFactoryId();
+										String workshopId = device.getWorkshopId();
 										errorLog.setDeptName( groupService.getGroupFullName( companyId, factoryId, workshopId ) );
-										String errMsg  = deviceInfo.getDeviceName() + ":监测点[" + pointInfoService.get( (pointDataList.get( k ).getPointId())).getControlPointName()+"]";
+										String errMsg  = device.getDeviceName() + ":监测点[" + pointInfoService.get( (pointDataList.get( k ).getPointId())).getControlPointName()+"]中的["+ pointParamInfoService.get( pointDataList.get( k ).getParamId()).getName() + "]";
 										errorLog.setDeviceName( errMsg );
 										result = result + errMsg;
 										
 										errorLog.setIsRemove( 0 );
-										errorLog.setDeviceNum( deviceInfo.getDeviceNum() );
+										errorLog.setDeviceNum( device.getDeviceNum() );
 										errorLog.setErrorTime( Calendar.getInstance() );
 										result = result + ",报警数据：" + Float.parseFloat( pointDataList.get( k ).getDataInfo() );
 										errorLog.setErrorData( Float.parseFloat( pointDataList.get( k ).getDataInfo() ) );
@@ -728,19 +729,19 @@ public class PointDataInfoAction extends BaseActionSupport {
 				//System.out.println("＝＝＝＝＝2.正常＝＝＝＝＝");
 				//记录日志
 				ErrorLog errorLog = new ErrorLog();
-				String companyId = deviceInfo.getCompanyId();
-				String factoryId = deviceInfo.getFactoryId();
-				String workshopId = deviceInfo.getWorkshopId();
+				String companyId = device.getCompanyId();
+				String factoryId = device.getFactoryId();
+				String workshopId = device.getWorkshopId();
 				
 				errorLog.setDeptName( groupService.getGroupFullName( companyId, factoryId, workshopId ) );
-				errorLog.setDeviceName( deviceInfo.getDeviceName() );
+				errorLog.setDeviceName( device.getDeviceName() );
 				errorLog.setIsRemove( 1 );
-				errorLog.setDeviceNum( deviceInfo.getDeviceNum() );
+				errorLog.setDeviceNum( device.getDeviceNum() );
 				errorLog.setErrorTime( Calendar.getInstance() );
 				errorLog.setIsAlarm( 0 );
 				errorLogService.save( errorLog );
 				
-				result = "诊断日志：设备["+deviceInfo.getDeviceName()+"]数据正常";
+				result = "诊断日志：设备["+device.getDeviceName()+"]数据正常";
 			}
 			
 			returnStr = SUCCESS;
