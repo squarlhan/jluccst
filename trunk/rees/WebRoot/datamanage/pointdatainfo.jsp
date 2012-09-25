@@ -114,7 +114,7 @@
 				<s:hidden name="deviceId" id="deviceId" />
 				<s:hidden name="selectYear" id="selectYear" />
 				<s:hidden name="selectWeek" id="selectWeek" />
-				<input id="saveBtn" type="button" value="保存" class="btn_2_3" />
+				<!-- input id="saveBtn" type="button" value="保存" class="btn_2_3" / -->
 				<input id="saveOverBtn" type="button" value="录入完毕" class="btn_4" />
 				<input id="closeBtn" type="button" value="关闭" class="btn_2_3" />
 			</center>
