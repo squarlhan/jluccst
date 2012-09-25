@@ -853,10 +853,15 @@ public class PointDataInfoAction extends BaseActionSupport {
 			}
 		}		
 		sb.append("<?xml version='1.0' encoding='gb2312'?>");
-		if(StringUtils.trimToNull(alarmSb.toString())!=null)
-			sb.append("<graph xAxisName='" + alarmSb.toString() + "超出警报范围 ( " + alarm + " )' yAxisName='threshold' baseFontSize='12' subCaption='监测点运行数据'");
-		else
-			sb.append("<graph xAxisName='( 一切正常运行 )' yAxisName='threshold' baseFontSize='12' subCaption='监测点运行数据'");
+		
+		//输出报警信息
+		//if(StringUtils.trimToNull(alarmSb.toString())!=null)
+		//	sb.append("<graph xAxisName='" + alarmSb.toString() + "超出警报范围 ( " + alarm + " )' yAxisName='threshold' baseFontSize='12' subCaption='监测点运行数据'");
+		//else
+		//	sb.append("<graph xAxisName='( 一切正常运行 )' yAxisName='threshold' baseFontSize='12' subCaption='监测点运行数据'");
+		//修改完后将下面这一行删除，使用上面的代码
+		sb.append("<graph xAxisName='' yAxisName='threshold' baseFontSize='12' subCaption='监测点运行数据'");
+		
 		sb.append(" rotateNames='1' numDivLines='4'>");
 		sb.append(tempSb);
 		sb.append("</graph>");
