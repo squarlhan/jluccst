@@ -461,6 +461,10 @@ public class ReportAction extends BaseActionSupport{
 	 */
 	public String toDownloadReportAttachment() throws UnsupportedEncodingException, FileNotFoundException{
 		ServletContext servletContext = ServletActionContext.getServletContext();
+		String id = report.getId();
+		if(id!=null && !id.equals("")){
+			report = service.get(id);
+		}
 		//获取服务器上图片的保存路径
 		String fileAllName = servletContext.getRealPath(report.getFilePath());
 		File file = new File(fileAllName);
@@ -519,7 +523,14 @@ public class ReportAction extends BaseActionSupport{
 								 String bookMark = props.getProperty(key);
 								 //使用反射获取属性的get方法 ,用于得到对象中的值
 								 Method getMethod = report.getClass().getMethod("get"+key);
-								 String bookMarkValue =  ( getMethod.invoke(report) instanceof Calendar) ? (new SimpleDateFormat( "yyyy-MM-dd")).format(((Calendar)getMethod.invoke(report)).getTime()) : getMethod.invoke(report).toString();
+								 String bookMarkValue = "";
+								 if(getMethod.invoke(report)!=null  &&  getMethod.invoke(report) instanceof Calendar ) {
+									 bookMarkValue= (new SimpleDateFormat( "yyyy-MM-dd")).format(((Calendar)getMethod.invoke(report)).getTime()) ;
+								} else if ( getMethod.invoke(report)!=null ){
+									bookMarkValue=getMethod.invoke(report).toString();
+								}else{
+									bookMarkValue="";
+								}
 								 System.out.println(key + " : "+ props.getProperty(key) );
 								 map.put(bookMark,bookMarkValue);
 							}
