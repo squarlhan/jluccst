@@ -103,6 +103,13 @@
 				row.find("input[type='hidden']").val("");
 				row.find("input[type='text']").val("");
 				$("#table1 tr:last").before(row);
+				$('input[name="id"]').each(function(){
+					var val = $(this).val();
+					if(val==""){
+						$("#warn").html("");
+						return false;
+					}
+				});
 			});
 			
 			/**
@@ -121,7 +128,14 @@
 			if(message!=null && $.trim(message)!="" ){
 				alert(message);
 			}
-		}
+			$('input[name="id"]').each(function(){
+				var val = $(this).val();
+				if(val==""){
+					$("#warn").html("<font color='red'>信息尚未保存，请保存！</font>");
+					return false;
+				}
+			});
+		};
 		
 		/**
 		 * 删除原有非第一个检测点并移除页面元素
@@ -131,6 +145,7 @@
 				$.post("toDeletePointParamAction.action", {pointId:id}, function(data){});
 				obj.parent().parent().remove();
 				$.fn.columnRename();
+				var flag=false;
 			}
 		}
 		
@@ -156,6 +171,13 @@
 			if(window.confirm("您确定要删除此参数吗？")){
 				obj.parent().parent().remove();
 				$.fn.columnRename();
+				$('input[name="id"]').each(function(){
+					var val = $(this).val();
+					if(val==""){
+						$("#warn").html("");
+						return false;
+					}
+				});
 			}
 		}
 		/**
@@ -176,7 +198,7 @@
 		<s:hidden id="hid_pointId" name="pointId"></s:hidden>
 		<table width="100%" border="0" cellspacing="5" cellpadding="0">
 			<tr>
-				<td>
+				<td align="center" >
 					<table width="100%" style="height: 100%;" border="0"
 						cellspacing="6" cellpadding="0">
 						<tr>
@@ -213,6 +235,7 @@
 							</td>
 						</tr>
 					</table>
+					<div id="warn"></div>
 				</td>
 			</tr>
 		</table>
