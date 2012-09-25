@@ -669,6 +669,9 @@ public class DeviceInfoAction extends BaseActionSupport{
 			PointParamInfo a = new PointParamInfo("a");
 			PointParamInfo v = new PointParamInfo("v");
 			PointParamInfo h = new PointParamInfo("h");
+//			pointParamInfoService.save(a);
+//			pointParamInfoService.save(v);
+//			pointParamInfoService.save(h);
 			pointParamInfoList.add(a);
 			pointParamInfoList.add(v);
 			pointParamInfoList.add(h);
