@@ -87,7 +87,32 @@
 
 		$.fn.checkall("cbk_all");
 		$.fn.uncheckall("ids","cbk_all");
+		
+		
+		/**
+		 * 删除单个报表
+		 */
+		$('a[name="download"]').each(function(){
+			$(this).click(function(){
+				var url = $(this).attr("url");
+				var oldAction = replist.action;
+				replist.action = url;
+				replist.submit();
+				replist.action = oldAction;
+			});
+		});
+		
+		$('a[name="export"]').each(function(){
+			$(this).click(function(){
+				var url = $(this).attr("url");
+				var oldAction = replist.action;
+				replist.action = url;
+				replist.submit();
+				replist.action = oldAction;
+			});
+		});
   	});
+	
 </script>
 </head>
 <body>
@@ -133,14 +158,25 @@
 		  	<s:date  name="reportDate" format="yyyy-MM-dd" />&nbsp;
 		  	</td>
 		  
-		  <td height="26" colspan="2" align="center" bgcolor="#FFFFFF">
+		  <td height="26" colspan="2" align="left" bgcolor="#FFFFFF">
           	<s:url id="edit_url" action="openModifyReportAction">   
 				<s:param name="report.id" value="id"></s:param>   
 			</s:url>
 			<s:url id="delete_url" action="deleteReportAction">   
 				<s:param name="ids" value="id"></s:param>   
 			</s:url>
+			<s:url id="download_url" action="toDownloadReportAttachmentAction">   
+				<s:param name="report.filePath" value="filePath"></s:param>   
+				<s:param name="report.id" value="id"></s:param>   
+			</s:url>
+			<s:url id="export_url" action="toExportReportAction">   
+				<s:param name="report.id" value="id"></s:param>   
+			</s:url>
          	<a name="edit" href="javascript:void(0);" url="${edit_url}">编辑</a>  
+         	<a name="export" href="javascript:void(0);" url="${export_url}">导出</a>  
+         	<s:if test='filePath!=null  &&filePath!=""'>
+         		<a name="download" href="javascript:void(0);" url="${download_url}">附件</a>  
+         	</s:if>
          	<a name="delete" href="javascript:void(0);" url="${delete_url}">删除</a>  
           </td>
 	    </tr>
