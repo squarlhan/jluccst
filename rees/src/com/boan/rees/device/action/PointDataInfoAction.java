@@ -799,11 +799,13 @@ public class PointDataInfoAction extends BaseActionSupport {
 		
 		List<PointInfo> pis= null;
 		Threshold threshold = null;
+		String dataType=null;
 		if(StringUtils.trimToNull(deviceId)!=null){
 			//获得监测点
 			pis = pointInfoService.findPointInfosByDeviceId(deviceId);
 			//获得设置对象
 			DeviceInfo deviceInfo =	deviceInfoService.get(deviceId);
+			dataType = deviceInfo.getDataType();
 			//根据设备中心高和转速获得阈值区间列表
 			threshold = thresholdService.getThresholdByCenterHeightAndSpeed(deviceInfo.getCenterHeight().toString(), deviceInfo.getSpeed().toString());
 		}
@@ -830,12 +832,14 @@ public class PointDataInfoAction extends BaseActionSupport {
 									List<ThresholdItem> thresholdItem = threshold.getThresholdItems();
 									String expression = null;
 									for (ThresholdItem item : thresholdItem) {
+										if(dataType == null || !item.getDataType().equals( dataType )){
+											break;
+										}
 										expression = item.getThresholdItemExpression();
 										if(item.getSign()==1){
-											if(ExpressionCompare.compare(expression, "V", pdi.getDataInfo())){
+											if(ExpressionCompare.compare(expression, item.getThresholdItemName(),pdi.getDataInfo())){
 												isAlarm = true;
-												alarmSb.append(pointInfo.getControlPointName() + ppi.getName() + ",");
-												alarm = expression;
+												break;
 											}
 										}
 									}
@@ -853,14 +857,8 @@ public class PointDataInfoAction extends BaseActionSupport {
 			}
 		}		
 		sb.append("<?xml version='1.0' encoding='gb2312'?>");
-		
-		//输出报警信息
-		//if(StringUtils.trimToNull(alarmSb.toString())!=null)
-		//	sb.append("<graph xAxisName='" + alarmSb.toString() + "超出警报范围 ( " + alarm + " )' yAxisName='threshold' baseFontSize='12' subCaption='监测点运行数据'");
-		//else
-		//	sb.append("<graph xAxisName='( 一切正常运行 )' yAxisName='threshold' baseFontSize='12' subCaption='监测点运行数据'");
-		//修改完后将下面这一行删除，使用上面的代码
-		sb.append("<graph xAxisName='' yAxisName='threshold' baseFontSize='12' subCaption='监测点运行数据'");
+	
+		sb.append("<graph xAxisName='绿色正常，红色预警' yAxisName='threshold' baseFontSize='12' subCaption='监测点运行数据'");
 		
 		sb.append(" rotateNames='1' numDivLines='4'>");
 		sb.append(tempSb);
