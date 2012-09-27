@@ -28,7 +28,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<title>设备离线监测系统</title>
+		<title>设备状态监测系统</title>
 		<j:scriptlink css="true" jquery="true"/>
 		<style type="text/css">
 		<!--
@@ -52,6 +52,9 @@
 		<script type="text/javascript">
 			$(document).ready(function() {
 				$("#username").focus();
+				$("#showdate").click(function(){
+					window.open("datamanage/datamanageview.jsp");
+				});
 			});
 			function logon() {
 				if ($.trim($("#username").val()) == "") {
@@ -111,7 +114,7 @@
 							<td height="159" colspan="2" rowspan="2" background="images/login_12.png">&nbsp;</td>
 					  </tr>
 						<tr>
-							<td height="131" colspan="2" background="images/login_13.png">&nbsp;</td>
+							<td height="131" colspan="2" background="images/login_13.png" valign="top"><div style="padding-top:10px;"><input id="showdate" type="button" value="数据查询" class="btn_2_3" /></div></td>
 							<td height="131" colspan="2" background="images/login_14.png">&nbsp;</td>
 					  </tr>
 						<tr>
