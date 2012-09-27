@@ -13,15 +13,27 @@
 	$(document).ready(function() {
 		//监测点数据维护
 		$("#showdevicepic").click(function() {
-			parent.parent.parent.tipsWindown("设备图", "iframe:datamanage/deviceimage.action?deviceId=<s:property value='deviceId'/>&selectYear=" + $("#yearlist").val() + "&selectWeek=" + $("#weeklist").val(), "600", "473", "true", "", "true", "", "auto");
+			var ifrHeight = $("#path",parent.parent.parent.document).height();
+			if(ifrHeight==0)
+				parent.parent.parent.tipsWindown("设备图", "iframe:datamanage/deviceimage.action?deviceId=<s:property value='deviceId'/>&selectYear=" + $("#yearlist").val() + "&selectWeek=" + $("#weeklist").val(), "600", "473", "true", "", "true", "", "auto");
+			else
+				parent.parent.tipsWindown("设备图", "iframe:datamanage/deviceimage.action?deviceId=<s:property value='deviceId'/>&selectYear=" + $("#yearlist").val() + "&selectWeek=" + $("#weeklist").val(), "600", "473", "true", "", "true", "", "auto");
 		});
 		//打开统计图
 		$("#showstat").click(function(){
-			parent.parent.parent.tipsWindown("柱状图", "iframe:datamanage/devicestat.action?deviceId=<s:property value='deviceId'/>&selectYear=" + $("#yearlist").val() + "&selectWeek=" + $("#weeklist").val(), "700", "673", "true", "", "true", "", "auto");
+			var ifrHeight = $("#path",parent.parent.parent.document).height();
+			if(ifrHeight!=0)
+				parent.parent.tipsWindown("柱状图", "iframe:datamanage/devicestat.action?deviceId=<s:property value='deviceId'/>&selectYear=" + $("#yearlist").val() + "&selectWeek=" + $("#weeklist").val(), "700", "673", "true", "", "true", "", "auto");
+			else
+				parent.parent.parent.tipsWindown("柱状图", "iframe:datamanage/devicestat.action?deviceId=<s:property value='deviceId'/>&selectYear=" + $("#yearlist").val() + "&selectWeek=" + $("#weeklist").val(), "700", "673", "true", "", "true", "", "auto");
 		});
 		//打开线状图
 		$("#showstatline").click(function(){
-			parent.parent.parent.tipsWindown("线状图", "iframe:datamanage/devicestatline.action?deviceId=<s:property value='deviceId'/>", "870", "673", "true", "", "true", "", "auto");
+			var ifrHeight = $("#path",parent.parent.parent.document).height();
+			if(ifrHeight!=0)
+				parent.parent.tipsWindown("线状图", "iframe:datamanage/devicestatline.action?deviceId=<s:property value='deviceId'/>", "870", "673", "true", "", "true", "", "auto");
+			else
+				parent.parent.parent.tipsWindown("线状图", "iframe:datamanage/devicestatline.action?deviceId=<s:property value='deviceId'/>", "870", "673", "true", "", "true", "", "auto");
 		});
 		//日期选择
 		$("#yearlist").change(function(){
