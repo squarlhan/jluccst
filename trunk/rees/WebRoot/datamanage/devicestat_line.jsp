@@ -11,7 +11,7 @@
 	<!--
 	$(document).ready(function() {
 		$("#gotoBtn").click(function() {
-			window.location.href="devicestatline.action?deviceId=" + $("#deviceId").val() + "&pointId=" + $("#pointlist").val() + "&selectYear=" + $("#yearlist").val() + "&selectFromWeek=" + $("#weekfromlist").val() + "&selectWeek=" + $("#weektolist").val() + "";
+			window.location.href="${pageContext.request.contextPath}/datamanage/devicestatline.action?deviceId=" + $("#deviceId").val() + "&pointId=" + $("#pointlist").val() + "&selectYear=" + $("#yearlist").val() + "&selectFromWeek=" + $("#weekfromlist").val() + "&selectWeek=" + $("#weektolist").val() + "";
 		});
 	});
 	//-->
@@ -29,8 +29,8 @@
 	</div>
 	<div id="chartdiv" align="center"></div>
 	<script type="text/javascript">
-		var chart = new FusionCharts("../js/FusionCharts/Charts/FCF_MSLine.swf", "ChartId", "820", "490");
-		chart.setDataURL("datamanage/deviceColumnStatLineAction.action?chart=<s:property value='pointId'/>|<s:property value='selectYear'/>|<s:property value='selectFromWeek'/>|<s:property value='selectWeek'/>");
+		var chart = new FusionCharts("${pageContext.request.contextPath}/js/FusionCharts/Charts/FCF_MSLine.swf", "ChartId", "820", "490");
+		chart.setDataURL("${pageContext.request.contextPath}/datamanage/deviceColumnStatLineAction.action?chart=<s:property value='pointId'/>|<s:property value='selectYear'/>|<s:property value='selectFromWeek'/>|<s:property value='selectWeek'/>");
 		chart.render("chartdiv");
 	</script>
 </body>

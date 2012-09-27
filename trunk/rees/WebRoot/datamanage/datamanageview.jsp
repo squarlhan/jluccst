@@ -4,7 +4,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title></title>
-<j:scriptlink css="true" jquery="true" />
+<j:scriptlink css="true" jquery="true" tipswindow="true"/>
 <script type="text/javascript">
 $(document).ready(function() {
 	var ifrHeight = $("#mainFrame",parent.parent.document).height();
