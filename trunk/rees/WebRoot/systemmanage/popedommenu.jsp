@@ -42,7 +42,7 @@
 		d.add(101,0,'数据管理','<%=url%>?menuKey=<%=MenuKey.SHU_JU_GUAN_LI%>','','groupmain');
 		
 		d.add(1011,101,'数据管理','<%=url%>?menuKey=<%=MenuKey.SUB_SHU_JU_GUAN_LI%>','','groupmain');
-		d.add(1013,101,'设备查看','<%=url%>?menuKey=<%=MenuKey.SHU_JU_CHA_KAN%>','','groupmain');
+		d.add(1013,101,'数据查看','<%=url%>?menuKey=<%=MenuKey.SHU_JU_CHA_KAN%>','','groupmain');
 		d.add(1012,101,'设备管理','<%=url%>?menuKey=<%=MenuKey.SUB_SHE_BEI_GUAN_LI%>','','groupmain');
 		d.add(1014,101,'特殊设备规则管理','<%=url%>?menuKey=<%=MenuKey.SUB_TE_SHU_SHE_BEI_GUI_ZE%>','','groupmain');
 		
