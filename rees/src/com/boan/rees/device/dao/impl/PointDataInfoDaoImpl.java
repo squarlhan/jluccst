@@ -22,7 +22,7 @@ public class PointDataInfoDaoImpl extends BaseDao<PointDataInfo, String>
 
 	@Override
 	public PointDataInfo get(String year, String week, String paramId) {
-		String hql = "from PointDataInfo where paramId=? and dataYear=? and weekofYear=?";
+		String hql = "from PointDataInfo where deviceId=? and dataYear=? and weekofYear=?";
 		List<PointDataInfo> list = this.find(hql, new Object[] { paramId, Integer.parseInt(year), Integer.parseInt(week) });
 		if(list!=null&&list.size()==1)
 			return list.get(0);
@@ -40,4 +40,10 @@ public class PointDataInfoDaoImpl extends BaseDao<PointDataInfo, String>
 		this.executeHql(hql, map);
 	}
 
+	@Override
+	public List<PointDataInfo> listByDeviceId(String year, String week, String deviceId) {
+		String hql = "from PointDataInfo where deviceId=? and dataYear=? and weekofYear=?";
+		List<PointDataInfo> list = this.find(hql, new Object[] { deviceId, Integer.parseInt(year), Integer.parseInt(week) });
+		return list;
+	}
 }
