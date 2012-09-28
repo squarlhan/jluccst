@@ -108,6 +108,7 @@ public class ForumIssueInfoAction extends BaseActionSupport {
 			if(isSendNotice.equals( "true" ))
 			{
 				NoticeInfo noticeInfo = new NoticeInfo();
+				noticeInfo.setForumIssueId( forumIssueInfo.getId() );
 				noticeInfo.setPublisher( sessionUserCName ); 
 				String dept = "";
 				if(sessionCompanyName != null && sessionCompanyName.length() > 0)
