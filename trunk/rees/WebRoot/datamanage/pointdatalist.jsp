@@ -115,7 +115,7 @@
 								<input name="showdevicepic" dataId="<s:property value='id'/>" class="btn_4" type="button" value="打开设备图" />
 								<input name="showstat" dataId="<s:property value='id'/>" class="btn_4" type="button" value="查看柱状图"  />
 								<input class="btn_5" type="button" dataId="<s:property value='id'/>" value="修改监测点数据" name="showpointdata" />
-								<input name="delbtn" class="btn_4" type="button" dataId="<s:property value='id'/>" value="删除数据"  />
+								<!-- input name="delbtn" class="btn_4" type="button" dataId="<s:property value='id'/>" value="删除数据"  /-->
 								</td><td style="text-align:right">
 								录入时间：<s:property value="creatTimeString"/>
 								</td></tr></table>
