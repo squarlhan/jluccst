@@ -26,7 +26,7 @@
     	 	<!-- 配置fileUpload的拦截器 -->
             <interceptor-ref name="fileUpload">
 		    	<!-- 配置允许上传的文件大小 1MB = 1024KB = 1024*1024 = 1048576-->
-				<param name="maximumSize">20971520</param> 
+				<param name="maximumSize">209715200</param> 
 			</interceptor-ref> 
 	        <interceptor-ref name="defaultStack"/>
 	        <interceptor-ref name="fileUploadStack"/>
@@ -51,7 +51,7 @@
     		<!-- 配置fileUpload的拦截器 -->
             <interceptor-ref name="fileUpload">
 		    	<!-- 配置允许上传的文件大小 1MB = 1024KB = 1024*1024 = 1048576-->
-				<param name="maximumSize">20971520</param> 
+				<param name="maximumSize">209715200</param> 
 			</interceptor-ref> 
 	        <interceptor-ref name="defaultStack"/>
 	        <interceptor-ref name="fileUploadStack"/>
@@ -100,7 +100,7 @@
 		    	<!-- 配置允许上传的文件类型 -->
 		        <param name="allowedTypes">application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document</param> 
 		    	<!-- 配置允许上传的文件大小 1MB = 1024KB = 1024*1024 = 1048576-->
-				<param name="maximumSize">20971520</param> 
+				<param name="maximumSize">209715200</param> 
 			</interceptor-ref> 
 	        <interceptor-ref name="defaultStack"/>
 	        <interceptor-ref name="fileUploadStack"/>
