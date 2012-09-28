@@ -362,6 +362,10 @@ public class GroupTreeAction extends BaseActionSupport
 			b = popedomService.isHasPopedom(userSession.getUserId(), String.valueOf(userSession.getUserType()),
 					popedomKey, userSession.getPopedomKeys() );
 		}
+		else
+		{
+			b = true;
+		}
 		return b;
 	}
 	/**
