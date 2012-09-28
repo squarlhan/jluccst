@@ -26,9 +26,9 @@
 				//直接显示提示
 				$(this).poshytip('show');
 				$(document).find("span[name='dataspan']").each(function(index,domEle){
-					$.getJSON("${pageContext.request.contextPath}/datamanage/getdataajax.action?rnd=" + Math.random(),{ paramId:$(this).attr("paramid"), selectWeek:$("#selectWeek").val(), selectYear:$("#selectYear").val() }, function(json){
-						if(json.pointDataInfo!=null){
-							$(domEle).html(json.pointDataInfo.dataInfo);
+					$.getJSON("${pageContext.request.contextPath}/datamanage/getdataajax.action?rnd=" + Math.random(),{ paramId:$(this).attr("paramid"), pointDataId:$("#pointDataId").val() }, function(json){
+						if(json.pointDataValueInfo!=null){
+							$(domEle).html(json.pointDataValueInfo.dataInfo);
 						}else{
 							$(domEle).html("");
 						}
@@ -56,8 +56,6 @@
 			</div>
    		</s:iterator>
 	</div>
-	<s:hidden name="deviceId" id="deviceId" />
-	<s:hidden name="selectYear" id="selectYear" />
-	<s:hidden name="selectWeek" id="selectWeek" />
+	<s:hidden name="pointDataId" id="pointDataId" />
 </body>
 </html>

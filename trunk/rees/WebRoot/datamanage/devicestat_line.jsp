@@ -30,7 +30,7 @@
 	<div id="chartdiv" align="center"></div>
 	<script type="text/javascript">
 		var chart = new FusionCharts("${pageContext.request.contextPath}/js/FusionCharts/Charts/FCF_MSLine.swf", "ChartId", "820", "490");
-		chart.setDataURL("${pageContext.request.contextPath}/datamanage/deviceColumnStatLineAction.action?chart=<s:property value='pointId'/>|<s:property value='selectYear'/>|<s:property value='selectFromWeek'/>|<s:property value='selectWeek'/>");
+		chart.setDataURL("${pageContext.request.contextPath}/datamanage/deviceColumnStatLineAction.action?chart=<s:property value='pointId'/>|<s:property value='selectYear'/>|<s:property value='selectFromWeek'/>|<s:property value='selectWeek'/>|<s:property value='deviceId'/>");
 		chart.render("chartdiv");
 	</script>
 </body>
