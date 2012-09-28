@@ -47,7 +47,7 @@ public class PointDataInfoServiceImpl implements IPointDataInfoService{
 	 */
 	@Override
 	public void save(PointDataInfo table1) {
-		pointDataInfoDao.save(table1);
+		pointDataInfoDao.saveOrUpdate(table1);
 		
 	}
 	/**
@@ -71,6 +71,11 @@ public class PointDataInfoServiceImpl implements IPointDataInfoService{
 	@Override
 	public void delete(String deviceId, String year, String week) {
 		pointDataInfoDao.delete(deviceId, year, week);
+	}
+	@Override
+	public List<PointDataInfo> listByDeviceId(String year, String week,
+			String deviceId) {
+		return pointDataInfoDao.listByDeviceId(year, week, deviceId);
 	}
 
 }

@@ -16,6 +16,8 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import com.boan.rees.utils.calendar.CalendarUtils;
+
 /**
  * 监测点数据实体类
  * 
@@ -40,24 +42,6 @@ public class PointDataInfo implements Serializable {
 	 */
 	@Column(name = "DEVICE_ID")
 	private String deviceId;
-
-	/**
-	 * 监测点编号，外键
-	 */
-	@Column(name = "POINT_ID")
-	private String pointId;
-
-	/**
-	 * 监测点编号，外键
-	 */
-	@Column(name = "PARAM_ID")
-	private String paramId;
-
-	/**
-	 * 参数数据信息
-	 */
-	@Column(name = "DATA_INFO")
-	private String dataInfo;
 
 	/**
 	 * 所属年度
@@ -110,30 +94,6 @@ public class PointDataInfo implements Serializable {
 		this.deviceId = deviceId;
 	}
 
-	public String getPointId() {
-		return pointId;
-	}
-
-	public void setPointId(String pointId) {
-		this.pointId = pointId;
-	}
-
-	public String getParamId() {
-		return paramId;
-	}
-
-	public void setParamId(String paramId) {
-		this.paramId = paramId;
-	}
-
-	public String getDataInfo() {
-		return dataInfo;
-	}
-
-	public void setDataInfo(String dataInfo) {
-		this.dataInfo = dataInfo;
-	}
-
 	public Integer getDataYear() {
 		return dataYear;
 	}
@@ -180,5 +140,9 @@ public class PointDataInfo implements Serializable {
 
 	public void setUpdateTime(Calendar updateTime) {
 		this.updateTime = updateTime;
+	}
+	
+	public String getCreatTimeString(){
+		return CalendarUtils.toLongString(creatTime);
 	}
 }

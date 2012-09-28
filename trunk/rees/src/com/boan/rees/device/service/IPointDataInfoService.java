@@ -53,4 +53,13 @@ public interface IPointDataInfoService {
 	 * @param week
 	 */
 	public void delete(String deviceId, String year, String week);
+	
+	/**
+	 * 获得指定设备周日期的监测点数据
+	 * @param year
+	 * @param week
+	 * @param deviceId
+	 * @return
+	 */
+	public List<PointDataInfo> listByDeviceId(String year, String week, String deviceId);
 }
