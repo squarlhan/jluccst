@@ -375,7 +375,7 @@ public class PointDataInfoAction extends BaseActionSupport {
 								for (ThresholdItem item : thresholdItem) {
 									if(dataType == null || !item.getDataType().equals( dataType ))
 									{
-										break;
+										continue;
 									}
 									expression = item.getThresholdItemExpression();
 									if(ExpressionCompare.compare(expression, item.getThresholdItemName(), pointDataList.get( k ).getDataInfo()))
@@ -628,7 +628,7 @@ public class PointDataInfoAction extends BaseActionSupport {
 				for (ThresholdItem item : thresholdItem) {
 					if(!item.getDataType().equals( dataType ))
 					{
-						break;
+						continue;
 					}
 					expression = item.getThresholdItemExpression();
 					if(ExpressionCompare.compare(expression, item.getThresholdItemName(), pointDataList.get( k ).getDataInfo())){
@@ -833,7 +833,7 @@ public class PointDataInfoAction extends BaseActionSupport {
 									String expression = null;
 									for (ThresholdItem item : thresholdItem) {
 										if(dataType == null || !item.getDataType().equals( dataType )){
-											break;
+											continue;
 										}
 										expression = item.getThresholdItemExpression();
 										if(item.getSign()==1){
