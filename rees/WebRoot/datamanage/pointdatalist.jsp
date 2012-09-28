@@ -13,18 +13,33 @@
 	$(document).ready(function() {
 		//监测点数据维护
 		$("#addpointdata").click(function() {
-			parent.parent.parent.tipsWindown("监测点数据维护", "iframe:datamanage/pointdatainfo.action?deviceId=<s:property value='deviceId'/>&selectYear=" + $("#yearlist").val() + "&selectWeek=" + $("#weeklist").val(), "480", "320", "true", "", "true", "", "auto");
+			parent.parent.parent.tipsWindown("添加监测点数据", "iframe:datamanage/pointdatainfo.action?deviceId=<s:property value='deviceId'/>&selectYear=" + $("#yearlist").val() + "&selectWeek=" + $("#weeklist").val(), "480", "320", "true", "", "true", "", "auto");
 			parent.parent.parent.$("#windown-close").bind('click',function(){
 				window.location.href="datamanage/pointdatalist.action?deviceId=<s:property value='deviceId'/>&selectYear=" + $("#yearlist").val() + "&selectWeek=" + $("#weeklist").val();
 			});
 		});
+		$(document).find("input[name='showpointdata']").click(function() {
+			parent.parent.parent.tipsWindown("修改监测点数据", "iframe:datamanage/pointdatainfo.action?pointDataId=" + $(this).attr("dataId") + "&deviceId=<s:property value='deviceId'/>&selectYear=" + $("#yearlist").val() + "&selectWeek=" + $("#weeklist").val(), "480", "320", "true", "", "true", "", "auto");
+			parent.parent.parent.$("#windown-close").bind('click',function(){
+				window.location.href="datamanage/pointdatalist.action?deviceId=<s:property value='deviceId'/>&selectYear=" + $("#yearlist").val() + "&selectWeek=" + $("#weeklist").val();
+			});
+		});
+		$(document).find("input[name='delbtn']").click(function(){
+			if(confirm("确定要删除当前监测点数据吗？")){
+				$("#pointDataId").val($(this).attr("dataId"));
+				$("#selectYear").val($("#yearlist").val());
+				$("#selectWeek").val($("#weekList").val());
+				form1.action="deletedatainfo.action" ;
+				form1.submit();
+			}
+		});
 		//监测点数据维护
-		$("#showdevicepic").click(function() {
-			parent.parent.parent.tipsWindown("设备图", "iframe:datamanage/deviceimage.action?deviceId=<s:property value='deviceId'/>&selectYear=" + $("#yearlist").val() + "&selectWeek=" + $("#weeklist").val(), "600", "473", "true", "", "true", "", "auto");
+		$(document).find("input[name='showdevicepic']").click(function() {
+			parent.parent.parent.tipsWindown("设备图", "iframe:datamanage/deviceimage.action?deviceId=<s:property value='deviceId'/>&pointDataId=" + $(this).attr("dataId"), "600", "473", "true", "", "true", "", "auto");
 		});
 		//打开统计图
-		$("#showstat").click(function(){
-			parent.parent.parent.tipsWindown("柱状图", "iframe:datamanage/devicestat.action?deviceId=<s:property value='deviceId'/>&selectYear=" + $("#yearlist").val() + "&selectWeek=" + $("#weeklist").val(), "700", "673", "true", "", "true", "", "auto");
+		$(document).find("input[name='showstat']").click(function(){
+			parent.parent.parent.tipsWindown("柱状图", "iframe:datamanage/devicestat.action?deviceId=<s:property value='deviceId'/>&pointDataId=" + $(this).attr("dataId"), "700", "673", "true", "", "true", "", "auto");
 		});
 		//打开线状图
 		$("#showstatline").click(function(){
@@ -42,21 +57,22 @@
 						else
 							$("#weeklist").prepend("<option value='" + json.weekList[i].value + "'>" + json.weekList[i].text + "</option>");
 					}
+					window.location.href="datamanage/pointdatalist.action?deviceId=" + $("#deviceId").val() + "&selectYear=" + $("#yearlist").val() + "&selectWeek=" + $("#weeklist").val();
 				}
-				reloadList();
 	    	});
 		});
 		//周选择
 		$("#weeklist").change(function(){
-			reloadList();
+			window.location.href="datamanage/pointdatalist.action?deviceId=" + $("#deviceId").val() + "&selectYear=" + $("#yearlist").val() + "&selectWeek=" + $("#weeklist").val();
 		});
 		reloadList();
 		//加载数据
 		function reloadList(){
 			$(document).find("span[name='dataspan']").each(function(index,domEle){
-				$.getJSON("getdataajax.action",{ paramId:$(this).attr("paramid"), selectWeek:$("#weeklist").val(), selectYear:$("#yearlist").val() }, function(json){
-					if(json.pointDataInfo!=null){
-						$(domEle).html(json.pointDataInfo.dataInfo);
+				var pointDataId = $(domEle).parent().parent().parent().parent().parent().attr("dataId");
+				$.getJSON("getdataajax.action",{ paramId:$(this).attr("paramid"), pointDataId:pointDataId }, function(json){
+					if(json.pointDataValueInfo!=null){
+						$(domEle).html(json.pointDataValueInfo.dataInfo);
 					}else{
 						$(domEle).html("");
 					}
@@ -68,6 +84,11 @@
 	</script>
 	</head>
 	<body>
+		<form name="form1" method="post">
+		<s:hidden name="pointDataId" id="pointDataId" />
+		<s:hidden name="deviceId" id="deviceId" />
+		<s:hidden name="selectYear" id="selectYear" />
+		<s:hidden name="selectWeek" id="selectWeek" />
 		<table width="100%" style="height: 100%;" border="0" cellspacing="5"
 			cellpadding="0">
 			<tr>
@@ -78,43 +99,58 @@
 								日期：
 								<s:select name="yearlist" id="yearlist" list="yearList" cssStyle="width:70px;" listKey="value" listValue="text" value="selectYear"></s:select>
 								<s:select name="weeklist" id="weeklist" list="weekList" cssStyle="width:180px;" listKey="value" listValue="text" value="selectWeek"></s:select>
-								<input id="showdevicepic" class="btn_4" type="button" value="打开设备图" />
-								<input id="showstat" class="btn_4" type="button" value="查看柱状图"  />
 								<input id="showstatline" class="btn_4" type="button" value="查看线状图"  />
-								<input class="btn_5" type="button" value="监测点数据维护" id="addpointdata" />
+								<input class="btn_5" type="button" value="添加监测点数据" id="addpointdata" />
 							</td>
 							<td align="right">
 								（<s:property value="dataTypeString"/>）
 							</td>
 						</tr>
 					</table>
-					<s:iterator value="pointRelations" status="st">
-                    <table width="180" border="0" cellpadding="5" cellspacing="1"
-						bgcolor="#d5e4fd" style="float:left; margin:5px;">
-						<tr>
-							<td colspan="2" align="center" background="../images/headerbg.jpg">
-								<strong><s:property value="pointInfo.controlPointName"/></strong>
-							</td>
-						</tr>
-						<tr>
-							<td align="center" bgcolor="#FFFFFF" style="font-size:12px;">参数</td>
-							<td align="center" bgcolor="#FFFFFF" style="font-size:12px;">数据</td>
-						</tr>
-						<s:iterator value="pointParamInfos">
-						<tr>
-							<td align="center" bgcolor="#FFFFFF">
-								<s:property value="name"/>
-							</td>
-							<td align="center" bgcolor="#FFFFFF"">
-								<span paramid="<s:property value='id'/>" name="dataspan">loading...</span>
-							</td>
-						</tr>
+					<s:iterator value="pointDataInfos">
+					<fieldset style="margin:3px;" dataId="<s:property value='id'/>">
+						<legend>
+							<strong>
+								<table width="100%" border="0" cellspacing="5" cellpadding="0"><tr><td>
+								<input name="showdevicepic" dataId="<s:property value='id'/>" class="btn_4" type="button" value="打开设备图" />
+								<input name="showstat" dataId="<s:property value='id'/>" class="btn_4" type="button" value="查看柱状图"  />
+								<input class="btn_5" type="button" dataId="<s:property value='id'/>" value="修改监测点数据" name="showpointdata" />
+								<input name="delbtn" class="btn_4" type="button" dataId="<s:property value='id'/>" value="删除数据"  />
+								</td><td style="text-align:right">
+								录入时间：<s:property value="creatTimeString"/>
+								</td></tr></table>
+							</strong>
+						</legend>
+						<s:iterator value="pointRelations" status="st">
+	                    <table width="180" border="0" cellpadding="5" cellspacing="1"
+							bgcolor="#d5e4fd" style="float:left; margin:5px;">
+							<tr>
+								<td colspan="2" align="center" background="../images/headerbg.jpg">
+									<strong><s:property value="pointInfo.controlPointName"/></strong>
+								</td>
+							</tr>
+							<tr>
+								<td align="center" bgcolor="#FFFFFF" style="font-size:12px;">参数</td>
+								<td align="center" bgcolor="#FFFFFF" style="font-size:12px;">数据</td>
+							</tr>
+							<s:iterator value="pointParamInfos">
+							<tr>
+								<td align="center" bgcolor="#FFFFFF">
+									<s:property value="name"/>
+								</td>
+								<td align="center" bgcolor="#FFFFFF"">
+									<span paramid="<s:property value='id'/>" name="dataspan">loading...</span>
+								</td>
+							</tr>
+							</s:iterator>
+						</table>
 						</s:iterator>
-					</table>
+					</fieldset>
 					</s:iterator>
 			  </td>
 			</tr>
 		</table>
+		</form>
 	</body>
 </html>
 

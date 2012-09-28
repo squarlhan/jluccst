@@ -79,8 +79,8 @@ $.fn.initpage = function(){
 		<div id="message_content" style="margin:0 5px 0 5px;border:#b9c9ef 1px solid;padding:10px 0 10px 5px;font-size:12px;width:'+(200-17)+'px;height:'+(100-50)+'px;color:#1f336b;text-align:left;overflow:hidden;">#text</div>
 	</div>
 </div>
-<iframe id="topFrame" name="topFrame" class="ui-layout-north" src="<%=path %>/datamanage/datamanageviewtop.jsp" frameborder="0" scrolling="no"></iframe>
-<iframe id="mainFrame" name="mainFrame" class="ui-layout-center" src="<%=path %>/datamanage/datamanageview.jsp" frameborder="0" scrolling="no"></iframe>
-<iframe id="bottomFrame" name="bottomFrame" class="ui-layout-south" src="<%=path %>/sysbottom.action" width="100%" height="100%" frameborder="0" scrolling="no"></iframe>
+<iframe id="topFrame" name="topFrame" class="ui-layout-north" src="${pageContext.request.contextPath}/datamanage/datamanageviewtop.jsp" frameborder="0" scrolling="no"></iframe>
+<iframe id="mainFrame" name="mainFrame" class="ui-layout-center" src="${pageContext.request.contextPath}/datamanage/datamanageview.jsp" frameborder="0" scrolling="no"></iframe>
+<iframe id="bottomFrame" name="bottomFrame" class="ui-layout-south" src="${pageContext.request.contextPath}/sysbottom.action" width="100%" height="100%" frameborder="0" scrolling="no"></iframe>
 </body>
 </html>

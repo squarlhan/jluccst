@@ -20,9 +20,9 @@
 				$(document).find("input[name='datainput']").each(function(index,domEle){
 					if(index==0)
 						$(domEle).focus();
-					$.getJSON("getdataajax.action?rnd=" + Math.random(),{ paramId:$(domEle).attr("paramid"), selectWeek:$("#selectWeek").val(), selectYear:$("#selectYear").val() }, function(json){
-						if(json.pointDataInfo!=null){
-							$(domEle).val(json.pointDataInfo.dataInfo);
+					$.getJSON("getdataajax.action?rnd=" + Math.random(),{pointDataId:$("#pointDataId").val(), paramId:$(domEle).attr("paramid"), selectWeek:$("#selectWeek").val(), selectYear:$("#selectYear").val() }, function(json){
+						if(json.pointDataValueInfo!=null){
+							$(domEle).val(json.pointDataValueInfo.dataInfo);
 						}else{
 							$(domEle).val("");
 						}
@@ -64,7 +64,7 @@
 						else
 							str = str + ',' + $(domEle).attr("pointid") + '|' + $(domEle).attr("paramid") + '|' + $(domEle).val();
 					});
-					$.post("savedatainfoajax.action", {status:1, deviceId:$("#deviceId").val(), selectWeek:$("#selectWeek").val(), selectYear:$("#selectYear").val(), datas:str },function(json){
+					$.post("savedatainfoajax.action", {status:1, pointDataId:$("#pointDataId").val(),deviceId:$("#deviceId").val(), selectWeek:$("#selectWeek").val(), selectYear:$("#selectYear").val(), datas:str },function(json){
 						if(json.result=="OK"){
 							alert("保存成功！");
 						}else
@@ -111,6 +111,7 @@
 			</fieldset>
 			</s:iterator>
 			<center style="padding: 5px;">
+				<s:hidden name="pointDataId" id="pointDataId" />
 				<s:hidden name="deviceId" id="deviceId" />
 				<s:hidden name="selectYear" id="selectYear" />
 				<s:hidden name="selectWeek" id="selectWeek" />
