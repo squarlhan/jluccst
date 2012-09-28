@@ -540,6 +540,7 @@ public class PointDataInfoAction extends BaseActionSupport {
 					}else
 					{
 						Inference(pointDataList,threshold,dataType,deviceInfo);
+						return SUCCESS;
 					}
 				}
 			}
