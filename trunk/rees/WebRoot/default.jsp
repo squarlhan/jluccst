@@ -52,9 +52,6 @@
 		<script type="text/javascript">
 			$(document).ready(function() {
 				$("#username").focus();
-				$("#showdate").click(function(){
-					window.open("datamanage/datamanageview.jsp");
-				});
 			});
 			function logon() {
 				if ($.trim($("#username").val()) == "") {
@@ -110,11 +107,11 @@
 							<td height="28" colspan="2"><img src="images/login_09.png" width="68" height="28" 
 								alt="登录" style="cursor:pointer;" onclick="logon();"></td>
 			  				<td height="159" rowspan="2" background="images/login_10.png">&nbsp;</td>
-							<td height="28" colspan="2"><img src="images/login_11.png" width="68" height="28" alt="重置"></td>
+							<td height="28" colspan="2"><img src="images/login_11.png" width="68" height="28" alt="游客" style="cursor:pointer;" onclick="window.location.href='${pageContext.request.contextPath}/datamanage/datamanageviewmain.jsp';"></td>
 							<td height="159" colspan="2" rowspan="2" background="images/login_12.png">&nbsp;</td>
 					  </tr>
 						<tr>
-							<td height="131" colspan="2" background="images/login_13.png" valign="top"><div style="padding-top:10px;"><input id="showdate" type="button" value="数据查询" class="btn_2_3" /></div></td>
+							<td height="131" colspan="2" background="images/login_13.png" valign="top">&nbsp;</td>
 							<td height="131" colspan="2" background="images/login_14.png">&nbsp;</td>
 					  </tr>
 						<tr>
