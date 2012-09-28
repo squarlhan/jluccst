@@ -24,6 +24,9 @@
 	
 	<!-- 监测点数据Action -->
 	<package name="pointdatainfo" extends="struts-default" namespace="/datamanage">
+		<action name="deletedatainfo" class="pointDataInfoAction" method="deleteDataInfo">
+			<result name="success" type="redirect">pointdatalist.action?deviceId=${deviceId}</result>
+		</action>
 		<action name="pointdatalist" class="pointDataInfoAction" method="pointDataInfoList">
 			<result name="success">/datamanage/pointdatalist.jsp</result>
 			<result name="input">/datamanage/pointdatalist.jsp</result>
