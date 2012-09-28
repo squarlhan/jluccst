@@ -13,13 +13,13 @@
 	$(document).ready(function() {
 		//监测点数据维护
 		$("#addpointdata").click(function() {
-			parent.parent.parent.tipsWindown("添加监测点数据", "iframe:datamanage/pointdatainfo.action?deviceId=<s:property value='deviceId'/>&selectYear=" + $("#yearlist").val() + "&selectWeek=" + $("#weeklist").val(), "480", "320", "true", "", "true", "", "auto");
+			parent.parent.parent.tipsWindown("添加监测点数据", "iframe:datamanage/pointdatainfo.action?deviceId=<s:property value='deviceId'/>&selectYear=" + $("#yearlist").val() + "&selectWeek=" + $("#weeklist").val(), "400", "390", "true", "", "true", "", "auto");
 			parent.parent.parent.$("#windown-close").bind('click',function(){
 				window.location.href="datamanage/pointdatalist.action?deviceId=<s:property value='deviceId'/>&selectYear=" + $("#yearlist").val() + "&selectWeek=" + $("#weeklist").val();
 			});
 		});
 		$(document).find("input[name='showpointdata']").click(function() {
-			parent.parent.parent.tipsWindown("修改监测点数据", "iframe:datamanage/pointdatainfo.action?pointDataId=" + $(this).attr("dataId") + "&deviceId=<s:property value='deviceId'/>&selectYear=" + $("#yearlist").val() + "&selectWeek=" + $("#weeklist").val(), "480", "320", "true", "", "true", "", "auto");
+			parent.parent.parent.tipsWindown("修改监测点数据", "iframe:datamanage/pointdatainfo.action?pointDataId=" + $(this).attr("dataId") + "&deviceId=<s:property value='deviceId'/>&selectYear=" + $("#yearlist").val() + "&selectWeek=" + $("#weeklist").val(), "400", "390", "true", "", "true", "", "auto");
 			parent.parent.parent.$("#windown-close").bind('click',function(){
 				window.location.href="datamanage/pointdatalist.action?deviceId=<s:property value='deviceId'/>&selectYear=" + $("#yearlist").val() + "&selectWeek=" + $("#weeklist").val();
 			});
