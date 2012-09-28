@@ -16,19 +16,19 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.apache.commons.lang.StringUtils;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.boan.rees.common.SelectList;
 import com.boan.rees.device.model.DeviceInfo;
 import com.boan.rees.device.model.PointDataInfo;
+import com.boan.rees.device.model.PointDataValueInfo;
 import com.boan.rees.device.model.PointInfo;
 import com.boan.rees.device.model.PointParamInfo;
 import com.boan.rees.device.model.PointRelation;
 import com.boan.rees.device.service.IDeviceInfoService;
 import com.boan.rees.device.service.IPointDataInfoService;
+import com.boan.rees.device.service.IPointDataValueInfoService;
 import com.boan.rees.device.service.IPointInfoService;
 import com.boan.rees.device.service.IPointParamInfoService;
 import com.boan.rees.error.model.ErrorLog;
@@ -75,6 +75,10 @@ public class PointDataInfoAction extends BaseActionSupport {
 	@Resource
 	// 监测点数据接口类
 	private IPointDataInfoService pointDataInfoService;
+	
+	@Resource
+	//监测点数据值接口类
+	private IPointDataValueInfoService pointDataValueInfoService;
 	
 	@Resource
 	//用于调用数据库相关操作
@@ -140,6 +144,11 @@ public class PointDataInfoAction extends BaseActionSupport {
 	
 	//监测数据对象
 	private PointDataInfo pointDataInfo = null;
+	//监测数据对象
+	private List<PointDataInfo> pointDataInfos = null;
+	private PointDataValueInfo pointDataValueInfo = null;
+	private String pointDataId = null;
+	private String pointDataValueId = null;
 	
 	//监测数据字符串
 	private String datas;
@@ -207,6 +216,7 @@ public class PointDataInfoAction extends BaseActionSupport {
 		
 		//获得监测点信息
 		if(StringUtils.trimToNull(deviceId)!=null){
+			pointDataInfos = pointDataInfoService.listByDeviceId(selectYear, selectWeek, deviceId);
 			pointInfos = pointInfoService.findPointInfosByDeviceId(deviceId);
 			if(pointInfos!=null && pointInfos.size()>0){
 				PointRelation pr = null;
@@ -290,9 +300,19 @@ public class PointDataInfoAction extends BaseActionSupport {
 	 * @return
 	 */
 	public String loadDataInfo(){
-		if(StringUtils.trimToNull(selectYear)!=null && StringUtils.trimToNull(selectWeek)!=null && StringUtils.trimToNull(paramId)!=null){
-			pointDataInfo = pointDataInfoService.get(selectYear, selectWeek, paramId);
+		if(StringUtils.trimToNull(pointDataId)!=null && StringUtils.trimToNull(paramId)!=null){
+			pointDataValueInfo = pointDataValueInfoService.get(pointDataId, paramId);
 		}
+		return SUCCESS;
+	}
+	
+	/**
+	 * 删除数据
+	 * @return
+	 */
+	public String deleteDataInfo(){
+		pointDataInfoService.deletePointDataInfo(pointDataId);
+		pointDataValueInfoService.deleteByDataId(pointDataId);
 		return SUCCESS;
 	}
 	
@@ -302,33 +322,45 @@ public class PointDataInfoAction extends BaseActionSupport {
 	 */
 	public String saveDataInfo(){
 		PointDataInfo pdi = null;
-		List<PointDataInfo> pointDataList = new ArrayList<PointDataInfo>();
+		List<PointDataValueInfo> pointDataList = new ArrayList<PointDataValueInfo>();
 		//解析字符串
 		if (StringUtils.trimToNull(datas) != null) {
-			//清除之前填写记录
-			pointDataInfoService.delete(deviceId, selectYear, selectWeek);
+			PointDataInfo pdiTemp = null;
+			if(StringUtils.trimToNull(pointDataId)!=null){
+				pdiTemp = pointDataInfoService.get(pointDataId);
+				pointDataValueInfoService.deleteByDataId(pointDataId);
+			}else{
+				pdiTemp = new PointDataInfo();
+				pdiTemp.setDeviceId(deviceId);
+				pdiTemp.setDataYear(Integer.valueOf(selectYear));
+				pdiTemp.setWeekofYear(Integer.valueOf(selectWeek));
+				pdiTemp.setUserId(sessionUserId);
+				pdiTemp.setUserName(sessionUserCName);
+				pdiTemp.setCreatTime(Calendar.getInstance());
+			}
+			pdiTemp.setUpdateTime(Calendar.getInstance());
+			pointDataInfoService.save(pdiTemp);
+						
 			String[] tempDatas = datas.split(",");
+			PointDataValueInfo pdvi = null;
 			if (tempDatas.length > 0) {
 				String[] tempDatas1 = null;
 				PointInfo pi = null;
 				for (int i = 0; i < tempDatas.length; i++) {
 					tempDatas1 = tempDatas[i].split("\\|");
 					if (tempDatas1.length > 0) {
-						pdi = new PointDataInfo();
-						pdi.setDeviceId(deviceId);
-						pdi.setPointId(StringUtils.trimToNull(tempDatas1[0]));
-						pdi.setParamId(StringUtils.trimToNull(tempDatas1[1]));
+						pdvi = new PointDataValueInfo();
+						pdvi.setPointDataId(pdiTemp.getId());
+						pdvi.setPointId(StringUtils.trimToNull(tempDatas1[0]));
+						pdvi.setParamId(StringUtils.trimToNull(tempDatas1[1]));
 						if(tempDatas1.length==3)
-							pdi.setDataInfo(StringUtils.trimToEmpty(tempDatas1[2]));
+							pdvi.setDataInfo(StringUtils.trimToEmpty(tempDatas1[2]));
 						else
-							pdi.setDataInfo("");
-						pdi.setDataYear(Integer.valueOf(selectYear));
-						pdi.setWeekofYear(Integer.valueOf(selectWeek));
-						pdi.setCreatTime(Calendar.getInstance());
-						pdi.setUpdateTime(Calendar.getInstance());
-						pointDataInfoService.save(pdi);
+							pdvi.setDataInfo("");
 						
-						pointDataList.add( pdi );
+						pointDataValueInfoService.save(pdvi);
+						
+						pointDataList.add(pdvi);
 					}
 				}
 			}
@@ -556,7 +588,7 @@ public class PointDataInfoAction extends BaseActionSupport {
 	 * @param device
 	 * @return　String
 	 */
-	private String Inference(List<PointDataInfo> pointDataList, Threshold threshold,String dataType,DeviceInfo device)
+	private String Inference(List<PointDataValueInfo> pointDataList, Threshold threshold,String dataType,DeviceInfo device)
 	{
 		String returnStr = "";
 		List<RuleInfo> listRule = ruleInfoService.findAllRuleInfo();
@@ -794,8 +826,7 @@ public class PointDataInfoAction extends BaseActionSupport {
 	public String deviceColumnStat(){
 		if(StringUtils.trimToNull(chart)!=null){
 			deviceId = chart.split("\\|")[0];
-			selectYear = chart.split("\\|")[1];
-			selectWeek = chart.split("\\|")[2];
+			pointDataId = chart.split("\\|")[1];
 		}
 		
 		List<PointInfo> pis= null;
@@ -817,41 +848,39 @@ public class PointDataInfoAction extends BaseActionSupport {
 		String alarm = "";
 		if(pis!=null && pis.size()>0){
 			List<PointParamInfo> ppis = null;
-			PointDataInfo pdi = null;
+			PointDataValueInfo pdvi = null;
 			for (PointInfo pointInfo : pis) {
 				//获得监测点参数
 				ppis = pointParamInfoService.findPointParamInfoByPointId(pointInfo.getId());
 				if(ppis!=null && ppis.size()>0){
 					for(PointParamInfo ppi:ppis){
-						if(StringUtils.trimToNull(selectYear)!=null && StringUtils.trimToNull(selectWeek)!=null){
-							//获得监测点参数数据
-							pdi = pointDataInfoService.get(selectYear, selectWeek, ppi.getId());
-							if(pdi!=null){
-								boolean isAlarm = false;
-								if(threshold!=null){
-									//判断监测点参数数据是否超出境界值
-									List<ThresholdItem> thresholdItem = threshold.getThresholdItems();
-									String expression = null;
-									for (ThresholdItem item : thresholdItem) {
-										if(dataType == null || !item.getDataType().equals( dataType )){
-											continue;
-										}
-										expression = item.getThresholdItemExpression();
-										if(item.getSign()==1){
-											if(ExpressionCompare.compare(expression, item.getThresholdItemName(),pdi.getDataInfo())){
-												isAlarm = true;
-												break;
-											}
+						//获得监测点参数数据
+						pdvi = pointDataValueInfoService.get(pointDataId, ppi.getId());
+						if(pdvi!=null){
+							boolean isAlarm = false;
+							if(threshold!=null){
+								//判断监测点参数数据是否超出境界值
+								List<ThresholdItem> thresholdItem = threshold.getThresholdItems();
+								String expression = null;
+								for (ThresholdItem item : thresholdItem) {
+									if(dataType == null || !item.getDataType().equals( dataType )){
+										continue;
+									}
+									expression = item.getThresholdItemExpression();
+									if(item.getSign()==1){
+										if(ExpressionCompare.compare(expression, item.getThresholdItemName(),pdvi.getDataInfo())){
+											isAlarm = true;
+											break;
 										}
 									}
 								}
-								if(isAlarm)
-									tempSb.append("<set name='" + pointInfo.getControlPointName() + ppi.getName() + "' value='" + pdi.getDataInfo() + "' color='ff0000' />");
-								else
-									tempSb.append("<set name='" + pointInfo.getControlPointName() + ppi.getName() + "' value='" + pdi.getDataInfo() + "' color='8BBA00' />");
-							}else{
-								tempSb.append("<set name='" + pointInfo.getControlPointName() + ppi.getName() + "' value='0' color='8BBA00' />");
 							}
+							if(isAlarm)
+								tempSb.append("<set name='" + pointInfo.getControlPointName() + ppi.getName() + "' value='" + pdvi.getDataInfo() + "' color='ff0000' />");
+							else
+								tempSb.append("<set name='" + pointInfo.getControlPointName() + ppi.getName() + "' value='" + pdvi.getDataInfo() + "' color='8BBA00' />");
+						}else{
+							tempSb.append("<set name='" + pointInfo.getControlPointName() + ppi.getName() + "' value='0' color='8BBA00' />");
 						}
 					}
 				}
@@ -932,6 +961,7 @@ public class PointDataInfoAction extends BaseActionSupport {
 			selectYear = chart.split("\\|")[1];
 			selectFromWeek = chart.split("\\|")[2];
 			selectWeek = chart.split("\\|")[3];
+			deviceId = chart.split("\\|")[4];
 		}
 		int fromYear = Integer.parseInt(selectFromWeek);
 		int toYear = Integer.parseInt(selectWeek);
@@ -939,12 +969,21 @@ public class PointDataInfoAction extends BaseActionSupport {
 		StringBuffer tempSb = new StringBuffer();
 		List<PointParamInfo> ppis = null;
 		PointDataInfo pdi = null;
+		List<PointDataInfo> pdis = null;
+		PointDataValueInfo pdvi = null;
 		//获得监测点参数
 		ppis = pointParamInfoService.findPointParamInfoByPointId(pointId);
 
 		tempSb.append("<categories >");
 		for(int i=0; i<(toYear-fromYear + 1); i++){
-			tempSb.append("<category name='" + (fromYear + i) + "' />");
+			pdis = pointDataInfoService.listByDeviceId(selectYear, String.valueOf(fromYear+i), deviceId);
+			if(pdis!=null&&pdis.size()>0){
+				for(int j=0; j<pdis.size(); j++){
+					tempSb.append("<category name='" + (fromYear + i) + "' />");
+				}
+			}else{
+				tempSb.append("<category name='" + (fromYear + i) + "' />");
+			}
 		}
 		tempSb.append("</categories>");
 		
@@ -960,10 +999,17 @@ public class PointDataInfoAction extends BaseActionSupport {
 					color = "DBDC25";
 				
 				tempSb.append("<dataset seriesName='参数" + ppi.getName() + "' color='" + color + "' anchorBorderColor='" + color + "' anchorBgColor='" + color + "'>");
+				
 				for(int i=0; i<(toYear-fromYear+1); i++){
-					pdi = pointDataInfoService.get(selectYear, String.valueOf(fromYear+i), ppi.getId());
-					if(pdi!=null){
-						tempSb.append("<set value='" + pdi.getDataInfo() + "' />");
+					pdis = pointDataInfoService.listByDeviceId(selectYear, String.valueOf(fromYear+i), deviceId);
+					if(pdis!=null&&pdis.size()>0){
+						for(int j=0; j<pdis.size(); j++){
+							pdvi = pointDataValueInfoService.get(pdis.get(j).getId(), ppi.getId());
+							if(pdvi!=null)
+								tempSb.append("<set value='" + pdvi.getDataInfo() + "' />");
+							else
+								tempSb.append("<set value='0' />");
+						}
 					}else{
 						tempSb.append("<set value='0' />");
 					}
@@ -978,57 +1024,6 @@ public class PointDataInfoAction extends BaseActionSupport {
 		sb.append(tempSb);
 		sb.append("</graph>");
 		xmlStream = new ByteArrayInputStream(sb.toString().getBytes(Charset.forName("gb2312")));
-		return SUCCESS;
-	}
-	
-	/**
-	 * 任务实现DEMO
-	 * @return
-	 */
-	public String taskDemo(){
-		if(StringUtils.trimToNull(deviceId)!=null){
-			//获得设备对象
-			DeviceInfo deviceInfo =	deviceInfoService.get(deviceId);
-			//根据设备ID获得所有未执行任务的监测点对象数组
-			List<PointInfo> pis = pointInfoService.findPointInfosByDeviceId(deviceId, 0);
-			//根据设备中心高和转速获得对应的阈值项实体类
-			Threshold threshold = thresholdService.getThresholdByCenterHeightAndSpeed(deviceInfo.getCenterHeight().toString(), deviceInfo.getSpeed().toString());
-			if(pis!=null && pis.size()>0){
-				//监测点参数
-				List<PointParamInfo> ppis = null;
-				//监测点参数对象
-				PointDataInfo pdi = null;
-				for (PointInfo pointInfo : pis) {
-					//获得监测点参数
-					ppis = pointParamInfoService.findPointParamInfoByPointId(pointInfo.getId());
-					if(ppis!=null && ppis.size()>0){
-						for(PointParamInfo ppi:ppis){
-							if(StringUtils.trimToNull(selectYear)!=null && StringUtils.trimToNull(selectWeek)!=null){
-								//获得监测点参数数据
-								pdi = pointDataInfoService.get(selectYear, selectWeek, ppi.getId());
-								if(pdi!=null){
-									//判断监测点参数数据是否超出境界值
-									List<ThresholdItem> thresholdItem = threshold.getThresholdItems();
-									String expression = null;
-									for (ThresholdItem item : thresholdItem) {
-										expression = item.getThresholdItemExpression();
-										if(item.getSign()==1){
-											//判断是否在报警区间
-											if(ExpressionCompare.compare(expression, "V", pdi.getDataInfo())){
-												//LUOJX TO DO
-												//送推理机
-												//问题ID朱好像说是item.getTroubleIds(),你再确定一下
-												
-											}
-										}
-									}
-								}
-							}
-						}
-					}
-				}
-			}
-		}
 		return SUCCESS;
 	}
 	
@@ -1204,6 +1199,62 @@ public class PointDataInfoAction extends BaseActionSupport {
 	 */
 	public void setDataTypeString(String dataTypeString) {
 		this.dataTypeString = dataTypeString;
+	}
+
+	/**
+	 * @return the pointDataInfos
+	 */
+	public List<PointDataInfo> getPointDataInfos() {
+		return pointDataInfos;
+	}
+
+	/**
+	 * @param pointDataInfos the pointDataInfos to set
+	 */
+	public void setPointDataInfos(List<PointDataInfo> pointDataInfos) {
+		this.pointDataInfos = pointDataInfos;
+	}
+
+	/**
+	 * @return the pointDataValueInfo
+	 */
+	public PointDataValueInfo getPointDataValueInfo() {
+		return pointDataValueInfo;
+	}
+
+	/**
+	 * @param pointDataValueInfo the pointDataValueInfo to set
+	 */
+	public void setPointDataValueInfo(PointDataValueInfo pointDataValueInfo) {
+		this.pointDataValueInfo = pointDataValueInfo;
+	}
+
+	/**
+	 * @return the pointDataId
+	 */
+	public String getPointDataId() {
+		return pointDataId;
+	}
+
+	/**
+	 * @param pointDataId the pointDataId to set
+	 */
+	public void setPointDataId(String pointDataId) {
+		this.pointDataId = pointDataId;
+	}
+
+	/**
+	 * @return the pointDataValueId
+	 */
+	public String getPointDataValueId() {
+		return pointDataValueId;
+	}
+
+	/**
+	 * @param pointDataValueId the pointDataValueId to set
+	 */
+	public void setPointDataValueId(String pointDataValueId) {
+		this.pointDataValueId = pointDataValueId;
 	}
 	
 }
