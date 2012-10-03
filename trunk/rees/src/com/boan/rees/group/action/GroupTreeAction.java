@@ -154,6 +154,15 @@ public class GroupTreeAction extends BaseActionSupport
 		this.showTreeAllNodes();
 		return "group-tree-for-report";
 	}
+	/**
+	 * 显示组织机构树,带公司、工厂、车间
+	 * @return
+	 */
+	public String showGroupTreeForDiagnosis() throws Exception
+	{
+		this.showTreeAllNodes();
+		return "group-tree-for-diagnosis";
+	}
 	public List<Company> getCompanyList()
 	{
 		return companyList;
