@@ -10,4 +10,11 @@
 			<result name="show-failure-diagnosis-result">/expertsystem/failurediagnosisresult.jsp</result>
 		</action>
 	</package>
+	<package name="failurediagnosisajax" extends="json-default" namespace="/expertsystem">
+		<action name="getDeveiceRuleResultInfo" class="failureDiagnosisAction" method="getDeveiceRuleResultInfo">
+            <result name="success" type="json">
+				<param name="root">ruleResultInfoList</param>
+			</result>
+        </action>
+	</package>
 </struts>
