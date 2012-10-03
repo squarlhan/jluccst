@@ -43,7 +43,8 @@
 			 */
 			$.fn.close = function() {
 				$("#closeBtn").click(function() {
-					window.location.href="./failureDiagnosisAction!showFailureDiagnosisInfo.action";
+					//window.location.href="./failureDiagnosisAction!showFailureDiagnosisInfo.action";
+					window.history.back(-1);
 				});
 			}
 		</script>

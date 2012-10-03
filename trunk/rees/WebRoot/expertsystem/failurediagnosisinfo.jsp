@@ -69,6 +69,32 @@
 		})
 		$.fn.save();
 		$.fn.close();
+		
+		$("#deviceInfoId").change(function() {
+            loadDevice($("#deviceInfoId").val());
+        });
+		
+		if($("#deviceInfoId").val() != "")
+		{
+		 loadDevice($("#deviceInfoId").val());
+		}
+		///expertsystem
+		//failurediagnosisajax
+		function loadDevice(deviceInfoId) {
+            $.ajax({
+                url:"<%=basePath%>expertsystem/getDeveiceRuleResultInfo.action?deviceInfoId=" + deviceInfoId,
+                type: 'POST',
+                dataType: 'JSON',
+                timeout: 5000,
+                error: function() { alert('Error loading data!'); },
+                success: function(msg) {
+                    $("#ruleResultInfoId").empty();
+                    $.each(eval(msg), function(i, item) {
+                        $("<option value='" + item.id + "'>" + item.result + "</option>").appendTo($("#ruleResultInfoId"));
+                    });
+                }
+            });
+        }
 	});
 	/**
 	 * 保存
@@ -87,8 +113,7 @@
 				form1.action = "toAddCompanyAction.action";
 			}
 			*/
-			var sTemp = "设备类型:【"+document.getElementById("deviceTypeId").options[document.getElementById("deviceTypeId").selectedIndex].text;
-			sTemp = sTemp + "】，设备名称:【"+document.getElementById("deviceInfoId").options[document.getElementById("deviceInfoId").selectedIndex].text;
+			var sTemp = "设备名称:【"+document.getElementById("deviceInfoId").options[document.getElementById("deviceInfoId").selectedIndex].text;
 			sTemp = sTemp + "】，故障现象:【"+document.getElementById("ruleResultInfoId").options[document.getElementById("ruleResultInfoId").selectedIndex].text+ "】";
 			document.getElementById("condition").value  = sTemp;
 			form1.action = "./failureDiagnosisAction!showFailureDiagnosisResult.action";
@@ -96,7 +121,7 @@
 			form1.submit();
 		});
 	}
-
+	
 	/**
 	 * 关闭
 	 */
@@ -116,6 +141,8 @@
 		<s:form id="form1" name="form1" method="post" theme="simple">
 			<s:hidden id="companyId" name="company.id"></s:hidden>
 			<s:hidden id="condition" name="condition"></s:hidden>
+			<s:hidden id="deviceTypeId" name="deviceTypeId"></s:hidden>
+			<s:hidden id="deviceTypeName" name="deviceTypeName"></s:hidden>
 			<table width="100%" border="0" cellspacing="5" cellpadding="0">
 				<tr>
 					<td>
@@ -128,16 +155,6 @@
 										<tr>
 											<td colspan="2" align="center" background="<%=path %>/images/headerbg.jpg">
 												<strong>请选择故障诊断的条件</strong>
-											</td>
-										</tr>
-										<tr>
-											<td height="26" align="right" bgcolor="#FFFFFF">
-												<strong>设备类型：</strong>
-											</td>
-											<td height="26" align="left" bgcolor="#FFFFFF">
-												<s:select list="deviceTypeList" listKey="id" listValue="typeName" name="deviceTypeId" id="deviceTypeId"
-												value="deviceTypeId" headerKey="" headerValue="==请选择设备类型==" cssStyle="width:250px;" onchange="$.fn.selectdevicetype();"></s:select>
-												<font color="red">*</font>
 											</td>
 										</tr>
 										<tr>
