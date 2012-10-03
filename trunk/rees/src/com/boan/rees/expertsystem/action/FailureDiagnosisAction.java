@@ -11,7 +11,9 @@ package com.boan.rees.expertsystem.action;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -78,7 +80,50 @@ public class FailureDiagnosisAction extends BaseActionSupport
 	@Autowired
 	@Qualifier("ruleAdviceInfoService")
 	private IRuleAdviceInfoService ruleAdviceInfoService;
+	/**
+	 * 树传过来的公司id
+	 */
+	private String companyId;
 	
+	/**
+	 * 树传过来的工厂Id
+	 */
+	private String factoryId;
+	
+	/**
+	 * 树传过来的车间Id
+	 */
+	private String workshopId;
+	
+	public String getCompanyId()
+	{
+		return companyId;
+	}
+
+	public void setCompanyId( String companyId )
+	{
+		this.companyId = companyId;
+	}
+
+	public String getFactoryId()
+	{
+		return factoryId;
+	}
+
+	public void setFactoryId( String factoryId )
+	{
+		this.factoryId = factoryId;
+	}
+
+	public String getWorkshopId()
+	{
+		return workshopId;
+	}
+
+	public void setWorkshopId( String workshopId )
+	{
+		this.workshopId = workshopId;
+	}
 	private List<DeviceType> deviceTypeList = null;
 
 	private List<DeviceInfo> deviceInfoList = null;
@@ -86,7 +131,17 @@ public class FailureDiagnosisAction extends BaseActionSupport
 	private List<RuleResultInfo> ruleResultInfoList = null;
 
 	private String deviceTypeId = null;
+	private String deviceTypeName = null;
 	
+	public String getDeviceTypeName()
+	{
+		return deviceTypeName;
+	}
+
+	public void setDeviceTypeName( String deviceTypeName )
+	{
+		this.deviceTypeName = deviceTypeName;
+	}
 	private String deviceInfoId = null;
 	
 	private String ruleResultInfoId = null;
@@ -110,19 +165,22 @@ public class FailureDiagnosisAction extends BaseActionSupport
 	 */
 	public String showFailureDiagnosisInfo()
 	{
-		deviceTypeList = deviceTypeService.findAllDeviceType();
+		//deviceTypeList = deviceTypeService.findAllDeviceType();
 
-		if( StringUtils.isNotBlank( deviceTypeId ) )
+		/*if( StringUtils.isNotBlank( deviceTypeId ) )
 		{
 			// （1）根据设备类型id取设备
 			deviceInfoList = deviceInfoService.findDeviceInfoByDeviceTypeId( deviceTypeId );
 			// （2）根据设备类型id取现象
 			ruleResultInfoList = ruleResultInfoService.findRuleResultInfoByDeviceTypeId( deviceTypeId );
-		}
-		if(deviceTypeList == null || deviceTypeList.size() == 0)
-		{
-			deviceTypeList = new ArrayList<DeviceType>();
-		}
+		}*/
+		
+		Map<String,String> param = new HashMap<String,String>();
+		param.put("companyId", companyId);
+		param.put("factoryId", factoryId);
+		param.put("workshopId", workshopId);
+		deviceInfoList = deviceInfoService.findDeviceInfoByOrgan( companyId, factoryId, workshopId );
+		
 		if(deviceInfoList == null || deviceInfoList.size() == 0)
 		{
 			deviceInfoList = new ArrayList<DeviceInfo>();
@@ -133,7 +191,24 @@ public class FailureDiagnosisAction extends BaseActionSupport
 		}
 		return "show-failure-diagnosis-info";
 	}
-
+	/**
+	 * 显示故障诊断的查询页面
+	 * 
+	 * @return
+	 */
+	public String getDeveiceRuleResultInfo()
+	{
+		DeviceInfo device  = deviceInfoService.get( deviceInfoId );
+		if(device != null)
+		{
+			//deviceTypeId = device.getDeviceTypeId();
+			//deviceTypeName = device.getDeviceTypeName();
+			ruleResultInfoList = ruleResultInfoService.findRuleResultInfoByDeviceTypeId( device.getDeviceTypeId() );
+		}
+		return SUCCESS;
+	}
+	
+	
 	/**
 	 * 显示故障诊断的结果建议页面
 	 * 
