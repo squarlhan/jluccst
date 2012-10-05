@@ -36,31 +36,62 @@
 			$("#addbtn").click(function(){
 				parent.parent.tipsWindown("添加服务记录","iframe:service/servicelog.action","785","350","true","","true","no");
 				parent.parent.$("#windown-close").bind('click',function(){
-					window.location.href="serviceloglist.action";
+					window.location.href="serviceloglist.action?companyId=" + $("#companyId").val();
 				});
 			});
 			
-			$(".showInfo").css("cursor","hand").click(function(){
-				parent.parent.tipsWindown("修改服务记录","iframe:service/servicelog.action?logId=" + $(this).attr("lid") ,"785","350","true","","true","no");
-				parent.parent.$("#windown-close").bind('click',function(){
-					window.location.href="serviceloglist.action";
-				});
-			});
 			/**
 	  		 * 删除所选设备信息
 	  		 */
 	  		$("#deletebtn").click(function(){
   				if(window.confirm("您确定要删除所选信息吗？")){
-  					document.forms[0].action = "deleteservicelog.action";
-					document.forms[0].submit();
+  					var url = "<%=path%>/service/deleteservicelog.action?logIds=";
+  					var values = "";
+  					$('input[name="logIds"]').each(function(){
+  						if($(this).attr("checked")){
+  							if(values==""){
+  								values = $(this).val();
+  							}else{
+  								values = values + "," + $(this).val();
+  							}
+  						}
+  					});
+  					$.post(url + values, "", function(data){window.location.href="serviceloglist.action?companyId=" + $("#companyId").val();});
   				}
 	  		});
+			
+	  		/**
+	  		 * 修改信息
+	  		 */
+	  		$('a[name="edit"]').each(function(){
+	  			$(this).click(function(){
+	  				var url = $(this).attr("url");
+	  				parent.parent.tipsWindown("修改服务记录","iframe:" + url ,"785","350","true","","true","no");
+					parent.parent.$("#windown-close").bind('click',function(){
+						window.location.href="serviceloglist.action?companyId=" + $("#companyId").val();
+					});
+	  			});
+	  		});
+	  		
+	  		/**
+	  		 * 删除单个信息
+	  		 */
+	  		$('a[name="delete"]').each(function(){
+	  			$(this).click(function(){
+	  				var url = $(this).attr("url");
+	  				if(window.confirm("您确定要删除这条信息吗？")){
+	  					$.post(url, "", function(data){window.location.href="serviceloglist.action?companyId=" + $("#companyId").val();});
+	  				}
+	  			});
+	  		});
+	  		$("#searchCompanyName").focus();
 		});
 		//-->
 		</script>
 	</head>
 	<body>
 		<s:form id="form1" name="form1" method="post" theme="simple">
+			<s:hidden name="companyId" id="companyId"></s:hidden>
 			<table width="100%" style="height: 100%;" border="0" cellspacing="5"
 				cellpadding="0">
 				<tr>
@@ -73,14 +104,18 @@
 									<input name="button" type="button" class="btn_4"
 										id="deletebtn" value="删除所选">
 								</td>
-								<td align="right"><table border="0" cellpadding="5" cellspacing="0">
+							</tr>
+							<tr>
+								<td>
+									<table border="0" cellpadding="5" cellspacing="0">
 							<tr>  		
 								<td></td>
 								<td align="center">客户名称</td>
-								<td><s:textfield name="searchCompanyName" cssStyle="width:150px;" /></td>
+								<td><s:textfield name="searchCompanyName" cssStyle="width:250px;" /></td>
 								<td style="width: 80px"><input type="button" style="width: 80px;" class="btn_4" id="searchBtn" value="快速查询" /></td>
 							</tr>
-						</table></td>
+						</table>
+								</td>
 							</tr>
 						</table>
 						<table width="100%" border="0" cellpadding="5" cellspacing="1"
@@ -109,6 +144,10 @@
 									background="<%=path%>/images/headerbg.jpg">
 									<strong>解决措施</strong>
 								</td>
+								<td align="center"
+									background="<%=path%>/images/headerbg.jpg" style="width:80px;">
+									<strong>操作</strong>
+								</td>
 							</tr>
 							<s:iterator value="pagination.data" status="obj">
 								<tr>
@@ -117,7 +156,7 @@
 											value="false" theme="simple" />
 									</td>
 									<td align="left" bgcolor="#FFFFFF">
-										<span class="showInfo" lid="<s:property value='id' />"><s:property value="companyName" />&nbsp;</span>
+										<s:property value="companyName" />&nbsp;
 									</td>
 									<td align="center" bgcolor="#FFFFFF">
 										<s:property value="serviceTime" />&nbsp;
@@ -131,10 +170,14 @@
 									<td align="left" bgcolor="#FFFFFF">
 										<s:property value="solutions" />&nbsp;
 									</td>
+									<td align="center" bgcolor="#FFFFFF">
+										<a name="edit" href="javascript:void(0);" url="<%=path%>/service/servicelog.action?logId=<s:property value='id' />">编辑</a>  
+         								<a name="delete" href="javascript:void(0);" url="<%=path%>/service/deleteservicelog.action?logIds=<s:property value='id' />">删除</a>&nbsp;
+									</td>
 								</tr>
 							</s:iterator>
 							<tr>
-					          <td height="26" colspan="6" align="center" bgcolor="#FFFFFF">
+					          <td height="26" colspan="7" align="center" bgcolor="#FFFFFF">
 								<page:pages currentPage="pagination.currentPage" totalPages="pagination.totalPages" totalRows="pagination.totalRows" styleClass="page" theme="text" ></page:pages> 
 							  </td>
 					        </tr>
