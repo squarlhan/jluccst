@@ -47,12 +47,11 @@
 					<td valign="top">
 						<table width="100%" border="0" cellspacing="5" cellpadding="0">
 							<tr>
-								<td>&nbsp;</td>
-								<td align="right"><table border="0" cellpadding="5" cellspacing="0">
+								<td><table border="0" cellpadding="5" cellspacing="0">
 							<tr>  		
 								<td></td>
 								<td align="center">客户名称</td>
-								<td><s:textfield name="searchCompanyName" cssStyle="width:150px;" /></td>
+								<td><s:textfield name="searchCompanyName" cssStyle="width:250px;" /></td>
 								<td style="width: 80px"><input type="button" style="width: 80px;" class="btn_4" id="searchBtn" value="快速查询" /></td>
 							</tr>
 						</table></td>

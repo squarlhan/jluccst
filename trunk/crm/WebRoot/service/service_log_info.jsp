@@ -64,6 +64,9 @@
 		if (message != null && $.trim(message) != "") {
 			alert(message);
 		}
+		if($("#logCompnayId").val()!=""){
+			$("#selCompany").val($("#logCompnayId").val());
+		}
 	};
 </script>
 </head>
@@ -71,6 +74,7 @@
 	<form id="form1" name="form1" method="post">
 		<label id="lb_message" style="display:none"></label>
 		<s:hidden id="logId" name="serviceLog.id"></s:hidden>
+		<s:hidden id="logCompnayId" name="serviceLog.companyId"></s:hidden>
 		<s:hidden id="hdCompanyId" name="companyId"></s:hidden>
 		<s:hidden id="hdCompanyName" name="companyName"></s:hidden>
 		<center>

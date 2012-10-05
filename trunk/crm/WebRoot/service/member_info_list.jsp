@@ -58,11 +58,13 @@
 							<tr>
 								<td><input name="button" type="button" class="btn_4"
 										id="deletebtn" value="取消会员"></td>
-								<td align="right"><table border="0" cellpadding="5" cellspacing="0">
+							</tr>
+							<tr>
+								<td><table border="0" cellpadding="5" cellspacing="0">
 							<tr>  		
 								<td></td>
 								<td align="center">客户名称</td>
-								<td><s:textfield name="searchCompanyName" cssStyle="width:150px;" /></td>
+								<td><s:textfield name="searchCompanyName" cssStyle="width:250px;" /></td>
 								<td style="width: 80px"><input type="button" style="width: 80px;" class="btn_4" id="searchBtn" value="快速查询" /></td>
 							</tr>
 						</table></td>
