@@ -85,9 +85,9 @@ public class ServiceLogAction extends BaseActionSupport {
 	public String serviceLogList(){
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("myCompanyId", sessionCompanyId);
-		if(searchCompanyName!=null)
+		if(StringUtils.trimToNull(searchCompanyName)!=null)
 			map.put("companyName", "%" + searchCompanyName + "%");
-		if(companyId!=null)
+		if(StringUtils.trimToNull(companyId)!=null)
 			map.put("companyId", companyId);
 		pagination = serviceLogService.findForPage(map, pagination );
 		return SUCCESS;
