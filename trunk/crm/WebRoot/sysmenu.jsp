@@ -307,6 +307,81 @@
 							}
 						%>
 						<%
+							b = popedomService.isHasPopedom(us.getUserId(), String.valueOf(us.getUserType()), MenuKey.MY_KE_HU_GUAN_LI, us.getPopedomKeys())
+									||popedomService.isHasPopedom(us.getUserId(), String.valueOf(us.getUserType()), MenuKey.MY_GEN_JIN, us.getPopedomKeys())
+									||popedomService.isHasPopedom(us.getUserId(), String.valueOf(us.getUserType()), MenuKey.MY_HUI_FANG, us.getPopedomKeys())
+									||popedomService.isHasPopedom(us.getUserId(), String.valueOf(us.getUserType()), MenuKey.MY_KE_HU, us.getPopedomKeys());
+							if (b) {
+						%>
+						<tr>
+							<td height="24" align="left" background="images/menubg.jpg">
+								<table width="100%" border="0" cellspacing="5" cellpadding="0">
+									<tr>
+										<td width="40" align="right" style="padding-bottom: 4px;"><img src="images/up.gif" width="10" height="12" />
+										</td>
+										<td><strong name="menus">我的客户管理</strong>
+										</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+						<tbody name="submenus" style="display:none">
+						<%
+							b = popedomService.isHasPopedom(us.getUserId(), String.valueOf(us.getUserType()), MenuKey.MY_KE_HU, us.getPopedomKeys());
+							if (b) {
+						%>
+						<tr>
+							<td align="left">
+								<table width="100%" border="0" cellspacing="5" cellpadding="0">
+									<tr>
+										<td width="40" align="right" style="padding-bottom: 4px;"><img src="images/menuto.jpg" width="5" height="5" />
+										</td>
+										<td><a href="customer/mycustomermanage.jsp" target="mainFrame">我的客户信息</a>
+										</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+						<%} %>
+						<%
+							b = popedomService.isHasPopedom(us.getUserId(), String.valueOf(us.getUserType()), MenuKey.MY_GEN_JIN, us.getPopedomKeys());
+							if (b) {
+						%>
+						<tr>
+							<td align="left">
+								<table width="100%" border="0" cellspacing="5" cellpadding="0">
+									<tr>
+										<td width="40" align="right" style="padding-bottom: 4px;"><img src="images/menuto.jpg" width="5" height="5" />
+										</td>
+										<td><a href="customer/mycustomertracemanage.jsp" target="mainFrame">我的跟进</a>
+										</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+						<%} %>
+						<%
+							b = popedomService.isHasPopedom(us.getUserId(), String.valueOf(us.getUserType()), MenuKey.MY_HUI_FANG, us.getPopedomKeys());
+							if (b) {
+						%>
+						<tr>
+							<td align="left">
+								<table width="100%" border="0" cellspacing="5" cellpadding="0">
+									<tr>
+										<td width="40" align="right" style="padding-bottom: 4px;"><img src="images/menuto.jpg" width="5" height="5" />
+										</td>
+										<td><a href="customer/mycustomervisitmanage.jsp" target="mainFrame">我的回访</a>
+										</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+						<%} %>
+						</tbody>
+						<%
+							}
+						%>
+						<%
 							b = popedomService.isHasPopedom(us.getUserId(), String.valueOf(us.getUserType()), MenuKey.KE_HU_GUAN_LI, us.getPopedomKeys())
 									||popedomService.isHasPopedom(us.getUserId(), String.valueOf(us.getUserType()), MenuKey.SUB_KE_HU_XIN_XI, us.getPopedomKeys())
 									||popedomService.isHasPopedom(us.getUserId(), String.valueOf(us.getUserType()), MenuKey.SUB_KE_HU_GEN_JIN, us.getPopedomKeys())
@@ -389,6 +464,81 @@
 										<td width="40" align="right" style="padding-bottom: 4px;"><img src="images/menuto.jpg" width="5" height="5" />
 										</td>
 										<td><a href="customeranalysis/customeranalysismanage.jsp" target="mainFrame">客户评估</a>
+										</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+						<%} %>
+						</tbody>
+						<%
+							}
+						%>
+						<%
+							b = popedomService.isHasPopedom(us.getUserId(), String.valueOf(us.getUserType()), MenuKey.ZONG_HE_CHA_XUN, us.getPopedomKeys())
+									||popedomService.isHasPopedom(us.getUserId(), String.valueOf(us.getUserType()), MenuKey.KE_HU_CHA_XUN, us.getPopedomKeys())
+									||popedomService.isHasPopedom(us.getUserId(), String.valueOf(us.getUserType()), MenuKey.GEN_JIN_CHA_XUN, us.getPopedomKeys())
+									||popedomService.isHasPopedom(us.getUserId(), String.valueOf(us.getUserType()), MenuKey.HUI_FANG_CHA_XUN, us.getPopedomKeys());
+							if (b) {
+						%>
+						<tr>
+							<td height="24" align="left" background="images/menubg.jpg">
+								<table width="100%" border="0" cellspacing="5" cellpadding="0">
+									<tr>
+										<td width="40" align="right" style="padding-bottom: 4px;"><img src="images/up.gif" width="10" height="12" />
+										</td>
+										<td><strong name="menus">综合查询</strong>
+										</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+						<tbody name="submenus" style="display:none">
+						<%
+							b = popedomService.isHasPopedom(us.getUserId(), String.valueOf(us.getUserType()), MenuKey.KE_HU_CHA_XUN, us.getPopedomKeys());
+							if (b) {
+						%>
+						<tr>
+							<td align="left">
+								<table width="100%" border="0" cellspacing="5" cellpadding="0">
+									<tr>
+										<td width="40" align="right" style="padding-bottom: 4px;"><img src="images/menuto.jpg" width="5" height="5" />
+										</td>
+										<td><a href="customer/customersearch.jsp" target="mainFrame">客户查询</a>
+										</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+						<%} %>
+						<%
+							b = popedomService.isHasPopedom(us.getUserId(), String.valueOf(us.getUserType()), MenuKey.GEN_JIN_CHA_XUN, us.getPopedomKeys());
+							if (b) {
+						%>
+						<tr>
+							<td align="left">
+								<table width="100%" border="0" cellspacing="5" cellpadding="0">
+									<tr>
+										<td width="40" align="right" style="padding-bottom: 4px;"><img src="images/menuto.jpg" width="5" height="5" />
+										</td>
+										<td><a href="customer/customertracesearch.jsp" target="mainFrame">跟进查询</a>
+										</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+						<%} %>
+						<%
+							b = popedomService.isHasPopedom(us.getUserId(), String.valueOf(us.getUserType()), MenuKey.HUI_FANG_CHA_XUN, us.getPopedomKeys());
+							if (b) {
+						%>
+						<tr>
+							<td align="left">
+								<table width="100%" border="0" cellspacing="5" cellpadding="0">
+									<tr>
+										<td width="40" align="right" style="padding-bottom: 4px;"><img src="images/menuto.jpg" width="5" height="5" />
+										</td>
+										<td><a href="customer/customervisitsearch.jsp" target="mainFrame">回访查询</a>
 										</td>
 									</tr>
 								</table>
