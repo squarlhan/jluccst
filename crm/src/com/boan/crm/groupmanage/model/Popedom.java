@@ -15,13 +15,12 @@ import org.hibernate.annotations.GenericGenerator;
  * @version 1.0.0
  */
 @Entity
-@Table( name = "GROUP_POPEDOM_ROLE" )
-public class Popedom
-{
+@Table(name = "GROUP_POPEDOM_ROLE")
+public class Popedom {
 
 	@Id
-	@GenericGenerator( name = "system-uuid", strategy = "uuid" )
-	@GeneratedValue( generator = "system-uuid" )
+	@GenericGenerator(name = "system-uuid", strategy = "uuid")
+	@GeneratedValue(generator = "system-uuid")
 	/**
 	 * 权限实体主键
 	 */
@@ -30,43 +29,51 @@ public class Popedom
 	/**
 	 * 角色号
 	 */
-	@Column( name = "ROLE_ID" )
+	@Column(name = "ROLE_ID")
 	private String roleId;
+
+	/**
+	 * 公司标识
+	 */
+	@Column(name = "COMPANY_ID")
+	private String companyId;
 
 	/**
 	 * 资源KEY标识
 	 */
-	@Column( name = "KEYWORD" )
+	@Column(name = "KEYWORD")
 	private String keyword;
 
-	public String getId()
-	{
+	public String getId() {
 		return id;
 	}
 
-	public void setId( String id )
-	{
+	public void setId(String id) {
 		this.id = id;
 	}
 
-	public String getRoleId()
-	{
+	public String getRoleId() {
 		return roleId;
 	}
 
-	public void setRoleId( String roleId )
-	{
+	public void setRoleId(String roleId) {
 		this.roleId = roleId;
 	}
 
-	public String getKeyword()
-	{
+	public String getKeyword() {
 		return keyword;
 	}
 
-	public void setKeyword( String keyword )
-	{
+	public void setKeyword(String keyword) {
 		this.keyword = keyword;
+	}
+
+	public String getCompanyId() {
+		return companyId;
+	}
+
+	public void setCompanyId(String companyId) {
+		this.companyId = companyId;
 	}
 
 }
