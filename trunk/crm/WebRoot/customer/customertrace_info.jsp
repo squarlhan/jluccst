@@ -35,7 +35,7 @@
 		  	 */
 			var _customer_submit = {
 				rules: {
-					"customerTraceInfo.personId":{required:true},
+					"customerTraceInfo.tracePersonId":{required:true},
 					"customerTraceInfo.salesmanId":{required:true},
 					"customerTraceInfo.traceOption":{required:true},
 					"customerTraceInfo.tel":{strangecode:true},
@@ -118,7 +118,7 @@
 			 * 初始化页面
 			 */
 			$.fn.initpage = function(){
-				//$("#personId").focus();
+				$("#tel").focus();
 				
 			}
 		</script>
@@ -148,13 +148,13 @@
 		<td></td>
 		<td align="center" nowrap>受访人：</td>
 		<td><s:select list="listPerson" listKey="id" listValue="personName" value="customerTraceInfo.tracePersonId" 
-			id="personId" name="customerTraceInfo.tracePersonId" cssStyle="width:150px" headerKey="" headerValue="--请选择--"></s:select></td>
+			id="personId" name="customerTraceInfo.tracePersonId" cssStyle="width:135px" headerKey="" headerValue="--请选择--"></s:select><font color="red">*</font></td>
 		<td align="center" nowrap>跟进人：</td>
 		<td><s:select list="userList" listKey="id" listValue="userCName" value="customerTraceInfo.salesmanId" 
-			id="salesmanId" name="customerTraceInfo.salesmanId" cssStyle="width:150px" headerKey="" headerValue="--请选择--"></s:select></td>
+			id="salesmanId" name="customerTraceInfo.salesmanId" cssStyle="width:135px" headerKey="" headerValue="--请选择--"></s:select><font color="red">*</font></td>
 		<td align="center" nowrap>跟进方式：</td>
 		<td style="width: 150px"><s:select list="listTraceOption" listKey="id" listValue="name" value="customerTraceInfo.traceOption" 
-			id="traceOption" name="customerTraceInfo.traceOption" cssStyle="width:150px" headerKey="" headerValue="--请选择--"></s:select></td>
+			id="traceOption" name="customerTraceInfo.traceOption" cssStyle="width:135px" headerKey="" headerValue="--请选择--"></s:select><font color="red">*</font></td>
 	</tr>
 	<tr>
 		<td></td>
@@ -184,19 +184,32 @@
 	<tr>
 		<td></td>
 		<td rowspan="2"><table>
-			<tr><td align="center">兴趣点：</td></tr>
+			<tr><td align="center" nowrap>兴趣点：</td></tr>
 			<tr><td style="color:white">占行：</td></tr></table></td>
 		<td rowspan="2"><table>
-			<tr><td><s:textarea type="text" style="width:550px;height:70px" name="customerTraceInfo.interest" id="interest"></s:textarea></td></tr></table></td>
+			<tr><td>
+			<s:if test='%{customerTraceInfo.id != null && customerTraceInfo.id != ""}'>
+				<s:textarea type="text" style="width:650px;height:70px" name="customerTraceInfo.interest" id="interest"></s:textarea></td></tr></table></td>
+			</s:if>
+			<s:else>
+				<s:textarea title="请先填写跟进记录再填写结果 " readOnly="true" type="text" style="width:650px;height:70px" name="customerTraceInfo.interest" id="interest"></s:textarea></td></tr></table></td>
+			</s:else>
+			
 	</tr>
 	<tr><td></td></tr>
 	<tr>
 		<td></td>
 		<td rowspan="2"><table>
-			<tr><td align="center">异议点：</td></tr>
-			<tr><td style="color:white">占行</td></tr></table></td>
+			<tr><td align="center" nowrap>异议点：</td></tr>
+			<tr><td style="color:white">占行：</td></tr></table></td>
 		<td rowspan="2"><table>
-			<tr><td><s:textarea type="text" style="width:550px;height:70px" name="customerTraceInfo.objection" id="objection"></s:textarea></td></tr></table></td>
+			<tr><td>
+			<s:if test='%{customerTraceInfo.id != null && customerTraceInfo.id != ""}'>
+			<s:textarea type="text"  style="width:650px;height:70px" name="customerTraceInfo.objection" id="objection"></s:textarea></td></tr></table></td>
+			</s:if>
+			<s:else>
+			<s:textarea title="请先填写跟进记录再填写结果 " type="text" readOnly="true" style="width:650px;height:70px" name="customerTraceInfo.objection" id="objection"></s:textarea></td></tr></table></td>
+			</s:else>
 	</tr>
 	<tr><td></td></tr>
 </table></td></tr>
