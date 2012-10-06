@@ -25,7 +25,7 @@ public interface IPopedomService {
  *            角色id串
  * @throws Exception
  */
-public void saveOrUpdatePopedom( String keyword, String[] roleIds ) throws Exception;
+public void saveOrUpdatePopedom( String keyword, String[] roleIds,String commpanyId ) throws Exception;
 
 /**
  * 根据权限主键串，删除权限

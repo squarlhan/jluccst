@@ -48,7 +48,7 @@ public class PopedomRoleAction extends BaseActionSupport
 	 */
 	public String saveOrUpdatePopedom() throws Exception
 	{
-		popedomService.saveOrUpdatePopedom( menuKey, roleIds );
+		popedomService.saveOrUpdatePopedom( menuKey, roleIds, companyId );
 		message.setContent( "权限设置成功！" );
 		return SUCCESS;
 	}

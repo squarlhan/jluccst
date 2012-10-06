@@ -48,14 +48,15 @@ public class PopedomDaoImpl extends BaseDao<Popedom, String> implements IPopedom
 		return list;
 	}
 
-	public void saveOrUpdatePopedom( String keyword, String[] roleIds ) throws Exception
+	public void saveOrUpdatePopedom( String keyword, String[] roleIds, String companyId ) throws Exception
 	{
 		if( roleIds != null && roleIds.length > 0 )
 		{
 			// （1）先删除权限
-			String hql = "delete Popedom where keyword = :keyword";
+			String hql = "delete Popedom where keyword = :keyword and companyId = :companyId ";
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put( "keyword", keyword );
+			map.put( "companyId", companyId );
 			super.executeHql( hql, map );
 			// （2）再保存权限
 			Popedom popedom = null;
