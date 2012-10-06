@@ -70,7 +70,7 @@ public class AnalysisEngineServiceImpl implements IAnalysisEngineService{
 						fuzzyValue = MathFunction.triangle(totalConsumption, obj.getFirstValue(), obj.getSecondValue(), obj.getThirdValue());
 					}else if(obj.getFunctionName().equals(MathFunction.TRAPEZOID))
 					{
-						fuzzyValue = MathFunction.trapezoid(totalConsumption, obj.getFirstValue(), obj.getSecondValue(), obj.getThirdValue(),obj.getFourthValue());
+						fuzzyValue = MathFunction.trapezoid(totalConsumption, obj.getFirstValue(), obj.getThirdValue(),obj.getFourthValue(), obj.getSecondValue());
 					}
 					fuzzy.setFuzzyValue(fuzzyValue);
 					
@@ -96,7 +96,7 @@ public class AnalysisEngineServiceImpl implements IAnalysisEngineService{
 						fuzzyValue = MathFunction.triangle(consumptionTimes, obj.getFirstValue(), obj.getSecondValue(), obj.getThirdValue());
 					}else if(obj.getFunctionName().equals(MathFunction.TRAPEZOID))
 					{
-						fuzzyValue = MathFunction.trapezoid(consumptionTimes, obj.getFirstValue(), obj.getSecondValue(), obj.getThirdValue(),obj.getFourthValue());
+						fuzzyValue = MathFunction.trapezoid(consumptionTimes, obj.getFirstValue(), obj.getThirdValue(),obj.getFourthValue(), obj.getSecondValue());
 					}
 					fuzzy.setFuzzyValue(fuzzyValue);
 					
@@ -122,7 +122,7 @@ public class AnalysisEngineServiceImpl implements IAnalysisEngineService{
 						fuzzyValue = MathFunction.triangle(introduceTimes, obj.getThirdValue(), obj.getFirstValue(), obj.getSecondValue() );
 					}else if(obj.getFunctionName().equals(MathFunction.TRAPEZOID))
 					{
-						fuzzyValue = MathFunction.trapezoid(introduceTimes, obj.getFirstValue(), obj.getSecondValue(), obj.getThirdValue(),obj.getFourthValue());
+						fuzzyValue = MathFunction.trapezoid(introduceTimes, obj.getFirstValue(), obj.getThirdValue(),obj.getFourthValue(), obj.getSecondValue());
 					}
 					fuzzy.setFuzzyValue(fuzzyValue);
 					fuzzy.setSugeno(obj.getSugeno());
@@ -148,7 +148,7 @@ public class AnalysisEngineServiceImpl implements IAnalysisEngineService{
 						fuzzyValue = MathFunction.triangle(devopDegree, obj.getFirstValue(), obj.getSecondValue(), obj.getThirdValue());
 					}else if(obj.getFunctionName().equals(MathFunction.TRAPEZOID))
 					{
-						fuzzyValue = MathFunction.trapezoid(devopDegree, obj.getFirstValue(), obj.getSecondValue(), obj.getThirdValue(),obj.getFourthValue());
+						fuzzyValue = MathFunction.trapezoid(devopDegree, obj.getFirstValue(), obj.getThirdValue(),obj.getFourthValue(), obj.getSecondValue());
 					}
 					fuzzy.setFuzzyValue(fuzzyValue);
 					
