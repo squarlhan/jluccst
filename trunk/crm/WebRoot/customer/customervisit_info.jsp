@@ -35,7 +35,7 @@
 		  	 */
 			var _customer_submit = {
 				rules: {
-					"customerVisitInfo.personId":{required:true},
+					"customerVisitInfo.visitPersonId":{required:true},
 					"customerVisitInfo.salesmanId":{required:true},
 					"customerVisitInfo.visitOption":{required:true},
 					"customerVisitInfo.tel":{strangecode:true},
@@ -119,7 +119,7 @@
 			 */
 			$.fn.initpage = function(){
 				//$("#personId").focus();
-				
+				$("#tel").focus();
 			}
 		</script>
 		<style type="text/css">
@@ -148,13 +148,13 @@
 		<td></td>
 		<td align="center" nowrap>受访人：</td>
 		<td><s:select list="listPerson" listKey="id" listValue="personName" value="customerVisitInfo.visitPersonId" 
-			id="personId" name="customerVisitInfo.visitPersonId" cssStyle="width:150px" headerKey="" headerValue="--请选择--"></s:select></td>
+			id="personId" name="customerVisitInfo.visitPersonId" cssStyle="width:135px" headerKey="" headerValue="--请选择--"></s:select><font color="red">*</font></td>
 		<td align="center" nowrap>回访人：</td>
 		<td><s:select list="userList" listKey="id" listValue="userCName" value="customerVisitInfo.salesmanId" 
-			id="salesmanId" name="customerVisitInfo.salesmanId" cssStyle="width:150px" headerKey="" headerValue="--请选择--"></s:select></td>
+			id="salesmanId" name="customerVisitInfo.salesmanId" cssStyle="width:135px" headerKey="" headerValue="--请选择--"></s:select><font color="red">*</font></td>
 		<td align="center" nowrap>回访方式：</td>
 		<td style="width: 150px"><s:select list="listVisitOption" listKey="id" listValue="name" value="customerVisitInfo.visitOption" 
-			id="visitOption" name="customerVisitInfo.visitOption" cssStyle="width:150px" headerKey="" headerValue="--请选择--"></s:select></td>
+			id="visitOption" name="customerVisitInfo.visitOption" cssStyle="width:135px" headerKey="" headerValue="--请选择--"></s:select><font color="red">*</font></td>
 	</tr>
 	<tr>
 		<td></td>
@@ -184,10 +184,17 @@
 	<tr>
 		<td></td>
 		<td rowspan="2"><table>
-			<tr><td align="center">了解内容及结果：</td></tr>
+			<tr><td align="center" nowrap>了解内容及结果：</td></tr>
 			<tr><td style="color:white">占行：</td></tr></table></td>
 		<td rowspan="2"><table>
-			<tr><td><s:textarea type="text" style="width:550px;height:70px" name="customerVisitInfo.contentResult" id="contentResult"></s:textarea></td></tr></table></td>
+			<tr><td>
+			<s:if test='%{customerVisitInfo.id != null && customerVisitInfo.id != ""}'>
+				<s:textarea type="text" style="width:600px;height:70px" name="customerVisitInfo.contentResult" id="contentResult"></s:textarea>
+			</s:if>
+			<s:else>
+				<s:textarea title="请先填写回访记录再填写结果 " readOnly="true" type="text" style="width:600px;height:70px" name="customerVisitInfo.contentResult" id="contentResult"></s:textarea>
+			</s:else>
+			</td></tr></table></td>
 	</tr>
 	<tr><td></td></tr>
 	<tr>
@@ -196,7 +203,14 @@
 			<tr><td align="center">备 注：</td></tr>
 			<tr><td style="color:white">占行</td></tr></table></td>
 		<td rowspan="2"><table>
-			<tr><td><s:textarea type="text" style="width:550px;height:70px" name="customerVisitInfo.remark" id="remark"></s:textarea></td></tr></table></td>
+			<tr><td>
+			<s:if test='%{customerVisitInfo.id != null && customerVisitInfo.id != ""}'>
+				<s:textarea type="text" style="width:600px;height:70px" name="customerVisitInfo.remark" id="remark"></s:textarea>
+			</s:if>
+			<s:else>
+				<s:textarea title="请先填写回访记录再填写结果 " readOnly="true" type="text" style="width:600px;height:70px" name="customerVisitInfo.remark" id="remark"></s:textarea>
+			</s:else>
+			</td></tr></table></td>
 	</tr>
 	<tr><td></td></tr>
 </table></td></tr>

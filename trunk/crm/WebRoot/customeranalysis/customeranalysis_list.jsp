@@ -87,6 +87,7 @@ $(function() {
 						  if(allData[i].customerName == itemname)
 						  {
 							  $("#chk"+g_number).val(allData[i].id);
+							  $("#chk"+g_number).attr("checked","true");
 							  $("#customerName"+g_number).html(allData[i].customerName);
 				  			  $("#salesman"+g_number).html(allData[i].salesman);
 							  $("#levelId"+g_number).html(allData[i].levelId);
@@ -153,6 +154,11 @@ $(function() {
 				if($("#chkLevel").attr("checked"))
 				{
 					level = 1;
+				}
+				if(customerIds == "")
+				{
+					alert("请先选择评估的客户！");
+					return false;
 				}
 				$.ajax({
                     url:"<%=basePath%>customerassessment/customerAnalysis.action?customerIds="+customerIds+"&totalComsumption="+totalComsumption+"&consumptionTimes="+consumptionTimes+"&introduceTimes="+introduceTimes+"&payments="+payments+"&level="+level,
