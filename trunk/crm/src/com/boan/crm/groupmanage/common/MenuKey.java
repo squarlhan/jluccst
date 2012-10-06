@@ -47,6 +47,23 @@ public class MenuKey {
 							 */
 							public static final String SUB_DAO_RU_KE_HU = "SUB_DAO_RU_KE_HU";
 
+/**
+ * 我的客户管理
+ */
+public static final String MY_KE_HU_GUAN_LI = "MY_KE_HU_GUAN_LI";
+						/**
+						 * 我的客户
+						 */
+						public static final String MY_KE_HU= "MY_KE_HU";
+						/**
+						 * 我的跟进
+						 */
+						public static final String MY_GEN_JIN= "MY_GEN_JIN";
+						/**
+						 * 我的回访
+						 */
+						public static final String MY_HUI_FANG= "MY_HUI_FANG";
+							
 	/**
 	 * 客户管理
 	 */
@@ -71,7 +88,22 @@ public class MenuKey {
 							 */
 							public static final String SUB_KE_HU_PING_GU = "SUB_KE_HU_PING_GU";
 							
-
+	/**
+	 * 综合查询
+	 */
+	public static final String ZONG_HE_CHA_XUN = "ZONG_HE_CHA_XUN";
+						/**
+						 * 客户查询
+						 */
+						public static final String KE_HU_CHA_XUN = "KE_HU_CHA_XUN";
+						/**
+						 * 回访查询
+						 */
+						public static final String HUI_FANG_CHA_XUN = "HUI_FANG_CHA_XUN";
+						/**
+						 * 跟进查询
+						 */
+						public static final String GEN_JIN_CHA_XUN = "GEN_JIN_CHA_XUN";
 	/**
 	 * 销售管理
 	 */
