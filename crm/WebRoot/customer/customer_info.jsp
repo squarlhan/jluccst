@@ -44,6 +44,7 @@
 					"customerInfo.maturityId":{required:true},
 					"customerInfo.levelId":{required:true},
 					"customerInfo.address":{required:true,strangecode:true},
+					"customerInfo.mainIndustry":{required:true,strangecode:true},
 					"customerInfo.introduceTimes":{number:true}
 				}
 			};
@@ -256,23 +257,23 @@
 										<tr>
 											<td></td>
 											<td align="center" nowrap>客户名称：</td>
-											<td><s:textfield style="width:150px"
-													name="customerInfo.customerName"></s:textfield>
+											<td><s:textfield style="width:140px"
+													name="customerInfo.customerName"></s:textfield><font color="red">*</font>
 											</td>
 											<td align="center" nowrap>公司全名：</td>
-											<td><s:textfield style="width:150px"
+											<td><s:textfield style="width:140px"
 													name="customerInfo.companyFullName"></s:textfield>
 											</td>
 											<td align="center" nowrap>公司传真：</td>
-											<td><s:textfield style="width:150px"
+											<td><s:textfield style="width:140px"
 													name="customerInfo.fax"></s:textfield>
 											</td>
 											<td align="center" nowrap>客户来源：</td>
 											<td><s:select list="listSource" listKey="id"
 													listValue="name" value="customerInfo.sourceId"
 													id="sourceId" name="customerInfo.sourceId"
-													cssStyle="width:150px" headerKey=""
-													headerValue="--请选择客户来源--"></s:select></td>
+													cssStyle="width:130px" headerKey=""
+													headerValue="--请选择客户来源--"></s:select><font color="red">*</font></td>
 										</tr>
 										<tr>
 											<td></td>
@@ -280,28 +281,28 @@
 											<td><s:select list="listCategory" listKey="id"
 													listValue="name" value="customerInfo.categoryId"
 													id="categoryId" name="customerInfo.categoryId"
-													cssStyle="width:150px" headerKey=""
-													headerValue="--请选择客户分类--"></s:select></td>
+													cssStyle="width:140px" headerKey=""
+													headerValue="--请选择客户分类--"></s:select><font color="red">*</font></td>
 											<td align="center">业务进展：</td>
 											<td><s:select list="listProgress" listKey="id"
 													listValue="name" value="customerInfo.progressId"
 													id="progressId" name="customerInfo.progressId"
-													cssStyle="width:150px" headerKey=""
-													headerValue="--请选择业务进展--"></s:select>
+													cssStyle="width:140px" headerKey=""
+													headerValue="--请选择业务进展--"></s:select><font color="red">*</font>
 											</td>
 											<td align="center">成熟度：</td>
 											<td><s:select list="listMaturity" listKey="id"
 													listValue="name" value="customerInfo.maturityId"
 													id="categoryId" name="customerInfo.maturityId"
-													cssStyle="width:150px" headerKey=""
-													headerValue="--请选择成熟度--"></s:select>
+													cssStyle="width:140px" headerKey=""
+													headerValue="--请选择成熟度--"></s:select><font color="red">*</font>
 											</td>
 											<td align="center">开发程度：</td>
-											<td style="width:150px"><s:select list="listLevel"
+											<td><s:select list="listLevel"
 													listKey="id" listValue="name" value="customerInfo.levelId"
 													id="levelId" name="customerInfo.levelId"
-													cssStyle="width:150px" headerKey=""
-													headerValue="--请选择开发程度--"></s:select>
+													cssStyle="width:130px" headerKey=""
+													headerValue="--请选择开发程度--"></s:select><font color="red">*</font>
 											</td>
 										</tr>
 										<tr>
@@ -310,18 +311,18 @@
 											<td><s:select list="userList" listKey="id"
 													listValue="userCName" value="customerInfo.salesmanId"
 													id="salesmanId" name="customerInfo.salesmanId"
-													cssStyle="width:150px" headerKey=""
+													cssStyle="width:140px" headerKey=""
 													headerValue="--请选择业务员--"></s:select>
 											</td>
 											<td align="center" nowrap>其他业务员：</td>
 											<td><s:select list="userList" listKey="id"
 													listValue="userCName" value="customerInfo.otherSalesmanId"
 													id="salesmanId" name="customerInfo.otherSalesmanId"
-													cssStyle="width:150px" headerKey=""
+													cssStyle="width:140px" headerKey=""
 													headerValue="--请选择业务员--"></s:select>
 											</td>
 											<td align="center">建档时间：</td>
-											<td><s:textfield type="text" style="width:150px"
+											<td><s:textfield type="text" style="width:140px"
 													name="customerInfo.registerTime" id="registerTime"></s:textfield>
 											</td>
 										</tr>
@@ -347,8 +348,8 @@
 											</select>
 											</td>
 											<td>具体地址：</td>
-											<td><s:textfield type="text" style="width:395px"
-													name="customerInfo.address" id="registerTime"></s:textfield>
+											<td><s:textfield type="text" style="width:380px"
+													name="customerInfo.address" id="registerTime"></s:textfield><font color="red">*</font>
 											</td>
 										</tr>
 									</table>
@@ -360,7 +361,7 @@
 											<td></td>
 											<td align="center">主营行业：</td>
 											<td><s:textfield type="text" style="width:410px"
-													name="customerInfo.mainIndustry" id="mainIndustry"></s:textfield>
+													name="customerInfo.mainIndustry" id="mainIndustry"></s:textfield><font color="red">*</font>
 											</td>
 											<td align="center">邮 编：</td>
 											<td><s:textfield type="text" style="width:395px"
@@ -375,7 +376,7 @@
 										<tr>
 											<td></td>
 											<td align="center">介绍客户次数：</td>
-											<td><s:textfield type="text" style="width:150px"
+											<td><s:textfield type="text" style="width:140px"
 													name="customerInfo.introduceTimes" id="introduceTimes"></s:textfield>
 											</td>
 											<td align="center"></td>
