@@ -137,7 +137,6 @@ public class FuzzyRuleInfoAction extends BaseActionSupport{
 		obj.setIfFuzzyName(fuzzyInfoService.get(ruleInfo.getIfFuzzyId()).getFuzzyName());
 		obj.setResultFuzzyId(ruleInfo.getResultFuzzyId());
 		obj.setResultFuzzyName(resultFuzzyName);
-		
 		fuzzyRuleInfoService.save(obj);
 		if(ifFuzzyCategory1 != null && ifFuzzyCategory1.length() > 0)
 		{

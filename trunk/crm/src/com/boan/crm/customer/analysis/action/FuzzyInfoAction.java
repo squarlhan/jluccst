@@ -162,6 +162,7 @@ public class FuzzyInfoAction extends BaseActionSupport{
 		obj.setSecondValue(fuzzyInfo.getSecondValue());
 		obj.setThirdValue(fuzzyInfo.getThirdValue());
 		obj.setSugeno(fuzzyInfo.getSugeno());
+		obj.setCompanyId(sessionCompanyId);
 		fuzzyInfoService.save(obj);
 		id = obj.getId();
 		return SUCCESS;
