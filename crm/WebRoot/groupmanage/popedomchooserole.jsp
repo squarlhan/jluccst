@@ -49,6 +49,7 @@
 	<body class="body">
 		<s:form id="form1" name="form1" method="post" theme="simple">
 			<s:hidden id="menuKey" name="menuKey"></s:hidden>
+			<s:hidden id="companyId" name="companyId"></s:hidden>
 			<table width="100%" border="0" cellspacing="0" cellpadding="0">
 				<tr>
 					<td style="padding: 5px;">
