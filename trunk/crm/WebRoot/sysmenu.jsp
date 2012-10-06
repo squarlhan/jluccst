@@ -693,6 +693,18 @@
 									<tr>
 										<td width="40" align="right" style="padding-bottom: 4px;"><img src="images/menuto.jpg" width="5" height="5" />
 										</td>
+										<td><a href="datadictionary/data_dict.jsp" target="mainFrame">数据字典</a>
+										</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+						<tr>
+							<td align="left">
+								<table width="100%" border="0" cellspacing="5" cellpadding="0">
+									<tr>
+										<td width="40" align="right" style="padding-bottom: 4px;"><img src="images/menuto.jpg" width="5" height="5" />
+										</td>
 										<td><a href="fuzzy/fuzzymanage.jsp" target="mainFrame">模糊项设置</a>
 										</td>
 									</tr>
