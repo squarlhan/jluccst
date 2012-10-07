@@ -30,9 +30,9 @@ public class AnalysisResultServiceImpl implements IAnalysisResultService{
 	/**
 	 * 根据分类获取模糊项
 	 */
-	public List<AnalysisResult> findAllAnalysisResult()
+	public List<AnalysisResult> findAllAnalysisResult(String companyId)
 	{
-		return analysisResultDao.find("from AnalysisResult order by id asc", new Object[0]);
+		return analysisResultDao.find("from AnalysisResult where companyId = ? order by id asc", companyId);
 	}
 	/**
 	 * 根据值获取结论　
