@@ -117,6 +117,46 @@ public class CustomerInfoAction extends BaseActionSupport{
 	 * 客户列表
 	 * @return String
 	 */
+	public String myCustomerList()
+	{
+		//客户分类： 传0
+		listCategory = dataDictionaryService.findDataDictionaryByType(sessionCompanyId, 0);
+		try
+		{
+			//userList = userService.queryUserListByCompanyIdRoleKey(sessionCompanyId,RoleFlag.YE_WU_YUAN);
+		}catch(Exception ex)
+		{
+			ex.printStackTrace();
+		}
+		Map<String,String> values = new HashMap<String,String>();
+		
+		if(customerName != null && customerName.length() > 0)
+		{
+			values.put("customerName", "%"+customerName+"%");
+		}
+		if(contractorName != null && contractorName.length() > 0)
+		{
+			values.put("contractorName", "%"+contractorName+"%");
+		}
+		if(customerCategory != null && customerCategory.length() > 0)
+		{
+			values.put("customerCategory", customerCategory);
+		}
+		if(salesmanId != null && salesmanId.length() > 0)
+		{
+			values.put("salesmanId", salesmanId);
+		}
+		
+		values.put("companyId", sessionCompanyId);
+		values.put("salesmanId", sessionUserId);
+		
+		pagination = customerInfoService.findCustomerInfoForPage(values, pagination);
+		return SUCCESS;
+	}
+	/**
+	 * 客户列表
+	 * @return String
+	 */
 	public String customerList()
 	{
 		//客户分类： 传0
@@ -483,7 +523,12 @@ public class CustomerInfoAction extends BaseActionSupport{
 		
 		return SUCCESS;
 	}
+	
 	public String customerTabInfo()
+	{
+		return SUCCESS;
+	}
+	public String myCustomerTabInfo()
 	{
 		return SUCCESS;
 	}

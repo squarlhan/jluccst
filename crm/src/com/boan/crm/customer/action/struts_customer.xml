@@ -5,6 +5,17 @@
 <struts>
 	<!-- 客户Action -->
 	<package name="customer" extends="struts-default" namespace="/customer">
+		<action name="myCustomerList" class="customerInfoAction" method="myCustomerList">
+			<result name="success">/customer/mycustomer_list.jsp</result>
+			<result name="input">/customer/mycustomer_list.jsp</result>
+		</action>
+		<action name="myCustomerTabInfo" class="customerInfoAction" method="myCustomerTabInfo">
+			<result name="success">/customer/mycustomertabinfo.jsp</result>
+		</action>
+		<action name="myCustomerInfo" class="customerInfoAction" method="customerInfo">
+			<result name="success">/customer/mycustomer_info.jsp</result>
+			<result name="input">/customer/mycustomer_info.jsp</result>
+		</action>
 		<action name="customerList" class="customerInfoAction" method="customerList">
 			<result name="success">/customer/customer_list.jsp</result>
 			<result name="input">/customer/customer_list.jsp</result>
