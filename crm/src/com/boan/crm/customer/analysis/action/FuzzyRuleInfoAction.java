@@ -3,7 +3,9 @@
  */
 package com.boan.crm.customer.analysis.action;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -75,7 +77,9 @@ public class FuzzyRuleInfoAction extends BaseActionSupport{
 	 */
 	public String fuzzyRuleList()
 	{
-		pagination = fuzzyRuleInfoService.findAllFuzzyRuleResultInfo(null,pagination);
+		Map<String, String> values  = new HashMap<String ,String>();
+		values.put("companyId", sessionCompanyId);
+		pagination = fuzzyRuleInfoService.findAllFuzzyRuleResultInfo(values,pagination);
 		return SUCCESS;
 	}
 	
@@ -137,6 +141,7 @@ public class FuzzyRuleInfoAction extends BaseActionSupport{
 		obj.setIfFuzzyName(fuzzyInfoService.get(ruleInfo.getIfFuzzyId()).getFuzzyName());
 		obj.setResultFuzzyId(ruleInfo.getResultFuzzyId());
 		obj.setResultFuzzyName(resultFuzzyName);
+		obj.setCompanyId(sessionCompanyId);
 		fuzzyRuleInfoService.save(obj);
 		if(ifFuzzyCategory1 != null && ifFuzzyCategory1.length() > 0)
 		{
@@ -147,7 +152,7 @@ public class FuzzyRuleInfoAction extends BaseActionSupport{
 			obj.setIfFuzzyName(fuzzyInfoService.get(ifFuzzyId1).getFuzzyName());
 			obj.setResultFuzzyId(ruleInfo.getResultFuzzyId());
 			obj.setResultFuzzyName(resultFuzzyName);
-			
+			obj.setCompanyId(sessionCompanyId);
 			fuzzyRuleInfoService.save(obj);
 		}
 		if(ifFuzzyCategory2 != null && ifFuzzyCategory2.length() > 0)
@@ -159,7 +164,7 @@ public class FuzzyRuleInfoAction extends BaseActionSupport{
 			obj.setIfFuzzyName(fuzzyInfoService.get(ifFuzzyId2).getFuzzyName());
 			obj.setResultFuzzyId(ruleInfo.getResultFuzzyId());
 			obj.setResultFuzzyName(resultFuzzyName);
-			
+			obj.setCompanyId(sessionCompanyId);
 			fuzzyRuleInfoService.save(obj);
 		}
 		if(ifFuzzyCategory3 != null && ifFuzzyCategory3.length() > 0)
@@ -171,7 +176,7 @@ public class FuzzyRuleInfoAction extends BaseActionSupport{
 			obj.setIfFuzzyName(fuzzyInfoService.get(ifFuzzyId3).getFuzzyName());
 			obj.setResultFuzzyId(ruleInfo.getResultFuzzyId());
 			obj.setResultFuzzyName(resultFuzzyName);
-			
+			obj.setCompanyId(sessionCompanyId);
 			fuzzyRuleInfoService.save(obj);
 		}
 		if(ifFuzzyCategory4 != null && ifFuzzyCategory4.length() > 0)
@@ -183,7 +188,7 @@ public class FuzzyRuleInfoAction extends BaseActionSupport{
 			obj.setIfFuzzyName(fuzzyInfoService.get(ifFuzzyId4).getFuzzyName());
 			obj.setResultFuzzyId(ruleInfo.getResultFuzzyId());
 			obj.setResultFuzzyName(resultFuzzyName);
-			
+			obj.setCompanyId(sessionCompanyId);
 			fuzzyRuleInfoService.save(obj);
 		}
 		id = obj.getResultFuzzyId();

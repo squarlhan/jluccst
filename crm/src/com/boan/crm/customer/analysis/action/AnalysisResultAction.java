@@ -54,7 +54,7 @@ public class AnalysisResultAction extends BaseActionSupport{
 	public String analysisResultList()
 	{
 		//分析结论分类： 传0
-		analysisResultList = analysisResultService.findAllAnalysisResult();
+		analysisResultList = analysisResultService.findAllAnalysisResult(sessionCompanyId);
 		return SUCCESS;
 	}
 	
@@ -90,7 +90,7 @@ public class AnalysisResultAction extends BaseActionSupport{
 		obj.setBeginValue(analysisResult.getBeginValue());
 		obj.setEndValue(analysisResult.getEndValue());
 		obj.setResult(analysisResult.getResult());
-		
+		obj.setCompanyId(sessionCompanyId);
 		analysisResultService.save(obj);
 		id = obj.getId();
 		return SUCCESS;
