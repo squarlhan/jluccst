@@ -32,6 +32,14 @@ public class AnalysisResult implements Serializable{
 	private double endValue = 0;
 	@Column(name = "RESULT" , length = 100)
 	private String result = "";
+	@Column(name = "COMPANY_ID")
+	private String companyId = "";
+	public String getCompanyId() {
+		return companyId;
+	}
+	public void setCompanyId(String companyId) {
+		this.companyId = companyId;
+	}
 	public int getId() {
 		return id;
 	}
