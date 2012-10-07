@@ -63,7 +63,7 @@ public class FuzzyRuleInfoServiceImpl implements IFuzzyRuleInfoService{
 	public Pagination<IdCaption> findAllFuzzyRuleResultInfo(Map<String, ?> values,Pagination<IdCaption> pagination)
 	{
 		StringBuilder hql = new StringBuilder();
-		hql.append( "select new com.boan.crm.customer.analysis.model.IdCaption(t.resultFuzzyId,t.resultFuzzyName) from RuleInfo t group by t.resultFuzzyId,t.resultFuzzyName ");
+		hql.append( "select new com.boan.crm.customer.analysis.model.IdCaption(t.resultFuzzyId,t.resultFuzzyName) from RuleInfo t where t.companyId = :companyId group by t.resultFuzzyId,t.resultFuzzyName ");
 		hql.append(" order by resultFuzzyId asc");
 		List<IdCaption> data = fuzzyRuleInfoDao.findForPage(hql.toString(), values, pagination.getStartIndex(), pagination.getPageSize());
 		if(data != null && data.size() > 0)
@@ -82,7 +82,7 @@ public class FuzzyRuleInfoServiceImpl implements IFuzzyRuleInfoService{
 			}
 		}
 		hql.delete(0, hql.length());
-		hql.append(" select Count(t.resultFuzzyId) from RuleInfo t group by t.resultFuzzyId,t.resultFuzzyName" );
+		hql.append(" select Count(t.resultFuzzyId) from RuleInfo t where t.companyId = :companyId group by t.resultFuzzyId,t.resultFuzzyName" );
 		List<Integer> list = fuzzyRuleInfoDao.find(hql.toString(), values);
 		int totalRows = 0;
 		if(list != null && list.size() > 0)

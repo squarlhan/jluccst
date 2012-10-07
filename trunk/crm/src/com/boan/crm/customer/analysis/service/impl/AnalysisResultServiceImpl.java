@@ -32,7 +32,10 @@ public class AnalysisResultServiceImpl implements IAnalysisResultService{
 	 */
 	public List<AnalysisResult> findAllAnalysisResult(String companyId)
 	{
-		return analysisResultDao.find("from AnalysisResult where companyId = ? order by id asc", companyId);
+		String hql = "from AnalysisResult where companyId = :companyId order by id asc";
+		Map<String ,String > values = new HashMap<String ,String>();
+		values.put("companyId", companyId);
+		return analysisResultDao.find(hql, values);
 	}
 	/**
 	 * 根据值获取结论　
@@ -42,7 +45,7 @@ public class AnalysisResultServiceImpl implements IAnalysisResultService{
 		Map<String,Double> idMap = new HashMap<String,Double>();
 		idMap.put("result", result);
 		
-		List<AnalysisResult> list= analysisResultDao.find("from AnalysisResult where :result >= beginValue and :result < endValue", idMap);
+		List<AnalysisResult> list= analysisResultDao.find("from AnalysisResult where :result >= beginValue and :result <= endValue", idMap);
 		if(list != null && list.size() > 0)
 		{
 			return list.get(0);
