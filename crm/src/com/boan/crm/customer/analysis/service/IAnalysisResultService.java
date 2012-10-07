@@ -16,7 +16,7 @@ public interface IAnalysisResultService {
 	/**
 	 * 根据分类获取分析结论
 	 */
-	public List<AnalysisResult> findAllAnalysisResult();
+	public List<AnalysisResult> findAllAnalysisResult(String companyId);
 	/**
 	 * 根据值获取分析结论
 	 */
