@@ -50,13 +50,13 @@
 				parent.parent.$("#windown-close").bind('click',function(){
 					window.location.href="./customerList.action";
 				});*/
-				window.parent.location.href = "customerTabInfo.action";
+				window.parent.location.href = "myCustomerTabInfo.action";
 		
 			});
 			$("#importbtn").click(function(){
-				parent.parent.tipsWindown("导入客户信息","iframe:customer/importcustomer.jsp","460","200","true","","true","no");
+				parent.parent.tipsWindown("导入客户信息","iframe:customer/myimportcustomer.jsp","460","200","true","","true","no");
 				parent.parent.$("#windown-close").bind('click',function(){
-					window.location.href="./customerList.action";
+					window.location.href="./myCustomerList.action";
 				});
 				//window.parent.location.href = "customerTabInfo.action";
 		
@@ -68,7 +68,7 @@
 					window.location.href="./customerList.action";
 				});*/
 				//window.parent.location.href = "customerTabInfo.action";
-				form1.action = "customerList.action";
+				form1.action = "myCustomerList.action";
 				form1.submit();
 		
 			});
@@ -106,7 +106,7 @@
 	  		 * 删除所选客户信息
 	  		 */
 	  		$("#deletepointbtn").click(function(){
-  				var url = "deleteCustomer.action";
+  				var url = "deleteMyCustomer.action";
   				if(window.confirm("您确定要删除所选信息吗？")){
   					$.post(url, $('#form1').serialize(), function(data){window.location.href=window.location.href;});
   				}

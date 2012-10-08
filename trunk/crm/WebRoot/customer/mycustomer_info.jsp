@@ -171,7 +171,7 @@
 						return false;
 					}
 					//if( $.trim( $("#companyId").val() ) != ""){
-					form1.action = "customer/saveCustomer.action";
+					form1.action = "customer/saveMyCustomer.action";
 					//}else{
 		             //  	form1.action = "saveCustomer.action";					
 					//}
@@ -193,7 +193,7 @@
 		 	$.fn.close = function(){
 		 		$("#closeBtn").click(function(){
 		  			//parent.$("#windown-close").click();
-		  			parent.location.href = "customermanage.jsp";
+		  			parent.location.href = "mycustomermanage.jsp";
 		  		});
 			}
 			/**
