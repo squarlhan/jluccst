@@ -71,7 +71,7 @@
 			//日期控件
 			$('#endDate').datetimepicker({showTimepicker: false});
 			$("#addbtn").click(function(){
-				parent.parent.parent.tipsWindown("添加回访信息","iframe:customer/customerVisitInfo.action?customerId=" + $("#customerId_t").val(),"800","500","true","","true","no");
+				parent.parent.parent.tipsWindown("添加回访信息","iframe:customer/myCustomerVisitInfo.action?customerId=" + $("#customerId_t").val(),"800","500","true","","true","no");
 				parent.parent.parent.$("#windown-close").bind('click',function(){
 					window.location.href= window.location.href;
 				});
@@ -82,7 +82,7 @@
                	if(!validator.form()){
 					return false;
 				}
-				form1.action = "customerVisitList.action";
+				form1.action = "myCustomerVisitList.action";
 				form1.submit();
 		
 			});
@@ -212,7 +212,7 @@
             <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="contentResult"/></td>
             <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="remark"/></td>
           <td height="26" colspan="2" align="center" bgcolor="#FFFFFF">
-          	<s:url id="edit_url" action="customer/customerVisitInfo.action">   
+          	<s:url id="edit_url" action="customer/myCustomerVisitInfo.action">   
 				<s:param name="id" value="id"></s:param>   
 			</s:url>
 			<s:url id="delete_url" action="customer/deleteCustomerVisit.action">   
