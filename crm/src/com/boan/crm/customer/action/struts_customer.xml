@@ -16,6 +16,45 @@
 			<result name="success">/customer/mycustomer_info.jsp</result>
 			<result name="input">/customer/mycustomer_info.jsp</result>
 		</action>
+		<action name="saveMyCustomer" class="customerInfoAction" method="saveCustomer">
+			<result name="success" type="chain">
+             	<param name="actionName">myCustomerTabInfo</param>
+             	<param name="id">${id}</param>
+            </result>
+		</action>
+		<action name="deleteMyCustomer" class="customerInfoAction" method="deleteCustomer">
+    		<result name="success" type="chain">
+             	<param name="actionName">myCustomerList</param>
+            </result>
+    	</action>
+    	<action name="myCustomerTraceList" class="customerTraceInfoAction" method="customerTraceList">
+			<result name="success">/customer/mycustomertrace_list.jsp</result>
+			<result name="input">/customer/mycustomertrace_list.jsp</result>
+		</action>
+		<action name="myCustomerTraceInfo" class="customerTraceInfoAction" method="customerTraceInfo">
+			<result name="success">/customer/mycustomertrace_info.jsp</result>
+			<result name="input">/customer/mycustomertrace_info.jsp</result>
+		</action>
+		<action name="saveMyTraceInfo" class="customerTraceInfoAction" method="saveTraceInfo">
+			<result name="success" type="chain">
+             	<param name="actionName">myCustomerTraceInfo</param>
+             	<param name="id">${id}</param>
+            </result>
+		</action>
+		<action name="customerVisitList" class="customerVisitInfoAction" method="customerVisitList">
+			<result name="success">/customer/customervisit_list.jsp</result>
+			<result name="input">/customer/customervisit_list.jsp</result>
+		</action>
+		<action name="myCustomerVisitInfo" class="customerVisitInfoAction" method="customerVisitInfo">
+			<result name="success">/customer/mycustomervisit_info.jsp</result>
+			<result name="input">/customer/mycustomervisit_info.jsp</result>
+		</action>
+		<action name="saveMyVisitInfo" class="customerVisitInfoAction" method="saveVisitInfo">
+			<result name="success" type="chain">
+             	<param name="actionName">myCustomerVisitInfo</param>
+             	<param name="id">${id}</param>
+            </result>
+		</action>
 		<action name="customerList" class="customerInfoAction" method="customerList">
 			<result name="success">/customer/customer_list.jsp</result>
 			<result name="input">/customer/customer_list.jsp</result>
