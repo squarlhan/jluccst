@@ -71,7 +71,7 @@
 			//日期控件
 			$('#endDate').datetimepicker({showTimepicker: false});
 			$("#addbtn").click(function(){
-				parent.parent.parent.tipsWindown("添加回访信息","iframe:customer/myCustomerVisitInfo.action?customerId=" + $("#customerId_t").val(),"800","500","true","","true","no");
+				parent.parent.parent.tipsWindown("添加回访信息","iframe:customer/myCustomerVisitInfo.action?customerId=<s:property value='customerId'/>","850","550","true","","true","no");
 				parent.parent.parent.$("#windown-close").bind('click',function(){
 					window.location.href= window.location.href;
 				});
@@ -82,7 +82,7 @@
                	if(!validator.form()){
 					return false;
 				}
-				form1.action = "myCustomerVisitList.action";
+				form1.action = "myCustomerVisitList.action?customerId=<s:property value='customerId'/>";
 				form1.submit();
 		
 			});
@@ -95,7 +95,7 @@
 	  		$('a[name="edit"]').each(function(){
 	  			$(this).click(function(){
 	  				var url = $(this).attr("url");
-	  				parent.parent.parent.tipsWindown("修改回访信息","iframe:" + url,"800","500","true","","true","no");
+	  				parent.parent.parent.tipsWindown("修改回访信息","iframe:" + url,"850","550","true","","true","no");
 					parent.parent.parent.$("#windown-close").bind('click',function(){
 						window.location.href= window.location.href;
 					});
@@ -155,8 +155,6 @@
   
   <body>
  <s:form id="form1" name="form1" method="post" theme="simple">
- <s:hidden id="customerId" name="customerVisitInfo.customerId"></s:hidden>
- <s:hidden id="customerId_t" name="customerId"></s:hidden>
 <table width="100%" style="height:100%;" border="0" cellspacing="5" cellpadding="0">
   <tr>
     <td valign="top"><table width="100%" border="0" cellspacing="5" cellpadding="0">
@@ -187,7 +185,7 @@
          <td align="center" background="../images/headerbg.jpg">  
    				<s:checkbox theme="simple" id="cbk_all" name="all"></s:checkbox>
    			</td>
-              <td align="center" background="../images/headerbg.jpg"><strong>回访日期</strong></td>
+              <td align="center" background="../images/headerbg.jpg"><strong>回访时间</strong></td>
               <td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">客户名称</td>
 			<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">业务员</td>
 			<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">业务进展</td>
@@ -202,7 +200,7 @@
         <td height="26" align="center" bgcolor="#FFFFFF" >  
 				<s:checkbox id="%{#obj.id}" name="ids" fieldValue="%{id}" value="false" theme="simple"/>
 			</td>
-            <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="visitTime"/></td>
+            <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="visitTimeStr"/></td>
             <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="customerName"/></td>
             <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="salesman"/></td>
             <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="progress"/></td>
