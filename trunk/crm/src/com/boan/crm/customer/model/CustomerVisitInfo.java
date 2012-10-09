@@ -63,6 +63,14 @@ public class CustomerVisitInfo implements Serializable
 	private String visitOption = "";
 	@Column(name = "VISIT_TIME")
 	private Calendar visitTime = Calendar.getInstance();
+	@Transient
+	private String visitTimeStr = "";
+	public String getVisitTimeStr() {
+		return visitTimeStr;
+	}
+	public void setVisitTimeStr(String visitTimeStr) {
+		this.visitTimeStr = visitTimeStr;
+	}
 	@Column(name = "TASK" , length = 255)
 	private String task = "";
 	@Column(name = "CONTENTRESULT" , length = 255)

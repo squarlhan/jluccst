@@ -28,6 +28,7 @@ import com.boan.crm.groupmanage.common.RoleFlag;
 import com.boan.crm.groupmanage.model.User;
 import com.boan.crm.groupmanage.service.IUserService;
 import com.boan.crm.utils.action.BaseActionSupport;
+import com.boan.crm.utils.calendar.CalendarUtils;
 import com.boan.crm.utils.page.Pagination;
 
 /**
@@ -84,7 +85,15 @@ public class CustomerVisitInfoAction extends BaseActionSupport{
 	private CustomerInfo customerInfo = null;
 	private String contractPerson = "";
 	private String contractTel  = "";
-	
+	private String visitTime = "";
+	public String getVisitTime() {
+		return visitTime;
+	}
+
+	public void setVisitTime(String visitTime) {
+		this.visitTime = visitTime;
+	}
+
 
 	/**
 	 * 客户回访信息列表
@@ -144,6 +153,7 @@ public class CustomerVisitInfoAction extends BaseActionSupport{
 			customerVisitInfo = customerVisitInfoService.get(id);
 			customerId = customerVisitInfo.getCustomerId();
 			customerInfo = customerInfoService.get(customerId);
+			visitTime = CalendarUtils.toLongStringNoSecond(customerVisitInfo.getVisitTime());
 			try
 			{
 				customerInfo.setSalesman(userService.getUserById(customerInfo.getSalesmanId()).getUserCName());
@@ -233,7 +243,18 @@ public class CustomerVisitInfoAction extends BaseActionSupport{
 		obj.setSalesmanId(customerVisitInfo.getSalesmanId());
 		obj.setTask(customerVisitInfo.getTask());
 		obj.setVisitOption(customerVisitInfo.getVisitOption());
-		obj.setVisitTime(customerVisitInfo.getVisitTime());
+		Calendar time = Calendar.getInstance();
+		String[] timeArray = visitTime.split(" ")[1].split(":");
+		String[] dayArray = visitTime.split(" ")[0].split("-");
+		if(dayArray.length>0 && timeArray.length>0){
+			time.set(Calendar.YEAR, Integer.parseInt(dayArray[0]));
+			time.set(Calendar.MONTH, Integer.parseInt(dayArray[1]) - 1);
+			time.set(Calendar.DATE, Integer.parseInt(dayArray[2]));
+			time.set(Calendar.HOUR_OF_DAY, Integer.parseInt(timeArray[0]));
+			time.set(Calendar.MINUTE, Integer.parseInt(timeArray[1]));
+			time.set(Calendar.SECOND, 0);
+		}
+		obj.setVisitTime(time);
 		obj.setEmail(customerVisitInfo.getEmail());
 		obj.setQq(customerVisitInfo.getQq());
 		obj.setTel(customerVisitInfo.getTel());

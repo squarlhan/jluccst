@@ -28,6 +28,7 @@ import com.boan.crm.groupmanage.common.RoleFlag;
 import com.boan.crm.groupmanage.model.User;
 import com.boan.crm.groupmanage.service.IUserService;
 import com.boan.crm.utils.action.BaseActionSupport;
+import com.boan.crm.utils.calendar.CalendarUtils;
 import com.boan.crm.utils.page.Pagination;
 
 /**
@@ -77,14 +78,20 @@ public class CustomerTraceInfoAction extends BaseActionSupport{
 	private List<User> userList = null;
 	private String customerName = "";
 	private Calendar beginDate;
-	
-
 	private Calendar endDate;
 	private String traceOption = "";
 	private CustomerInfo customerInfo = null;
 	private String contractPerson = "";
 	private String contractTel  = "";
-	
+	private String traceTime = "";
+	public String getTraceTime() {
+		return traceTime;
+	}
+
+	public void setTraceTime(String traceTime) {
+		this.traceTime = traceTime;
+	}
+
 	public String getContractTel() {
 		return contractTel;
 	}
@@ -159,6 +166,7 @@ public class CustomerTraceInfoAction extends BaseActionSupport{
 			customerTraceInfo = customerTraceInfoService.get(id);
 			customerId = customerTraceInfo.getCustomerId();
 			customerInfo = customerInfoService.get(customerId);
+			traceTime = CalendarUtils.toLongStringNoSecond(customerTraceInfo.getTraceTime());
 			try
 			{
 				customerInfo.setSalesman(userService.getUserById(customerInfo.getSalesmanId()).getUserCName());
@@ -248,7 +256,18 @@ public class CustomerTraceInfoAction extends BaseActionSupport{
 		obj.setSalesmanId(customerTraceInfo.getSalesmanId());
 		obj.setTask(customerTraceInfo.getTask());
 		obj.setTraceOption(customerTraceInfo.getTraceOption());
-		obj.setTraceTime(customerTraceInfo.getTraceTime());
+		Calendar time = Calendar.getInstance();
+		String[] timeArray = traceTime.split(" ")[1].split(":");
+		String[] dayArray = traceTime.split(" ")[0].split("-");
+		if(dayArray.length>0 && timeArray.length>0){
+			time.set(Calendar.YEAR, Integer.parseInt(dayArray[0]));
+			time.set(Calendar.MONTH, Integer.parseInt(dayArray[1]) - 1);
+			time.set(Calendar.DATE, Integer.parseInt(dayArray[2]));
+			time.set(Calendar.HOUR_OF_DAY, Integer.parseInt(timeArray[0]));
+			time.set(Calendar.MINUTE, Integer.parseInt(timeArray[1]));
+			time.set(Calendar.SECOND, 0);
+		}
+		obj.setTraceTime(time);
 		obj.setEmail(customerTraceInfo.getEmail());
 		obj.setQq(customerTraceInfo.getQq());
 		obj.setTel(customerTraceInfo.getTel());

@@ -64,6 +64,14 @@ public class CustomerTraceInfo implements Serializable
 	private String traceOption = "";
 	@Column(name = "TRACE_TIME")
 	private Calendar traceTime = Calendar.getInstance();
+	@Transient
+	private String traceTimeStr = "";
+	public String getTraceTimeStr() {
+		return traceTimeStr;
+	}
+	public void setTraceTimeStr(String traceTimeStr) {
+		this.traceTimeStr = traceTimeStr;
+	}
 	@Column(name = "TASK" , length = 255)
 	private String task = "";
 	@Column(name = "INTERREST" , length = 255)
