@@ -41,9 +41,9 @@
              	<param name="id">${id}</param>
             </result>
 		</action>
-		<action name="customerVisitList" class="customerVisitInfoAction" method="customerVisitList">
-			<result name="success">/customer/customervisit_list.jsp</result>
-			<result name="input">/customer/customervisit_list.jsp</result>
+		<action name="myCustomerVisitList" class="customerVisitInfoAction" method="customerVisitList">
+			<result name="success">/customer/mycustomervisit_list.jsp</result>
+			<result name="input">/customer/mycustomervisit_list.jsp</result>
 		</action>
 		<action name="myCustomerVisitInfo" class="customerVisitInfoAction" method="customerVisitInfo">
 			<result name="success">/customer/mycustomervisit_info.jsp</result>
