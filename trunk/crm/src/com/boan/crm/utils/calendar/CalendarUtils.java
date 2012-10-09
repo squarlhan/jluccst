@@ -30,7 +30,23 @@ public class CalendarUtils {
 		}
 		return s;
 	}
-
+	/**
+	 * 返回[1980-2-24 18:12]类型的字符串
+	 * 
+	 * @param obj
+	 * @throws Exception
+	 */
+	public static String toLongStringNoSecond(Calendar cal) {
+		String s = null;
+		if (cal != null) {
+			s = cal.get(cal.YEAR) + "-" + (cal.get(cal.MONTH) + 1) + "-"
+					+ cal.get(cal.DAY_OF_MONTH) + " "
+					+ cal.get(cal.HOUR_OF_DAY) + ":" + cal.get(cal.MINUTE);
+		} else {
+			s = "";
+		}
+		return s;
+	}
 	/**
 	 * 返回[1980-2-24]类型的字符串
 	 * 
