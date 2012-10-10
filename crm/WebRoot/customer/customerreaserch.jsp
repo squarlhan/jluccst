@@ -92,9 +92,12 @@
 				if($.trim($("#txt_mainIndustry").val())==""){
 					alert("请输入您要查询的主营行业信息！");
 					return false;
-				}else{
-					$("#form1").submit();
 				}
+				if($.trim($("#sel_province").val())==""){
+					alert("请选择您要查询的省份！");
+					return false;
+				}
+				$("#form1").submit();
 			});
 		});
 		
@@ -116,13 +119,13 @@
 						<strong>主营行业：</strong>
 					</td>
 					<td height="26" align="left" bgcolor="#FFFFFF">
-						<s:textfield id="txt_mainIndustry" name="mainIndustry" cssStyle="width:200px" ></s:textfield>
+						<s:textfield id="txt_mainIndustry" name="mainIndustry" cssStyle="width:200px" ></s:textfield><font color="red">*</font>
 					</td>
 					<td height="26" align="right" bgcolor="#FFFFFF">
 						<strong>省份</strong>
 					</td>
 					<td height="26" align="left" bgcolor="#FFFFFF">
-						<s:select id="sel_province"  name ="provinceId"  list="provinceList" listKey="id"  listValue="provinceName" cssStyle="width:100px" headerKey="" headerValue="--- 请选择 ---"></s:select>
+						<s:select id="sel_province"  name ="provinceId"  list="provinceList" listKey="id"  listValue="provinceName" cssStyle="width:100px" headerKey="" headerValue="--- 请选择 ---"></s:select><font color="red">*</font>
 					</td>
 					<td height="26" align="right" bgcolor="#FFFFFF">
 						<strong>城市：</strong>
