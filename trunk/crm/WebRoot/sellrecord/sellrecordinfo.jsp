@@ -246,6 +246,7 @@
   <body>
     <s:form id="form1" name="form1" method="post" theme="simple" action="">
     	<s:hidden id="recordId"  name="sellRecord.id"></s:hidden>
+    	<s:hidden id="companyId"  name="sellRecord.companyId"></s:hidden>
 		<table width="100%" border="0" cellspacing="5" cellpadding="0">
 			<tr>
 				<td>
@@ -276,7 +277,7 @@
 									<strong>销售单号：</strong>
 								</td>
 								<td height="26" align="left" bgcolor="#FFFFFF">
-									<s:textfield id="txt_orderID" name="sellRecord.orderID" cssStyle="width:100px" ></s:textfield><font color="red">*</font>
+									<s:textfield id="txt_orderID" name="sellRecord.orderID" cssStyle="width:120px"  readonly="true"></s:textfield>
 								</td>
 							</tr>
 						</table>

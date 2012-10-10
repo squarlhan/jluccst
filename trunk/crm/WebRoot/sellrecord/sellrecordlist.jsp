@@ -200,6 +200,7 @@
 				<td align="center" width="50px" background="<%=basePath%>/images/headerbg.jpg">
  							<s:checkbox theme="simple" id="cbk_all" name="all"></s:checkbox>
  						</td>
+            			<td align="center" background="<%=basePath%>/images/headerbg.jpg"><strong>销售单号</strong></td>
             			<td align="center" background="<%=basePath%>/images/headerbg.jpg"><strong>客户名称</strong></td>
             			<td align="center" background="<%=basePath%>/images/headerbg.jpg"><strong>业务员</strong></td>
             			<td align="center" background="<%=basePath%>/images/headerbg.jpg"><strong>成交日期</strong></td>
@@ -215,6 +216,7 @@
 	        		<td height="26" align="center" bgcolor="#FFFFFF" >  
 						<s:checkbox id="%{#obj.id}" name="ids" fieldValue="%{id}" value="false" theme="simple"/>
 					</td>
+           			<td height="26" align="center" bgcolor="#FFFFFF"><s:property value="orderID"/></td>
            			<td height="26" align="center" bgcolor="#FFFFFF"><s:property value="customerName"/></td>
             		<td height="26" align="center" bgcolor="#FFFFFF"><s:property value="salesmanName"/></td>
             		<td height="26" align="center" bgcolor="#FFFFFF"><s:property value="bargainTime"/></td>
