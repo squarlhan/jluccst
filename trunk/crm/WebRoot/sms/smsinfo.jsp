@@ -369,22 +369,23 @@
 									<tr>
 										<td height="26" align="left" bgcolor="#FFFFFF">
 											<span>
-												<select id="sel_one" name="headType" style="width:150px" disabled="true">
+												<select id="sel_one" name="headType" style="width:150px"  >
 													<option selected>姓氏</option>
 													<option>昵称</option>
 												</select>
-												<select id="sel_two" name="headSuffix" style="width:60px" disabled="true">
+												<select id="sel_two" name="headSuffix" style="width:60px" >
 													<option selected>总</option>
 													<option>先生</option>
 													<option>小姐</option>
 													<option>女士</option>
+													<option></option>
 												</select>
-												<input type="checkbox" checked="checked" id="chk_use_appellation"/>不使用
+												<input type="checkbox" id="chk_use_appellation"/>不使用
 											</span>
 											<br/>
 											<span>
-												<s:textfield id="txt_hello" name="headHello" maxlength="50" cssStyle="width: 208px;" value="您好！" disabled="true"/>
-												<input type="checkbox" checked="checked" id="chk_use_hello"/>不使用
+												<s:textfield id="txt_hello" name="headHello" maxlength="50" cssStyle="width: 208px;" value="您好！"  />
+												<input type="checkbox"  id="chk_use_hello"/>不使用
 											</span>
 											<table width="100%">
 												<tr>
@@ -399,8 +400,8 @@
 													</td>
 													<td align="right">
 														<span>
-															<s:textfield id="txt_company" name="footContent" maxlength="50" cssStyle="width: 200px;" value="XXXXX公司" disabled="true"/>
-															<input type="checkbox" checked="checked" id="chk_use_company"/>不使用
+															<s:textfield id="txt_company" name="footContent" maxlength="50" cssStyle="width: 200px;"  />
+															<input type="checkbox"  id="chk_use_company"/>不使用
 														</span>
 													</td>
 												</tr>
