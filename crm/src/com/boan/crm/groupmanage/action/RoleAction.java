@@ -139,7 +139,7 @@ public class RoleAction extends BaseActionSupport {
 	 * @return
 	 */
 	public String toModifyRole() {
-		boolean b = service.isExistSameName(role.getId(),  role.getRoleName(), role.getCompanyId());
+		boolean b = service.isExistSameName(role.getId(), role.getRoleName(), role.getCompanyId());
 		// 如果存在，则提示
 		if (b) {
 			message.setContent("相同职务名称已存在，请重新输入！");
