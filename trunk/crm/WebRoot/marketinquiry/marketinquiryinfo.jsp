@@ -52,6 +52,7 @@
 		  	 * 准备工作
 		  	 */
 			$(document).ready(function(){
+				$("#txt_inquiryPersonName").focus();
 				if($("#hid_message").val()!="" && $("#hid_marketInquiryId").val()!=null){
 					alert($("#hid_message").val());
 				}
@@ -134,7 +135,7 @@
 											<strong>调查地点：</strong>
 										</td>
 										<td height="26" align="left" bgcolor="#FFFFFF" colspan="3">
-											<s:textfield id="txt_inquiryAddress" name="marketInquiry.inquiryAddress" cssStyle="width: 440px;" maxlength="25"></s:textfield><font color="red" title="必填项">*</font>
+											<s:textfield id="txt_inquiryAddress" name="marketInquiry.inquiryAddress" cssStyle="width: 465px;" maxlength="25"></s:textfield><font color="red" title="必填项">*</font>
 										</td>
 									</tr>
 									
