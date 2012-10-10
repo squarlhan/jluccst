@@ -54,7 +54,7 @@
 			$('#txt_query_endTime').datetimepicker({showTimepicker: false});
 			
 			$("#addbtn").click(function(){
-				parent.parent.tipsWindown("添加市场调查","iframe:openAddMarketInquiryAction.action","580","250","true","","true","no");
+				parent.parent.tipsWindown("添加市场调查","iframe:openAddMarketInquiryAction.action","650","250","true","","true","no");
 				parent.parent.$("#windown-close").bind('click',function(){
 					window.location.href="./openMarketInquiryListAction.action";
 				});
@@ -69,7 +69,7 @@
 	  		$('a[name="edit"]').each(function(){
 	  			$(this).click(function(){
 	  				var url = $(this).attr("url");
-	  				parent.parent.tipsWindown("修改市场调查","iframe:"+url,"580","250","true","","true","no");
+	  				parent.parent.tipsWindown("修改市场调查","iframe:"+url,"650","250","true","","true","no");
 	  				parent.parent.$("#windown-close").bind('click',function(){
 						window.location.href="./openMarketInquiryListAction.action";
 					});
