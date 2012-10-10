@@ -292,6 +292,7 @@ public class SMSAtion extends BaseActionSupport{
 		//bookerService.deleteSMSCustomerInfoFoCustomer("1111111");
 		UserSession userSession = this.getSession();
 		String organId = userSession.getCompanyId();
+		footContent="["+userSession.getCompanyName()+"]";
 		//初始化短信发送接口
 		if(organId!=null){
 			Company  company = companyService.get(organId);
