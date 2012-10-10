@@ -46,4 +46,12 @@ public interface ISellRecordService {
 	 * @return
 	 */
 	public  BigDecimal getConsumptionMoney(String customerId);
+	
+	/**
+	 * 获取订单当前最大流水号
+	 * @param dataStr 日期串 yyyyMMdd
+	 * @param customerId 公司Id
+	 * @return 流水号
+	 */
+	public String getSellRecordorderID(String dataStr,String customerId);
 }

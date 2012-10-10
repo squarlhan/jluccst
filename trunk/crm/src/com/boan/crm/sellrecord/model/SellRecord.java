@@ -124,6 +124,12 @@ public class SellRecord implements Serializable {
 	@Column(name = "RETURNED_MONEY", precision=12, scale=2)
 	private BigDecimal returnedMoney;
 	
+	/**
+	 * 客公司Id
+	 */
+	@Column(name = "COMPANY_ID")
+	private String companyId;
+	
 	public BigDecimal getReturnedMoney() {
 		return realCollection.divideToIntegralValue(receivable); 
 	}
@@ -280,5 +286,13 @@ public class SellRecord implements Serializable {
 
 	public void setGoodsType(String goodsType) {
 		this.goodsType = goodsType;
+	}
+
+	public String getCompanyId() {
+		return companyId;
+	}
+
+	public void setCompanyId(String companyId) {
+		this.companyId = companyId;
 	}
 }
