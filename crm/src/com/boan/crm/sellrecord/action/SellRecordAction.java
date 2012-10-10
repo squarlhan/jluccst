@@ -1,6 +1,7 @@
 package com.boan.crm.sellrecord.action;
 
 import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -155,7 +156,25 @@ public class SellRecordAction extends BaseActionSupport{
 	
 	
 	public String openAddSellRecord(){
+		
+		Calendar rightNow = Calendar.getInstance();
+		SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd"); //日期格式化格式
+		String date = format.format(rightNow.getTime()); //取得当前时间，并格式化成相应格式   
+
+		UserSession userSession = this.getSession();
+		String orderID = sellRecordService.getSellRecordorderID(date,userSession.getCompanyId());
+		int number = 1;
+		if(orderID!=null && orderID.length()==13){
+			number = Integer.parseInt(orderID.substring(8));
+			number=number+1;
+		}
 		customerInfos= customerInfoService.findAllCustomerInfo();
+		sellRecord = new SellRecord();
+		sellRecord.setCompanyId(userSession.getCompanyId());
+		//String.format("%05d", number) 将流水号格式化为 5位长度返回
+		String serialNo = date+String.format("%05d", number);
+		sellRecord.setOrderID(serialNo);
+		
 		return SUCCESS;
 	}
 	public String openModifySellRecord(){
@@ -404,4 +423,28 @@ public class SellRecordAction extends BaseActionSupport{
 	public void setCustomerId(String customerId) {
 		this.customerId = customerId;
 	}
+	
+		/**
+	    * 生成流水号
+	    * @return
+	    */
+	    
+	    public String generateSerialNumber() {
+	    //当天的初始化流水号为1
+	    Integer serialNo = 1;
+	    //查询当天的下一个流水号
+	    String hql = "SELECT max(t.serialNo+1) FROM SerialNumber t WHERE t.generateDate=?";
+//	    String generateDate = DateUtils.formatDate(new Date(),"yyyyMMdd");
+//	    Object obj = session.createQuery(hql).setParameter(0, generateDate).uniqueResult();
+//	    if(obj != null) {
+//	    	serialNo = (Integer) obj;
+//	    }
+	    //将当前序列号保存到数据库
+//	    SerialNumber sn = new SerialNumber();
+//	    sn.setSerialNo(serialNo);
+//	    sn.setGenerateDate(generateDate);
+//	    session.save(sn);
+	    //将流水号格式化为 "00001"  5位长度返回
+	    return String.format("%05d", serialNo);
+	    }
 }

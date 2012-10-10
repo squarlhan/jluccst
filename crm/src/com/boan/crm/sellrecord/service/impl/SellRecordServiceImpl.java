@@ -163,4 +163,19 @@ public class SellRecordServiceImpl implements ISellRecordService {
 		List list = sellRecordDao.find(hql, param);
 		return (list!=null &&  list.size()>0 && list.get(0)!=null )? new BigDecimal( list.get(0).toString()) : new BigDecimal(0);
 	}
+	
+	/**
+	 * 获取订单当前最大流水号
+	 * @param dataStr 日期串 yyyyMMdd
+	 * @param companyId 公司Id
+	 * @return 流水号
+	 */
+	public String getSellRecordorderID(String dataStr,String companyId){
+		String hql ="select max(record.orderID) from SellRecord as record where record. companyId=:companyId and record.orderID like '"+dataStr+"%'";
+//		String hql ="select max(record.orderID) from SellRecord as record where record. customerId=:customerId and record.orderID like '"+dataStr+"%'";
+		Map<String, String> param = new HashMap<String,String>();
+		param.put("companyId",companyId);
+		List list = sellRecordDao.find(hql, param);
+		return (list!=null &&  list.size()>0 && list.get(0)!=null)?   list.get(0).toString() : "";
+	}
 }
