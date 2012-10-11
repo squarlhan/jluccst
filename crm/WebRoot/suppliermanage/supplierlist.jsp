@@ -60,7 +60,6 @@
 		$('a[name="edit"]').each(function() {
 				$(this).click( function() {
 						var url = $(this).attr("url");
-						alert(url);
 						parent.parent.tipsWindown( "修改供应商", "iframe:" + url, "460","350", "true", "","true", "no");
 						parent.parent.$("#windown-close").bind('click',function() {
 								window.location.href = "./showSupplierListAction.action?companyId=<s:property value="companyId"/>";
