@@ -631,7 +631,7 @@
 									<tr>
 										<td width="40" align="right" style="padding-bottom: 4px;"><img src="images/menuto.jpg" width="5" height="5" />
 										</td>
-										<td><a href="sellrecord/sellrecordtab.jsp" target="mainFrame">销售记录</a>
+										<td><a href="sellrecord/sellrecordmanage.jsp" target="mainFrame">销售记录</a>
 										</td>
 									</tr>
 								</table>
@@ -889,6 +889,32 @@
 						<%
 							}
 						%>
+						<tr>
+							<td height="24" align="left" background="images/menubg.jpg">
+								<table width="100%" border="0" cellspacing="5" cellpadding="0">
+									<tr>
+										<td width="40" align="right" style="padding-bottom: 4px;"><img src="images/up.gif" width="10" height="12" />
+										</td>
+										<td><strong name="menus">增值功能</strong>
+										</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+						<tbody name="submenus" style="display:none">
+						<tr>
+							<td align="left">
+								<table width="100%" border="0" cellspacing="5" cellpadding="0">
+									<tr>
+										<td width="40" align="right" style="padding-bottom: 4px;"><img src="images/menuto.jpg" width="5" height="5" />
+										</td>
+										<td><a href="suppliermanage/suppliermanage.jsp" target="mainFrame">供应商管理</a>
+										</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+						</tbody>
 					</table>
 				</div>
 			</td>
