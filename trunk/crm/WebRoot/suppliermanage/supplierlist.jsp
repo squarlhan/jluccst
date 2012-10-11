@@ -122,10 +122,10 @@
 									<s:checkbox theme="simple" id="cbk_all" name="all"></s:checkbox>
 								</td>
 								<td align="center" background="<%=path %>/images/headerbg.jpg">
-									<strong>供货商名称</strong>
+									<strong>供应商名称</strong>
 								</td>
 								<td align="center" background="<%=path %>/images/headerbg.jpg">
-									<strong>供货商编号</strong>
+									<strong>供应商编号</strong>
 								</td>
 								<td align="center" background="<%=path %>/images/headerbg.jpg">
 									<strong>产品</strong>
@@ -149,7 +149,7 @@
 									<td height="26" align="center" bgcolor="#FFFFFF">
 										<s:property value="supplierNumber" />
 									</td>
-									<td height="26" align="center" bgcolor="#FFFFFF">
+									<td height="26" align="center" bgcolor="#FFFFFF" style="work-break:break-all;">
 										<s:property value="product" />
 									</td>
 									<td height="26" align="center" bgcolor="#FFFFFF">
