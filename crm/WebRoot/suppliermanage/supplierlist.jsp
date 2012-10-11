@@ -52,7 +52,7 @@
 
 				});
 		$.fn.checkall("cbk_all");
-		$.fn.uncheckall("ids", "cbk_all");
+		$.fn.uncheckall("supplierIds", "cbk_all");
 
 		/**
 		 * 修改供应商信息
@@ -60,6 +60,7 @@
 		$('a[name="edit"]').each(function() {
 				$(this).click( function() {
 						var url = $(this).attr("url");
+						alert(url);
 						parent.parent.tipsWindown( "修改供应商", "iframe:" + url, "460","350", "true", "","true", "no");
 						parent.parent.$("#windown-close").bind('click',function() {
 								window.location.href = "./showSupplierListAction.action?companyId=<s:property value="companyId"/>";
@@ -140,7 +141,7 @@
 							<s:iterator value="pagination.data" status="obj">
 								<tr>
 									<td height="26" align="center" bgcolor="#FFFFFF">
-										<s:checkbox id="%{#obj.id}" name="ids" fieldValue="%{id}"
+										<s:checkbox id="%{#obj.id}" name="supplierIds" fieldValue="%{id}"
 											value="false" theme="simple" />
 									</td>
 									<td height="26" align="center" bgcolor="#FFFFFF">
@@ -161,7 +162,7 @@
 											<s:param name="supplier.companyId" value="companyId"></s:param>
 										</s:url>
 										<s:url id="delete_url" action="deleteSupplierAction">
-											<s:param name="ids" value="id"></s:param>
+											<s:param name="supplierIds" value="id"></s:param>
 										</s:url>
 										<a name="edit" href="javascript:void(0);" url="${edit_url}">编辑</a>
 										<a name="delete" href="javascript:void(0);"
