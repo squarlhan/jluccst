@@ -1,7 +1,9 @@
 package com.boan.crm.supplier.action;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -80,7 +82,10 @@ public class SupplierAction extends BaseActionSupport {
 	 * @return
 	 */
 	public String showSupplierList() throws Exception {
-		supplierList = supplierService.queryList(companyId);
+		Map<String, Object> map = new HashMap<String, Object>(); 
+		companyId = sessionCompanyId;
+		map.put("companyId", companyId);
+		pagination = supplierService.findForPage(map,pagination);
 		return SUCCESS;
 	}
 
