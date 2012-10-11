@@ -32,15 +32,10 @@
 		<!--
 			var _customer_submit = {
 			rules: {
-				"user.username":{required:true,strangecode:true},
-				"user.userCName":{required:true,strangecode:true},
-				<s:if test="null==user.id||user.id.isEmpty">
-				"user.password":{required:true},
-				</s:if>
-				"user.officePhone":{strangecode:true},
-				"user.phone":{strangecode:true},
-				"user.email":{email:true},
-				"user.roleId":{selectvalidate:true}
+				"supplier.supplierName":{required:true,strangecode:true},
+				"supplier.supplierNumber":{required:true,strangecode:true},
+				"supplier.product":{strangecode:true,maxlength:500},
+				"supplier.memo":{strangecode:true,maxlength:500}
 				}
 			};
 			$(document).ready(function(){
@@ -55,9 +50,7 @@
 				})
 				$.fn.save();
 		  		$.fn.close();
-		  		$.fn.configpasswod();
 		  		$.fn.initpage();
-		  		$.fn.initpassword();
 		  	});
 			/**
 		  	 * 保存
@@ -69,11 +62,8 @@
 	               	if(!validator.form()){
 						return false;
 					}
-	               	form1.action = "./saveOrUpdateUserAction.action";
+	               	form1.action = "./saveSupplierAction.action";
 	               	form1.target = "iframe1";
-	               	<s:if test="user.deleteFlag==1">
-	               		$("#roleId").attr("disabled",false);
-	               	</s:if>
 	               	form1.submit();
 	           	});
           	}
@@ -89,61 +79,7 @@
 			 * 初始化页面
 			 */
 			$.fn.initpage = function(){
-				$("#username").focus();
-			}
-			/**
-          	 * 设置初始密码，如果是新增加用户，则默认为初始密码，否则为空
-          	 */
-          	$.fn.configpasswod = function(){
-          		if( $.trim($("#userId").val()) == "" )
-          		{
-	          		$("#password").val( "<%=UserConfig.DEFAULT_PASSWORD%>" );
-          		}
-          		else
-          		{
-          			$("#password").val( "" );
-          		}
-          	}
-			/**
-          	 * 初始化密码
-          	 */
-          	$.fn.initpassword = function(){
-          		$("#button3").click(function(){
-	          		if( confirm("确定要将密码初始化为[ <%=UserConfig.DEFAULT_PASSWORD%> ]吗？ ") )
-	          		{
-	          			$.fn.commitinitpassword();
-	          		}
-          		});
-          	}
-			/**
-          	 * 异步初始化密码
-          	 */
-          	$.fn.commitinitpassword = function(){
-				var myData;
-				$.ajax({
-					type: "post",
-					dataType: "json",
-					url: "./initUserPasswordAction.action",
-					data: {"user.id": $("#userId").val() }, 
-					beforeSend: function(XMLHttpRequest){
-						;
-					},
-					success: function(data, textStatus){
-						myData= eval('('+data+')');
-					},
-					complete: function(XMLHttpRequest, textStatus){ 
-					     if(myData.jsonData=="success"){
-					     	alert("密码初始化成功！");
-					     }
-					     else
-					     {
-					     	alert("无此用户，请联系管理员！");
-					     }
-					},
-					error: function(){
-						alert("异步请求处理出错！");
-					}
-				});
+				$("#supplierName").focus();
 			}
 		//-->
 		</script>
@@ -167,7 +103,7 @@
 												<strong>供货商名称：</strong>
 											</td>
 											<td height="26" align="left" bgcolor="#FFFFFF">
-												<s:textfield name="supplier.supplierName" id="supplierName" cssStyle="width: 250px;" maxlength="25"></s:textfield>
+												<s:textfield name="supplier.supplierName" id="supplierName" cssStyle="width: 290px;" maxlength="25"></s:textfield>
 												<font color="red">*</font>
 											</td>
 										</tr>
@@ -176,7 +112,7 @@
 												<strong>供货商编号：</strong>
 											</td>
 											<td height="26" align="left" bgcolor="#FFFFFF">
-												<s:textfield name="supplier.supplierNumber" id="supplierNumber" cssStyle="width: 250px;" maxlength="25"></s:textfield>
+												<s:textfield name="supplier.supplierNumber" id="supplierNumber" cssStyle="width: 290px;" maxlength="25"></s:textfield>
 												<font color="red">*</font>
 											</td>
 										</tr>
@@ -185,7 +121,7 @@
 												<strong> 产品：</strong>
 											</td>
 											<td height="26" align="left" bgcolor="#FFFFFF">
-												<s:textarea name="supplier.product" id="product" cssStyle="width: 250px;"  rows="5"></s:textarea>
+												<s:textarea name="supplier.product" id="product" cssStyle="width: 290px;"  rows="5"></s:textarea>
 											</td>
 										</tr>
 										<tr>
@@ -193,7 +129,7 @@
 												<strong> 备注：</strong>
 											</td>
 											<td height="26" align="left" bgcolor="#FFFFFF">
-												<s:textarea name="supplier.memo" id="memo" cssStyle="width: 250px;" rows="5"></s:textarea>
+												<s:textarea name="supplier.memo" id="memo" cssStyle="width: 290px;" rows="5"></s:textarea>
 											</td>
 										</tr>
 										<tr>
