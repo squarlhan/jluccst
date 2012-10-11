@@ -4,10 +4,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.springframework.stereotype.Repository;
+
 import com.boan.crm.supplier.dao.ISupplierDao;
 import com.boan.crm.supplier.model.Supplier;
 import com.boan.crm.utils.dao.impl.BaseDao;
-
+@Repository("supplierDao")
 public class SupplierDaoImpl extends BaseDao<Supplier, String> implements ISupplierDao {
 
 	@Override

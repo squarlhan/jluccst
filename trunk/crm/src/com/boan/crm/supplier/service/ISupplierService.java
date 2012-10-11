@@ -8,8 +8,6 @@ import com.boan.crm.utils.page.Pagination;
 
 public interface ISupplierService {
 	
-	public List<Supplier> findAllGroupRole();
-
 	public Supplier get(String id);
 
 	public void delete(String... ids);
