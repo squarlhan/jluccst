@@ -20,7 +20,9 @@ import org.springframework.stereotype.Controller;
 import com.boan.crm.customer.model.CustomerInfo;
 import com.boan.crm.customer.service.ICustomerInfoService;
 import com.boan.crm.groupmanage.common.UserSession;
+import com.boan.crm.groupmanage.model.Deptment;
 import com.boan.crm.groupmanage.model.User;
+import com.boan.crm.groupmanage.service.IDeptmentService;
 import com.boan.crm.groupmanage.service.IUserService;
 import com.boan.crm.sellrecord.model.GoodsInfo;
 import com.boan.crm.sellrecord.model.SellRecord;
@@ -57,6 +59,15 @@ public class SellRecordAction extends BaseActionSupport{
 	@Resource
 	//会员类别接口类
 	private IMemberTypeService memberTypeService;
+	@Autowired
+	@Qualifier("deptService")
+	private IDeptmentService deptService = null;
+	
+	private List<Deptment> deptList = null;
+	
+	private String companyId = null;
+	
+	private String companyName = null;
 	
 	/**
 	 * 商品明细
@@ -303,7 +314,17 @@ public class SellRecordAction extends BaseActionSupport{
 		}
 		memberInfoService.updateInfo(mi);
 	}
-
+	/**
+	 * 显示组织机构树,带公司、工厂、车间
+	 * @return
+	 */
+	public String showGroupTreeForSellRecord() throws Exception
+	{
+		companyId = sessionCompanyId;
+		companyName = sessionCompanyName;
+		deptList = deptService.queryAllDeptmentsByCompanyId( sessionCompanyId );
+		return "group-tree-for-sell-record";
+	}
 	public List<String> getDetials() {
 		return detials;
 	}
@@ -447,4 +468,28 @@ public class SellRecordAction extends BaseActionSupport{
 	    //将流水号格式化为 "00001"  5位长度返回
 	    return String.format("%05d", serialNo);
 	    }
+
+		public List<Deptment> getDeptList() {
+			return deptList;
+		}
+
+		public void setDeptList(List<Deptment> deptList) {
+			this.deptList = deptList;
+		}
+
+		public String getCompanyId() {
+			return companyId;
+		}
+
+		public void setCompanyId(String companyId) {
+			this.companyId = companyId;
+		}
+
+		public String getCompanyName() {
+			return companyName;
+		}
+
+		public void setCompanyName(String companyName) {
+			this.companyName = companyName;
+		}
 }

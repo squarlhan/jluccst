@@ -37,6 +37,10 @@
 		</action>
 		
 		<action name="deleteSellRecordDetialsAction" class="sellRecordAction" method="deleteSellRecordDetials"/>
+		
+		<action name="showGroupTreeForSellRecordAction" class="sellRecordAction"  method="showGroupTreeForSellRecord">
+			<result name="group-tree-for-sell-record">/sellrecord/group-tree-for-sell-record.jsp</result>
+		</action>
 	</package>
 	<!-- package name="sellRecordAjax" extends="json-default" namespace="/">
 		<action name="addSellRecordAction" class="sellRecordAction" method="addSellRecord">
