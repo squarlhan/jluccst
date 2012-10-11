@@ -7,11 +7,15 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
+import com.boan.crm.backstagemanage.common.LogType;
+import com.boan.crm.backstagemanage.model.Log;
 import com.boan.crm.backstagemanage.service.ICompanyService;
 import com.boan.crm.common.Message;
+import com.boan.crm.groupmanage.model.Deptment;
 import com.boan.crm.supplier.model.Supplier;
 import com.boan.crm.supplier.service.ISupplierService;
 import com.boan.crm.utils.action.BaseActionSupport;
@@ -48,8 +52,6 @@ public class SupplierAction extends BaseActionSupport {
 
 	private String companyId = null;
 
-	private String supplierId = null;
-
 	private String[] supplierIds = null;
 
 	/**
@@ -58,7 +60,11 @@ public class SupplierAction extends BaseActionSupport {
 	 * @return
 	 */
 	public String showSupplierInfo() {
-		supplier = supplierService.get(supplierId);
+		if (StringUtils.isBlank(supplier.getId())) {
+			supplier = new Supplier();
+		} else {
+			supplier = supplierService.get(supplier.getId());
+		}
 		return SUCCESS;
 	}
 
@@ -69,10 +75,22 @@ public class SupplierAction extends BaseActionSupport {
 	 */
 	public String saveSupplier() {
 		Date date = new Date();
+		if (StringUtils.isBlank(supplier.getId())) {
+			supplier.setId(null);
+		}
+		supplier.setCompanyId(sessionCompanyId);
+		supplier.setCompanyName(sessionCompanyName);
 		supplier.setUserId(sessionUserId);
 		supplier.setUserName(sessionUserCName);
 		supplier.setCreateTime(date);
-		supplierService.save(supplier);
+		supplierService.saveOrUpdate(supplier);
+		message.setContent("供应商信息保存成功！");
+		// 保存日志开始
+		Log log = new Log();
+		log.setLogType(LogType.INFO);
+		log.setLogContent("[" + supplier.getSupplierName() + "]" + "供应信息保存成功");
+		super.saveLog(log);
+		// 保存日志结束
 		return SUCCESS;
 	}
 
@@ -82,10 +100,10 @@ public class SupplierAction extends BaseActionSupport {
 	 * @return
 	 */
 	public String showSupplierList() throws Exception {
-		Map<String, Object> map = new HashMap<String, Object>(); 
+		Map<String, Object> map = new HashMap<String, Object>();
 		companyId = sessionCompanyId;
 		map.put("companyId", companyId);
-		pagination = supplierService.findForPage(map,pagination);
+		pagination = supplierService.findForPage(map, pagination);
 		return SUCCESS;
 	}
 
@@ -94,9 +112,22 @@ public class SupplierAction extends BaseActionSupport {
 	 * 
 	 * @return
 	 */
-	public String deleteSupplier() {
+	public String deleteSupplier() throws Exception {
+		if (supplierIds != null && supplierIds.length > 0) {
+			Supplier supplier = null;
+			Log log = null;
+			for (int i = 0; i < supplierIds.length; i++) {
+				supplier = supplierService.get(supplierIds[i]);
+				if (supplier != null) {
+					log = new Log();
+					log.setLogType(LogType.INFO);
+					log.setLogContent("[" + supplier.getSupplierName() + "]" + "信息删除成功");
+					super.saveLog(log);
+				}
+			}
+		}
 		supplierService.delete(supplierIds);
-		return SUCCESS;
+		return NONE;
 	}
 
 	public Pagination<Supplier> getPagination() {
@@ -129,14 +160,6 @@ public class SupplierAction extends BaseActionSupport {
 
 	public void setCompanyId(String companyId) {
 		this.companyId = companyId;
-	}
-
-	public String getSupplierId() {
-		return supplierId;
-	}
-
-	public void setSupplierId(String supplierId) {
-		this.supplierId = supplierId;
 	}
 
 	public List<Supplier> getSupplierList() {
