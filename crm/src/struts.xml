@@ -52,4 +52,6 @@
 	<include file="com/boan/crm/sellrecord/action/struts_sell_record.xml"></include>
     <!-- 客户查找 -->
 	<include file="com/boan/crm/customersearch/action/struts_customer_search.xml"></include>
+	<!-- 供应商 -->
+	<include file="com/boan/crm/supplier/action/struts_supplier.xml"></include>
 </struts>
