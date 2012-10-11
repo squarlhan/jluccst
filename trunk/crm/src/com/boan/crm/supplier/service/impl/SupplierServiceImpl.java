@@ -31,13 +31,8 @@ public class SupplierServiceImpl implements ISupplierService {
 	}
 
 	@Override
-	public void save(Supplier supplier) {
+	public void saveOrUpdate(Supplier supplier) {
 		dao.saveOrUpdate(supplier);
-	}
-
-	@Override
-	public void update(Supplier one) {
-		dao.update(one);
 	}
 
 	@Override

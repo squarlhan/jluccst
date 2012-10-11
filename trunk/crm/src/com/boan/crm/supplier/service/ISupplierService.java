@@ -12,9 +12,7 @@ public interface ISupplierService {
 
 	public void delete(String... ids);
 
-	public void save(Supplier table1);
-
-	public void update(Supplier one);
+	public void saveOrUpdate(Supplier table1);
 
 	public List<Supplier> queryList(String companyId) throws Exception;
 
