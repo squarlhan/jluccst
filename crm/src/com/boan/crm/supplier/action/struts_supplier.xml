@@ -9,5 +9,14 @@
 			<result name="success">/suppliermanage/supplierlist.jsp</result>
 			<result name="input">/suppliermanage/supplierlist.jsp</result>
 		</action>
+		<action name="showSupplierInfoAction" class="supplierAction" method="showSupplierInfo">
+			<result name="success">/suppliermanage/supplierinfo.jsp</result>
+			<result name="input">/suppliermanage/supplierinfo.jsp</result>
+		</action>
+		<action name="saveSupplierAction" class="supplierAction" method="saveSupplier">
+			<result name="success">/common/message.jsp</result>
+			<result name="error">/common/messagenoclose.jsp</result>
+		</action>
+		<action name="deleteSupplierAction" class="supplierAction" method="deleteSupplier" />
 	</package>
 </struts>
