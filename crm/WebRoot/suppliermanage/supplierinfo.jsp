@@ -100,7 +100,7 @@
 
 										<tr>
 											<td height="26" align="right" bgcolor="#FFFFFF">
-												<strong>供货商名称：</strong>
+												<strong>供应商名称：</strong>
 											</td>
 											<td height="26" align="left" bgcolor="#FFFFFF">
 												<s:textfield name="supplier.supplierName" id="supplierName" cssStyle="width: 290px;" maxlength="25"></s:textfield>
@@ -109,7 +109,7 @@
 										</tr>
 										<tr>
 											<td height="26" align="right" bgcolor="#FFFFFF">
-												<strong>供货商编号：</strong>
+												<strong>供应商编号：</strong>
 											</td>
 											<td height="26" align="left" bgcolor="#FFFFFF">
 												<s:textfield name="supplier.supplierNumber" id="supplierNumber" cssStyle="width: 290px;" maxlength="25"></s:textfield>
