@@ -150,8 +150,7 @@
 	</head>
 	<body>
 		<s:form name="form1" id="form1" method="post" theme="simple">
-			<s:hidden name="user.id" id="userId"></s:hidden>
-			<s:hidden name="deptId" id="deptId"></s:hidden>
+			<s:hidden name="supplier.id" id="supplierId"></s:hidden>
 			<s:hidden name="companyId" id="companyId"></s:hidden>
 			<table width="100%" border="0" cellspacing="5" cellpadding="0">
 				<tr>
@@ -165,103 +164,40 @@
 
 										<tr>
 											<td height="26" align="right" bgcolor="#FFFFFF">
-												<strong>用 户 名：</strong>
+												<strong>供货商名称：</strong>
 											</td>
 											<td height="26" align="left" bgcolor="#FFFFFF">
-												<s:textfield name="user.username" id="username" cssStyle="width: 250px;" maxlength="25"></s:textfield>
+												<s:textfield name="supplier.supplierName" id="supplierName" cssStyle="width: 250px;" maxlength="25"></s:textfield>
 												<font color="red">*</font>
 											</td>
 										</tr>
 										<tr>
 											<td height="26" align="right" bgcolor="#FFFFFF">
-												<strong>中文姓名：</strong>
+												<strong>供货商编号：</strong>
 											</td>
 											<td height="26" align="left" bgcolor="#FFFFFF">
-												<s:textfield name="user.userCName" id="userCName" cssStyle="width: 250px;" maxlength="25"></s:textfield>
+												<s:textfield name="supplier.supplierNumber" id="supplierNumber" cssStyle="width: 250px;" maxlength="25"></s:textfield>
 												<font color="red">*</font>
 											</td>
 										</tr>
 										<tr>
 											<td height="26" align="right" bgcolor="#FFFFFF">
-												<strong>用户密码：</strong>
+												<strong> 产品：</strong>
 											</td>
 											<td height="26" align="left" bgcolor="#FFFFFF">
-												<s:textfield name="user.password" id="password" maxlength="25"
-													cssStyle="width:150px;" value=""></s:textfield>
-												<s:if test="null==user.id||user.id.isEmpty">
-													<span style="color: #ff0000">*</span>
-												</s:if>
-												<s:else>
-												<input type="button" name="button3" value="初始化密码" id="button3"
-													class="SkinImg Btn_4" />
-												</s:else>
+												<s:textarea name="supplier.product" id="product" cssStyle="width: 250px;"  rows="5"></s:textarea>
 											</td>
 										</tr>
 										<tr>
 											<td height="26" align="right" bgcolor="#FFFFFF">
-												<strong>办公电话：</strong>
+												<strong> 备注：</strong>
 											</td>
 											<td height="26" align="left" bgcolor="#FFFFFF">
-												<s:textfield name="user.officePhone" id="officePhone" cssStyle="width: 250px;" maxlength="25"></s:textfield>
-											</td>
-										</tr>
-										<tr>
-											<td height="26" align="right" bgcolor="#FFFFFF">
-												<strong>个人手机：</strong>
-											</td>
-											<td height="26" align="left" bgcolor="#FFFFFF">
-												<s:textfield name="user.phone" id="phone" cssStyle="width: 250px;" maxlength="25"></s:textfield>
-											</td>
-										</tr>
-										<tr>
-											<td height="26" align="right" bgcolor="#FFFFFF">
-												<strong>电子邮箱：</strong>
-											</td>
-											<td height="26" align="left" bgcolor="#FFFFFF">
-												<s:textfield name="user.email" id="email" cssStyle="width: 250px;" maxlength="100"></s:textfield>
-											</td>
-										</tr>
-										<tr>
-											<td height="26" align="right" bgcolor="#FFFFFF">
-												<strong>用户职务：</strong>
-											</td>
-											<td height="26" align="left" bgcolor="#FFFFFF">
-											<s:if test="user.deleteFlag==1">
-												<span  onMouseMove="this.setCapture();" onMouseOut="this.releaseCapture();" onfocus="this.blur();">
-												<s:select title="您不能修改自己的职务" list="roleList" listKey="id" listValue="roleName" value="user.roleId" 
-													id="roleId" name="user.roleId" cssStyle="width:250px" headerKey="" headerValue="--请选择职务--"></s:select>
-												</span><br/>
-												<font color="#FF0000" title="不能修改自己的职务" style="font-size:9pt;">[ 不能修改自己的职务 ]</font>
-											</s:if>
-											<s:else>
-												<s:select list="roleList" listKey="id" listValue="roleName" value="user.roleId" 
-													id="roleId" name="user.roleId" cssStyle="width:250px" headerKey="" headerValue="--请选择职务--"></s:select>
-											</s:else>
-											</td>
-										</tr>
-										<tr>
-											<td height="26" align="right" bgcolor="#FFFFFF">
-												<strong>权限类型：</strong>
-											</td>
-											<td height="26" align="left" bgcolor="#FFFFFF">
-												<s:if test="user.deleteFlag==1">
-													<span  onMouseMove="this.setCapture();" onMouseOut="this.releaseCapture();" onfocus="this.blur();">
-														<s:radio list="userTypeList" listKey="key" listValue="value" id="userType" name="user.userType" value="user.userType">
-														</s:radio>
-													</span>
-													<br/>
-													<font color="#FF0000" title="不能修改自己的用户类别" style="font-size:9pt;">[ 不能修改自己的用户类别 ]</font>
-												</s:if>
-												<s:else>
-													<s:radio list="userTypeList" listKey="key" listValue="value" id="userType" name="user.userType" value="user.userType">
-													</s:radio>
-												</s:else>
+												<s:textarea name="supplier.memo" id="memo" cssStyle="width: 250px;" rows="5"></s:textarea>
 											</td>
 										</tr>
 										<tr>
 											<td height="26" colspan="2" align="center" bgcolor="#FFFFFF">
-												<font style="font-size: 9pt;color=#FF0000">注：用户密码为空时，保存功能不会对原用户密码进行修改。</font>
-												<br/>
 												<input name="button1" type="button" class="btn_2_3"
 													id="button1" value="确定">
 												<input name="button2" type="button" class="btn_2_3"

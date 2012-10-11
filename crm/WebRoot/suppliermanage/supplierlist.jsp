@@ -45,9 +45,9 @@
 	$(function() {
 		$("#addbtn").click(
 				function() {
-					parent.parent.tipsWindown("添加供应商","iframe:openAddRoleAction.action?companyId=<s:property value="companyId"/>", "460", "150", "true", "", "true", "no");
+					parent.parent.tipsWindown("添加供应商","iframe:showSupplierInfoAction.action?companyId=<s:property value="companyId"/>", "460", "350", "true", "", "true", "no");
 					parent.parent.$("#windown-close").bind('click', function() {
-						window.location.href = "./openRoleAction.action?companyId=<s:property value="companyId"/>";
+						window.location.href = "./showSupplierListAction.action?companyId=<s:property value="companyId"/>";
 					});
 
 				});
@@ -57,27 +57,15 @@
 		/**
 		 * 修改供应商信息
 		 */
-		$('a[name="edit"]')
-				.each(
-						function() {
-							$(this)
-									.click(
-											function() {
-												var url = $(this).attr("url");
-												parent.parent.tipsWindown(
-														"修改供应商", "iframe:"
-																+ url, "460",
-														"150", "true", "",
-														"true", "no");
-												parent.parent
-														.$("#windown-close")
-														.bind(
-																'click',
-																function() {
-																	window.location.href = "./openRoleAction.action?companyId=<s:property value="companyId"/>";
-																});
-											});
-						});
+		$('a[name="edit"]').each(function() {
+				$(this).click( function() {
+						var url = $(this).attr("url");
+						parent.parent.tipsWindown( "修改供应商", "iframe:" + url, "460","350", "true", "","true", "no");
+						parent.parent.$("#windown-close").bind('click',function() {
+								window.location.href = "./showSupplierListAction.action?companyId=<s:property value="companyId"/>";
+							});
+					});
+			});
 
 		/**
 		 * 删除单个角色信息
@@ -98,7 +86,7 @@
 		 */
 		$("#deletepointbtn").click(function() {
 			if (window.confirm("您确定要删除所选信息吗？")) {
-				var url = "deleteRoleAction.action";
+				var url = "deleteSupplierAction.action";
 				$.post(url, $('#form1').serialize(), function(data) {
 					window.location.href = window.location.href;
 				});
@@ -169,10 +157,10 @@
 									</td>
 									<td height="26" colspan="2" align="center" bgcolor="#FFFFFF">
 										<s:url id="edit_url" action="showSupplierInfoAction">
-											<s:param name="role.id" value="id"></s:param>
-											<s:param name="role.companyId" value="companyId"></s:param>
+											<s:param name="supplier.id" value="id"></s:param>
+											<s:param name="supplier.companyId" value="companyId"></s:param>
 										</s:url>
-										<s:url id="delete_url" action="deleteRoleAction">
+										<s:url id="delete_url" action="deleteSupplierAction">
 											<s:param name="ids" value="id"></s:param>
 										</s:url>
 										<a name="edit" href="javascript:void(0);" url="${edit_url}">编辑</a>
