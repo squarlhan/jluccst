@@ -2,12 +2,22 @@ package com.boan.crm.purchase.model;
 
 import java.util.Date;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.GenericGenerator;
+
 /**
  * 购买批次
  * 
  * @author Administrator
  * 
  */
+@Entity
+@Table(name = "PURCHASE_BATCH")
 public class PurchaseBatch implements java.io.Serializable {
 	/**
 	 * serialVersionUID
@@ -15,12 +25,21 @@ public class PurchaseBatch implements java.io.Serializable {
 	private static final long serialVersionUID = 5298238142121781175L;
 
 	/**
+	 * 主键
+	 */
+	@Id
+	@GenericGenerator(name = "system-uuid", strategy = "uuid")
+	@GeneratedValue(generator = "system-uuid")
+	private String id;
+	/**
 	 * 批次名称
 	 */
+	@Column(name = "BATCH_NAME", length=50)
 	private String batchName;
 	/**
 	 * 公司id
 	 */
+	@Column(name = "COMPANY_ID", length=50)
 	private String companyId;
 	/**
 	 * 供应商ID
@@ -152,6 +171,14 @@ public class PurchaseBatch implements java.io.Serializable {
 
 	public void setBatchName(String batchName) {
 		this.batchName = batchName;
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 
 }
