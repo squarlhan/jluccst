@@ -3,7 +3,11 @@ package com.boan.crm.purchase.model;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.GenericGenerator;
 
 /**
  * 采购管理
@@ -22,6 +26,9 @@ public class PurchaseRecord implements java.io.Serializable {
 	/**
 	 * 主键
 	 */
+	@Id
+	@GenericGenerator(name="system-uuid", strategy="uuid")
+	@GeneratedValue(generator="system-uuid")
 	private String id;
 	/**
 	 * 批次id
