@@ -33,6 +33,12 @@
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<j:scriptlink css="true" tipswindow="true" jmessagebox="true" jquery="true" validate="true" jfunction="true"/>
+	<link rel="stylesheet" media="all" type="text/css" href="<%=basePath%>js/timepicke/jquery-ui-1.7.3.custom.css" />
+	<link rel="stylesheet" media="all" type="text/css" href="<%=basePath%>js/timepicke/jquery-ui-timepicker-addon.css" />
+	<script type="text/javascript" src="<%=basePath%>js/timepicke/jquery-ui-1.7.3.custom.min.js"></script>
+	<script type="text/javascript" src="<%=basePath%>js/timepicke/jquery-ui-timepicker-addon.js"></script>
+	<script type="text/javascript" src="<%=basePath%>js/timepicke/jquery-ui-timepicker-zh-CN.js"></script>
+	<script type="text/javascript" src="<%=basePath%>js/timepicke/jquery-ui-sliderAccess.js"></script>
 	<style type="text/css">
 	<!--
 	.STYLE1 {
@@ -57,7 +63,13 @@
 		            	alert(value);document.getElementById(key).focus();return false;
 		        	}); 
 		    	}
-			})
+			});
+			//日期控件
+	  		//$('#txt_begin').val((new Date()).getYear()+"-"+(((new Date()).getMonth()+1)<10 ? "0"+((new Date()).getMonth()+1) : (new Date()).getMonth()+1)+"-"+((new Date()).getDate()-15<10 ? "0"+(new Date()).getDate()-15 : (new Date()).getDate()-15));
+	  		//$('#txt_end').val((new Date()).getYear()+"-"+(((new Date()).getMonth()+1)<10 ? "0"+((new Date()).getMonth()+1) : (new Date()).getMonth()+1)+"-"+((new Date()).getDate()<10 ? "0"+(new Date()).getDate() : (new Date()).getDate()));
+			$('#beginDate').datetimepicker({showTimepicker: false});
+			//日期控件
+			$('#endDate').datetimepicker({showTimepicker: false});
 			$("#addbtn").click(function(){
 				parent.parent.parent.tipsWindown("添加跟进信息","iframe:customer/allCustomerTraceInfo.action?customerId=" + $("#customerId_t").val(),"800","500","true","","true","no");
 				parent.parent.parent.$("#windown-close").bind('click',function(){
@@ -143,9 +155,9 @@
 			id="salesmanId" name="salesmanId" cssStyle="width:80px" headerKey="" headerValue="--请选择--"></s:select></td>
 		<td align="center">查询开始日期：</td>
 		<td >
-		<s:textfield name="beginDate" id="beginDate" style="width: 80px"></s:textfield></td>
+		<s:textfield name="beginDate" id="beginDate" style="width: 80px" readOnly="true"></s:textfield></td>
 		<td align="center">查询结束日期：</td>
-		<td><s:textfield name="endDate" id="endDate" style="width: 80px"></s:textfield></td>
+		<td><s:textfield name="endDate" id="endDate" style="width: 80px" readOnly="true"></s:textfield></td>
 		<td align="center">类型：</td>
 		<td style="width:120px"><s:select list="listTraceOption" listKey="id" listValue="name" value="traceOption" 
 			id="traceOption" name="traceOption" cssStyle="width:120px" headerKey="" headerValue="--请选择--"></s:select></td>
@@ -158,7 +170,7 @@
          <td align="center" background="../images/headerbg.jpg">  
    				<s:checkbox theme="simple" id="cbk_all" name="all"></s:checkbox>
    			</td>
-              <td align="center" background="../images/headerbg.jpg"><strong>跟进日期</strong></td>
+              <td align="center" background="../images/headerbg.jpg"><strong>跟进时间</strong></td>
               <td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">客户名称</td>
 			<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">业务员</td>
 			<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">业务进展</td>
@@ -173,7 +185,7 @@
         <td height="26" align="center" bgcolor="#FFFFFF" >  
 				<s:checkbox id="%{#obj.id}" name="ids" fieldValue="%{id}" value="false" theme="simple"/>
 			</td>
-            <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="traceTime"/></td>
+            <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="traceTimeStr"/></td>
             <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="customerName"/></td>
             <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="salesman"/></td>
             <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="progress"/></td>

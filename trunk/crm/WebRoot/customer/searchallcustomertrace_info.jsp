@@ -267,32 +267,32 @@
 		<table width="100%" border="0" cellspacing="5" cellpadding="0">
 			<tr><td><table><tr><td style="height: 12px"></td></tr>
 			<tr><td><table>
-			<tr><td><fieldset><legend><span>完善基本信息</span></legend><table>
+			<tr><td><fieldset><legend><span>基本信息</span></legend><table>
 <tr><td><table cellpadding="5" cellspacing="3">
 	<tr>
 		<td></td>
 		<td align="right" style="width: 72px">客户名称：</td>
 		<td >
-		<s:textfield type="text" style="width:150px" name="customerInfo.customerName" id="customerName"></s:textfield>
+		<s:textfield type="text" style="width:150px" name="customerInfo.customerName" id="customerName" readOnly="true"></s:textfield>
 		</td>
 		<td align="right">业务员：</td>
-		<td><s:textfield type="text" readOnly="true" style="width:150px" name="customerInfo.salesman" id="salesman"></s:textfield></td>
+		<td><s:textfield type="text" readOnly="true" style="width:150px" name="customerInfo.salesman" id="salesman" readOnly="true"></s:textfield></td>
 		<td align="right">业务进展：</td>
 		<td style="width: 150px">
-		<s:textfield type="text" readOnly="true" style="width:150px" name="customerInfo.progressId" id="progressId"></s:textfield>
+		<s:textfield type="text" readOnly="true" style="width:150px" name="customerInfo.progressId" id="progressId" readOnly="true"></s:textfield>
 		</td>
 	</tr>
 	<tr>
 		<td></td>
 		<td align="right" style="width: 72px">联系人：</td>
-		<td><s:textfield type="text" readOnly="true" style="width:150px" name="contractPerson" id="contractPerson"></s:textfield></td>
+		<td><s:textfield type="text" readOnly="true" style="width:150px" name="contractPerson" id="contractPerson" readOnly="true"></s:textfield></td>
 		<td align="center">手　机：</td>
 		<td>
-		<s:textfield type="text" readOnly="true" style="width:150px" name="contractTel" id="phone"></s:textfield>
+		<s:textfield type="text" readOnly="true" style="width:150px" name="contractTel" id="phone" readOnly="true"></s:textfield>
 		</td>
 		<td align="right">客户分类：</td>
 		<td style="width: 150px">
-		<s:textfield type="text" readOnly="true" style="width:150px" name="customerInfo.category" id="category"></s:textfield></td>
+		<s:textfield type="text" readOnly="true" style="width:150px" name="customerInfo.category" id="category" readOnly="true"></s:textfield></td>
 	</tr>
 	</table></td></tr>
 
@@ -306,29 +306,29 @@
 		<td></td>
 		<td align="right" nowrap>受访人：</td>
 		<td ><s:select list="listPerson" listKey="id" listValue="personName" value="customerTraceInfo.tracePersonId" 
-			id="personId" name="customerTraceInfo.tracePersonId" cssStyle="width:150px" headerKey="" headerValue="--请选择--"></s:select></td>
+			id="personId" name="customerTraceInfo.tracePersonId" cssStyle="width:150px" headerKey="" headerValue="--请选择--" disabled="true"></s:select></td>
 		<td align="right" nowrap>跟进人：</td>
 		<td><s:select list="userList" listKey="id" listValue="userCName" value="customerTraceInfo.salesmanId" 
-			id="salesmanId" name="customerTraceInfo.salesmanId" cssStyle="width:150px" headerKey="" headerValue="--请选择--"></s:select></td>
+			id="salesmanId" name="customerTraceInfo.salesmanId" cssStyle="width:150px" headerKey="" headerValue="--请选择--" disabled="true"></s:select></td>
 		<td align="right" nowrap>跟进方式：</td>
 		<td ><s:select list="listTraceOption" listKey="id" listValue="name" value="customerTraceInfo.traceOption" 
-			id="traceOption" name="customerTraceInfo.traceOption" cssStyle="width:150px" headerKey="" headerValue="--请选择--"></s:select></td>
+			id="traceOption" name="customerTraceInfo.traceOption" cssStyle="width:150px" headerKey="" headerValue="--请选择--" disabled="true"></s:select></td>
 	</tr>
 	<tr>
 		<td></td>
 		<td align="right" nowrap>联系电话：</td>
-		<td><s:textfield type="text" style="width:150px" name="customerTraceInfo.tel" id="tel"></s:textfield></td>
+		<td><s:textfield type="text" style="width:150px" name="customerTraceInfo.tel" id="tel" readOnly="true"></s:textfield></td>
 		<td align="right" nowrap>Q Q：</td>
-		<td ><s:textfield type="text" style="width:150px" name="customerTraceInfo.qq" id="qq"></s:textfield></td>
+		<td ><s:textfield type="text" style="width:150px" name="customerTraceInfo.qq" id="qq" readOnly="true"></s:textfield></td>
 		<td align="right" nowrap>邮 箱：</td>
-		<td ><s:textfield type="text" style="width:150px" name="customerTraceInfo.email" id="email"></s:textfield></td>
+		<td ><s:textfield type="text" style="width:150px" name="customerTraceInfo.email" id="email" readOnly="true"></s:textfield></td>
 	</tr>
 	<tr>
 		<td></td>
 		<td align="right" nowrap>跟进时间：</td>
-		<td><s:textfield readOnly="true" type="text" style="width:150px" name="traceTime" id="traceTime"></s:textfield></td>
+		<td><s:textfield readOnly="true" type="text" style="width:150px" name="traceTime" id="traceTime" readOnly="true"></s:textfield></td>
 		<td align="right">任务：</td>
-		<td colspan="3"><s:textarea type="text" style="width:400px;height:60px" name="customerTraceInfo.task" id="task"></s:textarea></td>
+		<td colspan="3"><s:textarea type="text" style="width:400px;height:60px" name="customerTraceInfo.task" id="task" readOnly="true"></s:textarea></td>
 	</tr>
 	</table></td></tr>
 </table></fieldset></td></tr>
@@ -345,13 +345,7 @@
 			<tr><td style="color:white">占行：</td></tr></table></td>
 		<td rowspan="2"><table>
 			<tr><td>
-			<s:if test='%{customerTraceInfo.id != null && customerTraceInfo.id != ""}'>
-				<s:textarea type="text" style="width:650px;height:70px" name="customerTraceInfo.interest" id="interest"></s:textarea></td></tr></table></td>
-			</s:if>
-			<s:else>
-				<s:textarea title="请先填写跟进记录再填写结果 " readOnly="true" type="text" style="width:650px;height:70px" name="customerTraceInfo.interest" id="interest"></s:textarea></td></tr></table></td>
-			</s:else>
-			
+				<s:textarea readOnly="true" type="text" style="width:650px;height:70px" name="customerTraceInfo.interest" id="interest"></s:textarea></td></tr></table></td>
 	</tr>
 	<tr><td></td></tr>
 	<tr>
@@ -361,12 +355,7 @@
 			<tr><td style="color:white">占行：</td></tr></table></td>
 		<td rowspan="2"><table>
 			<tr><td>
-			<s:if test='%{customerTraceInfo.id != null && customerTraceInfo.id != ""}'>
-			<s:textarea type="text"  style="width:650px;height:70px" name="customerTraceInfo.objection" id="objection"></s:textarea></td></tr></table></td>
-			</s:if>
-			<s:else>
-			<s:textarea title="请先填写跟进记录再填写结果 " type="text" readOnly="true" style="width:650px;height:70px" name="customerTraceInfo.objection" id="objection"></s:textarea></td></tr></table></td>
-			</s:else>
+			<s:textarea type="text" readOnly="true" style="width:650px;height:70px" name="customerTraceInfo.objection" id="objection"></s:textarea></td></tr></table></td>
 	</tr>
 	<tr><td></td></tr>
 </table></td></tr>
@@ -376,7 +365,6 @@
 	<tr><td style="height: 10px"></td></tr>
 	<tr>
 		<td align="center">
-		<input type="button" name="addBtn" id="addBtn" value="保存" style="width: 50px"/>
 		<input type="button" name="closeBtn" id="closeBtn" value="关闭" style="width: 50px"/></td>
 	</tr>
 </table></td></tr>
