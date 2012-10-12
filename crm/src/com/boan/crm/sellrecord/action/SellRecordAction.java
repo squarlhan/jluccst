@@ -39,73 +39,73 @@ import com.boan.crm.utils.page.Pagination;
 
 @Controller("sellRecordAction")
 @Scope("prototype")
-public class SellRecordAction extends BaseActionSupport{
+public class SellRecordAction extends BaseActionSupport {
 
 	/**
 	 * 客户信息
 	 */
 	private CustomerInfo customer;
-	
+
 	@Autowired
 	@Qualifier("customerInfoService")
-	//客户状态接口类
+	// 客户状态接口类
 	private ICustomerInfoService customerInfoService;
 	@Resource
-	//积分接口类
+	// 积分接口类
 	private IPointInfoService pointInfoService;
 	@Resource
-	//会员接口类
+	// 会员接口类
 	private IMemberInfoService memberInfoService;
 	@Resource
-	//会员类别接口类
+	// 会员类别接口类
 	private IMemberTypeService memberTypeService;
 	@Autowired
 	@Qualifier("deptService")
 	private IDeptmentService deptService = null;
-	
+
 	private List<Deptment> deptList = null;
-	
+
 	private String companyId = null;
-	
+
 	private String companyName = null;
-	
+
 	/**
 	 * 商品明细
 	 */
 	private List<String> detials = new ArrayList<String>();
-	
+
 	/**
 	 * 销售记录信息
 	 */
 	private SellRecord sellRecord;
-	
+
 	@Autowired
 	@Qualifier("sellRecordService")
 	private ISellRecordService sellRecordService;
-	
+
 	@Autowired
 	@Qualifier("goodsInfoService")
 	private IGoodsInfoService goodsInfoService;
-	
+
 	@Autowired
 	@Qualifier("userService")
 	private IUserService userService = null;
-	
+
 	/**
 	 * 销售员所有的客户
 	 */
 	private List<CustomerInfo> customerInfos = new ArrayList<CustomerInfo>();
-	
+
 	/**
 	 * 员工数组
 	 */
 	private List<User> userList = null;
-	
+
 	/**
 	 * 提示信息
 	 */
 	private String message;
-	
+
 	/**
 	 * 显示分页
 	 */
@@ -113,100 +113,101 @@ public class SellRecordAction extends BaseActionSupport{
 
 	private String[] ids;
 	private String customerId;
-	//--------------查询条件-------------------------//
+	// --------------查询条件-------------------------//
 	private String queryCustomerName;
-	
+
 	private String queryLinkman;
-	
+
 	private String querySalesman;
-	
+
 	private String queryReturnedMoney;
-	
+
 	private String queryBargainTimeBegin;
-	
+
 	private String queryBargainTimeEnd;
-	//--------------查询条件-------------------------//
-	
-	public String openSellRecordList() throws Exception{
-		userList =userService.queryUserList( sessionCompanyId, sessionDeptId, new Pagination<User>()).getData();
+
+	// --------------查询条件-------------------------//
+
+	public String openSellRecordList() throws Exception {
+		userList = userService.queryUserList(sessionCompanyId, sessionDeptId, new Pagination<User>()).getData();
 		Map<String, String> params = new HashMap<String, String>();
-		if(queryCustomerName!=null  && !queryCustomerName.trim().equals("")){
+		if (queryCustomerName != null && !queryCustomerName.trim().equals("")) {
 			params.put("queryCustomerName", queryCustomerName);
 		}
-		if(querySalesman!=null && !querySalesman.trim().equals("")){
+		if (querySalesman != null && !querySalesman.trim().equals("")) {
 			params.put("querySalesman", querySalesman);
 		}
-		if(queryBargainTimeBegin!=null && !queryBargainTimeBegin.trim().equals("")){
+		if (queryBargainTimeBegin != null && !queryBargainTimeBegin.trim().equals("")) {
 			params.put("queryBargainTimeBegin", queryBargainTimeBegin);
 		}
-		if(queryBargainTimeBegin!=null  && !queryBargainTimeBegin.trim().equals("")){
+		if (queryBargainTimeBegin != null && !queryBargainTimeBegin.trim().equals("")) {
 			params.put("queryBargainTimeEnd", queryBargainTimeEnd);
 		}
-		pagination = sellRecordService.findSellRecordForPage(params ,pagination);
+		pagination = sellRecordService.findSellRecordForPage(params, pagination);
 		return SUCCESS;
 	}
-	
-	public String openSellRecordListForCustomer() throws Exception{
-		userList =userService.queryUserList( sessionCompanyId, sessionDeptId, new Pagination<User>()).getData();
+
+	public String openSellRecordListForCustomer() throws Exception {
+		userList = userService.queryUserList(sessionCompanyId, sessionDeptId, new Pagination<User>()).getData();
 		Map<String, String> params = new HashMap<String, String>();
-		if(customerId!=null ){
-			customerId=customerId.split(",")[0];
-			if(customerId!=null  && !customerId.trim().equals("")){
+		if (customerId != null) {
+			customerId = customerId.split(",")[0];
+			if (customerId != null && !customerId.trim().equals("")) {
 				params.put("customerId", customerId);
 			}
-			if(queryBargainTimeBegin!=null && !queryBargainTimeBegin.trim().equals("")){
+			if (queryBargainTimeBegin != null && !queryBargainTimeBegin.trim().equals("")) {
 				params.put("queryBargainTimeBegin", queryBargainTimeBegin);
 			}
-			if(queryBargainTimeBegin!=null  && !queryBargainTimeBegin.trim().equals("")){
+			if (queryBargainTimeBegin != null && !queryBargainTimeBegin.trim().equals("")) {
 				params.put("queryBargainTimeEnd", queryBargainTimeEnd);
 			}
 		}
-		pagination = sellRecordService.findSellRecordForPage(params ,pagination);
+		pagination = sellRecordService.findSellRecordForPage(params, pagination);
 		return SUCCESS;
 	}
-	
-	
-	public String openAddSellRecord(){
-		
+
+	public String openAddSellRecord() {
+
 		Calendar rightNow = Calendar.getInstance();
-		SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd"); //日期格式化格式
-		String date = format.format(rightNow.getTime()); //取得当前时间，并格式化成相应格式   
+		SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd"); // 日期格式化格式
+		String date = format.format(rightNow.getTime()); // 取得当前时间，并格式化成相应格式
 
 		UserSession userSession = this.getSession();
-		String orderID = sellRecordService.getSellRecordorderID(date,userSession.getCompanyId());
+		String orderID = sellRecordService.getSellRecordorderID(date, userSession.getCompanyId());
 		int number = 1;
-		if(orderID!=null && orderID.length()==13){
+		if (orderID != null && orderID.length() == 13) {
 			number = Integer.parseInt(orderID.substring(8));
-			number=number+1;
+			number = number + 1;
 		}
-		customerInfos= customerInfoService.findAllCustomerInfo();
+		customerInfos = customerInfoService.findAllCustomerInfo();
 		sellRecord = new SellRecord();
 		sellRecord.setCompanyId(userSession.getCompanyId());
-		//String.format("%05d", number) 将流水号格式化为 5位长度返回
-		String serialNo = date+String.format("%05d", number);
+		// String.format("%05d", number) 将流水号格式化为 5位长度返回
+		String serialNo = date + String.format("%05d", number);
 		sellRecord.setOrderID(serialNo);
-		
+
 		return SUCCESS;
 	}
-	public String openModifySellRecord(){
-		customerInfos= customerInfoService.findAllCustomerInfo();
+
+	public String openModifySellRecord() {
+		customerInfos = customerInfoService.findAllCustomerInfo();
 		sellRecord = sellRecordService.getSellRecordById(sellRecord.getId());
 		return SUCCESS;
 	}
-	
-	public String addSellRecord(){
-		customerInfos= customerInfoService.findAllCustomerInfo();
-		//查找客户信息
+
+	public String addSellRecord() {
+		customerInfos = customerInfoService.findAllCustomerInfo();
+		// 查找客户信息
 		customer = customerInfoService.get(sellRecord.getCustomerId());
 		sellRecord.setCustomer(customer);
-		sellRecord.setCustomerId(customer.getId());//设置客户Id
+		sellRecord.setCustomerId(customer.getId());// 设置客户Id
 		sellRecord.setCustomerName(customer.getCustomerName());
 		UserSession userSession = this.getSession();
-		sellRecord.setSalesmanId(userSession.getUserId());//设置销售员Id
+		sellRecord.setSalesmanId(userSession.getUserId());// 设置销售员Id
 		sellRecord.setSalesmanName(userSession.getUserCName());
 		Set<GoodsInfo> goodsDetials = new HashSet<GoodsInfo>();
 		BigDecimal thisPrice = new BigDecimal(0);
-		for(String str  : detials){
+		for (String str : detials) {
 			String[] array = str.split("☆");
 			System.out.println(array[0]);
 			GoodsInfo goods = new GoodsInfo();
@@ -216,115 +217,132 @@ public class SellRecordAction extends BaseActionSupport{
 			goods.setPrice(new BigDecimal(array[3]));
 			goods.setNumber(Integer.parseInt(array[4]));
 			goods.setAllPrice(new BigDecimal(array[5]));
-			goodsDetials.add(goods );
+			goodsDetials.add(goods);
 			thisPrice = thisPrice.add(goods.getAllPrice());
 		}
-		sellRecord.setGoodsDetials(goodsDetials );
-		
+		sellRecord.setGoodsDetials(goodsDetials);
+
 		try {
-			//保存或更新销售记录
-			if(sellRecord.getId().equals("")){
+			// 保存或更新销售记录
+			if (sellRecord.getId().equals("")) {
 				sellRecord.setId(null);
 			}
 			sellRecordService.saveOrUpdate(sellRecord);
 			serviceData(sellRecord.getCustomerId(), sellRecord.getCustomerName(), sellRecord.getBargainTime(), sellRecord.getId(), sellRecord.getRealCollection().floatValue());
-			message="保存成功！";
+			message = "保存成功！";
 		} catch (Exception e) {
-			message="保存失败！";
+			message = "保存失败！";
 			e.printStackTrace();
 		}
 		sellRecord = sellRecordService.getSellRecordById(sellRecord.getId());
-//		return "message";
+		// return "message";
 		return SUCCESS;
 	}
-	
-	public String modifySellRecord(){
+
+	public String modifySellRecord() {
 		return SUCCESS;
 	}
-	
-	public String deleteSellRecord(){
+
+	public String deleteSellRecord() {
 		sellRecordService.deleteSellRecordByIds(ids);
 		return NONE;
 	}
-	
-	
-	public String openAddSellRecordDetial(){
+
+	public String openAddSellRecordDetial() {
 		return SUCCESS;
 	}
-	public String openModifySellRecordDetial(){
+
+	public String openModifySellRecordDetial() {
 		return SUCCESS;
 	}
-	
-	public String addSellRecordDetial(){
+
+	public String addSellRecordDetial() {
 		return SUCCESS;
 	}
-	
-	public String modifySellRecordDetial(){
+
+	public String modifySellRecordDetial() {
 		return SUCCESS;
 	}
-	
-	public String deleteSellRecordDetials(){
+
+	public String deleteSellRecordDetials() {
 		goodsInfoService.deleteGoodsInfoByIds(ids);
 		return NONE;
 	}
-	
+
 	/**
 	 * 为服务模块生成数据
-	 * @param companyId 单位ID
-	 * @param companyName 单位名称
-	 * @param consumptionId 销售ID
-	 * @param money 销售金额
+	 * 
+	 * @param companyId
+	 *            单位ID
+	 * @param companyName
+	 *            单位名称
+	 * @param consumptionId
+	 *            销售ID
+	 * @param money
+	 *            销售金额
 	 */
-	private void serviceData(String companyId, String companyName, Calendar createTime, String consumptionId, float money){
+	private void serviceData(String companyId, String companyName, Calendar createTime, String consumptionId, float money) {
 		PointInfo pi = pointInfoService.getByConsumptionId(consumptionId);
-		if(pi==null){
+		if (pi == null) {
 			pi = new PointInfo();
 			pi.setConsumptionId(consumptionId);
 		}
 		pi.setMyCompanyId(sessionCompanyId);
 		pi.setCompanyId(companyId);
 		pi.setCompanyName(companyName);
-		pi.setConsumptionTime(createTime);//消费时间
-		pi.setConsumptionMoney(money);//消费金额
-		pi.setPoint((int)pi.getConsumptionMoney());//消费积分
+		pi.setConsumptionTime(createTime);// 消费时间
+		pi.setConsumptionMoney(money);// 消费金额
+		pi.setPoint((int) pi.getConsumptionMoney());// 消费积分
 		pointInfoService.saveOrUpdate(pi);
-		//更新会员积分信息
-		MemberInfo mi = memberInfoService.getByCompanyId(companyId);//客户ID
-		if(mi==null){
+		// 更新会员积分信息
+		MemberInfo mi = memberInfoService.getByCompanyId(companyId);// 客户ID
+		if (mi == null) {
 			mi = new MemberInfo();
 			mi.setCreateTime(createTime);
 		}
 		mi.setMyCompanyId(sessionCompanyId);
 		mi.setCompanyId(companyId);
 		mi.setCompanyName(companyName);
-		mi.setConsumptionAmount(pointInfoService.getConsumptionAmount(companyId));//消费总额
-		mi.setTotalPoint(pointInfoService.getTotalPoint(companyId));//总积分
-		
-		//设置会员类别
+		mi.setConsumptionAmount(pointInfoService.getConsumptionAmount(companyId));// 消费总额
+		mi.setTotalPoint(pointInfoService.getTotalPoint(companyId));// 总积分
+
+		// 设置会员类别
 		List<MemberType> memberTypes = memberTypeService.memberTypeList(sessionCompanyId);
-		if(memberTypes!=null&&memberTypes.size()>0){
+		if (memberTypes != null && memberTypes.size() > 0) {
 			for (MemberType memberType : memberTypes) {
-				if(mi.getTotalPoint()>=memberType.getMinStandard() && mi.getTotalPoint()<=memberType.getMaxStandard()){
+				if (mi.getTotalPoint() >= memberType.getMinStandard() && mi.getTotalPoint() <= memberType.getMaxStandard()) {
 					mi.setMemberType(memberType.getTypeName());
 					break;
 				}
 			}
-		}else{
+		} else {
 			mi.setMemberType("普通会员");
 		}
 		memberInfoService.updateInfo(mi);
 	}
+
 	/**
 	 * 显示组织机构树,带公司、工厂、车间
+	 * 
 	 * @return
 	 */
-	public String showGroupTreeForSellRecord() throws Exception
-	{
+	public String showGroupTreeForSellRecord() throws Exception {
 		companyId = sessionCompanyId;
 		companyName = sessionCompanyName;
-		deptList = deptService.queryAllDeptmentsByCompanyId( sessionCompanyId );
+		deptList = deptService.queryAllDeptmentsByCompanyId(sessionCompanyId);
+		// 获取用户列表
+		if (deptList != null && deptList.size() > 0) {
+			List<User> tempUserList = null;
+			for (int i = 0; i < deptList.size(); i++) {
+				tempUserList = userService.queryUserList(sessionCompanyId, deptList.get(i).getId());
+			}
+			if (tempUserList != null && tempUserList.size() > 0) {
+				userList.addAll(tempUserList);
+			}
+		}
 		return "group-tree-for-sell-record";
 	}
+
 	public List<String> getDetials() {
 		return detials;
 	}
@@ -444,52 +462,54 @@ public class SellRecordAction extends BaseActionSupport{
 	public void setCustomerId(String customerId) {
 		this.customerId = customerId;
 	}
-	
-		/**
-	    * 生成流水号
-	    * @return
-	    */
-	    
-	    public String generateSerialNumber() {
-	    //当天的初始化流水号为1
-	    Integer serialNo = 1;
-	    //查询当天的下一个流水号
-	    String hql = "SELECT max(t.serialNo+1) FROM SerialNumber t WHERE t.generateDate=?";
-//	    String generateDate = DateUtils.formatDate(new Date(),"yyyyMMdd");
-//	    Object obj = session.createQuery(hql).setParameter(0, generateDate).uniqueResult();
-//	    if(obj != null) {
-//	    	serialNo = (Integer) obj;
-//	    }
-	    //将当前序列号保存到数据库
-//	    SerialNumber sn = new SerialNumber();
-//	    sn.setSerialNo(serialNo);
-//	    sn.setGenerateDate(generateDate);
-//	    session.save(sn);
-	    //将流水号格式化为 "00001"  5位长度返回
-	    return String.format("%05d", serialNo);
-	    }
 
-		public List<Deptment> getDeptList() {
-			return deptList;
-		}
+	/**
+	 * 生成流水号
+	 * 
+	 * @return
+	 */
 
-		public void setDeptList(List<Deptment> deptList) {
-			this.deptList = deptList;
-		}
+	public String generateSerialNumber() {
+		// 当天的初始化流水号为1
+		Integer serialNo = 1;
+		// 查询当天的下一个流水号
+		String hql = "SELECT max(t.serialNo+1) FROM SerialNumber t WHERE t.generateDate=?";
+		// String generateDate = DateUtils.formatDate(new Date(),"yyyyMMdd");
+		// Object obj = session.createQuery(hql).setParameter(0,
+		// generateDate).uniqueResult();
+		// if(obj != null) {
+		// serialNo = (Integer) obj;
+		// }
+		// 将当前序列号保存到数据库
+		// SerialNumber sn = new SerialNumber();
+		// sn.setSerialNo(serialNo);
+		// sn.setGenerateDate(generateDate);
+		// session.save(sn);
+		// 将流水号格式化为 "00001" 5位长度返回
+		return String.format("%05d", serialNo);
+	}
 
-		public String getCompanyId() {
-			return companyId;
-		}
+	public List<Deptment> getDeptList() {
+		return deptList;
+	}
 
-		public void setCompanyId(String companyId) {
-			this.companyId = companyId;
-		}
+	public void setDeptList(List<Deptment> deptList) {
+		this.deptList = deptList;
+	}
 
-		public String getCompanyName() {
-			return companyName;
-		}
+	public String getCompanyId() {
+		return companyId;
+	}
 
-		public void setCompanyName(String companyName) {
-			this.companyName = companyName;
-		}
+	public void setCompanyId(String companyId) {
+		this.companyId = companyId;
+	}
+
+	public String getCompanyName() {
+		return companyName;
+	}
+
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
+	}
 }
