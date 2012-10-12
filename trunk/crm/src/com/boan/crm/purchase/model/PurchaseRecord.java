@@ -2,12 +2,17 @@ package com.boan.crm.purchase.model;
 
 import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
 /**
  * 采购管理
  * 
  * @author Administrator
  * 
  */
+@Entity
+@Table(name = "PURCHASE_RECORD")
 public class PurchaseRecord implements java.io.Serializable {
 
 	/**
