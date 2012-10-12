@@ -38,6 +38,9 @@
 		<s:iterator value="deptList">
 			d.add("<s:property value="id"/>",0,'<s:property value="deptName"/>','./userAction!showUserList.action?companyId=<s:property value="commpanyId"/>&deptId=<s:property value="id"/>&who=session','','groupmain','');
 		</s:iterator>
+		<s:iterator value="userList">
+			d.add("<s:property value="id"/>",0,'<s:property value="userCName"/>','./userAction!showUserList.action?companyId=<s:property value="commpanyId"/>&deptId=<s:property value="deptId"/>&userId=<s:property value="id"/>&who=session','','groupmain','');
+		</s:iterator>
 		document.write(d);
 		//-->
 	</script>
