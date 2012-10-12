@@ -28,7 +28,13 @@
 		<base href="<%=basePath%>">
 		<title>客户回访信息</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<j:scriptlink  css="true" jmessagebox="true" jquery="true" tipswindow="true" validate="true"/>
+		<j:scriptlink css="true" tipswindow="true" jmessagebox="true" jquery="true" validate="true" jfunction="true"/>
+		<link rel="stylesheet" media="all" type="text/css" href="<%=basePath%>js/timepicke/jquery-ui-1.7.3.custom.css" />
+		<link rel="stylesheet" media="all" type="text/css" href="<%=basePath%>js/timepicke/jquery-ui-timepicker-addon.css" />
+		<script type="text/javascript" src="<%=basePath%>js/timepicke/jquery-ui-1.7.3.custom.min.js"></script>
+		<script type="text/javascript" src="<%=basePath%>js/timepicke/jquery-ui-timepicker-addon.js"></script>
+		<script type="text/javascript" src="<%=basePath%>js/timepicke/jquery-ui-timepicker-zh-CN.js"></script>
+		<script type="text/javascript" src="<%=basePath%>js/timepicke/jquery-ui-sliderAccess.js"></script>
 		<script type="text/javascript">
 			/**
 		  	 * 验证条件
@@ -58,7 +64,11 @@
 			            	alert(value);document.getElementById(key).focus();return false;
 			        	}); 
 			    	}
-				})
+				});
+				//日期控件
+		  		//$('#txt_begin').val((new Date()).getYear()+"-"+(((new Date()).getMonth()+1)<10 ? "0"+((new Date()).getMonth()+1) : (new Date()).getMonth()+1)+"-"+((new Date()).getDate()-15<10 ? "0"+(new Date()).getDate()-15 : (new Date()).getDate()-15));
+		  		//$('#txt_end').val((new Date()).getYear()+"-"+(((new Date()).getMonth()+1)<10 ? "0"+((new Date()).getMonth()+1) : (new Date()).getMonth()+1)+"-"+((new Date()).getDate()<10 ? "0"+(new Date()).getDate() : (new Date()).getDate()));
+				$('#visitTime').datetimepicker({showTimepicker: true});
 				$.fn.save();
 		  		$.fn.close();
 		  		$.fn.initpage();
@@ -168,7 +178,7 @@
 	<tr>
 		<td></td>
 		<td align="center" nowrap>回访时间：</td>
-		<td><s:textfield type="text" style="width:150px" name="customerVisitInfo.visitTime" id="visitTime"></s:textfield></td>
+		<td><s:textfield type="text" readOnly="true" style="width:150px" name="visitTime" id="visitTime"></s:textfield></td>
 		<td align="center"  nowrap>回访任务：</td>
 		<td colspan="3"><s:textarea type="text" style="width:400px;height:60px" name="customerVisitInfo.task" id="task"></s:textarea></td>
 	</tr>
