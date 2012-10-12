@@ -330,6 +330,7 @@ public class SellRecordAction extends BaseActionSupport {
 		companyId = sessionCompanyId;
 		companyName = sessionCompanyName;
 		deptList = deptService.queryAllDeptmentsByCompanyId(sessionCompanyId);
+		userList = new ArrayList<User>();
 		// 获取用户列表
 		if (deptList != null && deptList.size() > 0) {
 			List<User> tempUserList = null;
