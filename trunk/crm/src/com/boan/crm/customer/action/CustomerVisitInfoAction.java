@@ -94,7 +94,53 @@ public class CustomerVisitInfoAction extends BaseActionSupport{
 		this.visitTime = visitTime;
 	}
 
-
+	/**
+	 * 我的客户回访信息列表
+	 * @return String
+	 */
+	public String myCustomerVisitList()
+	{
+		//回访方式： 传5
+		listVisitOption = dataDictionaryService.findDataDictionaryByType(sessionCompanyId, 5);
+		
+		try
+		{
+			userList = userService.queryUserListByCompanyIdRoleKey(sessionCompanyId,RoleFlag.YE_WU_YUAN);
+		}catch(Exception ex)
+		{
+			ex.printStackTrace();
+		}
+		Map<String,Object> values = new HashMap<String,Object>();
+		
+		if(customerName != null && customerName.length() > 0)
+		{
+			values.put("customerName", "%"+customerName+"%");
+		}
+		if(customerId != null && customerId.length() > 0)
+		{
+			values.put("customerId", customerId);
+		}
+		if(salesmanId != null && salesmanId.length() > 0)
+		{
+			values.put("salesmanId", salesmanId);
+		}
+		if(visitOption != null && visitOption.length() > 0)
+		{
+			values.put("visitOption", visitOption);
+		}
+		if(beginDate != null)
+		{
+			values.put("beginDate", beginDate);
+		}
+		if(endDate != null)
+		{
+			values.put("endDate", endDate);
+		}
+		values.put( "companyId", sessionCompanyId );
+		values.put( "salesmanId", sessionUserId );
+		pagination = customerVisitInfoService.findCustomerVisitInfoForPage(values, pagination);
+		return SUCCESS;
+	}
 	/**
 	 * 客户回访信息列表
 	 * @return String

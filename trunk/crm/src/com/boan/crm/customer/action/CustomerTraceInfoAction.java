@@ -107,7 +107,53 @@ public class CustomerTraceInfoAction extends BaseActionSupport{
 	public void setContractPerson(String contractPerson) {
 		this.contractPerson = contractPerson;
 	}
-
+	/**
+	 * 客户跟进信息列表
+	 * @return String
+	 */
+	public String myCustomerTraceList()
+	{
+		//跟进方式： 传6
+		listTraceOption = dataDictionaryService.findDataDictionaryByType(sessionCompanyId, 6);
+		
+		try
+		{
+			userList = userService.queryUserListByCompanyIdRoleKey(sessionCompanyId,RoleFlag.YE_WU_YUAN);
+		}catch(Exception ex)
+		{
+			ex.printStackTrace();
+		}
+		Map<String,Object> values = new HashMap<String,Object>();
+		
+		if(customerName != null && customerName.length() > 0)
+		{
+			values.put("customerName", "%"+customerName+"%");
+		}
+		if(salesmanId != null && salesmanId.length() > 0)
+		{
+			values.put("salesmanId", salesmanId);
+		}
+		if(customerId != null && customerId.length() > 0)
+		{
+			values.put("customerId", customerId);
+		}
+		if(traceOption != null && traceOption.length() > 0)
+		{
+			values.put("traceOption", traceOption);
+		}
+		if(beginDate != null)
+		{
+			values.put("beginDate", beginDate);
+		}
+		if(endDate != null)
+		{
+			values.put("endDate", endDate);
+		}
+		values.put( "companyId", sessionCompanyId );
+		values.put( "salesmanId", sessionUserId );
+		pagination = customerTraceInfoService.findCustomerTraceInfoForPage(values, pagination);
+		return SUCCESS;
+	}
 	/**
 	 * 客户跟进信息列表
 	 * @return String

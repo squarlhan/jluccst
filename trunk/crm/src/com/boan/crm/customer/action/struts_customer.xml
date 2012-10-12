@@ -55,6 +55,65 @@
              	<param name="id">${id}</param>
             </result>
 		</action>
+		<action name="allMyCustomerVisitList" class="customerVisitInfoAction" method="myCustomerVisitList">
+			<result name="success">/customer/allcustomervisit_list.jsp</result>
+			<result name="input">/customer/allcustomervisit_list.jsp</result>
+		</action>
+		<action name="allMyCustomerVisitInfo" class="customerVisitInfoAction" method="customerVisitInfo">
+			<result name="success">/customer/allmycustomervisit_info.jsp</result>
+			<result name="input">/customer/allmycustomervisit_info.jsp</result>
+		</action>
+    	<action name="allMyCustomerTraceList" class="customerTraceInfoAction" method="myCustomerTraceList">
+			<result name="success">/customer/allmycustomertrace_list.jsp</result>
+			<result name="input">/customer/allmycustomertrace_list.jsp</result>
+		</action>
+		<action name="allMyCustomerTraceInfo" class="customerTraceInfoAction" method="customerTraceInfo">
+			<result name="success">/customer/allmycustomertrace_info.jsp</result>
+			<result name="input">/customer/allmycustomertrace_info.jsp</result>
+		</action>
+		<action name="searchCustomerList" class="customerInfoAction" method="customerList">
+			<result name="success">/customer/searchcustomer_list.jsp</result>
+			<result name="input">/customer/searchcustomer_list.jsp</result>
+		</action>
+		<action name="searchCustomerInfo" class="customerInfoAction" method="customerInfo">
+			<result name="success">/customer/searchcustomer_info.jsp</result>
+			<result name="input">/customer/searchcustomer_info.jsp</result>
+		</action>
+		<action name="searchCustomerTabInfo" class="customerInfoAction" method="customerTabInfo">
+			<result name="success">/customer/searchcustomertabinfo.jsp</result>
+		</action>
+		<action name="searchCustomerTraceList" class="customerTraceInfoAction" method="customerTraceList">
+			<result name="success">/customer/searchcustomertrace_list.jsp</result>
+			<result name="input">/customer/searchcustomertrace_list.jsp</result>
+		</action>
+		<action name="searchCustomerTraceInfo" class="customerTraceInfoAction" method="customerTraceInfo">
+			<result name="success">/customer/searchcustomertrace_info.jsp</result>
+			<result name="input">/customer/searchcustomertrace_info.jsp</result>
+		</action>
+		<action name="searchCustomerVisitList" class="customerVisitInfoAction" method="customerVisitList">
+			<result name="success">/customer/searchcustomervisit_list.jsp</result>
+			<result name="input">/customer/searchcustomervisit_list.jsp</result>
+		</action>
+		<action name="searchCustomerVisitInfo" class="customerVisitInfoAction" method="customerVisitInfo">
+			<result name="success">/customer/searchcustomervisit_info.jsp</result>
+			<result name="input">/customer/searchcustomervisit_info.jsp</result>
+		</action>
+		<action name="searchAllCustomerVisitList" class="customerVisitInfoAction" method="customerVisitList">
+			<result name="success">/customer/searchallcustomervisit_list.jsp</result>
+			<result name="input">/customer/searchallcustomervisit_list.jsp</result>
+		</action>
+		<action name="searchAllCustomerVisitInfo" class="customerVisitInfoAction" method="customerVisitInfo">
+			<result name="success">/customer/searchallcustomervisit_info.jsp</result>
+			<result name="input">/customer/searchallcustomervisit_info.jsp</result>
+		</action>
+    	<action name="searchAllCustomerTraceList" class="customerTraceInfoAction" method="customerTraceList">
+			<result name="success">/customer/searchallcustomertrace_list.jsp</result>
+			<result name="input">/customer/searchallcustomertrace_list.jsp</result>
+		</action>
+		<action name="searchAllCustomerTraceInfo" class="customerTraceInfoAction" method="customerTraceInfo">
+			<result name="success">/customer/searchallcustomertrace_info.jsp</result>
+			<result name="input">/customer/searchallcustomertrace_info.jsp</result>
+		</action>
 		<action name="customerList" class="customerInfoAction" method="customerList">
 			<result name="success">/customer/customer_list.jsp</result>
 			<result name="input">/customer/customer_list.jsp</result>
@@ -104,7 +163,6 @@
 		<action name="personservice" class="contractPersonInfoAction" method="personService">
 			<result name="success">/customer/getcontractpersonservice.jsp</result>
 		</action>
-		
 		<action name="contractPersonInfo" class="contractPersonInfoAction" method="contractPerson">
 			<result name="success">/customer/contractperson_info.jsp</result>
 			<result name="input">/customer/contractperson_info.jsp</result>
@@ -160,7 +218,6 @@
 		</action>
 		<action name="deleteCustomerTrace" class="customerTraceInfoAction" method="deleteCustomerTrace">
     	</action>
-    	
     	<action name="customerVisitList" class="customerVisitInfoAction" method="customerVisitList">
 			<result name="success">/customer/customervisit_list.jsp</result>
 			<result name="input">/customer/customervisit_list.jsp</result>
@@ -177,7 +234,6 @@
 		</action>
 		<action name="deleteCustomerVisit" class="customerVisitInfoAction" method="deleteCustomerVisit">
     	</action>
-    	
 	</package>
 	<package name="ssss" extends="json-default" namespace="/customer">
 			<action name="getCustomerByName" class="customerInfoAction" method="getCustomerByName">
