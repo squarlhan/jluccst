@@ -11,7 +11,7 @@ import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 
 /**
- * 供货商
+ * 供应商
  * 
  * @author Administrator
  * 
@@ -43,12 +43,12 @@ public class Supplier implements java.io.Serializable {
 	@Column(name = "COMPANY_NAME", length = 50)
 	private String companyName;
 	/**
-	 * 供货商名称
+	 * 供应商名称
 	 */
 	@Column(name = "SUPPLIER_NAME", length = 100)
 	private String supplierName;
 	/**
-	 * 供货商编号
+	 * 供应商编号
 	 */
 	@Column(name = "SUPPLIER_NUMBER", length = 50)
 	private String supplierNumber;
@@ -56,7 +56,7 @@ public class Supplier implements java.io.Serializable {
 	/**
 	 * 产品
 	 */
-	@Column(name = "PRODUCT", length = 100)
+	@Column(name = "PRODUCT", length = 1000)
 	private String product;
 
 	/**

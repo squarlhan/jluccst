@@ -83,7 +83,11 @@ public class SupplierAction extends BaseActionSupport {
 		supplier.setUserId(sessionUserId);
 		supplier.setUserName(sessionUserCName);
 		supplier.setCreateTime(date);
-		supplierService.saveOrUpdate(supplier);
+		try {
+			supplierService.saveOrUpdate(supplier);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		message.setContent("供应商信息保存成功！");
 		// 保存日志开始
 		Log log = new Log();
