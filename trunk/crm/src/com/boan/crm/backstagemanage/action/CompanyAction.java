@@ -23,6 +23,8 @@ import com.boan.crm.backstagemanage.model.Company;
 import com.boan.crm.backstagemanage.model.Log;
 import com.boan.crm.backstagemanage.service.ICompanyService;
 import com.boan.crm.common.Message;
+import com.boan.crm.datadictionary.model.DataDictionary;
+import com.boan.crm.datadictionary.service.IDataDictionaryService;
 import com.boan.crm.groupmanage.common.RoleFlag;
 import com.boan.crm.groupmanage.model.Deptment;
 import com.boan.crm.groupmanage.model.Role;
@@ -66,6 +68,13 @@ public class CompanyAction extends BaseActionSupport {
 	@Autowired
 	@Qualifier("roleService")
 	private IRoleService roleService = null;
+	
+	/**
+	 * 角色Service
+	 */
+	@Autowired
+	@Qualifier("dataDictionaryService")
+	private IDataDictionaryService dataDictionaryService = null;
 	/**
 	 * 显示分页
 	 */
@@ -162,6 +171,22 @@ public class CompanyAction extends BaseActionSupport {
 			businessRole.setRoleKey(RoleFlag.YE_WU_YUAN);
 			businessRole.setSortIndex(0);
 			roleService.save(businessRole);
+			
+			List<DataDictionary> dataDictionary = dataDictionaryService.findAllDataDictionaryByCompanyId("");
+			if(dataDictionary!=null && dataDictionary.size()>0){
+				//创建数据字典
+				DataDictionary newObj = null;
+				for (DataDictionary dd : dataDictionary) {
+					newObj = new DataDictionary();
+					newObj.setName(dd.getName());
+					newObj.setRemark(dd.getRemark());
+					newObj.setSortIndex(dd.getSortIndex());
+					newObj.setCompanyId(company.getId());
+					newObj.setTypeFlag(dd.getTypeFlag());
+					dataDictionaryService.save(newObj);
+				}
+			}
+			
 			// 保存日志开始
 			Log log = new Log();
 			log.setLogType(LogType.INFO);
@@ -198,6 +223,25 @@ public class CompanyAction extends BaseActionSupport {
 		} else {
 			service.update(company);
 			message.setContent("公司信息保存成功！");
+			List<DataDictionary> dataDictionary = dataDictionaryService.findAllDataDictionaryByCompanyId(StringUtils.trimToEmpty(company.getId()));
+			if(dataDictionary!=null && dataDictionary.size()>0){
+				//存在不维护了
+			}else{
+				//创建数据字典
+				List<DataDictionary> initObjs = dataDictionaryService.findAllDataDictionaryByCompanyId("");
+				if(initObjs!=null && initObjs.size()>0){
+					DataDictionary newObj = null;
+					for (DataDictionary dd : initObjs) {
+						newObj = new DataDictionary();
+						newObj.setName(dd.getName());
+						newObj.setRemark(dd.getRemark());
+						newObj.setSortIndex(dd.getSortIndex());
+						newObj.setCompanyId(company.getId());
+						newObj.setTypeFlag(dd.getTypeFlag());
+						dataDictionaryService.save(newObj);
+					}
+				}
+			}
 			// 保存日志开始
 			Log log = new Log();
 			log.setLogType(LogType.INFO);
