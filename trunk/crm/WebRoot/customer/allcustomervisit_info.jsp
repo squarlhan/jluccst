@@ -43,7 +43,6 @@
 					"customerVisitInfo.personId":{required:true},
 					"customerVisitInfo.salesmanId":{required:true},
 					"customerVisitInfo.visitOption":{required:true},
-					"customerVisitInfo.tel":{strangecode:true},
 					"customerVisitInfo.qq":{strangecode:true},
 					"customerVisitInfo.email":{email:true},
 					"customerVisitInfo.task":{strangecode:true},
@@ -228,8 +227,7 @@
 			 * 初始化页面
 			 */
 			$.fn.initpage = function(){
-				//$("#personId").focus();
-				
+				$("#tel").focus();
 			}
 		</script>
 		<style type="text/css">
@@ -329,12 +327,24 @@
 	<tr>
 		<td></td>
 		<td align="right" nowrap>了解内容<br/>及结果：</td>
-		<td ><s:textarea type="text" style="width:646px;height:70px" name="customerVisitInfo.contentResult" id="contentResult"></s:textarea></td>
+		<td >
+		<s:if test='%{customerVisitInfo.id != null && customerVisitInfo.id != ""}'>
+		<s:textarea type="text" style="width:646px;height:70px" name="customerVisitInfo.contentResult" id="contentResult"></s:textarea></td>
+		</s:if>
+		<s:else>
+		<s:textarea title="请先填写回访记录再填写结果 " type="text" readOnly="true" style="width:646px;height:70px" name="customerVisitInfo.contentResult" id="contentResult"></s:textarea></td>
+		</s:else>
 	</tr>
 	<tr>
 		<td></td>
 		<td align="right" nowrap>备 注：</td>
-		<td ><s:textarea type="text" style="width:646px;height:70px" name="customerVisitInfo.remark" id="remark"></s:textarea></td>
+		<td >
+		<s:if test='%{customerVisitInfo.id != null && customerVisitInfo.id != ""}'>
+		<s:textarea type="text" style="width:646px;height:70px" name="customerVisitInfo.remark" id="remark"></s:textarea></td>
+		</s:if>
+		<s:else>
+		<s:textarea title="请先填写回访记录再填写结果 " type="text" readOnly="true" style="width:646px;height:70px" name="customerVisitInfo.remark" id="remark"></s:textarea></td>
+		</s:else>
 	</tr>
 	<tr><td></td></tr>
 </table></td></tr>

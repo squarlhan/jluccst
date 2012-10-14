@@ -50,7 +50,6 @@
 					"customerTraceInfo.personId":{required:true},
 					"customerTraceInfo.salesmanId":{required:true},
 					"customerTraceInfo.traceOption":{required:true},
-					"customerTraceInfo.tel":{strangecode:true},
 					"customerTraceInfo.qq":{strangecode:true},
 					"customerTraceInfo.email":{email:true},
 					"customerTraceInfo.task":{strangecode:true},
