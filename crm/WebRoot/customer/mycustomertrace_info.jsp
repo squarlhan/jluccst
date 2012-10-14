@@ -227,7 +227,7 @@
 	<tr><td style="height: 10px"></td></tr>
 	<tr>
 		<td align="center">
-		<s:checkbox name="customerTraceInfo.sms" id="chkSMS" value="1">短信提醒
+		<s:checkbox name="chkSMS" id="chkSMS" />短信提醒
 		<input type="button" name="addBtn" id="addBtn" value="保存" style="width: 50px"/>
 		<input type="button" name="closeBtn" id="closeBtn" value="关闭" style="width: 50px"/></td>
 	</tr>
