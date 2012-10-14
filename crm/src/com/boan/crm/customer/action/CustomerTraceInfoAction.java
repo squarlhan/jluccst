@@ -91,6 +91,15 @@ public class CustomerTraceInfoAction extends BaseActionSupport{
 	private String contractPerson = "";
 	private String contractTel  = "";
 	private String traceTime = "";
+	private String chkSMS = "";
+	public String getChkSMS() {
+		return chkSMS;
+	}
+
+	public void setChkSMS(String chkSMS) {
+		this.chkSMS = chkSMS;
+	}
+
 	public String getTraceTime() {
 		return traceTime;
 	}
@@ -342,7 +351,7 @@ public class CustomerTraceInfoAction extends BaseActionSupport{
 		obj.setCompanyId( sessionCompanyId );
 		customerTraceInfoService.save(obj);
 		
-		if(customerTraceInfo.getSms() == 1)
+		if(chkSMS != null && chkSMS.equals("true"))
 		{
 			SMSInfo sms = new SMSInfo();
 			SMSCustomerInfo customerInfo = new SMSCustomerInfo();
@@ -355,7 +364,7 @@ public class CustomerTraceInfoAction extends BaseActionSupport{
 			sms.setSendTime(time);
 			sms.setPhone(customerTraceInfo.getTel());
 			sms.setInfo("跟进任务提醒："+customerTraceInfo.getTask());
-			smsInfoService.saveSMSInfo(sms); 
+			//smsInfoService.saveSMSInfo(sms); 
 		}
 		id = obj.getId();
 		return SUCCESS;
