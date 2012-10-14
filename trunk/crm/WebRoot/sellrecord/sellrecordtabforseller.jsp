@@ -15,7 +15,7 @@
 		$('.selector').tabs({ ajaxOptions: { async: false } });
 		//$('.selector').tabs({ selected: 1 });
 		$("#tt").click(function(){
-			$("#iframe1").attr("src","openSellRecordListAction.action?companyId=<s:property value='commpanyId'/>&deptId=<s:property value='deptId'/>&userId=<s:property value='userId'/>&who=<s:property value='who'/>");
+			$("#iframe1").attr("src","openSellRecordListForSellerAction.action");
 		});
 		$.fn.showOrHideTab(1,false);
 	});
@@ -52,10 +52,10 @@
 <body>
 <!-- tab开始 -->
 <div id="tt" class="tabs-container">
-	<div id="tab1" title="销售记录查看"  style="padding: 1px; display: none;">
-		<iframe id="iframe1" scrolling="auto" frameborder="0" style="width:100%; height:100%" src="openSellRecordListAction.action?companyId=<s:property value='commpanyId'/>&deptId=<s:property value='deptId'/>&userId=<s:property value='userId'/>&who=<s:property value='who'/>" ></iframe>
+	<div id="tab1" title="销售记录查看11"  style="padding: 1px; display: none;">
+		<iframe id="iframe1" scrolling="auto" frameborder="0" style="width:100%; height:100%" src="openSellRecordListForSellerAction.action" ></iframe>
 	</div>
-	<div id="tab2" title="销售记录编辑"  style="padding: 1px; display: none;">
+	<div id="tab2" title="销售记录编辑11"  style="padding: 1px; display: none;">
 		<iframe id="iframe2"  scrolling="auto" frameborder="0" style="width:100%; height:100%" src="" ></iframe>
 	</div>
 </div>

@@ -91,6 +91,7 @@
 				  			row=row+"<td align='center' bgcolor='#FFFFFF'>"+info[3]+"</td>";
 				  			row=row+"<td align='center' bgcolor='#FFFFFF'>"+info[4]+"</td>";
 				  			row=row+"<td align='center' bgcolor='#FFFFFF'>"+info[5]+"</td>";
+				  			row=row+"<td align='center' bgcolor='#FFFFFF'>"+info[6]+"</td>";
 				  			row=row+"<td align='center' bgcolor='#FFFFFF'><a name='del_one' href='javascript:void(0);' onclick='$.fn.deletetemp($(this));'>删除</a></td>";
 				  			row=row+"</tr>";
 				  			$("#no_data").hide();
@@ -288,6 +289,20 @@
 					<legend>商品明细</legend>
 						<table id="goodsList" width="100%" height="50%"  border="0" cellpadding="5" cellspacing="1" bgcolor="#d5e4fd">
 							<tr>
+								<td colspan="12" align="center" width="50px" bgcolor="#FFFFFF">
+									<table>
+										<tr>
+											<td>
+												<input name="btn_add" type="button" class="btn_2_3" id="btn_add" value="添加">
+											</td>
+											<td>
+												<input name="btn_delAll" type="button" class="btn_2_3" id="btn_delAll" value="删除所选">
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							<tr>
 								<td align="center" width="50px" background="<%=basePath%>/images/headerbg.jpg">
 		   							<s:checkbox theme="simple" id="cbk_all" name="all"></s:checkbox>
 		   						</td>
@@ -298,6 +313,7 @@
 		              			<td align="center" background="<%=basePath%>/images/headerbg.jpg"><strong>数 量</strong></td>
 		              			<td align="center" background="<%=basePath%>/images/headerbg.jpg"><strong>预 付</strong></td>
 		              			<td align="center" background="<%=basePath%>/images/headerbg.jpg"><strong>备注</strong></td>
+		              			<td align="center" background="<%=basePath%>/images/headerbg.jpg"><strong>操作</strong></td>
 							</tr>
 							<s:if test="sellRecord!=null">
 							<s:iterator value="sellRecord.goodsDetials" status="obj">
@@ -312,6 +328,12 @@
 						            <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="number"/></td>
 						            <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="allPrice"/></td>
 						            <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="memo"/></td>
+						            <td height="26" align="center" bgcolor="#FFFFFF">
+										<s:url id="delete_url" action="deleteSellRecordDetialsAction">   
+											<s:param name="ids" value="id"></s:param>   
+										</s:url>
+							         	<a name="del_one" href="javascript:void(0);" url="${delete_url}">删除</a>  
+									</td>
 					            </tr>
 							</s:iterator>
 							</s:if>
@@ -350,6 +372,17 @@
 						</table>
 						</span>
 					</fieldset>
+				</td>
+			</tr>
+			<tr>
+				<td align="center" >
+					<table>
+						<tr>
+							<td>
+								<input name="btn_save" type="button" class="btn_2_3" id="btn_save" value="保存">
+							</td>
+						</tr>
+					</table>
 				</td>
 			</tr>
 		</table>

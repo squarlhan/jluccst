@@ -56,9 +56,24 @@
 			//日期控件
 			$('#txt_queryBargainTimeBegin').datetimepicker({showTimepicker: false});
 			$('#txt_queryBargainTimeEnd').datetimepicker({showTimepicker: false});
-
+			$("#btn_add").click(function(){
+				try{
+					parent.$.fn.showOrHideTab(1,true);
+					parent.$.fn.selectTab(1,'openAddSellRecordForSellerAction.action');
+				}catch(e){
+					alert(e.description);
+				}
+			});
+			$("#btn_delAll").click(function(){
+				var url = "deleteSellRecordAction.action";
+  				if(window.confirm("您确定要删除所选信息吗？")){
+  					$.post(url, $('#form1').serialize(), function(data){window.location.href=window.location.href;});
+  				}
+			});
+			
+			
 			/**
-	  		 * 查看信息
+	  		 * 修改信息
 	  		 */
 	  		$('a[name="edit"]').each(function(){
 	  			$(this).click(function(){
@@ -133,10 +148,26 @@
 	</head>
   <body>
    <s:form id="form1" name="form1" method="post" theme="simple" action="">
+   		<table id="recordsList" width="100%"  border="0" cellpadding="5" cellspacing="1" bgcolor="#d5e4fd">
+			<tr>
+				<td colspan="12" align="center" width="50px" bgcolor="#FFFFFF">
+					<table>
+						<tr>
+							<td>
+								<input name="btn_add" type="button" class="btn_2_3" id="btn_add" value="添加">
+							</td>
+							<td>
+								<input name="btn_delAll" type="button" class="btn_2_3" id="btn_delAll" value="删除所选">
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			</table>
    		<fieldset >
 		<legend>查询条件</legend>
    		<span>
-			<table width="120%" border="0" cellpadding="5" cellspacing="1" bgcolor="#d5e4fd">
+			<table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#d5e4fd">
 				<tr>
 					<td height="26" align="right" bgcolor="#FFFFFF" nowrap="nowrap">
 						<strong>客户名称：</strong>
@@ -164,7 +195,7 @@
 			</table>
 		</span>
 		</fieldset>
-   		<table id="recordsList" width="120%"  border="0" cellpadding="5" cellspacing="1" bgcolor="#d5e4fd">
+   		<table id="recordsList" width="100%"  border="0" cellpadding="5" cellspacing="1" bgcolor="#d5e4fd">
 			<tr>
 				<td align="center" width="50px" background="<%=basePath%>/images/headerbg.jpg">
  							<s:checkbox theme="simple" id="cbk_all" name="all"></s:checkbox>
@@ -195,14 +226,14 @@
             		<td height="26" align="center" bgcolor="#FFFFFF"><s:property value="debt"/></td>
             		<td height="26" align="center" bgcolor="#FFFFFF"><s:property value="receivable/realCollection"/>%</td>
             		<td height="26" align="center" bgcolor="#FFFFFF">
-							<s:url id="edit_url" action="openViewSellRecordAction">   
+							<s:url id="edit_url" action="openModifySellRecordForSellerAction">   
 								<s:param name="sellRecord.id" value="id"></s:param>   
 							</s:url>
 							<s:url id="delete_url" action="deleteSellRecordAction">   
 								<s:param name="ids" value="id"></s:param>   
 							</s:url>
-				         	<a name="edit" href="javascript:void(0);" url="${edit_url}">查看</a>  
-				         	<a name="delete" href="javascript:void(0);" url="${delete_url}"></a>
+				         	<a name="edit" href="javascript:void(0);" url="${edit_url}">编辑</a>  
+				         	<a name="delete" href="javascript:void(0);" url="${delete_url}">删除</a>
 					</td>
             </tr>
             </s:iterator>
