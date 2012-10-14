@@ -5,6 +5,28 @@
 <struts>
 	<!-- 客户Action -->
 	<package name="customer" extends="struts-default" namespace="/customer">
+		<action name="customerInfoFromTel" class="customerInfoAction" method="myCustomerTabInfo">
+			<result name="success">/customer/customertabinfofromtel.jsp</result>
+		</action>
+		<action name="inCustomerInfoFromTel" class="customerInfoAction" method="customerTabInfo">
+			<result name="success">/customer/incustomerinfofromtel.jsp</result>
+		</action>
+		<action name="customerTraceListFromTel" class="customerTraceInfoAction" method="customerTraceList">
+			<result name="success">/customer/searchcustomertrace_listfromtel.jsp</result>
+			<result name="input">/customer/searchcustomertrace_listfromtel.jsp</result>
+		</action>
+		<action name="customerTraceInfoFromTel" class="customerTraceInfoAction" method="customerTraceInfo">
+			<result name="success">/customer/searchcustomertrace_infofromtel.jsp</result>
+			<result name="input">/customer/searchcustomertrace_infofromtel.jsp</result>
+		</action>
+		<action name="customerVisitListFromTel" class="customerVisitInfoAction" method="customerVisitList">
+			<result name="success">/customer/searchcustomervisit_listfromtel.jsp</result>
+			<result name="input">/customer/searchcustomervisit_listfromtel.jsp</result>
+		</action>
+		<action name="customerVisitInfoFromTel" class="customerVisitInfoAction" method="customerVisitInfo">
+			<result name="success">/customer/customervisit_infofromtel.jsp</result>
+			<result name="input">/customer/customervisit_infofromtel.jsp</result>
+		</action>
 		<action name="myCustomerList" class="customerInfoAction" method="myCustomerList">
 			<result name="success">/customer/mycustomer_list.jsp</result>
 			<result name="input">/customer/mycustomer_list.jsp</result>

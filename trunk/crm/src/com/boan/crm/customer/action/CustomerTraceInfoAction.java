@@ -27,6 +27,9 @@ import com.boan.crm.datadictionary.service.IDataDictionaryService;
 import com.boan.crm.groupmanage.common.RoleFlag;
 import com.boan.crm.groupmanage.model.User;
 import com.boan.crm.groupmanage.service.IUserService;
+import com.boan.crm.sms.model.SMSCustomerInfo;
+import com.boan.crm.sms.model.SMSInfo;
+import com.boan.crm.sms.service.ISMSInfoService;
 import com.boan.crm.utils.action.BaseActionSupport;
 import com.boan.crm.utils.calendar.CalendarUtils;
 import com.boan.crm.utils.page.Pagination;
@@ -65,6 +68,10 @@ public class CustomerTraceInfoAction extends BaseActionSupport{
 	@Autowired
 	@Qualifier("dataDictionaryService")
 	private IDataDictionaryService dataDictionaryService = null;
+	@Autowired
+	@Qualifier("SMSInfoService")
+	private ISMSInfoService smsInfoService;
+	
 	//客户跟进信息类
 	private CustomerTraceInfo customerTraceInfo ;
 	private String id = "";
@@ -285,8 +292,10 @@ public class CustomerTraceInfoAction extends BaseActionSupport{
 		customerTraceInfo.setSalesmanId(sessionUserId);
 		customerTraceInfo.setSalesman(sessionUserCName);
 		CustomerTraceInfo obj = null;
+		boolean inserFLag = true;
 		if(customerTraceInfo.getId() != null && customerTraceInfo.getId().length() > 0)
 		{
+			inserFLag = false;
 			obj =  customerTraceInfoService.get(customerTraceInfo.getId());
 		}else
 		{
@@ -303,6 +312,7 @@ public class CustomerTraceInfoAction extends BaseActionSupport{
 		obj.setTask(customerTraceInfo.getTask());
 		obj.setTraceOption(customerTraceInfo.getTraceOption());
 		Calendar time = Calendar.getInstance();
+		Calendar time2 = Calendar.getInstance();
 		if(traceTime.indexOf(" ") != -1)
 		{
 			String[] timeArray = traceTime.split(" ")[1].split(":");
@@ -331,6 +341,22 @@ public class CustomerTraceInfoAction extends BaseActionSupport{
 		obj.setTel(customerTraceInfo.getTel());
 		obj.setCompanyId( sessionCompanyId );
 		customerTraceInfoService.save(obj);
+		
+		if(customerTraceInfo.getSms() == 1)
+		{
+			SMSInfo sms = new SMSInfo();
+			SMSCustomerInfo customerInfo = new SMSCustomerInfo();
+			customerInfo.setCustomerId(customerId);
+			sms.setCustomerInfo(customerInfo);
+			sms.setIsImmediately(1);
+			sms.setOrganId(sessionCompanyId);
+			sms.setPersonCompany(sessionCompanyName);
+			sms.setPersonName( sessionUserCName );
+			sms.setSendTime(time);
+			sms.setPhone(customerTraceInfo.getTel());
+			sms.setInfo("跟进任务提醒："+customerTraceInfo.getTask());
+			smsInfoService.saveSMSInfo(sms); 
+		}
 		id = obj.getId();
 		return SUCCESS;
 	}
