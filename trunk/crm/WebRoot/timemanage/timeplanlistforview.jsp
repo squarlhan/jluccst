@@ -54,7 +54,7 @@
 			$('#txt_query_endTime').datetimepicker({showTimepicker: false});
 			
 			$("#addbtn").click(function(){
-				parent.parent.tipsWindown("添加时间计划","iframe:openAddTimePlanAction.action","620","380","true","","true","no");
+				parent.parent.tipsWindown("添加时间计划","iframe:openAddTimePlanAction.action","580","380","true","","true","no");
 				parent.parent.$("#windown-close").bind('click',function(){
 					window.location.href="./openTimePlanListAction.action";
 				});
@@ -69,9 +69,9 @@
 	  		$('a[name="edit"]').each(function(){
 	  			$(this).click(function(){
 	  				var url = $(this).attr("url");
-	  				parent.parent.tipsWindown("修改时间计划","iframe:"+url,"620","380","true","","true","no");
+	  				parent.parent.tipsWindown("查看时间计划","iframe:"+url,"620","380","true","","true","no");
 	  				parent.parent.$("#windown-close").bind('click',function(){
-						window.location.href="./openTimePlanListAction.action";
+						window.location.href="./openTimePlanListForViewAction.action";
 					});
 	  			});
 	  		});
@@ -102,9 +102,12 @@
 
   </head>
   
+  
   <body>
- <s:form id="form1" name="form1" method="post" theme="simple" action="openTimePlanListAction.action">
-<table width="100%"  border="0" cellspacing="5" cellpadding="0">
+ <s:form id="form1" name="form1" method="post" theme="simple" action="openTimePlanListForViewAction.action">
+ <s:hidden name="deptId"></s:hidden>
+  <s:hidden name="userId"></s:hidden>
+<table width="110%"  border="0" cellspacing="5" cellpadding="0">
 	<tr>
 		<td colspan="2">
 		<fieldset >
@@ -142,8 +145,6 @@
 	</tr>
   <tr>
     <td valign="top">
-    <input name="addbtn" type="button" class="btn_2_3" id="addbtn" value="添加" >
-            <input name="deletepointbtn" type="button" class="btn_4" id="deletepointbtn" value="删除所选">
       <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#d5e4fd">
         <tr>
          	<td align="center" background="<%=path %>/images/headerbg.jpg">  
@@ -177,14 +178,13 @@
                 <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="planContent"/></td>
                 <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="memo"/></td>
           <td height="26" colspan="2" align="center" bgcolor="#FFFFFF">
-          	<s:url id="edit_url" action="openModifyTimePlanAction">   
+          	<s:url id="edit_url" action="openModifyTimePlanForViewAction">   
 				<s:param name="timePlan.id" value="id"></s:param>   
 			</s:url>
 			<s:url id="delete_url" action="deleteTimePlanAction">   
 				<s:param name="ids" value="id"></s:param>   
 			</s:url>
-         	<a name="edit" href="javascript:void(0);" url="${edit_url}">编辑</a>  
-         	<a name="delete" href="javascript:void(0);" url="${delete_url}">删除</a>
+         	<a name="edit" href="javascript:void(0);" url="${edit_url}">查看</a>  
           </td>
         </tr>
         </s:iterator>        
