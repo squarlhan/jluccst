@@ -290,14 +290,27 @@ public class CustomerVisitInfoAction extends BaseActionSupport{
 		obj.setTask(customerVisitInfo.getTask());
 		obj.setVisitOption(customerVisitInfo.getVisitOption());
 		Calendar time = Calendar.getInstance();
-		String[] timeArray = visitTime.split(" ")[1].split(":");
-		String[] dayArray = visitTime.split(" ")[0].split("-");
-		if(dayArray.length>0 && timeArray.length>0){
-			time.set(Calendar.YEAR, Integer.parseInt(dayArray[0]));
-			time.set(Calendar.MONTH, Integer.parseInt(dayArray[1]) - 1);
-			time.set(Calendar.DATE, Integer.parseInt(dayArray[2]));
-			time.set(Calendar.HOUR_OF_DAY, Integer.parseInt(timeArray[0]));
-			time.set(Calendar.MINUTE, Integer.parseInt(timeArray[1]));
+		if(visitTime.indexOf(" ") != -1)
+		{
+			String[] timeArray = visitTime.split(" ")[1].split(":");
+			String[] dayArray = visitTime.split(" ")[0].split("-");
+			if(dayArray.length>0 && timeArray.length>0){
+				time.set(Calendar.YEAR, Integer.parseInt(dayArray[0]));
+				time.set(Calendar.MONTH, Integer.parseInt(dayArray[1]) - 1);
+				time.set(Calendar.DATE, Integer.parseInt(dayArray[2]));
+				time.set(Calendar.HOUR_OF_DAY, Integer.parseInt(timeArray[0]));
+				time.set(Calendar.MINUTE, Integer.parseInt(timeArray[1]));
+				time.set(Calendar.SECOND, 0);
+			}
+			
+		}else
+		{
+			String[] dayArray1 = visitTime.split("-");
+			time.set(Calendar.YEAR, Integer.parseInt(dayArray1[0]));
+			time.set(Calendar.MONTH, Integer.parseInt(dayArray1[1]) - 1);
+			time.set(Calendar.DATE, Integer.parseInt(dayArray1[2]));
+			time.set(Calendar.HOUR_OF_DAY, 0);
+			time.set(Calendar.MINUTE, 0);
 			time.set(Calendar.SECOND, 0);
 		}
 		obj.setVisitTime(time);

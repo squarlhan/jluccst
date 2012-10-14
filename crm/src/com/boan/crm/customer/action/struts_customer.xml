@@ -56,8 +56,8 @@
             </result>
 		</action>
 		<action name="allMyCustomerVisitList" class="customerVisitInfoAction" method="myCustomerVisitList">
-			<result name="success">/customer/allcustomervisit_list.jsp</result>
-			<result name="input">/customer/allcustomervisit_list.jsp</result>
+			<result name="success">/customer/allmycustomervisit_list.jsp</result>
+			<result name="input">/customer/allmycustomervisit_list.jsp</result>
 		</action>
 		<action name="allMyCustomerVisitInfo" class="customerVisitInfoAction" method="customerVisitInfo">
 			<result name="success">/customer/allmycustomervisit_info.jsp</result>
@@ -70,6 +70,18 @@
 		<action name="allMyCustomerTraceInfo" class="customerTraceInfoAction" method="customerTraceInfo">
 			<result name="success">/customer/allmycustomertrace_info.jsp</result>
 			<result name="input">/customer/allmycustomertrace_info.jsp</result>
+		</action>
+		<action name="saveAllMyTraceInfo" class="customerTraceInfoAction" method="saveTraceInfo">
+			<result name="success" type="chain">
+             	<param name="actionName">allMyCustomerTraceInfo</param>
+             	<param name="id">${id}</param>
+            </result>
+		</action>
+		<action name="saveAllMyVisitInfo" class="customerVisitInfoAction" method="saveVisitInfo">
+			<result name="success" type="chain">
+             	<param name="actionName">allMyCustomerVisitInfo</param>
+             	<param name="id">${id}</param>
+            </result>
 		</action>
 		<action name="searchCustomerList" class="customerInfoAction" method="customerList">
 			<result name="success">/customer/searchcustomer_list.jsp</result>
