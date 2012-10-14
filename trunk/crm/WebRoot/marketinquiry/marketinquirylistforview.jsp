@@ -69,9 +69,9 @@
 	  		$('a[name="edit"]').each(function(){
 	  			$(this).click(function(){
 	  				var url = $(this).attr("url");
-	  				parent.parent.tipsWindown("修改市场调查","iframe:"+url,"650","300","true","","true","no");
+	  				parent.parent.tipsWindown("查看市场调查","iframe:"+url,"650","300","true","","true","no");
 	  				parent.parent.$("#windown-close").bind('click',function(){
-						window.location.href="./openMarketInquiryListAction.action?goodsId="+$("#goodsId").val();
+						window.location.href="./openMarketInquiryListForViewAction.action?goodsId="+$("#goodsId").val();
 					});
 	  			});
 	  		});
@@ -101,6 +101,7 @@
 	</script>
 
   </head>
+  
   
   <body>
  <s:form id="form1" name="form1" method="post" theme="simple" action="openMarketInquiryListForViewAction.action">
@@ -157,8 +158,6 @@
 </tr>
   <tr>
     <td valign="top">
-    <input name="addbtn" type="button" class="btn_2_3" id="addbtn" value="添加" >
-            <input name="deletepointbtn" type="button" class="btn_4" id="deletepointbtn" value="删除所选">
       <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#d5e4fd">
         <tr>
          <td align="center" background="<%=path %>/images/headerbg.jpg">  
@@ -192,8 +191,7 @@
 			<s:url id="delete_url" action="deleteMarketInquiryAction">   
 				<s:param name="ids" value="id"></s:param>   
 			</s:url>
-         	<a name="edit" href="javascript:void(0);" url="${edit_url}">编辑</a>  
-         	<a name="delete" href="javascript:void(0);" url="${delete_url}">删除</a>
+         	<a name="edit" href="javascript:void(0);" url="${edit_url}">查看</a>  
           </td>
         </tr>
         </s:iterator>        

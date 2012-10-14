@@ -57,6 +57,11 @@ public class MarketInquiryServiceImpl implements IMarketInquiryService {
 				strb.append(" And  personId=:personId");
 			}
 		}
+		if(values.containsKey("goodsTypeId")){
+			if(values.get("goodsTypeId")!=null ){
+				strb.append(" And  goodsTypeId=:goodsTypeId");
+			}
+		}
 		if(values.containsKey("organId")){
 			if(values.get("organId")!=null ){
 				strb.append(" And organId=:organId");
