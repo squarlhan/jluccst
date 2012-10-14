@@ -59,7 +59,7 @@ public class TimePlan implements Serializable{
 	
 	@Column(name = "CREATE_TIME")
 	private Calendar createTime;
-
+	
 	/**
 	 * @return
 	 */
