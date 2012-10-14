@@ -86,7 +86,7 @@ public class SellRecord implements Serializable {
 	/**
 	 * 销售员部门id
 	 */
-	@Column(name = "dept_Id")
+	@Column(name = "DEPT_ID")
 	private String deptId;
 	
 	/**
