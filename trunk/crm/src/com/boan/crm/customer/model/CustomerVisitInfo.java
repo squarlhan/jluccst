@@ -79,7 +79,7 @@ public class CustomerVisitInfo implements Serializable
 	private String remark = "";
 	@Transient
 	private String progress = "";
-	@Column(name = "SMS")
+	@Transient
 	private int sms = 0;
 	public int getSms() {
 		return sms;

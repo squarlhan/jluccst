@@ -78,7 +78,7 @@ public class CustomerTraceInfo implements Serializable
 	private String interest = "";
 	@Column(name = "OBJECTION" , length = 255)
 	private String objection = "";
-	@Column(name = "SMS")
+	@Transient
 	private int sms = 0;
 	public int getSms() {
 		return sms;
