@@ -34,9 +34,9 @@
 			/**
 	  		 */
 			$("#addbtn").click(function(){
-				parent.parent.tipsWindown("添加服务记录","iframe:${pageContext.request.contextPath}/service/servicelog.action","785","350","true","","true","no");
+				parent.parent.tipsWindown("添加服务记录","iframe:${pageContext.request.contextPath}/service/servicelogbycustomer.action?companyId=" + $("#companyId").val(),"785","350","true","","true","no");
 				parent.parent.$("#windown-close").bind('click',function(){
-					window.location.href="${pageContext.request.contextPath}/service/serviceloglist.action?companyId=" + $("#companyId").val();
+					window.location.href="${pageContext.request.contextPath}/service/serviceloglistbycustomer.action?companyId=" + $("#companyId").val();
 				});
 			});
 			
@@ -56,7 +56,7 @@
   							}
   						}
   					});
-  					$.post(url + values, "", function(data){window.location.href="${pageContext.request.contextPath}/service/serviceloglist.action?companyId=" + $("#companyId").val();});
+  					$.post(url + values, "", function(data){window.location.href="${pageContext.request.contextPath}/service/serviceloglistbycustomer.action?companyId=" + $("#companyId").val();});
   				}
 	  		});
 			
@@ -68,7 +68,7 @@
 	  				var url = $(this).attr("url");
 	  				parent.parent.tipsWindown("修改服务记录","iframe:" + url ,"785","350","true","","true","no");
 					parent.parent.$("#windown-close").bind('click',function(){
-						window.location.href="${pageContext.request.contextPath}/service/serviceloglist.action?companyId=" + $("#companyId").val();
+						window.location.href="${pageContext.request.contextPath}/service/serviceloglistbycustomer.action?companyId=" + $("#companyId").val();
 					});
 	  			});
 	  		});
@@ -80,7 +80,7 @@
 	  			$(this).click(function(){
 	  				var url = $(this).attr("url");
 	  				if(window.confirm("您确定要删除这条信息吗？")){
-	  					$.post(url, "", function(data){window.location.href="${pageContext.request.contextPath}/service/serviceloglist.action?companyId=" + $("#companyId").val();});
+	  					$.post(url, "", function(data){window.location.href="${pageContext.request.contextPath}/service/serviceloglistbycustomer.action?companyId=" + $("#companyId").val();});
 	  				}
 	  			});
 	  		});
@@ -105,28 +105,12 @@
 										id="deletebtn" value="删除所选">
 								</td>
 							</tr>
-							<tr>
-								<td>
-									<table border="0" cellpadding="5" cellspacing="0">
-							<tr>  		
-								<td></td>
-								<td align="center">客户名称</td>
-								<td><s:textfield name="searchCompanyName" cssStyle="width:250px;" /></td>
-								<td style="width: 80px"><input type="button" style="width: 80px;" class="btn_4" id="searchBtn" value="快速查询" /></td>
-							</tr>
-						</table>
-								</td>
-							</tr>
 						</table>
 						<table width="100%" border="0" cellpadding="5" cellspacing="1"
 							bgcolor="#d5e4fd">
 							<tr>
 								<td align="center" background="<%=path%>/images/headerbg.jpg">
 									<s:checkbox theme="simple" id="cbk_all" name="all"></s:checkbox>
-								</td>
-								<td align="center"
-									background="<%=path%>/images/headerbg.jpg">
-									<strong>客户名称</strong>
 								</td>
 								<td align="center"
 									background="<%=path%>/images/headerbg.jpg">
@@ -145,7 +129,7 @@
 									<strong>解决措施</strong>
 								</td>
 								<td align="center"
-									background="<%=path%>/images/headerbg.jpg" style="width:80px;">
+									background="<%=path%>/images/headerbg.jpg" style="width:100px;">
 									<strong>操作</strong>
 								</td>
 							</tr>
@@ -154,9 +138,6 @@
 									<td height="26" align="center" bgcolor="#FFFFFF">
 										<s:checkbox id="%{id}" name="logIds" fieldValue="%{id}"
 											value="false" theme="simple" />
-									</td>
-									<td align="left" bgcolor="#FFFFFF">
-										<s:property value="companyName" />&nbsp;
 									</td>
 									<td align="center" bgcolor="#FFFFFF">
 										<s:property value="serviceTime" />&nbsp;
@@ -171,13 +152,13 @@
 										<s:property value="solutions" />&nbsp;
 									</td>
 									<td align="center" bgcolor="#FFFFFF">
-										<a name="edit" href="javascript:void(0);" url="<%=path%>/service/servicelog.action?logId=<s:property value='id' />">编辑</a>  
+										<a name="edit" href="javascript:void(0);" url="<%=path%>/service/servicelogbycustomer.action?logId=<s:property value='id' />&companyId=<s:property value='companyId' />">编辑</a>  
          								<a name="delete" href="javascript:void(0);" url="<%=path%>/service/deleteservicelog.action?logIds=<s:property value='id' />">删除</a>&nbsp;
 									</td>
 								</tr>
 							</s:iterator>
 							<tr>
-					          <td height="26" colspan="7" align="center" bgcolor="#FFFFFF">
+					          <td height="26" colspan="6" align="center" bgcolor="#FFFFFF">
 								<page:pages currentPage="pagination.currentPage" totalPages="pagination.totalPages" totalRows="pagination.totalRows" styleClass="page" theme="text" ></page:pages> 
 							  </td>
 					        </tr>

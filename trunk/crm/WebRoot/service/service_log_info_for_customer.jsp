@@ -16,10 +16,6 @@
 <j:scriptlink css="true" jmessagebox="true" jquery="true"
 	tipswindow="true" validate="true" jfunction="true" />
 <script type="text/javascript" src="<%=basePath%>js/My97DatePicker/WdatePicker.js"></script>
-<script src="<%=basePath %>/js/ui/jquery.ui.core.js"></script>
-<script src="<%=basePath %>/js/ui/jquery.ui.widget.js"></script>
-<script src="<%=basePath %>/js/ui/jquery.ui.position.js"></script>
-<script src="<%=basePath %>/js/ui/jquery.autocomplete.js"></script>
 	<script type="text/javascript">
 	/**
 	 * 准备工作
@@ -28,53 +24,6 @@
 		$.fn.save();
 		$.fn.close();
 		$.fn.initpage();
-		
-		var allData;
-		$("#customerName").autocomplete("<%=basePath %>/customer/getCustomerByName.action",{
-           minChars: 1,
-           max:5,
-           width: 150, 
-           matchContains: true,
-           autoFill: false,
-           dataType: "json",
-           extraParams: {
-        	   customerName: function(){
-        		   return $("#customerName").val();
-        	   }   
-           },
-           parse: function(test){
-        	   data = test;
-               var rows = [];
-               if(data != null){
-            	   allData = data;
-	               for(var i=0; i<data.length; i++){
-		              rows[rows.length] = 
-		              {
-		                   data: data[i].customerName,
-		                   value:data[i],
-		                   result:data[i].customerName
-		               };
-		            }
-           		}
-	            return rows;
-           },
-           formatItem:function(item)
-           {
-                  return item;
-           }
-	     });
-		$("#customerName").result(function(event, itemname, formatted) {
-			  //如选择后给其他控件赋值，触发别的事件等等
-			  for(var i=0; i<allData.length; i++)
-			  {
-				  if(allData[i].customerName == itemname)
-				  {
-					  form1.companyId.value = allData[i].id;
-					  form1.companyName.value = allData[i].customerName;
-					  
-				  }
-			  }
-		});
 	});
 	/**
 	 * 保存
@@ -82,7 +31,7 @@
 	$.fn.save = function() {
 		//如果有id就说明是修改action
 		$("#saveBtn").click(function() {
-			form1.action = "${pageContext.request.contextPath}/service/saveservicelog.action";
+			form1.action = "${pageContext.request.contextPath}/service/saveservicelogbycustomer.action";
 			form1.submit();
 		});
 	};
@@ -118,19 +67,6 @@
 		}
 	};
 </script>
-<style type="text/css">
-	.auto-style1 {
-	background: #d3eaef; font-size: 18px; font-family: 仿宋;}
-
-.auto-style2 {
-	font-size: x-large;
-}
-.auto-style3 {
-	text-align: right;
-}
-.ui-autocomplete-loading { background: white url('images/ui-anim_basic_16x16.gif') right center no-repeat; }
-</style>
-<link rel='stylesheet' type='text/css'  href='<%=path %>/css/jquery.autocomplete.css' />
 </head>
 <body>
 	<form id="form1" name="form1" method="post">
@@ -153,16 +89,15 @@
 											<tr>
 												<td><table cellpadding="3" cellspacing="3">
 														<tr>
-															<td align="center" nowrap="nowrap">客户名称</td>
-															<td>
-																<s:textfield type="text" style="width:150px" name="serviceLog.companyName" id="customerName"></s:textfield>
-															</td>
 															<td align="center" nowrap="nowrap">联系人</td>
 															<td align="left"><s:textfield id="txt_contact"
 																	name="serviceLog.contact" cssStyle="width:150px;" /></td>
 															<td align="center" nowrap="nowrap">联系人手机</td>
 															<td align="left"><s:textfield id="txt_mobilePhone"
 																	name="serviceLog.mobilePhone" cssStyle="width:150px;" />
+															</td>
+															<td align="center" nowrap="nowrap"></td>
+															<td>
 															</td>
 														</tr>
 														<tr>
