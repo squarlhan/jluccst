@@ -94,6 +94,21 @@ public class ServiceLogAction extends BaseActionSupport {
 	}
 	
 	/**
+	 * 服务记录对象集合
+	 * @return 结果
+	 */
+	public String serviceLogListByCustomer(){
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("myCompanyId", sessionCompanyId);
+		if(StringUtils.trimToNull(searchCompanyName)!=null)
+			map.put("companyName", "%" + searchCompanyName + "%");
+		if(StringUtils.trimToNull(companyId)!=null)
+			map.put("companyId", companyId);
+		pagination = serviceLogService.findForPage(map, pagination );
+		return SUCCESS;
+	}
+	
+	/**
 	 * 获得服务记录对象信息
 	 * @return
 	 */
@@ -101,10 +116,29 @@ public class ServiceLogAction extends BaseActionSupport {
 		customerInfos= customerInfoService.findAllCustomerInfo();
 		if(customerInfos==null)
 			customerInfos = new ArrayList<CustomerInfo>();
+		if(StringUtils.trimToNull(logId)!=null){
+			serviceLog = serviceLogService.get(logId);
+			companyId = serviceLog.getCompanyId();
+			if(StringUtils.trimToNull(companyId)!=null)
+				companyName = customerInfoService.get(companyId).getCustomerName();
+		}else
+			serviceLog = new ServiceLog();
+		return SUCCESS;
+	}
+	
+	/**
+	 * 获得服务记录对象信息
+	 * @return
+	 */
+	public String serviceLogInfoByCustomer(){
+		customerInfos= customerInfoService.findAllCustomerInfo();
+		if(customerInfos==null)
+			customerInfos = new ArrayList<CustomerInfo>();
 		if(StringUtils.trimToNull(logId)!=null)
 			serviceLog = serviceLogService.get(logId);
 		else
 			serviceLog = new ServiceLog();
+		companyName = customerInfoService.get(companyId).getCustomerName();
 		return SUCCESS;
 	}
 	
@@ -116,6 +150,20 @@ public class ServiceLogAction extends BaseActionSupport {
 		customerInfos= customerInfoService.findAllCustomerInfo();
 		if(customerInfos==null)
 			customerInfos = new ArrayList<CustomerInfo>();
+		if(StringUtils.trimToNull(serviceLog.getId())==null)
+			serviceLog.setId(null);
+		serviceLog.setMyCompanyId(sessionCompanyId);
+		serviceLog.setCompanyId(companyId);
+		serviceLog.setCompanyName(companyName);
+		serviceLogService.saveOrUpdate(serviceLog);
+		return SUCCESS;
+	}
+	
+	/**
+	 * 保存信息
+	 * @return
+	 */
+	public String saveServiceLogByCustomer(){
 		if(StringUtils.trimToNull(serviceLog.getId())==null)
 			serviceLog.setId(null);
 		serviceLog.setMyCompanyId(sessionCompanyId);
