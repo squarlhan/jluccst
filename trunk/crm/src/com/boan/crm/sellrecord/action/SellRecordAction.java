@@ -68,7 +68,12 @@ public class SellRecordAction extends BaseActionSupport {
 	private String companyId = null;
 
 	private String companyName = null;
+	
+	private String deptId=null;
 
+	private String who=null;
+	
+	private String userId=null;
 	/**
 	 * 商品明细
 	 */
@@ -128,7 +133,24 @@ public class SellRecordAction extends BaseActionSupport {
 
 	// --------------查询条件-------------------------//
 
+	
+	/**
+	 * 给领导使用
+	 * @return
+	 * @throws Exception
+	 */
+	public String toTabPage() throws Exception {
+		return SUCCESS;
+	}
+	/**
+	 * 给领导使用
+	 * @return
+	 * @throws Exception
+	 */
 	public String openSellRecordList() throws Exception {
+		System.out.println(deptId);
+		System.out.println(userId);
+		
 		userList = userService.queryUserList(sessionCompanyId, sessionDeptId, new Pagination<User>()).getData();
 		Map<String, String> params = new HashMap<String, String>();
 		if (queryCustomerName != null && !queryCustomerName.trim().equals("")) {
@@ -143,6 +165,38 @@ public class SellRecordAction extends BaseActionSupport {
 		if (queryBargainTimeBegin != null && !queryBargainTimeBegin.trim().equals("")) {
 			params.put("queryBargainTimeEnd", queryBargainTimeEnd);
 		}
+		if (deptId != null && !deptId.trim().equals("")) {
+			params.put("deptId", deptId);
+		}
+		if (userId != null && !userId.trim().equals("")) {
+			params.put("salesmanId", userId);
+		}
+		pagination = sellRecordService.findSellRecordForPage(params, pagination);
+		return SUCCESS;
+	}
+	
+	/**
+	 * 给销售员使用
+	 * @return
+	 * @throws Exception
+	 */
+	public String openSellRecordListForSeller() throws Exception {
+		userList = userService.queryUserList(sessionCompanyId, sessionDeptId, new Pagination<User>()).getData();
+		Map<String, String> params = new HashMap<String, String>();
+		if (queryCustomerName != null && !queryCustomerName.trim().equals("")) {
+			params.put("queryCustomerName", queryCustomerName);
+		}
+		if (querySalesman != null && !querySalesman.trim().equals("")) {
+			params.put("querySalesman", querySalesman);
+		}
+		if (queryBargainTimeBegin != null && !queryBargainTimeBegin.trim().equals("")) {
+			params.put("queryBargainTimeBegin", queryBargainTimeBegin);
+		}
+		if (queryBargainTimeBegin != null && !queryBargainTimeBegin.trim().equals("")) {
+			params.put("queryBargainTimeEnd", queryBargainTimeEnd);
+		}
+		UserSession userSession = this.getSession();
+		params.put("salesmanId", userSession.getUserId());
 		pagination = sellRecordService.findSellRecordForPage(params, pagination);
 		return SUCCESS;
 	}
@@ -166,7 +220,15 @@ public class SellRecordAction extends BaseActionSupport {
 		return SUCCESS;
 	}
 
-	public String openAddSellRecord() {
+	
+	public String openViewSellRecord() {
+
+		customerInfos = customerInfoService.findAllCustomerInfo();
+		sellRecord = sellRecordService.getSellRecordById(sellRecord.getId());
+		return SUCCESS;
+	}
+	
+	public String openAddSellRecordForSeller() {
 
 		Calendar rightNow = Calendar.getInstance();
 		SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd"); // 日期格式化格式
@@ -185,17 +247,17 @@ public class SellRecordAction extends BaseActionSupport {
 		// String.format("%05d", number) 将流水号格式化为 5位长度返回
 		String serialNo = date + String.format("%05d", number);
 		sellRecord.setOrderID(serialNo);
-
+		sellRecord.setDeptId(userSession.getDeptId());
 		return SUCCESS;
 	}
 
-	public String openModifySellRecord() {
+	public String openModifySellRecordForSeller() {
 		customerInfos = customerInfoService.findAllCustomerInfo();
 		sellRecord = sellRecordService.getSellRecordById(sellRecord.getId());
 		return SUCCESS;
 	}
 
-	public String addSellRecord() {
+	public String addSellRecordForSeller() {
 		customerInfos = customerInfoService.findAllCustomerInfo();
 		// 查找客户信息
 		customer = customerInfoService.get(sellRecord.getCustomerId());
@@ -217,6 +279,7 @@ public class SellRecordAction extends BaseActionSupport {
 			goods.setPrice(new BigDecimal(array[3]));
 			goods.setNumber(Integer.parseInt(array[4]));
 			goods.setAllPrice(new BigDecimal(array[5]));
+			goods.setMemo(array[6]);
 			goodsDetials.add(goods);
 			thisPrice = thisPrice.add(goods.getAllPrice());
 		}
@@ -333,9 +396,12 @@ public class SellRecordAction extends BaseActionSupport {
 		userList = new ArrayList<User>();
 		// 获取用户列表
 		if (deptList != null && deptList.size() > 0) {
-			List<User> tempUserList = null;
+			List<User> tempUserList = new ArrayList<User>();
 			for (int i = 0; i < deptList.size(); i++) {
-				tempUserList = userService.queryUserList(sessionCompanyId, deptList.get(i).getId());
+				List<User> tempList = userService.queryUserList(sessionCompanyId, deptList.get(i).getId());
+				if (tempList != null && tempList.size() > 0) {
+					tempUserList.addAll(tempList);
+				}
 			}
 			if (tempUserList != null && tempUserList.size() > 0) {
 				userList.addAll(tempUserList);
@@ -512,5 +578,23 @@ public class SellRecordAction extends BaseActionSupport {
 
 	public void setCompanyName(String companyName) {
 		this.companyName = companyName;
+	}
+	public String getDeptId() {
+		return deptId;
+	}
+	public void setDeptId(String deptId) {
+		this.deptId = deptId;
+	}
+	public String getWho() {
+		return who;
+	}
+	public void setWho(String who) {
+		this.who = who;
+	}
+	public String getUserId() {
+		return userId;
+	}
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 }

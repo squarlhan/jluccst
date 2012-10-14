@@ -84,6 +84,12 @@ public class SellRecord implements Serializable {
 	private String customerName;
 	
 	/**
+	 * 销售员部门id
+	 */
+	@Column(name = "dept_Id")
+	private String deptId;
+	
+	/**
 	 * 销售员id
 	 */
 	@Column(name = "SALESMAN_ID")
@@ -294,5 +300,13 @@ public class SellRecord implements Serializable {
 
 	public void setCompanyId(String companyId) {
 		this.companyId = companyId;
+	}
+
+	public String getDeptId() {
+		return deptId;
+	}
+
+	public void setDeptId(String deptId) {
+		this.deptId = deptId;
 	}
 }

@@ -80,6 +80,10 @@ public class SellRecordServiceImpl implements ISellRecordService {
      */
 	public Pagination<SellRecord> findSellRecordForPage(Map<String, ?> values, Pagination<SellRecord> pagination){
 		StringBuffer param = new StringBuffer();
+		
+		if(values.containsKey("customerId")){
+			param = param.append("  and customer.id ='"+values.get("customerId")+"'  ");
+		}
 		if(values.containsKey("customerId")){
 			param = param.append("  and customer.id ='"+values.get("customerId")+"'  ");
 		}
@@ -95,7 +99,12 @@ public class SellRecordServiceImpl implements ISellRecordService {
 		if(values.containsKey("queryBargainTimeEnd")){
 			param.append(" and record. bargainTime <='"+values.get("queryBargainTimeEnd")+"'" );
 		}
-		
+		if(values.containsKey("deptId")){
+			param = param.append("  and record. deptId ='"+values.get("deptId")+"'  ");
+		}
+		if(values.containsKey("salesmanId")){
+			param = param.append("  and record. salesmanId ='"+values.get("salesmanId")+"'  ");
+		}
 		String hql = "select new SellRecord" +
 				"(record.id,record. goodsType,record. customerId,record. customerName," +
 				"record. salesmanId,record. salesmanName,record. orderID,record. rate," +
