@@ -79,6 +79,14 @@ public class CustomerVisitInfo implements Serializable
 	private String remark = "";
 	@Transient
 	private String progress = "";
+	@Column(name = "SMS")
+	private int sms = 0;
+	public int getSms() {
+		return sms;
+	}
+	public void setSms(int sms) {
+		this.sms = sms;
+	}
 	public String getProgress() {
 		return progress;
 	}

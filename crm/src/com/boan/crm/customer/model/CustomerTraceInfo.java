@@ -78,6 +78,14 @@ public class CustomerTraceInfo implements Serializable
 	private String interest = "";
 	@Column(name = "OBJECTION" , length = 255)
 	private String objection = "";
+	@Column(name = "SMS")
+	private int sms = 0;
+	public int getSms() {
+		return sms;
+	}
+	public void setSms(int sms) {
+		this.sms = sms;
+	}
 	/**
 	 * 编号
 	 * @return String
