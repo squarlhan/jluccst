@@ -9,6 +9,10 @@
 			<result name="success">/service/service_log_list_for_client.jsp</result>
 			<result name="input">/service/service_log_list_for_client.jsp</result>
 		</action>
+		<action name="serviceloglistbycustomer" class="serviceLogAction" method="serviceLogListByCustomer">
+			<result name="success">/service/service_log_list_for_customer.jsp</result>
+			<result name="input">/service/service_log_list_for_customer.jsp</result>
+		</action>
 		<action name="serviceloglist" class="serviceLogAction" method="serviceLogList">
 			<result name="success">/service/service_log_list.jsp</result>
 			<result name="input">/service/service_log_list.jsp</result>
@@ -17,9 +21,17 @@
 			<result name="success">/service/service_log_info.jsp</result>
 			<result name="input">/service/service_log_info.jsp</result>
 		</action>
+		<action name="servicelogbycustomer" class="serviceLogAction" method="serviceLogInfoByCustomer">
+			<result name="success">/service/service_log_info_for_customer.jsp</result>
+			<result name="input">/service/service_log_info_for_customer.jsp</result>
+		</action>
 		<action name="saveservicelog" class="serviceLogAction" method="saveServiceLog">
 			<result name="success">/service/service_log_info.jsp</result>
 			<result name="input">/service/service_log_info.jsp</result>
+		</action>
+		<action name="saveservicelogbycustomer" class="serviceLogAction" method="saveServiceLogByCustomer">
+			<result name="success">/service/service_log_info_for_customer.jsp</result>
+			<result name="input">/service/service_log_info_for_customer.jsp</result>
 		</action>
     	<action name="deleteservicelog" class="serviceLogAction" method="deleteServiceLog">
     		<result name="success" type="chain">
