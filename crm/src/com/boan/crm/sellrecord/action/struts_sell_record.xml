@@ -5,29 +5,41 @@
 <struts>
 	<!--  销售记录管理Action -->
 	<package name="sell_record" extends="struts-default" namespace="/">
+		<action name="toTabPageAction" class="sellRecordAction" method="toTabPage">
+			<result name="success">/sellrecord/sellrecordtab.jsp</result>
+			<result name="input">/sellrecord/sellrecordtab.jsp</result>
+		</action>
 		<action name="openSellRecordListAction" class="sellRecordAction" method="openSellRecordList">
 			<result name="success">/sellrecord/sellrecordlist.jsp</result>
 			<result name="input">/sellrecord/sellrecordlist.jsp</result>
+		</action>
+		<action name="openSellRecordListForSellerAction" class="sellRecordAction" method="openSellRecordListForSeller">
+			<result name="success">/sellrecord/sellrecordlistforseller.jsp</result>
+			<result name="input">/sellrecord/sellrecordlistforseller.jsp</result>
 		</action>
 		<action name="openSellRecordListForCustomerAction" class="sellRecordAction" method="openSellRecordListForCustomer">
 			<result name="success">/sellrecord/sellrecordlistforcustomer.jsp</result>
 			<result name="input">/sellrecord/sellrecordlistforcustomer.jsp</result>
 		</action>
-		<action name="openAddSellRecordAction" class="sellRecordAction" method="openAddSellRecord">
+		<action name="openViewSellRecordAction" class="sellRecordAction" method="openViewSellRecord">
 			<result name="success">/sellrecord/sellrecordinfo.jsp</result>
 			<result name="input">/sellrecord/sellrecordinfo.jsp</result>
 		</action>
-		<action name="openModifySellRecordAction" class="sellRecordAction" method="openModifySellRecord">
-			<result name="success">/sellrecord/sellrecordinfo.jsp</result>
-			<result name="input">/sellrecord/sellrecordinfo.jsp</result>
+		<action name="openAddSellRecordForSellerAction" class="sellRecordAction" method="openAddSellRecordForSeller">
+			<result name="success">/sellrecord/sellrecordinfoforseller.jsp</result>
+			<result name="input">/sellrecord/sellrecordinfoforseller.jsp</result>
 		</action>
-		<action name="addSellRecordAction" class="sellRecordAction" method="addSellRecord">
-			<result name="success">/sellrecord/sellrecordinfo.jsp</result>
-			<result name="input">/sellrecord/sellrecordinfo.jsp</result>
+		<action name="openModifySellRecordForSellerAction" class="sellRecordAction" method="openModifySellRecordForSeller">
+			<result name="success">/sellrecord/sellrecordinfoforseller.jsp</result>
+			<result name="input">/sellrecord/sellrecordinfoforseller.jsp</result>
 		</action>
-		<action name="modifySellRecordAction" class="sellRecordAction" method="modifySellRecord">
-			<result name="success">/sellrecord/sellrecordinfo.jsp</result>
-			<result name="input">/sellrecord/sellrecordinfo.jsp</result>
+		<action name="addSellRecordAction" class="sellRecordAction" method="addSellRecordForSeller">
+			<result name="success">/sellrecord/sellrecordinfoforseller.jsp</result>
+			<result name="input">/sellrecord/sellrecordinfoforseller.jsp</result>
+		</action>
+		<action name="modifySellRecordAction" class="sellRecordAction" method="modifySellRecordForSeller">
+			<result name="success">/sellrecord/sellrecordinfoforseller.jsp</result>
+			<result name="input">/sellrecord/sellrecordinfoforseller.jsp</result>
 		</action>
 		<action name="deleteSellRecordAction" class="sellRecordAction" method="deleteSellRecord"/>
 		
