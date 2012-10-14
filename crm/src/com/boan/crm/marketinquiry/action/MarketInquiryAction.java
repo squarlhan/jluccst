@@ -1,5 +1,6 @@
 package com.boan.crm.marketinquiry.action;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
@@ -10,6 +11,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
+import com.boan.crm.datadictionary.model.DataDictionary;
+import com.boan.crm.datadictionary.service.IDataDictionaryService;
 import com.boan.crm.groupmanage.model.User;
 import com.boan.crm.groupmanage.service.IDeptmentService;
 import com.boan.crm.groupmanage.service.IUserService;
@@ -38,6 +41,10 @@ public class MarketInquiryAction extends BaseActionSupport{
 	@Autowired
 	@Qualifier("marketInquiryService")
 	private IMarketInquiryService marketInquiryService = null;
+	
+	@Autowired
+	@Qualifier("dataDictionaryService")
+	private IDataDictionaryService dataDictionaryService= null;
 	
 	/**
 	 * 市场调查实体
@@ -86,6 +93,33 @@ public class MarketInquiryAction extends BaseActionSupport{
 	 * 查询条件 提交结束时间
 	 */
 	private Calendar endTime;
+	
+	List<DataDictionary> goodsList = new ArrayList<DataDictionary>();
+	
+	private String goodsId;
+	
+	/**
+	 * 显示组织机构树,带公司、工厂、车间
+	 * 
+	 * @return
+	 */
+	public String showGoodsTreeForMarketInquiry() throws Exception {
+		goodsList = dataDictionaryService.findDataDictionaryByType(sessionCompanyId, 8);
+		return "group-tree-for-market_inquiry";
+	}
+	
+	/**
+	 * 显示组织机构树,带公司、工厂、车间
+	 * 
+	 * @return
+	 */
+	public String showGoodsTreeForMarketInquiryForView() throws Exception {
+		goodsList = dataDictionaryService.findDataDictionaryByType(sessionCompanyId, 8);
+		return "group-tree-for-market-inquiry-for-view.jsp";
+	}
+	
+	
+	
 	/**
 	 * 显示计划列表
 	 * @return
@@ -100,6 +134,33 @@ public class MarketInquiryAction extends BaseActionSupport{
 		Map<String,Object> params = new HashMap<String, Object>();
 		params.put("personId", this.sessionUserId);
 		params.put("organId", this.sessionCompanyId);
+		params.put("goodsTypeId", goodsId);
+		params.put("goodsName", goodsName);
+		params.put("inquiryPersonName", inquiryPersonName);
+		params.put("inquiryPersonName", inquiryPersonName);
+		params.put("goodsStandard", goodsStandard);
+		params.put("beginTime", beginTime); 
+		params.put("endTime", endTime); 
+		pagination = marketInquiryService.findMarketInquiryForPage(params,pagination);
+		
+		return SUCCESS;
+	}
+	
+	/**
+	 * 显示计划列表
+	 * @return
+	 */
+	public String openMarketInquiryListForView() {
+		if(beginTime==null && endTime==null){
+			Calendar temp = Calendar.getInstance();
+			temp.set(Calendar.DATE, -15);
+			beginTime =temp;
+			endTime = Calendar.getInstance();
+		}
+		Map<String,Object> params = new HashMap<String, Object>();
+		params.put("personId", this.sessionUserId);
+		params.put("organId", this.sessionCompanyId);
+		params.put("goodsTypeId", goodsId);
 		params.put("goodsName", goodsName);
 		params.put("inquiryPersonName", inquiryPersonName);
 		params.put("inquiryPersonName", inquiryPersonName);
@@ -116,6 +177,11 @@ public class MarketInquiryAction extends BaseActionSupport{
 	 * @throws Exception 
 	 */
 	public String openAddMarketInquiry() throws Exception {
+		System.out.println(goodsId);
+		DataDictionary  goods  =  dataDictionaryService.get(goodsId);
+		marketInquiry = new MarketInquiry();
+		marketInquiry.setGoodsName(goods.getName());
+		marketInquiry.setGoodsTypeId(goodsId);
 		userList =userService.queryUserList( sessionCompanyId, sessionDeptId, new Pagination<User>()).getData();
 		return SUCCESS;
 	}
@@ -141,6 +207,18 @@ public class MarketInquiryAction extends BaseActionSupport{
 	 * @throws Exception 
 	 */
 	public String openModifyMarketInquiry() throws Exception {
+		if(marketInquiry!=null){
+			marketInquiry = marketInquiryService.getMarketInquiryById(marketInquiry.getId());
+		}
+		return SUCCESS;
+	}
+	
+	/**
+	 * 打开修改页
+	 * @return
+	 * @throws Exception 
+	 */
+	public String openModifyMarketInquiryForView() throws Exception {
 		if(marketInquiry!=null){
 			marketInquiry = marketInquiryService.getMarketInquiryById(marketInquiry.getId());
 		}
@@ -229,4 +307,21 @@ public class MarketInquiryAction extends BaseActionSupport{
 	public void setEndTime(Calendar endTime) {
 		this.endTime = endTime;
 	}
+
+	public List<DataDictionary> getGoodsList() {
+		return goodsList;
+	}
+
+	public void setGoodsList(List<DataDictionary> goodsList) {
+		this.goodsList = goodsList;
+	}
+
+	public String getGoodsId() {
+		return goodsId;
+	}
+
+	public void setGoodsId(String goodsId) {
+		this.goodsId = goodsId;
+	}
+
 }

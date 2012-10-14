@@ -39,8 +39,14 @@ public class MarketInquiry implements Serializable{
 	@Column(name = "INQUIRY_ADDRESS" , length = 50)
 	private String inquiryAddress;
 	
+	@Column(name = "goods_Type_Id" , length = 50)
+	private String goodsTypeId;
+	
 	@Column(name = "GOODS_NAME" , length = 50)
 	private String goodsName;
+	
+	@Column(name = "FACTORY_NAME" , length = 150)
+	private String factoryName;
 	
 	@Column(name = "GOODS_STANDARD" , length = 50)
 	private String goodsStandard;
@@ -56,6 +62,7 @@ public class MarketInquiry implements Serializable{
 	
 	@Column(name = "CREATE_TIME")
 	private Calendar createTime;
+	
 
 	public String getId() {
 		return id;
@@ -143,5 +150,21 @@ public class MarketInquiry implements Serializable{
 
 	public void setOrganId(String organId) {
 		this.organId = organId;
+	}
+
+	public String getFactoryName() {
+		return factoryName;
+	}
+
+	public void setFactoryName(String factoryName) {
+		this.factoryName = factoryName;
+	}
+
+	public String getGoodsTypeId() {
+		return goodsTypeId;
+	}
+
+	public void setGoodsTypeId(String goodsTypeId) {
+		this.goodsTypeId = goodsTypeId;
 	}
 }

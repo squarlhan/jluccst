@@ -5,9 +5,23 @@
 <struts>
 	<!--  市场调查Action -->
 	<package name="market_inquiry" extends="struts-default" namespace="/">
+	
+	
+		<action name="showGoodsTreeForMarketInquiryAction" class="marketInquiryAction" method="showGoodsTreeForMarketInquiry">
+			<result name="group-tree-for-market_inquiry">/marketinquiry/group-tree-for-market-inquiry.jsp</result>
+			<result name="input">/marketinquiry/group-tree-for-market-inquiry.jsp</result>
+		</action>
+		<action name="showGoodsTreeForMarketInquiryForViewAction" class="marketInquiryAction" method="showGoodsTreeForMarketInquiryForView">
+			<result name="group-tree-for-market-inquiry-for-view.jsp">/marketinquiry/group-tree-for-market-inquiry-for-view.jsp</result>
+			<result name="input">/marketinquiry/group-tree-for-market-inquiry-for-view.jsp</result>
+		</action>
 		<action name="openMarketInquiryListAction" class="marketInquiryAction" method="openMarketInquiryList">
 			<result name="success">/marketinquiry/marketinquirylist.jsp</result>
 			<result name="input">/marketinquiry/marketinquirylist.jsp</result>
+		</action>
+		<action name="openMarketInquiryListForViewAction" class="marketInquiryAction" method="openMarketInquiryListForView">
+			<result name="success">/marketinquiry/marketinquirylistforview.jsp</result>
+			<result name="input">/marketinquiry/marketinquirylistforview.jsp</result>
 		</action>
 		<action name="openAddMarketInquiryAction" class="marketInquiryAction" method="openAddMarketInquiry">
 			<result name="success">/marketinquiry/marketinquiryinfo.jsp</result>
@@ -17,6 +31,11 @@
 			<result name="success">/marketinquiry/marketinquiryinfo.jsp</result>
 			<result name="input">/marketinquiry/marketinquiryinfo.jsp</result>
 		</action>
+		<action name="openModifyMarketInquiryForViewAction" class="marketInquiryAction" method="openModifyMarketInquiryForView">
+			<result name="success">/marketinquiry/marketinquiryinfoforview.jsp</result>
+			<result name="input">/marketinquiry/marketinquiryinfoforview.jsp</result>
+		</action>
+		
 		<action name="addMarketInquiryAction" class="marketInquiryAction" method="addMarketInquiry">
 			<result name="success">/marketinquiry/marketinquiryinfo.jsp</result>
 			<result name="input">/marketinquiry/marketinquiryinfo.jsp</result>

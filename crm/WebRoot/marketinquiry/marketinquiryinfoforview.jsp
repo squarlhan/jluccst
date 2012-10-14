@@ -180,8 +180,6 @@
 									
 									<tr>
 										<td height="26" colspan="4" align="center" bgcolor="#FFFFFF">
-											<input name="addBtn" type="button" class="btn_2_3" id="addBtn" value="保存">
-											&nbsp;&nbsp;
 											<input name="closeBtn" type="button" class="btn_2_3" id="closeBtn" value="关闭">
 										</td>
 									</tr>
