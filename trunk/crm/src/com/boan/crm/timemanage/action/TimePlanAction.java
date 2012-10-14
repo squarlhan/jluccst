@@ -1,5 +1,6 @@
 package com.boan.crm.timemanage.action;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
@@ -88,6 +89,60 @@ public class TimePlanAction extends BaseActionSupport{
 	 * 查询条件 提交结束时间
 	 */
 	private Calendar endTime;
+	
+	private String deptId=null;
+	
+	private String userId=null;
+	
+	/**
+	 * 显示组织机构树,带公司、工厂、车间
+	 * 
+	 * @return
+	 */
+	public String showGroupTreeForTimePlan() throws Exception {
+		deptList = deptService.queryAllDeptmentsByCompanyId(sessionCompanyId);
+		userList = new ArrayList<User>();
+		// 获取用户列表
+		if (deptList != null && deptList.size() > 0) {
+			List<User> tempUserList = new ArrayList<User>();
+			for (int i = 0; i < deptList.size(); i++) {
+				List<User> tempList = userService.queryUserList(sessionCompanyId, deptList.get(i).getId());
+				if (tempList != null && tempList.size() > 0) {
+					tempUserList.addAll(tempList);
+				}
+			}
+			if (tempUserList != null && tempUserList.size() > 0) {
+				userList.addAll(tempUserList);
+			}
+		}
+		return "group-tree-for-sell-record";
+	}
+
+	/**
+	 * 显示计划列表
+	 * @return
+	 */
+	public String openTimePlanListForView() {
+		if(beginTime==null && endTime==null){
+			Calendar temp = Calendar.getInstance();
+			temp.set(Calendar.DATE, -15);
+			beginTime =temp;
+			endTime = Calendar.getInstance();
+		}
+		Map<String,Object> params = new HashMap<String, Object>();
+		params.put("personId", this.sessionUserId);
+		params.put("organId", this.sessionCompanyId);
+		params.put("employeeName", employeeName);
+		params.put("planType", planType);
+		params.put("beginTime", beginTime);
+		params.put("endTime", endTime); 
+		params.put("deptId", deptId);
+		params.put("employeeId", userId);
+		pagination = timePlanService.findTimePlanForPage(params,pagination);
+		
+		return SUCCESS;
+	}
+	
 	/**
 	 * 显示计划列表
 	 * @return
@@ -152,6 +207,20 @@ public class TimePlanAction extends BaseActionSupport{
 			message="保存成功！";
 		}
 		
+		return SUCCESS;
+	}
+	
+	/**
+	 * 打开修改页
+	 * @return
+	 * @throws Exception 
+	 */
+	public String openModifyTimePlanForView() throws Exception {
+		deptList = deptService.queryAllDeptmentsByCompanyId( sessionCompanyId );
+		userList =userService.queryUserList( sessionCompanyId, sessionDeptId, new Pagination<User>()).getData();
+		if(timePlan!=null){
+			timePlan = timePlanService.getTimePlanById(timePlan.getId());
+		}
 		return SUCCESS;
 	}
 	
@@ -262,5 +331,21 @@ public class TimePlanAction extends BaseActionSupport{
 	}
 	public void setEndTime(Calendar endTime) {
 		this.endTime = endTime;
+	}
+
+	public String getDeptId() {
+		return deptId;
+	}
+
+	public void setDeptId(String deptId) {
+		this.deptId = deptId;
+	}
+
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 }

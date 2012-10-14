@@ -5,6 +5,10 @@
 <struts>
 	<!--  时间管理Action -->
 	<package name="time_plan" extends="struts-default" namespace="/">
+		<action name="openTimePlanListForViewAction" class="timePlanAction" method="openTimePlanListForView">
+			<result name="success">/timemanage/timeplanlistforview.jsp</result>
+			<result name="input">/timemanage/timeplanlistforview.jsp</result>
+		</action>
 		<action name="openTimePlanListAction" class="timePlanAction" method="openTimePlanList">
 			<result name="success">/timemanage/timeplanlist.jsp</result>
 			<result name="input">/timemanage/timeplanlist.jsp</result>
@@ -17,6 +21,10 @@
 			<result name="success">/timemanage/timeplaninfo.jsp</result>
 			<result name="input">/timemanage/timeplaninfo.jsp</result>
 		</action>
+		<action name="openModifyTimePlanForViewAction" class="timePlanAction" method="openModifyTimePlanForView">
+			<result name="success">/timemanage/timeplaninfoforview.jsp</result>
+			<result name="input">/timemanage/timeplaninfoforview.jsp</result>
+		</action>
 		<action name="addTimePlanAction" class="timePlanAction" method="addTimePlan">
 			<result name="success">/timemanage/timeplaninfo.jsp</result>
 			<result name="input">/timemanage/timeplaninfo.jsp</result>
@@ -26,5 +34,8 @@
 			<result name="input">/timemanage/timeplaninfo.jsp</result>
 		</action>
 		<action name="deleteTimePlanAction" class="timePlanAction" method="deleteTimePlan"/>
+		<action name="showGroupTreeForTimePlanAction" class="timePlanAction"  method="showGroupTreeForTimePlan">
+			<result name="group-tree-for-sell-record">/timemanage/group-tree-for-time-plan.jsp</result>
+		</action>
 	</package>
 </struts>

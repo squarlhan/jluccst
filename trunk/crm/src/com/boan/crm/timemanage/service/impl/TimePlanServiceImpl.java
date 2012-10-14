@@ -78,6 +78,17 @@ public class TimePlanServiceImpl implements ITimePlanService {
 			strb.append(" And  submitTime>=:beginTime And submitTime<=:endTime");
 		}
 
+		if(values.containsKey("deptId")){
+			if(values.get("deptId")!=null ){
+				strb.append(" And  deptId=:deptId");
+			}
+		}
+		if(values.containsKey("employeeId")){
+			if(values.get("employeeId")!=null ){
+				strb.append(" And  employeeId=:employeeId");
+			}
+		}
+		
 		String hql = "from TimePlan "+strb.toString()+" order by createTime desc";
 		List<TimePlan> data = timePlanDao.findForPage(hql, values, pagination.getStartIndex(), pagination.getPageSize());
 		hql = "select count(*) from TimePlan" +strb.toString();
