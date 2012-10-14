@@ -40,6 +40,23 @@
 	<script type="text/javascript" src="<%=basePath%>js/timepicke/jquery-ui-timepicker-addon.js"></script>
 	<script type="text/javascript" src="<%=basePath%>js/timepicke/jquery-ui-timepicker-zh-CN.js"></script>
 	<script type="text/javascript" src="<%=basePath%>js/timepicke/jquery-ui-sliderAccess.js"></script>
+	<script src="<%=basePath %>/js/ui/jquery.ui.core.js"></script>
+		<script src="<%=basePath %>/js/ui/jquery.ui.widget.js"></script>
+		<script src="<%=basePath %>/js/ui/jquery.ui.position.js"></script>
+		<script src="<%=basePath %>/js/ui/jquery.autocomplete.js"></script>
+		<style type="text/css">
+			.auto-style1 {
+			background: #d3eaef; font-size: 18px; font-family: 仿宋;}
+		
+		.auto-style2 {
+			font-size: x-large;
+		}
+		.auto-style3 {
+			text-align: right;
+		}
+		.ui-autocomplete-loading { background: white url('images/ui-anim_basic_16x16.gif') right center no-repeat; }
+		</style>
+		<link rel='stylesheet' type='text/css'  href='<%=path %>/css/jquery.autocomplete.css' />
 	<style type="text/css">
 	<!--
 	.STYLE1 {
@@ -51,6 +68,95 @@
 	<script type="text/javascript">
 	
 		$(function(){
+			$("#txt_queryCustomerName").autocomplete("../customer/getCustomerByName.action",
+		     {
+	           minChars: 1,
+	           max:5,
+	           width: 150, 
+	           matchContains: true,
+	           autoFill: false,
+	           dataType: "json",
+	           extraParams: 
+	           {   
+	        	 customerName: function() 
+                 {
+                  	 return $("#txt_queryCustomerName").val(); 
+                 }   
+               },
+	           parse: function(test) 
+	           {
+	               data = test;
+	               var rows = [];
+	               if(data != null)
+	               {
+	            	   allData = data;
+		               for(var i=0; i<data.length; i++)
+			           {
+			              rows[rows.length] = 
+			              {
+			                   data: data[i].customerName,
+			                   value:data[i],
+			                   result:data[i].customerName
+			               };
+			            }
+	           		}
+		            return rows;
+	           },
+	           formatItem:function(item)
+	           {
+                   return item;
+	           }
+
+		     });
+			$("#txt_queryCustomerName").result(function(event, itemname, formatted) {
+				  //如选择后给其他控件赋值，触发别的事件等等
+				  for(var i=0; i<allData.length; i++)
+				  {
+					  if(allData[i].customerName == itemname)
+					  {
+						  $("#customerId").val(allData[i].id);
+						  $("#customerId_t").val(allData[i].id);
+			  			  $("#salesman").val(allData[i].salesman);
+		  				  $("#progressId").val(allData[i].progressId);
+		  				  $("#category").val(allData[i].category);
+		  				  var contractPerson = "";
+		  				  var tel = "";
+		  				  for(var j= 0;j<allData[i].contractPersonList.length; j++)
+		  				  {
+		  					  if(contractPerson == "")
+		  					  {
+		  						  contractPerson = allData[i].contractPersonList[j].personName;
+		  					  }else
+		  					  {
+		  						contractPerson = contractPerson + "," + allData[i].contractPersonList[j].personName;
+		  					  }
+		  					  
+		  					  
+		  						  if(allData[i].contractPersonList[j].phone != "")
+		  						  {
+		  							if(tel == "")
+				  					  {
+				  					  	tel = allData[i].contractPersonList[j].phone;
+				  					  }else
+				  					  {
+				  						tel = tel + "," + allData[i].contractPersonList[j].phone;
+				  					  }
+		  						  }
+		  						if(allData[i].contractPersonList[j].tel != "")
+		  						  {
+		  							if(tel == "")
+				  					  {
+				  					  	tel = allData[i].contractPersonList[j].tel;
+				  					  }else
+				  					  {
+				  						tel = tel + "," + allData[i].contractPersonList[j].tel;
+				  					  }
+		  						  }
+		  					  
+		  				  }
+					  }
+				  }
+				 });
 			$.fn.CheckBoxAll("ids","cbk_all");
 			$.fn.UnCheckBoxAll("ids","cbk_all");
 			//日期控件
@@ -148,22 +254,6 @@
 	</head>
   <body>
    <s:form id="form1" name="form1" method="post" theme="simple" action="">
-   		<table id="recordsList" width="100%"  border="0" cellpadding="5" cellspacing="1" bgcolor="#d5e4fd">
-			<tr>
-				<td colspan="12" align="center" width="50px" bgcolor="#FFFFFF">
-					<table>
-						<tr>
-							<td>
-								<input name="btn_add" type="button" class="btn_2_3" id="btn_add" value="添加">
-							</td>
-							<td>
-								<input name="btn_delAll" type="button" class="btn_2_3" id="btn_delAll" value="删除所选">
-							</td>
-						</tr>
-					</table>
-				</td>
-			</tr>
-			</table>
    		<fieldset >
 		<legend>查询条件</legend>
    		<span>
@@ -195,6 +285,8 @@
 			</table>
 		</span>
 		</fieldset>
+		<input name="btn_add" type="button" class="btn_2_3" id="btn_add" value="添加">
+		<input name="btn_delAll" type="button" class="btn_2_3" id="btn_delAll" value="删除所选">
    		<table id="recordsList" width="100%"  border="0" cellpadding="5" cellspacing="1" bgcolor="#d5e4fd">
 			<tr>
 				<td align="center" width="50px" background="<%=basePath%>/images/headerbg.jpg">
