@@ -34,12 +34,12 @@
   <script type="text/javascript">
 		<!--
 		d = new dTree('d','<%=path%>');
-		d.add(0,-1,'<s:property value="commpanyName"/>部门及业务员','./userAction!showUserList.action?companyId=<s:property value="commpanyId"/>&deptId=<s:property value="id"/>&who=session','','groupmain');
+		d.add(0,-1,'<s:property value="commpanyName"/>部门及业务员','./toTabPageAction.action?companyId=<s:property value="commpanyId"/>&deptId=<s:property value="id"/>&who=session','','groupmain');
 		<s:iterator value="deptList">
-			d.add("<s:property value="id"/>",0,'<s:property value="deptName"/>','./userAction!showUserList.action?companyId=<s:property value="commpanyId"/>&deptId=<s:property value="id"/>&who=session','','groupmain','<%=path%>/js/tree/img/group.gif','<%=path%>/js/tree/img/group.gif');
+			d.add("<s:property value="id"/>",0,'<s:property value="deptName"/>','./toTabPageAction.action?companyId=<s:property value="commpanyId"/>&deptId=<s:property value="id"/>&who=session','','groupmain','<%=path%>/js/tree/img/group.gif','<%=path%>/js/tree/img/group.gif');
 		</s:iterator>
 		<s:iterator value="userList">
-			d.add("<s:property value="id"/>","<s:property value="deptId"/>",'<s:property value="userCName"/>','./userAction!showUserList.action?companyId=<s:property value="commpanyId"/>&deptId=<s:property value="deptId"/>&userId=<s:property value="id"/>&who=session','','groupmain','<%=path%>/js/tree/img/user.gif');
+			d.add("<s:property value="id"/>","<s:property value="deptId"/>",'<s:property value="userCName"/>','./toTabPageAction.action?companyId=<s:property value="commpanyId"/>&deptId=<s:property value="deptId"/>&userId=<s:property value="id"/>&who=session','','groupmain','<%=path%>/js/tree/img/user.gif');
 		</s:iterator>
 		document.write(d);
 		//-->

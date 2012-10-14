@@ -631,7 +631,19 @@
 									<tr>
 										<td width="40" align="right" style="padding-bottom: 4px;"><img src="images/menuto.jpg" width="5" height="5" />
 										</td>
-										<td><a href="sellrecord/sellrecordmanage.jsp" target="mainFrame">销售记录</a>
+										<td><a href="sellrecord/sellrecordmanage.jsp" target="mainFrame">销售记录(领导)</a>
+										</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+						<tr>
+							<td align="left">
+								<table width="100%" border="0" cellspacing="5" cellpadding="0">
+									<tr>
+										<td width="40" align="right" style="padding-bottom: 4px;"><img src="images/menuto.jpg" width="5" height="5" />
+										</td>
+										<td><a href="sellrecord/sellrecordtabforseller.jsp" target="mainFrame">销售记录(员工)</a>
 										</td>
 									</tr>
 								</table>
