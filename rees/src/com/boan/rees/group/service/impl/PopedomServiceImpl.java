@@ -92,6 +92,19 @@ public class PopedomServiceImpl implements IPopedomService{
 	{
 		this.popedomDao = popedomDao;
 	}
-
+	@Override
+	public boolean isSuperAdministrator(String userId, String userType) throws Exception {
+		boolean b = false;
+		// userId=1,userType=9,表示超级管理员
+		if( "1".equals( userId )||"9".equals( userType ) )
+		{
+			b = true;
+		}
+		else
+		{
+			b = false;
+		}
+		return b;
+	}
 }
 
