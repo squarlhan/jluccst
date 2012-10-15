@@ -247,7 +247,10 @@ public class CustomerVisitInfoAction extends BaseActionSupport{
 			}
 		}
 		else
+		{
 			customerVisitInfo = new CustomerVisitInfo();
+			visitTime = CalendarUtils.toLongStringNoSecond(Calendar.getInstance());
+		}
 		
 		listVisitOption = dataDictionaryService.findDataDictionaryByType(sessionCompanyId, 5);
 		
