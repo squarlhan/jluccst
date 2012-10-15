@@ -77,7 +77,6 @@
 								<s:select name="yearlist" id="yearlist" list="yearList" cssStyle="width:70px;" listKey="value" listValue="text" value="selectYear"></s:select>
 								<s:select name="weeklist" id="weeklist" list="weekList" cssStyle="width:180px;" listKey="value" listValue="text" value="selectWeek"></s:select>
 								<input id="showstatline" class="btn_4" type="button" value="查看线状图"  />
-								<input class="btn_5" type="button" value="添加监测点数据" id="addpointdata" />
 							</td>
 							<td align="right">
 								（<s:property value="dataTypeString"/>）
