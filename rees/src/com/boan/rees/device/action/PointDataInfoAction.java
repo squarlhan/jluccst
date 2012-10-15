@@ -14,8 +14,10 @@ import java.util.Calendar;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.struts2.ServletActionContext;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
@@ -48,7 +50,9 @@ import com.boan.rees.expertsystem.service.InferenceEngine;
 import com.boan.rees.expertsystem.threshold.model.Threshold;
 import com.boan.rees.expertsystem.threshold.model.ThresholdItem;
 import com.boan.rees.expertsystem.threshold.service.IThresholdService;
+import com.boan.rees.group.common.UserSession;
 import com.boan.rees.group.service.IGroupService;
+import com.boan.rees.group.service.IPopedomService;
 import com.boan.rees.utils.action.BaseActionSupport;
 import com.boan.rees.utils.calendar.CalendarUtils;
 import com.boan.rees.utils.expression.ExpressionCompare;
@@ -109,6 +113,9 @@ public class PointDataInfoAction extends BaseActionSupport {
 	@Resource
 	private ISpecialDeviceRuleService specialDeviceRuleService;
 	
+	@Resource
+	private IPopedomService popedomService;
+	
 	//设备ID
 	private String deviceId = null;
 	
@@ -167,11 +174,20 @@ public class PointDataInfoAction extends BaseActionSupport {
 	
 	private String dataTypeString;
 	
+	private boolean admin = false;
+	
 	/**
 	 * 获得监测数据列表
 	 * @return
+	 * @throws Exception 
 	 */
-	public String pointDataInfoList(){
+	public String pointDataInfoList() throws Exception{
+		HttpSession session = ServletActionContext.getRequest().getSession();
+		UserSession userSession = ( UserSession ) session.getAttribute( "userSession" );
+		if(popedomService.isSuperAdministrator(userSession.getUserId(),String.valueOf(userSession.getUserType()) )){
+			//当前用户是管理员
+			admin = true;
+		}
 		DeviceInfo deviceInfo = deviceInfoService.get( deviceId );
 		String dataType = deviceInfo.getDataType();
 		if("S".equalsIgnoreCase(dataType))
@@ -1256,5 +1272,18 @@ public class PointDataInfoAction extends BaseActionSupport {
 	public void setPointDataValueId(String pointDataValueId) {
 		this.pointDataValueId = pointDataValueId;
 	}
-	
+
+	/**
+	 * @return the admin
+	 */
+	public boolean isAdmin() {
+		return admin;
+	}
+
+	/**
+	 * @param admin the admin to set
+	 */
+	public void setAdmin(boolean admin) {
+		this.admin = admin;
+	}
 }
