@@ -114,7 +114,10 @@
 								<table width="100%" border="0" cellspacing="5" cellpadding="0"><tr><td>
 								<input name="showdevicepic" dataId="<s:property value='id'/>" class="btn_4" type="button" value="打开设备图" />
 								<input name="showstat" dataId="<s:property value='id'/>" class="btn_4" type="button" value="查看柱状图"  />
+								<s:if test="admin==true">
+								<!-- 只有管理员才能修改 -->
 								<input class="btn_5" type="button" dataId="<s:property value='id'/>" value="修改监测点数据" name="showpointdata" />
+								</s:if>
 								<!-- input name="delbtn" class="btn_4" type="button" dataId="<s:property value='id'/>" value="删除数据"  /-->
 								</td><td style="text-align:right">
 								录入时间：<s:property value="creatTimeString"/>
