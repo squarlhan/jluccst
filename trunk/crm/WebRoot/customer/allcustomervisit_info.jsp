@@ -43,6 +43,7 @@
 					"customerVisitInfo.personId":{required:true},
 					"customerVisitInfo.salesmanId":{required:true},
 					"customerVisitInfo.visitOption":{required:true},
+					"customerTraceInfo.visitTime":{required:true},
 					"customerVisitInfo.qq":{strangecode:true},
 					"customerVisitInfo.email":{email:true},
 					"customerVisitInfo.task":{strangecode:true},
@@ -259,7 +260,7 @@
 		<td></td>
 		<td align="right" style="width: 72px">客户名称：</td>
 		<td >
-		<s:textfield type="text" style="width:150px" name="customerInfo.customerName" id="customerName"></s:textfield>
+		<s:textfield type="text" style="width:150px" name="customerInfo.customerName" id="customerName"></s:textfield><font color="red">*</font>
 		</td>
 		<td align="right">业务员：</td>
 		<td><s:textfield type="text" readOnly="true" style="width:150px" name="customerInfo.salesman" id="salesman"></s:textfield></td>
@@ -292,13 +293,13 @@
 		<td></td>
 		<td align="right" nowrap>受访人：</td>
 		<td ><s:select list="listPerson" listKey="id" listValue="personName" value="customerVisitInfo.visitPersonId" 
-			id="personId" name="customerVisitInfo.visitPersonId" cssStyle="width:150px" headerKey="" headerValue="--请选择--"></s:select></td>
+			id="personId" name="customerVisitInfo.visitPersonId" cssStyle="width:135px" headerKey="" headerValue="--请选择--"></s:select><font color="red">*</font></td>
 		<td align="right" nowrap>回访人：</td>
 		<td><s:select list="userList" listKey="id" listValue="userCName" value="customerVisitInfo.salesmanId" 
-			id="salesmanId" name="customerVisitInfo.salesmanId" cssStyle="width:150px" headerKey="" headerValue="--请选择--"></s:select></td>
+			id="salesmanId" name="customerVisitInfo.salesmanId" cssStyle="width:135px" headerKey="" headerValue="--请选择--"></s:select><font color="red">*</font></td>
 		<td align="right" nowrap>回访方式：</td>
 		<td ><s:select list="listVisitOption" listKey="id" listValue="name" value="customerVisitInfo.visitOption" 
-			id="visitOption" name="customerVisitInfo.visitOption" cssStyle="width:150px" headerKey="" headerValue="--请选择--"></s:select></td>
+			id="visitOption" name="customerVisitInfo.visitOption" cssStyle="width:135px" headerKey="" headerValue="--请选择--"></s:select><font color="red">*</font></td>
 	</tr>
 	<tr>
 		<td></td>
@@ -312,7 +313,7 @@
 	<tr>
 		<td></td>
 		<td align="right" nowrap>回访时间：</td>
-		<td><s:textfield type="text" style="width:150px" name="customerVisitInfo.visitTime" id="visitTime"></s:textfield></td>
+		<td><s:textfield type="text" style="width:150px" name="visitTime" id="visitTime"></s:textfield><font color="red">*</font></td>
 		<td align="right">任务：</td>
 		<td colspan="3"><s:textarea type="text" style="width:400px;height:60px" name="customerVisitInfo.task" id="task"></s:textarea></td>
 	</tr>
