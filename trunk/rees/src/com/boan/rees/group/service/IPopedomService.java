@@ -79,5 +79,15 @@ public boolean isHasPopedom( String userId, String userType, String keyword, Str
  * @throws Excepiton
  */
 public void deletePopedomByRoleIds( String[] roleIds ) throws Exception;
+/**
+ *  是否是超级管理员
+ * @param userId
+ * @param userType
+ * @param keyword
+ * @param popedomKeys
+ * @return
+ * @throws Exception
+ */
+public boolean isSuperAdministrator( String userId, String userType ) throws Exception;
 }
 
