@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<!-- 供应商Action -->
+	<package name="supplier" extends="struts-default" namespace="/">
+		<action name="showSupplierListAction" class="supplierAction" method="showSupplierList">
+			<result name="success">/suppliermanage/supplierlist.jsp</result>
+			<result name="input">/suppliermanage/supplierlist.jsp</result>
+		</action>
+		<action name="showSupplierInfoAction" class="supplierAction" method="showSupplierInfo">
+			<result name="success">/suppliermanage/supplierinfo.jsp</result>
+			<result name="input">/suppliermanage/supplierinfo.jsp</result>
+		</action>
+		<action name="saveSupplierAction" class="supplierAction" method="saveSupplier">
+			<result name="success">/common/message.jsp</result>
+			<result name="error">/common/messagenoclose.jsp</result>
+		</action>
+		<action name="deleteSupplierAction" class="supplierAction" method="deleteSupplier" />
+	</package>
+</struts>
