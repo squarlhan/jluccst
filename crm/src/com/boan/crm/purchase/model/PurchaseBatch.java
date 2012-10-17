@@ -42,43 +42,57 @@ public class PurchaseBatch implements java.io.Serializable {
 	@Column(name = "COMPANY_ID", length=50)
 	private String companyId;
 	/**
+	 * 公司名称
+	 */
+	@Column(name = "COMPANY_NAME", length=50)
+	private String companyName;
+	/**
 	 * 供应商ID
 	 */
+	@Column(name = "SUPPLIER_ID", length=50)
 	private String supplierId;
 	/**
 	 * 供应商名称
 	 */
+	@Column(name = "SUPPLIER_NAME", length=50)
 	private String supplierName;
 	/**
 	 * 供应商编号
 	 */
+	@Column(name = "SUPPLIER_NUMBER", length=50)
 	private String supplierNumber;
 	/**
 	 * 成交日期
 	 */
+	@Column(name = "TRANSACTION_DATE", length=50)
 	private String transactionDate;
 	/**
 	 * 是否到货，1表示到货，0表示未到
 	 */
+	@Column(name = "IS_ARRIVE")
 	private int isArrive;
 
 	/**
 	 * 是否结账
 	 */
+	@Column(name = "IS_SETTLE_ACCOUNT")
 	private int isSettleAccount;
 	/**
 	 * 用户id
 	 */
+	@Column(name = "USER_ID", length=50)
 	private String userId;
 
 	/**
 	 * 用户姓名
 	 */
+	@Column(name = "USER_NAME", length=50)
 	private String userName;
 
 	/**
 	 * 创建时间
 	 */
+	@Column(name = "CREATE_TIME")
 	private Date createTime;
 
 	public String getCompanyId() {
@@ -179,6 +193,14 @@ public class PurchaseBatch implements java.io.Serializable {
 
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	public String getCompanyName() {
+		return companyName;
+	}
+
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
 	}
 
 }
