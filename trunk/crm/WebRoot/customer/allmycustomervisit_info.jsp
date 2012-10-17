@@ -44,6 +44,7 @@
 					"customerVisitInfo.salesmanId":{required:true},
 					"customerVisitInfo.visitOption":{required:true},
 					"customerVisitInfo.qq":{strangecode:true},
+					"visitTime":{required:true,date:true},
 					"customerVisitInfo.email":{email:true},
 					"customerVisitInfo.task":{strangecode:true},
 					"customerVisitInfo.contentResult":{strangecode:true},
@@ -54,7 +55,7 @@
 			var allData;
 			$(function() {
 				<s:if test='%{customerVisitInfo.id.equals("")}'>
-				$("#customerName").autocomplete("customer/getCustomerByName.action",
+				$("#customerName").autocomplete("customer/getMyCustomerByName.action",
 			     {
 		           minChars: 1,
 		           max:5,
