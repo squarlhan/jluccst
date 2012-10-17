@@ -230,7 +230,26 @@ public class CustomerInfoAction extends BaseActionSupport{
 		listCustomer = pagination.getData();
 		return SUCCESS;
 	}
-	
+	public String getMyCustomerByName()
+	{
+		Map<String,String> values = new HashMap<String,String>();
+		try
+		{
+			customerName = new String(customerName.getBytes("ISO-8859-1"), "UTF-8");
+		}catch(Exception ex){}
+		if(customerName != null && customerName.length() > 0)
+		{
+			values.put("customerName", "%"+customerName+"%");
+		}
+		
+		values.put("companyId", sessionCompanyId);
+		values.put("salesmanId", sessionUserId);
+		
+		pagination.setPageSize(5);
+		pagination = customerInfoService.findCustomerInfoForPage(values, pagination);
+		listCustomer = pagination.getData();
+		return SUCCESS;
+	}
 	public String importCustomer()
 	{
 		return SUCCESS;
