@@ -353,7 +353,7 @@ public class CustomerVisitInfoAction extends BaseActionSupport{
 			timePlan.setEmployeeId(sessionUserId);
 			timePlan.setEmployeeName(sessionUserCName);
 			timePlan.setOrganId(sessionCompanyId);
-			//timePlan.setPersonId("1");
+			timePlan.setPersonId(obj.getVisitPersonId());
 			//timePlan.setPlanType(planType);
 			StringBuilder sb = new StringBuilder();
 			sb.append("回访计划：");
