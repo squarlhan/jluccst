@@ -260,7 +260,7 @@
 		<td></td>
 		<td align="right" style="width: 72px">客户名称：</td>
 		<td >
-		<s:textfield type="text" style="width:150px" name="customerInfo.customerName" id="customerName"></s:textfield>
+		<s:textfield type="text" style="width:150px" name="customerVisitInfo.customerName" id="customerName"></s:textfield>
 		</td>
 		<td align="right">业务员：</td>
 		<td><s:property value="sessionUserCName"/></td>
@@ -355,6 +355,7 @@
 	<tr><td style="height: 10px"></td></tr>
 	<tr>
 		<td align="center">
+		<s:checkbox name="chkSMS" id="chkSMS" />短信提醒
 		<input type="button" name="addBtn" id="addBtn" value="保存" style="width: 50px"/>
 		<input type="button" name="closeBtn" id="closeBtn" value="关闭" style="width: 50px"/></td>
 	</tr>
