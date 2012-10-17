@@ -274,7 +274,7 @@
 		<td></td>
 		<td align="right" style="width: 72px">客户名称：</td>
 		<td >
-		<s:textfield type="text" style="width:150px" name="customerInfo.customerName" id="customerName"></s:textfield>
+		<s:textfield type="text" style="width:150px" name="customerTraceInfo.customerName" id="customerName"></s:textfield>
 		</td>
 		<td align="right">业务员：</td>
 		<td><s:property value="sessionUserCName"/></td>
