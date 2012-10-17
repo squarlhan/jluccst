@@ -31,14 +31,15 @@
 		<j:scriptlink css="true" tipswindow="true" jmessagebox="true" jquery="true" validate="true" jfunction="true"/>
 		<link rel="stylesheet" media="all" type="text/css" href="<%=basePath%>js/timepicke/jquery-ui-1.7.3.custom.css" />
 		<link rel="stylesheet" media="all" type="text/css" href="<%=basePath%>js/timepicke/jquery-ui-timepicker-addon.css" />
-		<script type="text/javascript" src="<%=basePath%>js/timepicke/jquery-ui-1.7.3.custom.min.js"></script>
-		<script type="text/javascript" src="<%=basePath%>js/timepicke/jquery-ui-timepicker-addon.js"></script>
-		<script type="text/javascript" src="<%=basePath%>js/timepicke/jquery-ui-timepicker-zh-CN.js"></script>
-		<script type="text/javascript" src="<%=basePath%>js/timepicke/jquery-ui-sliderAccess.js"></script>
 		<script src="<%=basePath %>/js/ui/jquery.ui.core.js"></script>
 		<script src="<%=basePath %>/js/ui/jquery.ui.widget.js"></script>
 		<script src="<%=basePath %>/js/ui/jquery.ui.position.js"></script>
 		<script src="<%=basePath %>/js/ui/jquery.autocomplete.js"></script>
+		<script type="text/javascript" src="<%=basePath%>js/timepicke/jquery-ui-1.7.3.custom.min.js"></script>
+		<script type="text/javascript" src="<%=basePath%>js/timepicke/jquery-ui-timepicker-addon.js"></script>
+		<script type="text/javascript" src="<%=basePath%>js/timepicke/jquery-ui-timepicker-zh-CN.js"></script>
+		<script type="text/javascript" src="<%=basePath%>js/timepicke/jquery-ui-sliderAccess.js"></script>
+		
 		
 		<script type="text/javascript">
 		
@@ -51,6 +52,7 @@
 					"customerTraceInfo.salesmanId":{required:true},
 					"customerTraceInfo.traceOption":{required:true},
 					"customerTraceInfo.qq":{strangecode:true},
+					//"traceTime":{required:true,dateISO:true},
 					"customerTraceInfo.email":{email:true},
 					"customerTraceInfo.task":{strangecode:true},
 					"customerTraceInfo.interest":{strangecode:true},
@@ -61,7 +63,7 @@
 			var allData;
 			$(function() {
 				<s:if test='%{customerTraceInfo.id.equals("")}'>
-				$("#customerName").autocomplete("customer/getCustomerByName.action",
+				$("#customerName").autocomplete("customer/getMyCustomerByName.action",
 			     {
 		           minChars: 1,
 		           max:5,
@@ -174,7 +176,7 @@
 				//日期控件
 		  		//$('#txt_begin').val((new Date()).getYear()+"-"+(((new Date()).getMonth()+1)<10 ? "0"+((new Date()).getMonth()+1) : (new Date()).getMonth()+1)+"-"+((new Date()).getDate()-15<10 ? "0"+(new Date()).getDate()-15 : (new Date()).getDate()-15));
 		  		//$('#txt_end').val((new Date()).getYear()+"-"+(((new Date()).getMonth()+1)<10 ? "0"+((new Date()).getMonth()+1) : (new Date()).getMonth()+1)+"-"+((new Date()).getDate()<10 ? "0"+(new Date()).getDate() : (new Date()).getDate()));
-				$('#traceTime').datetimepicker({showTimepicker: true});
+				//$('#traceTime').datetimepicker({showTimepicker: true});
 				$.fn.save();
 		  		$.fn.close();
 		  		$.fn.initpage();
@@ -324,7 +326,7 @@
 	<tr>
 		<td></td>
 		<td align="right" nowrap>跟进时间：</td>
-		<td><s:textfield readOnly="true" type="text" style="width:150px" name="traceTime" id="traceTime"></s:textfield></td>
+		<td><s:textfield type="text" style="width:150px" name="traceTime" id="traceTime"></s:textfield></td>
 		<td align="right">任务：</td>
 		<td colspan="3"><s:textarea type="text" style="width:400px;height:60px" name="customerTraceInfo.task" id="task"></s:textarea></td>
 	</tr>
