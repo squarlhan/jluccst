@@ -30,6 +30,8 @@ import com.boan.crm.groupmanage.service.IUserService;
 import com.boan.crm.sms.model.SMSCustomerInfo;
 import com.boan.crm.sms.model.SMSInfo;
 import com.boan.crm.sms.service.ISMSInfoService;
+import com.boan.crm.timemanage.model.TimePlan;
+import com.boan.crm.timemanage.service.ITimePlanService;
 import com.boan.crm.utils.action.BaseActionSupport;
 import com.boan.crm.utils.calendar.CalendarUtils;
 import com.boan.crm.utils.page.Pagination;
@@ -71,7 +73,9 @@ public class CustomerTraceInfoAction extends BaseActionSupport{
 	@Autowired
 	@Qualifier("SMSInfoService")
 	private ISMSInfoService smsInfoService;
-	
+	@Autowired
+	@Qualifier("timePlanService")
+	private ITimePlanService timePlanService = null;
 	//客户跟进信息类
 	private CustomerTraceInfo customerTraceInfo ;
 	private String id = "";
@@ -353,6 +357,32 @@ public class CustomerTraceInfoAction extends BaseActionSupport{
 		obj.setTel(customerTraceInfo.getTel());
 		obj.setCompanyId( sessionCompanyId );
 		customerTraceInfoService.save(obj);
+		
+		if(inserFLag)
+		{
+			TimePlan timePlan = new TimePlan();
+			timePlan.setDeptId(sessionDeptId);
+			timePlan.setCreateTime(Calendar.getInstance());
+			timePlan.setDeptName(sessionDeptName);
+			timePlan.setEmployeeId(sessionUserId);
+			timePlan.setEmployeeName(sessionUserCName);
+			timePlan.setOrganId(sessionCompanyId);
+			//timePlan.setPersonId("1");
+			//timePlan.setPlanType(planType);
+			StringBuilder sb = new StringBuilder();
+			sb.append("跟进计划：");
+			sb.append(CalendarUtils.toLongStringNoSecond(obj.getTraceTime()));
+			sb.append(",对客户[");
+			sb.append(obj.getCustomerName());
+			sb.append("]进行["+dataDictionaryService.get(obj.getTraceOption()).getName()+"]方式跟进");
+			sb.append(",跟进任务：[");
+			sb.append(obj.getTask());
+			sb.append("]。");
+			timePlan.setPlanContent(sb.toString());
+			timePlan.setSubmitTime(Calendar.getInstance());
+			
+			timePlanService.saveOrUpdateTimePlan(timePlan);
+		}
 		
 		if(chkSMS != null && chkSMS.equals("true"))
 		{

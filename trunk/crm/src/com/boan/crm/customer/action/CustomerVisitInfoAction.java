@@ -27,6 +27,11 @@ import com.boan.crm.datadictionary.service.IDataDictionaryService;
 import com.boan.crm.groupmanage.common.RoleFlag;
 import com.boan.crm.groupmanage.model.User;
 import com.boan.crm.groupmanage.service.IUserService;
+import com.boan.crm.sms.model.SMSCustomerInfo;
+import com.boan.crm.sms.model.SMSInfo;
+import com.boan.crm.sms.service.ISMSInfoService;
+import com.boan.crm.timemanage.model.TimePlan;
+import com.boan.crm.timemanage.service.ITimePlanService;
 import com.boan.crm.utils.action.BaseActionSupport;
 import com.boan.crm.utils.calendar.CalendarUtils;
 import com.boan.crm.utils.page.Pagination;
@@ -65,7 +70,12 @@ public class CustomerVisitInfoAction extends BaseActionSupport{
 	@Autowired
 	@Qualifier("dataDictionaryService")
 	private IDataDictionaryService dataDictionaryService = null;
-	
+	@Autowired
+	@Qualifier("SMSInfoService")
+	private ISMSInfoService smsInfoService;
+	@Autowired
+	@Qualifier("timePlanService")
+	private ITimePlanService timePlanService = null;
 	//客户回访信息类
 	private CustomerVisitInfo customerVisitInfo ;
 	private String id = "";
@@ -86,6 +96,15 @@ public class CustomerVisitInfoAction extends BaseActionSupport{
 	private String contractPerson = "";
 	private String contractTel  = "";
 	private String visitTime = "";
+	private String chkSMS = "";
+	public String getChkSMS() {
+		return chkSMS;
+	}
+
+	public void setChkSMS(String chkSMS) {
+		this.chkSMS = chkSMS;
+	}
+
 	public String getVisitTime() {
 		return visitTime;
 	}
@@ -275,8 +294,10 @@ public class CustomerVisitInfoAction extends BaseActionSupport{
 		customerVisitInfo.setSalesmanId(sessionUserId);
 		customerVisitInfo.setSalesman(sessionUserCName);
 		CustomerVisitInfo obj = null;
+		boolean inserFLag = true;
 		if(customerVisitInfo.getId() != null && customerVisitInfo.getId().length() > 0)
 		{
+			inserFLag = false;
 			obj =  customerVisitInfoService.get(customerVisitInfo.getId());
 		}else
 		{
@@ -322,6 +343,49 @@ public class CustomerVisitInfoAction extends BaseActionSupport{
 		obj.setTel(customerVisitInfo.getTel());
 		obj.setCompanyId( sessionCompanyId );
 		customerVisitInfoService.save(obj);
+		
+		if(inserFLag)
+		{
+			TimePlan timePlan = new TimePlan();
+			timePlan.setDeptId(sessionDeptId);
+			timePlan.setCreateTime(Calendar.getInstance());
+			timePlan.setDeptName(sessionDeptName);
+			timePlan.setEmployeeId(sessionUserId);
+			timePlan.setEmployeeName(sessionUserCName);
+			timePlan.setOrganId(sessionCompanyId);
+			//timePlan.setPersonId("1");
+			//timePlan.setPlanType(planType);
+			StringBuilder sb = new StringBuilder();
+			sb.append("回访计划：");
+			sb.append(CalendarUtils.toLongStringNoSecond(obj.getVisitTime()));
+			sb.append(",对客户[");
+			sb.append(obj.getCustomerName());
+			sb.append("]进行["+dataDictionaryService.get(obj.getVisitOption()).getName()+"]方式回访");
+			sb.append(",回访任务：[");
+			sb.append(obj.getTask());
+			sb.append("]。");
+			timePlan.setPlanContent(sb.toString());
+			timePlan.setSubmitTime(Calendar.getInstance());
+			
+			timePlanService.saveOrUpdateTimePlan(timePlan);
+		}
+		
+		if(chkSMS != null && chkSMS.equals("true"))
+		{
+			SMSInfo sms = new SMSInfo();
+			SMSCustomerInfo customerInfo = new SMSCustomerInfo();
+			customerInfo.setCustomerId(customerId);
+			sms.setCustomerInfo(customerInfo);
+			sms.setIsImmediately(1);
+			sms.setOrganId(sessionCompanyId);
+			sms.setPersonCompany(sessionCompanyName);
+			sms.setPersonName( sessionUserCName );
+			sms.setSendTime(time);
+			sms.setPhone(customerVisitInfo.getTel());
+			sms.setInfo("回访任务提醒："+customerVisitInfo.getTask());
+			//smsInfoService.saveSMSInfo(sms); 
+		}
+		
 		id = obj.getId();
 		return SUCCESS;
 	}
