@@ -56,10 +56,12 @@
 				d.add(1042,104,'客户跟进','<%=url%>?menuKey=<%=MenuKey.SUB_KE_HU_GEN_JIN%>&companyId=<%=companyId%>','','groupmain');
 				d.add(1043,104,'客户回访','<%=url%>?menuKey=<%=MenuKey.SUB_KE_HU_HUI_FANG%>&companyId=<%=companyId%>','','groupmain');
 				d.add(1044,104,'客户评估','<%=url%>?menuKey=<%=MenuKey.SUB_KE_HU_PING_GU%>&companyId=<%=companyId%>','','groupmain');
-		d.add(108,0,'综合查询','<%=url%>?menuKey=<%=MenuKey.ZONG_HE_CHA_XUN%>&companyId=<%=companyId%>','','groupmain');
+		/*
+				d.add(108,0,'综合查询','<%=url%>?menuKey=<%=MenuKey.ZONG_HE_CHA_XUN%>&companyId=<%=companyId%>','','groupmain');
 				d.add(1081,108,'客户查询','<%=url%>?menuKey=<%=MenuKey.KE_HU_CHA_XUN%>&companyId=<%=companyId%>','','groupmain');
 				d.add(1082,108,'跟进查询','<%=url%>?menuKey=<%=MenuKey.GEN_JIN_CHA_XUN%>&companyId=<%=companyId%>','','groupmain');
 				d.add(1083,108,'回访查询','<%=url%>?menuKey=<%=MenuKey.HUI_FANG_CHA_XUN%>&companyId=<%=companyId%>','','groupmain');
+		*/
 		d.add(105,0,'销售管理','<%=url%>?menuKey=<%=MenuKey.XIAO_SHOU_GUAN_LI%>&companyId=<%=companyId%>','','groupmain');
 				d.add(1051,105,'短信平台','<%=url%>?menuKey=<%=MenuKey.SUB_DUAN_XIN_PING_TAI%>&companyId=<%=companyId%>','','groupmain');
 				d.add(1052,105,'时间管理','<%=url%>?menuKey=<%=MenuKey.SUB_SHI_JIAN_GUAN_LI%>&companyId=<%=companyId%>','','groupmain');
@@ -69,8 +71,12 @@
 				d.add(1061,106,'服务记录','<%=url%>?menuKey=<%=MenuKey.SUB_FU_WU_JI_LU%>&companyId=<%=companyId%>','','groupmain');
 				d.add(1062,106,'会员管理','<%=url%>?menuKey=<%=MenuKey.SUB_HUI_YUAN_GUAN_LI%>&companyId=<%=companyId%>','','groupmain');
 				d.add(1063,106,'积分管理','<%=url%>?menuKey=<%=MenuKey.SUB_JI_FEN_GUAN_LI%>&companyId=<%=companyId%>','','groupmain');
+		
+		d.add(-2,-1,'操作权限列表','','','Menu');
+		d.add(201,-2,'本部门','<%=url%>?menuKey=<%=MenuKey.SELF_DEPT%>&companyId=<%=companyId%>','','groupmain','<%=path%>/js/tree/img/imgfolder.gif','<%=path%>/js/tree/img/imgfolder.gif');
+		d.add(202,-2,'本公司','<%=url%>?menuKey=<%=MenuKey.SELF_COMPANY%>&companyId=<%=companyId%>','','groupmain','<%=path%>/js/tree/img/imgfolder.gif','<%=path%>/js/tree/img/imgfolder.gif');
 		document.write(d);
-		d.openAll();
+		//d.openAll();
 		//-->
 	</script>
 </div>
