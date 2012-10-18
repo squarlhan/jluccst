@@ -475,10 +475,12 @@
 							}
 						%>
 						<%
-							b = popedomService.isHasPopedom(us.getUserId(), String.valueOf(us.getUserType()), MenuKey.ZONG_HE_CHA_XUN, us.getPopedomKeys())
-									||popedomService.isHasPopedom(us.getUserId(), String.valueOf(us.getUserType()), MenuKey.KE_HU_CHA_XUN, us.getPopedomKeys())
-									||popedomService.isHasPopedom(us.getUserId(), String.valueOf(us.getUserType()), MenuKey.GEN_JIN_CHA_XUN, us.getPopedomKeys())
-									||popedomService.isHasPopedom(us.getUserId(), String.valueOf(us.getUserType()), MenuKey.HUI_FANG_CHA_XUN, us.getPopedomKeys());
+							//!b = popedomService.isHasPopedom(us.getUserId(), String.valueOf(us.getUserType()), MenuKey.ZONG_HE_CHA_XUN, us.getPopedomKeys())
+							//!		||popedomService.isHasPopedom(us.getUserId(), String.valueOf(us.getUserType()), MenuKey.KE_HU_CHA_XUN, us.getPopedomKeys())
+							//!		||popedomService.isHasPopedom(us.getUserId(), String.valueOf(us.getUserType()), MenuKey.GEN_JIN_CHA_XUN, us.getPopedomKeys())
+							//!		||popedomService.isHasPopedom(us.getUserId(), String.valueOf(us.getUserType()), MenuKey.HUI_FANG_CHA_XUN, us.getPopedomKeys());
+						//变成公共的了，不受权限控制的了	
+						b = true;
 							if (b) {
 						%>
 						<tr>
@@ -495,7 +497,7 @@
 						</tr>
 						<tbody name="submenus" style="display:none">
 						<%
-							b = popedomService.isHasPopedom(us.getUserId(), String.valueOf(us.getUserType()), MenuKey.KE_HU_CHA_XUN, us.getPopedomKeys());
+							b = true;//!popedomService.isHasPopedom(us.getUserId(), String.valueOf(us.getUserType()), MenuKey.KE_HU_CHA_XUN, us.getPopedomKeys());
 							if (b) {
 						%>
 						<tr>
@@ -512,7 +514,7 @@
 						</tr>
 						<%} %>
 						<%
-							b = popedomService.isHasPopedom(us.getUserId(), String.valueOf(us.getUserType()), MenuKey.GEN_JIN_CHA_XUN, us.getPopedomKeys());
+							b = true;//!popedomService.isHasPopedom(us.getUserId(), String.valueOf(us.getUserType()), MenuKey.GEN_JIN_CHA_XUN, us.getPopedomKeys());
 							if (b) {
 						%>
 						<tr>
@@ -529,7 +531,7 @@
 						</tr>
 						<%} %>
 						<%
-							b = popedomService.isHasPopedom(us.getUserId(), String.valueOf(us.getUserType()), MenuKey.HUI_FANG_CHA_XUN, us.getPopedomKeys());
+							b =true ;//! popedomService.isHasPopedom(us.getUserId(), String.valueOf(us.getUserType()), MenuKey.HUI_FANG_CHA_XUN, us.getPopedomKeys());
 							if (b) {
 						%>
 						<tr>
@@ -539,6 +541,23 @@
 										<td width="40" align="right" style="padding-bottom: 4px;"><img src="images/menuto.jpg" width="5" height="5" />
 										</td>
 										<td><a href="customer/customervisitsearch.jsp" target="mainFrame">回访查询</a>
+										</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+						<%} %>
+						<%
+							b = false; //!popedomService.isHasPopedom(us.getUserId(), String.valueOf(us.getUserType()), MenuKey.HUI_FANG_CHA_XUN, us.getPopedomKeys());
+							if (b) {
+						%>
+						<tr>
+							<td align="left">
+								<table width="100%" border="0" cellspacing="5" cellpadding="0">
+									<tr>
+										<td width="40" align="right" style="padding-bottom: 4px;"><img src="images/menuto.jpg" width="5" height="5" />
+										</td>
+										<td><a href="customer/analysisResult.action" target="mainFrame">评估结果</a>
 										</td>
 									</tr>
 								</table>
