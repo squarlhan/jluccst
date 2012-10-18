@@ -166,13 +166,28 @@ public class SellRecordServiceImpl implements ISellRecordService {
 	 * @return
 	 */
 	public  BigDecimal getConsumptionMoney(String customerId){
-		String hql ="select sum(record.receivable) from SellRecord as record where record. customerId=:customerId";
+		String hql ="select sum(record.receivable)  from SellRecord as record where record. customerId=:customerId";
 		Map<String, String> param = new HashMap<String,String>();
 		param.put("customerId",customerId);
 		List list = sellRecordDao.find(hql, param);
 		return (list!=null &&  list.size()>0 && list.get(0)!=null )? new BigDecimal( list.get(0).toString()) : new BigDecimal(0);
 	}
 	
+
+	/**
+	 * 根据客户Id,成交时间段查询回款情况  （总款－欠款）/总款
+	 * @param customerId 客户Id
+	 * @param bargainTimeBegin 成交开始时间
+	 * @param bargainTimeEnd   成交结束时间
+	 * @return 回款情况
+	 */
+	public  BigDecimal getConsumptionDebt(String customerId,String bargainTimeBegin,String bargainTimeEnd){
+		String hql ="select (sum(record.receivable)-sum(record.debt))/sum(record.receivable)  from SellRecord as record where record. customerId=:customerId  and  record. bargainTime >='"+bargainTimeBegin+"' and record. bargainTime <='"+bargainTimeEnd+"'";
+		Map<String, String> param = new HashMap<String,String>();
+		param.put("customerId",customerId);
+		List list = sellRecordDao.find(hql, param);
+		return (list!=null &&  list.size()>0 && list.get(0)!=null )? new BigDecimal( list.get(0).toString()) : new BigDecimal(0);
+	}
 	/**
 	 * 获取订单当前最大流水号
 	 * @param dataStr 日期串 yyyyMMdd
