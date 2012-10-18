@@ -141,4 +141,12 @@ public static final String MY_KE_HU_GUAN_LI = "MY_KE_HU_GUAN_LI";
 						 * 积分管理
 						 */
 						public static final String SUB_JI_FEN_GUAN_LI = "SUB_JI_FEN_GUAN_LI";
+	/**
+	 * 本部门
+	 */
+	public static final String SELF_DEPT = "SELF_DEPT";
+	/**
+	 * 本公司
+	 */
+	public static final String SELF_COMPANY = "SELF_COMPANY ";
 }
