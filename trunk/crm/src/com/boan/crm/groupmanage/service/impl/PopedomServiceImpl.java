@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import com.boan.crm.groupmanage.common.MenuKey;
 import com.boan.crm.groupmanage.dao.IPopedomDao;
 import com.boan.crm.groupmanage.model.Role;
 import com.boan.crm.groupmanage.service.IPopedomService;
@@ -119,5 +120,38 @@ public class PopedomServiceImpl implements IPopedomService{
 		return b;
 	}
 
+	@Override
+	public boolean isCompanyPopedom(String[] popedomKeys) throws Exception {
+		boolean b = false;
+		if( popedomKeys != null && popedomKeys.length > 0 )
+		{
+			for( String s : popedomKeys )
+			{
+				if( MenuKey.SELF_COMPANY.equalsIgnoreCase( s ) )
+				{
+					b = true;
+					break;
+				}
+			}
+		}
+		return b;
+	}
+
+	@Override
+	public boolean isDeptPopedom(String[] popedomKeys) throws Exception {
+		boolean b = false;
+		if( popedomKeys != null && popedomKeys.length > 0 )
+		{
+			for( String s : popedomKeys )
+			{
+				if( MenuKey.SELF_DEPT.equalsIgnoreCase( s ) )
+				{
+					b = true;
+					break;
+				}
+			}
+		}
+		return b;
+	}
 }
 

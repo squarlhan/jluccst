@@ -93,6 +93,22 @@ public boolean isCompanyAdministrator( String userId, String userType) throws Ex
 public boolean isSuperAdministrator( String userId, String userType ) throws Exception;
 
 /**
+ * 是否是公司权限
+ * @param popedomKeys
+ * @return
+ * @throws Exception
+ */
+public boolean isCompanyPopedom(String[] popedomKeys ) throws Exception;
+
+/**
+ *  是否是部门权限
+ * @param popedomKeys
+ * @return
+ * @throws Exception
+ */
+public boolean isDeptPopedom( String[] popedomKeys ) throws Exception;
+
+/**
  * 当角色删除的时候，权限记录也要删除
  * @param roleIds
  * 角色id
