@@ -47,7 +47,7 @@
 	  	 */
 		var _customer_submit = {
 			rules: {
-				"customer.id":{required:true,strangecode:true},
+				"sellRecord.customerId":{required:true,strangecode:true},
 				"sellRecord.bargainTime":{required:true,strangecode:true},
 				"sellRecord.goodsType":{required:true,strangecode:true},
 				"sellRecord.orderID":{required:true,strangecode:true},
