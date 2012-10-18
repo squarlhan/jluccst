@@ -121,7 +121,7 @@ public class PopedomServiceImpl implements IPopedomService{
 	}
 
 	@Override
-	public boolean isCompanyPopedom(String[] popedomKeys) throws Exception {
+	public boolean isHasCompanyPopedom(String[] popedomKeys) throws Exception {
 		boolean b = false;
 		if( popedomKeys != null && popedomKeys.length > 0 )
 		{
@@ -138,7 +138,7 @@ public class PopedomServiceImpl implements IPopedomService{
 	}
 
 	@Override
-	public boolean isDeptPopedom(String[] popedomKeys) throws Exception {
+	public boolean isHasDeptPopedom(String[] popedomKeys) throws Exception {
 		boolean b = false;
 		if( popedomKeys != null && popedomKeys.length > 0 )
 		{
