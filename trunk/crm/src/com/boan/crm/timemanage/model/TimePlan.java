@@ -51,10 +51,10 @@ public class TimePlan implements Serializable{
 	@Column(name = "SUBMIT_TIME" , length = 50)
 	private Calendar submitTime;
 	
-	@Column(name = "PLAN_CONTENT" , length = 50)
+	@Column(name = "PLAN_CONTENT" , length = 4000)
 	private String planContent;
 	
-	@Column(name = "MEMO" , length = 50)
+	@Column(name = "MEMO" , length = 4000)
 	private String memo;
 	
 	@Column(name = "CREATE_TIME")
