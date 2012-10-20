@@ -70,13 +70,13 @@ public class PurchaseBatch implements java.io.Serializable {
 	 * 是否到货，1表示到货，0表示未到
 	 */
 	@Column(name = "IS_ARRIVE")
-	private int isArrive;
+	private int isArrive = 0;
 
 	/**
 	 * 是否结账
 	 */
 	@Column(name = "IS_SETTLE_ACCOUNT")
-	private int isSettleAccount;
+	private int isSettleAccount = 0;
 	/**
 	 * 用户id
 	 */

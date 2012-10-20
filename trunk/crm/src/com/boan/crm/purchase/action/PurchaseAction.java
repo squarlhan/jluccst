@@ -19,6 +19,8 @@ import com.boan.crm.purchase.model.PurchaseBatch;
 import com.boan.crm.purchase.model.PurchaseRecord;
 import com.boan.crm.purchase.service.IPurchaseBatchService;
 import com.boan.crm.purchase.service.IPurchaseRecordService;
+import com.boan.crm.supplier.model.Supplier;
+import com.boan.crm.supplier.service.ISupplierService;
 import com.boan.crm.utils.action.BaseActionSupport;
 import com.boan.crm.utils.page.Pagination;
 
@@ -43,6 +45,8 @@ public class PurchaseAction extends BaseActionSupport {
 	private IPurchaseRecordService purchaseRecordService = null;
 	@Resource
 	private ICompanyService companyService = null;
+	@Resource
+	private ISupplierService supplierService = null;
 
 	private Pagination<PurchaseBatch> pagination = new Pagination<PurchaseBatch>();
 
@@ -55,18 +59,21 @@ public class PurchaseAction extends BaseActionSupport {
 	private String companyId = null;
 
 	private String[] purchaseBatchIds = null;
+	
+	private List<Supplier> supplierList = null;
 
 	/**
 	 * 显示采购记录
 	 * 
 	 * @return
 	 */
-	public String showPurchaseBatchInfo() {
+	public String showPurchaseBatchInfo() throws Exception{
 		if (StringUtils.isBlank(purchaseBatch.getId())) {
 			purchaseBatch = new PurchaseBatch();
 		} else {
 			purchaseBatch = purchaseBatchService.get(purchaseBatch.getId());
 		}
+		supplierList = supplierService.queryList(companyId);
 		return SUCCESS;
 	}
 
@@ -75,7 +82,7 @@ public class PurchaseAction extends BaseActionSupport {
 	 * 
 	 * @return
 	 */
-	public String savePurchaseBatch() {
+	public String savePurchaseBatch() throws Exception{
 		Date date = new Date();
 		if (StringUtils.isBlank(purchaseBatch.getId())) {
 			purchaseBatch.setId(null);
@@ -90,14 +97,14 @@ public class PurchaseAction extends BaseActionSupport {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		message.setContent("供应商信息保存成功！");
+		message.setContent("供应商采购批次信息保存成功，您可以录入采购记录了！");
 		// 保存日志开始
 		Log log = new Log();
 		log.setLogType(LogType.INFO);
-		log.setLogContent("[" + purchaseBatch.getBatchName() + "]" + "供应信息保存成功");
+		log.setLogContent("[" + purchaseBatch.getBatchName() + "]" + "供应商采购批次信息保存成功");
 		super.saveLog(log);
 		// 保存日志结束
-		return SUCCESS;
+		return this.showPurchaseBatchInfo();
 	}
 
 	/**
@@ -252,6 +259,22 @@ public class PurchaseAction extends BaseActionSupport {
 
 	public void setPurchaseRecord(PurchaseRecord purchaseRecord) {
 		this.purchaseRecord = purchaseRecord;
+	}
+
+	public ISupplierService getSupplierService() {
+		return supplierService;
+	}
+
+	public void setSupplierService(ISupplierService supplierService) {
+		this.supplierService = supplierService;
+	}
+
+	public List<Supplier> getSupplierList() {
+		return supplierList;
+	}
+
+	public void setSupplierList(List<Supplier> supplierList) {
+		this.supplierList = supplierList;
 	}
 
 }
