@@ -116,14 +116,14 @@
 												<strong>供应商名称：</strong>
 											</td>
 											<td height="26" align="left" bgcolor="#FFFFFF">
-												<s:textfield name="supplier.supplierName" id="supplierName" cssStyle="width: 290px;" maxlength="25"></s:textfield>
+												<s:textfield name="supplier.supplierName" id="supplierName" cssStyle="width: 200px;" maxlength="25"></s:textfield>
 												<font color="red">*</font>
 											</td>
 											<td height="26" align="right" bgcolor="#FFFFFF">
 												<strong>供应商编号：</strong>
 											</td>
 											<td height="26" align="left" bgcolor="#FFFFFF">
-												<s:textfield name="supplier.supplierNumber" id="supplierNumber" cssStyle="width: 290px;" maxlength="25"></s:textfield>
+												<s:textfield name="supplier.supplierNumber" id="supplierNumber" cssStyle="width: 200px;" maxlength="25"></s:textfield>
 												<font color="red">*</font>
 											</td>
 										</tr>
@@ -132,20 +132,20 @@
 												<strong>成交日期：</strong>
 											</td>
 											<td height="26" align="left" bgcolor="#FFFFFF">
-												<s:textfield name="supplier.supplierNumber" id="supplierNumber" cssStyle="width: 290px;" maxlength="25"></s:textfield>
+												<s:textfield name="supplier.supplierNumber" id="supplierNumber" cssStyle="width: 200px;" maxlength="25"></s:textfield>
 												<font color="red">*</font>
 											</td>
 											<td height="26" colspan="2" align="center" bgcolor="#FFFFFF">
 												<input type="checkbox">已到货
-												<input type="checkbox">已到货
+												<input type="checkbox">已结账
 												<input name="button1" type="button" class="btn_2_3"
 													id="button1" value="确定">
-												<input name="button2" type="button" class="btn_2_3"
-													id="button2" value="取消">
 												<input name="addbtn" type="button" class="btn_2_3" id="addbtn"
-													value="添加">
+													value="添加记录">
 												<input name="deletepointbtn" type="button" class="btn_4"
-													id="deletepointbtn" value="删除所选">
+													id="deletepointbtn" value="删除记录">
+												<input name="button2" type="button" class="btn_2_3"
+													id="button2" value="关闭">
 											</td>
 										</tr>
 									</table>
@@ -156,28 +156,31 @@
 									<s:checkbox theme="simple" id="cbk_all" name="all"></s:checkbox>
 								</td>
 								<td align="center" background="<%=path %>/images/headerbg.jpg">
-									<strong>进货日期</strong>
+									<strong>产品名称</strong>
 								</td>
 								<td align="center" background="<%=path %>/images/headerbg.jpg">
-									<strong>供应商</strong>
+									<strong>规格</strong>
 								</td>
 								<td align="center" background="<%=path %>/images/headerbg.jpg">
-									<strong>供应商编号</strong>
+									<strong>克重</strong>
 								</td>
 								<td align="center" background="<%=path %>/images/headerbg.jpg">
-									<strong>应付总额</strong>
+									<strong>吨</strong>
 								</td>
 								<td align="center" background="<%=path %>/images/headerbg.jpg">
-									<strong>实付总额</strong>
+									<strong>数量</strong>
+								</td>
+								<td align="center" background="<%=path %>/images/headerbg.jpg">
+									<strong>运费</strong>
+								</td>
+								<td align="center" background="<%=path %>/images/headerbg.jpg">
+									<strong>应付款</strong>
+								</td>
+								<td align="center" background="<%=path %>/images/headerbg.jpg">
+									<strong>实付款</strong>
 								</td>
 								<td align="center" background="<%=path %>/images/headerbg.jpg">
 									<strong>欠款</strong>
-								</td>
-								<td align="center" background="<%=path %>/images/headerbg.jpg">
-									<strong>是否结账</strong>
-								</td>
-								<td align="center" background="<%=path %>/images/headerbg.jpg">
-									<strong>是否到货</strong>
 								</td>
 								<td align="center" background="<%=path %>/images/headerbg.jpg">
 									<strong>操作</strong>
@@ -207,6 +210,9 @@
 									<td height="26" align="center" bgcolor="#FFFFFF">
 										<s:property value="memo" />
 									</td>
+									<td height="26" align="center" bgcolor="#FFFFFF">
+										<s:property value="memo" />
+									</td>
 									
 									<td height="26" align="center" bgcolor="#FFFFFF">
 										<s:property value="memo" />
@@ -226,7 +232,7 @@
 								</tr>
 							</s:iterator>
 							<tr>
-								<td height="26" colspan="10" align="center" bgcolor="#FFFFFF">
+								<td height="26" colspan="11" align="center" bgcolor="#FFFFFF">
 									<page:pages currentPage="pagination.currentPage"
 										totalPages="pagination.totalPages"
 										totalRows="pagination.totalRows" styleClass="page"
