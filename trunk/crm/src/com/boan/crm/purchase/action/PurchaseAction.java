@@ -16,7 +16,9 @@ import com.boan.crm.backstagemanage.model.Log;
 import com.boan.crm.backstagemanage.service.ICompanyService;
 import com.boan.crm.common.Message;
 import com.boan.crm.purchase.model.PurchaseBatch;
+import com.boan.crm.purchase.model.PurchaseRecord;
 import com.boan.crm.purchase.service.IPurchaseBatchService;
+import com.boan.crm.purchase.service.IPurchaseRecordService;
 import com.boan.crm.utils.action.BaseActionSupport;
 import com.boan.crm.utils.page.Pagination;
 
@@ -26,7 +28,7 @@ import com.boan.crm.utils.page.Pagination;
  * @author Administrator
  * 
  */
-@Controller("purchaseBatchAction")
+@Controller("purchaseAction")
 @Scope("prototype")
 public class PurchaseAction extends BaseActionSupport {
 
@@ -37,13 +39,16 @@ public class PurchaseAction extends BaseActionSupport {
 
 	@Resource
 	private IPurchaseBatchService purchaseBatchService = null;
-
+	@Resource
+	private IPurchaseRecordService purchaseRecordService = null;
 	@Resource
 	private ICompanyService companyService = null;
 
 	private Pagination<PurchaseBatch> pagination = new Pagination<PurchaseBatch>();
 
 	private PurchaseBatch purchaseBatch = null;
+	
+	private PurchaseRecord purchaseRecord = null;
 
 	private Message message = new Message();
 
@@ -52,7 +57,7 @@ public class PurchaseAction extends BaseActionSupport {
 	private String[] purchaseBatchIds = null;
 
 	/**
-	 * 显示供应商
+	 * 显示采购记录
 	 * 
 	 * @return
 	 */
@@ -66,7 +71,7 @@ public class PurchaseAction extends BaseActionSupport {
 	}
 
 	/**
-	 * 保存供应商
+	 * 保存批次
 	 * 
 	 * @return
 	 */
@@ -131,6 +136,48 @@ public class PurchaseAction extends BaseActionSupport {
 		return NONE;
 	}
 
+	/**
+	 * 显示采购记录
+	 * 
+	 * @return
+	 */
+	public String showPurchaseRecordInfo() {
+		if (StringUtils.isBlank(purchaseRecord.getId())) {
+			purchaseRecord = new PurchaseRecord();
+		} else {
+			purchaseRecord = purchaseRecordService.get(purchaseRecord.getId());
+		}
+		return SUCCESS;
+	}
+	/**
+	 * 保存采购记录
+	 * 
+	 * @return
+	 */
+	public String savePurchaseRecord() {
+		Date date = new Date();
+		if (StringUtils.isBlank(purchaseRecord.getId())) {
+			purchaseRecord.setId(null);
+		}
+		//purchaseRecord.setCompanyId(sessionCompanyId);
+		//purchaseRecord.setCompanyName(sessionCompanyName);
+		//purchaseRecord.setUserId(sessionUserId);
+		//purchaseRecord.setUserName(sessionUserCName);
+		purchaseRecord.setCreateTime(date);
+		try {
+			purchaseRecordService.saveOrUpdate(purchaseRecord);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		message.setContent("采购记录保存成功！");
+		// 保存日志开始
+		Log log = new Log();
+		log.setLogType(LogType.INFO);
+		log.setLogContent("[" + purchaseRecord.getPrductName() + "]" + "采购记录保存成功");
+		super.saveLog(log);
+		// 保存日志结束
+		return SUCCESS;
+	}
 	public IPurchaseBatchService getPurchaseBatchService() {
 		return purchaseBatchService;
 	}
@@ -189,6 +236,22 @@ public class PurchaseAction extends BaseActionSupport {
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	public IPurchaseRecordService getPurchaseRecordService() {
+		return purchaseRecordService;
+	}
+
+	public void setPurchaseRecordService(IPurchaseRecordService purchaseRecordService) {
+		this.purchaseRecordService = purchaseRecordService;
+	}
+
+	public PurchaseRecord getPurchaseRecord() {
+		return purchaseRecord;
+	}
+
+	public void setPurchaseRecord(PurchaseRecord purchaseRecord) {
+		this.purchaseRecord = purchaseRecord;
 	}
 
 }

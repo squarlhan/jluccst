@@ -3,20 +3,30 @@
     "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
     "http://struts.apache.org/dtds/struts-2.3.dtd">
 <struts>
-	<!-- 供应商Action -->
-	<package name="supplier" extends="struts-default" namespace="/">
-		<action name="showSupplierListAction" class="supplierAction" method="showSupplierList">
-			<result name="success">/suppliermanage/supplierlist.jsp</result>
-			<result name="input">/suppliermanage/supplierlist.jsp</result>
+	<!-- 采购管理Action -->
+	<package name="purchase" extends="struts-default" namespace="/">
+	<!-- 采购批次 -->
+		<action name="showPurchaseBatchListAction" class="purchaseAction" method="showPurchaseBatchList">
+			<result name="success">/purchasemanage/purchasebatchlist.jsp</result>
+			<result name="input">/purchasemanage/purchasebatchlist.jsp</result>
 		</action>
-		<action name="showSupplierInfoAction" class="supplierAction" method="showSupplierInfo">
-			<result name="success">/suppliermanage/supplierinfo.jsp</result>
-			<result name="input">/suppliermanage/supplierinfo.jsp</result>
+		<action name="showPurchaseBatchInfoAction" class="purchaseAction" method="showPurchaseBatchInfo">
+			<result name="success">/purchasemanage/purchasebatchinfo.jsp</result>
+			<result name="input">/purchasemanage/purchasebatchinfo.jsp</result>
 		</action>
-		<action name="saveSupplierAction" class="supplierAction" method="saveSupplier">
+		<action name="savePurchaseBatchAction" class="purchaseAction" method="savePurchaseBatch">
 			<result name="success">/common/message.jsp</result>
 			<result name="error">/common/messagenoclose.jsp</result>
 		</action>
-		<action name="deleteSupplierAction" class="supplierAction" method="deleteSupplier" />
+		<action name="deletePurchaseBatchAction" class="purchaseAction" method="deletePurchaseBatch" />
+		<!-- 采购记录 -->
+		<action name="showPurchaseRecordInfoAction" class="purchaseAction" method="showPurchaseRecordInfo">
+			<result name="success">/purchasemanage/purchaserecordinfo.jsp</result>
+			<result name="input">/purchasemanage/purchaserecordinfo.jsp</result>
+		</action>
+		<action name="savePurchaseRecordAction" class="purchaseAction" method="savePurchaseRecord">
+			<result name="success">/common/message.jsp</result>
+			<result name="error">/common/messagenoclose.jsp</result>
+		</action>
 	</package>
 </struts>
