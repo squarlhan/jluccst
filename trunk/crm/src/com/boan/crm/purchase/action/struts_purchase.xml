@@ -11,8 +11,8 @@
 			<result name="input">/purchasemanage/purchasebatchlist.jsp</result>
 		</action>
 		<action name="showPurchaseBatchInfoAction" class="purchaseAction" method="showPurchaseBatchInfo">
-			<result name="success">/purchasemanage/purchasebatchinfo.jsp</result>
-			<result name="input">/purchasemanage/purchasebatchinfo.jsp</result>
+			<result name="success">/purchasemanage/purchaserecordlist.jsp</result>
+			<result name="input">/purchasemanage/purchaserecordlist.jsp</result>
 		</action>
 		<action name="savePurchaseBatchAction" class="purchaseAction" method="savePurchaseBatch">
 			<result name="success">/common/message.jsp</result>
