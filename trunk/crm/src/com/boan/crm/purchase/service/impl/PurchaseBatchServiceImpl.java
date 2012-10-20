@@ -30,8 +30,8 @@ public class PurchaseBatchServiceImpl implements IPurchaseBatchService {
 	}
 
 	@Override
-	public void saveOrUpdate(PurchaseBatch supplier) {
-		dao.saveOrUpdate(supplier);
+	public void saveOrUpdate(PurchaseBatch purchaseBatch) {
+		dao.saveOrUpdate(purchaseBatch);
 	}
 
 	@Override
@@ -41,9 +41,9 @@ public class PurchaseBatchServiceImpl implements IPurchaseBatchService {
 
 	@Override
 	public Pagination<PurchaseBatch> findForPage(Map<String, ?> values, Pagination<PurchaseBatch> pagination) {
-		String hql = "from Supplier where companyId = :companyId order by  createTime asc";
+		String hql = "from PurchaseBatch where companyId = :companyId order by  createTime asc";
 		List<PurchaseBatch> data = dao.findForPage(hql, values, pagination.getStartIndex(), pagination.getPageSize());
-		hql = "select count(*) from Supplier  where companyId = :companyId ";
+		hql = "select count(*) from PurchaseBatch  where companyId = :companyId ";
 		int totalRows = dao.findCountForPage(hql, values);
 		pagination.setTotalRows(totalRows);
 		pagination.setData(data);

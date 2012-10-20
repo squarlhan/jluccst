@@ -66,24 +66,29 @@ public class PurchaseRecord implements java.io.Serializable {
 	/**
 	 * 运费
 	 */
-	@Column(name = "FREIGHT", length = 50)
-	private String freight;
+	@Column(name = "FREIGHT")
+	private float freight;
 	/**
 	 * 应付款
 	 */
-	@Column(name = "ACCOUNT_PAYABLE", length = 50)
-	private String accountPayable;
+	@Column(name = "ACCOUNT_PAYABLE")
+	private float accountPayable;
 	/**
 	 * 实付款
 	 */
-	@Column(name = "ACTUAL_PAYMENT", length = 50)
-	private String actualPayment;
+	@Column(name = "ACTUAL_PAYMENT")
+	private float actualPayment;
 	/**
 	 * 欠款
 	 */
-	@Column(name = "AMOUNT_IN_ARREAR", length = 50)
-	private String amountInArrear;
+	@Column(name = "AMOUNT_IN_ARREAR")
+	private float amountInArrear;
 
+	/**
+	 * 备注
+	 */
+	@Column(name = "MEMO", length = 1000)
+	private String memo;
 	/**
 	 * 创建时间
 	 */
@@ -146,35 +151,35 @@ public class PurchaseRecord implements java.io.Serializable {
 		this.amount = amount;
 	}
 
-	public String getFreight() {
+	public float getFreight() {
 		return freight;
 	}
 
-	public void setFreight(String freight) {
+	public void setFreight(float freight) {
 		this.freight = freight;
 	}
 
-	public String getAccountPayable() {
+	public float getAccountPayable() {
 		return accountPayable;
 	}
 
-	public void setAccountPayable(String accountPayable) {
+	public void setAccountPayable(float accountPayable) {
 		this.accountPayable = accountPayable;
 	}
 
-	public String getActualPayment() {
+	public float getActualPayment() {
 		return actualPayment;
 	}
 
-	public void setActualPayment(String actualPayment) {
+	public void setActualPayment(float actualPayment) {
 		this.actualPayment = actualPayment;
 	}
 
-	public String getAmountInArrear() {
+	public float getAmountInArrear() {
 		return amountInArrear;
 	}
 
-	public void setAmountInArrear(String amountInArrear) {
+	public void setAmountInArrear(float amountInArrear) {
 		this.amountInArrear = amountInArrear;
 	}
 
@@ -188,6 +193,14 @@ public class PurchaseRecord implements java.io.Serializable {
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	public String getMemo() {
+		return memo;
+	}
+
+	public void setMemo(String memo) {
+		this.memo = memo;
 	}
 
 }
