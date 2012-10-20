@@ -312,3 +312,25 @@ $.validator.addMethod("validatecertificatenum", function(value, element){
 	
 	return true;
 },"日期格式不正确！");
+ 
+
+ $.validator.addMethod("isNotNegativeNum", function(value, element){
+   if(value != null && value != ""){
+    	var a = /^\d+$/.test(value);        //验证正数
+   	var b = /^\d+\.\d+$/.test(value);   //验证正小数
+   	if(!(a || b)){
+           return  false;
+ 	}
+   }
+      return true;
+  },"请输入非负数");
+
+ $.validator.addMethod("isPositiveNum", function(value, element){
+ 	  if(value != null && value != ""){
+ 	   	var a = /^\d+$/.test(value);        //验证正数
+ 	  	if(!a){
+ 	          return  false;
+ 		}
+ 	  }
+ 	     return true;
+ 	 },"请输入正整数");
