@@ -42,18 +42,37 @@
 -->
 </style>
 		<script type="text/javascript">
-	$(function() {
+		var _customer_submit = {
+				rules: {
+					"purchaseRecord.prductName":{required:true,strangecode:true},
+					"purchaseRecord.specification":{required:true,strangecode:true},
+					"purchaseRecord.memo":{strangecode:true,maxlength:500}
+					}
+				};
+		$(document).ready(function(){
+	  		$.validator.setDefaults({
+				debug: false,onkeyup: false,onfocusout:false,focusCleanup: true,
+			    errorPlacement:function(error, element) {},
+				invalidHandler: function(form, validator) {
+		        	$.each(validator.invalid,function(key,value){
+		            	alert(value);document.getElementById(key).focus();return false;
+		        	}); 
+		    	}
+			})
+			$.fn.save();
+	  		$.fn.close();
+	  		$.fn.initpage();
 		/**
 		 * 添加
 		 */
 		$("#addbtn").click(
-				function() {
-					parent.parent.tipsWindown("添加采购记录","iframe:showPurchaseRecordInfoAction.action?companyId=<s:property value="companyId"/>&purchaseRecord.id=", "460", "450", "true", "", "true", "no");
-					parent.parent.$("#windown-close").bind('click', function() {
-						window.location.href = "./showPurchaseBatchInfoAction.action?companyId=<s:property value="companyId"/>";
-					});
-
+			function() {
+				parent.parent.tipsWindown("添加采购记录","iframe:showPurchaseRecordInfoAction.action?companyId=<s:property value="companyId"/>&purchaseRecord.id=", "460", "450", "true", "", "true", "no");
+				parent.parent.$("#windown-close").bind('click', function() {
+					window.location.href = "./showPurchaseBatchInfoAction.action?companyId=<s:property value="companyId"/>";
 				});
+
+			});
 		$.fn.checkall("cbk_all");
 		$.fn.uncheckall("purchaseBatchIds", "cbk_all");
 
@@ -95,7 +114,36 @@
 				});
 			}
 		});
-	});
+	  	});
+	/**
+  	 * 保存
+  	 */
+	$.fn.save = function(){
+		$("#button1").click(function() {
+			var validate_settings_submit = jQuery.extend({}, _customer_submit);
+           	var validator = $("form").validate(validate_settings_submit);
+           	if(!validator.form()){
+				return false;
+			}
+           	form1.action = "./savePurchaseBatchAction.action";
+           	form1.target = "iframe1";
+           	form1.submit();
+       	});
+  	}
+	/**
+	 * 关闭
+	 */
+ 	$.fn.close = function(){
+	 	$("#button2").click(function() {
+			parent.$("#windown-close").click();
+		});
+	}
+	/**
+	 * 初始化页面
+	 */
+	$.fn.initpage = function(){
+		$("#prductName").focus();
+	}
 </script>
 
 	</head>
@@ -145,7 +193,7 @@
 												<input name="deletepointbtn" type="button" class="btn_4"
 													id="deletepointbtn" value="删除记录">
 												<input name="button2" type="button" class="btn_2_3"
-													id="button2" value="关闭">
+													id="button2" value="返回">
 											</td>
 										</tr>
 									</table>

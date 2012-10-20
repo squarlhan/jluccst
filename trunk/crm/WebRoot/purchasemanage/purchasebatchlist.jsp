@@ -48,6 +48,8 @@
 		 */
 		$("#addbtn").click(
 				function() {
+					window.location.href="showPurchaseBatchInfoAction.action?companyId=<s:property value="companyId"/>&purchaseBatch.id=";
+					return ;
 					parent.parent.tipsWindown("添加采购批次","iframe:showPurchaseBatchInfoAction.action?companyId=<s:property value="companyId"/>&purchaseBatch.id=", "860", "650", "true", "", "true", "no");
 					parent.parent.$("#windown-close").bind('click', function() {
 						window.location.href = "./showPurchaseBatchListAction.action?companyId=<s:property value="companyId"/>";
