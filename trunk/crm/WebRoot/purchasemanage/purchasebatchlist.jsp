@@ -48,7 +48,7 @@
 		 */
 		$("#addbtn").click(
 				function() {
-					parent.parent.tipsWindown("添加采购批次","iframe:showPurchaseBatchInfoAction.action?companyId=<s:property value="companyId"/>&purchaseBatch.id=", "960", "650", "true", "", "true", "no");
+					parent.parent.tipsWindown("添加采购批次","iframe:showPurchaseBatchInfoAction.action?companyId=<s:property value="companyId"/>&purchaseBatch.id=", "860", "650", "true", "", "true", "no");
 					parent.parent.$("#windown-close").bind('click', function() {
 						window.location.href = "./showPurchaseBatchListAction.action?companyId=<s:property value="companyId"/>";
 					});
@@ -63,7 +63,7 @@
 		$('a[name="edit"]').each(function() {
 				$(this).click( function() {
 						var url = $(this).attr("url");
-						parent.parent.tipsWindown( "修改采购批次", "iframe:" + url, "960","650", "true", "","true", "no");
+						parent.parent.tipsWindown( "修改采购批次", "iframe:" + url, "860","650", "true", "","true", "no");
 						parent.parent.$("#windown-close").bind('click',function() {
 								window.location.href = "./showPurchaseBatchListAction.action?companyId=<s:property value="companyId"/>";
 							});
