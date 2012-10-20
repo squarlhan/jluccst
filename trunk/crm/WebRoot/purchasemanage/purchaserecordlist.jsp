@@ -8,7 +8,7 @@
 	 * All right reserved.
 	 */
 	/**
-	 * @author yangGY
+	 * @author XXX
 	 * @version 1.0
 	 * @audit  
 	 */
@@ -44,9 +44,8 @@
 		<script type="text/javascript">
 		var _customer_submit = {
 				rules: {
-					"purchaseRecord.prductName":{required:true,strangecode:true},
-					"purchaseRecord.specification":{required:true,strangecode:true},
-					"purchaseRecord.memo":{strangecode:true,maxlength:500}
+					"purchaseBatch.supplierId":{required:true,strangecode:true},
+					"purchaseBatch.transactionDate":{required:true}
 					}
 				};
 		$(document).ready(function(){
@@ -126,7 +125,6 @@
 				return false;
 			}
            	form1.action = "./savePurchaseBatchAction.action";
-           	form1.target = "iframe1";
            	form1.submit();
        	});
   	}
@@ -135,7 +133,7 @@
 	 */
  	$.fn.close = function(){
 	 	$("#button2").click(function() {
-			parent.$("#windown-close").click();
+			window.location.href="./showPurchaseBatchListAction.action";
 		});
 	}
 	/**
@@ -164,15 +162,15 @@
 												<strong>供应商名称：</strong>
 											</td>
 											<td height="26" align="left" bgcolor="#FFFFFF">
-												<s:textfield name="supplier.supplierName" id="supplierName" cssStyle="width: 200px;" maxlength="25"></s:textfield>
+												<s:select list="supplierList"  id="supplierId"  name="purchaseBatch.supplierId"  headerKey=""  headerValue="==请选择供应商=="  listKey="id"  listValue="supplierName"  cssStyle="width: 200px;" >
+												</s:select>
 												<font color="red">*</font>
 											</td>
 											<td height="26" align="right" bgcolor="#FFFFFF">
 												<strong>供应商编号：</strong>
 											</td>
 											<td height="26" align="left" bgcolor="#FFFFFF">
-												<s:textfield name="supplier.supplierNumber" id="supplierNumber" cssStyle="width: 200px;" maxlength="25"></s:textfield>
-												<font color="red">*</font>
+												<s:textfield name="purchaseBatch.supplierNumber" id="supplierNumber" cssStyle="width: 200px;" maxlength="25" readonly="true"></s:textfield>
 											</td>
 										</tr>
 										<tr>
@@ -180,7 +178,7 @@
 												<strong>成交日期：</strong>
 											</td>
 											<td height="26" align="left" bgcolor="#FFFFFF">
-												<s:textfield name="supplier.supplierNumber" id="supplierNumber" cssStyle="width: 200px;" maxlength="25"></s:textfield>
+												<s:textfield name="purchaseBatch.transactionDate"  id="transactionDate"  cssStyle="width: 200px;" maxlength="25"></s:textfield>
 												<font color="red">*</font>
 											</td>
 											<td height="26" colspan="2" align="center" bgcolor="#FFFFFF">
@@ -244,7 +242,7 @@
 										<s:property value="supplierName" />
 									</td>
 									<td height="26" align="center" bgcolor="#FFFFFF">
-										<s:property value="supplierNumber" />
+										<s:property value="transactionDate" />
 									</td>
 									<td height="26" align="center" bgcolor="#FFFFFF" style="work-break:break-all;">
 										<s:property value="product" />

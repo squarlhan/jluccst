@@ -178,6 +178,9 @@
 									<td height="26" align="center" bgcolor="#FFFFFF">
 										<s:property value="memo" />
 									</td>
+									<td height="26" align="center" bgcolor="#FFFFFF">
+										<s:property value="memo" />
+									</td>
 									
 									<td height="26" align="center" bgcolor="#FFFFFF">
 										<s:property value="memo" />
@@ -197,7 +200,7 @@
 								</tr>
 							</s:iterator>
 							<tr>
-								<td height="26" colspan="10" align="center" bgcolor="#FFFFFF">
+								<td height="26" colspan="11" align="center" bgcolor="#FFFFFF">
 									<page:pages currentPage="pagination.currentPage"
 										totalPages="pagination.totalPages"
 										totalRows="pagination.totalRows" styleClass="page"
