@@ -66,6 +66,22 @@ public class PurchaseBatch implements java.io.Serializable {
 	 */
 	@Column(name = "TRANSACTION_DATE", length=50)
 	private String transactionDate;
+	
+	/**
+	 * 总应付款
+	 */
+	@Column(name = "TOTAL_ACCOUNT_PAYABLE")
+	private float totalAccountPayable;
+	/**
+	 * 总实付款
+	 */
+	@Column(name = "TOTAL_ACTUAL_PAYMENT")
+	private float totalActualPayment;
+	/**
+	 * 总欠款
+	 */
+	@Column(name = "TOTAL_AMOUNT_IN_ARREAR")
+	private float totalAmountInArrear;
 	/**
 	 * 是否到货，1表示到货，0表示未到
 	 */
@@ -202,5 +218,57 @@ public class PurchaseBatch implements java.io.Serializable {
 	public void setCompanyName(String companyName) {
 		this.companyName = companyName;
 	}
+	/**
+	 * 中文结账状态
+	 * @return
+	 */
+	public String getSettleAccountCn(){
+		if( isSettleAccount == 0 )
+		{
+			return "未结账";
+		}else if( isSettleAccount == 1 )
+		{  
+			return "已结账";
+		}
+		return "未知状态";
+	}
+	/**
+	 * 到货中文状态
+	 * @return
+	 */
+	public String getArriveCn(){
+		if( isSettleAccount == 0 )
+		{
+			return "未到货";
+		}else if( isSettleAccount == 1 )
+		{  
+			return "已到货";
+		}
+		return "未知状态";
+	}
 
+	public float getTotalAccountPayable() {
+		return totalAccountPayable;
+	}
+
+	public void setTotalAccountPayable(float totalAccountPayable) {
+		this.totalAccountPayable = totalAccountPayable;
+	}
+
+	public float getTotalActualPayment() {
+		return totalActualPayment;
+	}
+
+	public void setTotalActualPayment(float totalActualPayment) {
+		this.totalActualPayment = totalActualPayment;
+	}
+
+	public float getTotalAmountInArrear() {
+		return totalAmountInArrear;
+	}
+
+	public void setTotalAmountInArrear(float totalAmountInArrear) {
+		this.totalAmountInArrear = totalAmountInArrear;
+	}
+	
 }
