@@ -49,5 +49,8 @@ public class PurchaseRecordServiceImpl implements IPurchaseRecordService {
 	public void deleteByBatchIds( String... batchIds ) throws Exception {
 		dao.deleteByBatchIds(batchIds);
 	}
+	public Object[] queryRecordSum(String batchId){
+		return dao.queryRecordSum(batchId);
+	}
 
 }

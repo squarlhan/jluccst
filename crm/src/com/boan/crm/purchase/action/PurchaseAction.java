@@ -49,11 +49,11 @@ public class PurchaseAction extends BaseActionSupport {
 	private ISupplierService supplierService = null;
 
 	private Pagination<PurchaseBatch> pagination = new Pagination<PurchaseBatch>();
-	
+
 	private Pagination<PurchaseRecord> paginationRecord = new Pagination<PurchaseRecord>();
 
 	private PurchaseBatch purchaseBatch = null;
-	
+
 	private PurchaseRecord purchaseRecord = null;
 
 	private Message message = new Message();
@@ -61,13 +61,13 @@ public class PurchaseAction extends BaseActionSupport {
 	private String companyId = null;
 
 	private String[] purchaseBatchIds = null;
-	
+
 	private String[] purchaseRecordIds = null;
-	
+
 	private List<Supplier> supplierList = null;
-	
+
 	private String isArrive = null;
-	
+
 	private String isSettleAccount = null;
 
 	/**
@@ -75,19 +75,19 @@ public class PurchaseAction extends BaseActionSupport {
 	 * 
 	 * @return
 	 */
-	public String showPurchaseRecordList() throws Exception{
+	public String showPurchaseRecordList() throws Exception {
 		companyId = sessionCompanyId;
 		if (StringUtils.isBlank(purchaseRecord.getBatchId())) {
 			purchaseBatch = new PurchaseBatch();
 			paginationRecord = new Pagination<PurchaseRecord>();
 		} else {
 			purchaseBatch = purchaseBatchService.get(purchaseRecord.getBatchId());
-			//提取采购记录
+			// 提取采购记录
 			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("batchId", purchaseRecord.getBatchId());
 			paginationRecord = purchaseRecordService.findForPage(map, paginationRecord);
 		}
-		//供应商记录
+		// 供应商记录
 		supplierList = supplierService.queryList(companyId);
 		return SUCCESS;
 	}
@@ -97,7 +97,7 @@ public class PurchaseAction extends BaseActionSupport {
 	 * 
 	 * @return
 	 */
-	public String savePurchaseBatch() throws Exception{
+	public String savePurchaseBatch() throws Exception {
 		Date date = new Date();
 		if (StringUtils.isBlank(purchaseBatch.getId())) {
 			purchaseBatch.setId(null);
@@ -107,20 +107,20 @@ public class PurchaseAction extends BaseActionSupport {
 		purchaseBatch.setUserId(sessionUserId);
 		purchaseBatch.setUserName(sessionUserCName);
 		purchaseBatch.setCreateTime(date);
-		//保存状态
-		if( "1".equals(isArrive) ){
+		// 保存状态
+		if ("1".equals(isArrive)) {
 			purchaseBatch.setIsArrive(1);
-		}else{
+		} else {
 			purchaseBatch.setIsArrive(0);
 		}
-		if( "1".equals(isSettleAccount) ){
+		if ("1".equals(isSettleAccount)) {
 			purchaseBatch.setIsSettleAccount(1);
-		}else{
+		} else {
 			purchaseBatch.setIsSettleAccount(0);
 		}
-		//保存供应商信息
+		// 保存供应商信息
 		Supplier su = supplierService.get(purchaseBatch.getSupplierId());
-		if( su != null ){
+		if (su != null) {
 			purchaseBatch.setSupplierName(su.getSupplierName());
 			purchaseBatch.setSupplierNumber(su.getSupplierNumber());
 		}
@@ -137,7 +137,7 @@ public class PurchaseAction extends BaseActionSupport {
 		super.saveLog(log);
 		// 保存日志结束
 		purchaseRecord = new PurchaseRecord();
-		purchaseRecord.setBatchId(purchaseBatch.getId()) ;
+		purchaseRecord.setBatchId(purchaseBatch.getId());
 		return this.showPurchaseRecordList();
 	}
 
@@ -151,6 +151,16 @@ public class PurchaseAction extends BaseActionSupport {
 		companyId = sessionCompanyId;
 		map.put("companyId", companyId);
 		pagination = purchaseBatchService.findForPage(map, pagination);
+		if (pagination != null && pagination.getData() != null && pagination.getData().size() > 0) {
+			for (int i = 0; i < pagination.getData().size(); i++) {
+				// 数组长度为四，0-3，分别表示：总运费，总应付款，总实付款，总欠款
+				Object[] objects = purchaseRecordService.queryRecordSum(pagination.getData().get(i).getId());
+				//总运费暂时不用显示到页面上
+				pagination.getData().get(i).setTotalAccountPayable(Float.parseFloat(objects[1].toString()));
+				pagination.getData().get(i).setTotalActualPayment(Float.parseFloat(objects[2].toString()));
+				pagination.getData().get(i).setTotalAmountInArrear(Float.parseFloat(objects[3].toString()));
+			}
+		}
 		return SUCCESS;
 	}
 
@@ -177,6 +187,7 @@ public class PurchaseAction extends BaseActionSupport {
 		purchaseRecordService.deleteByBatchIds(purchaseBatchIds);
 		return NONE;
 	}
+
 	/**
 	 * 删除记录
 	 * 
@@ -215,6 +226,7 @@ public class PurchaseAction extends BaseActionSupport {
 		purchaseRecord.setBatchId(batchId);
 		return SUCCESS;
 	}
+
 	/**
 	 * 保存采购记录
 	 * 
@@ -225,10 +237,10 @@ public class PurchaseAction extends BaseActionSupport {
 		if (StringUtils.isBlank(purchaseRecord.getId())) {
 			purchaseRecord.setId(null);
 		}
-		//purchaseRecord.setCompanyId(sessionCompanyId);
-		//purchaseRecord.setCompanyName(sessionCompanyName);
-		//purchaseRecord.setUserId(sessionUserId);
-		//purchaseRecord.setUserName(sessionUserCName);
+		// purchaseRecord.setCompanyId(sessionCompanyId);
+		// purchaseRecord.setCompanyName(sessionCompanyName);
+		// purchaseRecord.setUserId(sessionUserId);
+		// purchaseRecord.setUserName(sessionUserCName);
 		purchaseRecord.setCreateTime(date);
 		try {
 			purchaseRecordService.saveOrUpdate(purchaseRecord);
@@ -244,6 +256,7 @@ public class PurchaseAction extends BaseActionSupport {
 		// 保存日志结束
 		return SUCCESS;
 	}
+
 	public IPurchaseBatchService getPurchaseBatchService() {
 		return purchaseBatchService;
 	}
