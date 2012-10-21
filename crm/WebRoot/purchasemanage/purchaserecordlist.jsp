@@ -31,8 +31,13 @@
 		<meta http-equiv="cache-control" content="no-cache">
 		<meta http-equiv="expires" content="0">
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<j:scriptlink css="true" tipswindow="true" jmessagebox="true"
-			jquery="true" validate="true" jfunction="true" />
+		<j:scriptlink css="true" tipswindow="true" jmessagebox="true" jquery="true" validate="true" jfunction="true" />
+	<link rel="stylesheet" media="all" type="text/css" href="http://127.0.0.1:8080/boan-crm/js/timepicke/jquery-ui-1.7.3.custom.css" />
+	<link rel="stylesheet" media="all" type="text/css" href="http://127.0.0.1:8080/boan-crm/js/timepicke/jquery-ui-timepicker-addon.css" />
+	<script type="text/javascript" src="http://127.0.0.1:8080/boan-crm/js/timepicke/jquery-ui-1.7.3.custom.min.js"></script>
+	<script type="text/javascript" src="http://127.0.0.1:8080/boan-crm/js/timepicke/jquery-ui-timepicker-addon.js"></script>
+	<script type="text/javascript" src="http://127.0.0.1:8080/boan-crm/js/timepicke/jquery-ui-timepicker-zh-CN.js"></script>
+	<script type="text/javascript" src="http://127.0.0.1:8080/boan-crm/js/timepicke/jquery-ui-sliderAccess.js"></script>
 		<style type="text/css">
 <!--
 .STYLE1 {
@@ -81,7 +86,7 @@
 		 */
 		$('a[name="edit"]').each(function() {
 				$(this).click( function() {
-					var myBatchId = $("#batchId").val();
+						var myBatchId = $("#batchId").val();
 						var url = $(this).attr("url");
 						parent.parent.tipsWindown( "修改采购记录", "iframe:" + url, "460","450", "true", "","true", "no");
 						parent.parent.$("#windown-close").bind('click',function() {
@@ -96,9 +101,10 @@
 		$('a[name="delete"]').each(function() {
 			$(this).click(function() {
 				if (window.confirm("您确定要删除这条信息吗？")) {
+					var myBatchId = $("#batchId").val();
 					var url = $(this).attr("url");
 					$.post(url, "", function(data) {
-						window.location.href = window.location.href;
+						window.location.href = "showPurchaseRecordListAction.action?purchaseRecord.batchId="+myBatchId ;
 					});
 				}
 			});
@@ -110,8 +116,9 @@
 		$("#deletepointbtn").click(function() {
 			if (window.confirm("您确定要删除所选信息吗？")) {
 				var url = "deletePurchaseRecordAction.action";
+				var myBatchId = $("#batchId").val();
 				$.post(url, $('#form1').serialize(), function(data) {
-					window.location.href = window.location.href;
+					window.location.href = "showPurchaseRecordListAction.action?purchaseRecord.batchId="+myBatchId ;
 				});
 			}
 		});
@@ -150,6 +157,10 @@
 			$("#addbtn").attr("disabled", true);
 			$("#deletepointbtn").attr("disabled", true);
 		}
+		<s:if test="message.content != null">
+		alert('${message.content}');
+		</s:if>
+		$('#transactionDate').datetimepicker({showTimepicker: false});
 	}
 </script>
 
@@ -180,7 +191,7 @@
 												<strong>成交日期：</strong>
 											</td>
 											<td height="26" align="left" bgcolor="#FFFFFF">
-												<s:textfield name="purchaseBatch.transactionDate"  id="transactionDate"  cssStyle="width: 200px;" maxlength="25"></s:textfield>
+												<s:textfield name="purchaseBatch.transactionDate"  id="transactionDate"  cssStyle="width: 200px;" maxlength="25" readonly="true"></s:textfield>
 												<font color="red">*</font>
 											</td>
 										</tr>
@@ -193,8 +204,14 @@
 												<font style="font-size:9pt">(自动获取)</font>
 											</td>
 											<td height="26" colspan="2" align="center" bgcolor="#FFFFFF">
-												<input type="checkbox">已到货
-												<input type="checkbox">已结账
+												<input type="checkbox" name="isArrive" id="isArrive" value="1"
+													<s:if test="purchaseBatch.isArrive==1">
+														checked="checked"
+													</s:if>>已到货
+												<input type="checkbox" name="isSettleAccount" id="isSettleAccount" value="1"
+													<s:if test="purchaseBatch.isSettleAccount==1">
+														checked="checked"
+													</s:if>>已结账
 												<input name="button1" type="button" class="btn_2_3"
 													id="button1" value="确定">
 												<input name="addbtn" type="button" class="btn_2_3" id="addbtn" value="添加记录">
