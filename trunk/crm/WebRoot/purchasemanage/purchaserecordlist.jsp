@@ -74,17 +74,18 @@
 
 			});
 		$.fn.checkall("cbk_all");
-		$.fn.uncheckall("purchaseBatchIds", "cbk_all");
+		$.fn.uncheckall("purchaseRecordIds", "cbk_all");
 
 		/**
 		 * 修改
 		 */
 		$('a[name="edit"]').each(function() {
 				$(this).click( function() {
+					var myBatchId = $("#batchId").val();
 						var url = $(this).attr("url");
-						parent.parent.tipsWindown( "修改采购批次", "iframe:" + url, "460","350", "true", "","true", "no");
+						parent.parent.tipsWindown( "修改采购记录", "iframe:" + url, "460","450", "true", "","true", "no");
 						parent.parent.$("#windown-close").bind('click',function() {
-								window.location.href = "./showPurchaseBatchListAction.action?companyId=<s:property value="companyId"/>";
+							window.location.href = "./showPurchaseRecordListAction.action?purchaseRecord.batchId="+myBatchId;
 							});
 					});
 			});
@@ -108,7 +109,7 @@
 		 */
 		$("#deletepointbtn").click(function() {
 			if (window.confirm("您确定要删除所选信息吗？")) {
-				var url = "deletePurchaseBatchAction.action";
+				var url = "deletePurchaseRecordAction.action";
 				$.post(url, $('#form1').serialize(), function(data) {
 					window.location.href = window.location.href;
 				});
@@ -242,7 +243,7 @@
 							<s:iterator value="paginationRecord.data" status="obj">
 								<tr>
 									<td height="26" align="center" bgcolor="#FFFFFF">
-										<s:checkbox id="%{#obj.id}" name="purchaseBatchIds" fieldValue="%{id}"
+										<s:checkbox id="%{#obj.id}" name="purchaseRecordIds" fieldValue="%{id}"
 											value="false" theme="simple" />
 									</td>
 									<td height="26" align="center" bgcolor="#FFFFFF">
@@ -273,16 +274,15 @@
 										<s:property value="amountInArrear" />
 									</td>
 									<td height="26"  align="center" bgcolor="#FFFFFF">
-										<s:url id="edit_url" action="showSupplierInfoAction">
-											<s:param name="purchaseBatch.id" value="id"></s:param>
-											<s:param name="purchaseBatch.companyId" value="companyId"></s:param>
+										<s:url id="edit_url" action="showPurchaseRecordInfoAction">
+											<s:param name="purchaseRecord.id" value="id"></s:param>
+											<s:param name="purchaseRecord.batchId" value="batchId"></s:param>
 										</s:url>
-										<s:url id="delete_url" action="deletePurchaseBatchAction">
-											<s:param name="purchaseBatchIds" value="id"></s:param>
+										<s:url id="delete_url" action="deletePurchaseRecordAction">
+											<s:param name="purchaseRecordIds" value="id"></s:param>
 										</s:url>
 										<a name="edit" href="javascript:void(0);" url="${edit_url}">编辑</a>
-										<a name="delete" href="javascript:void(0);"
-											url="${delete_url}">删除</a>
+										<a name="delete" href="javascript:void(0);" url="${delete_url}">删除</a>
 									</td>
 								</tr>
 							</s:iterator>
