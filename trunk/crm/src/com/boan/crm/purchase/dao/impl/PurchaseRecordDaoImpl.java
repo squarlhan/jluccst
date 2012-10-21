@@ -24,7 +24,7 @@ public class PurchaseRecordDaoImpl extends BaseDao<PurchaseRecord, String> imple
 	
 	public Object[] queryRecordSum(String batchId) {
 		
-		String hql = "select sum(a.freight), sum(a.accountPayable), sum(a.actualPayment), sum(a.amountInArrear) from PurchaseRecord a where a.batchId =  :batchId ";
+		String hql = "select sum(a.freight), sum(a.accountPayable), sum(a.actualPayment), sum(a.amountInArrear), sum(amount) from PurchaseRecord a where a.batchId =  :batchId ";
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("batchId", batchId);
 		List list = super.find(hql.toString(), map);
