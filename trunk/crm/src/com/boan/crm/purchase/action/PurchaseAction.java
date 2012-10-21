@@ -129,7 +129,7 @@ public class PurchaseAction extends BaseActionSupport {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		message.setContent("供应商采购批次信息保存成功，您可以录入采购记录了！");
+		message.setContent("采购批次信息保存成功！");
 		// 保存日志开始
 		Log log = new Log();
 		log.setLogType(LogType.INFO);
