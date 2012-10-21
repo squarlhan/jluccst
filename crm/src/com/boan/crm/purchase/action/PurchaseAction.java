@@ -49,6 +49,8 @@ public class PurchaseAction extends BaseActionSupport {
 	private ISupplierService supplierService = null;
 
 	private Pagination<PurchaseBatch> pagination = new Pagination<PurchaseBatch>();
+	
+	private Pagination<PurchaseRecord> paginationRecord = new Pagination<PurchaseRecord>();
 
 	private PurchaseBatch purchaseBatch = null;
 	
@@ -67,12 +69,19 @@ public class PurchaseAction extends BaseActionSupport {
 	 * 
 	 * @return
 	 */
-	public String showPurchaseBatchInfo() throws Exception{
-		if (StringUtils.isBlank(purchaseBatch.getId())) {
+	public String showPurchaseRecordList() throws Exception{
+		companyId = sessionCompanyId;
+		if (StringUtils.isBlank(purchaseRecord.getBatchId())) {
 			purchaseBatch = new PurchaseBatch();
+			paginationRecord = new Pagination<PurchaseRecord>();
 		} else {
-			purchaseBatch = purchaseBatchService.get(purchaseBatch.getId());
+			purchaseBatch = purchaseBatchService.get(purchaseRecord.getBatchId());
+			//提取采购记录
+			Map<String, Object> map = new HashMap<String, Object>();
+			map.put("batchId", purchaseRecord.getBatchId());
+			paginationRecord = purchaseRecordService.findForPage(map, paginationRecord);
 		}
+		//供应商记录
 		supplierList = supplierService.queryList(companyId);
 		return SUCCESS;
 	}
@@ -92,6 +101,12 @@ public class PurchaseAction extends BaseActionSupport {
 		purchaseBatch.setUserId(sessionUserId);
 		purchaseBatch.setUserName(sessionUserCName);
 		purchaseBatch.setCreateTime(date);
+		//保存供应商信息
+		Supplier su = supplierService.get(purchaseBatch.getSupplierId());
+		if( su != null ){
+			purchaseBatch.setSupplierName(su.getSupplierName());
+			purchaseBatch.setSupplierNumber(su.getSupplierNumber());
+		}
 		try {
 			purchaseBatchService.saveOrUpdate(purchaseBatch);
 		} catch (Exception e) {
@@ -104,7 +119,9 @@ public class PurchaseAction extends BaseActionSupport {
 		log.setLogContent("[" + purchaseBatch.getBatchName() + "]" + "供应商采购批次信息保存成功");
 		super.saveLog(log);
 		// 保存日志结束
-		return this.showPurchaseBatchInfo();
+		purchaseRecord = new PurchaseRecord();
+		purchaseRecord.setBatchId(purchaseBatch.getId()) ;
+		return this.showPurchaseRecordList();
 	}
 
 	/**
@@ -149,11 +166,13 @@ public class PurchaseAction extends BaseActionSupport {
 	 * @return
 	 */
 	public String showPurchaseRecordInfo() {
+		String batchId = purchaseRecord.getBatchId();
 		if (StringUtils.isBlank(purchaseRecord.getId())) {
 			purchaseRecord = new PurchaseRecord();
 		} else {
 			purchaseRecord = purchaseRecordService.get(purchaseRecord.getId());
 		}
+		purchaseRecord.setBatchId(batchId);
 		return SUCCESS;
 	}
 	/**
@@ -275,6 +294,14 @@ public class PurchaseAction extends BaseActionSupport {
 
 	public void setSupplierList(List<Supplier> supplierList) {
 		this.supplierList = supplierList;
+	}
+
+	public Pagination<PurchaseRecord> getPaginationRecord() {
+		return paginationRecord;
+	}
+
+	public void setPaginationRecord(Pagination<PurchaseRecord> paginationRecord) {
+		this.paginationRecord = paginationRecord;
 	}
 
 }

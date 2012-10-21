@@ -10,7 +10,7 @@
 			<result name="success">/purchasemanage/purchasebatchlist.jsp</result>
 			<result name="input">/purchasemanage/purchasebatchlist.jsp</result>
 		</action>
-		<action name="showPurchaseBatchInfoAction" class="purchaseAction" method="showPurchaseBatchInfo">
+		<action name="showPurchaseRecordListAction" class="purchaseAction" method="showPurchaseRecordList">
 			<result name="success">/purchasemanage/purchaserecordlist.jsp</result>
 			<result name="input">/purchasemanage/purchaserecordlist.jsp</result>
 		</action>

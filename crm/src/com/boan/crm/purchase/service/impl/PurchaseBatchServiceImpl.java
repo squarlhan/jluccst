@@ -41,7 +41,7 @@ public class PurchaseBatchServiceImpl implements IPurchaseBatchService {
 
 	@Override
 	public Pagination<PurchaseBatch> findForPage(Map<String, ?> values, Pagination<PurchaseBatch> pagination) {
-		String hql = "from PurchaseBatch where companyId = :companyId order by  createTime asc";
+		String hql = "from PurchaseBatch where companyId = :companyId order by  createTime desc";
 		List<PurchaseBatch> data = dao.findForPage(hql, values, pagination.getStartIndex(), pagination.getPageSize());
 		hql = "select count(*) from PurchaseBatch  where companyId = :companyId ";
 		int totalRows = dao.findCountForPage(hql, values);
