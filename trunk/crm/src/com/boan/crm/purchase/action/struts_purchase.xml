@@ -27,5 +27,6 @@
 			<result name="success">/common/message.jsp</result>
 			<result name="error">/common/messagenoclose.jsp</result>
 		</action>
+		<action name="deletePurchaseRecordAction" class="purchaseAction" method="deletePurchaseRecord" />
 	</package>
 </struts>
