@@ -93,7 +93,7 @@
 	<body>
 		<s:form name="form1" id="form1" method="post" theme="simple">
 			<s:hidden name="purchaseRecord.id" id="purchaseRecordId"></s:hidden>
-			<s:hidden name="companyId" id="companyId"></s:hidden>
+			<s:hidden name="purchaseRecord.batchId" id="batchId"></s:hidden>
 			<table width="100%" border="0" cellspacing="5" cellpadding="0">
 				<tr>
 					<td>

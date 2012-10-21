@@ -48,13 +48,8 @@
 		 */
 		$("#addbtn").click(
 				function() {
-					window.location.href="showPurchaseBatchInfoAction.action?companyId=<s:property value="companyId"/>&purchaseBatch.id=";
-					return ;
-					parent.parent.tipsWindown("添加采购批次","iframe:showPurchaseBatchInfoAction.action?companyId=<s:property value="companyId"/>&purchaseBatch.id=", "860", "650", "true", "", "true", "no");
-					parent.parent.$("#windown-close").bind('click', function() {
-						window.location.href = "./showPurchaseBatchListAction.action?companyId=<s:property value="companyId"/>";
-					});
-
+					window.location.href="showPurchaseRecordListAction.action?purchaseRecord.batchId=";
+					return;
 				});
 		$.fn.checkall("cbk_all");
 		$.fn.uncheckall("purchaseBatchIds", "cbk_all");
@@ -65,10 +60,8 @@
 		$('a[name="edit"]').each(function() {
 				$(this).click( function() {
 						var url = $(this).attr("url");
-						parent.parent.tipsWindown( "修改采购批次", "iframe:" + url, "860","650", "true", "","true", "no");
-						parent.parent.$("#windown-close").bind('click',function() {
-								window.location.href = "./showPurchaseBatchListAction.action?companyId=<s:property value="companyId"/>";
-							});
+						window.location.href= url;
+						return ;
 					});
 			});
 
@@ -127,7 +120,7 @@
 									<s:checkbox theme="simple" id="cbk_all" name="all"></s:checkbox>
 								</td>
 								<td align="center" background="<%=path %>/images/headerbg.jpg">
-									<strong>进货日期</strong>
+									<strong>成交日期</strong>
 								</td>
 								<td align="center" background="<%=path %>/images/headerbg.jpg">
 									<strong>供应商</strong>
@@ -161,34 +154,33 @@
 											value="false" theme="simple" />
 									</td>
 									<td height="26" align="center" bgcolor="#FFFFFF">
+										<s:property value="transactionDate" />
+									</td>
+									<td height="26" align="center" bgcolor="#FFFFFF">
 										<s:property value="supplierName" />
 									</td>
 									<td height="26" align="center" bgcolor="#FFFFFF">
 										<s:property value="supplierNumber" />
 									</td>
 									<td height="26" align="center" bgcolor="#FFFFFF" style="work-break:break-all;">
-										<s:property value="product" />
+										<s:property value="totalAccountPayable" />
 									</td>
 									<td height="26" align="center" bgcolor="#FFFFFF">
-										<s:property value="memo" />
+										<s:property value="totalActualPayment" />
 									</td>
 									<td height="26" align="center" bgcolor="#FFFFFF">
-										<s:property value="memo" />
+										<s:property value="totalAmountInArrear" />
 									</td>
 									<td height="26" align="center" bgcolor="#FFFFFF">
-										<s:property value="memo" />
-									</td>
-									<td height="26" align="center" bgcolor="#FFFFFF">
-										<s:property value="memo" />
+										<s:property value="settleAccountCn" />
 									</td>
 									
 									<td height="26" align="center" bgcolor="#FFFFFF">
-										<s:property value="memo" />
+										<s:property value="arriveCn" />
 									</td>
 									<td height="26" colspan="2" align="center" bgcolor="#FFFFFF">
-										<s:url id="edit_url" action="showSupplierInfoAction">
-											<s:param name="purchaseBatch.id" value="id"></s:param>
-											<s:param name="purchaseBatch.companyId" value="companyId"></s:param>
+										<s:url id="edit_url" action="showPurchaseRecordListAction">
+											<s:param name="purchaseRecord.batchId" value="id"></s:param>
 										</s:url>
 										<s:url id="delete_url" action="deletePurchaseBatchAction">
 											<s:param name="purchaseBatchIds" value="id"></s:param>

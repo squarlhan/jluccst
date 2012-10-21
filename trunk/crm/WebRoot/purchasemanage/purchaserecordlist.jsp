@@ -66,9 +66,10 @@
 		 */
 		$("#addbtn").click(
 			function() {
-				parent.parent.tipsWindown("添加采购记录","iframe:showPurchaseRecordInfoAction.action?companyId=<s:property value="companyId"/>&purchaseRecord.id=", "460", "450", "true", "", "true", "no");
+				var myBatchId = $("#batchId").val();
+				parent.parent.tipsWindown("添加采购记录","iframe:showPurchaseRecordInfoAction.action?purchaseRecord.batchId="+ myBatchId +"&purchaseRecord.id=" , "460", "450", "true", "", "true", "no");
 				parent.parent.$("#windown-close").bind('click', function() {
-					window.location.href = "./showPurchaseBatchInfoAction.action?companyId=<s:property value="companyId"/>";
+					window.location.href = "./showPurchaseRecordListAction.action?purchaseRecord.batchId="+myBatchId;
 				});
 
 			});
@@ -141,6 +142,13 @@
 	 */
 	$.fn.initpage = function(){
 		$("#prductName").focus();
+		if( $("#batchId").val() != "" ){
+			$("#addbtn").attr("disabled", false);
+			$("#deletepointbtn").attr("disabled", false);
+		}else{
+			$("#addbtn").attr("disabled", true);
+			$("#deletepointbtn").attr("disabled", true);
+		}
 	}
 </script>
 
@@ -150,6 +158,7 @@
 	<body>
 		<s:form id="form1" name="form1" method="post" theme="simple">
 			<s:hidden name="companyId" id="companyId"></s:hidden>
+			<s:hidden name="purchaseBatch.id" id="batchId"></s:hidden>
 			<table width="100%" style="height: 100%;" border="0" cellspacing="5"
 				cellpadding="0">
 				<tr>
@@ -167,31 +176,29 @@
 												<font color="red">*</font>
 											</td>
 											<td height="26" align="right" bgcolor="#FFFFFF">
-												<strong>供应商编号：</strong>
-											</td>
-											<td height="26" align="left" bgcolor="#FFFFFF">
-												<s:textfield name="purchaseBatch.supplierNumber" id="supplierNumber" cssStyle="width: 200px;" maxlength="25" readonly="true"></s:textfield>
-											</td>
-										</tr>
-										<tr>
-											<td height="26" align="right" bgcolor="#FFFFFF">
 												<strong>成交日期：</strong>
 											</td>
 											<td height="26" align="left" bgcolor="#FFFFFF">
 												<s:textfield name="purchaseBatch.transactionDate"  id="transactionDate"  cssStyle="width: 200px;" maxlength="25"></s:textfield>
 												<font color="red">*</font>
 											</td>
+										</tr>
+										<tr>
+											<td height="26" align="right" bgcolor="#FFFFFF">
+												<strong>供应商编号：</strong>
+											</td>
+											<td height="26" align="left" bgcolor="#FFFFFF">
+												<s:textfield name="purchaseBatch.supplierNumber" id="supplierNumber" cssStyle="width: 200px;" maxlength="25" readonly="true"></s:textfield>
+												<font style="font-size:9pt">(自动获取)</font>
+											</td>
 											<td height="26" colspan="2" align="center" bgcolor="#FFFFFF">
 												<input type="checkbox">已到货
 												<input type="checkbox">已结账
 												<input name="button1" type="button" class="btn_2_3"
 													id="button1" value="确定">
-												<input name="addbtn" type="button" class="btn_2_3" id="addbtn"
-													value="添加记录">
-												<input name="deletepointbtn" type="button" class="btn_4"
-													id="deletepointbtn" value="删除记录">
-												<input name="button2" type="button" class="btn_2_3"
-													id="button2" value="返回">
+												<input name="addbtn" type="button" class="btn_2_3" id="addbtn" value="添加记录">
+												<input name="deletepointbtn" type="button" class="btn_4" id="deletepointbtn" value="删除记录">
+												<input name="button2" type="button" class="btn_2_3" id="button2" value="返回">
 											</td>
 										</tr>
 									</table>
@@ -232,38 +239,40 @@
 									<strong>操作</strong>
 								</td>
 							</tr>
-							<s:iterator value="pagination.data" status="obj">
+							<s:iterator value="paginationRecord.data" status="obj">
 								<tr>
 									<td height="26" align="center" bgcolor="#FFFFFF">
 										<s:checkbox id="%{#obj.id}" name="purchaseBatchIds" fieldValue="%{id}"
 											value="false" theme="simple" />
 									</td>
 									<td height="26" align="center" bgcolor="#FFFFFF">
-										<s:property value="supplierName" />
+										<s:property value="prductName" />
 									</td>
 									<td height="26" align="center" bgcolor="#FFFFFF">
-										<s:property value="transactionDate" />
+										<s:property value="specification" />
 									</td>
 									<td height="26" align="center" bgcolor="#FFFFFF" style="work-break:break-all;">
-										<s:property value="product" />
+										<s:property value="gramWeight" />
 									</td>
 									<td height="26" align="center" bgcolor="#FFFFFF">
-										<s:property value="memo" />
+										<s:property value="ton" />
 									</td>
 									<td height="26" align="center" bgcolor="#FFFFFF">
-										<s:property value="memo" />
+										<s:property value="amount" />
 									</td>
 									<td height="26" align="center" bgcolor="#FFFFFF">
-										<s:property value="memo" />
+										<s:property value="freight" />
 									</td>
 									<td height="26" align="center" bgcolor="#FFFFFF">
-										<s:property value="memo" />
+										<s:property value="accountPayable" />
 									</td>
-									
 									<td height="26" align="center" bgcolor="#FFFFFF">
-										<s:property value="memo" />
+										<s:property value="actualPayment" />
 									</td>
-									<td height="26" colspan="2" align="center" bgcolor="#FFFFFF">
+									<td height="26" align="center" bgcolor="#FFFFFF">
+										<s:property value="amountInArrear" />
+									</td>
+									<td height="26"  align="center" bgcolor="#FFFFFF">
 										<s:url id="edit_url" action="showSupplierInfoAction">
 											<s:param name="purchaseBatch.id" value="id"></s:param>
 											<s:param name="purchaseBatch.companyId" value="companyId"></s:param>
@@ -279,9 +288,9 @@
 							</s:iterator>
 							<tr>
 								<td height="26" colspan="11" align="center" bgcolor="#FFFFFF">
-									<page:pages currentPage="pagination.currentPage"
-										totalPages="pagination.totalPages"
-										totalRows="pagination.totalRows" styleClass="page"
+									<page:pages currentPage="paginationRecord.currentPage"
+										totalPages="paginationRecord.totalPages"
+										totalRows="paginationRecord.totalRows" styleClass="page"
 										theme="text"></page:pages>
 
 								</td>
