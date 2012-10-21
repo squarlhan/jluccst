@@ -172,11 +172,11 @@
 										<s:property value="totalAmountInArrear" />
 									</td>
 									<td height="26" align="center" bgcolor="#FFFFFF">
-										<s:property value="settleAccountCn" />
+										<s:property value="settleAccountCn"  escape="false"/>
 									</td>
 									
 									<td height="26" align="center" bgcolor="#FFFFFF">
-										<s:property value="arriveCn" />
+										<s:property value="arriveCn" escape="false"/>
 									</td>
 									<td height="26" colspan="2" align="center" bgcolor="#FFFFFF">
 										<s:url id="edit_url" action="showPurchaseRecordListAction">
