@@ -62,6 +62,8 @@ public class PurchaseAction extends BaseActionSupport {
 
 	private String[] purchaseBatchIds = null;
 	
+	private String[] purchaseRecordIds = null;
+	
 	private List<Supplier> supplierList = null;
 
 	/**
@@ -138,7 +140,7 @@ public class PurchaseAction extends BaseActionSupport {
 	}
 
 	/**
-	 * 删除供应商
+	 * 删除批次
 	 * 
 	 * @return
 	 */
@@ -157,6 +159,28 @@ public class PurchaseAction extends BaseActionSupport {
 			}
 		}
 		purchaseBatchService.delete(purchaseBatchIds);
+		return NONE;
+	}
+	/**
+	 * 删除记录
+	 * 
+	 * @return
+	 */
+	public String deletePurchaseRecord() throws Exception {
+		if (purchaseRecordIds != null && purchaseRecordIds.length > 0) {
+			PurchaseRecord purchaseRecord = null;
+			Log log = null;
+			for (int i = 0; i < purchaseRecordIds.length; i++) {
+				purchaseRecord = purchaseRecordService.get(purchaseRecordIds[i]);
+				if (purchaseRecord != null) {
+					log = new Log();
+					log.setLogType(LogType.INFO);
+					log.setLogContent("[" + purchaseRecord.getPrductName() + "]" + "采购删除成功");
+					super.saveLog(log);
+				}
+			}
+		}
+		purchaseRecordService.delete(purchaseRecordIds);
 		return NONE;
 	}
 
@@ -302,6 +326,14 @@ public class PurchaseAction extends BaseActionSupport {
 
 	public void setPaginationRecord(Pagination<PurchaseRecord> paginationRecord) {
 		this.paginationRecord = paginationRecord;
+	}
+
+	public String[] getPurchaseRecordIds() {
+		return purchaseRecordIds;
+	}
+
+	public void setPurchaseRecordIds(String[] purchaseRecordIds) {
+		this.purchaseRecordIds = purchaseRecordIds;
 	}
 
 }
