@@ -17,4 +17,6 @@ public interface IPurchaseRecordService {
 	public void saveOrUpdate(PurchaseRecord table1);
 
 	public Pagination<PurchaseRecord> findForPage(Map<String, ?> values, Pagination<PurchaseRecord> pagination);
+	
+	public Object[] queryRecordSum(String batchId);
 }

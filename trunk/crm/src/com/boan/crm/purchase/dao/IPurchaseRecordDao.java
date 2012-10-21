@@ -14,4 +14,9 @@ public interface IPurchaseRecordDao extends IBaseDao<PurchaseRecord, String> {
 	 * @throws Exception
 	 */
 	public void deleteByBatchIds(String... batchIds) throws Exception;
+	/**
+	 * 查询总和
+	 * @return
+	 */
+	public Object[] queryRecordSum(String batchId);
 }
