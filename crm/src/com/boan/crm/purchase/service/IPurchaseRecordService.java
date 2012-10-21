@@ -11,10 +11,10 @@ public interface IPurchaseRecordService {
 	public PurchaseRecord get(String id);
 
 	public void delete(String... ids);
+	
+	public void deleteByBatchIds(String... batchIds) throws Exception;
 
 	public void saveOrUpdate(PurchaseRecord table1);
-
-	public List<PurchaseRecord> queryList(String companyId) throws Exception;
 
 	public Pagination<PurchaseRecord> findForPage(Map<String, ?> values, Pagination<PurchaseRecord> pagination);
 }

@@ -65,6 +65,10 @@ public class PurchaseAction extends BaseActionSupport {
 	private String[] purchaseRecordIds = null;
 	
 	private List<Supplier> supplierList = null;
+	
+	private String isArrive = null;
+	
+	private String isSettleAccount = null;
 
 	/**
 	 * 显示采购记录
@@ -103,6 +107,17 @@ public class PurchaseAction extends BaseActionSupport {
 		purchaseBatch.setUserId(sessionUserId);
 		purchaseBatch.setUserName(sessionUserCName);
 		purchaseBatch.setCreateTime(date);
+		//保存状态
+		if( "1".equals(isArrive) ){
+			purchaseBatch.setIsArrive(1);
+		}else{
+			purchaseBatch.setIsArrive(0);
+		}
+		if( "1".equals(isSettleAccount) ){
+			purchaseBatch.setIsSettleAccount(1);
+		}else{
+			purchaseBatch.setIsSettleAccount(0);
+		}
 		//保存供应商信息
 		Supplier su = supplierService.get(purchaseBatch.getSupplierId());
 		if( su != null ){
@@ -159,6 +174,7 @@ public class PurchaseAction extends BaseActionSupport {
 			}
 		}
 		purchaseBatchService.delete(purchaseBatchIds);
+		purchaseRecordService.deleteByBatchIds(purchaseBatchIds);
 		return NONE;
 	}
 	/**
@@ -175,7 +191,7 @@ public class PurchaseAction extends BaseActionSupport {
 				if (purchaseRecord != null) {
 					log = new Log();
 					log.setLogType(LogType.INFO);
-					log.setLogContent("[" + purchaseRecord.getPrductName() + "]" + "采购删除成功");
+					log.setLogContent("[" + purchaseRecord.getPrductName() + "]" + "采购记录删除成功");
 					super.saveLog(log);
 				}
 			}
@@ -334,6 +350,22 @@ public class PurchaseAction extends BaseActionSupport {
 
 	public void setPurchaseRecordIds(String[] purchaseRecordIds) {
 		this.purchaseRecordIds = purchaseRecordIds;
+	}
+
+	public String getIsArrive() {
+		return isArrive;
+	}
+
+	public void setIsArrive(String isArrive) {
+		this.isArrive = isArrive;
+	}
+
+	public String getIsSettleAccount() {
+		return isSettleAccount;
+	}
+
+	public void setIsSettleAccount(String isSettleAccount) {
+		this.isSettleAccount = isSettleAccount;
 	}
 
 }

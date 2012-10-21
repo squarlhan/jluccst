@@ -5,13 +5,13 @@ import java.util.List;
 import com.boan.crm.purchase.model.PurchaseRecord;
 import com.boan.crm.utils.dao.IBaseDao;
 
-public interface IPurchaseRecordDao extends IBaseDao<PurchaseRecord,String>{
+public interface IPurchaseRecordDao extends IBaseDao<PurchaseRecord, String> {
 
 	/**
-	 * 取得所有列表
+	 * 根据批次id删除采购记录
 	 * 
-	 * @return 列表
+	 * @param batchIds
 	 * @throws Exception
 	 */
-	public List<PurchaseRecord> queryAllList(String companyId) throws Exception;
+	public void deleteByBatchIds(String... batchIds) throws Exception;
 }
