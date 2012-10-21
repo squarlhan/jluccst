@@ -21,6 +21,7 @@ import com.boan.crm.customerassessment.model.CustomerAssessment;
 import com.boan.crm.customerassessment.service.ICustomerAssessmentService;
 import com.boan.crm.sellrecord.service.ISellRecordService;
 import com.boan.crm.utils.action.BaseActionSupport;
+import com.boan.crm.utils.calendar.CurrentDateTime;
 
 /**
  * @author luojx
@@ -84,6 +85,15 @@ public class CustomerAssessmentAction extends BaseActionSupport{
 			if(consumptionTimes.equals("1"))
 			{
 				analysisCustomer.setConsumptionTimes(sellRecordService.getConsumptionCount(customer.getId()));
+			}
+			if(payments.equals("1"))
+			{
+				Calendar t1 = Calendar.getInstance();
+				Calendar t2 = Calendar.getInstance();
+				
+				String t22 = CurrentDateTime.getCurrentDate();
+				String t11 = t22.split("-")[0]+"-1-1";
+				analysisCustomer.setPayments(sellRecordService.getConsumptionDebt(customer.getId(),t11,t22));
 			}
 			if(level.equals("1"))
 			{
