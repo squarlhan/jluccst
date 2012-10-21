@@ -138,10 +138,10 @@
 									<strong>欠款</strong>
 								</td>
 								<td align="center" background="<%=path %>/images/headerbg.jpg">
-									<strong>是否结账</strong>
+									<strong>是否到货</strong>
 								</td>
 								<td align="center" background="<%=path %>/images/headerbg.jpg">
-									<strong>是否到货</strong>
+									<strong>是否结账</strong>
 								</td>
 								<td align="center" background="<%=path %>/images/headerbg.jpg">
 									<strong>操作</strong>
@@ -172,11 +172,10 @@
 										<s:property value="totalAmountInArrear" />
 									</td>
 									<td height="26" align="center" bgcolor="#FFFFFF">
-										<s:property value="settleAccountCn"  escape="false"/>
-									</td>
-									
-									<td height="26" align="center" bgcolor="#FFFFFF">
 										<s:property value="arriveCn" escape="false"/>
+									</td>
+									<td height="26" align="center" bgcolor="#FFFFFF">
+										<s:property value="settleAccountCn"  escape="false"/>
 									</td>
 									<td height="26" colspan="2" align="center" bgcolor="#FFFFFF">
 										<s:url id="edit_url" action="showPurchaseRecordListAction">
