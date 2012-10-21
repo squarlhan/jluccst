@@ -52,7 +52,6 @@ public class AnalysisEngineServiceImpl implements IAnalysisEngineService{
 			List<AnalysisFuzzyValue> listFuzzyValue = new ArrayList<AnalysisFuzzyValue>();
 			//模糊化开始
 			//模糊化:消费总额
-			//模糊化:消费次数
 			if(enter.getTotalConsumption() != null && !enter.getTotalConsumption().equals(BigDecimal.ZERO)) //是否等于0)
 			{
 				double totalConsumption = Double.parseDouble(enter.getTotalConsumption().toString());
@@ -71,6 +70,32 @@ public class AnalysisEngineServiceImpl implements IAnalysisEngineService{
 					}else if(obj.getFunctionName().equals(MathFunction.TRAPEZOID))
 					{
 						fuzzyValue = MathFunction.trapezoid(totalConsumption, obj.getFirstValue(), obj.getThirdValue(),obj.getFourthValue(), obj.getSecondValue());
+					}
+					fuzzy.setFuzzyValue(fuzzyValue);
+					
+					if(fuzzyValue != 0)
+						listFuzzyValue.add(fuzzy);
+				}
+			}
+			//模糊化:消费总额
+			if(enter.getPayments()!= null && !enter.getPayments().equals(BigDecimal.ZERO)) //是否等于0)
+			{
+				double payments = Double.parseDouble(enter.getPayments().toString());
+				List<FuzzyInfo> listPayments =  fuzzyInfoService.findAllFuzzyInfoByCategory(FuzzyCategory.PAYMENTS,companyId);
+				for(int i=0;i<listPayments.size();i++)
+				{
+					FuzzyInfo obj = listPayments.get(i);
+					AnalysisFuzzyValue fuzzy = new AnalysisFuzzyValue();
+					fuzzy.setFuzzyId(obj.getId());
+					fuzzy.setId(FuzzyCategory.PAYMENTS);
+					fuzzy.setSugeno(obj.getSugeno());
+					double fuzzyValue = 0;
+					if(obj.getFunctionName().equals(MathFunction.TRIANGLE))
+					{
+						fuzzyValue = MathFunction.triangle(payments, obj.getFirstValue(), obj.getSecondValue(), obj.getThirdValue());
+					}else if(obj.getFunctionName().equals(MathFunction.TRAPEZOID))
+					{
+						fuzzyValue = MathFunction.trapezoid(payments, obj.getFirstValue(), obj.getThirdValue(),obj.getFourthValue(), obj.getSecondValue());
 					}
 					fuzzy.setFuzzyValue(fuzzyValue);
 					
