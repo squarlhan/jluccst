@@ -225,7 +225,7 @@ public class PurchaseBatch implements java.io.Serializable {
 	public String getSettleAccountCn(){
 		if( isSettleAccount == 0 )
 		{
-			return "未结账";
+			return "<font color='red'>未结账</red>";
 		}else if( isSettleAccount == 1 )
 		{  
 			return "已结账";
@@ -239,7 +239,7 @@ public class PurchaseBatch implements java.io.Serializable {
 	public String getArriveCn(){
 		if( isSettleAccount == 0 )
 		{
-			return "未到货";
+			return "<font color='red'>未到货</red>";
 		}else if( isSettleAccount == 1 )
 		{  
 			return "已到货";
