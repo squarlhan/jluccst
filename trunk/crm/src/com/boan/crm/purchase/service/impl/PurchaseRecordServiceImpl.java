@@ -35,11 +35,6 @@ public class PurchaseRecordServiceImpl implements IPurchaseRecordService {
 	}
 
 	@Override
-	public List<PurchaseRecord> queryList(String companyId) throws Exception {
-		return dao.queryAllList(companyId);
-	}
-
-	@Override
 	public Pagination<PurchaseRecord> findForPage(Map<String, ?> values, Pagination<PurchaseRecord> pagination) {
 		String hql = "from PurchaseRecord where batchId = :batchId order by  createTime asc";
 		List<PurchaseRecord> data = dao.findForPage(hql, values, pagination.getStartIndex(), pagination.getPageSize());
@@ -48,6 +43,11 @@ public class PurchaseRecordServiceImpl implements IPurchaseRecordService {
 		pagination.setTotalRows(totalRows);
 		pagination.setData(data);
 		return pagination;
+	}
+
+	@Override
+	public void deleteByBatchIds( String... batchIds ) throws Exception {
+		dao.deleteByBatchIds(batchIds);
 	}
 
 }

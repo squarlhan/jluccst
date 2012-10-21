@@ -14,12 +14,11 @@ import com.boan.crm.utils.dao.impl.BaseDao;
 public class PurchaseRecordDaoImpl extends BaseDao<PurchaseRecord, String> implements IPurchaseRecordDao {
 
 	@Override
-	public List<PurchaseRecord> queryAllList(String companyId) throws Exception {
-		String hql = "from PurchaseRecord where companyId = :companyId order by createTime";
+	public void deleteByBatchIds(String... batchIds) throws Exception {
+		String hql = "delete PurchaseRecord where batchId in ( :batchIds ) order by createTime";
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put("companyId", companyId);
-		List<PurchaseRecord> list = super.find(hql, map);
-		return list;
+		map.put("batchIds", batchIds);
+		super.executeHql(hql, map);
 	}
 
 }
