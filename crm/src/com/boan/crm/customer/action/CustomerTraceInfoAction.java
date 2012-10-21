@@ -368,7 +368,7 @@ public class CustomerTraceInfoAction extends BaseActionSupport{
 			timePlan.setEmployeeName(sessionUserCName);
 			timePlan.setOrganId(sessionCompanyId);
 			timePlan.setPersonId(obj.getTracePersonId());
-			//timePlan.setPlanType(planType);
+			timePlan.setPlanType("0");
 			StringBuilder sb = new StringBuilder();
 			sb.append("跟进计划：");
 			sb.append(CalendarUtils.toLongStringNoSecond(obj.getTraceTime()));

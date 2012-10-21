@@ -354,7 +354,7 @@ public class CustomerVisitInfoAction extends BaseActionSupport{
 			timePlan.setEmployeeName(sessionUserCName);
 			timePlan.setOrganId(sessionCompanyId);
 			timePlan.setPersonId(obj.getVisitPersonId());
-			//timePlan.setPlanType(planType);
+			timePlan.setPlanType("0");
 			StringBuilder sb = new StringBuilder();
 			sb.append("回访计划：");
 			sb.append(CalendarUtils.toLongStringNoSecond(obj.getVisitTime()));
