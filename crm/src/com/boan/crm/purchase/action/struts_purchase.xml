@@ -28,5 +28,10 @@
 			<result name="error">/common/messagenoclose.jsp</result>
 		</action>
 		<action name="deletePurchaseRecordAction" class="purchaseAction" method="deletePurchaseRecord" />
+		<!-- 库存清单 -->
+		<action name="showRepertoryListAction" class="repertoryAction" method="showRepertoryList">
+				<result name="success">/purchasemanage/repertorylist.jsp</result>
+				<result name="input">/purchasemanage/repertorylist.jsp</result>
+		</action>
 	</package>
 </struts>
