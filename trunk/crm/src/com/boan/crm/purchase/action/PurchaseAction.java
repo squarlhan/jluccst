@@ -1,5 +1,6 @@
 package com.boan.crm.purchase.action;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -15,6 +16,8 @@ import com.boan.crm.backstagemanage.common.LogType;
 import com.boan.crm.backstagemanage.model.Log;
 import com.boan.crm.backstagemanage.service.ICompanyService;
 import com.boan.crm.common.Message;
+import com.boan.crm.datadictionary.model.DataDictionary;
+import com.boan.crm.datadictionary.service.IDataDictionaryService;
 import com.boan.crm.purchase.model.PurchaseBatch;
 import com.boan.crm.purchase.model.PurchaseRecord;
 import com.boan.crm.purchase.service.IPurchaseBatchService;
@@ -47,6 +50,8 @@ public class PurchaseAction extends BaseActionSupport {
 	private ICompanyService companyService = null;
 	@Resource
 	private ISupplierService supplierService = null;
+	@Resource
+	private  IDataDictionaryService dataDictionaryService = null;
 
 	private Pagination<PurchaseBatch> pagination = new Pagination<PurchaseBatch>();
 
@@ -69,6 +74,8 @@ public class PurchaseAction extends BaseActionSupport {
 	private String isArrive = null;
 
 	private String isSettleAccount = null;
+	
+	private List<DataDictionary> productList = null;
 
 	/**
 	 * 显示采购记录
@@ -202,7 +209,7 @@ public class PurchaseAction extends BaseActionSupport {
 				if (purchaseRecord != null) {
 					log = new Log();
 					log.setLogType(LogType.INFO);
-					log.setLogContent("[" + purchaseRecord.getPrductName() + "]" + "采购记录删除成功");
+					log.setLogContent("[" + purchaseRecord.getProductName() + "]" + "采购记录删除成功");
 					super.saveLog(log);
 				}
 			}
@@ -224,6 +231,11 @@ public class PurchaseAction extends BaseActionSupport {
 			purchaseRecord = purchaseRecordService.get(purchaseRecord.getId());
 		}
 		purchaseRecord.setBatchId(batchId);
+		//显示产品列表
+		productList = dataDictionaryService.findDataDictionaryByType(sessionCompanyId, 8);
+		if( productList == null  ){
+			productList = new ArrayList<DataDictionary>();
+		}
 		return SUCCESS;
 	}
 
@@ -241,6 +253,13 @@ public class PurchaseAction extends BaseActionSupport {
 		// purchaseRecord.setCompanyName(sessionCompanyName);
 		// purchaseRecord.setUserId(sessionUserId);
 		// purchaseRecord.setUserName(sessionUserCName);
+		//获取产品名称
+		DataDictionary product = dataDictionaryService.get(purchaseRecord.getProductId());
+		if( product != null  ){
+			purchaseRecord.setProductName(product.getName());
+		}else{
+			purchaseRecord.setProductName("未知产品");
+		}
 		purchaseRecord.setCreateTime(date);
 		try {
 			purchaseRecordService.saveOrUpdate(purchaseRecord);
@@ -251,7 +270,7 @@ public class PurchaseAction extends BaseActionSupport {
 		// 保存日志开始
 		Log log = new Log();
 		log.setLogType(LogType.INFO);
-		log.setLogContent("[" + purchaseRecord.getPrductName() + "]" + "采购记录保存成功");
+		log.setLogContent("[" + purchaseRecord.getProductName() + "]" + "采购记录保存成功");
 		super.saveLog(log);
 		// 保存日志结束
 		return SUCCESS;
@@ -379,6 +398,22 @@ public class PurchaseAction extends BaseActionSupport {
 
 	public void setIsSettleAccount(String isSettleAccount) {
 		this.isSettleAccount = isSettleAccount;
+	}
+
+	public IDataDictionaryService getDataDictionaryService() {
+		return dataDictionaryService;
+	}
+
+	public void setDataDictionaryService(IDataDictionaryService dataDictionaryService) {
+		this.dataDictionaryService = dataDictionaryService;
+	}
+
+	public List<DataDictionary> getProductList() {
+		return productList;
+	}
+
+	public void setProductList(List<DataDictionary> productList) {
+		this.productList = productList;
 	}
 
 }
