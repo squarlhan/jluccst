@@ -249,7 +249,7 @@ public class PurchaseAction extends BaseActionSupport {
 		if (StringUtils.isBlank(purchaseRecord.getId())) {
 			purchaseRecord.setId(null);
 		}
-		// purchaseRecord.setCompanyId(sessionCompanyId);
+		purchaseRecord.setCompanyId(sessionCompanyId);
 		// purchaseRecord.setCompanyName(sessionCompanyName);
 		// purchaseRecord.setUserId(sessionUserId);
 		// purchaseRecord.setUserName(sessionUserCName);
