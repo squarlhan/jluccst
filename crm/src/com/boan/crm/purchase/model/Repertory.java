@@ -1,6 +1,6 @@
-package com.boan.crm.repertory.model;
+package com.boan.crm.purchase.model;
 /**
- * 库存管理
+ * 库存清单
  * @author Administrator
  *
  */
