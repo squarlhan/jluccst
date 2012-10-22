@@ -264,7 +264,7 @@
 											value="false" theme="simple" />
 									</td>
 									<td height="26" align="center" bgcolor="#FFFFFF">
-										<s:property value="prductName" />
+										<s:property value="productName" />
 									</td>
 									<td height="26" align="center" bgcolor="#FFFFFF">
 										<s:property value="specification" />
