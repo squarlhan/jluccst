@@ -37,10 +37,15 @@ public class PurchaseRecord implements java.io.Serializable {
 	@Column(name = "BATCH_ID", length = 50)
 	private String batchId;
 	/**
+	 * 产品id
+	 */
+	@Column(name = "PRODUCT_ID", length = 50)
+	private String productId;
+	/**
 	 * 产品名称
 	 */
-	@Column(name = "PRDUCT_NAME", length = 50)
-	private String prductName;
+	@Column(name = "PRODUCT_NAME", length = 50)
+	private String productName;
 
 	/**
 	 * 规格
@@ -109,14 +114,6 @@ public class PurchaseRecord implements java.io.Serializable {
 
 	public void setBatchId(String batchId) {
 		this.batchId = batchId;
-	}
-
-	public String getPrductName() {
-		return prductName;
-	}
-
-	public void setPrductName(String prductName) {
-		this.prductName = prductName;
 	}
 
 	public String getSpecification() {
@@ -201,6 +198,22 @@ public class PurchaseRecord implements java.io.Serializable {
 
 	public void setMemo(String memo) {
 		this.memo = memo;
+	}
+
+	public String getProductId() {
+		return productId;
+	}
+
+	public void setProductId(String productId) {
+		this.productId = productId;
+	}
+
+	public String getProductName() {
+		return productName;
+	}
+
+	public void setProductName(String productName) {
+		this.productName = productName;
 	}
 
 }
