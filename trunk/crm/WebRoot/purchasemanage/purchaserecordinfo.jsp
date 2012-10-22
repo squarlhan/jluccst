@@ -32,7 +32,7 @@
 		<!--
 			var _customer_submit = {
 			rules: {
-				"purchaseRecord.prductName":{required:true,strangecode:true},
+				"purchaseRecord.productId":{required:true,strangecode:true},
 				"purchaseRecord.specification":{required:true,strangecode:true},
 				"purchaseRecord.gramWeight":{required:true,strangecode:true},
 				"purchaseRecord.ton":{required:true,strangecode:true},
@@ -85,7 +85,7 @@
 			 * 初始化页面
 			 */
 			$.fn.initpage = function(){
-				$("#prductName").focus();
+				$("#productId").focus();
 			}
 		//-->
 		</script>
@@ -109,7 +109,11 @@
 												<strong>产品名称：</strong>
 											</td>
 											<td height="26" align="left" bgcolor="#FFFFFF">
-												<s:textfield name="purchaseRecord.prductName" id="prductName" cssStyle="width: 290px;" maxlength="25"></s:textfield>
+											<!-- 
+												<s:textfield name="purchaseRecord.productName" id="productName" cssStyle="width: 290px;" maxlength="25"></s:textfield>
+											 -->
+											 	<s:select list="productList" name="purchaseRecord.productId" id="productId"  cssStyle="width: 290px;" 
+											 	headerKey="" headerValue="==请选择产品==" listKey="id" listValue="name"></s:select>
 												<font color="red">*</font>
 											</td>
 										</tr>
