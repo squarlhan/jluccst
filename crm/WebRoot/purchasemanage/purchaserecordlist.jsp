@@ -72,7 +72,7 @@
 		$("#addbtn").click(
 			function() {
 				var myBatchId = $("#batchId").val();
-				parent.parent.tipsWindown("添加采购记录","iframe:showPurchaseRecordInfoAction.action?purchaseRecord.batchId="+ myBatchId +"&purchaseRecord.id=" , "460", "450", "true", "", "true", "no");
+				parent.parent.tipsWindown("添加采购记录","iframe:showPurchaseRecordInfoAction.action?purchaseRecord.batchId="+ myBatchId +"&purchaseRecord.id=" , "460", "480", "true", "", "true", "no");
 				parent.parent.$("#windown-close").bind('click', function() {
 					window.location.href = "./showPurchaseRecordListAction.action?purchaseRecord.batchId="+myBatchId;
 				});
@@ -88,7 +88,7 @@
 				$(this).click( function() {
 						var myBatchId = $("#batchId").val();
 						var url = $(this).attr("url");
-						parent.parent.tipsWindown( "修改采购记录", "iframe:" + url, "460","450", "true", "","true", "no");
+						parent.parent.tipsWindown( "修改采购记录", "iframe:" + url, "460","480", "true", "","true", "no");
 						parent.parent.$("#windown-close").bind('click',function() {
 							window.location.href = "./showPurchaseRecordListAction.action?purchaseRecord.batchId="+myBatchId;
 							});
@@ -242,6 +242,9 @@
 									<strong>数量</strong>
 								</td>
 								<td align="center" background="<%=path %>/images/headerbg.jpg">
+									<strong>单价</strong>
+								</td>
+								<td align="center" background="<%=path %>/images/headerbg.jpg">
 									<strong>运费</strong>
 								</td>
 								<td align="center" background="<%=path %>/images/headerbg.jpg">
@@ -279,6 +282,9 @@
 										<s:property value="amount" />
 									</td>
 									<td height="26" align="center" bgcolor="#FFFFFF">
+										<s:property value="unitPrice" />
+									</td>
+									<td height="26" align="center" bgcolor="#FFFFFF">
 										<s:property value="freight" />
 									</td>
 									<td height="26" align="center" bgcolor="#FFFFFF">
@@ -304,7 +310,7 @@
 								</tr>
 							</s:iterator>
 							<tr>
-								<td height="26" colspan="11" align="center" bgcolor="#FFFFFF">
+								<td height="26" colspan="12" align="center" bgcolor="#FFFFFF">
 									<page:pages currentPage="paginationRecord.currentPage"
 										totalPages="paginationRecord.totalPages"
 										totalRows="paginationRecord.totalRows" styleClass="page"

@@ -99,11 +99,9 @@
 								<td align="center" background="<%=path %>/images/headerbg.jpg">
 									<strong>欠款</strong>
 								</td>
-								<!-- 
 								<td align="center" background="<%=path %>/images/headerbg.jpg">
 									<strong>总价值</strong>
 								</td>
-								 -->
 								<td align="center" background="<%=path %>/images/headerbg.jpg">
 									<strong>操作</strong>
 								</td>
@@ -128,11 +126,9 @@
 									<td height="26" align="center" bgcolor="#FFFFFF">
 										<s:property value="amountInArrear" />
 									</td>
-									<!-- 
 									<td height="26" align="center" bgcolor="#FFFFFF">
-										<s:property value="amountInArrear" />总价值
+										<s:property value="totalValue" />
 									</td>
-									 -->
 									<td height="26" colspan="2" align="center" bgcolor="#FFFFFF">
 										<s:url id="edit_url" action="showPurchaseDetailAction">
 											<s:param name="productId" value="productId"></s:param>

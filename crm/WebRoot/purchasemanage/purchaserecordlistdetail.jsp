@@ -115,6 +115,9 @@
 									<strong>数量</strong>
 								</td>
 								<td align="center" background="<%=path %>/images/headerbg.jpg">
+									<strong>单价</strong>
+								</td>
+								<td align="center" background="<%=path %>/images/headerbg.jpg">
 									<strong>运费</strong>
 								</td>
 								<td align="center" background="<%=path %>/images/headerbg.jpg">
@@ -153,6 +156,9 @@
 									<td height="26" align="center" bgcolor="#FFFFFF">
 										<s:property value="amount" />
 									</td>
+										<td height="26" align="center" bgcolor="#FFFFFF">
+										<s:property value="unitPrice" />
+									</td>
 									<td height="26" align="center" bgcolor="#FFFFFF">
 										<s:property value="freight" />
 									</td>
@@ -168,7 +174,7 @@
 								</tr>
 							</s:iterator>
 							<tr>
-								<td height="26" colspan="12" align="center" bgcolor="#FFFFFF">
+								<td height="26" colspan="13" align="center" bgcolor="#FFFFFF">
 									<page:pages currentPage="paginationRecord.currentPage"
 										totalPages="paginationRecord.totalPages"
 										totalRows="paginationRecord.totalRows" styleClass="page"

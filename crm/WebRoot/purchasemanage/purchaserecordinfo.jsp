@@ -41,6 +41,7 @@
 				"purchaseRecord.accountPayable":{required : true,isNotNegativeNum:true},
 				"purchaseRecord.actualPayment":{required : true,isNotNegativeNum:true},
 				"purchaseRecord.amountInArrear":{required : true,isNotNegativeNum:true},
+				"purchaseRecord.unitPrice":{required : true,isNotNegativeNum:true},
 				"purchaseRecord.memo":{strangecode:true,maxlength:500}
 				}
 			};
@@ -150,6 +151,15 @@
 											</td>
 											<td height="26" align="left" bgcolor="#FFFFFF">
 												<s:textfield name="purchaseRecord.amount" id="amount" cssStyle="width: 290px;" maxlength="25"></s:textfield>
+												<font color="red">*</font>
+											</td>
+										</tr>
+										<tr>
+											<td height="26" align="right" bgcolor="#FFFFFF">
+												<strong> 单价：</strong>
+											</td>
+											<td height="26" align="left" bgcolor="#FFFFFF">
+												<s:textfield name="purchaseRecord.unitPrice" id="freight" cssStyle="width: 290px;" maxlength="25"></s:textfield>
 												<font color="red">*</font>
 											</td>
 										</tr>
