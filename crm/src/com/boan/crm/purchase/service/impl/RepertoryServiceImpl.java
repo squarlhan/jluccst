@@ -24,7 +24,7 @@ public class RepertoryServiceImpl implements IRepertoryService {
 	public Pagination<Repertory> findForPage(Map<String, ?> values, Pagination<Repertory> pagination) {
 		StringBuffer sb = new StringBuffer();
 		sb.append( "  select a.companyId, a.productId, a.productName, sum(a.amount), sum(a.freight), ");
-		sb.append( " sum(a.accountPayable), sum(a.actualPayment), sum(a.amountInArrear) from PurchaseRecord a where a.companyId = :companyId ");
+		sb.append( " sum(a.accountPayable), sum(a.actualPayment), sum(a.amountInArrear), sum(a.amount * a.unitPrice ) from PurchaseRecord a where a.companyId = :companyId ");
 		sb.append( " group by a.productId" );
 		List<Object> list = dao.findForPage(sb.toString(), values, pagination.getStartIndex(), pagination.getPageSize());
 		List<Repertory> data = new ArrayList<Repertory>();
@@ -44,6 +44,7 @@ public class RepertoryServiceImpl implements IRepertoryService {
 				repertory.setAccountPayable(Float.parseFloat(objs[5].toString()));
 				repertory.setActualPayment(Float.parseFloat(objs[6].toString()));
 				repertory.setAmountInArrear(Float.parseFloat(objs[7].toString()));
+				repertory.setTotalValue(Float.parseFloat(objs[8].toString()));
 				data.add(repertory);
 			}
 		}

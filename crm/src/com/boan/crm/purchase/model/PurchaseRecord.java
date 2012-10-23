@@ -91,6 +91,11 @@ public class PurchaseRecord implements java.io.Serializable {
 	@Column(name = "AMOUNT")
 	private int amount;
 	/**
+	 * 单价
+	 */
+	@Column(name = "UNIT_PRICE")
+	private float  unitPrice;
+	/**
 	 * 运费
 	 */
 	@Column(name = "FREIGHT")
@@ -268,6 +273,14 @@ public class PurchaseRecord implements java.io.Serializable {
 
 	public void setSupplierNumber(String supplierNumber) {
 		this.supplierNumber = supplierNumber;
+	}
+
+	public float getUnitPrice() {
+		return unitPrice;
+	}
+
+	public void setUnitPrice(float unitPrice) {
+		this.unitPrice = unitPrice;
 	}
 
 }
