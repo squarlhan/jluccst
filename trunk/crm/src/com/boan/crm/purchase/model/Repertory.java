@@ -43,6 +43,11 @@ public class Repertory implements java.io.Serializable {
 	 * 欠款
 	 */
 	private float amountInArrear;
+	
+	/**
+	 * 总价值=单价*数量
+	 */
+	private float totalValue;
 
 	/**
 	 * 默认机构器
@@ -140,6 +145,14 @@ public class Repertory implements java.io.Serializable {
 
 	public static long getSerialversionuid() {
 		return serialVersionUID;
+	}
+
+	public float getTotalValue() {
+		return totalValue;
+	}
+
+	public void setTotalValue(float totalValue) {
+		this.totalValue = totalValue;
 	}
 
 }
