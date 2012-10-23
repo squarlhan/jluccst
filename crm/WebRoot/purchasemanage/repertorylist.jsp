@@ -100,7 +100,7 @@
 									<strong>欠款</strong>
 								</td>
 								<td align="center" background="<%=path %>/images/headerbg.jpg">
-									<strong>总价值</strong>
+									<strong>总价值<font style="font-size:9pt;color:#888888">[单价x数量]</font></strong>
 								</td>
 								<td align="center" background="<%=path %>/images/headerbg.jpg">
 									<strong>操作</strong>
