@@ -53,4 +53,15 @@ public class PurchaseRecordServiceImpl implements IPurchaseRecordService {
 		return dao.queryRecordSum(batchId);
 	}
 
+	@Override
+	public Pagination<PurchaseRecord> findPorductDetailListForPage(Map<String, ?> values, Pagination<PurchaseRecord> pagination) {
+		String hql = "from PurchaseRecord where productId = :productId and companyId = :companyId order by  createTime asc";
+		List<PurchaseRecord> data = dao.findForPage(hql, values, pagination.getStartIndex(), pagination.getPageSize());
+		hql = "select count(*) from PurchaseRecord  where productId = :productId  and companyId = :companyId";
+		int totalRows = dao.findCountForPage(hql, values);
+		pagination.setTotalRows(totalRows);
+		pagination.setData(data);
+		return pagination;
+	}
+
 }

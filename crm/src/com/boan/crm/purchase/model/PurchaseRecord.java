@@ -32,11 +32,27 @@ public class PurchaseRecord implements java.io.Serializable {
 	@GeneratedValue(generator = "system-uuid")
 	private String id;
 	/**
-	 *  公司id
+	 * 公司id
 	 */
 	@Column(name = "COMPANY_ID", length = 50)
 	private String companyId;
+	/**
+	 * 供应商id
+	 */
+	@Column(name = "SUPPLIER_ID", length = 50)
+	private String supplierId;
 	
+	/**
+	 * 供应商名称
+	 */
+	@Column(name = "SUPPLIER_NAME", length = 50)
+	private String supplierName;
+	/**
+	 * 供应商编号
+	 */
+	@Column(name = "SUPPLIER_NUMBER", length = 50)
+	private String supplierNumber;
+
 	/**
 	 * 批次id
 	 */
@@ -228,6 +244,30 @@ public class PurchaseRecord implements java.io.Serializable {
 
 	public void setCompanyId(String companyId) {
 		this.companyId = companyId;
+	}
+
+	public String getSupplierId() {
+		return supplierId;
+	}
+
+	public void setSupplierId(String supplierId) {
+		this.supplierId = supplierId;
+	}
+
+	public String getSupplierName() {
+		return supplierName;
+	}
+
+	public void setSupplierName(String supplierName) {
+		this.supplierName = supplierName;
+	}
+
+	public String getSupplierNumber() {
+		return supplierNumber;
+	}
+
+	public void setSupplierNumber(String supplierNumber) {
+		this.supplierNumber = supplierNumber;
 	}
 
 }
