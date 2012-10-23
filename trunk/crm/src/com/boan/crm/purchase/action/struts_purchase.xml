@@ -28,6 +28,11 @@
 			<result name="error">/common/messagenoclose.jsp</result>
 		</action>
 		<action name="deletePurchaseRecordAction" class="purchaseAction" method="deletePurchaseRecord" />
+		<!-- 采购详细记录为库存清单使用 -->
+		<action name="showPurchaseDetailAction" class="purchaseAction" method="showPurchaseDetail">
+			<result name="success">/purchasemanage/purchaserecordlistdetail.jsp</result>
+			<result name="input">/purchasemanage/purchaserecordlistdetail.jsp</result>
+		</action>
 		<!-- 库存清单 -->
 		<action name="showRepertoryListAction" class="repertoryAction" method="showRepertoryList">
 				<result name="success">/purchasemanage/repertorylist.jsp</result>

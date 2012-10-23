@@ -76,6 +76,8 @@ public class PurchaseAction extends BaseActionSupport {
 	private String isSettleAccount = null;
 	
 	private List<DataDictionary> productList = null;
+	
+	private String productId = null;
 
 	/**
 	 * 显示采购记录
@@ -250,9 +252,6 @@ public class PurchaseAction extends BaseActionSupport {
 			purchaseRecord.setId(null);
 		}
 		purchaseRecord.setCompanyId(sessionCompanyId);
-		// purchaseRecord.setCompanyName(sessionCompanyName);
-		// purchaseRecord.setUserId(sessionUserId);
-		// purchaseRecord.setUserName(sessionUserCName);
 		//获取产品名称
 		DataDictionary product = dataDictionaryService.get(purchaseRecord.getProductId());
 		if( product != null  ){
@@ -260,6 +259,15 @@ public class PurchaseAction extends BaseActionSupport {
 		}else{
 			purchaseRecord.setProductName("未知产品");
 		}
+		//获取供应商信息
+		PurchaseBatch batch = purchaseBatchService.get(purchaseRecord.getBatchId());
+		if( batch != null ){
+			
+			purchaseRecord.setSupplierId( batch.getSupplierId() );
+			purchaseRecord.setSupplierName( batch.getSupplierName() );
+			purchaseRecord.setSupplierNumber( batch.getSupplierNumber() );
+		}
+		
 		purchaseRecord.setCreateTime(date);
 		try {
 			purchaseRecordService.saveOrUpdate(purchaseRecord);
@@ -273,6 +281,19 @@ public class PurchaseAction extends BaseActionSupport {
 		log.setLogContent("[" + purchaseRecord.getProductName() + "]" + "采购记录保存成功");
 		super.saveLog(log);
 		// 保存日志结束
+		return SUCCESS;
+	}
+	
+	/**
+	 * 用于库存清单显示详细记录用
+	 * @return
+	 */
+	public String showPurchaseDetail()
+	{
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("productId", productId);
+		map.put("companyId", sessionCompanyId);
+		paginationRecord = purchaseRecordService.findPorductDetailListForPage(map, paginationRecord);
 		return SUCCESS;
 	}
 
@@ -414,6 +435,14 @@ public class PurchaseAction extends BaseActionSupport {
 
 	public void setProductList(List<DataDictionary> productList) {
 		this.productList = productList;
+	}
+
+	public String getProductId() {
+		return productId;
+	}
+
+	public void setProductId(String productId) {
+		this.productId = productId;
 	}
 
 }
