@@ -987,7 +987,7 @@
 									<tr>
 										<td width="40" align="right" style="padding-bottom: 4px;"><img src="images/menuto.jpg" width="5" height="5" />
 										</td>
-										<td><a href="suppliermanage/suppliermanage.jsp" target="mainFrame">库存管理</a>
+										<td><a href="purchasemanage/repertorymanage.jsp" target="mainFrame">库存清单</a>
 										</td>
 									</tr>
 								</table>
