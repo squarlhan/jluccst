@@ -99,9 +99,11 @@
 								<td align="center" background="<%=path %>/images/headerbg.jpg">
 									<strong>欠款</strong>
 								</td>
+								<!-- 
 								<td align="center" background="<%=path %>/images/headerbg.jpg">
 									<strong>总价值</strong>
 								</td>
+								 -->
 								<td align="center" background="<%=path %>/images/headerbg.jpg">
 									<strong>操作</strong>
 								</td>
@@ -126,15 +128,14 @@
 									<td height="26" align="center" bgcolor="#FFFFFF">
 										<s:property value="amountInArrear" />
 									</td>
+									<!-- 
 									<td height="26" align="center" bgcolor="#FFFFFF">
 										<s:property value="amountInArrear" />总价值
 									</td>
+									 -->
 									<td height="26" colspan="2" align="center" bgcolor="#FFFFFF">
-										<s:url id="edit_url" action="showPurchaseRecordListAction">
-											<s:param name="purchaseRecord.batchId" value="id"></s:param>
-										</s:url>
-										<s:url id="delete_url" action="deletePurchaseBatchAction">
-											<s:param name="purchaseBatchIds" value="id"></s:param>
+										<s:url id="edit_url" action="showPurchaseDetailAction">
+											<s:param name="productId" value="productId"></s:param>
 										</s:url>
 										<a name="edit" href="javascript:void(0);" url="${edit_url}">查看详细记录</a>
 									</td>
