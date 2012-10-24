@@ -8,6 +8,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -21,6 +23,7 @@ import org.hibernate.annotations.GenericGenerator;
  */
 @Entity
 @Table(name = "CUSTOMER_LIB_INFO")
+@Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
 public class CustomerLibInfo implements Serializable
 {
 	/**
