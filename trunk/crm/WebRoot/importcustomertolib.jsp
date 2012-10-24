@@ -21,8 +21,13 @@
 		  	 */
 			var _device_submit = {
 				rules: {
+					"provinceId":{required:true},
 					"uploadFile":{required:true}
 				},messages:{
+					"provinceId":
+					{
+					    required:"选择省份名称！"
+					},
 					"uploadFile":
 					{
 					    required:"请选择文件！"
@@ -98,9 +103,13 @@
 		</script>
 	</head>
 
-	<body>
+	<body >
+		<center>
 		<s:form id="form1" name="form1" method="post" theme="simple" enctype="multipart/form-data">
 			<s:label id="lb_message" name="message" cssStyle="display:none"></s:label>
+		<fieldset  style="width:80%" >
+		<legend>查询条件</legend>
+   		<span>
 			<table width="100%" border="0" cellspacing="5" cellpadding="0">
 				<tr>
 					<td>
@@ -110,6 +119,15 @@
 								<td style="height: 36px;">
 									<table id="table1" width="100%" border="0" cellpadding="5"
 										cellspacing="1" bgcolor="#d5e4fd">
+										<tr>
+											<td height="26" align="right" bgcolor="#FFFFFF">
+												<strong>选择省份名称：</strong>
+											</td>
+											<td height="26" align="left" bgcolor="#FFFFFF">
+												<s:select id="sel_province"  name ="provinceId"  list="provinceList" listKey="id"  listValue="provinceName" cssStyle="width:230px" headerKey="" headerValue="--- 请选择 ---"></s:select>
+												<font color="red">*</font>
+											</td>
+										</tr>
 										<tr>
 											<td height="26" align="right" bgcolor="#FFFFFF">
 												<strong>选择导入文件：</strong>
@@ -132,11 +150,14 @@
 					</td>
 				</tr>
 			</table>
+			</span>
+			</fieldset>
 			<s:if test="hasFieldErrors()">
 				<s:iterator value="fieldErrors">
 					<s:label id="lb_error" name="value[0]" cssStyle="display:none"></s:label>
 				</s:iterator>
 			</s:if>
 		</s:form>
+		</center>
 	</body>
 </html>
