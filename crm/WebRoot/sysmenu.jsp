@@ -295,7 +295,7 @@
 									<tr>
 										<td width="40" align="right" style="padding-bottom: 4px;"><img src="images/menuto.jpg" width="5" height="5" />
 										</td>
-										<td><a href="importcustomertolib.jsp" target="mainFrame">导入客户库</a>
+										<td><a href="toImportCustomerLibAction.action" target="mainFrame">导入客户库</a>
 										</td>
 									</tr>
 								</table>
