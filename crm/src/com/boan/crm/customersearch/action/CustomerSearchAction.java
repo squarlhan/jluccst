@@ -37,6 +37,7 @@ import com.boan.crm.datadictionary.service.IAreaService;
 import com.boan.crm.utils.action.BaseActionSupport;
 import com.boan.crm.utils.converter.ParseBeanUtil;
 import com.boan.crm.utils.io.impl.FileCopyAndDeleteUtilsAdaptor;
+import com.boan.crm.utils.myenum.ProvinceEnum;
 import com.boan.crm.utils.page.Pagination;
 import com.boan.crm.utils.path.PathUtil;
 import com.boan.crm.utils.uuid.MyUUIDGenerator;
@@ -163,8 +164,9 @@ public class CustomerSearchAction  extends BaseActionSupport{
 		if(cityId!=null && !cityId.trim().equals("")){
 			values.put("cityId", cityId);
 		}
-		
-		pagination = customerInfoService.findCustomerLibInfoForPage(values, pagination);
+		ProvinceInfo province = areaService.getProvince(provinceId);
+		String provincName = province.getProvinceName();
+		pagination = customerInfoService.findCustomerLibInfoForPage(provincName , values, pagination);
 		if(provinceId!=null){
 			cityList = areaService.findCityInfoByProvinceId(provinceId);
 		}
@@ -180,6 +182,7 @@ public class CustomerSearchAction  extends BaseActionSupport{
 	 */
 	public String toCustomer(){
 		customerLibInfo = customerInfoService.get(customerLibInfo.getId());
+		
 		List<ContractPersonLibInfo> contractPersonInfoList = contractpersonService.findAllContractPersonLibInfoByCustomerId(customerLibInfo.getId());
 		if(customerLibInfo!=null){
 			CustomerInfo customerInfo =(CustomerInfo)ParseBeanUtil.parseBean(customerLibInfo, CustomerInfo.class);
@@ -189,6 +192,7 @@ public class CustomerSearchAction  extends BaseActionSupport{
 			customerInfo.setSalesman(sessionUserCName);
 			customerInfo.setSalesmanId(sessionUserId);
 			customerService.save(customerInfo);
+			
 			for(ContractPersonLibInfo temp : contractPersonInfoList){
 				ContractPersonInfo contractPersonInfo = (ContractPersonInfo)ParseBeanUtil.parseBean(temp, ContractPersonInfo.class);
 				contractPersonInfo.setId(null);
@@ -197,6 +201,12 @@ public class CustomerSearchAction  extends BaseActionSupport{
 			}
 		}
 		message = "转入成功!";
+		return SUCCESS;
+	}
+	
+	public String toImportCustomerLib()
+	{
+		provinceList = areaService.findAllProvinceInfo();
 		return SUCCESS;
 	}
 	
@@ -362,19 +372,22 @@ public class CustomerSearchAction  extends BaseActionSupport{
 											}
 										}
 									}
-									
-									customerInfoService.save(customer);
-									
-									ContractPersonLibInfo contractPerson = new ContractPersonLibInfo();
-									contractPerson.setCustomerId(customer.getId());
-									contractPerson.setPersonName(customerContractPersonName);
-									contractPerson.setTel(customerTel);
-									contractPerson.setPhone(customerPhone);
-									contractPerson.setDeptOrDuty(customerContractDept);
-									contractPerson.setEmail(customerEmail);
-
-									contractpersonService.save(contractPerson);
-									
+									ProvinceInfo province = areaService.getProvince(provinceId);
+									if(province!=null){
+										String provincName = province.getProvinceName();
+										customerInfoService.save ( provincName , customer);
+	//									customerInfoService.save(customer);
+										
+										ContractPersonLibInfo contractPerson = new ContractPersonLibInfo();
+										contractPerson.setCustomerId(customer.getId());
+										contractPerson.setPersonName(customerContractPersonName);
+										contractPerson.setTel(customerTel);
+										contractPerson.setPhone(customerPhone);
+										contractPerson.setDeptOrDuty(customerContractDept);
+										contractPerson.setEmail(customerEmail);
+	
+										contractpersonService.save(provincName,contractPerson);
+									}
 									
 								}
 							}catch(Exception ex)

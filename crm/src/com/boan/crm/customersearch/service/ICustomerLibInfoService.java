@@ -39,4 +39,38 @@ public interface ICustomerLibInfoService {
 	 */
 	public Pagination<CustomerLibInfo> findCustomerLibInfoForPage(
 			Map<String, ?> values, Pagination<CustomerLibInfo> pagination);
+	
+	
+	
+	/**
+	 * 查找全部客户
+	 * @param province 省份
+	 * @return
+	 */
+	public List<CustomerLibInfo> findAllCustomerLibInfo(String province );
+
+	/**
+	 * 根据id获取客户
+	 * @param province 省份
+	 */
+	public CustomerLibInfo get(String province , String id);
+
+	/**
+	 * 根据id删除客户
+	 * @param province 省份
+	 */
+	public void deleteCustomerLibInfo(String province ,String... ids);
+
+	/**
+	 * 保存客户
+	 * @param province 省份
+	 */
+	public void save(String province ,CustomerLibInfo table1);
+
+	/**
+	 * 按分页查询客户
+	 * @param province 省份
+	 */
+	public Pagination<CustomerLibInfo> findCustomerLibInfoForPage(String province ,
+			Map<String, ?> values, Pagination<CustomerLibInfo> pagination);
 }
