@@ -92,6 +92,7 @@
 		/**
 		 * 删除单个报表
 		 */
+		 /*
 		$('a[name="download"]').each(function(){
 			$(this).click(function(){
 				var url = $(this).attr("url");
@@ -111,12 +112,27 @@
 				replist.action = oldAction;
 			});
 		});
+		*/
   	});
+	function toexport(obj){
+		var url = obj.attr("url");
+		var oldAction = replist.action;
+		replist.action = url;
+		replist.submit();
+		replist.action = oldAction;
+	}
 	
+	function download(obj){
+		var url = obj.attr("url");
+		var oldAction = replist.action;
+		replist.action = url;
+		replist.submit();
+		replist.action = oldAction;
+	}
 </script>
 </head>
 <body>
-<s:form action="openReportAction" id="replist">
+<s:form action="openReportAction" id="replist" method="post">
 <table width="100%" style="height:100%;" border="0" cellspacing="5" cellpadding="0">
   <tr>
     <td valign="top"><table width="100%" border="0" cellspacing="5" cellpadding="0">
@@ -177,9 +193,9 @@
 				<s:param name="report.id" value="id"></s:param>   
 			</s:url>
          	<a name="edit" href="javascript:void(0);" url="${edit_url}">编辑</a>  
-         	<a name="export" href="javascript:void(0);" url="${export_url}">导出</a>  
+         	<a name="export" href="javascript:void(0);" url="${export_url}" onclick="toexport($(this));return false;">导出</a>  
          	<s:if test='filePath!=null  &&filePath!=""'>
-         		<a name="download" href="javascript:void(0);" url="${download_url}">附件</a>  
+         		<a name="download" href="javascript:void(0);" url="${download_url}"  onclick="download($(this));return false;">附件</a>  
          	</s:if>
          	<a name="delete" href="javascript:void(0);" url="${delete_url}">删除</a>  
           </td>
