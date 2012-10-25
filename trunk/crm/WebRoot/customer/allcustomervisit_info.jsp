@@ -43,7 +43,7 @@
 					"customerVisitInfo.personId":{required:true},
 					"customerVisitInfo.salesmanId":{required:true},
 					"customerVisitInfo.visitOption":{required:true},
-					"customerTraceInfo.visitTime":{required:true},
+					//"customerTraceInfo.visitTime":{required:true},
 					"customerVisitInfo.qq":{strangecode:true},
 					"customerVisitInfo.email":{email:true},
 					"customerVisitInfo.task":{strangecode:true},
