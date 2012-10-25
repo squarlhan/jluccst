@@ -184,6 +184,8 @@
 	<s:form id="repform" theme="simple"  enctype="multipart/form-data" >
 	<s:label id="lb_message" name="message" cssStyle="display:none"></s:label>
 	<s:hidden id="hid_reportId" name="report.id"></s:hidden>
+	<s:hidden id="hid_reportPersonFactoryId" name="report.reportPersonFactoryId"></s:hidden>
+	<s:hidden id="hid_reportPersonWorkshopId" name="report.reportPersonWorkshopId"></s:hidden>
 	<s:hidden id="hid_templateId" name="report.templateId"></s:hidden>
 	<s:hidden id="hid_reportState" name="report.reportState"></s:hidden>
 	<s:hidden id="hid_isDelete" name="report.isDelete"></s:hidden>
@@ -212,6 +214,16 @@
 									</td>
 									<td height="26" align="left" bgcolor="#FFFFFF">
 										<s:textfield id="txt_reportSubject" name="report.reportSubject" maxlength="25" cssStyle="width: 250px;"/><font color="red">*</font>
+									</td>
+								</tr>
+								<tr>
+									<td height="26" align="right" bgcolor="#FFFFFF">
+										<strong>所属单位：</strong>
+									</td>
+									<td height="26" align="left" bgcolor="#FFFFFF">
+										<span onmousemove="this.setCapture();" onmouseout="this.releaseCapture();" onfocus="this.blur();">
+											<s:textfield id="txt_reportPersonFactoryName" name="report.reportPersonFactoryName+report.reportPersonWorkshopName" maxlength="25" cssStyle="width: 250px;"/>
+										</span>
 									</td>
 								</tr>
 								<tr>
