@@ -329,7 +329,11 @@ public class ReportAction extends BaseActionSupport{
 			report.setReportDate(date);
 			String content = template.getReportContent();
 			report.setReportContent(content);
-
+			report.setReportPersonFactoryId(this.sessionFactoryId);
+			report.setReportPersonWorkshopId(this.sessionWorkshopId);
+			
+			report.setReportPersonFactoryName(this.sessionFactoryName);
+			report.setReportPersonWorkshopName(this.sessionWorkshopName);
 			//保存为当前登录人所在的车间Id
 			report.setDeptId(sessionWorkshopId);
 		}
@@ -343,6 +347,8 @@ public class ReportAction extends BaseActionSupport{
 	public String toAddReport(){
 		try {
 			saveAttachmentToDevice(report);
+			report.setReportPersonFactoryName(this.sessionFactoryName);
+			report.setReportPersonWorkshopName(this.sessionWorkshopName);
 			service.save(report);
 			message="保存成功！";
 		} catch (Exception e) {
@@ -433,6 +439,8 @@ public class ReportAction extends BaseActionSupport{
 	public String toModifyReport(){
 		try {
 			saveAttachmentToDevice(report);
+			report.setReportPersonFactoryName(this.sessionFactoryName);
+			report.setReportPersonWorkshopName(this.sessionWorkshopName);
 			service.update(report);
 			message="保存成功！";
 		} catch (Exception e) {

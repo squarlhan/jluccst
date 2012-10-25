@@ -48,6 +48,31 @@ public class PersonReport implements Serializable{
 	 */
 	@Column(name = "REPORT_PERSON")
 	private String reportPerson;
+	
+	/**
+	 * 汇报人所在工厂Id
+	 */
+	@Column(name = "REPORT_FACTORY_ID")
+	private String reportPersonFactoryId;
+	
+	/**
+	 * 汇报人所在工厂名
+	 */
+	@Column(name = "REPORT_FACTORY_NAME")
+	private String reportPersonFactoryName;
+	
+	/**
+	 * 汇报人所在车间Id
+	 */
+	@Column(name = "REPORT_WORKSHOP_ID")
+	private String reportPersonWorkshopId;
+	
+	/**
+	 * 汇报人所在车间名
+	 */
+	@Column(name = "REPORT_WORKSHOP_NAME")
+	private String reportPersonWorkshopName;
+	
 	/**
 	 * 汇报时间
 	 */
@@ -174,6 +199,30 @@ public class PersonReport implements Serializable{
 	}
 	public void setFileName(String fileName) {
 		this.fileName = fileName;
+	}
+	public String getReportPersonFactoryId() {
+		return reportPersonFactoryId;
+	}
+	public void setReportPersonFactoryId(String reportPersonFactoryId) {
+		this.reportPersonFactoryId = reportPersonFactoryId;
+	}
+	public String getReportPersonFactoryName() {
+		return reportPersonFactoryName;
+	}
+	public void setReportPersonFactoryName(String reportPersonFactoryName) {
+		this.reportPersonFactoryName = reportPersonFactoryName;
+	}
+	public String getReportPersonWorkshopId() {
+		return reportPersonWorkshopId;
+	}
+	public void setReportPersonWorkshopId(String reportPersonWorkshopId) {
+		this.reportPersonWorkshopId = reportPersonWorkshopId;
+	}
+	public String getReportPersonWorkshopName() {
+		return reportPersonWorkshopName;
+	}
+	public void setReportPersonWorkshopName(String reportPersonWorkshopName) {
+		this.reportPersonWorkshopName = reportPersonWorkshopName;
 	}
 }
 
