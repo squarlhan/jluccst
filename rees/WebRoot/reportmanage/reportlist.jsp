@@ -44,7 +44,7 @@
 		 * 添加报表
 		 */
 		$("#addbtn").click(function(){
-			parent.parent.tipsWindown("添加汇报","iframe:openAddReportAction.action","450","400","true","","true","no");
+			parent.parent.tipsWindown("添加汇报","iframe:openAddReportAction.action","450","420","true","","true","no");
 			parent.parent.$("#windown-close").bind('click',function(){
 				window.location.href=window.location.href;
 			});
@@ -56,7 +56,7 @@
 		$('a[name="edit"]').each(function(){
 			$(this).click(function(){
 				var url = $(this).attr("url");
-				parent.parent.tipsWindown("修改报表信息","iframe:"+url,"450","400","true","","true","no");
+				parent.parent.tipsWindown("修改报表信息","iframe:"+url,"450","420","true","","true","no");
 				parent.parent.$("#windown-close").bind('click',function(){
 					window.location.href=window.location.href;
 				});
@@ -134,9 +134,10 @@
           <td width="8%" height="26" align="center" background="../images/headerbg.jpg">
           	<s:checkbox theme="simple" id="cbk_all" name="all"></s:checkbox>
           </td>
-          <td width="16%" align="center" background="../images/headerbg.jpg"><strong>汇报类别</strong></td>
+          <td width="12%" align="center" background="../images/headerbg.jpg"><strong>汇报类别</strong></td>
           <td width="16%" align="center" background="../images/headerbg.jpg"><strong>汇报题目</strong></td>
-		  <td width="16%" align="center" background="../images/headerbg.jpg"><strong>汇报人</strong></td>
+		  <td width="12%" align="center" background="../images/headerbg.jpg"><strong>汇报人</strong></td>
+		  <td width="16%" align="center" background="../images/headerbg.jpg"><strong>所属单位</strong></td>
 		  <td width="16%" align="center" background="../images/headerbg.jpg"><strong>汇报时间</strong></td>
 		   <td width="16%" align="center" background="../images/headerbg.jpg"><strong>操作</strong></td>
 	    </tr>
@@ -153,6 +154,9 @@
           	</td>
           <td height="26" align="center" bgcolor="#FFFFFF">
 			<s:property value="reportPerson"/>&nbsp;
+			</td>
+			<td height="26" align="center" bgcolor="#FFFFFF">
+			<s:property value="reportPersonFactoryName"/><s:property value="reportPersonWorkshopName"/>&nbsp;
 			</td>
 		  <td height="26" align="center" bgcolor="#FFFFFF"><!-- format="yyyy-MM-dd HH:mm" -->
 		  	<s:date  name="reportDate" format="yyyy-MM-dd" />&nbsp;
