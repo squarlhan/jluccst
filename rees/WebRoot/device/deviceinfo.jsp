@@ -112,7 +112,7 @@
 				$.fn.save();
 		  		$.fn.close();
 		  		$.fn.initpage();
-		  		$.fn.download();
+		  		//$.fn.download();
 		  		$.fn.deviceTypeChange();
 		  		
 		  		if($("#sel_dataType").val()=="S"){
@@ -210,6 +210,13 @@
 					form1.action = oldAction;
 				});
 			};
+			
+			function download(){
+				var oldAction = form1.action;
+				form1.action = "toDownloadDeviceImageAction.action";
+				form1.submit();
+				form1.action = oldAction;
+			}
 			
 			/**
 			 * 删除设备图片
@@ -410,7 +417,7 @@
 										<strong>设备图片：</strong>
 										</td>
 										<td height="26" align="left" bgcolor="#FFFFFF">
-											<a id="download" href="javascript:void(0);"><img src="<%=basePath%>/images/picture_link.png" style="height:32px;width:32px;cursor:pointer" border="0" title="查看"></img></a>
+											<a id="download" href="javascript:void(0);" onclick="download();return false;"><img src="<%=basePath%>/images/picture_link.png" style="height:32px;width:32px;cursor:pointer" border="0" title="查看"></img></a>
 											<a id="delImg" href="javascript:void(0);" onclick="$.fn.delImg('${device.id}')"><img src="<%=basePath%>/images/cross.png" style="height:32px;width:32px;cursor:pointer" border="0" title="删除"></img></a>
 										</td>
 									</tr>	
