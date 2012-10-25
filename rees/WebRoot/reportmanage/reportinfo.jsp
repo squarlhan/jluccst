@@ -94,7 +94,7 @@
 		$.fn.save();
 		$.fn.exportReport();
 		$.fn.close();
-		$.fn.download();
+		//$.fn.download();
   	});
 
 	/**
@@ -178,6 +178,13 @@
 			repform.action = oldAction;
 		});
 	};
+	
+	function download(){
+		var oldAction = repform.action;
+		repform.action = "toDownloadReportAttachmentAction.action";
+		repform.submit();
+		repform.action = oldAction;
+	}
 </script>
 </head>
 <body>
@@ -257,7 +264,7 @@
 										<strong>附件：</strong>
 										</td>
 										<td height="26" align="left" bgcolor="#FFFFFF">
-											<a id="download" href="javascript:void(0);"><img src="<%=basePath%>/images/picture_link.png" style="height:32px;width:32px;cursor:pointer" border="0" title="查看"></img></a>
+											<a id="download" href="javascript:void(0);"   onclick="download();return false;"><img src="<%=basePath%>/images/picture_link.png" style="height:32px;width:32px;cursor:pointer" border="0" title="查看"></img></a>
 											<a id="delAttachment" href="javascript:void(0);" onclick="$.fn.delAttachment('${report.id}')"><img src="<%=basePath%>/images/cross.png" style="height:32px;width:32px;cursor:pointer" border="0" title="删除"></img></a>
 										</td>
 									</tr>	
