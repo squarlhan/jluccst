@@ -122,16 +122,34 @@
 									<s:checkbox theme="simple" id="cbk_all" name="all"></s:checkbox>
 								</td>
 								<td align="center" background="<%=path %>/images/headerbg.jpg">
-									<strong>供应商名称</strong>
+									<strong>日期</strong>
 								</td>
 								<td align="center" background="<%=path %>/images/headerbg.jpg">
-									<strong>供应商编号</strong>
+									<strong>销售总额</strong>
 								</td>
 								<td align="center" background="<%=path %>/images/headerbg.jpg">
-									<strong>产品</strong>
+									<strong>应收款总额</strong>
 								</td>
 								<td align="center" background="<%=path %>/images/headerbg.jpg">
-									<strong>备注</strong>
+									<strong>实际收入</strong>
+								</td>
+								<td align="center" background="<%=path %>/images/headerbg.jpg">
+									<strong>欠款</strong>
+								</td>
+								<td align="center" background="<%=path %>/images/headerbg.jpg">
+									<strong>进货总额</strong>
+								</td>
+								<td align="center" background="<%=path %>/images/headerbg.jpg">
+									<strong>应付款总额</strong>
+								</td>
+								<td align="center" background="<%=path %>/images/headerbg.jpg">
+									<strong>实际支出</strong>
+								</td>
+								<td align="center" background="<%=path %>/images/headerbg.jpg">
+									<strong>库存总额</strong>
+								</td>
+								<td align="center" background="<%=path %>/images/headerbg.jpg">
+									<strong>总利润</strong>
 								</td>
 								<td align="center" background="<%=path %>/images/headerbg.jpg">
 									<strong>操作</strong>
@@ -148,6 +166,24 @@
 									</td>
 									<td height="26" align="center" bgcolor="#FFFFFF">
 										<s:property value="supplierNumber" />
+									</td>
+									<td height="26" align="center" bgcolor="#FFFFFF" style="work-break:break-all;">
+										<s:property value="product" />
+									</td>
+									<td height="26" align="center" bgcolor="#FFFFFF" style="work-break:break-all;">
+										<s:property value="product" />
+									</td>
+									<td height="26" align="center" bgcolor="#FFFFFF" style="work-break:break-all;">
+										<s:property value="product" />
+									</td>
+									<td height="26" align="center" bgcolor="#FFFFFF" style="work-break:break-all;">
+										<s:property value="product" />
+									</td>
+									<td height="26" align="center" bgcolor="#FFFFFF" style="work-break:break-all;">
+										<s:property value="product" />
+									</td>
+									<td height="26" align="center" bgcolor="#FFFFFF" style="work-break:break-all;">
+										<s:property value="product" />
 									</td>
 									<td height="26" align="center" bgcolor="#FFFFFF" style="work-break:break-all;">
 										<s:property value="product" />
@@ -170,7 +206,7 @@
 								</tr>
 							</s:iterator>
 							<tr>
-								<td height="26" colspan="9" align="center" bgcolor="#FFFFFF">
+								<td height="26" colspan="12" align="center" bgcolor="#FFFFFF">
 									<page:pages currentPage="pagination.currentPage"
 										totalPages="pagination.totalPages"
 										totalRows="pagination.totalRows" styleClass="page"
