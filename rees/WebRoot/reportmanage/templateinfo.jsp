@@ -94,7 +94,7 @@
 		})
 		$.fn.save();
 		$.fn.close();
-		$.fn.downloadTemplate();
+		//$.fn.downloadTemplate();
   	});
 
 	/**
@@ -160,6 +160,12 @@
 		});
 	}
 	
+	function download(){
+		var oldAction = repform.action;
+		repform.action = "toDownloadTempleFileAction.action";
+		repform.submit();
+		repform.action = oldAction;
+	}
 	/**
 	 * 关闭
 	 */
@@ -235,7 +241,7 @@
 										<strong>添加模板文件：</strong>
 										</td>
 										<td height="26" align="left" bgcolor="#FFFFFF">
-											<a id="download" href="javascript:void(0);"><img src="<%=basePath%>/images/Files-Word.png" style="height:32px;width:32px;cursor:pointer" title="查看"></img></a>
+											<a id="download" href="javascript:void(0);" onclick="download();return false;"><img src="<%=basePath%>/images/Files-Word.png" style="height:32px;width:32px;cursor:pointer" title="查看"></img></a>
 											<a id="delTemplate" href="javascript:void(0);" onclick="$.fn.delTemplate('${template.id}')"><img src="<%=basePath%>/images/cross.png" style="height:32px;width:32px;cursor:pointer" title="删除"></img></a>
 										</td>
 									</tr>	
