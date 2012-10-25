@@ -44,7 +44,7 @@
 					"customerVisitInfo.salesmanId":{required:true},
 					"customerVisitInfo.visitOption":{required:true},
 					"customerVisitInfo.qq":{strangecode:true},
-					"visitTime":{required:true,date:true},
+					"visitTime":{required:true},
 					"customerVisitInfo.email":{email:true},
 					"customerVisitInfo.task":{strangecode:true},
 					"customerVisitInfo.contentResult":{strangecode:true},
