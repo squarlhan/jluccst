@@ -14,7 +14,7 @@
 	<!-- Spring配置文件参数 -->
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
-		<param-value>/WEB-INF/applicationContext-*.xml,classpath*:applicationContext-*.xml,classpath*:applicationContext.xml</param-value>
+		<param-value>/WEB-INF/applicationContext-*.xml,classpath*:applicationContext-*.xml,classpath*:applicationContext.xml,classpath*:xfire-services.xml</param-value>
 	</context-param>
 	
 	<!-- Spring监听 -->
@@ -89,7 +89,7 @@
 	</filter>
 	<filter-mapping>
 		<filter-name>struts2</filter-name>
-		<url-pattern>/*</url-pattern>
+		<url-pattern>*.action</url-pattern>
 	</filter-mapping>
 	<filter>
 		<filter-name>encodingFilter</filter-name>
@@ -119,6 +119,28 @@
 		<url-pattern>*.action</url-pattern>
 	</filter-mapping>
 	<!-- 验证SESSION完毕 -->
+	<servlet>
+		<servlet-name>XFireServlet</servlet-name>
+		<servlet-class>
+			org.codehaus.xfire.spring.XFireSpringServlet
+		</servlet-class>
+		<load-on-startup>0</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>XFireServlet</servlet-name>
+		<url-pattern>/services/*</url-pattern>
+	</servlet-mapping>
+	<servlet>
+		<servlet-name>dispatcher</servlet-name>
+		<servlet-class>
+			org.springframework.web.servlet.DispatcherServlet
+		</servlet-class>
+		<load-on-startup>0</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>dispatcher</servlet-name>
+		<url-pattern>/services/</url-pattern>
+	</servlet-mapping>
 	<welcome-file-list>
 		<welcome-file>default.jsp</welcome-file>
 	</welcome-file-list>
