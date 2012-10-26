@@ -176,6 +176,21 @@ public class CustomerSearchAction  extends BaseActionSupport{
 		return SUCCESS;
 	}
 	
+	public void validateCustomerSearch(){
+		provinceList = areaService.findAllProvinceInfo();
+		ProvinceInfo province = areaService.getProvince(provinceId);
+		if(province==null){
+			message="没有对应省份数据，请联系管理员！";
+			this.addFieldError("", "");
+		}else{
+			String provincName = province.getProvinceName();
+			System.out.println(ProvinceEnum.getKeyByName(provincName));
+			if(ProvinceEnum.getKeyByName(provincName)==null){
+				message="没有对应省份数据，请联系管理员！";
+				this.addFieldError("", "");
+			}
+		}
+	}
 	/**
 	 * 转为客户
 	 * @return
