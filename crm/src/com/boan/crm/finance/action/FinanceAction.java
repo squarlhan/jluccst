@@ -28,7 +28,9 @@ public class FinanceAction extends BaseActionSupport {
 	 * @return
 	 */
 	public String showFinanceList() throws Exception {
-		// Map<String, Object> map = new HashMap<String, Object>();
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("companyId", sessionCompanyId);
+		
 		return SUCCESS;
 	}
 
