@@ -50,11 +50,8 @@
 	$(function() {
 		$("#addbtn").click(
 				function() {
-					parent.parent.tipsWindown("添加供应商","iframe:showSupplierInfoAction.action?companyId=<s:property value="companyId"/>&supplier.id=", "460", "350", "true", "", "true", "no");
-					parent.parent.$("#windown-close").bind('click', function() {
-						window.location.href = "./showSupplierListAction.action?companyId=<s:property value="companyId"/>";
-					});
-
+					var url="./showFinanceListAction.action";
+					form1.submit();
 				});
 		$.fn.checkall("cbk_all");
 		$.fn.uncheckall("supplierIds", "cbk_all");
