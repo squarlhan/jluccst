@@ -31,16 +31,21 @@
 		<meta http-equiv="cache-control" content="no-cache">
 		<meta http-equiv="expires" content="0">
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-		<j:scriptlink css="true" tipswindow="true" jmessagebox="true"
-			jquery="true" validate="true" jfunction="true" />
+		<j:scriptlink css="true" tipswindow="true" jmessagebox="true" jquery="true" validate="true" jfunction="true" />
+		<link rel="stylesheet" media="all" type="text/css" href="<%=path %>/js/timepicke/jquery-ui-1.7.3.custom.css" />
+		<link rel="stylesheet" media="all" type="text/css" href="<%=path %>/js/timepicke/jquery-ui-timepicker-addon.css" />
+		<script type="text/javascript" src="<%=path %>/js/timepicke/jquery-ui-1.7.3.custom.min.js"></script>
+		<script type="text/javascript" src="<%=path %>/js/timepicke/jquery-ui-timepicker-addon.js"></script>
+		<script type="text/javascript" src="<%=path %>/js/timepicke/jquery-ui-timepicker-zh-CN.js"></script>
+		<script type="text/javascript" src="<%=path %>/js/timepicke/jquery-ui-sliderAccess.js"></script>
 		<style type="text/css">
-<!--
-.STYLE1 {
-	color: #FFFFFF;
-	font-weight: bold;
-}
--->
-</style>
+			<!--
+			.STYLE1 {
+				color: #FFFFFF;
+				font-weight: bold;
+			}
+			-->
+		</style>
 		<script type="text/javascript">
 	$(function() {
 		$("#addbtn").click(
@@ -53,7 +58,7 @@
 				});
 		$.fn.checkall("cbk_all");
 		$.fn.uncheckall("supplierIds", "cbk_all");
-
+		$.fn.initpage();
 		/**
 		 * 修改供应商信息
 		 */
@@ -93,6 +98,13 @@
 			}
 		});
 	});
+	/**
+	 * 初始化页面
+	 */
+	$.fn.initpage = function(){
+		$('#beginDate').datetimepicker({showTimepicker: false});
+		$('#endDate').datetimepicker({showTimepicker: false});
+	}
 </script>
 
 	</head>
@@ -107,9 +119,14 @@
 					<td valign="top">
 						<table width="100%" border="0" cellspacing="5" cellpadding="0">
 							<tr>
+								<td height="26" align="right" bgcolor="#FFFFFF" nowrap="nowrap" width="80px">
+									<strong>起始日期：</strong>
+								</td>
 								<td>
-									<input name="addbtn" type="button" class="btn_2_3" id="addbtn"
-										value="添加">
+									<input type="text" name="beginDate" value="" id="beginDate" style="width:100px"/>
+									- <input type="text" name="endDate" value="" id="endDate" style="width:100px"/>
+									&nbsp;
+									<input name="addbtn" type="button" class="btn_2_3" id="addbtn" value="查询">
 									<input name="deletepointbtn" type="button" class="btn_4"
 										id="deletepointbtn" value="删除所选">
 								<td align="right"></td>
