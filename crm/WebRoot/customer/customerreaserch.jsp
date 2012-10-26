@@ -44,6 +44,11 @@
 	<script type="text/javascript">
 	
 		$(function(){
+			
+			if($("#message").html()!=null && $("#message").html()!=""){
+				alert( $("#message").html());
+			}
+			
 			$("#sel_province").change(function(){
 				var provinceId =  $("#sel_province").val();
 				var url = "getCityAction.action";
@@ -108,6 +113,7 @@
   
   <body>
  <s:form id="form1" name="form1" method="post" theme="simple" action="customerSearchAction.action">
+ <s:label  name="message" id ="message" cssStyle="display:none"></s:label>
 <table width="100%" style="height:100%;" border="0" cellspacing="5" cellpadding="0">
   <tr>
     <td valign="top"><fieldset >
