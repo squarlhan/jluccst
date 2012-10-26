@@ -56,4 +56,6 @@
 	<include file="com/boan/crm/supplier/action/struts_supplier.xml"></include>
 	<!-- 采购管理 -->
 	<include file="com/boan/crm/purchase/action/struts_purchase.xml"></include>
+	<!-- 财务清单-->
+	<include file="com/boan/crm/finance/action/struts_finance.xml"></include>
 </struts>
