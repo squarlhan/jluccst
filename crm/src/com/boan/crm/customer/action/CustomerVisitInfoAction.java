@@ -268,7 +268,9 @@ public class CustomerVisitInfoAction extends BaseActionSupport{
 		else
 		{
 			customerVisitInfo = new CustomerVisitInfo();
-			visitTime = CalendarUtils.toLongStringNoSecond(Calendar.getInstance());
+			Calendar time = Calendar.getInstance();
+			time.add(Calendar.HOUR, 1);
+			visitTime = CalendarUtils.toLongStringNoSecond(time);
 		}
 		
 		listVisitOption = dataDictionaryService.findDataDictionaryByType(sessionCompanyId, 5);

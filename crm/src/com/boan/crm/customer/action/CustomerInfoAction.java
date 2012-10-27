@@ -34,7 +34,11 @@ import com.boan.crm.datadictionary.model.ProvinceInfo;
 import com.boan.crm.datadictionary.service.IAreaService;
 import com.boan.crm.datadictionary.service.IDataDictionaryService;
 import com.boan.crm.groupmanage.common.RoleFlag;
+import com.boan.crm.groupmanage.common.UserSession;
+import com.boan.crm.groupmanage.model.Deptment;
 import com.boan.crm.groupmanage.model.User;
+import com.boan.crm.groupmanage.service.IDeptmentService;
+import com.boan.crm.groupmanage.service.IPopedomService;
 import com.boan.crm.groupmanage.service.IUserService;
 import com.boan.crm.utils.action.BaseActionSupport;
 import com.boan.crm.utils.io.impl.FileCopyAndDeleteUtilsAdaptor;
@@ -77,10 +81,29 @@ public class CustomerInfoAction extends BaseActionSupport{
 	@Autowired
 	@Qualifier("userService")
 	private IUserService userService;
+	@Autowired
+	@Qualifier("deptService")
+	private IDeptmentService deptService = null;
+	@Autowired
+	@Qualifier("popedomService")
+	private IPopedomService popedomService = null;
 	
+	public String getCompanyId() {
+		return companyId;
+	}
+	public void setCompanyId(String companyId) {
+		this.companyId = companyId;
+	}
+	public String getCompanyName() {
+		return companyName;
+	}
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
+	}
 	//客户信息类
 	private CustomerInfo customerInfo ;
 	private String id = "";
+	private String deptId = "";
 	private String[] ids = null;
 	private Pagination<CustomerInfo> pagination = new Pagination<CustomerInfo>();
 	private List<DataDictionary> listCategory = null;
@@ -113,6 +136,35 @@ public class CustomerInfoAction extends BaseActionSupport{
 	 * 上传导入文件的名称
 	 */
 	private String uploadFileFileName = null;
+	private String companyId = "";
+	private String companyName = "";
+	private List<Deptment> deptList = null;
+	
+	public String showGroupTree() throws Exception
+	{
+		companyId = sessionCompanyId;
+		companyName = sessionCompanyName;
+		
+		UserSession us = this.getSession();
+		
+		boolean popodomFlag = popedomService.isHasCompanyPopedom( us.getPopedomKeys() );
+		
+		if(popodomFlag)
+		{
+			deptList = deptService.queryAllDeptmentsByCompanyId( sessionCompanyId );
+		}else
+		{
+			deptList = new ArrayList<Deptment>();
+			Deptment dept = new Deptment();
+			dept.setCompanyId(companyId);
+			dept.setDeptName(us.getDeptName());
+			dept.setId(us.getDeptId());
+			deptList.add(dept);
+		}
+		
+		return "success";
+	}
+	
 	/**
 	 * 客户列表
 	 * @return String
@@ -163,7 +215,13 @@ public class CustomerInfoAction extends BaseActionSupport{
 		listCategory = dataDictionaryService.findDataDictionaryByType(sessionCompanyId, 0);
 		try
 		{
-			userList = userService.queryUserListByCompanyIdRoleKey(sessionCompanyId,RoleFlag.YE_WU_YUAN);
+			if(deptId != null && deptId.length() > 0)
+			{
+				userList = userService.queryUserListByCompanyIdRoleKey(sessionCompanyId,deptId,RoleFlag.YE_WU_YUAN);
+			}else
+			{
+				userList = userService.queryUserListByCompanyIdRoleKey(sessionCompanyId,RoleFlag.YE_WU_YUAN);
+			}
 		}catch(Exception ex)
 		{
 			ex.printStackTrace();
@@ -186,7 +244,10 @@ public class CustomerInfoAction extends BaseActionSupport{
 		{
 			values.put("salesmanId", salesmanId);
 		}
-		
+		if(deptId != null && deptId.length() > 0)
+		{
+			values.put("deptId", deptId);
+		}
 		values.put("companyId", sessionCompanyId);
 		
 		pagination = customerInfoService.findCustomerInfoForPage(values, pagination);
@@ -727,5 +788,17 @@ public class CustomerInfoAction extends BaseActionSupport{
 	}
 	public void setMessage(String message) {
 		this.message = message;
+	}
+	public List<Deptment> getDeptList() {
+		return deptList;
+	}
+	public void setDeptList(List<Deptment> deptList) {
+		this.deptList = deptList;
+	}
+	public String getDeptId() {
+		return deptId;
+	}
+	public void setDeptId(String deptId) {
+		this.deptId = deptId;
 	}
 }
