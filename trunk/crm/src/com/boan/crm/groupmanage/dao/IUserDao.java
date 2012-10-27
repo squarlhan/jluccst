@@ -142,4 +142,13 @@ public interface IUserDao extends IBaseDao<User, String> {
 	 * @throws Exception
 	 */
 	public List<User> queryUserList(String companyId, String deptId) throws Exception;
+	/**
+	 * 取公司部门下指定角色的用户列表
+	 * @param companyId
+	 * @param deptId
+	 * @param roleKey
+	 * @return
+	 * @throws Exception
+	 */
+	public List<User> queryUserListByCompanyIdRoleKey(  String companyId, String deptId, String roleKey ) throws Exception;
 }
