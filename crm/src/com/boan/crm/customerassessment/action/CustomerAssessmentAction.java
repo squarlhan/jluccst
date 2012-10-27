@@ -3,6 +3,7 @@
  */
 package com.boan.crm.customerassessment.action;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -99,7 +100,16 @@ public class CustomerAssessmentAction extends BaseActionSupport{
 			{
 				if(customer.getLevelId() != null && customer.getLevelId().length() > 0)
 				{
-					analysisCustomer.setDevelopDegree(Double.parseDouble(customer.getLevelId()));
+					NumberFormat f = NumberFormat.getPercentInstance();
+					double level = 0;
+					try
+					{
+						level = f.parse(customer.getLevelId()).doubleValue(); 
+					}catch(Exception ex)
+					{
+						
+					}
+					analysisCustomer.setDevelopDegree(level);
 				}
 			}
 			if(introduceTimes.equals("1"))
