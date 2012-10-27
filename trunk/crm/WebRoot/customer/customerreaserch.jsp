@@ -83,8 +83,9 @@
 			});
 			
 			/**
-	  		 * 修改客户信息
+	  		 * 转为客户信息
 	  		 */
+	  		 /*
 	  		$('a[name="edit"]').each(function(){
 	  			$(this).click(function(){
 	  				var url = $(this).attr("url");
@@ -93,6 +94,16 @@
 					});
 	  			});
 	  		});
+			//*/
+			
+			$('a[name="edit"]').each(function(){
+	  			$(this).click(function(){
+	  				var url = $(this).attr("url");
+	  				$("#form1").attr("action",url);
+	  				$("#form1").submit();
+	  			});
+	  		});
+			
 			$("#queryBtn").click(function(){
 				if($.trim($("#txt_mainIndustry").val())==""){
 					alert("请输入您要查询的主营行业信息！");
@@ -104,6 +115,17 @@
 				}
 				$("#form1").submit();
 			});
+			
+			/**
+	  		 * 不再客户信息
+	  		 */
+	  		$('a[name="nosearch"]').each(function(){
+	  			$(this).click(function(){
+	  				var url = $(this).attr("url");
+	  				$("#form1").attr("action",url);
+	  				$("#form1").submit();
+	  			});
+	  		});
 		});
 		
 		</script>
@@ -190,7 +212,12 @@
 	          	<s:url id="edit_url" action="toCustomerAction.action">   
 					<s:param name="customerLibInfo.id" value="id"></s:param>   
 				</s:url>
+				<s:url id="nosearch_url" action="toNoSearchCustomerAction.action">   
+					<s:param name="customerLibInfo.id" value="id"></s:param>   
+				</s:url>
 	         	<a name="edit" href="javascript:void(0);" url="${edit_url}"><font color="green"><strong>转为客户</strong></font></a>  
+	         	
+	         	<a name="nosearch" href="javascript:void(0);" url="${nosearch_url}"><font color="red"><strong>不再查询</strong></font></a>  
 	          </td>
         </tr>
         </s:iterator>        
