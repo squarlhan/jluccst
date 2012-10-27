@@ -30,6 +30,10 @@ public class FinanceAction extends BaseActionSupport {
 
 	private Pagination<Finance> pagination = new Pagination<Finance>();
 
+	private String beginDate;
+	
+	private String endDate;
+	
 	private Message message = new Message();
 
 	private String[] financeIds = null;
@@ -122,5 +126,21 @@ public class FinanceAction extends BaseActionSupport {
 
 	public void setFinanceIds(String[] financeIds) {
 		this.financeIds = financeIds;
+	}
+
+	public String getBeginDate() {
+		return beginDate;
+	}
+
+	public void setBeginDate(String beginDate) {
+		this.beginDate = beginDate;
+	}
+
+	public String getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(String endDate) {
+		this.endDate = endDate;
 	}
 }
