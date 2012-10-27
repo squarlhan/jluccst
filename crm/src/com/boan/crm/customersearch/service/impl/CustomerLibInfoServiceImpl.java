@@ -218,7 +218,7 @@ public class CustomerLibInfoServiceImpl implements ICustomerLibInfoService{
 	public boolean existCustomerInLib(String province,String customerName ){
 		String provincKey = "CustomerLib_"+ ProvinceEnum.getKeyByName(province);
 		List list = customerLibInfoDao.find("from " + provincKey +" where customerName='"+customerName+"' order by registerTime asc", new Object[0]);
-		return list!=null && list.get(0)!=null ? true : false;
+		return list!=null && list.size()>0 ? true : false;
 	}
 	
 	/**
