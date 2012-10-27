@@ -129,5 +129,14 @@ public interface IUserService {
 	 * @throws Exception
 	 */
 	public List<User> queryUserListByCompanyIdRoleKey(  String companyId, String roleKey ) throws Exception;
+	/**
+	 * 取公司部门下指定角色的用户列表
+	 * @param companyId
+	 * @param deptId
+	 * @param roleKey
+	 * @return
+	 * @throws Exception
+	 */
+	public List<User> queryUserListByCompanyIdRoleKey(  String companyId, String deptId, String roleKey ) throws Exception;
 }
 
