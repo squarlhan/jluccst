@@ -48,27 +48,18 @@
 		</style>
 		<script type="text/javascript">
 	$(function() {
-		$("#addbtn").click(
-				function() {
-					var url="./showFinanceListAction.action";
-					form1.submit();
-				});
 		$.fn.checkall("cbk_all");
-		$.fn.uncheckall("supplierIds", "cbk_all");
+		$.fn.uncheckall("financeIds", "cbk_all");
 		$.fn.initpage();
 		/**
-		 * 修改供应商信息
+		 * 查询并添加记录
 		 */
-		$('a[name="edit"]').each(function() {
-				$(this).click( function() {
-						var url = $(this).attr("url");
-						parent.parent.tipsWindown( "修改供应商", "iframe:" + url, "460","350", "true", "","true", "no");
-						parent.parent.$("#windown-close").bind('click',function() {
-								window.location.href = "./showSupplierListAction.action?companyId=<s:property value="companyId"/>";
-							});
-					});
-			});
-
+		$("#addbtn").click(
+			function() {
+				form1.action ="./saveFinanceAction.action";
+				form1.submit();
+			}
+		);
 		/**
 		 * 删除单个角色信息
 		 */
@@ -77,7 +68,7 @@
 				if (window.confirm("您确定要删除这条信息吗？")) {
 					var url = $(this).attr("url");
 					$.post(url, "", function(data) {
-						window.location.href = window.location.href;
+						window.location.href = "./showFinanceListAction.action"
 					});
 				}
 			});
@@ -88,9 +79,9 @@
 		 */
 		$("#deletepointbtn").click(function() {
 			if (window.confirm("您确定要删除所选信息吗？")) {
-				var url = "deleteSupplierAction.action";
+				var url = "deleteFinanceAction.action";
 				$.post(url, $('#form1').serialize(), function(data) {
-					window.location.href = window.location.href;
+					window.location.href = "./showFinanceListAction.action"
 				});
 			}
 		});
@@ -108,8 +99,7 @@
 
 
 	<body>
-		<s:form id="form1" name="form1" method="post" theme="simple">
-			<s:hidden name="companyId" id="companyId"></s:hidden>
+		<s:form id="form1" name="form1" method="post" theme="simple" action="./showFinanceListAction.action">
 			<table width="100%" style="height: 100%;" border="0" cellspacing="5"
 				cellpadding="0">
 				<tr>
@@ -120,8 +110,8 @@
 									<strong>起始日期：</strong>
 								</td>
 								<td>
-									<input type="text" name="beginDate" value="" id="beginDate" style="width:100px"/>
-									- <input type="text" name="endDate" value="" id="endDate" style="width:100px"/>
+									<input type="text" name="beginDate" value="" id="beginDate" style="width:100px" readonly="true"/>
+									- <input type="text" name="endDate" value="" id="endDate" style="width:100px" readonly="true"/>
 									&nbsp;
 									<input name="addbtn" type="button" class="btn_2_3" id="addbtn" value="查询">
 									<input name="deletepointbtn" type="button" class="btn_4"
@@ -172,55 +162,49 @@
 							<s:iterator value="pagination.data" status="obj">
 								<tr>
 									<td height="26" align="center" bgcolor="#FFFFFF">
-										<s:checkbox id="%{#obj.id}" name="supplierIds" fieldValue="%{id}"
+										<s:checkbox id="%{#obj.id}" name="financeIds" fieldValue="%{id}"
 											value="false" theme="simple" />
 									</td>
 									<td height="26" align="center" bgcolor="#FFFFFF">
-										<s:property value="supplierName" />
+										<s:property value="beginDate" />~<s:property value="endDate" />
 									</td>
 									<td height="26" align="center" bgcolor="#FFFFFF">
-										<s:property value="supplierNumber" />
+										<s:property value="totalSellAmount" />
 									</td>
 									<td height="26" align="center" bgcolor="#FFFFFF" style="work-break:break-all;">
-										<s:property value="product" />
+										<s:property value="totalAccountDue" />
 									</td>
 									<td height="26" align="center" bgcolor="#FFFFFF" style="work-break:break-all;">
-										<s:property value="product" />
+										<s:property value="totalActualReceipt" />
 									</td>
 									<td height="26" align="center" bgcolor="#FFFFFF" style="work-break:break-all;">
-										<s:property value="product" />
+										<s:property value="totalAmountInArrear" />
 									</td>
 									<td height="26" align="center" bgcolor="#FFFFFF" style="work-break:break-all;">
-										<s:property value="product" />
+										<s:property value="totalAmountPurchase" />
 									</td>
 									<td height="26" align="center" bgcolor="#FFFFFF" style="work-break:break-all;">
-										<s:property value="product" />
+										<s:property value="totalAmountDue" />
 									</td>
 									<td height="26" align="center" bgcolor="#FFFFFF" style="work-break:break-all;">
-										<s:property value="product" />
+										<s:property value="totalActualOutlay" />
 									</td>
 									<td height="26" align="center" bgcolor="#FFFFFF" style="work-break:break-all;">
-										<s:property value="product" />
+										<s:property value="totalInventory" />
 									</td>
 									<td height="26" align="center" bgcolor="#FFFFFF">
-										<s:property value="memo" />
+										<s:property value="totalProfit" />
 									</td>
 									<td height="26" colspan="2" align="center" bgcolor="#FFFFFF">
-										<s:url id="edit_url" action="showSupplierInfoAction">
-											<s:param name="supplier.id" value="id"></s:param>
-											<s:param name="supplier.companyId" value="companyId"></s:param>
+										<s:url id="delete_url" action="deleteFinanceAction.action">
+											<s:param name="financeIds" value="id"></s:param>
 										</s:url>
-										<s:url id="delete_url" action="deleteSupplierAction">
-											<s:param name="supplierIds" value="id"></s:param>
-										</s:url>
-										<a name="edit" href="javascript:void(0);" url="${edit_url}">编辑</a>
-										<a name="delete" href="javascript:void(0);"
-											url="${delete_url}">删除</a>
+										<a name="delete" href="javascript:void(0);" url="${delete_url}">删除</a>
 									</td>
 								</tr>
 							</s:iterator>
 							<tr>
-								<td height="26" colspan="12" align="center" bgcolor="#FFFFFF">
+								<td height="26" colspan="13" align="center" bgcolor="#FFFFFF">
 									<page:pages currentPage="pagination.currentPage"
 										totalPages="pagination.totalPages"
 										totalRows="pagination.totalRows" styleClass="page"
