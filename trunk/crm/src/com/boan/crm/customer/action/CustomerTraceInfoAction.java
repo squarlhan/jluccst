@@ -282,7 +282,9 @@ public class CustomerTraceInfoAction extends BaseActionSupport{
 		else
 		{
 			customerTraceInfo = new CustomerTraceInfo();
-			traceTime = CalendarUtils.toLongStringNoSecond(Calendar.getInstance());
+			Calendar time = Calendar.getInstance();
+			time.add(Calendar.HOUR, 1);
+			traceTime = CalendarUtils.toLongStringNoSecond(time);
 		}
 		
 		listTraceOption = dataDictionaryService.findDataDictionaryByType(sessionCompanyId, 6);

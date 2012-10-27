@@ -86,6 +86,10 @@ public class CustomerInfoServiceImpl implements ICustomerInfoService{
 		{
 			hql.append(" and categoryId = :customerCategory ");
 		}
+		if(values.get("deptId") != null)
+		{
+			hql.append(" and salesmanId in (select id from User where deptId =:deptId ) ");
+		}
 		
 		hql.append(" order by registerTime asc");
 		List<CustomerInfo> data = customerInfoDao.findForPage(hql.toString(), values, pagination.getStartIndex(), pagination.getPageSize());
@@ -111,7 +115,10 @@ public class CustomerInfoServiceImpl implements ICustomerInfoService{
 		{
 			hql.append(" and categoryId = :customerCategory ");
 		}
-		
+		if(values.get("deptId") != null)
+		{
+			hql.append(" and salesmanId in (select id from User where deptId =:deptId ) ");
+		}
 		int totalRows = customerInfoDao.findCountForPage(hql.toString(), values);
 		pagination.setTotalRows(totalRows);
 		pagination.setData(data);
