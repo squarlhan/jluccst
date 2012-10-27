@@ -56,6 +56,14 @@
 		 */
 		$("#addbtn").click(
 			function() {
+				if( $("#beginDate").val() == "" || $("#endDate").val() == "" ){
+					alert("请输入完成的起始日期！");
+					return false;
+				}
+				if( $("#beginDate").val()  > $("#endDate").val()  ){
+					alert("结束日期要在开始日期之后！");
+					return false;
+				}
 				form1.action ="./saveFinanceAction.action";
 				form1.submit();
 			}
@@ -110,10 +118,10 @@
 									<strong>起始日期：</strong>
 								</td>
 								<td>
-									<input type="text" name="beginDate" value="" id="beginDate" style="width:100px" readonly="true"/>
-									- <input type="text" name="endDate" value="" id="endDate" style="width:100px" readonly="true"/>
+									<input type="text" name="beginDate"  id="beginDate" style="width:100px" readonly="true" value="<s:property value="beginDate" />"/>
+									- <input type="text" name="endDate"  id="endDate" style="width:100px" readonly="true" value="<s:property value="endDate" />"/>
 									&nbsp;
-									<input name="addbtn" type="button" class="btn_2_3" id="addbtn" value="查询">
+									<input name="addbtn" type="button" class="btn_2_3" id="addbtn" value="生成清单">
 									<input name="deletepointbtn" type="button" class="btn_4"
 										id="deletepointbtn" value="删除所选">
 								<td align="right"></td>
