@@ -10,8 +10,10 @@
 			<result name="input">/financemanage/financelist.jsp</result>
 		</action>
 		<action name="saveFinanceAction" class="financeAction" method="saveFinance">
-			<result name="input">/financemanage/financelist.jsp</result>
+			<result name="success">/financemanage/financelist.jsp</result>
 		</action>
-		<action name="deleteFinanceAction" class="financeAction" method="deleteFinance" />
+		<action name="deleteFinanceAction" class="financeAction" method="deleteFinance" >
+			<result name="success">/financemanage/financelist.jsp</result>
+		</action>
 	</package>
 </struts>

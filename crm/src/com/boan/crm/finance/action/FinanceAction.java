@@ -64,7 +64,8 @@ public class FinanceAction extends BaseActionSupport {
 		log.setLogType(LogType.INFO);
 		log.setLogContent("[" + finance.getBeginDate() + "-" + finance.getEndDate() + "]" + "财务清单保存成功");
 		super.saveLog(log);
-		return SUCCESS;
+		
+		return this.showFinanceList();
 	}
 
 	/**
@@ -88,7 +89,7 @@ public class FinanceAction extends BaseActionSupport {
 			}
 		}
 		financeService.delete(financeIds);
-		return NONE;
+		return this.showFinanceList();
 	}
 
 	public Pagination<Finance> getPagination() {
