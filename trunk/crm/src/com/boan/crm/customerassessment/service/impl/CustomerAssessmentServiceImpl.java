@@ -3,6 +3,7 @@
  */
 package com.boan.crm.customerassessment.service.impl;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,6 +57,9 @@ public class CustomerAssessmentServiceImpl implements ICustomerAssessmentService
 			AnalysisCustomer customer = customerList.get(i);
 			analysisEngineService.setEnter(customer);
 			double value = analysisEngineService.analysisResult();
+			BigDecimal b = new BigDecimal(value);  
+			value = b.setScale(2,   BigDecimal.ROUND_HALF_UP).doubleValue();  
+
 			String result = analysisEngineService.getResultByValue(value);
 			
 			assessment.setCustomerId(customer.getId());
