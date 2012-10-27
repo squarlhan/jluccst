@@ -1,9 +1,12 @@
 package com.boan.crm.finance.action;
 
+import java.text.ParsePosition;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.annotation.Resource;
 import javax.persistence.Column;
 
 import org.apache.commons.lang.StringUtils;
@@ -16,6 +19,7 @@ import com.boan.crm.common.Message;
 import com.boan.crm.finance.model.Finance;
 import com.boan.crm.finance.service.IFinanceService;
 import com.boan.crm.purchase.model.PurchaseBatch;
+import com.boan.crm.purchase.service.IPurchaseRecordService;
 import com.boan.crm.utils.action.BaseActionSupport;
 import com.boan.crm.utils.page.Pagination;
 
@@ -28,15 +32,18 @@ import com.boan.crm.utils.page.Pagination;
 @Controller("financeAction")
 @Scope("prototype")
 public class FinanceAction extends BaseActionSupport {
-
+	@Resource
 	private IFinanceService financeService = null;
+
+	@Resource
+	private IPurchaseRecordService purchaseRecordService = null;
 
 	private Pagination<Finance> pagination = new Pagination<Finance>();
 
 	private String beginDate;
-	
+
 	private String endDate;
-	
+
 	private Message message = new Message();
 
 	private String[] financeIds = null;
@@ -60,38 +67,47 @@ public class FinanceAction extends BaseActionSupport {
 	 * @throws Exception
 	 */
 	public String saveFinance() throws Exception {
-		if( StringUtils.isNotBlank(beginDate) && StringUtils.isNotBlank(endDate) ){
+		if (StringUtils.isNotBlank(beginDate) && StringUtils.isNotBlank(endDate)) {
+			SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");// format格式："yyyy-MM-dd"
+			ParsePosition pos = new ParsePosition(0);
+			ParsePosition pos2= new ParsePosition(0);
+			Date myBeginDate = formatter.parse(beginDate, pos);
+			Date myEndDate = formatter.parse(endDate, pos2);
 			Date date = new Date();
 			Finance finance = new Finance();
 			finance.setCompanyId(sessionCompanyId);
-			
-			//销售总额,根据销售记录中，到查询日期止，所有用户产生的所有销售单中的交易总额和
-			//totalSellAmount
-			
+			finance.setBeginDate(beginDate);
+			finance.setEndDate(endDate);
+			// 销售总额,根据销售记录中，到查询日期止，所有用户产生的所有销售单中的交易总额和
+			// totalSellAmount
+
 			// 应收款总额：根据销售记录中，到查询日期止，所有用户产生的所有销售单中的交易总额和
-			//totalAccountDue;
-			
-			 //实际收入：根据销售记录中，到查询日期止，所有用户产生的所有销售单中的实收和
-			//totalActualReceipt
-			
+			// totalAccountDue;
+
+			// 实际收入：根据销售记录中，到查询日期止，所有用户产生的所有销售单中的实收和
+			// totalActualReceipt
+
 			// 欠款：根据销售记录中，到查询日期止，所有用户产生的所有销售单中的欠款和
-			//totalAmountInArrear
-			
+			// totalAmountInArrear
+
 			// 进货总额：根据采购记录中，到查询日期止，所有用户产生的所有采购单中的（数量X单价）和
-			//totalAmountPurchase
-			
-			//应付款总额：根据采购记录中，到查询日期止，所有用户产生的所有采购单中的（数量X单价）和
-			//totalAmountDue
-			
-			//实际支出：根据采购记录中，到查询日期止，所有用户产生的所有采购单中的实际支出和
-			//totalActualOutlay
-			
+			// totalAmountPurchase
+
+			float totalAmountPurchase = purchaseRecordService.queryTotalAmountPurchase(sessionCompanyId, beginDate, endDate);
+			finance.setTotalAmountPurchase(totalAmountPurchase);
+
+			// 应付款总额：根据采购记录中，到查询日期止，所有用户产生的所有采购单中的（数量X单价）和
+			// totalAmountDue
+
+			// 实际支出：根据采购记录中，到查询日期止，所有用户产生的所有采购单中的实际支出和
+			// totalActualOutlay
+
 			// 库存总额： 根据库存记录中，到查询日期止，所有库存 总和
-			//totalInventory
-			
-			//总利润：销售总额－ 进货总额
-			//totalProfit
-			
+			// totalInventory
+
+			// 总利润：销售总额－ 进货总额
+			// totalProfit
+
 			finance.setCreateTime(date);
 			financeService.saveOrUpdate(finance);
 			message.setContent("财务清单保存成功！");
@@ -174,5 +190,13 @@ public class FinanceAction extends BaseActionSupport {
 
 	public void setEndDate(String endDate) {
 		this.endDate = endDate;
+	}
+
+	public IPurchaseRecordService getPurchaseRecordService() {
+		return purchaseRecordService;
+	}
+
+	public void setPurchaseRecordService(IPurchaseRecordService purchaseRecordService) {
+		this.purchaseRecordService = purchaseRecordService;
 	}
 }
