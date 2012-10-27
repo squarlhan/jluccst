@@ -4,6 +4,9 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.persistence.Column;
+
+import org.apache.commons.lang.StringUtils;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
@@ -57,18 +60,47 @@ public class FinanceAction extends BaseActionSupport {
 	 * @throws Exception
 	 */
 	public String saveFinance() throws Exception {
-		Finance finance = new Finance();
-		finance.setCompanyId(sessionCompanyId);
-		Date date = new Date();
-		finance.setCreateTime(date);
-		financeService.saveOrUpdate(finance);
-		message.setContent("财务清单保存成功！");
-		// 保存日志开始
-		Log log = new Log();
-		log.setLogType(LogType.INFO);
-		log.setLogContent("[" + finance.getBeginDate() + "-" + finance.getEndDate() + "]" + "财务清单保存成功");
-		super.saveLog(log);
-		
+		if( StringUtils.isNotBlank(beginDate) && StringUtils.isNotBlank(endDate) ){
+			Date date = new Date();
+			Finance finance = new Finance();
+			finance.setCompanyId(sessionCompanyId);
+			
+			//销售总额,根据销售记录中，到查询日期止，所有用户产生的所有销售单中的交易总额和
+			//totalSellAmount
+			
+			// 应收款总额：根据销售记录中，到查询日期止，所有用户产生的所有销售单中的交易总额和
+			//totalAccountDue;
+			
+			 //实际收入：根据销售记录中，到查询日期止，所有用户产生的所有销售单中的实收和
+			//totalActualReceipt
+			
+			// 欠款：根据销售记录中，到查询日期止，所有用户产生的所有销售单中的欠款和
+			//totalAmountInArrear
+			
+			// 进货总额：根据采购记录中，到查询日期止，所有用户产生的所有采购单中的（数量X单价）和
+			//totalAmountPurchase
+			
+			//应付款总额：根据采购记录中，到查询日期止，所有用户产生的所有采购单中的（数量X单价）和
+			//totalAmountDue
+			
+			//实际支出：根据采购记录中，到查询日期止，所有用户产生的所有采购单中的实际支出和
+			//totalActualOutlay
+			
+			// 库存总额： 根据库存记录中，到查询日期止，所有库存 总和
+			//totalInventory
+			
+			//总利润：销售总额－ 进货总额
+			//totalProfit
+			
+			finance.setCreateTime(date);
+			financeService.saveOrUpdate(finance);
+			message.setContent("财务清单保存成功！");
+			// 保存日志开始
+			Log log = new Log();
+			log.setLogType(LogType.INFO);
+			log.setLogContent("[" + finance.getBeginDate() + "-" + finance.getEndDate() + "]" + "财务清单保存成功");
+			super.saveLog(log);
+		}
 		return this.showFinanceList();
 	}
 
