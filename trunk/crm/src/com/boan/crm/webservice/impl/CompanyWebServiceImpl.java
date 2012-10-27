@@ -21,7 +21,11 @@ public class CompanyWebServiceImpl implements ICompanyWebService {
 	@Override
 	public void importCompanys(List<CompanyInfo> companyInfos) {
 		// TODO Auto-generated method stub
-		
+		if(companyInfos!=null && companyInfos.size()>0){
+			for(CompanyInfo ci:companyInfos){
+				System.out.println(ci.getCompanyName());
+			}
+		}
 	}
 
 }
