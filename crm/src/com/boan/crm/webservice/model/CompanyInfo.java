@@ -7,6 +7,7 @@ import java.io.Serializable;
  */
 public class CompanyInfo implements Serializable {
 	private static final long serialVersionUID = 217073663671802716L;
+	private String companyType;//主营类别（行业类别）
 	private String companyName;//公司名称
 	private String province;//省份名称
 	private String city;//城市名称
@@ -17,6 +18,19 @@ public class CompanyInfo implements Serializable {
 	private String fax;//传真（可能多个）
 	private String phone;//手机号（可能多个）
 	private String website;//网站（可能多个）
+	
+	/**
+	 * @return the companyType
+	 */
+	public String getCompanyType() {
+		return companyType;
+	}
+	/**
+	 * @param companyType the companyType to set
+	 */
+	public void setCompanyType(String companyType) {
+		this.companyType = companyType;
+	}
 	/**
 	 * @return the companyName
 	 */
