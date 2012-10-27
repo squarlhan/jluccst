@@ -43,7 +43,7 @@
 					"customerVisitInfo.personId":{required:true},
 					"customerVisitInfo.salesmanId":{required:true},
 					"customerVisitInfo.visitOption":{required:true},
-					//"customerTraceInfo.visitTime":{required:true},
+					"customerTraceInfo.visitTime":{required:true},
 					"customerVisitInfo.qq":{strangecode:true},
 					"customerVisitInfo.email":{email:true},
 					"customerVisitInfo.task":{strangecode:true},
@@ -312,8 +312,8 @@
 	</tr>
 	<tr>
 		<td></td>
-		<td align="right" nowrap>回访时间：</td>
-		<td><s:textfield type="text" style="width:150px" name="visitTime" id="visitTime"></s:textfield><font color="red">*</font></td>
+		<td align="right" nowrap title="日期格式：<s:property value='visitTime'/>">回访时间：</td>
+		<td title="日期格式：<s:property value='visitTime'/>"><s:textfield type="text" style="width:150px" name="visitTime" id="visitTime"></s:textfield><font color="red">*</font></td>
 		<td align="right">任务：</td>
 		<td colspan="3"><s:textarea type="text" style="width:400px;height:60px" name="customerVisitInfo.task" id="task"></s:textarea></td>
 	</tr>

@@ -52,7 +52,7 @@
 					"customerTraceInfo.salesmanId":{required:true},
 					"customerTraceInfo.traceOption":{required:true},
 					"customerTraceInfo.qq":{strangecode:true},
-					//"traceTime":{required:true,dateISO:true},
+					"traceTime":{required:true},
 					"customerTraceInfo.email":{email:true},
 					"customerTraceInfo.task":{strangecode:true},
 					"customerTraceInfo.interest":{strangecode:true},
@@ -274,7 +274,7 @@
 		<td></td>
 		<td align="right" style="width: 72px">客户名称：</td>
 		<td >
-		<s:textfield type="text" style="width:150px" name="customerTraceInfo.customerName" id="customerName"></s:textfield>
+		<s:textfield type="text" style="width:150px" name="customerTraceInfo.customerName" id="customerName"></s:textfield><font color="red">*</font>
 		</td>
 		<td align="right">业务员：</td>
 		<td><s:property value="sessionUserCName"/></td>
@@ -307,12 +307,12 @@
 		<td></td>
 		<td align="right" nowrap>受访人：</td>
 		<td ><s:select list="listPerson" listKey="id" listValue="personName" value="customerTraceInfo.tracePersonId" 
-			id="personId" name="customerTraceInfo.tracePersonId" cssStyle="width:150px" headerKey="" headerValue="--请选择--"></s:select></td>
+			id="personId" name="customerTraceInfo.tracePersonId" cssStyle="width:135px" headerKey="" headerValue="--请选择--"></s:select><font color="red">*</font></td>
 		<td align="right" nowrap>跟进人：</td>
 		<td><s:property value="sessionUserCName"/></td>
 		<td align="right" nowrap>跟进方式：</td>
 		<td ><s:select list="listTraceOption" listKey="id" listValue="name" value="customerTraceInfo.traceOption" 
-			id="traceOption" name="customerTraceInfo.traceOption" cssStyle="width:150px" headerKey="" headerValue="--请选择--"></s:select></td>
+			id="traceOption" name="customerTraceInfo.traceOption" cssStyle="width:135px" headerKey="" headerValue="--请选择--"></s:select><font color="red">*</font></td>
 	</tr>
 	<tr>
 		<td></td>
@@ -325,8 +325,8 @@
 	</tr>
 	<tr>
 		<td></td>
-		<td align="right" nowrap>跟进时间：</td>
-		<td><s:textfield type="text" style="width:150px" name="traceTime" id="traceTime"></s:textfield></td>
+		<td align="right" nowrap title="日期格式：<s:property value='traceTime'/>">跟进时间：</td>
+		<td title="日期格式：<s:property value='traceTime'/>"><s:textfield type="text" style="width:150px" name="traceTime" id="traceTime"></s:textfield><font color="red">*</font></td>
 		<td align="right">任务：</td>
 		<td colspan="3"><s:textarea type="text" style="width:400px;height:60px" name="customerTraceInfo.task" id="task"></s:textarea></td>
 	</tr>
