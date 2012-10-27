@@ -168,7 +168,7 @@ $(function() {
                     error: function() { alert('Error loading data!'); },
                     success: function(msg) {
                         $.each(eval(msg), function(i, item) {
-                        	for(var j = 0 ;j< 6;j++)
+                        	for(var j = 1;j<6;j++)
                         	{
 								if($("#chk"+j).val() == item.id)
 								{
