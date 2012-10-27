@@ -48,6 +48,14 @@ public interface ICustomerLibInfoService {
 	 * @return
 	 */
 	public List<CustomerLibInfo> findAllCustomerLibInfo(String province );
+	
+	/**
+	 * 查找指定省份中有无客户
+	 * @param province 省份中文名
+	  @param province 客户名称（公司名称）
+	 * @return true：指定省份中已经存在该公司
+	 */
+	public boolean existCustomerInLib(String province,String customerName );
 
 	/**
 	 * 根据id获取客户
