@@ -42,12 +42,12 @@ public class Finance implements java.io.Serializable {
 	 * 日期,按日期控件进行查询，并保存，开始日期
 	 */
 	@Column(name = "BEGIN_DATE")
-	private Date beginDate;
+	private String beginDate;
 	/**
 	 * 日期,按日期控件进行查询，并保存,结束日期
 	 */
 	@Column(name = "END_DATE")
-	private Date endDate;
+	private String endDate;
 
 	/**
 	 * 销售总额,根据销售记录中，到查询日期止，所有用户产生的所有销售单中的交易总额和
@@ -190,19 +190,19 @@ public class Finance implements java.io.Serializable {
 		return serialVersionUID;
 	}
 
-	public Date getBeginDate() {
+	public String getBeginDate() {
 		return beginDate;
 	}
 
-	public void setBeginDate(Date beginDate) {
+	public void setBeginDate(String beginDate) {
 		this.beginDate = beginDate;
 	}
 
-	public Date getEndDate() {
+	public String getEndDate() {
 		return endDate;
 	}
 
-	public void setEndDate(Date endDate) {
+	public void setEndDate(String endDate) {
 		this.endDate = endDate;
 	}
 
