@@ -1,5 +1,6 @@
 package com.boan.crm.purchase.dao;
 
+import java.util.Date;
 import java.util.List;
 
 import com.boan.crm.purchase.model.PurchaseRecord;
@@ -19,4 +20,13 @@ public interface IPurchaseRecordDao extends IBaseDao<PurchaseRecord, String> {
 	 * @return
 	 */
 	public Object[] queryRecordSum(String batchId);
+	
+	/**
+	 * 进货总额
+	 * @param companyId
+	 * @param beginDate
+	 * @param endDate
+	 * @return
+	 */
+	public float queryTotalAmountPurchase(String companyId, String beginDate, String endDate);
 }

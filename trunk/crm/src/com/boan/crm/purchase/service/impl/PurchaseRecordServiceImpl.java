@@ -1,5 +1,6 @@
 package com.boan.crm.purchase.service.impl;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -62,6 +63,11 @@ public class PurchaseRecordServiceImpl implements IPurchaseRecordService {
 		pagination.setTotalRows(totalRows);
 		pagination.setData(data);
 		return pagination;
+	}
+
+	@Override
+	public float queryTotalAmountPurchase(String companyId, String beginDate, String endDate) {
+		return dao.queryTotalAmountPurchase(companyId, beginDate, endDate);
 	}
 
 }
