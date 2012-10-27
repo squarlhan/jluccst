@@ -1,5 +1,6 @@
 package com.boan.crm.purchase.service;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -21,4 +22,12 @@ public interface IPurchaseRecordService {
 	public Pagination<PurchaseRecord> findPorductDetailListForPage(Map<String, ?> values, Pagination<PurchaseRecord> pagination);
 	
 	public Object[] queryRecordSum(String batchId);
+	/**
+	 * 进货总额
+	 * @param companyId
+	 * @param beginDate
+	 * @param endDate
+	 * @return
+	 */
+	public float queryTotalAmountPurchase(String companyId, String beginDate, String endDate);
 }
