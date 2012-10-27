@@ -32,11 +32,6 @@ public class CompanyWebServiceImpl implements ICompanyWebService {
 	private IContractPersonLibService contractpersonService;
 	
 	@Override
-	public boolean exist(String companyName) {
-		return false;
-	}
-
-	@Override
 	public void importCompanys(List<CompanyInfo> companyInfos) {
 		if(companyInfos!=null && companyInfos.size()>0){
 			
