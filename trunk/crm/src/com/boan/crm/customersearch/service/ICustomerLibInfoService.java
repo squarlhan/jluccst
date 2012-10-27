@@ -72,5 +72,5 @@ public interface ICustomerLibInfoService {
 	 * @param province 省份
 	 */
 	public Pagination<CustomerLibInfo> findCustomerLibInfoForPage(String province ,
-			Map<String, ?> values, Pagination<CustomerLibInfo> pagination);
+			Map<String, ?> values, Pagination<CustomerLibInfo> pagination,String company_Id ,String salesmanId);
 }

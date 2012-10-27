@@ -14,6 +14,16 @@
 			<result name="input">/customer/customerreaserch.jsp</result>
 		</action>
 		
+		<action name="toNoSearchCustomerAction" class="customerSearchAction" method="toNoSearchCustomer">
+			<result name="success">/customer/customerreaserch.jsp</result>
+			<result name="input">/customer/customerreaserch.jsp</result>
+		</action>
+		
+		<action name="toCustomerAction" class="customerSearchAction" method="toCustomer">
+			<result name="success">/customer/customerreaserch.jsp</result>
+			<result name="input">/customer/customerreaserch.jsp</result>
+		</action>
+		
 		<action name="toImportCustomerLibAction" class="customerSearchAction" method="toImportCustomerLib">
 			<result name="success">/importcustomertolib.jsp</result>
 			<result name="input">/importcustomertolib.jsp</result>
@@ -48,10 +58,10 @@
 				<param name="root">areaList</param>
 				</result>
 			</action>
-			<action name="toCustomerAction" class="customerSearchAction" method="toCustomer">
-				<result name="success" type="json">
-				<param name="root">message</param>
-				</result>
-			</action>
+<!-- 			<action name="toCustomerAction" class="customerSearchAction" method="toCustomer"> -->
+<!-- 				<result name="success" type="json"> -->
+<!-- 				<param name="root">message</param> -->
+<!-- 				</result> -->
+<!-- 			</action> -->
 	</package>
 </struts>

@@ -28,8 +28,10 @@ import com.boan.crm.customer.service.IContractPersonService;
 import com.boan.crm.customer.service.ICustomerInfoService;
 import com.boan.crm.customersearch.model.ContractPersonLibInfo;
 import com.boan.crm.customersearch.model.CustomerLibInfo;
+import com.boan.crm.customersearch.model.NoSearchCustomers;
 import com.boan.crm.customersearch.service.IContractPersonLibService;
 import com.boan.crm.customersearch.service.ICustomerLibInfoService;
+import com.boan.crm.customersearch.service.INoSearchCustomersService;
 import com.boan.crm.datadictionary.model.AreaInfo;
 import com.boan.crm.datadictionary.model.CityInfo;
 import com.boan.crm.datadictionary.model.ProvinceInfo;
@@ -66,6 +68,11 @@ public class CustomerSearchAction  extends BaseActionSupport{
 	@Qualifier("contractPersonLibService")
 	private IContractPersonLibService contractpersonService;
 		
+	// 处理不再查询客户的接口类
+	@Autowired
+	@Qualifier("noSearchCustomersService")
+	private INoSearchCustomersService noSearchCustomersService;
+	
 	@Resource
 	// 客户状态接口类
 	private IAreaService areaService;
@@ -144,6 +151,8 @@ public class CustomerSearchAction  extends BaseActionSupport{
 	 */
 	public String openCustomerSearch(){
 		provinceList = areaService.findAllProvinceInfo();
+//		mainIndustry="童装";
+//		 provinceId="402880e439861adb01398639a5a20002" ;
 		return SUCCESS;
 	}
 	/**
@@ -154,7 +163,7 @@ public class CustomerSearchAction  extends BaseActionSupport{
 		
 		provinceList = areaService.findAllProvinceInfo();
 		Map<String,String> values = new HashMap<String,String>();
-	
+		
 		if(mainIndustry!=null && !mainIndustry.trim().equals("")){
 			values.put("mainIndustry", mainIndustry);
 		}
@@ -166,7 +175,7 @@ public class CustomerSearchAction  extends BaseActionSupport{
 		}
 		ProvinceInfo province = areaService.getProvince(provinceId);
 		String provincName = province.getProvinceName();
-		pagination = customerInfoService.findCustomerLibInfoForPage(provincName , values, pagination);
+		pagination = customerInfoService.findCustomerLibInfoForPage(provincName , values, pagination, sessionCompanyId ,sessionUserId);
 		if(provinceId!=null){
 			cityList = areaService.findCityInfoByProvinceId(provinceId);
 		}
@@ -196,6 +205,9 @@ public class CustomerSearchAction  extends BaseActionSupport{
 	 * @return
 	 */
 	public String toCustomer(){
+		
+		provinceList = areaService.findAllProvinceInfo();
+		
 		customerLibInfo = customerInfoService.get(customerLibInfo.getId());
 		
 		List<ContractPersonLibInfo> contractPersonInfoList = contractpersonService.findAllContractPersonLibInfoByCustomerId(customerLibInfo.getId());
@@ -206,7 +218,15 @@ public class CustomerSearchAction  extends BaseActionSupport{
 			customerInfo.setCompanyFullName(sessionCompanyName);
 			customerInfo.setSalesman(sessionUserCName);
 			customerInfo.setSalesmanId(sessionUserId);
-			customerService.save(customerInfo);
+			customerService.save(customerInfo);//保存到客户表
+			
+			NoSearchCustomers obj = new NoSearchCustomers();
+			obj.setCustomerLibId(customerLibInfo.getId());
+			obj.setCompany_Id(sessionCompanyId);
+			obj.setCompanyFullName(sessionCompanyName);
+			obj.setSalesman(sessionUserCName);
+			obj.setSalesmanId(sessionUserId);
+			noSearchCustomersService.save(obj);//保存到不再查询的客户表
 			
 			for(ContractPersonLibInfo temp : contractPersonInfoList){
 				ContractPersonInfo contractPersonInfo = (ContractPersonInfo)ParseBeanUtil.parseBean(temp, ContractPersonInfo.class);
@@ -216,7 +236,26 @@ public class CustomerSearchAction  extends BaseActionSupport{
 			}
 		}
 		message = "转入成功!";
-		return SUCCESS;
+		return customerSearch();
+	}
+	
+	/**
+	 * 查询排除指定客户
+	 * @return
+	 */
+	public String toNoSearchCustomer(){
+		customerLibInfo = customerInfoService.get(customerLibInfo.getId());
+		if(customerLibInfo!=null){
+			NoSearchCustomers obj = new NoSearchCustomers();
+			obj.setCustomerLibId(customerLibInfo.getId());
+			obj.setCompany_Id(sessionCompanyId);
+			obj.setCompanyFullName(sessionCompanyName);
+			obj.setSalesman(sessionUserCName);
+			obj.setSalesmanId(sessionUserId);
+			noSearchCustomersService.save(obj);
+		}
+		 
+		return customerSearch();
 	}
 	
 	public String toImportCustomerLib()

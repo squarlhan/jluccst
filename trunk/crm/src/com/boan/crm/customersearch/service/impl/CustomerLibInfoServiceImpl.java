@@ -49,6 +49,7 @@ import com.boan.crm.customersearch.model.CustomerLib_YunNan;
 import com.boan.crm.customersearch.model.CustomerLib_ZheJiang;
 import com.boan.crm.customersearch.service.IContractPersonLibService;
 import com.boan.crm.customersearch.service.ICustomerLibInfoService;
+import com.boan.crm.customersearch.service.INoSearchCustomersService;
 import com.boan.crm.datadictionary.model.DataDictionary;
 import com.boan.crm.datadictionary.service.IDataDictionaryService;
 import com.boan.crm.groupmanage.model.User;
@@ -80,6 +81,11 @@ public class CustomerLibInfoServiceImpl implements ICustomerLibInfoService{
 	@Qualifier("contractPersonLibService")
 	private IContractPersonLibService contractPersonService = null;
 	
+	// 处理不再查询客户的接口类
+	@Autowired
+	@Qualifier("noSearchCustomersService")
+	private INoSearchCustomersService noSearchCustomersService;
+	
 	@Autowired
 	@Qualifier("userService")
 	private IUserService userService;
@@ -95,8 +101,7 @@ public class CustomerLibInfoServiceImpl implements ICustomerLibInfoService{
 	}
 
 	@Override
-	public Pagination<CustomerLibInfo> findCustomerLibInfoForPage(
-			Map<String, ?> values, Pagination<CustomerLibInfo> pagination) {
+	public Pagination<CustomerLibInfo> findCustomerLibInfoForPage( Map<String, ?> values, Pagination<CustomerLibInfo> pagination) {
 		StringBuilder hql = new StringBuilder();
 		hql.append( "from CustomerLibInfo where 1=1");
 		
@@ -135,7 +140,7 @@ public class CustomerLibInfoServiceImpl implements ICustomerLibInfoService{
 		}
 		if(values.get("areaId") != null)
 		{
-			hql.append(" and area = :areaId ");
+			hql.append(" and district = :areaId ");
 		}
 		
 		int totalRows = customerLibInfoDao.findCountForPage(hql.toString(), values);
@@ -378,7 +383,10 @@ public class CustomerLibInfoServiceImpl implements ICustomerLibInfoService{
 	 * 按分页查询客户
 	 * @param province 省份
 	 */
-	public Pagination<CustomerLibInfo> findCustomerLibInfoForPage(String province , Map<String, ?> values, Pagination<CustomerLibInfo> pagination){
+	public Pagination<CustomerLibInfo> findCustomerLibInfoForPage(String province , Map<String, ?> values, Pagination<CustomerLibInfo> pagination,String company_Id ,String salesmanId){
+		
+//		List<String> noSearchCustomerLibIds=  noSearchCustomersService.findCustomerLibIds(salesmanId);
+		
 		String provincKey = "CustomerLib_"+ ProvinceEnum.getKeyByName(province);
 		StringBuilder hql = new StringBuilder();
 		hql.append( "from " + provincKey +" where 1=1");
@@ -399,6 +407,9 @@ public class CustomerLibInfoServiceImpl implements ICustomerLibInfoService{
 		{
 			hql.append(" and district = :areaId ");
 		}
+		if(salesmanId!=null){
+			hql.append(" and id not in (Select customerLibId from NoSearchCustomers where salesmanId='"+salesmanId+"') ");
+		}
 		
 		hql.append(" order by registerTime asc");
 		List<CustomerLibInfo> data = customerLibInfoDao.findForPage(hql.toString(), values, pagination.getStartIndex(), pagination.getPageSize());
@@ -418,7 +429,10 @@ public class CustomerLibInfoServiceImpl implements ICustomerLibInfoService{
 		}
 		if(values.get("areaId") != null)
 		{
-			hql.append(" and area = :areaId ");
+			hql.append(" and district = :areaId ");
+		}
+		if(salesmanId!=null){
+			hql.append(" and id not in (Select customerLibId from NoSearchCustomers where salesmanId='"+salesmanId+"') ");
 		}
 		
 		int totalRows = customerLibInfoDao.findCountForPage(hql.toString(), values);
