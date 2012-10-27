@@ -44,6 +44,7 @@
 					"customerVisitInfo.visitPersonId":{required:true},
 					"customerVisitInfo.salesmanId":{required:true},
 					"customerVisitInfo.visitOption":{required:true},
+					"visitTime":{required:true},
 					"customerVisitInfo.tel":{strangecode:true},
 					"customerVisitInfo.qq":{strangecode:true},
 					"customerVisitInfo.email":{email:true},
@@ -178,7 +179,7 @@
 	<tr>
 		<td></td>
 		<td align="center" nowrap>回访时间：</td>
-		<td><s:textfield type="text" readOnly="true" style="width:150px" name="visitTime" id="visitTime"></s:textfield></td>
+		<td><s:textfield type="text" readOnly="true" style="width:150px" name="visitTime" id="visitTime"></s:textfield><font color="red">*</font></td>
 		<td align="center"  nowrap>回访任务：</td>
 		<td colspan="3"><s:textarea type="text" style="width:400px;height:60px" name="customerVisitInfo.task" id="task"></s:textarea></td>
 	</tr>

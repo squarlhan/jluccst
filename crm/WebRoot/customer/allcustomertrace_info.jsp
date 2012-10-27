@@ -325,8 +325,8 @@
 	</tr>
 	<tr>
 		<td></td>
-		<td align="right" nowrap>跟进时间：</td>
-		<td><s:textfield  type="text" style="width:150px" name="traceTime" id="traceTime"></s:textfield><font color="red">*</font></td>
+		<td align="right" nowrap title="日期格式：<s:property value='traceTime'/>">跟进时间：</td>
+		<td title="日期格式：<s:property value='traceTime'/>"><s:textfield  type="text" style="width:150px" name="traceTime" id="traceTime"></s:textfield><font color="red">*</font></td>
 		<td align="right">任务：</td>
 		<td colspan="3"><s:textarea type="text" style="width:400px;height:60px" name="customerTraceInfo.task" id="task"></s:textarea></td>
 	</tr>

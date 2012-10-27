@@ -260,7 +260,7 @@
 		<td></td>
 		<td align="right" style="width: 72px">客户名称：</td>
 		<td >
-		<s:textfield type="text" style="width:150px" name="customerVisitInfo.customerName" id="customerName"></s:textfield>
+		<s:textfield type="text" style="width:150px" name="customerVisitInfo.customerName" id="customerName"></s:textfield><font color="red">*</font>
 		</td>
 		<td align="right">业务员：</td>
 		<td><s:property value="sessionUserCName"/></td>
@@ -293,12 +293,12 @@
 		<td></td>
 		<td align="right" nowrap>受访人：</td>
 		<td ><s:select list="listPerson" listKey="id" listValue="personName" value="customerVisitInfo.visitPersonId" 
-			id="personId" name="customerVisitInfo.visitPersonId" cssStyle="width:150px" headerKey="" headerValue="--请选择--"></s:select></td>
+			id="personId" name="customerVisitInfo.visitPersonId" cssStyle="width:135px" headerKey="" headerValue="--请选择--"></s:select><font color="red">*</font></td>
 		<td align="right" nowrap>回访人：</td>
 		<td><s:property value="sessionUserCName"/></td>
 		<td align="right" nowrap>回访方式：</td>
 		<td ><s:select list="listVisitOption" listKey="id" listValue="name" value="customerVisitInfo.visitOption" 
-			id="visitOption" name="customerVisitInfo.visitOption" cssStyle="width:150px" headerKey="" headerValue="--请选择--"></s:select></td>
+			id="visitOption" name="customerVisitInfo.visitOption" cssStyle="width:135px" headerKey="" headerValue="--请选择--"></s:select><font color="red">*</font></td>
 	</tr>
 	<tr>
 		<td></td>
@@ -311,8 +311,8 @@
 	</tr>
 	<tr>
 		<td></td>
-		<td align="right" nowrap>回访时间：</td>
-		<td><s:textfield type="text" style="width:150px" name="visitTime" id="visitTime"></s:textfield></td>
+		<td align="right" nowrap title="日期格式：<s:property value='visitTime'/>">回访时间：</td>
+		<td title="日期格式：<s:property value='visitTime'/>"><s:textfield type="text" style="width:150px" name="visitTime" id="visitTime"></s:textfield><font color="red">*</font></td>
 		<td align="right">任务：</td>
 		<td colspan="3"><s:textarea type="text" style="width:400px;height:60px" name="customerVisitInfo.task" id="task"></s:textarea></td>
 	</tr>

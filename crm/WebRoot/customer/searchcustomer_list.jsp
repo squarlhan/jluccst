@@ -97,15 +97,15 @@
 		<td >
 		<s:textfield name="customerName" id="customerName" style="width: 100px"></s:textfield></td>
 		<td align="center">联 系 人：</td>
-		<td><s:textfield name="contractorName" id="contractorName" style="width: 100px"></s:textfield></td>
+		<td><s:textfield name="contractorName" id="contractorName" style="width: 80px"></s:textfield></td>
 		<td align="center">客户分类：</td>
-		<td style="width:120px"><s:select list="listCategory" listKey="id" listValue="name" value="customerCategory" 
-			id="categoryId" name="customerCategory" cssStyle="width:150px" headerKey="" headerValue="--请选择客户分类--"></s:select></td>
-		<td>所属业务员：</td/>
-		<td style="width:120px"><s:select list="userList" listKey="id" listValue="userCName" value="salesmanId" 
-			id="salesmanId" name="salesmanId" cssStyle="width:150px" headerKey="" headerValue="--请选择业务员--"></s:select></td>
+		<td><s:select list="listCategory" listKey="id" listValue="name" value="customerCategory" 
+			id="categoryId" name="customerCategory" cssStyle="width:100px" headerKey="" headerValue="--请选择--"></s:select></td>
+		<td>业务员：</td/>
+		<td ><s:select list="userList" listKey="id" listValue="userCName" value="salesmanId" 
+			id="salesmanId" name="salesmanId" cssStyle="width:100px" headerKey="" headerValue="--请选择--"></s:select></td>
 		<td></td>
-		<td style="width: 80px"><input type="button" style="width: 80px;" class="btn_4" id="searchBtn" value="快速查询" /></td>
+		<td style="width: 80px"><input type="button" style="width: 80px;" class="btn_4" id="searchBtn" value="查询" /></td>
 	</tr>
 </table></td></tr>
     </table>
