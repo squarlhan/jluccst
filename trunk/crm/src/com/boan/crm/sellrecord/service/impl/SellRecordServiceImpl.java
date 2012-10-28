@@ -235,7 +235,7 @@ public class SellRecordServiceImpl implements ISellRecordService {
 			hql = hql + "and record. bargainTime <='"+endDate+"'";
 		}
 		Map<String, String> param = new HashMap<String,String>();
-		param.put("customerId",companyId);
+		param.put("companyId",companyId);
 		
 		List list = sellRecordDao.find(hql, param);
 		return (list!=null &&  list.size()>0 && list.get(0)!=null )? new BigDecimal( list.get(0).toString()) : new BigDecimal(0);
