@@ -244,26 +244,26 @@
    		<span>
 			<table width="120%" border="0" cellpadding="5" cellspacing="1" bgcolor="#d5e4fd">
 				<tr>
-					<td height="26" align="right" bgcolor="#FFFFFF" nowrap="nowrap">
+					<td height="26"  width="100"  align="right" bgcolor="#FFFFFF" nowrap="nowrap">
 						<strong>客户名称：</strong>
 					</td>
-					<td height="26" align="left" bgcolor="#FFFFFF">
+					<td height="26"  width="220" align="left" bgcolor="#FFFFFF">
 						<s:textfield id="txt_queryCustomerName" name="queryCustomerName" cssStyle="width:212px" ></s:textfield>
 					</td>
-					<td height="26" align="right" bgcolor="#FFFFFF" nowrap="nowrap">
-						<strong>所属业务员：</strong>
-					</td>
-					<td height="26" align="left" bgcolor="#FFFFFF">
-						<s:select id="sel_querySalesman"   name="querySalesman" list="userList"  listKey="id"  listValue="userCName"  headerKey="" headerValue="---全部---" cssStyle="width: 100px;" ></s:select>
-					</td>
-					<td height="26" align="right" bgcolor="#FFFFFF" nowrap="nowrap">
+<%--					<td height="26" align="right" bgcolor="#FFFFFF" nowrap="nowrap">--%>
+<%--						<strong>所属业务员：</strong>--%>
+<%--					</td>--%>
+<%--					<td height="26" align="left" bgcolor="#FFFFFF">--%>
+<%--						<s:select id="sel_querySalesman"   name="querySalesman" list="userList"  listKey="id"  listValue="userCName"  headerKey="" headerValue="---全部---" cssStyle="width: 100px;" ></s:select>--%>
+<%--					</td>--%>
+					<td height="26" width="100"  align="right" bgcolor="#FFFFFF" nowrap="nowrap">
 						<strong>成交日期：</strong>
 					</td>
-					<td height="26" align="left" bgcolor="#FFFFFF"  nowrap="nowrap">
+					<td height="26"  width="220"  align="left" bgcolor="#FFFFFF"  nowrap="nowrap">
 						<s:textfield id="txt_queryBargainTimeBegin" name="queryBargainTimeBegin" cssStyle="width:100px" ></s:textfield>
 						- <s:textfield id="txt_queryBargainTimeEnd" name="queryBargainTimeEnd" cssStyle="width:100px" ></s:textfield>
 					</td>
-					<td height="26" align="right" bgcolor="#FFFFFF" rowspan="2">
+					<td height="26" align="left" bgcolor="#FFFFFF" rowspan="2">
 						<input name="queryBtn" type="submit" class="btn_2_3" id="queryBtn" value="查询">
 					</td>
 				</tr>
