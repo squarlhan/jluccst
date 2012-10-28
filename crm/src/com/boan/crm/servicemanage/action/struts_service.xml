@@ -13,6 +13,10 @@
 			<result name="success">/service/service_log_list_for_customer.jsp</result>
 			<result name="input">/service/service_log_list_for_customer.jsp</result>
 		</action>
+		<action name="serviceloglistforleader" class="serviceLogAction" method="serviceLogListForLeader">
+			<result name="success">/service/service_log_list_for_leader.jsp</result>
+			<result name="input">/service/service_log_list_for_leader.jsp</result>
+		</action>
 		<action name="serviceloglist" class="serviceLogAction" method="serviceLogList">
 			<result name="success">/service/service_log_list.jsp</result>
 			<result name="input">/service/service_log_list.jsp</result>
@@ -20,6 +24,10 @@
 		<action name="servicelog" class="serviceLogAction" method="serviceLogInfo">
 			<result name="success">/service/service_log_info.jsp</result>
 			<result name="input">/service/service_log_info.jsp</result>
+		</action>
+		<action name="servicelogforleader" class="serviceLogAction" method="serviceLogInfoForLeader">
+			<result name="success">/service/service_log_info_for_leader.jsp</result>
+			<result name="input">/service/service_log_info_for_leader.jsp</result>
 		</action>
 		<action name="servicelogbycustomer" class="serviceLogAction" method="serviceLogInfoByCustomer">
 			<result name="success">/service/service_log_info_for_customer.jsp</result>
