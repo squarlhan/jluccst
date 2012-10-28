@@ -1,5 +1,6 @@
 package com.boan.crm.finance.action;
 
+import java.math.BigDecimal;
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -21,6 +22,7 @@ import com.boan.crm.finance.model.Finance;
 import com.boan.crm.finance.service.IFinanceService;
 import com.boan.crm.purchase.model.PurchaseBatch;
 import com.boan.crm.purchase.service.IPurchaseRecordService;
+import com.boan.crm.sellrecord.service.ISellRecordService;
 import com.boan.crm.utils.action.BaseActionSupport;
 import com.boan.crm.utils.page.Pagination;
 
@@ -38,6 +40,8 @@ public class FinanceAction extends BaseActionSupport {
 
 	@Resource
 	private IPurchaseRecordService purchaseRecordService = null;
+	@Resource
+	private ISellRecordService sellRecordService = null;
 
 	private Pagination<Finance> pagination = new Pagination<Finance>();
 
@@ -79,18 +83,26 @@ public class FinanceAction extends BaseActionSupport {
 			finance.setCompanyId(sessionCompanyId);
 			finance.setBeginDate(beginDate);
 			finance.setEndDate(endDate);
-			// 销售总额,根据销售记录中，到查询日期止，所有用户产生的所有销售单中的交易总额和
+			// 销售总额,根据销售记录中，到查询日期止，所有用户产生的所有销售单中的交易总额和?？
 			// totalSellAmount
-
+			BigDecimal bTotalSellAmount = sellRecordService.getTotalMoneyByType("RECEIVABLE", sessionCompanyId, beginDate, endDate);
+			float totalSellAmount =  bTotalSellAmount.floatValue();
+			finance.setTotalSellAmount(totalSellAmount);
 			// 应收款总额：根据销售记录中，到查询日期止，所有用户产生的所有销售单中的交易总额和
 			// totalAccountDue;
-
+			BigDecimal bTotalAccountDue = sellRecordService.getTotalMoneyByType("RECEIVABLE", sessionCompanyId, beginDate, endDate);
+			float totalAccountDue =  bTotalAccountDue.floatValue();
+			finance.setTotalAccountDue(totalAccountDue);
 			// 实际收入：根据销售记录中，到查询日期止，所有用户产生的所有销售单中的实收和
 			// totalActualReceipt
-
+			BigDecimal bTotalActualReceipt = sellRecordService.getTotalMoneyByType("REAL_COLLECTION", sessionCompanyId, beginDate, endDate);
+			float totalActualReceipt =  bTotalActualReceipt.floatValue();
+			finance.setTotalActualReceipt(totalActualReceipt);
 			// 欠款：根据销售记录中，到查询日期止，所有用户产生的所有销售单中的欠款和
 			// totalAmountInArrear
-
+			BigDecimal bTotalAmountInArrear = sellRecordService.getTotalMoneyByType("DEBT", sessionCompanyId, beginDate, endDate);
+			float totalAmountInArrear =  bTotalAmountInArrear.floatValue();
+			finance.setTotalAmountInArrear(totalAmountInArrear);
 			// 进货总额：根据采购记录中，到查询日期止，所有用户产生的所有采购单中的（数量X单价）和
 			// totalAmountPurchase
 			float totalAmountPurchase = purchaseRecordService.queryFinanceList(sessionCompanyId, beginDate, endDate,FinanceListType.JIN_HUO_ZONG_E);
@@ -203,5 +215,13 @@ public class FinanceAction extends BaseActionSupport {
 
 	public void setPurchaseRecordService(IPurchaseRecordService purchaseRecordService) {
 		this.purchaseRecordService = purchaseRecordService;
+	}
+
+	public ISellRecordService getSellRecordService() {
+		return sellRecordService;
+	}
+
+	public void setSellRecordService(ISellRecordService sellRecordService) {
+		this.sellRecordService = sellRecordService;
 	}
 }
