@@ -27,7 +27,7 @@
 	$(document).ready(function() {
 		$.fn.close();
 		$.fn.initpage();
-
+	});
 	/**
 	 * 关闭
 	 */
