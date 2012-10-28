@@ -125,7 +125,7 @@ public class SellRecord implements Serializable {
 	private BigDecimal realCollection;
 	
 	/**
-	 * 实收
+	 * 
 	 */
 	@Column(name = "RETURNED_MONEY", precision=12, scale=2)
 	private BigDecimal returnedMoney;
