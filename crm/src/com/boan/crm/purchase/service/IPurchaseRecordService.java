@@ -23,11 +23,12 @@ public interface IPurchaseRecordService {
 	
 	public Object[] queryRecordSum(String batchId);
 	/**
-	 * 进货总额
+	 * 财务清单列表
 	 * @param companyId
 	 * @param beginDate
 	 * @param endDate
+	 * @param financeListType
 	 * @return
 	 */
-	public float queryTotalAmountPurchase(String companyId, String beginDate, String endDate);
+	public float queryFinanceList(String companyId, String beginDate, String endDate, String financeListType);
 }
