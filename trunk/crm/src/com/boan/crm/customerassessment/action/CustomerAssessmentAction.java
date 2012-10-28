@@ -16,12 +16,16 @@ import org.springframework.stereotype.Controller;
 import com.boan.crm.customer.analysis.model.AnalysisCustomer;
 import com.boan.crm.customer.model.ContractPersonInfo;
 import com.boan.crm.customer.model.CustomerInfo;
+import com.boan.crm.customer.model.CustomerTraceInfo;
 import com.boan.crm.customer.service.IContractPersonService;
 import com.boan.crm.customer.service.ICustomerInfoService;
+import com.boan.crm.customerassessment.model.AutoAssessmentSetting;
 import com.boan.crm.customerassessment.model.CustomerAssessment;
+import com.boan.crm.customerassessment.service.IAutoAssessmentSettingService;
 import com.boan.crm.customerassessment.service.ICustomerAssessmentService;
 import com.boan.crm.sellrecord.service.ISellRecordService;
 import com.boan.crm.utils.action.BaseActionSupport;
+import com.boan.crm.utils.calendar.CalendarUtils;
 import com.boan.crm.utils.calendar.CurrentDateTime;
 
 /**
@@ -44,6 +48,8 @@ public class CustomerAssessmentAction extends BaseActionSupport{
 	private ICustomerInfoService customerInfoService;
 	@Resource
 	private ISellRecordService sellRecordService;
+	@Resource
+	private IAutoAssessmentSettingService autoAssessmentSettingService;
 	
 	private String customerIds = null;
 	private	List<CustomerAssessment> listResult = null;
@@ -52,6 +58,20 @@ public class CustomerAssessmentAction extends BaseActionSupport{
 	private String introduceTimes = "";
 	private String payments = "";
 	private String level = "";
+	private String beginTime = "";
+	public String getBeginTime() {
+		return beginTime;
+	}
+	public void setBeginTime(String beginTime) {
+		this.beginTime = beginTime;
+	}
+	private AutoAssessmentSetting autoAssessmentSetting ;
+	public AutoAssessmentSetting getAutoAssessmentSetting() {
+		return autoAssessmentSetting;
+	}
+	public void setAutoAssessmentSetting(AutoAssessmentSetting autoAssessmentSetting) {
+		this.autoAssessmentSetting = autoAssessmentSetting;
+	}
 	public List<CustomerAssessment> getListResult() {
 		return listResult;
 	}
@@ -66,9 +86,130 @@ public class CustomerAssessmentAction extends BaseActionSupport{
 	}
 	public String customerAnalysisList()
 	{
+		return SUCCESS;
+	}
+	public String customerAnalysisSetting()
+	{
+		String companyId = sessionCompanyId;
+		autoAssessmentSetting = autoAssessmentSettingService.findAutoAssessmentSettingByCompanyId(companyId);
+		if(autoAssessmentSetting != null)
+		{
+			String item = autoAssessmentSetting.getItem();
+			String[] itemArray = item.split("_");
+			if(itemArray[0].equals("1"))
+			{
+				totalComsumption = "1";
+			}
+			if(itemArray[1].equals("1"))
+			{
+				consumptionTimes = "1";
+			}
+			if(itemArray[2].equals("1"))
+			{
+				payments = "1";
+			}
+			if(itemArray[3].equals("1"))
+			{
+				level = "1";
+			}
+			if(itemArray[4].equals("1"))
+			{
+				introduceTimes = "1";
+			}
+			beginTime = CalendarUtils.toLongStringNoSecond(autoAssessmentSetting.getBeginTime());
+		}else
+		{
+			autoAssessmentSetting = new AutoAssessmentSetting();
+			Calendar time = Calendar.getInstance();
+			time.add(Calendar.HOUR, 1);
+			beginTime = CalendarUtils.toLongStringNoSecond(time);
+			autoAssessmentSetting.setOptions(1);
+		}
 		
 		return SUCCESS;
 	}
+	
+	public String customerAnalysisSettingSave()
+	{
+		String item = "";
+		if(totalComsumption.equals("1"))
+		{
+			item = "1_";
+		}else
+		{
+			item = "0_";
+		}
+		if(consumptionTimes.equals("1"))
+		{
+			item = item + "1_";
+		}else
+		{
+			item = item + "0_";
+		}
+		if(payments.equals("1"))
+		{
+			item = item + "1_";
+		}else
+		{
+			item = item + "0_";
+		}
+		if(level.equals("1"))
+		{
+			item = item + "1_";
+		}else
+		{
+			item = item + "0_";
+		}
+		if(introduceTimes.equals("1"))
+		{
+			item = item + "1";
+		}else
+		{
+			item = item + "0";
+		}
+		autoAssessmentSetting.setItem(item);
+		
+		Calendar time = Calendar.getInstance();
+		if(beginTime.indexOf(" ") != -1)
+		{
+			String[] timeArray = beginTime.split(" ")[1].split(":");
+			String[] dayArray = beginTime.split(" ")[0].split("-");
+			if(dayArray.length>0 && timeArray.length>0){
+				time.set(Calendar.YEAR, Integer.parseInt(dayArray[0]));
+				time.set(Calendar.MONTH, Integer.parseInt(dayArray[1]) - 1);
+				time.set(Calendar.DATE, Integer.parseInt(dayArray[2]));
+				time.set(Calendar.HOUR_OF_DAY, Integer.parseInt(timeArray[0]));
+				time.set(Calendar.MINUTE, Integer.parseInt(timeArray[1]));
+				time.set(Calendar.SECOND, 0);
+			}
+		}else
+		{
+			String[] dayArray1 = beginTime.split("-");
+			time.set(Calendar.YEAR, Integer.parseInt(dayArray1[0]));
+			time.set(Calendar.MONTH, Integer.parseInt(dayArray1[1]) - 1);
+			time.set(Calendar.DATE, Integer.parseInt(dayArray1[2]));
+			time.set(Calendar.HOUR_OF_DAY, 0);
+			time.set(Calendar.MINUTE, 0);
+			time.set(Calendar.SECOND, 0);
+		}
+		autoAssessmentSetting.setBeginTime(time);
+		autoAssessmentSetting.setCompanyId(sessionCompanyId);
+		
+		AutoAssessmentSetting temp = autoAssessmentSettingService.findAutoAssessmentSettingByCompanyId(sessionCompanyId);
+		if(temp != null)
+		{
+			temp.setBeginTime(time);
+			temp.setItem(autoAssessmentSetting.getItem());
+			temp.setOptions(autoAssessmentSetting.getOptions());
+			autoAssessmentSettingService.save(temp);
+		}else
+		{
+			autoAssessmentSettingService.save(autoAssessmentSetting);
+		}
+		
+		return SUCCESS;
+	}
+	
 	public String customerAnalysis()
 	{
 		List<AnalysisCustomer> customerList = new ArrayList<AnalysisCustomer>();
