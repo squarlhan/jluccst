@@ -67,7 +67,7 @@
 						</tr>
 						<tr>
 							<td width="200" valign="top" style="border-left: 1px solid #54a4e3; border-bottom: 1px solid #54a4e3; border-right: 1px solid #54a4e3; padding: 5px;"><iframe width="100%" height="100%" id="menutree" name="menutree"frameborder="0" scrolling="auto" src="<%=path %>/sell_record/showGroupTreeForSellRecordAction.action"></iframe></td>
-							<td valign="top" style="border-left: 1px solid #54a4e3; border-bottom: 1px solid #54a4e3; border-right: 1px solid #54a4e3; padding: 5px;"><iframe width="100%" height="100%" id="groupmain" name="groupmain" frameborder="0" scrolling="auto" src="<%=path %>/sellrecord/sellrecordtab.jsp"></iframe></td>
+							<td valign="top" style="border-left: 1px solid #54a4e3; border-bottom: 1px solid #54a4e3; border-right: 1px solid #54a4e3; padding: 5px;"><iframe width="100%" height="100%" id="groupmain" name="groupmain" frameborder="0" scrolling="auto" src="<%=path %>/toTabPageAction.action"></iframe></td>
 						</tr>
 					</table>
 				</td>
