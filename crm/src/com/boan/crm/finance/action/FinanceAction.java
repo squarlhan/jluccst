@@ -16,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import com.boan.crm.backstagemanage.common.LogType;
 import com.boan.crm.backstagemanage.model.Log;
 import com.boan.crm.common.Message;
+import com.boan.crm.finance.common.FinanceListType;
 import com.boan.crm.finance.model.Finance;
 import com.boan.crm.finance.service.IFinanceService;
 import com.boan.crm.purchase.model.PurchaseBatch;
@@ -92,22 +93,26 @@ public class FinanceAction extends BaseActionSupport {
 
 			// 进货总额：根据采购记录中，到查询日期止，所有用户产生的所有采购单中的（数量X单价）和
 			// totalAmountPurchase
-
-			float totalAmountPurchase = purchaseRecordService.queryTotalAmountPurchase(sessionCompanyId, beginDate, endDate);
+			float totalAmountPurchase = purchaseRecordService.queryFinanceList(sessionCompanyId, beginDate, endDate,FinanceListType.JIN_HUO_ZONG_E);
 			finance.setTotalAmountPurchase(totalAmountPurchase);
 
-			// 应付款总额：根据采购记录中，到查询日期止，所有用户产生的所有采购单中的（数量X单价）和
+			// 应付款总额
 			// totalAmountDue
-
+			float totalAmountDue = purchaseRecordService.queryFinanceList(sessionCompanyId, beginDate, endDate,FinanceListType.YING_FU_KUAN_ZONG_E );
+			finance.setTotalAmountDue(totalAmountDue);
+			
 			// 实际支出：根据采购记录中，到查询日期止，所有用户产生的所有采购单中的实际支出和
 			// totalActualOutlay
+			float totalActualOutlay = purchaseRecordService.queryFinanceList(sessionCompanyId, beginDate, endDate,FinanceListType.SHI_JI_ZHI_CHU );
+			finance.setTotalActualOutlay(totalActualOutlay);
 
-			// 库存总额： 根据库存记录中，到查询日期止，所有库存 总和
+			// 库存总额： 根据库存记录中，到查询日期止，所有库存 总和??
 			// totalInventory
-
+			float totalInventory = purchaseRecordService.queryFinanceList(sessionCompanyId, beginDate, endDate,FinanceListType.KU_CUN_ZONG_E );
+			finance.setTotalInventory(totalInventory);
 			// 总利润：销售总额－ 进货总额
 			// totalProfit
-
+			finance.setTotalProfit(totalAmountPurchase);
 			finance.setCreateTime(date);
 			financeService.saveOrUpdate(finance);
 			message.setContent("财务清单保存成功！");

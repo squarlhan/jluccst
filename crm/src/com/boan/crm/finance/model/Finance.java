@@ -80,7 +80,7 @@ public class Finance implements java.io.Serializable {
 	private float totalAmountPurchase;
 
 	/**
-	 * 应付款总额：根据采购记录中，到查询日期止，所有用户产生的所有采购单中的（数量X单价）和
+	 * 应付款总额
 	 */
 	@Column(name = "TOTAL_AMOUNT_DUE")
 	private float totalAmountDue;
