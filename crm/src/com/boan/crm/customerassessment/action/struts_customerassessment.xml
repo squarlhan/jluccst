@@ -9,6 +9,15 @@
 			<result name="success">/customeranalysis/customeranalysis_list.jsp</result>
 			<result name="input">/customeranalysis/customeranalysis_list.jsp</result>
 		</action>
+		<action name="customerAnalysisSetting" class="customerAssessmentAction" method="customerAnalysisSetting">
+			<result name="success">/customeranalysis/customeranalysissetting.jsp</result>
+			<result name="input">/customeranalysis/customeranalysissetting.jsp</result>
+		</action>
+		<action name="customerAnalysisSettingSave" class="customerAssessmentAction" method="customerAnalysisSettingSave">
+			<result name="success" type="chain">
+             	<param name="actionName">customerAnalysisSetting</param>
+            </result>
+		</action>
 		<action name="customerAnalysis" class="customerAssessmentAction" method="customerAnalysis">
 			<result name="success">/customeranalysis/getresult.jsp</result>
 		</action>
