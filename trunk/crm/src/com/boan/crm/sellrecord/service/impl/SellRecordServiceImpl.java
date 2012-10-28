@@ -216,23 +216,23 @@ public class SellRecordServiceImpl implements ISellRecordService {
 		String column ="*";
 		//应收总金额
 		if(queryType!=null && queryType.equals("RECEIVABLE")){
-			column= "sum(record.receivable) ";
+			column= " sum(record.receivable) ";
 		}
 		//实收总金额
 		if(queryType!=null && queryType.equals("REAL_COLLECTION")){
-			column= "sum(record.realCollection) ";
+			column= " sum(record.realCollection) ";
 		}
 		//总欠款金额
 		if(queryType!=null && queryType.equals("DEBT")){
-			column= "sum(record.debt) ";
+			column= " sum(record.debt) ";
 		}
-		String hql ="select  " +column+ "  from SellRecord as record where record. companyId=:companyId";
+		String hql ="select  " +column+ "  from SellRecord as record where record.companyId=:companyId ";
 		
 		if(beginDate!=null && !beginDate.equals("")){
-			hql = hql + "and record. bargainTime >='"+beginDate+"'";
+			hql = hql + " and record.bargainTime >='"+beginDate+"' ";
 		}
 		if(endDate!=null && !endDate.equals("")){
-			hql = hql + "and record. bargainTime <='"+endDate+"'";
+			hql = hql + " and record.bargainTime <='"+endDate+"' ";
 		}
 		Map<String, String> param = new HashMap<String,String>();
 		param.put("companyId",companyId);
