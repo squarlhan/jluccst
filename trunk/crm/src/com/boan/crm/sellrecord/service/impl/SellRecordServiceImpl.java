@@ -202,4 +202,42 @@ public class SellRecordServiceImpl implements ISellRecordService {
 		List list = sellRecordDao.find(hql, param);
 		return (list!=null &&  list.size()>0 && list.get(0)!=null)?   list.get(0).toString() : "";
 	}
+	
+	/**
+	 * 获指定公司指定时间段内不同数额
+	 * @param queryType  RECEIVABLE：应收总金额  REAL_COLLECTION ：实收总金额   DEBT:总欠款金额
+	 * @param companyId 公司id
+	 * @param beginDate 查询开始时间
+	 * @param endDate  查询结束时间
+	 * @return 相应数额
+	 */
+	public  BigDecimal getTotalMoneyByType(String queryType,String companyId,String beginDate,String endDate){
+		
+		String column ="*";
+		//应收总金额
+		if(queryType!=null && queryType.equals("RECEIVABLE")){
+			column= "sum(record.receivable) ";
+		}
+		//实收总金额
+		if(queryType!=null && queryType.equals("REAL_COLLECTION")){
+			column= "sum(record.realCollection) ";
+		}
+		//总欠款金额
+		if(queryType!=null && queryType.equals("DEBT")){
+			column= "sum(record.debt) ";
+		}
+		String hql ="select  " +column+ "  from SellRecord as record where record. companyId=:companyId";
+		
+		if(beginDate!=null && !beginDate.equals("")){
+			hql = hql + "and record. bargainTime >='"+beginDate+"'";
+		}
+		if(endDate!=null && !endDate.equals("")){
+			hql = hql + "and record. bargainTime <='"+endDate+"'";
+		}
+		Map<String, String> param = new HashMap<String,String>();
+		param.put("customerId",companyId);
+		
+		List list = sellRecordDao.find(hql, param);
+		return (list!=null &&  list.size()>0 && list.get(0)!=null )? new BigDecimal( list.get(0).toString()) : new BigDecimal(0);
+	}
 }
