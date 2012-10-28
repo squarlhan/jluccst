@@ -46,7 +46,7 @@ public class PurchaseRecordDaoImpl extends BaseDao<PurchaseRecord, String> imple
 		}else if( FinanceListType.SHI_JI_ZHI_CHU .equals(financeListType) ){
 			sb.append(" sum( a. actualPayment) ");
 		}else if( FinanceListType.KU_CUN_ZONG_E.equals(financeListType) ){
-			sb.append(" sum( a. accountPayable) ");
+			sb.append(" sum(a.unitPrice * a.amount)  ");
 		}
 		sb.append(" from PurchaseRecord a,PurchaseBatch b where a.companyId =  :companyId ");
 		sb.append(" and a.batchId = b.id  and ( b.transactionDate between :beginDate and :endDate  ) ");
