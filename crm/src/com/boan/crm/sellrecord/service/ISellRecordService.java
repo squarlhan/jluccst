@@ -63,4 +63,14 @@ public interface ISellRecordService {
 	 * @return 流水号
 	 */
 	public String getSellRecordorderID(String dataStr,String customerId);
+	
+	/**
+	 * 获指定公司指定时间段内不同数额
+	 * @param queryType  RECEIVABLE：应收总金额  REAL_COLLECTION ：实收总金额   DEBT:总欠款金额
+	 * @param companyId 公司id
+	 * @param beginDate 查询开始时间
+	 * @param endDate  查询结束时间
+	 * @return 相应数额
+	 */
+	public  BigDecimal getTotalMoneyByType(String queryType,String companyId,String beginDate,String endDate);
 }
