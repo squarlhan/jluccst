@@ -66,8 +66,8 @@ public class PurchaseRecordServiceImpl implements IPurchaseRecordService {
 	}
 
 	@Override
-	public float queryTotalAmountPurchase(String companyId, String beginDate, String endDate) {
-		return dao.queryTotalAmountPurchase(companyId, beginDate, endDate);
+	public float queryFinanceList(String companyId, String beginDate, String endDate, String financeListType) {
+		return dao.queryFinanceList(companyId, beginDate, endDate, financeListType);
 	}
 
 }
