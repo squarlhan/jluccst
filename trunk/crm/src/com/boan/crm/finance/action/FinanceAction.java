@@ -118,13 +118,13 @@ public class FinanceAction extends BaseActionSupport {
 			float totalActualOutlay = purchaseRecordService.queryFinanceList(sessionCompanyId, beginDate, endDate,FinanceListType.SHI_JI_ZHI_CHU );
 			finance.setTotalActualOutlay(totalActualOutlay);
 
-			// 库存总额： 根据库存记录中，到查询日期止，所有库存 总和??
+			// 库存总额： 根据库存记录中，到查询日期止，所有库存 总和 等于进货总－销售总
 			// totalInventory
-			float totalInventory = purchaseRecordService.queryFinanceList(sessionCompanyId, beginDate, endDate,FinanceListType.KU_CUN_ZONG_E );
+			float totalInventory = totalAmountPurchase-totalSellAmount;//purchaseRecordService.queryFinanceList(sessionCompanyId, beginDate, endDate,FinanceListType.KU_CUN_ZONG_E );
 			finance.setTotalInventory(totalInventory);
 			// 总利润：销售总额－ 进货总额
 			// totalProfit
-			finance.setTotalProfit(totalAmountPurchase);
+			finance.setTotalProfit(totalSellAmount-totalAmountPurchase);
 			finance.setCreateTime(date);
 			financeService.saveOrUpdate(finance);
 			message.setContent("财务清单保存成功！");
