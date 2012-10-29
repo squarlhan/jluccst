@@ -18,6 +18,11 @@ public interface ICustomerInfoService {
 	 * 查找全部客户
 	 */
 	public List<CustomerInfo> findAllCustomerInfo();
+	
+	/**
+	 * 查找全部客户
+	 */
+	public List<CustomerInfo> findAllCustomerInfoByCompanyId( String companyId );
 
 	/**
 	 * 根据id获取客户
