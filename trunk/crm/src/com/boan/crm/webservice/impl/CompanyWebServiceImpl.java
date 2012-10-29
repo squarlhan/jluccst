@@ -2,6 +2,7 @@ package com.boan.crm.webservice.impl;
 
 import java.util.List;
 
+import javax.annotation.Resource;
 import javax.jws.WebService;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,8 @@ import com.boan.crm.customersearch.model.ContractPersonLibInfo;
 import com.boan.crm.customersearch.model.CustomerLibInfo;
 import com.boan.crm.customersearch.service.IContractPersonLibService;
 import com.boan.crm.customersearch.service.ICustomerLibInfoService;
+import com.boan.crm.datadictionary.model.CityInfo;
+import com.boan.crm.datadictionary.service.IAreaService;
 import com.boan.crm.utils.myenum.ProvinceEnum;
 import com.boan.crm.webservice.ICompanyWebService;
 import com.boan.crm.webservice.model.CompanyInfo;
@@ -31,6 +34,10 @@ public class CompanyWebServiceImpl implements ICompanyWebService {
 	@Qualifier("contractPersonLibService")
 	private IContractPersonLibService contractpersonService;
 	
+	@Autowired
+	@Qualifier("areaService")
+	private IAreaService areaService;
+	
 	@Override
 	public void importCompanys(List<CompanyInfo> companyInfos) {
 		if(companyInfos!=null && companyInfos.size()>0){
@@ -47,7 +54,10 @@ public class CompanyWebServiceImpl implements ICompanyWebService {
 					if(!flag){
 						CustomerLibInfo customerLibInfo = new CustomerLibInfo();
 						customerLibInfo.setProvince(ci.getProvince());
-						customerLibInfo.setCity(ci.getCity());
+						CityInfo cityInfo = areaService.getCityByName(ci.getCity());
+						if(cityInfo!=null){
+							customerLibInfo.setCity(cityInfo.getId());
+						}
 						customerLibInfo.setAddress(ci.getAddress());
 						customerLibInfo.setFax(ci.getFax());
 						customerLibInfo.setCustomerName(ci.getCompanyName());
