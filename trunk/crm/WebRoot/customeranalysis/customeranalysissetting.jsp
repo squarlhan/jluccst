@@ -217,7 +217,6 @@ $(function() {
 <table>	
 <tr><td></td><td style="width:100%"><table>
 <tr><td style="width: 20px"></td><td style="width:838px"><fieldset><legend><span>选择客户</span></legend><table style="width: 100%" cellpadding="5" cellspacing="3">
-
 <tr><td style="width: 20px"></td><td><table cellpadding="5" cellspacing="3">
 	<tr>
 		<td align="center">添加客户</td>
@@ -228,76 +227,12 @@ $(function() {
 		</td>
 	</tr>
 </table></td></tr>
-<tr><td style="width: 20px"></td><td style="width: 100%"><table width="100%" border="0" cellpadding="0" cellspacing="1" style="background-color: #d5e4fd">
-	<tr>
-		<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')"></td>
-		<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">客户名称</td>
-		<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">联系人</td>
-		<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">业务员</td>
-		<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">客户分类</td>
-		<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">成熟度</td>
-		<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">开发程度</td>
-		<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">评估结论</td>
-	</tr>
-	<tr>
-		<td align="center" style="height: 26px; background-color:#FFFFFF"><input type="checkbox" name="checkbox" id="chk1" /></td>
-		<td align="center" style="height: 26px; background-color:#FFFFFF" id="customerName1"></td>
-		<td align="center" style="height: 26px; background-color:#FFFFFF" id="contractPerson1"></td>
-		<td align="center" style="height: 26px; background-color:#FFFFFF" id="salesman1"></td>
-		<td align="center" style="height: 26px; background-color:#FFFFFF" id="category1"></td>
-		<td align="center" style="height: 26px; background-color:#FFFFFF" id="maturity1"></td>
-		<td align="center" style="height: 26px; background-color:#FFFFFF" id="levelId1"></td>
-		<td align="center" style="height: 26px; background-color:#FFFFFF" id="result1"></td>
-	</tr>
-	<tr>
-		<td align="center" style="height: 26px; background-color:#FFFFFF"><input type="checkbox" name="checkbox" id="chk2" /></td>
-		<td align="center" style="height: 26px; background-color:#FFFFFF" id="customerName2"></td>
-		<td align="center" style="height: 26px; background-color:#FFFFFF" id="contractPerson2"></td>
-		<td align="center" style="height: 26px; background-color:#FFFFFF" id="salesman2"></td>
-		<td align="center" style="height: 26px; background-color:#FFFFFF" id="category2"></td>
-		<td align="center" style="height: 26px; background-color:#FFFFFF" id="maturity2"></td>
-		<td align="center" style="height: 26px; background-color:#FFFFFF" id="levelId2"></td>
-		<td align="center" style="height: 26px; background-color:#FFFFFF" id="result2"></td>
-	</tr>
-	<tr>
-		<td align="center" style="height: 26px; background-color:#FFFFFF"><input type="checkbox" name="checkbox" id="chk3" /></td>
-		<td align="center" style="height: 26px; background-color:#FFFFFF" id="customerName3"></td>
-		<td align="center" style="height: 26px; background-color:#FFFFFF" id="contractPerson3"></td>
-		<td align="center" style="height: 26px; background-color:#FFFFFF" id="salesman3"></td>
-		<td align="center" style="height: 26px; background-color:#FFFFFF" id="category3"></td>
-		<td align="center" style="height: 26px; background-color:#FFFFFF" id="maturity3"></td>
-		<td align="center" style="height: 26px; background-color:#FFFFFF" id="levelId3"></td>
-		<td align="center" style="height: 26px; background-color:#FFFFFF" id="result3"></td>
-	</tr>
-	<tr>
-		<td align="center" style="height: 26px; background-color:#FFFFFF"><input type="checkbox" name="checkbox" id="chk4" /></td>
-		<td align="center" style="height: 26px; background-color:#FFFFFF" id="customerName4"></td>
-		<td align="center" style="height: 26px; background-color:#FFFFFF" id="contractPerson4"></td>
-		<td align="center" style="height: 26px; background-color:#FFFFFF" id="salesman4"></td>
-		<td align="center" style="height: 26px; background-color:#FFFFFF" id="category4"></td>
-		<td align="center" style="height: 26px; background-color:#FFFFFF" id="maturity4"></td>
-		<td align="center" style="height: 26px; background-color:#FFFFFF" id="levelId4"></td>
-		<td align="center" style="height: 26px; background-color:#FFFFFF" id="result4"></td>
-	</tr>
-	<tr>
-		<td align="center" style="height: 26px; background-color:#FFFFFF"><input type="checkbox" name="checkbox" id="chk5" /></td>
-		<td align="center" style="height: 26px; background-color:#FFFFFF" id="customerName5"></td>
-		<td align="center" style="height: 26px; background-color:#FFFFFF" id="contractPerson5"></td>
-		<td align="center" style="height: 26px; background-color:#FFFFFF" id="salesman5"></td>
-		<td align="center" style="height: 26px; background-color:#FFFFFF" id="category5"></td>
-		<td align="center" style="height: 26px; background-color:#FFFFFF" id="maturity5"></td>
-		<td align="center" style="height: 26px; background-color:#FFFFFF" id="levelId5"></td>
-		<td align="center" style="height: 26px; background-color:#FFFFFF" id="result5"></td>
-	</tr>
-</table></td></tr>
-
 </table></fieldset></td></tr>
 </table></td></tr>
 <tr><td style="width: 20px"></td>
 <td><table>
 <tr><td style="width: 20px"></td>
 <td style="width:400px"><fieldset><legend><span>选择评估项目</span></legend><table style="width: 100%" cellpadding="5" cellspacing="3">
-
 <tr><td style="width: 10px"></td><td style="width: 100%"><table width="100%" border="0" cellpadding="0" cellspacing="1" style="background-color: #d5e4fd">
 	<tr>
 		<td align="center" style="height: 26px; background-color:#FFFFFF">
@@ -356,7 +291,7 @@ $(function() {
 
 <tr><td style="width: 10px"></td><td style="width: 100%"><table width="100%" border="0" cellpadding="0" cellspacing="1">
 	<tr><td colspan="3"><table><tr>
-		<td align="center" style="height: 26px; background-color:#FFFFFF; width: 50%;">选择评估时间</td>
+		<td align="center" style="height: 26px; background-color:#FFFFFF; width: 50%;">评估开始时间</td>
 		<td align="center" style="height: 26px; width:160px; background-color:#FFFFFF">
 		<s:textfield  type="text" style="width:150px" name="beginTime" id="beginTime"></s:textfield><font color="red">*</font>
 		</td>
