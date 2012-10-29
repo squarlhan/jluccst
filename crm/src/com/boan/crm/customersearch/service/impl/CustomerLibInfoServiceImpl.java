@@ -254,138 +254,172 @@ public class CustomerLibInfoServiceImpl implements ICustomerLibInfoService{
 			if(provincKey.equals("AnHui")){
 				CustomerLib_AnHui customerInfo =(CustomerLib_AnHui)ParseBeanUtil.parseBean(info, CustomerLib_AnHui.class);
 				customerLibInfoDao.save(customerInfo);
+				info.setId(customerInfo.getId());
 			}
 			if(provincKey.equals("AoMen")){
 				CustomerLib_AoMen customerInfo =(CustomerLib_AoMen)ParseBeanUtil.parseBean(info, CustomerLib_AoMen.class);
 				customerLibInfoDao.save(customerInfo);
+				info.setId(customerInfo.getId());
 			}
 			if(provincKey.equals("BeiJing")){
 				CustomerLib_BeiJing customerInfo =(CustomerLib_BeiJing)ParseBeanUtil.parseBean(info, CustomerLib_BeiJing.class);
 				customerLibInfoDao.save(customerInfo);
+				info.setId(customerInfo.getId());
 			}
 			if(provincKey.equals("ChongQing")){
 				CustomerLib_ChongQing customerInfo =(CustomerLib_ChongQing)ParseBeanUtil.parseBean(info, CustomerLib_ChongQing.class);
 				customerLibInfoDao.save(customerInfo);
+				info.setId(customerInfo.getId());
 			}
 			if(provincKey.equals("FuJian")){
 				CustomerLib_FuJian customerInfo =(CustomerLib_FuJian)ParseBeanUtil.parseBean(info, CustomerLib_FuJian.class);
 				customerLibInfoDao.save(customerInfo);
+				info.setId(customerInfo.getId());
 			}
 			if(provincKey.equals("GanSu")){
 				CustomerLib_GanSu customerInfo =(CustomerLib_GanSu)ParseBeanUtil.parseBean(info, CustomerLib_GanSu.class);
 				customerLibInfoDao.save(customerInfo);
+				info.setId(customerInfo.getId());
 			}
 			if(provincKey.equals("GuangDong")){
 				CustomerLib_GuangDong customerInfo =(CustomerLib_GuangDong)ParseBeanUtil.parseBean(info, CustomerLib_GuangDong.class);
 				customerLibInfoDao.save(customerInfo);
+				info.setId(customerInfo.getId());
 			}
 			if(provincKey.equals("GuangXi")){
 				CustomerLib_GuangXi customerInfo =(CustomerLib_GuangXi)ParseBeanUtil.parseBean(info, CustomerLib_GuangXi.class);
 				customerLibInfoDao.save(customerInfo);
+				info.setId(customerInfo.getId());
 			}
 			if(provincKey.equals("GuiZhou")){
 				CustomerLib_GuiZhou customerInfo =(CustomerLib_GuiZhou)ParseBeanUtil.parseBean(info, CustomerLib_GuiZhou.class);
 				customerLibInfoDao.save(customerInfo);
+				info.setId(customerInfo.getId());
 			}
 			if(provincKey.equals("HaiNan")){
 				CustomerLib_HaiNan customerInfo =(CustomerLib_HaiNan)ParseBeanUtil.parseBean(info, CustomerLib_HaiNan.class);
 				customerLibInfoDao.save(customerInfo);
+				info.setId(customerInfo.getId());
 			}
 			if(provincKey.equals("HeBei")){
 				CustomerLib_HeBei customerInfo =(CustomerLib_HeBei)ParseBeanUtil.parseBean(info, CustomerLib_HeBei.class);
 				customerLibInfoDao.save(customerInfo);
+				info.setId(customerInfo.getId());
 			}
 			if(provincKey.equals("HeiLongJiang")){
 				CustomerLib_HeiLongJiang customerInfo =(CustomerLib_HeiLongJiang)ParseBeanUtil.parseBean(info, CustomerLib_HeiLongJiang.class);
 				customerLibInfoDao.save(customerInfo);
+				info.setId(customerInfo.getId());
 			}
 			if(provincKey.equals("HeNan")){
 				CustomerLib_HeNan customerInfo =(CustomerLib_HeNan)ParseBeanUtil.parseBean(info, CustomerLib_HeNan.class);
 				customerLibInfoDao.save(customerInfo);
+				info.setId(customerInfo.getId());
 			}
 			if(provincKey.equals("HuBei")){
 				CustomerLib_HuBei customerInfo =(CustomerLib_HuBei)ParseBeanUtil.parseBean(info, CustomerLib_HuBei.class);
 				customerLibInfoDao.save(customerInfo);
+				info.setId(customerInfo.getId());
 			}
 			if(provincKey.equals("HuNan")){
 				CustomerLib_HuNan customerInfo =(CustomerLib_HuNan)ParseBeanUtil.parseBean(info, CustomerLib_HuNan.class);
 				customerLibInfoDao.save(customerInfo);
+				info.setId(customerInfo.getId());
 			}
 			if(provincKey.equals("JiangSu")){
 				CustomerLib_JiangSu customerInfo =(CustomerLib_JiangSu)ParseBeanUtil.parseBean(info, CustomerLib_JiangSu.class);
 				customerLibInfoDao.save(customerInfo);
+				info.setId(customerInfo.getId());
 			}
 			if(provincKey.equals("JiangXi")){
 				CustomerLib_JiangXi customerInfo =(CustomerLib_JiangXi)ParseBeanUtil.parseBean(info, CustomerLib_JiangXi.class);
 				customerLibInfoDao.save(customerInfo);
+				info.setId(customerInfo.getId());
 			}
 			if(provincKey.equals("JiLin")){
 				CustomerLib_JiLin customerInfo =(CustomerLib_JiLin)ParseBeanUtil.parseBean(info, CustomerLib_JiLin.class);
 				customerLibInfoDao.save(customerInfo);
+				info.setId(customerInfo.getId());
 			}
 			if(provincKey.equals("LiaoNing")){
 				CustomerLib_LiaoNing customerInfo =(CustomerLib_LiaoNing)ParseBeanUtil.parseBean(info, CustomerLib_LiaoNing.class);
 				customerLibInfoDao.save(customerInfo);
+				info.setId(customerInfo.getId());
 			}
 			if(provincKey.equals("NeiMeng")){
 				CustomerLib_NeiMeng customerInfo =(CustomerLib_NeiMeng)ParseBeanUtil.parseBean(info, CustomerLib_NeiMeng.class);
 				customerLibInfoDao.save(customerInfo);
+				info.setId(customerInfo.getId());
 			}
 			if(provincKey.equals("NingXia")){
 				CustomerLib_NingXia customerInfo =(CustomerLib_NingXia)ParseBeanUtil.parseBean(info, CustomerLib_NingXia.class);
 				customerLibInfoDao.save(customerInfo);
+				info.setId(customerInfo.getId());
 			}
 			if(provincKey.equals("QingHai")){
 				CustomerLib_QingHai customerInfo =(CustomerLib_QingHai)ParseBeanUtil.parseBean(info, CustomerLib_QingHai.class);
 				customerLibInfoDao.save(customerInfo);
+				info.setId(customerInfo.getId());
 			}
 			if(provincKey.equals("ShanDong")){
 				CustomerLib_ShanDong customerInfo =(CustomerLib_ShanDong)ParseBeanUtil.parseBean(info, CustomerLib_ShanDong.class);
 				customerLibInfoDao.save(customerInfo);
+				info.setId(customerInfo.getId());
 			}
 			if(provincKey.equals("ShangHai")){
 				CustomerLib_ShangHai customerInfo =(CustomerLib_ShangHai)ParseBeanUtil.parseBean(info, CustomerLib_ShangHai.class);
 				customerLibInfoDao.save(customerInfo);
+				info.setId(customerInfo.getId());
 			}
 			if(provincKey.equals("ShanXi")){
 				CustomerLib_ShanXi customerInfo =(CustomerLib_ShanXi)ParseBeanUtil.parseBean(info, CustomerLib_ShanXi.class);
 				customerLibInfoDao.save(customerInfo);
+				info.setId(customerInfo.getId());
 			}
 			if(provincKey.equals("ShanXi2")){
 				CustomerLib_ShanXi2 customerInfo =(CustomerLib_ShanXi2)ParseBeanUtil.parseBean(info, CustomerLib_ShanXi2.class);
 				customerLibInfoDao.save(customerInfo);
+				info.setId(customerInfo.getId());
 			}
 			if(provincKey.equals("SiChuan")){
 				CustomerLib_SiChuan customerInfo =(CustomerLib_SiChuan)ParseBeanUtil.parseBean(info, CustomerLib_SiChuan.class);
 				customerLibInfoDao.save(customerInfo);
+				info.setId(customerInfo.getId());
 			}
 			if(provincKey.equals("TaiWan")){
 				CustomerLib_TaiWan customerInfo =(CustomerLib_TaiWan)ParseBeanUtil.parseBean(info, CustomerLib_TaiWan.class);
 				customerLibInfoDao.save(customerInfo);
+				info.setId(customerInfo.getId());
 			}
 			if(provincKey.equals("TianJin")){
 				CustomerLib_TianJin customerInfo =(CustomerLib_TianJin)ParseBeanUtil.parseBean(info, CustomerLib_TianJin.class);
 				customerLibInfoDao.save(customerInfo);
+				info.setId(customerInfo.getId());
 			}
 			if(provincKey.equals("XiangGang")){
 				CustomerLib_XiangGang customerInfo =(CustomerLib_XiangGang)ParseBeanUtil.parseBean(info, CustomerLib_XiangGang.class);
 				customerLibInfoDao.save(customerInfo);
+				info.setId(customerInfo.getId());
 			}
 			if(provincKey.equals("XinJiang")){
 				CustomerLib_XinJiang customerInfo =(CustomerLib_XinJiang)ParseBeanUtil.parseBean(info, CustomerLib_XinJiang.class);
 				customerLibInfoDao.save(customerInfo);
+				info.setId(customerInfo.getId());
 			}
 			if(provincKey.equals("XiZang")){
 				CustomerLib_XiZang customerInfo =(CustomerLib_XiZang)ParseBeanUtil.parseBean(info, CustomerLib_XiZang.class);
 				customerLibInfoDao.save(customerInfo);
+				info.setId(customerInfo.getId());
 			}
 			if(provincKey.equals("YunNan")){
 				CustomerLib_YunNan customerInfo =(CustomerLib_YunNan)ParseBeanUtil.parseBean(info, CustomerLib_YunNan.class);
 				customerLibInfoDao.save(customerInfo);
+				info.setId(customerInfo.getId());
 			}
 			if(provincKey.equals("ZheJiang")){
 				CustomerLib_ZheJiang customerInfo =(CustomerLib_ZheJiang)ParseBeanUtil.parseBean(info, CustomerLib_ZheJiang.class);
 				customerLibInfoDao.save(customerInfo);
+				info.setId(customerInfo.getId());
 			}
 		}
 	}
