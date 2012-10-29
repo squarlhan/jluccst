@@ -4,6 +4,7 @@
 package com.boan.crm.customer.service.impl;
 
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -60,7 +61,17 @@ public class CustomerInfoServiceImpl implements ICustomerInfoService{
 	public List<CustomerInfo> findAllCustomerInfo() {
 		return customerInfoDao.find("from CustomerInfo order by registerTime asc", new Object[0]);
 	}
-
+	/**
+	 * 查找全部客户
+	 */
+	@Override
+	public List<CustomerInfo> findAllCustomerInfoByCompanyId( String companyId )
+	{
+		Map<String,String> values = new HashMap<String,String>();
+		values.put("companyId", companyId);
+		
+		return customerInfoDao.find("from CustomerInfo where companyId = :companyId order by registerTime asc",values );
+	}
 	@Override
 	public Pagination<CustomerInfo> findCustomerInfoForPage(
 			Map<String, ?> values, Pagination<CustomerInfo> pagination) {
