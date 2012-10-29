@@ -329,10 +329,15 @@ public class ReportAction extends BaseActionSupport{
 			report.setReportDate(date);
 			String content = template.getReportContent();
 			report.setReportContent(content);
-			report.setReportPersonFactoryId(this.sessionFactoryId);
+			if(sessionCompanyId!=null && !sessionCompanyId.equals("")){
+				report.setReportPersonFactoryId(this.sessionCompanyId);
+				report.setReportPersonFactoryName(this.sessionCompanyName);
+			}
+			if(sessionFactoryId!=null && !sessionFactoryId.equals("")){
+				report.setReportPersonFactoryId(this.sessionFactoryId);
+				report.setReportPersonFactoryName(this.sessionFactoryName);
+			}
 			report.setReportPersonWorkshopId(this.sessionWorkshopId);
-			
-			report.setReportPersonFactoryName(this.sessionFactoryName);
 			report.setReportPersonWorkshopName(this.sessionWorkshopName);
 			//保存为当前登录人所在的车间Id
 			report.setDeptId(sessionWorkshopId);
