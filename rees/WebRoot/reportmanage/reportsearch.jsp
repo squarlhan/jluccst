@@ -84,7 +84,7 @@
 		/**
   		 * 下载
   		 */
-  		$('a[name="download"]').each(function(){
+  		$('a[name="export"]').each(function(){
   			$(this).click(function(){
   				var url = $(this).attr("url");
   				var oldAction = form1.action;
@@ -94,11 +94,19 @@
   			});
   		});
 	});
+	
+	function download(obj){
+		var url = obj.attr("url");
+		var oldAction = form1.action;
+		form1.action = url;
+		form1.submit();
+		form1.action = oldAction;
+	}
 	</script>
   </head>
   
   <body>
-   <s:form action="openReportSearchAction" id="form1">
+   <s:form action="openReportSearchAction" id="form1" method="post">
 <table width="100%" style="height:100%;" border="0" cellspacing="5" cellpadding="0">
   <tr>
     <td valign="top"><table width="100%" border="0" cellspacing="5" cellpadding="0">
@@ -137,12 +145,19 @@
 		  <td height="26" align="center" bgcolor="#FFFFFF"><!-- format="yyyy-MM-dd HH:mm" -->
 		  	<s:date  name="reportDate" format="yyyy-MM-dd" />&nbsp;
 		  	</td>
-		  <td height="26" colspan="2" align="center" bgcolor="#FFFFFF" nowrap>
-          	<s:url id="download_url" action="toExportReportAction">   
+		  <td height="26" colspan="2" align="left" bgcolor="#FFFFFF" nowrap>
+          	<s:url id="export_url" action="toExportReportAction">   
 				<s:param name="report.id" value="id"></s:param>   
 				<s:param name="report.templateId" value="templateId"></s:param>   
 			</s:url>
-         	<a name="download" href="javascript:void(0);" url="${download_url}">下载</a>  
+			<s:url id="download_url" action="toDownloadReportAttachmentAction">   
+				<s:param name="report.filePath" value="filePath"></s:param>   
+				<s:param name="report.id" value="id"></s:param>   
+			</s:url>
+         	<a name="export" href="javascript:void(0);" url="${export_url}">导出</a>  
+         	<s:if test='filePath!=null  &&filePath!=""'>
+         		<a name="download" href="javascript:void(0);" url="${download_url}"  onclick="download($(this));return false;">附件</a>  
+         	</s:if>
           </td>
 	    </tr>
 		</s:iterator>
