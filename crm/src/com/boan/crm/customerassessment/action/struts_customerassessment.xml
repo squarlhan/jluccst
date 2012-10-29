@@ -18,8 +18,18 @@
              	<param name="actionName">customerAnalysisSetting</param>
             </result>
 		</action>
+		<action name="autoAnalysisCustomerSave" class="customerAssessmentAction" method="autoAnalysisCustomerSave">
+			<result name="success" type="chain">
+             	<param name="actionName">customerAnalysisSetting</param>
+            </result>
+		</action>
 		<action name="customerAnalysis" class="customerAssessmentAction" method="customerAnalysis">
 			<result name="success">/customeranalysis/getresult.jsp</result>
 		</action>
+		<action name="autoAnalysisCustomerList" class="customerAssessmentAction" method="autoAnalysisCustomerList">
+			<result name="success">/customeranalysis/autoanalysisuser_list.jsp</result>
+			<result name="input">/customeranalysis/autoanalysisuser_list.jsp</result>
+		</action>
+		
 	</package>
 </struts>

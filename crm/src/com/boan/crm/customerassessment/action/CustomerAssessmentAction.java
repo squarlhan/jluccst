@@ -20,8 +20,10 @@ import com.boan.crm.customer.model.CustomerTraceInfo;
 import com.boan.crm.customer.service.IContractPersonService;
 import com.boan.crm.customer.service.ICustomerInfoService;
 import com.boan.crm.customerassessment.model.AutoAssessmentSetting;
+import com.boan.crm.customerassessment.model.AutoCustomerAssessment;
 import com.boan.crm.customerassessment.model.CustomerAssessment;
 import com.boan.crm.customerassessment.service.IAutoAssessmentSettingService;
+import com.boan.crm.customerassessment.service.IAutoCustomerAssessmentService;
 import com.boan.crm.customerassessment.service.ICustomerAssessmentService;
 import com.boan.crm.sellrecord.service.ISellRecordService;
 import com.boan.crm.utils.action.BaseActionSupport;
@@ -50,6 +52,9 @@ public class CustomerAssessmentAction extends BaseActionSupport{
 	private ISellRecordService sellRecordService;
 	@Resource
 	private IAutoAssessmentSettingService autoAssessmentSettingService;
+	@Resource
+	private IAutoCustomerAssessmentService autoCustomerAssessmentService;
+	
 	
 	private String customerIds = null;
 	private	List<CustomerAssessment> listResult = null;
@@ -59,30 +64,33 @@ public class CustomerAssessmentAction extends BaseActionSupport{
 	private String payments = "";
 	private String level = "";
 	private String beginTime = "";
-	public String getBeginTime() {
-		return beginTime;
+	private String optionFlag = "";
+	private String customerId ="";
+	private String customerName = "";
+	public String getOptionFlag() {
+		return optionFlag;
 	}
-	public void setBeginTime(String beginTime) {
-		this.beginTime = beginTime;
+	public void setOptionFlag(String optionFlag) {
+		this.optionFlag = optionFlag;
 	}
-	private AutoAssessmentSetting autoAssessmentSetting ;
-	public AutoAssessmentSetting getAutoAssessmentSetting() {
-		return autoAssessmentSetting;
+	public String getCustomerId() {
+		return customerId;
 	}
-	public void setAutoAssessmentSetting(AutoAssessmentSetting autoAssessmentSetting) {
-		this.autoAssessmentSetting = autoAssessmentSetting;
+	public void setCustomerId(String customerId) {
+		this.customerId = customerId;
 	}
-	public List<CustomerAssessment> getListResult() {
-		return listResult;
+	public String getCustomerName() {
+		return customerName;
 	}
-	public void setListResult(List<CustomerAssessment> listResult) {
-		this.listResult = listResult;
+	public void setCustomerName(String customerName) {
+		this.customerName = customerName;
 	}
-	public String getCustomerIds() {
-		return customerIds;
+	private List<AutoCustomerAssessment> listAutoCustomer;
+	public List<AutoCustomerAssessment> getListAutoCustomer() {
+		return listAutoCustomer;
 	}
-	public void setCustomerIds(String customerIds) {
-		this.customerIds = customerIds;
+	public void setListAutoCustomer(List<AutoCustomerAssessment> listAutoCustomer) {
+		this.listAutoCustomer = listAutoCustomer;
 	}
 	public String customerAnalysisList()
 	{
@@ -268,6 +276,65 @@ public class CustomerAssessmentAction extends BaseActionSupport{
 		
 		return SUCCESS;
 	}
+	public String autoAnalysisCustomerSave()
+	{
+		if(optionFlag.equals("all"))
+		{
+			List<CustomerInfo> list = customerInfoService.findAllCustomerInfoByCompanyId(sessionCompanyId);
+			if(list != null && list.size() > 0)
+			{
+				for(int i=0;i<list.size();i++)
+				{
+					AutoCustomerAssessment autoCustomerAssessment = new AutoCustomerAssessment();
+					autoCustomerAssessment.setCompanyId(sessionCompanyId);
+					autoCustomerAssessment.setCustomerId(list.get(i).getId());
+					autoCustomerAssessment.setCustomerName(list.get(i).getCustomerName());
+					autoCustomerAssessmentService.save(autoCustomerAssessment);
+				}
+			}
+		}else
+		{
+			AutoCustomerAssessment autoCustomerAssessment = new AutoCustomerAssessment();
+			autoCustomerAssessment.setCompanyId(sessionCompanyId);
+			autoCustomerAssessment.setCustomerId(customerId);
+			autoCustomerAssessment.setCustomerName(customerName);
+			autoCustomerAssessmentService.save(autoCustomerAssessment);
+		}
+		
+		return SUCCESS;
+	}
+	public String autoAnalysisCustomerList()
+	{
+		listAutoCustomer = autoCustomerAssessmentService.findAutoCustomerAssessmentByCompanyId(sessionCompanyId);
+		
+		return SUCCESS;
+	}
+	public String getBeginTime() {
+		return beginTime;
+	}
+	public void setBeginTime(String beginTime) {
+		this.beginTime = beginTime;
+	}
+	private AutoAssessmentSetting autoAssessmentSetting ;
+	public AutoAssessmentSetting getAutoAssessmentSetting() {
+		return autoAssessmentSetting;
+	}
+	public void setAutoAssessmentSetting(AutoAssessmentSetting autoAssessmentSetting) {
+		this.autoAssessmentSetting = autoAssessmentSetting;
+	}
+	public List<CustomerAssessment> getListResult() {
+		return listResult;
+	}
+	public void setListResult(List<CustomerAssessment> listResult) {
+		this.listResult = listResult;
+	}
+	public String getCustomerIds() {
+		return customerIds;
+	}
+	public void setCustomerIds(String customerIds) {
+		this.customerIds = customerIds;
+	}
+	
 	public String getTotalComsumption() {
 		return totalComsumption;
 	}
