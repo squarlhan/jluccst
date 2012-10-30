@@ -15,9 +15,19 @@ public class ParseBeanUtil {
 	public static Object parseBean(Object objBean, Class clazz) {
 		Object obj = null;
 		Class classPojo = objBean.getClass();
+		Class superClass=classPojo.getSuperclass();//获取父类类型
+		
 		try {
 			obj = clazz.newInstance();
-			Field[] fields = classPojo.getDeclaredFields();
+//			Field[] fields = classPojo.getDeclaredFields();
+			
+			Field[] fields =  clazz.getDeclaredFields();
+			if(fields==null || fields.length==0){
+				if(clazz.getSuperclass()!=null && !clazz.getSuperclass().toString().equals("")){
+					fields = clazz.getSuperclass().getDeclaredFields();
+				}
+			}
+			
 			for (int i = 0; i < fields.length; i++) {
 				String strGetMethod = "get"
 						+ fields[i].getName().substring(0, 1).toUpperCase()
