@@ -184,9 +184,13 @@ public class PointDataInfoAction extends BaseActionSupport {
 	public String pointDataInfoList() throws Exception{
 		HttpSession session = ServletActionContext.getRequest().getSession();
 		UserSession userSession = ( UserSession ) session.getAttribute( "userSession" );
-		if(popedomService.isSuperAdministrator(userSession.getUserId(),String.valueOf(userSession.getUserType()) )){
-			//当前用户是管理员
-			admin = true;
+		if(userSession!=null){
+			if(popedomService.isSuperAdministrator(userSession.getUserId(),String.valueOf(userSession.getUserType()) )){
+				//当前用户是管理员
+				admin = true;
+			}
+		}else{
+			admin = false;
 		}
 		DeviceInfo deviceInfo = deviceInfoService.get( deviceId );
 		String dataType = deviceInfo.getDataType();
