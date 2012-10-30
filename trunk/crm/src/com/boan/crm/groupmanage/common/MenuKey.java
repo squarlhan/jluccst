@@ -113,13 +113,25 @@ public static final String MY_KE_HU_GUAN_LI = "MY_KE_HU_GUAN_LI";
 						 */
 						public static final String SUB_DUAN_XIN_PING_TAI= "SUB_DUAN_XIN_PING_TAI";
 						/**
+						 * 时间管理查询
+						 */
+						public static final String SUB_SHI_JIAN_GUAN_LI_CHA_XUN= "SUB_SHI_JIAN_GUAN_LI_CHA_XUN";
+						/**
 						 * 时间管理
 						 */
 						public static final String SUB_SHI_JIAN_GUAN_LI= "SUB_SHI_JIAN_GUAN_LI";
 						/**
+						 * 市场调查查询
+						 */
+						public static final String SUB_SHI_CHANG_DIAO_CHA_CHA_XUN= "SUB_SHI_CHANG_DIAO_CHA_CHA_XUN";
+						/**
 						 * 市场调查
 						 */
 						public static final String SUB_SHI_CHANG_DIAO_CHA= "SUB_SHI_CHANG_DIAO_CHA";
+						/**
+						 * 销售记录查询
+						 */
+						public static final String SUB_XIAO_SHOU_JI_LU_CHA_XUN= "SUB_XIAO_SHOU_JI_LU_CHA_XUN";
 						/**
 						 * 销售记录
 						 */
@@ -129,6 +141,10 @@ public static final String MY_KE_HU_GUAN_LI = "MY_KE_HU_GUAN_LI";
 	 */
 	public static final String FU_WU_GUAN_LI = "FU_WU_GUAN_LI";
 	
+						/**
+						 * 服务记录查询
+						 */
+						public static final String SUB_FU_WU_JI_LU_CHA_XUN = "SUB_FU_WU_JI_LU_CHA_XUN";
 						/**
 						 * 服务记录
 						 */
