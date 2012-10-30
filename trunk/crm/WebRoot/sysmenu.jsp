@@ -968,6 +968,14 @@
 						<%
 							}
 						%>
+						<%
+							b = popedomService.isHasPopedom(us.getUserId(), String.valueOf(us.getUserType()), MenuKey.ZENG_ZHI_GONG_NENG, us.getPopedomKeys())
+									||popedomService.isHasPopedom(us.getUserId(), String.valueOf(us.getUserType()), MenuKey.SUB_GONG_YING_SHANG_GUAN_LI, us.getPopedomKeys())
+									||popedomService.isHasPopedom(us.getUserId(), String.valueOf(us.getUserType()), MenuKey.SUB_CAI_GOU_GUAN_LI, us.getPopedomKeys())
+									||popedomService.isHasPopedom(us.getUserId(), String.valueOf(us.getUserType()), MenuKey.SUB_KU_CUN_QING_DAN, us.getPopedomKeys())
+									||popedomService.isHasPopedom(us.getUserId(), String.valueOf(us.getUserType()), MenuKey.SUB_CAI_WU_QING_DAN, us.getPopedomKeys());
+							if (b) {
+						%>
 						<tr>
 							<td height="24" align="left" background="images/menubg.jpg">
 								<table width="100%" border="0" cellspacing="5" cellpadding="0">
@@ -981,6 +989,10 @@
 							</td>
 						</tr>
 						<tbody name="submenus" style="display:none">
+						<%
+						b = popedomService.isHasPopedom(us.getUserId(), String.valueOf(us.getUserType()), MenuKey.SUB_GONG_YING_SHANG_GUAN_LI, us.getPopedomKeys());
+							if (b) {
+						%>
 						<tr>
 							<td align="left">
 								<table width="100%" border="0" cellspacing="5" cellpadding="0">
@@ -993,6 +1005,11 @@
 								</table>
 							</td>
 						</tr>
+						<%} %>
+						<%
+						b = popedomService.isHasPopedom(us.getUserId(), String.valueOf(us.getUserType()), MenuKey.SUB_CAI_GOU_GUAN_LI, us.getPopedomKeys());
+							if (b) {
+						%>
 						<tr>
 							<td align="left">
 								<table width="100%" border="0" cellspacing="5" cellpadding="0">
@@ -1005,6 +1022,11 @@
 								</table>
 							</td>
 						</tr>
+						<%} %>
+						<%
+						b = popedomService.isHasPopedom(us.getUserId(), String.valueOf(us.getUserType()), MenuKey.SUB_KU_CUN_QING_DAN, us.getPopedomKeys());
+							if (b) {
+						%>
 						<tr>
 							<td align="left">
 								<table width="100%" border="0" cellspacing="5" cellpadding="0">
@@ -1017,6 +1039,11 @@
 								</table>
 							</td>
 						</tr>
+						<%} %>
+						<%
+						b = popedomService.isHasPopedom(us.getUserId(), String.valueOf(us.getUserType()), MenuKey.SUB_CAI_WU_QING_DAN, us.getPopedomKeys());
+							if (b) {
+						%>
 						<tr>
 							<td align="left">
 								<table width="100%" border="0" cellspacing="5" cellpadding="0">
@@ -1029,7 +1056,9 @@
 								</table>
 							</td>
 						</tr>
+						<%} %>
 						</tbody>
+						<%} %>
 					</table>
 				</div>
 			</td>
