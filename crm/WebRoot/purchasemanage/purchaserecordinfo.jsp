@@ -34,8 +34,8 @@
 			rules: {
 				"purchaseRecord.productId":{required:true,strangecode:true},
 				"purchaseRecord.specification":{required:true,strangecode:true},
-				"purchaseRecord.gramWeight":{required:true,strangecode:true},
-				"purchaseRecord.ton":{required:true,strangecode:true},
+				//"purchaseRecord.gramWeight":{required:true,strangecode:true},
+				//"purchaseRecord.ton":{required:true,strangecode:true},
 				"purchaseRecord.amount":{required:true,isPositiveNum:true},
 				"purchaseRecord.freight":{required : true,isNotNegativeNum:true},
 				"purchaseRecord.accountPayable":{required : true,isNotNegativeNum:true},
@@ -86,7 +86,7 @@
 			 * 初始化页面
 			 */
 			$.fn.initpage = function(){
-				$("#productId").focus();
+				$("#specification").focus();
 			}
 		//-->
 		</script>
@@ -127,6 +127,7 @@
 												<font color="red">*</font>
 											</td>
 										</tr>
+										<!-- 
 										<tr>
 											<td height="26" align="right" bgcolor="#FFFFFF">
 												<strong> 克重：</strong>
@@ -145,6 +146,7 @@
 												<font color="red">*</font>
 											</td>
 										</tr>
+										 -->
 										<tr>
 											<td height="26" align="right" bgcolor="#FFFFFF">
 												<strong> 数量：</strong>
