@@ -278,7 +278,7 @@
 									<tr>
 										<td width="40" align="right" style="padding-bottom: 4px;"><img src="images/menuto.jpg" width="5" height="5" />
 										</td>
-										<td><a href="openCustomerSearchAction.action" target="mainFrame">客户查找</a>
+										<td><a href="customer/customerreaserchmain.jsp" target="mainFrame">客户查找</a>
 										</td>
 									</tr>
 								</table>
@@ -290,7 +290,7 @@
 									<tr>
 										<td width="40" align="right" style="padding-bottom: 4px;"><img src="images/menuto.jpg" width="5" height="5" />
 										</td>
-										<td><a href="openCustomerSearchForAdminAction.action" target="mainFrame">客户查找（管理员）</a>
+										<td><a href="customer/customerreaserchadminmain.jsp" target="mainFrame">客户查找（管理员）</a>
 										</td>
 									</tr>
 								</table>
