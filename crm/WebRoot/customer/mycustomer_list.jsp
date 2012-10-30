@@ -195,7 +195,7 @@
           	<s:url id="edit_url" action="myCustomerTabInfo.action">   
 				<s:param name="id" value="id"></s:param>   
 			</s:url>
-			<s:url id="delete_url" action="deleteMyCompanyAction">   
+			<s:url id="delete_url" action="deleteMyCustomer">   
 				<s:param name="ids" value="id"></s:param>   
 			</s:url>
          	<a name="edit" href="javascript:void(0);" url="${edit_url}">编辑</a>  
