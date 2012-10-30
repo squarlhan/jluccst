@@ -72,6 +72,16 @@ public class CustomerInfoServiceImpl implements ICustomerInfoService{
 		
 		return customerInfoDao.find("from CustomerInfo where companyId = :companyId order by registerTime asc",values );
 	}
+	/**
+	 * 查找销售员自己的客户
+	 */
+	public List<CustomerInfo> findAllCustomerInfoBySalesmanId( String salesmanId )
+	{
+		Map<String,String> values = new HashMap<String,String>();
+		values.put("salesmanId", salesmanId);
+		
+		return customerInfoDao.find("from CustomerInfo where salesmanId = :salesmanId order by registerTime asc",values );
+	}
 	@Override
 	public Pagination<CustomerInfo> findCustomerInfoForPage(
 			Map<String, ?> values, Pagination<CustomerInfo> pagination) {
