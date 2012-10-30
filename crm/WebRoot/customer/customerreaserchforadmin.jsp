@@ -170,7 +170,7 @@
         <td height="26" align="center" bgcolor="#FFFFFF" >  
 				<s:checkbox id="%{#obj.id}" name="ids" fieldValue="%{id}" value="false" theme="simple"/>
 			</td>
-            <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="customerName"/></td>
+            <td height="26" align="left" bgcolor="#FFFFFF"><s:property value="customerName"/></td>
             <td height="26" align="center" bgcolor="#FFFFFF">
 				<s:property value="mainIndustry"/>
 			</td>
@@ -185,7 +185,7 @@
             	</s:iterator>
 			</td>
             <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="fax"/></td>
-            <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="address"/></td>
+            <td height="26" align="left" bgcolor="#FFFFFF"><s:property value="address"/></td>
 	          <td height="26" colspan="2" align="center" bgcolor="#FFFFFF"  nowrap="nowrap">
 				<s:url id="nosearch_url" action="toNoSearchCustomerForAdminAction.action">   
 					<s:param name="customerLibInfo.id" value="id"></s:param>   
