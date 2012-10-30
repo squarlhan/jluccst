@@ -74,6 +74,14 @@ public interface ICustomerLibInfoService {
 	 * @param province 省份
 	 */
 	public void save(String province ,CustomerLibInfo table1);
+	
+	/**
+	 * 修改不查询列
+	 * @param province 省份
+	 * @param customerId 客户Id
+	 * @param flag 0：查询 1：不查询
+	 */
+	public void updateNoSearchColumn(String province,String customerId,int flag);
 
 	/**
 	 * 按分页查询客户
