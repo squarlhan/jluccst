@@ -164,17 +164,18 @@
 										</td>
 									</tr>
 									<tr>
-										<td height="26" align="right" bgcolor="#FFFFFF">
-											<strong>克 重：</strong>
-										</td>
-										<td height="26" align="left" bgcolor="#FFFFFF">
-											<s:textfield id="txt_goodsWeight" name="marketInquiry.goodsWeight" cssStyle="width: 160px;" maxlength="25"></s:textfield>
-										</td>
+										
 										<td height="26" align="right" bgcolor="#FFFFFF">
 											<strong>价 格：</strong>
 										</td>
 										<td height="26" align="left" bgcolor="#FFFFFF">
 											<s:textfield id="txt_goodsPrice" name="marketInquiry.goodsPrice" cssStyle="width: 160px;" maxlength="25"></s:textfield><font color="red" title="必填项">*</font>
+										</td>
+										<td height="26" align="right" bgcolor="#FFFFFF">
+											<strong>备 注：</strong>
+										</td>
+										<td height="26" align="left" bgcolor="#FFFFFF">
+											<s:textfield id="txt_goodsWeight" name="marketInquiry.goodsWeight" cssStyle="width: 160px;" maxlength="25"></s:textfield>
 										</td>
 									</tr>
 									

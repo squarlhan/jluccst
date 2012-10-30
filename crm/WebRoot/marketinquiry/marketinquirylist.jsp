@@ -166,11 +166,12 @@
    			</td>
               <td align="center" background="<%=path %>/images/headerbg.jpg"><strong>商品名称</strong></td>
               <td align="center" background="<%=path %>/images/headerbg.jpg"><strong>规 格</strong></td>
-              <td align="center" background="<%=path %>/images/headerbg.jpg"><strong>克 重</strong></td>
+              
                <td align="center" background="<%=path %>/images/headerbg.jpg"><strong>价 格</strong></td>
                <td align="center" background="<%=path %>/images/headerbg.jpg"><strong>调查地点</strong></td>
                <td align="center" background="<%=path %>/images/headerbg.jpg"><strong>调查人</strong></td>
                <td align="center" background="<%=path %>/images/headerbg.jpg"><strong>调查日期</strong></td>
+               <td align="center" background="<%=path %>/images/headerbg.jpg"><strong>备 注</strong></td>
               <td align="center" background="<%=path %>/images/headerbg.jpg"><strong>操作</strong></td>
         </tr>
         <s:iterator value="pagination.data" status="obj">
@@ -180,13 +181,14 @@
 		</td>
               <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="inquiryPersonName"/></td>
               <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="goodsStandard"/></td>
-                <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="goodsWeight"/></td>
+                
                 <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="goodsPrice"/></td>
                 <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="inquiryAddress"/></td>
                 <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="inquiryPersonName"/></td>
                 <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="inquiryTime"/></td>
+                <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="goodsWeight"/></td>
           <td height="26" colspan="2" align="center" bgcolor="#FFFFFF">
-          	<s:url id="edit_url" action="openModifyMarketInquiryForViewAction">   
+          	<s:url id="edit_url" action="openModifyMarketInquiryAction">   
 				<s:param name="marketInquiry.id" value="id"></s:param>   
 			</s:url>
 			<s:url id="delete_url" action="deleteMarketInquiryAction">   
