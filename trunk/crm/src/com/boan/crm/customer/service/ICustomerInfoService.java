@@ -23,6 +23,11 @@ public interface ICustomerInfoService {
 	 * 查找全部客户
 	 */
 	public List<CustomerInfo> findAllCustomerInfoByCompanyId( String companyId );
+	
+	/**
+	 * 查找销售员自己的客户
+	 */
+	public List<CustomerInfo> findAllCustomerInfoBySalesmanId( String salesmanId );
 
 	/**
 	 * 根据id获取客户
