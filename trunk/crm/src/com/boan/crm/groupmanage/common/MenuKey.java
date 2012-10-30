@@ -142,6 +142,26 @@ public static final String MY_KE_HU_GUAN_LI = "MY_KE_HU_GUAN_LI";
 						 */
 						public static final String SUB_JI_FEN_GUAN_LI = "SUB_JI_FEN_GUAN_LI";
 	/**
+	 * 增值功能
+	 */
+	public static final String ZENG_ZHI_GONG_NENG = "ZENG_ZHI_GONG_NENG";
+						/**
+						 * 供应商管理
+						 */
+						public static final String SUB_GONG_YING_SHANG_GUAN_LI = "SUB_GONG_YING_SHANG_GUAN_LI";
+						/**
+						 * 采购管理
+						 */
+						public static final String SUB_CAI_GOU_GUAN_LI = "SUB_CAI_GOU_GUAN_LI";
+						/**
+						 * 库存清单
+						 */
+						public static final String SUB_KU_CUN_QING_DAN = "SUB_KU_CUN_QING_DAN";
+						/**
+						 * 财务清单
+						 */
+						public static final String SUB_CAI_WU_QING_DAN = "SUB_CAI_WU_QING_DAN";
+	/**
 	 * 本部门
 	 */
 	public static final String SELF_DEPT = "SELF_DEPT";
