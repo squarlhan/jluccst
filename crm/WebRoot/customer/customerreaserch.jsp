@@ -141,7 +141,7 @@
     <td valign="top"><fieldset >
 		<legend>查询条件</legend>
    		<span>
-			<table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#d5e4fd">
+			<table width="100%" border="0" cellpadding="5" cellspacing="0" bgcolor="#d5e4fd">
 				<tr>
 					<td height="26" align="right" bgcolor="#FFFFFF">
 						<strong>主营行业：</strong>
@@ -174,7 +174,7 @@
 			</table>
 		</span>
 		</fieldset>
-      <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#d5e4fd">
+      <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#d5e4fd" style="margin-top:5px;">
         <tr>
          <td align="center" background="<%=basePath%>/images/headerbg.jpg">  
    				<s:checkbox theme="simple" id="cbk_all" name="all"></s:checkbox>
