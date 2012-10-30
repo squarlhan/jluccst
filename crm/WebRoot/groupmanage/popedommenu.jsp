@@ -71,7 +71,11 @@
 				d.add(1061,106,'服务记录','<%=url%>?menuKey=<%=MenuKey.SUB_FU_WU_JI_LU%>&companyId=<%=companyId%>','','groupmain');
 				d.add(1062,106,'会员管理','<%=url%>?menuKey=<%=MenuKey.SUB_HUI_YUAN_GUAN_LI%>&companyId=<%=companyId%>','','groupmain');
 				d.add(1063,106,'积分管理','<%=url%>?menuKey=<%=MenuKey.SUB_JI_FEN_GUAN_LI%>&companyId=<%=companyId%>','','groupmain');
-		
+		d.add(107,0,'增值功能','<%=url%>?menuKey=<%=MenuKey.FU_WU_GUAN_LI%>&companyId=<%=companyId%>','','groupmain');
+				d.add(1071,107,'供应商管理','<%=url%>?menuKey=<%=MenuKey.SUB_GONG_YING_SHANG_GUAN_LI%>&companyId=<%=companyId%>','','groupmain');
+				d.add(1072,107,'采购管理','<%=url%>?menuKey=<%=MenuKey.SUB_CAI_GOU_GUAN_LI%>&companyId=<%=companyId%>','','groupmain');
+				d.add(1073,107,'库存清单','<%=url%>?menuKey=<%=MenuKey.SUB_KU_CUN_QING_DAN%>&companyId=<%=companyId%>','','groupmain');
+				d.add(1074,107,'财务清单','<%=url%>?menuKey=<%=MenuKey.SUB_CAI_WU_QING_DAN%>&companyId=<%=companyId%>','','groupmain');
 		d.add(-2,-1,'操作权限列表','','','Menu');
 		d.add(201,-2,'本部门','<%=url%>?menuKey=<%=MenuKey.SELF_DEPT%>&companyId=<%=companyId%>','','groupmain','<%=path%>/js/tree/img/imgfolder.gif','<%=path%>/js/tree/img/imgfolder.gif');
 		d.add(202,-2,'本公司','<%=url%>?menuKey=<%=MenuKey.SELF_COMPANY%>&companyId=<%=companyId%>','','groupmain','<%=path%>/js/tree/img/imgfolder.gif','<%=path%>/js/tree/img/imgfolder.gif');
