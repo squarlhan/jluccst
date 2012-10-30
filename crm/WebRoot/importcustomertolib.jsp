@@ -101,13 +101,34 @@
 			};
 			
 		</script>
+		<style type="text/css">
+		<!--
+		.STYLE1 {
+			color: #FFFFFF;
+			font-weight: bold;
+		}
+		-->
+		</style>
 	</head>
 
 	<body >
-		<center>
-		<s:form id="form1" name="form1" method="post" theme="simple" enctype="multipart/form-data">
+		<table width="100%" style="height:100%;" border="0" cellspacing="5" cellpadding="0">
+  <tr>
+    <td><table width="100%" style="height:100%;" border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td colspan="2" style="height:36px;"><table id="__01" width="100%" height="36" border="0" cellpadding="0" cellspacing="0">
+              <tr>
+                <td width="11"><img src="images/header_01.jpg" width="11" height="36" alt=""></td>
+                <td background="images/header_02.jpg"><span class="STYLE1">您当前的位置：客户查找&gt;&gt;&gt;导入客户库</span></td>
+                <td width="12"><img src="images/header_03.jpg" width="12" height="36" alt=""></td>
+              </tr>
+            </table></td>
+        </tr>
+        <tr>
+          <td valign="top" style="border-left:1px solid #54a4e3; border-bottom:1px solid #54a4e3; border-right:1px solid #54a4e3; padding:20px;">
+          <s:form id="form1" name="form1" method="post" theme="simple" enctype="multipart/form-data">
 			<s:label id="lb_message" name="message" cssStyle="display:none"></s:label>
-		<fieldset  style="width:80%" >
+		<fieldset  style="width:100%" >
 		<legend>查询条件</legend>
    		<span>
 			<table width="100%" border="0" cellspacing="5" cellpadding="0">
@@ -158,6 +179,10 @@
 				</s:iterator>
 			</s:if>
 		</s:form>
-		</center>
+          </td>
+        </tr>
+    </table></td>
+  </tr>
+</table>
 	</body>
 </html>
