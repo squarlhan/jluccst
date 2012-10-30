@@ -54,7 +54,7 @@
 			rules: {
 				"goods.goodsName":{required:true,strangecode:true},
 				"goods.standard":{strangecode:true},
-				"goods.weight":{strangecode:true,number:true},
+				"goods.weight":{strangecode:true},
 				"goods.allPrice":{required:true,strangecode:true,number:true},
 				"goods.number":{required:true,strangecode:true,number:true},
 				"goods.price":{required:true,strangecode:true,number:true},
@@ -103,6 +103,7 @@
 		 */
 	 	$.fn.close = function(){ 
 	 		$("#closeBtn").click(function(){
+	  			$.cookie('detial',''); 
 	  			parent.$("#windown-close").click();
 	  		});
 		};

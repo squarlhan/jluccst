@@ -253,7 +253,7 @@
 			<tr>
 				<td>
 					<fieldset >
-					<legend>交易信息11</legend>
+					<legend>交易信息</legend>
 						<span>
 						<table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#d5e4fd">
 							<tr>
