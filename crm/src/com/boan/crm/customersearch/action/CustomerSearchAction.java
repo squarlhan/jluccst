@@ -144,6 +144,15 @@ public class CustomerSearchAction  extends BaseActionSupport{
 	public void setAreaId(String areaId) {
 		this.areaId = areaId;
 	}
+	
+	/**
+	 * 管理员查询客户
+	 * @return
+	 */
+	public String openCustomerSearchForAdmin(){
+		provinceList = areaService.findAllProvinceInfo();
+		return SUCCESS;
+	}
 
 	/**
 	 * 查询客户
@@ -151,10 +160,55 @@ public class CustomerSearchAction  extends BaseActionSupport{
 	 */
 	public String openCustomerSearch(){
 		provinceList = areaService.findAllProvinceInfo();
-//		mainIndustry="童装";
-//		 provinceId="402880e439861adb01398639a5a20002" ;
 		return SUCCESS;
 	}
+	
+	/**
+	 * 管理员查询客户
+	 * @return
+	 */
+	public String customerSearchForAdmin(){
+		
+		provinceList = areaService.findAllProvinceInfo();
+		Map<String,String> values = new HashMap<String,String>();
+		
+		if(mainIndustry!=null && !mainIndustry.trim().equals("")){
+			values.put("mainIndustry", mainIndustry);
+		}
+		if(provinceId!=null && !provinceId.trim().equals("")){
+			values.put("provinceId", provinceId);
+		}
+		if(cityId!=null && !cityId.trim().equals("")){
+			values.put("cityId", cityId);
+		}
+		ProvinceInfo province = areaService.getProvince(provinceId);
+		String provincName = province.getProvinceName();
+		pagination = customerInfoService.findCustomerLibInfoForPage(provincName , values, pagination, null ,null);
+		if(provinceId!=null){
+			cityList = areaService.findCityInfoByProvinceId(provinceId);
+		}
+		if(cityId!=null){
+			areaList = areaService.findAreaInfoByCityId(cityId);
+		}
+		return SUCCESS;
+	}
+	
+	public void validateCustomerSearchForAdmin(){
+		provinceList = areaService.findAllProvinceInfo();
+		ProvinceInfo province = areaService.getProvince(provinceId);
+		if(province==null){
+			message="没有对应省份数据，请联系管理员！";
+			this.addFieldError("", "");
+		}else{
+			String provincName = province.getProvinceName();
+			System.out.println(ProvinceEnum.getKeyByName(provincName));
+			if(ProvinceEnum.getKeyByName(provincName)==null){
+				message="没有对应省份数据，请联系管理员！";
+				this.addFieldError("", "");
+			}
+		}
+	}
+	
 	/**
 	 * 查询客户
 	 * @return
@@ -237,6 +291,20 @@ public class CustomerSearchAction  extends BaseActionSupport{
 		}
 		message = "转入成功!";
 		return customerSearch();
+	}
+	
+	/**
+	 * 管理员查询排除指定客户
+	 * @return
+	 */
+	public String toNoSearchCustomerForAdmin(){
+		
+		ProvinceInfo province = areaService.getProvince(provinceId);
+		if(province!=null){
+			customerInfoService.updateNoSearchColumn(province.getProvinceName(),customerLibInfo.getId(), 1);
+		}
+		 
+		return customerSearchForAdmin();
 	}
 	
 	/**

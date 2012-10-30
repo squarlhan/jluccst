@@ -97,13 +97,13 @@ public class CustomerLibInfoServiceImpl implements ICustomerLibInfoService{
 
 	@Override
 	public List<CustomerLibInfo> findAllCustomerLibInfo() {
-		return customerLibInfoDao.find("from CustomerLibInfo order by registerTime asc", new Object[0]);
+		return customerLibInfoDao.find("from CustomerLibInfo where noSearch=0 order by registerTime asc", new Object[0]);
 	}
 
 	@Override
 	public Pagination<CustomerLibInfo> findCustomerLibInfoForPage( Map<String, ?> values, Pagination<CustomerLibInfo> pagination) {
 		StringBuilder hql = new StringBuilder();
-		hql.append( "from CustomerLibInfo where 1=1");
+		hql.append( "from CustomerLibInfo where 1=1 and noSearch=0 ");
 		
 		if(values.get("mainIndustry") != null)
 		{
@@ -125,7 +125,7 @@ public class CustomerLibInfoServiceImpl implements ICustomerLibInfoService{
 		hql.append(" order by registerTime asc");
 		List<CustomerLibInfo> data = customerLibInfoDao.findForPage(hql.toString(), values, pagination.getStartIndex(), pagination.getPageSize());
 		hql.delete(0, hql.length());
-		hql.append(" select count(*) from CustomerLibInfo where 1=1 " );
+		hql.append(" select count(*) from CustomerLibInfo where 1=1 and noSearch=0 " );
 		if(values.get("mainIndustry") != null)
 		{
 			hql.append(" and mainIndustry like '%"+values.get("mainIndustry") +"%' ");
@@ -206,7 +206,7 @@ public class CustomerLibInfoServiceImpl implements ICustomerLibInfoService{
 	 */
 	public List<CustomerLibInfo> findAllCustomerLibInfo(String province ){
 		String provincKey = "CustomerLib_"+ ProvinceEnum.getKeyByName(province);
-		return customerLibInfoDao.find("from " + provincKey +" order by registerTime asc", new Object[0]);
+		return customerLibInfoDao.find("from " + provincKey +" where noSearch=0  order by registerTime asc", new Object[0]);
 	}
 
 	/**
@@ -217,7 +217,7 @@ public class CustomerLibInfoServiceImpl implements ICustomerLibInfoService{
 	 */
 	public boolean existCustomerInLib(String province,String customerName ){
 		String provincKey = "CustomerLib_"+ ProvinceEnum.getKeyByName(province);
-		List list = customerLibInfoDao.find("from " + provincKey +" where customerName='"+customerName+"' order by registerTime asc", new Object[0]);
+		List list = customerLibInfoDao.find("from " + provincKey +" where customerName='"+customerName+"'  and noSearch=0 order by registerTime asc", new Object[0]);
 		return list!=null && list.size()>0 &&  list.get(0)!=null ? true : false;
 	}
 	
@@ -227,7 +227,9 @@ public class CustomerLibInfoServiceImpl implements ICustomerLibInfoService{
 	 */
 	public CustomerLibInfo get(String province , String id){
 		String provincKey = "CustomerLib_"+ ProvinceEnum.getKeyByName(province);
-		List list = customerLibInfoDao.find("from " + provincKey +" where id=:id", id);
+		Map param = new HashMap();
+		param.put("id", id);
+		List list = customerLibInfoDao.find("from " + provincKey +" where  noSearch=0  and id=:id", param);
 		return list!=null && list.get(0)!=null ? (CustomerLibInfo)list.get(0) : null;
 	}
 
@@ -435,7 +437,7 @@ public class CustomerLibInfoServiceImpl implements ICustomerLibInfoService{
 		
 		String provincKey = "CustomerLib_"+ ProvinceEnum.getKeyByName(province);
 		StringBuilder hql = new StringBuilder();
-		hql.append( "from " + provincKey +" where 1=1");
+		hql.append( "from " + provincKey +" where 1=1 and  noSearch=0 ");
 		
 		if(values.get("mainIndustry") != null)
 		{
@@ -460,7 +462,7 @@ public class CustomerLibInfoServiceImpl implements ICustomerLibInfoService{
 		hql.append(" order by registerTime asc");
 		List<CustomerLibInfo> data = customerLibInfoDao.findForPage(hql.toString(), values, pagination.getStartIndex(), pagination.getPageSize());
 		hql.delete(0, hql.length());
-		hql.append(" select count(*) from " + provincKey +" where 1=1 " );
+		hql.append(" select count(*) from " + provincKey +" where 1=1 and  noSearch=0 " );
 		if(values.get("mainIndustry") != null)
 		{
 			hql.append(" and mainIndustry like '%"+values.get("mainIndustry") +"%' ");
@@ -524,5 +526,21 @@ public class CustomerLibInfoServiceImpl implements ICustomerLibInfoService{
 			}
 		}
 		return pagination;
+	}
+	
+	/**
+	 * 修改不查询列
+	 * @param province 省份
+	 * @param customerId 客户Id
+	 * @param flag 0：查询 1：不查询
+	 */
+	public void updateNoSearchColumn(String province,String customerId,int flag){
+		String provincKey = "CustomerLib_"+ ProvinceEnum.getKeyByName(province);
+		StringBuilder hql = new StringBuilder();
+		hql.append( "update " + provincKey +" set noSearch=:flag where id=:id");
+		Map param = new HashMap();
+		param.put("id", customerId);
+		param.put("flag", flag);
+		customerLibInfoDao.executeHql(hql.toString(), param);
 	}
 }

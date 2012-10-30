@@ -93,6 +93,10 @@ public class CustomerLibInfo implements Serializable
 	@Column(name = "POSTCODE")
 	private String postCode = null;
 	
+	//管理员设的不在查询（0：查询  1：不查询）
+	@Column(name = "no_Search"  ,nullable=false,columnDefinition="INT default 0")
+	private int noSearch = 0;
+	
 	public String getPostCode() {
 		return postCode;
 	}
@@ -533,5 +537,11 @@ public class CustomerLibInfo implements Serializable
 	 */
 	public void setCompanyId(String companyId) {
 		this.companyId = companyId;
+	}
+	public int getNoSearch() {
+		return noSearch;
+	}
+	public void setNoSearch(int noSearch) {
+		this.noSearch = noSearch;
 	}
 }

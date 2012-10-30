@@ -223,7 +223,8 @@ public class SellRecordAction extends BaseActionSupport {
 	
 	public String openViewSellRecord() {
 
-		customerInfos = customerInfoService.findAllCustomerInfo();
+		customerInfos = customerInfoService.findAllCustomerInfoByCompanyId(sessionCompanyId);//本公司的所有客户
+//		customerInfos = customerInfoService.findAllCustomerInfoBySalesmanId(sessionUserId); //查本公司业务员所管辖的客户
 		sellRecord = sellRecordService.getSellRecordById(sellRecord.getId());
 		return SUCCESS;
 	}
@@ -241,7 +242,8 @@ public class SellRecordAction extends BaseActionSupport {
 			number = Integer.parseInt(orderID.substring(8));
 			number = number + 1;
 		}
-		customerInfos = customerInfoService.findAllCustomerInfo();
+		customerInfos = customerInfoService.findAllCustomerInfoByCompanyId(sessionCompanyId);//本公司的所有客户
+//		customerInfos = customerInfoService.findAllCustomerInfoBySalesmanId(sessionUserId); //查本公司业务员所管辖的客户
 		sellRecord = new SellRecord();
 		sellRecord.setCompanyId(userSession.getCompanyId());
 		// String.format("%05d", number) 将流水号格式化为 5位长度返回
@@ -252,13 +254,15 @@ public class SellRecordAction extends BaseActionSupport {
 	}
 
 	public String openModifySellRecordForSeller() {
-		customerInfos = customerInfoService.findAllCustomerInfo();
+		customerInfos = customerInfoService.findAllCustomerInfoByCompanyId(sessionCompanyId);//本公司的所有客户
+//		customerInfos = customerInfoService.findAllCustomerInfoBySalesmanId(sessionUserId); //查本公司业务员所管辖的客户
 		sellRecord = sellRecordService.getSellRecordById(sellRecord.getId());
 		return SUCCESS;
 	}
 
 	public String addSellRecordForSeller() {
-		customerInfos = customerInfoService.findAllCustomerInfo();
+		customerInfos = customerInfoService.findAllCustomerInfoByCompanyId(sessionCompanyId);//本公司的所有客户
+//		customerInfos = customerInfoService.findAllCustomerInfoBySalesmanId(sessionUserId); //查本公司业务员所管辖的客户
 		// 查找客户信息
 		customer = customerInfoService.get(sellRecord.getCustomerId());
 		sellRecord.setCustomer(customer);
