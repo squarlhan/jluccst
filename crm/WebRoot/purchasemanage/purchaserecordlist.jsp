@@ -72,7 +72,7 @@
 		$("#addbtn").click(
 			function() {
 				var myBatchId = $("#batchId").val();
-				parent.parent.tipsWindown("添加采购记录","iframe:showPurchaseRecordInfoAction.action?purchaseRecord.batchId="+ myBatchId +"&purchaseRecord.id=" , "460", "480", "true", "", "true", "no");
+				parent.parent.tipsWindown("添加采购记录","iframe:showPurchaseRecordInfoAction.action?purchaseRecord.batchId="+ myBatchId +"&purchaseRecord.id=" , "460", "450", "true", "", "true", "no");
 				parent.parent.$("#windown-close").bind('click', function() {
 					window.location.href = "./showPurchaseRecordListAction.action?purchaseRecord.batchId="+myBatchId;
 				});
@@ -88,7 +88,7 @@
 				$(this).click( function() {
 						var myBatchId = $("#batchId").val();
 						var url = $(this).attr("url");
-						parent.parent.tipsWindown( "修改采购记录", "iframe:" + url, "460","480", "true", "","true", "no");
+						parent.parent.tipsWindown( "修改采购记录", "iframe:" + url, "460","450", "true", "","true", "no");
 						parent.parent.$("#windown-close").bind('click',function() {
 							window.location.href = "./showPurchaseRecordListAction.action?purchaseRecord.batchId="+myBatchId;
 							});
@@ -235,12 +235,14 @@
 								<td align="center" background="<%=path %>/images/headerbg.jpg">
 									<strong>规格</strong>
 								</td>
+								<!-- 
 								<td align="center" background="<%=path %>/images/headerbg.jpg">
 									<strong>克重</strong>
 								</td>
 								<td align="center" background="<%=path %>/images/headerbg.jpg">
 									<strong>吨</strong>
 								</td>
+								 -->
 								<td align="center" background="<%=path %>/images/headerbg.jpg">
 									<strong>数量</strong>
 								</td>
@@ -275,12 +277,14 @@
 									<td height="26" align="center" bgcolor="#FFFFFF">
 										<s:property value="specification" />
 									</td>
+									<!-- 
 									<td height="26" align="center" bgcolor="#FFFFFF" style="work-break:break-all;">
 										<s:property value="gramWeight" />
 									</td>
 									<td height="26" align="center" bgcolor="#FFFFFF">
 										<s:property value="ton" />
 									</td>
+									 -->
 									<td height="26" align="center" bgcolor="#FFFFFF">
 										<s:property value="amount" />
 									</td>
