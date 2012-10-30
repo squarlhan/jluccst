@@ -279,10 +279,24 @@ public class SellRecordAction extends BaseActionSupport {
 			GoodsInfo goods = new GoodsInfo();
 			goods.setGoodsName(array[0]);
 			goods.setStandard(array[1]);
-			goods.setWeight(new BigDecimal(array[2]));
-			goods.setPrice(new BigDecimal(array[3]));
-			goods.setNumber(Integer.parseInt(array[4]));
-			goods.setAllPrice(new BigDecimal(array[5]));
+			goods.setWeight(array[2]);
+			if(array[3].equals("")){
+				goods.setPrice(new BigDecimal(0));
+			}else{
+				goods.setPrice(new BigDecimal(array[3]));
+			}
+			if(array[4].equals("")){
+				goods.setNumber(0);
+			}else{
+				goods.setNumber(Integer.parseInt(array[4]));
+			}
+			
+			if(array[5].equals("")){
+				goods.setAllPrice(new BigDecimal(0));
+			}else{
+				goods.setAllPrice(new BigDecimal(array[5]));
+			}
+			
 			goods.setMemo(array[6]);
 			goodsDetials.add(goods);
 			thisPrice = thisPrice.add(goods.getAllPrice());

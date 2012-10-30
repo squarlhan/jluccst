@@ -53,7 +53,7 @@ public class GoodsInfo implements Serializable {
 	 * 重量
 	 */
 	@Column(name = "WEIGHT")
-	private BigDecimal weight;
+	private String weight;
 	
 	/**
 	 * 数量
@@ -116,11 +116,11 @@ public class GoodsInfo implements Serializable {
 		this.standard = standard;
 	}
 
-	public BigDecimal getWeight() {
+	public String getWeight() {
 		return weight;
 	}
 
-	public void setWeight(BigDecimal weight) {
+	public void setWeight(String weight) {
 		this.weight = weight;
 	}
 
