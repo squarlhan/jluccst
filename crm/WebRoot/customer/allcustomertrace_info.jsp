@@ -241,7 +241,18 @@
 			 */
 			$.fn.initpage = function(){
 				$("#tel").focus();
+				//回显上传时的错误信息
+				var uploadErr = $("#lb_error").html();
+				if(uploadErr!=null && $.trim(uploadErr)!="" ){
+					alert(uploadErr);
+				}
 				
+				var message = $("#lb_message").html();
+				if(message!=null && $.trim(message)!="" ){
+					alert(message);
+					
+					parent.$("#windown-close").click();
+				}
 			}
 		</script>
 		<style type="text/css">
@@ -261,6 +272,7 @@
 
 	<body>
 		<s:form id="form1" name="form1" method="post" theme="simple">
+		<s:label id="lb_message" name="message" cssStyle="display:none"></s:label>
 		<s:hidden id="id" name="customerTraceInfo.id"></s:hidden>
 		<s:hidden id="customerId" name="customerTraceInfo.customerId"></s:hidden>
 		<s:hidden id="customerId_t" name="customerId"></s:hidden>

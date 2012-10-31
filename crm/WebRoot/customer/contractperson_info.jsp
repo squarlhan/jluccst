@@ -23,8 +23,8 @@
 				rules: {
 					"contractPersonInfo.personName":{required:true,maxlength:10},
 					"contractPersonInfo.email":{email:true},
-					"contractPersonInfo.deptOrDuty":{required:true}//,
-					//"contractPersonInfo.birthday":{date:true}
+					"contractPersonInfo.deptOrDuty":{required:true},
+					"contractPersonInfo.birthday":{dateISO:true}
 					
 				}
 				
