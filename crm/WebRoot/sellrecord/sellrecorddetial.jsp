@@ -88,8 +88,8 @@
 	  			var number= $("#txt_number").val();
 	  			var price= $("#txt_price").val();
 	  			var allPrice= $("#txt_allPrice").val();
-	  			var memo= $("#txt_memo").val();
-	  			info = goodsName+"☆" + standard+"☆" + weight+"☆" + price+"☆"+number+"☆"+allPrice +"☆" + memo;
+	  			var memo= $("#txt_memo").val()+" ";
+	  			info = goodsName+"☆" + standard+"☆" + weight+"☆" + price+"☆"+number+"☆"+allPrice +"☆" + memo +"☆";
 	  			$.cookie('detial',info); 
 	  			parent.parent.parent.$("#windown-close").click();
 			});

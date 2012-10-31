@@ -79,6 +79,7 @@
 			  			$.cookie('detial', '', { expires: -1 }); //读取完毕后删除cookie
 	  					if(detials!=null){
 	  						var info = detials.split("☆");//☆
+	  						alert(info.length);
 				  			var row="";
 							row=row+"<tr>";
 				  			row=row+"<td align='center' bgcolor='#FFFFFF' >";  
@@ -91,6 +92,7 @@
 				  			row=row+"<td align='center' bgcolor='#FFFFFF'>"+info[3]+"</td>";
 				  			row=row+"<td align='center' bgcolor='#FFFFFF'>"+info[4]+"</td>";
 				  			row=row+"<td align='center' bgcolor='#FFFFFF'>"+info[5]+"</td>";
+				  			row=row+"<td align='center' bgcolor='#FFFFFF'>"+info[6]+"</td>";
 				  			row=row+"<td align='center' bgcolor='#FFFFFF'><a name='del_one' href='javascript:void(0);' onclick='$.fn.deletetemp($(this));'>删除</a></td>";
 				  			row=row+"</tr>";
 				  			$("#no_data").hide();
@@ -317,7 +319,7 @@
 							</s:if>
 							<s:else>
 							<tr id="no_data">
-		              			<td align="center" bgcolor="#FFFFFF" colspan="8" >暂无记录</td>
+		              			<td align="center" bgcolor="#FFFFFF" colspan="9" >暂无记录</td>
 		        			</tr>
 							</s:else>
 							
