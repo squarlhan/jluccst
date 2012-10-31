@@ -54,7 +54,7 @@
 		
 			});
 			$("#importbtn").click(function(){
-				parent.parent.tipsWindown("导入客户信息","iframe:customer/importcustomer.jsp","460","200","true","","true","no");
+				parent.parent.tipsWindown("导入客户信息","iframe:customer/importCustomer.action","460","200","true","","true","no");
 				parent.parent.$("#windown-close").bind('click',function(){
 					window.location.href="./customerList.action";
 				});

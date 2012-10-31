@@ -126,7 +126,6 @@
         <td>
        		<input name="addbtn" type="button" class="btn_4" id="addbtn" value="添加客户" >
             <input name="deletepointbtn" type="button" class="btn_4" id="deletepointbtn" value="删除所选">
-            <input name="importbtn" type="button" class="btn_4" id="importbtn" value="导入客户" >
         <td align="right"></td>
       </tr>
       
