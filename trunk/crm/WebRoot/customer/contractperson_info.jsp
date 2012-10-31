@@ -91,6 +91,8 @@
 				var message = $("#lb_message").html();
 				if(message!=null && $.trim(message)!="" ){
 					alert(message);
+					
+					parent.$("#windown-close").click();
 				}
 			};
 			
