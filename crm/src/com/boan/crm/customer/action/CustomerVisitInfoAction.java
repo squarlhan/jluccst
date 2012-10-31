@@ -97,6 +97,15 @@ public class CustomerVisitInfoAction extends BaseActionSupport{
 	private String contractTel  = "";
 	private String visitTime = "";
 	private String chkSMS = "";
+	private String message = null;
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+
 	public String getChkSMS() {
 		return chkSMS;
 	}
@@ -389,6 +398,7 @@ public class CustomerVisitInfoAction extends BaseActionSupport{
 		}
 		
 		id = obj.getId();
+		message = "保存成功！";
 		return SUCCESS;
 	}
 	/**
