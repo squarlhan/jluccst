@@ -96,6 +96,15 @@ public class CustomerTraceInfoAction extends BaseActionSupport{
 	private String contractTel  = "";
 	private String traceTime = "";
 	private String chkSMS = "";
+	private String message = null;
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+
 	public String getChkSMS() {
 		return chkSMS;
 	}
@@ -402,6 +411,10 @@ public class CustomerTraceInfoAction extends BaseActionSupport{
 			//smsInfoService.saveSMSInfo(sms); 
 		}
 		id = obj.getId();
+		
+		
+		message = "保存成功！";
+		
 		return SUCCESS;
 	}
 	/**
