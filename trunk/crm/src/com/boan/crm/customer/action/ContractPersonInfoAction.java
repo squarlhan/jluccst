@@ -33,7 +33,16 @@ public class ContractPersonInfoAction extends BaseActionSupport{
 	
 	private String customerId = null;
 	private String personId = null;
+	private String message = null;
 	
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+
 	public String contractPerson()
 	{
 		if(personId != null && personId.length() > 0)
@@ -69,6 +78,9 @@ public class ContractPersonInfoAction extends BaseActionSupport{
 		obj.setTel(contractPersonInfo.getTel());
 		
 		contractpersonInfoService.save(contractPersonInfo);
+		
+		message = "保存成功！";
+		
 		return SUCCESS;
 	}
 	public String personService()
