@@ -297,7 +297,7 @@ public class SellRecordAction extends BaseActionSupport {
 				goods.setAllPrice(new BigDecimal(array[5]));
 			}
 			
-			goods.setMemo(array[6]);
+			goods.setMemo(array[6].trim());
 			goodsDetials.add(goods);
 			thisPrice = thisPrice.add(goods.getAllPrice());
 		}
