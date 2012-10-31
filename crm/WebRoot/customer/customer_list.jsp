@@ -155,8 +155,7 @@
    				<s:checkbox theme="simple" id="cbk_all" name="all"></s:checkbox>
    			</td>
               <td align="center" background="../images/headerbg.jpg"><strong>客户名称</strong></td>
-              <td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">联系人</td>
-			<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">联系方式</td>
+              <td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">联系人/联系方式</td>
 			<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">业务员</td>
 			<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">客户分类</td>
 			<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">业务进展</td>
@@ -178,10 +177,7 @@
             <td height="26" align="center" bgcolor="#FFFFFF">
             <s:iterator value="contractPersonList" status="obj1">
             <s:property value="personName"/>&nbsp;
-            </s:iterator></td>
-            <td height="26" align="center" bgcolor="#FFFFFF">
-			<s:iterator value="contractPersonList" status="obj1">
-            <s:property value="phone"/>&nbsp;<s:property value="tel"/>
+            <s:property value="phone"/>&nbsp;<s:property value="tel"/><br/>
             </s:iterator>
 			</td>
             <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="salesman"/></td>
