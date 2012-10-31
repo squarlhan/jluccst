@@ -339,7 +339,7 @@
 							</s:if>
 							<s:else>
 							<tr id="no_data">
-		              			<td align="center" bgcolor="#FFFFFF" colspan="8" >暂无记录</td>
+		              			<td align="center" bgcolor="#FFFFFF" colspan="9" >暂无记录</td>
 		        			</tr>
 							</s:else>
 							
