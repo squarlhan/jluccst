@@ -29,6 +29,7 @@ import com.boan.crm.groupmanage.model.User;
 import com.boan.crm.groupmanage.service.IUserService;
 import com.boan.crm.sms.model.SMSCustomerInfo;
 import com.boan.crm.sms.model.SMSInfo;
+import com.boan.crm.sms.service.ISMSCustomerInfoService;
 import com.boan.crm.sms.service.ISMSInfoService;
 import com.boan.crm.timemanage.model.TimePlan;
 import com.boan.crm.timemanage.service.ITimePlanService;
@@ -73,6 +74,9 @@ public class CustomerVisitInfoAction extends BaseActionSupport{
 	@Autowired
 	@Qualifier("SMSInfoService")
 	private ISMSInfoService smsInfoService;
+	@Autowired
+	@Qualifier("SMSCustomerInfoService")
+	private ISMSCustomerInfoService sMSCustomerInfoService;
 	@Autowired
 	@Qualifier("timePlanService")
 	private ITimePlanService timePlanService = null;
@@ -230,6 +234,7 @@ public class CustomerVisitInfoAction extends BaseActionSupport{
 			visitTime = CalendarUtils.toLongStringNoSecond(customerVisitInfo.getVisitTime());
 			try
 			{
+				customerVisitInfo.setCustomerName(customerInfo.getCustomerName());
 				customerInfo.setSalesman(userService.getUserById(customerInfo.getSalesmanId()).getUserCName());
 			}catch(Exception ex){}
 			DataDictionary d = dataDictionaryService.get(customerInfo.getCategoryId());
@@ -384,9 +389,21 @@ public class CustomerVisitInfoAction extends BaseActionSupport{
 		if(chkSMS != null && chkSMS.equals("true"))
 		{
 			SMSInfo sms = new SMSInfo();
-			SMSCustomerInfo customerInfo = new SMSCustomerInfo();
-			customerInfo.setCustomerId(customerId);
-			sms.setCustomerInfo(customerInfo);
+			
+			CustomerInfo customer = customerInfoService.get(customerId);
+			
+			SMSCustomerInfo smsCustomer = new SMSCustomerInfo();
+			smsCustomer.setCustomerId(customerId);
+			//smsCustomer.setBirthday(birthday)
+			smsCustomer.setName(customer.getCustomerName());
+			smsCustomer.setOrganId(customer.getCompanyId());
+			smsCustomer.setOrganName(customer.getCompanyFullName());
+			smsCustomer.setSalesmanId(customer.getSalesmanId());
+			smsCustomer.setCategoryId(customer.getCategoryId());
+			
+			sMSCustomerInfoService.saveSMSCustomerInfo(smsCustomer);
+			
+			sms.setCustomerInfo(smsCustomer);
 			sms.setIsImmediately(1);
 			sms.setOrganId(sessionCompanyId);
 			sms.setPersonCompany(sessionCompanyName);
@@ -394,7 +411,7 @@ public class CustomerVisitInfoAction extends BaseActionSupport{
 			sms.setSendTime(time);
 			sms.setPhone(customerVisitInfo.getTel());
 			sms.setInfo("回访任务提醒："+customerVisitInfo.getTask());
-			//smsInfoService.saveSMSInfo(sms); 
+			smsInfoService.saveSMSInfo(sms);
 		}
 		
 		id = obj.getId();
