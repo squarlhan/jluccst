@@ -165,7 +165,7 @@ public class CompanyAction extends BaseActionSupport {
 			return ERROR;
 		} else {
 			if(true){  //此处默认保存时激活短信账号，如果以后要加开关，if语句可另行判断
-				if(company.getSmsPassword()!=null && !company.getSmsPassword().trim().equals("")){
+				if(company.getSmsSN()!=null && !company.getSmsSN().trim().equals("") && company.getSmsKey()!=null && !company.getSmsKey().trim().equals("") && company.getSmsPassword()!=null && !company.getSmsPassword().trim().equals("")){
 					//激活短信账号
 					SMSManageService.activateAccount(company.getSmsPassword());
 				}
@@ -242,7 +242,7 @@ public class CompanyAction extends BaseActionSupport {
 			return ERROR;
 		} else {
 			if(true){  //此处默认保存时激活短信账号，如果以后要加开关，if语句可另行判断
-				if(company.getSmsPassword()!=null && !company.getSmsPassword().trim().equals("")){
+				if(company.getSmsSN()!=null && !company.getSmsSN().trim().equals("") && company.getSmsKey()!=null && !company.getSmsKey().trim().equals("") && company.getSmsPassword()!=null && !company.getSmsPassword().trim().equals("")){
 					//激活短信账号
 					SMSManageService.activateAccount(company.getSmsPassword());
 				}
