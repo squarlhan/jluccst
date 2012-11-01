@@ -316,7 +316,7 @@
             		<td height="26" align="center" bgcolor="#FFFFFF"><s:property value="receivable"/></td>
             		<td height="26" align="center" bgcolor="#FFFFFF"><s:property value="realCollection"/></td>
             		<td height="26" align="center" bgcolor="#FFFFFF"><s:property value="debt"/></td>
-            		<td height="26" align="center" bgcolor="#FFFFFF"><s:property value="receivable/realCollection"/>%</td>
+            		<td height="26" align="center" bgcolor="#FFFFFF"><s:property value="realCollection/receivable"/>%</td>
             		<td height="26" align="center" bgcolor="#FFFFFF">
 							<s:url id="edit_url" action="openModifySellRecordForSellerAction">   
 								<s:param name="sellRecord.id" value="id"></s:param>   
