@@ -51,7 +51,7 @@ public class PurchaseAction extends BaseActionSupport {
 	@Resource
 	private ISupplierService supplierService = null;
 	@Resource
-	private  IDataDictionaryService dataDictionaryService = null;
+	private IDataDictionaryService dataDictionaryService = null;
 
 	private Pagination<PurchaseBatch> pagination = new Pagination<PurchaseBatch>();
 
@@ -74,9 +74,9 @@ public class PurchaseAction extends BaseActionSupport {
 	private String isArrive = null;
 
 	private String isSettleAccount = null;
-	
+
 	private List<DataDictionary> productList = null;
-	
+
 	private String productId = null;
 
 	/**
@@ -164,10 +164,18 @@ public class PurchaseAction extends BaseActionSupport {
 			for (int i = 0; i < pagination.getData().size(); i++) {
 				// 数组长度为四，0-3，分别表示：总运费，总应付款，总实付款，总欠款
 				Object[] objects = purchaseRecordService.queryRecordSum(pagination.getData().get(i).getId());
-				//总运费暂时不用显示到页面上
-				pagination.getData().get(i).setTotalAccountPayable(Float.parseFloat(objects[1].toString()));
-				pagination.getData().get(i).setTotalActualPayment(Float.parseFloat(objects[2].toString()));
-				pagination.getData().get(i).setTotalAmountInArrear(Float.parseFloat(objects[3].toString()));
+				if (objects != null && objects.length > 0) {
+					// 总运费暂时不用显示到页面上
+					if (objects[1] != null) {
+						pagination.getData().get(i).setTotalAccountPayable(Float.parseFloat(objects[1].toString()));
+					}
+					if (objects[2] != null) {
+						pagination.getData().get(i).setTotalActualPayment(Float.parseFloat(objects[2].toString()));
+					}
+					if (objects[3] != null) {
+						pagination.getData().get(i).setTotalAmountInArrear(Float.parseFloat(objects[3].toString()));
+					}
+				}
 			}
 		}
 		return SUCCESS;
@@ -233,9 +241,9 @@ public class PurchaseAction extends BaseActionSupport {
 			purchaseRecord = purchaseRecordService.get(purchaseRecord.getId());
 		}
 		purchaseRecord.setBatchId(batchId);
-		//显示产品列表
+		// 显示产品列表
 		productList = dataDictionaryService.findDataDictionaryByType(sessionCompanyId, 8);
-		if( productList == null  ){
+		if (productList == null) {
 			productList = new ArrayList<DataDictionary>();
 		}
 		return SUCCESS;
@@ -252,22 +260,22 @@ public class PurchaseAction extends BaseActionSupport {
 			purchaseRecord.setId(null);
 		}
 		purchaseRecord.setCompanyId(sessionCompanyId);
-		//获取产品名称
+		// 获取产品名称
 		DataDictionary product = dataDictionaryService.get(purchaseRecord.getProductId());
-		if( product != null  ){
+		if (product != null) {
 			purchaseRecord.setProductName(product.getName());
-		}else{
+		} else {
 			purchaseRecord.setProductName("未知产品");
 		}
-		//获取供应商信息
+		// 获取供应商信息
 		PurchaseBatch batch = purchaseBatchService.get(purchaseRecord.getBatchId());
-		if( batch != null ){
-			
-			purchaseRecord.setSupplierId( batch.getSupplierId() );
-			purchaseRecord.setSupplierName( batch.getSupplierName() );
-			purchaseRecord.setSupplierNumber( batch.getSupplierNumber() );
+		if (batch != null) {
+
+			purchaseRecord.setSupplierId(batch.getSupplierId());
+			purchaseRecord.setSupplierName(batch.getSupplierName());
+			purchaseRecord.setSupplierNumber(batch.getSupplierNumber());
 		}
-		
+
 		purchaseRecord.setCreateTime(date);
 		try {
 			purchaseRecordService.saveOrUpdate(purchaseRecord);
@@ -283,13 +291,13 @@ public class PurchaseAction extends BaseActionSupport {
 		// 保存日志结束
 		return SUCCESS;
 	}
-	
+
 	/**
 	 * 用于库存清单显示详细记录用
+	 * 
 	 * @return
 	 */
-	public String showPurchaseDetail()
-	{
+	public String showPurchaseDetail() {
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("productId", productId);
 		map.put("companyId", sessionCompanyId);
