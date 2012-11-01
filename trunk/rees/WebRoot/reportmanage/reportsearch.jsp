@@ -127,8 +127,8 @@
         <tr>
           <td width="16%" align="center" background="<%=path %>/images/headerbg.jpg" ><strong>汇报类别</strong></td>
           <td width="16%" align="center" background="<%=path %>/images/headerbg.jpg"><strong>汇报题目</strong></td>
-		  <td width="16%" align="center" background="<%=path %>/images/headerbg.jpg"><strong>汇报人</strong></td>
 		  <td width="16%" align="center" background="../images/headerbg.jpg"><strong>所属单位</strong></td>
+		  <td width="16%" align="center" background="<%=path %>/images/headerbg.jpg"><strong>汇报人</strong></td>
 		  <td width="16%" align="center" background="<%=path %>/images/headerbg.jpg"><strong>汇报时间</strong></td>
 		  <td width="10%" align="center" background="<%=path %>/images/headerbg.jpg"><strong>操作</strong></td>
 	    </tr>
@@ -140,12 +140,13 @@
           <td height="26" align="center" bgcolor="#FFFFFF">
           	<s:property value="reportSubject"/>&nbsp;
           	</td>
+          	<td height="26" align="center" bgcolor="#FFFFFF">
+			<s:property value="reportPersonFactoryName"/><s:property value="reportPersonWorkshopName"/>&nbsp;
+			</td>
           <td height="26" align="center" bgcolor="#FFFFFF">
 			<s:property value="reportPerson"/>&nbsp;
 			</td>
-			<td height="26" align="center" bgcolor="#FFFFFF">
-			<s:property value="reportPersonFactoryName"/><s:property value="reportPersonWorkshopName"/>&nbsp;
-			</td>
+			
 		  <td height="26" align="center" bgcolor="#FFFFFF"><!-- format="yyyy-MM-dd HH:mm" -->
 		  	<s:date  name="reportDate" format="yyyy-MM-dd" />&nbsp;
 		  	</td>
