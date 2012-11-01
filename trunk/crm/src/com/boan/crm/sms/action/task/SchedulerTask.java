@@ -63,6 +63,8 @@ public class SchedulerTask {
 						time.append(info.getSendTime().get(Calendar.MINUTE)<10 ? "0"+info.getSendTime().get(Calendar.MINUTE ) : info.getSendTime().get(Calendar.MINUTE ));
 						time.append(info.getSendTime().get(Calendar.SECOND)<10 ? "0"+info.getSendTime().get(Calendar.SECOND ) : info.getSendTime().get(Calendar.SECOND ));
 						int flag = smsManageService.sendScheduledSMS(info.getInfo(), time.toString() , info.getPhone());
+						//关闭当前短信客户端连接
+						smsManageService.closeClientSocket();
 						if(flag==0){
 							smsInfoService.updateSMSInfoState(info.getId(), 2);
 						}
