@@ -31,6 +31,7 @@ import com.boan.crm.groupmanage.model.Role;
 import com.boan.crm.groupmanage.service.IDeptmentService;
 import com.boan.crm.groupmanage.service.IRoleService;
 import com.boan.crm.groupmanage.service.IUserService;
+import com.boan.crm.sms.service.ISMSManageService;
 import com.boan.crm.utils.action.BaseActionSupport;
 import com.boan.crm.utils.page.Pagination;
 
@@ -75,6 +76,14 @@ public class CompanyAction extends BaseActionSupport {
 	@Autowired
 	@Qualifier("dataDictionaryService")
 	private IDataDictionaryService dataDictionaryService = null;
+	
+	/**
+	 * 短信Service
+	 */
+	@Autowired
+	@Qualifier("SMSManageService")
+	private ISMSManageService SMSManageService = null;
+	
 	/**
 	 * 显示分页
 	 */
@@ -155,6 +164,17 @@ public class CompanyAction extends BaseActionSupport {
 			message.setContent("相同公司名称已存在，请重新输入！");
 			return ERROR;
 		} else {
+			if(true){  //此处默认保存时激活短信账号，如果以后要加开关，if语句可另行判断
+				if(company.getSmsPassword()!=null && !company.getSmsPassword().trim().equals("")){
+					//激活短信账号
+					SMSManageService.activateAccount(company.getSmsPassword());
+				}
+			}else{
+				if(company.getSmsSN()!=null && !company.getSmsSN().trim().equals("") && company.getSmsKey()!=null && !company.getSmsKey().trim().equals("")){
+					//注销短信账号
+					SMSManageService.logoutAccount(company.getSmsSN(),company.getSmsKey());
+				}
+			}
 			service.save(company);
 			message.setContent("公司信息保存成功！");
 			//为新建的公司建一个公司管理员角色
@@ -221,6 +241,18 @@ public class CompanyAction extends BaseActionSupport {
 			message.setContent("相同公司名称已存在，请重新输入！");
 			return ERROR;
 		} else {
+			if(true){  //此处默认保存时激活短信账号，如果以后要加开关，if语句可另行判断
+				if(company.getSmsPassword()!=null && !company.getSmsPassword().trim().equals("")){
+					//激活短信账号
+					SMSManageService.activateAccount(company.getSmsPassword());
+				}
+			}else{
+				if(company.getSmsSN()!=null && !company.getSmsSN().trim().equals("") && company.getSmsKey()!=null && !company.getSmsKey().trim().equals("")){
+					//注销短信账号
+					SMSManageService.logoutAccount(company.getSmsSN(),company.getSmsKey());
+				}
+			}
+			
 			service.update(company);
 			message.setContent("公司信息保存成功！");
 			List<DataDictionary> dataDictionary = dataDictionaryService.findAllDataDictionaryByCompanyId(StringUtils.trimToEmpty(company.getId()));
