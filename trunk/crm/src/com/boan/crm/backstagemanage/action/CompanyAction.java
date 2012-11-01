@@ -166,13 +166,19 @@ public class CompanyAction extends BaseActionSupport {
 		} else {
 			if(true){  //此处默认保存时激活短信账号，如果以后要加开关，if语句可另行判断
 				if(company.getSmsSN()!=null && !company.getSmsSN().trim().equals("") && company.getSmsKey()!=null && !company.getSmsKey().trim().equals("") && company.getSmsPassword()!=null && !company.getSmsPassword().trim().equals("")){
+					SMSManageService.initClient(company.getSmsSN(), company.getSmsPassword(), company.getSmsKey());
 					//激活短信账号
 					SMSManageService.activateAccount(company.getSmsPassword());
+					//关闭当前短信客户端连接
+					SMSManageService.closeClientSocket();
 				}
 			}else{
 				if(company.getSmsSN()!=null && !company.getSmsSN().trim().equals("") && company.getSmsKey()!=null && !company.getSmsKey().trim().equals("")){
+					SMSManageService.initClient(company.getSmsSN(), company.getSmsPassword(), company.getSmsKey());
 					//注销短信账号
 					SMSManageService.logoutAccount(company.getSmsSN(),company.getSmsKey());
+					//关闭当前短信客户端连接
+					SMSManageService.closeClientSocket();
 				}
 			}
 			service.save(company);
@@ -244,12 +250,18 @@ public class CompanyAction extends BaseActionSupport {
 			if(true){  //此处默认保存时激活短信账号，如果以后要加开关，if语句可另行判断
 				if(company.getSmsSN()!=null && !company.getSmsSN().trim().equals("") && company.getSmsKey()!=null && !company.getSmsKey().trim().equals("") && company.getSmsPassword()!=null && !company.getSmsPassword().trim().equals("")){
 					//激活短信账号
+					SMSManageService.initClient(company.getSmsSN(), company.getSmsPassword(), company.getSmsKey());
 					SMSManageService.activateAccount(company.getSmsPassword());
+					//关闭当前短信客户端连接
+					SMSManageService.closeClientSocket();
 				}
 			}else{
 				if(company.getSmsSN()!=null && !company.getSmsSN().trim().equals("") && company.getSmsKey()!=null && !company.getSmsKey().trim().equals("")){
+					SMSManageService.initClient(company.getSmsSN(), company.getSmsPassword(), company.getSmsKey());
 					//注销短信账号
 					SMSManageService.logoutAccount(company.getSmsSN(),company.getSmsKey());
+					//关闭当前短信客户端连接
+					SMSManageService.closeClientSocket();
 				}
 			}
 			
