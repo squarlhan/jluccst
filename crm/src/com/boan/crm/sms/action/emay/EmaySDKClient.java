@@ -227,6 +227,13 @@ public class EmaySDKClient {
 			e.printStackTrace();
 		}
 	}
+	/**
+	 * 返回短信客户端对象
+	 * @return
+	 */
+	public Client getClient(){
+		return client;
+	}
 	
 	public static void main(String[] args) {
 		EmaySDKClient client = new EmaySDKClient("3SDK-ECQ-0130-LGWLM","17725","key-177259");
@@ -240,5 +247,12 @@ public class EmaySDKClient {
 		client.getBalance();
 		//发送信息
 		client.sendSMS("测试ss", "13514318022");
+		try {
+			client.client.closeSocketConnect();
+			client.client.closeRemoteSocket();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }
