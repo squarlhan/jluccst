@@ -105,6 +105,9 @@ public class SellRecordServiceImpl implements ISellRecordService {
 		if(values.containsKey("salesmanId")){
 			param = param.append("  and record. salesmanId ='"+values.get("salesmanId")+"'  ");
 		}
+		if(values.containsKey("companyId")){
+			param = param.append("  and record. companyId ='"+values.get("companyId")+"'  ");
+		}
 		String hql = "select new SellRecord" +
 				"(record.id,record. goodsType,record. customerId,record. customerName," +
 				"record. salesmanId,record. salesmanName,record. orderID,record. rate," +
