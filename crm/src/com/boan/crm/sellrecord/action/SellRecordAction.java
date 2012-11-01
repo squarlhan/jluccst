@@ -153,6 +153,8 @@ public class SellRecordAction extends BaseActionSupport {
 		
 		userList = userService.queryUserList(sessionCompanyId, sessionDeptId, new Pagination<User>()).getData();
 		Map<String, String> params = new HashMap<String, String>();
+
+		params.put("companyId", sessionCompanyId);
 		if (queryCustomerName != null && !queryCustomerName.trim().equals("")) {
 			params.put("queryCustomerName", queryCustomerName);
 		}
@@ -183,6 +185,7 @@ public class SellRecordAction extends BaseActionSupport {
 	public String openSellRecordListForSeller() throws Exception {
 		userList = userService.queryUserList(sessionCompanyId, sessionDeptId, new Pagination<User>()).getData();
 		Map<String, String> params = new HashMap<String, String>();
+		params.put("companyId", sessionCompanyId);
 		if (queryCustomerName != null && !queryCustomerName.trim().equals("")) {
 			params.put("queryCustomerName", queryCustomerName);
 		}
