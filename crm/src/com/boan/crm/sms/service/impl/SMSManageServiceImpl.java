@@ -74,4 +74,39 @@ public class SMSManageServiceImpl implements ISMSManageService {
 	public String getBalance(){
 		return client.getBalance();
 	}
+	
+	/**
+	 * 获取当前短信客户端
+	 * @param serialNo 序列号
+	 * @param password 密码
+	 * @param key key值
+	 * @return 客户端对象，需要强转
+	 */
+	public EmaySDKClient getCurrentClient(){
+		return client;
+	}
+	
+	/**
+	 * 获取短信客户端
+	 * @param serialNo 序列号
+	 * @param password 密码
+	 * @param key key值
+	 * @return 客户端对象，需要强转
+	 */
+	public EmaySDKClient getClient(String serialNo,String password,String key){
+		EmaySDKClient client = new EmaySDKClient(serialNo,password,key);
+		return client;
+	}
+	
+	/**
+	 * 关闭当前短信客户端连接
+	 */
+	public void closeClientSocket(){
+		try {
+			client.getClient().closeRemoteSocket();
+			client.getClient().closeSocketConnect();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
 }
