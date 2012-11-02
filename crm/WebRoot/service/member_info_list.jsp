@@ -32,7 +32,7 @@
 			$(".showInfo").css("cursor","hand").click(function(){
 				parent.parent.tipsWindown("查看会员信息","iframe:service/memberinfo.action?infoId=" + $(this).attr("lid") ,"785","300","true","","true","no");
 				parent.parent.$("#windown-close").bind('click',function(){
-					window.location.href="memberinfolist.action";
+					window.location.href="${pageContext.request.contextPath}/service/memberinfolist.action";
 				});
 			});
 			/**

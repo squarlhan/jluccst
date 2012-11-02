@@ -32,7 +32,7 @@
 			$(".showInfo").css("cursor","hand").click(function(){
 				parent.parent.tipsWindown("查看积分记录","iframe:service/pointinfolist.action?companyId=" + $(this).attr("lid") ,"885","500","true","","true","no");
 				parent.parent.$("#windown-close").bind('click',function(){
-					window.location.href="pointmemberinfolist.action";
+					window.location.href="${pageContext.request.contextPath}/service/pointmemberinfolist.action";
 				});
 			});
 		});
