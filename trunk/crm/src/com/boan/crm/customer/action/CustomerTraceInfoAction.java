@@ -334,10 +334,15 @@ public class CustomerTraceInfoAction extends BaseActionSupport{
 		{
 			obj = new CustomerTraceInfo();
 			obj.setCustomerId(customerId);
+			
+			CustomerInfo customer = customerInfoService.get(customerId);
+			if(customer != null)
+			{
+				obj.setCustomerName(customer.getCustomerName());
+			}
 		}
 		
 		obj.setTracePersonId(customerTraceInfo.getTracePersonId());
-		obj.setCustomerName(customerTraceInfo.getCustomerName());
 		obj.setInterest(customerTraceInfo.getInterest());
 		obj.setObjection(customerTraceInfo.getObjection());
 		obj.setSalesman(customerTraceInfo.getSalesman());
@@ -384,7 +389,7 @@ public class CustomerTraceInfoAction extends BaseActionSupport{
 			timePlan.setEmployeeId(sessionUserId);
 			timePlan.setEmployeeName(sessionUserCName);
 			timePlan.setOrganId(sessionCompanyId);
-			timePlan.setPersonId(obj.getTracePersonId());
+			timePlan.setPersonId(sessionUserId);
 			timePlan.setPlanType("0");
 			StringBuilder sb = new StringBuilder();
 			sb.append("跟进计划：");
