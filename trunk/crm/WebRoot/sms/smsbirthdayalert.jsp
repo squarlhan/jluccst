@@ -261,7 +261,13 @@
 											</span>
 											<br/>
 											<br/>
-											<font color="red">;当前短信余额：</font><font color="red"><strong  id="balance"><s:property value="SMSBalance"/>元</strong>，每条短信费用为0.1元。</font>
+											<font color="red">;当前短信余额：</font>
+												<s:if test="SMSBalance==303">
+													<font color="red">查询余额失败，请稍后再试！</font>
+												</s:if>
+												<s:else>
+													<font color="red"><strong  id="balance"><s:property value="SMSBalance"/>元</strong>，每条短信费用为0.1元。</font>
+												</s:else>
 										</td>
 									</tr>
 								</table>
