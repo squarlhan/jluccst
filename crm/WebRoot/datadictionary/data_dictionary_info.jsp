@@ -50,16 +50,36 @@
 			        	}); 
 			    	}
 				})
+				$.fn.addinfo();
 				$.fn.save();
 		  		$.fn.close();
 		  		$.fn.initpage();
 		  	});
 			/**
+		  	 * 添加
+		  	 */
+			$.fn.addinfo = function(){
+				//如果有id就说明是修改action
+				$("#addBtn").click(function() {
+					var validate_settings_submit = jQuery.extend({}, _device_submit);
+	               	var validator = $("form").validate(validate_settings_submit);
+	               	if(!validator.form()){
+						return false;
+					}
+	               	form1.dictId.value = "";
+					form1.name.value = $("#dictName_t").val();
+					form1.remark.value = $("#remark_t").val(); 
+					form1.action = "datadictionary/savedatadictionary.action";
+	               	form1.submit();
+	           	});
+          	};
+          	
+			/**
 		  	 * 保存
 		  	 */
 			$.fn.save = function(){
 				//如果有id就说明是修改action
-				$("#addBtn").click(function() {
+				$("#saveBtn").click(function() {
 					var validate_settings_submit = jQuery.extend({}, _device_submit);
 	               	var validator = $("form").validate(validate_settings_submit);
 	               	if(!validator.form()){
@@ -140,8 +160,11 @@
 										<tr>
 											<td height="26" colspan="2" align="center" bgcolor="#FFFFFF">
 												<input name="addBtn" type="button" class="btn_2_3"
-													id="addBtn" value="确定">
-												&nbsp;&nbsp;
+													id="addBtn" value="添加">
+												<s:if test="dictId!=null">
+												<input name="saveBtn" type="button" class="btn_2_3"
+													id="saveBtn" value="保存">
+												</s:if>
 												<input name="closeBtn" type="button" class="btn_2_3"
 													id="closeBtn" value="关闭">
 											</td>
