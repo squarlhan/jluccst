@@ -33,7 +33,7 @@
 			$("#addbtn").click(function(){
 				parent.parent.tipsWindown("添加字典","iframe:datadictionary/datadictionary.action?typeFlag=" + $("#typeFlag").val(),"470","320","true","","true","no");
 				parent.parent.$("#windown-close").bind('click',function(){
-					window.location.href="datadictionarylist.action?typeFlag=" + $("#typeFlag").val();
+					window.location.href="${pageContext.request.contextPath}/datadictionary/datadictionarylist.action?typeFlag=" + $("#typeFlag").val();
 				});
 			});
 			
@@ -43,14 +43,14 @@
 			$("#sortbtn").click(function(){
 				parent.parent.tipsWindown("字典排序","iframe:datadictionary/datadictionarysort.action?typeFlag=" + $("#typeFlag").val(),"370","320","true","","true","no");
 				parent.parent.$("#windown-close").bind('click',function(){
-					window.location.href="datadictionarylist.action?typeFlag=" + $("#typeFlag").val();
+					window.location.href="${pageContext.request.contextPath}/datadictionary/datadictionarylist.action?typeFlag=" + $("#typeFlag").val();
 				});
 			});
 			
 			$(".showInfo").css("cursor","hand").click(function(){
 				parent.parent.tipsWindown("修改字典","iframe:datadictionary/datadictionary.action?dictId=" + $(this).attr("tid") + "&typeFlag=" + $("#typeFlag").val(),"470","320","true","","true","no");
 				parent.parent.$("#windown-close").bind('click',function(){
-					window.location.href="datadictionarylist.action?typeFlag=" + $("#typeFlag").val();
+					window.location.href="${pageContext.request.contextPath}/datadictionary/datadictionarylist.action?typeFlag=" + $("#typeFlag").val();
 				});
 			});
 			/**
