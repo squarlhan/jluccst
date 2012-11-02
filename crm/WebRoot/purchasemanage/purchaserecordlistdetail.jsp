@@ -105,12 +105,14 @@
 								<td align="center" background="<%=path %>/images/headerbg.jpg">
 									<strong>规格</strong>
 								</td>
+								<!-- 
 								<td align="center" background="<%=path %>/images/headerbg.jpg">
 									<strong>克重</strong>
 								</td>
 								<td align="center" background="<%=path %>/images/headerbg.jpg">
 									<strong>吨</strong>
 								</td>
+								 -->
 								<td align="center" background="<%=path %>/images/headerbg.jpg">
 									<strong>数量</strong>
 								</td>
@@ -147,12 +149,14 @@
 									<td height="26" align="center" bgcolor="#FFFFFF">
 										<s:property value="specification" />
 									</td>
+									<!-- 
 									<td height="26" align="center" bgcolor="#FFFFFF" style="work-break:break-all;">
 										<s:property value="gramWeight" />
 									</td>
 									<td height="26" align="center" bgcolor="#FFFFFF">
 										<s:property value="ton" />
 									</td>
+									 -->
 									<td height="26" align="center" bgcolor="#FFFFFF">
 										<s:property value="amount" />
 									</td>
