@@ -252,11 +252,11 @@ public class AnalysisEngineServiceImpl implements IAnalysisEngineService{
 							if(resultList.get(k).getId() == rulelist.get(0).getResultFuzzyId())
 							{
 								listFuzzy.get(j).setSugeno(resultList.get(k).getSugeno());
-								break;
+								continue;
 							}
 						}
 						calculateResultList.add(listFuzzy.get(j));
-						break;
+						continue;
 					}
 				}
 			}else if(rulelist.size() > 1)
@@ -275,7 +275,7 @@ public class AnalysisEngineServiceImpl implements IAnalysisEngineService{
 						{
 							tempFuzzyList.add(listFuzzy.get(k));
 							iCount = iCount + 1;
-							break;
+							continue;
 						}
 					}
 					if(iCount == iTotalCount)
@@ -295,7 +295,7 @@ public class AnalysisEngineServiceImpl implements IAnalysisEngineService{
 								tempObj.setFuzzyValue(value);
 								tempObj.setSugeno(resultList.get(k).getSugeno());
 								calculateResultList.add(tempObj);
-								break;
+								continue;
 							}
 						}
 					}
