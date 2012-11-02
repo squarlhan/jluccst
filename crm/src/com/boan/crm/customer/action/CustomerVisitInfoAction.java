@@ -319,10 +319,13 @@ public class CustomerVisitInfoAction extends BaseActionSupport{
 		{
 			obj = new CustomerVisitInfo();
 			obj.setCustomerId(customerId);
+			CustomerInfo customer = customerInfoService.get(customerId);
+			if(customer != null)
+			{
+				obj.setCustomerName(customer.getCustomerName());
+			}
 		}
-		
 		obj.setVisitPersonId(customerVisitInfo.getVisitPersonId());
-		obj.setCustomerName(customerVisitInfo.getCustomerName());
 		obj.setContentResult(customerVisitInfo.getContentResult());
 		obj.setRemark(customerVisitInfo.getRemark());
 		obj.setSalesman(customerVisitInfo.getSalesman());
@@ -369,7 +372,7 @@ public class CustomerVisitInfoAction extends BaseActionSupport{
 			timePlan.setEmployeeId(sessionUserId);
 			timePlan.setEmployeeName(sessionUserCName);
 			timePlan.setOrganId(sessionCompanyId);
-			timePlan.setPersonId(obj.getVisitPersonId());
+			timePlan.setPersonId(sessionUserId);
 			timePlan.setPlanType("0");
 			StringBuilder sb = new StringBuilder();
 			sb.append("回访计划：");
