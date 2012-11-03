@@ -13,9 +13,13 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import org.apache.commons.lang.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
+import com.boan.crm.datadictionary.model.DataDictionary;
+import com.boan.crm.datadictionary.service.IDataDictionaryService;
 import com.boan.crm.servicemanage.model.MemberInfo;
 import com.boan.crm.servicemanage.model.ServiceLog;
 import com.boan.crm.servicemanage.service.IMemberInfoService;
@@ -38,6 +42,9 @@ public class MemberInfoAction extends BaseActionSupport {
 	@Resource
 	//会员接口类
 	private IMemberInfoService memberInfoService;
+	@Autowired
+	@Qualifier("dataDictionaryService")
+	private IDataDictionaryService dataDictionaryService = null;
 	
 	//会员对象
 	private MemberInfo memberInfo = null;
@@ -55,8 +62,11 @@ public class MemberInfoAction extends BaseActionSupport {
 	
 	private String companyId;
 	private String companyName;
+	private String memberType;
 	
 	private String searchCompanyName;
+	
+	private List<DataDictionary> listSource = null;
 	
 	/**
 	 * 会员对象集合
@@ -76,6 +86,7 @@ public class MemberInfoAction extends BaseActionSupport {
 	 * @return
 	 */
 	public String memberInfoInfo(){
+		listSource = dataDictionaryService.findDataDictionaryByType(sessionCompanyId, 9);
 		if(StringUtils.trimToNull(infoId)!=null)
 			memberInfo = memberInfoService.getById(infoId);
 		else
@@ -88,7 +99,13 @@ public class MemberInfoAction extends BaseActionSupport {
 	 * @return
 	 */
 	public String saveMemberInfo(){
-		memberInfoService.toMemberInfo(memberInfo);
+		listSource = dataDictionaryService.findDataDictionaryByType(sessionCompanyId, 9);
+		if(StringUtils.trimToNull(infoId)!=null)
+			memberInfo = memberInfoService.getById(infoId);
+		else
+			memberInfo = new MemberInfo();
+		memberInfo.setMemberType(memberType);
+		memberInfoService.updateInfo(memberInfo);
 		return SUCCESS;
 	}
 	
@@ -213,5 +230,33 @@ public class MemberInfoAction extends BaseActionSupport {
 	 */
 	public void setSearchCompanyName(String searchCompanyName) {
 		this.searchCompanyName = searchCompanyName;
+	}
+
+	/**
+	 * @return the listSource
+	 */
+	public List<DataDictionary> getListSource() {
+		return listSource;
+	}
+
+	/**
+	 * @param listSource the listSource to set
+	 */
+	public void setListSource(List<DataDictionary> listSource) {
+		this.listSource = listSource;
+	}
+
+	/**
+	 * @return the memberType
+	 */
+	public String getMemberType() {
+		return memberType;
+	}
+
+	/**
+	 * @param memberType the memberType to set
+	 */
+	public void setMemberType(String memberType) {
+		this.memberType = memberType;
 	}
 }
