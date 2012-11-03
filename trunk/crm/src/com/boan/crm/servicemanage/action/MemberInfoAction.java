@@ -96,9 +96,9 @@ public class MemberInfoAction extends BaseActionSupport {
 	 * 删除会员信息
 	 * @return
 	 */
-	public String cancelInfo(){
+	public String deleteInfo(){
 		if(infoIds!=null){
-			memberInfoService.cancelInfo(infoIds);
+			memberInfoService.deleteInfo(infoIds);
 		}
 		return SUCCESS;
 	}

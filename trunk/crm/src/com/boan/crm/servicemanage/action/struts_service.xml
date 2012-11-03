@@ -61,7 +61,7 @@
 			<result name="success">/service/member_info_info.jsp</result>
 			<result name="input">/service/member_info_info.jsp</result>
 		</action>
-    	<action name="cancelmemberinfo" class="memberInfoAction" method="cancelInfo">
+    	<action name="deletememberinfo" class="memberInfoAction" method="deleteInfo">
     		<result name="success" type="chain">
              	<param name="actionName">memberinfolist</param>
             </result>
@@ -85,7 +85,7 @@
 			<result name="success">/service/point_info_info.jsp</result>
 			<result name="input">/service/point_info_info.jsp</result>
 		</action>
-    	<action name="cancelpointinfo" class="pointInfoAction" method="cancelInfo">
+    	<action name="deletepointinfo" class="pointInfoAction" method="deleteInfo">
     		<result name="success" type="chain">
              	<param name="actionName">pointinfolist</param>
             </result>
