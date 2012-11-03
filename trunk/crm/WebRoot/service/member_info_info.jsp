@@ -31,6 +31,7 @@
 	$.fn.save = function() {
 		//如果有id就说明是修改action
 		$("#saveBtn").click(function() {
+			$("#memberType").val($("#selMemberType").val());
 			form1.action = "savememberinfo.action";
 			form1.submit();
 		});
@@ -68,9 +69,10 @@
 <body>
 	<form id="form1" name="form1" method="post">
 		<label id="lb_message" style="display:none"></label>
-		<s:hidden id="logId" name="memberInfo.id"></s:hidden>
+		<s:hidden id="infoId" name="infoId"></s:hidden>
 		<s:hidden id="hdCompanyId" name="companyId"></s:hidden>
 		<s:hidden id="hdCompanyName" name="companyName"></s:hidden>
+		<s:hidden id="memberType" name="memberType"></s:hidden>
 		<center>
 			<table>
 				<tr>
@@ -87,13 +89,18 @@
 														<tr>
 															<td align="center" nowrap="nowrap">客户名称</td>
 															<td><s:textfield id="txt_companyName"
-																	name="memberInfo.companyName" cssStyle="width:150px;" /></td>
+																	name="memberInfo.companyName" cssStyle="width:150px;" readonly="true" /></td>
 															<td align="center" nowrap="nowrap">会员类别</td>
-															<td align="left"><s:textfield id="txt_memberType"
-																	name="memberInfo.memberType" cssStyle="width:150px;" /></td>
+															<td align="left">
+																<s:select list="listSource" listKey="name"
+																	listValue="name" value="memberInfo.memberType"
+																	id="selMemberType" name="memberInfo.memberType"
+																	cssStyle="width:150px" headerKey=""
+																	headerValue="--请选择会员类别--"></s:select>
+															</td>
 															<td align="center" nowrap="nowrap">业务员 </td>
 															<td align="left"><s:textfield id="txt_salespeople"
-																	name="memberInfo.salespeople" cssStyle="width:150px;" />
+																	name="memberInfo.salespeople" cssStyle="width:150px;" readonly="true"/>
 															</td>
 														</tr>
 														<tr>
@@ -103,11 +110,11 @@
 															</td>
 															<td align="center" nowrap="nowrap">消费总额</td>
 															<td align="left"><s:textfield id="txt_consumptionAmount"
-																	name="memberInfo.consumptionAmount" cssStyle="width:150px;"/>
+																	name="memberInfo.consumptionAmount" cssStyle="width:150px;" readonly="true"/>
 															</td>
 															<td align="center" nowrap="nowrap">总积分</td>
 															<td align="left"><s:textfield id="txt_totalPoint"
-																	name="memberInfo.totalPoint" cssStyle="width:150px;"/></td>
+																	name="memberInfo.totalPoint" cssStyle="width:150px;" readonly="true"/></td>
 														</tr>
 														<tr>
 															<td align="center" nowrap="nowrap">备注</td>
