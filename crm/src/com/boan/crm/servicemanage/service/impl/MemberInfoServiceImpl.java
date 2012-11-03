@@ -76,7 +76,7 @@ public class MemberInfoServiceImpl extends BaseDao<MemberInfo,String> implements
 	}
 
 	@Override
-	public void cancelInfo(String... ids) {
+	public void deleteInfo(String... ids) {
 		memberInfoDao.delete(ids);
 	}
 

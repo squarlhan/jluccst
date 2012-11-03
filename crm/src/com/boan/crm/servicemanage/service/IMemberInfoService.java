@@ -42,7 +42,7 @@ public interface IMemberInfoService {
 	 * 取消会员状态
 	 * @param ids 会员ID
 	 */
-	public void cancelInfo(String... ids);
+	public void deleteInfo(String... ids);
 
 	/**
 	 * 保存会员信息
