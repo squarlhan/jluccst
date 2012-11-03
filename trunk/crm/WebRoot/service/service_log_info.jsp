@@ -71,7 +71,43 @@
 				  {
 					  form1.companyId.value = allData[i].id;
 					  form1.companyName.value = allData[i].customerName;
-					  
+					  var contractPerson = "";
+	  				  var tel = "";
+	  				  for(var j= 0;j<allData[i].contractPersonList.length; j++)
+	  				  {
+	  					  if(contractPerson == "")
+	  					  {
+	  						  contractPerson = allData[i].contractPersonList[j].personName;
+	  					  }else
+	  					  {
+	  						contractPerson = contractPerson + "," + allData[i].contractPersonList[j].personName;
+	  					  }
+	  					  
+	  					  
+	  						  if(allData[i].contractPersonList[j].phone != "")
+	  						  {
+	  							if(tel == "")
+			  					  {
+			  					  	tel = allData[i].contractPersonList[j].phone;
+			  					  }else
+			  					  {
+			  						tel = tel + "," + allData[i].contractPersonList[j].phone;
+			  					  }
+	  						  }
+	  						if(allData[i].contractPersonList[j].tel != "")
+	  						  {
+	  							if(tel == "")
+			  					  {
+			  					  	tel = allData[i].contractPersonList[j].tel;
+			  					  }else
+			  					  {
+			  						tel = tel + "," + allData[i].contractPersonList[j].tel;
+			  					  }
+	  						  }
+	  					  
+	  				  }
+	  				$("#txt_contact").val(contractPerson);
+	  				$("#txt_mobilePhone").val(tel);
 				  }
 			  }
 		});
@@ -82,6 +118,11 @@
 	$.fn.save = function() {
 		//如果有id就说明是修改action
 		$("#saveBtn").click(function() {
+			if($("#customerName").val()==""){
+				alert("请输入客户名称！");
+				$("#customerName").focus();
+				return false;
+			}
 			form1.action = "${pageContext.request.contextPath}/service/saveservicelog.action";
 			form1.submit();
 		});
@@ -102,7 +143,7 @@
 	 * 初始化页面
 	 */
 	$.fn.initpage = function() {
-		$("#txt_contact").focus();
+		$("#customerName").focus();
 		//回显上传时的错误信息
 		var uploadErr = $("#lb_error").html();
 		if (uploadErr != null && $.trim(uploadErr) != "") {
@@ -154,8 +195,9 @@
 												<td><table cellpadding="3" cellspacing="3">
 														<tr>
 															<td align="center" nowrap="nowrap">客户名称</td>
-															<td>
+															<td nowrap="nowrap">
 																<s:textfield type="text" style="width:150px" name="serviceLog.companyName" id="customerName"></s:textfield>
+																<span style="color:#ff0000">*</span>
 															</td>
 															<td align="center" nowrap="nowrap">联系人</td>
 															<td align="left"><s:textfield id="txt_contact"
