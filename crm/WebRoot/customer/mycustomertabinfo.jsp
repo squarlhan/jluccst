@@ -35,8 +35,8 @@
 <script type="text/javascript">
 <!--
 	$(document).ready(function() {
-		$("#tt").css("width",$("#groupmain",parent.document).width());
-		$("#tt").css("height",$("#groupmain",parent.document).height());
+		$("#tt").css("width",$("#mainFrame",parent.document).width());
+		$("#tt").css("height",$("#mainFrame",parent.document).height());
 		$("#tt").tabs();
 	});
 //-->
@@ -47,7 +47,7 @@
 <div id="tt" class="tabs-container" style="width:100%">
 	<div title="基本信息"
 		style="padding: 1px; display: none;">
-		<iframe scrolling="auto" frameborder="0" style="width:100%; height:450px"
+		<iframe scrolling="auto" frameborder="0" style="width:100%; height:100%"
 			src="myCustomerInfo.action?id=<s:property value='id'/>"></iframe>
 	</div>
 	<s:if test='id!=null && id.length() > 0'>
