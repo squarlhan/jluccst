@@ -26,6 +26,9 @@
 		</style>
 		<script type="text/javascript">
 		$(function(){
+			$.fn.checkall("cbk_all");
+			$.fn.uncheckall("infoIds","cbk_all");
+
 			$("#searchBtn").click(function(){
 				form1.submit();
 			});
@@ -39,10 +42,21 @@
 	  		 * 删除所选
 	  		 */
 	  		$("#deletebtn").click(function(){
-  				if(window.confirm("您确定要取消所选信息会员信息吗？")){
-  					document.forms[0].action = "cancelmemberinfo.action";
+  				if(window.confirm("您确定要取消所选会员资格吗？")){
+  					document.forms[0].action = "deletememberinfo.action";
 					document.forms[0].submit();
   				}
+	  		});
+	  		/**
+	  		 * 删除单个信息
+	  		 */
+	  		$('a[name="delete"]').each(function(){
+	  			$(this).click(function(){
+	  				var url = $(this).attr("url");
+	  				if(window.confirm("您确定要该会员资格吗？")){
+	  					$.post(url, "", function(data){window.location.href="${pageContext.request.contextPath}/service/memberinfolist.action";});
+	  				}
+	  			});
 	  		});
 		});
 		//-->
@@ -96,11 +110,15 @@
 									background="<%=path%>/images/headerbg.jpg">
 									<strong>总积分</strong>
 								</td>
+								<td align="center"
+									background="<%=path%>/images/headerbg.jpg" style="width:80px;">
+									<strong>操作</strong>
+								</td>
 							</tr>
 							<s:iterator value="pagination.data" status="obj">
 								<tr>
 									<td height="26" align="center" bgcolor="#FFFFFF">
-										<s:checkbox id="%{id}" name="logIds" fieldValue="%{id}"
+										<s:checkbox id="%{id}" name="infoIds" fieldValue="%{id}"
 											value="false" theme="simple" />
 									</td>
 									<td align="left" bgcolor="#FFFFFF">
@@ -118,10 +136,13 @@
 									<td align="center" bgcolor="#FFFFFF">
 										<s:property value="totalPoint" />&nbsp;
 									</td>
+									<td align="center" bgcolor="#FFFFFF">
+         								<a name="delete" href="javascript:void(0);" url="<%=path%>/service/deletememberinfo.action?infoIds=<s:property value='id' />">取消会员</a>
+									</td>
 								</tr>
 							</s:iterator>
 							<tr>
-					          <td height="26" colspan="6" align="center" bgcolor="#FFFFFF">
+					          <td height="26" colspan="7" align="center" bgcolor="#FFFFFF">
 								<page:pages currentPage="pagination.currentPage" totalPages="pagination.totalPages" totalRows="pagination.totalRows" styleClass="page" theme="text" ></page:pages> 
 							  </td>
 					        </tr>
