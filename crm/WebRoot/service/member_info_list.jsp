@@ -58,6 +58,18 @@
 	  				}
 	  			});
 	  		});
+	  		
+	  		/**
+	  		 * 修改信息
+	  		 */
+	  		$('a[name="edit"]').each(function(){
+	  			$(this).click(function(){
+	  				parent.parent.tipsWindown("查看会员信息","iframe:service/memberinfo.action?infoId=" + $(this).attr("lid") ,"785","300","true","","true","no");
+					parent.parent.$("#windown-close").bind('click',function(){
+						window.location.href="${pageContext.request.contextPath}/service/memberinfolist.action";
+					});
+	  			});
+	  		});
 		});
 		//-->
 		</script>
@@ -111,7 +123,7 @@
 									<strong>总积分</strong>
 								</td>
 								<td align="center"
-									background="<%=path%>/images/headerbg.jpg" style="width:80px;">
+									background="<%=path%>/images/headerbg.jpg" style="width:100px;">
 									<strong>操作</strong>
 								</td>
 							</tr>
@@ -122,7 +134,7 @@
 											value="false" theme="simple" />
 									</td>
 									<td align="left" bgcolor="#FFFFFF">
-										<span class="showInfo" lid="<s:property value='id' />"><s:property value="companyName" />&nbsp;</span>
+										<span><s:property value="companyName" />&nbsp;</span>
 									</td>
 									<td align="center" bgcolor="#FFFFFF">
 										<s:property value="memberType" />&nbsp;
@@ -137,6 +149,7 @@
 										<s:property value="totalPoint" />&nbsp;
 									</td>
 									<td align="center" bgcolor="#FFFFFF">
+										<a name="edit" href="javascript:void(0);" lid="<s:property value='id' />">编辑</a>
          								<a name="delete" href="javascript:void(0);" url="<%=path%>/service/deletememberinfo.action?infoIds=<s:property value='id' />">取消会员</a>
 									</td>
 								</tr>
