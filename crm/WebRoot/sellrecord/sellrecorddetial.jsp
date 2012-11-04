@@ -135,12 +135,13 @@
 										<td height="26" align="left" bgcolor="#FFFFFF">
 											<s:textfield id="txt_standard" name="goods.standard" cssStyle="width: 160px;" maxlength="25"></s:textfield>
 										</td>
-										<td height="26" align="right" bgcolor="#FFFFFF" nowrap="nowrap">
-											<strong>克重：</strong>
-										</td>
-										<td height="26" align="left" bgcolor="#FFFFFF">
-											<s:textfield id="txt_weight" name="goods.weight" cssStyle="width: 160px;" maxlength="25"></s:textfield>
-										</td>
+										<td bgcolor="#FFFFFF"  colspan="2" nowrap="nowrap"></td>
+<%--										<td height="26" align="right" bgcolor="#FFFFFF" nowrap="nowrap">--%>
+<%--											<strong>克重：</strong>--%>
+<%--										</td>--%>
+<%--										<td height="26" align="left" bgcolor="#FFFFFF">--%>
+<%--											<s:textfield id="txt_weight" name="goods.weight" cssStyle="width: 160px;" maxlength="25"></s:textfield>--%>
+<%--										</td>--%>
 									</tr>
 									<tr>
 										<td height="26" align="right" bgcolor="#FFFFFF"  nowrap="nowrap">
