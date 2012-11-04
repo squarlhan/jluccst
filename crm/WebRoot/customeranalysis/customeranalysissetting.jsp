@@ -185,23 +185,8 @@ $(function() {
 		       	form1.submit();
 			});
 			$("#delbtn").click(function(){
-				alert("123");
-				for(var i=1;i<6;i++)
-				{
-					if($("#chk"+i).attr("checked"))
-					{
-						  $("#chk"+i).val("");
-						  $("#customerName"+i).html("");
-			  			  $("#salesman"+i).html("");
-						  $("#levelId"+i).html("");
-						  $("#maturity"+i).html("");
-						  $("#category"+i).html("");
-						  $("#contractPerson"+i).html("");
-						  $("#result"+i).html("");
-						  
-						  g_number = g_number - 1;
-					}
-				}
+				
+				window.location.href = "<%=basePath%>customerassessment/autoAnalysisCustomerList.action";
 			});
 			
 			
@@ -219,12 +204,16 @@ $(function() {
 <tr><td style="width: 20px"></td><td style="width:838px"><fieldset><legend><span>选择客户</span></legend><table style="width: 100%" cellpadding="5" cellspacing="3">
 <tr><td style="width: 20px"></td><td><table cellpadding="5" cellspacing="3">
 	<tr>
-		<td align="center">添加客户</td>
-		<td style="width: 160px;"><s:textfield type="text" style="width:150px" name="customerInfo.customerName" id="customerName"></s:textfield></td>
-		<td style="width: 80px"><input type="button" style="width: 80px;" class="btn_4" id="delbtn" value="删除所选" />
+		<td style="width: 160px" align="center">
+		<!--<s:if test='chkAllCustomer == "1"'>
+		<input type="checkbox" name="chkAllCustomer" value="1" checked/>全部客户
+		</s:if>
+		<s:else>
+		<input type="checkbox" name="chkAllCustomer" value="1" />全部客户
+		</s:else>-->
+		全部客户统一设置
 		</td>
-		<td style="width: 80px"><input type="button" style="width: 80px;" class="btn_4" id="allBtn" value="全部客户" />
-		</td>
+<td><!--<input type="button" style="width: 80px;" class="btn_4" id="delbtn" value="查看设置用户" />--></td>
 	</tr>
 </table></td></tr>
 </table></fieldset></td></tr>

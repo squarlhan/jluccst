@@ -69,82 +69,84 @@ background-color:#d3eaef}
 -->
 </style>
 <link rel="StyleSheet" href="tree.css" type="text/css">
-	<script type="text/javascript" src="tree.js"></script>
+	<meta http-equiv="pragma" content="no-cache">
+	<meta http-equiv="cache-control" content="no-cache">
+	<meta http-equiv="expires" content="0">    
+	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<j:scriptlink css="true" tipswindow="true" jmessagebox="true" jquery="true" validate="true" jfunction="true"/>
+	<style type="text/css">
+	<!--
+	.STYLE1 {
+		color: #FFFFFF;
+		font-weight: bold;
+	}
+	-->
+	</style>
 	<script type="text/javascript">
-		<!--
-		var Tree = new Array;
-		// nodeId | parentNodeId | nodeName | nodeUrl
-		Tree[0]  = "1|0|长春分公司|#";
-		Tree[1]	 = "2|1|销售部|#";
-		Tree[2]  = "3|1|市场部|#";
-		Tree[3]  = "4|1|采购部|#";
-		Tree[4]  = "5|1|部门一|#";
-		Tree[5] = "6|0|沈阳分公司|#";
-		//-->
+	
+		$(function(){
+			
+			$("#addbtn").click(function(){
+				/*parent.parent.tipsWindown("添加客户信息","iframe:openAddCompanyAction.action","460","200","true","","true","no");
+				parent.parent.$("#windown-close").bind('click',function(){
+					window.location.href="./customerList.action";
+				});*/
+				//window.parent.location.href = "customerTabInfo.action";
+		
+			});
+			
+			$("#searchBtn").click(function(){
+				/*parent.parent.tipsWindown("添加客户信息","iframe:openAddCompanyAction.action","460","200","true","","true","no");
+				parent.parent.$("#windown-close").bind('click',function(){
+					window.location.href="./customerList.action";
+				});*/
+				//window.parent.location.href = "customerTabInfo.action";
+				form1.action = "customerList.action";
+				form1.submit();
+		
+			});
+			$.fn.checkall("cbk_all");
+	  		$.fn.uncheckall("ids","cbk_all");
 
-
-var  highlightcolor='#d5f4fe';
-//此处clickcolor只能用win系统颜色代码才能成功,如果用#xxxxxx的代码就不行,还没搞清楚为什么:(
-var  clickcolor='#51b2f6';
-function  changeto(){
-source=event.srcElement;
-if  (source.tagName=="TR"||source.tagName=="TABLE")
-return;
-while(source.tagName!="TD")
-source=source.parentElement;
-source=source.parentElement;
-cs  =  source.children;
-//alert(cs.length);
-if  (cs[1].style.backgroundColor!=highlightcolor&&source.id!="nc"&&cs[1].style.backgroundColor!=clickcolor)
-for(i=0;i<cs.length;i++){
-	cs[i].style.backgroundColor=highlightcolor;
-}
-}
-
-function  changeback(){
-if  (event.fromElement.contains(event.toElement)||source.contains(event.toElement)||source.id=="nc")
-return
-if  (event.toElement!=source&&cs[1].style.backgroundColor!=clickcolor)
-//source.style.backgroundColor=originalcolor
-for(i=0;i<cs.length;i++){
-	cs[i].style.backgroundColor="";
-}
-}
-
-function  clickto(){
-source=event.srcElement;
-if  (source.tagName=="TR"||source.tagName=="TABLE")
-return;
-while(source.tagName!="TD")
-source=source.parentElement;
-source=source.parentElement;
-cs  =  source.children;
-//alert(cs.length);
-if  (cs[1].style.backgroundColor!=clickcolor&&source.id!="nc")
-for(i=0;i<cs.length;i++){
-	cs[i].style.backgroundColor=clickcolor;
-}
-else
-for(i=0;i<cs.length;i++){
-	cs[i].style.backgroundColor="";
-}
-}
-
-function showwin(){
-	var url = "customerVisitingEdited.html";
-	window.location.href = url;
-}
-
-function deleteAll(){
-	if(window.confirm("您确定要删除信息吗！")){
-		alert("删除成功！");
-	}else{}
-}
-
-</script>
-
-
-</head>
+	  		/**
+	  		 * 修改客户信息
+	  		 */
+	  		$('a[name="edit"]').each(function(){
+	  			$(this).click(function(){
+	  				var url = $(this).attr("url");
+	  				/*parent.parent.tipsWindown("修改客户信息","iframe:"+url,"460","200","true","","true","no");
+	  				parent.parent.$("#windown-close").bind('click',function(){
+						window.location.href="./customerList.action";
+					});*/
+					
+	  				window.parent.location.href = url;
+	  			});
+	  		});
+	  		
+	  		/**
+	  		 * 删除单个客户信息
+	  		 */
+	  		$('a[name="delete"]').each(function(){
+	  			$(this).click(function(){
+	  				var url = $(this).attr("url");
+	  				if(window.confirm("您确定要删除这条信息吗？")){
+	  					$.post(url, "", function(data){window.location.href=window.location.href;});
+	  				}
+	  			});
+	  		});
+	  		
+	  		/**
+	  		 * 删除所选客户信息
+	  		 */
+	  		$("#deletepointbtn").click(function(){
+  				var url = "deleteAnalysisCustomer.action";
+  				if(window.confirm("您确定要删除所选信息吗？")){
+  					$.post(url, $('#form1').serialize(), function(data){window.location.href=window.location.href;});
+  				}
+	  		});
+		});
+	</script>
 
 <body>
 
@@ -157,128 +159,48 @@ function deleteAll(){
 		<td align="center">客户名称</td>
 		<td><input type="text" /></td>
 		<td></td>
-		<td style="width: 80px"><input type="button" style="width: 80px;" class="btn_4" id="addBtn" value="快速查询" /></td>
+		<td><input name="addbtn" type="button" class="btn_4" id="addbtn" value="添加客户" >
+		<input name="deletepointbtn" type="button" class="btn_4" id="deletepointbtn" value="删除所选" >
+        <input name="backbtn" type="button" class="btn_4" id="backbtn" value="返回" onclick="window.location.href='customerassessment/customerAnalysisSetting.action'"></td>
 	</tr>
 </table></td></tr>
 <!--总框架下的第二行（第一列），查询条件与按钮   结束！-->
 <!--总第三行第一列,表格主体-->
-<tr><td><table width="100%" border="0" cellpadding="0" cellspacing="1" style="background-color: #d5e4fd">
+<tr><td><table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#d5e4fd">
 	<tr>
 		<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg'); width: 90px;"></td>
 		<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">客户名称</td>
-		<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">成熟度</td>
-		<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">开发程度</td>
 		<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">消费额度</td>
 		<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">消费次数</td>
-		<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">变化情况</td>
+		<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">转介绍客户情况</td>
+		<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">回款情况</td>
+		<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">开发程度</td>
+		<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">操作</td>
 	</tr>
-	<tr>
-		<td align="center" style="height: 26px; background-color:#FFFFFF; width: 90px;" ><input type="checkbox" name="checkbox" id="checkbox" /></td>
-		<td align="center" style="height: 26px; background-color:#FFFFFF"></td>
-		<td align="center" style="height: 26px; background-color:#FFFFFF"></td>
-		<td align="center" style="height: 26px; background-color:#FFFFFF"></td>
-		<td align="center" style="height: 26px; background-color:#FFFFFF"></td>
-		<td align="center" style="height: 26px; background-color:#FFFFFF"></td>
-		<td align="center" style="height: 26px; background-color:#FFFFFF"></td>
-	</tr>
-	<tr>
-		<td align="center" style="height: 26px; background-color:#FFFFFF; width: 90px;" ><input type="checkbox" name="checkbox" id="checkbox" /></td>
-		<td align="center" style="height: 26px; background-color:#FFFFFF"></td>
-		<td align="center" style="height: 26px; background-color:#FFFFFF"></td>
-		<td align="center" style="height: 26px; background-color:#FFFFFF"></td>
-		<td align="center" style="height: 26px; background-color:#FFFFFF"></td>
-		<td align="center" style="height: 26px; background-color:#FFFFFF"></td>
-		<td align="center" style="height: 26px; background-color:#FFFFFF"></td>
-	</tr>
-	<tr>
-		<td align="center" style="height: 26px; background-color:#FFFFFF; width: 90px;" ><input type="checkbox" name="checkbox" id="checkbox" /></td>
-		<td align="center" style="height: 26px; background-color:#FFFFFF"></td>
-		<td align="center" style="height: 26px; background-color:#FFFFFF"></td>
-		<td align="center" style="height: 26px; background-color:#FFFFFF"></td>
-		<td align="center" style="height: 26px; background-color:#FFFFFF"></td>
-		<td align="center" style="height: 26px; background-color:#FFFFFF"></td>
-		<td align="center" style="height: 26px; background-color:#FFFFFF"></td>
-	</tr>
-	<tr>
-		<td align="center" style="height: 26px; background-color:#FFFFFF; width: 90px;" ><input type="checkbox" name="checkbox" id="checkbox" /></td>
-		<td align="center" style="height: 26px; background-color:#FFFFFF"></td>
-		<td align="center" style="height: 26px; background-color:#FFFFFF"></td>
-		<td align="center" style="height: 26px; background-color:#FFFFFF"></td>
-		<td align="center" style="height: 26px; background-color:#FFFFFF"></td>
-		<td align="center" style="height: 26px; background-color:#FFFFFF"></td>
-		<td align="center" style="height: 26px; background-color:#FFFFFF"></td>
-	</tr>
-	<tr>
-		<td align="center" style="height: 26px; background-color:#FFFFFF; width: 90px;" ><input type="checkbox" name="checkbox" id="checkbox" /></td>
-		<td align="center" style="height: 26px; background-color:#FFFFFF"></td>
-		<td align="center" style="height: 26px; background-color:#FFFFFF"></td>
-		<td align="center" style="height: 26px; background-color:#FFFFFF"></td>
-		<td align="center" style="height: 26px; background-color:#FFFFFF"></td>
-		<td align="center" style="height: 26px; background-color:#FFFFFF"></td>
-		<td align="center" style="height: 26px; background-color:#FFFFFF"></td>
-	</tr>
-	<tr>
-		<td align="center" style="height: 26px; background-color:#FFFFFF; width: 90px;" ><input type="checkbox" name="checkbox" id="checkbox" /></td>
-		<td align="center" style="height: 26px; background-color:#FFFFFF"></td>
-		<td align="center" style="height: 26px; background-color:#FFFFFF"></td>
-		<td align="center" style="height: 26px; background-color:#FFFFFF"></td>
-		<td align="center" style="height: 26px; background-color:#FFFFFF"></td>
-		<td align="center" style="height: 26px; background-color:#FFFFFF"></td>
-		<td align="center" style="height: 26px; background-color:#FFFFFF"></td>
-	</tr>
-	<tr>
-		<td align="center" style="height: 26px; background-color:#FFFFFF; width: 90px;" ><input type="checkbox" name="checkbox" id="checkbox" /></td>
-		<td align="center" style="height: 26px; background-color:#FFFFFF"></td>
-		<td align="center" style="height: 26px; background-color:#FFFFFF"></td>
-		<td align="center" style="height: 26px; background-color:#FFFFFF"></td>
-		<td align="center" style="height: 26px; background-color:#FFFFFF"></td>
-		<td align="center" style="height: 26px; background-color:#FFFFFF"></td>
-		<td align="center" style="height: 26px; background-color:#FFFFFF"></td>
-	</tr>
-	<tr>
-		<td align="center" style="height: 26px; background-color:#FFFFFF; width: 90px;" ><input type="checkbox" name="checkbox" id="checkbox" /></td>
-		<td align="center" style="height: 26px; background-color:#FFFFFF"></td>
-		<td align="center" style="height: 26px; background-color:#FFFFFF"></td>
-		<td align="center" style="height: 26px; background-color:#FFFFFF"></td>
-		<td align="center" style="height: 26px; background-color:#FFFFFF"></td>
-		<td align="center" style="height: 26px; background-color:#FFFFFF"></td>
-		<td align="center" style="height: 26px; background-color:#FFFFFF"></td>
-	</tr>
-	<tr>
-		<td align="center" style="height: 26px; background-color:#FFFFFF; width: 90px;" ><input type="checkbox" name="checkbox" id="checkbox" /></td>
-		<td align="center" style="height: 26px; background-color:#FFFFFF"></td>
-		<td align="center" style="height: 26px; background-color:#FFFFFF"></td>
-		<td align="center" style="height: 26px; background-color:#FFFFFF"></td>
-		<td align="center" style="height: 26px; background-color:#FFFFFF"></td>
-		<td align="center" style="height: 26px; background-color:#FFFFFF"></td>
-		<td align="center" style="height: 26px; background-color:#FFFFFF"></td>
-	</tr>
-	<tr>
-		<td align="center" style="height: 26px; background-color:#FFFFFF; width: 90px;" ><input type="checkbox" name="checkbox" id="checkbox" /></td>
-		<td align="center" style="height: 26px; background-color:#FFFFFF"></td>
-		<td align="center" style="height: 26px; background-color:#FFFFFF"></td>
-		<td align="center" style="height: 26px; background-color:#FFFFFF"></td>
-		<td align="center" style="height: 26px; background-color:#FFFFFF"></td>
-		<td align="center" style="height: 26px; background-color:#FFFFFF"></td>
-		<td align="center" style="height: 26px; background-color:#FFFFFF"></td>
-	</tr>
-	<tr>
-		<td align="center" style="height: 26px; background-color:#FFFFFF; width: 90px;" ><input type="checkbox" name="checkbox" id="checkbox" /></td>
-		<td align="center" style="height: 26px; background-color:#FFFFFF"></td>
-		<td align="center" style="height: 26px; background-color:#FFFFFF"></td>
-		<td align="center" style="height: 26px; background-color:#FFFFFF"></td>
-		<td align="center" style="height: 26px; background-color:#FFFFFF"></td>
-		<td align="center" style="height: 26px; background-color:#FFFFFF"></td>
-		<td align="center" style="height: 26px; background-color:#FFFFFF"></td>
-	</tr>
-</table></td></tr>
-<!--总第三行第一列,表格主体   结束！-->
-
-<!--总第四行第一列  表格分页-->
-<tr><td style="width:100%"><table>
-<tr>
-<td align="right" style="height:26px; background-color:#FFFFFF; width: 1400px;"#">首　页</a>　<a href="#">上一页</a>　<a href="#">下一页</a>　<a href="#">尾　页</a>　当前[1/1]页</td>
-</tr>
+	<s:iterator value="pagination.data" status="obj">
+        <tr>
+        <td height="26" align="center" bgcolor="#FFFFFF" >  
+				<s:checkbox id="%{#obj.id}" name="ids" fieldValue="%{id}" value="false" theme="simple"/>
+			</td>
+            <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="customerName"/></td>
+            <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="totalConsumption"/></td>
+            <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="consumptionTimes"/></td>
+            <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="introduceCustomerTime"/></td>
+            <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="paymentsTimes"/></td>
+            <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="developDegree"/></td>
+	          <td height="26" colspan="2" align="center" bgcolor="#FFFFFF">
+				<s:url id="delete_url" action="deleteAnalysisCustomer">   
+					<s:param name="ids" value="id"></s:param>   
+				</s:url>
+	         	<a name="delete" href="javascript:void(0);" url="${delete_url}">删除</a>  
+	          </td>
+        </tr>
+        </s:iterator>        
+        <tr>
+          <td height="26" colspan="11" align="center" bgcolor="#FFFFFF">
+			<page:pages currentPage="pagination.currentPage" totalPages="pagination.totalPages" totalRows="pagination.totalRows" styleClass="page" theme="text" ></page:pages> 
+		  </td>
+        </tr>
 </table></td></tr>
 <!--总第四行第一列  表格分页   结束！--> 
 
