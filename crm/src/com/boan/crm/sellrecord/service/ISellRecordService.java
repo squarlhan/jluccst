@@ -73,4 +73,13 @@ public interface ISellRecordService {
 	 * @return 相应数额
 	 */
 	public  BigDecimal getTotalMoneyByType(String queryType,String companyId,String beginDate,String endDate);
+	
+	/**
+	 * 查询产品销售量
+	 * @param companyId 公司Id
+	 * @param productId 产品Id
+	 * @return
+	 */
+	public int getSellTotalAmount( String companyId, String productId );
+
 }

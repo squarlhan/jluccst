@@ -44,6 +44,12 @@ public class GoodsInfo implements Serializable {
 	private String goodsName;
 	
 	/**
+	 * 产品Id
+	 */
+	@Column(name = "GOODS_PRODUCTID", length=200)
+	private String goodsProductId;
+	
+	/**
 	 * 规格
 	 */
 	@Column(name = "STANDARD", length=200)
@@ -91,6 +97,12 @@ public class GoodsInfo implements Serializable {
 	 */
 	@Column(name = "MEMO")
 	private String memo;
+	
+	/**
+	 * 客公司Id
+	 */
+	@Column(name = "COMPANY_ID")
+	private String companyId;
 	
 	public String getId() {
 		return id;
@@ -178,5 +190,21 @@ public class GoodsInfo implements Serializable {
 
 	public void setSellRecordId(String sellRecordId) {
 		this.sellRecordId = sellRecordId;
+	}
+
+	public String getGoodsProductId() {
+		return goodsProductId;
+	}
+
+	public void setGoodsProductId(String goodsProductId) {
+		this.goodsProductId = goodsProductId;
+	}
+
+	public String getCompanyId() {
+		return companyId;
+	}
+
+	public void setCompanyId(String companyId) {
+		this.companyId = companyId;
 	}
 }

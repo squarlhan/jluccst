@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import com.boan.crm.sms.dao.ISMSCustomerInfoDao;
 import com.boan.crm.sms.model.SMSCustomerInfo;
 import com.boan.crm.sms.service.ISMSCustomerInfoService;
+import com.boan.crm.utils.pinyin.PinYin4J;
 
 @Service("SMSCustomerInfoService")
 public class SMSCustomerInfoServiceImpl implements ISMSCustomerInfoService {
@@ -25,6 +26,7 @@ public class SMSCustomerInfoServiceImpl implements ISMSCustomerInfoService {
 	 * @param info
 	 */
 	public void saveSMSCustomerInfo(SMSCustomerInfo info){
+		info.setNameSpell( PinYin4J.makeStringByStringSet(PinYin4J.getPinyin(info.getName())));
 		dao.save(info);
 	}
 	

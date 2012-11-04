@@ -147,7 +147,7 @@ public class SMSCustomerInfo {
 	private String postalcode; 
 	
 	/**
-	 * 名片分类Id
+	 * 名片分类Id  客户:1  销售人员：2
 	 */
 	@Column(name = "CATEGORY_ID" , length = 50)
 	private String categoryId;
