@@ -70,9 +70,15 @@ public class SMSManageServiceImpl implements ISMSManageService {
 	/**
 	 * 查询余额
 	 * @return 剩余金额
+	 * @throws Exception 
 	 */
-	public String getBalance(){
-		return client.getBalance();
+	public String getBalance() {
+		try {
+			return client.getBalance();
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "";
+		}
 	}
 	
 	/**
