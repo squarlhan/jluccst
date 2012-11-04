@@ -49,7 +49,7 @@
 			rules: {
 				"sellRecord.customerId":{required:true,strangecode:true},
 				"sellRecord.bargainTime":{required:true,strangecode:true},
-				"sellRecord.goodsType":{required:true,strangecode:true},
+				"sellRecord.goodsType":{strangecode:true},
 				"sellRecord.orderID":{required:true,strangecode:true},
 				"sellRecord.receivable":{strangecode:true,number:true},
 				"sellRecord.realCollection":{required:true,strangecode:true,number:true},
@@ -88,7 +88,7 @@
 				  			row=row+"</td>";
 				  			row=row+"<td align='center' bgcolor='#FFFFFF'>"+info[1]+"</td>";
 				  			row=row+"<td align='center' bgcolor='#FFFFFF'>"+info[2]+"</td>";
-				  			row=row+"<td align='center' bgcolor='#FFFFFF'>"+info[3]+"</td>";
+				  			//row=row+"<td align='center' bgcolor='#FFFFFF'>"+info[3]+"</td>";
 				  			row=row+"<td align='center' bgcolor='#FFFFFF'>"+info[4]+"</td>";
 				  			row=row+"<td align='center' bgcolor='#FFFFFF'>"+info[5]+"</td>";
 				  			row=row+"<td align='center' bgcolor='#FFFFFF'>"+info[6]+"</td>";
@@ -100,13 +100,13 @@
 				  		    $("#cbk_all").attr("checked", false);
 			  			    $("#cbk_all").attr("disabled",false);
 			  			    var receivable=$("#txt_receivable").val() * 1;
-			  			    var temp =info[3]*info[4];
+			  			    var temp =info[4]*info[5];
 			  				receivable=temp+receivable;
 			  				 $("#txt_receivable").val(receivable);
 			  				 
 			  				 
 			  				var realCollection=$("#txt_realCollection").val() * 1;
-			  			    var temp2 =info[5]*1;
+			  			    var temp2 =info[6]*1;
 			  			  	realCollection=temp2+realCollection;
 			  				$("#txt_realCollection").val(realCollection);
 			  				$("#txt_debt").val(receivable-realCollection);
@@ -262,19 +262,19 @@
 									<strong>客户名称：</strong>
 								</td>
 								<td height="26" align="left" bgcolor="#FFFFFF" nowrap="nowrap">
-									<s:select id="sel_customer"  name ="sellRecord.customerId"  list="customerInfos" listKey="id"  listValue="customerName" cssStyle="width:200px" headerKey="" headerValue="--- 请选择客户 ---"></s:select><font color="red">*</font>
+									<s:select id="sel_customer"  name ="sellRecord.customerId"  list="customerInfos" listKey="id"  listValue="customerName" cssStyle="width:200px" headerKey="" headerValue="--- 请选择客户 ---"></s:select>
 								</td>
 								<td height="26" align="right" bgcolor="#FFFFFF" nowrap="nowrap">
 									<strong>交易日期：</strong>
 								</td>
 								<td height="26" align="left" bgcolor="#FFFFFF" nowrap="nowrap">
-									<s:textfield id="txt_bargainTime" name="sellRecord.bargainTime" cssStyle="width:100px" ></s:textfield><font color="red">*</font>
+									<s:textfield id="txt_bargainTime" name="sellRecord.bargainTime" cssStyle="width:100px" ></s:textfield>
 								</td>
 								<td height="26" align="right" bgcolor="#FFFFFF" nowrap="nowrap">
 									<strong>产品种类：</strong>
 								</td>
 								<td height="26" align="left" bgcolor="#FFFFFF" nowrap="nowrap">
-									<s:textfield id="txt_goodsType" name="sellRecord.goodsType" cssStyle="width:100px" ></s:textfield><font color="red">*</font>
+									<s:textfield id="txt_goodsType" name="sellRecord.goodsType" cssStyle="width:100px" ></s:textfield>
 								</td>
 								<td height="26" align="right" bgcolor="#FFFFFF" nowrap="nowrap">
 									<strong>销售单号：</strong>
@@ -295,7 +295,7 @@
 		   						</td>
 		              			<td align="center" background="<%=basePath%>/images/headerbg.jpg"><strong>品 名</strong></td>
 		              			<td align="center" background="<%=basePath%>/images/headerbg.jpg"><strong>规 格</strong></td>
-		              			<td align="center" background="<%=basePath%>/images/headerbg.jpg"><strong>克 重</strong></td>
+<%--		              			<td align="center" background="<%=basePath%>/images/headerbg.jpg"><strong>克 重</strong></td>--%>
 		              			<td align="center" background="<%=basePath%>/images/headerbg.jpg"><strong>单 价</strong></td>
 		              			<td align="center" background="<%=basePath%>/images/headerbg.jpg"><strong>数 量</strong></td>
 		              			<td align="center" background="<%=basePath%>/images/headerbg.jpg"><strong>预 付</strong></td>
@@ -309,7 +309,7 @@
 									</td>
 						            <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="goodsName"/></td>
 						            <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="standard"/></td>
-						            <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="weight"/></td>
+<%--						            <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="weight"/></td>--%>
 						            <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="price"/></td>
 						            <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="number"/></td>
 						            <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="allPrice"/></td>
