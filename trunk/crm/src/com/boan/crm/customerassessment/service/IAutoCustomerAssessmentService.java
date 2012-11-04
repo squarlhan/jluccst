@@ -26,6 +26,12 @@ public interface IAutoCustomerAssessmentService {
 	 */
 	public List<AutoCustomerAssessment> findAutoCustomerAssessmentByCompanyId(String companyId);
 	/**
+	 * 根据单位Id查找
+	 * @param companyId
+	 * @return List<AutoAssessmentSetting>
+	 */
+	public Pagination<AutoCustomerAssessment> findAutoCustomerAssessmentByCompanyId(String companyId,Pagination<AutoCustomerAssessment> pagination);
+	/**
 	 * 保存
 	 * @param autoAssessmentSetting
 	 */

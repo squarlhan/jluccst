@@ -29,6 +29,7 @@ import com.boan.crm.sellrecord.service.ISellRecordService;
 import com.boan.crm.utils.action.BaseActionSupport;
 import com.boan.crm.utils.calendar.CalendarUtils;
 import com.boan.crm.utils.calendar.CurrentDateTime;
+import com.boan.crm.utils.page.Pagination;
 
 /**
  * @author luojx
@@ -67,6 +68,20 @@ public class CustomerAssessmentAction extends BaseActionSupport{
 	private String optionFlag = "";
 	private String customerId ="";
 	private String customerName = "";
+	private String chkAllCustomer = "";
+	private String[] ids = null;
+	public String[] getIds() {
+		return ids;
+	}
+	public void setIds(String[] ids) {
+		this.ids = ids;
+	}
+	public String getChkAllCustomer() {
+		return chkAllCustomer;
+	}
+	public void setChkAllCustomer(String chkAllCustomer) {
+		this.chkAllCustomer = chkAllCustomer;
+	}
 	public String getOptionFlag() {
 		return optionFlag;
 	}
@@ -96,6 +111,8 @@ public class CustomerAssessmentAction extends BaseActionSupport{
 	{
 		return SUCCESS;
 	}
+	private Pagination<AutoCustomerAssessment> pagination = new Pagination<AutoCustomerAssessment>();
+	
 	public String customerAnalysisSetting()
 	{
 		String companyId = sessionCompanyId;
@@ -124,6 +141,10 @@ public class CustomerAssessmentAction extends BaseActionSupport{
 			{
 				introduceTimes = "1";
 			}
+			if(autoAssessmentSetting.getAllCustomerFlag() == 1)
+			{
+				chkAllCustomer = "1";
+			}
 			beginTime = CalendarUtils.toLongStringNoSecond(autoAssessmentSetting.getBeginTime());
 		}else
 		{
@@ -137,6 +158,12 @@ public class CustomerAssessmentAction extends BaseActionSupport{
 		return SUCCESS;
 	}
 	
+	public Pagination<AutoCustomerAssessment> getPagination() {
+		return pagination;
+	}
+	public void setPagination(Pagination<AutoCustomerAssessment> pagination) {
+		this.pagination = pagination;
+	}
 	public String customerAnalysisSettingSave()
 	{
 		String item = "";
@@ -202,7 +229,10 @@ public class CustomerAssessmentAction extends BaseActionSupport{
 		}
 		autoAssessmentSetting.setBeginTime(time);
 		autoAssessmentSetting.setCompanyId(sessionCompanyId);
-		
+		if(chkAllCustomer.equals("1"))
+		{
+			autoAssessmentSetting.setAllCustomerFlag(1);
+		}
 		AutoAssessmentSetting temp = autoAssessmentSettingService.findAutoAssessmentSettingByCompanyId(sessionCompanyId);
 		if(temp != null)
 		{
@@ -213,6 +243,22 @@ public class CustomerAssessmentAction extends BaseActionSupport{
 		}else
 		{
 			autoAssessmentSettingService.save(autoAssessmentSetting);
+		}
+		
+		if(chkAllCustomer.equals("1"))
+		{
+			List<CustomerInfo> list = customerInfoService.findAllCustomerInfoByCompanyId(sessionCompanyId);
+			if(list != null && list.size() > 0)
+			{
+				for(int i=0;i<list.size();i++)
+				{
+					AutoCustomerAssessment autoCustomerAssessment = new AutoCustomerAssessment();
+					autoCustomerAssessment.setCompanyId(sessionCompanyId);
+					autoCustomerAssessment.setCustomerId(list.get(i).getId());
+					autoCustomerAssessment.setCustomerName(list.get(i).getCustomerName());
+					autoCustomerAssessmentService.save(autoCustomerAssessment);
+				}
+			}
 		}
 		
 		return SUCCESS;
@@ -305,8 +351,14 @@ public class CustomerAssessmentAction extends BaseActionSupport{
 	}
 	public String autoAnalysisCustomerList()
 	{
-		listAutoCustomer = autoCustomerAssessmentService.findAutoCustomerAssessmentByCompanyId(sessionCompanyId);
+		pagination = autoCustomerAssessmentService.findAutoCustomerAssessmentByCompanyId(sessionCompanyId, pagination);
 		
+		return SUCCESS;
+	}
+	
+	public String deleteAnalysisCustomer()
+	{
+		autoCustomerAssessmentService.delete(ids);
 		return SUCCESS;
 	}
 	public String getBeginTime() {

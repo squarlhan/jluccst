@@ -34,6 +34,15 @@ public class AutoAssessmentSetting {
 	private int TIME_CLOCK = 0;
 	@Column(name = "ITEM")
 	private String item = "";
+	@Column(name = "ALLCUSTOMER_FLAG")
+	private int allCustomerFlag = 0;
+	
+	public int getAllCustomerFlag() {
+		return allCustomerFlag;
+	}
+	public void setAllCustomerFlag(int allCustomerFlag) {
+		this.allCustomerFlag = allCustomerFlag;
+	}
 	public String getItem() {
 		return item;
 	}
