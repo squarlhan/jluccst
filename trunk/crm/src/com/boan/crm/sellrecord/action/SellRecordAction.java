@@ -19,6 +19,8 @@ import org.springframework.stereotype.Controller;
 
 import com.boan.crm.customer.model.CustomerInfo;
 import com.boan.crm.customer.service.ICustomerInfoService;
+import com.boan.crm.datadictionary.model.DataDictionary;
+import com.boan.crm.datadictionary.service.IDataDictionaryService;
 import com.boan.crm.groupmanage.common.UserSession;
 import com.boan.crm.groupmanage.model.Deptment;
 import com.boan.crm.groupmanage.model.User;
@@ -59,6 +61,10 @@ public class SellRecordAction extends BaseActionSupport {
 	@Resource
 	// 会员类别接口类
 	private IMemberTypeService memberTypeService;
+	
+	@Resource
+	private IDataDictionaryService dataDictionaryService;
+	
 	@Autowired
 	@Qualifier("deptService")
 	private IDeptmentService deptService = null;
@@ -78,6 +84,10 @@ public class SellRecordAction extends BaseActionSupport {
 	 * 商品明细
 	 */
 	private List<String> detials = new ArrayList<String>();
+	/**
+	 * 商品名称
+	 */
+	private List<DataDictionary> dataDictionarys =  null;
 
 	/**
 	 * 销售记录信息
@@ -276,31 +286,35 @@ public class SellRecordAction extends BaseActionSupport {
 		sellRecord.setSalesmanName(userSession.getUserCName());
 		Set<GoodsInfo> goodsDetials = new HashSet<GoodsInfo>();
 		BigDecimal thisPrice = new BigDecimal(0);
+		String productId="";
 		for (String str : detials) {
 			String[] array = str.split("☆");
 			System.out.println(array[0]);
+			productId = array[0];
 			GoodsInfo goods = new GoodsInfo();
-			goods.setGoodsName(array[0]);
-			goods.setStandard(array[1]);
-			goods.setWeight(array[2]);
-			if(array[3].equals("")){
+			goods.setCompanyId(sessionCompanyId);
+			goods.setGoodsProductId(array[0]);
+			goods.setGoodsName(array[1]);
+			goods.setStandard(array[2]);
+			goods.setWeight(array[3]);
+			if(array[4].equals("")){
 				goods.setPrice(new BigDecimal(0));
 			}else{
-				goods.setPrice(new BigDecimal(array[3]));
+				goods.setPrice(new BigDecimal(array[4]));
 			}
-			if(array[4].equals("")){
+			if(array[5].equals("")){
 				goods.setNumber(0);
 			}else{
-				goods.setNumber(Integer.parseInt(array[4]));
+				goods.setNumber(Integer.parseInt(array[5]));
 			}
 			
-			if(array[5].equals("")){
+			if(array[6].equals("")){
 				goods.setAllPrice(new BigDecimal(0));
 			}else{
-				goods.setAllPrice(new BigDecimal(array[5]));
+				goods.setAllPrice(new BigDecimal(array[6]));
 			}
 			
-			goods.setMemo(array[6].trim());
+			goods.setMemo(array[7].trim());
 			goodsDetials.add(goods);
 			thisPrice = thisPrice.add(goods.getAllPrice());
 		}
@@ -333,6 +347,7 @@ public class SellRecordAction extends BaseActionSupport {
 	}
 
 	public String openAddSellRecordDetial() {
+		dataDictionarys =  dataDictionaryService.findDataDictionaryByType(sessionCompanyId, 8);
 		return SUCCESS;
 	}
 
@@ -617,5 +632,11 @@ public class SellRecordAction extends BaseActionSupport {
 	}
 	public void setUserId(String userId) {
 		this.userId = userId;
+	}
+	public List<DataDictionary> getDataDictionarys() {
+		return dataDictionarys;
+	}
+	public void setDataDictionarys(List<DataDictionary> dataDictionarys) {
+		this.dataDictionarys = dataDictionarys;
 	}
 }

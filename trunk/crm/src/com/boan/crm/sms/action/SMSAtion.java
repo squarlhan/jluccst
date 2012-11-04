@@ -6,9 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpSession;
-
-import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
@@ -17,7 +14,6 @@ import org.springframework.stereotype.Controller;
 import com.boan.crm.backstagemanage.model.Company;
 import com.boan.crm.backstagemanage.service.ICompanyService;
 import com.boan.crm.groupmanage.common.UserSession;
-import com.boan.crm.groupmanage.model.User;
 import com.boan.crm.groupmanage.service.IUserService;
 import com.boan.crm.sms.model.SMSCustomerInfo;
 import com.boan.crm.sms.model.SMSInfo;
@@ -204,7 +200,8 @@ public class SMSAtion extends BaseActionSupport{
 			pageSize=(pageSize==null || pageSize.trim().equals("")) ? "0" : pageSize;
 			p=(p==null || p.trim().equals("")) ? "1" : p;
 			name=name==null ? "" : name;
-			name = new String(name.getBytes("iso8859-1"));
+			//name = new String(name.getBytes("iso8859-1"));
+			//name = java.net.URLDecoder.decode(name,"UTF-8");
 			Map<String,Object> params = new HashMap<String,Object>();
 			//销售员id
 			UserSession userSession = this.getSession();
@@ -287,6 +284,15 @@ public class SMSAtion extends BaseActionSupport{
 	 * @return
 	 */
 	public String openSendInfo(){
+//		SMSCustomerInfo info = new SMSCustomerInfo();
+//		info.setName("AA");
+//		info.setOrganId(sessionDeptId);
+//		info.setPhone("13514318022");
+//		info.setOrganId(sessionDeptId);
+//		info.setCategoryId("0");
+//		info.setSalesmanId(sessionUserId);
+//		bookerService.saveSMSCustomerInfo(info );
+		
 		//需要保证表没有外键，删除外键才能执行deleteSMSCustomerInfoFoCustomer方法
 		//ALTER TABLE sms_info DROP FOREIGN KEY FK2A40AFF46D4294D0;  
 		//bookerService.deleteSMSCustomerInfoFoCustomer("1111111");

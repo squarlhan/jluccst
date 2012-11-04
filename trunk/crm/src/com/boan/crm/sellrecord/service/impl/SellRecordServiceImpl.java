@@ -243,4 +243,14 @@ public class SellRecordServiceImpl implements ISellRecordService {
 		List list = sellRecordDao.find(hql, param);
 		return (list!=null &&  list.size()>0 && list.get(0)!=null )? new BigDecimal( list.get(0).toString()) : new BigDecimal(0);
 	}
+	
+	/**
+	 * 查询产品销售量
+	 * @param companyId 公司Id
+	 * @param productId 产品Id
+	 * @return
+	 */
+	public int getSellTotalAmount( String companyId, String productId ){
+		return goodsInfoService.getGoodsNumberByProductIdAndCompanyId(companyId,productId);
+	}
 }

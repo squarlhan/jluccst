@@ -1,5 +1,6 @@
 package com.boan.crm.sellrecord.service.impl;
 
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,5 +33,14 @@ public class GoodsInfoServiceImpl implements IGoodsInfoService {
 	
 	public void deleteGoodsInfoByIds(String... ids){
 		goodsInfoDao.delete(ids);
+	}
+	
+	public int getGoodsNumberByProductIdAndCompanyId( String companyId, String productId){
+		Map<String, String> values = new HashMap<String, String>();
+		values.put("companyId", companyId);
+		values.put("productId", productId);
+		String hql = "select sum(obj.number) from GoodsInfo obj where obj. companyId=:companyId and  obj.goodsProductId=:productId";
+		List list =  goodsInfoDao.find( hql , values);
+		return (list!=null &&  list.size()>0 && list.get(0)!=null )? new Integer( list.get(0).toString()) : new Integer(0);
 	}
 }

@@ -11,4 +11,6 @@ public interface IGoodsInfoService {
 	public List<GoodsInfo> queryGoodsInfoByRecordId(String recordId);
 	
 	public void deleteGoodsInfoByIds(String... ids);
+	
+	public int getGoodsNumberByProductIdAndCompanyId( String companyId, String productId);
 }
