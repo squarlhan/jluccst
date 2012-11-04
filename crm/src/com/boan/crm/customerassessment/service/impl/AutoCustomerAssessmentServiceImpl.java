@@ -18,6 +18,7 @@ import org.springframework.stereotype.Service;
 import com.boan.crm.customer.analysis.model.AnalysisCustomer;
 import com.boan.crm.customer.analysis.service.IAnalysisEngineService;
 import com.boan.crm.customer.dao.IContractPersonDAO;
+import com.boan.crm.customer.model.CustomerInfo;
 import com.boan.crm.customerassessment.dao.IAutoAssessmentSettingDAO;
 import com.boan.crm.customerassessment.dao.IAutoCustomerAssessmentDAO;
 import com.boan.crm.customerassessment.model.AutoAssessmentSetting;
@@ -25,6 +26,9 @@ import com.boan.crm.customerassessment.model.AutoCustomerAssessment;
 import com.boan.crm.customerassessment.model.CustomerAssessment;
 import com.boan.crm.customerassessment.service.IAutoAssessmentSettingService;
 import com.boan.crm.customerassessment.service.IAutoCustomerAssessmentService;
+import com.boan.crm.datadictionary.model.DataDictionary;
+import com.boan.crm.groupmanage.model.User;
+import com.boan.crm.utils.page.Pagination;
 
 /**
  * @author luojx
@@ -42,7 +46,37 @@ public class AutoCustomerAssessmentServiceImpl implements IAutoCustomerAssessmen
 	@Override
 	public List<AutoCustomerAssessment> findAutoCustomerAssessmentByCompanyId(String companyId)
 	{	
-		return autoCustomerAssessmentDao.find(" from AutoAssessmentSetting where companyId = :companyId ", companyId);
+		Map<String,String> values = new HashMap<String,String>();
+		values.put("companyId", companyId);
+		return autoCustomerAssessmentDao.find(" from AutoAssessmentSetting where companyId = :companyId ", values);
+	}
+	@Override
+	public Pagination<AutoCustomerAssessment> findAutoCustomerAssessmentByCompanyId(String companyId,Pagination<AutoCustomerAssessment> pagination)
+	{	
+		Map<String,String> values = new HashMap<String,String>();
+		values.put("companyId", companyId);
+		//return autoCustomerAssessmentDao.find(" from AutoAssessmentSetting where companyId = :companyId ", values);
+		
+		StringBuilder hql = new StringBuilder();
+		hql.append( "from AutoAssessmentSetting where 1=1");
+		if(values.get("companyId") != null)
+		{
+			hql.append(" and companyId = :companyId ");
+		}
+		
+		List<AutoCustomerAssessment> data = autoCustomerAssessmentDao.findForPage(hql.toString(), values, pagination.getStartIndex(), pagination.getPageSize());
+		
+		hql.delete(0, hql.length());
+		hql.append(" select count(*) from AutoAssessmentSetting where 1=1 " );
+		if(values.get("companyId") != null)
+		{
+			hql.append(" and companyId = :companyId ");
+		}
+		int totalRows = autoCustomerAssessmentDao.findCountForPage(hql.toString(), values);
+		pagination.setTotalRows(totalRows);
+		pagination.setData(data);
+		
+		return pagination;
 	}
 	/**
 	 * 保存设置

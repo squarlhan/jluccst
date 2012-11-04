@@ -30,6 +30,10 @@
 			<result name="success">/customeranalysis/autoanalysisuser_list.jsp</result>
 			<result name="input">/customeranalysis/autoanalysisuser_list.jsp</result>
 		</action>
-		
+		<action name="deleteAnalysisCustomer" class="customerAssessmentAction" method="deleteAnalysisCustomer">
+    		<result name="success" type="chain">
+             	<param name="actionName">autoAnalysisCustomerList</param>
+            </result>
+    	</action>
 	</package>
 </struts>
