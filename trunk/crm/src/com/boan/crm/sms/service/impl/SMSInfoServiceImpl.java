@@ -39,7 +39,9 @@ public class SMSInfoServiceImpl implements ISMSInfoService{
 	 * @param id
 	 */
 	public SMSInfo getSMSInfo(String id){
-		return dao.get(id);
+		SMSInfo info = dao.get(id);
+		dao.clearSession();
+		return info;
 	}
 	
 	/**
@@ -101,7 +103,7 @@ public class SMSInfoServiceImpl implements ISMSInfoService{
 		}
 		
 		
-		String hql = " from SMSInfo where 1=1 "+param.toString()+"order by sendTime desc";
+		String hql = " from SMSInfo where 1=1 "+param.toString()+" order by sendTime desc";
 		List<SMSInfo> data = dao.findForPage(hql, values, pagination.getStartIndex(), pagination.getPageSize());
 		hql = "select count(*) from SMSInfo where 1=1 "+param.toString();
 		int totalRows = dao.findCountForPage(hql, values);

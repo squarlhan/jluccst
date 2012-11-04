@@ -430,6 +430,10 @@ public class SMSAtion extends BaseActionSupport{
 							info.setOrganId(organId);
 							info.setState(2);
 							smsInfoService.saveSMSInfo(info);
+						}else{
+							info.setOrganId(organId);
+							info.setState(3);
+							smsInfoService.saveSMSInfo(info);
 						}
 					}
 				}
@@ -560,11 +564,16 @@ public class SMSAtion extends BaseActionSupport{
 			//保存记录到数据库
 			if(flag==0){
 				info.setId(null);
+				info.setState(2);
 				info.setSendTime(Calendar.getInstance());
 				smsInfoService.saveSMSInfo(info);
 				//发送成功
 			}else{
 				//发送失败
+				info.setId(null);
+				info.setState(3);
+				info.setSendTime(Calendar.getInstance());
+				smsInfoService.saveSMSInfo(info);
 			}
 		}
 		return SUCCESS;

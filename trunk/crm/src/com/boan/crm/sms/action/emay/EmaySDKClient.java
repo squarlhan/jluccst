@@ -177,14 +177,20 @@ public class EmaySDKClient {
 	/**
 	 * 序列号的余额
 	 * 0.1代表一条
+	 * @throws Exception 
 	 */
-	public String getBalance() {
+	public String getBalance() throws Exception {
 		String a =null;
 		try {
 			a = client.getBalance();
 			System.out.println("testGetBalance:" + a);
 		} catch (Exception e) {
 			e.printStackTrace();
+		}finally{
+			client.closeRemoteSocket();
+			client.closeSocketConnect();
+			if(a.equals("303")){
+			}
 		}
 		return a;
 	}
@@ -235,7 +241,7 @@ public class EmaySDKClient {
 		return client;
 	}
 	
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 		EmaySDKClient client = new EmaySDKClient("3SDK-ECQ-0130-LGWLM","17725","key-177259");
 		//注销序列号
 		client.logout();
