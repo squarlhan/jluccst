@@ -237,6 +237,7 @@ if(typeof giant.ui === 'undefined') giant.ui = {};
             this.xmlHttpObj = $.ajax({
                 url:ajaxUrl,
                 data:data,
+                type: "POST",
                 cache:false,
                 before:function() {
                     if ($.isFunction($this.opts.ajaxBefore)) {

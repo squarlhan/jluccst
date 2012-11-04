@@ -86,13 +86,13 @@
 				  			row=row+"<input type='checkbox' name='ids'/>";
 				  			row=row+"<input type='hidden' id='"+1+"' name='detials' value='"+detials+"'/>";
 				  			row=row+"</td>";
-				  			row=row+"<td align='center' bgcolor='#FFFFFF'>"+info[0]+"</td>";
 				  			row=row+"<td align='center' bgcolor='#FFFFFF'>"+info[1]+"</td>";
 				  			row=row+"<td align='center' bgcolor='#FFFFFF'>"+info[2]+"</td>";
 				  			row=row+"<td align='center' bgcolor='#FFFFFF'>"+info[3]+"</td>";
 				  			row=row+"<td align='center' bgcolor='#FFFFFF'>"+info[4]+"</td>";
 				  			row=row+"<td align='center' bgcolor='#FFFFFF'>"+info[5]+"</td>";
 				  			row=row+"<td align='center' bgcolor='#FFFFFF'>"+info[6]+"</td>";
+				  			row=row+"<td align='center' bgcolor='#FFFFFF'>"+info[7]+"</td>";
 				  			row=row+"<td align='center' bgcolor='#FFFFFF'><a name='del_one' href='javascript:void(0);' onclick='$.fn.deletetemp($(this));'>删除</a></td>";
 				  			row=row+"</tr>";
 				  			$("#no_data").hide();
