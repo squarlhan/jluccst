@@ -286,6 +286,7 @@ public class SMSAtion extends BaseActionSupport{
 	public String openSendInfo(){
 //		SMSCustomerInfo info = new SMSCustomerInfo();
 //		info.setName("AA");
+//		info.setCategoryId("1");//1:客户 2 :销售员
 //		info.setOrganId(sessionDeptId);
 //		info.setPhone("13514318022");
 //		info.setOrganId(sessionDeptId);
