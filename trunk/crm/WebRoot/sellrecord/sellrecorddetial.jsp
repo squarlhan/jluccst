@@ -52,7 +52,7 @@
 	  	 */
 		var _customer_submit = {
 			rules: {
-				"goods.goodsName":{required:true,strangecode:true},
+				"goods.goodsProductId":{required:true,strangecode:true},
 				"goods.standard":{strangecode:true},
 				"goods.weight":{strangecode:true},
 				"goods.allPrice":{required:true,strangecode:true,number:true},
@@ -62,7 +62,7 @@
 			}
 		};
 	  	$(function(){
-	  		$("#txt_goodsName").focus();
+	  		$("#goodsProductId").focus();
 	  		try{
 	  		$.validator.setDefaults({
 				debug: false,onkeyup: false,onfocusout:false,focusCleanup: true,
@@ -82,14 +82,15 @@
 				}
 	  			
 	  			var info="";
-	  			var goodsName= $("#txt_goodsName").val();
+	  			var goodsProductId= $("#goodsProductId").val();
+	  			var goodsName= 	$('#goodsProductId option:selected').text();
 	  			var standard= $("#txt_standard").val();
 	  			var weight= $("#txt_weight").val();
 	  			var number= $("#txt_number").val();
 	  			var price= $("#txt_price").val();
 	  			var allPrice= $("#txt_allPrice").val();
 	  			var memo= $("#txt_memo").val()+" ";
-	  			info = goodsName+"☆" + standard+"☆" + weight+"☆" + price+"☆"+number+"☆"+allPrice +"☆" + memo +"☆";
+	  			info = goodsProductId+"☆"+goodsName+"☆" + standard+"☆" + weight+"☆" + price+"☆"+number+"☆"+allPrice +"☆" + memo +"☆";
 	  			$.cookie('detial',info); 
 	  			parent.parent.parent.$("#windown-close").click();
 			});
@@ -124,7 +125,8 @@
 											<strong>品名：</strong>
 										</td>
 										<td height="26" align="left" bgcolor="#FFFFFF">
-											<s:textfield id="txt_goodsName" name="goods.goodsName" cssStyle="width: 160px;" maxlength="25"></s:textfield>
+<%--											<s:textfield id="txt_goodsName" name="goods.goodsName" cssStyle="width: 160px;" maxlength="25"></s:textfield>--%>
+												<s:select list="dataDictionarys" listKey="id" listValue="name" value="goodsProductId"  id="goodsProductId" name="goods.goodsProductId" cssStyle="width:150px" headerKey="" headerValue="--请选择产品--"  cssStyle="width: 165px;"></s:select>
 											<font color="red">*</font>
 										</td>
 										<td height="26" align="right" bgcolor="#FFFFFF" nowrap="nowrap">
