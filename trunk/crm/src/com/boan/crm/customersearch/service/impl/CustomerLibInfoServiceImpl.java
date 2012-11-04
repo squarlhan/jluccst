@@ -442,6 +442,8 @@ public class CustomerLibInfoServiceImpl implements ICustomerLibInfoService{
 		if(values.get("mainIndustry") != null)
 		{
 			hql.append(" and mainIndustry like '%"+values.get("mainIndustry") +"%' ");
+			hql.append(" or customerName like '%"+values.get("mainIndustry") +"%' ");
+			hql.append(" or companyFullName like '%"+values.get("mainIndustry") +"%' ");
 		}
 		if(values.get("provinceId") != null)
 		{
@@ -466,6 +468,8 @@ public class CustomerLibInfoServiceImpl implements ICustomerLibInfoService{
 		if(values.get("mainIndustry") != null)
 		{
 			hql.append(" and mainIndustry like '%"+values.get("mainIndustry") +"%' ");
+			hql.append(" or customerName like '%"+values.get("mainIndustry") +"%' ");
+			hql.append(" or companyFullName like '%"+values.get("mainIndustry") +"%' ");
 		}
 		if(values.get("provinceId") != null)
 		{
