@@ -250,7 +250,9 @@
 							}
 						%>
 						<%
-							b = popedomService.isHasPopedom(us.getUserId(), String.valueOf(us.getUserType()), MenuKey.KE_HU_CHA_ZHAO, us.getPopedomKeys()) 
+							//超级管理员可以访问
+							b = popedomService.isSuperAdministrator(us.getUserId(), String.valueOf(us.getUserType()))
+									||popedomService.isHasPopedom(us.getUserId(), String.valueOf(us.getUserType()), MenuKey.KE_HU_CHA_ZHAO, us.getPopedomKeys()) 
 									||popedomService.isHasPopedom(us.getUserId(), String.valueOf(us.getUserType()), MenuKey.SUB_KE_HU_CHA_ZHAO, us.getPopedomKeys())
 									||popedomService.isHasPopedom(us.getUserId(), String.valueOf(us.getUserType()), MenuKey.SUB_DAO_RU_KE_HU, us.getPopedomKeys());
 							if (b) {
@@ -284,6 +286,13 @@
 								</table>
 							</td>
 						</tr>
+						<%} %>
+						<%
+							b = popedomService.isSuperAdministrator(us.getUserId(), String.valueOf(us.getUserType()));
+							//此功能只对超级管理员开放
+							//b = popedomService.isHasPopedom(us.getUserId(), String.valueOf(us.getUserType()), MenuKey.SUB_KE_HU_CHA_ZHAO, us.getPopedomKeys());
+							if (b) {
+						%>
 						<tr>
 							<td align="left">
 								<table width="100%" border="0" cellspacing="5" cellpadding="0">
@@ -298,7 +307,9 @@
 						</tr>
 						<%} %>
 						<%
-							b = popedomService.isHasPopedom(us.getUserId(), String.valueOf(us.getUserType()), MenuKey.SUB_DAO_RU_KE_HU, us.getPopedomKeys());
+							b = popedomService.isSuperAdministrator(us.getUserId(), String.valueOf(us.getUserType()));
+							//此功能只对超级管理员开放
+							//b = popedomService.isHasPopedom(us.getUserId(), String.valueOf(us.getUserType()), MenuKey.SUB_DAO_RU_KE_HU, us.getPopedomKeys());
 							if (b) {
 						%>
 						<tr>
