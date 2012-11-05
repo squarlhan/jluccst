@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Resource;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -20,7 +22,7 @@ public class RepertoryServiceImpl implements IRepertoryService {
 	@Autowired
 	@Qualifier("repertoryDao")
 	private IRepertoryDao dao = null;
-	@Qualifier("sellRecordService")
+	@Resource
 	private ISellRecordService sellRecordService = null;
 
 	@Override
@@ -61,6 +63,14 @@ public class RepertoryServiceImpl implements IRepertoryService {
 		pagination.setTotalRows(totalRows);
 		pagination.setData(data);
 		return pagination;
+	}
+
+	public ISellRecordService getSellRecordService() {
+		return sellRecordService;
+	}
+
+	public void setSellRecordService(ISellRecordService sellRecordService) {
+		this.sellRecordService = sellRecordService;
 	}
 
 }
