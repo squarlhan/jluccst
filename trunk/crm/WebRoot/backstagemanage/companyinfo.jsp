@@ -167,12 +167,23 @@
 											<s:textfield id="smsPassword" name="company.smsPassword" cssStyle="width: 250px;" maxlength="100"></s:textfield>
 										</td>
 									</tr>
-										<tr>
+									<tr>
 										<td height="26" align="right" bgcolor="#FFFFFF">
 											<strong>短信Key值：</strong>
 										</td>
 										<td height="26" align="left" bgcolor="#FFFFFF">
 											<s:textfield id="smsKey" name="company.smsKey" cssStyle="width: 250px;" maxlength="100"></s:textfield>
+										</td>
+									</tr>
+									<tr>
+										<td height="26" align="right" bgcolor="#FFFFFF">
+											<strong>短信选项：</strong>
+										</td>
+										<td height="26" align="left" bgcolor="#FFFFFF">
+											<input type="checkbox" name="smsActivation" id="smsActivation" value="1"
+											<s:if test='company.smsActivationStatus =="1"'>
+											checked="checked"
+											</s:if>/> 选中激活短信服务，不选中为注销短信服务
 										</td>
 									</tr>
 									<tr>
