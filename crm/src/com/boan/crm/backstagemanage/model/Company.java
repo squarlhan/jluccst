@@ -84,6 +84,12 @@ public class Company {
 	private String smsKey;
 	
 	/**
+	 * 短信服务是否已被激活的标识，1表示激活，0表示注销
+	 */
+	@Column(name="SMS_ACTIVATION_STATUS")
+	private int smsActivationStatus;
+	
+	/**
 	 * 公司排序号
 	 */
 	@Column(name = "SORT_INDEX")
@@ -196,5 +202,13 @@ public class Company {
 
 	public void setSmsKey(String smsKey) {
 		this.smsKey = smsKey;
+	}
+
+	public int getSmsActivationStatus() {
+		return smsActivationStatus;
+	}
+
+	public void setSmsActivationStatus(int smsActivationStatus) {
+		this.smsActivationStatus = smsActivationStatus;
 	}
 }

@@ -69,21 +69,21 @@ public class CompanyAction extends BaseActionSupport {
 	@Autowired
 	@Qualifier("roleService")
 	private IRoleService roleService = null;
-	
+
 	/**
 	 * 角色Service
 	 */
 	@Autowired
 	@Qualifier("dataDictionaryService")
 	private IDataDictionaryService dataDictionaryService = null;
-	
+
 	/**
 	 * 短信Service
 	 */
 	@Autowired
 	@Qualifier("SMSManageService")
 	private ISMSManageService SMSManageService = null;
-	
+
 	/**
 	 * 显示分页
 	 */
@@ -112,6 +112,11 @@ public class CompanyAction extends BaseActionSupport {
 	 * 部门列表
 	 */
 	private List<Deptment> deptList = null;
+
+	/**
+	 * 短信服务激活标识
+	 */
+	private String smsActivation = null;
 
 	/**
 	 * 显示公司列表
@@ -164,26 +169,32 @@ public class CompanyAction extends BaseActionSupport {
 			message.setContent("相同公司名称已存在，请重新输入！");
 			return ERROR;
 		} else {
-			if(true){  //此处默认保存时激活短信账号，如果以后要加开关，if语句可另行判断
-				if(company.getSmsSN()!=null && !company.getSmsSN().trim().equals("") && company.getSmsKey()!=null && !company.getSmsKey().trim().equals("") && company.getSmsPassword()!=null && !company.getSmsPassword().trim().equals("")){
+			if ("1".equals(smsActivation)) {
+				// 公司短信服务状态
+				company.setSmsActivationStatus(1);
+
+				if (company.getSmsSN() != null && !company.getSmsSN().trim().equals("") && company.getSmsKey() != null && !company.getSmsKey().trim().equals("") && company.getSmsPassword() != null && !company.getSmsPassword().trim().equals("")) {
 					SMSManageService.initClient(company.getSmsSN(), company.getSmsPassword(), company.getSmsKey());
-					//激活短信账号
+					// 激活短信账号
 					SMSManageService.activateAccount(company.getSmsPassword());
-					//关闭当前短信客户端连接
+					// 关闭当前短信客户端连接
 					SMSManageService.closeClientSocket();
 				}
-			}else{
-				if(company.getSmsSN()!=null && !company.getSmsSN().trim().equals("") && company.getSmsKey()!=null && !company.getSmsKey().trim().equals("")){
+			} else {
+				// 公司短信服务状态
+				company.setSmsActivationStatus(0);
+
+				if (company.getSmsSN() != null && !company.getSmsSN().trim().equals("") && company.getSmsKey() != null && !company.getSmsKey().trim().equals("")) {
 					SMSManageService.initClient(company.getSmsSN(), company.getSmsPassword(), company.getSmsKey());
-					//注销短信账号
-					SMSManageService.logoutAccount(company.getSmsSN(),company.getSmsKey());
-					//关闭当前短信客户端连接
+					// 注销短信账号
+					SMSManageService.logoutAccount(company.getSmsSN(), company.getSmsKey());
+					// 关闭当前短信客户端连接
 					SMSManageService.closeClientSocket();
 				}
 			}
 			service.save(company);
 			message.setContent("公司信息保存成功！");
-			//为新建的公司建一个公司管理员角色
+			// 为新建的公司建一个公司管理员角色
 			Role role = new Role();
 			role.setCompanyId(company.getId());
 			role.setCreateTime(Calendar.getInstance());
@@ -197,10 +208,10 @@ public class CompanyAction extends BaseActionSupport {
 			businessRole.setRoleKey(RoleFlag.YE_WU_YUAN);
 			businessRole.setSortIndex(0);
 			roleService.save(businessRole);
-			
+
 			List<DataDictionary> dataDictionary = dataDictionaryService.findAllDataDictionaryByCompanyId("");
-			if(dataDictionary!=null && dataDictionary.size()>0){
-				//创建数据字典
+			if (dataDictionary != null && dataDictionary.size() > 0) {
+				// 创建数据字典
 				DataDictionary newObj = null;
 				for (DataDictionary dd : dataDictionary) {
 					newObj = new DataDictionary();
@@ -212,7 +223,7 @@ public class CompanyAction extends BaseActionSupport {
 					dataDictionaryService.save(newObj);
 				}
 			}
-			
+
 			// 保存日志开始
 			Log log = new Log();
 			log.setLogType(LogType.INFO);
@@ -247,33 +258,37 @@ public class CompanyAction extends BaseActionSupport {
 			message.setContent("相同公司名称已存在，请重新输入！");
 			return ERROR;
 		} else {
-			if(true){  //此处默认保存时激活短信账号，如果以后要加开关，if语句可另行判断
-				if(company.getSmsSN()!=null && !company.getSmsSN().trim().equals("") && company.getSmsKey()!=null && !company.getSmsKey().trim().equals("") && company.getSmsPassword()!=null && !company.getSmsPassword().trim().equals("")){
-					//激活短信账号
+			if ("1".equals(smsActivation)) {
+				// 公司短信服务状态
+				company.setSmsActivationStatus(1);
+				if (company.getSmsSN() != null && !company.getSmsSN().trim().equals("") && company.getSmsKey() != null && !company.getSmsKey().trim().equals("") && company.getSmsPassword() != null && !company.getSmsPassword().trim().equals("")) {
+					// 激活短信账号
 					SMSManageService.initClient(company.getSmsSN(), company.getSmsPassword(), company.getSmsKey());
 					SMSManageService.activateAccount(company.getSmsPassword());
-					//关闭当前短信客户端连接
+					// 关闭当前短信客户端连接
 					SMSManageService.closeClientSocket();
 				}
-			}else{
-				if(company.getSmsSN()!=null && !company.getSmsSN().trim().equals("") && company.getSmsKey()!=null && !company.getSmsKey().trim().equals("")){
+			} else {
+				// 公司短信服务状态
+				company.setSmsActivationStatus(0);
+				if (company.getSmsSN() != null && !company.getSmsSN().trim().equals("") && company.getSmsKey() != null && !company.getSmsKey().trim().equals("")) {
 					SMSManageService.initClient(company.getSmsSN(), company.getSmsPassword(), company.getSmsKey());
-					//注销短信账号
-					SMSManageService.logoutAccount(company.getSmsSN(),company.getSmsKey());
-					//关闭当前短信客户端连接
+					// 注销短信账号
+					SMSManageService.logoutAccount(company.getSmsSN(), company.getSmsKey());
+					// 关闭当前短信客户端连接
 					SMSManageService.closeClientSocket();
 				}
 			}
-			
+
 			service.update(company);
 			message.setContent("公司信息保存成功！");
 			List<DataDictionary> dataDictionary = dataDictionaryService.findAllDataDictionaryByCompanyId(StringUtils.trimToEmpty(company.getId()));
-			if(dataDictionary!=null && dataDictionary.size()>0){
-				//存在不维护了
-			}else{
-				//创建数据字典
+			if (dataDictionary != null && dataDictionary.size() > 0) {
+				// 存在不维护了
+			} else {
+				// 创建数据字典
 				List<DataDictionary> initObjs = dataDictionaryService.findAllDataDictionaryByCompanyId("");
-				if(initObjs!=null && initObjs.size()>0){
+				if (initObjs != null && initObjs.size() > 0) {
 					DataDictionary newObj = null;
 					for (DataDictionary dd : initObjs) {
 						newObj = new DataDictionary();
@@ -360,34 +375,40 @@ public class CompanyAction extends BaseActionSupport {
 		}
 		return "company-tree-for-dept";
 	}
+
 	/**
 	 * 获取所有公司列表，用于维护角色
+	 * 
 	 * @return
 	 */
 	public String showCompanyTreeForRole() {
 		companyList = service.queryAllCompanys();
 		return "company-tree-for-role";
 	}
+
 	/**
 	 * 获取所有公司列表，用于权限分配
+	 * 
 	 * @return
 	 */
 	public String showCompanyTreeForPopedom() {
 		companyList = service.queryAllCompanys();
 		return "company-tree-for-popedom";
 	}
+
 	/**
 	 * 修改自己的公司档案
+	 * 
 	 * @return
 	 */
-	public String openMyCompanyAction(){
-		if(StringUtils.isNotBlank(sessionCompanyId))
-		{
+	public String openMyCompanyAction() {
+		if (StringUtils.isNotBlank(sessionCompanyId)) {
 			company = service.get(sessionCompanyId);
 			return "show-my-company";
 		}
 		return NONE;
 	}
+
 	public Company getCompany() {
 		return company;
 	}
@@ -434,5 +455,13 @@ public class CompanyAction extends BaseActionSupport {
 
 	public void setDeptList(List<Deptment> deptList) {
 		this.deptList = deptList;
+	}
+
+	public String getSmsActivation() {
+		return smsActivation;
+	}
+
+	public void setSmsActivation(String smsActivation) {
+		this.smsActivation = smsActivation;
 	}
 }
