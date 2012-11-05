@@ -46,7 +46,7 @@
 		//d.add(107,0,'数据字典','<%=url%>?menuKey=<%=MenuKey.SHU_JU_ZI_DIAN%>&companyId=<%=companyId%>','','groupmain');
 		d.add(103,0,'客户查找','<%=url%>?menuKey=<%=MenuKey.KE_HU_CHA_ZHAO%>&companyId=<%=companyId%>','','groupmain');
 				d.add(1031,103,'客户查找','<%=url%>?menuKey=<%=MenuKey.SUB_KE_HU_CHA_ZHAO%>&companyId=<%=companyId%>','','groupmain');
-				d.add(1032,103,'导入客户库','<%=url%>?menuKey=<%=MenuKey.SUB_DAO_RU_KE_HU%>&companyId=<%=companyId%>','','groupmain');
+			//	d.add(1032,103,'导入客户库','<%=url%>?menuKey=<%=MenuKey.SUB_DAO_RU_KE_HU%>&companyId=<%=companyId%>','','groupmain');
 		d.add(107,0,'我的客户管理','<%=url%>?menuKey=<%=MenuKey.MY_KE_HU_GUAN_LI%>&companyId=<%=companyId%>','','groupmain');
 				d.add(1071,107,'我的客户','<%=url%>?menuKey=<%=MenuKey.MY_KE_HU%>&companyId=<%=companyId%>','','groupmain');
 				d.add(1072,107,'我的跟进','<%=url%>?menuKey=<%=MenuKey.MY_GEN_JIN%>&companyId=<%=companyId%>','','groupmain');
