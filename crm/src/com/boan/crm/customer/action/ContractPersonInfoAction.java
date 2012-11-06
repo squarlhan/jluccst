@@ -7,11 +7,17 @@ import java.util.Calendar;
 
 import javax.annotation.Resource;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.boan.crm.customer.model.ContractPersonInfo;
+import com.boan.crm.customer.model.CustomerInfo;
 import com.boan.crm.customer.service.IContractPersonService;
+import com.boan.crm.customer.service.ICustomerInfoService;
+import com.boan.crm.sms.model.SMSCustomerInfo;
+import com.boan.crm.sms.service.ISMSCustomerInfoService;
 import com.boan.crm.utils.action.BaseActionSupport;
 
 /**
@@ -29,6 +35,14 @@ public class ContractPersonInfoAction extends BaseActionSupport{
 	// 客户状态接口类
 	@Resource
 	private IContractPersonService contractpersonInfoService;
+	@Autowired
+	@Qualifier("SMSCustomerInfoService")
+	private ISMSCustomerInfoService sMSCustomerInfoService;
+	@Autowired
+	@Qualifier("customerInfoService")
+	//客户状态接口类
+	private ICustomerInfoService customerInfoService;
+	
 	private ContractPersonInfo contractPersonInfo = null;
 	
 	private String customerId = null;
@@ -78,6 +92,34 @@ public class ContractPersonInfoAction extends BaseActionSupport{
 		obj.setTel(contractPersonInfo.getTel());
 		
 		contractpersonInfoService.save(contractPersonInfo);
+		
+		if(personId != null && personId.length() > 0)
+		{
+			
+		}else
+		{
+			//需保存到短信用户处
+			SMSCustomerInfo smsCustomer = new SMSCustomerInfo();
+			smsCustomer.setCustomerId(contractPersonInfo.getCustomerId());
+			//smsCustomer.setBirthday(birthday)
+			CustomerInfo customer = customerInfoService.get(contractPersonInfo.getCustomerId());
+			if(customer != null)
+			{
+				smsCustomer.setName(customer.getCustomerName());
+				smsCustomer.setOrganId(customer.getCompanyId());
+				smsCustomer.setOrganName(customer.getCompanyFullName());
+				smsCustomer.setSalesmanId(customer.getSalesmanId());
+				smsCustomer.setCategoryId(customer.getCategoryId());
+				smsCustomer.setBirthday(contractPersonInfo.getBirthday());
+				smsCustomer.setCreateTime(Calendar.getInstance());
+				smsCustomer.setEmail(contractPersonInfo.getEmail());
+				smsCustomer.setPhone(contractPersonInfo.getTel());
+				smsCustomer.setQq(contractPersonInfo.getQq());
+				smsCustomer.setPostalcode(customer.getPostCode());
+				smsCustomer.setNickname(contractPersonInfo.getNickName());
+				sMSCustomerInfoService.saveSMSCustomerInfo(smsCustomer);
+			}
+		}
 		
 		message = "保存成功！";
 		
