@@ -1,6 +1,7 @@
 package com.boan.crm.customer.model;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.List;
 
@@ -91,6 +92,47 @@ public class CustomerInfo implements Serializable
 	private String postCode = null;
 	@Column(name = "INTRODUCE_TIMES")
 	private int introduceTimes = 0;
+	@Transient
+	private BigDecimal totalConsumption;
+	@Transient
+	private int consumptionTimes = 0;
+	@Transient
+	private int paymentsTimes = 0;
+	@Transient
+	private BigDecimal payments;
+	@Transient
+	private double developDegree = 0;
+	
+	public BigDecimal getTotalConsumption() {
+		return totalConsumption;
+	}
+	public void setTotalConsumption(BigDecimal totalConsumption) {
+		this.totalConsumption = totalConsumption;
+	}
+	public int getConsumptionTimes() {
+		return consumptionTimes;
+	}
+	public void setConsumptionTimes(int consumptionTimes) {
+		this.consumptionTimes = consumptionTimes;
+	}
+	public int getPaymentsTimes() {
+		return paymentsTimes;
+	}
+	public void setPaymentsTimes(int paymentsTimes) {
+		this.paymentsTimes = paymentsTimes;
+	}
+	public BigDecimal getPayments() {
+		return payments;
+	}
+	public void setPayments(BigDecimal payments) {
+		this.payments = payments;
+	}
+	public double getDevelopDegree() {
+		return developDegree;
+	}
+	public void setDevelopDegree(double developDegree) {
+		this.developDegree = developDegree;
+	}
 	public int getIntroduceTimes() {
 		return introduceTimes;
 	}
