@@ -135,6 +135,18 @@ background-color:#d3eaef}
 	  				}
 	  			});
 	  		});
+	  		/**
+	  		 * 删除单个客户信息
+	  		 */
+	  		$('a[name="static"]').each(function(){
+	  			$(this).click(function(){
+	  				var url = $(this).attr("static_url");
+	  				parent.parent.tipsWindown("客户统计信息","iframe:"+url,"460","200","true","","true","no");
+	  				parent.parent.$("#windown-close").bind('click',function(){
+						window.location.href="autoAnalysisCustomerList.action";
+					});
+	  			});
+	  		});
 	  		
 	  		/**
 	  		 * 删除所选客户信息
@@ -159,9 +171,9 @@ background-color:#d3eaef}
 		<td align="center">客户名称</td>
 		<td><input type="text" /></td>
 		<td></td>
-		<td><input name="addbtn" type="button" class="btn_4" id="addbtn" value="添加客户" >
+		<td><!-- <input name="addbtn" type="button" class="btn_4" id="addbtn" value="添加客户" > -->
 		<input name="deletepointbtn" type="button" class="btn_4" id="deletepointbtn" value="删除所选" >
-        <input name="backbtn" type="button" class="btn_4" id="backbtn" value="返回" onclick="window.location.href='customerassessment/customerAnalysisSetting.action'"></td>
+        </td>
 	</tr>
 </table></td></tr>
 <!--总框架下的第二行（第一列），查询条件与按钮   结束！-->
@@ -175,6 +187,8 @@ background-color:#d3eaef}
 		<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">转介绍客户情况</td>
 		<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">回款情况</td>
 		<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">开发程度</td>
+		<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">评估值</td>
+		<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">评估结论</td>
 		<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">操作</td>
 	</tr>
 	<s:iterator value="pagination.data" status="obj">
@@ -188,7 +202,13 @@ background-color:#d3eaef}
             <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="introduceCustomerTime"/></td>
             <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="paymentsTimes"/></td>
             <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="developDegree"/></td>
+            <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="resultValue"/></td>
+            <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="result"/></td>
 	          <td height="26" colspan="2" align="center" bgcolor="#FFFFFF">
+	          <s:url id="static_url" action="staticAnalysisCustomer">   
+					<s:param name="ids" value="id"></s:param>   
+				</s:url>
+				<a name="static" href="javascript:void(0);" url="${delete_url}">统计结果</a>  
 				<s:url id="delete_url" action="deleteAnalysisCustomer">   
 					<s:param name="ids" value="id"></s:param>   
 				</s:url>
@@ -202,8 +222,6 @@ background-color:#d3eaef}
 		  </td>
         </tr>
 </table></td></tr>
-<!--总第四行第一列  表格分页   结束！--> 
-
 </table>
 </body>
 </html>

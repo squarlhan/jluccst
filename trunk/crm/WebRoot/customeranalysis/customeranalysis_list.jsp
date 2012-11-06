@@ -93,6 +93,10 @@ $(function() {
 							  $("#levelId"+g_number).html(allData[i].levelId);
 							  $("#maturity"+g_number).html(allData[i].maturity);
 							  $("#category"+g_number).html(allData[i].category);
+							  $("#totalConsumption"+g_number).html(allData[i].totalConsumption);
+							  $("#consumptionTimes"+g_number).html(allData[i].consumptionTimes);
+							  $("#payments"+g_number).html(allData[i].payments);
+							  $("#introducetimes"+g_number).html(allData[i].introduceTimes);
 							  var contractPerson = "";
 							  var tel = "";
 							  for(var j= 0;j<allData[i].contractPersonList.length; j++)
@@ -223,6 +227,10 @@ $(function() {
 		<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">业务员</td>
 		<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">客户分类</td>
 		<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">成熟度</td>
+		<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">消费总额</td>
+		<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">消费次数</td>
+		<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">汇款情况</td>
+		<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">介绍客户次数</td>
 		<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">开发程度</td>
 		<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">评估结论</td>
 	</tr>
@@ -233,6 +241,10 @@ $(function() {
 		<td align="center" style="height: 26px; background-color:#FFFFFF" id="salesman1"></td>
 		<td align="center" style="height: 26px; background-color:#FFFFFF" id="category1"></td>
 		<td align="center" style="height: 26px; background-color:#FFFFFF" id="maturity1"></td>
+		<td align="center" style="height: 26px; background-color:#FFFFFF" id="totalConsumption1"></td>
+		<td align="center" style="height: 26px; background-color:#FFFFFF" id="consumptionTimes1"></td>
+		<td align="center" style="height: 26px; background-color:#FFFFFF" id="payments1"></td>
+		<td align="center" style="height: 26px; background-color:#FFFFFF" id="introducetimes1"></td>
 		<td align="center" style="height: 26px; background-color:#FFFFFF" id="levelId1"></td>
 		<td align="center" style="height: 26px; background-color:#FFFFFF" id="result1"></td>
 	</tr>
@@ -243,6 +255,10 @@ $(function() {
 		<td align="center" style="height: 26px; background-color:#FFFFFF" id="salesman2"></td>
 		<td align="center" style="height: 26px; background-color:#FFFFFF" id="category2"></td>
 		<td align="center" style="height: 26px; background-color:#FFFFFF" id="maturity2"></td>
+		<td align="center" style="height: 26px; background-color:#FFFFFF" id="totalConsumption2"></td>
+		<td align="center" style="height: 26px; background-color:#FFFFFF" id="consumptionTimes2"></td>
+		<td align="center" style="height: 26px; background-color:#FFFFFF" id="payments2"></td>
+		<td align="center" style="height: 26px; background-color:#FFFFFF" id="introducetimes2"></td>
 		<td align="center" style="height: 26px; background-color:#FFFFFF" id="levelId2"></td>
 		<td align="center" style="height: 26px; background-color:#FFFFFF" id="result2"></td>
 	</tr>
@@ -253,6 +269,10 @@ $(function() {
 		<td align="center" style="height: 26px; background-color:#FFFFFF" id="salesman3"></td>
 		<td align="center" style="height: 26px; background-color:#FFFFFF" id="category3"></td>
 		<td align="center" style="height: 26px; background-color:#FFFFFF" id="maturity3"></td>
+		<td align="center" style="height: 26px; background-color:#FFFFFF" id="totalConsumption3"></td>
+		<td align="center" style="height: 26px; background-color:#FFFFFF" id="consumptionTimes3"></td>
+		<td align="center" style="height: 26px; background-color:#FFFFFF" id="payments3"></td>
+		<td align="center" style="height: 26px; background-color:#FFFFFF" id="introducetimes3"></td>
 		<td align="center" style="height: 26px; background-color:#FFFFFF" id="levelId3"></td>
 		<td align="center" style="height: 26px; background-color:#FFFFFF" id="result3"></td>
 	</tr>
@@ -263,6 +283,10 @@ $(function() {
 		<td align="center" style="height: 26px; background-color:#FFFFFF" id="salesman4"></td>
 		<td align="center" style="height: 26px; background-color:#FFFFFF" id="category4"></td>
 		<td align="center" style="height: 26px; background-color:#FFFFFF" id="maturity4"></td>
+		<td align="center" style="height: 26px; background-color:#FFFFFF" id="totalConsumption4"></td>
+		<td align="center" style="height: 26px; background-color:#FFFFFF" id="consumptionTimes4"></td>
+		<td align="center" style="height: 26px; background-color:#FFFFFF" id="payments4"></td>
+		<td align="center" style="height: 26px; background-color:#FFFFFF" id="introducetimes4"></td>
 		<td align="center" style="height: 26px; background-color:#FFFFFF" id="levelId4"></td>
 		<td align="center" style="height: 26px; background-color:#FFFFFF" id="result4"></td>
 	</tr>
@@ -273,6 +297,10 @@ $(function() {
 		<td align="center" style="height: 26px; background-color:#FFFFFF" id="salesman5"></td>
 		<td align="center" style="height: 26px; background-color:#FFFFFF" id="category5"></td>
 		<td align="center" style="height: 26px; background-color:#FFFFFF" id="maturity5"></td>
+		<td align="center" style="height: 26px; background-color:#FFFFFF" id="totalConsumption5"></td>
+		<td align="center" style="height: 26px; background-color:#FFFFFF" id="consumptionTimes5"></td>
+		<td align="center" style="height: 26px; background-color:#FFFFFF" id="payments5"></td>
+		<td align="center" style="height: 26px; background-color:#FFFFFF" id="introducetimes5"></td>
 		<td align="center" style="height: 26px; background-color:#FFFFFF" id="levelId5"></td>
 		<td align="center" style="height: 26px; background-color:#FFFFFF" id="result5"></td>
 	</tr>
