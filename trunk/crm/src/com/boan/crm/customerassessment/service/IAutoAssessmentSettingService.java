@@ -4,6 +4,7 @@
 package com.boan.crm.customerassessment.service;
 
 
+import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 
@@ -24,6 +25,13 @@ public interface IAutoAssessmentSettingService {
 	 * @return List<AutoAssessmentSetting>
 	 */
 	public AutoAssessmentSetting findAutoAssessmentSettingByCompanyId(String companyId);
+	
+	/**
+	 * 自动评估
+	 * @param companyId
+	 * @param t
+	 */
+	public void autoAssessment(String companyId,Calendar t);
 	/**
 	 * 保存设置
 	 * @param autoAssessmentSetting

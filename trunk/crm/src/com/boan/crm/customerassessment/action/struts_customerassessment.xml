@@ -35,5 +35,10 @@
              	<param name="actionName">autoAnalysisCustomerList</param>
             </result>
     	</action>
+    	<action name="staticAnalysisCustomer" class="customerAssessmentAction" method="staticAnalysisCustomer">
+			<result name="success">/customeranalysis/staticanalysisuser.jsp</result>
+			<result name="input">/customeranalysis/staticanalysisuser.jsp</result>
+		</action>
+    	
 	</package>
 </struts>
