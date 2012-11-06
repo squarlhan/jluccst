@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 
 import com.boan.crm.backstagemanage.model.Company;
 import com.boan.crm.backstagemanage.service.ICompanyService;
+import com.boan.crm.customerassessment.service.IAutoAssessmentSettingService;
 import com.boan.crm.sms.model.SMSInfo;
 import com.boan.crm.sms.service.ISMSInfoService;
 import com.boan.crm.sms.service.ISMSManageService;
@@ -27,6 +28,12 @@ public class SchedulerTask {
 	@Autowired
 	@Qualifier("companyService")
 	private ICompanyService companyService;
+	
+	@Autowired
+	@Qualifier("autoAssessmentSettingService")
+	private IAutoAssessmentSettingService autoAssessmentSettingService;
+	
+	
 	
 	/**
 	 * 发送短信
@@ -73,6 +80,10 @@ public class SchedulerTask {
 				}
 				infoList = null;
 			}
+			
+			//调用自动评估接口
+			autoAssessmentSettingService.autoAssessment(companyId, Calendar.getInstance());
+			
 		}
 		companyList = null;
 		System.out.println(" 执行定时短信服务间隔[" + (new Date()).toLocaleString() +"]ms");
