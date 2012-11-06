@@ -3,10 +3,13 @@
  */
 package com.boan.crm.customer.service.impl;
 
+import java.text.NumberFormat;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -21,8 +24,10 @@ import com.boan.crm.datadictionary.service.IAreaService;
 import com.boan.crm.datadictionary.service.IDataDictionaryService;
 import com.boan.crm.groupmanage.model.User;
 import com.boan.crm.groupmanage.service.IUserService;
+import com.boan.crm.sellrecord.service.ISellRecordService;
 import com.boan.crm.sms.model.SMSCustomerInfo;
 import com.boan.crm.sms.service.ISMSCustomerInfoService;
+import com.boan.crm.utils.calendar.CurrentDateTime;
 import com.boan.crm.utils.page.Pagination;
 
 /**
@@ -51,6 +56,9 @@ public class CustomerInfoServiceImpl implements ICustomerInfoService{
 	@Autowired
 	@Qualifier("userService")
 	private IUserService userService;
+	@Autowired
+	@Qualifier("sellRecordService")
+	private ISellRecordService sellRecordService;
 	
 	@Override
 	public void deleteCustomerInfo(String... ids) {
@@ -180,6 +188,25 @@ public class CustomerInfoServiceImpl implements ICustomerInfoService{
 				}
 				customerInfo.setContractPersonList(contractPersonService.findAllContractPersonInfoByCustomerId(customerInfo.getId()));
 				
+				customerInfo.setTotalConsumption(sellRecordService.getConsumptionMoney(customerInfo.getId()));
+				customerInfo.setConsumptionTimes(sellRecordService.getConsumptionCount(customerInfo.getId()));
+				
+				String t22 = CurrentDateTime.getCurrentDate();
+				String t11 = t22.split("-")[0]+"-1-1";
+				customerInfo.setPayments(sellRecordService.getConsumptionDebt(customerInfo.getId(),t11,t22));
+				
+				if(customerInfo.getLevelId() != null && customerInfo.getLevelId().length() > 0)
+				{
+					NumberFormat f = NumberFormat.getPercentInstance();
+					double level = 0;
+					try
+					{
+						level = f.parse(customerInfo.getLevelId()).doubleValue(); 
+					}catch(Exception ex)
+					{
+					}
+					customerInfo.setDevelopDegree(level);
+				}
 			}
 		}
 		return pagination;
