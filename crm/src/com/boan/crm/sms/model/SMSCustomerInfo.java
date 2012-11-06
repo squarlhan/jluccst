@@ -65,31 +65,31 @@ public class SMSCustomerInfo {
 	/**
 	 * 姓名
 	 */
-	@Column(name = "NAME" , length = 20)
+	@Column(name = "NAME" , length = 200)
 	private String name;
 	
 	/**
 	 * 姓名全拼
 	 */
-	@Column(name = "NAME_SPELL" , length = 20)
+	@Column(name = "NAME_SPELL" , length = 500)
 	private String nameSpell;
 	
 	/**
 	 * 昵称
 	 */
-	@Column(name = "NICKNAME" , length = 50)
+	@Column(name = "NICKNAME" , length = 250)
 	private String nickname;
 	
 	/**
 	 * 敬称（先生、小姐...）
 	 */
-	@Column(name = "APPELLATION" , length = 50)
+	@Column(name = "APPELLATION" , length =250)
 	private String appellation;
 	
 	/**
 	 * 职务
 	 */
-	@Column(name = "POST" , length = 50)
+	@Column(name = "POST" , length = 250)
 	private String post;
 	
 	/**

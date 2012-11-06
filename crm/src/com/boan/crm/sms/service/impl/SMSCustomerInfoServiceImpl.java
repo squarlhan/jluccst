@@ -39,6 +39,25 @@ public class SMSCustomerInfoServiceImpl implements ISMSCustomerInfoService {
 	}
 	
 	/**
+	 * 通过客户Id查询相应通讯录信息
+	 * @param customerId 客户Id
+	 * @param info
+	 */
+	public SMSCustomerInfo getSMSCustomerInfoByCustomerId(String customerId){
+		Map<String, Object> values = new HashMap<String, Object>();
+		values.put("customerId", customerId);
+		String hql ="from SMSCustomerInfo where customerId=:customerId ";
+		List<SMSCustomerInfo> temp = dao.find(hql, values);
+		SMSCustomerInfo obj =  null;
+		if(temp!=null && temp.size()>0 ){
+			if(temp.get(0)!=null){
+				obj = temp.get(0);
+			}
+		}
+		return obj;
+	}
+	
+	/**
 	 * 修改客户联系人时调用
 	 * @param customerId
 	 * @param info
@@ -49,13 +68,37 @@ public class SMSCustomerInfoServiceImpl implements ISMSCustomerInfoService {
 		String hql ="from SMSCustomerInfo where customerId=:customerId ";
 		List<SMSCustomerInfo> temp = dao.find(hql, values);
 		String id=null;
+		SMSCustomerInfo obj =  null;
 		if(temp!=null && temp.size()>0 ){
 			if(temp.get(0)!=null){
-				id = temp.get(0).getId();
+				obj = temp.get(0);
+				id = obj.getId();
+				
 			}
 		}
-		info.setId(id);
-		dao.update(info);
+		obj.setAppellation(info.getAppellation());
+		obj.setBirthday(info.getBirthday());
+		obj.setCategoryId(info.getCategoryId());
+		obj.setCreateTime(info.getCreateTime());
+		obj.setCustomerId((info.getCustomerId()));
+		obj.setEmail(info.getEmail());
+		obj.setFaxes(info.getFaxes());
+		obj.setIsLunarCalender(info.getIsLunarCalender());
+		obj.setName(info.getName());
+		obj.setNameSpell(info.getNameSpell());
+		obj.setNameSpell( PinYin4J.makeStringByStringSet(PinYin4J.getPinyin(info.getName())));
+		obj.setNickname(info.getNickname());
+		obj.setOrganId(info.getOrganId());
+		obj.setOrganId(info.getOrganId());
+		obj.setPhone(info.getPhone());
+		obj.setPost(info.getPost());
+		obj.setPostalcode(info.getPostalcode());
+		obj.setQq(info.getQq());
+		obj.setSalesmanId(info.getSalesmanId());
+		obj.setSex(info.getSex());
+		obj.setUnit(info.getUnit());
+		obj.setUnitAddress(info.getUnitAddress());
+		dao.update(obj);
 	}
 	
 	/**
