@@ -14,10 +14,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.boan.crm.customer.analysis.model.AnalysisCustomer;
-import com.boan.crm.customer.model.ContractPersonInfo;
 import com.boan.crm.customer.model.CustomerInfo;
-import com.boan.crm.customer.model.CustomerTraceInfo;
-import com.boan.crm.customer.service.IContractPersonService;
 import com.boan.crm.customer.service.ICustomerInfoService;
 import com.boan.crm.customerassessment.model.AutoAssessmentSetting;
 import com.boan.crm.customerassessment.model.AutoCustomerAssessment;
