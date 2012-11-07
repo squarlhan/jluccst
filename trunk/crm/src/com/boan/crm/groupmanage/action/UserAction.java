@@ -135,20 +135,34 @@ public class UserAction extends BaseActionSupport {
 				newUserFlag = false;
 				userService.saveOrUpdateUser(oldUser);
 			}
-			// 存储SMS用户信息
-			SMSCustomerInfo smsUser = new SMSCustomerInfo();
-			smsUser.setCustomerId(user.getId());
-			smsUser.setCategoryId("2");
-			smsUser.setPhone(user.getPhone());
-			smsUser.setName(user.getUserCName());
-			smsUser.setCreateTime(Calendar.getInstance());
-			smsUser.setUnit(user.getCompanyId());
-			smsUser.setEmail(user.getEmail());
-			smsUser.setOrganId(user.getDeptId());
+			SMSCustomerInfo smsUser =null;
 			if(newUserFlag){
+				// 存储SMS用户信息
+				smsUser= new SMSCustomerInfo();
+				smsUser.setCustomerId(user.getId());
+				smsUser.setCategoryId("2");
+				smsUser.setPhone(user.getPhone());
+				smsUser.setName(user.getUserCName());
+				smsUser.setCreateTime(Calendar.getInstance());
+				smsUser.setUnit(sessionCompanyName);
+				smsUser.setEmail(user.getEmail());
+				smsUser.setOrganId(user.getCompanyId());
+				smsUser.setPost(user.getRoleName());
+				smsUser.setOrganName(sessionCompanyName);
 				smsService.saveSMSCustomerInfo(smsUser);
 			}else{
-				smsService.updateSMSCustomerInfoForCustomer(user.getId(), smsUser);
+				smsUser  = smsService.getSMSCustomerInfoByCustomerId(user.getId());
+				if(smsUser!=null){
+					smsUser.setPhone(user.getPhone());
+					smsUser.setName(user.getUserCName());
+					smsUser.setCreateTime(Calendar.getInstance());
+					smsUser.setUnit(sessionCompanyName);
+					smsUser.setEmail(user.getEmail());
+					smsUser.setOrganId(user.getCompanyId());
+					smsUser.setPost(user.getRoleName());
+					smsUser.setOrganName(sessionCompanyName);
+					smsService.updateSMSCustomerInfoForCustomer(user.getId(), smsUser);
+				}
 			}
 			message.setContent("用户信息保存成功！");
 			// 保存日志开始
@@ -343,18 +357,20 @@ public class UserAction extends BaseActionSupport {
 				// 复制
 				User.convertToUser(oldUser, user);
 				userService.saveOrUpdateUser(oldUser);
-				// 存储SMS用户信息
-				SMSCustomerInfo smsUser = new SMSCustomerInfo();
-				smsUser.setCustomerId(oldUser.getId());
-				smsUser.setCategoryId("2");
-				smsUser.setPhone(oldUser.getPhone());
-				smsUser.setName(oldUser.getUserCName());
-				smsUser.setCreateTime(Calendar.getInstance());
-				smsUser.setUnit(oldUser.getCompanyId());
-				smsUser.setEmail(oldUser.getEmail());
-				smsUser.setOrganId(oldUser.getDeptId());
 				try {
-					smsService.updateSMSCustomerInfoForCustomer(oldUser.getId(), smsUser);
+					// 存储SMS用户信息
+					SMSCustomerInfo smsUser = smsService.getSMSCustomerInfoByCustomerId(oldUser.getId());
+					if(smsUser!=null){
+						smsUser.setPhone(oldUser.getPhone());
+						smsUser.setName(oldUser.getUserCName());
+						smsUser.setCreateTime(Calendar.getInstance());
+						smsUser.setUnit(sessionCompanyName);
+						smsUser.setEmail(oldUser.getEmail());
+						smsUser.setOrganId(oldUser.getCompanyId());
+						smsUser.setPost(oldUser.getRoleName());
+						smsUser.setOrganName(sessionCompanyName);
+						smsService.updateSMSCustomerInfoForCustomer(oldUser.getId(), smsUser);
+					}
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
