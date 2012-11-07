@@ -71,6 +71,7 @@
               <td align="center" background="<%=path %>/images/headerbg.jpg"><strong>部门名称</strong></td>
               <td align="center" background="<%=path %>/images/headerbg.jpg"><strong>操作人</strong></td>
               <td align="center" background="<%=path %>/images/headerbg.jpg"><strong>操作内容</strong></td>
+              <td align="center" background="<%=path %>/images/headerbg.jpg"><strong>用户IP</strong></td>
                <td align="center" background="<%=path %>/images/headerbg.jpg"><strong>记录时间</strong></td>
         </tr>
         <s:iterator value="pagination.data" status="obj">
@@ -83,11 +84,12 @@
               <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="deptName"/></td>
               <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="userName"/></td>
                 <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="logContent"/></td>
+                <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="userIp"/></td>
                 <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="createTimeEn"/></td>
         </tr>
         </s:iterator>        
         <tr>
-          <td height="26" colspan="9" align="center" bgcolor="#FFFFFF">
+          <td height="26" colspan="10" align="center" bgcolor="#FFFFFF">
 			<page:pages currentPage="pagination.currentPage" totalPages="pagination.totalPages" totalRows="pagination.totalRows" styleClass="page" theme="text" ></page:pages> 
 		   
 		  </td>
