@@ -46,5 +46,8 @@
 		<action name="loadCustomerInfoForAjaxAction" class="SMSAtion" method="loadCustomerInfoForAjax">
             <result type="json" name="customerInfoList"></result>
         </action>
+        <action name="queryBalanceAction" class="SMSAtion" method="queryBalance">
+            <result type="json"></result>
+        </action>
 	</package>
 </struts>

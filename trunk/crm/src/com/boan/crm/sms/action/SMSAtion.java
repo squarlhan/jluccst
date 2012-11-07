@@ -166,6 +166,12 @@ public class SMSAtion extends BaseActionSupport{
 	 */
 	private String SMSInfoId;
 	
+	
+	/**
+	 * 查询条件-接收人
+	 */
+	private String queryPersonName;
+	
 	/**
 	 * 查询条件-公司名
 	 */
@@ -308,8 +314,8 @@ public class SMSAtion extends BaseActionSupport{
 			String key = company.getSmsKey();
 			if(serialNo!=null && password!=null && key!=null && !serialNo.trim().equals("") && !password.trim().equals("") && !key.trim().equals("")){
 				//初始化短信发送接口
-				smsManageService.initClient( serialNo,password,key);
-				SMSBalance = smsManageService.getBalance();
+//				smsManageService.initClient( serialNo,password,key);
+//				SMSBalance = smsManageService.getBalance();
 			}
 		}
 		return SUCCESS;
@@ -442,6 +448,26 @@ public class SMSAtion extends BaseActionSupport{
 		}
 		return SUCCESS;
 	}
+	
+	/**
+	 * 查询余额
+	 * @return
+	 */
+	public String queryBalance(){
+		UserSession userSession = this.getSession();
+		String organId = userSession.getCompanyId();
+		//初始化短信发送接口
+		Company  company = companyService.get(organId);
+		String serialNo =company.getSmsSN();
+		String password = company.getSmsPassword();
+		String key = company.getSmsKey();
+		if(serialNo!=null && password!=null && key!=null && !serialNo.trim().equals("") && !password.trim().equals("") && !key.trim().equals("")){
+			//初始化短信发送接口
+			smsManageService.initClient( serialNo,password,key);
+			SMSBalance = smsManageService.getBalance();
+		}
+		return SUCCESS;
+	}
 
 	/**
 	 * 打开发送短信页面
@@ -458,8 +484,8 @@ public class SMSAtion extends BaseActionSupport{
 			String key = company.getSmsKey();
 			if(serialNo!=null && password!=null && key!=null && !serialNo.trim().equals("") && !password.trim().equals("") && !key.trim().equals("")){
 				//初始化短信发送接口
-				smsManageService.initClient( serialNo,password,key);
-				SMSBalance = smsManageService.getBalance();
+//				smsManageService.initClient( serialNo,password,key);
+//				SMSBalance = smsManageService.getBalance();
 			}
 		}
 		return SUCCESS;
@@ -598,6 +624,11 @@ public class SMSAtion extends BaseActionSupport{
 		String organId = userSession.getCompanyId();
 		Map<String,String> params = new HashMap<String,String>();
 		params.put("organId", organId);
+		
+		if(queryPersonName!=null && !queryPersonName.trim().equals("")){
+			params.put("queryPersonName", queryPersonName);
+		}
+		
 		if(queryCompany!=null && !queryCompany.trim().equals("")){
 			params.put("personCompany", queryCompany);
 		}
@@ -833,6 +864,14 @@ public class SMSAtion extends BaseActionSupport{
 
 	public String getQueryState() {
 		return queryState;
+	}
+
+	public String getQueryPersonName() {
+		return queryPersonName;
+	}
+
+	public void setQueryPersonName(String queryPersonName) {
+		this.queryPersonName = queryPersonName;
 	}
 
 	public void setQueryState(String queryState) {
