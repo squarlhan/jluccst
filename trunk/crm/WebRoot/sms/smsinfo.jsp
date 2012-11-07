@@ -155,6 +155,8 @@
 	  		});
 	  		//发送信息
 	  		$.fn.sendInfo ();
+	  		//查询余额
+	  		$.fn.getMoney();
 		});
 	  	/**
 	  	 * 点击选复选框时，执行全选/取消全选功能
@@ -339,7 +341,11 @@
   					success: function(data, textStatus){
   						try{
   							data = eval("("+data+")");
-  							$("#balance").html(data.SMSBalance+"元");
+  							if(data.SMSBalance!="303"){
+  								$("#balance").html('<font color="red">&nbsp;&nbsp;当前短信余额：<strong>'+data.SMSBalance+'</strong>元，每条短信费用为0.1元。</font>');
+  							}else{
+  								$("#balance").html('<font color="red">网络故障，请稍后再试！</font>');
+  							}
   						}catch(e){
   							alert(e.description);
   						}
@@ -348,6 +354,39 @@
   						alert("发送完毕！");
   					},
   					error: function(){
+  					}
+				});
+			});
+		};
+		
+		
+		/**
+	  	 * 获取余额
+	  	 */
+		$.fn.getMoney = function(){
+			$("#getMoney").click(function(){
+				$.ajax({
+  					type:"post",
+  					url: "queryBalanceAction.action",
+  					beforeSend: function(XMLHttpRequest){
+  					},
+  					success: function(data, textStatus){
+  						try{
+  							data = eval("("+data+")");
+  							if(data.SMSBalance!="303"){
+  								$("#balance").html('<font color="red">&nbsp;&nbsp;当前短信余额：<strong>'+data.SMSBalance+'</strong>元，每条短信费用为0.1元。</font>');
+  							}else{
+  								$("#balance").html('<font color="red">网络故障，请稍后再试！</font>');
+  							}
+  						}catch(e){
+  							$("#balance").html('<font color="red">网络故障，请稍后再试！</font>');
+  							alert(e.description);
+  						}
+  					},
+  					complete: function(XMLHttpRequest, textStatus){
+  					},
+  					error: function(){
+  						$("#balance").html('<font color="red">网络故障，请稍后再试！</font>');
   					}
 				});
 			});
@@ -396,13 +435,8 @@
 												</tr>
 												<tr>
 													<td>
-														<font color="red">&nbsp;&nbsp;当前短信余额：</font>
-														<s:if test="SMSBalance==303">
-															<font color="red">查询余额失败，请稍后再试！</font>
-														</s:if>
-														<s:else>
-															<font color="red"><strong  id="balance"><s:property value="SMSBalance"/>元</strong>，每条短信费用为0.1元。</font>
-														</s:else>
+														<img src="<%=basePath%>/images/yen_coins.png" style="cursor: pointer;" id="getMoney" title="查询余额"></img>
+														<strong  id="balance"></strong>
 													</td>
 													<td align="right">
 														<span>

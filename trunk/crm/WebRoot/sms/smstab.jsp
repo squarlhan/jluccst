@@ -12,10 +12,6 @@
 		$("#tt").css("width",$("#groupmain",parent.document).width());
 		$("#tt").css("height",$("#groupmain",parent.document).height());
 		$("#tt").tabs();
-		$('.selector').tabs({ ajaxOptions: { async: false } });
-		$("#tt").click(function(){
-			$("#iframe3").attr("src","loadSendedRecordAction.action");
-		});
 	});
 //-->
 </script>
@@ -35,10 +31,10 @@
 		<iframe id="iframe1" scrolling="auto" frameborder="0" style="width:100%; height:100%" src="openSendInfoAction.action" ></iframe>
 	</div>
 	<div title="生日提醒"  style="padding: 1px; display: none;">
-		<iframe id="iframe2"  scrolling="auto" frameborder="0" style="width:100%; height:100%" src="openSendInfoBeforeTimeAction.action" ></iframe>
+		<iframe id="iframe2"  scrolling="auto" frameborder="0" style="width:100%; height:100%" src="about:blank" url="openSendInfoBeforeTimeAction.action"/></iframe>
 	</div>
 	<div id="a"  title="发送记录" style="padding: 1px; display: none;">
-		<iframe id="iframe3"  scrolling="auto" frameborder="0" style="width:100%; height:100%" src="" ></iframe>
+		<iframe id="iframe3"  scrolling="auto" frameborder="0" style="width:100%; height:100%" src="about:blank"  url="loadSendedRecordAction.action"/></iframe>
 	</div>
 </div>
 </body>
