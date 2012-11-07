@@ -229,7 +229,7 @@ $(function() {
 		<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">成熟度</td>
 		<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">消费总额</td>
 		<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">消费次数</td>
-		<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">汇款情况</td>
+		<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">回款情况</td>
 		<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">介绍客户次数</td>
 		<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">开发程度</td>
 		<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">评估结论</td>
