@@ -22,7 +22,9 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.boan.crm.backstagemanage.common.LogType;
+import com.boan.crm.backstagemanage.model.Company;
 import com.boan.crm.backstagemanage.model.Log;
+import com.boan.crm.backstagemanage.service.ICompanyService;
 import com.boan.crm.common.Message;
 import com.boan.crm.common.UserConfig;
 import com.boan.crm.common.UserType;
@@ -52,6 +54,9 @@ public class UserAction extends BaseActionSupport {
 	@Autowired
 	@Qualifier("userService")
 	private IUserService userService = null;
+	@Autowired
+	@Qualifier("companyService")
+	private ICompanyService companyService = null;
 	@Autowired
 	@Qualifier("SMSCustomerInfoService")
 	private ISMSCustomerInfoService smsService;
@@ -135,34 +140,27 @@ public class UserAction extends BaseActionSupport {
 				newUserFlag = false;
 				userService.saveOrUpdateUser(oldUser);
 			}
-			SMSCustomerInfo smsUser =null;
-			if(newUserFlag){
-				// 存储SMS用户信息
-				smsUser= new SMSCustomerInfo();
-				smsUser.setCustomerId(user.getId());
-				smsUser.setCategoryId("2");
-				smsUser.setPhone(user.getPhone());
-				smsUser.setName(user.getUserCName());
-				smsUser.setCreateTime(Calendar.getInstance());
-				smsUser.setUnit(sessionCompanyName);
-				smsUser.setEmail(user.getEmail());
-				smsUser.setOrganId(user.getCompanyId());
-				smsUser.setPost(user.getRoleName());
-				smsUser.setOrganName(sessionCompanyName);
+			SMSCustomerInfo smsUser = smsService.getSMSCustomerInfoByCustomerId(user.getId());
+			if (smsUser == null) {
+				smsUser = new SMSCustomerInfo();
+			}
+			smsUser.setCustomerId(user.getId());
+			smsUser.setCategoryId("2");
+			smsUser.setPhone(user.getPhone());
+			smsUser.setName(user.getUserCName());
+			smsUser.setCreateTime(Calendar.getInstance());
+			smsUser.setEmail(user.getEmail());
+			smsUser.setPost(user.getRoleName());
+			smsUser.setOrganId(user.getCompanyId());
+			Company company = companyService.get(user.getCompanyId());
+			if (company != null) {
+				smsUser.setUnit(company.getCompanyName());
+				smsUser.setOrganName(company.getCompanyName());
+			}
+			if (newUserFlag) {
 				smsService.saveSMSCustomerInfo(smsUser);
-			}else{
-				smsUser  = smsService.getSMSCustomerInfoByCustomerId(user.getId());
-				if(smsUser!=null){
-					smsUser.setPhone(user.getPhone());
-					smsUser.setName(user.getUserCName());
-					smsUser.setCreateTime(Calendar.getInstance());
-					smsUser.setUnit(sessionCompanyName);
-					smsUser.setEmail(user.getEmail());
-					smsUser.setOrganId(user.getCompanyId());
-					smsUser.setPost(user.getRoleName());
-					smsUser.setOrganName(sessionCompanyName);
-					smsService.updateSMSCustomerInfoForCustomer(user.getId(), smsUser);
-				}
+			} else {
+				smsService.updateSMSCustomerInfoForCustomer(user.getId(), smsUser);
 			}
 			message.setContent("用户信息保存成功！");
 			// 保存日志开始
@@ -360,15 +358,27 @@ public class UserAction extends BaseActionSupport {
 				try {
 					// 存储SMS用户信息
 					SMSCustomerInfo smsUser = smsService.getSMSCustomerInfoByCustomerId(oldUser.getId());
-					if(smsUser!=null){
-						smsUser.setPhone(oldUser.getPhone());
-						smsUser.setName(oldUser.getUserCName());
-						smsUser.setCreateTime(Calendar.getInstance());
-						smsUser.setUnit(sessionCompanyName);
-						smsUser.setEmail(oldUser.getEmail());
-						smsUser.setOrganId(oldUser.getCompanyId());
-						smsUser.setPost(oldUser.getRoleName());
-						smsUser.setOrganName(sessionCompanyName);
+					boolean newUserFlag = true;
+					if (smsUser == null) {
+						newUserFlag = false;
+						smsUser = new SMSCustomerInfo();
+					}
+					smsUser.setCustomerId(oldUser.getId());
+					smsUser.setCategoryId("2");
+					smsUser.setPhone(oldUser.getPhone());
+					smsUser.setName(oldUser.getUserCName());
+					smsUser.setCreateTime(Calendar.getInstance());
+					smsUser.setEmail(oldUser.getEmail());
+					smsUser.setPost(oldUser.getRoleName());
+					smsUser.setOrganId(oldUser.getCompanyId());
+					Company company = companyService.get(oldUser.getCompanyId());
+					if (company != null) {
+						smsUser.setUnit(company.getCompanyName());
+						smsUser.setOrganName(company.getCompanyName());
+					}
+					if (newUserFlag) {
+						smsService.saveSMSCustomerInfo(smsUser);
+					} else {
 						smsService.updateSMSCustomerInfoForCustomer(oldUser.getId(), smsUser);
 					}
 				} catch (Exception e) {
