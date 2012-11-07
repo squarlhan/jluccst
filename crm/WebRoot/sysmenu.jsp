@@ -512,7 +512,7 @@
 									<tr>
 										<td width="40" align="right" style="padding-bottom: 4px;"><img src="images/up.gif" width="10" height="12" />
 										</td>
-										<td><strong name="menus">综合查询</strong>
+										<td><strong name="menus">客户查询</strong>
 										</td>
 									</tr>
 								</table>
@@ -529,7 +529,7 @@
 									<tr>
 										<td width="40" align="right" style="padding-bottom: 4px;"><img src="images/menuto.jpg" width="5" height="5" />
 										</td>
-										<td><a href="customer/customersearch.jsp" target="mainFrame">客户查询</a>
+										<td><a href="customer/customersearch.jsp" target="mainFrame">信息查询</a>
 										</td>
 									</tr>
 								</table>
