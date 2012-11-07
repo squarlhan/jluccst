@@ -72,7 +72,7 @@
 	               	if(!validator.form()){
 						return false;
 					}
-					if( $.trim( $("#companyId").val() ) != ""){
+					if( $("#companyId").val()  != ""){
 						form1.action = "toModifyCompanyAction.action";
 					}else{
 		               	form1.action = "toAddCompanyAction.action";					
