@@ -371,10 +371,12 @@ public class UserAction extends BaseActionSupport {
 					smsUser.setEmail(oldUser.getEmail());
 					smsUser.setPost(oldUser.getRoleName());
 					smsUser.setOrganId(oldUser.getCompanyId());
-					Company company = companyService.get(oldUser.getCompanyId());
-					if (company != null) {
-						smsUser.setUnit(company.getCompanyName());
-						smsUser.setOrganName(company.getCompanyName());
+					if( StringUtils.isNotBlank(oldUser.getCompanyId()) ){
+						Company company = companyService.get(oldUser.getCompanyId());
+						if (company != null) {
+							smsUser.setUnit(company.getCompanyName());
+							smsUser.setOrganName(company.getCompanyName());
+						}
 					}
 					if (newUserFlag) {
 						smsService.saveSMSCustomerInfo(smsUser);
