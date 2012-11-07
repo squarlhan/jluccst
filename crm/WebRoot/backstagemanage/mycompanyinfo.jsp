@@ -181,6 +181,17 @@
 										</td>
 									</tr>
 									<tr>
+										<td height="26" align="right" bgcolor="#FFFFFF">
+											<strong>短信选项：</strong>
+										</td>
+										<td height="26" align="left" bgcolor="#FFFFFF">
+											<input type="checkbox" name="smsActivation" id="smsActivation" value="1"
+											<s:if test='company.smsActivationStatus =="1"'>
+											checked="checked"
+											</s:if>/> 选中激活短信服务，不选中为注销短信服务
+										</td>
+									</tr>
+									<tr>
 										<td height="26" colspan="2" align="center" bgcolor="#FFFFFF">
 											<input name="addBtn" type="button" class="btn_2_3" id="addBtn" value="保 存">
 											&nbsp;&nbsp;
