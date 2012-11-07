@@ -57,8 +57,8 @@
 				d.add(1043,104,'客户回访','<%=url%>?menuKey=<%=MenuKey.SUB_KE_HU_HUI_FANG%>&companyId=<%=companyId%>','','groupmain');
 				d.add(1044,104,'客户评估','<%=url%>?menuKey=<%=MenuKey.SUB_KE_HU_PING_GU%>&companyId=<%=companyId%>','','groupmain');
 		/*
-				d.add(108,0,'综合查询','<%=url%>?menuKey=<%=MenuKey.ZONG_HE_CHA_XUN%>&companyId=<%=companyId%>','','groupmain');
-				d.add(1081,108,'客户查询','<%=url%>?menuKey=<%=MenuKey.KE_HU_CHA_XUN%>&companyId=<%=companyId%>','','groupmain');
+				d.add(108,0,'客户查询','<%=url%>?menuKey=<%=MenuKey.ZONG_HE_CHA_XUN%>&companyId=<%=companyId%>','','groupmain');//综合查询改为客户查询
+				d.add(1081,108,'信息查询','<%=url%>?menuKey=<%=MenuKey.KE_HU_CHA_XUN%>&companyId=<%=companyId%>','','groupmain');//客户查询改为信息查询
 				d.add(1082,108,'跟进查询','<%=url%>?menuKey=<%=MenuKey.GEN_JIN_CHA_XUN%>&companyId=<%=companyId%>','','groupmain');
 				d.add(1083,108,'回访查询','<%=url%>?menuKey=<%=MenuKey.HUI_FANG_CHA_XUN%>&companyId=<%=companyId%>','','groupmain');
 		*/
