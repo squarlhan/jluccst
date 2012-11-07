@@ -30,7 +30,9 @@
     <j:scriptlink jquery="true"></j:scriptlink>
     <script type="text/javascript">
 		alert('${message.content}');
+		try{
 		parent.parent.$("#windown-close").click();
+		}catch(e){};
 	</script>
   </head>
   <body>
