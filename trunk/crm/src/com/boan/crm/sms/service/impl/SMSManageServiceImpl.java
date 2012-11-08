@@ -1,5 +1,7 @@
 package com.boan.crm.sms.service.impl;
 
+import java.rmi.RemoteException;
+
 import org.springframework.stereotype.Service;
 
 import com.boan.crm.sms.action.emay.EmaySDKClient;
@@ -33,7 +35,12 @@ public class SMSManageServiceImpl implements ISMSManageService {
 	 * @return 返回值代码
 	 */
 	public int activateAccount(String password){
-		return client.registEx(password);
+		try {
+			return client.registEx(password);
+		} catch (RemoteException e) {
+			e.printStackTrace();
+			return -1111;
+		}
 	}
 	
 	/**
@@ -109,8 +116,8 @@ public class SMSManageServiceImpl implements ISMSManageService {
 	 */
 	public void closeClientSocket(){
 		try {
-			client.getClient().closeRemoteSocket();
-			client.getClient().closeSocketConnect();
+//			client.getClient().closeRemoteSocket();
+//			client.getClient().closeSocketConnect();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
