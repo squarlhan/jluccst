@@ -1,11 +1,15 @@
 ﻿package com.boan.crm.sms.action.emay;
 
+import java.rmi.RemoteException;
 import java.util.List;
 import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
 
-import cn.emay.sdk.client.api.Client;
-import cn.emay.sdk.client.api.MO;
+import com.boan.crm.sms.action.emay.webservice.Client;
+import com.boan.crm.sms.action.emay.webservice.Mo;
+
+//import cn.emay.sdk.client.api.Client;
+//import cn.emay.sdk.client.api.MO;
 
 /**
  * 亿美短信平台客户端接口
@@ -74,8 +78,9 @@ public class EmaySDKClient {
 	 * 软件序列号注册、或则说是激活、软件序列号首次使用必须激活
 	 * registEx(String serialpass)
 	 * 1、serialpass 软件序列号密码、密码长度为6位的数字字符串、软件序列号和密码请通过亿美销售人员获取
+	 * @throws RemoteException 
 	 */
-	public int registEx(String password ) {
+	public int registEx(String password ) throws RemoteException {
 		int i =client.registEx(password);
 		System.out.println("testTegistEx:" + i);
 		return i;
@@ -182,13 +187,11 @@ public class EmaySDKClient {
 	public String getBalance() throws Exception {
 		String a =null;
 		try {
-			a = client.getBalance();
+			a =""+ client.getBalance();
 			System.out.println("testGetBalance:" + a);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}finally{
-			client.closeRemoteSocket();
-			client.closeSocketConnect();
 			if(a.equals("303")){
 			}
 		}
@@ -214,11 +217,11 @@ public class EmaySDKClient {
 	 */
 	public void getMO() {
 		try {
-			List<MO> list = client.getMO();
+			List<Mo> list = client.getMO();
 			if (list != null) {
 				System.out.println("testGetMO1size:" + list.size());
 
-				for(MO mo : list) {
+				for(Mo mo : list) {
 					System.out.println("短信内容:" + mo.getSmsContent());
 					System.out.println("通道号:" + mo.getChannelnumber());
 					System.out.println("手机号:" + mo.getMobileNumber());
@@ -254,8 +257,8 @@ public class EmaySDKClient {
 		//发送信息
 		client.sendSMS("测试ss", "13514318022");
 		try {
-			client.client.closeSocketConnect();
-			client.client.closeRemoteSocket();
+//			client.client.closeSocketConnect();
+//			client.client.closeRemoteSocket();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
