@@ -82,6 +82,9 @@ public class SMSInfoServiceImpl implements ISMSInfoService{
 		if(values.containsKey("organId")){
 			param.append(" and organId='"+values.get("organId")+"'");
 		}
+		if(values.containsKey("queryPersonName")){
+			param.append(" and personName like '%"+values.get("queryPersonName")+"%'");
+		}
 		if(values.containsKey("personCompany")){
 			param.append(" and personCompany like '%"+values.get("personCompany")+"%'");
 		}
@@ -99,7 +102,7 @@ public class SMSInfoServiceImpl implements ISMSInfoService{
 			param.append(" and isImmediately ='"+values.get("queryType")+"'");
 		}
 		if(values.containsKey("queryState")){
-			param.append(" and state ='"+values.get("sendEndTime")+"'");
+			param.append(" and state ='"+values.get("queryState")+"'");
 		}
 		
 		
