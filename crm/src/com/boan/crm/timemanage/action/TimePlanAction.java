@@ -130,14 +130,16 @@ public class TimePlanAction extends BaseActionSupport{
 			endTime = Calendar.getInstance();
 		}
 		Map<String,Object> params = new HashMap<String, Object>();
-		params.put("personId", this.sessionUserId);
+//		params.put("personId", this.sessionUserId);
 		params.put("organId", this.sessionCompanyId);
 		params.put("employeeName", employeeName);
 		params.put("planType", planType);
 		params.put("beginTime", beginTime);
 		params.put("endTime", endTime); 
 		params.put("deptId", deptId);
-		params.put("employeeId", userId);
+		if(userId!=null && !userId.equals("")){
+			params.put("employeeId", userId);
+		}
 		pagination = timePlanService.findTimePlanForPage(params,pagination);
 		
 		return SUCCESS;
