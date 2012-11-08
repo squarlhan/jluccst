@@ -98,6 +98,8 @@ public class MarketInquiryAction extends BaseActionSupport{
 	
 	private String goodsId;
 	
+	private String companyId;
+	
 	/**
 	 * 显示组织机构树,带公司、工厂、车间
 	 * 
@@ -137,7 +139,6 @@ public class MarketInquiryAction extends BaseActionSupport{
 		params.put("goodsTypeId", goodsId);
 		params.put("goodsName", goodsName);
 		params.put("inquiryPersonName", inquiryPersonName);
-		params.put("inquiryPersonName", inquiryPersonName);
 		params.put("goodsStandard", goodsStandard);
 		params.put("beginTime", beginTime); 
 		params.put("endTime", endTime); 
@@ -158,11 +159,15 @@ public class MarketInquiryAction extends BaseActionSupport{
 			endTime = Calendar.getInstance();
 		}
 		Map<String,Object> params = new HashMap<String, Object>();
-		params.put("personId", this.sessionUserId);
-		params.put("organId", this.sessionCompanyId);
-		params.put("goodsTypeId", goodsId);
+		if(companyId!=null && !companyId.equals("")){
+			params.put("organId",companyId);
+		}else{
+			params.put("organId",sessionCompanyId);
+		}
+		if(goodsId!=null && !goodsId.equals("")){
+			params.put("goodsTypeId", goodsId);
+		}
 		params.put("goodsName", goodsName);
-		params.put("inquiryPersonName", inquiryPersonName);
 		params.put("inquiryPersonName", inquiryPersonName);
 		params.put("goodsStandard", goodsStandard);
 		params.put("beginTime", beginTime); 
@@ -322,6 +327,14 @@ public class MarketInquiryAction extends BaseActionSupport{
 
 	public void setGoodsId(String goodsId) {
 		this.goodsId = goodsId;
+	}
+
+	public String getCompanyId() {
+		return companyId;
+	}
+
+	public void setCompanyId(String companyId) {
+		this.companyId = companyId;
 	}
 
 }
