@@ -30,6 +30,7 @@ import com.boan.crm.common.Message;
 import com.boan.crm.groupmanage.common.UserSession;
 import com.boan.crm.groupmanage.model.Deptment;
 import com.boan.crm.groupmanage.model.User;
+import com.boan.crm.groupmanage.security.CheckProductKey;
 import com.boan.crm.groupmanage.service.IDeptmentService;
 import com.boan.crm.groupmanage.service.IPopedomService;
 import com.boan.crm.groupmanage.service.IUserService;
@@ -92,6 +93,8 @@ public class UserLogonAction extends ActionSupport
 	private String factoryName = null;
 
 	private String workshopName = null;
+	
+	private String suffix = "";
 	/**
 	 * 验证密码
 	 * 
@@ -102,6 +105,12 @@ public class UserLogonAction extends ActionSupport
 	{
 		String md5 = MakeMd5.MD5( password );
 		boolean b = false;
+		//验证产品是否过期
+		CheckProductKey  productKey = new CheckProductKey();
+		if( productKey.getProductKey() ){
+			message.setContent( CheckProductKey.message);
+			return ERROR;
+		}
 		try
 		{
 			b = userService.logonValid( username, md5 );
@@ -133,7 +142,7 @@ public class UserLogonAction extends ActionSupport
 				userSession.setUserType( user.getUserType() );
 				userSession.setPopedomKeys( popedomKeys );
 				userSession.setUserPhone(user.getPhone());
-				
+				userSession.setProductSuffix(productKey.getProductSuffix());
 				if( companyService != null )
 				{
 					if( StringUtils.isNotBlank(user.getCompanyId() ))
@@ -188,6 +197,10 @@ public class UserLogonAction extends ActionSupport
 	 */
 	public String logonMain() throws Exception
 	{
+		HttpSession session = ServletActionContext.getRequest().getSession();
+		if( session != null && session.getAttribute( "userSession" ) != null ){
+			suffix = ((UserSession) session.getAttribute( "userSession" )).getProductSuffix();
+		}
 		return SUCCESS;
 	}
 	/**
@@ -222,7 +235,6 @@ public class UserLogonAction extends ActionSupport
 				fullGroupName = fullGroupName.substring( 0,fullGroupName.length() -1 );
 			}
 			fullGroupName  = StringUtils.defaultIfEmpty( fullGroupName, "超级管理组" );
-			
 		}
 		return SUCCESS;
 	}
@@ -408,6 +420,14 @@ public class UserLogonAction extends ActionSupport
 
 	public void setDeptName(String deptName) {
 		this.deptName = deptName;
+	}
+
+	public String getSuffix() {
+		return suffix;
+	}
+
+	public void setSuffix(String suffix) {
+		this.suffix = suffix;
 	}
 
 }
