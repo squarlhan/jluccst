@@ -71,6 +71,11 @@ public class UserSession implements java.io.Serializable
 	private int userType;
 	
 	/**
+	 * 产品试用标识，如果正式版，则为空，否则为试用版
+	 */
+	private String productSuffix;
+	
+	/**
 	 * 用户登录时，所拥有的所有权限key值
 	 */
 	private String[] popedomKeys;
@@ -190,6 +195,14 @@ public class UserSession implements java.io.Serializable
 
 	public void setUserPhone(String userPhone) {
 		this.userPhone = userPhone;
+	}
+
+	public String getProductSuffix() {
+		return productSuffix;
+	}
+
+	public void setProductSuffix(String productSuffix) {
+		this.productSuffix = productSuffix;
 	}
 
 }
