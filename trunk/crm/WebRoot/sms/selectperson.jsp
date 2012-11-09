@@ -86,7 +86,7 @@
 				<div class="top">
 					<select id="ui-fs-friendtype">
 						<option value="-1">
-							所有好友
+							所有人员
 						</option>
 					</select>
 					<!-- div class="close" title="关闭">关闭</div> -->
