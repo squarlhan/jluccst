@@ -27,7 +27,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>客户档案管理</title>
-<link type="text/css" rel="stylesheet" href="../style.css" />
+<link type="text/css" rel="stylesheet" href="../css/style.css" />
 <style type="text/css">
 <!--
 body {
@@ -68,7 +68,6 @@ background-color:#d3eaef}
 }
 -->
 </style>
-<link rel="StyleSheet" href="tree.css" type="text/css">
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="expires" content="0">    
@@ -102,7 +101,7 @@ background-color:#d3eaef}
 					window.location.href="./customerList.action";
 				});*/
 				//window.parent.location.href = "customerTabInfo.action";
-				form1.action = "customerList.action";
+				form1.action = "autoAnalysisCustomerList.action";
 				form1.submit();
 		
 			});
@@ -161,23 +160,28 @@ background-color:#d3eaef}
 	</script>
 
 <body>
-
+ <s:form id="form1" name="form1" method="post" theme="simple">
 <table width="100%" >
 
 <!--总框架下的第二行（第一列），查询条件与按钮-->
 <tr><td><table border="0" cellpadding="5" cellspacing="0">
+	 <tr>
+        <td>
+            <input name="deletepointbtn" type="button" class="btn_4" id="deletepointbtn" value="删除所选">
+        <td align="right"></td>
+      </tr>
+      
+      <tr><td><table border="0" cellpadding="5" cellspacing="0">
 	<tr>  		
 		<td></td>
-		<td align="center">客户名称</td>
-		<td><input type="text" /></td>
-		<td></td>
-		<td><!-- <input name="addbtn" type="button" class="btn_4" id="addbtn" value="添加客户" > -->
-		<input name="deletepointbtn" type="button" class="btn_4" id="deletepointbtn" value="删除所选" >
-        </td>
+		<td align="center">客户名称：</td>
+		<td >
+		<s:textfield name="customerName" id="customerName" style="width: 100px"></s:textfield></td>
+		<td align="center">联 系 人：</td>
+		<td><s:textfield name="contractorName" id="contractorName" style="width: 100px"></s:textfield></td>
+		<td style="width: 80px"><input type="button" style="width: 80px;" class="btn_4" id="searchBtn" value="快速查询" /></td>
 	</tr>
-</table></td></tr>
-<!--总框架下的第二行（第一列），查询条件与按钮   结束！-->
-<!--总第三行第一列,表格主体-->
+</table></td></tr></table></td></tr>
 <tr><td><table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#d5e4fd">
 	<tr>
 		<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg'); width: 90px;"></td>
@@ -223,5 +227,6 @@ background-color:#d3eaef}
         </tr>
 </table></td></tr>
 </table>
+</s:form>
 </body>
 </html>
