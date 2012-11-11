@@ -46,41 +46,71 @@
 		  		$.fn.close();
 		  		$.fn.initpage();
 		  		
-		  		loadFuzzy($("#fuzzyCategory"),$("#ifFuzzyId"));
+		  		loadFuzzy($("#fuzzyCategory"),$("#ifFuzzyId"),0);
 		  		
 		  		if($("#fuzzyCategory1").val() != "")
 		  		{
-		  			loadFuzzy($("#fuzzyCategory1"),$("#ifFuzzyId1"));
+		  			loadFuzzy($("#fuzzyCategory1"),$("#ifFuzzyId1"),1);
 		  		}
 		  		if($("#fuzzyCategory2").val() != "")
 		  		{
-		  			loadFuzzy($("#fuzzyCategory2"),$("#ifFuzzyId2"));
+		  			loadFuzzy($("#fuzzyCategory2"),$("#ifFuzzyId2"),2);
 		  		}
 		  		if($("#fuzzyCategory3").val() != "")
 		  		{
-		  			loadFuzzy($("#fuzzyCategory3"),$("#ifFuzzyId3"));
+		  			loadFuzzy($("#fuzzyCategory3"),$("#ifFuzzyId3"),3);
 		  		}
 		  		if($("#fuzzyCategory4").val() != "")
 		  		{
-		  			loadFuzzy($("#fuzzyCategory4"),$("#ifFuzzyId4"));
+		  			loadFuzzy($("#fuzzyCategory4"),$("#ifFuzzyId4"),4);
 		  		}
 		  		$("#fuzzyCategory").change(function() {
-	                loadFuzzy($("#fuzzyCategory"),$("#ifFuzzyId"));
+	                loadFuzzy2($("#fuzzyCategory"),$("#ifFuzzyId"));
 	            });
 		  		
 		  		$("#fuzzyCategory1").change(function() {
-	                loadFuzzy($("#fuzzyCategory1"),$("#ifFuzzyId1"));
+	                loadFuzzy2($("#fuzzyCategory1"),$("#ifFuzzyId1"));
 	            });
 		  		$("#fuzzyCategory2").change(function() {
-	                loadFuzzy($("#fuzzyCategory2"),$("#ifFuzzyId2"));
+	                loadFuzzy2($("#fuzzyCategory2"),$("#ifFuzzyId2"));
 	            });
 		  		$("#fuzzyCategory3").change(function() {
-	                loadFuzzy($("#fuzzyCategory3"),$("#ifFuzzyId3"));
+	                loadFuzzy2($("#fuzzyCategory3"),$("#ifFuzzyId3"));
 	            });
 		  		$("#fuzzyCategory4").change(function() {
-	                loadFuzzy($("#fuzzyCategory4"),$("#ifFuzzyId4"));
+	                loadFuzzy2($("#fuzzyCategory4"),$("#ifFuzzyId4"));
 	            });
-		  		function loadFuzzy(obj,obj2) {
+		  		function loadFuzzy(obj,obj2,num) {
+	                $.ajax({
+	                    url:"<%=basePath%>fuzzy/fuzzyinfoservice.action?fuzzyCategory=" + obj.val(),
+	                    type: 'POST',
+	                    dataType: 'JSON',
+	                    timeout: 1000,
+	                    error: function(XMLHttpRequest, textStatus, errorThrown) { 
+	                    	   alert(XMLHttpRequest.status);
+						       alert(XMLHttpRequest.readyState);
+						       alert(textStatus);
+						 },
+	                    success: function(msg) {
+	                    	obj2.empty();
+	                        $.each(eval(msg), function(i, item) {
+	                            $("<option value='" + item.id + "'>" + item.name + "</option>").appendTo(obj2);
+	                        });
+	                        obj2.val('<s:property value="ifFuzzyId" />');
+	                        
+	                        if(num == 1)
+	                        	obj2.val('<s:property value="ifFuzzyId1" />');
+	                        if(num == 2)
+	                        	obj2.val('<s:property value="ifFuzzyId2" />');
+	                        if(num == 3)
+	                        	obj2.val('<s:property value="ifFuzzyId3" />');
+	                        if(num == 4)
+	                        	obj2.val('<s:property value="ifFuzzyId4" />');
+	                    }
+	                });
+	            }
+		  		
+		  		function loadFuzzy2(obj,obj2) {
 	                $.ajax({
 	                    url:"<%=basePath%>fuzzy/fuzzyinfoservice.action?fuzzyCategory=" + obj.val(),
 	                    type: 'POST',
@@ -92,8 +122,6 @@
 	                        $.each(eval(msg), function(i, item) {
 	                            $("<option value='" + item.id + "'>" + item.name + "</option>").appendTo(obj2);
 	                        });
-	                        
-	                        obj2.val('<s:property value="ruleInfo.ifFuzzyId" />');
 	                    }
 	                });
 	            }
