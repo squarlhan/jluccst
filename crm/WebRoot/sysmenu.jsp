@@ -571,7 +571,7 @@
 						</tr>
 						<%} %>
 						<%
-							b = false; //!popedomService.isHasPopedom(us.getUserId(), String.valueOf(us.getUserType()), MenuKey.HUI_FANG_CHA_XUN, us.getPopedomKeys());
+							b = true; //!popedomService.isHasPopedom(us.getUserId(), String.valueOf(us.getUserType()), MenuKey.HUI_FANG_CHA_XUN, us.getPopedomKeys());
 							if (b) {
 						%>
 						<tr>
@@ -580,7 +580,7 @@
 									<tr>
 										<td width="40" align="right" style="padding-bottom: 4px;"><img src="images/menuto.jpg" width="5" height="5" />
 										</td>
-										<td><a href="customer/analysisResult.action" target="mainFrame">评估结果</a>
+										<td><a href="customeranalysis/autoanalysisusermanage.jsp" target="mainFrame">评估结果</a>
 										</td>
 									</tr>
 								</table>
