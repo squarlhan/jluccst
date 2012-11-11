@@ -37,14 +37,14 @@ public class FuzzyRuleInfoServiceImpl implements IFuzzyRuleInfoService{
 	public List<IdCaption> findAllFuzzyRuleInfo()
 	{
 		StringBuilder hql = new StringBuilder();
-		hql.append( "select new com.boan.crm.customer.analysis.model.IdCaption(t.resultFuzzyId,t.resultFuzzyName) from RuleInfo t group by t.resultFuzzyId,t.resultFuzzyName ");
-		hql.append(" order by resultFuzzyId asc");
+		hql.append( "select new com.boan.crm.customer.analysis.model.IdCaption(t.groupId,t.resultFuzzyName) from RuleInfo t group by t.groupId,t.resultFuzzyName ");
+		hql.append(" order by groupId asc");
 		List<IdCaption> data = fuzzyRuleInfoDao.find(hql.toString(),new Object[0]);
 		if(data != null && data.size() > 0)
 		{
 			for(int i=0;i<data.size();i++)
 			{
-				List<RuleInfo> list = findAllFuzzyRuleInfoByResultId(data.get(i).getIId());
+				List<RuleInfo> list = findAllFuzzyRuleInfoByGroupId(data.get(i).getIId());
 				if(list != null && list.size() >0)
 				{
 					for(int j=0;j<list.size();j++)
@@ -63,14 +63,14 @@ public class FuzzyRuleInfoServiceImpl implements IFuzzyRuleInfoService{
 	public Pagination<IdCaption> findAllFuzzyRuleResultInfo(Map<String, ?> values,Pagination<IdCaption> pagination)
 	{
 		StringBuilder hql = new StringBuilder();
-		hql.append( "select new com.boan.crm.customer.analysis.model.IdCaption(t.resultFuzzyId,t.resultFuzzyName) from RuleInfo t where t.companyId = :companyId group by t.resultFuzzyId,t.resultFuzzyName ");
-		hql.append(" order by resultFuzzyId asc");
+		hql.append( "select new com.boan.crm.customer.analysis.model.IdCaption(t.groupId,t.resultFuzzyName) from RuleInfo t where t.companyId = :companyId group by t.groupId,t.resultFuzzyName");
+		hql.append(" order by groupId asc");
 		List<IdCaption> data = fuzzyRuleInfoDao.findForPage(hql.toString(), values, pagination.getStartIndex(), pagination.getPageSize());
 		if(data != null && data.size() > 0)
 		{
 			for(int i=0;i<data.size();i++)
 			{
-				List<RuleInfo> list = findAllFuzzyRuleInfoByResultId(data.get(i).getIId());
+				List<RuleInfo> list = findAllFuzzyRuleInfoByGroupId(data.get(i).getIId());
 				if(list != null && list.size() >0)
 				{
 					for(int j=0;j<list.size();j++)
@@ -82,7 +82,7 @@ public class FuzzyRuleInfoServiceImpl implements IFuzzyRuleInfoService{
 			}
 		}
 		hql.delete(0, hql.length());
-		hql.append(" select Count(t.resultFuzzyId) from RuleInfo t where t.companyId = :companyId group by t.resultFuzzyId,t.resultFuzzyName" );
+		hql.append(" select Count(t.groupId) from RuleInfo t where t.companyId = :companyId group by t.groupId" );
 		List<Integer> list = fuzzyRuleInfoDao.find(hql.toString(), values);
 		int totalRows = 0;
 		if(list != null && list.size() > 0)
@@ -103,6 +103,16 @@ public class FuzzyRuleInfoServiceImpl implements IFuzzyRuleInfoService{
 		values.put("resultFuzzyId", resultId);
 		return fuzzyRuleInfoDao.find("from RuleInfo where resultFuzzyId = :resultFuzzyId", values);
 	}
+	
+	/**
+	 * 根据分类获取规则
+	 */
+	public List<RuleInfo> findAllFuzzyRuleInfoByGroupId(int groupId)
+	{
+		Map<String ,Integer > values = new HashMap<String ,Integer>();
+		values.put("groupId", groupId);
+		return fuzzyRuleInfoDao.find("from RuleInfo where groupId = :groupId", values);
+	}
 	/**
 	 * 根据id获取模糊项
 	 */
@@ -114,9 +124,12 @@ public class FuzzyRuleInfoServiceImpl implements IFuzzyRuleInfoService{
 	/**
 	 * 根据id删除模糊项
 	 */
-	public void deleteFuzzyRuleInfo(Integer... ids)
+	public void deleteFuzzyRuleInfo(String... ids)
 	{
-		fuzzyRuleInfoDao.delete(ids);
+		for(int i=0;i< ids.length;i++)
+		{
+			deleteFuzzyRuleInfoByGroupId(Integer.parseInt(ids[i]));
+		}
 	}
 	
 	/**
@@ -127,6 +140,15 @@ public class FuzzyRuleInfoServiceImpl implements IFuzzyRuleInfoService{
 		Map<String ,Integer > values = new HashMap<String ,Integer>();
 		values.put("resultFuzzyId", resultId);
 		fuzzyRuleInfoDao.executeHql("delete from RuleInfo where resultFuzzyId = :resultFuzzyId", values);
+	}
+	/**
+	 * 根据resultId删除规则
+	 */
+	public void deleteFuzzyRuleInfoByGroupId(int groupId)
+	{
+		Map<String ,Integer > values = new HashMap<String ,Integer>();
+		values.put("groupId", groupId);
+		fuzzyRuleInfoDao.executeHql("delete from RuleInfo where groupId = :groupId", values);
 	}
 
 	/**

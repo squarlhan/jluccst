@@ -48,7 +48,7 @@ public class FuzzyRuleInfoAction extends BaseActionSupport{
 	private RuleInfo ruleInfo ;
 	
 	private int id = 0;
-	private Integer[] ids = null;
+	private String[] ids = null;
 	
 	private String ruleName = "";
 	private List<IdCaption> categoryList = null;
@@ -58,11 +58,28 @@ public class FuzzyRuleInfoAction extends BaseActionSupport{
 	private String message = "";
 	private List<RuleInfo> listRuleInfo = null;
 	
+	private String ifFuzzyCategory = "";
 	private String ifFuzzyCategory1 = "";
 	private String ifFuzzyCategory2 = "";
 	private String ifFuzzyCategory3 = "";
 	private String ifFuzzyCategory4 = "";
-	
+	private int ifFuzzyId = 0;
+	public String getIfFuzzyCategory() {
+		return ifFuzzyCategory;
+	}
+
+	public void setIfFuzzyCategory(String ifFuzzyCategory) {
+		this.ifFuzzyCategory = ifFuzzyCategory;
+	}
+
+	public int getIfFuzzyId() {
+		return ifFuzzyId;
+	}
+
+	public void setIfFuzzyId(int ifFuzzyId) {
+		this.ifFuzzyId = ifFuzzyId;
+	}
+
 	private int ifFuzzyId1 = 0;
 	private int ifFuzzyId2 = 0;
 	private int ifFuzzyId3 = 0;
@@ -89,11 +106,14 @@ public class FuzzyRuleInfoAction extends BaseActionSupport{
 	 */
 	public String fuzzyRuleInfo()
 	{
-		List<RuleInfo> ruleList = fuzzyRuleInfoService.findAllFuzzyRuleInfoByResultId(id);
+		List<RuleInfo> ruleList = fuzzyRuleInfoService.findAllFuzzyRuleInfoByGroupId(id);
 		
 		if(ruleList != null && ruleList.size() > 0)
 		{
 			ruleInfo = ruleList.get(0);
+			ifFuzzyCategory = ruleInfo.getFuzzyCategory();
+			ifFuzzyId = ruleInfo.getIfFuzzyId();
+			
 			if(ruleList.size() == 2)
 			{
 				ifFuzzyCategory1 = ruleList.get(1).getFuzzyCategory();
@@ -101,16 +121,33 @@ public class FuzzyRuleInfoAction extends BaseActionSupport{
 			}
 			if(ruleList.size() == 3)
 			{
+				ifFuzzyCategory1 = ruleList.get(1).getFuzzyCategory();
+				ifFuzzyId1 = ruleList.get(1).getIfFuzzyId();
+				
 				ifFuzzyCategory2 = ruleList.get(2).getFuzzyCategory();
 				ifFuzzyId2 = ruleList.get(2).getIfFuzzyId();
 			}
 			if(ruleList.size() == 4)
 			{
+				ifFuzzyCategory1 = ruleList.get(1).getFuzzyCategory();
+				ifFuzzyId1 = ruleList.get(1).getIfFuzzyId();
+				
+				ifFuzzyCategory2 = ruleList.get(2).getFuzzyCategory();
+				ifFuzzyId2 = ruleList.get(2).getIfFuzzyId();
+				
 				ifFuzzyCategory3 = ruleList.get(3).getFuzzyCategory();
 				ifFuzzyId3 = ruleList.get(3).getIfFuzzyId();
 			}
 			if(ruleList.size() == 5)
 			{
+				ifFuzzyCategory1 = ruleList.get(1).getFuzzyCategory();
+				ifFuzzyId1 = ruleList.get(1).getIfFuzzyId();
+				
+				ifFuzzyCategory2 = ruleList.get(2).getFuzzyCategory();
+				ifFuzzyId2 = ruleList.get(2).getIfFuzzyId();
+				
+				ifFuzzyCategory3 = ruleList.get(3).getFuzzyCategory();
+				ifFuzzyId3 = ruleList.get(3).getIfFuzzyId();
 				ifFuzzyCategory4 = ruleList.get(4).getFuzzyCategory();
 				ifFuzzyId4 = ruleList.get(4).getIfFuzzyId();
 			}
@@ -133,7 +170,9 @@ public class FuzzyRuleInfoAction extends BaseActionSupport{
 	 */
 	public String saveRule()
 	{
-		fuzzyRuleInfoService.deleteFuzzyRuleInfoByResultId(ruleInfo.getResultFuzzyId());
+		if(id != 0)
+			fuzzyRuleInfoService.deleteFuzzyRuleInfoByGroupId(id);
+		
 		RuleInfo obj = new RuleInfo();
 		String resultFuzzyName = fuzzyInfoService.get(ruleInfo.getResultFuzzyId()).getFuzzyName();
 		obj.setFuzzyCategory(ruleInfo.getFuzzyCategory());
@@ -143,6 +182,11 @@ public class FuzzyRuleInfoAction extends BaseActionSupport{
 		obj.setResultFuzzyName(resultFuzzyName);
 		obj.setCompanyId(sessionCompanyId);
 		fuzzyRuleInfoService.save(obj);
+		
+		int groupId = obj.getId();
+		obj.setGroupId(groupId);
+		fuzzyRuleInfoService.save(obj);
+		
 		if(ifFuzzyCategory1 != null && ifFuzzyCategory1.length() > 0)
 		{
 			obj = new RuleInfo();
@@ -153,6 +197,7 @@ public class FuzzyRuleInfoAction extends BaseActionSupport{
 			obj.setResultFuzzyId(ruleInfo.getResultFuzzyId());
 			obj.setResultFuzzyName(resultFuzzyName);
 			obj.setCompanyId(sessionCompanyId);
+			obj.setGroupId(groupId);
 			fuzzyRuleInfoService.save(obj);
 		}
 		if(ifFuzzyCategory2 != null && ifFuzzyCategory2.length() > 0)
@@ -165,6 +210,7 @@ public class FuzzyRuleInfoAction extends BaseActionSupport{
 			obj.setResultFuzzyId(ruleInfo.getResultFuzzyId());
 			obj.setResultFuzzyName(resultFuzzyName);
 			obj.setCompanyId(sessionCompanyId);
+			obj.setGroupId(groupId);
 			fuzzyRuleInfoService.save(obj);
 		}
 		if(ifFuzzyCategory3 != null && ifFuzzyCategory3.length() > 0)
@@ -177,6 +223,7 @@ public class FuzzyRuleInfoAction extends BaseActionSupport{
 			obj.setResultFuzzyId(ruleInfo.getResultFuzzyId());
 			obj.setResultFuzzyName(resultFuzzyName);
 			obj.setCompanyId(sessionCompanyId);
+			obj.setGroupId(groupId);
 			fuzzyRuleInfoService.save(obj);
 		}
 		if(ifFuzzyCategory4 != null && ifFuzzyCategory4.length() > 0)
@@ -189,10 +236,11 @@ public class FuzzyRuleInfoAction extends BaseActionSupport{
 			obj.setResultFuzzyId(ruleInfo.getResultFuzzyId());
 			obj.setResultFuzzyName(resultFuzzyName);
 			obj.setCompanyId(sessionCompanyId);
+			obj.setGroupId(groupId);
 			fuzzyRuleInfoService.save(obj);
 		}
-		id = obj.getResultFuzzyId();
 		
+		message = "保存成功！";
 		return SUCCESS;
 	}
 	/**
@@ -210,10 +258,10 @@ public class FuzzyRuleInfoAction extends BaseActionSupport{
 	public void setId(int id) {
 		this.id = id;
 	}
-	public Integer[] getIds() {
+	public String[] getIds() {
 		return ids;
 	}
-	public void setIds(Integer[] ids) {
+	public void setIds(String[] ids) {
 		this.ids = ids;
 	}
 	public String getMessage() {

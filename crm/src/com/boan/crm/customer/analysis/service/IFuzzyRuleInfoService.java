@@ -26,6 +26,10 @@ public interface IFuzzyRuleInfoService {
 	/**
 	 * 根据分类获取规则
 	 */
+	public List<RuleInfo> findAllFuzzyRuleInfoByGroupId(int groupId);
+	/**
+	 * 根据分类获取规则
+	 */
 	public Pagination<IdCaption> findAllFuzzyRuleResultInfo(Map<String, ?> values,Pagination<IdCaption> pagination);
 
 	/**
@@ -36,13 +40,16 @@ public interface IFuzzyRuleInfoService {
 	/**
 	 * 根据id删除规则
 	 */
-	public void deleteFuzzyRuleInfo(Integer... ids);
+	public void deleteFuzzyRuleInfo(String... ids);
 	
 	/**
 	 * 根据resultId删除规则
 	 */
 	public void deleteFuzzyRuleInfoByResultId(int resultId);
-
+	/**
+	 * 根据groupId删除规则
+	 */
+	public void deleteFuzzyRuleInfoByGroupId(int groupId);
 	/**
 	 * 保存规则
 	 */

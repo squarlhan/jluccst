@@ -47,6 +47,14 @@ public class RuleInfo implements Serializable
 	private int ifFuzzyId = 0;
 	@Column(name = "COMPANY_ID")
 	private String companyId = "";
+	@Column(name = "group_ID")
+	private int groupId = 0;
+	public int getGroupId() {
+		return groupId;
+	}
+	public void setGroupId(int groupId) {
+		this.groupId = groupId;
+	}
 	public String getCompanyId() {
 		return companyId;
 	}
