@@ -82,7 +82,7 @@ public class SchedulerTask {
 			}
 			
 			//调用自动评估接口
-			autoAssessmentSettingService.autoAssessment(companyId, Calendar.getInstance());
+			autoAssessmentSettingService.saveAutoAssessment(companyId, Calendar.getInstance());
 			
 		}
 		companyList = null;
