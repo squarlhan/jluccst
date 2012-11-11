@@ -1,6 +1,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%@ taglib prefix="j" uri="/script-tags"%>
+<%@ taglib prefix="page" uri="/page-tags"%> 
 <%
 	String path = request.getContextPath();
 	String basePath = request.getScheme() + "://"
@@ -121,7 +122,7 @@
 								</tr>
 							</s:iterator>
 							<tr>
-					          <td height="26" colspan="11" align="center" bgcolor="#FFFFFF">
+					          <td height="26" colspan="3" align="center" bgcolor="#FFFFFF">
 								<page:pages currentPage="pagination.currentPage" totalPages="pagination.totalPages" totalRows="pagination.totalRows" styleClass="page" theme="text" ></page:pages> 
 							  </td>
 					        </tr>
