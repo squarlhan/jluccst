@@ -5,7 +5,6 @@ package com.boan.crm.customerassessment.service.impl;
 
 import java.math.BigDecimal;
 import java.text.NumberFormat;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
@@ -18,8 +17,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.boan.crm.customer.analysis.model.AnalysisCustomer;
-import com.boan.crm.customer.analysis.service.IAnalysisEngineService;
-import com.boan.crm.customer.dao.IContractPersonDAO;
 import com.boan.crm.customer.model.CustomerInfo;
 import com.boan.crm.customer.service.ICustomerInfoService;
 import com.boan.crm.customerassessment.dao.IAutoAssessmentSettingDAO;
@@ -46,9 +43,11 @@ public class AutoAssessmentSettingServiceImpl implements IAutoAssessmentSettingS
 	private ICustomerInfoService customerInfoService;
 	@Resource
 	private ISellRecordService sellRecordService;
-	@Resource
+	@Autowired
+	@Qualifier("customerAssessmentService")
 	private ICustomerAssessmentService customerAssessmentService;
-	@Resource
+	@Autowired
+	@Qualifier("autoCustomerAssessmentService")
 	private IAutoCustomerAssessmentService autoCustomerAssessmentService;
 	/**
 	 * 根据客户id删除联系人
@@ -72,7 +71,7 @@ public class AutoAssessmentSettingServiceImpl implements IAutoAssessmentSettingS
 	 * @param companyId
 	 * @param t
 	 */
-	public void autoAssessment(String companyId,Calendar t)
+	public void saveAutoAssessment(String companyId,Calendar t)
 	{
 		AutoAssessmentSetting setting = findAutoAssessmentSettingByCompanyId(companyId);
 		if(setting != null)
@@ -91,7 +90,7 @@ public class AutoAssessmentSettingServiceImpl implements IAutoAssessmentSettingS
 					if(t.get(Calendar.YEAR) == t2.get(Calendar.YEAR) && t.get(Calendar.MONTH) == t2.get(Calendar.MONTH) && t.get(Calendar.DATE) == t2.get(Calendar.DATE) && t.get(Calendar.HOUR_OF_DAY) == t2.get(Calendar.HOUR_OF_DAY)&& t.get(Calendar.MINUTE) == t2.get(Calendar.MINUTE))
 					{
 						System.out.println("=====按每天执行自动评估！");
-						autoAssessmentByCompany( setting ,companyId);
+						saveAutoAssessmentByCompany( setting ,companyId);
 					}
 				}else if(setting.getOptions() == 2)
 				{
@@ -107,6 +106,7 @@ public class AutoAssessmentSettingServiceImpl implements IAutoAssessmentSettingS
 						if(t.get(Calendar.YEAR) == t2.get(Calendar.YEAR) && t.get(Calendar.MONTH) == t2.get(Calendar.MONTH) && t.get(Calendar.DATE) == t2.get(Calendar.DATE) && t.get(Calendar.HOUR_OF_DAY) == t2.get(Calendar.HOUR_OF_DAY)&& t.get(Calendar.MINUTE) == t2.get(Calendar.MINUTE))
 						{
 							System.out.println("=====按周执行自动评估！");
+							saveAutoAssessmentByCompany( setting ,companyId);
 						}
 					}
 					
@@ -124,6 +124,7 @@ public class AutoAssessmentSettingServiceImpl implements IAutoAssessmentSettingS
 						if(t.get(Calendar.YEAR) == t2.get(Calendar.YEAR) && t.get(Calendar.MONTH) == t2.get(Calendar.MONTH) && t.get(Calendar.DATE) == t2.get(Calendar.DATE) && t.get(Calendar.HOUR_OF_DAY) == t2.get(Calendar.HOUR_OF_DAY)&& t.get(Calendar.MINUTE) == t2.get(Calendar.MINUTE))
 						{
 							System.out.println("=====按月执行自动评估！");
+							saveAutoAssessmentByCompany( setting ,companyId);
 						}
 					}
 				}
@@ -135,7 +136,7 @@ public class AutoAssessmentSettingServiceImpl implements IAutoAssessmentSettingS
 	 * @param setting
 	 * @param companyId
 	 */
-	private void autoAssessmentByCompany(AutoAssessmentSetting setting,String companyId)
+	private void saveAutoAssessmentByCompany(AutoAssessmentSetting setting,String companyId)
 	{
 		List<CustomerInfo> listCustomer = customerInfoService.findAllCustomerInfoByCompanyId(companyId);
 		if(listCustomer != null  && listCustomer.size() > 0)
@@ -228,7 +229,10 @@ public class AutoAssessmentSettingServiceImpl implements IAutoAssessmentSettingS
 				if(assessmentResult != null)
 				{
 					autoCustomerAssessment.setResult(assessmentResult.getResult());
-					autoCustomerAssessment.setResultValue(assessmentResult.getResultValue());
+					Double value = assessmentResult.getResultValue();
+					BigDecimal b = new BigDecimal(value);  
+					value = b.setScale(2,   BigDecimal.ROUND_HALF_UP).doubleValue();  
+					autoCustomerAssessment.setResultValue(value);
 				}
 				
 				autoCustomerAssessmentService.save(autoCustomerAssessment);
