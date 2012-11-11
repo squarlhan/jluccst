@@ -139,6 +139,8 @@ background-color:#d3eaef}
 	  		 */
 	  		$('a[name="static"]').each(function(){
 	  			$(this).click(function(){
+	  				alert("正在开发中。。。");
+	  				return;
 	  				var url = $(this).attr("static_url");
 	  				parent.parent.tipsWindown("客户统计信息","iframe:"+url,"460","200","true","","true","no");
 	  				parent.parent.$("#windown-close").bind('click',function(){
@@ -165,12 +167,12 @@ background-color:#d3eaef}
 
 <!--总框架下的第二行（第一列），查询条件与按钮-->
 <tr><td><table border="0" cellpadding="5" cellspacing="0">
-	 <tr>
+	<!--  <tr>
         <td>
             <input name="deletepointbtn" type="button" class="btn_4" id="deletepointbtn" value="删除所选">
         <td align="right"></td>
       </tr>
-      
+       -->
       <tr><td><table border="0" cellpadding="5" cellspacing="0">
 	<tr>  		
 		<td></td>
@@ -184,8 +186,9 @@ background-color:#d3eaef}
 </table></td></tr></table></td></tr>
 <tr><td><table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#d5e4fd">
 	<tr>
+	<!-- 
 		<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg'); width: 90px;"></td>
-		<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">客户名称</td>
+		 --><td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">客户名称</td>
 		<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">消费额度</td>
 		<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">消费次数</td>
 		<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">转介绍客户情况</td>
@@ -197,9 +200,10 @@ background-color:#d3eaef}
 	</tr>
 	<s:iterator value="pagination.data" status="obj">
         <tr>
-        <td height="26" align="center" bgcolor="#FFFFFF" >  
+        <!-- 
+        	<td height="26" align="center" bgcolor="#FFFFFF" >  
 				<s:checkbox id="%{#obj.id}" name="ids" fieldValue="%{id}" value="false" theme="simple"/>
-			</td>
+			</td> -->
             <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="customerName"/></td>
             <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="totalConsumption"/></td>
             <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="consumptionTimes"/></td>
@@ -216,7 +220,9 @@ background-color:#d3eaef}
 				<s:url id="delete_url" action="deleteAnalysisCustomer">   
 					<s:param name="ids" value="id"></s:param>   
 				</s:url>
+				<!-- 
 	         	<a name="delete" href="javascript:void(0);" url="${delete_url}">删除</a>  
+	           -->
 	          </td>
         </tr>
         </s:iterator>        
