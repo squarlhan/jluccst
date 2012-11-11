@@ -31,7 +31,7 @@ public interface IAutoAssessmentSettingService {
 	 * @param companyId
 	 * @param t
 	 */
-	public void autoAssessment(String companyId,Calendar t);
+	public void saveAutoAssessment(String companyId,Calendar t);
 	/**
 	 * 保存设置
 	 * @param autoAssessmentSetting

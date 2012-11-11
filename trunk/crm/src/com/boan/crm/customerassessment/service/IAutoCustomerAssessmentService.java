@@ -7,11 +7,7 @@ package com.boan.crm.customerassessment.service;
 import java.util.List;
 import java.util.Map;
 
-import com.boan.crm.customer.analysis.model.AnalysisCustomer;
-import com.boan.crm.customer.model.ContractPersonInfo;
-import com.boan.crm.customerassessment.model.AutoAssessmentSetting;
 import com.boan.crm.customerassessment.model.AutoCustomerAssessment;
-import com.boan.crm.customerassessment.model.CustomerAssessment;
 import com.boan.crm.utils.page.Pagination;
 
 /**
@@ -30,7 +26,7 @@ public interface IAutoCustomerAssessmentService {
 	 * @param companyId
 	 * @return List<AutoAssessmentSetting>
 	 */
-	public Pagination<AutoCustomerAssessment> findAutoCustomerAssessmentByCompanyId(String companyId,Pagination<AutoCustomerAssessment> pagination);
+	public Pagination<AutoCustomerAssessment> findAutoCustomerAssessmentByCompanyId(Map<String,String> values,Pagination<AutoCustomerAssessment> pagination);
 	/**
 	 * 保存
 	 * @param autoAssessmentSetting

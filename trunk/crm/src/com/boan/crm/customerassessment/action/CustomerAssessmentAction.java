@@ -6,10 +6,14 @@ package com.boan.crm.customerassessment.action;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
@@ -22,6 +26,9 @@ import com.boan.crm.customerassessment.model.CustomerAssessment;
 import com.boan.crm.customerassessment.service.IAutoAssessmentSettingService;
 import com.boan.crm.customerassessment.service.IAutoCustomerAssessmentService;
 import com.boan.crm.customerassessment.service.ICustomerAssessmentService;
+import com.boan.crm.datadictionary.model.DataDictionary;
+import com.boan.crm.datadictionary.service.IDataDictionaryService;
+import com.boan.crm.groupmanage.model.User;
 import com.boan.crm.sellrecord.service.ISellRecordService;
 import com.boan.crm.utils.action.BaseActionSupport;
 import com.boan.crm.utils.calendar.CalendarUtils;
@@ -52,7 +59,9 @@ public class CustomerAssessmentAction extends BaseActionSupport{
 	private IAutoAssessmentSettingService autoAssessmentSettingService;
 	@Resource
 	private IAutoCustomerAssessmentService autoCustomerAssessmentService;
-	
+	@Autowired
+	@Qualifier("dataDictionaryService")
+	private IDataDictionaryService dataDictionaryService = null;
 	
 	private String customerIds = null;
 	private	List<CustomerAssessment> listResult = null;
@@ -65,7 +74,43 @@ public class CustomerAssessmentAction extends BaseActionSupport{
 	private String optionFlag = "";
 	private String customerId ="";
 	private String customerName = "";
+	private List<DataDictionary> listCategory = null;
+	public List<DataDictionary> getListCategory() {
+		return listCategory;
+	}
+	public void setListCategory(List<DataDictionary> listCategory) {
+		this.listCategory = listCategory;
+	}
+	public String getContractorName() {
+		return contractorName;
+	}
+	public void setContractorName(String contractorName) {
+		this.contractorName = contractorName;
+	}
+	public String getCustomerCategory() {
+		return customerCategory;
+	}
+	public void setCustomerCategory(String customerCategory) {
+		this.customerCategory = customerCategory;
+	}
+	public String getSalesmanId() {
+		return salesmanId;
+	}
+	public void setSalesmanId(String salesmanId) {
+		this.salesmanId = salesmanId;
+	}
+	public List<User> getUserList() {
+		return userList;
+	}
+	public void setUserList(List<User> userList) {
+		this.userList = userList;
+	}
 	private String chkAllCustomer = "";
+	private String contractorName = "";
+	private String customerCategory = "";
+	private String salesmanId = "";
+	private List<User> userList = null;
+	
 	private String[] ids = null;
 	public String[] getIds() {
 		return ids;
@@ -348,7 +393,21 @@ public class CustomerAssessmentAction extends BaseActionSupport{
 	}
 	public String autoAnalysisCustomerList()
 	{
-		pagination = autoCustomerAssessmentService.findAutoCustomerAssessmentByCompanyId(sessionCompanyId, pagination);
+		//客户分类： 传0
+		listCategory = dataDictionaryService.findDataDictionaryByType(sessionCompanyId, 0);
+		Map<String,String> values = new HashMap<String,String>();
+		
+		if(customerName != null && customerName.length() > 0)
+		{
+			values.put("customerName", "%"+customerName+"%");
+		}
+		if(contractorName != null && contractorName.length() > 0)
+		{
+			values.put("contractorName", "%"+contractorName+"%");
+		}
+		
+		values.put("companyId", sessionCompanyId);
+		pagination = autoCustomerAssessmentService.findAutoCustomerAssessmentByCompanyId(values, pagination);
 		
 		return SUCCESS;
 	}
