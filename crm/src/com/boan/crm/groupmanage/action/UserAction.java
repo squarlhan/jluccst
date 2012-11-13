@@ -132,17 +132,18 @@ public class UserAction extends BaseActionSupport {
 				user.setPassword(md5);
 			}
 			user.setCompanyId(companyId);
-			boolean newUserFlag = false;
 			if (StringUtils.isBlank(user.getId())) {
-				newUserFlag = true;
 				userService.saveOrUpdateUser(user);
 			} else {
-				newUserFlag = false;
 				userService.saveOrUpdateUser(oldUser);
 			}
+			boolean newUserFlag = false;
 			SMSCustomerInfo smsUser = smsService.getSMSCustomerInfoByCustomerId(user.getId());
 			if (smsUser == null) {
+				newUserFlag = true;
 				smsUser = new SMSCustomerInfo();
+			}else{
+				newUserFlag = false;
 			}
 			smsUser.setCustomerId(user.getId());
 			smsUser.setCategoryId("2");
