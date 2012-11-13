@@ -29,6 +29,12 @@
 		<title>公司信息管理</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<j:scriptlink  css="true" jmessagebox="true" jquery="true" tipswindow="true" validate="true"/>
+		<link rel="stylesheet" media="all" type="text/css" href="<%=path %>/js/timepicke/jquery-ui-1.7.3.custom.css" />
+		<link rel="stylesheet" media="all" type="text/css" href="<%=path %>/js/timepicke/jquery-ui-timepicker-addon.css" />
+		<script type="text/javascript" src="<%=path %>/js/timepicke/jquery-ui-1.7.3.custom.min.js"></script>
+		<script type="text/javascript" src="<%=path %>/js/timepicke/jquery-ui-timepicker-addon.js"></script>
+		<script type="text/javascript" src="<%=path %>/js/timepicke/jquery-ui-timepicker-zh-CN.js"></script>
+		<script type="text/javascript" src="<%=path %>/js/timepicke/jquery-ui-sliderAccess.js"></script>
 		<script type="text/javascript">
 			/**
 		  	 * 验证条件
@@ -60,6 +66,7 @@
 				})
 				$.fn.save();
 		  		$.fn.close();
+		  		$.fn.cleartxt();
 		  		$.fn.initpage();
 		  	});
 			/**
@@ -90,11 +97,20 @@
 		  			parent.$("#windown-close").click();
 		  		});
 			}
+		 	/**
+			 * 清空
+			 */
+		 	$.fn.cleartxt = function(){
+		 		$("#clearBtn").click(function(){
+		 			$("#serviceTerm").val('');
+		  		});
+			}
 			/**
 			 * 初始化页面
 			 */
 			$.fn.initpage = function(){
 				$("#txt_companyName").focus();
+				$('#serviceTerm').datetimepicker({showTimepicker: false});
 			}
 		</script>
 	</head>
@@ -184,6 +200,15 @@
 											<s:if test='company.smsActivationStatus =="1"'>
 											checked="checked"
 											</s:if>/> 选中激活短信服务，不选中为注销短信服务
+										</td>
+									</tr>
+									<tr>
+										<td height="26" align="right" bgcolor="#FFFFFF">
+											<strong>服务截至日期：</strong>
+										</td>
+										<td height="26" align="left" bgcolor="#FFFFFF">
+											<s:textfield id="serviceTerm" name="company.serviceTerm" cssStyle="width: 150px;" maxlength="50" readonly="true"></s:textfield>
+											<input name="clearBtn" type="button" class="btn_2_3" id="clearBtn" value="清空" >
 										</td>
 									</tr>
 									<tr>
