@@ -350,6 +350,9 @@ public class SMSAtion extends BaseActionSupport{
 						if(headType.equals("姓氏")){
 							allContent.append(" "+lastName);
 						}
+						if(headType.equals("姓名")){
+							allContent.append(" "+obj.getName());
+						}
 						if(headType.equals("昵称")){
 							allContent.append(" "+nickname);
 						}

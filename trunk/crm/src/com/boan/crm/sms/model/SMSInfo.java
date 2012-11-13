@@ -4,6 +4,7 @@ import java.util.Calendar;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -34,7 +35,7 @@ public class SMSInfo {
 	/**
 	 * 名片信息
 	 */
-	@ManyToOne(targetEntity=SMSCustomerInfo.class)
+	@ManyToOne(targetEntity=SMSCustomerInfo.class,fetch=FetchType.LAZY)
 	@JoinColumn(name="CUSTOMER_ID")
 	private SMSCustomerInfo customerInfo;
 	
