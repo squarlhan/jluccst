@@ -349,30 +349,29 @@ public class CustomerTraceInfoAction extends BaseActionSupport{
 		obj.setSalesmanId(customerTraceInfo.getSalesmanId());
 		obj.setTask(customerTraceInfo.getTask());
 		obj.setTraceOption(customerTraceInfo.getTraceOption());
-		Calendar time = Calendar.getInstance();
-		Calendar time2 = Calendar.getInstance();
-		if(traceTime.indexOf(" ") != -1)
-		{
-			String[] timeArray = traceTime.split(" ")[1].split(":");
-			String[] dayArray = traceTime.split(" ")[0].split("-");
-			if(dayArray.length>0 && timeArray.length>0){
-				time.set(Calendar.YEAR, Integer.parseInt(dayArray[0]));
-				time.set(Calendar.MONTH, Integer.parseInt(dayArray[1]) - 1);
-				time.set(Calendar.DATE, Integer.parseInt(dayArray[2]));
-				time.set(Calendar.HOUR_OF_DAY, Integer.parseInt(timeArray[0]));
-				time.set(Calendar.MINUTE, Integer.parseInt(timeArray[1]));
-				time.set(Calendar.SECOND, 0);
-			}
-		}else
-		{
-			String[] dayArray1 = traceTime.split("-");
-			time.set(Calendar.YEAR, Integer.parseInt(dayArray1[0]));
-			time.set(Calendar.MONTH, Integer.parseInt(dayArray1[1]) - 1);
-			time.set(Calendar.DATE, Integer.parseInt(dayArray1[2]));
-			time.set(Calendar.HOUR_OF_DAY, 0);
-			time.set(Calendar.MINUTE, 0);
-			time.set(Calendar.SECOND, 0);
-		}
+		Calendar time = CalendarUtils.toLongCalendarNoSecond( traceTime );
+//		if(traceTime.indexOf(" ") != -1)
+//		{
+//			String[] timeArray = traceTime.split(" ")[1].split(":");
+//			String[] dayArray = traceTime.split(" ")[0].split("-");
+//			if(dayArray.length>0 && timeArray.length>0){
+//				time.set(Calendar.YEAR, Integer.parseInt(dayArray[0]));
+//				time.set(Calendar.MONTH, Integer.parseInt(dayArray[1]) - 1);
+//				time.set(Calendar.DAY_OF_MONTH, Integer.parseInt(dayArray[2]) - 1);
+//				time.set(Calendar.HOUR, Integer.parseInt(timeArray[0]));
+//				time.set(Calendar.MINUTE, Integer.parseInt(timeArray[1]));
+//				time.set(Calendar.SECOND, 0);
+//			}
+//		}else
+//		{
+//			String[] dayArray1 = traceTime.split("-");
+//			time.set(Calendar.YEAR, Integer.parseInt(dayArray1[0]));
+//			time.set(Calendar.MONTH, Integer.parseInt(dayArray1[1]) - 1);
+//			time.set(Calendar.DAY_OF_MONTH, Integer.parseInt(dayArray1[2]) - 1);
+//			time.set(Calendar.HOUR, 0);
+//			time.set(Calendar.MINUTE, 0);
+//			time.set(Calendar.SECOND, 0);
+//		}
 		obj.setTraceTime(time);
 		obj.setEmail(customerTraceInfo.getEmail());
 		obj.setQq(customerTraceInfo.getQq());
@@ -410,51 +409,60 @@ public class CustomerTraceInfoAction extends BaseActionSupport{
 		{
 			SMSInfo sms = new SMSInfo();
 			
-			CustomerInfo customer = customerInfoService.get(customerId);
+			//CustomerInfo customer = customerInfoService.get(customerId);
 			
-			SMSCustomerInfo smsCustomer = new SMSCustomerInfo();
-			smsCustomer.setCustomerId(customerId);
-			//smsCustomer.setBirthday(customer.getContractPersonList().get)
-			smsCustomer.setName(customer.getCustomerName());
-			smsCustomer.setOrganId(customer.getCompanyId());
-			smsCustomer.setOrganName(customer.getCompanyFullName());
-			smsCustomer.setSalesmanId(customer.getSalesmanId());
-			smsCustomer.setCategoryId(customer.getCategoryId());
-			
-			sMSCustomerInfoService.saveSMSCustomerInfo(smsCustomer);
-			
-			sms.setCustomerInfo(smsCustomer);
-			sms.setIsImmediately(1);
-			sms.setOrganId(sessionCompanyId);
-			sms.setPersonCompany(sessionCompanyName);
-			sms.setPersonName( sessionUserCName );
-			sms.setSendTime(time);
-			
-			StringBuilder sb2 = new StringBuilder();
-			sb2.append("提醒：对客户[");
-			sb2.append(obj.getCustomerName());
-			sb2.append("]进行["+dataDictionaryService.get(obj.getTraceOption()).getName()+"]方式跟进");
-			sb2.append(",跟进任务：[");
-			sb2.append(obj.getTask());
-			sb2.append("]。");
-			
-			sms.setInfo(sb2.toString());
-			try
+			SMSCustomerInfo smsUser = sMSCustomerInfoService.getSMSCustomerInfoByCustomerId(sessionUserId);
+
+//			smsCustomer.setCustomerId(customerId);
+//			//smsCustomer.setBirthday(customer.getContractPersonList().get)
+//			smsCustomer.setName(customer.getCustomerName());
+//			smsCustomer.setOrganId(customer.getCompanyId());
+//			smsCustomer.setOrganName(customer.getCompanyFullName());
+//			smsCustomer.setSalesmanId(customer.getSalesmanId());
+//			smsCustomer.setCategoryId(customer.getCategoryId());
+//			
+//			sMSCustomerInfoService.saveSMSCustomerInfo(smsCustomer);
+			if(smsUser != null)
 			{
-				String phone = userService.getUserById( sessionUserId ).getPhone();
-				if(phone != null && phone.length() > 0 && phone.length() == 11)
+				sms.setCustomerInfo(smsUser);
+				
+				sms.setIsImmediately(1);
+				sms.setOrganId(sessionCompanyId);
+				sms.setPersonCompany(sessionCompanyName);
+				sms.setPersonName( sessionUserCName );
+				sms.setSendTime(time);
+				
+				StringBuilder sb2 = new StringBuilder();
+				sb2.append("提醒：对客户[");
+				sb2.append(obj.getCustomerName());
+				sb2.append("]进行["+dataDictionaryService.get(obj.getTraceOption()).getName()+"]方式跟进");
+				sb2.append(",跟进任务：[");
+				sb2.append(obj.getTask());
+				sb2.append("]。");
+				
+				sms.setInfo(sb2.toString());
+				try
 				{
-					sms.setPhone(phone);
-					smsInfoService.saveSMSInfo(sms); 
-				}else
+					String phone = userService.getUserById( sessionUserId ).getPhone();
+					if(phone != null && phone.length() > 0 && phone.length() == 11)
+					{
+						sms.setPhone(phone);
+						smsInfoService.saveSMSInfo(sms); 
+					}else
+					{
+						message = "保存跟进任务成功！手机短信提醒失败：跟进人手机号有误！";
+						id = obj.getId();
+						return SUCCESS;
+					}
+					
+					
+				}catch(Exception ex)
 				{
-					message = "保存跟进任务成功！手机短信提醒失败：跟进人手机号有误！";
+					message = "保存跟进任务成功！手机短信提醒失败：获取跟进人信息有误！";
 					id = obj.getId();
 					return SUCCESS;
 				}
-				
-				
-			}catch(Exception ex)
+			}else
 			{
 				message = "保存跟进任务成功！手机短信提醒失败：获取跟进人信息有误！";
 				id = obj.getId();

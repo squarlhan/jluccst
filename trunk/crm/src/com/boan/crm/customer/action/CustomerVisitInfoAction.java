@@ -331,30 +331,30 @@ public class CustomerVisitInfoAction extends BaseActionSupport{
 		obj.setSalesmanId(customerVisitInfo.getSalesmanId());
 		obj.setTask(customerVisitInfo.getTask());
 		obj.setVisitOption(customerVisitInfo.getVisitOption());
-		Calendar time = Calendar.getInstance();
-		if(visitTime.indexOf(" ") != -1)
-		{
-			String[] timeArray = visitTime.split(" ")[1].split(":");
-			String[] dayArray = visitTime.split(" ")[0].split("-");
-			if(dayArray.length>0 && timeArray.length>0){
-				time.set(Calendar.YEAR, Integer.parseInt(dayArray[0]));
-				time.set(Calendar.MONTH, Integer.parseInt(dayArray[1]) - 1);
-				time.set(Calendar.DATE, Integer.parseInt(dayArray[2]));
-				time.set(Calendar.HOUR_OF_DAY, Integer.parseInt(timeArray[0]));
-				time.set(Calendar.MINUTE, Integer.parseInt(timeArray[1]));
-				time.set(Calendar.SECOND, 0);
-			}
-			
-		}else
-		{
-			String[] dayArray1 = visitTime.split("-");
-			time.set(Calendar.YEAR, Integer.parseInt(dayArray1[0]));
-			time.set(Calendar.MONTH, Integer.parseInt(dayArray1[1]) - 1);
-			time.set(Calendar.DATE, Integer.parseInt(dayArray1[2]));
-			time.set(Calendar.HOUR_OF_DAY, 0);
-			time.set(Calendar.MINUTE, 0);
-			time.set(Calendar.SECOND, 0);
-		}
+		Calendar time = CalendarUtils.toLongCalendarNoSecond( visitTime );
+//		if(visitTime.indexOf(" ") != -1)
+//		{
+//			String[] timeArray = visitTime.split(" ")[1].split(":");
+//			String[] dayArray = visitTime.split(" ")[0].split("-");
+//			if(dayArray.length>0 && timeArray.length>0){
+//				time.set(Calendar.YEAR, Integer.parseInt(dayArray[0]));
+//				time.set(Calendar.MONTH, Integer.parseInt(dayArray[1]) - 1);
+//				time.set(Calendar.DATE, Integer.parseInt(dayArray[2]));
+//				time.set(Calendar.HOUR_OF_DAY, Integer.parseInt(timeArray[0]));
+//				time.set(Calendar.MINUTE, Integer.parseInt(timeArray[1]));
+//				time.set(Calendar.SECOND, 0);
+//			}
+//			
+//		}else
+//		{
+//			String[] dayArray1 = visitTime.split("-");
+//			time.set(Calendar.YEAR, Integer.parseInt(dayArray1[0]));
+//			time.set(Calendar.MONTH, Integer.parseInt(dayArray1[1]) - 1);
+//			time.set(Calendar.DATE, Integer.parseInt(dayArray1[2]));
+//			time.set(Calendar.HOUR_OF_DAY, 0);
+//			time.set(Calendar.MINUTE, 0);
+//			time.set(Calendar.SECOND, 0);
+//		}
 		obj.setVisitTime(time);
 		obj.setEmail(customerVisitInfo.getEmail());
 		obj.setQq(customerVisitInfo.getQq());
@@ -392,52 +392,60 @@ public class CustomerVisitInfoAction extends BaseActionSupport{
 		{
 			SMSInfo sms = new SMSInfo();
 			
-			CustomerInfo customer = customerInfoService.get(customerId);
-			
-			SMSCustomerInfo smsCustomer = new SMSCustomerInfo();
-			smsCustomer.setCustomerId(customerId);
-			smsCustomer.setName(customer.getCustomerName());
-			smsCustomer.setOrganId(customer.getCompanyId());
-			smsCustomer.setOrganName(customer.getCompanyFullName());
-			smsCustomer.setSalesmanId(customer.getSalesmanId());
-			smsCustomer.setCategoryId(customer.getCategoryId());
-			
-			sMSCustomerInfoService.saveSMSCustomerInfo(smsCustomer);
-			
-			sms.setCustomerInfo(smsCustomer);
-			sms.setIsImmediately(1);
-			sms.setOrganId(sessionCompanyId);
-			sms.setPersonCompany(sessionCompanyName);
-			sms.setPersonName( sessionUserCName );
-			sms.setSendTime(time);
-
-			StringBuilder sb2 = new StringBuilder();
-			sb2.append("提醒：对客户[");
-			sb2.append(obj.getCustomerName());
-			sb2.append("]进行["+dataDictionaryService.get(obj.getVisitOption()).getName()+"]方式回访");
-			sb2.append(",回访任务：[");
-			sb2.append(obj.getTask());
-			sb2.append("]。");
-			
-			sms.setInfo(sb2.toString());
-			try
+//			CustomerInfo customer = customerInfoService.get(customerId);
+//			
+//			SMSCustomerInfo smsCustomer = new SMSCustomerInfo();
+//			smsCustomer.setCustomerId(customerId);
+//			smsCustomer.setName(customer.getCustomerName());
+//			smsCustomer.setOrganId(customer.getCompanyId());
+//			smsCustomer.setOrganName(customer.getCompanyFullName());
+//			smsCustomer.setSalesmanId(customer.getSalesmanId());
+//			smsCustomer.setCategoryId(customer.getCategoryId());
+//			
+//			sMSCustomerInfoService.saveSMSCustomerInfo(smsCustomer);
+			SMSCustomerInfo smsUser = sMSCustomerInfoService.getSMSCustomerInfoByCustomerId(sessionUserId);
+			if(smsUser != null)
 			{
-				String phone = userService.getUserById( sessionUserId ).getPhone();
-				if(phone != null && phone.length() > 0 && phone.length() == 11)
+				sms.setCustomerInfo(smsUser);
+				sms.setIsImmediately(1);
+				sms.setOrganId(sessionCompanyId);
+				sms.setPersonCompany(sessionCompanyName);
+				sms.setPersonName( sessionUserCName );
+				sms.setSendTime(time);
+	
+				StringBuilder sb2 = new StringBuilder();
+				sb2.append("提醒：对客户[");
+				sb2.append(obj.getCustomerName());
+				sb2.append("]进行["+dataDictionaryService.get(obj.getVisitOption()).getName()+"]方式回访");
+				sb2.append(",回访任务：[");
+				sb2.append(obj.getTask());
+				sb2.append("]。");
+				
+				sms.setInfo(sb2.toString());
+				try
 				{
-					sms.setPhone(phone);
-					smsInfoService.saveSMSInfo(sms); 
-				}else
+					String phone = userService.getUserById( sessionUserId ).getPhone();
+					if(phone != null && phone.length() > 0 && phone.length() == 11)
+					{
+						sms.setPhone(phone);
+						smsInfoService.saveSMSInfo(sms); 
+					}else
+					{
+						message = "保存回访任务成功！手机短信提醒失败：回访人手机信息有误！";
+						id = obj.getId();
+						return SUCCESS;
+					}
+					
+					
+				}catch(Exception ex)
 				{
-					message = "保存回访任务成功！手机短信提醒失败：跟进人手机号有误！";
+					message = "保存回访任务成功！手机短信提醒失败：获取回访人信息有误！";
 					id = obj.getId();
 					return SUCCESS;
 				}
-				
-				
-			}catch(Exception ex)
+			}else
 			{
-				message = "保存回访任务成功！手机短信提醒失败：获取跟进人信息有误！";
+				message = "保存跟进任务成功！手机短信提醒失败：获取回访人手机信息有误！";
 				id = obj.getId();
 				return SUCCESS;
 			}
