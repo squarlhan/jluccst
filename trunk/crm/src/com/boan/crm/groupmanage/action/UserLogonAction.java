@@ -152,6 +152,10 @@ public class UserLogonAction extends ActionSupport
 						{
 							userSession.setCompanyName( company.getCompanyName());
 						}
+						if( company.checkServiceTerm() ){
+							message.setContent(   "您的账号已过试用期，请联系软件供应商！" );
+							return ERROR;
+						}
 					}
 				}
 				if( deptService != null )
