@@ -441,9 +441,9 @@ public class CustomerLibInfoServiceImpl implements ICustomerLibInfoService{
 		
 		if(values.get("mainIndustry") != null)
 		{
-			hql.append(" and mainIndustry like '%"+values.get("mainIndustry") +"%' ");
+			hql.append(" and (mainIndustry like '%"+values.get("mainIndustry") +"%' ");
 			hql.append(" or customerName like '%"+values.get("mainIndustry") +"%' ");
-			hql.append(" or companyFullName like '%"+values.get("mainIndustry") +"%' ");
+			hql.append(" or companyFullName like '%"+values.get("mainIndustry") +"%' )");
 		}
 		if(values.get("provinceId") != null)
 		{
@@ -458,7 +458,7 @@ public class CustomerLibInfoServiceImpl implements ICustomerLibInfoService{
 			hql.append(" and district = :areaId ");
 		}
 		if(salesmanId!=null){
-			hql.append(" and id not in (Select customerLibId from NoSearchCustomers where salesmanId='"+salesmanId+"') ");
+			hql.append(" and id not in (Select customerLibId from NoSearchCustomers where company_Id = '"+company_Id+"' and salesmanId='"+salesmanId+"') ");
 		}
 		
 		hql.append(" order by registerTime asc");
@@ -467,9 +467,9 @@ public class CustomerLibInfoServiceImpl implements ICustomerLibInfoService{
 		hql.append(" select count(*) from " + provincKey +" where 1=1 and  noSearch=0 " );
 		if(values.get("mainIndustry") != null)
 		{
-			hql.append(" and mainIndustry like '%"+values.get("mainIndustry") +"%' ");
+			hql.append(" and (mainIndustry like '%"+values.get("mainIndustry") +"%' ");
 			hql.append(" or customerName like '%"+values.get("mainIndustry") +"%' ");
-			hql.append(" or companyFullName like '%"+values.get("mainIndustry") +"%' ");
+			hql.append(" or companyFullName like '%"+values.get("mainIndustry") +"%' )");
 		}
 		if(values.get("provinceId") != null)
 		{
@@ -484,7 +484,7 @@ public class CustomerLibInfoServiceImpl implements ICustomerLibInfoService{
 			hql.append(" and district = :areaId ");
 		}
 		if(salesmanId!=null){
-			hql.append(" and id not in (Select customerLibId from NoSearchCustomers where salesmanId='"+salesmanId+"') ");
+			hql.append(" and id not in (Select customerLibId from NoSearchCustomers where company_Id = '"+company_Id+"' and  salesmanId='"+salesmanId+"') ");
 		}
 		
 		int totalRows = customerLibInfoDao.findCountForPage(hql.toString(), values);
