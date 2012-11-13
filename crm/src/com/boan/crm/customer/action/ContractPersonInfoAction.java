@@ -93,32 +93,27 @@ public class ContractPersonInfoAction extends BaseActionSupport{
 		
 		contractpersonInfoService.save(contractPersonInfo);
 		
-		if(personId != null && personId.length() > 0)
+		//需保存到短信用户处
+		SMSCustomerInfo smsCustomer = new SMSCustomerInfo();
+		smsCustomer.setCustomerId(contractPersonInfo.getId());
+		
+		CustomerInfo customer = customerInfoService.get(contractPersonInfo.getCustomerId());
+		if(customer != null)
 		{
-			
-		}else
-		{
-			//需保存到短信用户处
-			SMSCustomerInfo smsCustomer = new SMSCustomerInfo();
-			smsCustomer.setCustomerId(contractPersonInfo.getCustomerId());
-			//smsCustomer.setBirthday(birthday)
-			CustomerInfo customer = customerInfoService.get(contractPersonInfo.getCustomerId());
-			if(customer != null)
-			{
-				smsCustomer.setName(customer.getCustomerName());
-				smsCustomer.setOrganId(customer.getCompanyId());
-				smsCustomer.setOrganName(customer.getCompanyFullName());
-				smsCustomer.setSalesmanId(customer.getSalesmanId());
-				smsCustomer.setCategoryId(customer.getCategoryId());
-				smsCustomer.setBirthday(contractPersonInfo.getBirthday());
-				smsCustomer.setCreateTime(Calendar.getInstance());
-				smsCustomer.setEmail(contractPersonInfo.getEmail());
-				smsCustomer.setPhone(contractPersonInfo.getTel());
-				smsCustomer.setQq(contractPersonInfo.getQq());
-				smsCustomer.setPostalcode(customer.getPostCode());
-				smsCustomer.setNickname(contractPersonInfo.getNickName());
-				sMSCustomerInfoService.saveSMSCustomerInfo(smsCustomer);
-			}
+			smsCustomer.setName(contractPersonInfo.getPersonName());
+			smsCustomer.setOrganId(customer.getCompanyId());
+			smsCustomer.setOrganName(customer.getCompanyFullName());
+			smsCustomer.setSalesmanId(customer.getSalesmanId());
+			smsCustomer.setCategoryId(customer.getCategoryId());
+			smsCustomer.setBirthday(contractPersonInfo.getBirthday());
+			smsCustomer.setCreateTime(Calendar.getInstance());
+			smsCustomer.setEmail(contractPersonInfo.getEmail());
+			smsCustomer.setPhone(contractPersonInfo.getTel());
+			smsCustomer.setQq(contractPersonInfo.getQq());
+			smsCustomer.setPostalcode(customer.getPostCode());
+			smsCustomer.setNickname(contractPersonInfo.getNickName());
+			smsCustomer.setUnit(customer.getCustomerName());
+			sMSCustomerInfoService.saveSMSCustomerInfo(smsCustomer);
 		}
 		
 		message = "保存成功！";

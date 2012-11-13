@@ -414,7 +414,7 @@ public class CustomerTraceInfoAction extends BaseActionSupport{
 			
 			SMSCustomerInfo smsCustomer = new SMSCustomerInfo();
 			smsCustomer.setCustomerId(customerId);
-			//smsCustomer.setBirthday(birthday)
+			//smsCustomer.setBirthday(customer.getContractPersonList().get)
 			smsCustomer.setName(customer.getCustomerName());
 			smsCustomer.setOrganId(customer.getCompanyId());
 			smsCustomer.setOrganName(customer.getCompanyFullName());
@@ -429,9 +429,38 @@ public class CustomerTraceInfoAction extends BaseActionSupport{
 			sms.setPersonCompany(sessionCompanyName);
 			sms.setPersonName( sessionUserCName );
 			sms.setSendTime(time);
-			sms.setPhone(customerTraceInfo.getTel());
-			sms.setInfo("跟进任务提醒："+customerTraceInfo.getTask());
-			smsInfoService.saveSMSInfo(sms); 
+			
+			StringBuilder sb2 = new StringBuilder();
+			sb2.append("提醒：对客户[");
+			sb2.append(obj.getCustomerName());
+			sb2.append("]进行["+dataDictionaryService.get(obj.getTraceOption()).getName()+"]方式跟进");
+			sb2.append(",跟进任务：[");
+			sb2.append(obj.getTask());
+			sb2.append("]。");
+			
+			sms.setInfo(sb2.toString());
+			try
+			{
+				String phone = userService.getUserById( sessionUserId ).getPhone();
+				if(phone != null && phone.length() > 0 && phone.length() == 11)
+				{
+					sms.setPhone(phone);
+					smsInfoService.saveSMSInfo(sms); 
+				}else
+				{
+					message = "保存跟进任务成功！手机短信提醒失败：跟进人手机号有误！";
+					id = obj.getId();
+					return SUCCESS;
+				}
+				
+				
+			}catch(Exception ex)
+			{
+				message = "保存跟进任务成功！手机短信提醒失败：获取跟进人信息有误！";
+				id = obj.getId();
+				return SUCCESS;
+			}
+			
 		}
 		id = obj.getId();
 		

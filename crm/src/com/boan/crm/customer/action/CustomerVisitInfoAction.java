@@ -3,7 +3,6 @@
  */
 package com.boan.crm.customer.action;
 
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
@@ -397,7 +396,6 @@ public class CustomerVisitInfoAction extends BaseActionSupport{
 			
 			SMSCustomerInfo smsCustomer = new SMSCustomerInfo();
 			smsCustomer.setCustomerId(customerId);
-			//smsCustomer.setBirthday(birthday)
 			smsCustomer.setName(customer.getCustomerName());
 			smsCustomer.setOrganId(customer.getCompanyId());
 			smsCustomer.setOrganName(customer.getCompanyFullName());
@@ -412,9 +410,37 @@ public class CustomerVisitInfoAction extends BaseActionSupport{
 			sms.setPersonCompany(sessionCompanyName);
 			sms.setPersonName( sessionUserCName );
 			sms.setSendTime(time);
-			sms.setPhone(customerVisitInfo.getTel());
-			sms.setInfo("回访任务提醒："+customerVisitInfo.getTask());
-			smsInfoService.saveSMSInfo(sms);
+
+			StringBuilder sb2 = new StringBuilder();
+			sb2.append("提醒：对客户[");
+			sb2.append(obj.getCustomerName());
+			sb2.append("]进行["+dataDictionaryService.get(obj.getVisitOption()).getName()+"]方式回访");
+			sb2.append(",回访任务：[");
+			sb2.append(obj.getTask());
+			sb2.append("]。");
+			
+			sms.setInfo(sb2.toString());
+			try
+			{
+				String phone = userService.getUserById( sessionUserId ).getPhone();
+				if(phone != null && phone.length() > 0 && phone.length() == 11)
+				{
+					sms.setPhone(phone);
+					smsInfoService.saveSMSInfo(sms); 
+				}else
+				{
+					message = "保存回访任务成功！手机短信提醒失败：跟进人手机号有误！";
+					id = obj.getId();
+					return SUCCESS;
+				}
+				
+				
+			}catch(Exception ex)
+			{
+				message = "保存回访任务成功！手机短信提醒失败：获取跟进人信息有误！";
+				id = obj.getId();
+				return SUCCESS;
+			}
 		}
 		
 		id = obj.getId();
