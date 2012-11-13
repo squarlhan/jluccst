@@ -12,6 +12,9 @@ import javax.persistence.Transient;
 import org.apache.commons.lang.StringUtils;
 import org.hibernate.annotations.GenericGenerator;
 
+import com.boan.crm.utils.calendar.CurrentDateTime;
+import com.boan.crm.utils.calendar.MySimpleDateFormat;
+
 /**
  * 公司实体类
  * 
@@ -230,5 +233,25 @@ public class Company {
 
 	public void setServiceTerm(String serviceTerm) {
 		this.serviceTerm = serviceTerm;
+	}
+	/**
+	 * 判断是否过服务期限，如果超了，则不能继续服务了
+	 * @return
+	 */
+	public boolean checkServiceTerm(){
+		if( StringUtils.isBlank(serviceTerm) ){
+			//无限期
+			return false;
+		}
+		Calendar endDate = MySimpleDateFormat.parse(serviceTerm);
+		Calendar cal = Calendar.getInstance();
+		int c = CurrentDateTime.compareBothDate(cal, endDate);
+		if( c > 0){
+			//过期
+			return true;
+		}else{
+			//没过期
+			return false;
+		}
 	}
 }
