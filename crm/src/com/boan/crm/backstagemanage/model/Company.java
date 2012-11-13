@@ -243,7 +243,7 @@ public class Company {
 			//无限期
 			return false;
 		}
-		Calendar endDate = MySimpleDateFormat.parse(serviceTerm);
+		Calendar endDate = MySimpleDateFormat.parse(serviceTerm +  " 00:00:00");
 		Calendar cal = Calendar.getInstance();
 		int c = CurrentDateTime.compareBothDate(cal, endDate);
 		if( c > 0){
