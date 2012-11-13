@@ -359,9 +359,9 @@ public class UserAction extends BaseActionSupport {
 				try {
 					// 存储SMS用户信息
 					SMSCustomerInfo smsUser = smsService.getSMSCustomerInfoByCustomerId(oldUser.getId());
-					boolean newUserFlag = true;
+					boolean newUserFlag = false;
 					if (smsUser == null) {
-						newUserFlag = false;
+						newUserFlag = true;
 						smsUser = new SMSCustomerInfo();
 					}
 					smsUser.setCustomerId(oldUser.getId());
