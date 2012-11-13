@@ -9,29 +9,28 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.apache.commons.lang.StringUtils;
 import org.hibernate.annotations.GenericGenerator;
 
 /**
  * 公司实体类
+ * 
  * @author XXX
  * @version 1.0.0
  */
 @Entity
 @Table(name = "GROUP_COMPANY")
 public class Company {
-	
-	
+
 	@Id
-	@GenericGenerator(name="system-uuid", strategy="uuid")
-	@GeneratedValue(generator="system-uuid")
-	
+	@GenericGenerator(name = "system-uuid", strategy = "uuid")
+	@GeneratedValue(generator = "system-uuid")
 	/**
 	 * 公司实体主键
 	 */
 	private String id;
-	
-	public Company()
-	{
+
+	public Company() {
 		this.id = "";
 	}
 
@@ -40,62 +39,67 @@ public class Company {
 	 */
 	@Column(name = "PHONE")
 	private String phone;
-	
+
 	/**
 	 * 公司地址
 	 */
 	@Column(name = "ADDRESS")
 	private String address;
-	
+
 	/**
 	 * 公司名称
 	 */
 	@Column(name = "COMPANY_NAME")
 	private String companyName;
-	
+
 	/**
 	 * 传真
 	 */
-	@Column(name="FAX")
+	@Column(name = "FAX")
 	private String fax;
-	
+
 	/**
 	 * 法人
 	 */
-	@Column(name="CORPORATION")
+	@Column(name = "CORPORATION")
 	private String corporation;
-	
+
 	/**
 	 * 公司短信序号列
 	 */
-	@Column(name="SMS_SN")
+	@Column(name = "SMS_SN")
 	private String smsSN;
-	
+
 	/**
 	 * 公司短信密码
 	 */
-	@Column(name="SMS_PASSWORD")
-	private String  smsPassword;
-	
+	@Column(name = "SMS_PASSWORD")
+	private String smsPassword;
+
 	/**
 	 * 公司短信Key
 	 */
-	@Column(name="SMS_KEY")
+	@Column(name = "SMS_KEY")
 	private String smsKey;
-	
+
 	/**
 	 * 短信服务是否已被激活的标识，1表示激活，0表示注销
 	 */
-	@Column(name="SMS_ACTIVATION_STATUS")
+	@Column(name = "SMS_ACTIVATION_STATUS")
 	private int smsActivationStatus;
-	
+
+	/**
+	 * 服务截至日期，如果没有，则表示无限期服务
+	 */
+	@Column(name = "SERVICE_TERM", length = 50)
+	private String serviceTerm;
+
 	/**
 	 * 公司排序号
 	 */
 	@Column(name = "SORT_INDEX")
 	private int sortIndex = 99;
-	
-	
+
 	/**
 	 * 创建时间
 	 */
@@ -107,7 +111,7 @@ public class Company {
 	 */
 	@Transient
 	private int deleteFlag = 0;
-	
+
 	public String getId() {
 		return id;
 	}
@@ -128,7 +132,7 @@ public class Company {
 		return address;
 	}
 
-    public void setAddress(String address) {
+	public void setAddress(String address) {
 		this.address = address;
 	}
 
@@ -210,5 +214,21 @@ public class Company {
 
 	public void setSmsActivationStatus(int smsActivationStatus) {
 		this.smsActivationStatus = smsActivationStatus;
+	}
+
+	public String getServiceTerm() {
+		return serviceTerm;
+	}
+
+	public String getServiceTermCn() {
+		if (StringUtils.isNotBlank(serviceTerm)) {
+			return serviceTerm;
+		} else {
+			return "无限期";
+		}
+	}
+
+	public void setServiceTerm(String serviceTerm) {
+		this.serviceTerm = serviceTerm;
 	}
 }
