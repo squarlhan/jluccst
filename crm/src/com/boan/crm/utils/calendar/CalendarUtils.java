@@ -109,7 +109,28 @@ public class CalendarUtils {
 		}
 		return calendar;
 	}
-
+	/**
+	 * 字符串转换成Calendar日期格式，如2008-8-8 12:12
+	 * 
+	 * @param stringDate
+	 * @return
+	 */
+	public static Calendar toLongCalendarNoSecond(String stringDate) {
+		Calendar calendar = null;
+		Date date = null; 
+		SimpleDateFormat sdf = null;
+		if (stringDate != null) {
+			calendar = Calendar.getInstance();
+			sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm");// 时间格式自己设置
+			try {
+				date = sdf.parse(stringDate);
+				if (date != null)
+					calendar.setTime(date);
+			} catch (Exception e) {
+			}
+		}
+		return calendar;
+	}
 	/**
 	 * 指定时间间隔天数
 	 * 
