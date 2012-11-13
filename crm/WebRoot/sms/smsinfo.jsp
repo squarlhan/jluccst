@@ -410,6 +410,7 @@
 											<span>
 												<select id="sel_one" name="headType" style="width:150px"  >
 													<option selected>姓氏</option>
+													<option>姓名</option>
 													<option>昵称</option>
 												</select>
 												<select id="sel_two" name="headSuffix" style="width:60px" >

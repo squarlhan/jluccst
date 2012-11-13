@@ -173,7 +173,7 @@
 	   				<font color="red">失败</font>
 	   			</s:if>
 			</td>
-   			<td align="left" bgcolor="#FFFFFF" nowrap="nowrap"><s:date  name="sendTime" format="yyyy-MM-dd hh:mm" /></td>
+   			<td align="left" bgcolor="#FFFFFF" nowrap="nowrap"><s:date  name="sendTime" format="yyyy-MM-dd HH:mm" /></td>
    			<td align="left" bgcolor="#FFFFFF" ><s:property value="info"/></td>
    			<td align="left" bgcolor="#FFFFFF" nowrap="nowrap">
           	<s:url id="reSend_url" action="reSendSMSInfoAction">   
