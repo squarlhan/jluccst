@@ -192,6 +192,15 @@
 										</td>
 									</tr>
 									<tr>
+										<td height="26" align="right" bgcolor="#FFFFFF">
+											<strong>服务截至日期：</strong>
+										</td>
+										<td height="26" align="left" bgcolor="#FFFFFF">
+											<font color="red"><strong><s:property value="company.serviceTermCn"/></strong></font>
+											<s:hidden id="serviceTerm" name="company.serviceTerm" />
+										</td>
+									</tr>
+									<tr>
 										<td height="26" colspan="2" align="center" bgcolor="#FFFFFF">
 											<input name="addBtn" type="button" class="btn_2_3" id="addBtn" value="保 存">
 											&nbsp;&nbsp;
