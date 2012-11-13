@@ -36,6 +36,8 @@ import com.boan.crm.datadictionary.model.AreaInfo;
 import com.boan.crm.datadictionary.model.CityInfo;
 import com.boan.crm.datadictionary.model.ProvinceInfo;
 import com.boan.crm.datadictionary.service.IAreaService;
+import com.boan.crm.sms.model.SMSCustomerInfo;
+import com.boan.crm.sms.service.ISMSCustomerInfoService;
 import com.boan.crm.utils.action.BaseActionSupport;
 import com.boan.crm.utils.converter.ParseBeanUtil;
 import com.boan.crm.utils.io.impl.FileCopyAndDeleteUtilsAdaptor;
@@ -48,6 +50,10 @@ import com.boan.crm.utils.uuid.MyUUIDGenerator;
 @Scope("prototype")
 public class CustomerSearchAction  extends BaseActionSupport{
 
+	@Autowired
+	@Qualifier("SMSCustomerInfoService")
+	private ISMSCustomerInfoService bookerService;
+	
 	@Autowired
 	@Qualifier("customerLibInfoService")
 	//客户状态接口类
@@ -268,16 +274,16 @@ public class CustomerSearchAction  extends BaseActionSupport{
 		if(customerLibInfo!=null){
 			CustomerInfo customerInfo =(CustomerInfo)ParseBeanUtil.parseBean(customerLibInfo, CustomerInfo.class);
 			customerInfo.setId(null);
-			customerInfo.setCompanyId(sessionCompanyId);
-			customerInfo.setCompanyFullName(sessionCompanyName);
+//			customerInfo.setCompanyId(sessionCompanyId);
+//			customerInfo.setCompanyFullName(sessionCompanyName);
 			customerInfo.setSalesman(sessionUserCName);
 			customerInfo.setSalesmanId(sessionUserId);
 			customerService.save(customerInfo);//保存到客户表
 			
 			NoSearchCustomers obj = new NoSearchCustomers();
 			obj.setCustomerLibId(customerLibInfo.getId());
-			obj.setCompany_Id(sessionCompanyId);
-			obj.setCompanyFullName(sessionCompanyName);
+			obj.setCompany_Id(customerInfo.getCompanyId());
+			obj.setCompanyFullName(customerInfo.getCompanyFullName());
 			obj.setSalesman(sessionUserCName);
 			obj.setSalesmanId(sessionUserId);
 			noSearchCustomersService.save(obj);//保存到不再查询的客户表
@@ -287,6 +293,27 @@ public class CustomerSearchAction  extends BaseActionSupport{
 				contractPersonInfo.setId(null);
 				contractPersonInfo.setCustomerId(customerInfo.getId());
 				contractpersonInfoService.save(contractPersonInfo);
+				if(contractPersonInfo.getPhone()!=null && !contractPersonInfo.getPhone().equals("")){
+					SMSCustomerInfo smsUser =new SMSCustomerInfo();
+					smsUser.setCustomerId(customerInfo.getId());
+					smsUser.setCategoryId("1");
+					smsUser.setPhone(temp.getPhone());
+					smsUser.setName(temp.getPersonName());
+					smsUser.setNickname(temp.getNickName());
+					smsUser.setCreateTime(Calendar.getInstance());
+					smsUser.setEmail(temp.getEmail());
+					smsUser.setPost(temp.getDeptOrDuty());
+					smsUser.setOrganId(sessionCompanyId);
+					smsUser.setOrganName(sessionCompanyName);
+					smsUser.setIsLunarCalender(1);
+					smsUser.setQq(temp.getQq());
+					smsUser.setUnit(customerInfo.getCompanyFullName());
+					smsUser.setUnitAddress(customerInfo.getAddress());
+					smsUser.setPostalcode(customerInfo.getPostCode());
+					smsUser.setSalesmanId(sessionUserId);
+					smsUser.setFaxes(customerInfo.getFax());
+					bookerService.saveSMSCustomerInfo(smsUser );
+				}
 			}
 		}
 		message = "转入成功!";
