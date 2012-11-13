@@ -72,9 +72,9 @@ public class ContractPersonInfoAction extends BaseActionSupport{
 	public String saveContractPerson()
 	{
 		ContractPersonInfo obj = null;
-		if(personId != null && personId.length() > 0)
+		if(contractPersonInfo.getId() != null && contractPersonInfo.getId().length() > 0)
 		{
-			obj = contractpersonInfoService.get(personId);
+			obj = contractpersonInfoService.get(contractPersonInfo.getId());
 		}else
 		{
 			obj = new ContractPersonInfo();
@@ -91,29 +91,44 @@ public class ContractPersonInfoAction extends BaseActionSupport{
 		obj.setQq(contractPersonInfo.getQq());
 		obj.setTel(contractPersonInfo.getTel());
 		
-		contractpersonInfoService.save(contractPersonInfo);
+		contractpersonInfoService.save(obj);
 		
 		//需保存到短信用户处
-		SMSCustomerInfo smsCustomer = new SMSCustomerInfo();
-		smsCustomer.setCustomerId(contractPersonInfo.getId());
+		boolean newUserFlag = false;
 		
 		CustomerInfo customer = customerInfoService.get(contractPersonInfo.getCustomerId());
 		if(customer != null)
 		{
-			smsCustomer.setName(contractPersonInfo.getPersonName());
-			smsCustomer.setOrganId(customer.getCompanyId());
-			smsCustomer.setOrganName(customer.getCompanyFullName());
+			SMSCustomerInfo smsCustomer = sMSCustomerInfoService.getSMSCustomerInfoByCustomerId( contractPersonInfo.getId() );
+			if(smsCustomer == null)
+			{
+				newUserFlag = true;
+				smsCustomer = new SMSCustomerInfo();
+			}
+			
+			smsCustomer.setCustomerId(contractPersonInfo.getId());
+			smsCustomer.setCategoryId("1");
+			smsCustomer.setName(obj.getPersonName());
+			smsCustomer.setOrganId( sessionCompanyId );
+			smsCustomer.setOrganName( sessionCompanyName );
 			smsCustomer.setSalesmanId(customer.getSalesmanId());
-			smsCustomer.setCategoryId(customer.getCategoryId());
-			smsCustomer.setBirthday(contractPersonInfo.getBirthday());
+			smsCustomer.setBirthday(obj.getBirthday());
 			smsCustomer.setCreateTime(Calendar.getInstance());
-			smsCustomer.setEmail(contractPersonInfo.getEmail());
-			smsCustomer.setPhone(contractPersonInfo.getTel());
-			smsCustomer.setQq(contractPersonInfo.getQq());
+			smsCustomer.setEmail(obj.getEmail());
+			smsCustomer.setPhone(obj.getPhone());
+			smsCustomer.setQq(obj.getQq());
+			smsCustomer.setPost(obj.getDeptOrDuty());
+			smsCustomer.setUnitAddress(customer.getAddress());
 			smsCustomer.setPostalcode(customer.getPostCode());
-			smsCustomer.setNickname(contractPersonInfo.getNickName());
+			smsCustomer.setNickname(obj.getNickName());
 			smsCustomer.setUnit(customer.getCustomerName());
-			sMSCustomerInfoService.saveSMSCustomerInfo(smsCustomer);
+			if(newUserFlag)
+			{
+				sMSCustomerInfoService.saveSMSCustomerInfo(smsCustomer);
+			}else
+			{
+				sMSCustomerInfoService.updateSMSCustomerInfoForCustomer(contractPersonInfo.getId(), smsCustomer);
+			}
 		}
 		
 		message = "保存成功！";
