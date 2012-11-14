@@ -274,7 +274,7 @@ public class CustomerSearchAction  extends BaseActionSupport{
 		if(customerLibInfo!=null){
 			CustomerInfo customerInfo =(CustomerInfo)ParseBeanUtil.parseBean(customerLibInfo, CustomerInfo.class);
 			customerInfo.setId(null);
-//			customerInfo.setCompanyId(sessionCompanyId);
+			customerInfo.setCompanyId(sessionCompanyId);
 //			customerInfo.setCompanyFullName(sessionCompanyName);
 			customerInfo.setSalesman(sessionUserCName);
 			customerInfo.setSalesmanId(sessionUserId);
@@ -282,7 +282,7 @@ public class CustomerSearchAction  extends BaseActionSupport{
 			
 			NoSearchCustomers obj = new NoSearchCustomers();
 			obj.setCustomerLibId(customerLibInfo.getId());
-			obj.setCompany_Id(customerInfo.getCompanyId());
+			obj.setCompany_Id(sessionCompanyId);
 			obj.setCompanyFullName(customerInfo.getCompanyFullName());
 			obj.setSalesman(sessionUserCName);
 			obj.setSalesmanId(sessionUserId);

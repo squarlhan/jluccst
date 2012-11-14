@@ -123,7 +123,8 @@ public class SMSInfoServiceImpl implements ISMSInfoService{
 	 * @return
 	 */
 	public List<SMSInfo> findSMSInfoByTime(Calendar beginTime,Calendar endTime,String organId){
-		String hql = " from SMSInfo where :beginTime <=sendTime and sendTime<= :endTime and state =1 and organId='"+organId+"' order by sendTime asc";
+//		String hql = " from SMSInfo where :beginTime <=sendTime and sendTime<= :endTime and state =1 and organId='"+organId+"' order by sendTime asc";
+		String hql = " from SMSInfo where :beginTime <=sendTime and (state =1 or state =0) and organId='"+organId+"' order by sendTime asc";
 		Map<String, Calendar> values = new HashMap();
 		values.put("beginTime",beginTime);
 		values.put("endTime",endTime);
