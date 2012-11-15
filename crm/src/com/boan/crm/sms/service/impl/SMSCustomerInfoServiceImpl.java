@@ -132,7 +132,16 @@ public class SMSCustomerInfoServiceImpl implements ISMSCustomerInfoService {
 	 * @return
 	 */
 	public List<SMSCustomerInfo> findAllSMSCustomerInfo() {
-		return dao.find("from SMSCustomerInfo order by registerTime asc", new Object[0]);
+		return dao.find("from SMSCustomerInfo order by createTime asc", new Object[0]);
+	}
+	
+	/**
+	 *  查询指定类型的短信通讯录信息
+	 * @param type 1：客户 2：销售员
+	 * @return
+	 */
+	public List<SMSCustomerInfo> findAllSMSCustomerInfoByType(int type){
+		return dao.find("from SMSCustomerInfo where  categoryId='"+type+"'order by createTime asc", new Object[0]);
 	}
 	
 	/**

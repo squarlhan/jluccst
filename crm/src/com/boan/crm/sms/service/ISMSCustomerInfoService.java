@@ -62,6 +62,13 @@ public interface ISMSCustomerInfoService {
 	 * @return
 	 */
 	public List<SMSCustomerInfo> findAllSMSCustomerInfo();
+	
+	/**
+	 *  查询指定类型的短信通讯录信息
+	 * @param type 1：客户 2：销售员
+	 * @return
+	 */
+	public List<SMSCustomerInfo> findAllSMSCustomerInfoByType(int type);
 	/**
 	 * 查询所有短信通讯录信息
 	 * @return

@@ -281,8 +281,16 @@ public class SMSAtion extends BaseActionSupport{
 	 * @return
 	 */
 	public String loadCustomerInfoForAjax(){
-		String[] ids = personIds.split(",");
-		customerInfoList = bookerService.findSMSCustomerInfoByIds(ids);
+		if(personIds!=null){
+			if(personIds.equals("all")){
+				customerInfoList = bookerService.findAllSMSCustomerInfo();
+			}else if (personIds.equals("customer")){
+				customerInfoList = bookerService.findAllSMSCustomerInfoByType(1);
+			}else{
+				String[] ids = personIds.split(",");
+				customerInfoList = bookerService.findSMSCustomerInfoByIds(ids);
+			}
+		}
 		return "customerInfoList";
 	}
 	/**
