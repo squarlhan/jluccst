@@ -61,6 +61,8 @@
 			
 			$.fn.dynamicsAddPerson();
 			
+			$.fn.dynamicsAddAllPerson();
+			
 			$("#chk_use_appellation").click(function(){
 				//激活文本框时间计算字数
 				$('#SMSContent').trigger('change');
@@ -321,6 +323,59 @@
 			});
 		};
 		
+
+		/**
+	  	 * 动态添加全部人员
+	  	 */
+		$.fn.dynamicsAddAllPerson = function(){
+			$("#btn_AddAllPerson").click(function(){
+ 				$.ajax({
+ 					type:"post",
+ 					url: "loadCustomerInfoForAjaxAction.action",
+ 					data:{personIds:"all"},
+ 					beforeSend: function(XMLHttpRequest){
+ 					},
+ 					success: function(data, textStatus){
+ 						try{
+ 							//将字符串转换为json对象
+ 							data = eval("("+data+")");
+ 							$.each(data.customerInfoList,function(i,value){
+ 								if($("#"+value.id).length==0){
+  								var row="";
+  								row=row+"<tr>";
+  					  			row=row+"<td align='center' bgcolor='#FFFFFF' >";  
+  					  			row=row+"<input type='checkbox' name='ids'/>";
+  					  			row=row+"<input type='hidden' id='"+value.id+"' name='selectedIds' value='"+value.id+"'/>";
+  					  			row=row+"</td>";
+  					  			row=row+"<td align='center' bgcolor='#FFFFFF'>"+(value.name==null ? "" : value.name) +"</td>";
+  					  			row=row+"<td align='center' bgcolor='#FFFFFF'>"+(value.phone==null ? "" : value.phone) +"</td>";
+  					  			row=row+"<td align='center' bgcolor='#FFFFFF'>"+(value.categoryId==1 ? "客户" : "销售人员" )+"</td>";
+  					  			row=row+"<td align='center' bgcolor='#FFFFFF'>"+(value.unit==null ? "" : value.unit )+"</td>";
+  					  			row=row+"<td align='center' bgcolor='#FFFFFF'>"+(value.post==null ? "" : value.post)+"</td>";
+  					  			row=row+"<td align='center' bgcolor='#FFFFFF'>"+(value.nickname==null ? "" : value.nickname)+"</td>";
+  					  			row=row+"<td align='center' bgcolor='#FFFFFF'><a id='del_one' href='javascript:void(0);'>删除</a></td>";
+  					  			row=row+"</tr>";
+  					  			$("#no_data").hide();
+  					  		    $("#personList tr:first").append(row);
+  					  		    $("#cbk_all").attr("checked", false);
+  				  			    $("#cbk_all").attr("disabled",false);
+ 								}else{
+ 									alert("有重复数据！");
+ 								}
+							    });
+ 						}catch(e){
+ 							alert(e.description);
+ 						}
+ 					},
+ 					complete: function(XMLHttpRequest, textStatus){
+ 					},
+ 					error: function(){
+ 					}
+ 				});
+			});
+		};
+		
+		
 		/**
 	  	 * 发送信息
 	  	 */
@@ -468,7 +523,8 @@
 											</span>
 											
 											<span>
-												<input name="btn_AddPerson" type="button" class="btn_2_3" id="btn_AddPerson" value="添加人员">
+												<input name="btn_AddPerson" type="button" class="btn_5" id="btn_AddPerson" value="查询/添加人员">
+												<input name="btn_AddAllPerson" type="button" class="btn_5" id="btn_AddAllPerson" value="添加全部人员">
 												<!-- input name="btn_export" type="button" class="btn_2_3" id="btn_export" value="导入号码"> -->
 												<input name="btn_send" type="button" class="btn_2_3" id="btn_send" disabled="true" value="发送">
 											</span>

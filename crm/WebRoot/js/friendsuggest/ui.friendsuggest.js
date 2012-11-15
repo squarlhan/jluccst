@@ -323,7 +323,7 @@ if(typeof giant.ui === 'undefined') giant.ui = {};
                         if (aObj) aObj.addClass('checked');
                     } else {
                         if ($.isFunction($this.opts.limitCallBack)) {
-                            $this.opts.limitCallBack.call()
+                            $this.opts.limitCallBack.call();
                         } else {
                             alert('抱歉，可选好友数量已经达到上限');
                         }
