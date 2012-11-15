@@ -50,6 +50,7 @@
 			$.fn.UnCheckBoxAll("ids","cbk_all");
 			
 			$.fn.dynamicsAddPerson();
+			$.fn.dynamicsAddAllPerson();
 			
 			//清空按钮事件
 	  		$("#btn_clear").click(function(){
@@ -199,6 +200,59 @@
 			});
 		};
 		
+		
+		/**
+	  	 * 动态添加全部人员
+	  	 */
+		$.fn.dynamicsAddAllPerson = function(){
+			$("#btn_AddAllPerson").click(function(){
+ 				$.ajax({
+ 					type:"post",
+ 					url: "loadCustomerInfoForAjaxAction.action",
+ 					data:{personIds:"customer"},
+ 					beforeSend: function(XMLHttpRequest){
+ 					},
+ 					success: function(data, textStatus){
+ 						try{
+ 							//将字符串转换为json对象
+ 							data = eval("("+data+")");
+ 							$.each(data.customerInfoList,function(i,value){
+ 								if($("#"+value.id).length==0){
+  								var row="";
+  								row=row+"<tr>";
+  					  			row=row+"<td align='center' bgcolor='#FFFFFF' >";  
+  					  			row=row+"<input type='checkbox' name='ids'/>";
+  					  			row=row+"<input type='hidden' id='"+value.id+"' name='selectedIds' value='"+value.id+"'/>";
+  					  			row=row+"</td>";
+  					  			row=row+"<td align='center' bgcolor='#FFFFFF'>"+(value.name==null ? "" : value.name) +"</td>";
+  					  			row=row+"<td align='center' bgcolor='#FFFFFF'>"+(value.phone==null ? "" : value.phone) +"</td>";
+  					  			row=row+"<td align='center' bgcolor='#FFFFFF'>"+(value.categoryId==1 ? "客户" : "销售人员" )+"</td>";
+  					  			row=row+"<td align='center' bgcolor='#FFFFFF'>"+(value.unit==null ? "" : value.unit )+"</td>";
+  					  			row=row+"<td align='center' bgcolor='#FFFFFF'>"+(value.post==null ? "" : value.post)+"</td>";
+  					  			row=row+"<td align='center' bgcolor='#FFFFFF'>"+(value.nickname==null ? "" : value.nickname)+"</td>";
+  					  			row=row+"<td align='center' bgcolor='#FFFFFF'><a id='del_one' href='javascript:void(0);'>删除</a></td>";
+  					  			row=row+"</tr>";
+  					  			$("#no_data").hide();
+  					  		    $("#personList tr:first").append(row);
+  					  		    $("#cbk_all").attr("checked", false);
+  				  			    $("#cbk_all").attr("disabled",false);
+ 								}else{
+ 									alert("有重复数据！");
+ 								}
+							    });
+ 						}catch(e){
+ 							alert(e.description);
+ 						}
+ 					},
+ 					complete: function(XMLHttpRequest, textStatus){
+ 					},
+ 					error: function(){
+ 					}
+ 				});
+			});
+		};
+		
+		
 		/**
 	  	 * 发送信息
 	  	 */
@@ -295,7 +349,8 @@
 												<s:textfield id="txt_sendTime" name="sendTime" maxlength="25" cssStyle="width: 80px;" value="09:00"/>
 												通知销售人员
 												&nbsp;&nbsp;&nbsp;
-												<input name="btn_AddPerson" type="button" class="btn_2_3" id="btn_AddPerson" value="选择客户">
+												<input name="btn_AddPerson" type="button" class="btn_5" id="btn_AddPerson" value="查询/选择客户">
+												<input name="btn_AddAllPerson" type="button" class="btn_5" id="btn_AddAllPerson" value="选择全部客户">
 												<input name="btn_send" type="button" class="btn_2_3" id="btn_send" value="确定">
 											</span>
 											<br/>
