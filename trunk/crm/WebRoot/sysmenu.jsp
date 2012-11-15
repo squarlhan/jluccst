@@ -1029,7 +1029,7 @@
 									<tr>
 										<td width="40" align="right" style="padding-bottom: 4px;"><img src="images/up.gif" width="10" height="12" />
 										</td>
-										<td><strong name="menus">增值功能</strong>
+										<td><strong name="menus">进销存管理</strong>
 										</td>
 									</tr>
 								</table>
