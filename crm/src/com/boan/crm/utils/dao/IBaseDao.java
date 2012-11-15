@@ -166,6 +166,21 @@ public interface IBaseDao<T, ID extends Serializable> {
 	 * 清空当前session
 	 */
 	public void clearSession();
+	
+	/**
+	 * 执行SQL语句
+	 * @param sql
+	 * @param values
+	 */
+	public void executeSql( String sql, Map<String, ?> values );
+	
+	/**
+	 *  根据sql取所有记录
+	 * @param sql
+	 * @param values
+	 * @return
+	 */
+	public <X> List<X> findAllBySQL(String sql, Map<String, ?> values);
 }
 
 

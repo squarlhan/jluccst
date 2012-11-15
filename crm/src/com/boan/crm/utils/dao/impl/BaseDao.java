@@ -224,6 +224,24 @@ public class BaseDao<T, ID extends Serializable> implements IBaseDao<T, ID> {
 	}
 	
 	@Override
+	public void executeSql( String sql, Map<String, ?> values )
+	{
+		Query query = getSession().createSQLQuery(sql);
+		if (values != null) {
+			query.setProperties(values);
+		}
+		query.executeUpdate();
+	}
+	@Override
+	public <X> List<X> findAllBySQL(String sql, Map<String, ?> values) {
+		Query query = getSession().createSQLQuery(sql);
+		if (values != null && values.size()>0) {
+			query.setProperties(values);
+		}
+		return query.list();
+	}
+	
+	@Override
 	public void clearSession(){
 		sessionFactory.getCurrentSession().clear();
 	}
