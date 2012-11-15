@@ -57,7 +57,7 @@
 	  	 */
 		$.fn.save = function(){
 			$("#addBtn").click(function() {
-				if( confirm("确定要将系统数据进行初始化吗？") ){
+				if( confirm("该操作将清空数据库中所有表的数据，同时将数据库还原至初始状态，\n\n确定要进行此操作吗？") ){
 					$("#tdmsg").html("数据库正在初始化，请稍候……");
 					$("#addBtn").attr("disabled",true);
 					form1.action = "systemConfigAction!initSystemData.action";
