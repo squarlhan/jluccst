@@ -33,11 +33,18 @@
 			<result name="company-tree-for-role">/backstagemanage/companytreeforrole.jsp</result>
 			<result name="company-tree-for-popedom">/backstagemanage/companytreeforpopedom.jsp</result>
 		</action>
-		
 	</package>
-	    <package name="log" extends="struts-default">
+	<!-- 日志 -->
+	 <package name="log" extends="struts-default">
     	<action name="logAction" class="logAction">
     		<result name="log-list">/backstagemanage/loglist.jsp</result>
+    	</action>
+    </package>
+    <!-- 系统初始化 -->
+    <package name="system-config" extends="struts-default">
+    	<action name="systemConfigAction" class="systemConfigAction">
+    		<result name="input">/backstagemanage/systemconfiginfo.jsp</result>
+    		<result name="success">/backstagemanage/systemconfiginfo.jsp</result>
     	</action>
     </package>
 </struts>
