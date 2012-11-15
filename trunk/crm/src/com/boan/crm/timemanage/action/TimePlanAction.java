@@ -175,6 +175,9 @@ public class TimePlanAction extends BaseActionSupport{
 	public String openAddTimePlan() throws Exception {
 		deptList = deptService.queryAllDeptmentsByCompanyId( sessionCompanyId );
 		userList =userService.queryUserList( sessionCompanyId, sessionDeptId, new Pagination<User>()).getData();
+		timePlan = new TimePlan();
+		timePlan.setDeptId(sessionDeptId);
+		timePlan.setEmployeeId(sessionUserId);
 		return SUCCESS;
 	}
 	/**
