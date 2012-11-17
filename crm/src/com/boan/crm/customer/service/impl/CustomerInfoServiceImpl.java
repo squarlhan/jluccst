@@ -69,6 +69,14 @@ public class CustomerInfoServiceImpl implements ICustomerInfoService{
 	public List<CustomerInfo> findAllCustomerInfo() {
 		return customerInfoDao.find("from CustomerInfo order by registerTime asc", new Object[0]);
 	}
+	@Override
+	public int findAllCustomerInfoCount(String companyId)
+	{
+		Map<String,String> values = new HashMap<String,String>();
+		values.put("companyId", companyId);
+		String hql = "select Count(id) from CustomerInfo where companyId = :companyId";
+		return customerInfoDao.findCountForPage(hql, values);
+	}
 	/**
 	 * 查找全部客户
 	 */
