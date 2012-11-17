@@ -39,6 +39,8 @@
 			<result name="success">/customeranalysis/staticanalysisuser.jsp</result>
 			<result name="input">/customeranalysis/staticanalysisuser.jsp</result>
 		</action>
-    	
+    	<action name="getCustomerAssessmentXML" class="customerAssessmentAction" method="getCustomerAssessmentXMLByDay">
+			<result name="success">/customeranalysis/getstaticservice.jsp</result>
+		</action>
 	</package>
 </struts>

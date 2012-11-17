@@ -75,6 +75,8 @@ public class CustomerAssessmentAction extends BaseActionSupport{
 	private String customerId ="";
 	private String customerName = "";
 	private List<DataDictionary> listCategory = null;
+	private List<AutoCustomerAssessment> listCustomerAssessment = null;
+	
 	public List<DataDictionary> getListCategory() {
 		return listCategory;
 	}
@@ -391,6 +393,13 @@ public class CustomerAssessmentAction extends BaseActionSupport{
 		
 		return SUCCESS;
 	}
+	
+	public String staticAnalysisCustomer()
+	{
+		autoAssessmentSetting= autoAssessmentSettingService.findAutoAssessmentSettingByCompanyId(sessionCompanyId);
+		return SUCCESS;
+	}
+	
 	public String autoAnalysisCustomerList()
 	{
 		//客户分类： 传0
@@ -409,6 +418,35 @@ public class CustomerAssessmentAction extends BaseActionSupport{
 		values.put("companyId", sessionCompanyId);
 		pagination = autoCustomerAssessmentService.findAutoCustomerAssessmentByCompanyId(values, pagination);
 		
+		return SUCCESS;
+	}
+	
+	public String getCustomerAssessmentXMLByDay()
+	{
+		Map<String,String> values = new HashMap<String,String>();
+		values.put("customerId", customerId);
+		pagination = autoCustomerAssessmentService.findAutoCustomerAssessmentByCustomerId(values, pagination);
+		listCustomerAssessment = pagination.getData();
+		return SUCCESS;
+	}
+	
+	public String getCustomerAssessmentXMLByWeek()
+	{
+		Map<String,String> values = new HashMap<String,String>();
+		values.put("customerId", customerId);
+		
+		pagination = autoCustomerAssessmentService.findAutoCustomerAssessmentByCustomerId(values, pagination);
+		listCustomerAssessment = pagination.getData();
+		return SUCCESS;
+	}
+	
+	public String getCustomerAssessmentXMLByMonth()
+	{
+		Map<String,String> values = new HashMap<String,String>();
+		values.put("customerId", customerId);
+		
+		pagination = autoCustomerAssessmentService.findAutoCustomerAssessmentByCustomerId(values, pagination);
+		listCustomerAssessment = pagination.getData();
 		return SUCCESS;
 	}
 	
