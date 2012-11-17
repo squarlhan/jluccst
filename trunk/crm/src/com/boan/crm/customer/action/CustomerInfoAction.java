@@ -25,8 +25,10 @@ import org.springframework.stereotype.Controller;
 
 import com.boan.crm.customer.model.ContractPersonInfo;
 import com.boan.crm.customer.model.CustomerInfo;
+import com.boan.crm.customer.model.CustomerStaticInfo;
 import com.boan.crm.customer.service.IContractPersonService;
 import com.boan.crm.customer.service.ICustomerInfoService;
+import com.boan.crm.customer.service.ICustomerStaticInfoService;
 import com.boan.crm.datadictionary.model.AreaInfo;
 import com.boan.crm.datadictionary.model.CityInfo;
 import com.boan.crm.datadictionary.model.DataDictionary;
@@ -88,6 +90,11 @@ public class CustomerInfoAction extends BaseActionSupport{
 	@Qualifier("popedomService")
 	private IPopedomService popedomService = null;
 	
+	@Autowired
+	@Qualifier("customerStaticInfoService")
+	private ICustomerStaticInfoService customerStaticInfoService = null;
+	
+	
 	public String getCompanyId() {
 		return companyId;
 	}
@@ -139,6 +146,48 @@ public class CustomerInfoAction extends BaseActionSupport{
 	private String companyId = "";
 	private String companyName = "";
 	private List<Deptment> deptList = null;
+	private int totalCustomerCount = 0;
+	public int getTotalCustomerCount() {
+		return totalCustomerCount;
+	}
+	public void setTotalCustomerCount(int totalCustomerCount) {
+		this.totalCustomerCount = totalCustomerCount;
+	}
+	public List<CustomerStaticInfo> getListCategoryStatic() {
+		return listCategoryStatic;
+	}
+	public void setListCategoryStatic(List<CustomerStaticInfo> listCategoryStatic) {
+		this.listCategoryStatic = listCategoryStatic;
+	}
+	public List<CustomerStaticInfo> getListSourceStatic() {
+		return listSourceStatic;
+	}
+	public void setListSourceStatic(List<CustomerStaticInfo> listSourceStatic) {
+		this.listSourceStatic = listSourceStatic;
+	}
+	public List<CustomerStaticInfo> getListMaturityStatic() {
+		return listMaturityStatic;
+	}
+	public void setListMaturityStatic(List<CustomerStaticInfo> listMaturityStatic) {
+		this.listMaturityStatic = listMaturityStatic;
+	}
+	public List<CustomerStaticInfo> getListProgressStatic() {
+		return listProgressStatic;
+	}
+	public void setListProgressStatic(List<CustomerStaticInfo> listProgressStatic) {
+		this.listProgressStatic = listProgressStatic;
+	}
+	public List<CustomerStaticInfo> getListLevelStatic() {
+		return listLevelStatic;
+	}
+	public void setListLevelStatic(List<CustomerStaticInfo> listLevelStatic) {
+		this.listLevelStatic = listLevelStatic;
+	}
+	private List<CustomerStaticInfo> listCategoryStatic = null;
+	private List<CustomerStaticInfo> listSourceStatic =  null;
+	private List<CustomerStaticInfo> listMaturityStatic =  null;
+	private List<CustomerStaticInfo> listProgressStatic =  null;
+	private List<CustomerStaticInfo> listLevelStatic =  null;
 	
 	public String showGroupTree() throws Exception
 	{
@@ -666,6 +715,25 @@ public class CustomerInfoAction extends BaseActionSupport{
 	{
 		customerInfoService.deleteCustomerInfo(ids);
 		contractpersonInfoService.deleteContractPersonInfo(ids);
+		return SUCCESS;
+	}
+	
+	/**
+	 * 统计客户信息
+	 * @return String
+	 */
+	public String staticCustomer()
+	{
+		companyId = sessionCompanyId;
+		
+		totalCustomerCount = customerInfoService.findAllCustomerInfoCount(companyId);
+		
+		listCategoryStatic = customerStaticInfoService.findAllCustomerStaticInfo(companyId,CustomerStaticInfo.CUSTOMER_CATEGORY);
+		listSourceStatic = customerStaticInfoService.findAllCustomerStaticInfo(companyId,CustomerStaticInfo.CUSTOMER_SOURCE);
+		listMaturityStatic = customerStaticInfoService.findAllCustomerStaticInfo(companyId,CustomerStaticInfo.CUSTOMER_MATURITY);
+		listProgressStatic = customerStaticInfoService.findAllCustomerStaticInfo(companyId,CustomerStaticInfo.CUSTOMER_PROGRESS);
+		listLevelStatic = customerStaticInfoService.findAllCustomerStaticInfo(companyId,CustomerStaticInfo.CUSTOMER_LEVEL);
+		
 		return SUCCESS;
 	}
 	

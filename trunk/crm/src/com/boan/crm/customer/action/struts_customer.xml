@@ -271,6 +271,9 @@
 		</action>
 		<action name="deleteCustomerVisit" class="customerVisitInfoAction" method="deleteCustomerVisit">
     	</action>
+    	<action name="customerStaticInfo" class="customerInfoAction" method="staticCustomer">
+			<result name="success">/customer/customerstatic_info.jsp</result>
+		</action>
 	</package>
 	<package name="ssss" extends="json-default" namespace="/customer">
 			<action name="getCustomerByName" class="customerInfoAction" method="getCustomerByName">
