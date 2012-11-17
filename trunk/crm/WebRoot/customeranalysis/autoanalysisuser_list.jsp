@@ -135,14 +135,12 @@ background-color:#d3eaef}
 	  			});
 	  		});
 	  		/**
-	  		 * 删除单个客户信息
+	  		 * 统计
 	  		 */
 	  		$('a[name="static"]').each(function(){
 	  			$(this).click(function(){
-	  				alert("正在开发中。。。");
-	  				return;
-	  				var url = $(this).attr("static_url");
-	  				parent.parent.tipsWindown("客户统计信息","iframe:"+url,"460","200","true","","true","no");
+	  				var url = $(this).attr("url");
+	  				parent.parent.tipsWindown("客户评估信息统计图","iframe:"+url,"650","450","true","","true","no");
 	  				parent.parent.$("#windown-close").bind('click',function(){
 						window.location.href="autoAnalysisCustomerList.action";
 					});
@@ -214,9 +212,9 @@ background-color:#d3eaef}
             <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="result"/></td>
 	          <td height="26" colspan="2" align="center" bgcolor="#FFFFFF">
 	          <s:url id="static_url" action="staticAnalysisCustomer">   
-					<s:param name="ids" value="id"></s:param>   
+					<s:param name="customerId" value="customerId"></s:param>   
 				</s:url>
-				<a name="static" href="javascript:void(0);" url="${delete_url}">统计结果</a>  
+				<a name="static" href="javascript:void(0);" url="${static_url}">统计结果</a>  
 				<s:url id="delete_url" action="deleteAnalysisCustomer">   
 					<s:param name="ids" value="id"></s:param>   
 				</s:url>
