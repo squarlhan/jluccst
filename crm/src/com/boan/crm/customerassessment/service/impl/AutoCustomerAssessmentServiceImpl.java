@@ -37,6 +37,38 @@ public class AutoCustomerAssessmentServiceImpl implements IAutoCustomerAssessmen
 		values.put("companyId", companyId);
 		return autoCustomerAssessmentDao.find(" from AutoCustomerAssessment where companyId = :companyId ", values);
 	}
+	
+	@Override
+	public Pagination<AutoCustomerAssessment> findAutoCustomerAssessmentByCustomerId(Map<String,String> values,Pagination<AutoCustomerAssessment> pagination)
+	{	
+		StringBuilder hql = new StringBuilder();
+		hql.append( "from AutoCustomerAssessment where 1=1");
+		if(values.get("customerId") != null)
+		{
+			hql.append(" and customerId = :customerId ");
+		}
+		hql.append(" order by assessmentTime asc ");
+		
+		List<AutoCustomerAssessment> data = autoCustomerAssessmentDao.findForPage(hql.toString(), values, pagination.getStartIndex(), pagination.getPageSize());
+		
+		hql.delete(0, hql.length());
+		hql.append(" select count(*) from AutoCustomerAssessment where 1=1 " );
+		if(values.get("customerId") != null)
+		{
+			hql.append(" and customerId = :customerId ");
+		}
+		
+		List<Integer> list = autoCustomerAssessmentDao.find(hql.toString(), values);
+		int totalRows = 0;
+		if(list != null && list.size() > 0)
+		{
+			totalRows =list.size();
+		}
+		pagination.setTotalRows(totalRows);
+		pagination.setData(data);
+		
+		return pagination;
+	}
 	@Override
 	public Pagination<AutoCustomerAssessment> findAutoCustomerAssessmentByCompanyId(Map<String,String> values,Pagination<AutoCustomerAssessment> pagination)
 	{	

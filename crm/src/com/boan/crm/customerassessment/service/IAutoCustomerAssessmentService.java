@@ -18,13 +18,13 @@ public interface IAutoCustomerAssessmentService {
 	/**
 	 * 根据单位Id查找
 	 * @param companyId
-	 * @return List<AutoAssessmentSetting>
+	 * @return List<AutoCustomerAssessment>
 	 */
 	public List<AutoCustomerAssessment> findAutoCustomerAssessmentByCompanyId(String companyId);
 	/**
 	 * 根据单位Id查找
 	 * @param companyId
-	 * @return List<AutoAssessmentSetting>
+	 * @return List<AutoCustomerAssessment>
 	 */
 	public Pagination<AutoCustomerAssessment> findAutoCustomerAssessmentByCompanyId(Map<String,String> values,Pagination<AutoCustomerAssessment> pagination);
 	/**
@@ -32,6 +32,13 @@ public interface IAutoCustomerAssessmentService {
 	 * @param autoAssessmentSetting
 	 */
 	public void save(AutoCustomerAssessment autoCustomerAssessment);
+	/**
+	 * 根据客户Id查找
+	 * @param customerId
+	 * @return List<AutoCustomerAssessment>
+	 */
+	public Pagination<AutoCustomerAssessment> findAutoCustomerAssessmentByCustomerId(Map<String,String> values,Pagination<AutoCustomerAssessment> pagination);
+	
 	
 	/**
 	 * 删除
