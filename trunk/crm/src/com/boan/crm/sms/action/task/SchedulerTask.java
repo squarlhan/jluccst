@@ -64,11 +64,18 @@ public class SchedulerTask {
 						//格式为：年年年年月月日日时时分分秒秒，例如2009 08 01 12 30 30 表示2009年8月1日12点30分30秒
 						StringBuffer time  = new StringBuffer();
 						time.append(info.getSendTime().get(Calendar.YEAR));
-						time.append(info.getSendTime().get(Calendar.MONTH)<10 ? "0"+(info.getSendTime().get(Calendar.MONTH)+1) : info.getSendTime().get(Calendar.MONTH));
-						time.append(info.getSendTime().get(Calendar.DATE )<10 ? "0"+info.getSendTime().get(Calendar.DATE ) : info.getSendTime().get(Calendar.DATE ));
-						time.append(info.getSendTime().get(Calendar.HOUR_OF_DAY)<10 ? "0"+info.getSendTime().get(Calendar.HOUR_OF_DAY ) : info.getSendTime().get(Calendar.HOUR_OF_DAY ));
-						time.append(info.getSendTime().get(Calendar.MINUTE)<10 ? "0"+info.getSendTime().get(Calendar.MINUTE ) : info.getSendTime().get(Calendar.MINUTE ));
-						time.append(info.getSendTime().get(Calendar.SECOND)<10 ? "0"+info.getSendTime().get(Calendar.SECOND ) : info.getSendTime().get(Calendar.SECOND ));
+						Calendar calendar= info.getSendTime();
+						System.out.println(calendar.get(Calendar.MONTH));
+						int month = calendar.get(Calendar.MONTH);
+						int date  = calendar.get(Calendar.DATE);
+						int hour_of_day = calendar.get(Calendar.HOUR_OF_DAY);
+						int minute = calendar.get(Calendar.MINUTE);
+						int second = calendar.get(Calendar.SECOND);
+						time.append(String.format("%02d", month+1));
+						time.append(String.format("%02d", date));
+						time.append(String.format("%02d", hour_of_day));
+						time.append(String.format("%02d", minute));
+						time.append(String.format("%02d", second));
 						int flag = smsManageService.sendScheduledSMS(info.getInfo(), time.toString() , info.getPhone());
 						//关闭当前短信客户端连接
 						smsManageService.closeClientSocket();
