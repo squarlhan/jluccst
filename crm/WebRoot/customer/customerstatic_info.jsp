@@ -88,73 +88,54 @@ background-color:#d3eaef}
 
 	<script type="text/javascript">
 	$(document).ready(function(){
-		loadData($("#customerId").val());
-		function loadData(customerId) {
-             $.ajax({
-                 url:"<%=basePath%>customerassessment/getCustomerAssessmentXML.action?customerId=" + customerId,
-                 type: 'POST',
-                 dataType: 'JSON',
-                 timeout: 5000,
-                 error: function() { alert('Error loading data!'); },
-                 success: function(msg) {
-                	 var xml = "<graph caption='客户评估信息统计图' subcaption='' xAxisName='日期' yAxisMinValue='0' yAxisName='assessment values' decimalPrecision='0' formatNumberScale='0' numberPrefix='' showNames='1' showValues='0'  showAlternateHGridColor='1' AlternateHGridColor='ff5904' divLineColor='ff5904' divLineAlpha='20' alternateHGridAlpha='5' >";
-                	 //xml = xml + "<set name='Jan' value='17400' hoverText='January'/>";
-                     $.each(eval(msg), function(i, item) {
-                         //$("<option value='" + item.id + "'>" + item.name + "</option>").appendTo($("#city"));
-                    	 xml = xml + "<set name='"+item.date+"' value='"+item.resultValue+"' hoverText='["+item.date+"]评估结果："+item.result+"'/>";
-                     });
-                     xml = xml + "</graph>";
-                     var chart = new FusionCharts("../js/FusionCharts/Charts/FCF_Line.swf", "chartdiv", "600", "350");
-	          		 chart.setDataXML(xml);
-	          		 chart.render("chartdiv");
-                 }
-             });
-         };
-         var xml = "<graph caption='客户分类信息统计'　showNames='1'  decimalPrecision='0'>";
-         <s:iterator value="listCategoryStatic" status="obj">
-        	xml = xml + "<set name=\"<s:property value='category'/>\" value=\"<s:property value='count'/>\" />";
-         </s:iterator>
-         xml = xml + "</graph>";
-         var chart = new FusionCharts("../js/FusionCharts/Charts/FCF_Pie3D.swf", "chartdiv1", "300", "250");
-  		 chart.setDataXML(xml);
-  		 chart.render("chartdiv1");
-  		 
-  		 var xml2 = "<graph caption='客户来源信息统计'　showNames='1'  decimalPrecision='0'>";
-         <s:iterator value="listSourceStatic" status="obj">
-        	xml2 = xml2 + "<set name=\"<s:property value='category'/>\" value=\"<s:property value='count'/>\" />";
-         </s:iterator>
-         xml2 = xml2 + "</graph>";
-         var chart2 = new FusionCharts("../js/FusionCharts/Charts/FCF_Pie3D.swf", "chartdiv2", "300", "250");
-  		 chart2.setDataXML(xml2);
-  		 chart2.render("chartdiv2");
-  		 
-  		var xml3 = "<graph caption='客户成熟度信息统计'　showNames='1'  decimalPrecision='0'>";
-        <s:iterator value="listMaturityStatic" status="obj">
-       	xml3 = xml3 + "<set name=\"<s:property value='category'/>\" value=\"<s:property value='count'/>\" />";
-        </s:iterator>
-        xml3 = xml3 + "</graph>";
-        var chart3 = new FusionCharts("../js/FusionCharts/Charts/FCF_Pie3D.swf", "chartdiv3", "300", "250");
- 		 chart3.setDataXML(xml3);
- 		 chart3.render("chartdiv3");
- 		 
- 		var xml4 = "<graph caption='客户业务进展信息统计'　showNames='1'  decimalPrecision='0'>";
-        <s:iterator value="listProgressStatic" status="obj">
-       	xml4 = xml4 + "<set name=\"<s:property value='category'/>\" value=\"<s:property value='count'/>\" />";
-        </s:iterator>
-        xml4 = xml4 + "</graph>";
-        alert(xml4);
-        var chart4 = new FusionCharts("../js/FusionCharts/Charts/FCF_Pie3D.swf", "chartdiv4", "300", "250");
- 		 chart4.setDataXML(xml4);
- 		 chart4.render("chartdiv4");
- 		 
- 		var xml5 = "<graph caption='客户开发程度信息统计'　showNames='1'  decimalPrecision='0'>";
-        <s:iterator value="listLevelStatic" status="obj">
-       	xml5 = xml5 + "<set name=\"<s:property value='category'/>\" value=\"<s:property value='count'/>\" />";
-        </s:iterator>
-        xml5 = xml5 + "</graph>";
-        var chart5 = new FusionCharts("../js/FusionCharts/Charts/FCF_Pie3D.swf", "chartdiv5", "300", "250");
- 		 chart5.setDataXML(xml5);
- 		 chart5.render("chartdiv5");
+       var xml = "<graph caption='客户分类信息统计'　showNames='1'  decimalPrecision='0'>";
+       <s:iterator value="listCategoryStatic" status="obj">
+      	//xml = xml + "<set name=\"<s:property value='category'/>\" value=\"<s:property value='count'/>\" />";
+      	xml = xml + "<set name=\""+document.getElementById("category<s:property value="#obj.index"/>").textStr+"\" value=\""+document.getElementById("category<s:property value="#obj.index"/>").valueStr+"\" />";
+       </s:iterator>
+       xml = xml + "</graph>";
+       var chart = new FusionCharts("../js/FusionCharts/Charts/FCF_Pie3D.swf", "chartdiv1", "300", "250");
+		 chart.setDataXML(xml);
+		 chart.render("chartdiv1");
+		 
+		 var xml2 = "<graph caption='客户来源信息统计'　showNames='1'  decimalPrecision='0'>";
+		 <s:iterator value="listSourceStatic" status="obj">
+	     	xml2 = xml2 + "<set name=\""+document.getElementById("source<s:property value="#obj.index"/>").textStr+"\" value=\""+document.getElementById("source<s:property value="#obj.index"/>").valueStr+"\" />";
+    	  </s:iterator>
+       xml2 = xml2 + "</graph>";
+       var chart2 = new FusionCharts("../js/FusionCharts/Charts/FCF_Pie3D.swf", "chartdiv2", "300", "250");
+		 chart2.setDataXML(xml2);
+		 chart2.render("chartdiv2");
+		 
+		var xml3 = "<graph caption='客户成熟度信息统计'　showNames='1'  decimalPrecision='0'>";
+      <s:iterator value="listMaturityStatic" status="obj">
+     	//xml3 = xml3 + "<set name=\"<s:property value='category'/>\" value=\"<s:property value='count'/>\" />";
+     	xml3 = xml3 + "<set name=\""+document.getElementById("maturity<s:property value="#obj.index"/>").textStr+"\" value=\""+document.getElementById("maturity<s:property value="#obj.index"/>").valueStr+"\" />";
+      </s:iterator>
+      xml3 = xml3 + "</graph>";
+      var chart3 = new FusionCharts("../js/FusionCharts/Charts/FCF_Pie3D.swf", "chartdiv3", "300", "250");
+	 chart3.setDataXML(xml3);
+	 chart3.render("chartdiv3");
+	 
+	var xml4 = "<graph caption='客户业务进展信息统计'　showNames='1'  decimalPrecision='0'>";
+      <s:iterator value="listProgressStatic" status="obj">
+     	//xml4 = xml4 + "<set name=\"<s:property value='category'/>\" value=\"<s:property value='count'/>\" />";
+     	xml4 = xml4 + "<set name=\""+document.getElementById("progress<s:property value="#obj.index"/>").textStr+"\" value=\""+document.getElementById("progress<s:property value="#obj.index"/>").valueStr+"\" />";
+      </s:iterator>
+      xml4 = xml4 + "</graph>";
+      var chart4 = new FusionCharts("../js/FusionCharts/Charts/FCF_Pie3D.swf", "chartdiv4", "300", "250");
+	 chart4.setDataXML(xml4);
+	 chart4.render("chartdiv4");
+	 
+	var xml5 = "<graph caption='客户开发程度信息统计'　showNames='1'  decimalPrecision='0'>";
+      <s:iterator value="listLevelStatic" status="obj">
+     	//xml5 = xml5 + "<set name=\"<s:property value='category'/>\" value=\"<s:property value='count'/>\" />";
+     	xml5 = xml5 + "<set name=\""+document.getElementById("level<s:property value="#obj.index"/>").textStr+"\" value=\""+document.getElementById("level<s:property value="#obj.index"/>").valueStr+"\" />";
+      </s:iterator>
+      xml5 = xml5 + "</graph>";
+      var chart5 = new FusionCharts("../js/FusionCharts/Charts/FCF_Pie3D.swf", "chartdiv5", "300", "250");
+	 chart5.setDataXML(xml5);
+	 chart5.render("chartdiv5");
 	});
 	</script>
 	<script type="text/javascript" src="../js/FusionCharts/FusionCharts.js"></script>
@@ -162,6 +143,21 @@ background-color:#d3eaef}
 	<body>
 	<s:form id="form1" name="form1" method="post" theme="simple">
 	<s:hidden id="totalCustomerCount" name="totalCustomerCount"></s:hidden>
+	 <s:iterator value="listCategoryStatic" status="obj">
+      	<span name="category" id="category<s:property value="#obj.index"/>" textStr="<s:property value='category'/>" valueStr="<s:property value='count'/>"></span>
+     </s:iterator>
+	 <s:iterator value="listSourceStatic" status="obj">
+      	<span name="source" id="source<s:property value="#obj.index"/>" textStr="<s:property value='category'/>" valueStr="<s:property value='count'/>"></span>
+     </s:iterator>
+     <s:iterator value="listMaturityStatic" status="obj">
+      	<span name="maturity" id="maturity<s:property value="#obj.index"/>" textStr="<s:property value='category'/>" valueStr="<s:property value='count'/>"></span>
+     </s:iterator>
+     <s:iterator value="listProgressStatic" status="obj">
+      	<span name="progress" id="progress<s:property value="#obj.index"/>" textStr="<s:property value='category'/>" valueStr="<s:property value='count'/>"></span>
+     </s:iterator>
+     <s:iterator value="listLevelStatic" status="obj">
+      	<span name="level" id="level<s:property value="#obj.index"/>" textStr="<s:property value='category'/>" valueStr="<s:property value='count'/>"></span>
+     </s:iterator>
 <table width="98%" border="0" cellspacing="0" cellpadding="3" align="center">
   <tr> 
     <td valign="top" class="text" align="center"> <div id="chartdiv1" align="center"> 
