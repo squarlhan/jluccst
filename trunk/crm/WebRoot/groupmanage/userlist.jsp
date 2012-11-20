@@ -43,7 +43,7 @@
 	$.fn.edit = function(cid){
 		var param = "deptId="+$("#deptId").val() ;
 		param += "&companyId="+$("#companyId").val();
-		parent.parent.tipsWindown("用户信息","iframe:./userAction!showUser.action?user.id="+cid + "&" + param,"430","430","true","","true","no");
+		parent.parent.tipsWindown("用户信息","iframe:./userAction!showUser.action?user.id="+cid + "&" + param,"430","440","true","","true","no");
 		parent.parent.$("#windown-close").bind('click',function(){
 			window.location.href="./userAction!showUserList.action?" + param;
 		});

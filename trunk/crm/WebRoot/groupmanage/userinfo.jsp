@@ -28,6 +28,12 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<title></title>
 		<j:scriptlink css="true" jquery="true" validate="true"></j:scriptlink>
+		<link rel="stylesheet" media="all" type="text/css" href="<%=path %>/js/timepicke/jquery-ui-1.7.3.custom.css" />
+		<link rel="stylesheet" media="all" type="text/css" href="<%=path %>/js/timepicke/jquery-ui-timepicker-addon.css" />
+		<script type="text/javascript" src="<%=path %>/js/timepicke/jquery-ui-1.7.3.custom.min.js"></script>
+		<script type="text/javascript" src="<%=path %>/js/timepicke/jquery-ui-timepicker-addon.js"></script>
+		<script type="text/javascript" src="<%=path %>/js/timepicke/jquery-ui-timepicker-zh-CN.js"></script>
+		<script type="text/javascript" src="<%=path %>/js/timepicke/jquery-ui-sliderAccess.js"></script>
 		<script type="text/javascript">
 		<!--
 			var _customer_submit = {
@@ -37,6 +43,7 @@
 				<s:if test="null==user.id||user.id.isEmpty">
 				"user.password":{required:true},
 				</s:if>
+				"user.birthday":{validatedate:true},
 				"user.officePhone":{strangecode:true},
 				"user.phone":{strangecode:true},
 				"user.email":{email:true},
@@ -90,6 +97,7 @@
 			 */
 			$.fn.initpage = function(){
 				$("#username").focus();
+				$("#birthday").datetimepicker({showTimepicker: false});
 			}
 			/**
           	 * 设置初始密码，如果是新增加用户，则默认为初始密码，否则为空
@@ -195,6 +203,26 @@
 												<input type="button" name="button3" value="初始化密码" id="button3"
 													class="SkinImg Btn_4" />
 												</s:else>
+											</td>
+										</tr>
+										<tr>
+											<td height="26" align="right" bgcolor="#FFFFFF">
+												<strong>出生日期：</strong>
+											</td>
+											<td height="26" align="left" bgcolor="#FFFFFF">
+												<s:textfield name="user.birthday" id="birthday" cssStyle="width: 250px;" maxlength="25"></s:textfield>
+											</td>
+										</tr>
+										<tr>
+											<td height="26" align="right" bgcolor="#FFFFFF">
+												<strong>生日类型：</strong>
+											</td>
+											<td height="26" align="left" bgcolor="#FFFFFF">
+												<input type="checkbox" name="lunarSolarFlag" id="lunarSolarFlag" value="1"
+												<s:if test='user.lunarSolarFlag =="1"'>
+													checked="true"
+												</s:if>
+												>农历生日
 											</td>
 										</tr>
 										<tr>
