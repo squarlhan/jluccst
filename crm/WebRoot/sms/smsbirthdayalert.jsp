@@ -156,7 +156,7 @@
 		  							//将字符串转换为json对象
 		  							data = eval("("+data+")");
 		  							$.each(data.customerInfoList,function(i,value){
-		  								if($("#"+value.id).length==0){
+		  								if($("#"+value.id).length==0){ 
 			  								var row="";
 			  								row=row+"<tr>";
 			  					  			row=row+"<td align='center' bgcolor='#FFFFFF' >";  
@@ -164,6 +164,8 @@
 			  					  			row=row+"<input type='hidden' id='"+value.id+"' name='selectedIds' value='"+value.id+"'/>";
 			  					  			row=row+"</td>";
 			  					  		row=row+"<td align='center' bgcolor='#FFFFFF'>"+(value.name==null ? "" : value.name) +"</td>";
+			  					  		var lunar = value.isLunarCalender=="0"?"(阴历)":"(阳历)";
+			  					  		row=row+"<td align='center' bgcolor='#FFFFFF'>"+(value.birthday==null ? "" : value.birthday.substring(0,10)+"<font color='red'>"+lunar) +"</font></td>";
 		  					  			row=row+"<td align='center' bgcolor='#FFFFFF'>"+(value.phone==null ? "" : value.phone) +"</td>";
 		  					  			row=row+"<td align='center' bgcolor='#FFFFFF'>"+(value.categoryId==1 ? "客户" : "销售人员" )+"</td>";
 		  					  		    row=row+"<td align='center' bgcolor='#FFFFFF'>"+(value.unit==null ? "" : value.unit )+"</td>";
@@ -225,6 +227,8 @@
   					  			row=row+"<input type='hidden' id='"+value.id+"' name='selectedIds' value='"+value.id+"'/>";
   					  			row=row+"</td>";
   					  			row=row+"<td align='center' bgcolor='#FFFFFF'>"+(value.name==null ? "" : value.name) +"</td>";
+  					  			var lunar = value.isLunarCalender=="0"?"(阴历)":"(阳历)";
+  					  			row=row+"<td align='center' bgcolor='#FFFFFF'>"+(value.birthday==null ? "" : value.birthday.substring(0,10)+"<font color='red'>"+lunar) +"</font></td>";
   					  			row=row+"<td align='center' bgcolor='#FFFFFF'>"+(value.phone==null ? "" : value.phone) +"</td>";
   					  			row=row+"<td align='center' bgcolor='#FFFFFF'>"+(value.categoryId==1 ? "客户" : "销售人员" )+"</td>";
   					  			row=row+"<td align='center' bgcolor='#FFFFFF'>"+(value.unit==null ? "" : value.unit )+"</td>";
@@ -380,6 +384,7 @@
 	   							<s:checkbox theme="simple" id="cbk_all" name="all"></s:checkbox>
 	   						</td>
 	              			<td align="center" background="<%=basePath%>/images/headerbg.jpg"><strong>接收人</strong></td>
+	              			<td align="center" background="<%=basePath%>/images/headerbg.jpg"><strong>生日</strong></td>
 	              			<td align="center" background="<%=basePath%>/images/headerbg.jpg"><strong>手机号</strong></td>
 	              			<td align="center" background="<%=basePath%>/images/headerbg.jpg"><strong>人员类型</strong></td>
 	              			<td align="center" background="<%=basePath%>/images/headerbg.jpg"><strong>公司</strong></td>
@@ -388,7 +393,7 @@
 	              			<td align="center" background="<%=basePath%>/images/headerbg.jpg"><strong>操作</strong></td>
 						</tr>
 						<tr id="no_data">
-	              			<td align="center" bgcolor="#FFFFFF" colspan="8" >暂无任务</td>
+	              			<td align="center" bgcolor="#FFFFFF" colspan="10" >暂无任务</td>
 	        			</tr>
 					</table>
 					</fieldset>
