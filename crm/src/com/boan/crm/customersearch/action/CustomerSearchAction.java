@@ -295,7 +295,7 @@ public class CustomerSearchAction  extends BaseActionSupport{
 				contractpersonInfoService.save(contractPersonInfo);
 				if(contractPersonInfo.getPhone()!=null && !contractPersonInfo.getPhone().equals("")){
 					SMSCustomerInfo smsUser =new SMSCustomerInfo();
-					smsUser.setCustomerId(customerInfo.getId());
+					smsUser.setCustomerId(contractPersonInfo.getId());
 					smsUser.setCategoryId("1");
 					smsUser.setPhone(temp.getPhone());
 					smsUser.setName(temp.getPersonName());
