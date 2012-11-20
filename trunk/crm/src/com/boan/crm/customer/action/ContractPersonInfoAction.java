@@ -92,6 +92,10 @@ public class ContractPersonInfoAction extends BaseActionSupport{
 		obj.setTel(contractPersonInfo.getTel());
 		
 		contractpersonInfoService.save(obj);
+		if(contractPersonInfo.getId() == null || contractPersonInfo.getId().equals(""))
+		{
+			contractPersonInfo.setId(obj.getId());
+		}
 		
 		//需保存到短信用户处
 		boolean newUserFlag = false;
@@ -143,6 +147,7 @@ public class ContractPersonInfoAction extends BaseActionSupport{
 	public String deletePersonInfo()
 	{
 		contractpersonInfoService.deleteContractPersonInfo(personId);
+		sMSCustomerInfoService.deleteSMSCustomerInfoFoCustomer(personId);
 		return NONE;
 	}
 	

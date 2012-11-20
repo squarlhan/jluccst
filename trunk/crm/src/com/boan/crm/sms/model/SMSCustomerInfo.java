@@ -33,7 +33,7 @@ public class SMSCustomerInfo {
 	private String id;
 	
 	/**
-	 * 客户Id（用于将客户保存时保存为SMSCustomerInfo对象，在客户删除时使用这个Id删除）
+	 * 客户联系人Id（用于将客户保存时保存为SMSCustomerInfo对象，在客户联系人删除时使用这个Id删除）
 	 */
 	@Column(name = "CUSTOMER_ID" , length = 50)
 	private String customerId;

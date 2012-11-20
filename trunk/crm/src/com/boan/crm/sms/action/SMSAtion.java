@@ -525,14 +525,17 @@ public class SMSAtion extends BaseActionSupport{
 					
 					SMSInfo info = new SMSInfo();
 					
-					info.setOrganId(organId);
 					String currentUserName =userSession.getUserCName();      //当前用户的名字
 					String currentUserPhone = userSession.getUserPhone();      //当前用户的手机号
 					String currentUserCompany =userSession.getCompanyName();      //当前用户的单位
+					
+					info.setOrganId(organId);
 					info.setPersonName(currentUserName);
 					info.setPersonCompany(currentUserCompany);
+					
 					Calendar time = Calendar.getInstance();
 					Calendar birthday = Calendar.getInstance();
+					
 					String[] timeArray = sendTime.split(":");
 					if(obj.getBirthday()!=null){
 						if(obj.getIsLunarCalender()==0){//阴历
@@ -549,37 +552,37 @@ public class SMSAtion extends BaseActionSupport{
 							time.set(Calendar.HOUR_OF_DAY, Integer.parseInt(timeArray[0]));
 							time.set(Calendar.MINUTE, Integer.parseInt(timeArray[1]));
 						}
-					}
 					
-					info.setPhone(currentUserPhone);
-					allContent= new StringBuffer();
-					allContent.append(currentUserName + ", 您的客户"+obj.getName());
-					if(obj.getNickname()!=null && !obj.getNickname().trim().equals("")){
-						allContent.append("("+obj.getNickname()+")");
+						info.setPhone(currentUserPhone);
+						allContent= new StringBuffer();
+						allContent.append(currentUserName + ", 您的客户"+obj.getName());
+						if(obj.getNickname()!=null && !obj.getNickname().trim().equals("")){
+							allContent.append("("+obj.getNickname()+")");
+						}
+						
+						allContent.append("将于"+time.get(Calendar.YEAR)+"-"+(time.get(Calendar.MONTH)+1)+"-"+time.get(Calendar.DATE));
+						allContent.append("过生日，记得送去祝福！");
+						info.setInfo(allContent.toString());
+						
+						if(beforeTime.equals("ONE_DAY")){
+							time.add(Calendar.DATE, -1);
+						}
+						if(beforeTime.equals("TWO_DAY")){
+							time.add(Calendar.DATE, -2);
+						}
+						if(beforeTime.equals("ONT_WEEK")){
+							time.add(Calendar.DATE,-7);
+						}
+						if(beforeTime.equals("FIFTEEN_DAY")){
+							time.add(Calendar.DATE, -15);
+						}
+						
+						//定时发送
+						info.setIsImmediately(1);
+						info.setState(1);
+						info.setSendTime(time);
+						smsInfoService.saveSMSInfo(info);
 					}
-	
-					allContent.append("将于"+time.get(Calendar.YEAR)+"-"+time.get(Calendar.MONTH)+"-"+time.get(Calendar.DATE));
-					allContent.append("过生日，记得送去祝福！");
-					
-					info.setInfo(allContent.toString());
-					
-					if(beforeTime.equals("ONE_DAY")){
-						time.add(Calendar.DATE, 1);
-					}
-					if(beforeTime.equals("TWO_DAY")){
-						time.add(Calendar.DATE, 2);
-					}
-					if(beforeTime.equals("ONT_WEEK")){
-						time.add(Calendar.DATE, 7);
-					}
-					if(beforeTime.equals("FIFTEEN_DAY")){
-						time.add(Calendar.DATE, 15);
-					}
-					//定时发送
-					info.setIsImmediately(1);
-					info.setState(1);
-					info.setSendTime(time);
-					smsInfoService.saveSMSInfo(info);
 				}
 				SMSBalance = smsManageService.getBalance();
 			}
