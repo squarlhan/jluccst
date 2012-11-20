@@ -38,6 +38,28 @@ public class AnalysisResultServiceImpl implements IAnalysisResultService{
 		return analysisResultDao.find(hql, values);
 	}
 	/**
+	 * 从总记录中拷贝生成公司记录
+	 * @param companyId
+	 */
+	public void saveMainFuzzyResultInfoToCompany(String companyId)
+	{
+		Map<String,String> idMap = new HashMap<String,String>();
+		List<AnalysisResult> listFuzzyResult = analysisResultDao.find("from AnalysisResult where companyId is null or companyId = ''", idMap);
+		if(listFuzzyResult != null && listFuzzyResult.size() > 0)
+		{
+			for(int i=0;i<listFuzzyResult.size();i++)
+			{
+				AnalysisResult temp = listFuzzyResult.get(i);
+				AnalysisResult analysisResult = new AnalysisResult();
+				analysisResult.setBeginValue(temp.getBeginValue());
+				analysisResult.setEndValue(temp.getEndValue());
+				analysisResult.setResult(temp.getResult());
+				analysisResult.setCompanyId(companyId);
+				save(analysisResult);
+			}
+		}
+	}
+	/**
 	 * 根据值获取结论　
 	 */
 	public AnalysisResult findAnalysisResult(double result)
