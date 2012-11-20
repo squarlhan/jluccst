@@ -109,6 +109,7 @@
 			<s:label id="lb_message" name="message" cssStyle="display:none"></s:label>
 			<s:hidden id="fuzzyCategory" name="fuzzyCategory"></s:hidden>
 			<s:hidden id="id" name="id"></s:hidden>
+			<s:hidden id="companyId" name="companyId"></s:hidden>
 			<input type="hidden" name="fuzzyName" value="" />
 			<table width="100%" border="0" cellspacing="5" cellpadding="0">
 				<tr>
