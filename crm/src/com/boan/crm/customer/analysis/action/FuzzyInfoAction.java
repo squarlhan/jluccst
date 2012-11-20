@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
+import com.boan.crm.backstagemanage.model.Company;
+import com.boan.crm.backstagemanage.service.ICompanyService;
 import com.boan.crm.customer.analysis.model.FuzzyCategory;
 import com.boan.crm.customer.analysis.model.FuzzyInfo;
 import com.boan.crm.customer.analysis.model.IdCaption;
@@ -35,6 +37,11 @@ public class FuzzyInfoAction extends BaseActionSupport{
 	@Qualifier("fuzzyInfoService")
 	//模糊项状态接口类
 	private IFuzzyInfoService fuzzyInfoService;
+	
+	@Autowired
+	@Qualifier("companyService")
+	//模糊项状态接口类
+	private ICompanyService companyService;
 	
 	//模糊项信息类
 	private FuzzyInfo fuzzyInfo ;
@@ -93,10 +100,22 @@ public class FuzzyInfoAction extends BaseActionSupport{
 	private String fuzzyCategory = "";
 	private List<IdCaption> categoryList = null;
 	private List<IdCaption> functionList = null;
-	
+	private String companyId = "";
+	public String getCompanyId() {
+		return companyId;
+	}
+	public void setCompanyId(String companyId) {
+		this.companyId = companyId;
+	}
 	private String message = "";
 	private List<FuzzyInfo> listFuzzyInfo = null;
-	
+	private List<Company> listCompany = null;
+	public List<Company> getListCompany() {
+		return listCompany;
+	}
+	public void setListCompany(List<Company> listCompany) {
+		this.listCompany = listCompany;
+	}
 	/**
 	 * 模糊项列表
 	 * @return String
@@ -104,6 +123,8 @@ public class FuzzyInfoAction extends BaseActionSupport{
 	public String fuzzyCategoryList()
 	{
 		categoryList = FuzzyCategory.getFuzzyCatetory();
+		
+		listCompany = companyService.queryAllCompanys();
 		return SUCCESS;
 	}
 	/**
@@ -113,7 +134,13 @@ public class FuzzyInfoAction extends BaseActionSupport{
 	public String fuzzyList()
 	{
 		//模糊项分类： 传0
-		listFuzzyInfo = fuzzyInfoService.findAllFuzzyInfoByCategory(fuzzyCategory,sessionCompanyId);
+		if(companyId != null && companyId.length() >0)
+		{
+			listFuzzyInfo = fuzzyInfoService.findAllFuzzyInfoByCategory(fuzzyCategory,companyId);
+		}else
+		{
+			listFuzzyInfo = fuzzyInfoService.findAllFuzzyInfoByCategory(fuzzyCategory,sessionCompanyId);
+		}
 		return SUCCESS;
 	}
 	
@@ -162,7 +189,13 @@ public class FuzzyInfoAction extends BaseActionSupport{
 		obj.setSecondValue(fuzzyInfo.getSecondValue());
 		obj.setThirdValue(fuzzyInfo.getThirdValue());
 		obj.setSugeno(fuzzyInfo.getSugeno());
-		obj.setCompanyId(sessionCompanyId);
+		if(companyId != null && companyId.length() > 0)
+		{
+			obj.setCompanyId(sessionCompanyId);
+		}else
+		{
+			obj.setCompanyId(companyId);
+		}
 		fuzzyInfoService.save(obj);
 		id = obj.getId();
 		return SUCCESS;
