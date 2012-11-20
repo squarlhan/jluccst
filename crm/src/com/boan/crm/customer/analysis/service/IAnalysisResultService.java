@@ -36,5 +36,10 @@ public interface IAnalysisResultService {
 	 * 保存分析结论
 	 */
 	public void save(AnalysisResult table1);
-
+	
+	/**
+	 * 从总记录中拷贝生成公司记录
+	 * @param companyId
+	 */
+	public void saveMainFuzzyResultInfoToCompany(String companyId);
 }
