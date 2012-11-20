@@ -46,7 +46,7 @@
 		$(function(){
 			
 			$("#addbtn").click(function(){
-				parent.parent.tipsWindown("添加公司档案","iframe:openAddCompanyAction.action","510","420","true","","true","no");
+				parent.parent.tipsWindown("添加公司档案","iframe:openAddCompanyAction.action","510","430","true","","true","no");
 				parent.parent.$("#windown-close").bind('click',function(){
 					window.location.href="./openCompanyAction.action";
 				});
@@ -61,7 +61,7 @@
 	  		$('a[name="edit"]').each(function(){
 	  			$(this).click(function(){
 	  				var url = $(this).attr("url");
-	  				parent.parent.tipsWindown("修改公司档案","iframe:"+url,"510","420","true","","true","no");
+	  				parent.parent.tipsWindown("修改公司档案","iframe:"+url,"510","430","true","","true","no");
 	  				parent.parent.$("#windown-close").bind('click',function(){
 						window.location.href="./openCompanyAction.action";
 					});
