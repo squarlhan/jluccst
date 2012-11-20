@@ -84,6 +84,8 @@ public class UserAction extends BaseActionSupport {
 	private String deleteId = null;
 
 	private String companyId = null;
+	
+	private String lunarSolarFlag = null;
 	// 标识是哪个用户维护的用户
 	private String who = null;
 
@@ -97,6 +99,13 @@ public class UserAction extends BaseActionSupport {
 	 */
 	public String saveOrUpdateUser() throws Exception {
 		User oldUser = null;
+		user.setCompanyId(companyId);
+		if( StringUtils.isNotBlank(lunarSolarFlag) ){
+			user.setLunarSolarFlag(Integer.parseInt(lunarSolarFlag));
+		}else
+		{
+			user.setLunarSolarFlag(0);
+		}
 		if (StringUtils.isBlank(user.getId())) {
 			user.setCreateTime(Calendar.getInstance());
 		} else {
@@ -131,7 +140,7 @@ public class UserAction extends BaseActionSupport {
 				String md5 = MakeMd5.MD5(user.getPassword());
 				user.setPassword(md5);
 			}
-			user.setCompanyId(companyId);
+			
 			if (StringUtils.isBlank(user.getId())) {
 				userService.saveOrUpdateUser(user);
 			} else {
@@ -149,6 +158,9 @@ public class UserAction extends BaseActionSupport {
 			smsUser.setCategoryId("2");
 			smsUser.setPhone(user.getPhone());
 			smsUser.setName(user.getUserCName());
+			// TODO
+			//smsUser.setBirthday(user.getBirthday());
+			smsUser.setIsLunarCalender(user.getLunarSolarFlag());
 			smsUser.setCreateTime(Calendar.getInstance());
 			smsUser.setEmail(user.getEmail());
 			smsUser.setPost(user.getRoleName());
@@ -335,6 +347,12 @@ public class UserAction extends BaseActionSupport {
 		}
 		String myUserId = userSession.getUserId();
 		user.setId(myUserId);
+		if( StringUtils.isNotBlank(lunarSolarFlag) ){
+			user.setLunarSolarFlag(Integer.parseInt(lunarSolarFlag));
+		}else
+		{
+			user.setLunarSolarFlag(0);
+		}
 		if (StringUtils.isNotBlank(myUserId)) {
 			User oldUser = userService.getUserById(myUserId);
 			// 判断原密码是否正确
@@ -368,6 +386,9 @@ public class UserAction extends BaseActionSupport {
 					smsUser.setCategoryId("2");
 					smsUser.setPhone(oldUser.getPhone());
 					smsUser.setName(oldUser.getUserCName());
+					// TODO
+					//smsUser.setBirthday(oldUser.getBirthday());
+					smsUser.setIsLunarCalender(oldUser.getLunarSolarFlag());
 					smsUser.setCreateTime(Calendar.getInstance());
 					smsUser.setEmail(oldUser.getEmail());
 					smsUser.setPost(oldUser.getRoleName());
@@ -520,5 +541,21 @@ public class UserAction extends BaseActionSupport {
 
 	public void setSmsService(ISMSCustomerInfoService smsService) {
 		this.smsService = smsService;
+	}
+
+	public ICompanyService getCompanyService() {
+		return companyService;
+	}
+
+	public void setCompanyService(ICompanyService companyService) {
+		this.companyService = companyService;
+	}
+
+	public String getLunarSolarFlag() {
+		return lunarSolarFlag;
+	}
+
+	public void setLunarSolarFlag(String lunarSolarFlag) {
+		this.lunarSolarFlag = lunarSolarFlag;
 	}
 }
