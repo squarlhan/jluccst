@@ -36,6 +36,35 @@ public class FuzzyInfoServiceImpl implements IFuzzyInfoService{
 	}
 
 	/**
+	 * 从总记录中拷贝生成公司记录
+	 * @param companyId
+	 */
+	public void saveMainFuzzyInfoToCompany(String companyId)
+	{
+		Map<String,String> idMap = new HashMap<String,String>();
+		List<FuzzyInfo> listFuzzy = fuzzyInfoDao.find("from FuzzyInfo where companyId is null or companyId = '' ", idMap);
+		if(listFuzzy != null && listFuzzy.size() > 0)
+		{
+			for(int i=0;i<listFuzzy.size();i++)
+			{
+				FuzzyInfo temp = listFuzzy.get(i);
+				FuzzyInfo fuzzyInfo = new FuzzyInfo();
+				fuzzyInfo.setFirstValue(temp.getFirstValue());
+				fuzzyInfo.setFourthValue(temp.getFourthValue());
+				fuzzyInfo.setFunctionCName(temp.getFunctionCName());
+				fuzzyInfo.setFunctionName(temp.getFunctionName());
+				fuzzyInfo.setFuzzyCategory(temp.getFuzzyCategory());
+				fuzzyInfo.setFuzzyCategoryName(temp.getFuzzyCategoryName());
+				fuzzyInfo.setFuzzyName(temp.getFuzzyName());
+				fuzzyInfo.setSecondValue(temp.getSecondValue());
+				fuzzyInfo.setSugeno(temp.getSugeno());
+				fuzzyInfo.setThirdValue(temp.getThirdValue());
+				fuzzyInfo.setCompanyId(companyId);
+				save(fuzzyInfo);
+			}
+		}
+	}
+	/**
 	 * 根据id获取模糊项
 	 */
 	public FuzzyInfo get(int id)

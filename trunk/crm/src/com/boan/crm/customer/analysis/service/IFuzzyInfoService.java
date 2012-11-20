@@ -31,5 +31,10 @@ public interface IFuzzyInfoService {
 	 * 保存模糊项
 	 */
 	public void save(FuzzyInfo table1);
+	/**
+	 * 从总记录中拷贝生成公司记录
+	 * @param companyId
+	 */
+	public void saveMainFuzzyInfoToCompany(String companyId);
 
 }
