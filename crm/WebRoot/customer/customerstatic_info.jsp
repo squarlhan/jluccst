@@ -142,7 +142,7 @@ background-color:#d3eaef}
 	</head>
 	<body>
 	<s:form id="form1" name="form1" method="post" theme="simple">
-	<s:hidden id="totalCustomerCount" name="totalCustomerCount"></s:hidden>
+	用户总数：<s:property value="totalCustomerCount"></s:property>
 	 <s:iterator value="listCategoryStatic" status="obj">
       	<span name="category" id="category<s:property value="#obj.index"/>" textStr="<s:property value='category'/>" valueStr="<s:property value='count'/>"></span>
      </s:iterator>
