@@ -23,6 +23,8 @@ import com.boan.crm.backstagemanage.model.Company;
 import com.boan.crm.backstagemanage.model.Log;
 import com.boan.crm.backstagemanage.service.ICompanyService;
 import com.boan.crm.common.Message;
+import com.boan.crm.customer.analysis.service.IAnalysisResultService;
+import com.boan.crm.customer.analysis.service.IFuzzyInfoService;
 import com.boan.crm.datadictionary.model.DataDictionary;
 import com.boan.crm.datadictionary.service.IDataDictionaryService;
 import com.boan.crm.groupmanage.common.RoleFlag;
@@ -83,7 +85,20 @@ public class CompanyAction extends BaseActionSupport {
 	@Autowired
 	@Qualifier("SMSManageService")
 	private ISMSManageService SMSManageService = null;
-
+	
+	/**
+	 * 模糊项Service
+	 */
+	@Autowired
+	@Qualifier("fuzzyInfoService")
+	private IFuzzyInfoService fuzzyInfoService = null;
+	/**
+	 * 模糊项Service
+	 */
+	@Autowired
+	@Qualifier("analysisResultService")
+	private IAnalysisResultService analysisResultService = null;
+	
 	/**
 	 * 显示分页
 	 */
@@ -223,7 +238,11 @@ public class CompanyAction extends BaseActionSupport {
 					dataDictionaryService.save(newObj);
 				}
 			}
-
+			
+			//创建模糊项和评估结论
+			fuzzyInfoService.saveMainFuzzyInfoToCompany(company.getId());
+			analysisResultService.saveMainFuzzyResultInfoToCompany(company.getId());
+			
 			// 保存日志开始
 			Log log = new Log();
 			log.setLogType(LogType.INFO);
