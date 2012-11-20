@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import com.boan.crm.customer.analysis.dao.IFuzzyInfoDAO;
 import com.boan.crm.customer.analysis.dao.IFuzzyRuleInfoDAO;
+import com.boan.crm.customer.analysis.model.AnalysisResult;
 import com.boan.crm.customer.analysis.model.FuzzyCategory;
 import com.boan.crm.customer.analysis.model.IdCaption;
 import com.boan.crm.customer.analysis.model.RuleInfo;
@@ -102,6 +103,25 @@ public class FuzzyRuleInfoServiceImpl implements IFuzzyRuleInfoService{
 		Map<String ,Integer > values = new HashMap<String ,Integer>();
 		values.put("resultFuzzyId", resultId);
 		return fuzzyRuleInfoDao.find("from RuleInfo where resultFuzzyId = :resultFuzzyId", values);
+	}
+	
+	/**
+	 * 从总记录中拷贝生成公司记录
+	 * @param companyId
+	 */
+	public void copyMainFuzzyRuleInfoToCompany(String companyId)
+	{
+		Map<String,String> idMap = new HashMap<String,String>();
+		List<RuleInfo> listRuleInfo = fuzzyRuleInfoDao.find("from RuleInfo where companyId is null ", idMap);
+		if(listRuleInfo != null && listRuleInfo.size() > 0)
+		{
+			for(int i=0;i<listRuleInfo.size();i++)
+			{
+				RuleInfo ruleInfo = listRuleInfo.get(i);
+				ruleInfo.setCompanyId(companyId);
+				save(ruleInfo);
+			}
+		}
 	}
 	
 	/**
