@@ -29,16 +29,14 @@ import com.boan.crm.common.Message;
 import com.boan.crm.common.UserConfig;
 import com.boan.crm.common.UserType;
 import com.boan.crm.groupmanage.common.UserSession;
-import com.boan.crm.groupmanage.model.Deptment;
 import com.boan.crm.groupmanage.model.Role;
 import com.boan.crm.groupmanage.model.User;
 import com.boan.crm.groupmanage.service.IRoleService;
 import com.boan.crm.groupmanage.service.IUserService;
 import com.boan.crm.sms.model.SMSCustomerInfo;
 import com.boan.crm.sms.service.ISMSCustomerInfoService;
-import com.boan.crm.sms.service.ISMSInfoService;
-import com.boan.crm.sms.service.ISMSManageService;
 import com.boan.crm.utils.action.BaseActionSupport;
+import com.boan.crm.utils.calendar.MySimpleDateFormat;
 import com.boan.crm.utils.md5.MakeMd5;
 import com.boan.crm.utils.page.Pagination;
 
@@ -158,8 +156,11 @@ public class UserAction extends BaseActionSupport {
 			smsUser.setCategoryId("2");
 			smsUser.setPhone(user.getPhone());
 			smsUser.setName(user.getUserCName());
-			// TODO
-			//smsUser.setBirthday(user.getBirthday());
+			if( StringUtils.isNotBlank(user.getBirthday()) ){
+				smsUser.setBirthday(MySimpleDateFormat.parse(user.getBirthday() + " 00:00:00"));
+			}else{
+				smsUser.setBirthday(null);
+			}
 			smsUser.setIsLunarCalender(user.getLunarSolarFlag());
 			smsUser.setCreateTime(Calendar.getInstance());
 			smsUser.setEmail(user.getEmail());
@@ -386,9 +387,12 @@ public class UserAction extends BaseActionSupport {
 					smsUser.setCategoryId("2");
 					smsUser.setPhone(oldUser.getPhone());
 					smsUser.setName(oldUser.getUserCName());
-					// TODO
-					//smsUser.setBirthday(oldUser.getBirthday());
-					smsUser.setIsLunarCalender(oldUser.getLunarSolarFlag());
+					if( StringUtils.isNotBlank(user.getBirthday()) ){
+						smsUser.setBirthday(MySimpleDateFormat.parse(user.getBirthday() + " 00:00:00"));
+					}else{
+						smsUser.setBirthday(null);
+					}
+					smsUser.setIsLunarCalender(user.getLunarSolarFlag());
 					smsUser.setCreateTime(Calendar.getInstance());
 					smsUser.setEmail(oldUser.getEmail());
 					smsUser.setPost(oldUser.getRoleName());
