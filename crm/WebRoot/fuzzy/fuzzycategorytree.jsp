@@ -35,9 +35,14 @@
 		<!--
 		d = new dTree('d','<%=path%>');
 		d.add(0,-1,'模糊分类列表','','','');
-		<s:iterator value="categoryList">
-			d.add("<s:property value="id"/>",0,'<s:property value="caption"/>','fuzzyList.action?fuzzyCategory=<s:property value="id"/>','','groupmain','');
+		<s:iterator value="listCompany">
+			var companyId = '<s:property value="id"/>';
+			d.add("<s:property value="id"/>",0,'<s:property value="companyName"/>','','','','');
+			<s:iterator value="categoryList">
+				d.add("<s:property value="id"/>",companyId,'<s:property value="caption"/>','fuzzyList.action?fuzzyCategory=<s:property value="id"/>&companyId='+companyId,'','groupmain','');
+			</s:iterator>
 		</s:iterator>
+		
 		document.write(d);
 		//-->
 	</script>
