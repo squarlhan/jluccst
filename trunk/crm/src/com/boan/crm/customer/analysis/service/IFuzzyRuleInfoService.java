@@ -59,4 +59,10 @@ public interface IFuzzyRuleInfoService {
 	 */
 	public Pagination<RuleInfo> findFuzzyRuleInfoInfoForPage(
 			Map<String, ?> values, Pagination<RuleInfo> pagination);
+	
+	/**
+	 * 从总记录中拷贝生成公司记录
+	 * @param companyId
+	 */
+	public void copyMainFuzzyRuleInfoToCompany(String companyId);
 }
