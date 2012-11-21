@@ -46,6 +46,7 @@
 	  		/**
 	  		 * 短信发送
 	  		 */
+	  		 /*
 	  		$('a[name="send"]').each(function(){
 	  			$(this).click(function(){
 	  				var url = $(this).attr("url");
@@ -64,14 +65,27 @@
 	  				$("#form1").submit();
 	  			});
 	  		});
-	  		
+	  		//*/
 	  		$("#queryBtn").click(function(){
 	  			$("#form1").attr("action","loadSendedRecordAction.action");
   				$("#form1").submit();
 	  		});
 		});
 	  	
-	  	
+	  	function send(obj){
+	  		var url = obj.attr("url");
+			var oldAction = $("#form1").attr("action");
+			$("#form1").attr("action",url);
+			$("#form1").submit();
+			 $("#form1").attr("action",oldAction);
+	  	}
+	  	function deleteInfo(obj){
+	  		var url = obj.attr("url");
+			var oldAction = $("#form1").attr("action");
+			$("#form1").attr("action",url);
+			$("#form1").submit();
+			 $("#form1").attr("action",oldAction);
+	  	}
 	</script>
   </head>
   
@@ -182,9 +196,9 @@
 			<s:url id="delete_url" action="deleteSMSInfoAction">   
 				<s:param name="SMSInfoId" value="id"></s:param>   
 			</s:url>
-         	<a name="send" href="javascript:void(0);" url="${reSend_url}">发送</a>  
+         	<a name="send" href="javascript:void(0);" url="${reSend_url}"  onclick="send($(this));return false;">发送</a>  
 			<s:if test="state!=2">
-   				<a name="delete" href="javascript:void(0);" url="${delete_url}">删除</a>
+   				<a name="delete" href="javascript:void(0);" url="${delete_url}"  onclick="deleteInfo($(this));return false;">删除</a>
    			</s:if>
           </td>
 		</tr>
