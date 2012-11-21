@@ -4,6 +4,7 @@ INSERT INTO `group_user` (`id`, `CREATE_TIME`, `PASSWORD`, `SORT_INDEX`, `USERCN
 
  alter table group_user alter column deleteFlag set default 0;
  
+ update GROUP_USER set LUNAR_SOLAR_FLAG = 0
  
  select   
 referenced_table_name,table_name,
