@@ -142,7 +142,7 @@ background-color:#d3eaef}
 	  				var url = $(this).attr("url");
 	  				parent.parent.tipsWindown("客户评估信息统计图","iframe:"+url,"650","450","true","","true","no");
 	  				parent.parent.$("#windown-close").bind('click',function(){
-						window.location.href="autoAnalysisCustomerList.action";
+						window.location.href=window.location.href;
 					});
 	  			});
 	  		});
