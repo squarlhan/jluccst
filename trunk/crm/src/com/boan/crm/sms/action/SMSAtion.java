@@ -596,6 +596,17 @@ public class SMSAtion extends BaseActionSupport{
 	 * @return
 	 */
 	public String reSendSMSInfo(){
+		UserSession userSession = this.getSession();
+		String organId = userSession.getCompanyId();
+		//初始化短信发送接口
+		Company  company = companyService.get(organId);
+		String serialNo =company.getSmsSN();
+		String password = company.getSmsPassword();
+		String key = company.getSmsKey();
+		if(serialNo!=null && password!=null && key!=null && !serialNo.trim().equals("") && !password.trim().equals("") && !key.trim().equals("")){
+			//初始化短信发送接口
+			smsManageService.initClient( serialNo,password,key);
+		}
 		if(SMSInfoId!=null && !SMSInfoId.equals("")){
 			SMSInfo info = smsInfoService.getSMSInfo(SMSInfoId);
 			//调用短信发送接口
