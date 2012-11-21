@@ -87,7 +87,7 @@ public class User {
 	/**
 	 * 阳历农历标识，0表示过阳历，1表示过农历
 	 */
-	@Column(name = "LUNAR_SOLAR_FLAG")
+	@Column(name = "LUNAR_SOLAR_FLAG", nullable=false)
 	private int lunarSolarFlag;
 
 	/**
