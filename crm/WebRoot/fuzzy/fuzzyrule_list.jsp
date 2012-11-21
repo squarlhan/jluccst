@@ -34,7 +34,7 @@
 			$("#addbtn").click(function(){
 				parent.parent.tipsWindown("添加模糊规则","iframe:fuzzy/fuzzyRuleInfo.action","650","420","true","","true","no");
 				parent.parent.$("#windown-close").bind('click',function(){
-					window.location.href="fuzzyRuleList.action";
+					window.location.href=window.location.href;
 				});
 			});
 			
@@ -44,14 +44,14 @@
 			$("#sortbtn").click(function(){
 				parent.parent.tipsWindown("模糊规则排序","iframe:fuzzy/citysort.action?fuzzyCategory=<s:property value='fuzzyCategory' />","370","320","true","","true","no");
 				parent.parent.$("#windown-close").bind('click',function(){
-					window.location.href="fuzzyRuleList.action?fuzzyCategory=<s:property value='fuzzyCategory' />";
+					window.location.href=window.location.href;
 				});
 			});
 			
 			$(".showInfo").css("cursor","hand").click(function(){
 				parent.parent.tipsWindown("修改模糊规则","iframe:fuzzy/fuzzyRuleInfo.action?id=" + $(this).attr("tid") ,"650","420","true","","true","no");
 				parent.parent.$("#windown-close").bind('click',function(){
-					window.location.href="fuzzyRuleList.action";
+					window.location.href=window.location.href;
 				});
 			});
 			/**
