@@ -34,7 +34,11 @@
   <script type="text/javascript">
 		<!--
 		d = new dTree('d','<%=path%>');
-		d.add(0,-1,'模糊分类列表','','','');
+		d.add("123123123",-1,'系统级模糊项','','','');
+		<s:iterator value="categoryList">
+			d.add("<s:property value="id"/>",'123123123','<s:property value="caption"/>','fuzzyList.action?fuzzyCategory=<s:property value="id"/>','','groupmain','');
+		</s:iterator>
+		d.add(0,-1,'公司级','','','');
 		<s:iterator value="listCompany">
 			var companyId = '<s:property value="id"/>';
 			d.add("<s:property value="id"/>",0,'<s:property value="companyName"/>','','','','');
