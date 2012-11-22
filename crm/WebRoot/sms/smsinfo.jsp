@@ -267,7 +267,7 @@
 		  		parent.parent.$("#windown-close").bind('click',function(){
 		  			var personIds = $.cookie('personIds'); // 读取 cookie中的被选择的人员Id
 		  			$.cookie('personIds', '', { expires: -1 }); //读取完毕后删除cookie
-		  			if(personIds.length>0){
+		  			if(personIds!=null && personIds.length>0){
 		  				$.ajax({
 		  					type:"post",
 		  					url: "loadCustomerInfoForAjaxAction.action",
