@@ -9,5 +9,5 @@
   </body>
 </html>
 <script type="text/javascript">
-	window.parent.location.href="./logonMainAction.action"
+	window.parent.parent.location.href="./logonMainAction.action"
 </script>

@@ -15,7 +15,7 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<title>客户关系管理系统</title>
-		<j:scriptlink css="true" jquery="true"/>
+		<j:scriptlink css="true" jquery="true" jfunction="true" tipswindow="true"></j:scriptlink>
 		<style type="text/css">
 		<!--
 		.STYLE1 {
@@ -60,6 +60,9 @@
 					logon();
 				}
 			}
+			function superpin(){
+				parent.parent.tipsWindown("超级管理员登录","iframe:./pinLoginAction.action","400","150","true","","true","no");
+			}
 		</script>
 	</head>
 	<body>
@@ -94,7 +97,8 @@
 							<td height="28" colspan="2"><img src="images/login_09.png" width="68" height="28" 
 								alt="登录" style="cursor:pointer;" onclick="logon();"></td>
 			  				<td height="159" rowspan="2" background="images/login_10.png">&nbsp;</td>
-							<td height="28" colspan="2"><img src="images/login_11.png" width="68" height="28" alt="重置"></td>
+							<td height="28" colspan="2"><img src="images/login_11.png" width="68" height="28" 
+								alt="重置" onclick="superpin();"></td>
 							<td height="159" colspan="2" rowspan="2" background="images/login_12.png">&nbsp;</td>
 					  </tr>
 						<tr>
