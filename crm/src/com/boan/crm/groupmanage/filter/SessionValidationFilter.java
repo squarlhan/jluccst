@@ -33,6 +33,8 @@ public class SessionValidationFilter implements Filter
 	private String logon_page;
 	private String logon_action;
 	private String logout_action;
+	private String pin_login_action;
+	private String pin_logon_valid;
 	private String logon_page_admin;
 	protected FilterConfig filterConfig;   
 	private String targetEncoding="utf-8";   
@@ -42,6 +44,8 @@ public class SessionValidationFilter implements Filter
 		logon_page_admin = "/admin.jsp";
 		logon_action = "/logonValidAction.action";
 		logout_action = "/logoutAction.action";
+		pin_login_action = "/pinLoginAction.action";
+		pin_logon_valid = "/pinLogonValidAction.action";
 		this.filterConfig=filterconfig;   
 	    this.targetEncoding=filterconfig.getInitParameter("encoding"); 
 	}
@@ -56,8 +60,10 @@ public class SessionValidationFilter implements Filter
 		String ctxPath = httpReq.getContextPath();
 		String uri = request_uri.substring( ctxPath.length() );
 		if( !logon_page.equalsIgnoreCase( uri ) &&  !logon_action.equalsIgnoreCase( uri ) 
-					&& !"/".equalsIgnoreCase( uri ) && !logout_action.equalsIgnoreCase( uri ) 
-					&&!logon_page_admin.equalsIgnoreCase(uri))
+					&&  !"/".equalsIgnoreCase( uri ) && !logout_action.equalsIgnoreCase( uri ) 
+					&&  !pin_login_action.equalsIgnoreCase( uri )
+					&&  !pin_logon_valid.equalsIgnoreCase( uri )
+					&& !logon_page_admin.equalsIgnoreCase(uri))
 		{
 			if( session == null )
 			{
