@@ -125,6 +125,12 @@ public class User {
 	 */
 	@Column(name = "SORT_INDEX")
 	private int sortIndex;
+	
+	/**
+	 * 当前登录用户盐值
+	 */
+	@Column(name = "SALT")
+	private String salt;
 
 	/**
 	 * 如果是本人，则本人不能删除本人，不能删除状态置为1
@@ -319,5 +325,13 @@ public class User {
 
 	public void setLunarSolarFlag(int lunarSolarFlag) {
 		this.lunarSolarFlag = lunarSolarFlag;
+	}
+
+	public String getSalt() {
+		return salt;
+	}
+
+	public void setSalt(String salt) {
+		this.salt = salt;
 	}
 }

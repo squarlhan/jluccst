@@ -12,8 +12,12 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Transient;
+
+import org.hibernate.annotations.GenericGenerator;
 
 /**
  * USB锁的身份信息
@@ -22,9 +26,15 @@ import javax.persistence.Transient;
  * @version 1.0.0
  */
 @Entity
-@Table(name = "GROUPE_EKEY_USER")
+@Table(name = "GROUP_EKEY_USER")
 public class EkeyUser implements Serializable {
-
+	/**
+	 * 用户实体主键
+	 */
+	@Id
+	@GenericGenerator(name = "system-uuid", strategy = "uuid")
+	@GeneratedValue(generator = "system-uuid")
+	private String id;
 	/**
 	 * 已生成的串行版本标识
 	 */
