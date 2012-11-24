@@ -113,6 +113,13 @@
 		<action name="logoutAction" class="userLogonAction" method="logout">
 			<result name="success">/default.jsp</result>
 		</action>
+		<action name="pinLoginAction" class="userLogonAction" method="pinLogin">
+			<result name="success">/pinlogin.jsp</result>
+		</action>
+		<action name="pinLogonValidAction" class="userLogonAction" method="pinLoginValid">
+			<result name="success">/sysloginsuccess.jsp</result>
+			<result name="error">/common/messagenoclose.jsp</result>
+		</action>
 		<action name="showModifyAction" class="userLogonAction" method="showModify">
 			<result name="success">/groupmanage/usermodify.jsp</result>
 		</action>
