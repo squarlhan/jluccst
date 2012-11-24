@@ -119,6 +119,16 @@
 		<url-pattern>*.action</url-pattern>
 	</filter-mapping>
 	<!-- 验证SESSION完毕 -->
+	<!-- 下载配置开始 -->
+	 <mime-mapping> 
+	 <extension>zip</extension> 
+	 <mime-type>application/zip</mime-type> 
+	 </mime-mapping>
+	 <mime-mapping> 
+	 <extension>rar</extension> 
+	 <mime-type>application/rar</mime-type> 
+	 </mime-mapping>
+	<!-- 下载配置结束 -->
 	<servlet>
 		<servlet-name>XFireServlet</servlet-name>
 		<servlet-class>
