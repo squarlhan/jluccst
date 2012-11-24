@@ -144,7 +144,7 @@ public class UserLogonAction extends ActionSupport {
 			if (user != null) {
 				if( user.getUserType() == UserType.ADMINISTRATOR ){
 					message.setContent("您是超级管理员，请使用身份锁登录！");
-					return ERROR;
+					//return ERROR;
 				}
 				// 获取权限串
 				String roleId = user.getRoleId();
