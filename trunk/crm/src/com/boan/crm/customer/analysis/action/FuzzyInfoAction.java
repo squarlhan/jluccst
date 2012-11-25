@@ -128,6 +128,15 @@ public class FuzzyInfoAction extends BaseActionSupport{
 		return SUCCESS;
 	}
 	/**
+	 * 公司树
+	 * @return
+	 */
+	public String companyTree()
+	{
+		listCompany = companyService.queryAllCompanys();
+		return SUCCESS;
+	}
+	/**
 	 * 模糊项列表
 	 * @return String
 	 */
@@ -191,10 +200,10 @@ public class FuzzyInfoAction extends BaseActionSupport{
 		obj.setSugeno(fuzzyInfo.getSugeno());
 		if(companyId != null && companyId.length() > 0)
 		{
-			obj.setCompanyId(sessionCompanyId);
+			obj.setCompanyId(companyId);
 		}else
 		{
-			obj.setCompanyId(companyId);
+			obj.setCompanyId(sessionCompanyId);
 		}
 		fuzzyInfoService.save(obj);
 		id = obj.getId();

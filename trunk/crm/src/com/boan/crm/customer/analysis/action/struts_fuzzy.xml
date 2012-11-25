@@ -9,6 +9,14 @@
 			<result name="success">/fuzzy/fuzzy_list.jsp</result>
 			<result name="input">/fuzzy/fuzzy_list.jsp</result>
 		</action>
+		<action name="companyTreeForRule" class="fuzzyInfoAction" method="companyTree">
+			<result name="success">/fuzzy/companytreeforrule.jsp</result>
+			<result name="input">/fuzzy/companytreeforrule.jsp</result>
+		</action>
+		<action name="companyTreeForResult" class="fuzzyInfoAction" method="companyTree">
+			<result name="success">/customeranalysis/companytreeforresult.jsp</result>
+			<result name="input">/customeranalysis/companytreeforresult.jsp</result>
+		</action>
 		<action name="fuzzyinfoservice" class="fuzzyInfoAction" method="fuzzyList">
 			<result name="success">/fuzzy/getfuzzyinfoservice.jsp</result>
 			<result name="input">/fuzzy/getfuzzyinfoservice.jsp</result>

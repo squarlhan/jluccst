@@ -46,7 +46,15 @@ public class AnalysisResultAction extends BaseActionSupport{
 	private List<AnalysisResult> analysisResultList = null;
 	
 	private String message = "";
-	
+	private String companyId = "";
+	public String getCompanyId() {
+		return companyId;
+	}
+
+	public void setCompanyId(String companyId) {
+		this.companyId = companyId;
+	}
+
 	/**
 	 * 分析结论列表
 	 * @return String
@@ -54,7 +62,13 @@ public class AnalysisResultAction extends BaseActionSupport{
 	public String analysisResultList()
 	{
 		//分析结论分类： 传0
-		analysisResultList = analysisResultService.findAllAnalysisResult(sessionCompanyId);
+		if(companyId != null && companyId.length() > 0)
+		{
+			analysisResultList = analysisResultService.findAllAnalysisResult(companyId);
+		}else
+		{
+			analysisResultList = analysisResultService.findAllAnalysisResult(sessionCompanyId);
+		}
 		return SUCCESS;
 	}
 	
@@ -90,7 +104,13 @@ public class AnalysisResultAction extends BaseActionSupport{
 		obj.setBeginValue(analysisResult.getBeginValue());
 		obj.setEndValue(analysisResult.getEndValue());
 		obj.setResult(analysisResult.getResult());
-		obj.setCompanyId(sessionCompanyId);
+		if(companyId != null && companyId.length() > 0)
+		{
+			obj.setCompanyId(companyId);
+		}else
+		{
+			obj.setCompanyId(sessionCompanyId);
+		}
 		analysisResultService.save(obj);
 		id = obj.getId();
 		return SUCCESS;
