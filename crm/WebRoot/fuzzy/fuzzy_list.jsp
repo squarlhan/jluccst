@@ -31,7 +31,7 @@
 			/**
 	  		 */
 			$("#addbtn").click(function(){
-				parent.parent.tipsWindown("添加模糊项","iframe:fuzzy/fuzzyInfo.action?fuzzyCategory=<s:property value='fuzzyCategory' />","470","350","true","","true","no");
+				parent.parent.tipsWindown("添加模糊项","iframe:fuzzy/fuzzyInfo.action?fuzzyCategory=<s:property value='fuzzyCategory' />&companyId=<s:property value='companyId' />","470","350","true","","true","no");
 				parent.parent.$("#windown-close").bind('click',function(){
 					window.location.href="fuzzy/fuzzyList.action?fuzzyCategory=<s:property value='fuzzyCategory' />";
 				});

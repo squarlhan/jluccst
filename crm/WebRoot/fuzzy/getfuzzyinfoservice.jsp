@@ -31,6 +31,6 @@
 	{
 		sb.append( "{root:[]}" );
 	}
-   	System.out.println(sb.toString());
+   //	System.out.println(sb.toString());
 	response.getWriter().write( sb.toString());
 %>

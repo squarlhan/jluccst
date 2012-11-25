@@ -32,9 +32,9 @@
 			/**
 	  		 */
 			$("#addbtn").click(function(){
-				parent.parent.tipsWindown("添加模糊规则","iframe:fuzzy/fuzzyRuleInfo.action","650","420","true","","true","no");
+				parent.parent.tipsWindown("添加模糊规则","iframe:fuzzy/fuzzyRuleInfo.action?companyId=<s:property value='companyId' />","650","420","true","","true","no");
 				parent.parent.$("#windown-close").bind('click',function(){
-					window.location.href=window.location.href;
+					window.location.href=window.location.href ;
 				});
 			});
 			
@@ -69,6 +69,7 @@
 	</head>
 	<body>
 		<s:form id="form1" name="form1" method="post" theme="simple">
+		<s:hidden name="companyId" />
 			<table width="100%" style="height: 100%;" border="0" cellspacing="5"
 				cellpadding="0">
 				<tr>
