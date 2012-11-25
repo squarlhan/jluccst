@@ -29,10 +29,17 @@
 		<title>客户跟进信息</title>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<j:scriptlink  css="true" jmessagebox="true" jquery="true" tipswindow="true" validate="true"/>
-		<script src="<%=path %>/js/ui/jquery.ui.core.js"></script>
-		<script src="<%=path %>/js/ui/jquery.ui.widget.js"></script>
-		<script src="<%=path %>/js/ui/jquery.ui.position.js"></script>
-		<script src="<%=path %>/js/ui/jquery.autocomplete.js"></script>
+		<link rel="stylesheet" media="all" type="text/css" href="<%=basePath%>js/timepicke/jquery-ui-1.7.3.custom.css" />
+		<link rel="stylesheet" media="all" type="text/css" href="<%=basePath%>js/timepicke/jquery-ui-timepicker-addon.css" />
+		
+		<script type="text/javascript" src="<%=basePath%>js/timepicke/jquery-ui-1.7.3.custom.min.js"></script>
+		<script type="text/javascript" src="<%=basePath%>js/timepicke/jquery-ui-timepicker-addon.js"></script>
+		<script type="text/javascript" src="<%=basePath%>js/timepicke/jquery-ui-timepicker-zh-CN.js"></script>
+		<script type="text/javascript" src="<%=basePath%>js/timepicke/jquery-ui-sliderAccess.js"></script>
+		
+		<script src="<%=basePath %>/js/ui/jquery.ui.core.js"></script>
+		<script src="<%=basePath %>/js/ui/jquery.ui.position.js"></script>
+		<script src="<%=basePath %>/js/ui/jquery.autocomplete.js"></script>
 		<script type="text/javascript">
 		
 			/**
@@ -153,7 +160,7 @@
 					  }
 					 });
 				</s:if> 
-					
+				$('#visitTime').datetimepicker({showTimepicker: true});	
 				
 				$.validator.setDefaults({
 					debug: false,onkeyup: false,onfocusout:false,focusCleanup: true,
@@ -325,7 +332,7 @@
 	<tr>
 		<td></td>
 		<td align="right" nowrap title="日期格式：<s:property value='visitTime'/>">回访时间：</td>
-		<td title="日期格式：<s:property value='visitTime'/>"><s:textfield type="text" style="width:150px" name="visitTime" id="visitTime"></s:textfield><font color="red">*</font></td>
+		<td title="日期格式：<s:property value='visitTime'/>"><s:textfield type="text" style="width:150px" name="visitTime" id="visitTime" readOnly="true"></s:textfield><font color="red">*</font></td>
 		<td align="right">任务：</td>
 		<td colspan="3"><s:textarea type="text" style="width:400px;height:60px" name="customerVisitInfo.task" id="task"></s:textarea></td>
 	</tr>
