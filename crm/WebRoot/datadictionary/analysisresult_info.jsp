@@ -102,6 +102,7 @@
 		<s:form id="form1" name="form1" method="post" theme="simple">
 			<s:label id="lb_message" name="message" cssStyle="display:none"></s:label>
 			<s:hidden id="id" name="id"></s:hidden>
+			<s:hidden name="companyId"/>
 			<table width="100%" border="0" cellspacing="5" cellpadding="0">
 				<tr>
 					<td>
