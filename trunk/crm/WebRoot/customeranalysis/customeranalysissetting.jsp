@@ -30,90 +30,17 @@
 <link type="text/css" rel="stylesheet" href="../style.css" />
 <link rel='stylesheet' type='text/css'  href='<%=path %>/css/jquery.autocomplete.css' />
 <j:scriptlink  css="true" jmessagebox="true" jquery="true" tipswindow="true" validate="true"/>
-<script src="<%=path %>/js/ui/jquery.ui.core.js"></script>
-<script src="<%=path %>/js/ui/jquery.ui.widget.js"></script>
-<script src="<%=path %>/js/ui/jquery.ui.position.js"></script>
-<script src="<%=path %>/js/ui/jquery.autocomplete.js"></script>
+<link rel="stylesheet" media="all" type="text/css" href="<%=basePath%>js/timepicke/jquery-ui-1.7.3.custom.css" />
+<link rel="stylesheet" media="all" type="text/css" href="<%=basePath%>js/timepicke/jquery-ui-timepicker-addon.css" />
+<script type="text/javascript" src="<%=basePath%>js/timepicke/jquery-ui-1.7.3.custom.min.js"></script>
+<script type="text/javascript" src="<%=basePath%>js/timepicke/jquery-ui-timepicker-addon.js"></script>
+<script type="text/javascript" src="<%=basePath%>js/timepicke/jquery-ui-timepicker-zh-CN.js"></script>
+<script type="text/javascript" src="<%=basePath%>js/timepicke/jquery-ui-sliderAccess.js"></script>
+
 <script type="text/javascript">
 var allData;
 var g_number = 1;
 $(function() {
-	$("#customerName").autocomplete("../customer/getCustomerByName.action",
-		     {
-	           minChars: 1,
-	           max:5,
-	           width: 150, 
-	           matchContains: true,
-	           autoFill: false,
-	           dataType: "json",
-	           extraParams: 
-	           {   
-	        	 customerName: function() 
-                {
-                 	 return $("#customerName").val(); 
-                }   
-              },
-	           parse: function(test) 
-	           {
-	               data = test;
-	               var rows = [];
-	               if(data != null)
-	               {
-	            	   allData = test;
-		               for(var i=0; i<data.length; i++)
-			           {
-			              rows[rows.length] = 
-			              {
-			                   data: data[i].customerName,
-			                   value:data[i],
-			                   result:data[i].customerName
-			               };
-			            }
-	           		}
-		            return rows;
-	           },
-	           formatItem:function(item)
-	           {
-                  return item;
-	           }
-		     });
-			$("#customerName").result(function(event, itemname, formatted) {
-				  //如选择后给其他控件赋值，触发别的事件等等
-				  if(typeof(allData) == "object")
-				  {
-					  
-					  for(var i=0; i<allData.length; i++)
-					  {
-						  if(allData[i].customerName == itemname)
-						  {
-							  $("#chk"+g_number).val(allData[i].id);
-							  $("#chk"+g_number).attr("checked","true");
-							  $("#customerName"+g_number).html(allData[i].customerName);
-				  			  $("#salesman"+g_number).html(allData[i].salesman);
-							  $("#levelId"+g_number).html(allData[i].levelId);
-							  $("#maturity"+g_number).html(allData[i].maturity);
-							  $("#category"+g_number).html(allData[i].category);
-							  var contractPerson = "";
-							  var tel = "";
-							  for(var j= 0;j<allData[i].contractPersonList.length; j++)
-							  {
-								  if(contractPerson == "")
-								  {
-									  contractPerson = allData[i].contractPersonList[j].personName;
-								  }else
-								  {
-									contractPerson = contractPerson + "," + allData[i].contractPersonList[j].personName;
-								  }
-							  }
-							  
-							  $("#contractPerson"+g_number).html(contractPerson);
-							  g_number = g_number + 1;
-							  break;
-						  }
-					  }
-				  }
-			});
-			
 			$("#assessmentbtn").click(function(){
 				var customerIds= "";
 				var totalComsumption = "";
@@ -189,7 +116,7 @@ $(function() {
 				window.location.href = "<%=basePath%>customerassessment/autoAnalysisCustomerList.action";
 			});
 			
-			
+			$('#beginTime').datetimepicker({showTimepicker: true});	
 			
 });
 
