@@ -196,7 +196,7 @@ public class CustomerInfoAction extends BaseActionSupport{
 		
 		UserSession us = this.getSession();
 		
-		boolean popodomFlag = popedomService.isHasCompanyPopedom( us.getPopedomKeys() );
+		boolean popodomFlag = popedomService.isCompanyAdministrator(us.getUserId(), String.valueOf(us.getUserType()) );
 		
 		if(popodomFlag)
 		{
