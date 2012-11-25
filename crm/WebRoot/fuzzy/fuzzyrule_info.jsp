@@ -82,7 +82,7 @@
 	            });
 		  		function loadFuzzy(obj,obj2,num) {
 	                $.ajax({
-	                    url:"<%=basePath%>fuzzy/fuzzyinfoservice.action?fuzzyCategory=" + obj.val(),
+	                    url:"<%=basePath%>fuzzy/fuzzyinfoservice.action?companyId=<s:property value='companyId'/>&fuzzyCategory=" + obj.val(),
 	                    type: 'POST',
 	                    dataType: 'JSON',
 	                    timeout: 1000,
@@ -112,7 +112,7 @@
 		  		
 		  		function loadFuzzy2(obj,obj2) {
 	                $.ajax({
-	                    url:"<%=basePath%>fuzzy/fuzzyinfoservice.action?fuzzyCategory=" + obj.val(),
+	                    url:"<%=basePath%>fuzzy/fuzzyinfoservice.action?companyId=<s:property value='companyId'/>&fuzzyCategory=" + obj.val(),
 	                    type: 'POST',
 	                    dataType: 'JSON',
 	                    timeout: 5000,
