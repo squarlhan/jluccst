@@ -31,9 +31,9 @@
 			/**
 	  		 */
 			$("#addbtn").click(function(){
-				parent.parent.tipsWindown("添加分析结论","iframe:fuzzy/analysisResult.action","500","320","true","","true","no");
+				parent.parent.tipsWindown("添加分析结论","iframe:fuzzy/analysisResult.action?companyId=<s:property value='companyId'/>","500","320","true","","true","no");
 				parent.parent.$("#windown-close").bind('click',function(){
-					window.location.href="fuzzy/analysisResultList.action";
+					window.location.href= window.location.href;
 				});
 			});
 			
@@ -43,14 +43,14 @@
 			$("#sortbtn").click(function(){
 				parent.parent.tipsWindown("分析结论排序","iframe:datadictionary/provincesort.action","500","320","true","","true","no");
 				parent.parent.$("#windown-close").bind('click',function(){
-					window.location.href="fuzzy/analysisResultList.action";
+					window.location.href= window.location.href;
 				});
 			});
 			
 			$(".showInfo").css("cursor","hand").click(function(){
 				parent.parent.tipsWindown("修改分析结论","iframe:fuzzy/analysisResult.action?id=" + $(this).attr("tid") ,"500","320","true","","true","no");
 				parent.parent.$("#windown-close").bind('click',function(){
-					window.location.href="fuzzy/analysisResultList.action";
+					window.location.href= window.location.href;
 				});
 			});
 			/**
@@ -69,6 +69,7 @@
 	<body>
 		<s:form id="form1" name="form1" method="post" theme="simple">
 			<s:hidden id="typeFlag" name="typeFlag"></s:hidden>
+			<s:hidden name="companyId"/>
 			<table width="100%" style="height: 100%;" border="0" cellspacing="5"
 				cellpadding="0">
 				<tr>
