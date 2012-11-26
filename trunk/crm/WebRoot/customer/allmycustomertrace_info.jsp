@@ -357,7 +357,7 @@
 		<td rowspan="2"><table>
 			<tr><td>
 			<s:if test='%{customerTraceInfo.id != null && customerTraceInfo.id != ""}'>
-				<s:textarea type="text" style="width:650px;height:70px" name="customerTraceInfo.interest" id="interest"></s:textarea></td></tr></table></td>
+				<s:textarea type="text" style="width:633px;height:70px" name="customerTraceInfo.interest" id="interest"></s:textarea></td></tr></table></td>
 			</s:if>
 			<s:else>
 				<s:textarea title="请先填写跟进记录再填写结果 " readOnly="true" type="text" style="width:650px;height:70px" name="customerTraceInfo.interest" id="interest"></s:textarea></td></tr></table></td>
@@ -372,7 +372,7 @@
 		<td rowspan="2"><table>
 			<tr><td>
 			<s:if test='%{customerTraceInfo.id != null && customerTraceInfo.id != ""}'>
-			<s:textarea type="text"  style="width:650px;height:70px" name="customerTraceInfo.objection" id="objection"></s:textarea></td></tr></table></td>
+			<s:textarea type="text"  style="width:633px;height:70px" name="customerTraceInfo.objection" id="objection"></s:textarea></td></tr></table></td>
 			</s:if>
 			<s:else>
 			<s:textarea title="请先填写跟进记录再填写结果 " type="text" readOnly="true" style="width:650px;height:70px" name="customerTraceInfo.objection" id="objection"></s:textarea></td></tr></table></td>

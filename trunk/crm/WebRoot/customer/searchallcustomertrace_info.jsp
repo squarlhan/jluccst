@@ -35,11 +35,6 @@
 		<script type="text/javascript" src="<%=basePath%>js/timepicke/jquery-ui-timepicker-addon.js"></script>
 		<script type="text/javascript" src="<%=basePath%>js/timepicke/jquery-ui-timepicker-zh-CN.js"></script>
 		<script type="text/javascript" src="<%=basePath%>js/timepicke/jquery-ui-sliderAccess.js"></script>
-		<script src="<%=basePath %>/js/ui/jquery.ui.core.js"></script>
-		<script src="<%=basePath %>/js/ui/jquery.ui.widget.js"></script>
-		<script src="<%=basePath %>/js/ui/jquery.ui.position.js"></script>
-		<script src="<%=basePath %>/js/ui/jquery.autocomplete.js"></script>
-		
 		<script type="text/javascript">
 		
 			/**
@@ -175,7 +170,7 @@
 				//日期控件
 		  		//$('#txt_begin').val((new Date()).getYear()+"-"+(((new Date()).getMonth()+1)<10 ? "0"+((new Date()).getMonth()+1) : (new Date()).getMonth()+1)+"-"+((new Date()).getDate()-15<10 ? "0"+(new Date()).getDate()-15 : (new Date()).getDate()-15));
 		  		//$('#txt_end').val((new Date()).getYear()+"-"+(((new Date()).getMonth()+1)<10 ? "0"+((new Date()).getMonth()+1) : (new Date()).getMonth()+1)+"-"+((new Date()).getDate()<10 ? "0"+(new Date()).getDate() : (new Date()).getDate()));
-				$('#traceTime').datetimepicker({showTimepicker: true});
+//				$('#traceTime').datetimepicker({showTimepicker: true});
 				$.fn.save();
 		  		$.fn.close();
 		  		$.fn.initpage();
@@ -345,7 +340,7 @@
 			<tr><td style="color:white">占行：</td></tr></table></td>
 		<td rowspan="2"><table>
 			<tr><td>
-				<s:textarea readOnly="true" type="text" style="width:650px;height:70px" name="customerTraceInfo.interest" id="interest"></s:textarea></td></tr></table></td>
+				<s:textarea readOnly="true" type="text" style="width:633px;height:70px" name="customerTraceInfo.interest" id="interest"></s:textarea></td></tr></table></td>
 	</tr>
 	<tr><td></td></tr>
 	<tr>
@@ -355,7 +350,7 @@
 			<tr><td style="color:white">占行：</td></tr></table></td>
 		<td rowspan="2"><table>
 			<tr><td>
-			<s:textarea type="text" readOnly="true" style="width:650px;height:70px" name="customerTraceInfo.objection" id="objection"></s:textarea></td></tr></table></td>
+			<s:textarea type="text" readOnly="true" style="width:633px;height:70px" name="customerTraceInfo.objection" id="objection"></s:textarea></td></tr></table></td>
 	</tr>
 	<tr><td></td></tr>
 </table></td></tr>

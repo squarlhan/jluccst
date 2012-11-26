@@ -33,6 +33,12 @@
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<j:scriptlink css="true" tipswindow="true" jmessagebox="true" jquery="true" validate="true" jfunction="true"/>
+	<link rel="stylesheet" media="all" type="text/css" href="<%=basePath%>js/timepicke/jquery-ui-1.7.3.custom.css" />
+	<link rel="stylesheet" media="all" type="text/css" href="<%=basePath%>js/timepicke/jquery-ui-timepicker-addon.css" />
+	<script type="text/javascript" src="<%=basePath%>js/timepicke/jquery-ui-1.7.3.custom.min.js"></script>
+	<script type="text/javascript" src="<%=basePath%>js/timepicke/jquery-ui-timepicker-addon.js"></script>
+	<script type="text/javascript" src="<%=basePath%>js/timepicke/jquery-ui-timepicker-zh-CN.js"></script>
+	<script type="text/javascript" src="<%=basePath%>js/timepicke/jquery-ui-sliderAccess.js"></script>
 	<style type="text/css">
 	<!--
 	.STYLE1 {
@@ -59,7 +65,7 @@
 		    	}
 			})
 			$("#addbtn").click(function(){
-				parent.parent.parent.tipsWindown("添加回访信息","iframe:customer/allMyCustomerVisitInfo.action?customerId=" + $("#customerId_t").val(),"800","500","true","","true","no");
+				parent.parent.parent.tipsWindown("添加回访信息","iframe:customer/allMyCustomerVisitInfo.action?customerId=" + $("#customerId_t").val(),"810","500","true","","true","no");
 				parent.parent.parent.$("#windown-close").bind('click',function(){
 					window.location.href= window.location.href;
 				});
@@ -74,6 +80,10 @@
 				form1.submit();
 		
 			});
+			$('#beginDate').datetimepicker({showTimepicker: false});
+			//日期控件
+			$('#endDate').datetimepicker({showTimepicker: false});
+			
 			$.fn.checkall("cbk_all");
 	  		$.fn.uncheckall("ids","cbk_all");
 
@@ -83,7 +93,7 @@
 	  		$('a[name="edit"]').each(function(){
 	  			$(this).click(function(){
 	  				var url = $(this).attr("url");
-	  				parent.parent.parent.tipsWindown("修改回访信息","iframe:" + url,"800","500","true","","true","no");
+	  				parent.parent.parent.tipsWindown("修改回访信息","iframe:" + url,"810","500","true","","true","no");
 					parent.parent.parent.$("#windown-close").bind('click',function(){
 						window.location.href= window.location.href;
 					});
@@ -140,9 +150,9 @@
 		<s:textfield name="customerName" id="customerName" style="width: 80px"></s:textfield></td>
 		<td align="center">查询开始日期：</td>
 		<td >
-		<s:textfield name="beginDate" id="beginDate" style="width: 80px"></s:textfield></td>
+		<s:textfield name="beginDate" id="beginDate" style="width: 80px" readOnly="true"></s:textfield></td>
 		<td align="center">查询结束日期：</td>
-		<td><s:textfield name="endDate" id="endDate" style="width: 80px"></s:textfield></td>
+		<td><s:textfield name="endDate" id="endDate" style="width: 80px" readOnly="true"></s:textfield></td>
 		<td align="center">类型：</td>
 		<td style="width:120px"><s:select list="listVisitOption" listKey="id" listValue="name" value="visitOption" 
 			id="visitOption" name="visitOption" cssStyle="width:120px" headerKey="" headerValue="--请选择--"></s:select></td>
