@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
+<%@ taglib prefix="j" uri="/script-tags"%>
 <%
 	/**
 	 * Copyright (c) 2010 Changchun Boan (BOAN) Co. Ltd.
@@ -27,10 +28,18 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>进入论坛窗口</title>
 <link type="text/css" rel="stylesheet" href="css/style.css" />
-<script type="text/javascript" src="../js/jquery-1.4.2.min.js"></script>
+<j:scriptlink css="true" tipswindow="true" jmessagebox="true" jquery="true" validate="true"/>
 <script type="text/javascript">
-<!--
-//-->
+$(function(){
+	var message = $("#lb_message").html();
+	if(message!=null && $.trim(message)!="" ){
+		alert(message);
+		if(message.indexOf("删除") != -1)
+			window.history.back();
+	}
+	
+	$("#msg_end").click();
+});
 </script>
 <style type="text/css">
 <!--
@@ -39,8 +48,9 @@
 -->
 </style>
 </head>
-<body onload="document.getElementById('msg_end').click();">
+<body>
 <s:form id="form1" action="toAddForumMessageInfoAction.action">
+<s:label id="lb_message" name="message" cssStyle="display:none"></s:label>
 <table width="100%" border="0" cellspacing="5" cellpadding="0">
   <tr>
     <td><table width="100%" style="height:100%;" border="0" cellspacing="6" cellpadding="0">
