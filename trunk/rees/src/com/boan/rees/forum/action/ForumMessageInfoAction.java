@@ -108,15 +108,21 @@ public class ForumMessageInfoAction extends BaseActionSupport {
 		
 		
 		forumIssueInfo = forumIssueInfoService.get( issueId );
-		forumIssueInfo.setIssueContent( forumIssueInfo.getIssueContent().replaceAll( "\r\n", "<br/>" ) );
-		Map<String,String> values = new HashMap<String,String>();
-		values.put( "issueId", issueId );
-		pagination.setCurrentPage( 1 );
-		pagination.setPageSize( 100 );
-		pagination = forumMessageInfoService.findForumMessageInfoForPage( values, pagination );
-		
-		joinPersonList = forumMessageInfoService.joinPerson(issueId);
-		
+		if(forumIssueInfo != null)
+		{
+			forumIssueInfo.setIssueContent( forumIssueInfo.getIssueContent().replaceAll( "\r\n", "<br/>" ) );
+			Map<String,String> values = new HashMap<String,String>();
+			values.put( "issueId", issueId );
+			pagination.setCurrentPage( 1 );
+			pagination.setPageSize( 100 );
+			pagination = forumMessageInfoService.findForumMessageInfoForPage( values, pagination );
+			
+			joinPersonList = forumMessageInfoService.joinPerson(issueId);
+		}else
+		{
+			message = "话题已经被删除，请查看其他话题！";
+			return INPUT;
+		}
 		return this.SUCCESS;
 	}
 
