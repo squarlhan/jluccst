@@ -39,7 +39,10 @@ public interface IForumIssueInfoService {
 	 */
 	
 	public void deleteForumIssueInfo(String... ids );
-
+	/**
+	 * 删除
+	 */
+	public void autoDeleteForumIssueInfo();
 	/**
 	 * 保存
 	 */
@@ -53,6 +56,5 @@ public interface IForumIssueInfoService {
 	/**
 	 * 按分页查询
 	 */
-	
 	public Pagination<ForumIssueInfo> findForumIssueInfoForPage(Map<String, ?> values,Pagination<ForumIssueInfo> pagination);
 }
