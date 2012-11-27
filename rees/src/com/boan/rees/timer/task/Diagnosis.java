@@ -42,6 +42,7 @@ import com.boan.rees.expertsystem.service.InferenceEngine;
 import com.boan.rees.expertsystem.threshold.model.Threshold;
 import com.boan.rees.expertsystem.threshold.model.ThresholdItem;
 import com.boan.rees.expertsystem.threshold.service.IThresholdService;
+import com.boan.rees.forum.service.IForumIssueInfoService;
 import com.boan.rees.group.service.IGroupService;
 import com.boan.rees.utils.calendar.CalendarUtils;
 import com.boan.rees.utils.expression.ExpressionCompare;
@@ -102,6 +103,10 @@ public class Diagnosis
 	@Autowired
 	@Qualifier("groupService")
 	private IGroupService groupService;
+	//故障日志服务接口
+	@Autowired
+	@Qualifier("forumIssueInfoService")
+	private IForumIssueInfoService forumIssueInfoService;
 	
 	@Resource
 	//监测点数据值接口类
@@ -118,6 +123,8 @@ public class Diagnosis
 	public void work()
 	{
 		System.out.println("＝＝＝＝＝执行服务任务开始＝＝＝＝＝！");
+		forumIssueInfoService.autoDeleteForumIssueInfo();
+		/*
 		//执行具体操作
 		//1.封装所有规则
 		//推理机:
@@ -351,7 +358,7 @@ public class Diagnosis
 				//处理完毕后，将设备监测点状态置为2
 				pointInfoService.updateStatus(listDeviceInfo.get( i ).getId(),2);
 			}
-	    }
+	    }*/
 	    System.out.println("＝＝＝＝＝执行服务任务结束！＝＝＝＝＝！");
 	}
 }
