@@ -75,6 +75,11 @@ public class MenuKey
 	 * 论坛区
 	 */
 	public static final String LUN_TAN_QU = "LUN_TAN_QU";
+	
+	/**
+	 * 发表话题
+	 */
+	public static final String FA_BIAO_HUA_TI = "FA_BIAO_HUA_TI";
 
 	/**
 	 * 系统管理
