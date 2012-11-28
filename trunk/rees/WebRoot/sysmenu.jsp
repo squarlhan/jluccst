@@ -461,6 +461,10 @@
 									</table>
 								</td>
 							</tr>
+							<%
+								sub = popedomService.isHasPopedom( us.getUserId(), String.valueOf( us.getUserType() ), MenuKey.LUN_TAN_GUAN_LI, us.getPopedomKeys() );
+								if( b && sub){ 
+							%>
 							<tr>
 								<td align="left">
 									<table width="100%" border="0" cellspacing="5" cellpadding="0">
@@ -475,6 +479,11 @@
 									</table>
 								</td>
 							</tr>
+							<%} %>
+							<%
+								sub = popedomService.isHasPopedom( us.getUserId(), String.valueOf( us.getUserType() ), MenuKey.LUN_TAN, us.getPopedomKeys() );
+								if( b && sub){ 
+							%>
 							<tr>
 								<td height="1" align="left" background="images/menubg2.jpg"></td>
 							</tr>
@@ -492,6 +501,7 @@
 									</table>
 								</td>
 							</tr>
+							<%} %>
 							<tr>
 								<td height="1" align="left" background="images/menubg2.jpg"></td>
 							</tr>
