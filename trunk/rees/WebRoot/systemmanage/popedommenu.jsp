@@ -59,6 +59,8 @@
 		
 		d.add(103,0,'报表管理','<%=url%>?menuKey=<%=MenuKey.BAO_BIAO_GUAN_LI%>','','groupmain');
 		d.add(104,0,'论坛区','<%=url%>?menuKey=<%=MenuKey.LUN_TAN_QU%>','','groupmain');
+		d.add(1041,104,'论坛管理','<%=url%>?menuKey=<%=MenuKey.LUN_TAN_GUAN_LI%>','','groupmain');
+		d.add(1042,104,'论坛','<%=url%>?menuKey=<%=MenuKey.LUN_TAN%>','','groupmain');
 		d.add(105,0,'系统管理','<%=url%>?menuKey=<%=MenuKey.XI_TONG_GUAN_LI%>','','groupmain');
 		d.add(106,0,'数据字典','<%=url%>?menuKey=<%=MenuKey.SHU_JU_ZI_DIAN%>','','groupmain');
 		
@@ -67,6 +69,9 @@
 		d.add(201,1,'显示所有机构','<%=url%>?menuKey=<%=MenuKey.SHOW_ALL_GROUP%>','','groupmain');
 		d.add(202,1,'显示当前机构','<%=url%>?menuKey=<%=MenuKey.SHOW_CURRENT_GROUP%>','','groupmain');
 		d.add(203,1,'显示当前及以下机构','<%=url%>?menuKey=<%=MenuKey.SHOW_CURRENT_AND_SUB_GROUP%>','','groupmain');
+		
+		d.add(2,-1,'操作权限','','','Menu');
+		d.add(301,2,'发表话题','<%=url%>?menuKey=<%=MenuKey.FA_BIAO_HUA_TI%>','','groupmain');
 		document.write(d);
 		d.openAll();
 		//-->
