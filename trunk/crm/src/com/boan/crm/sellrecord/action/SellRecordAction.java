@@ -428,15 +428,27 @@ public class SellRecordAction extends BaseActionSupport {
 	public String showGroupTreeForSellRecord() throws Exception {
 		companyId = sessionCompanyId;
 		companyName = sessionCompanyName;
-		deptList = deptService.queryAllDeptmentsByCompanyId(sessionCompanyId);
 		userList = new ArrayList<User>();
+		deptList = new ArrayList<Deptment>();
+		boolean flag=true;
+		if(sessionDeptId.equals("")){ //总经理
+			flag=false;
+		}
+		if(flag){ //部门经理
+			deptList.add(deptService.get(sessionDeptId));
+		}else{    //总经理
+			deptList = deptService.queryAllDeptmentsByCompanyId(sessionCompanyId);
+		}
+		
 		// 获取用户列表
 		if (deptList != null && deptList.size() > 0) {
 			List<User> tempUserList = new ArrayList<User>();
 			for (int i = 0; i < deptList.size(); i++) {
-				List<User> tempList = userService.queryUserList(sessionCompanyId, deptList.get(i).getId());
-				if (tempList != null && tempList.size() > 0) {
-					tempUserList.addAll(tempList);
+				if(deptList.get(i)!=null){
+					List<User> tempList = userService.queryUserList(sessionCompanyId, deptList.get(i).getId());
+					if (tempList != null && tempList.size() > 0) {
+						tempUserList.addAll(tempList);
+					}
 				}
 			}
 			if (tempUserList != null && tempUserList.size() > 0) {
