@@ -132,18 +132,14 @@
 		
 		function toCustomer(obj){
 			var url = obj.attr("url");
-			var oldAction = $("#form1").attr("action");
 			$("#form1").attr("action",url);
 			$("#form1").submit();
-			 $("#form1").attr("action",oldAction);
 		}
 		
 		function noSearch(obj){
 			var url = obj.attr("url");
-			var oldAction = $("#form1").attr("action");
 			$("#form1").attr("action",url);
 			$("#form1").submit();
-			$("#form1").attr("action",oldAction);
 		}
 		</script>
 
@@ -240,7 +236,7 @@
         </s:iterator>        
         <tr>
           <td height="26" colspan="11" align="center" bgcolor="#FFFFFF">
-		  	<page:pages currentPage="pagination.currentPage" totalPages="pagination.totalPages" totalRows="pagination.totalRows" styleClass="page" theme="text" ></page:pages>
+		  	<page:pages currentPage="pagination.currentPage" totalPages="pagination.totalPages" totalRows="pagination.totalRows" styleClass="page" theme="text"  url="customerSearchAction.action"></page:pages>
 		  </td>
         </tr>
       </table></td>
