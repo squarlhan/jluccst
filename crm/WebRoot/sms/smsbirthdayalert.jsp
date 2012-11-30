@@ -45,6 +45,13 @@
 	<script type="text/javascript">
 	
 	  	$(function(){
+	  		
+	  		//时间控件
+			$('#txt_sendTime').timepicker({
+				hourGrid: 4,
+				minuteGrid: 10
+			});
+	  		
 	  		//人员复选框控制
 			$.fn.CheckBoxAll("ids","cbk_all");
 			$.fn.UnCheckBoxAll("ids","cbk_all");
