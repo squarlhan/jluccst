@@ -179,7 +179,7 @@
         <td height="26" align="center" bgcolor="#FFFFFF" >  
         	<s:checkbox id="%{#obj.id}" name="ids" fieldValue="%{id}" value="false" theme="simple"/>
 		</td>
-              <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="inquiryPersonName"/></td>
+              <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="goodsName"/></td>
               <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="goodsStandard"/></td>
                 
                 <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="goodsPrice"/></td>
