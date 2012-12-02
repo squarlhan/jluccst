@@ -11,7 +11,9 @@ import java.io.InputStream;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
@@ -56,6 +58,7 @@ import com.boan.rees.group.service.IPopedomService;
 import com.boan.rees.utils.action.BaseActionSupport;
 import com.boan.rees.utils.calendar.CalendarUtils;
 import com.boan.rees.utils.expression.ExpressionCompare;
+import com.boan.rees.utils.page.Pagination;
 
 /**
  * 设备监测点数据Action类
@@ -134,6 +137,12 @@ public class PointDataInfoAction extends BaseActionSupport {
 	//年下拉列表
 	private List<SelectList> yearList = null;
 	
+	//开始时间
+	private String beginTime = null;
+	
+	//结束时间
+	private String endTime = null;
+	
 	//当前选择的年度
 	private String selectYear = null;
 	
@@ -176,6 +185,9 @@ public class PointDataInfoAction extends BaseActionSupport {
 	
 	private boolean admin = false;
 	
+	
+	private Pagination<PointDataInfo> pagePointDataInfos = new Pagination<PointDataInfo>();
+	
 	/**
 	 * 获得监测数据列表
 	 * @return
@@ -200,43 +212,29 @@ public class PointDataInfoAction extends BaseActionSupport {
 			dataTypeString = "位移 mm";
 		if("A".equalsIgnoreCase(dataType))
 			dataTypeString = "加速度 mm/s2";
-		//初始化下拉列表
+		
 		int thisYear = Calendar.getInstance().get(Calendar.YEAR);
 		int thisWeek = CalendarUtils.getWeekOfYear(Calendar.getInstance());
-		if(StringUtils.trimToNull(selectYear)==null)
-			selectYear = String.valueOf(thisYear);
-		if(StringUtils.trimToNull(selectWeek)==null)
-			selectWeek = String.valueOf(thisWeek);
-		SelectList sl = null;
-		yearList = new ArrayList<SelectList>();
-		for(int i=2011; i<thisYear+1; i++){
-			sl = new SelectList();
-			sl.setText(String.valueOf(i));
-			sl.setValue(String.valueOf(i));
-			yearList.add(sl);
-		}
-		
-		weekList = new ArrayList<SelectList>();
-		sl = null;
 		Calendar calBegin = null;
 		Calendar calEnd = null;
-		int maxWeek = CalendarUtils.getMaxWeekNumOfYear(thisYear);
 		
-		for(int i=0; i<maxWeek; i++){
-			calBegin = CalendarUtils.getFirstDayOfWeek(thisYear, i+1);
-			calEnd = CalendarUtils.getLastDayOfWeek(thisYear, i+1);
-			sl = new SelectList();
-			sl.setText(CalendarUtils.toString(calBegin) + "~" + CalendarUtils.toString(calEnd));
-			sl.setValue(String.valueOf(i+1));
-			weekList.add(sl);
-			if(i==thisWeek-1)
-				break;
+		if(StringUtils.trimToNull(beginTime)==null){
+			calBegin = CalendarUtils.getFirstDayOfWeek(thisYear, thisWeek);
+			beginTime = CalendarUtils.toString(calBegin);
 		}
-		
+		if(StringUtils.trimToNull(endTime)==null){
+			calEnd = CalendarUtils.getLastDayOfWeek(thisYear, thisWeek);
+			endTime = CalendarUtils.toString(calEnd);
+		}
 		
 		//获得监测点信息
 		if(StringUtils.trimToNull(deviceId)!=null){
-			pointDataInfos = pointDataInfoService.listByDeviceId(selectYear, selectWeek, deviceId);
+			Map<String,Object> values = new HashMap<String,Object>();
+			values.put( "deviceId", deviceId );
+			values.put( "beginTime", CalendarUtils.toLongCalendar(beginTime + " 0:0:1") );
+			values.put( "endTime", CalendarUtils.toLongCalendar(endTime + " 23:59:59") );
+			pagePointDataInfos.setPageSize(5);
+			pagePointDataInfos = pointDataInfoService.findPointDataInfoForPage(values, pagePointDataInfos);
 			pointInfos = pointInfoService.findPointInfosByDeviceId(deviceId);
 			if(pointInfos!=null && pointInfos.size()>0){
 				PointRelation pr = null;
@@ -352,8 +350,10 @@ public class PointDataInfoAction extends BaseActionSupport {
 			}else{
 				pdiTemp = new PointDataInfo();
 				pdiTemp.setDeviceId(deviceId);
-				pdiTemp.setDataYear(Integer.valueOf(selectYear));
-				pdiTemp.setWeekofYear(Integer.valueOf(selectWeek));
+				if(StringUtils.trimToNull(selectYear)!=null)
+					pdiTemp.setDataYear(Integer.valueOf(selectYear));
+				if(StringUtils.trimToNull(selectWeek)!=null)
+					pdiTemp.setWeekofYear(Integer.valueOf(selectWeek));
 				pdiTemp.setUserId(sessionUserId);
 				pdiTemp.setUserName(sessionUserCName);
 				pdiTemp.setCreatTime(Calendar.getInstance());
@@ -922,41 +922,19 @@ public class PointDataInfoAction extends BaseActionSupport {
 	 * @return
 	 */
 	public String deviceStatLine(){
-		//初始化下拉列表
 		int thisYear = Calendar.getInstance().get(Calendar.YEAR);
 		int thisWeek = CalendarUtils.getWeekOfYear(Calendar.getInstance());
-		if(StringUtils.trimToNull(selectYear)==null)
-			selectYear = String.valueOf(thisYear);
-		if(StringUtils.trimToNull(selectWeek)==null)
-			selectWeek = String.valueOf(thisWeek);
-		SelectList sl = null;
-		yearList = new ArrayList<SelectList>();
-		for(int i=2011; i<thisYear+1; i++){
-			sl = new SelectList();
-			sl.setText(String.valueOf(i));
-			sl.setValue(String.valueOf(i));
-			yearList.add(sl);
-		}
-		
-		weekList = new ArrayList<SelectList>();
-		sl = null;
 		Calendar calBegin = null;
 		Calendar calEnd = null;
-		int maxWeek = CalendarUtils.getMaxWeekNumOfYear(thisYear);
 		
-		for(int i=0; i<maxWeek; i++){
-			calBegin = CalendarUtils.getFirstDayOfWeek(thisYear, i+1);
-			calEnd = CalendarUtils.getLastDayOfWeek(thisYear, i+1);
-			sl = new SelectList();
-			sl.setText("第" + (i+1) + "周");
-			sl.setValue(String.valueOf(i+1));
-			weekList.add(sl);
-			if(i==thisWeek-1)
-				break;
+		if(StringUtils.trimToNull(beginTime)==null){
+			calBegin = CalendarUtils.getFirstDayOfWeek(thisYear, thisWeek);
+			beginTime = CalendarUtils.toString(calBegin);
 		}
-		
-		if(StringUtils.trimToNull(selectFromWeek)==null)
-			selectFromWeek = "1";
+		if(StringUtils.trimToNull(endTime)==null){
+			calEnd = CalendarUtils.getLastDayOfWeek(thisYear, thisWeek);
+			endTime = CalendarUtils.toString(calEnd);
+		}
 		
 		
 		//获得监测点信息
@@ -978,13 +956,10 @@ public class PointDataInfoAction extends BaseActionSupport {
 	public String deviceColumnStatLine(){				
 		if(StringUtils.trimToNull(chart)!=null){
 			pointId = chart.split("\\|")[0];
-			selectYear = chart.split("\\|")[1];
-			selectFromWeek = chart.split("\\|")[2];
-			selectWeek = chart.split("\\|")[3];
-			deviceId = chart.split("\\|")[4];
+			beginTime = chart.split("\\|")[1];
+			endTime = chart.split("\\|")[2];
+			deviceId = chart.split("\\|")[3];
 		}
-		int fromYear = Integer.parseInt(selectFromWeek);
-		int toYear = Integer.parseInt(selectWeek);
 		StringBuffer sb = new StringBuffer();
 		StringBuffer tempSb = new StringBuffer();
 		List<PointParamInfo> ppis = null;
@@ -993,16 +968,18 @@ public class PointDataInfoAction extends BaseActionSupport {
 		PointDataValueInfo pdvi = null;
 		//获得监测点参数
 		ppis = pointParamInfoService.findPointParamInfoByPointId(pointId);
+		
+		Map<String,Object> values = new HashMap<String,Object>();
+		values.put( "deviceId", deviceId );
+		values.put( "beginTime", CalendarUtils.toLongCalendar(beginTime + " 0:0:1") );
+		values.put( "endTime", CalendarUtils.toLongCalendar(endTime + " 23:59:59") );
+		
+		pdis= pointDataInfoService.listByMap(values);
 
 		tempSb.append("<categories >");
-		for(int i=0; i<(toYear-fromYear + 1); i++){
-			pdis = pointDataInfoService.listByDeviceId(selectYear, String.valueOf(fromYear+i), deviceId);
-			if(pdis!=null&&pdis.size()>0){
-				for(int j=0; j<pdis.size(); j++){
-					tempSb.append("<category name='" + (fromYear + i) + "' />");
-				}
-			}else{
-				tempSb.append("<category name='" + (fromYear + i) + "' />");
+		if(pdis!=null&&pdis.size()>0){
+			for(int j=0; j<pdis.size(); j++){
+				tempSb.append("<category name='" + pdis.get(j).getCreatTimeString() + "' />");
 			}
 		}
 		tempSb.append("</categories>");
@@ -1020,19 +997,16 @@ public class PointDataInfoAction extends BaseActionSupport {
 				
 				tempSb.append("<dataset seriesName='参数" + ppi.getName() + "' color='" + color + "' anchorBorderColor='" + color + "' anchorBgColor='" + color + "'>");
 				
-				for(int i=0; i<(toYear-fromYear+1); i++){
-					pdis = pointDataInfoService.listByDeviceId(selectYear, String.valueOf(fromYear+i), deviceId);
-					if(pdis!=null&&pdis.size()>0){
-						for(int j=0; j<pdis.size(); j++){
-							pdvi = pointDataValueInfoService.get(pdis.get(j).getId(), ppi.getId());
-							if(pdvi!=null)
-								tempSb.append("<set value='" + pdvi.getDataInfo() + "' />");
-							else
-								tempSb.append("<set value='0' />");
-						}
-					}else{
-						tempSb.append("<set value='0' />");
+				if(pdis!=null&&pdis.size()>0){
+					for(int j=0; j<pdis.size(); j++){
+						pdvi = pointDataValueInfoService.get(pdis.get(j).getId(), ppi.getId());
+						if(pdvi!=null)
+							tempSb.append("<set value='" + pdvi.getDataInfo() + "' />");
+						else
+							tempSb.append("<set value='0' />");
 					}
+				}else{
+					tempSb.append("<set value='0' />");
 				}
 				tempSb.append("</dataset>");
 				count++;
@@ -1040,7 +1014,7 @@ public class PointDataInfoAction extends BaseActionSupport {
 		}
 		
 		sb.append("<?xml version='1.0' encoding='gb2312'?>");
-		sb.append("<graph caption='监测点参数运行曲线图' subcaption='(从" + selectYear + "年第" + selectFromWeek + "周到第" + selectWeek + "周)' hovercapbg='FFECAA' hovercapborder='F47E00' formatNumberScale='0' decimalPrecision='0' showvalues='0' numVdivlines='0' rotateNames='0' baseFontSize='12'>");
+		sb.append("<graph caption='监测点参数运行曲线图' subcaption='(从" + beginTime + "到" + endTime + ")' hovercapbg='FFECAA' hovercapborder='F47E00' formatNumberScale='0' decimalPrecision='0' showvalues='0' numVdivlines='0' rotateNames='1' baseFontSize='12'>");
 		sb.append(tempSb);
 		sb.append("</graph>");
 		xmlStream = new ByteArrayInputStream(sb.toString().getBytes(Charset.forName("gb2312")));
@@ -1289,5 +1263,47 @@ public class PointDataInfoAction extends BaseActionSupport {
 	 */
 	public void setAdmin(boolean admin) {
 		this.admin = admin;
+	}
+
+	/**
+	 * @return the beginTime
+	 */
+	public String getBeginTime() {
+		return beginTime;
+	}
+
+	/**
+	 * @param beginTime the beginTime to set
+	 */
+	public void setBeginTime(String beginTime) {
+		this.beginTime = beginTime;
+	}
+
+	/**
+	 * @return the endTime
+	 */
+	public String getEndTime() {
+		return endTime;
+	}
+
+	/**
+	 * @param endTime the endTime to set
+	 */
+	public void setEndTime(String endTime) {
+		this.endTime = endTime;
+	}
+
+	/**
+	 * @return the pagePointDataInfos
+	 */
+	public Pagination<PointDataInfo> getPagePointDataInfos() {
+		return pagePointDataInfos;
+	}
+
+	/**
+	 * @param pagePointDataInfos the pagePointDataInfos to set
+	 */
+	public void setPagePointDataInfos(Pagination<PointDataInfo> pagePointDataInfos) {
+		this.pagePointDataInfos = pagePointDataInfos;
 	}
 }

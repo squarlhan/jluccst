@@ -62,4 +62,11 @@ public interface IPointDataInfoService {
 	 * @return
 	 */
 	public List<PointDataInfo> listByDeviceId(String year, String week, String deviceId);
+	
+	/**
+	 * 获得指定设备周日期的监测点数据
+	 * @param values
+	 * @return
+	 */
+	public List<PointDataInfo> listByMap(Map<String, ?> values);
 }
