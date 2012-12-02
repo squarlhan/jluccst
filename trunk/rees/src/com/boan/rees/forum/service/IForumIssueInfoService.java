@@ -42,7 +42,7 @@ public interface IForumIssueInfoService {
 	/**
 	 * 删除
 	 */
-	public void autoDeleteForumIssueInfo();
+	public void deleteForumIssueInfoByAutoTask();
 	/**
 	 * 保存
 	 */
