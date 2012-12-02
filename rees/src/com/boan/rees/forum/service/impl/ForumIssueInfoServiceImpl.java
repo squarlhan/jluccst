@@ -57,19 +57,19 @@ public class ForumIssueInfoServiceImpl implements IForumIssueInfoService {
 	/**
 	 * 自动删除>６０天的话题
 	 */
-	public void autoDeleteForumIssueInfo()
+	public void deleteForumIssueInfoByAutoTask()
 	{
 		Calendar time = Calendar.getInstance();
 		time.add( Calendar.DATE, -60 );
 		
 		StringBuffer hql = new StringBuffer();
 		Map<String,Calendar> values = new HashMap<String,Calendar>();
-		
-		hql.append( "delete from ForumMessageInfo where issueId  in ( select id from ForumIssueInfo where createTime < :deleteTime)" );
+
+		hql.append( "delete from ForumMessageInfo where messageTime < :deleteTime)" );
 		values.put( "deleteTime", time );
-		hql.delete( 0, hql.length() );
 		forumIssueInfoDao.executeHql( hql.toString(), values );
 		
+		hql.delete( 0, hql.length() );
 		hql.append( "delete from ForumIssueInfo where createTime < :deleteTime" );
 		values.put( "deleteTime", time );
 		forumIssueInfoDao.executeHql( hql.toString(), values );
