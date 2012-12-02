@@ -56,9 +56,9 @@ public class PointDataInfoServiceImpl implements IPointDataInfoService{
 	@Override
   public Pagination<PointDataInfo> findPointDataInfoForPage(Map<String, ?> values,Pagination<PointDataInfo> pagination){
 		
-		String hql = "from PointDataInfo";
+		String hql = "from PointDataInfo where deviceId=:deviceId and creatTime>=:beginTime and creatTime<=:endTime order by creatTime desc";
 		List<PointDataInfo> data = pointDataInfoDao.findForPage(hql, values, pagination.getStartIndex(), pagination.getPageSize());
-		hql = "select count(*) from PointDataInfo";
+		hql = "select count(*) from PointDataInfo where deviceId=:deviceId and creatTime>=:beginTime and creatTime<=:endTime order by creatTime desc";
 		int totalRows = pointDataInfoDao.findCountForPage(hql, values);
 		pagination.setTotalRows(totalRows);
 		pagination.setData(data);
@@ -76,6 +76,12 @@ public class PointDataInfoServiceImpl implements IPointDataInfoService{
 	public List<PointDataInfo> listByDeviceId(String year, String week,
 			String deviceId) {
 		return pointDataInfoDao.listByDeviceId(year, week, deviceId);
+	}
+	@Override
+	public List<PointDataInfo> listByMap(Map<String, ?> values) {
+		String hql = "from PointDataInfo where deviceId=:deviceId and creatTime>=:beginTime and creatTime<=:endTime order by creatTime asc";
+		List<PointDataInfo> data = pointDataInfoDao.find(hql, values);
+		return data;
 	}
 
 }

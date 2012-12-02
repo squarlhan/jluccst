@@ -42,7 +42,7 @@ public class PointDataInfoDaoImpl extends BaseDao<PointDataInfo, String>
 
 	@Override
 	public List<PointDataInfo> listByDeviceId(String year, String week, String deviceId) {
-		String hql = "from PointDataInfo where deviceId=? and dataYear=? and weekofYear=?";
+		String hql = "from PointDataInfo where deviceId=? and dataYear=? and weekofYear=? order by creatTime desc";
 		List<PointDataInfo> list = this.find(hql, new Object[] { deviceId, Integer.parseInt(year), Integer.parseInt(week) });
 		return list;
 	}
