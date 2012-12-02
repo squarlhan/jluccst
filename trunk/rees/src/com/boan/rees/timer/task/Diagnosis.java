@@ -123,7 +123,7 @@ public class Diagnosis
 	public void work()
 	{
 		System.out.println("＝＝＝＝＝执行服务任务开始＝＝＝＝＝！");
-		forumIssueInfoService.autoDeleteForumIssueInfo();
+		forumIssueInfoService.deleteForumIssueInfoByAutoTask(); 
 		/*
 		//执行具体操作
 		//1.封装所有规则
