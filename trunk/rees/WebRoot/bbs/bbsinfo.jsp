@@ -1,4 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@page import="com.boan.rees.group.service.IPopedomService"%>
+<%@page import="org.springframework.web.context.WebApplicationContext"%>
+<%@page import="com.boan.rees.group.common.UserSession"%>
+<%@page import="com.boan.rees.group.common.MenuKey"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%@ taglib prefix="j" uri="/script-tags"%>
 <%
@@ -21,6 +25,10 @@
 	response.setHeader( "Expires", "0" );
 	request.setCharacterEncoding( "utf-8" );
 	String path = request.getContextPath();
+	UserSession us = ( UserSession ) session.getAttribute( "userSession" );
+	WebApplicationContext context = ( WebApplicationContext ) this.getServletContext().getAttribute( WebApplicationContext.ROOT_WEB_APPLICATION_CONTEXT_ATTRIBUTE );
+	IPopedomService popedomService = ( IPopedomService ) context.getBean( "popedomService" );
+	boolean b = false;
 %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
@@ -39,6 +47,13 @@ $(function(){
 	}
 	
 	$("#msg_end").click();
+	
+	$("#addbtn").click(function(){
+		parent.parent.parent.tipsWindown("添加话题","iframe:openAddForumIssueInfoAction.action","460","250","true","","true","no");
+		parent.parent.$("#windown-close").bind('click',function(){
+			window.location.href="openForumIssueInfoAction.action";
+		});
+	});		
 });
 </script>
 <style type="text/css">
@@ -99,9 +114,21 @@ $(function(){
                 </s:if>
               </table></td>
               <td width="31%" valign="top" bgcolor="#FFFFFF"><table width="100%" height="396" border="0">
+                 <%
+                b = popedomService.isHasPopedom( us.getUserId(), String.valueOf( us.getUserType() ), MenuKey.FA_BIAO_HUA_TI, us.getPopedomKeys() );
+				if( b )
+				{
+					%>
+					<tr>
+	                  <td height="28" background="images/bottombg.jpg"><input name="addbtn" type="button" class="btn_4" id="addbtn" value="发起话题"></td>
+	                </tr>
+                <%
+				}
+                %>
                 <tr>
                   <td height="28" background="images/bottombg.jpg"><strong>--<s:property value="forumIssueInfo.issueName"/>--</strong></td>
-                  </tr>
+                </tr>
+               
                 <tr>
                   <td height="87" align="left" valign="top" style="padding:5px;"><s:property value="forumIssueInfo.issueContent"/></td>
                   </tr>
