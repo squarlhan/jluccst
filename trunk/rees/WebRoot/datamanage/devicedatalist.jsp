@@ -33,7 +33,7 @@
 	<s:iterator value="deviceInfos" status="st">
 	<div title="<s:property value='deviceName'/>"
 		style="padding: 1px; display: none;">
-		<iframe scrolling="auto" frameborder="0" style="width:100%; height:100%"
+		<iframe scrolling="auto" frameborder="0" style="width:100%; height:95%"
 			src="about:blank" url="pointdatalist.action?deviceId=<s:property value='id'/>"></iframe>
 	</div>
 	</s:iterator>

@@ -57,6 +57,8 @@
 				if(flag)
 					return false;
 				if(confirm("确定要录入完成监测点数据了吗？")){
+					var obj = $(this);
+					obj.attr("disabled","disabled");
 					var str = "";
 					$(document).find("input[name='datainput']").each(function(index,domEle){
 						if (index == 0)
@@ -67,9 +69,11 @@
 					$.post("savedatainfoajax.action", {status:1, pointDataId:$("#pointDataId").val(),deviceId:$("#deviceId").val(), selectWeek:$("#selectWeek").val(), selectYear:$("#selectYear").val(), datas:str },function(json){
 						if(json.result=="OK"){
 							alert("保存成功！");
+							obj.removeAttr("disabled");
 						}else
 						{
 							alert(json.result);
+							obj.removeAttr("disabled");
 						}
 			    	});
 				};
