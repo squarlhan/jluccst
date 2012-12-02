@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
+<%@ taglib prefix="page" uri="/WEB-INF/page-tags.tld"%> 
 <%@ taglib prefix="s" uri="/struts-tags" %>
 <%@ taglib prefix="j" uri="/script-tags"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
@@ -8,27 +9,28 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<title></title>
 	<j:scriptlink css="true" jquery="true" />
+	<script type="text/javascript" src="${pageContext.request.contextPath}/js/My97DatePicker/WdatePicker.js"></script>
 	<script type="text/javascript">
 	<!--
 	$(document).ready(function() {
+		$("#beginTime").click(function(){WdatePicker({el:'beginTime',dateFmt:'yyyy-MM-dd'});});
+		$("#endTime").click(function(){WdatePicker({el:'endTime',dateFmt:'yyyy-MM-dd'});});
 		//监测点数据维护
 		$("#addpointdata").click(function() {
-			parent.parent.parent.tipsWindown("添加监测点数据", "iframe:datamanage/pointdatainfo.action?deviceId=<s:property value='deviceId'/>&selectYear=" + $("#yearlist").val() + "&selectWeek=" + $("#weeklist").val(), "400", "390", "true", "", "true", "", "auto");
+			parent.parent.parent.tipsWindown("添加监测点数据", "iframe:datamanage/pointdatainfo.action?deviceId=<s:property value='deviceId'/>", "400", "390", "true", "", "true", "", "auto");
 			parent.parent.parent.$("#windown-close").bind('click',function(){
-				window.location.href="datamanage/pointdatalist.action?deviceId=<s:property value='deviceId'/>&selectYear=" + $("#yearlist").val() + "&selectWeek=" + $("#weeklist").val();
+				window.location.href="datamanage/pointdatalist.action?deviceId=<s:property value='deviceId'/>";
 			});
 		});
 		$(document).find("input[name='showpointdata']").click(function() {
-			parent.parent.parent.tipsWindown("修改监测点数据", "iframe:datamanage/pointdatainfo.action?pointDataId=" + $(this).attr("dataId") + "&deviceId=<s:property value='deviceId'/>&selectYear=" + $("#yearlist").val() + "&selectWeek=" + $("#weeklist").val(), "400", "390", "true", "", "true", "", "auto");
+			parent.parent.parent.tipsWindown("修改监测点数据", "iframe:datamanage/pointdatainfo.action?pointDataId=" + $(this).attr("dataId") + "&deviceId=<s:property value='deviceId'/>", "400", "390", "true", "", "true", "", "auto");
 			parent.parent.parent.$("#windown-close").bind('click',function(){
-				window.location.href="datamanage/pointdatalist.action?deviceId=<s:property value='deviceId'/>&selectYear=" + $("#yearlist").val() + "&selectWeek=" + $("#weeklist").val();
+				window.location.href="datamanage/pointdatalist.action?deviceId=<s:property value='deviceId'/>";
 			});
 		});
 		$(document).find("input[name='delbtn']").click(function(){
 			if(confirm("确定要删除当前监测点数据吗？")){
 				$("#pointDataId").val($(this).attr("dataId"));
-				$("#selectYear").val($("#yearlist").val());
-				$("#selectWeek").val($("#weekList").val());
 				form1.action="deletedatainfo.action" ;
 				form1.submit();
 			}
@@ -45,26 +47,6 @@
 		$("#showstatline").click(function(){
 			parent.parent.parent.tipsWindown("线状图", "iframe:datamanage/devicestatline.action?deviceId=<s:property value='deviceId'/>", "870", "673", "true", "", "true", "", "auto");
 		});
-		//日期选择
-		$("#yearlist").change(function(){
-			$.post("getweeksajax.action", {selectYear:$("#yearlist").val()},function(json){
-				if(json.weekList.length>0){
-					//清空下拉列表
-					$("#weeklist").empty();
-					for(var i=json.weekList.length-1; i>-1; i--){
-						if(json.selectWeek==json.weekList[i].value)
-							$("#weeklist").prepend("<option value='" + json.weekList[i].value + "' seleced='selected'>" + json.weekList[i].text + "</option>");
-						else
-							$("#weeklist").prepend("<option value='" + json.weekList[i].value + "'>" + json.weekList[i].text + "</option>");
-					}
-					window.location.href="datamanage/pointdatalist.action?deviceId=" + $("#deviceId").val() + "&selectYear=" + $("#yearlist").val() + "&selectWeek=" + $("#weeklist").val();
-				}
-	    	});
-		});
-		//周选择
-		$("#weeklist").change(function(){
-			window.location.href="datamanage/pointdatalist.action?deviceId=" + $("#deviceId").val() + "&selectYear=" + $("#yearlist").val() + "&selectWeek=" + $("#weeklist").val();
-		});
 		reloadList();
 		//加载数据
 		function reloadList(){
@@ -79,12 +61,16 @@
 				});
 			});
 		}
+		$("#selectBtn").click(function(){
+			$("#form1").attr("action","pointdatalist.action");
+			$("#form1").submit();
+		});
 	});
 	//-->
 	</script>
 	</head>
 	<body>
-		<form name="form1" method="post">
+		<form name="form1" id="form1" method="post">
 		<s:hidden name="pointDataId" id="pointDataId" />
 		<s:hidden name="deviceId" id="deviceId" />
 		<s:hidden name="selectYear" id="selectYear" />
@@ -96,9 +82,11 @@
 					<table width="100%" border="0" cellspacing="5" cellpadding="0">
 						<tr>
 							<td>
-								日期：
-								<s:select name="yearlist" id="yearlist" list="yearList" cssStyle="width:70px;" listKey="value" listValue="text" value="selectYear"></s:select>
-								<s:select name="weeklist" id="weeklist" list="weekList" cssStyle="width:180px;" listKey="value" listValue="text" value="selectWeek"></s:select>
+								开始日期: 
+								<s:textfield id="beginTime" name="beginTime" cssClass="Wdate" cssStyle="width:120px;" readonly="true"/>
+								结束日期: 
+								<s:textfield id="endTime" name="endTime" cssClass="Wdate" cssStyle="width:120px;" readonly="true"/>
+								<input name="selectBtn" id="selectBtn" type="button" class="btn_2_3" value="查询">
 								<input id="showstatline" class="btn_4" type="button" value="查看线状图"  />
 								<input class="btn_5" type="button" value="添加监测点数据" id="addpointdata" />
 							</td>
@@ -107,7 +95,7 @@
 							</td>
 						</tr>
 					</table>
-					<s:iterator value="pointDataInfos">
+					<s:iterator value="pagePointDataInfos.data">
 					<fieldset style="margin:3px;" dataId="<s:property value='id'/>">
 						<legend>
 							<strong>
@@ -152,6 +140,11 @@
 					</s:iterator>
 			  </td>
 			</tr>
+			<tr>
+				<td align="center"  background="images/headerbg.jpg">
+					<page:pages currentPage="pagePointDataInfos.currentPage" totalPages="pagePointDataInfos.totalPages" totalRows="pagePointDataInfos.totalRows" styleClass="page" theme="text" ></page:pages> 
+			   	</td>
+		  	</tr>
 		</table>
 		</form>
 	</body>
