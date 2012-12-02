@@ -22,11 +22,16 @@
 			var _device_submit = {
 				rules: {
 					"provinceId":{required:true},
+					"cityId":{required:true},
 					"uploadFile":{required:true}
 				},messages:{
 					"provinceId":
 					{
-					    required:"选择省份名称！"
+					    required:"选择省份！"
+					},
+					"cityId":
+					{
+					    required:"选择城市！"
 					},
 					"uploadFile":
 					{
@@ -52,7 +57,25 @@
 				$.fn.save();
 		  		$.fn.close();
 		  		$.fn.initpage();
+		  		$("#sel_province").change(function() {
+	                loadCity($("#sel_province").val());
+	            });
 		  	});
+			function loadCity(parentid) {
+                $.ajax({
+                    url:"<%=basePath%>datadictionary/cityinfoservice.action?provinceId=" + parentid,
+                    type: 'POST',
+                    dataType: 'JSON',
+                    timeout: 5000,
+                    error: function() { alert('Error loading data!'); },
+                    success: function(msg) {
+                        $("#cityId").empty();
+                        $.each(eval(msg), function(i, item) {
+                            $("<option value='" + item.id + "'>" + item.name + "</option>").appendTo($("#cityId"));
+                        });
+                    }
+                });
+            }
 			/**
 		  	 * 保存
 		  	 */
@@ -146,6 +169,15 @@
 											</td>
 											<td height="26" align="left" bgcolor="#FFFFFF">
 												<s:select id="sel_province"  name ="provinceId"  list="provinceList" listKey="id"  listValue="provinceName" cssStyle="width:230px" headerKey="" headerValue="--- 请选择 ---"></s:select>
+												<font color="red">*</font>
+											</td>
+										</tr>
+										<tr>
+											<td height="26" align="right" bgcolor="#FFFFFF">
+												<strong>选择城市名称：</strong>
+											</td>
+											<td height="26" align="left" bgcolor="#FFFFFF">
+												<select id="cityId" name="cityId" cssStyle="width:230px"></select>
 												<font color="red">*</font>
 											</td>
 										</tr>
