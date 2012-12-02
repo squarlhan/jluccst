@@ -476,7 +476,8 @@ public class CustomerSearchAction  extends BaseActionSupport{
 									customer.setCreateTime(Calendar.getInstance());
 									customer.setCompanyId( sessionCompanyId );
 									customer.setCreatorId(sessionUserId);
-									
+									customer.setProvince(provinceId);
+									customer.setCity(cityId);
 									customer.setCompanyFullName(customerName);
 
 									String customerAddressTemp = customerAddress.replaceAll("-", " ");
@@ -492,27 +493,27 @@ public class CustomerSearchAction  extends BaseActionSupport{
 									{
 										if(!customerAddressArray[kk].equals("中国"))
 										{
-											if(!bProvinceFlag)
-											{
-												ProvinceInfo province = areaService.getProvinceByName(customerAddressArray[kk]);
-												if(province != null)
-												{
-													customer.setProvince(province.getId());
-													bProvinceFlag = true;
-													continue;
-												}
-											}
-											if(!bCityFlag)
-											{
-												CityInfo city = areaService.getCityByName(customerAddressArray[kk]);
-												if(city != null)
-												{
-													customer.setCity(city.getId());
-													customer.setProvince(city.getProvinceId());
-													bCityFlag = true;
-													continue;
-												}
-											}
+//											if(!bProvinceFlag)
+//											{
+//												ProvinceInfo province = areaService.getProvinceByName(customerAddressArray[kk]);
+//												if(province != null)
+//												{
+//													customer.setProvince(province.getId());
+//													bProvinceFlag = true;
+//													continue;
+//												}
+//											}
+//											if(!bCityFlag)
+//											{
+//												CityInfo city = areaService.getCityByName(customerAddressArray[kk]);
+//												if(city != null)
+//												{
+//													customer.setCity(city.getId());
+//													customer.setProvince(city.getProvinceId());
+//													bCityFlag = true;
+//													continue;
+//												}
+//											}
 											if(! bAreaFlag)
 											{
 												AreaInfo area = areaService.getAreaByName(customerAddressArray[kk]);
