@@ -15,6 +15,14 @@
 		<title></title>
 		<j:scriptlink css="true" jmessagebox="true" jquery="true"
 			tipswindow="true" validate="true" jfunction="true" />
+			<link rel="stylesheet" media="all" type="text/css" href="<%=basePath%>js/timepicke/jquery-ui-1.7.3.custom.css" />
+		<link rel="stylesheet" media="all" type="text/css" href="<%=basePath%>js/timepicke/jquery-ui-timepicker-addon.css" />
+		
+		<script type="text/javascript" src="<%=basePath%>js/timepicke/jquery-ui-1.7.3.custom.min.js"></script>
+		<script type="text/javascript" src="<%=basePath%>js/timepicke/jquery-ui-timepicker-addon.js"></script>
+		<script type="text/javascript" src="<%=basePath%>js/timepicke/jquery-ui-timepicker-zh-CN.js"></script>
+		<script type="text/javascript" src="<%=basePath%>js/timepicke/jquery-ui-sliderAccess.js"></script>
+		
 		<script type="text/javascript">
 			/**
 		  	 * 验证条件
@@ -43,11 +51,13 @@
 			            	alert(value);document.getElementById(key).focus();return false;
 			        	}); 
 			    	}
-				})
+				});
+		  		$('#birthday').datetimepicker({showTimepicker: false,changeMonth: true, changeYear: true,yearRange:'-80:0'});
 				$.fn.save();
 		  		$.fn.close();
 		  		$.fn.initpage();
 		  	});
+			
 			/**
 		  	 * 保存
 		  	 */
@@ -168,7 +178,14 @@
 											</td>
 											<td height="26" align="left" bgcolor="#FFFFFF">
 												<s:textfield id="birthday" name="contractPersonInfo.birthday"
-													maxlength="25" cssStyle="width: 300px;"></s:textfield>
+													maxlength="25" cssStyle="width: 300px;" readOnly="true"></s:textfield>
+													<br/>
+													<s:if test='lunarStr.equals("1")'>
+													<input type="checkbox" name="lunarStr" value="1" checked="true">农历
+													</s:if>
+													<s:else>
+													<input type="checkbox" name="lunarStr" value="1">农历
+													</s:else>
 											</td>
 										</tr>
 										<tr>
