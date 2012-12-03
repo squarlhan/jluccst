@@ -65,7 +65,7 @@
 		    	}
 			})
 			$("#addbtn").click(function(){
-				parent.parent.parent.tipsWindown("添加回访信息","iframe:customer/allCustomerVisitInfo.action?customerId=" + $("#customerId_t").val(),"800","500","true","","true","no");
+				parent.parent.parent.tipsWindown("添加回访信息","iframe:customer/allCustomerVisitInfo.action?deptId=<s:property value='deptId'/>&customerId=" + $("#customerId_t").val(),"800","500","true","","true","no");
 				parent.parent.parent.$("#windown-close").bind('click',function(){
 					window.location.href= window.location.href;
 				});
@@ -92,7 +92,7 @@
 	  		 */
 	  		$('a[name="edit"]').each(function(){
 	  			$(this).click(function(){
-	  				var url = $(this).attr("url");
+	  				var url = $(this).attr("url") + "&deptId=<s:property value='deptId'/>";
 	  				parent.parent.parent.tipsWindown("修改回访信息","iframe:" + url,"800","500","true","","true","no");
 					parent.parent.parent.$("#windown-close").bind('click',function(){
 						window.location.href= window.location.href;
@@ -133,6 +133,7 @@
  <s:form id="form1" name="form1" method="post" theme="simple">
  <s:hidden id="customerId" name="customerVisitInfo.customerId"></s:hidden>
  <s:hidden id="customerId_t" name="customerId"></s:hidden>
+ <s:hidden name="deptId" />
 <table width="100%" style="height:100%;" border="0" cellspacing="5" cellpadding="0">
   <tr>
     <td valign="top"><table width="100%" border="0" cellspacing="5" cellpadding="0">
@@ -145,20 +146,20 @@
       
       <tr><td><table border="0" cellpadding="5" cellspacing="0">
 	<tr>  		
-		<td align="center">客户名称：</td>
+		<td align="center">客户：</td>
 		<td >
 		<s:textfield name="customerName" id="customerName" style="width: 80px"></s:textfield></td>
 		<td>业务员：</td/>
 		<td><s:select list="userList" listKey="id" listValue="userCName" value="salesmanId" 
 			id="salesmanId" name="salesmanId" cssStyle="width:80px" headerKey="" headerValue="--请选择--"></s:select></td>
-		<td align="center">查询开始日期：</td>
+		<td align="center">起始日期：</td>
 		<td >
 		<s:textfield name="beginDate" id="beginDate" style="width: 80px" readOnly="true"></s:textfield></td>
-		<td align="center">查询结束日期：</td>
+		<td align="center">结束日期：</td>
 		<td><s:textfield name="endDate" id="endDate" style="width: 80px" readOnly="true"></s:textfield></td>
 		<td align="center">类型：</td>
-		<td style="width:120px"><s:select list="listVisitOption" listKey="id" listValue="name" value="visitOption" 
-			id="visitOption" name="visitOption" cssStyle="width:120px" headerKey="" headerValue="--请选择--"></s:select></td>
+		<td style="width:80px"><s:select list="listVisitOption" listKey="id" listValue="name" value="visitOption" 
+			id="visitOption" name="visitOption" cssStyle="width:80px" headerKey="" headerValue="--请选择--"></s:select></td>
 		<td style="width: 80px"><input type="button" style="width: 80px;" class="btn_4" id="searchBtn" value="查询" /></td>
 	</tr>
 </table></td></tr>

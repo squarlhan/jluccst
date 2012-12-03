@@ -161,6 +161,7 @@
 
 	<body>
 		<s:form id="form1" name="form1" method="post" theme="simple">
+		<s:hidden id="deptId" name="deptId"></s:hidden>
 		<s:label id="lb_message" name="message" cssStyle="display:none"></s:label>
 		<s:hidden id="id" name="customerVisitInfo.id"></s:hidden>
 		<s:hidden id="customerId" name="customerVisitInfo.customerId"></s:hidden>
