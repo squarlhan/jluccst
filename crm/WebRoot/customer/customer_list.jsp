@@ -50,13 +50,13 @@
 				parent.parent.$("#windown-close").bind('click',function(){
 					window.location.href="./customerList.action";
 				});*/
-				window.parent.location.href = "customerTabInfo.action";
+				window.parent.location.href = "customerTabInfo.action?deptId=<s:property value='deptId'/>";
 		
 			});
 			$("#importbtn").click(function(){
 				parent.parent.tipsWindown("导入客户信息","iframe:customer/importCustomer.action","460","200","true","","true","no");
 				parent.parent.$("#windown-close").bind('click',function(){
-					window.location.href="./customerList.action";
+					window.location.href= window.location.href;
 				});
 				//window.parent.location.href = "customerTabInfo.action";
 		
@@ -80,7 +80,7 @@
 	  		 */
 	  		$('a[name="edit"]').each(function(){
 	  			$(this).click(function(){
-	  				var url = $(this).attr("url");
+	  				var url = $(this).attr("url") + "&deptId=<s:property value='deptId'/>";
 	  				/*parent.parent.tipsWindown("修改客户信息","iframe:"+url,"460","200","true","","true","no");
 	  				parent.parent.$("#windown-close").bind('click',function(){
 						window.location.href="./customerList.action";
@@ -119,6 +119,7 @@
   
   <body>
  <s:form id="form1" name="form1" method="post" theme="simple">
+ <s:hidden name="deptId"></s:hidden>
 <table width="100%" style="height:100%;" border="0" cellspacing="5" cellpadding="0">
   <tr>
     <td valign="top"><table width="100%" border="0" cellspacing="5" cellpadding="0">
@@ -136,14 +137,14 @@
 		<td align="center">客户名称：</td>
 		<td >
 		<s:textfield name="customerName" id="customerName" style="width: 100px"></s:textfield></td>
-		<td align="center">联 系 人：</td>
+		<td align="center">联系人：</td>
 		<td><s:textfield name="contractorName" id="contractorName" style="width: 100px"></s:textfield></td>
-		<td align="center">客户分类：</td>
+		<td align="center">分类：</td>
 		<td style="width:120px"><s:select list="listCategory" listKey="id" listValue="name" value="customerCategory" 
-			id="categoryId" name="customerCategory" cssStyle="width:150px" headerKey="" headerValue="--请选择客户分类--"></s:select></td>
-		<td>所属业务员：</td/>
+			id="categoryId" name="customerCategory" cssStyle="width:120px" headerKey="" headerValue="--请选择--"></s:select></td>
+		<td>业务员：</td/>
 		<td style="width:120px"><s:select list="userList" listKey="id" listValue="userCName" value="salesmanId" 
-			id="salesmanId" name="salesmanId" cssStyle="width:150px" headerKey="" headerValue="--请选择业务员--"></s:select></td>
+			id="salesmanId" name="salesmanId" cssStyle="width:120px" headerKey="" headerValue="--请选择--"></s:select></td>
 		<td></td>
 		<td style="width: 80px"><input type="button" style="width: 80px;" class="btn_4" id="searchBtn" value="快速查询" /></td>
 	</tr>

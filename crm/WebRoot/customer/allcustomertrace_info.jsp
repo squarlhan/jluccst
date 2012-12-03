@@ -277,6 +277,7 @@
 		<s:hidden id="id" name="customerTraceInfo.id"></s:hidden>
 		<s:hidden id="customerId" name="customerTraceInfo.customerId"></s:hidden>
 		<s:hidden id="customerId_t" name="customerId"></s:hidden>
+		<s:hidden name="deptId" />
 		<table width="100%" border="0" cellspacing="5" cellpadding="0">
 			<tr><td><table><tr><td style="height: 12px"></td></tr>
 			<tr><td><table>

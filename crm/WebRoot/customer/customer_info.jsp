@@ -237,6 +237,7 @@
 		<s:hidden id="maturityName" name="customerInfo.maturity"></s:hidden>
 		<s:hidden id="levelName" name="customerInfo.level"></s:hidden>
 		<s:hidden id="customerId_t" name="customerId"></s:hidden>
+		<s:hidden id="deptId" name="deptId"></s:hidden>
 		<table width="100%" border="0" cellspacing="5" cellpadding="0">
 			<tr>
 				<td style="height: 50px"><table width=100%>

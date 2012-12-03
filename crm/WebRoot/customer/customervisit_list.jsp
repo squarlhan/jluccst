@@ -71,7 +71,7 @@
 			//日期控件
 			$('#endDate').datetimepicker({showTimepicker: false});
 			$("#addbtn").click(function(){
-				parent.parent.parent.tipsWindown("添加回访信息","iframe:customer/customerVisitInfo.action?customerId=<s:property value='customerId'/>","820","520","true","","true","no");
+				parent.parent.parent.tipsWindown("添加回访信息","iframe:customer/customerVisitInfo.action?customerId=<s:property value='customerId'/>&deptId=<s:property value='deptId'/>","820","520","true","","true","no");
 				parent.parent.parent.$("#windown-close").bind('click',function(){
 					window.location.href= window.location.href;
 				});
@@ -94,7 +94,7 @@
 	  		 */
 	  		$('a[name="edit"]').each(function(){
 	  			$(this).click(function(){
-	  				var url = $(this).attr("url");
+	  				var url = $(this).attr("url")+"&deptId=<s:property value='deptId'/>";
 	  				parent.parent.parent.tipsWindown("修改回访信息","iframe:" + url,"820","520","true","","true","no");
 					parent.parent.parent.$("#windown-close").bind('click',function(){
 						window.location.href= window.location.href;
@@ -155,6 +155,7 @@
   
   <body>
  <s:form id="form1" name="form1" method="post" theme="simple">
+  <s:hidden name="deptId"/>
 <table width="100%" style="height:100%;" border="0" cellspacing="5" cellpadding="0">
   <tr>
     <td valign="top"><table width="100%" border="0" cellspacing="5" cellpadding="0">
