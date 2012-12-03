@@ -132,6 +132,8 @@ public class CustomerInfoAction extends BaseActionSupport{
 	private String uploadFileContentType = null;
 	private String message = "";
 	private List<CustomerInfo> listCustomer = null;
+	private String provinceId = "";
+	private String cityId = "";
 	
 	public List<CustomerInfo> getListCustomer() {
 		return listCustomer;
@@ -362,9 +364,22 @@ public class CustomerInfoAction extends BaseActionSupport{
 	}
 	public String importCustomer()
 	{
+		listProvince = areaService.findAllProvinceInfo();
 		return SUCCESS;
 	}
 	
+	public String getProvinceId() {
+		return provinceId;
+	}
+	public void setProvinceId(String provinceId) {
+		this.provinceId = provinceId;
+	}
+	public String getCityId() {
+		return cityId;
+	}
+	public void setCityId(String cityId) {
+		this.cityId = cityId;
+	}
 	public String importCustomerSave()
 	{
 		if(uploadFile != null)
@@ -482,10 +497,15 @@ public class CustomerInfoAction extends BaseActionSupport{
 									customer.setCreateTime(Calendar.getInstance());
 									customer.setCompanyId( sessionCompanyId );
 									customer.setCreatorId(sessionUserId);
-									
+									customer.setProvince(provinceId);
+									if(cityId != null && cityId.length() > 0)
+									{
+										customer.setCity(cityId);
+									}
 									customer.setCompanyFullName(customerName);
 
 									String customerAddressTemp = customerAddress.replaceAll("-", " ");
+									customerAddressTemp = customerAddressTemp.replaceAll("省", "省 ");
 									customerAddressTemp = customerAddressTemp.replaceAll("市", "市 ");
 									customerAddressTemp = customerAddressTemp.replaceAll("区", "区 ");
 									customerAddressTemp = customerAddressTemp.replaceAll("县", "县 ");
@@ -493,37 +513,45 @@ public class CustomerInfoAction extends BaseActionSupport{
 									String[] customerAddressArray = customerAddressTemp.split(" ");
 									boolean bProvinceFlag = false;
 									boolean bCityFlag = false;
+									boolean bAreaFlag = false;
 									for(int kk=0;kk<customerAddressArray.length - 1;kk++)
 									{
 										if(!customerAddressArray[kk].equals("中国"))
 										{
-											if(!bProvinceFlag)
+//											if(!bProvinceFlag)
+//											{
+//												ProvinceInfo province = areaService.getProvinceByName(customerAddressArray[kk]);
+//												if(province != null)
+//												{
+//													customer.setProvince(province.getId());
+//													bProvinceFlag = true;
+//													continue;
+//												}
+//											}
+											if(cityId == null || cityId.length() == 0)
 											{
-												ProvinceInfo province = areaService.getProvinceByName(customerAddressArray[kk]);
-												if(province != null)
+												if(!bCityFlag)
 												{
-													customer.setProvince(province.getId());
-													bProvinceFlag = true;
-													continue;
+													CityInfo city = areaService.getCityByName(customerAddressArray[kk]);
+													if(city != null)
+													{
+														customer.setCity(city.getId());
+														//customer.setProvince(city.getProvinceId());
+														bCityFlag = true;
+														continue;
+													}
 												}
 											}
-											if(!bCityFlag)
+											if(! bAreaFlag)
 											{
-												CityInfo city = areaService.getCityByName(customerAddressArray[kk]);
-												if(city != null)
+												AreaInfo area = areaService.getAreaByName(customerAddressArray[kk]);
+												if(area != null)
 												{
-													customer.setCity(city.getId());
-													customer.setProvince(city.getProvinceId());
-													bCityFlag = true;
+													customer.setDistrict(area.getId());
+													customer.setCity(area.getCityId());
+													bAreaFlag = true;
 													continue;
-												}
-											}
-											AreaInfo area = areaService.getAreaByName(customerAddressArray[kk]);
-											if(area != null)
-											{
-												customer.setDistrict(area.getId());
-												customer.setCity(area.getCityId());
-												continue;
+												}	
 											}
 										}
 									}
@@ -558,6 +586,7 @@ public class CustomerInfoAction extends BaseActionSupport{
 			}
 		}
 		message = "保存成功！";
+		listProvince = areaService.findAllProvinceInfo();
 		return SUCCESS;
 	}
 	
