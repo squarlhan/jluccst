@@ -21,8 +21,13 @@
 		  	 */
 			var _device_submit = {
 				rules: {
+					"provinceId":{required:true},
 					"uploadFile":{required:true}
 				},messages:{
+					"provinceId":
+					{
+					    required:"选择省份！"
+					},
 					"uploadFile":
 					{
 					    required:"请选择文件！"
@@ -47,7 +52,26 @@
 				$.fn.save();
 		  		$.fn.close();
 		  		$.fn.initpage();
+		  		$("#sel_province").change(function() {
+	                loadCity($("#sel_province").val());
+	            });
 		  	});
+			function loadCity(parentid) {
+                $.ajax({
+                    url:"<%=basePath%>datadictionary/cityinfoservice.action?provinceId=" + parentid,
+                    type: 'POST',
+                    dataType: 'JSON',
+                    timeout: 5000,
+                    error: function() { alert('Error loading data!'); },
+                    success: function(msg) {
+                        $("#cityId").empty();
+                        $("<option value=''>请选择...</option>").appendTo($("#cityId"));
+                        $.each(eval(msg), function(i, item) {
+                            $("<option value='" + item.id + "'>" + item.name + "</option>").appendTo($("#cityId"));
+                        });
+                    }
+                });
+            }
 			/**
 		  	 * 保存
 		  	 */
@@ -110,6 +134,23 @@
 								<td style="height: 36px;">
 									<table id="table1" width="100%" border="0" cellpadding="5"
 										cellspacing="1" bgcolor="#d5e4fd">
+										<tr>
+											<td height="26" align="right" bgcolor="#FFFFFF">
+												<strong>选择省份名称：</strong>
+											</td>
+											<td height="26" align="left" bgcolor="#FFFFFF">
+												<s:select id="sel_province"  name ="provinceId"  list="listProvince" listKey="id"  listValue="provinceName" cssStyle="width:230px" headerKey="" headerValue="--- 请选择 ---"></s:select>
+												<font color="red">*</font>
+											</td>
+										</tr>
+										<tr>
+											<td height="26" align="right" bgcolor="#FFFFFF">
+												<strong>选择城市名称：</strong>
+											</td>
+											<td height="26" align="left" bgcolor="#FFFFFF">
+												<select id="cityId" name="cityId" cssStyle="width:230px"></select>
+											</td>
+										</tr>
 										<tr>
 											<td height="26" align="right" bgcolor="#FFFFFF">
 												<strong>选择导入文件：</strong>
