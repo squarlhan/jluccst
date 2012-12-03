@@ -477,7 +477,10 @@ public class CustomerSearchAction  extends BaseActionSupport{
 									customer.setCompanyId( sessionCompanyId );
 									customer.setCreatorId(sessionUserId);
 									customer.setProvince(provinceId);
-									customer.setCity(cityId);
+									if(cityId != null && cityId.length() > 0)
+									{
+										customer.setCity(cityId);
+									}
 									customer.setCompanyFullName(customerName);
 
 									String customerAddressTemp = customerAddress.replaceAll("-", " ");
@@ -503,17 +506,20 @@ public class CustomerSearchAction  extends BaseActionSupport{
 //													continue;
 //												}
 //											}
-//											if(!bCityFlag)
-//											{
-//												CityInfo city = areaService.getCityByName(customerAddressArray[kk]);
-//												if(city != null)
-//												{
-//													customer.setCity(city.getId());
-//													customer.setProvince(city.getProvinceId());
-//													bCityFlag = true;
-//													continue;
-//												}
-//											}
+											if(cityId == null || cityId.length() == 0)
+											{
+												if(!bCityFlag)
+												{
+													CityInfo city = areaService.getCityByName(customerAddressArray[kk]);
+													if(city != null)
+													{
+														customer.setCity(city.getId());
+														//customer.setProvince(city.getProvinceId());
+														bCityFlag = true;
+														continue;
+													}
+												}
+											}
 											if(! bAreaFlag)
 											{
 												AreaInfo area = areaService.getAreaByName(customerAddressArray[kk]);
