@@ -58,7 +58,7 @@
 	  		 */
 	  		$("#deletebtn").click(function(){
   				if(window.confirm("您确定要删除所选信息吗？")){
-  					document.forms[0].action = "delAnalysisResult.action";
+  					document.forms[0].action = "fuzzy/deleteAnalysisResult.action";
 					document.forms[0].submit();
   				}
 	  		});
