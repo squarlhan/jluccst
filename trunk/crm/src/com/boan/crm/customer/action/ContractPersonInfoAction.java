@@ -48,7 +48,7 @@ public class ContractPersonInfoAction extends BaseActionSupport{
 	private String customerId = null;
 	private String personId = null;
 	private String message = null;
-	
+	private String lunarStr = null;
 	public String getMessage() {
 		return message;
 	}
@@ -62,6 +62,13 @@ public class ContractPersonInfoAction extends BaseActionSupport{
 		if(personId != null && personId.length() > 0)
 		{
 			contractPersonInfo = contractpersonInfoService.get(personId);
+			if(contractPersonInfo.getLunar() == 1)
+			{
+				lunarStr = "1";
+			}else
+			{
+				lunarStr = "0";
+			}
 		}else
 		{
 			contractPersonInfo = new ContractPersonInfo();
@@ -90,7 +97,13 @@ public class ContractPersonInfoAction extends BaseActionSupport{
 		obj.setPhone(contractPersonInfo.getPhone());
 		obj.setQq(contractPersonInfo.getQq());
 		obj.setTel(contractPersonInfo.getTel());
-		
+		if(lunarStr != null && lunarStr.equals("1"))
+		{
+			obj.setLunar(1);
+		}else
+		{
+			obj.setLunar(0);
+		}
 		contractpersonInfoService.save(obj);
 		if(contractPersonInfo.getId() == null || contractPersonInfo.getId().equals(""))
 		{
@@ -125,6 +138,7 @@ public class ContractPersonInfoAction extends BaseActionSupport{
 			smsCustomer.setUnitAddress(customer.getAddress());
 			smsCustomer.setPostalcode(customer.getPostCode());
 			smsCustomer.setNickname(obj.getNickName());
+			smsCustomer.setIsLunarCalender(obj.getLunar());
 			smsCustomer.setUnit(customer.getCustomerName());
 			if(newUserFlag)
 			{
@@ -139,6 +153,14 @@ public class ContractPersonInfoAction extends BaseActionSupport{
 		
 		return SUCCESS;
 	}
+	public String getLunarStr() {
+		return lunarStr;
+	}
+
+	public void setLunarStr(String lunarStr) {
+		this.lunarStr = lunarStr;
+	}
+
 	public String personService()
 	{
 		contractPersonInfo = contractpersonInfoService.get(personId);

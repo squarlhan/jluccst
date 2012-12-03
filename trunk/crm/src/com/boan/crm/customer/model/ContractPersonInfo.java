@@ -45,6 +45,8 @@ public class ContractPersonInfo implements Serializable
 	private String nickName = "";
 	@Column(name = "BIRTHDAY")
 	private Calendar birthday = null;
+	@Column(name = "ISLUNAR")
+	private int lunar = 0;
 	@Column(name = "QQ" , length = 50)
 	private String qq = "";
 	@Column(name = "EMAIL" , length = 100)
@@ -220,5 +222,19 @@ public class ContractPersonInfo implements Serializable
 	 */
 	public void setSort_index(int sort_index) {
 		this.sort_index = sort_index;
+	}
+	/**
+	 * 农历
+	 * @return
+	 */
+	public int getLunar() {
+		return lunar;
+	}
+	/**
+	 * 农历
+	 * @param lunar
+	 */
+	public void setLunar(int lunar) {
+		this.lunar = lunar;
 	}
 }
