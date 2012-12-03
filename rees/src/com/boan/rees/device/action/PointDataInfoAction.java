@@ -1014,7 +1014,7 @@ public class PointDataInfoAction extends BaseActionSupport {
 		}
 		
 		sb.append("<?xml version='1.0' encoding='gb2312'?>");
-		sb.append("<graph caption='监测点参数运行曲线图' subcaption='(从" + beginTime + "到" + endTime + ")' hovercapbg='FFECAA' hovercapborder='F47E00' formatNumberScale='0' decimalPrecision='0' showvalues='0' numVdivlines='0' rotateNames='1' baseFontSize='12'>");
+		sb.append("<graph caption='监测点参数运行曲线图' subcaption='(从" + beginTime + "到" + endTime + ")' hovercapbg='FFECAA' hovercapborder='F47E00' formatNumberScale='0' decimalPrecision='1' showvalues='0' numVdivlines='0' rotateNames='1' baseFontSize='12'>");
 		sb.append(tempSb);
 		sb.append("</graph>");
 		xmlStream = new ByteArrayInputStream(sb.toString().getBytes(Charset.forName("gb2312")));
