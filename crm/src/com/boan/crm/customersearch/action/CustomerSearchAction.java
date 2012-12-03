@@ -484,6 +484,7 @@ public class CustomerSearchAction  extends BaseActionSupport{
 									customer.setCompanyFullName(customerName);
 
 									String customerAddressTemp = customerAddress.replaceAll("-", " ");
+									customerAddressTemp = customerAddressTemp.replaceAll("省", "省 ");
 									customerAddressTemp = customerAddressTemp.replaceAll("市", "市 ");
 									customerAddressTemp = customerAddressTemp.replaceAll("区", "区 ");
 									customerAddressTemp = customerAddressTemp.replaceAll("县", "县 ");
