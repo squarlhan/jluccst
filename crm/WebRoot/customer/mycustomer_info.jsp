@@ -29,6 +29,14 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <j:scriptlink css="true" jmessagebox="true" jquery="true"
 	tipswindow="true" validate="true" />
+	<link rel="stylesheet" media="all" type="text/css" href="<%=basePath%>js/timepicke/jquery-ui-1.7.3.custom.css" />
+		<link rel="stylesheet" media="all" type="text/css" href="<%=basePath%>js/timepicke/jquery-ui-timepicker-addon.css" />
+		
+		<script type="text/javascript" src="<%=basePath%>js/timepicke/jquery-ui-1.7.3.custom.min.js"></script>
+		<script type="text/javascript" src="<%=basePath%>js/timepicke/jquery-ui-timepicker-addon.js"></script>
+		<script type="text/javascript" src="<%=basePath%>js/timepicke/jquery-ui-timepicker-zh-CN.js"></script>
+		<script type="text/javascript" src="<%=basePath%>js/timepicke/jquery-ui-sliderAccess.js"></script>
+		
 <script type="text/javascript">
 			/**
 		  	 * 验证条件
@@ -64,7 +72,7 @@
 				$.fn.save();
 		  		$.fn.close();
 		  		$.fn.initpage();
-		  		
+				$('#registerTime').datetimepicker({showTimepicker: false});
 		  		loadCity($("#province").val());
 		  		
 		  		$("#province").change(function() {
@@ -319,7 +327,7 @@
 											</td>
 											<td align="center">建档时间：</td>
 											<td><s:textfield type="text" style="width:140px"
-													name="customerInfo.registerTime" id="registerTime"></s:textfield>
+													name="customerInfo.registerTime" id="registerTime" readOnly="true"></s:textfield>
 											</td>
 										</tr>
 									</table>
