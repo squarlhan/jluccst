@@ -22,16 +22,11 @@
 			var _device_submit = {
 				rules: {
 					"provinceId":{required:true},
-					"cityId":{required:true},
 					"uploadFile":{required:true}
 				},messages:{
 					"provinceId":
 					{
 					    required:"选择省份！"
-					},
-					"cityId":
-					{
-					    required:"选择城市！"
 					},
 					"uploadFile":
 					{
@@ -70,6 +65,7 @@
                     error: function() { alert('Error loading data!'); },
                     success: function(msg) {
                         $("#cityId").empty();
+                        $("<option value=''>请选择...</option>").appendTo($("#cityId"));
                         $.each(eval(msg), function(i, item) {
                             $("<option value='" + item.id + "'>" + item.name + "</option>").appendTo($("#cityId"));
                         });
@@ -178,7 +174,6 @@
 											</td>
 											<td height="26" align="left" bgcolor="#FFFFFF">
 												<select id="cityId" name="cityId" cssStyle="width:230px"></select>
-												<font color="red">*</font>
 											</td>
 										</tr>
 										<tr>

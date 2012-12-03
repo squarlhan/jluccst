@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ page import="org.apache.commons.lang.StringUtils"%>
 <%@ taglib uri="/struts-tags" prefix="s"%>
-<%@ taglib uri="/UiTag" prefix="uitag"%>
 <%
 	//错误信息代码
 	String errorCode = StringUtils.trimToEmpty( request.getParameter( "errorCode" ) );
