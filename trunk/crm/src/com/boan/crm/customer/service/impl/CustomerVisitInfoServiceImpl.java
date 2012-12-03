@@ -89,7 +89,10 @@ public class CustomerVisitInfoServiceImpl implements ICustomerVisitInfoService{
 		{
 			hql.append(" and visitTime <= :endDate ");
 		}
-		
+		if(values.get("deptId") != null)
+		{
+			hql.append(" and salesmanId in (select id from User where deptId =:deptId) ");
+		}
 		hql.append(" order by visitTime asc");
 		List<CustomerVisitInfo> data = customerVisitInfoDao.findForPage(hql.toString(), values, pagination.getStartIndex(), pagination.getPageSize());
 		hql.delete(0, hql.length());
@@ -122,6 +125,10 @@ public class CustomerVisitInfoServiceImpl implements ICustomerVisitInfoService{
 		{
 			hql.append(" and visitTime <= :endDate ");
 		}
+		if(values.get("deptId") != null)
+		{
+			hql.append(" and salesmanId in (select id from User where deptId =:deptId) ");
+		}
 		int totalRows = customerVisitInfoDao.findCountForPage(hql.toString(), values);
 		pagination.setTotalRows(totalRows);
 		pagination.setData(data);
@@ -135,10 +142,14 @@ public class CustomerVisitInfoServiceImpl implements ICustomerVisitInfoService{
 				try
 				{
 					CustomerInfo customer = customerInfoDao.get(customerVisitInfo.getCustomerId());
-					customerVisitInfo.setCustomerName(customer.getCustomerName());
+					if(customer != null)
+					{
+						customerVisitInfo.setCustomerName(customer.getCustomerName());
+						customerVisitInfo.setProgress(customer.getProgressId());
+					}
 					customerVisitInfo.setSalesman(userService.getUserById(customerVisitInfo.getSalesmanId()).getUserCName());
 					customerVisitInfo.setPerson(contractPersonService.get(customerVisitInfo.getVisitPersonId()));
-					customerVisitInfo.setProgress(customer.getProgressId());
+					
 					
 					customerVisitInfo.setVisitTimeStr(CalendarUtils.toLongStringNoSecond(customerVisitInfo.getVisitTime()));
 				}catch(Exception e)

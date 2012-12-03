@@ -101,6 +101,15 @@ public class CustomerVisitInfoAction extends BaseActionSupport{
 	private String visitTime = "";
 	private String chkSMS = "";
 	private String message = null;
+	public String getDeptId() {
+		return deptId;
+	}
+
+	public void setDeptId(String deptId) {
+		this.deptId = deptId;
+	}
+
+	private String deptId = "";
 	public String getMessage() {
 		return message;
 	}
@@ -136,7 +145,13 @@ public class CustomerVisitInfoAction extends BaseActionSupport{
 		
 		try
 		{
-			userList = userService.queryUserListByCompanyIdRoleKey(sessionCompanyId,RoleFlag.YE_WU_YUAN);
+			if(deptId != null && deptId.length() > 0)
+			{
+				userList = userService.queryUserListByCompanyIdRoleKey(sessionCompanyId,deptId,RoleFlag.YE_WU_YUAN);
+			}else
+			{
+				userList = userService.queryUserListByCompanyIdRoleKey(sessionCompanyId,RoleFlag.YE_WU_YUAN);
+			}
 		}catch(Exception ex)
 		{
 			ex.printStackTrace();
@@ -183,7 +198,13 @@ public class CustomerVisitInfoAction extends BaseActionSupport{
 		
 		try
 		{
-			userList = userService.queryUserListByCompanyIdRoleKey(sessionCompanyId,RoleFlag.YE_WU_YUAN);
+			if(deptId != null && deptId.length() > 0)
+			{
+				userList = userService.queryUserListByCompanyIdRoleKey(sessionCompanyId,deptId,RoleFlag.YE_WU_YUAN);
+			}else
+			{
+				userList = userService.queryUserListByCompanyIdRoleKey(sessionCompanyId,RoleFlag.YE_WU_YUAN);
+			}
 		}catch(Exception ex)
 		{
 			ex.printStackTrace();
@@ -213,6 +234,10 @@ public class CustomerVisitInfoAction extends BaseActionSupport{
 		if(endDate != null)
 		{
 			values.put("endDate", endDate);
+		}
+		if(deptId != null)
+		{
+			values.put("deptId", deptId);
 		}
 		values.put( "companyId", sessionCompanyId );
 		pagination = customerVisitInfoService.findCustomerVisitInfoForPage(values, pagination);
@@ -292,7 +317,13 @@ public class CustomerVisitInfoAction extends BaseActionSupport{
 		
 		try
 		{
-			userList = userService.queryUserListByCompanyIdRoleKey(sessionCompanyId,RoleFlag.YE_WU_YUAN);
+			if(deptId != null && deptId.length() > 0)
+			{
+				userList = userService.queryUserListByCompanyIdRoleKey(sessionCompanyId,deptId,RoleFlag.YE_WU_YUAN);
+			}else
+			{
+				userList = userService.queryUserListByCompanyIdRoleKey(sessionCompanyId,RoleFlag.YE_WU_YUAN);
+			}
 		}catch(Exception ex)
 		{
 			ex.printStackTrace();
@@ -306,8 +337,8 @@ public class CustomerVisitInfoAction extends BaseActionSupport{
 	 */
 	public String saveVisitInfo()
 	{
-		customerVisitInfo.setSalesmanId(sessionUserId);
-		customerVisitInfo.setSalesman(sessionUserCName);
+		//customerVisitInfo.setSalesmanId(sessionUserId);
+		//customerVisitInfo.setSalesman(sessionUserCName);
 		CustomerVisitInfo obj = null;
 		boolean inserFLag = true;
 		if(customerVisitInfo.getId() != null && customerVisitInfo.getId().length() > 0)
@@ -368,10 +399,10 @@ public class CustomerVisitInfoAction extends BaseActionSupport{
 			timePlan.setDeptId(sessionDeptId);
 			timePlan.setCreateTime(Calendar.getInstance());
 			timePlan.setDeptName(sessionDeptName);
-			timePlan.setEmployeeId(sessionUserId);
-			timePlan.setEmployeeName(sessionUserCName);
+			timePlan.setEmployeeId(obj.getSalesmanId());
+			timePlan.setEmployeeName(obj.getSalesman());
 			timePlan.setOrganId(sessionCompanyId);
-			timePlan.setPersonId(sessionUserId);
+			timePlan.setPersonId(obj.getSalesmanId());
 			timePlan.setPlanType("0");
 			StringBuilder sb = new StringBuilder();
 			sb.append("回访计划：");
@@ -403,7 +434,7 @@ public class CustomerVisitInfoAction extends BaseActionSupport{
 //			smsCustomer.setCategoryId(customer.getCategoryId());
 //			
 //			sMSCustomerInfoService.saveSMSCustomerInfo(smsCustomer);
-			SMSCustomerInfo smsUser = sMSCustomerInfoService.getSMSCustomerInfoByCustomerId(sessionUserId);
+			SMSCustomerInfo smsUser = sMSCustomerInfoService.getSMSCustomerInfoByCustomerId(obj.getSalesmanId());
 			if(smsUser != null)
 			{
 				sms.setCustomerInfo(smsUser);
@@ -424,7 +455,7 @@ public class CustomerVisitInfoAction extends BaseActionSupport{
 				sms.setInfo(sb2.toString());
 				try
 				{
-					String phone = userService.getUserById( sessionUserId ).getPhone();
+					String phone = userService.getUserById( obj.getSalesmanId() ).getPhone();
 					if(phone != null && phone.length() > 0 && phone.length() == 11)
 					{
 						sms.setPhone(phone);

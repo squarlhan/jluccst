@@ -8,6 +8,15 @@
 		<action name="groupTreeForSearch" class="customerInfoAction"  method="showGroupTree">
 			<result name="success">/customer/grouptreeforsearch.jsp</result>
 		</action>
+		<action name="groupTreeForManage" class="customerInfoAction"  method="showGroupTree">
+			<result name="success">/customer/grouptreeformanage.jsp</result>
+		</action>
+		<action name="groupTreeForTraceManage" class="customerInfoAction"  method="showGroupTree">
+			<result name="success">/customer/grouptreefortracemanage.jsp</result>
+		</action>
+		<action name="groupTreeForVisitManage" class="customerInfoAction"  method="showGroupTree">
+			<result name="success">/customer/grouptreeforvisitmanage.jsp</result>
+		</action>
 		<action name="customerInfoFromTel" class="customerInfoAction" method="myCustomerTabInfo">
 			<result name="success">/customer/customertabinfofromtel.jsp</result>
 		</action>
