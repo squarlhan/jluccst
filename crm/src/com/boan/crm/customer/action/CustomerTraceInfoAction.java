@@ -102,6 +102,15 @@ public class CustomerTraceInfoAction extends BaseActionSupport{
 	private String traceTime = "";
 	private String chkSMS = "";
 	private String message = null;
+	private String deptId ="";
+	public String getDeptId() {
+		return deptId;
+	}
+
+	public void setDeptId(String deptId) {
+		this.deptId = deptId;
+	}
+
 	public String getMessage() {
 		return message;
 	}
@@ -152,7 +161,14 @@ public class CustomerTraceInfoAction extends BaseActionSupport{
 		
 		try
 		{
-			userList = userService.queryUserListByCompanyIdRoleKey(sessionCompanyId,RoleFlag.YE_WU_YUAN);
+			//userList = userService.queryUserListByCompanyIdRoleKey(sessionCompanyId,RoleFlag.YE_WU_YUAN);
+			if(deptId != null && deptId.length() > 0)
+			{
+				userList = userService.queryUserListByCompanyIdRoleKey(sessionCompanyId,deptId,RoleFlag.YE_WU_YUAN);
+			}else
+			{
+				userList = userService.queryUserListByCompanyIdRoleKey(sessionCompanyId,RoleFlag.YE_WU_YUAN);
+			}
 		}catch(Exception ex)
 		{
 			ex.printStackTrace();
@@ -199,7 +215,14 @@ public class CustomerTraceInfoAction extends BaseActionSupport{
 		
 		try
 		{
-			userList = userService.queryUserListByCompanyIdRoleKey(sessionCompanyId,RoleFlag.YE_WU_YUAN);
+//			userList = userService.queryUserListByCompanyIdRoleKey(sessionCompanyId,RoleFlag.YE_WU_YUAN);
+			if(deptId != null && deptId.length() > 0)
+			{
+				userList = userService.queryUserListByCompanyIdRoleKey(sessionCompanyId,deptId,RoleFlag.YE_WU_YUAN);
+			}else
+			{
+				userList = userService.queryUserListByCompanyIdRoleKey(sessionCompanyId,RoleFlag.YE_WU_YUAN);
+			}
 		}catch(Exception ex)
 		{
 			ex.printStackTrace();
@@ -231,6 +254,10 @@ public class CustomerTraceInfoAction extends BaseActionSupport{
 			values.put("endDate", endDate);
 		}
 		values.put( "companyId", sessionCompanyId );
+		if(deptId != null)
+		{
+			values.put("deptId", deptId);
+		}
 		pagination = customerTraceInfoService.findCustomerTraceInfoForPage(values, pagination);
 		return SUCCESS;
 	}
@@ -308,7 +335,14 @@ public class CustomerTraceInfoAction extends BaseActionSupport{
 		
 		try
 		{
-			userList = userService.queryUserListByCompanyIdRoleKey(sessionCompanyId,RoleFlag.YE_WU_YUAN);
+			//userList = userService.queryUserListByCompanyIdRoleKey(sessionCompanyId,RoleFlag.YE_WU_YUAN);
+			if(deptId != null && deptId.length() > 0)
+			{
+				userList = userService.queryUserListByCompanyIdRoleKey(sessionCompanyId,deptId,RoleFlag.YE_WU_YUAN);
+			}else
+			{
+				userList = userService.queryUserListByCompanyIdRoleKey(sessionCompanyId,RoleFlag.YE_WU_YUAN);
+			}
 		}catch(Exception ex)
 		{
 			ex.printStackTrace();
@@ -322,8 +356,8 @@ public class CustomerTraceInfoAction extends BaseActionSupport{
 	 */
 	public String saveTraceInfo()
 	{
-		customerTraceInfo.setSalesmanId(sessionUserId);
-		customerTraceInfo.setSalesman(sessionUserCName);
+		//customerTraceInfo.setSalesmanId(sessionUserId);
+		//customerTraceInfo.setSalesman(sessionUserCName);
 		CustomerTraceInfo obj = null;
 		boolean inserFLag = true;
 		if(customerTraceInfo.getId() != null && customerTraceInfo.getId().length() > 0)
@@ -385,10 +419,10 @@ public class CustomerTraceInfoAction extends BaseActionSupport{
 			timePlan.setDeptId(sessionDeptId);
 			timePlan.setCreateTime(Calendar.getInstance());
 			timePlan.setDeptName(sessionDeptName);
-			timePlan.setEmployeeId(sessionUserId);
-			timePlan.setEmployeeName(sessionUserCName);
+			timePlan.setEmployeeId(obj.getSalesmanId());
+			timePlan.setEmployeeName(obj.getSalesman());
 			timePlan.setOrganId(sessionCompanyId);
-			timePlan.setPersonId(sessionUserId);
+			timePlan.setPersonId(obj.getSalesmanId());
 			timePlan.setPlanType("0");
 			StringBuilder sb = new StringBuilder();
 			sb.append("跟进计划：");
@@ -411,7 +445,7 @@ public class CustomerTraceInfoAction extends BaseActionSupport{
 			
 			//CustomerInfo customer = customerInfoService.get(customerId);
 			
-			SMSCustomerInfo smsUser = sMSCustomerInfoService.getSMSCustomerInfoByCustomerId(sessionUserId);
+			SMSCustomerInfo smsUser = sMSCustomerInfoService.getSMSCustomerInfoByCustomerId(obj.getSalesmanId());
 
 //			smsCustomer.setCustomerId(customerId);
 //			//smsCustomer.setBirthday(customer.getContractPersonList().get)
@@ -429,7 +463,7 @@ public class CustomerTraceInfoAction extends BaseActionSupport{
 				sms.setIsImmediately(1);
 				sms.setOrganId(sessionCompanyId);
 				sms.setPersonCompany(sessionCompanyName);
-				sms.setPersonName( sessionUserCName );
+				sms.setPersonName( obj.getSalesman() );
 				sms.setSendTime(time);
 				
 				StringBuilder sb2 = new StringBuilder();
@@ -443,7 +477,7 @@ public class CustomerTraceInfoAction extends BaseActionSupport{
 				sms.setInfo(sb2.toString());
 				try
 				{
-					String phone = userService.getUserById( sessionUserId ).getPhone();
+					String phone = userService.getUserById( obj.getSalesmanId() ).getPhone();
 					if(phone != null && phone.length() > 0 && phone.length() == 11)
 					{
 						sms.setPhone(phone);

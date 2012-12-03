@@ -91,7 +91,10 @@ public class CustomerTraceInfoServiceImpl implements ICustomerTraceInfoService{
 		{
 			hql.append(" and traceTime <= :endDate ");
 		}
-		
+		if(values.get("deptId") != null)
+		{
+			hql.append(" and salesmanId in (select id from User where deptId =:deptId) ");
+		}
 		hql.append(" order by traceTime asc");
 		List<CustomerTraceInfo> data = customerTraceInfoDao.findForPage(hql.toString(), values, pagination.getStartIndex(), pagination.getPageSize());
 		hql.delete(0, hql.length());
@@ -124,6 +127,10 @@ public class CustomerTraceInfoServiceImpl implements ICustomerTraceInfoService{
 		{
 			hql.append(" and traceTime <= :endDate ");
 		}
+		if(values.get("deptId") != null)
+		{
+			hql.append(" and salesmanId in (select id from User where deptId =:deptId) ");
+		}
 		int totalRows = customerTraceInfoDao.findCountForPage(hql.toString(), values);
 		pagination.setTotalRows(totalRows);
 		pagination.setData(data);
@@ -137,11 +144,13 @@ public class CustomerTraceInfoServiceImpl implements ICustomerTraceInfoService{
 				try
 				{
 					CustomerInfo customer = customerInfoDao.get(customerTraceInfo.getCustomerId());
-					customerTraceInfo.setCustomerName(customer.getCustomerName());
+					if(customer != null)
+					{
+						customerTraceInfo.setCustomerName(customer.getCustomerName());
+						customerTraceInfo.setProgress(customer.getProgressId());
+					}
 					customerTraceInfo.setSalesman(userService.getUserById(customerTraceInfo.getSalesmanId()).getUserCName());
 					customerTraceInfo.setPerson(contractPersonService.get(customerTraceInfo.getTracePersonId()));
-					customerTraceInfo.setProgress(customer.getProgressId());
-					
 					customerTraceInfo.setTraceTimeStr(CalendarUtils.toLongStringNoSecond(customerTraceInfo.getTraceTime()));
 				}catch(Exception e)
 				{

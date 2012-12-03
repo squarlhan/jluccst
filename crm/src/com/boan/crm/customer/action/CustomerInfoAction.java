@@ -669,7 +669,13 @@ public class CustomerInfoAction extends BaseActionSupport{
 		
 		try
 		{
-			userList = userService.queryUserListByCompanyIdRoleKey(sessionCompanyId,RoleFlag.YE_WU_YUAN);
+			if(deptId != null && deptId.length() > 0)
+			{
+				userList = userService.queryUserListByCompanyIdRoleKey(sessionCompanyId,deptId,RoleFlag.YE_WU_YUAN);
+			}else
+			{
+				userList = userService.queryUserListByCompanyIdRoleKey(sessionCompanyId,RoleFlag.YE_WU_YUAN);
+			}
 		}catch(Exception ex)
 		{
 			ex.printStackTrace();
@@ -698,8 +704,8 @@ public class CustomerInfoAction extends BaseActionSupport{
 	{
 		customerInfo.setCompanyId(sessionCompanyId);
 		customerInfo.setCreatorId(sessionUserId);
-		customerInfo.setSalesmanId(sessionUserId);
-		customerInfo.setSalesman(sessionUserCName);
+		//customerInfo.setSalesmanId(sessionUserId);
+		//customerInfo.setSalesman(sessionUserCName);
 		customerInfo.setCreateTime(Calendar.getInstance());
 		CustomerInfo obj = null;
 		if(customerInfo.getId() != null && customerInfo.getId().length() > 0)
