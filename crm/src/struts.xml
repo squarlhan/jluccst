@@ -58,4 +58,6 @@
 	<include file="com/boan/crm/purchase/action/struts_purchase.xml"></include>
 	<!-- 财务清单-->
 	<include file="com/boan/crm/finance/action/struts_finance.xml"></include>
+	<!--销售职责类型-->
+	<include file="com/boan/crm/sellreport/sellduty/action/struts_sell_duty.xml"></include>
 </struts>
