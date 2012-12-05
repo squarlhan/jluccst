@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<!--  销售职责Action -->
+	<package name="sell_duty" extends="struts-default" namespace="/">
+		<action name="openSellDutyListAction" class="sellDutyAction" method="openSellDutyList">
+			<result name="success">/sellreport/sellduty/selldutylist.jsp</result>
+			<result name="input">/sellreport/sellduty/selldutylist.jsp</result>
+		</action>
+		<action name="openAddSellDutyAction" class="sellDutyAction" method="openAddSellDuty">
+			<result name="success">/sellreport/sellduty/selldutyinfo.jsp</result>
+			<result name="input">/sellreport/sellduty/selldutyinfo.jsp</result>
+		</action>
+		<action name="openModifySellDutyAction" class="sellDutyAction" method="openModifySellDuty">
+			<result name="success">/sellreport/sellduty/selldutyinfo.jsp</result>
+			<result name="input">/sellreport/sellduty/selldutyinfo.jsp</result>
+		</action>
+		<action name="addSellDutyAction" class="sellDutyAction" method="addSellDuty">
+			<result name="success">/sellreport/sellduty/selldutyinfo.jsp</result>
+			<result name="input">/sellreport/sellduty/selldutyinfo.jsp</result>
+		</action>
+		<action name="modifySellDutyAction" class="sellDutyAction" method="modifySellDuty">
+			<result name="success">/sellreport/sellduty/selldutyinfo.jsp</result>
+			<result name="input">/sellreport/sellduty/selldutyinfo.jsp</result>
+		</action>
+		<action name="deleteSellDutyAction" class="sellDutyAction" method="deleteSellDuty"/>
+	</package>
+</struts>
