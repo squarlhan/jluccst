@@ -150,12 +150,12 @@
          	<td align="center" background="<%=path %>/images/headerbg.jpg">  
    				<s:checkbox theme="simple" id="cbk_all" name="all"></s:checkbox>
    			</td>
-              <td align="center" background="<%=path %>/images/headerbg.jpg"><strong>业务员</strong></td>
-              <td align="center" background="<%=path %>/images/headerbg.jpg"><strong>提交日期</strong></td>
-              <td align="center" background="<%=path %>/images/headerbg.jpg"><strong>计划类型</strong></td>
-               <td align="center" background="<%=path %>/images/headerbg.jpg"><strong>计划内容</strong></td>
-               <td align="center" background="<%=path %>/images/headerbg.jpg"><strong>备注</strong></td>
-              <td align="center" background="<%=path %>/images/headerbg.jpg"><strong>操作</strong></td>
+              <td align="center" background="<%=path %>/images/headerbg.jpg" nowrap="nowrap"><strong>业务员</strong></td>
+              <td align="center" background="<%=path %>/images/headerbg.jpg" nowrap="nowrap"><strong>提交日期</strong></td>
+              <td align="center" background="<%=path %>/images/headerbg.jpg" nowrap="nowrap"><strong>计划类型</strong></td>
+               <td width="40%"  align="center" background="<%=path %>/images/headerbg.jpg"><strong>计划内容</strong></td>
+               <td align="center" background="<%=path %>/images/headerbg.jpg" nowrap="nowrap"><strong>总结</strong></td>
+              <td align="center" background="<%=path %>/images/headerbg.jpg" nowrap="nowrap"><strong>操作</strong></td>
         </tr>
         <s:iterator value="pagination.data" status="obj">
         <tr>
@@ -163,7 +163,7 @@
         	<s:checkbox id="%{#obj.id}" name="ids" fieldValue="%{id}" value="false" theme="simple"/>
 		</td>
               <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="employeeName"/></td>
-              <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="submitTime"/></td>
+              <td height="26" align="center" bgcolor="#FFFFFF"  nowrap="nowrap"><s:property value="submitTime"/></td>
               <td height="26" align="center" bgcolor="#FFFFFF">
               	<s:if test="planType==0">
 	              	日计划
@@ -175,8 +175,8 @@
 	              	月计划
 	              	</s:else>
               	</td>
-                <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="planContent"/></td>
-                <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="memo"/></td>
+                <td height="26" align="left" bgcolor="#FFFFFF"><s:property value="planContent"/></td>
+                <td height="26" align="left" bgcolor="#FFFFFF"><s:property value="memo"/></td>
           <td height="26" colspan="2" align="center" bgcolor="#FFFFFF">
           	<s:url id="edit_url" action="openModifyTimePlanForViewAction">   
 				<s:param name="timePlan.id" value="id"></s:param>   
