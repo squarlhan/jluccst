@@ -42,7 +42,7 @@
 			var _customer_submit = {
 				rules: {
 					"timePlan.submitTime":{required:true,strangecode:true},
-					"timePlan.planContent":{required:true,strangecode:true},
+					"timePlan.planContent":{required:true,strangecode:false},
 					"timePlan.memo":{strangecode:true}
 				}
 			};
@@ -159,7 +159,7 @@
 									</tr>
 									<tr>
 										<td height="26" align="right" bgcolor="#FFFFFF">
-											<strong>备注：</strong>
+											<strong>总结：</strong>
 										</td>
 										<td height="26" align="left" bgcolor="#FFFFFF" colspan="3">
 											<s:textarea  id="txt_memo" name="timePlan.memo" cssStyle="width: 438px;height:100px;resize:none;" maxlength="500"></s:textarea>
