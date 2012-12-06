@@ -11,9 +11,11 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
+import com.boan.crm.groupmanage.common.UserSession;
 import com.boan.crm.groupmanage.model.Deptment;
 import com.boan.crm.groupmanage.model.User;
 import com.boan.crm.groupmanage.service.IDeptmentService;
+import com.boan.crm.groupmanage.service.IPopedomService;
 import com.boan.crm.groupmanage.service.IUserService;
 import com.boan.crm.timemanage.model.TimePlan;
 import com.boan.crm.timemanage.service.ITimePlanService;
@@ -40,6 +42,10 @@ public class TimePlanAction extends BaseActionSupport{
 	@Autowired
 	@Qualifier("timePlanService")
 	private ITimePlanService timePlanService = null;
+	
+	@Autowired
+	@Qualifier("popedomService")
+	private IPopedomService popedomService = null;
 	
 	/**
 	 * 时间计划实体
@@ -106,10 +112,22 @@ public class TimePlanAction extends BaseActionSupport{
 		if(sessionDeptId.equals("")){ //总经理
 			flag=false;
 		}
+		UserSession us = this.getSession();
+		//判断是否是公司管理员或公司级用户
+		boolean popodomFlag = popedomService.isCompanyAdministrator(us.getUserId(), String.valueOf(us.getUserType()) ) 
+				||popedomService.isHasCompanyPopedom(us.getPopedomKeys());
+		/*
+		 * JHY 注
 		if(flag){ //部门经理
 			deptList.add(deptService.get(sessionDeptId));
 		}else{    //总经理
 			deptList = deptService.queryAllDeptmentsByCompanyId(sessionCompanyId);
+		}
+		*/
+		if( popodomFlag ){
+			deptList = deptService.queryAllDeptmentsByCompanyId(sessionCompanyId);
+		}else{
+			deptList.add(deptService.get(sessionDeptId));
 		}
 		// 获取用户列表
 		if (deptList != null && deptList.size() > 0) {
