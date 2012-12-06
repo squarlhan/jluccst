@@ -197,9 +197,10 @@ public class CustomerInfoAction extends BaseActionSupport{
 		companyName = sessionCompanyName;
 		
 		UserSession us = this.getSession();
-		
-		boolean popodomFlag = popedomService.isCompanyAdministrator(us.getUserId(), String.valueOf(us.getUserType()) );
-		
+		//判断是否是公司管理员或公司级用户
+		boolean popodomFlag = popedomService.isCompanyAdministrator(us.getUserId(), String.valueOf(us.getUserType()) ) 
+				||popedomService.isHasCompanyPopedom(us.getPopedomKeys());
+		//SELF_COMPANY
 		if(popodomFlag)
 		{
 			deptList = deptService.queryAllDeptmentsByCompanyId( sessionCompanyId );
