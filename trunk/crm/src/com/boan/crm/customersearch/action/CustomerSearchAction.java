@@ -493,8 +493,10 @@ public class CustomerSearchAction  extends BaseActionSupport{
 									boolean bProvinceFlag = false;
 									boolean bCityFlag = false;
 									boolean bAreaFlag = false;
+									String tempCityId = cityId;
 									for(int kk=0;kk<customerAddressArray.length - 1;kk++)
 									{
+										
 										if(!customerAddressArray[kk].equals("中国"))
 										{
 //											if(!bProvinceFlag)
@@ -511,19 +513,27 @@ public class CustomerSearchAction  extends BaseActionSupport{
 											{
 												if(!bCityFlag)
 												{
-													CityInfo city = areaService.getCityByName(customerAddressArray[kk]);
+													CityInfo city = areaService.getCityByNameAndProvinceId(customerAddressArray[kk],provinceId);
 													if(city != null)
 													{
 														customer.setCity(city.getId());
 														//customer.setProvince(city.getProvinceId());
 														bCityFlag = true;
+														tempCityId = city.getId();
 														continue;
 													}
 												}
 											}
-											if(! bAreaFlag)
+											if(!bAreaFlag)
 											{
-												AreaInfo area = areaService.getAreaByName(customerAddressArray[kk]);
+												AreaInfo area = null;
+												if(tempCityId != null && tempCityId.length() > 0)
+												{
+													area = areaService.getAreaByNameAndCityId(customerAddressArray[kk],tempCityId);
+												}else
+												{
+													area = areaService.getAreaByName(customerAddressArray[kk]);
+												}
 												if(area != null)
 												{
 													customer.setDistrict(area.getId());
