@@ -57,6 +57,12 @@ public class SellDuty implements Serializable {
 	private int dutyType;
 	
 	/**
+	 * 是否是数字类型，0：不是数字类型  1：是数字类型
+	 */
+	@Column(name = "NUMBER_TYPE" ,nullable=false,columnDefinition="int default 0")
+	private boolean numberType=false;
+	
+	/**
 	 * 创建时间
 	 */
 	@Column(name = "CREATE_TIME")
@@ -116,5 +122,13 @@ public class SellDuty implements Serializable {
 
 	public void setCreateTime(Calendar createTime) {
 		this.createTime = createTime;
+	}
+
+	public boolean isNumberType() {
+		return numberType;
+	}
+
+	public void setNumberType(boolean numberType) {
+		this.numberType = numberType;
 	}
 }
