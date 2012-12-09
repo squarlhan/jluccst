@@ -80,9 +80,26 @@ public class SellDutyAction extends BaseActionSupport{
 		sellDuty.setCompanyName(this.sessionCompanyName);
 		//（0：周报，周计划职责类型  1： 月报，月计划职责类型）
 		sellDuty.setCreateTime(Calendar.getInstance());
+		if(sellDuty.getId().equals("")){
+			sellDuty.setId(null);
+		}
 		sellDutyService.saveOrUpdateSellDuty(sellDuty);
 		message="保存成功！";
 		return SUCCESS;
+	}
+	
+	/**
+	 * 保存前验证
+	 */
+	public void validateAddSellDuty(){
+		if(sellDuty.isNumberType()){
+			String name = sellDuty.getName().trim();
+			try {
+				Double temp = Double.parseDouble(name);
+			} catch (NumberFormatException e) {
+				this.addFieldError("", "如果您数值型，请保证职责名称输入的是数字类型！");
+			}
+		}
 	}
 	
 	/**
@@ -92,6 +109,20 @@ public class SellDutyAction extends BaseActionSupport{
 		sellDutyService.saveOrUpdateSellDuty(sellDuty);
 		message="保存成功！";
 		return SUCCESS;
+	}
+	
+	/**
+	 * 修改前验证
+	 */
+	public void validateModifySellDuty(){
+		if(sellDuty.isNumberType()){
+			String name = sellDuty.getName().trim();
+			try {
+				Double temp = Double.parseDouble(name);
+			} catch (NumberFormatException e) {
+				this.addFieldError("", "如果您数值型，请保证职责名称输入的是数字类型！");
+			}
+		}
 	}
 	
 	/**
