@@ -41,9 +41,10 @@ public interface IAreaService {
 	public ProvinceInfo getProvinceByName(String name);
 	
 	public CityInfo getCityByName(String name);
+	public CityInfo getCityByNameAndProvinceId(String name,String provinceId);
 	
 	public AreaInfo getAreaByName(String name);
-	
+	public AreaInfo getAreaByNameAndCityId(String name,String cityId);
 	/**
 	 * 根据id删除数据字典
 	 */

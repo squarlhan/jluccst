@@ -58,6 +58,19 @@ public class AreaServiceImpl implements IAreaService{
 		return null;
 	}
 	@Override
+	public CityInfo getCityByNameAndProvinceId(String name,String provinceId)
+	{
+		Map<String, String> values = new HashMap<String, String>();
+		values.put("cityName", "%"+name+"%");
+		values.put("provinceId", provinceId);
+		List<CityInfo> list =  provinceInfoDao.find("from CityInfo where provinceId = :provinceId and cityName like :cityName", values);
+		if(list != null && list.size() > 0)
+		{
+			return list.get(0);
+		}
+		return null;
+	}
+	@Override
 	public CityInfo getCityByName(String name)
 	{
 		Map<String, String> values = new HashMap<String, String>();
@@ -75,6 +88,19 @@ public class AreaServiceImpl implements IAreaService{
 		Map<String, String> values = new HashMap<String, String>();
 		values.put("areaName", "%"+name+"%");
 		List<AreaInfo> list =  provinceInfoDao.find("from AreaInfo where areaName like :areaName", values);
+		if(list != null && list.size() > 0)
+		{
+			return list.get(0);
+		}
+		return null;
+	}
+	@Override
+	public AreaInfo getAreaByNameAndCityId(String name,String cityId)
+	{
+		Map<String, String> values = new HashMap<String, String>();
+		values.put("areaName", "%"+name+"%");
+		values.put("cityId", cityId);
+		List<AreaInfo> list =  provinceInfoDao.find("from AreaInfo where cityId = :cityId and areaName like :areaName", values);
 		if(list != null && list.size() > 0)
 		{
 			return list.get(0);
