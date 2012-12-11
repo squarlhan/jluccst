@@ -134,7 +134,13 @@ public class CustomerInfoAction extends BaseActionSupport{
 	private List<CustomerInfo> listCustomer = null;
 	private String provinceId = "";
 	private String cityId = "";
-	
+	private String tel = "";
+	public String getTel() {
+		return tel;
+	}
+	public void setTel(String tel) {
+		this.tel = tel;
+	}
 	public List<CustomerInfo> getListCustomer() {
 		return listCustomer;
 	}
@@ -606,14 +612,23 @@ public class CustomerInfoAction extends BaseActionSupport{
 	 */
 	public String customerInfo()
 	{
+		String companyId = sessionCompanyId;
 		if(StringUtils.trimToNull(id)!=null)
+		{
 			customerInfo = customerInfoService.get(id);
+			if(companyId == null || companyId.length() == 0)
+			{
+				companyId = customerInfo.getCompanyId();
+			}
+		}
 		else
 			customerInfo = new CustomerInfo();
+		
+		
 		//客户来源：传2
-		listSource = dataDictionaryService.findDataDictionaryByType(sessionCompanyId, 2);
+		listSource = dataDictionaryService.findDataDictionaryByType(companyId, 2);
 		//客户分类： 传0
-		listCategory = dataDictionaryService.findDataDictionaryByType(sessionCompanyId, 0);
+		listCategory = dataDictionaryService.findDataDictionaryByType(companyId, 0);
 		//业务进展：传
 		//listProgress = dataDictionaryService.findDataDictionaryByType(0);
 		listProgress = new ArrayList<DataDictionary>();
@@ -630,7 +645,7 @@ public class CustomerInfoAction extends BaseActionSupport{
 		d2.setName("成熟客户");
 		listProgress.add(d2);
 		//成熟度：传4
-		listMaturity = dataDictionaryService.findDataDictionaryByType(sessionCompanyId, 4);
+		listMaturity = dataDictionaryService.findDataDictionaryByType(companyId, 4);
 		//开发程度
 		//listLevel = dataDictionaryService.findDataDictionaryByType(0);
 		listLevel = new ArrayList<DataDictionary>();
@@ -681,10 +696,10 @@ public class CustomerInfoAction extends BaseActionSupport{
 		{
 			if(deptId != null && deptId.length() > 0)
 			{
-				userList = userService.queryUserListByCompanyIdRoleKey(sessionCompanyId,deptId,RoleFlag.YE_WU_YUAN);
+				userList = userService.queryUserListByCompanyIdRoleKey(companyId,deptId,RoleFlag.YE_WU_YUAN);
 			}else
 			{
-				userList = userService.queryUserListByCompanyIdRoleKey(sessionCompanyId,RoleFlag.YE_WU_YUAN);
+				userList = userService.queryUserListByCompanyIdRoleKey(companyId,RoleFlag.YE_WU_YUAN);
 			}
 		}catch(Exception ex)
 		{
@@ -704,6 +719,16 @@ public class CustomerInfoAction extends BaseActionSupport{
 	}
 	public String myCustomerTabInfo()
 	{
+		return SUCCESS;
+	}
+	public String myTelCustomerTabInfo()
+	{
+		//根据电话号、手机号取客户Id
+		id = contractpersonInfoService.getCustomerIdByPhone(tel);
+		if(id == null || id.length() == 0)
+		{
+			return ERROR;
+		}
 		return SUCCESS;
 	}
 	/**

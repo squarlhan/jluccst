@@ -53,4 +53,10 @@ public interface IContractPersonService {
 	 */
 	public Pagination<ContractPersonInfo> findContractPersonInfoForPage(
 			Map<String, ?> values, Pagination<ContractPersonInfo> pagination);
+	/**
+	 * 根据电话号或手机号，取客户信息Id
+	 * @param phone
+	 * @return　String
+	 */
+	public String getCustomerIdByPhone(String phone);
 }
