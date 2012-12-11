@@ -75,9 +75,25 @@ public class ContractPersonServiceImpl implements IContractPersonService {
 	 */
 	public String getCustomerIdByPhone(String phone)
 	{
-		String hql = "select customerId from ContractPersonInfo where phone = :phone or tel = :phone";
 		Map<String, String> values = new HashMap<String, String>();
-		values.put("phone", phone);
+		String hql = "select customerId from ContractPersonInfo where phone like :phone or tel like :phone";
+//		if(phone.length() == 11)
+//		{
+//			
+//			String firstChar = phone.substring(0,1);
+//			if(firstChar.equals("1"))
+//			{
+//				//手机
+//				hql = "select customerId from ContractPersonInfo where phone like :phone or tel like :phone";
+//				values.put("phone", "'%"+phone+"%'");
+//			}else
+//			{
+//				//座机
+//				hql = "select customerId from ContractPersonInfo where phone like :phone or tel like :phone";
+//				values.put("phone", "'%"+phone+"%'");
+//			}
+//		}
+		values.put("phone", "'%"+phone+"%'");
 		List<String> list = contractPersonDao.find(hql, values);
 		if(list != null && list.size() > 0)
 		{
