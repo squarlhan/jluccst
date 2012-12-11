@@ -17,11 +17,12 @@
 		<action name="groupTreeForVisitManage" class="customerInfoAction"  method="showGroupTree">
 			<result name="success">/customer/grouptreeforvisitmanage.jsp</result>
 		</action>
-		<action name="customerInfoFromTel" class="customerInfoAction" method="myCustomerTabInfo">
+		<action name="customerInfoFromTel" class="customerInfoAction" method="myTelCustomerTabInfo">
+			<result name="error">/customer/customernotfound.jsp</result>
 			<result name="success">/customer/customertabinfofromtel.jsp</result>
 		</action>
-		<action name="inCustomerInfoFromTel" class="customerInfoAction" method="customerTabInfo">
-			<result name="success">/customer/incustomerinfofromtel.jsp</result>
+		<action name="inCustomerInfoFromTel" class="customerInfoAction" method="customerInfo">
+			<result name="success">/customer/customer_infofromtel.jsp</result>
 		</action>
 		<action name="customerTraceListFromTel" class="customerTraceInfoAction" method="customerTraceList">
 			<result name="success">/customer/searchcustomertrace_listfromtel.jsp</result>

@@ -68,7 +68,26 @@ public class ContractPersonServiceImpl implements IContractPersonService {
 		pagination.setData(data);
 		return pagination;
 	}
-
+	/**
+	 * 根据电话号或手机号，取客户信息Id
+	 * @param phone
+	 * @return　String
+	 */
+	public String getCustomerIdByPhone(String phone)
+	{
+		String hql = "select customerId from ContractPersonInfo where phone = :phone or tel = :phone";
+		Map<String, String> values = new HashMap<String, String>();
+		values.put("phone", phone);
+		List<String> list = contractPersonDao.find(hql, values);
+		if(list != null && list.size() > 0)
+		{
+			return list.get(0);
+		}else
+		{
+			return "";
+		}
+		
+	}
 	@Override
 	public ContractPersonInfo get(String id) {
 		return contractPersonDao.get(id);
