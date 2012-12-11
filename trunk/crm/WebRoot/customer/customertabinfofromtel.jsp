@@ -48,13 +48,13 @@
 	<div title="基本信息"
 		style="padding: 1px; display: none;">
 		<iframe scrolling="auto" frameborder="0" style="width:100%; height:450px"
-			src="CustomerInfoFromTel.action?id=<s:property value='id'/>"></iframe>
+			src="inCustomerInfoFromTel.action?id=<s:property value='id'/>"></iframe>
 	</div>
 	<s:if test='id!=null && id.length() > 0'>
 	<div title="客户跟进"
 		style="padding: 1px; display: none;" id="traceDiv">
 		<iframe id="traceDivFrame" scrolling="auto" frameborder="0" style="width:100%; height:100%"
-			src="about:blank" url="customerTraceListFromTel.action?customerId=<s:property value='id'/>"></iframe>
+			src="about:blank" url="searchCustomerTraceList.action?customerId=<s:property value='id'/>"></iframe>
 	</div>
 	<div title="销售记录"
 		style="padding: 1px; display: none;">
@@ -64,7 +64,7 @@
 	<div title="客户回访"
 		style="padding: 1px; display: none;" id="visitDiv">
 		<iframe id="visitDivFrame" scrolling="auto" frameborder="0" style="width:100%; height:100%"
-			src="about:blank" url="customerVisitListFromTel.action?customerId=<s:property value='id'/>"></iframe>
+			src="about:blank" url="searchCustomerVisitList.action?customerId=<s:property value='id'/>"></iframe>
 	</div>
 	<div title="服务记录"
 		style="padding: 1px; display: none;">
