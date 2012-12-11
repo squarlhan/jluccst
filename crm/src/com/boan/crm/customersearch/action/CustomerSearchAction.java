@@ -563,18 +563,21 @@ public class CustomerSearchAction  extends BaseActionSupport{
 									
 								}
 							}catch(Exception ex)
-							{}
+							{
+								System.out.println("第"+ i +"行错误！" );
+								//ex.printStackTrace();
+							}
 						}
 					}
 				}
 				catch( Exception ex )
 				{
-					
+					ex.printStackTrace();
 				}
 				
 			}catch(Exception ex)
 			{
-				
+				ex.printStackTrace();
 			}
 		}
 		message = "保存成功！";
