@@ -192,8 +192,8 @@
 			 */
 		 	$.fn.close = function(){
 		 		$("#closeBtn").click(function(){
-		  			parent.$("#windown-close").click();
-		  			//parent.location.href = "customermanage.jsp";
+		  			//parent.$("#windown-close").click();
+		  			parent.location.href = "customermanage.jsp";
 		  		});
 			}
 			/**
