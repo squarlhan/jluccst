@@ -1,5 +1,6 @@
 package com.boan.crm.sellreport.sellduty.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -51,7 +52,13 @@ public class SellDutyServiceImpl implements ISellDutyService {
 	 * 按分页查询销售职责
 	 */
 	public Pagination<SellDuty> findSellDutyForPage( Map<String, ?> values, Pagination<SellDuty> pagination){
+		
 		StringBuffer strb = new StringBuffer( " where 1=1 ");
+		if(values!=null){
+			if(values.containsKey("companyId")){
+				strb.append(" companyId=:companyId  ");
+			}
+		}
 		String hql = "from SellDuty "+strb.toString()+" order by createTime desc , dutyType asc";
 		List<SellDuty> data = sellDutyDao.findForPage(hql, values, pagination.getStartIndex(), pagination.getPageSize());
 		hql = "select count(*) from SellDuty" +strb.toString();
@@ -59,5 +66,18 @@ public class SellDutyServiceImpl implements ISellDutyService {
 		pagination.setTotalRows(totalRows);
 		pagination.setData(data);
 		return pagination;
+	}
+	
+	/**
+	 * 查询本公司的所有销售职责
+	 */
+	public List<SellDuty> findAllSellDutyByCompanyId(String companyId){
+		
+		StringBuffer strb = new StringBuffer( " where companyId=:companyId");
+		Map<String, String> param = new HashMap<String, String>();
+		param.put("companyId", companyId);
+		String hql = "from SellDuty "+strb.toString()+" order by createTime desc , dutyType asc";
+		List<SellDuty> data = sellDutyDao.find(hql, param);
+		return data;
 	}
 }

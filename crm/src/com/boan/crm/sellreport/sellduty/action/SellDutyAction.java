@@ -52,6 +52,7 @@ public class SellDutyAction extends BaseActionSupport{
 	 */
 	public String openSellDutyList(){
 		Map<String, String> param = new HashMap<String, String>();
+		param.put("companyId", this.sessionCompanyId);
 		pagination = sellDutyService.findSellDutyForPage(param , pagination);
 		return SUCCESS;
 	}
