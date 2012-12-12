@@ -71,9 +71,8 @@ public class ServiceLogAction extends BaseActionSupport {
 	 * @return 结果
 	 */
 	public String serviceLogListByTel(){
-		String tempCompanyId = "cbit";
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put( "companyId", tempCompanyId );
+		map.put( "companyId", companyId );
 		pagination = serviceLogService.findForPage(map, pagination );
 		return SUCCESS;
 	}
