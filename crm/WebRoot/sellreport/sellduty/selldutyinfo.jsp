@@ -60,8 +60,13 @@
 	               	if(!validator.form()){
 						return false;
 					}
+	               	
 					form1.name.value = $("#name").val();
-					form1.action = "addSellDutyAction.action";
+					if($("#sellDutyId").val()!=""){
+						form1.action = "modifySellDutyAction.action";
+					}else{
+						form1.action = "addSellDutyAction.action";
+					}
 	               	form1.submit();
 	           	});
           	};
@@ -120,7 +125,8 @@
 											</td>
 											<td height="26" align="left" bgcolor="#FFFFFF">
 												<s:textfield id="name" name="sellDuty.name"
-													maxlength="25" cssStyle="width: 300px;"></s:textfield>
+													maxlength="25" cssStyle="width: 230px;"></s:textfield> 数值型
+													<s:checkbox id="chk_numberType"  name="sellDuty.numberType" fieldvalue="true"  title="数值型表示是销售额" ></s:checkbox>
 												<font color="red">*</font>
 											</td>
 										</tr>
