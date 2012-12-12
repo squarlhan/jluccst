@@ -1,4 +1,4 @@
-package com.boan.crm.sellreport.monthly.action;
+package com.boan.crm.sellreport.weekly.action;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -16,19 +16,19 @@ import com.boan.crm.groupmanage.model.Deptment;
 import com.boan.crm.groupmanage.model.User;
 import com.boan.crm.groupmanage.service.IDeptmentService;
 import com.boan.crm.groupmanage.service.IUserService;
-import com.boan.crm.sellreport.monthly.model.MonthlyMainInfo;
-import com.boan.crm.sellreport.monthly.service.IMonthlyMainInfoService;
+import com.boan.crm.sellreport.weekly.model.WeeklyMainInfo;
+import com.boan.crm.sellreport.weekly.service.IWeeklyMainInfoService;
 import com.boan.crm.utils.action.BaseActionSupport;
 import com.boan.crm.utils.page.Pagination;
 
-@Controller("monthlyMainInfoAction")
+@Controller("weeklyMainInfoAction")
 @Scope("prototype")
-public class MonthlyMainInfoAction  extends BaseActionSupport{
+public class WeeklyMainInfoAction  extends BaseActionSupport{
 
 	/**
-	 * 月计划主信息
+	 * 周计划主信息
 	 */
-	private MonthlyMainInfo monthlyMainInfo;
+	private WeeklyMainInfo weeklyMainInfo;
 	
 	/**
 	 * 部门列表
@@ -45,7 +45,7 @@ public class MonthlyMainInfoAction  extends BaseActionSupport{
 	/**
 	 * 分页对象
 	 */
-	private Pagination<MonthlyMainInfo> pagination = new  Pagination<MonthlyMainInfo>() ;
+	private Pagination<WeeklyMainInfo> pagination = new  Pagination<WeeklyMainInfo>() ;
 	
 	@Autowired
 	@Qualifier("userService")
@@ -56,8 +56,8 @@ public class MonthlyMainInfoAction  extends BaseActionSupport{
 	private IDeptmentService deptService = null;
 	
 	@Autowired
-	@Qualifier("monthlyMainInfoService")
-	private IMonthlyMainInfoService monthlyMainInfoService;
+	@Qualifier("weeklyMainInfoService")
+	private IWeeklyMainInfoService weeklyMainInfoService;
 	
 	/**
 	 * 提示信息
@@ -82,17 +82,15 @@ public class MonthlyMainInfoAction  extends BaseActionSupport{
 	 * 
 	 * @return
 	 */
-	public String showGroupTreeForMonthlyMainInfo() throws Exception {
+	public String showGroupTreeForWeeklyMainInfo() throws Exception {
 		companyId = sessionCompanyId;
 		companyName = sessionCompanyName;
 		userList = new ArrayList<User>();
 		deptList = new ArrayList<Deptment>();
 		boolean flag=true;
 		if(sessionDeptId.equals("")){ //总经理
-			flag=false;
+			//flag=false;
 		}
-		flag=false;
-		
 		if(flag){ //部门经理
 			deptList.add(deptService.get(sessionDeptId));
 		}else{    //总经理
@@ -114,14 +112,14 @@ public class MonthlyMainInfoAction  extends BaseActionSupport{
 				userList.addAll(tempUserList);
 			}
 		}
-		return "group-tree-for-monthly-main-info";
+		return "group-tree-for-weekly-main-info";
 	}
 	
 	/**
-	 * 打开月计划列表页
+	 * 打开周计划列表页
 	 * @return
 	 */
-	public String openMonthlyMainInfoList(){
+	public String openWeeklyMainInfoList(){
 		deptList = deptService.queryAllDeptmentsByCompanyId( sessionCompanyId );
 		Map param = new HashMap();
 		if(personId!=null && !personId.equals("")){
@@ -129,67 +127,67 @@ public class MonthlyMainInfoAction  extends BaseActionSupport{
 		}else{
 			param.put("deptId", deptId);
 		}
-		monthlyMainInfoService.findMonthlyMainInfoForPage(param, pagination);
+		weeklyMainInfoService.findWeeklyMainInfoForPage(param, pagination);
 		return this.SUCCESS;
 	}
 	
 	/**
-	 * 打开月计划Tab页
+	 * 打开周计划Tab页
 	 * @return
 	 */
 	public String openTabPage(){
 		return this.SUCCESS;
 	}
 	
-	public String openAddMonthlyMainInfo() throws Exception{
+	public String openAddWeeklyMainInfo() throws Exception{
 		deptList = deptService.queryAllDeptmentsByCompanyId( sessionCompanyId );
 		userList =userService.queryUserList( sessionCompanyId, sessionDeptId, new Pagination<User>()).getData();
-		monthlyMainInfo = new MonthlyMainInfo();
+		weeklyMainInfo = new WeeklyMainInfo();
 		
-		monthlyMainInfo.setCompanyId(sessionCompanyId);
-		monthlyMainInfo.setCompanyName(sessionCompanyName);
+		weeklyMainInfo.setCompanyId(sessionCompanyId);
+		weeklyMainInfo.setCompanyName(sessionCompanyName);
 		
-		monthlyMainInfo.setDeptId(sessionDeptId);
-		monthlyMainInfo.setDeptName(sessionDeptName);
+		weeklyMainInfo.setDeptId(sessionDeptId);
+		weeklyMainInfo.setDeptName(sessionDeptName);
 		
-		monthlyMainInfo.setPersonId(sessionUserId);
-		monthlyMainInfo.setPersonName(sessionUserCName);
+		weeklyMainInfo.setPersonId(sessionUserId);
+		weeklyMainInfo.setPersonName(sessionUserCName);
 		
 		Calendar begin  = Calendar.getInstance();
 		begin.set(Calendar.DAY_OF_MONTH,1);
 		Calendar end  = Calendar.getInstance();
 		end.set(Calendar.DAY_OF_MONTH,Calendar.getInstance().getActualMaximum(Calendar.DAY_OF_MONTH));
 		
-		monthlyMainInfo.setPlanInterzoneBegin(begin);
-		monthlyMainInfo.setPlanInterzoneEnd(end);
+		weeklyMainInfo.setPlanInterzoneBegin(begin);
+		weeklyMainInfo.setPlanInterzoneEnd(end);
 		
-		monthlyMainInfo.setCreateTime(Calendar.getInstance());
+		weeklyMainInfo.setCreateTime(Calendar.getInstance());
 		return this.SUCCESS;
 	}
 	
-	public String openModifyMonthlyMainInfo() throws Exception{
+	public String openModifyWeeklyMainInfo() throws Exception{
 		deptList = deptService.queryAllDeptmentsByCompanyId( sessionCompanyId );
 		userList =userService.queryUserList( sessionCompanyId, sessionDeptId, new Pagination<User>()).getData();
-		monthlyMainInfo = monthlyMainInfoService.getMonthlyMainInfoById(mainInfoId);
+		weeklyMainInfo = weeklyMainInfoService.getWeeklyMainInfoById(mainInfoId);
 		return this.SUCCESS;
 	}
 	
-	public String addMonthlyMainInfo() throws Exception{
-		if(monthlyMainInfo.getId().equals("")){
-			monthlyMainInfo.setId(null);
+	public String addWeeklyMainInfo() throws Exception{
+		if(weeklyMainInfo.getId().equals("")){
+			weeklyMainInfo.setId(null);
 		}
 		
-		String deptName =deptService.get(monthlyMainInfo.getDeptId()).getDeptName();
-		monthlyMainInfo.setDeptName(deptName);
+		String deptName =deptService.get(weeklyMainInfo.getDeptId()).getDeptName();
+		weeklyMainInfo.setDeptName(deptName);
 		
-		String userName = userService.getUserById(monthlyMainInfo.getPersonId()).getUserCName();
-		monthlyMainInfo.setPersonName(userName);
+		String userName = userService.getUserById(weeklyMainInfo.getPersonId()).getUserCName();
+		weeklyMainInfo.setPersonName(userName);
 		
 		SimpleDateFormat format = new SimpleDateFormat("yyyy年-MM月-dd日");
-		String planInterzone =  format.format(monthlyMainInfo.getPlanInterzoneBegin().getTime());
-		planInterzone=planInterzone+"--"+ format.format(monthlyMainInfo.getPlanInterzoneEnd().getTime());
-		monthlyMainInfo.setPlanInterzone(planInterzone );
-		monthlyMainInfoService.saveOrUpdateMonthlyMainInfo(monthlyMainInfo);
+		String planInterzone =  format.format(weeklyMainInfo.getPlanInterzoneBegin().getTime());
+		planInterzone=planInterzone+"--"+ format.format(weeklyMainInfo.getPlanInterzoneEnd().getTime());
+		weeklyMainInfo.setPlanInterzone(planInterzone );
+		weeklyMainInfoService.saveOrUpdateWeeklyMainInfo(weeklyMainInfo);
 		
 		message="保存成功！";
 		deptList = deptService.queryAllDeptmentsByCompanyId( sessionCompanyId );
@@ -197,46 +195,46 @@ public class MonthlyMainInfoAction  extends BaseActionSupport{
 		return this.SUCCESS;
 	}
 	
-	public String modifyMonthlyMainInfo() throws Exception{
+	public String modifyWeeklyMainInfo() throws Exception{
 		deptList = deptService.queryAllDeptmentsByCompanyId( sessionCompanyId );
 		userList =userService.queryUserList( sessionCompanyId, sessionDeptId, new Pagination<User>()).getData();
 		
-		String deptName =deptService.get(monthlyMainInfo.getDeptId()).getDeptName();
-		monthlyMainInfo.setDeptName(deptName);
+		String deptName =deptService.get(weeklyMainInfo.getDeptId()).getDeptName();
+		weeklyMainInfo.setDeptName(deptName);
 		
-		String userName = userService.getUserById(monthlyMainInfo.getPersonId()).getUserCName();
-		monthlyMainInfo.setPersonName(userName);
+		String userName = userService.getUserById(weeklyMainInfo.getPersonId()).getUserCName();
+		weeklyMainInfo.setPersonName(userName);
 		
 		SimpleDateFormat format = new SimpleDateFormat("yyyy年-MM月-dd日");
-		String planInterzone =  format.format(monthlyMainInfo.getPlanInterzoneBegin().getTime());
-		planInterzone=planInterzone+"--"+ format.format(monthlyMainInfo.getPlanInterzoneEnd().getTime());
-		monthlyMainInfo.setPlanInterzone(planInterzone );
+		String planInterzone =  format.format(weeklyMainInfo.getPlanInterzoneBegin().getTime());
+		planInterzone=planInterzone+"--"+ format.format(weeklyMainInfo.getPlanInterzoneEnd().getTime());
+		weeklyMainInfo.setPlanInterzone(planInterzone );
 		
-		monthlyMainInfo.setCreateTime(Calendar.getInstance());
-		monthlyMainInfoService.saveOrUpdateMonthlyMainInfo(monthlyMainInfo);
+		weeklyMainInfo.setCreateTime(Calendar.getInstance());
+		weeklyMainInfoService.saveOrUpdateWeeklyMainInfo(weeklyMainInfo);
 		message="保存成功！";
 		return this.SUCCESS;
 	}
 	
-	public String deleteMonthlyMainInfo() throws Exception{
-		monthlyMainInfoService.deleteMonthlyMainInfoByIds(ids);
+	public String deleteWeeklyMainInfo() throws Exception{
+		weeklyMainInfoService.deleteWeeklyMainInfoByIds(ids);
 		return this.NONE;
 	}
 
-	public Pagination<MonthlyMainInfo> getPagination() {
+	public Pagination<WeeklyMainInfo> getPagination() {
 		return pagination;
 	}
 
-	public void setPagination(Pagination<MonthlyMainInfo> pagination) {
+	public void setPagination(Pagination<WeeklyMainInfo> pagination) {
 		this.pagination = pagination;
 	}
 
-	public MonthlyMainInfo getMonthlyMainInfo() {
-		return monthlyMainInfo;
+	public WeeklyMainInfo getWeeklyMainInfo() {
+		return weeklyMainInfo;
 	}
 
-	public void setMonthlyMainInfo(MonthlyMainInfo monthlyMainInfo) {
-		this.monthlyMainInfo = monthlyMainInfo;
+	public void setWeeklyMainInfo(WeeklyMainInfo weeklyMainInfo) {
+		this.weeklyMainInfo = weeklyMainInfo;
 	}
 
 	public List<Deptment> getDeptList() {
