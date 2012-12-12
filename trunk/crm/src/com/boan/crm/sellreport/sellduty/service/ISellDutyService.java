@@ -1,5 +1,6 @@
 package com.boan.crm.sellreport.sellduty.service;
 
+import java.util.List;
 import java.util.Map;
 
 import com.boan.crm.sellreport.sellduty.model.SellDuty;
@@ -33,4 +34,9 @@ public interface ISellDutyService {
 	 * 按分页查询销售职责
 	 */
 	public Pagination<SellDuty> findSellDutyForPage( Map<String, ?> values, Pagination<SellDuty> pagination);
+	
+	/**
+	 * 查询本公司的所有销售职责
+	 */
+	public List<SellDuty> findAllSellDutyByCompanyId(String companyId);
 }

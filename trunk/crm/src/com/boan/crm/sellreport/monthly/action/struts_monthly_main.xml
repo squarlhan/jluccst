@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<!--  月计划主信息Action -->
+	<package name="monthly_main_info" extends="struts-default" namespace="/">
+		<action name="showGroupTreeForMonthlyMainInfoAction" class="monthlyMainInfoAction"  method="showGroupTreeForMonthlyMainInfo">
+			<result name="group-tree-for-monthly-main-info">/sellreport/monthly/group-tree-for-monthly-main-info.jsp</result>
+		</action>
+	
+		<action name="openMonthlyMainInfoListAction" class="monthlyMainInfoAction" method="openMonthlyMainInfoList">
+			<result name="success">/sellreport/monthly/monthlymaininfolist.jsp</result>
+			<result name="input">/sellreport/monthly/monthlymaininfolist.jsp</result>
+		</action>
+		<action name="openTabPageAction" class="monthlyMainInfoAction" method="openTabPage">
+			<result name="success">/sellreport/monthly/monthlytab.jsp</result>
+			<result name="input">/sellreport/monthly/monthlytab.jsp</result>
+		</action>
+		<action name="openAddMonthlyMainInfoAction" class="monthlyMainInfoAction" method="openAddMonthlyMainInfo">
+			<result name="success">/sellreport/monthly/monthlymaininfoadd.jsp</result>
+			<result name="input">/sellreport/monthly/monthlymaininfoadd.jsp</result>
+		</action>
+		<action name="openModifyMonthlyMainInfoAction" class="monthlyMainInfoAction" method="openModifyMonthlyMainInfo">
+			<result name="success">/sellreport/monthly/monthlymaininfoadd.jsp</result>
+			<result name="input">/sellreport/monthly/monthlymaininfoadd.jsp</result>
+		</action>
+		<action name="addMonthlyMainInfoAction" class="monthlyMainInfoAction" method="addMonthlyMainInfo">
+			<result name="success">/sellreport/monthly/monthlymaininfoadd.jsp</result>
+			<result name="input">/sellreport/monthly/monthlymaininfoadd.jsp</result>
+		</action>
+		<action name="modifyMonthlyMainInfoAction" class="monthlyMainInfoAction" method="modifyMonthlyMainInfo">
+			<result name="success">/sellreport/monthly/monthlymaininfoadd.jsp</result>
+			<result name="input">/sellreport/monthly/monthlymaininfoadd.jsp</result>
+		</action>
+		<action name="deleteMonthlyMainInfoAction" class="monthlyMainInfoAction" method="deleteMonthlyMainInfo"/>
+	</package>
+</struts>
