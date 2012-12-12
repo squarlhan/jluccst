@@ -32,18 +32,11 @@
 	</head>
 	<body>
 		<s:form id="form1" name="form1" method="post" theme="simple">
+			<s:hidden name="companyId"></s:hidden>
 			<table width="100%" style="height: 100%;" border="0" cellspacing="5"
 				cellpadding="0">
 				<tr>
 					<td valign="top">
-						<table width="100%" border="0" cellspacing="5" cellpadding="0">
-							<tr>
-								<td>
-									客户名称：长春长白信息科技 有限责任公司
-								</td>
-								<td align="right">&nbsp;</td>
-							</tr>
-						</table>
 						<table width="100%" border="0" cellpadding="5" cellspacing="1"
 							bgcolor="#d5e4fd">
 							<tr>
