@@ -1,6 +1,7 @@
 package com.boan.crm.sellreport.weekly.model;
 
 import java.io.Serializable;
+import java.util.Calendar;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -82,6 +83,18 @@ public class WeeklyMainInfo implements Serializable {
 	private String planInterzone;
 
 	/**
+	 * 计划区间段开始时间
+	 */
+	@Column(name = "PLAN_INTERZONE_BEGIN")
+	private Calendar planInterzoneBegin;
+	
+	/**
+	 * 计划区间段结束时间
+	 */
+	@Column(name = "PLAN_INTERZONE_END")
+	private Calendar planInterzoneEnd;
+
+	/**
 	 * 公司战略重点
 	 */
 	@Column(name = "COMPANY_KEYSTONE", length =100)
@@ -92,6 +105,12 @@ public class WeeklyMainInfo implements Serializable {
 	 */
 	@Column(name = "NEXT_WEEK_KEYSTONE", length =100)
 	private String nextWeekKeystone;
+
+	/**
+	 * 保存时间
+	 */
+	@Column(name = "CREATE_TIME")
+	private Calendar createTime =Calendar.getInstance() ;
 	
 	public String getId() {
 		return id;
@@ -179,5 +198,45 @@ public class WeeklyMainInfo implements Serializable {
 
 	public void setPlanInterzone(String planInterzone) {
 		this.planInterzone = planInterzone;
+	}
+
+	public Calendar getPlanInterzoneBegin() {
+		return planInterzoneBegin;
+	}
+
+	public void setPlanInterzoneBegin(Calendar planInterzoneBegin) {
+		this.planInterzoneBegin = planInterzoneBegin;
+	}
+
+	public Calendar getPlanInterzoneEnd() {
+		return planInterzoneEnd;
+	}
+
+	public void setPlanInterzoneEnd(Calendar planInterzoneEnd) {
+		this.planInterzoneEnd = planInterzoneEnd;
+	}
+
+	public String getCompanyKeystone() {
+		return companyKeystone;
+	}
+
+	public void setCompanyKeystone(String companyKeystone) {
+		this.companyKeystone = companyKeystone;
+	}
+
+	public String getNextWeekKeystone() {
+		return nextWeekKeystone;
+	}
+
+	public void setNextWeekKeystone(String nextWeekKeystone) {
+		this.nextWeekKeystone = nextWeekKeystone;
+	}
+
+	public Calendar getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(Calendar createTime) {
+		this.createTime = createTime;
 	}
 }

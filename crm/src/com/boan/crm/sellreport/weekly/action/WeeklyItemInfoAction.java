@@ -1,4 +1,4 @@
-package com.boan.crm.sellreport.monthly.action;
+package com.boan.crm.sellreport.weekly.action;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -10,16 +10,16 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
-import com.boan.crm.sellreport.monthly.model.MonthlyItemInfo;
-import com.boan.crm.sellreport.monthly.service.IMonthlyItemInfoService;
+import com.boan.crm.sellreport.weekly.model.WeeklyItemInfo;
+import com.boan.crm.sellreport.weekly.service.IWeeklyItemInfoService;
 import com.boan.crm.sellreport.sellduty.model.SellDuty;
 import com.boan.crm.sellreport.sellduty.service.ISellDutyService;
 import com.boan.crm.utils.action.BaseActionSupport;
 import com.boan.crm.utils.page.Pagination;
 
-@Controller("monthlyItemInfoAction")
+@Controller("weeklyItemInfoAction")
 @Scope("prototype")
-public class MonthlyItemInfoAction extends BaseActionSupport{
+public class WeeklyItemInfoAction extends BaseActionSupport{
 
 
 	@Autowired
@@ -27,8 +27,8 @@ public class MonthlyItemInfoAction extends BaseActionSupport{
 	private ISellDutyService sellDutyService = null;
 	
 	@Autowired
-	@Qualifier("monthlyItemInfoService")
-	private IMonthlyItemInfoService monthlyItemInfoService = null;
+	@Qualifier("weeklyItemInfoService")
+	private IWeeklyItemInfoService weeklyItemInfoService = null;
 	
 	/**
 	 * 职责类型
@@ -36,14 +36,14 @@ public class MonthlyItemInfoAction extends BaseActionSupport{
 	private List<SellDuty> sellDutyList = new ArrayList<SellDuty>();
 	
 	/**
-	 * 月计划子信息
+	 * 周计划子信息
 	 */
-	private MonthlyItemInfo monthlyItemInfo;
+	private WeeklyItemInfo weeklyItemInfo;
 	
 	/**
 	 * 分页对象
 	 */
-	private Pagination<MonthlyItemInfo> pagination = new Pagination<MonthlyItemInfo>();
+	private Pagination<WeeklyItemInfo> pagination = new Pagination<WeeklyItemInfo>();
 	
 	/**
 	 * 主信息Id
@@ -60,56 +60,56 @@ public class MonthlyItemInfoAction extends BaseActionSupport{
 	 */
 	private String message;
 	
-	public String openMonthlyItemList(){
+	public String openWeeklyItemList(){
 		Map param = new HashMap();
 		if(mainInfoId!=null && !mainInfoId.equals("")){
 			param.put("mainInfoId",mainInfoId);
 		}
-		monthlyItemInfoService.findMonthlyItemInfoForPage(param,pagination);
+		weeklyItemInfoService.findWeeklyItemInfoForPage(param,pagination);
 		pagination.setTotalPages(100);
 		return this.SUCCESS;
 	}
 
-	public String openAddMonthlyItem(){
+	public String openAddWeeklyItem(){
 		sellDutyList = sellDutyService.findAllSellDutyByCompanyId(this.sessionCompanyId);
 		return this.SUCCESS;
 	}
 	
-	public String openModifyMonthlyItem(){
-		monthlyItemInfo= monthlyItemInfoService.getMonthlyItemInfoById(monthlyItemInfo.getId());
+	public String openModifyWeeklyItem(){
+		weeklyItemInfo= weeklyItemInfoService.getWeeklyItemInfoById(weeklyItemInfo.getId());
 		
 		sellDutyList = sellDutyService.findAllSellDutyByCompanyId(this.sessionCompanyId);
 		return this.SUCCESS;
 	}
 	
-	public String addMonthlyItem(){
+	public String addWeeklyItem(){
 		
-		if(monthlyItemInfo.getId()!=null && monthlyItemInfo.getId().equals("")){
-			monthlyItemInfo.setId(null);
+		if(weeklyItemInfo.getId()!=null && weeklyItemInfo.getId().equals("")){
+			weeklyItemInfo.setId(null);
 		}
-		monthlyItemInfoService.saveOrUpdateMonthlyItemInfo(monthlyItemInfo);
+		weeklyItemInfoService.saveOrUpdateWeeklyItemInfo(weeklyItemInfo);
 		sellDutyList = sellDutyService.findAllSellDutyByCompanyId(this.sessionCompanyId);
 		message="保存成功！";
 		return this.SUCCESS;
 	}
 	
-	public String modifyMonthlyItem(){
-		monthlyItemInfoService.saveOrUpdateMonthlyItemInfo(monthlyItemInfo);
+	public String modifyWeeklyItem(){
+		weeklyItemInfoService.saveOrUpdateWeeklyItemInfo(weeklyItemInfo);
 		sellDutyList = sellDutyService.findAllSellDutyByCompanyId(this.sessionCompanyId);
 		message="保存成功！";
 		return this.SUCCESS;
 	}
-	public String deleteMonthlyItem(){
-		monthlyItemInfoService.deleteMonthlyItemInfoByIds(ids);
+	public String deleteWeeklyItem(){
+		weeklyItemInfoService.deleteWeeklyItemInfoByIds(ids);
 		return this.NONE;
 	}
 	
-	public MonthlyItemInfo getMonthlyItemInfo() {
-		return monthlyItemInfo;
+	public WeeklyItemInfo getWeeklyItemInfo() {
+		return weeklyItemInfo;
 	}
 
-	public void setMonthlyItemInfo(MonthlyItemInfo monthlyItemInfo) {
-		this.monthlyItemInfo = monthlyItemInfo;
+	public void setWeeklyItemInfo(WeeklyItemInfo weeklyItemInfo) {
+		this.weeklyItemInfo = weeklyItemInfo;
 	}
 
 	public List<SellDuty> getSellDutyList() {
@@ -136,11 +136,11 @@ public class MonthlyItemInfoAction extends BaseActionSupport{
 		this.ids = ids;
 	}
 
-	public Pagination<MonthlyItemInfo> getPagination() {
+	public Pagination<WeeklyItemInfo> getPagination() {
 		return pagination;
 	}
 
-	public void setPagination(Pagination<MonthlyItemInfo> pagination) {
+	public void setPagination(Pagination<WeeklyItemInfo> pagination) {
 		this.pagination = pagination;
 	}
 

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<!--  周计划子项Action -->
+	<package name="weekly_item_info" extends="struts-default" namespace="/">
+		<action name="openWeeklyItemListAction" class="weeklyItemInfoAction" method="openWeeklyItemList">
+			<result name="success">/sellreport/weekly/weeklyiteminfolist.jsp</result>
+			<result name="input">/sellreport/weekly/weeklyiteminfolist.jsp</result>
+		</action>
+		<action name="openAddWeeklyItemAction" class="weeklyItemInfoAction" method="openAddWeeklyItem">
+			<result name="success">/sellreport/weekly/weeklyiteminfoadd.jsp</result>
+			<result name="input">/sellreport/weekly/weeklyiteminfoadd.jsp</result>
+		</action>
+		<action name="openModifyWeeklyItemAction" class="weeklyItemInfoAction" method="openModifyWeeklyItem">
+			<result name="success">/sellreport/weekly/weeklyiteminfoadd.jsp</result>
+			<result name="input">/sellreport/weekly/weeklyiteminfoadd.jsp</result>
+		</action>
+		<action name="addWeeklyItemAction" class="weeklyItemInfoAction" method="addWeeklyItem">
+			<result name="success">/sellreport/weekly/weeklyiteminfoadd.jsp</result>
+			<result name="input">/sellreport/weekly/weeklyiteminfoadd.jsp</result>
+		</action>
+		<action name="modifyWeeklyItemAction" class="weeklyItemInfoAction" method="modifyWeeklyItem">
+			<result name="success">/sellreport/weekly/weeklyiteminfoadd.jsp</result>
+			<result name="input">/sellreport/weekly/weeklyiteminfoadd.jsp</result>
+		</action>
+		<action name="deleteWeeklyItemAction" class="weeklyItemInfoAction" method="deleteWeeklyItem"/>
+	</package>
+</struts>

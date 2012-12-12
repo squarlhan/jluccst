@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<!--  周计划主信息Action -->
+	<package name="weekly_main_info" extends="struts-default" namespace="/">
+		<action name="showGroupTreeForWeeklyMainInfoAction" class="weeklyMainInfoAction"  method="showGroupTreeForWeeklyMainInfo">
+			<result name="group-tree-for-weekly-main-info">/sellreport/weekly/group-tree-for-weekly-main-info.jsp</result>
+		</action>
+	
+		<action name="openWeeklyMainInfoListAction" class="weeklyMainInfoAction" method="openWeeklyMainInfoList">
+			<result name="success">/sellreport/weekly/weeklymaininfolist.jsp</result>
+			<result name="input">/sellreport/weekly/weeklymaininfolist.jsp</result>
+		</action>
+		<action name="openWeeklyTabPageAction" class="weeklyMainInfoAction" method="openTabPage">
+			<result name="success">/sellreport/weekly/weeklytab.jsp</result>
+			<result name="input">/sellreport/weekly/weeklytab.jsp</result>
+		</action>
+		<action name="openAddWeeklyMainInfoAction" class="weeklyMainInfoAction" method="openAddWeeklyMainInfo">
+			<result name="success">/sellreport/weekly/weeklymaininfoadd.jsp</result>
+			<result name="input">/sellreport/weekly/weeklymaininfoadd.jsp</result>
+		</action>
+		<action name="openModifyWeeklyMainInfoAction" class="weeklyMainInfoAction" method="openModifyWeeklyMainInfo">
+			<result name="success">/sellreport/weekly/weeklymaininfoadd.jsp</result>
+			<result name="input">/sellreport/weekly/weeklymaininfoadd.jsp</result>
+		</action>
+		<action name="addWeeklyMainInfoAction" class="weeklyMainInfoAction" method="addWeeklyMainInfo">
+			<result name="success">/sellreport/weekly/weeklymaininfoadd.jsp</result>
+			<result name="input">/sellreport/weekly/weeklymaininfoadd.jsp</result>
+		</action>
+		<action name="modifyWeeklyMainInfoAction" class="weeklyMainInfoAction" method="modifyWeeklyMainInfo">
+			<result name="success">/sellreport/weekly/weeklymaininfoadd.jsp</result>
+			<result name="input">/sellreport/weekly/weeklymaininfoadd.jsp</result>
+		</action>
+		<action name="deleteWeeklyMainInfoAction" class="weeklyMainInfoAction" method="deleteWeeklyMainInfo"/>
+	</package>
+</struts>
