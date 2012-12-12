@@ -93,7 +93,7 @@ public class ContractPersonServiceImpl implements IContractPersonService {
 //				values.put("phone", "'%"+phone+"%'");
 //			}
 //		}
-		values.put("phone", "'%"+phone+"%'");
+		values.put("phone", "%"+phone+"%");
 		List<String> list = contractPersonDao.find(hql, values);
 		if(list != null && list.size() > 0)
 		{
