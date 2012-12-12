@@ -35,8 +35,8 @@
 <script type="text/javascript">
 <!--
 	$(document).ready(function() {
-		$("#tt").css("width",$("#groupmain",parent.document).width());
-		$("#tt").css("height",$("#groupmain",parent.document).height());
+		$("#tt").css("width","760px");
+		$("#tt").css("height","373px");
 		$("#tt").tabs();
 	});
 //-->
@@ -47,7 +47,7 @@
 <div id="tt" class="tabs-container" style="width:100%">
 	<div title="基本信息"
 		style="padding: 1px; display: none;">
-		<iframe scrolling="auto" frameborder="0" style="width:100%; height:450px"
+		<iframe scrolling="auto" frameborder="0" scrolling="auto" style="width:100%; height:100%"
 			src="inCustomerInfoFromTel.action?id=<s:property value='id'/>"></iframe>
 	</div>
 	<s:if test='id!=null && id.length() > 0'>
@@ -69,7 +69,7 @@
 	<div title="服务记录"
 		style="padding: 1px; display: none;">
 		<iframe scrolling="auto" frameborder="0" style="width:100%; height:100%"
-			src="about:blank" url="../service/serviceloglist.action?companyId=<s:property value='id'/>"></iframe>
+			src="about:blank" url="../service/serviceloglistbytel.action?companyId=<s:property value='id'/>"></iframe>
 	</div>
 	</s:if>
 </div>
