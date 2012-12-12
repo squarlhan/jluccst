@@ -115,6 +115,10 @@
 								</td>
 								<td align="center"
 									background="<%=path%>/images/headerbg.jpg">
+									<strong>数值型</strong>
+								</td>
+								<td align="center"
+									background="<%=path%>/images/headerbg.jpg">
 									<strong>职责类型</strong>
 								</td>
 								<td align="center"
@@ -134,6 +138,10 @@
 									</td>
 									<td height="26" align="center" bgcolor="#FFFFFF">
 										<span class="showInfo" tid="<s:property value='id' />"><s:property value="name" /></span>
+										&nbsp;
+									</td>
+									<td height="26" align="center" bgcolor="#FFFFFF">
+										<span class="showInfo" tid="<s:property value=' id' />"><s:property value="numberType?'是':'否'" /></span>
 										&nbsp;
 									</td>
 									<td height="26" align="center" bgcolor="#FFFFFF">
