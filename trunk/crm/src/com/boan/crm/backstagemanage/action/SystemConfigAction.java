@@ -51,6 +51,33 @@ public class SystemConfigAction extends BaseActionSupport {
 		}
 		return SUCCESS;
 	}
+	/**
+	 * 初始化数据
+	 * 
+	 * @return
+	 */
+	public String clearPartData() throws Exception {
+		try {
+			// 保留数据的表
+			List<String> list = new ArrayList<String>();
+			list.add("area_info");
+			list.add("city_info");
+			list.add("province_info");
+			//保留数据的表含前缀
+			List<String> preList = new ArrayList<String>();
+			preList.add("contract_person_");
+			preList.add("customer_lib_info_for_");
+			service.deleteTableDataExceptTables(list,preList);
+			// 录数初始化数据
+			service.saveInitTableData(sqls);
+			// 消息
+			message = "数据库清理成功，保留数据的表有:" +list.toString()+" 和以"+ preList.toString() +"开头的表。";
+		} catch (Exception e) {
+			message = e.getMessage();
+			e.printStackTrace();
+		}
+		return SUCCESS;
+	}
 
 	/**
 	 * 显示页面
