@@ -33,4 +33,33 @@ public class SystemConfigDaoImpl extends BaseDao<Object, String> implements ISys
 			}
 		}
 	}
+
+	@Override
+	public void deleteTableDataExceptTables(List<String> tableList, List<String> preRules) throws Exception {
+		String sql = "show TABLES;";
+		List<String> list = super.findAllBySQL(sql, null);
+		if (list != null && list.size() > 0) {
+			String tableName = null;
+			for (int i = 0; i < list.size(); i++) {
+				tableName = (String) list.get(i);
+				// 判断表名
+				if (!tableList.contains(tableName)) {
+					// 判断前缀
+					boolean truncateFlag = true;
+					if (preRules != null && preRules.size() > 0) {
+						for (int k = 0; k < preRules.size(); k++) {
+							if (tableName.startsWith(preRules.get(k))) {
+								truncateFlag = false;
+								break;
+							}
+						}
+						if (truncateFlag) {
+							sql = "truncate table " + tableName + ";";
+							super.executeSql(sql, null);
+						}
+					}
+				}
+			}
+		}
+	}
 }
