@@ -49,14 +49,13 @@
 		  	 * 准备工作
 		  	 */
 			$(document).ready(function(){
+				parent.$("#mainInfoId").val($("#hid_Id").val());
 				if($("#hid_message").val()!="" && $("#hid_Id").val()!=null){
 					alert($("#hid_message").val());
-					parent.$("#mainInfoId").val($("#hid_Id").val());
 					var url = parent.$("#iframe2").attr("url");
-					alert(url);
 					url = url+"?mainInfoId="+$("#hid_Id").val();
-					alert(url);
 					parent.$("#iframe2").attr("url",url);
+					parent.$.fn.showOrHideTab(1,true);
 				}
 		  		//日期控件
 				$('#txt_planInterzone_begin').datetimepicker({showTimepicker: false});

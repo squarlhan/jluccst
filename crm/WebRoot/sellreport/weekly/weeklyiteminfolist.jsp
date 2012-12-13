@@ -56,7 +56,7 @@
 			
 			$("#addbtn").click(function(){
 				var mainInfoId = parent.$("#mainInfoId").val();
-				parent.tipsWindown("添加计划明细","iframe:openAddWeeklyItemAction.action?weeklyItemInfo.mainInfoId="+mainInfoId,"750","450","true","","true","no");
+				parent.tipsWindown("添加计划明细","iframe:openAddWeeklyItemAction.action?weeklyItemInfo.mainInfoId="+mainInfoId,"780","450","true","","true","no");
 				parent.$("#windown-close").bind('click',function(){
 					window.location.href="./openWeeklyItemListAction.action?mainInfoId="+mainInfoId;
 				});
@@ -72,7 +72,7 @@
 	  			$(this).click(function(){
 	  				var url = $(this).attr("url");
 	  				var mainInfoId = $("#mainInfoId").val();
-	  				parent.tipsWindown("修改计划明细","iframe:"+url,"750","450","true","","true","no");
+	  				parent.tipsWindown("修改计划明细","iframe:"+url,"780","450","true","","true","no");
 	  				parent.$("#windown-close").bind('click',function(){
 						window.location.href="./openWeeklyItemListAction.action?mainInfoId="+mainInfoId;
 					});
@@ -88,6 +88,17 @@
 	  				if(window.confirm("您确定要删除这条信息吗？")){
 	  					$.post(url, "", function(data){window.location.href=window.location.href;});
 	  				}
+	  			});
+	  		});
+	  		
+	  		/**
+	  		 * 统计
+	  		 */
+	  		$('a[name="stat"]').each(function(){
+	  			$(this).click(function(){
+	  				//var url = $(this).attr("url");
+	  				var url ="";
+	  				parent.tipsWindown("查看统计","iframe:"+url,"780","450","true","","true","no");
 	  			});
 	  		});
 	  		
@@ -130,7 +141,14 @@
         <td height="26" align="center" bgcolor="#FFFFFF" >  
         	<s:checkbox id="%{#obj.id}" name="ids" fieldValue="%{id}" value="false" theme="simple"/>
 		</td>
-              <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="sellDutyName"/></td>
+              <td height="26" align="left" bgcolor="#FFFFFF">
+              	<s:if test="sellTarget==null || sellTarget==''">
+              		<s:property value="sellDutyName"/>
+              	</s:if>
+              	<s:else>
+              		<s:property value="sellDutyName"/>：<s:property value="sellTarget"/> 元
+              	</s:else>
+              </td>
               <td height="26" align="center" bgcolor="#FFFFFF"  nowrap="nowrap"><s:property value="executeMoney"/></td>
               <td height="26" align="center" bgcolor="#FFFFFF">
               	<s:property value="superiorResult"/>
@@ -144,8 +162,12 @@
 			<s:url id="delete_url" action="deleteWeeklyItemAction">   
 				<s:param name="ids" value="id"></s:param>   
 			</s:url>
+			<s:url id="stat_url" action="about:blank">   
+				<s:param name="ids" value="id"></s:param>   
+			</s:url>
          	<a name="edit" href="javascript:void(0);" url="${edit_url}">编辑</a>  
          	<a name="delete" href="javascript:void(0);" url="${delete_url}">删除</a>
+         	<a name="stat" href="javascript:void(0);" url="${stat_url}">查看统计</a>
           </td>
         </tr>
         </s:iterator>        
