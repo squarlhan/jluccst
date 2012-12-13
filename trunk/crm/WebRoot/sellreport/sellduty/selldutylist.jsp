@@ -115,11 +115,11 @@
 								</td>
 								<td align="center"
 									background="<%=path%>/images/headerbg.jpg">
-									<strong>数值型</strong>
+									<strong>职责类型</strong>
 								</td>
 								<td align="center"
 									background="<%=path%>/images/headerbg.jpg">
-									<strong>职责类型</strong>
+									<strong>销售额</strong>
 								</td>
 								<td align="center"
 									background="<%=path%>/images/headerbg.jpg">
@@ -141,18 +141,22 @@
 										&nbsp;
 									</td>
 									<td height="26" align="center" bgcolor="#FFFFFF">
-										<span class="showInfo" tid="<s:property value=' id' />"><s:property value="numberType?'是':'否'" /></span>
+										<span class="showInfo" tid="<s:property value='id' />">
+										<s:if test="dutyType==0">
+											<font color="green">
+												周报/周计划
+											</font>
+										</s:if>
+										<s:else>
+											<font color="orange">
+											月报/月计划
+											</font>
+										</s:else>
+										</span>
 										&nbsp;
 									</td>
 									<td height="26" align="center" bgcolor="#FFFFFF">
-										<span class="showInfo" tid="<s:property value='id' />">
-										<s:if test="dutyType==0">
-											周报/周计划
-										</s:if>
-										<s:else>
-											月报/月计划
-										</s:else>
-										</span>
+										<span class="showInfo" tid="<s:property value=' id' />"><s:property value="numberType?'是':'否'" /></span>
 										&nbsp;
 									</td>
 									<td height="26" align="center" bgcolor="#FFFFFF">

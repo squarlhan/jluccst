@@ -127,8 +127,8 @@
 											</td>
 											<td height="26" align="left" bgcolor="#FFFFFF">
 												<s:textfield id="name" name="sellDuty.name"
-													maxlength="25" cssStyle="width: 230px;"></s:textfield> 数值型
-													<s:checkbox id="chk_numberType"  name="sellDuty.numberType" fieldvalue="true"  title="数值型表示是销售额" ></s:checkbox>
+													maxlength="25" cssStyle="width: 230px;"></s:textfield> 销售额
+													<s:checkbox id="chk_numberType"  name="sellDuty.numberType" fieldvalue="true"  title="选中表示是销售额" ></s:checkbox>
 												<font color="red">*</font>
 											</td>
 										</tr>
