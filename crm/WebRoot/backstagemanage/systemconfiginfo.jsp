@@ -50,10 +50,11 @@
 		    	}
 			})
 			$.fn.save();
+			$.fn.clearpart();
 			$.fn.initpage();
 	  	});
 		/**
-	  	 * 保存
+	  	 * 清理数据
 	  	 */
 		$.fn.save = function(){
 			$("#addBtn").click(function() {
@@ -61,6 +62,19 @@
 					$("#tdmsg").html("数据库正在初始化，请稍候……");
 					$("#addBtn").attr("disabled",true);
 					form1.action = "systemConfigAction!initSystemData.action";
+               		form1.submit();
+				}
+      		});
+      	}
+		/**
+		 * 清理部分表
+		 */
+		$.fn.clearpart = function(){
+			$("#clearBtn").click(function() {
+				if( confirm("该操作将保留数据库中部分表数据，\n\n确定要进行此操作吗？") ){
+					$("#tdmsg").html("数据库正在清理部分表的数据，请稍候……");
+					$("#clearBtn").attr("disabled",true);
+					form1.action = "systemConfigAction!clearPartData.action";
                		form1.submit();
 				}
       		});
@@ -99,6 +113,8 @@
 									<tr>
 										<td height="50" colspan="2" align="center" bgcolor="#FFFFFF">
 											<input name="addBtn" type="button" class="btn_5" id="addBtn" value="初始化数据库">
+											&nbsp;&nbsp;
+											<input name="clearBtn" type="button" class="btn_5" id="clearBtn" value="清理部分表">
 											<!-- 
 											&nbsp;&nbsp;
 											<input name="closeBtn" type="button" class="btn_5" id="closeBtn" value="录入客户数据">
