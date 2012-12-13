@@ -57,7 +57,7 @@ public class SellDuty implements Serializable {
 	private int dutyType;
 	
 	/**
-	 * 是否是数字类型，0：不是数字类型  1：是数字类型
+	 * 是否是数字类型，0：不是销售额类型  1：是销售额类型
 	 */
 	@Column(name = "NUMBER_TYPE" ,nullable=false,columnDefinition="int default 0")
 	private boolean numberType=false;
