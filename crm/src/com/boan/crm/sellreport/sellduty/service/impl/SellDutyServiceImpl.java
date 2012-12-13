@@ -88,7 +88,7 @@ public class SellDutyServiceImpl implements ISellDutyService {
 		StringBuffer strb = new StringBuffer( " where companyId=:companyId");
 		Map<String, String> param = new HashMap<String, String>();
 		param.put("companyId", companyId);
-		String hql = "from SellDuty "+strb.toString()+"dutyType="+dutyType+" order by dutyType asc,createTime desc ";
+		String hql = "from SellDuty "+strb.toString()+" and dutyType="+dutyType+" order by numberType desc,createTime desc ";
 		List<SellDuty> data = sellDutyDao.find(hql, param);
 		return data;
 	}
