@@ -56,7 +56,7 @@ public class SellDutyServiceImpl implements ISellDutyService {
 		StringBuffer strb = new StringBuffer( " where 1=1 ");
 		if(values!=null){
 			if(values.containsKey("companyId")){
-				strb.append(" companyId=:companyId  ");
+				strb.append(" and companyId=:companyId  ");
 			}
 		}
 		String hql = "from SellDuty "+strb.toString()+" order by createTime desc , dutyType asc";
