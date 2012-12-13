@@ -71,14 +71,14 @@ public class MonthlyItemInfoAction extends BaseActionSupport{
 	}
 
 	public String openAddMonthlyItem(){
-		sellDutyList = sellDutyService.findAllSellDutyByCompanyId(this.sessionCompanyId);
+		sellDutyList = sellDutyService.findAllSellDutyByCompanyIdAndDutyType(this.sessionCompanyId,1);
 		return this.SUCCESS;
 	}
 	
 	public String openModifyMonthlyItem(){
 		monthlyItemInfo= monthlyItemInfoService.getMonthlyItemInfoById(monthlyItemInfo.getId());
 		
-		sellDutyList = sellDutyService.findAllSellDutyByCompanyId(this.sessionCompanyId);
+		sellDutyList = sellDutyService.findAllSellDutyByCompanyIdAndDutyType(this.sessionCompanyId,1);
 		return this.SUCCESS;
 	}
 	
@@ -88,14 +88,14 @@ public class MonthlyItemInfoAction extends BaseActionSupport{
 			monthlyItemInfo.setId(null);
 		}
 		monthlyItemInfoService.saveOrUpdateMonthlyItemInfo(monthlyItemInfo);
-		sellDutyList = sellDutyService.findAllSellDutyByCompanyId(this.sessionCompanyId);
+		sellDutyList = sellDutyService.findAllSellDutyByCompanyIdAndDutyType(this.sessionCompanyId,1);
 		message="保存成功！";
 		return this.SUCCESS;
 	}
 	
 	public String modifyMonthlyItem(){
 		monthlyItemInfoService.saveOrUpdateMonthlyItemInfo(monthlyItemInfo);
-		sellDutyList = sellDutyService.findAllSellDutyByCompanyId(this.sessionCompanyId);
+		sellDutyList = sellDutyService.findAllSellDutyByCompanyIdAndDutyType(this.sessionCompanyId,1);
 		message="保存成功！";
 		return this.SUCCESS;
 	}
