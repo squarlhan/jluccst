@@ -59,7 +59,7 @@ public class SellDutyServiceImpl implements ISellDutyService {
 				strb.append(" and companyId=:companyId  ");
 			}
 		}
-		String hql = "from SellDuty "+strb.toString()+" order by createTime desc , dutyType asc";
+		String hql = "from SellDuty "+strb.toString()+" order by dutyType asc,createTime desc ";
 		List<SellDuty> data = sellDutyDao.findForPage(hql, values, pagination.getStartIndex(), pagination.getPageSize());
 		hql = "select count(*) from SellDuty" +strb.toString();
 		int totalRows = sellDutyDao.findCountForPage(hql, values);
@@ -76,8 +76,71 @@ public class SellDutyServiceImpl implements ISellDutyService {
 		StringBuffer strb = new StringBuffer( " where companyId=:companyId");
 		Map<String, String> param = new HashMap<String, String>();
 		param.put("companyId", companyId);
-		String hql = "from SellDuty "+strb.toString()+" order by createTime desc , dutyType asc";
+		String hql = "from SellDuty "+strb.toString()+" order by dutyType asc,createTime desc ";
 		List<SellDuty> data = sellDutyDao.find(hql, param);
 		return data;
+	}
+	
+	/**
+	 * 判断同一公司是否已经有同名的销售职责了
+	 */
+	public boolean isExistSameName(String sellDutyName,String id , String companyId ,String dutyType){
+		
+		StringBuffer strb = new StringBuffer( " where 1=1 ");
+		Map<String, String> param = new HashMap<String, String>();
+		param.put("name", sellDutyName);
+		strb.append(" and name=:name");
+		if(companyId!=null){
+			param.put("companyId", companyId);
+			strb.append(" and companyId=:companyId");
+		}
+		
+		strb.append(" and dutyType="+dutyType );
+
+		String hql = "select id from SellDuty "+strb.toString()+"";
+		List data = sellDutyDao.find(hql, param);
+		if(data!=null && data.size()>0){
+			String temp = data.get(0).toString();
+			if(temp==null){
+				return false;//不存在
+			}else{
+				if(id==null || id.equals("")){
+					return true;
+				}
+				if(temp.equals(id)){
+					return false;
+				}
+			}
+			temp=null;
+		}
+		return false;
+	}
+	
+	/**
+	 * 判断是否已经有销售额类型的职责名称了
+	 */
+	public boolean hasSellTargetName(String companyId ,String dutyType){
+		
+		StringBuffer strb = new StringBuffer( " where 1=1 ");
+		Map<String, String> param = new HashMap<String, String>();
+		if(companyId!=null){
+			param.put("companyId", companyId);
+			strb.append(" and companyId=:companyId");
+		}
+		strb.append(" and dutyType="+dutyType);
+		param.put("numberType", "1");
+		strb.append(" and numberType=:numberType");
+		
+		String hql = "from SellDuty "+strb.toString()+" order by dutyType asc,createTime desc ";
+		List<SellDuty> data = sellDutyDao.find(hql, param);
+		if(data!=null && data.size()>0){
+			SellDuty temp = data.get(0);
+			if(temp==null){
+				return false;//不存在
+			}
+		}else{
+			return false;//不存在
+		}
+		return true;
 	}
 }

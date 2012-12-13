@@ -93,14 +93,18 @@ public class SellDutyAction extends BaseActionSupport{
 	 * 保存前验证
 	 */
 	public void validateAddSellDuty(){
-		if(sellDuty.isNumberType()){
-			String name = sellDuty.getName().trim();
-			try {
-				Double temp = Double.parseDouble(name);
-			} catch (NumberFormatException e) {
-				this.addFieldError("", "如果您数值型，请保证职责名称输入的是数字类型！");
-			}
+		boolean flag = sellDutyService.isExistSameName(sellDuty.getName(),sellDuty.getId(),this.sessionCompanyId,""+sellDuty.getDutyType());
+		if(flag){
+			this.addFieldError("", "相同职责类型下已经存在该职责名称，请重新输入！");
 		}
+//		if(sellDuty.isNumberType()){
+//			String name = sellDuty.getName().trim();
+//			try {
+//				Double temp = Double.parseDouble(name);
+//			} catch (NumberFormatException e) {
+//				this.addFieldError("", "如果您数值型，请保证职责名称输入的是数字类型！");
+//			}
+//		}
 	}
 	
 	/**
@@ -116,14 +120,18 @@ public class SellDutyAction extends BaseActionSupport{
 	 * 修改前验证
 	 */
 	public void validateModifySellDuty(){
-		if(sellDuty.isNumberType()){
-			String name = sellDuty.getName().trim();
-			try {
-				Double temp = Double.parseDouble(name);
-			} catch (NumberFormatException e) {
-				this.addFieldError("", "如果您数值型，请保证职责名称输入的是数字类型！");
-			}
+		boolean flag = sellDutyService.isExistSameName(sellDuty.getName(),sellDuty.getId(),this.sessionCompanyId,""+sellDuty.getDutyType());
+		if(flag){
+			this.addFieldError("", "相同职责类型下已经存在该职责名称，请重新输入！");
 		}
+//		if(sellDuty.isNumberType()){
+//			String name = sellDuty.getName().trim();
+//			try {
+//				Double temp = Double.parseDouble(name);
+//			} catch (NumberFormatException e) {
+//				this.addFieldError("", "如果您数值型，请保证职责名称输入的是数字类型！");
+//			}
+//		}
 	}
 	
 	/**
