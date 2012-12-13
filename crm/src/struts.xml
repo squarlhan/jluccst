@@ -64,4 +64,8 @@
 	<include file="com/boan/crm/sellreport/monthly/action/struts_monthly_main.xml"></include>
 	<!--销售月计划子信息-->
 	<include file="com/boan/crm/sellreport/monthly/action/struts_monthly_item.xml"></include>
+	<!--销售周计划主信息-->
+	<include file="com/boan/crm/sellreport/weekly/action/struts_weekly_main.xml"></include>
+	<!--销售周计划子信息-->
+	<include file="com/boan/crm/sellreport/weekly/action/struts_weekly_item.xml"></include>
 </struts>
