@@ -80,11 +80,23 @@ public class SellDutyServiceImpl implements ISellDutyService {
 		List<SellDuty> data = sellDutyDao.find(hql, param);
 		return data;
 	}
+	/**
+	 * 查询本公司下指定职责类型的所有销售职责
+	 */
+	public List<SellDuty> findAllSellDutyByCompanyIdAndDutyType(String companyId ,int dutyType){
+		
+		StringBuffer strb = new StringBuffer( " where companyId=:companyId");
+		Map<String, String> param = new HashMap<String, String>();
+		param.put("companyId", companyId);
+		String hql = "from SellDuty "+strb.toString()+"dutyType="+dutyType+" order by dutyType asc,createTime desc ";
+		List<SellDuty> data = sellDutyDao.find(hql, param);
+		return data;
+	}
 	
 	/**
 	 * 判断同一公司是否已经有同名的销售职责了
 	 */
-	public boolean isExistSameName(String sellDutyName,String id , String companyId ,String dutyType){
+	public boolean isExistSameName(String sellDutyName,String id , String companyId ,int dutyType){
 		
 		StringBuffer strb = new StringBuffer( " where 1=1 ");
 		Map<String, String> param = new HashMap<String, String>();

@@ -43,5 +43,10 @@ public interface ISellDutyService {
 	/**
 	 * 判断同一公司是否已经有同名的销售职责了
 	 */
-	public boolean isExistSameName(String sellDutyName,String id , String companyId ,String dutyType);
+	public boolean isExistSameName(String sellDutyName,String id , String companyId ,int dutyType);
+	
+	/**
+	 * 查询本公司下指定职责类型的所有销售职责
+	 */
+	public List<SellDuty> findAllSellDutyByCompanyIdAndDutyType(String companyId ,int dutyType);
 }
