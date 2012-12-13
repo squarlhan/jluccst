@@ -71,14 +71,14 @@ public class WeeklyItemInfoAction extends BaseActionSupport{
 	}
 
 	public String openAddWeeklyItem(){
-		sellDutyList = sellDutyService.findAllSellDutyByCompanyId(this.sessionCompanyId);
+		sellDutyList = sellDutyService.findAllSellDutyByCompanyIdAndDutyType(this.sessionCompanyId,0);
 		return this.SUCCESS;
 	}
 	
 	public String openModifyWeeklyItem(){
 		weeklyItemInfo= weeklyItemInfoService.getWeeklyItemInfoById(weeklyItemInfo.getId());
 		
-		sellDutyList = sellDutyService.findAllSellDutyByCompanyId(this.sessionCompanyId);
+		sellDutyList = sellDutyService.findAllSellDutyByCompanyIdAndDutyType(this.sessionCompanyId,0);
 		return this.SUCCESS;
 	}
 	
@@ -88,14 +88,14 @@ public class WeeklyItemInfoAction extends BaseActionSupport{
 			weeklyItemInfo.setId(null);
 		}
 		weeklyItemInfoService.saveOrUpdateWeeklyItemInfo(weeklyItemInfo);
-		sellDutyList = sellDutyService.findAllSellDutyByCompanyId(this.sessionCompanyId);
+		sellDutyList = sellDutyService.findAllSellDutyByCompanyIdAndDutyType(this.sessionCompanyId,0);
 		message="保存成功！";
 		return this.SUCCESS;
 	}
 	
 	public String modifyWeeklyItem(){
 		weeklyItemInfoService.saveOrUpdateWeeklyItemInfo(weeklyItemInfo);
-		sellDutyList = sellDutyService.findAllSellDutyByCompanyId(this.sessionCompanyId);
+		sellDutyList = sellDutyService.findAllSellDutyByCompanyIdAndDutyType(this.sessionCompanyId,0);
 		message="保存成功！";
 		return this.SUCCESS;
 	}

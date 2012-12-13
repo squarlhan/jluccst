@@ -39,6 +39,12 @@ public class MonthlyItemInfo implements Serializable {
 	private String sellDutyName;
 	
 	/**
+	 * 销售额
+	 */
+	@Column(name = "SELL_TARGET" , length = 50)
+	private String sellTarget;
+	
+	/**
 	 * KPI
 	 */
 	@Column(name = "KPI" , length = 50)
@@ -316,5 +322,13 @@ public class MonthlyItemInfo implements Serializable {
 
 	public void setMemo(String memo) {
 		this.memo = memo;
+	}
+
+	public String getSellTarget() {
+		return sellTarget;
+	}
+
+	public void setSellTarget(String sellTarget) {
+		this.sellTarget = sellTarget;
 	}
 }
