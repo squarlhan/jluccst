@@ -43,6 +43,17 @@
 				rules: {
 					"monthlyItemInfo.sellDutyId":{required:true,strangecode:true},
 					"monthlyItemInfo.monthResult":{required:true,strangecode:false}
+				},messages:{
+					"weeklyItemInfo.sellDutyId":
+					{
+					    required:"请选择职责类型！",
+					    strangecode:"职责类型包含特殊字符！"
+					},
+					"weeklyItemInfo.monthResult":
+					{
+					    required:"结果定义为必填项！",
+					    strangecode:"结果定义中包含特殊字符！"
+					}
 				}
 			};
 			/**
@@ -67,6 +78,20 @@
 				});
 				$.fn.save();
 		  		$.fn.close();
+		  		
+		  		//选中职责事件
+		  		$("#sel_sellDuty").change(function(){
+		  			var  dutyId= $("#sel_sellDuty option:selected").val();
+		  			if($("#hid_idNumberTypeId").length!=0 && $("#hid_idNumberTypeId").val()==dutyId){
+		  				if($("#mydiv").length==0){
+		  					$("#myspan").append('<span id="mydiv"><strong>额度：</strong><input type="text" name="weeklyMainInfo.sellTarget" maxlength="25" value="" id="txt_sellTarget" style="width: 160px;"/>元</span>');
+		  				}else{
+		  					$("#mydiv").show();
+		  				}
+		  			}else{
+		  				$("#mydiv").remove();
+		  			}
+		  		});
 		  	});
 			/**
 		  	 * 保存
@@ -113,30 +138,35 @@
 		<s:hidden id="hid_mainInfoId" name="monthlyItemInfo.mainInfoId"></s:hidden>
 		<s:hidden id="hid_sequence" name="monthlyItemInfo.sequence"></s:hidden>
 		<s:hidden id="hid_sellDutyName" name="monthlyItemInfo.sellDutyName"></s:hidden>
-		<fieldset >
-		<legend><span style="cursor:pointer;"><strong>职责信息</strong></span></legend>
+		
 			<table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#d5e4fd">
 				<tr>
-					<td height="26" align="left" bgcolor="#FFFFFF" width="80px" >
+					<td height="26" align="left" bgcolor="#FFFFFF" width="120px" nowrap="nowrap">
 						<strong>职责类型：</strong>
 					</td>
-					<td height="26" align="left" bgcolor="#FFFFFF" >
+					<td height="26" align="left" bgcolor="#FFFFFF"  colspan="4">
 						<s:select id="sel_sellDuty"   name="monthlyItemInfo.sellDutyId" list="sellDutyList"  listKey="id"  listValue="name"  cssStyle="width: 160px;" headerKey="" headerValue="----请选择---" ></s:select><font color="red">*</font>
+						 <span id="myspan">
+							<s:iterator value="sellDutyList" status="obj">
+								<s:if test="numberType==true">
+									<s:hidden id="hid_idNumberTypeId" name="id"></s:hidden>
+								</s:if>
+								<s:if test="id==monthlyItemInfo.sellDutyId &&  numberType==true">
+									<span id="mydiv"><strong>额度：</strong><s:textfield id="txt_sellTarget" name="monthlyItemInfo.sellTarget" cssStyle="width: 160px;" maxlength="25"></s:textfield>元</span>
+								</s:if>
+							</s:iterator>
+						</span>
 					</td>
 				</tr>
 				<tr>
 					<td height="26" align="left" bgcolor="#FFFFFF" width="80px" >
-						<strong>本月计划：</strong>
+						<strong>结果定义：</strong>
 					</td>
-					<td height="26" align="left" bgcolor="#FFFFFF" >
-						<s:textarea  id="txt_monthResult" name="monthlyItemInfo.monthResult" cssStyle="width: 610px;height:100px;resize:none;" maxlength="500"></s:textarea>
+					<td height="26" align="left" bgcolor="#FFFFFF" colspan="4">
+						<s:textarea  id="txt_monthResult" name="monthlyItemInfo.monthResult" cssStyle="width: 610px;height:100px;resize:none;" maxlength="500"></s:textarea><font color="red">*</font>
 					</td>
 				</tr>
-			</table>
-		</fieldset>
-		<fieldset >
-		<legend><span style="cursor:pointer;"><strong>过程结果</strong></span></legend>
-			<table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#d5e4fd" style="display:block;">
+
 				<tr>
 					<td height="26" align="left" bgcolor="#FFFFFF" width="80px" >
 						<strong>第一周：</strong>
@@ -144,7 +174,7 @@
 					<td height="26" align="left" bgcolor="#FFFFFF" >
 						<s:textarea  id="txt_firstWeek" name="monthlyItemInfo.firstWeek" cssStyle="width: 250px;height:50px;resize:none;" maxlength="500"></s:textarea>
 					</td>
-					<td height="26" align="left" bgcolor="#FFFFFF" width="80px" >
+					<td height="26" align="left" bgcolor="#FFFFFF" width="80px"  nowrap="nowrap">
 						<strong>第二周：</strong>
 					</td>
 					<td height="26" align="left" bgcolor="#FFFFFF" >
@@ -165,11 +195,6 @@
 						<s:textarea  id="txt_fourthWeek" name="monthlyItemInfo.fourthWeek" cssStyle="width: 250px;height:50px;resize:none;" maxlength="500"></s:textarea>
 					</td>
 				</tr>
-			</table>
-		</fieldset>
-		<fieldset>
-		<legend><span style="cursor:pointer;"><strong>直接领导</strong></span></legend>
-			<table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#d5e4fd" style="display:block;">
 				<tr>
 					<td height="26" align="left" bgcolor="#FFFFFF" width="80px" >
 						<strong>实际结果：</strong>
@@ -177,7 +202,7 @@
 					<td height="26" align="left" bgcolor="#FFFFFF" >
 						<s:textarea  id="txt_superiorResult" name="monthlyItemInfo.superiorResult" cssStyle="width: 250px;height:50px;resize:none;" maxlength="500"></s:textarea>
 					</td>
-					<td height="26" align="left" bgcolor="#FFFFFF" width="80px" >
+					<td height="26" align="left" bgcolor="#FFFFFF" width="80px" nowrap="nowrap">
 						<strong>实际得分：</strong>
 					</td>
 					<td height="26" align="left" bgcolor="#FFFFFF" >
@@ -198,12 +223,6 @@
 						<s:textarea  id="txt_superiorMethod" name="monthlyItemInfo.superiorMethod" cssStyle="width: 250px;height:50px;resize:none;" maxlength="500"></s:textarea>
 					</td>
 				</tr>
-			</table>
-		</fieldset>
-		
-		<fieldset >
-		<legend><span style="cursor:pointer;"><strong>绩效相关</strong></span></legend>
-			<table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#d5e4fd" style="display:block;">
 				<!-- 
 					<tr>
 						<td height="26" align="left" bgcolor="#FFFFFF" width="80px" >
@@ -248,16 +267,11 @@
 							<s:textfield id="txt_executeMoney" name="monthlyItemInfo.executeMoney" cssStyle="width: 250px;" maxlength="25"></s:textfield>
 						</td>
 					</tr>
-				</table>
-		</fieldset>
-		<fieldset>
-		<legend><span style="cursor:pointer;"><strong>总经理</strong></span></legend>
-			<table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#d5e4fd" style="display:block;">
 				<tr>
-					<td height="26" align="left" bgcolor="#FFFFFF" width="80px" >
+					<td height="26" align="left" bgcolor="#FFFFFF" width="80px"  >
 						<strong>下月目标：</strong>
 					</td>
-					<td height="26" align="left" bgcolor="#FFFFFF" >
+					<td height="26" align="left" bgcolor="#FFFFFF" colspan="4">
 						<s:textarea  id="txt_nextMonthlyResult" name="monthlyItemInfo.nextMonthlyResult" cssStyle="width: 610px;height:50px;resize:none;" maxlength="500"></s:textarea>
 					</td>
 				</tr>
@@ -265,12 +279,11 @@
 					<td height="26" align="left" bgcolor="#FFFFFF" width="80px" >
 						<strong>备注：</strong>
 					</td>
-					<td height="26" align="left" bgcolor="#FFFFFF" >
+					<td height="26" align="left" bgcolor="#FFFFFF" colspan="4">
 						<s:textarea  id="txt_memo" name="monthlyItemInfo.memo" cssStyle="width: 610px;height:50px;resize:none;" maxlength="500"></s:textarea>
 					</td>
 				</tr>
 			</table>
-		</fieldset>
 		<div align="center" style="height: 50px;vertical-align: middle;">
 			<input name="addBtn" type="button" class="btn_2_3" id="addBtn" value="保存">&nbsp;&nbsp;
 			<input name="closeBtn" type="button" class="btn_2_3" id="closeBtn" value="关闭">

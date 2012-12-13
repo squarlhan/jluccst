@@ -1,6 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib prefix="j" uri="/script-tags"%>
 <%@ taglib prefix="s" uri="/struts-tags" %>
+<%
+	String mainInfoId = request.getParameter("monthlyMainInfo.id");
+	String src="openAddMonthlyMainInfoAction.action";
+	if(mainInfoId!=null && !mainInfoId.equals("")){
+		mainInfoId = "?mainInfoId="+mainInfoId;
+		src="openModifyMonthlyMainInfoAction.action";
+	}else{
+		mainInfoId="";
+	}
+	src=src+mainInfoId;
+%>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -12,7 +23,30 @@
 		$("#tt").css("width",$("#groupmain",parent.document).width());
 		$("#tt").css("height",$("#groupmain",parent.document).height());
 		$("#tt").tabs();
+		<%
+			if(mainInfoId.equals("")){
+				%>
+				$.fn.showOrHideTab(1,false);
+				<%
+			}else{
+				%>
+				$.fn.showOrHideTab(1,true);
+				<%
+			}
+		%>
 	});
+	
+	$.fn.showOrHideTab = function (index,flag){
+		$(document).find(".tabs-inner").each(function(i,domEle){
+			if(index==i){
+				if(!flag){
+					$(domEle).hide();
+				}else{
+					$(domEle).show();
+				}
+			}
+		});	
+	};
 //-->
 </script>
 <style type="text/css">
@@ -29,17 +63,6 @@
 <!-- tab开始 -->
 <div id="tt" class="tabs-container">
 	<div title="月计划主信息"  style="padding: 1px; display: none;" id="main">
-		<%
-			String mainInfoId = request.getParameter("monthlyMainInfo.id");
-			String src="openAddMonthlyMainInfoAction.action";
-			if(mainInfoId!=null && !mainInfoId.equals("")){
-				mainInfoId = "?mainInfoId="+mainInfoId;
-				src="openModifyMonthlyMainInfoAction.action";
-			}else{
-				mainInfoId="";
-			}
-			src=src+mainInfoId;
-		%>
 		<iframe id="iframe1" scrolling="none" frameborder="0" style="width:100%; height:100%" src="<%=src %>" ></iframe>
 	</div>
 	<div title="月计划明细"  style="padding: 1px; display:none;" id="item">
