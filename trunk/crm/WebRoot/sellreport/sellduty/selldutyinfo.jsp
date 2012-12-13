@@ -109,7 +109,9 @@
 			<s:hidden id="sellDutyId" name="sellDuty.id"></s:hidden>
 			<s:hidden id="companyId" name="companyId"></s:hidden>
 			<s:hidden id="companyName" name="companyName"></s:hidden>
-			<s:hidden id="createTime" name="createTime"></s:hidden>
+			<s:hidden id="sellDutycompanyId" name="sellDuty.companyId"></s:hidden>
+			<s:hidden id="sellDutycompanyName" name="sellDuty.companyName"></s:hidden>
+			<s:hidden id="sellDutycreateTime" name="sellDuty.createTime"></s:hidden>
 			<table width="100%" border="0" cellspacing="5" cellpadding="0">
 				<tr>
 					<td>
