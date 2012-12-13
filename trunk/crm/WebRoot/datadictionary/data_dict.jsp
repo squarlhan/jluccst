@@ -67,7 +67,7 @@
 								  <!--a href="javascript: d.openAll();">展开</a> | <a href="javascript: d.closeAll();">关闭</a-->
 								  <script type="text/javascript">
 										<!--
-										d = new dTree('d','/crm');
+										d = new dTree('d','<%=path%>');
 										d.add(0,-1,'数据字典类别','','','Menu');
 										d.add(101,0,'客户分类','datadictionarylist.action?typeFlag=0','','groupmain');
 										d.add(102,0,'客户状态','datadictionarylist.action?typeFlag=1','','groupmain');
