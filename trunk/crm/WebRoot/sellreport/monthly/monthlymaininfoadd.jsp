@@ -49,12 +49,13 @@
 		  	 * 准备工作
 		  	 */
 			$(document).ready(function(){
+				parent.$("#mainInfoId").val($("#hid_Id").val());
 				if($("#hid_message").val()!="" && $("#hid_Id").val()!=null){
 					alert($("#hid_message").val());
-					parent.$("#mainInfoId").val($("#hid_Id").val());
 					var url = parent.$("#iframe2").attr("url");
 					url = url+"?mainInfoId="+$("#hid_Id").val();
 					parent.$("#iframe2").attr("url",url);
+					parent.$.fn.showOrHideTab(1,true);
 				}
 		  		//日期控件
 				$('#txt_planInterzone_begin').datetimepicker({showTimepicker: false});
@@ -176,7 +177,7 @@
 											<strong>下月部门战略重点：</strong>
 										</td>
 										<td height="26" align="left" bgcolor="#FFFFFF" colspan="8">
-											<s:textarea  id="txt_nextMonthKeystone" name="monthlyMainInfo.nextMonthKeystone" cssStyle="width: 510px;height:100px;resize:none;" maxlength="500"></s:textarea>
+											<s:textarea  id="txt_nextMonthKeystone" name="monthlyMainInfo.nextMonthKeystone" cssStyle="width: 540px;height:100px;resize:none;" maxlength="500"></s:textarea>
 										</td>
 									</tr>
 									<tr>
@@ -184,7 +185,7 @@
 											<strong>公司战略重点：</strong>
 										</td>
 										<td height="26" align="left" bgcolor="#FFFFFF" colspan="8">
-											<s:textarea  id="txt_companyKeystone" name="monthlyMainInfo.companyKeystone" cssStyle="width: 510px;height:100px;resize:none;" maxlength="500"></s:textarea>
+											<s:textarea  id="txt_companyKeystone" name="monthlyMainInfo.companyKeystone" cssStyle="width: 540px;height:100px;resize:none;" maxlength="500"></s:textarea>
 										</td>
 									</tr>
 									
