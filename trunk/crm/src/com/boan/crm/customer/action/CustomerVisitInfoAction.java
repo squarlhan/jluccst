@@ -337,8 +337,15 @@ public class CustomerVisitInfoAction extends BaseActionSupport{
 	 */
 	public String saveVisitInfo()
 	{
-		//customerVisitInfo.setSalesmanId(sessionUserId);
-		//customerVisitInfo.setSalesman(sessionUserCName);
+		if(customerVisitInfo.getSalesmanId() != null && customerVisitInfo.getSalesmanId().length() > 0)
+		{
+			
+		}else
+		{
+			customerVisitInfo.setSalesmanId(sessionUserId);
+			customerVisitInfo.setSalesman(sessionUserCName);
+		}
+		
 		CustomerVisitInfo obj = null;
 		boolean inserFLag = true;
 		if(customerVisitInfo.getId() != null && customerVisitInfo.getId().length() > 0)

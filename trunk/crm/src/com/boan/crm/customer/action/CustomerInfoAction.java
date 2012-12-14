@@ -737,10 +737,17 @@ public class CustomerInfoAction extends BaseActionSupport{
 	 */
 	public String saveCustomer()
 	{
+		
 		customerInfo.setCompanyId(sessionCompanyId);
 		customerInfo.setCreatorId(sessionUserId);
-		//customerInfo.setSalesmanId(sessionUserId);
-		//customerInfo.setSalesman(sessionUserCName);
+		if(customerInfo.getSalesmanId() != null && customerInfo.getSalesmanId().length() > 0)
+		{
+			
+		}else
+		{
+			customerInfo.setSalesmanId(sessionUserId);
+			customerInfo.setSalesman(sessionUserCName);
+		}
 		customerInfo.setCreateTime(Calendar.getInstance());
 		CustomerInfo obj = null;
 		if(customerInfo.getId() != null && customerInfo.getId().length() > 0)
