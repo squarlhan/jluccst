@@ -35,6 +35,7 @@
 		<script type="text/javascript" src="<%=basePath%>js/timepicke/jquery-ui-timepicker-addon.js"></script>
 		<script type="text/javascript" src="<%=basePath%>js/timepicke/jquery-ui-timepicker-zh-CN.js"></script>
 		<script type="text/javascript" src="<%=basePath%>js/timepicke/jquery-ui-sliderAccess.js"></script>
+		<script type="text/javascript" src="<%=basePath%>js/jquery-formatcurrency.js"></script>
 		<script type="text/javascript">
 			/**
 		  	 * 验证条件
@@ -86,7 +87,7 @@
 		  				$(".hid_idNumberTypeId").each(function(){
 		  					if($(this).val()==dutyId){
 		  						if($("#mydiv").length==0){
-				  					$("#myspan").append('<span id="mydiv"><strong>额度：</strong><input type="text" name="monthlyItemInfo.sellTarget" maxlength="25" value="" id="txt_sellTarget" style="width: 160px;"/>元</span>');
+				  					$("#myspan").append('<span id="mydiv"><strong>额度：</strong><input type="text" name="monthlyItemInfo.sellTarget" maxlength="25" value="" id="txt_sellTarget" style="width: 160px;" class="currenciesOnly"/>元</span>');
 				  				}else{
 				  					$("#mydiv").show();
 				  				}
@@ -156,7 +157,7 @@
 									<s:hidden name="id" cssClass="hid_idNumberTypeId"></s:hidden>
 								</s:if>
 								<s:if test="id==monthlyItemInfo.sellDutyId &&  numberType==true">
-									<span id="mydiv"><strong>额度：</strong><s:textfield id="txt_sellTarget" name="monthlyItemInfo.sellTarget" cssStyle="width: 160px;" maxlength="25"></s:textfield>元</span>
+									<span id="mydiv"><strong>额度：</strong><s:textfield id="txt_sellTarget" name="monthlyItemInfo.sellTarget" cssStyle="width: 160px;" cssClass="currenciesOnly"   maxlength="25"></s:textfield>元</span>
 								</s:if>
 							</s:iterator>
 						</span>
