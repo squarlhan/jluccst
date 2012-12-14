@@ -82,14 +82,18 @@
 		  		//选中职责事件
 		  		$("#sel_sellDuty").change(function(){
 		  			var  dutyId= $("#sel_sellDuty option:selected").val();
-		  			if($("#hid_idNumberTypeId").length!=0 && $("#hid_idNumberTypeId").val()==dutyId){
-		  				if($("#mydiv").length==0){
-		  					$("#myspan").append('<span id="mydiv"><strong>额度：</strong><input type="text" name="weeklyMainInfo.sellTarget" maxlength="25" value="" id="txt_sellTarget" style="width: 160px;"/>元</span>');
-		  				}else{
-		  					$("#mydiv").show();
-		  				}
-		  			}else{
-		  				$("#mydiv").remove();
+		  			if($(".hid_idNumberTypeId").length!=0 ){
+		  				$(".hid_idNumberTypeId").each(function(){
+		  					if($(this).val()==dutyId){
+		  						if($("#mydiv").length==0){
+				  					$("#myspan").append('<span id="mydiv"><strong>额度：</strong><input type="text" name="monthlyItemInfo.sellTarget" maxlength="25" value="" id="txt_sellTarget" style="width: 160px;"/>元</span>');
+				  				}else{
+				  					$("#mydiv").show();
+				  				}
+		  					}else{
+		  						$("#mydiv").remove();
+		  					}
+		  				});
 		  			}
 		  		});
 		  	});
@@ -149,7 +153,7 @@
 						 <span id="myspan">
 							<s:iterator value="sellDutyList" status="obj">
 								<s:if test="numberType==true">
-									<s:hidden id="hid_idNumberTypeId" name="id"></s:hidden>
+									<s:hidden name="id" cssClass="hid_idNumberTypeId"></s:hidden>
 								</s:if>
 								<s:if test="id==monthlyItemInfo.sellDutyId &&  numberType==true">
 									<span id="mydiv"><strong>额度：</strong><s:textfield id="txt_sellTarget" name="monthlyItemInfo.sellTarget" cssStyle="width: 160px;" maxlength="25"></s:textfield>元</span>
@@ -202,25 +206,33 @@
 					<td height="26" align="left" bgcolor="#FFFFFF" >
 						<s:textarea  id="txt_superiorResult" name="monthlyItemInfo.superiorResult" cssStyle="width: 250px;height:50px;resize:none;" maxlength="500"></s:textarea>
 					</td>
-					<td height="26" align="left" bgcolor="#FFFFFF" width="80px" nowrap="nowrap">
-						<strong>实际得分：</strong>
-					</td>
-					<td height="26" align="left" bgcolor="#FFFFFF" >
-						<s:textarea  id="txt_factScore" name="monthlyItemInfo.factScore" cssStyle="width: 250px;height:50px;resize:none;" maxlength="500"></s:textarea>
-					</td>
-				</tr>
-				<tr>
 					<td height="26" align="left" bgcolor="#FFFFFF" width="80px" >
 						<strong>延期原因：</strong>
 					</td>
 					<td height="26" align="left" bgcolor="#FFFFFF" >
 						<s:textarea  id="txt_superiorReason" name="monthlyItemInfo.superiorReason" cssStyle="width: 250px;height:50px;resize:none;" maxlength="500"></s:textarea>
 					</td>
+				</tr>
+				<tr>
+					<!-- 
+					<td height="26" align="left" bgcolor="#FFFFFF" width="80px" nowrap="nowrap">
+						<strong>实际得分：</strong>
+					</td>
+					<td height="26" align="left" bgcolor="#FFFFFF" >
+						<s:textarea  id="txt_factScore" name="monthlyItemInfo.factScore" cssStyle="width: 250px;height:50px;resize:none;" maxlength="500"></s:textarea>
+					</td>
+					 -->
 					<td height="26" align="left" bgcolor="#FFFFFF" width="80px" >
 						<strong>改进措施：</strong>
 					</td>
 					<td height="26" align="left" bgcolor="#FFFFFF" >
 						<s:textarea  id="txt_superiorMethod" name="monthlyItemInfo.superiorMethod" cssStyle="width: 250px;height:50px;resize:none;" maxlength="500"></s:textarea>
+					</td>
+					<td height="26" align="left" bgcolor="#FFFFFF" width="80px" >
+						<strong>执行基金：</strong>
+					</td>
+					<td height="26" align="left" bgcolor="#FFFFFF" >
+						<s:textfield id="txt_executeMoney" name="monthlyItemInfo.executeMoney" cssStyle="width: 250px;" maxlength="25"></s:textfield>
 					</td>
 				</tr>
 				<!-- 
@@ -253,23 +265,9 @@
 						</td>
 					</tr>
 				 -->
-					<tr>
-						<td height="26" align="left" bgcolor="#FFFFFF" width="80px" >
-							<strong>实际绩效：</strong>
-						</td>
-						<td height="26" align="left" bgcolor="#FFFFFF" >
-							<s:textfield id="txt_factPerformance" name="monthlyItemInfo.factPerformance" cssStyle="width: 250px;" maxlength="25"></s:textfield>
-						</td>
-						<td height="26" align="left" bgcolor="#FFFFFF" width="80px" >
-							<strong>执行基金：</strong>
-						</td>
-						<td height="26" align="left" bgcolor="#FFFFFF">
-							<s:textfield id="txt_executeMoney" name="monthlyItemInfo.executeMoney" cssStyle="width: 250px;" maxlength="25"></s:textfield>
-						</td>
-					</tr>
 				<tr>
-					<td height="26" align="left" bgcolor="#FFFFFF" width="80px"  >
-						<strong>下月目标：</strong>
+					<td height="26" align="left" bgcolor="#FFFFFF" nowrap="nowrap">
+						<strong>新结果定义：</strong>
 					</td>
 					<td height="26" align="left" bgcolor="#FFFFFF" colspan="4">
 						<s:textarea  id="txt_nextMonthlyResult" name="monthlyItemInfo.nextMonthlyResult" cssStyle="width: 610px;height:50px;resize:none;" maxlength="500"></s:textarea>

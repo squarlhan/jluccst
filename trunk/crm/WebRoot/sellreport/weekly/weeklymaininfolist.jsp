@@ -93,6 +93,17 @@
 	  		});
 	  		
 	  		/**
+	  		 * 统计
+	  		 */
+	  		$('a[name="stat"]').each(function(){
+	  			$(this).click(function(){
+	  				var url = $(this).attr("url");
+	  				parent.parent.tipsWindown("查看统计","iframe:"+url,"850","520","true","","true","no");
+	  			});
+	  		});
+	  		
+	  		
+	  		/**
 	  		 * 删除所选设备信息
 	  		 */
 	  		$("#deletepointbtn").click(function(){
@@ -176,11 +187,15 @@
           	<s:url id="edit_url" action="openWeeklyTabPageAction">   
 				<s:param name="weeklyMainInfo.id" value="id"></s:param>   
 			</s:url>
-			<s:url id="delete_url" action="deleteWeeklyMainInfoAction">   
+			<s:url id="delete_url" action="deleteWeeklyMainInfoAction">
+				<s:param name="ids" value="id"></s:param>   
+			</s:url>
+			<s:url id="stat_url" action="showWeeklyStatInfoAction">
 				<s:param name="ids" value="id"></s:param>   
 			</s:url>
          	<a name="edit" href="javascript:void(0);" url="${edit_url}">编辑</a>  
          	<a name="delete" href="javascript:void(0);" url="${delete_url}">删除</a>
+         	<a name="stat" href="javascript:void(0);" url="${stat_url}">查看统计</a>
           </td>
         </tr>
         </s:iterator>        

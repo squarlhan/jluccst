@@ -92,17 +92,6 @@
 	  		});
 	  		
 	  		/**
-	  		 * 统计
-	  		 */
-	  		$('a[name="stat"]').each(function(){
-	  			$(this).click(function(){
-	  				//var url = $(this).attr("url");
-	  				var url ="";
-	  				parent.tipsWindown("查看统计","iframe:"+url,"780","450","true","","true","no");
-	  			});
-	  		});
-	  		
-	  		/**
 	  		 * 删除所选
 	  		 */
 	  		$("#deletepointbtn").click(function(){
@@ -131,8 +120,8 @@
    			</td>
               <td align="center" background="<%=path %>/images/headerbg.jpg" nowrap="nowrap"><strong>职责</strong></td>
               <td align="center" background="<%=path %>/images/headerbg.jpg" nowrap="nowrap"><strong>结果定义</strong></td>
-              <td align="center" background="<%=path %>/images/headerbg.jpg" nowrap="nowrap"><strong>执行基金</strong></td>
               <td align="center" background="<%=path %>/images/headerbg.jpg" nowrap="nowrap"><strong>实际结果</strong></td>
+              <td align="center" background="<%=path %>/images/headerbg.jpg" nowrap="nowrap"><strong>执行基金</strong></td>
               <td align="center" background="<%=path %>/images/headerbg.jpg" nowrap="nowrap"><strong>操作</strong></td>
         </tr>
         <s:iterator value="pagination.data" status="obj">
@@ -149,8 +138,8 @@
               	</s:else>
 			</td>
               <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="monthResult"/></td>
-              <td height="26" align="center" bgcolor="#FFFFFF"  nowrap="nowrap"><s:property value="executeMoney"/></td>
               <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="superiorResult"/></td>
+              <td height="26" align="center" bgcolor="#FFFFFF"  nowrap="nowrap"><s:property value="executeMoney"/></td>
           <td height="26" colspan="2" align="center" bgcolor="#FFFFFF"  nowrap="nowrap">
           	<s:url id="edit_url" action="openModifyMonthlyItemAction">   
 				<s:param name="monthlyItemInfo.id" value="id"></s:param>   
@@ -158,12 +147,8 @@
 			<s:url id="delete_url" action="deleteMonthlyItemAction">   
 				<s:param name="ids" value="id"></s:param>   
 			</s:url>
-			<s:url id="stat_url" action="about:blank">   
-				<s:param name="ids" value="id"></s:param>   
-			</s:url>
          	<a name="edit" href="javascript:void(0);" url="${edit_url}">编辑</a>  
          	<a name="delete" href="javascript:void(0);" url="${delete_url}">删除</a>
-         	<a name="stat" href="javascript:void(0);" url="${stat_url}">查看统计</a>
           </td>
         </tr>
         </s:iterator>        
