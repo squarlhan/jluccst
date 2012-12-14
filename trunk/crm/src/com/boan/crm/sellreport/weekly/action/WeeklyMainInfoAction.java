@@ -1,5 +1,8 @@
 package com.boan.crm.sellreport.weekly.action;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+import java.nio.charset.Charset;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -41,6 +44,10 @@ public class WeeklyMainInfoAction  extends BaseActionSupport{
 	private List<User> userList = null;
 	
 	private String mainInfoId;
+	
+	private InputStream xmlStream;
+	
+	private String caption;
 	
 	/**
 	 * 分页对象
@@ -224,6 +231,56 @@ public class WeeklyMainInfoAction  extends BaseActionSupport{
 	public String showWeeklyStatInfo() {
 		return this.SUCCESS;
 	}
+	
+	public String getWeeklyStatData(){
+		String str="<chart palette='2' caption='周销售计划对比统计' showValues='0' numVDivLines='10' drawAnchors='0' numberPrefix='$' divLineAlpha='30' alternateHGridAlpha='20'  setAdaptiveYMin='1' >";
+		str=str+"<categories>";
+		str=str+"<category label='周一' /> ";
+		str=str+"<category label='周二' /> ";
+		str=str+"<category label='周三' /> ";
+		str=str+"<category label='周四' /> ";
+		str=str+"<category label='周五' /> ";
+		str=str+"<category label='周六' /> ";
+		str=str+"<category label='周日' /> ";
+		str=str+"</categories>";
+		str=str+"<dataset seriesName='实际结果' color='FA0F1A'>";
+		str=str+"<set value='1127654' /> ";
+		str=str+"<set value='1226234' /> ";
+		str=str+"<set value='599456' /> ";
+		str=str+"<set value='1311565' /> ";
+		str=str+"<set value='1534' /> ";
+		str=str+"<set value='122456' /> ";
+		str=str+"<set value='341565' /> ";
+		str=str+"</dataset>";
+		str=str+"<dataset seriesName='计划结果' color='65FA0F'>";
+		str=str+"<set value='927654' /> ";
+		str=str+"<set value='1126234' /> ";
+		str=str+"<set value='999456' /> ";
+		str=str+"<set value='41565' /> ";
+		str=str+"<set value='56234' /> ";
+		str=str+"<set value='996456' /> ";
+		str=str+"<set value='131565' /> ";
+		str=str+"</dataset>";
+
+		str=str+"<styles>";
+		str=str+"<definition>";
+		str=str+"<style name='XScaleAnim' type='ANIMATION' duration='0.5' start='0' param='_xScale' />";
+		str=str+"<style name='YScaleAnim' type='ANIMATION' duration='0.5' start='0' param='_yscale' />";
+		str=str+"<style name='XAnim' type='ANIMATION' duration='0.5' start='0' param='_yscale' />";
+		str=str+"<style name='AlphaAnim' type='ANIMATION' duration='0.5' start='0' param='_alpha' />";
+		str=str+"</definition>";
+		str=str+"<application>";
+		str=str+"<apply toObject='CANVAS' styles='XScaleAnim, YScaleAnim,AlphaAnim' />";
+    	str=str+"<apply toObject='DIVLINES' styles='XScaleAnim,AlphaAnim' />";
+    	str=str+"<apply toObject='VDIVLINES' styles='YScaleAnim,AlphaAnim' />";
+        str=str+"<apply toObject='HGRID' styles='YScaleAnim,AlphaAnim' />";
+		str=str+"</application>";
+		str=str+"</styles>";
+		str=str+"</chart>";
+	
+		xmlStream = new ByteArrayInputStream(str.getBytes(Charset.forName("GB2312")));
+		return this.SUCCESS;
+	}
 
 	public Pagination<WeeklyMainInfo> getPagination() {
 		return pagination;
@@ -311,5 +368,21 @@ public class WeeklyMainInfoAction  extends BaseActionSupport{
 
 	public void setMainInfoId(String mainInfoId) {
 		this.mainInfoId = mainInfoId;
+	}
+
+	public InputStream getXmlStream() {
+		return xmlStream;
+	}
+
+	public void setXmlStream(InputStream xmlStream) {
+		this.xmlStream = xmlStream;
+	}
+
+	public String getCaption() {
+		return caption;
+	}
+
+	public void setCaption(String caption) {
+		this.caption = caption;
 	}
 }

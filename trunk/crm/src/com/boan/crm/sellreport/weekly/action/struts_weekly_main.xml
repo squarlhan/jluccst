@@ -38,5 +38,13 @@
 			<result name="input">/sellreport/weekly/showweeklystatinfo.jsp</result>
 		</action>
 		<action name="deleteWeeklyMainInfoAction" class="weeklyMainInfoAction" method="deleteWeeklyMainInfo"/>
+		
+		<action name="getWeeklyStatDataAction" class="weeklyMainInfoAction"  method="getWeeklyStatData">
+        	<param name="caption">统计图描述</param>
+            <result name="success"  type="stream">
+				<param name="contentType">application/xml;charset=UTF-8</param>
+				<param name="inputName">xmlStream</param>
+			</result>
+        </action>
 	</package>
 </struts>
