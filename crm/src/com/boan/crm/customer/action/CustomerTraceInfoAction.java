@@ -356,8 +356,15 @@ public class CustomerTraceInfoAction extends BaseActionSupport{
 	 */
 	public String saveTraceInfo()
 	{
-		//customerTraceInfo.setSalesmanId(sessionUserId);
-		//customerTraceInfo.setSalesman(sessionUserCName);
+		if(customerTraceInfo.getSalesmanId() != null && customerTraceInfo.getSalesmanId().length() > 0)
+		{
+			
+		}else
+		{
+			customerTraceInfo.setSalesmanId(sessionUserId);
+			customerTraceInfo.setSalesman(sessionUserCName);	
+		}
+		
 		CustomerTraceInfo obj = null;
 		boolean inserFLag = true;
 		if(customerTraceInfo.getId() != null && customerTraceInfo.getId().length() > 0)
