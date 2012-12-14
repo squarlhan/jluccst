@@ -25,14 +25,19 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
  <head>
 	<title>月报表曲线图</title>
+	<j:scriptlink jquery="true"  css="true"/>
     <script type="text/javascript" src="<%=basePath%>js/FusionCharts/FusionCharts.js"></script></head>   
 <body>
         <div id="chartdiv" align="center">Chart will load here</div>
         <script type="text/javascript">
-           var chart = new FusionCharts("<%=basePath%>js/FusionCharts/Charts/MSLine.swf", "ChartId", "750", "450", "0", "0");
+           var chart = new FusionCharts("<%=basePath%>js/FusionCharts/Charts/ZoomLine.swf", "ChartId", "750", "450", "0", "0");
 		   chart.setDataURL( "<%=basePath%>/getMonthlyStatDataAction.action");		   
 		   chart.render("chartdiv");
 		</script>
+		<div align="center">
+			<br />
+			<input name="closeBtn" type="button" class="btn_2_3" id="closeBtn" value="关闭" onclick='javascript:parent.$("#windown-close").click();'>
+		</div>
 </body>
  </html>
 
