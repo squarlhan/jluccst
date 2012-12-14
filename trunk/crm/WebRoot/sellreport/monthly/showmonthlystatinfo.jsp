@@ -1,28 +1,38 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ taglib prefix="s" uri="/struts-tags"%>
+<%@ taglib prefix="j" uri="/script-tags"%>
 <%
-String path = request.getContextPath();
-String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
+/**
+ * Copyright (c) 2010 Changchun Boan (BOAN) Co. Ltd.
+ * All right reserved.
+ */
+/**
+ * @author yangGY
+ * @version 1.0
+ * @audit  
+ */
+/**
+ * Modified Person：
+ * Modified Time：
+ * Modified Explain：
+ */
+	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://"
+			+ request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
 %>
+<?xml version="1.0" encoding="iso-8859-1"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+ <head>
+	<title>月报表曲线图</title>
+    <script type="text/javascript" src="<%=basePath%>js/FusionCharts/FusionCharts.js"></script></head>   
+<body>
+        <div id="chartdiv" align="center">Chart will load here</div>
+        <script type="text/javascript">
+           var chart = new FusionCharts("<%=basePath%>js/FusionCharts/Charts/MSLine.swf", "ChartId", "750", "450", "0", "0");
+		   chart.setDataURL( "<%=basePath%>/getMonthlyStatDataAction.action");		   
+		   chart.render("chartdiv");
+		</script>
+</body>
+ </html>
 
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html>
-  <head>
-    <base href="<%=basePath%>">
-    
-    <title>My JSP 'showmonthlystatinfo.jsp' starting page</title>
-    
-	<meta http-equiv="pragma" content="no-cache">
-	<meta http-equiv="cache-control" content="no-cache">
-	<meta http-equiv="expires" content="0">    
-	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-	<meta http-equiv="description" content="This is my page">
-	<!--
-	<link rel="stylesheet" type="text/css" href="styles.css">
-	-->
-
-  </head>
-  
-  <body>
-    月统计对比表
-  </body>
-</html>
