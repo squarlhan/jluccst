@@ -38,5 +38,13 @@
 			<result name="input">/sellreport/monthly/showmonthlystatinfo.jsp</result>
 		</action>
 		<action name="deleteMonthlyMainInfoAction" class="monthlyMainInfoAction" method="deleteMonthlyMainInfo"/>
+		
+		<action name="getMonthlyStatDataAction" class="monthlyMainInfoAction"  method="getMonthlyStatData">
+        	<param name="caption">统计图描述</param>
+            <result name="success"  type="stream">
+				<param name="contentType">application/xml;charset=UTF-8</param>
+				<param name="inputName">xmlStream</param>
+			</result>
+        </action>
 	</package>
 </struts>
