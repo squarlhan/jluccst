@@ -254,7 +254,7 @@ public class CustomerTraceInfoAction extends BaseActionSupport{
 			values.put("endDate", endDate);
 		}
 		values.put( "companyId", sessionCompanyId );
-		if(deptId != null)
+		if(deptId != null && deptId.length() > 0)
 		{
 			values.put("deptId", deptId);
 		}

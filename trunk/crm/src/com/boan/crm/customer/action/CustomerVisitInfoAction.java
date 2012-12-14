@@ -235,7 +235,7 @@ public class CustomerVisitInfoAction extends BaseActionSupport{
 		{
 			values.put("endDate", endDate);
 		}
-		if(deptId != null)
+		if(deptId != null && deptId.length() > 0)
 		{
 			values.put("deptId", deptId);
 		}
