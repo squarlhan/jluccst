@@ -33,6 +33,10 @@
 			<result name="success">/sellreport/weekly/weeklymaininfoadd.jsp</result>
 			<result name="input">/sellreport/weekly/weeklymaininfoadd.jsp</result>
 		</action>
+		<action name="showWeeklyStatInfoAction" class="weeklyMainInfoAction" method="showWeeklyStatInfo">
+			<result name="success">/sellreport/weekly/showweeklystatinfo.jsp</result>
+			<result name="input">/sellreport/weekly/showweeklystatinfo.jsp</result>
+		</action>
 		<action name="deleteWeeklyMainInfoAction" class="weeklyMainInfoAction" method="deleteWeeklyMainInfo"/>
 	</package>
 </struts>

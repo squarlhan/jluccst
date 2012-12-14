@@ -220,6 +220,10 @@ public class WeeklyMainInfoAction  extends BaseActionSupport{
 		weeklyMainInfoService.deleteWeeklyMainInfoByIds(ids);
 		return this.NONE;
 	}
+	
+	public String showWeeklyStatInfo() {
+		return this.SUCCESS;
+	}
 
 	public Pagination<WeeklyMainInfo> getPagination() {
 		return pagination;
