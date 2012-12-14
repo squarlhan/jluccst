@@ -223,6 +223,10 @@ public class MonthlyMainInfoAction  extends BaseActionSupport{
 		return this.NONE;
 	}
 
+	public String showMonthlyStatInfo() {
+		return this.SUCCESS;
+	}
+	
 	public Pagination<MonthlyMainInfo> getPagination() {
 		return pagination;
 	}
