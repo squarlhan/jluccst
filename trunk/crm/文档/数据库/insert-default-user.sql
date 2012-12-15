@@ -1,6 +1,6 @@
 TRUNCATE TABLE `group_user`;
 
-INSERT INTO `group_user` (`id`, `CREATE_TIME`, `PASSWORD`, `SORT_INDEX`, `USERCNAME`, `USER_TYPE`, `USERNAME`) VALUES ('1', '2012-6-1 00:00:00', 'b59c67bf196a4758191e42f76670ceba', 0, '超级管理员', 9, 'admin');
+INSERT INTO `group_user` (`id`, `CREATE_TIME`, `PASSWORD`, `SORT_INDEX`, `USERCNAME`, `USER_TYPE`, `USERNAME`,`LUNAR_SOLAR_FLAG`) VALUES ('1', '2012-6-1 00:00:00', 'b59c67bf196a4758191e42f76670ceba', 0, '超级管理员', 9, 'admin',1);
 
  alter table group_user alter column deleteFlag set default 0;
  
