@@ -45,12 +45,23 @@ public class WeeklyItemInfoServiceImpl implements IWeeklyItemInfoService{
 	}
 	
 	/**
-	 * 根据计划人Id查询周计划项信息
+	 * 根据周计划Id查询周计划项信息
 	 * @param mainInfoId
 	 * @return
 	 */
 	public List<WeeklyItemInfo>  getWeeklyItemInfoListByMainInfoId(String mainInfoId){
 		String hql = "from WeeklyItemInfo where mainInfoId=:mainInfoId order by sequence asc";
+		Map param = new HashMap();
+		param.put("mainInfoId",mainInfoId);
+		return weeklyItemInfoDao.find(hql, param);
+	}
+	/**
+	 * 根据周计划Id查询周计划项中销售额的信息
+	 * @param mainInfoId
+	 * @return
+	 */
+	public List<WeeklyItemInfo>  getWeeklyItemInfoListOfSellTargetByMainInfoId(String mainInfoId){
+		String hql = "from WeeklyItemInfo where mainInfoId=:mainInfoId and sellTarget<>'' and sellTarget is not null order by sequence asc";
 		Map param = new HashMap();
 		param.put("mainInfoId",mainInfoId);
 		return weeklyItemInfoDao.find(hql, param);

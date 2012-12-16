@@ -2,6 +2,7 @@ package com.boan.crm.sellreport.weekly.action;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.math.BigDecimal;
 import java.nio.charset.Charset;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -19,9 +20,13 @@ import com.boan.crm.groupmanage.model.Deptment;
 import com.boan.crm.groupmanage.model.User;
 import com.boan.crm.groupmanage.service.IDeptmentService;
 import com.boan.crm.groupmanage.service.IUserService;
+import com.boan.crm.sellrecord.service.ISellRecordService;
+import com.boan.crm.sellreport.weekly.model.WeeklyItemInfo;
 import com.boan.crm.sellreport.weekly.model.WeeklyMainInfo;
+import com.boan.crm.sellreport.weekly.service.IWeeklyItemInfoService;
 import com.boan.crm.sellreport.weekly.service.IWeeklyMainInfoService;
 import com.boan.crm.utils.action.BaseActionSupport;
+import com.boan.crm.utils.calendar.CalendarUtils;
 import com.boan.crm.utils.page.Pagination;
 
 @Controller("weeklyMainInfoAction")
@@ -65,6 +70,14 @@ public class WeeklyMainInfoAction  extends BaseActionSupport{
 	@Autowired
 	@Qualifier("weeklyMainInfoService")
 	private IWeeklyMainInfoService weeklyMainInfoService;
+	
+	@Autowired
+	@Qualifier("weeklyItemInfoService")
+	private IWeeklyItemInfoService weeklyItemInfoService;
+	
+	@Autowired
+	@Qualifier("sellRecordService")
+	private ISellRecordService sellRecordService;
 	
 	/**
 	 * 提示信息
@@ -160,11 +173,8 @@ public class WeeklyMainInfoAction  extends BaseActionSupport{
 		weeklyMainInfo.setPersonId(sessionUserId);
 		weeklyMainInfo.setPersonName(sessionUserCName);
 		
-		Calendar begin  = Calendar.getInstance();
-		begin.set(Calendar.DAY_OF_MONTH,1);
-		Calendar end  = Calendar.getInstance();
-		end.set(Calendar.DAY_OF_MONTH,Calendar.getInstance().getActualMaximum(Calendar.DAY_OF_MONTH));
-		
+		Calendar begin  = CalendarUtils.getFirstDayOfWeek( Calendar.getInstance());
+		Calendar end  = CalendarUtils.getLastDayOfWeek( Calendar.getInstance());
 		weeklyMainInfo.setPlanInterzoneBegin(begin);
 		weeklyMainInfo.setPlanInterzoneEnd(end);
 		
@@ -229,11 +239,37 @@ public class WeeklyMainInfoAction  extends BaseActionSupport{
 	}
 	
 	public String showWeeklyStatInfo() {
+		System.out.print(mainInfoId);
 		return this.SUCCESS;
 	}
 	
 	public String getWeeklyStatData(){
-		String str="<chart palette='2' caption='周销售计划对比统计' showValues='0' numVDivLines='10' drawAnchors='0' numberPrefix='$' divLineAlpha='30' alternateHGridAlpha='20'  setAdaptiveYMin='1' >";
+		List<WeeklyItemInfo>  sellTargerList = weeklyItemInfoService.getWeeklyItemInfoListOfSellTargetByMainInfoId(mainInfoId);
+		String str="<chart palette='2' " +
+				"caption='周销售计划对比统计' " +
+				"btnSwitchtoZoomModeTitle='选择缩放模式' " +
+				"btnSwitchToPinModeTitle='选择锁定模式' " +
+				"btnResetChartTitle='重置图表' " +
+				"btnZoomOutTitle='缩小图表' " +
+				"zoomOutMenuItemLabel='缩小图表' " +
+				"resetChartMenuItemLabel='重置图表	' " +
+				"zoomModeMenuItemLabel='选择缩放模式	' " +
+				"pinModeMenuItemLabel='选择锁定模式	' " +
+				"drawToolbarButtons='1' " +
+				"numberPrefix='' " +
+				"numberSuffix='元' " +
+				"formatNumberScale='0'  " +
+//				"divIntervalHints='150000' "+//纵坐标间隔
+//				"displayStartIndex='1'"+       //默认显示从第一列开始
+//				"displayEndIndex='7'" +        //默认显示到第七列
+				"showNames='1'  " +
+				"showValues='0' " +
+				"yAxisMinValue='20000' " +
+				"numVDivLines='10' " +
+				"drawAnchors='0' " +
+				"divLineAlpha='30' " +
+				"alternateHGridAlpha='20'  " +
+				"setAdaptiveYMin='1' >";
 		str=str+"<categories>";
 		str=str+"<category label='周一' /> ";
 		str=str+"<category label='周二' /> ";
@@ -244,22 +280,112 @@ public class WeeklyMainInfoAction  extends BaseActionSupport{
 		str=str+"<category label='周日' /> ";
 		str=str+"</categories>";
 		str=str+"<dataset seriesName='实际结果' color='FA0F1A'>";
-		str=str+"<set value='1127654' /> ";
-		str=str+"<set value='1226234' /> ";
-		str=str+"<set value='599456' /> ";
-		str=str+"<set value='1311565' /> ";
-		str=str+"<set value='1534' /> ";
-		str=str+"<set value='122456' /> ";
-		str=str+"<set value='341565' /> ";
+		
+		WeeklyMainInfo mainInfo = weeklyMainInfoService.getWeeklyMainInfoById(mainInfoId);
+		
+		//获取周计划开始和结束时间
+		Calendar planInterzoneBegin = mainInfo.getPlanInterzoneBegin();
+		Calendar planInterzoneEnd = mainInfo.getPlanInterzoneEnd();
+		//获取填写的周计划是从周几到周几
+		int dayOfWeekBegin = planInterzoneBegin.get(Calendar.DAY_OF_WEEK) -1 ;
+		int dayOfWeekEnd = planInterzoneEnd.get(Calendar.DAY_OF_WEEK ) - 1 ;
+		String dayNames[] ={"星期日","星期一","星期二","星期三","星期四","星期五","星期六"}; 
+		System.out.println( dayNames[dayOfWeekBegin] +" 至 " + dayNames[dayOfWeekEnd]);
+
+		if(dayOfWeekBegin>1){//说明不是周一也不是周日
+			for(int i=1;i<dayOfWeekBegin;i++){
+				//输出开始日期之前的空数据如 开始时间是 周三，则输出 周一到周二的数据
+				str=str+"<set value='0' /> ";
+			}
+			Calendar tempVar =  planInterzoneBegin;
+			for(int i=dayOfWeekBegin;i<=7;i++){
+				//输出开始时间到周六的数据
+				if(i!=7){
+					System.out.println(CalendarUtils.toString(tempVar));
+					BigDecimal dd = sellRecordService.getRealCollectionByBargainTime(sessionCompanyId, null, tempVar, tempVar);
+					str=str+"<set value='"+ dd +"' /> ";
+					tempVar.add(Calendar.DAY_OF_MONTH, 1);
+				}else{
+					//周日的数据
+					System.out.println(CalendarUtils.toString(tempVar));
+					BigDecimal dd = sellRecordService.getRealCollectionByBargainTime(sessionCompanyId, null, tempVar, tempVar);
+					str=str+"<set value='"+ dd +"' /> ";
+				}
+			}
+		}else if (dayOfWeekBegin==1){//说明是周一
+			//输出周一到周日的数据
+			Calendar tempVar =  planInterzoneBegin;
+			for(int i=dayOfWeekBegin;i<=7;i++){
+				//输出开始时间到周六的数据
+				if(i!=7){
+					System.out.println(CalendarUtils.toString(tempVar));
+					BigDecimal dd = sellRecordService.getRealCollectionByBargainTime(sessionCompanyId, null, tempVar, tempVar);
+					str=str+"<set value='"+ dd +"' /> ";
+					tempVar.add(Calendar.DAY_OF_MONTH, 1);
+				}else{
+					//周日的数据
+					System.out.println(CalendarUtils.toString(tempVar));
+					BigDecimal dd = sellRecordService.getRealCollectionByBargainTime(sessionCompanyId, null, tempVar, tempVar);
+					str=str+"<set value='"+ dd +"' /> ";
+				}
+			}
+		}else if(dayOfWeekBegin==0){//说明是周日
+			//输出6条空数据
+			str=str+"<set value='0' /> ";
+			str=str+"<set value='0' /> ";
+			str=str+"<set value='0' /> ";
+			str=str+"<set value='0' /> ";
+			str=str+"<set value='0' /> ";
+			str=str+"<set value='0' /> ";
+			//输出周日的数据
+			BigDecimal dd = sellRecordService.getRealCollectionByBargainTime(sessionCompanyId, null, planInterzoneBegin, planInterzoneBegin);
+			str=str+"<set value='"+ dd +"' /> ";
+		}
 		str=str+"</dataset>";
 		str=str+"<dataset seriesName='计划结果' color='65FA0F'>";
-		str=str+"<set value='927654' /> ";
-		str=str+"<set value='1126234' /> ";
-		str=str+"<set value='999456' /> ";
-		str=str+"<set value='41565' /> ";
-		str=str+"<set value='56234' /> ";
-		str=str+"<set value='996456' /> ";
-		str=str+"<set value='131565' /> ";
+		boolean flag=false;
+		if(sellTargerList!=null && sellTargerList.size()>0){
+			WeeklyItemInfo temp = null;
+			//如果添加了多个销售额类型的子项信息，则计算和各项的和
+			boolean noAdd=false;//不累加标示
+			for(WeeklyItemInfo item : sellTargerList){
+				if(temp==null){
+					temp = item;
+					noAdd=true;//不累加
+				}
+				if(temp!=null ){
+					if(!noAdd){
+						temp.setMonday(compute(temp.getMonday(), item.getMonday()));
+						temp.setTuesday(compute(temp.getTuesday(), item.getTuesday()));
+						temp.setWednesday(compute(temp.getWednesday(), item.getWednesday()));
+						temp.setThursday(compute(temp.getThursday(), item.getThursday()));
+						temp.setFriday(compute(temp.getFriday(), item.getFriday()));
+						temp.setSaturday(compute(temp.getSaturday(), item.getSaturday()));
+						temp.setSunday(compute(temp.getSunday(), item.getSunday()));
+					}
+					noAdd=false;
+					flag = true;
+				}
+			}
+			if(flag){//计算的实际值显示
+				str=str+"<set value='"+temp.getMonday()+"' /> ";
+				str=str+"<set value='"+temp.getTuesday()+"' /> ";
+				str=str+"<set value='"+temp.getWednesday()+"' /> ";
+				str=str+"<set value='"+temp.getThursday()+"' /> ";
+				str=str+"<set value='"+temp.getFriday()+"' /> ";
+				str=str+"<set value='"+temp.getSaturday()+"' /> ";
+				str=str+"<set value='"+temp.getSunday()+"' /> ";
+			}
+		}
+		if(!flag){//使用默认值
+			str=str+"<set value='0' /> ";
+			str=str+"<set value='0' /> ";
+			str=str+"<set value='0' /> ";
+			str=str+"<set value='0' /> ";
+			str=str+"<set value='0' /> ";
+			str=str+"<set value='0' /> ";
+			str=str+"<set value='0' /> ";
+		}
 		str=str+"</dataset>";
 
 		str=str+"<styles>";
@@ -277,9 +403,26 @@ public class WeeklyMainInfoAction  extends BaseActionSupport{
 		str=str+"</application>";
 		str=str+"</styles>";
 		str=str+"</chart>";
-	
 		xmlStream = new ByteArrayInputStream(str.getBytes(Charset.forName("GB2312")));
 		return this.SUCCESS;
+	}
+
+	private String compute(String old, String young) {
+		Double a= new Double(0);
+		Double b= new Double(0);
+		try {
+			Double.parseDouble(old);
+		} catch (NumberFormatException e) {
+			old="0";
+		}
+		try {
+			Double.parseDouble(young);
+		} catch (NumberFormatException e) {
+			young="0";
+		}
+		a= (old!=null && !old.trim().equals("")) ? Double.parseDouble(old) : Double.parseDouble("0") ;
+		b= (young!=null && !young.trim().equals("")) ? Double.parseDouble(young) : Double.parseDouble("0") ;
+		return ""+(a+b);
 	}
 
 	public Pagination<WeeklyMainInfo> getPagination() {

@@ -35,6 +35,13 @@ public interface IWeeklyItemInfoService {
 	public List<WeeklyItemInfo>  getWeeklyItemInfoListByMainInfoId(String mainInfoId);
 	
 	/**
+	 * 根据周计划Id查询周计划项中销售额的信息
+	 * @param mainInfoId
+	 * @return
+	 */
+	public List<WeeklyItemInfo>  getWeeklyItemInfoListOfSellTargetByMainInfoId(String mainInfoId);
+	
+	/**
 	 * 按分页查询周计划项信息
 	 */
 	public Pagination<WeeklyItemInfo> findWeeklyItemInfoForPage( Map<String, ?> values, Pagination<WeeklyItemInfo> pagination);

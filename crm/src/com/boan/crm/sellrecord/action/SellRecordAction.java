@@ -163,9 +163,6 @@ public class SellRecordAction extends BaseActionSupport {
 	 * @throws Exception
 	 */
 	public String openSellRecordList() throws Exception {
-		System.out.println(deptId);
-		System.out.println(userId);
-		
 		userList = userService.queryUserList(sessionCompanyId, sessionDeptId, new Pagination<User>()).getData();
 		Map<String, String> params = new HashMap<String, String>();
 
@@ -220,7 +217,7 @@ public class SellRecordAction extends BaseActionSupport {
 	}
 
 	public String openSellRecordListForCustomer() throws Exception {
-		userList = userService.queryUserList(sessionCompanyId, sessionDeptId, new Pagination<User>()).getData();
+		//userList = userService.queryUserList(sessionCompanyId, sessionDeptId, new Pagination<User>()).getData();
 		Map<String, String> params = new HashMap<String, String>();
 		if (customerId != null) {
 			customerId = customerId.split(",")[0];

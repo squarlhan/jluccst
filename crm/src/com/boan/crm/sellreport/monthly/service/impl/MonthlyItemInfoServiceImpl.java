@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 import com.boan.crm.sellreport.monthly.dao.IMonthlyItemInfoDao;
 import com.boan.crm.sellreport.monthly.model.MonthlyItemInfo;
 import com.boan.crm.sellreport.monthly.service.IMonthlyItemInfoService;
-import com.boan.crm.sellreport.sellduty.model.SellDuty;
 import com.boan.crm.utils.page.Pagination;
 @Service("monthlyItemInfoService")
 public class MonthlyItemInfoServiceImpl implements IMonthlyItemInfoService{
@@ -75,5 +74,17 @@ public class MonthlyItemInfoServiceImpl implements IMonthlyItemInfoService{
 		pagination.setTotalRows(totalRows);
 		pagination.setData(data);
 		return pagination;
+	}
+	
+	/**
+	 * 根据月计划Id查询月计划项中销售额的信息
+	 * @param mainInfoId
+	 * @return
+	 */
+	public List<MonthlyItemInfo>  getMonthlyItemInfoListOfSellTargetByMainInfoId(String mainInfoId){
+		String hql = "from MonthlyItemInfo where mainInfoId=:mainInfoId and sellTarget<>'' and sellTarget is not null order by sequence asc";
+		Map param = new HashMap();
+		param.put("mainInfoId",mainInfoId);
+		return monthlyItemInfoDao.find(hql, param);
 	}
 }
