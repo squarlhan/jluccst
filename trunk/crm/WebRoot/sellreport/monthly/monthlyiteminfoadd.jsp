@@ -57,10 +57,27 @@
 					}
 				}
 			};
+			
+			function onlyNumbers(id) {
+				re = /^\d+\.?\d*$/;
+				var str = $("#"+id).val();
+				if(str!=""){
+					if (!re.test(str)) {
+						$("#"+id).focus();
+						$("#"+id).select();
+						return false;
+					}else{
+						return true;
+					}
+				}else{
+					return true;
+				}
+			}
 			/**
 		  	 * 准备工作
 		  	 */
 			$(document).ready(function(){
+				$("#sel_sellDuty").focus();
 				if($("#hid_message").val()!="" && $("#hid_Id").val()!=null){
 					alert($("#hid_message").val());
 					parent.$("#windown-close").click();
@@ -116,6 +133,25 @@
 	               		$("#hid_sellDutyName").focus();
 	               		return false;
 	               	}
+	               	
+		  			if($("#txt_sellTarget").length!=0){ //如果选择了销售额类型
+		                if( !onlyNumbers("txt_firstWeek")){
+		            	   alert("当前职责类型为销售额类型，请在本月各周天内填写数字信息，如：10000！");
+		            	   return false;
+		               }
+		               if( !onlyNumbers("txt_secondWeek")){
+		            	   alert("当前职责类型为销售额类型，请在本月各周天内填写数字信息，如：10000！");
+		            	   return false;
+		               }
+		               if(! onlyNumbers("txt_thirdWeek")){
+		            	   alert("当前职责类型为销售额类型，请在本月各周天内填写数字信息，如：10000！");
+		            	   return false;
+		               }
+		               if( !onlyNumbers("txt_fourthWeek")){
+		            	   alert("当前职责类型为销售额类型，请在本月各周天内填写数字信息，如：10000！");
+		            	   return false;
+		               }
+		  			}
 					if( $.trim( $("#hid_Id").val() ) != ""){
 						form1.action = "modifyMonthlyItemAction.action";
 					}else{
