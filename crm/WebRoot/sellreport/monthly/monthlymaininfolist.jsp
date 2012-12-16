@@ -190,7 +190,7 @@
 				<s:param name="ids" value="id"></s:param>   
 			</s:url>
 			<s:url id="stat_url" action="showMonthlyStatInfoAction">   
-				<s:param name="ids" value="id"></s:param>   
+				<s:param name="mainInfoId" value="id"></s:param>   
 			</s:url>
          	<a name="edit" href="javascript:void(0);" url="${edit_url}">编辑</a>  
          	<a name="delete" href="javascript:void(0);" url="${delete_url}">删除</a>

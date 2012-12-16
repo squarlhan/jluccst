@@ -31,7 +31,7 @@
         <div id="chartdiv" align="center">Chart will load here</div>
         <script type="text/javascript">
            var chart = new FusionCharts("<%=basePath%>js/FusionCharts/Charts/ZoomLine.swf", "ChartId", "750", "450", "0", "0");
-		   chart.setDataURL( "<%=basePath%>/getWeeklyStatDataAction.action");		   
+		   chart.setDataURL( "<%=basePath%>/getWeeklyStatDataAction.action?mainInfoId=<s:property value="mainInfoId"/>");		   
 		   chart.render("chartdiv");
 		</script>
 		<div align="center">
