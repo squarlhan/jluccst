@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.boan.crm.sellreport.monthly.model.MonthlyItemInfo;
+import com.boan.crm.sellreport.weekly.model.WeeklyItemInfo;
 import com.boan.crm.utils.page.Pagination;
 
 public interface IMonthlyItemInfoService {
@@ -38,4 +39,11 @@ public interface IMonthlyItemInfoService {
 	 * 按分页查询月计划项信息
 	 */
 	public Pagination<MonthlyItemInfo> findMonthlyItemInfoForPage( Map<String, ?> values, Pagination<MonthlyItemInfo> pagination);
+	
+	/**
+	 * 根据月计划Id查询月计划项中销售额的信息
+	 * @param mainInfoId
+	 * @return
+	 */
+	public List<MonthlyItemInfo>  getMonthlyItemInfoListOfSellTargetByMainInfoId(String mainInfoId);
 }

@@ -1,6 +1,8 @@
 package com.boan.crm.sellrecord.service;
 
 import java.math.BigDecimal;
+import java.util.Calendar;
+import java.util.List;
 import java.util.Map;
 
 import com.boan.crm.sellrecord.model.SellRecord;
@@ -73,6 +75,26 @@ public interface ISellRecordService {
 	 * @return 相应数额
 	 */
 	public  BigDecimal getTotalMoneyByType(String queryType,String companyId,String beginDate,String endDate);
+	
+	/**
+	 * 获指定公司指定时间段查询销售记录，可以指定某个客户
+	 * @param companyId 公司id
+	 * @param customerId  客户Id
+	 * @param beginDate 查询开始时间
+	 * @param endDate  查询结束时间
+	 * @return 销售记录
+	 */
+	public  List<SellRecord> getSellRecordorderByBargainTime(String companyId,String customerId,String beginDate,String endDate);
+	
+	/**
+	 * 获指定公司指定时间段查询销售记录，可以指定某个客户
+	 * @param companyId 公司id
+	 * @param customerId  客户Id
+	 * @param beginDate 查询开始时间
+	 * @param endDate  查询结束时间
+	 * @return 实收总金额
+	 */
+	public  BigDecimal getRealCollectionByBargainTime(String companyId,String customerId,Calendar beginDate,Calendar endDate);
 	
 	/**
 	 * 查询产品销售量

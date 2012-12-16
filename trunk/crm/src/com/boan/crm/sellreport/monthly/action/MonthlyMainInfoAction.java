@@ -2,6 +2,7 @@ package com.boan.crm.sellreport.monthly.action;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.math.BigDecimal;
 import java.nio.charset.Charset;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -19,9 +20,14 @@ import com.boan.crm.groupmanage.model.Deptment;
 import com.boan.crm.groupmanage.model.User;
 import com.boan.crm.groupmanage.service.IDeptmentService;
 import com.boan.crm.groupmanage.service.IUserService;
+import com.boan.crm.sellrecord.service.ISellRecordService;
+import com.boan.crm.sellreport.monthly.model.MonthlyItemInfo;
 import com.boan.crm.sellreport.monthly.model.MonthlyMainInfo;
+import com.boan.crm.sellreport.monthly.service.IMonthlyItemInfoService;
 import com.boan.crm.sellreport.monthly.service.IMonthlyMainInfoService;
+import com.boan.crm.sellreport.weekly.model.WeeklyItemInfo;
 import com.boan.crm.utils.action.BaseActionSupport;
+import com.boan.crm.utils.calendar.CalendarUtils;
 import com.boan.crm.utils.page.Pagination;
 
 @Controller("monthlyMainInfoAction")
@@ -66,6 +72,14 @@ public class MonthlyMainInfoAction  extends BaseActionSupport{
 	@Qualifier("monthlyMainInfoService")
 	private IMonthlyMainInfoService monthlyMainInfoService;
 	
+	@Autowired
+	@Qualifier("monthlyItemInfoService")
+	private IMonthlyItemInfoService monthlyItemInfoService;
+	
+	@Autowired
+	@Qualifier("sellRecordService")
+	private ISellRecordService sellRecordService;
+	
 	/**
 	 * 提示信息
 	 */
@@ -98,7 +112,6 @@ public class MonthlyMainInfoAction  extends BaseActionSupport{
 		if(sessionDeptId.equals("")){ //总经理
 			flag=false;
 		}
-		flag=false;
 		
 		if(flag){ //部门经理
 			deptList.add(deptService.get(sessionDeptId));
@@ -235,7 +248,32 @@ public class MonthlyMainInfoAction  extends BaseActionSupport{
 	}
 	
 	public String getMonthlyStatData(){
-		String str="<chart palette='2' caption='月销售计划对比统计' showValues='0' numVDivLines='10' drawAnchors='0' numberPrefix='$' divLineAlpha='30' alternateHGridAlpha='20'  setAdaptiveYMin='1' >";
+		List<MonthlyItemInfo>  sellTargerList = monthlyItemInfoService.getMonthlyItemInfoListOfSellTargetByMainInfoId(mainInfoId);
+		String str="<chart palette='2' " +
+				"caption='月销售计划对比统计' " +
+				"btnSwitchtoZoomModeTitle='选择缩放模式' " +
+				"btnSwitchToPinModeTitle='选择锁定模式' " +
+				"btnResetChartTitle='重置图表' " +
+				"btnZoomOutTitle='缩小图表' " +
+				"zoomOutMenuItemLabel='缩小图表' " +
+				"resetChartMenuItemLabel='重置图表	' " +
+				"zoomModeMenuItemLabel='选择缩放模式	' " +
+				"pinModeMenuItemLabel='选择锁定模式	' " +
+				"drawToolbarButtons='1' " +
+				"numberPrefix='' " +
+				"numberSuffix='元' " +
+				"formatNumberScale='0'  " +
+//				"divIntervalHints='150000' "+//纵坐标间隔
+//				"displayStartIndex='1'"+       //默认显示从第一列开始
+//				"displayEndIndex='7'" +        //默认显示到第七列
+				"showNames='1'  " +
+				"showValues='0' " +
+				"yAxisMinValue='20000' " +
+				"numVDivLines='10' " +
+				"drawAnchors='0' " +
+				"divLineAlpha='30' " +
+				"alternateHGridAlpha='20'  " +
+				"setAdaptiveYMin='1' >";
 		str=str+"<categories>";
 		str=str+"<category label='第一周' /> ";
 		str=str+"<category label='第二周' /> ";
@@ -243,16 +281,146 @@ public class MonthlyMainInfoAction  extends BaseActionSupport{
 		str=str+"<category label='第四周' /> ";
 		str=str+"</categories>";
 		str=str+"<dataset seriesName='实际结果' color='FA0F1A'>";
-		str=str+"<set value='1127654' /> ";
-		str=str+"<set value='1226234' /> ";
-		str=str+"<set value='1299456' /> ";
-		str=str+"<set value='1311565' /> ";
+		MonthlyMainInfo mainInfo = monthlyMainInfoService.getMonthlyMainInfoById(mainInfoId);
+		
+		//获取周计划开始和结束时间
+		Calendar planInterzoneBegin = mainInfo.getPlanInterzoneBegin();
+		Calendar planInterzoneEnd = mainInfo.getPlanInterzoneEnd();
+		
+		System.out.println(CalendarUtils.toString(planInterzoneBegin));
+		System.out.println(CalendarUtils.toString(planInterzoneEnd));
+		
+		//月报表开始时间记录的年月日
+		
+		int year = planInterzoneBegin.get(Calendar.YEAR);
+		int month = planInterzoneBegin.get(Calendar.MONTH);
+		
+		Calendar firstWeekBegin = Calendar.getInstance();
+		Calendar firstWeekEnd = Calendar.getInstance();
+		//第一周开始时间
+		firstWeekBegin.set(Calendar.YEAR, year);
+		firstWeekBegin.set(Calendar.MONTH, month);
+		firstWeekBegin.set(Calendar.DAY_OF_MONTH, 1);
+		firstWeekBegin.set(Calendar.HOUR_OF_DAY, 0);
+		firstWeekBegin.set(Calendar.MINUTE , 0 );
+		firstWeekBegin.set(Calendar.SECOND, 0);
+		//第一周结束时间
+		firstWeekEnd.set(Calendar.YEAR, year);
+		firstWeekEnd.set(Calendar.MONTH, month);
+		firstWeekEnd.set(Calendar.DAY_OF_MONTH, 7);
+		firstWeekEnd.set(Calendar.HOUR_OF_DAY, 23);
+		firstWeekEnd.set(Calendar.MINUTE , 59 );
+		firstWeekEnd.set(Calendar.SECOND, 59);
+		
+		System.out.println(CalendarUtils.toLongString(firstWeekBegin));
+		System.out.println(CalendarUtils.toLongString(firstWeekEnd));
+		//----------------------------------------------
+		Calendar secondWeekBegin = Calendar.getInstance();
+		Calendar secondWeekEnd = Calendar.getInstance();
+		//第二周开始时间
+		secondWeekBegin.set(Calendar.YEAR, year);
+		secondWeekBegin.set(Calendar.MONTH, month);
+		secondWeekBegin.set(Calendar.DAY_OF_MONTH, 8);
+		secondWeekBegin.set(Calendar.HOUR_OF_DAY, 0);
+		secondWeekBegin.set(Calendar.MINUTE , 0 );
+		secondWeekBegin.set(Calendar.SECOND, 0);
+		//第二周结束时间
+		secondWeekEnd.set(Calendar.YEAR, year);
+		secondWeekEnd.set(Calendar.MONTH, month);
+		secondWeekEnd.set(Calendar.DAY_OF_MONTH, 14);
+		secondWeekEnd.set(Calendar.HOUR_OF_DAY, 23);
+		secondWeekEnd.set(Calendar.MINUTE , 59 );
+		secondWeekEnd.set(Calendar.SECOND, 59);
+		
+		System.out.println(CalendarUtils.toLongString(secondWeekBegin));
+		System.out.println(CalendarUtils.toLongString(secondWeekEnd));
+		//----------------------------------------------
+		Calendar thirdWeekBegin = Calendar.getInstance();
+		Calendar thirdWeekEnd = Calendar.getInstance();
+		//第三周开始时间
+		thirdWeekBegin.set(Calendar.YEAR, year);
+		thirdWeekBegin.set(Calendar.MONTH, month);
+		thirdWeekBegin.set(Calendar.DAY_OF_MONTH, 15);
+		thirdWeekBegin.set(Calendar.HOUR_OF_DAY, 0);
+		thirdWeekBegin.set(Calendar.MINUTE , 0 );
+		thirdWeekBegin.set(Calendar.SECOND, 0);
+		//第三周结束时间
+		thirdWeekEnd.set(Calendar.YEAR, year);
+		thirdWeekEnd.set(Calendar.MONTH, month);
+		thirdWeekEnd.set(Calendar.DAY_OF_MONTH, 21);
+		thirdWeekEnd.set(Calendar.HOUR_OF_DAY, 23);
+		thirdWeekEnd.set(Calendar.MINUTE , 59 );
+		thirdWeekEnd.set(Calendar.SECOND, 59);
+		
+		System.out.println(CalendarUtils.toLongString(thirdWeekBegin));
+		System.out.println(CalendarUtils.toLongString(thirdWeekEnd));
+		
+		//----------------------------------------------
+		Calendar fourthWeekBegin = Calendar.getInstance();
+		Calendar fourthWeekEnd = Calendar.getInstance();
+		//第四周开始时间
+		fourthWeekBegin.set(Calendar.YEAR, year);
+		fourthWeekBegin.set(Calendar.MONTH, month);
+		fourthWeekBegin.set(Calendar.DAY_OF_MONTH, 22);
+		fourthWeekBegin.set(Calendar.HOUR_OF_DAY, 0);
+		fourthWeekBegin.set(Calendar.MINUTE , 0 );
+		fourthWeekBegin.set(Calendar.SECOND, 0);
+		//第四周结束时间
+		fourthWeekEnd.set(Calendar.YEAR, year);
+		fourthWeekEnd.set(Calendar.MONTH, month);
+		fourthWeekEnd.set(Calendar.DAY_OF_MONTH, fourthWeekEnd.getActualMaximum(Calendar.DAY_OF_MONTH));
+		fourthWeekEnd.set(Calendar.HOUR_OF_DAY, 23);
+		fourthWeekEnd.set(Calendar.MINUTE , 59 );
+		fourthWeekEnd.set(Calendar.SECOND, 59);
+		
+		System.out.println(CalendarUtils.toLongString(fourthWeekBegin));
+		System.out.println(CalendarUtils.toLongString(fourthWeekEnd));
+
+		BigDecimal first = sellRecordService.getRealCollectionByBargainTime(sessionCompanyId, null, firstWeekBegin, firstWeekEnd);
+		BigDecimal second = sellRecordService.getRealCollectionByBargainTime(sessionCompanyId, null, secondWeekBegin, secondWeekEnd);
+		BigDecimal third = sellRecordService.getRealCollectionByBargainTime(sessionCompanyId, null, thirdWeekBegin, thirdWeekEnd);
+		BigDecimal fourth = sellRecordService.getRealCollectionByBargainTime(sessionCompanyId, null, fourthWeekBegin, fourthWeekEnd);
+		
+		str=str+"<set value='"+first+"' /> ";
+		str=str+"<set value='"+second+"' /> ";
+		str=str+"<set value='"+third+"' /> ";
+		str=str+"<set value='"+fourth+"' /> ";
 		str=str+"</dataset>";
 		str=str+"<dataset seriesName='计划结果' color='65FA0F'>";
-		str=str+"<set value='927654' /> ";
-		str=str+"<set value='1126234' /> ";
-		str=str+"<set value='999456' /> ";
-		str=str+"<set value='1111565' /> ";
+		boolean flag=false;
+		if(sellTargerList!=null && sellTargerList.size()>0){
+			MonthlyItemInfo temp = null;
+			//如果添加了多个销售额类型的子项信息，则计算和各项的和
+			boolean noAdd=false;//不累加标示
+			for(MonthlyItemInfo item : sellTargerList){
+				if(temp==null){
+					temp = item;
+					noAdd=true;//不累加
+				}
+				if(temp!=null){
+					if(!noAdd){
+						temp.setFirstWeek(compute(temp.getFirstWeek(), item.getFirstWeek()));
+						temp.setSecondWeek(compute(temp.getSecondWeek(), item.getSecondWeek()));
+						temp.setThirdWeek(compute(temp.getThirdWeek(), item.getThirdWeek()));
+						temp.setFourthWeek(compute(temp.getFourthWeek(), item.getFourthWeek()));
+					}
+					noAdd=false;
+					flag = true;
+				}
+			}
+			if(flag){//计算的实际值显示
+				str=str+"<set value='"+temp.getFirstWeek()+"' /> ";
+				str=str+"<set value='"+temp.getSecondWeek()+"' /> ";
+				str=str+"<set value='"+temp.getThirdWeek()+"' /> ";
+				str=str+"<set value='"+temp.getFourthWeek()+"' /> ";
+			}
+		}
+		if(!flag){//使用默认值
+			str=str+"<set value='0' /> ";
+			str=str+"<set value='0' /> ";
+			str=str+"<set value='0' /> ";
+			str=str+"<set value='0' /> ";
+		}
 		str=str+"</dataset>";
 
 		str=str+"<styles>";
@@ -273,6 +441,24 @@ public class MonthlyMainInfoAction  extends BaseActionSupport{
 	
 		xmlStream = new ByteArrayInputStream(str.getBytes(Charset.forName("GB2312")));
 		return this.SUCCESS;
+	}
+	
+	private String compute(String old, String young) {
+		Double a= new Double(0);
+		Double b= new Double(0);
+		try {
+			Double.parseDouble(old);
+		} catch (NumberFormatException e) {
+			old="0";
+		}
+		try {
+			Double.parseDouble(young);
+		} catch (NumberFormatException e) {
+			young="0";
+		}
+		a= (old!=null && !old.trim().equals("")) ? Double.parseDouble(old) : Double.parseDouble("0") ;
+		b= (young!=null && !young.trim().equals("")) ? Double.parseDouble(young) : Double.parseDouble("0") ;
+		return ""+(a+b);
 	}
 	
 	public InputStream getXmlStream() {

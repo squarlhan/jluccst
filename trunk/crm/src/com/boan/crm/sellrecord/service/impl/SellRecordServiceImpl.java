@@ -1,6 +1,7 @@
 package com.boan.crm.sellrecord.service.impl;
 
 import java.math.BigDecimal;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -240,6 +241,66 @@ public class SellRecordServiceImpl implements ISellRecordService {
 		Map<String, String> param = new HashMap<String,String>();
 		param.put("companyId",companyId);
 		
+		List list = sellRecordDao.find(hql, param);
+		return (list!=null &&  list.size()>0 && list.get(0)!=null )? new BigDecimal( list.get(0).toString()) : new BigDecimal(0);
+	}
+	
+	/**
+	 * 获指定公司指定时间段查询销售记录，可以指定某个客户
+	 * @param companyId 公司id
+	 * @param customerId  客户Id
+	 * @param beginDate 查询开始时间
+	 * @param endDate  查询结束时间
+	 * @return 销售记录
+	 */
+	public  List<SellRecord> getSellRecordorderByBargainTime(String companyId,String customerId,String beginDate,String endDate){
+		String hql =" from SellRecord as record where record.companyId=:companyId ";
+		if(beginDate!=null && !beginDate.equals("")){
+			hql = hql + " and record.bargainTime >='"+beginDate+"' ";
+		}
+		if(endDate!=null && !endDate.equals("")){
+			hql = hql + " and record.bargainTime <='"+endDate+"' ";
+		}
+		if(customerId!=null &&customerId.equals("")){
+			hql = hql + " and record.customerId =:customerId";
+		}
+		Map<String, String> param = new HashMap<String,String>();
+		if(customerId!=null &&customerId.equals("")){
+			param.put("customerId",customerId);
+		}
+		param.put("companyId",companyId);
+		List list = sellRecordDao.find(hql, param);
+		return list;
+	}
+	
+	/**
+	 * 获指定公司指定时间段查询销售记录，可以指定某个客户
+	 * @param companyId 公司id
+	 * @param customerId  客户Id
+	 * @param beginDate 查询开始时间
+	 * @param endDate  查询结束时间
+	 * @return 实收总金额
+	 */
+	public  BigDecimal getRealCollectionByBargainTime(String companyId,String customerId,Calendar beginDate,Calendar endDate){
+		String hql =" select sum(record.realCollection) from SellRecord as record where record.companyId=:companyId ";
+		if(beginDate!=null && !beginDate.equals("")){
+//			hql = hql + " and record.bargainTime >='"+beginDate+"' ";
+			hql = hql + " and record.bargainTime >=:beginDate";
+		}
+		if(endDate!=null && !endDate.equals("")){
+//			hql = hql + " and record.bargainTime <='"+endDate+"' ";
+			hql = hql + " and record.bargainTime <=:endDate ";
+		}
+		if(customerId!=null &&customerId.equals("")){
+			hql = hql + " and record.customerId =:customerId";
+		}
+		Map param = new HashMap();
+		if(customerId!=null &&customerId.equals("")){
+			param.put("customerId",customerId);
+		}
+		param.put("beginDate",beginDate);
+		param.put("endDate",endDate);
+		param.put("companyId",companyId);
 		List list = sellRecordDao.find(hql, param);
 		return (list!=null &&  list.size()>0 && list.get(0)!=null )? new BigDecimal( list.get(0).toString()) : new BigDecimal(0);
 	}
