@@ -60,10 +60,14 @@ public class MonthlyMainInfoServiceImpl implements IMonthlyMainInfoService{
 			if(values.containsKey("personId")){
 				strb.append(" and  personId=:personId  ");
 			}
-		}
-		if(values!=null){
 			if(values.containsKey("deptId")){
 				strb.append(" and  deptId=:deptId  ");
+			}
+			if(values.containsKey("planInterzoneBegin")){
+				strb.append(" and  planInterzoneBegin ='"+values.get("planInterzoneBegin")+"'  ");
+			}
+			if(values.containsKey("personName")){
+				strb.append(" and  personName like '%"+values.get("personName")+"%'  ");
 			}
 		}
 		String hql = "from MonthlyMainInfo "+strb.toString()+" order by createTime desc";
