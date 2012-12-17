@@ -48,8 +48,7 @@
 	<script type="text/javascript">
 	
 		$(function(){
-			$('#txt_query_beginTime').datetimepicker({showTimepicker: false});
-			$('#txt_query_endTime').datetimepicker({showTimepicker: false});
+			$('#txt_queryTime').datetimepicker({showTimepicker: false});
 			
 			$("#addbtn").click(function(){
 				parent.parent.tipsWindown("添加月计划","iframe:openTabPageAction.action","850","520","true","","true","no");
@@ -62,7 +61,9 @@
 			});
 			$.fn.checkall("cbk_all");
 	  		$.fn.uncheckall("ids","cbk_all");
-
+	  		if($("#hid_personId").val()!=""){
+	  			$.fn.ReadOnly("txt_query_person_name");
+	  		}
 	  		/**
 	  		 * 修改
 	  		 */
@@ -114,6 +115,22 @@
   				}
 	  		});
 		});
+		/**
+		 * 设置某元素或其下的子元素为只读
+		 * @param {Object} id 参数Id
+		*/
+		$.fn.ReadOnly = function(id){
+			var obj = $("#"+id) ;
+			obj.wrap('<span id="readonly_span_for_'+id+'" onmousemove="this.setCapture();" onmouseout="this.releaseCapture();" onfocus="this.blur();"></span>');
+			obj.find(":input").each(function(i){
+				if($(this).is(":radio")){
+					$(this).focus(function(){
+						$(this).blur();
+					});
+				}
+				$(this).attr("tabindex","-1");
+			});
+		};
 	</script>
 
   </head>
@@ -124,7 +141,6 @@
  <s:hidden id="hid_deptId" name="deptId"></s:hidden>
 <s:hidden id="hid_personId" name="personId"></s:hidden>
 <table width="100%"  border="0" cellspacing="5" cellpadding="0">
-	<!-- 
 	<tr>
 		<td colspan="2">
 		<fieldset >
@@ -136,13 +152,13 @@
 						<strong>计划人：</strong>
 					</td>
 					<td height="26" width = "80px"  align="left" bgcolor="#FFFFFF">
-						<s:textfield id="txt_query_employee_name" name="employeeName" cssStyle="width:120px"></s:textfield>
+						<s:textfield id="txt_query_person_name" name="personName" cssStyle="width:120px"></s:textfield>
 					</td>
-					<td height="26" width = "80px"  align="left" bgcolor="#FFFFFF" nowrap="nowrap">
-						<strong>所在部门：</strong>
+					<td height="26" width = "120px"  align="left" bgcolor="#FFFFFF" nowrap="nowrap">
+						<strong>计划开始时间：</strong>
 					</td>
 					<td height="26" width = "80px"  align="left" bgcolor="#FFFFFF">
-						<s:select id="sel_dept"  name="monthlyMainInfo.deptId" list="deptList" listKey="id"  listValue="deptName" cssStyle="width: 160px;"  headerKey="" headerValue="---全部---"></s:select>
+						<s:textfield id="txt_queryTime" name="queryTime" cssStyle="width:120px"></s:textfield>
 					</td>
 					<td height="26"  align="left" bgcolor="#FFFFFF">
 						<input name="queryBtn" type="submit" class="btn_2_3" id="queryBtn" value="查询">
@@ -153,7 +169,6 @@
 		</fieldset>
 		</td>
 	</tr>
-	 -->
   <tr>
     <td valign="top">
     <input name="addbtn" type="button" class="btn_2_3" id="addbtn" value="添加" >
