@@ -26,7 +26,15 @@
  <head>
 	<title>月报表曲线图</title>
 	<j:scriptlink jquery="true"  css="true"/>
-    <script type="text/javascript" src="<%=basePath%>js/FusionCharts/FusionCharts.js"></script></head>   
+    <script type="text/javascript" src="<%=basePath%>js/FusionCharts/FusionCharts.js"></script>
+	<!--[if IE 6]>
+         <script type="text/javascript">
+         	$(document).ready(function(){
+         		$("#msg").html("<font color='red'><strong>浏览器太落后了吧！请升级到IE6以上版本！<strong></font>");
+         	});
+         </script>
+	<![endif]-->        
+</head>   
 <body>
         <div id="chartdiv" align="center">Chart will load here</div>
         <script type="text/javascript">
@@ -34,6 +42,7 @@
 		   chart.setDataURL( "<%=basePath%>/getMonthlyStatDataAction.action?mainInfoId=<s:property value="mainInfoId"/>");		     
 		   chart.render("chartdiv");
 		</script>
+		<div id="msg" align="center"></div>
 		<div align="center">
 			<br />
 			<input name="closeBtn" type="button" class="btn_2_3" id="closeBtn" value="关闭" onclick='javascript:parent.$("#windown-close").click();'>
