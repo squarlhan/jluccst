@@ -98,6 +98,10 @@ public class MonthlyMainInfoAction  extends BaseActionSupport{
 	
 	private String deptId;
 	
+	private String personName;
+	
+	private String queryTime;
+	
 	/**
 	 * 显示组织机构树
 	 * 
@@ -140,14 +144,22 @@ public class MonthlyMainInfoAction  extends BaseActionSupport{
 	/**
 	 * 打开月计划列表页
 	 * @return
+	 * @throws Exception 
 	 */
-	public String openMonthlyMainInfoList(){
+	public String openMonthlyMainInfoList() throws Exception{
 		deptList = deptService.queryAllDeptmentsByCompanyId( sessionCompanyId );
 		Map param = new HashMap();
 		if(personId!=null && !personId.equals("")){
 			param.put("personId", personId);
+			personName = userService.getUserById(personId).getUserCName();
 		}else{
 			param.put("deptId", deptId);
+			if(personName!=null && !personName.equals("")){
+				param.put("personName", personName);
+			}
+		}
+		if(queryTime!=null && !queryTime.equals("")){
+			param.put("planInterzoneBegin", queryTime);
 		}
 		monthlyMainInfoService.findMonthlyMainInfoForPage(param, pagination);
 		return this.SUCCESS;
@@ -563,5 +575,21 @@ public class MonthlyMainInfoAction  extends BaseActionSupport{
 
 	public void setCaption(String caption) {
 		this.caption = caption;
+	}
+
+	public String getPersonName() {
+		return personName;
+	}
+
+	public void setPersonName(String personName) {
+		this.personName = personName;
+	}
+
+	public String getQueryTime() {
+		return queryTime;
+	}
+
+	public void setQueryTime(String queryTime) {
+		this.queryTime = queryTime;
 	}
 }
