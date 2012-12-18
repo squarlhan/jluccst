@@ -218,6 +218,9 @@ public class SMSAtion extends BaseActionSupport{
 			if(typeId!=null && !typeId.equals("") && !typeId.equals("-1")){
 				params.put("categoryId", typeId);
 			}
+			if(this.sessionCompanyId!=null && !this.sessionCompanyId.equals("")){
+				params.put("organId", this.sessionCompanyId);
+			}
 			customersTypeJsonStr="[{name:'客户',id:'1'},{name:'销售人员',id:'2'}]";
 			if(onlycustomer.equals("yes")){
 				params.put("categoryId", "1");
@@ -269,6 +272,9 @@ public class SMSAtion extends BaseActionSupport{
 			if(onlycustomer.equals("yes")){
 				params.put("categoryId", "1");
 			}
+			if(this.sessionCompanyId!=null && !this.sessionCompanyId.equals("")){
+				params.put("organId", this.sessionCompanyId);
+			}
 			customersCountJsonStr=""+bookerService.findSMSCustomerInfoCountForPage(params);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -283,9 +289,9 @@ public class SMSAtion extends BaseActionSupport{
 	public String loadCustomerInfoForAjax(){
 		if(personIds!=null){
 			if(personIds.equals("all")){
-				customerInfoList = bookerService.findAllSMSCustomerInfo();
+				customerInfoList = bookerService.findAllSMSCustomerInfo(this.sessionCompanyId);
 			}else if (personIds.equals("customer")){
-				customerInfoList = bookerService.findAllSMSCustomerInfoByType(1);
+				customerInfoList = bookerService.findAllSMSCustomerInfoByType(this.sessionCompanyId,1);
 			}else{
 				String[] ids = personIds.split(",");
 				customerInfoList = bookerService.findSMSCustomerInfoByIds(ids);
