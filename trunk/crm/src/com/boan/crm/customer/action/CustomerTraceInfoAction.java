@@ -371,6 +371,11 @@ public class CustomerTraceInfoAction extends BaseActionSupport{
 		{
 			inserFLag = false;
 			obj =  customerTraceInfoService.get(customerTraceInfo.getId());
+			CustomerInfo customer = customerInfoService.get(obj.getCustomerId());
+			if(customer != null)
+			{
+				obj.setCustomerName(customer.getCustomerName());
+			}
 		}else
 		{
 			obj = new CustomerTraceInfo();

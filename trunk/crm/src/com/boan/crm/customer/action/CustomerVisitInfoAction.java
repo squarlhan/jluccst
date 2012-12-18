@@ -352,6 +352,11 @@ public class CustomerVisitInfoAction extends BaseActionSupport{
 		{
 			inserFLag = false;
 			obj =  customerVisitInfoService.get(customerVisitInfo.getId());
+			CustomerInfo customer = customerInfoService.get(obj.getCustomerId());
+			if(customer != null)
+			{
+				obj.setCustomerName(customer.getCustomerName());
+			}
 		}else
 		{
 			obj = new CustomerVisitInfo();
