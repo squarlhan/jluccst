@@ -61,14 +61,14 @@ public interface ISMSCustomerInfoService {
 	 * 查询所有短信通讯录信息
 	 * @return
 	 */
-	public List<SMSCustomerInfo> findAllSMSCustomerInfo();
+	public List<SMSCustomerInfo> findAllSMSCustomerInfo(String companyId);
 	
 	/**
 	 *  查询指定类型的短信通讯录信息
 	 * @param type 1：客户 2：销售员
 	 * @return
 	 */
-	public List<SMSCustomerInfo> findAllSMSCustomerInfoByType(int type);
+	public List<SMSCustomerInfo> findAllSMSCustomerInfoByType(String companyId,int type);
 	/**
 	 * 查询所有短信通讯录信息
 	 * @return
