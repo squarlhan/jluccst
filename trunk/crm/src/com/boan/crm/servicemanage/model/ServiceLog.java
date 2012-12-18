@@ -62,7 +62,7 @@ public class ServiceLog implements Serializable {
 	/**
 	 * 联系人电话
 	 */
-	@Column(name = "MOBILE_PHONE", length = 20)
+	@Column(name = "MOBILE_PHONE", length = 100)
 	private String mobilePhone;
 	
 	/**
