@@ -253,8 +253,7 @@
 																	</tr>
 																	<tr>
 																		<td>
-																			<input type="button" id="closeBtn" name="closeBtn" value="关闭" onclick="winclose();"
-																	class="btn_2_3">
+																			<input type="button" id="closeBtn" name="closeBtn" value="关闭" class="btn_2_3">
 																		</td>
 																	</tr>
 																	<tr>
