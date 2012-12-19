@@ -136,6 +136,18 @@ public static final String MY_KE_HU_GUAN_LI = "MY_KE_HU_GUAN_LI";
 						 * 销售记录
 						 */
 						public static final String SUB_XIAO_SHOU_JI_LU= "SUB_XIAO_SHOU_JI_LU";
+						/**
+						 * 月计划
+						 */
+						public static final String SUB_YUE_JI_HUA= "SUB_YUE_JI_HUA";
+						/**
+						 * 周计划
+						 */
+						public static final String SUB_ZHOU_JI_HUA= "SUB_ZHOU_JI_HUA";
+						/**
+						 * 销售职责设置
+						 */
+						public static final String SUB_XIAO_SHOU_ZHI_ZE_SHE_ZHI= "SUB_XIAO_SHOU_ZHI_ZE_SHE_ZHI";
 	/**
 	 * 服务管理
 	 */
