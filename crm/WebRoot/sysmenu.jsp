@@ -772,7 +772,7 @@
 									<tr>
 										<td width="40" align="right" style="padding-bottom: 4px;"><img src="images/menuto.jpg" width="5" height="5" />
 										</td>
-										<td><a href="sellreport/weekly/weeklymaininfomanager.jsp" target="mainFrame">周计划</a>
+										<td><a href="sellreport/weekly/weeklymaininfomanager.jsp" target="mainFrame">部门周计划</a>
 										</td>
 									</tr>
 								</table>
@@ -789,7 +789,7 @@
 									<tr>
 										<td width="40" align="right" style="padding-bottom: 4px;"><img src="images/menuto.jpg" width="5" height="5" />
 										</td>
-										<td><a href="sellreport/monthly/monthlymaininfomanager.jsp" target="mainFrame">月计划</a>
+										<td><a href="sellreport/monthly/monthlymaininfomanager.jsp" target="mainFrame">部门月计划</a>
 										</td>
 									</tr>
 								</table>
