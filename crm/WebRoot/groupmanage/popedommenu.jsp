@@ -70,8 +70,8 @@
 				d.add(1055,105,'市场调查查询','<%=url%>?menuKey=<%=MenuKey.SUB_SHI_CHANG_DIAO_CHA_CHA_XUN%>&companyId=<%=companyId%>','','groupmain');
 				d.add(1056,105,'销售记录','<%=url%>?menuKey=<%=MenuKey.SUB_XIAO_SHOU_JI_LU%>&companyId=<%=companyId%>','','groupmain');
 				d.add(1057,105,'销售记录查询','<%=url%>?menuKey=<%=MenuKey.SUB_XIAO_SHOU_JI_LU_CHA_XUN%>&companyId=<%=companyId%>','','groupmain');
-				d.add(1058,105,'周计划','<%=url%>?menuKey=<%=MenuKey.SUB_ZHOU_JI_HUA%>&companyId=<%=companyId%>','','groupmain');
-				d.add(1059,105,'月计划','<%=url%>?menuKey=<%=MenuKey.SUB_YUE_JI_HUA%>&companyId=<%=companyId%>','','groupmain');
+				d.add(1058,105,'部门周计划','<%=url%>?menuKey=<%=MenuKey.SUB_ZHOU_JI_HUA%>&companyId=<%=companyId%>','','groupmain');
+				d.add(1059,105,'部门月计划','<%=url%>?menuKey=<%=MenuKey.SUB_YUE_JI_HUA%>&companyId=<%=companyId%>','','groupmain');
 				d.add(1060,105,'销售职责设置','<%=url%>?menuKey=<%=MenuKey.SUB_XIAO_SHOU_ZHI_ZE_SHE_ZHI%>&companyId=<%=companyId%>','','groupmain');
 		d.add(106,0,'服务管理','<%=url%>?menuKey=<%=MenuKey.FU_WU_GUAN_LI%>&companyId=<%=companyId%>','','groupmain');
 				d.add(1061,106,'服务记录','<%=url%>?menuKey=<%=MenuKey.SUB_FU_WU_JI_LU%>&companyId=<%=companyId%>','','groupmain');
