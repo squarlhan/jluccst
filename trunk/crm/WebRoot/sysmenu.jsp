@@ -39,10 +39,7 @@
 <script type="text/javascript">
 <!--
 	$(document).ready(function() {
-		var ifrHeight = $("#leftFrame", parent.parent.document).height();
-		var ifrHeightTemp = ifrHeight - 50;
-		$("#menuArea").height(ifrHeightTemp);
-		
+		$(window).resize();
 		$(document).find("strong[name='menus']").each(function(index,domEle){
 			if(index==0){
 				$("tbody[name='submenus']:first").css("display","block");
@@ -59,7 +56,7 @@
 		});
 	});
 	$(window).resize(function() {
-		var ifrHeight = $("#leftFrame", parent.parent.document).height();
+		var ifrHeight = $("#leftFrame", parent.document).height();
 		var ifrHeightTemp = ifrHeight - 50;
 		$("#menuArea").height(ifrHeightTemp);
 	});
