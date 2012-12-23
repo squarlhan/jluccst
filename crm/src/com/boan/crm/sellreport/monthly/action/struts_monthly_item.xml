@@ -26,5 +26,16 @@
 			<result name="input">/sellreport/monthly/monthlyiteminfoadd.jsp</result>
 		</action>
 		<action name="deleteMonthlyItemAction" class="monthlyItemInfoAction" method="deleteMonthlyItem"/>
+		
+		
+		
+		<action name="openMonthlyItemListViewAction" class="monthlyItemInfoAction" method="openMonthlyItemListView">
+			<result name="success">/sellreport/monthly/monthlyiteminfolistview.jsp</result>
+			<result name="input">/sellreport/monthly/monthlyiteminfolistview.jsp</result>
+		</action>
+		<action name="openViewMonthlyItemAction" class="monthlyItemInfoAction" method="openViewMonthlyItem">
+			<result name="success">/sellreport/monthly/monthlyiteminfoview.jsp</result>
+			<result name="input">/sellreport/monthly/monthlyiteminfoview.jsp</result>
+		</action>
 	</package>
 </struts>

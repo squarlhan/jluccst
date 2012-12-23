@@ -137,6 +137,14 @@ public static final String MY_KE_HU_GUAN_LI = "MY_KE_HU_GUAN_LI";
 						 */
 						public static final String SUB_XIAO_SHOU_JI_LU= "SUB_XIAO_SHOU_JI_LU";
 						/**
+						 * 月计划查询
+						 */
+						public static final String SUB_YUE_JI_HUA_CHA_XUN= "SUB_YUE_JI_HUA_CHA_XUN";
+						/**
+						 * 周计划查询
+						 */
+						public static final String SUB_ZHOU_JI_HUA_CHA_XUN= "SUB_ZHOU_JI_HUA_CHA_XUN";
+						/**
 						 * 月计划
 						 */
 						public static final String SUB_YUE_JI_HUA= "SUB_YUE_JI_HUA";

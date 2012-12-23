@@ -69,6 +69,15 @@ public class MonthlyItemInfoAction extends BaseActionSupport{
 		pagination.setTotalPages(100);
 		return this.SUCCESS;
 	}
+	public String openMonthlyItemListView(){
+		Map param = new HashMap();
+		if(mainInfoId!=null && !mainInfoId.equals("")){
+			param.put("mainInfoId",mainInfoId);
+		}
+		monthlyItemInfoService.findMonthlyItemInfoForPage(param,pagination);
+		pagination.setTotalPages(100);
+		return this.SUCCESS;
+	}
 
 	public String openAddMonthlyItem(){
 		sellDutyList = sellDutyService.findAllSellDutyByCompanyIdAndDutyType(this.sessionCompanyId,1);
@@ -76,6 +85,12 @@ public class MonthlyItemInfoAction extends BaseActionSupport{
 	}
 	
 	public String openModifyMonthlyItem(){
+		monthlyItemInfo= monthlyItemInfoService.getMonthlyItemInfoById(monthlyItemInfo.getId());
+		
+		sellDutyList = sellDutyService.findAllSellDutyByCompanyIdAndDutyType(this.sessionCompanyId,1);
+		return this.SUCCESS;
+	}
+	public String openViewMonthlyItem(){
 		monthlyItemInfo= monthlyItemInfoService.getMonthlyItemInfoById(monthlyItemInfo.getId());
 		
 		sellDutyList = sellDutyService.findAllSellDutyByCompanyIdAndDutyType(this.sessionCompanyId,1);

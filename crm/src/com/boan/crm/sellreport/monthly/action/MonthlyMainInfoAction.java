@@ -140,6 +140,44 @@ public class MonthlyMainInfoAction  extends BaseActionSupport{
 		}
 		return "group-tree-for-monthly-main-info";
 	}
+	/**
+	 * 显示组织机构树
+	 * 
+	 * @return
+	 */
+	public String showGroupTreeForMonthlyMainInfoView() throws Exception {
+		companyId = sessionCompanyId;
+		companyName = sessionCompanyName;
+		userList = new ArrayList<User>();
+		deptList = new ArrayList<Deptment>();
+		boolean flag=true;
+		if(sessionDeptId.equals("")){ //总经理
+			flag=false;
+		}
+		
+		if(flag){ //部门经理
+			deptList.add(deptService.get(sessionDeptId));
+		}else{    //总经理
+			deptList = deptService.queryAllDeptmentsByCompanyId(sessionCompanyId);
+		}
+		
+		// 获取用户列表
+		if (deptList != null && deptList.size() > 0) {
+			List<User> tempUserList = new ArrayList<User>();
+			for (int i = 0; i < deptList.size(); i++) {
+				if(deptList.get(i)!=null){
+					List<User> tempList = userService.queryUserList(sessionCompanyId, deptList.get(i).getId());
+					if (tempList != null && tempList.size() > 0) {
+						tempUserList.addAll(tempList);
+					}
+				}
+			}
+			if (tempUserList != null && tempUserList.size() > 0) {
+				userList.addAll(tempUserList);
+			}
+		}
+		return "group-tree-for-monthly-main-info-view";
+	}
 	
 	/**
 	 * 打开月计划列表页
@@ -147,6 +185,25 @@ public class MonthlyMainInfoAction  extends BaseActionSupport{
 	 * @throws Exception 
 	 */
 	public String openMonthlyMainInfoList() throws Exception{
+		deptList = deptService.queryAllDeptmentsByCompanyId( sessionCompanyId );
+		Map param = new HashMap();
+		personId = sessionUserId;
+		if(personId!=null && !personId.equals("")){
+			param.put("personId", personId);
+			personName =sessionUserCName;
+		}
+		if(queryTime!=null && !queryTime.equals("")){
+			param.put("planInterzoneBegin", queryTime);
+		}
+		monthlyMainInfoService.findMonthlyMainInfoForPage(param, pagination);
+		return this.SUCCESS;
+	}
+	/**
+	 * 打开月计划列表页
+	 * @return
+	 * @throws Exception 
+	 */
+	public String openMonthlyMainInfoListView() throws Exception{
 		deptList = deptService.queryAllDeptmentsByCompanyId( sessionCompanyId );
 		Map param = new HashMap();
 		if(personId!=null && !personId.equals("")){
@@ -170,6 +227,13 @@ public class MonthlyMainInfoAction  extends BaseActionSupport{
 	 * @return
 	 */
 	public String openTabPage(){
+		return this.SUCCESS;
+	}
+	/**
+	 * 打开月计划Tab页
+	 * @return
+	 */
+	public String openTabPageView(){
 		return this.SUCCESS;
 	}
 	
@@ -200,6 +264,12 @@ public class MonthlyMainInfoAction  extends BaseActionSupport{
 	}
 	
 	public String openModifyMonthlyMainInfo() throws Exception{
+		deptList = deptService.queryAllDeptmentsByCompanyId( sessionCompanyId );
+		userList =userService.queryUserList( sessionCompanyId, sessionDeptId, new Pagination<User>()).getData();
+		monthlyMainInfo = monthlyMainInfoService.getMonthlyMainInfoById(mainInfoId);
+		return this.SUCCESS;
+	}
+	public String openViewMonthlyMainInfo() throws Exception{
 		deptList = deptService.queryAllDeptmentsByCompanyId( sessionCompanyId );
 		userList =userService.queryUserList( sessionCompanyId, sessionDeptId, new Pagination<User>()).getData();
 		monthlyMainInfo = monthlyMainInfoService.getMonthlyMainInfoById(mainInfoId);
