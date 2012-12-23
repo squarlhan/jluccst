@@ -624,7 +624,12 @@
 									||popedomService.isHasPopedom(us.getUserId(), String.valueOf(us.getUserType()), MenuKey.SUB_YUE_JI_HUA, us.getPopedomKeys())
 									||popedomService.isHasPopedom(us.getUserId(), String.valueOf(us.getUserType()), MenuKey.SUB_XIAO_SHOU_ZHI_ZE_SHE_ZHI, us.getPopedomKeys())
 									||popedomService.isHasPopedom(us.getUserId(), String.valueOf(us.getUserType()), MenuKey.SUB_XIAO_SHOU_JI_LU_CHA_XUN, us.getPopedomKeys())
-									||popedomService.isHasPopedom(us.getUserId(), String.valueOf(us.getUserType()), MenuKey.SUB_XIAO_SHOU_JI_LU, us.getPopedomKeys());
+									||popedomService.isHasPopedom(us.getUserId(), String.valueOf(us.getUserType()), MenuKey.SUB_XIAO_SHOU_JI_LU, us.getPopedomKeys())
+									
+									||popedomService.isHasPopedom(us.getUserId(), String.valueOf(us.getUserType()), MenuKey.SUB_ZHOU_JI_HUA, us.getPopedomKeys())
+									||popedomService.isHasPopedom(us.getUserId(), String.valueOf(us.getUserType()), MenuKey.SUB_YUE_JI_HUA, us.getPopedomKeys())
+									||popedomService.isHasPopedom(us.getUserId(), String.valueOf(us.getUserType()), MenuKey.SUB_ZHOU_JI_HUA_CHA_XUN, us.getPopedomKeys())
+									||popedomService.isHasPopedom(us.getUserId(), String.valueOf(us.getUserType()), MenuKey.SUB_YUE_JI_HUA_CHA_XUN, us.getPopedomKeys());
 							if (b) {
 						%>
 						<tr>
@@ -777,6 +782,23 @@
 						</tr>
 						<%} %>
 						<%
+							b = popedomService.isHasPopedom(us.getUserId(), String.valueOf(us.getUserType()), MenuKey.SUB_YUE_JI_HUA_CHA_XUN, us.getPopedomKeys());
+							if (b) {
+						%>
+						<tr>
+							<td align="left">
+								<table width="100%" border="0" cellspacing="5" cellpadding="0">
+									<tr>
+										<td width="40" align="right" style="padding-bottom: 4px;"><img src="images/menuto.jpg" width="5" height="5" />
+										</td>
+										<td><a href="sellreport/weekly/weeklymaininfomanagerview.jsp" target="mainFrame">周计划查询</a>
+										</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+						<%} %>
+						<%
 							b = popedomService.isHasPopedom(us.getUserId(), String.valueOf(us.getUserType()), MenuKey.SUB_YUE_JI_HUA, us.getPopedomKeys());
 							if (b) {
 						%>
@@ -787,6 +809,23 @@
 										<td width="40" align="right" style="padding-bottom: 4px;"><img src="images/menuto.jpg" width="5" height="5" />
 										</td>
 										<td><a href="sellreport/monthly/monthlymaininfomanager.jsp" target="mainFrame">部门月计划</a>
+										</td>
+									</tr>
+								</table>
+							</td>
+						</tr>
+						<%} %>
+						<%
+							b = popedomService.isHasPopedom(us.getUserId(), String.valueOf(us.getUserType()), MenuKey.SUB_YUE_JI_HUA_CHA_XUN, us.getPopedomKeys());
+							if (b) {
+						%>
+						<tr>
+							<td align="left">
+								<table width="100%" border="0" cellspacing="5" cellpadding="0">
+									<tr>
+										<td width="40" align="right" style="padding-bottom: 4px;"><img src="images/menuto.jpg" width="5" height="5" />
+										</td>
+										<td><a href="sellreport/monthly/monthlymaininfomanagerview.jsp" target="mainFrame">月计划查询</a>
 										</td>
 									</tr>
 								</table>
