@@ -46,5 +46,23 @@
 				<param name="inputName">xmlStream</param>
 			</result>
         </action>
+
+		<!-- 月计划查看相关 -->
+        <action name="showGroupTreeForMonthlyMainInfoViewAction" class="monthlyMainInfoAction"  method="showGroupTreeForMonthlyMainInfoView">
+			<result name="group-tree-for-monthly-main-info-view">/sellreport/monthly/group-tree-for-monthly-main-info-view.jsp</result>
+		</action>
+	
+		<action name="openMonthlyMainInfoListViewAction" class="monthlyMainInfoAction" method="openMonthlyMainInfoListView">
+			<result name="success">/sellreport/monthly/monthlymaininfolistview.jsp</result>
+			<result name="input">/sellreport/monthly/monthlymaininfolistview.jsp</result>
+		</action>
+		<action name="openTabPageViewAction" class="monthlyMainInfoAction" method="openTabPageView">
+			<result name="success">/sellreport/monthly/monthlytabview.jsp</result>
+			<result name="input">/sellreport/monthly/monthlytabview.jsp</result>
+		</action>
+		<action name="openViewMonthlyMainInfoAction" class="monthlyMainInfoAction" method="openViewMonthlyMainInfo">
+			<result name="success">/sellreport/monthly/monthlymaininfoview.jsp</result>
+			<result name="input">/sellreport/monthly/monthlymaininfoview.jsp</result>
+		</action>
 	</package>
 </struts>

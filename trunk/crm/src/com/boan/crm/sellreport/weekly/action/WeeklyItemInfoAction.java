@@ -69,6 +69,15 @@ public class WeeklyItemInfoAction extends BaseActionSupport{
 		pagination.setTotalPages(100);
 		return this.SUCCESS;
 	}
+	public String openWeeklyItemListView(){
+		Map param = new HashMap();
+		if(mainInfoId!=null && !mainInfoId.equals("")){
+			param.put("mainInfoId",mainInfoId);
+		}
+		weeklyItemInfoService.findWeeklyItemInfoForPage(param,pagination);
+		pagination.setTotalPages(100);
+		return this.SUCCESS;
+	}
 
 	public String openAddWeeklyItem(){
 		sellDutyList = sellDutyService.findAllSellDutyByCompanyIdAndDutyType(this.sessionCompanyId,0);
@@ -76,6 +85,12 @@ public class WeeklyItemInfoAction extends BaseActionSupport{
 	}
 	
 	public String openModifyWeeklyItem(){
+		weeklyItemInfo= weeklyItemInfoService.getWeeklyItemInfoById(weeklyItemInfo.getId());
+		
+		sellDutyList = sellDutyService.findAllSellDutyByCompanyIdAndDutyType(this.sessionCompanyId,0);
+		return this.SUCCESS;
+	}
+	public String openViewWeeklyItem(){
 		weeklyItemInfo= weeklyItemInfoService.getWeeklyItemInfoById(weeklyItemInfo.getId());
 		
 		sellDutyList = sellDutyService.findAllSellDutyByCompanyIdAndDutyType(this.sessionCompanyId,0);
