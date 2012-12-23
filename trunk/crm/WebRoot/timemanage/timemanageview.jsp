@@ -51,14 +51,14 @@
 									cellpadding="0" cellspacing="0">
 									<tr>
 										<td width="11">
-											<img src="<%=path %>/images/header_01.jpg" width="11" height="36"
+											<img src="../images/header_01.jpg" width="11" height="36"
 												alt="">
 										</td>
-										<td background="<%=path %>/images/header_02.jpg">
-											<span class="STYLE1">您当前的位置：销售管理&gt;&gt;&gt;月计划</span>
+										<td background="../images/header_02.jpg">
+											<span class="STYLE1">您当前的位置：销售管理&gt;&gt;&gt;时间管理查询</span>
 										</td>
 										<td width="12">
-											<img src="<%=path %>/images/header_03.jpg" width="12" height="36"
+											<img src="../images/header_03.jpg" width="12" height="36"
 												alt="">
 										</td>
 									</tr>
@@ -66,7 +66,8 @@
 							</td>
 						</tr>
 						<tr>
-							<td valign="top" style="border-left: 1px solid #54a4e3; border-bottom: 1px solid #54a4e3; border-right: 1px solid #54a4e3; padding: 5px;"><iframe width="100%" height="100%" id="groupmain" name="groupmain" frameborder="0" scrolling="auto" src="openMonthlyMainInfoListAction.action"></iframe></td>
+							<td width="200" valign="top" style="border-left: 1px solid #54a4e3; border-bottom: 1px solid #54a4e3; border-right: 1px solid #54a4e3; padding: 5px;"><iframe width="100%" height="100%" id="menutree" name="menutree"frameborder="0" scrolling="auto" src="<%=path %>/showGroupTreeForTimePlanAction.action"></iframe></td>
+							<td valign="top" style="border-left: 1px solid #54a4e3; border-bottom: 1px solid #54a4e3; border-right: 1px solid #54a4e3; padding: 5px;"><iframe width="100%" height="100%" id="groupmain" name="groupmain" frameborder="0" scrolling="auto" src="<%=path %>/blank.jsp"></iframe></td>
 						</tr>
 					</table>
 				</td>

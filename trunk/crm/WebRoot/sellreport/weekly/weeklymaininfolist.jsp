@@ -151,12 +151,14 @@
    		<span>
       		<table   border="0" cellpadding="5" cellspacing="1" bgcolor="#d5e4fd">
 		      <tr>
+		      		<!-- 
 					<td height="26" width = "80px" align="left" bgcolor="#FFFFFF" nowrap="nowrap">
 						<strong>计划人：</strong>
 					</td>
 					<td height="26" width = "80px"  align="left" bgcolor="#FFFFFF">
 						<s:textfield id="txt_query_person_name" name="personName" cssStyle="width:120px"></s:textfield>
 					</td>
+					 -->
 					<td height="26" width = "120px"  align="left" bgcolor="#FFFFFF" nowrap="nowrap">
 						<strong>计划开始时间：</strong>
 					</td>

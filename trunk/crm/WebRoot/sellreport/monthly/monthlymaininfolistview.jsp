@@ -49,50 +49,25 @@
 	
 		$(function(){
 			$('#txt_queryTime').datetimepicker({showTimepicker: false});
-			
-			$("#addbtn").click(function(){
-				parent.parent.tipsWindown("添加月计划","iframe:openTabPageAction.action","850","520","true","","true","no");
-				parent.parent.$("#windown-close").bind('click',function(){
-					//window.location.href="./openMonthlyMainInfoListAction.action?companyId="+$("#hid_companyId").val()+"&deptId="+$("#hid_deptId").val()+"&personId="+$("#hid_personId").val();
-					$("#form1").attr("openMonthlyMainInfoListAction.action");
-					$("#form1").submit();
-				});
-		
-			});
 			$.fn.checkall("cbk_all");
 	  		$.fn.uncheckall("ids","cbk_all");
 	  		if($("#hid_personId").val()!=""){
 	  			$.fn.ReadOnly("txt_query_person_name");
 	  		}
 	  		/**
-	  		 * 修改
+	  		 * 查看信息
 	  		 */
 	  		$('a[name="edit"]').each(function(){
 	  			$(this).click(function(){
 	  				var url = $(this).attr("url");
-	  				parent.parent.tipsWindown("修改月计划","iframe:"+url,"850","520","true","","true","no");
+	  				parent.parent.tipsWindown("查看月计划","iframe:"+url,"850","520","true","","true","no");
 	  				parent.parent.$("#windown-close").bind('click',function(){
 	  					//window.location.href="./openMonthlyMainInfoListAction.action?companyId="+$("#hid_companyId").val()+"&deptId="+$("#hid_deptId").val()+"&personId="+$("#hid_personId").val();
-	  					$("#form1").attr("openMonthlyMainInfoListAction.action");
+	  					$("#form1").attr("openMonthlyMainInfoListViewAction.action");
 						$("#form1").submit();
 					});
 	  			});
 	  		});
-	  		
-	  		/**
-	  		 * 删除单个设备信息
-	  		 */
-	  		$('a[name="delete"]').each(function(){
-	  			$(this).click(function(){
-	  				var url = $(this).attr("url");
-	  				if(window.confirm("您确定要删除这条信息吗？")){
-	  					$.post(url, "", function(data){
-	  						window.location.href="./openMonthlyMainInfoListAction.action?companyId="+$("#hid_companyId").val()+"&deptId="+$("#hid_deptId").val()+"&personId="+$("#hid_personId").val();
-	  					});
-	  				}
-	  			});
-	  		});
-	  		
 	  		/**
 	  		 * 统计
 	  		 */
@@ -101,18 +76,6 @@
 	  				var url = $(this).attr("url");
 	  				parent.parent.tipsWindown("查看统计","iframe:"+url,"850","520","true","","true","no");
 	  			});
-	  		});
-	  		
-	  		/**
-	  		 * 删除所选设备信息
-	  		 */
-	  		$("#deletepointbtn").click(function(){
-  				var url = "deleteTimePlanAction.action";
-  				if(window.confirm("您确定要删除所选信息吗？")){
-  					$.post(url, $('#form1').serialize(), function(data){
-  						window.location.href="./openMonthlyMainInfoListAction.action?companyId="+$("#hid_companyId").val()+"&deptId="+$("#hid_deptId").val()+"&personId="+$("#hid_personId").val();
-  					});
-  				}
 	  		});
 		});
 		/**
@@ -148,14 +111,12 @@
    		<span>
       		<table   border="0" cellpadding="5" cellspacing="1" bgcolor="#d5e4fd">
 		      <tr>
-		      		<!-- 
 					<td height="26" width = "80px" align="left" bgcolor="#FFFFFF" nowrap="nowrap">
 						<strong>计划人：</strong>
 					</td>
 					<td height="26" width = "80px"  align="left" bgcolor="#FFFFFF">
 						<s:textfield id="txt_query_person_name" name="personName" cssStyle="width:120px"></s:textfield>
 					</td>
-					 -->
 					<td height="26" width = "120px"  align="left" bgcolor="#FFFFFF" nowrap="nowrap">
 						<strong>计划开始时间：</strong>
 					</td>
@@ -173,8 +134,6 @@
 	</tr>
   <tr>
     <td valign="top">
-    <input name="addbtn" type="button" class="btn_2_3" id="addbtn" value="添加" >
-            <input name="deletepointbtn" type="button" class="btn_4" id="deletepointbtn" value="删除所选">
       <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#d5e4fd">
         <tr>
          	<td align="center" background="<%=path %>/images/headerbg.jpg">  
@@ -200,17 +159,13 @@
                 <td height="26" align="left" bgcolor="#FFFFFF"><s:property value="superior"/></td>
                 <td height="26" align="left" bgcolor="#FFFFFF"><s:property value="checker"/></td>
           <td height="26" colspan="2" align="center" bgcolor="#FFFFFF"  nowrap="nowrap">
-          	<s:url id="edit_url" action="openTabPageAction">   
+          	<s:url id="edit_url" action="openTabPageViewAction">   
 				<s:param name="monthlyMainInfo.id" value="id"></s:param>   
-			</s:url>
-			<s:url id="delete_url" action="deleteMonthlyMainInfoAction">   
-				<s:param name="ids" value="id"></s:param>   
 			</s:url>
 			<s:url id="stat_url" action="showMonthlyStatInfoAction">   
 				<s:param name="mainInfoId" value="id"></s:param>   
 			</s:url>
-         	<a name="edit" href="javascript:void(0);" url="${edit_url}">编辑</a>  
-         	<a name="delete" href="javascript:void(0);" url="${delete_url}">删除</a>
+         	<a name="edit" href="javascript:void(0);" url="${edit_url}">查看信息</a>  
          	<a name="stat" href="javascript:void(0);" url="${stat_url}">查看统计</a>
           </td>
         </tr>
