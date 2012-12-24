@@ -400,7 +400,7 @@ public class SMSAtion extends BaseActionSupport{
 							String[] timeArray = sendTime.split(":");
 							if(dayArray.length>0 && timeArray.length>0){
 								time.set(Calendar.YEAR, Integer.parseInt(dayArray[0]));
-								time.set(Calendar.MONTH, Integer.parseInt(dayArray[1]));
+								time.set(Calendar.MONTH, Integer.parseInt(dayArray[1])-1);
 								time.set(Calendar.DATE, Integer.parseInt(dayArray[2]));
 								time.set(Calendar.HOUR_OF_DAY, Integer.parseInt(timeArray[0]));
 								time.set(Calendar.MINUTE, Integer.parseInt(timeArray[1]));
