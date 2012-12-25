@@ -12,7 +12,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title><s:property value="suffix"/>客户关系管理系统</title>
+<title><s:property value="suffix"/>销售团队智能管理系统</title>
 <j:scriptlink css="true" jquery="true" jquerylayout="true" tipswindow="true" jmessagebox="true" jmessager="true" />
 <script type="text/javascript">
 <!--
