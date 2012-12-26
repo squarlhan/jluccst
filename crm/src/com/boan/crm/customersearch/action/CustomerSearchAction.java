@@ -268,8 +268,9 @@ public class CustomerSearchAction  extends BaseActionSupport{
 		
 		provinceList = areaService.findAllProvinceInfo();
 		
-		customerLibInfo = customerInfoService.get(customerLibInfo.getId());
 		ProvinceInfo province = areaService.getProvince(provinceId);
+//		customerLibInfo = customerInfoService.get(customerLibInfo.getId());
+		customerLibInfo = customerInfoService.get(province.getProvinceName(),customerLibInfo.getId());
 		List<ContractPersonLibInfo> contractPersonInfoList = contractpersonService.findAllContractPersonLibInfoByCustomerId(province.getProvinceName(),customerLibInfo.getId());
 		if(customerLibInfo!=null){
 			CustomerInfo customerInfo =(CustomerInfo)ParseBeanUtil.parseBean(customerLibInfo, CustomerInfo.class);
