@@ -458,7 +458,8 @@ public class CustomerLibInfoServiceImpl implements ICustomerLibInfoService{
 			hql.append(" and district = :areaId ");
 		}
 		if(salesmanId!=null){
-			hql.append(" and id not in (Select customerLibId from NoSearchCustomers where company_Id = '"+company_Id+"' and salesmanId='"+salesmanId+"') ");
+			//hql.append(" and id not in (Select customerLibId from NoSearchCustomers where company_Id = '"+company_Id+"' and salesmanId='"+salesmanId+"') ");
+			hql.append(" and id not in (Select customerLibId from NoSearchCustomers where company_Id = '"+company_Id+"' ) ");
 		}
 		
 		hql.append(" order by registerTime asc");
@@ -484,7 +485,8 @@ public class CustomerLibInfoServiceImpl implements ICustomerLibInfoService{
 			hql.append(" and district = :areaId ");
 		}
 		if(salesmanId!=null){
-			hql.append(" and id not in (Select customerLibId from NoSearchCustomers where company_Id = '"+company_Id+"' and  salesmanId='"+salesmanId+"') ");
+			//hql.append(" and id not in (Select customerLibId from NoSearchCustomers where company_Id = '"+company_Id+"' and  salesmanId='"+salesmanId+"') ");
+			hql.append(" and id not in (Select customerLibId from NoSearchCustomers where company_Id = '"+company_Id+"' ) ");
 		}
 		
 		int totalRows = customerLibInfoDao.findCountForPage(hql.toString(), values);
