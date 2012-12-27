@@ -73,6 +73,7 @@
 		  		//日期控件
 				$('#txt_bargainTime').datetimepicker({showTimepicker: false});
 		  		$("#btn_add").click(function(){
+		  			$.cookie('detial', '', { expires: -1 }); //先清理一下cookie，防止原来没有清理的数据还存在
 					parent.parent.parent.tipsWindown("商品明细","iframe:openAddSellRecordDetialAction.action","780","300","true","","true","no");
 					parent.parent.parent.$("#windown-close").bind('click',function(){
 						var detials = $.cookie('detial'); // 读取 cookie中的被选择的人员Id
