@@ -109,7 +109,7 @@
 	  		 * 删除所选设备信息
 	  		 */
 	  		$("#deletepointbtn").click(function(){
-  				var url = "deleteTimePlanAction.action";
+  				var url = "deleteWeeklyMainInfoAction.action";
   				if(window.confirm("您确定要删除所选信息吗？")){
   					$.post(url, $('#form1').serialize(), function(data){
   						window.location.href="./openWeeklyMainInfoListAction.action?companyId="+$("#hid_companyId").val()+"&deptId="+$("#hid_deptId").val()+"&personId="+$("#hid_personId").val();
