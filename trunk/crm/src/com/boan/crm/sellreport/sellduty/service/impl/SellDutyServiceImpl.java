@@ -124,8 +124,10 @@ public class SellDutyServiceImpl implements ISellDutyService {
 				}
 			}
 			temp=null;
+		}else{
+			return false;
 		}
-		return false;
+		return true;
 	}
 	
 	/**

@@ -102,7 +102,8 @@ public class SellDutyAction extends BaseActionSupport{
 	 * 保存前验证
 	 */
 	public void validateAddSellDuty(){
-		boolean flag = sellDutyService.isExistSameName(sellDuty.getName(),sellDuty.getId(),this.sessionCompanyId,sellDuty.getDutyType());
+		companyId = sellDuty.getCompanyId();
+		boolean flag = sellDutyService.isExistSameName(sellDuty.getName(),sellDuty.getId(),companyId,sellDuty.getDutyType());
 		if(flag){
 			this.addFieldError("", "相同职责类型下已经存在该职责名称，请重新输入！");
 		}
@@ -129,7 +130,8 @@ public class SellDutyAction extends BaseActionSupport{
 	 * 修改前验证
 	 */
 	public void validateModifySellDuty(){
-		boolean flag = sellDutyService.isExistSameName(sellDuty.getName(),sellDuty.getId(),this.sessionCompanyId,sellDuty.getDutyType());
+		companyId = sellDuty.getCompanyId();
+		boolean flag = sellDutyService.isExistSameName(sellDuty.getName(),sellDuty.getId(),companyId,sellDuty.getDutyType());
 		if(flag){
 			this.addFieldError("", "相同职责类型下已经存在该职责名称，请重新输入！");
 		}
