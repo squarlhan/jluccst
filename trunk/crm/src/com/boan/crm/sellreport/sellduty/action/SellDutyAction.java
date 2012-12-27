@@ -46,6 +46,11 @@ public class SellDutyAction extends BaseActionSupport{
 	 * 选择的时间计划Id
 	 */
 	private String[] ids;
+
+	/**
+	 * 公司id
+	 */
+	private String companyId;
 	
 	/**
 	 * @return
@@ -53,6 +58,7 @@ public class SellDutyAction extends BaseActionSupport{
 	public String openSellDutyList(){
 		Map<String, String> param = new HashMap<String, String>();
 		param.put("companyId", this.sessionCompanyId);
+		companyId =  this.sessionCompanyId;
 		pagination = sellDutyService.findSellDutyForPage(param , pagination);
 		return SUCCESS;
 	}
@@ -62,6 +68,8 @@ public class SellDutyAction extends BaseActionSupport{
 	 */
 	public String openAddSellDuty(){
 		sellDuty=new SellDuty();
+		companyId =  this.sessionCompanyId;
+		sellDuty.setCompanyId(companyId);
 		return SUCCESS;
 	}
 	
@@ -70,6 +78,7 @@ public class SellDutyAction extends BaseActionSupport{
 	 */
 	public String openModifySellDuty(){
 		sellDuty =  sellDutyService.getSellDutyById(sellDuty.getId());
+		companyId =  sellDuty.getCompanyId();
 		return SUCCESS;
 	}
 	
@@ -174,5 +183,13 @@ public class SellDutyAction extends BaseActionSupport{
 
 	public void setIds(String[] ids) {
 		this.ids = ids;
+	}
+
+	public String getCompanyId() {
+		return companyId;
+	}
+
+	public void setCompanyId(String companyId) {
+		this.companyId = companyId;
 	}
 }
