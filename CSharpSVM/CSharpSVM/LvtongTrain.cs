@@ -12,6 +12,8 @@ namespace CSharpSVM
         public DataSet lvds { get; set; }
         public List<LvtongTrainData> lvdata { get; set; }
         public libSVM_Problem Problem { get; set; }
+        public libSVM svm{get; set;}
+        public List<SortedDictionary<int, int>> weights{get;set;}
 
         public LvtongTrain()
         {
@@ -111,13 +113,66 @@ namespace CSharpSVM
         public void doTrian()
         {
             libSVM_Parameter Parameter = new libSVM_Parameter();
-            libSVM svm = new libSVM();
+            svm = new libSVM();
             Parameter.svm_type = SVM_TYPE.ONE_CLASS;
             Parameter.kernel_type = KERNEL_TYPE.RBF;
             Parameter.gamma = 0.00003571;
             Parameter.nu = 0.0381;
             svm.Train(Problem, Parameter);
-            Console.ReadLine();
+            //svm.TrainAuto(10, Problem, Parameter);
+            //libSVM_Grid grid_c = new libSVM_Grid();
+            //svm.TrainAuto(10, Problem, Parameter, grid_c, null, null, null, null, null);
+            //libSVM_Grid grid_c = new libSVM_Grid();
+            //libSVM_Grid grid_g = new libSVM_Grid();
+            //libSVM_Grid grid_n = new libSVM_Grid();
+            //svm.TrainAuto(10, Problem, Parameter, grid_c, grid_g, null, grid_n, null, null);
+            int size = Problem.samples.Length;
+            int wc= 0;
+            for (int i = 0; i <= size - 1; i++)
+            {
+                if (Problem.labels[i] != svm.Predict(Problem.samples[i]))
+                {
+                    wc++;
+                    Console.WriteLine("Wrong Prediction @" + (i + 1));
+                }
+            }
+            Console.WriteLine(1-(double)wc/size);
+        }
+
+        public void doTrainbyWeight()
+        {
+            if(weights == null||weights.Count <= 0)doTrian();
+
+        
+        }
+        public bool doPredictbyWeight(LvtongTrainData lv)
+        {
+            if (weights == null || weights.Count <= 0) doPredict(lv);
+
+            return true;
+        }
+
+        public bool doPredict(LvtongTrainData lv)
+        {
+            SortedDictionary<int, double> sample = new SortedDictionary<int, double>();
+            sample.Add(1, lv.in_M);
+            sample.Add(2, lv.in_D);
+            sample.Add(3, lv.in_H);
+            sample.Add(4, lv.out_M);
+            sample.Add(5, lv.out_D);
+            sample.Add(6, lv.out_H);
+            sample.Add(7, lv.jianmian);
+            sample.Add(8, lv.chezhou);
+            sample.Add(9, lv.chezhong);
+            sample.Add(10, lv.zaihuo);
+            sample.Add(11, lv.bianhao);
+            sample.Add(12, lv.ruguan);
+            sample.Add(13, lv.shijiancha);
+            if (svm.Predict(sample)!=1)
+            {
+                return false;
+            }
+            return true;
         }
 
     }
