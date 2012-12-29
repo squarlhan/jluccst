@@ -10,10 +10,13 @@ namespace CSharpSVM
     {
         static void Main(string[] args)
         {
-
+            DateTime dt = DateTime.Now;          
             LvtongTrain lt = new LvtongTrain();
             lt.Load_LvData();
             lt.doTrian();
+            TimeSpan ts = DateTime.Now - dt;
+            Console.WriteLine(ts);
+            Console.ReadLine();
             
 
             //libSVM_Problem Problem = libSVM_Problem.Load("../../data/train.dat");
