@@ -147,7 +147,6 @@ namespace CSharpSVM
 
         public void doTrian()
         {
-            
             svm.Train(Problem, Parameter);
             //svm.TrainAuto(10, Problem, Parameter);
             //libSVM_Grid grid_c = new libSVM_Grid();
@@ -156,20 +155,26 @@ namespace CSharpSVM
             //libSVM_Grid grid_g = new libSVM_Grid();
             //libSVM_Grid grid_n = new libSVM_Grid();
             //svm.TrainAuto(10, Problem, Parameter, grid_c, grid_g, null, grid_n, null, null);
-            int size = Problem.samples.Length;
-            int wc= 0;
-            for (int i = 0; i <= size - 1; i++)
-            {
-                if (Problem.labels[i] != svm.Predict(Problem.samples[i]))
-                {
-                    wc++;
-                    Console.WriteLine("Wrong Prediction @" + (i + 1));
-                }
-            }
-            Console.WriteLine(1-(double)wc/size);
+            //int size = Problem.samples.Length;
+            //int wc= 0;
+            //for (int i = 0; i <= size - 1; i++)
+            //{
+            //    if (Problem.labels[i] != svm.Predict(Problem.samples[i]))
+            //    {
+            //        wc++;
+            //        Console.WriteLine("Wrong Prediction @" + (i + 1));
+            //    }
+            //}
+            //Console.WriteLine(1-(double)wc/size);
+            Console.WriteLine("train Accuracy is "+svm.GetAccuracy(Problem));
+            svm.Save("lv_model_file"); 
         }
 
-        
+
+        public void reloadSVM(String filename)
+        {
+            svm.Reload("lv_model_file"); 
+        }
 
         public bool doPredict(LvtongTrainData lv)
         {
