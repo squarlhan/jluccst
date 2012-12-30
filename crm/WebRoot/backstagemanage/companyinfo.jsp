@@ -212,6 +212,17 @@
 										</td>
 									</tr>
 									<tr>
+										<td height="26" align="right" bgcolor="#FFFFFF">
+											<strong>试用限制：</strong>
+										</td>
+										<td height="26" align="left" bgcolor="#FFFFFF">
+											<input type="checkbox" name="trialFlag" id="trialFlag" value="1"
+											<s:if test='company.trialFlag =="1"'>
+											checked="checked"
+											</s:if>/> 选中表示有试用限制
+										</td>
+									</tr>
+									<tr>
 										<td height="26" colspan="2" align="center" bgcolor="#FFFFFF">
 											<input name="addBtn" type="button" class="btn_2_3" id="addBtn" value="确定">
 											&nbsp;&nbsp;
