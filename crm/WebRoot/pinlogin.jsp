@@ -22,9 +22,9 @@ function message(msg){
 	alert(msg);
 }
 function validUsbkey(){
-	var randomData = "<s:property value="randomData"/>";
+	var randomData = document.getElementById("randomData");
 	var hashToken = document.getElementById("hashToken");
-	var sn_random = document.getElementById("sn_random");
+	var keySn = document.getElementById("keySn");
 	
 	//检查ePass驱动及安全控件是否安装
 	try{
@@ -44,7 +44,7 @@ function validUsbkey(){
 	
 	//获取SN
 	try{
-		sn_random.value = ePass.GetStrProperty(7, 0, 0) + "@" + randomData;
+		keySn.value = ePass.GetStrProperty(7, 0, 0) ;
 	}catch(e){
 		ePass.CloseDevice();
 		message("USB锁无效，请联系管理员！");
@@ -115,8 +115,8 @@ function validUsbkey(){
 	}catch(e){}
 	
 	//验证表单值
-	if(hashToken.value!="" && sn_random.value!="" && sn_random.value.indexOf("@")!=-1){
-		//alert(sn_random.value);
+	if(hashToken.value!="" && keySn.value!=""){
+		//alert(keySn.value);
 		//alert(hashToken.value);
 	} else {
 		message("读取USB锁过程中发生错误！如有问题请联系管理人员。");
@@ -145,7 +145,8 @@ function validmessage(){
 <object classid="clsid:E740C5DF-3454-46A7-80EC-364D1ADB6CF0" id="ePass" name="ePass" style="left: 0px; top: 0px" width=0 height=0></object>
 <form id="form1" name="form1" method="post" onsubmit="return validUsbkey();" action="./pinLogonValidAction.action" target="iframe1">
 <input name="hashToken" id="hashToken" type="hidden"/>
-<input name="sn_random" id="sn_random" type="hidden"/>
+<input name="keySn" id="keySn" type="hidden"/>
+<input name="randomData" id="randomData" type="hidden" value="<s:property value="randomData"/>"/>
 		<table width="100%" border="0" cellspacing="5" cellpadding="0">
 			<tr>
 				<td>
