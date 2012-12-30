@@ -196,8 +196,17 @@
 											<strong>服务截至日期：</strong>
 										</td>
 										<td height="26" align="left" bgcolor="#FFFFFF">
-											<font color="red"><strong><s:property value="company.serviceTermCn"/></strong></font>
+											<strong><s:property value="company.serviceTermCn"/></strong>
 											<s:hidden id="serviceTerm" name="company.serviceTerm" />
+										</td>
+									</tr>
+									<tr>
+										<td height="26" align="right" bgcolor="#FFFFFF">
+											<strong>试用限制：</strong>
+										</td>
+										<td height="26" align="left" bgcolor="#FFFFFF">
+											<strong><s:property value="company.trialFlagCn" escape="false"/></strong>
+											<s:hidden id="trialFlag" name="company.trialFlag" />
 										</td>
 									</tr>
 									<tr>

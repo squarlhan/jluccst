@@ -46,7 +46,7 @@
 		$(function(){
 			
 			$("#addbtn").click(function(){
-				parent.parent.tipsWindown("添加公司档案","iframe:openAddCompanyAction.action","510","430","true","","true","no");
+				parent.parent.tipsWindown("添加公司档案","iframe:openAddCompanyAction.action","530","460","true","","true","no");
 				parent.parent.$("#windown-close").bind('click',function(){
 					window.location.href="./openCompanyAction.action";
 				});
@@ -61,7 +61,7 @@
 	  		$('a[name="edit"]').each(function(){
 	  			$(this).click(function(){
 	  				var url = $(this).attr("url");
-	  				parent.parent.tipsWindown("修改公司档案","iframe:"+url,"510","430","true","","true","no");
+	  				parent.parent.tipsWindown("修改公司档案","iframe:"+url,"510","460","true","","true","no");
 	  				parent.parent.$("#windown-close").bind('click',function(){
 						window.location.href="./openCompanyAction.action";
 					});
@@ -118,6 +118,7 @@
               <td align="center" background="<%=path %>/images/headerbg.jpg"><strong>公司电话</strong></td>
                <td align="center" background="<%=path %>/images/headerbg.jpg"><strong>传真</strong></td>
                <td align="center" background="<%=path %>/images/headerbg.jpg"><strong>服务截至日期</strong></td>
+               <td align="center" background="<%=path %>/images/headerbg.jpg"><strong>试用限制</strong></td>
               <td align="center" background="<%=path %>/images/headerbg.jpg"><strong>操作</strong></td>
         </tr>
         <s:iterator value="pagination.data" status="obj">
@@ -139,6 +140,7 @@
                 <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="phone"/></td>
                 <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="fax"/></td>
                 <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="serviceTermCn"/></td>
+                <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="trialFlagCn" escape="false"/></td>
           <td height="26" colspan="2" align="center" bgcolor="#FFFFFF">
           	<s:url id="edit_url" action="openModifyCompanyAction">   
 				<s:param name="company.id" value="id"></s:param>   
@@ -160,7 +162,7 @@
         </tr>
         </s:iterator>        
         <tr>
-          <td height="26" colspan="9" align="center" bgcolor="#FFFFFF">
+          <td height="26" colspan="10" align="center" bgcolor="#FFFFFF">
 			<page:pages currentPage="pagination.currentPage" totalPages="pagination.totalPages" totalRows="pagination.totalRows" styleClass="page" theme="text" ></page:pages> 
 		   
 		  </td>
