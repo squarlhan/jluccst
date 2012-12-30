@@ -61,7 +61,7 @@
 				}
 			}
 			function superpin(){
-				parent.parent.tipsWindown("超级管理员登录","iframe:./pinLoginAction.action","400","150","true","","true","no");
+				parent.parent.tipsWindown("超级管理员后台登录","iframe:./pinLoginAction.action","400","150","true","","true","no");
 			}
 		</script>
 	</head>
