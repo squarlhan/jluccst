@@ -98,7 +98,7 @@
 								alt="登录" style="cursor:pointer;" onclick="logon();"></td>
 			  				<td height="159" rowspan="2" background="images/login_10.png">&nbsp;</td>
 							<td height="28" colspan="2"><img src="images/login_11.png" width="68" height="28" 
-								alt="重置" onclick="superpin();"></td>
+								alt="后台登录"  style="cursor:pointer;" onclick="superpin();"></td>
 							<td height="159" colspan="2" rowspan="2" background="images/login_12.png">&nbsp;</td>
 					  </tr>
 						<tr>
