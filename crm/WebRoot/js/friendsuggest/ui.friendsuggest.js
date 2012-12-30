@@ -252,9 +252,11 @@ if(typeof giant.ui === 'undefined') giant.ui = {};
 	                        var arr = [];
 	                        $.each(myData, function(i, n) {
 	                            if ($this.opts.selectType == 'multiple') {
-	                            arr.push("<a href='javascript:void(0)' title='" + n.friendUserName + "' class='checkbox" + (($.inArray(n.fUid + '', $this.resultArr) > -1) ? " checked" : "") + "' name='" + n.fUid+ "'><img src='" + n.friendHeadPic + "' title='" + n.fUid + "' alt='' />" + n.friendUserName + "</a>");
+	                            //arr.push("<a href='javascript:void(0)' title='" + n.friendUserName + "' class='checkbox" + (($.inArray(n.fUid + '', $this.resultArr) > -1) ? " checked" : "") + "' name='" + n.fUid+ "'><img src='" + n.friendHeadPic + "' title='" + n.fUid + "' alt='' />" + n.friendUserName + "</a>");
+	                            arr.push("<a href='javascript:void(0)' title='" + n.friendUserName + "' class='checkbox" + (($.inArray(n.fUid + '', $this.resultArr) > -1) ? " checked" : "") + "' name='" + n.fUid+ "'><img src='" + n.friendHeadPic + "' alt='' />" + n.friendUserName + "</a>");
 	                            } else {
-	                            arr.push("<a href='javascript:void(0)' title='" + n.friendUserName + "' class='radio" + (($.inArray(n.fUid + '', $this.resultArr) > -1) ? " checked" : "") + "' name='" + n.fUid + "'><img src='" + n.friendHeadPic + "' title='" + n.fUid + "' alt='' />" + n.friendUserName + "</a>");
+	                            //arr.push("<a href='javascript:void(0)' title='" + n.friendUserName + "' class='radio" + (($.inArray(n.fUid + '', $this.resultArr) > -1) ? " checked" : "") + "' name='" + n.fUid + "'><img src='" + n.friendHeadPic + "' title='" + n.fUid + "' alt='' />" + n.friendUserName + "</a>");
+	                            arr.push("<a href='javascript:void(0)' title='" + n.friendUserName + "' class='radio" + (($.inArray(n.fUid + '', $this.resultArr) > -1) ? " checked" : "") + "' name='" + n.fUid + "'><img src='" + n.friendHeadPic + "' alt='' />" + n.friendUserName + "</a>");
 	                            }
 	                        });
 	                        $container.html(arr.join(''));
