@@ -132,6 +132,11 @@ public class CompanyAction extends BaseActionSupport {
 	 * 短信服务激活标识
 	 */
 	private String smsActivation = null;
+	
+	/**
+	 * 试用限制
+	 */
+	private String trialFlag = null;
 
 	/**
 	 * 显示公司列表
@@ -206,6 +211,13 @@ public class CompanyAction extends BaseActionSupport {
 					// 关闭当前短信客户端连接
 					SMSManageService.closeClientSocket();
 				}
+			}
+			//试用限制
+			if( "1".equals(trialFlag) ){
+				company.setTrialFlag(1);
+			}else
+			{
+				company.setTrialFlag(0);
 			}
 			service.save(company);
 			message.setContent("公司信息保存成功！");
@@ -298,7 +310,13 @@ public class CompanyAction extends BaseActionSupport {
 					SMSManageService.closeClientSocket();
 				}
 			}
-
+			//试用限制
+			if( "1".equals(trialFlag) ){
+				company.setTrialFlag(1);
+			}else
+			{
+				company.setTrialFlag(0);
+			}
 			service.update(company);
 			message.setContent("公司信息保存成功！");
 			List<DataDictionary> dataDictionary = dataDictionaryService.findAllDataDictionaryByCompanyId(StringUtils.trimToEmpty(company.getId()));
@@ -482,5 +500,13 @@ public class CompanyAction extends BaseActionSupport {
 
 	public void setSmsActivation(String smsActivation) {
 		this.smsActivation = smsActivation;
+	}
+
+	public String getTrialFlag() {
+		return trialFlag;
+	}
+
+	public void setTrialFlag(String trialFlag) {
+		this.trialFlag = trialFlag;
 	}
 }
