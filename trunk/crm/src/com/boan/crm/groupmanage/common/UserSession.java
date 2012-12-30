@@ -79,6 +79,11 @@ public class UserSession implements java.io.Serializable
 	 * 用户登录时，所拥有的所有权限key值
 	 */
 	private String[] popedomKeys;
+	
+	/**
+	 * 公司试用限制标识，1表示有限制，0表示没有
+	 */
+	private int companyTrialFlag;
 
 	public String getUserId()
 	{
@@ -203,6 +208,14 @@ public class UserSession implements java.io.Serializable
 
 	public void setProductSuffix(String productSuffix) {
 		this.productSuffix = productSuffix;
+	}
+
+	public int getCompanyTrialFlag() {
+		return companyTrialFlag;
+	}
+
+	public void setCompanyTrialFlag(int companyTrialFlag) {
+		this.companyTrialFlag = companyTrialFlag;
 	}
 
 }
