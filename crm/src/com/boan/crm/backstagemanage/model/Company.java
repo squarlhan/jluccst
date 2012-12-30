@@ -108,6 +108,12 @@ public class Company {
 	 */
 	@Column(name = "CREATE_TIME")
 	private Calendar createTime = Calendar.getInstance();
+	
+	/**
+	 * 试用标识，1表示试用，0表示正式版
+	 */
+	@Column(name = "TRIAL_FLAG", nullable=false)
+	private int  trialFlag;
 
 	/**
 	 * 如果公司下有部门或有人，则不能删除
@@ -252,6 +258,22 @@ public class Company {
 		}else{
 			//没过期
 			return false;
+		}
+	}
+
+	public int getTrialFlag() {
+		return trialFlag;
+	}
+
+	public void setTrialFlag(int trialFlag) {
+		this.trialFlag = trialFlag;
+	}
+	
+	public String getTrialFlagCn(){
+		if( trialFlag == 1 ){
+			return "<font color='red'>有限制</font>";
+		}else{
+			return "无限制";
 		}
 	}
 }
