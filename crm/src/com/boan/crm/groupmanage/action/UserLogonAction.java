@@ -108,11 +108,11 @@ public class UserLogonAction extends ActionSupport {
 
 	private String suffix = "";
 
-	private String randomData = "";
-
 	private String hashToken = null;
 
-	private String sn_random = null;
+	private String randomData = "";
+
+	private String keySn = null;
 
 	/**
 	 * 验证密码
@@ -142,9 +142,9 @@ public class UserLogonAction extends ActionSupport {
 			ServletContext servletContext = session.getServletContext();
 			WebApplicationContext context = WebApplicationContextUtils.getRequiredWebApplicationContext(servletContext);
 			if (user != null) {
-				if( user.getUserType() == UserType.ADMINISTRATOR ){
+				if (user.getUserType() == UserType.ADMINISTRATOR) {
 					message.setContent("您是超级管理员，请使用身份锁登录！");
-					//return ERROR;
+					// return ERROR;
 				}
 				// 获取权限串
 				String roleId = user.getRoleId();
@@ -165,6 +165,7 @@ public class UserLogonAction extends ActionSupport {
 						Company company = companyService.get(user.getCompanyId());
 						if (company != null) {
 							userSession.setCompanyName(company.getCompanyName());
+							userSession.setCompanyTrialFlag(company.getTrialFlag());
 						}
 						if (company.checkServiceTerm()) {
 							message.setContent("您的账号已过试用期，请联系软件供应商！");
@@ -284,7 +285,7 @@ public class UserLogonAction extends ActionSupport {
 	 */
 	public String pinLoginValid() throws Exception {
 		boolean b = false;
-		User user = null; 
+		User user = null;
 		// 验证产品是否过期
 		CheckProductKey productKey = new CheckProductKey();
 		if (productKey.getProductKey()) {
@@ -292,27 +293,39 @@ public class UserLogonAction extends ActionSupport {
 			return ERROR;
 		}
 		try {
-			HMAC_MD5 hm = null;
-			String sn = sn_random.substring(0, sn_random.lastIndexOf("@"));
-			String randata = sn_random.substring(sn_random.lastIndexOf("@") + 1);
-			EkeyUser ekeyUser = ekeyUserService.getEkeyUserById(sn);
+			// 对以下三个关键数据进行处理
+			// keySn
+			// randomData
+			// hashToken
+			EkeyUser ekeyUser = ekeyUserService.getEkeyUserById(keySn);
 			if (ekeyUser != null) {
-				if (ekeyUser.getKey() != null && !"".equals(ekeyUser.getKey()) && randata != null && !"".equals(randata)) {
-					hm = new HMAC_MD5(ekeyUser.getKey().getBytes());
-					hm.addData(randata.getBytes());
+				// 获取数据库当中的值
+				if (ekeyUser.getKey() != null && !"".equals(ekeyUser.getKey()) && randomData != null && !"".equals(randomData)) {
+					// 处理
+					HMAC_MD5 hm = new HMAC_MD5(ekeyUser.getKey().getBytes());
+					hm.addData(randomData.getBytes());
 					hm.sign();
+					// 获得客户端Hash串与后台数据库当中的数据Hash处理后,进行对比
+					//Md5PasswordEncoder.encodePassword(password, sn_random);
+					//!
+					/*
+					if (!hashToken.equals(hm.toString())) {
+						message.setContent("您正在使用的是非法身份锁，请联系管理员！");
+						return ERROR;
+					}
+					*/
 				}
 				String eKeyUserId = ekeyUser.getUserId();
 				user = userService.getUserById(eKeyUserId);
 				if (user != null) {
-					String password = hm.toString();
-					user.setPassword(Md5PasswordEncoder.encodePassword(password, sn_random));
-					user.setSalt(sn_random);
-					if( user.getUserType() == UserType.ADMINISTRATOR ){
+					if (user.getUserType() == UserType.ADMINISTRATOR) {
 						b = true;
 					}
+				} else {
+					message.setContent("当前身份锁用户并不存在，请联系管理员！");
+					return ERROR;
 				}
-			}else{
+			} else {
 				message.setContent("获取身份锁用户失败，请联系管理员！");
 				return ERROR;
 			}
@@ -561,20 +574,20 @@ public class UserLogonAction extends ActionSupport {
 		this.hashToken = hashToken;
 	}
 
-	public String getSn_random() {
-		return sn_random;
-	}
-
-	public void setSn_random(String sn_random) {
-		this.sn_random = sn_random;
-	}
-
 	public IEkeyUserService getEkeyUserService() {
 		return ekeyUserService;
 	}
 
 	public void setEkeyUserService(IEkeyUserService ekeyUserService) {
 		this.ekeyUserService = ekeyUserService;
+	}
+
+	public String getKeySn() {
+		return keySn;
+	}
+
+	public void setKeySn(String keySn) {
+		this.keySn = keySn;
 	}
 
 }
