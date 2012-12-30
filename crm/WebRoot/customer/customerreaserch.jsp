@@ -236,7 +236,14 @@
         </s:iterator>        
         <tr>
           <td height="26" colspan="11" align="center" bgcolor="#FFFFFF">
-		  	<page:pages currentPage="pagination.currentPage" totalPages="pagination.totalPages" totalRows="pagination.totalRows" styleClass="page" theme="text"  url="customerSearchAction.action"></page:pages>
+          	<s:if test="session.companyTrialFlag==1">
+          	<span onmousemove="this.setCapture();" onmouseout="this.releaseCapture();" onfocus="this.blur();"  title="您当前使用的是试用版，不提供翻页功能！"> 
+          		<page:pages currentPage="pagination.currentPage" totalPages="pagination.totalPages" totalRows="pagination.totalRows" styleClass="page" theme="text"  url="customerSearchAction.action"></page:pages>
+          	</span>
+          	</s:if>
+          	<s:else>
+		  		<page:pages currentPage="pagination.currentPage" totalPages="pagination.totalPages" totalRows="pagination.totalRows" styleClass="page" theme="text"  url="customerSearchAction.action"></page:pages>
+		  	</s:else>
 		  </td>
         </tr>
       </table></td>
