@@ -14,7 +14,7 @@ public class CheckProductKey {
 	/**
 	 * 字符串型开始时间
 	 */
-	private  String productEndDate = "2012-12-31 00:00:00";
+	private  String productEndDate = "2013-03-31 00:00:00";
 	
 	/**
 	 * 消息
