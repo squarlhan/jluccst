@@ -629,21 +629,8 @@ public class CustomerInfoAction extends BaseActionSupport{
 		listSource = dataDictionaryService.findDataDictionaryByType(companyId, 2);
 		//客户分类： 传0
 		listCategory = dataDictionaryService.findDataDictionaryByType(companyId, 0);
-		//业务进展：传
-		//listProgress = dataDictionaryService.findDataDictionaryByType(0);
-		listProgress = new ArrayList<DataDictionary>();
-		DataDictionary d = new DataDictionary();
-		d.setId("潜在客户");
-		d.setName("潜在客户");
-		listProgress.add(d);
-		DataDictionary d1 = new DataDictionary();
-		d1.setId("新建客户");
-		d1.setName("新建客户");
-		listProgress.add(d1);
-		DataDictionary d2 = new DataDictionary();
-		d2.setId("成熟客户");
-		d2.setName("成熟客户");
-		listProgress.add(d2);
+		//业务进展：传1
+		listProgress = dataDictionaryService.findDataDictionaryByType(companyId, 1);
 		//成熟度：传4
 		listMaturity = dataDictionaryService.findDataDictionaryByType(companyId, 4);
 		//开发程度

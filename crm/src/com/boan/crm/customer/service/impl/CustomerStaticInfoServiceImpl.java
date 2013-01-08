@@ -36,7 +36,7 @@ public class CustomerStaticInfoServiceImpl implements ICustomerStaticInfoService
 		List<CustomerStaticInfo> list = new ArrayList<CustomerStaticInfo>();
 		StringBuilder hql = new StringBuilder();
 		Map<String,String> values = new HashMap<String,String>();
-		if(key == CustomerStaticInfo.CUSTOMER_SOURCE || key == CustomerStaticInfo.CUSTOMER_CATEGORY || key == CustomerStaticInfo.CUSTOMER_MATURITY)
+		if(key == CustomerStaticInfo.CUSTOMER_SOURCE || key == CustomerStaticInfo.CUSTOMER_CATEGORY || key == CustomerStaticInfo.CUSTOMER_MATURITY || key == CustomerStaticInfo.CUSTOMER_PROGRESS)
 		{
 			List<DataDictionary> listDic = dataDictionaryService.findDataDictionaryByType(companyId, key);
 			if(listDic != null && listDic.size() > 0)
@@ -69,40 +69,6 @@ public class CustomerStaticInfoServiceImpl implements ICustomerStaticInfoService
 					
 				}
 			}
-		}else if(key == CustomerStaticInfo.CUSTOMER_PROGRESS)
-		{
-			CustomerStaticInfo staticInfo = new CustomerStaticInfo();
-			staticInfo.setKey(key);
-			staticInfo.setCategory("潜在客户");
-			hql.append("select Count(id) from CustomerInfo where progressId = :progressId and companyId = :companyId");
-			values.put("progressId", "潜在客户");
-			values.put("companyId", companyId);
-			int count = customerStaticInfoDao.findCountForPage(hql.toString(), values);
-			staticInfo.setCount(count);
-			list.add(staticInfo);
-		
-			CustomerStaticInfo staticInfo1 = new CustomerStaticInfo();
-			staticInfo1.setKey(key);
-			staticInfo1.setCategory("新建客户");
-			hql.delete(0, hql.length());
-			hql.append("select Count(id) from CustomerInfo where progressId = :progressId and companyId = :companyId");
-			values.put("progressId", "新建客户");
-			values.put("companyId", companyId);
-			count = customerStaticInfoDao.findCountForPage(hql.toString(), values);
-			staticInfo1.setCount(count);
-			list.add(staticInfo1);
-			
-			CustomerStaticInfo staticInfo2 = new CustomerStaticInfo();
-			staticInfo2.setKey(key);
-			staticInfo2.setCategory("成熟客户");
-			hql.delete(0, hql.length());
-			hql.append("select Count(id) from CustomerInfo where progressId = :progressId and companyId = :companyId");
-			values.put("progressId", "成熟客户");
-			values.put("companyId", companyId);
-			count = customerStaticInfoDao.findCountForPage(hql.toString(), values);
-			staticInfo2.setCount(count);
-			list.add(staticInfo2);
-			
 		}else if(key == CustomerStaticInfo.CUSTOMER_LEVEL)
 		{
 			CustomerStaticInfo staticInfo1 = new CustomerStaticInfo();
