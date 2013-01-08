@@ -630,7 +630,7 @@ public class CustomerInfoAction extends BaseActionSupport{
 		//客户分类： 传0
 		listCategory = dataDictionaryService.findDataDictionaryByType(companyId, 0);
 		//业务进展：传1
-		listProgress = dataDictionaryService.findDataDictionaryByType(companyId, 1);
+		listProgress = dataDictionaryService.findDataDictionaryByType(companyId, 7);
 		//成熟度：传4
 		listMaturity = dataDictionaryService.findDataDictionaryByType(companyId, 4);
 		//开发程度
