@@ -88,7 +88,7 @@ background-color:#d3eaef}
 
 	<script type="text/javascript">
 	$(document).ready(function(){
-       var xml = "<graph caption='客户分类信息统计'　showNames='1'  decimalPrecision='0'>";
+       var xml = "<graph caption='客户分类信息统计' baseFontSize='16'　showNames='1'  decimalPrecision='0'>";
        <s:iterator value="listCategoryStatic" status="obj">
       	//xml = xml + "<set name=\"<s:property value='category'/>\" value=\"<s:property value='count'/>\" />";
       	xml = xml + "<set name=\""+document.getElementById("category<s:property value="#obj.index"/>").textStr+"\" value=\""+document.getElementById("category<s:property value="#obj.index"/>").valueStr+"\" />";
@@ -98,7 +98,7 @@ background-color:#d3eaef}
 		 chart.setDataXML(xml);
 		 chart.render("chartdiv1");
 		 
-		 var xml2 = "<graph caption='客户来源信息统计'　showNames='1'  decimalPrecision='0'>";
+		 var xml2 = "<graph caption='客户来源信息统计' baseFontSize='16'　showNames='1'  decimalPrecision='0'>";
 		 <s:iterator value="listSourceStatic" status="obj">
 	     	xml2 = xml2 + "<set name=\""+document.getElementById("source<s:property value="#obj.index"/>").textStr+"\" value=\""+document.getElementById("source<s:property value="#obj.index"/>").valueStr+"\" />";
     	  </s:iterator>
@@ -107,7 +107,7 @@ background-color:#d3eaef}
 		 chart2.setDataXML(xml2);
 		 chart2.render("chartdiv2");
 		 
-		var xml3 = "<graph caption='客户成熟度信息统计'　showNames='1'  decimalPrecision='0'>";
+		var xml3 = "<graph caption='客户成熟度信息统计' baseFontSize='16'　showNames='1'  decimalPrecision='0'>";
       <s:iterator value="listMaturityStatic" status="obj">
      	//xml3 = xml3 + "<set name=\"<s:property value='category'/>\" value=\"<s:property value='count'/>\" />";
      	xml3 = xml3 + "<set name=\""+document.getElementById("maturity<s:property value="#obj.index"/>").textStr+"\" value=\""+document.getElementById("maturity<s:property value="#obj.index"/>").valueStr+"\" />";
@@ -117,7 +117,7 @@ background-color:#d3eaef}
 	 chart3.setDataXML(xml3);
 	 chart3.render("chartdiv3");
 	 
-	var xml4 = "<graph caption='客户业务进展信息统计'　showNames='1'  decimalPrecision='0'>";
+	var xml4 = "<graph caption='客户业务进展信息统计' baseFontSize='16'　showNames='1'  decimalPrecision='0'>";
       <s:iterator value="listProgressStatic" status="obj">
      	//xml4 = xml4 + "<set name=\"<s:property value='category'/>\" value=\"<s:property value='count'/>\" />";
      	xml4 = xml4 + "<set name=\""+document.getElementById("progress<s:property value="#obj.index"/>").textStr+"\" value=\""+document.getElementById("progress<s:property value="#obj.index"/>").valueStr+"\" />";
@@ -127,7 +127,7 @@ background-color:#d3eaef}
 	 chart4.setDataXML(xml4);
 	 chart4.render("chartdiv4");
 	 
-	var xml5 = "<graph caption='客户开发程度信息统计'　showNames='1'  decimalPrecision='0'>";
+	var xml5 = "<graph caption='客户开发程度信息统计' baseFontSize='16'　showNames='1'  decimalPrecision='0'>";
       <s:iterator value="listLevelStatic" status="obj">
      	//xml5 = xml5 + "<set name=\"<s:property value='category'/>\" value=\"<s:property value='count'/>\" />";
      	xml5 = xml5 + "<set name=\""+document.getElementById("level<s:property value="#obj.index"/>").textStr+"\" value=\""+document.getElementById("level<s:property value="#obj.index"/>").valueStr+"\" />";
