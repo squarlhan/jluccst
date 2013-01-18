@@ -268,7 +268,7 @@
 		<s:hidden id="maturityName" name="customerInfo.maturity"></s:hidden>
 		<s:hidden id="levelName" name="customerInfo.level"></s:hidden>
 		<s:hidden id="customerId_t" name="customerId"></s:hidden>
-		<table width="100%" border="0" cellspacing="5" cellpadding="0">
+		<table width="790" border="0" cellspacing="5" cellpadding="0">
 			<tr>
 				<td style="height: 24px"><table width=100%>
 						<tr>
@@ -286,7 +286,7 @@
 						</legend>
 						<table>
 							<tr>
-								<td><table cellpadding="5" cellspacing="3" border="0">
+								<td><table cellpadding="5" cellspacing="3" border="0" width=100%>
 										<tr>
 											<td align="center" nowrap>客户名称：</td>
 											<td><s:textfield style="width:190px"
@@ -369,7 +369,7 @@
 			<tr>
 				<td><fieldset>
 						<legend>
-							<span>其他信息</span>
+							<span>扩展信息</span>
 						</legend>
 						<table>
 							<tr>
@@ -412,9 +412,6 @@
 					</fieldset>
 				</td>
 			</tr>
-			<tr>
-				<td>
-					<table>
 						<s:if test='listPerson != null && listPerson.size() > 0'>
 							<s:iterator value="listPerson" status="obj">
 								<s:url id="del_url" action="customer/deletePersonInfo.action">
@@ -477,13 +474,7 @@
 								</tr>
 							</s:iterator>
 						</s:if>
-					</table></td>
-			</tr>
-		</table>
-		</td>
-		</tr>
 		<tr>
-			<td></td>
 			<td align="center"><table align="center">
 					<tr>
 						<td align="center"> <s:if
