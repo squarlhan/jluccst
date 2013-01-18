@@ -139,7 +139,7 @@
 		<td><s:textfield name="contractorName" id="contractorName" style="width: 100px"></s:textfield></td>
 		<td align="center">客户分类：</td>
 		<td style="width:120px"><s:select list="listCategory" listKey="id" listValue="name" value="customerCategory" 
-			id="categoryId" name="customerCategory" cssStyle="width:150px" headerKey="" headerValue="--请选择客户分类--"></s:select></td>
+			id="categoryId" name="customerCategory" cssStyle="width:120px" headerKey="" headerValue="--请选择--"></s:select></td>
 		<td></td>
 		<td style="width: 80px"><input type="button" style="width: 80px;" class="btn_4" id="searchBtn" value="快速查询" /></td>
 	</tr>
@@ -152,7 +152,6 @@
    			</td>
               <td align="center" background="../images/headerbg.jpg"><strong>客户名称</strong></td>
               <td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">联系人/联系方式</td>
-			<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">业务员</td>
 			<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">客户分类</td>
 			<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">业务进展</td>
 			<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">成熟度</td>
@@ -176,7 +175,6 @@
             <s:property value="phone"/>&nbsp;<s:property value="tel"/><br/>
             </s:iterator>
 			</td>
-            <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="salesman"/></td>
             <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="category"/></td>
             <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="progressId"/></td>
             <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="maturity"/></td>
