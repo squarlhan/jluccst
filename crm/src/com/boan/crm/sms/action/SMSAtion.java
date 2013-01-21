@@ -292,7 +292,10 @@ public class SMSAtion extends BaseActionSupport{
 				customerInfoList = bookerService.findAllSMSCustomerInfo(this.sessionCompanyId);
 			}else if (personIds.equals("customer")){
 				customerInfoList = bookerService.findAllSMSCustomerInfoByType(this.sessionCompanyId,1);
-			}else{
+			}else if (personIds.equals("seller")){
+				customerInfoList = bookerService.findAllSMSCustomerInfoByType(this.sessionCompanyId,2);
+			}
+			else{
 				String[] ids = personIds.split(",");
 				customerInfoList = bookerService.findSMSCustomerInfoByIds(ids);
 			}
