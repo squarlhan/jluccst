@@ -47,7 +47,7 @@ public class AutoCustomerAssessmentServiceImpl implements IAutoCustomerAssessmen
 		{
 			hql.append(" and customerId = :customerId ");
 		}
-		hql.append(" order by assessmentTime asc ");
+		hql.append(" order by assessmentTime desc ");
 		
 		List<AutoCustomerAssessment> data = autoCustomerAssessmentDao.findForPage(hql.toString(), values, pagination.getStartIndex(), pagination.getPageSize());
 		
