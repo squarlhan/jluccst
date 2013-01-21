@@ -19,6 +19,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.boan.crm.backstagemanage.common.LogType;
+import com.boan.crm.backstagemanage.common.ProductType;
 import com.boan.crm.backstagemanage.model.Company;
 import com.boan.crm.backstagemanage.model.Log;
 import com.boan.crm.backstagemanage.service.ICompanyService;
@@ -137,6 +138,11 @@ public class CompanyAction extends BaseActionSupport {
 	 * 试用限制
 	 */
 	private String trialFlag = null;
+	
+	/**
+	 * 产品列表
+	 */
+	private List<ProductType> productTypeList = ProductType.getProductTypeList();
 
 	/**
 	 * 显示公司列表
@@ -508,5 +514,13 @@ public class CompanyAction extends BaseActionSupport {
 
 	public void setTrialFlag(String trialFlag) {
 		this.trialFlag = trialFlag;
+	}
+
+	public List<ProductType> getProductTypeList() {
+		return productTypeList;
+	}
+
+	public void setProductTypeList(List<ProductType> productTypeList) {
+		this.productTypeList = productTypeList;
 	}
 }

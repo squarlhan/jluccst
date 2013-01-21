@@ -210,6 +210,15 @@
 										</td>
 									</tr>
 									<tr>
+										<td height="26" align="right" bgcolor="#FFFFFF">
+											<strong>产品类型：</strong>
+										</td>
+										<td height="26" align="left" bgcolor="#FFFFFF">
+											<strong><s:property value="company.productTypeCn" escape="false"/></strong>
+											<s:hidden id="productType" name="company.productType" />
+										</td>
+									</tr>
+									<tr>
 										<td height="26" colspan="2" align="center" bgcolor="#FFFFFF">
 											<input name="addBtn" type="button" class="btn_2_3" id="addBtn" value="保 存">
 											&nbsp;&nbsp;
