@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
+<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%@ taglib prefix="j" uri="/script-tags"%>
 <%
@@ -16,45 +16,60 @@
  * Modified Time：
  * Modified Explain：
  */
-	response.setHeader("Pragma", "No-cache");
-	response.setHeader("Cache-Control", "no-cache");
-	response.setHeader("Expires", "0");
-	request.setCharacterEncoding("utf-8");
 	String path = request.getContextPath();
+	String basePath = request.getScheme() + "://"
+			+ request.getServerName() + ":" + request.getServerPort()
+			+ path + "/";
+	//String id = request.getParameter("id");
 %>
+
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title></title>
-<j:scriptlink css="true"></j:scriptlink>
-<style type="text/css">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<title>无标题文档</title>
+<link type="text/css" rel="stylesheet" href="../css/style.css">
+<link type="text/css" rel="stylesheet" href="../css/tabs.css">
+<script type="text/javascript" src="../js/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="../js/tab/jquery.tab.js"></script>
+<script type="text/javascript">
 <!--
-.STYLE1 {
-	color: #FFFFFF;
-	font-weight: bold;
-}
--->
-</style>
+	$(document).ready(function() {
+		$("#tt").css("width",$("#mainFrame",parent.document).width());
+		$("#tt").css("height",$("#mainFrame",parent.document).height());
+		$("#tt").tabs();
+	});
+//-->
+</script>
 </head>
+<title>客户信息统计</title>
 <body>
-<table width="100%" style="height:100%;" border="0" cellspacing="5" cellpadding="0">
-  <tr>
-    <td><table width="100%" style="height:100%;" border="0" cellspacing="0" cellpadding="0">
-        <tr>
-          <td colspan="2" style="height:36px;"><table id="__01" width="100%" height="36" border="0" cellpadding="0" cellspacing="0">
-              <tr>
-                <td width="11"><img src="../images/header_01.jpg" width="11" height="36" alt=""></td>
-                <td background="../images/header_02.jpg"><span class="STYLE1">您当前的位置：客户管理&gt;&gt;&gt;客户信息统计</span></td>
-                <td width="12"><img src="../images/header_03.jpg" width="12" height="36" alt=""></td>
-              </tr>
-            </table></td>
-        </tr>
-        <tr>
-          <td valign="top" style="border-left:1px solid #54a4e3; border-bottom:1px solid #54a4e3; border-right:1px solid #54a4e3; padding:5px;"><iframe width="100%" height="100%"
-          	 id="groupmain" name="groupmain" frameborder="0" scrolling="auto" src="customerStaticInfo.action"></iframe></td>
-        </tr>
-    </table></td>
-  </tr>
-</table>
+<div id="tt" class="tabs-container" style="width:100%">
+	<div title="客户分类信息统计"
+		style="padding: 1px; display: none;">
+		<iframe scrolling="auto" frameborder="0" style="width:100%; height:100%"
+			src="customerStaticInfo.action?flag=category"></iframe>
+	</div>
+	<div title="客户来源信息统计"
+		style="padding: 1px; display: none;" id="traceDiv">
+		<iframe id="traceDivFrame" scrolling="auto" frameborder="0" style="width:100%; height:100%"
+			src="about:blank" url="customerStaticInfo.action?flag=source"></iframe>
+	</div>
+	<div title="客户成熟度信息统计"
+		style="padding: 1px; display: none;">
+		<iframe scrolling="auto" frameborder="0" style="width:100%; height:100%"
+			src="about:blank" url="customerStaticInfo.action?flag=maturity"></iframe>
+	</div>
+	<div title="客户业务进展信息统计"
+		style="padding: 1px; display: none;" id="visitDiv">
+		<iframe id="visitDivFrame" scrolling="auto" frameborder="0" style="width:100%; height:100%"
+			src="about:blank" url="customerStaticInfo.action?flag=progress"></iframe>
+	</div>
+	<div title="客户开发程度信息统计"
+		style="padding: 1px; display: none;">
+		<iframe scrolling="auto" frameborder="0" style="width:100%; height:100%"
+			src="about:blank" url="customerStaticInfo.action?flag=level"></iframe>
+	</div>
+</div>
 </body>
 </html>
+
