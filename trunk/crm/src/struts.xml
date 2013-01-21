@@ -46,6 +46,8 @@
 	<include file="com/boan/crm/sms/action/struts_sms.xml"></include>
 	<!-- 时间管理 -->
 	<include file="com/boan/crm/timemanage/action/struts_time_plan.xml"></include>
+	<!-- 行动计划管理 -->
+	<include file="com/boan/crm/actionplan/action/struts_action_plan.xml"></include>
 	<!-- 市场调查 -->
 	<include file="com/boan/crm/marketinquiry/action/struts_market_inquiry.xml"></include>
 	<!-- 销售记录 -->
