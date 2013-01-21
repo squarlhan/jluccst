@@ -112,7 +112,12 @@ $(function() {
 							  
 							  $("#contractPerson"+g_number).html(contractPerson);
 							  g_number = g_number + 1;
+							  
+							  $("#customerName").val("");
+							  
 							  break;
+							  
+							  
 						  }
 					  }
 				  }
@@ -176,7 +181,7 @@ $(function() {
                         	{
 								if($("#chk"+j).val() == item.id)
 								{
-									$("#result"+j).html("评估值："+item.resultValue + "，结论：" + item.result);
+									$("#result"+j).html("<font color='red'>评估值："+item.resultValue + "，结论：" + item.result+"</font>");
 								}
                         	}
                         });
@@ -196,8 +201,12 @@ $(function() {
 						  $("#maturity"+i).html("");
 						  $("#category"+i).html("");
 						  $("#contractPerson"+i).html("");
-						  $("#result"+i).html("");
 						  
+						  $("#totalConsumption"+i).html("");
+						  $("#consumptionTimes"+i).html("");
+						  $("#payments"+i).html("");
+						  $("#introducetimes"+i).html("");
+						  $("#result"+i).html("");
 						  g_number = g_number - 1;
 					}
 				}
@@ -210,8 +219,7 @@ $(function() {
 <form>
 <table>	
 <tr><td></td><td style="width:100%"><table>
-<tr><td style="width: 20px"></td><td style="width:838px"><fieldset><legend><span>选择客户</span></legend><table style="width: 100%" cellpadding="5" cellspacing="3">
-
+<tr><td style="width: 10px"></td><td style="width:838px"><fieldset><legend><span>选择客户</span></legend><table style="width: 100%" cellpadding="5" cellspacing="3">
 <tr><td style="width: 20px"></td><td><table cellpadding="5" cellspacing="3">
 	<tr>
 		<td align="center">添加客户</td>
@@ -310,44 +318,21 @@ $(function() {
 </table></td></tr>
 <tr><td style="width: 20px"></td>
 <td><table>
-<tr><td style="width: 20px"></td>
-<td style="width:400px"><fieldset><legend><span>选择评估项目</span></legend><table style="width: 100%" cellpadding="5" cellspacing="3">
-
+<tr><td style="width: 10px"></td>
+<td style="width:838px"><fieldset><legend><span>选择评估项目</span></legend><table style="width: 100%" cellpadding="5" cellspacing="3">
 <tr><td style="width: 10px"></td><td style="width: 100%"><table width="100%" border="0" cellpadding="0" cellspacing="1" style="background-color: #d5e4fd">
 	<tr>
-		<td align="center" style="height: 26px; background-color:#FFFFFF"><input type="checkbox" name="checkbox" id="chkTotalComsumption" /></td>
-		<td align="center" style="height: 26px; background-color:#FFFFFF">消费总额</td>
+		<td align="center" style="height: 36px; background-color:#FFFFFF">
+		<input type="checkbox" name="checkbox" id="chkTotalComsumption" />消费总额
+		<input type="checkbox" name="checkbox" id="chkConsumptionTimes" />消费次数
+		<input type="checkbox" name="checkbox" id="chkIntroduceTimes" />转介绍客户情况
+		<input type="checkbox" name="checkbox" id="chkPayments" />回款情况
+		<input type="checkbox" name="checkbox" id="chkLevel" />开发程度</td>
 	</tr>
 	<tr>
-		<td align="center" style="height: 26px; background-color:#FFFFFF"><input type="checkbox" name="checkbox" id="chkConsumptionTimes" /></td>
-		<td align="center" style="height: 26px; background-color:#FFFFFF">消费次数</td>
-	</tr>
-	<tr>
-		<td align="center" style="height: 26px; background-color:#FFFFFF"><input type="checkbox" name="checkbox" id="chkIntroduceTimes" /></td>
-		<td align="center" style="height: 26px; background-color:#FFFFFF">转介绍客户情况</td>
-	</tr>
-	<tr>
-		<td align="center" style="height: 26px; background-color:#FFFFFF"><input type="checkbox" name="checkbox" id="chkPayments" /></td>
-		<td align="center" style="height: 26px; background-color:#FFFFFF">回款情况</td>
-	</tr>
-	<tr>
-		<td align="center" style="height: 26px; background-color:#FFFFFF"><input type="checkbox" name="checkbox" id="chkLevel" /></td>
-		<td align="center" style="height: 26px; background-color:#FFFFFF">开发程度</td>
+		<td align="center" style="height: 36px; background-color:#FFFFFF"><input type="button" style="width: 80px;" class="btn_4" id="assessmentbtn" value="开始评估" /></td>
 	</tr>
 </table></td></tr>
-
-<tr><td colspan="3"><table>
-	<tr>
-		<td style="width: 240px"></td>
-		<td style="width: 80px"><input type="button" style="width: 80px;" class="btn_4" id="assessmentbtn" value="开始评估" /></td>
-	</tr>
-</table></td></tr>
-
-</table></fieldset></td>
-</tr></table></td>
-</tr>
-
-
 </table>
 </form>
 </body>
