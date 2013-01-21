@@ -287,7 +287,7 @@
 		<td><s:textfield type="text" readOnly="true" style="width:150px" name="customerInfo.salesman" id="salesman"></s:textfield></td>
 		<td align="right">业务进展：</td>
 		<td style="width: 150px">
-		<s:textfield type="text" readOnly="true" style="width:150px" name="customerInfo.progressId" id="progressId"></s:textfield>
+		<s:textfield type="text" readOnly="true" style="width:150px" name="customerInfo.progress" id="progressId"></s:textfield>
 		</td>
 	</tr>
 	<tr>
