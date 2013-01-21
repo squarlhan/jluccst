@@ -71,6 +71,11 @@
 		<iframe scrolling="auto" frameborder="0" style="width:100%; height:100%"
 			src="about:blank" url="../service/serviceloglistbytel.action?companyId=<s:property value='id'/>"></iframe>
 	</div>
+	<div title="客户评估"
+		style="padding: 1px; display: none;">
+		<iframe scrolling="auto" frameborder="0" style="width:100%; height:100%"
+			src="about:blank" url="../customerassessment/staticAnalysisCustomer.action?customerId=<s:property value='id'/>"></iframe>
+	</div>
 	</s:if>
 </div>
 </body>
