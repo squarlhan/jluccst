@@ -58,7 +58,7 @@
 			sb.append( "',salesman:'" );
 			sb.append( obj.getSalesman());
 			sb.append( "',progressId:'" );
-			sb.append( obj.getProgressId());
+			sb.append( obj.getProgress());
 			sb.append( "',category:'" );
 			sb.append( obj.getCategory());
 			sb.append( "'}" );
@@ -69,6 +69,6 @@
 	{
 		sb.append( "{root:[]}" );
 	}
-   	System.out.println(sb.toString());
+   	//System.out.println(sb.toString());
 	response.getWriter().write( sb.toString());
 %>

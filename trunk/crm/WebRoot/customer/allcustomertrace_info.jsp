@@ -107,6 +107,7 @@
 					  //如选择后给其他控件赋值，触发别的事件等等
 					  for(var i=0; i<allData.length; i++)
 					  {
+						  alert(allData[i].progress);
 						  if(allData[i].customerName == itemname)
 						  {
 							  $("#customerId").val(allData[i].id);
@@ -293,7 +294,7 @@
 		<td><s:textfield type="text" readOnly="true" style="width:150px" name="customerInfo.salesman" id="salesman"></s:textfield></td>
 		<td align="right">业务进展：</td>
 		<td style="width: 150px">
-		<s:textfield type="text" readOnly="true" style="width:150px" name="customerInfo.progressId" id="progressId"></s:textfield>
+		<s:textfield type="text" readOnly="true" style="width:150px" name="customerInfo.progress" id="progressId"></s:textfield>
 		</td>
 	</tr>
 	<tr>
