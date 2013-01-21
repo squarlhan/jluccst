@@ -265,7 +265,7 @@ public class CustomerSearchAction  extends BaseActionSupport{
 	 * @return
 	 */
 	public String toCustomer(){
-		
+		try{
 		provinceList = areaService.findAllProvinceInfo();
 		
 		ProvinceInfo province = areaService.getProvince(provinceId);
@@ -316,8 +316,11 @@ public class CustomerSearchAction  extends BaseActionSupport{
 					bookerService.saveSMSCustomerInfo(smsUser );
 				}
 			}
+			message = customerInfo.getId();
+		}}catch(Exception e){
+			message = "failure";
 		}
-		message = "转入成功!";
+		
 		return customerSearch();
 	}
 	
