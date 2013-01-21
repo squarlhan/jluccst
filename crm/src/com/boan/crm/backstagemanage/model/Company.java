@@ -12,6 +12,7 @@ import javax.persistence.Transient;
 import org.apache.commons.lang.StringUtils;
 import org.hibernate.annotations.GenericGenerator;
 
+import com.boan.crm.backstagemanage.common.ProductType;
 import com.boan.crm.utils.calendar.CurrentDateTime;
 import com.boan.crm.utils.calendar.MySimpleDateFormat;
 
@@ -120,6 +121,11 @@ public class Company {
 	 */
 	@Transient
 	private int deleteFlag = 0;
+	/**
+	 * 产品类型
+	 */
+	@Column(name = "PRODUCT_TYPE", nullable=false)
+	private int productType = 0;
 
 	public String getId() {
 		return id;
@@ -275,5 +281,17 @@ public class Company {
 		}else{
 			return "无限制";
 		}
+	}
+
+	public int getProductType() {
+		return productType;
+	}
+
+	public void setProductType(int productType) {
+		this.productType = productType;
+	}
+	
+	public String getProductTypeCn() {
+		return ProductType.getMean(productType);
 	}
 }

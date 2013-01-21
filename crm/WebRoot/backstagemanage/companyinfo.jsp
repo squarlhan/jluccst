@@ -48,7 +48,8 @@
 					"company.fax":{strangecode:true},
 					"company.smsSN":{strangecode:true},
 					"company.smsPassword":{strangecode:true},
-					"company.smsKey":{strangecode:true}
+					"company.smsKey":{strangecode:true},
+					"company.productType":{required:true}
 				}
 			};
 			/**
@@ -220,6 +221,16 @@
 											<s:if test='company.trialFlag =="1"'>
 											checked="checked"
 											</s:if>/> 选中表示有试用限制
+										</td>
+									</tr>
+									<tr>
+										<td height="26" align="right" bgcolor="#FFFFFF">
+											<strong>产品类型：</strong>
+										</td>
+										<td height="26" align="left" bgcolor="#FFFFFF">
+											<s:radio list="productTypeList" listKey="num" listValue="name" id="productType" name="company.productType" value="company.productType">
+											</s:radio>
+											<font color="red">*</font>
 										</td>
 									</tr>
 									<tr>
