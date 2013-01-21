@@ -264,6 +264,9 @@ public class CustomerVisitInfoAction extends BaseActionSupport{
 			DataDictionary d = dataDictionaryService.get(customerInfo.getCategoryId());
 			if(d != null)
 				customerInfo.setCategory(d.getName());
+			DataDictionary d1 = dataDictionaryService.get(customerInfo.getProgressId());
+			if(d1 != null)
+				customerInfo.setProgress(d1.getName());
 			
 			List<ContractPersonInfo> listPerson = contractPersonService.findAllContractPersonInfoByCustomerId(customerId);
 			if(listPerson != null)
