@@ -46,7 +46,30 @@
 		$(function(){
 			
 			if($("#message").html()!=null && $("#message").html()!=""){
-				alert( $("#message").html());
+				
+				if($("#message").html()!="failure"){
+					parent.parent.$.jMessageBox.show({
+						width : 300,
+					 	title : '提示',
+					    message : '转为客户成功！',
+					    yesButton : {
+						    text  : '编辑客户',
+						    click : function(){
+						    	parent.parent.$.jMessageBox.hide();
+						    	var url="customer/myCustomerTabInfo.action?id="+$("#message").html();
+								parent.parent.$("#mainFrame").attr("src",url);
+						    }
+					  	},
+					  	cancelButton : {
+					  		text  : '继续查找',
+					   		click : function(){
+					   			parent.parent.$.jMessageBox.hide();
+						  	}
+					  	}
+					 });
+				}else{
+					alert("转入失败！");
+				}
 			}
 			
 			$("#sel_province").change(function(){
