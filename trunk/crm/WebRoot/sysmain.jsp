@@ -14,6 +14,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title><s:property value="suffix"/>销售团队智能管理系统</title>
 <j:scriptlink css="true" jquery="true" jquerylayout="true" tipswindow="true" jmessagebox="true" jmessager="true" />
+<link rel="stylesheet" type="text/css" href="js/messagebox/blue/messagebox.css" />
 <script type="text/javascript">
 <!--
 var myLayout;
