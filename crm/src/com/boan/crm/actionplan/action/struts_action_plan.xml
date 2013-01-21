@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<!--  行动计划管理Action -->
+	<package name="action_plan" extends="struts-default" namespace="/">
+		<action name="openActionPlanListForViewAction" class="actionPlanAction" method="openActionPlanListForView">
+			<result name="success">/actionplan/actionplanlistforview.jsp</result>
+			<result name="input">/actionplan/actionplanlistforview.jsp</result>
+		</action>
+		<action name="openActionPlanListAction" class="actionPlanAction" method="openActionPlanList">
+			<result name="success">/actionplan/actionplanlist.jsp</result>
+			<result name="input">/actionplan/actionplanlist.jsp</result>
+		</action>
+		<action name="openAddActionPlanAction" class="actionPlanAction" method="openAddActionPlan">
+			<result name="success">/actionplan/actionplaninfo.jsp</result>
+			<result name="input">/actionplan/actionplaninfo.jsp</result>
+		</action>
+		<action name="openModifyActionPlanAction" class="actionPlanAction" method="openModifyActionPlan">
+			<result name="success">/actionplan/actionplaninfo.jsp</result>
+			<result name="input">/actionplan/actionplaninfo.jsp</result>
+		</action>
+		<action name="openModifyActionPlanForViewAction" class="actionPlanAction" method="openModifyActionPlanForView">
+			<result name="success">/actionplan/actionplaninfoforview.jsp</result>
+			<result name="input">/actionplan/actionplaninfoforview.jsp</result>
+		</action>
+		<action name="addActionPlanAction" class="actionPlanAction" method="addActionPlan">
+			<result name="success">/actionplan/actionplaninfo.jsp</result>
+			<result name="input">/actionplan/actionplaninfo.jsp</result>
+		</action>
+		<action name="modifyActionPlanAction" class="actionPlanAction" method="modifyActionPlan">
+			<result name="success">/actionplan/actionplaninfo.jsp</result>
+			<result name="input">/actionplan/actionplaninfo.jsp</result>
+		</action>
+		<action name="deleteActionPlanAction" class="actionPlanAction" method="deleteActionPlan"/>
+		<action name="showGroupTreeForActionPlanAction" class="actionPlanAction"  method="showGroupTreeForActionPlan">
+			<result name="group-tree-for-sell-record">/actionplan/group-tree-for-action-plan.jsp</result>
+		</action>
+	</package>
+</struts>
