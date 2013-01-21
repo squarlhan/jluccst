@@ -23,7 +23,7 @@ public class CustomerStaticInfo {
 	/**
 	 * 客户业务进展
 	 */
-	public static int CUSTOMER_PROGRESS = 10;
+	public static int CUSTOMER_PROGRESS = 7;
 	/**
 	 * 客户开发程度
 	 */

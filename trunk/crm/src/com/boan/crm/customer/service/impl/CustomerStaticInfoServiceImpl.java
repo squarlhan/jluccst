@@ -61,6 +61,11 @@ public class CustomerStaticInfoServiceImpl implements ICustomerStaticInfoService
 						hql.delete(0, hql.length());
 						hql.append("select Count(id) from CustomerInfo where maturityId = :maturityId ");
 						values.put("maturityId", listDic.get(i).getId());
+					}else if(key == CustomerStaticInfo.CUSTOMER_PROGRESS)
+					{
+						hql.delete(0, hql.length());
+						hql.append("select Count(id) from CustomerInfo where progressId = :progressId ");
+						values.put("progressId", listDic.get(i).getId());
 					}
 					int count = customerStaticInfoDao.findCountForPage(hql.toString(), values);
 					staticInfo.setCount(count);
