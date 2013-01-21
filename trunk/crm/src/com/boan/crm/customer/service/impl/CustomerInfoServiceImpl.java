@@ -172,17 +172,24 @@ public class CustomerInfoServiceImpl implements ICustomerInfoService{
 					customerInfo.setCategory(d1.getName());
 				}
 				
-				d1 = dataDictionaryService.get(customerInfo.getMaturityId());
-				if(d1 != null)
+				DataDictionary d2 = dataDictionaryService.get(customerInfo.getMaturityId());
+				if(d2 != null)
 				{
-					customerInfo.setMaturity(d1.getName());
+					customerInfo.setMaturity(d2.getName());
 				}
-				d1 = dataDictionaryService.get(customerInfo.getSourceId());
-				if(d1 != null)
+				DataDictionary d3 = dataDictionaryService.get(customerInfo.getSourceId());
+				if(d3 != null)
 				{
-					customerInfo.setSource(d1.getName());
+					customerInfo.setSource(d3.getName());
 				}
-				
+				DataDictionary d4 = dataDictionaryService.get(customerInfo.getProgressId());
+				if(d4 != null)
+				{
+					customerInfo.setProgress(d4.getName());
+				}else
+				{
+					customerInfo.setProgress("");
+				}
 				try
 				{
 					User salesman = userService.getUserById(customerInfo.getSalesmanId());

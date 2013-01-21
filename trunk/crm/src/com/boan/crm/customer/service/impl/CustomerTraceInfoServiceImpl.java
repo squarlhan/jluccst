@@ -16,6 +16,7 @@ import com.boan.crm.customer.model.CustomerInfo;
 import com.boan.crm.customer.model.CustomerTraceInfo;
 import com.boan.crm.customer.service.IContractPersonService;
 import com.boan.crm.customer.service.ICustomerTraceInfoService;
+import com.boan.crm.datadictionary.model.DataDictionary;
 import com.boan.crm.datadictionary.service.IDataDictionaryService;
 import com.boan.crm.groupmanage.service.IUserService;
 import com.boan.crm.utils.calendar.CalendarUtils;
@@ -48,6 +49,10 @@ public class CustomerTraceInfoServiceImpl implements ICustomerTraceInfoService{
 		customerTraceInfoDao.delete(ids);
 	}
 
+	@Autowired
+	@Qualifier("dataDictionaryService")
+	private IDataDictionaryService dataDictionaryService = null;
+	
 	@Override
 	public List<CustomerTraceInfo> findAllCustomerTraceInfo() {
 		return customerTraceInfoDao.find("from customerTraceInfoDao order by traceTime asc", new Object[0]);
@@ -147,7 +152,14 @@ public class CustomerTraceInfoServiceImpl implements ICustomerTraceInfoService{
 					if(customer != null)
 					{
 						customerTraceInfo.setCustomerName(customer.getCustomerName());
-						customerTraceInfo.setProgress(customer.getProgressId());
+						DataDictionary dc = dataDictionaryService.get(customer.getProgressId());
+						if(dc != null)
+						{
+							customerTraceInfo.setProgress(dc.getName());
+						}else
+						{
+							customerTraceInfo.setProgress("");
+						}
 					}
 					customerTraceInfo.setSalesman(userService.getUserById(customerTraceInfo.getSalesmanId()).getUserCName());
 					customerTraceInfo.setPerson(contractPersonService.get(customerTraceInfo.getTracePersonId()));

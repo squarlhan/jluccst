@@ -16,6 +16,8 @@ import com.boan.crm.customer.model.CustomerInfo;
 import com.boan.crm.customer.model.CustomerVisitInfo;
 import com.boan.crm.customer.service.IContractPersonService;
 import com.boan.crm.customer.service.ICustomerVisitInfoService;
+import com.boan.crm.datadictionary.model.DataDictionary;
+import com.boan.crm.datadictionary.service.IDataDictionaryService;
 import com.boan.crm.groupmanage.service.IUserService;
 import com.boan.crm.utils.calendar.CalendarUtils;
 import com.boan.crm.utils.page.Pagination;
@@ -40,6 +42,9 @@ public class CustomerVisitInfoServiceImpl implements ICustomerVisitInfoService{
 	@Autowired
 	@Qualifier("contractPersonService")
 	private IContractPersonService contractPersonService;
+	@Autowired
+	@Qualifier("dataDictionaryService")
+	private IDataDictionaryService dataDictionaryService = null;
 	
 	@Override
 	public void deleteCustomerVisitInfo(String... ids) {
@@ -145,7 +150,15 @@ public class CustomerVisitInfoServiceImpl implements ICustomerVisitInfoService{
 					if(customer != null)
 					{
 						customerVisitInfo.setCustomerName(customer.getCustomerName());
-						customerVisitInfo.setProgress(customer.getProgressId());
+						
+						DataDictionary dc = dataDictionaryService.get(customer.getProgressId());
+						if(dc != null)
+						{
+							customerVisitInfo.setProgress(dc.getName());
+						}else
+						{
+							customerVisitInfo.setProgress("");
+						}
 					}
 					customerVisitInfo.setSalesman(userService.getUserById(customerVisitInfo.getSalesmanId()).getUserCName());
 					customerVisitInfo.setPerson(contractPersonService.get(customerVisitInfo.getVisitPersonId()));
