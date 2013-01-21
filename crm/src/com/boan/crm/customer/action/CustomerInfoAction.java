@@ -135,8 +135,16 @@ public class CustomerInfoAction extends BaseActionSupport{
 	private String provinceId = "";
 	private String cityId = "";
 	private String tel = "";
+	private String flag = "";
+
 	public String getTel() {
 		return tel;
+	}
+	public String getFlag() {
+		return flag;
+	}
+	public void setFlag(String flag) {
+		this.flag = flag;
 	}
 	public void setTel(String tel) {
 		this.tel = tel;
