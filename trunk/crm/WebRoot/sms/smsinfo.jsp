@@ -91,15 +91,18 @@
 				//激活文本框时间计算字数
 				$('#SMSContent').trigger('change');
 			});
+			/*
 			$("#chk_use_company").click(function(){
 				//激活文本框时间计算字数
 				$('#SMSContent').trigger('change');
+				
 				if($("#chk_use_company").attr("checked")){
 					$("#txt_company").attr("disabled",true);
 				}else{
 					$("#txt_company").attr("disabled",false);
 				}
 			});
+			//*/
 			$("#sel_sendType").change(function(){
 				var type = $("#sel_sendType").val();
 				if(type=="IMMEDIATELY"){
@@ -121,10 +124,12 @@
 					$("#txt_sendTime").show();
 				}
 			});
+			/*
 			$("#txt_company").blur(function(){
 				//激活文本框时间计算字数
 				$('#SMSContent').trigger('change');
 			});
+			//*/
 	  		
 			//清空按钮事件
 	  		$("#btn_clear").click(function(){
@@ -238,9 +243,11 @@
 					val=val+$("#txt_hello").val().length;
 				}
 				//如果使用公司
+				/*
 				if($("#chk_use_company").attr("checked")==false){
 					val=val+$("#txt_company").val().length;
 				}
+				//*/
 					
 				if (val == 0) disabled.off();
 				if(val <= maxNumber){
@@ -322,56 +329,59 @@
 				});
 			});
 		};
-		
 
 		/**
 	  	 * 动态添加全部人员
 	  	 */
 		$.fn.dynamicsAddAllPerson = function(){
 			$("#btn_AddAllPerson").click(function(){
- 				$.ajax({
- 					type:"post",
- 					url: "loadCustomerInfoForAjaxAction.action",
- 					data:{personIds:"all"},
- 					beforeSend: function(XMLHttpRequest){
- 					},
- 					success: function(data, textStatus){
- 						try{
- 							//将字符串转换为json对象
- 							data = eval("("+data+")");
- 							$.each(data.customerInfoList,function(i,value){
- 								if($("#"+value.id).length==0){
-  								var row="";
-  								row=row+"<tr>";
-  					  			row=row+"<td align='center' bgcolor='#FFFFFF' >";  
-  					  			row=row+"<input type='checkbox' name='ids'/>";
-  					  			row=row+"<input type='hidden' id='"+value.id+"' name='selectedIds' value='"+value.id+"'/>";
-  					  			row=row+"</td>";
-  					  			row=row+"<td align='center' bgcolor='#FFFFFF'>"+(value.name==null ? "" : value.name) +"</td>";
-  					  			row=row+"<td align='center' bgcolor='#FFFFFF'>"+(value.phone==null ? "" : value.phone) +"</td>";
-  					  			row=row+"<td align='center' bgcolor='#FFFFFF'>"+(value.categoryId==1 ? "客户" : "销售人员" )+"</td>";
-  					  			row=row+"<td align='center' bgcolor='#FFFFFF'>"+(value.unit==null ? "" : value.unit )+"</td>";
-  					  			row=row+"<td align='center' bgcolor='#FFFFFF'>"+(value.post==null ? "" : value.post)+"</td>";
-  					  			row=row+"<td align='center' bgcolor='#FFFFFF'>"+(value.nickname==null ? "" : value.nickname)+"</td>";
-  					  			row=row+"<td align='center' bgcolor='#FFFFFF'><a id='del_one' href='javascript:void(0);'>删除</a></td>";
-  					  			row=row+"</tr>";
-  					  			$("#no_data").hide();
-  					  		    $("#personList tr:first").append(row);
-  					  		    $("#cbk_all").attr("checked", false);
-  				  			    $("#cbk_all").attr("disabled",false);
- 								}else{
- 									alert("有重复数据！");
- 								}
+				parent.parent.setPerson=function(type){
+					$.ajax({
+						type:"post",
+						url: "loadCustomerInfoForAjaxAction.action",
+						data:{personIds:type},
+						beforeSend: function(XMLHttpRequest){
+						},
+						success: function(data, textStatus){
+							try{
+								//将字符串转换为json对象
+								data = eval("("+data+")");
+								$.each(data.customerInfoList,function(i,value){
+									if($("#"+value.id).length==0){
+									var row="";
+									row=row+"<tr>";
+						  			row=row+"<td align='center' bgcolor='#FFFFFF' >";  
+						  			row=row+"<input type='checkbox' name='ids'/>";
+						  			row=row+"<input type='hidden' id='"+value.id+"' name='selectedIds' value='"+value.id+"'/>";
+						  			row=row+"</td>";
+						  			row=row+"<td align='center' bgcolor='#FFFFFF'>"+(value.name==null ? "" : value.name) +"</td>";
+						  			row=row+"<td align='center' bgcolor='#FFFFFF'>"+(value.phone==null ? "" : value.phone) +"</td>";
+						  			row=row+"<td align='center' bgcolor='#FFFFFF'>"+(value.categoryId==1 ? "客户" : "销售人员" )+"</td>";
+						  			row=row+"<td align='center' bgcolor='#FFFFFF'>"+(value.unit==null ? "" : value.unit )+"</td>";
+						  			row=row+"<td align='center' bgcolor='#FFFFFF'>"+(value.post==null ? "" : value.post)+"</td>";
+						  			row=row+"<td align='center' bgcolor='#FFFFFF'>"+(value.nickname==null ? "" : value.nickname)+"</td>";
+						  			row=row+"<td align='center' bgcolor='#FFFFFF'><a id='del_one' href='javascript:void(0);'>删除</a></td>";
+						  			row=row+"</tr>";
+						  			$("#no_data").hide();
+						  		    $("#personList tr:first").append(row);
+						  		    $("#cbk_all").attr("checked", false);
+					  			    $("#cbk_all").attr("disabled",false);
+									}else{
+										//alert("有重复数据！");
+									}
 							    });
- 						}catch(e){
- 							alert(e.description);
- 						}
- 					},
- 					complete: function(XMLHttpRequest, textStatus){
- 					},
- 					error: function(){
- 					}
- 				});
+							}catch(e){
+								alert(e.description);
+							}
+						},
+						complete: function(XMLHttpRequest, textStatus){
+						},
+						error: function(){
+						}
+					});
+				};
+				parent.parent.tipsWindown("选择类型","iframe:<%=basePath%>sms/selecttype.html","400","150","true","","true","no");
+				
 			});
 		};
 		
@@ -491,13 +501,18 @@
 												</tr>
 												<tr>
 													<td>
+														点击查询余额：<img src="<%=basePath%>/images/finger.png" ></img>
 														<img src="<%=basePath%>/images/yen_coins.png" style="cursor: pointer;" id="getMoney" title="查询余额"></img>
 														<strong  id="balance"></strong>
 													</td>
 													<td align="right">
 														<span>
+															<s:hidden id="txt_company" name="footContent" maxlength="50" cssStyle="width: 200px;"  ></s:hidden>
+															<input type="checkbox"  id="chk_use_company"  style="display: none;"/>
+															<!-- 
 															<s:textfield id="txt_company" name="footContent" maxlength="50" cssStyle="width: 200px;"  />
 															<input type="checkbox"  id="chk_use_company"/>不使用
+															 -->
 														</span>
 													</td>
 												</tr>
