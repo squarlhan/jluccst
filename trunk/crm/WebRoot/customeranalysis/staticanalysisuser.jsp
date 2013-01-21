@@ -96,7 +96,7 @@ background-color:#d3eaef}
                  timeout: 5000,
                  error: function() { alert('Error loading data!'); },
                  success: function(msg) {
-                	 var xml = "<graph caption='客户评估信息统计图' subcaption='' xAxisName='日期' yAxisMinValue='0' yAxisMaxValue='100' yAxisName='assessment values' decimalPrecision='0' formatNumberScale='0' numberPrefix='' showNames='1' showValues='0'  showAlternateHGridColor='1' AlternateHGridColor='ff5904' divLineColor='ff5904' divLineAlpha='20' alternateHGridAlpha='5' >";
+                	 var xml = "<graph caption='客户评估信息统计图' rotateNames='1' baseFontSize='16' subcaption='' xAxisName='日期' yAxisMinValue='0' yAxisMaxValue='100' yAxisName='assessment values' decimalPrecision='0' formatNumberScale='0' numberPrefix='' showNames='1' showValues='0'  showAlternateHGridColor='1' AlternateHGridColor='ff5904' divLineColor='ff5904' divLineAlpha='20' alternateHGridAlpha='5' >";
                 	 //xml = xml + "<set name='Jan' value='17400' hoverText='January'/>";
                      $.each(eval(msg), function(i, item) {
                          //$("<option value='" + item.id + "'>" + item.name + "</option>").appendTo($("#city"));
