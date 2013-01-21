@@ -12,10 +12,10 @@
    	{
 		sb.append( "{" );
 		sb.append( "root:[" );
-		for( int i = 0;i<pagination.getData().size();i++ )
+		for( int i = pagination.getData().size() - 1;i>0;i-- )
 		{
 			obj = ( AutoCustomerAssessment )pagination.getData().get( i );
-			if( i > 0 )
+			if( i < pagination.getData().size() - 1 )
 				sb.append( "," );
 			sb.append( "{id:'" );
 			sb.append(  obj.getId() );
