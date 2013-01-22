@@ -10,7 +10,7 @@ public interface IActionPlanService {
 	 * 保存或修改行动计划
 	 * @param ActionPlan
 	 */
-	public void saveOrUpdateActionPlan(ActionPlan ActionPlan);
+	public void saveOrUpdateActionPlan(ActionPlan actionPlan);
 	
 	 /**
 	  * 通过Id删除行动计划
