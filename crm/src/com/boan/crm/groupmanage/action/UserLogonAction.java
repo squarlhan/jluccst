@@ -9,6 +9,7 @@
 
 package com.boan.crm.groupmanage.action;
 
+import java.util.List;
 import java.util.Random;
 
 import javax.servlet.ServletContext;
@@ -35,10 +36,12 @@ import com.boan.crm.groupmanage.common.Md5PasswordEncoder;
 import com.boan.crm.groupmanage.common.UserSession;
 import com.boan.crm.groupmanage.model.Deptment;
 import com.boan.crm.groupmanage.model.EkeyUser;
+import com.boan.crm.groupmanage.model.Menu;
 import com.boan.crm.groupmanage.model.User;
 import com.boan.crm.groupmanage.security.CheckProductKey;
 import com.boan.crm.groupmanage.service.IDeptmentService;
 import com.boan.crm.groupmanage.service.IEkeyUserService;
+import com.boan.crm.groupmanage.service.IMenuService;
 import com.boan.crm.groupmanage.service.IPopedomService;
 import com.boan.crm.groupmanage.service.IUserService;
 import com.boan.crm.utils.md5.MakeMd5;
@@ -78,6 +81,12 @@ public class UserLogonAction extends ActionSupport {
 	@Qualifier("deptService")
 	private IDeptmentService deptService = null;
 	/**
+	 * 获取菜单数据
+	 */
+	@Autowired
+	@Qualifier("menuService")
+	private IMenuService menuService = null;
+	/**
 	 * key用户接口
 	 */
 	@Autowired
@@ -113,6 +122,8 @@ public class UserLogonAction extends ActionSupport {
 	private String randomData = "";
 
 	private String keySn = null;
+	
+	private List<Menu> menuList = null;
 
 	/**
 	 * 验证密码
@@ -245,7 +256,15 @@ public class UserLogonAction extends ActionSupport {
 		}
 		return SUCCESS;
 	}
-
+	/**
+	 * 显示菜单
+	 * @return
+	 * @throws Exception
+	 */
+	public String  logonMenu() throws Exception {
+		menuList = menuService.getAllMenuList();
+		return SUCCESS;
+	}
 	/**
 	 * 退出登录,释放session资源
 	 * 
@@ -588,6 +607,22 @@ public class UserLogonAction extends ActionSupport {
 
 	public void setKeySn(String keySn) {
 		this.keySn = keySn;
+	}
+
+	public IMenuService getMenuService() {
+		return menuService;
+	}
+
+	public void setMenuService(IMenuService menuService) {
+		this.menuService = menuService;
+	}
+
+	public List<Menu> getMenuList() {
+		return menuList;
+	}
+
+	public void setMenuList(List<Menu> menuList) {
+		this.menuList = menuList;
 	}
 
 }

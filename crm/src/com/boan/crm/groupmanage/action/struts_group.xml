@@ -110,6 +110,9 @@
 		<action name="logonTopAction" class="userLogonAction" method="logonTop">
 			<result name="success">/systop.jsp</result>
 		</action>
+		<action name="logonMenuAction" class="userLogonAction" method="logonMenu">
+			<result name="success">/sysmenu.jsp</result>
+		</action>
 		<action name="logoutAction" class="userLogonAction" method="logout">
 			<result name="success">/default.jsp</result>
 		</action>
