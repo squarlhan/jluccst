@@ -75,7 +75,18 @@
 					});
 	  			});
 	  		});
-	  		
+	  		/**
+	  		 * 查看
+	  		 */
+	  		$('a[name="view"]').each(function(){
+	  			$(this).click(function(){
+	  				var url = $(this).attr("url");
+	  				parent.parent.tipsWindown("查看行动计划","iframe:"+url,"620","380","true","","true","no");
+	  				parent.parent.$("#windown-close").bind('click',function(){
+						window.location.href="./openActionPlanListForViewAction.action";
+					});
+	  			});
+	  		});
 	  		/**
 	  		 * 删除信息
 	  		 */
@@ -144,8 +155,10 @@
 	</tr>
   <tr>
     <td valign="top">
-    <input name="addbtn" type="button" class="btn_2_3" id="addbtn" value="添加" >
-            <input name="deletepointbtn" type="button" class="btn_4" id="deletepointbtn" value="删除所选">
+    	<!-- 
+      <input name="addbtn" type="button" class="btn_2_3" id="addbtn" value="添加" >
+      <input name="deletepointbtn" type="button" class="btn_4" id="deletepointbtn" value="删除所选">
+       -->
       <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#d5e4fd">
         <tr>
          	<td align="center" background="<%=path %>/images/headerbg.jpg">  
@@ -179,13 +192,17 @@
                 <td height="26" align="left" bgcolor="#FFFFFF"><s:property value="planContent"/></td>
                 <td height="26" align="left" bgcolor="#FFFFFF"><s:property value="memo"/></td>
           <td height="26" colspan="2" align="center" bgcolor="#FFFFFF"  nowrap="nowrap">
-          	<s:url id="edit_url" action="openModifyActionPlanAction">   
+			<s:url id="view_url" action="openModifyActionPlanForViewAction">   
+				<s:param name="actionPlan.id" value="id"></s:param>   
+			</s:url>
+			<s:url id="edit_url" action="openModifyActionPlanAction">   
 				<s:param name="actionPlan.id" value="id"></s:param>   
 			</s:url>
 			<s:url id="delete_url" action="deleteActionPlanAction">   
 				<s:param name="ids" value="id"></s:param>   
 			</s:url>
-         	<a name="edit" href="javascript:void(0);" url="${edit_url}">编辑</a>  
+         	<!-- <a name="edit" href="javascript:void(0);" url="${edit_url}">编辑</a> -->
+         	<a name="view" href="javascript:void(0);" url="${view_url}">查看</a>    
          	<a name="delete" href="javascript:void(0);" url="${delete_url}">删除</a>
           </td>
         </tr>
