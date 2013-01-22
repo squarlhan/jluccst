@@ -264,7 +264,8 @@
 											<s:else>
 												<s:select list="roleList" listKey="id" listValue="roleName" value="user.roleId" 
 													id="roleId" name="user.roleId" cssStyle="width:250px" headerKey="" headerValue="--请选择职务--"></s:select>
-											</s:else>
+												</s:else>
+												<font color="red">*</font>
 											</td>
 										</tr>
 										<tr>
