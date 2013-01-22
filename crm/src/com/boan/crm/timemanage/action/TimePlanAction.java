@@ -165,7 +165,9 @@ public class TimePlanAction extends BaseActionSupport{
 		params.put("planType", planType);
 		params.put("beginTime", beginTime);
 		params.put("endTime", endTime); 
-		params.put("deptId", deptId);
+		if(!deptId.equals("")){
+			params.put("deptId", deptId);
+		}
 		if(userId!=null && !userId.equals("")){
 			params.put("employeeId", userId);
 		}
