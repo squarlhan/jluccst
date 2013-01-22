@@ -143,7 +143,6 @@
 										</td>
 										<td height="26" align="left" bgcolor="#FFFFFF">
 											<s:textfield tabindex="-1"  id="txt_submitTime" name="actionPlan.submitTime" cssStyle="width: 160px;" maxlength="25"></s:textfield>
-											<font color="red">*</font>
 										</td>
 									</tr>
 									<tr>
@@ -160,7 +159,6 @@
 										</td>
 										<td height="26" align="left" bgcolor="#FFFFFF" colspan="3">
 											<s:textarea tabindex="-1"   id="txt_planContent" name="actionPlan.planContent" cssStyle="width: 438px;height:100px;resize:none;" maxlength="500"></s:textarea>
-											<font color="red">*</font>
 										</td>
 									</tr>
 									
