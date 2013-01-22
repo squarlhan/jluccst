@@ -1,4 +1,6 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ page language="java" 
+import="com.boan.crm.groupmanage.common.UserSession,com.boan.crm.groupmanage.service.IPopedomService,com.boan.crm.groupmanage.service.impl.PopedomServiceImpl"
+pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%@ taglib prefix="j" uri="/script-tags"%>
 <%@ taglib prefix="page" uri="/page-tags"%> 
@@ -21,6 +23,21 @@
 	String basePath = request.getScheme() + "://"
 			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
+	IPopedomService popedomService = new PopedomServiceImpl();
+	UserSession us = (UserSession) session.getAttribute("userSession");
+	String deptId = us.getDeptId();
+	//判断是否是公司管理员或公司级用户
+	boolean popodomFlag = popedomService.isCompanyAdministrator(us.getUserId(), String.valueOf(us.getUserType()) ) 
+			||popedomService.isHasCompanyPopedom(us.getPopedomKeys());
+	String getUserNameUrl = "";
+	if( popodomFlag ){
+		//经理级人员
+		getUserNameUrl = "getUserNameByCompany.action";
+	}else{
+		//部门人员
+		getUserNameUrl = "getUserNameByDept.action";
+	}
+	//*/
 %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
@@ -39,6 +56,24 @@
 	<script type="text/javascript" src="<%=basePath%>js/timepicke/jquery-ui-timepicker-addon.js"></script>
 	<script type="text/javascript" src="<%=basePath%>js/timepicke/jquery-ui-timepicker-zh-CN.js"></script>
 	<script type="text/javascript" src="<%=basePath%>js/timepicke/jquery-ui-sliderAccess.js"></script>
+	
+	<script src="<%=basePath %>/js/ui/jquery.ui.core.js"></script>
+	<script src="<%=basePath %>/js/ui/jquery.ui.position.js"></script>
+	<script src="<%=basePath %>/js/ui/jquery.autocomplete.js"></script>
+	<style type="text/css">
+		.auto-style1 {
+		background: #d3eaef; font-size: 18px; font-family: 仿宋;}
+	
+	.auto-style2 {
+		font-size: x-large;
+	}
+	.auto-style3 {
+		text-align: right;
+	}
+	.ui-autocomplete-loading { background: white url('images/ui-anim_basic_16x16.gif') right center no-repeat; }
+	</style>
+	<link rel='stylesheet' type='text/css'  href='<%=path %>/css/jquery.autocomplete.css' />
+	
 	<style type="text/css">
 	<!--
 	.STYLE1 {
@@ -63,6 +98,44 @@
 			$.fn.checkall("cbk_all");
 	  		$.fn.uncheckall("ids","cbk_all");
 
+	  		$("#txt_query_employee_name").autocomplete("<%=getUserNameUrl%>",
+		     {
+	           minChars: 1,
+	           max:5,
+	           width: 150, 
+	           matchContains: true,
+	           autoFill: false,
+	           extraParams: 
+	           {   
+	        	 userName: function() 
+                 {
+                  	 return $("#txt_query_employee_name").val(); 
+                 }   
+               },
+	           parse: function(test) 
+	           {
+	               data = test;
+	               var rows = [];
+	               if(data != null)
+	               {
+	            	   allData = test;
+		               for(var i=0; i<data.length; i++)
+			           {
+			              rows[rows.length] = 
+			              {
+			                   data: data[i].userCName,
+			                   value:data[i],
+			                   result:data[i].userCName
+			               };
+			            }
+	           		}
+		            return rows;
+	           },
+	           formatItem:function(item)
+	           {
+                   return item;
+	           }
+		     });
 	  		/**
 	  		 * 修改公司信息
 	  		 */
