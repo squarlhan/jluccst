@@ -9,12 +9,12 @@ public class CheckProductKey {
 	/**
 	 * 正式版为1 ，试用版为0
 	 */
-	private String productKey = "0";
+	private String productKey = "1";
 	
 	/**
 	 * 字符串型开始时间
 	 */
-	private  String productEndDate = "2013-03-31 00:00:00";
+	private  String productEndDate = "2013-12-31 00:00:00";
 	
 	/**
 	 * 消息
@@ -29,7 +29,8 @@ public class CheckProductKey {
 		if( "1".equals(productKey ) ){
 			//正式版
 			message="";
-			return false;
+			//!暂时先屏掉，让正式版也有期限，JHY
+			//return false;
 		}
 		Calendar endDate = MySimpleDateFormat.parse(productEndDate);
 		Calendar cal = Calendar.getInstance();
