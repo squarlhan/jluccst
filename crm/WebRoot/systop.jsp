@@ -45,14 +45,18 @@
   </tr>
   <tr>
     <td height="36" colspan="3" background="images/top_bg2.jpg" style="padding-left:20px;">
-	    <table width="890" border="0" cellspacing="0" cellpadding="0">
+	    <table width="100%" border="0" cellspacing="0" cellpadding="0">
 	      <tr>
 	        <td width="20" style="padding-bottom:2px;"><img src="images/user.gif" width="16" height="16" /></td>
-	        <td width="870" style="padding-top:2px;">
+	        <td style="padding-top:2px;">
 	        	<span class="STYLE1">
-	        		今天是<%=sb.toString() %>  欢迎您：<s:property value="userCName"/>, 您的部门信息：<s:property value="fullGroupName"/>
-	        		[<A href="javascript:myinfo();" style="color:yellow">个人资料</A>]
-	        		[<A href="javascript:logout();" style="color:yellow">退出</A>]
+	        		今天是<%=sb.toString() %>  欢迎您：<s:property value="userCName"/>, 所在部门：<s:property value="fullGroupName"/>
+	        	</span>
+	        </td>
+	        <td align="right" style="padding-top:2px; padding-right:10px;">
+	        	<span class="STYLE1">
+	        		[ <A href="javascript:myinfo();" style="color:yellow">个人资料</A> ]
+	        		[ <A href="javascript:logout();" style="color:yellow">退出</A> ]
 	        	</span>
 	        </td>
 	      </tr>
