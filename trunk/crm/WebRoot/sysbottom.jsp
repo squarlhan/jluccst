@@ -20,7 +20,7 @@
 <input type="hidden" name="path" id="path" value="<%=path%>"/>
 <table width="100%" border="0" cellpadding="0" cellspacing="0" id="__01">
   <tr>
-    <td height="26" background="images/bottombg.jpg" style="padding-left:10px;"><p><strong>版权所有：长春博岸信息科技有限责任公司　技术支持：长春博岸信息科技有限责任公司</strong></p></td>
+    <td height="26" background="images/bottombg.jpg" style="padding-left:10px;"><p><strong>技术支持：长春博岸信息科技有限责任公司</strong></p></td>
   </tr>
 </table>
 </body>
