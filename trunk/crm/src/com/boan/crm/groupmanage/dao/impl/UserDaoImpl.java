@@ -194,5 +194,33 @@ public class UserDaoImpl extends BaseDao<User,String> implements IUserDao{
 		map.put( "roleKey", roleKey );
 		return super.find( hql, map );
 	}	
+	
+	/**
+	 * 根据组织机构id和用户名称模糊查询客户信息
+	 * @param companyId 公司id （为空表示只查询同部门的用户）
+	 * @param deptId 部门id （为空表示只查询同公司的用户）
+	 * @param userCName 用户名称
+	 * @return 用户信息
+	 * @throws Exception
+	 */
+	public List<User> queryUserListByUserName(String companyId, String deptId,String userCName ) throws Exception {
+		String hql = "from User where 1=1 ";
+		if(companyId!=null && !companyId.equals("")){
+			hql = hql+" and companyId = :companyId ";
+		}
+		if(deptId!=null && !deptId.equals("")){
+			hql = hql+" and deptId = :deptId ";
+		}
+		if(deptId!=null && !deptId.equals("")){
+			hql = hql+" and userCName like :userCName ";
+		}
+		hql = hql+" order by createTime";
+		
+		Map<String, String> map = new HashMap<String, String>();
+		map.put( "companyId", companyId );
+		map.put( "deptId", deptId );
+		map.put( "userCName", "%" + userCName + "%" );
+		return super.find( hql, map );
+	}
 }
 
