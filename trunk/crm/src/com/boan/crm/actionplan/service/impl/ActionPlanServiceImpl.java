@@ -22,8 +22,8 @@ public class ActionPlanServiceImpl implements IActionPlanService {
 		 * 保存或修改行动计划
 		 * @param ActionPlan
 		 */
-		public void saveOrUpdateActionPlan(ActionPlan ActionPlan){
-			actionPlanDao.saveOrUpdate(ActionPlan);
+		public void saveOrUpdateActionPlan(ActionPlan actionPlan){
+			actionPlanDao.saveOrUpdate(actionPlan);
 		}
 		
 		 /**
