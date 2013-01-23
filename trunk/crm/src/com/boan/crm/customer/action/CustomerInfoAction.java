@@ -799,13 +799,26 @@ public class CustomerInfoAction extends BaseActionSupport{
 		companyId = sessionCompanyId;
 		
 		totalCustomerCount = customerInfoService.findAllCustomerInfoCount(companyId);
-		
-		listCategoryStatic = customerStaticInfoService.findAllCustomerStaticInfo(companyId,CustomerStaticInfo.CUSTOMER_CATEGORY);
-		listSourceStatic = customerStaticInfoService.findAllCustomerStaticInfo(companyId,CustomerStaticInfo.CUSTOMER_SOURCE);
-		listMaturityStatic = customerStaticInfoService.findAllCustomerStaticInfo(companyId,CustomerStaticInfo.CUSTOMER_MATURITY);
-		listProgressStatic = customerStaticInfoService.findAllCustomerStaticInfo(companyId,CustomerStaticInfo.CUSTOMER_PROGRESS);
-		listLevelStatic = customerStaticInfoService.findAllCustomerStaticInfo(companyId,CustomerStaticInfo.CUSTOMER_LEVEL);
-		
+		if(flag.equals("category"))
+		{
+			listCategoryStatic = customerStaticInfoService.findAllCustomerStaticInfo(companyId,CustomerStaticInfo.CUSTOMER_CATEGORY);
+		}
+		if(flag.equals("source"))
+		{
+			listSourceStatic = customerStaticInfoService.findAllCustomerStaticInfo(companyId,CustomerStaticInfo.CUSTOMER_SOURCE);
+		}
+		if(flag.equals("maturity"))
+		{
+			listMaturityStatic = customerStaticInfoService.findAllCustomerStaticInfo(companyId,CustomerStaticInfo.CUSTOMER_MATURITY);
+		}
+		if(flag.equals("progress"))
+		{
+			listProgressStatic = customerStaticInfoService.findAllCustomerStaticInfo(companyId,CustomerStaticInfo.CUSTOMER_PROGRESS);
+		}
+		if(flag.equals("level"))
+		{
+			listLevelStatic = customerStaticInfoService.findAllCustomerStaticInfo(companyId,CustomerStaticInfo.CUSTOMER_LEVEL);
+		}
 		return SUCCESS;
 	}
 	
