@@ -155,7 +155,7 @@
 		<td><s:textfield name="endDate" id="endDate" style="width: 100px" readOnly="true"></s:textfield></td>
 		<td align="center">跟进类型：</td>
 		<td style="width:120px"><s:select list="listTraceOption" listKey="id" listValue="name" value="traceOption" 
-			id="traceOption" name="traceOption" cssStyle="width:150px" headerKey="" headerValue="--请选择跟进类型--"></s:select></td>
+			id="traceOption" name="traceOption" cssStyle="width:150px" headerKey="" headerValue="--请选择--"></s:select></td>
 		<td style="width: 80px"><input type="button" style="width: 80px;" class="btn_4" id="searchBtn" value="快速查询" /></td>
 	</tr>
 </table></td></tr>
