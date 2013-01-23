@@ -16,6 +16,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
+import com.boan.crm.actionplan.model.ActionPlan;
+import com.boan.crm.actionplan.service.IActionPlanService;
 import com.boan.crm.customer.model.ContractPersonInfo;
 import com.boan.crm.customer.model.CustomerInfo;
 import com.boan.crm.customer.model.CustomerTraceInfo;
@@ -79,8 +81,8 @@ public class CustomerTraceInfoAction extends BaseActionSupport{
 	private ISMSCustomerInfoService sMSCustomerInfoService;
 	
 	@Autowired
-	@Qualifier("timePlanService")
-	private ITimePlanService timePlanService = null;
+	@Qualifier("actionPlanService")
+	private IActionPlanService actionPlanService = null;
 	//客户跟进信息类
 	private CustomerTraceInfo customerTraceInfo ;
 	private String id = "";
@@ -103,6 +105,24 @@ public class CustomerTraceInfoAction extends BaseActionSupport{
 	private String chkSMS = "";
 	private String message = null;
 	private String deptId ="";
+	private String traceFlag = "";
+	private String actualTraceTime = "";
+	public String getTraceFlag() {
+		return traceFlag;
+	}
+
+	public void setTraceFlag(String traceFlag) {
+		this.traceFlag = traceFlag;
+	}
+
+	public String getActualTraceTime() {
+		return actualTraceTime;
+	}
+
+	public void setActualTraceTime(String actualTraceTime) {
+		this.actualTraceTime = actualTraceTime;
+	}
+
 	public String getDeptId() {
 		return deptId;
 	}
@@ -273,6 +293,10 @@ public class CustomerTraceInfoAction extends BaseActionSupport{
 			customerTraceInfo = customerTraceInfoService.get(id);
 			customerId = customerTraceInfo.getCustomerId();
 			customerInfo = customerInfoService.get(customerId);
+			if(customerTraceInfo.getActualTraceTime() != null)
+			{
+				actualTraceTime = CalendarUtils.toLongStringNoSecond(customerTraceInfo.getActualTraceTime());
+			}
 			traceTime = CalendarUtils.toLongStringNoSecond(customerTraceInfo.getTraceTime());
 			try
 			{
@@ -391,8 +415,7 @@ public class CustomerTraceInfoAction extends BaseActionSupport{
 		}
 		
 		obj.setTracePersonId(customerTraceInfo.getTracePersonId());
-		obj.setInterest(customerTraceInfo.getInterest());
-		obj.setObjection(customerTraceInfo.getObjection());
+		
 		obj.setSalesman(customerTraceInfo.getSalesman());
 		obj.setSalesmanId(customerTraceInfo.getSalesmanId());
 		obj.setTask(customerTraceInfo.getTask());
@@ -421,6 +444,23 @@ public class CustomerTraceInfoAction extends BaseActionSupport{
 //			time.set(Calendar.SECOND, 0);
 //		}
 		obj.setTraceTime(time);
+		
+		if (traceFlag != null && traceFlag.equals("1"))
+		{
+			obj.setTraceFlag("1");
+			
+			Calendar time2 = CalendarUtils.toLongCalendarNoSecond( actualTraceTime );
+			obj.setActualTraceTime(time2);
+			obj.setInterest(customerTraceInfo.getInterest());
+			obj.setObjection(customerTraceInfo.getObjection());
+			
+		}else
+		{
+			obj.setTraceFlag("0");
+			obj.setActualTraceTime(null);
+			obj.setInterest("");
+			obj.setObjection("");
+		}
 		obj.setEmail(customerTraceInfo.getEmail());
 		obj.setQq(customerTraceInfo.getQq());
 		obj.setTel(customerTraceInfo.getTel());
@@ -429,7 +469,7 @@ public class CustomerTraceInfoAction extends BaseActionSupport{
 		
 		if(inserFLag)
 		{
-			TimePlan timePlan = new TimePlan();
+			/*TimePlan timePlan = new TimePlan();
 			timePlan.setDeptId(sessionDeptId);
 			timePlan.setCreateTime(Calendar.getInstance());
 			timePlan.setDeptName(sessionDeptName);
@@ -450,7 +490,30 @@ public class CustomerTraceInfoAction extends BaseActionSupport{
 			timePlan.setPlanContent(sb.toString());
 			timePlan.setSubmitTime(Calendar.getInstance());
 			
-			timePlanService.saveOrUpdateTimePlan(timePlan);
+			timePlanService.saveOrUpdateTimePlan(timePlan);*/
+			
+			ActionPlan actionPlan = new ActionPlan();
+			actionPlan.setDeptId(sessionDeptId);
+			actionPlan.setCreateTime(Calendar.getInstance());
+			actionPlan.setDeptName(sessionDeptName);
+			actionPlan.setEmployeeId(obj.getSalesmanId());
+			actionPlan.setEmployeeName(obj.getSalesman());
+			actionPlan.setOrganId(sessionCompanyId);
+			actionPlan.setPersonId(obj.getSalesmanId());
+			actionPlan.setPlanType("3");
+			StringBuilder sb = new StringBuilder();
+			sb.append("跟进计划：");
+			sb.append(CalendarUtils.toLongStringNoSecond(obj.getTraceTime()));
+			sb.append(",对客户[");
+			sb.append(obj.getCustomerName());
+			sb.append("]进行["+dataDictionaryService.get(obj.getTraceOption()).getName()+"]方式跟进");
+			sb.append(",跟进任务：[");
+			sb.append(obj.getTask());
+			sb.append("]。");
+			actionPlan.setPlanContent(sb.toString());
+			actionPlan.setSubmitTime(Calendar.getInstance());
+			
+			actionPlanService.saveOrUpdateActionPlan(actionPlan);
 		}
 		
 		if(chkSMS != null && chkSMS.equals("true"))

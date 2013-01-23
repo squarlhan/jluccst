@@ -62,10 +62,34 @@ public class CustomerTraceInfo implements Serializable
 	private String salesmanId = "";
 	@Column(name = "TRACEOPTION" , length = 50)
 	private String traceOption = "";
+	@Column(name = "TRACEFLAG")
+	private String traceFlag = "";
+	public String getTraceFlag() {
+		return traceFlag;
+	}
+	public void setTraceFlag(String traceFlag) {
+		this.traceFlag = traceFlag;
+	}
 	@Column(name = "TRACE_TIME")
 	private Calendar traceTime = Calendar.getInstance();
+	@Column(name = "ACTUALTRACE_TIME")
+	private Calendar actualTraceTime = Calendar.getInstance();
 	@Transient
 	private String traceTimeStr = "";
+	@Transient
+	private String actualTraceTimeStr = "";
+	public String getActualTraceTimeStr() {
+		return actualTraceTimeStr;
+	}
+	public void setActualTraceTimeStr(String actualTraceTimeStr) {
+		this.actualTraceTimeStr = actualTraceTimeStr;
+	}
+	public Calendar getActualTraceTime() {
+		return actualTraceTime;
+	}
+	public void setActualTraceTime(Calendar actualTraceTime) {
+		this.actualTraceTime = actualTraceTime;
+	}
 	public String getTraceTimeStr() {
 		return traceTimeStr;
 	}

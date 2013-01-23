@@ -100,7 +100,7 @@ public class CustomerTraceInfoServiceImpl implements ICustomerTraceInfoService{
 		{
 			hql.append(" and salesmanId in (select id from User where deptId =:deptId) ");
 		}
-		hql.append(" order by traceTime asc");
+		hql.append(" order by actualTraceTime asc ,traceTime desc");
 		List<CustomerTraceInfo> data = customerTraceInfoDao.findForPage(hql.toString(), values, pagination.getStartIndex(), pagination.getPageSize());
 		hql.delete(0, hql.length());
 		hql.append(" select count(*) from CustomerTraceInfo where 1=1 " );
@@ -164,6 +164,8 @@ public class CustomerTraceInfoServiceImpl implements ICustomerTraceInfoService{
 					customerTraceInfo.setSalesman(userService.getUserById(customerTraceInfo.getSalesmanId()).getUserCName());
 					customerTraceInfo.setPerson(contractPersonService.get(customerTraceInfo.getTracePersonId()));
 					customerTraceInfo.setTraceTimeStr(CalendarUtils.toLongStringNoSecond(customerTraceInfo.getTraceTime()));
+					if(customerTraceInfo.getActualTraceTime() != null)
+						customerTraceInfo.setActualTraceTimeStr(CalendarUtils.toLongStringNoSecond(customerTraceInfo.getActualTraceTime()));
 				}catch(Exception e)
 				{
 					e.printStackTrace();

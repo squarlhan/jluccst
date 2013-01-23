@@ -98,7 +98,7 @@ public class CustomerVisitInfoServiceImpl implements ICustomerVisitInfoService{
 		{
 			hql.append(" and salesmanId in (select id from User where deptId =:deptId) ");
 		}
-		hql.append(" order by visitTime asc");
+		hql.append(" order by actualVisitTime asc ,visitTime desc");
 		List<CustomerVisitInfo> data = customerVisitInfoDao.findForPage(hql.toString(), values, pagination.getStartIndex(), pagination.getPageSize());
 		hql.delete(0, hql.length());
 		hql.append(" select count(*) from CustomerVisitInfo where 1=1 " );
@@ -134,6 +134,7 @@ public class CustomerVisitInfoServiceImpl implements ICustomerVisitInfoService{
 		{
 			hql.append(" and salesmanId in (select id from User where deptId =:deptId) ");
 		}
+		
 		int totalRows = customerVisitInfoDao.findCountForPage(hql.toString(), values);
 		pagination.setTotalRows(totalRows);
 		pagination.setData(data);
@@ -163,7 +164,8 @@ public class CustomerVisitInfoServiceImpl implements ICustomerVisitInfoService{
 					customerVisitInfo.setSalesman(userService.getUserById(customerVisitInfo.getSalesmanId()).getUserCName());
 					customerVisitInfo.setPerson(contractPersonService.get(customerVisitInfo.getVisitPersonId()));
 					
-					
+					if(customerVisitInfo.getActualVisitTime() != null)
+						customerVisitInfo.setActualVisitTimeStr(CalendarUtils.toLongStringNoSecond(customerVisitInfo.getActualVisitTime()));
 					customerVisitInfo.setVisitTimeStr(CalendarUtils.toLongStringNoSecond(customerVisitInfo.getVisitTime()));
 				}catch(Exception e)
 				{
