@@ -124,7 +124,7 @@
 						$("#remark").attr("disabled",true);
 					}
 				});
-          	}
+          	};
 			
 			
 			

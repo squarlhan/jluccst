@@ -123,7 +123,10 @@
   					$.post(url, $('#form1').serialize(), function(data){window.location.href=window.location.href;});
   				}
 	  		});
-	  		
+	  		$("#closeBtn").click(function(){
+	  			//parent.$("#windown-close").click();
+	  			parent.location.href = "mycustomermanage.jsp";
+	  		});
 	  		
 	  		/*$("#beginDate").datepicker({
                 dateFormat: 'yy-mm-dd',
@@ -162,6 +165,7 @@
         <td>
        		<input name="addbtn" type="button" class="btn_4" id="addbtn" value="添加回访信息" >
             <input name="deletepointbtn" type="button" class="btn_4" id="deletepointbtn" value="删除所选">
+            <input type="button" name="closeBtn" id="closeBtn" value="返回客户列表" class="btn_5" />
         <td align="right"></td>
       </tr>
       

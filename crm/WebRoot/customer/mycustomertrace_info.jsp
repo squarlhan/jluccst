@@ -167,7 +167,7 @@
 					$("#interest").attr("disabled",true);
 					$("#objection").attr("disabled",true);
 				}
-			}
+			};
 		</script>
 		<style type="text/css">
 			.auto-style1 {
