@@ -15,6 +15,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
+import com.boan.crm.actionplan.model.ActionPlan;
+import com.boan.crm.actionplan.service.IActionPlanService;
 import com.boan.crm.customer.model.ContractPersonInfo;
 import com.boan.crm.customer.model.CustomerInfo;
 import com.boan.crm.customer.model.CustomerVisitInfo;
@@ -77,8 +79,8 @@ public class CustomerVisitInfoAction extends BaseActionSupport{
 	@Qualifier("SMSCustomerInfoService")
 	private ISMSCustomerInfoService sMSCustomerInfoService;
 	@Autowired
-	@Qualifier("timePlanService")
-	private ITimePlanService timePlanService = null;
+	@Qualifier("actionPlanService")
+	private IActionPlanService actionPlanService = null;
 	//客户回访信息类
 	private CustomerVisitInfo customerVisitInfo ;
 	private String id = "";
@@ -99,6 +101,24 @@ public class CustomerVisitInfoAction extends BaseActionSupport{
 	private String contractPerson = "";
 	private String contractTel  = "";
 	private String visitTime = "";
+	private String visitFlag = "";
+	private String actualVisitTime = "";
+	public String getVisitFlag() {
+		return visitFlag;
+	}
+
+	public void setVisitFlag(String visitFlag) {
+		this.visitFlag = visitFlag;
+	}
+
+	public String getActualVisitTime() {
+		return actualVisitTime;
+	}
+
+	public void setActualVisitTime(String actualVisitTime) {
+		this.actualVisitTime = actualVisitTime;
+	}
+
 	private String chkSMS = "";
 	private String message = null;
 	public String getDeptId() {
@@ -255,6 +275,10 @@ public class CustomerVisitInfoAction extends BaseActionSupport{
 			customerVisitInfo = customerVisitInfoService.get(id);
 			customerId = customerVisitInfo.getCustomerId();
 			customerInfo = customerInfoService.get(customerId);
+			if(customerVisitInfo.getActualVisitTime() != null)
+			{
+				actualVisitTime = CalendarUtils.toLongStringNoSecond(customerVisitInfo.getActualVisitTime());
+			}
 			visitTime = CalendarUtils.toLongStringNoSecond(customerVisitInfo.getVisitTime());
 			try
 			{
@@ -402,6 +426,21 @@ public class CustomerVisitInfoAction extends BaseActionSupport{
 //			time.set(Calendar.SECOND, 0);
 //		}
 		obj.setVisitTime(time);
+		
+		if (visitFlag != null && visitFlag.equals("1"))
+		{
+			obj.setVisitFlag("1");
+			
+			Calendar time2 = CalendarUtils.toLongCalendarNoSecond( actualVisitTime );
+			obj.setActualVisitTime(time2);
+		}else
+		{
+			obj.setVisitFlag("0");
+			obj.setActualVisitTime(null);
+			obj.setContentResult("");
+			obj.setRemark("");
+		}
+		
 		obj.setEmail(customerVisitInfo.getEmail());
 		obj.setQq(customerVisitInfo.getQq());
 		obj.setTel(customerVisitInfo.getTel());
@@ -410,7 +449,7 @@ public class CustomerVisitInfoAction extends BaseActionSupport{
 		
 		if(inserFLag)
 		{
-			TimePlan timePlan = new TimePlan();
+			ActionPlan timePlan = new ActionPlan();
 			timePlan.setDeptId(sessionDeptId);
 			timePlan.setCreateTime(Calendar.getInstance());
 			timePlan.setDeptName(sessionDeptName);
@@ -418,7 +457,7 @@ public class CustomerVisitInfoAction extends BaseActionSupport{
 			timePlan.setEmployeeName(obj.getSalesman());
 			timePlan.setOrganId(sessionCompanyId);
 			timePlan.setPersonId(obj.getSalesmanId());
-			timePlan.setPlanType("0");
+			timePlan.setPlanType("4");
 			StringBuilder sb = new StringBuilder();
 			sb.append("回访计划：");
 			sb.append(CalendarUtils.toLongStringNoSecond(obj.getVisitTime()));
@@ -431,7 +470,7 @@ public class CustomerVisitInfoAction extends BaseActionSupport{
 			timePlan.setPlanContent(sb.toString());
 			timePlan.setSubmitTime(Calendar.getInstance());
 			
-			timePlanService.saveOrUpdateTimePlan(timePlan);
+			actionPlanService.saveOrUpdateActionPlan(timePlan);
 		}
 		
 		if(chkSMS != null && chkSMS.equals("true"))

@@ -61,10 +61,34 @@ public class CustomerVisitInfo implements Serializable
 	private String email = "";
 	@Column(name = "VISITOPTION" , length = 50)
 	private String visitOption = "";
+	@Column(name = "VISITFLAG")
+	private String visitFlag = "";
+	public String getVisitFlag() {
+		return visitFlag;
+	}
+	public void setVisitFlag(String visitFlag) {
+		this.visitFlag = visitFlag;
+	}
 	@Column(name = "VISIT_TIME")
 	private Calendar visitTime = Calendar.getInstance();
+	@Column(name = "ACTUALVISIT_TIME")
+	private Calendar actualVisitTime = Calendar.getInstance();
+	public Calendar getActualVisitTime() {
+		return actualVisitTime;
+	}
+	public void setActualVisitTime(Calendar actualVisitTime) {
+		this.actualVisitTime = actualVisitTime;
+	}
 	@Transient
 	private String visitTimeStr = "";
+	@Transient
+	private String actualVisitTimeStr = "";
+	public String getActualVisitTimeStr() {
+		return actualVisitTimeStr;
+	}
+	public void setActualVisitTimeStr(String actualVisitTimeStr) {
+		this.actualVisitTimeStr = actualVisitTimeStr;
+	}
 	public String getVisitTimeStr() {
 		return visitTimeStr;
 	}
