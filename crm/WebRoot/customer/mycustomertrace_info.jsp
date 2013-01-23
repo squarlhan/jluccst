@@ -68,6 +68,8 @@
 		  		//$('#txt_begin').val((new Date()).getYear()+"-"+(((new Date()).getMonth()+1)<10 ? "0"+((new Date()).getMonth()+1) : (new Date()).getMonth()+1)+"-"+((new Date()).getDate()-15<10 ? "0"+(new Date()).getDate()-15 : (new Date()).getDate()-15));
 		  		//$('#txt_end').val((new Date()).getYear()+"-"+(((new Date()).getMonth()+1)<10 ? "0"+((new Date()).getMonth()+1) : (new Date()).getMonth()+1)+"-"+((new Date()).getDate()<10 ? "0"+(new Date()).getDate() : (new Date()).getDate()));
 				$('#traceTime').datetimepicker({showTimepicker: true});
+				$('#actualTraceTime').datetimepicker({showTimepicker: true});
+				
 				$.fn.save();
 		  		$.fn.close();
 		  		$.fn.initpage();
@@ -110,6 +112,19 @@
 					form1.customerId.value  = form1.customerId_t.value;
 	               	form1.submit();
           		});
+				$("#traceFlag").click(function() {
+					if($("#traceFlag").attr("checked"))
+					{
+						$("#actualTraceTime").attr("disabled",false);
+						$("#interest").attr("disabled",false);
+						$("#objection").attr("disabled",false);
+					}else
+					{
+						$("#actualTraceTime").attr("disabled",true);
+						$("#interest").attr("disabled",true);
+						$("#objection").attr("disabled",true);
+					}
+				});
           	}
 			
 			
@@ -139,6 +154,18 @@
 					alert(message);
 					
 					parent.$("#windown-close").click();
+				}
+				
+				if($("#traceFlag").attr("checked"))
+				{
+					$("#actualTraceTime").attr("disabled",false);
+					$("#interest").attr("disabled",false);
+					$("#objection").attr("disabled",false);
+				}else
+				{
+					$("#actualTraceTime").attr("disabled",true);
+					$("#interest").attr("disabled",true);
+					$("#objection").attr("disabled",true);
 				}
 			}
 		</script>
@@ -187,56 +214,57 @@
 	</tr>
 	<tr>
 		<td></td>
-		<td align="center" nowrap>跟进时间：</td>
+		<td align="center" nowrap>预计跟进时间：</td>
 		<td><s:textfield readOnly="true" type="text" style="width:150px" name="traceTime" id="traceTime"></s:textfield></td>
 		<td align="center"  nowrap>跟进任务：</td>
 		<td colspan="3"><s:textarea type="text" style="width:400px;height:60px" name="customerTraceInfo.task" id="task"></s:textarea></td>
 	</tr>
 	</table></td></tr>
-
 </table></fieldset></td></tr>
-</table></td></tr>
-
-<tr><td><table>
-<tr><td style="height: 15px"></td></tr>
-<tr><td><fieldset><legend><span>填写跟进结果：</span></legend><table>
-<tr><td><table cellpadding="5" cellspacing="3">
-	<tr>
-		<td></td>
-		<td rowspan="2"><table>
-			<tr><td align="center" nowrap>兴趣点：</td></tr>
-			<tr><td style="color:white">占行：</td></tr></table></td>
-		<td rowspan="2"><table>
-			<tr><td>
+<tr><td><fieldset><legend><span>
+<s:if test='%{customerTraceInfo.id != null && customerTraceInfo.id != ""}'>
+	<s:if test='customerTraceInfo.traceFlag.equals("1")'>
+		<input type="checkbox" name="traceFlag" id="traceFlag" value="1" checked/>
+	</s:if>
+	<s:else>
+		<input type="checkbox" name="traceFlag" id="traceFlag" value="1"/>
+	</s:else>
+</s:if>
+填写跟进结果</span></legend><table>
+<tr><td width="15px"></td><td align="center" nowrap>实际跟进时间：</td>
+			<td style="padding-left:12px">
 			<s:if test='%{customerTraceInfo.id != null && customerTraceInfo.id != ""}'>
-				<s:textarea type="text" style="width:650px;height:70px" name="customerTraceInfo.interest" id="interest"></s:textarea></td></tr></table></td>
+				<s:textfield readOnly="true" type="text" style="width:150px" name="actualTraceTime" id="actualTraceTime"></s:textfield>
+				</td>
 			</s:if>
 			<s:else>
-				<s:textarea title="请先填写跟进记录再填写结果 " readOnly="true" type="text" style="width:650px;height:70px" name="customerTraceInfo.interest" id="interest"></s:textarea></td></tr></table></td>
+				<s:textfield readOnly="true" type="text" style="width:150px" name="actualTraceTime" id="actualTraceTime"></s:textfield>
+				</td>
 			</s:else>
-			
 	</tr>
-	<tr><td></td></tr>
 	<tr>
-		<td></td>
-		<td rowspan="2"><table>
-			<tr><td align="center" nowrap>异议点：</td></tr>
-			<tr><td style="color:white">占行：</td></tr></table></td>
-		<td rowspan="2"><table>
-			<tr><td>
+		<td></td><td align="center" nowrap>兴趣点：</td>
+		<td  style="padding-left:12px">
 			<s:if test='%{customerTraceInfo.id != null && customerTraceInfo.id != ""}'>
-			<s:textarea type="text"  style="width:650px;height:70px" name="customerTraceInfo.objection" id="objection"></s:textarea></td></tr></table></td>
+				<s:textarea type="text" style="width:650px;height:70px" name="customerTraceInfo.interest" id="interest"></s:textarea>
+				</td>
 			</s:if>
 			<s:else>
-			<s:textarea title="请先填写跟进记录再填写结果 " type="text" readOnly="true" style="width:650px;height:70px" name="customerTraceInfo.objection" id="objection"></s:textarea></td></tr></table></td>
+				<s:textarea title="请先填写跟进记录再填写结果 " readOnly="true" type="text" style="width:645px;height:70px" name="customerTraceInfo.interest" id="interest"></s:textarea></td>
 			</s:else>
 	</tr>
-	<tr><td></td></tr>
-</table></td></tr>
+	<tr>
+		<td></td><td align="center" nowrap>异议点：</td>
+		<td style="padding-left:12px">
+			<s:if test='%{customerTraceInfo.id != null && customerTraceInfo.id != ""}'>
+			<s:textarea type="text"  style="width:650px;height:70px" name="customerTraceInfo.objection" id="objection"></s:textarea></td>
+			</s:if>
+			<s:else>
+			<s:textarea title="请先填写跟进记录再填写结果 " type="text" readOnly="true" style="width:645px;height:70px" name="customerTraceInfo.objection" id="objection"></s:textarea></td>
+			</s:else>
+	</tr>
 </table></fieldset></td></tr>
-</table></td></tr>
 <tr><td align="center"><table>
-	<tr><td style="height: 10px"></td></tr>
 	<tr>
 		<td align="center">
 		<s:checkbox name="chkSMS" id="chkSMS" />短信提醒
