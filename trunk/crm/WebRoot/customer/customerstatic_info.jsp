@@ -82,10 +82,7 @@ background-color:#d3eaef}
 	}
 	-->
 	</style>
-	<j:scriptlink css="true" jmessagebox="true" jquery="true"
-	tipswindow="true" validate="true" />
-	
-
+	<j:scriptlink css="true" jmessagebox="true" jquery="true" tipswindow="true" validate="true" />
 	<script type="text/javascript">
 	$(document).ready(function(){
 		<s:if test="flag.equals('category')">
@@ -99,7 +96,6 @@ background-color:#d3eaef}
 		 chart.setDataXML(xml);
 		 chart.render("chartdiv1");
 		 </s:if>
-		 
 		 <s:if test="flag.equals('source')">
 		 var xml2 = "<graph caption='客户来源信息统计' baseFontSize='16' xAxisName='客户来源' showNames='1'  decimalPrecision='0'>";
 		 <s:iterator value="listSourceStatic" status="obj">
