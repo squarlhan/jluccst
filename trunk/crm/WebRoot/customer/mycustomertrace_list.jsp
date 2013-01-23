@@ -126,13 +126,13 @@
   				}
 	  		});
 	  		
-	  	
+	  		$("#closeBtn").click(function(){
+	  			//parent.$("#windown-close").click();
+	  			parent.location.href = "mycustomermanage.jsp";
+	  		});
 		});
 	</script>
-
   </head>
-  
-  
   <body>
  <s:form id="form1" name="form1" method="post" theme="simple">
 <table width="100%" style="height:100%;" border="0" cellspacing="5" cellpadding="0">
@@ -142,6 +142,7 @@
         <td>
        		<input name="addbtn" type="button" class="btn_4" id="addbtn" value="添加跟进信息" >
             <input name="deletepointbtn" type="button" class="btn_4" id="deletepointbtn" value="删除所选">
+        	<input type="button" name="closeBtn" id="closeBtn" value="返回客户列表" class="btn_5" />
         <td align="right"></td>
       </tr>
       
@@ -155,7 +156,7 @@
 		<td><s:textfield name="endDate" id="endDate" style="width: 100px" readOnly="true"></s:textfield></td>
 		<td align="center">跟进类型：</td>
 		<td style="width:120px"><s:select list="listTraceOption" listKey="id" listValue="name" value="traceOption" 
-			id="traceOption" name="traceOption" cssStyle="width:150px" headerKey="" headerValue="--请选择--"></s:select></td>
+			id="traceOption" name="traceOption" cssStyle="width:100px" headerKey="" headerValue="--请选择--"></s:select></td>
 		<td style="width: 80px"><input type="button" style="width: 80px;" class="btn_4" id="searchBtn" value="快速查询" /></td>
 	</tr>
 </table></td></tr>
@@ -165,9 +166,9 @@
          <td align="center" background="../images/headerbg.jpg">  
    				<s:checkbox theme="simple" id="cbk_all" name="all"></s:checkbox>
    			</td>
-              <td align="center" background="../images/headerbg.jpg"><strong>跟进时间</strong></td>
+              <td align="center" background="../images/headerbg.jpg"><strong>预计跟进时间</strong></td>
+              <td align="center" background="../images/headerbg.jpg"><strong>实际跟进时间</strong></td>
               <td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">客户名称</td>
-			<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">业务员</td>
 			<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">业务进展</td>
 			<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">受访人</td>
 			<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">联系方式</td>
@@ -181,8 +182,8 @@
 				<s:checkbox id="%{#obj.id}" name="ids" fieldValue="%{id}" value="false" theme="simple"/>
 			</td>
             <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="traceTimeStr"/></td>
+            <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="actualTraceTimeStr"/></td>
             <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="customerName"/></td>
-            <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="salesman"/></td>
             <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="progress"/></td>
             <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="person.personName"/>
 			</td>
