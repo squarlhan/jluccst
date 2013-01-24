@@ -107,7 +107,6 @@
 					  //如选择后给其他控件赋值，触发别的事件等等
 					  for(var i=0; i<allData.length; i++)
 					  {
-						  alert(allData[i].progress);
 						  if(allData[i].customerName == itemname)
 						  {
 							  $("#customerId").val(allData[i].id);
@@ -178,6 +177,7 @@
 		  		//$('#txt_begin').val((new Date()).getYear()+"-"+(((new Date()).getMonth()+1)<10 ? "0"+((new Date()).getMonth()+1) : (new Date()).getMonth()+1)+"-"+((new Date()).getDate()-15<10 ? "0"+(new Date()).getDate()-15 : (new Date()).getDate()-15));
 		  		//$('#txt_end').val((new Date()).getYear()+"-"+(((new Date()).getMonth()+1)<10 ? "0"+((new Date()).getMonth()+1) : (new Date()).getMonth()+1)+"-"+((new Date()).getDate()<10 ? "0"+(new Date()).getDate() : (new Date()).getDate()));
 				$('#traceTime').datetimepicker({showTimepicker: true});
+				$('#actualTraceTime').datetimepicker({showTimepicker: true});
 				$.fn.save();
 		  		$.fn.close();
 		  		$.fn.initpage();
@@ -225,7 +225,20 @@
 					form1.customerId.value  = form1.customerId_t.value;
 	               	form1.submit();
           		});
-          	}
+				$("#traceFlag").click(function() {
+					if($("#traceFlag").attr("checked"))
+					{
+						$("#actualTraceTime").attr("disabled",false);
+						$("#interest").attr("disabled",false);
+						$("#objection").attr("disabled",false);
+					}else
+					{
+						$("#actualTraceTime").attr("disabled",true);
+						$("#interest").attr("disabled",true);
+						$("#objection").attr("disabled",true);
+					}
+				});
+          	};
 			
 			
 			
@@ -251,11 +264,21 @@
 				
 				var message = $("#lb_message").html();
 				if(message!=null && $.trim(message)!="" ){
-					alert(message);
 					
 					parent.$("#windown-close").click();
 				}
-			}
+				if($("#traceFlag").attr("checked"))
+				{
+					$("#actualTraceTime").attr("disabled",false);
+					$("#interest").attr("disabled",false);
+					$("#objection").attr("disabled",false);
+				}else
+				{
+					$("#actualTraceTime").attr("disabled",true);
+					$("#interest").attr("disabled",true);
+					$("#objection").attr("disabled",true);
+				}
+			};
 		</script>
 		<style type="text/css">
 			.auto-style1 {
@@ -293,8 +316,8 @@
 		<td align="right">业务员：</td>
 		<td><s:textfield type="text" readOnly="true" style="width:150px" name="customerInfo.salesman" id="salesman"></s:textfield></td>
 		<td align="right">业务进展：</td>
-		<td style="width: 150px">
-		<s:textfield type="text" readOnly="true" style="width:150px" name="customerInfo.progress" id="progressId"></s:textfield>
+		<td style="width: 140px">
+		<s:textfield type="text" readOnly="true" style="width:140px" name="customerInfo.progress" id="progressId"></s:textfield>
 		</td>
 	</tr>
 	<tr>
@@ -306,15 +329,11 @@
 		<s:textfield type="text" readOnly="true" style="width:150px" name="contractTel" id="phone"></s:textfield>
 		</td>
 		<td align="right">客户分类：</td>
-		<td style="width: 150px">
-		<s:textfield type="text" readOnly="true" style="width:150px" name="customerInfo.category" id="category"></s:textfield></td>
+		<td style="width: 140px">
+		<s:textfield type="text" readOnly="true" style="width:140px" name="customerInfo.category" id="category"></s:textfield></td>
 	</tr>
 	</table></td></tr>
-
 </table></fieldset></td></tr>
-</table></td></tr>
-<tr><td><table>
-<tr><td style="height: 15px"></td></tr>			
 <tr><td><fieldset><legend><span>添写跟进记录</span></legend><table>
 <tr><td><table cellpadding="5" cellspacing="3">
 	<tr>
@@ -336,59 +355,61 @@
 		<td align="right" nowrap>Q Q：</td>
 		<td ><s:textfield type="text" style="width:150px" name="customerTraceInfo.qq" id="qq"></s:textfield></td>
 		<td align="right" nowrap>邮 箱：</td>
-		<td ><s:textfield type="text" style="width:150px" name="customerTraceInfo.email" id="email"></s:textfield></td>
+		<td ><s:textfield type="text" style="width:140px" name="customerTraceInfo.email" id="email"></s:textfield></td>
 	</tr>
 	<tr>
 		<td></td>
 		<td align="right" nowrap title="日期格式：<s:property value='traceTime'/>">跟进时间：</td>
 		<td title="日期格式：<s:property value='traceTime'/>"><s:textfield  type="text" style="width:150px" name="traceTime" id="traceTime" readOnly="true"></s:textfield><font color="red">*</font></td>
 		<td align="right">任务：</td>
-		<td colspan="3"><s:textarea type="text" style="width:400px;height:60px" name="customerTraceInfo.task" id="task"></s:textarea></td>
+		<td colspan="3"><s:textarea type="text" style="width:390px;height:60px" name="customerTraceInfo.task" id="task"></s:textarea></td>
 	</tr>
 	</table></td></tr>
 </table></fieldset></td></tr>
-</table></td></tr>
-
-<tr><td><table>
-<tr><td style="height: 15px"></td></tr>
-<tr><td><fieldset><legend><span>填写跟进结果：</span></legend><table>
-<tr><td><table cellpadding="5" cellspacing="3">
-	<tr>
-		<td></td>
-		<td rowspan="2"><table>
-			<tr><td align="center" nowrap>兴趣点：</td></tr>
-			<tr><td style="color:white">占行：</td></tr></table></td>
-		<td rowspan="2"><table>
-			<tr><td>
+<tr><td><fieldset><legend><span>
+<s:if test='%{customerTraceInfo.id != null && customerTraceInfo.id != ""}'>
+	<s:if test='customerTraceInfo.traceFlag.equals("1")'>
+		<input type="checkbox" name="traceFlag" id="traceFlag" value="1" checked/>
+	</s:if>
+	<s:else>
+		<input type="checkbox" name="traceFlag" id="traceFlag" value="1"/>
+	</s:else>
+</s:if>
+填写跟进结果</span></legend><table>
+<tr><td width="15px"></td><td align="center" nowrap>实际<br/>跟进时间：</td>
+			<td style="padding-left:12px">
 			<s:if test='%{customerTraceInfo.id != null && customerTraceInfo.id != ""}'>
-				<s:textarea type="text" style="width:650px;height:70px" name="customerTraceInfo.interest" id="interest"></s:textarea></td></tr></table></td>
+				<s:textfield readOnly="true" type="text" style="width:150px" name="actualTraceTime" id="actualTraceTime"></s:textfield>
+				</td>
 			</s:if>
 			<s:else>
-				<s:textarea title="请先填写跟进记录再填写结果 " readOnly="true" type="text" style="width:650px;height:70px" name="customerTraceInfo.interest" id="interest"></s:textarea></td></tr></table></td>
+				<s:textfield readOnly="true" type="text" style="width:150px" name="actualTraceTime" id="actualTraceTime"></s:textfield>
+				</td>
 			</s:else>
-			
 	</tr>
-	<tr><td></td></tr>
 	<tr>
-		<td></td>
-		<td rowspan="2"><table>
-			<tr><td align="center" nowrap>异议点：</td></tr>
-			<tr><td style="color:white">占行：</td></tr></table></td>
-		<td rowspan="2"><table>
-			<tr><td>
+		<td></td><td align="center" nowrap>兴趣点：</td>
+		<td  style="padding-left:12px">
 			<s:if test='%{customerTraceInfo.id != null && customerTraceInfo.id != ""}'>
-			<s:textarea type="text"  style="width:650px;height:70px" name="customerTraceInfo.objection" id="objection"></s:textarea></td></tr></table></td>
+				<s:textarea type="text" style="width:630px;height:70px" name="customerTraceInfo.interest" id="interest"></s:textarea>
+				</td>
 			</s:if>
 			<s:else>
-			<s:textarea title="请先填写跟进记录再填写结果 " type="text" readOnly="true" style="width:650px;height:70px" name="customerTraceInfo.objection" id="objection"></s:textarea></td></tr></table></td>
+				<s:textarea title="请先填写跟进记录再填写结果 " readOnly="true" type="text" style="width:630px;height:70px" name="customerTraceInfo.interest" id="interest"></s:textarea></td>
 			</s:else>
 	</tr>
-	<tr><td></td></tr>
-</table></td></tr>
+	<tr>
+		<td></td><td align="center" nowrap>异议点：</td>
+		<td style="padding-left:12px">
+			<s:if test='%{customerTraceInfo.id != null && customerTraceInfo.id != ""}'>
+			<s:textarea type="text"  style="width:630px;height:70px" name="customerTraceInfo.objection" id="objection"></s:textarea></td>
+			</s:if>
+			<s:else>
+			<s:textarea title="请先填写跟进记录再填写结果 " type="text" readOnly="true" style="width:630px;height:70px" name="customerTraceInfo.objection" id="objection"></s:textarea></td>
+			</s:else>
+	</tr>
 </table></fieldset></td></tr>
-</table></td></tr>
 <tr><td align="center"><table>
-	<tr><td style="height: 10px"></td></tr>
 	<tr>
 		<td align="center">
 		<input type="button" name="addBtn" id="addBtn" value="保存" style="width: 50px"/>

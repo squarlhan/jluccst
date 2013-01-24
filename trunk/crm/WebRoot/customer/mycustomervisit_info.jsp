@@ -267,7 +267,6 @@
 			</td>
 	</tr>
 </table></fieldset></td></tr>
-</fieldset></td></tr>
 </table></td></tr>
 <tr><td align="center"><table>
 	<tr>

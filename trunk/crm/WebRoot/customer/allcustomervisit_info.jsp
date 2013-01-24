@@ -162,7 +162,7 @@
 				</s:if> 
 					
 				$('#visitTime').datetimepicker({showTimepicker: true});	
-				
+				$('#actualVisitTime').datetimepicker({showTimepicker: true});
 				$.validator.setDefaults({
 					debug: false,onkeyup: false,onfocusout:false,focusCleanup: true,
 				    errorPlacement:function(error, element) {},
@@ -219,6 +219,20 @@
 					form1.customerId.value  = form1.customerId_t.value;
 	               	form1.submit();
           		});
+				
+				$("#visitFlag").click(function() {
+					if($("#visitFlag").attr("checked"))
+					{
+						$("#actualVisitTime").attr("disabled",false);
+						$("#contentResult").attr("disabled",false);
+						$("#remark").attr("disabled",false);
+					}else
+					{
+						$("#actualVisitTime").attr("disabled",true);
+						$("#contentResult").attr("disabled",true);
+						$("#remark").attr("disabled",true);
+					}
+				});
           	}
 			
 			
@@ -248,6 +262,18 @@
 					alert(message);
 					
 					parent.$("#windown-close").click();
+				}
+				
+				if($("#visitFlag").attr("checked"))
+				{
+					$("#actualVisitTime").attr("disabled",false);
+					$("#contentResult").attr("disabled",false);
+					$("#remark").attr("disabled",false);
+				}else
+				{
+					$("#actualVisitTime").attr("disabled",true);
+					$("#contentResult").attr("disabled",true);
+					$("#remark").attr("disabled",true);
 				}
 			}
 		</script>
@@ -286,8 +312,8 @@
 		<td align="right">业务员：</td>
 		<td><s:textfield type="text" readOnly="true" style="width:150px" name="customerInfo.salesman" id="salesman"></s:textfield></td>
 		<td align="right">业务进展：</td>
-		<td style="width: 150px">
-		<s:textfield type="text" readOnly="true" style="width:150px" name="customerInfo.progress" id="progressId"></s:textfield>
+		<td style="width: 140px">
+		<s:textfield type="text" readOnly="true" style="width:140px" name="customerInfo.progress" id="progressId"></s:textfield>
 		</td>
 	</tr>
 	<tr>
@@ -299,15 +325,11 @@
 		<s:textfield type="text" readOnly="true" style="width:150px" name="contractTel" id="phone"></s:textfield>
 		</td>
 		<td align="right">客户分类：</td>
-		<td style="width: 150px">
-		<s:textfield type="text" readOnly="true" style="width:150px" name="customerInfo.category" id="category"></s:textfield></td>
+		<td style="width: 140px">
+		<s:textfield type="text" readOnly="true" style="width:140px" name="customerInfo.category" id="category"></s:textfield></td>
 	</tr>
 	</table></td></tr>
-
 </table></fieldset></td></tr>
-</table></td></tr>
-<tr><td><table>
-<tr><td style="height: 15px"></td></tr>			
 <tr><td><fieldset><legend><span>添写回访记录</span></legend><table>
 <tr><td><table cellpadding="5" cellspacing="3">
 	<tr>
@@ -329,51 +351,64 @@
 		<td align="right" nowrap>Q Q：</td>
 		<td ><s:textfield type="text" style="width:150px" name="customerVisitInfo.qq" id="qq"></s:textfield></td>
 		<td align="right" nowrap>邮 箱：</td>
-		<td ><s:textfield type="text" style="width:150px" name="customerVisitInfo.email" id="email"></s:textfield></td>
+		<td ><s:textfield type="text" style="width:140px" name="customerVisitInfo.email" id="email"></s:textfield></td>
 	</tr>
 	<tr>
 		<td></td>
 		<td align="right" nowrap title="日期格式：<s:property value='visitTime'/>">回访时间：</td>
 		<td title="日期格式：<s:property value='visitTime'/>"><s:textfield type="text" style="width:150px" name="visitTime" id="visitTime" readOnly="true"></s:textfield><font color="red">*</font></td>
 		<td align="right">任务：</td>
-		<td colspan="3"><s:textarea type="text" style="width:400px;height:60px" name="customerVisitInfo.task" id="task"></s:textarea></td>
+		<td colspan="3"><s:textarea type="text" style="width:380px;height:60px" name="customerVisitInfo.task" id="task"></s:textarea></td>
 	</tr>
 	</table></td></tr>
 </table></fieldset></td></tr>
-</table></td></tr>
-
-<tr><td><table>
-<tr><td style="height: 15px"></td></tr>
-<tr><td><fieldset><legend><span>填写回访结果：</span></legend><table>
-<tr><td><table cellpadding="5" cellspacing="3">
-	<tr>
-		<td></td>
-		<td align="right" nowrap>了解内容<br/>及结果：</td>
-		<td >
-		<s:if test='%{customerVisitInfo.id != null && customerVisitInfo.id != ""}'>
-		<s:textarea type="text" style="width:646px;height:70px" name="customerVisitInfo.contentResult" id="contentResult"></s:textarea></td>
-		</s:if>
-		<s:else>
-		<s:textarea title="请先填写回访记录再填写结果 " type="text" readOnly="true" style="width:646px;height:70px" name="customerVisitInfo.contentResult" id="contentResult"></s:textarea></td>
-		</s:else>
+<tr><td><fieldset><legend><span>
+<s:if test='%{customerVisitInfo.id != null && customerVisitInfo.id != ""}'>
+	<s:if test='customerVisitInfo.visitFlag.equals("1")'>
+		<input type="checkbox" name="visitFlag" id="visitFlag" value="1" checked/>
+	</s:if>
+	<s:else>
+		<input type="checkbox" name="visitFlag" id="visitFlag" value="1"/>
+	</s:else>
+</s:if>
+填写回访结果：</span></legend>
+<table>
+<tr><td width="12px"></td><td align="center" nowrap>实际<br/>回访时间：</td>
+			<td style="padding-left:12px">
+			<s:if test='%{customerVisitInfo.id != null && customerVisitInfo.id != ""}'>
+				<s:textfield readOnly="true" type="text" style="width:150px" name="actualVisitTime" id="actualVisitTime"></s:textfield>
+				</td>
+			</s:if>
+			<s:else>
+				<s:textfield readOnly="true" type="text" style="width:150px" name="actualVisitTime" id="actualVisitTime"></s:textfield>
+				</td>
+			</s:else>
 	</tr>
 	<tr>
-		<td></td>
-		<td align="right" nowrap>备 注：</td>
-		<td >
-		<s:if test='%{customerVisitInfo.id != null && customerVisitInfo.id != ""}'>
-		<s:textarea type="text" style="width:646px;height:70px" name="customerVisitInfo.remark" id="remark"></s:textarea></td>
-		</s:if>
-		<s:else>
-		<s:textarea title="请先填写回访记录再填写结果 " type="text" readOnly="true" style="width:646px;height:70px" name="customerVisitInfo.remark" id="remark"></s:textarea></td>
-		</s:else>
+		<td width="12px"></td><td align="center" valign="top" nowrap>了解内容<br/>及结果：</td>
+		<td  style="padding-left:12px">
+			<s:if test='%{customerVisitInfo.id != null && customerVisitInfo.id != ""}'>
+				<s:textarea type="text" style="width:635px;height:70px" name="customerVisitInfo.contentResult" id="contentResult"></s:textarea>
+				</td>
+			</s:if>
+			<s:else>
+				<s:textarea type="text" style="width:635px;height:70px" name="customerVisitInfo.contentResult" id="contentResult"></s:textarea>
+				</td>
+			</s:else>
 	</tr>
-	<tr><td></td></tr>
-</table></td></tr>
+	<tr>
+		<td width="12px"></td><td align="center" valign="top" nowrap>备 注：</td>
+		<td style="padding-left:12px">
+			<s:if test='%{customerTraceInfo.id != null && customerTraceInfo.id != ""}'>
+			<s:textarea type="text" style="width:635px;height:70px" name="customerVisitInfo.remark" id="remark"></s:textarea>
+			</s:if>
+			<s:else>
+			<s:textarea type="text" style="width:635px;height:70px" name="customerVisitInfo.remark" id="remark"></s:textarea>
+			</s:else>
+			</td>
+	</tr>
 </table></fieldset></td></tr>
-</table></td></tr>
 <tr><td align="center"><table>
-	<tr><td style="height: 10px"></td></tr>
 	<tr>
 		<td align="center">
 		<input type="button" name="addBtn" id="addBtn" value="保存" style="width: 50px"/>
