@@ -171,7 +171,8 @@
          <td align="center" background="../images/headerbg.jpg">  
    				<s:checkbox theme="simple" id="cbk_all" name="all"></s:checkbox>
    			</td>
-              <td align="center" background="../images/headerbg.jpg"><strong>跟进时间</strong></td>
+              <td align="center" background="../images/headerbg.jpg"><strong>预计跟进时间</strong></td>
+              <td align="center" background="../images/headerbg.jpg"><strong>实际跟进时间</strong></td>
               <td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">客户名称</td>
 			<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">业务员</td>
 			<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">业务进展</td>
@@ -187,6 +188,7 @@
 				<s:checkbox id="%{#obj.id}" name="ids" fieldValue="%{id}" value="false" theme="simple"/>
 			</td>
             <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="traceTimeStr"/></td>
+            <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="actualTraceTimeStr"/></td>
             <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="customerName"/></td>
             <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="salesman"/></td>
             <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="progress"/></td>
