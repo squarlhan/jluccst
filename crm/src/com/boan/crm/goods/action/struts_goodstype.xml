@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">	
+<struts>
+	<!-- Action -->
+	<package name="goodstype" extends="struts-default" namespace="/goodsmanage">
+		<action name="goodstypetree" class="goodsTypeAction" method="goodsTypeTree">
+			<result name="success">/goodsmanage/goods_type_tree.jsp</result>
+			<result name="input">/goodsmanage/goods_type_tree.jsp</result>
+		</action>
+		<action name="goodstypetreeview" class="goodsTypeAction" method="goodsTypeTree">
+			<result name="success">/goodsmanage/goods_type_tree_view.jsp</result>
+			<result name="input">/goodsmanage/goods_type_tree_view.jsp</result>
+		</action>
+		<action name="goodstypelist" class="goodsTypeAction" method="goodsTypeList">
+			<result name="success">/goodsmanage/goods_type_list.jsp</result>
+			<result name="input">/goodsmanage/goods_type_list.jsp</result>
+		</action>
+		<action name="goodstypeinfo" class="goodsTypeAction" method="goodsTypeInfo">
+			<result name="success">/goodsmanage/goods_type_info.jsp</result>
+			<result name="input">/goodsmanage/goods_type_info.jsp</result>
+		</action>
+		<action name="savegoodstype" class="goodsTypeAction" method="saveGoodsType">
+			<result name="success">/goodsmanage/goods_type_info.jsp</result>
+			<result name="input">/goodsmanage/goods_type_info.jsp</result>
+		</action>
+    	<action name="delgoodstype" class="goodsTypeAction" method="deleteGoodsType">
+    		<result name="success" type="chain">
+             	<param name="actionName">goodstypelist</param>
+             	<param name="typeFlag">${fatherId}</param>
+            </result>
+    	</action>
+    	<action name="goodstypesort" class="goodsTypeAction" method="goodsTypeSort">
+    		<result name="success">/goodsmanage/goods_type_sort.jsp</result>
+			<result name="input">/goodsmanage/goods_type_sort.jsp</result>
+    	</action>
+    	<action name="savegoodstypesort" class="goodsTypeAction" method="saveGoodsTypeSort">
+    		<result name="success" type="chain">
+             	<param name="actionName">goodstypesort</param>
+             	<param name="typeFlag">${fatherId}</param>
+            </result>
+    	</action>
+	</package>
+</struts>
