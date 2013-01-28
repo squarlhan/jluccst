@@ -1,5 +1,6 @@
 package com.boan.crm.groupmanage.action;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.commons.lang.StringUtils;
@@ -12,6 +13,7 @@ import com.boan.crm.backstagemanage.common.LogType;
 import com.boan.crm.backstagemanage.common.ProductType;
 import com.boan.crm.backstagemanage.model.Log;
 import com.boan.crm.common.Message;
+import com.boan.crm.groupmanage.common.MenuPopedomType;
 import com.boan.crm.groupmanage.model.Menu;
 import com.boan.crm.groupmanage.model.Role;
 import com.boan.crm.groupmanage.service.IMenuService;
@@ -33,9 +35,9 @@ public class MenuAction extends BaseActionSupport {
 	private String parentKey = null;
 	
 	private List<ProductType> productList = ProductType.getProductTypeList();
-
-	private String[] ids = null;
 	
+	private List<MenuPopedomType> popedomTypeList = MenuPopedomType.getMenuPopedomTypeList();
+
 	private Menu menu = null;
 
 	private Message message = new Message();
@@ -52,6 +54,8 @@ public class MenuAction extends BaseActionSupport {
 	public String showMenuInfo() {
 		if( StringUtils.isBlank(menu.getId()) ){
 			menu = new Menu();
+			menu.setProductId(Integer.parseInt(productId));
+			menu.setParentKey(parentKey);
 		}else{
 			menu = menuService.getMenuById(menu.getId());
 		}
@@ -89,7 +93,23 @@ public class MenuAction extends BaseActionSupport {
 	 * @return
 	 */
 	public String showRootMenuList() {
-		menuList = menuService.getOneLevelMenuListByProductType(Integer.parseInt(productId), 1);
+		
+		menuList = new ArrayList<Menu>();
+		List<Menu> menuList1 = menuService.getOneLevelMenuListByProductType(ProductType.CRM, 1);
+		if( menuList1 != null && menuList1.size() > 0 )
+		{
+			menuList.addAll(menuList1);
+		}
+		List<Menu> menuList2 = menuService.getOneLevelMenuListByProductType(ProductType.ERP, 1);
+		if( menuList2 != null && menuList2.size() > 0 )
+		{
+			menuList.addAll(menuList2);
+		}
+		List<Menu> menuList3 = menuService.getOneLevelMenuListByProductType(ProductType.TEAM_MANAGE, 1);
+		if( menuList3 != null && menuList3.size() > 0 )
+		{
+			menuList.addAll(menuList3);
+		}	
 		return "show-root-menu-tree";
 	}
 	/**
@@ -97,12 +117,12 @@ public class MenuAction extends BaseActionSupport {
 	 * 
 	 * @return
 	 */
-	public String deleteRole() {
-		if (ids != null && ids.length > 0) {
+	public String deleteMenu() {
+		if (menuIds != null && menuIds.length > 0) {
 			Menu rl = null;
 			Log log = null;
-			for (int i = 0; i < ids.length; i++) {
-				rl = menuService.getMenuById(ids[i]);
+			for (int i = 0; i < menuIds.length; i++) {
+				rl = menuService.getMenuById(menuIds[i]);
 				if (rl != null) {
 					log = new Log();
 					log.setLogType(LogType.INFO);
@@ -111,7 +131,7 @@ public class MenuAction extends BaseActionSupport {
 				}
 			}
 		}
-		menuService.deleteMenuByIds(ids);
+		menuService.deleteMenuByIds(menuIds);
 		return this.showMenuList();
 	}
 	/**
@@ -136,6 +156,7 @@ public class MenuAction extends BaseActionSupport {
 	 */
 	public String saveSortMenu(){
 		menuService.saveSortMenu(menuIds);
+		message.setContent("菜单排序成功！");
 		return "save-sort-success";
 	}
 	public IMenuService getMenuService() {
@@ -161,14 +182,6 @@ public class MenuAction extends BaseActionSupport {
 	}
 	public void setProductList(List<ProductType> productList) {
 		this.productList = productList;
-	}
-
-	public String[] getIds() {
-		return ids;
-	}
-
-	public void setIds(String[] ids) {
-		this.ids = ids;
 	}
 
 	public Menu getMenu() {
@@ -201,6 +214,14 @@ public class MenuAction extends BaseActionSupport {
 
 	public void setMenuIds(String[] menuIds) {
 		this.menuIds = menuIds;
+	}
+
+	public List<MenuPopedomType> getPopedomTypeList() {
+		return popedomTypeList;
+	}
+
+	public void setPopedomTypeList(List<MenuPopedomType> popedomTypeList) {
+		this.popedomTypeList = popedomTypeList;
 	}
 
 }
