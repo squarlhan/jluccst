@@ -52,13 +52,56 @@ public class MenuDaoImpl extends BaseDao<Menu, String> implements IMenuDao {
 	}
 
 	@Override
-	public List<Menu> getOneLevelMenuListByProductType(int productType, int levelNum) {
+	public List<Menu> getOneLevelMenuListByProductType(int productId,
+			int levelNum) {
 		String hql = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		hql = "from Menu where productType = :productType and levelNum = :levelNum order by sortIndex";
-		map.put("productType", productType);
+		hql = "from Menu where productId = :productId and levelNum = :levelNum order by sortIndex";
+		map.put("productId", productId);
 		map.put("levelNum", levelNum);
 		return super.find(hql, map);
+	}
+
+	@Override
+	public List<Menu> getMenuListByParentKey(String parentKey) {
+		String hql = null;
+		Map<String, Object> map = new HashMap<String, Object>();
+		hql = "from Menu where parentKey = :parentKey order by sortIndex";
+		map.put("parentKey", parentKey);
+		return super.find(hql, map);
+	}
+
+	@Override
+	public void saveOrUpdateMenu(Menu menu) {
+		if (StringUtils.isNotBlank(menu.getId())) {
+			super.update(menu);
+		} else {
+			super.save(menu);
+		}
+	}
+
+	@Override
+	public Menu getMenuById(String id) {
+		return super.get(id);
+	}
+
+	@Override
+	public void deleteMenuByIds(String[] ids) {
+		super.delete(ids);
+	}
+
+	@Override
+	public void saveSortMenu(String[] menuIds) {
+		String hql = "update Menu set sortIndex = :sortIndex where id = :menuId";
+		Map<String, Object> map = null;
+		if (menuIds != null && menuIds.length > 0) {
+			for (int i = 0; i < menuIds.length; i++) {
+				map = new HashMap<String, Object>();
+				map.put("menuId", menuIds[i]);
+				map.put("sortIndex", i);
+				super.executeHql(hql, map);
+			}
+		}
 	}
 
 }

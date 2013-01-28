@@ -12,12 +12,29 @@ import com.boan.crm.groupmanage.model.Menu;
  */
 public interface IMenuDao {
 	/**
+	 * 保存和更新
+	 * @param menu
+	 */
+	public void saveOrUpdateMenu( Menu menu);
+	/**
 	 * 根据key获取菜单
 	 * 
 	 * @param key
 	 * @return
 	 */
 	public Menu getMenuByKey(String key);
+	
+	/**
+	 * 根据id获取菜单
+	 * @param id
+	 * @return
+	 */
+	public Menu getMenuById( String id );
+	/**
+	 * 删除菜单
+	 * @param ids
+	 */
+	public void deleteMenuByIds( String[] ids );
 
 	/**
 	 * 获取所有菜单列表
@@ -38,10 +55,21 @@ public interface IMenuDao {
 	/**
 	 * 根据产品类型取指定层级的菜单
 	 * 
-	 * @param productType
+	 * @param productId
 	 * @param levelNum
 	 * @return
 	 */
 
-	public List<Menu> getOneLevelMenuListByProductType(int productType, int levelNum);
+	public List<Menu> getOneLevelMenuListByProductType(int productId, int levelNum);
+	/**
+	 * 根据父key，取所有菜单
+	 * @param parentKey
+	 * @return
+	 */
+	public List<Menu> getMenuListByParentKey(String parentKey);
+	/**
+	 * 存储排序菜单
+	 * @param menuIds
+	 */
+	public void saveSortMenu(String[] menuIds);
 }
