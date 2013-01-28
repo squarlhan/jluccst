@@ -32,9 +32,34 @@ public class MenuServiceImpl implements IMenuService {
 	}
 
 	@Override
-	public List<Menu> getOneLevelMenuListByProductType(int productType,
+	public List<Menu> getOneLevelMenuListByProductType(int productId,
 			int levelNum) {
-		return menuDao.getOneLevelMenuListByProductType(productType, levelNum);
+		return menuDao.getOneLevelMenuListByProductType(productId, levelNum);
+	}
+
+	@Override
+	public List<Menu> getMenuListByParentKey(String parentKey) {
+		return menuDao.getMenuListByParentKey(parentKey);
+	}
+
+	@Override
+	public void saveOrUpdateMenu(Menu menu) {
+		menuDao.saveOrUpdateMenu(menu);
+	}
+
+	@Override
+	public Menu getMenuById(String id) {
+		return menuDao.getMenuById(id);
+	}
+
+	@Override
+	public void deleteMenuByIds(String[] ids) {
+		menuDao.deleteMenuByIds(ids);
+	}
+
+	@Override
+	public void saveSortMenu(String[] menuIds) {
+		menuDao.saveSortMenu(menuIds);
 	}
 
 }
