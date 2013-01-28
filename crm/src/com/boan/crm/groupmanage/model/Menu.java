@@ -1,12 +1,17 @@
 package com.boan.crm.groupmanage.model;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.GenericGenerator;
+
+import com.boan.crm.groupmanage.common.MenuPopedomType;
 
 /**
  * 菜单对象
@@ -31,18 +36,13 @@ public class Menu implements java.io.Serializable {
 	/**
 	 * 菜单关键字
 	 */
-	@Column(name = "KEY", length = 100)
-	private String key;
-	/**
-	 * 菜单值
-	 */
-	@Column(name = "VALUE", length = 100)
-	private String value;
+	@Column(name = "MENU_KEY", length = 100)
+	private String menuKey;
 	/**
 	 * 菜单名字
 	 */
-	@Column(name = "NAME", length = 100)
-	private String name;
+	@Column(name = "MENU_NAME", length = 100)
+	private String menuName;
 	/**
 	 * 菜单你父关键字
 	 */
@@ -63,33 +63,33 @@ public class Menu implements java.io.Serializable {
 	 * 层级，从1开始
 	 */
 	@Column(name = "LEVEL_NUM")
-	private int levelNum;
+	private int levelNum = 1;
 	/**
 	 * 排序号
 	 */
 	@Column(name = "SORT_INDEX")
 	private int sortIndex;
 	/**
+	 * 菜单权限类型，SUPER:只能超级管理员使用，COMPANY:只能由公司管理员使用，COMMON:普通菜单，但要通过权限分配才可用，OPEN:谁都可以查看的菜单，不需要设置权限
+	 */
+	@Column(name = "POPEDOM_TYPE", length=50)
+	private String popedomType;
+	/**
 	 * 完整的在整个系统当中的排序
 	 */
 	@Column(name = "FULL_SORT_INDEX")
 	private int fullSortIndex;
+	
+	/**
+	 * 所有子菜单列表
+	 */
+	@Transient
+	private List<Menu> subMenuList;
 
-	public String getKey() {
-		return key;
+	public Menu() {
+		this.id = "";
 	}
 
-	public void setKey(String key) {
-		this.key = key;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
 
 	public String getParentKey() {
 		return parentKey;
@@ -113,14 +113,6 @@ public class Menu implements java.io.Serializable {
 
 	public void setSortIndex(int sortIndex) {
 		this.sortIndex = sortIndex;
-	}
-
-	public String getValue() {
-		return value;
-	}
-
-	public void setValue(String value) {
-		this.value = value;
 	}
 
 	public int getLevelNum() {
@@ -159,4 +151,45 @@ public class Menu implements java.io.Serializable {
 		this.id = id;
 	}
 
+	public String getPopedomType() {
+		return popedomType;
+	}
+
+	public void setPopedomType(String popedomType) {
+		this.popedomType = popedomType;
+	}
+
+
+	public String getMenuKey() {
+		return menuKey;
+	}
+
+
+	public void setMenuKey(String menuKey) {
+		this.menuKey = menuKey;
+	}
+
+
+	public String getMenuName() {
+		return menuName;
+	}
+
+
+	public void setMenuName(String menuName) {
+		this.menuName = menuName;
+	}
+
+
+	public List<Menu> getSubMenuList() {
+		return subMenuList;
+	}
+
+
+	public void setSubMenuList(List<Menu> subMenuList) {
+		this.subMenuList = subMenuList;
+	}
+
+	public String getPopedomTypeCn(){
+		return MenuPopedomType.getMean(popedomType);
+	}
 }
