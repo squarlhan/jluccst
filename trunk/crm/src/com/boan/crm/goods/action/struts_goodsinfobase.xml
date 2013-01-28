@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">	
+<struts>
+	<!-- Action -->
+	<package name="goodsinfobase" extends="struts-default" namespace="/goodsmanage">
+		<action name="goodsinfobaselist" class="goodsInfoBaseAction" method="goodsInfoBaseList">
+			<result name="success">/goodsmanage/goods_info_list.jsp</result>
+			<result name="input">/goodsmanage/goods_info_list.jsp</result>
+		</action>
+		<action name="goodsinfobaseinfo" class="goodsInfoBaseAction" method="goodsInfoBaseInfo">
+			<result name="success">/goodsmanage/goods_info_base.jsp</result>
+			<result name="input">/goodsmanage/goods_info_base.jsp</result>
+		</action>
+		<action name="savegoodsinfobase" class="goodsInfoBaseAction" method="saveGoodsInfoBase">
+			<result name="success">/goodsmanage/goods_info_base.jsp</result>
+			<result name="input">/goodsmanage/goods_info_base.jsp</result>
+		</action>
+    	<action name="delgoodsinfobase" class="goodsInfoBaseAction" method="deleteGoodsInfoBase">
+    		<result name="success" type="chain">
+             	<param name="actionName">goodsinfobaselist</param>
+             	<param name="typeId">${typeId}</param>
+            </result>
+    	</action>
+	</package>
+</struts>
