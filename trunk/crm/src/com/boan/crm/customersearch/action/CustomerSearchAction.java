@@ -316,7 +316,7 @@ public class CustomerSearchAction  extends BaseActionSupport{
 					bookerService.saveSMSCustomerInfo(smsUser );
 				}
 			}
-			message = customerInfo.getId();
+			message ="id=" +customerInfo.getId();
 		}}catch(Exception e){
 			message = "failure";
 		}
