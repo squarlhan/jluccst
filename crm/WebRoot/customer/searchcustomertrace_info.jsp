@@ -208,7 +208,7 @@
 	<tr><td style="height: 10px"></td></tr>
 	<tr>
 		<td align="center">
-		<input type="button" name="closeBtn" id="closeBtn" value="关闭" style="width: 50px"/></td>
+		<input type="button" name="closeBtn" id="closeBtn" value="关闭" class="btn_2_3"/></td>
 	</tr>
 </table></td></tr>
 		</table>
