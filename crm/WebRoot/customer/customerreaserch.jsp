@@ -43,11 +43,13 @@
 	</style>
 	<script type="text/javascript">
 	
-		$(function(){
-			
+		$(document).ready(function(){
 			if($("#message").html()!=null && $("#message").html()!=""){
-				
-				if($("#message").html()!="failure"){
+				var info = $("#message").html();
+				if(info=="failure"){
+					alert('转为客户失败！');
+				}
+			   if(info.indexOf("id=")>=0){
 					parent.parent.$.jMessageBox.show({
 						width : 300,
 					 	title : '提示',
@@ -56,7 +58,7 @@
 						    text  : '编辑客户',
 						    click : function(){
 						    	parent.parent.$.jMessageBox.hide();
-						    	var url="customer/myCustomerTabInfo.action?id="+$("#message").html();
+						    	var url="customer/myCustomerTabInfo.action?"+$("#message").html();
 								parent.parent.$("#mainFrame").attr("src",url);
 						    }
 					  	},
@@ -68,10 +70,9 @@
 					  	}
 					 });
 				}else{
-					alert("转入失败！");
+					alert(info);
 				}
 			}
-			
 			$("#sel_province").change(function(){
 				var provinceId =  $("#sel_province").val();
 				var url = "getCityAction.action";
@@ -128,6 +129,7 @@
 	  		});
 			//*/
 			$("#queryBtn").click(function(){
+				$("#form1").attr("action","customerSearchAction.action");
 				if($.trim($("#txt_mainIndustry").val())==""){
 					alert("请输入您要查询的主营行业信息！");
 					return false;
@@ -170,7 +172,7 @@
   
   
   <body>
- <s:form id="form1" name="form1" method="post" theme="simple" action="customerSearchAction.action">
+ <s:form id="form1" name="form1" method="post" theme="simple"  >
  <s:label  name="message" id ="message" cssStyle="display:none"></s:label>
 <table width="100%" style="height:100%;" border="0" cellspacing="5" cellpadding="0">
   <tr>
@@ -183,7 +185,7 @@
 						<strong>主营行业：</strong>
 					</td>
 					<td height="26" align="left" bgcolor="#FFFFFF">
-						<s:textfield id="txt_mainIndustry" name="mainIndustry" cssStyle="width:200px" ></s:textfield><font color="red">*</font>
+						<s:textfield id="txt_mainIndustry" name="mainIndustry" cssStyle="width:200px"  onkeydown="if(event.keyCode==13){return false;}"></s:textfield><font color="red">*</font>
 					</td>
 					<td height="26" align="right" bgcolor="#FFFFFF">
 						<strong>省份</strong>
