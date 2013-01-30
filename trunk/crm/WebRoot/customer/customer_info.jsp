@@ -491,7 +491,7 @@
 							</s:if>
 						<input type="button" name="addBtn"
 							id="addBtn" value="保存" class="btn_2_3" />　　
-							<input type="button" name="closeBtn" id="closeBtn" value="关闭" class="btn_2_3" />
+							<input type="button" name="closeBtn" id="closeBtn" value="返回客户列表" class="btn_5" />
 						</td>
 					</tr>
 				</table>
