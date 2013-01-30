@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%@ taglib prefix="j" uri="/script-tags"%>
+<%@ page import="com.boan.crm.groupmanage.common.UserSession"%>
+<%@ page import="org.apache.commons.lang.StringUtils"%>
 <%
 /**
  * Copyright (c) 2010 Changchun Boan (BOAN) Co. Ltd.
@@ -21,6 +23,13 @@
 	response.setHeader("Expires", "0");
 	request.setCharacterEncoding("utf-8");
 	String path = request.getContextPath();
+	UserSession userSession = (UserSession) session.getAttribute("userSession");
+	String deptId = "";
+	String companyId = "";
+	if (userSession != null) {
+		deptId = StringUtils.trimToEmpty(userSession.getDeptId());
+		companyId = StringUtils.trimToEmpty(userSession.getCompanyId());
+	}
 %>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -50,9 +59,8 @@
             </table></td>
         </tr>
         <tr>
-          <td width="150" valign="top" style="border-left: 1px solid #54a4e3; border-bottom: 1px solid #54a4e3; border-right: 1px solid #54a4e3; padding: 5px;"><iframe width="100%" height="100%" id="menutree" name="menutree"frameborder="0" scrolling="auto" src="groupTreeForSearch.action"></iframe></td>
           <td valign="top" style="border-left:1px solid #54a4e3; border-bottom:1px solid #54a4e3; border-right:1px solid #54a4e3; padding:5px;"><iframe width="100%" height="100%"
-          	 id="groupmain" name="groupmain" frameborder="0" scrolling="auto" src="../blank.jsp"></iframe></td>
+          	 id="groupmain" name="groupmain" frameborder="0" scrolling="auto" src="searchCustomerList.action?companyId=<%=companyId%>&deptId=<%=deptId%>&who=session"></iframe></td>
         </tr>
     </table></td>
   </tr>
