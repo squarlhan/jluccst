@@ -74,6 +74,13 @@ public class CustomerAssessmentAction extends BaseActionSupport{
 	private String optionFlag = "";
 	private String customerId ="";
 	private String customerName = "";
+	private String option = "";
+	public String getOption() {
+		return option;
+	}
+	public void setOption(String option) {
+		this.option = option;
+	}
 	private List<DataDictionary> listCategory = null;
 	private List<AutoCustomerAssessment> listCustomerAssessment = null;
 	
