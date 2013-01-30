@@ -96,7 +96,7 @@ background-color:#d3eaef}
                  timeout: 5000,
                  error: function() { alert('Error loading data!'); },
                  success: function(msg) {
-                	 var xml = "<graph caption='客户评估信息统计图' rotateNames='1' baseFontSize='16' subcaption='' xAxisName='日期' yAxisMinValue='0' yAxisMaxValue='100' yAxisName='assessment values' decimalPrecision='0' formatNumberScale='0' numberPrefix='' showNames='1' showValues='0'  showAlternateHGridColor='1' AlternateHGridColor='ff5904' divLineColor='ff5904' divLineAlpha='20' alternateHGridAlpha='5' >";
+                	 var xml = "<graph caption='客户评估信息统计图' rotateNames='1' baseFontSize='18' subcaption='' xAxisName='日期' yAxisMinValue='0' yAxisMaxValue='100' yAxisName='assessment values' decimalPrecision='0' formatNumberScale='0' numberPrefix='' showNames='1' showValues='0'  showAlternateHGridColor='1' AlternateHGridColor='ff5904' divLineColor='ff5904' divLineAlpha='20' alternateHGridAlpha='5' >";
                 	 //xml = xml + "<set name='Jan' value='17400' hoverText='January'/>";
                      $.each(eval(msg), function(i, item) {
                          //$("<option value='" + item.id + "'>" + item.name + "</option>").appendTo($("#city"));
@@ -109,7 +109,15 @@ background-color:#d3eaef}
                  }
              });
          };
-         
+         $("#closeBtn").click(function(){
+	  			//parent.$("#windown-close").click();
+	  			parent.location.href = "../customer/mycustomermanage.jsp";
+	  		});
+         $("#closeBtn1").click(function(){
+	  			//parent.$("#windown-close").click();
+        	 	parent.$("#windown-close").click();
+	  			//parent.location.href = "autoAnalysisCustomerList.action";
+	  		});
          /*
  		$.fn.close();
 		
@@ -134,6 +142,12 @@ background-color:#d3eaef}
         FusionCharts. </div>
       </td>
   </tr>
+  <s:if test='option!=null && option.length() > 0 && option.equals("mycustomer")'>
+  <tr><td align="center"><input type="button" name="closeBtn" id="closeBtn" value="返回客户列表" class="btn_5" /></td></tr>
+  </s:if>
+  <s:else>
+  <tr><td align="center"><input type="button" name="closeBtn1" id="closeBtn1" value="关闭" class="btn_2_3" /></td></tr>
+  </s:else>
 </table>
 </s:form>
 </body>
