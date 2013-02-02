@@ -36,7 +36,7 @@
 		d = new dTree('d','<%=path%>');
 		d.add(0,-1,'公司列表','','','menumain');
 		<s:iterator value="companyList">
-			d.add("<s:property value="id"/>",0,'<s:property value="companyName"/>','<%=path%>/backstagemanage/companypopedommanagepage.jsp?companyId=<s:property value="id"/>','','popedommain','<%=path%>/js/tree/img/imgfolder.gif');
+			d.add("<s:property value="id"/>",0,'<s:property value="companyName"/>','<%=path%>/backstagemanage/companypopedommanagepage.jsp?companyId=<s:property value="id"/>&productId=<s:property value="productType"/>&parentKey=0','','popedommain','<%=path%>/js/tree/img/imgfolder.gif');
 		</s:iterator>
 		document.write(d);
 		//-->
