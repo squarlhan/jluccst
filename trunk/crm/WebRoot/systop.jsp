@@ -39,7 +39,7 @@
 <body>
 <table width="100%" height="85" border="0" cellpadding="0" cellspacing="0" id="__01">
   <tr>
-    <td width="886"><img src="images/top_01.jpg" width="886" height="85" alt=""></td>
+    <td width="886"><img src="images/<s:property value="topImage"/>" width="886" height="85" alt=""></td>
     <td background="images/top_02.jpg">&nbsp;</td>
     <td width="138"><img src="images/top_03.jpg" width="138" height="85" alt=""></td>
   </tr>
