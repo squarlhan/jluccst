@@ -34,7 +34,12 @@ public class ProductType {
 	 * @return
 	 */
 	public static String getMean(int productType) {
-		return means[productType];
+		if( productType < 0  )
+		{
+			return "";
+		}else{
+			return means[productType];
+		}
 	}
 
 	/**
