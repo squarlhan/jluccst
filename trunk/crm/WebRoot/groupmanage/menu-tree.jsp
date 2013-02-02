@@ -36,12 +36,13 @@
 		d = new dTree('d','<%=path%>');
 		d.add(-2,-1,'<s:property value="commpanyName"/>菜单列表','','','groupmain');
 		<s:iterator value="productList">
-			d.add('<s:property value="num"/>',-2,'<s:property value="name"/>','./menuAction!showMenuList.action?parentKey=<s:property value="num"/>','','groupmain','<%=path%>/js/tree/img/folder.gif');
+			d.add('<s:property value="num"/>_0',-2,'<s:property value="name"/>','./menuAction!showMenuList.action?productId=<s:property value="num"/>&parentKey=0','','groupmain','<%=path%>/js/tree/img/folder.gif');
 		</s:iterator>
 		<s:iterator value="menuList">
-			d.add("<s:property value="key"/>",'<s:property value="parentKey"/>','<s:property value="name"/>','./menuAction!showMenuList.action?parentKey=<s:property value="key"/>','','groupmain','');
+			d.add("<s:property value="productId"/>_<s:property value="menuKey"/>",'<s:property value="productId"/>_0','<s:property value="menuName"/>','./menuAction!showMenuList.action?productId=<s:property value="productId"/>&parentKey=<s:property value="menuKey"/>','','groupmain','');
 		</s:iterator>
 		document.write(d);
+		d.openAll();
 		//-->
 	</script>
 </div>
