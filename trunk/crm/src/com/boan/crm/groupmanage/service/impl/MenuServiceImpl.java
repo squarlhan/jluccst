@@ -32,14 +32,13 @@ public class MenuServiceImpl implements IMenuService {
 	}
 
 	@Override
-	public List<Menu> getOneLevelMenuListByProductType(int productId,
-			int levelNum) {
-		return menuDao.getOneLevelMenuListByProductType(productId, levelNum);
+	public List<Menu> getOneLevelMenuListByProductType(int productId,String popedomType,int levelNum) {
+		return menuDao.getOneLevelMenuListByProductType(productId,popedomType, levelNum);
 	}
 
 	@Override
-	public List<Menu> getMenuListByParentKey(String parentKey) {
-		return menuDao.getMenuListByParentKey(parentKey);
+	public List<Menu> getMenuListByParentKey(int productId, String parentKey) {
+		return menuDao.getMenuListByParentKey(productId, parentKey);
 	}
 
 	@Override
@@ -60,6 +59,11 @@ public class MenuServiceImpl implements IMenuService {
 	@Override
 	public void saveSortMenu(String[] menuIds) {
 		menuDao.saveSortMenu(menuIds);
+	}
+
+	@Override
+	public void deleteMenuByParentKey(int productId, String[] keys) {
+		menuDao.deleteMenuByParentKey(productId, keys);
 	}
 
 }

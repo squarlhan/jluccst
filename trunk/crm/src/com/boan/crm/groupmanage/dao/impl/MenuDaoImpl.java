@@ -38,7 +38,7 @@ public class MenuDaoImpl extends BaseDao<Menu, String> implements IMenuDao {
 	public List<Menu> getAllMenuList() {
 		String hql = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		hql = "from Menu  order by fullSortIndex";
+		hql = "from Menu  order by sortIndex";
 		return super.find(hql, map);
 	}
 
@@ -52,21 +52,27 @@ public class MenuDaoImpl extends BaseDao<Menu, String> implements IMenuDao {
 	}
 
 	@Override
-	public List<Menu> getOneLevelMenuListByProductType(int productId,
-			int levelNum) {
+	public List<Menu> getOneLevelMenuListByProductType(int productId, String popedomType,	int levelNum) {
 		String hql = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		hql = "from Menu where productId = :productId and levelNum = :levelNum order by sortIndex";
+		if( StringUtils.isNotBlank(popedomType) ){
+			hql = "from Menu where productId = :productId and popedomType = :popedomType and levelNum = :levelNum order by sortIndex";
+			map.put("popedomType", popedomType);
+		}
+		else{
+			hql = "from Menu where productId = :productId  and levelNum = :levelNum order by sortIndex";
+		}
 		map.put("productId", productId);
 		map.put("levelNum", levelNum);
 		return super.find(hql, map);
 	}
 
 	@Override
-	public List<Menu> getMenuListByParentKey(String parentKey) {
+	public List<Menu> getMenuListByParentKey(int productId, String parentKey) {
 		String hql = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		hql = "from Menu where parentKey = :parentKey order by sortIndex";
+		hql = "from Menu where productId = :productId and parentKey = :parentKey order by sortIndex";
+		map.put("productId", productId);
 		map.put("parentKey", parentKey);
 		return super.find(hql, map);
 	}
@@ -99,6 +105,20 @@ public class MenuDaoImpl extends BaseDao<Menu, String> implements IMenuDao {
 				map = new HashMap<String, Object>();
 				map.put("menuId", menuIds[i]);
 				map.put("sortIndex", i);
+				super.executeHql(hql, map);
+			}
+		}
+	}
+
+	@Override
+	public void deleteMenuByParentKey(int productId, String[] keys) {
+		String hql = "delete Menu where productId = :productId and parentKey = :parentKey";
+		Map<String, Object> map = null;
+		if (keys != null && keys.length > 0) {
+			for (int i = 0; i < keys.length; i++) {
+				map = new HashMap<String, Object>();
+				map.put("productId", productId);
+				map.put("parentKey", keys[i]);
 				super.executeHql(hql, map);
 			}
 		}

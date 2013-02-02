@@ -42,7 +42,10 @@
         	<result name="success">/groupmanage/popedomchooserole.jsp</result>
         </action>
         <action name="saveOrUpdatePopedomAction" class="popedomAction" method="saveOrUpdatePopedom">
+        	<!-- 
         	<result name="success">/common/messagemodaldialog.jsp</result>
+        	 -->
+        	<result name="success">/common/message.jsp</result>
         </action>
         <action name="showAllPopedomListAction" class="popedomAction" method="showAllPopedomList">
         	<result name="success">/groupmanage/popedomlist.jsp</result>
@@ -138,6 +141,19 @@
 			<result type="json">
 				<param name="root">jsonData</param>
 			</result>
+		</action>
+	</package>
+	<!-- 菜单 -->
+	<package name="menu" extends="struts-default" namespace="/">
+		<action name="menuAction" class="menuAction">
+			<result name="show-root-menu-tree">/groupmanage/menu-tree.jsp</result>
+			<result name="show-menu-list">/groupmanage/menulist.jsp</result>
+			<result name="show-menu-info">/groupmanage/menuinfo.jsp</result>
+			<result name="save-error">/common/messagenoclose.jsp</result>
+			<result name="save-success">/common/message.jsp</result>
+			<result name="show-sort-menu-list">/groupmanage/menusortlist.jsp</result>
+			<result name="save-sort-success">/common/message.jsp</result>
+        	<result name="show-menu-list-for-popedom">/groupmanage/popedommenu.jsp</result>
 		</action>
 	</package>
 </struts>
