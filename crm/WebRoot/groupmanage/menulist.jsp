@@ -45,39 +45,31 @@
 	$(function() {
 		$("#addbtn").click(
 				function() {
-					parent.parent.tipsWindown("添加菜单信息","iframe:menuAction!showMenuInfo.action?companyId=<s:property value="companyId"/>", "460", "150", "true", "", "true", "no");
+					parent.parent.tipsWindown("添加菜单信息","iframe:menuAction!showMenuInfo.action?menu.id=&productId=<s:property value="productId"/>&parentKey=<s:property value="parentKey"/>", "460", "210", "true", "", "true", "no");
 					parent.parent.$("#windown-close").bind('click', function() {
-						window.location.href = "./menuAction!showMenuList.action?companyId=<s:property value="companyId"/>";
+						window.location.href = "./menuAction!showMenuList.action?productId=<s:property value="productId"/>&parentKey=<s:property value="parentKey"/>";
 					});
-
-				});
+		});
 		$.fn.checkall("cbk_all");
-		$.fn.uncheckall("ids", "cbk_all");
-
+		$.fn.uncheckall("menuIds", "cbk_all");
+		$("#sortbtn").click(
+				function() {
+					parent.parent.tipsWindown("菜单排序","iframe:menuAction!showSortMenuList.action?productId=<s:property value="productId"/>&parentKey=<s:property value="parentKey"/>", "370", "320", "true", "", "true", "no");
+					parent.parent.$("#windown-close").bind('click', function() {
+						window.location.href = "./menuAction!showMenuList.action?productId=<s:property value="productId"/>&parentKey=<s:property value="parentKey"/>";
+					});
+		});
 		/**
 		 * 修改角色信息
 		 */
-		$('a[name="edit"]')
-				.each(
-						function() {
-							$(this)
-									.click(
-											function() {
-												var url = $(this).attr("url");
-												parent.parent.tipsWindown(
-														"修改菜单信息", "iframe:"
-																+ url, "460",
-														"150", "true", "",
-														"true", "no");
-												parent.parent
-														.$("#windown-close")
-														.bind(
-																'click',
-																function() {
-																	window.location.href = "./menuAction!showMenuInfo.action?companyId=<s:property value="companyId"/>";
-																});
-											});
-						});
+		$('a[name="edit"]').each(function() {$(this).click(function() {
+					var url = $(this).attr("url");
+					parent.parent.tipsWindown("修改菜单信息", "iframe:"+ url, "460", "210", "true", "", "true", "no");
+					parent.parent.$("#windown-close").bind('click',function() {
+							window.location.href = "./menuAction!showMenuList.action?productId=<s:property value="productId"/>&parentKey=<s:property value="parentKey"/>";
+							});
+					});
+			});
 
 		/**
 		 * 删除单个角色信息
@@ -97,7 +89,7 @@
 		 * 删除所选角色信息
 		 */
 		$("#deletepointbtn").click(function() {
-			var url = "deleteRoleAction.action";
+			var url = "menuAction!deleteMenu.action";
 			if (window.confirm("您确定要删除所选信息吗？")) {
 				$.post(url, $('#form1').serialize(), function(data) {
 					window.location.href = window.location.href;
@@ -113,6 +105,7 @@
 	<body>
 		<s:form id="form1" name="form1" method="post" theme="simple">
 			<s:hidden name="parentKey" id="parentKey"></s:hidden>
+			<s:hidden name="productId" id="productId"></s:hidden>
 			<table width="100%" style="height: 100%;" border="0" cellspacing="5"
 				cellpadding="0">
 				<tr>
@@ -122,7 +115,7 @@
 								<td>
 									<input name="addbtn" type="button" class="btn_2_3" id="addbtn"
 										value="添加">
-									<input name="addbtn" type="button" class="btn_2_3" id="addbtn"
+									<input name="sortbtn" type="button" class="btn_2_3" id="sortbtn"
 										value="排序">
 									<input name="deletepointbtn" type="button" class="btn_4"
 										id="deletepointbtn" value="删除所选">
@@ -145,30 +138,36 @@
 									<strong>权限类型</strong>
 								</td>
 								<td align="center" background="<%=path %>/images/headerbg.jpg">
+									<strong>链接地址</strong>
+								</td>
+								<td align="center" background="<%=path %>/images/headerbg.jpg">
 									<strong>操作</strong>
 								</td>
 							</tr>
 							<s:iterator value="menuList" status="obj">
 								<tr>
 									<td height="26" align="center" bgcolor="#FFFFFF">
-										<s:checkbox id="%{#obj.id}" name="ids" fieldValue="%{id}"
+										<s:checkbox id="%{#obj.id}" name="menuIds" fieldValue="%{id}"
 											value="false" theme="simple" />
 									</td>
 									<td height="26" align="center" bgcolor="#FFFFFF">
-										<s:property value="name" />
+										<s:property value="menuName" />
+									</td>
+									<td height="26" align="left" bgcolor="#FFFFFF">
+										<s:property value="menuKey" />
 									</td>
 									<td height="26" align="center" bgcolor="#FFFFFF">
-										<s:property value="key" />
+										<s:property value="popedomTypeCn" />
 									</td>
-									<td height="26" align="center" bgcolor="#FFFFFF">
-										<s:property value="popedomType" />
+									<td height="26" align="left" bgcolor="#FFFFFF">
+										<s:property value="url" />
 									</td>
 									<td height="26" colspan="2" align="center" bgcolor="#FFFFFF">
 										<s:url id="edit_url" action="menuAction!showMenuInfo.action">
 											<s:param name="menu.id" value="id"></s:param>
 										</s:url>
-										<s:url id="delete_url" action="deleteRoleAction">
-											<s:param name="ids" value="id"></s:param>
+										<s:url id="delete_url" action="menuAction!deleteMenu.action">
+											<s:param name="menuIds" value="id"></s:param>
 										</s:url>
 										<a name="edit" href="javascript:void(0);" url="${edit_url}">编辑</a>
 										<a name="delete" href="javascript:void(0);" url="${delete_url}">删除</a>

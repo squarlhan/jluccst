@@ -35,8 +35,9 @@
 		  	 */
 			var _customer_submit = {
 				rules: {
-					"role.roleName":{required:true,strangecode:true},
-					"role.roleKey":{strangecode:true}
+					"menu.menuName":{required:true,strangecode:true},
+					"menu.menuKey":{required:true,strangecode:true,minlength:3},
+					"menu.popedomType":{required:true}
 				}
 			};
 			/**
@@ -66,11 +67,7 @@
 	               	if(!validator.form()){
 						return false;
 					}
-					if( $.trim( $("#roleId").val() ) != ""){
-						form1.action = "toModifyRoleAction.action";
-					}else{
-		               	form1.action = "toAddRoleAction.action";					
-					}
+					form1.action = "menuAction!saveMenu.action";
 					form1.target = "iframe1";
 	               	form1.submit();
           		});
@@ -88,15 +85,18 @@
 			 * 初始化页面
 			 */
 			$.fn.initpage = function(){
-				$("#roleName").focus();
+				$("#menuName").focus();
 			}
 		</script>
 	</head>
 
 	<body>
 		<s:form id="form1" name="form1" method="post" theme="simple">
-		<s:hidden id="roleId" name="role.id"></s:hidden>
-		<s:hidden id="companyId" name="role.companyId"></s:hidden>
+		<s:hidden id="menuId" name="menu.id"></s:hidden>
+		<s:hidden id="sortIndex" name="menu.sortIndex"></s:hidden>
+		<s:hidden id="levelNum" name="menu.levelNum"></s:hidden>
+		<s:hidden id="productId" name="menu.productId"></s:hidden>
+		<s:hidden id="parentKey" name="menu.parentKey"></s:hidden>
 		<table width="100%" border="0" cellspacing="5" cellpadding="0">
 			<tr>
 				<td>
@@ -110,7 +110,7 @@
 											<strong>菜单名称：</strong>
 										</td>
 										<td height="26" align="left" bgcolor="#FFFFFF">
-											<s:textfield id="menuName" name="menu.name" cssStyle="width: 250px;" maxlength="25"></s:textfield>
+											<s:textfield id="menuName" name="menu.menuName" cssStyle="width: 250px;" maxlength="25"></s:textfield>
 											<font color="red">*</font>
 										</td>
 									</tr>
@@ -119,22 +119,26 @@
 											<strong>关键字：</strong>
 										</td>
 										<td height="26" align="left" bgcolor="#FFFFFF">
-											<s:textfield id="menuKey" name="menu.key" cssStyle="width: 250px;" maxlength="25"></s:textfield>
+											<s:textfield id="menuKey" name="menu.menuKey" cssStyle="width: 250px;" maxlength="100"></s:textfield>
 											<font color="red">*</font>
 										</td>
 									</tr>
 									<tr>
 										<td height="26" align="right" bgcolor="#FFFFFF">
-											<strong>职务标识：</strong>
+											<strong>权限类型：</strong>
 										</td>
 										<td height="26" align="left" bgcolor="#FFFFFF">
-										<!--
-											<s:textfield id="roleKey" name="role.roleKey" cssStyle="width: 250px;" maxlength="25"></s:textfield>
-										-->
-											<s:select   list="roleFlagList"
-													listKey="key" listValue="value" value="role.roleKey"
-													id="roleKey" name="role.roleKey" cssStyle="width:250px"
-													headerKey="" headerValue="--可选择标识--"></s:select>
+											<s:select list="popedomTypeList" listKey="key" listValue="value" value="menu.popedomType" 
+													id="popedomType" name="menu.popedomType" cssStyle="width:250px" headerKey="" headerValue="--请选择类型--"></s:select>
+											<font color="red">*</font>
+										</td>
+									</tr>
+									<tr>
+										<td height="26" align="right" bgcolor="#FFFFFF">
+											<strong>链接地址：</strong>
+										</td>
+										<td height="26" align="left" bgcolor="#FFFFFF">
+											<s:textfield id="menuUrl" name="menu.url" cssStyle="width: 250px;" maxlength="200"></s:textfield>
 										</td>
 									</tr>
 									<tr>
