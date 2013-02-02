@@ -28,7 +28,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title></title>
-<j:scriptlink css="true"></j:scriptlink>
+<j:scriptlink css="true" tipswindow="true" jmessagebox="true" jquery="true" validate="true" jfunction="true" />
 <style type="text/css">
 <!--
 .STYLE1 {
