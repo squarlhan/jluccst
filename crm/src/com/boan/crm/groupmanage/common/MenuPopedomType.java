@@ -15,19 +15,19 @@ public class MenuPopedomType {
 	/**
 	 * SUPER:只能超级管理员使用
 	 */
-	public static String ONLY_SUPER_ADMIN;
+	public static String ONLY_SUPER_ADMIN= "ONLY_SUPER_ADMIN";
 	/**
 	 * COMPANY:只能由公司管理员使用
 	 */
-	public static String ONLY_COMPANY_ADMIN;
+	public static String ONLY_COMPANY_ADMIN = "ONLY_COMPANY_ADMIN";
 	/**
 	 * COMMON:普通菜单，但要通过权限分配才可用
 	 */
-	public static String COMMON;
+	public static String COMMON = "COMMON";
 	/**
 	 * OPEN:谁都可以查看的菜单，不需要设置权限
 	 */
-	public static String OPEN;
+	public static String OPEN = "OPEN";
 
 	/**
 	 * 关键字串

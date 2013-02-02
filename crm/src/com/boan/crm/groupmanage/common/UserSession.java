@@ -84,6 +84,10 @@ public class UserSession implements java.io.Serializable
 	 * 公司试用限制标识，1表示有限制，0表示没有
 	 */
 	private int companyTrialFlag;
+	/**
+	 * 产品类型
+	 */
+	private int productType;
 
 	public String getUserId()
 	{
@@ -216,6 +220,14 @@ public class UserSession implements java.io.Serializable
 
 	public void setCompanyTrialFlag(int companyTrialFlag) {
 		this.companyTrialFlag = companyTrialFlag;
+	}
+
+	public int getProductType() {
+		return productType;
+	}
+
+	public void setProductType(int productType) {
+		this.productType = productType;
 	}
 
 }

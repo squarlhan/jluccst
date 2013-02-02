@@ -9,6 +9,7 @@
 
 package com.boan.crm.groupmanage.action;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -27,12 +28,14 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
+import com.boan.crm.backstagemanage.common.ProductType;
 import com.boan.crm.backstagemanage.model.Company;
 import com.boan.crm.backstagemanage.service.ICompanyService;
 import com.boan.crm.common.Message;
 import com.boan.crm.common.UserType;
 import com.boan.crm.groupmanage.common.HMAC_MD5;
 import com.boan.crm.groupmanage.common.Md5PasswordEncoder;
+import com.boan.crm.groupmanage.common.MenuPopedomType;
 import com.boan.crm.groupmanage.common.UserSession;
 import com.boan.crm.groupmanage.model.Deptment;
 import com.boan.crm.groupmanage.model.EkeyUser;
@@ -122,8 +125,10 @@ public class UserLogonAction extends ActionSupport {
 	private String randomData = "";
 
 	private String keySn = null;
-	
+
 	private List<Menu> menuList = null;
+
+	private String topImage = "";
 
 	/**
 	 * 验证密码
@@ -171,12 +176,15 @@ public class UserLogonAction extends ActionSupport {
 				userSession.setPopedomKeys(popedomKeys);
 				userSession.setUserPhone(user.getPhone());
 				userSession.setProductSuffix(productKey.getProductSuffix());
+				// 默认是销售团队管理系统
+				userSession.setProductType(ProductType.TEAM_MANAGE);
 				if (companyService != null) {
 					if (StringUtils.isNotBlank(user.getCompanyId())) {
 						Company company = companyService.get(user.getCompanyId());
 						if (company != null) {
 							userSession.setCompanyName(company.getCompanyName());
 							userSession.setCompanyTrialFlag(company.getTrialFlag());
+							userSession.setProductType(company.getProductType());
 						}
 						if (company.checkServiceTerm()) {
 							message.setContent("您的账号已过试用期，请联系软件供应商！");
@@ -253,18 +261,108 @@ public class UserLogonAction extends ActionSupport {
 				fullGroupName = fullGroupName.substring(0, fullGroupName.length() - 1);
 			}
 			fullGroupName = StringUtils.defaultIfEmpty(fullGroupName, "超级管理组");
+			int productType = ((UserSession) session.getAttribute("userSession")).getProductType();
+			if (productType == 0) {
+				topImage = "top_crm.jpg";
+			} else if (productType == 1) {
+				topImage = "top_erp.jpg";
+			} else {
+				topImage = "top_team.jpg";
+			}
+		} else {
+			topImage = "top_team.jpg";
 		}
+
 		return SUCCESS;
 	}
+
 	/**
 	 * 显示菜单
+	 * 
 	 * @return
 	 * @throws Exception
 	 */
-	public String  logonMenu() throws Exception {
-		menuList = menuService.getAllMenuList();
+	public String logonMenu() throws Exception {
+
+		HttpSession session = ServletActionContext.getRequest().getSession();
+		UserSession userSession = (UserSession) session.getAttribute("userSession");
+
+		int productId = userSession.getProductType();
+		boolean superFlag = popedomService.isSuperAdministrator(userSession.getUserId(), String.valueOf(userSession.getUserType()));
+		boolean comanyFlag = popedomService.isCompanyAdministrator(userSession.getUserId(), String.valueOf(userSession.getUserType()));
+		// 如果是系统管理员，则只取超级管理员菜单
+		if (superFlag) {
+			menuList = menuService.getOneLevelMenuListByProductType(productId, MenuPopedomType.ONLY_SUPER_ADMIN, 1);
+			if (menuList == null || menuList.size() == 0) {
+				menuList = new ArrayList<Menu>();
+			}
+			menuList.addAll(menuService.getOneLevelMenuListByProductType(productId, MenuPopedomType.OPEN, 1));
+		} else {
+			// 如果是公司管理员，则要取出公司级菜单
+			if (menuList == null || menuList.size() == 0) {
+				menuList = new ArrayList<Menu>();
+			}
+			if (comanyFlag) {
+				menuList.addAll(menuService.getOneLevelMenuListByProductType(productId, MenuPopedomType.ONLY_COMPANY_ADMIN, 1));
+			}
+			menuList.addAll(menuService.getOneLevelMenuListByProductType(productId, MenuPopedomType.OPEN, 1));
+			if (menuList == null || menuList.size() == 0) {
+				menuList = new ArrayList<Menu>();
+			}
+
+			List<Menu> menuCommonList = menuService.getOneLevelMenuListByProductType(productId, MenuPopedomType.COMMON, 1);
+			if (menuCommonList != null && menuCommonList.size() > 0) {
+				for (int i = 0; i < menuCommonList.size(); i++) {
+					if (MenuPopedomType.COMMON.equals(menuCommonList.get(i).getPopedomType())) {
+						boolean hasPopedomFlag = popedomService.isHasPopedom(userSession.getUserId(), String.valueOf(userSession.getUserType()), menuCommonList.get(i).getMenuKey(), userSession.getPopedomKeys());
+						if (hasPopedomFlag) {
+							menuList.add(menuCommonList.get(i));
+						}
+					}
+				}
+			}
+		}
+		if (menuList != null && menuList.size() > 0) {
+			List<Menu> subMenuList = null;
+			List<Menu> subHasMenuList = null;
+
+			for (int i = 0; i < menuList.size(); i++) {
+				subMenuList = menuService.getMenuListByParentKey(productId, menuList.get(i).getMenuKey());
+				if (subMenuList != null && subMenuList.size() > 0) {
+					subHasMenuList = new ArrayList<Menu>();
+					for (int j = 0; j < subMenuList.size(); j++) {
+						if (superFlag) {
+							if (MenuPopedomType.ONLY_SUPER_ADMIN.equals(subMenuList.get(j).getPopedomType())) {
+								subHasMenuList.add(subMenuList.get(j));
+								continue;
+							}
+						}
+						if (comanyFlag) {
+							if (MenuPopedomType.ONLY_COMPANY_ADMIN.equals(subMenuList.get(j).getPopedomType())) {
+								subHasMenuList.add(subMenuList.get(j));
+								continue;
+							}
+						}
+						if (MenuPopedomType.OPEN.equals(subMenuList.get(j).getPopedomType())) {
+							subHasMenuList.add(subMenuList.get(j));
+							continue;
+						}
+						if (MenuPopedomType.COMMON.equals(subMenuList.get(j).getPopedomType())) {
+							boolean hasPopedomFlag = popedomService.isHasPopedom(userSession.getUserId(), String.valueOf(userSession.getUserType()), subMenuList.get(j).getMenuKey(), userSession.getPopedomKeys());
+							if (hasPopedomFlag) {
+								subHasMenuList.add(subMenuList.get(j));
+								continue;
+							}
+						}
+					}
+				}
+				menuList.get(i).setSubMenuList(subHasMenuList);
+				// menuList.get(i).setSubMenuList(subMenuList);
+			}
+		}
 		return SUCCESS;
 	}
+
 	/**
 	 * 退出登录,释放session资源
 	 * 
@@ -325,14 +423,13 @@ public class UserLogonAction extends ActionSupport {
 					hm.addData(randomData.getBytes());
 					hm.sign();
 					// 获得客户端Hash串与后台数据库当中的数据Hash处理后,进行对比
-					//Md5PasswordEncoder.encodePassword(password, sn_random);
-					//!
+					// Md5PasswordEncoder.encodePassword(password, sn_random);
+					// !
 					/*
-					if (!hashToken.equals(hm.toString())) {
-						message.setContent("您正在使用的是非法身份锁，请联系管理员！");
-						return ERROR;
-					}
-					*/
+					 * if (!hashToken.equals(hm.toString())) {
+					 * message.setContent("您正在使用的是非法身份锁，请联系管理员！"); return ERROR;
+					 * }
+					 */
 				}
 				String eKeyUserId = ekeyUser.getUserId();
 				user = userService.getUserById(eKeyUserId);
@@ -623,6 +720,14 @@ public class UserLogonAction extends ActionSupport {
 
 	public void setMenuList(List<Menu> menuList) {
 		this.menuList = menuList;
+	}
+
+	public String getTopImage() {
+		return topImage;
+	}
+
+	public void setTopImage(String topImage) {
+		this.topImage = topImage;
 	}
 
 }

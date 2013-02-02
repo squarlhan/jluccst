@@ -74,11 +74,6 @@ public class Menu implements java.io.Serializable {
 	 */
 	@Column(name = "POPEDOM_TYPE", length=50)
 	private String popedomType;
-	/**
-	 * 完整的在整个系统当中的排序
-	 */
-	@Column(name = "FULL_SORT_INDEX")
-	private int fullSortIndex;
 	
 	/**
 	 * 所有子菜单列表
@@ -121,14 +116,6 @@ public class Menu implements java.io.Serializable {
 
 	public void setLevelNum(int levelNum) {
 		this.levelNum = levelNum;
-	}
-
-	public int getFullSortIndex() {
-		return fullSortIndex;
-	}
-
-	public void setFullSortIndex(int fullSortIndex) {
-		this.fullSortIndex = fullSortIndex;
 	}
 
 	public static long getSerialversionuid() {

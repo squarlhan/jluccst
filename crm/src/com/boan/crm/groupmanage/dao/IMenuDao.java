@@ -35,6 +35,12 @@ public interface IMenuDao {
 	 * @param ids
 	 */
 	public void deleteMenuByIds( String[] ids );
+	
+	/**
+	 * 根据父key删作所有子菜单
+	 * @param keys
+	 */
+	public void deleteMenuByParentKey(int productId, String[] keys );
 
 	/**
 	 * 获取所有菜单列表
@@ -60,13 +66,13 @@ public interface IMenuDao {
 	 * @return
 	 */
 
-	public List<Menu> getOneLevelMenuListByProductType(int productId, int levelNum);
+	public List<Menu> getOneLevelMenuListByProductType(int productId, String popedomType, int levelNum);
 	/**
 	 * 根据父key，取所有菜单
 	 * @param parentKey
 	 * @return
 	 */
-	public List<Menu> getMenuListByParentKey(String parentKey);
+	public List<Menu> getMenuListByParentKey(int productId,String parentKey);
 	/**
 	 * 存储排序菜单
 	 * @param menuIds
