@@ -113,10 +113,16 @@ function delinfo(n){
     }
 }
 function popedomOpen(url,iwidth,iheight){
+	/*
 	var result = window.showModalDialog(url,'','status=no;dialogWidth=' + iwidth + 'px;dialogHeight=' + iheight + 'px;center=yes;help=no;')
 	if(typeof(result)=="string"){
 		window.location.href = "./showAllPopedomListAction.action?menuKey=<s:property value="menuKey"/>&companyId=<s:property value="companyId"/>";
 	}
+	*/
+	parent.parent.parent.tipsWindown("选择职务","iframe:"+url,iwidth,iheight,"true","","true","no");
+	parent.parent.parent.$("#windown-close").bind('click',function(){
+		window.location.href = "./showAllPopedomListAction.action?menuKey=<s:property value="menuKey"/>&companyId=<s:property value="companyId"/>";
+	});
 }
 
 function checkall(obj,n){
