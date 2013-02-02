@@ -31,8 +31,11 @@
 		<script language="javascript" type="text/JavaScript">
             function winclose()
             {
+            	/*
                 parent.returnValue=0;
                 parent.close();
+                */
+            	parent.$("#windown-close").click();
             }
             function gosubmit()
             {
