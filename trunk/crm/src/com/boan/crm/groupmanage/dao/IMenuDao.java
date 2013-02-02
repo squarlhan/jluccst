@@ -78,4 +78,12 @@ public interface IMenuDao {
 	 * @param menuIds
 	 */
 	public void saveSortMenu(String[] menuIds);
+	
+	/**
+	 * 一个产品下是否有同Key菜单
+	 * @param productId
+	 * @param menuKey
+	 * @return
+	 */
+	boolean isExistSameKey(int productId, String menuKey, String id);
 }

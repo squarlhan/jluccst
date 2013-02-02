@@ -66,4 +66,9 @@ public class MenuServiceImpl implements IMenuService {
 		menuDao.deleteMenuByParentKey(productId, keys);
 	}
 
+	@Override
+	public boolean isExistSameKey(int productId, String menuKey, String id) {
+		return menuDao.isExistSameKey(productId, menuKey, id);
+	}
+
 }
