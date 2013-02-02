@@ -124,4 +124,30 @@ public class MenuDaoImpl extends BaseDao<Menu, String> implements IMenuDao {
 		}
 	}
 
+	@Override
+	public boolean isExistSameKey(int productId, String menuKey, String id) {
+		boolean b = false;
+		int rowCount = 0;
+		String hql = null;
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put( "productId", productId );
+		map.put( "menuKey", menuKey );
+		if( StringUtils.isNotBlank( id ) )
+		{
+			hql = "select count(id) from Menu where id <> :id and productId= :productId and menuKey = :menuKey";
+			map.put( "id", id );
+		}
+		else
+		{
+			hql = "select count(id) from Menu where productId = :productId and menuKey = :menuKey";
+		}
+		
+		rowCount = super.findCountForPage( hql, map );			
+		if( rowCount > 0 )
+		{
+			b = true;
+		}
+		return b;
+	}
+
 }

@@ -80,9 +80,8 @@ public class MenuAction extends BaseActionSupport {
 	 * @return
 	 */
 	public String saveMenu() {
-		// 验证用户名是否重复
-		//boolean b = service.isExistSameName(role.getId(), role.getRoleName(), role.getCompanyId());
-		boolean b = false;
+		// 验证Key是否重复
+		boolean b = menuService.isExistSameKey(menu.getProductId(), StringUtils.trim(menu.getMenuKey()), menu.getId());
 		// 如果存在，则提示
 		if (b) {
 			message.setContent("相同菜单关键字已存在，请重新输入！");
