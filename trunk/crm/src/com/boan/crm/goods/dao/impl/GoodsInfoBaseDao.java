@@ -26,7 +26,7 @@ public class GoodsInfoBaseDao extends BaseDao<GoodsInfoBase, String>
 
 	@Override
 	public List<GoodsInfoBase> findGoodsInfoBaseByGoodsTypeId(String goodsTypeId) {
-		String hql = "from GoodsInfoBase where typeId=:typeId";
+		String hql = "from GoodsInfoBase where typeId=:typeId order by createTime asc";
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("typeId", goodsTypeId);
 		return this.find(hql, map);
