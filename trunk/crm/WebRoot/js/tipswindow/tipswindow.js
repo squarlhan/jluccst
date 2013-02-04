@@ -63,7 +63,7 @@ function tipsWindown(title, content, width, height, drag, time, showbg, cssName,
 		opacity : "0.5"
 	}, "normal");// 设置透明度
 	$("#windown-box").show();
-	if (height >= 527) {
+	if (height >= 600) {
 		$("#windown-title").css({
 			width : (parseInt(width) + 22) + "px"
 		});
