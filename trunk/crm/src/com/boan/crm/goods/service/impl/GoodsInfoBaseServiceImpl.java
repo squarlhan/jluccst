@@ -13,7 +13,7 @@ import com.boan.crm.goods.service.IGoodsInfoBaseService;
 import com.boan.crm.utils.page.Pagination;
 
 @Service("goodsInfoBaseService")
-public class GoodsInfoBaseServiceImpl implements IGoodsInfoBaseService{
+public class GoodsInfoBaseServiceImpl implements IGoodsInfoBaseService {
 	@Autowired
 	@Qualifier("goodsInfoBaseDao")
 	private IGoodsInfoBaseDao goodsInfoBaseDao;
@@ -34,8 +34,7 @@ public class GoodsInfoBaseServiceImpl implements IGoodsInfoBaseService{
 	}
 
 	@Override
-	public Pagination<GoodsInfoBase> findGoodsInfoBaseForPage(
-			Map<String, ?> values, Pagination<GoodsInfoBase> pagination) {
+	public Pagination<GoodsInfoBase> findGoodsInfoBaseForPage(Map<String, ?> values, Pagination<GoodsInfoBase> pagination) {
 		String hql = "from GoodsInfoBase where typeId=:typeId";
 		List<GoodsInfoBase> data = goodsInfoBaseDao.findForPage(hql, values, pagination.getStartIndex(), pagination.getPageSize());
 		hql = "select count(*) from GoodsInfoBase where typeId=:typeId";
@@ -45,5 +44,9 @@ public class GoodsInfoBaseServiceImpl implements IGoodsInfoBaseService{
 		return pagination;
 	}
 
-	
+	@Override
+	public List<GoodsInfoBase> findGoodsInfoBaseByGoodsTypeId(String goodsTypeId) {
+		return goodsInfoBaseDao.findGoodsInfoBaseByGoodsTypeId(goodsTypeId);
+	}
+
 }
