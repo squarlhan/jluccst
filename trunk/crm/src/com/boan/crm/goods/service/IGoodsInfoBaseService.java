@@ -31,6 +31,13 @@ public interface IGoodsInfoBaseService {
 	/**
 	 * 按分页查询数据字典
 	 */
-	public Pagination<GoodsInfoBase> findGoodsInfoBaseForPage(Map<String, ?> values,
-			Pagination<GoodsInfoBase> pagination);
+	public Pagination<GoodsInfoBase> findGoodsInfoBaseForPage(Map<String, ?> values, Pagination<GoodsInfoBase> pagination);
+
+	/**
+	 * 根据id取商品信息列表
+	 * 
+	 * @param goodsTypeId
+	 * @return
+	 */
+	public List<GoodsInfoBase> findGoodsInfoBaseByGoodsTypeId(String goodsTypeId);
 }
