@@ -6,6 +6,8 @@
 
 package com.boan.crm.goods.dao;
 
+import java.util.List;
+
 import com.boan.crm.goods.model.GoodsInfoBase;
 import com.boan.crm.utils.dao.IBaseDao;
 
@@ -14,4 +16,5 @@ import com.boan.crm.utils.dao.IBaseDao;
  * @version 1.0.0
  */
 public interface IGoodsInfoBaseDao extends IBaseDao<GoodsInfoBase, String> {
+	public List<GoodsInfoBase> findGoodsInfoBaseByGoodsTypeId(String goodsTypeId) ;
 }
