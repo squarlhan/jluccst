@@ -50,7 +50,7 @@ public class ServiceLogServiceImpl extends BaseDao<ServiceLog,String> implements
 				hql= hql + " and companyId =:companyId";
 			}
 		}
-		hql= hql + " order by serviceTime asc";
+		hql= hql + " order by arriveTime asc";
 		List<ServiceLog> data = serviceLogDao.findForPage(hql, values, pagination.getStartIndex(), pagination.getPageSize());
 		hql = "select count(*) from ServiceLog where 1=1";
 		if(values!=null){

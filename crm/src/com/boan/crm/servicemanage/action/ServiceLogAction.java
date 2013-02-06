@@ -63,8 +63,12 @@ public class ServiceLogAction extends BaseActionSupport {
 	
 	private String companyId;
 	private String companyName;
+	private String receipt;
+	private String degreeSatisfaction;
 	
 	private String searchCompanyName;
+	
+	private String message;
 	
 	/**
 	 * 根据电话号码获得服务记录对象集合
@@ -187,7 +191,12 @@ public class ServiceLogAction extends BaseActionSupport {
 		serviceLog.setMyCompanyId(sessionCompanyId);
 		serviceLog.setCompanyId(companyId);
 		serviceLog.setCompanyName(companyName);
+		if(StringUtils.trimToNull(receipt)!=null)
+			serviceLog.setReceipt(Integer.valueOf(receipt));
+		if(StringUtils.trimToNull(degreeSatisfaction)!=null)
+			serviceLog.setDegreeSatisfaction(Integer.valueOf(degreeSatisfaction));
 		serviceLogService.saveOrUpdate(serviceLog);
+		message = "保存成功！";
 		return SUCCESS;
 	}
 	
@@ -201,7 +210,12 @@ public class ServiceLogAction extends BaseActionSupport {
 		serviceLog.setMyCompanyId(sessionCompanyId);
 		serviceLog.setCompanyId(companyId);
 		serviceLog.setCompanyName(companyName);
+		if(StringUtils.trimToNull(receipt)!=null)
+			serviceLog.setReceipt(Integer.valueOf(receipt));
+		if(StringUtils.trimToNull(degreeSatisfaction)!=null)
+			serviceLog.setDegreeSatisfaction(Integer.valueOf(degreeSatisfaction));
 		serviceLogService.saveOrUpdate(serviceLog);
+		message = "保存成功！";
 		return SUCCESS;
 	}
 	
@@ -340,5 +354,47 @@ public class ServiceLogAction extends BaseActionSupport {
 	 */
 	public void setSearchCompanyName(String searchCompanyName) {
 		this.searchCompanyName = searchCompanyName;
+	}
+
+	/**
+	 * @return the receipt
+	 */
+	public String getReceipt() {
+		return receipt;
+	}
+
+	/**
+	 * @param receipt the receipt to set
+	 */
+	public void setReceipt(String receipt) {
+		this.receipt = receipt;
+	}
+
+	/**
+	 * @return the degreeSatisfaction
+	 */
+	public String getDegreeSatisfaction() {
+		return degreeSatisfaction;
+	}
+
+	/**
+	 * @param degreeSatisfaction the degreeSatisfaction to set
+	 */
+	public void setDegreeSatisfaction(String degreeSatisfaction) {
+		this.degreeSatisfaction = degreeSatisfaction;
+	}
+
+	/**
+	 * @return the message
+	 */
+	public String getMessage() {
+		return message;
+	}
+
+	/**
+	 * @param message the message to set
+	 */
+	public void setMessage(String message) {
+		this.message = message;
 	}
 }
