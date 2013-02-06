@@ -42,39 +42,50 @@
 							<tr>
 								<td align="center"
 									background="<%=path%>/images/headerbg.jpg">
-									<strong>服务日期</strong>
+									<strong>客服人员</strong>
 								</td>
 								<td align="center"
 									background="<%=path%>/images/headerbg.jpg">
-									<strong>维修员</strong>
+									<strong>申请时间</strong>
 								</td>
 								<td align="center"
 									background="<%=path%>/images/headerbg.jpg">
-									<strong>故障情况</strong>
+									<strong>实际到达时间</strong>
 								</td>
 								<td align="center"
 									background="<%=path%>/images/headerbg.jpg">
-									<strong>解决措施</strong>
+									<strong>客户满意度</strong>
+								</td>
+								<td align="center"
+									background="<%=path%>/images/headerbg.jpg">
+									<strong>服务人员</strong>
 								</td>
 							</tr>
 							<s:iterator value="pagination.data" status="obj">
 								<tr>
 									<td align="center" bgcolor="#FFFFFF">
-										<s:property value="serviceTime" />&nbsp;
+										<s:property value="customerService" />&nbsp;
 									</td>
 									<td align="center" bgcolor="#FFFFFF">
-										<s:property value="repairman" />&nbsp;
+										<s:property value="petitionTime" />&nbsp;
 									</td>
-									<td align="left" bgcolor="#FFFFFF">
-										<s:property value="malfunction" />&nbsp;
+									<td align="center" bgcolor="#FFFFFF">
+										<s:property value="arriveTime" />&nbsp;
 									</td>
-									<td align="left" bgcolor="#FFFFFF">
-										<s:property value="solutions" />&nbsp;
+									<td align="center" bgcolor="#FFFFFF">
+										<s:if test="degreeSatisfaction==0"></s:if>
+										<s:if test="degreeSatisfaction==1">非常满意</s:if>
+										<s:if test="degreeSatisfaction==2">满意</s:if>
+										<s:if test="degreeSatisfaction==3">不满意</s:if>
+										&nbsp;
+									</td>
+									<td align="center" bgcolor="#FFFFFF">
+										<s:property value="actServiceUser" />&nbsp;
 									</td>
 								</tr>
 							</s:iterator>
 							<tr>
-					          <td height="26" colspan="6" align="center" bgcolor="#FFFFFF">
+					          <td height="26" colspan="5" align="center" bgcolor="#FFFFFF">
 								<page:pages currentPage="pagination.currentPage" totalPages="pagination.totalPages" totalRows="pagination.totalRows" styleClass="page" theme="text" ></page:pages> 
 							  </td>
 					        </tr>
