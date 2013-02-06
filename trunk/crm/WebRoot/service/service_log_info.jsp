@@ -29,6 +29,22 @@
 		$.fn.close();
 		$.fn.initpage();
 		
+		$("#receipt").click(function(){
+			if($("#receipt").attr("checked")){
+				$("#returnVisitTime").attr("disabled","");
+				$("#returnVisitType").attr("disabled","");
+				$("#returnVisitUser").attr("disabled","");
+				$("#degreeSatisfaction").attr("disabled","");
+				$("#customerFeedback").attr("disabled","");
+			}else{
+				$("#returnVisitTime").attr("disabled","disabled");
+				$("#returnVisitType").attr("disabled","disabled");
+				$("#returnVisitUser").attr("disabled","disabled");
+				$("#degreeSatisfaction").attr("disabled","disabled");
+				$("#customerFeedback").attr("disabled","disabled");
+			}
+		});
+		
 		var allData;
 		$("#customerName").autocomplete("<%=basePath %>/customer/getCustomerByName.action",{
            minChars: 1,
@@ -106,8 +122,8 @@
 	  						  }
 	  					  
 	  				  }
-	  				$("#txt_contact").val(contractPerson);
-	  				$("#txt_mobilePhone").val(tel);
+	  				//$("#txt_contact").val(contractPerson);
+	  				//$("#txt_mobilePhone").val(tel);
 				  }
 			  }
 		});
@@ -123,6 +139,12 @@
 				$("#customerName").focus();
 				return false;
 			}
+			if($("#receipt").attr("checked")){
+				$("#hdReceipt").val(1);
+				$("#hdDegreeSatisfaction").val($("#degreeSatisfaction").val());
+			}else{
+				$("#hdReceipt").val(0);
+			}
 			form1.action = "${pageContext.request.contextPath}/service/saveservicelog.action";
 			form1.submit();
 		});
@@ -133,7 +155,7 @@
 	 */
 	$.fn.close = function() {
 		$("#closeBtn").click(function() {
-			var message = $("#lb_message").html();
+			var message = $("#message").val();
 			if (message != null && $.trim(message) != "") {
 			}
 			parent.$("#windown-close").click();
@@ -144,18 +166,30 @@
 	 */
 	$.fn.initpage = function() {
 		$("#customerName").focus();
-		//回显上传时的错误信息
-		var uploadErr = $("#lb_error").html();
-		if (uploadErr != null && $.trim(uploadErr) != "") {
-			alert(uploadErr);
-		}
 
-		var message = $("#lb_message").html();
+		var message = $("#message").val();
 		if (message != null && $.trim(message) != "") {
 			alert(message);
 		}
 		if($("#logCompnayId").val()!=""){
 			$("#selCompany").val($("#logCompnayId").val());
+		}
+		if($("#tempReceipt").val()=="1"){
+			$("#receipt").attr("checked","true")
+		}
+		
+		if($("#receipt").attr("checked")){
+			$("#returnVisitTime").attr("disabled","");
+			$("#returnVisitType").attr("disabled","");
+			$("#returnVisitUser").attr("disabled","");
+			$("#degreeSatisfaction").attr("disabled","");
+			$("#customerFeedback").attr("disabled","");
+		}else{
+			$("#returnVisitTime").attr("disabled","disabled");
+			$("#returnVisitType").attr("disabled","disabled");
+			$("#returnVisitUser").attr("disabled","disabled");
+			$("#degreeSatisfaction").attr("disabled","disabled");
+			$("#customerFeedback").attr("disabled","disabled");
 		}
 	};
 </script>
@@ -175,75 +209,118 @@
 </head>
 <body>
 	<form id="form1" name="form1" method="post">
-		<label id="lb_message" style="display:none"></label>
+		<s:hidden id="message" name="message" />
 		<s:hidden id="logId" name="serviceLog.id"></s:hidden>
 		<s:hidden id="logCompnayId" name="serviceLog.companyId"></s:hidden>
 		<s:hidden id="hdCompanyId" name="companyId"></s:hidden>
 		<s:hidden id="hdCompanyName" name="companyName"></s:hidden>
+		<s:hidden id="tempReceipt" name="serviceLog.receipt"></s:hidden>
+		<input type="hidden" name="receipt" value="" id="hdReceipt"/>
+		<input type="hidden" name="degreeSatisfaction" value="" id="hdDegreeSatisfaction"/>
 		<center>
 			<table>
 				<tr>
 					<td><table>
 							<tr>
-								<td style="padding:10px;"><fieldset>
-										<legend>
-											<span>服务记录编辑</span>
-										</legend>
+							  <td style="padding:5px;"><fieldset>
+										<legend>服务申请</legend>
 										<table>
-
+ 
 											<tr>
-												<td><table cellpadding="3" cellspacing="3">
-														<tr>
-															<td align="center" nowrap="nowrap">客户名称</td>
-															<td nowrap="nowrap">
-																<s:textfield type="text" style="width:150px" name="serviceLog.companyName" id="customerName"></s:textfield>
-																<span style="color:#ff0000">*</span>
-															</td>
-															<td align="center" nowrap="nowrap">联系人</td>
-															<td align="left"><s:textfield id="txt_contact"
-																	name="serviceLog.contact" cssStyle="width:150px;" /></td>
-															<td align="center" nowrap="nowrap">联系人手机</td>
-															<td align="left"><s:textfield id="txt_mobilePhone"
-																	name="serviceLog.mobilePhone" cssStyle="width:150px;" />
-															</td>
-														</tr>
-														<tr>
-															<td align="center" nowrap="nowrap">服务日期</td>
-															<td align="left"><s:textfield id="txt_serviceTime"
-																	name="serviceLog.serviceTime" cssStyle="width:150px;" readonly="true" onClick="WdatePicker()"/>
-															</td>
-															<td align="center" nowrap="nowrap">到达时间</td>
-															<td align="left"><s:textfield id="txt_arriveTime"
-																	name="serviceLog.arriveTime" cssStyle="width:150px;" readonly="true" onClick="WdatePicker()"/>
-															</td>
-															<td align="center" nowrap="nowrap">完成时间</td>
-															<td align="left"><s:textfield id="txt_finishTime"
-																	name="serviceLog.finishTime" cssStyle="width:150px;" readonly="true" onClick="WdatePicker()"/></td>
-														</tr>
-														<tr>
-															<td align="center" nowrap="nowrap">品牌型号</td>
-															<td align="left"><s:textfield id="txt_brandModel"
-																	name="serviceLog.brandModel" cssStyle="width:150px;" /></td>
-															<td align="center" nowrap="nowrap">维修员</td>
-															<td align="left" colspan="3"><s:textfield id="txt_repairman"
-																	name="serviceLog.repairman" cssStyle="width:150px;" /></td>
-														</tr>
-														<tr>
-															<td align="center" nowrap="nowrap">故障情况</td>
-															<td colspan="5" align="left"><s:textarea id="txt_malfunction"
-																	name="serviceLog.malfunction" cssStyle="width:648px; height:60px"/>
-															</td>
-														</tr>
-														<tr>
-															<td align="center" nowrap="nowrap">解决措施</td>
-															<td colspan="5" align="left"><s:textarea id="txt_solutions"
-																	name="serviceLog.solutions" cssStyle="width:648px; height:60px"/>
-															</td>
-														</tr>
-													</table></td>
+												<td><table cellpadding="0" cellspacing="3">
+                                                  <tr>
+                                                    <td align="right" nowrap="nowrap">客户名称</td>
+                                                    <td colspan="5" nowrap="nowrap">
+                                                    	<s:textfield type="text" style="width:668px" name="serviceLog.companyName" id="customerName"></s:textfield>
+                                                        <span style="color:#ff0000">*</span> </td>
+                                                  </tr>
+                                                  <tr>
+                                                    <td align="right" nowrap="nowrap">申 请 人</td>
+                                                    <td align="left"><s:textfield type="text" style="width:150px" name="serviceLog.petitioner" id="petitioner"></s:textfield></td>
+                                                    <td align="right" nowrap="nowrap">申请时间</td>
+                                                    <td align="left"><s:textfield type="text" style="width:150px" name="serviceLog.petitionTime" id="petitionTime" onClick="WdatePicker()"></s:textfield></td>
+                                                    <td align="right" nowrap="nowrap">电　　话</td>
+                                                    <td align="left"><s:textfield type="text" style="width:150px" name="serviceLog.telephone" id="telephone"></s:textfield></td>
+                                                  </tr>
+                                                  <tr>
+                                                    <td align="right" nowrap="nowrap">服务人员</td>
+                                                    <td align="left"><s:textfield type="text" style="width:150px" name="serviceLog.serviceUser" id="serviceUser"></s:textfield></td>
+                                                    <td align="right" nowrap="nowrap">客服人员</td>
+                                                    <td align="left"><s:textfield type="text" style="width:150px" name="serviceLog.customerService" id="customerService"></s:textfield></td>
+                                                    <td align="right" nowrap="nowrap">预计收费</td>
+                                                    <td align="left"><s:textfield type="text" style="width:150px" name="serviceLog.planCharges" id="planCharges"></s:textfield></td>
+                                                  </tr>
+                                                  <tr>
+                                                    <td align="right" nowrap="nowrap">服务事项</td>
+                                                    <td colspan="5" align="left"><s:textarea id="serviceMatter" name="serviceLog.serviceMatter" cssStyle="width:648px; height:40px"/></td>
+                                                  </tr>
+
+                                                </table></td>
 											</tr>
 										</table>
-									</fieldset></td>
+									</fieldset>
+                                    
+                                    <fieldset style="margin-top:5px;">
+                                    <legend>现场服务</legend>
+                                    <table>
+                                      <tr>
+                                        <td><table cellpadding="0" cellspacing="3">
+                                            <tr>
+                                              <td align="right" nowrap="nowrap">到达时间</td>
+                                              <td nowrap="nowrap"><s:textfield type="text" style="width:150px" name="serviceLog.arriveTime" id="arriveTime" onClick="WdatePicker()"></s:textfield></td>
+                                              <td align="right" nowrap="nowrap">离开时间</td>
+                                              <td align="left"><s:textfield type="text" style="width:150px" name="serviceLog.leaveTime" id="leaveTime" onClick="WdatePicker()"></s:textfield></td>
+                                              <td align="right" nowrap="nowrap">服务人员</td>
+                                              <td align="left"><s:textfield type="text" style="width:150px" name="serviceLog.actServiceUser" id="actServiceUser"></s:textfield></td>
+                                            </tr>
+                                            <tr>
+                                              <td align="right" nowrap="nowrap">实际收费</td>
+                                              <td align="left"><s:textfield type="text" style="width:150px" name="serviceLog.actCharges" id="actCharges"></s:textfield></td>
+                                              <td align="right" nowrap="nowrap">是否收到回执</td>
+                                              <td colspan="3" align="left"><input type="checkbox" id="receipt" value="0" /></td>
+                                            </tr>
+
+                                            <tr>
+                                              <td align="right" nowrap="nowrap">问题诊断</td>
+                                              <td colspan="5" align="left"><s:textarea id="problemDiagnosis" name="serviceLog.problemDiagnosis" cssStyle="width:648px; height:40px"/></td>
+                                            </tr>
+                                            <tr>
+                                              <td align="right" nowrap="nowrap">解决方案</td>
+                                              <td colspan="5" align="left"><s:textarea id="solution" name="serviceLog.solution" cssStyle="width:648px; height:40px"/></td>
+                                            </tr>
+                                        </table></td>
+                                      </tr>
+                                    </table>
+                                    </fieldset>
+                                    <fieldset style="margin-top:5px;">
+                                    <legend>服务回访</legend>
+                                    <table>
+                                      <tr>
+                                        <td><table cellpadding="0" cellspacing="3">
+                                            <tr>
+                                              <td align="right" nowrap="nowrap">回访时间</td>
+                                              <td nowrap="nowrap"><s:textfield type="text" style="width:150px" name="serviceLog.returnVisitTime" id="returnVisitTime" disabled="true" onClick="WdatePicker()"></s:textfield></td>
+                                              <td align="right" nowrap="nowrap">回访方式</td>
+                                              <td align="left"><s:textfield type="text" style="width:150px" name="serviceLog.returnVisitType" id="returnVisitType" disabled="true"></s:textfield></td>
+                                              <td align="right" nowrap="nowrap">回访人员</td>
+                                              <td align="left"><s:textfield type="text" style="width:150px" name="serviceLog.returnVisitUser" id="returnVisitUser" disabled="true"></s:textfield></td>
+                                            </tr>
+                                            <tr>
+                                              <td align="right" nowrap="nowrap">客户满意度</td>
+                                              <td colspan="5" align="left">
+                                              	<s:select list="#{1:'非常满意',2:'满意',3:'不满意'}" theme="simple" id="degreeSatisfaction" name="serviceLog.degreeSatisfaction" headerKey="0" headerValue="请选择" cssStyle="width:150px" disabled="true" />
+                                              </td>
+                                            </tr>
+
+                                            <tr>
+                                              <td align="right" nowrap="nowrap">客户反馈</td>
+                                              <td colspan="5" align="left"><s:textarea id="customerFeedback" name="serviceLog.customerFeedback" cssStyle="width:648px; height:40px" disabled="true"/></td>
+                                            </tr>
+
+                                        </table></td>
+                                      </tr>
+                                    </table>
+                                    </fieldset></td>
 							</tr>
 						</table></td>
 				</tr>
@@ -254,11 +331,7 @@
 					</td>
 				</tr>
 			</table>
-			<s:if test="hasFieldErrors()">
-				<s:iterator value="fieldErrors">
-					<s:label id="lb_error" name="value[0]" cssStyle="display:none"></s:label>
-				</s:iterator>
-			</s:if>
+			
 		</center>
 	</form>
 </body>
