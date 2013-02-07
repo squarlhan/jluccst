@@ -18,10 +18,16 @@ import com.boan.crm.backstagemanage.service.ICompanyService;
 import com.boan.crm.common.Message;
 import com.boan.crm.datadictionary.model.DataDictionary;
 import com.boan.crm.datadictionary.service.IDataDictionaryService;
+import com.boan.crm.goods.model.GoodsInfoBase;
+import com.boan.crm.goods.model.GoodsType;
+import com.boan.crm.goods.service.IGoodsInfoBaseService;
+import com.boan.crm.goods.service.IGoodsTypeService;
 import com.boan.crm.purchase.model.PurchaseBatch;
 import com.boan.crm.purchase.model.PurchaseRecord;
 import com.boan.crm.purchase.service.IPurchaseBatchService;
 import com.boan.crm.purchase.service.IPurchaseRecordService;
+import com.boan.crm.sellrecord.model.GoodsInfo;
+import com.boan.crm.sellrecord.service.IGoodsInfoService;
 import com.boan.crm.supplier.model.Supplier;
 import com.boan.crm.supplier.service.ISupplierService;
 import com.boan.crm.utils.action.BaseActionSupport;
@@ -51,7 +57,9 @@ public class PurchaseAction extends BaseActionSupport {
 	@Resource
 	private ISupplierService supplierService = null;
 	@Resource
-	private IDataDictionaryService dataDictionaryService = null;
+	private IGoodsTypeService goodsTypeService = null;
+	@Resource
+	private IGoodsInfoBaseService goodsInfoBaseService = null;
 
 	private Pagination<PurchaseBatch> pagination = new Pagination<PurchaseBatch>();
 
@@ -75,9 +83,15 @@ public class PurchaseAction extends BaseActionSupport {
 
 	private String isSettleAccount = null;
 
-	private List<DataDictionary> productList = null;
+	private List<GoodsType> productTypeList = null;
+
+	private List<GoodsInfoBase> productList = null;
 
 	private String productId = null;
+
+	private String productTypeId = null;
+	
+	private String changeFlag = null;
 
 	/**
 	 * 显示采购记录
@@ -235,16 +249,45 @@ public class PurchaseAction extends BaseActionSupport {
 	 */
 	public String showPurchaseRecordInfo() {
 		String batchId = purchaseRecord.getBatchId();
+		productId = purchaseRecord.getProductId();
+		productTypeId = purchaseRecord.getProductType();
 		if (StringUtils.isBlank(purchaseRecord.getId())) {
-			purchaseRecord = new PurchaseRecord();
 		} else {
 			purchaseRecord = purchaseRecordService.get(purchaseRecord.getId());
+			purchaseRecord.setBatchId(batchId);
+			if (StringUtils.isNotBlank(productId)) {
+				purchaseRecord.setProductId(productId);
+			}
+			if (StringUtils.isNotBlank(productTypeId)) {
+				purchaseRecord.setProductType(productTypeId);
+			}
 		}
-		purchaseRecord.setBatchId(batchId);
+		// 赋规格和单价
+		if (StringUtils.isNotBlank(purchaseRecord.getProductId())) {
+			if (StringUtils.isBlank(purchaseRecord.getId()) || StringUtils.isNotBlank(changeFlag) ) {
+				GoodsInfoBase base = goodsInfoBaseService.get(purchaseRecord.getProductId());
+				if (base != null) {
+					purchaseRecord.setSpecification(base.getGoodsStandard());
+					purchaseRecord.setUnitPrice(Float.parseFloat(base.getGoodsPrice()));
+				}
+			}
+		}
 		// 显示产品列表
-		productList = dataDictionaryService.findDataDictionaryByType(sessionCompanyId, 8);
+		/*
+		 * productList =
+		 * dataDictionaryService.findDataDictionaryByType(sessionCompanyId, 8);
+		 * if (productList == null) { productList = new
+		 * ArrayList<DataDictionary>(); }
+		 */
+		productTypeList = goodsTypeService.findAllGoodsType(sessionCompanyId);
+		if (productTypeList == null) {
+			productTypeList = new ArrayList<GoodsType>();
+		}
+		if (StringUtils.isNotBlank(purchaseRecord.getProductType())) {
+			productList = goodsInfoBaseService.findGoodsInfoBaseByGoodsTypeId(purchaseRecord.getProductType());
+		}
 		if (productList == null) {
-			productList = new ArrayList<DataDictionary>();
+			productList = new ArrayList<GoodsInfoBase>();
 		}
 		return SUCCESS;
 	}
@@ -261,7 +304,7 @@ public class PurchaseAction extends BaseActionSupport {
 		}
 		purchaseRecord.setCompanyId(sessionCompanyId);
 		// 获取产品名称
-		DataDictionary product = dataDictionaryService.get(purchaseRecord.getProductId());
+		GoodsInfoBase product = goodsInfoBaseService.get(purchaseRecord.getProductId());
 		if (product != null) {
 			purchaseRecord.setProductName(product.getName());
 		} else {
@@ -429,19 +472,11 @@ public class PurchaseAction extends BaseActionSupport {
 		this.isSettleAccount = isSettleAccount;
 	}
 
-	public IDataDictionaryService getDataDictionaryService() {
-		return dataDictionaryService;
-	}
-
-	public void setDataDictionaryService(IDataDictionaryService dataDictionaryService) {
-		this.dataDictionaryService = dataDictionaryService;
-	}
-
-	public List<DataDictionary> getProductList() {
+	public List<GoodsInfoBase> getProductList() {
 		return productList;
 	}
 
-	public void setProductList(List<DataDictionary> productList) {
+	public void setProductList(List<GoodsInfoBase> productList) {
 		this.productList = productList;
 	}
 
@@ -451,6 +486,46 @@ public class PurchaseAction extends BaseActionSupport {
 
 	public void setProductId(String productId) {
 		this.productId = productId;
+	}
+
+	public IGoodsTypeService getGoodsTypeService() {
+		return goodsTypeService;
+	}
+
+	public void setGoodsTypeService(IGoodsTypeService goodsTypeService) {
+		this.goodsTypeService = goodsTypeService;
+	}
+
+	public List<GoodsType> getProductTypeList() {
+		return productTypeList;
+	}
+
+	public void setProductTypeList(List<GoodsType> productTypeList) {
+		this.productTypeList = productTypeList;
+	}
+
+	public IGoodsInfoBaseService getGoodsInfoBaseService() {
+		return goodsInfoBaseService;
+	}
+
+	public void setGoodsInfoBaseService(IGoodsInfoBaseService goodsInfoBaseService) {
+		this.goodsInfoBaseService = goodsInfoBaseService;
+	}
+
+	public String getProductTypeId() {
+		return productTypeId;
+	}
+
+	public void setProductTypeId(String productTypeId) {
+		this.productTypeId = productTypeId;
+	}
+
+	public String getChangeFlag() {
+		return changeFlag;
+	}
+
+	public void setChangeFlag(String changeFlag) {
+		this.changeFlag = changeFlag;
 	}
 
 }
