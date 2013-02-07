@@ -32,6 +32,7 @@
 		<!--
 			var _customer_submit = {
 			rules: {
+				"purchaseRecord.productType":{required:true,strangecode:true},
 				"purchaseRecord.productId":{required:true,strangecode:true},
 				"purchaseRecord.specification":{required:true,strangecode:true},
 				//"purchaseRecord.gramWeight":{required:true,strangecode:true},
@@ -88,6 +89,16 @@
 			$.fn.initpage = function(){
 				$("#specification").focus();
 			}
+			function productTypeIdChange(){
+				form1.action = "./showPurchaseRecordInfoAction.action";
+				document.getElementById("changeFlag").value="change";
+				form1.submit();
+			}
+			function productIdChange(){
+				form1.action = "./showPurchaseRecordInfoAction.action";
+				document.getElementById("changeFlag").value="change";
+				form1.submit();
+			}
 		//-->
 		</script>
 	</head>
@@ -95,6 +106,7 @@
 		<s:form name="form1" id="form1" method="post" theme="simple">
 			<s:hidden name="purchaseRecord.id" id="purchaseRecordId"></s:hidden>
 			<s:hidden name="purchaseRecord.batchId" id="batchId"></s:hidden>
+			<input type="hidden" value="" name="changeFlag" id="changeFlag" />
 			<table width="100%" border="0" cellspacing="5" cellpadding="0">
 				<tr>
 					<td>
@@ -104,7 +116,19 @@
 								<td style="height: 36px;">
 									<table width="100%" border="0" cellpadding="5" cellspacing="1"
 										bgcolor="#d5e4fd">
-
+										<tr>
+											<td height="26" align="right" bgcolor="#FFFFFF">
+												<strong>产品类别：</strong>
+											</td>
+											<td height="26" align="left" bgcolor="#FFFFFF">
+											<!-- 
+												<s:textfield name="purchaseRecord.productName" id="productName" cssStyle="width: 290px;" maxlength="25"></s:textfield>
+											 -->
+											 	<s:select list="productTypeList" name="purchaseRecord.productType" id="productTypeId"  cssStyle="width: 290px;" 
+											 	headerKey="" headerValue="==请选择产品类别==" listKey="id" listValue="name" onchange="productTypeIdChange();"></s:select>
+												<font color="red">*</font>
+											</td>
+										</tr>
 										<tr>
 											<td height="26" align="right" bgcolor="#FFFFFF">
 												<strong>产品名称：</strong>
@@ -114,7 +138,7 @@
 												<s:textfield name="purchaseRecord.productName" id="productName" cssStyle="width: 290px;" maxlength="25"></s:textfield>
 											 -->
 											 	<s:select list="productList" name="purchaseRecord.productId" id="productId"  cssStyle="width: 290px;" 
-											 	headerKey="" headerValue="==请选择产品==" listKey="id" listValue="name"></s:select>
+											 	headerKey="" headerValue="==请选择产品==" listKey="id" listValue="name" onchange="productIdChange();"></s:select>
 												<font color="red">*</font>
 											</td>
 										</tr>
