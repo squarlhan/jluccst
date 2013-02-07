@@ -59,6 +59,12 @@ public class PurchaseRecord implements java.io.Serializable {
 	@Column(name = "BATCH_ID", length = 50)
 	private String batchId;
 	/**
+	 * 产品分类
+	 */
+	@Column(name = "PRODUCT_TYPE", length = 50)
+	private String productType;
+	
+	/**
 	 * 产品id
 	 */
 	@Column(name = "PRODUCT_ID", length = 50)
@@ -281,6 +287,14 @@ public class PurchaseRecord implements java.io.Serializable {
 
 	public void setUnitPrice(float unitPrice) {
 		this.unitPrice = unitPrice;
+	}
+
+	public String getProductType() {
+		return productType;
+	}
+
+	public void setProductType(String productType) {
+		this.productType = productType;
 	}
 
 }
