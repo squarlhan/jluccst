@@ -38,5 +38,16 @@
 				<result name="success">/purchasemanage/repertorylist.jsp</result>
 				<result name="input">/purchasemanage/repertorylist.jsp</result>
 		</action>
+		<!-- 初始库存 -->
+		<action name="showInitRepertoryListAction" class="initRepertoryAction" method="showInitRepertoryList">
+				<result name="show-init-info-list">/purchasemanage/initrepertorylist.jsp</result>
+		</action>
+		<action name="initRepertoryAction"  class="initRepertoryAction" >
+				<result name="show-init-info">/purchasemanage/initrepertoryinfo.jsp</result>
+				<result name="input">/purchasemanage/initrepertoryinfo.jsp</result>
+				<result name="show-init-info-list">/purchasemanage/initrepertorylist.jsp</result>
+				<result name="save-success">/common/message.jsp</result>
+				<result name="save-error">/common/messagenoclose.jsp</result>
+		</action>
 	</package>
 </struts>
