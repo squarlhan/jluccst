@@ -12,7 +12,7 @@
    	{
 		sb.append( "{" );
 		sb.append( "root:[" );
-		for( int i = pagination.getData().size() - 1;i>0;i-- )
+		for( int i = pagination.getData().size() - 1;i>=0;i-- )
 		{
 			obj = ( AutoCustomerAssessment )pagination.getData().get( i );
 			if( i < pagination.getData().size() - 1 )
@@ -35,6 +35,6 @@
 	{
 		sb.append( "{root:[]}" );
 	}
-   	//System.out.println(sb.toString());
+   //	System.out.println(sb.toString());
 	response.getWriter().write( sb.toString() );
 %>
