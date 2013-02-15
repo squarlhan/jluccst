@@ -52,7 +52,7 @@ public class AutoCustomerAssessmentServiceImpl implements IAutoCustomerAssessmen
 		List<AutoCustomerAssessment> data = autoCustomerAssessmentDao.findForPage(hql.toString(), values, pagination.getStartIndex(), pagination.getPageSize());
 		
 		hql.delete(0, hql.length());
-		hql.append(" select count(*) from AutoCustomerAssessment where 1=1 " );
+		hql.append(" from AutoCustomerAssessment where 1=1 " );
 		if(values.get("customerId") != null)
 		{
 			hql.append(" and customerId = :customerId ");
