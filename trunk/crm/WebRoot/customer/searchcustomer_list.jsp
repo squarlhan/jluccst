@@ -82,6 +82,7 @@
   
   <body>
  <s:form id="form1" name="form1" method="post" theme="simple">
+ <s:hidden name="deptId"></s:hidden>
 <table width="100%" style="height:100%;" border="0" cellspacing="5" cellpadding="0">
   <tr>
     <td valign="top"><table width="100%" border="0" cellspacing="5" cellpadding="0">
