@@ -14,11 +14,15 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import org.apache.commons.lang.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.boan.crm.customer.model.CustomerInfo;
 import com.boan.crm.customer.service.ICustomerInfoService;
+import com.boan.crm.datadictionary.model.DataDictionary;
+import com.boan.crm.datadictionary.service.IDataDictionaryService;
 import com.boan.crm.servicemanage.model.ServiceLog;
 import com.boan.crm.servicemanage.service.IServiceLogService;
 import com.boan.crm.utils.action.BaseActionSupport;
@@ -43,6 +47,9 @@ public class ServiceLogAction extends BaseActionSupport {
 	//客户状态接口类
 	@Resource
 	private ICustomerInfoService customerInfoService;
+	
+	@Resource
+	private IDataDictionaryService dataDictionaryService = null;
 	
 	//服务记录对象
 	private ServiceLog serviceLog = null;
@@ -69,6 +76,9 @@ public class ServiceLogAction extends BaseActionSupport {
 	private String searchCompanyName;
 	
 	private String message;
+	
+	//回访方式
+	private List<DataDictionary> listHffs = null;
 	
 	/**
 	 * 根据电话号码获得服务记录对象集合
@@ -131,6 +141,7 @@ public class ServiceLogAction extends BaseActionSupport {
 	 * @return
 	 */
 	public String serviceLogInfo(){
+		listHffs = dataDictionaryService.findDataDictionaryByType(sessionCompanyId, 5);
 		customerInfos= customerInfoService.findAllCustomerInfo();
 		if(customerInfos==null)
 			customerInfos = new ArrayList<CustomerInfo>();
@@ -183,6 +194,7 @@ public class ServiceLogAction extends BaseActionSupport {
 	 * @return
 	 */
 	public String saveServiceLog(){
+		listHffs = dataDictionaryService.findDataDictionaryByType(sessionCompanyId, 5);
 		customerInfos= customerInfoService.findAllCustomerInfo();
 		if(customerInfos==null)
 			customerInfos = new ArrayList<CustomerInfo>();
@@ -396,5 +408,15 @@ public class ServiceLogAction extends BaseActionSupport {
 	 */
 	public void setMessage(String message) {
 		this.message = message;
+	}
+
+	public List<DataDictionary> getListHffs()
+	{
+		return listHffs;
+	}
+
+	public void setListHffs( List<DataDictionary> listHffs )
+	{
+		this.listHffs = listHffs;
 	}
 }
