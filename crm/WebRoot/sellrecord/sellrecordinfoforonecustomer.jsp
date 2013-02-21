@@ -73,11 +73,18 @@
 		  		//日期控件
 				$('#txt_bargainTime').datetimepicker({showTimepicker: false});
 		  		$("#btn_add").click(function(){
-					parent.parent.parent.tipsWindown("商品明细","iframe:openAddSellRecordDetialAction.action","780","300","true","","true","no");
+		  			$.cookie('detial', '', { expires: -1 }); //先清理一下cookie，防止原来没有清理的数据还存在
+		  			var goodsTypeId = $("#txt_goodsType").val();
+		  			if(goodsTypeId==""){
+		  				alert('请先选择产品种类！');
+		  				$("#txt_goodsType").focus();
+		  				return false;
+		  			}
+					parent.parent.parent.tipsWindown("商品明细","iframe:openAddSellRecordDetialAction.action?goodsTypeId="+goodsTypeId,"780","300","true","","true","no");
 					parent.parent.parent.$("#windown-close").bind('click',function(){
-						var detials = $.cookie('detial'); // 读取 cookie中的被选择的人员Id
+						var detials = $.cookie('detial'); // 读取 cookie中的被选择的产品
 			  			$.cookie('detial', '', { expires: -1 }); //读取完毕后删除cookie
-	  					if(detials!=null){
+	  					if(detials!=null && detials!=undefined){
 	  						var info = detials.split("☆");//☆
 	  						if(info[1]!=undefined && info[2]!=undefined && info[3]!=undefined&& info[4]!=undefined&& info[5]!=undefined&& info[6]!=undefined){
 					  			var row="";
@@ -181,7 +188,7 @@
 		  			$("input[type=text]").each(function(){
 		  				$(this).val($.trim($(this).val()));
 		  			});
-		  			$("#form1").attr("action","addSellRecordAction.action");
+		  			$("#form1").attr("action","addSellRecordForForOneCustomerAction.action");
 		  			$("#form1").submit();
 		  		});
 	  		}catch(e){
@@ -247,10 +254,9 @@
   </head>
   
   <body>
-  <span onmousemove="this.setCapture();" onmouseout="this.releaseCapture();" onfocus="this.blur();"> 
     <s:form id="form1" name="form1" method="post" theme="simple" action="">
     	<s:hidden id="recordId"  name="sellRecord.id"></s:hidden>
-    	<s:hidden id="companyId"  name="sellRecord.companyId"></s:hidden>
+    	<s:hidden id="companyId"  name="sellRecord.companyId" ></s:hidden>
     	<s:hidden id="deptId"  name="sellRecord.deptId"></s:hidden>
 		<table width="100%" border="0" cellspacing="5" cellpadding="0">
 			<tr>
@@ -264,21 +270,21 @@
 									<strong>客户名称：</strong>
 								</td>
 								<td height="26" align="left" bgcolor="#FFFFFF" nowrap="nowrap">
-									<s:textfield id="txt_customerName" name="sellRecord.customerName" cssStyle="width:200px" ></s:textfield>
+									<span onmousemove="this.setCapture();" onmouseout="this.releaseCapture();" onfocus="this.blur();">
+										<s:select id="sel_customer"  name ="sellRecord.customerId"  list="customerInfos" listKey="id"  listValue="customerName" cssStyle="width:200px" headerKey="" headerValue="--- 请选择客户 ---"></s:select>
+									</span>
 								</td>
 								<td height="26" align="right" bgcolor="#FFFFFF" nowrap="nowrap">
 									<strong>交易日期：</strong>
 								</td>
 								<td height="26" align="left" bgcolor="#FFFFFF" nowrap="nowrap">
-									<s:textfield id="txt_bargainTime" name="sellRecord.bargainTime" cssStyle="width:100px" ></s:textfield>
+									<s:textfield id="txt_bargainTime" name="sellRecord.bargainTime" cssStyle="width:100px" ></s:textfield><font color="red">*</font>
 								</td>
 								<td height="26" align="right" bgcolor="#FFFFFF" nowrap="nowrap">
 									<strong>产品种类：</strong>
 								</td>
 								<td height="26" align="left" bgcolor="#FFFFFF" nowrap="nowrap">
-									<span onmousemove="this.setCapture();" onmouseout="this.releaseCapture();" onfocus="this.blur();"> 
-										<s:select id="txt_goodsType"  name="sellRecord.goodsType"  list="goodsTypes" listKey="id"  listValue="name" cssStyle="width:100px" headerKey="" headerValue="--- 请选择 ---"></s:select>
-									</span>
+									<s:select id="txt_goodsType"  name="sellRecord.goodsType"  list="goodsTypes" listKey="id"  listValue="name" cssStyle="width:100px" headerKey="" headerValue="--- 请选择 ---"></s:select><font color="red">*</font>
 								</td>
 								<td height="26" align="right" bgcolor="#FFFFFF" nowrap="nowrap">
 									<strong>销售单号：</strong>
@@ -294,6 +300,23 @@
 					<legend>商品明细</legend>
 						<table id="goodsList" width="100%" height="50%"  border="0" cellpadding="5" cellspacing="1" bgcolor="#d5e4fd">
 							<tr>
+								<td colspan="12" align="center" width="50px" bgcolor="#FFFFFF">
+									<table>
+										<tr>
+											<td>
+												<input name="btn_add" type="button" class="btn_2_3" id="btn_add" value="添加">
+											</td>
+											<td>
+												<input name="btn_delAll" type="button" class="btn_2_3" id="btn_delAll" value="删除所选">
+											</td>
+										</tr>
+									</table>
+								</td>
+							</tr>
+							<tr>
+								<td align="center" width="50px" background="<%=basePath%>/images/headerbg.jpg">
+		   							<s:checkbox theme="simple" id="cbk_all" name="all"></s:checkbox>
+		   						</td>
 		              			<td align="center" background="<%=basePath%>/images/headerbg.jpg"><strong>品 名</strong></td>
 		              			<td align="center" background="<%=basePath%>/images/headerbg.jpg"><strong>规 格</strong></td>
 								<td align="center" background="<%=basePath%>/images/headerbg.jpg"><strong>厂商</strong></td>
@@ -301,10 +324,14 @@
 		              			<td align="center" background="<%=basePath%>/images/headerbg.jpg"><strong>数 量</strong></td>
 		              			<td align="center" background="<%=basePath%>/images/headerbg.jpg"><strong>预 付</strong></td>
 		              			<td align="center" background="<%=basePath%>/images/headerbg.jpg"><strong>备注</strong></td>
+		              			<td align="center" background="<%=basePath%>/images/headerbg.jpg"><strong>操作</strong></td>
 							</tr>
 							<s:if test="sellRecord!=null">
 							<s:iterator value="sellRecord.goodsDetials" status="obj">
 								<tr>
+									 <td height="26" align="center" bgcolor="#FFFFFF" >  
+										<s:checkbox id="%{#obj.id}" name="ids" fieldValue="%{id}" value="false" theme="simple"/>
+									</td>
 						            <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="goodsName"/></td>
 						            <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="standard"/></td>
 									<td height="26" align="center" bgcolor="#FFFFFF"><s:property value="factory"/></td>
@@ -312,6 +339,12 @@
 						            <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="number"/></td>
 						            <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="allPrice"/></td>
 						            <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="memo"/></td>
+						            <td height="26" align="center" bgcolor="#FFFFFF">
+										<s:url id="delete_url" action="deleteSellRecordDetialsAction">   
+											<s:param name="ids" value="id"></s:param>   
+										</s:url>
+							         	<a name="del_one" href="javascript:void(0);" url="${delete_url}">删除</a>  
+									</td>
 					            </tr>
 							</s:iterator>
 							</s:if>
@@ -352,8 +385,18 @@
 					</fieldset>
 				</td>
 			</tr>
+			<tr>
+				<td align="center" >
+					<table>
+						<tr>
+							<td>
+								<input name="btn_save" type="button" class="btn_2_3" id="btn_save" value="保存">
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
 		</table>
 		</s:form>
-</span>
   </body>
 </html>

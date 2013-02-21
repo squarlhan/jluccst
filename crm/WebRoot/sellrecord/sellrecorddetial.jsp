@@ -73,6 +73,8 @@
 		        	}); 
 		    	}
 			});
+	  		//选择商品事件
+	  		$.fn.goodsInfoBaseListChange();
 	  		
 	  		$("#btn_add").click(function(){
 	  			var validate_settings_submit = jQuery.extend({}, _customer_submit);
@@ -85,12 +87,12 @@
 	  			var goodsProductId= $("#goodsProductId").val();
 	  			var goodsName= 	$('#goodsProductId option:selected').text();
 	  			var standard= $("#txt_standard").val();
-	  			var weight= $("#txt_weight").val();
+	  			var factory= $("#txt_factory").val();
 	  			var number= $("#txt_number").val();
 	  			var price= $("#txt_price").val();
 	  			var allPrice= $("#txt_allPrice").val();
 	  			var memo= $("#txt_memo").val()+" ";
-	  			info = goodsProductId+"☆"+goodsName+"☆" + standard+"☆" + weight+"☆" + price+"☆"+number+"☆"+allPrice +"☆" + memo +"☆";
+	  			info = goodsProductId+"☆"+goodsName+"☆" + standard+"☆" + factory+"☆" + price+"☆"+number+"☆"+allPrice +"☆" + memo +"☆";
 	  			$.cookie('detial',info); 
 	  			parent.parent.parent.$("#windown-close").click();
 			});
@@ -108,6 +110,27 @@
 	  			parent.$("#windown-close").click();
 	  		});
 		};
+		
+		$.fn.goodsInfoBaseListChange = function(){
+			$("#goodsProductId").change(function(){
+				var goodsInfoBaseId = $("#goodsProductId").val();
+				$.ajax({
+  					type:"post",
+  					url: "getGoodsInfoForAjaxAction.action",
+  					data:{goodsInfoBaseId:goodsInfoBaseId},
+  					success: function(data, textStatus){
+  						try{
+  							$("#txt_standard").val(data.goodsInfoBase.goodsStandard);
+  							$("#txt_price").val((data.goodsInfoBase.goodsPrice));
+  							$("#txt_factory").val((data.goodsInfoBase.factoryName));
+  						}catch(e){
+  							alert(e.description);
+  						}
+  					}
+				});
+			});
+		};
+		
 	</script>
   </head>
   
@@ -126,29 +149,34 @@
 										</td>
 										<td height="26" align="left" bgcolor="#FFFFFF">
 <%--											<s:textfield id="txt_goodsName" name="goods.goodsName" cssStyle="width: 160px;" maxlength="25"></s:textfield>--%>
-												<s:select list="dataDictionarys" listKey="id" listValue="name" value="goodsProductId"  id="goodsProductId" name="goods.goodsProductId" cssStyle="width:150px" headerKey="" headerValue="--请选择产品--"  cssStyle="width: 165px;"></s:select>
+												<s:select list="goodsInfoBaseList" listKey="id" listValue="name" value="goodsProductId"  id="goodsProductId" name="goods.goodsProductId" cssStyle="width:150px" headerKey="" headerValue="--请选择产品--"  cssStyle="width: 165px;"></s:select>
 											<font color="red">*</font>
 										</td>
 										<td height="26" align="right" bgcolor="#FFFFFF" nowrap="nowrap">
 											<strong>规格：</strong>
 										</td>
 										<td height="26" align="left" bgcolor="#FFFFFF">
-											<s:textfield id="txt_standard" name="goods.standard" cssStyle="width: 160px;" maxlength="25"></s:textfield>
+											<span onmousemove="this.setCapture();" onmouseout="this.releaseCapture();" onfocus="this.blur();"> 
+												<s:textfield id="txt_standard" name="goods.standard" cssStyle="width: 160px;" maxlength="25"></s:textfield>
+											</span>
 										</td>
-										<td bgcolor="#FFFFFF"  colspan="2" nowrap="nowrap"></td>
-<%--										<td height="26" align="right" bgcolor="#FFFFFF" nowrap="nowrap">--%>
-<%--											<strong>克重：</strong>--%>
-<%--										</td>--%>
-<%--										<td height="26" align="left" bgcolor="#FFFFFF">--%>
-<%--											<s:textfield id="txt_weight" name="goods.weight" cssStyle="width: 160px;" maxlength="25"></s:textfield>--%>
-<%--										</td>--%>
+										<td height="26" align="right" bgcolor="#FFFFFF" nowrap="nowrap">
+											<strong>厂商：</strong>
+										</td>
+										<td height="26" align="left" bgcolor="#FFFFFF">
+											<span onmousemove="this.setCapture();" onmouseout="this.releaseCapture();" onfocus="this.blur();"> 
+												<s:textfield id="txt_factory" name="goods.factory" cssStyle="width: 160px;" maxlength="25"></s:textfield>
+											</span>
+										</td>
 									</tr>
 									<tr>
 										<td height="26" align="right" bgcolor="#FFFFFF"  nowrap="nowrap">
 											<strong>单价：</strong>
 										</td>
 										<td height="26" align="left" bgcolor="#FFFFFF">
-											<s:textfield id="txt_price" name="goods.price" cssStyle="width: 160px;" maxlength="25"></s:textfield>元<font color="red">*</font>
+											<span onmousemove="this.setCapture();" onmouseout="this.releaseCapture();" onfocus="this.blur();"> 
+												<s:textfield id="txt_price" name="goods.price" cssStyle="width: 160px;" maxlength="25"></s:textfield>元
+											</span>
 										</td>
 										<td height="26" align="right" bgcolor="#FFFFFF">
 											<strong>数量：</strong>

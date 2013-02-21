@@ -21,6 +21,10 @@
 	String basePath = request.getScheme() + "://"
 			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
+	String customerId = request.getParameter("customerId");
+	if(customerId==null){
+		customerId="";
+	}
 %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
@@ -165,7 +169,7 @@
 			$("#btn_add").click(function(){
 				try{
 					parent.$.fn.showOrHideTab(1,true);
-					parent.$.fn.selectTab(1,'openAddSellRecordForSellerAction.action');
+					parent.$.fn.selectTab(1,'openAddSellRecordForOneCustomerAction.action?customerId=<%=customerId%>');
 				}catch(e){
 					alert(e.description);
 				}
@@ -259,18 +263,6 @@
    		<span>
 			<table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#d5e4fd">
 				<tr>
-					<td height="26"  width="100"  align="right" bgcolor="#FFFFFF" nowrap="nowrap">
-						<strong>客户名称：</strong>
-					</td>
-					<td height="26" width="220"  align="left" bgcolor="#FFFFFF">
-						<s:textfield id="txt_queryCustomerName" name="queryCustomerName" cssStyle="width:212px" ></s:textfield>
-					</td>
-<%--					<td height="26" align="right" bgcolor="#FFFFFF" nowrap="nowrap">--%>
-<%--						<strong>所属业务员：</strong>--%>
-<%--					</td>--%>
-<%--					<td height="26" align="left" bgcolor="#FFFFFF">--%>
-<%--						<s:select id="sel_querySalesman"   name="querySalesman" list="userList"  listKey="id"  listValue="userCName"  headerKey="" headerValue="---全部---" cssStyle="width: 100px;" ></s:select>--%>
-<%--					</td>--%>
 					<td height="26" width="100" align="right" bgcolor="#FFFFFF" nowrap="nowrap">
 						<strong>成交日期：</strong>
 					</td>
@@ -324,7 +316,7 @@
             		<td height="26" align="center" bgcolor="#FFFFFF"><s:property value="debt"/></td>
             		<td height="26" align="center" bgcolor="#FFFFFF"><s:property value="(realCollection/receivable)*100"/>%</td>
             		<td height="26" align="center" bgcolor="#FFFFFF" nowrap="nowrap">
-							<s:url id="edit_url" action="openModifySellRecordForSellerAction">   
+							<s:url id="edit_url" action="openModifySellRecordForOneCustomerAction">   
 								<s:param name="sellRecord.id" value="id"></s:param>   
 							</s:url>
 							<s:url id="delete_url" action="deleteSellRecordAction">   
