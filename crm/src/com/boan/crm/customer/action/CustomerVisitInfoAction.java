@@ -3,6 +3,7 @@
  */
 package com.boan.crm.customer.action;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
@@ -32,8 +33,6 @@ import com.boan.crm.sms.model.SMSCustomerInfo;
 import com.boan.crm.sms.model.SMSInfo;
 import com.boan.crm.sms.service.ISMSCustomerInfoService;
 import com.boan.crm.sms.service.ISMSInfoService;
-import com.boan.crm.timemanage.model.TimePlan;
-import com.boan.crm.timemanage.service.ITimePlanService;
 import com.boan.crm.utils.action.BaseActionSupport;
 import com.boan.crm.utils.calendar.CalendarUtils;
 import com.boan.crm.utils.page.Pagination;
@@ -90,7 +89,15 @@ public class CustomerVisitInfoAction extends BaseActionSupport{
 	private List<DataDictionary> listVisitOption = null;
 	
 	private List<ContractPersonInfo> listPerson = null;
-	
+	private List<DataDictionary> listVisitFlag = new ArrayList<DataDictionary>();
+	public List<DataDictionary> getListVisitFlag() {
+		return listVisitFlag;
+	}
+
+	public void setListVisitFlag(List<DataDictionary> listVisitFlag) {
+		this.listVisitFlag = listVisitFlag;
+	}
+
 	private String salesmanId = "";
 	private List<User> userList = null;
 	private String customerName = "";
@@ -163,6 +170,15 @@ public class CustomerVisitInfoAction extends BaseActionSupport{
 		//回访方式： 传5
 		listVisitOption = dataDictionaryService.findDataDictionaryByType(sessionCompanyId, 5);
 		
+		DataDictionary d = new DataDictionary();
+		d.setId("0");
+		d.setName("未完成回访");
+		listVisitFlag.add(d);
+		DataDictionary d1 = new DataDictionary();
+		d1.setId("1");
+		d1.setName("已完成回访");
+		listVisitFlag.add(d1);
+		
 		try
 		{
 			if(deptId != null && deptId.length() > 0)
@@ -201,6 +217,10 @@ public class CustomerVisitInfoAction extends BaseActionSupport{
 		if(endDate != null)
 		{
 			values.put("endDate", endDate);
+		}
+		if(visitFlag != null && visitFlag.length() > 0)
+		{
+			values.put("visitFlag", visitFlag);
 		}
 		values.put( "companyId", sessionCompanyId );
 		values.put( "salesmanId", sessionUserId );
@@ -445,6 +465,7 @@ public class CustomerVisitInfoAction extends BaseActionSupport{
 		obj.setQq(customerVisitInfo.getQq());
 		obj.setTel(customerVisitInfo.getTel());
 		obj.setCompanyId( sessionCompanyId );
+		obj.setDeleteFlag(0);
 		customerVisitInfoService.save(obj);
 		
 		if(inserFLag)

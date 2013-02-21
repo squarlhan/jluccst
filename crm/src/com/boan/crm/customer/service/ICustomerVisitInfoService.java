@@ -33,7 +33,11 @@ public interface ICustomerVisitInfoService {
 	 * 根据id删除客户回访信息
 	 */
 	public void deleteCustomerVisitInfo(String... ids);
-
+	/**
+	 * 根据客户Id删除回访信息
+	 * @param customerId
+	 */
+	public void deleteAllCustomerVisitInfoByCustomerId(String customerId);
 	/**
 	 * 保存客户回访信息
 	 */

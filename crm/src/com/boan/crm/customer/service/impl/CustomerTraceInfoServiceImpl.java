@@ -3,6 +3,7 @@
  */
 package com.boan.crm.customer.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -48,26 +49,32 @@ public class CustomerTraceInfoServiceImpl implements ICustomerTraceInfoService{
 	public void deleteCustomerTraceInfo(String... ids) {
 		customerTraceInfoDao.delete(ids);
 	}
-
+	@Override
+	public void deleteAllCustomerTraceInfoByCustomerId(String customerId) {
+		Map<String,String> values = new HashMap<String,String>();
+		values.put("customerId", customerId);
+		customerTraceInfoDao.executeHql("update CustomerTraceInfo set deleteFlag = 1 where customerId = :customerId",values);
+	}
+	
 	@Autowired
 	@Qualifier("dataDictionaryService")
 	private IDataDictionaryService dataDictionaryService = null;
 	
 	@Override
 	public List<CustomerTraceInfo> findAllCustomerTraceInfo() {
-		return customerTraceInfoDao.find("from customerTraceInfoDao order by traceTime asc", new Object[0]);
+		return customerTraceInfoDao.find("from CustomerTraceInfo where deleteFlag = 0 order by traceTime asc", new Object[0]);
 	}
 	
 	@Override
 	public List<CustomerTraceInfo> findAllCustomerTraceInfoByCustomerId(String customerId) {
-		return customerTraceInfoDao.find("from customerTraceInfoDao where customerId = :customerId order by traceTime asc", customerId);
+		return customerTraceInfoDao.find("from CustomerTraceInfo where customerId = :customerId and deleteFlag = 0 order by traceTime asc", customerId);
 	}
 	
 	@Override
 	public Pagination<CustomerTraceInfo> findCustomerTraceInfoForPage(
 			Map<String, ?> values, Pagination<CustomerTraceInfo> pagination) {
 		StringBuilder hql = new StringBuilder();
-		hql.append( "from CustomerTraceInfo where 1=1");
+		hql.append( "from CustomerTraceInfo where 1=1 and (deleteFlag = 0 )");
 		if(values.get("companyId") != null)
 		{
 			hql.append(" and companyId = :companyId ");
@@ -100,10 +107,17 @@ public class CustomerTraceInfoServiceImpl implements ICustomerTraceInfoService{
 		{
 			hql.append(" and salesmanId in (select id from User where deptId =:deptId) ");
 		}
+		if(values.get("traceFlag") != null && values.get("traceFlag").equals("1"))
+		{
+			hql.append(" and traceFlag = '1' ");
+		}else if(values.get("traceFlag") != null && values.get("traceFlag").equals("0"))
+		{
+			hql.append(" and (traceFlag = '0' or traceFlag is null) ");
+		}
 		hql.append(" order by actualTraceTime asc ,traceTime desc");
 		List<CustomerTraceInfo> data = customerTraceInfoDao.findForPage(hql.toString(), values, pagination.getStartIndex(), pagination.getPageSize());
 		hql.delete(0, hql.length());
-		hql.append(" select count(*) from CustomerTraceInfo where 1=1 " );
+		hql.append(" select count(*) from CustomerTraceInfo where 1=1 and (deleteFlag = 0 )" );
 		if(values.get("companyId") != null)
 		{
 			hql.append(" and companyId = :companyId ");
@@ -136,6 +150,14 @@ public class CustomerTraceInfoServiceImpl implements ICustomerTraceInfoService{
 		{
 			hql.append(" and salesmanId in (select id from User where deptId =:deptId) ");
 		}
+		if(values.get("traceFlag") != null && values.get("traceFlag").equals("1"))
+		{
+			hql.append(" and traceFlag = '1' ");
+		}else if(values.get("traceFlag") != null && values.get("traceFlag").equals("0"))
+		{
+			hql.append(" and (traceFlag = '0' or traceFlag is null) ");
+		}
+		
 		int totalRows = customerTraceInfoDao.findCountForPage(hql.toString(), values);
 		pagination.setTotalRows(totalRows);
 		pagination.setData(data);

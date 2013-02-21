@@ -33,8 +33,6 @@ import com.boan.crm.sms.model.SMSCustomerInfo;
 import com.boan.crm.sms.model.SMSInfo;
 import com.boan.crm.sms.service.ISMSCustomerInfoService;
 import com.boan.crm.sms.service.ISMSInfoService;
-import com.boan.crm.timemanage.model.TimePlan;
-import com.boan.crm.timemanage.service.ITimePlanService;
 import com.boan.crm.utils.action.BaseActionSupport;
 import com.boan.crm.utils.calendar.CalendarUtils;
 import com.boan.crm.utils.page.Pagination;
@@ -91,7 +89,7 @@ public class CustomerTraceInfoAction extends BaseActionSupport{
 	private Pagination<CustomerTraceInfo> pagination = new Pagination<CustomerTraceInfo>();
 	private List<DataDictionary> listTraceOption = null;
 	private List<ContractPersonInfo> listPerson = null;
-	
+	private List<DataDictionary> listTraceFlag = new ArrayList<DataDictionary>();
 	private String salesmanId = "";
 	private List<User> userList = null;
 	private String customerName = "";
@@ -178,7 +176,14 @@ public class CustomerTraceInfoAction extends BaseActionSupport{
 	{
 		//跟进方式： 传6
 		listTraceOption = dataDictionaryService.findDataDictionaryByType(sessionCompanyId, 6);
-		
+		DataDictionary d = new DataDictionary();
+		d.setId("0");
+		d.setName("未完成跟进");
+		listTraceFlag.add(d);
+		DataDictionary d1 = new DataDictionary();
+		d1.setId("1");
+		d1.setName("已完成跟进");
+		listTraceFlag.add(d1);
 		try
 		{
 			//userList = userService.queryUserListByCompanyIdRoleKey(sessionCompanyId,RoleFlag.YE_WU_YUAN);
@@ -219,11 +224,23 @@ public class CustomerTraceInfoAction extends BaseActionSupport{
 		{
 			values.put("endDate", endDate);
 		}
+		if(traceFlag != null && traceFlag.length() > 0)
+		{
+			values.put("traceFlag", traceFlag);
+		}
 		values.put( "companyId", sessionCompanyId );
 		values.put( "salesmanId", sessionUserId );
 		pagination = customerTraceInfoService.findCustomerTraceInfoForPage(values, pagination);
 		return SUCCESS;
 	}
+	public List<DataDictionary> getListTraceFlag() {
+		return listTraceFlag;
+	}
+
+	public void setListTraceFlag(List<DataDictionary> listTraceFlag) {
+		this.listTraceFlag = listTraceFlag;
+	}
+
 	/**
 	 * 客户跟进信息列表
 	 * @return String
@@ -465,6 +482,7 @@ public class CustomerTraceInfoAction extends BaseActionSupport{
 		obj.setQq(customerTraceInfo.getQq());
 		obj.setTel(customerTraceInfo.getTel());
 		obj.setCompanyId( sessionCompanyId );
+		obj.setDeleteFlag(0);
 		customerTraceInfoService.save(obj);
 		
 		if(inserFLag)

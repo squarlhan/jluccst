@@ -3,6 +3,7 @@
  */
 package com.boan.crm.customer.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -53,14 +54,19 @@ public class CustomerVisitInfoServiceImpl implements ICustomerVisitInfoService{
 
 	@Override
 	public List<CustomerVisitInfo> findAllCustomerVisitInfo() {
-		return customerVisitInfoDao.find("from customerVisitInfoDao order by VisitTime asc", new Object[0]);
+		return customerVisitInfoDao.find("from CustomerVisitInfo and (deleteFlag = 0 ) order by VisitTime asc", new Object[0]);
 	}
 	
 	@Override
 	public List<CustomerVisitInfo> findAllCustomerVisitInfoByCustomerId(String customerId) {
-		return customerVisitInfoDao.find("from customerVisitInfoDao where customerId = :customerId order by VisitTime asc", customerId);
+		return customerVisitInfoDao.find("from CustomerVisitInfo where customerId = :customerId and (deleteFlag = 0 ) order by VisitTime asc", customerId);
 	}
-	
+	@Override
+	public void deleteAllCustomerVisitInfoByCustomerId(String customerId) {
+		Map<String,String> values = new HashMap<String,String>();
+		values.put("customerId", customerId);
+		customerVisitInfoDao.executeHql("update CustomerVisitInfo set deleteFlag = 1 where customerId = :customerId",values);
+	}
 	@Override
 	public Pagination<CustomerVisitInfo> findCustomerVisitInfoForPage(
 			Map<String, ?> values, Pagination<CustomerVisitInfo> pagination) {
@@ -98,10 +104,17 @@ public class CustomerVisitInfoServiceImpl implements ICustomerVisitInfoService{
 		{
 			hql.append(" and salesmanId in (select id from User where deptId =:deptId) ");
 		}
+		if(values.get("visitFlag") != null && values.get("visitFlag").equals("1"))
+		{
+			hql.append(" and visitFlag = '1' ");
+		}else if(values.get("visitFlag") != null && values.get("visitFlag").equals("0"))
+		{
+			hql.append(" and (visitFlag = '0' or visitFlag is null) ");
+		}
 		hql.append(" order by actualVisitTime asc ,visitTime desc");
 		List<CustomerVisitInfo> data = customerVisitInfoDao.findForPage(hql.toString(), values, pagination.getStartIndex(), pagination.getPageSize());
 		hql.delete(0, hql.length());
-		hql.append(" select count(*) from CustomerVisitInfo where 1=1 " );
+		hql.append(" select count(*) from CustomerVisitInfo where 1=1 and (deleteFlag = 0 ) " );
 		if(values.get("companyId") != null)
 		{
 			hql.append(" and companyId = :companyId ");
@@ -134,7 +147,13 @@ public class CustomerVisitInfoServiceImpl implements ICustomerVisitInfoService{
 		{
 			hql.append(" and salesmanId in (select id from User where deptId =:deptId) ");
 		}
-		
+		if(values.get("visitFlag") != null && values.get("visitFlag").equals("1"))
+		{
+			hql.append(" and visitFlag = '1' ");
+		}else if(values.get("visitFlag") != null && values.get("visitFlag").equals("0"))
+		{
+			hql.append(" and (visitFlag = '0' or visitFlag is null) ");
+		}
 		int totalRows = customerVisitInfoDao.findCountForPage(hql.toString(), values);
 		pagination.setTotalRows(totalRows);
 		pagination.setData(data);
