@@ -21,6 +21,10 @@ import com.boan.crm.customer.model.CustomerInfo;
 import com.boan.crm.customer.service.ICustomerInfoService;
 import com.boan.crm.datadictionary.model.DataDictionary;
 import com.boan.crm.datadictionary.service.IDataDictionaryService;
+import com.boan.crm.goods.model.GoodsInfoBase;
+import com.boan.crm.goods.model.GoodsType;
+import com.boan.crm.goods.service.IGoodsInfoBaseService;
+import com.boan.crm.goods.service.IGoodsTypeService;
 import com.boan.crm.groupmanage.common.UserSession;
 import com.boan.crm.groupmanage.model.Deptment;
 import com.boan.crm.groupmanage.model.User;
@@ -73,6 +77,24 @@ public class SellRecordAction extends BaseActionSupport {
 	@Autowired
 	@Qualifier("popedomService")
 	private IPopedomService popedomService = null;
+	
+	
+	@Resource
+	// 商品类别接口类
+	private IGoodsTypeService goodsTypeService;
+	
+	// 商品类别对象
+	private GoodsType goodsType = null;
+	
+	private List<GoodsType> goodsTypes = null;
+	
+	@Resource
+	// 商品类别接口类
+	private IGoodsInfoBaseService goodsInfoBaseService;
+	
+	private GoodsInfoBase goodsInfoBase = null;
+	
+	private List<GoodsInfoBase> goodsInfoBaseList=null;
 
 	private List<Deptment> deptList = null;
 
@@ -146,6 +168,10 @@ public class SellRecordAction extends BaseActionSupport {
 
 	private String queryBargainTimeEnd;
 
+	private String goodsTypeId;
+
+	private String goodsInfoBaseId;
+
 	// --------------查询条件-------------------------//
 
 	
@@ -163,6 +189,7 @@ public class SellRecordAction extends BaseActionSupport {
 	 * @throws Exception
 	 */
 	public String openSellRecordList() throws Exception {
+		goodsTypes = goodsTypeService.findAllGoodsType(sessionCompanyId);
 		userList = userService.queryUserList(sessionCompanyId, sessionDeptId, new Pagination<User>()).getData();
 		Map<String, String> params = new HashMap<String, String>();
 
@@ -195,6 +222,7 @@ public class SellRecordAction extends BaseActionSupport {
 	 * @throws Exception
 	 */
 	public String openSellRecordListForSeller() throws Exception {
+		goodsTypes = goodsTypeService.findAllGoodsType(sessionCompanyId);
 		userList = userService.queryUserList(sessionCompanyId, sessionDeptId, new Pagination<User>()).getData();
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("companyId", sessionCompanyId);
@@ -215,8 +243,40 @@ public class SellRecordAction extends BaseActionSupport {
 		pagination = sellRecordService.findSellRecordForPage(params, pagination);
 		return SUCCESS;
 	}
+	/**
+	 * 给客户信息用
+	 * @return
+	 * @throws Exception
+	 */
+	public String openSellRecordListForOneCustomer() throws Exception {
+		goodsTypes = goodsTypeService.findAllGoodsType(sessionCompanyId);
+		userList = userService.queryUserList(sessionCompanyId, sessionDeptId, new Pagination<User>()).getData();
+		Map<String, String> params = new HashMap<String, String>();
+		params.put("companyId", sessionCompanyId);
+		
+		if (customerId != null && !customerId.trim().equals("")) {
+			params.put("customerId", customerId);
+		}
+		if (queryCustomerName != null && !queryCustomerName.trim().equals("")) {
+			params.put("queryCustomerName", queryCustomerName);
+		}
+		if (querySalesman != null && !querySalesman.trim().equals("")) {
+			params.put("querySalesman", querySalesman);
+		}
+		if (queryBargainTimeBegin != null && !queryBargainTimeBegin.trim().equals("")) {
+			params.put("queryBargainTimeBegin", queryBargainTimeBegin);
+		}
+		if (queryBargainTimeBegin != null && !queryBargainTimeBegin.trim().equals("")) {
+			params.put("queryBargainTimeEnd", queryBargainTimeEnd);
+		}
+		UserSession userSession = this.getSession();
+		params.put("salesmanId", userSession.getUserId());
+		pagination = sellRecordService.findSellRecordForPage(params, pagination);
+		return SUCCESS;
+	}
 
 	public String openSellRecordListForCustomer() throws Exception {
+		goodsTypes = goodsTypeService.findAllGoodsType(sessionCompanyId);
 		//userList = userService.queryUserList(sessionCompanyId, sessionDeptId, new Pagination<User>()).getData();
 		Map<String, String> params = new HashMap<String, String>();
 		if (customerId != null) {
@@ -237,7 +297,7 @@ public class SellRecordAction extends BaseActionSupport {
 
 	
 	public String openViewSellRecord() {
-
+		goodsTypes = goodsTypeService.findAllGoodsType(sessionCompanyId);
 //		customerInfos = customerInfoService.findAllCustomerInfoByCompanyId(sessionCompanyId);//本公司的所有客户
 		customerInfos = customerInfoService.findAllCustomerInfoBySalesmanId(sessionUserId); //查本公司业务员所管辖的客户
 		sellRecord = sellRecordService.getSellRecordById(sellRecord.getId());
@@ -246,6 +306,7 @@ public class SellRecordAction extends BaseActionSupport {
 	
 	public String openAddSellRecordForSeller() {
 
+		goodsTypes = goodsTypeService.findAllGoodsType(sessionCompanyId);
 		Calendar rightNow = Calendar.getInstance();
 		SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd"); // 日期格式化格式
 		String date = format.format(rightNow.getTime()); // 取得当前时间，并格式化成相应格式
@@ -272,12 +333,14 @@ public class SellRecordAction extends BaseActionSupport {
 //		customerInfos = customerInfoService.findAllCustomerInfoByCompanyId(sessionCompanyId);//本公司的所有客户
 		customerInfos = customerInfoService.findAllCustomerInfoBySalesmanId(sessionUserId); //查本公司业务员所管辖的客户
 		sellRecord = sellRecordService.getSellRecordById(sellRecord.getId());
+		goodsTypes = goodsTypeService.findAllGoodsType(sessionCompanyId);
 		return SUCCESS;
 	}
 
 	public String addSellRecordForSeller() {
 //		customerInfos = customerInfoService.findAllCustomerInfoByCompanyId(sessionCompanyId);//本公司的所有客户
 		customerInfos = customerInfoService.findAllCustomerInfoBySalesmanId(sessionUserId); //查本公司业务员所管辖的客户
+		goodsTypes = goodsTypeService.findAllGoodsType(sessionCompanyId);
 		// 查找客户信息
 		customer = customerInfoService.get(sellRecord.getCustomerId());
 		sellRecord.setCustomer(customer);
@@ -298,7 +361,7 @@ public class SellRecordAction extends BaseActionSupport {
 			goods.setGoodsProductId(array[0]);
 			goods.setGoodsName(array[1]);
 			goods.setStandard(array[2]);
-			goods.setWeight(array[3]);
+			goods.setFactory(array[3]);
 			if(array[4].equals("")){
 				goods.setPrice(new BigDecimal(0));
 			}else{
@@ -338,6 +401,131 @@ public class SellRecordAction extends BaseActionSupport {
 		// return "message";
 		return SUCCESS;
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	//////////////////////////////////////////////
+	
+	
+	public String openAddSellRecordForOneCustomer() {
+
+		
+		goodsTypes = goodsTypeService.findAllGoodsType(sessionCompanyId);
+		Calendar rightNow = Calendar.getInstance();
+		SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd"); // 日期格式化格式
+		String date = format.format(rightNow.getTime()); // 取得当前时间，并格式化成相应格式
+
+		UserSession userSession = this.getSession();
+		String orderID = sellRecordService.getSellRecordorderID(date, userSession.getCompanyId());
+		int number = 1;
+		if (orderID != null && orderID.length() == 13) {
+			number = Integer.parseInt(orderID.substring(8));
+			number = number + 1;
+		}
+//		customerInfos = customerInfoService.findAllCustomerInfoByCompanyId(sessionCompanyId);//本公司的所有客户
+		customerInfos = customerInfoService.findAllCustomerInfoBySalesmanId(sessionUserId); //查本公司业务员所管辖的客户
+		sellRecord = new SellRecord();
+		sellRecord.setCustomerId(customerId);
+		sellRecord.setCompanyId(userSession.getCompanyId());
+		// String.format("%05d", number) 将流水号格式化为 5位长度返回
+		String serialNo = date + String.format("%05d", number);
+		sellRecord.setOrderID(serialNo);
+		sellRecord.setDeptId(userSession.getDeptId());
+		return SUCCESS;
+	}
+
+	public String openModifySellRecordForOneCustomer() {
+//		customerInfos = customerInfoService.findAllCustomerInfoByCompanyId(sessionCompanyId);//本公司的所有客户
+		customerInfos = customerInfoService.findAllCustomerInfoBySalesmanId(sessionUserId); //查本公司业务员所管辖的客户
+		sellRecord = sellRecordService.getSellRecordById(sellRecord.getId());
+		goodsTypes = goodsTypeService.findAllGoodsType(sessionCompanyId);
+		return SUCCESS;
+	}
+
+	public String addSellRecordForForOneCustomer() {
+//		customerInfos = customerInfoService.findAllCustomerInfoByCompanyId(sessionCompanyId);//本公司的所有客户
+		customerInfos = customerInfoService.findAllCustomerInfoBySalesmanId(sessionUserId); //查本公司业务员所管辖的客户
+		goodsTypes = goodsTypeService.findAllGoodsType(sessionCompanyId);
+		// 查找客户信息
+		customer = customerInfoService.get(sellRecord.getCustomerId());
+		sellRecord.setCustomer(customer);
+		sellRecord.setCustomerId(customer.getId());// 设置客户Id
+		sellRecord.setCustomerName(customer.getCustomerName());
+		UserSession userSession = this.getSession();
+		sellRecord.setSalesmanId(userSession.getUserId());// 设置销售员Id
+		sellRecord.setSalesmanName(userSession.getUserCName());
+		Set<GoodsInfo> goodsDetials = new HashSet<GoodsInfo>();
+		BigDecimal thisPrice = new BigDecimal(0);
+		String productId="";
+		for (String str : detials) {
+			String[] array = str.split("☆");
+			System.out.println(array[0]);
+			productId = array[0];
+			GoodsInfo goods = new GoodsInfo();
+			goods.setCompanyId(sessionCompanyId);
+			goods.setGoodsProductId(array[0]);
+			goods.setGoodsName(array[1]);
+			goods.setStandard(array[2]);
+			goods.setFactory(array[3]);
+			if(array[4].equals("")){
+				goods.setPrice(new BigDecimal(0));
+			}else{
+				goods.setPrice(new BigDecimal(array[4]));
+			}
+			if(array[5].equals("")){
+				goods.setNumber(0);
+			}else{
+				goods.setNumber(Integer.parseInt(array[5]));
+			}
+			
+			if(array[6].equals("")){
+				goods.setAllPrice(new BigDecimal(0));
+			}else{
+				goods.setAllPrice(new BigDecimal(array[6]));
+			}
+			
+			goods.setMemo(array[7].trim());
+			goodsDetials.add(goods);
+			thisPrice = thisPrice.add(goods.getAllPrice());
+		}
+		sellRecord.setGoodsDetials(goodsDetials);
+
+		try {
+			// 保存或更新销售记录
+			if (sellRecord.getId().equals("")) {
+				sellRecord.setId(null);
+			}
+			sellRecordService.saveOrUpdate(sellRecord);
+			serviceData(sellRecord.getCustomerId(), sellRecord.getCustomerName(), sellRecord.getBargainTime(), sellRecord.getId(), sellRecord.getRealCollection().floatValue());
+			message = "保存成功！";
+		} catch (Exception e) {
+			message = "保存失败！";
+			e.printStackTrace();
+		}
+		sellRecord = sellRecordService.getSellRecordById(sellRecord.getId());
+		// return "message";
+		return SUCCESS;
+	}
+	////////////////////////////////
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 	public String modifySellRecord() {
 		return SUCCESS;
@@ -349,7 +537,8 @@ public class SellRecordAction extends BaseActionSupport {
 	}
 
 	public String openAddSellRecordDetial() {
-		dataDictionarys =  dataDictionaryService.findDataDictionaryByType(sessionCompanyId, 8);
+		//dataDictionarys =  dataDictionaryService.findDataDictionaryByType(sessionCompanyId, 8);
+		goodsInfoBaseList = goodsInfoBaseService.findGoodsInfoBaseByGoodsTypeId(goodsTypeId);
 		return SUCCESS;
 	}
 
@@ -616,6 +805,11 @@ public class SellRecordAction extends BaseActionSupport {
 		// 将流水号格式化为 "00001" 5位长度返回
 		return String.format("%05d", serialNo);
 	}
+	
+	public String getGoodsInfoForAjax(){
+		goodsInfoBase = goodsInfoBaseService.get(goodsInfoBaseId);
+		return this.SUCCESS;
+	}
 
 	public List<Deptment> getDeptList() {
 		return deptList;
@@ -663,5 +857,41 @@ public class SellRecordAction extends BaseActionSupport {
 	}
 	public void setDataDictionarys(List<DataDictionary> dataDictionarys) {
 		this.dataDictionarys = dataDictionarys;
+	}
+	public GoodsType getGoodsType() {
+		return goodsType;
+	}
+	public void setGoodsType(GoodsType goodsType) {
+		this.goodsType = goodsType;
+	}
+	public List<GoodsType> getGoodsTypes() {
+		return goodsTypes;
+	}
+	public void setGoodsTypes(List<GoodsType> goodsTypes) {
+		this.goodsTypes = goodsTypes;
+	}
+	public List<GoodsInfoBase> getGoodsInfoBaseList() {
+		return goodsInfoBaseList;
+	}
+	public void setGoodsInfoBaseList(List<GoodsInfoBase> goodsInfoBaseList) {
+		this.goodsInfoBaseList = goodsInfoBaseList;
+	}
+	public String getGoodsTypeId() {
+		return goodsTypeId;
+	}
+	public void setGoodsTypeId(String goodsTypeId) {
+		this.goodsTypeId = goodsTypeId;
+	}
+	public GoodsInfoBase getGoodsInfoBase() {
+		return goodsInfoBase;
+	}
+	public void setGoodsInfoBase(GoodsInfoBase goodsInfoBase) {
+		this.goodsInfoBase = goodsInfoBase;
+	}
+	public String getGoodsInfoBaseId() {
+		return goodsInfoBaseId;
+	}
+	public void setGoodsInfoBaseId(String goodsInfoBaseId) {
+		this.goodsInfoBaseId = goodsInfoBaseId;
 	}
 }
