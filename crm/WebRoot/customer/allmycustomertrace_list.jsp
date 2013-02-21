@@ -156,8 +156,11 @@
 		<td align="center">查询结束日期：</td>
 		<td><s:textfield name="endDate" id="endDate" style="width: 80px" readOnly="true"></s:textfield></td>
 		<td align="center">类型：</td>
-		<td style="width:120px"><s:select list="listTraceOption" listKey="id" listValue="name" value="traceOption" 
-			id="traceOption" name="traceOption" cssStyle="width:120px" headerKey="" headerValue="--请选择--"></s:select></td>
+		<td ><s:select list="listTraceOption" listKey="id" listValue="name" value="traceOption" 
+			id="traceOption" name="traceOption" cssStyle="width:80px" headerKey="" headerValue="--请选择--"></s:select></td>
+		<td align="center">状态：</td>
+		<td ><s:select list="listTraceFlag" listKey="id" listValue="name" value="traceFlag" 
+			id="traceFlag" name="traceFlag" cssStyle="width:80px" headerKey="" headerValue="--请选择--"></s:select></td>
 		<td style="width: 80px"><input type="button" style="width: 80px;" class="btn_4" id="searchBtn" value="查询" /></td>
 	</tr>
 </table></td></tr>
