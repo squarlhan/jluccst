@@ -37,10 +37,7 @@
 			<result name="success">/sellrecord/sellrecordinfoforseller.jsp</result>
 			<result name="input">/sellrecord/sellrecordinfoforseller.jsp</result>
 		</action>
-		<action name="modifySellRecordAction" class="sellRecordAction" method="modifySellRecordForSeller">
-			<result name="success">/sellrecord/sellrecordinfoforseller.jsp</result>
-			<result name="input">/sellrecord/sellrecordinfoforseller.jsp</result>
-		</action>
+
 		<action name="deleteSellRecordAction" class="sellRecordAction" method="deleteSellRecord"/>
 		
 		<action name="openAddSellRecordDetialAction" class="sellRecordAction" method="openAddSellRecordDetial">
@@ -53,10 +50,37 @@
 		<action name="showGroupTreeForSellRecordAction" class="sellRecordAction"  method="showGroupTreeForSellRecord">
 			<result name="group-tree-for-sell-record">/sellrecord/group-tree-for-sell-record.jsp</result>
 		</action>
+
+		<action name="openSellRecordListForOneCustomerAction" class="sellRecordAction" method="openSellRecordListForOneCustomer">
+			<result name="success">/sellrecord/sellrecordlistforonecustomer.jsp</result>
+			<result name="input">/sellrecord/sellrecordlistforonecustomer.jsp</result>
+		</action>
+		
+		
+		<action name="openAddSellRecordForOneCustomerAction" class="sellRecordAction" method="openAddSellRecordForOneCustomer">
+			<result name="success">/sellrecord/sellrecordinfoforonecustomer.jsp</result>
+			<result name="input">/sellrecord/sellrecordinfoforonecustomer.jsp</result>
+		</action>
+		<action name="openModifySellRecordForOneCustomerAction" class="sellRecordAction" method="openModifySellRecordForOneCustomer">
+			<result name="success">/sellrecord/sellrecordinfoforonecustomer.jsp</result>
+			<result name="input">/sellrecord/sellrecordinfoforonecustomer.jsp</result>
+		</action>
+		<action name="addSellRecordForForOneCustomerAction" class="sellRecordAction" method="addSellRecordForForOneCustomer">
+			<result name="success">/sellrecord/sellrecordinfoforonecustomer.jsp</result>
+			<result name="input">/sellrecord/sellrecordinfoforonecustomer.jsp</result>
+		</action>
+		
+	</package>
+	<package name="sellRecordAjax" extends="json-default" namespace="/">
+		<action name="getGoodsInfoForAjaxAction" class="sellRecordAction" method="getGoodsInfoForAjax">
+            <result type="json" >goodsInfoBase</result>
+        </action>
 	</package>
 	<!-- package name="sellRecordAjax" extends="json-default" namespace="/">
 		<action name="addSellRecordAction" class="sellRecordAction" method="addSellRecord">
             <result type="json" name="message">message</result>
         </action>
 	</package> -->
+	
+	
 </struts>
