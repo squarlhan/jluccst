@@ -272,35 +272,35 @@
 		</fieldset>
    		<table id="recordsList" width="120%"  border="0" cellpadding="5" cellspacing="1" bgcolor="#d5e4fd">
 			<tr>
-				<td align="center" width="50px" background="<%=basePath%>/images/headerbg.jpg">
- 							<s:checkbox theme="simple" id="cbk_all" name="all"></s:checkbox>
- 						</td>
-            			<td align="center" background="<%=basePath%>/images/headerbg.jpg"><strong>销售单号</strong></td>
-            			<td align="center" background="<%=basePath%>/images/headerbg.jpg"><strong>客户名称</strong></td>
-            			<td align="center" background="<%=basePath%>/images/headerbg.jpg"><strong>业务员</strong></td>
-            			<td align="center" background="<%=basePath%>/images/headerbg.jpg"><strong>成交日期</strong></td>
-            			<td align="center" background="<%=basePath%>/images/headerbg.jpg"><strong>产品种类</strong></td>
-            			<td align="center" background="<%=basePath%>/images/headerbg.jpg"><strong>交易总额（元）</strong></td>
-            			<td align="center" background="<%=basePath%>/images/headerbg.jpg"><strong>实 收（元）</strong></td>
-            			<td align="center" background="<%=basePath%>/images/headerbg.jpg"><strong>欠 款（元）</strong></td>
-            			<td align="center" background="<%=basePath%>/images/headerbg.jpg"><strong>交回款情况</strong></td>
-            			<td align="center" background="<%=basePath%>/images/headerbg.jpg"><strong>操作</strong></td>
+            			<td align="center" background="<%=basePath%>/images/headerbg.jpg" nowrap="nowrap"><strong>销售单号</strong></td>
+            			<td align="center" background="<%=basePath%>/images/headerbg.jpg" nowrap="nowrap"><strong>客户名称</strong></td>
+            			<td align="center" background="<%=basePath%>/images/headerbg.jpg" nowrap="nowrap"><strong>业务员</strong></td>
+            			<td align="center" background="<%=basePath%>/images/headerbg.jpg" nowrap="nowrap"><strong>成交日期</strong></td>
+            			<td align="center" background="<%=basePath%>/images/headerbg.jpg" nowrap="nowrap"><strong>产品种类</strong></td>
+            			<td align="center" background="<%=basePath%>/images/headerbg.jpg" nowrap="nowrap"><strong>交易总额（元）</strong></td>
+            			<td align="center" background="<%=basePath%>/images/headerbg.jpg" nowrap="nowrap"><strong>实 收（元）</strong></td>
+            			<td align="center" background="<%=basePath%>/images/headerbg.jpg" nowrap="nowrap"><strong>欠 款（元）</strong></td>
+            			<td align="center" background="<%=basePath%>/images/headerbg.jpg" nowrap="nowrap"><strong>交回款情况</strong></td>
+            			<td align="center" background="<%=basePath%>/images/headerbg.jpg" nowrap="nowrap"><strong>操作</strong></td>
 			</tr>
 			 <s:iterator value="pagination.data" status="obj">
 	        	<tr>
-	        		<td height="26" align="center" bgcolor="#FFFFFF" >  
-						<s:checkbox id="%{#obj.id}" name="ids" fieldValue="%{id}" value="false" theme="simple"/>
-					</td>
            			<td height="26" align="center" bgcolor="#FFFFFF"><s:property value="orderID"/></td>
            			<td height="26" align="center" bgcolor="#FFFFFF"><s:property value="customerName"/></td>
             		<td height="26" align="center" bgcolor="#FFFFFF"><s:property value="salesmanName"/></td>
             		<td height="26" align="center" bgcolor="#FFFFFF"><s:property value="bargainTime"/></td>
-            		<td height="26" align="center" bgcolor="#FFFFFF"><s:property value="goodsType"/></td>
+            		<td height="26" align="center" bgcolor="#FFFFFF">
+            			<s:iterator value="goodsTypes" status="temp">
+	            			<s:if test="id==goodsType">
+	            				<s:property value="name"/>
+	            			</s:if>
+            			</s:iterator>
+            		</td>
             		<td height="26" align="center" bgcolor="#FFFFFF"><s:property value="receivable"/></td>
             		<td height="26" align="center" bgcolor="#FFFFFF"><s:property value="realCollection"/></td>
             		<td height="26" align="center" bgcolor="#FFFFFF"><s:property value="debt"/></td>
             		<td height="26" align="center" bgcolor="#FFFFFF"><s:property value="(realCollection/receivable)*100"/>%</td>
-            		<td height="26" align="center" bgcolor="#FFFFFF">
+            		<td height="26" align="center" bgcolor="#FFFFFF" nowrap="nowrap">
 							<s:url id="edit_url" action="openViewSellRecordAction">   
 								<s:param name="sellRecord.id" value="id"></s:param>   
 							</s:url>

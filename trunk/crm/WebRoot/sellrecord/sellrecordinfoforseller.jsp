@@ -74,43 +74,51 @@
 				$('#txt_bargainTime').datetimepicker({showTimepicker: false});
 		  		$("#btn_add").click(function(){
 		  			$.cookie('detial', '', { expires: -1 }); //先清理一下cookie，防止原来没有清理的数据还存在
-					parent.parent.parent.tipsWindown("商品明细","iframe:openAddSellRecordDetialAction.action","780","300","true","","true","no");
+		  			var goodsTypeId = $("#txt_goodsType").val();
+		  			if(goodsTypeId==""){
+		  				alert('请先选择产品种类！');
+		  				$("#txt_goodsType").focus();
+		  				return false;
+		  			}
+					parent.parent.parent.tipsWindown("商品明细","iframe:openAddSellRecordDetialAction.action?goodsTypeId="+goodsTypeId,"780","300","true","","true","no");
 					parent.parent.parent.$("#windown-close").bind('click',function(){
-						var detials = $.cookie('detial'); // 读取 cookie中的被选择的人员Id
+						var detials = $.cookie('detial'); // 读取 cookie中的被选择的产品
 			  			$.cookie('detial', '', { expires: -1 }); //读取完毕后删除cookie
-	  					if(detials!=null){
+	  					if(detials!=null && detials!=undefined){
 	  						var info = detials.split("☆");//☆
-				  			var row="";
-							row=row+"<tr>";
-				  			row=row+"<td align='center' bgcolor='#FFFFFF' >";  
-				  			row=row+"<input type='checkbox' name='ids'/>";
-				  			row=row+"<input type='hidden' id='"+1+"' name='detials' value='"+detials+"'/>";
-				  			row=row+"</td>";
-				  			row=row+"<td align='center' bgcolor='#FFFFFF'>"+info[1]+"</td>";
-				  			row=row+"<td align='center' bgcolor='#FFFFFF'>"+info[2]+"</td>";
-				  			//row=row+"<td align='center' bgcolor='#FFFFFF'>"+info[3]+"</td>";
-				  			row=row+"<td align='center' bgcolor='#FFFFFF'>"+info[4]+"</td>";
-				  			row=row+"<td align='center' bgcolor='#FFFFFF'>"+info[5]+"</td>";
-				  			row=row+"<td align='center' bgcolor='#FFFFFF'>"+info[6]+"</td>";
-				  			row=row+"<td align='center' bgcolor='#FFFFFF'>"+info[7]+"</td>";
-				  			row=row+"<td align='center' bgcolor='#FFFFFF'><a name='del_one' href='javascript:void(0);' onclick='$.fn.deletetemp($(this));'>删除</a></td>";
-				  			row=row+"</tr>";
-				  			$("#no_data").hide();
-				  		    $("#goodsList tr:eq(2)").append(row);
-				  		    $("#cbk_all").attr("checked", false);
-			  			    $("#cbk_all").attr("disabled",false);
-			  			    var receivable=$("#txt_receivable").val() * 1;
-			  			    var temp =info[4]*info[5];
-			  				receivable=temp+receivable;
-			  				 $("#txt_receivable").val(receivable);
-			  				 
-			  				 
-			  				var realCollection=$("#txt_realCollection").val() * 1;
-			  			    var temp2 =info[6]*1;
-			  			  	realCollection=temp2+realCollection;
-			  				$("#txt_realCollection").val(realCollection);
-			  				$("#txt_debt").val(receivable-realCollection);
-			  			  	$("#txt_receivable").focus();
+	  						if(info[1]!=undefined && info[2]!=undefined && info[3]!=undefined&& info[4]!=undefined&& info[5]!=undefined&& info[6]!=undefined){
+					  			var row="";
+								row=row+"<tr>";
+					  			row=row+"<td align='center' bgcolor='#FFFFFF' >";  
+					  			row=row+"<input type='checkbox' name='ids'/>";
+					  			row=row+"<input type='hidden' id='"+1+"' name='detials' value='"+detials+"'/>";
+					  			row=row+"</td>";
+					  			row=row+"<td align='center' bgcolor='#FFFFFF'>"+info[1]+"</td>";
+					  			row=row+"<td align='center' bgcolor='#FFFFFF'>"+info[2]+"</td>";
+					  			row=row+"<td align='center' bgcolor='#FFFFFF'>"+info[3]+"</td>";
+					  			row=row+"<td align='center' bgcolor='#FFFFFF'>"+info[4]+"</td>";
+					  			row=row+"<td align='center' bgcolor='#FFFFFF'>"+info[5]+"</td>";
+					  			row=row+"<td align='center' bgcolor='#FFFFFF'>"+info[6]+"</td>";
+					  			row=row+"<td align='center' bgcolor='#FFFFFF'>"+info[7]+"</td>";
+					  			row=row+"<td align='center' bgcolor='#FFFFFF'><a name='del_one' href='javascript:void(0);' onclick='$.fn.deletetemp($(this));'>删除</a></td>";
+					  			row=row+"</tr>";
+					  			$("#no_data").hide();
+					  		    $("#goodsList tr:eq(2)").append(row);
+					  		    $("#cbk_all").attr("checked", false);
+				  			    $("#cbk_all").attr("disabled",false);
+				  			    var receivable=$("#txt_receivable").val() * 1;
+				  			    var temp =info[4]*info[5];
+				  				receivable=temp+receivable;
+				  				 $("#txt_receivable").val(receivable);
+				  				 
+				  				 
+				  				var realCollection=$("#txt_realCollection").val() * 1;
+				  			    var temp2 =info[6]*1;
+				  			  	realCollection=temp2+realCollection;
+				  				$("#txt_realCollection").val(realCollection);
+				  				$("#txt_debt").val(receivable-realCollection);
+				  			  	$("#txt_receivable").focus();
+	  						}
 	  					}
 					});
 		  		});
@@ -274,7 +282,7 @@
 									<strong>产品种类：</strong>
 								</td>
 								<td height="26" align="left" bgcolor="#FFFFFF" nowrap="nowrap">
-									<s:textfield id="txt_goodsType" name="sellRecord.goodsType" cssStyle="width:100px" ></s:textfield>
+									<s:select id="txt_goodsType"  name="sellRecord.goodsType"  list="goodsTypes" listKey="id"  listValue="name" cssStyle="width:100px" headerKey="" headerValue="--- 请选择 ---"></s:select><font color="red">*</font>
 								</td>
 								<td height="26" align="right" bgcolor="#FFFFFF" nowrap="nowrap">
 									<strong>销售单号：</strong>
@@ -309,7 +317,7 @@
 		   						</td>
 		              			<td align="center" background="<%=basePath%>/images/headerbg.jpg"><strong>品 名</strong></td>
 		              			<td align="center" background="<%=basePath%>/images/headerbg.jpg"><strong>规 格</strong></td>
-<%--		              			<td align="center" background="<%=basePath%>/images/headerbg.jpg"><strong>克 重</strong></td>--%>
+								<td align="center" background="<%=basePath%>/images/headerbg.jpg"><strong>厂商</strong></td>
 		              			<td align="center" background="<%=basePath%>/images/headerbg.jpg"><strong>单 价</strong></td>
 		              			<td align="center" background="<%=basePath%>/images/headerbg.jpg"><strong>数 量</strong></td>
 		              			<td align="center" background="<%=basePath%>/images/headerbg.jpg"><strong>预 付</strong></td>
@@ -324,7 +332,7 @@
 									</td>
 						            <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="goodsName"/></td>
 						            <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="standard"/></td>
-<%--						            <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="weight"/></td>--%>
+									<td height="26" align="center" bgcolor="#FFFFFF"><s:property value="factory"/></td>
 						            <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="price"/></td>
 						            <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="number"/></td>
 						            <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="allPrice"/></td>
