@@ -72,6 +72,9 @@ public class CustomerTraceInfo implements Serializable
 	}
 	@Column(name = "TRACE_TIME")
 	private Calendar traceTime = Calendar.getInstance();
+	@Column(name = "DELETEFLAG")
+	private int deleteFlag = 0;
+	
 	@Column(name = "ACTUALTRACE_TIME")
 	private Calendar actualTraceTime = Calendar.getInstance();
 	@Transient
@@ -216,5 +219,11 @@ public class CustomerTraceInfo implements Serializable
 	}
 	public void setProgress(String progress) {
 		this.progress = progress;
+	}
+	public int getDeleteFlag() {
+		return deleteFlag;
+	}
+	public void setDeleteFlag(int deleteFlag) {
+		this.deleteFlag = deleteFlag;
 	}
 }

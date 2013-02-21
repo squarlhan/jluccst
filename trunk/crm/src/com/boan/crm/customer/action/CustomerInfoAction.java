@@ -26,9 +26,13 @@ import org.springframework.stereotype.Controller;
 import com.boan.crm.customer.model.ContractPersonInfo;
 import com.boan.crm.customer.model.CustomerInfo;
 import com.boan.crm.customer.model.CustomerStaticInfo;
+import com.boan.crm.customer.model.CustomerTraceInfo;
+import com.boan.crm.customer.model.CustomerVisitInfo;
 import com.boan.crm.customer.service.IContractPersonService;
 import com.boan.crm.customer.service.ICustomerInfoService;
 import com.boan.crm.customer.service.ICustomerStaticInfoService;
+import com.boan.crm.customer.service.ICustomerTraceInfoService;
+import com.boan.crm.customer.service.ICustomerVisitInfoService;
 import com.boan.crm.datadictionary.model.AreaInfo;
 import com.boan.crm.datadictionary.model.CityInfo;
 import com.boan.crm.datadictionary.model.DataDictionary;
@@ -93,7 +97,12 @@ public class CustomerInfoAction extends BaseActionSupport{
 	@Autowired
 	@Qualifier("customerStaticInfoService")
 	private ICustomerStaticInfoService customerStaticInfoService = null;
-	
+	@Autowired
+	@Qualifier("customerTraceInfoService")
+	private ICustomerTraceInfoService customerTraceInfoService = null;
+	@Autowired
+	@Qualifier("customerVisitInfoService")
+	private ICustomerVisitInfoService customerVisitInfoService = null;
 	
 	public String getCompanyId() {
 		return companyId;
@@ -786,7 +795,38 @@ public class CustomerInfoAction extends BaseActionSupport{
 	public String deleteCustomer()
 	{
 		customerInfoService.deleteCustomerInfo(ids);
-		contractpersonInfoService.deleteContractPersonInfo(ids);
+		contractpersonInfoService.deleteContractPersonInfoByCustomerIds(ids);
+		for(int i=0;i<ids.length;i++)
+		{
+			/*List<CustomerTraceInfo> listTrace = customerTraceInfoService.findAllCustomerTraceInfoByCustomerId(ids[i]);
+			if(listTrace != null && listTrace.size() > 0)
+			{
+				for(int j=0;j<listTrace.size() ;j++)
+				{
+					CustomerTraceInfo obj = listTrace.get(j);
+					if(obj != null)
+					{
+						obj.setDeleteFlag(1);
+						customerTraceInfoService.save(obj);
+					}
+				}
+			}*/
+			customerTraceInfoService.deleteAllCustomerTraceInfoByCustomerId(ids[i]);
+			customerVisitInfoService.deleteAllCustomerVisitInfoByCustomerId(ids[i]);
+			/*List<CustomerVisitInfo> listVisit = customerVisitInfoService.findAllCustomerVisitInfoByCustomerId(ids[i]);
+			if(listVisit != null && listVisit.size() > 0)
+			{
+				for(int j=0;j<listVisit.size() ;j++)
+				{
+					CustomerVisitInfo obj = listVisit.get(j);
+					if(obj != null)
+					{
+						obj.setDeleteFlag(1);
+						customerVisitInfoService.save(obj);
+					}
+				}
+			}*/
+		}
 		return SUCCESS;
 	}
 	

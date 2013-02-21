@@ -63,6 +63,14 @@ public class CustomerVisitInfo implements Serializable
 	private String visitOption = "";
 	@Column(name = "VISITFLAG")
 	private String visitFlag = "";
+	@Column(name = "DELETEFLAG")
+	private int deleteFlag = 0;
+	public int getDeleteFlag() {
+		return deleteFlag;
+	}
+	public void setDeleteFlag(int deleteFlag) {
+		this.deleteFlag = deleteFlag;
+	}
 	public String getVisitFlag() {
 		return visitFlag;
 	}

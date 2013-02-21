@@ -62,19 +62,25 @@ public class CustomerInfoServiceImpl implements ICustomerInfoService{
 	
 	@Override
 	public void deleteCustomerInfo(String... ids) {
-		customerInfoDao.delete(ids);
+		//customerInfoDao.delete(ids);
+		for(int i=0;i<ids.length ;i++)
+		{
+			Map<String,String> values = new HashMap<String,String>();
+			values.put("customerId", ids[i]);
+			customerInfoDao.executeHql("update CustomerInfo set deleteFlag = 1 where id = :customerId",values);
+		}
 	}
 
 	@Override
 	public List<CustomerInfo> findAllCustomerInfo() {
-		return customerInfoDao.find("from CustomerInfo order by registerTime asc", new Object[0]);
+		return customerInfoDao.find("from CustomerInfo where deleteFlag = 0 order by registerTime asc", new Object[0]);
 	}
 	@Override
 	public int findAllCustomerInfoCount(String companyId)
 	{
 		Map<String,String> values = new HashMap<String,String>();
 		values.put("companyId", companyId);
-		String hql = "select Count(id) from CustomerInfo where companyId = :companyId";
+		String hql = "select Count(id) from CustomerInfo where companyId = :companyId and deleteFlag = 0 ";
 		return customerInfoDao.findCountForPage(hql, values);
 	}
 	/**
@@ -96,13 +102,13 @@ public class CustomerInfoServiceImpl implements ICustomerInfoService{
 		Map<String,String> values = new HashMap<String,String>();
 		values.put("salesmanId", salesmanId);
 		
-		return customerInfoDao.find("from CustomerInfo where salesmanId = :salesmanId order by registerTime asc",values );
+		return customerInfoDao.find("from CustomerInfo where salesmanId = :salesmanId and deleteFlag = 0  order by registerTime asc",values );
 	}
 	@Override
 	public Pagination<CustomerInfo> findCustomerInfoForPage(
 			Map<String, ?> values, Pagination<CustomerInfo> pagination) {
 		StringBuilder hql = new StringBuilder();
-		hql.append( "from CustomerInfo where 1=1");
+		hql.append( "from CustomerInfo where 1=1 and deleteFlag = 0 ");
 		if(values.get("companyId") != null)
 		{
 			hql.append(" and companyId = :companyId ");
@@ -131,7 +137,7 @@ public class CustomerInfoServiceImpl implements ICustomerInfoService{
 		hql.append(" order by registerTime asc");
 		List<CustomerInfo> data = customerInfoDao.findForPage(hql.toString(), values, pagination.getStartIndex(), pagination.getPageSize());
 		hql.delete(0, hql.length());
-		hql.append(" select count(*) from CustomerInfo where 1=1 " );
+		hql.append(" select count(*) from CustomerInfo where 1=1 and deleteFlag = 0 " );
 		if(values.get("companyId") != null)
 		{
 			hql.append(" and companyId = :companyId ");

@@ -33,7 +33,11 @@ public interface ICustomerTraceInfoService {
 	 * 根据id删除客户跟进信息
 	 */
 	public void deleteCustomerTraceInfo(String... ids);
-
+	/**
+	 * 根据客户Id删除跟进信息
+	 * @param customerId
+	 */
+	public void deleteAllCustomerTraceInfoByCustomerId(String customerId);
 	/**
 	 * 保存客户跟进信息
 	 */

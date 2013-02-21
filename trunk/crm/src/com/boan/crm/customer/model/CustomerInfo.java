@@ -102,7 +102,14 @@ public class CustomerInfo implements Serializable
 	private BigDecimal payments;
 	@Transient
 	private double developDegree = 0;
-	
+	@Column(name = "DELETE_FLAG")
+	private int deleteFlag = 0;
+	public int getDeleteFlag() {
+		return deleteFlag;
+	}
+	public void setDeleteFlag(int deleteFlag) {
+		this.deleteFlag = deleteFlag;
+	}
 	public BigDecimal getTotalConsumption() {
 		return totalConsumption;
 	}
