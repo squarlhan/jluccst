@@ -14,10 +14,11 @@
     		if(($("#customer").attr("checked")==true) && ($("#seller").attr("checked")==true)){
     			type="all";
     		}else{
-	    		if($("#customer").attr("checked")==true){
+    			if($("#all").attr("checked")==true){
+	    			type="all";
+				}else if($("#customer").attr("checked")==true){
 	    			type="customer";
-				}
-	    		if($("#seller").attr("checked")==true){
+				}else	if($("#seller").attr("checked")==true){
 	    			type="seller";
 				}
     		}
@@ -36,6 +37,7 @@
     <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#d5e4fd">
 		<tr>
 			<td height="100" align="center" bgcolor="#FFFFFF" nowrap="nowrap">
+				<input type="checkbox" id="all">全部
 				<input type="checkbox" id="customer">客户
 				<input type="checkbox" id="seller">销售人员
 			</td>
