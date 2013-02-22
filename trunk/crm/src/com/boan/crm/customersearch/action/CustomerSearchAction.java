@@ -279,6 +279,7 @@ public class CustomerSearchAction  extends BaseActionSupport{
 //			customerInfo.setCompanyFullName(sessionCompanyName);
 			customerInfo.setSalesman(sessionUserCName);
 			customerInfo.setSalesmanId(sessionUserId);
+			customerInfo.setDeleteFlag(0);
 			customerService.save(customerInfo);//保存到客户表
 			
 			NoSearchCustomers obj = new NoSearchCustomers();
