@@ -16,6 +16,8 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import com.boan.crm.utils.calendar.CalendarUtils;
+
 /**
  * 服务日志实体类
  * 
@@ -491,5 +493,23 @@ public class ServiceLog implements Serializable {
 	 */
 	public void setDegreeSatisfaction(int degreeSatisfaction) {
 		this.degreeSatisfaction = degreeSatisfaction;
+	}
+	
+	/**
+	 * 获得时间字符串
+	 * 
+	 * @return
+	 */
+	public String getPetitionTimeString() {
+		return CalendarUtils.toLongString(petitionTime);
+	}
+	
+	/**
+	 * 设置时间字符串
+	 * 
+	 * @return
+	 */
+	public void setPetitionTimeString(String petitionTimeString) {
+		this.petitionTime = CalendarUtils.toLongCalendarNoSecond( petitionTimeString );
 	}
 }
