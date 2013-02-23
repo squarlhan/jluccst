@@ -166,7 +166,7 @@
 										<s:property value="customerService" />&nbsp;
 									</td>
 									<td align="center" bgcolor="#FFFFFF">
-										<s:property value="petitionTime" />&nbsp;
+										<s:property value="petitionTimeString" />&nbsp;
 									</td>
 									<td align="center" bgcolor="#FFFFFF">
 										<s:property value="arriveTime" />&nbsp;

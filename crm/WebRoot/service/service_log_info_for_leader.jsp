@@ -98,7 +98,7 @@
                                                     <td align="right" nowrap="nowrap">申 请 人</td>
                                                     <td align="left"><s:textfield type="text" style="width:150px" name="serviceLog.petitioner" id="petitioner"></s:textfield></td>
                                                     <td align="right" nowrap="nowrap">申请时间</td>
-                                                    <td align="left"><s:textfield type="text" style="width:150px" name="serviceLog.petitionTime" id="petitionTime" onClick="WdatePicker()"></s:textfield></td>
+                                                    <td align="left"><s:textfield type="text" style="width:150px" name="serviceLog.petitionTimeString" id="petitionTime" onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"></s:textfield></td>
                                                     <td align="right" nowrap="nowrap">电　　话</td>
                                                     <td align="left"><s:textfield type="text" style="width:150px" name="serviceLog.telephone" id="telephone"></s:textfield></td>
                                                   </tr>
