@@ -77,7 +77,7 @@
 										d.add(106,0,'回访方式','datadictionarylist.action?typeFlag=5','','groupmain');
 										d.add(107,0,'跟进方式','datadictionarylist.action?typeFlag=6','','groupmain');
 										d.add(108,0,'业务进展','datadictionarylist.action?typeFlag=7','','groupmain');
-										d.add(109,0,'经营产品','datadictionarylist.action?typeFlag=8','','groupmain');
+										//d.add(109,0,'经营产品','datadictionarylist.action?typeFlag=8','','groupmain');
 										d.add(110,0,'会员类别','datadictionarylist.action?typeFlag=9','','groupmain');
 										document.write(d);
 										d.openAll();
