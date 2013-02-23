@@ -39,9 +39,9 @@
 <script type="text/javascript">
 <!--
 	$(document).ready(function() {
-		var ifrHeight = $("#leftFrame", parent.document).height();
-		var ifrHeightTemp = ifrHeight - 50;
-		$("#menuArea").height(ifrHeightTemp);
+		//var ifrHeight = $("#leftFrame", parent.document).height();
+		//var ifrHeightTemp = ifrHeight - 50;
+		//$("#menuArea").height(ifrHeightTemp);
 
 		$(document).find("strong[name='menus']").each(function(index,domEle){
 			if(index==0){
@@ -67,13 +67,13 @@
 </script>
 </head>
 <body>
-	<table width="100%" border="0" cellspacing="5" cellpadding="0">
+	<table width="100%" border="0" cellspacing="5" cellpadding="0" style="height:100%;">
 		<tr>
 			<td style="background-image: url(images/jzywcd.jpg); height: 35px;"></td>
 		</tr>
 		<tr>
-			<td align="center">
-				<div id="menuArea" style="overflow: auto; display: block;">
+			<td align="center" style="vertical-align: top;">
+				<div id="menuArea" style="overflow: auto; display: block; height: 100%">
 					<table width="100%" border="0" cellspacing="0" cellpadding="0">
 					<s:iterator value="menuList">
 						<tr>
