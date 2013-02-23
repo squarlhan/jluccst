@@ -39,7 +39,10 @@
 <script type="text/javascript">
 <!--
 	$(document).ready(function() {
-		$(window).resize();
+		var ifrHeight = $("#leftFrame", parent.document).height();
+		var ifrHeightTemp = ifrHeight - 50;
+		$("#menuArea").height(ifrHeightTemp);
+
 		$(document).find("strong[name='menus']").each(function(index,domEle){
 			if(index==0){
 				$("tbody[name='submenus']:first").css("display","block");
