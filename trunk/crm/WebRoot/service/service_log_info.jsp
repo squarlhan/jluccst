@@ -135,10 +135,15 @@
 		//如果有id就说明是修改action
 		$("#saveBtn").click(function() {
 			if($("#customerName").val()==""){
-				alert("请输入客户名称！");
+				alert("请输入并选择客户名称！");
 				$("#customerName").focus();
 				return false;
 			}
+			if($("#hdCompanyId").val()==""){
+				alert("请输入并选择正确的客户名称！");
+				$("#companyId").focus();
+				return false;
+			}//companyId
 			if($("#receipt").attr("checked")){
 				$("#hdReceipt").val(1);
 				$("#hdDegreeSatisfaction").val($("#degreeSatisfaction").val());
@@ -238,7 +243,7 @@
                                                     <td align="right" nowrap="nowrap">申 请 人</td>
                                                     <td align="left"><s:textfield type="text" style="width:150px" name="serviceLog.petitioner" id="petitioner"></s:textfield></td>
                                                     <td align="right" nowrap="nowrap">申请时间</td>
-                                                    <td align="left"><s:textfield type="text" style="width:150px" name="serviceLog.petitionTime" id="petitionTime" onClick="WdatePicker()"></s:textfield></td>
+                                                    <td align="left"><s:textfield type="text" style="width:150px" name="serviceLog.petitionTimeString" id="petitionTime" onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"></s:textfield></td>
                                                     <td align="right" nowrap="nowrap">电　　话</td>
                                                     <td align="left"><s:textfield type="text" style="width:150px" name="serviceLog.telephone" id="telephone"></s:textfield></td>
                                                   </tr>
