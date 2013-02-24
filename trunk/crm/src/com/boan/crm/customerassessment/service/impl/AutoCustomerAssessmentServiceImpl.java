@@ -84,6 +84,14 @@ public class AutoCustomerAssessmentServiceImpl implements IAutoCustomerAssessmen
 		{
 			hql.append(" and customerId in ( select customerId from ContractPersonInfo where personName like :contractorName) ");
 		}
+		if(values.get("userId") != null)
+		{
+			hql.append(" and customerId in ( select id from CustomerInfo where salesmanId =:userId or otherSalesmanId = :userId)");
+		}
+		if(values.get("deptId") != null)
+		{
+			hql.append(" and customerId in ( select id from CustomerInfo where salesmanId in (select id from User where deptId =:deptId ) ");
+		}
 		hql.append(" group by customerId order by resultValue desc ");
 		List<AutoCustomerAssessment> data = autoCustomerAssessmentDao.findForPage(hql.toString(), values, pagination.getStartIndex(), pagination.getPageSize());
 		
@@ -97,6 +105,14 @@ public class AutoCustomerAssessmentServiceImpl implements IAutoCustomerAssessmen
 		if(values.get("contractorName") != null)
 		{
 			hql.append(" and customerId in ( select customerId from ContractPersonInfo where personName like :contractorName) ");
+		}
+		if(values.get("userId") != null)
+		{
+			hql.append(" and customerId in ( select id from CustomerInfo where salesmanId =:userId or otherSalesmanId = :userId)");
+		}
+		if(values.get("deptId") != null)
+		{
+			hql.append(" and customerId in ( select id from CustomerInfo where salesmanId in (select id from User where deptId =:deptId ) ");
 		}
 		hql.append(" group by customerId");
 		
