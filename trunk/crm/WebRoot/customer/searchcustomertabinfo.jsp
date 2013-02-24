@@ -56,7 +56,7 @@
 		<iframe id="traceDivFrame" scrolling="auto" frameborder="0" style="width:100%; height:100%"
 			src="about:blank" url="searchCustomerTraceList.action?customerId=<s:property value='id'/>"></iframe>
 	</div>
-	<div title="销售记录111"
+	<div title="销售记录"
 		style="padding: 1px; display: none;">
 		<iframe scrolling="auto" frameborder="0" style="width:100%; height:100%"
 			src="about:blank" url="../openSellRecordListForCustomerViewAction.action?customerId=<s:property value='id'/>"></iframe>
