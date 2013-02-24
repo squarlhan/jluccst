@@ -28,7 +28,7 @@ import="com.boan.crm.groupmanage.common.UserSession,com.boan.crm.groupmanage.ser
 	String deptId = us.getDeptId();
 	//判断是否是公司管理员或公司级用户
 	boolean popodomFlag = popedomService.isCompanyAdministrator(us.getUserId(), String.valueOf(us.getUserType()) ) 
-			||popedomService.isHasCompanyPopedom(us.getPopedomKeys());
+			||popedomService.isHasCompanyPopedom(us.getRoleKey());
 	
 	if( popodomFlag ){
 		//经理级人员
