@@ -71,6 +71,11 @@ public class UserSession implements java.io.Serializable
 	private int userType;
 	
 	/**
+	 * 角色关键字
+	 */
+	private String roleKey;
+	
+	/**
 	 * 产品试用标识，如果正式版，则为空，否则为试用版
 	 */
 	private String productSuffix;
@@ -228,6 +233,14 @@ public class UserSession implements java.io.Serializable
 
 	public void setProductType(int productType) {
 		this.productType = productType;
+	}
+
+	public String getRoleKey() {
+		return roleKey;
+	}
+
+	public void setRoleKey(String roleKey) {
+		this.roleKey = roleKey;
 	}
 
 }
