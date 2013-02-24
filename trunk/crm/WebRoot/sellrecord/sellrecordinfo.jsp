@@ -338,7 +338,7 @@
 									<strong>实 收：</strong>
 								</td>
 								<td height="26" align="left" bgcolor="#FFFFFF"  nowrap="nowrap">
-									<s:textfield id="txt_realCollection" name="sellRecord.realCollection" cssStyle="width:240px" ></s:textfield>元<font color="red">*</font>
+									<s:textfield id="txt_realCollection" name="sellRecord.realCollection" cssStyle="width:240px" ></s:textfield>元
 								</td>
 								<td height="26" align="right" bgcolor="#FFFFFF" nowrap="nowrap">
 									<strong>欠 款：</strong>
