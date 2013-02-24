@@ -11,7 +11,9 @@ import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
+import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
@@ -28,7 +30,10 @@ import com.boan.crm.customerassessment.service.IAutoCustomerAssessmentService;
 import com.boan.crm.customerassessment.service.ICustomerAssessmentService;
 import com.boan.crm.datadictionary.model.DataDictionary;
 import com.boan.crm.datadictionary.service.IDataDictionaryService;
+import com.boan.crm.groupmanage.common.RoleFlag;
+import com.boan.crm.groupmanage.common.UserSession;
 import com.boan.crm.groupmanage.model.User;
+import com.boan.crm.groupmanage.service.IPopedomService;
 import com.boan.crm.sellrecord.service.ISellRecordService;
 import com.boan.crm.utils.action.BaseActionSupport;
 import com.boan.crm.utils.calendar.CalendarUtils;
@@ -62,6 +67,10 @@ public class CustomerAssessmentAction extends BaseActionSupport{
 	@Autowired
 	@Qualifier("dataDictionaryService")
 	private IDataDictionaryService dataDictionaryService = null;
+	@Autowired
+	@Qualifier("popedomService")
+	private IPopedomService popedomService = null;
+	
 	
 	private String customerIds = null;
 	private	List<CustomerAssessment> listResult = null;
@@ -423,6 +432,25 @@ public class CustomerAssessmentAction extends BaseActionSupport{
 		}
 		
 		values.put("companyId", sessionCompanyId);
+		
+		HttpSession session = ServletActionContext.getRequest().getSession();
+		UserSession userSession = (UserSession) session.getAttribute("userSession");
+		
+		try
+		{
+			if(popedomService.isHasPopedomByRoleKey( userSession , RoleFlag.YE_WU_YUAN ))
+			{
+				values.put("userId", sessionUserId);
+			}else if(popedomService.isHasPopedomByRoleKey( userSession , RoleFlag.BU_MEN_GUAN_LI_YUAN ))
+			{
+				values.put("deptId", sessionDeptId);
+			}
+		}catch(Exception ex)
+		{
+			ex.printStackTrace();
+			return ERROR;
+		}
+		
 		pagination = autoCustomerAssessmentService.findAutoCustomerAssessmentByCompanyId(values, pagination);
 		
 		return SUCCESS;
