@@ -50,6 +50,7 @@ public interface ICustomerInfoService {
 	/**
 	 * 按分页查询客户
 	 */
-	public Pagination<CustomerInfo> findCustomerInfoForPage(
-			Map<String, ?> values, Pagination<CustomerInfo> pagination);
+	public Pagination<CustomerInfo> findCustomerInfoForPage( Map<String, ?> values, Pagination<CustomerInfo> pagination);
+	
+	public Pagination<CustomerInfo> findCustomerInfoAndSellAmountForPage( Map<String, ?> values, Pagination<CustomerInfo> pagination) ;
 }
