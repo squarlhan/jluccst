@@ -294,6 +294,45 @@ public class SellRecordAction extends BaseActionSupport {
 		pagination = sellRecordService.findSellRecordForPage(params, pagination);
 		return SUCCESS;
 	}
+	
+	public String openSellRecordListForCustomerView() throws Exception {
+		goodsTypes = goodsTypeService.findAllGoodsType(sessionCompanyId);
+		//userList = userService.queryUserList(sessionCompanyId, sessionDeptId, new Pagination<User>()).getData();
+		Map<String, String> params = new HashMap<String, String>();
+		if (customerId != null) {
+			customerId = customerId.split(",")[0];
+			if (customerId != null && !customerId.trim().equals("")) {
+				params.put("customerId", customerId);
+			}
+			if (queryBargainTimeBegin != null && !queryBargainTimeBegin.trim().equals("")) {
+				params.put("queryBargainTimeBegin", queryBargainTimeBegin);
+			}
+			if (queryBargainTimeBegin != null && !queryBargainTimeBegin.trim().equals("")) {
+				params.put("queryBargainTimeEnd", queryBargainTimeEnd);
+			}
+		}
+		pagination = sellRecordService.findSellRecordForPage(params, pagination);
+		return SUCCESS;
+	}
+	public String openSellRecordListForOneCustomerView() throws Exception {
+		goodsTypes = goodsTypeService.findAllGoodsType(sessionCompanyId);
+		//userList = userService.queryUserList(sessionCompanyId, sessionDeptId, new Pagination<User>()).getData();
+		Map<String, String> params = new HashMap<String, String>();
+		if (customerId != null) {
+			customerId = customerId.split(",")[0];
+			if (customerId != null && !customerId.trim().equals("")) {
+				params.put("customerId", customerId);
+			}
+			if (queryBargainTimeBegin != null && !queryBargainTimeBegin.trim().equals("")) {
+				params.put("queryBargainTimeBegin", queryBargainTimeBegin);
+			}
+			if (queryBargainTimeBegin != null && !queryBargainTimeBegin.trim().equals("")) {
+				params.put("queryBargainTimeEnd", queryBargainTimeEnd);
+			}
+		}
+		pagination = sellRecordService.findSellRecordForPage(params, pagination);
+		return SUCCESS;
+	}
 
 	
 	public String openViewSellRecord() {
@@ -443,6 +482,13 @@ public class SellRecordAction extends BaseActionSupport {
 	}
 
 	public String openModifySellRecordForOneCustomer() {
+//		customerInfos = customerInfoService.findAllCustomerInfoByCompanyId(sessionCompanyId);//本公司的所有客户
+		customerInfos = customerInfoService.findAllCustomerInfoBySalesmanId(sessionUserId); //查本公司业务员所管辖的客户
+		sellRecord = sellRecordService.getSellRecordById(sellRecord.getId());
+		goodsTypes = goodsTypeService.findAllGoodsType(sessionCompanyId);
+		return SUCCESS;
+	}
+	public String openModifySellRecordForOneCustomerView() {
 //		customerInfos = customerInfoService.findAllCustomerInfoByCompanyId(sessionCompanyId);//本公司的所有客户
 		customerInfos = customerInfoService.findAllCustomerInfoBySalesmanId(sessionUserId); //查本公司业务员所管辖的客户
 		sellRecord = sellRecordService.getSellRecordById(sellRecord.getId());

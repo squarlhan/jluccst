@@ -70,6 +70,20 @@
 			<result name="input">/sellrecord/sellrecordinfoforonecustomer.jsp</result>
 		</action>
 		
+		
+		<action name="openSellRecordListForCustomerViewAction" class="sellRecordAction" method="openSellRecordListForCustomerView">
+			<result name="success">/sellrecord/sellrecordlistforcustomerview.jsp</result>
+			<result name="input">/sellrecord/sellrecordlistforcustomerview.jsp</result>
+		</action>
+		
+		<action name="openSellRecordListForOneCustomerViewAction" class="sellRecordAction" method="openSellRecordListForOneCustomerView">
+			<result name="success">/sellrecord/sellrecordlistforonecustomerview.jsp</result>
+			<result name="input">/sellrecord/sellrecordlistforonecustomerview.jsp</result>
+		</action>
+		<action name="openModifySellRecordForOneCustomerViewAction" class="sellRecordAction" method="openModifySellRecordForOneCustomerView">
+			<result name="success">/sellrecord/sellrecordinfoforonecustomerview.jsp</result>
+			<result name="input">/sellrecord/sellrecordinfoforonecustomerview.jsp</result>
+		</action>
 	</package>
 	<package name="sellRecordAjax" extends="json-default" namespace="/">
 		<action name="getGoodsInfoForAjaxAction" class="sellRecordAction" method="getGoodsInfoForAjax">
