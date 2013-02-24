@@ -254,4 +254,172 @@ public class CustomerInfoServiceImpl implements ICustomerInfoService{
 	public void save(CustomerInfo customerInfo) {
 		customerInfoDao.saveOrUpdate(customerInfo);
 	}
+	
+	@Override
+	public Pagination<CustomerInfo> findCustomerInfoAndSellAmountForPage( Map<String, ?> values, Pagination<CustomerInfo> pagination) {
+		StringBuilder hql = new StringBuilder();
+		hql.append( "from CustomerInfo where 1=1 and deleteFlag = 0 ");
+		if(values.get("companyId") != null)
+		{
+			hql.append(" and companyId = :companyId ");
+		}
+		if(values.get("salesmanId") != null)
+		{
+			hql.append(" and salesmanId = :salesmanId ");
+		}
+		if(values.get("customerName") != null)
+		{
+			hql.append(" and customerName like :customerName ");
+		}
+		if(values.get("contractorName") != null)
+		{
+			hql.append(" and id in ( select customerId from ContractPersonInfo where personName like :contractorName) ");
+		}
+		//销售额范围条件
+		hql.append(" and id in ( select record.customerId  from SellRecord as record group by  record.customerId , record.bargainTime  having 1=1 ");
+		
+		if(values.get("queryBeginTime")!=null && !values.get("queryBeginTime").equals("")){
+			hql. append( " and record.bargainTime >='"+values.get("queryBeginTime")+"' ");
+		}
+		if(values.get("queryEndTime")!=null && !values.get("queryEndTime").equals("")){
+			hql. append( " and record.bargainTime <='"+values.get("queryEndTime")+"' ");
+		}
+		if(values.get("queryAmountBegin")!=null && !values.get("queryAmountBegin").equals("")){
+			hql.append("  and sum(record.receivable) >= "+values.get("queryAmountBegin") );
+		}
+		if(values.get("queryAmountEnd")!=null && !values.get("queryAmountEnd").equals("")){
+			hql.append(" and  sum(record.receivable) <= "+values.get("queryAmountEnd"));
+		}
+		
+		hql. append( " ) ");
+		
+		if(values.get("customerCategory") != null)
+		{
+			hql.append(" and categoryId = :customerCategory ");
+		}
+		if(values.get("deptId") != null)
+		{
+			hql.append(" and salesmanId in (select id from User where deptId =:deptId ) ");
+		}
+		
+		hql.append(" order by registerTime asc");
+		List<CustomerInfo> data = customerInfoDao.findForPage(hql.toString(), values, pagination.getStartIndex(), pagination.getPageSize());
+		hql.delete(0, hql.length());
+		
+		
+		
+		hql.append(" select count(*) from CustomerInfo where 1=1 and deleteFlag = 0 " );
+		if(values.get("companyId") != null)
+		{
+			hql.append(" and companyId = :companyId ");
+		}
+		if(values.get("salesmanId") != null)
+		{
+			hql.append(" and salesmanId = :salesmanId ");
+		}
+		if(values.get("customerName") != null)
+		{
+			hql.append(" and customerName like :customerName ");
+		}
+		if(values.get("contractorName") != null)
+		{
+			hql.append(" and id in ( select customerId from ContractPersonInfo where personName like :contractorName) ");
+		}
+		
+		//销售额范围条件
+		hql.append(" and id in ( select record.customerId  from SellRecord as record group by  record.customerId , record.bargainTime  having 1=1 ");
+		
+		if(values.get("queryBeginTime")!=null && !values.get("queryBeginTime").equals("")){
+			hql. append( " and record.bargainTime >='"+values.get("queryBeginTime")+"' ");
+		}
+		if(values.get("queryEndTime")!=null && !values.get("queryEndTime").equals("")){
+			hql. append( " and record.bargainTime <='"+values.get("queryEndTime")+"' ");
+		}
+		if(values.get("queryAmountBegin")!=null && !values.get("queryAmountBegin").equals("")){
+			hql.append("  and sum(record.receivable) >= "+values.get("queryAmountBegin") );
+		}
+		if(values.get("queryAmountEnd")!=null && !values.get("queryAmountEnd").equals("")){
+			hql.append(" and  sum(record.receivable) <= "+values.get("queryAmountEnd"));
+		}
+		
+		hql. append( " ) ");
+				
+		if(values.get("customerCategory") != null)
+		{
+			hql.append(" and categoryId = :customerCategory ");
+		}
+		if(values.get("deptId") != null)
+		{
+			hql.append(" and salesmanId in (select id from User where deptId =:deptId ) ");
+		}
+		int totalRows = customerInfoDao.findCountForPage(hql.toString(), values);
+		pagination.setTotalRows(totalRows);
+		pagination.setData(data);
+		
+		List<CustomerInfo> list = pagination.getData();
+		if(list != null && list.size() > 0)
+		{
+			for(int i=0;i< list.size();i++)
+			{
+				CustomerInfo customerInfo = list.get(i);
+				DataDictionary d1 = dataDictionaryService.get(customerInfo.getCategoryId());
+				if(d1 != null)
+				{
+					customerInfo.setCategory(d1.getName());
+				}
+				
+				DataDictionary d2 = dataDictionaryService.get(customerInfo.getMaturityId());
+				if(d2 != null)
+				{
+					customerInfo.setMaturity(d2.getName());
+				}
+				DataDictionary d3 = dataDictionaryService.get(customerInfo.getSourceId());
+				if(d3 != null)
+				{
+					customerInfo.setSource(d3.getName());
+				}
+				DataDictionary d4 = dataDictionaryService.get(customerInfo.getProgressId());
+				if(d4 != null)
+				{
+					customerInfo.setProgress(d4.getName());
+				}else
+				{
+					customerInfo.setProgress("");
+				}
+				try
+				{
+					User salesman = userService.getUserById(customerInfo.getSalesmanId());
+					if(salesman != null)
+					{
+						customerInfo.setSalesman(salesman.getUserCName());
+					}
+				}catch(Exception e)
+				{
+					e.printStackTrace();
+				}
+				customerInfo.setContractPersonList(contractPersonService.findAllContractPersonInfoByCustomerId(customerInfo.getId()));
+				
+				customerInfo.setTotalConsumption(sellRecordService.getConsumptionMoney(customerInfo.getId()));
+				customerInfo.setConsumptionTimes(sellRecordService.getConsumptionCount(customerInfo.getId()));
+				
+				String t22 = CurrentDateTime.getCurrentDate();
+				String t11 = t22.split("-")[0]+"-1-1";
+				customerInfo.setPayments(sellRecordService.getConsumptionDebt(customerInfo.getId(),t11,t22));
+				
+				if(customerInfo.getLevelId() != null && customerInfo.getLevelId().length() > 0)
+				{
+					NumberFormat f = NumberFormat.getPercentInstance();
+					double level = 0;
+					try
+					{
+						level = f.parse(customerInfo.getLevelId()).doubleValue(); 
+					}catch(Exception ex)
+					{
+					}
+					customerInfo.setDevelopDegree(level);
+				}
+			}
+		}
+		return pagination;
+	}
 }
