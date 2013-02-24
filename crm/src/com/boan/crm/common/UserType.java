@@ -42,7 +42,7 @@ public class UserType
 
 
 	/**
-	 * 普通用户
+	 * 业务用户
 	 */
 	public static int COMMON_USER = 0;
 
@@ -54,7 +54,7 @@ public class UserType
 	/**
 	 * value值字典
 	 */
-	private static String[] values = { "普通用户", " 公司管理员", "超级管理员" };
+	private static String[] values = { "业务用户", " 公司管理员", "超级管理员" };
 
 	/**
 	 * 返回用户类别列表
