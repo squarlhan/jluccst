@@ -24,12 +24,17 @@
 	request.setCharacterEncoding("utf-8");
 	String path = request.getContextPath();
 	UserSession userSession = (UserSession) session.getAttribute("userSession");
+	String userId = "";
 	String deptId = "";
 	String companyId = "";
+	int userType = 0;
 	if (userSession != null) {
+		userId = StringUtils.trimToEmpty(userSession.getUserId());
 		deptId = StringUtils.trimToEmpty(userSession.getDeptId());
 		companyId = StringUtils.trimToEmpty(userSession.getCompanyId());
+		userType = userSession.getUserType();
 	}
+	
 %>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -59,8 +64,14 @@
             </table></td>
         </tr>
         <tr>
+        <%if(userType == 8){%>
+        	 <td width="150" valign="top" style="border-left: 1px solid #54a4e3; border-bottom: 1px solid #54a4e3; border-right: 1px solid #54a4e3; padding: 5px;"><iframe width="100%" height="100%" id="menutree" name="menutree"frameborder="0" scrolling="auto" src="groupTreeForSearch.action"></iframe></td>
+          <td valign="top" style="border-left:1px solid #54a4e3; border-bottom:1px solid #54a4e3; border-right:1px solid #54a4e3; padding:5px;"><iframe width="100%" height="100%"
+          	 id="groupmain" name="groupmain" frameborder="0" scrolling="auto" src="../blank.jsp"></iframe></td>
+		<%}else{%>
           <td valign="top" style="border-left:1px solid #54a4e3; border-bottom:1px solid #54a4e3; border-right:1px solid #54a4e3; padding:5px;"><iframe width="100%" height="100%"
           	 id="groupmain" name="groupmain" frameborder="0" scrolling="auto" src="searchCustomerList.action?companyId=<%=companyId%>&deptId=<%=deptId%>&who=session"></iframe></td>
+        <%}%>
         </tr>
     </table></td>
   </tr>
