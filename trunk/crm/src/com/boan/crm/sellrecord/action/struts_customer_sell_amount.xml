@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<!--  客户销售额Action -->
+	<package name="customer_sell_amount" extends="struts-default" namespace="/">
+		<action name="showGroupTreeForQueryCustomerBySellAmountAction" class="customerSellAmountAction" method="showGroupTreeForQueryCustomerBySellAmount">
+			<result name="success">/sellrecord/group-tree-for-query-customer-by-sell-amount.jsp</result>
+			<result name="input">/sellrecord/group-tree-for-query-customer-by-sell-amount.jsp</result>
+		</action>
+		<action name="queryCustomerBySellAmountAction" class="customerSellAmountAction" method="queryCustomerBySellAmount">
+			<result name="success">/sellrecord/query-customer-by-sell-amount-list.jsp</result>
+			<result name="input">/sellrecord/query-customer-by-sell-amount-list.jsp</result>
+		</action>
+	</package>
+</struts>
