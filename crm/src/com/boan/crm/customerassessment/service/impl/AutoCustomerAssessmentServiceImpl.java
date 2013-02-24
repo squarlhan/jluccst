@@ -35,7 +35,7 @@ public class AutoCustomerAssessmentServiceImpl implements IAutoCustomerAssessmen
 	{	
 		Map<String,String> values = new HashMap<String,String>();
 		values.put("companyId", companyId);
-		return autoCustomerAssessmentDao.find(" from AutoCustomerAssessment where companyId = :companyId ", values);
+		return autoCustomerAssessmentDao.find(" from AutoCustomerAssessment where companyId = :companyId order by assessmentTime desc", values);
 	}
 	
 	@Override
@@ -92,9 +92,31 @@ public class AutoCustomerAssessmentServiceImpl implements IAutoCustomerAssessmen
 		{
 			hql.append(" and customerId in ( select id from CustomerInfo where salesmanId in (select id from User where deptId =:deptId ) ");
 		}
-		hql.append(" group by customerId order by resultValue desc ");
+		hql.append(" group by customerId  order by resultValue desc");
 		List<AutoCustomerAssessment> data = autoCustomerAssessmentDao.findForPage(hql.toString(), values, pagination.getStartIndex(), pagination.getPageSize());
-		
+		if(data != null && data.size() > 0)
+		{
+			for (int i=0;i< data.size();i++)
+			{
+				AutoCustomerAssessment obj = data.get(i);
+				hql.delete(0, hql.length());
+				hql.append( "from AutoCustomerAssessment where customerId =:customerId order by resultValue desc ");
+				Map<String,String> values1 = new HashMap<String,String>();
+				values1.put("customerId", obj.getCustomerId());
+				List<AutoCustomerAssessment> tempObjs = autoCustomerAssessmentDao.findForPage(hql.toString(), values1, pagination.getStartIndex(), pagination.getPageSize());
+				if(tempObjs != null && tempObjs.size() > 0)
+				{
+					obj.setConsumptionTimes(tempObjs.get(0).getConsumptionTimes());
+					obj.setDevelopDegree(tempObjs.get(0).getDevelopDegree());
+					obj.setIntroduceCustomerTime(tempObjs.get(0).getIntroduceCustomerTime());
+					obj.setPayments(tempObjs.get(0).getPayments());
+					obj.setPaymentsTimes(tempObjs.get(0).getPaymentsTimes());
+					obj.setResult(tempObjs.get(0).getResult());
+					obj.setResultValue(tempObjs.get(0).getResultValue());
+					obj.setTotalConsumption(tempObjs.get(0).getTotalConsumption());
+				}
+			}
+		}
 		hql.delete(0, hql.length());
 		hql.append(" select count(*) from AutoCustomerAssessment where 1=1 " );
 		hql.append(" and companyId = :companyId ");
