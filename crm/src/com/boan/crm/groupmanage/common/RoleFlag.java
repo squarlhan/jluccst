@@ -9,8 +9,11 @@
 package com.boan.crm.groupmanage.common;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+
+import org.apache.commons.collections.map.LinkedMap;
 
 /**
  * XXX 类
@@ -49,7 +52,7 @@ public class RoleFlag {
 	 * @return
 	 */
 	public static Map<String, String> getRoleFlagList() {
-		Map<String, String> map = new HashMap<String, String>();
+		Map<String, String> map = new LinkedHashMap<String, String>();
 		for (int i = 0; i < roleEn.length; i++) {
 			map.put(roleEn[i], roleCn[i]);
 		}
