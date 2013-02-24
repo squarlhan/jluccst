@@ -108,7 +108,13 @@ public class CustomerInfoServiceImpl implements ICustomerInfoService{
 	public Pagination<CustomerInfo> findCustomerInfoForPage(
 			Map<String, ?> values, Pagination<CustomerInfo> pagination) {
 		StringBuilder hql = new StringBuilder();
-		hql.append( "from CustomerInfo where 1=1 and deleteFlag = 0 ");
+		if(values.get("showAllFlag") != null && values.get("showAllFlag").equals("1"))
+		{
+			hql.append( "from CustomerInfo where 1=1 ");
+		}else{
+			hql.append( "from CustomerInfo where 1=1 and deleteFlag = 0 ");
+		}
+				
 		if(values.get("companyId") != null)
 		{
 			hql.append(" and companyId = :companyId ");
@@ -137,7 +143,13 @@ public class CustomerInfoServiceImpl implements ICustomerInfoService{
 		hql.append(" order by registerTime asc");
 		List<CustomerInfo> data = customerInfoDao.findForPage(hql.toString(), values, pagination.getStartIndex(), pagination.getPageSize());
 		hql.delete(0, hql.length());
-		hql.append(" select count(*) from CustomerInfo where 1=1 and deleteFlag = 0 " );
+		if(values.get("showAllFlag") != null && values.get("showAllFlag").equals("1"))
+		{
+			hql.append(" select count(*) from CustomerInfo where 1=1 " );
+		}else{
+			hql.append(" select count(*) from CustomerInfo where 1=1 and deleteFlag = 0 " );
+		}
+		
 		if(values.get("companyId") != null)
 		{
 			hql.append(" and companyId = :companyId ");

@@ -54,12 +54,14 @@ public class CustomerVisitInfoServiceImpl implements ICustomerVisitInfoService{
 
 	@Override
 	public List<CustomerVisitInfo> findAllCustomerVisitInfo() {
-		return customerVisitInfoDao.find("from CustomerVisitInfo and (deleteFlag = 0 ) order by VisitTime asc", new Object[0]);
+		return customerVisitInfoDao.find("from CustomerVisitInfo and (deleteFlag = 0 ) order by visitTime asc", new Object[0]);
 	}
 	
 	@Override
 	public List<CustomerVisitInfo> findAllCustomerVisitInfoByCustomerId(String customerId) {
-		return customerVisitInfoDao.find("from CustomerVisitInfo where customerId = :customerId and (deleteFlag = 0 ) order by VisitTime asc", customerId);
+		Map<String,String> values = new HashMap<String,String>();
+		values.put("customerId", customerId);
+		return customerVisitInfoDao.find("from CustomerVisitInfo where customerId = :customerId and (deleteFlag = 0 ) order by visitTime asc", values);
 	}
 	@Override
 	public void deleteAllCustomerVisitInfoByCustomerId(String customerId) {
@@ -71,7 +73,13 @@ public class CustomerVisitInfoServiceImpl implements ICustomerVisitInfoService{
 	public Pagination<CustomerVisitInfo> findCustomerVisitInfoForPage(
 			Map<String, ?> values, Pagination<CustomerVisitInfo> pagination) {
 		StringBuilder hql = new StringBuilder();
-		hql.append( "from CustomerVisitInfo where 1=1");
+		if(values.get("showAllFlag") != null && values.get("showAllFlag").equals("1"))
+		{
+			hql.append( "from CustomerVisitInfo where 1=1");
+		}else
+		{
+			hql.append( "from CustomerVisitInfo where 1=1 and deleteFlag = 0");
+		}
 		if(values.get("companyId") != null)
 		{
 			hql.append(" and companyId = :companyId ");
@@ -114,7 +122,14 @@ public class CustomerVisitInfoServiceImpl implements ICustomerVisitInfoService{
 		hql.append(" order by actualVisitTime asc ,visitTime desc");
 		List<CustomerVisitInfo> data = customerVisitInfoDao.findForPage(hql.toString(), values, pagination.getStartIndex(), pagination.getPageSize());
 		hql.delete(0, hql.length());
-		hql.append(" select count(*) from CustomerVisitInfo where 1=1 and (deleteFlag = 0 ) " );
+		if(values.get("showAllFlag") != null && values.get("showAllFlag").equals("1"))
+		{
+			hql.append( "select count(*) from CustomerVisitInfo where 1=1 ");
+		}else
+		{
+			hql.append(" select count(*) from CustomerVisitInfo where 1=1 and (deleteFlag = 0 ) " );
+		}
+		
 		if(values.get("companyId") != null)
 		{
 			hql.append(" and companyId = :companyId ");

@@ -324,7 +324,7 @@ public class CustomerInfoAction extends BaseActionSupport{
 			values.put("deptId", deptId);
 		}
 		values.put("companyId", sessionCompanyId);
-		
+		values.put("showAllFlag", "1");
 		pagination = customerInfoService.findCustomerInfoForPage(values, pagination);
 		return SUCCESS;
 	}
@@ -798,7 +798,7 @@ public class CustomerInfoAction extends BaseActionSupport{
 		contractpersonInfoService.deleteContractPersonInfoByCustomerIds(ids);
 		for(int i=0;i<ids.length;i++)
 		{
-			/*List<CustomerTraceInfo> listTrace = customerTraceInfoService.findAllCustomerTraceInfoByCustomerId(ids[i]);
+			List<CustomerTraceInfo> listTrace = customerTraceInfoService.findAllCustomerTraceInfoByCustomerId(ids[i]);
 			if(listTrace != null && listTrace.size() > 0)
 			{
 				for(int j=0;j<listTrace.size() ;j++)
@@ -810,10 +810,8 @@ public class CustomerInfoAction extends BaseActionSupport{
 						customerTraceInfoService.save(obj);
 					}
 				}
-			}*/
-			customerTraceInfoService.deleteAllCustomerTraceInfoByCustomerId(ids[i]);
-			customerVisitInfoService.deleteAllCustomerVisitInfoByCustomerId(ids[i]);
-			/*List<CustomerVisitInfo> listVisit = customerVisitInfoService.findAllCustomerVisitInfoByCustomerId(ids[i]);
+			}
+			List<CustomerVisitInfo> listVisit = customerVisitInfoService.findAllCustomerVisitInfoByCustomerId(ids[i]);
 			if(listVisit != null && listVisit.size() > 0)
 			{
 				for(int j=0;j<listVisit.size() ;j++)
@@ -825,7 +823,7 @@ public class CustomerInfoAction extends BaseActionSupport{
 						customerVisitInfoService.save(obj);
 					}
 				}
-			}*/
+			}
 		}
 		return SUCCESS;
 	}

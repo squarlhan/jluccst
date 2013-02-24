@@ -295,6 +295,7 @@ public class CustomerTraceInfoAction extends BaseActionSupport{
 		{
 			values.put("deptId", deptId);
 		}
+		values.put("showAllFlag", "1");
 		pagination = customerTraceInfoService.findCustomerTraceInfoForPage(values, pagination);
 		return SUCCESS;
 	}
