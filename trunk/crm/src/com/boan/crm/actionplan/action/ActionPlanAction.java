@@ -117,7 +117,7 @@ public class ActionPlanAction extends BaseActionSupport{
 		UserSession us = this.getSession();
 		//判断是否是公司管理员或公司级用户
 		boolean popodomFlag = popedomService.isCompanyAdministrator(us.getUserId(), String.valueOf(us.getUserType()) ) 
-				||popedomService.isHasCompanyPopedom(us.getPopedomKeys());
+				||popedomService.isHasCompanyPopedom(us.getRoleKey());
 		/*
 		 * JHY 注
 		if(flag){ //部门经理
