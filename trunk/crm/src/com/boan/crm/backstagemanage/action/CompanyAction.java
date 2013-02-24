@@ -232,12 +232,22 @@ public class CompanyAction extends BaseActionSupport {
 			role.setCompanyId(company.getId());
 			role.setCreateTime(Calendar.getInstance());
 			role.setRoleName("公司管理员");
+			role.setRoleKey(RoleFlag.GONG_SI_GUAN_LI_YUAN);
 			role.setSortIndex(0);
 			roleService.save(role);
+			//创建一个默认部门经理角色
+			Role deptRole = new Role();
+			deptRole.setCompanyId(company.getId());
+			deptRole.setCreateTime(Calendar.getInstance());
+			deptRole.setRoleName("部门经理");
+			deptRole.setRoleKey(RoleFlag.BU_MEN_GUAN_LI_YUAN);
+			deptRole.setSortIndex(0);
+			roleService.save(deptRole);
+			//创建一个默认业务员角色
 			Role businessRole = new Role();
 			businessRole.setCompanyId(company.getId());
 			businessRole.setCreateTime(Calendar.getInstance());
-			businessRole.setRoleName("系统业务员");
+			businessRole.setRoleName("业务员");
 			businessRole.setRoleKey(RoleFlag.YE_WU_YUAN);
 			businessRole.setSortIndex(0);
 			roleService.save(businessRole);
