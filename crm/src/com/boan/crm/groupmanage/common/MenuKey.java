@@ -20,9 +20,9 @@ public class MenuKey {
 	/**
 	 * 本部门
 	 */
-	public static final String SELF_DEPT = "SELF_DEPT";
+	public static final String SELF_DEPT1 = "SELF_DEPT";
 	/**
 	 * 本公司
 	 */
-	public static final String SELF_COMPANY = "SELF_COMPANY ";
+	public static final String SELF_COMPANY1 = "SELF_COMPANY ";
 }

@@ -40,12 +40,14 @@ import com.boan.crm.groupmanage.common.UserSession;
 import com.boan.crm.groupmanage.model.Deptment;
 import com.boan.crm.groupmanage.model.EkeyUser;
 import com.boan.crm.groupmanage.model.Menu;
+import com.boan.crm.groupmanage.model.Role;
 import com.boan.crm.groupmanage.model.User;
 import com.boan.crm.groupmanage.security.CheckProductKey;
 import com.boan.crm.groupmanage.service.IDeptmentService;
 import com.boan.crm.groupmanage.service.IEkeyUserService;
 import com.boan.crm.groupmanage.service.IMenuService;
 import com.boan.crm.groupmanage.service.IPopedomService;
+import com.boan.crm.groupmanage.service.IRoleService;
 import com.boan.crm.groupmanage.service.IUserService;
 import com.boan.crm.utils.md5.MakeMd5;
 import com.opensymphony.xwork2.ActionSupport;
@@ -95,6 +97,10 @@ public class UserLogonAction extends ActionSupport {
 	@Autowired
 	@Qualifier("ekeyUserService")
 	private IEkeyUserService ekeyUserService = null;
+	
+	@Autowired
+	@Qualifier("roleService")
+	private IRoleService roleService = null;
 
 	private Message message = new Message();
 
@@ -165,6 +171,8 @@ public class UserLogonAction extends ActionSupport {
 				// 获取权限串
 				String roleId = user.getRoleId();
 				String[] popedomKeys = popedomService.queryPopedomsByRoleId(roleId);
+				//获取角色对象
+				Role role = roleService.get(roleId);
 				// 创建userSession对象
 				UserSession userSession = new UserSession();
 				userSession.setUserId(user.getId());
@@ -176,6 +184,9 @@ public class UserLogonAction extends ActionSupport {
 				userSession.setPopedomKeys(popedomKeys);
 				userSession.setUserPhone(user.getPhone());
 				userSession.setProductSuffix(productKey.getProductSuffix());
+				if( role != null ){
+					userSession.setRoleKey(role.getRoleKey());
+				}
 				// 默认是销售团队管理系统
 				userSession.setProductType(ProductType.TEAM_MANAGE);
 				if (companyService != null) {
@@ -728,6 +739,14 @@ public class UserLogonAction extends ActionSupport {
 
 	public void setTopImage(String topImage) {
 		this.topImage = topImage;
+	}
+
+	public IRoleService getRoleService() {
+		return roleService;
+	}
+
+	public void setRoleService(IRoleService roleService) {
+		this.roleService = roleService;
 	}
 
 }

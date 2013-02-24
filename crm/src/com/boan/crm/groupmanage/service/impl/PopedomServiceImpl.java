@@ -13,6 +13,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.boan.crm.groupmanage.common.MenuKey;
+import com.boan.crm.groupmanage.common.RoleFlag;
+import com.boan.crm.groupmanage.common.UserSession;
 import com.boan.crm.groupmanage.dao.IPopedomDao;
 import com.boan.crm.groupmanage.model.Role;
 import com.boan.crm.groupmanage.service.IPopedomService;
@@ -121,37 +123,59 @@ public class PopedomServiceImpl implements IPopedomService{
 	}
 
 	@Override
-	public boolean isHasCompanyPopedom(String[] popedomKeys) throws Exception {
+	public boolean isHasCompanyPopedom(String  roleKey) throws Exception {
+		/*
 		boolean b = false;
 		if( popedomKeys != null && popedomKeys.length > 0 )
 		{
 			for( String s : popedomKeys )
 			{
-				if( MenuKey.SELF_COMPANY.equalsIgnoreCase( s ) )
+				if( RoleFlag.GONG_SI_GUAN_LI_YUAN.equalsIgnoreCase( s ) )
 				{
 					b = true;
 					break;
 				}
 			}
 		}
-		return b;
+		*/
+		if( RoleFlag.GONG_SI_GUAN_LI_YUAN.equalsIgnoreCase( roleKey ) )
+		{
+			return true;
+		}
+		return false;
 	}
 
 	@Override
-	public boolean isHasDeptPopedom(String[] popedomKeys) throws Exception {
+	public boolean isHasDeptPopedom(String roleKey) throws Exception {
+		/*
 		boolean b = false;
 		if( popedomKeys != null && popedomKeys.length > 0 )
 		{
 			for( String s : popedomKeys )
 			{
-				if( MenuKey.SELF_DEPT.equalsIgnoreCase( s ) )
+				if( RoleFlag.BU_MEN_GUAN_LI_YUAN.equalsIgnoreCase( s ) )
 				{
 					b = true;
 					break;
 				}
 			}
 		}
-		return b;
+		*/
+		if( RoleFlag.BU_MEN_GUAN_LI_YUAN.equalsIgnoreCase( roleKey ) )
+		{
+			return true;
+		}
+		return false;
+	}
+
+	@Override
+	public boolean isHasPopedomByRoleKey(UserSession userSession, String roleKey) throws Exception {
+		if( userSession != null ){
+			if( userSession.getRoleKey().equalsIgnoreCase(roleKey)){
+				return true;
+			}
+		}
+		return false;
 	}
 }
 
