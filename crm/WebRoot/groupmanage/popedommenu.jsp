@@ -49,9 +49,9 @@
 		d.add('<s:property value="menuKey"/>','<s:property value="parentKey"/>','<s:property value="menuName"/>','<%=url%>?menuKey=<s:property value="menuKey"/>&companyId=<%=companyId%>','','groupmain');
 		</s:iterator>
 		
-		d.add(-2,-1,'操作权限列表','','','Menu');
-		d.add(201,-2,'本部门','<%=url%>?menuKey=<%=MenuKey.SELF_DEPT%>&companyId=<%=companyId%>','','groupmain','<%=path%>/js/tree/img/imgfolder.gif','<%=path%>/js/tree/img/imgfolder.gif');
-		d.add(202,-2,'本公司','<%=url%>?menuKey=<%=MenuKey.SELF_COMPANY%>&companyId=<%=companyId%>','','groupmain','<%=path%>/js/tree/img/imgfolder.gif','<%=path%>/js/tree/img/imgfolder.gif');
+		//d.add(-2,-1,'操作权限列表','','','Menu');
+		//d.add(201,-2,'本部门','<%=url%>?menuKey=<%=MenuKey.SELF_DEPT%>&companyId=<%=companyId%>','','groupmain','<%=path%>/js/tree/img/imgfolder.gif','<%=path%>/js/tree/img/imgfolder.gif');
+		//d.add(202,-2,'本公司','<%=url%>?menuKey=<%=MenuKey.SELF_COMPANY%>&companyId=<%=companyId%>','','groupmain','<%=path%>/js/tree/img/imgfolder.gif','<%=path%>/js/tree/img/imgfolder.gif');
 		document.write(d);
 		d.openAll();
 		//-->
