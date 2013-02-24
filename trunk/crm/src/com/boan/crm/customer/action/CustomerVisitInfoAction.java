@@ -279,6 +279,7 @@ public class CustomerVisitInfoAction extends BaseActionSupport{
 		{
 			values.put("deptId", deptId);
 		}
+		values.put("showAllFlag", "1");
 		values.put( "companyId", sessionCompanyId );
 		pagination = customerVisitInfoService.findCustomerVisitInfoForPage(values, pagination);
 		return SUCCESS;
