@@ -278,26 +278,25 @@
 									<strong>交易日期：</strong>
 								</td>
 								<td height="26" align="left" bgcolor="#FFFFFF" nowrap="nowrap">
-									<s:textfield id="txt_bargainTime" name="sellRecord.bargainTime" cssStyle="width:100px" ></s:textfield><font color="red">*</font>
+									<span onmousemove="this.setCapture();" onmouseout="this.releaseCapture();" onfocus="this.blur();">
+										<s:textfield id="txt_bargainTime" name="sellRecord.bargainTime" cssStyle="width:100px" ></s:textfield>
+									</span>
 								</td>
 								<td height="26" align="right" bgcolor="#FFFFFF" nowrap="nowrap">
 									<strong>产品种类：</strong>
 								</td>
 								<td height="26" align="left" bgcolor="#FFFFFF" nowrap="nowrap">
-									<s:if test="sellRecord.id!=null">
-										<span onmousemove="this.setCapture();" onmouseout="this.releaseCapture();" onfocus="this.blur();">
-									</s:if>
-									<s:else>
-										<span>
-									</s:else>
-									<s:select id="txt_goodsType"  name="sellRecord.goodsType"  list="goodsTypes" listKey="id"  listValue="name" cssStyle="width:100px" headerKey="" headerValue="--- 请选择 ---"></s:select><font color="red">*</font>
+									<span onmousemove="this.setCapture();" onmouseout="this.releaseCapture();" onfocus="this.blur();">
+										<s:select id="txt_goodsType"  name="sellRecord.goodsType"  list="goodsTypes" listKey="id"  listValue="name" cssStyle="width:100px" headerKey="" headerValue="--- 请选择 ---"></s:select>
 									</span>
 								</td>
 								<td height="26" align="right" bgcolor="#FFFFFF" nowrap="nowrap">
 									<strong>销售单号：</strong>
 								</td>
 								<td height="26" align="left" bgcolor="#FFFFFF" nowrap="nowrap">
-									<s:textfield id="txt_orderID" name="sellRecord.orderID" cssStyle="width:120px"  readonly="true"></s:textfield>
+									<span onmousemove="this.setCapture();" onmouseout="this.releaseCapture();" onfocus="this.blur();">
+										<s:textfield id="txt_orderID" name="sellRecord.orderID" cssStyle="width:120px"  readonly="true"></s:textfield>
+									</span>
 								</td>
 							</tr>
 						</table>
@@ -307,23 +306,6 @@
 					<legend>商品明细</legend>
 						<table id="goodsList" width="100%" height="50%"  border="0" cellpadding="5" cellspacing="1" bgcolor="#d5e4fd">
 							<tr>
-								<td colspan="12" align="center" width="50px" bgcolor="#FFFFFF">
-									<table>
-										<tr>
-											<td>
-												<input name="btn_add" type="button" class="btn_2_3" id="btn_add" value="添加">
-											</td>
-											<td>
-												<input name="btn_delAll" type="button" class="btn_2_3" id="btn_delAll" value="删除所选">
-											</td>
-										</tr>
-									</table>
-								</td>
-							</tr>
-							<tr>
-								<td align="center" width="50px" background="<%=basePath%>/images/headerbg.jpg">
-		   							<s:checkbox theme="simple" id="cbk_all" name="all"></s:checkbox>
-		   						</td>
 		              			<td align="center" background="<%=basePath%>/images/headerbg.jpg"><strong>品 名</strong></td>
 		              			<td align="center" background="<%=basePath%>/images/headerbg.jpg"><strong>规 格</strong></td>
 								<td align="center" background="<%=basePath%>/images/headerbg.jpg"><strong>厂商</strong></td>
@@ -331,14 +313,10 @@
 		              			<td align="center" background="<%=basePath%>/images/headerbg.jpg"><strong>数 量</strong></td>
 		              			<td align="center" background="<%=basePath%>/images/headerbg.jpg"><strong>预 付</strong></td>
 		              			<td align="center" background="<%=basePath%>/images/headerbg.jpg"><strong>备注</strong></td>
-		              			<td align="center" background="<%=basePath%>/images/headerbg.jpg"><strong>操作</strong></td>
 							</tr>
 							<s:if test="sellRecord!=null">
 							<s:iterator value="sellRecord.goodsDetials" status="obj">
 								<tr>
-									 <td height="26" align="center" bgcolor="#FFFFFF" >  
-										<s:checkbox id="%{#obj.id}" name="ids" fieldValue="%{id}" value="false" theme="simple"/>
-									</td>
 						            <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="goodsName"/></td>
 						            <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="standard"/></td>
 									<td height="26" align="center" bgcolor="#FFFFFF"><s:property value="factory"/></td>
@@ -346,12 +324,6 @@
 						            <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="number"/></td>
 						            <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="allPrice"/></td>
 						            <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="memo"/></td>
-						            <td height="26" align="center" bgcolor="#FFFFFF">
-										<s:url id="delete_url" action="deleteSellRecordDetialsAction">   
-											<s:param name="ids" value="id"></s:param>   
-										</s:url>
-							         	<a name="del_one" href="javascript:void(0);" url="${delete_url}">删除</a>  
-									</td>
 					            </tr>
 							</s:iterator>
 							</s:if>
@@ -365,7 +337,7 @@
 					</fieldset>
 					<fieldset >
 					<legend>结算信息</legend>
-						<span>
+						<span onmousemove="this.setCapture();" onmouseout="this.releaseCapture();" onfocus="this.blur();">
 						<table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#d5e4fd">
 							<tr>
 								<td height="26" align="right" bgcolor="#FFFFFF" nowrap="nowrap">
@@ -378,7 +350,7 @@
 									<strong>实 收：</strong>
 								</td>
 								<td height="26" align="left" bgcolor="#FFFFFF"  nowrap="nowrap">
-									<s:textfield id="txt_realCollection" name="sellRecord.realCollection" cssStyle="width:240px" ></s:textfield>元<font color="red">*</font>
+									<s:textfield id="txt_realCollection" name="sellRecord.realCollection" cssStyle="width:240px" ></s:textfield>元
 								</td>
 								<td height="26" align="right" bgcolor="#FFFFFF" nowrap="nowrap">
 									<strong>欠 款：</strong>
@@ -390,17 +362,6 @@
 						</table>
 						</span>
 					</fieldset>
-				</td>
-			</tr>
-			<tr>
-				<td align="center" >
-					<table>
-						<tr>
-							<td>
-								<input name="btn_save" type="button" class="btn_2_3" id="btn_save" value="保存">
-							</td>
-						</tr>
-					</table>
 				</td>
 			</tr>
 		</table>
