@@ -53,6 +53,8 @@
 	<include file="com/boan/crm/marketinquiry/action/struts_market_inquiry.xml"></include>
 	<!-- 销售记录 -->
 	<include file="com/boan/crm/sellrecord/action/struts_sell_record.xml"></include>
+	<!-- 客户销售额 -->
+	<include file="com/boan/crm/sellrecord/action/struts_customer_sell_amount.xml"></include>
     <!-- 客户查找 -->
 	<include file="com/boan/crm/customersearch/action/struts_customer_search.xml"></include>
 	<!-- 供应商 -->
