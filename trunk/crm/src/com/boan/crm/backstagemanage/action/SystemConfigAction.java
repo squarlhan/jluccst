@@ -63,6 +63,7 @@ public class SystemConfigAction extends BaseActionSupport {
 			list.add("area_info");
 			list.add("city_info");
 			list.add("province_info");
+			list.add("sys_menu");
 			//保留数据的表含前缀
 			List<String> preList = new ArrayList<String>();
 			preList.add("contract_person_");
