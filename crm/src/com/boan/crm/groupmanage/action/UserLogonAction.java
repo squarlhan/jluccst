@@ -168,11 +168,15 @@ public class UserLogonAction extends ActionSupport {
 					message.setContent("您是超级管理员，请使用身份锁登录！");
 					// return ERROR;
 				}
-				// 获取权限串
 				String roleId = user.getRoleId();
-				String[] popedomKeys = popedomService.queryPopedomsByRoleId(roleId);
-				//获取角色对象
-				Role role = roleService.get(roleId);
+				String[] popedomKeys = null;
+				Role role = null;
+				if( StringUtils.isNotBlank(roleId) ){
+					// 获取权限串
+					popedomKeys = popedomService.queryPopedomsByRoleId(roleId);
+					//获取角色对象
+					role = roleService.get(roleId);
+				};
 				// 创建userSession对象
 				UserSession userSession = new UserSession();
 				userSession.setUserId(user.getId());
