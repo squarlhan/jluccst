@@ -441,7 +441,7 @@ public class CustomerAssessmentAction extends BaseActionSupport{
 			if(popedomService.isHasPopedomByRoleKey( userSession , RoleFlag.YE_WU_YUAN ))
 			{
 				values.put("userId", sessionUserId);
-			}else if(popedomService.isHasPopedomByRoleKey( userSession , RoleFlag.BU_MEN_GUAN_LI_YUAN ))
+			}else if(popedomService.isHasPopedomByRoleKey( userSession , RoleFlag.BU_MEN_LING_DAO ))
 			{
 				values.put("deptId", sessionDeptId);
 			}
