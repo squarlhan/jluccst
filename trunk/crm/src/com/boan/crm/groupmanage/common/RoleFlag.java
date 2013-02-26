@@ -28,9 +28,14 @@ public class RoleFlag {
 	public static String YE_WU_YUAN = "YE_WU_YUAN";
 
 	/**
-	 * 部门管理员
+	 * 部门领导
 	 */
-	public static String BU_MEN_GUAN_LI_YUAN = "BU_MEN_GUAN_LI_YUAN";
+	public static String BU_MEN_LING_DAO = "BU_MEN_LING_DAO";
+
+	/**
+	 * 公司领导
+	 */
+	public static String GONG_SI_LING_DAO = "GONG_SI_LING_DAO";
 
 	/**
 	 * 公司管理员
@@ -40,11 +45,11 @@ public class RoleFlag {
 	/**
 	 * 关键标识
 	 */
-	private static String[] roleEn = { GONG_SI_GUAN_LI_YUAN, BU_MEN_GUAN_LI_YUAN, YE_WU_YUAN };
+	private static String[] roleEn = { BU_MEN_LING_DAO, GONG_SI_LING_DAO, YE_WU_YUAN, GONG_SI_GUAN_LI_YUAN };
 	/**
 	 * 中文名称
 	 */
-	private static String[] roleCn = { "公司管理员", "部门管理员", "业务员" };
+	private static String[] roleCn = { "部门领导", "公司领导", "业务员", "公司管理员" };
 
 	/**
 	 * 获取角色标识实体
