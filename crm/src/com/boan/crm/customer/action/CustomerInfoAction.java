@@ -221,10 +221,10 @@ public class CustomerInfoAction extends BaseActionSupport{
 		
 		UserSession us = this.getSession();
 		//判断是否是公司管理员或公司级用户
-		boolean popodomFlag = popedomService.isCompanyAdministrator(us.getUserId(), String.valueOf(us.getUserType()) ) 
-				||popedomService.isHasCompanyPopedom(us.getRoleKey());
+		boolean administratorFlag = popedomService.isHasPopedomByRoleKey(us,RoleFlag.GONG_SI_GUAN_LI_YUAN);
+		boolean leaderFlag = popedomService.isHasPopedomByRoleKey(us,RoleFlag.GONG_SI_LING_DAO);
 		//SELF_COMPANY
-		if(popodomFlag)
+		if(leaderFlag || administratorFlag)
 		{
 			deptList = deptService.queryAllDeptmentsByCompanyId( sessionCompanyId );
 		}else
