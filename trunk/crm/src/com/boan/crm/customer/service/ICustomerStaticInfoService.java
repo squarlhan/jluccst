@@ -16,5 +16,8 @@ public interface ICustomerStaticInfoService {
 	 * 查找全部客户
 	 */
 	public List<CustomerStaticInfo> findAllCustomerStaticInfo(String companyId,int key);
-	
+	/**
+	 * 查找全部客户
+	 */
+	public List<CustomerStaticInfo> findAllCustomerStaticInfo(String companyId,String deptId,String userId,int key);
 }

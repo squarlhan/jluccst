@@ -84,6 +84,31 @@ public class CustomerInfoServiceImpl implements ICustomerInfoService{
 		return customerInfoDao.findCountForPage(hql, values);
 	}
 	/**
+	 * 查找全部客户个数
+	 */
+	@Override
+	public int findAllCustomerInfoCount(String companyId,String deptId,String userId)
+	{
+		StringBuffer hql = new StringBuffer();
+		hql.append("select Count(id) from CustomerInfo where companyId = :companyId and deleteFlag = 0 ");
+		Map<String,String> values = new HashMap<String,String>();
+		values.put("companyId", companyId);
+		if( deptId != null && deptId.length() > 0)
+		{
+			hql.append(" and salesmanId in (select id from User where deptId =:deptId ) ");
+			values.put("deptId", deptId);
+		}else
+		{
+			if(userId != null && userId.length() > 0)
+			{
+				hql.append(" and salesmanId = :userId ) ");
+				values.put("userId", userId);
+			}
+		}
+		
+		return customerInfoDao.findCountForPage(hql.toString(), values);
+	}
+	/**
 	 * 查找全部客户
 	 */
 	@Override

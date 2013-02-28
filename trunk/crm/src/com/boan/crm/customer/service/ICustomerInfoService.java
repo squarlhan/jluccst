@@ -23,6 +23,10 @@ public interface ICustomerInfoService {
 	 */
 	public int findAllCustomerInfoCount(String companyId);
 	/**
+	 * 查找全部客户个数
+	 */
+	public int findAllCustomerInfoCount(String companyId,String deptId,String userId);
+	/**
 	 * 查找全部客户
 	 */
 	public List<CustomerInfo> findAllCustomerInfoByCompanyId( String companyId );
