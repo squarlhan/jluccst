@@ -84,6 +84,13 @@ public class CustomerAssessmentAction extends BaseActionSupport{
 	private String customerId ="";
 	private String customerName = "";
 	private String option = "";
+	private String message = "";
+	public String getMessage() {
+		return message;
+	}
+	public void setMessage(String message) {
+		this.message = message;
+	}
 	public String getOption() {
 		return option;
 	}
@@ -320,7 +327,7 @@ public class CustomerAssessmentAction extends BaseActionSupport{
 				}
 			}
 		}
-		
+		message = "自动评估设置成功！";
 		return SUCCESS;
 	}
 	
@@ -344,9 +351,6 @@ public class CustomerAssessmentAction extends BaseActionSupport{
 			}
 			if(payments.equals("1"))
 			{
-				Calendar t1 = Calendar.getInstance();
-				Calendar t2 = Calendar.getInstance();
-				
 				String t22 = CurrentDateTime.getCurrentDate();
 				String t11 = t22.split("-")[0]+"-1-1";
 				analysisCustomer.setPayments(sellRecordService.getConsumptionDebt(customer.getId(),t11,t22));
