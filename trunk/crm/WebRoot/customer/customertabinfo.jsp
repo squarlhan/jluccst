@@ -65,11 +65,13 @@
 		<iframe id="visitDivFrame" scrolling="auto" frameborder="0" style="width:100%; height:100%"
 			src="about:blank" url="customerVisitList.action?customerId=<s:property value='id'/>&deptId=<s:property value='deptId'/>"></iframe>
 	</div>
+	<s:if test='!teamFlag'>
 	<div title="服务记录"
 		style="padding: 1px; display: none;">
 		<iframe scrolling="auto" frameborder="0" style="width:100%; height:100%"
 			src="about:blank" url="../service/serviceloglistbycustomer.action?companyId=<s:property value='id'/>"></iframe>
 	</div>
+	</s:if>
 	<div title="客户评估"
 		style="padding: 1px; display: none;">
 		<iframe scrolling="auto" frameborder="0" style="width:100%; height:100%"
