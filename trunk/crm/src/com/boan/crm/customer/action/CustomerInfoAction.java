@@ -835,91 +835,171 @@ public class CustomerInfoAction extends BaseActionSupport{
 	public String staticCustomer()
 	{
 		companyId = sessionCompanyId;
-		
-		totalCustomerCount = customerInfoService.findAllCustomerInfoCount(companyId);
-		int sumCount = 0;
-		
-		if(flag.equals("category"))
+		UserSession us = this.getSession();
+		try
 		{
-			listCategoryStatic = customerStaticInfoService.findAllCustomerStaticInfo(companyId,CustomerStaticInfo.CUSTOMER_CATEGORY);
+			//判断是否是公司管理员或公司级用户
+			boolean administratorFlag = popedomService.isHasPopedomByRoleKey(us,RoleFlag.GONG_SI_GUAN_LI_YUAN);
+			boolean companyLeaderFlag = popedomService.isHasPopedomByRoleKey(us,RoleFlag.GONG_SI_LING_DAO);
+			boolean deptLeaderFlag = popedomService.isHasPopedomByRoleKey(us,RoleFlag.BU_MEN_LING_DAO);
+			boolean ywyFlag = popedomService.isHasPopedomByRoleKey(us,RoleFlag.YE_WU_YUAN);
+			if(administratorFlag || companyLeaderFlag)
+			{
+				totalCustomerCount = customerInfoService.findAllCustomerInfoCount(companyId);
+			}
+			if(deptLeaderFlag)
+			{
+				totalCustomerCount = customerInfoService.findAllCustomerInfoCount(companyId , sessionDeptId,null);
+			}
+			if(ywyFlag)
+			{
+				totalCustomerCount = customerInfoService.findAllCustomerInfoCount(companyId , null , sessionUserId);
+			}
+			int sumCount = 0;
 			
-			for(int i=0;i<listCategoryStatic.size();i++)
+			if(flag.equals("category"))
 			{
-				sumCount = sumCount + listCategoryStatic.get(i).getCount();
+				if(administratorFlag || companyLeaderFlag)
+				{
+					listCategoryStatic = customerStaticInfoService.findAllCustomerStaticInfo(companyId,CustomerStaticInfo.CUSTOMER_CATEGORY);
+				}
+				if(deptLeaderFlag)
+				{
+					listCategoryStatic = customerStaticInfoService.findAllCustomerStaticInfo(companyId, sessionDeptId,null,CustomerStaticInfo.CUSTOMER_CATEGORY);
+				}
+				if(ywyFlag)
+				{
+					listCategoryStatic = customerStaticInfoService.findAllCustomerStaticInfo(companyId, null , sessionUserId,CustomerStaticInfo.CUSTOMER_CATEGORY);
+				}
+				
+				
+				for(int i=0;i<listCategoryStatic.size();i++)
+				{
+					sumCount = sumCount + listCategoryStatic.get(i).getCount();
+				}
+				if(sumCount < totalCustomerCount)
+				{
+					CustomerStaticInfo obj = new CustomerStaticInfo();
+					obj.setCategory("其他");
+					obj.setCount(totalCustomerCount - sumCount) ;
+					obj.setKey(999);
+					listCategoryStatic.add(obj);
+				}
 			}
-			if(sumCount < totalCustomerCount)
+			if(flag.equals("source"))
 			{
-				CustomerStaticInfo obj = new CustomerStaticInfo();
-				obj.setCategory("其他");
-				obj.setCount(totalCustomerCount - sumCount) ;
-				obj.setKey(999);
-				listCategoryStatic.add(obj);
+				if(administratorFlag || companyLeaderFlag)
+				{
+					listSourceStatic = customerStaticInfoService.findAllCustomerStaticInfo(companyId,CustomerStaticInfo.CUSTOMER_SOURCE);
+				}
+				if(deptLeaderFlag)
+				{
+					listSourceStatic = customerStaticInfoService.findAllCustomerStaticInfo(companyId, sessionDeptId,null,CustomerStaticInfo.CUSTOMER_SOURCE);
+				}
+				if(ywyFlag)
+				{
+					listSourceStatic = customerStaticInfoService.findAllCustomerStaticInfo(companyId, null , sessionUserId,CustomerStaticInfo.CUSTOMER_SOURCE);
+				}
+				for(int i=0;i<listSourceStatic.size();i++)
+				{
+					sumCount = sumCount + listSourceStatic.get(i).getCount();
+				}
+				if(sumCount < totalCustomerCount)
+				{
+					CustomerStaticInfo obj = new CustomerStaticInfo();
+					obj.setCategory("其他");
+					obj.setCount(totalCustomerCount - sumCount) ;
+					obj.setKey(999);
+					listSourceStatic.add(obj);
+				}
 			}
-		}
-		if(flag.equals("source"))
+			if(flag.equals("maturity"))
+			{
+				if(administratorFlag || companyLeaderFlag)
+				{
+					listMaturityStatic = customerStaticInfoService.findAllCustomerStaticInfo(companyId,CustomerStaticInfo.CUSTOMER_MATURITY);
+				}
+				if(deptLeaderFlag)
+				{
+					listMaturityStatic = customerStaticInfoService.findAllCustomerStaticInfo(companyId, sessionDeptId,null,CustomerStaticInfo.CUSTOMER_MATURITY);
+				}
+				if(ywyFlag)
+				{
+					listMaturityStatic = customerStaticInfoService.findAllCustomerStaticInfo(companyId, null , sessionUserId,CustomerStaticInfo.CUSTOMER_MATURITY);
+				}
+				for(int i=0;i<listMaturityStatic.size();i++)
+				{
+					sumCount = sumCount + listMaturityStatic.get(i).getCount();
+				}
+				if(sumCount < totalCustomerCount)
+				{
+					CustomerStaticInfo obj = new CustomerStaticInfo();
+					obj.setCategory("其他");
+					obj.setCount(totalCustomerCount - sumCount) ;
+					obj.setKey(999);
+					listMaturityStatic.add(obj);
+				}
+			}
+			if(flag.equals("progress"))
+			{
+				if(administratorFlag || companyLeaderFlag)
+				{
+					listProgressStatic = customerStaticInfoService.findAllCustomerStaticInfo(companyId,CustomerStaticInfo.CUSTOMER_PROGRESS);
+				}
+				if(deptLeaderFlag)
+				{
+					listProgressStatic = customerStaticInfoService.findAllCustomerStaticInfo(companyId, sessionDeptId,null,CustomerStaticInfo.CUSTOMER_PROGRESS);
+				}
+				if(ywyFlag)
+				{
+					listProgressStatic = customerStaticInfoService.findAllCustomerStaticInfo(companyId, null , sessionUserId,CustomerStaticInfo.CUSTOMER_PROGRESS);
+				}
+				for(int i=0;i<listProgressStatic.size();i++)
+				{
+					sumCount = sumCount + listProgressStatic.get(i).getCount();
+				}
+				if(sumCount < totalCustomerCount)
+				{
+					CustomerStaticInfo obj = new CustomerStaticInfo();
+					obj.setCategory("其他");
+					obj.setCount(totalCustomerCount - sumCount) ;
+					obj.setKey(999);
+					listProgressStatic.add(obj);
+				}
+			}
+			if(flag.equals("level"))
+			{
+				if(administratorFlag || companyLeaderFlag)
+				{
+					listLevelStatic = customerStaticInfoService.findAllCustomerStaticInfo(companyId,CustomerStaticInfo.CUSTOMER_LEVEL);
+				}
+				if(deptLeaderFlag)
+				{
+					listLevelStatic = customerStaticInfoService.findAllCustomerStaticInfo(companyId, sessionDeptId,null,CustomerStaticInfo.CUSTOMER_LEVEL);
+				}
+				if(ywyFlag)
+				{
+					listLevelStatic = customerStaticInfoService.findAllCustomerStaticInfo(companyId, null , sessionUserId,CustomerStaticInfo.CUSTOMER_LEVEL);
+				}
+				for(int i=0;i<listLevelStatic.size();i++)
+				{
+					sumCount = sumCount + listLevelStatic.get(i).getCount();
+				}
+				if(sumCount < totalCustomerCount)
+				{
+					CustomerStaticInfo obj = new CustomerStaticInfo();
+					obj.setCategory("others");
+					obj.setCount(totalCustomerCount - sumCount) ;
+					obj.setKey(999);
+					listLevelStatic.add(obj);
+				}
+			}
+		}catch(Exception e)
 		{
-			listSourceStatic = customerStaticInfoService.findAllCustomerStaticInfo(companyId,CustomerStaticInfo.CUSTOMER_SOURCE);
-			for(int i=0;i<listSourceStatic.size();i++)
-			{
-				sumCount = sumCount + listSourceStatic.get(i).getCount();
-			}
-			if(sumCount < totalCustomerCount)
-			{
-				CustomerStaticInfo obj = new CustomerStaticInfo();
-				obj.setCategory("其他");
-				obj.setCount(totalCustomerCount - sumCount) ;
-				obj.setKey(999);
-				listSourceStatic.add(obj);
-			}
+			e.printStackTrace();
+			return null;
 		}
-		if(flag.equals("maturity"))
-		{
-			listMaturityStatic = customerStaticInfoService.findAllCustomerStaticInfo(companyId,CustomerStaticInfo.CUSTOMER_MATURITY);
-			for(int i=0;i<listMaturityStatic.size();i++)
-			{
-				sumCount = sumCount + listMaturityStatic.get(i).getCount();
-			}
-			if(sumCount < totalCustomerCount)
-			{
-				CustomerStaticInfo obj = new CustomerStaticInfo();
-				obj.setCategory("其他");
-				obj.setCount(totalCustomerCount - sumCount) ;
-				obj.setKey(999);
-				listMaturityStatic.add(obj);
-			}
-		}
-		if(flag.equals("progress"))
-		{
-			listProgressStatic = customerStaticInfoService.findAllCustomerStaticInfo(companyId,CustomerStaticInfo.CUSTOMER_PROGRESS);
-			for(int i=0;i<listProgressStatic.size();i++)
-			{
-				sumCount = sumCount + listProgressStatic.get(i).getCount();
-			}
-			if(sumCount < totalCustomerCount)
-			{
-				CustomerStaticInfo obj = new CustomerStaticInfo();
-				obj.setCategory("其他");
-				obj.setCount(totalCustomerCount - sumCount) ;
-				obj.setKey(999);
-				listProgressStatic.add(obj);
-			}
-		}
-		if(flag.equals("level"))
-		{
-			listLevelStatic = customerStaticInfoService.findAllCustomerStaticInfo(companyId,CustomerStaticInfo.CUSTOMER_LEVEL);
-			for(int i=0;i<listLevelStatic.size();i++)
-			{
-				sumCount = sumCount + listLevelStatic.get(i).getCount();
-			}
-			if(sumCount < totalCustomerCount)
-			{
-				CustomerStaticInfo obj = new CustomerStaticInfo();
-				obj.setCategory("others");
-				obj.setCount(totalCustomerCount - sumCount) ;
-				obj.setKey(999);
-				listLevelStatic.add(obj);
-			}
-		}
+		
 		return SUCCESS;
 	}
 	
