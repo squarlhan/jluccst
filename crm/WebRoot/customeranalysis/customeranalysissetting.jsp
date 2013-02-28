@@ -118,6 +118,11 @@ $(function() {
 			
 			$('#beginTime').datetimepicker({showTimepicker: true});	
 			
+				
+			var message = $("#lb_message").html();
+			if(message!=null && $.trim(message)!="" ){
+				alert(message);
+			}
 });
 
 
@@ -126,6 +131,7 @@ $(function() {
 
 <body>
 <form id="form1" name="form1">
+<s:label id="lb_message" name="message" cssStyle="display:none"></s:label>
 <table>	
 <tr><td></td><td style="width:100%"><table>
 <tr><td style="width: 20px"></td><td style="width:838px"><fieldset><legend><span>选择客户</span></legend><table style="width: 100%" cellpadding="5" cellspacing="3">
