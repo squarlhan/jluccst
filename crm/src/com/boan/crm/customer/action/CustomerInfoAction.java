@@ -23,6 +23,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
+import com.boan.crm.backstagemanage.common.ProductType;
 import com.boan.crm.customer.model.ContractPersonInfo;
 import com.boan.crm.customer.model.CustomerInfo;
 import com.boan.crm.customer.model.CustomerStaticInfo;
@@ -145,7 +146,27 @@ public class CustomerInfoAction extends BaseActionSupport{
 	private String cityId = "";
 	private String tel = "";
 	private String flag = "";
-
+	private boolean crmFlag = false;
+	private boolean erpFlag = false;
+	private boolean teamFlag = false;
+	public boolean isCrmFlag() {
+		return crmFlag;
+	}
+	public void setCrmFlag(boolean crmFlag) {
+		this.crmFlag = crmFlag;
+	}
+	public boolean isErpFlag() {
+		return erpFlag;
+	}
+	public void setErpFlag(boolean erpFlag) {
+		this.erpFlag = erpFlag;
+	}
+	public boolean isTeamFlag() {
+		return teamFlag;
+	}
+	public void setTeamFlag(boolean teamFlag) {
+		this.teamFlag = teamFlag;
+	}
 	public String getTel() {
 		return tel;
 	}
@@ -163,6 +184,23 @@ public class CustomerInfoAction extends BaseActionSupport{
 	}
 	public void setListCustomer(List<CustomerInfo> listCustomer) {
 		this.listCustomer = listCustomer;
+	}
+	public CustomerInfoAction()
+	{
+		int productType = this.getSession().getProductType();
+		if(productType == ProductType.CRM)
+		{
+			crmFlag = true;
+		}
+		if(productType == ProductType.ERP)
+		{
+			erpFlag = false;
+		}
+		if(productType == ProductType.TEAM_MANAGE)
+		{
+			teamFlag = false;
+		}
+		
 	}
 	/**
 	 * 上传导入文件的名称
@@ -535,7 +573,6 @@ public class CustomerInfoAction extends BaseActionSupport{
 									customerAddressTemp = customerAddressTemp.replaceAll("县", "县 ");
 									customerAddressTemp = customerAddressTemp.replaceAll("  ", " ");
 									String[] customerAddressArray = customerAddressTemp.split(" ");
-									boolean bProvinceFlag = false;
 									boolean bCityFlag = false;
 									boolean bAreaFlag = false;
 									String tempCityId = cityId;
@@ -719,6 +756,7 @@ public class CustomerInfoAction extends BaseActionSupport{
 	
 	public String customerTabInfo()
 	{
+		
 		return SUCCESS;
 	}
 	public String myCustomerTabInfo()
