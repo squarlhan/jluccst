@@ -194,11 +194,11 @@ public class CustomerInfoAction extends BaseActionSupport{
 		}
 		if(productType == ProductType.ERP)
 		{
-			erpFlag = false;
+			erpFlag = true;
 		}
 		if(productType == ProductType.TEAM_MANAGE)
 		{
-			teamFlag = false;
+			teamFlag = true;
 		}
 		
 	}
