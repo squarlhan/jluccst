@@ -9,9 +9,19 @@
 			<result name="success">/sellrecord/group-tree-for-query-customer-by-sell-amount.jsp</result>
 			<result name="input">/sellrecord/group-tree-for-query-customer-by-sell-amount.jsp</result>
 		</action>
+		
+		<action name="showGroupTreeForEditCustomerBySellAmountAction" class="customerSellAmountAction" method="showGroupTreeForEditCustomerBySellAmount">
+			<result name="success">/sellrecord/group-tree-for-edit-customer-by-sell-amount.jsp</result>
+			<result name="input">/sellrecord/group-tree-for-edit-customer-by-sell-amount.jsp</result>
+		</action>
 		<action name="queryCustomerBySellAmountAction" class="customerSellAmountAction" method="queryCustomerBySellAmount">
 			<result name="success">/sellrecord/query-customer-by-sell-amount-list.jsp</result>
 			<result name="input">/sellrecord/query-customer-by-sell-amount-list.jsp</result>
+		</action>
+		
+		<action name="queryCustomerBySellAmountForEditAction" class="customerSellAmountAction" method="queryCustomerBySellAmountForEdit">
+			<result name="success">/sellrecord/query-customer-by-sell-amount-list-for-edit.jsp</result>
+			<result name="input">/sellrecord/query-customer-by-sell-amount-list-for-edit.jsp</result>
 		</action>
 	</package>
 </struts>
