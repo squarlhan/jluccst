@@ -57,6 +57,10 @@
 			}
 		};
 	  	$(function(){
+	  		if($("#hid_message").val()!="" && $("#recordId").val()!=null){
+				alert($("#hid_message").val());
+			}
+	  		
 	  		$.fn.CheckBoxAll("ids","cbk_all");
 			$.fn.UnCheckBoxAll("ids","cbk_all");
 	  		try{
@@ -255,6 +259,7 @@
   
   <body>
     <s:form id="form1" name="form1" method="post" theme="simple" action="">
+    	<s:hidden id="hid_message" name="message"></s:hidden>
     	<s:hidden id="recordId"  name="sellRecord.id"></s:hidden>
     	<s:hidden id="companyId"  name="sellRecord.companyId"></s:hidden>
     	<s:hidden id="deptId"  name="sellRecord.deptId"></s:hidden>
