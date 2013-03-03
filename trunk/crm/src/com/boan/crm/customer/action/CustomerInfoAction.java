@@ -326,15 +326,30 @@ public class CustomerInfoAction extends BaseActionSupport{
 	{
 		//客户分类： 传0
 		listCategory = dataDictionaryService.findDataDictionaryByType(sessionCompanyId, 0);
+		
+		UserSession us = this.getSession();
+		//判断是否是公司管理员或公司级用户
+		boolean ywyFlag = false;
 		try
 		{
-			if(deptId != null && deptId.length() > 0)
+			ywyFlag = popedomService.isHasPopedomByRoleKey(us,RoleFlag.YE_WU_YUAN);
+			if(ywyFlag)
 			{
-				userList = userService.queryUserListByCompanyIdRoleKey(sessionCompanyId,deptId,RoleFlag.YE_WU_YUAN);
+				User user = userService.getUserById(sessionUserId);
+				userList = new ArrayList<User>();
+				userList.add(user);
 			}else
 			{
-				userList = userService.queryUserListByCompanyIdRoleKey(sessionCompanyId,RoleFlag.YE_WU_YUAN);
+				if(deptId != null && deptId.length() > 0)
+				{
+					userList = userService.queryUserListByCompanyIdRoleKey(sessionCompanyId,deptId,RoleFlag.YE_WU_YUAN);
+				}else
+				{
+					userList = userService.queryUserListByCompanyIdRoleKey(sessionCompanyId,RoleFlag.YE_WU_YUAN);
+				}
 			}
+			
+			
 		}catch(Exception ex)
 		{
 			ex.printStackTrace();
@@ -356,6 +371,10 @@ public class CustomerInfoAction extends BaseActionSupport{
 		if(salesmanId != null && salesmanId.length() > 0)
 		{
 			values.put("salesmanId", salesmanId);
+		}
+		if(ywyFlag)
+		{
+			values.put("salesmanId", sessionUserId);
 		}
 		if(deptId != null && deptId.length() > 0)
 		{
