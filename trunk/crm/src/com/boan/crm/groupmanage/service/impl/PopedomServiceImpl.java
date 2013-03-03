@@ -138,7 +138,7 @@ public class PopedomServiceImpl implements IPopedomService{
 			}
 		}
 		*/
-		if( RoleFlag.GONG_SI_GUAN_LI_YUAN.equalsIgnoreCase( roleKey ) )
+		if( RoleFlag.GONG_SI_LING_DAO.equalsIgnoreCase( roleKey ) )
 		{
 			return true;
 		}
