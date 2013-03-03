@@ -344,19 +344,19 @@
 									<strong>应收总计：</strong>
 								</td>
 								<td height="26" align="left" bgcolor="#FFFFFF"  nowrap="nowrap">
-									<s:textfield id="txt_receivable" name="sellRecord.receivable" cssStyle="width:240px" ></s:textfield>元
+									<s:textfield id="txt_receivable" name="sellRecord.receivable" ></s:textfield>元
 								</td>
 								<td height="26" align="right" bgcolor="#FFFFFF" nowrap="nowrap">
 									<strong>实 收：</strong>
 								</td>
 								<td height="26" align="left" bgcolor="#FFFFFF"  nowrap="nowrap">
-									<s:textfield id="txt_realCollection" name="sellRecord.realCollection" cssStyle="width:240px" ></s:textfield>元
+									<s:textfield id="txt_realCollection" name="sellRecord.realCollection"  ></s:textfield>元
 								</td>
 								<td height="26" align="right" bgcolor="#FFFFFF" nowrap="nowrap">
 									<strong>欠 款：</strong>
 								</td>
 								<td height="26" align="left" bgcolor="#FFFFFF" nowrap="nowrap">
-									<s:textfield  id="txt_debt" name="sellRecord.debt" cssStyle="width:240px" ></s:textfield>元
+									<s:textfield  id="txt_debt" name="sellRecord.debt"  ></s:textfield>元
 								</td>
 							</tr>
 						</table>
