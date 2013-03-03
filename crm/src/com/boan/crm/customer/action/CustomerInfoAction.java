@@ -105,18 +105,7 @@ public class CustomerInfoAction extends BaseActionSupport{
 	@Qualifier("customerVisitInfoService")
 	private ICustomerVisitInfoService customerVisitInfoService = null;
 	
-	public String getCompanyId() {
-		return companyId;
-	}
-	public void setCompanyId(String companyId) {
-		this.companyId = companyId;
-	}
-	public String getCompanyName() {
-		return companyName;
-	}
-	public void setCompanyName(String companyName) {
-		this.companyName = companyName;
-	}
+	
 	//客户信息类
 	private CustomerInfo customerInfo ;
 	private String id = "";
@@ -149,42 +138,23 @@ public class CustomerInfoAction extends BaseActionSupport{
 	private boolean crmFlag = false;
 	private boolean erpFlag = false;
 	private boolean teamFlag = false;
-	public boolean isCrmFlag() {
-		return crmFlag;
-	}
-	public void setCrmFlag(boolean crmFlag) {
-		this.crmFlag = crmFlag;
-	}
-	public boolean isErpFlag() {
-		return erpFlag;
-	}
-	public void setErpFlag(boolean erpFlag) {
-		this.erpFlag = erpFlag;
-	}
-	public boolean isTeamFlag() {
-		return teamFlag;
-	}
-	public void setTeamFlag(boolean teamFlag) {
-		this.teamFlag = teamFlag;
-	}
-	public String getTel() {
-		return tel;
-	}
-	public String getFlag() {
-		return flag;
-	}
-	public void setFlag(String flag) {
-		this.flag = flag;
-	}
-	public void setTel(String tel) {
-		this.tel = tel;
-	}
-	public List<CustomerInfo> getListCustomer() {
-		return listCustomer;
-	}
-	public void setListCustomer(List<CustomerInfo> listCustomer) {
-		this.listCustomer = listCustomer;
-	}
+	
+	
+	/**
+	 * 上传导入文件的名称
+	 */
+	private String uploadFileFileName = null;
+	private String companyId = "";
+	private String companyName = "";
+	private List<Deptment> deptList = null;
+	private int totalCustomerCount = 0;
+	
+	private List<CustomerStaticInfo> listCategoryStatic = null;
+	private List<CustomerStaticInfo> listSourceStatic =  null;
+	private List<CustomerStaticInfo> listMaturityStatic =  null;
+	private List<CustomerStaticInfo> listProgressStatic =  null;
+	private List<CustomerStaticInfo> listLevelStatic =  null;
+	
 	public CustomerInfoAction()
 	{
 		int productType = this.getSession().getProductType();
@@ -202,55 +172,6 @@ public class CustomerInfoAction extends BaseActionSupport{
 		}
 		
 	}
-	/**
-	 * 上传导入文件的名称
-	 */
-	private String uploadFileFileName = null;
-	private String companyId = "";
-	private String companyName = "";
-	private List<Deptment> deptList = null;
-	private int totalCustomerCount = 0;
-	public int getTotalCustomerCount() {
-		return totalCustomerCount;
-	}
-	public void setTotalCustomerCount(int totalCustomerCount) {
-		this.totalCustomerCount = totalCustomerCount;
-	}
-	public List<CustomerStaticInfo> getListCategoryStatic() {
-		return listCategoryStatic;
-	}
-	public void setListCategoryStatic(List<CustomerStaticInfo> listCategoryStatic) {
-		this.listCategoryStatic = listCategoryStatic;
-	}
-	public List<CustomerStaticInfo> getListSourceStatic() {
-		return listSourceStatic;
-	}
-	public void setListSourceStatic(List<CustomerStaticInfo> listSourceStatic) {
-		this.listSourceStatic = listSourceStatic;
-	}
-	public List<CustomerStaticInfo> getListMaturityStatic() {
-		return listMaturityStatic;
-	}
-	public void setListMaturityStatic(List<CustomerStaticInfo> listMaturityStatic) {
-		this.listMaturityStatic = listMaturityStatic;
-	}
-	public List<CustomerStaticInfo> getListProgressStatic() {
-		return listProgressStatic;
-	}
-	public void setListProgressStatic(List<CustomerStaticInfo> listProgressStatic) {
-		this.listProgressStatic = listProgressStatic;
-	}
-	public List<CustomerStaticInfo> getListLevelStatic() {
-		return listLevelStatic;
-	}
-	public void setListLevelStatic(List<CustomerStaticInfo> listLevelStatic) {
-		this.listLevelStatic = listLevelStatic;
-	}
-	private List<CustomerStaticInfo> listCategoryStatic = null;
-	private List<CustomerStaticInfo> listSourceStatic =  null;
-	private List<CustomerStaticInfo> listMaturityStatic =  null;
-	private List<CustomerStaticInfo> listProgressStatic =  null;
-	private List<CustomerStaticInfo> listLevelStatic =  null;
 	
 	public String showGroupTree() throws Exception
 	{
@@ -1191,5 +1112,89 @@ public class CustomerInfoAction extends BaseActionSupport{
 	}
 	public void setDeptId(String deptId) {
 		this.deptId = deptId;
+	}
+	public String getCompanyId() {
+		return companyId;
+	}
+	public void setCompanyId(String companyId) {
+		this.companyId = companyId;
+	}
+	public String getCompanyName() {
+		return companyName;
+	}
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
+	}
+	public boolean isCrmFlag() {
+		return crmFlag;
+	}
+	public void setCrmFlag(boolean crmFlag) {
+		this.crmFlag = crmFlag;
+	}
+	public boolean isErpFlag() {
+		return erpFlag;
+	}
+	public void setErpFlag(boolean erpFlag) {
+		this.erpFlag = erpFlag;
+	}
+	public boolean isTeamFlag() {
+		return teamFlag;
+	}
+	public void setTeamFlag(boolean teamFlag) {
+		this.teamFlag = teamFlag;
+	}
+	public String getTel() {
+		return tel;
+	}
+	public String getFlag() {
+		return flag;
+	}
+	public void setFlag(String flag) {
+		this.flag = flag;
+	}
+	public void setTel(String tel) {
+		this.tel = tel;
+	}
+	public List<CustomerInfo> getListCustomer() {
+		return listCustomer;
+	}
+	public void setListCustomer(List<CustomerInfo> listCustomer) {
+		this.listCustomer = listCustomer;
+	}
+	public int getTotalCustomerCount() {
+		return totalCustomerCount;
+	}
+	public void setTotalCustomerCount(int totalCustomerCount) {
+		this.totalCustomerCount = totalCustomerCount;
+	}
+	public List<CustomerStaticInfo> getListCategoryStatic() {
+		return listCategoryStatic;
+	}
+	public void setListCategoryStatic(List<CustomerStaticInfo> listCategoryStatic) {
+		this.listCategoryStatic = listCategoryStatic;
+	}
+	public List<CustomerStaticInfo> getListSourceStatic() {
+		return listSourceStatic;
+	}
+	public void setListSourceStatic(List<CustomerStaticInfo> listSourceStatic) {
+		this.listSourceStatic = listSourceStatic;
+	}
+	public List<CustomerStaticInfo> getListMaturityStatic() {
+		return listMaturityStatic;
+	}
+	public void setListMaturityStatic(List<CustomerStaticInfo> listMaturityStatic) {
+		this.listMaturityStatic = listMaturityStatic;
+	}
+	public List<CustomerStaticInfo> getListProgressStatic() {
+		return listProgressStatic;
+	}
+	public void setListProgressStatic(List<CustomerStaticInfo> listProgressStatic) {
+		this.listProgressStatic = listProgressStatic;
+	}
+	public List<CustomerStaticInfo> getListLevelStatic() {
+		return listLevelStatic;
+	}
+	public void setListLevelStatic(List<CustomerStaticInfo> listLevelStatic) {
+		this.listLevelStatic = listLevelStatic;
 	}
 }
