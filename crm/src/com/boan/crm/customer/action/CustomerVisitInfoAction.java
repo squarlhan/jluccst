@@ -27,7 +27,9 @@ import com.boan.crm.customer.service.ICustomerVisitInfoService;
 import com.boan.crm.datadictionary.model.DataDictionary;
 import com.boan.crm.datadictionary.service.IDataDictionaryService;
 import com.boan.crm.groupmanage.common.RoleFlag;
+import com.boan.crm.groupmanage.common.UserSession;
 import com.boan.crm.groupmanage.model.User;
+import com.boan.crm.groupmanage.service.IPopedomService;
 import com.boan.crm.groupmanage.service.IUserService;
 import com.boan.crm.sms.model.SMSCustomerInfo;
 import com.boan.crm.sms.model.SMSInfo;
@@ -80,6 +82,10 @@ public class CustomerVisitInfoAction extends BaseActionSupport{
 	@Autowired
 	@Qualifier("actionPlanService")
 	private IActionPlanService actionPlanService = null;
+	@Autowired
+	@Qualifier("popedomService")
+	private IPopedomService popedomService = null;
+	
 	//客户回访信息类
 	private CustomerVisitInfo customerVisitInfo ;
 	private String id = "";
@@ -236,14 +242,33 @@ public class CustomerVisitInfoAction extends BaseActionSupport{
 		//回访方式： 传5
 		listVisitOption = dataDictionaryService.findDataDictionaryByType(sessionCompanyId, 5);
 		
+		UserSession us = this.getSession();
+		boolean ywyFlag = false;
+		boolean leaderFlag = false;
 		try
 		{
-			if(deptId != null && deptId.length() > 0)
+			ywyFlag = popedomService.isHasPopedomByRoleKey(us,RoleFlag.YE_WU_YUAN);
+			leaderFlag = popedomService.isHasPopedomByRoleKey(us,RoleFlag.BU_MEN_LING_DAO);
+			if(ywyFlag)
 			{
-				userList = userService.queryUserListByCompanyIdRoleKey(sessionCompanyId,deptId,RoleFlag.YE_WU_YUAN);
+				User user = userService.getUserById(sessionUserId);
+				userList = new ArrayList<User>();
+				userList.add(user);
 			}else
 			{
-				userList = userService.queryUserListByCompanyIdRoleKey(sessionCompanyId,RoleFlag.YE_WU_YUAN);
+				if(leaderFlag)
+				{
+					userList = userService.queryUserListByCompanyIdRoleKey(sessionCompanyId,sessionDeptId,RoleFlag.YE_WU_YUAN);
+				}else
+				{
+					if(deptId != null && deptId.length() > 0)
+					{
+						userList = userService.queryUserListByCompanyIdRoleKey(sessionCompanyId,deptId,RoleFlag.YE_WU_YUAN);
+					}else
+					{
+						userList = userService.queryUserListByCompanyIdRoleKey(sessionCompanyId,RoleFlag.YE_WU_YUAN);
+					}
+				}
 			}
 		}catch(Exception ex)
 		{
@@ -263,6 +288,10 @@ public class CustomerVisitInfoAction extends BaseActionSupport{
 		{
 			values.put("salesmanId", salesmanId);
 		}
+		if(ywyFlag)
+		{
+			values.put("salesmanId", sessionUserId);
+		}
 		if(visitOption != null && visitOption.length() > 0)
 		{
 			values.put("visitOption", visitOption);
@@ -278,6 +307,10 @@ public class CustomerVisitInfoAction extends BaseActionSupport{
 		if(deptId != null && deptId.length() > 0)
 		{
 			values.put("deptId", deptId);
+		}
+		if(leaderFlag)
+		{
+			values.put("deptId", sessionDeptId);
 		}
 		values.put("showAllFlag", "1");
 		values.put( "companyId", sessionCompanyId );

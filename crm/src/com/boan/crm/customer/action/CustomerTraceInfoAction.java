@@ -27,7 +27,9 @@ import com.boan.crm.customer.service.ICustomerTraceInfoService;
 import com.boan.crm.datadictionary.model.DataDictionary;
 import com.boan.crm.datadictionary.service.IDataDictionaryService;
 import com.boan.crm.groupmanage.common.RoleFlag;
+import com.boan.crm.groupmanage.common.UserSession;
 import com.boan.crm.groupmanage.model.User;
+import com.boan.crm.groupmanage.service.IPopedomService;
 import com.boan.crm.groupmanage.service.IUserService;
 import com.boan.crm.sms.model.SMSCustomerInfo;
 import com.boan.crm.sms.model.SMSInfo;
@@ -81,6 +83,10 @@ public class CustomerTraceInfoAction extends BaseActionSupport{
 	@Autowired
 	@Qualifier("actionPlanService")
 	private IActionPlanService actionPlanService = null;
+	
+	@Autowired
+	@Qualifier("popedomService")
+	private IPopedomService popedomService = null;
 	//客户跟进信息类
 	private CustomerTraceInfo customerTraceInfo ;
 	private String id = "";
@@ -249,16 +255,33 @@ public class CustomerTraceInfoAction extends BaseActionSupport{
 	{
 		//跟进方式： 传6
 		listTraceOption = dataDictionaryService.findDataDictionaryByType(sessionCompanyId, 6);
-		
+		UserSession us = this.getSession();
+		boolean ywyFlag = false;
+		boolean leaderFlag = false;
 		try
 		{
-//			userList = userService.queryUserListByCompanyIdRoleKey(sessionCompanyId,RoleFlag.YE_WU_YUAN);
-			if(deptId != null && deptId.length() > 0)
+			ywyFlag = popedomService.isHasPopedomByRoleKey(us,RoleFlag.YE_WU_YUAN);
+			leaderFlag = popedomService.isHasPopedomByRoleKey(us,RoleFlag.BU_MEN_LING_DAO);
+			if(ywyFlag)
 			{
-				userList = userService.queryUserListByCompanyIdRoleKey(sessionCompanyId,deptId,RoleFlag.YE_WU_YUAN);
+				User user = userService.getUserById(sessionUserId);
+				userList = new ArrayList<User>();
+				userList.add(user);
 			}else
 			{
-				userList = userService.queryUserListByCompanyIdRoleKey(sessionCompanyId,RoleFlag.YE_WU_YUAN);
+				if(leaderFlag)
+				{
+					userList = userService.queryUserListByCompanyIdRoleKey(sessionCompanyId,sessionDeptId,RoleFlag.YE_WU_YUAN);
+				}else
+				{
+					if(deptId != null && deptId.length() > 0)
+					{
+						userList = userService.queryUserListByCompanyIdRoleKey(sessionCompanyId,deptId,RoleFlag.YE_WU_YUAN);
+					}else
+					{
+						userList = userService.queryUserListByCompanyIdRoleKey(sessionCompanyId,RoleFlag.YE_WU_YUAN);
+					}
+				}
 			}
 		}catch(Exception ex)
 		{
@@ -273,6 +296,10 @@ public class CustomerTraceInfoAction extends BaseActionSupport{
 		if(salesmanId != null && salesmanId.length() > 0)
 		{
 			values.put("salesmanId", salesmanId);
+		}
+		if(ywyFlag)
+		{
+			values.put("salesmanId", sessionUserId);
 		}
 		if(customerId != null && customerId.length() > 0)
 		{
@@ -294,6 +321,10 @@ public class CustomerTraceInfoAction extends BaseActionSupport{
 		if(deptId != null && deptId.length() > 0)
 		{
 			values.put("deptId", deptId);
+		}
+		if(leaderFlag)
+		{
+			values.put("deptId", sessionDeptId);
 		}
 		values.put("showAllFlag", "1");
 		pagination = customerTraceInfoService.findCustomerTraceInfoForPage(values, pagination);
