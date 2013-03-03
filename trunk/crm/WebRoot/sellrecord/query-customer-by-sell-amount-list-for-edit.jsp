@@ -126,7 +126,7 @@
             	   alert("总销售额结束值请填写数字，如：10000！");
             	   return false;
                 }
-				form1.action = "queryCustomerBySellAmountAction.action";
+				form1.action = "queryCustomerBySellAmountForEditAction.action";
 				form1.submit();
 		
 			});
@@ -137,7 +137,7 @@
 	  		$('a[name="edit"]').each(function(){
 	  			$(this).click(function(){
 	  				var url = $(this).attr("url");
-	  				parent.parent.tipsWindown("销售记录","iframe:"+url,"950","527","true","","true","yes");
+	  				parent.parent.tipsWindown("销售记录","iframe:"+url,"6800","1800","true","","true","yes");
 	  			});
 	  		});
 		});
@@ -236,10 +236,10 @@
             <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="source"/></td>
             <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="totalConsumption"/></td>
           	<td height="26" colspan="2" align="center" bgcolor="#FFFFFF">
-          	<s:url id="edit_url" action="openSellRecordListForCustomerViewAction.action">   
+          	<s:url id="edit_url" action="openSellRecordListForCustomerAction.action">   
 				<s:param name="customerId" value="id"></s:param>   
 			</s:url>
-         	<a name="edit" href="javascript:void(0);" url="${edit_url}">详细</a>  
+         	<a name="edit" href="javascript:void(0);" url="${edit_url}">维护</a>  
           </td>
         </tr>
         </s:iterator>        
