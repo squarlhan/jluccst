@@ -142,6 +142,10 @@ public class CustomerSellAmountAction extends BaseActionSupport {
 		return SUCCESS;
 	}
 	
+	public String showGroupTreeForEditCustomerBySellAmount() throws Exception{
+		return showGroupTreeForQueryCustomerBySellAmount();
+	}
+	
 	public String queryCustomerBySellAmount() {
 		// 客户分类： 传0
 		listCategory = dataDictionaryService.findDataDictionaryByType( sessionCompanyId, 0);
@@ -189,6 +193,10 @@ public class CustomerSellAmountAction extends BaseActionSupport {
 
 		pagination = customerInfoService.findCustomerInfoAndSellAmountForPage(values , pagination);
 		return SUCCESS;
+	}
+	
+	public String queryCustomerBySellAmountForEdit(){
+		return queryCustomerBySellAmount();
 	}
 
 	public String getCompanyId() {
