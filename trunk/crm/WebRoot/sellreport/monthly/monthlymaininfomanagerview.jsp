@@ -26,10 +26,9 @@ import="com.boan.crm.groupmanage.common.UserSession,com.boan.crm.groupmanage.ser
 	IPopedomService popedomService = new PopedomServiceImpl();
 	UserSession us = (UserSession) session.getAttribute("userSession");
 	String deptId = us.getDeptId();
-	//判断是否是公司管理员或公司级用户
+	String personId = us.getUserId();
 	boolean popodomFlag = popedomService.isCompanyAdministrator(us.getUserId(), String.valueOf(us.getUserType()) ) 
-			||popedomService.isHasCompanyPopedom(us.getRoleKey());
-	
+			||popedomService.isHasDeptPopedom(us.getRoleKey()) || popedomService.isHasCompanyPopedom(us.getRoleKey());
 	if( popodomFlag ){
 		//经理级人员
 	}else{
@@ -84,7 +83,7 @@ import="com.boan.crm.groupmanage.common.UserSession,com.boan.crm.groupmanage.ser
 								<td width="200" valign="top" style="border-left: 1px solid #54a4e3; border-bottom: 1px solid #54a4e3; border-right: 1px solid #54a4e3; padding: 5px;"><iframe width="100%" height="100%" id="menutree" name="menutree"frameborder="0" scrolling="auto" src="<%=path %>/showGroupTreeForMonthlyMainInfoViewAction.action"></iframe></td>
 								<td valign="top" style="border-left: 1px solid #54a4e3; border-bottom: 1px solid #54a4e3; border-right: 1px solid #54a4e3; padding: 5px;"><iframe width="100%" height="100%" id="groupmain" name="groupmain" frameborder="0" scrolling="auto" src="<%=path %>/blank.jsp"></iframe></td>
 							<%}else{%>
-								<td valign="top" style="border-left: 1px solid #54a4e3; border-bottom: 1px solid #54a4e3; border-right: 1px solid #54a4e3; padding: 5px;"><iframe width="100%" height="100%" id="groupmain" name="groupmain" frameborder="0" scrolling="auto" src="openMonthlyMainInfoListViewAction.action?deptId=<%=deptId %>"></iframe></td>
+								<td valign="top" style="border-left: 1px solid #54a4e3; border-bottom: 1px solid #54a4e3; border-right: 1px solid #54a4e3; padding: 5px;"><iframe width="100%" height="100%" id="groupmain" name="groupmain" frameborder="0" scrolling="auto" src="openMonthlyMainInfoListViewAction.action?deptId=<%=deptId %>&personId=<%=personId%>"></iframe></td>
 							<%}%>
 						</tr>
 					</table>

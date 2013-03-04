@@ -111,14 +111,6 @@ public class CustomerSellAmountAction extends BaseActionSupport {
 		//判断是否是公司管理员或公司级用户
 		boolean popodomFlag = popedomService.isCompanyAdministrator(us.getUserId(), String.valueOf(us.getUserType()) ) 
 				||popedomService.isHasCompanyPopedom(us.getRoleKey());
-		/**
-		 * JHY注 
-		if(flag){ //部门经理
-			deptList.add(deptService.get(sessionDeptId));
-		}else{    //总经理
-			deptList = deptService.queryAllDeptmentsByCompanyId(sessionCompanyId);
-		}
-		*/
 		if( popodomFlag ){
 			deptList = deptService.queryAllDeptmentsByCompanyId(sessionCompanyId);
 		}else{
