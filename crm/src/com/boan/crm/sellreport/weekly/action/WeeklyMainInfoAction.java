@@ -16,9 +16,11 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
+import com.boan.crm.groupmanage.common.UserSession;
 import com.boan.crm.groupmanage.model.Deptment;
 import com.boan.crm.groupmanage.model.User;
 import com.boan.crm.groupmanage.service.IDeptmentService;
+import com.boan.crm.groupmanage.service.IPopedomService;
 import com.boan.crm.groupmanage.service.IUserService;
 import com.boan.crm.sellrecord.service.ISellRecordService;
 import com.boan.crm.sellreport.weekly.model.WeeklyItemInfo;
@@ -84,6 +86,10 @@ public class WeeklyMainInfoAction  extends BaseActionSupport{
 	@Qualifier("sellRecordService")
 	private ISellRecordService sellRecordService;
 	
+	@Autowired
+	@Qualifier("popedomService")
+	private IPopedomService popedomService = null;
+	
 	/**
 	 * 提示信息
 	 */
@@ -114,8 +120,9 @@ public class WeeklyMainInfoAction  extends BaseActionSupport{
 		deptList = new ArrayList<Deptment>();
 		boolean flag=true;
 		if(sessionDeptId.equals("")){ //总经理
-			//flag=false;
+			flag=false;
 		}
+		
 		if(flag){ //部门经理
 			deptList.add(deptService.get(sessionDeptId));
 		}else{    //总经理
@@ -151,14 +158,17 @@ public class WeeklyMainInfoAction  extends BaseActionSupport{
 		deptList = new ArrayList<Deptment>();
 		boolean flag=true;
 		if(sessionDeptId.equals("")){ //总经理
-			//flag=false;
+			flag=false;
 		}
-		if(flag){ //部门经理
-			deptList.add(deptService.get(sessionDeptId));
-		}else{    //总经理
+		UserSession us = this.getSession();
+		//判断是否是公司管理员或公司级用户
+		boolean popodomFlag = popedomService.isCompanyAdministrator(us.getUserId(), String.valueOf(us.getUserType()) ) 
+				||popedomService.isHasCompanyPopedom(us.getRoleKey());
+		if( popodomFlag ){
 			deptList = deptService.queryAllDeptmentsByCompanyId(sessionCompanyId);
+		}else{
+			deptList.add(deptService.get(sessionDeptId));
 		}
-		
 		// 获取用户列表
 		if (deptList != null && deptList.size() > 0) {
 			List<User> tempUserList = new ArrayList<User>();
