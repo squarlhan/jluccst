@@ -177,23 +177,25 @@
 		  		 */
 		  		$('a[name="delRecord"]').each(function(){
 		  			$(this).click(function(){
-		  				var url = $(this).attr("url");
-		  				var id = $(this).attr("id");
-		  				/*form1.action = url;
-						form1.customerId_t.value = $("#customerId").val();
-						form1.target = "_parent";
-		               	form1.submit();*/
-		               	$.ajax({
-		                    url:url,
-		                    type: 'POST',
-		                    dataType: 'JSON',
-		                    timeout: 5000,
-		                    error: function() { alert('Error loading data!'); },
-		                    success: function(msg) {
-		                    	alert("删除成功！");
-		                        $("#tr"+id).empty();
-		                    }
-		                });
+		  				if(window.confirm("您确定要删除所选联系人吗？")){
+			  				var url = $(this).attr("url");
+			  				var id = $(this).attr("id");
+			  				/*form1.action = url;
+							form1.customerId_t.value = $("#customerId").val();
+							form1.target = "_parent";
+			               	form1.submit();*/
+			               	$.ajax({
+			                    url:url,
+			                    type: 'POST',
+			                    dataType: 'JSON',
+			                    timeout: 5000,
+			                    error: function() { alert('Error loading data!'); },
+			                    success: function(msg) {
+			                    	alert("删除成功！");
+			                        $("#tr"+id).empty();
+			                    }
+			                });
+		  				}
 		  				//window.parent.location.href = url;
 		  			});
 		  		});
@@ -423,7 +425,7 @@
 											<legend>
 												<span>联系人信息</span> &nbsp;&nbsp;<a name="delRecord"
 													href="javascript:void(0);" url="${del_url}"
-													id="<s:property value="id"/>" style="font-size:9pt;hover:red;"><u>删除联系人</u></a>
+													id="<s:property value="id"/>" style="font-size:9pt;hover:red;"><b><font color="#535353"><u>删除联系人</u></font></b></a>
 											</legend>
 											<table>
 												<tr>
@@ -435,7 +437,7 @@
 																		action="customer/contractPersonInfo.action">
 																		<s:param name="personId" value="id"></s:param>
 																	</s:url> <a name="edit" href="javascript:void(0);"
-																	url="${edit_url}" style="hover:red;"><u><s:property value="personName" /></u>
+																	url="${edit_url}" style="hover:red;"><b><font color="#535353"><u><s:property value="personName" /></u></font></b>
 																</a>
 																</td>
 																<td align="center" width="100px">部门/职务：</td>
