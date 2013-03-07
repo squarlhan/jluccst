@@ -27,13 +27,16 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<title></title>
-		<j:scriptlink css="true" jquery="true" validate="true"></j:scriptlink>
+		<j:scriptlink css="true" jquery="true" validate="true" date="true"></j:scriptlink>
+		<script type="text/javascript" src="<%=path %>/js/My97DatePicker/WdatePicker.js"></script>
+		<!-- 
 		<link rel="stylesheet" media="all" type="text/css" href="<%=path %>/js/timepicke/jquery-ui-1.7.3.custom.css" />
 		<link rel="stylesheet" media="all" type="text/css" href="<%=path %>/js/timepicke/jquery-ui-timepicker-addon.css" />
 		<script type="text/javascript" src="<%=path %>/js/timepicke/jquery-ui-1.7.3.custom.min.js"></script>
 		<script type="text/javascript" src="<%=path %>/js/timepicke/jquery-ui-timepicker-addon.js"></script>
 		<script type="text/javascript" src="<%=path %>/js/timepicke/jquery-ui-timepicker-zh-CN.js"></script>
 		<script type="text/javascript" src="<%=path %>/js/timepicke/jquery-ui-sliderAccess.js"></script>
+		 -->
 		<script type="text/javascript">
 		<!--
 			var _customer_submit = {
@@ -90,7 +93,7 @@
 			 */
 			$.fn.initpage = function(){
 				$("#userCName").focus();
-				$("#birthday").datetimepicker({showTimepicker: false});
+				//$("#birthday").datetimepicker({showTimepicker: false});
 			}
 		//-->
 		</script>
@@ -160,7 +163,7 @@
 												<strong>出生日期：</strong>
 											</td>
 											<td height="26" align="left" bgcolor="#FFFFFF">
-												<s:textfield name="user.birthday" id="birthday" cssStyle="width: 250px;" maxlength="25"></s:textfield>
+												<s:textfield name="user.birthday" id="birthday" cssStyle="width: 250px;" maxlength="25" onclick="WdatePicker()"></s:textfield>
 											</td>
 										</tr>
 										<tr>
