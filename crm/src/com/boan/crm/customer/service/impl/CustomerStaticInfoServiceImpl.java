@@ -215,25 +215,25 @@ public class CustomerStaticInfoServiceImpl implements ICustomerStaticInfoService
 					if(key == CustomerStaticInfo.CUSTOMER_SOURCE)
 					{
 						hql.delete(0, hql.length());
-						hql.append("select Count(id) from CustomerInfo where companyId = :companyId and sourceId = :sourceId ");
+						hql.append("select Count(id) from CustomerInfo where companyId = :companyId and sourceId = :sourceId and deleteFlag = 0");
 						values.put("companyId", companyId);
 						values.put("sourceId", listDic.get(i).getId());
 					}else if(key == CustomerStaticInfo.CUSTOMER_CATEGORY)
 					{
 						hql.delete(0, hql.length());
-						hql.append("select Count(id) from CustomerInfo where companyId = :companyId and categoryId = :categoryId ");
+						hql.append("select Count(id) from CustomerInfo where companyId = :companyId and categoryId = :categoryId and deleteFlag = 0");
 						values.put("companyId", companyId);
 						values.put("categoryId", listDic.get(i).getId());
 					}else if(key == CustomerStaticInfo.CUSTOMER_MATURITY)
 					{
 						hql.delete(0, hql.length());
-						hql.append("select Count(id) from CustomerInfo where companyId = :companyId and maturityId = :maturityId ");
+						hql.append("select Count(id) from CustomerInfo where companyId = :companyId and maturityId = :maturityId and deleteFlag = 0");
 						values.put("companyId", companyId);
 						values.put("maturityId", listDic.get(i).getId());
 					}else if(key == CustomerStaticInfo.CUSTOMER_PROGRESS)
 					{
 						hql.delete(0, hql.length());
-						hql.append("select Count(id) from CustomerInfo where companyId = :companyId and progressId = :progressId ");
+						hql.append("select Count(id) from CustomerInfo where companyId = :companyId and progressId = :progressId and deleteFlag = 0");
 						values.put("companyId", companyId);
 						values.put("progressId", listDic.get(i).getId());
 					}
