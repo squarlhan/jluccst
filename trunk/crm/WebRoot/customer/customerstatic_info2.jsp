@@ -85,14 +85,8 @@ background-color:#d3eaef}
 	<j:scriptlink css="true" jmessagebox="true" jquery="true" tipswindow="true" validate="true" />
 	<script type="text/javascript">
 	$(document).ready(function(){
-		var recordCount = document.getElementById("form1_totalCustomerCount").value;
-		var yMaxValue = parseInt(recordCount);
-		if(recordCount < 10 )
-		{
-			recordCount = 10;
-		}
 		<s:if test="flag.equals('category')">
-			var xml = "<graph caption='客户分类信息统计' baseFontSize='16'　showNames='1' showValues='1' xAxisName='客户分类' yAxisMinValue='0' yAxisMaxValue='"+recordCount+"' yAxisName='客户个数' showLabels='1'  decimalPrecision='0'>";
+			var xml = "<graph caption='客户分类信息统计' baseFontSize='16'　showNames='1' showValues='1' xAxisName='客户分类' yAxisMinValue='0' yAxisName='客户个数' showLabels='1'  decimalPrecision='0'>";
 			<s:iterator value="listCategoryStatic" status="obj">
 				xml = xml + "<set label=\""+document.getElementById("category<s:property value="#obj.index"/>").textStr+"\" name=\""+document.getElementById("category<s:property value="#obj.index"/>").textStr+"\" value=\""+document.getElementById("category<s:property value="#obj.index"/>").valueStr+"\" />";
 			</s:iterator>
@@ -100,9 +94,18 @@ background-color:#d3eaef}
 			var chart = new FusionCharts("../js/FusionCharts/Charts/FCF_Column3D.swf", "chartdiv1", "500", "350");
 			chart.setDataXML(xml);
 			chart.render("chartdiv1");
+			
+			var xml11 = "<graph caption='客户分类信息统计' pieSliceDepth='30'  baseFontSize='16' shownames='1' showvalues='1' showLegend='1' formatNumberScale='1' formatNumber='1'  pieRadius='150' pieYScale='60' decimalPrecision='2' chartLeftMargin='0' chartRightMargin='0' chartTopMargin='0' >";
+		    <s:iterator value="listCategoryStatic" status="obj">
+		    	xml11 = xml11 + "<set name=\""+document.getElementById("category<s:property value="#obj.index"/>").textStr+"\" value=\""+document.getElementById("category<s:property value="#obj.index"/>").valueStr+"\" />";
+		    </s:iterator>
+		    xml11 = xml11 + "</graph>";
+		    var chart11 = new FusionCharts("../js/FusionCharts/Charts/FCF_Pie3D.swf", "chartdiv11", "500", "350");
+			chart11.setDataXML(xml11);
+			chart11.render("chartdiv11");
 		</s:if>
 		<s:if test="flag.equals('source')">
-			var xml2 = "<graph caption='客户来源信息统计' baseFontSize='16' xAxisName='客户来源' yAxisName='客户个数' showNames='1' yAxisMaxValue='"+recordCount+"'  decimalPrecision='0'>";
+			var xml2 = "<graph caption='客户来源信息统计' baseFontSize='16' xAxisName='客户来源' yAxisName='客户个数' showNames='1'  decimalPrecision='0'>";
 			<s:iterator value="listSourceStatic" status="obj">
 				xml2 = xml2 + "<set name=\""+document.getElementById("source<s:property value="#obj.index"/>").textStr+"\" value=\""+document.getElementById("source<s:property value="#obj.index"/>").valueStr+"\" />";
 			</s:iterator>
@@ -112,7 +115,7 @@ background-color:#d3eaef}
 			chart2.render("chartdiv2");
 		</s:if>
 		<s:if test="flag.equals('maturity')">
-			var xml3 = "<graph caption='客户成熟度信息统计' baseFontSize='16' xAxisName='客户成熟度' showNames='1' yAxisMaxValue='"+recordCount+"' decimalPrecision='0'>";
+			var xml3 = "<graph caption='客户成熟度信息统计' baseFontSize='16' xAxisName='客户成熟度' showNames='1'  decimalPrecision='0'>";
 			<s:iterator value="listMaturityStatic" status="obj">
 				xml3 = xml3 + "<set name=\""+document.getElementById("maturity<s:property value="#obj.index"/>").textStr+"\" value=\""+document.getElementById("maturity<s:property value="#obj.index"/>").valueStr+"\" />";
 			</s:iterator>
@@ -122,7 +125,7 @@ background-color:#d3eaef}
 			chart3.render("chartdiv3");
 		</s:if>
 		<s:if test="flag.equals('progress')">
-			var xml4 = "<graph caption='客户业务进展信息统计' baseFontSize='16' xAxisName='客户业务进展' showNames='1' yAxisMaxValue='"+recordCount+"' decimalPrecision='0'>";
+			var xml4 = "<graph caption='客户业务进展信息统计' baseFontSize='16' xAxisName='客户业务进展' showNames='1'  decimalPrecision='0'>";
 			<s:iterator value="listProgressStatic" status="obj">
 				xml4 = xml4 + "<set name=\""+document.getElementById("progress<s:property value="#obj.index"/>").textStr+"\" value=\""+document.getElementById("progress<s:property value="#obj.index"/>").valueStr+"\" />";
 			</s:iterator>
@@ -132,23 +135,38 @@ background-color:#d3eaef}
 			chart4.render("chartdiv4");
 		</s:if>
 		<s:if test="flag.equals('level')">
-			var xml5 = "<graph caption='客户开发程度信息统计' baseFontSize='16' xAxisName='客户开发程度' showNames='1' yAxisMaxValue='"+recordCount+"' rotateNames='1'  decimalPrecision='0'>";
+			var xml5 = "<graph caption='客户开发程度信息统计' baseFontSize='16' xAxisName='客户开发程度' showNames='1' rotateNames='1'  decimalPrecision='0'>";
 			<s:iterator value="listLevelStatic" status="obj">
 				xml5 = xml5 + "<set name=\""+document.getElementById("level<s:property value="#obj.index"/>").textStr+"\" value=\""+document.getElementById("level<s:property value="#obj.index"/>").valueStr+"\" />";
 			</s:iterator>
 			xml5 = xml5 + "</graph>";
-			var chart5 = new FusionCharts("../js/FusionCharts/Charts/FCF_Column3D.swf", "chartdiv5", "500", "350");
+			var chart5 = new FusionCharts("../js/FusionCharts/Charts/FCF_Column3D.swf", "chartdiv5", "650", "410");
 			chart5.setDataXML(xml5);
 			chart5.render("chartdiv5");
 		</s:if>
 	});
+	function showGraph(f_num)
+	{
+		if(f_num == 1)
+		{
+			<s:if test="flag.equals('category')">
+				document.getElementById("chartdiv1").style.display = 'block';
+				document.getElementById("chartdiv11").style.display = 'none';
+			</s:if>
+		}else
+		{
+			<s:if test="flag.equals('category')">
+				document.getElementById("chartdiv1").style.display = 'none';
+				document.getElementById("chartdiv11").style.display = 'block';
+			</s:if>
+		}
+	}
 	</script>
 	<script type="text/javascript" src="../js/FusionCharts/FusionCharts.js"></script>
 	</head>
 	<body style="margin:2px;">
 	<s:form id="form1" name="form1" method="post" theme="simple">
-	<s:hidden name="totalCustomerCount" />
-	当前客户总数：<s:property value="totalCustomerCount"></s:property>人
+	当前客户总数：<s:property value="totalCustomerCount"></s:property>人，<input type="radio" value="1" name="rdGroup" checked onclick="showGraph(1);">柱状图<input type="radio" name="rdGroup" value="0" onclick="showGraph(0);">饼图
 		<s:if test="flag.equals('category')">
 			<s:iterator value="listCategoryStatic" status="obj">
 				<span name="category" id="category<s:property value="#obj.index"/>" textStr="<s:property value='category'/>" valueStr="<s:property value='count'/>"></span>
@@ -175,40 +193,51 @@ background-color:#d3eaef}
 			</s:iterator>
 		</s:if>
 <table width="98%" border="0" cellspacing="0" cellpadding="3" align="center">
-  <tr> 
-    <td valign="top" class="text" align="center">
-     <s:if test="flag.equals('category')">
-     <div id="chartdiv1" align="center"> 
-        FusionCharts. </div>
-        </s:if>
-      </td> <td valign="top" class="text" align="center"> 
-       <s:if test="flag.equals('source')">
-      <div id="chartdiv2" align="center"> 
-        FusionCharts. </div>
-        </s:if>
+	<tr> 
+		<td valign="top" class="text" align="center">
+			<s:if test="flag.equals('category')">
+     			<div id="chartdiv1" align="center" style="display:block;"> 
+        			FusionCharts. 
+        		</div>
+        		<div id="chartdiv11" align="center" style="display:none;"> 
+        			FusionCharts. 
+        		</div>
+     		</s:if>
+   		</td> 
+		<td valign="top" class="text" align="center"> 
+			<s:if test="flag.equals('source')">
+				<div id="chartdiv2" align="center"> 
+	        		FusionCharts. 
+	        	</div>
+        	</s:if>
       </td>
-  </tr>
-   <tr> 
-    <td valign="top" class="text" align="center"> 
-     <s:if test="flag.equals('maturity')">
-    <div id="chartdiv3" align="center"> 
-        FusionCharts. </div>
-        </s:if>
-      </td> <td valign="top" class="text" align="center"> 
-       <s:if test="flag.equals('progress')">
-      <div id="chartdiv4" align="center"> 
-        FusionCharts. </div>
-        </s:if>
-      </td>
-  </tr>
-   <tr> 
-    <td valign="top" class="text" align="center"> 
-     <s:if test="flag.equals('level')">
-    <div id="chartdiv5" align="center"> 
-        FusionCharts. </div>
-        </s:if>
-      </td> <td valign="top" class="text" align="center">
-      </td>
+	</tr>
+  	<tr> 
+		<td valign="top" class="text" align="center"> 
+     		<s:if test="flag.equals('maturity')">
+    			<div id="chartdiv3" align="center"> 
+        			FusionCharts. 
+        		</div>
+    		</s:if>
+		</td>
+		<td valign="top" class="text" align="center"> 
+			<s:if test="flag.equals('progress')">
+				<div id="chartdiv4" align="center"> 
+					FusionCharts. 
+				</div>
+        	</s:if>
+		</td>
+	</tr>
+	<tr> 
+		<td valign="top" class="text" align="center"> 
+			<s:if test="flag.equals('level')">
+				<div id="chartdiv5" align="center"> 
+					FusionCharts. 
+				</div>
+        	</s:if>
+      	</td>
+		<td valign="top" class="text" align="center">
+      	</td>
   </tr>
 </table>
 </s:form>
