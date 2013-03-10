@@ -31,12 +31,24 @@
 		
 		$("#receipt").click(function(){
 			if($("#receipt").attr("checked")){
+				$("#arriveTime").attr("disabled","");
+				$("#leaveTime").attr("disabled","");
+				$("#actServiceUser").attr("disabled","");
+				$("#actCharges").attr("disabled","");
+				$("#problemDiagnosis").attr("disabled","");
+				$("#solution").attr("disabled","");
 				$("#returnVisitTime").attr("disabled","");
 				$("#returnVisitType").attr("disabled","");
 				$("#returnVisitUser").attr("disabled","");
 				$("#degreeSatisfaction").attr("disabled","");
 				$("#customerFeedback").attr("disabled","");
 			}else{
+				$("#arriveTime").attr("disabled","disabled");
+				$("#leaveTime").attr("disabled","disabled");
+				$("#actServiceUser").attr("disabled","disabled");
+				$("#actCharges").attr("disabled","disabled");
+				$("#problemDiagnosis").attr("disabled","disabled");
+				$("#solution").attr("disabled","disabled");
 				$("#returnVisitTime").attr("disabled","disabled");
 				$("#returnVisitType").attr("disabled","disabled");
 				$("#returnVisitUser").attr("disabled","disabled");
@@ -184,12 +196,24 @@
 		}
 		
 		if($("#receipt").attr("checked")){
+			$("#arriveTime").attr("disabled","");
+			$("#leaveTime").attr("disabled","");
+			$("#actServiceUser").attr("disabled","");
+			$("#actCharges").attr("disabled","");
+			$("#problemDiagnosis").attr("disabled","");
+			$("#solution").attr("disabled","");
 			$("#returnVisitTime").attr("disabled","");
 			$("#returnVisitType").attr("disabled","");
 			$("#returnVisitUser").attr("disabled","");
 			$("#degreeSatisfaction").attr("disabled","");
 			$("#customerFeedback").attr("disabled","");
 		}else{
+			$("#arriveTime").attr("disabled","disabled");
+			$("#leaveTime").attr("disabled","disabled");
+			$("#actServiceUser").attr("disabled","disabled");
+			$("#actCharges").attr("disabled","disabled");
+			$("#problemDiagnosis").attr("disabled","disabled");
+			$("#solution").attr("disabled","disabled");
 			$("#returnVisitTime").attr("disabled","disabled");
 			$("#returnVisitType").attr("disabled","disabled");
 			$("#returnVisitUser").attr("disabled","disabled");
@@ -257,14 +281,14 @@
                                                   </tr>
                                                   <tr>
                                                     <td align="right" nowrap="nowrap">服务事项</td>
-                                                    <td colspan="5" align="left"><s:textarea id="serviceMatter" name="serviceLog.serviceMatter" cssStyle="width:648px; height:40px"/></td>
+                                                    <td colspan="5" align="left"><s:textarea id="serviceMatter" name="serviceLog.serviceMatter" cssStyle="width:648px; height:35px"/></td>
                                                   </tr>
 
                                                 </table></td>
 											</tr>
 										</table>
 									</fieldset>
-                                    
+                                    <input type="checkbox" id="receipt" value="0" />是否收到回执
                                     <fieldset style="margin-top:5px;">
                                     <legend>现场服务</legend>
                                     <table>
@@ -272,26 +296,25 @@
                                         <td><table cellpadding="0" cellspacing="3">
                                             <tr>
                                               <td align="right" nowrap="nowrap">到达时间</td>
-                                              <td nowrap="nowrap"><s:textfield type="text" style="width:150px" name="serviceLog.arriveTime" id="arriveTime" onClick="WdatePicker()"></s:textfield></td>
+                                              <td nowrap="nowrap"><s:textfield type="text" style="width:150px" name="serviceLog.arriveTime" id="arriveTime" disabled="true" onClick="WdatePicker()"></s:textfield></td>
                                               <td align="right" nowrap="nowrap">离开时间</td>
-                                              <td align="left"><s:textfield type="text" style="width:150px" name="serviceLog.leaveTime" id="leaveTime" onClick="WdatePicker()"></s:textfield></td>
+                                              <td align="left"><s:textfield type="text" style="width:150px" name="serviceLog.leaveTime" id="leaveTime" disabled="true" onClick="WdatePicker()"></s:textfield></td>
                                               <td align="right" nowrap="nowrap">服务人员</td>
-                                              <td align="left"><s:textfield type="text" style="width:150px" name="serviceLog.actServiceUser" id="actServiceUser"></s:textfield></td>
+                                              <td align="left"><s:textfield type="text" style="width:150px" name="serviceLog.actServiceUser" disabled="true" id="actServiceUser"></s:textfield></td>
                                             </tr>
                                             <tr>
                                               <td align="right" nowrap="nowrap">实际收费</td>
-                                              <td align="left"><s:textfield type="text" style="width:150px" name="serviceLog.actCharges" id="actCharges"></s:textfield></td>
-                                              <td align="right" nowrap="nowrap">是否收到回执</td>
-                                              <td colspan="3" align="left"><input type="checkbox" id="receipt" value="0" /></td>
+                                              <td align="left"><s:textfield type="text" style="width:150px" name="serviceLog.actCharges" disabled="true" id="actCharges"></s:textfield></td>
+                                              <td align="right" nowrap="nowrap" colspan="5">&nbsp</td>
                                             </tr>
 
                                             <tr>
                                               <td align="right" nowrap="nowrap">问题诊断</td>
-                                              <td colspan="5" align="left"><s:textarea id="problemDiagnosis" name="serviceLog.problemDiagnosis" cssStyle="width:648px; height:40px"/></td>
+                                              <td colspan="5" align="left"><s:textarea id="problemDiagnosis" name="serviceLog.problemDiagnosis" disabled="true" cssStyle="width:648px; height:35px"/></td>
                                             </tr>
                                             <tr>
                                               <td align="right" nowrap="nowrap">解决方案</td>
-                                              <td colspan="5" align="left"><s:textarea id="solution" name="serviceLog.solution" cssStyle="width:648px; height:40px"/></td>
+                                              <td colspan="5" align="left"><s:textarea id="solution" name="serviceLog.solution" disabled="true" cssStyle="width:648px; height:35px"/></td>
                                             </tr>
                                         </table></td>
                                       </tr>
@@ -321,7 +344,7 @@
 
                                             <tr>
                                               <td align="right" nowrap="nowrap">客户反馈</td>
-                                              <td colspan="5" align="left"><s:textarea id="customerFeedback" name="serviceLog.customerFeedback" cssStyle="width:648px; height:40px" disabled="true"/></td>
+                                              <td colspan="5" align="left"><s:textarea id="customerFeedback" name="serviceLog.customerFeedback" cssStyle="width:648px; height:35px" disabled="true"/></td>
                                             </tr>
 
                                         </table></td>

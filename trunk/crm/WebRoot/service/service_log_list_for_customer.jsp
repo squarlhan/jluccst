@@ -84,6 +84,9 @@
 	  				}
 	  			});
 	  		});
+	  		$("#backBtn").click(function(){
+	  			parent.location.href = "../customer/customermanage.jsp";
+	  		});
 	  		$("#searchCompanyName").focus();
 		});
 		//-->
@@ -99,10 +102,11 @@
 						<table width="100%" border="0" cellspacing="5" cellpadding="0">
 							<tr>
 								<td>
-									<input name="button" type="button" class="btn_2_3" id="addbtn"
-										value="添加">
+									<input name="button" type="button" class="btn_5" id="addbtn"
+										value="添加服务记录">
 									<input name="button" type="button" class="btn_4"
 										id="deletebtn" value="删除所选">
+									<input type="button" name="backBtn" id="backBtn" value="返回客户列表" class="btn_5" />
 								</td>
 							</tr>
 						</table>
