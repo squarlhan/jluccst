@@ -86,6 +86,7 @@ $(function() {
 					  {
 						  if(allData[i].customerName == itemname)
 						  {
+							  $("#chk"+g_number).attr("disabled",false);
 							  $("#chk"+g_number).val(allData[i].id);
 							  $("#chk"+g_number).attr("checked","true");
 							  $("#customerName"+g_number).html(allData[i].customerName);
@@ -195,6 +196,8 @@ $(function() {
 					if($("#chk"+i).attr("checked"))
 					{
 						  $("#chk"+i).val("");
+						  $("#chk"+i).attr("disabled",true);
+						  $("#chk"+i).attr("checked",false);
 						  $("#customerName"+i).html("");
 			  			  $("#salesman"+i).html("");
 						  $("#levelId"+i).html("");
@@ -243,7 +246,7 @@ $(function() {
 		<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">评估结论</td>
 	</tr>
 	<tr>
-		<td align="center" style="height: 26px; background-color:#FFFFFF"><input type="checkbox" name="checkbox" id="chk1" /></td>
+		<td align="center" style="height: 26px; background-color:#FFFFFF"><input type="checkbox" name="checkbox" id="chk1" disabled="true"/></td>
 		<td align="center" style="height: 26px; background-color:#FFFFFF" id="customerName1"></td>
 		<td align="center" style="height: 26px; background-color:#FFFFFF" id="contractPerson1"></td>
 		<td align="center" style="height: 26px; background-color:#FFFFFF" id="salesman1"></td>
@@ -257,7 +260,7 @@ $(function() {
 		<td align="center" style="height: 26px; background-color:#FFFFFF" id="result1"></td>
 	</tr>
 	<tr>
-		<td align="center" style="height: 26px; background-color:#FFFFFF"><input type="checkbox" name="checkbox" id="chk2" /></td>
+		<td align="center" style="height: 26px; background-color:#FFFFFF"><input type="checkbox" name="checkbox" id="chk2" disabled="true"/></td>
 		<td align="center" style="height: 26px; background-color:#FFFFFF" id="customerName2"></td>
 		<td align="center" style="height: 26px; background-color:#FFFFFF" id="contractPerson2"></td>
 		<td align="center" style="height: 26px; background-color:#FFFFFF" id="salesman2"></td>
@@ -271,7 +274,7 @@ $(function() {
 		<td align="center" style="height: 26px; background-color:#FFFFFF" id="result2"></td>
 	</tr>
 	<tr>
-		<td align="center" style="height: 26px; background-color:#FFFFFF"><input type="checkbox" name="checkbox" id="chk3" /></td>
+		<td align="center" style="height: 26px; background-color:#FFFFFF"><input type="checkbox" name="checkbox" id="chk3" disabled="true"/></td>
 		<td align="center" style="height: 26px; background-color:#FFFFFF" id="customerName3"></td>
 		<td align="center" style="height: 26px; background-color:#FFFFFF" id="contractPerson3"></td>
 		<td align="center" style="height: 26px; background-color:#FFFFFF" id="salesman3"></td>
@@ -285,7 +288,7 @@ $(function() {
 		<td align="center" style="height: 26px; background-color:#FFFFFF" id="result3"></td>
 	</tr>
 	<tr>
-		<td align="center" style="height: 26px; background-color:#FFFFFF"><input type="checkbox" name="checkbox" id="chk4" /></td>
+		<td align="center" style="height: 26px; background-color:#FFFFFF"><input type="checkbox" name="checkbox" id="chk4" disabled="true"/></td>
 		<td align="center" style="height: 26px; background-color:#FFFFFF" id="customerName4"></td>
 		<td align="center" style="height: 26px; background-color:#FFFFFF" id="contractPerson4"></td>
 		<td align="center" style="height: 26px; background-color:#FFFFFF" id="salesman4"></td>
@@ -299,7 +302,7 @@ $(function() {
 		<td align="center" style="height: 26px; background-color:#FFFFFF" id="result4"></td>
 	</tr>
 	<tr>
-		<td align="center" style="height: 26px; background-color:#FFFFFF"><input type="checkbox" name="checkbox" id="chk5" /></td>
+		<td align="center" style="height: 26px; background-color:#FFFFFF"><input type="checkbox" name="checkbox" id="chk5" disabled="true"/></td>
 		<td align="center" style="height: 26px; background-color:#FFFFFF" id="customerName5"></td>
 		<td align="center" style="height: 26px; background-color:#FFFFFF" id="contractPerson5"></td>
 		<td align="center" style="height: 26px; background-color:#FFFFFF" id="salesman5"></td>
