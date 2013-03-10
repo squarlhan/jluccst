@@ -263,7 +263,7 @@ public class CustomerStaticInfoServiceImpl implements ICustomerStaticInfoService
 			CustomerStaticInfo staticInfo1 = new CustomerStaticInfo();
 			staticInfo1.setKey(key);
 			staticInfo1.setCategory("10%");
-			hql.append("select Count(id) from CustomerInfo where levelId = :levelId and companyId = :companyId");
+			hql.append("select Count(id) from CustomerInfo where levelId = :levelId and companyId = :companyId and deleteFlag = 0");
 			values.put("levelId", "10%");
 			values.put("companyId", companyId);
 			if( deptId != null && deptId.length() > 0)
@@ -286,7 +286,7 @@ public class CustomerStaticInfoServiceImpl implements ICustomerStaticInfoService
 			staticInfo2.setKey(key);
 			staticInfo2.setCategory("20%");
 			hql.delete(0, hql.length());
-			hql.append("select Count(id) from CustomerInfo where levelId = :levelId and companyId = :companyId");
+			hql.append("select Count(id) from CustomerInfo where levelId = :levelId and companyId = :companyId and deleteFlag = 0");
 			values.put("levelId", "20%");
 			values.put("companyId", companyId);
 			if( deptId != null && deptId.length() > 0)
@@ -309,7 +309,7 @@ public class CustomerStaticInfoServiceImpl implements ICustomerStaticInfoService
 			staticInfo3.setKey(key);
 			staticInfo3.setCategory("30%");
 			hql.delete(0, hql.length());
-			hql.append("select Count(id) from CustomerInfo where levelId = :levelId and companyId = :companyId");
+			hql.append("select Count(id) from CustomerInfo where levelId = :levelId and companyId = :companyId and deleteFlag = 0");
 			values.put("levelId", "30%");
 			values.put("companyId", companyId);
 			if( deptId != null && deptId.length() > 0)
@@ -332,7 +332,7 @@ public class CustomerStaticInfoServiceImpl implements ICustomerStaticInfoService
 			staticInfo4.setKey(key);
 			staticInfo4.setCategory("40%");
 			hql.delete(0, hql.length());
-			hql.append("select Count(id) from CustomerInfo where levelId = :levelId and companyId = :companyId");
+			hql.append("select Count(id) from CustomerInfo where levelId = :levelId and companyId = :companyId and deleteFlag = 0");
 			values.put("levelId", "40%");
 			values.put("companyId", companyId);
 			if( deptId != null && deptId.length() > 0)
@@ -356,7 +356,7 @@ public class CustomerStaticInfoServiceImpl implements ICustomerStaticInfoService
 			staticInfo5.setKey(key);
 			staticInfo5.setCategory("50%");
 			hql.delete(0, hql.length());
-			hql.append("select Count(id) from CustomerInfo where levelId = :levelId and companyId = :companyId");
+			hql.append("select Count(id) from CustomerInfo where levelId = :levelId and companyId = :companyId and deleteFlag = 0");
 			values.put("levelId", "50%");
 			values.put("companyId", companyId);
 			if( deptId != null && deptId.length() > 0)
@@ -379,7 +379,7 @@ public class CustomerStaticInfoServiceImpl implements ICustomerStaticInfoService
 			staticInfo6.setKey(key);
 			staticInfo6.setCategory("60%");
 			hql.delete(0, hql.length());
-			hql.append("select Count(id) from CustomerInfo where levelId = :levelId and companyId = :companyId");
+			hql.append("select Count(id) from CustomerInfo where levelId = :levelId and companyId = :companyId and deleteFlag = 0");
 			values.put("levelId", "60%");
 			values.put("companyId", companyId);
 			if( deptId != null && deptId.length() > 0)
@@ -403,7 +403,7 @@ public class CustomerStaticInfoServiceImpl implements ICustomerStaticInfoService
 			staticInfo7.setKey(key);
 			staticInfo7.setCategory("70%");
 			hql.delete(0, hql.length());
-			hql.append("select Count(id) from CustomerInfo where levelId = :levelId and companyId = :companyId");
+			hql.append("select Count(id) from CustomerInfo where levelId = :levelId and companyId = :companyId and deleteFlag = 0");
 			values.put("levelId", "70%");
 			values.put("companyId", companyId);
 			if( deptId != null && deptId.length() > 0)
@@ -426,7 +426,7 @@ public class CustomerStaticInfoServiceImpl implements ICustomerStaticInfoService
 			staticInfo8.setKey(key);
 			staticInfo8.setCategory("80%");
 			hql.delete(0, hql.length());
-			hql.append("select Count(id) from CustomerInfo where levelId = :levelId and companyId = :companyId");
+			hql.append("select Count(id) from CustomerInfo where levelId = :levelId and companyId = :companyId and deleteFlag = 0");
 			values.put("levelId", "80%");
 			values.put("companyId", companyId);
 			if( deptId != null && deptId.length() > 0)
@@ -449,7 +449,7 @@ public class CustomerStaticInfoServiceImpl implements ICustomerStaticInfoService
 			staticInfo9.setKey(key);
 			staticInfo9.setCategory("90%");
 			hql.delete(0, hql.length());
-			hql.append("select Count(id) from CustomerInfo where levelId = :levelId and companyId = :companyId");
+			hql.append("select Count(id) from CustomerInfo where levelId = :levelId and companyId = :companyId and deleteFlag = 0");
 			values.put("levelId", "90%");
 			values.put("companyId", companyId);
 			if( deptId != null && deptId.length() > 0)
@@ -472,7 +472,7 @@ public class CustomerStaticInfoServiceImpl implements ICustomerStaticInfoService
 			staticInfo10.setKey(key);
 			staticInfo10.setCategory("100%");
 			hql.delete(0, hql.length());
-			hql.append("select Count(id) from CustomerInfo where levelId = :levelId and companyId = :companyId");
+			hql.append("select Count(id) from CustomerInfo where levelId = :levelId and companyId = :companyId and deleteFlag = 0" );
 			values.put("levelId", "100%");
 			values.put("companyId", companyId);
 			if( deptId != null && deptId.length() > 0)
