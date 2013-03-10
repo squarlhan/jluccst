@@ -80,7 +80,7 @@ public class CustomerInfoServiceImpl implements ICustomerInfoService{
 	{
 		Map<String,String> values = new HashMap<String,String>();
 		values.put("companyId", companyId);
-		String hql = "select Count(id) from CustomerInfo where companyId = :companyId and deleteFlag = 0 ";
+		String hql = "select Count(id) from CustomerInfo where companyId = :companyId ";
 		return customerInfoDao.findCountForPage(hql, values);
 	}
 	/**
@@ -90,7 +90,13 @@ public class CustomerInfoServiceImpl implements ICustomerInfoService{
 	public int findAllCustomerInfoCount(String companyId,String deptId,String userId)
 	{
 		StringBuffer hql = new StringBuffer();
-		hql.append("select Count(id) from CustomerInfo where companyId = :companyId and deleteFlag = 0 ");
+		if( deptId != null)
+		{
+			hql.append("select Count(id) from CustomerInfo where companyId = :companyId ");
+		}else
+		{
+			hql.append("select Count(id) from CustomerInfo where companyId = :companyId and deleteFlag = 0 ");
+		}
 		Map<String,String> values = new HashMap<String,String>();
 		values.put("companyId", companyId);
 		if( deptId != null && deptId.length() > 0)
