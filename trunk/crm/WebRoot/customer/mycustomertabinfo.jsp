@@ -70,7 +70,7 @@
 	<div title="服务记录"
 		style="padding: 1px; display: none;">
 		<iframe scrolling="auto" frameborder="0" style="width:100%; height:100%"
-			src="about:blank" url="../service/serviceloglist.action?companyId=<s:property value='id'/>"></iframe>
+			src="about:blank" url="../service/serviceloglistbycustomer.action?companyId=<s:property value='id'/>"></iframe>
 	</div>
 	</s:if>
 	<div title="客户评估"
