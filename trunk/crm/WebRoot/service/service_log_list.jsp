@@ -90,7 +90,7 @@
 		</script>
 	</head>
 	<body>
-		<s:form id="form1" name="form1" method="post" theme="simple">
+		<s:form id="form1" name="form1" method="post" theme="simple"> 
 			<s:hidden name="companyId" id="companyId"></s:hidden>
 			<table width="100%" style="height: 100%;" border="0" cellspacing="5"
 				cellpadding="0">

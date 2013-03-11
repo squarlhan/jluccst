@@ -224,7 +224,7 @@
 </script>
 <style type="text/css">
 	.auto-style1 {
-	background: #d3eaef; font-size: 18px; font-family: 仿宋;}
+	background: #d3eaef; font-size: 18px; font-family: 仿宋;} 
 
 .auto-style2 {
 	font-size: x-large;
