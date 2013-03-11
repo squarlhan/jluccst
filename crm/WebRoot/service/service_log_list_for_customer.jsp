@@ -172,7 +172,7 @@
 									</td>
 								</tr>
 							</s:iterator>
-							<tr>
+							<tr> 
 					          <td height="26" colspan="7" align="center" bgcolor="#FFFFFF">
 								<page:pages currentPage="pagination.currentPage" totalPages="pagination.totalPages" totalRows="pagination.totalRows" styleClass="page" theme="text" ></page:pages> 
 							  </td>
