@@ -95,6 +95,8 @@ public class CustomerInfo implements Serializable
 	@Transient
 	private BigDecimal totalConsumption;
 	@Transient
+	private BigDecimal totalDebt;
+	@Transient
 	private int consumptionTimes = 0;
 	@Transient
 	private int paymentsTimes = 0;
@@ -586,5 +588,19 @@ public class CustomerInfo implements Serializable
 	 */
 	public void setCompanyId(String companyId) {
 		this.companyId = companyId;
+	}
+	/**
+	 * 总欠款数
+	 * @return
+	 */
+	public BigDecimal getTotalDebt() {
+		return totalDebt;
+	}
+	/**
+	 * 设置总欠款数
+	 * @return
+	 */
+	public void setTotalDebt(BigDecimal totalDebt) {
+		this.totalDebt = totalDebt;
 	}
 }
