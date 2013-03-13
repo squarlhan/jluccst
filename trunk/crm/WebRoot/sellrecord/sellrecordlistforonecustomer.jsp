@@ -22,6 +22,7 @@
 			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
 	String customerId = request.getParameter("customerId");
+	String hasReturn = request.getParameter("hasReturn");
 	if(customerId==null){
 		customerId="";
 	}
@@ -169,7 +170,7 @@
 			$("#btn_add").click(function(){
 				try{
 					parent.$.fn.showOrHideTab(1,true);
-					parent.$.fn.selectTab(1,'openAddSellRecordForOneCustomerAction.action?customerId=<%=customerId%>');
+					parent.$.fn.selectTab(1,'openAddSellRecordForOneCustomerAction.action?customerId=<%=customerId%>&hasReturn=<%=hasReturn %>');
 				}catch(e){
 					alert(e.description);
 				}
@@ -187,7 +188,7 @@
 	  		 */
 	  		$('a[name="edit"]').each(function(){
 	  			$(this).click(function(){
-	  				var url = $(this).attr("url");
+	  				var url = $(this).attr("url")+"&hasReturn=<%=hasReturn %>";
 	  				try{
 						parent.$.fn.showOrHideTab(1,true);
 						parent.$.fn.selectTab(1,url);
@@ -208,6 +209,12 @@
 	  				}
 	  			});
 	  		});
+	  		
+	  		$("#closeBtn").click(function(){
+	  			//parent.$("#windown-close").click();
+	  			parent.parent.location.href = "customer/mycustomermanage.jsp";
+	  		});
+
 		});
 		/**
 	  	 * 点击选复选框时，执行全选/取消全选功能
@@ -277,8 +284,12 @@
 			</table>
 		</span>
 		</fieldset>
-		<input name="btn_add" type="button" class="btn_2_3" id="btn_add" value="添加">
+		<input name="btn_add" type="button" class="btn_4" id="btn_add" value="添加销售记录">
 		<input name="btn_delAll" type="button" class="btn_2_3" id="btn_delAll" value="删除所选">
+		<% if(hasReturn==null || !hasReturn.equals("false")) {%>
+		<input type="button" name="closeBtn" id="closeBtn" value="返回客户列表" class="btn_5" />
+		<%} %>
+		
    		<table id="recordsList" width="100%"  border="0" cellpadding="5" cellspacing="1" bgcolor="#d5e4fd">
 			<tr>
 				<td align="center" width="50px" background="<%=basePath%>/images/headerbg.jpg">

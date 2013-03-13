@@ -221,7 +221,7 @@ public class SMSAtion extends BaseActionSupport{
 			if(this.sessionCompanyId!=null && !this.sessionCompanyId.equals("")){
 				params.put("organId", this.sessionCompanyId);
 			}
-			customersTypeJsonStr="[{name:'客户',id:'1'},{name:'销售人员',id:'2'}]";
+			customersTypeJsonStr="[{name:'客户',id:'1'},{name:'工作人员',id:'2'}]";
 			if(onlycustomer.equals("yes")){
 				params.put("categoryId", "1");
 				customersTypeJsonStr="[{name:'客户',id:'1'}]";

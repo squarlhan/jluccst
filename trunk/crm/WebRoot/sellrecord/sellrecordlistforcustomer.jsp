@@ -7,6 +7,7 @@
 			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
 	String customerId = request.getParameter("customerId");
+	String hasReturn = request.getParameter("hasReturn");
 	if(customerId==null){
 		customerId="";
 	}
@@ -25,9 +26,13 @@
 		$('.selector').tabs({ ajaxOptions: { async: false } });
 		//$('.selector').tabs({ selected: 1 });
 		$("#tt").click(function(){
-			$("#iframe1").attr("src","openSellRecordListForOneCustomerAction.action?customerId=<%=customerId%>");
+			$("#iframe1").attr("src","openSellRecordListForOneCustomerAction.action?customerId=<%=customerId%>&hasReturn=<%=hasReturn %>");
 		});
 		$.fn.showOrHideTab(1,false);
+		$("#closeBtn").show();
+		$("#closeBtn").click(function(){
+  			parent.$("#windown-close").click();
+  		});
 	});
 	$.fn.selectTab = function(index,url){
 		$(document).find(".tabs-inner").each(function(i,domEle){
@@ -63,11 +68,18 @@
 <!-- tab开始 -->
 <div id="tt" class="tabs-container">
 	<div id="tab1" title="销售记录查看"  style="padding: 1px; display: none;">
-		<iframe id="iframe1" scrolling="auto" frameborder="0" style="width:100%; height:100%" src="openSellRecordListForOneCustomerAction.action?customerId=<%=customerId%>" ></iframe>
+		<iframe id="iframe1" scrolling="auto" frameborder="0" style="width:100%; height:100%" src="openSellRecordListForOneCustomerAction.action?customerId=<%=customerId%>&hasReturn=<%=hasReturn %>" ></iframe>
 	</div>
 	<div id="tab2" title="销售记录编辑"  style="padding: 1px; display: none;">
 		<iframe id="iframe2"  scrolling="auto" frameborder="0" style="width:100%; height:100%" src="" ></iframe>
 	</div>
 </div>
+<% if( hasReturn!=null && hasReturn.equals("false")) {%>
+<center>
+<div style="width:100%;height:80px">
+<input name="closeBtn" type="button" class="btn_2_3" id="closeBtn" style="display: none" value="关闭">
+</div>
+</center>
+<%} %>
 </body>
 </html>

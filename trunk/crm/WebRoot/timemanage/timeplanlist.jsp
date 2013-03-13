@@ -124,7 +124,7 @@
 						<strong>计划类型：</strong>
 					</td>
 					<td height="26" width = "80px"  align="left" bgcolor="#FFFFFF">
-						<s:select id="sel_query_planType"  name="planType"  list="#{-1:'--全部--',0:'日计划',1:'周计划',2:'月计划' }"  cssStyle="width: 120px;" ></s:select>
+						<s:select id="sel_query_planType"  name="planType"  list="#{-1:'--全部--',0:'日报',1:'周报',2:'月报' }"  cssStyle="width: 120px;" ></s:select>
 					</td>
 					<td height="26" width = "80px"  align="left" bgcolor="#FFFFFF" nowrap="nowrap">
 						<strong>提交时间：</strong>
@@ -167,13 +167,13 @@
               <td height="26" align="center" bgcolor="#FFFFFF"  nowrap="nowrap"><s:property value="submitTime"/></td>
               <td height="26" align="center" bgcolor="#FFFFFF">
               	<s:if test="planType==0">
-	              	日计划
+	              	日报
 	              	</s:if>
 	              	<s:elseif test="planType==1">
-	              	周计划
+	              	周报
 	              	</s:elseif>
 	              	<s:else>
-	              	月计划
+	              	月报
 	              	</s:else>
               	</td>
                 <td height="26" align="left" bgcolor="#FFFFFF"><s:property value="planContent"/></td>

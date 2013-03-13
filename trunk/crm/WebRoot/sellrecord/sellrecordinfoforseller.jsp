@@ -132,9 +132,11 @@
 		  		*/
 		  		$("a[name='del_one']").each(function(){
 		  			$(this).click(function(){
-		  				var url = $(this).attr("url");
-		  				$.post(url, null, function(data){});
-		  				$(this).parent().parent().remove();
+		  				if(window.confirm("您确定要删除这条信息吗？")){
+			  				var url = $(this).attr("url");
+			  				$.post(url, null, function(data){});
+			  				$(this).parent().parent().remove();
+		  				}
 		  			});
 		  		});
 		  		
@@ -142,21 +144,22 @@
 		  		 *ajax删除数据库行
 		  		*/
 	  			$("#btn_delAll").click(function(){
-
-	  				$(":checkbox[name='ids']:checked").each(function(){
-	  					if($(this).parent().parent().find("a")){
-	  						var url = $(this).parent().parent().find("a").attr("url")
-	  		  				$.post(url, null, function(data){});
-	  					}
-	  					$(this).parent().parent().remove();
-	  				});
-
-	  				$(":checkbox[name='ids']:checked").parent().parent().remove();
-		  			$.fn.CheckBoxAll("ids","cbk_all");
-		  			if($("#goodsList tr:has(input[type='checkbox'])").length==1){
-		  				$("#no_data").show();
-		  			}
-		  			$(this).parent().parent().remove();
+	  				if(window.confirm("您确定要删除所选信息吗？")){
+		  				$(":checkbox[name='ids']:checked").each(function(){
+		  					
+			  					if($(this).parent().parent().find("a")){
+			  						var url = $(this).parent().parent().find("a").attr("url")
+			  		  				$.post(url, null, function(data){});
+			  					}
+			  					$(this).parent().parent().remove();
+		  				});
+	
+		  				$(":checkbox[name='ids']:checked").parent().parent().remove();
+			  			$.fn.CheckBoxAll("ids","cbk_all");
+			  			if($("#goodsList tr:has(input[type='checkbox'])").length==1){
+			  				$("#no_data").show();
+			  			}
+	  				}
 	  			});
 		  		
 		  		$("#btn_save").click(function(){

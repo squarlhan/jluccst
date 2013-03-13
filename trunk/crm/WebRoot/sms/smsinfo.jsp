@@ -295,7 +295,7 @@
 			  					  			row=row+"</td>";
 			  					  			row=row+"<td align='center' bgcolor='#FFFFFF'>"+(value.name==null ? "" : value.name) +"</td>";
 			  					  			row=row+"<td align='center' bgcolor='#FFFFFF'>"+(value.phone==null ? "" : value.phone) +"</td>";
-			  					  			row=row+"<td align='center' bgcolor='#FFFFFF'>"+(value.categoryId==1 ? "客户" : "销售人员" )+"</td>";
+			  					  			row=row+"<td align='center' bgcolor='#FFFFFF'>"+(value.categoryId==1 ? "客户" : "工作人员" )+"</td>";
 			  					  			row=row+"<td align='center' bgcolor='#FFFFFF'>"+(value.unit==null ? "" : value.unit )+"</td>";
 			  					  			row=row+"<td align='center' bgcolor='#FFFFFF'>"+(value.post==null ? "" : value.post)+"</td>";
 			  					  			row=row+"<td align='center' bgcolor='#FFFFFF'>"+(value.nickname==null ? "" : value.nickname)+"</td>";
@@ -356,7 +356,7 @@
 						  			row=row+"</td>";
 						  			row=row+"<td align='center' bgcolor='#FFFFFF'>"+(value.name==null ? "" : value.name) +"</td>";
 						  			row=row+"<td align='center' bgcolor='#FFFFFF'>"+(value.phone==null ? "" : value.phone) +"</td>";
-						  			row=row+"<td align='center' bgcolor='#FFFFFF'>"+(value.categoryId==1 ? "客户" : "销售人员" )+"</td>";
+						  			row=row+"<td align='center' bgcolor='#FFFFFF'>"+(value.categoryId==1 ? "客户" : "工作人员" )+"</td>";
 						  			row=row+"<td align='center' bgcolor='#FFFFFF'>"+(value.unit==null ? "" : value.unit )+"</td>";
 						  			row=row+"<td align='center' bgcolor='#FFFFFF'>"+(value.post==null ? "" : value.post)+"</td>";
 						  			row=row+"<td align='center' bgcolor='#FFFFFF'>"+(value.nickname==null ? "" : value.nickname)+"</td>";
