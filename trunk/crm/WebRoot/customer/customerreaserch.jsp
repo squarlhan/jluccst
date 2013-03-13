@@ -70,7 +70,9 @@
 					  	}
 					 });
 				}else{
-					alert(info);
+					if(info!="failure"){
+						alert(info);
+					}
 				}
 			}
 			$("#sel_province").change(function(){
