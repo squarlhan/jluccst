@@ -41,7 +41,7 @@ sample 3 :
 			var container = $('#jmessagebox_container');
 			if(container.length == 0){
 				$('body').append('<iframe style="display:none;position:absolute;z-index:99998;top:0px;left:0px;width:100%;height:100%;background-color:#ffffff;filter:alpha(opacity=0);opacity:0"jmlayer="1" jmconverlayer="1"></iframe>');
-				$('body').append('<div style="display:none;position:absolute;z-index:99999;top:0px;left:0px;width:100%;height:100%;background-color:#000000;filter:alpha(opacity=75);opacity:0.75" jmlayer="1" jmconverlayer="1"></div>');
+				$('body').append('<div style="display:none;position:absolute;z-index:99999;top:0px;left:0px;width:100%;height:100%;background-color:#000000;filter:alpha(opacity=45);opacity:0.45" jmlayer="1" jmconverlayer="1"></div>');
 				$('body').append('<div id="jmessagebox_container" name="jmessagebox_container" style="display:none;position:absolute;z-index:99999;" jmlayer="1"><div id="jmessagebox_title"></div><div id="jmessagebox_message"></div><div id="jmessagebox_buttons"><button id="jmessagebox_yesbutton"></button><button id="jmessagebox_nobutton"></button><button id="jmessagebox_cancelbutton"></button></div><div id="jmessagebox_bottom"></div></div>');
 				$(window).scroll($.jMessageBox._fixposition);
 				$('#jmessagebox_title').html($.jMessageBox.settings.title);
