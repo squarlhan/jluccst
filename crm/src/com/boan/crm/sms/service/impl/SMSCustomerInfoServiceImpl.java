@@ -26,8 +26,10 @@ public class SMSCustomerInfoServiceImpl implements ISMSCustomerInfoService {
 	 * @param info
 	 */
 	public void saveSMSCustomerInfo(SMSCustomerInfo info){
-		info.setNameSpell( PinYin4J.makeStringByStringSet(PinYin4J.getPinyin(info.getName())));
-		dao.save(info);
+		if(info!=null && info.getName()!=null &&  !info.getName().trim().equals("")){
+			info.setNameSpell( PinYin4J.makeStringByStringSet(PinYin4J.getPinyin(info.getName())));
+			dao.save(info);
+		}
 	}
 	
 	/**
