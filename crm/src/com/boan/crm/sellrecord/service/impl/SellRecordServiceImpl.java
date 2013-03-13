@@ -177,6 +177,26 @@ public class SellRecordServiceImpl implements ISellRecordService {
 		return (list!=null &&  list.size()>0 && list.get(0)!=null )? new BigDecimal( list.get(0).toString()) : new BigDecimal(0);
 	}
 	
+	/**
+	 * 根据客户Id,成交时间段查询总欠款数
+	 * @param customerId 客户Id
+	 * @param bargainTimeBegin 成交开始时间
+	 * @param bargainTimeEnd   成交结束时间
+	 * @return 欠款数
+	 */
+	public  BigDecimal getTotalDebt(String customerId,String bargainTimeBegin,String bargainTimeEnd){
+		String hql ="select sum(record.debt)  from SellRecord as record where record. customerId=:customerId ";
+		if(bargainTimeBegin!=null && !bargainTimeBegin.equals("")){
+			hql = hql + "  and  record. bargainTime >='"+bargainTimeBegin+"' ";
+		}
+		if(bargainTimeEnd!=null && !bargainTimeEnd.equals("")){
+			hql = hql + "  and record. bargainTime <='"+bargainTimeEnd+"'";
+		}
+		Map<String, String> param = new HashMap<String,String>();
+		param.put("customerId",customerId);
+		List list = sellRecordDao.find(hql, param);
+		return (list!=null &&  list.size()>0 && list.get(0)!=null )? new BigDecimal( list.get(0).toString()) : new BigDecimal(0);
+	}
 
 	/**
 	 * 根据客户Id,成交时间段查询回款情况  （总款－欠款）/总款

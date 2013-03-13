@@ -174,7 +174,7 @@
 			  					  		var lunar = value.isLunarCalender=="0"?"(阴历)":"(阳历)";
 			  					  		row=row+"<td align='center' bgcolor='#FFFFFF'>"+(value.birthday==null ? "" : value.birthday.substring(0,10)+"<font color='red'>"+lunar) +"</font></td>";
 		  					  			row=row+"<td align='center' bgcolor='#FFFFFF'>"+(value.phone==null ? "" : value.phone) +"</td>";
-		  					  			row=row+"<td align='center' bgcolor='#FFFFFF'>"+(value.categoryId==1 ? "客户" : "销售人员" )+"</td>";
+		  					  			row=row+"<td align='center' bgcolor='#FFFFFF'>"+(value.categoryId==1 ? "客户" : "工作人员" )+"</td>";
 		  					  		    row=row+"<td align='center' bgcolor='#FFFFFF'>"+(value.unit==null ? "" : value.unit )+"</td>";
 		  					  			row=row+"<td align='center' bgcolor='#FFFFFF'>"+(value.post==null ? "" : value.post)+"</td>";
 		  					  			row=row+"<td align='center' bgcolor='#FFFFFF'>"+(value.nickname==null ? "" : value.nickname)+"</td>";
@@ -237,7 +237,7 @@
   					  			var lunar = value.isLunarCalender=="0"?"(阴历)":"(阳历)";
   					  			row=row+"<td align='center' bgcolor='#FFFFFF'>"+(value.birthday==null ? "" : value.birthday.substring(0,10)+"<font color='red'>"+lunar) +"</font></td>";
   					  			row=row+"<td align='center' bgcolor='#FFFFFF'>"+(value.phone==null ? "" : value.phone) +"</td>";
-  					  			row=row+"<td align='center' bgcolor='#FFFFFF'>"+(value.categoryId==1 ? "客户" : "销售人员" )+"</td>";
+  					  			row=row+"<td align='center' bgcolor='#FFFFFF'>"+(value.categoryId==1 ? "客户" : "工作人员" )+"</td>";
   					  			row=row+"<td align='center' bgcolor='#FFFFFF'>"+(value.unit==null ? "" : value.unit )+"</td>";
   					  			row=row+"<td align='center' bgcolor='#FFFFFF'>"+(value.post==null ? "" : value.post)+"</td>";
   					  			row=row+"<td align='center' bgcolor='#FFFFFF'>"+(value.nickname==null ? "" : value.nickname)+"</td>";
@@ -358,7 +358,7 @@
 													<option value="FIFTEEN_DAY">15天</option>
 												</select>
 												<s:textfield id="txt_sendTime" name="sendTime" maxlength="25" cssStyle="width: 80px;" value="09:00"/>
-												通知销售人员
+												通知工作人员
 												&nbsp;&nbsp;&nbsp;
 												<input name="btn_AddPerson" type="button" class="btn_5" id="btn_AddPerson" value="查询/选择客户">
 												<input name="btn_AddAllPerson" type="button" class="btn_5" id="btn_AddAllPerson" value="选择全部客户">

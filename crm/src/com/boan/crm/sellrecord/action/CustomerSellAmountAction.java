@@ -72,6 +72,8 @@ public class CustomerSellAmountAction extends BaseActionSupport {
 	
 	private String queryAmountEnd="";
 	
+	private String queryIsArrearage="";
+	
 	@Autowired
 	@Qualifier("popedomService")
 	private IPopedomService popedomService = null;
@@ -164,8 +166,12 @@ public class CustomerSellAmountAction extends BaseActionSupport {
 		if (salesmanId != null && salesmanId.length() > 0) {
 			values.put("salesmanId", salesmanId);
 		}
+		
 		if (deptId != null && deptId.length() > 0) {
 			values.put("deptId", deptId);
+		}
+		if (queryIsArrearage != null && !queryIsArrearage.equals("")) {
+			values.put("queryIsArrearage", queryIsArrearage);
 		}
 		values.put("companyId", sessionCompanyId);
 		
@@ -309,6 +315,14 @@ public class CustomerSellAmountAction extends BaseActionSupport {
 
 	public void setQueryAmountEnd(String queryAmountEnd) {
 		this.queryAmountEnd = queryAmountEnd;
+	}
+
+	public String getQueryIsArrearage() {
+		return queryIsArrearage;
+	}
+
+	public void setQueryIsArrearage(String queryIsArrearage) {
+		this.queryIsArrearage = queryIsArrearage;
 	}
 }
 

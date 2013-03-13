@@ -285,7 +285,7 @@
 			</table>
 		</span>
 		</fieldset>
-		<input name="btn_add" type="button" class="btn_2_3" id="btn_add" value="添加">
+		<input name="btn_add" type="button" class="btn_4" id="btn_add" value="添加销售记录">
 		<input name="btn_delAll" type="button" class="btn_2_3" id="btn_delAll" value="删除所选">
    		<table id="recordsList" width="100%"  border="0" cellpadding="5" cellspacing="1" bgcolor="#d5e4fd">
 			<tr>

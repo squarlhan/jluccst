@@ -119,11 +119,11 @@
 			
 			$("#searchBtn").click(function(){
 				if( !onlyNumbers("queryAmountBegin")){
-            	   alert("总销售额起始值请填写数字，如：10000！");
+            	   alert("交易总额起始值请填写数字，如：10000！");
             	   return false;
                 }
 				if( !onlyNumbers("queryAmountEnd")){
-            	   alert("总销售额结束值请填写数字，如：10000！");
+            	   alert("交易总额结束值请填写数字，如：10000！");
             	   return false;
                 }
 				form1.action = "queryCustomerBySellAmountAction.action";
@@ -193,12 +193,18 @@
 						<s:textfield name="queryEndTime" id="queryEndTime" style="width: 100px"></s:textfield>
 					</td>
 					<td height="26"  align="right" bgcolor="#FFFFFF" nowrap="nowrap">
-						<strong>总销售额范围：</strong>
+						<strong>交易总额范围：</strong>
 					</td>
 					<td height="26" align="left" bgcolor="#FFFFFF">
 						<s:textfield name="queryAmountBegin" id="queryAmountBegin" style="width: 100px"></s:textfield>
 						-
 						<s:textfield name="queryAmountEnd" id="queryAmountEnd" style="width: 100px"></s:textfield>
+					</td>
+					<td height="26"  align="right" bgcolor="#FFFFFF" nowrap="nowrap">
+						<strong>是否欠款：</strong>
+					</td>
+					<td height="26" align="left" bgcolor="#FFFFFF">
+						<s:select list="#{'0':'否','1':'是'}"  headerValue="---全部---" headerKey=""  name="queryIsArrearage"></s:select>
 					</td>
 					<td height="26" align="left" bgcolor="#FFFFFF">
 						<input type="button" style="width: 80px;" class="btn_4" id="searchBtn" value="查询" />
@@ -217,6 +223,7 @@
 			<td align="center" style="height: 26px; background-image:url('<%=basePath%>/images/headerbg.jpg')"><strong>开发程度</strong></td>
 			<td align="center" style="height: 26px; background-image:url('<%=basePath%>/images/headerbg.jpg')"><strong>客户来源</strong></td>
 			<td align="center" style="height: 26px; background-image:url('<%=basePath%>/images/headerbg.jpg')"><strong>交易总额</strong></td>
+			<td align="center" style="height: 26px; background-image:url('<%=basePath%>/images/headerbg.jpg')"><strong>欠款金额</strong></td>
             <td align="center" background="<%=basePath%>/images/headerbg.jpg" nowrap="nowrap"><strong>操作</strong></td>
         </tr>
         <s:iterator value="pagination.data" status="obj">
@@ -235,6 +242,14 @@
             <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="levelId"/></td>
             <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="source"/></td>
             <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="totalConsumption"/></td>
+            <td height="26" align="center" bgcolor="#FFFFFF">
+            <s:if test="totalDebt!=0">
+            	<font color="red"><s:property value="totalDebt"/></font>
+            </s:if>
+            <s:else>
+            	<s:property value="totalDebt"/>
+            </s:else>
+            </td>
           	<td height="26" colspan="2" align="center" bgcolor="#FFFFFF">
           	<s:url id="edit_url" action="openSellRecordListForCustomerViewAction.action">   
 				<s:param name="customerId" value="id"></s:param>   

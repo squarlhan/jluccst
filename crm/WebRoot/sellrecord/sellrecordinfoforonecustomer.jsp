@@ -20,6 +20,7 @@
 	String basePath = request.getScheme() + "://"
 			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
+	String hasReturn = request.getParameter("hasReturn");
 %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -131,9 +132,11 @@
 		  		*/
 		  		$("a[name='del_one']").each(function(){
 		  			$(this).click(function(){
-		  				var url = $(this).attr("url");
-		  				$.post(url, null, function(data){});
-		  				$(this).parent().parent().remove();
+		  				if(window.confirm("您确定要删除这条信息吗？")){
+			  				var url = $(this).attr("url");
+			  				$.post(url, null, function(data){});
+			  				$(this).parent().parent().remove();
+		  				}
 		  			});
 		  		});
 		  		
@@ -141,21 +144,21 @@
 		  		 *ajax删除数据库行
 		  		*/
 	  			$("#btn_delAll").click(function(){
-
-	  				$(":checkbox[name='ids']:checked").each(function(){
-	  					if($(this).parent().parent().find("a")){
-	  						var url = $(this).parent().parent().find("a").attr("url")
-	  		  				$.post(url, null, function(data){});
-	  					}
-	  					$(this).parent().parent().remove();
-	  				});
-
-	  				$(":checkbox[name='ids']:checked").parent().parent().remove();
-		  			$.fn.CheckBoxAll("ids","cbk_all");
-		  			if($("#goodsList tr:has(input[type='checkbox'])").length==1){
-		  				$("#no_data").show();
-		  			}
-		  			$(this).parent().parent().remove();
+	  				if(window.confirm("您确定要删除所选信息吗？")){
+		  				$(":checkbox[name='ids']:checked").each(function(){
+		  					if($(this).parent().parent().find("a")){
+		  						var url = $(this).parent().parent().find("a").attr("url")
+		  		  				$.post(url, null, function(data){});
+		  					}
+		  					$(this).parent().parent().remove();
+		  				});
+	
+		  				$(":checkbox[name='ids']:checked").parent().parent().remove();
+			  			$.fn.CheckBoxAll("ids","cbk_all");
+			  			if($("#goodsList tr:has(input[type='checkbox'])").length==1){
+			  				$("#no_data").show();
+			  			}
+	  				}
 	  			});
 		  		
 		  		$("#btn_save").click(function(){
@@ -198,6 +201,11 @@
 	  			alert(e.description);
 	  		}
 	  		
+	  		$("#closeBtn").click(function(){
+	  			//parent.$("#windown-close").click();
+	  			parent.parent.location.href = "customer/mycustomermanage.jsp";
+	  		});
+
 		});
 			
 	  	/**
@@ -315,11 +323,16 @@
 									<table>
 										<tr>
 											<td>
-												<input name="btn_add" type="button" class="btn_2_3" id="btn_add" value="添加">
+												<input name="btn_add" type="button" class="btn_4" id="btn_add" value="添加销售记录">
 											</td>
 											<td>
 												<input name="btn_delAll" type="button" class="btn_2_3" id="btn_delAll" value="删除所选">
 											</td>
+											<% if(hasReturn==null || !hasReturn.equals("false")) {%>
+											<td>
+												<input type="button" name="closeBtn" id="closeBtn" value="返回客户列表" class="btn_5" />
+											</td>
+											<%} %>
 										</tr>
 									</table>
 								</td>

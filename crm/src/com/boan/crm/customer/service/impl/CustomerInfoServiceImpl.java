@@ -321,6 +321,12 @@ public class CustomerInfoServiceImpl implements ICustomerInfoService{
 		if(values.get("queryAmountEnd")!=null && !values.get("queryAmountEnd").equals("")){
 			hql.append(" and  sum(record.receivable) <= "+values.get("queryAmountEnd"));
 		}
+		if(values.get("queryIsArrearage")!=null && values.get("queryIsArrearage").equals("0")){
+			hql.append(" and  sum(record.debt)  = 0");
+		}
+		if(values.get("queryIsArrearage")!=null && values.get("queryIsArrearage").equals("1")){
+			hql.append(" and  sum(record.debt) > 0");
+		}
 		
 		hql. append( " ) ");
 		
@@ -371,6 +377,12 @@ public class CustomerInfoServiceImpl implements ICustomerInfoService{
 		}
 		if(values.get("queryAmountEnd")!=null && !values.get("queryAmountEnd").equals("")){
 			hql.append(" and  sum(record.receivable) <= "+values.get("queryAmountEnd"));
+		}
+		if(values.get("queryIsArrearage")!=null && values.get("queryIsArrearage").equals("0")){
+			hql.append(" and  sum(record.debt)  = 0");
+		}
+		if(values.get("queryIsArrearage")!=null && values.get("queryIsArrearage").equals("1")){
+			hql.append(" and  sum(record.debt) > 0");
 		}
 		
 		hql. append( " ) ");
@@ -431,6 +443,9 @@ public class CustomerInfoServiceImpl implements ICustomerInfoService{
 				customerInfo.setContractPersonList(contractPersonService.findAllContractPersonInfoByCustomerId(customerInfo.getId()));
 				
 				customerInfo.setTotalConsumption(sellRecordService.getConsumptionMoney(customerInfo.getId()));
+				String begin = values.get("queryBeginTime") ==null ? "" : values.get("queryBeginTime").toString();
+				String end = values.get("queryEndTime") ==null ? "" : values.get("queryEndTime").toString();
+				customerInfo.setTotalDebt(sellRecordService.getTotalDebt(customerInfo.getId(),begin , end));
 				customerInfo.setConsumptionTimes(sellRecordService.getConsumptionCount(customerInfo.getId()));
 				
 				String t22 = CurrentDateTime.getCurrentDate();
