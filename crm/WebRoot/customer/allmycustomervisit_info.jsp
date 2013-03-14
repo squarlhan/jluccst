@@ -376,7 +376,7 @@
 				</td>
 			</s:if>
 			<s:else>
-				<s:textfield readOnly="true" type="text" style="width:150px" name="actualVisitTime" id="actualVisitTime"></s:textfield>
+				<s:textfield title="请于回访结束后填写 " type="text" readOnly="true"  style="width:150px" name="actualVisitTime" id="actualVisitTime"></s:textfield>
 				</td>
 			</s:else>
 	</tr>
@@ -388,7 +388,7 @@
 				</td>
 			</s:if>
 			<s:else>
-				<s:textarea type="text" style="width:634px;height:70px" name="customerVisitInfo.contentResult" id="contentResult"></s:textarea>
+				<s:textarea title="请于回访结束后填写 " type="text" readOnly="true"  style="width:634px;height:70px" name="customerVisitInfo.contentResult" id="contentResult"></s:textarea>
 				</td>
 			</s:else>
 	</tr>

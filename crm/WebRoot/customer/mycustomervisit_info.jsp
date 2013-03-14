@@ -251,7 +251,7 @@
 				</td>
 			</s:if>
 			<s:else>
-				<s:textarea type="text" style="width:600px;height:70px" name="customerVisitInfo.contentResult" id="contentResult"></s:textarea>
+				<s:textarea title="请于回访结束后填写 " type="text" readOnly="true"  style="width:600px;height:70px" name="customerVisitInfo.contentResult" id="contentResult"></s:textarea>
 				</td>
 			</s:else>
 	</tr>
@@ -262,7 +262,7 @@
 			<s:textarea type="text" style="width:600px;height:70px" name="customerVisitInfo.remark" id="remark"></s:textarea>
 			</s:if>
 			<s:else>
-			<s:textarea type="text" style="width:600px;height:70px" name="customerVisitInfo.remark" id="remark"></s:textarea>
+			<s:textarea title="请于回访结束后填写 " type="text" readOnly="true"  style="width:600px;height:70px" name="customerVisitInfo.remark" id="remark"></s:textarea>
 			</s:else>
 			</td>
 	</tr>
