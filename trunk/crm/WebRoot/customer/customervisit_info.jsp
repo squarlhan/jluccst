@@ -218,7 +218,7 @@
 				<s:textarea type="text" style="width:600px;height:70px" name="customerVisitInfo.contentResult" id="contentResult"></s:textarea>
 			</s:if>
 			<s:else>
-				<s:textarea title="请于回访结束后填写结果" readOnly="true" type="text" style="width:600px;height:70px" name="customerVisitInfo.contentResult" id="contentResult"></s:textarea>
+				<s:textarea title="请于回访结束后填写" readOnly="true" type="text" style="width:600px;height:70px" name="customerVisitInfo.contentResult" id="contentResult"></s:textarea>
 			</s:else>
 			</td></tr></table></td>
 	</tr>
@@ -234,7 +234,7 @@
 				<s:textarea type="text" style="width:600px;height:70px" name="customerVisitInfo.remark" id="remark"></s:textarea>
 			</s:if>
 			<s:else>
-				<s:textarea title="请于回访结束后填写结果" readOnly="true" type="text" style="width:600px;height:70px" name="customerVisitInfo.remark" id="remark"></s:textarea>
+				<s:textarea title="请于回访结束后填写" readOnly="true" type="text" style="width:600px;height:70px" name="customerVisitInfo.remark" id="remark"></s:textarea>
 			</s:else>
 			</td></tr></table></td>
 	</tr>
