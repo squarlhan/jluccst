@@ -186,7 +186,7 @@ public class AnalysisEngineServiceImpl implements IAnalysisEngineService{
 			double finalValue = 0;
 			if(listFuzzyValue != null && listFuzzyValue.size() > 0)
 			{
-				List<IdCaption> listRule = fuzzyRuleInfoService.findAllFuzzyRuleInfo();
+				List<IdCaption> listRule = fuzzyRuleInfoService.findAllFuzzyRuleInfo(companyId);
 				
 				List<AnalysisFuzzyValue> list = calculate(listFuzzyValue,listRule);
 				if(list != null && list.size() > 0)
