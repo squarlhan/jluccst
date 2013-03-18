@@ -11,9 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import com.boan.crm.customer.analysis.dao.IFuzzyInfoDAO;
 import com.boan.crm.customer.analysis.dao.IFuzzyRuleInfoDAO;
-import com.boan.crm.customer.analysis.model.AnalysisResult;
 import com.boan.crm.customer.analysis.model.FuzzyCategory;
 import com.boan.crm.customer.analysis.model.IdCaption;
 import com.boan.crm.customer.analysis.model.RuleInfo;
@@ -29,18 +27,17 @@ public class FuzzyRuleInfoServiceImpl implements IFuzzyRuleInfoService{
 	@Autowired
 	@Qualifier("fuzzyRuleInfoDao")
 	private IFuzzyRuleInfoDAO fuzzyRuleInfoDao;
-	@Autowired
-	@Qualifier("fuzzyInfoDao")
-	private IFuzzyInfoDAO fuzzyInfoDao;
 	/**
 	 * 根据分类获取模糊项
 	 */
-	public List<IdCaption> findAllFuzzyRuleInfo()
+	public List<IdCaption> findAllFuzzyRuleInfo(String companyId)
 	{
 		StringBuilder hql = new StringBuilder();
-		hql.append( "select new com.boan.crm.customer.analysis.model.IdCaption(t.groupId,t.resultFuzzyName) from RuleInfo t group by t.groupId,t.resultFuzzyName ");
+		hql.append( "select new com.boan.crm.customer.analysis.model.IdCaption(t.groupId,t.resultFuzzyName) from RuleInfo t where t.companyId =:companyId group by t.groupId,t.resultFuzzyName ");
 		hql.append(" order by groupId asc");
-		List<IdCaption> data = fuzzyRuleInfoDao.find(hql.toString(),new Object[0]);
+		Map<String, String> values = new HashMap<String,String>();
+		values.put("companyId", companyId);
+		List<IdCaption> data = fuzzyRuleInfoDao.find(hql.toString(),values);
 		if(data != null && data.size() > 0)
 		{
 			for(int i=0;i<data.size();i++)
