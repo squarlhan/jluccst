@@ -352,7 +352,7 @@ public class CustomerAssessmentAction extends BaseActionSupport{
 			if(payments.equals("1"))
 			{
 				String t22 = CurrentDateTime.getCurrentDate();
-				String t11 = t22.split("-")[0]+"-1-1";
+				String t11 = "2010-1-1";
 				analysisCustomer.setPayments(sellRecordService.getConsumptionDebt(customer.getId(),t11,t22));
 			}
 			if(level.equals("1"))
