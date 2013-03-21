@@ -208,13 +208,13 @@ background-color:#d3eaef}
             <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="introduceCustomerTime"/></td>
             <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="paymentsTimes"/></td>
             <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="developDegree"/></td>
-            <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="resultValue"/></td>
-            <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="result"/></td>
+            <td height="26" align="center" bgcolor="#FFFFFF"><font color="#ff00ff"><s:property value="resultValue"/></font></td>
+            <td height="26" align="center" bgcolor="#FFFFFF"><font color="#ff00ff"><s:property value="result"/></font></td>
 	          <td height="26" colspan="2" align="center" bgcolor="#FFFFFF">
 	          <s:url id="static_url" action="staticAnalysisCustomer">   
 					<s:param name="customerId" value="customerId"></s:param>   
 				</s:url>
-				<a name="static" href="javascript:void(0);" url="${static_url}">统计结果</a>  
+				<a name="static" href="javascript:void(0);" url="${static_url}"><font color="#535353"><u>统计结果</u></font></a>  
 				<s:url id="delete_url" action="deleteAnalysisCustomer">   
 					<s:param name="ids" value="id"></s:param>   
 				</s:url>
