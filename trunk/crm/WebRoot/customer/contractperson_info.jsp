@@ -180,7 +180,7 @@
 												<s:textfield id="birthday" name="contractPersonInfo.birthday"
 													maxlength="25" cssStyle="width: 300px;" readOnly="true"></s:textfield>
 													<br/>
-													<s:if test='lunarStr.equals("1")'>
+													<s:if test='lunarStr != null && lunarStr.equals("1")'>
 													<input type="checkbox" name="lunarStr" value="1" checked="true">农历
 													</s:if>
 													<s:else>
