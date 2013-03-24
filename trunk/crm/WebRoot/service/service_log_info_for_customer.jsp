@@ -149,7 +149,7 @@
                                                     <td align="right" nowrap="nowrap">申 请 人</td>
                                                     <td align="left"><s:textfield type="text" style="width:150px" name="serviceLog.petitioner" id="petitioner"></s:textfield></td>
                                                     <td align="right" nowrap="nowrap">申请时间</td>
-                                                    <td align="left"><s:textfield type="text" style="width:150px" name="serviceLog.petitionTimeString" id="petitionTime" onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})"></s:textfield></td>
+                                                    <td align="left"><s:textfield type="text" style="width:150px" name="serviceLog.petitionTimeString" id="petitionTime" onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm'})"></s:textfield></td>
                                                     <td align="right" nowrap="nowrap">电　　话</td>
                                                     <td align="left"><s:textfield type="text" style="width:150px" name="serviceLog.telephone" id="telephone"></s:textfield></td>
                                                   </tr>
@@ -178,9 +178,9 @@
                                         <td><table cellpadding="0" cellspacing="3">
                                             <tr>
                                               <td align="right" nowrap="nowrap">到达时间</td>
-                                              <td nowrap="nowrap"><s:textfield type="text" style="width:150px" name="serviceLog.arriveTime" id="arriveTime" onClick="WdatePicker()"></s:textfield></td>
+                                              <td nowrap="nowrap"><s:textfield type="text" style="width:150px" name="serviceLog.arriveTimeString" id="arriveTime" onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm'})"></s:textfield></td>
                                               <td align="right" nowrap="nowrap">离开时间</td>
-                                              <td align="left"><s:textfield type="text" style="width:150px" name="serviceLog.leaveTime" id="leaveTime" onClick="WdatePicker()"></s:textfield></td>
+                                              <td align="left"><s:textfield type="text" style="width:150px" name="serviceLog.leaveTimeString" id="leaveTime" onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm'})"></s:textfield></td>
                                               <td align="right" nowrap="nowrap">服务人员</td>
                                               <td align="left"><s:textfield type="text" style="width:150px" name="serviceLog.actServiceUser" id="actServiceUser"></s:textfield></td>
                                             </tr>
@@ -208,7 +208,7 @@
                                         <td><table cellpadding="0" cellspacing="3">
                                             <tr>
                                               <td align="right" nowrap="nowrap">回访时间</td>
-                                              <td nowrap="nowrap"><s:textfield type="text" style="width:150px" name="serviceLog.returnVisitTime" id="returnVisitTime" disabled="true" onClick="WdatePicker()"></s:textfield></td>
+                                              <td nowrap="nowrap"><s:textfield type="text" style="width:150px" name="serviceLog.returnVisitTimeString" id="returnVisitTime" disabled="true" onClick="WdatePicker({dateFmt:'yyyy-MM-dd HH:mm'})"></s:textfield></td>
                                               <td align="right" nowrap="nowrap">回访方式</td>
                                               <td align="left"><s:textfield type="text" style="width:150px" name="serviceLog.returnVisitType" id="returnVisitType" disabled="true"></s:textfield></td>
                                               <td align="right" nowrap="nowrap">回访人员</td>

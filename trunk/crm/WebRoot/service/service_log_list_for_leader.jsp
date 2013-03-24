@@ -113,7 +113,7 @@
 										<s:property value="petitionTimeString" />&nbsp;
 									</td>
 									<td align="center" bgcolor="#FFFFFF">
-										<s:property value="arriveTime" />&nbsp;
+										<s:property value="arriveTimeString" />&nbsp;
 									</td>
 									<td align="center" bgcolor="#FFFFFF">
 										<s:if test="degreeSatisfaction==0"></s:if>
