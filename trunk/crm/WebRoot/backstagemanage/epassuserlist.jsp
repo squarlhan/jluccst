@@ -127,7 +127,7 @@
               <td align="center" background="<%=path %>/images/headerbg.jpg"><strong>职务</strong></td>
               <td align="center" background="<%=path %>/images/headerbg.jpg"><strong>用户类型</strong></td>
               <td align="center" background="<%=path %>/images/headerbg.jpg"><strong>所属部门</strong></td>
-              <td align="center" background="<%=path %>/images/headerbg.jpg"><strong>身份锁SN</strong></td>
+              <td align="center" background="<%=path %>/images/headerbg.jpg"><strong>ePassSN</strong></td>
               <td align="center" background="<%=path %>/images/headerbg.jpg"><strong>操作</strong></td>
             </tr>
             <s:iterator value="pagination.data" status="obj">
