@@ -83,11 +83,11 @@ public interface IUserService {
 
 	/**
 	 * 根据集团id，取得集团下可以登录的用户，用于登录时显示
-	 * @param unitId
+	 * @param companyId
 	 * @return
 	 * @throws Exception
 	 */
-	public List<User> queryAllUserListByUnitId( String unitId ) throws Exception;
+	public List<User> queryAllUserListByCompanyId( String companyId ) throws Exception;
 	/**
 	 * 获取用户列表数
 	 * 
