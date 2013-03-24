@@ -42,7 +42,6 @@ pageEncoding="UTF-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>
-    <title>时间管理列表</title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -220,9 +219,6 @@ pageEncoding="UTF-8"%>
     <td valign="top">
       <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#d5e4fd">
         <tr>
-         	<td align="center" background="<%=path %>/images/headerbg.jpg">  
-   				<s:checkbox theme="simple" id="cbk_all" name="all"></s:checkbox>
-   			</td>
               <td align="center" background="<%=path %>/images/headerbg.jpg" nowrap="nowrap"><strong>业务员</strong></td>
               <td align="center" background="<%=path %>/images/headerbg.jpg" nowrap="nowrap"><strong>提交日期</strong></td>
               <td align="center" background="<%=path %>/images/headerbg.jpg" nowrap="nowrap"><strong>计划类型</strong></td>
@@ -232,9 +228,6 @@ pageEncoding="UTF-8"%>
         </tr>
         <s:iterator value="pagination.data" status="obj">
         <tr>
-        <td height="26" align="center" bgcolor="#FFFFFF" >  
-        	<s:checkbox id="%{#obj.id}" name="ids" fieldValue="%{id}" value="false" theme="simple"/>
-		</td>
               <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="employeeName"/></td>
               <td height="26" align="center" bgcolor="#FFFFFF"  nowrap="nowrap"><s:property value="submitTime"/></td>
               <td height="26" align="center" bgcolor="#FFFFFF">

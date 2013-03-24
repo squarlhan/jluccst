@@ -67,6 +67,7 @@
 				});
 				$.fn.save();
 		  		$.fn.close();
+		  		$.fn.reference();
 		  	});
 			/**
 		  	 * 保存
@@ -95,6 +96,14 @@
 		  			parent.$("#windown-close").click();
 		  		});
 			};
+			
+			$.fn.reference = function(){
+				$("#referenceBtn").click(function() {
+		            form1.action = "openAddTimePlanAction.action?reference=true";					
+	               	form1.submit();
+          		});
+          	};
+			
 		</script>
 	</head>
 
@@ -148,18 +157,9 @@
 											<font color="red">*</font>
 										</td>
 									</tr>
-									
 									<tr>
 										<td height="26" align="right" bgcolor="#FFFFFF">
-											<strong>总结：</strong>
-										</td>
-										<td height="26" align="left" bgcolor="#FFFFFF" colspan="3">
-											<s:textarea  id="txt_memo" name="timePlan.memo" cssStyle="width: 438px;height:100px;resize:none;" maxlength="500"></s:textarea>
-										</td>
-									</tr>
-									<tr>
-										<td height="26" align="right" bgcolor="#FFFFFF">
-											<strong>计划内容：</strong>
+											<strong>明日计划：</strong>
 										</td>
 										<td height="26" align="left" bgcolor="#FFFFFF" colspan="3">
 											<s:textarea  id="txt_planContent" name="timePlan.planContent" cssStyle="width: 438px;height:100px;resize:none;" maxlength="500"></s:textarea>
@@ -167,7 +167,18 @@
 										</td>
 									</tr>
 									<tr>
+										<td height="26" align="right" bgcolor="#FFFFFF">
+											<strong>今日总结：</strong>
+										</td>
+										<td height="26" align="left" bgcolor="#FFFFFF" colspan="3">
+											<s:textarea  id="txt_memo" name="timePlan.memo" cssStyle="width: 438px;height:100px;resize:none;" maxlength="500"></s:textarea>
+										</td>
+									</tr>
+									<tr>
 										<td height="26" colspan="4" align="center" bgcolor="#FFFFFF">
+											<s:if test="timePlan.id==null">
+												<input name="referenceBtn" type="button" class="btn_5" id="referenceBtn" value="参考上次计划">&nbsp;&nbsp;
+											</s:if>
 											<input name="addBtn" type="button" class="btn_2_3" id="addBtn" value="保存">
 											&nbsp;&nbsp;
 											<input name="closeBtn" type="button" class="btn_2_3" id="closeBtn" value="关闭">

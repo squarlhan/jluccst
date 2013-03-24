@@ -28,6 +28,7 @@ import com.boan.crm.sellreport.monthly.model.MonthlyMainInfo;
 import com.boan.crm.sellreport.monthly.service.IMonthlyItemInfoService;
 import com.boan.crm.sellreport.monthly.service.IMonthlyMainInfoService;
 import com.boan.crm.sellreport.weekly.model.WeeklyItemInfo;
+import com.boan.crm.sellreport.weekly.model.WeeklyMainInfo;
 import com.boan.crm.utils.action.BaseActionSupport;
 import com.boan.crm.utils.calendar.CalendarUtils;
 import com.boan.crm.utils.page.Pagination;
@@ -56,6 +57,8 @@ public class MonthlyMainInfoAction  extends BaseActionSupport{
 	private InputStream xmlStream;
 	
 	private String caption;
+	
+	private List<MonthlyItemInfo> monthlyItemInfoList = new ArrayList<MonthlyItemInfo>();
 	
 	/**
 	 * 分页对象
@@ -107,6 +110,8 @@ public class MonthlyMainInfoAction  extends BaseActionSupport{
 	private String personName;
 	
 	private String queryTime;
+	
+	private String reference="";
 	
 	/**
 	 * 显示组织机构树
@@ -248,7 +253,21 @@ public class MonthlyMainInfoAction  extends BaseActionSupport{
 	public String openAddMonthlyMainInfo() throws Exception{
 		deptList = deptService.queryAllDeptmentsByCompanyId( sessionCompanyId );
 		userList =userService.queryUserList( sessionCompanyId, sessionDeptId, new Pagination<User>()).getData();
-		monthlyMainInfo = new MonthlyMainInfo();
+		
+		System.out.println(reference);
+		if(reference!=null && reference.equals("true")){
+			Map<String,Object> params = new HashMap<String, Object>();
+			personId = sessionUserId;
+			if(personId!=null && !personId.equals("")){
+				params.put("personId", personId);
+			}
+			monthlyMainInfo= monthlyMainInfoService.getLastMonthlyMainInfo(params);
+		}
+		if(monthlyMainInfo!=null){
+			monthlyMainInfo.setId(null);
+		}else{
+			monthlyMainInfo = new MonthlyMainInfo();
+		}
 		
 		monthlyMainInfo.setCompanyId(sessionCompanyId);
 		monthlyMainInfo.setCompanyName(sessionCompanyName);
@@ -334,6 +353,12 @@ public class MonthlyMainInfoAction  extends BaseActionSupport{
 	}
 
 	public String showMonthlyStatInfo() {
+		return this.SUCCESS;
+	}
+	
+	public String openMonthlyReport(){
+		monthlyMainInfo = monthlyMainInfoService.getMonthlyMainInfoById(mainInfoId);
+		monthlyItemInfoList = monthlyItemInfoService.getMonthlyItemInfoListByMainInfoId(mainInfoId);
 		return this.SUCCESS;
 	}
 	
@@ -669,5 +694,17 @@ public class MonthlyMainInfoAction  extends BaseActionSupport{
 
 	public void setQueryTime(String queryTime) {
 		this.queryTime = queryTime;
+	}
+	public String getReference() {
+		return reference;
+	}
+	public void setReference(String reference) {
+		this.reference = reference;
+	}
+	public List<MonthlyItemInfo> getMonthlyItemInfoList() {
+		return monthlyItemInfoList;
+	}
+	public void setMonthlyItemInfoList(List<MonthlyItemInfo> monthlyItemInfoList) {
+		this.monthlyItemInfoList = monthlyItemInfoList;
 	}
 }

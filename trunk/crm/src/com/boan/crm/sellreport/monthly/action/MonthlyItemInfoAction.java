@@ -14,6 +14,7 @@ import com.boan.crm.sellreport.monthly.model.MonthlyItemInfo;
 import com.boan.crm.sellreport.monthly.service.IMonthlyItemInfoService;
 import com.boan.crm.sellreport.sellduty.model.SellDuty;
 import com.boan.crm.sellreport.sellduty.service.ISellDutyService;
+import com.boan.crm.sellreport.weekly.model.WeeklyItemInfo;
 import com.boan.crm.utils.action.BaseActionSupport;
 import com.boan.crm.utils.page.Pagination;
 
@@ -60,6 +61,8 @@ public class MonthlyItemInfoAction extends BaseActionSupport{
 	 */
 	private String message;
 	
+	private String reference="";
+	
 	public String openMonthlyItemList(){
 		Map param = new HashMap();
 		if(mainInfoId!=null && !mainInfoId.equals("")){
@@ -80,6 +83,19 @@ public class MonthlyItemInfoAction extends BaseActionSupport{
 	}
 
 	public String openAddMonthlyItem(){
+		System.out.println(reference);
+		if(reference!=null && reference.equals("true")){
+			Map<String,Object> params = new HashMap<String, Object>();
+			String mainInfoId = monthlyItemInfo.getMainInfoId();
+			params.put("mainInfoId",mainInfoId);
+			monthlyItemInfo= monthlyItemInfoService.getLastMonthlyItemInfo(params);
+			if(monthlyItemInfo!=null){
+				monthlyItemInfo.setId(null);
+			}else{
+				monthlyItemInfo = new MonthlyItemInfo();
+			}
+			monthlyItemInfo.setMainInfoId(mainInfoId);
+		}
 		sellDutyList = sellDutyService.findAllSellDutyByCompanyIdAndDutyType(this.sessionCompanyId,1);
 		return this.SUCCESS;
 	}
@@ -165,5 +181,11 @@ public class MonthlyItemInfoAction extends BaseActionSupport{
 
 	public void setMessage(String message) {
 		this.message = message;
+	}
+	public String getReference() {
+		return reference;
+	}
+	public void setReference(String reference) {
+		this.reference = reference;
 	}
 }

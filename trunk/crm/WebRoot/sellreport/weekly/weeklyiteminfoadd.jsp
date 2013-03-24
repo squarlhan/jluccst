@@ -96,6 +96,7 @@
 				});
 				$.fn.save();
 		  		$.fn.close();
+		  		$.fn.reference();
 		  		//选中职责事件
 		  		$("#sel_sellDuty").change(function(){
 		  			var  dutyId= $("#sel_sellDuty option:selected").val();
@@ -181,6 +182,13 @@
 		  			parent.$("#windown-close").click();
 		  		});
 			};
+			
+			$.fn.reference = function(){
+				$("#referenceBtn").click(function() {
+		            form1.action = "openAddWeeklyItemAction.action?reference=true";					
+	               	form1.submit();
+          		});
+          	};
 		</script>
 	</head>
 
@@ -191,6 +199,7 @@
 		<s:hidden id="hid_mainInfoId" name="weeklyItemInfo.mainInfoId"></s:hidden>
 		<s:hidden id="hid_sequence" name="weeklyItemInfo.sequence"></s:hidden>
 		<s:hidden id="hid_sellDutyName" name="weeklyItemInfo.sellDutyName"></s:hidden>
+		<s:hidden id="hid_createTime" name="weeklyItemInfo.createTime"></s:hidden>
 			<table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#d5e4fd">
 				<tr>
 					<td height="26" align="left" bgcolor="#FFFFFF" width="80px"  nowrap="nowrap">
@@ -209,6 +218,10 @@
 							</s:iterator>
 						</span>
 						<font color="red">*</font>
+						<s:if test="weeklyItemInfo.id==null">
+							<input name="referenceBtn" type="button" class="btn_5" id="referenceBtn" value="参考上次计划">
+						</s:if>
+						&nbsp;&nbsp;
 					</td>
 				</tr>
 				<tr>

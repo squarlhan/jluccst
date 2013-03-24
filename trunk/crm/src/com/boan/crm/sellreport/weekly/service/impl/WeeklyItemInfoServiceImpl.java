@@ -86,4 +86,24 @@ public class WeeklyItemInfoServiceImpl implements IWeeklyItemInfoService{
 		pagination.setData(data);
 		return pagination;
 	}
+	
+	/**
+	 *查询最近周计划项信息
+	 * @param 
+	 * @return
+	 */
+	public WeeklyItemInfo getLastWeeklyItemInfo( Map<String, ?> params){
+		StringBuffer strb = new StringBuffer( " where 1=1 ");
+		if(params!=null){
+			if(params.containsKey("mainInfoId")){
+				strb.append(" and  mainInfoId=:mainInfoId  ");
+			}
+		}
+		String hql = "from WeeklyItemInfo "+strb.toString()+" order by createTime desc , sequence asc";
+		List<WeeklyItemInfo> data = weeklyItemInfoDao.find(hql, params);
+		if(data!=null && data.size()>0){
+			return data.get(0);
+		}
+		return null;
+	}
 }

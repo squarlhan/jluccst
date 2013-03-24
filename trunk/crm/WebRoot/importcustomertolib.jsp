@@ -148,7 +148,7 @@
           <s:form id="form1" name="form1" method="post" theme="simple" enctype="multipart/form-data">
 			<s:label id="lb_message" name="message" cssStyle="display:none"></s:label>
 		<fieldset  style="width:100%" >
-		<legend>查询条件</legend>
+		<legend>配置项</legend>
    		<span>
 			<table width="100%" border="0" cellspacing="5" cellpadding="0">
 				<tr>

@@ -45,4 +45,12 @@ public interface IWeeklyItemInfoService {
 	 * 按分页查询周计划项信息
 	 */
 	public Pagination<WeeklyItemInfo> findWeeklyItemInfoForPage( Map<String, ?> values, Pagination<WeeklyItemInfo> pagination);
+	
+	
+	/**
+	 *查询最近周计划项信息
+	 * @param 
+	 * @return
+	 */
+	public WeeklyItemInfo getLastWeeklyItemInfo( Map<String, ?> params);
 }

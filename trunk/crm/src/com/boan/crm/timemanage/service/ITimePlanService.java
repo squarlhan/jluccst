@@ -29,4 +29,11 @@ public interface ITimePlanService {
 	 * 按分页查询时间计划
 	 */
 	public Pagination<TimePlan> findTimePlanForPage( Map<String, ?> values, Pagination<TimePlan> pagination);
+	
+	
+	/**
+	 * 获取最近的时间计划
+	 * @param id
+	 */
+	public TimePlan getLastTimePlan(Map<String, ?> params);
 }

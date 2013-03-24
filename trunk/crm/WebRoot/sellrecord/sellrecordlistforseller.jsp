@@ -321,7 +321,7 @@
             		</td>
             		<td height="26" align="center" bgcolor="#FFFFFF"><s:property value="receivable"/></td>
             		<td height="26" align="center" bgcolor="#FFFFFF"><s:property value="realCollection"/></td>
-            		<td height="26" align="center" bgcolor="#FFFFFF"><s:property value="debt"/></td>
+            		<td height="26" align="center" bgcolor="#FFFFFF"><font color="red"><s:property value="debt"/></font></td>
             		<td height="26" align="center" bgcolor="#FFFFFF"><s:property value="(realCollection/receivable)*100"/>%</td>
             		<td height="26" align="center" bgcolor="#FFFFFF" nowrap="nowrap">
 							<s:url id="edit_url" action="openModifySellRecordForSellerAction">   

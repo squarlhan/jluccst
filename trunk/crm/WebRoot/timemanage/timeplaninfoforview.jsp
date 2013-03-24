@@ -146,24 +146,24 @@
 											<font color="red">*</font>
 										</td>
 									</tr>
-									<tr>
-										<td height="26" align="right" bgcolor="#FFFFFF">
-											<strong>总结：</strong>
-										</td>
-										<td height="26" align="left" bgcolor="#FFFFFF" colspan="3">
-											<s:textarea tabindex="-1"   id="txt_memo" name="timePlan.memo" cssStyle="width: 438px;height:100px;resize:none;" maxlength="500"></s:textarea>
-										</td>
-									</tr>
+								
 									<tr>
 										<td height="26" align="right" bgcolor="#FFFFFF" nowrap="nowrap">
-											<strong>计划内容：</strong>
+											<strong>明日计划：</strong>
 										</td>
 										<td height="26" align="left" bgcolor="#FFFFFF" colspan="3">
 											<s:textarea tabindex="-1"   id="txt_planContent" name="timePlan.planContent" cssStyle="width: 438px;height:100px;resize:none;" maxlength="500"></s:textarea>
 											<font color="red">*</font>
 										</td>
 									</tr>
-									
+										<tr>
+										<td height="26" align="right" bgcolor="#FFFFFF">
+											<strong>今日总结：</strong>
+										</td>
+										<td height="26" align="left" bgcolor="#FFFFFF" colspan="3">
+											<s:textarea tabindex="-1"   id="txt_memo" name="timePlan.memo" cssStyle="width: 438px;height:100px;resize:none;" maxlength="500"></s:textarea>
+										</td>
+									</tr>
 									</span>
 									<tr>
 										<td height="26" colspan="4" align="center" bgcolor="#FFFFFF">

@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 import com.boan.crm.sellreport.monthly.model.MonthlyItemInfo;
-import com.boan.crm.sellreport.weekly.model.WeeklyItemInfo;
 import com.boan.crm.utils.page.Pagination;
 
 public interface IMonthlyItemInfoService {
@@ -46,4 +45,11 @@ public interface IMonthlyItemInfoService {
 	 * @return
 	 */
 	public List<MonthlyItemInfo>  getMonthlyItemInfoListOfSellTargetByMainInfoId(String mainInfoId);
+	
+	/**
+	 *查询最近月计划项信息
+	 * @param 
+	 * @return
+	 */
+	public MonthlyItemInfo getLastMonthlyItemInfo( Map<String, ?> params);
 }

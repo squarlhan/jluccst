@@ -97,4 +97,29 @@ public class TimePlanServiceImpl implements ITimePlanService {
 		pagination.setData(data);
 		return pagination;
 	}
+	
+	/**
+	 * 获取最近的时间计划
+	 * @param id
+	 */
+	public TimePlan getLastTimePlan(Map<String, ?> params){
+		StringBuffer strb = new StringBuffer( " where 1=1 ");
+		
+		if(params.containsKey("personId")){
+			if(params.get("personId")!=null ){
+				strb.append(" And  personId=:personId");
+			}
+		}
+		if(params.containsKey("organId")){
+			if(params.get("organId")!=null ){
+				strb.append(" And organId=:organId");
+			}
+		}
+		String hql = "from TimePlan "+strb.toString()+" order by submitTime desc , createTime desc";
+		List<TimePlan> data = timePlanDao.find(hql, params);
+		if(data!=null && data.size()>0){
+			return data.get(0);
+		}
+		return null;
+	}
 }

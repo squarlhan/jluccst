@@ -40,6 +40,8 @@ public class WeeklyMainInfoAction  extends BaseActionSupport{
 	 */
 	private WeeklyMainInfo weeklyMainInfo;
 	
+	private List<WeeklyItemInfo> weeklyItemInfoList = new ArrayList<WeeklyItemInfo>();
+	
 	/**
 	 * 部门列表
 	 */
@@ -59,6 +61,8 @@ public class WeeklyMainInfoAction  extends BaseActionSupport{
 	private String personName;
 	
 	private String queryTime;
+	
+	private String reference="";
 	
 	
 	/**
@@ -250,8 +254,20 @@ public class WeeklyMainInfoAction  extends BaseActionSupport{
 	public String openAddWeeklyMainInfo() throws Exception{
 		deptList = deptService.queryAllDeptmentsByCompanyId( sessionCompanyId );
 		userList =userService.queryUserList( sessionCompanyId, sessionDeptId, new Pagination<User>()).getData();
-		weeklyMainInfo = new WeeklyMainInfo();
-		
+		System.out.println(reference);
+		if(reference!=null && reference.equals("true")){
+			Map<String,Object> params = new HashMap<String, Object>();
+			personId = sessionUserId;
+			if(personId!=null && !personId.equals("")){
+				params.put("personId", personId);
+			}
+			weeklyMainInfo= weeklyMainInfoService.getLastWeeklyMainInfo(params);
+		}
+		if(weeklyMainInfo!=null){
+			weeklyMainInfo.setId(null);
+		}else{
+			weeklyMainInfo = new WeeklyMainInfo();
+		}
 		weeklyMainInfo.setCompanyId(sessionCompanyId);
 		weeklyMainInfo.setCompanyName(sessionCompanyName);
 		
@@ -334,6 +350,12 @@ public class WeeklyMainInfoAction  extends BaseActionSupport{
 	
 	public String showWeeklyStatInfo() {
 		System.out.print(mainInfoId);
+		return this.SUCCESS;
+	}
+	
+	public String openWeeklyReport(){
+		weeklyMainInfo = weeklyMainInfoService.getWeeklyMainInfoById(mainInfoId);
+		weeklyItemInfoList =  weeklyItemInfoService.getWeeklyItemInfoListByMainInfoId(mainInfoId);
 		return this.SUCCESS;
 	}
 	
@@ -637,5 +659,17 @@ public class WeeklyMainInfoAction  extends BaseActionSupport{
 
 	public void setQueryTime(String queryTime) {
 		this.queryTime = queryTime;
+	}
+	public String getReference() {
+		return reference;
+	}
+	public void setReference(String reference) {
+		this.reference = reference;
+	}
+	public List<WeeklyItemInfo> getWeeklyItemInfoList() {
+		return weeklyItemInfoList;
+	}
+	public void setWeeklyItemInfoList(List<WeeklyItemInfo> weeklyItemInfoList) {
+		this.weeklyItemInfoList = weeklyItemInfoList;
 	}
 }

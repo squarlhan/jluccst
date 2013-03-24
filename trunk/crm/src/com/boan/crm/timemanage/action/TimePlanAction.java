@@ -100,6 +100,8 @@ public class TimePlanAction extends BaseActionSupport{
 	
 	private String userId=null;
 	
+	private String reference="";
+	
 	/**
 	 * 显示组织机构树,带公司、工厂、车间
 	 * 
@@ -206,9 +208,19 @@ public class TimePlanAction extends BaseActionSupport{
 	public String openAddTimePlan() throws Exception {
 		deptList = deptService.queryAllDeptmentsByCompanyId( sessionCompanyId );
 		userList =userService.queryUserList( sessionCompanyId, sessionDeptId, new Pagination<User>()).getData();
-		timePlan = new TimePlan();
-		timePlan.setDeptId(sessionDeptId);
-		timePlan.setEmployeeId(sessionUserId);
+		if(reference!=null && reference.equals("true")){
+			Map<String,Object> params = new HashMap<String, Object>();
+			params.put("personId", this.sessionUserId);
+			params.put("organId", this.sessionCompanyId);
+			TimePlan  temp  = timePlanService.getLastTimePlan(params);
+			timePlan.setId(null);
+			timePlan.setPlanContent(temp.getPlanContent());//明日计划
+			timePlan.setMemo(temp.getMemo());//今日总结
+		}else{
+			timePlan = new TimePlan();
+			timePlan.setDeptId(sessionDeptId);
+			timePlan.setEmployeeId(sessionUserId);
+		}
 		return SUCCESS;
 	}
 	/**
@@ -383,5 +395,13 @@ public class TimePlanAction extends BaseActionSupport{
 
 	public void setUserId(String userId) {
 		this.userId = userId;
+	}
+
+	public String getReference() {
+		return reference;
+	}
+
+	public void setReference(String reference) {
+		this.reference = reference;
 	}
 }

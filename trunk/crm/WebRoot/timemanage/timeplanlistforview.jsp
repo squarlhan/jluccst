@@ -144,7 +144,7 @@ pageEncoding="UTF-8"%>
 	  				var url = $(this).attr("url");
 	  				parent.parent.tipsWindown("查看时间计划","iframe:"+url,"620","380","true","","true","no");
 	  				parent.parent.$("#windown-close").bind('click',function(){
-						window.location.href="./openTimePlanListForViewAction.action";
+						window.location.href="./openTimePlanListForViewAction.action?deptId="+$("#deptId").val()+"&userId="+$("#userId").val();
 					});
 	  			});
 	  		});
@@ -178,8 +178,8 @@ pageEncoding="UTF-8"%>
   
   <body>
  <s:form id="form1" name="form1" method="post" theme="simple" action="openTimePlanListForViewAction.action">
- <s:hidden name="deptId"></s:hidden>
-  <s:hidden name="userId"></s:hidden>
+ <s:hidden id="deptId"  name="deptId"></s:hidden>
+  <s:hidden id="userId"  name="userId"></s:hidden>
 <table width="110%"  border="0" cellspacing="5" cellpadding="0">
 	<tr>
 		<td colspan="2">
@@ -220,21 +220,15 @@ pageEncoding="UTF-8"%>
     <td valign="top">
       <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#d5e4fd">
         <tr>
-         	<td align="center" background="<%=path %>/images/headerbg.jpg">  
-   				<s:checkbox theme="simple" id="cbk_all" name="all"></s:checkbox>
-   			</td>
               <td align="center" background="<%=path %>/images/headerbg.jpg" nowrap="nowrap"><strong>业务员</strong></td>
               <td align="center" background="<%=path %>/images/headerbg.jpg" nowrap="nowrap"><strong>提交日期</strong></td>
               <td align="center" background="<%=path %>/images/headerbg.jpg" nowrap="nowrap"><strong>计划类型</strong></td>
-               <td width="40%"  align="center" background="<%=path %>/images/headerbg.jpg"><strong>计划内容</strong></td>
-               <td align="center" background="<%=path %>/images/headerbg.jpg" nowrap="nowrap"><strong>总结</strong></td>
+               <td align="center" background="<%=path %>/images/headerbg.jpg" ><strong>今日总结</strong></td>
+               <td align="center" background="<%=path %>/images/headerbg.jpg"><strong>明日计划</strong></td>
               <td align="center" background="<%=path %>/images/headerbg.jpg" nowrap="nowrap"><strong>操作</strong></td>
         </tr>
         <s:iterator value="pagination.data" status="obj">
         <tr>
-        <td height="26" align="center" bgcolor="#FFFFFF" >  
-        	<s:checkbox id="%{#obj.id}" name="ids" fieldValue="%{id}" value="false" theme="simple"/>
-		</td>
               <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="employeeName"/></td>
               <td height="26" align="center" bgcolor="#FFFFFF"  nowrap="nowrap"><s:property value="submitTime"/></td>
               <td height="26" align="center" bgcolor="#FFFFFF">

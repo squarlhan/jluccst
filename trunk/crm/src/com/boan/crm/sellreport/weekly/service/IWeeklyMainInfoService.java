@@ -38,4 +38,10 @@ public interface IWeeklyMainInfoService {
 	  * @param id
 	  */
 	public void deleteWeeklyMainInfoByIds(String... ids);
+	
+	 /**
+	  * 获取最近周计划信息
+	  * @param id
+	  */
+	public WeeklyMainInfo getLastWeeklyMainInfo( Map<String, ?> params);
 }

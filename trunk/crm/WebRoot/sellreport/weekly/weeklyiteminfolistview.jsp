@@ -83,21 +83,14 @@
     <td valign="top">
       <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#d5e4fd">
         <tr>
-         	<td align="center" background="<%=path %>/images/headerbg.jpg">  
-   				<s:checkbox theme="simple" id="cbk_all" name="all"></s:checkbox>
-   			</td>
               <td align="center" background="<%=path %>/images/headerbg.jpg" nowrap="nowrap"><strong>职责</strong></td>
-              <td align="center" background="<%=path %>/images/headerbg.jpg" nowrap="nowrap"><strong>实际结果</strong></td>
-               <td align="center" background="<%=path %>/images/headerbg.jpg" nowrap="nowrap"><strong>延期原因</strong></td>
-               <td align="center" background="<%=path %>/images/headerbg.jpg" nowrap="nowrap"><strong>改进措施</strong></td>
+              <td align="center" background="<%=path %>/images/headerbg.jpg" nowrap="nowrap"><strong>结果定义</strong></td>
+               <td align="center" background="<%=path %>/images/headerbg.jpg" nowrap="nowrap"><strong>实际结果</strong></td>
               <td align="center" background="<%=path %>/images/headerbg.jpg" nowrap="nowrap"><strong>执行基金</strong></td>
               <td align="center" background="<%=path %>/images/headerbg.jpg" nowrap="nowrap"><strong>操作</strong></td>
         </tr>
         <s:iterator value="pagination.data" status="obj">
         <tr>
-        <td height="26" align="center" bgcolor="#FFFFFF" >  
-        	<s:checkbox id="%{#obj.id}" name="ids" fieldValue="%{id}" value="false" theme="simple"/>
-		</td>
               <td height="26" align="left" bgcolor="#FFFFFF">
               	<s:if test="sellTarget==null || sellTarget==''">
               		<s:property value="sellDutyName"/>
@@ -107,10 +100,9 @@
               	</s:else>
               </td>
               <td height="26" align="center" bgcolor="#FFFFFF">
-              	<s:property value="superiorResult"/>
+              	<s:property value="weekResult"/>
               </td>
-                <td height="26" align="left" bgcolor="#FFFFFF"><s:property value="superiorReason"/></td>
-                <td height="26" align="left" bgcolor="#FFFFFF"><s:property value="superiorMethod"/></td>
+                <td height="26" align="left" bgcolor="#FFFFFF"><s:property value="superiorResult"/></td>
               <td height="26" align="center" bgcolor="#FFFFFF"  nowrap="nowrap"><s:property value="executeMoney"/></td>
           <td height="26" colspan="2" align="center" bgcolor="#FFFFFF"  nowrap="nowrap">
           	<s:url id="edit_url" action="openViewWeeklyItemAction">   

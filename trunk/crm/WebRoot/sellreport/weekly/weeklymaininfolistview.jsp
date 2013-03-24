@@ -146,6 +146,16 @@ pageEncoding="UTF-8"%>
 	  		});
 	  		
 	  		/**
+	  		 * 查看报表
+	  		 */
+	  		$('a[name="seeAll"]').each(function(){
+	  			$(this).click(function(){
+	  				var url = $(this).attr("url");
+	  				parent.parent.tipsWindown("查看全部计划","iframe:"+url,"900","520","true","","true","no");
+	  			});
+	  		});
+	  		
+	  		/**
 	  		 * 统计
 	  		 */
 	  		$('a[name="stat"]').each(function(){
@@ -214,9 +224,6 @@ pageEncoding="UTF-8"%>
     <td valign="top">
       <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#d5e4fd">
         <tr>
-         	<td align="center" background="<%=path %>/images/headerbg.jpg">  
-   				<s:checkbox theme="simple" id="cbk_all" name="all"></s:checkbox>
-   			</td>
               <td align="center" background="<%=path %>/images/headerbg.jpg" nowrap="nowrap"><strong>计划人</strong></td>
               <td align="center" background="<%=path %>/images/headerbg.jpg" nowrap="nowrap"><strong>计划时间</strong></td>
               <td align="center" background="<%=path %>/images/headerbg.jpg" nowrap="nowrap"><strong>所在部门</strong></td>
@@ -227,9 +234,6 @@ pageEncoding="UTF-8"%>
         </tr>
         <s:iterator value="pagination.data" status="obj">
         <tr>
-        <td height="26" align="center" bgcolor="#FFFFFF" >  
-        	<s:checkbox id="%{#obj.id}" name="ids" fieldValue="%{id}" value="false" theme="simple"/>
-		</td>
               <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="personName"/></td>
               <td height="26" align="center" bgcolor="#FFFFFF"  nowrap="nowrap"><s:property value="planInterzone"/></td>
               <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="deptName"/></td>
@@ -243,7 +247,11 @@ pageEncoding="UTF-8"%>
 			<s:url id="stat_url" action="showWeeklyStatInfoAction">
 				<s:param name="mainInfoId" value="id"></s:param>   
 			</s:url>
-         	<a name="edit" href="javascript:void(0);" url="${edit_url}">编辑信息</a>  
+			<s:url id="report_url" action="openWeeklyReportAction.action">   
+				<s:param name="mainInfoId" value="id"></s:param>   
+			</s:url>
+			<a name="seeAll" href="javascript:void(0);" url="${report_url}">查看全部计划</a>  
+         	<a name="edit" href="javascript:void(0);" url="${edit_url}">查看计划</a>  
          	<a name="stat" href="javascript:void(0);" url="${stat_url}">查看统计</a>
           </td>
         </tr>
