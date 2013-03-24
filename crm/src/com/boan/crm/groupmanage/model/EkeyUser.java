@@ -124,4 +124,12 @@ public class EkeyUser implements Serializable {
 		this.user = user;
 	}
 
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
 }

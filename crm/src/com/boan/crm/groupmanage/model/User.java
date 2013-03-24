@@ -137,6 +137,17 @@ public class User {
 	 */
 	@Transient
 	private int deleteFlag;
+	
+	/**
+	 * 身份锁SN
+	 */
+	@Transient
+	private String ePassSN;
+	/**
+	 * 部门对象
+	 */
+	@Transient
+	private Deptment dept;
 
 	public User() {
 		this.id = "";
@@ -333,5 +344,29 @@ public class User {
 
 	public void setSalt(String salt) {
 		this.salt = salt;
+	}
+
+	public String getEPassSN() {
+		return ePassSN;
+	}
+
+	public void setEPassSN(String ePassSN) {
+		this.ePassSN = ePassSN;
+	}
+
+	public String getePassSN() {
+		return ePassSN;
+	}
+
+	public void setePassSN(String ePassSN) {
+		this.ePassSN = ePassSN;
+	}
+
+	public Deptment getDept() {
+		return dept;
+	}
+
+	public void setDept(Deptment dept) {
+		this.dept = dept;
 	}
 }
