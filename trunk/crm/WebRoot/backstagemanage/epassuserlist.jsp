@@ -53,7 +53,7 @@
 	 */
 	 $.fn.exportuser = function(){
 		$("#button1").click(function(){
-			if( confirm("确定要导出当前部门所有用户吗？") ){
+			if( confirm("确定要导出当前用户吗？") ){
 				form1.action = "./advancedAction!exportEkeyUser.action";
 				form1.submit();
 			}
@@ -110,7 +110,7 @@
 			<s:hidden name="deptId" id="deptId"></s:hidden>
         	&nbsp;<input type="file" name="uploadFile" id="uploadFile" contenteditable="false" style="width:300px;">
             <input name="button2" type="button" class="btn_5" id="button2" value="开始导入锁数据" >
-        	<input name="button1" type="button" class="btn_4" id="button1" value="导出公司用户">
+        	<input name="button1" type="button" class="btn_4" id="button1" value="导出用户">
             </s:form>
           </td>
       </tr>
