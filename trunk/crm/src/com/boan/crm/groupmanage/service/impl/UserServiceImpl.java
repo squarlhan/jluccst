@@ -72,10 +72,10 @@ public class UserServiceImpl implements IUserService {
 	}
 
 	@Override
-	public List<User> queryAllUserListByUnitId( String unitId )
+	public List<User> queryAllUserListByCompanyId(String companyId)
 			throws Exception
 	{
-		return userDao.queryAllUserListByUnitId( unitId );
+		return userDao.queryAllUserListByCompanyId( companyId );
 	}
 
 	@Override
