@@ -463,74 +463,69 @@ public class UserLogonAction extends ActionSupport {
 		}
 		if (b) {
 			HttpSession session = ServletActionContext.getRequest().getSession();
-			if (user != null) {
-				if (user.getUserType() == UserType.ADMINISTRATOR) {
-					message.setContent("您是超级管理员，请使用身份锁登录！");
-					// return ERROR;
-				}
-				String roleId = user.getRoleId();
-				String[] popedomKeys = null;
-				Role role = null;
-				if( StringUtils.isNotBlank(roleId) ){
-					// 获取权限串
-					popedomKeys = popedomService.queryPopedomsByRoleId(roleId);
-					//获取角色对象
-					role = roleService.get(roleId);
-				};
-				// 创建userSession对象
-				UserSession userSession = new UserSession();
-				userSession.setUserId(user.getId());
-				userSession.setUsername(user.getUsername());
-				userSession.setUserCName(user.getUserCName());
-				userSession.setDeptId(user.getDeptId());
-				userSession.setCompanyId(user.getCompanyId());
-				userSession.setUserType(user.getUserType());
-				userSession.setPopedomKeys(popedomKeys);
-				userSession.setUserPhone(user.getPhone());
-				userSession.setProductSuffix(productKey.getProductSuffix());
-				if( role != null ){
-					userSession.setRoleKey(role.getRoleKey());
-				}
-				// 默认是销售团队管理系统
-				userSession.setProductType(ProductType.TEAM_MANAGE);
-				if (companyService != null) {
-					if (StringUtils.isNotBlank(user.getCompanyId())) {
-						Company company = companyService.get(user.getCompanyId());
-						if (company != null) {
-							userSession.setCompanyName(company.getCompanyName());
-							userSession.setCompanyTrialFlag(company.getTrialFlag());
-							userSession.setProductType(company.getProductType());
-						}
-						if (company.checkServiceTerm()) {
-							message.setContent("您的账号已过试用期，请联系软件供应商！");
-							return ERROR;
-						}
-					}
-				}
-				if (deptService != null) {
-					if (StringUtils.isNotBlank(user.getDeptId())) {
-						Deptment deptment = deptService.get(user.getDeptId());
-						if (deptment != null) {
-							userSession.setDeptName(deptment.getDeptName());
-						}
-					}
-				}
-				// 创建Session
-				session.setAttribute("userSession", userSession);
-				// 单位为秒,设置为一天
-				session.setMaxInactiveInterval(60 * 60 * 1);
-				// 创建Cookies
-				// Cookie myCookie = new Cookie( "loginUserName",
-				// user.getUsername());
-				// myCookie.setMaxAge(60 * 60 * 24 * 30); //设置Cookie有效期为30天
-				// ServletActionContext.getResponse().addCookie(myCookie);
-				return SUCCESS;
-			} else {
-				message.setContent("登录失败，请检查用户名及密码！");
-				return ERROR;
+			if (user.getUserType() == UserType.ADMINISTRATOR) {
+				message.setContent("您是超级管理员，请使用身份锁登录！");
+				// return ERROR;
 			}
+			String roleId = user.getRoleId();
+			String[] popedomKeys = null;
+			Role role = null;
+			if( StringUtils.isNotBlank(roleId) ){
+				// 获取权限串
+				popedomKeys = popedomService.queryPopedomsByRoleId(roleId);
+				//获取角色对象
+				role = roleService.get(roleId);
+			};
+			// 创建userSession对象
+			UserSession userSession = new UserSession();
+			userSession.setUserId(user.getId());
+			userSession.setUsername(user.getUsername());
+			userSession.setUserCName(user.getUserCName());
+			userSession.setDeptId(user.getDeptId());
+			userSession.setCompanyId(user.getCompanyId());
+			userSession.setUserType(user.getUserType());
+			userSession.setPopedomKeys(popedomKeys);
+			userSession.setUserPhone(user.getPhone());
+			userSession.setProductSuffix(productKey.getProductSuffix());
+			if( role != null ){
+				userSession.setRoleKey(role.getRoleKey());
+			}
+			// 默认是销售团队管理系统
+			userSession.setProductType(ProductType.TEAM_MANAGE);
+			if (companyService != null) {
+				if (StringUtils.isNotBlank(user.getCompanyId())) {
+					Company company = companyService.get(user.getCompanyId());
+					if (company != null) {
+						userSession.setCompanyName(company.getCompanyName());
+						userSession.setCompanyTrialFlag(company.getTrialFlag());
+						userSession.setProductType(company.getProductType());
+					}
+					if (company.checkServiceTerm()) {
+						message.setContent("您的账号已过试用期，请联系软件供应商！");
+						return ERROR;
+					}
+				}
+			}
+			if (deptService != null) {
+				if (StringUtils.isNotBlank(user.getDeptId())) {
+					Deptment deptment = deptService.get(user.getDeptId());
+					if (deptment != null) {
+						userSession.setDeptName(deptment.getDeptName());
+					}
+				}
+			}
+			// 创建Session
+			session.setAttribute("userSession", userSession);
+			// 单位为秒,设置为一天
+			session.setMaxInactiveInterval(60 * 60 * 1);
+			// 创建Cookies
+			// Cookie myCookie = new Cookie( "loginUserName",
+			// user.getUsername());
+			// myCookie.setMaxAge(60 * 60 * 24 * 30); //设置Cookie有效期为30天
+			// ServletActionContext.getResponse().addCookie(myCookie);
+			return SUCCESS;
 		} else {
-			message.setContent("登录失败，请检查用户名及密码！");
+			message.setContent("登录异常，请联系管理员！！");
 			return ERROR;
 		}
 	}
