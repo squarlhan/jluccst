@@ -10,6 +10,7 @@ package com.boan.crm.groupmanage.model;
 
 /**
  * 用户锁查询条件
+ * 
  * @author XXX
  * @version 1.0.0
  */
@@ -19,85 +20,76 @@ public class EkeyQueryCondition {
 	 */
 	private Integer ekeyFlag;
 	/**
-	 * 组织机构名称
+	 * 机构名称
 	 */
-	private String organName;
+	private String deptName;
 	/**
-	 * 组织机构ID
+	 * 机构ID
 	 */
-	private String organId;
+	private String deptId;
 	/**
-	 * 组织机构标识
+	 * 公司id
 	 */
-	private Long organMark;
+	private String companyId;
+
 	/**
 	 * 用户登录名/用户姓名
 	 */
 	private String userName;
-	
+
 	/**
 	 * @return 返回 ekeyFlag
 	 */
 	public Integer getEkeyFlag() {
 		return ekeyFlag;
 	}
+
 	/**
 	 * 设置 ekeyFlag
-	 * @param ekeyFlag 
+	 * 
+	 * @param ekeyFlag
 	 */
 	public void setEkeyFlag(Integer ekeyFlag) {
 		this.ekeyFlag = ekeyFlag;
 	}
-	/**
-	 * @return 返回 organName
-	 */
-	public String getOrganName() {
-		return organName;
-	}
-	/**
-	 * 设置 organName
-	 * @param organName 
-	 */
-	public void setOrganName(String organName) {
-		this.organName = organName;
-	}
-	/**
-	 * @return 返回 organId
-	 */
-	public String getOrganId() {
-		return organId;
-	}
-	/**
-	 * 设置 organId
-	 * @param organId 
-	 */
-	public void setOrganId(String organId) {
-		this.organId = organId;
-	}
-	/**
-	 * @return 返回 organMark
-	 */
-	public Long getOrganMark() {
-		return organMark;
-	}
-	/**
-	 * 设置 organMark
-	 * @param organMark 
-	 */
-	public void setOrganMark(Long organMark) {
-		this.organMark = organMark;
-	}
+
 	/**
 	 * @return 返回 userName
 	 */
 	public String getUserName() {
 		return userName;
 	}
+
 	/**
 	 * 设置 userName
-	 * @param userName 
+	 * 
+	 * @param userName
 	 */
 	public void setUserName(String userName) {
 		this.userName = userName;
+	}
+
+	public String getDeptName() {
+		return deptName;
+	}
+
+	public void setDeptName(String deptName) {
+		this.deptName = deptName;
+	}
+
+	public String getDeptId() {
+		return deptId;
+	}
+
+	public void setDeptId(String deptId) {
+		this.deptId = deptId;
+	}
+
+	public String getCompanyId() {
+		return companyId;
+	}
+
+	public void setCompanyId(String companyId) {
+		this.companyId = companyId;
 	}
 }
