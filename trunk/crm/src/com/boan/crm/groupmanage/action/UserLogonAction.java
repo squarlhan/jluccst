@@ -14,10 +14,7 @@ import java.util.List;
 import java.util.Random;
 
 import javax.servlet.ServletContext;
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import javax.xml.ws.Response;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.struts2.ServletActionContext;
@@ -34,7 +31,6 @@ import com.boan.crm.backstagemanage.service.ICompanyService;
 import com.boan.crm.common.Message;
 import com.boan.crm.common.UserType;
 import com.boan.crm.groupmanage.common.HMAC_MD5;
-import com.boan.crm.groupmanage.common.Md5PasswordEncoder;
 import com.boan.crm.groupmanage.common.MenuPopedomType;
 import com.boan.crm.groupmanage.common.UserSession;
 import com.boan.crm.groupmanage.model.Deptment;
@@ -467,12 +463,20 @@ public class UserLogonAction extends ActionSupport {
 		}
 		if (b) {
 			HttpSession session = ServletActionContext.getRequest().getSession();
-			ServletContext servletContext = session.getServletContext();
-			WebApplicationContext context = WebApplicationContextUtils.getRequiredWebApplicationContext(servletContext);
 			if (user != null) {
-				// 获取权限串
+				if (user.getUserType() == UserType.ADMINISTRATOR) {
+					message.setContent("您是超级管理员，请使用身份锁登录！");
+					// return ERROR;
+				}
 				String roleId = user.getRoleId();
-				String[] popedomKeys = popedomService.queryPopedomsByRoleId(roleId);
+				String[] popedomKeys = null;
+				Role role = null;
+				if( StringUtils.isNotBlank(roleId) ){
+					// 获取权限串
+					popedomKeys = popedomService.queryPopedomsByRoleId(roleId);
+					//获取角色对象
+					role = roleService.get(roleId);
+				};
 				// 创建userSession对象
 				UserSession userSession = new UserSession();
 				userSession.setUserId(user.getId());
@@ -484,11 +488,18 @@ public class UserLogonAction extends ActionSupport {
 				userSession.setPopedomKeys(popedomKeys);
 				userSession.setUserPhone(user.getPhone());
 				userSession.setProductSuffix(productKey.getProductSuffix());
+				if( role != null ){
+					userSession.setRoleKey(role.getRoleKey());
+				}
+				// 默认是销售团队管理系统
+				userSession.setProductType(ProductType.TEAM_MANAGE);
 				if (companyService != null) {
 					if (StringUtils.isNotBlank(user.getCompanyId())) {
 						Company company = companyService.get(user.getCompanyId());
 						if (company != null) {
 							userSession.setCompanyName(company.getCompanyName());
+							userSession.setCompanyTrialFlag(company.getTrialFlag());
+							userSession.setProductType(company.getProductType());
 						}
 						if (company.checkServiceTerm()) {
 							message.setContent("您的账号已过试用期，请联系软件供应商！");
@@ -516,7 +527,6 @@ public class UserLogonAction extends ActionSupport {
 				return SUCCESS;
 			} else {
 				message.setContent("登录失败，请检查用户名及密码！");
-
 				return ERROR;
 			}
 		} else {
