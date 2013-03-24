@@ -20,6 +20,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -96,7 +97,21 @@ public class AdvancedAction extends BaseActionSupport {
 	 * @throws Exception
 	 */
 	public String exportEkeyUser() throws Exception {
-		userList = userService.queryAllUserListByCompanyId(companyId);
+		String companyName = null;
+		Company com = companyService.get(companyId);
+		if (com != null) {
+			companyName = com.getCompanyName();
+		}
+		if( StringUtils.isBlank(deptId) ){
+			userList = userService.queryAllUserListByCompanyId(companyId);
+		}else{
+			userList = userService.queryUserList(companyId, deptId);
+			Deptment dept = deptService.get(deptId);
+			if( dept != null )
+			{
+				companyName += "-" + dept.getDeptName(); 
+			}
+		}
 		// 取部门信息
 		if (userList != null && userList.size() > 0) {
 			for (int i = 0; i < userList.size(); i++) {
@@ -105,11 +120,7 @@ public class AdvancedAction extends BaseActionSupport {
 			}
 		}
 		archiveStream = ExportUtil.exportEkeyUser(userList);
-		String companyName = null;
-		Company com = companyService.get(companyId);
-		if (com != null) {
-			companyName = com.getCompanyName();
-		}
+		
 		SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmmss");
 		exportFileName = "待写锁用户-" + companyName + "-" + format.format(Calendar.getInstance().getTime()) + ".dat";
 		exportFileName = new String(exportFileName.getBytes(), "ISO8859-1");
