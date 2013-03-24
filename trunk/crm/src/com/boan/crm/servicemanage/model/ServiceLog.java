@@ -501,7 +501,7 @@ public class ServiceLog implements Serializable {
 	 * @return
 	 */
 	public String getPetitionTimeString() {
-		return CalendarUtils.toLongString(petitionTime);
+		return CalendarUtils.toLongStringNoSecond(petitionTime);
 	}
 	
 	/**
@@ -511,5 +511,29 @@ public class ServiceLog implements Serializable {
 	 */
 	public void setPetitionTimeString(String petitionTimeString) {
 		this.petitionTime = CalendarUtils.toLongCalendarNoSecond( petitionTimeString );
+	}
+	
+	public String getArriveTimeString() {
+		return CalendarUtils.toLongStringNoSecond(arriveTime);
+	}
+	
+	public void setArriveTimeString(String arriveTimeString) {
+		this.arriveTime = CalendarUtils.toLongCalendarNoSecond( arriveTimeString );
+	}
+	
+	public String getLeaveTimeString() {
+		return CalendarUtils.toLongStringNoSecond(leaveTime);
+	}
+	
+	public void setLeaveTimeString(String leaveTimeString) {
+		this.leaveTime = CalendarUtils.toLongCalendarNoSecond( leaveTimeString );
+	}
+	
+	public String getReturnVisitTimeString() {
+		return CalendarUtils.toLongStringNoSecond(returnVisitTime);
+	}
+	
+	public void setReturnVisitTimeString(String returnVisitTimeString) {
+		this.returnVisitTime = CalendarUtils.toLongCalendarNoSecond( returnVisitTimeString );
 	}
 }
