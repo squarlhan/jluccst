@@ -26,25 +26,39 @@
 			<result name="error">/common/messagenoclose.jsp</result>
 		</action>
 		<action name="deleteCompanyAction" class="companyAction" method="deleteCompany" />
-		<action name="companyAction"  class="companyAction">
+		<action name="companyAction" class="companyAction">
 			<result name="show-my-company">/backstagemanage/mycompanyinfo.jsp</result>
 			<result name="company-tree-for-user">/backstagemanage/companytreeforuser.jsp</result>
 			<result name="company-tree-for-dept">/backstagemanage/companytreefordept.jsp</result>
 			<result name="company-tree-for-role">/backstagemanage/companytreeforrole.jsp</result>
 			<result name="company-tree-for-popedom">/backstagemanage/companytreeforpopedom.jsp</result>
+			<result name="company-dept-tree-for-epass">/backstagemanage/companytreeforepass.jsp</result>
 		</action>
 	</package>
 	<!-- 日志 -->
-	 <package name="log" extends="struts-default">
-    	<action name="logAction" class="logAction">
-    		<result name="log-list">/backstagemanage/loglist.jsp</result>
-    	</action>
-    </package>
-    <!-- 系统初始化 -->
-    <package name="system-config" extends="struts-default">
-    	<action name="systemConfigAction" class="systemConfigAction">
-    		<result name="input">/backstagemanage/systemconfiginfo.jsp</result>
-    		<result name="success">/backstagemanage/systemconfiginfo.jsp</result>
-    	</action>
-    </package>
+	<package name="log" extends="struts-default">
+		<action name="logAction" class="logAction">
+			<result name="log-list">/backstagemanage/loglist.jsp</result>
+		</action>
+	</package>
+	<!-- 系统初始化 -->
+	<package name="system-config" extends="struts-default">
+		<action name="systemConfigAction" class="systemConfigAction">
+			<result name="input">/backstagemanage/systemconfiginfo.jsp</result>
+			<result name="success">/backstagemanage/systemconfiginfo.jsp</result>
+		</action>
+	</package>
+	<!-- 身份锁 -->
+	<package name="epass-manage" extends="struts-default">
+		<action name="advancedAction" class="advancedAction">
+			<result name="success-ekey-show">/backstagemanage/epassuserlist.jsp</result>
+			<result name="export-success" type="stream">
+				<param name="contentType">text/plain</param>
+				<param name="inputName">archiveStream</param>
+				<param name="contentDisposition">attachment;filename="${exportFileName}"</param>
+				<param name="bufferSize">1024</param>
+			</result>
+			<result name="success-ekey-import">/backstagemanage/epassimportmessage.jsp</result>
+		</action>
+	</package>
 </struts>
