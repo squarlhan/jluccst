@@ -13,6 +13,7 @@ import java.util.List;
 
 import com.boan.crm.groupmanage.model.EkeyQueryCondition;
 import com.boan.crm.groupmanage.model.EkeyUser;
+import com.boan.crm.groupmanage.model.User;
 import com.boan.crm.utils.dao.IBaseDao;
 
 
@@ -58,7 +59,7 @@ public interface IEkeyUserDao extends IBaseDao<EkeyUser, Serializable>{
 	 * @return 用户锁列表
 	 * @throws Exception
 	 */
-	public List<EkeyUser> queryEkeyUserListByCondition(EkeyQueryCondition condition, int startIndex, int maxResults) throws Exception;
+	public List<User> queryEkeyUserListByCondition(EkeyQueryCondition condition, int startIndex, int maxResults) throws Exception;
 	/**
 	 * 根据用户锁查询条件查询用户锁总数
 	 * @param condition 用户锁查询条件
@@ -66,4 +67,17 @@ public interface IEkeyUserDao extends IBaseDao<EkeyUser, Serializable>{
 	 * @throws Exception
 	 */
 	public int queryEkeyUserCountByCondition(EkeyQueryCondition condition) throws Exception;
+	
+	/**
+	 * 根据用户id取锁数据
+	 * @param userId
+	 * @return
+	 * @throws Exception
+	 */
+	public EkeyUser getEkeyUserByUserId( String userId ) throws Exception;
+	
+	/**
+	 * 根据用户id清除锁信息
+	 */
+	public void deleteUserEkeyData(String userId);
 }
