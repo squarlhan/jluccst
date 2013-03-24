@@ -159,11 +159,11 @@ public class UserDaoImpl extends BaseDao<User,String> implements IUserDao{
 		return b;
 	}
 
-	public List<User> queryAllUserListByUnitId( String unitId ) throws Exception
+	public List<User> queryAllUserListByCompanyId( String companyId ) throws Exception
 	{
-		String hql = "from User where unitId = :unitId order by createTime";
+		String hql = "from User where companyId = :companyId order by createTime";
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put( "unitId", unitId );
+		map.put( "companyId", companyId );
 		return super.find( hql, map );
 	}
 

@@ -14,6 +14,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang.StringUtils;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.MatchMode;
 import org.hibernate.criterion.ProjectionList;
@@ -27,6 +28,7 @@ import com.boan.crm.groupmanage.model.EkeyQueryCondition;
 import com.boan.crm.groupmanage.model.EkeyUser;
 import com.boan.crm.groupmanage.model.User;
 import com.boan.crm.utils.dao.impl.BaseDao;
+import com.sun.org.apache.xml.internal.security.encryption.EncryptedKey;
 
 /**
  * USB锁的身份信息Dao实现类
@@ -90,7 +92,11 @@ public class EkeyUserDaoImpl extends BaseDao<EkeyUser, Serializable> implements 
 	 * @throws Exception
 	 */
 	public int saveOrUpdateEkeyUser(EkeyUser ekeyUser) throws Exception {
-		// //this.saveOrUpdateEntity(ekeyUser);
+		try {
+			this.saveOrUpdate(ekeyUser);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return 0;
 	}
 
@@ -126,51 +132,18 @@ public class EkeyUserDaoImpl extends BaseDao<EkeyUser, Serializable> implements 
 	 * @throws Exception
 	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
-	public List<EkeyUser> queryEkeyUserListByCondition(EkeyQueryCondition condition, int startIndex, int maxResults) throws Exception {
-		List userIdList = queryUserIdList(condition);
-		if (userIdList != null && userIdList.size() > 0) {
-			DetachedCriteria criteria = DetachedCriteria.forClass(EkeyUser.class);
-			criteria.createAlias("user", "user", DetachedCriteria.FULL_JOIN);
-			criteria.setResultTransformer(DetachedCriteria.PROJECTION);
-			criteria.add(Property.forName("user.id").in(queryUserIdList(condition)));
-			if (condition.getEkeyFlag() != null) {
-				if (0 == condition.getEkeyFlag()) {
-					criteria.add(Property.forName("sn").isNull());
-				} else if (1 == condition.getEkeyFlag()) {
-					criteria.add(Property.forName("sn").isNotNull());
-				}
-			}
-			List list = null;
-			if (maxResults != 0) {
-				// //list = this.queryByCriteria(criteria, startIndex,
-				// maxResults);
-			} else {
-				// //list = this.queryByCriteria(criteria);
-			}
-
-			if (list != null && list.size() > 0) {
-				List<EkeyUser> resultList = new ArrayList<EkeyUser>();
-				for (Object objs : list) {
-					Object[] objects = (Object[]) objs;
-					if (objects.length == 2 && objects[0] instanceof User) {
-						User user = (User) objects[0];
-						EkeyUser ekeyUser;
-						if (objects[1] == null) {
-							ekeyUser = new EkeyUser();
-							ekeyUser.setUserId(user.getId());
-						} else {
-							ekeyUser = (EkeyUser) objects[1];
-						}
-						ekeyUser.setUser(user);
-						resultList.add(ekeyUser);
-					}
-				}
-				return resultList;
-			}
-			return list;
+	public List<User> queryEkeyUserListByCondition(EkeyQueryCondition condition, int startIndex, int maxResults) throws Exception {
+		String hql = null;
+		Map<String, Object> map = new HashMap<String, Object>();
+		// 表示公司用户
+		if (StringUtils.isNotBlank(condition.getDeptId())) {
+			hql = "from User where companyId = :companyId and deptId = :deptId  order by createTime";
+			map.put("deptId", condition.getDeptId());
 		} else {
-			return new ArrayList<EkeyUser>();
+			hql = "from User where companyId = :companyId  order by createTime";
 		}
+		map.put("companyId", condition.getCompanyId());
+		return super.findForPage(hql, map, startIndex, maxResults);
 	}
 
 	/**
@@ -183,58 +156,37 @@ public class EkeyUserDaoImpl extends BaseDao<EkeyUser, Serializable> implements 
 	 */
 	@SuppressWarnings("rawtypes")
 	public int queryEkeyUserCountByCondition(EkeyQueryCondition condition) throws Exception {
-		List userIdList = queryUserIdList(condition);
-		if (userIdList != null && userIdList.size() > 0) {
-			DetachedCriteria criteria = DetachedCriteria.forClass(EkeyUser.class);
-			criteria.createAlias("user", "user", DetachedCriteria.FULL_JOIN);
-			criteria.setResultTransformer(DetachedCriteria.PROJECTION);
-			criteria.add(Property.forName("user.id").in(queryUserIdList(condition)));
-			if (condition.getEkeyFlag() != null) {
-				if (0 == condition.getEkeyFlag()) {
-					criteria.add(Property.forName("sn").isNull());
-				} else if (1 == condition.getEkeyFlag()) {
-					criteria.add(Property.forName("sn").isNotNull());
-				}
-			}
-			return 0;// //this.getRowCount(criteria);
+		String hql = null;
+		Map<String, Object> map = new HashMap<String, Object>();
+		// 表示公司用户
+		if (StringUtils.isNotBlank(condition.getDeptId())) {
+			hql = " select count(id) from User where  companyId = :companyId  and deptId = :deptId  ";
+			map.put("deptId", condition.getDeptId());
 		} else {
-			return 0;
+			hql = " select count(id) from User where  companyId = :companyId ";
+		}
+		map.put("companyId", condition.getCompanyId());
+		return super.findCountForPage(hql, map);
+	}
+
+	@Override
+	public EkeyUser getEkeyUserByUserId(String userId) throws Exception {
+		String hql = "  from EkeyUser where  userId = :userId";
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("userId", userId);
+		List<EncryptedKey> userList = super.find(hql, map);
+		if (userList != null && userList.size() > 0) {
+			return (EkeyUser) userList.get(0);
+		} else {
+			return null;
 		}
 	}
 
-	/**
-	 * 根据用户锁查询条件查询用户ID数组
-	 * 
-	 * @param condition
-	 *            用户锁查询条件
-	 * @return 用户ID数组
-	 * @throws Exception
-	 */
-	@SuppressWarnings("rawtypes")
-	private List queryUserIdList(EkeyQueryCondition condition) throws Exception {
-
-		DetachedCriteria criteria = null;// //DetachedCriteria.forClass(UserDept.class);
-		criteria.createAlias("user", "user");
-		criteria.createAlias("dept", "dept");
-
-		ProjectionList projectionList = Projections.projectionList();
-		projectionList.add(Projections.distinct(Projections.property("userId")));
-
-		criteria.setProjection(projectionList);
-
-		if (condition.getOrganId() != null && !"".equals(condition.getOrganId())) {
-			criteria.add(Property.forName("dept.id").eq(condition.getOrganId()));
-		}
-		if (condition.getOrganMark() != null && condition.getOrganMark() != 0) {
-			// /criteria.add(this.queryByMark("dept.mark",
-			// condition.getOrganMark()));
-		}
-		if (condition.getOrganName() != null && !"".equals(condition.getOrganName())) {
-			criteria.add(Property.forName("dept.name").like(condition.getOrganName(), MatchMode.ANYWHERE));
-		}
-		if (condition.getUserName() != null && !"".equals(condition.getUserName())) {
-			criteria.add(Restrictions.or(Property.forName("user.name").like(condition.getUserName(), MatchMode.ANYWHERE), Property.forName("user.username").like(condition.getUserName(), MatchMode.ANYWHERE)));
-		}
-		return null;// this.queryByCriteria(criteria);
+	@Override
+	public void deleteUserEkeyData(String userId) {
+		String hql = " delete EkeyUser where  userId = :userId";
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("userId", userId);
+		this.executeHql(hql, map);
 	}
 }
