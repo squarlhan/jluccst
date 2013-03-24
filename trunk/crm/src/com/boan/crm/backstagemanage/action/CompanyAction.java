@@ -436,6 +436,25 @@ public class CompanyAction extends BaseActionSupport {
 		}
 		return "company-tree-for-dept";
 	}
+	/**
+	 * 获取所有公司列表以及部门列表用于ePass维护
+	 * 
+	 * @return
+	 */
+	public String showCompanyDeptTreeForEPass() {
+		companyList = service.queryAllCompanys();
+		deptList = new ArrayList<Deptment>();
+		if (companyList != null && companyList.size() > 0) {
+			List<Deptment> ls = null;
+			for (int i = 0; i < companyList.size(); i++) {
+				ls = deptService.queryAllDeptmentsByCompanyId(companyList.get(i).getId());
+				if (ls != null && ls.size() > 0) {
+					deptList.addAll(ls);
+				}
+			}
+		}
+		return "company-dept-tree-for-epass";
+	}
 
 	/**
 	 * 获取所有公司列表，用于维护角色
