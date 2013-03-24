@@ -9,9 +9,9 @@ import org.springframework.stereotype.Service;
 
 import com.boan.crm.sellreport.monthly.dao.IMonthlyItemInfoDao;
 import com.boan.crm.sellreport.monthly.dao.IMonthlyMainInfoDao;
-import com.boan.crm.sellreport.monthly.model.MonthlyItemInfo;
 import com.boan.crm.sellreport.monthly.model.MonthlyMainInfo;
 import com.boan.crm.sellreport.monthly.service.IMonthlyMainInfoService;
+import com.boan.crm.sellreport.weekly.model.WeeklyMainInfo;
 import com.boan.crm.utils.page.Pagination;
 
 @Service("monthlyMainInfoService")
@@ -84,5 +84,25 @@ public class MonthlyMainInfoServiceImpl implements IMonthlyMainInfoService{
 	  */
 	public void deleteMonthlyMainInfoByIds(String... ids){
 		monthlyMainInfoDao.delete(ids);
+	}
+	
+	/**
+	 *查询最近月计划项信息
+	 * @param 
+	 * @return
+	 */
+	public MonthlyMainInfo getLastMonthlyMainInfo(Map<String, ?> params){
+		StringBuffer strb = new StringBuffer( " where 1=1 ");
+		if(params!=null){
+			if(params.containsKey("personId")){
+				strb.append(" and  personId=:personId  ");
+			}
+		}
+		String hql = "from MonthlyMainInfo "+strb.toString()+" order by createTime desc";
+		List<MonthlyMainInfo> data = monthlyMainInfoDao.find(hql, params);
+		if(data!=null && data.size()>0){
+			return data.get(0);
+		}
+		return null;
 	}
 }

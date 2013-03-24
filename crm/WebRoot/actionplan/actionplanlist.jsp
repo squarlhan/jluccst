@@ -83,7 +83,7 @@
 	  				var url = $(this).attr("url");
 	  				parent.parent.tipsWindown("查看行动计划","iframe:"+url,"620","380","true","","true","no");
 	  				parent.parent.$("#windown-close").bind('click',function(){
-						window.location.href="./openActionPlanListForViewAction.action";
+						window.location.href="./openActionPlanListAction.action";
 					});
 	  			});
 	  		});

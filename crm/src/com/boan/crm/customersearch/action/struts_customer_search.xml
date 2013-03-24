@@ -10,6 +10,58 @@
 			<result name="success">/customer/customerreaserchforadmin.jsp</result>
 			<result name="input">/customer/customerreaserchforadmin.jsp</result>
 		</action>
+		
+		<action name="openCustomerSearchInCompanyAction" class="customerSearchAction" method="openCustomerSearchInCompany">
+			<result name="success">/customer/customerreaserchincompany.jsp</result>
+			<result name="input">/customer/customerreaserchincompany.jsp</result>
+		</action>
+		
+		<action name="customerSearchInCompanyAction" class="customerSearchAction" method="customerSearchInCompany">
+			<result name="success">/customer/customerreaserchincompany.jsp</result>
+			<result name="input">/customer/customerreaserchincompany.jsp</result>
+		</action>
+		
+		<action name="openCustomerSearchInCompanyManagerAction" class="customerSearchAction" method="openCustomerSearchInCompanyManager">
+			<result name="success">/customer/customerreaserchincompanymanager.jsp</result>
+			<result name="input">/customer/customerreaserchincompanymanager.jsp</result>
+		</action>
+		<action name="toSetImportantAction" class="customerSearchAction" method="toSetImportant">
+			<result name="success">/customer/customerreaserchincompanymanager.jsp</result>
+			<result name="input">/customer/customerreaserchincompanymanager.jsp</result>
+		</action>
+		<action name="openAssignSellerAction" class="customerSearchAction" method="openAssignSeller">
+			<result name="success">/customer/customerreaserchincompanymanagerassignseller.jsp</result>
+			<result name="input">/customer/customerreaserchincompanymanagerassignseller.jsp</result>
+		</action>
+		
+		<action name="toAssignSellerAction" class="customerSearchAction" method="toAssignSeller">
+			<result name="success">/customer/customerreaserchincompanymanagerassignseller.jsp</result>
+			<result name="input">/customer/customerreaserchincompanymanagerassignseller.jsp</result>
+		</action>
+		
+		<action name="importCustomerInCompanyAction" class="customerSearchAction" method="importCustomerInCompany">
+			<interceptor-ref name="defaultStack">
+				<param name="fileUpload.maximumSize">524288000</param>
+				<param name="fileUpload.allowedTypes">
+					application/octet-stream,application/msexcel,application/vnd.ms-excel
+					,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet
+					,application/excel,application/x-excel
+					,vnd.ms-excel.addin.macroEnabled.12
+					,vnd.ms-excel.sheet.binary.macroEnabled.12
+					,vnd.ms-excel.sheet.macroEnabled.12
+					,vnd.ms-excel.template.macroEnabled.12
+				</param>
+			</interceptor-ref>
+			<result name="success">/customer/customerreaserchincompanymanager.jsp</result>
+			<result name="input">/customer/customerreaserchincompanymanager.jsp</result>
+		</action>
+		
+		<action name="customerSearchForCompanyManagerAction" class="customerSearchAction" method="customerSearchForCompanyManager">
+			<result name="success">/customer/customerreaserchincompanymanager.jsp</result>
+			<result name="input">/customer/customerreaserchincompanymanager.jsp</result>
+		</action>
+		
+		
 		<action name="customerSearchForAdminAction" class="customerSearchAction" method="customerSearchForAdmin">
 			<result name="success">/customer/customerreaserchforadmin.jsp</result>
 			<result name="input">/customer/customerreaserchforadmin.jsp</result>
@@ -40,6 +92,12 @@
 			<result name="success">/customer/customerreaserch.jsp</result>
 			<result name="input">/customer/customerreaserch.jsp</result>
 		</action>
+		
+		<action name="toCustomerForInCompanyrAction" class="customerSearchAction" method="toCustomerForInCompany">
+			<result name="success">/customer/customerreaserchincompany.jsp</result>
+			<result name="input">/customer/customerreaserchincompany.jsp</result>
+		</action>
+		
 		
 		<action name="toImportCustomerLibAction" class="customerSearchAction" method="toImportCustomerLib">
 			<result name="success">/importcustomertolib.jsp</result>

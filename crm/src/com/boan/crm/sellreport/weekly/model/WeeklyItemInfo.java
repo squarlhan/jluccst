@@ -2,6 +2,7 @@ package com.boan.crm.sellreport.weekly.model;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.Calendar;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -126,6 +127,9 @@ public class WeeklyItemInfo implements Serializable {
 	@Column(name = "MEMO", length = 1000)
 	private String memo;
 	
+	@Column(name = "CREATE_TIME")
+	private Calendar createTime;
+	
 	public String getId() {
 		return id;
 	}
@@ -245,5 +249,11 @@ public class WeeklyItemInfo implements Serializable {
 	}
 	public void setSellTarget(String sellTarget) {
 		this.sellTarget = sellTarget;
+	}
+	public Calendar getCreateTime() {
+		return createTime;
+	}
+	public void setCreateTime(Calendar createTime) {
+		this.createTime = createTime;
 	}
 }

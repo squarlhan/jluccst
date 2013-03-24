@@ -39,4 +39,11 @@ public interface IMonthlyMainInfoService {
 	  * @param id
 	  */
 	public void deleteMonthlyMainInfoByIds(String... ids);
+	
+	/**
+	 *查询最近月计划项信息
+	 * @param 
+	 * @return
+	 */
+	public MonthlyMainInfo getLastMonthlyMainInfo(Map<String, ?> params);
 }

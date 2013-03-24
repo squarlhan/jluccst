@@ -222,8 +222,8 @@
 			<td align="center" style="height: 26px; background-image:url('<%=basePath%>/images/headerbg.jpg')"><strong>成熟度</strong></td>
 			<td align="center" style="height: 26px; background-image:url('<%=basePath%>/images/headerbg.jpg')"><strong>开发程度</strong></td>
 			<td align="center" style="height: 26px; background-image:url('<%=basePath%>/images/headerbg.jpg')"><strong>客户来源</strong></td>
-			<td align="center" style="height: 26px; background-image:url('<%=basePath%>/images/headerbg.jpg')"><strong>交易总额</strong></td>
-			<td align="center" style="height: 26px; background-image:url('<%=basePath%>/images/headerbg.jpg')"><strong>欠款金额</strong></td>
+			<td align="center" style="height: 26px; background-image:url('<%=basePath%>/images/headerbg.jpg')"><strong>交易总额（元）</strong></td>
+			<td align="center" style="height: 26px; background-image:url('<%=basePath%>/images/headerbg.jpg')"><strong>欠款金额（元）</strong></td>
             <td align="center" background="<%=basePath%>/images/headerbg.jpg" nowrap="nowrap"><strong>操作</strong></td>
         </tr>
         <s:iterator value="pagination.data" status="obj">

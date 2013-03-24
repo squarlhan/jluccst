@@ -37,11 +37,9 @@ public interface ICustomerLibInfoService {
 	/**
 	 * 按分页查询客户
 	 */
-	public Pagination<CustomerLibInfo> findCustomerLibInfoForPage(
-			Map<String, ?> values, Pagination<CustomerLibInfo> pagination);
+	public Pagination<CustomerLibInfo> findCustomerLibInfoForPage( Map<String, ?> values, Pagination<CustomerLibInfo> pagination);
 	
-	
-	
+	public Pagination<CustomerLibInfo> findCustomerLibInfoForPage( Map<String, ?> values, Pagination<CustomerLibInfo> pagination,String sellerId) ;
 	/**
 	 * 查找全部客户
 	 * @param province 省份
@@ -82,6 +80,13 @@ public interface ICustomerLibInfoService {
 	 * @param flag 0：查询 1：不查询
 	 */
 	public void updateNoSearchColumn(String province,String customerId,int flag);
+	
+	/**
+	 * 修改重要客户标识
+	 * @param customerId 客户Id
+	 * @param flag 0：一般客户 1：重要客户
+	 */
+	public void updateImportantFlag(String customerId,int flag);
 
 	/**
 	 * 按分页查询客户

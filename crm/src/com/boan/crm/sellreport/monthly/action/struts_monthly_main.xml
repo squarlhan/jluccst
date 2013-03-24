@@ -64,5 +64,9 @@
 			<result name="success">/sellreport/monthly/monthlymaininfoview.jsp</result>
 			<result name="input">/sellreport/monthly/monthlymaininfoview.jsp</result>
 		</action>
+		<action name="openMonthlyReportAction" class="monthlyMainInfoAction" method="openMonthlyReport">
+			<result name="success">/sellreport/monthly/monthlyreport.jsp</result>
+			<result name="input">/sellreport/monthly/monthlyreport.jsp</result>
+		</action>
 	</package>
 </struts>

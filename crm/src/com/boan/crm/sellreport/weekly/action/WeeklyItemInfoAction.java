@@ -1,6 +1,7 @@
 package com.boan.crm.sellreport.weekly.action;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -60,6 +61,8 @@ public class WeeklyItemInfoAction extends BaseActionSupport{
 	 */
 	private String message;
 	
+	private String reference="";
+	
 	public String openWeeklyItemList(){
 		Map param = new HashMap();
 		if(mainInfoId!=null && !mainInfoId.equals("")){
@@ -80,6 +83,19 @@ public class WeeklyItemInfoAction extends BaseActionSupport{
 	}
 
 	public String openAddWeeklyItem(){
+		System.out.println(reference);
+		if(reference!=null && reference.equals("true")){
+			Map<String,Object> params = new HashMap<String, Object>();
+			String mainInfoId = weeklyItemInfo.getMainInfoId();
+			params.put("mainInfoId",mainInfoId);
+			weeklyItemInfo= weeklyItemInfoService.getLastWeeklyItemInfo(params);
+			if(weeklyItemInfo!=null){
+				weeklyItemInfo.setId(null);
+			}else{
+				weeklyItemInfo = new WeeklyItemInfo();
+			}
+			weeklyItemInfo.setMainInfoId(mainInfoId);
+		}
 		sellDutyList = sellDutyService.findAllSellDutyByCompanyIdAndDutyType(this.sessionCompanyId,0);
 		return this.SUCCESS;
 	}
@@ -102,6 +118,7 @@ public class WeeklyItemInfoAction extends BaseActionSupport{
 		if(weeklyItemInfo.getId()!=null && weeklyItemInfo.getId().equals("")){
 			weeklyItemInfo.setId(null);
 		}
+		weeklyItemInfo.setCreateTime(Calendar.getInstance());
 		weeklyItemInfoService.saveOrUpdateWeeklyItemInfo(weeklyItemInfo);
 		sellDutyList = sellDutyService.findAllSellDutyByCompanyIdAndDutyType(this.sessionCompanyId,0);
 		message="保存成功！";
@@ -165,5 +182,11 @@ public class WeeklyItemInfoAction extends BaseActionSupport{
 
 	public void setMessage(String message) {
 		this.message = message;
+	}
+	public String getReference() {
+		return reference;
+	}
+	public void setReference(String reference) {
+		this.reference = reference;
 	}
 }

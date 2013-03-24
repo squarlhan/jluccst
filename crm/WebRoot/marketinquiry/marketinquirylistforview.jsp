@@ -160,9 +160,6 @@
     <td valign="top">
       <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#d5e4fd">
         <tr>
-         <td align="center" background="<%=path %>/images/headerbg.jpg">  
-   				<s:checkbox theme="simple" id="cbk_all" name="all"></s:checkbox>
-   			</td>
               <td align="center" background="<%=path %>/images/headerbg.jpg"><strong>商品名称</strong></td>
               <td align="center" background="<%=path %>/images/headerbg.jpg"><strong>规 格</strong></td>
               
@@ -175,9 +172,6 @@
         </tr>
         <s:iterator value="pagination.data" status="obj">
         <tr>
-        <td height="26" align="center" bgcolor="#FFFFFF" >  
-        	<s:checkbox id="%{#obj.id}" name="ids" fieldValue="%{id}" value="false" theme="simple"/>
-		</td>
               <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="goodsName"/></td>
               <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="goodsStandard"/></td>
                 <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="goodsPrice"/></td>

@@ -84,4 +84,23 @@ public class WeeklyMainInfoServiceImpl implements IWeeklyMainInfoService{
 	public void deleteWeeklyMainInfoByIds(String... ids){
 		weeklyMainInfoDao.delete(ids);
 	}
+	
+	 /**
+	  * 获取最近周计划信息
+	  * @param id
+	  */
+	public WeeklyMainInfo getLastWeeklyMainInfo( Map<String, ?> params){
+		StringBuffer strb = new StringBuffer( " where 1=1 ");
+		if(params!=null){
+			if(params.containsKey("personId")){
+				strb.append(" and  personId=:personId  ");
+			}
+		}
+		String hql = "from WeeklyMainInfo "+strb.toString()+" order by createTime desc";
+		List<WeeklyMainInfo> data = weeklyItemInfoDao.find(hql, params);
+		if(data!=null && data.size()>0){
+			return data.get(0);
+		}
+		return null;
+	}
 }

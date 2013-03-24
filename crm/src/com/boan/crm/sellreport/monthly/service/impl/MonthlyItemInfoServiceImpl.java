@@ -87,4 +87,24 @@ public class MonthlyItemInfoServiceImpl implements IMonthlyItemInfoService{
 		param.put("mainInfoId",mainInfoId);
 		return monthlyItemInfoDao.find(hql, param);
 	}
+	
+	/**
+	 *查询最近月计划项信息
+	 * @param 
+	 * @return
+	 */
+	public MonthlyItemInfo getLastMonthlyItemInfo( Map<String, ?> params){
+		StringBuffer strb = new StringBuffer( " where 1=1 ");
+		if(params!=null){
+			if(params.containsKey("mainInfoId")){
+				strb.append(" and  mainInfoId=:mainInfoId  ");
+			}
+		}
+		String hql = "from MonthlyItemInfo "+strb.toString()+" order by createTime desc , sequence asc";
+		List<MonthlyItemInfo> data = monthlyItemInfoDao.find(hql, params);
+		if(data!=null && data.size()>0){
+			return data.get(0);
+		}
+		return null;
+	}
 }

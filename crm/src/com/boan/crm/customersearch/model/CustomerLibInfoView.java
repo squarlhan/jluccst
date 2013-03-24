@@ -23,17 +23,15 @@ import org.hibernate.annotations.GenericGenerator;
  */
 @Entity
 @Table(name = "CUSTOMER_LIB_INFO")
-//@Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
-@Inheritance(strategy = InheritanceType.JOINED)
-@org.hibernate.annotations.Polymorphism(type=org.hibernate.annotations.PolymorphismType.EXPLICIT)
-public class CustomerLibInfo implements Serializable
+@Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
+public class CustomerLibInfoView implements Serializable
 {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -6407278513107210750L;
 
-	public CustomerLibInfo(){ this.id = ""; }
+	public CustomerLibInfoView(){ this.id = ""; }
 	@Id
 	@GenericGenerator(name = "system-uuid", strategy = "uuid")
 	@GeneratedValue(generator = "system-uuid")

@@ -3,6 +3,7 @@
  */
 package com.boan.crm.customersearch.service.impl;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,11 +13,13 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.boan.crm.customersearch.dao.ICustomerLibInfoDAO;
+import com.boan.crm.customersearch.model.ContractPersonLibInfo;
+import com.boan.crm.customersearch.model.CustomerLibInfo;
+import com.boan.crm.customersearch.model.CustomerLibInfoViewAndSellerRelation;
 import com.boan.crm.customersearch.model.CustomerLib_AnHui;
 import com.boan.crm.customersearch.model.CustomerLib_AoMen;
 import com.boan.crm.customersearch.model.CustomerLib_BeiJing;
 import com.boan.crm.customersearch.model.CustomerLib_ChongQing;
-import com.boan.crm.customersearch.model.CustomerLibInfo;
 import com.boan.crm.customersearch.model.CustomerLib_FuJian;
 import com.boan.crm.customersearch.model.CustomerLib_GanSu;
 import com.boan.crm.customersearch.model.CustomerLib_GuangDong;
@@ -103,8 +106,12 @@ public class CustomerLibInfoServiceImpl implements ICustomerLibInfoService{
 	@Override
 	public Pagination<CustomerLibInfo> findCustomerLibInfoForPage( Map<String, ?> values, Pagination<CustomerLibInfo> pagination) {
 		StringBuilder hql = new StringBuilder();
-		hql.append( "from CustomerLibInfo where 1=1 and noSearch=0 ");
+		hql.append( "from CustomerLibInfoView where 1=1 and noSearch=0 ");
 		
+		if(values.get("companyId") != null)
+		{
+			hql.append(" and companyId =:companyId");
+		}
 		if(values.get("mainIndustry") != null)
 		{
 			hql.append(" and mainIndustry like '%"+values.get("mainIndustry") +"%' ");
@@ -123,9 +130,9 @@ public class CustomerLibInfoServiceImpl implements ICustomerLibInfoService{
 		}
 		
 		hql.append(" order by registerTime asc");
-		List<CustomerLibInfo> data = customerLibInfoDao.findForPage(hql.toString(), values, pagination.getStartIndex(), pagination.getPageSize());
+		List tempList = customerLibInfoDao.findForPage(hql.toString(), values, pagination.getStartIndex(), pagination.getPageSize());
 		hql.delete(0, hql.length());
-		hql.append(" select count(*) from CustomerLibInfo where 1=1 and noSearch=0 " );
+		hql.append(" select count(*) from CustomerLibInfoView where 1=1 and noSearch=0 " );
 		if(values.get("mainIndustry") != null)
 		{
 			hql.append(" and mainIndustry like '%"+values.get("mainIndustry") +"%' ");
@@ -141,6 +148,11 @@ public class CustomerLibInfoServiceImpl implements ICustomerLibInfoService{
 		if(values.get("areaId") != null)
 		{
 			hql.append(" and district = :areaId ");
+		}
+		List<CustomerLibInfo> data = new ArrayList<CustomerLibInfo>();
+		for(int i=0;i<tempList.size();i++){
+			CustomerLibInfo customerInfo =(CustomerLibInfo)ParseBeanUtil.parseBean(tempList.get(i), CustomerLibInfo.class);
+			data.add(customerInfo);
 		}
 		
 		int totalRows = customerLibInfoDao.findCountForPage(hql.toString(), values);
@@ -181,7 +193,114 @@ public class CustomerLibInfoServiceImpl implements ICustomerLibInfoService{
 				{
 					e.printStackTrace();
 				}
-				customerLibInfo.setContractPersonList(contractPersonService.findAllContractPersonLibInfoByCustomerId(customerLibInfo.getId()));
+				List temp  = contractPersonService.findAllContractPersonLibInfoByCustomerId(customerLibInfo.getId());
+				List<ContractPersonLibInfo> aa = new ArrayList<ContractPersonLibInfo>();
+				for(int n =0;n<temp.size();n++){
+					ContractPersonLibInfo customerInfo =(ContractPersonLibInfo)ParseBeanUtil.parseBean(temp.get(n), ContractPersonLibInfo.class);
+					aa.add(customerInfo);
+				}
+				customerLibInfo.setContractPersonList(aa);
+				
+			}
+		}
+		return pagination;
+	}
+	
+	//@Override
+	public Pagination<CustomerLibInfo> findCustomerLibInfoForPage( Map<String, ?> values, Pagination<CustomerLibInfo> pagination,String sellerId) {
+		StringBuilder hql = new StringBuilder();
+		hql.append( "from CustomerLibInfoView where 1=1 and noSearch=0 ");
+		
+		if(values.get("mainIndustry") != null)
+		{
+			hql.append(" and mainIndustry like '%"+values.get("mainIndustry") +"%' ");
+		}
+		if(values.get("provinceId") != null)
+		{
+			hql.append(" and province = :provinceId ");
+		}
+		if(values.get("cityId") != null)
+		{
+			hql.append(" and city = :cityId ");
+		}
+		if(values.get("areaId") != null)
+		{
+			hql.append(" and district = :areaId ");
+		}
+		hql.append(" and id in ( select temp.customerLibInfoViewId from CustomerLibInfoViewAndSellerRelation temp  where temp.noSearch=0 and temp.sellerId='"+sellerId+"') ");
+		
+		hql.append(" order by registerTime asc");
+		List tempList = customerLibInfoDao.findForPage(hql.toString(), values, pagination.getStartIndex(), pagination.getPageSize());
+		hql.delete(0, hql.length());
+		hql.append(" select count(*) from CustomerLibInfoView where 1=1 and noSearch=0 " );
+		if(values.get("mainIndustry") != null)
+		{
+			hql.append(" and mainIndustry like '%"+values.get("mainIndustry") +"%' ");
+		}
+		if(values.get("provinceId") != null)
+		{
+			hql.append(" and province = :provinceId ");
+		}
+		if(values.get("cityId") != null)
+		{
+			hql.append(" and city = :cityId ");
+		}
+		if(values.get("areaId") != null)
+		{
+			hql.append(" and district = :areaId ");
+		}
+		hql.append(" and id in ( select temp.customerLibInfoViewId from CustomerLibInfoViewAndSellerRelation temp  where temp.noSearch=0 and temp.sellerId='"+sellerId+"') ");
+		List<CustomerLibInfo> data = new ArrayList<CustomerLibInfo>();
+		for(int i=0;i<tempList.size();i++){
+			CustomerLibInfo customerInfo =(CustomerLibInfo)ParseBeanUtil.parseBean(tempList.get(i), CustomerLibInfo.class);
+			data.add(customerInfo);
+		}
+		
+		int totalRows = customerLibInfoDao.findCountForPage(hql.toString(), values);
+		pagination.setTotalRows(totalRows);
+		pagination.setData(data);
+		
+		List<CustomerLibInfo> list = pagination.getData();
+		if(list != null && list.size() > 0)
+		{
+			for(int i=0;i< list.size();i++)
+			{
+				CustomerLibInfo customerLibInfo = list.get(i);
+				DataDictionary d1 = dataDictionaryService.get(customerLibInfo.getCategoryId());
+				if(d1 != null)
+				{
+					customerLibInfo.setCategory(d1.getName());
+				}
+				
+				d1 = dataDictionaryService.get(customerLibInfo.getMaturityId()); 
+				if(d1 != null)
+				{
+					customerLibInfo.setMaturity(d1.getName());
+				}
+				d1 = dataDictionaryService.get(customerLibInfo.getSourceId());
+				if(d1 != null)
+				{
+					customerLibInfo.setSource(d1.getName());
+				}
+				
+				try
+				{
+					User salesman = userService.getUserById(customerLibInfo.getSalesmanId());
+					if(salesman != null)
+					{
+						customerLibInfo.setSalesman(salesman.getUserCName());
+					}
+				}catch(Exception e)
+				{
+					e.printStackTrace();
+				}
+				List temp  = contractPersonService.findAllContractPersonLibInfoByCustomerId(customerLibInfo.getId());
+				List<ContractPersonLibInfo> aa = new ArrayList<ContractPersonLibInfo>();
+				for(int n =0;n<temp.size();n++){
+					ContractPersonLibInfo customerInfo =(ContractPersonLibInfo)ParseBeanUtil.parseBean(temp.get(n), ContractPersonLibInfo.class);
+					aa.add(customerInfo);
+				}
+				customerLibInfo.setContractPersonList(aa);
 				
 			}
 		}
@@ -544,6 +663,20 @@ public class CustomerLibInfoServiceImpl implements ICustomerLibInfoService{
 		String provincKey = "CustomerLib_"+ ProvinceEnum.getKeyByName(province);
 		StringBuilder hql = new StringBuilder();
 		hql.append( "update " + provincKey +" set noSearch=:flag where id=:id");
+		Map param = new HashMap();
+		param.put("id", customerId);
+		param.put("flag", flag);
+		customerLibInfoDao.executeHql(hql.toString(), param);
+	}
+	
+	/**
+	 * 修改重要客户标识
+	 * @param customerId 客户Id
+	 * @param flag 0：一般客户 1：重要客户
+	 */
+	public void updateImportantFlag(String customerId,int flag){
+		StringBuilder hql = new StringBuilder();
+		hql.append( "update CustomerLibInfoView set importantFlag=:flag where id=:id");
 		Map param = new HashMap();
 		param.put("id", customerId);
 		param.put("flag", flag);

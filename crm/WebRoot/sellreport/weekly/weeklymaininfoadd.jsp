@@ -71,6 +71,7 @@
 				});
 				$.fn.save();
 		  		$.fn.close();
+		  		$.fn.reference ();
 		  	});
 			/**
 		  	 * 保存
@@ -99,6 +100,13 @@
 		 			parent.parent.$("#windown-close").click();
 		  		});
 			};
+			
+			$.fn.reference = function(){
+				$("#referenceBtn").click(function() {
+		            form1.action = "openAddWeeklyMainInfoAction.action?reference=true";					
+	               	form1.submit();
+          		});
+          	};
 		</script>
 	</head>
 
@@ -174,6 +182,10 @@
 									</tr>
 									<tr>
 										<td height="26" colspan="8" align="center" bgcolor="#FFFFFF">
+											<s:if test="weeklyMainInfo.id==null">
+												<input name="referenceBtn" type="button" class="btn_5" id="referenceBtn" value="参考上次计划">
+												&nbsp;&nbsp;
+											</s:if>
 											<input name="addBtn" type="button" class="btn_2_3" id="addBtn" value="保存">
 											&nbsp;&nbsp;
 											<input name="closeBtn" type="button" class="btn_2_3" id="closeBtn" value="关闭">

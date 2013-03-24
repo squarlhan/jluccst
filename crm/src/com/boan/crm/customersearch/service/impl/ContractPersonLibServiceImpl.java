@@ -83,7 +83,7 @@ public class ContractPersonLibServiceImpl implements IContractPersonLibService {
 	public List<ContractPersonLibInfo> findAllContractPersonLibInfoByCustomerId(String customerId) {
 		Map<String,String> idMap = new HashMap<String,String>();
 		idMap.put("customerId", customerId);
-		return contractPersonDao.find("from ContractPersonLibInfo where customerId = :customerId order by sort_index asc", idMap);
+		return contractPersonDao.find("from ContractPersonLibInfoView where customerId = :customerId order by sort_index asc", idMap);
 	}
 
 	@Override
