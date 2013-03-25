@@ -187,13 +187,13 @@ background-color:#d3eaef}
 	<!-- 
 		<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg'); width: 90px;"></td>
 		 --><td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">客户名称</td>
+		 <td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">评估值</td>
+		<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">评估结论</td>
 		<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">消费额度</td>
 		<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">消费次数</td>
 		<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">转介绍客户情况</td>
 		<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">回款情况</td>
 		<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">开发程度</td>
-		<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">评估值</td>
-		<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">评估结论</td>
 		<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">操作</td>
 	</tr>
 	<s:iterator value="pagination.data" status="obj">
@@ -203,13 +203,13 @@ background-color:#d3eaef}
 				<s:checkbox id="%{#obj.id}" name="ids" fieldValue="%{id}" value="false" theme="simple"/>
 			</td> -->
             <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="customerName"/></td>
+            <td height="26" align="center" bgcolor="#FFFFFF"><font color="#ff00ff"><s:property value="resultValue"/></font></td>
+            <td height="26" align="center" bgcolor="#FFFFFF"><font color="#ff00ff"><s:property value="result"/></font></td>
             <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="totalConsumption"/></td>
             <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="consumptionTimes"/></td>
             <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="introduceCustomerTime"/></td>
             <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="paymentsTimes"/></td>
             <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="developDegree"/></td>
-            <td height="26" align="center" bgcolor="#FFFFFF"><font color="#ff00ff"><s:property value="resultValue"/></font></td>
-            <td height="26" align="center" bgcolor="#FFFFFF"><font color="#ff00ff"><s:property value="result"/></font></td>
 	          <td height="26" colspan="2" align="center" bgcolor="#FFFFFF">
 	          <s:url id="static_url" action="staticAnalysisCustomer">   
 					<s:param name="customerId" value="customerId"></s:param>   
