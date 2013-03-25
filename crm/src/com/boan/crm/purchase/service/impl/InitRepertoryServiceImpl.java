@@ -1,16 +1,12 @@
 package com.boan.crm.purchase.service.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
-import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import com.boan.crm.groupmanage.model.Role;
 import com.boan.crm.purchase.dao.IInitRepertoryDao;
 import com.boan.crm.purchase.model.InitRepertory;
 import com.boan.crm.purchase.service.IInitRepertoryService;
