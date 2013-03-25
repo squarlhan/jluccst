@@ -32,6 +32,8 @@
 		<!--
 			var _customer_submit = {
 			rules: {
+				"initRepertory.productType":{required:true,strangecode:true},
+				"initRepertory.productId":{required:true,strangecode:true},
 				"initRepertory.productName":{required:true,strangecode:true},
 				"initRepertory.amount":{required:true,isPositiveNum:true},
 				"initRepertory.accountPayable":{required : true,isNotNegativeNum:true},
@@ -84,12 +86,12 @@
 				$("#productName").focus();
 			}
 			function productTypeIdChange(){
-				form1.action = "./showinitRepertoryInfoAction.action";
+				form1.action = "./initRepertoryAction!showInitRepertoryInfo.action";
 				document.getElementById("changeFlag").value="change";
 				form1.submit();
 			}
 			function productIdChange(){
-				form1.action = "./showinitRepertoryInfoAction.action";
+				form1.action = "./initRepertoryAction!showInitRepertoryInfo.action";
 				document.getElementById("changeFlag").value="change";
 				form1.submit();
 			}
@@ -111,6 +113,27 @@
 										bgcolor="#d5e4fd">
 										<tr>
 											<td height="26" align="right" bgcolor="#FFFFFF">
+												<strong>产品类别：</strong>
+											</td>
+											<td height="26" align="left" bgcolor="#FFFFFF">
+											 	<s:select list="productTypeList" name="initRepertory.productType" id="productTypeId"  cssStyle="width: 290px;" 
+											 	headerKey="" headerValue="==请选择产品类别==" listKey="id" listValue="name" onchange="productTypeIdChange();"></s:select>
+												<font color="red">*</font>
+											</td>
+										</tr>
+										<tr>
+											<td height="26" align="right" bgcolor="#FFFFFF">
+												<strong>产品名称：</strong>
+											</td>
+											<td height="26" align="left" bgcolor="#FFFFFF">
+											 	<s:select list="productList" name="initRepertory.productId" id="productId"  cssStyle="width: 290px;" 
+											 	headerKey="" headerValue="==请选择产品==" listKey="id" listValue="name" onchange="productIdChange();"></s:select>
+												<font color="red">*</font>
+											</td>
+										</tr>
+										<!-- 
+										<tr>
+											<td height="26" align="right" bgcolor="#FFFFFF">
 												<strong>产品名称：</strong>
 											</td>
 											<td height="26" align="left" bgcolor="#FFFFFF">
@@ -118,6 +141,7 @@
 												<font color="red">*</font>
 											</td>
 										</tr>
+										 -->
 										<tr>
 											<td height="26" align="right" bgcolor="#FFFFFF">
 												<strong> 库存量：</strong>
