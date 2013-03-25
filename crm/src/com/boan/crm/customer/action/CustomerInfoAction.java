@@ -48,6 +48,7 @@ import com.boan.crm.groupmanage.service.IDeptmentService;
 import com.boan.crm.groupmanage.service.IPopedomService;
 import com.boan.crm.groupmanage.service.IUserService;
 import com.boan.crm.utils.action.BaseActionSupport;
+import com.boan.crm.utils.calendar.CurrentDateTime;
 import com.boan.crm.utils.io.impl.FileCopyAndDeleteUtilsAdaptor;
 import com.boan.crm.utils.page.Pagination;
 import com.boan.crm.utils.path.PathUtil;
@@ -978,6 +979,41 @@ public class CustomerInfoAction extends BaseActionSupport{
 			return null;
 		}
 		
+		return SUCCESS;
+	}
+	
+	public String getNewTraceAndVisitCount()
+	{
+		Map<String,Object> values = new HashMap<String,Object>();
+		values.put("salesmanId", sessionUserId );
+		UserSession us = this.getSession();
+		try
+		{
+			//判断是否是公司管理员或公司级用户
+			boolean deptLeaderFlag = popedomService.isHasPopedomByRoleKey(us,RoleFlag.BU_MEN_LING_DAO);
+			boolean ywyFlag = popedomService.isHasPopedomByRoleKey(us,RoleFlag.YE_WU_YUAN);
+			
+			if( ywyFlag || deptLeaderFlag )
+			{
+				Calendar t1 = Calendar.getInstance();
+				Calendar t2 = Calendar.getInstance();
+				t2.add(Calendar.MINUTE, 10);
+				
+				values.put("beginDate",t1);
+				values.put("endDate",t2);
+				values.put("traceFlag", "0");
+				values.put("visitFlag", "0");
+				int traceCount = customerTraceInfoService.findCustomerTraceInfoCount(values);
+				int visitCount = customerVisitInfoService.findCustomerVisitInfoCount(values);
+				message = traceCount + "|" + visitCount;
+			}else
+			{
+				message = "";
+			}
+		}catch(Exception ex)
+		{
+			
+		}
 		return SUCCESS;
 	}
 	

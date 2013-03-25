@@ -70,6 +70,56 @@ public class CustomerVisitInfoServiceImpl implements ICustomerVisitInfoService{
 		customerVisitInfoDao.executeHql("update CustomerVisitInfo set deleteFlag = 1 where customerId = :customerId",values);
 	}
 	@Override
+	public int findCustomerVisitInfoCount(Map<String, ?> values) {
+		StringBuilder hql = new StringBuilder();
+		hql.delete(0, hql.length());
+		if(values.get("showAllFlag") != null && values.get("showAllFlag").equals("1"))
+		{
+			hql.append( "select count(*) from CustomerVisitInfo where 1=1 ");
+		}else
+		{
+			hql.append(" select count(*) from CustomerVisitInfo where 1=1 and (deleteFlag = 0 ) " );
+		}
+		
+		if(values.get("companyId") != null)
+		{
+			hql.append(" and companyId = :companyId ");
+		}
+		if(values.get("customerId") != null)
+		{
+			hql.append(" and customerId = :customerId ");
+		}
+		if(values.get("salesmanId") != null)
+		{
+			hql.append(" and salesmanId = :salesmanId ");
+		}
+		if(values.get("visitOption") != null)
+		{
+			hql.append(" and visitOption = :visitOption ");
+		}
+		if(values.get("customerName") != null)
+		{
+			hql.append(" and customerId in (select id from CustomerInfo where customerName like :customerName )");
+		}
+		if(values.get("beginDate") != null && values.get("endDate") != null)
+		{
+			hql.append(" and visitTime between :beginDate and :endDate");
+		}
+		if(values.get("deptId") != null)
+		{
+			hql.append(" and salesmanId in (select id from User where deptId =:deptId) ");
+		}
+		if(values.get("visitFlag") != null && values.get("visitFlag").equals("1"))
+		{
+			hql.append(" and visitFlag = '1' ");
+		}else if(values.get("visitFlag") != null && values.get("visitFlag").equals("0"))
+		{
+			hql.append(" and (visitFlag = '0' or visitFlag is null) ");
+		}
+		int totalRows = customerVisitInfoDao.findCountForPage(hql.toString(), values);
+		return totalRows;
+	}
+	@Override
 	public Pagination<CustomerVisitInfo> findCustomerVisitInfoForPage(
 			Map<String, ?> values, Pagination<CustomerVisitInfo> pagination) {
 		StringBuilder hql = new StringBuilder();

@@ -48,4 +48,10 @@ public interface ICustomerVisitInfoService {
 	 */
 	public Pagination<CustomerVisitInfo> findCustomerVisitInfoForPage(
 			Map<String, ?> values, Pagination<CustomerVisitInfo> pagination);
+	/**
+	 * 取记录个数
+	 * @param values
+	 * @return　int
+	 */
+	public int findCustomerVisitInfoCount(Map<String, ?> values);
 }
