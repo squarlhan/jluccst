@@ -36,9 +36,10 @@
 		d = new dTree('d','<%=path%>');
 		d.add(0,-1,'<s:property value="commpanyName"/>公司产品','./openMarketInquiryListForViewAction.action?companyId=<s:property value="commpanyId"/>&goodsId=<s:property value="id"/>&who=session','','groupmain');
 		<s:iterator value="goodsList">
-			d.add("<s:property value="id"/>",0,'<s:property value="name"/>','./openMarketInquiryListForViewAction.action?companyId=<s:property value="commpanyId"/>&goodsId=<s:property value="id"/>&who=session','','groupmain','<%=path%>/js/tree/img/group.gif','<%=path%>/js/tree/img/group.gif');
+			d.add('<s:property value="id"/>','<s:property value="fatherId"/>','<s:property value="name"/>','./openMarketInquiryListForViewAction.action?companyId=<s:property value="commpanyId"/>&goodsId=<s:property value="id"/>&who=session','','groupmain','<%=path%>/js/tree/img/folder.gif');
 		</s:iterator>
 		document.write(d);
+		d.openAll();
 		//-->
 	</script>
 </div>
