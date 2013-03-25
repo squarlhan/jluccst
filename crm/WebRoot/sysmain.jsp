@@ -39,7 +39,7 @@ $( document ).ready( function() {
 	//需要定时触发
 	$.fn.notice();
 	//定时获得通知
-	window.setInterval("$.fn.notice()",15000*4);
+	window.setInterval("$.fn.notice()",15000 * 4 * 10);
 	$("#message_close").click(function(){
 		$("#message").hide();
 	});
