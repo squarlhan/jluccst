@@ -5,6 +5,9 @@
 <struts>
 	<!-- 客户Action -->
 	<package name="customer" extends="struts-default" namespace="/customer">
+		<action name="noticeService" class="customerInfoAction" method="getNewTraceAndVisitCount">
+			<result name="success">/customer/getnewtraceandvisitcountservice.jsp</result>
+		</action>
 		<action name="groupTreeForSearch" class="customerInfoAction"  method="showGroupTree">
 			<result name="success">/customer/grouptreeforsearch.jsp</result>
 		</action>

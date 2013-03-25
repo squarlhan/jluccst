@@ -48,4 +48,11 @@ public interface ICustomerTraceInfoService {
 	 */
 	public Pagination<CustomerTraceInfo> findCustomerTraceInfoForPage(
 			Map<String, ?> values, Pagination<CustomerTraceInfo> pagination);
+	/**
+	 * 
+	 * @param values
+	 * @param pagination
+	 * @return
+	 */
+	public int findCustomerTraceInfoCount(Map<String, ?> values);
 }

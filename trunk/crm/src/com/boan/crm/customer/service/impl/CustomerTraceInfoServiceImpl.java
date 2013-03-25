@@ -73,6 +73,56 @@ public class CustomerTraceInfoServiceImpl implements ICustomerTraceInfoService{
 	}
 	
 	@Override
+	public int findCustomerTraceInfoCount(Map<String, ?> values) {
+		StringBuilder hql = new StringBuilder();
+		if(values.get("showAllFlag") != null && values.get("showAllFlag").equals("1"))
+		{
+			hql.append(" select count(*) from CustomerTraceInfo where 1=1 " );
+		}else{
+			hql.append(" select count(*) from CustomerTraceInfo where 1=1 and (deleteFlag = 0 )" );
+		}
+		
+		if(values.get("companyId") != null)
+		{
+			hql.append(" and companyId = :companyId ");
+		}
+		if(values.get("customerId") != null)
+		{
+			hql.append(" and customerId = :customerId ");
+		}
+		if(values.get("salesmanId") != null)
+		{
+			hql.append(" and salesmanId = :salesmanId ");
+		}
+		if(values.get("traceOption") != null)
+		{
+			hql.append(" and traceOption = :traceOption ");
+		}
+		if(values.get("customerName") != null)
+		{
+			hql.append(" and customerId in (select id from CustomerInfo where customerName like :customerName )");
+		}
+		if(values.get("beginDate") != null && values.get("endDate") != null)
+		{
+			hql.append(" and traceTime between :beginDate and :endDate");
+		}
+		if(values.get("deptId") != null)
+		{
+			hql.append(" and salesmanId in (select id from User where deptId =:deptId) ");
+		}
+		if(values.get("traceFlag") != null && values.get("traceFlag").equals("1"))
+		{
+			hql.append(" and traceFlag = '1' ");
+		}else if(values.get("traceFlag") != null && values.get("traceFlag").equals("0"))
+		{
+			hql.append(" and (traceFlag = '0' or traceFlag is null) ");
+		}
+		
+		int totalRows = customerTraceInfoDao.findCountForPage(hql.toString(), values);
+		return totalRows;
+	}
+	
+	@Override
 	public Pagination<CustomerTraceInfo> findCustomerTraceInfoForPage(
 			Map<String, ?> values, Pagination<CustomerTraceInfo> pagination) {
 		StringBuilder hql = new StringBuilder();
@@ -209,7 +259,7 @@ public class CustomerTraceInfoServiceImpl implements ICustomerTraceInfoService{
 		}
 		return pagination;
 	}
-
+	
 	@Override
 	public CustomerTraceInfo get(String id) {
 		return customerTraceInfoDao.get(id);
