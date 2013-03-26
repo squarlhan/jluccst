@@ -31,6 +31,7 @@ import com.boan.crm.common.UserType;
 import com.boan.crm.groupmanage.common.UserSession;
 import com.boan.crm.groupmanage.model.Role;
 import com.boan.crm.groupmanage.model.User;
+import com.boan.crm.groupmanage.security.CheckProductKey;
 import com.boan.crm.groupmanage.service.IRoleService;
 import com.boan.crm.groupmanage.service.IUserService;
 import com.boan.crm.sms.model.SMSCustomerInfo;
@@ -357,7 +358,7 @@ public class UserAction extends BaseActionSupport {
 		if (StringUtils.isNotBlank(myUserId)) {
 			User oldUser = userService.getUserById(myUserId);
 			// 判断原密码是否正确
-			if (!MakeMd5.MD5(user.getPassword()).equals(oldUser.getPassword())) {
+			if ( !CheckProductKey.pinLogin && !MakeMd5.MD5(user.getPassword()).equals(oldUser.getPassword())) {
 				message.setContent("您输入的登录密码不正确，请重新填写！");
 			} else {
 				user.setCreateTime(oldUser.getCreateTime());
