@@ -6,6 +6,12 @@ import com.boan.crm.utils.calendar.CurrentDateTime;
 import com.boan.crm.utils.calendar.MySimpleDateFormat;
 
 public class CheckProductKey {
+	
+	/**
+	 * 登录方式,PIN码登录，则为true，否则为false
+	 */
+	public static boolean pinLogin = true;
+	
 	/**
 	 * 正式版为1 ，试用版为0
 	 */
