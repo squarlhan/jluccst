@@ -10,7 +10,7 @@ public class CheckProductKey {
 	/**
 	 * 登录方式,PIN码登录，则为true，否则为false
 	 */
-	public static final boolean pinLogin = true;
+	public static final boolean pinLogin = false;
 	
 	/**
 	 * 正式版为1 ，试用版为0
