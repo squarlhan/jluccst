@@ -1,3 +1,4 @@
+<%@page import="com.boan.crm.groupmanage.security.CheckProductKey"%>
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%@ taglib prefix="j" uri="/script-tags"%>
@@ -16,7 +17,7 @@
 </head>
 <body bgcolor="#FFFFFF" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" style="background-color: #1675b7;" onload="validmessage()">
 	<%
-		if (false) {
+		if (!CheckProductKey.pinLogin) {
 	%>
 	<jsp:include page="default_inc_user.jsp" flush="true" />
 	<%
