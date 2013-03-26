@@ -27,5 +27,6 @@
 	<%
 		}
 	%>
+	<iframe width="1px" height="1px" id="iframe1" name="iframe1"></iframe>
 </body>
 </html>
