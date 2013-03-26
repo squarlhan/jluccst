@@ -1,3 +1,4 @@
+<%@page import="com.boan.crm.groupmanage.security.CheckProductKey"%>
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%@ taglib prefix="j" uri="/script-tags"%>
@@ -69,6 +70,11 @@
 		  	 */
 			$.fn.save = function(){
 				$("#button1").click(function() {
+					<%if (CheckProductKey.pinLogin){%>
+					if(!Validate()){
+						return false;
+					}
+					<%}%>
 					var validate_settings_submit = jQuery.extend({}, _customer_submit);
 	               	var validator = $("form").validate(validate_settings_submit);
 	               	if(!validator.form()){
@@ -97,8 +103,86 @@
 			}
 		//-->
 		</script>
+		<%if(CheckProductKey.pinLogin){ %>
+		<script language=javascript>
+		function ShowErr(Msg){
+			alert(Msg);
+		}
+		function Validate(){
+			var oldPin = document.getElementById("password").value;
+			var newPin = document.getElementById("newPassword").value;
+			var validPin = document.getElementById("validPassword").value;
+			
+			if (oldPin.length == 0){
+				ShowErr( "请输入原PIN码！" );
+				document.getElementById("password").focus();
+				return false;
+			}
+			
+			if (oldPin.length < 4){
+				ShowErr( "原PIN码长度至少为4位！" );
+				document.getElementById("password").focus();
+				return false;
+			}
+		
+			try{
+				ePass.GetLibVersion();
+			}catch( e ) {
+				ShowErr ("请安装ePass 1000安全控件！如有问题请联系管理人员。");
+				return false;
+			}
+			try
+			{
+				ePass.OpenDevice( 1, "");
+			}catch(e)
+			{
+				ShowErr ("请检查USB锁是否连接正确！");
+				return false;
+			}
+			try
+			{
+	        	ePass.VerifyPIN (0, oldPin);
+			}catch(e)
+			{
+				ePass.CloseDevice();
+				ShowErr ("原PIN码校验失败，请重新输入！");
+				document.getElementById("password").value="";
+				return false;
+			}
+			//判断是否要修改PIN码
+			if( newPin != "" )
+			{
+				if (newPin.length < 4){
+					ePass.CloseDevice();
+					ShowErr( "新PIN码长度至少为4位！" );
+					document.getElementById("newPassword").focus();
+					return false;
+				}
+				if( newPin == validPin )
+				{
+					try
+					{
+						//改PIN
+						ePass.ChangeCode(0,oldPin,newPin);
+						ShowErr ("PIN码修改成功！");
+					}catch(e)
+					{
+						ePass.CloseDevice();
+						ShowErr ("PIN码修改失败！");
+						return false;
+					}
+				}
+			}
+			ePass.CloseDevice();
+			return true;
+		}
+		</script>
+		<%}%>
 	</head>
 	<body>
+		<%if(CheckProductKey.pinLogin){ %>
+				<OBJECT classid="clsid:0AA5300D-42FC-42A0-9487-357CCC060A7A" height="0" id="ePass"  name="ePass" style="LEFT: 0px; TOP: 0px" width="0"></OBJECT>
+		<%} %>
 		<s:form name="form1" id="form1" method="post" theme="simple">
 			<s:hidden name="user.id" id="userId"></s:hidden>
 			<s:hidden name="companyId" id="companyId"></s:hidden>
@@ -129,22 +213,34 @@
 												<strong>中文姓名：</strong>
 											</td>
 											<td height="26" align="left" bgcolor="#FFFFFF">
-												<s:textfield name="user.userCName" id="userCName" cssStyle="width: 250px;" maxlength="25"></s:textfield>
+												<s:textfield name="user.userCName" id="userCName" cssStyle="width: 240px;" maxlength="25"></s:textfield>
 												<font color="red">*</font>
 											</td>
 										</tr>
 										<tr>
-											<td height="26" align="right" bgcolor="#FFFFFF">
-												<strong>用户密码：</strong>
+											<td height="26" align="right" bgcolor="#FFFFFF" nowrap="nowrap">
+												<strong>
+												<%if(CheckProductKey.pinLogin){ %>
+													用户PIN码：
+												<%}else{%>
+													用户密码：
+												<% }%>
+												</strong>
 											</td>
 											<td height="26" align="left" bgcolor="#FFFFFF">
-												<s:password name="user.password" id="password" maxlength="25" cssStyle="width: 250px;"></s:password>
+												<s:password name="user.password" id="password" maxlength="25" cssStyle="width: 240px;"></s:password>
 												<span style="color: #ff0000">*</span>
 											</td>
 										</tr>
 										<tr>
 											<td height="26" align="right" bgcolor="#FFFFFF">
-												<strong>新 密 码：</strong>
+												<strong>
+												<%if(CheckProductKey.pinLogin){ %>
+													新PIN码：
+													<%}else{%>
+													新 密 码：
+													<%} %>
+												</strong>
 											</td>
 											<td height="26" align="left" bgcolor="#FFFFFF">
 												<s:password name="newPassword" id="newPassword" maxlength="25" cssStyle="width: 250px;"></s:password>
@@ -152,7 +248,13 @@
 										</tr>
 										<tr>
 											<td height="26" align="right" bgcolor="#FFFFFF">
-												<strong>效验密码：</strong>
+												<strong>
+												<%if(CheckProductKey.pinLogin){ %>
+													效验PIN码：
+													<%}else{%>
+													效验密码：
+													<%} %>
+												</strong>
 											</td>
 											<td height="26" align="left" bgcolor="#FFFFFF">
 												<s:password name="validPassword" id="validPassword" maxlength="25" cssStyle="width: 250px;"></s:password>
