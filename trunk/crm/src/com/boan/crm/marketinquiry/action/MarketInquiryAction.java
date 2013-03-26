@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.annotation.Resource;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
@@ -13,6 +15,8 @@ import org.springframework.stereotype.Controller;
 
 import com.boan.crm.datadictionary.model.DataDictionary;
 import com.boan.crm.datadictionary.service.IDataDictionaryService;
+import com.boan.crm.goods.model.GoodsType;
+import com.boan.crm.goods.service.IGoodsTypeService;
 import com.boan.crm.groupmanage.model.User;
 import com.boan.crm.groupmanage.service.IDeptmentService;
 import com.boan.crm.groupmanage.service.IUserService;
@@ -45,6 +49,10 @@ public class MarketInquiryAction extends BaseActionSupport{
 	@Autowired
 	@Qualifier("dataDictionaryService")
 	private IDataDictionaryService dataDictionaryService= null;
+	
+	@Resource
+	// 商品类别接口类
+	private IGoodsTypeService goodsTypeService;
 	
 	/**
 	 * 市场调查实体
@@ -94,7 +102,7 @@ public class MarketInquiryAction extends BaseActionSupport{
 	 */
 	private Calendar endTime;
 	
-	List<DataDictionary> goodsList = new ArrayList<DataDictionary>();
+	private List<GoodsType> goodsList = null;
 	
 	private String goodsId;
 	
@@ -106,7 +114,8 @@ public class MarketInquiryAction extends BaseActionSupport{
 	 * @return
 	 */
 	public String showGoodsTreeForMarketInquiry() throws Exception {
-		goodsList = dataDictionaryService.findDataDictionaryByType(sessionCompanyId, 8);
+		//goodsList = dataDictionaryService.findDataDictionaryByType(sessionCompanyId, 8);
+		goodsList = goodsTypeService.findAllGoodsType(sessionCompanyId);
 		return "group-tree-for-market_inquiry";
 	}
 	
@@ -116,7 +125,8 @@ public class MarketInquiryAction extends BaseActionSupport{
 	 * @return
 	 */
 	public String showGoodsTreeForMarketInquiryForView() throws Exception {
-		goodsList = dataDictionaryService.findDataDictionaryByType(sessionCompanyId, 8);
+		//goodsList = dataDictionaryService.findDataDictionaryByType(sessionCompanyId, 8);
+		goodsList = goodsTypeService.findAllGoodsType(sessionCompanyId);
 		return "group-tree-for-market-inquiry-for-view.jsp";
 	}
 	
@@ -313,14 +323,6 @@ public class MarketInquiryAction extends BaseActionSupport{
 		this.endTime = endTime;
 	}
 
-	public List<DataDictionary> getGoodsList() {
-		return goodsList;
-	}
-
-	public void setGoodsList(List<DataDictionary> goodsList) {
-		this.goodsList = goodsList;
-	}
-
 	public String getGoodsId() {
 		return goodsId;
 	}
@@ -335,6 +337,54 @@ public class MarketInquiryAction extends BaseActionSupport{
 
 	public void setCompanyId(String companyId) {
 		this.companyId = companyId;
+	}
+
+	public IUserService getUserService() {
+		return userService;
+	}
+
+	public void setUserService(IUserService userService) {
+		this.userService = userService;
+	}
+
+	public IDeptmentService getDeptService() {
+		return deptService;
+	}
+
+	public void setDeptService(IDeptmentService deptService) {
+		this.deptService = deptService;
+	}
+
+	public IMarketInquiryService getMarketInquiryService() {
+		return marketInquiryService;
+	}
+
+	public void setMarketInquiryService(IMarketInquiryService marketInquiryService) {
+		this.marketInquiryService = marketInquiryService;
+	}
+
+	public IDataDictionaryService getDataDictionaryService() {
+		return dataDictionaryService;
+	}
+
+	public void setDataDictionaryService(IDataDictionaryService dataDictionaryService) {
+		this.dataDictionaryService = dataDictionaryService;
+	}
+
+	public IGoodsTypeService getGoodsTypeService() {
+		return goodsTypeService;
+	}
+
+	public void setGoodsTypeService(IGoodsTypeService goodsTypeService) {
+		this.goodsTypeService = goodsTypeService;
+	}
+
+	public List<GoodsType> getGoodsList() {
+		return goodsList;
+	}
+
+	public void setGoodsList(List<GoodsType> goodsList) {
+		this.goodsList = goodsList;
 	}
 
 }
