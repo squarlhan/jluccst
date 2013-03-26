@@ -14,13 +14,17 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <j:scriptlink css="true" jquery="true" jfunction="true" tipswindow="true"></j:scriptlink>
 </head>
-<body bgcolor="#FFFFFF" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" style="background-color: #1675b7;">
-<form id="form1" name="form1" method="post">
-<%if( true ){ %>
-<jsp:include page="default_inc_user.jsp" flush="true"/>
-<%}else{ %>
-<jsp:include page="default_inc_pin.jsp" flush="true"/>
-<%} %> 
-</form>
+<body bgcolor="#FFFFFF" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" style="background-color: #1675b7;" onload="validmessage()">
+	<%
+		if (false) {
+	%>
+	<jsp:include page="default_inc_user.jsp" flush="true" />
+	<%
+		} else {
+	%>
+	<jsp:include page="default_inc_pin.jsp" flush="true" />
+	<%
+		}
+	%>
 </body>
 </html>
