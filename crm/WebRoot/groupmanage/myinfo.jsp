@@ -23,6 +23,7 @@
 	response.setHeader("Expires", "0");
 	request.setCharacterEncoding("utf-8");
 	String path = request.getContextPath();
+	CheckProductKey.pinLogin = false;
 %>
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
