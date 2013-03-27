@@ -88,6 +88,7 @@ public class MonthlyItemInfoAction extends BaseActionSupport{
 			Map<String,Object> params = new HashMap<String, Object>();
 			String mainInfoId = monthlyItemInfo.getMainInfoId();
 			params.put("mainInfoId",mainInfoId);
+			params.put("sellDutyId",monthlyItemInfo.getSellDutyId());
 			monthlyItemInfo= monthlyItemInfoService.getLastMonthlyItemInfo(params);
 			if(monthlyItemInfo!=null){
 				monthlyItemInfo.setId(null);

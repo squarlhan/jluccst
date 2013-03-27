@@ -100,6 +100,11 @@ public class MonthlyItemInfoServiceImpl implements IMonthlyItemInfoService{
 				strb.append(" and  mainInfoId=:mainInfoId  ");
 			}
 		}
+		if(params!=null){
+			if(params.containsKey("sellDutyId")){
+				strb.append(" and  sellDutyId=:sellDutyId  ");
+			}
+		}
 		String hql = "from MonthlyItemInfo "+strb.toString()+" order by createTime desc , sequence asc";
 		List<MonthlyItemInfo> data = monthlyItemInfoDao.find(hql, params);
 		if(data!=null && data.size()>0){

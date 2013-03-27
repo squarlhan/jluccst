@@ -99,6 +99,11 @@ public class WeeklyItemInfoServiceImpl implements IWeeklyItemInfoService{
 				strb.append(" and  mainInfoId=:mainInfoId  ");
 			}
 		}
+		if(params!=null){
+			if(params.containsKey("sellDutyId")){
+				strb.append(" and  sellDutyId=:sellDutyId  ");
+			}
+		}
 		String hql = "from WeeklyItemInfo "+strb.toString()+" order by createTime desc , sequence asc";
 		List<WeeklyItemInfo> data = weeklyItemInfoDao.find(hql, params);
 		if(data!=null && data.size()>0){

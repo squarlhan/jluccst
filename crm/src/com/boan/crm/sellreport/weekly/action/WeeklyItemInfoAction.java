@@ -88,6 +88,7 @@ public class WeeklyItemInfoAction extends BaseActionSupport{
 			Map<String,Object> params = new HashMap<String, Object>();
 			String mainInfoId = weeklyItemInfo.getMainInfoId();
 			params.put("mainInfoId",mainInfoId);
+			params.put("sellDutyId",weeklyItemInfo.getSellDutyId());
 			weeklyItemInfo= weeklyItemInfoService.getLastWeeklyItemInfo(params);
 			if(weeklyItemInfo!=null){
 				weeklyItemInfo.setId(null);
