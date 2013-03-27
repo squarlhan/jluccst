@@ -195,7 +195,6 @@ public class ActionPlanAction extends BaseActionSupport{
 		params.put("planType", planType);
 		params.put("beginTime", beginTime);
 		params.put("endTime", endTime); 
-		pagination.setPageSize(1);
 		pagination = actionPlanService.findActionPlanForPage(params,pagination);
 		
 		return SUCCESS;
