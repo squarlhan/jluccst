@@ -64,7 +64,6 @@ public class WeeklyMainInfoAction  extends BaseActionSupport{
 	
 	private String reference="";
 	
-	
 	/**
 	 * 分页对象
 	 */
@@ -111,6 +110,8 @@ public class WeeklyMainInfoAction  extends BaseActionSupport{
 	private String  personId;
 	
 	private String deptId;
+
+	private String postName;
 	
 	/**
 	 * 显示组织机构树
@@ -275,6 +276,11 @@ public class WeeklyMainInfoAction  extends BaseActionSupport{
 		weeklyMainInfo.setDeptName(sessionDeptName);
 		
 		weeklyMainInfo.setPersonId(sessionUserId);
+		User user = userService.getUserById(sessionUserId);
+		if(user!=null){
+			postName = user.getRoleName();
+			weeklyMainInfo.setPosition(postName);
+		}
 		weeklyMainInfo.setPersonName(sessionUserCName);
 		
 		Calendar begin  = CalendarUtils.getFirstDayOfWeek( Calendar.getInstance());
@@ -359,7 +365,18 @@ public class WeeklyMainInfoAction  extends BaseActionSupport{
 		return this.SUCCESS;
 	}
 	
-	public String getWeeklyStatData(){
+	public String queryPersonPost() {
+		User user=null;
+		try {
+			user = userService.getUserById(this.personId);
+			postName = user.getRoleName();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return this.SUCCESS;
+	}
+	
+	public String queryWeeklyStatData(){
 		List<WeeklyItemInfo>  sellTargerList = weeklyItemInfoService.getWeeklyItemInfoListOfSellTargetByMainInfoId(mainInfoId);
 		String str="<chart palette='2' " +
 				"caption='周销售计划对比统计' " +
@@ -671,5 +688,11 @@ public class WeeklyMainInfoAction  extends BaseActionSupport{
 	}
 	public void setWeeklyItemInfoList(List<WeeklyItemInfo> weeklyItemInfoList) {
 		this.weeklyItemInfoList = weeklyItemInfoList;
+	}
+	public String getPostName() {
+		return postName;
+	}
+	public void setPostName(String postName) {
+		this.postName = postName;
 	}
 }

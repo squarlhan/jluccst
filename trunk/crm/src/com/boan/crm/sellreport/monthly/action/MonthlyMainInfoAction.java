@@ -112,6 +112,8 @@ public class MonthlyMainInfoAction  extends BaseActionSupport{
 	private String queryTime;
 	
 	private String reference="";
+
+	private String postName;
 	
 	/**
 	 * 显示组织机构树
@@ -274,6 +276,13 @@ public class MonthlyMainInfoAction  extends BaseActionSupport{
 		
 		monthlyMainInfo.setDeptId(sessionDeptId);
 		monthlyMainInfo.setDeptName(sessionDeptName);
+		
+		monthlyMainInfo.setPersonId(sessionUserId);
+		User user = userService.getUserById(sessionUserId);
+		if(user!=null){
+			postName = user.getRoleName();
+			monthlyMainInfo.setPosition(postName);
+		}
 		
 		monthlyMainInfo.setPersonId(sessionUserId);
 		monthlyMainInfo.setPersonName(sessionUserCName);
@@ -706,5 +715,11 @@ public class MonthlyMainInfoAction  extends BaseActionSupport{
 	}
 	public void setMonthlyItemInfoList(List<MonthlyItemInfo> monthlyItemInfoList) {
 		this.monthlyItemInfoList = monthlyItemInfoList;
+	}
+	public String getPostName() {
+		return postName;
+	}
+	public void setPostName(String postName) {
+		this.postName = postName;
 	}
 }

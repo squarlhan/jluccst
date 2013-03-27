@@ -39,7 +39,7 @@
 		</action>
 		<action name="deleteWeeklyMainInfoAction" class="weeklyMainInfoAction" method="deleteWeeklyMainInfo"/>
 		
-		<action name="getWeeklyStatDataAction" class="weeklyMainInfoAction"  method="getWeeklyStatData">
+		<action name="getWeeklyStatDataAction" class="weeklyMainInfoAction"  method="queryWeeklyStatData">
         	<param name="caption">统计图描述</param>
             <result name="success"  type="stream">
 				<param name="contentType">application/xml;charset=UTF-8</param>
@@ -68,5 +68,11 @@
 			<result name="success">/sellreport/weekly/weeklyreport.jsp</result>
 			<result name="input">/sellreport/weekly/weeklyreport.jsp</result>
 		</action>
+	</package>
+	
+	<package name="weeklyAjax" extends="json-default" namespace="/">
+		<action name="queryPersonPostAction" class="weeklyMainInfoAction" method="queryPersonPost">
+            <result type="json"></result>
+        </action>
 	</package>
 </struts>
