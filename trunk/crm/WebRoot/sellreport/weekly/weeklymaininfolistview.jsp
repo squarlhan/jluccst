@@ -227,7 +227,7 @@ pageEncoding="UTF-8"%>
               <td align="center" background="<%=path %>/images/headerbg.jpg" nowrap="nowrap"><strong>计划人</strong></td>
               <td align="center" background="<%=path %>/images/headerbg.jpg" nowrap="nowrap"><strong>计划时间</strong></td>
               <td align="center" background="<%=path %>/images/headerbg.jpg" nowrap="nowrap"><strong>所在部门</strong></td>
-               <td width="40%" align="center" background="<%=path %>/images/headerbg.jpg" ><strong>职务  </strong></td>
+               <td align="center" background="<%=path %>/images/headerbg.jpg" ><strong>职务  </strong></td>
                <td align="center" background="<%=path %>/images/headerbg.jpg" nowrap="nowrap"><strong>直接上级</strong></td>
                <td align="center" background="<%=path %>/images/headerbg.jpg" nowrap="nowrap"><strong>检查人</strong></td>
               <td align="center" background="<%=path %>/images/headerbg.jpg" nowrap="nowrap"><strong>操作</strong></td>
