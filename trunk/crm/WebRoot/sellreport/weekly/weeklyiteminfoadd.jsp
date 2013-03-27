@@ -185,7 +185,7 @@
 			
 			$.fn.reference = function(){
 				$("#referenceBtn").click(function() {
-		            form1.action = "openAddWeeklyItemAction.action?reference=true";					
+		            form1.action = "openAddWeeklyItemAction.action?reference=true";				
 	               	form1.submit();
           		});
           	};
