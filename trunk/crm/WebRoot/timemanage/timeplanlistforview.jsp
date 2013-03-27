@@ -242,8 +242,8 @@ pageEncoding="UTF-8"%>
 	              	月报
 	              	</s:else>
               	</td>
-                <td height="26" align="left" bgcolor="#FFFFFF"><s:property value="planContent"/></td>
                 <td height="26" align="left" bgcolor="#FFFFFF"><s:property value="memo"/></td>
+                <td height="26" align="left" bgcolor="#FFFFFF"><s:property value="planContent"/></td>
           <td height="26" colspan="2" align="center" bgcolor="#FFFFFF">
           	<s:url id="edit_url" action="openModifyTimePlanForViewAction">   
 				<s:param name="timePlan.id" value="id"></s:param>   
