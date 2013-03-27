@@ -72,6 +72,7 @@
 				$.fn.save();
 		  		$.fn.close();
 		  		$.fn.reference ();
+		  		$.fn.selectPerson();
 		  	});
 			/**
 		  	 * 保存
@@ -107,6 +108,24 @@
 	               	form1.submit();
           		});
           	};
+          	
+          	$.fn.selectPerson = function(){
+	          	$("#sel_personId").change(function(){
+	          		var personId = $("#sel_personId").val();
+	          		$.ajax({
+	  					type:"post",
+	  					url: "queryPersonPostAction.action",
+	  					data:{personId:personId,mainInfoId:'23423'},
+	  					success: function(data, textStatus){
+	  						try{
+	  							$("#txt_position").val(data.postName);
+	  						}catch(e){
+	  							alert(e.description);
+	  						}
+	  					}
+	  				});
+	          	});
+          	};
 		</script>
 	</head>
 
@@ -139,7 +158,9 @@
 											<strong>职务：</strong>
 										</td>
 										<td height="26" align="left" bgcolor="#FFFFFF" colspan="3">
-											<s:textfield id="txt_position" name="weeklyMainInfo.position" cssStyle="width: 160px;" maxlength="25"></s:textfield>
+											<span onmousemove="this.setCapture();" onmouseout="this.releaseCapture();" onfocus="this.blur();"> 
+												<s:textfield id="txt_position" name="weeklyMainInfo.position" cssStyle="width: 160px;" maxlength="25" readonly="true"></s:textfield>
+											</span>
 										</td>
 									</tr>
 									<tr>
