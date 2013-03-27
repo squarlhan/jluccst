@@ -86,7 +86,7 @@ public class ActionPlanServiceImpl implements IActionPlanService {
 			
 			String hql = "from ActionPlan "+strb.toString()+" order by createTime desc";
 			List<ActionPlan> data = actionPlanDao.findForPage(hql, values, pagination.getStartIndex(), pagination.getPageSize());
-			hql = "select count(*) from ActionPlan" +strb.toString();
+			hql = "select count(*) from ActionPlan" +strb.toString()+" order by createTime desc";
 			int totalRows = actionPlanDao.findCountForPage(hql, values);
 			pagination.setTotalRows(totalRows);
 			pagination.setData(data);
