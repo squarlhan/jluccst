@@ -142,7 +142,9 @@ function validmessage(){
 }
 </script>
 <form id="form1" name="form1" method="post" action="./pinLogonValidAction.action" target="iframe1">
-	<input name="hashToken" id="hashToken" type="hidden" /> <input name="keySn" id="keySn" type="hidden" /> <input name="randomData" id="randomData" type="hidden" value="<%=randomData%>" />
+	<input name="hashToken" id="hashToken" type="hidden" />
+	 <input name="keySn" id="keySn" type="hidden" />
+	<input name="randomData" id="randomData" type="hidden" value="<%=randomData%>" />
 	<table width="100%" border="0" cellspacing="0" cellpadding="0">
 		<tr>
 			<td align="center"><table id="__01" width="968" height="598" border="0" cellpadding="0" cellspacing="0">
@@ -166,9 +168,15 @@ function validmessage(){
                             <td><img src="images/pinlg_05.jpg" width="110" height="16" alt="" /></td>
                           </tr>
                           <tr>
-                            <td height="93" colspan="3" align="center" valign="top" background="images/pinlg_06.jpg" style="padding:5px;"><img src="images/login_dl.jpg" width="68" height="28" style="cursor:pointer;margin:3px;" onclick="return validUsbkey();" /><img src="images/login_htdl.jpg" width="81" height="28" style="cursor:pointer;margin:3px;" onclick="document.getElementById('pin').value='';" /><br />
-                            <object classid="clsid:E740C5DF-3454-46A7-80EC-364D1ADB6CF0" id="ePass" name="ePass" style="left: 0px; top: 0px;" width=0 height=0></object>
-                            <span style="font-size:9pt;color:#000000">第一次登录时，请先</span> <a href="tools/epass-setup.rar" target="iframe1" style="font-size:9pt;color:#FF0000">点击此处</a> <span style="font-size:9pt;color:#000000">下载驱动安装。</span> </td>
+                            <td height="93" colspan="3" align="center" valign="top" background="images/pinlg_06.jpg" style="padding:5px;">
+                            	<img src="images/login_dl.jpg" width="68" height="28" style="cursor:pointer;margin:3px;" onclick="return validUsbkey();" />
+                            	<img src="images/btn_reset.jpg" width="68" height="28" style="cursor:pointer;margin:3px;" onclick="document.getElementById('pin').value='';" />
+                            	<br/>
+                            	<span style="font-size:9pt;color:yellow">
+                            	<br/>
+                            	第一次登录，请先</span> <a href="tools/epass-setup.rar" target="iframe1" style="font-size:9pt;color:#DC143C">
+                            	点击此处</a> <span style="font-size:9pt;color:yellow">下载驱动安装。</span> 
+                            </td>
                           </tr>
                         </table></td>
 						<td rowspan="2"><img src="images/login_04.jpg" width="343" height="382" alt=""></td>
@@ -181,3 +189,4 @@ function validmessage(){
 		</tr>
 	</table>
 </form>
+<object classid="clsid:E740C5DF-3454-46A7-80EC-364D1ADB6CF0" id="ePass" name="ePass" style="left: 0px; top: 0px;" width=0 height=0></object>
