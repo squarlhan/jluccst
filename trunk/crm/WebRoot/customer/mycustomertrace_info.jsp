@@ -250,7 +250,7 @@
 				</td>
 			</s:if>
 			<s:else>
-				<s:textarea title="请于回访结束后填写" readOnly="true" type="text" style="width:645px;height:70px" name="customerTraceInfo.interest" id="interest"></s:textarea></td>
+				<s:textarea title="请于跟进结束后填写" readOnly="true" type="text" style="width:645px;height:70px" name="customerTraceInfo.interest" id="interest"></s:textarea></td>
 			</s:else>
 	</tr>
 	<tr>
@@ -260,7 +260,7 @@
 			<s:textarea type="text"  style="width:650px;height:70px" name="customerTraceInfo.objection" id="objection"></s:textarea></td>
 			</s:if>
 			<s:else>
-			<s:textarea title="请于回访结束后填写" type="text" readOnly="true" style="width:645px;height:70px" name="customerTraceInfo.objection" id="objection"></s:textarea></td>
+			<s:textarea title="请于跟进结束后填写" type="text" readOnly="true" style="width:645px;height:70px" name="customerTraceInfo.objection" id="objection"></s:textarea></td>
 			</s:else>
 	</tr>
 </table></fieldset></td></tr>
