@@ -57,21 +57,20 @@
 								</tr>
 								<tr>
 									<td rowspan="4"><img src="images/ptlg_02.jpg" width="112" height="82" alt=""></td>
-									<td><input type="text" name="username" id="username" value="" style="width:111px;height:21px;" maxlength="20" onkeypress="mykeypress();">
-									</td>
+								  <td background="images/ptlg_03.jpg" style="width:111px;height:21px;"><input type="text" name="username" id="username" value="" style="width:111px;height:19px;" maxlength="20" onkeypress="mykeypress();"></td>
 									<td rowspan="4"><img src="images/ptlg_04.jpg" width="35" height="82" alt=""></td>
 								</tr>
 								<tr>
 									<td><img src="images/ptlg_05.jpg" width="111" height="25" alt=""></td>
 								</tr>
 								<tr>
-									<td><input type="password" name="password" id="password" value="" style="width:111px;height:21px;" maxlength="20" onkeypress="mykeypress();"></td>
+									<td background="images/ptlg_06.jpg" style="width:111px;height:20px;"><input type="password" name="password" id="password" value="" style="width:111px;height:18px;" maxlength="20" onkeypress="mykeypress();"></td>
 								</tr>
 								<tr>
 									<td><img src="images/ptlg_07.jpg" width="111" height="16" alt=""></td>
 								</tr>
 								<tr>
-									<td height="82" colspan="3" align="center" valign="top" background="images/ptlg_08.jpg"><span style="padding:5px;"> <img src="images/login_dl.jpg" width="68" height="28" style="margin:3px;" alt="登录" style="cursor:pointer;" onclick="logon();"> <img src="images/login_htdl.jpg" width="81" height="28" style="margin:3px;" alt="后台登录" style="cursor:pointer;" onclick="superpin();"> </span></td>
+									<td height="82" colspan="3" align="center" valign="top" background="images/ptlg_08.jpg"><span style="padding:5px;"> <img src="images/login_dl.jpg" width="68" height="28" alt="登录" style="cursor:pointer;margin:3px;" onclick="logon();"> <img src="images/login_htdl.jpg" width="81" height="28" alt="后台登录" style="cursor:pointer;margin:3px;" onclick="superpin();"> </span></td>
 								</tr>
 							</table></td>
 						<td rowspan="2"><img src="images/login_04.jpg" width="343" height="382" alt=""></td>

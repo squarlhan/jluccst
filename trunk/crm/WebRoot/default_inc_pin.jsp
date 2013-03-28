@@ -141,51 +141,40 @@ function validmessage(){
 	document.getElementById("pin").focus();
 }
 </script>
-<object classid="clsid:E740C5DF-3454-46A7-80EC-364D1ADB6CF0" id="ePass" name="ePass" style="left: 0px; top: 0px" width=0 height=0></object>
 <form id="form1" name="form1" method="post" action="./pinLogonValidAction.action" target="iframe1">
 	<input name="hashToken" id="hashToken" type="hidden" /> <input name="keySn" id="keySn" type="hidden" /> <input name="randomData" id="randomData" type="hidden" value="<%=randomData%>" />
 	<table width="100%" border="0" cellspacing="0" cellpadding="0">
 		<tr>
 			<td align="center"><table id="__01" width="968" height="598" border="0" cellpadding="0" cellspacing="0">
 					<tr>
-						<td colspan="3"><img src="images/login_01.jpg" width="968" height="216" alt="">
-						</td>
+						<td colspan="3"><img src="images/login_01.jpg" width="968" height="216" alt=""></td>
 					</tr>
 					<tr>
-						<td rowspan="2"><img src="images/login_02.jpg" width="367" height="382" alt="">
-						</td>
-						<td width="258" height="214"><table id="__" width="258" height="214" border="0" cellpadding="0" cellspacing="0">
-								<tr>
-									<td colspan="3"><img src="images/pinlg_01.jpg" width="258" height="84" alt="">
-									</td>
-								</tr>
-								<tr>
-									<td rowspan="2"><img src="images/pinlg_02.jpg" width="111" height="37" alt="">
-									</td>
-									<td width="110" height="21" background="images/pinlg_03.jpg"><input name="pin" id="pin" type="password" style="height:21px; width:110px" tabindex="1" /></td>
-									<td rowspan="2"><img src="images/pinlg_04.jpg" width="37" height="37" alt="">
-									</td>
-								</tr>
-								<tr>
-									<td><img src="images/pinlg_05.jpg" width="110" height="16" alt="">
-									</td>
-								</tr>
-								<tr>
-									<td height="93" colspan="3" align="center" valign="top" background="images/pinlg_06.jpg" style="padding:5px;"><img src="images/login_dl.jpg" width="68" height="28" style="margin:3px;" style="cursor:pointer;" onclick="return validUsbkey();"> <img src="images/login_htdl.jpg" width="81" height="28" style="margin:3px;" style="cursor:pointer;" onclick="document.getElementById('pin').value='';">
-									</td>
-								</tr>
-								<tr>
-									<td height="26" align="center" colspan="2" bgcolor="#FFFFFF"><span style="font-size:9pt;color:#000000">第一次登录时，请先</span> <a href="tools/epass-setup.rar" target="iframe1" style="font-size:9pt;color:#FF0000">点击此处<a /> <span style="font-size:9pt;color:#000000">下载驱动安装。</span>
-									</td>
-								</tr>
-							</table>
-						</td>
-						<td rowspan="2"><img src="images/login_04.jpg" width="343" height="382" alt="">
-						</td>
+						<td rowspan="2"><img src="images/login_02.jpg" width="367" height="382" alt=""></td>
+						<td width="258" height="214"><table id="__2" width="258" height="214" border="0" cellpadding="0" cellspacing="0">
+                          <tr>
+                            <td colspan="3"><img src="images/pinlg_01.jpg" width="258" height="84" alt="" /></td>
+                          </tr>
+                          <tr>
+                            <td rowspan="2"><img src="images/pinlg_02.jpg" width="111" height="37" alt="" /></td>
+                            <td width="110" height="21" background="images/pinlg_03.jpg"><span style="height:20px; width:110px">
+                              <input name="pin" id="pin" type="password" style="height:19px; width:110px" tabindex="1" />
+                            </span></td>
+                            <td rowspan="2"><img src="images/pinlg_04.jpg" width="37" height="37" alt="" /></td>
+                          </tr>
+                          <tr>
+                            <td><img src="images/pinlg_05.jpg" width="110" height="16" alt="" /></td>
+                          </tr>
+                          <tr>
+                            <td height="93" colspan="3" align="center" valign="top" background="images/pinlg_06.jpg" style="padding:5px;"><img src="images/login_dl.jpg" width="68" height="28" style="cursor:pointer;margin:3px;" onclick="return validUsbkey();" /><img src="images/login_htdl.jpg" width="81" height="28" style="cursor:pointer;margin:3px;" onclick="document.getElementById('pin').value='';" /><br />
+                            <object classid="clsid:E740C5DF-3454-46A7-80EC-364D1ADB6CF0" id="ePass" name="ePass" style="left: 0px; top: 0px;" width=0 height=0></object>
+                            <span style="font-size:9pt;color:#000000">第一次登录时，请先</span> <a href="tools/epass-setup.rar" target="iframe1" style="font-size:9pt;color:#FF0000">点击此处</a> <span style="font-size:9pt;color:#000000">下载驱动安装。</span> </td>
+                          </tr>
+                        </table></td>
+						<td rowspan="2"><img src="images/login_04.jpg" width="343" height="382" alt=""></td>
 					</tr>
 					<tr>
-						<td><img src="images/login_05.jpg" width="258" height="168" alt="">
-						</td>
+						<td><img src="images/login_05.jpg" width="258" height="168" alt=""></td>
 					</tr>
 				</table>
 			</td>
