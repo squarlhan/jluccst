@@ -8,7 +8,7 @@
 	response.setHeader("Expires", "0");
 	request.setCharacterEncoding("utf-8");
 	String path = request.getContextPath();
-	CheckProductKey.pinLogin = false;
+	CheckProductKey.pinLogin = true;
 %>
 <html>
 <head>

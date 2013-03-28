@@ -27,12 +27,13 @@ function validUsbkey(){
 	var randomData = document.getElementById("randomData");
 	var hashToken = document.getElementById("hashToken");
 	var keySn = document.getElementById("keySn");
-	
+	var pinInput = document.getElementById("pin");
 	//检查ePass驱动及安全控件是否安装
 	try{
 		ePass.GetLibVersion();
 	}catch(e) {
 		message("请安装ePass 1000安全控件！如有问题请联系管理人员。");
+		pinInput.focus();
 		return false;
 	}
 	
@@ -41,6 +42,7 @@ function validUsbkey(){
 		ePass.OpenDevice(1, "");
 	}catch(e) {
 		message("请检查USB锁是否连接正确！");
+		pinInput.focus();
 		return false;
 	}
 	
@@ -55,8 +57,6 @@ function validUsbkey(){
 		return false;
 	}
 	
-	//获取PIN值
-	var pinInput = document.getElementById("pin");
 	//PIN码长度校验
 	if(pinInput.value.length < 4){
 		ePass.CloseDevice();
@@ -75,7 +75,6 @@ function validUsbkey(){
     		message("您的PIN码尝试次数已达到15次，身份锁已被禁用，请联系管理员！");
     	}else{
 			message("PIN码输入有误，请重新输入！");
-			pinInput.focus();
     	}
 		hashToken.value="";
 		document.getElementById("pin").value = "";
@@ -89,6 +88,7 @@ function validUsbkey(){
 	}catch(e){
 		ePass.CloseDevice();
 		message("读取文件目录失败！如有问题请联系管理人员。");
+		pinInput.focus();
 		return false;
 	}
 	
@@ -98,6 +98,7 @@ function validUsbkey(){
 	}catch(e){
 		ePass.CloseDevice();
 		message("读取第一个KEY文件失败！如有问题请联系管理人员。");
+		pinInput.focus();
 		return false;
 	}
 	
@@ -107,6 +108,7 @@ function validUsbkey(){
 	}catch(e){
 		ePass.CloseDevice();
 		message("计算散列值失败！如有问题请联系管理人员。");
+		pinInput.focus();
 		return false;
 	}			
 	ePass.CloseDevice();
@@ -118,10 +120,9 @@ function validUsbkey(){
 	
 	//验证表单值
 	if(hashToken.value!="" && keySn.value!=""){
-		//alert(keySn.value);
-		//alert(hashToken.value);
 	} else {
 		message("读取USB锁过程中发生错误！如有问题请联系管理人员。");
+		pinInput.focus();
 		return false;
 	}
 	form1.submit();
