@@ -709,7 +709,7 @@ public class CustomerSearchAction  extends BaseActionSupport{
 	 */
 	public String toCustomerForInCompany(){
 		try{
-		customerLibInfo = customerInfoService.get(customerLibInfo.getId());
+		customerLibInfo = customerInfoService.getCustomerLibInfoView(customerLibInfo.getId());
 		List contractPersonInfoList = contractpersonService.findAllContractPersonLibInfoByCustomerId(customerLibInfo.getId());
 		if(customerLibInfo!=null){
 			CustomerInfo customerInfo =(CustomerInfo)ParseBeanUtil.parseBean(customerLibInfo, CustomerInfo.class);
@@ -764,7 +764,7 @@ public class CustomerSearchAction  extends BaseActionSupport{
 			message = "failure";
 		}
 		
-		return this.SUCCESS;
+		return openCustomerSearchInCompany();
 	}
 	
 	/**
@@ -786,7 +786,9 @@ public class CustomerSearchAction  extends BaseActionSupport{
 	 * @return
 	 */
 	public String toNoSearchCustomer(){
-		customerLibInfo = customerInfoService.get(customerLibInfo.getId());
+		ProvinceInfo province = areaService.getProvince(provinceId);
+		customerLibInfo = customerInfoService.get(province.getProvinceName(),customerLibInfo.getId());
+//		customerLibInfo = customerInfoService.get(customerLibInfo.getId());
 		if(customerLibInfo!=null){
 			NoSearchCustomers obj = new NoSearchCustomers();
 			obj.setCustomerLibId(customerLibInfo.getId());
