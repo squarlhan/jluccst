@@ -52,8 +52,18 @@
     <StartupObject>CSharpSVM.Program</StartupObject>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AForge, Version=2.0.0.0, Culture=neutral, PublicKeyToken=c1db6ff4eaa06aeb, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>pca\AForge.dll</HintPath>
+    </Reference>
+    <Reference Include="AForge.Math, Version=2.0.0.0, Culture=neutral, PublicKeyToken=abba2e25397ee8c9, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>pca\AForge.Math.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -61,15 +71,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ga\GA.cs" />
+    <Compile Include="ga\Genome.cs" />
+    <Compile Include="ga\GenomeComparer.cs" />
+    <Compile Include="ga\Test.cs" />
     <Compile Include="LvtongTrain.cs" />
     <Compile Include="LvtongTrainData.cs" />
-    <Compile Include="libSVM.cs" />
-    <Compile Include="libSVM_enums.cs" />
-    <Compile Include="libSVM_Grid.cs" />
-    <Compile Include="libSVM_internals.cs" />
-    <Compile Include="libSVM_Model.cs" />
-    <Compile Include="libSVM_Parameter.cs" />
-    <Compile Include="libSVM_Problem.cs" />
+    <Compile Include="libsvm\libSVM.cs" />
+    <Compile Include="libsvm\libSVM_enums.cs" />
+    <Compile Include="libsvm\libSVM_Grid.cs" />
+    <Compile Include="libsvm\libSVM_internals.cs" />
+    <Compile Include="libsvm\libSVM_Model.cs" />
+    <Compile Include="libsvm\libSVM_Parameter.cs" />
+    <Compile Include="libsvm\libSVM_Problem.cs" />
     <Compile Include="lvtong.cs">
       <DependentUpon>lvtong.xsd</DependentUpon>
       <SubType>Component</SubType>
@@ -81,6 +101,21 @@
       <DependentUpon>lvtong.xsd</DependentUpon>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Compile>
+    <Compile Include="pca\CholeskyDecomposition.cs" />
+    <Compile Include="pca\Distance.cs" />
+    <Compile Include="pca\EigenValueDecomposition.cs" />
+    <Compile Include="pca\Gaussian.cs" />
+    <Compile Include="pca\IKernel.cs" />
+    <Compile Include="pca\KernelPrincipalComponentAnalysis.cs" />
+    <Compile Include="pca\Linear.cs" />
+    <Compile Include="pca\LuDecomposition.cs" />
+    <Compile Include="pca\Matrix.cs" />
+    <Compile Include="pca\Polynomial.cs" />
+    <Compile Include="pca\PrincipalComponentAnalysis.cs" />
+    <Compile Include="pca\QrDecomposition.cs" />
+    <Compile Include="pca\Sigmoid.cs" />
+    <Compile Include="pca\SingularValueDecomposition.cs" />
+    <Compile Include="pca\Tools.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
@@ -93,6 +128,21 @@
     <Content Include="libsvm.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="pca\AForge.Controls.dll" />
+    <Content Include="pca\AForge.dll" />
+    <Content Include="pca\AForge.Fuzzy.dll" />
+    <Content Include="pca\AForge.Genetic.dll" />
+    <Content Include="pca\AForge.Imaging.dll" />
+    <Content Include="pca\AForge.Imaging.Formats.dll" />
+    <Content Include="pca\AForge.MachineLearning.dll" />
+    <Content Include="pca\AForge.Math.dll" />
+    <Content Include="pca\AForge.Neuro.dll" />
+    <Content Include="pca\AForge.Robotics.Lego.dll" />
+    <Content Include="pca\AForge.Robotics.TeRK.dll" />
+    <Content Include="pca\AForge.Video.DirectShow.dll" />
+    <Content Include="pca\AForge.Video.dll" />
+    <Content Include="pca\AForge.Video.VFW.dll" />
+    <Content Include="pca\AForge.Vision.dll" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.0,Profile=Client">
@@ -136,6 +186,11 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

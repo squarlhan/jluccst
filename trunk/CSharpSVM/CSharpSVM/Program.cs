@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Data;
 using System.Data.SqlClient;
+using System.Windows.Forms;
 namespace CSharpSVM
 {
     class Program
@@ -17,6 +18,10 @@ namespace CSharpSVM
             TimeSpan ts = DateTime.Now - dt;
             Console.WriteLine(ts);
             Console.ReadLine();
+
+            //Application.EnableVisualStyles();
+            //Application.SetCompatibleTextRenderingDefault(false);
+            //Application.Run(new Form1());
             
 
             //libSVM_Problem Problem = libSVM_Problem.Load("../../data/train.dat");

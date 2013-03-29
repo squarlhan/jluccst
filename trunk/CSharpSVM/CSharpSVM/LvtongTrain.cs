@@ -53,7 +53,7 @@ namespace CSharpSVM
                               ",[E10]" +
                               ",[E11]" +
                               ",substring([E15],5,2) as [E15-2]" +
-                              ",cast([E04] as float)/100 as [E04]" +
+                              ",[E04]" +
                               ",datediff(minute,[E03], [E06]) as [E63]" +
                           "FROM [绿通数据].[dbo].[通关车辆信息表] where E09<=6 and [e11] not like '%,%' and [e11]!='4'";
             SqlCommand cmd = new SqlCommand(str, con);
@@ -70,6 +70,10 @@ namespace CSharpSVM
                 //}
                 //Console.WriteLine();
                 LvtongTrainData lv = new LvtongTrainData();
+                if (mDr[1].ToString().Trim().Length < 1)
+                {
+                    continue;
+                }
                 lv.in_M = int.Parse(mDr[1].ToString());
                 lv.in_D = int.Parse(mDr[2].ToString());
                 lv.in_H = int.Parse(mDr[3].ToString());
@@ -81,7 +85,15 @@ namespace CSharpSVM
                 lv.chezhong = double.Parse(mDr[9].ToString());
                 lv.zaihuo = int.Parse(mDr[10].ToString());
                 lv.bianhao = int.Parse(mDr[11].ToString());
-                lv.ruguan = double.Parse(mDr[12].ToString());
+                if (Char.IsNumber(mDr[12].ToString(), 2))
+                {
+                    lv.ruguan = double.Parse(mDr[12].ToString());
+                }
+                else 
+                {
+                    lv.ruguan = double.Parse(mDr[12].ToString().Substring(0, 2))*10; 
+                }
+                lv.ruguan = lv.ruguan / 100;
                 lv.shijiancha = int.Parse(mDr[13].ToString());
                 lv.shijiancha = lv.shijiancha < 0 ? lv.shijiancha + 1440 : lv.shijiancha;
                 //Console.WriteLine(lv);
