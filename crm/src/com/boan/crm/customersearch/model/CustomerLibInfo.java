@@ -23,9 +23,9 @@ import org.hibernate.annotations.GenericGenerator;
  */
 @Entity
 @Table(name = "CUSTOMER_LIB_INFO")
-//@Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
-@Inheritance(strategy = InheritanceType.JOINED)
-@org.hibernate.annotations.Polymorphism(type=org.hibernate.annotations.PolymorphismType.EXPLICIT)
+@Inheritance(strategy=InheritanceType.TABLE_PER_CLASS)
+//@Inheritance(strategy = InheritanceType.JOINED)
+//@org.hibernate.annotations.Polymorphism(type=org.hibernate.annotations.PolymorphismType.EXPLICIT)
 public class CustomerLibInfo implements Serializable
 {
 	/**
@@ -95,7 +95,7 @@ public class CustomerLibInfo implements Serializable
 	@Column(name = "POSTCODE")
 	private String postCode = null;
 	@Column(name = "IMPORTANT_FLAG",nullable=false)
-	private int importantFlag = 0;
+	private Integer importantFlag = 0;
 	
 	//管理员设的不在查询（0：查询  1：不查询）
 	@Column(name = "no_Search"  ,nullable=false,columnDefinition="INT default 0")
@@ -548,10 +548,10 @@ public class CustomerLibInfo implements Serializable
 	public void setNoSearch(int noSearch) {
 		this.noSearch = noSearch;
 	}
-	public int getImportantFlag() {
+	public Integer getImportantFlag() {
 		return importantFlag;
 	}
-	public void setImportantFlag(int importantFlag) {
+	public void setImportantFlag(Integer importantFlag) {
 		this.importantFlag = importantFlag;
 	}
 }
