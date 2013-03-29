@@ -23,6 +23,12 @@ public interface ICustomerLibInfoService {
 	 * 根据id获取客户
 	 */
 	public CustomerLibInfo get(String id);
+	
+	/**
+	 * 根据id获取客户
+	 */
+	public CustomerLibInfo getCustomerLibInfoView(String id);
+
 
 	/**
 	 * 根据id删除客户
