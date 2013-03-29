@@ -311,6 +311,23 @@ public class CustomerLibInfoServiceImpl implements ICustomerLibInfoService{
 	public CustomerLibInfo get(String id) {
 		return customerLibInfoDao.get(id);
 	}
+	
+	/**
+	 * 根据id获取客户
+	 */
+	@Override
+	public CustomerLibInfo getCustomerLibInfoView(String id){
+		String hql = "from CustomerLibInfoView where id=:id";
+		Map param = new HashMap();
+		param.put("id", id);
+		CustomerLibInfo customerInfo =null;
+		List data = customerLibInfoDao.find(hql, param);
+		for(int i=0;i<data.size();i++){
+			customerInfo =(CustomerLibInfo)ParseBeanUtil.parseBean(data.get(i), CustomerLibInfo.class);
+		}
+		return customerInfo;
+	}
+
 
 	@Override
 	public void save(CustomerLibInfo CustomerLibInfo) {
