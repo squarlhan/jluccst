@@ -115,7 +115,12 @@ public class TimePlanServiceImpl implements ITimePlanService {
 				strb.append(" And organId=:organId");
 			}
 		}
-		String hql = "from TimePlan "+strb.toString()+" order by submitTime desc , createTime desc";
+		if(params.containsKey("planType")){
+			if(params.get("planType")!=null ){
+				strb.append(" And planType=:planType");
+			}
+		}
+		String hql = "from TimePlan "+strb.toString()+" order by createTime desc,submitTime desc";
 		List<TimePlan> data = timePlanDao.find(hql, params);
 		if(data!=null && data.size()>0){
 			return data.get(0);

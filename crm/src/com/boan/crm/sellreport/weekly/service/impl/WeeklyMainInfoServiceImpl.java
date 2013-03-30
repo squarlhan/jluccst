@@ -95,6 +95,12 @@ public class WeeklyMainInfoServiceImpl implements IWeeklyMainInfoService{
 			if(params.containsKey("personId")){
 				strb.append(" and  personId=:personId  ");
 			}
+			if(params.containsKey("planInterzoneBegin")){
+				strb.append(" and  planInterzoneBegin >='"+params.get("planInterzoneBegin")+"'  ");
+			}
+			if(params.containsKey("planInterzoneEnd")){
+				strb.append(" and  planInterzoneEnd <='"+params.get("planInterzoneEnd")+"'  ");
+			}
 		}
 		String hql = "from WeeklyMainInfo "+strb.toString()+" order by createTime desc";
 		List<WeeklyMainInfo> data = weeklyItemInfoDao.find(hql, params);

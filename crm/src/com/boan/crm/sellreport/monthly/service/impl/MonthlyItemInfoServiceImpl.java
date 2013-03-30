@@ -99,10 +99,14 @@ public class MonthlyItemInfoServiceImpl implements IMonthlyItemInfoService{
 			if(params.containsKey("mainInfoId")){
 				strb.append(" and  mainInfoId=:mainInfoId  ");
 			}
-		}
-		if(params!=null){
 			if(params.containsKey("sellDutyId")){
 				strb.append(" and  sellDutyId=:sellDutyId  ");
+			}
+			if(params.containsKey("planInterzoneBegin")){
+				strb.append(" and  createTime >='"+params.get("planInterzoneBegin")+"'  ");
+			}
+			if(params.containsKey("planInterzoneEnd")){
+				strb.append(" and  createTime <='"+params.get("planInterzoneEnd")+"'  ");
 			}
 		}
 		String hql = "from MonthlyItemInfo "+strb.toString()+" order by createTime desc , sequence asc";

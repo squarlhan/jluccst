@@ -86,6 +86,12 @@ public class SMSInfo {
 	@Column(name = "STATE", length=1)
 	private int state;
 	
+	/**
+	 * 销售记录Id
+	 */
+	@Column(name = "SELL_RECORD_ID")
+	private String sellRecordId;
+	
 	
 	public String getId() {
 		return id;
@@ -146,5 +152,11 @@ public class SMSInfo {
 	}
 	public void setPersonCompany(String personCompany) {
 		this.personCompany = personCompany;
+	}
+	public String getSellRecordId() {
+		return sellRecordId;
+	}
+	public void setSellRecordId(String sellRecordId) {
+		this.sellRecordId = sellRecordId;
 	}
 }

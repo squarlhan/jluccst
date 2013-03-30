@@ -76,9 +76,6 @@
 </div>
 <% if( hasReturn!=null && hasReturn.equals("false")) {%>
 <center>
-<div style="width:100%;height:80px">
-<input name="closeBtn" type="button" class="btn_2_3" id="closeBtn" style="display: none" value="关闭">
-</div>
 </center>
 <%} %>
 </body>

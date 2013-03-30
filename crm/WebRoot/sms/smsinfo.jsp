@@ -153,6 +153,17 @@
 	  		});
 	  		//删除所选
 	  		$("#btn_delAll").click(function(){
+	  			var flag=true;
+  				$("input[name='ids']").each(function(){
+  					if($(this).attr('checked')){
+  						flag=false;
+  						return false;
+  					}
+  				});
+  				if(flag){
+  					alert('请选择所要删除记录！');
+  					return false;
+  				}
 	  			//找到所有名称为row_chb并且被选中的checkbox，然后删去其所在的行
 	  			$(":checkbox[name='ids']:checked").parent().parent().remove();
 	  			$.fn.CheckBoxAll("ids","cbk_all");

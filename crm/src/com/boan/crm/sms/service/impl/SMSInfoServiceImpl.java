@@ -43,6 +43,30 @@ public class SMSInfoServiceImpl implements ISMSInfoService{
 		dao.clearSession();
 		return info;
 	}
+	/**
+	 *  通过销售记录Id获取短信信息
+	 * @param id
+	 */
+	public SMSInfo getSMSInfoBySellRecordId(String sellRecordId){
+		String hql = " from SMSInfo where (state=0 or state=1) and sellRecordId='"+sellRecordId+"'";
+		List<SMSInfo> data = dao.find(hql);
+		if(data!=null && data.size()>0){
+			return data.get(0);
+		}else{
+			return null;
+		}
+	}
+	/**
+	 * 通过销售记录Id删除短信信息
+	 * @param ids
+	 */
+	public void deleteSMSInfoBySellRecordId(String... sellRecordId){
+		String hql = " delete from SMSInfo where (state=0 or state=1) and sellRecordId in (:sellRecordId)";
+		Map<String, Object> values = new HashMap();
+		values.put("sellRecordId", sellRecordId);
+		dao.executeHql(hql , values);
+	}
+	
 	
 	/**
 	 * 修改短信信息

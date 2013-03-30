@@ -97,6 +97,12 @@ public class MonthlyMainInfoServiceImpl implements IMonthlyMainInfoService{
 			if(params.containsKey("personId")){
 				strb.append(" and  personId=:personId  ");
 			}
+			if(params.containsKey("planInterzoneBegin")){
+				strb.append(" and  planInterzoneBegin >='"+params.get("planInterzoneBegin")+"'  ");
+			}
+			if(params.containsKey("planInterzoneEnd")){
+				strb.append(" and  planInterzoneEnd <='"+params.get("planInterzoneEnd")+"'  ");
+			}
 		}
 		String hql = "from MonthlyMainInfo "+strb.toString()+" order by createTime desc";
 		List<MonthlyMainInfo> data = monthlyMainInfoDao.find(hql, params);

@@ -44,4 +44,10 @@ public interface IGoodsTypeService {
 	 */
 	public Pagination<GoodsType> findGoodsTypeForPage(Map<String, ?> values,
 			Pagination<GoodsType> pagination);
+	
+	
+	/**
+	 * 获得所有商品类别并且带有类别下的产品信息
+	 */
+	public List<GoodsType> findAllGoodsTypeHasGoodsInfo(String companyId);
 }

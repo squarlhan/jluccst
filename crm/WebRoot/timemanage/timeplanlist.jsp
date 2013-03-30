@@ -92,6 +92,17 @@
 	  		 * 删除所选设备信息
 	  		 */
 	  		$("#deletepointbtn").click(function(){
+  				var flag=true;
+  				$("input[name='ids']").each(function(){
+  					if($(this).attr('checked')){
+  						flag=false;
+  						return false;
+  					}
+  				});
+  				if(flag){
+  					alert('请选择所要删除记录！');
+  					return false;
+  				}
   				var url = "deleteTimePlanAction.action";
   				if(window.confirm("您确定要删除所选信息吗？")){
   					$.post(url, $('#form1').serialize(), function(data){window.location.href=window.location.href;});

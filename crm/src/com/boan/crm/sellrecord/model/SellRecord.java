@@ -165,6 +165,12 @@ public class SellRecord implements Serializable {
 	 */
 	@Column(name = "BARGAIN_TIME")
 	private Calendar  bargainTime;
+	
+	/**
+	 * 还款时间
+	 */
+	@Column(name = "RETURN_MONEY_TIME")
+	private Calendar  returnMoneyTime;
 
 	public CustomerInfo getCustomer() {
 		return customer;
@@ -308,5 +314,13 @@ public class SellRecord implements Serializable {
 
 	public void setDeptId(String deptId) {
 		this.deptId = deptId;
+	}
+
+	public Calendar getReturnMoneyTime() {
+		return returnMoneyTime;
+	}
+
+	public void setReturnMoneyTime(Calendar returnMoneyTime) {
+		this.returnMoneyTime = returnMoneyTime;
 	}
 }

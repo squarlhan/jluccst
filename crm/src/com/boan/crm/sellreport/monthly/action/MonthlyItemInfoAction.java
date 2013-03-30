@@ -1,6 +1,7 @@
 package com.boan.crm.sellreport.monthly.action;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -11,11 +12,13 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.boan.crm.sellreport.monthly.model.MonthlyItemInfo;
+import com.boan.crm.sellreport.monthly.model.MonthlyMainInfo;
 import com.boan.crm.sellreport.monthly.service.IMonthlyItemInfoService;
+import com.boan.crm.sellreport.monthly.service.IMonthlyMainInfoService;
 import com.boan.crm.sellreport.sellduty.model.SellDuty;
 import com.boan.crm.sellreport.sellduty.service.ISellDutyService;
-import com.boan.crm.sellreport.weekly.model.WeeklyItemInfo;
 import com.boan.crm.utils.action.BaseActionSupport;
+import com.boan.crm.utils.calendar.CurrentDateTime;
 import com.boan.crm.utils.page.Pagination;
 
 @Controller("monthlyItemInfoAction")
@@ -30,6 +33,10 @@ public class MonthlyItemInfoAction extends BaseActionSupport{
 	@Autowired
 	@Qualifier("monthlyItemInfoService")
 	private IMonthlyItemInfoService monthlyItemInfoService = null;
+	
+	@Autowired
+	@Qualifier("monthlyMainInfoService")
+	private IMonthlyMainInfoService monthlyMainInfoService;
 	
 	/**
 	 * 职责类型
@@ -89,6 +96,15 @@ public class MonthlyItemInfoAction extends BaseActionSupport{
 			String mainInfoId = monthlyItemInfo.getMainInfoId();
 			params.put("mainInfoId",mainInfoId);
 			params.put("sellDutyId",monthlyItemInfo.getSellDutyId());
+			
+			MonthlyMainInfo monthlyMainInfo =monthlyMainInfoService.getMonthlyMainInfoById(monthlyItemInfo.getMainInfoId());
+			if(monthlyMainInfo.getPlanInterzoneBegin()!=null && !monthlyMainInfo.getPlanInterzoneBegin().equals(monthlyItemInfo.getMainInfoId())){
+				params.put("planInterzoneBegin", CurrentDateTime.getCurrentDate(monthlyMainInfo.getPlanInterzoneBegin()));
+			}
+			if(monthlyMainInfo.getPlanInterzoneEnd()!=null && !monthlyMainInfo.getPlanInterzoneEnd().equals("")){
+				params.put("planInterzoneEnd", CurrentDateTime.getCurrentDate(monthlyMainInfo.getPlanInterzoneEnd()));
+			}
+			
 			monthlyItemInfo= monthlyItemInfoService.getLastMonthlyItemInfo(params);
 			if(monthlyItemInfo!=null){
 				monthlyItemInfo.setId(null);
@@ -119,6 +135,7 @@ public class MonthlyItemInfoAction extends BaseActionSupport{
 		if(monthlyItemInfo.getId()!=null && monthlyItemInfo.getId().equals("")){
 			monthlyItemInfo.setId(null);
 		}
+		monthlyItemInfo.setCreateTime(Calendar.getInstance());
 		monthlyItemInfoService.saveOrUpdateMonthlyItemInfo(monthlyItemInfo);
 		sellDutyList = sellDutyService.findAllSellDutyByCompanyIdAndDutyType(this.sessionCompanyId,1);
 		message="保存成功！";

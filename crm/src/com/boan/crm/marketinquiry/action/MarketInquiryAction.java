@@ -15,7 +15,9 @@ import org.springframework.stereotype.Controller;
 
 import com.boan.crm.datadictionary.model.DataDictionary;
 import com.boan.crm.datadictionary.service.IDataDictionaryService;
+import com.boan.crm.goods.model.GoodsInfoBase;
 import com.boan.crm.goods.model.GoodsType;
+import com.boan.crm.goods.service.IGoodsInfoBaseService;
 import com.boan.crm.goods.service.IGoodsTypeService;
 import com.boan.crm.groupmanage.model.User;
 import com.boan.crm.groupmanage.service.IDeptmentService;
@@ -46,9 +48,9 @@ public class MarketInquiryAction extends BaseActionSupport{
 	@Qualifier("marketInquiryService")
 	private IMarketInquiryService marketInquiryService = null;
 	
-	@Autowired
-	@Qualifier("dataDictionaryService")
-	private IDataDictionaryService dataDictionaryService= null;
+	@Resource
+	// 商品类别接口类
+	private IGoodsInfoBaseService goodsInfoBaseService;
 	
 	@Resource
 	// 商品类别接口类
@@ -102,7 +104,13 @@ public class MarketInquiryAction extends BaseActionSupport{
 	 */
 	private Calendar endTime;
 	
-	private List<GoodsType> goodsList = null;
+	private String goodsTypeId="";
+	
+	List<DataDictionary> goodsList = new ArrayList<DataDictionary>();
+	
+	private List<GoodsInfoBase> goodsInfoBaseList=null;
+	
+	private List<GoodsType> goodsTypes = null;
 	
 	private String goodsId;
 	
@@ -114,8 +122,7 @@ public class MarketInquiryAction extends BaseActionSupport{
 	 * @return
 	 */
 	public String showGoodsTreeForMarketInquiry() throws Exception {
-		//goodsList = dataDictionaryService.findDataDictionaryByType(sessionCompanyId, 8);
-		goodsList = goodsTypeService.findAllGoodsType(sessionCompanyId);
+		goodsTypes = goodsTypeService.findAllGoodsTypeHasGoodsInfo(this.sessionCompanyId);
 		return "group-tree-for-market_inquiry";
 	}
 	
@@ -125,12 +132,24 @@ public class MarketInquiryAction extends BaseActionSupport{
 	 * @return
 	 */
 	public String showGoodsTreeForMarketInquiryForView() throws Exception {
-		//goodsList = dataDictionaryService.findDataDictionaryByType(sessionCompanyId, 8);
-		goodsList = goodsTypeService.findAllGoodsType(sessionCompanyId);
+		goodsTypes = goodsTypeService.findAllGoodsTypeHasGoodsInfo(this.sessionCompanyId);
 		return "group-tree-for-market-inquiry-for-view.jsp";
 	}
 	
-	
+	/**
+	 * 递归获取商品类别Id
+	 * @param typeId
+	 * @return
+	 */
+	public List recursionGoodsTypeIds(String typeId){
+		List<GoodsType>  list = goodsTypeService.findGoodsTypeByTypeId(this.sessionCompanyId,typeId );
+		List array = new ArrayList();
+		array.add(typeId);
+		for(GoodsType type : list){
+			array.addAll(recursionGoodsTypeIds(type.getId()));
+		}
+		return array;
+	}
 	
 	/**
 	 * 显示计划列表
@@ -146,12 +165,32 @@ public class MarketInquiryAction extends BaseActionSupport{
 		Map<String,Object> params = new HashMap<String, Object>();
 		params.put("personId", this.sessionUserId);
 		params.put("organId", this.sessionCompanyId);
-		params.put("goodsTypeId", goodsId);
-		params.put("goodsName", goodsName);
-		params.put("inquiryPersonName", inquiryPersonName);
-		params.put("goodsStandard", goodsStandard);
-		params.put("beginTime", beginTime); 
-		params.put("endTime", endTime); 
+		
+		
+		List goodsTypeIds = recursionGoodsTypeIds(goodsTypeId);
+		System.out.println(goodsTypeIds.toString());
+		
+		if(goodsTypeId!=null && !goodsTypeId.equals("")){
+			params.put("goodsTypeId", goodsTypeIds);
+		}
+		if(goodsId!=null && !goodsId.equals("")){
+			params.put("goodsId", goodsId);
+		}
+		if(goodsName!=null && !goodsName.equals("")){
+			params.put("goodsName", goodsName);
+		}
+		if(inquiryPersonName!=null && !inquiryPersonName.equals("")){
+			params.put("inquiryPersonName", inquiryPersonName);
+		}
+		if(goodsStandard!=null && !goodsStandard.equals("")){
+			params.put("goodsStandard", goodsStandard);
+		}
+		if(beginTime!=null && !beginTime.equals("")){
+			params.put("beginTime", beginTime); 
+		}
+		if(endTime!=null && !endTime.equals("")){
+			params.put("endTime", endTime); 
+		}
 		pagination = marketInquiryService.findMarketInquiryForPage(params,pagination);
 		
 		return SUCCESS;
@@ -175,7 +214,7 @@ public class MarketInquiryAction extends BaseActionSupport{
 			params.put("organId",sessionCompanyId);
 		}
 		if(goodsId!=null && !goodsId.equals("")){
-			params.put("goodsTypeId", goodsId);
+			params.put("goodsId", goodsId);
 		}
 		params.put("goodsName", goodsName);
 		params.put("inquiryPersonName", inquiryPersonName);
@@ -193,10 +232,15 @@ public class MarketInquiryAction extends BaseActionSupport{
 	 */
 	public String openAddMarketInquiry() throws Exception {
 		System.out.println(goodsId);
-		DataDictionary  goods  =  dataDictionaryService.get(goodsId);
+		GoodsInfoBase  goods  =  goodsInfoBaseService.get(goodsId);
 		marketInquiry = new MarketInquiry();
-		marketInquiry.setGoodsName(goods.getName());
-		marketInquiry.setGoodsTypeId(goodsId);
+		if(goods!=null){
+			marketInquiry.setGoodsName(goods.getName());
+			marketInquiry.setGoodsTypeId(goods.getTypeId());
+			marketInquiry.setGoodsId(goodsId);
+		}else{
+			marketInquiry.setGoodsTypeId(goodsTypeId);
+		}
 		userList =userService.queryUserList( sessionCompanyId, sessionDeptId, new Pagination<User>()).getData();
 		return SUCCESS;
 	}
@@ -323,6 +367,14 @@ public class MarketInquiryAction extends BaseActionSupport{
 		this.endTime = endTime;
 	}
 
+	public List<DataDictionary> getGoodsList() {
+		return goodsList;
+	}
+
+	public void setGoodsList(List<DataDictionary> goodsList) {
+		this.goodsList = goodsList;
+	}
+
 	public String getGoodsId() {
 		return goodsId;
 	}
@@ -339,52 +391,27 @@ public class MarketInquiryAction extends BaseActionSupport{
 		this.companyId = companyId;
 	}
 
-	public IUserService getUserService() {
-		return userService;
+	public List<GoodsInfoBase> getGoodsInfoBaseList() {
+		return goodsInfoBaseList;
 	}
 
-	public void setUserService(IUserService userService) {
-		this.userService = userService;
+	public void setGoodsInfoBaseList(List<GoodsInfoBase> goodsInfoBaseList) {
+		this.goodsInfoBaseList = goodsInfoBaseList;
+	}
+	public List<GoodsType> getGoodsTypes() {
+		return goodsTypes;
 	}
 
-	public IDeptmentService getDeptService() {
-		return deptService;
+	public void setGoodsTypes(List<GoodsType> goodsTypes) {
+		this.goodsTypes = goodsTypes;
 	}
 
-	public void setDeptService(IDeptmentService deptService) {
-		this.deptService = deptService;
+	public String getGoodsTypeId() {
+		return goodsTypeId;
 	}
 
-	public IMarketInquiryService getMarketInquiryService() {
-		return marketInquiryService;
-	}
-
-	public void setMarketInquiryService(IMarketInquiryService marketInquiryService) {
-		this.marketInquiryService = marketInquiryService;
-	}
-
-	public IDataDictionaryService getDataDictionaryService() {
-		return dataDictionaryService;
-	}
-
-	public void setDataDictionaryService(IDataDictionaryService dataDictionaryService) {
-		this.dataDictionaryService = dataDictionaryService;
-	}
-
-	public IGoodsTypeService getGoodsTypeService() {
-		return goodsTypeService;
-	}
-
-	public void setGoodsTypeService(IGoodsTypeService goodsTypeService) {
-		this.goodsTypeService = goodsTypeService;
-	}
-
-	public List<GoodsType> getGoodsList() {
-		return goodsList;
-	}
-
-	public void setGoodsList(List<GoodsType> goodsList) {
-		this.goodsList = goodsList;
+	public void setGoodsTypeId(String goodsTypeId) {
+		this.goodsTypeId = goodsTypeId;
 	}
 
 }

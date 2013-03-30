@@ -54,9 +54,9 @@
 			$('#txt_query_endTime').datetimepicker({showTimepicker: false});
 			
 			$("#addbtn").click(function(){
-				parent.parent.tipsWindown("添加市场调查","iframe:openAddMarketInquiryAction.action?goodsId="+$("#goodsId").val(),"650","300","true","","true","no");
+				parent.parent.tipsWindown("添加市场调查","iframe:openAddMarketInquiryAction.action?goodsId="+$("#goodsId").val()+"&goodsTypeId="+$("#goodsTypeId").val(),"650","300","true","","true","no");
 				parent.parent.$("#windown-close").bind('click',function(){
-					window.location.href="./openMarketInquiryListAction.action?goodsId="+$("#goodsId").val();
+					window.location.href="./openMarketInquiryListAction.action?goodsId="+$("#goodsId").val()+"&goodsTypeId="+$("#goodsTypeId").val();
 				});
 		
 			});
@@ -71,7 +71,7 @@
 	  				var url = $(this).attr("url");
 	  				parent.parent.tipsWindown("修改市场调查","iframe:"+url,"650","300","true","","true","no");
 	  				parent.parent.$("#windown-close").bind('click',function(){
-						window.location.href="./openMarketInquiryListAction.action?goodsId="+$("#goodsId").val();
+						window.location.href="./openMarketInquiryListAction.action?goodsId="+$("#goodsId").val()+"&goodsTypeId="+$("#goodsTypeId").val();
 					});
 	  			});
 	  		});
@@ -92,6 +92,17 @@
 	  		 * 删除所选设备信息
 	  		 */
 	  		$("#deletepointbtn").click(function(){
+	  			var flag=true;
+  				$("input[name='ids']").each(function(){
+  					if($(this).attr('checked')){
+  						flag=false;
+  						return false;
+  					}
+  				});
+  				if(flag){
+  					alert('请选择所要删除记录！');
+  					return false;
+  				}
   				var url = "deleteMarketInquiryAction.action";
   				if(window.confirm("您确定要删除所选信息吗？")){
   					$.post(url, $('#form1').serialize(), function(data){window.location.href=window.location.href;});
@@ -105,6 +116,7 @@
   <body>
  <s:form id="form1" name="form1" method="post" theme="simple" action="openMarketInquiryListForViewAction.action">
  <s:hidden name="goodsId" id="goodsId"></s:hidden>
+ <s:hidden name="goodsTypeId" id="goodsTypeId"></s:hidden>
  
 <table width="100%"  border="0" cellspacing="5" cellpadding="0">
 <tr>
