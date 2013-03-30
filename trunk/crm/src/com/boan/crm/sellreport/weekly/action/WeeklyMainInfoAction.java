@@ -29,6 +29,7 @@ import com.boan.crm.sellreport.weekly.service.IWeeklyItemInfoService;
 import com.boan.crm.sellreport.weekly.service.IWeeklyMainInfoService;
 import com.boan.crm.utils.action.BaseActionSupport;
 import com.boan.crm.utils.calendar.CalendarUtils;
+import com.boan.crm.utils.calendar.CurrentDateTime;
 import com.boan.crm.utils.page.Pagination;
 
 @Controller("weeklyMainInfoAction")
@@ -261,6 +262,12 @@ public class WeeklyMainInfoAction  extends BaseActionSupport{
 			personId = sessionUserId;
 			if(personId!=null && !personId.equals("")){
 				params.put("personId", personId);
+			}
+			if(weeklyMainInfo.getPlanInterzoneBegin()!=null && !weeklyMainInfo.getPlanInterzoneBegin().equals("")){
+				params.put("planInterzoneBegin",CurrentDateTime.getCurrentDate( weeklyMainInfo.getPlanInterzoneBegin()));
+			}
+			if(weeklyMainInfo.getPlanInterzoneEnd()!=null && !weeklyMainInfo.getPlanInterzoneEnd().equals("")){
+				params.put("planInterzoneEnd", CurrentDateTime.getCurrentDate(weeklyMainInfo.getPlanInterzoneEnd()));
 			}
 			weeklyMainInfo= weeklyMainInfoService.getLastWeeklyMainInfo(params);
 		}

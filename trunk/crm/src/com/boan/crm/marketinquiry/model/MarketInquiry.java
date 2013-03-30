@@ -45,6 +45,9 @@ public class MarketInquiry implements Serializable{
 	@Column(name = "GOODS_NAME" , length = 50)
 	private String goodsName;
 	
+	@Column(name = "GOODS_ID" , length = 50)
+	private String goodsId;
+	
 	@Column(name = "FACTORY_NAME" , length = 150)
 	private String factoryName;
 	
@@ -166,5 +169,13 @@ public class MarketInquiry implements Serializable{
 
 	public void setGoodsTypeId(String goodsTypeId) {
 		this.goodsTypeId = goodsTypeId;
+	}
+
+	public String getGoodsId() {
+		return goodsId;
+	}
+
+	public void setGoodsId(String goodsId) {
+		this.goodsId = goodsId;
 	}
 }

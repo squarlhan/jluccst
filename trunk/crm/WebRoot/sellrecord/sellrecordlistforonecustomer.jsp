@@ -176,6 +176,17 @@
 				}
 			});
 			$("#btn_delAll").click(function(){
+				var flag=true;
+  				$("input[name='ids']").each(function(){
+  					if($(this).attr('checked')){
+  						flag=false;
+  						return false;
+  					}
+  				});
+  				if(flag){
+  					alert('请选择所要删除记录！');
+  					return false;
+  				}
 				var url = "deleteSellRecordAction.action";
   				if(window.confirm("您确定要删除所选信息吗？")){
   					$.post(url, $('#form1').serialize(), function(data){window.location.href=window.location.href;});
@@ -210,9 +221,13 @@
 	  			});
 	  		});
 	  		
-	  		$("#closeBtn").click(function(){
+	  		$("#returnBtn").click(function(){
 	  			//parent.$("#windown-close").click();
 	  			parent.parent.location.href = "customer/mycustomermanage.jsp";
+	  		});
+	  		
+	  		$("#closeBtn").click(function(){
+	  			parent.parent.parent.$("#windown-close").click();
 	  		});
 
 		});
@@ -284,10 +299,10 @@
 			</table>
 		</span>
 		</fieldset>
-		<input name="btn_add" type="button" class="btn_4" id="btn_add" value="添加销售记录">
+		<input name="btn_add" type="button" class="btn_5" id="btn_add" value="添加销售记录">
 		<input name="btn_delAll" type="button" class="btn_2_3" id="btn_delAll" value="删除所选">
 		<% if(hasReturn==null || !hasReturn.equals("false")) {%>
-		<input type="button" name="closeBtn" id="closeBtn" value="返回客户列表" class="btn_5" />
+		<input type="button" name="returnBtn" id="closeBtn" value="返回客户列表" class="btn_5" />
 		<%} %>
 		
    		<table id="recordsList" width="100%"  border="0" cellpadding="5" cellspacing="1" bgcolor="#d5e4fd">
@@ -343,6 +358,19 @@
 				<page:pages currentPage="pagination.currentPage" totalPages="pagination.totalPages" totalRows="pagination.totalRows" styleClass="page" theme="text" ></page:pages> 
 			  </td>
 	        </tr>
+	        <% if(hasReturn.equals("false")) {%>
+	        <tr>
+				<td height="26" colspan="11" align="center" bgcolor="#FFFFFF">
+					<table>
+						<tr>
+							<td>
+								<input name="closeBtn" type="button" class="btn_2_3" id="closeBtn" value="关闭">
+							</td>
+						</tr>
+					</table>
+				</td>
+			</tr>
+			<%} %>
 		</table>
 	</s:form>
   </body>

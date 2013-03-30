@@ -109,13 +109,28 @@ public class SellRecordServiceImpl implements ISellRecordService {
 		if(values.containsKey("companyId")){
 			param = param.append("  and record. companyId ='"+values.get("companyId")+"'  ");
 		}
+		/////////////////
+		if(values.get("queryAmountBegin")!=null && !values.get("queryAmountBegin").equals("")){
+			param = param.append("   and record.receivable >= "+values.get("queryAmountBegin") );
+		}
+		if(values.get("queryAmountEnd")!=null && !values.get("queryAmountEnd").equals("")){
+			param = param.append("  and  record.receivable <= "+values.get("queryAmountEnd"));
+		}
+		if(values.get("queryIsArrearage")!=null && values.get("queryIsArrearage").equals("0")){
+			param = param.append("  and  record.debt  = 0 ");
+		}
+		if(values.get("queryIsArrearage")!=null && values.get("queryIsArrearage").equals("1")){
+			param = param.append(" and  record.debt > 0");
+		}
+		/////////////////
 		String hql = "select new SellRecord" +
 				"(record.id,record. goodsType,record. customerId,record. customerName," +
 				"record. salesmanId,record. salesmanName,record. orderID,record. rate," +
 				"record. receivable,record. realCollection,record. debt,record. advance," +
 				"record. invoice,record. bargainTime) " +
 				"from SellRecord as record,CustomerInfo as customer where 1=1 " +
-				"and record.customerId=customer.id "+param.toString()+"order by receivable desc,record.bargainTime desc";
+				"and record.customerId=customer.id "+param.toString()+"" +
+				" order by receivable desc,record.bargainTime desc";
 		List<SellRecord> data =sellRecordDao.findForPage(hql, values, pagination.getStartIndex(), pagination.getPageSize());
 		for(int i=0;i<data.size();i++){
 			SellRecord temp  = data.get(i);

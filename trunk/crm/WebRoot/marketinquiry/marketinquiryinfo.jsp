@@ -108,6 +108,7 @@
 		<s:hidden id="hid_message" name="message"></s:hidden>
 		<s:hidden id="hid_marketInquiryId" name="marketInquiry.id"></s:hidden>
 		<s:hidden id="hid_marketInquirygoodsTypeId" name="marketInquiry.goodsTypeId"></s:hidden>
+		<s:hidden id="hid_marketInquirygoodsId" name="marketInquiry.goodsId"></s:hidden>
 		<s:hidden id="hid_marketInquiryCreateTime" name="marketInquiry.createTime"></s:hidden>
 		<s:hidden id="hid_personId" name="marketInquiry.personId"></s:hidden>
 		<s:hidden id="hid_organId" name="marketInquiry.organId"></s:hidden>

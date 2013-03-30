@@ -41,7 +41,11 @@ import com.boan.crm.servicemanage.model.PointInfo;
 import com.boan.crm.servicemanage.service.IMemberInfoService;
 import com.boan.crm.servicemanage.service.IMemberTypeService;
 import com.boan.crm.servicemanage.service.IPointInfoService;
+import com.boan.crm.sms.model.SMSInfo;
+import com.boan.crm.sms.service.ISMSInfoService;
+import com.boan.crm.sms.service.ISMSManageService;
 import com.boan.crm.utils.action.BaseActionSupport;
+import com.boan.crm.utils.calendar.CurrentDateTime;
 import com.boan.crm.utils.page.Pagination;
 
 @Controller("sellRecordAction")
@@ -120,6 +124,27 @@ public class SellRecordAction extends BaseActionSupport {
 	 * 销售记录信息
 	 */
 	private SellRecord sellRecord;
+	
+	/**
+	 * 销售记录短信通知对象
+	 */
+	private SMSInfo smsInfo = new SMSInfo();
+	private String smsSendDay;
+	private String smsSendTime;
+	
+	private String queryAmountBegin="";
+	
+	private String queryAmountEnd="";
+	
+	private String queryIsArrearage="";
+	
+	@Autowired
+	@Qualifier("SMSInfoService")
+	private ISMSInfoService smsInfoService;
+	
+	@Autowired
+	@Qualifier("SMSManageService")
+	private ISMSManageService smsManageService;
 
 	@Autowired
 	@Qualifier("sellRecordService")
@@ -212,6 +237,16 @@ public class SellRecordAction extends BaseActionSupport {
 		if (userId != null && !userId.trim().equals("")) {
 			params.put("salesmanId", userId);
 		}
+		//销售总额相关条件
+		if (queryIsArrearage != null && !queryIsArrearage.equals("")) {
+			params.put("queryIsArrearage", queryIsArrearage);
+		}
+		if (queryAmountBegin != null && queryAmountBegin.length() > 0) {
+			params.put("queryAmountBegin", queryAmountBegin);
+		}
+		if (queryAmountEnd != null && queryAmountEnd.length() > 0) {
+			params.put("queryAmountEnd", queryAmountEnd);
+		}
 		pagination = sellRecordService.findSellRecordForPage(params, pagination);
 		return SUCCESS;
 	}
@@ -237,6 +272,16 @@ public class SellRecordAction extends BaseActionSupport {
 		}
 		if (queryBargainTimeBegin != null && !queryBargainTimeBegin.trim().equals("")) {
 			params.put("queryBargainTimeEnd", queryBargainTimeEnd);
+		}
+		//销售总额相关条件
+		if (queryIsArrearage != null && !queryIsArrearage.equals("")) {
+			params.put("queryIsArrearage", queryIsArrearage);
+		}
+		if (queryAmountBegin != null && queryAmountBegin.length() > 0) {
+			params.put("queryAmountBegin", queryAmountBegin);
+		}
+		if (queryAmountEnd != null && queryAmountEnd.length() > 0) {
+			params.put("queryAmountEnd", queryAmountEnd);
 		}
 		UserSession userSession = this.getSession();
 		params.put("salesmanId", userSession.getUserId());
@@ -369,6 +414,11 @@ public class SellRecordAction extends BaseActionSupport {
 		String serialNo = date + String.format("%05d", number);
 		sellRecord.setOrderID(serialNo);
 		sellRecord.setDeptId(userSession.getDeptId());
+		
+		//短信通知号码
+		smsInfo.setPhone(this.sessionUserPhone);
+		smsSendDay=CurrentDateTime.getCurrentDate();
+		smsSendTime="09:00";
 		return SUCCESS;
 	}
 
@@ -379,6 +429,13 @@ public class SellRecordAction extends BaseActionSupport {
 		}
 		sellRecord = sellRecordService.getSellRecordById(sellRecord.getId());
 		goodsTypes = goodsTypeService.findAllGoodsType(sessionCompanyId);
+		
+		//获取短信通知对象
+		smsInfo= smsInfoService.getSMSInfoBySellRecordId(sellRecord.getId());
+		if(smsInfo!=null){
+			smsSendDay=CurrentDateTime.getCurrentDate(smsInfo.getSendTime());
+			smsSendTime=CurrentDateTime.getCurrentTime(smsInfo.getSendTime());
+		}
 		return SUCCESS;
 	}
 
@@ -438,6 +495,51 @@ public class SellRecordAction extends BaseActionSupport {
 				sellRecord.setId(null);
 			}
 			sellRecordService.saveOrUpdate(sellRecord);
+
+			SMSInfo tempSmsInfo= smsInfoService.getSMSInfoBySellRecordId(sellRecord.getId());
+			if(tempSmsInfo!=null){
+				tempSmsInfo.setPhone(smsInfo.getPhone());
+				tempSmsInfo.setInfo(smsInfo.getInfo());
+				Calendar time = Calendar.getInstance();
+				if(smsSendDay!=null && smsSendTime!=null && !smsSendDay.equals("") && !smsSendTime.equals("")){
+					String[] dayArray = smsSendDay.split("-");
+					String[] timeArray = smsSendTime.split(":");
+					if(dayArray.length>0 && timeArray.length>0){
+						time.set(Calendar.YEAR, Integer.parseInt(dayArray[0]));
+						time.set(Calendar.MONTH, Integer.parseInt(dayArray[1])-1);
+						time.set(Calendar.DATE, Integer.parseInt(dayArray[2]));
+						time.set(Calendar.HOUR_OF_DAY, Integer.parseInt(timeArray[0]));
+						time.set(Calendar.MINUTE, Integer.parseInt(timeArray[1]));
+					}
+				}
+				smsInfo.setSendTime(time);
+				smsInfo = tempSmsInfo;
+				smsInfoService.saveSMSInfo(smsInfo);
+			}else{
+				//保存短信通知对象
+				if(smsInfo.getPhone()!=null && !smsInfo.getPhone().equals("") && smsInfo.getInfo()!=null && !smsInfo.getInfo().equals("")){
+					smsInfo.setIsImmediately(1);
+					smsInfo.setSellRecordId(sellRecord.getId());
+					smsInfo.setOrganId(this.sessionCompanyId);
+					smsInfo.setPersonName(this.sessionUserCName);
+					smsInfo.setPersonCompany(this.sessionCompanyName);
+					Calendar time = Calendar.getInstance();
+					if(smsSendDay!=null && smsSendTime!=null && !smsSendDay.equals("") && !smsSendTime.equals("")){
+						String[] dayArray = smsSendDay.split("-");
+						String[] timeArray = smsSendTime.split(":");
+						if(dayArray.length>0 && timeArray.length>0){
+							time.set(Calendar.YEAR, Integer.parseInt(dayArray[0]));
+							time.set(Calendar.MONTH, Integer.parseInt(dayArray[1])-1);
+							time.set(Calendar.DATE, Integer.parseInt(dayArray[2]));
+							time.set(Calendar.HOUR_OF_DAY, Integer.parseInt(timeArray[0]));
+							time.set(Calendar.MINUTE, Integer.parseInt(timeArray[1]));
+						}
+					}
+					smsInfo.setSendTime(time);
+					smsInfoService.saveSMSInfo(smsInfo);
+				}
+			}
+			
 			serviceData(sellRecord.getCustomerId(), sellRecord.getCustomerName(), sellRecord.getBargainTime(), sellRecord.getId(), sellRecord.getRealCollection().floatValue());
 			message = "保存成功！";
 		} catch (Exception e) {
@@ -448,15 +550,6 @@ public class SellRecordAction extends BaseActionSupport {
 		// return "message";
 		return SUCCESS;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	
 	//////////////////////////////////////////////
@@ -488,6 +581,11 @@ public class SellRecordAction extends BaseActionSupport {
 		String serialNo = date + String.format("%05d", number);
 		sellRecord.setOrderID(serialNo);
 		sellRecord.setDeptId(userSession.getDeptId());
+		
+		//短信通知号码
+		smsInfo.setPhone(this.sessionUserPhone);
+		smsSendDay=CurrentDateTime.getCurrentDate();
+		smsSendTime="09:00";
 		return SUCCESS;
 	}
 
@@ -498,6 +596,12 @@ public class SellRecordAction extends BaseActionSupport {
 		}
 		sellRecord = sellRecordService.getSellRecordById(sellRecord.getId());
 		goodsTypes = goodsTypeService.findAllGoodsType(sessionCompanyId);
+		//获取短信通知对象
+		smsInfo= smsInfoService.getSMSInfoBySellRecordId(sellRecord.getId());
+		if(smsInfo!=null){
+			smsSendDay=CurrentDateTime.getCurrentDate(smsInfo.getSendTime());
+			smsSendTime=CurrentDateTime.getCurrentTime(smsInfo.getSendTime());
+		}
 		return SUCCESS;
 	}
 	public String openModifySellRecordForOneCustomerView() {
@@ -566,6 +670,50 @@ public class SellRecordAction extends BaseActionSupport {
 				sellRecord.setId(null);
 			}
 			sellRecordService.saveOrUpdate(sellRecord);
+			SMSInfo tempSmsInfo= smsInfoService.getSMSInfoBySellRecordId(sellRecord.getId());
+			if(tempSmsInfo!=null){
+				tempSmsInfo.setPhone(smsInfo.getPhone());
+				tempSmsInfo.setInfo(smsInfo.getInfo());
+				Calendar time = Calendar.getInstance();
+				if(smsSendDay!=null && smsSendTime!=null && !smsSendDay.equals("") && !smsSendTime.equals("")){
+					String[] dayArray = smsSendDay.split("-");
+					String[] timeArray = smsSendTime.split(":");
+					if(dayArray.length>0 && timeArray.length>0){
+						time.set(Calendar.YEAR, Integer.parseInt(dayArray[0]));
+						time.set(Calendar.MONTH, Integer.parseInt(dayArray[1])-1);
+						time.set(Calendar.DATE, Integer.parseInt(dayArray[2]));
+						time.set(Calendar.HOUR_OF_DAY, Integer.parseInt(timeArray[0]));
+						time.set(Calendar.MINUTE, Integer.parseInt(timeArray[1]));
+					}
+				}
+				smsInfo.setSendTime(time);
+				smsInfo = tempSmsInfo;
+				smsInfoService.saveSMSInfo(smsInfo);
+			}else{
+				//保存短信通知对象
+				if(smsInfo.getPhone()!=null && !smsInfo.getPhone().equals("") && smsInfo.getInfo()!=null && !smsInfo.getInfo().equals("")){
+					smsInfo.setIsImmediately(1);
+					smsInfo.setSellRecordId(sellRecord.getId());
+					smsInfo.setOrganId(this.sessionCompanyId);
+					smsInfo.setPersonName(this.sessionUserCName);
+					smsInfo.setPersonCompany(this.sessionCompanyName);
+					Calendar time = Calendar.getInstance();
+					if(smsSendDay!=null && smsSendTime!=null && !smsSendDay.equals("") && !smsSendTime.equals("")){
+						String[] dayArray = smsSendDay.split("-");
+						String[] timeArray = smsSendTime.split(":");
+						if(dayArray.length>0 && timeArray.length>0){
+							time.set(Calendar.YEAR, Integer.parseInt(dayArray[0]));
+							time.set(Calendar.MONTH, Integer.parseInt(dayArray[1])-1);
+							time.set(Calendar.DATE, Integer.parseInt(dayArray[2]));
+							time.set(Calendar.HOUR_OF_DAY, Integer.parseInt(timeArray[0]));
+							time.set(Calendar.MINUTE, Integer.parseInt(timeArray[1]));
+						}
+					}
+					smsInfo.setSendTime(time);
+					smsInfoService.saveSMSInfo(smsInfo);
+				}
+			}
+			
 			serviceData(sellRecord.getCustomerId(), sellRecord.getCustomerName(), sellRecord.getBargainTime(), sellRecord.getId(), sellRecord.getRealCollection().floatValue());
 			message = "保存成功！";
 		} catch (Exception e) {
@@ -577,17 +725,6 @@ public class SellRecordAction extends BaseActionSupport {
 		return SUCCESS;
 	}
 	////////////////////////////////
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 
 	public String modifySellRecord() {
 		return SUCCESS;
@@ -595,6 +732,7 @@ public class SellRecordAction extends BaseActionSupport {
 
 	public String deleteSellRecord() {
 		sellRecordService.deleteSellRecordByIds(ids);
+		smsInfoService.deleteSMSInfoBySellRecordId(ids);
 		return NONE;
 	}
 
@@ -955,5 +1093,41 @@ public class SellRecordAction extends BaseActionSupport {
 	}
 	public void setGoodsInfoBaseId(String goodsInfoBaseId) {
 		this.goodsInfoBaseId = goodsInfoBaseId;
+	}
+	public SMSInfo getSmsInfo() {
+		return smsInfo;
+	}
+	public void setSmsInfo(SMSInfo smsInfo) {
+		this.smsInfo = smsInfo;
+	}
+	public String getSmsSendDay() {
+		return smsSendDay;
+	}
+	public void setSmsSendDay(String smsSendDay) {
+		this.smsSendDay = smsSendDay;
+	}
+	public String getSmsSendTime() {
+		return smsSendTime;
+	}
+	public void setSmsSendTime(String smsSendTime) {
+		this.smsSendTime = smsSendTime;
+	}
+	public String getQueryAmountBegin() {
+		return queryAmountBegin;
+	}
+	public void setQueryAmountBegin(String queryAmountBegin) {
+		this.queryAmountBegin = queryAmountBegin;
+	}
+	public String getQueryAmountEnd() {
+		return queryAmountEnd;
+	}
+	public void setQueryAmountEnd(String queryAmountEnd) {
+		this.queryAmountEnd = queryAmountEnd;
+	}
+	public String getQueryIsArrearage() {
+		return queryIsArrearage;
+	}
+	public void setQueryIsArrearage(String queryIsArrearage) {
+		this.queryIsArrearage = queryIsArrearage;
 	}
 }

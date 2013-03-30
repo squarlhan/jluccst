@@ -82,6 +82,17 @@
 	  		//删除所选
 	  		$("#btn_delAll").click(function(){
 	  			//找到所有名称为row_chb并且被选中的checkbox，然后删去其所在的行
+	  			var flag=true;
+  				$("input[name='ids']").each(function(){
+  					if($(this).attr('checked')){
+  						flag=false;
+  						return false;
+  					}
+  				});
+  				if(flag){
+  					alert('请选择所要删除记录！');
+  					return false;
+  				}
 	  			$(":checkbox[name='ids']:checked").parent().parent().remove();
 	  			$.fn.CheckBoxAll("ids","cbk_all");
 	  			if($("#personList tr:has(input[type='checkbox'])").length==1){
@@ -213,6 +224,7 @@
 		/**
 	  	 * 动态添加全部人员
 	  	 */
+	  	 /*
 		$.fn.dynamicsAddAllPerson = function(){
 			$("#btn_AddAllPerson").click(function(){
  				$.ajax({
@@ -260,6 +272,63 @@
  					error: function(){
  					}
  				});
+			});
+		};
+		//*/
+		/**
+	  	 * 动态添加全部人员
+	  	 */
+		$.fn.dynamicsAddAllPerson = function(){
+			$("#btn_AddAllPerson").click(function(){
+				parent.parent.setPerson=function(type){
+					$.ajax({
+						type:"post",
+						url: "loadCustomerInfoForAjaxAction.action",
+						data:{personIds:type},
+						beforeSend: function(XMLHttpRequest){
+						},
+						success: function(data, textStatus){
+							try{
+								//将字符串转换为json对象
+								data = eval("("+data+")");
+								$.each(data.customerInfoList,function(i,value){
+									if($("#"+value.id).length==0){
+		  								var row="";
+		  								row=row+"<tr>";
+		  					  			row=row+"<td align='center' bgcolor='#FFFFFF' >";  
+		  					  			row=row+"<input type='checkbox' name='ids'/>";
+		  					  			row=row+"<input type='hidden' id='"+value.id+"' name='selectedIds' value='"+value.id+"'/>";
+		  					  			row=row+"</td>";
+		  					  			row=row+"<td align='center' bgcolor='#FFFFFF'>"+(value.name==null ? "" : value.name) +"</td>";
+		  					  			var lunar = value.isLunarCalender=="0"?"(阴历)":"(阳历)";
+		  					  			row=row+"<td align='center' bgcolor='#FFFFFF'>"+(value.birthday==null ? "" : value.birthday.substring(0,10)+"<font color='red'>"+lunar) +"</font></td>";
+		  					  			row=row+"<td align='center' bgcolor='#FFFFFF'>"+(value.phone==null ? "" : value.phone) +"</td>";
+		  					  			row=row+"<td align='center' bgcolor='#FFFFFF'>"+(value.categoryId==1 ? "客户" : "工作人员" )+"</td>";
+		  					  			row=row+"<td align='center' bgcolor='#FFFFFF'>"+(value.unit==null ? "" : value.unit )+"</td>";
+		  					  			row=row+"<td align='center' bgcolor='#FFFFFF'>"+(value.post==null ? "" : value.post)+"</td>";
+		  					  			row=row+"<td align='center' bgcolor='#FFFFFF'>"+(value.nickname==null ? "" : value.nickname)+"</td>";
+		  					  			row=row+"<td align='center' bgcolor='#FFFFFF'><a id='del_one' href='javascript:void(0);'>删除</a></td>";
+		  					  			row=row+"</tr>";
+		  					  			$("#no_data").hide();
+		  					  		    $("#personList tr:first").append(row);
+		  					  		    $("#cbk_all").attr("checked", false);
+		  				  			    $("#cbk_all").attr("disabled",false);
+		 								}else{
+		 									alert("有重复数据！");
+		 								}
+								 });
+							}catch(e){
+								alert(e.description);
+							}
+						},
+						complete: function(XMLHttpRequest, textStatus){
+						},
+						error: function(){
+						}
+					});
+				};
+				parent.parent.tipsWindown("选择类型","iframe:<%=basePath%>sms/selecttype.html","400","150","true","","true","no");
+				
 			});
 		};
 		

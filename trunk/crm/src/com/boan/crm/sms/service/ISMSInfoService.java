@@ -28,6 +28,18 @@ public interface ISMSInfoService {
 	public SMSInfo getSMSInfo(String id);
 	
 	/**
+	 *  通过销售记录Id获取短信信息
+	 * @param id
+	 */
+	public SMSInfo getSMSInfoBySellRecordId(String sellRecordId);
+	
+	/**
+	 * 通过销售记录Id删除短信信息
+	 * @param ids
+	 */
+	public void deleteSMSInfoBySellRecordId(String... sellRecordId);
+	
+	/**
 	 * 修改短信信息
 	 * @param info
 	 */

@@ -34,12 +34,15 @@
   <script type="text/javascript">
 		<!--
 		d = new dTree('d','<%=path%>');
-		d.add(0,-1,'<s:property value="commpanyName"/>公司产品','./openMarketInquiryListForViewAction.action?companyId=<s:property value="commpanyId"/>&goodsId=<s:property value="id"/>&who=session','','groupmain');
-		<s:iterator value="goodsList">
-			d.add('<s:property value="id"/>','<s:property value="fatherId"/>','<s:property value="name"/>','./openMarketInquiryListForViewAction.action?companyId=<s:property value="commpanyId"/>&goodsId=<s:property value="id"/>&who=session','','groupmain','<%=path%>/js/tree/img/folder.gif');
+		d.add(0,-1,'<s:property value="commpanyName"/>公司产品','./openMarketInquiryListForViewAction.action?companyId=<s:property value="commpanyId"/>&goodsTypeId=0&goodsId=&who=session','','groupmain');
+		<s:iterator value="goodsTypes">
+			d.add("<s:property value="id"/>","<s:property value="fatherId"/>",'<s:property value="name"/>','./openMarketInquiryListForViewAction.action?companyId=<s:property value="commpanyId"/>&goodsTypeId=<s:property value="id"/>&goodsId=&who=session','','groupmain','<%=path%>/js/tree/img/folder.gif','<%=path%>/js/tree/img/folder.gif');
+			<s:iterator value="goodsInfos">
+				d.add("<s:property value="id"/>","<s:property value="typeId"/>",'<s:property value="name"/>','./openMarketInquiryListForViewAction.action?companyId=<s:property value="commpanyId"/>&goodsTypeId=<s:property value="typeId"/>&goodsId=<s:property value="id"/>&who=session','','groupmain','<%=path%>/js/tree/img/group.gif','<%=path%>/js/tree/img/group.gif');
+			</s:iterator>
 		</s:iterator>
+		
 		document.write(d);
-		d.openAll();
 		//-->
 	</script>
 </div>

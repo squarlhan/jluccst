@@ -157,6 +157,15 @@
 											<font color="red">*</font>
 										</td>
 									</tr>
+									
+									<tr>
+										<td height="26" align="right" bgcolor="#FFFFFF">
+											<strong>今日总结：</strong>
+										</td>
+										<td height="26" align="left" bgcolor="#FFFFFF" colspan="3">
+											<s:textarea  id="txt_memo" name="timePlan.memo" cssStyle="width: 438px;height:100px;resize:none;" maxlength="500"></s:textarea>
+										</td>
+									</tr>
 									<tr>
 										<td height="26" align="right" bgcolor="#FFFFFF">
 											<strong>明日计划：</strong>
@@ -164,14 +173,6 @@
 										<td height="26" align="left" bgcolor="#FFFFFF" colspan="3">
 											<s:textarea  id="txt_planContent" name="timePlan.planContent" cssStyle="width: 438px;height:100px;resize:none;" maxlength="500"></s:textarea>
 											<font color="red">*</font>
-										</td>
-									</tr>
-									<tr>
-										<td height="26" align="right" bgcolor="#FFFFFF">
-											<strong>今日总结：</strong>
-										</td>
-										<td height="26" align="left" bgcolor="#FFFFFF" colspan="3">
-											<s:textarea  id="txt_memo" name="timePlan.memo" cssStyle="width: 438px;height:100px;resize:none;" maxlength="500"></s:textarea>
 										</td>
 									</tr>
 									<tr>

@@ -212,14 +212,22 @@ public class TimePlanAction extends BaseActionSupport{
 			Map<String,Object> params = new HashMap<String, Object>();
 			params.put("personId", this.sessionUserId);
 			params.put("organId", this.sessionCompanyId);
+			params.put("planType", timePlan.getPlanType());
 			TimePlan  temp  = timePlanService.getLastTimePlan(params);
 			timePlan.setId(null);
-			timePlan.setPlanContent(temp.getPlanContent());//明日计划
-			timePlan.setMemo(temp.getMemo());//今日总结
+			if(temp!=null){
+				timePlan.setPlanContent(temp.getPlanContent());//明日计划
+				timePlan.setMemo(temp.getMemo());//今日总结
+			}else{
+				timePlan.setPlanContent("");//明日计划
+				timePlan.setMemo("");//今日总结
+				timePlan.setCreateTime(Calendar.getInstance());
+			}
 		}else{
 			timePlan = new TimePlan();
 			timePlan.setDeptId(sessionDeptId);
 			timePlan.setEmployeeId(sessionUserId);
+			timePlan.setCreateTime(Calendar.getInstance());
 		}
 		return SUCCESS;
 	}

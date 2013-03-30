@@ -11,11 +11,14 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
-import com.boan.crm.sellreport.weekly.model.WeeklyItemInfo;
-import com.boan.crm.sellreport.weekly.service.IWeeklyItemInfoService;
 import com.boan.crm.sellreport.sellduty.model.SellDuty;
 import com.boan.crm.sellreport.sellduty.service.ISellDutyService;
+import com.boan.crm.sellreport.weekly.model.WeeklyItemInfo;
+import com.boan.crm.sellreport.weekly.model.WeeklyMainInfo;
+import com.boan.crm.sellreport.weekly.service.IWeeklyItemInfoService;
+import com.boan.crm.sellreport.weekly.service.IWeeklyMainInfoService;
 import com.boan.crm.utils.action.BaseActionSupport;
+import com.boan.crm.utils.calendar.CurrentDateTime;
 import com.boan.crm.utils.page.Pagination;
 
 @Controller("weeklyItemInfoAction")
@@ -30,6 +33,10 @@ public class WeeklyItemInfoAction extends BaseActionSupport{
 	@Autowired
 	@Qualifier("weeklyItemInfoService")
 	private IWeeklyItemInfoService weeklyItemInfoService = null;
+	
+	@Autowired
+	@Qualifier("weeklyMainInfoService")
+	private IWeeklyMainInfoService weeklyMainInfoService;
 	
 	/**
 	 * 职责类型
@@ -89,6 +96,14 @@ public class WeeklyItemInfoAction extends BaseActionSupport{
 			String mainInfoId = weeklyItemInfo.getMainInfoId();
 			params.put("mainInfoId",mainInfoId);
 			params.put("sellDutyId",weeklyItemInfo.getSellDutyId());
+			WeeklyMainInfo weeklyMainInfo = weeklyMainInfoService.getWeeklyMainInfoById(weeklyItemInfo.getMainInfoId());
+			if(weeklyMainInfo.getPlanInterzoneBegin()!=null && !weeklyMainInfo.getPlanInterzoneBegin().equals("")){
+				params.put("planInterzoneBegin", CurrentDateTime.getCurrentDate(weeklyMainInfo.getPlanInterzoneBegin()));
+			}
+			if(weeklyMainInfo.getPlanInterzoneEnd()!=null && !weeklyMainInfo.getPlanInterzoneEnd().equals("")){
+				params.put("planInterzoneEnd", CurrentDateTime.getCurrentDate(weeklyMainInfo.getPlanInterzoneEnd()));
+			}
+			
 			weeklyItemInfo= weeklyItemInfoService.getLastWeeklyItemInfo(params);
 			if(weeklyItemInfo!=null){
 				weeklyItemInfo.setId(null);

@@ -6,12 +6,15 @@
 package com.boan.crm.goods.model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.GenericGenerator;
 
@@ -62,6 +65,9 @@ public class GoodsType implements Serializable {
 	 */
 	@Column(name = "REMARK", length = 200)
 	private String remark;
+	
+	@Transient
+	private List<GoodsInfoBase> goodsInfos = new ArrayList<GoodsInfoBase>();
 
 	/**
 	 * @return the id
@@ -145,5 +151,13 @@ public class GoodsType implements Serializable {
 	 */
 	public void setRemark(String remark) {
 		this.remark = remark;
+	}
+
+	public List<GoodsInfoBase> getGoodsInfos() {
+		return goodsInfos;
+	}
+
+	public void setGoodsInfos(List<GoodsInfoBase> goodsInfos) {
+		this.goodsInfos = goodsInfos;
 	}
 }

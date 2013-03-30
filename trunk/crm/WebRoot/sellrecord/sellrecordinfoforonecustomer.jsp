@@ -58,6 +58,21 @@
 			}
 		};
 	  	$(function(){
+	  		$("#closeBtn").click(function(){
+	  			parent.parent.parent.$("#windown-close").click();
+	  		});
+	  		$('#txt_returnMoneyTime').datetimepicker({showTimepicker: false});
+	  		//日期控件
+			$('#txt_smsSendDay').datetimepicker({showTimepicker: false});
+	  		//时间控件
+			$('#txt_smsSendTime').timepicker({
+				hourGrid: 4,
+				minuteGrid: 10
+			});
+	  		$("#txt_returnMoneyTime").change(function(){
+	  			$("#txt_smsSendDay").val($(this).val());
+	  		});
+	  		
 	  		if($("#hid_message").val()!="" && $("#recordId").val()!=null){
 				alert($("#hid_message").val());
 			}
@@ -385,28 +400,65 @@
 						<span>
 						<table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#d5e4fd">
 							<tr>
-								<td height="26" align="right" bgcolor="#FFFFFF" nowrap="nowrap">
+								<td height="26" align="right" bgcolor="#FFFFFF" nowrap="nowrap" width="80px">
 									<strong>应收总计：</strong>
 								</td>
-								<td height="26" align="left" bgcolor="#FFFFFF"  nowrap="nowrap">
-									<s:textfield id="txt_receivable" name="sellRecord.receivable" ></s:textfield>元
+								<td height="26" align="left" bgcolor="#FFFFFF"  nowrap="nowrap" width="150px">
+									<s:textfield id="txt_receivable" name="sellRecord.receivable" cssStyle="width:100px" ></s:textfield>元
 								</td>
-								<td height="26" align="right" bgcolor="#FFFFFF" nowrap="nowrap">
+								<td height="26" align="right" bgcolor="#FFFFFF" nowrap="nowrap" width="80px">
 									<strong>实 收：</strong>
 								</td>
-								<td height="26" align="left" bgcolor="#FFFFFF"  nowrap="nowrap">
-									<s:textfield id="txt_realCollection" name="sellRecord.realCollection"></s:textfield>元<font color="red">*</font>
+								<td height="26" align="left" bgcolor="#FFFFFF"  nowrap="nowrap" width="190px">
+									<s:textfield id="txt_realCollection" name="sellRecord.realCollection" cssStyle="width:100px" ></s:textfield>元<font color="red">*</font>
 								</td>
-								<td height="26" align="right" bgcolor="#FFFFFF" nowrap="nowrap">
+								<td height="26" align="right" bgcolor="#FFFFFF" nowrap="nowrap" width="80px">
 									<strong>欠 款：</strong>
 								</td>
 								<td height="26" align="left" bgcolor="#FFFFFF" nowrap="nowrap">
-									<s:textfield  id="txt_debt" name="sellRecord.debt" ></s:textfield>元
+									<s:textfield  id="txt_debt" name="sellRecord.debt" cssStyle="width:100px" ></s:textfield>元
+								</td>
+								<td height="26" align="right" bgcolor="#FFFFFF" nowrap="nowrap" width="80px">
+									<strong>还款时间：</strong>
+								</td>
+								<td height="26" align="left" bgcolor="#FFFFFF" nowrap="nowrap">
+									<s:textfield id="txt_returnMoneyTime" name="sellRecord.returnMoneyTime" maxlength="25"  cssStyle="width:100px" />
 								</td>
 							</tr>
 						</table>
 						</span>
 					</fieldset>
+					<fieldset >
+					<legend>短信还款提醒</legend>
+						<span>
+						<table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#d5e4fd">
+							<tr>
+								<td height="26" align="right" bgcolor="#FFFFFF" nowrap="nowrap" width="80px">
+									<strong>手机号码：</strong>
+								</td>
+								<td height="26" align="left" bgcolor="#FFFFFF"  nowrap="nowrap" width="150px">
+									<s:textfield id="txt_smPhone"  name="smsInfo.phone" cssStyle="width:100px" ></s:textfield>
+								</td>
+								<td height="26" align="right" bgcolor="#FFFFFF" nowrap="nowrap" width="80px">
+									<strong>提醒时间：</strong>
+								</td>
+								<td height="26" align="left" bgcolor="#FFFFFF"  nowrap="nowrap" colspan="5">
+									<s:textfield id="txt_smsSendDay" name="smsSendDay" maxlength="25"  cssStyle="width:100px" />
+									<s:textfield id="txt_smsSendTime" name="smsSendTime" maxlength="25" cssStyle="width: 80px;" />
+								</td>
+							</tr>
+							<tr>
+								<td height="26" align="right" bgcolor="#FFFFFF" nowrap="nowrap" width="80px">
+									<strong>通知内容：</strong>
+								</td>
+								<td height="26" align="left" bgcolor="#FFFFFF"  nowrap="nowrap"  colspan="8">
+									<s:textarea  id="txt_smsInfo"  name="smsInfo.info"   cssStyle="width:440px;height:50px" ></s:textarea>
+								</td>
+							</tr>
+						</table>
+						</span>
+					</fieldset>
+					
 				</td>
 			</tr>
 			<tr>
@@ -415,6 +467,9 @@
 						<tr>
 							<td>
 								<input name="btn_save" type="button" class="btn_2_3" id="btn_save" value="保存">
+								<% if(hasReturn.equals("false")) {%>
+									<input name="closeBtn" type="button" class="btn_2_3" id="closeBtn" value="关闭">
+								<%} %>
 							</td>
 						</tr>
 					</table>

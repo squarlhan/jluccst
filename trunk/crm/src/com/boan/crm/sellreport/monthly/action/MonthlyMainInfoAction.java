@@ -31,6 +31,7 @@ import com.boan.crm.sellreport.weekly.model.WeeklyItemInfo;
 import com.boan.crm.sellreport.weekly.model.WeeklyMainInfo;
 import com.boan.crm.utils.action.BaseActionSupport;
 import com.boan.crm.utils.calendar.CalendarUtils;
+import com.boan.crm.utils.calendar.CurrentDateTime;
 import com.boan.crm.utils.page.Pagination;
 
 @Controller("monthlyMainInfoAction")
@@ -262,6 +263,12 @@ public class MonthlyMainInfoAction  extends BaseActionSupport{
 			personId = sessionUserId;
 			if(personId!=null && !personId.equals("")){
 				params.put("personId", personId);
+			}
+			if(monthlyMainInfo.getPlanInterzoneBegin()!=null && !monthlyMainInfo.getPlanInterzoneBegin().equals("")){
+				params.put("planInterzoneBegin", CurrentDateTime.getCurrentDate(monthlyMainInfo.getPlanInterzoneBegin()));
+			}
+			if(monthlyMainInfo.getPlanInterzoneEnd()!=null && !monthlyMainInfo.getPlanInterzoneEnd().equals("")){
+				params.put("planInterzoneEnd", CurrentDateTime.getCurrentDate(monthlyMainInfo.getPlanInterzoneEnd()));
 			}
 			monthlyMainInfo= monthlyMainInfoService.getLastMonthlyMainInfo(params);
 		}
