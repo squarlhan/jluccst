@@ -53,7 +53,6 @@
 		  	 * 准备工作
 		  	 */
 			$(document).ready(function(){
-				$("#txt_inquiryPersonName").focus();
 				if($("#hid_message").val()!="" && $("#hid_marketInquiryId").val()!=null){
 					alert($("#hid_message").val());
 				}
@@ -110,7 +109,9 @@
 		<s:hidden id="hid_marketInquiryCreateTime" name="marketInquiry.createTime"></s:hidden>
 		<s:hidden id="hid_personId" name="marketInquiry.personId"></s:hidden>
 		<s:hidden id="hid_organId" name="marketInquiry.organId"></s:hidden>
+		
 		<table width="100%" border="0" cellspacing="5" cellpadding="0">
+		
 			<tr>
 				<td>
 					<table width="100%" style="height: 100%;" border="0"
@@ -118,18 +119,19 @@
 						<tr>
 							<td style="height: 36px;">
 								<table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#d5e4fd">
+									<span onmousemove="this.setCapture();" onmouseout="this.releaseCapture();" onfocus="this.blur();">
 									<tr>
 										<td height="26" align="right" bgcolor="#FFFFFF">
 											<strong>调查人：</strong>
 										</td>
 										<td height="26" align="left" bgcolor="#FFFFFF">
-											<s:textfield id="txt_inquiryPersonName" name="marketInquiry.inquiryPersonName" cssStyle="width: 160px;" maxlength="25"></s:textfield><font color="red" title="必填项">*</font>
+											<s:textfield tabindex="-1" id="txt_inquiryPersonName" name="marketInquiry.inquiryPersonName" cssStyle="width: 160px;" maxlength="25"></s:textfield>
 										</td>
 										<td height="26" align="right" bgcolor="#FFFFFF">
 											<strong>调查日期：</strong>
 										</td>
 										<td height="26" align="left" bgcolor="#FFFFFF">
-											<s:textfield id="txt_inquiryTime" name="marketInquiry.inquiryTime" cssStyle="width: 160px;" maxlength="25"></s:textfield><font color="red" title="必填项">*</font>
+											<s:textfield tabindex="-1"  id="txt_inquiryTime" name="marketInquiry.inquiryTime" cssStyle="width: 160px;" maxlength="25"></s:textfield>
 										</td>
 									</tr>
 									<tr>
@@ -137,7 +139,7 @@
 											<strong>调查地点：</strong>
 										</td>
 										<td height="26" align="left" bgcolor="#FFFFFF" colspan="3">
-											<s:textfield id="txt_inquiryAddress" name="marketInquiry.inquiryAddress" cssStyle="width: 465px;" maxlength="25"></s:textfield><font color="red" title="必填项">*</font>
+											<s:textfield tabindex="-1"  id="txt_inquiryAddress" name="marketInquiry.inquiryAddress" cssStyle="width: 465px;" maxlength="25"></s:textfield>
 										</td>
 									</tr>
 									
@@ -146,13 +148,13 @@
 											<strong>商品名称：</strong>
 										</td>
 										<td height="26" align="left" bgcolor="#FFFFFF">
-											<s:textfield id="txt_goodsName" name="marketInquiry.goodsName" cssStyle="width: 160px;" maxlength="25"></s:textfield><font color="red" title="必填项">*</font>
+											<s:textfield tabindex="-1"  id="txt_goodsName" name="marketInquiry.goodsName" cssStyle="width: 160px;" maxlength="25"></s:textfield>
 										</td>
 										<td height="26" align="right" bgcolor="#FFFFFF">
 											<strong>商品规格：</strong>
 										</td>
 										<td height="26" align="left" bgcolor="#FFFFFF">
-											<s:textfield id="txt_goodsStandard" name="marketInquiry.goodsStandard" cssStyle="width: 160px;" maxlength="25"></s:textfield>
+											<s:textfield tabindex="-1"  id="txt_goodsStandard" name="marketInquiry.goodsStandard" cssStyle="width: 160px;" maxlength="25"></s:textfield>
 										</td>
 									</tr>
 									<tr>
@@ -160,7 +162,7 @@
 											<strong>厂商名称：</strong>
 										</td>
 										<td height="26" align="left" bgcolor="#FFFFFF" colspan="3">
-											<s:textfield id="txt_factoryName" name="marketInquiry.factoryName" cssStyle="width: 465px;" maxlength="25"></s:textfield><font color="red" title="必填项">*</font>
+											<s:textfield tabindex="-1"  id="txt_factoryName" name="marketInquiry.factoryName" cssStyle="width: 465px;" maxlength="25"></s:textfield>
 										</td>
 									</tr>
 									<tr>
@@ -169,16 +171,16 @@
 											<strong>价 格：</strong>
 										</td>
 										<td height="26" align="left" bgcolor="#FFFFFF">
-											<s:textfield id="txt_goodsPrice" name="marketInquiry.goodsPrice" cssStyle="width: 160px;" maxlength="25"></s:textfield><font color="red" title="必填项">*</font>
+											<s:textfield tabindex="-1"  id="txt_goodsPrice" name="marketInquiry.goodsPrice" cssStyle="width: 160px;" maxlength="25"></s:textfield>
 										</td>
 										<td height="26" align="right" bgcolor="#FFFFFF">
 											<strong>备 注：</strong>
 										</td>
 										<td height="26" align="left" bgcolor="#FFFFFF">
-											<s:textfield id="txt_goodsWeight" name="marketInquiry.goodsWeight" cssStyle="width: 160px;" maxlength="25"></s:textfield>
+											<s:textfield tabindex="-1"  id="txt_goodsWeight" name="marketInquiry.goodsWeight" cssStyle="width: 160px;" maxlength="25"></s:textfield>
 										</td>
 									</tr>
-									
+									</span>
 									<tr>
 										<td height="26" colspan="4" align="center" bgcolor="#FFFFFF">
 											<input name="closeBtn" type="button" class="btn_2_3" id="closeBtn" value="关闭">
@@ -191,6 +193,7 @@
 				</td>
 			</tr>
 		</table>
+		
 		</s:form>
 </body>
 </html>
