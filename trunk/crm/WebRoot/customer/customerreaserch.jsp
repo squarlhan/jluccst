@@ -164,9 +164,11 @@
 		}
 		
 		function noSearch(obj){
-			var url = obj.attr("url");
-			$("#form1").attr("action",url);
-			$("#form1").submit();
+			if(window.confirm("您确定将这条客户信息设为不再查询吗？")){
+				var url = obj.attr("url");
+				$("#form1").attr("action",url);
+				$("#form1").submit();
+			}
 		}
 		</script>
 
