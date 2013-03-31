@@ -70,7 +70,7 @@
         <tr>
          <%if(userType == 8 || leaderFlag){%>
         	 <td width="150" valign="top" style="border-left: 1px solid #54a4e3; border-bottom: 1px solid #54a4e3; border-right: 1px solid #54a4e3; padding: 5px;">
-        	 <iframe width="100%" height="100%" id="menutree" name="menutree"frameborder="0" scrolling="auto" src="groupTreeForVisitManage.action"></iframe></td>
+        	 <iframe width="100%" height="100%" id="menutree" name="menutree"frameborder="0" scrolling="auto" src="groupTreeForVisitManage.action?searchFlag=1"></iframe></td>
           <td valign="top" style="border-left:1px solid #54a4e3; border-bottom:1px solid #54a4e3; border-right:1px solid #54a4e3; padding:5px;">
           	<iframe width="100%" height="100%"
           	 id="groupmain" name="groupmain" frameborder="0" scrolling="auto" src="../blank.jsp"></iframe></td>
