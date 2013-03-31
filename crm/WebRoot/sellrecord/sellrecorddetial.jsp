@@ -94,7 +94,7 @@
 	  			var memo= $("#txt_memo").val()+" ";
 	  			info = goodsProductId+"☆"+goodsName+"☆" + standard+"☆" + factory+"☆" + price+"☆"+number+"☆"+allPrice +"☆" + memo +"☆";
 	  			$.cookie('detial',info); 
-	  			parent.parent.parent.$("#windown-close").click();
+	  			parent.$("#windown-close").click();
 			});
 	  		$.fn.close();
 	  		}catch(e){

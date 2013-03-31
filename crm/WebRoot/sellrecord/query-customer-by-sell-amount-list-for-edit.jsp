@@ -254,7 +254,7 @@
             </s:else>
             </td>
           	<td height="26" colspan="2" align="center" bgcolor="#FFFFFF">
-          	<s:url id="edit_url" action="openSellRecordListForCustomerAction.action">   
+          	<s:url id="edit_url" action="openSellRecordTabForMyCustomerAction.action">   
 				<s:param name="customerId" value="id"></s:param>  
 				<s:param name="hasReturn" value="false"></s:param> 
 			</s:url>

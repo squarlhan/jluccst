@@ -99,8 +99,8 @@
 		  				$("#txt_goodsType").focus();
 		  				return false;
 		  			}
-					parent.parent.parent.tipsWindown("商品明细","iframe:openAddSellRecordDetialAction.action?goodsTypeId="+goodsTypeId,"780","300","true","","true","no");
-					parent.parent.parent.$("#windown-close").bind('click',function(){
+					tipsWindown("商品明细","iframe:openAddSellRecordDetialAction.action?goodsTypeId="+goodsTypeId,"780","300","true","","true","no");
+					$("#windown-close").bind('click',function(){
 						var detials = $.cookie('detial'); // 读取 cookie中的被选择的产品
 			  			$.cookie('detial', '', { expires: -1 }); //读取完毕后删除cookie
 	  					if(detials!=null && detials!=undefined){
@@ -182,34 +182,10 @@
 	               	if(!validator.form()){
 						return false;
 					}
-		  			/*
-		  			$.ajax({
-	  					type:"post",
-	  					url: "addSellRecordAction.action",
-	  					data:$("#form1").serialize(),
-	  					beforeSend: function(XMLHttpRequest){
-	  						
-	  					},
-	  					success: function(data, textStatus){
-	  						try{
-	  							data = eval("("+data+")");
-	  							alert(data.message);
-	  							parent.$.fn.selectTab(0);
-	  							parent.$.fn.showOrHideTab(1,false);
-	  						}catch(e){
-	  							alert(e.description);
-	  						}
-	  					},
-	  					complete: function(XMLHttpRequest, textStatus){
-	  					},
-	  					error: function(){
-	  					}
-					});
-		  			//*/
 		  			$("input[type=text]").each(function(){
 		  				$(this).val($.trim($(this).val()));
 		  			});
-		  			$("#form1").attr("action","addSellRecordForForOneCustomerAction.action");
+		  			$("#form1").attr("action","addSellRecordForMyCustomerAction.action");
 		  			$("#form1").submit();
 		  		});
 	  		}catch(e){
@@ -343,9 +319,6 @@
 											<td>
 												<input name="btn_delAll" type="button" class="btn_2_3" id="btn_delAll" value="删除所选">
 											</td>
-											<td>
-												<input type="button" name="closeBtn" id="closeBtn" value="返回客户列表" class="btn_5" />
-											</td>
 										</tr>
 									</table>
 								</td>
@@ -465,6 +438,7 @@
 						<tr>
 							<td>
 								<input name="btn_save" type="button" class="btn_2_3" id="btn_save" value="保存">
+								<input name="closeBtn" type="button" class="btn_2_3" id="closeBtn" value="关闭">
 							</td>
 						</tr>
 					</table>
