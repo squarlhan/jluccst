@@ -172,9 +172,6 @@
        -->
       <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#d5e4fd">
         <tr>
-         	<td align="center" background="<%=path %>/images/headerbg.jpg">  
-   				<s:checkbox theme="simple" id="cbk_all" name="all"></s:checkbox>
-   			</td>
               <td align="center" background="<%=path %>/images/headerbg.jpg" nowrap="nowrap"><strong>业务员</strong></td>
               <td align="center" background="<%=path %>/images/headerbg.jpg" nowrap="nowrap"><strong>提交日期</strong></td>
               <td align="center" background="<%=path %>/images/headerbg.jpg" nowrap="nowrap"><strong>行动类型</strong></td>
@@ -184,9 +181,6 @@
         </tr>
         <s:iterator value="pagination.data" status="obj">
         <tr>
-        <td height="26" align="center" bgcolor="#FFFFFF" >  
-        	<s:checkbox id="%{#obj.id}" name="ids" fieldValue="%{id}" value="false" theme="simple"/>
-		</td>
               <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="employeeName"/></td>
               <td height="26" align="center" bgcolor="#FFFFFF"  nowrap="nowrap"><s:property value="submitTime"/></td>
               <td height="26" align="center" bgcolor="#FFFFFF">
