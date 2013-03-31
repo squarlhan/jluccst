@@ -139,8 +139,15 @@ public class CustomerInfoAction extends BaseActionSupport{
 	private boolean crmFlag = false;
 	private boolean erpFlag = false;
 	private boolean teamFlag = false;
+	private String searchFlag = "";
 	
-	
+	public String getSearchFlag() {
+		return searchFlag;
+	}
+
+	public void setSearchFlag(String searchFlag) {
+		this.searchFlag = searchFlag;
+	}
 	/**
 	 * 上传导入文件的名称
 	 */
@@ -196,7 +203,7 @@ public class CustomerInfoAction extends BaseActionSupport{
 			dept.setId(us.getDeptId());
 			deptList.add(dept);
 		}
-		
+
 		return "success";
 	}
 	
