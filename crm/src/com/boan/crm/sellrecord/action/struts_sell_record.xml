@@ -21,6 +21,55 @@
 			<result name="success">/sellrecord/sellrecordlistforcustomer.jsp</result>
 			<result name="input">/sellrecord/sellrecordlistforcustomer.jsp</result>
 		</action>
+		
+		
+		
+		
+		<action name="openSellRecordTabForMyCustomerAction" class="sellRecordAction" method="openSellRecordTabForMyCustomer">
+			<result name="success">/sellrecord/query-customer-by-sell-amount-tab-for-my-customer.jsp</result>
+			<result name="input">/sellrecord/query-customer-by-sell-amount-tab-for-my-customer.jsp</result>
+		</action>
+		<action name="openSellRecordListForMyCustomerAction" class="sellRecordAction" method="openSellRecordListForMyCustomer">
+			<result name="success">/sellrecord/query-customer-by-sell-amount-tab-for-my-customer-list.jsp</result>
+			<result name="input">/sellrecord/query-customer-by-sell-amount-tab-for-my-customer-list.jsp</result>
+		</action>
+		<action name="openModifySellRecordForMyCustomerAction" class="sellRecordAction" method="openModifySellRecordForMyCustomer">
+			<result name="success">/sellrecord/query-customer-by-sell-amount-tab-for-my-customer-info.jsp</result>
+			<result name="input">/sellrecord/query-customer-by-sell-amount-tab-for-my-customer-info.jsp</result>
+		</action>
+		<action name="openAddSellRecordForMyCustomerAction" class="sellRecordAction" method="openAddSellRecordForMyCustomer">
+			<result name="success">/sellrecord/query-customer-by-sell-amount-tab-for-my-customer-info.jsp</result>
+			<result name="input">/sellrecord/query-customer-by-sell-amount-tab-for-my-customer-info.jsp</result>
+		</action>
+		<action name="addSellRecordForMyCustomerAction" class="sellRecordAction" method="addSellRecordForMyCustomer">
+			<result name="success">/sellrecord/query-customer-by-sell-amount-tab-for-my-customer-info.jsp</result>
+			<result name="input">/sellrecord/query-customer-by-sell-amount-tab-for-my-customer-info.jsp</result>
+		</action>
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		<action name="openViewSellRecordAction" class="sellRecordAction" method="openViewSellRecord">
 			<result name="success">/sellrecord/sellrecordinfo.jsp</result>
 			<result name="input">/sellrecord/sellrecordinfo.jsp</result>

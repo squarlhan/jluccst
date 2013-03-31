@@ -321,24 +321,133 @@ public class SellRecordAction extends BaseActionSupport {
 	}
 
 	public String openSellRecordListForCustomer() throws Exception {
+//		goodsTypes = goodsTypeService.findAllGoodsType(sessionCompanyId);
+//		//userList = userService.queryUserList(sessionCompanyId, sessionDeptId, new Pagination<User>()).getData();
+//		Map<String, String> params = new HashMap<String, String>();
+//		if (customerId != null) {
+//			customerId = customerId.split(",")[0];
+//			if (customerId != null && !customerId.trim().equals("")) {
+//				params.put("customerId", customerId);
+//			}
+//			if (queryBargainTimeBegin != null && !queryBargainTimeBegin.trim().equals("")) {
+//				params.put("queryBargainTimeBegin", queryBargainTimeBegin);
+//			}
+//			if (queryBargainTimeBegin != null && !queryBargainTimeBegin.trim().equals("")) {
+//				params.put("queryBargainTimeEnd", queryBargainTimeEnd);
+//			}
+//		}
+//		pagination = sellRecordService.findSellRecordForPage(params, pagination);
+		return SUCCESS;
+	}
+	
+	public String openSellRecordTabForMyCustomer() throws Exception {
+		return SUCCESS;
+	}
+
+	public String openSellRecordListForMyCustomer() throws Exception {
 		goodsTypes = goodsTypeService.findAllGoodsType(sessionCompanyId);
-		//userList = userService.queryUserList(sessionCompanyId, sessionDeptId, new Pagination<User>()).getData();
+		userList = userService.queryUserList(sessionCompanyId, sessionDeptId, new Pagination<User>()).getData();
 		Map<String, String> params = new HashMap<String, String>();
-		if (customerId != null) {
-			customerId = customerId.split(",")[0];
-			if (customerId != null && !customerId.trim().equals("")) {
-				params.put("customerId", customerId);
-			}
-			if (queryBargainTimeBegin != null && !queryBargainTimeBegin.trim().equals("")) {
-				params.put("queryBargainTimeBegin", queryBargainTimeBegin);
-			}
-			if (queryBargainTimeBegin != null && !queryBargainTimeBegin.trim().equals("")) {
-				params.put("queryBargainTimeEnd", queryBargainTimeEnd);
-			}
+		params.put("companyId", sessionCompanyId);
+		
+		
+		if (customerId != null && !customerId.trim().equals("")) {
+			String[] strArry = customerId.split(",");
+			customerId= strArry[0];
+			params.put("customerId", customerId);
 		}
+		if (queryCustomerName != null && !queryCustomerName.trim().equals("")) {
+			params.put("queryCustomerName", queryCustomerName);
+		}
+		if (querySalesman != null && !querySalesman.trim().equals("")) {
+			params.put("querySalesman", querySalesman);
+		}
+		if (queryBargainTimeBegin != null && !queryBargainTimeBegin.trim().equals("")) {
+			params.put("queryBargainTimeBegin", queryBargainTimeBegin);
+		}
+		if (queryBargainTimeBegin != null && !queryBargainTimeBegin.trim().equals("")) {
+			params.put("queryBargainTimeEnd", queryBargainTimeEnd);
+		}
+		UserSession userSession = this.getSession();
+		params.put("salesmanId", userSession.getUserId());
 		pagination = sellRecordService.findSellRecordForPage(params, pagination);
 		return SUCCESS;
 	}
+	public String openAddSellRecordForMyCustomer() {
+		goodsTypes = goodsTypeService.findAllGoodsType(sessionCompanyId);
+		Calendar rightNow = Calendar.getInstance();
+		SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd"); // 日期格式化格式
+		String date = format.format(rightNow.getTime()); // 取得当前时间，并格式化成相应格式
+
+		UserSession userSession = this.getSession();
+		String orderID = sellRecordService.getSellRecordorderID(date, userSession.getCompanyId());
+		int number = 1;
+		if (orderID != null && orderID.length() == 13) {
+			number = Integer.parseInt(orderID.substring(8));
+			number = number + 1;
+		}
+		customerInfos = customerInfoService.findAllCustomerInfoBySalesmanId(sessionUserId); //查本公司业务员所管辖的客户
+		if(customerInfos==null || customerInfos.size()==0){
+			customerInfos = customerInfoService.findAllCustomerInfoByCompanyId(sessionCompanyId);//本公司的所有客户
+		}
+		sellRecord = new SellRecord();
+		sellRecord.setCustomerId(customerId);
+		sellRecord.setCompanyId(userSession.getCompanyId());
+		// String.format("%05d", number) 将流水号格式化为 5位长度返回
+		String serialNo = date + String.format("%05d", number);
+		sellRecord.setOrderID(serialNo);
+		sellRecord.setDeptId(userSession.getDeptId());
+		
+		//短信通知号码
+		smsInfo.setPhone(this.sessionUserPhone);
+		smsSendDay=CurrentDateTime.getCurrentDate();
+		smsSendTime="09:00";
+		return SUCCESS;
+	}
+	public String openModifySellRecordForMyCustomer() {
+		customerInfos = customerInfoService.findAllCustomerInfoBySalesmanId(sessionUserId); //查本公司业务员所管辖的客户
+		if(customerInfos==null || customerInfos.size()==0){
+			customerInfos = customerInfoService.findAllCustomerInfoByCompanyId(sessionCompanyId);//本公司的所有客户
+		}
+		sellRecord = sellRecordService.getSellRecordById(sellRecord.getId());
+		goodsTypes = goodsTypeService.findAllGoodsType(sessionCompanyId);
+		//获取短信通知对象
+		smsInfo= smsInfoService.getSMSInfoBySellRecordId(sellRecord.getId());
+		if(smsInfo!=null){
+			smsSendDay=CurrentDateTime.getCurrentDate(smsInfo.getSendTime());
+			smsSendTime=CurrentDateTime.getCurrentTime(smsInfo.getSendTime());
+		}
+		return SUCCESS;
+	}
+	
+	public String addSellRecordForMyCustomer() {
+		return addSellRecordForForOneCustomer();
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	public String openSellRecordListForCustomerView() throws Exception {
 		goodsTypes = goodsTypeService.findAllGoodsType(sessionCompanyId);
@@ -556,8 +665,6 @@ public class SellRecordAction extends BaseActionSupport {
 	
 	
 	public String openAddSellRecordForOneCustomer() {
-
-		
 		goodsTypes = goodsTypeService.findAllGoodsType(sessionCompanyId);
 		Calendar rightNow = Calendar.getInstance();
 		SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd"); // 日期格式化格式
