@@ -29,14 +29,23 @@
 <j:scriptlink css="true" tree="true"></j:scriptlink>
 </head>
 <body style="padding:5px;">
+<s:hidden name="searchFlag"/>
 <div class="dtree">
   <!--a href="javascript: d.openAll();">展开</a> | <a href="javascript: d.closeAll();">关闭</a-->
   <script type="text/javascript">
 		<!--
 		d = new dTree('d','<%=path%>');
 		d.add(0,-1,'<s:property value="commpanyName"/>部门列表','','','groupmain');
+		var searchFlag = document.getElementById("searchFlag").value;
 		<s:iterator value="deptList">
-			d.add("<s:property value="id"/>",0,'<s:property value="deptName"/>','searchAllCustomerTraceList.action?companyId=<s:property value="commpanyId"/>&deptId=<s:property value="id"/>&who=session','','groupmain','');
+			if(searchFlag == "1")
+			{
+				d.add("<s:property value="id"/>",0,'<s:property value="deptName"/>','searchAllCustomerTraceList.action?companyId=<s:property value="commpanyId"/>&deptId=<s:property value="id"/>&who=session','','groupmain','');	
+			}else
+			{
+				d.add("<s:property value="id"/>",0,'<s:property value="deptName"/>','allCustomerTraceList.action?companyId=<s:property value="commpanyId"/>&deptId=<s:property value="id"/>&who=session','','groupmain','');	
+			}
+			
 		</s:iterator>
 		document.write(d);
 		//-->
