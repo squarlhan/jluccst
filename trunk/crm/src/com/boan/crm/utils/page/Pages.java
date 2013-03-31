@@ -158,11 +158,19 @@ public class Pages extends Component {
 				str.append(" 共[ " + totalRows + " ]条记录&nbsp;&nbsp;&nbsp;&nbsp;");
 				String hrefStyle = "style=\"cursor:hand\" onmouseover=\"this.style.color='red'\" onmouseout=\"this.style.color='#0e4871'\" ";
 				if (currentPage.equals(totalPages)) {
-					str.append("<a "+ hrefStyle +" onclick='javascript:turnOverPage(1)'>首　页&nbsp;&nbsp;&nbsp;&nbsp;</a> ");
-					str.append("<a "+ hrefStyle +" onclick='javascript:turnOverPage("+ ( cpageInt - 1) + ")'>上一页&nbsp;&nbsp;&nbsp;&nbsp;</a>");
-					str.append("下一页&nbsp;&nbsp;&nbsp;&nbsp;");
-					str.append("尾　页&nbsp;&nbsp;&nbsp;&nbsp;");
-					str.append("当前["+ currentPage + "/" + totalPages + "]页");
+					if(currentPage.equals("1")){
+						str.append("<a >首　页&nbsp;&nbsp;&nbsp;&nbsp;</a> ");
+						str.append("<a >上一页&nbsp;&nbsp;&nbsp;&nbsp;</a>");
+						str.append("下一页&nbsp;&nbsp;&nbsp;&nbsp;");
+						str.append("尾　页&nbsp;&nbsp;&nbsp;&nbsp;");
+						str.append("当前["+ currentPage + "/" + totalPages + "]页");
+					}else{
+						str.append("<a "+ hrefStyle +" onclick='javascript:turnOverPage(1)'>首　页&nbsp;&nbsp;&nbsp;&nbsp;</a> ");
+						str.append("<a "+ hrefStyle +" onclick='javascript:turnOverPage("+ ( cpageInt - 1) + ")'>上一页&nbsp;&nbsp;&nbsp;&nbsp;</a>");
+						str.append("下一页&nbsp;&nbsp;&nbsp;&nbsp;");
+						str.append("尾　页&nbsp;&nbsp;&nbsp;&nbsp;");
+						str.append("当前["+ currentPage + "/" + totalPages + "]页");
+					}
 				} else {
 					// 当前页与总页数不相同
 					if ("1".equals(currentPage)) {
@@ -172,10 +180,10 @@ public class Pages extends Component {
 						str.append("<a "+ hrefStyle +" onclick='javascript:turnOverPage("+totalPages + ")'>尾　页&nbsp;&nbsp;&nbsp;&nbsp;</a>");
 						str.append("当前["+ currentPage + "/" + totalPages + "]页");
 					} else {
-						str.append("<a onclick='javascript:turnOverPage(1)'>首　页&nbsp;&nbsp;&nbsp;&nbsp;</a>");
+						str.append("<a "+ hrefStyle +"  onclick='javascript:turnOverPage(1)'>首　页&nbsp;&nbsp;&nbsp;&nbsp;</a>");
 						str.append("<a "+ hrefStyle +" onclick='javascript:turnOverPage("+ ( cpageInt - 1) + ")'>上一页&nbsp;&nbsp;&nbsp;&nbsp;</a>");
 						str.append("<a "+ hrefStyle +" onclick='javascript:turnOverPage("+ (cpageInt + 1) + ")'>下一页&nbsp;&nbsp;&nbsp;&nbsp;</a>");
-						str.append("<a onclick='javascript:turnOverPage("+totalPages + "'>尾　页&nbsp;&nbsp;&nbsp;&nbsp;</a>");
+						str.append("<a  "+ hrefStyle +" onclick='javascript:turnOverPage("+totalPages + ")'>尾　页&nbsp;&nbsp;&nbsp;&nbsp;</a>");
 						str.append("当前["+ currentPage + "/" + totalPages + "]页");
 					}
 				}
