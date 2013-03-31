@@ -223,8 +223,8 @@ pageEncoding="UTF-8"%>
               <td align="center" background="<%=path %>/images/headerbg.jpg" nowrap="nowrap"><strong>业务员</strong></td>
               <td align="center" background="<%=path %>/images/headerbg.jpg" nowrap="nowrap"><strong>提交日期</strong></td>
               <td align="center" background="<%=path %>/images/headerbg.jpg" nowrap="nowrap"><strong>计划类型</strong></td>
-               <td align="center" background="<%=path %>/images/headerbg.jpg" ><strong>今日总结</strong></td>
-               <td align="center" background="<%=path %>/images/headerbg.jpg"><strong>明日计划</strong></td>
+               <td align="center" background="<%=path %>/images/headerbg.jpg" ><strong>总结</strong></td>
+               <td align="center" background="<%=path %>/images/headerbg.jpg"><strong>计划</strong></td>
               <td align="center" background="<%=path %>/images/headerbg.jpg" nowrap="nowrap"><strong>操作</strong></td>
         </tr>
         <s:iterator value="pagination.data" status="obj">

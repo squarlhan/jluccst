@@ -50,6 +50,33 @@
 		  	 * 准备工作
 		  	 */
 			$(document).ready(function(){
+				if($("#sel_planType").val()==0){
+					$("#aa").html("今日总结：");
+					$("#bb").html("明日计划：");
+				}
+				if($("#sel_planType").val()==1){
+					$("#aa").html("本周总结：");
+					$("#bb").html("下周计划：");
+				}
+				if($("#sel_planType").val()==2){
+					$("#aa").html("本月总结：");
+					$("#bb").html("下月计划：");
+				}
+				
+				$("#sel_planType").change(function(){
+					if($("#sel_planType").val()==0){
+						$("#aa").html("今日总结：");
+						$("#bb").html("明日计划：");
+					}
+					if($("#sel_planType").val()==1){
+						$("#aa").html("本周总结：");
+						$("#bb").html("下周计划：");
+					}
+					if($("#sel_planType").val()==2){
+						$("#aa").html("本月总结：");
+						$("#bb").html("下月计划：");
+					}
+				});
 				if($("#hid_message").val()!="" && $("#hid_timePlanId").val()!=null){
 					alert($("#hid_message").val());
 				}
@@ -148,18 +175,18 @@
 									</tr>
 									<tr>
 										<td height="26" align="right" bgcolor="#FFFFFF">
-											<strong>今日总结：</strong>
+											<strong id="aa">今日总结：</strong>
 										</td>
 										<td height="26" align="left" bgcolor="#FFFFFF" colspan="3">
-											<s:textarea tabindex="-1"   id="txt_memo" name="timePlan.memo" cssStyle="width: 438px;height:100px;resize:none;" maxlength="500"></s:textarea>
+											<s:textarea  id="txt_memo" name="timePlan.memo" cssStyle="width: 438px;height:100px;resize:none;" maxlength="500"></s:textarea>
 										</td>
 									</tr>
 									<tr>
-										<td height="26" align="right" bgcolor="#FFFFFF" nowrap="nowrap">
-											<strong>明日计划：</strong>
+										<td height="26" align="right" bgcolor="#FFFFFF">
+											<strong  id="bb">明日计划：</strong>
 										</td>
 										<td height="26" align="left" bgcolor="#FFFFFF" colspan="3">
-											<s:textarea tabindex="-1"   id="txt_planContent" name="timePlan.planContent" cssStyle="width: 438px;height:100px;resize:none;" maxlength="500"></s:textarea>
+											<s:textarea  id="txt_planContent" name="timePlan.planContent" cssStyle="width: 438px;height:100px;resize:none;" maxlength="500"></s:textarea>
 											<font color="red">*</font>
 										</td>
 									</tr>
