@@ -21,6 +21,11 @@
 	String basePath = request.getScheme() + "://"
 			+ request.getServerName() + ":" + request.getServerPort()
 			+ path + "/";
+	String customerId = request.getParameter("customerId");
+	String hasReturn = request.getParameter("hasReturn");
+	if(customerId==null){
+		customerId="";
+	}
 %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
@@ -66,38 +71,8 @@
 	-->
 	</style>
 	<script type="text/javascript">
-		function onlyNumbers(id) {
-			re = /^\d+\.?\d*$/;
-			var str = $("#"+id).val();
-			if(str!=""){
-				if (!re.test(str)) {
-					$("#"+id).focus();
-					$("#"+id).select();
-					return false;
-				}else{
-					return true;
-				}
-			}else{
-				return true;
-			}
-		}
 	
 		$(function(){
-			
-			$("#queryBtn").click(function(){
-				if( !onlyNumbers("queryAmountBegin")){
-	         	   alert("交易总额起始值请填写数字，如：10000！");
-	         	   return false;
-	             }
-				if( !onlyNumbers("queryAmountEnd")){
-	         	   alert("交易总额结束值请填写数字，如：10000！");
-	         	   return false;
-	             }
-				form1.action = "openSellRecordListForSellerAction.action";
-				form1.submit();
-			});
-			
-				
 			$("#txt_queryCustomerName").autocomplete("../customer/getCustomerByName.action",
 		     {
 	           minChars: 1,
@@ -195,7 +170,7 @@
 			$("#btn_add").click(function(){
 				try{
 					parent.$.fn.showOrHideTab(1,true);
-					parent.$.fn.selectTab(1,'openAddSellRecordForSellerAction.action');
+					parent.$.fn.selectTab(1,'openAddSellRecordForMyCustomerAction.action?customerId=<%=customerId%>&hasReturn=<%=hasReturn %>');
 				}catch(e){
 					alert(e.description);
 				}
@@ -224,7 +199,7 @@
 	  		 */
 	  		$('a[name="edit"]').each(function(){
 	  			$(this).click(function(){
-	  				var url = $(this).attr("url");
+	  				var url = $(this).attr("url")+"&hasReturn=<%=hasReturn %>";
 	  				try{
 						parent.$.fn.showOrHideTab(1,true);
 						parent.$.fn.selectTab(1,url);
@@ -245,6 +220,16 @@
 	  				}
 	  			});
 	  		});
+	  		
+	  		$("#returnBtn").click(function(){
+	  			//parent.$("#windown-close").click();
+	  			parent.parent.location.href = "customer/mycustomermanage.jsp";
+	  		});
+	  		
+	  		$("#closeBtn").click(function(){
+	  			parent.parent.parent.$("#windown-close").click();
+	  		});
+
 		});
 		/**
 	  	 * 点击选复选框时，执行全选/取消全选功能
@@ -295,50 +280,29 @@
 	</head>
   <body>
    <s:form id="form1" name="form1" method="post" theme="simple" action="">
+   <s:hidden name="customerId"></s:hidden>
    		<fieldset >
 		<legend>查询条件</legend>
    		<span>
 			<table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#d5e4fd">
 				<tr>
-					<td height="26"  align="right" bgcolor="#FFFFFF" nowrap="nowrap">
-						<strong>客户名称：</strong>
-					</td>
-					<td height="26" width="220"  align="left" bgcolor="#FFFFFF">
-						<s:textfield id="txt_queryCustomerName" name="queryCustomerName" cssStyle="width:210px" ></s:textfield>
-					</td>
 					<td height="26" width="100" align="right" bgcolor="#FFFFFF" nowrap="nowrap">
 						<strong>成交日期：</strong>
 					</td>
-					<td height="26"   width="220"  align="left" bgcolor="#FFFFFF" >
+					<td height="26"   width="220"  align="left" bgcolor="#FFFFFF"  nowrap="nowrap">
 						<s:textfield id="txt_queryBargainTimeBegin" name="queryBargainTimeBegin" cssStyle="width:100px" ></s:textfield>
 						- <s:textfield id="txt_queryBargainTimeEnd" name="queryBargainTimeEnd" cssStyle="width:100px" ></s:textfield>
 					</td>
 					<td height="26" align="left" bgcolor="#FFFFFF" rowspan="2">
-						<input name="queryBtn" type="button" class="btn_2_3" id="queryBtn" value="查询">
+						<input name="queryBtn" type="submit" class="btn_2_3" id="queryBtn" value="查询">
 					</td>
-					</tr>
-					<tr>
-					<td height="26"  align="right" bgcolor="#FFFFFF" nowrap="nowrap">
-						<strong>交易总额范围：</strong>
-					</td>
-					<td height="26" align="left" bgcolor="#FFFFFF" nowrap="nowrap">
-						<s:textfield name="queryAmountBegin" id="queryAmountBegin" style="width: 100px"></s:textfield>
-						-
-						<s:textfield name="queryAmountEnd" id="queryAmountEnd" style="width: 100px"></s:textfield>
-					</td>
-					<td height="26"  align="right" bgcolor="#FFFFFF" nowrap="nowrap">
-						<strong>是否欠款：</strong>
-					</td>
-					<td height="26" align="left" bgcolor="#FFFFFF">
-						<s:select list="#{'0':'否','1':'是'}"  headerValue="---全部---" headerKey=""  name="queryIsArrearage" cssStyle="width:210px" ></s:select>
-					</td>
-					
 				</tr>
 			</table>
 		</span>
 		</fieldset>
 		<input name="btn_add" type="button" class="btn_5" id="btn_add" value="添加销售记录">
 		<input name="btn_delAll" type="button" class="btn_2_3" id="btn_delAll" value="删除所选">
+		
    		<table id="recordsList" width="100%"  border="0" cellpadding="5" cellspacing="1" bgcolor="#d5e4fd">
 			<tr>
 				<td align="center" width="50px" background="<%=basePath%>/images/headerbg.jpg">
@@ -373,17 +337,10 @@
             		</td>
             		<td height="26" align="center" bgcolor="#FFFFFF"><s:property value="receivable"/></td>
             		<td height="26" align="center" bgcolor="#FFFFFF"><s:property value="realCollection"/></td>
-            		<td height="26" align="center" bgcolor="#FFFFFF">
-            		<s:if test="debt!=0">
-		            	<font color="red"><s:property value="debt"/></font>
-		            </s:if>
-		            <s:else>
-		            	<s:property value="debt"/>
-		            </s:else>
-            		</td>
+            		<td height="26" align="center" bgcolor="#FFFFFF"><font color="red"><s:property value="debt"/></font></td>
             		<td height="26" align="center" bgcolor="#FFFFFF"><s:property value="(realCollection/receivable)*100"/>%</td>
             		<td height="26" align="center" bgcolor="#FFFFFF" nowrap="nowrap">
-							<s:url id="edit_url" action="openModifySellRecordForSellerAction">   
+							<s:url id="edit_url" action="openModifySellRecordForMyCustomerAction">   
 								<s:param name="sellRecord.id" value="id"></s:param>   
 							</s:url>
 							<s:url id="delete_url" action="deleteSellRecordAction">   
@@ -400,6 +357,15 @@
 			  </td>
 	        </tr>
 		</table>
+		<center>
+			<table>
+				<tr>
+					<td height="50">
+						<input name="closeBtn" type="button" class="btn_2_3" id="closeBtn" value="关闭">
+					</td>
+				</tr>
+			</table>
+		</center>
 	</s:form>
   </body>
 </html>

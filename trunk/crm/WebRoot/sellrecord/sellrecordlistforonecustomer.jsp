@@ -280,6 +280,7 @@
 	</head>
   <body>
    <s:form id="form1" name="form1" method="post" theme="simple" action="">
+   <s:hidden name="customerId"></s:hidden>
    		<fieldset >
 		<legend>查询条件</legend>
    		<span>
@@ -301,10 +302,7 @@
 		</fieldset>
 		<input name="btn_add" type="button" class="btn_5" id="btn_add" value="添加销售记录">
 		<input name="btn_delAll" type="button" class="btn_2_3" id="btn_delAll" value="删除所选">
-		<% if(hasReturn==null || !hasReturn.equals("false")) {%>
-		<input type="button" name="returnBtn" id="closeBtn" value="返回客户列表" class="btn_5" />
-		<%} %>
-		
+		<input type="button" name="returnBtn" id="returnBtn" value="返回客户列表" class="btn_5" />
    		<table id="recordsList" width="100%"  border="0" cellpadding="5" cellspacing="1" bgcolor="#d5e4fd">
 			<tr>
 				<td align="center" width="50px" background="<%=basePath%>/images/headerbg.jpg">
@@ -358,19 +356,6 @@
 				<page:pages currentPage="pagination.currentPage" totalPages="pagination.totalPages" totalRows="pagination.totalRows" styleClass="page" theme="text" ></page:pages> 
 			  </td>
 	        </tr>
-	        <% if(hasReturn.equals("false")) {%>
-	        <tr>
-				<td height="26" colspan="11" align="center" bgcolor="#FFFFFF">
-					<table>
-						<tr>
-							<td>
-								<input name="closeBtn" type="button" class="btn_2_3" id="closeBtn" value="关闭">
-							</td>
-						</tr>
-					</table>
-				</td>
-			</tr>
-			<%} %>
 		</table>
 	</s:form>
   </body>
