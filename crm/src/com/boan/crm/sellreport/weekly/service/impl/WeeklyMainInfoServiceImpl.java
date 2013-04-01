@@ -95,10 +95,11 @@ public class WeeklyMainInfoServiceImpl implements IWeeklyMainInfoService{
 			if(params.containsKey("personId")){
 				strb.append(" and  personId=:personId  ");
 			}
-			if(params.containsKey("planInterzoneBegin")){
+			if(params.containsKey("planInterzoneBegin") && params.containsKey("planInterzoneEnd")){
 				strb.append(" and  planInterzoneBegin >='"+params.get("planInterzoneBegin")+"'  ");
-			}
-			if(params.containsKey("planInterzoneEnd")){
+				strb.append(" and  planInterzoneEnd >='"+params.get("planInterzoneBegin")+"'  ");
+				
+				strb.append(" and  planInterzoneBegin <='"+params.get("planInterzoneEnd")+"'  ");
 				strb.append(" and  planInterzoneEnd <='"+params.get("planInterzoneEnd")+"'  ");
 			}
 		}
