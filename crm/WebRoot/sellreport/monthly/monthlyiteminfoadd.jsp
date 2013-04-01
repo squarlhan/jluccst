@@ -207,7 +207,9 @@
 						</span>
 						<font color="red">*</font>
 						<s:if test="monthlyItemInfo.id==null">
+							<!-- 
 							<input name="referenceBtn" type="button" class="btn_5" id="referenceBtn" value="参考上次计划">
+							 -->
 						</s:if>
 					</td>
 				</tr>
