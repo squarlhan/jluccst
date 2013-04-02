@@ -337,7 +337,14 @@
             		</td>
             		<td height="26" align="center" bgcolor="#FFFFFF"><s:property value="receivable"/></td>
             		<td height="26" align="center" bgcolor="#FFFFFF"><s:property value="realCollection"/></td>
-            		<td height="26" align="center" bgcolor="#FFFFFF"><font color="red"><s:property value="debt"/></font></td>
+            		<td height="26" align="center" bgcolor="#FFFFFF">
+	            		<s:if test="debt!=0">
+		            		<font color="red"><s:property value="debt"/></font>
+			            </s:if>
+			            <s:else>
+			            	<s:property value="debt"/>
+			            </s:else>
+            		</td>
             		<td height="26" align="center" bgcolor="#FFFFFF"><s:property value="(realCollection/receivable)*100"/>%</td>
             		<td height="26" align="center" bgcolor="#FFFFFF" nowrap="nowrap">
 							<s:url id="edit_url" action="openModifySellRecordForOneCustomerAction">   
@@ -346,7 +353,7 @@
 							<s:url id="delete_url" action="deleteSellRecordAction">   
 								<s:param name="ids" value="id"></s:param>   
 							</s:url>
-				         	<a name="edit" href="javascript:void(0);" url="${edit_url}">编辑</a>  
+				         	<a name="edit" href="javascript:void(0);" url="${edit_url}">编辑22</a>  
 				         	<a name="delete" href="javascript:void(0);" url="${delete_url}">删除</a>
 					</td>
             </tr>
