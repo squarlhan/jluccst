@@ -300,7 +300,8 @@ public class SellRecordAction extends BaseActionSupport {
 		params.put("companyId", sessionCompanyId);
 		
 		if (customerId != null && !customerId.trim().equals("")) {
-			params.put("customerId", customerId);
+			String[] array = customerId.split(",");
+			params.put("customerId", array[0]);
 		}
 		if (queryCustomerName != null && !queryCustomerName.trim().equals("")) {
 			params.put("queryCustomerName", queryCustomerName);
