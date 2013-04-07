@@ -317,7 +317,7 @@
             			<td align="center" background="<%=basePath%>/images/headerbg.jpg" nowrap="nowrap"><strong>实 收（元）</strong></td>
             			<td align="center" background="<%=basePath%>/images/headerbg.jpg" nowrap="nowrap"><strong>欠 款（元）</strong></td>
             			<td align="center" background="<%=basePath%>/images/headerbg.jpg" nowrap="nowrap"><strong>交回款情况</strong></td>
-            			<td align="center" background="<%=basePath%>/images/headerbg.jpg" nowrap="nowrap"><strong>操作</strong></td>
+            			<td align="center" background="<%=basePath%>/images/headerbg.jpg" nowrap="nowrap"><strong>操作1</strong></td>
 			</tr>
 			 <s:iterator value="pagination.data" status="obj">
 	        	<tr>
@@ -334,7 +334,14 @@
             		</td>
             		<td height="26" align="center" bgcolor="#FFFFFF"><s:property value="receivable"/></td>
             		<td height="26" align="center" bgcolor="#FFFFFF"><s:property value="realCollection"/></td>
-            		<td height="26" align="center" bgcolor="#FFFFFF"><font color="red"><s:property value="debt"/></font></td>
+            		<td height="26" align="center" bgcolor="#FFFFFF">
+	            		<s:if test="debt>0">
+			            	<font color="red"><s:property value="debt"/></font>
+			            </s:if>
+			            <s:else>
+			            	<s:property value="debt"/>
+			            </s:else>
+            		</td>
             		<td height="26" align="center" bgcolor="#FFFFFF"><s:property value="(realCollection/receivable)*100"/>%</td>
             		<td height="26" align="center" bgcolor="#FFFFFF" nowrap="nowrap">
 							<s:url id="edit_url" action="openViewSellRecordAction">   
