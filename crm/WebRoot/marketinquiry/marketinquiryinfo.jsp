@@ -47,7 +47,7 @@
 					"marketInquiry.txt_factoryName"  :{required:true,strangecode:true},
 					"marketInquiry.goodsName"   :{required:true,strangecode:true},
 					"marketInquiry.goodsWeight"   :{strangecode:true},
-					"marketInquiry.goodsPrice"  :{required:true,strangecode:true}
+					"marketInquiry.goodsPrice"  :{required:true,strangecode:true,number:true}
 				}
 			};
 			/**
@@ -66,7 +66,7 @@
 				    errorPlacement:function(error, element) {},
 					invalidHandler: function(form, validator) {
 			        	$.each(validator.invalid,function(key,value){
-			            	alert(value);document.getElementById(key).focus();return false;
+			            	alert(value);document.getElementById(key).focus();document.getElementById(key).select();return false;
 			        	}); 
 			    	}
 				});
@@ -83,6 +83,7 @@
 	               	if(!validator.form()){
 						return false;
 					}
+	               	
 					if( $.trim( $("#hid_marketInquiryId").val() ) != ""){
 						form1.action = "modifyMarketInquiryAction.action";
 					}else{
@@ -100,6 +101,7 @@
 		  			parent.$("#windown-close").click();
 		  		});
 			};
+			
 		</script>
 	</head>
 
