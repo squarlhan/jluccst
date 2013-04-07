@@ -374,7 +374,7 @@
             		<td height="26" align="center" bgcolor="#FFFFFF"><s:property value="receivable"/></td>
             		<td height="26" align="center" bgcolor="#FFFFFF"><s:property value="realCollection"/></td>
             		<td height="26" align="center" bgcolor="#FFFFFF">
-            		<s:if test="debt!=0">
+            		<s:if test="debt>0">
 		            	<font color="red"><s:property value="debt"/></font>
 		            </s:if>
 		            <s:else>
