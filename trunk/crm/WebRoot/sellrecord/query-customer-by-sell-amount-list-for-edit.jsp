@@ -246,7 +246,7 @@
             <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="source"/></td>
             <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="totalConsumption"/></td>
             <td height="26" align="center" bgcolor="#FFFFFF">
-            <s:if test="totalDebt!=0">
+            <s:if test="totalDebt>0">
             	<font color="red"><s:property value="totalDebt"/></font>
             </s:if>
             <s:else>
