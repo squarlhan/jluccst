@@ -15,7 +15,11 @@ namespace CSharpSVM
         public libSVM svm{get; set;}
         libSVM_Parameter Parameter { get; set; }
         public SortedDictionary<int, int> weights{get;set;}
-
+        /// <summary>
+        /// 把定义的数据结构类转化成SVM需要的类型
+        /// </summary>
+        /// <param name="lv">输入的自定义数据结构</param>
+        /// <returns>输出SVM要求的数据结构</returns>
         public SortedDictionary<int, double> toSample(LvtongTrainData lv)
         {
             SortedDictionary<int, double> sample = new SortedDictionary<int, double>();
@@ -34,7 +38,9 @@ namespace CSharpSVM
                 sample.Add(13, lv.shijiancha);
             return sample;
         }
-
+        /// <summary>
+        /// 构造方法，把数据从数据库读出来，并设置一些SVM的参数
+        /// </summary>
         public LvtongTrain()
         {
             SqlConnection con = new SqlConnection(Properties.Settings.Default.绿通数据ConnectionString);
@@ -114,7 +120,9 @@ namespace CSharpSVM
             Parameter.nu = 0.0381;
 
         }
-
+        /// <summary>
+        /// 把数据转化成SVM训练需要的数据格式
+        /// </summary>
         public void Load_LvData()
         {
 
@@ -135,7 +143,9 @@ namespace CSharpSVM
             }
 
         }
-
+        /// <summary>
+        /// 把加权的数据转化成SVM训练需要的数据
+        /// </summary>
         public void Load_WightedLvData()
         {
 
@@ -156,7 +166,9 @@ namespace CSharpSVM
             }
 
         }
-
+        /// <summary>
+        /// 训练SVM，产生一个模型文件lv_model_file
+        /// </summary>
         public void doTrian()
         {
             svm.Train(Problem, Parameter);
@@ -182,12 +194,19 @@ namespace CSharpSVM
             svm.Save("lv_model_file"); 
         }
 
-
+        /// <summary>
+        /// 通过加载已存在的模型文件，初始化SVM
+        /// </summary>
+        /// <param name="filename"></param>
         public void reloadSVM(String filename)
         {
             svm.Reload("lv_model_file"); 
         }
-
+        /// <summary>
+        /// 通过模型来预测
+        /// </summary>
+        /// <param name="lv">输入的数据</param>
+        /// <returns>返回是否为绿通车辆</returns>
         public bool doPredict(LvtongTrainData lv)
         {
             SortedDictionary<int, double> sample = toSample(lv);
@@ -197,7 +216,11 @@ namespace CSharpSVM
             }
             return true;
         }
-
+        /// <summary>
+        /// 把加权的自定义的数据结构转化成SVM训练需要的格式
+        /// </summary>
+        /// <param name="lv">自定义数据结构的数据</param>
+        /// <returns>SVM训练需要的格式数据</returns>
         private SortedDictionary<int, double> toWeightedSample(LvtongTrainData lv)
         {
             SortedDictionary<int, double> ws= toSample(lv);
@@ -220,7 +243,11 @@ namespace CSharpSVM
 
         }
 
-       
+       /// <summary>
+       /// 预测加权的数据的结果
+       /// </summary>
+       /// <param name="lv">输入的数据</param>
+       /// <returns>是否为绿通车辆</returns>
         public bool doPredictbyWeight(LvtongTrainData lv)
         {
             if (weights == null || weights.Count <= 0) doPredict(lv);
