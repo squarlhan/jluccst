@@ -358,7 +358,7 @@ public class UserAction extends BaseActionSupport {
 		if (StringUtils.isNotBlank(myUserId)) {
 			User oldUser = userService.getUserById(myUserId);
 			// 判断原密码是否正确
-			if ( !CheckProductKey.pinLogin && !MakeMd5.MD5(user.getPassword()).equals(oldUser.getPassword())) {
+			if ( !CheckProductKey.isPinLoginMethod() && !MakeMd5.MD5(user.getPassword()).equals(oldUser.getPassword())) {
 				message.setContent("您输入的登录密码不正确，请重新填写！");
 			} else {
 				user.setCreateTime(oldUser.getCreateTime());

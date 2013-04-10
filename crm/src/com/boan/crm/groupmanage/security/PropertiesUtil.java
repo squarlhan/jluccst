@@ -13,41 +13,42 @@ import org.apache.commons.lang.StringUtils;
  * 
  */
 public class PropertiesUtil {
-	
+
 	private static PropertiesUtil instance = null;
-	
+
 	private static String loginMehtod = null;
 
-	public static PropertiesUtil getInstance() {
-		if (instance == null)
-			instance = new PropertiesUtil();
-		return instance;
-	}
-
-	public boolean isUsbKeyLogin()
-	{
-		boolean b = false;
+	private PropertiesUtil() {
 		InputStream in = PropertiesUtil.class.getClassLoader().getResourceAsStream("config.properties");
 		Properties configFile = new Properties();
 		try {
 			configFile.load(in);
 			loginMehtod = configFile.getProperty("login-method");
-			if(  StringUtils.isNotBlank(loginMehtod))
-			{
-				if( "key".equalsIgnoreCase(loginMehtod) )
-				{
-					b = true;
-				}
-			}
 			in.close();
 
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	public static PropertiesUtil getInstance() {
+		if (instance == null) {
+			instance = new PropertiesUtil();
+		}
+		return instance;
+	}
+
+	public boolean isUsbKeyLogin() {
+		boolean b = false;
+		if (StringUtils.isNotBlank(loginMehtod)) {
+			if ("key".equalsIgnoreCase(loginMehtod)) {
+				b = true;
+			}
+		}
 		return b;
 	}
 
 	public static void main(String[] args) {
-		System.out.println(PropertiesUtil.getInstance().isUsbKeyLogin() );
+		System.out.println(PropertiesUtil.getInstance().isUsbKeyLogin());
 	}
 }
