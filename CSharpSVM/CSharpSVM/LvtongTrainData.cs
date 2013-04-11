@@ -30,7 +30,7 @@ namespace CSharpSVM
         //车重
         public double chezhong{ get; set; }
         //货物类型
-        public int zaihuo{ get; set; }
+        public string zaihuo { get; set; }
         //收费员编号
         public int bianhao{ get; set; }
         //入关网点
@@ -50,7 +50,7 @@ namespace CSharpSVM
                 "出关" + out_M + "月" + out_D + "日" + out_H + "点," +
                 "可减免" + jianmian + "元," + "车轴数为" + chezhou +
                 "车重为" + chezhong + "吨," + "货物类型为" + zaihuo +
-                ",收费员编号为" + bianhao + ",入关网点为" + rg +
+                "等,收费员编号为" + bianhao + ",入关网点为" + rg +
                 ",运行时间为" + shijiancha + "分钟";
         }
         
