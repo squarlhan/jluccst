@@ -23,7 +23,6 @@
 	response.setHeader("Expires", "0");
 	request.setCharacterEncoding("utf-8");
 	String path = request.getContextPath();
-	CheckProductKey.pinLogin = false;
 %>
 <html xmlns="http://www.w3.org/1999/xhtml">
 	<head>
@@ -71,7 +70,7 @@
 		  	 */
 			$.fn.save = function(){
 				$("#button1").click(function() {
-					<%if (CheckProductKey.pinLogin){%>
+					<%if (CheckProductKey.isPinLoginMethod()){%>
 					if(!Validate()){
 						return false;
 					}
@@ -104,7 +103,7 @@
 			}
 		//-->
 		</script>
-		<%if(CheckProductKey.pinLogin){ %>
+		<%if(CheckProductKey.isPinLoginMethod()){ %>
 		<script language=javascript>
 		function ShowErr(Msg){
 			alert(Msg);
@@ -181,7 +180,7 @@
 		<%}%>
 	</head>
 	<body>
-		<%if(CheckProductKey.pinLogin){ %>
+		<%if(CheckProductKey.isPinLoginMethod()){ %>
 				<OBJECT classid="clsid:0AA5300D-42FC-42A0-9487-357CCC060A7A" height="0" id="ePass"  name="ePass" style="LEFT: 0px; TOP: 0px" width="0"></OBJECT>
 		<%} %>
 		<s:form name="form1" id="form1" method="post" theme="simple">
@@ -221,7 +220,7 @@
 										<tr>
 											<td height="26" align="right" bgcolor="#FFFFFF" nowrap="nowrap">
 												<strong>
-												<%if(CheckProductKey.pinLogin){ %>
+												<%if(CheckProductKey.isPinLoginMethod()){ %>
 													用户PIN码：
 												<%}else{%>
 													用户密码：
@@ -236,7 +235,7 @@
 										<tr>
 											<td height="26" align="right" bgcolor="#FFFFFF">
 												<strong>
-												<%if(CheckProductKey.pinLogin){ %>
+												<%if(CheckProductKey.isPinLoginMethod()){ %>
 													新PIN码：
 													<%}else{%>
 													新 密 码：
@@ -250,7 +249,7 @@
 										<tr>
 											<td height="26" align="right" bgcolor="#FFFFFF">
 												<strong>
-												<%if(CheckProductKey.pinLogin){ %>
+												<%if(CheckProductKey.isPinLoginMethod()){ %>
 													效验PIN码：
 													<%}else{%>
 													效验密码：
