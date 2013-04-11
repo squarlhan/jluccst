@@ -32,10 +32,34 @@ namespace CSharpSVM
                 sample.Add(7, lv.jianmian);
                 sample.Add(8, lv.chezhou);
                 sample.Add(9, lv.chezhong);
-                sample.Add(10, lv.zaihuo);
-                sample.Add(11, lv.bianhao);
-                sample.Add(12, lv.ruguan);
-                sample.Add(13, lv.shijiancha);
+                
+                string[] zaihuos = lv.zaihuo.Split(',');
+                int[] zaihuoint = new int[10];
+                for (int i = 0; i <= 9; i++)
+                {
+                    if (i <= zaihuos.Length - 1)
+                    {
+                        zaihuoint[i] = int.Parse(zaihuos[i]);
+                    }
+                    else
+                    {
+                        zaihuoint[i] = 0;
+                    }
+                }
+
+                sample.Add(10, zaihuoint[0]);
+                sample.Add(11, zaihuoint[1]);
+                sample.Add(12, zaihuoint[2]);
+                sample.Add(13, zaihuoint[3]);
+                sample.Add(14, zaihuoint[4]);
+                sample.Add(15, zaihuoint[5]);
+                sample.Add(16, zaihuoint[6]);
+                sample.Add(17, zaihuoint[7]);
+                sample.Add(18, zaihuoint[8]);
+                sample.Add(19, zaihuoint[9]);
+                sample.Add(20, lv.bianhao);
+                sample.Add(21, lv.ruguan);
+                sample.Add(22, lv.shijiancha);
             return sample;
         }
         /// <summary>
@@ -61,7 +85,7 @@ namespace CSharpSVM
                               ",substring([E15],5,2) as [E15-2]" +
                               ",[E04]" +
                               ",datediff(minute,[E03], [E06]) as [E63]" +
-                          "FROM [绿通数据].[dbo].[通关车辆信息表] where E09<=6 and [e11] not like '%,%' and [e11]!='4'";
+                          "FROM [绿通数据].[dbo].[通关车辆信息表] where E09<=6 and [e11]!='4'";
             SqlCommand cmd = new SqlCommand(str, con);
             SqlDataAdapter adp = new SqlDataAdapter(cmd);
             lvds = new DataSet();
@@ -89,7 +113,7 @@ namespace CSharpSVM
                 lv.jianmian = double.Parse(mDr[7].ToString());
                 lv.chezhou = int.Parse(mDr[8].ToString());
                 lv.chezhong = double.Parse(mDr[9].ToString());
-                lv.zaihuo = int.Parse(mDr[10].ToString());
+                lv.zaihuo = mDr[10].ToString();
                 lv.bianhao = int.Parse(mDr[11].ToString());
                 if (Char.IsNumber(mDr[12].ToString(), 2))
                 {
