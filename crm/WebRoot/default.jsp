@@ -1,3 +1,4 @@
+<%@page import="com.boan.crm.groupmanage.security.PropertiesUtil"%>
 <%@page import="com.boan.crm.groupmanage.security.CheckProductKey"%>
 <%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
@@ -8,7 +9,6 @@
 	response.setHeader("Expires", "0");
 	request.setCharacterEncoding("utf-8");
 	String path = request.getContextPath();
-	CheckProductKey.pinLogin = false;
 %>
 <html>
 <head>
@@ -18,7 +18,7 @@
 </head>
 <body bgcolor="#FFFFFF" leftmargin="0" topmargin="0" marginwidth="0" marginheight="0" style="background-color: #1675b7;" onload="validmessage()">
 	<%
-		if (!CheckProductKey.pinLogin) {
+		if (!CheckProductKey.isPinLoginMethod()) {
 	%>
 	<jsp:include page="default_inc_user.jsp" flush="true" />
 	<%
