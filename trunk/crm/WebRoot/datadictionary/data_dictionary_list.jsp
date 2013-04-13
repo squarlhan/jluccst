@@ -57,6 +57,16 @@
 	  		 * 删除所选设备信息
 	  		 */
 	  		$("#deletebtn").click(function(){
+	  			var chknum = ($(":checkbox[name='dictIds'][disabled=false]").length );
+	  			if( chknum == 0 ){
+	  				alert("暂无可删除的信息！");
+	  				return false;
+	  			}
+	  			var chkchecknum = ($(":checkbox[name='dictIds']:checked").length );
+	  			if( chkchecknum == 0 ){
+	  				alert("请选择要删除的信息！");
+	  				return false;
+	  			}
   				if(window.confirm("您确定要删除所选信息吗？")){
   					document.forms[0].action = "deldatadictionary.action";
 					document.forms[0].submit();

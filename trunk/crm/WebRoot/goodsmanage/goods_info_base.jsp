@@ -152,7 +152,7 @@
 											<strong>价　　格：</strong>
 										</td>
 										<td height="26" align="left" bgcolor="#FFFFFF">
-											<s:textfield id="txt_goodsPrice" name="goodsInfoBase.goodsPrice" cssStyle="width: 250px;" maxlength="100"></s:textfield>
+											<s:textfield id="txt_goodsPrice" name="goodsInfoBase.goodsPrice" cssStyle="width: 250px;" maxlength="100" onKeyPress="if((event.keyCode<48 || event.keyCode>57) && event.keyCode!=46 || /\.\d\d$/.test(value))event.returnValue=false" ></s:textfield>
 											<font color="red">*</font>
 										</td>
 									</tr>
