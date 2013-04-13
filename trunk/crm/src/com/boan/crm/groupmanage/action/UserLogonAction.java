@@ -445,9 +445,10 @@ public class UserLogonAction extends ActionSupport {
 				String eKeyUserId = ekeyUser.getUserId();
 				user = userService.getUserById(eKeyUserId);
 				if (user != null) {
-					if (user.getUserType() == UserType.ADMINISTRATOR) {
-						b = true;
-					}
+					//if (user.getUserType() == UserType.ADMINISTRATOR) {
+					//	b = true;
+					//}
+					b = true;
 				} else {
 					message.setContent("当前身份锁用户并不存在，请联系管理员！");
 					return ERROR;
