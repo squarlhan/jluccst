@@ -206,6 +206,7 @@
 		  	 */
 			$.fn.save = function(){
 				$("#addBtn").click(function() {
+					$("#addBtn").attr("disabled",true);
 					var validate_settings_submit = jQuery.extend({}, _customer_submit);
 	               	var validator = $("form").validate(validate_settings_submit);
 	               	if(!validator.form()){
@@ -224,7 +225,7 @@
 					form1.levelName.value = $("#levelId").text();
 	               	form1.submit();
           		});
-          	}
+          	};
 			
 			
 			
