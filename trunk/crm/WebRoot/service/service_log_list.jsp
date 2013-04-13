@@ -44,6 +44,16 @@
 	  		 * 删除所选设备信息
 	  		 */
 	  		$("#deletebtn").click(function(){
+	  			var chknum = ($(":checkbox[name='logIds'][disabled=false]").length );
+	  			if( chknum == 0 ){
+	  				alert("暂无可删除的信息！");
+	  				return false;
+	  			}
+	  			var chkchecknum = ($(":checkbox[name='logIds']:checked").length );
+	  			if( chkchecknum == 0 ){
+	  				alert("请选择要删除的信息！");
+	  				return false;
+	  			}
   				if(window.confirm("您确定要删除所选信息吗？")){
   					var url = "<%=path%>/service/deleteservicelog.action?logIds=";
   					var values = "";
