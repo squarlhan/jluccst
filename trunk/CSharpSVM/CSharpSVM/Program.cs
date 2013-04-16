@@ -11,8 +11,9 @@ namespace CSharpSVM
     {
         static void Main(string[] args)
         {
-            DateTime dt = DateTime.Now;          
+            DateTime dt = DateTime.Now;
             LvtongTrain lt = new LvtongTrain();
+            lt.read_db_data_old();
             lt.Load_LvData();
             lt.doTrian();
             TimeSpan ts = DateTime.Now - dt;
