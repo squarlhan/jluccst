@@ -11,14 +11,25 @@ namespace CSharpSVM
     {
         static void Main(string[] args)
         {
+
             DateTime dt = DateTime.Now;
-            LvtongTrain lt = new LvtongTrain();
-            lt.read_db_data_old();
+            LvtongTrainNew lt = new LvtongTrainNew();
+            lt.read_db_data_new();
             lt.Load_LvData();
             lt.doTrian();
             TimeSpan ts = DateTime.Now - dt;
             Console.WriteLine(ts);
             Console.ReadLine();
+
+            //DateTime dt = DateTime.Now;
+            //LvtongTrainOld lt = new LvtongTrainOld();
+            //lt.read_db_data_old();
+            //lt.Load_LvData();
+            //lt.doTrian();
+            //TimeSpan ts = DateTime.Now - dt;
+            //Console.WriteLine(ts);
+            //Console.ReadLine();
+
 
             //Application.EnableVisualStyles();
             //Application.SetCompatibleTextRenderingDefault(false);
