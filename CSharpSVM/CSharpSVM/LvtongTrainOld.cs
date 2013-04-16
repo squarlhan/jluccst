@@ -7,7 +7,7 @@ using System.Data.SqlClient;
 
 namespace CSharpSVM
 {
-    class LvtongTrain
+    class LvtongTrainOld
     {
         public DataSet lvds { get; set; }
         public List<LvtongTrainData> lvdata { get; set; }
@@ -63,9 +63,9 @@ namespace CSharpSVM
             return sample;
         }
         /// <summary>
-        /// 构造方法，把数据从数据库读出来，并设置一些SVM的参数
+        /// 构造方法设置一些SVM的参数
         /// </summary>
-        public LvtongTrain()
+        public LvtongTrainOld()
         {
 
             Parameter = new libSVM_Parameter();
@@ -78,6 +78,9 @@ namespace CSharpSVM
             Parameter.nu = 0.0381;
 
         }
+        /// <summary>
+        /// 把数据从数据库读出来,对应于第一版的数据库
+        /// </summary>
         public void read_db_data_old()
         {
             SqlConnection con = new SqlConnection(Properties.Settings.Default.绿通数据ConnectionString);

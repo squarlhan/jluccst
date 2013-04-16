@@ -81,7 +81,8 @@
     <Compile Include="ga\Genome.cs" />
     <Compile Include="ga\GenomeComparer.cs" />
     <Compile Include="ga\Test.cs" />
-    <Compile Include="LvtongTrain.cs" />
+    <Compile Include="LvtongTrainNew.cs" />
+    <Compile Include="LvtongTrainOld.cs" />
     <Compile Include="LvtongTrainData.cs" />
     <Compile Include="libsvm\libSVM.cs" />
     <Compile Include="libsvm\libSVM_enums.cs" />
@@ -90,17 +91,6 @@
     <Compile Include="libsvm\libSVM_Model.cs" />
     <Compile Include="libsvm\libSVM_Parameter.cs" />
     <Compile Include="libsvm\libSVM_Problem.cs" />
-    <Compile Include="lvtong.cs">
-      <DependentUpon>lvtong.xsd</DependentUpon>
-      <SubType>Component</SubType>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Compile>
-    <Compile Include="lvtong.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>lvtong.xsd</DependentUpon>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Compile>
     <Compile Include="pca\CholeskyDecomposition.cs" />
     <Compile Include="pca\Distance.cs" />
     <Compile Include="pca\EigenValueDecomposition.cs" />
@@ -143,6 +133,7 @@
     <Content Include="pca\AForge.Video.dll" />
     <Content Include="pca\AForge.Video.VFW.dll" />
     <Content Include="pca\AForge.Vision.dll" />
+    <Content Include="zaihuo.txt" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.0,Profile=Client">
@@ -168,20 +159,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
-    <None Include="lvtong.xsc">
-      <DependentUpon>lvtong.xsd</DependentUpon>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="lvtong.xsd">
-      <SubType>Designer</SubType>
-      <Generator>MSDataSetGenerator</Generator>
-      <LastGenOutput>lvtong.Designer.cs</LastGenOutput>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Include="lvtong.xss">
-      <DependentUpon>lvtong.xsd</DependentUpon>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -191,6 +168,9 @@
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
