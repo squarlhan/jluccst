@@ -67,6 +67,19 @@ namespace CSharpSVM
         /// </summary>
         public LvtongTrain()
         {
+
+            Parameter = new libSVM_Parameter();
+            svm = new libSVM();
+            Problem = new libSVM_Problem();
+
+            Parameter.svm_type = SVM_TYPE.ONE_CLASS;
+            Parameter.kernel_type = KERNEL_TYPE.RBF;
+            Parameter.gamma = 0.00003571;
+            Parameter.nu = 0.0381;
+
+        }
+        public void read_db_data_old()
+        {
             SqlConnection con = new SqlConnection(Properties.Settings.Default.绿通数据ConnectionString);
             if (con.State == ConnectionState.Closed)
                 con.Open();
@@ -119,9 +132,9 @@ namespace CSharpSVM
                 {
                     lv.ruguan = double.Parse(mDr[12].ToString());
                 }
-                else 
+                else
                 {
-                    lv.ruguan = double.Parse(mDr[12].ToString().Substring(0, 2))*10; 
+                    lv.ruguan = double.Parse(mDr[12].ToString().Substring(0, 2)) * 10;
                 }
                 lv.ruguan = lv.ruguan / 100;
                 lv.shijiancha = int.Parse(mDr[13].ToString());
@@ -133,16 +146,6 @@ namespace CSharpSVM
             //Console.WriteLine(lvdata.Count);
             //Console.ReadLine();
             con.Close();
-
-            Parameter = new libSVM_Parameter();
-            svm = new libSVM();
-            Problem = new libSVM_Problem();
-
-            Parameter.svm_type = SVM_TYPE.ONE_CLASS;
-            Parameter.kernel_type = KERNEL_TYPE.RBF;
-            Parameter.gamma = 0.00003571;
-            Parameter.nu = 0.0381;
-
         }
         /// <summary>
         /// 把数据转化成SVM训练需要的数据格式
