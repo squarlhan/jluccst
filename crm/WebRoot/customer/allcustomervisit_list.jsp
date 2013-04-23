@@ -176,8 +176,8 @@
 			<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">业务进展</td>
 			<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">受访人</td>
 			<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">联系方式</td>
-			<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">兴趣点</td>
-			<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">异议点</td>
+			<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">内容及结果</td>
+			<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">备注</td>
               <td align="center" background="../images/headerbg.jpg"><strong>操作</strong></td>
         </tr>
         <s:iterator value="pagination.data" status="obj">
