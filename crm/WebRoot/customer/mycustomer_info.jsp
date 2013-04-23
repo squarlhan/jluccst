@@ -53,7 +53,8 @@
 					"customerInfo.levelId":{required:true},
 					"customerInfo.address":{required:true,strangecode:true},
 					"customerInfo.mainIndustry":{required:true,strangecode:true},
-					"customerInfo.introduceTimes":{number:true}
+					"customerInfo.introduceTimes":{number:true},
+					"customerInfo.postCode":{number:true}
 				},    
 				messages: {
 				    "customerInfo.customerName": {
