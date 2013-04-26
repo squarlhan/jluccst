@@ -325,26 +325,26 @@
 					</fieldset>
 					<fieldset >
 					<legend>结算信息</legend>
-						<span>
+						<span onmousemove="this.setCapture();" onmouseout="this.releaseCapture();" onfocus="this.blur();">
 						<table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#d5e4fd">
 							<tr>
 								<td height="26" align="right" bgcolor="#FFFFFF" nowrap="nowrap">
 									<strong>应收总计：</strong>
 								</td>
 								<td height="26" align="left" bgcolor="#FFFFFF"  nowrap="nowrap">
-									<s:textfield id="txt_receivable" name="sellRecord.receivable" cssStyle="width:240px" ></s:textfield>元
+									<s:textfield id="txt_receivable" name="sellRecord.receivable" cssStyle="width:240px"  readonly="true"></s:textfield>元
 								</td>
 								<td height="26" align="right" bgcolor="#FFFFFF" nowrap="nowrap">
 									<strong>实 收：</strong>
 								</td>
 								<td height="26" align="left" bgcolor="#FFFFFF"  nowrap="nowrap">
-									<s:textfield id="txt_realCollection" name="sellRecord.realCollection" cssStyle="width:240px" ></s:textfield>元
+									<s:textfield id="txt_realCollection" name="sellRecord.realCollection" cssStyle="width:240px"  readonly="true"></s:textfield>元
 								</td>
 								<td height="26" align="right" bgcolor="#FFFFFF" nowrap="nowrap">
 									<strong>欠 款：</strong>
 								</td>
-								<td height="26" align="left" bgcolor="#FFFFFF" nowrap="nowrap">
-									<s:textfield  id="txt_debt" name="sellRecord.debt" cssStyle="width:240px" ></s:textfield>元
+								<td height="26" align="left" bgcolor="#FFFFFF" nowrap="nowrap" >
+									<s:textfield  id="txt_debt" name="sellRecord.debt" cssStyle="width:240px" readonly="true" ></s:textfield>元
 								</td>
 							</tr>
 						</table>

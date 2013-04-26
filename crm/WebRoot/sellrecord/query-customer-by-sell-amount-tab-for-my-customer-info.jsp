@@ -371,25 +371,27 @@
 						<span>
 						<table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#d5e4fd">
 							<tr>
-								<td height="26" align="right" bgcolor="#FFFFFF" nowrap="nowrap" width="80px">
-									<strong>应收总计：</strong>
+								<span onmousemove="this.setCapture();" onmouseout="this.releaseCapture();" onfocus="this.blur();">
+								<td height="26" align="right" bgcolor="#FFFFFF" nowrap="nowrap" width="100px">
+									<strong >应收总计：</strong>
 								</td>
 								<td height="26" align="left" bgcolor="#FFFFFF"  nowrap="nowrap" width="150px">
-									<s:textfield id="txt_receivable" name="sellRecord.receivable" cssStyle="width:100px" ></s:textfield>元
+									<s:textfield id="txt_receivable" name="sellRecord.receivable" cssStyle="width:100px"  readonly="true"></s:textfield>元
 								</td>
 								<td height="26" align="right" bgcolor="#FFFFFF" nowrap="nowrap" width="80px">
 									<strong>实 收：</strong>
 								</td>
 								<td height="26" align="left" bgcolor="#FFFFFF"  nowrap="nowrap" width="190px">
-									<s:textfield id="txt_realCollection" name="sellRecord.realCollection" cssStyle="width:100px" ></s:textfield>元<font color="red">*</font>
+									<s:textfield id="txt_realCollection" name="sellRecord.realCollection" cssStyle="width:100px"   readonly="true"></s:textfield>元
 								</td>
 								<td height="26" align="right" bgcolor="#FFFFFF" nowrap="nowrap" width="80px">
 									<strong>欠 款：</strong>
 								</td>
 								<td height="26" align="left" bgcolor="#FFFFFF" nowrap="nowrap">
-									<s:textfield  id="txt_debt" name="sellRecord.debt" cssStyle="width:100px" ></s:textfield>元
+									<s:textfield  id="txt_debt" name="sellRecord.debt" cssStyle="width:100px"   readonly="true"></s:textfield>元
 								</td>
-								<td height="26" align="right" bgcolor="#FFFFFF" nowrap="nowrap" width="80px">
+								</span>
+								<td height="26" align="right" bgcolor="#FFFFFF" nowrap="nowrap" width="100px">
 									<strong>还款时间：</strong>
 								</td>
 								<td height="26" align="left" bgcolor="#FFFFFF" nowrap="nowrap">
