@@ -133,6 +133,10 @@ public class CustomerLibInfoServiceImpl implements ICustomerLibInfoService{
 		List tempList = customerLibInfoDao.findForPage(hql.toString(), values, pagination.getStartIndex(), pagination.getPageSize());
 		hql.delete(0, hql.length());
 		hql.append(" select count(*) from CustomerLibInfoView where 1=1 and noSearch=0 " );
+		if(values.get("companyId") != null)
+		{
+			hql.append(" and companyId =:companyId");
+		}
 		if(values.get("mainIndustry") != null)
 		{
 			hql.append(" and mainIndustry like '%"+values.get("mainIndustry") +"%' ");
