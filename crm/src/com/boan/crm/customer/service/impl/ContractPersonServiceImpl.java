@@ -12,11 +12,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.boan.crm.customer.dao.IContractPersonDAO;
-import com.boan.crm.customer.dao.ICustomerInfoDAO;
 import com.boan.crm.customer.model.ContractPersonInfo;
-import com.boan.crm.customer.model.CustomerInfo;
 import com.boan.crm.customer.service.IContractPersonService;
-import com.boan.crm.sms.service.ISMSCustomerInfoService;
 import com.boan.crm.utils.page.Pagination;
 
 /**
@@ -28,9 +25,6 @@ public class ContractPersonServiceImpl implements IContractPersonService {
 	@Autowired
 	@Qualifier("contractPersonDao")
 	private IContractPersonDAO contractPersonDao;
-	@Autowired
-	@Qualifier("SMSCustomerInfoService")
-	private ISMSCustomerInfoService  smsCustomerService ;
 	
 	@Override
 	public void deleteContractPersonInfo(String... ids) {
