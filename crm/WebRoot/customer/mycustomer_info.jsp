@@ -329,7 +329,7 @@
 											</td>
 										</tr>
 										<tr>
-											<td align="center">开发程度：</td>
+											<td align="center">客户状态：</td>
 											<td><s:select list="listLevel"
 													listKey="id" listValue="name" value="customerInfo.levelId"
 													id="levelId" name="customerInfo.levelId"
