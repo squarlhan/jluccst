@@ -155,7 +155,7 @@
 			<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">客户分类</td>
 			<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">业务进展</td>
 			<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">成熟度</td>
-			<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">开发程度</td>
+			<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">客户状态</td>
 			<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">客户来源</td>
               <!-- 
               <td align="center" background="../images/headerbg.jpg"><strong>公司地址</strong></td>
