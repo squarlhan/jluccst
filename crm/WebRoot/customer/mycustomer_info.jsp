@@ -77,7 +77,7 @@
 						required: "请选择成熟度！"
 					},
 					"customerInfo.levelId": {
-						required: "请选择开发程度！"
+						required: "请选择客户状态！"
 					},
 					"customerInfo.address": {
 						required: "请输入客户具体地址！"
