@@ -8,7 +8,6 @@
 	request.setCharacterEncoding( "utf-8" );
 	String path = request.getContextPath();
 %>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -17,14 +16,39 @@
 <style type="text/css">
 <!--
 .STYLE1 {color: #FFFFFF}
+.btnCls{
+	float: left;
+}
 -->
 </style>
 </head>
 <body>
-<table width="100%" height="100%" border="0" cellpadding="0" cellspacing="0" id="__01">
+<table height="100%" border="0" cellpadding="0" cellspacing="0" id="__01">
   <tr>
-    <td align="center"><img src="images/20110222-150712-81872.jpg" /></td>
+    <td align="center"><img src="images/mainpic.jpg" /></td>
+    <td align="center">
+    	<div class="btnCls"><img src="images/btn/czqzkh.png" /></div>
+ 		<div class="btnCls"><img src="images/btn/wdkh.png" /></div>
+ 		<div class="btnCls"><img src="images/btn/yxkh.png" /></div>
+ 		<div class="btnCls"><img src="images/btn/zkh.png" /></div>
+ 		<div class="btnCls"><img src="images/btn/cdkh.png" /></div>
+ 		<div class="btnCls"><img src="images/btn/khpg.png" /></div>
+    </td>
   </tr>
+  <!-- tr>
+    <td align="center">
+    	<table border="0" cellpadding="0" cellspacing="0">
+    		<tr>
+    			<td><img src="images/btn/czqzkh.png" /></td>
+    			<td><img src="images/btn/wdkh.png" /></td>
+    			<td><img src="images/btn/yxkh.png" /></td>
+    			<td><img src="images/btn/zkh.png" /></td>
+    			<td><img src="images/btn/cdkh.png" /></td>
+    			<td><img src="images/btn/khpg.png" /></td>
+    		</tr>
+    	</table>
+    </td>
+  </tr-->
 </table>
 </body>
 </html>
