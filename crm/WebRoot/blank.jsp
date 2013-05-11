@@ -23,32 +23,10 @@
 </style>
 </head>
 <body>
-<table height="100%" border="0" cellpadding="0" cellspacing="0" id="__01">
+<table style="width:100%" height="100%" border="0" cellpadding="0" cellspacing="0" id="__01">
   <tr>
     <td align="center"><img src="images/mainpic.jpg" /></td>
-    <td align="center">
-    	<div class="btnCls"><img src="images/btn/czqzkh.png" /></div>
- 		<div class="btnCls"><img src="images/btn/wdkh.png" /></div>
- 		<div class="btnCls"><img src="images/btn/yxkh.png" /></div>
- 		<div class="btnCls"><img src="images/btn/zkh.png" /></div>
- 		<div class="btnCls"><img src="images/btn/cdkh.png" /></div>
- 		<div class="btnCls"><img src="images/btn/khpg.png" /></div>
-    </td>
   </tr>
-  <!-- tr>
-    <td align="center">
-    	<table border="0" cellpadding="0" cellspacing="0">
-    		<tr>
-    			<td><img src="images/btn/czqzkh.png" /></td>
-    			<td><img src="images/btn/wdkh.png" /></td>
-    			<td><img src="images/btn/yxkh.png" /></td>
-    			<td><img src="images/btn/zkh.png" /></td>
-    			<td><img src="images/btn/cdkh.png" /></td>
-    			<td><img src="images/btn/khpg.png" /></td>
-    		</tr>
-    	</table>
-    </td>
-  </tr-->
 </table>
 </body>
 </html>
