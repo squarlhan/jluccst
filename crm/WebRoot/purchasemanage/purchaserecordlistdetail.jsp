@@ -32,12 +32,12 @@
 		<meta http-equiv="expires" content="0">
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<j:scriptlink css="true" tipswindow="true" jmessagebox="true" jquery="true" validate="true" jfunction="true" />
-	<link rel="stylesheet" media="all" type="text/css" href="http://127.0.0.1:8080/boan-crm/js/timepicke/jquery-ui-1.7.3.custom.css" />
-	<link rel="stylesheet" media="all" type="text/css" href="http://127.0.0.1:8080/boan-crm/js/timepicke/jquery-ui-timepicker-addon.css" />
-	<script type="text/javascript" src="http://127.0.0.1:8080/boan-crm/js/timepicke/jquery-ui-1.7.3.custom.min.js"></script>
-	<script type="text/javascript" src="http://127.0.0.1:8080/boan-crm/js/timepicke/jquery-ui-timepicker-addon.js"></script>
-	<script type="text/javascript" src="http://127.0.0.1:8080/boan-crm/js/timepicke/jquery-ui-timepicker-zh-CN.js"></script>
-	<script type="text/javascript" src="http://127.0.0.1:8080/boan-crm/js/timepicke/jquery-ui-sliderAccess.js"></script>
+	<link rel="stylesheet" media="all" type="text/css" href="<%=path %>/js/timepicke/jquery-ui-1.7.3.custom.css" />
+	<link rel="stylesheet" media="all" type="text/css" href="<%=path %>/js/timepicke/jquery-ui-timepicker-addon.css" />
+	<script type="text/javascript" src="<%=path %>/js/timepicke/jquery-ui-1.7.3.custom.min.js"></script>
+	<script type="text/javascript" src="<%=path %>/js/timepicke/jquery-ui-timepicker-addon.js"></script>
+	<script type="text/javascript" src="<%=path %>/js/timepicke/jquery-ui-timepicker-zh-CN.js"></script>
+	<script type="text/javascript" src="<%=path %>/js/timepicke/jquery-ui-sliderAccess.js"></script>
 		<style type="text/css">
 <!--
 .STYLE1 {
