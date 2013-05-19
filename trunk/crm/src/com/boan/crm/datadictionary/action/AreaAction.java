@@ -6,7 +6,6 @@
 
 package com.boan.crm.datadictionary.action;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -17,10 +16,8 @@ import org.springframework.stereotype.Controller;
 
 import com.boan.crm.datadictionary.model.AreaInfo;
 import com.boan.crm.datadictionary.model.CityInfo;
-import com.boan.crm.datadictionary.model.DataDictionary;
 import com.boan.crm.datadictionary.model.ProvinceInfo;
 import com.boan.crm.datadictionary.service.IAreaService;
-import com.boan.crm.datadictionary.service.IDataDictionaryService;
 import com.boan.crm.utils.action.BaseActionSupport;
 
 
