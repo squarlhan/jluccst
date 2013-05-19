@@ -73,7 +73,7 @@
 										d.add(102,0,'客户状态','datadictionarylist.action?typeFlag=1','','groupmain');
 										d.add(103,0,'客户来源','datadictionarylist.action?typeFlag=2','','groupmain');
 										d.add(104,0,'主营行业','datadictionarylist.action?typeFlag=3','','groupmain');
-										d.add(105,0,'客户成熟度','datadictionarylist.action?typeFlag=4','','groupmain');
+										d.add(105,0,'客户忠诚度','datadictionarylist.action?typeFlag=4','','groupmain');
 										d.add(106,0,'回访方式','datadictionarylist.action?typeFlag=5','','groupmain');
 										d.add(107,0,'跟进方式','datadictionarylist.action?typeFlag=6','','groupmain');
 										d.add(108,0,'业务进展','datadictionarylist.action?typeFlag=7','','groupmain');
