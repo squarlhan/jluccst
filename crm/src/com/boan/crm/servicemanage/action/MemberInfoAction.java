@@ -21,7 +21,6 @@ import org.springframework.stereotype.Controller;
 import com.boan.crm.datadictionary.model.DataDictionary;
 import com.boan.crm.datadictionary.service.IDataDictionaryService;
 import com.boan.crm.servicemanage.model.MemberInfo;
-import com.boan.crm.servicemanage.model.ServiceLog;
 import com.boan.crm.servicemanage.service.IMemberInfoService;
 import com.boan.crm.utils.action.BaseActionSupport;
 import com.boan.crm.utils.page.Pagination;
@@ -63,8 +62,11 @@ public class MemberInfoAction extends BaseActionSupport {
 	private String companyId;
 	private String companyName;
 	private String memberType;
+	private String txtRemark;
 	
 	private String searchCompanyName;
+	
+	private String message;
 	
 	private List<DataDictionary> listSource = null;
 	
@@ -100,12 +102,15 @@ public class MemberInfoAction extends BaseActionSupport {
 	 */
 	public String saveMemberInfo(){
 		listSource = dataDictionaryService.findDataDictionaryByType(sessionCompanyId, 9);
+		txtRemark = memberInfo.getRemark();
 		if(StringUtils.trimToNull(infoId)!=null)
 			memberInfo = memberInfoService.getById(infoId);
 		else
 			memberInfo = new MemberInfo();
 		memberInfo.setMemberType(memberType);
+		memberInfo.setRemark(txtRemark);
 		memberInfoService.updateInfo(memberInfo);
+		message = "保存成功！";
 		return SUCCESS;
 	}
 	
@@ -258,5 +263,13 @@ public class MemberInfoAction extends BaseActionSupport {
 	 */
 	public void setMemberType(String memberType) {
 		this.memberType = memberType;
+	}
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
 	}
 }
