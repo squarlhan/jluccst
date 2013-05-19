@@ -10,13 +10,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.struts2.ServletActionContext;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.boan.crm.datadictionary.model.DataDictionary;
 import com.boan.crm.datadictionary.service.IDataDictionaryService;
+import com.boan.crm.groupmanage.common.UserSession;
 import com.boan.crm.utils.action.BaseActionSupport;
 
 
@@ -49,6 +52,7 @@ public class DataDictionaryAction extends BaseActionSupport {
 	
 	private String[] dictIds;
 	private String message;
+	private int userType;
 	
 	private List<DictionaryType> loadDictionaryTypes(){
 		List<DictionaryType> list = new ArrayList<DictionaryType>();
@@ -70,6 +74,9 @@ public class DataDictionaryAction extends BaseActionSupport {
 	 * @return
 	 */
 	public String dataDictionaryList(){
+		HttpSession session = ServletActionContext.getRequest().getSession();
+		UserSession userSession = (UserSession) session.getAttribute("userSession");
+		userType = userSession.getUserType();
 		dataDictionarys = dataDictionaryService.findDataDictionaryByType(sessionCompanyId, typeFlag);
 		return SUCCESS;
 	}
@@ -79,6 +86,9 @@ public class DataDictionaryAction extends BaseActionSupport {
 	 * @return
 	 */
 	public String dataDictionaryInfo(){
+		HttpSession session = ServletActionContext.getRequest().getSession();
+		UserSession userSession = (UserSession) session.getAttribute("userSession");
+		userType = userSession.getUserType();
 		if(StringUtils.trimToNull(dictId)!=null)
 			dataDictionary = dataDictionaryService.get(dictId);
 		else
@@ -91,6 +101,9 @@ public class DataDictionaryAction extends BaseActionSupport {
 	 * @return
 	 */
 	public String saveDataDictionary(){
+		HttpSession session = ServletActionContext.getRequest().getSession();
+		UserSession userSession = (UserSession) session.getAttribute("userSession");
+		userType = userSession.getUserType();
 		if(StringUtils.trimToNull(dictId)!=null){
 			dataDictionary = dataDictionaryService.get(dictId);
 			this.message = "保存成功！";
@@ -244,6 +257,14 @@ public class DataDictionaryAction extends BaseActionSupport {
 	 */
 	public void setMessage(String message) {
 		this.message = message;
+	}
+
+	public int getUserType() {
+		return userType;
+	}
+
+	public void setUserType(int userType) {
+		this.userType = userType;
 	}
 	
 }
