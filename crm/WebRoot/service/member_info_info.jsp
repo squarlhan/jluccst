@@ -54,12 +54,7 @@
 	$.fn.initpage = function() {
 		$("#txt_companyName").focus();
 		//回显上传时的错误信息
-		var uploadErr = $("#lb_error").html();
-		if (uploadErr != null && $.trim(uploadErr) != "") {
-			alert(uploadErr);
-		}
-
-		var message = $("#lb_message").html();
+		var message = $("#message").val();
 		if (message != null && $.trim(message) != "") {
 			alert(message);
 		}
@@ -68,7 +63,7 @@
 </head>
 <body>
 	<form id="form1" name="form1" method="post">
-		<label id="lb_message" style="display:none"></label>
+		<s:hidden id="message" name="message" />
 		<s:hidden id="infoId" name="infoId"></s:hidden>
 		<s:hidden id="hdCompanyId" name="companyId"></s:hidden>
 		<s:hidden id="hdCompanyName" name="companyName"></s:hidden>
@@ -106,7 +101,7 @@
 														<tr>
 															<td align="center" nowrap="nowrap">成为时间</td>
 															<td align="left"><s:textfield id="txt_createTime"
-																	name="memberInfo.createTime" cssStyle="width:150px;" readonly="true" onClick="WdatePicker()"/>
+																	name="memberInfo.createTime" cssStyle="width:150px;" readonly="true"/>
 															</td>
 															<td align="center" nowrap="nowrap">消费总额</td>
 															<td align="left"><s:textfield id="txt_consumptionAmount"
@@ -118,7 +113,7 @@
 														</tr>
 														<tr>
 															<td align="center" nowrap="nowrap">备注</td>
-															<td colspan="5" align="left"><s:textarea id="txt_remark"
+															<td colspan="5" align="left"><s:textarea id="txtRemark"
 																	name="memberInfo.remark" cssStyle="width:648px; height:120px"/>
 															</td>
 														</tr>
