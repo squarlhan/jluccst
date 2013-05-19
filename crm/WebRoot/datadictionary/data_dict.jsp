@@ -80,6 +80,7 @@
 										//d.add(109,0,'经营产品','datadictionarylist.action?typeFlag=8','','groupmain');
 										d.add(110,0,'会员类别','datadictionarylist.action?typeFlag=9','','groupmain');
 										d.add(111,0,'销售设置','../openSellDutyListAction.action','','groupmain');
+										d.add(112,0,'开发程度','datadictionarylist.action?typeFlag=10','','groupmain');
 										document.write(d);
 										d.openAll();
 										//-->
