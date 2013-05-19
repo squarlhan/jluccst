@@ -86,10 +86,18 @@
 						<table width="100%" border="0" cellspacing="5" cellpadding="0">
 							<tr>
 								<td>
-									<input name="button" type="button" class="btn_2_3" id="addbtn"
-										value="添加">
-									<input name="button" type="button" class="btn_4"
-										id="deletebtn" value="删除所选">
+									<s:if test="userType==9">
+										<input name="button" type="button" class="btn_2_3" id="addbtn" value="添加">
+										<input name="button" type="button" class="btn_4" id="deletebtn" value="删除所选">
+									</s:if>
+									<s:else>
+										<s:if test="typeFlag==4 || typeFlag==7 || typeFlag==10">
+										</s:if>
+										<s:else>										
+											<input name="button" type="button" class="btn_2_3" id="addbtn" value="添加">
+											<input name="button" type="button" class="btn_4" id="deletebtn" value="删除所选">
+										</s:else>
+									</s:else>
 									<input name="sortbtn" type="button" class="btn_2_3"
 										id="sortbtn" value="排序">
 								</td>
@@ -99,10 +107,20 @@
 						<table width="100%" border="0" cellpadding="5" cellspacing="1"
 							bgcolor="#d5e4fd">
 							<tr>
-								<td align="center" background="<%=path%>/images/headerbg.jpg">
-									<s:checkbox theme="simple" id="cbk_all" name="all"></s:checkbox>
-								</td>
-
+								<s:if test="userType==9">
+									<td align="center" background="<%=path%>/images/headerbg.jpg">
+										<s:checkbox theme="simple" id="cbk_all" name="all"></s:checkbox>
+									</td>
+								</s:if>
+								<s:else>
+									<s:if test="typeFlag==4 || typeFlag==7 || typeFlag==10">
+									</s:if>
+									<s:else>										
+										<td align="center" background="<%=path%>/images/headerbg.jpg">
+											<s:checkbox theme="simple" id="cbk_all" name="all"></s:checkbox>
+										</td>
+									</s:else>
+								</s:else>
 								<td align="center"
 									background="<%=path%>/images/headerbg.jpg">
 									<strong>字典名称</strong>
@@ -114,10 +132,22 @@
 							</tr>
 							<s:iterator value="dataDictionarys" status="obj">
 								<tr>
-									<td height="26" align="center" bgcolor="#FFFFFF">
-										<s:checkbox id="%{id}" name="dictIds" fieldValue="%{id}"
-											value="false" theme="simple" />
-									</td>
+									<s:if test="userType==9">
+										<td height="26" align="center" bgcolor="#FFFFFF">
+											<s:checkbox id="%{id}" name="dictIds" fieldValue="%{id}"
+												value="false" theme="simple" />
+										</td>
+									</s:if>
+									<s:else>
+										<s:if test="typeFlag==4 || typeFlag==7 || typeFlag==10">
+										</s:if>
+										<s:else>										
+											<td height="26" align="center" bgcolor="#FFFFFF">
+												<s:checkbox id="%{id}" name="dictIds" fieldValue="%{id}"
+													value="false" theme="simple" />
+											</td>
+										</s:else>
+									</s:else>
 									<td height="26" align="center" bgcolor="#FFFFFF">
 										<span class="showInfo" tid="<s:property value='id' />"><s:property value="name" /></span>
 										&nbsp;

@@ -144,8 +144,17 @@
 												<strong>字典名称：</strong>
 											</td>
 											<td height="26" align="left" bgcolor="#FFFFFF">
-												<s:textfield id="dictName_t" name="dataDictionary.name"
-													maxlength="25" cssStyle="width: 300px;"></s:textfield>
+												<s:if test="userType==9">
+													<s:textfield id="dictName_t" name="dataDictionary.name" maxlength="25" readonly="false" cssStyle="width: 300px;"></s:textfield>
+												</s:if>
+												<s:else>
+													<s:if test="typeFlag==4 || typeFlag==7 || typeFlag==10">
+														<s:textfield id="dictName_t" name="dataDictionary.name" maxlength="25" readonly="true" cssStyle="width: 300px;"></s:textfield>
+													</s:if>
+													<s:else>
+														<s:textfield id="dictName_t" name="dataDictionary.name" maxlength="25" readonly="false" cssStyle="width: 300px;"></s:textfield>
+													</s:else>
+												</s:else>
 												<font color="red">*</font>
 											</td>
 										</tr>
@@ -159,8 +168,16 @@
 										</tr>
 										<tr>
 											<td height="26" colspan="2" align="center" bgcolor="#FFFFFF">
-												<input name="addBtn" type="button" class="btn_2_3"
-													id="addBtn" value="添加">
+												<s:if test="userType==9">
+													<input name="addBtn" type="button" class="btn_2_3" id="addBtn" value="添加">
+												</s:if>
+												<s:else>
+													<s:if test="typeFlag==4 || typeFlag==7 || typeFlag==10">
+													</s:if>
+													<s:else>										
+														<input name="addBtn" type="button" class="btn_2_3" id="addBtn" value="添加">
+													</s:else>
+												</s:else>
 												<s:if test="dictId!=null">
 												<input name="saveBtn" type="button" class="btn_2_3"
 													id="saveBtn" value="保存">
