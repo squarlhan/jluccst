@@ -155,7 +155,7 @@
 			<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">客户分类</td>
 			<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">业务进展</td>
 			<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">成熟度</td>
-			<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">客户状态</td>
+			<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">开发程度</td>
 			<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">客户来源</td>
               <!-- 
               <td align="center" background="../images/headerbg.jpg"><strong>公司地址</strong></td>
@@ -178,7 +178,7 @@
             <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="category"/></td>
             <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="progress"/></td>
             <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="maturity"/></td>
-            <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="level"/></td>
+            <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="levelId"/></td>
             <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="source"/></td>
               <!-- 
               <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="address"/></td>
