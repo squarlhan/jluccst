@@ -207,7 +207,7 @@ public class CustomerStaticInfoServiceImpl implements ICustomerStaticInfoService
 		{
 			deleteFlagStr = " and deleteFlag = 0";
 		}
-		if(key == CustomerStaticInfo.CUSTOMER_SOURCE || key == CustomerStaticInfo.CUSTOMER_CATEGORY || key == CustomerStaticInfo.CUSTOMER_MATURITY || key == CustomerStaticInfo.CUSTOMER_PROGRESS || key == CustomerStaticInfo.CUSTOMER_LEVEL)
+		if(key == CustomerStaticInfo.CUSTOMER_SOURCE || key == CustomerStaticInfo.CUSTOMER_CATEGORY || key == CustomerStaticInfo.CUSTOMER_MATURITY || key == CustomerStaticInfo.CUSTOMER_PROGRESS)
 		{
 			List<DataDictionary> listDic = dataDictionaryService.findDataDictionaryByType(companyId, key);
 			if(listDic != null && listDic.size() > 0)
@@ -265,236 +265,236 @@ public class CustomerStaticInfoServiceImpl implements ICustomerStaticInfoService
 			}
 		}else if(key == CustomerStaticInfo.CUSTOMER_LEVEL)
 		{
-//			CustomerStaticInfo staticInfo1 = new CustomerStaticInfo();
-//			staticInfo1.setKey(key);
-//			staticInfo1.setCategory("10%");
-//			hql.append("select Count(id) from CustomerInfo where levelId = :levelId and companyId = :companyId  " + deleteFlagStr);
-//			values.put("levelId", "10%");
-//			values.put("companyId", companyId);
-//			if( deptId != null && deptId.length() > 0)
-//			{
-//				hql.append(" and salesmanId in (select id from User where deptId =:deptId ) ");
-//				values.put("deptId", deptId);
-//			}else
-//			{
-//				if(userId != null && userId.length() > 0)
-//				{
-//					hql.append(" and salesmanId = :userId ) ");
-//					values.put("userId", userId);
-//				}
-//			}
-//			int count = customerStaticInfoDao.findCountForPage(hql.toString(), values);
-//			staticInfo1.setCount(count);
-//			list.add(staticInfo1);
-//			
-//			CustomerStaticInfo staticInfo2 = new CustomerStaticInfo();
-//			staticInfo2.setKey(key);
-//			staticInfo2.setCategory("20%");
-//			hql.delete(0, hql.length());
-//			hql.append("select Count(id) from CustomerInfo where levelId = :levelId and companyId = :companyId  " + deleteFlagStr);
-//			values.put("levelId", "20%");
-//			values.put("companyId", companyId);
-//			if( deptId != null && deptId.length() > 0)
-//			{
-//				hql.append(" and salesmanId in (select id from User where deptId =:deptId ) ");
-//				values.put("deptId", deptId);
-//			}else
-//			{
-//				if(userId != null && userId.length() > 0)
-//				{
-//					hql.append(" and salesmanId = :userId ) ");
-//					values.put("userId", userId);
-//				}
-//			}
-//			count = customerStaticInfoDao.findCountForPage(hql.toString(), values);
-//			staticInfo2.setCount(count);
-//			list.add(staticInfo2);
-//			
-//			CustomerStaticInfo staticInfo3 = new CustomerStaticInfo();
-//			staticInfo3.setKey(key);
-//			staticInfo3.setCategory("30%");
-//			hql.delete(0, hql.length());
-//			hql.append("select Count(id) from CustomerInfo where levelId = :levelId and companyId = :companyId  " + deleteFlagStr);
-//			values.put("levelId", "30%");
-//			values.put("companyId", companyId);
-//			if( deptId != null && deptId.length() > 0)
-//			{
-//				hql.append(" and salesmanId in (select id from User where deptId =:deptId ) ");
-//				values.put("deptId", deptId);
-//			}else
-//			{
-//				if(userId != null && userId.length() > 0)
-//				{
-//					hql.append(" and salesmanId = :userId ) ");
-//					values.put("userId", userId);
-//				}
-//			}
-//			count = customerStaticInfoDao.findCountForPage(hql.toString(), values);
-//			staticInfo3.setCount(count);
-//			list.add(staticInfo3);
-//			
-//			CustomerStaticInfo staticInfo4 = new CustomerStaticInfo();
-//			staticInfo4.setKey(key);
-//			staticInfo4.setCategory("40%");
-//			hql.delete(0, hql.length());
-//			hql.append("select Count(id) from CustomerInfo where levelId = :levelId and companyId = :companyId  " + deleteFlagStr);
-//			values.put("levelId", "40%");
-//			values.put("companyId", companyId);
-//			if( deptId != null && deptId.length() > 0)
-//			{
-//				hql.append(" and salesmanId in (select id from User where deptId =:deptId ) ");
-//				values.put("deptId", deptId);
-//			}else
-//			{
-//				if(userId != null && userId.length() > 0)
-//				{
-//					hql.append(" and salesmanId = :userId ) ");
-//					values.put("userId", userId);
-//				}
-//			}
-//			count = customerStaticInfoDao.findCountForPage(hql.toString(), values);
-//			staticInfo4.setCount(count);
-//			list.add(staticInfo4);
-//			
-//			
-//			CustomerStaticInfo staticInfo5 = new CustomerStaticInfo();
-//			staticInfo5.setKey(key);
-//			staticInfo5.setCategory("50%");
-//			hql.delete(0, hql.length());
-//			hql.append("select Count(id) from CustomerInfo where levelId = :levelId and companyId = :companyId  " + deleteFlagStr);
-//			values.put("levelId", "50%");
-//			values.put("companyId", companyId);
-//			if( deptId != null && deptId.length() > 0)
-//			{
-//				hql.append(" and salesmanId in (select id from User where deptId =:deptId ) ");
-//				values.put("deptId", deptId);
-//			}else
-//			{
-//				if(userId != null && userId.length() > 0)
-//				{
-//					hql.append(" and salesmanId = :userId ) ");
-//					values.put("userId", userId);
-//				}
-//			}
-//			count = customerStaticInfoDao.findCountForPage(hql.toString(), values);
-//			staticInfo5.setCount(count);
-//			list.add(staticInfo5);
-//			
-//			CustomerStaticInfo staticInfo6 = new CustomerStaticInfo();
-//			staticInfo6.setKey(key);
-//			staticInfo6.setCategory("60%");
-//			hql.delete(0, hql.length());
-//			hql.append("select Count(id) from CustomerInfo where levelId = :levelId and companyId = :companyId  " + deleteFlagStr);
-//			values.put("levelId", "60%");
-//			values.put("companyId", companyId);
-//			if( deptId != null && deptId.length() > 0)
-//			{
-//				hql.append(" and salesmanId in (select id from User where deptId =:deptId ) ");
-//				values.put("deptId", deptId);
-//			}else
-//			{
-//				if(userId != null && userId.length() > 0)
-//				{
-//					hql.append(" and salesmanId = :userId ) ");
-//					values.put("userId", userId);
-//				}
-//			}
-//			count = customerStaticInfoDao.findCountForPage(hql.toString(), values);
-//			staticInfo6.setCount(count);
-//			list.add(staticInfo6);
-//			
-//			
-//			CustomerStaticInfo staticInfo7 = new CustomerStaticInfo();
-//			staticInfo7.setKey(key);
-//			staticInfo7.setCategory("70%");
-//			hql.delete(0, hql.length());
-//			hql.append("select Count(id) from CustomerInfo where levelId = :levelId and companyId = :companyId  " + deleteFlagStr);
-//			values.put("levelId", "70%");
-//			values.put("companyId", companyId);
-//			if( deptId != null && deptId.length() > 0)
-//			{
-//				hql.append(" and salesmanId in (select id from User where deptId =:deptId ) ");
-//				values.put("deptId", deptId);
-//			}else
-//			{
-//				if(userId != null && userId.length() > 0)
-//				{
-//					hql.append(" and salesmanId = :userId ) ");
-//					values.put("userId", userId);
-//				}
-//			}
-//			count = customerStaticInfoDao.findCountForPage(hql.toString(), values);
-//			staticInfo7.setCount(count);
-//			list.add(staticInfo7);
-//			
-//			CustomerStaticInfo staticInfo8 = new CustomerStaticInfo();
-//			staticInfo8.setKey(key);
-//			staticInfo8.setCategory("80%");
-//			hql.delete(0, hql.length());
-//			hql.append("select Count(id) from CustomerInfo where levelId = :levelId and companyId = :companyId  " + deleteFlagStr);
-//			values.put("levelId", "80%");
-//			values.put("companyId", companyId);
-//			if( deptId != null && deptId.length() > 0)
-//			{
-//				hql.append(" and salesmanId in (select id from User where deptId =:deptId ) ");
-//				values.put("deptId", deptId);
-//			}else
-//			{
-//				if(userId != null && userId.length() > 0)
-//				{
-//					hql.append(" and salesmanId = :userId ) ");
-//					values.put("userId", userId);
-//				}
-//			}
-//			count = customerStaticInfoDao.findCountForPage(hql.toString(), values);
-//			staticInfo8.setCount(count);
-//			list.add(staticInfo8);
-//			
-//			CustomerStaticInfo staticInfo9 = new CustomerStaticInfo();
-//			staticInfo9.setKey(key);
-//			staticInfo9.setCategory("90%");
-//			hql.delete(0, hql.length());
-//			hql.append("select Count(id) from CustomerInfo where levelId = :levelId and companyId = :companyId  " + deleteFlagStr);
-//			values.put("levelId", "90%");
-//			values.put("companyId", companyId);
-//			if( deptId != null && deptId.length() > 0)
-//			{
-//				hql.append(" and salesmanId in (select id from User where deptId =:deptId ) ");
-//				values.put("deptId", deptId);
-//			}else
-//			{
-//				if(userId != null && userId.length() > 0)
-//				{
-//					hql.append(" and salesmanId = :userId ) ");
-//					values.put("userId", userId);
-//				}
-//			}
-//			count = customerStaticInfoDao.findCountForPage(hql.toString(), values);
-//			staticInfo9.setCount(count);
-//			list.add(staticInfo9);
-//			
-//			CustomerStaticInfo staticInfo10 = new CustomerStaticInfo();
-//			staticInfo10.setKey(key);
-//			staticInfo10.setCategory("100%");
-//			hql.delete(0, hql.length());
-//			hql.append("select Count(id) from CustomerInfo where levelId = :levelId and companyId = :companyId  " + deleteFlagStr );
-//			values.put("levelId", "100%");
-//			values.put("companyId", companyId);
-//			if( deptId != null && deptId.length() > 0)
-//			{
-//				hql.append(" and salesmanId in (select id from User where deptId =:deptId ) ");
-//				values.put("deptId", deptId);
-//			}else
-//			{
-//				if(userId != null && userId.length() > 0)
-//				{
-//					hql.append(" and salesmanId = :userId ) ");
-//					values.put("userId", userId);
-//				}
-//			}
-//			count = customerStaticInfoDao.findCountForPage(hql.toString(), values);
-//			staticInfo10.setCount(count);
-//			list.add(staticInfo10);
+			CustomerStaticInfo staticInfo1 = new CustomerStaticInfo();
+			staticInfo1.setKey(key);
+			staticInfo1.setCategory("10%");
+			hql.append("select Count(id) from CustomerInfo where levelId = :levelId and companyId = :companyId  " + deleteFlagStr);
+			values.put("levelId", "10%");
+			values.put("companyId", companyId);
+			if( deptId != null && deptId.length() > 0)
+			{
+				hql.append(" and salesmanId in (select id from User where deptId =:deptId ) ");
+				values.put("deptId", deptId);
+			}else
+			{
+				if(userId != null && userId.length() > 0)
+				{
+					hql.append(" and salesmanId = :userId ) ");
+					values.put("userId", userId);
+				}
+			}
+			int count = customerStaticInfoDao.findCountForPage(hql.toString(), values);
+			staticInfo1.setCount(count);
+			list.add(staticInfo1);
+			
+			CustomerStaticInfo staticInfo2 = new CustomerStaticInfo();
+			staticInfo2.setKey(key);
+			staticInfo2.setCategory("20%");
+			hql.delete(0, hql.length());
+			hql.append("select Count(id) from CustomerInfo where levelId = :levelId and companyId = :companyId  " + deleteFlagStr);
+			values.put("levelId", "20%");
+			values.put("companyId", companyId);
+			if( deptId != null && deptId.length() > 0)
+			{
+				hql.append(" and salesmanId in (select id from User where deptId =:deptId ) ");
+				values.put("deptId", deptId);
+			}else
+			{
+				if(userId != null && userId.length() > 0)
+				{
+					hql.append(" and salesmanId = :userId ) ");
+					values.put("userId", userId);
+				}
+			}
+			count = customerStaticInfoDao.findCountForPage(hql.toString(), values);
+			staticInfo2.setCount(count);
+			list.add(staticInfo2);
+			
+			CustomerStaticInfo staticInfo3 = new CustomerStaticInfo();
+			staticInfo3.setKey(key);
+			staticInfo3.setCategory("30%");
+			hql.delete(0, hql.length());
+			hql.append("select Count(id) from CustomerInfo where levelId = :levelId and companyId = :companyId  " + deleteFlagStr);
+			values.put("levelId", "30%");
+			values.put("companyId", companyId);
+			if( deptId != null && deptId.length() > 0)
+			{
+				hql.append(" and salesmanId in (select id from User where deptId =:deptId ) ");
+				values.put("deptId", deptId);
+			}else
+			{
+				if(userId != null && userId.length() > 0)
+				{
+					hql.append(" and salesmanId = :userId ) ");
+					values.put("userId", userId);
+				}
+			}
+			count = customerStaticInfoDao.findCountForPage(hql.toString(), values);
+			staticInfo3.setCount(count);
+			list.add(staticInfo3);
+			
+			CustomerStaticInfo staticInfo4 = new CustomerStaticInfo();
+			staticInfo4.setKey(key);
+			staticInfo4.setCategory("40%");
+			hql.delete(0, hql.length());
+			hql.append("select Count(id) from CustomerInfo where levelId = :levelId and companyId = :companyId  " + deleteFlagStr);
+			values.put("levelId", "40%");
+			values.put("companyId", companyId);
+			if( deptId != null && deptId.length() > 0)
+			{
+				hql.append(" and salesmanId in (select id from User where deptId =:deptId ) ");
+				values.put("deptId", deptId);
+			}else
+			{
+				if(userId != null && userId.length() > 0)
+				{
+					hql.append(" and salesmanId = :userId ) ");
+					values.put("userId", userId);
+				}
+			}
+			count = customerStaticInfoDao.findCountForPage(hql.toString(), values);
+			staticInfo4.setCount(count);
+			list.add(staticInfo4);
+			
+			
+			CustomerStaticInfo staticInfo5 = new CustomerStaticInfo();
+			staticInfo5.setKey(key);
+			staticInfo5.setCategory("50%");
+			hql.delete(0, hql.length());
+			hql.append("select Count(id) from CustomerInfo where levelId = :levelId and companyId = :companyId  " + deleteFlagStr);
+			values.put("levelId", "50%");
+			values.put("companyId", companyId);
+			if( deptId != null && deptId.length() > 0)
+			{
+				hql.append(" and salesmanId in (select id from User where deptId =:deptId ) ");
+				values.put("deptId", deptId);
+			}else
+			{
+				if(userId != null && userId.length() > 0)
+				{
+					hql.append(" and salesmanId = :userId ) ");
+					values.put("userId", userId);
+				}
+			}
+			count = customerStaticInfoDao.findCountForPage(hql.toString(), values);
+			staticInfo5.setCount(count);
+			list.add(staticInfo5);
+			
+			CustomerStaticInfo staticInfo6 = new CustomerStaticInfo();
+			staticInfo6.setKey(key);
+			staticInfo6.setCategory("60%");
+			hql.delete(0, hql.length());
+			hql.append("select Count(id) from CustomerInfo where levelId = :levelId and companyId = :companyId  " + deleteFlagStr);
+			values.put("levelId", "60%");
+			values.put("companyId", companyId);
+			if( deptId != null && deptId.length() > 0)
+			{
+				hql.append(" and salesmanId in (select id from User where deptId =:deptId ) ");
+				values.put("deptId", deptId);
+			}else
+			{
+				if(userId != null && userId.length() > 0)
+				{
+					hql.append(" and salesmanId = :userId ) ");
+					values.put("userId", userId);
+				}
+			}
+			count = customerStaticInfoDao.findCountForPage(hql.toString(), values);
+			staticInfo6.setCount(count);
+			list.add(staticInfo6);
+			
+			
+			CustomerStaticInfo staticInfo7 = new CustomerStaticInfo();
+			staticInfo7.setKey(key);
+			staticInfo7.setCategory("70%");
+			hql.delete(0, hql.length());
+			hql.append("select Count(id) from CustomerInfo where levelId = :levelId and companyId = :companyId  " + deleteFlagStr);
+			values.put("levelId", "70%");
+			values.put("companyId", companyId);
+			if( deptId != null && deptId.length() > 0)
+			{
+				hql.append(" and salesmanId in (select id from User where deptId =:deptId ) ");
+				values.put("deptId", deptId);
+			}else
+			{
+				if(userId != null && userId.length() > 0)
+				{
+					hql.append(" and salesmanId = :userId ) ");
+					values.put("userId", userId);
+				}
+			}
+			count = customerStaticInfoDao.findCountForPage(hql.toString(), values);
+			staticInfo7.setCount(count);
+			list.add(staticInfo7);
+			
+			CustomerStaticInfo staticInfo8 = new CustomerStaticInfo();
+			staticInfo8.setKey(key);
+			staticInfo8.setCategory("80%");
+			hql.delete(0, hql.length());
+			hql.append("select Count(id) from CustomerInfo where levelId = :levelId and companyId = :companyId  " + deleteFlagStr);
+			values.put("levelId", "80%");
+			values.put("companyId", companyId);
+			if( deptId != null && deptId.length() > 0)
+			{
+				hql.append(" and salesmanId in (select id from User where deptId =:deptId ) ");
+				values.put("deptId", deptId);
+			}else
+			{
+				if(userId != null && userId.length() > 0)
+				{
+					hql.append(" and salesmanId = :userId ) ");
+					values.put("userId", userId);
+				}
+			}
+			count = customerStaticInfoDao.findCountForPage(hql.toString(), values);
+			staticInfo8.setCount(count);
+			list.add(staticInfo8);
+			
+			CustomerStaticInfo staticInfo9 = new CustomerStaticInfo();
+			staticInfo9.setKey(key);
+			staticInfo9.setCategory("90%");
+			hql.delete(0, hql.length());
+			hql.append("select Count(id) from CustomerInfo where levelId = :levelId and companyId = :companyId  " + deleteFlagStr);
+			values.put("levelId", "90%");
+			values.put("companyId", companyId);
+			if( deptId != null && deptId.length() > 0)
+			{
+				hql.append(" and salesmanId in (select id from User where deptId =:deptId ) ");
+				values.put("deptId", deptId);
+			}else
+			{
+				if(userId != null && userId.length() > 0)
+				{
+					hql.append(" and salesmanId = :userId ) ");
+					values.put("userId", userId);
+				}
+			}
+			count = customerStaticInfoDao.findCountForPage(hql.toString(), values);
+			staticInfo9.setCount(count);
+			list.add(staticInfo9);
+			
+			CustomerStaticInfo staticInfo10 = new CustomerStaticInfo();
+			staticInfo10.setKey(key);
+			staticInfo10.setCategory("100%");
+			hql.delete(0, hql.length());
+			hql.append("select Count(id) from CustomerInfo where levelId = :levelId and companyId = :companyId  " + deleteFlagStr );
+			values.put("levelId", "100%");
+			values.put("companyId", companyId);
+			if( deptId != null && deptId.length() > 0)
+			{
+				hql.append(" and salesmanId in (select id from User where deptId =:deptId ) ");
+				values.put("deptId", deptId);
+			}else
+			{
+				if(userId != null && userId.length() > 0)
+				{
+					hql.append(" and salesmanId = :userId ) ");
+					values.put("userId", userId);
+				}
+			}
+			count = customerStaticInfoDao.findCountForPage(hql.toString(), values);
+			staticInfo10.setCount(count);
+			list.add(staticInfo10);
 			
 		}
 		
