@@ -77,7 +77,7 @@
 						required: "请选择成熟度！"
 					},
 					"customerInfo.levelId": {
-						required: "请选择客户状态！"
+						required: "请选择开发程度！"
 					},
 					"customerInfo.address": {
 						required: "请输入客户具体地址！"
@@ -329,7 +329,7 @@
 											</td>
 										</tr>
 										<tr>
-											<td align="center">客户状态：</td>
+											<td align="center">开发程度：</td>
 											<td><s:select list="listLevel"
 													listKey="id" listValue="name" value="customerInfo.levelId"
 													id="levelId" name="customerInfo.levelId"
