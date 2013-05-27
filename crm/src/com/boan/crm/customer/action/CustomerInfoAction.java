@@ -24,6 +24,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.boan.crm.backstagemanage.common.ProductType;
+import com.boan.crm.customer.model.BusinessProgressKey;
 import com.boan.crm.customer.model.ContractPersonInfo;
 import com.boan.crm.customer.model.CustomerInfo;
 import com.boan.crm.customer.model.CustomerStaticInfo;
@@ -48,7 +49,6 @@ import com.boan.crm.groupmanage.service.IDeptmentService;
 import com.boan.crm.groupmanage.service.IPopedomService;
 import com.boan.crm.groupmanage.service.IUserService;
 import com.boan.crm.utils.action.BaseActionSupport;
-import com.boan.crm.utils.calendar.CurrentDateTime;
 import com.boan.crm.utils.io.impl.FileCopyAndDeleteUtilsAdaptor;
 import com.boan.crm.utils.page.Pagination;
 import com.boan.crm.utils.path.PathUtil;
@@ -62,30 +62,24 @@ import com.boan.crm.utils.uuid.MyUUIDGenerator;
 @Scope("prototype")
 public class CustomerInfoAction extends BaseActionSupport{
 
-	
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = -4140371188076904836L;
-	
 	@Autowired
 	@Qualifier("customerInfoService")
 	//客户状态接口类
 	private ICustomerInfoService customerInfoService;
-	
 	@Autowired
 	@Qualifier("dataDictionaryService")
 	private IDataDictionaryService dataDictionaryService = null;
-	
 	@Autowired
 	@Qualifier("areaService")
 	private IAreaService areaService = null;
-	
 	// 客户状态接口类
 	@Autowired
 	@Qualifier("contractPersonService")
 	private IContractPersonService contractpersonInfoService;
-	
 	@Autowired
 	@Qualifier("userService")
 	private IUserService userService;
@@ -105,7 +99,6 @@ public class CustomerInfoAction extends BaseActionSupport{
 	@Autowired
 	@Qualifier("customerVisitInfoService")
 	private ICustomerVisitInfoService customerVisitInfoService = null;
-	
 	
 	//客户信息类
 	private CustomerInfo customerInfo ;
@@ -140,14 +133,6 @@ public class CustomerInfoAction extends BaseActionSupport{
 	private boolean erpFlag = false;
 	private boolean teamFlag = false;
 	private String searchFlag = "";
-	
-	public String getSearchFlag() {
-		return searchFlag;
-	}
-
-	public void setSearchFlag(String searchFlag) {
-		this.searchFlag = searchFlag;
-	}
 	/**
 	 * 上传导入文件的名称
 	 */
@@ -156,13 +141,11 @@ public class CustomerInfoAction extends BaseActionSupport{
 	private String companyName = "";
 	private List<Deptment> deptList = null;
 	private int totalCustomerCount = 0;
-	
 	private List<CustomerStaticInfo> listCategoryStatic = null;
 	private List<CustomerStaticInfo> listSourceStatic =  null;
 	private List<CustomerStaticInfo> listMaturityStatic =  null;
 	private List<CustomerStaticInfo> listProgressStatic =  null;
 	private List<CustomerStaticInfo> listLevelStatic =  null;
-	
 	public CustomerInfoAction()
 	{
 		int productType = this.getSession().getProductType();
@@ -622,9 +605,14 @@ public class CustomerInfoAction extends BaseActionSupport{
 			{
 				companyId = customerInfo.getCompanyId();
 			}
+			
+			customerInfo.setProgress(BusinessProgressKey.getBusinessProgressNameByKey(customerInfo.getProgressId()));
 		}
 		else
+		{
 			customerInfo = new CustomerInfo();
+			customerInfo.setProgress("新建");
+		}
 		
 		
 		//客户来源：传2
@@ -632,7 +620,7 @@ public class CustomerInfoAction extends BaseActionSupport{
 		//客户分类： 传0
 		listCategory = dataDictionaryService.findDataDictionaryByType(companyId, 0);
 		//业务进展：传1
-		listProgress = dataDictionaryService.findDataDictionaryByType(companyId, 7);
+		//listProgress = dataDictionaryService.findDataDictionaryByType(companyId, 7);
 		//成熟度：传4
 		listMaturity = dataDictionaryService.findDataDictionaryByType(companyId, 4);
 		//开发程度
@@ -746,6 +734,8 @@ public class CustomerInfoAction extends BaseActionSupport{
 		}else
 		{
 			obj = new CustomerInfo();
+			obj.setProgress("新建");
+			obj.setProgressId(BusinessProgressKey.NEW);
 		}
 		
 		obj.setAddress(customerInfo.getAddress());
@@ -761,7 +751,7 @@ public class CustomerInfoAction extends BaseActionSupport{
 		obj.setLevelId(customerInfo.getLevelId());
 		obj.setMaturityId(customerInfo.getMaturityId());
 		obj.setOtherSalesmanId(customerInfo.getOtherSalesmanId());
-		obj.setProgressId(customerInfo.getProgressId());
+		//obj.setProgressId(customerInfo.getProgressId());
 		obj.setProvince(customerInfo.getProvince());
 		obj.setRegisterTime(customerInfo.getRegisterTime());
 		obj.setSalesmanId(customerInfo.getSalesmanId());
@@ -1239,5 +1229,12 @@ public class CustomerInfoAction extends BaseActionSupport{
 	}
 	public void setListLevelStatic(List<CustomerStaticInfo> listLevelStatic) {
 		this.listLevelStatic = listLevelStatic;
+	}
+	public String getSearchFlag() {
+		return searchFlag;
+	}
+
+	public void setSearchFlag(String searchFlag) {
+		this.searchFlag = searchFlag;
 	}
 }
