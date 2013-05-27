@@ -17,6 +17,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
+import com.boan.crm.customer.model.BusinessProgressKey;
 import com.boan.crm.customer.model.CustomerInfo;
 import com.boan.crm.customer.service.ICustomerInfoService;
 import com.boan.crm.datadictionary.model.DataDictionary;
@@ -778,6 +779,11 @@ public class SellRecordAction extends BaseActionSupport {
 				sellRecord.setId(null);
 			}
 			sellRecordService.saveOrUpdate(sellRecord);
+			
+			//更新客户业务进展状态为：已成交
+			customer.setProgressId(BusinessProgressKey.DEALED);
+			customerInfoService.save(customer);
+			
 			SMSInfo tempSmsInfo= smsInfoService.getSMSInfoBySellRecordId(sellRecord.getId());
 			if(tempSmsInfo!=null){
 				tempSmsInfo.setPhone(smsInfo.getPhone());
