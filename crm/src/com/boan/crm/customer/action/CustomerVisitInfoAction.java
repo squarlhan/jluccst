@@ -18,6 +18,7 @@ import org.springframework.stereotype.Controller;
 
 import com.boan.crm.actionplan.model.ActionPlan;
 import com.boan.crm.actionplan.service.IActionPlanService;
+import com.boan.crm.customer.model.BusinessProgressKey;
 import com.boan.crm.customer.model.ContractPersonInfo;
 import com.boan.crm.customer.model.CustomerInfo;
 import com.boan.crm.customer.model.CustomerVisitInfo;
@@ -446,6 +447,8 @@ public class CustomerVisitInfoAction extends BaseActionSupport{
 			if(customer != null)
 			{
 				obj.setCustomerName(customer.getCustomerName());
+				customer.setProgressId(BusinessProgressKey.VISIT);
+				customerInfoService.save(customer);
 			}
 		}
 		obj.setVisitPersonId(customerVisitInfo.getVisitPersonId());
