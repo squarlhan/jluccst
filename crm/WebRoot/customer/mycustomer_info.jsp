@@ -48,7 +48,6 @@
 					"customerInfo.fax":{strangecode:true},
 					"customerInfo.sourceId":{required:true},
 					"customerInfo.categoryId":{required:true},
-					"customerInfo.progressId":{required:true},
 					"customerInfo.maturityId":{required:true},
 					"customerInfo.levelId":{required:true},
 					"customerInfo.address":{required:true,strangecode:true},
@@ -69,9 +68,6 @@
 					    },
 					"customerInfo.categoryId": {
 						required: "请选择客户分类！"
-					},
-					"customerInfo.progressId": {
-						required: "请选择业务进展！"
 					},
 					"customerInfo.maturityId": {
 						required: "请选择成熟度！"
@@ -314,11 +310,7 @@
 													cssStyle="width:190px" headerKey=""
 													headerValue="--请选择--"></s:select><font color="red">*</font></td>
 											<td align="center">业务进展：</td>
-											<td><s:select list="listProgress" listKey="id"
-													listValue="name" value="customerInfo.progressId"
-													id="progressId" name="customerInfo.progressId"
-													cssStyle="width:120px" headerKey=""
-													headerValue="--请选择--"></s:select><font color="red">*</font>
+											<td><s:label name="customerInfo.progress"></s:label>
 											</td> 
 											<td align="right">成 熟 度：</td>
 											<td><s:select list="listMaturity" listKey="id"
