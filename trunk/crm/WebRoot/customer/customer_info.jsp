@@ -27,8 +27,7 @@
 <base href="<%=basePath%>">
 <title>客户基本信息</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<j:scriptlink css="true" jmessagebox="true" jquery="true"
-	tipswindow="true" validate="true" />
+<j:scriptlink css="true" jmessagebox="true" jquery="true" tipswindow="true" validate="true" />
 	<link rel="stylesheet" media="all" type="text/css" href="<%=basePath%>js/timepicke/jquery-ui-1.7.3.custom.css" />
 		<link rel="stylesheet" media="all" type="text/css" href="<%=basePath%>js/timepicke/jquery-ui-timepicker-addon.css" />
 		
@@ -36,8 +35,7 @@
 		<script type="text/javascript" src="<%=basePath%>js/timepicke/jquery-ui-timepicker-addon.js"></script>
 		<script type="text/javascript" src="<%=basePath%>js/timepicke/jquery-ui-timepicker-zh-CN.js"></script>
 		<script type="text/javascript" src="<%=basePath%>js/timepicke/jquery-ui-sliderAccess.js"></script>
-		
-<script type="text/javascript">
+		<script type="text/javascript">
 			/**
 		  	 * 验证条件
 		  	 */
@@ -48,7 +46,6 @@
 					"customerInfo.fax":{strangecode:true},
 					"customerInfo.sourceId":{required:true},
 					"customerInfo.categoryId":{required:true},
-					"customerInfo.progressId":{required:true},
 					"customerInfo.maturityId":{required:true},
 					"customerInfo.levelId":{required:true},
 					"customerInfo.address":{required:true,strangecode:true},
@@ -69,9 +66,6 @@
 					    },
 					"customerInfo.categoryId": {
 						required: "请选择客户分类！"
-					},
-					"customerInfo.progressId": {
-						required: "请选择业务进展！"
 					},
 					"customerInfo.maturityId": {
 						required: "请选择成熟度！"
@@ -128,8 +122,6 @@
 		                        loadArea($("#city").val());
 		                    }
 		                });
-		                
-		                
 		            }
 		  		function loadArea(parentid) {
 	                $.ajax({
@@ -318,11 +310,7 @@
 													cssStyle="width:190px" headerKey=""
 													headerValue="--请选择--"></s:select><font color="red">*</font></td>
 											<td align="center">业务进展：</td>
-											<td><s:select list="listProgress" listKey="id"
-													listValue="name" value="customerInfo.progressId"
-													id="progressId" name="customerInfo.progressId"
-													cssStyle="width:120px" headerKey=""
-													headerValue="--请选择--"></s:select><font color="red">*</font>
+											<td><s:label name="customerInfo.progress"></s:label>
 											</td> 
 											<td align="right">成 熟 度：</td>
 											<td><s:select list="listMaturity" listKey="id"
