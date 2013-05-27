@@ -18,6 +18,7 @@ import org.springframework.stereotype.Controller;
 
 import com.boan.crm.actionplan.model.ActionPlan;
 import com.boan.crm.actionplan.service.IActionPlanService;
+import com.boan.crm.customer.model.BusinessProgressKey;
 import com.boan.crm.customer.model.ContractPersonInfo;
 import com.boan.crm.customer.model.CustomerInfo;
 import com.boan.crm.customer.model.CustomerTraceInfo;
@@ -111,69 +112,9 @@ public class CustomerTraceInfoAction extends BaseActionSupport{
 	private String deptId ="";
 	private String traceFlag = "";
 	private String actualTraceTime = "";
-	public String getTraceFlag() {
-		return traceFlag;
-	}
-
-	public void setTraceFlag(String traceFlag) {
-		this.traceFlag = traceFlag;
-	}
-
-	public String getActualTraceTime() {
-		return actualTraceTime;
-	}
-
-	public void setActualTraceTime(String actualTraceTime) {
-		this.actualTraceTime = actualTraceTime;
-	}
-
-	public String getDeptId() {
-		return deptId;
-	}
-
-	public void setDeptId(String deptId) {
-		this.deptId = deptId;
-	}
-
-	public String getMessage() {
-		return message;
-	}
-
-	public void setMessage(String message) {
-		this.message = message;
-	}
-
-	public String getChkSMS() {
-		return chkSMS;
-	}
-
-	public void setChkSMS(String chkSMS) {
-		this.chkSMS = chkSMS;
-	}
-
-	public String getTraceTime() {
-		return traceTime;
-	}
-
-	public void setTraceTime(String traceTime) {
-		this.traceTime = traceTime;
-	}
-
-	public String getContractTel() {
-		return contractTel;
-	}
-
-	public void setContractTel(String contractTel) {
-		this.contractTel = contractTel;
-	}
-
-	public String getContractPerson() {
-		return contractPerson;
-	}
-
-	public void setContractPerson(String contractPerson) {
-		this.contractPerson = contractPerson;
-	}
+	private String dealingFlag = "";
+	
+	
 	/**
 	 * 客户跟进信息列表
 	 * @return String
@@ -450,6 +391,17 @@ public class CustomerTraceInfoAction extends BaseActionSupport{
 			if(customer != null)
 			{
 				obj.setCustomerName(customer.getCustomerName());
+				if (dealingFlag != null && dealingFlag.equals("1"))
+				{
+					customer.setProgressId(BusinessProgressKey.DEALING);
+					customer.setProgress(BusinessProgressKey.getBusinessProgressNameByKey(BusinessProgressKey.DEALING));
+					customerInfoService.save(customer);
+				}else
+				{
+					customer.setProgressId(BusinessProgressKey.TRACE);
+					customer.setProgress(BusinessProgressKey.getBusinessProgressNameByKey(BusinessProgressKey.TRACE));
+					customerInfoService.save(customer);
+				}
 			}
 		}else
 		{
@@ -460,6 +412,17 @@ public class CustomerTraceInfoAction extends BaseActionSupport{
 			if(customer != null)
 			{
 				obj.setCustomerName(customer.getCustomerName());
+				if (dealingFlag != null && dealingFlag.equals("1"))
+				{
+					customer.setProgressId(BusinessProgressKey.DEALING);
+					customer.setProgress(BusinessProgressKey.getBusinessProgressNameByKey(BusinessProgressKey.DEALING));
+					customerInfoService.save(customer);
+				}else
+				{
+					customer.setProgressId(BusinessProgressKey.TRACE);
+					customer.setProgress(BusinessProgressKey.getBusinessProgressNameByKey(BusinessProgressKey.TRACE));
+					customerInfoService.save(customer);
+				}
 			}
 		}
 		
@@ -470,28 +433,6 @@ public class CustomerTraceInfoAction extends BaseActionSupport{
 		obj.setTask(customerTraceInfo.getTask());
 		obj.setTraceOption(customerTraceInfo.getTraceOption());
 		Calendar time = CalendarUtils.toLongCalendarNoSecond( traceTime );
-//		if(traceTime.indexOf(" ") != -1)
-//		{
-//			String[] timeArray = traceTime.split(" ")[1].split(":");
-//			String[] dayArray = traceTime.split(" ")[0].split("-");
-//			if(dayArray.length>0 && timeArray.length>0){
-//				time.set(Calendar.YEAR, Integer.parseInt(dayArray[0]));
-//				time.set(Calendar.MONTH, Integer.parseInt(dayArray[1]) - 1);
-//				time.set(Calendar.DAY_OF_MONTH, Integer.parseInt(dayArray[2]) - 1);
-//				time.set(Calendar.HOUR, Integer.parseInt(timeArray[0]));
-//				time.set(Calendar.MINUTE, Integer.parseInt(timeArray[1]));
-//				time.set(Calendar.SECOND, 0);
-//			}
-//		}else
-//		{
-//			String[] dayArray1 = traceTime.split("-");
-//			time.set(Calendar.YEAR, Integer.parseInt(dayArray1[0]));
-//			time.set(Calendar.MONTH, Integer.parseInt(dayArray1[1]) - 1);
-//			time.set(Calendar.DAY_OF_MONTH, Integer.parseInt(dayArray1[2]) - 1);
-//			time.set(Calendar.HOUR, 0);
-//			time.set(Calendar.MINUTE, 0);
-//			time.set(Calendar.SECOND, 0);
-//		}
 		obj.setTraceTime(time);
 		
 		if (traceFlag != null && traceFlag.equals("1"))
@@ -510,6 +451,15 @@ public class CustomerTraceInfoAction extends BaseActionSupport{
 			obj.setInterest("");
 			obj.setObjection("");
 		}
+		
+		if (dealingFlag != null && dealingFlag.equals("1"))
+		{
+			obj.setDealingFlag("1");
+		}else
+		{
+			obj.setDealingFlag("0");
+		}
+		
 		obj.setEmail(customerTraceInfo.getEmail());
 		obj.setQq(customerTraceInfo.getQq());
 		obj.setTel(customerTraceInfo.getTel());
@@ -517,31 +467,9 @@ public class CustomerTraceInfoAction extends BaseActionSupport{
 		obj.setDeleteFlag(0);
 		customerTraceInfoService.save(obj);
 		
+		
 		if(inserFLag)
 		{
-			/*TimePlan timePlan = new TimePlan();
-			timePlan.setDeptId(sessionDeptId);
-			timePlan.setCreateTime(Calendar.getInstance());
-			timePlan.setDeptName(sessionDeptName);
-			timePlan.setEmployeeId(obj.getSalesmanId());
-			timePlan.setEmployeeName(obj.getSalesman());
-			timePlan.setOrganId(sessionCompanyId);
-			timePlan.setPersonId(obj.getSalesmanId());
-			timePlan.setPlanType("0");
-			StringBuilder sb = new StringBuilder();
-			sb.append("跟进计划：");
-			sb.append(CalendarUtils.toLongStringNoSecond(obj.getTraceTime()));
-			sb.append(",对客户[");
-			sb.append(obj.getCustomerName());
-			sb.append("]进行["+dataDictionaryService.get(obj.getTraceOption()).getName()+"]方式跟进");
-			sb.append(",跟进任务：[");
-			sb.append(obj.getTask());
-			sb.append("]。");
-			timePlan.setPlanContent(sb.toString());
-			timePlan.setSubmitTime(Calendar.getInstance());
-			
-			timePlanService.saveOrUpdateTimePlan(timePlan);*/
-			
 			ActionPlan actionPlan = new ActionPlan();
 			actionPlan.setDeptId(sessionDeptId);
 			actionPlan.setCreateTime(Calendar.getInstance());
@@ -569,20 +497,8 @@ public class CustomerTraceInfoAction extends BaseActionSupport{
 		if(chkSMS != null && chkSMS.equals("true"))
 		{
 			SMSInfo sms = new SMSInfo();
-			
-			//CustomerInfo customer = customerInfoService.get(customerId);
-			
 			SMSCustomerInfo smsUser = sMSCustomerInfoService.getSMSCustomerInfoByCustomerId(obj.getSalesmanId());
 
-//			smsCustomer.setCustomerId(customerId);
-//			//smsCustomer.setBirthday(customer.getContractPersonList().get)
-//			smsCustomer.setName(customer.getCustomerName());
-//			smsCustomer.setOrganId(customer.getCompanyId());
-//			smsCustomer.setOrganName(customer.getCompanyFullName());
-//			smsCustomer.setSalesmanId(customer.getSalesmanId());
-//			smsCustomer.setCategoryId(customer.getCategoryId());
-//			
-//			sMSCustomerInfoService.saveSMSCustomerInfo(smsCustomer);
 			if(smsUser != null)
 			{
 				sms.setCustomerInfo(smsUser);
@@ -615,8 +531,6 @@ public class CustomerTraceInfoAction extends BaseActionSupport{
 						id = obj.getId();
 						return SUCCESS;
 					}
-					
-					
 				}catch(Exception ex)
 				{
 					message = "保存跟进任务成功！手机短信提醒失败：获取跟进人信息有误！";
@@ -632,10 +546,7 @@ public class CustomerTraceInfoAction extends BaseActionSupport{
 			
 		}
 		id = obj.getId();
-		
-		
 		message = "保存成功！";
-		
 		return SUCCESS;
 	}
 	/**
@@ -739,5 +650,74 @@ public class CustomerTraceInfoAction extends BaseActionSupport{
 
 	public void setCustomerInfo(CustomerInfo customerInfo) {
 		this.customerInfo = customerInfo;
+	}
+	public String getTraceFlag() {
+		return traceFlag;
+	}
+
+	public void setTraceFlag(String traceFlag) {
+		this.traceFlag = traceFlag;
+	}
+
+	public String getActualTraceTime() {
+		return actualTraceTime;
+	}
+
+	public void setActualTraceTime(String actualTraceTime) {
+		this.actualTraceTime = actualTraceTime;
+	}
+
+	public String getDeptId() {
+		return deptId;
+	}
+
+	public void setDeptId(String deptId) {
+		this.deptId = deptId;
+	}
+
+	public String getMessage() {
+		return message;
+	}
+
+	public void setMessage(String message) {
+		this.message = message;
+	}
+
+	public String getChkSMS() {
+		return chkSMS;
+	}
+
+	public void setChkSMS(String chkSMS) {
+		this.chkSMS = chkSMS;
+	}
+
+	public String getTraceTime() {
+		return traceTime;
+	}
+
+	public void setTraceTime(String traceTime) {
+		this.traceTime = traceTime;
+	}
+
+	public String getContractTel() {
+		return contractTel;
+	}
+
+	public void setContractTel(String contractTel) {
+		this.contractTel = contractTel;
+	}
+
+	public String getContractPerson() {
+		return contractPerson;
+	}
+
+	public void setContractPerson(String contractPerson) {
+		this.contractPerson = contractPerson;
+	}
+	public String getDealingFlag() {
+		return dealingFlag;
+	}
+	public void setDealingFlag(String dealingFlag) {
+		this.dealingFlag = dealingFlag;
 	}
 }

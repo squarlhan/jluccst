@@ -4,29 +4,24 @@
 package com.boan.crm.customer.service.impl;
 
 import java.text.NumberFormat;
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.boan.crm.customer.dao.ICustomerInfoDAO;
+import com.boan.crm.customer.model.BusinessProgressKey;
 import com.boan.crm.customer.model.CustomerInfo;
 import com.boan.crm.customer.service.IContractPersonService;
 import com.boan.crm.customer.service.ICustomerInfoService;
 import com.boan.crm.datadictionary.model.DataDictionary;
-import com.boan.crm.datadictionary.service.IAreaService;
 import com.boan.crm.datadictionary.service.IDataDictionaryService;
 import com.boan.crm.groupmanage.model.User;
 import com.boan.crm.groupmanage.service.IUserService;
 import com.boan.crm.sellrecord.service.ISellRecordService;
-import com.boan.crm.sms.model.SMSCustomerInfo;
-import com.boan.crm.sms.service.ISMSCustomerInfoService;
 import com.boan.crm.utils.calendar.CurrentDateTime;
 import com.boan.crm.utils.page.Pagination;
 
@@ -231,14 +226,14 @@ public class CustomerInfoServiceImpl implements ICustomerInfoService{
 				{
 					customerInfo.setSource(d3.getName());
 				}
-				DataDictionary d4 = dataDictionaryService.get(customerInfo.getProgressId());
-				if(d4 != null)
-				{
-					customerInfo.setProgress(d4.getName());
-				}else
-				{
-					customerInfo.setProgress("");
-				}
+//				DataDictionary d4 = dataDictionaryService.get(customerInfo.getProgressId());
+//				if(d4 != null)
+//				{
+					customerInfo.setProgress(BusinessProgressKey.getBusinessProgressNameByKey(customerInfo.getProgressId()));
+//				}else
+//				{
+//					customerInfo.setProgress("");
+//				}
 				try
 				{
 					User salesman = userService.getUserById(customerInfo.getSalesmanId());

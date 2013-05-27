@@ -50,12 +50,6 @@ public class CustomerTraceInfo implements Serializable
 	private String progress = "";
 	@Column(name = "COMPANY_ID" , length = 50)
 	private String companyId = "";
-	public String getCompanyId() {
-		return companyId;
-	}
-	public void setCompanyId(String companyId) {
-		this.companyId = companyId;
-	}
 	@Transient
 	private String salesman = "";
 	@Column(name = "SALESMANID" , length = 50)
@@ -64,41 +58,16 @@ public class CustomerTraceInfo implements Serializable
 	private String traceOption = "";
 	@Column(name = "TRACEFLAG")
 	private String traceFlag = "";
-	public String getTraceFlag() {
-		return traceFlag;
-	}
-	public void setTraceFlag(String traceFlag) {
-		this.traceFlag = traceFlag;
-	}
 	@Column(name = "TRACE_TIME")
 	private Calendar traceTime = Calendar.getInstance();
 	@Column(name = "DELETEFLAG")
 	private int deleteFlag = 0;
-	
 	@Column(name = "ACTUALTRACE_TIME")
 	private Calendar actualTraceTime = Calendar.getInstance();
 	@Transient
 	private String traceTimeStr = "";
 	@Transient
 	private String actualTraceTimeStr = "";
-	public String getActualTraceTimeStr() {
-		return actualTraceTimeStr;
-	}
-	public void setActualTraceTimeStr(String actualTraceTimeStr) {
-		this.actualTraceTimeStr = actualTraceTimeStr;
-	}
-	public Calendar getActualTraceTime() {
-		return actualTraceTime;
-	}
-	public void setActualTraceTime(Calendar actualTraceTime) {
-		this.actualTraceTime = actualTraceTime;
-	}
-	public String getTraceTimeStr() {
-		return traceTimeStr;
-	}
-	public void setTraceTimeStr(String traceTimeStr) {
-		this.traceTimeStr = traceTimeStr;
-	}
 	@Column(name = "TASK" , length = 255)
 	private String task = "";
 	@Column(name = "INTERREST" , length = 255)
@@ -107,12 +76,8 @@ public class CustomerTraceInfo implements Serializable
 	private String objection = "";
 	@Transient
 	private int sms = 0;
-	public int getSms() {
-		return sms;
-	}
-	public void setSms(int sms) {
-		this.sms = sms;
-	}
+	@Column(name = "DEALING_FLAG")
+	private String dealingFlag = "";
 	/**
 	 * 编号
 	 * @return String
@@ -225,5 +190,55 @@ public class CustomerTraceInfo implements Serializable
 	}
 	public void setDeleteFlag(int deleteFlag) {
 		this.deleteFlag = deleteFlag;
+	}
+	public String getCompanyId() {
+		return companyId;
+	}
+	public void setCompanyId(String companyId) {
+		this.companyId = companyId;
+	}
+	public String getTraceFlag() {
+		return traceFlag;
+	}
+	public void setTraceFlag(String traceFlag) {
+		this.traceFlag = traceFlag;
+	}
+	public int getSms() {
+		return sms;
+	}
+	public void setSms(int sms) {
+		this.sms = sms;
+	}
+	public String getActualTraceTimeStr() {
+		return actualTraceTimeStr;
+	}
+	public void setActualTraceTimeStr(String actualTraceTimeStr) {
+		this.actualTraceTimeStr = actualTraceTimeStr;
+	}
+	public Calendar getActualTraceTime() {
+		return actualTraceTime;
+	}
+	public void setActualTraceTime(Calendar actualTraceTime) {
+		this.actualTraceTime = actualTraceTime;
+	}
+	public String getTraceTimeStr() {
+		return traceTimeStr;
+	}
+	public void setTraceTimeStr(String traceTimeStr) {
+		this.traceTimeStr = traceTimeStr;
+	}
+	/**
+	 * 要成交标记
+	 * @return　String
+	 */
+	public String getDealingFlag() {
+		return dealingFlag;
+	}
+	/**
+	 * 要成交标记
+	 * @param dealingFlag
+	 */
+	public void setDealingFlag(String dealingFlag) {
+		this.dealingFlag = dealingFlag;
 	}
 }
