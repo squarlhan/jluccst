@@ -329,7 +329,7 @@ public class CustomerInfoAction extends BaseActionSupport{
 		}
 		
 		values.put("companyId", sessionCompanyId);
-		
+		values.put("progressId", BusinessProgressKey.DEALED);
 		pagination.setPageSize(5);
 		pagination = customerInfoService.findCustomerInfoForPage(values, pagination);
 		listCustomer = pagination.getData();
@@ -349,7 +349,7 @@ public class CustomerInfoAction extends BaseActionSupport{
 		
 		values.put("companyId", sessionCompanyId);
 		values.put("salesmanId", sessionUserId);
-		
+		values.put("progressId", BusinessProgressKey.DEALED);
 		pagination.setPageSize(5);
 		pagination = customerInfoService.findCustomerInfoForPage(values, pagination);
 		listCustomer = pagination.getData();

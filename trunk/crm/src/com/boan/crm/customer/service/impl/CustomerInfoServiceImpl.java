@@ -140,7 +140,10 @@ public class CustomerInfoServiceImpl implements ICustomerInfoService{
 		}else{
 			hql.append( "from CustomerInfo where 1=1 and deleteFlag = 0 ");
 		}
-				
+		if(values.get("progressId") != null)
+		{
+			hql.append(" and progressId = :progressId ");
+		}		
 		if(values.get("companyId") != null)
 		{
 			hql.append(" and companyId = :companyId ");
@@ -175,7 +178,10 @@ public class CustomerInfoServiceImpl implements ICustomerInfoService{
 		}else{
 			hql.append(" select count(*) from CustomerInfo where 1=1 and deleteFlag = 0 " );
 		}
-		
+		if(values.get("progressId") != null)
+		{
+			hql.append(" and progressId = :progressId ");
+		}	
 		if(values.get("companyId") != null)
 		{
 			hql.append(" and companyId = :companyId ");
