@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.boan.crm.customer.dao.ICustomerStaticInfoDAO;
+import com.boan.crm.customer.model.BusinessProgressKey;
 import com.boan.crm.customer.model.CustomerStaticInfo;
 import com.boan.crm.customer.service.ICustomerStaticInfoService;
 import com.boan.crm.datadictionary.model.DataDictionary;
@@ -37,7 +38,7 @@ public class CustomerStaticInfoServiceImpl implements ICustomerStaticInfoService
 		List<CustomerStaticInfo> list = new ArrayList<CustomerStaticInfo>();
 		StringBuilder hql = new StringBuilder();
 		Map<String,String> values = new HashMap<String,String>();
-		if(key == CustomerStaticInfo.CUSTOMER_SOURCE || key == CustomerStaticInfo.CUSTOMER_CATEGORY || key == CustomerStaticInfo.CUSTOMER_MATURITY || key == CustomerStaticInfo.CUSTOMER_PROGRESS)
+		if(key == CustomerStaticInfo.CUSTOMER_SOURCE || key == CustomerStaticInfo.CUSTOMER_CATEGORY || key == CustomerStaticInfo.CUSTOMER_MATURITY)
 		{
 			List<DataDictionary> listDic = dataDictionaryService.findDataDictionaryByType(companyId, key);
 			if(listDic != null && listDic.size() > 0)
@@ -79,6 +80,64 @@ public class CustomerStaticInfoServiceImpl implements ICustomerStaticInfoService
 					
 				}
 			}
+		}else if(key == CustomerStaticInfo.CUSTOMER_PROGRESS)
+		{
+			CustomerStaticInfo staticInfo1 = new CustomerStaticInfo();
+			staticInfo1.setKey(key);
+			staticInfo1.setCategory(BusinessProgressKey.getBusinessProgressNameByKey(BusinessProgressKey.NEW));
+			hql.append("select Count(id) from CustomerInfo where progressId = :progressId and companyId = :companyId");
+			values.put("progressId", BusinessProgressKey.NEW);
+			values.put("companyId", companyId);
+			int count = customerStaticInfoDao.findCountForPage(hql.toString(), values);
+			staticInfo1.setCount(count);
+			list.add(staticInfo1);
+			
+			CustomerStaticInfo staticInfo2 = new CustomerStaticInfo();
+			staticInfo2.setKey(key);
+			staticInfo2.setCategory(BusinessProgressKey.getBusinessProgressNameByKey(BusinessProgressKey.TRACE));
+			hql.delete(0, hql.length());
+			hql.append("select Count(id) from CustomerInfo where progressId = :progressId and companyId = :companyId");
+			values.put("progressId", BusinessProgressKey.TRACE);
+			values.put("companyId", companyId);
+			count = customerStaticInfoDao.findCountForPage(hql.toString(), values);
+			staticInfo2.setCount(count);
+			list.add(staticInfo2);
+			
+			CustomerStaticInfo staticInfo3 = new CustomerStaticInfo();
+			staticInfo3.setKey(key);
+			staticInfo3.setCategory(BusinessProgressKey.getBusinessProgressNameByKey(BusinessProgressKey.DEALING));
+			hql.delete(0, hql.length());
+			hql.append("select Count(id) from CustomerInfo where progressId = :progressId and companyId = :companyId");
+			values.put("progressId", BusinessProgressKey.DEALING);
+			values.put("companyId", companyId);
+			count = customerStaticInfoDao.findCountForPage(hql.toString(), values);
+			staticInfo3.setCount(count);
+			list.add(staticInfo3);
+			
+			CustomerStaticInfo staticInfo4 = new CustomerStaticInfo();
+			staticInfo4.setKey(key);
+			staticInfo4.setCategory(BusinessProgressKey.getBusinessProgressNameByKey(BusinessProgressKey.DEALED));
+			hql.delete(0, hql.length());
+			hql.append("select Count(id) from CustomerInfo where progressId = :progressId and companyId = :companyId");
+			values.put("progressId", BusinessProgressKey.DEALED);
+			values.put("companyId", companyId);
+			count = customerStaticInfoDao.findCountForPage(hql.toString(), values);
+			staticInfo4.setCount(count);
+			list.add(staticInfo4);
+			
+			
+			CustomerStaticInfo staticInfo5 = new CustomerStaticInfo();
+			staticInfo5.setKey(key);
+			staticInfo5.setCategory(BusinessProgressKey.getBusinessProgressNameByKey(BusinessProgressKey.VISIT));
+			hql.delete(0, hql.length());
+			hql.append("select Count(id) from CustomerInfo where progressId = :progressId and companyId = :companyId");
+			values.put("progressId", BusinessProgressKey.VISIT);
+			values.put("companyId", companyId);
+			count = customerStaticInfoDao.findCountForPage(hql.toString(), values);
+			staticInfo5.setCount(count);
+			list.add(staticInfo5);
+			
+			
 		}else if(key == CustomerStaticInfo.CUSTOMER_LEVEL)
 		{
 			CustomerStaticInfo staticInfo1 = new CustomerStaticInfo();
@@ -207,7 +266,7 @@ public class CustomerStaticInfoServiceImpl implements ICustomerStaticInfoService
 		{
 			deleteFlagStr = " and deleteFlag = 0";
 		}
-		if(key == CustomerStaticInfo.CUSTOMER_SOURCE || key == CustomerStaticInfo.CUSTOMER_CATEGORY || key == CustomerStaticInfo.CUSTOMER_MATURITY || key == CustomerStaticInfo.CUSTOMER_PROGRESS)
+		if(key == CustomerStaticInfo.CUSTOMER_SOURCE || key == CustomerStaticInfo.CUSTOMER_CATEGORY || key == CustomerStaticInfo.CUSTOMER_MATURITY )
 		{
 			List<DataDictionary> listDic = dataDictionaryService.findDataDictionaryByType(companyId, key);
 			if(listDic != null && listDic.size() > 0)
@@ -263,6 +322,64 @@ public class CustomerStaticInfoServiceImpl implements ICustomerStaticInfoService
 					
 				}
 			}
+		}else if(key == CustomerStaticInfo.CUSTOMER_PROGRESS)
+		{
+			CustomerStaticInfo staticInfo1 = new CustomerStaticInfo();
+			staticInfo1.setKey(key);
+			staticInfo1.setCategory(BusinessProgressKey.getBusinessProgressNameByKey(BusinessProgressKey.NEW));
+			hql.append("select Count(id) from CustomerInfo where progressId = :progressId and companyId = :companyId");
+			values.put("progressId", BusinessProgressKey.NEW);
+			values.put("companyId", companyId);
+			int count = customerStaticInfoDao.findCountForPage(hql.toString(), values);
+			staticInfo1.setCount(count);
+			list.add(staticInfo1);
+			
+			CustomerStaticInfo staticInfo2 = new CustomerStaticInfo();
+			staticInfo2.setKey(key);
+			staticInfo2.setCategory(BusinessProgressKey.getBusinessProgressNameByKey(BusinessProgressKey.TRACE));
+			hql.delete(0, hql.length());
+			hql.append("select Count(id) from CustomerInfo where progressId = :progressId and companyId = :companyId");
+			values.put("progressId", BusinessProgressKey.TRACE);
+			values.put("companyId", companyId);
+			count = customerStaticInfoDao.findCountForPage(hql.toString(), values);
+			staticInfo2.setCount(count);
+			list.add(staticInfo2);
+			
+			CustomerStaticInfo staticInfo3 = new CustomerStaticInfo();
+			staticInfo3.setKey(key);
+			staticInfo3.setCategory(BusinessProgressKey.getBusinessProgressNameByKey(BusinessProgressKey.DEALING));
+			hql.delete(0, hql.length());
+			hql.append("select Count(id) from CustomerInfo where progressId = :progressId and companyId = :companyId");
+			values.put("progressId", BusinessProgressKey.DEALING);
+			values.put("companyId", companyId);
+			count = customerStaticInfoDao.findCountForPage(hql.toString(), values);
+			staticInfo3.setCount(count);
+			list.add(staticInfo3);
+			
+			CustomerStaticInfo staticInfo4 = new CustomerStaticInfo();
+			staticInfo4.setKey(key);
+			staticInfo4.setCategory(BusinessProgressKey.getBusinessProgressNameByKey(BusinessProgressKey.DEALED));
+			hql.delete(0, hql.length());
+			hql.append("select Count(id) from CustomerInfo where progressId = :progressId and companyId = :companyId");
+			values.put("progressId", BusinessProgressKey.DEALED);
+			values.put("companyId", companyId);
+			count = customerStaticInfoDao.findCountForPage(hql.toString(), values);
+			staticInfo4.setCount(count);
+			list.add(staticInfo4);
+			
+			
+			CustomerStaticInfo staticInfo5 = new CustomerStaticInfo();
+			staticInfo5.setKey(key);
+			staticInfo5.setCategory(BusinessProgressKey.getBusinessProgressNameByKey(BusinessProgressKey.VISIT));
+			hql.delete(0, hql.length());
+			hql.append("select Count(id) from CustomerInfo where progressId = :progressId and companyId = :companyId");
+			values.put("progressId", BusinessProgressKey.VISIT);
+			values.put("companyId", companyId);
+			count = customerStaticInfoDao.findCountForPage(hql.toString(), values);
+			staticInfo5.setCount(count);
+			list.add(staticInfo5);
+			
+			
 		}else if(key == CustomerStaticInfo.CUSTOMER_LEVEL)
 		{
 			CustomerStaticInfo staticInfo1 = new CustomerStaticInfo();

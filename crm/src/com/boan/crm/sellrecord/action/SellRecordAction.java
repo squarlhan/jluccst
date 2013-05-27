@@ -21,7 +21,6 @@ import com.boan.crm.customer.model.BusinessProgressKey;
 import com.boan.crm.customer.model.CustomerInfo;
 import com.boan.crm.customer.service.ICustomerInfoService;
 import com.boan.crm.datadictionary.model.DataDictionary;
-import com.boan.crm.datadictionary.service.IDataDictionaryService;
 import com.boan.crm.goods.model.GoodsInfoBase;
 import com.boan.crm.goods.model.GoodsType;
 import com.boan.crm.goods.service.IGoodsInfoBaseService;
@@ -53,6 +52,8 @@ import com.boan.crm.utils.page.Pagination;
 @Scope("prototype")
 public class SellRecordAction extends BaseActionSupport {
 
+	private static final long serialVersionUID = -1200734348985284253L;
+
 	/**
 	 * 客户信息
 	 */
@@ -72,8 +73,6 @@ public class SellRecordAction extends BaseActionSupport {
 	// 会员类别接口类
 	private IMemberTypeService memberTypeService;
 	
-	@Resource
-	private IDataDictionaryService dataDictionaryService;
 	
 	@Autowired
 	@Qualifier("deptService")
@@ -143,10 +142,6 @@ public class SellRecordAction extends BaseActionSupport {
 	@Qualifier("SMSInfoService")
 	private ISMSInfoService smsInfoService;
 	
-	@Autowired
-	@Qualifier("SMSManageService")
-	private ISMSManageService smsManageService;
-
 	@Autowired
 	@Qualifier("sellRecordService")
 	private ISellRecordService sellRecordService;
@@ -566,11 +561,8 @@ public class SellRecordAction extends BaseActionSupport {
 		sellRecord.setSalesmanName(userSession.getUserCName());
 		Set<GoodsInfo> goodsDetials = new HashSet<GoodsInfo>();
 		BigDecimal thisPrice = new BigDecimal(0);
-		String productId="";
 		for (String str : detials) {
 			String[] array = str.split("☆");
-			System.out.println(array[0]);
-			productId = array[0];
 			GoodsInfo goods = new GoodsInfo();
 			goods.setCompanyId(sessionCompanyId);
 			goods.setGoodsProductId(array[0]);
@@ -739,11 +731,9 @@ public class SellRecordAction extends BaseActionSupport {
 		sellRecord.setSalesmanName(userSession.getUserCName());
 		Set<GoodsInfo> goodsDetials = new HashSet<GoodsInfo>();
 		BigDecimal thisPrice = new BigDecimal(0);
-		String productId="";
 		for (String str : detials) {
 			String[] array = str.split("☆");
 			System.out.println(array[0]);
-			productId = array[0];
 			GoodsInfo goods = new GoodsInfo();
 			goods.setCompanyId(sessionCompanyId);
 			goods.setGoodsProductId(array[0]);
@@ -935,10 +925,10 @@ public class SellRecordAction extends BaseActionSupport {
 		companyName = sessionCompanyName;
 		userList = new ArrayList<User>();
 		deptList = new ArrayList<Deptment>();
-		boolean flag=true;
-		if(sessionDeptId.equals("")){ //总经理
-			flag=false;
-		}
+//		boolean flag=true;
+//		if(sessionDeptId.equals("")){ //总经理
+//			flag=false;
+//		}
 		UserSession us = this.getSession();
 		//判断是否是公司管理员或公司级用户
 		boolean popodomFlag = popedomService.isCompanyAdministrator(us.getUserId(), String.valueOf(us.getUserType()) ) 
@@ -1104,7 +1094,7 @@ public class SellRecordAction extends BaseActionSupport {
 		// 当天的初始化流水号为1
 		Integer serialNo = 1;
 		// 查询当天的下一个流水号
-		String hql = "SELECT max(t.serialNo+1) FROM SerialNumber t WHERE t.generateDate=?";
+//		String hql = "SELECT max(t.serialNo+1) FROM SerialNumber t WHERE t.generateDate=?";
 		// String generateDate = DateUtils.formatDate(new Date(),"yyyyMMdd");
 		// Object obj = session.createQuery(hql).setParameter(0,
 		// generateDate).uniqueResult();
@@ -1122,7 +1112,7 @@ public class SellRecordAction extends BaseActionSupport {
 	
 	public String getGoodsInfoForAjax(){
 		goodsInfoBase = goodsInfoBaseService.get(goodsInfoBaseId);
-		return this.SUCCESS;
+		return SUCCESS;
 	}
 
 	public List<Deptment> getDeptList() {
