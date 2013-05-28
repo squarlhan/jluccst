@@ -174,7 +174,14 @@
         <td height="26" align="center" bgcolor="#FFFFFF" >  
 				<s:checkbox id="%{#obj.id}" name="ids" fieldValue="%{id}" value="false" theme="simple"/>
 			</td>
-            <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="customerName"/></td>
+            <td height="26" align="center" bgcolor="#FFFFFF">
+            <s:if test="progressId.equals('DEALING')">
+            	<font color="#ff00ff" title="要成交客户"><s:property value="customerName"/></font>
+            </s:if>
+            <s:else>
+            	<s:property value="customerName"/>
+            </s:else>
+            </td>
             <td height="26" align="center" bgcolor="#FFFFFF">
             <s:iterator value="contractPersonList" status="obj1">
             <s:property value="personName"/>&nbsp;

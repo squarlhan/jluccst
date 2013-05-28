@@ -150,8 +150,8 @@
          <td align="center" background="../images/headerbg.jpg">  
    				<s:checkbox theme="simple" id="cbk_all" name="all"></s:checkbox>
    			</td>
-              <td align="center" background="../images/headerbg.jpg"><strong>客户名称</strong></td>
-              <td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">联系人/联系方式</td>
+            <td align="center" background="../images/headerbg.jpg"><strong>客户名称</strong></td>
+            <td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">联系人/联系方式</td>
 			<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">客户分类</td>
 			<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">业务进展</td>
 			<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">成熟度</td>
@@ -168,7 +168,14 @@
         <td height="26" align="center" bgcolor="#FFFFFF" >  
 				<s:checkbox id="%{#obj.id}" name="ids" fieldValue="%{id}" value="false" theme="simple"/>
 			</td>
-            <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="customerName"/></td>
+            <td height="26" align="center" bgcolor="#FFFFFF">
+            <s:if test="progressId.equals('DEALING')">
+            	<font color="#ff00ff" title="要成交客户"><s:property value="customerName"/></font>
+            </s:if>
+            <s:else>
+            	<s:property value="customerName"/>
+            </s:else>
+            </td>
             <td height="26" align="center" bgcolor="#FFFFFF">
             <s:iterator value="contractPersonList" status="obj1">
             <s:property value="personName"/>&nbsp;
