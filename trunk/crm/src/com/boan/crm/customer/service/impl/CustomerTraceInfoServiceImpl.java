@@ -171,7 +171,7 @@ public class CustomerTraceInfoServiceImpl implements ICustomerTraceInfoService{
 		{
 			hql.append(" and (traceFlag = '0' or traceFlag is null) ");
 		}
-		hql.append(" order by actualTraceTime asc ,traceTime desc");
+		hql.append(" order by traceTime asc,actualTraceTime");
 		List<CustomerTraceInfo> data = customerTraceInfoDao.findForPage(hql.toString(), values, pagination.getStartIndex(), pagination.getPageSize());
 		hql.delete(0, hql.length());
 		if(values.get("showAllFlag") != null && values.get("showAllFlag").equals("1"))
