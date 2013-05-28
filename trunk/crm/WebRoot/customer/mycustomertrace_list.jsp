@@ -172,6 +172,7 @@
 			<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">业务进展</td>
 			<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">受访人</td>
 			<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">联系方式</td>
+			<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">跟进任务</td>
 			<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">兴趣点</td>
 			<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">异议点</td>
               <td align="center" background="../images/headerbg.jpg"><strong>操作</strong></td>
@@ -188,6 +189,7 @@
             <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="person.personName"/>
 			</td>
             <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="tel"/></td>
+            <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="task"/></td>
             <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="interest"/></td>
             <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="objection"/></td>
           <td height="26" colspan="2" align="center" bgcolor="#FFFFFF">
@@ -203,7 +205,7 @@
         </tr>
         </s:iterator>        
         <tr>
-          <td height="26" colspan="11" align="center" bgcolor="#FFFFFF">
+          <td height="26" colspan="13" align="center" bgcolor="#FFFFFF">
 			<page:pages currentPage="pagination.currentPage" totalPages="pagination.totalPages" totalRows="pagination.totalRows" styleClass="page" theme="text" ></page:pages> 
 		  </td>
         </tr>
