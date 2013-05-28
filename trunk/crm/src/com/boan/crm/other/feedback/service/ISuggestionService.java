@@ -25,6 +25,12 @@ public interface ISuggestionService {
 	 * @return
 	 */
 	public void save(Suggestion object);
+	
+	/**
+	 * 删除信息
+	 * @param ids
+	 */
+	public void delete( String[] ids );
 
 	/**
 	 * 更新信息

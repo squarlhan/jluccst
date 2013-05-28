@@ -54,4 +54,16 @@ public class SuggestionServiceImpl implements ISuggestionService {
 		this.dao = dao;
 	}
 
+	@Override
+	public void delete(String[] ids) {
+		if( ids != null && ids.length  > 0 )
+		{
+			for( int i = 0; i < ids.length ; i ++ )
+			{
+				dao.delete(ids[i]);
+			}
+		}
+		
+	}
+
 }
