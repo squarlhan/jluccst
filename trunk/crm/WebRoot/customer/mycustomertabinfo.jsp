@@ -61,11 +61,13 @@
 		<iframe scrolling="auto" frameborder="0" style="width:100%; height:100%"
 			src="about:blank" url="../openSellRecordListForCustomerAction.action?customerId=<s:property value='id'/>"></iframe>
 	</div>
+	<s:if test="customerInfo != null && customerInfo.progressId.equals('DEALED')">
 	<div title="客户回访"
 		style="padding: 1px; display: none;" id="visitDiv">
 		<iframe id="visitDivFrame" scrolling="auto" frameborder="0" style="width:100%; height:100%"
 			src="about:blank" url="myCustomerVisitList.action?customerId=<s:property value='id'/>"></iframe>
 	</div>
+	</s:if>
 	<s:if test='!teamFlag'>
 	<div title="服务记录"
 		style="padding: 1px; display: none;">
