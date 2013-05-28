@@ -697,6 +697,10 @@ public class CustomerInfoAction extends BaseActionSupport{
 	}
 	public String myCustomerTabInfo()
 	{
+		if(id != null && id.length() > 0)
+		{
+			customerInfo = customerInfoService.get(id);
+		}
 		return SUCCESS;
 	}
 	public String myTelCustomerTabInfo()
