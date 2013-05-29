@@ -29,6 +29,14 @@
 	  {
 		  parent.parent.tipsWindown("个人资料","iframe:./showMyInfoAction.action","400","525","true","","true","no");
 	  }
+	  function writeOpinion()
+	  {
+		  parent.parent.tipsWindown("提出意见","iframe:./suggestionAction!showInfo.action","600","320","true","","true","no");
+	  }
+	  function viewOpinion()
+	  {
+		  parent.parent.tipsWindown("意见反馈","iframe:./suggestionAction!showList.action","600","400","true","","true","no");
+	  }
 </SCRIPT>
 <style type="text/css">
 <!--
@@ -55,6 +63,8 @@
 	        </td>
 	        <td align="right" style="padding-top:2px; padding-right:10px;">
 	        	<span class="STYLE1">
+	        		[ <A href="javascript:writeOpinion();" style="color:yellow">提出意见</A> ]
+	        		[ <A href="javascript:viewOpinion();" style="color:yellow">意见反馈</A> ]
 	        		[ <A href="javascript:myinfo();" style="color:yellow">个人资料</A> ]
 	        		[ <A href="javascript:logout();" style="color:yellow">退出</A> ]
 	        	</span>
