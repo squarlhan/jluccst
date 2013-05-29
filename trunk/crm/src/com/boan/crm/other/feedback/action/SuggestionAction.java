@@ -35,7 +35,7 @@ public class SuggestionAction extends BaseActionSupport {
 	 */
 	public String showList()  {
 		pagination = service.findSuggestionForPage(null, pagination);
-		return SUCCESS;
+		return "show-list";
 	}
 
 	/**
@@ -44,7 +44,7 @@ public class SuggestionAction extends BaseActionSupport {
 	 * @return
 	 */
 	public String showInfo() {
-		return SUCCESS;
+		return "show-info";
 	}
 
 	/**
@@ -63,5 +63,21 @@ public class SuggestionAction extends BaseActionSupport {
 	public String deleteInfo()
 	{
 		return this.showList();
+	}
+
+	public ISuggestionService getService() {
+		return service;
+	}
+
+	public void setService(ISuggestionService service) {
+		this.service = service;
+	}
+
+	public Pagination<Suggestion> getPagination() {
+		return pagination;
+	}
+
+	public void setPagination(Pagination<Suggestion> pagination) {
+		this.pagination = pagination;
 	}
 }
