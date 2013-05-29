@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<!-- 意见反馈Action -->
+	<package name="suggestion" extends="struts-default" namespace="/">
+		<action name="suggestionAction" class="suggestionAction">
+			<result name="show-list">/other/feedback/view_opinion_list.jsp</result>
+			<result name="show-info">/other/feedback/write_opinion.jsp</result>
+		</action>
+	</package>
+</struts>
