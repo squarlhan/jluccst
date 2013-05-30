@@ -128,15 +128,16 @@
     </table>
       <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#d5e4fd">
         <tr>
-              <td align="center" background="../images/headerbg.jpg"><strong>跟进时间</strong></td>
-              <td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">客户名称</td>
+            <td align="center" background="../images/headerbg.jpg"><strong>跟进时间</strong></td>
+            <td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">客户名称</td>
 			<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">业务员</td>
 			<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">业务进展</td>
 			<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">受访人</td>
 			<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">联系方式</td>
+			<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">跟进任务</td>
 			<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">兴趣点</td>
 			<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">异议点</td>
-              <td align="center" background="../images/headerbg.jpg"><strong>操作</strong></td>
+            <td align="center" background="../images/headerbg.jpg"><strong>操作</strong></td>
         </tr>
         <s:iterator value="pagination.data" status="obj">
         <tr>
@@ -147,6 +148,7 @@
             <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="person.personName"/>
 			</td>
             <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="tel"/></td>
+            <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="task"/></td>
             <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="interest"/></td>
             <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="objection"/></td>
           <td height="26" colspan="2" align="center" bgcolor="#FFFFFF">

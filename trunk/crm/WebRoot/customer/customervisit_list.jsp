@@ -197,7 +197,7 @@
 			<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">业务进展</td>
 			<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">受访人</td>
 			<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">联系方式</td>
-			<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">跟进任务</td>
+			<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">回访任务</td>
 			<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">了解内容及结果</td>
 			<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">备 注</td>
               <td align="center" background="../images/headerbg.jpg"><strong>操作</strong></td>
