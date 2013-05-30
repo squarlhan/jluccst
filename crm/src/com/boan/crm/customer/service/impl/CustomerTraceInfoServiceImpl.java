@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import com.boan.crm.customer.dao.ICustomerInfoDAO;
 import com.boan.crm.customer.dao.ICustomerTraceInfoDAO;
+import com.boan.crm.customer.model.BusinessProgressKey;
 import com.boan.crm.customer.model.CustomerInfo;
 import com.boan.crm.customer.model.CustomerTraceInfo;
 import com.boan.crm.customer.service.IContractPersonService;
@@ -237,14 +238,11 @@ public class CustomerTraceInfoServiceImpl implements ICustomerTraceInfoService{
 					if(customer != null)
 					{
 						customerTraceInfo.setCustomerName(customer.getCustomerName());
-						DataDictionary dc = dataDictionaryService.get(customer.getProgressId());
-						if(dc != null)
-						{
-							customerTraceInfo.setProgress(dc.getName());
-						}else
-						{
-							customerTraceInfo.setProgress("");
-						}
+						if(customer.getProgressId() != null)
+							customerTraceInfo.setProgress(BusinessProgressKey.getBusinessProgressNameByKey(customer.getProgressId()));
+						else
+							customerTraceInfo.setProgress("新建");
+						
 					}
 					customerTraceInfo.setSalesman(userService.getUserById(customerTraceInfo.getSalesmanId()).getUserCName());
 					customerTraceInfo.setPerson(contractPersonService.get(customerTraceInfo.getTracePersonId()));
