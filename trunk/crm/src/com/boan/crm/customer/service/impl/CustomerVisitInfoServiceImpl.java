@@ -13,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import com.boan.crm.customer.dao.ICustomerInfoDAO;
 import com.boan.crm.customer.dao.ICustomerVisitInfoDAO;
+import com.boan.crm.customer.model.BusinessProgressKey;
 import com.boan.crm.customer.model.CustomerInfo;
 import com.boan.crm.customer.model.CustomerVisitInfo;
 import com.boan.crm.customer.service.IContractPersonService;
@@ -236,14 +237,11 @@ public class CustomerVisitInfoServiceImpl implements ICustomerVisitInfoService{
 					{
 						customerVisitInfo.setCustomerName(customer.getCustomerName());
 						
-						DataDictionary dc = dataDictionaryService.get(customer.getProgressId());
-						if(dc != null)
-						{
-							customerVisitInfo.setProgress(dc.getName());
-						}else
-						{
-							customerVisitInfo.setProgress("");
-						}
+						if(customer.getProgressId() != null)
+							customerVisitInfo.setProgress(BusinessProgressKey.getBusinessProgressNameByKey(customer.getProgressId()));
+						else
+							customerVisitInfo.setProgress("新建");
+						
 					}
 					customerVisitInfo.setSalesman(userService.getUserById(customerVisitInfo.getSalesmanId()).getUserCName());
 					customerVisitInfo.setPerson(contractPersonService.get(customerVisitInfo.getVisitPersonId()));

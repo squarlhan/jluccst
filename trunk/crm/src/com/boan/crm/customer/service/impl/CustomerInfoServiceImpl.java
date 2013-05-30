@@ -235,7 +235,11 @@ public class CustomerInfoServiceImpl implements ICustomerInfoService{
 //				DataDictionary d4 = dataDictionaryService.get(customerInfo.getProgressId());
 //				if(d4 != null)
 //				{
+				if(customerInfo.getProgressId() != null)
 					customerInfo.setProgress(BusinessProgressKey.getBusinessProgressNameByKey(customerInfo.getProgressId()));
+				else
+					customerInfo.setProgress("新建");
+				
 //				}else
 //				{
 //					customerInfo.setProgress("");
@@ -422,14 +426,11 @@ public class CustomerInfoServiceImpl implements ICustomerInfoService{
 				{
 					customerInfo.setSource(d3.getName());
 				}
-				DataDictionary d4 = dataDictionaryService.get(customerInfo.getProgressId());
-				if(d4 != null)
-				{
-					customerInfo.setProgress(d4.getName());
-				}else
-				{
-					customerInfo.setProgress("");
-				}
+				if(customerInfo.getProgressId() != null)
+					customerInfo.setProgress(BusinessProgressKey.getBusinessProgressNameByKey(customerInfo.getProgressId()));
+				else
+					customerInfo.setProgress("新建");
+				
 				try
 				{
 					User salesman = userService.getUserById(customerInfo.getSalesmanId());
