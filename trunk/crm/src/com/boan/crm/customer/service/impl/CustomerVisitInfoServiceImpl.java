@@ -169,7 +169,7 @@ public class CustomerVisitInfoServiceImpl implements ICustomerVisitInfoService{
 		{
 			hql.append(" and (visitFlag = '0' or visitFlag is null) ");
 		}
-		hql.append(" order by visitTime asc,actualVisitTime asc");
+		hql.append(" order by visitTime desc,actualVisitTime asc");
 		List<CustomerVisitInfo> data = customerVisitInfoDao.findForPage(hql.toString(), values, pagination.getStartIndex(), pagination.getPageSize());
 		hql.delete(0, hql.length());
 		if(values.get("showAllFlag") != null && values.get("showAllFlag").equals("1"))
