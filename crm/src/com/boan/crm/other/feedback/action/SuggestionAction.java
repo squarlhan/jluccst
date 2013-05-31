@@ -27,6 +27,8 @@ public class SuggestionAction extends BaseActionSupport {
 	private ISuggestionService service = null;
 
 	private Pagination<Suggestion> pagination = new Pagination<Suggestion>();
+	
+	private Suggestion suggestion = null;
 
 	/**
 	 * 显示列表
@@ -53,7 +55,7 @@ public class SuggestionAction extends BaseActionSupport {
 	 * @return
 	 */
 	public String saveInfo() {
-		// 保存日志结束
+		service.save(suggestion);
 		return SUCCESS;
 	}
 	/**
@@ -79,5 +81,13 @@ public class SuggestionAction extends BaseActionSupport {
 
 	public void setPagination(Pagination<Suggestion> pagination) {
 		this.pagination = pagination;
+	}
+
+	public Suggestion getSuggestion() {
+		return suggestion;
+	}
+
+	public void setSuggestion(Suggestion suggestion) {
+		this.suggestion = suggestion;
 	}
 }
