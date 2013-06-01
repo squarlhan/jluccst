@@ -102,7 +102,7 @@
 													<script type="text/javascript">
 													$("#progressname").html($("#progressId").find("option:selected").text());
 												</script>											</td>
-											<td align="right"><strong>成熟度：</strong></td>
+											<td align="right"><strong>忠诚度：</strong></td>
 										  <td>
 											<span id="maturityname"></span><s:select list="listMaturity" listKey="id"
 													listValue="name" value="customerInfo.maturityId"

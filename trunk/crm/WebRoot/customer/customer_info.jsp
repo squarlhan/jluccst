@@ -68,7 +68,7 @@
 						required: "请选择客户分类！"
 					},
 					"customerInfo.maturityId": {
-						required: "请选择成熟度！"
+						required: "请选择忠诚度！"
 					},
 					"customerInfo.levelId": {
 						required: "请选择开发程度！"
@@ -312,7 +312,7 @@
 											<td align="center">业务进展：</td>
 											<td><s:label name="customerInfo.progress"></s:label>
 											</td> 
-											<td align="right">成 熟 度：</td>
+											<td align="right">忠 诚 度：</td>
 											<td><s:select list="listMaturity" listKey="id"
 													listValue="name" value="customerInfo.maturityId"
 													id="categoryId" name="customerInfo.maturityId"
