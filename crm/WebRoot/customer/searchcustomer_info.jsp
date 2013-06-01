@@ -284,13 +284,9 @@
 													cssStyle="width:140px" headerKey=""
 													headerValue="--请选择客户分类--" disabled="true"></s:select></td>
 											<td align="center">业务进展：</td>
-											<td><s:select list="listProgress" listKey="id"
-													listValue="name" value="customerInfo.progressId"
-													id="progressId" name="customerInfo.progressId"
-													cssStyle="width:140px" headerKey=""
-													headerValue="--请选择业务进展--" disabled="true"></s:select>
+											<td><s:label name="customerInfo.progress"></s:label>
 											</td>
-											<td align="center">成熟度：</td>
+											<td align="center">忠诚度：</td>
 											<td><s:select list="listMaturity" listKey="id"
 													listValue="name" value="customerInfo.maturityId"
 													id="categoryId" name="customerInfo.maturityId"
