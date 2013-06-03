@@ -12,9 +12,6 @@ package com.boan.crm.backstagemanage.dao;
 import java.util.Calendar;
 import java.util.List;
 
-import org.hibernate.criterion.DetachedCriteria;
-
-import com.boan.crm.backstagemanage.model.Company;
 import com.boan.crm.backstagemanage.model.Log;
 import com.boan.crm.utils.dao.IBaseDao;
 

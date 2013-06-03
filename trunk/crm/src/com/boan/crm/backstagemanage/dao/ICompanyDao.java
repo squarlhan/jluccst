@@ -2,8 +2,6 @@ package com.boan.crm.backstagemanage.dao;
 
 import java.util.List;
 
-import org.springframework.stereotype.Repository;
-
 import com.boan.crm.backstagemanage.model.Company;
 import com.boan.crm.utils.dao.IBaseDao;
 

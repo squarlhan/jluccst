@@ -9,19 +9,15 @@
 
 package com.boan.crm.backstagemanage.dao.impl;
 
-import java.io.Serializable;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
-import org.hibernate.criterion.DetachedCriteria;
-import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
 import com.boan.crm.backstagemanage.dao.ILogDao;
-import com.boan.crm.backstagemanage.model.Company;
 import com.boan.crm.backstagemanage.model.Log;
 import com.boan.crm.utils.calendar.CurrentDateTime;
 import com.boan.crm.utils.dao.impl.BaseDao;

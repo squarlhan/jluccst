@@ -19,7 +19,6 @@ import javax.persistence.Table;
 
 import org.apache.commons.lang.StringUtils;
 import org.hibernate.annotations.GenericGenerator;
-import org.springframework.beans.factory.annotation.Qualifier;
 
 import com.boan.crm.backstagemanage.common.LogType;
 import com.boan.crm.utils.calendar.CurrentDateTime;

@@ -14,6 +14,8 @@ import com.boan.crm.utils.action.BaseActionSupport;
 @Controller("systemConfigAction")
 @Scope("prototype")
 public class SystemConfigAction extends BaseActionSupport {
+	private static final long serialVersionUID = -7673889146210910368L;
+
 	@Autowired
 	@Qualifier("systemConfigService")
 	private ISystemConfigService service = null;
