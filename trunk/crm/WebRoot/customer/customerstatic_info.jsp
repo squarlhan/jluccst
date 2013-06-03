@@ -112,7 +112,7 @@ background-color:#d3eaef}
 			chart2.render("chartdiv2");
 		</s:if>
 		<s:if test="flag.equals('maturity')">
-			var xml3 = "<graph caption='客户成熟度信息统计' baseFontSize='16' xAxisName='客户成熟度' showNames='1' yAxisMaxValue='"+recordCount+"' decimalPrecision='0'>";
+			var xml3 = "<graph caption='客户忠诚度信息统计' baseFontSize='16' xAxisName='客户忠诚度' showNames='1' yAxisMaxValue='"+recordCount+"' decimalPrecision='0'>";
 			<s:iterator value="listMaturityStatic" status="obj">
 				xml3 = xml3 + "<set name=\""+document.getElementById("maturity<s:property value="#obj.index"/>").textStr+"\" value=\""+document.getElementById("maturity<s:property value="#obj.index"/>").valueStr+"\" />";
 			</s:iterator>
