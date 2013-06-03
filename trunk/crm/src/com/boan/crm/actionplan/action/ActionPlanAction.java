@@ -110,10 +110,10 @@ public class ActionPlanAction extends BaseActionSupport{
 	public String showGroupTreeForActionPlan() throws Exception {
 		userList = new ArrayList<User>();
 		deptList = new ArrayList<Deptment>();
-		boolean flag=true;
-		if(sessionDeptId.equals("")){ //总经理
-			flag=false;
-		}
+//		boolean flag=true;
+//		if(sessionDeptId.equals("")){ //总经理
+//			flag=false;
+//		}
 		UserSession us = this.getSession();
 		//判断是否是公司管理员或公司级用户
 		boolean popodomFlag = popedomService.isCompanyAdministrator(us.getUserId(), String.valueOf(us.getUserType()) ) 
