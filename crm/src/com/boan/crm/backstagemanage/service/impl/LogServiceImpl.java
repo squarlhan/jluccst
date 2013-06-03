@@ -17,7 +17,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.boan.crm.backstagemanage.dao.ILogDao;
-import com.boan.crm.backstagemanage.model.Company;
 import com.boan.crm.backstagemanage.model.Log;
 import com.boan.crm.backstagemanage.service.ILogService;
 import com.boan.crm.utils.page.Pagination;
