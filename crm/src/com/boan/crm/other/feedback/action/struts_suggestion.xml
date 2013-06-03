@@ -8,6 +8,9 @@
 		<action name="suggestionAction" class="suggestionAction">
 			<result name="show-list">/other/feedback/view_opinion_list.jsp</result>
 			<result name="show-info">/other/feedback/write_opinion.jsp</result>
+			<result name="show-info-detail">/other/feedback/view_opinion_detail.jsp</result>
+			<result name="success">/common/message.jsp</result>
+			<result name="error">/common/messagenoclose.jsp</result>
 		</action>
 	</package>
 </struts>
