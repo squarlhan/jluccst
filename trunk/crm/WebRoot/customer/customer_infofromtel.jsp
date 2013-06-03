@@ -93,25 +93,10 @@
 												</script>													</td>
 											<td align="right"><strong>业务进展：</strong></td>
 										  <td>
-											<span id="progressname"></span>
-											<s:select list="listProgress" listKey="id"
-													listValue="name" value="customerInfo.progressId"
-													id="progressId" name="customerInfo.progressId"
-													cssStyle="width:140px; display:none" headerKey=""
-													headerValue="--请选择业务进展--" disabled="true"></s:select>
-													<script type="text/javascript">
-													$("#progressname").html($("#progressId").find("option:selected").text());
-												</script>											</td>
+											<s:label name="customerInfo.progress"></s:label></td>
 											<td align="right"><strong>忠诚度：</strong></td>
 										  <td>
-											<span id="maturityname"></span><s:select list="listMaturity" listKey="id"
-													listValue="name" value="customerInfo.maturityId"
-													id="maturityId" name="customerInfo.maturityId"
-													cssStyle="width:140px; display:none" headerKey=""
-													headerValue="--请选择成熟度--" disabled="true"></s:select>
-													<script type="text/javascript">
-													$("#maturityname").html($("#maturityId").find("option:selected").text());
-												</script>											</td>
+											<s:label name="customerInfo.maturityId"></s:label></td>
 											<td align="right"><strong>开发程度：</strong></td>
 										  <td>
 											<span id="levelname"></span><s:select list="listLevel"

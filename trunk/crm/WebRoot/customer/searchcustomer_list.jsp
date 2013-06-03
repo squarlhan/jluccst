@@ -138,7 +138,7 @@
             <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="salesman"/></td>
             <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="category"/></td>
             <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="progress"/></td>
-            <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="maturity"/></td>
+            <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="maturityId"/></td>
             <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="levelId"/></td>
             <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="source"/></td>
               <!-- 
