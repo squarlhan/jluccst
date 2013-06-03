@@ -62,7 +62,7 @@ public class UserType
 
 	public static List<UserType> getUserTypeList()
 	{
-		List<UserType> list = new ArrayList();
+		List<UserType> list = new ArrayList<UserType>();
 		UserType type = null;
 		for( int i = 0; i < keys.length; i++ )
 		{
@@ -80,7 +80,7 @@ public class UserType
 
 	public static List<UserType> getCompanyUserTypeList()
 	{
-		List<UserType> list = new ArrayList();
+		List<UserType> list = new ArrayList<UserType>();
 		UserType type = null;
 		for( int i = 0; i < keys.length-1; i++ )
 		{
