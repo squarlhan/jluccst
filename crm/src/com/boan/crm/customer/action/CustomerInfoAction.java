@@ -109,7 +109,7 @@ public class CustomerInfoAction extends BaseActionSupport{
 	private List<DataDictionary> listCategory = null;
 	private List<DataDictionary> listSource = null;
 	private List<DataDictionary> listProgress = null;
-	private List<DataDictionary> listMaturity = null;
+//	private List<DataDictionary> listMaturity = null;
 	private List<DataDictionary> listLevel = null;
 	private List<ContractPersonInfo> listPerson = null;
 	private List<ProvinceInfo> listProvince = null;
@@ -622,7 +622,7 @@ public class CustomerInfoAction extends BaseActionSupport{
 		//业务进展：传1
 		//listProgress = dataDictionaryService.findDataDictionaryByType(companyId, 7);
 		//成熟度：传4
-		listMaturity = dataDictionaryService.findDataDictionaryByType(companyId, 4);
+//		listMaturity = dataDictionaryService.findDataDictionaryByType(companyId, 4);
 		//开发程度
 		//listLevel = dataDictionaryService.findDataDictionaryByType(0);
 		listLevel = new ArrayList<DataDictionary>();
@@ -1059,12 +1059,6 @@ public class CustomerInfoAction extends BaseActionSupport{
 	}
 	public void setListProgress(List<DataDictionary> listProgress) {
 		this.listProgress = listProgress;
-	}
-	public List<DataDictionary> getListMaturity() {
-		return listMaturity;
-	}
-	public void setListMaturity(List<DataDictionary> listMaturity) {
-		this.listMaturity = listMaturity;
 	}
 	public List<DataDictionary> getListLevel() {
 		return listLevel;
