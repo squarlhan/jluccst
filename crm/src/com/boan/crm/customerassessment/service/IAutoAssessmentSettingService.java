@@ -5,14 +5,8 @@ package com.boan.crm.customerassessment.service;
 
 
 import java.util.Calendar;
-import java.util.List;
-import java.util.Map;
 
-import com.boan.crm.customer.analysis.model.AnalysisCustomer;
-import com.boan.crm.customer.model.ContractPersonInfo;
 import com.boan.crm.customerassessment.model.AutoAssessmentSetting;
-import com.boan.crm.customerassessment.model.CustomerAssessment;
-import com.boan.crm.utils.page.Pagination;
 
 /**
  * @author luojx
