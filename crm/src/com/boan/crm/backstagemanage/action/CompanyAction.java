@@ -47,6 +47,7 @@ import com.boan.crm.utils.page.Pagination;
 @Controller("companyAction")
 @Scope("prototype")
 public class CompanyAction extends BaseActionSupport {
+	private static final long serialVersionUID = 1460088654662374524L;
 	/**
 	 * 公司Service
 	 */

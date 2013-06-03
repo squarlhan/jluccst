@@ -36,6 +36,8 @@ import com.boan.crm.utils.page.Pagination;
 @Controller("logAction")
 @Scope("prototype")
 public class LogAction extends BaseActionSupport {
+	private static final long serialVersionUID = -4716066844752664441L;
+
 	@Autowired
 	@Qualifier("logService")
 	private ILogService logService = null;

@@ -1,13 +1,10 @@
 package com.boan.crm.backstagemanage.dao.impl;
 
-import java.io.Serializable;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
-import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 
 import com.boan.crm.backstagemanage.dao.ICompanyDao;
