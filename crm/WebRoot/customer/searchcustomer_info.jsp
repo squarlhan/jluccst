@@ -287,11 +287,7 @@
 											<td><s:label name="customerInfo.progress"></s:label>
 											</td>
 											<td align="center">忠诚度：</td>
-											<td><s:select list="listMaturity" listKey="id"
-													listValue="name" value="customerInfo.maturityId"
-													id="categoryId" name="customerInfo.maturityId"
-													cssStyle="width:140px" headerKey=""
-													headerValue="--请选择成熟度--" disabled="true"></s:select>
+											<td><s:label name="customerInfo.maturityId"></s:label>
 											</td>
 											<td align="center">开发程度：</td>
 											<td><s:select list="listLevel"

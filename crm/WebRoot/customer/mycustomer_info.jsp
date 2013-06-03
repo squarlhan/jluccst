@@ -48,7 +48,6 @@
 					"customerInfo.fax":{strangecode:true},
 					"customerInfo.sourceId":{required:true},
 					"customerInfo.categoryId":{required:true},
-					"customerInfo.maturityId":{required:true},
 					"customerInfo.levelId":{required:true},
 					"customerInfo.address":{required:true,strangecode:true},
 					"customerInfo.mainIndustry":{required:true,strangecode:true},
@@ -68,9 +67,6 @@
 					    },
 					"customerInfo.categoryId": {
 						required: "请选择客户分类！"
-					},
-					"customerInfo.maturityId": {
-						required: "请选择忠诚度！"
 					},
 					"customerInfo.levelId": {
 						required: "请选择开发程度！"
@@ -265,7 +261,6 @@
 		<s:hidden id="sourceName" name="customerInfo.source"></s:hidden>
 		<s:hidden id="categoryName" name="customerInfo.category"></s:hidden>
 		<s:hidden id="progressName" name="customerInfo.progress"></s:hidden>
-		<s:hidden id="maturityName" name="customerInfo.maturity"></s:hidden>
 		<s:hidden id="levelName" name="customerInfo.level"></s:hidden>
 		<s:hidden id="customerId_t" name="customerId"></s:hidden>
 		<table width="790" border="0" cellspacing="5" cellpadding="0">
@@ -313,11 +308,8 @@
 											<td><s:label name="customerInfo.progress"></s:label>
 											</td> 
 											<td align="right">忠 诚 度：</td>
-											<td><s:select list="listMaturity" listKey="id"
-													listValue="name" value="customerInfo.maturityId"
-													id="categoryId" name="customerInfo.maturityId"
-													cssStyle="width:130px" headerKey=""
-													headerValue="--请选择--"></s:select><font color="red">*</font>
+											<td>
+											<s:label name="customerInfo.maturityId"></s:label>
 											</td>
 										</tr>
 										<tr>
