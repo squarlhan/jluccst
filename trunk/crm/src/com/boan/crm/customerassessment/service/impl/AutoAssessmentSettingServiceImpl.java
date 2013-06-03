@@ -236,6 +236,10 @@ public class AutoAssessmentSettingServiceImpl implements IAutoAssessmentSettingS
 				}
 				
 				autoCustomerAssessmentService.save(autoCustomerAssessment);
+				
+				customer.setMaturity(assessmentResult.getResult());
+				customer.setMaturityId(assessmentResult.getResult());
+				customerInfoService.save(customer);
 			}
 		}
 	}
