@@ -23,7 +23,7 @@ public class MenuDaoImpl extends BaseDao<Menu, String> implements IMenuDao {
 
 	@Override
 	public Menu getMenuByKey(String key) {
-		String hql = "from Menu where key = :key";
+		String hql = "from Menu where menuKey = :key";
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("key", key);
 		List<Menu> menuList = super.find(hql, map);
