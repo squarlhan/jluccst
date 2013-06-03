@@ -194,5 +194,16 @@ public class Suggestion implements java.io.Serializable {
 	public void setReplyStatus(int replyStatus) {
 		this.replyStatus = replyStatus;
 	}
-
+	public String replyStatusCn()
+	{
+		if( this.replyStatus == 0 )
+		{
+			return "未回复";
+		}
+		else if( this.replyStatus == 1 )
+		{
+			return "已回复";
+		}
+		return "";
+	}
 }
