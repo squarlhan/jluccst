@@ -6,7 +6,6 @@ package com.boan.crm.customer.analysis.service;
 import java.util.List;
 
 import com.boan.crm.customer.analysis.model.AnalysisResult;
-import com.boan.crm.customer.analysis.model.FuzzyInfo;
 
 /**
  * @author luojx
