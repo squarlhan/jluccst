@@ -18,8 +18,6 @@ import com.boan.crm.customer.model.CustomerInfo;
 import com.boan.crm.customer.model.CustomerTraceInfo;
 import com.boan.crm.customer.service.IContractPersonService;
 import com.boan.crm.customer.service.ICustomerTraceInfoService;
-import com.boan.crm.datadictionary.model.DataDictionary;
-import com.boan.crm.datadictionary.service.IDataDictionaryService;
 import com.boan.crm.groupmanage.service.IUserService;
 import com.boan.crm.utils.calendar.CalendarUtils;
 import com.boan.crm.utils.page.Pagination;
@@ -57,9 +55,6 @@ public class CustomerTraceInfoServiceImpl implements ICustomerTraceInfoService{
 		customerTraceInfoDao.executeHql("update CustomerTraceInfo set deleteFlag = 1 where customerId = :customerId",values);
 	}
 	
-	@Autowired
-	@Qualifier("dataDictionaryService")
-	private IDataDictionaryService dataDictionaryService = null;
 	
 	@Override
 	public List<CustomerTraceInfo> findAllCustomerTraceInfo() {

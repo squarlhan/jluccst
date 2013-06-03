@@ -12,11 +12,8 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import com.boan.crm.customer.analysis.dao.IAnalysisResultDAO;
-import com.boan.crm.customer.analysis.dao.IFuzzyInfoDAO;
 import com.boan.crm.customer.analysis.model.AnalysisResult;
-import com.boan.crm.customer.analysis.model.FuzzyInfo;
 import com.boan.crm.customer.analysis.service.IAnalysisResultService;
-import com.boan.crm.customer.analysis.service.IFuzzyInfoService;
 
 /**
  * @author luojx

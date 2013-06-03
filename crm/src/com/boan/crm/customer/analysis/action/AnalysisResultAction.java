@@ -11,12 +11,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.boan.crm.customer.analysis.model.AnalysisResult;
-import com.boan.crm.customer.analysis.model.FuzzyCategory;
-import com.boan.crm.customer.analysis.model.FuzzyInfo;
-import com.boan.crm.customer.analysis.model.IdCaption;
 import com.boan.crm.customer.analysis.service.IAnalysisResultService;
-import com.boan.crm.customer.analysis.service.IFuzzyInfoService;
-import com.boan.crm.customer.analysis.utils.MathFunction;
 import com.boan.crm.utils.action.BaseActionSupport;
 
 /**
