@@ -32,10 +32,17 @@
 	  function writeOpinion()
 	  {
 		  parent.parent.tipsWindown("提出意见","iframe:./suggestionAction!showInfo.action","600","320","true","","true","no");
+			parent.parent.$("#windown-close").bind('click', function() {
+				window.open("./suggestionAction!showListForFeedback.action","groupmain");
+			});
 	  }
 	  function viewOpinion()
 	  {
-		  parent.parent.tipsWindown("意见反馈","iframe:./suggestionAction!showList.action","600","400","true","","true","no");
+		  window.open("./other/feedback/opinionmanage.jsp","mainFrame");
+	  }
+	  function viewFeedback()
+	  {
+		  window.open("./other/feedback/feedbackmanage.jsp","mainFrame");
 	  }
 </SCRIPT>
 <style type="text/css">
@@ -64,6 +71,8 @@
 	        <td align="right" style="padding-top:2px; padding-right:10px;">
 	        	<span class="STYLE1">
 	        		[ <A href="javascript:writeOpinion();" style="color:yellow">提出意见</A> ]
+	        		[ <A href="javascript:viewFeedback();" style="color:yellow">查看反馈</A> ]
+	        		
 	        		[ <A href="javascript:viewOpinion();" style="color:yellow">意见反馈</A> ]
 	        		[ <A href="javascript:myinfo();" style="color:yellow">个人资料</A> ]
 	        		[ <A href="javascript:logout();" style="color:yellow">退出</A> ]
