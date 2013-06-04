@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
-import com.boan.crm.backstagemanage.model.Company;
 import com.boan.crm.other.feedback.dao.ISuggestionDao;
 import com.boan.crm.other.feedback.model.Suggestion;
 import com.boan.crm.other.feedback.service.ISuggestionService;
@@ -64,6 +63,22 @@ public class SuggestionServiceImpl implements ISuggestionService {
 			}
 		}
 		
+	}
+
+	@Override
+	public Pagination<Suggestion> findMySuggestionForPage(Map<String, ?> values, Pagination<Suggestion> pagination) {
+		String hql = " from Suggestion where userId = :userId  order by createTime desc ";
+		List<Suggestion> data = dao.findForPage(hql, values, pagination.getStartIndex(), pagination.getPageSize());
+		hql = " select count(id) from Suggestion where userId = :userId ";
+		int totalRows = dao.findCountForPage(hql, values);
+		pagination.setTotalRows(totalRows);
+		pagination.setData(data);
+		return pagination;
+	}
+
+	@Override
+	public void updateReplyStatus(String suggestionId, int replyStatus) {
+		dao.updateReplyStatus(suggestionId, replyStatus);
 	}
 
 }

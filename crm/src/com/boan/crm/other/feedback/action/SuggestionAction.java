@@ -1,7 +1,9 @@
 package com.boan.crm.other.feedback.action;
 
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +15,10 @@ import com.boan.crm.backstagemanage.common.ProductType;
 import com.boan.crm.common.Message;
 import com.boan.crm.groupmanage.model.Menu;
 import com.boan.crm.groupmanage.service.IMenuService;
+import com.boan.crm.other.feedback.common.SuggestionReplyStatus;
 import com.boan.crm.other.feedback.model.Suggestion;
+import com.boan.crm.other.feedback.model.SuggestionReply;
+import com.boan.crm.other.feedback.service.ISuggestionReplyService;
 import com.boan.crm.other.feedback.service.ISuggestionService;
 import com.boan.crm.utils.action.BaseActionSupport;
 import com.boan.crm.utils.page.Pagination;
@@ -34,12 +39,17 @@ public class SuggestionAction extends BaseActionSupport {
 	@Qualifier("suggestionService")
 	private ISuggestionService service = null;
 	@Autowired
+	@Qualifier("suggestionReplyService")
+	private ISuggestionReplyService replyService = null;
+	@Autowired
 	@Qualifier("menuService")
 	private IMenuService menuService = null;
 
 	private Pagination<Suggestion> pagination = new Pagination<Suggestion>();
 
 	private Suggestion suggestion = null;
+	
+	private SuggestionReply suggestionReply = null;
 
 	private List<Menu> menuList = null;
 
@@ -65,8 +75,10 @@ public class SuggestionAction extends BaseActionSupport {
 	 * @return
 	 */
 	public String showListForFeedback() {
-		pagination = service.findSuggestionForPage(null, pagination);
-		return "show-list";
+		Map<String, Object> map = new HashMap<String ,Object>();
+		map.put("userId", sessionUserId);
+		pagination = service.findMySuggestionForPage(map, pagination);
+		return "show-feedback-list";
 	}
 
 	/**
@@ -75,7 +87,6 @@ public class SuggestionAction extends BaseActionSupport {
 	 * @return
 	 */
 	public String showInfo() {
-		
 		menuList = menuService.getOneLevelMenuListByProductType(ProductType.CRM, null, 1);
 		return "show-info";
 	}
@@ -87,7 +98,19 @@ public class SuggestionAction extends BaseActionSupport {
 	public String showSuggestionDetail()
 	{
 		suggestion = service.get(suggestionId);
+		suggestionReply = replyService.getReply(suggestionId);
 		return "show-info-detail";
+	}
+	
+	/**
+	 * 显示意见及反馈详情
+	 * @return
+	 */
+	public String showSuggestionAndReply()
+	{
+		suggestion = service.get(suggestionId);
+		suggestionReply = replyService.getReply(suggestionId);
+		return "show-info-and-reply";
 	}
 
 	/**
@@ -118,6 +141,28 @@ public class SuggestionAction extends BaseActionSupport {
 			return ERROR;
 		}
 	}
+	
+	/**
+	 * 保存回复意见
+	 * @return
+	 */
+	public String saveReplyInfo() {
+		try {
+			//（1）保存回复内容
+			suggestionReply.setSuggestionId(suggestionId);
+			suggestionReply.setUserId(sessionUserId);
+			suggestionReply.setUserName(sessionUserCName);
+			suggestionReply.setReplyTime(Calendar.getInstance());
+			replyService.save(suggestionReply);
+			//（2）更新回复状态
+			service.updateReplyStatus(suggestionId, SuggestionReplyStatus.REPLYED.getIndex());
+			message.setContent("意见回复成功！");
+			return SUCCESS;
+		} catch (Exception e) {
+			message.setContent("意见回复发生异常，请联系管理员！");
+			return ERROR;
+		}
+	}
 
 	/**
 	 * 删除多条
@@ -128,6 +173,7 @@ public class SuggestionAction extends BaseActionSupport {
 		if( StringUtils.isNotBlank(suggestionId) )
 		{
 			service.delete(new String[]{suggestionId});
+			replyService.deleteBySuggestionId(suggestionId);
 		}
 		return this.showList();
 	}
@@ -141,6 +187,10 @@ public class SuggestionAction extends BaseActionSupport {
 		if( suggestionIds != null && suggestionIds.length > 0 )
 		{
 			service.delete(suggestionIds);
+			for(  String s : suggestionIds)
+			{
+				replyService.deleteBySuggestionId(s);
+			}
 		}
 		return this.showList();
 	}
@@ -207,5 +257,21 @@ public class SuggestionAction extends BaseActionSupport {
 
 	public void setSuggestionIds(String[] suggestionIds) {
 		this.suggestionIds = suggestionIds;
+	}
+
+	public ISuggestionReplyService getReplyService() {
+		return replyService;
+	}
+
+	public void setReplyService(ISuggestionReplyService replyService) {
+		this.replyService = replyService;
+	}
+
+	public SuggestionReply getSuggestionReply() {
+		return suggestionReply;
+	}
+
+	public void setSuggestionReply(SuggestionReply suggestionReply) {
+		this.suggestionReply = suggestionReply;
 	}
 }
