@@ -50,11 +50,21 @@ public class SuggestionAction extends BaseActionSupport {
 	private String[] suggestionIds = null;
 
 	/**
-	 * 显示列表
+	 * 显示列表用于意见反馈
 	 * 
 	 * @return
 	 */
 	public String showList() {
+		pagination = service.findSuggestionForPage(null, pagination);
+		return "show-list";
+	}
+	
+	/**
+	 * 显示列表用于查看反馈
+	 * 
+	 * @return
+	 */
+	public String showListForFeedback() {
 		pagination = service.findSuggestionForPage(null, pagination);
 		return "show-list";
 	}
