@@ -77,4 +77,6 @@
 	<include file="com/boan/crm/goods/action/struts_goodstype.xml"></include>
 	<!--产品信息-->
 	<include file="com/boan/crm/goods/action/struts_goodsinfobase.xml"></include>
+	<!--意见反馈-->
+	<include file="com/boan/crm/other/feedback/action/struts_suggestion.xml"></include>
 </struts>
