@@ -1,5 +1,7 @@
 package com.boan.crm.other.feedback.model;
 
+import java.util.Calendar;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -58,7 +60,7 @@ public class SuggestionReply implements java.io.Serializable{
 	 * 回复时间
 	 */
 	@Column(name = "REPLY_TIME" )
-	private String replyTime;
+	private Calendar replyTime;
 
 	public String getId() {
 		return id;
@@ -100,11 +102,11 @@ public class SuggestionReply implements java.io.Serializable{
 		this.userName = userName;
 	}
 
-	public String getReplyTime() {
+	public Calendar getReplyTime() {
 		return replyTime;
 	}
 
-	public void setReplyTime(String replyTime) {
+	public void setReplyTime(Calendar replyTime) {
 		this.replyTime = replyTime;
 	}
 

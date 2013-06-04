@@ -40,9 +40,23 @@ public interface ISuggestionService {
 	public void update(Suggestion object);
 
 	/**
-	 * 实现分页
+	 *分页，获取全部意见列表
 	 * 
 	 * @return
 	 */
 	public Pagination<Suggestion> findSuggestionForPage(Map<String, ?> values, Pagination<Suggestion> pagination);
+	
+	/**
+	 *分页，获取自己的意见列表
+	 * 
+	 * @return
+	 */
+	public Pagination<Suggestion> findMySuggestionForPage(Map<String, ?> values, Pagination<Suggestion> pagination);
+	
+	/**
+	 * 更新意见表的回复状态
+	 * @param suggestionId
+	 * @param replyStatus
+	 */
+	public void updateReplyStatus( String  suggestionId , int replyStatus);
 }
