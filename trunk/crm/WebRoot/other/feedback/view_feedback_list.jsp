@@ -54,15 +54,12 @@
 		$.fn.uncheckall("ids", "cbk_all");
 
 		/**
-		 * 修改角色信息
+		 * 修改
 		 */
 		$('a[name="edit"]').each(function() {$(this).click(
 				function() {
 					var url = $(this).attr("url");
-					parent.parent.tipsWindown("意见反馈", "iframe:"+ url, "630","450", "true", "","true", "no");
-					parent.parent.$("#windown-close").bind('click', function() {
-						window.location.href = "./suggestionAction!showList.action";
-					});
+					parent.parent.tipsWindown("查看反馈", "iframe:"+ url, "600","800", "true", "","true", "no");
 				});
 		});
 
@@ -170,13 +167,13 @@
 										<s:property value="replyStatusCn" />
 									</td>
 									<td height="26"  align="center" bgcolor="#FFFFFF">
-										<s:url id="edit_url" action="suggestionAction!showSuggestionDetail.action">
+										<s:url id="edit_url" action="suggestionAction!showSuggestionAndReply.action">
 											<s:param name="suggestionId" value="id"></s:param>
 										</s:url>
 										<s:url id="delete_url" action="suggestionAction!deleteItem.action">
 											<s:param name="suggestionId" value="id"></s:param>
 										</s:url>
-										<a name="edit" href="javascript:void(0);" url="${edit_url}">反馈</a>
+										<a name="edit" href="javascript:void(0);" url="${edit_url}">查看详情</a>
 										<a name="delete" href="javascript:void(0);"
 											url="${delete_url}">删除</a>
 									</td>
