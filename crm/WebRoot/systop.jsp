@@ -32,9 +32,9 @@
 	  function writeOpinion()
 	  {
 		  parent.parent.tipsWindown("提出意见","iframe:./suggestionAction!showInfo.action","600","320","true","","true","no");
-			parent.parent.$("#windown-close").bind('click', function() {
-				window.open("./suggestionAction!showListForFeedback.action","groupmain");
-			});
+		  parent.parent.$("#windown-close").bind('click', function() {
+				window.open("./other/feedback/feedbackmanage.jsp","mainFrame");
+		  });
 	  }
 	  function viewOpinion()
 	  {
@@ -70,10 +70,13 @@
 	        </td>
 	        <td align="right" style="padding-top:2px; padding-right:10px;">
 	        	<span class="STYLE1">
+	        		<s:if test='isSuperUser!="true"'>
 	        		[ <A href="javascript:writeOpinion();" style="color:yellow">提出意见</A> ]
 	        		[ <A href="javascript:viewFeedback();" style="color:yellow">查看反馈</A> ]
-	        		
+	        		</s:if>
+	        		<s:if test='isSuperUser=="true"'>
 	        		[ <A href="javascript:viewOpinion();" style="color:yellow">意见反馈</A> ]
+	        		</s:if>
 	        		[ <A href="javascript:myinfo();" style="color:yellow">个人资料</A> ]
 	        		[ <A href="javascript:logout();" style="color:yellow">退出</A> ]
 	        	</span>
