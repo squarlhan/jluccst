@@ -41,7 +41,6 @@
 	</listener>
 
 	<!-- 把一个Hibernate Session和一次完整的请求过程对应的线程相绑定 -->
-
 	<filter>
 		<filter-name>OpenSessionInViewFilter</filter-name>
 		<filter-class>org.springframework.orm.hibernate4.support.OpenSessionInViewFilter</filter-class>
@@ -72,7 +71,22 @@
 		<filter-name>SetCharacterEncoding</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
-
+	<!-- 验证SESSION -->
+		<filter>
+			<filter-name>validationSessionFilter</filter-name>
+			<filter-class>
+				com.boan.crm.groupmanage.filter.SessionValidationFilter
+			</filter-class>
+		</filter>
+		<filter-mapping>
+			<filter-name>validationSessionFilter</filter-name>
+			<url-pattern>*.action</url-pattern>
+		</filter-mapping>
+		<filter-mapping>
+			<filter-name>validationSessionFilter</filter-name>
+			<url-pattern>*.jsp</url-pattern>
+		</filter-mapping>
+		<!-- 验证SESSION完毕 -->
 	<!-- 延长action中属性的生命周期，包括自定义属性，以便在jsp页面中进行访问，让actionContextcleanup过滤器来清除属性，不让action自己清除 -->
 	<filter>
 		<filter-name>struts-cleanup</filter-name>
@@ -103,22 +117,6 @@
 		<filter-name>encodingFilter</filter-name>
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
-	<!-- 验证SESSION -->
-	<filter>
-		<filter-name>validationSessionFilter</filter-name>
-		<filter-class>
-			com.boan.crm.groupmanage.filter.SessionValidationFilter
-		</filter-class>
-	</filter>
-	<filter-mapping>
-		<filter-name>validationSessionFilter</filter-name>
-		<url-pattern>*.jsp</url-pattern>
-	</filter-mapping>
-	<filter-mapping>
-		<filter-name>validationSessionFilter</filter-name>
-		<url-pattern>*.action</url-pattern>
-	</filter-mapping>
-	<!-- 验证SESSION完毕 -->
 	<!-- 下载配置开始 -->
 	 <mime-mapping> 
 	 <extension>zip</extension> 
