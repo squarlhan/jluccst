@@ -72,7 +72,7 @@
 			 */
 		 	$.fn.close = function(){
 			 	$("#button2").click(function() {
-					parent.$("#windown-close").click();
+					parent.parent.$("#windown-close").click();
 				});
 			}
 			/**
