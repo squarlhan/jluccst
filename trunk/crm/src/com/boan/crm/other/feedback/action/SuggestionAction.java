@@ -5,7 +5,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.apache.commons.lang.StringUtils;
+import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
@@ -13,6 +16,7 @@ import org.springframework.stereotype.Controller;
 
 import com.boan.crm.backstagemanage.common.ProductType;
 import com.boan.crm.common.Message;
+import com.boan.crm.groupmanage.common.UserSession;
 import com.boan.crm.groupmanage.model.Menu;
 import com.boan.crm.groupmanage.service.IMenuService;
 import com.boan.crm.other.feedback.common.SuggestionReplyStatus;
@@ -87,7 +91,10 @@ public class SuggestionAction extends BaseActionSupport {
 	 * @return
 	 */
 	public String showInfo() {
-		menuList = menuService.getOneLevelMenuListByProductType(ProductType.CRM, null, 1);
+		HttpSession session = ServletActionContext.getRequest().getSession();
+		UserSession userSession = (UserSession) session.getAttribute("userSession");
+		int productType =userSession.getProductType();
+		menuList = menuService.getOneLevelMenuListByProductType(productType, null, 1);
 		return "show-info";
 	}
 	
