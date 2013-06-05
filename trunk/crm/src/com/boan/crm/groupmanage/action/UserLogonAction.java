@@ -131,6 +131,8 @@ public class UserLogonAction extends ActionSupport {
 	private List<Menu> menuList = null;
 
 	private String topImage = "";
+	
+	private String isSuperUser= null;
 
 	/**
 	 * 验证密码
@@ -255,6 +257,13 @@ public class UserLogonAction extends ActionSupport {
 	public String logonTop() throws Exception {
 		HttpSession session = ServletActionContext.getRequest().getSession();
 		if (session != null && session.getAttribute("userSession") != null) {
+			UserSession userSession = (UserSession) session.getAttribute("userSession");
+			//判断是否是超级管理员
+			boolean superFlag = popedomService.isSuperAdministrator(userSession.getUserId(), String.valueOf(userSession.getUserType()));
+			if( superFlag  )
+			{
+				isSuperUser = "true";
+			}
 			fullGroupName = "→";
 			if (StringUtils.isNotBlank(((UserSession) session.getAttribute("userSession")).getUserCName())) {
 				userCName = ((UserSession) session.getAttribute("userSession")).getUserCName();
@@ -757,6 +766,14 @@ public class UserLogonAction extends ActionSupport {
 
 	public void setRoleService(IRoleService roleService) {
 		this.roleService = roleService;
+	}
+
+	public String getIsSuperUser() {
+		return isSuperUser;
+	}
+
+	public void setIsSuperUser(String isSuperUser) {
+		this.isSuperUser = isSuperUser;
 	}
 
 }
