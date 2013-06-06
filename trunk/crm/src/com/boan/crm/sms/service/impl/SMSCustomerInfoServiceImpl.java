@@ -133,13 +133,38 @@ public class SMSCustomerInfoServiceImpl implements ISMSCustomerInfoService {
 	 * 查询所有短信通讯录信息
 	 * @return
 	 */
-	public List<SMSCustomerInfo> findAllSMSCustomerInfo(String companyId ) {
+	public List<SMSCustomerInfo> findAllSMSCustomerInfo(String companyId , String salesmanId,String provinceId,String cityId,String areaId,String categoryId,String progressId){
 		String hql ="";
-		if(companyId!=null && !companyId.equals("")){
-			hql = "from SMSCustomerInfo where organId='"+companyId+"' order by createTime asc";
-		}else{
-			hql = "from SMSCustomerInfo order by createTime asc";
-		}
+//		if(companyId!=null && !companyId.equals("")){
+//			hql = "from SMSCustomerInfo where organId='"+companyId+"' order by createTime asc";
+//		}else{
+//			hql = "from SMSCustomerInfo order by createTime asc";
+//		}
+		
+		hql = "   from SMSCustomerInfo where " + 
+				"   ( categoryId='2'  and organId='"+companyId+"'  and phone is not null and phone <>'' ) " +
+				"   or " + 
+				"   customerId in ( " +
+				"		select A.id from ContractPersonInfo A, CustomerInfo B  where B.id=A.customerId "+
+				"   	and B.deleteFlag=0 and B.salesmanId='"+salesmanId+"' and B.companyId='"+companyId+"'";
+				if(!provinceId.equals("")){
+					hql = hql + " and B.province='"+provinceId+"'";
+				}
+				if(!cityId.equals("")){
+					hql = hql + " and B.city='"+cityId+"'";
+				}
+				if(!areaId.equals("")){
+					hql = hql + " and B.district='"+areaId+"'";
+				}
+				if(!categoryId.equals("")){
+					hql = hql + " and B.categoryId='"+categoryId+"'";
+				}
+				if(!progressId.equals("")){
+					hql = hql + " and B.progressId='"+progressId+"'";
+				}
+				hql = hql + "   	and A.phone is not null and A.phone <>''"+
+				"	) order by categoryId, nameSpell asc" ;
+		
 		return dao.find(hql , new Object[0]);
 	}
 	
@@ -148,12 +173,44 @@ public class SMSCustomerInfoServiceImpl implements ISMSCustomerInfoService {
 	 * @param type 1：客户 2：销售员
 	 * @return
 	 */
-	public List<SMSCustomerInfo> findAllSMSCustomerInfoByType(String companyId , int type){
+	public List<SMSCustomerInfo> findAllSMSCustomerInfoByType(String companyId , String salesmanId, int type,String provinceId,String cityId,String areaId,String categoryId,String progressId){
 		String hql ="";
-		if(companyId!=null && !companyId.equals("")){
-			hql = "from SMSCustomerInfo where  categoryId='"+type+"'  and  organId='"+companyId+"' order by createTime asc";
-		}else{
-			hql ="from SMSCustomerInfo where  categoryId='"+type+"' order by createTime asc";
+//		if(companyId!=null && !companyId.equals("")){
+//			hql = "from SMSCustomerInfo where  categoryId='"+type+"'  and  organId='"+companyId+"' order by createTime asc";
+//		}else{
+//			hql ="from SMSCustomerInfo where  categoryId='"+type+"' order by createTime asc";
+//		}
+		
+		
+		if(type==1){ //是客户
+		hql = "from SMSCustomerInfo where " + 
+			"   ( categoryId='1'  and organId='"+companyId+"' and phone is not null and phone <>'' ) " +
+			"   and " + 
+			"   customerId in ( " +
+			"		select A.id from ContractPersonInfo A, CustomerInfo B  where B.id=A.customerId "+
+			"   	and B.deleteFlag=0 and B.salesmanId='"+salesmanId+"' and B.companyId='"+companyId+"' ";
+			
+			if(!provinceId.equals("")){
+				hql = hql + " and B.province='"+provinceId+"'";
+			}
+			if(!cityId.equals("")){
+				hql = hql + " and B.city='"+cityId+"'";
+			}
+			if(!areaId.equals("")){
+				hql = hql + " and B.district='"+areaId+"'";
+			}
+			if(!categoryId.equals("")){
+				hql = hql + " and B.categoryId='"+categoryId+"'";
+			}
+			if(!progressId.equals("")){
+				hql = hql + " and B.progressId='"+progressId+"'";
+			}
+			
+			hql = hql +"   	and A.phone is not null and A.phone <>''"+
+			"	) order by categoryId, nameSpell asc" ;
+		}else if(type==2){ //工作人员
+			hql = "from SMSCustomerInfo where " + 
+					"   ( categoryId='2'  and organId='"+companyId+"' and phone is not null and phone <>'' ) order by categoryId, nameSpell asc" ;
 		}
 		return dao.find(hql, new Object[0]);
 	}
@@ -167,16 +224,45 @@ public class SMSCustomerInfoServiceImpl implements ISMSCustomerInfoService {
 		if(values.containsKey("nameSpell")){
 			nameSpell=" and nameSpell like '%"+values.get("nameSpell")+"%'";
 		}
-		String categoryId="";
-		if(values.containsKey("categoryId")){
-			categoryId=" and categoryId=:categoryId ";
-		}
+//		String categoryId="";
+//		if(values.containsKey("categoryId")){
+//			categoryId=" and categoryId=:categoryId ";
+//		}
 		String organId="";
 		if(values.containsKey("organId")){
 			organId=" and organId=:organId ";
 		}
-		String hql = "select count(*)  from SMSCustomerInfo where 1=1 "+nameSpell+categoryId+organId+" and ( salesmanId=:salesmanId or salesmanId is null ) order by createTime desc";
+		//String hql = "select count(*)  from SMSCustomerInfo where 1=1 "+nameSpell+categoryId+organId+" and ( salesmanId=:salesmanId or salesmanId is null ) order by createTime desc";
+		String hql ="";
+		int category=Integer.parseInt(values.get("categoryId")==null ? "0" : values.get("categoryId").toString());
+		if(category==1){ //是客户
+		hql = "   select count (*) from SMSCustomerInfo where " + 
+			"   ( categoryId='1' " +organId + " and phone is not null and phone <>'' ) " +
+			"   and " + 
+			"   customerId in ( " +
+			"		select A.id from ContractPersonInfo A, CustomerInfo B  where B.id=A.customerId "+
+			"   	and B.deleteFlag=0 and B.salesmanId=:salesmanId and B.companyId=:organId"+
+			"   	and A.phone is not null and A.phone <>''"+
+			"	)" +
+			" " + nameSpell ;
+		}else if(category==2){ //工作人员
+			hql = "   select count (*) from SMSCustomerInfo where " + 
+					"   ( categoryId='2'  " +organId + " and phone is not null and phone <>'' ) " +
+			        "	 " + nameSpell ;
+		}else {//全部
+			hql = "  select count (*) from SMSCustomerInfo where (" + 
+					"   ( categoryId='2' " +organId + " and phone is not null and phone <>'' ) " +
+					"   or " + 
+					"   customerId in ( " +
+					"		select A.id from ContractPersonInfo A, CustomerInfo B  where B.id=A.customerId "+
+					"   	and B.deleteFlag=0 and B.salesmanId=:salesmanId and B.companyId=:organId"+
+					"   	and A.phone is not null and A.phone <>''"+
+					"	) " +
+					"	) " + nameSpell ;
+		}
+
 		int totalRows = dao.findCountForPage(hql, values);
+		System.out.println(totalRows);
 		return totalRows;
 	}
 
@@ -200,7 +286,35 @@ public class SMSCustomerInfoServiceImpl implements ISMSCustomerInfoService {
 		if(values.containsKey("organId")){
 			organId=" and organId=:organId ";
 		}
-		String hql = "from SMSCustomerInfo where 1=1 "+nameSpell+categoryId+organId+" and (salesmanId=:salesmanId or salesmanId is null ) order by createTime desc";
+//		String hql = "from SMSCustomerInfo where 1=1 "+nameSpell+categoryId+organId+" and (salesmanId=:salesmanId or salesmanId is null ) order by createTime desc";
+		
+		String hql ="";
+		int category=Integer.parseInt(values.get("categoryId")==null ? "0" : values.get("categoryId").toString());
+		if(category==1){ //是客户
+		hql = " from SMSCustomerInfo where " + 
+			"   ( categoryId='1' " +organId + " and phone is not null and phone <>'' ) " +
+			"   and " + 
+			"   customerId in ( " +
+			"		select A.id from ContractPersonInfo A, CustomerInfo B  where B.id=A.customerId "+
+			"   	and B.deleteFlag=0 and B.salesmanId=:salesmanId and B.companyId=:organId"+
+			"   	and A.phone is not null and A.phone <>''"+
+			"	)" +
+			" " + nameSpell  + " order by categoryId, nameSpell asc" ;
+		}else if(category==2){ //工作人员
+			hql = "  from SMSCustomerInfo where " + 
+					"   ( categoryId='2'  " +organId + " and phone is not null and phone <>'' ) " +
+			        "	 " + nameSpell  + " order by categoryId, nameSpell asc" ;
+		}else {//全部
+			hql = "from SMSCustomerInfo where (" + 
+				"   ( categoryId='2' " +organId + " and phone is not null and phone <>'' ) " +
+				"   or " + 
+				"   customerId in ( " +
+				"		select A.id from ContractPersonInfo A, CustomerInfo B  where B.id=A.customerId "+
+				"   	and B.deleteFlag=0 and B.salesmanId=:salesmanId and B.companyId=:organId"+
+				"   	and A.phone is not null and A.phone <>''"+
+				"	) " +
+				"	) " + nameSpell  + " order by categoryId, nameSpell asc" ;
+		}
 		List<SMSCustomerInfo> data = dao.findForPage(hql, values, currentlyPage, pageSize);
 		return data;
 	}
