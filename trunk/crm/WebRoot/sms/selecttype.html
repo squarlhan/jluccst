@@ -43,6 +43,26 @@
 			</td>
 		</tr>
 		<tr>
+			<td align="center">客户分类：</td>
+			<td><s:select list="listCategory" listKey="id"
+					listValue="name" value="customerInfo.categoryId"
+					id="categoryId" name="customerInfo.categoryId"
+					cssStyle="width:190px" headerKey=""
+					headerValue="--请选择--"></s:select><font color="red">*</font></td>
+			<td align="center">业务进展：</td>
+			<td><s:label name="customerInfo.progress"></s:label>
+			</td> 
+			<td align="center">所 在 地：</td>
+			<td colspan="3" >
+			<s:select list="listProvince" listKey="id"
+					listValue="provinceName" value="customerInfo.province"
+					id="province" name="customerInfo.province"
+					cssStyle="width:120px" headerKey="" headerValue="请选择"></s:select>
+			<select value="customerInfo.city" id="city" name="customerInfo.city" style="width:114px"> </select>
+			<select value="customerInfo.district" id="area" name="customerInfo.district" style="width:114px"> </select>
+			</td>
+		</tr>
+		<tr>
 			<td align="center" bgcolor="#FFFFFF" nowrap="nowrap">
 			<input name="addBtn" type="button" class="btn_2_3" id="addBtn" value="确定">
 			&nbsp;&nbsp;
