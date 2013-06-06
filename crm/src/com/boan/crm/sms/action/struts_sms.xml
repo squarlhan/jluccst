@@ -29,6 +29,11 @@
 			</result>
 			<result name="input">/sms/smssendrecord.jsp</result>
 		</action>
+		
+		<action name="openSelectWindowAction" class="SMSAtion" method="openSelectWindow">
+			<result name="success">/sms/queryconditionwindow.jsp</result>
+			<result name="input">/sms/queryconditionwindow.jsp</result>
+		</action>
 	</package>
 	<package name="smsAjax" extends="json-default" namespace="/">
 		<action name="sendInfoAction" class="SMSAtion" method="sendInfo">

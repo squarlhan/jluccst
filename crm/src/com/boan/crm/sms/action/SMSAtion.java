@@ -13,6 +13,11 @@ import org.springframework.stereotype.Controller;
 
 import com.boan.crm.backstagemanage.model.Company;
 import com.boan.crm.backstagemanage.service.ICompanyService;
+import com.boan.crm.customer.model.ContractPersonInfo;
+import com.boan.crm.datadictionary.model.DataDictionary;
+import com.boan.crm.datadictionary.model.ProvinceInfo;
+import com.boan.crm.datadictionary.service.IAreaService;
+import com.boan.crm.datadictionary.service.IDataDictionaryService;
 import com.boan.crm.groupmanage.common.UserSession;
 import com.boan.crm.groupmanage.service.IUserService;
 import com.boan.crm.sms.model.SMSCustomerInfo;
@@ -55,6 +60,13 @@ public class SMSAtion extends BaseActionSupport{
 	@Autowired
 	@Qualifier("userService")
 	private IUserService userService;
+	
+	@Autowired
+	@Qualifier("dataDictionaryService")
+	private IDataDictionaryService dataDictionaryService = null;
+	@Autowired
+	@Qualifier("areaService")
+	private IAreaService areaService = null;
 	
 	/**
 	 * 返回给页面的可供选择的短信接受者json字符串
@@ -198,6 +210,31 @@ public class SMSAtion extends BaseActionSupport{
 	private String queryState;
 	
 	/**
+	 * 查询条件-省
+	 */
+	private String queryProvince;
+	/**
+	 * 查询条件-市
+	 */
+	private String querycCity;
+	/**
+	 * 查询条件-区
+	 */
+	private String queryArea;
+	/**
+	 * 查询条件-业务进展
+	 */
+	private String queryCategoryId;
+	/**
+	 * 查询条件-客户分类
+	 */
+	private String queryProgress;
+	
+	private List<DataDictionary> listCategory = null;
+	private List<DataDictionary> listProgress = null;
+	private List<ProvinceInfo> listProvince = null;
+	
+	/**
 	 * 查询供选择接收短信的人员信息
 	 * @return
 	 */
@@ -283,17 +320,31 @@ public class SMSAtion extends BaseActionSupport{
 	}
 	
 	/**
+	 * 打开选择窗口
+	 * @return
+	 */
+	public String openSelectWindow(){
+		//客户分类： 传0
+		listCategory = dataDictionaryService.findDataDictionaryByType(sessionCompanyId, 0);
+		//业务进展：传1
+		listProgress = dataDictionaryService.findDataDictionaryByType(sessionCompanyId, 7);
+		//省份信息
+		listProvince = areaService.findAllProvinceInfo();
+		return this.SUCCESS;
+	}
+	/**
 	 * 查询客户信息，返回信息数组给ajax请求页面
 	 * @return
 	 */
 	public String loadCustomerInfoForAjax(){
+		//String str = queryType+"="+queryProvince+"="+querycCity+"="+queryArea+"="+queryCategoryId+"="+queryProgress;
 		if(personIds!=null){
 			if(personIds.equals("all")){
-				customerInfoList = bookerService.findAllSMSCustomerInfo(this.sessionCompanyId);
+				customerInfoList = bookerService.findAllSMSCustomerInfo(this.sessionCompanyId,this.sessionUserId,queryProvince,querycCity,queryArea,queryCategoryId,queryProgress);
 			}else if (personIds.equals("customer")){
-				customerInfoList = bookerService.findAllSMSCustomerInfoByType(this.sessionCompanyId,1);
+				customerInfoList = bookerService.findAllSMSCustomerInfoByType(this.sessionCompanyId,this.sessionUserId,1,queryProvince,querycCity,queryArea,queryCategoryId,queryProgress);
 			}else if (personIds.equals("seller")){
-				customerInfoList = bookerService.findAllSMSCustomerInfoByType(this.sessionCompanyId,2);
+				customerInfoList = bookerService.findAllSMSCustomerInfoByType(this.sessionCompanyId,this.sessionUserId,2,"","","","","");
 			}
 			else{
 				String[] ids = personIds.split(",");
@@ -918,5 +969,117 @@ public class SMSAtion extends BaseActionSupport{
 
 	public void setSMSBalance(String sMSBalance) {
 		SMSBalance = sMSBalance;
+	}
+
+	/**
+	 * @return the listCategory
+	 */
+	public List<DataDictionary> getListCategory() {
+		return listCategory;
+	}
+
+	/**
+	 * @param listCategory the listCategory to set
+	 */
+	public void setListCategory(List<DataDictionary> listCategory) {
+		this.listCategory = listCategory;
+	}
+
+	/**
+	 * @return the listProgress
+	 */
+	public List<DataDictionary> getListProgress() {
+		return listProgress;
+	}
+
+	/**
+	 * @param listProgress the listProgress to set
+	 */
+	public void setListProgress(List<DataDictionary> listProgress) {
+		this.listProgress = listProgress;
+	}
+
+	/**
+	 * @return the listProvince
+	 */
+	public List<ProvinceInfo> getListProvince() {
+		return listProvince;
+	}
+
+	/**
+	 * @param listProvince the listProvince to set
+	 */
+	public void setListProvince(List<ProvinceInfo> listProvince) {
+		this.listProvince = listProvince;
+	}
+
+	/**
+	 * @return the queryProvince
+	 */
+	public String getQueryProvince() {
+		return queryProvince;
+	}
+
+	/**
+	 * @param queryProvince the queryProvince to set
+	 */
+	public void setQueryProvince(String queryProvince) {
+		this.queryProvince = queryProvince;
+	}
+
+	/**
+	 * @return the querycCity
+	 */
+	public String getQuerycCity() {
+		return querycCity;
+	}
+
+	/**
+	 * @param querycCity the querycCity to set
+	 */
+	public void setQuerycCity(String querycCity) {
+		this.querycCity = querycCity;
+	}
+
+	/**
+	 * @return the queryArea
+	 */
+	public String getQueryArea() {
+		return queryArea;
+	}
+
+	/**
+	 * @param queryArea the queryArea to set
+	 */
+	public void setQueryArea(String queryArea) {
+		this.queryArea = queryArea;
+	}
+
+	/**
+	 * @return the queryCategoryId
+	 */
+	public String getQueryCategoryId() {
+		return queryCategoryId;
+	}
+
+	/**
+	 * @param queryCategoryId the queryCategoryId to set
+	 */
+	public void setQueryCategoryId(String queryCategoryId) {
+		this.queryCategoryId = queryCategoryId;
+	}
+
+	/**
+	 * @return the queryProgress
+	 */
+	public String getQueryProgress() {
+		return queryProgress;
+	}
+
+	/**
+	 * @param queryProgress the queryProgress to set
+	 */
+	public void setQueryProgress(String queryProgress) {
+		this.queryProgress = queryProgress;
 	}
 }
