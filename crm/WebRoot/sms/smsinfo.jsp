@@ -346,11 +346,11 @@
 	  	 */
 		$.fn.dynamicsAddAllPerson = function(){
 			$("#btn_AddAllPerson").click(function(){
-				parent.parent.setPerson=function(type){
+				parent.parent.setPerson=function(queryType,queryProvince,querycCity,queryArea,queryCategoryId,queryProgress){
 					$.ajax({
 						type:"post",
 						url: "loadCustomerInfoForAjaxAction.action",
-						data:{personIds:type},
+						data:{personIds:queryType,queryProvince:queryProvince,querycCity:querycCity,queryArea:queryArea,queryCategoryId:queryCategoryId,queryProgress:queryProgress},
 						beforeSend: function(XMLHttpRequest){
 						},
 						success: function(data, textStatus){
@@ -391,7 +391,7 @@
 						}
 					});
 				};
-				parent.parent.tipsWindown("选择类型","iframe:<%=basePath%>sms/selecttype.html","400","150","true","","true","no");
+				parent.parent.tipsWindown("查询条件","iframe:<%=basePath%>openSelectWindowAction.action","450","200","true","","true","no");
 				
 			});
 		};
