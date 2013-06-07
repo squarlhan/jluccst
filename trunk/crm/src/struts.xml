@@ -25,7 +25,7 @@
 	<constant name="struts.serve.static.browserCache" value="false" />
 	
 	<!-- 默认后缀名 -->
-	<!-- constant name="struts.action.extension" value="action" /-->
+	<constant name="struts.action.extension" value="action" />
 	
 	<include file="struts_ui.xml"></include>
 	<!-- 数据字典 -->
