@@ -52,6 +52,10 @@
 		d.add(-100,-1,'操作权限列表','','','Menu');
 		d.add(201,-100,'本部门','<%=url%>?menuKey=<%=MenuKey.SELF_DEPT%>&companyId=<%=companyId%>','','groupmain','<%=path%>/js/tree/img/imgfolder.gif','<%=path%>/js/tree/img/imgfolder.gif');
 		d.add(202,-100,'本公司','<%=url%>?menuKey=<%=MenuKey.SELF_COMPANY%>&companyId=<%=companyId%>','','groupmain','<%=path%>/js/tree/img/imgfolder.gif','<%=path%>/js/tree/img/imgfolder.gif');
+		d.add(-200,-1,'登录默认桌面','','','Menu');
+		d.add(301,-200,'客户管理','<%=url%>?menuKey=<%=MenuKey.DESKTOP_CUSTOMER%>&companyId=<%=companyId%>','','groupmain','<%=path%>/js/tree/img/imgfolder.gif','<%=path%>/js/tree/img/imgfolder.gif');
+		d.add(302,-200,'月计划','<%=url%>?menuKey=<%=MenuKey.DESKTOP_MONTH_PLAN%>&companyId=<%=companyId%>','','groupmain','<%=path%>/js/tree/img/imgfolder.gif','<%=path%>/js/tree/img/imgfolder.gif');
+		d.add(303,-200,'销售统计','<%=url%>?menuKey=<%=MenuKey.DESKTOP_SALES_STAT%>&companyId=<%=companyId%>','','groupmain','<%=path%>/js/tree/img/imgfolder.gif','<%=path%>/js/tree/img/imgfolder.gif');
 		document.write(d);
 		d.openAll();
 		//-->
