@@ -31,6 +31,7 @@ import com.boan.crm.backstagemanage.service.ICompanyService;
 import com.boan.crm.common.Message;
 import com.boan.crm.common.UserType;
 import com.boan.crm.groupmanage.common.HMAC_MD5;
+import com.boan.crm.groupmanage.common.MenuKey;
 import com.boan.crm.groupmanage.common.MenuPopedomType;
 import com.boan.crm.groupmanage.common.UserSession;
 import com.boan.crm.groupmanage.model.Deptment;
@@ -93,7 +94,7 @@ public class UserLogonAction extends ActionSupport {
 	@Autowired
 	@Qualifier("ekeyUserService")
 	private IEkeyUserService ekeyUserService = null;
-	
+
 	@Autowired
 	@Qualifier("roleService")
 	private IRoleService roleService = null;
@@ -131,8 +132,14 @@ public class UserLogonAction extends ActionSupport {
 	private List<Menu> menuList = null;
 
 	private String topImage = "";
+
+	private String isSuperUser = null;
+
+	private String desktopUrl = "";
 	
-	private String isSuperUser= null;
+	private boolean isHashPopedom01 = false;
+	private boolean isHashPopedom02 = false;
+	private boolean isHashPopedom03 = false;
 
 	/**
 	 * 验证密码
@@ -169,12 +176,13 @@ public class UserLogonAction extends ActionSupport {
 				String roleId = user.getRoleId();
 				String[] popedomKeys = null;
 				Role role = null;
-				if( StringUtils.isNotBlank(roleId) ){
+				if (StringUtils.isNotBlank(roleId)) {
 					// 获取权限串
 					popedomKeys = popedomService.queryPopedomsByRoleId(roleId);
-					//获取角色对象
+					// 获取角色对象
 					role = roleService.get(roleId);
-				};
+				}
+				;
 				// 创建userSession对象
 				UserSession userSession = new UserSession();
 				userSession.setUserId(user.getId());
@@ -186,7 +194,109 @@ public class UserLogonAction extends ActionSupport {
 				userSession.setPopedomKeys(popedomKeys);
 				userSession.setUserPhone(user.getPhone());
 				userSession.setProductSuffix(productKey.getProductSuffix());
-				if( role != null ){
+				if (role != null) {
+					userSession.setRoleKey(role.getRoleKey());
+				}
+				// 默认是销售团队管理系统
+				userSession.setProductType(ProductType.TEAM_MANAGE);
+				if (companyService != null) {
+					if (StringUtils.isNotBlank(user.getCompanyId())) {
+						Company company = companyService.get(user.getCompanyId());
+						if (company != null) {
+							userSession.setCompanyName(company.getCompanyName());
+							userSession.setCompanyTrialFlag(company.getTrialFlag());
+							userSession.setProductType(company.getProductType());
+						}
+						if (company.checkServiceTerm()) {
+							message.setContent("您的账号已过试用期，请联系软件供应商！");
+							return ERROR;
+						}
+					}
+				}
+				if (deptService != null) {
+					if (StringUtils.isNotBlank(user.getDeptId())) {
+						Deptment deptment = deptService.get(user.getDeptId());
+						if (deptment != null) {
+							userSession.setDeptName(deptment.getDeptName());
+						}
+					}
+				}
+				// 创建Session
+				session.setAttribute("userSession", userSession);
+				// 单位为秒,设置为一天
+				session.setMaxInactiveInterval(60 * 60 * 1);
+				// 创建Cookies
+				// Cookie myCookie = new Cookie( "loginUserName",
+				// user.getUsername());
+				// myCookie.setMaxAge(60 * 60 * 24 * 30); //设置Cookie有效期为30天
+				// ServletActionContext.getResponse().addCookie(myCookie);
+				return SUCCESS;
+			} else {
+				message.setContent("登录失败，请检查用户名及密码！");
+
+				return ERROR;
+			}
+		} else {
+			message.setContent("登录失败，请检查用户名及密码！");
+			return ERROR;
+		}
+	}
+
+	/**
+	 * 验证密码，为手机提供果断json数据
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	// TODO
+	public String logonValidForPhone() throws Exception {
+		String md5 = MakeMd5.MD5(password);
+		boolean b = false;
+		// 验证产品是否过期
+		CheckProductKey productKey = new CheckProductKey();
+		if (productKey.getProductKey()) {
+			message.setContent(CheckProductKey.message);
+			return ERROR;
+		}
+		try {
+			b = userService.logonValid(username, md5);
+		} catch (Exception e) {
+			e.printStackTrace();
+			message.setContent("数据库连接失败，请联系管理员！");
+			return ERROR;
+		}
+		if (b) {
+			HttpSession session = ServletActionContext.getRequest().getSession();
+			User user = userService.queryUserByUsername(username);
+			ServletContext servletContext = session.getServletContext();
+			WebApplicationContext context = WebApplicationContextUtils.getRequiredWebApplicationContext(servletContext);
+			if (user != null) {
+				if (user.getUserType() == UserType.ADMINISTRATOR) {
+					message.setContent("您是超级管理员，请使用身份锁登录！");
+					// return ERROR;
+				}
+				String roleId = user.getRoleId();
+				String[] popedomKeys = null;
+				Role role = null;
+				if (StringUtils.isNotBlank(roleId)) {
+					// 获取权限串
+					popedomKeys = popedomService.queryPopedomsByRoleId(roleId);
+					// 获取角色对象
+					role = roleService.get(roleId);
+				}
+				;
+				// 创建userSession对象
+				UserSession userSession = new UserSession();
+				userSession.setUserId(user.getId());
+				userSession.setUsername(user.getUsername());
+				userSession.setUserCName(user.getUserCName());
+				userSession.setDeptId(user.getDeptId());
+				userSession.setCompanyId(user.getCompanyId());
+				userSession.setUserType(user.getUserType());
+				userSession.setPopedomKeys(popedomKeys);
+				userSession.setUserPhone(user.getPhone());
+				userSession.setProductSuffix(productKey.getProductSuffix());
+				if (role != null) {
 					userSession.setRoleKey(role.getRoleKey());
 				}
 				// 默认是销售团队管理系统
@@ -247,6 +357,43 @@ public class UserLogonAction extends ActionSupport {
 		}
 		return SUCCESS;
 	}
+	
+	/**
+	 * 显示桌面地址
+	 * @return
+	 */
+	public String showDesktop() throws Exception
+	{
+		HttpSession session = ServletActionContext.getRequest().getSession();
+		UserSession userSession = (UserSession) session.getAttribute("userSession");
+		isHashPopedom01 = popedomService.isHasPopedom(userSession.getUserId(), String.valueOf(userSession.getUserType()), MenuKey.DESKTOP_CUSTOMER, userSession.getPopedomKeys());
+		isHashPopedom02 = popedomService.isHasPopedom(userSession.getUserId(), String.valueOf(userSession.getUserType()), MenuKey.DESKTOP_MONTH_PLAN, userSession.getPopedomKeys());
+		isHashPopedom03 = popedomService.isHasPopedom(userSession.getUserId(), String.valueOf(userSession.getUserType()), MenuKey.DESKTOP_SALES_STAT, userSession.getPopedomKeys());
+		// 返回桌面地址
+		if (isHashPopedom01) {
+			desktopUrl = "desktop01";
+		} else if (isHashPopedom02) {
+			desktopUrl = "desktop02";
+		} else if (isHashPopedom03) {
+			desktopUrl = "desktop03";
+		} else {
+			desktopUrl = "sysdesktop";
+		}
+		return desktopUrl;
+	}
+	/**
+	 * 返回指定桌面页面
+	 * @return
+	 */
+	public String showDesktopPage() throws Exception
+	{
+		HttpSession session = ServletActionContext.getRequest().getSession();
+		UserSession userSession = (UserSession) session.getAttribute("userSession");
+		isHashPopedom01 = popedomService.isHasPopedom(userSession.getUserId(), String.valueOf(userSession.getUserType()), MenuKey.DESKTOP_CUSTOMER, userSession.getPopedomKeys());
+		isHashPopedom02 = popedomService.isHasPopedom(userSession.getUserId(), String.valueOf(userSession.getUserType()), MenuKey.DESKTOP_MONTH_PLAN, userSession.getPopedomKeys());
+		isHashPopedom03 = popedomService.isHasPopedom(userSession.getUserId(), String.valueOf(userSession.getUserType()), MenuKey.DESKTOP_SALES_STAT, userSession.getPopedomKeys());
+		return desktopUrl;
+	}
 
 	/**
 	 * 身份验证成功后，转入桌面的top页
@@ -258,10 +405,9 @@ public class UserLogonAction extends ActionSupport {
 		HttpSession session = ServletActionContext.getRequest().getSession();
 		if (session != null && session.getAttribute("userSession") != null) {
 			UserSession userSession = (UserSession) session.getAttribute("userSession");
-			//判断是否是超级管理员
+			// 判断是否是超级管理员
 			boolean superFlag = popedomService.isSuperAdministrator(userSession.getUserId(), String.valueOf(userSession.getUserType()));
-			if( superFlag  )
-			{
+			if (superFlag) {
 				isSuperUser = "true";
 			}
 			fullGroupName = "→";
@@ -454,9 +600,9 @@ public class UserLogonAction extends ActionSupport {
 				String eKeyUserId = ekeyUser.getUserId();
 				user = userService.getUserById(eKeyUserId);
 				if (user != null) {
-					//if (user.getUserType() == UserType.ADMINISTRATOR) {
-					//	b = true;
-					//}
+					// if (user.getUserType() == UserType.ADMINISTRATOR) {
+					// b = true;
+					// }
 					b = true;
 				} else {
 					message.setContent("当前身份锁用户并不存在，请联系管理员！");
@@ -475,17 +621,18 @@ public class UserLogonAction extends ActionSupport {
 			HttpSession session = ServletActionContext.getRequest().getSession();
 			if (user.getUserType() == UserType.ADMINISTRATOR) {
 				message.setContent("您是超级管理员，请使用身份锁登录！");
-				//return ERROR;
+				// return ERROR;
 			}
 			String roleId = user.getRoleId();
 			String[] popedomKeys = null;
 			Role role = null;
-			if( StringUtils.isNotBlank(roleId) ){
+			if (StringUtils.isNotBlank(roleId)) {
 				// 获取权限串
 				popedomKeys = popedomService.queryPopedomsByRoleId(roleId);
-				//获取角色对象
+				// 获取角色对象
 				role = roleService.get(roleId);
-			};
+			}
+			;
 			// 创建userSession对象
 			UserSession userSession = new UserSession();
 			userSession.setUserId(user.getId());
@@ -497,7 +644,7 @@ public class UserLogonAction extends ActionSupport {
 			userSession.setPopedomKeys(popedomKeys);
 			userSession.setUserPhone(user.getPhone());
 			userSession.setProductSuffix(productKey.getProductSuffix());
-			if( role != null ){
+			if (role != null) {
 				userSession.setRoleKey(role.getRoleKey());
 			}
 			// 默认是销售团队管理系统
@@ -774,6 +921,38 @@ public class UserLogonAction extends ActionSupport {
 
 	public void setIsSuperUser(String isSuperUser) {
 		this.isSuperUser = isSuperUser;
+	}
+
+	public String getDesktopUrl() {
+		return desktopUrl;
+	}
+
+	public void setDesktopUrl(String desktopUrl) {
+		this.desktopUrl = desktopUrl;
+	}
+
+	public boolean getHashPopedom01() {
+		return isHashPopedom01;
+	}
+
+	public void setHashPopedom01(boolean isHashPopedom01) {
+		this.isHashPopedom01 = isHashPopedom01;
+	}
+
+	public boolean getHashPopedom02() {
+		return isHashPopedom02;
+	}
+
+	public void setHashPopedom02(boolean isHashPopedom02) {
+		this.isHashPopedom02 = isHashPopedom02;
+	}
+
+	public boolean getHashPopedom03() {
+		return isHashPopedom03;
+	}
+
+	public void setHashPopedom03(boolean isHashPopedom03) {
+		this.isHashPopedom03 = isHashPopedom03;
 	}
 
 }

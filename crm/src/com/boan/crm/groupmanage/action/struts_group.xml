@@ -133,6 +133,12 @@
 			<result name="success">/common/message.jsp</result>
 			<result name="error">/common/messagenoclose.jsp</result>
 		</action>
+		<action name="userLogonAction" class="userLogonAction">
+			<result name="desktop01">/desktop01.jsp</result>
+			<result name="desktop02">/desktop02.jsp</result>
+			<result name="desktop03">/desktop03.jsp</result>
+			<result name="sysdesktop">/sysdesktop.jsp</result>
+		</action>
 	</package>
 	<package name="ajax" extends="json-default">
 		<!-- 初始化用户密码 -->
