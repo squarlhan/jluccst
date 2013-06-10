@@ -25,4 +25,17 @@ public class MenuKey {
 	 * 本公司
 	 */
 	public static final String SELF_COMPANY = "SELF_COMPANY ";
+
+	/**
+	 * 客户管理
+	 */
+	public static final String DESKTOP_CUSTOMER = "DESKTOP_CUSTOMER";
+	/**
+	 * 月计划
+	 */
+	public static final String DESKTOP_MONTH_PLAN = "DESKTOP_MONTH_PLAN";
+	/**
+	 * 销售统计
+	 */
+	public static final String DESKTOP_SALES_STAT = "DESKTOP_SALES_STAT";
 }
