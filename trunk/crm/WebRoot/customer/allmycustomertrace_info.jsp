@@ -230,11 +230,13 @@
 						$("#actualTraceTime").attr("disabled",false);
 						$("#interest").attr("disabled",false);
 						$("#objection").attr("disabled",false);
+						$("#dealingFlag").attr("disabled",false);
 					}else
 					{
 						$("#actualTraceTime").attr("disabled",true);
 						$("#interest").attr("disabled",true);
 						$("#objection").attr("disabled",true);
+						$("#dealingFlag").attr("disabled",true);
 					}
 				});
           	}
@@ -272,11 +274,13 @@
 					$("#actualTraceTime").attr("disabled",false);
 					$("#interest").attr("disabled",false);
 					$("#objection").attr("disabled",false);
+					$("#dealingFlag").attr("disabled",false);
 				}else
 				{
 					$("#actualTraceTime").attr("disabled",true);
 					$("#interest").attr("disabled",true);
 					$("#objection").attr("disabled",true);
+					$("#dealingFlag").attr("disabled",true);
 				}
 			};
 		</script>
@@ -376,12 +380,18 @@
 			<td style="padding-left:26px">
 			<s:if test='%{customerTraceInfo.id != null && customerTraceInfo.id != ""}'>
 				<s:textfield readOnly="true" type="text" style="width:150px" name="actualTraceTime" id="actualTraceTime"></s:textfield>
-				</td>
 			</s:if>
 			<s:else>
 				<s:textfield readOnly="true" type="text" style="width:150px" name="actualTraceTime" id="actualTraceTime"></s:textfield>
-				</td>
 			</s:else>
+			&nbsp;&nbsp;&nbsp;&nbsp;
+				<s:if test='customerTraceInfo.dealingFlag.equals("1")'>
+					<input type="checkbox" name="dealingFlag" id="dealingFlag" value="1" checked/>要成交
+				</s:if>
+				<s:else>
+					<input title="请于跟进结束后填写" readOnly="true" type="checkbox" name="dealingFlag" id="dealingFlag" value="1"/>要成交
+				</s:else>
+				</td>
 	</tr>
 	<tr>
 		<td></td><td align="center" nowrap>兴趣点：</td>
