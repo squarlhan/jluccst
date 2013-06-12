@@ -213,8 +213,6 @@
 					form1.target = "_parent";
 					form1.sourceName.value = $("#sourceId").text();
 					form1.categoryName.value = $("#categoryId").text();
-					form1.progressName.value = $("#progressId").text();
-					form1.maturityName.value = $("#maturityId").text();
 					form1.levelName.value = $("#levelId").text();
 	               	form1.submit();
           		});
