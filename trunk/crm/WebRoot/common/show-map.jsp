@@ -16,7 +16,7 @@
 
 	Map list = ( Map ) request.getAttribute( "map" );
 
-	String result = "[]";
+	String result = "{}";
 
 	if( list != null && list.size() > 0 )
 	{
