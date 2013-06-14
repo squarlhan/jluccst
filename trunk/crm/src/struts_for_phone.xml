@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<!-- 全局 -->
+	<package name="phonejson" extends="struts-default">
+		<global-results>
+			<result name="show-common-list">/common/show-list.jsp</result>
+			<result name="show-common-object">/common/show-object.jsp</result>
+			<result name="show-common-map">/common/show-map.jsp</result>
+		</global-results>
+	</package>
+	<!-- 登录 -->
+	<package name="phoneplatform" extends="phonejson">
+		<action name="logonValidForPhoneAction" class="userLogonAction" method="logonValidForPhone"></action>
+	</package>
+</struts>

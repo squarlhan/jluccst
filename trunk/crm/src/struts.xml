@@ -26,8 +26,10 @@
 	
 	<!-- 默认后缀名 -->
 	<constant name="struts.action.extension" value="action" />
-	
+
 	<include file="struts_ui.xml"></include>
+	<!-- 手机接口 -->
+	<include file="struts_for_phone.xml"></include>
 	<!-- 数据字典 -->
 	<include file="com/boan/crm/datadictionary/action/struts_datadictionary.xml"></include>
 	<!-- 服务管理 -->
@@ -79,4 +81,5 @@
 	<include file="com/boan/crm/goods/action/struts_goodsinfobase.xml"></include>
 	<!--意见反馈-->
 	<include file="com/boan/crm/other/feedback/action/struts_suggestion.xml"></include>
+	
 </struts>
