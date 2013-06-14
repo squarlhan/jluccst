@@ -41,7 +41,6 @@ import com.boan.crm.groupmanage.service.IUserService;
 import com.boan.crm.sms.model.SMSCustomerInfo;
 import com.boan.crm.sms.service.ISMSCustomerInfoService;
 import com.boan.crm.utils.action.BaseActionSupport;
-import com.boan.crm.utils.calendar.CurrentDateTime;
 import com.boan.crm.utils.calendar.MySimpleDateFormat;
 import com.boan.crm.utils.md5.MakeMd5;
 import com.boan.crm.utils.page.Pagination;
@@ -192,6 +191,110 @@ public class UserAction extends BaseActionSupport {
 			// 保存日志结束
 			return SUCCESS;
 		}
+	}
+
+	/**
+	 * 更新用户信息用于手机端修改数据
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public String updateUserForPhone() throws Exception {
+		Map<String, Object> map = new HashMap<String, Object>();
+		try {
+			User oldUser = null;
+			if (user != null && StringUtils.isNotBlank(user.getId())) {
+				oldUser = userService.getUserById(user.getId());
+			}
+			if (oldUser != null) {
+				// 判断password
+				String oldMd5 = MakeMd5.MD5(user.getOldPassword());
+				if (oldMd5 == null || !oldMd5.equals(oldUser.getPassword())) {
+					//原密码不匹配
+					map.put("status", "failure");
+				} else {
+					boolean b = userService.isExistSameUsername(user.getId(), user.getUsername());
+					if (b) {
+						// message.setContent("相同用户名已存在，请重新输入！");
+						map.put("status", "failure");
+					} else {
+						// 转对象
+						if (StringUtils.isNotBlank(user.getPassword())) {
+							String md5 = MakeMd5.MD5(user.getPassword());
+							oldUser.setPassword(md5);
+						}
+						if (StringUtils.isNotBlank(user.getUsername())) {
+							oldUser.setUsername(user.getUsername());
+						}
+						if (StringUtils.isNotBlank(user.getUserCName())) {
+							oldUser.setUserCName(user.getUserCName());
+						}
+						if (StringUtils.isNotBlank(user.getBirthday())) {
+							oldUser.setBirthday(user.getBirthday());
+						}
+						if (StringUtils.isNotBlank(user.getOfficePhone())) {
+							oldUser.setOfficePhone(user.getOfficePhone());
+						}
+						if (StringUtils.isNotBlank(user.getPhone())) {
+							oldUser.setPhone(user.getPhone());
+						}
+						if (StringUtils.isNotBlank(user.getEmail())) {
+							oldUser.setEmail(user.getEmail());
+						}
+						oldUser.setLunarSolarFlag(user.getLunarSolarFlag());
+						userService.saveOrUpdateUser(oldUser);
+						// 更新sms数据
+						boolean newUserFlag = false;
+						SMSCustomerInfo smsUser = smsService.getSMSCustomerInfoByCustomerId(oldUser.getId());
+						if (smsUser == null) {
+							newUserFlag = true;
+							smsUser = new SMSCustomerInfo();
+						} else {
+							newUserFlag = false;
+						}
+						smsUser.setCustomerId(oldUser.getId());
+						smsUser.setCategoryId("2");
+						smsUser.setPhone(oldUser.getPhone());
+						smsUser.setName(oldUser.getUserCName());
+						if (StringUtils.isNotBlank(oldUser.getBirthday())) {
+							smsUser.setBirthday(MySimpleDateFormat.parse(oldUser.getBirthday() + " 00:00:00"));
+						} else {
+							smsUser.setBirthday(null);
+						}
+						smsUser.setIsLunarCalender(oldUser.getLunarSolarFlag());
+						smsUser.setCreateTime(Calendar.getInstance());
+						smsUser.setEmail(oldUser.getEmail());
+						smsUser.setPost(oldUser.getRoleName());
+						smsUser.setOrganId(oldUser.getCompanyId());
+
+						Company company = null;
+						if (StringUtils.isNotBlank(oldUser.getCompanyId())) {
+							company = companyService.get(oldUser.getCompanyId());
+						}
+						if (company != null) {
+							smsUser.setUnit(company.getCompanyName());
+							smsUser.setOrganName(company.getCompanyName());
+						}
+						if (newUserFlag) {
+							smsService.saveSMSCustomerInfo(smsUser);
+						} else {
+							smsService.updateSMSCustomerInfoForCustomer(oldUser.getId(), smsUser);
+						}
+						// message.setContent("用户信息保存成功！");
+						map.put("status", "success");
+					}
+				}
+			} else {
+				map.put("status", "failure");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			map.put("status", "failure");
+		}
+		HttpServletRequest request = ServletActionContext.getRequest();
+		request.setAttribute("map", map);
+		// 保存日志结束
+		return COMMON_MAP;
 	}
 
 	/**
@@ -361,30 +464,23 @@ public class UserAction extends BaseActionSupport {
 				map.put("mobile", user.getPhone() + "");
 				map.put("email", user.getEmail());
 				map.put("position", user.getRoleName() + "");
-				
+
 				Role role = null;
-				if( StringUtils.isNotBlank(user.getRoleId()) )
-				{
+				if (StringUtils.isNotBlank(user.getRoleId())) {
 					role = roleService.get(user.getRoleId());
 				}
-				if( role != null ){
-					if( RoleFlag.YE_WU_YUAN.equalsIgnoreCase(role.getRoleKey()) )
-					{
-						map.put("user_group",  "1");
-					}else if( RoleFlag.BU_MEN_LING_DAO.equalsIgnoreCase(role.getRoleKey()) )
-					{
-						map.put("user_group",  "2");
-					}else if( RoleFlag.GONG_SI_LING_DAO.equalsIgnoreCase(role.getRoleKey()) )
-					{
-						map.put("user_group",  "3");
-					}  else
-					{
-						map.put("user_group",  "-1");
+				if (role != null) {
+					if (RoleFlag.YE_WU_YUAN.equalsIgnoreCase(role.getRoleKey())) {
+						map.put("user_group", "1");
+					} else if (RoleFlag.BU_MEN_LING_DAO.equalsIgnoreCase(role.getRoleKey())) {
+						map.put("user_group", "2");
+					} else if (RoleFlag.GONG_SI_LING_DAO.equalsIgnoreCase(role.getRoleKey())) {
+						map.put("user_group", "3");
+					} else {
+						map.put("user_group", "-1");
 					}
-				}
-				else
-				{
-					map.put("user_group",  "-1");
+				} else {
+					map.put("user_group", "-1");
 				}
 			}
 		}
