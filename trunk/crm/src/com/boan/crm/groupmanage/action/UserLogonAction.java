@@ -36,6 +36,7 @@ import com.boan.crm.common.UserType;
 import com.boan.crm.groupmanage.common.HMAC_MD5;
 import com.boan.crm.groupmanage.common.MenuKey;
 import com.boan.crm.groupmanage.common.MenuPopedomType;
+import com.boan.crm.groupmanage.common.RoleFlag;
 import com.boan.crm.groupmanage.common.UserSession;
 import com.boan.crm.groupmanage.model.Deptment;
 import com.boan.crm.groupmanage.model.EkeyUser;
@@ -359,26 +360,39 @@ public class UserLogonAction extends ActionSupport {
 				//request.setAttribute("list", list);
 				//request.setAttribute("totalCount", totalCount);
 				//return "show-common-list";
-
+				
 				//（2）返回map
 				Map<String,Object> map = new HashMap<String,Object>();
-				map.put("status", "success");
-				map.put("user_id", userSession.getUserId());
-				map.put("user_name", userSession.getUserCName());
-				if(  userSession.getUserType() == UserType.COMMON_USER)
+				int userType = 0;
+				if(RoleFlag.YE_WU_YUAN.equalsIgnoreCase( userSession.getRoleKey()) )
 				{
+					//业务员
 					map.put("user_group", "1");
-				}else if(  userSession.getUserType() == UserType.COMPANY_ADMINISTRATOR)
+					userType = 1;
+				}else if(RoleFlag.BU_MEN_LING_DAO.equalsIgnoreCase( userSession.getRoleKey()) )
 				{
+					//部门领导
 					map.put("user_group", "2");
+					userType = 2;
 				}
-				else if(  userSession.getUserType() == UserType.ADMINISTRATOR)
+				else if(RoleFlag.GONG_SI_LING_DAO.equalsIgnoreCase( userSession.getRoleKey()) )
 				{
 					map.put("user_group", "3");
+					userType = 3;
 				}
 				else
 				{
-					map.put("user_group", "1");
+					userType = -1;
+				}
+				if( userType == -1 )
+				{
+					map.put("status", "failure");
+				}
+				else
+				{
+					map.put("status", "success");
+					map.put("user_id", userSession.getUserId());
+					map.put("user_name", userSession.getUserCName());
 				}
 				request.setAttribute("map", map);
 				return "show-common-map";
