@@ -71,6 +71,19 @@ public class BaseActionSupport extends ActionSupport {
 	 */
 	protected String sessionUserPhone = null;
 
+	/**
+	 * JSON通用列表
+	 */
+	protected static final String COMMON_LIST = "show-common-list";
+	/**
+	 * JSON通用Map
+	 */
+	protected static final String COMMON_MAP = "show-common-map";
+	/**
+	 * JSON通用对象
+	 */
+	protected static final String COMMON_OBJECT = "show-common-object";
+
 	@Override
 	public void validate() {
 		HttpSession session = ServletActionContext.getRequest().getSession();
