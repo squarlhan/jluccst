@@ -15,5 +15,6 @@
 	<package name="phoneplatform" extends="phonejson">
 		<action name="logonValidForPhoneAction" class="userLogonAction" method="logonValidForPhone"></action>
 		<action name="showUserInfoForPhoneAction" class="userAction" method="showUserInfoForPhone"></action>
+		<action name="updateUserForPhoneAction" class="userAction" method="updateUserForPhone"></action>
 	</package>
 </struts>
