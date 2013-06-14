@@ -10,8 +10,11 @@ package com.boan.crm.groupmanage.action;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.StringUtils;
@@ -28,6 +31,7 @@ import com.boan.crm.backstagemanage.service.ICompanyService;
 import com.boan.crm.common.Message;
 import com.boan.crm.common.UserConfig;
 import com.boan.crm.common.UserType;
+import com.boan.crm.groupmanage.common.RoleFlag;
 import com.boan.crm.groupmanage.common.UserSession;
 import com.boan.crm.groupmanage.model.Role;
 import com.boan.crm.groupmanage.model.User;
@@ -37,6 +41,7 @@ import com.boan.crm.groupmanage.service.IUserService;
 import com.boan.crm.sms.model.SMSCustomerInfo;
 import com.boan.crm.sms.service.ISMSCustomerInfoService;
 import com.boan.crm.utils.action.BaseActionSupport;
+import com.boan.crm.utils.calendar.CurrentDateTime;
 import com.boan.crm.utils.calendar.MySimpleDateFormat;
 import com.boan.crm.utils.md5.MakeMd5;
 import com.boan.crm.utils.page.Pagination;
@@ -83,8 +88,10 @@ public class UserAction extends BaseActionSupport {
 	private String deleteId = null;
 
 	private String companyId = null;
-	
+
 	private String lunarSolarFlag = null;
+
+	private String userId = null;
 	// 标识是哪个用户维护的用户
 	private String who = null;
 
@@ -99,10 +106,9 @@ public class UserAction extends BaseActionSupport {
 	public String saveOrUpdateUser() throws Exception {
 		User oldUser = null;
 		user.setCompanyId(companyId);
-		if( StringUtils.isNotBlank(lunarSolarFlag) ){
+		if (StringUtils.isNotBlank(lunarSolarFlag)) {
 			user.setLunarSolarFlag(Integer.parseInt(lunarSolarFlag));
-		}else
-		{
+		} else {
 			user.setLunarSolarFlag(0);
 		}
 		if (StringUtils.isBlank(user.getId())) {
@@ -139,7 +145,7 @@ public class UserAction extends BaseActionSupport {
 				String md5 = MakeMd5.MD5(user.getPassword());
 				user.setPassword(md5);
 			}
-			
+
 			if (StringUtils.isBlank(user.getId())) {
 				userService.saveOrUpdateUser(user);
 			} else {
@@ -150,16 +156,16 @@ public class UserAction extends BaseActionSupport {
 			if (smsUser == null) {
 				newUserFlag = true;
 				smsUser = new SMSCustomerInfo();
-			}else{
+			} else {
 				newUserFlag = false;
 			}
 			smsUser.setCustomerId(user.getId());
 			smsUser.setCategoryId("2");
 			smsUser.setPhone(user.getPhone());
 			smsUser.setName(user.getUserCName());
-			if( StringUtils.isNotBlank(user.getBirthday()) ){
+			if (StringUtils.isNotBlank(user.getBirthday())) {
 				smsUser.setBirthday(MySimpleDateFormat.parse(user.getBirthday() + " 00:00:00"));
-			}else{
+			} else {
 				smsUser.setBirthday(null);
 			}
 			smsUser.setIsLunarCalender(user.getLunarSolarFlag());
@@ -335,6 +341,58 @@ public class UserAction extends BaseActionSupport {
 	}
 
 	/**
+	 * 显示个有信息用于手机显示
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public String showUserInfoForPhone() throws Exception {
+		HttpServletRequest request = ServletActionContext.getRequest();
+		Map<String, Object> map = new HashMap<String, Object>();
+		if (StringUtils.isNotBlank(userId)) {
+			user = userService.getUserById(userId);
+			if (user != null) {
+				// 并Json串
+				map.put("user_name", user.getUsername());
+				map.put("ch_name", user.getUserCName());
+				map.put("birth_day", user.getBirthday());
+				map.put("birth_type", user.getLunarSolarFlag() + "");
+				map.put("hone", user.getOfficePhone() + "");
+				map.put("mobile", user.getPhone() + "");
+				map.put("email", user.getEmail());
+				map.put("position", user.getRoleName() + "");
+				
+				Role role = null;
+				if( StringUtils.isNotBlank(user.getRoleId()) )
+				{
+					role = roleService.get(user.getRoleId());
+				}
+				if( role != null ){
+					if( RoleFlag.YE_WU_YUAN.equalsIgnoreCase(role.getRoleKey()) )
+					{
+						map.put("user_group",  "1");
+					}else if( RoleFlag.BU_MEN_LING_DAO.equalsIgnoreCase(role.getRoleKey()) )
+					{
+						map.put("user_group",  "2");
+					}else if( RoleFlag.GONG_SI_LING_DAO.equalsIgnoreCase(role.getRoleKey()) )
+					{
+						map.put("user_group",  "3");
+					}  else
+					{
+						map.put("user_group",  "-1");
+					}
+				}
+				else
+				{
+					map.put("user_group",  "-1");
+				}
+			}
+		}
+		request.setAttribute("map", map);
+		return COMMON_MAP;
+	}
+
+	/**
 	 * 更新个人资料
 	 * 
 	 * @return
@@ -349,16 +407,15 @@ public class UserAction extends BaseActionSupport {
 		}
 		String myUserId = userSession.getUserId();
 		user.setId(myUserId);
-		if( StringUtils.isNotBlank(lunarSolarFlag) ){
+		if (StringUtils.isNotBlank(lunarSolarFlag)) {
 			user.setLunarSolarFlag(Integer.parseInt(lunarSolarFlag));
-		}else
-		{
+		} else {
 			user.setLunarSolarFlag(0);
 		}
 		if (StringUtils.isNotBlank(myUserId)) {
 			User oldUser = userService.getUserById(myUserId);
 			// 判断原密码是否正确
-			if ( !CheckProductKey.isPinLoginMethod() && !MakeMd5.MD5(user.getPassword()).equals(oldUser.getPassword())) {
+			if (!CheckProductKey.isPinLoginMethod() && !MakeMd5.MD5(user.getPassword()).equals(oldUser.getPassword())) {
 				message.setContent("您输入的登录密码不正确，请重新填写！");
 			} else {
 				user.setCreateTime(oldUser.getCreateTime());
@@ -388,9 +445,9 @@ public class UserAction extends BaseActionSupport {
 					smsUser.setCategoryId("2");
 					smsUser.setPhone(oldUser.getPhone());
 					smsUser.setName(oldUser.getUserCName());
-					if( StringUtils.isNotBlank(user.getBirthday()) ){
+					if (StringUtils.isNotBlank(user.getBirthday())) {
 						smsUser.setBirthday(MySimpleDateFormat.parse(user.getBirthday() + " 00:00:00"));
-					}else{
+					} else {
 						smsUser.setBirthday(null);
 					}
 					smsUser.setIsLunarCalender(user.getLunarSolarFlag());
@@ -398,7 +455,7 @@ public class UserAction extends BaseActionSupport {
 					smsUser.setEmail(oldUser.getEmail());
 					smsUser.setPost(oldUser.getRoleName());
 					smsUser.setOrganId(oldUser.getCompanyId());
-					if( StringUtils.isNotBlank(oldUser.getCompanyId()) ){
+					if (StringUtils.isNotBlank(oldUser.getCompanyId())) {
 						Company company = companyService.get(oldUser.getCompanyId());
 						if (company != null) {
 							smsUser.setUnit(company.getCompanyName());
@@ -562,5 +619,13 @@ public class UserAction extends BaseActionSupport {
 
 	public void setLunarSolarFlag(String lunarSolarFlag) {
 		this.lunarSolarFlag = lunarSolarFlag;
+	}
+
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 }

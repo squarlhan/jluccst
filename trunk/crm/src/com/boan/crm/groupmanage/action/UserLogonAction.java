@@ -392,7 +392,8 @@ public class UserLogonAction extends ActionSupport {
 				{
 					map.put("status", "success");
 					map.put("user_id", userSession.getUserId());
-					map.put("user_name", userSession.getUserCName());
+					map.put("user_name", userSession.getUsername());
+					map.put("ch_name", userSession.getUserCName());
 				}
 				request.setAttribute("map", map);
 				return "show-common-map";
