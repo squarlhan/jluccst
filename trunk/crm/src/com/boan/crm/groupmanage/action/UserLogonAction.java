@@ -10,11 +10,16 @@
 package com.boan.crm.groupmanage.action;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
+import net.sf.json.JSONObject;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.struts2.ServletActionContext;
@@ -136,10 +141,13 @@ public class UserLogonAction extends ActionSupport {
 	private String isSuperUser = null;
 
 	private String desktopUrl = "";
-	
+
 	private boolean isHashPopedom01 = false;
+	
 	private boolean isHashPopedom02 = false;
+	
 	private boolean isHashPopedom03 = false;
+	
 
 	/**
 	 * 验证密码
@@ -250,20 +258,29 @@ public class UserLogonAction extends ActionSupport {
 	 */
 	// TODO
 	public String logonValidForPhone() throws Exception {
+		HttpServletRequest request = ServletActionContext.getRequest();
 		String md5 = MakeMd5.MD5(password);
 		boolean b = false;
 		// 验证产品是否过期
 		CheckProductKey productKey = new CheckProductKey();
 		if (productKey.getProductKey()) {
-			message.setContent(CheckProductKey.message);
-			return ERROR;
+			//message.setContent(CheckProductKey.message);
+			//return ERROR;
+			Map<String,Object> map = new HashMap<String,Object>();
+			map.put("status", "failure");
+			request.setAttribute("map", map);
+			return "show-common-map";
 		}
 		try {
 			b = userService.logonValid(username, md5);
 		} catch (Exception e) {
 			e.printStackTrace();
-			message.setContent("数据库连接失败，请联系管理员！");
-			return ERROR;
+			//message.setContent("数据库连接失败，请联系管理员！");
+			//return ERROR;
+			Map<String,Object> map = new HashMap<String,Object>();
+			map.put("status", "failure");
+			request.setAttribute("map", map);
+			return "show-common-map";
 		}
 		if (b) {
 			HttpSession session = ServletActionContext.getRequest().getSession();
@@ -310,8 +327,12 @@ public class UserLogonAction extends ActionSupport {
 							userSession.setProductType(company.getProductType());
 						}
 						if (company.checkServiceTerm()) {
-							message.setContent("您的账号已过试用期，请联系软件供应商！");
-							return ERROR;
+							Map<String,Object> map = new HashMap<String,Object>();
+							map.put("status", "failure");
+							request.setAttribute("map", map);
+							return "show-common-map";
+							//message.setContent("您的账号已过试用期，请联系软件供应商！");
+							//return ERROR;
 						}
 					}
 				}
@@ -332,15 +353,44 @@ public class UserLogonAction extends ActionSupport {
 				// user.getUsername());
 				// myCookie.setMaxAge(60 * 60 * 24 * 30); //设置Cookie有效期为30天
 				// ServletActionContext.getResponse().addCookie(myCookie);
-				return SUCCESS;
-			} else {
-				message.setContent("登录失败，请检查用户名及密码！");
 
-				return ERROR;
+				// 构造Json串
+				//（1）返回list
+				//List<UserSession> list = xxxxService.getxxxList();
+				//int totalCount = 10;
+				//request.setAttribute("list", list);
+				//request.setAttribute("totalCount", totalCount);
+				//return "show-common-list";
+
+				//（2）返回map
+				Map<String,Object> map = new HashMap<String,Object>();
+				map.put("status", "success");
+				map.put("user_id", userSession.getUserId());
+				map.put("user_name", userSession.getUserCName());
+				map.put("user_group", userSession.getUserType());
+				request.setAttribute("map", map);
+				return "show-common-map";
+				
+				//（3）返回object
+				//List<UserSession> list = new ArrayList<UserSession>();
+				//list.add(userSession);
+				//request.setAttribute("object", list);
+				//return "show-common-object";
+			} else {
+				Map<String,Object> map = new HashMap<String,Object>();
+				map.put("status", "failure");
+				request.setAttribute("map", map);
+				return "show-common-map";
+				//message.setContent("登录失败，请检查用户名及密码！");
+				//return ERROR;
 			}
 		} else {
-			message.setContent("登录失败，请检查用户名及密码！");
-			return ERROR;
+			Map<String,Object> map = new HashMap<String,Object>();
+			map.put("status", "failure");
+			request.setAttribute("map", map);
+			return "show-common-map";
+			//message.setContent("登录失败，请检查用户名及密码！");
+			//return ERROR;
 		}
 	}
 
@@ -357,13 +407,13 @@ public class UserLogonAction extends ActionSupport {
 		}
 		return SUCCESS;
 	}
-	
+
 	/**
 	 * 显示桌面地址
+	 * 
 	 * @return
 	 */
-	public String showDesktop() throws Exception
-	{
+	public String showDesktop() throws Exception {
 		HttpSession session = ServletActionContext.getRequest().getSession();
 		UserSession userSession = (UserSession) session.getAttribute("userSession");
 		isHashPopedom01 = popedomService.isHasPopedom(userSession.getUserId(), String.valueOf(userSession.getUserType()), MenuKey.DESKTOP_CUSTOMER, userSession.getPopedomKeys());
@@ -381,12 +431,13 @@ public class UserLogonAction extends ActionSupport {
 		}
 		return desktopUrl;
 	}
+
 	/**
 	 * 返回指定桌面页面
+	 * 
 	 * @return
 	 */
-	public String showDesktopPage() throws Exception
-	{
+	public String showDesktopPage() throws Exception {
 		HttpSession session = ServletActionContext.getRequest().getSession();
 		UserSession userSession = (UserSession) session.getAttribute("userSession");
 		isHashPopedom01 = popedomService.isHasPopedom(userSession.getUserId(), String.valueOf(userSession.getUserType()), MenuKey.DESKTOP_CUSTOMER, userSession.getPopedomKeys());

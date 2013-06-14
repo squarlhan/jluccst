@@ -5,6 +5,7 @@
 <struts>
 	<!-- 部门Action -->
 	<package name="group_dept" extends="struts-default" namespace="/">
+		<!-- <global-results> <result name="show-common-list">/common/show-list.jsp</result> <result name="show-common-object">/common/show-object.jsp</result> <result name="show-common-map">/common/show-map.jsp</result> </global-results> -->
 		<action name="openDeptmentAction" class="deptmentAction" method="openDeptment">
 			<result name="success">/groupmanage/deptmentlist.jsp</result>
 			<result name="input">/groupmanage/deptmentlist.jsp</result>
@@ -35,49 +36,47 @@
 			<result name="group-tree-for-user">/groupmanage/group-tree-for-user.jsp</result>
 		</action>
 	</package>
-	
+
 	<!-- 权限Action -->
 	<package name="group_popedom_role" extends="struts-default" namespace="/">
 		<action name="showAllRoleListAction" class="popedomAction" method="showAllRoleList">
-        	<result name="success">/groupmanage/popedomchooserole.jsp</result>
-        </action>
-        <action name="saveOrUpdatePopedomAction" class="popedomAction" method="saveOrUpdatePopedom">
-        	<!-- 
-        	<result name="success">/common/messagemodaldialog.jsp</result>
-        	 -->
-        	<result name="success">/common/message.jsp</result>
-        </action>
-        <action name="showAllPopedomListAction" class="popedomAction" method="showAllPopedomList">
-        	<result name="success">/groupmanage/popedomlist.jsp</result>
-        </action>
-        <action name="deletePopedomAction" class="popedomAction" method="deletePopedom">
-        	<result name="success">/groupmanage/popedomlist.jsp</result>
-        </action>
+			<result name="success">/groupmanage/popedomchooserole.jsp</result>
+		</action>
+		<action name="saveOrUpdatePopedomAction" class="popedomAction" method="saveOrUpdatePopedom">
+			<!-- <result name="success">/common/messagemodaldialog.jsp</result> -->
+			<result name="success">/common/message.jsp</result>
+		</action>
+		<action name="showAllPopedomListAction" class="popedomAction" method="showAllPopedomList">
+			<result name="success">/groupmanage/popedomlist.jsp</result>
+		</action>
+		<action name="deletePopedomAction" class="popedomAction" method="deletePopedom">
+			<result name="success">/groupmanage/popedomlist.jsp</result>
+		</action>
 	</package>
 
 	<!-- 角色Action -->
 	<package name="group_role" extends="struts-default" namespace="/">
-        <action name="openRoleAction" class="roleAction" method="openRole">
-            <result name="success">/groupmanage/rolelist.jsp</result>
-            <result name="input">/groupmanage/rolelist.jsp</result>
-        </action>
-        <action name="openAddRoleAction" class="roleAction" method="openAddRole" >
-            <result name="success">/groupmanage/roleinfo.jsp</result>
-            <result name="input">/groupmanage/roleinfo.jsp</result>
-        </action>
-        <action name="toAddRoleAction" class="roleAction" method="toAddRole">
-           <result name="success">/common/message.jsp</result>
+		<action name="openRoleAction" class="roleAction" method="openRole">
+			<result name="success">/groupmanage/rolelist.jsp</result>
+			<result name="input">/groupmanage/rolelist.jsp</result>
+		</action>
+		<action name="openAddRoleAction" class="roleAction" method="openAddRole">
+			<result name="success">/groupmanage/roleinfo.jsp</result>
+			<result name="input">/groupmanage/roleinfo.jsp</result>
+		</action>
+		<action name="toAddRoleAction" class="roleAction" method="toAddRole">
+			<result name="success">/common/message.jsp</result>
 			<result name="error">/common/messagenoclose.jsp</result>
-        </action>
-        <action name="openModifyRoleAction" class="roleAction" method="openModifyRole">
-            <result name="success">/groupmanage/roleinfo.jsp</result>
-            <result name="input">/groupmanage/roleinfo.jsp</result>
-        </action>
-        <action name="toModifyRoleAction" class="roleAction" method="toModifyRole">
-           <result name="success">/common/message.jsp</result>
+		</action>
+		<action name="openModifyRoleAction" class="roleAction" method="openModifyRole">
+			<result name="success">/groupmanage/roleinfo.jsp</result>
+			<result name="input">/groupmanage/roleinfo.jsp</result>
+		</action>
+		<action name="toModifyRoleAction" class="roleAction" method="toModifyRole">
+			<result name="success">/common/message.jsp</result>
 			<result name="error">/common/messagenoclose.jsp</result>
-        </action>
-        <action name="deleteRoleAction" class="roleAction" method="deleteRole"></action>
+		</action>
+		<action name="deleteRoleAction" class="roleAction" method="deleteRole"></action>
 	</package>
 	<!-- 用户 -->
 	<package name="group_user" extends="struts-default" namespace="/">
@@ -85,8 +84,7 @@
 			<result name="show-user">/groupmanage/userinfo.jsp</result>
 			<result name="show-list">/groupmanage/userlist.jsp</result>
 		</action>
-		<action name="saveOrUpdateUserAction" class="userAction"
-			method="saveOrUpdateUser">
+		<action name="saveOrUpdateUserAction" class="userAction" method="saveOrUpdateUser">
 			<result name="success">/common/message.jsp</result>
 			<result name="error">/common/messagenoclose.jsp</result>
 		</action>
@@ -96,8 +94,7 @@
 		<action name="showMyInfoAction" class="userAction" method="showMyInfo">
 			<result name="success">/groupmanage/myinfo.jsp</result>
 		</action>
-		<action name="saveOrUpdateMyInfoAction" class="userAction"
-			method="saveOrUpdateMyInfo">
+		<action name="saveOrUpdateMyInfoAction" class="userAction" method="saveOrUpdateMyInfo">
 			<result name="success">/common/message.jsp</result>
 		</action>
 	</package>
@@ -142,8 +139,7 @@
 	</package>
 	<package name="ajax" extends="json-default">
 		<!-- 初始化用户密码 -->
-		<action name="initUserPasswordAction" class="userAction"
-			method="initUserPassword">
+		<action name="initUserPasswordAction" class="userAction" method="initUserPassword">
 			<result type="json">
 				<param name="root">jsonData</param>
 			</result>
@@ -159,7 +155,7 @@
 			<result name="save-success">/common/message.jsp</result>
 			<result name="show-sort-menu-list">/groupmanage/menusortlist.jsp</result>
 			<result name="save-sort-success">/common/message.jsp</result>
-        	<result name="show-menu-list-for-popedom">/groupmanage/popedommenu.jsp</result>
+			<result name="show-menu-list-for-popedom">/groupmanage/popedommenu.jsp</result>
 		</action>
 	</package>
 </struts>
