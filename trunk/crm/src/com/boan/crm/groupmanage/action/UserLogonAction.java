@@ -19,8 +19,6 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import net.sf.json.JSONObject;
-
 import org.apache.commons.lang.StringUtils;
 import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -367,7 +365,21 @@ public class UserLogonAction extends ActionSupport {
 				map.put("status", "success");
 				map.put("user_id", userSession.getUserId());
 				map.put("user_name", userSession.getUserCName());
-				map.put("user_group", userSession.getUserType());
+				if(  userSession.getUserType() == UserType.COMMON_USER)
+				{
+					map.put("user_group", 1);
+				}else if(  userSession.getUserType() == UserType.COMPANY_ADMINISTRATOR)
+				{
+					map.put("user_group", 2);
+				}
+				else if(  userSession.getUserType() == UserType.ADMINISTRATOR)
+				{
+					map.put("user_group", 3);
+				}
+				else
+				{
+					map.put("user_group", userSession.getUserType());
+				}
 				request.setAttribute("map", map);
 				return "show-common-map";
 				
