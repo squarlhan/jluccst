@@ -378,7 +378,7 @@ public class UserLogonAction extends ActionSupport {
 				}
 				else
 				{
-					map.put("user_group", userSession.getUserType());
+					map.put("user_group", 1);
 				}
 				request.setAttribute("map", map);
 				return "show-common-map";
