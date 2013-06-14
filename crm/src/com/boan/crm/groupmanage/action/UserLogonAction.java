@@ -367,18 +367,18 @@ public class UserLogonAction extends ActionSupport {
 				map.put("user_name", userSession.getUserCName());
 				if(  userSession.getUserType() == UserType.COMMON_USER)
 				{
-					map.put("user_group", 1);
+					map.put("user_group", "1");
 				}else if(  userSession.getUserType() == UserType.COMPANY_ADMINISTRATOR)
 				{
-					map.put("user_group", 2);
+					map.put("user_group", "2");
 				}
 				else if(  userSession.getUserType() == UserType.ADMINISTRATOR)
 				{
-					map.put("user_group", 3);
+					map.put("user_group", "3");
 				}
 				else
 				{
-					map.put("user_group", 1);
+					map.put("user_group", "1");
 				}
 				request.setAttribute("map", map);
 				return "show-common-map";
