@@ -63,7 +63,8 @@ public class SessionValidationFilter implements Filter
 					&&  !"/".equalsIgnoreCase( uri ) && !logout_action.equalsIgnoreCase( uri ) 
 					&&  !pin_login_action.equalsIgnoreCase( uri )
 					&&  !pin_logon_valid.equalsIgnoreCase( uri )
-					&& !logon_page_admin.equalsIgnoreCase(uri))
+					&& !logon_page_admin.equalsIgnoreCase(uri)
+					&& logon_page.indexOf("ForPhone") != -1)
 		{
 			if( session == null )
 			{
