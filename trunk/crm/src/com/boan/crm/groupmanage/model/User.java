@@ -59,12 +59,16 @@ public class User {
 	 */
 	@Column(name = "USERNAME")
 	private String username;
-
 	/**
 	 * 用户密码
 	 */
 	@Column(name = "PASSWORD")
 	private String password;
+	/**
+	 * 用户原密码
+	 */
+	@Transient
+	private String oldPassword;
 
 	/**
 	 * 用户姓名
@@ -368,5 +372,13 @@ public class User {
 
 	public void setDept(Deptment dept) {
 		this.dept = dept;
+	}
+
+	public String getOldPassword() {
+		return oldPassword;
+	}
+
+	public void setOldPassword(String oldPassword) {
+		this.oldPassword = oldPassword;
 	}
 }
