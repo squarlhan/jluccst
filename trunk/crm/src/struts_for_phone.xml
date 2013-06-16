@@ -17,4 +17,10 @@
 		<action name="showUserInfoForPhoneAction" class="userAction" method="showUserInfoForPhone"></action>
 		<action name="updateUserForPhoneAction" class="userAction" method="updateUserForPhone"></action>
 	</package>
+	<!-- 客户信息 -->
+	<package name="customerinfo" extends="phonejson">
+		<action name="getMyTaskListForPhoneAction" class="userLogonAction" method="getMyTaskListForPhone"></action>
+		<action name="getCustomerTraceInfoForPhoneAction" class="customerTraceInfoAction" method="customerTraceInfoForPhone"></action>
+		<action name="getCustomerVisitInfoForPhoneAction" class="customerVisitInfoAction" method="customerVisitInfoForPhone"></action>
+	</package>
 </struts>
