@@ -17,23 +17,17 @@
 	
 	List list = ( List ) request.getAttribute( "list" );
 	String format = (String) request.getAttribute( "format" );
-	Object obj = request.getAttribute( "totalCount" );
-	long totalCount = 0;
-	if( obj != null )
-	{
-		totalCount = (Long)obj;
-	}
+	String jsonRootName =  (String) request.getAttribute( "jsonRootName" );
 	//获取请求参数
 	StringBuffer sb = new StringBuffer();
 	if (list != null && list.size() > 0) {
-		sb.append("{totalProperty:");
 		CalendarJsonValueProcessor processor = new CalendarJsonValueProcessor("yyyy-MM-dd");
 		JsonConfig jsonConfig = new JsonConfig();
 		jsonConfig.registerJsonValueProcessor(Calendar.class, processor);
-		sb.append(",root:" + JSONSerializer.toJSON(list, jsonConfig ).toString());
+		sb.append("{\""+ jsonRootName +"\":" + JSONSerializer.toJSON(list, jsonConfig ).toString());
 		sb.append("}");
 	} else {
-		sb.append("{totalProperty:0,root:[]}");
+		sb.append("{root:[]}");
 	}
 	response.getWriter().write(sb.toString(  ));
 %>
