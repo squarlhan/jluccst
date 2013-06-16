@@ -22,6 +22,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
+import com.boan.crm.customer.model.BusinessProgressKey;
 import com.boan.crm.customer.model.ContractPersonInfo;
 import com.boan.crm.customer.model.CustomerInfo;
 import com.boan.crm.customer.service.IContractPersonService;
@@ -656,6 +657,8 @@ public class CustomerSearchAction  extends BaseActionSupport{
 //			customerInfo.setCompanyFullName(sessionCompanyName);
 			customerInfo.setSalesman(sessionUserCName);
 			customerInfo.setSalesmanId(sessionUserId);
+			customerInfo.setProgress("新建");
+			customerInfo.setProgressId(BusinessProgressKey.NEW);
 			customerInfo.setDeleteFlag(0);
 			customerService.save(customerInfo);//保存到客户表
 			
@@ -717,6 +720,8 @@ public class CustomerSearchAction  extends BaseActionSupport{
 			customerInfo.setCompanyId(sessionCompanyId);
 			customerInfo.setSalesman(sessionUserCName);
 			customerInfo.setSalesmanId(sessionUserId);
+			customerInfo.setProgress("新建");
+			customerInfo.setProgressId(BusinessProgressKey.NEW);
 			customerInfo.setDeleteFlag(0);
 			customerService.save(customerInfo);//保存到客户表
 			
