@@ -44,7 +44,7 @@ public class BusinessProgressKey {
 		mapKey.put(TRACE, "跟进");
 		mapKey.put(DEALING, "要成交");
 		mapKey.put(DEALED, "成交");
-		
+		mapKey.put(VISIT, "回访");
 		return mapKey.get(key);
 	}
 }
