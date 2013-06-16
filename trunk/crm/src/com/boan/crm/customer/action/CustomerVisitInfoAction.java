@@ -9,8 +9,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
@@ -414,6 +417,39 @@ public class CustomerVisitInfoAction extends BaseActionSupport{
 		}
 		
 		return SUCCESS;
+	}
+	/**
+	 * 手机端客户回访信息
+	 * @return String
+	 */
+	public String customerVisitInfoForPhone()
+	{
+		Map<String,Object> map = new HashMap<String,Object>();
+		if(StringUtils.trimToNull(id)!=null)
+		{
+			customerVisitInfo = customerVisitInfoService.get(id);
+			map.put("object_name", contractPersonService.get(customerVisitInfo.getVisitPersonId()).getPersonName());
+			visitTime = CalendarUtils.toLongStringNoSecond(customerVisitInfo.getVisitTime());
+			map.put("date", visitTime);
+			
+			visitOption = dataDictionaryService.get(customerVisitInfo.getVisitOption()).getName();
+			map.put("connect_way", visitOption);
+			map.put("QQ", customerVisitInfo.getQq());
+			map.put("email", customerVisitInfo.getEmail());
+			map.put("phone", customerVisitInfo.getTel());
+			map.put("task", customerVisitInfo.getTask());
+			if(customerVisitInfo.getActualVisitTime() != null)
+			{
+				map.put("realy_time", CalendarUtils.toLongStringNoSecond(customerVisitInfo.getActualVisitTime()));
+			}
+			
+			map.put("result", customerVisitInfo.getContentResult());
+			map.put("mark", customerVisitInfo.getRemark());
+			
+		}
+		HttpServletRequest request = ServletActionContext.getRequest();
+		request.setAttribute("map", map);
+		return COMMON_MAP;
 	}
 	/**
 	 * 保存客户回访信息

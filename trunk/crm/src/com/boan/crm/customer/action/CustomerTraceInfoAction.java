@@ -9,8 +9,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
@@ -368,6 +371,45 @@ public class CustomerTraceInfoAction extends BaseActionSupport{
 		}
 		
 		return SUCCESS;
+	}
+	/**
+	 * 手机端客户跟进信息
+	 * @return String
+	 */
+	public String customerTraceInfoForPhone()
+	{
+		Map<String,Object> map = new HashMap<String,Object>();
+		if(StringUtils.trimToNull(id)!=null)
+		{
+			customerTraceInfo = customerTraceInfoService.get(id);
+			
+			ContractPersonInfo personObj = contractPersonService.get(customerTraceInfo.getTracePersonId());
+			if(personObj!= null)
+				map.put("object_name", contractPersonService.get(customerTraceInfo.getTracePersonId()).getPersonName());
+			else
+				map.put("object_name", "");
+			
+			traceTime = CalendarUtils.toLongStringNoSecond(customerTraceInfo.getTraceTime());
+			map.put("date", traceTime);
+			
+			traceOption = dataDictionaryService.get(customerTraceInfo.getTraceOption()).getName();
+			map.put("connect_way", traceOption);
+			map.put("QQ", customerTraceInfo.getQq());
+			map.put("email", customerTraceInfo.getEmail());
+			map.put("phone", customerTraceInfo.getTel());
+			map.put("task", customerTraceInfo.getTask());
+			if(customerTraceInfo.getActualTraceTime() != null)
+			{
+				map.put("realy_time", CalendarUtils.toLongStringNoSecond(customerTraceInfo.getActualTraceTime()));
+			}
+			
+			map.put("intrest_point", customerTraceInfo.getInterest());
+			map.put("diffrent_point", customerTraceInfo.getObjection());
+			
+		}
+		HttpServletRequest request = ServletActionContext.getRequest();
+		request.setAttribute("map", map);
+		return COMMON_MAP;
 	}
 	/**
 	 * 保存客户跟进信息
