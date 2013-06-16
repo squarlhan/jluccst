@@ -12,12 +12,15 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.commons.lang.StringUtils;
 import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
+import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
@@ -27,9 +30,11 @@ import com.boan.crm.backstagemanage.common.ProductType;
 import com.boan.crm.customer.model.BusinessProgressKey;
 import com.boan.crm.customer.model.ContractPersonInfo;
 import com.boan.crm.customer.model.CustomerInfo;
+import com.boan.crm.customer.model.CustomerInfoForJson;
 import com.boan.crm.customer.model.CustomerStaticInfo;
 import com.boan.crm.customer.model.CustomerTraceInfo;
 import com.boan.crm.customer.model.CustomerVisitInfo;
+import com.boan.crm.customer.model.TaskInfoForJson;
 import com.boan.crm.customer.service.IContractPersonService;
 import com.boan.crm.customer.service.ICustomerInfoService;
 import com.boan.crm.customer.service.ICustomerStaticInfoService;
@@ -146,22 +151,25 @@ public class CustomerInfoAction extends BaseActionSupport{
 	private List<CustomerStaticInfo> listMaturityStatic =  null;
 	private List<CustomerStaticInfo> listProgressStatic =  null;
 	private List<CustomerStaticInfo> listLevelStatic =  null;
+	private String progress = "";
 	public CustomerInfoAction()
 	{
-		int productType = this.getSession().getProductType();
-		if(productType == ProductType.CRM)
+		if(this.getSession() != null)
 		{
-			crmFlag = true;
+			int productType = this.getSession().getProductType();
+			if(productType == ProductType.CRM)
+			{
+				crmFlag = true;
+			}
+			if(productType == ProductType.ERP)
+			{
+				erpFlag = true;
+			}
+			if(productType == ProductType.TEAM_MANAGE)
+			{
+				teamFlag = true;
+			}
 		}
-		if(productType == ProductType.ERP)
-		{
-			erpFlag = true;
-		}
-		if(productType == ProductType.TEAM_MANAGE)
-		{
-			teamFlag = true;
-		}
-		
 	}
 	
 	public String showGroupTree() throws Exception
@@ -229,6 +237,117 @@ public class CustomerInfoAction extends BaseActionSupport{
 		
 		pagination = customerInfoService.findCustomerInfoForPage(values, pagination);
 		return SUCCESS;
+	}
+	/**
+	 * 客户列表
+	 * @return String
+	 */
+	public String getMyCutomerListForPhone()
+	{
+		Map<String,String> values = new HashMap<String,String>();
+		
+		if(customerName != null && customerName.length() > 0)
+		{
+			values.put("customerName", "%"+customerName+"%");
+		}
+		if(progress != null && progress.length() > 0)
+		{
+			values.put("progress", progress);
+		}
+		values.put("salesmanId", salesmanId);
+		pagination.setPageSize(200);
+		List<CustomerInfoForJson> list = new ArrayList<CustomerInfoForJson>();
+		List<CustomerInfo> listCustomer = customerInfoService.findCustomerInfoForPage(values, pagination).getData();
+		if(listCustomer != null && listCustomer.size() >0)
+		{
+			for(int i=0;i<listCustomer.size();i++)
+			{
+				CustomerInfo customer = listCustomer.get(i);
+				List<ContractPersonInfo> contractPersonList = customer.getContractPersonList();
+				String contactPersonName = "";
+				if(contractPersonList != null && contractPersonList.size() > 0)
+				{
+					for(int j=0;j<contractPersonList.size();j++)
+					{
+						if(contactPersonName.length() == 0)
+						{
+							contactPersonName = contractPersonList.get(j).getPersonName();
+						}else
+						{
+							contactPersonName = contactPersonName + "," + contractPersonList.get(j).getPersonName();
+						}
+					}
+				}
+				CustomerInfoForJson obj = new CustomerInfoForJson(customer.getId(),contactPersonName,customer.getCustomerName(),customer.getProgressId());
+				list.add(obj);
+			}
+		}
+		HttpServletRequest request = ServletActionContext.getRequest();
+		request.setAttribute("list", list);
+		request.setAttribute("jsonRootName", "contect");
+		return COMMON_LIST;
+	}
+	/**
+	 * 获取我的任务列表
+	 * @return 
+	 */
+	public String getMyTaskListForPhone()
+	{
+		List<TaskInfoForJson> list = new ArrayList<TaskInfoForJson>();
+		Map<String,String> values = new HashMap<String,String>();
+		values.put("salesmanId", salesmanId);
+		Pagination<CustomerTraceInfo> paginationTraceInfo = new Pagination<CustomerTraceInfo>();
+		
+		List<CustomerTraceInfo>  listTraceInfo = customerTraceInfoService.findCustomerTraceInfoForPage(values, paginationTraceInfo).getData();
+		if(listTraceInfo != null && listTraceInfo.size() >0)
+		{
+			for(int i=0;i<listTraceInfo.size();i++)
+			{
+				CustomerTraceInfo traceInfo = listTraceInfo.get(i);
+				String status = "";
+				if(traceInfo.getTraceFlag().equals( "1" ))
+				{
+					status = "2";
+				}else
+				{
+					status = "1";
+				}
+				TaskInfoForJson obj = new TaskInfoForJson(traceInfo.getId(),"1",status,traceInfo.getCustomerName(),traceInfo.getPerson().getPersonName(),traceInfo.getTel(),traceInfo.getTraceTimeStr());
+				list.add(obj);
+			}
+		}
+		
+		Pagination<CustomerVisitInfo> paginationVisitInfo = new Pagination<CustomerVisitInfo>();
+		
+		List<CustomerVisitInfo>  listVisitInfo = customerVisitInfoService.findCustomerVisitInfoForPage(values, paginationVisitInfo).getData();
+		if(listVisitInfo != null && listVisitInfo.size() >0)
+		{
+			for(int i=0;i<listVisitInfo.size();i++)
+			{
+				CustomerVisitInfo visitInfo = listVisitInfo.get(i);
+				String status = "";
+				if(visitInfo.getVisitFlag().equals( "1" ))
+				{
+					status = "2";
+				}else
+				{
+					status = "1";
+				}
+				String personName = "";
+				if(visitInfo.getPerson() != null)
+				{
+					personName = visitInfo.getPerson().getPersonName();
+				}
+				TaskInfoForJson obj = new TaskInfoForJson(visitInfo.getId(),"2",status,visitInfo.getCustomerName(),personName,visitInfo.getTel(),visitInfo.getVisitTimeStr());
+				list.add(obj);
+			}
+		}
+		
+		
+		HttpServletRequest request = ServletActionContext.getRequest();
+		request.setAttribute("list", list);
+		request.setAttribute("jsonRootName", "task");
+		return COMMON_LIST; 
 	}
 	/**
 	 * 客户列表
@@ -1234,5 +1353,13 @@ public class CustomerInfoAction extends BaseActionSupport{
 
 	public void setSearchFlag(String searchFlag) {
 		this.searchFlag = searchFlag;
+	}
+
+	public String getProgress() {
+		return progress;
+	}
+
+	public void setProgress(String progress) {
+		this.progress = progress;
 	}
 }
