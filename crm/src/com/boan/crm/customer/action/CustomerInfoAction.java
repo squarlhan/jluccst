@@ -29,9 +29,11 @@ import org.springframework.stereotype.Controller;
 import com.boan.crm.backstagemanage.common.ProductType;
 import com.boan.crm.customer.model.BusinessProgressKey;
 import com.boan.crm.customer.model.ContractPersonInfo;
+import com.boan.crm.customer.model.ContractPersonInfoForJson;
 import com.boan.crm.customer.model.CustomerInfo;
-import com.boan.crm.customer.model.CustomerInfoForJson;
+import com.boan.crm.customer.model.CustomerListInfoForJson;
 import com.boan.crm.customer.model.CustomerStaticInfo;
+import com.boan.crm.customer.model.CustomerTaskInfoForJson;
 import com.boan.crm.customer.model.CustomerTraceInfo;
 import com.boan.crm.customer.model.CustomerVisitInfo;
 import com.boan.crm.customer.model.TaskInfoForJson;
@@ -54,6 +56,7 @@ import com.boan.crm.groupmanage.service.IDeptmentService;
 import com.boan.crm.groupmanage.service.IPopedomService;
 import com.boan.crm.groupmanage.service.IUserService;
 import com.boan.crm.utils.action.BaseActionSupport;
+import com.boan.crm.utils.calendar.CalendarUtils;
 import com.boan.crm.utils.io.impl.FileCopyAndDeleteUtilsAdaptor;
 import com.boan.crm.utils.page.Pagination;
 import com.boan.crm.utils.path.PathUtil;
@@ -256,7 +259,7 @@ public class CustomerInfoAction extends BaseActionSupport{
 		}
 		values.put("salesmanId", salesmanId);
 		pagination.setPageSize(200);
-		List<CustomerInfoForJson> list = new ArrayList<CustomerInfoForJson>();
+		List<CustomerListInfoForJson> list = new ArrayList<CustomerListInfoForJson>();
 		List<CustomerInfo> listCustomer = customerInfoService.findCustomerInfoForPage(values, pagination).getData();
 		if(listCustomer != null && listCustomer.size() >0)
 		{
@@ -278,7 +281,27 @@ public class CustomerInfoAction extends BaseActionSupport{
 						}
 					}
 				}
-				CustomerInfoForJson obj = new CustomerInfoForJson(customer.getId(),contactPersonName,customer.getCustomerName(),customer.getProgressId());
+				String progress = customer.getProgressId();
+				if(progress.equals(BusinessProgressKey.NEW))
+				{
+					progress = "1";
+				}else if(progress.equals(BusinessProgressKey.TRACE))
+				{
+					progress = "2";
+				}else if(progress.equals(BusinessProgressKey.DEALING))
+				{
+					progress = "3";
+				}else if(progress.equals(BusinessProgressKey.DEALED))
+				{
+					progress = "4";
+				}else if(progress.equals(BusinessProgressKey.VISIT))
+				{
+					progress = "5";
+				}else
+				{
+					progress = "1";
+				}
+				CustomerListInfoForJson obj = new CustomerListInfoForJson(customer.getId(),contactPersonName,customer.getCustomerName(),progress);
 				list.add(obj);
 			}
 		}
@@ -286,6 +309,100 @@ public class CustomerInfoAction extends BaseActionSupport{
 		request.setAttribute("list", list);
 		request.setAttribute("jsonRootName", "contect");
 		return COMMON_LIST;
+	}
+	/**
+	 * 返回我的客户信息为手机
+	 * @return
+	 */
+	public String getCutomerInfoForPhone()
+	{
+		HttpServletRequest request = ServletActionContext.getRequest();
+		Map<String,Object> map = new HashMap<String,Object>();
+		if(StringUtils.trimToNull(id)!=null)
+		{
+			customerInfo = customerInfoService.get(id);
+			
+			map.put("company", customerInfo.getCustomerName());
+			map.put("industry", customerInfo.getMainIndustry());
+			map.put("address", customerInfo.getAddress());
+			map.put("company_full_name", customerInfo.getCompanyFullName());
+			map.put("fax", customerInfo.getFax());
+			//TODO
+			List<ContractPersonInfoForJson> listContractPerson = new ArrayList<ContractPersonInfoForJson>();
+			List<ContractPersonInfo> listPerson = contractpersonInfoService.findAllContractPersonInfoByCustomerId(customerInfo.getId());
+			if(listPerson != null && listPerson.size() > 0)
+			{
+				for(int i = 0;i<listPerson.size();i++)
+				{
+					ContractPersonInfoForJson obj = new ContractPersonInfoForJson();
+					obj.setContact_id(listPerson.get(i).getId());
+					obj.setName(listPerson.get(i).getPersonName());
+					obj.setPhone(listPerson.get(i).getPhone());
+					
+					listContractPerson.add(obj);
+				}
+			}
+			
+			map.put("contact", listContractPerson);
+			
+			List<CustomerTaskInfoForJson> listTraceTask = new ArrayList<CustomerTaskInfoForJson>();
+			List<CustomerTraceInfo> listTrace = customerTraceInfoService.findAllCustomerTraceInfoByCustomerId(id);
+			if(listTrace != null && listTrace.size() > 0)
+			{
+				for(int i = 0;i<listTrace.size();i++)
+				{
+					ContractPersonInfo personObj = contractpersonInfoService.get(listTrace.get(i).getTracePersonId());
+					String personName = "";
+					if(personObj!= null)
+						personName = contractpersonInfoService.get(listTrace.get(i).getTracePersonId()).getPersonName();
+					
+					CustomerTaskInfoForJson obj = new CustomerTaskInfoForJson(listTrace.get(i).getId(),listTrace.get(i).getCustomerName(),personName,listTrace.get(i).getTel(),CalendarUtils.toLongStringNoSecond(listTrace.get(i).getTraceTime()));
+					
+					listTraceTask.add(obj);
+				}
+			}
+			
+			
+			map.put("follow", listTraceTask);
+			
+			List<CustomerTaskInfoForJson> listVisitTask = new ArrayList<CustomerTaskInfoForJson>();
+			List<CustomerVisitInfo> listVisit = customerVisitInfoService.findAllCustomerVisitInfoByCustomerId(id);
+			if(listVisit != null && listVisit.size() > 0)
+			{
+				for(int i = 0;i<listVisit.size();i++)
+				{
+					ContractPersonInfo personObj = contractpersonInfoService.get(listVisit.get(i).getVisitPersonId());
+					String personName = "";
+					if(personObj!= null)
+						personName = contractpersonInfoService.get(listVisit.get(i).getVisitPersonId()).getPersonName();
+					
+					CustomerTaskInfoForJson obj = new CustomerTaskInfoForJson(listVisit.get(i).getId(),listVisit.get(i).getCustomerName(),personName,listVisit.get(i).getTel(),CalendarUtils.toLongStringNoSecond(listVisit.get(i).getVisitTime()));
+					
+					listVisitTask.add(obj);
+				}
+			}
+			
+			map.put("visit", listVisitTask);
+		}
+		
+		request.setAttribute("map", map);
+		return COMMON_MAP;
+	}
+	/**
+	 * 返回我的客户详细信息为手机
+	 * @return
+	 */
+	public String getCutomerDetailInfoForPhone()
+	{
+		//TODO
+		HttpServletRequest request = ServletActionContext.getRequest();
+		Map<String,Object> map = new HashMap<String,Object>();
+		if(StringUtils.trimToNull(id)!=null)
+		{
+			
+		}
+		request.setAttribute("map", map);
+		return COMMON_MAP;
 	}
 	/**
 	 * 获取我的任务列表

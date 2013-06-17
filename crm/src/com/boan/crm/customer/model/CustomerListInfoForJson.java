@@ -1,9 +1,5 @@
 package com.boan.crm.customer.model;
 
-import java.io.Serializable;
-import java.math.BigDecimal;
-import java.util.Calendar;
-import java.util.List;
 
 /**
  * 客户信息实体Json类
