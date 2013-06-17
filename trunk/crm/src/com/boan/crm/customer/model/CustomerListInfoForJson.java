@@ -11,10 +11,10 @@ import java.util.List;
  * @author luojx
  * @version 1.0.0
  */
-public class CustomerInfoForJson
+public class CustomerListInfoForJson
 {
-	public CustomerInfoForJson(){ this.id = ""; }
-	public CustomerInfoForJson(String id,String name,String company,String type)
+	public CustomerListInfoForJson(){ this.id = ""; }
+	public CustomerListInfoForJson(String id,String name,String company,String type)
 	{
 		this.id = id ;
 		this.name = name;
