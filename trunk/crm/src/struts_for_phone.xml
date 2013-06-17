@@ -23,6 +23,7 @@
 		<action name="getMyCutomerListForPhoneAction" class="customerInfoAction" method="getMyCutomerListForPhone"></action>
 		<action name="getCutomerInfoForPhoneAction" class="customerInfoAction" method="getCutomerInfoForPhone"></action>
 		<action name="getCutomerDetailInfoForPhoneAction" class="customerInfoAction" method="getCutomerDetailInfoListForPhone"></action>
+		<action name="getCutomerDailyInfoForPhoneAction" class="customerInfoAction" method="getCutomerDailyInfoForPhone"></action>
 		<action name="getCustomerTraceInfoForPhoneAction" class="customerTraceInfoAction" method="customerTraceInfoForPhone"></action>
 		<action name="getCustomerVisitInfoForPhoneAction" class="customerVisitInfoAction" method="customerVisitInfoForPhone"></action>
 	</package>
