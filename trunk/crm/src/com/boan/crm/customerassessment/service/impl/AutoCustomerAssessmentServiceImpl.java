@@ -100,7 +100,7 @@ public class AutoCustomerAssessmentServiceImpl implements IAutoCustomerAssessmen
 			{
 				AutoCustomerAssessment obj = data.get(i);
 				hql.delete(0, hql.length());
-				hql.append( "from AutoCustomerAssessment where customerId =:customerId order by resultValue desc ");
+				hql.append( "from AutoCustomerAssessment where customerId =:customerId order by assessmentTime desc ");
 				Map<String,String> values1 = new HashMap<String,String>();
 				values1.put("customerId", obj.getCustomerId());
 				List<AutoCustomerAssessment> tempObjs = autoCustomerAssessmentDao.findForPage(hql.toString(), values1, pagination.getStartIndex(), pagination.getPageSize());
