@@ -207,9 +207,9 @@ public class TimePlanServiceImpl implements ITimePlanService {
 	 * @return
 	 */
 	public boolean hasTimePlanForTrackOrVisit(String trackOrVisitId){
-		String hql = "from TimePlanAndTrackOrVisitRelation where  trackOrVisitId:trackOrVisitId";
+		String hql = "from TimePlanAndTrackOrVisitRelation where  trackOrVisitId=:trackOrVisitId";
 		Map param = new HashMap();
-		param.put("param", "param");
+		param.put("trackOrVisitId", trackOrVisitId);
 		List list = timePlanAndTrackOrVisitRelationDao.find(hql,param );
 		if(list!=null && list.size()>0){
 			return true;
