@@ -27,4 +27,9 @@
 		<action name="getCustomerTraceInfoForPhoneAction" class="customerTraceInfoAction" method="customerTraceInfoForPhone"></action>
 		<action name="getCustomerVisitInfoForPhoneAction" class="customerVisitInfoAction" method="customerVisitInfoForPhone"></action>
 	</package>
+	<!-- 职员日报信息 -->
+	<package name="dailyinfoforphone" extends="phonejson">
+		<action name="getDailyInfoForPhoneAction" class="timePlanAction" method="getDailyInfoForPhone"></action>
+		<action name="saveOrUpdateTimePlanForPhoneAction" class="timePlanAction" method="saveOrUpdateTimePlanForPhone"></action>
+	</package>
 </struts>
