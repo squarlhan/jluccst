@@ -139,7 +139,7 @@ public class TimePlan implements Serializable{
 	}
 
 	/**
-	 * 计划类型
+	 * 计划类型（0:'日报',1:'周报',2:'月报'）
 	 * @return
 	 */
 	public String getPlanType() {
@@ -147,7 +147,7 @@ public class TimePlan implements Serializable{
 	}
 
 	/**
-	 * 计划类型
+	 * 计划类型（0:'日报',1:'周报',2:'月报'）
 	 * @param planType
 	 */
 	public void setPlanType(String planType) {
@@ -171,7 +171,7 @@ public class TimePlan implements Serializable{
 	}
 
 	/**
-	 * 计划内容
+	 * 明日计划
 	 * @return
 	 */
 	public String getPlanContent() {
@@ -179,7 +179,7 @@ public class TimePlan implements Serializable{
 	}
 
 	/**
-	 * 计划内容
+	 * 明日计划
 	 * @param planContent
 	 */
 	public void setPlanContent(String planContent) {
@@ -187,7 +187,7 @@ public class TimePlan implements Serializable{
 	}
 
 	/**
-	 * 备注
+	 * 今日总结
 	 * @return
 	 */
 	public String getMemo() {
@@ -195,7 +195,7 @@ public class TimePlan implements Serializable{
 	}
 
 	/**
-	 * 备注
+	 * 今日总结
 	 * @param memo
 	 */
 	public void setMemo(String memo) {
