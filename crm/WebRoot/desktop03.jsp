@@ -42,7 +42,7 @@
             <td align="center"><a href="./userLogonAction!showDesktopPage.action?desktopUrl=desktop01">客户管理</a></td>
             </s:if>
             <s:if test="hashPopedom02">
-            <td align="center"><a href="./userLogonAction!showDesktopPage.action?desktopUrl=desktop02">月计划</a></td>
+            <td align="center"><a href="./userLogonAction!showDesktopPage.action?desktopUrl=desktop02">计划管理</a></td>
             </s:if>
             <td align="center"><span class="STYLE1">销售统计</span></td>
           </tr>

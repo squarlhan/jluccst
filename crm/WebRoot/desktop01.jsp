@@ -40,7 +40,7 @@
           <tr>
             <td align="center" class="STYLE1">客户管理</td>
             <s:if test="hashPopedom02">
-            <td align="center"><a href="./userLogonAction!showDesktopPage.action?desktopUrl=desktop02">月计划</a></td>
+            <td align="center"><a href="./userLogonAction!showDesktopPage.action?desktopUrl=desktop02">计划管理</a></td>
             </s:if>
             <s:if test="hashPopedom03">
             <td align="center"><span class="STYLE1"><a href="./userLogonAction!showDesktopPage.action?desktopUrl=desktop03">销售统计</a></span>
