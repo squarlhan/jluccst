@@ -441,6 +441,9 @@ public class CustomerVisitInfoAction extends BaseActionSupport{
 			if(customerVisitInfo.getActualVisitTime() != null)
 			{
 				map.put("realy_time", CalendarUtils.toLongStringNoSecond(customerVisitInfo.getActualVisitTime()));
+			}else
+			{
+				map.put("realy_time", "");
 			}
 			
 			map.put("result", customerVisitInfo.getContentResult());
