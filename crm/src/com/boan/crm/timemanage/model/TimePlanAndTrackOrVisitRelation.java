@@ -27,6 +27,20 @@ import org.hibernate.annotations.GenericGenerator;
 @Entity
 @Table(name = "TIME_PLANAND_TRACK_OR_VISITRELATION")
 public class TimePlanAndTrackOrVisitRelation implements Serializable{
+
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GenericGenerator(name = "system-uuid", strategy = "uuid")
+	@GeneratedValue(generator = "system-uuid")
+	private String id;
+	
+	@Column(name = "TIME_PLAN_ID" , length = 50)
+	private String time_Planand;
+	
+	@Column(name = "TRACK_OR_VISIT_ID" , length = 50)
+	private String trackOrVisitId;
+
 	/**
 	 * @return the id
 	 */
@@ -56,28 +70,17 @@ public class TimePlanAndTrackOrVisitRelation implements Serializable{
 	}
 
 	/**
-	 * @return the trackOrVisitrelationId
+	 * @return the trackOrVisitId
 	 */
-	public String getTrackOrVisitrelationId() {
-		return trackOrVisitrelationId;
+	public String getTrackOrVisitId() {
+		return trackOrVisitId;
 	}
 
 	/**
-	 * @param trackOrVisitrelationId the trackOrVisitrelationId to set
+	 * @param trackOrVisitId the trackOrVisitId to set
 	 */
-	public void setTrackOrVisitrelationId(String trackOrVisitrelationId) {
-		this.trackOrVisitrelationId = trackOrVisitrelationId;
+	public void setTrackOrVisitId(String trackOrVisitId) {
+		this.trackOrVisitId = trackOrVisitId;
 	}
-
-	@Id
-	@GenericGenerator(name = "system-uuid", strategy = "uuid")
-	@GeneratedValue(generator = "system-uuid")
-	private String id;
-	
-	@Column(name = "Time_Plan_Id" , length = 50)
-	private String time_Planand;
-	
-	@Column(name = "TRACK_OR_VISITRELATION_ID" , length = 50)
-	private String trackOrVisitrelationId;
 }
 
