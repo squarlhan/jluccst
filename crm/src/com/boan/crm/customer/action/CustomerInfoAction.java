@@ -449,14 +449,12 @@ public class CustomerInfoAction extends BaseActionSupport{
 			Calendar endTime = Calendar.getInstance();
 			Map<String,Object> params = new HashMap<String, Object>();
 //			params.put("personId", this.sessionUserId);
-			Pagination<TimePlan> paginationTime = new Pagination<TimePlan>();
 			 
 			params.put("beginTime", beginTime);
 			params.put("endTime", endTime); 
 			params.put("employeeId", userId);
 			
-			paginationTime = timePlanService.findTimePlanForPage(params,paginationTime);
-			List<TimePlan> listTimePlan = paginationTime.getData();
+			List<TimePlan> listTimePlan = timePlanService.findTimePlan(params);
 			List<TimePlanForJson> listTim = new ArrayList<TimePlanForJson>();
 			if(listTimePlan != null && listTimePlan.size() > 0)
 			{
