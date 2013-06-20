@@ -6,11 +6,21 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.persistence.Column;
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.commons.lang.StringUtils;
+import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
+import com.boan.crm.customer.model.ContractPersonInfo;
+import com.boan.crm.customer.model.CustomerInfo;
+import com.boan.crm.customer.model.CustomerTraceInfo;
+import com.boan.crm.customer.model.CustomerVisitInfo;
+import com.boan.crm.customer.model.TaskInfoForJson;
 import com.boan.crm.groupmanage.common.UserSession;
 import com.boan.crm.groupmanage.model.Deptment;
 import com.boan.crm.groupmanage.model.User;
@@ -18,8 +28,11 @@ import com.boan.crm.groupmanage.service.IDeptmentService;
 import com.boan.crm.groupmanage.service.IPopedomService;
 import com.boan.crm.groupmanage.service.IUserService;
 import com.boan.crm.timemanage.model.TimePlan;
+import com.boan.crm.timemanage.model.TimePlanForJson;
 import com.boan.crm.timemanage.service.ITimePlanService;
 import com.boan.crm.utils.action.BaseActionSupport;
+import com.boan.crm.utils.calendar.CalendarUtils;
+import com.boan.crm.utils.converter.ParseBeanUtil;
 import com.boan.crm.utils.page.Pagination;
 
 /**
@@ -327,6 +340,103 @@ public class TimePlanAction extends BaseActionSupport{
 		timePlanService.deleteTimePlan(ids);
 		return NONE;
 	}
+	
+	
+	/**
+	 * 获取日程返回Json串给手机客户端
+	 * @return
+	 */
+	public String getDailyInfoForPhone()
+	{
+		HttpServletRequest request = ServletActionContext.getRequest();
+		Map<String,Object> map = new HashMap<String,Object>();
+		if(StringUtils.trimToNull(userId)!=null)
+		{
+			Calendar temp = Calendar.getInstance();
+			temp.set(Calendar.DATE, -15);
+			Calendar beginTime =temp;
+			Calendar endTime = Calendar.getInstance();
+			Map<String,Object> params = new HashMap<String, Object>();
+//			params.put("personId", this.sessionUserId);
+			 
+			params.put("beginTime", beginTime);
+			params.put("endTime", endTime); 
+			params.put("employeeId", userId);
+			List<TimePlan> listTimePlan =timePlanService.findTimePlan(params);
+			List<TimePlanForJson> listTim = new ArrayList<TimePlanForJson>();
+			if(listTimePlan != null && listTimePlan.size() > 0)
+			{
+				for(int i = 0;i<listTimePlan.size();i++)
+				{
+					TimePlanForJson obj = new TimePlanForJson();
+					//0:'日报',1:'周报',2:'月报'
+					if(listTimePlan.get(i).getPlanType().equals("0")){
+						obj.setType("日报");
+					}
+					if(listTimePlan.get(i).getPlanType().equals("1")){
+						obj.setType("周报");
+					}
+					if(listTimePlan.get(i).getPlanType().equals("2")){
+						obj.setType("月报");
+					}
+					obj.setDate(CalendarUtils.toLongStringNoSecond(listTimePlan.get(i).getSubmitTime()));
+					obj.setSummary(listTimePlan.get(i).getMemo());
+					obj.setPlan(listTimePlan.get(i).getPlanContent());
+					listTim.add(obj);
+				}
+			}
+			
+			map.put("dialy", listTim);
+		}
+		request.setAttribute("map", map);
+		return COMMON_MAP;
+	}
+	
+	/**
+	 * 维护时间计划给手机客户端
+	 * @return
+	 * @throws Exception 
+	 */
+	public String saveOrUpdateTimePlanForPhone() {
+		Map<String,Object> map = new HashMap<String,Object>();
+		try{
+			if(timePlan!=null){
+				if(timePlan.getOrganId()!=null && !timePlan.getOrganId().trim().equals("")){
+					deptList = deptService.queryAllDeptmentsByCompanyId( timePlan.getOrganId() );
+					for(Deptment dept : deptList){
+						if(dept.getId().equals(timePlan.getDeptId())){
+							timePlan.setDeptName(dept.getDeptName());
+						}
+					}
+				}
+				if(timePlan.getOrganId()!=null && !timePlan.getDeptId().trim().equals("")){
+					userList =userService.queryUserList( timePlan.getOrganId(), timePlan.getDeptId(), new Pagination<User>()).getData();
+					for(User user : userList){
+						if(user.getId().equals(timePlan.getEmployeeId())){
+							timePlan.setEmployeeName(user.getUserCName());
+						}
+					}
+				}
+				
+				//保存
+				if(timePlan.getId()==null || timePlan.getDeptId().trim().equals("")){
+					timePlan.setId(null);
+					timePlan.setCreateTime(Calendar.getInstance());
+				}else if(timePlan.getId()!=null && !timePlan.getDeptId().trim().equals("")) {
+					//修改
+					TimePlan temp = timePlanService.getTimePlanById(timePlan.getId());
+					timePlan=(TimePlan)ParseBeanUtil.parseBean(temp, TimePlan.class);
+				}
+				timePlanService.saveOrUpdateTimePlan(timePlan);
+				map.put("status", "success");
+			}
+		}catch(Exception e){
+			map.put("status", "failure");
+			e.printStackTrace();
+		}
+		return COMMON_MAP;
+	}
+	
 	public Pagination<TimePlan> getPagination() {
 		return pagination;
 	}
