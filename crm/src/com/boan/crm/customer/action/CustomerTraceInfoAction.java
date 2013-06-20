@@ -401,6 +401,9 @@ public class CustomerTraceInfoAction extends BaseActionSupport{
 			if(customerTraceInfo.getActualTraceTime() != null)
 			{
 				map.put("realy_time", CalendarUtils.toLongStringNoSecond(customerTraceInfo.getActualTraceTime()));
+			}else
+			{
+				map.put("realy_time", "");
 			}
 			
 			map.put("intrest_point", customerTraceInfo.getInterest());
