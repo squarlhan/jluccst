@@ -226,21 +226,11 @@ public class UserAction extends BaseActionSupport {
 						if (StringUtils.isNotBlank(user.getUsername())) {
 							oldUser.setUsername(user.getUsername());
 						}
-						if (StringUtils.isNotBlank(user.getUserCName())) {
-							oldUser.setUserCName(user.getUserCName());
-						}
-						if (StringUtils.isNotBlank(user.getBirthday())) {
-							oldUser.setBirthday(user.getBirthday());
-						}
-						if (StringUtils.isNotBlank(user.getOfficePhone())) {
-							oldUser.setOfficePhone(user.getOfficePhone());
-						}
-						if (StringUtils.isNotBlank(user.getPhone())) {
-							oldUser.setPhone(user.getPhone());
-						}
-						if (StringUtils.isNotBlank(user.getEmail())) {
-							oldUser.setEmail(user.getEmail());
-						}
+						oldUser.setUserCName(user.getUserCName());
+						oldUser.setBirthday(user.getBirthday());
+						oldUser.setOfficePhone(user.getOfficePhone());
+						oldUser.setPhone(user.getPhone());
+						oldUser.setEmail(user.getEmail());
 						oldUser.setLunarSolarFlag(user.getLunarSolarFlag());
 						userService.saveOrUpdateUser(oldUser);
 						// 更新sms数据
