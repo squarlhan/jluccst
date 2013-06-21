@@ -198,6 +198,8 @@ public class TimePlanServiceImpl implements ITimePlanService {
 		}
 		timePlanDao.saveOrUpdate(timePlan );
 		TimePlanAndTrackOrVisitRelation relation = new TimePlanAndTrackOrVisitRelation();
+		relation.setTime_Planand(timePlan.getId());
+		relation.setTrackOrVisitId(trackOrVisitId);
 		timePlanAndTrackOrVisitRelationDao.save(relation);
 	}
 	
