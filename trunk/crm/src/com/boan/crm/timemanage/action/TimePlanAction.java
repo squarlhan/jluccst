@@ -400,34 +400,31 @@ public class TimePlanAction extends BaseActionSupport{
 	public String saveOrUpdateTimePlanForPhone() {
 		Map<String,Object> map = new HashMap<String,Object>();
 		try{
-			if(timePlan!=null){
-				if(timePlan.getOrganId()!=null && !timePlan.getOrganId().trim().equals("")){
-					deptList = deptService.queryAllDeptmentsByCompanyId( timePlan.getOrganId() );
-					for(Deptment dept : deptList){
-						if(dept.getId().equals(timePlan.getDeptId())){
-							timePlan.setDeptName(dept.getDeptName());
-						}
-					}
-				}
-				if(timePlan.getOrganId()!=null && !timePlan.getDeptId().trim().equals("")){
-					userList =userService.queryUserList( timePlan.getOrganId(), timePlan.getDeptId(), new Pagination<User>()).getData();
-					for(User user : userList){
-						if(user.getId().equals(timePlan.getEmployeeId())){
-							timePlan.setEmployeeName(user.getUserCName());
-						}
-					}
-				}
-				
+			if(timePlan!=null && userId!=null &&  !userId.trim().equals("")){
 				//保存
 				if(timePlan.getId()==null || timePlan.getDeptId().trim().equals("")){
+					User user = userService.getUserById(userId);
+					String companyId = user.getCompanyId();
+					String deptId = user.getDeptId();
+					String deptName = user.getDept().getDeptName();
+					
 					timePlan.setId(null);
+					timePlan.setOrganId(companyId);
+					timePlan.setDeptId(deptId);
+					timePlan.setDeptName(deptName);
+					timePlan.setEmployeeId(userId);
+					timePlan.setPersonId(userId);
+					timePlan.setPlanType("0");//默认为日报
 					timePlan.setCreateTime(Calendar.getInstance());
+					timePlanService.saveOrUpdateTimePlan(timePlan);
 				}else if(timePlan.getId()!=null && !timePlan.getDeptId().trim().equals("")) {
 					//修改
 					TimePlan temp = timePlanService.getTimePlanById(timePlan.getId());
-					timePlan=(TimePlan)ParseBeanUtil.parseBean(temp, TimePlan.class);
+					temp.setPlanContent(timePlan.getPlanContent());
+					temp.setSubmitTime(timePlan.getSubmitTime());
+					temp.setMemo(timePlan.getMemo());
+					timePlanService.saveOrUpdateTimePlan(temp);
 				}
-				timePlanService.saveOrUpdateTimePlan(timePlan);
 				map.put("status", "success");
 			}
 		}catch(Exception e){
