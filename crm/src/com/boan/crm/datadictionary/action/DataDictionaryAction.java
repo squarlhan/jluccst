@@ -7,9 +7,12 @@
 package com.boan.crm.datadictionary.action;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.StringUtils;
@@ -18,6 +21,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.boan.crm.datadictionary.model.DataDictionary;
+import com.boan.crm.datadictionary.model.DataDictionaryForPhone;
 import com.boan.crm.datadictionary.service.IDataDictionaryService;
 import com.boan.crm.groupmanage.common.UserSession;
 import com.boan.crm.utils.action.BaseActionSupport;
@@ -53,6 +57,7 @@ public class DataDictionaryAction extends BaseActionSupport {
 	private String[] dictIds;
 	private String message;
 	private int userType;
+	private String companyId = "";
 	
 	private List<DictionaryType> loadDictionaryTypes(){
 		List<DictionaryType> list = new ArrayList<DictionaryType>();
@@ -156,7 +161,119 @@ public class DataDictionaryAction extends BaseActionSupport {
 		}
 		return SUCCESS;
 	}
-	
+	/**
+	 * 为jason返回跟进和回访方式
+	 * @return
+	 */
+	public String visitTraceOptionInfoForPhone()
+	{
+		Map<String,Object> map = new HashMap<String,Object>();
+		List<DataDictionary> listDic = dataDictionaryService.findDataDictionaryByType(companyId, 6);
+		List<DataDictionaryForPhone> list = new ArrayList<DataDictionaryForPhone>();
+		
+		for(int i =0;i<listDic.size();i++)
+		{
+			DataDictionaryForPhone obj = new DataDictionaryForPhone();
+			obj.setId(listDic.get(i).getId());
+			obj.setValue(listDic.get(i).getName());
+			list.add(obj);
+		}
+		map.put("follow_way", list);
+		
+		List<DataDictionary> listDic2 = dataDictionaryService.findDataDictionaryByType(companyId, 5);
+		List<DataDictionaryForPhone> list2 = new ArrayList<DataDictionaryForPhone>();
+		
+		for(int i =0;i<listDic2.size();i++)
+		{
+			DataDictionaryForPhone obj = new DataDictionaryForPhone();
+			obj.setId(listDic2.get(i).getId());
+			obj.setValue(listDic2.get(i).getName());
+			list2.add(obj);
+		}
+		map.put("vist", list2);
+		HttpServletRequest request = ServletActionContext.getRequest();
+		request.setAttribute("map", map);
+		return COMMON_MAP;
+		
+	}
+	/**
+	 * 取数据字典，客户维护页
+	 * @return
+	 */
+	public String dictionaryInfoForPhone()
+	{
+		Map<String,Object> map = new HashMap<String,Object>();
+		//客户分类： 传0
+		List<DataDictionary> listDic = dataDictionaryService.findDataDictionaryByType(companyId, 0);
+		List<DataDictionaryForPhone> list = new ArrayList<DataDictionaryForPhone>();
+		
+		for(int i =0;i<listDic.size();i++)
+		{
+			DataDictionaryForPhone obj = new DataDictionaryForPhone();
+			obj.setId(listDic.get(i).getId());
+			obj.setValue(listDic.get(i).getName());
+			list.add(obj);
+		}
+		map.put("client_type", list);
+		//客户来源：传2
+		List<DataDictionary> listDic2 = dataDictionaryService.findDataDictionaryByType(companyId, 2);
+		List<DataDictionaryForPhone> list2 = new ArrayList<DataDictionaryForPhone>();
+		
+		for(int i =0;i<listDic2.size();i++)
+		{
+			DataDictionaryForPhone obj = new DataDictionaryForPhone();
+			obj.setId(listDic2.get(i).getId());
+			obj.setValue(listDic2.get(i).getName());
+			list2.add(obj);
+		}
+		map.put("client_come", list2);
+		List<DataDictionaryForPhone> list3 = new ArrayList<DataDictionaryForPhone>();
+		DataDictionaryForPhone level = new DataDictionaryForPhone();
+		level.setId("10%");
+		level.setValue("10%");
+		list3.add(level);
+		DataDictionaryForPhone level1 = new DataDictionaryForPhone();
+		level1.setId("20%");
+		level1.setValue("20%");
+		list3.add(level1);
+		DataDictionaryForPhone level2 = new DataDictionaryForPhone();
+		level2.setId("30%");
+		level2.setValue("30%");
+		list3.add(level2);
+		DataDictionaryForPhone level3 = new DataDictionaryForPhone();
+		level3.setId("40%");
+		level3.setValue("40%");
+		list3.add(level3);
+		DataDictionaryForPhone level4 = new DataDictionaryForPhone();
+		level4.setId("50%");
+		level4.setValue("50%");
+		list3.add(level4);
+		DataDictionaryForPhone level5 = new DataDictionaryForPhone();
+		level5.setId("60%");
+		level5.setValue("60%");
+		list3.add(level5);
+		DataDictionaryForPhone level6 = new DataDictionaryForPhone();
+		level6.setId("70%");
+		level6.setValue("70%");
+		list3.add(level6);
+		DataDictionaryForPhone level7 = new DataDictionaryForPhone();
+		level7.setId("80%");
+		level7.setValue("80%");
+		list3.add(level7);
+		DataDictionaryForPhone level8 = new DataDictionaryForPhone();
+		level8.setId("90%");
+		level8.setValue("90%");
+		list3.add(level8);
+		DataDictionaryForPhone level9 = new DataDictionaryForPhone();
+		level9.setId("100%");
+		level9.setValue("100%");
+		list3.add(level9);
+		
+		map.put("develop_process", list3);
+		HttpServletRequest request = ServletActionContext.getRequest();
+		request.setAttribute("map", map);
+		return COMMON_MAP;
+	}
 	public class DictionaryType{
 		private Integer flag = 0;
 		private String name;
@@ -265,6 +382,14 @@ public class DataDictionaryAction extends BaseActionSupport {
 
 	public void setUserType(int userType) {
 		this.userType = userType;
+	}
+
+	public String getCompanyId() {
+		return companyId;
+	}
+
+	public void setCompanyId(String companyId) {
+		this.companyId = companyId;
 	}
 	
 }
