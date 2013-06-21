@@ -39,6 +39,8 @@ import com.boan.crm.sms.model.SMSCustomerInfo;
 import com.boan.crm.sms.model.SMSInfo;
 import com.boan.crm.sms.service.ISMSCustomerInfoService;
 import com.boan.crm.sms.service.ISMSInfoService;
+import com.boan.crm.timemanage.model.TimePlan;
+import com.boan.crm.timemanage.service.ITimePlanService;
 import com.boan.crm.utils.action.BaseActionSupport;
 import com.boan.crm.utils.calendar.CalendarUtils;
 import com.boan.crm.utils.page.Pagination;
@@ -87,6 +89,10 @@ public class CustomerTraceInfoAction extends BaseActionSupport{
 	@Autowired
 	@Qualifier("actionPlanService")
 	private IActionPlanService actionPlanService = null;
+	
+	@Autowired
+	@Qualifier("timePlanService")
+	private ITimePlanService  timePlanService = null;
 	
 	@Autowired
 	@Qualifier("popedomService")
@@ -540,6 +546,48 @@ public class CustomerTraceInfoAction extends BaseActionSupport{
 			actionPlan.setSubmitTime(Calendar.getInstance());
 			
 			actionPlanService.saveOrUpdateActionPlan(actionPlan);
+			
+			TimePlan timePlan = new TimePlan();
+			timePlan.setCreateTime(Calendar.getInstance());
+			timePlan.setDeptId(sessionDeptId);
+			timePlan.setDeptName(sessionDeptName);
+			timePlan.setEmployeeId(sessionUserId);
+			timePlan.setEmployeeName(sessionUserCName);
+			timePlan.setPersonId(sessionUserId);
+			timePlan.setOrganId(sessionCompanyId);
+			timePlan.setPlanType("0");
+			timePlan.setSubmitTime(Calendar.getInstance());
+			timePlanService.saveOrUpdateTimePlan(timePlan, 0, sb.toString(), obj.getId());
+		}else
+		{
+			if (traceFlag != null && traceFlag.equals("1"))
+			{
+				
+				if(!timePlanService.hasTimePlanForTrackOrVisit(obj.getId()))
+				{
+					TimePlan timePlan = new TimePlan();
+					timePlan.setCreateTime(Calendar.getInstance());
+					timePlan.setDeptId(sessionDeptId);
+					timePlan.setDeptName(sessionDeptName);
+					timePlan.setEmployeeId(sessionUserId);
+					timePlan.setEmployeeName(sessionUserCName);
+					timePlan.setPersonId(sessionUserId);
+					timePlan.setOrganId(sessionCompanyId);
+					timePlan.setPlanType("0");
+					timePlan.setSubmitTime(Calendar.getInstance());
+					StringBuilder sb = new StringBuilder();
+					sb.append("跟进完成：");
+					sb.append(CalendarUtils.toLongStringNoSecond(obj.getTraceTime()));
+					sb.append(",对客户[");
+					sb.append(obj.getCustomerName());
+					sb.append("]进行["+dataDictionaryService.get(obj.getTraceOption()).getName()+"]方式跟进");
+					sb.append(",跟进任务：[");
+					sb.append(obj.getTask());
+					sb.append("]。");
+					
+					timePlanService.saveOrUpdateTimePlan(timePlan, 1, sb.toString(), obj.getId());
+				}
+			}
 		}
 		
 		if(chkSMS != null && chkSMS.equals("true"))
