@@ -402,35 +402,46 @@ public class TimePlanAction extends BaseActionSupport{
 		try{
 			if(timePlan!=null && userId!=null &&  !userId.trim().equals("")){
 				//保存
-				if(timePlan.getId()==null || timePlan.getDeptId().trim().equals("")){
+				if(timePlan.getId()==null || timePlan.getId().trim().equals("")){
 					User user = userService.getUserById(userId);
 					String companyId = user.getCompanyId();
 					String deptId = user.getDeptId();
-					String deptName = user.getDept().getDeptName();
-					
+					deptList = deptService.queryAllDeptmentsByCompanyId( companyId );
+					for(Deptment dept : deptList){
+						if(dept.getId().equals(deptId)){
+							timePlan.setDeptName(dept.getDeptName());
+							break;
+						}
+					}
 					timePlan.setId(null);
 					timePlan.setOrganId(companyId);
 					timePlan.setDeptId(deptId);
-					timePlan.setDeptName(deptName);
 					timePlan.setEmployeeId(userId);
+					timePlan.setEmployeeName(user.getUserCName());
 					timePlan.setPersonId(userId);
 					timePlan.setPlanType("0");//默认为日报
 					timePlan.setCreateTime(Calendar.getInstance());
 					timePlanService.saveOrUpdateTimePlan(timePlan);
-				}else if(timePlan.getId()!=null && !timePlan.getDeptId().trim().equals("")) {
+				}else if(timePlan.getId()!=null && !timePlan.getId().trim().equals("")) {
 					//修改
 					TimePlan temp = timePlanService.getTimePlanById(timePlan.getId());
-					temp.setPlanContent(timePlan.getPlanContent());
-					temp.setSubmitTime(timePlan.getSubmitTime());
-					temp.setMemo(timePlan.getMemo());
-					timePlanService.saveOrUpdateTimePlan(temp);
+					if(temp!=null){
+						temp.setPlanContent(timePlan.getPlanContent());
+						temp.setSubmitTime(timePlan.getSubmitTime());
+						temp.setMemo(timePlan.getMemo());
+						timePlanService.saveOrUpdateTimePlan(temp);
+					}else{
+						map.put("status", "failure");
+					}
 				}
 				map.put("status", "success");
 			}
 		}catch(Exception e){
 			map.put("status", "failure");
-			e.printStackTrace();
+			//e.printStackTrace();
 		}
+		HttpServletRequest request = ServletActionContext.getRequest();
+		request.setAttribute("map", map);
 		return COMMON_MAP;
 	}
 	
