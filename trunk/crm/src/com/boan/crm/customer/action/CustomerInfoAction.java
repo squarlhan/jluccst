@@ -520,10 +520,21 @@ public class CustomerInfoAction extends BaseActionSupport{
 				String status = "";
 				if(traceInfo.getTraceFlag().equals( "1" ))
 				{
-					status = "2";
+					status = "4";
 				}else
 				{
-					status = "1";
+					Calendar now = Calendar.getInstance();
+					if(traceInfo.getTraceTime().get(Calendar.YEAR) == now.get(Calendar.YEAR) && traceInfo.getTraceTime().get(Calendar.MONTH) == now.get(Calendar.MONTH) && traceInfo.getTraceTime().get(Calendar.DATE) == now.get(Calendar.DATE))
+					{
+						status = "1";
+					}else if(traceInfo.getTraceTime().after(Calendar.getInstance()))
+					{
+						status = "2";
+					}
+					else if(traceInfo.getTraceTime().before(Calendar.getInstance()))
+					{
+						status = "3";
+					}
 				}
 				TaskInfoForJson obj = new TaskInfoForJson(traceInfo.getId(),"1",status,traceInfo.getCustomerName(),traceInfo.getPerson().getPersonName(),traceInfo.getTel(),traceInfo.getTraceTimeStr());
 				list.add(obj);
