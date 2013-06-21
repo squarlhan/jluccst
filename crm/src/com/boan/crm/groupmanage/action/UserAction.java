@@ -450,7 +450,7 @@ public class UserAction extends BaseActionSupport {
 				map.put("ch_name", user.getUserCName());
 				map.put("birth_day", user.getBirthday());
 				map.put("birth_type", user.getLunarSolarFlag() + "");
-				map.put("hone", user.getOfficePhone() + "");
+				map.put("phone", user.getOfficePhone() + "");
 				map.put("mobile", user.getPhone() + "");
 				map.put("email", user.getEmail());
 				map.put("position", user.getRoleName() + "");
