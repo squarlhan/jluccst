@@ -39,6 +39,8 @@ import com.boan.crm.sms.model.SMSCustomerInfo;
 import com.boan.crm.sms.model.SMSInfo;
 import com.boan.crm.sms.service.ISMSCustomerInfoService;
 import com.boan.crm.sms.service.ISMSInfoService;
+import com.boan.crm.timemanage.model.TimePlan;
+import com.boan.crm.timemanage.service.ITimePlanService;
 import com.boan.crm.utils.action.BaseActionSupport;
 import com.boan.crm.utils.calendar.CalendarUtils;
 import com.boan.crm.utils.page.Pagination;
@@ -86,6 +88,9 @@ public class CustomerVisitInfoAction extends BaseActionSupport{
 	@Autowired
 	@Qualifier("actionPlanService")
 	private IActionPlanService actionPlanService = null;
+	@Autowired
+	@Qualifier("timePlanService")
+	private ITimePlanService timePlanService = null;
 	@Autowired
 	@Qualifier("popedomService")
 	private IPopedomService popedomService = null;
@@ -548,15 +553,15 @@ public class CustomerVisitInfoAction extends BaseActionSupport{
 		
 		if(inserFLag)
 		{
-			ActionPlan timePlan = new ActionPlan();
-			timePlan.setDeptId(sessionDeptId);
-			timePlan.setCreateTime(Calendar.getInstance());
-			timePlan.setDeptName(sessionDeptName);
-			timePlan.setEmployeeId(obj.getSalesmanId());
-			timePlan.setEmployeeName(obj.getSalesman());
-			timePlan.setOrganId(sessionCompanyId);
-			timePlan.setPersonId(obj.getSalesmanId());
-			timePlan.setPlanType("4");
+			ActionPlan actionPlan = new ActionPlan();
+			actionPlan.setDeptId(sessionDeptId);
+			actionPlan.setCreateTime(Calendar.getInstance());
+			actionPlan.setDeptName(sessionDeptName);
+			actionPlan.setEmployeeId(obj.getSalesmanId());
+			actionPlan.setEmployeeName(obj.getSalesman());
+			actionPlan.setOrganId(sessionCompanyId);
+			actionPlan.setPersonId(obj.getSalesmanId());
+			actionPlan.setPlanType("4");
 			StringBuilder sb = new StringBuilder();
 			sb.append("回访计划：");
 			sb.append(CalendarUtils.toLongStringNoSecond(obj.getVisitTime()));
@@ -566,10 +571,54 @@ public class CustomerVisitInfoAction extends BaseActionSupport{
 			sb.append(",回访任务：[");
 			sb.append(obj.getTask());
 			sb.append("]。");
-			timePlan.setPlanContent(sb.toString());
-			timePlan.setSubmitTime(Calendar.getInstance());
+			actionPlan.setPlanContent(sb.toString());
+			actionPlan.setSubmitTime(Calendar.getInstance());
 			
-			actionPlanService.saveOrUpdateActionPlan(timePlan);
+			actionPlanService.saveOrUpdateActionPlan(actionPlan);
+			
+			TimePlan timePlan = new TimePlan();
+			timePlan.setCreateTime(Calendar.getInstance());
+			timePlan.setDeptId(sessionDeptId);
+			timePlan.setDeptName(sessionDeptName);
+			timePlan.setEmployeeId(sessionUserId);
+			timePlan.setEmployeeName(sessionUserCName);
+			timePlan.setPersonId(sessionUserId);
+			timePlan.setOrganId(sessionCompanyId);
+			timePlan.setPlanType("0");
+			
+			timePlanService.saveOrUpdateTimePlan(timePlan, 0, sb.toString(), obj.getId());
+			
+			
+		}else
+		{
+			if (visitFlag != null && visitFlag.equals("1"))
+			{
+				
+				if(!timePlanService.hasTimePlanForTrackOrVisit(obj.getId()))
+				{
+					TimePlan timePlan = new TimePlan();
+					timePlan.setCreateTime(Calendar.getInstance());
+					timePlan.setDeptId(sessionDeptId);
+					timePlan.setDeptName(sessionDeptName);
+					timePlan.setEmployeeId(sessionUserId);
+					timePlan.setEmployeeName(sessionUserCName);
+					timePlan.setPersonId(sessionUserId);
+					timePlan.setOrganId(sessionCompanyId);
+					timePlan.setPlanType("0");
+					
+					StringBuilder sb = new StringBuilder();
+					sb.append("回访完成：");
+					sb.append(CalendarUtils.toLongStringNoSecond(obj.getVisitTime()));
+					sb.append(",对客户[");
+					sb.append(obj.getCustomerName());
+					sb.append("]进行["+dataDictionaryService.get(obj.getVisitOption()).getName()+"]方式跟进");
+					sb.append(",回访任务：[");
+					sb.append(obj.getTask());
+					sb.append("]。");
+					
+					timePlanService.saveOrUpdateTimePlan(timePlan, 1, sb.toString(), obj.getId());
+				}
+			}
 		}
 		
 		if(chkSMS != null && chkSMS.equals("true"))
