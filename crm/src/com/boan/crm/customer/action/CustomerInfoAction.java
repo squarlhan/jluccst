@@ -530,8 +530,7 @@ public class CustomerInfoAction extends BaseActionSupport{
 					}else if(traceInfo.getTraceTime().after(Calendar.getInstance()))
 					{
 						status = "2";
-					}
-					else if(traceInfo.getTraceTime().before(Calendar.getInstance()))
+					}else if(traceInfo.getTraceTime().before(Calendar.getInstance()))
 					{
 						status = "3";
 					}
@@ -566,8 +565,6 @@ public class CustomerInfoAction extends BaseActionSupport{
 				list.add(obj);
 			}
 		}
-		
-		
 		HttpServletRequest request = ServletActionContext.getRequest();
 		request.setAttribute("list", list);
 		request.setAttribute("jsonRootName", "task");
