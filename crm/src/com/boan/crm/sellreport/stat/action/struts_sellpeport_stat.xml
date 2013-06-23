@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+    "http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<!--  销售统计Action -->
+	<package name="sell_report_stat" extends="struts-default" namespace="/">
+		<action name="showGroupTreeForSellTargetStatAction" class="sellReportStatAction"  method="showGroupTreeForSellTargetStat">
+			<result name="group-tree-for-sell-target-stat">/sellreport/stat/group-tree-for-sell-target-stat.jsp</result>
+		</action>
+		<action name="showGroupTreeForSalesPerformanceRankStatAction" class="sellReportStatAction"  method="showGroupTreeForSalesPerformanceRankStat">
+			<result name="group-tree-for-sell-target-stat">/sellreport/stat/group-tree-for-sales-performance-stat.jsp</result>
+		</action>
+		<action name="showGroupTreeForSellTrendStatAction" class="sellReportStatAction"  method="showGroupTreeForSellTrendStat">
+			<result name="group-tree-for-sell-trend-stat">/sellreport/stat/group-tree-for-sell-trend-stat.jsp</result>
+		</action>
+		<action name="openSellReportStatTargetAction" class="sellReportStatAction" method="openSellReportStatTarget">
+			<result name="success">/sellreport/stat/sell-report-target-stat.jsp</result>
+			<result name="success">/sellreport/stat/sell-report-target-stat.jsp</result>
+		</action>
+		
+		<action name="getStatDataForTargetAction" class="sellReportStatAction"  method="getStatDataForTarget">
+        	<param name="caption">统计图描述</param>
+            <result name="success"  type="stream">
+				<param name="contentType">application/xml;charset=UTF-8</param>
+				<param name="inputName">xmlStream</param>
+			</result>
+        </action>
+        
+        <action name="openSellSalesPerformanceRankAction" class="sellReportStatAction" method="openSellSalesPerformanceRank">
+			<result name="success">/sellreport/stat/sell-report-sales-performance-rank-stat.jsp</result>
+			<result name="input">/sellreport/stat/sell-report-sales-performance-rank-stat.jsp</result>
+		</action>
+		
+        <action name="openSellTrendAction" class="sellReportStatAction" method="openSellTrend">
+			<result name="success">/sellreport/stat/sell-report-trend-stat.jsp</result>
+			<result name="input">/sellreport/stat/sell-report-trend-stat.jsp</result>
+		</action>
+		<action name="getStatDataForSellTrendAction" class="sellReportStatAction"  method="getStatDataForSellTrend">
+        	<param name="caption">统计图描述</param>
+            <result name="success"  type="stream">
+				<param name="contentType">application/xml;charset=UTF-8</param>
+				<param name="inputName">xmlStream</param>
+			</result>
+        </action>
+	</package>
+</struts>

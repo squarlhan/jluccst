@@ -88,6 +88,8 @@ public class MonthlyItemInfoServiceImpl implements IMonthlyItemInfoService{
 		return monthlyItemInfoDao.find(hql, param);
 	}
 	
+	
+	
 	/**
 	 *查询最近月计划项信息
 	 * @param 

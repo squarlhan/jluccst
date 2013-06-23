@@ -1,5 +1,8 @@
 package com.boan.crm.sellreport.monthly.service.impl;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -11,7 +14,6 @@ import com.boan.crm.sellreport.monthly.dao.IMonthlyItemInfoDao;
 import com.boan.crm.sellreport.monthly.dao.IMonthlyMainInfoDao;
 import com.boan.crm.sellreport.monthly.model.MonthlyMainInfo;
 import com.boan.crm.sellreport.monthly.service.IMonthlyMainInfoService;
-import com.boan.crm.sellreport.weekly.model.WeeklyMainInfo;
 import com.boan.crm.utils.page.Pagination;
 
 @Service("monthlyMainInfoService")
@@ -40,6 +42,53 @@ public class MonthlyMainInfoServiceImpl implements IMonthlyMainInfoService{
 	 */
 	public MonthlyMainInfo getMonthlyMainInfoById(String id){
 		return monthlyMainInfoDao.get(id);
+	}
+	
+	/**
+	 * 查询指定年、月的最后填写的月计划信息
+	 * @param companyId 所属单位
+	 * @param deptId 所属部门
+	 * @param personId 计划填写人
+	 * @param year 年份
+	 * @param month 月份
+	 * @return
+	 */
+	public MonthlyMainInfo getMonthlyMainInfoByMonth(String companyId, String deptId,String personId ,  int year , int month){
+		String beginDate;
+		String endDate;
+		Calendar monthBegin = Calendar.getInstance();
+		Calendar monthkEnd = Calendar.getInstance();
+		
+		monthBegin.set(Calendar.YEAR, year);
+		monthBegin.set(Calendar.MONTH, month-1);
+		monthBegin.set(Calendar.DAY_OF_MONTH, monthBegin.getMinimum(Calendar.DATE));
+		beginDate = new SimpleDateFormat("yyyy-MM-dd").format(monthBegin.getTime());
+		
+		
+		monthkEnd.set(Calendar.YEAR, year);
+		monthkEnd.set(Calendar.MONTH, month-1);
+		monthkEnd.set(Calendar.DAY_OF_MONTH, 1);
+		int value = monthkEnd.getActualMaximum(Calendar.DAY_OF_MONTH);
+		monthkEnd.set(Calendar.DAY_OF_MONTH, value);
+		endDate= new SimpleDateFormat("yyyy-MM-dd").format(monthkEnd.getTime());
+		String str="";
+		String hql = "from MonthlyMainInfo where 1=1 ";
+		Map param = new HashMap();
+		if(companyId!=null && !companyId.equals("")){
+			param.put("companyId", companyId);
+			str = str + " and companyId=:companyId " ;
+		}
+		if(deptId!=null && !deptId.equals("")){
+			param.put("deptId", deptId);
+			str = str + " and deptId=:deptId " ;
+		}
+		if(personId!=null && !personId.equals("")){
+			param.put("personId", personId);
+			str = str + " and personId=:personId " ;
+		}
+		hql =  hql +str+" and  planInterzoneBegin >='"+beginDate+"'  and planInterzoneBegin <='"+endDate+"'  order by createTime desc";
+		List<MonthlyMainInfo> data = monthlyItemInfoDao.find(hql, param);
+		return (data!=null &&  data.size()>0) ? data.get(0) : null;
 	}
 	
 	/**
