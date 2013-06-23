@@ -34,7 +34,8 @@ infosoftglobal.FusionCharts = function(swf, id, w, h, debugMode, registerWithJS,
 	h=h.toString().replace(/\%$/,"%25");
 	if(h) { this.setAttribute('height', h); }
 
-	
+	this.addParam("wmode","opaque");
+	 
 	//Set background color
 	if(c) { this.addParam('bgcolor', c); }
 	
