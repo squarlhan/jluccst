@@ -585,7 +585,7 @@ public class CustomerVisitInfoAction extends BaseActionSupport{
 			timePlan.setPersonId(sessionUserId);
 			timePlan.setOrganId(sessionCompanyId);
 			timePlan.setPlanType("0");
-			
+			timePlan.setSubmitTime(Calendar.getInstance());
 			timePlanService.saveOrUpdateTimePlan(timePlan, 0, sb.toString(), obj.getId());
 			
 			
@@ -605,7 +605,7 @@ public class CustomerVisitInfoAction extends BaseActionSupport{
 					timePlan.setPersonId(sessionUserId);
 					timePlan.setOrganId(sessionCompanyId);
 					timePlan.setPlanType("0");
-					
+					timePlan.setSubmitTime(Calendar.getInstance());
 					StringBuilder sb = new StringBuilder();
 					sb.append("回访完成：");
 					sb.append(CalendarUtils.toLongStringNoSecond(obj.getVisitTime()));
