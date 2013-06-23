@@ -370,15 +370,16 @@ public class TimePlanAction extends BaseActionSupport{
 				{
 					TimePlanForJson obj = new TimePlanForJson();
 					//0:'日报',1:'周报',2:'月报'
-					if(listTimePlan.get(i).getPlanType().equals("0")){
-						obj.setType("日报");
-					}
-					if(listTimePlan.get(i).getPlanType().equals("1")){
-						obj.setType("周报");
-					}
-					if(listTimePlan.get(i).getPlanType().equals("2")){
-						obj.setType("月报");
-					}
+//					if(listTimePlan.get(i).getPlanType().equals("0")){
+//						obj.setType("日报");
+//					}
+//					if(listTimePlan.get(i).getPlanType().equals("1")){
+//						obj.setType("周报");
+//					}
+//					if(listTimePlan.get(i).getPlanType().equals("2")){
+//						obj.setType("月报");
+//					}
+					obj.setType("2");
 					obj.setDate(CalendarUtils.toLongStringNoSecond(listTimePlan.get(i).getSubmitTime()));
 					obj.setSummary(listTimePlan.get(i).getMemo());
 					obj.setPlan(listTimePlan.get(i).getPlanContent());
