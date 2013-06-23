@@ -112,5 +112,27 @@ public interface ISellRecordService {
 	 * @return
 	 */
 	public int getSellTotalAmount( String companyId, String productId );
+	
+	/**
+	 *  获指定公司指定时间段查询某部门某人的实收销售总额
+	 * @param companyId 公司id
+	 * @param deptId 销售人员部门id
+	 * @param salesmanId  销售人员id
+	 * @param beginDate  查询开始时间
+	 * @param endDate 查询结束时间
+	 * @return 实收总金额
+	 */
+	public  BigDecimal getSalesmanRealCollectionByBargainTime(String companyId,String deptId ,String salesmanId , Calendar beginDate,Calendar endDate);
+	
+	/**
+	 *  获指定公司指定时间段查询某部门某人的实收销售总额和时间
+	 * @param companyId 公司id
+	 * @param deptId 销售人员部门id
+	 * @param salesmanId  销售人员id
+	 * @param beginDate  查询开始时间
+	 * @param endDate 查询结束时间
+	 * @return 实收总金额
+	 */
+	public  List getSalesmanRealCollectionAndTimeByBargainTime(String companyId,String deptId ,String salesmanId , Calendar beginDate,Calendar endDate);
 
 }

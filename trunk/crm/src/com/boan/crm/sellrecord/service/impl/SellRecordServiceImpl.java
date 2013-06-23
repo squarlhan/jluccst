@@ -1,6 +1,7 @@
 package com.boan.crm.sellrecord.service.impl;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -348,5 +349,117 @@ public class SellRecordServiceImpl implements ISellRecordService {
 	 */
 	public int getSellTotalAmount( String companyId, String productId ){
 		return goodsInfoService.getGoodsNumberByProductIdAndCompanyId(companyId,productId);
+	}
+
+	/**
+	 *  获指定公司指定时间段查询某部门某人的实收销售总额
+	 * @param companyId 公司id
+	 * @param deptId 销售人员部门id
+	 * @param salesmanId  销售人员id
+	 * @param beginDate  查询开始时间
+	 * @param endDate 查询结束时间
+	 * @return 实收总金额
+	 */
+	public  BigDecimal getSalesmanRealCollectionByBargainTime(String companyId,String deptId ,String salesmanId , Calendar beginDate,Calendar endDate){
+		try {
+			String hql = " select sum(record.realCollection) from SellRecord as record where record.companyId=:companyId ";
+			if (deptId != null && !deptId.equals("")) {
+				hql = hql + " and record.deptId =:deptId";
+			}
+			if (beginDate != null && !beginDate.equals("")) {
+				hql = hql + " and record.bargainTime >=:beginDate";
+			}
+			if (endDate != null && !endDate.equals("")) {
+				hql = hql + " and record.bargainTime <=:endDate ";
+			}
+			if (salesmanId != null && !salesmanId.equals("")) {
+				hql = hql + " and record.salesmanId =:salesmanId";
+			}
+			if(salesmanId==null || salesmanId.equals("")){
+				hql = hql + " group by record.deptId";
+			}else{
+				hql = hql + " group by record.salesmanId";
+			}
+			
+			Map param = new HashMap();
+			param.put("companyId", companyId);
+			if (deptId != null && !deptId.equals("")) {
+				param.put("deptId", deptId);
+			}
+			if (salesmanId != null && !salesmanId.equals("")) {
+				param.put("salesmanId", salesmanId);
+			}
+			param.put("beginDate", beginDate);
+			param.put("endDate", endDate);
+			List list = sellRecordDao.find(hql, param);
+			return (list != null && list.size() > 0 && list.get(0) != null) ? new BigDecimal( list.get(0).toString()) : new BigDecimal(0);
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	/**
+	 *  获指定公司指定时间段查询某部门某人的实收销售总额和时间
+	 * @param companyId 公司id
+	 * @param deptId 销售人员部门id
+	 * @param salesmanId  销售人员id
+	 * @param beginDate  查询开始时间
+	 * @param endDate 查询结束时间
+	 * @return 实收总金额
+	 */
+	public  List getSalesmanRealCollectionAndTimeByBargainTime(String companyId,String deptId ,String salesmanId , Calendar beginDate,Calendar endDate){
+		try {
+			String hql = " select record.bargainTime , sum(record.realCollection) from SellRecord as record where record.companyId=:companyId ";
+			if (deptId != null && !deptId.equals("")) {
+				hql = hql + " and record.deptId =:deptId";
+			}
+			if (beginDate != null && !beginDate.equals("")) {
+				hql = hql + " and record.bargainTime >=:beginDate";
+			}
+			if (endDate != null && !endDate.equals("")) {
+				hql = hql + " and record.bargainTime <=:endDate ";
+			}
+			if (salesmanId != null && !salesmanId.equals("")) {
+				hql = hql + " and record.salesmanId =:salesmanId";
+			}
+			if(salesmanId==null || salesmanId.equals("")){
+				hql = hql + " group by record.bargainTime";
+			}else{
+				hql = hql + " group by record.bargainTime";
+			}
+			hql = hql + " order by record.bargainTime";
+			
+			Map param = new HashMap();
+			param.put("companyId", companyId);
+			if (deptId != null && !deptId.equals("")) {
+				param.put("deptId", deptId);
+			}
+			if (salesmanId != null && !salesmanId.equals("")) {
+				param.put("salesmanId", salesmanId);
+			}
+			param.put("beginDate", beginDate);
+			param.put("endDate", endDate);
+			List list = sellRecordDao.find(hql, param);
+			
+			List tempList = new ArrayList();
+			if(list!=null && list.size()>0){
+				for(int i=0;i<list.size();i++){
+					Map map = new HashMap();
+					Object[] columns = (Object[])list.get(i);
+					if(columns[1]==null){
+						map.put(columns[0], new BigDecimal(0));
+					}else{
+						map.put(columns[0], columns[1]);
+					}
+					tempList.add(map);
+				}
+			}
+			
+			return tempList;
+		} catch (Exception e) {
+			e.printStackTrace();
+			return null;
+		}
 	}
 }
