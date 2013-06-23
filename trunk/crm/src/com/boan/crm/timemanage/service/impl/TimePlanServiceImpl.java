@@ -196,13 +196,19 @@ public class TimePlanServiceImpl implements ITimePlanService {
 		if(flag==1){
 			timePlan.setMemo(info);
 		}
-		timePlanDao.saveOrUpdate(timePlan );
+		
 		TimePlanAndTrackOrVisitRelation relation = new TimePlanAndTrackOrVisitRelation();
 		relation.setTime_Planand(timePlan.getId());
 		relation.setTrackOrVisitId(trackOrVisitId);
+		
 		if(!hasTimePlanForTrackOrVisit(trackOrVisitId)){
 			timePlanAndTrackOrVisitRelationDao.save(relation);
+		}else{
+			TimePlanAndTrackOrVisitRelation temp = this.getTimePlanForTrackOrVisit(trackOrVisitId);
+			String timePlanId= temp.getTime_Planand();
+			timePlan.setId(timePlanId);
 		}
+		timePlanDao.saveOrUpdate(timePlan );
 	}
 	
 	/**
@@ -219,6 +225,22 @@ public class TimePlanServiceImpl implements ITimePlanService {
 			return true;
 		}else{
 			return false;
+		}
+	}
+	/**
+	 * 根据跟踪或回访Id查询是否有对应的时间计划信息
+	 * @param trackOrVisitId
+	 * @return
+	 */
+	public TimePlanAndTrackOrVisitRelation getTimePlanForTrackOrVisit(String trackOrVisitId){
+		String hql = "from TimePlanAndTrackOrVisitRelation where  trackOrVisitId=:trackOrVisitId";
+		Map param = new HashMap();
+		param.put("trackOrVisitId", trackOrVisitId);
+		List list = timePlanAndTrackOrVisitRelationDao.find(hql,param );
+		if(list!=null && list.size()>0){
+			return (TimePlanAndTrackOrVisitRelation)list.get(0);
+		}else{
+			return null;
 		}
 	}
 }
