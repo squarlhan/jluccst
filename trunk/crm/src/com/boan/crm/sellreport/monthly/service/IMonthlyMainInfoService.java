@@ -46,4 +46,15 @@ public interface IMonthlyMainInfoService {
 	 * @return
 	 */
 	public MonthlyMainInfo getLastMonthlyMainInfo(Map<String, ?> params);
+	
+	/**
+	 * 查询指定年、月的最后填写的月计划信息
+	 * @param companyId 所属单位
+	 * @param deptId 所属部门
+	 * @param personId 计划填写人
+	 * @param year 年份
+	 * @param month 月份
+	 * @return
+	 */
+	public MonthlyMainInfo getMonthlyMainInfoByMonth(String companyId, String deptId,String personId ,  int year , int month);
 }
