@@ -75,6 +75,8 @@
 	<include file="com/boan/crm/sellreport/weekly/action/struts_weekly_main.xml"></include>
 	<!--销售周计划子信息-->
 	<include file="com/boan/crm/sellreport/weekly/action/struts_weekly_item.xml"></include>
+	<!--销售统计信息-->
+	<include file="com/boan/crm/sellreport/stat/action/struts_sellpeport_stat.xml"></include>
 	<!--产品类别-->
 	<include file="com/boan/crm/goods/action/struts_goodstype.xml"></include>
 	<!--产品信息-->
