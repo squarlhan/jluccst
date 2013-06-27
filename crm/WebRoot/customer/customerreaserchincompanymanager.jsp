@@ -93,7 +93,12 @@
 	  		$('a[name="setImportant"]').each(function(){
 	  			$(this).click(function(){
 	  				var url = $(this).attr("url");
-	  				if(window.confirm("您确定要将这条信息标为重要客户吗？")){
+	  				var flag = $(this).attr("flag");
+	  				var msg = "您确定要将这条信息标为重要客户吗？";
+	  				if(flag==1){
+	  					msg = "您确定要将这条信息标为普通客户吗？";
+	  				}
+	  				if(window.confirm(msg)){
 	  					//$.post(url, "", function(data){window.location.href=window.location.href;});
 	  					$("#form1").attr("action",url);
 	  					$("#form1").submit();
@@ -239,8 +244,14 @@
 				</s:url>
 				<s:url id="setImportant_url" action="toSetImportantAction.action">   
 					<s:param name="customerLibInfo.id" value="id"></s:param>   
+					<s:param name="isCommonly" value="importantFlag"></s:param>
 				</s:url>
-	         	<a name="setImportant" href="javascript:void(0);" url="${setImportant_url}"><strong>标为重要客户</strong></a>  
+				<s:if test="importantFlag==1">
+					<a name="setImportant" href="javascript:void(0);" url="${setImportant_url}" flag="${importantFlag}"><strong>标为普通客户</strong></a>  
+				</s:if>
+				<s:else>
+		         	<a name="setImportant" href="javascript:void(0);" url="${setImportant_url}" flag="${importantFlag}"><strong>标为重要客户</strong></a>  
+				 </s:else>
 	         	<a name="assignSeller" href="javascript:void(0);" url="${assignSeller_url}"><font color="blue"><strong>分配业务员</strong></font></a>
 	          </td>
         </tr>
