@@ -128,6 +128,11 @@ public class CustomerSearchAction  extends BaseActionSupport{
 	 */
 	private String uploadFileFileName = null;
 	
+	/**
+	 * 是否设为普通用户标记( 0 :当前是普通用户  1 ：当前是重要客户)
+	 */
+	private int isCommonly=0;
+	
 	public List<ProvinceInfo> getProvinceList() {
 		return provinceList;
 	}
@@ -491,7 +496,11 @@ public class CustomerSearchAction  extends BaseActionSupport{
 	 * @return
 	 */
 	public String toSetImportant(){
-		customerInfoService.updateImportantFlag(customerLibInfo.getId(),1);
+		if(isCommonly==0){
+			customerInfoService.updateImportantFlag(customerLibInfo.getId(),1);
+		}else{
+			customerInfoService.updateImportantFlag(customerLibInfo.getId(),0);
+		}
 		return customerSearchForCompanyManager();
 	}
 	/**
@@ -1126,5 +1135,19 @@ public class CustomerSearchAction  extends BaseActionSupport{
 
 	public void setSelectedSellerIds(String[] selectedSellerIds) {
 		this.selectedSellerIds = selectedSellerIds;
+	}
+
+	/**
+	 * @return the isCommonly
+	 */
+	public int getIsCommonly() {
+		return isCommonly;
+	}
+
+	/**
+	 * @param isCommonly the isCommonly to set
+	 */
+	public void setIsCommonly(int isCommonly) {
+		this.isCommonly = isCommonly;
 	}
 }
