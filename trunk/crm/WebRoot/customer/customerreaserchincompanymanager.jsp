@@ -196,9 +196,11 @@
 		</fieldset>
       <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#d5e4fd" style="margin-top:5px;">
         <tr>
-         <td align="center" background="<%=basePath%>/images/headerbg.jpg">  
+      		<!-- 
+         	<td align="center" background="<%=basePath%>/images/headerbg.jpg">  
    				<s:checkbox theme="simple" id="cbk_all" name="all"></s:checkbox>
    			</td>
+   			 -->
               <td align="center" background="<%=basePath%>/images/headerbg.jpg" nowrap="nowrap"><strong>客户名称</strong></td>
               <td align="center" style="height: 26px; background-image:url('<%=basePath%>/images/headerbg.jpg')" nowrap="nowrap">主营行业</td>
               <td align="center" style="height: 26px; background-image:url('<%=basePath%>/images/headerbg.jpg')" nowrap="nowrap">联系人</td>
@@ -210,9 +212,11 @@
         </tr>
         <s:iterator value="pagination.data" status="obj">
         <tr>
-        <td height="26" align="center" bgcolor="#FFFFFF" >  
+        	<!-- 
+        	<td height="26" align="center" bgcolor="#FFFFFF" >  
 				<s:checkbox id="%{#obj.id}" name="ids" fieldValue="%{id}" value="false" theme="simple"/>
 			</td>
+			 -->
             <td height="26" align="left" bgcolor="#FFFFFF"><s:property value="customerName"/></td>
             <td height="26" align="center" bgcolor="#FFFFFF">
 				<s:property value="mainIndustry"/>
