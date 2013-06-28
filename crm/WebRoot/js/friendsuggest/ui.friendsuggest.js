@@ -289,7 +289,7 @@ if(typeof giant.ui === 'undefined') giant.ui = {};
                 	msg = $this.ajaxFriendsCountOperate(msg);
                     var myData = eval(msg);
                     if(!window.isNaN(myData)){
-                        $this.totalPage = Math.ceil(myData/5.0);
+                        $this.totalPage = Math.ceil(myData/50.0);
                     }
                     if($.isFunction(callBack)){
                         callBack.call($this);
