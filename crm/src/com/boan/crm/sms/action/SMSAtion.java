@@ -263,8 +263,7 @@ public class SMSAtion extends BaseActionSupport{
 				params.put("categoryId", "1");
 				customersTypeJsonStr="[{name:'客户',id:'1'}]";
 			}
-			
-			List<SMSCustomerInfo> list = bookerService.findSMSCustomerInfoForPage(params,Integer.parseInt(p)-1,Integer.parseInt(pageSize));
+			List<SMSCustomerInfo> list = bookerService.findSMSCustomerInfoForPage(params,(Integer.parseInt(p)-1 )*Integer.parseInt(pageSize),Integer.parseInt(pageSize));
 			customersJsonStr= "[";
 			for(SMSCustomerInfo person : list){
 				//1为客户 2为销售人员

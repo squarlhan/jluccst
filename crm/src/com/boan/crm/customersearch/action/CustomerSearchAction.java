@@ -275,12 +275,13 @@ public class CustomerSearchAction  extends BaseActionSupport{
 					wb = WorkbookFactory.create( is );
 					is.close();
 					sheet = wb.getSheetAt( 0 );
+					
 					int totalRecord = ( sheet.getLastRowNum() + 1 ) - 1;
 					if( totalRecord == 0 )
 					{
 					}else
 					{
-						for( int i = 1; i < totalRecord + 1; i++ )
+						for( int i = 1; i < totalRecord ; i++ )
 						{
 							Row row = sheet.getRow( i );
 							try
@@ -372,15 +373,15 @@ public class CustomerSearchAction  extends BaseActionSupport{
 									boolean bProvinceFlag = false;
 									boolean bCityFlag = false;
 									boolean bAreaFlag = false;
-									String tempProvinceId = provinceId;
-									String tempCityId = cityId;
-									for(int kk=0;kk<customerAddressArray.length - 1;kk++)
+									String tempProvinceId = "";
+									String tempCityId = "";
+									for(int kk=0;kk<customerAddressArray.length ;kk++)
 									{
-										if(!customerAddressArray[kk].equals("中国"))
+										if(customerAddressArray[0].trim().equals("中国"))
 										{
 											if(!bProvinceFlag)
 											{
-												ProvinceInfo province = areaService.getProvinceByName(customerAddressArray[kk]);
+												ProvinceInfo province = areaService.getProvinceByName(customerAddressArray[kk].trim());
 												if(province != null)
 												{
 													customer.setProvince(province.getId());
@@ -389,11 +390,11 @@ public class CustomerSearchAction  extends BaseActionSupport{
 													continue;
 												}
 											}
-											if(cityId == null || cityId.length() == 0)
+											if(!bCityFlag)
 											{
-												if(!bCityFlag)
+												if(!tempProvinceId .equals(""))
 												{
-													CityInfo city = areaService.getCityByNameAndProvinceId(customerAddressArray[kk],tempProvinceId);
+													CityInfo city = areaService.getCityByNameAndProvinceId(customerAddressArray[kk].trim(),tempProvinceId);
 													if(city != null)
 													{
 														customer.setCity(city.getId());
@@ -424,22 +425,20 @@ public class CustomerSearchAction  extends BaseActionSupport{
 											}
 										}
 									}
-									ProvinceInfo province = areaService.getProvince(tempProvinceId);
-									if(province!=null){
-										customerInfoService.save(customer);
-										ContractPersonLibInfo contractPerson = new ContractPersonLibInfo();
-										contractPerson.setCustomerId(customer.getId());
-										contractPerson.setPersonName(customerContractPersonName);
-										contractPerson.setTel(customerTel);
-										contractPerson.setPhone(customerPhone);
-										contractPerson.setDeptOrDuty(customerContractDept);
-										contractPerson.setEmail(customerEmail);
-										contractpersonService.save(contractPerson);
-									}
+									customerInfoService.save(customer);
+									ContractPersonLibInfo contractPerson = new ContractPersonLibInfo();
+									contractPerson.setCustomerId(customer.getId());
+									contractPerson.setPersonName(customerContractPersonName);
+									contractPerson.setTel(customerTel);
+									contractPerson.setPhone(customerPhone);
+									contractPerson.setDeptOrDuty(customerContractDept);
+									contractPerson.setEmail(customerEmail);
+									contractpersonService.save(contractPerson);
 								}
 							}catch(Exception ex)
 							{
 								System.out.println("第"+ i +"行错误！" );
+								ex.printStackTrace();
 							}
 						}
 					}
@@ -496,10 +495,12 @@ public class CustomerSearchAction  extends BaseActionSupport{
 	 * @return
 	 */
 	public String toSetImportant(){
-		if(isCommonly==0){
-			customerInfoService.updateImportantFlag(customerLibInfo.getId(),1);
-		}else{
-			customerInfoService.updateImportantFlag(customerLibInfo.getId(),0);
+		if(customerLibInfo!=null && customerLibInfo.getId()!=null){
+			if(isCommonly==0){
+				customerInfoService.updateImportantFlag(customerLibInfo.getId(),1);
+			}else{
+				customerInfoService.updateImportantFlag(customerLibInfo.getId(),0);
+			}
 		}
 		return customerSearchForCompanyManager();
 	}
