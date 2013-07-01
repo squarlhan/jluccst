@@ -94,7 +94,7 @@ background-color:#d3eaef}
 		<s:if test="flag.equals('category')">
 			var xml = "<graph caption='客户分类信息统计' baseFontSize='16'　showNames='1' showValues='1' xAxisName='客户分类' yAxisMinValue='0' yAxisMaxValue='"+recordCount+"' yAxisName='客户个数' showLabels='1'  decimalPrecision='0'>";
 			<s:iterator value="listCategoryStatic" status="obj">
-				xml = xml + "<set label=\""+document.getElementById("category<s:property value="#obj.index"/>").textStr+"\" name=\""+document.getElementById("category<s:property value="#obj.index"/>").textStr+"\" value=\""+document.getElementById("category<s:property value="#obj.index"/>").valueStr+"\" />";
+				xml = xml + "<set label=\""+document.getElementById("category<s:property value="#obj.index"/>").textStr+"\" link=\"aaa.action\" name=\""+document.getElementById("category<s:property value="#obj.index"/>").textStr+"\" value=\""+document.getElementById("category<s:property value="#obj.index"/>").valueStr+"\" />";
 			</s:iterator>
 			xml = xml + "</graph>";
 			var chart = new FusionCharts("../js/FusionCharts/Charts/FCF_Column3D.swf", "chartdiv1", "500", "350");

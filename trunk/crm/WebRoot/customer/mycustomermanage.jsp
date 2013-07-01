@@ -21,6 +21,11 @@
 	response.setHeader("Expires", "0");
 	request.setCharacterEncoding("utf-8");
 	String path = request.getContextPath();
+	String progress=request.getParameter("progress");
+	if(progress == null)
+	{
+		progress = "";
+	}
 %>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -51,7 +56,7 @@
         </tr>
         <tr>
           <td valign="top" style="border-left:1px solid #54a4e3; border-bottom:1px solid #54a4e3; border-right:1px solid #54a4e3; padding:5px;"><iframe width="100%" height="100%"
-          	 id="groupmain" name="groupmain" frameborder="0" scrolling="auto" src="myCustomerList.action"></iframe></td>
+          	 id="groupmain" name="groupmain" frameborder="0" scrolling="auto" src="myCustomerList.action?customerProgress=<%=progress %>"></iframe></td>
         </tr>
     </table></td>
   </tr>
