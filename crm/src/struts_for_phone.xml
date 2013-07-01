@@ -32,6 +32,13 @@
 	<!-- 职员日报信息 -->
 	<package name="dailyinfoforphone" extends="phonejson">
 		<action name="getDailyInfoForPhoneAction" class="timePlanAction" method="getDailyInfoForPhone"></action>
+		<action name="getDeptDailyInfoForPhoneAction" class="timePlanAction" method="getDeptDailyInfoForPhone"></action>
 		<action name="saveOrUpdateTimePlanForPhoneAction" class="timePlanAction" method="saveOrUpdateTimePlanForPhone"></action>
+		<action name="getDailyInfoByIdForPhoneAction" class="timePlanAction" method="getDailyInfoByIdForPhone">
+			<result name="success">/common/show-string.jsp</result>
+			<result name="input">/common/show-string.jsp</result>
+		</action>
+		<action name="getSellerSellRecordListForPhoneAction" class="sellRecordAction" method="getSellerSellRecordListForPhone"></action>
+		
 	</package>
 </struts>
