@@ -12,6 +12,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
+import com.boan.crm.customer.analysis.model.AnalysisResult;
+import com.boan.crm.customer.analysis.service.IAnalysisResultService;
 import com.boan.crm.customer.dao.ICustomerStaticInfoDAO;
 import com.boan.crm.customer.model.BusinessProgressKey;
 import com.boan.crm.customer.model.CustomerStaticInfo;
@@ -31,6 +33,9 @@ public class CustomerStaticInfoServiceImpl implements ICustomerStaticInfoService
 	@Autowired
 	@Qualifier("dataDictionaryService")
 	private IDataDictionaryService dataDictionaryService;
+	@Autowired
+	@Qualifier("analysisResultService")
+	private IAnalysisResultService analysisResultService;
 	
 	@Override
 	public List<CustomerStaticInfo> findAllCustomerStaticInfo(String companyId,int key)
@@ -38,7 +43,7 @@ public class CustomerStaticInfoServiceImpl implements ICustomerStaticInfoService
 		List<CustomerStaticInfo> list = new ArrayList<CustomerStaticInfo>();
 		StringBuilder hql = new StringBuilder();
 		Map<String,String> values = new HashMap<String,String>();
-		if(key == CustomerStaticInfo.CUSTOMER_SOURCE || key == CustomerStaticInfo.CUSTOMER_CATEGORY || key == CustomerStaticInfo.CUSTOMER_MATURITY)
+		if(key == CustomerStaticInfo.CUSTOMER_SOURCE || key == CustomerStaticInfo.CUSTOMER_CATEGORY)
 		{
 			List<DataDictionary> listDic = dataDictionaryService.findDataDictionaryByType(companyId, key);
 			if(listDic != null && listDic.size() > 0)
@@ -79,6 +84,22 @@ public class CustomerStaticInfoServiceImpl implements ICustomerStaticInfoService
 					list.add(staticInfo);
 					
 				}
+			}
+		}else if(key == CustomerStaticInfo.CUSTOMER_MATURITY)
+		{
+			List<AnalysisResult> listResult = analysisResultService.findAllAnalysisResult(companyId);
+			for(int k=0;k<listResult.size();k++)
+			{
+				CustomerStaticInfo staticInfo = new CustomerStaticInfo();
+				staticInfo.setCategory(listResult.get(k).getResult());
+				staticInfo.setKey(key);
+				hql.delete(0, hql.length());
+				hql.append("select Count(id) from CustomerInfo where maturityId=:maturityId and companyId = :companyId");
+				values.put("maturityId", listResult.get(k).getResult());
+				values.put("companyId", companyId);
+				int count = customerStaticInfoDao.findCountForPage(hql.toString(), values);
+				staticInfo.setCount(count);
+				list.add(staticInfo);
 			}
 		}else if(key == CustomerStaticInfo.CUSTOMER_PROGRESS)
 		{
@@ -266,7 +287,7 @@ public class CustomerStaticInfoServiceImpl implements ICustomerStaticInfoService
 		{
 			deleteFlagStr = " and deleteFlag = 0";
 		}
-		if(key == CustomerStaticInfo.CUSTOMER_SOURCE || key == CustomerStaticInfo.CUSTOMER_CATEGORY || key == CustomerStaticInfo.CUSTOMER_MATURITY )
+		if(key == CustomerStaticInfo.CUSTOMER_SOURCE || key == CustomerStaticInfo.CUSTOMER_CATEGORY  )
 		{
 			List<DataDictionary> listDic = dataDictionaryService.findDataDictionaryByType(companyId, key);
 			if(listDic != null && listDic.size() > 0)
@@ -322,14 +343,54 @@ public class CustomerStaticInfoServiceImpl implements ICustomerStaticInfoService
 					
 				}
 			}
+		}else if(key == CustomerStaticInfo.CUSTOMER_MATURITY)
+		{
+			List<AnalysisResult> listResult = analysisResultService.findAllAnalysisResult(companyId);
+			for(int k=0;k<listResult.size();k++)
+			{
+				CustomerStaticInfo staticInfo = new CustomerStaticInfo();
+				staticInfo.setCategory(listResult.get(k).getResult());
+				staticInfo.setKey(key);
+				hql.delete(0, hql.length());
+				hql.append("select Count(id) from CustomerInfo where maturityId=:maturityId and companyId = :companyId"+ deleteFlagStr);
+				values.put("maturityId", listResult.get(k).getResult());
+				values.put("companyId", companyId);
+				if( deptId != null && deptId.length() > 0)
+				{
+					hql.append(" and salesmanId in (select id from User where deptId =:deptId ) ");
+					values.put("deptId", deptId);
+				}else
+				{
+					if(userId != null && userId.length() > 0)
+					{
+						hql.append(" and salesmanId = :userId ) ");
+						values.put("userId", userId);
+					}
+				}
+				int count = customerStaticInfoDao.findCountForPage(hql.toString(), values);
+				staticInfo.setCount(count);
+				list.add(staticInfo);
+			}
 		}else if(key == CustomerStaticInfo.CUSTOMER_PROGRESS)
 		{
 			CustomerStaticInfo staticInfo1 = new CustomerStaticInfo();
 			staticInfo1.setKey(key);
 			staticInfo1.setCategory(BusinessProgressKey.getBusinessProgressNameByKey(BusinessProgressKey.NEW));
-			hql.append("select Count(id) from CustomerInfo where progressId = :progressId and companyId = :companyId");
+			hql.append("select Count(id) from CustomerInfo where progressId = :progressId and companyId = :companyId"+ deleteFlagStr);
 			values.put("progressId", BusinessProgressKey.NEW);
 			values.put("companyId", companyId);
+			if( deptId != null && deptId.length() > 0)
+			{
+				hql.append(" and salesmanId in (select id from User where deptId =:deptId ) ");
+				values.put("deptId", deptId);
+			}else
+			{
+				if(userId != null && userId.length() > 0)
+				{
+					hql.append(" and salesmanId = :userId ) ");
+					values.put("userId", userId);
+				}
+			}
 			int count = customerStaticInfoDao.findCountForPage(hql.toString(), values);
 			staticInfo1.setCount(count);
 			list.add(staticInfo1);
@@ -338,9 +399,21 @@ public class CustomerStaticInfoServiceImpl implements ICustomerStaticInfoService
 			staticInfo2.setKey(key);
 			staticInfo2.setCategory(BusinessProgressKey.getBusinessProgressNameByKey(BusinessProgressKey.TRACE));
 			hql.delete(0, hql.length());
-			hql.append("select Count(id) from CustomerInfo where progressId = :progressId and companyId = :companyId");
+			hql.append("select Count(id) from CustomerInfo where progressId = :progressId and companyId = :companyId"+ deleteFlagStr);
 			values.put("progressId", BusinessProgressKey.TRACE);
 			values.put("companyId", companyId);
+			if( deptId != null && deptId.length() > 0)
+			{
+				hql.append(" and salesmanId in (select id from User where deptId =:deptId ) ");
+				values.put("deptId", deptId);
+			}else
+			{
+				if(userId != null && userId.length() > 0)
+				{
+					hql.append(" and salesmanId = :userId ) ");
+					values.put("userId", userId);
+				}
+			}
 			count = customerStaticInfoDao.findCountForPage(hql.toString(), values);
 			staticInfo2.setCount(count);
 			list.add(staticInfo2);
@@ -349,9 +422,21 @@ public class CustomerStaticInfoServiceImpl implements ICustomerStaticInfoService
 			staticInfo3.setKey(key);
 			staticInfo3.setCategory(BusinessProgressKey.getBusinessProgressNameByKey(BusinessProgressKey.DEALING));
 			hql.delete(0, hql.length());
-			hql.append("select Count(id) from CustomerInfo where progressId = :progressId and companyId = :companyId");
+			hql.append("select Count(id) from CustomerInfo where progressId = :progressId and companyId = :companyId"+ deleteFlagStr);
 			values.put("progressId", BusinessProgressKey.DEALING);
 			values.put("companyId", companyId);
+			if( deptId != null && deptId.length() > 0)
+			{
+				hql.append(" and salesmanId in (select id from User where deptId =:deptId ) ");
+				values.put("deptId", deptId);
+			}else
+			{
+				if(userId != null && userId.length() > 0)
+				{
+					hql.append(" and salesmanId = :userId ) ");
+					values.put("userId", userId);
+				}
+			}
 			count = customerStaticInfoDao.findCountForPage(hql.toString(), values);
 			staticInfo3.setCount(count);
 			list.add(staticInfo3);
@@ -360,9 +445,21 @@ public class CustomerStaticInfoServiceImpl implements ICustomerStaticInfoService
 			staticInfo4.setKey(key);
 			staticInfo4.setCategory(BusinessProgressKey.getBusinessProgressNameByKey(BusinessProgressKey.DEALED));
 			hql.delete(0, hql.length());
-			hql.append("select Count(id) from CustomerInfo where progressId = :progressId and companyId = :companyId");
+			hql.append("select Count(id) from CustomerInfo where progressId = :progressId and companyId = :companyId"+ deleteFlagStr);
 			values.put("progressId", BusinessProgressKey.DEALED);
 			values.put("companyId", companyId);
+			if( deptId != null && deptId.length() > 0)
+			{
+				hql.append(" and salesmanId in (select id from User where deptId =:deptId ) ");
+				values.put("deptId", deptId);
+			}else
+			{
+				if(userId != null && userId.length() > 0)
+				{
+					hql.append(" and salesmanId = :userId ) ");
+					values.put("userId", userId);
+				}
+			}
 			count = customerStaticInfoDao.findCountForPage(hql.toString(), values);
 			staticInfo4.setCount(count);
 			list.add(staticInfo4);
@@ -372,12 +469,48 @@ public class CustomerStaticInfoServiceImpl implements ICustomerStaticInfoService
 			staticInfo5.setKey(key);
 			staticInfo5.setCategory(BusinessProgressKey.getBusinessProgressNameByKey(BusinessProgressKey.VISIT));
 			hql.delete(0, hql.length());
-			hql.append("select Count(id) from CustomerInfo where progressId = :progressId and companyId = :companyId");
+			hql.append("select Count(id) from CustomerInfo where progressId = :progressId and companyId = :companyId"+ deleteFlagStr);
 			values.put("progressId", BusinessProgressKey.VISIT);
 			values.put("companyId", companyId);
+			if( deptId != null && deptId.length() > 0)
+			{
+				hql.append(" and salesmanId in (select id from User where deptId =:deptId ) ");
+				values.put("deptId", deptId);
+			}else
+			{
+				if(userId != null && userId.length() > 0)
+				{
+					hql.append(" and salesmanId = :userId ) ");
+					values.put("userId", userId);
+				}
+			}
 			count = customerStaticInfoDao.findCountForPage(hql.toString(), values);
 			staticInfo5.setCount(count);
 			list.add(staticInfo5);
+			
+			
+			CustomerStaticInfo staticInfo6 = new CustomerStaticInfo();
+			staticInfo6.setKey(key);
+			staticInfo6.setCategory(BusinessProgressKey.getBusinessProgressNameByKey(BusinessProgressKey.VISIT));
+			hql.delete(0, hql.length());
+			hql.append("select Count(id) from CustomerInfo where progressId = :progressId and companyId = :companyId"+ deleteFlagStr);
+			values.put("progressId", BusinessProgressKey.LOYAL);
+			values.put("companyId", companyId);
+			if( deptId != null && deptId.length() > 0)
+			{
+				hql.append(" and salesmanId in (select id from User where deptId =:deptId ) ");
+				values.put("deptId", deptId);
+			}else
+			{
+				if(userId != null && userId.length() > 0)
+				{
+					hql.append(" and salesmanId = :userId ) ");
+					values.put("userId", userId);
+				}
+			}
+			count = customerStaticInfoDao.findCountForPage(hql.toString(), values);
+			staticInfo6.setCount(count);
+			list.add(staticInfo6);
 			
 			
 		}else if(key == CustomerStaticInfo.CUSTOMER_LEVEL)
