@@ -11,7 +11,9 @@ import java.util.Map;
 import java.util.Set;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
+import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
@@ -33,6 +35,7 @@ import com.boan.crm.groupmanage.service.IPopedomService;
 import com.boan.crm.groupmanage.service.IUserService;
 import com.boan.crm.sellrecord.model.GoodsInfo;
 import com.boan.crm.sellrecord.model.SellRecord;
+import com.boan.crm.sellrecord.model.SellRecordForPhone;
 import com.boan.crm.sellrecord.service.IGoodsInfoService;
 import com.boan.crm.sellrecord.service.ISellRecordService;
 import com.boan.crm.servicemanage.model.MemberInfo;
@@ -43,7 +46,6 @@ import com.boan.crm.servicemanage.service.IMemberTypeService;
 import com.boan.crm.servicemanage.service.IPointInfoService;
 import com.boan.crm.sms.model.SMSInfo;
 import com.boan.crm.sms.service.ISMSInfoService;
-import com.boan.crm.sms.service.ISMSManageService;
 import com.boan.crm.utils.action.BaseActionSupport;
 import com.boan.crm.utils.calendar.CurrentDateTime;
 import com.boan.crm.utils.page.Pagination;
@@ -192,6 +194,9 @@ public class SellRecordAction extends BaseActionSupport {
 	private String goodsTypeId;
 
 	private String goodsInfoBaseId;
+
+	//销售员Id
+	private String  salesmanId;
 
 	// --------------查询条件-------------------------//
 
@@ -964,6 +969,71 @@ public class SellRecordAction extends BaseActionSupport {
 		return "group-tree-for-sell-record";
 	}
 
+	
+	
+	
+	
+	
+	/**
+	 * 给销售员使用
+	 * @return
+	 * @throws Exception
+	 */
+	public String getSellerSellRecordListForPhone() throws Exception {
+		HttpServletRequest request = ServletActionContext.getRequest();
+		Map<String,Object> map = new HashMap<String,Object>();
+//		if(userId!=null && !userId.equals("") && salesmanId!=null && !salesmanId.equals("")){
+		if( salesmanId!=null && !salesmanId.equals("")){
+//			String companyId = userService.getUserById(userId).getCompanyId();
+			Map<String, String> params = new HashMap<String, String>();
+//			params.put("companyId", companyId);
+			params.put("salesmanId", salesmanId);
+			List<SellRecord> tempList = sellRecordService.findAllSellRecord(params);
+			List<SellRecordForPhone> list = new ArrayList<SellRecordForPhone>();
+			for(SellRecord obj : tempList){
+				SellRecordForPhone temp = new SellRecordForPhone();
+				temp.setId(obj.getId());
+				temp.setCompany(obj.getCustomerName());
+				temp.setOrder(obj.getOrderID());
+				
+				Set goodsDetialSet = obj.getGoodsDetials();
+				StringBuffer goodsStr = new StringBuffer("");
+				List<String> ss = new ArrayList<String>();
+				for(Object detial : goodsDetialSet) {
+					GoodsInfo tempGoods =  (GoodsInfo)detial;
+					if(!ss.contains(tempGoods.getGoodsName())){
+						ss.add(tempGoods.getGoodsName());
+					}
+				}
+				
+				for(int i=0,j=ss.size();i<j;i++){
+					goodsStr.append(ss.get(i));
+					if(i+1<j){
+						goodsStr.append(",");
+					}
+				}
+				
+				temp.setGoods(goodsStr.toString());
+				SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+				String dateString = formatter.format(obj.getBargainTime().getTime());
+				temp.setDate(dateString);
+				temp.setMoney(""+obj.getRealCollection());
+				list.add(temp);
+			}
+			map.put("sell", list);
+			request.setAttribute("map", map);
+		}
+		return COMMON_MAP;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	public List<String> getDetials() {
 		return detials;
 	}
@@ -1233,5 +1303,17 @@ public class SellRecordAction extends BaseActionSupport {
 	}
 	public void setQueryIsArrearage(String queryIsArrearage) {
 		this.queryIsArrearage = queryIsArrearage;
+	}
+	/**
+	 * @return the salesmanId
+	 */
+	public String getSalesmanId() {
+		return salesmanId;
+	}
+	/**
+	 * @param salesmanId the salesmanId to set
+	 */
+	public void setSalesmanId(String salesmanId) {
+		this.salesmanId = salesmanId;
 	}
 }

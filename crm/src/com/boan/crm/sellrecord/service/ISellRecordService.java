@@ -134,5 +134,11 @@ public interface ISellRecordService {
 	 * @return 实收总金额
 	 */
 	public  List getSalesmanRealCollectionAndTimeByBargainTime(String companyId,String deptId ,String salesmanId , Calendar beginDate,Calendar endDate);
+	
+	/**
+     * 查询指定销售员的所有销售记录
+     * @return 记录数组
+     */
+	public List<SellRecord> findAllSellRecord(Map<String, ?> values);
 
 }
