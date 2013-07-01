@@ -1,12 +1,12 @@
 package com.boan.crm.timemanage.action;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.persistence.Column;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang.StringUtils;
@@ -16,11 +16,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
-import com.boan.crm.customer.model.ContractPersonInfo;
-import com.boan.crm.customer.model.CustomerInfo;
-import com.boan.crm.customer.model.CustomerTraceInfo;
-import com.boan.crm.customer.model.CustomerVisitInfo;
-import com.boan.crm.customer.model.TaskInfoForJson;
 import com.boan.crm.groupmanage.common.UserSession;
 import com.boan.crm.groupmanage.model.Deptment;
 import com.boan.crm.groupmanage.model.User;
@@ -29,10 +24,11 @@ import com.boan.crm.groupmanage.service.IPopedomService;
 import com.boan.crm.groupmanage.service.IUserService;
 import com.boan.crm.timemanage.model.TimePlan;
 import com.boan.crm.timemanage.model.TimePlanForJson;
+import com.boan.crm.timemanage.model.TimePlanInfoForJson;
+import com.boan.crm.timemanage.model.TimePlanStaffPersonInfo;
 import com.boan.crm.timemanage.service.ITimePlanService;
 import com.boan.crm.utils.action.BaseActionSupport;
 import com.boan.crm.utils.calendar.CalendarUtils;
-import com.boan.crm.utils.converter.ParseBeanUtil;
 import com.boan.crm.utils.page.Pagination;
 
 /**
@@ -114,6 +110,8 @@ public class TimePlanAction extends BaseActionSupport{
 	private String userId=null;
 	
 	private String reference="";
+    //日报Id
+	private String dailyId;
 	
 	/**
 	 * 显示组织机构树,带公司、工厂、车间
@@ -393,6 +391,91 @@ public class TimePlanAction extends BaseActionSupport{
 		return COMMON_MAP;
 	}
 	
+	
+	/**
+	 * 获取部门人员日程返回Json串给手机客户端
+	 * @return
+	 */
+	public String getDeptDailyInfoForPhone()
+	{
+		try {
+			HttpServletRequest request = ServletActionContext.getRequest();
+			Map<String,Object> map = new HashMap<String,Object>();
+			if(StringUtils.trimToNull(userId)!=null)
+			{
+				deptId = userService.getUserById(userId).getDeptId();
+				Calendar temp = Calendar.getInstance();
+				temp.set(Calendar.DATE, -15);
+				Calendar beginTime =temp;
+				Calendar endTime = Calendar.getInstance();
+				Map<String,Object> params = new HashMap<String, Object>();
+				 
+				params.put("beginTime", beginTime);
+				params.put("endTime", endTime); 
+				params.put("deptId", deptId);
+				List<TimePlan> listTimePlan =timePlanService.findTimePlan(params);
+				List<TimePlanInfoForJson> listTim = new ArrayList<TimePlanInfoForJson>();
+				List<TimePlanStaffPersonInfo> listPerson = new ArrayList<TimePlanStaffPersonInfo>();
+				if(listTimePlan != null && listTimePlan.size() > 0)
+				{
+					for(int i = 0;i<listTimePlan.size();i++)
+					{
+						TimePlanInfoForJson obj = new TimePlanInfoForJson();
+						TimePlanStaffPersonInfo person = new TimePlanStaffPersonInfo();
+						obj.setName(listTimePlan.get(i).getEmployeeName());
+						obj.setType("2");
+						obj.setDate(CalendarUtils.toLongStringNoSecond(listTimePlan.get(i).getSubmitTime()));
+						obj.setSummary(listTimePlan.get(i).getMemo());
+						obj.setPlan(listTimePlan.get(i).getPlanContent());
+						listTim.add(obj);
+						
+						person.setId(listTimePlan.get(i).getEmployeeId());
+						person.setName(listTimePlan.get(i).getEmployeeName());
+						
+						listPerson.add(person);
+					}
+				}
+				
+				map.put("dialy", listTim);
+				map.put("staff", listPerson);
+			}
+			request.setAttribute("map", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return COMMON_MAP;
+	}
+	
+	/**
+	 * 获取日程返回Json串给手机客户端
+	 * @return
+	 */
+	public String getDailyInfoByIdForPhone()
+	{
+		HttpServletRequest request = ServletActionContext.getRequest();
+		if(StringUtils.trimToNull(dailyId)!=null)
+		{
+			Map<String,Object> params = new HashMap<String, Object>();
+			params.put("id", dailyId);
+			TimePlan timePlan =timePlanService.getTimePlanById(dailyId);
+			if(timePlan!=null){
+				String str= "{";
+				SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+				String dateString = formatter.format(timePlan.getSubmitTime().getTime());
+				str = str +"'date':'" + dateString+"'";
+				String summary = timePlan.getMemo();
+				str = str +",'summary':'" +( summary==null ? "" : summary )+"'";
+				String plan = timePlan.getPlanContent();
+				str = str +",'plan': '" + (plan==null ? "" : plan)+"'";
+				str = str +"}" ;
+				request.setAttribute("info", str);
+			}
+		}
+		
+		return this.SUCCESS;
+	}
+	
+	
 	/**
 	 * 维护时间计划给手机客户端
 	 * @return
@@ -530,5 +613,19 @@ public class TimePlanAction extends BaseActionSupport{
 
 	public void setReference(String reference) {
 		this.reference = reference;
+	}
+
+	/**
+	 * @return the dailyId
+	 */
+	public String getDailyId() {
+		return dailyId;
+	}
+
+	/**
+	 * @param dailyId the dailyId to set
+	 */
+	public void setDailyId(String dailyId) {
+		this.dailyId = dailyId;
 	}
 }
