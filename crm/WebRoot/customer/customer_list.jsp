@@ -142,6 +142,16 @@
 		<td align="center">分类：</td>
 		<td style="width:120px"><s:select list="listCategory" listKey="id" listValue="name" value="customerCategory" 
 			id="categoryId" name="customerCategory" cssStyle="width:120px" headerKey="" headerValue="--请选择--"></s:select></td>
+		<td align="center">业务进展：</td>
+		<td style="width:120px"><select name="customerProgress" style="width:120px" >
+		<option value="" >--请选择--</option>
+		<option value="NEW" <s:if test="customerProgress.equals('NEW')">selected</s:if>>新建</option>
+		<option value="TRACE" <s:if test="customerProgress.equals('TRACE')">selected</s:if>>跟踪</option>
+		<option value="DEALING" <s:if test="customerProgress.equals('DEALING')">selected</s:if>>要成单</option>
+		<option value="DEALED" <s:if test="customerProgress.equals('DEALED')">selected</s:if>>成单</option>
+		<option value="VISIT" <s:if test="customerProgress.equals('VISIT')">selected</s:if>>回访</option>
+		<option value="LOYAL" <s:if test="customerProgress.equals('LOYAL')">selected</s:if>>忠诚</option>
+		</select></td>
 		<td>业务员：</td/>
 		<td style="width:120px"><s:select list="userList" listKey="id" listValue="userCName" value="salesmanId" 
 			id="salesmanId" name="salesmanId" cssStyle="width:120px" headerKey="" headerValue="--请选择--"></s:select></td>
@@ -176,7 +186,7 @@
 			</td>
             <td height="26" align="center" bgcolor="#FFFFFF">
             <s:if test="progressId.equals('DEALING')">
-            	<font color="#ff00ff" title="要成交客户"><s:property value="customerName"/></font>
+            	<font color="#ff00ff" title="要成单客户"><s:property value="customerName"/></font>
             </s:if>
             <s:else>
             	<s:property value="customerName"/>

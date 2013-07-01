@@ -245,10 +245,10 @@
 				</s:else>
 				&nbsp;&nbsp;&nbsp;&nbsp;
 				<s:if test='customerTraceInfo.dealingFlag.equals("1")'>
-					<input type="checkbox" name="dealingFlag" id="dealingFlag" value="1" checked/>要成交
+					<input type="checkbox" name="dealingFlag" id="dealingFlag" value="1" checked/>要成单
 				</s:if>
 				<s:else>
-					<input title="请于跟进结束后填写" readOnly="true" type="checkbox" name="dealingFlag" id="dealingFlag" value="1"/>要成交
+					<input title="请于跟进结束后填写" readOnly="true" type="checkbox" name="dealingFlag" id="dealingFlag" value="1"/>要成单
 				</s:else>
 				</td>
 	</tr>
