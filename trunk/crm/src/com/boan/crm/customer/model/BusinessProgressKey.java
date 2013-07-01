@@ -23,6 +23,7 @@ public class BusinessProgressKey {
 	public static String DEALING = "DEALING";
 	public static String DEALED = "DEALED";
 	public static String VISIT = "VISIT";
+	public static String LOYAL = "LOYAL";
 	
 	//private Map<String,String> mapKey = new HashMap<String,String>();
 	
@@ -42,9 +43,10 @@ public class BusinessProgressKey {
 		Map<String,String> mapKey = new HashMap<String,String>();
 		mapKey.put(NEW, "新建");
 		mapKey.put(TRACE, "跟进");
-		mapKey.put(DEALING, "要成交");
-		mapKey.put(DEALED, "成交");
+		mapKey.put(DEALING, "要成单");
+		mapKey.put(DEALED, "成单");
 		mapKey.put(VISIT, "回访");
+		mapKey.put(LOYAL, "忠诚客户");
 		return mapKey.get(key);
 	}
 }

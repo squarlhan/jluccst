@@ -131,6 +131,7 @@ public class CustomerInfoAction extends BaseActionSupport{
 	private String customerName = "";
 	private String contractorName = "";
 	private String customerCategory = "";
+	private String customerProgress = "";
 	private String salesmanId = "";
 	private List<User> userList = null;
 	private int iSearchMaxRecord = 10;
@@ -236,6 +237,10 @@ public class CustomerInfoAction extends BaseActionSupport{
 		{
 			values.put("customerCategory", customerCategory);
 		}
+		if(customerProgress != null && customerProgress.length() > 0)
+		{
+			values.put("progressId", customerProgress);
+		}
 		if(salesmanId != null && salesmanId.length() > 0)
 		{
 			values.put("salesmanId", salesmanId);
@@ -333,7 +338,6 @@ public class CustomerInfoAction extends BaseActionSupport{
 			map.put("address", customerInfo.getAddress());
 			map.put("company_full_name", customerInfo.getCompanyFullName());
 			map.put("fax", customerInfo.getFax());
-			//TODO
 			List<ContractPersonInfoForJson> listContractPerson = new ArrayList<ContractPersonInfoForJson>();
 			List<ContractPersonInfo> listPerson = contractpersonInfoService.findAllContractPersonInfoByCustomerId(customerInfo.getId());
 			if(listPerson != null && listPerson.size() > 0)
@@ -400,7 +404,6 @@ public class CustomerInfoAction extends BaseActionSupport{
 	 */
 	public String getCutomerDailyInfoForPhone()
 	{
-		//TODO
 		HttpServletRequest request = ServletActionContext.getRequest();
 		Map<String,Object> map = new HashMap<String,Object>();
 		if(StringUtils.trimToNull(userId)!=null)
@@ -442,7 +445,6 @@ public class CustomerInfoAction extends BaseActionSupport{
 				}
 			}
 			map.put("visit", listVisitTask);
-			//TODO
 			Calendar temp = Calendar.getInstance();
 			temp.set(Calendar.DATE, -15);
 			Calendar beginTime =temp;
@@ -619,6 +621,10 @@ public class CustomerInfoAction extends BaseActionSupport{
 		if(customerCategory != null && customerCategory.length() > 0)
 		{
 			values.put("customerCategory", customerCategory);
+		}
+		if(customerProgress != null && customerProgress.length() > 0)
+		{
+			values.put("progressId", customerProgress);
 		}
 		if(salesmanId != null && salesmanId.length() > 0)
 		{
@@ -1093,7 +1099,7 @@ public class CustomerInfoAction extends BaseActionSupport{
 		obj.setDistrict(customerInfo.getDistrict());
 		obj.setFax(customerInfo.getFax());
 		obj.setLevelId(customerInfo.getLevelId());
-		obj.setMaturityId(customerInfo.getMaturityId());
+		//obj.setMaturityId(customerInfo.getMaturityId());
 		obj.setOtherSalesmanId(customerInfo.getOtherSalesmanId());
 		//obj.setProgressId(customerInfo.getProgressId());
 		obj.setProvince(customerInfo.getProvince());
@@ -1590,5 +1596,13 @@ public class CustomerInfoAction extends BaseActionSupport{
 
 	public void setUserId(String userId) {
 		this.userId = userId;
+	}
+
+	public String getCustomerProgress() {
+		return customerProgress;
+	}
+
+	public void setCustomerProgress(String customerProgress) {
+		this.customerProgress = customerProgress;
 	}
 }
