@@ -259,6 +259,7 @@
 					val=val+$("#txt_company").val().length;
 				}
 				//*/
+				val=val+$("#txt_company").val().length;
 					
 				if (val == 0) disabled.off();
 				if(val <= maxNumber){
@@ -518,7 +519,10 @@
 													</td>
 													<td align="right">
 														<span>
+															<!-- 
 															<s:hidden id="txt_company" name="footContent" maxlength="50" cssStyle="width: 200px;"  ></s:hidden>
+															-->
+															<s:textfield id="txt_company" name="footContent" maxlength="50" cssStyle="width: 200px;"  readonly="true"  onfocus="javascript:this.blur();"/>
 															<input type="checkbox"  id="chk_use_company"  style="display: none;"/>
 															<!-- 
 															<s:textfield id="txt_company" name="footContent" maxlength="50" cssStyle="width: 200px;"  />
