@@ -529,10 +529,10 @@ public class CustomerInfoAction extends BaseActionSupport{
 					if(traceInfo.getTraceTime().get(Calendar.YEAR) == now.get(Calendar.YEAR) && traceInfo.getTraceTime().get(Calendar.MONTH) == now.get(Calendar.MONTH) && traceInfo.getTraceTime().get(Calendar.DATE) == now.get(Calendar.DATE))
 					{
 						status = "1";
-					}else if(traceInfo.getTraceTime().after(Calendar.getInstance()))
+					}else if(traceInfo.getTraceTime().before(Calendar.getInstance()))
 					{
 						status = "2";
-					}else if(traceInfo.getTraceTime().before(Calendar.getInstance()))
+					}else if(traceInfo.getTraceTime().after(Calendar.getInstance()))
 					{
 						status = "3";
 					}
@@ -553,10 +553,20 @@ public class CustomerInfoAction extends BaseActionSupport{
 				String status = "";
 				if(visitInfo.getVisitFlag().equals( "1" ))
 				{
-					status = "2";
+					status = "4";
 				}else
 				{
-					status = "1";
+					Calendar now = Calendar.getInstance();
+					if(visitInfo.getVisitTime().get(Calendar.YEAR) == now.get(Calendar.YEAR) && visitInfo.getVisitTime().get(Calendar.MONTH) == now.get(Calendar.MONTH) && visitInfo.getVisitTime().get(Calendar.DATE) == now.get(Calendar.DATE))
+					{
+						status = "1";
+					}else if(visitInfo.getVisitTime().before(Calendar.getInstance()))
+					{
+						status = "2";
+					}else if(visitInfo.getVisitTime().after(Calendar.getInstance()))
+					{
+						status = "3";
+					}
 				}
 				String personName = "";
 				if(visitInfo.getPerson() != null)
