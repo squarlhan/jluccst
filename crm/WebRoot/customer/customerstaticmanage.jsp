@@ -54,7 +54,7 @@
 		<iframe id="traceDivFrame" scrolling="auto" frameborder="0" style="width:100%; height:100%"
 			src="about:blank" url="customerStaticInfo.action?flag=source"></iframe>
 	</div>
-	<div title="客户成熟度信息统计"
+	<div title="客户忠诚度信息统计"
 		style="padding: 1px; display: none;">
 		<iframe scrolling="auto" frameborder="0" style="width:100%; height:100%"
 			src="about:blank" url="customerStaticInfo.action?flag=maturity"></iframe>
