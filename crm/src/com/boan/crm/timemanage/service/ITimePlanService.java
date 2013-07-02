@@ -59,4 +59,10 @@ public interface ITimePlanService {
 	 * @return
 	 */
 	public boolean hasTimePlanForTrackOrVisit(String trackOrVisitId);
+	/**
+	 * 根据跟踪或回访Id查询是否有对应的时间计划信息
+	 * @param trackOrVisitId
+	 * @return
+	 */
+	public TimePlanAndTrackOrVisitRelation getTimePlanForTrackOrVisit(String trackOrVisitId);
 }

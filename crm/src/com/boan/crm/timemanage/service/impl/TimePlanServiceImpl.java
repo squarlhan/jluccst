@@ -196,19 +196,15 @@ public class TimePlanServiceImpl implements ITimePlanService {
 		if(flag==1){
 			timePlan.setMemo(info);
 		}
-		
-		TimePlanAndTrackOrVisitRelation relation = new TimePlanAndTrackOrVisitRelation();
-		relation.setTime_Planand(timePlan.getId());
-		relation.setTrackOrVisitId(trackOrVisitId);
+		timePlanDao.saveOrUpdate(timePlan );
 		
 		if(!hasTimePlanForTrackOrVisit(trackOrVisitId)){
+			TimePlanAndTrackOrVisitRelation relation = new TimePlanAndTrackOrVisitRelation();
+			relation.setTime_Planand(timePlan.getId());
+			relation.setTrackOrVisitId(trackOrVisitId);
 			timePlanAndTrackOrVisitRelationDao.save(relation);
-		}else{
-			TimePlanAndTrackOrVisitRelation temp = this.getTimePlanForTrackOrVisit(trackOrVisitId);
-			String timePlanId= temp.getTime_Planand();
-			timePlan.setId(timePlanId);
 		}
-		timePlanDao.saveOrUpdate(timePlan );
+		
 	}
 	
 	/**

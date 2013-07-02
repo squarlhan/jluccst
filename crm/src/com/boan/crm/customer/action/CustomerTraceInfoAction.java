@@ -40,6 +40,7 @@ import com.boan.crm.sms.model.SMSInfo;
 import com.boan.crm.sms.service.ISMSCustomerInfoService;
 import com.boan.crm.sms.service.ISMSInfoService;
 import com.boan.crm.timemanage.model.TimePlan;
+import com.boan.crm.timemanage.model.TimePlanAndTrackOrVisitRelation;
 import com.boan.crm.timemanage.service.ITimePlanService;
 import com.boan.crm.utils.action.BaseActionSupport;
 import com.boan.crm.utils.calendar.CalendarUtils;
@@ -562,7 +563,7 @@ public class CustomerTraceInfoAction extends BaseActionSupport{
 		{
 			if (traceFlag != null && traceFlag.equals("1"))
 			{
-				
+//				
 				if(!timePlanService.hasTimePlanForTrackOrVisit(obj.getId()))
 				{
 					TimePlan timePlan = new TimePlan();
@@ -586,6 +587,21 @@ public class CustomerTraceInfoAction extends BaseActionSupport{
 					sb.append("]。");
 					
 					timePlanService.saveOrUpdateTimePlan(timePlan, 1, sb.toString(), obj.getId());
+				}else
+				{
+					TimePlanAndTrackOrVisitRelation timePlanAndTrackOrVisitRelation = timePlanService.getTimePlanForTrackOrVisit(obj.getId());
+					TimePlan objTemp = timePlanService.getTimePlanById(timePlanAndTrackOrVisitRelation.getTime_Planand());
+					StringBuilder sb = new StringBuilder();
+					sb.append("跟进完成：");
+					sb.append(CalendarUtils.toLongStringNoSecond(obj.getActualTraceTime()));
+					sb.append(",对客户[");
+					sb.append(obj.getCustomerName());
+					sb.append("]进行["+dataDictionaryService.get(obj.getTraceOption()).getName()+"]方式跟进");
+					sb.append(",跟进任务：[");
+					sb.append(obj.getTask());
+					sb.append("]。");
+					objTemp.setMemo(sb.toString());
+					timePlanService.saveOrUpdateTimePlan(objTemp);
 				}
 			}
 		}
