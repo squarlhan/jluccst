@@ -146,7 +146,13 @@ public class CustomerInfoServiceImpl implements ICustomerInfoService{
 		}
 		if(values.get("progressId") != null)
 		{
-			hql.append(" and progressId = :progressId ");
+			if(values.get("progressId").toString().equals("LOYAL"))
+			{
+				hql.append(" and maturityId like '%高%' ");
+			}else
+			{
+				hql.append(" and progressId = :progressId ");
+			}
 		}		
 		if(values.get("companyId") != null)
 		{
@@ -188,7 +194,13 @@ public class CustomerInfoServiceImpl implements ICustomerInfoService{
 		}
 		if(values.get("progressId") != null)
 		{
-			hql.append(" and progressId = :progressId ");
+			if(values.get("progressId").toString().equals("LOYAL"))
+			{
+				hql.append(" and maturityId like '%高%' ");
+			}else
+			{
+				hql.append(" and progressId = :progressId ");
+			}
 		}	
 		if(values.get("companyId") != null)
 		{
