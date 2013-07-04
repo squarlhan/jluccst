@@ -51,9 +51,10 @@ public class MonthlyMainInfoServiceImpl implements IMonthlyMainInfoService{
 	 * @param personId 计划填写人
 	 * @param year 年份
 	 * @param month 月份
+	 * @param roleKey 角色关键字
 	 * @return
 	 */
-	public MonthlyMainInfo getMonthlyMainInfoByMonth(String companyId, String deptId,String personId ,  int year , int month){
+	public MonthlyMainInfo getMonthlyMainInfoByMonth(String companyId, String deptId,String personId ,  int year , int month , String roleKey){
 		String beginDate;
 		String endDate;
 		Calendar monthBegin = Calendar.getInstance();
@@ -72,23 +73,30 @@ public class MonthlyMainInfoServiceImpl implements IMonthlyMainInfoService{
 		monthkEnd.set(Calendar.DAY_OF_MONTH, value);
 		endDate= new SimpleDateFormat("yyyy-MM-dd").format(monthkEnd.getTime());
 		String str="";
-		String hql = "from MonthlyMainInfo where 1=1 ";
+		String hql = " from MonthlyMainInfo A ,  User B , Role C where 1=1 and A.personId=B.id And B.roleId = C.id ";
 		Map param = new HashMap();
+		if(roleKey!=null && !roleKey.equals("")){
+			param.put("roleKey", roleKey);
+			str = str + " and C.roleKey=:roleKey " ;
+		}
 		if(companyId!=null && !companyId.equals("")){
 			param.put("companyId", companyId);
-			str = str + " and companyId=:companyId " ;
+			str = str + " and A.companyId=:companyId " ;
 		}
 		if(deptId!=null && !deptId.equals("")){
 			param.put("deptId", deptId);
-			str = str + " and deptId=:deptId " ;
+			str = str + " and A.deptId=:deptId " ;
 		}
 		if(personId!=null && !personId.equals("")){
 			param.put("personId", personId);
-			str = str + " and personId=:personId " ;
+			str = str + " and A.personId=:personId " ;
 		}
-		hql =  hql +str+" and  planInterzoneBegin >='"+beginDate+"'  and planInterzoneBegin <='"+endDate+"'  order by createTime desc";
-		List<MonthlyMainInfo> data = monthlyItemInfoDao.find(hql, param);
-		return (data!=null &&  data.size()>0) ? data.get(0) : null;
+		hql =  hql +str+" and  A.planInterzoneBegin >='"+beginDate+"'  and A.planInterzoneBegin <='"+endDate+"'  order by A.createTime desc";
+		List data = monthlyMainInfoDao.find(hql, param);
+		if((data!=null &&  data.size()>0 )){
+			return  (MonthlyMainInfo)((Object[])data.get(0))[0];
+		}
+		return null;
 	}
 	
 	/**
