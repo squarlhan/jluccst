@@ -54,7 +54,8 @@ public interface IMonthlyMainInfoService {
 	 * @param personId 计划填写人
 	 * @param year 年份
 	 * @param month 月份
+	 * @param roleKey 角色关键字
 	 * @return
 	 */
-	public MonthlyMainInfo getMonthlyMainInfoByMonth(String companyId, String deptId,String personId ,  int year , int month);
+	public MonthlyMainInfo getMonthlyMainInfoByMonth(String companyId, String deptId,String personId ,  int year , int month , String roleKey);
 }

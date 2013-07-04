@@ -327,11 +327,11 @@ public class SellRecordServiceImpl implements ISellRecordService {
 //			hql = hql + " and record.bargainTime <='"+endDate+"' ";
 			hql = hql + " and record.bargainTime <=:endDate ";
 		}
-		if(customerId!=null &&customerId.equals("")){
+		if(customerId!=null && !customerId.equals("")){
 			hql = hql + " and record.customerId =:customerId";
 		}
 		Map param = new HashMap();
-		if(customerId!=null &&customerId.equals("")){
+		if(customerId!=null && !customerId.equals("")){
 			param.put("customerId",customerId);
 		}
 		param.put("beginDate",beginDate);
