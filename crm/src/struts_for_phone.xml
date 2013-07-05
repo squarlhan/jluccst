@@ -28,6 +28,10 @@
 		<action name="getCustomerVisitInfoForPhoneAction" class="customerVisitInfoAction" method="customerVisitInfoForPhone"></action>
 		<action name="getVisitTraceOptionInfoForPhoneAction" class="dataDictionaryAction" method="visitTraceOptionInfoForPhone"></action>
 		<action name="getDictionaryInfoForPhoneAction" class="dataDictionaryAction" method="dictionaryInfoForPhone"></action>
+		<action name="saveTraceInfoForPhoneAction" class="customerTraceInfoAction" method="saveTraceInfoForPhone"></action>
+		<action name="deleteTraceInfoForPhoneAction" class="customerTraceInfoAction" method="deleteTraceInfoForPhone"></action>
+		<action name="saveVisitInfoForPhoneAction" class="customerVisitInfoAction" method="saveVisitInfoForPhone"></action>
+		<action name="deleteVisitInfoForPhoneAction" class="customerVisitInfoAction" method="deleteVisitInfoForPhone"></action>
 	</package>
 	<!-- 职员日报信息 -->
 	<package name="dailyinfoforphone" extends="phonejson">
