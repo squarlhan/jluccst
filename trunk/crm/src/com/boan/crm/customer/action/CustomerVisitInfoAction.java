@@ -24,6 +24,7 @@ import com.boan.crm.actionplan.service.IActionPlanService;
 import com.boan.crm.customer.model.BusinessProgressKey;
 import com.boan.crm.customer.model.ContractPersonInfo;
 import com.boan.crm.customer.model.CustomerInfo;
+import com.boan.crm.customer.model.CustomerTraceInfo;
 import com.boan.crm.customer.model.CustomerVisitInfo;
 import com.boan.crm.customer.service.IContractPersonService;
 import com.boan.crm.customer.service.ICustomerInfoService;
@@ -44,6 +45,7 @@ import com.boan.crm.timemanage.model.TimePlanAndTrackOrVisitRelation;
 import com.boan.crm.timemanage.service.ITimePlanService;
 import com.boan.crm.utils.action.BaseActionSupport;
 import com.boan.crm.utils.calendar.CalendarUtils;
+import com.boan.crm.utils.calendar.MySimpleDateFormat;
 import com.boan.crm.utils.page.Pagination;
 
 /**
@@ -459,6 +461,59 @@ public class CustomerVisitInfoAction extends BaseActionSupport{
 		HttpServletRequest request = ServletActionContext.getRequest();
 		request.setAttribute("map", map);
 		return COMMON_MAP;
+	}
+	/**
+	 * 手机端删除任务
+	 * @return String
+	 */
+	public String deleteVisitInfoForPhone()
+	{
+		CustomerVisitInfo obj = customerVisitInfoService.get(id);
+		if(obj != null)
+		{
+			obj.setDeleteFlag(1);
+			customerVisitInfoService.save(obj);
+			message = "success";
+		}else
+		{
+			message = "failure";
+		}
+		HttpServletRequest request = ServletActionContext.getRequest();
+		request.setAttribute("message", message);
+		return COMMON_RESULT;
+	}
+	/**
+	 * 手机端完成任务，保存客户跟进信息
+	 * @return String
+	 */
+	public String saveVisitInfoForPhone()
+	{
+		CustomerVisitInfo obj = customerVisitInfoService.get(id);
+		if(obj != null)
+		{
+			if(customerVisitInfo != null && customerVisitInfo.getVisitFlag().length() > 0)
+			{
+				obj.setVisitFlag(customerVisitInfo.getVisitFlag());
+				if(customerVisitInfo.getActualVisitTimeStr() != null && customerVisitInfo.getActualVisitTimeStr().length() > 0 )
+				{
+					obj.setActualVisitTime(MySimpleDateFormat.parse(customerVisitInfo.getActualVisitTimeStr(),"yyyy-MM-dd"));
+				}
+				obj.setContentResult(customerVisitInfo.getContentResult());
+				obj.setRemark(customerVisitInfo.getRemark());
+			}else
+			{
+				obj.setVisitFlag("1");
+				obj.setActualVisitTime(Calendar.getInstance());
+			}
+			customerVisitInfoService.save(obj);
+			message = "success";
+		}else
+		{
+			message = "failure";
+		}
+		HttpServletRequest request = ServletActionContext.getRequest();
+		request.setAttribute("message", message);
+		return COMMON_RESULT;
 	}
 	/**
 	 * 保存客户回访信息

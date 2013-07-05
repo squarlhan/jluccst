@@ -44,6 +44,7 @@ import com.boan.crm.timemanage.model.TimePlanAndTrackOrVisitRelation;
 import com.boan.crm.timemanage.service.ITimePlanService;
 import com.boan.crm.utils.action.BaseActionSupport;
 import com.boan.crm.utils.calendar.CalendarUtils;
+import com.boan.crm.utils.calendar.MySimpleDateFormat;
 import com.boan.crm.utils.page.Pagination;
 
 /**
@@ -420,6 +421,60 @@ public class CustomerTraceInfoAction extends BaseActionSupport{
 		HttpServletRequest request = ServletActionContext.getRequest();
 		request.setAttribute("map", map);
 		return COMMON_MAP;
+	}
+	/**
+	 * 手机端删除任务
+	 * @return String
+	 */
+	public String deleteTraceInfoForPhone()
+	{
+		CustomerTraceInfo obj = customerTraceInfoService.get(id);
+		if(obj != null)
+		{
+			obj.setDeleteFlag(1);
+			customerTraceInfoService.save(obj);
+			message = "success";
+		}else
+		{
+			message = "failure";
+		}
+		HttpServletRequest request = ServletActionContext.getRequest();
+		request.setAttribute("message", message);
+		return COMMON_RESULT;
+	}
+	/**
+	 * 手机端完成任务，保存客户跟进信息
+	 * @return String
+	 */
+	public String saveTraceInfoForPhone()
+	{
+		CustomerTraceInfo obj = customerTraceInfoService.get(id);
+		if(obj != null)
+		{
+			if(customerTraceInfo != null && customerTraceInfo.getTraceFlag().length() > 0)
+			{
+				obj.setTraceFlag(customerTraceInfo.getTraceFlag());
+				if(customerTraceInfo.getActualTraceTimeStr() != null && customerTraceInfo.getActualTraceTimeStr().length() > 0 )
+				{
+					obj.setActualTraceTime(MySimpleDateFormat.parse(customerTraceInfo.getActualTraceTimeStr(),"yyyy-MM-dd"));
+				}
+				obj.setDealingFlag(customerTraceInfo.getDealingFlag());
+				obj.setInterest(customerTraceInfo.getInterest());
+				obj.setObjection(customerTraceInfo.getObjection());
+			}else
+			{
+				obj.setTraceFlag("1");
+				obj.setActualTraceTime(Calendar.getInstance());
+			}
+			customerTraceInfoService.save(obj);
+			message = "success";
+		}else
+		{
+			message = "failure";
+		}
+		HttpServletRequest request = ServletActionContext.getRequest();
+		request.setAttribute("message", message);
+		return COMMON_RESULT;
 	}
 	/**
 	 * 保存客户跟进信息
