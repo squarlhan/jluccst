@@ -9,6 +9,7 @@
 			<result name="show-common-list">/common/show-list.jsp</result>
 			<result name="show-common-object">/common/show-object.jsp</result>
 			<result name="show-common-map">/common/show-map.jsp</result>
+			<result name="show-common-result">/common/show-result.jsp</result>
 		</global-results>
 	</package>
 	<!-- 登录 -->
