@@ -83,6 +83,11 @@ public class BaseActionSupport extends ActionSupport {
 	 * JSON通用对象
 	 */
 	protected static final String COMMON_OBJECT = "show-common-object";
+	
+	/**
+	 * JSON通用对象
+	 */
+	protected static final String COMMON_RESULT = "show-common-result";
 
 	@Override
 	public void validate() {
