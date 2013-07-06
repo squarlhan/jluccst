@@ -375,6 +375,7 @@ public class SellRecordAction extends BaseActionSupport {
 		pagination = sellRecordService.findSellRecordForPage(params, pagination);
 		return SUCCESS;
 	}
+	
 	public String openAddSellRecordForMyCustomer() {
 		goodsTypes = goodsTypeService.findAllGoodsType(sessionCompanyId);
 		Calendar rightNow = Calendar.getInstance();
@@ -406,6 +407,7 @@ public class SellRecordAction extends BaseActionSupport {
 		smsSendTime="09:00";
 		return SUCCESS;
 	}
+	
 	public String openModifySellRecordForMyCustomer() {
 		customerInfos = customerInfoService.findAllCustomerInfoBySalesmanId(sessionUserId); //查本公司业务员所管辖的客户
 		if(customerInfos==null || customerInfos.size()==0){
@@ -470,6 +472,7 @@ public class SellRecordAction extends BaseActionSupport {
 		pagination = sellRecordService.findSellRecordForPage(params, pagination);
 		return SUCCESS;
 	}
+	
 	public String openSellRecordListForOneCustomerView() throws Exception {
 		goodsTypes = goodsTypeService.findAllGoodsType(sessionCompanyId);
 		//userList = userService.queryUserList(sessionCompanyId, sessionDeptId, new Pagination<User>()).getData();
@@ -490,7 +493,6 @@ public class SellRecordAction extends BaseActionSupport {
 		return SUCCESS;
 	}
 
-	
 	public String openViewSellRecord() throws Exception {
 		goodsTypes = goodsTypeService.findAllGoodsType(sessionCompanyId);
 		customerInfos = customerInfoService.findAllCustomerInfoBySalesmanId(sessionUserId); //查本公司业务员所管辖的客户
@@ -710,6 +712,7 @@ public class SellRecordAction extends BaseActionSupport {
 		}
 		return SUCCESS;
 	}
+	
 	public String openModifySellRecordForOneCustomerView() {
 		customerInfos = customerInfoService.findAllCustomerInfoBySalesmanId(sessionUserId); //查本公司业务员所管辖的客户
 		if(customerInfos==null || customerInfos.size()==0){
@@ -969,13 +972,8 @@ public class SellRecordAction extends BaseActionSupport {
 		return "group-tree-for-sell-record";
 	}
 
-	
-	
-	
-	
-	
 	/**
-	 * 给销售员使用
+	 * 手机给销售员使用
 	 * @return
 	 * @throws Exception
 	 */
@@ -1025,14 +1023,6 @@ public class SellRecordAction extends BaseActionSupport {
 		}
 		return COMMON_MAP;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
 	
 	public List<String> getDetials() {
 		return detials;
