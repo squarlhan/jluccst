@@ -16,10 +16,14 @@ import java.nio.charset.Charset;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
@@ -41,6 +45,7 @@ import com.boan.crm.sellreport.monthly.service.IMonthlyItemInfoService;
 import com.boan.crm.sellreport.monthly.service.IMonthlyMainInfoService;
 import com.boan.crm.sellreport.sellduty.service.ISellDutyService;
 import com.boan.crm.sellreport.stat.model.SalesPerformanceRank;
+import com.boan.crm.sellreport.stat.model.SalesmanSellInfoForPhone;
 import com.boan.crm.sellreport.stat.service.ISellReportStatService;
 import com.boan.crm.utils.action.BaseActionSupport;
 import com.boan.crm.utils.calendar.CalendarUtils;
@@ -107,6 +112,17 @@ public class SellReportStatAction extends BaseActionSupport{
 	 * 统计月份
 	 */
 	private String statMonth;
+	
+	/**
+	 * 1：周统计   2：月统计
+	 */
+	private String type="";
+	
+	/**
+	 * 第几周
+	 */
+	private int weekIndex=1;
+	
 	/**
 	 * 统计开始时间
 	 */
@@ -136,6 +152,11 @@ public class SellReportStatAction extends BaseActionSupport{
 	 * 销售员业绩信息数组
 	 */
 	private List<SalesPerformanceRank> salesPerformanceRankList;
+
+	/**
+	 * 手机用户Id
+	 */
+	private String userId;
 	/**
 	 * 显示组织机构树用于销售目标统计
 	 * 
@@ -359,7 +380,7 @@ public class SellReportStatAction extends BaseActionSupport{
 						}
 					}
 					
-					if(flag){//计算的实际值显示
+					if(flag){
 						//按每月中的各周中填写的数值计算运算后做计划值
 //						monthPlanAmountStr=monthPlanAmountStr+"<set value='"+compute(compute(temp.getFirstWeek(),temp.getSecondWeek()),compute(temp.getThirdWeek(),temp.getFourthWeek()))+"' /> ";
 						//直接使用销售目标中填写的数值作为月计划值
@@ -432,9 +453,12 @@ public class SellReportStatAction extends BaseActionSupport{
 			
 			String roleKey="";
 			if(personId==null || personId.equals("")){
-				roleKey = RoleFlag.YE_WU_YUAN;
-			}else{
 				roleKey = RoleFlag.BU_MEN_LING_DAO;
+			}else{
+				User user = userService.getUserById(personId);
+				String roleId = user.getRoleId();
+				Role role = roleService.get(roleId);
+				roleKey = role.getRoleKey();
 			}
 			MonthlyMainInfo mainInfo = monthlyMainInfoService.getMonthlyMainInfoByMonth(sessionCompanyId,deptId, personId ,Integer.parseInt(statYear),Integer.parseInt(statMonth) , roleKey);
 			List<MonthlyItemInfo>  sellTargerList = null;
@@ -561,7 +585,7 @@ public class SellReportStatAction extends BaseActionSupport{
 						flag = true;
 					}
 				}
-				if(flag){//计算的实际值显示
+				if(flag){//计算的计划值显示
 					str=str+"<set value='"+temp.getFirstWeek()+"' /> ";
 					str=str+"<set value='"+temp.getSecondWeek()+"' /> ";
 					str=str+"<set value='"+temp.getThirdWeek()+"' /> ";
@@ -931,7 +955,318 @@ public class SellReportStatAction extends BaseActionSupport{
 	}
 	
 	
+	/**
+	 * 手机端获取部门销售信息给部门使用
+	 * @return
+	 * @throws Exception
+	 */
+	public String getDeptSellerSellRecordListForPhone() throws Exception {
+		BigDecimal sellAmount =new BigDecimal(0);
+		BigDecimal planAmount =new BigDecimal(0);
+		String unfinished="";
+		String roleKey = "";
+		String companyId="";
+		String deptId="";
+		if(userId!=null && !userId.equals("")){
+			User user = userService.getUserById(userId);
+			String roleId = user.getRoleId();
+			Role role = roleService.get(roleId);
+			roleKey = role.getRoleKey();
+			companyId=user.getCompanyId();
+			deptId=user.getDeptId();
+		}
+		
+		HttpServletRequest request = ServletActionContext.getRequest();
+		Map<String,Object> map = new HashMap<String,Object>();
+		List<SalesmanSellInfoForPhone> salesmanSellInfoForPhoneList = new ArrayList<SalesmanSellInfoForPhone>();
+		//如果是部门领导则查询下面所管的业务员
+		if(roleKey .equals( RoleFlag.BU_MEN_LING_DAO)){
+			int year = Integer.parseInt(statYear);
+			int month = Integer.parseInt(statMonth) ;
+			
+			if(type.equals("1")){
+				//计算某年某月第某周的销售总额
+				sellAmount = getSellAmountForWeek( companyId, deptId, null , year, month , weekIndex);
+				//计算某年某月第某周的计划销售总额
+				planAmount = getPlanAmountForWeek(roleKey, companyId, deptId, null,  year, month ,weekIndex );
+			}else if(type.equals("2")){
+				//计算某年某月销售总额
+				sellAmount = getSellAmountForMonth( companyId, deptId, null , year, month);
+				//计算某年某月计划销售总额
+				planAmount = getPlanAmountForMonth(roleKey, companyId, deptId, null,  year, month);
+			}
+			//未完成的销售值比例
+			if(planAmount.doubleValue()==0){
+				unfinished= "100";
+			}else{
+				if(planAmount.subtract( sellAmount ).doubleValue()>0){
+					BigDecimal a= planAmount.subtract( sellAmount );
+					BigDecimal b= a. divide( planAmount,2,BigDecimal.ROUND_HALF_UP );
+					unfinished = b .multiply(new BigDecimal(100)).toString();
+				}else{
+					unfinished= "100";
+				}
+			}
+			
+			List<User> tempList = userService.queryUserList(companyId, deptId);
+			for(User user : tempList){
+				String roleId = user.getRoleId();
+				Role role = roleService.get(roleId);
+				String tempRoleKey = role.getRoleKey();
+				String tempId=user.getId();
+				//如果传过来的userId是部门的领导，则不用取数据
+				if(!tempId.equals(this.userId)){
+					String tempName=user.getUserCName();
+					BigDecimal tempSellAmount = new BigDecimal(0);
+					BigDecimal tempPlanAmount =new BigDecimal(0);
+					if(type.equals("1")){
+						tempSellAmount = getSellAmountForWeek( companyId, deptId, tempId , year, month , weekIndex);
+						tempPlanAmount = getPlanAmountForWeek(tempRoleKey, companyId, deptId,  tempId , year, month , weekIndex);
+					}else if(type.equals("2")){
+						tempSellAmount = getSellAmountForMonth( companyId, deptId, tempId , year, month);
+						tempPlanAmount = getPlanAmountForMonth(tempRoleKey, companyId, deptId,  tempId , year, month );
+					}
+					
+					SalesmanSellInfoForPhone obj  = new SalesmanSellInfoForPhone();
+					obj.setId(tempId);
+					obj.setName(tempName);
+					obj.setFinished(tempSellAmount.toString());
+					obj.setPlane(tempPlanAmount.toString());
+					salesmanSellInfoForPhoneList.add(obj);
+				}
+			}
+			map.put("unfinished", unfinished );
+			map.put("sell", salesmanSellInfoForPhoneList);
+		}
+		request.setAttribute("map", map);
+		return COMMON_MAP;
+	}
 	
+	/**
+	 * 计算某年某月计划销售总额
+	 * @param roleKey
+	 * @param companyId
+	 * @param deptId
+	 * @param personId
+	 * @param year
+	 * @param month
+	 * @return
+	 */
+	private BigDecimal getPlanAmountForMonth(String roleKey, String companyId, String deptId, String personId, int year, int month) {
+		BigDecimal planAmount = new BigDecimal(0);
+		MonthlyMainInfo mainInfo = monthlyMainInfoService.getMonthlyMainInfoByMonth(companyId,deptId, personId , year, month , roleKey);
+		List<MonthlyItemInfo>  sellTargerList = null;
+		if(mainInfo!=null){
+			String mainInfoId = mainInfo.getId();
+			sellTargerList = monthlyItemInfoService.getMonthlyItemInfoListOfSellTargetByMainInfoId(mainInfoId);
+			boolean flag=false;
+			if(sellTargerList!=null && sellTargerList.size()>0){
+				MonthlyItemInfo temp = null;
+				//如果添加了多个销售额类型的子项信息，则计算和各项的和
+				boolean noAdd=false;//不累加标示
+				for(MonthlyItemInfo item : sellTargerList){
+					if(temp==null){
+						temp = item;
+						noAdd=true;//不累加
+					}
+					if(temp!=null){
+						if(!noAdd){
+							temp.setFirstWeek(compute(temp.getFirstWeek(), item.getFirstWeek()));
+							temp.setSecondWeek(compute(temp.getSecondWeek(), item.getSecondWeek()));
+							temp.setThirdWeek(compute(temp.getThirdWeek(), item.getThirdWeek()));
+							temp.setFourthWeek(compute(temp.getFourthWeek(), item.getFourthWeek()));
+						}
+						noAdd=false;
+						flag = true;
+					}
+				}
+				planAmount = new BigDecimal(temp.getSellTarget().replace("￥", "").replace(",", ""));
+			}
+		}else{
+			planAmount = new BigDecimal(0);
+		}
+		
+		return planAmount;
+	}
+	/**
+	 * 计算某年某月实际销售总额
+	 * @param companyId
+	 * @param deptId
+	 * @param personId
+	 * @param year
+	 * @param month
+	 * @return
+	 */
+	private BigDecimal getSellAmountForMonth(String companyId, String deptId, String personId, int year, int month) {
+		//月报表开始时间记录的年月日
+		Calendar monthBegin = Calendar.getInstance();
+		monthBegin.set(Calendar.YEAR, year);
+		monthBegin.set(Calendar.MONTH, month-1);
+		monthBegin.set(Calendar.DAY_OF_MONTH, monthBegin.getMinimum(Calendar.DATE));
+		monthBegin.set(Calendar.HOUR_OF_DAY, 0);
+		monthBegin.set(Calendar.MINUTE , 0 );
+		monthBegin.set(Calendar.SECOND, 0);
+		
+		Calendar monthkEnd = Calendar.getInstance();
+		monthkEnd.set(Calendar.YEAR, year);
+		monthkEnd.set(Calendar.MONTH, month-1);
+		monthkEnd.set(Calendar.DAY_OF_MONTH, 1);
+		int value = monthkEnd.getActualMaximum(Calendar.DAY_OF_MONTH);
+		monthkEnd.set(Calendar.DAY_OF_MONTH, value);
+		monthkEnd.set(Calendar.HOUR_OF_DAY, 23);
+		monthkEnd.set(Calendar.MINUTE , 59 );
+		monthkEnd.set(Calendar.SECOND, 59);
+		//指定月的实际销售额
+		System.out.println(CalendarUtils.toLongString(monthBegin));
+		System.out.println(CalendarUtils.toLongString(monthkEnd));
+		
+		BigDecimal sellAmount = sellRecordService.getSalesmanRealCollectionByBargainTime(companyId, deptId,personId, monthBegin, monthkEnd);
+		return sellAmount;
+	}
+	
+	/**
+	 * 计算某年某月第某周的计划销售总额
+	 * @param roleKey
+	 * @param companyId
+	 * @param deptId
+	 * @param personId
+	 * @param weekIndex
+	 * @param year
+	 * @param month
+	 * @return
+	 */
+	private BigDecimal getPlanAmountForWeek(String roleKey, String companyId, String deptId,String personId,  int year, int month ,int weekIndex) {
+		BigDecimal planAmount = new BigDecimal(0);
+		MonthlyMainInfo mainInfo = monthlyMainInfoService.getMonthlyMainInfoByMonth(companyId,deptId, personId ,year,month , roleKey);
+		List<MonthlyItemInfo>  sellTargerList = null;
+		if(mainInfo!=null){
+			sellTargerList = monthlyItemInfoService.getMonthlyItemInfoListOfSellTargetByMainInfoId(mainInfo.getId());
+		}
+		boolean flag=false;
+		if(sellTargerList!=null && sellTargerList.size()>0){
+			MonthlyItemInfo temp = null;
+			//如果添加了多个销售额类型的子项信息，则计算和各项的和
+			boolean noAdd=false;//不累加标示
+			for(MonthlyItemInfo item : sellTargerList){
+				if(temp==null){
+					temp = item;
+					noAdd=true;//不累加
+				}
+				if(temp!=null){
+					if(!noAdd){
+						temp.setFirstWeek(compute(temp.getFirstWeek(), item.getFirstWeek()));
+						temp.setSecondWeek(compute(temp.getSecondWeek(), item.getSecondWeek()));
+						temp.setThirdWeek(compute(temp.getThirdWeek(), item.getThirdWeek()));
+						temp.setFourthWeek(compute(temp.getFourthWeek(), item.getFourthWeek()));
+					}
+					noAdd=false;
+				}
+			}
+			if(weekIndex==1){
+				planAmount = new BigDecimal(temp.getFirstWeek());
+			}
+			if(weekIndex==2){
+				planAmount = new BigDecimal(temp.getSecondWeek());
+			}
+			if(weekIndex==3){
+				planAmount = new BigDecimal(temp.getThirdWeek());
+			}
+			if(weekIndex==4){
+				planAmount = new BigDecimal(temp.getFourthWeek());
+			}
+		}
+		return planAmount;
+	}
+	
+	
+	/**
+	 * 计算某年某月第某周的销售总额
+	 * @param year
+	 * @param month
+	 * @param weekIndex
+	 * @return
+	 */
+	private BigDecimal getSellAmountForWeek(String companyId,String deptId,String personId, int year, int month,int weekIndex) {
+		BigDecimal value=new BigDecimal(0);
+		if(weekIndex==1){
+			Calendar firstWeekBegin = Calendar.getInstance();
+			Calendar firstWeekEnd = Calendar.getInstance();
+			//第一周开始时间
+			firstWeekBegin.set(Calendar.YEAR, year);
+			firstWeekBegin.set(Calendar.MONTH, month-1);
+			firstWeekBegin.set(Calendar.DAY_OF_MONTH, 1);
+			firstWeekBegin.set(Calendar.HOUR_OF_DAY, 0);
+			firstWeekBegin.set(Calendar.MINUTE , 0 );
+			firstWeekBegin.set(Calendar.SECOND, 0);
+			//第一周结束时间
+			firstWeekEnd.set(Calendar.YEAR, year);
+			firstWeekEnd.set(Calendar.MONTH, month-1);
+			firstWeekEnd.set(Calendar.DAY_OF_MONTH, 7);
+			firstWeekEnd.set(Calendar.HOUR_OF_DAY, 23);
+			firstWeekEnd.set(Calendar.MINUTE , 59 );
+			firstWeekEnd.set(Calendar.SECOND, 59);
+			value = sellRecordService.getSalesmanRealCollectionByBargainTime(companyId, deptId,personId, firstWeekBegin, firstWeekEnd);
+		}
+		
+		if(weekIndex==2){
+			Calendar secondWeekBegin = Calendar.getInstance();
+			Calendar secondWeekEnd = Calendar.getInstance();
+			//第二周开始时间
+			secondWeekBegin.set(Calendar.YEAR, year);
+			secondWeekBegin.set(Calendar.MONTH, month-1);
+			secondWeekBegin.set(Calendar.DAY_OF_MONTH, 8);
+			secondWeekBegin.set(Calendar.HOUR_OF_DAY, 0);
+			secondWeekBegin.set(Calendar.MINUTE , 0 );
+			secondWeekBegin.set(Calendar.SECOND, 0);
+			//第二周结束时间
+			secondWeekEnd.set(Calendar.YEAR, year);
+			secondWeekEnd.set(Calendar.MONTH, month-1);
+			secondWeekEnd.set(Calendar.DAY_OF_MONTH, 14);
+			secondWeekEnd.set(Calendar.HOUR_OF_DAY, 23);
+			secondWeekEnd.set(Calendar.MINUTE , 59 );
+			secondWeekEnd.set(Calendar.SECOND, 59);
+			value =  sellRecordService.getSalesmanRealCollectionByBargainTime(sessionCompanyId, deptId,personId, secondWeekBegin, secondWeekEnd);
+		}
+		if(weekIndex==3){
+			Calendar thirdWeekBegin = Calendar.getInstance();
+			Calendar thirdWeekEnd = Calendar.getInstance();
+			//第三周开始时间
+			thirdWeekBegin.set(Calendar.YEAR, year);
+			thirdWeekBegin.set(Calendar.MONTH, month-1);
+			thirdWeekBegin.set(Calendar.DAY_OF_MONTH, 15);
+			thirdWeekBegin.set(Calendar.HOUR_OF_DAY, 0);
+			thirdWeekBegin.set(Calendar.MINUTE , 0 );
+			thirdWeekBegin.set(Calendar.SECOND, 0);
+			//第三周结束时间
+			thirdWeekEnd.set(Calendar.YEAR, year);
+			thirdWeekEnd.set(Calendar.MONTH, month-1);
+			thirdWeekEnd.set(Calendar.DAY_OF_MONTH, 21);
+			thirdWeekEnd.set(Calendar.HOUR_OF_DAY, 23);
+			thirdWeekEnd.set(Calendar.MINUTE , 59 );
+			thirdWeekEnd.set(Calendar.SECOND, 59);
+			value = sellRecordService.getSalesmanRealCollectionByBargainTime(sessionCompanyId, deptId,personId, thirdWeekBegin, thirdWeekEnd);
+		}
+		if(weekIndex==4){
+			Calendar fourthWeekBegin = Calendar.getInstance();
+			Calendar fourthWeekEnd = Calendar.getInstance();
+			//第四周开始时间
+			fourthWeekBegin.set(Calendar.YEAR, year);
+			fourthWeekBegin.set(Calendar.MONTH, month-1);
+			fourthWeekBegin.set(Calendar.DAY_OF_MONTH, 22);
+			fourthWeekBegin.set(Calendar.HOUR_OF_DAY, 0);
+			fourthWeekBegin.set(Calendar.MINUTE , 0 );
+			fourthWeekBegin.set(Calendar.SECOND, 0);
+			//第四周结束时间
+			fourthWeekEnd.set(Calendar.YEAR, year);
+			fourthWeekEnd.set(Calendar.MONTH, month-1);
+			fourthWeekEnd.set(Calendar.DAY_OF_MONTH, fourthWeekEnd.getActualMaximum(Calendar.DAY_OF_MONTH));
+			fourthWeekEnd.set(Calendar.HOUR_OF_DAY, 23);
+			fourthWeekEnd.set(Calendar.MINUTE , 59 );
+			fourthWeekEnd.set(Calendar.SECOND, 59);
+			value = sellRecordService.getSalesmanRealCollectionByBargainTime(sessionCompanyId, deptId,personId, fourthWeekBegin, fourthWeekEnd);
+		}
+		return value;
+	}
 	
 	
 	
@@ -959,154 +1294,132 @@ public class SellReportStatAction extends BaseActionSupport{
 	public List<Deptment> getDeptList() {
 		return deptList;
 	}
-
 	/**
 	 * @param deptList the deptList to set
 	 */
 	public void setDeptList(List<Deptment> deptList) {
 		this.deptList = deptList;
 	}
-
 	/**
 	 * @return the userList
 	 */
 	public List<User> getUserList() {
 		return userList;
 	}
-
 	/**
 	 * @param userList the userList to set
 	 */
 	public void setUserList(List<User> userList) {
 		this.userList = userList;
 	}
-
 	/**
 	 * @return the companyId
 	 */
 	public String getCompanyId() {
 		return companyId;
 	}
-
 	/**
 	 * @param companyId the companyId to set
 	 */
 	public void setCompanyId(String companyId) {
 		this.companyId = companyId;
 	}
-
 	/**
 	 * @return the companyName
 	 */
 	public String getCompanyName() {
 		return companyName;
 	}
-
 	/**
 	 * @param companyName the companyName to set
 	 */
 	public void setCompanyName(String companyName) {
 		this.companyName = companyName;
 	}
-
 	/**
 	 * @return the statYear
 	 */
 	public String getStatYear() {
 		return statYear;
 	}
-
 	/**
 	 * @param statYear the statYear to set
 	 */
 	public void setStatYear(String statYear) {
 		this.statYear = statYear;
 	}
-
 	/**
 	 * @return the statMonth
 	 */
 	public String getStatMonth() {
 		return statMonth;
 	}
-
 	/**
 	 * @param statMonth the statMonth to set
 	 */
 	public void setStatMonth(String statMonth) {
 		this.statMonth = statMonth;
 	}
-
 	/**
 	 * @return the xmlStream
 	 */
 	public InputStream getXmlStream() {
 		return xmlStream;
 	}
-
 	/**
 	 * @param xmlStream the xmlStream to set
 	 */
 	public void setXmlStream(InputStream xmlStream) {
 		this.xmlStream = xmlStream;
 	}
-
 	/**
 	 * @return the statBeginDate
 	 */
 	public String getStatBeginDate() {
 		return statBeginDate;
 	}
-
 	/**
 	 * @param statBeginDate the statBeginDate to set
 	 */
 	public void setStatBeginDate(String statBeginDate) {
 		this.statBeginDate = statBeginDate;
 	}
-
 	/**
 	 * @return the statEndDate
 	 */
 	public String getStatEndDate() {
 		return statEndDate;
 	}
-
 	/**
 	 * @param statEndDate the statEndDate to set
 	 */
 	public void setStatEndDate(String statEndDate) {
 		this.statEndDate = statEndDate;
 	}
-
 	/**
 	 * @return the deptId
 	 */
 	public String getDeptId() {
 		return deptId;
 	}
-
 	/**
 	 * @param deptId the deptId to set
 	 */
 	public void setDeptId(String deptId) {
 		this.deptId = deptId;
 	}
-
 	/**
 	 * @return the personId
 	 */
 	public String getPersonId() {
 		return personId;
 	}
-
 	/**
 	 * @param personId the personId to set
 	 */
 	public void setPersonId(String personId) {
 		this.personId = personId;
 	}
-
 	private String compute(String old, String young) {
 		Double a= new Double(0);
 		Double b= new Double(0);
@@ -1148,6 +1461,42 @@ public class SellReportStatAction extends BaseActionSupport{
 	public void setSalesPerformanceRankList(
 			List<SalesPerformanceRank> salesPerformanceRankList) {
 		this.salesPerformanceRankList = salesPerformanceRankList;
+	}
+	/**
+	 * @return the type
+	 */
+	public String getType() {
+		return type;
+	}
+	/**
+	 * @param type the type to set
+	 */
+	public void setType(String type) {
+		this.type = type;
+	}
+	/**
+	 * @return the weekIndex
+	 */
+	public int getWeekIndex() {
+		return weekIndex;
+	}
+	/**
+	 * @param weekIndex the weekIndex to set
+	 */
+	public void setWeekIndex(int weekIndex) {
+		this.weekIndex = weekIndex;
+	}
+	/**
+	 * @return the userId
+	 */
+	public String getUserId() {
+		return userId;
+	}
+	/**
+	 * @param userId the userId to set
+	 */
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 }
 
