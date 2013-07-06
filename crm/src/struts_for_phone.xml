@@ -44,6 +44,9 @@
 			<result name="input">/common/show-string.jsp</result>
 		</action>
 		<action name="getSellerSellRecordListForPhoneAction" class="sellRecordAction" method="getSellerSellRecordListForPhone"></action>
-		
+	</package>
+	<!-- 销售记录统计、查看 -->
+	<package name="sellreportstatforphone" extends="phonejson">
+		<action name="getDeptSellerSellRecordListForPhoneAction" class="sellReportStatAction" method="getDeptSellerSellRecordListForPhone"></action>
 	</package>
 </struts>
