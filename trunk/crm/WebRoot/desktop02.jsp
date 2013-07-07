@@ -66,7 +66,7 @@
             	flag = popedomService.isHasPopedom(us.getUserId(), String.valueOf(us.getUserType()), MenuKey.DESKTOP_SUB_MONTH_PLAN, us.getPopedomKeys());
             	if( flag ){
             	%>
-            	onclick="window.location.href='sellreport/weekly/monthlymaininfomanagerview.jsp'" style="cursor:pointer"
+            	onclick="window.location.href='sellreport/monthly/monthlymaininfomanagerview.jsp'" style="cursor:pointer"
             	<%} %>
             	>
             <table width="100%"  style="height:71px;" border="0" cellspacing="0" cellpadding="0">
