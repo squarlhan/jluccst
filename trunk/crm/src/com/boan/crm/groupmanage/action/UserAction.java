@@ -33,6 +33,7 @@ import com.boan.crm.common.UserConfig;
 import com.boan.crm.common.UserType;
 import com.boan.crm.groupmanage.common.RoleFlag;
 import com.boan.crm.groupmanage.common.UserSession;
+import com.boan.crm.groupmanage.model.PhoneUser;
 import com.boan.crm.groupmanage.model.Role;
 import com.boan.crm.groupmanage.model.User;
 import com.boan.crm.groupmanage.security.CheckProductKey;
@@ -384,6 +385,30 @@ public class UserAction extends BaseActionSupport {
 			}
 		}
 		return "show-list";
+	}
+	
+	/**
+	 * 显示用户列表用于手机端列表
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public String showUserListByDeptIdForPhone() throws Exception {
+		HttpServletRequest request = ServletActionContext.getRequest();
+		if( StringUtils.isNotBlank(companyId) && StringUtils.isNotBlank(deptId))
+		{
+			List<User> list= userService.queryUserList(companyId, deptId);
+			List<PhoneUser> phoneUserList = PhoneUser.convertUserListToPhoneUserList(list);
+			request.setAttribute("list", phoneUserList);
+			
+		}
+		else
+		{
+			List<User> list = new ArrayList<User>();
+			request.setAttribute("list", list);
+		}
+		request.setAttribute("jsonRootName", "staff");
+		return COMMON_LIST;
 	}
 
 	/**
