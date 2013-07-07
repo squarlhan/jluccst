@@ -94,8 +94,8 @@
           		<%
             	flag = popedomService.isHasPopedom(us.getUserId(), String.valueOf(us.getUserType()), MenuKey.DESKTOP_SUB_CUSTOMER_SOURCE, us.getPopedomKeys());
             	if( flag ){
-            	//onclick="window.location.href='sellreport/weekly/monthlymaininfomanagerview.jsp'" style="cursor:pointer"
             	%>
+            	onclick="window.location.href='customer/customerStaticInfo.action?flag=source'" style="cursor:pointer"
             	<%} %>
             	>
             <td style="width:340px; height:71px; background-image:url(images/desktop/03_03.jpg); background-repeat:no-repeat;"><table width="100%"  style="height:71px;" border="0" cellspacing="0" cellpadding="0">
