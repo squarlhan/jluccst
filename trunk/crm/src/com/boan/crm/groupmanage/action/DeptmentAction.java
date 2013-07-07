@@ -8,9 +8,15 @@
  */
 package com.boan.crm.groupmanage.action;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.commons.lang.StringUtils;
+import org.apache.struts2.ServletActionContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
@@ -21,6 +27,9 @@ import com.boan.crm.backstagemanage.model.Company;
 import com.boan.crm.backstagemanage.model.Log;
 import com.boan.crm.common.Message;
 import com.boan.crm.groupmanage.model.Deptment;
+import com.boan.crm.groupmanage.model.PhoneDeptment;
+import com.boan.crm.groupmanage.model.PhoneUser;
+import com.boan.crm.groupmanage.model.User;
 import com.boan.crm.groupmanage.service.IDeptmentService;
 import com.boan.crm.groupmanage.service.IUserService;
 import com.boan.crm.utils.action.BaseActionSupport;
@@ -105,6 +114,28 @@ public class DeptmentAction extends BaseActionSupport
 			}
 		}
 		return SUCCESS;
+	}
+	/**
+	 * 显示公司下部门列表，用于手机端
+	 * @return
+	 * @throws Exception
+	 */
+	public String showDeptListForPhone() throws Exception
+	{
+		HttpServletRequest request = ServletActionContext.getRequest();
+		if( StringUtils.isNotBlank(companyId) )
+		{
+			List<Deptment> list= service.queryAllDeptmentsByCompanyId( companyId );
+			List<PhoneDeptment> phoneUserList = PhoneDeptment.convertDeptListToPhoneDeptList(list);
+			request.setAttribute("list", phoneUserList);
+		}
+		else
+		{
+			List<User> list = new ArrayList<User>();
+			request.setAttribute("list", list);
+		}
+		request.setAttribute("jsonRootName", "department");
+		return COMMON_LIST;
 	}
 
 	/**
