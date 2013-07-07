@@ -77,8 +77,8 @@
 	        		<s:if test='isSuperUser=="true"'>
 	        		[ <A href="javascript:viewOpinion();" style="color:yellow">意见反馈</A> ]
 	        		</s:if>
-	        		[ <A href="./userLogonAction!showDesktop.action" style="color:yellow" target="mainFrame">首页</A> ]
 	        		[ <A href="javascript:myinfo();" style="color:yellow">个人资料</A> ]
+	        		[ <A href="./userLogonAction!showDesktop.action" style="color:yellow" target="mainFrame">首页</A> ]
 	        		[ <A href="javascript:logout();" style="color:yellow">退出</A> ]
 	        	</span>
 	        </td>
