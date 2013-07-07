@@ -373,6 +373,7 @@ public class UserLogonAction extends ActionSupport {
 				{
 					//部门领导
 					map.put("user_group", "2");
+					map.put("departId", userSession.getDeptId());
 					userType = 2;
 				}
 				else if(RoleFlag.GONG_SI_LING_DAO.equalsIgnoreCase( userSession.getRoleKey()) )
