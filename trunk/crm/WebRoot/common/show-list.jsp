@@ -27,7 +27,7 @@
 		sb.append("{\""+ jsonRootName +"\":" + JSONSerializer.toJSON(list, jsonConfig ).toString());
 		sb.append("}");
 	} else {
-		sb.append("{root:[]}");
+		sb.append("{"+ jsonRootName +":[]}");
 	}
 	response.getWriter().write(sb.toString(  ));
 %>
