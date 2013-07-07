@@ -61,7 +61,7 @@
         <td align="center"><table border="0" cellspacing="3" cellpadding="0">
           <tr>
           <!-- 月计划 -->
-            <td style="width:340px; height:71px; background-image:url(images/desktop/02_01.jpg); background-repeat:no-repeat;"
+            <td style="width:340px; height:71px; background-image:url(images/desktop/02_01.jpg); background-repeat:no-repeat;" title="月计划"
             	<%
             	flag = popedomService.isHasPopedom(us.getUserId(), String.valueOf(us.getUserType()), MenuKey.DESKTOP_SUB_MONTH_PLAN, us.getPopedomKeys());
             	if( flag ){
@@ -78,7 +78,7 @@
           </tr>
           <tr>
           <!-- 周计划 -->
-            <td style="width:340px; height:71px; background-image:url(images/desktop/02_02.jpg); background-repeat:no-repeat;"
+            <td style="width:340px; height:71px; background-image:url(images/desktop/02_02.jpg); background-repeat:no-repeat;" title="周计划"
             	<%
             	flag = popedomService.isHasPopedom(us.getUserId(), String.valueOf(us.getUserType()), MenuKey.DESKTOP_SUB_WEEK_PLAN, us.getPopedomKeys());
             	if( flag ){
@@ -95,7 +95,7 @@
           </tr>
           <tr>
           	<!-- 日报 -->
-            <td style="width:340px; height:71px; background-image:url(images/desktop/02_03.jpg); background-repeat:no-repeat;"
+            <td style="width:340px; height:71px; background-image:url(images/desktop/02_03.jpg); background-repeat:no-repeat;" title="日报"
             	<%
             	flag = popedomService.isHasPopedom(us.getUserId(), String.valueOf(us.getUserType()), MenuKey.DESKTOP_SUB_DAILY_PAPER, us.getPopedomKeys());
             	if( flag ){
@@ -112,7 +112,7 @@
           </tr>
           <tr>
           	<!-- 行动计划 -->
-            <td style="width:340px; height:71px; background-image:url(images/desktop/02_04.jpg); background-repeat:no-repeat;"
+            <td style="width:340px; height:71px; background-image:url(images/desktop/02_04.jpg); background-repeat:no-repeat;" title="行动计划"
             	<%
             	flag = popedomService.isHasPopedom(us.getUserId(), String.valueOf(us.getUserType()), MenuKey.DESKTOP_SUB_ACT_PLAN, us.getPopedomKeys());
             	if( flag ){
