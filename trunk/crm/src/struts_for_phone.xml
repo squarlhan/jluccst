@@ -12,11 +12,12 @@
 			<result name="show-common-result">/common/show-result.jsp</result>
 		</global-results>
 	</package>
-	<!-- 登录 -->
+	<!-- 登录、组织机构信息 -->
 	<package name="phoneplatform" extends="phonejson">
 		<action name="logonValidForPhoneAction" class="userLogonAction" method="logonValidForPhone"></action>
 		<action name="showUserInfoForPhoneAction" class="userAction" method="showUserInfoForPhone"></action>
 		<action name="updateUserForPhoneAction" class="userAction" method="updateUserForPhone"></action>
+		<action name="showUserListByDeptIdForPhoneAction" class="userAction" method="showUserListByDeptIdForPhone"></action>
 	</package>
 	<!-- 客户信息 -->
 	<package name="customerinfo" extends="phonejson">
