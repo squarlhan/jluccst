@@ -444,7 +444,7 @@ public class UserLogonAction extends ActionSupport {
 		HttpSession session = ServletActionContext.getRequest().getSession();
 		UserSession userSession = (UserSession) session.getAttribute("userSession");
 		isHashPopedom01 = popedomService.isHasPopedom(userSession.getUserId(), String.valueOf(userSession.getUserType()), MenuKey.DESKTOP_CUSTOMER, userSession.getPopedomKeys());
-		isHashPopedom02 = popedomService.isHasPopedom(userSession.getUserId(), String.valueOf(userSession.getUserType()), MenuKey.DESKTOP_MONTH_PLAN, userSession.getPopedomKeys());
+		isHashPopedom02 = popedomService.isHasPopedom(userSession.getUserId(), String.valueOf(userSession.getUserType()), MenuKey.DESKTOP_PLAN_MANAGER, userSession.getPopedomKeys());
 		isHashPopedom03 = popedomService.isHasPopedom(userSession.getUserId(), String.valueOf(userSession.getUserType()), MenuKey.DESKTOP_SALES_STAT, userSession.getPopedomKeys());
 		// 返回桌面地址
 		if (isHashPopedom01) {
@@ -468,7 +468,7 @@ public class UserLogonAction extends ActionSupport {
 		HttpSession session = ServletActionContext.getRequest().getSession();
 		UserSession userSession = (UserSession) session.getAttribute("userSession");
 		isHashPopedom01 = popedomService.isHasPopedom(userSession.getUserId(), String.valueOf(userSession.getUserType()), MenuKey.DESKTOP_CUSTOMER, userSession.getPopedomKeys());
-		isHashPopedom02 = popedomService.isHasPopedom(userSession.getUserId(), String.valueOf(userSession.getUserType()), MenuKey.DESKTOP_MONTH_PLAN, userSession.getPopedomKeys());
+		isHashPopedom02 = popedomService.isHasPopedom(userSession.getUserId(), String.valueOf(userSession.getUserType()), MenuKey.DESKTOP_PLAN_MANAGER, userSession.getPopedomKeys());
 		isHashPopedom03 = popedomService.isHasPopedom(userSession.getUserId(), String.valueOf(userSession.getUserType()), MenuKey.DESKTOP_SALES_STAT, userSession.getPopedomKeys());
 		return desktopUrl;
 	}
