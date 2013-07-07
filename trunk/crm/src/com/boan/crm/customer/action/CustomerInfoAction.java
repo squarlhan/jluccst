@@ -148,6 +148,8 @@ public class CustomerInfoAction extends BaseActionSupport{
 	private boolean teamFlag = false;
 	private String searchFlag = "";
 	private String userId = "";
+	private String taskId = "";
+	private String type = "";
 	/**
 	 * 上传导入文件的名称
 	 */
@@ -581,6 +583,31 @@ public class CustomerInfoAction extends BaseActionSupport{
 		request.setAttribute("list", list);
 		request.setAttribute("jsonRootName", "task");
 		return COMMON_LIST; 
+	}
+	/**
+	 * 删除我的已完成任务列表
+	 * @return 
+	 */
+	public String deleteMyFinishedTaskListForPhone()
+	{
+		if(type != null && type.length() > 0)
+		{
+			if(type.equals("1"))
+			{
+				customerTraceInfoService.deleteCustomerTraceInfo(taskId);
+			}else
+			{
+				customerVisitInfoService.deleteCustomerVisitInfo(taskId);
+			}
+			message = "success";
+		}else
+		{
+			message = "failure";
+		}
+		
+		HttpServletRequest request = ServletActionContext.getRequest();
+		request.setAttribute("message", message);
+		return COMMON_RESULT;
 	}
 	/**
 	 * 客户列表
@@ -1614,5 +1641,21 @@ public class CustomerInfoAction extends BaseActionSupport{
 
 	public void setCustomerProgress(String customerProgress) {
 		this.customerProgress = customerProgress;
+	}
+
+	public String getTaskId() {
+		return taskId;
+	}
+
+	public void setTaskId(String taskId) {
+		this.taskId = taskId;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 }
