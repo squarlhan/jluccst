@@ -7,10 +7,15 @@
 	request.setCharacterEncoding( "utf-8" );
 	response.setCharacterEncoding( "utf-8" );
 	String message = ( String ) request.getAttribute( "message" );
+	String id = ( String ) request.getAttribute( "id" );
 	//获取请求参数
 	StringBuffer sb = new StringBuffer();
 	sb.append("{");
 	sb.append("\"status\":\"" + message+"\"");
+	if(id != null && id.length() > 0)
+	{
+		sb.append(",\"id\":\"" + id+"\"");
+	}
 	sb.append("}");
 	response.getWriter().write(sb.toString(  ));
 %>
