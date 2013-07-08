@@ -28,8 +28,10 @@ import org.springframework.stereotype.Controller;
 
 import com.boan.crm.backstagemanage.common.ProductType;
 import com.boan.crm.customer.model.BusinessProgressKey;
+import com.boan.crm.customer.model.ContractPersonDetailInfoForJson;
 import com.boan.crm.customer.model.ContractPersonInfo;
 import com.boan.crm.customer.model.ContractPersonInfoForJson;
+import com.boan.crm.customer.model.CustomerDetailInfoForJson;
 import com.boan.crm.customer.model.CustomerInfo;
 import com.boan.crm.customer.model.CustomerListInfoForJson;
 import com.boan.crm.customer.model.CustomerStaticInfo;
@@ -60,6 +62,7 @@ import com.boan.crm.timemanage.model.TimePlanForJson;
 import com.boan.crm.timemanage.service.ITimePlanService;
 import com.boan.crm.utils.action.BaseActionSupport;
 import com.boan.crm.utils.calendar.CalendarUtils;
+import com.boan.crm.utils.calendar.CurrentDateTime;
 import com.boan.crm.utils.io.impl.FileCopyAndDeleteUtilsAdaptor;
 import com.boan.crm.utils.page.Pagination;
 import com.boan.crm.utils.path.PathUtil;
@@ -496,13 +499,48 @@ public class CustomerInfoAction extends BaseActionSupport{
 	{
 		//TODO
 		HttpServletRequest request = ServletActionContext.getRequest();
-		Map<String,Object> map = new HashMap<String,Object>();
 		if(StringUtils.trimToNull(id)!=null)
 		{
+			customerInfo = customerInfoService.get(id);
+			CustomerDetailInfoForJson obj = new CustomerDetailInfoForJson();
+			obj.setAddress(customerInfo.getAddress());
+			obj.setCome_from(customerInfo.getSource());
+			obj.setCompany(customerInfo.getCustomerName());
+			obj.setCompany_full_name(customerInfo.getCompanyFullName());
+			obj.setDevelope(customerInfo.getLevelId());
+			obj.setFax(customerInfo.getFax());
+			obj.setIndustry(customerInfo.getMainIndustry());
+			obj.setProgress(customerInfo.getProgressId());
+			obj.setType(customerInfo.getCategory());
 			
+			List<ContractPersonInfo>  listPerson = contractpersonInfoService.findAllContractPersonInfoByCustomerId(id);
+			List<ContractPersonDetailInfoForJson> list = new ArrayList<ContractPersonDetailInfoForJson>();
+			if(listPerson != null &&listPerson.size() > 0)
+			{
+				for(int i=0;i<listPerson.size();i++)
+				{
+					ContractPersonDetailInfoForJson detail = new ContractPersonDetailInfoForJson();
+					detail.setBirth_day(CurrentDateTime.getCurrentDate(listPerson.get(i).getBirthday()));
+					detail.setBirth_type(String.valueOf(listPerson.get(i).getLunar()));
+					detail.setEmail(listPerson.get(i).getEmail());
+					detail.setMobile(listPerson.get(i).getTel());
+					detail.setName(listPerson.get(i).getPersonName());
+					detail.setNick_name(listPerson.get(i).getNickName());
+					detail.setPhone(listPerson.get(i).getPhone());
+					detail.setPosition(listPerson.get(i).getDeptOrDuty());
+					detail.setQQ(listPerson.get(i).getQq());
+					list.add(detail);
+				}
+				
+				obj.setContact(list);
+			}
+			
+			
+			request.setAttribute("object", obj);
 		}
-		request.setAttribute("map", map);
-		return COMMON_MAP;
+		
+		
+		return COMMON_OBJECT;
 	}
 	/**
 	 * 获取我的任务列表
