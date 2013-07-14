@@ -104,6 +104,32 @@ public class CustomerInfoForPhoneAction extends BaseActionSupport{
 		request.setAttribute("id", id);
 		return COMMON_RESULT;
 	}
+	/**
+	 * 保存客户详细信息
+	 * @return String
+	 */
+	public String saveCustomerDetailInfoForPhone()
+	{
+		CustomerInfo customerInfo = customerInfoService.get(id);
+		
+		//customerInfo.setCompanyId(sessionCompanyId);
+		
+		customerInfo.setAddress(detailAddress);
+		//customerInfo.setCategoryId(customerInfo.getCategoryId());
+		//customerInfo.setSourceId(clientComeWay);
+		//customerInfo.setCity(customerInfo.getCity());
+		//customerInfo.setDistrict(customerInfo.getDistrict());
+//		customerInfo.setLevelId(customerInfo.getLevelId());
+//		customerInfo.setProvince(customerInfo.getProvince());
+		customerInfo.setMainIndustry(industry);
+		customerInfo.setCompanyFullName(companyFullName);
+		
+		customerInfoService.save(customerInfo);
+		message = "success";
+		HttpServletRequest request = ServletActionContext.getRequest();
+		request.setAttribute("message", message);
+		return COMMON_RESULT;
+	}
 	public String getUserId() {
 		return userId;
 	}

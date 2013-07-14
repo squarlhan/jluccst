@@ -63,6 +63,7 @@ import com.boan.crm.timemanage.service.ITimePlanService;
 import com.boan.crm.utils.action.BaseActionSupport;
 import com.boan.crm.utils.calendar.CalendarUtils;
 import com.boan.crm.utils.calendar.CurrentDateTime;
+import com.boan.crm.utils.calendar.MySimpleDateFormat;
 import com.boan.crm.utils.io.impl.FileCopyAndDeleteUtilsAdaptor;
 import com.boan.crm.utils.page.Pagination;
 import com.boan.crm.utils.path.PathUtil;
@@ -167,6 +168,8 @@ public class CustomerInfoAction extends BaseActionSupport{
 	private List<CustomerStaticInfo> listProgressStatic =  null;
 	private List<CustomerStaticInfo> listLevelStatic =  null;
 	private String progress = "";
+	private String startTime = "";
+	private String endTime = "";
 	public CustomerInfoAction()
 	{
 		if(this.getSession() != null)
@@ -416,6 +419,11 @@ public class CustomerInfoAction extends BaseActionSupport{
 			List<TaskInfoForJson> listTraceTask = new ArrayList<TaskInfoForJson>();
 			Map<String,Object> values = new HashMap<String,Object>();
 			values.put( "salesmanId", userId );
+			if(startTime != null)
+				values.put("startTime", MySimpleDateFormat.parse(startTime,"yyyy-MM-dd HH:mm:ss"));
+			if(endTime != null)
+				values.put("endTime", MySimpleDateFormat.parse(endTime,"yyyy-MM-dd HH:mm:ss"));
+			
 			List<CustomerTraceInfo> listTrace = customerTraceInfoService.findCustomerTraceInfoForPage(values, new Pagination<CustomerTraceInfo>()).getData();
 			if(listTrace != null && listTrace.size() > 0)
 			{
@@ -1695,5 +1703,21 @@ public class CustomerInfoAction extends BaseActionSupport{
 
 	public void setType(String type) {
 		this.type = type;
+	}
+
+	public String getStartTime() {
+		return startTime;
+	}
+
+	public void setStartTime(String startTime) {
+		this.startTime = startTime;
+	}
+
+	public String getEndTime() {
+		return endTime;
+	}
+
+	public void setEndTime(String endTime) {
+		this.endTime = endTime;
 	}
 }
