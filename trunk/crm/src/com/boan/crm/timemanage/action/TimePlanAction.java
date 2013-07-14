@@ -23,6 +23,7 @@ import com.boan.crm.groupmanage.service.IDeptmentService;
 import com.boan.crm.groupmanage.service.IPopedomService;
 import com.boan.crm.groupmanage.service.IUserService;
 import com.boan.crm.timemanage.model.TimePlan;
+import com.boan.crm.timemanage.model.TimePlanDeptInfo;
 import com.boan.crm.timemanage.model.TimePlanForJson;
 import com.boan.crm.timemanage.model.TimePlanInfoForJson;
 import com.boan.crm.timemanage.model.TimePlanStaffPersonInfo;
@@ -393,30 +394,6 @@ public class TimePlanAction extends BaseActionSupport{
 	}
 	
 	/**
-	 * 公司领导查询销售情况(周、月）返回Json串给手机客户端
-	 * @return
-	 */
-	public String getLeadSellRecordListForPhone(){
-		return COMMON_MAP;
-	}
-	
-	/**
-	 * 公司领导查询部门销售情况(周、月）返回Json串给手机客户端
-	 * @return
-	 */
-	public String getLeadSellRecordListByDeptForPhone(){
-		return COMMON_MAP;
-	}
-	
-	/**
-	 * 公司领导查询销售员销售情况(周、月）返回Json串给手机客户端
-	 * @return
-	 */
-	public String getLeadSellRecordListBySellerIdForPhone(){
-		return COMMON_MAP;
-	}
-	
-	/**
 	 * 获取部门人员日程返回Json串给手机客户端
 	 * @return
 	 */
@@ -425,9 +402,78 @@ public class TimePlanAction extends BaseActionSupport{
 		try {
 			HttpServletRequest request = ServletActionContext.getRequest();
 			Map<String,Object> map = new HashMap<String,Object>();
-			if(StringUtils.trimToNull(userId)!=null)
+			if(StringUtils.trimToNull(deptId)==null)
 			{
 				deptId = userService.getUserById(userId).getDeptId();
+			}
+			
+			Calendar temp = Calendar.getInstance();
+			temp.set(Calendar.DATE, -15);
+			Calendar beginTime =temp;
+			Calendar endTime = Calendar.getInstance();
+			Map<String,Object> params = new HashMap<String, Object>();
+			 
+			params.put("beginTime", beginTime);
+			params.put("endTime", endTime); 
+			params.put("deptId", deptId);
+			List<TimePlan> listTimePlan =timePlanService.findTimePlan(params);
+			List<TimePlanInfoForJson> listTim = new ArrayList<TimePlanInfoForJson>();
+			List<TimePlanStaffPersonInfo> listPerson = new ArrayList<TimePlanStaffPersonInfo>();
+			if(listTimePlan != null && listTimePlan.size() > 0)
+			{
+				for(int i = 0;i<listTimePlan.size();i++)
+				{
+					TimePlanInfoForJson obj = new TimePlanInfoForJson();
+					TimePlanStaffPersonInfo person = new TimePlanStaffPersonInfo();
+					obj.setId(listTimePlan.get(i).getId());
+					obj.setName(listTimePlan.get(i).getEmployeeName());
+					obj.setType("2");
+					obj.setDate(CalendarUtils.toLongStringNoSecond(listTimePlan.get(i).getSubmitTime()));
+					obj.setSummary(listTimePlan.get(i).getMemo());
+					obj.setPlan(listTimePlan.get(i).getPlanContent());
+					listTim.add(obj);
+					
+					person.setId(listTimePlan.get(i).getEmployeeId());
+					person.setName(listTimePlan.get(i).getEmployeeName());
+					
+					listPerson.add(person);
+				}
+			}
+			
+			map.put("dialy", listTim);
+			map.put("staff", listPerson);
+			request.setAttribute("map", map);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return COMMON_MAP;
+	}
+	
+	
+	/**
+	 * 获取公司人员日程返回Json串给手机客户端
+	 * @return
+	 */
+	public String getLeadDailyInfoForPhone()
+	{
+		try {
+			HttpServletRequest request = ServletActionContext.getRequest();
+			Map<String,Object> map = new HashMap<String,Object>();
+			
+			//当前登录人
+			User currentUser = userService.getUserById(userId);
+			String companyId =currentUser.getCompanyId();
+			List<Deptment>  deptList = deptService.queryAllDeptmentsByCompanyId(companyId);
+			List<TimePlanDeptInfo> listDept = new ArrayList<TimePlanDeptInfo>();
+			List<TimePlanInfoForJson> listTim = new ArrayList<TimePlanInfoForJson>();
+			List<TimePlanStaffPersonInfo> listPerson = new ArrayList<TimePlanStaffPersonInfo>();
+			for(Deptment dept : deptList){
+				deptId = dept.getId();
+				TimePlanDeptInfo tempDetp = new TimePlanDeptInfo();
+				tempDetp.setId(dailyId);
+				tempDetp.setName(dept.getDeptName());
+				listDept.add(tempDetp);
+				
 				Calendar temp = Calendar.getInstance();
 				temp.set(Calendar.DATE, -15);
 				Calendar beginTime =temp;
@@ -438,8 +484,7 @@ public class TimePlanAction extends BaseActionSupport{
 				params.put("endTime", endTime); 
 				params.put("deptId", deptId);
 				List<TimePlan> listTimePlan =timePlanService.findTimePlan(params);
-				List<TimePlanInfoForJson> listTim = new ArrayList<TimePlanInfoForJson>();
-				List<TimePlanStaffPersonInfo> listPerson = new ArrayList<TimePlanStaffPersonInfo>();
+				
 				if(listTimePlan != null && listTimePlan.size() > 0)
 				{
 					for(int i = 0;i<listTimePlan.size();i++)
@@ -461,6 +506,7 @@ public class TimePlanAction extends BaseActionSupport{
 					}
 				}
 				
+				map.put("department", listDept);
 				map.put("dialy", listTim);
 				map.put("staff", listPerson);
 			}
