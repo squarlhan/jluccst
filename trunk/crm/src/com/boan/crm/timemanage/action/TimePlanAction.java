@@ -392,6 +392,29 @@ public class TimePlanAction extends BaseActionSupport{
 		return COMMON_MAP;
 	}
 	
+	/**
+	 * 公司领导查询销售情况(周、月）返回Json串给手机客户端
+	 * @return
+	 */
+	public String getLeadSellRecordListForPhone(){
+		return COMMON_MAP;
+	}
+	
+	/**
+	 * 公司领导查询部门销售情况(周、月）返回Json串给手机客户端
+	 * @return
+	 */
+	public String getLeadSellRecordListByDeptForPhone(){
+		return COMMON_MAP;
+	}
+	
+	/**
+	 * 公司领导查询销售员销售情况(周、月）返回Json串给手机客户端
+	 * @return
+	 */
+	public String getLeadSellRecordListBySellerIdForPhone(){
+		return COMMON_MAP;
+	}
 	
 	/**
 	 * 获取部门人员日程返回Json串给手机客户端
