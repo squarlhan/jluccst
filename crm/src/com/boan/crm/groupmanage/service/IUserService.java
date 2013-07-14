@@ -80,6 +80,14 @@ public interface IUserService {
 	 * @throws Exception
 	 */
 	public List<User> queryUserList( String companyId, String deptId ) throws Exception;
+	/**
+	 * 获取用户列表
+	 * @param deptId
+	 * @param pagination
+	 * @return
+	 * @throws Exception
+	 */
+	public List<User> queryUserListByDeptId(String deptId ) throws Exception;
 
 	/**
 	 * 根据集团id，取得集团下可以登录的用户，用于登录时显示

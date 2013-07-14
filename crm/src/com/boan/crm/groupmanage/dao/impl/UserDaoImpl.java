@@ -222,5 +222,13 @@ public class UserDaoImpl extends BaseDao<User,String> implements IUserDao{
 		map.put( "userCName", "%" + userCName + "%" );
 		return super.find( hql, map );
 	}
+
+	@Override
+	public List<User> queryUserListByDeptId(String deptId) throws Exception {
+		String hql = "from User where  deptId = :deptId order by createTime";
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put( "deptId", deptId );
+		return super.find( hql, map );
+	}
 }
 

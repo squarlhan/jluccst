@@ -395,9 +395,9 @@ public class UserAction extends BaseActionSupport {
 	 */
 	public String showUserListByDeptIdForPhone() throws Exception {
 		HttpServletRequest request = ServletActionContext.getRequest();
-		if( StringUtils.isNotBlank(companyId) && StringUtils.isNotBlank(deptId))
+		if(  StringUtils.isNotBlank(deptId))
 		{
-			List<User> list= userService.queryUserList(companyId, deptId);
+			List<User> list= userService.queryUserListByDeptId( deptId);
 			List<PhoneUser> phoneUserList = PhoneUser.convertUserListToPhoneUserList(list);
 			request.setAttribute("list", phoneUserList);
 			

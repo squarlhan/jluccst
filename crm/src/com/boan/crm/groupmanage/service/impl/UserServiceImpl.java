@@ -138,5 +138,10 @@ public class UserServiceImpl implements IUserService {
 	public List<User> queryUserListByUserName(String companyId, String deptId,String userName ) throws Exception {
 		return userDao.queryUserListByUserName(companyId, deptId, userName);
 	}
+
+	@Override
+	public List<User> queryUserListByDeptId(String deptId) throws Exception {
+		return userDao.queryUserListByDeptId(deptId);
+	}
 }
 
