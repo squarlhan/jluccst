@@ -12,7 +12,7 @@
 			<result name="show-common-result">/common/show-result.jsp</result>
 		</global-results>
 	</package>
-	<!-- 登录、组织机构信息 -->
+	<!-- 登录 -->
 	<package name="phoneplatform" extends="phonejson">
 		<action name="logonValidForPhoneAction" class="userLogonAction" method="logonValidForPhone"></action>
 		<action name="showUserInfoForPhoneAction" class="userAction" method="showUserInfoForPhone"></action>
@@ -42,6 +42,7 @@
 	<package name="dailyinfoforphone" extends="phonejson">
 		<action name="getDailyInfoForPhoneAction" class="timePlanAction" method="getDailyInfoForPhone"></action>
 		<action name="getDeptDailyInfoForPhoneAction" class="timePlanAction" method="getDeptDailyInfoForPhone"></action>
+		<action name="getLeadDailyInfoForPhoneAction" class="timePlanAction" method="getLeadDailyInfoForPhone"></action>
 		<action name="saveOrUpdateTimePlanForPhoneAction" class="timePlanAction" method="saveOrUpdateTimePlanForPhone"></action>
 		<action name="getDailyInfoByIdForPhoneAction" class="timePlanAction" method="getDailyInfoByIdForPhone">
 			<result name="success">/common/show-string.jsp</result>
@@ -52,5 +53,6 @@
 	<!-- 销售记录统计、查看 -->
 	<package name="sellreportstatforphone" extends="phonejson">
 		<action name="getDeptSellerSellRecordListForPhoneAction" class="sellReportStatAction" method="getDeptSellerSellRecordListForPhone"></action>
+		<action name="getLeadSellRecordListForPhoneAction" class="sellReportStatAction" method="getLeadSellRecordListForPhone"></action>
 	</package>
 </struts>
