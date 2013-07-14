@@ -377,6 +377,7 @@ public class TimePlanAction extends BaseActionSupport{
 //					if(listTimePlan.get(i).getPlanType().equals("2")){
 //						obj.setType("月报");
 //					}
+					obj.setId(listTimePlan.get(i).getId());
 					obj.setType("2");
 					obj.setDate(CalendarUtils.toLongStringNoSecond(listTimePlan.get(i).getSubmitTime()));
 					obj.setSummary(listTimePlan.get(i).getMemo());
@@ -422,6 +423,7 @@ public class TimePlanAction extends BaseActionSupport{
 					{
 						TimePlanInfoForJson obj = new TimePlanInfoForJson();
 						TimePlanStaffPersonInfo person = new TimePlanStaffPersonInfo();
+						obj.setId(listTimePlan.get(i).getId());
 						obj.setName(listTimePlan.get(i).getEmployeeName());
 						obj.setType("2");
 						obj.setDate(CalendarUtils.toLongStringNoSecond(listTimePlan.get(i).getSubmitTime()));
