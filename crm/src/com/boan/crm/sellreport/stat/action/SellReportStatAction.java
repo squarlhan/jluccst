@@ -44,6 +44,7 @@ import com.boan.crm.sellreport.monthly.model.MonthlyMainInfo;
 import com.boan.crm.sellreport.monthly.service.IMonthlyItemInfoService;
 import com.boan.crm.sellreport.monthly.service.IMonthlyMainInfoService;
 import com.boan.crm.sellreport.sellduty.service.ISellDutyService;
+import com.boan.crm.sellreport.stat.model.DeptSellInfoForPhone;
 import com.boan.crm.sellreport.stat.model.SalesPerformanceRank;
 import com.boan.crm.sellreport.stat.model.SalesmanSellInfoForPhone;
 import com.boan.crm.sellreport.stat.service.ISellReportStatService;
@@ -96,6 +97,8 @@ public class SellReportStatAction extends BaseActionSupport{
 	 * 公司名称
 	 */
 	private String companyName = null;
+	
+	private String id;
 	/**
 	 * 选择的部门
 	 */
@@ -967,14 +970,13 @@ public class SellReportStatAction extends BaseActionSupport{
 		String roleKey = "";
 		String companyId="";
 		String deptId="";
-		if(userId!=null && !userId.equals("")){
-			User user = userService.getUserById(userId);
-			String roleId = user.getRoleId();
-			Role role = roleService.get(roleId);
-			roleKey = role.getRoleKey();
-			companyId=user.getCompanyId();
-			deptId=user.getDeptId();
-		}
+		//手机端传过来的id为部门Id
+		deptId= id;
+		//由于是部门领导查看，所以他的权限为 RoleFlag.BU_MEN_LING_DAO
+		roleKey = RoleFlag.BU_MEN_LING_DAO;
+		//获取部门所在的公司Id
+		companyId = deptService.get(deptId).getCompanyId();
+		
 		
 		HttpServletRequest request = ServletActionContext.getRequest();
 		Map<String,Object> map = new HashMap<String,Object>();
@@ -1270,7 +1272,107 @@ public class SellReportStatAction extends BaseActionSupport{
 	
 	
 	
+	/**
+	 * 公司领导查询销售情况(周、月）返回Json串给手机客户端
+	 * @return
+	 * @throws Exception 
+	 */
+	public String getLeadSellRecordListForPhone() throws Exception{
+		
+		BigDecimal sellAmount =new BigDecimal(0);
+		BigDecimal planAmount =new BigDecimal(0);
+		String unfinished="";
+		String roleKey = "";
+		String companyId="";
+		HttpServletRequest request = ServletActionContext.getRequest();
+		Map<String,Object> map = new HashMap<String,Object>();
+		
+		//当前登录人
+		User currentUser = userService.getUserById(userId);
+		companyId =currentUser.getCompanyId();
+		List<Deptment>  deptList = deptService.queryAllDeptmentsByCompanyId(companyId);
+		List<DeptSellInfoForPhone> deptSellInfoForPhoneList = new ArrayList<DeptSellInfoForPhone>();
+		for(Deptment dept : deptList){
+			String deptId=dept.getId();
+			//由于是部门领导查看，所以他的权限为 RoleFlag.BU_MEN_LING_DAO
+			roleKey = RoleFlag.BU_MEN_LING_DAO;
+
+			int year = Integer.parseInt(statYear);
+			int month = Integer.parseInt(statMonth) ;
+			
+			if(type.equals("1")){
+				DeptSellInfoForPhone deptTemp = new DeptSellInfoForPhone();
+				//计算某年某月第某周的销售总额
+				sellAmount = getSellAmountForWeek( companyId, deptId, null , year, month , weekIndex);
+				//计算某年某月第某周的计划销售总额
+				planAmount = getPlanAmountForWeek(roleKey, companyId, deptId, null,  year, month ,weekIndex );
+				
+				deptTemp.setId(dept.getId());
+				deptTemp.setName(dept.getDeptName());
+				deptTemp.setFinished(sellAmount.toString());
+				deptTemp.setPlane(planAmount.toString());
+				
+				deptSellInfoForPhoneList.add(deptTemp);
+				
+			}else if(type.equals("2")){
+				DeptSellInfoForPhone deptTemp = new DeptSellInfoForPhone();
+				//计算某年某月销售总额
+				sellAmount = getSellAmountForMonth( companyId, deptId, null , year, month);
+				//计算某年某月计划销售总额
+				planAmount = getPlanAmountForMonth(roleKey, companyId, deptId, null,  year, month);
+				
+				deptTemp.setId(dept.getId());
+				deptTemp.setName(dept.getDeptName());
+				deptTemp.setFinished(sellAmount.toString());
+				deptTemp.setPlane(planAmount.toString());
+				
+				deptSellInfoForPhoneList.add(deptTemp);
+			}
+			
+		}
+		planAmount= new BigDecimal (0);
+		sellAmount= new BigDecimal (0);
+		//计算所有部门的总计划销售值和所有实际销售值
+		for(DeptSellInfoForPhone obj : deptSellInfoForPhoneList){
+			planAmount = new BigDecimal (compute ( planAmount.toString() , obj.getPlane()));
+			sellAmount = new BigDecimal (compute ( sellAmount.toString() , obj.getFinished()));
+		}
+		//未完成的销售值比例
+		if(planAmount.doubleValue()==0){
+			unfinished= "100";
+		}else{
+			if(planAmount.subtract( sellAmount ).doubleValue()>0){
+				BigDecimal a= planAmount.subtract( sellAmount );
+				BigDecimal b= a. divide( planAmount,2,BigDecimal.ROUND_HALF_UP );
+				unfinished = b .multiply(new BigDecimal(100)).toString();
+			}else{
+				unfinished= "100";
+			}
+		}
+		
+		map.put("unfinished", unfinished );
+		map.put("sell", deptSellInfoForPhoneList);
+		request.setAttribute("map", map);
+		
+		return COMMON_MAP;
+	}
 	
+	/**
+	 * 公司领导查询部门销售情况(周、月）返回Json串给手机客户端
+	 * @return
+	 * @throws Exception 
+	 */
+	public String getLeadSellRecordListByDeptForPhone() throws Exception{
+		return getDeptSellerSellRecordListForPhone();
+	}
+	
+	/**
+	 * 公司领导查询销售员销售情况(周、月）返回Json串给手机客户端
+	 * @return
+	 */
+	public String getLeadSellRecordListBySellerIdForPhone(){
+		return COMMON_MAP;
+	}
 	
 	
 	
@@ -1497,6 +1599,18 @@ public class SellReportStatAction extends BaseActionSupport{
 	 */
 	public void setUserId(String userId) {
 		this.userId = userId;
+	}
+	/**
+	 * @return the id
+	 */
+	public String getId() {
+		return id;
+	}
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(String id) {
+		this.id = id;
 	}
 }
 
