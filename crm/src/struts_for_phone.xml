@@ -37,6 +37,7 @@
 		<action name="deleteVisitInfoForPhoneAction" class="customerVisitInfoAction" method="deleteVisitInfoForPhone"></action>
 		<action name="deleteMyFinishedTaskForPhoneAction" class="customerInfoAction" method="deleteMyFinishedTaskListForPhone"></action>
 		<action name="saveCustomerForPhoneAction" class="customerInfoForPhoneAction" method="saveCustomerForPhone"></action>
+		<action name="saveCustomerDetailInfoForPhoneAction" class="customerInfoForPhoneAction" method="saveCustomerDetailInfoForPhone"></action>
 	</package>
 	<!-- 职员日报信息 -->
 	<package name="dailyinfoforphone" extends="phonejson">
