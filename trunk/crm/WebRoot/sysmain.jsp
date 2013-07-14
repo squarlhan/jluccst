@@ -88,7 +88,7 @@ $.fn.notice = function(){
 <iframe id="topFrame" name="topFrame" class="ui-layout-north" src="${pageContext.request.contextPath}/logonTopAction.action" frameborder="0" scrolling="no"></iframe>
 <iframe id="leftFrame" name="leftFrame" class="ui-layout-west" src="${pageContext.request.contextPath}/logonMenuAction.action" width="100%" frameborder="0" scrolling="no"></iframe>
 <!-- <iframe id="mainFrame" name="mainFrame" class="ui-layout-center" src="${pageContext.request.contextPath}/sysdesktop.jsp" frameborder="0" scrolling="no"></iframe> -->
-<iframe id="mainFrame" name="mainFrame" class="ui-layout-center" src="${pageContext.request.contextPath}/userLogonAction!showDesktop.action" frameborder="0" scrolling="no">
+<iframe id="mainFrame" name="mainFrame" class="ui-layout-center" src="${pageContext.request.contextPath}/userLogonAction!showDesktop.action" frameborder="0" scrolling="auto">
 <iframe id="bottomFrame" name="bottomFrame" class="ui-layout-south" src="${pageContext.request.contextPath}/sysbottom.action" width="100%" height="100%" frameborder="0" scrolling="no"></iframe>
 </body>
 </html>
