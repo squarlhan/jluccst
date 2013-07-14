@@ -56,7 +56,7 @@
         </tr>
         <tr>
           <td valign="top" style="border-left:1px solid #54a4e3; border-bottom:1px solid #54a4e3; border-right:1px solid #54a4e3; padding:5px;"><iframe width="100%" height="100%"
-          	 id="groupmain" name="groupmain" frameborder="0" scrolling="auto" src="customerStaticInfo.action?flag=category"></iframe></td>
+          	 id="groupmain" name="groupmain" frameborder="0" scrolling="auto" src="customerStaticInfo.action?flag=source"></iframe></td>
         </tr>
     </table></td>
   </tr>
