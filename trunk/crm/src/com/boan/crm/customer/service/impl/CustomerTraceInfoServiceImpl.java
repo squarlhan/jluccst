@@ -167,6 +167,10 @@ public class CustomerTraceInfoServiceImpl implements ICustomerTraceInfoService{
 		{
 			hql.append(" and (traceFlag = '0' or traceFlag is null) ");
 		}
+		if(values.get("startTime") != null && values.get("endTime") != null)
+		{
+			hql.append(" and (traceTime between :startTime and :endTime ");
+		}
 		hql.append(" order by traceTime desc,actualTraceTime");
 		List<CustomerTraceInfo> data = customerTraceInfoDao.findForPage(hql.toString(), values, pagination.getStartIndex(), pagination.getPageSize());
 		hql.delete(0, hql.length());
@@ -216,7 +220,10 @@ public class CustomerTraceInfoServiceImpl implements ICustomerTraceInfoService{
 		{
 			hql.append(" and (traceFlag = '0' or traceFlag is null) ");
 		}
-		
+		if(values.get("startTime") != null && values.get("endTime") != null)
+		{
+			hql.append(" and (traceTime between :startTime and :endTime ");
+		}
 		int totalRows = customerTraceInfoDao.findCountForPage(hql.toString(), values);
 		pagination.setTotalRows(totalRows);
 		pagination.setData(data);
