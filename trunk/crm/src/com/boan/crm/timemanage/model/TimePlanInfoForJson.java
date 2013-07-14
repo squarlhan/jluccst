@@ -7,10 +7,10 @@ package com.boan.crm.timemanage.model;
  *
  */
 public class TimePlanInfoForJson {
-//	/**
-//	 * 销售员id
-//	 */
-//	private String id="";
+	/**
+	 * 日报Id
+	 */
+	private String id="";
 	/**
 	 * 销售员名称
 	 */
@@ -46,15 +46,15 @@ public class TimePlanInfoForJson {
 	/**
 	 * @return the id
 	 */
-//	public String getId() {
-//		return id;
-//	}
-//	/**
-//	 * @param id the id to set
-//	 */
-//	public void setId(String id) {
-//		this.id = id;
-//	}
+	public String getId() {
+		return id;
+	}
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(String id) {
+		this.id = id;
+	}
 	/**
 	 * @return the name
 	 */

@@ -7,6 +7,7 @@ package com.boan.crm.timemanage.model;
  *
  */
 public class TimePlanForJson {
+	private String id = "";
 	private String type = "";
 	private String date = "";
 	private String summary = "";
@@ -34,6 +35,18 @@ public class TimePlanForJson {
 	}
 	public void setPlan(String plan) {
 		this.plan = plan;
+	}
+	/**
+	 * @return the id
+	 */
+	public String getId() {
+		return id;
+	}
+	/**
+	 * @param id the id to set
+	 */
+	public void setId(String id) {
+		this.id = id;
 	}
 	
 	
