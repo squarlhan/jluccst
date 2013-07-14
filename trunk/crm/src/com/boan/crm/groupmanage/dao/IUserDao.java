@@ -161,4 +161,13 @@ public interface IUserDao extends IBaseDao<User, String> {
 	 * @throws Exception
 	 */
 	public List<User> queryUserListByUserName(String companyId, String deptId,String userName ) throws Exception ;
+	
+	/**
+	 * 获取用户列表
+	 * @param deptId
+	 * @param pagination
+	 * @return
+	 * @throws Exception
+	 */
+	public List<User> queryUserListByDeptId(String deptId ) throws Exception;
 }
