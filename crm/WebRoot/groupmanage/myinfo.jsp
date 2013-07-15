@@ -221,9 +221,9 @@
 											<td height="26" align="right" bgcolor="#FFFFFF" nowrap="nowrap">
 												<strong>
 												<%if(CheckProductKey.isPinLoginMethod()){ %>
-													用户PIN码：
+													原PIN码：
 												<%}else{%>
-													用户密码：
+													当前密码：
 												<% }%>
 												</strong>
 											</td>
@@ -250,9 +250,9 @@
 											<td height="26" align="right" bgcolor="#FFFFFF">
 												<strong>
 												<%if(CheckProductKey.isPinLoginMethod()){ %>
-													效验PIN码：
+													确认PIN码：
 													<%}else{%>
-													效验密码：
+													确认密码：
 													<%} %>
 												</strong>
 											</td>
