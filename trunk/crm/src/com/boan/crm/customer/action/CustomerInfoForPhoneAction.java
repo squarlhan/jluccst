@@ -84,11 +84,11 @@ public class CustomerInfoForPhoneAction extends BaseActionSupport{
 		customerInfo.setProgressId(BusinessProgressKey.NEW);
 		
 		customerInfo.setAddress(detailAddress);
-		//customerInfo.setCategoryId(customerInfo.getCategoryId());
-		//customerInfo.setSourceId(clientComeWay);
+		customerInfo.setCategoryId(customerInfo.getCategoryId());
+		customerInfo.setSourceId(clientComeWay);
 		//customerInfo.setCity(customerInfo.getCity());
 		//customerInfo.setDistrict(customerInfo.getDistrict());
-//		customerInfo.setLevelId(customerInfo.getLevelId());
+		customerInfo.setLevelId(customerInfo.getLevelId());
 //		customerInfo.setProvince(customerInfo.getProvince());
 		
 		customerInfo.setRegisterTime(Calendar.getInstance());
@@ -115,11 +115,11 @@ public class CustomerInfoForPhoneAction extends BaseActionSupport{
 		//customerInfo.setCompanyId(sessionCompanyId);
 		
 		customerInfo.setAddress(detailAddress);
-		//customerInfo.setCategoryId(customerInfo.getCategoryId());
-		//customerInfo.setSourceId(clientComeWay);
+		customerInfo.setCategoryId(customerInfo.getCategoryId());
+		customerInfo.setSourceId(clientComeWay);
 		//customerInfo.setCity(customerInfo.getCity());
 		//customerInfo.setDistrict(customerInfo.getDistrict());
-//		customerInfo.setLevelId(customerInfo.getLevelId());
+		customerInfo.setLevelId(customerInfo.getLevelId());
 //		customerInfo.setProvince(customerInfo.getProvince());
 		customerInfo.setMainIndustry(industry);
 		customerInfo.setCompanyFullName(companyFullName);
