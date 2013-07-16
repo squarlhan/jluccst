@@ -52,7 +52,7 @@
             </s:if>
             <td align="center"><span class="STYLE1">计划管理</span></td>
              <s:if test="hashPopedom03">
-            <td align="center"><a href="./userLogonAction!showDesktopPage.action?desktopUrl=desktop03">销售统计</a></td>
+            <td align="center"><a href="./userLogonAction!showDesktopPage.action?desktopUrl=desktop03">统计分析</a></td>
             </s:if>
           </tr>
           </s:if>

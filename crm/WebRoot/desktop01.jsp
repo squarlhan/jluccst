@@ -63,7 +63,7 @@
             <td align="center"><a href="./userLogonAction!showDesktopPage.action?desktopUrl=desktop02">计划管理</a></td>
             </s:if>
             <s:if test="hashPopedom03">
-            <td align="center"><span class="STYLE1"><a href="./userLogonAction!showDesktopPage.action?desktopUrl=desktop03">销售统计</a></span>
+            <td align="center"><span class="STYLE1"><a href="./userLogonAction!showDesktopPage.action?desktopUrl=desktop03">统计分析</a></span>
             </s:if>
             </td>
           </tr>
