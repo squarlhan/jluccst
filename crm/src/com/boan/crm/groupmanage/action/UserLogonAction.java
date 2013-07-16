@@ -448,12 +448,23 @@ public class UserLogonAction extends ActionSupport {
 		isHashPopedom02 = popedomService.isHasPopedom(userSession.getUserId(), String.valueOf(userSession.getUserType()), MenuKey.DESKTOP_PLAN_MANAGER, userSession.getPopedomKeys());
 		isHashPopedom03 = popedomService.isHasPopedom(userSession.getUserId(), String.valueOf(userSession.getUserType()), MenuKey.DESKTOP_SALES_STAT, userSession.getPopedomKeys());
 		// 返回桌面地址
+		/*
 		if (isHashPopedom01) {
 			desktopUrl = "desktop01";
 		} else if (isHashPopedom02) {
 			desktopUrl = "desktop02";
 		} else if (isHashPopedom03) {
 			desktopUrl = "desktop03";
+		} else {
+			desktopUrl = "sysdesktop";
+		}
+		*/
+		if (isHashPopedom03) {
+			desktopUrl = "desktop03";
+		} else if (isHashPopedom02) {
+			desktopUrl = "desktop02";
+		} else if (isHashPopedom01) {
+			desktopUrl = "desktop01";
 		} else {
 			desktopUrl = "sysdesktop";
 		}
