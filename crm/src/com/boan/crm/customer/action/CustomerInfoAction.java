@@ -500,6 +500,93 @@ public class CustomerInfoAction extends BaseActionSupport{
 		return COMMON_MAP;
 	}
 	/**
+	 * 获取图表日程
+	 * @return
+	 */
+	public String getCutomerDailyGraphInfoForPhone()
+	{
+		HttpServletRequest request = ServletActionContext.getRequest();
+		Map<String,Object> map = new HashMap<String,Object>();
+		int finishedCount = 0 ;
+		int expiredCount = 0;
+		int unfinishedCount = 0;
+		int totalCount = 0;
+		if(StringUtils.trimToNull(userId)!=null)
+		{
+			Map<String,Object> values = new HashMap<String,Object>();
+			values.put( "salesmanId", userId );
+			if(startTime != null)
+				values.put("startTime", MySimpleDateFormat.parse(startTime,"yyyy-MM-dd HH:mm:ss"));
+			if(endTime != null)
+				values.put("endTime", MySimpleDateFormat.parse(endTime,"yyyy-MM-dd HH:mm:ss"));
+			
+			List<CustomerTraceInfo> listTrace = customerTraceInfoService.findCustomerTraceInfoForPage(values, new Pagination<CustomerTraceInfo>()).getData();
+			if(listTrace != null && listTrace.size() > 0)
+			{
+				totalCount = totalCount + listTrace.size();
+				for(int i = 0;i<listTrace.size();i++)
+				{
+					CustomerTraceInfo traceInfo = listTrace.get(i);
+					if(traceInfo.getTraceFlag().equals( "1" ))
+					{
+						finishedCount ++;
+					}else
+					{
+						Calendar now = Calendar.getInstance();
+						
+						if(traceInfo.getTraceTime().before(Calendar.getInstance()))
+						{
+							expiredCount ++;
+						}else if(traceInfo.getTraceTime().after(Calendar.getInstance()))
+						{
+							unfinishedCount ++;
+						}
+					}
+				}
+			}
+			
+			List<CustomerVisitInfo> listVisit = customerVisitInfoService.findCustomerVisitInfoForPage(values, new Pagination<CustomerVisitInfo>()).getData();
+			if(listVisit != null && listVisit.size() > 0)
+			{
+				totalCount = totalCount + listVisit.size();
+				for(int i = 0;i<listVisit.size();i++)
+				{
+					CustomerVisitInfo visitInfo = listVisit.get(i);
+					if(visitInfo.getVisitFlag().equals( "1" ))
+					{
+						finishedCount ++;
+					}else
+					{
+						Calendar now = Calendar.getInstance();
+						
+						if(visitInfo.getVisitTime().before(Calendar.getInstance()))
+						{
+							expiredCount ++;
+						}else if(visitInfo.getVisitTime().after(Calendar.getInstance()))
+						{
+							unfinishedCount ++;
+						}
+					}
+				}
+			}
+			int finishedRate = 0;
+			int expiredRate = 0;
+			int unfinishedRate = 0;
+			if(totalCount > 0)
+			{
+				finishedRate = finishedCount/totalCount;
+				expiredRate = expiredCount/totalCount;
+				unfinishedRate = unfinishedCount/totalCount;
+			}
+			
+			map.put("finished", finishedRate);
+			map.put("expired", expiredRate);
+			map.put("unfinished", unfinishedRate);
+		}
+		request.setAttribute("map", map);
+		return COMMON_MAP;
+	}
+	/**
 	 * 返回我的客户详细信息为手机
 	 * @return
 	 */
