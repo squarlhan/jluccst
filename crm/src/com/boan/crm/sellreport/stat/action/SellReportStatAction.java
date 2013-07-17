@@ -1304,9 +1304,14 @@ public class SellReportStatAction extends BaseActionSupport{
 				DeptSellInfoForPhone deptTemp = new DeptSellInfoForPhone();
 				//计算某年某月第某周的销售总额
 				sellAmount = getSellAmountForWeek( companyId, deptId, null , year, month , weekIndex);
+				if(sellAmount==null){
+					sellAmount = new BigDecimal(0);
+				}
 				//计算某年某月第某周的计划销售总额
 				planAmount = getPlanAmountForWeek(roleKey, companyId, deptId, null,  year, month ,weekIndex );
-				
+				if(planAmount==null){
+					planAmount = new BigDecimal(0);
+				}
 				deptTemp.setId(dept.getId());
 				deptTemp.setName(dept.getDeptName());
 				deptTemp.setFinished(sellAmount.toString());
@@ -1318,9 +1323,14 @@ public class SellReportStatAction extends BaseActionSupport{
 				DeptSellInfoForPhone deptTemp = new DeptSellInfoForPhone();
 				//计算某年某月销售总额
 				sellAmount = getSellAmountForMonth( companyId, deptId, null , year, month);
+				if(sellAmount==null){
+					sellAmount = new BigDecimal(0);
+				}
 				//计算某年某月计划销售总额
 				planAmount = getPlanAmountForMonth(roleKey, companyId, deptId, null,  year, month);
-				
+				if(planAmount==null){
+					planAmount = new BigDecimal(0);
+				}
 				deptTemp.setId(dept.getId());
 				deptTemp.setName(dept.getDeptName());
 				deptTemp.setFinished(sellAmount.toString());
