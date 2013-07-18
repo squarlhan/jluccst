@@ -88,6 +88,7 @@ public class SellReportStatAction extends BaseActionSupport{
 	@Autowired
 	@Qualifier("sellReportStatService")
 	private ISellReportStatService sellReportStatService;
+	
 	/**
 	 * 公司Id
 	 */
