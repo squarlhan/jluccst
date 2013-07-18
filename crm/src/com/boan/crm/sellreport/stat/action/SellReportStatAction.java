@@ -1228,7 +1228,7 @@ public class SellReportStatAction extends BaseActionSupport{
 			secondWeekEnd.set(Calendar.HOUR_OF_DAY, 23);
 			secondWeekEnd.set(Calendar.MINUTE , 59 );
 			secondWeekEnd.set(Calendar.SECOND, 59);
-			value =  sellRecordService.getSalesmanRealCollectionByBargainTime(sessionCompanyId, deptId,personId, secondWeekBegin, secondWeekEnd);
+			value =  sellRecordService.getSalesmanRealCollectionByBargainTime(companyId, deptId,personId, secondWeekBegin, secondWeekEnd);
 		}
 		if(weekIndex==3){
 			Calendar thirdWeekBegin = Calendar.getInstance();
@@ -1247,7 +1247,7 @@ public class SellReportStatAction extends BaseActionSupport{
 			thirdWeekEnd.set(Calendar.HOUR_OF_DAY, 23);
 			thirdWeekEnd.set(Calendar.MINUTE , 59 );
 			thirdWeekEnd.set(Calendar.SECOND, 59);
-			value = sellRecordService.getSalesmanRealCollectionByBargainTime(sessionCompanyId, deptId,personId, thirdWeekBegin, thirdWeekEnd);
+			value = sellRecordService.getSalesmanRealCollectionByBargainTime(companyId, deptId,personId, thirdWeekBegin, thirdWeekEnd);
 		}
 		if(weekIndex==4){
 			Calendar fourthWeekBegin = Calendar.getInstance();
@@ -1266,7 +1266,7 @@ public class SellReportStatAction extends BaseActionSupport{
 			fourthWeekEnd.set(Calendar.HOUR_OF_DAY, 23);
 			fourthWeekEnd.set(Calendar.MINUTE , 59 );
 			fourthWeekEnd.set(Calendar.SECOND, 59);
-			value = sellRecordService.getSalesmanRealCollectionByBargainTime(sessionCompanyId, deptId,personId, fourthWeekBegin, fourthWeekEnd);
+			value = sellRecordService.getSalesmanRealCollectionByBargainTime(companyId, deptId,personId, fourthWeekBegin, fourthWeekEnd);
 		}
 		return value;
 	}
@@ -1294,10 +1294,14 @@ public class SellReportStatAction extends BaseActionSupport{
 		List<Deptment>  deptList = deptService.queryAllDeptmentsByCompanyId(companyId);
 		List<DeptSellInfoForPhone> deptSellInfoForPhoneList = new ArrayList<DeptSellInfoForPhone>();
 		for(Deptment dept : deptList){
-			String deptId=dept.getId();
-			//由于是部门领导查看，所以他的权限为 RoleFlag.BU_MEN_LING_DAO
-			roleKey = RoleFlag.BU_MEN_LING_DAO;
+//			String deptId=dept.getId();
+//			//由于是部门领导查看，所以他的权限为 RoleFlag.BU_MEN_LING_DAO
+//			roleKey = RoleFlag.BU_MEN_LING_DAO;
 
+			//如果是公司领导则不需要部门Id和权限Key
+			String deptId=null;
+			roleKey = null;
+			
 			int year = Integer.parseInt(statYear);
 			int month = Integer.parseInt(statMonth) ;
 			
