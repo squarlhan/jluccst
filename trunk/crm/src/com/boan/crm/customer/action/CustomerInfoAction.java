@@ -826,6 +826,38 @@ public class CustomerInfoAction extends BaseActionSupport{
 		return COMMON_LIST; 
 	}
 	/**
+	 * 完成任务列表
+	 * @return 
+	 */
+	public String finishedMyTaskForPhone()
+	{
+		if(type != null && type.length() > 0)
+		{
+			if(type.equals("1"))
+			{
+				CustomerTraceInfo customerTrace = customerTraceInfoService.get(id);
+				//customerTraceInfoService.deleteCustomerTraceInfo(taskId);
+				customerTrace.setTraceFlag("1");
+				customerTraceInfoService.save(customerTrace);
+			}else
+			{
+				customerVisitInfoService.deleteCustomerVisitInfo(taskId);
+				CustomerVisitInfo customerVisit = customerVisitInfoService.get(id);
+				//customerTraceInfoService.deleteCustomerTraceInfo(taskId);
+				customerVisit.setVisitFlag("1");
+				customerVisitInfoService.save(customerVisit);
+			}
+			message = "success";
+		}else
+		{
+			message = "failure";
+		}
+		
+		HttpServletRequest request = ServletActionContext.getRequest();
+		request.setAttribute("message", message);
+		return COMMON_RESULT;
+	}
+	/**
 	 * 删除我的已完成任务列表
 	 * @return 
 	 */
