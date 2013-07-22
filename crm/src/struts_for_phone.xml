@@ -23,10 +23,12 @@
 	<!-- 客户信息 -->
 	<package name="customerinfo" extends="phonejson">
 		<action name="getMyTaskListForPhoneAction" class="customerInfoAction" method="getMyTaskListForPhone"></action>
+		<action name="finishedMyTaskForPhoneAction" class="customerInfoAction" method="finishedMyTaskForPhone"></action>
 		<action name="getMyCutomerListForPhoneAction" class="customerInfoAction" method="getMyCutomerListForPhone"></action>
 		<action name="getCutomerInfoForPhoneAction" class="customerInfoAction" method="getCutomerInfoForPhone"></action>
 		<action name="getCutomerDetailInfoForPhoneAction" class="customerInfoAction" method="getCutomerDetailInfoForPhone"></action>
 		<action name="getCutomerDailyInfoForPhoneAction" class="customerInfoAction" method="getCutomerDailyInfoForPhone"></action>
+		<action name="getDeptCutomerDailyInfoForPhoneAction" class="customerInfoAction" method="getDeptCutomerDailyInfoForPhone"></action>
 		<action name="getCustomerTraceInfoForPhoneAction" class="customerTraceInfoAction" method="customerTraceInfoForPhone"></action>
 		<action name="getCustomerVisitInfoForPhoneAction" class="customerVisitInfoAction" method="customerVisitInfoForPhone"></action>
 		<action name="getVisitTraceOptionInfoForPhoneAction" class="dataDictionaryAction" method="visitTraceOptionInfoForPhone"></action>
