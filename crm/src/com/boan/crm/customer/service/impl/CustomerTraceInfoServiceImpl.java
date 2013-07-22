@@ -3,6 +3,7 @@
  */
 package com.boan.crm.customer.service.impl;
 
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -223,6 +224,17 @@ public class CustomerTraceInfoServiceImpl implements ICustomerTraceInfoService{
 		if(values.get("startTime") != null && values.get("endTime") != null)
 		{
 			hql.append(" and (traceTime between :startTime and :endTime ");
+		}
+		if(values.get("taskType") != null && values.get("taskType").equals("1"))
+		{
+			hql.append(" and traceFlag = 1 ");
+		}else if(values.get("taskType") != null && values.get("taskType").equals("2"))
+		{
+			hql.append(" and traceFlag = 0 and traceTime >= :now ");
+			
+		}else if(values.get("taskType") != null && values.get("taskType").equals("3"))
+		{
+			hql.append(" and traceFlag = 0 and traceTime < :now ");
 		}
 		int totalRows = customerTraceInfoDao.findCountForPage(hql.toString(), values);
 		pagination.setTotalRows(totalRows);
