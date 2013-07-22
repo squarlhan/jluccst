@@ -41,7 +41,7 @@
 		<action name="saveCustomerForPhoneAction" class="customerInfoForPhoneAction" method="saveCustomerForPhone"></action>
 		<action name="saveCustomerDetailInfoForPhoneAction" class="customerInfoForPhoneAction" method="saveCustomerDetailInfoForPhone"></action>
 		<action name="getCutomerDailyGraphInfoForPhoneAction" class="customerInfoAction" method="getCutomerDailyGraphInfoForPhone"></action>
-		
+		<action name="saveContactPersonForPhoneAction" class="contractPersonInfoForPhoneAction" method="saveContactPersonForPhone"></action>
 	</package>
 	<!-- 职员日报信息 -->
 	<package name="dailyinfoforphone" extends="phonejson">

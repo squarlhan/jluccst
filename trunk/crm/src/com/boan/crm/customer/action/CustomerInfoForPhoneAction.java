@@ -15,11 +15,7 @@ import org.springframework.stereotype.Controller;
 
 import com.boan.crm.customer.model.BusinessProgressKey;
 import com.boan.crm.customer.model.CustomerInfo;
-import com.boan.crm.customer.service.IContractPersonService;
 import com.boan.crm.customer.service.ICustomerInfoService;
-import com.boan.crm.customer.service.ICustomerTraceInfoService;
-import com.boan.crm.customer.service.ICustomerVisitInfoService;
-import com.boan.crm.datadictionary.service.IDataDictionaryService;
 import com.boan.crm.utils.action.BaseActionSupport;
 
 /**
@@ -38,19 +34,6 @@ public class CustomerInfoForPhoneAction extends BaseActionSupport{
 	@Qualifier("customerInfoService")
 	//客户状态接口类
 	private ICustomerInfoService customerInfoService;
-	@Autowired
-	@Qualifier("dataDictionaryService")
-	private IDataDictionaryService dataDictionaryService = null;
-	// 客户状态接口类
-	@Autowired
-	@Qualifier("contractPersonService")
-	private IContractPersonService contractpersonInfoService;
-	@Autowired
-	@Qualifier("customerTraceInfoService")
-	private ICustomerTraceInfoService customerTraceInfoService = null;
-	@Autowired
-	@Qualifier("customerVisitInfoService")
-	private ICustomerVisitInfoService customerVisitInfoService = null;
 	
 	private String userId = "";
 	private String clientName = "";
