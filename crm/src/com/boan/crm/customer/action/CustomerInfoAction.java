@@ -1270,6 +1270,7 @@ public class CustomerInfoAction extends BaseActionSupport{
 		{
 			customerInfo = new CustomerInfo();
 			customerInfo.setProgress("新建");
+			customerInfo.setLevelId("10%");
 		}
 		
 		
