@@ -286,7 +286,7 @@
 													name="customerInfo.customerName"></s:textfield>
 													<font color="red">*</font>
 											</td>
-											<td align="right">业 务 员：</td>
+											<td align="right" nowrap>业 务 员：</td>
 											<td><s:property value="sessionUserCName"/></td>
 											<td align="center" nowrap>客户来源：</td>
 											<td><s:select list="listSource" listKey="id"
@@ -296,13 +296,13 @@
 													headerValue="--请选择--"></s:select><font color="red">*</font></td>
 										</tr>
 										<tr>
-											<td align="center">客户分类：</td>
+											<td align="center" nowrap>客户分类：</td>
 											<td><s:select list="listCategory" listKey="id"
 													listValue="name" value="customerInfo.categoryId"
 													id="categoryId" name="customerInfo.categoryId"
 													cssStyle="width:190px" headerKey=""
 													headerValue="--请选择--"></s:select><font color="red">*</font></td>
-											<td align="center">业务进展：</td>
+											<td align="center" nowrap>业务进展：</td>
 											<td><s:label name="customerInfo.progress"></s:label>
 											</td> 
 											<td align="right">忠 诚 度：</td>
@@ -311,14 +311,14 @@
 											</td>
 										</tr>
 										<tr>
-											<td align="center">开发程度：</td>
+											<td align="center" nowrap>开发程度：</td>
 											<td><s:select list="listLevel"
 													listKey="id" listValue="name" value="customerInfo.levelId"
 													id="levelId" name="customerInfo.levelId"
 													cssStyle="width:190px" headerKey=""
 													headerValue="--请选择--"></s:select><font color="red">*</font>
 											</td>
-											<td align="center">所 在 地：</td>
+											<td align="center" nowrap>所 在 地：</td>
 											<td colspan="3" ><s:select list="listProvince" listKey="id"
 													listValue="provinceName" value="customerInfo.province"
 													id="province" name="customerInfo.province"
@@ -332,7 +332,7 @@
 											</td>
 										</tr>
 										<tr>
-											<td align="center">主营行业：</td>
+											<td align="center" nowrap>主营行业：</td>
 											<td colspan="5"><s:textfield type="text" style="width:416px"
 													name="customerInfo.mainIndustry" id="mainIndustry"></s:textfield>
 													<font color="red">*</font>

@@ -283,7 +283,7 @@
 													name="customerInfo.customerName"></s:textfield>
 													<font color="red">*</font>
 											</td>
-											<td align="right">业 务 员：</td>
+											<td align="right" nowrap>业 务 员：</td>
 											<td><s:select list="userList" listKey="id"
 													listValue="userCName" value="customerInfo.salesmanId"
 													id="salesmanId" name="customerInfo.salesmanId"
@@ -297,21 +297,21 @@
 													headerValue="--请选择--"></s:select><font color="red">*</font></td>
 										</tr>
 										<tr>
-											<td align="center">客户分类：</td>
+											<td align="center" nowrap>客户分类：</td>
 											<td><s:select list="listCategory" listKey="id"
 													listValue="name" value="customerInfo.categoryId"
 													id="categoryId" name="customerInfo.categoryId"
 													cssStyle="width:190px" headerKey=""
 													headerValue="--请选择--"></s:select><font color="red">*</font></td>
-											<td align="center">业务进展：</td>
+											<td align="center" nowrap>业务进展：</td>
 											<td><s:label name="customerInfo.progress"></s:label>
 											</td> 
-											<td align="right">忠 诚 度：</td>
+											<td align="right" nowrap>忠 诚 度：</td>
 											<td><s:label name="customerInfo.maturityId"></s:label>
 											</td>
 										</tr>
 										<tr>
-											<td align="center">开发程度：</td>
+											<td align="center" nowrap>开发程度：</td>
 											<td><s:select list="listLevel"
 													listKey="id" listValue="name" value="customerInfo.levelId"
 													id="levelId" name="customerInfo.levelId"
