@@ -142,11 +142,10 @@ public class UserLogonAction extends ActionSupport {
 	private String desktopUrl = "";
 
 	private boolean isHashPopedom01 = false;
-	
+
 	private boolean isHashPopedom02 = false;
-	
+
 	private boolean isHashPopedom03 = false;
-	
 
 	/**
 	 * 验证密码
@@ -263,9 +262,9 @@ public class UserLogonAction extends ActionSupport {
 		// 验证产品是否过期
 		CheckProductKey productKey = new CheckProductKey();
 		if (productKey.getProductKey()) {
-			//message.setContent(CheckProductKey.message);
-			//return ERROR;
-			Map<String,Object> map = new HashMap<String,Object>();
+			// message.setContent(CheckProductKey.message);
+			// return ERROR;
+			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("status", "failure");
 			request.setAttribute("map", map);
 			return "show-common-map";
@@ -274,9 +273,9 @@ public class UserLogonAction extends ActionSupport {
 			b = userService.logonValid(username, md5);
 		} catch (Exception e) {
 			e.printStackTrace();
-			//message.setContent("数据库连接失败，请联系管理员！");
-			//return ERROR;
-			Map<String,Object> map = new HashMap<String,Object>();
+			// message.setContent("数据库连接失败，请联系管理员！");
+			// return ERROR;
+			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("status", "failure");
 			request.setAttribute("map", map);
 			return "show-common-map";
@@ -326,12 +325,12 @@ public class UserLogonAction extends ActionSupport {
 							userSession.setProductType(company.getProductType());
 						}
 						if (company.checkServiceTerm()) {
-							Map<String,Object> map = new HashMap<String,Object>();
+							Map<String, Object> map = new HashMap<String, Object>();
 							map.put("status", "failure");
 							request.setAttribute("map", map);
 							return "show-common-map";
-							//message.setContent("您的账号已过试用期，请联系软件供应商！");
-							//return ERROR;
+							// message.setContent("您的账号已过试用期，请联系软件供应商！");
+							// return ERROR;
 						}
 					}
 				}
@@ -354,43 +353,34 @@ public class UserLogonAction extends ActionSupport {
 				// ServletActionContext.getResponse().addCookie(myCookie);
 
 				// 构造Json串
-				//（1）返回list
-				//List<UserSession> list = xxxxService.getxxxList();
-				//int totalCount = 10;
-				//request.setAttribute("list", list);
-				//request.setAttribute("totalCount", totalCount);
-				//return "show-common-list";
-				
-				//（2）返回map
-				Map<String,Object> map = new HashMap<String,Object>();
+				// （1）返回list
+				// List<UserSession> list = xxxxService.getxxxList();
+				// int totalCount = 10;
+				// request.setAttribute("list", list);
+				// request.setAttribute("totalCount", totalCount);
+				// return "show-common-list";
+
+				// （2）返回map
+				Map<String, Object> map = new HashMap<String, Object>();
 				int userType = 0;
-				if(RoleFlag.YE_WU_YUAN.equalsIgnoreCase( userSession.getRoleKey()) )
-				{
-					//业务员
+				if (RoleFlag.YE_WU_YUAN.equalsIgnoreCase(userSession.getRoleKey())) {
+					// 业务员
 					map.put("user_group", "1");
 					userType = 1;
-				}else if(RoleFlag.BU_MEN_LING_DAO.equalsIgnoreCase( userSession.getRoleKey()) )
-				{
-					//部门领导
+				} else if (RoleFlag.BU_MEN_LING_DAO.equalsIgnoreCase(userSession.getRoleKey())) {
+					// 部门领导
 					map.put("user_group", "2");
 					map.put("departId", userSession.getDeptId());
 					userType = 2;
-				}
-				else if(RoleFlag.GONG_SI_LING_DAO.equalsIgnoreCase( userSession.getRoleKey()) )
-				{
+				} else if (RoleFlag.GONG_SI_LING_DAO.equalsIgnoreCase(userSession.getRoleKey())) {
 					map.put("user_group", "3");
 					userType = 3;
-				}
-				else
-				{
+				} else {
 					userType = -1;
 				}
-				if( userType == -1 )
-				{
+				if (userType == -1) {
 					map.put("status", "failure");
-				}
-				else
-				{
+				} else {
 					map.put("status", "success");
 					map.put("user_id", userSession.getUserId());
 					map.put("user_name", userSession.getUsername());
@@ -398,27 +388,27 @@ public class UserLogonAction extends ActionSupport {
 				}
 				request.setAttribute("map", map);
 				return "show-common-map";
-				
-				//（3）返回object
-				//List<UserSession> list = new ArrayList<UserSession>();
-				//list.add(userSession);
-				//request.setAttribute("object", list);
-				//return "show-common-object";
+
+				// （3）返回object
+				// List<UserSession> list = new ArrayList<UserSession>();
+				// list.add(userSession);
+				// request.setAttribute("object", list);
+				// return "show-common-object";
 			} else {
-				Map<String,Object> map = new HashMap<String,Object>();
+				Map<String, Object> map = new HashMap<String, Object>();
 				map.put("status", "failure");
 				request.setAttribute("map", map);
 				return "show-common-map";
-				//message.setContent("登录失败，请检查用户名及密码！");
-				//return ERROR;
+				// message.setContent("登录失败，请检查用户名及密码！");
+				// return ERROR;
 			}
 		} else {
-			Map<String,Object> map = new HashMap<String,Object>();
+			Map<String, Object> map = new HashMap<String, Object>();
 			map.put("status", "failure");
 			request.setAttribute("map", map);
 			return "show-common-map";
-			//message.setContent("登录失败，请检查用户名及密码！");
-			//return ERROR;
+			// message.setContent("登录失败，请检查用户名及密码！");
+			// return ERROR;
 		}
 	}
 
@@ -449,24 +439,63 @@ public class UserLogonAction extends ActionSupport {
 		isHashPopedom03 = popedomService.isHasPopedom(userSession.getUserId(), String.valueOf(userSession.getUserType()), MenuKey.DESKTOP_SALES_STAT, userSession.getPopedomKeys());
 		// 返回桌面地址
 		/*
-		if (isHashPopedom01) {
-			desktopUrl = "desktop01";
-		} else if (isHashPopedom02) {
-			desktopUrl = "desktop02";
-		} else if (isHashPopedom03) {
-			desktopUrl = "desktop03";
-		} else {
-			desktopUrl = "sysdesktop";
+		 * if (isHashPopedom01) { desktopUrl = "desktop01"; } else if
+		 * (isHashPopedom02) { desktopUrl = "desktop02"; } else if
+		 * (isHashPopedom03) { desktopUrl = "desktop03"; } else { desktopUrl =
+		 * "sysdesktop"; }
+		 */
+		// 业务员
+		if (RoleFlag.YE_WU_YUAN.equalsIgnoreCase(userSession.getRoleKey())) {
+			if (isHashPopedom01) {
+				desktopUrl = "desktop01";
+			} else {
+				if (isHashPopedom03) {
+					desktopUrl = "desktop03";
+				} else if (isHashPopedom02) {
+					desktopUrl = "desktop02";
+				} else {
+					desktopUrl = "sysdesktop";
+				}
+			}
 		}
-		*/
-		if (isHashPopedom03) {
-			desktopUrl = "desktop03";
-		} else if (isHashPopedom02) {
-			desktopUrl = "desktop02";
-		} else if (isHashPopedom01) {
-			desktopUrl = "desktop01";
+		// 部门领导
+		else if (RoleFlag.BU_MEN_LING_DAO.equalsIgnoreCase(userSession.getRoleKey())) {
+			if (isHashPopedom02) {
+				desktopUrl = "desktop02";
+			} else {
+				if (isHashPopedom03) {
+					desktopUrl = "desktop03";
+				} else if (isHashPopedom01) {
+					desktopUrl = "desktop01";
+				} else {
+					desktopUrl = "sysdesktop";
+				}
+			}
+		}
+		// 公司领导
+		else if (RoleFlag.GONG_SI_LING_DAO.equalsIgnoreCase(userSession.getRoleKey())) {
+			if (isHashPopedom03) {
+				desktopUrl = "desktop03";
+			} else {
+				if (isHashPopedom02) {
+					desktopUrl = "desktop02";
+				} else if (isHashPopedom01) {
+					desktopUrl = "desktop01";
+				} else {
+					desktopUrl = "sysdesktop";
+				}
+			}
+		//其他用户
 		} else {
-			desktopUrl = "sysdesktop";
+			if (isHashPopedom03) {
+				desktopUrl = "desktop03";
+			} else if (isHashPopedom02) {
+				desktopUrl = "desktop02";
+			} else if (isHashPopedom01) {
+				desktopUrl = "desktop01";
+			} else {
+				desktopUrl = "sysdesktop";
+			}
 		}
 		return desktopUrl;
 	}
