@@ -44,6 +44,17 @@ public class CustomerTraceInfoForPhoneAction extends BaseActionSupport{
 	private String message = null;
 	private String followIntrester  ="";
 	private String followUnagreePoint = "";
+	
+	private String userId = "";
+	private String contactId  = ""; 
+	private String vistPeople = "";  
+	private String time   = "";
+	private String type   = "";
+	private String qq   = "";
+	private String emial   = "";
+	private String realTime   = "";
+	private String intrester  = ""; 
+	private String unAgree  = "";
 	/**
 	 * 手机端完成任务，保存客户跟进信息
 	 * @return String
@@ -81,6 +92,40 @@ public class CustomerTraceInfoForPhoneAction extends BaseActionSupport{
 		request.setAttribute("message", message);
 		return COMMON_RESULT;
 	}
+	
+	/**
+	 * 手机端新建客户跟进信息
+	 * @return String
+	 */
+	public String saveNewTraceInfoForPhone()
+	{
+		CustomerTraceInfo obj = new CustomerTraceInfo();
+		
+		obj.setCustomerId(contactId);
+		obj.setEmail(email);
+		obj.setTask(followTask);
+		obj.setInterest(intrester);
+		obj.setObjection(unAgree);
+		obj.setQq(qq);
+		obj.setTraceOption(type);
+		obj.setSalesmanId(userId);
+		obj.setTracePersonId(vistPeople);
+		
+		if(realTime != null && realTime.length() > 0)
+			obj.setActualTraceTime(MySimpleDateFormat.parse( realTime,"yyyy-MM-dd HH:mm:ss"));
+		if(time != null && time.length() > 0)
+			obj.setTraceTime(MySimpleDateFormat.parse( time,"yyyy-MM-dd HH:mm:ss"));
+		
+		customerTraceInfoService.save(obj);
+		id = obj.getId();
+		message = "success";
+		
+		HttpServletRequest request = ServletActionContext.getRequest();
+		request.setAttribute("message", message);
+		request.setAttribute("id", id);
+		return COMMON_RESULT;
+	}
+	
 	public String getMessage() {
 		return message;
 	}
@@ -152,5 +197,94 @@ public class CustomerTraceInfoForPhoneAction extends BaseActionSupport{
 	}
 	public void setFollowUnagreePoint(String followUnagreePoint) {
 		this.followUnagreePoint = followUnagreePoint;
+	}
+
+	public ICustomerTraceInfoService getCustomerTraceInfoService() {
+		return customerTraceInfoService;
+	}
+
+	public void setCustomerTraceInfoService(
+			ICustomerTraceInfoService customerTraceInfoService) {
+		this.customerTraceInfoService = customerTraceInfoService;
+	}
+
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+
+	public String getContactId() {
+		return contactId;
+	}
+
+	public void setContactId(String contactId) {
+		this.contactId = contactId;
+	}
+
+	public String getVistPeople() {
+		return vistPeople;
+	}
+
+	public void setVistPeople(String vistPeople) {
+		this.vistPeople = vistPeople;
+	}
+
+	public String getTime() {
+		return time;
+	}
+
+	public void setTime(String time) {
+		this.time = time;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public String getQq() {
+		return qq;
+	}
+
+	public void setQq(String qq) {
+		this.qq = qq;
+	}
+
+	public String getEmial() {
+		return emial;
+	}
+
+	public void setEmial(String emial) {
+		this.emial = emial;
+	}
+
+	public String getRealTime() {
+		return realTime;
+	}
+
+	public void setRealTime(String realTime) {
+		this.realTime = realTime;
+	}
+
+	public String getIntrester() {
+		return intrester;
+	}
+
+	public void setIntrester(String intrester) {
+		this.intrester = intrester;
+	}
+
+	public String getUnAgree() {
+		return unAgree;
+	}
+
+	public void setUnAgree(String unAgree) {
+		this.unAgree = unAgree;
 	}
 }

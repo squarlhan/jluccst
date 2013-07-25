@@ -45,6 +45,20 @@ public class CustomerVisitInfoForPhoneAction extends BaseActionSupport{
 	private String vistResult  ="";
 	private String vistMark = "";
 	private String isFinisehd = "";
+	
+	
+	private String userId  = "";
+	private String contactId   = "";
+	private String vistPeople = "";  
+	private String time   = "";
+	private String type   = "";
+	private String qq   = "";
+	private String emial  = "";
+	private String vistTask   = "";
+	private String realTime  = ""; 
+	private String result  = "";
+	
+	
 	/**
 	 * 手机端完成任务，保存客户回访信息
 	 * @return String
@@ -81,6 +95,40 @@ public class CustomerVisitInfoForPhoneAction extends BaseActionSupport{
 		request.setAttribute("message", message);
 		return COMMON_RESULT;
 	}
+	
+	
+	/**
+	 * 手机端新建客户回访信息
+	 * @return String
+	 */
+	public String saveNewVisitInfoForPhone()
+	{
+		CustomerVisitInfo obj = new CustomerVisitInfo();
+		
+		obj.setCustomerId(contactId);
+		obj.setEmail(email);
+		obj.setTask(vistTask);
+		obj.setContentResult(result);
+		obj.setQq(qq);
+		obj.setVisitOption(type);
+		obj.setSalesmanId(userId);
+		obj.setVisitPersonId(vistPeople);
+		
+		if(realTime != null && realTime.length() > 0)
+			obj.setActualVisitTime(MySimpleDateFormat.parse( realTime,"yyyy-MM-dd HH:mm:ss"));
+		if(time != null && time.length() > 0)
+			obj.setVisitTime(MySimpleDateFormat.parse( time,"yyyy-MM-dd HH:mm:ss"));
+		
+		customerVisitInfoService.save(obj);
+		id = obj.getId();
+		message = "success";
+		
+		HttpServletRequest request = ServletActionContext.getRequest();
+		request.setAttribute("message", message);
+		request.setAttribute("id", id);
+		return COMMON_RESULT;
+	}
+	
 	public String getMessage() {
 		return message;
 	}
@@ -158,5 +206,105 @@ public class CustomerVisitInfoForPhoneAction extends BaseActionSupport{
 	}
 	public void setIsFinisehd(String isFinisehd) {
 		this.isFinisehd = isFinisehd;
+	}
+
+
+	public String getUserId() {
+		return userId;
+	}
+
+
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+
+
+	public String getContactId() {
+		return contactId;
+	}
+
+
+	public void setContactId(String contactId) {
+		this.contactId = contactId;
+	}
+
+
+	public String getVistPeople() {
+		return vistPeople;
+	}
+
+
+	public void setVistPeople(String vistPeople) {
+		this.vistPeople = vistPeople;
+	}
+
+
+	public String getTime() {
+		return time;
+	}
+
+
+	public void setTime(String time) {
+		this.time = time;
+	}
+
+
+	public String getType() {
+		return type;
+	}
+
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+
+	public String getQq() {
+		return qq;
+	}
+
+
+	public void setQq(String qq) {
+		this.qq = qq;
+	}
+
+
+	public String getEmial() {
+		return emial;
+	}
+
+
+	public void setEmial(String emial) {
+		this.emial = emial;
+	}
+
+
+	public String getVistTask() {
+		return vistTask;
+	}
+
+
+	public void setVistTask(String vistTask) {
+		this.vistTask = vistTask;
+	}
+
+
+	public String getRealTime() {
+		return realTime;
+	}
+
+
+	public void setRealTime(String realTime) {
+		this.realTime = realTime;
+	}
+
+
+	public String getResult() {
+		return result;
+	}
+
+
+	public void setResult(String result) {
+		this.result = result;
 	}
 }
