@@ -33,7 +33,8 @@
 					"contractPersonInfo.email":{email:true},
 					"contractPersonInfo.deptOrDuty":{required:true},
 					"contractPersonInfo.birthday":{dateISO:true},
-					"contractPersonInfo.qq":{number:true}
+					"contractPersonInfo.qq":{number:true},
+					"contractPersonInfo.phone":{number:true}
 				}
 				
 			};
@@ -69,6 +70,7 @@
 	               	if(!validator.form()){
 						return false;
 					}
+					
 					form1.personName.value = $("#dictName_t").val();
 					form1.customerId_t.value = form1.customerId.value;
 					form1.action = "customer/saveContractPerson.action";
@@ -151,7 +153,7 @@
 											</td>
 											<td height="26" align="left" bgcolor="#FFFFFF">
 												<s:textfield id="phone" name="contractPersonInfo.phone"
-													maxlength="25" cssStyle="width: 300px;"></s:textfield>
+													maxlength="11" cssStyle="width: 300px;"></s:textfield>
 											</td>
 										</tr>
 										<tr>
