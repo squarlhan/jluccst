@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
-import="com.boan.crm.groupmanage.common.UserSession,com.boan.crm.groupmanage.service.IPopedomService,com.boan.crm.groupmanage.service.impl.PopedomServiceImpl"
+import="java.util.Calendar,com.boan.crm.groupmanage.common.UserSession,com.boan.crm.groupmanage.service.IPopedomService,com.boan.crm.groupmanage.service.impl.PopedomServiceImpl,com.boan.crm.groupmanage.common.RoleFlag"
 	pageEncoding="utf-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%@ taglib prefix="j" uri="/script-tags"%>
@@ -27,6 +27,7 @@ import="com.boan.crm.groupmanage.common.UserSession,com.boan.crm.groupmanage.ser
 	UserSession us = (UserSession) session.getAttribute("userSession");
 	String deptId = us.getDeptId();
 	String personId = us.getUserId();
+	String companyId = us.getCompanyId();
 	boolean popodomFlag = popedomService.isCompanyAdministrator(us.getUserId(), String.valueOf(us.getUserType()) ) 
 			||popedomService.isHasDeptPopedom(us.getRoleKey()) || popedomService.isHasCompanyPopedom(us.getRoleKey());
 	if( popodomFlag ){
@@ -74,8 +75,16 @@ import="com.boan.crm.groupmanage.common.UserSession,com.boan.crm.groupmanage.ser
 							</td>
 						</tr>
 						<tr>
-							<td width="200" valign="top" style="border-left: 1px solid #54a4e3; border-bottom: 1px solid #54a4e3; border-right: 1px solid #54a4e3; padding: 5px;"><iframe width="100%" height="100%" id="menutree" name="menutree"frameborder="0" scrolling="auto" src="<%=path %>/showGroupTreeForSalesPerformanceRankStatAction.action"></iframe></td>
-							<td valign="top" style="border-left: 1px solid #54a4e3; border-bottom: 1px solid #54a4e3; border-right: 1px solid #54a4e3; padding: 5px;"><iframe width="100%" height="100%" id="groupmain" name="groupmain" frameborder="0" scrolling="auto" src="<%=path %>/blank.jsp"></iframe></td>
+							<%
+								String roleKey= us.getRoleKey();
+								if(!roleKey.equals(RoleFlag.BU_MEN_LING_DAO) && !roleKey.equals(RoleFlag.YE_WU_YUAN)){
+									deptId="";
+							%>
+								<td width="200" valign="top" style="border-left: 1px solid #54a4e3; border-bottom: 1px solid #54a4e3; border-right: 1px solid #54a4e3; padding: 5px;"><iframe width="100%" height="100%" id="menutree" name="menutree"frameborder="0" scrolling="auto" src="<%=path %>/showGroupTreeForSalesPerformanceRankStatAction.action"></iframe></td>
+							<% } %>
+							<td valign="top" style="border-left: 1px solid #54a4e3; border-bottom: 1px solid #54a4e3; border-right: 1px solid #54a4e3; padding: 5px;">
+								<iframe width="100%" height="100%" id="groupmain" name="groupmain" frameborder="0" scrolling="auto" src="openSellSalesPerformanceRankAction.action?companyId=<%=companyId %>&deptId=<%=deptId %>&statBeginDate=<%=Calendar.getInstance().get(Calendar.YEAR)+"-01-01"%>&statEndDate=<%=Calendar.getInstance().get(Calendar.YEAR)+"-12-31"%>"></iframe>
+							</td>
 						</tr>
 					</table>
 				</td>
