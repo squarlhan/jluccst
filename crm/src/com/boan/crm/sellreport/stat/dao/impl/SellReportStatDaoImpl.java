@@ -46,7 +46,7 @@ public class SellReportStatDaoImpl  extends BaseDao implements ISellReportStatDa
 				sql = sql + " and  A.COMPANY_ID='"+companyId+"' " +
 				" and A.BARGAIN_TIME>='"+beginDate+"' " +
 				" and A.BARGAIN_TIME<='"+endDate +"' " +
-				" GROUP BY A.SALESMAN_ID ORDER BY sales_Amount";
+				" GROUP BY A.SALESMAN_ID ORDER BY sales_Amount desc";
 		List list = this.getSession().createSQLQuery(sql).list();
 		if(list!=null && list.size()>0){
 			returnList = new ArrayList<SalesPerformanceRank>();

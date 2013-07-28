@@ -285,9 +285,6 @@ public class SellReportStatAction extends BaseActionSupport{
 					"numberPrefix='' " +
 					"numberSuffix='元' " +
 					"formatNumberScale='0'  " +
-//					"divIntervalHints='150000' "+//纵坐标间隔
-//					"displayStartIndex='1'"+       //默认显示从第一列开始
-//					"displayEndIndex='7'" +        //默认显示到第七列
 					"showNames='1'  " +
 					"showValues='0' " +
 					"yAxisMinValue='20000' " +
@@ -326,11 +323,8 @@ public class SellReportStatAction extends BaseActionSupport{
 					Role role = roleService.get(roleId);
 					roleKey = role.getRoleKey();
 				}
-				MonthlyMainInfo mainInfo = monthlyMainInfoService.getMonthlyMainInfoByMonth(sessionCompanyId,deptId, personId , Integer.parseInt(statYear),i , roleKey);
-				List<MonthlyItemInfo>  sellTargerList = null;
 				
 				//月报表开始时间记录的年月日
-				
 				int year = Integer.parseInt(statYear);
 				int month = i;
 	
@@ -355,13 +349,30 @@ public class SellReportStatAction extends BaseActionSupport{
 				System.out.println(CalendarUtils.toLongString(monthBegin));
 				System.out.println(CalendarUtils.toLongString(monthkEnd));
 				
-				BigDecimal sellAmount = sellRecordService.getSalesmanRealCollectionByBargainTime(sessionCompanyId, deptId,personId, monthBegin, monthkEnd);
+				List<MonthlyItemInfo>  sellTargerList = new ArrayList<MonthlyItemInfo>();
+				List<Deptment> deptList = new ArrayList<Deptment>();
+				if(deptId==null || deptId.equals("")){//说明是查看全公司的
+					deptList = deptService.queryAllDeptmentsByCompanyId(sessionCompanyId);
+				}else{//按部门查或者按个人查
+					Deptment dp = deptService.get(deptId);
+					deptList.add(dp);
+				}
+				BigDecimal sellAmount = new BigDecimal(0);
+				for(Deptment dept : deptList){
+					MonthlyMainInfo mainInfo = monthlyMainInfoService.getMonthlyMainInfoByMonth(sessionCompanyId, dept.getId(), personId , Integer.parseInt(statYear),i , roleKey);
+					if(mainInfo!=null){
+						mainInfoId = mainInfo.getId();
+						List<MonthlyItemInfo> tempSellTargerList = monthlyItemInfoService.getMonthlyItemInfoListOfSellTargetByMainInfoId(mainInfoId);
+						for(MonthlyItemInfo oo : tempSellTargerList){
+							sellTargerList.add(oo);
+						}
+					}
+					BigDecimal tempSellAmount = sellRecordService.getSalesmanRealCollectionByBargainTime(sessionCompanyId, dept.getId(),personId, monthBegin, monthkEnd);
+					sellAmount = sellAmount.add(tempSellAmount);
+				}
+				
 				monthSellAmountStr=monthSellAmountStr+"<set value='"+sellAmount+"' /> ";
 				
-				if(mainInfo!=null){
-					mainInfoId = mainInfo.getId();
-					sellTargerList = monthlyItemInfoService.getMonthlyItemInfoListOfSellTargetByMainInfoId(mainInfoId);
-				}
 				boolean flag=false;
 				if(sellTargerList!=null && sellTargerList.size()>0){
 					MonthlyItemInfo temp = null;
@@ -434,9 +445,6 @@ public class SellReportStatAction extends BaseActionSupport{
 					"numberPrefix='' " +
 					"numberSuffix='元' " +
 					"formatNumberScale='0'  " +
-//					"divIntervalHints='150000' "+//纵坐标间隔
-//					"displayStartIndex='1'"+       //默认显示从第一列开始
-//					"displayEndIndex='7'" +        //默认显示到第七列
 					"showNames='1'  " +
 					"showValues='0' " +
 					"yAxisMinValue='20000' " +
@@ -464,98 +472,124 @@ public class SellReportStatAction extends BaseActionSupport{
 				Role role = roleService.get(roleId);
 				roleKey = role.getRoleKey();
 			}
-			MonthlyMainInfo mainInfo = monthlyMainInfoService.getMonthlyMainInfoByMonth(sessionCompanyId,deptId, personId ,Integer.parseInt(statYear),Integer.parseInt(statMonth) , roleKey);
-			List<MonthlyItemInfo>  sellTargerList = null;
 			
-			//月报表开始时间记录的年月日
-			int year = Integer.parseInt(statYear);
-			int month = Integer.parseInt(statMonth) ;
+			List<MonthlyItemInfo>  sellTargerList = new ArrayList<MonthlyItemInfo>();
+			List<Deptment> deptList = new ArrayList<Deptment>();
+			if(deptId==null || deptId.equals("")){//说明是查看全公司的
+				deptList = deptService.queryAllDeptmentsByCompanyId(sessionCompanyId);
+			}else{//按部门查或者按个人查
+				Deptment dp = deptService.get(deptId);
+				deptList.add(dp);
+			}
+			BigDecimal first = new BigDecimal(0);
+			BigDecimal second =  new BigDecimal(0);
+			BigDecimal third =  new BigDecimal(0);
+			BigDecimal fourth = new BigDecimal(0);
 			
-			Calendar firstWeekBegin = Calendar.getInstance();
-			Calendar firstWeekEnd = Calendar.getInstance();
-			//第一周开始时间
-			firstWeekBegin.set(Calendar.YEAR, year);
-			firstWeekBegin.set(Calendar.MONTH, month-1);
-			firstWeekBegin.set(Calendar.DAY_OF_MONTH, 1);
-			firstWeekBegin.set(Calendar.HOUR_OF_DAY, 0);
-			firstWeekBegin.set(Calendar.MINUTE , 0 );
-			firstWeekBegin.set(Calendar.SECOND, 0);
-			//第一周结束时间
-			firstWeekEnd.set(Calendar.YEAR, year);
-			firstWeekEnd.set(Calendar.MONTH, month-1);
-			firstWeekEnd.set(Calendar.DAY_OF_MONTH, 7);
-			firstWeekEnd.set(Calendar.HOUR_OF_DAY, 23);
-			firstWeekEnd.set(Calendar.MINUTE , 59 );
-			firstWeekEnd.set(Calendar.SECOND, 59);
-			
-			System.out.println(CalendarUtils.toLongString(firstWeekBegin));
-			System.out.println(CalendarUtils.toLongString(firstWeekEnd));
-			//----------------------------------------------
-			Calendar secondWeekBegin = Calendar.getInstance();
-			Calendar secondWeekEnd = Calendar.getInstance();
-			//第二周开始时间
-			secondWeekBegin.set(Calendar.YEAR, year);
-			secondWeekBegin.set(Calendar.MONTH, month-1);
-			secondWeekBegin.set(Calendar.DAY_OF_MONTH, 8);
-			secondWeekBegin.set(Calendar.HOUR_OF_DAY, 0);
-			secondWeekBegin.set(Calendar.MINUTE , 0 );
-			secondWeekBegin.set(Calendar.SECOND, 0);
-			//第二周结束时间
-			secondWeekEnd.set(Calendar.YEAR, year);
-			secondWeekEnd.set(Calendar.MONTH, month-1);
-			secondWeekEnd.set(Calendar.DAY_OF_MONTH, 14);
-			secondWeekEnd.set(Calendar.HOUR_OF_DAY, 23);
-			secondWeekEnd.set(Calendar.MINUTE , 59 );
-			secondWeekEnd.set(Calendar.SECOND, 59);
-			
-			System.out.println(CalendarUtils.toLongString(secondWeekBegin));
-			System.out.println(CalendarUtils.toLongString(secondWeekEnd));
-			//----------------------------------------------
-			Calendar thirdWeekBegin = Calendar.getInstance();
-			Calendar thirdWeekEnd = Calendar.getInstance();
-			//第三周开始时间
-			thirdWeekBegin.set(Calendar.YEAR, year);
-			thirdWeekBegin.set(Calendar.MONTH, month-1);
-			thirdWeekBegin.set(Calendar.DAY_OF_MONTH, 15);
-			thirdWeekBegin.set(Calendar.HOUR_OF_DAY, 0);
-			thirdWeekBegin.set(Calendar.MINUTE , 0 );
-			thirdWeekBegin.set(Calendar.SECOND, 0);
-			//第三周结束时间
-			thirdWeekEnd.set(Calendar.YEAR, year);
-			thirdWeekEnd.set(Calendar.MONTH, month-1);
-			thirdWeekEnd.set(Calendar.DAY_OF_MONTH, 21);
-			thirdWeekEnd.set(Calendar.HOUR_OF_DAY, 23);
-			thirdWeekEnd.set(Calendar.MINUTE , 59 );
-			thirdWeekEnd.set(Calendar.SECOND, 59);
-			
-			System.out.println(CalendarUtils.toLongString(thirdWeekBegin));
-			System.out.println(CalendarUtils.toLongString(thirdWeekEnd));
-			
-			//----------------------------------------------
-			Calendar fourthWeekBegin = Calendar.getInstance();
-			Calendar fourthWeekEnd = Calendar.getInstance();
-			//第四周开始时间
-			fourthWeekBegin.set(Calendar.YEAR, year);
-			fourthWeekBegin.set(Calendar.MONTH, month-1);
-			fourthWeekBegin.set(Calendar.DAY_OF_MONTH, 22);
-			fourthWeekBegin.set(Calendar.HOUR_OF_DAY, 0);
-			fourthWeekBegin.set(Calendar.MINUTE , 0 );
-			fourthWeekBegin.set(Calendar.SECOND, 0);
-			//第四周结束时间
-			fourthWeekEnd.set(Calendar.YEAR, year);
-			fourthWeekEnd.set(Calendar.MONTH, month-1);
-			fourthWeekEnd.set(Calendar.DAY_OF_MONTH, fourthWeekEnd.getActualMaximum(Calendar.DAY_OF_MONTH));
-			fourthWeekEnd.set(Calendar.HOUR_OF_DAY, 23);
-			fourthWeekEnd.set(Calendar.MINUTE , 59 );
-			fourthWeekEnd.set(Calendar.SECOND, 59);
-			
-			System.out.println(CalendarUtils.toLongString(fourthWeekBegin));
-			System.out.println(CalendarUtils.toLongString(fourthWeekEnd));
+			for(Deptment dept : deptList){
+				MonthlyMainInfo mainInfo = monthlyMainInfoService.getMonthlyMainInfoByMonth(sessionCompanyId, dept.getId() , personId ,Integer.parseInt(statYear),Integer.parseInt(statMonth) , roleKey);
+				if(mainInfo!=null){
+					mainInfoId = mainInfo.getId();
+					List<MonthlyItemInfo> tempSellTargerList = monthlyItemInfoService.getMonthlyItemInfoListOfSellTargetByMainInfoId(mainInfoId);
+					for(MonthlyItemInfo oo : tempSellTargerList){
+						sellTargerList.add(oo);
+					}
+				}
+				//月报表开始时间记录的年月日
+				int year = Integer.parseInt(statYear);
+				int month = Integer.parseInt(statMonth) ;
+				
+				Calendar firstWeekBegin = Calendar.getInstance();
+				Calendar firstWeekEnd = Calendar.getInstance();
+				//第一周开始时间
+				firstWeekBegin.set(Calendar.YEAR, year);
+				firstWeekBegin.set(Calendar.MONTH, month-1);
+				firstWeekBegin.set(Calendar.DAY_OF_MONTH, 1);
+				firstWeekBegin.set(Calendar.HOUR_OF_DAY, 0);
+				firstWeekBegin.set(Calendar.MINUTE , 0 );
+				firstWeekBegin.set(Calendar.SECOND, 0);
+				//第一周结束时间
+				firstWeekEnd.set(Calendar.YEAR, year);
+				firstWeekEnd.set(Calendar.MONTH, month-1);
+				firstWeekEnd.set(Calendar.DAY_OF_MONTH, 7);
+				firstWeekEnd.set(Calendar.HOUR_OF_DAY, 23);
+				firstWeekEnd.set(Calendar.MINUTE , 59 );
+				firstWeekEnd.set(Calendar.SECOND, 59);
+				
+				System.out.println(CalendarUtils.toLongString(firstWeekBegin));
+				System.out.println(CalendarUtils.toLongString(firstWeekEnd));
+				//----------------------------------------------
+				Calendar secondWeekBegin = Calendar.getInstance();
+				Calendar secondWeekEnd = Calendar.getInstance();
+				//第二周开始时间
+				secondWeekBegin.set(Calendar.YEAR, year);
+				secondWeekBegin.set(Calendar.MONTH, month-1);
+				secondWeekBegin.set(Calendar.DAY_OF_MONTH, 8);
+				secondWeekBegin.set(Calendar.HOUR_OF_DAY, 0);
+				secondWeekBegin.set(Calendar.MINUTE , 0 );
+				secondWeekBegin.set(Calendar.SECOND, 0);
+				//第二周结束时间
+				secondWeekEnd.set(Calendar.YEAR, year);
+				secondWeekEnd.set(Calendar.MONTH, month-1);
+				secondWeekEnd.set(Calendar.DAY_OF_MONTH, 14);
+				secondWeekEnd.set(Calendar.HOUR_OF_DAY, 23);
+				secondWeekEnd.set(Calendar.MINUTE , 59 );
+				secondWeekEnd.set(Calendar.SECOND, 59);
+				
+				System.out.println(CalendarUtils.toLongString(secondWeekBegin));
+				System.out.println(CalendarUtils.toLongString(secondWeekEnd));
+				//----------------------------------------------
+				Calendar thirdWeekBegin = Calendar.getInstance();
+				Calendar thirdWeekEnd = Calendar.getInstance();
+				//第三周开始时间
+				thirdWeekBegin.set(Calendar.YEAR, year);
+				thirdWeekBegin.set(Calendar.MONTH, month-1);
+				thirdWeekBegin.set(Calendar.DAY_OF_MONTH, 15);
+				thirdWeekBegin.set(Calendar.HOUR_OF_DAY, 0);
+				thirdWeekBegin.set(Calendar.MINUTE , 0 );
+				thirdWeekBegin.set(Calendar.SECOND, 0);
+				//第三周结束时间
+				thirdWeekEnd.set(Calendar.YEAR, year);
+				thirdWeekEnd.set(Calendar.MONTH, month-1);
+				thirdWeekEnd.set(Calendar.DAY_OF_MONTH, 21);
+				thirdWeekEnd.set(Calendar.HOUR_OF_DAY, 23);
+				thirdWeekEnd.set(Calendar.MINUTE , 59 );
+				thirdWeekEnd.set(Calendar.SECOND, 59);
+				
+				System.out.println(CalendarUtils.toLongString(thirdWeekBegin));
+				System.out.println(CalendarUtils.toLongString(thirdWeekEnd));
+				
+				//----------------------------------------------
+				Calendar fourthWeekBegin = Calendar.getInstance();
+				Calendar fourthWeekEnd = Calendar.getInstance();
+				//第四周开始时间
+				fourthWeekBegin.set(Calendar.YEAR, year);
+				fourthWeekBegin.set(Calendar.MONTH, month-1);
+				fourthWeekBegin.set(Calendar.DAY_OF_MONTH, 22);
+				fourthWeekBegin.set(Calendar.HOUR_OF_DAY, 0);
+				fourthWeekBegin.set(Calendar.MINUTE , 0 );
+				fourthWeekBegin.set(Calendar.SECOND, 0);
+				//第四周结束时间
+				fourthWeekEnd.set(Calendar.YEAR, year);
+				fourthWeekEnd.set(Calendar.MONTH, month-1);
+				fourthWeekEnd.set(Calendar.DAY_OF_MONTH, fourthWeekEnd.getActualMaximum(Calendar.DAY_OF_MONTH));
+				fourthWeekEnd.set(Calendar.HOUR_OF_DAY, 23);
+				fourthWeekEnd.set(Calendar.MINUTE , 59 );
+				fourthWeekEnd.set(Calendar.SECOND, 59);
+				
+				System.out.println(CalendarUtils.toLongString(fourthWeekBegin));
+				System.out.println(CalendarUtils.toLongString(fourthWeekEnd));
 
-			BigDecimal first = sellRecordService.getSalesmanRealCollectionByBargainTime(sessionCompanyId, deptId,personId, firstWeekBegin, firstWeekEnd);
-			BigDecimal second = sellRecordService.getSalesmanRealCollectionByBargainTime(sessionCompanyId, deptId,personId, secondWeekBegin, secondWeekEnd);
-			BigDecimal third = sellRecordService.getSalesmanRealCollectionByBargainTime(sessionCompanyId, deptId,personId, thirdWeekBegin, thirdWeekEnd);
-			BigDecimal fourth = sellRecordService.getSalesmanRealCollectionByBargainTime(sessionCompanyId, deptId,personId, fourthWeekBegin, fourthWeekEnd);
+				BigDecimal tempFirst = sellRecordService.getSalesmanRealCollectionByBargainTime(sessionCompanyId, dept.getId() ,personId, firstWeekBegin, firstWeekEnd);
+				BigDecimal tempSecond = sellRecordService.getSalesmanRealCollectionByBargainTime(sessionCompanyId, dept.getId() ,personId, secondWeekBegin, secondWeekEnd);
+				BigDecimal tempThird = sellRecordService.getSalesmanRealCollectionByBargainTime(sessionCompanyId, dept.getId() ,personId, thirdWeekBegin, thirdWeekEnd);
+				BigDecimal tempFourth = sellRecordService.getSalesmanRealCollectionByBargainTime(sessionCompanyId, dept.getId() ,personId, fourthWeekBegin, fourthWeekEnd);
+				
+				first = first.add(tempFirst);
+				second = second.add(tempSecond);
+				third = third.add(tempThird);
+				fourth = fourth.add(tempFourth);
+			}
 			
 			str=str+"<set value='"+first+"' /> ";
 			str=str+"<set value='"+second+"' /> ";
@@ -564,10 +598,6 @@ public class SellReportStatAction extends BaseActionSupport{
 			str=str+"</dataset>";
 			str=str+"<dataset seriesName='计划结果' color='65FA0F'>";
 			
-			if(mainInfo!=null){
-				mainInfoId = mainInfo.getId();
-				sellTargerList = monthlyItemInfoService.getMonthlyItemInfoListOfSellTargetByMainInfoId(mainInfoId);
-			}
 			boolean flag=false;
 			if(sellTargerList!=null && sellTargerList.size()>0){
 				MonthlyItemInfo temp = null;
