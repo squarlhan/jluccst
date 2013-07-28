@@ -114,6 +114,7 @@
   </head>
   
   <body>
+  <div style="height:470px;overflow-y:auto;">
  <s:form id="form1" name="form1" method="post" theme="simple" action="openTimePlanListAction.action">
 <table width="100%"  border="0" cellspacing="5" cellpadding="0">
 	<tr>
@@ -156,7 +157,7 @@
   <tr>
     <td valign="top">
     <input name="addbtn" type="button" class="btn_2_3" id="addbtn" value="添加" >
-            <input name="deletepointbtn" type="button" class="btn_4" id="deletepointbtn" value="删除所选">
+    <input name="deletepointbtn" type="button" class="btn_4" id="deletepointbtn" value="删除所选">
       <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#d5e4fd">
         <tr>
          	<td align="center" background="<%=path %>/images/headerbg.jpg">  
@@ -211,5 +212,6 @@
   </tr>
 </table>
 </s:form>
+</div>
 </body>
 </html>
