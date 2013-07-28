@@ -126,15 +126,15 @@
         <tr>
               <td align="center" background="<%=path %>/images/headerbg.jpg" width="80"><strong>名次</strong></td>
               <td align="center" background="<%=path %>/images/headerbg.jpg" nowrap="nowrap"><strong>业务员</strong></td>
-              <td align="center" background="<%=path %>/images/headerbg.jpg" nowrap="nowrap"><strong>所在部门</strong></td>
               <td align="center" background="<%=path %>/images/headerbg.jpg" nowrap="nowrap"><strong>销售额</strong></td>
+              <td align="center" background="<%=path %>/images/headerbg.jpg" nowrap="nowrap"><strong>所在部门</strong></td>
         </tr>
         <s:iterator value="salesPerformanceRankList" status="obj">
         <tr>
               <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="sequenceNumber"/></td>
               <td height="26" align="center" bgcolor="#FFFFFF"  nowrap="nowrap"><s:property value="salesmanName"/></td>
-              <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="deptName"/></td>
               <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="salesAmount"/></td>
+              <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="deptName"/></td>
         </tr>
         </s:iterator>
         <s:if test="salesPerformanceRankList==null || salesPerformanceRankList.size()==0">
