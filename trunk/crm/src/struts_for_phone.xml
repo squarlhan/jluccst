@@ -10,15 +10,17 @@
 			<result name="show-common-object">/common/show-object.jsp</result>
 			<result name="show-common-map">/common/show-map.jsp</result>
 			<result name="show-common-result">/common/show-result.jsp</result>
+			<result name="show-common-string">/common/show-string.jsp</result>
 		</global-results>
 	</package>
-	<!-- 登录 -->
+	<!-- 登录组织机构 -->
 	<package name="phoneplatform" extends="phonejson">
 		<action name="logonValidForPhoneAction" class="userLogonAction" method="logonValidForPhone"></action>
 		<action name="showUserInfoForPhoneAction" class="userAction" method="showUserInfoForPhone"></action>
 		<action name="updateUserForPhoneAction" class="userAction" method="updateUserForPhone"></action>
 		<action name="showUserListByDeptIdForPhoneAction" class="userAction" method="showUserListByDeptIdForPhone"></action>
 		<action name="showDeptListForPhoneAction" class="deptmentAction" method="showDeptListForPhone"></action>
+		<action name="showUserDutyAndPopedomForPhoneAction" class="userLogonAction" method="showUserDutyAndPopedomForPhone"></action>
 	</package>
 	<!-- 客户信息 -->
 	<package name="customerinfo" extends="phonejson">
