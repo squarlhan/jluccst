@@ -687,9 +687,9 @@ public class CustomerInfoAction extends BaseActionSupport{
 				unfinishedRate = unfinishedCount/totalCount;
 			}
 			
-			map.put("finished", finishedRate);
-			map.put("expired", expiredRate);
-			map.put("unfinished", unfinishedRate);
+			map.put("finished", String.valueOf(finishedRate));
+			map.put("expired", String.valueOf(expiredRate));
+			map.put("unfinished", String.valueOf(unfinishedRate));
 		}
 		request.setAttribute("map", map);
 		return COMMON_MAP;
