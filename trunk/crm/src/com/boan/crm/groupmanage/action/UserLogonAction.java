@@ -105,6 +105,8 @@ public class UserLogonAction extends ActionSupport {
 
 	private Message message = new Message();
 
+	private String userId = null;
+
 	private String username = null;
 
 	private String password = null;
@@ -254,7 +256,6 @@ public class UserLogonAction extends ActionSupport {
 	 * @return
 	 * @throws Exception
 	 */
-	// TODO
 	public String logonValidForPhone() throws Exception {
 		HttpServletRequest request = ServletActionContext.getRequest();
 		String md5 = MakeMd5.MD5(password);
@@ -413,6 +414,72 @@ public class UserLogonAction extends ActionSupport {
 	}
 
 	/**
+	 * 根据用户id获取用户职务及权限
+	 * 
+	 * @return
+	 * @throws Exception
+	 */
+	public String showUserDutyAndPopedomForPhone() throws Exception {
+		HttpServletRequest request = ServletActionContext.getRequest();
+		User user = null;
+		StringBuffer sb   = new StringBuffer();
+		sb.append("{");
+		if( StringUtils.isNotBlank(userId) )
+		{
+			user = userService.getUserById(userId);
+		}
+		if (user != null) {
+			String roleKey = null;
+			if (StringUtils.isNotBlank(user.getRoleId())) {
+				// 获取权限串
+				String[] popedomKeys = popedomService.queryPopedomsByRoleId(user.getRoleId());
+				// 获取角色对象
+				Role role = roleService.get(user.getRoleId());
+				if (role != null) {
+					roleKey = role.getRoleKey();
+					sb.append("\"user_position\":" + "[" );
+					sb.append("{\"value\":\""+ role.getRoleName() +"\",\"id\":\""+role.getId()+"\"}");
+					sb.append( "]");
+				}else
+				{
+					sb.append("\"user_position\":" + "[]" );
+				}
+			}else
+			{
+				sb.append("\"user_position\":" + "[]" );
+			}
+			// （2）返回map
+			int userType = 0;
+			String userTypeName = null;
+			if (RoleFlag.YE_WU_YUAN.equalsIgnoreCase(roleKey)) {
+				// 业务员
+				userType = 1;
+				userTypeName = "业务员";
+			} else if (RoleFlag.BU_MEN_LING_DAO.equalsIgnoreCase(roleKey)) {
+				// 部门领导
+				userType = 2;
+				userTypeName = "部门领导";
+			} else if (RoleFlag.GONG_SI_LING_DAO.equalsIgnoreCase(roleKey)) {
+				//公司领导
+				userType = 3;
+				userTypeName = "公司领导";
+			} else {
+				userType = -1;
+				userTypeName = "非法用户";
+			}
+			sb.append(",\"user_group\":" + "[" );
+			sb.append("{\"value\":\""+ userTypeName +"\",\"id\":\""+userType+"\"}");
+			sb.append( "]");
+
+		} else {
+			sb.append("\"user_position\":" + "[],\"user_group\":" + "[]" );
+		}
+		sb.append("}");
+		request.setAttribute("info", sb.toString());
+		return "show-common-string";
+	}
+
+	/**
 	 * 身份验证成功后，转入桌面
 	 * 
 	 * @return
@@ -485,7 +552,7 @@ public class UserLogonAction extends ActionSupport {
 					desktopUrl = "sysdesktop";
 				}
 			}
-		//其他用户
+			// 其他用户
 		} else {
 			if (isHashPopedom03) {
 				desktopUrl = "desktop03";
@@ -1072,6 +1139,14 @@ public class UserLogonAction extends ActionSupport {
 
 	public void setHashPopedom03(boolean isHashPopedom03) {
 		this.isHashPopedom03 = isHashPopedom03;
+	}
+
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 
 }
