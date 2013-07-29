@@ -170,7 +170,7 @@ public class CustomerTraceInfoServiceImpl implements ICustomerTraceInfoService{
 		}
 		if(values.get("startTime") != null && values.get("endTime") != null)
 		{
-			hql.append(" and (traceTime between :startTime and :endTime ");
+			hql.append(" and (traceTime between :startTime and :endTime) ");
 		}
 		hql.append(" order by traceTime desc,actualTraceTime");
 		List<CustomerTraceInfo> data = customerTraceInfoDao.findForPage(hql.toString(), values, pagination.getStartIndex(), pagination.getPageSize());
@@ -223,7 +223,7 @@ public class CustomerTraceInfoServiceImpl implements ICustomerTraceInfoService{
 		}
 		if(values.get("startTime") != null && values.get("endTime") != null)
 		{
-			hql.append(" and (traceTime between :startTime and :endTime ");
+			hql.append(" and (traceTime between :startTime and :endTime) ");
 		}
 		if(values.get("taskType") != null && values.get("taskType").equals("1"))
 		{
