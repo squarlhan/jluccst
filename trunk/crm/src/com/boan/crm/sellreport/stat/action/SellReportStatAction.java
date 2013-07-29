@@ -951,10 +951,29 @@ public class SellReportStatAction extends BaseActionSupport{
 		System.out.println(CalendarUtils.toLongString(fourthWeekBegin));
 		System.out.println(CalendarUtils.toLongString(fourthWeekEnd));
 
-		BigDecimal first = sellRecordService.getSalesmanRealCollectionByBargainTime(sessionCompanyId, deptId,personId, firstWeekBegin, firstWeekEnd);
-		BigDecimal second = sellRecordService.getSalesmanRealCollectionByBargainTime(sessionCompanyId, deptId,personId, secondWeekBegin, secondWeekEnd);
-		BigDecimal third = sellRecordService.getSalesmanRealCollectionByBargainTime(sessionCompanyId, deptId,personId, thirdWeekBegin, thirdWeekEnd);
-		BigDecimal fourth = sellRecordService.getSalesmanRealCollectionByBargainTime(sessionCompanyId, deptId,personId, fourthWeekBegin, fourthWeekEnd);
+		
+		BigDecimal first =new BigDecimal(0);
+		BigDecimal second =new BigDecimal(0);
+		BigDecimal third =new BigDecimal(0);
+		BigDecimal fourth =new BigDecimal(0);
+		List<Deptment> deptList = new ArrayList<Deptment>();
+		if(deptId==null || deptId.equals("")){//说明是查看全公司的
+			deptList = deptService.queryAllDeptmentsByCompanyId(sessionCompanyId);
+		}else{//按部门查或者按个人查
+			Deptment dp = deptService.get(deptId);
+			deptList.add(dp);
+		}
+		for(Deptment dept : deptList){
+			BigDecimal tempFirst = sellRecordService.getSalesmanRealCollectionByBargainTime(sessionCompanyId, dept.getId() ,personId, firstWeekBegin, firstWeekEnd);
+			BigDecimal tempSecond = sellRecordService.getSalesmanRealCollectionByBargainTime(sessionCompanyId, dept.getId() ,personId, secondWeekBegin, secondWeekEnd);
+			BigDecimal tempThird = sellRecordService.getSalesmanRealCollectionByBargainTime(sessionCompanyId, dept.getId() ,personId, thirdWeekBegin, thirdWeekEnd);
+			BigDecimal tempFourth = sellRecordService.getSalesmanRealCollectionByBargainTime(sessionCompanyId, dept.getId() ,personId, fourthWeekBegin, fourthWeekEnd);
+			
+			first = first.add(tempFirst);
+			second = second.add(tempSecond);
+			third = third.add(tempThird);
+			fourth = fourth.add(tempFourth);
+		}
 		
 		str=str+"<set value='"+first+"' /> ";
 		str=str+"<set value='"+second+"' /> ";
@@ -970,6 +989,7 @@ public class SellReportStatAction extends BaseActionSupport{
 	 */
 	private String computeEveryMonthSellAmount(String str) {
 		for(int i =1;i<=12;i++){
+			BigDecimal sellAmount = new BigDecimal(0);
 			Calendar monthBegin = Calendar.getInstance();
 			monthBegin.set(Calendar.MONTH, i -1);
 			monthBegin.set(Calendar.DAY_OF_MONTH, monthBegin.getMinimum(Calendar.DATE));
@@ -982,7 +1002,17 @@ public class SellReportStatAction extends BaseActionSupport{
 			System.out.println(CalendarUtils.toString(monthBegin));
 			System.out.println(CalendarUtils.toString(monthkEnd));
 			
-			BigDecimal sellAmount = sellRecordService.getSalesmanRealCollectionByBargainTime(sessionCompanyId, deptId,personId, monthBegin, monthkEnd);
+			List<Deptment> deptList = new ArrayList<Deptment>();
+			if(deptId==null || deptId.equals("")){//说明是查看全公司的
+				deptList = deptService.queryAllDeptmentsByCompanyId(sessionCompanyId);
+			}else{//按部门查或者按个人查
+				Deptment dp = deptService.get(deptId);
+				deptList.add(dp);
+			}
+			for(Deptment dept : deptList){
+				BigDecimal tempSellAmount = sellRecordService.getSalesmanRealCollectionByBargainTime(sessionCompanyId, dept.getId() , personId, monthBegin, monthkEnd);
+				sellAmount = sellAmount.add(tempSellAmount);
+			}
 			str=str + "<set value='"+sellAmount+"' /> ";
 		}
 		return str;
