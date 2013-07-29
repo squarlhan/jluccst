@@ -1,4 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"  import="java.util.Calendar"%>
+<%@ page language="java" contentType="text/html; charset=utf-8"
+import="java.util.Calendar,com.boan.crm.groupmanage.common.RoleFlag,com.boan.crm.groupmanage.common.UserSession,com.boan.crm.groupmanage.service.IPopedomService,com.boan.crm.groupmanage.service.impl.PopedomServiceImpl"
+	pageEncoding="utf-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%@ taglib prefix="j" uri="/script-tags"%>
 <%
@@ -16,11 +18,24 @@
 	 * Modified Time：
 	 * Modified Explain：
 	 */
-	response.setHeader( "Pragma", "No-cache" );
+	 response.setHeader( "Pragma", "No-cache" );
 	response.setHeader( "Cache-Control", "no-cache" );
 	response.setHeader( "Expires", "0" );
 	request.setCharacterEncoding( "utf-8" );
 	String path = request.getContextPath();
+	IPopedomService popedomService = new PopedomServiceImpl();
+	UserSession us = (UserSession) session.getAttribute("userSession");
+	String deptId = us.getDeptId();
+	String personId = us.getUserId();
+	String companyId = us.getCompanyId();
+	boolean popodomFlag = popedomService.isCompanyAdministrator(us.getUserId(), String.valueOf(us.getUserType()) ) 
+			||popedomService.isHasDeptPopedom(us.getRoleKey()) || popedomService.isHasCompanyPopedom(us.getRoleKey());
+	if( popodomFlag ){
+		//经理级人员
+	}else{
+		//部门人员
+	}
+	//*/
 %>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -34,7 +49,14 @@
   <script type="text/javascript">
 		<!--
 		d = new dTree('d','<%=path%>');
-		d.add(0,-1,'<s:property value="companyName"/>','','','groupmain');
+		<%
+			String roleKey= us.getRoleKey();
+			if( roleKey.equals(RoleFlag.BU_MEN_LING_DAO)){
+		%>
+			d.add(0,-1,'<s:property value="companyName"/>','','','groupmain');
+		<%}else{%>
+			d.add(0,-1,'<s:property value="companyName"/>','./openSellTrendAction.action?companyId=<s:property value="companyId"/>&statYear=<%=Calendar.getInstance().get(Calendar.YEAR)%>','','groupmain');
+		<%}%>
 		<s:iterator value="deptList">
 			d.add("<s:property value="id"/>",0,'<s:property value="deptName"/>','./openSellTrendAction.action?companyId=<s:property value="companyId"/>&deptId=<s:property value="id"/>&statYear=<%=Calendar.getInstance().get(Calendar.YEAR)%>','','groupmain','<%=path%>/js/tree/img/group.gif','<%=path%>/js/tree/img/group.gif');
 		</s:iterator>
