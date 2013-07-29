@@ -27,6 +27,7 @@ import com.boan.crm.goods.model.GoodsInfoBase;
 import com.boan.crm.goods.model.GoodsType;
 import com.boan.crm.goods.service.IGoodsInfoBaseService;
 import com.boan.crm.goods.service.IGoodsTypeService;
+import com.boan.crm.groupmanage.common.RoleFlag;
 import com.boan.crm.groupmanage.common.UserSession;
 import com.boan.crm.groupmanage.model.Deptment;
 import com.boan.crm.groupmanage.model.User;
@@ -371,7 +372,7 @@ public class SellRecordAction extends BaseActionSupport {
 			params.put("queryBargainTimeEnd", queryBargainTimeEnd);
 		}
 		UserSession userSession = this.getSession();
-		params.put("salesmanId", userSession.getUserId());
+		//params.put("salesmanId", userSession.getUserId());
 		pagination = sellRecordService.findSellRecordForPage(params, pagination);
 		return SUCCESS;
 	}
@@ -409,7 +410,13 @@ public class SellRecordAction extends BaseActionSupport {
 	}
 	
 	public String openModifySellRecordForMyCustomer() {
-		customerInfos = customerInfoService.findAllCustomerInfoBySalesmanId(sessionUserId); //查本公司业务员所管辖的客户
+		//
+		UserSession userSession = this.getSession();
+		if(!userSession.getRoleKey().equals(RoleFlag.YE_WU_YUAN)){
+			customerInfos = customerInfoService.findAllCustomerInfoByCompanyId(sessionCompanyId);
+		}else{
+			customerInfos = customerInfoService.findAllCustomerInfoBySalesmanId(sessionUserId); //查本公司业务员所管辖的客户
+		}
 		if(customerInfos==null || customerInfos.size()==0){
 			customerInfos = customerInfoService.findAllCustomerInfoByCompanyId(sessionCompanyId);//本公司的所有客户
 		}
