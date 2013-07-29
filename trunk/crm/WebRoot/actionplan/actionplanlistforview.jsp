@@ -55,10 +55,10 @@ pageEncoding="UTF-8"%>
 	<script type="text/javascript" src="<%=basePath%>js/timepicke/jquery-ui-timepicker-addon.js"></script>
 	<script type="text/javascript" src="<%=basePath%>js/timepicke/jquery-ui-timepicker-zh-CN.js"></script>
 	<script type="text/javascript" src="<%=basePath%>js/timepicke/jquery-ui-sliderAccess.js"></script>
-	
 	<script src="<%=basePath %>/js/ui/jquery.ui.core.js"></script>
 	<script src="<%=basePath %>/js/ui/jquery.ui.position.js"></script>
 	<script src="<%=basePath %>/js/ui/jquery.autocomplete.js"></script>
+	<script type="text/javascript" src="<%=basePath%>js/jquery.mergeCell.js"></script>
 	<style type="text/css">
 		.auto-style1 {
 		background: #d3eaef; font-size: 18px; font-family: 仿宋;}
@@ -84,6 +84,9 @@ pageEncoding="UTF-8"%>
 	<script type="text/javascript">
 	
 		$(function(){
+			$('#table1').mergeCell({
+				cols: [0, 2, 3]
+			}); 
 			$('#txt_query_beginTime').datetimepicker({showTimepicker: false});
 			$('#txt_query_endTime').datetimepicker({showTimepicker: false});
 			
@@ -217,7 +220,7 @@ pageEncoding="UTF-8"%>
 	</tr>
   <tr>
     <td valign="top">
-      <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#d5e4fd">
+      <table id="table1" width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#d5e4fd">
         <tr>
               <td align="center" background="<%=path %>/images/headerbg.jpg" nowrap="nowrap"><strong>业务员</strong></td>
               <td align="center" background="<%=path %>/images/headerbg.jpg" nowrap="nowrap"><strong>提交日期</strong></td>
