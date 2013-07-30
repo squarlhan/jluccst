@@ -6,6 +6,7 @@ package com.boan.crm.customer.action;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -627,8 +628,9 @@ public class CustomerInfoAction extends BaseActionSupport{
 				values.put("startTime", MySimpleDateFormat.parse(startTime,"yyyy-MM-dd HH:mm:ss"));
 			if(endTime != null)
 				values.put("endTime", MySimpleDateFormat.parse(endTime,"yyyy-MM-dd HH:mm:ss"));
-			
-			List<CustomerTraceInfo> listTrace = customerTraceInfoService.findCustomerTraceInfoForPage(values, new Pagination<CustomerTraceInfo>()).getData();
+			Pagination<CustomerTraceInfo> paginationTrace = new Pagination<CustomerTraceInfo>();
+			paginationTrace.setPageSize(300);
+			List<CustomerTraceInfo> listTrace = customerTraceInfoService.findCustomerTraceInfoForPage(values, paginationTrace ).getData();
 			if(listTrace != null && listTrace.size() > 0)
 			{
 				totalCount = totalCount + listTrace.size();
@@ -652,8 +654,9 @@ public class CustomerInfoAction extends BaseActionSupport{
 					}
 				}
 			}
-			
-			List<CustomerVisitInfo> listVisit = customerVisitInfoService.findCustomerVisitInfoForPage(values, new Pagination<CustomerVisitInfo>()).getData();
+			Pagination<CustomerVisitInfo> paginationVisit =  new Pagination<CustomerVisitInfo>();
+			paginationVisit.setPageSize(300);
+			List<CustomerVisitInfo> listVisit = customerVisitInfoService.findCustomerVisitInfoForPage(values, paginationVisit).getData();
 			if(listVisit != null && listVisit.size() > 0)
 			{
 				totalCount = totalCount + listVisit.size();
@@ -677,14 +680,16 @@ public class CustomerInfoAction extends BaseActionSupport{
 					}
 				}
 			}
-			int finishedRate = 0;
-			int expiredRate = 0;
-			int unfinishedRate = 0;
+			String finishedRate = "";
+			String expiredRate = "";
+			String unfinishedRate = "";
+			NumberFormat numberFormat = NumberFormat.getInstance();
+			numberFormat.setMaximumFractionDigits(2);
 			if(totalCount > 0)
 			{
-				finishedRate = finishedCount/totalCount;
-				expiredRate = expiredCount/totalCount;
-				unfinishedRate = unfinishedCount/totalCount;
+				finishedRate = numberFormat.format(((float)finishedCount/(float)totalCount) * 100);
+				expiredRate = numberFormat.format(((float)expiredCount/(float)totalCount) * 100);
+				unfinishedRate = numberFormat.format(((float)unfinishedCount/(float)totalCount) * 100);
 			}
 			
 			map.put("finished", String.valueOf(finishedRate));
