@@ -15,19 +15,17 @@
 	response.setCharacterEncoding( "utf-8" );
 
 	
-	List list = ( List ) request.getAttribute( "object" );
+	Object list = ( Object ) request.getAttribute( "object" );
 	String format = (String) request.getAttribute( "format" );
 	//获取请求参数
 	StringBuffer sb = new StringBuffer();
-	if (list != null && list.size() > 0) {
-		sb.append("{");
+	if (list != null) {
 		CalendarJsonValueProcessor processor = new CalendarJsonValueProcessor("yyyy-MM-dd");
 		JsonConfig jsonConfig = new JsonConfig();
 		jsonConfig.registerJsonValueProcessor(Calendar.class, processor);
-		sb.append("root:" + JSONSerializer.toJSON(list, jsonConfig ).toString());
-		sb.append("}");
+		sb.append(JSONSerializer.toJSON(list, jsonConfig ).toString());
 	} else {
-		sb.append("{root:[]}");
+		sb.append("{}");
 	}
 	response.getWriter().write(sb.toString(  ));
 %>
