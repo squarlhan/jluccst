@@ -801,7 +801,8 @@ public class CustomerInfoAction extends BaseActionSupport{
 				for(int i=0;i<listPerson.size();i++)
 				{
 					ContractPersonDetailInfoForJson detail = new ContractPersonDetailInfoForJson();
-					detail.setBirth_day(CurrentDateTime.getCurrentDate(listPerson.get(i).getBirthday()));
+					if(listPerson.get(i).getBirthday() != null)
+						detail.setBirth_day(CurrentDateTime.getCurrentDate(listPerson.get(i).getBirthday()));
 					detail.setBirth_type(String.valueOf(listPerson.get(i).getLunar()));
 					detail.setEmail(listPerson.get(i).getEmail());
 					detail.setMobile(listPerson.get(i).getTel());
