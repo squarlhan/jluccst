@@ -615,10 +615,9 @@ public class CustomerInfoAction extends BaseActionSupport{
 	public String getCutomerDailyInfoViewForPhone()
 	{
 		HttpServletRequest request = ServletActionContext.getRequest();
-		Map<String,Object> map = new HashMap<String,Object>();
+		List<TaskInfoForJson> list = new ArrayList<TaskInfoForJson>();
 		if(StringUtils.trimToNull(userId)!=null)
 		{
-			List<TaskInfoForJson> listTraceTask = new ArrayList<TaskInfoForJson>();
 			Map<String,Object> values = new HashMap<String,Object>();
 			values.put( "salesmanId", userId );
 			if(startTime != null)
@@ -644,12 +643,10 @@ public class CustomerInfoAction extends BaseActionSupport{
 					
 					TaskInfoForJson obj = new TaskInfoForJson(listTrace.get(i).getId(),"0","",listTrace.get(i).getCustomerName(),personName,listTrace.get(i).getTel(),CalendarUtils.toLongStringNoSecond(listTrace.get(i).getTraceTime()));
 					
-					listTraceTask.add(obj);
+					list.add(obj);
 				}
 			}
 			
-			map.put("follow", listTraceTask);
-			List<TaskInfoForJson> listVisitTask = new ArrayList<TaskInfoForJson>();
 			List<CustomerVisitInfo> listVisit = customerVisitInfoService.findCustomerVisitInfoForPage(values, new Pagination<CustomerVisitInfo>()).getData();
 			if(listVisit != null && listVisit.size() > 0)
 			{
@@ -662,24 +659,14 @@ public class CustomerInfoAction extends BaseActionSupport{
 					
 					TaskInfoForJson obj = new TaskInfoForJson(listVisit.get(i).getId(),"1","",listVisit.get(i).getCustomerName(),personName,listVisit.get(i).getTel(),CalendarUtils.toLongStringNoSecond(listVisit.get(i).getVisitTime()));
 					
-					listVisitTask.add(obj);
+					list.add(obj);
 				}
 			}
-			map.put("visit", listVisitTask);
-			Calendar temp = Calendar.getInstance();
-			temp.set(Calendar.DATE, -15);
-			Calendar beginTime =temp;
-			Calendar endTime = Calendar.getInstance();
-			Map<String,Object> params = new HashMap<String, Object>();
-//			params.put("personId", this.sessionUserId);
-			 
-			params.put("beginTime", beginTime);
-			params.put("endTime", endTime); 
-			params.put("employeeId", userId);
 			
 		}
-		request.setAttribute("map", map);
-		return COMMON_MAP;
+		request.setAttribute("list", list);
+		request.setAttribute("jsonRootName", "task");
+		return COMMON_LIST; 
 	}
 	/**
 	 * 获取图表日程
