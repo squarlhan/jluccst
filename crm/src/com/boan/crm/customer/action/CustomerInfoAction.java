@@ -609,6 +609,79 @@ public class CustomerInfoAction extends BaseActionSupport{
 		return COMMON_MAP;
 	}
 	/**
+	 * 获取日程，未完成，已完成
+	 * @return
+	 */
+	public String getCutomerDailyInfoViewForPhone()
+	{
+		HttpServletRequest request = ServletActionContext.getRequest();
+		Map<String,Object> map = new HashMap<String,Object>();
+		if(StringUtils.trimToNull(userId)!=null)
+		{
+			List<TaskInfoForJson> listTraceTask = new ArrayList<TaskInfoForJson>();
+			Map<String,Object> values = new HashMap<String,Object>();
+			values.put( "salesmanId", userId );
+			if(startTime != null)
+				values.put("startTime", MySimpleDateFormat.parse(startTime,"yyyy-MM-dd HH:mm:ss"));
+			if(endTime != null)
+				values.put("endTime", MySimpleDateFormat.parse(endTime,"yyyy-MM-dd HH:mm:ss"));
+			
+			if(taskType != null && taskType.length() > 0)
+			{
+				values.put("taskType", taskType);
+				values.put("now", Calendar.getInstance());
+			}
+			
+			List<CustomerTraceInfo> listTrace = customerTraceInfoService.findCustomerTraceInfoForPage(values, new Pagination<CustomerTraceInfo>()).getData();
+			if(listTrace != null && listTrace.size() > 0)
+			{
+				for(int i = 0;i<listTrace.size();i++)
+				{
+					ContractPersonInfo personObj = contractpersonInfoService.get(listTrace.get(i).getTracePersonId());
+					String personName = "";
+					if(personObj!= null)
+						personName = contractpersonInfoService.get(listTrace.get(i).getTracePersonId()).getPersonName();
+					
+					TaskInfoForJson obj = new TaskInfoForJson(listTrace.get(i).getId(),"0","",listTrace.get(i).getCustomerName(),personName,listTrace.get(i).getTel(),CalendarUtils.toLongStringNoSecond(listTrace.get(i).getTraceTime()));
+					
+					listTraceTask.add(obj);
+				}
+			}
+			
+			map.put("follow", listTraceTask);
+			List<TaskInfoForJson> listVisitTask = new ArrayList<TaskInfoForJson>();
+			List<CustomerVisitInfo> listVisit = customerVisitInfoService.findCustomerVisitInfoForPage(values, new Pagination<CustomerVisitInfo>()).getData();
+			if(listVisit != null && listVisit.size() > 0)
+			{
+				for(int i = 0;i<listVisit.size();i++)
+				{
+					ContractPersonInfo personObj = contractpersonInfoService.get(listVisit.get(i).getVisitPersonId());
+					String personName = "";
+					if(personObj!= null)
+						personName = contractpersonInfoService.get(listVisit.get(i).getVisitPersonId()).getPersonName();
+					
+					TaskInfoForJson obj = new TaskInfoForJson(listVisit.get(i).getId(),"1","",listVisit.get(i).getCustomerName(),personName,listVisit.get(i).getTel(),CalendarUtils.toLongStringNoSecond(listVisit.get(i).getVisitTime()));
+					
+					listVisitTask.add(obj);
+				}
+			}
+			map.put("visit", listVisitTask);
+			Calendar temp = Calendar.getInstance();
+			temp.set(Calendar.DATE, -15);
+			Calendar beginTime =temp;
+			Calendar endTime = Calendar.getInstance();
+			Map<String,Object> params = new HashMap<String, Object>();
+//			params.put("personId", this.sessionUserId);
+			 
+			params.put("beginTime", beginTime);
+			params.put("endTime", endTime); 
+			params.put("employeeId", userId);
+			
+		}
+		request.setAttribute("map", map);
+		return COMMON_MAP;
+	}
+	/**
 	 * 获取图表日程
 	 * @return
 	 */
