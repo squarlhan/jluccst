@@ -30,6 +30,7 @@
 		<action name="getCutomerInfoForPhoneAction" class="customerInfoAction" method="getCutomerInfoForPhone"></action>
 		<action name="getCutomerDetailInfoForPhoneAction" class="customerInfoAction" method="getCutomerDetailInfoForPhone"></action>
 		<action name="getCutomerDailyInfoForPhoneAction" class="customerInfoAction" method="getCutomerDailyInfoForPhone"></action>
+		<action name="getCutomerDailyInfoViewForPhoneAction" class="customerInfoAction" method="getCutomerDailyInfoViewForPhone"></action>
 		<action name="getDeptCutomerDailyInfoForPhoneAction" class="customerInfoAction" method="getDeptCutomerDailyInfoForPhone"></action>
 		<action name="getCustomerTraceInfoForPhoneAction" class="customerTraceInfoAction" method="customerTraceInfoForPhone"></action>
 		<action name="getCustomerVisitInfoForPhoneAction" class="customerVisitInfoAction" method="customerVisitInfoForPhone"></action>
