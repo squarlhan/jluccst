@@ -16,7 +16,7 @@
 		</action>
 		<action name="openSellReportStatTargetAction" class="sellReportStatAction" method="openSellReportStatTarget">
 			<result name="success">/sellreport/stat/sell-report-target-stat.jsp</result>
-			<result name="success">/sellreport/stat/sell-report-target-stat.jsp</result>
+			<result name="input">/sellreport/stat/sell-report-target-stat.jsp</result>
 		</action>
 		
 		<action name="getStatDataForTargetAction" class="sellReportStatAction"  method="getStatDataForTarget">
