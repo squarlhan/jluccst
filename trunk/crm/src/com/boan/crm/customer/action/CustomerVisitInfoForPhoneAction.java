@@ -3,6 +3,8 @@
  */
 package com.boan.crm.customer.action;
 
+import java.util.Calendar;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts2.ServletActionContext;
@@ -71,6 +73,9 @@ public class CustomerVisitInfoForPhoneAction extends BaseActionSupport{
 			if(vistDate != null &&vistDate.length() > 0)
 			{
 				obj.setVisitTime(MySimpleDateFormat.parse(vistDate, "yyyy-MM-dd HH:mm"));
+			}else
+			{
+				obj.setVisitTime(Calendar.getInstance());
 			}
 			if(vistRealDate != null &&vistRealDate.length() > 0)
 			{

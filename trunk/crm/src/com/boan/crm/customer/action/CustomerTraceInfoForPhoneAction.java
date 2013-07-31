@@ -3,6 +3,8 @@
  */
 package com.boan.crm.customer.action;
 
+import java.util.Calendar;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts2.ServletActionContext;
@@ -67,6 +69,9 @@ public class CustomerTraceInfoForPhoneAction extends BaseActionSupport{
 			if(followDate != null &&followDate.length() > 0)
 			{
 				obj.setTraceTime(MySimpleDateFormat.parse(followDate, "yyyy-MM-dd HH:mm"));
+			}else
+			{
+				obj.setTraceTime(Calendar.getInstance());
 			}
 			if(followRealDate != null &&followRealDate.length() > 0)
 			{
