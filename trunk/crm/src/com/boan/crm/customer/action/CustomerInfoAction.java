@@ -418,75 +418,80 @@ public class CustomerInfoAction extends BaseActionSupport{
 		HttpServletRequest request = ServletActionContext.getRequest();
 		Map<String,Object> map = new HashMap<String,Object>();
 		//TODO
+		
+		List<TaskInfoForJson> listTraceTask = new ArrayList<TaskInfoForJson>();
+		Map<String,Object> values = new HashMap<String,Object>();
 		if(StringUtils.trimToNull(staffId)!=null)
 		{
-			List<TaskInfoForJson> listTraceTask = new ArrayList<TaskInfoForJson>();
-			Map<String,Object> values = new HashMap<String,Object>();
 			values.put( "salesmanId", staffId );
-			if(startTime != null)
-				values.put("startTime", MySimpleDateFormat.parse(startTime,"yyyy-MM-dd HH:mm:ss"));
-			if(endTime != null)
-				values.put("endTime", MySimpleDateFormat.parse(endTime,"yyyy-MM-dd HH:mm:ss"));
-			
-			if(taskType != null && taskType.length() > 0)
+		}else
+		{
+			values.put("deptId", deptId);
+		}
+		if(startTime != null)
+			values.put("startTime", MySimpleDateFormat.parse(startTime,"yyyy-MM-dd HH:mm:ss"));
+		if(endTime != null)
+			values.put("endTime", MySimpleDateFormat.parse(endTime,"yyyy-MM-dd HH:mm:ss"));
+		
+		if(taskType != null && taskType.length() > 0)
+		{
+			values.put("taskType", taskType);
+			values.put("now", Calendar.getInstance());
+		}
+		
+		List<CustomerTraceInfo> listTrace = customerTraceInfoService.findCustomerTraceInfoForPage(values, new Pagination<CustomerTraceInfo>()).getData();
+		if(listTrace != null && listTrace.size() > 0)
+		{
+			for(int i = 0;i<listTrace.size();i++)
 			{
-				values.put("taskType", taskType);
-				values.put("now", Calendar.getInstance());
+				ContractPersonInfo personObj = contractpersonInfoService.get(listTrace.get(i).getTracePersonId());
+				String personName = "";
+				if(personObj!= null)
+					personName = contractpersonInfoService.get(listTrace.get(i).getTracePersonId()).getPersonName();
+				
+				TaskInfoForJson obj = new TaskInfoForJson(listTrace.get(i).getId(),"0","",listTrace.get(i).getCustomerName(),personName,listTrace.get(i).getTel(),CalendarUtils.toLongStringNoSecond(listTrace.get(i).getTraceTime()));
+				
+				listTraceTask.add(obj);
 			}
-			
-			List<CustomerTraceInfo> listTrace = customerTraceInfoService.findCustomerTraceInfoForPage(values, new Pagination<CustomerTraceInfo>()).getData();
-			if(listTrace != null && listTrace.size() > 0)
+		}
+		
+		map.put("follow", listTraceTask);
+		List<TaskInfoForJson> listVisitTask = new ArrayList<TaskInfoForJson>();
+		List<CustomerVisitInfo> listVisit = customerVisitInfoService.findCustomerVisitInfoForPage(values, new Pagination<CustomerVisitInfo>()).getData();
+		if(listVisit != null && listVisit.size() > 0)
+		{
+			for(int i = 0;i<listVisit.size();i++)
 			{
-				for(int i = 0;i<listTrace.size();i++)
-				{
-					ContractPersonInfo personObj = contractpersonInfoService.get(listTrace.get(i).getTracePersonId());
-					String personName = "";
-					if(personObj!= null)
-						personName = contractpersonInfoService.get(listTrace.get(i).getTracePersonId()).getPersonName();
-					
-					TaskInfoForJson obj = new TaskInfoForJson(listTrace.get(i).getId(),"0","",listTrace.get(i).getCustomerName(),personName,listTrace.get(i).getTel(),CalendarUtils.toLongStringNoSecond(listTrace.get(i).getTraceTime()));
-					
-					listTraceTask.add(obj);
-				}
+				ContractPersonInfo personObj = contractpersonInfoService.get(listVisit.get(i).getVisitPersonId());
+				String personName = "";
+				if(personObj!= null)
+					personName = contractpersonInfoService.get(listVisit.get(i).getVisitPersonId()).getPersonName();
+				
+				TaskInfoForJson obj = new TaskInfoForJson(listVisit.get(i).getId(),"1","",listVisit.get(i).getCustomerName(),personName,listVisit.get(i).getTel(),CalendarUtils.toLongStringNoSecond(listVisit.get(i).getVisitTime()));
+				
+				listVisitTask.add(obj);
 			}
-			
-			map.put("follow", listTraceTask);
-			List<TaskInfoForJson> listVisitTask = new ArrayList<TaskInfoForJson>();
-			List<CustomerVisitInfo> listVisit = customerVisitInfoService.findCustomerVisitInfoForPage(values, new Pagination<CustomerVisitInfo>()).getData();
-			if(listVisit != null && listVisit.size() > 0)
-			{
-				for(int i = 0;i<listVisit.size();i++)
-				{
-					ContractPersonInfo personObj = contractpersonInfoService.get(listVisit.get(i).getVisitPersonId());
-					String personName = "";
-					if(personObj!= null)
-						personName = contractpersonInfoService.get(listVisit.get(i).getVisitPersonId()).getPersonName();
-					
-					TaskInfoForJson obj = new TaskInfoForJson(listVisit.get(i).getId(),"1","",listVisit.get(i).getCustomerName(),personName,listVisit.get(i).getTel(),CalendarUtils.toLongStringNoSecond(listVisit.get(i).getVisitTime()));
-					
-					listVisitTask.add(obj);
-				}
-			}
-			map.put("visit", listVisitTask);
-			Calendar temp = Calendar.getInstance();
-			temp.set(Calendar.DATE, -15);
-			Calendar beginTime =temp;
-			Calendar endTime = Calendar.getInstance();
-			Map<String,Object> params = new HashMap<String, Object>();
+		}
+		map.put("visit", listVisitTask);
+		Calendar temp = Calendar.getInstance();
+		temp.set(Calendar.DATE, -15);
+		Calendar beginTime =temp;
+		Calendar endTime = Calendar.getInstance();
+		Map<String,Object> params = new HashMap<String, Object>();
 //			params.put("personId", this.sessionUserId);
-			 
-			params.put("beginTime", beginTime);
-			params.put("endTime", endTime); 
-			params.put("employeeId", userId);
-			
-			List<TimePlan> listTimePlan = timePlanService.findTimePlan(params);
-			List<TimePlanForJson> listTim = new ArrayList<TimePlanForJson>();
-			if(listTimePlan != null && listTimePlan.size() > 0)
+		 
+		params.put("beginTime", beginTime);
+		params.put("endTime", endTime); 
+		params.put("employeeId", userId);
+		
+		List<TimePlan> listTimePlan = timePlanService.findTimePlan(params);
+		List<TimePlanForJson> listTim = new ArrayList<TimePlanForJson>();
+		if(listTimePlan != null && listTimePlan.size() > 0)
+		{
+			for(int i = 0;i<listTimePlan.size();i++)
 			{
-				for(int i = 0;i<listTimePlan.size();i++)
-				{
-					TimePlanForJson obj = new TimePlanForJson();
-					//0:'日报',1:'周报',2:'月报'
+				TimePlanForJson obj = new TimePlanForJson();
+				//0:'日报',1:'周报',2:'月报'
 //					if(listTimePlan.get(i).getPlanType().equals("0")){
 //						obj.setType("日报");
 //					}
@@ -496,16 +501,15 @@ public class CustomerInfoAction extends BaseActionSupport{
 //					if(listTimePlan.get(i).getPlanType().equals("2")){
 //						obj.setType("月报");
 //					}
-					obj.setType("2");
-					obj.setDate(CalendarUtils.toLongStringNoSecond(listTimePlan.get(i).getSubmitTime()));
-					obj.setSummary(listTimePlan.get(i).getMemo());
-					obj.setPlan(listTimePlan.get(i).getPlanContent());
-					listTim.add(obj);
-				}
+				obj.setType("2");
+				obj.setDate(CalendarUtils.toLongStringNoSecond(listTimePlan.get(i).getSubmitTime()));
+				obj.setSummary(listTimePlan.get(i).getMemo());
+				obj.setPlan(listTimePlan.get(i).getPlanContent());
+				listTim.add(obj);
 			}
-			
-			map.put("dialy", listTim);
 		}
+		
+		map.put("dialy", listTim);
 		request.setAttribute("map", map);
 		return COMMON_MAP;
 	}
