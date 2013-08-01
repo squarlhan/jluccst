@@ -379,6 +379,8 @@ public class UserLogonAction extends ActionSupport {
 				} else {
 					userType = -1;
 				}
+				//公司id
+				map.put("company_id", userSession.getCompanyId());
 				if (userType == -1) {
 					map.put("status", "failure");
 				} else {
