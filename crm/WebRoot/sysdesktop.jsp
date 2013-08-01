@@ -27,12 +27,14 @@
   <tr>
     <td align="center"><img src="images/mainpic.jpg" /></td>
     <td align="center">
+    	<!-- 
     	<div class="btnCls"><img src="images/btn/czqzkh.png" /></div>
  		<div class="btnCls"><img src="images/btn/wdkh.png" /></div>
  		<div class="btnCls"><img src="images/btn/yxkh.png" /></div>
  		<div class="btnCls"><img src="images/btn/zkh.png" /></div>
  		<div class="btnCls"><img src="images/btn/cdkh.png" /></div>
  		<div class="btnCls"><img src="images/btn/khpg.png" /></div>
+    	 -->
     </td>
   </tr>
 </table>
