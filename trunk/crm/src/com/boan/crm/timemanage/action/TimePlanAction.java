@@ -351,10 +351,13 @@ public class TimePlanAction extends BaseActionSupport{
 		Map<String,Object> map = new HashMap<String,Object>();
 		if(StringUtils.trimToNull(userId)!=null)
 		{
-			Calendar temp = Calendar.getInstance();
-			temp.set(Calendar.DATE, -15);
-			Calendar beginTime =temp;
-			Calendar endTime = Calendar.getInstance();
+			beginTime.set(Calendar.HOUR_OF_DAY, 0);
+			beginTime.set(Calendar.MINUTE , 0 );
+			beginTime.set(Calendar.SECOND, 0);
+			
+			endTime.set(Calendar.HOUR_OF_DAY, 23);
+			endTime.set(Calendar.MINUTE , 59 );
+			endTime.set(Calendar.SECOND, 59);
 			Map<String,Object> params = new HashMap<String, Object>();
 //			params.put("personId", this.sessionUserId);
 			 
@@ -406,13 +409,15 @@ public class TimePlanAction extends BaseActionSupport{
 			{
 				deptId = userService.getUserById(userId).getDeptId();
 			}
+			beginTime.set(Calendar.HOUR_OF_DAY, 0);
+			beginTime.set(Calendar.MINUTE , 0 );
+			beginTime.set(Calendar.SECOND, 0);
 			
-			Calendar temp = Calendar.getInstance();
-			temp.set(Calendar.DATE, -15);
-			Calendar beginTime =temp;
-			Calendar endTime = Calendar.getInstance();
+			endTime.set(Calendar.HOUR_OF_DAY, 23);
+			endTime.set(Calendar.MINUTE , 59 );
+			endTime.set(Calendar.SECOND, 59);
+			
 			Map<String,Object> params = new HashMap<String, Object>();
-			 
 			params.put("beginTime", beginTime);
 			params.put("endTime", endTime); 
 			params.put("deptId", deptId);
@@ -474,10 +479,13 @@ public class TimePlanAction extends BaseActionSupport{
 				tempDetp.setName(dept.getDeptName());
 				listDept.add(tempDetp);
 				
-				Calendar temp = Calendar.getInstance();
-				temp.set(Calendar.DATE, -15);
-				Calendar beginTime =temp;
-				Calendar endTime = Calendar.getInstance();
+				beginTime.set(Calendar.HOUR_OF_DAY, 0);
+				beginTime.set(Calendar.MINUTE , 0 );
+				beginTime.set(Calendar.SECOND, 0);
+				
+				endTime.set(Calendar.HOUR_OF_DAY, 23);
+				endTime.set(Calendar.MINUTE , 59 );
+				endTime.set(Calendar.SECOND, 59);
 				Map<String,Object> params = new HashMap<String, Object>();
 				 
 				params.put("beginTime", beginTime);
