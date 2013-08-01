@@ -1031,6 +1031,15 @@ public class SellReportStatAction extends BaseActionSupport{
 		String roleKey = "";
 		String companyId="";
 		String deptId="";
+		
+//		if(id!=null && !id.equals("")){
+//			//手机端传过来的id为部门Id
+//			deptId= id;
+//		}else{
+//			//当前登录人
+//			User currentUser = userService.getUserById(userId);
+//			deptId=currentUser.getDeptId();
+//		}
 		//手机端传过来的id为部门Id
 		deptId= id;
 		//由于是部门领导查看，所以他的权限为 RoleFlag.BU_MEN_LING_DAO
