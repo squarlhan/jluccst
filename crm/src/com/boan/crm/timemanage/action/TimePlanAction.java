@@ -351,18 +351,20 @@ public class TimePlanAction extends BaseActionSupport{
 		Map<String,Object> map = new HashMap<String,Object>();
 		if(StringUtils.trimToNull(userId)!=null)
 		{
-			beginTime.set(Calendar.HOUR_OF_DAY, 0);
-			beginTime.set(Calendar.MINUTE , 0 );
-			beginTime.set(Calendar.SECOND, 0);
-			
-			endTime.set(Calendar.HOUR_OF_DAY, 23);
-			endTime.set(Calendar.MINUTE , 59 );
-			endTime.set(Calendar.SECOND, 59);
 			Map<String,Object> params = new HashMap<String, Object>();
-//			params.put("personId", this.sessionUserId);
-			 
-			params.put("beginTime", beginTime);
-			params.put("endTime", endTime); 
+			if(beginTime!=null && endTime!=null ){
+				beginTime.set(Calendar.HOUR_OF_DAY, 0);
+				beginTime.set(Calendar.MINUTE , 0 );
+				beginTime.set(Calendar.SECOND, 0);
+				
+				endTime.set(Calendar.HOUR_OF_DAY, 23);
+				endTime.set(Calendar.MINUTE , 59 );
+				endTime.set(Calendar.SECOND, 59);
+	//			params.put("personId", this.sessionUserId);
+				 
+				params.put("beginTime", beginTime);
+				params.put("endTime", endTime); 
+			}
 			params.put("employeeId", userId);
 			List<TimePlan> listTimePlan =timePlanService.findTimePlan(params);
 			List<TimePlanForJson> listTim = new ArrayList<TimePlanForJson>();
