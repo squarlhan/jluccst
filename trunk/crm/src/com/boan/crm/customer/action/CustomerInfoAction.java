@@ -419,14 +419,19 @@ public class CustomerInfoAction extends BaseActionSupport{
 		Map<String,Object> map = new HashMap<String,Object>();
 		//TODO
 		
-		List<TaskInfoForJson> listTraceTask = new ArrayList<TaskInfoForJson>();
+		List<TaskInfoForJson> listToday = new ArrayList<TaskInfoForJson>();
+		List<TaskInfoForJson> listExpired = new ArrayList<TaskInfoForJson>();
+		List<TaskInfoForJson> listRecent = new ArrayList<TaskInfoForJson>();
+		List<TaskInfoForJson> listFinished = new ArrayList<TaskInfoForJson>();
+		
 		Map<String,Object> values = new HashMap<String,Object>();
 		if(StringUtils.trimToNull(staffId)!=null)
 		{
 			values.put( "salesmanId", staffId );
 		}else
 		{
-			values.put("deptId", deptId);
+			if(StringUtils.trimToNull(deptId)!=null)
+				values.put("deptId", deptId);
 		}
 		if(startTime != null)
 			values.put("startTime", MySimpleDateFormat.parse(startTime,"yyyy-MM-dd HH:mm:ss"));
@@ -444,72 +449,124 @@ public class CustomerInfoAction extends BaseActionSupport{
 		{
 			for(int i = 0;i<listTrace.size();i++)
 			{
-				ContractPersonInfo personObj = contractpersonInfoService.get(listTrace.get(i).getTracePersonId());
+				CustomerTraceInfo traceInfo = listTrace.get(i);
+				ContractPersonInfo personObj = contractpersonInfoService.get(traceInfo.getTracePersonId());
 				String personName = "";
 				if(personObj!= null)
-					personName = contractpersonInfoService.get(listTrace.get(i).getTracePersonId()).getPersonName();
+					personName = contractpersonInfoService.get(traceInfo.getTracePersonId()).getPersonName();
+				User userInfo = null;
 				
-				TaskInfoForJson obj = new TaskInfoForJson(listTrace.get(i).getId(),"0","",listTrace.get(i).getCustomerName(),personName,listTrace.get(i).getTel(),CalendarUtils.toLongStringNoSecond(listTrace.get(i).getTraceTime()));
+				try
+				{
+					userInfo = userService.getUserById(traceInfo.getSalesmanId());
+				}catch(Exception ex){}
 				
-				listTraceTask.add(obj);
+				TaskInfoForJson obj = new TaskInfoForJson(traceInfo.getId(),"0","",traceInfo.getCustomerName(),personName,traceInfo.getTel(),CalendarUtils.toLongStringNoSecond(traceInfo.getTraceTime()));
+				
+				obj.setOperator(userInfo.getUserCName());
+				
+				if(traceInfo.getTraceFlag().equals( "1" ))
+				{
+					listFinished.add(obj);
+				}else
+				{
+					Calendar now = Calendar.getInstance();
+					if(traceInfo.getTraceTime().get(Calendar.YEAR) == now.get(Calendar.YEAR) && traceInfo.getTraceTime().get(Calendar.MONTH) == now.get(Calendar.MONTH) && traceInfo.getTraceTime().get(Calendar.DATE) == now.get(Calendar.DATE))
+					{
+						listToday.add(obj);
+					}else if(traceInfo.getTraceTime().before(Calendar.getInstance()))
+					{
+						listExpired.add(obj);
+					}else if(traceInfo.getTraceTime().after(Calendar.getInstance()))
+					{
+						listRecent.add(obj);
+					}
+				}
 			}
 		}
-		
-		map.put("follow", listTraceTask);
-		List<TaskInfoForJson> listVisitTask = new ArrayList<TaskInfoForJson>();
 		List<CustomerVisitInfo> listVisit = customerVisitInfoService.findCustomerVisitInfoForPage(values, new Pagination<CustomerVisitInfo>()).getData();
 		if(listVisit != null && listVisit.size() > 0)
 		{
 			for(int i = 0;i<listVisit.size();i++)
 			{
-				ContractPersonInfo personObj = contractpersonInfoService.get(listVisit.get(i).getVisitPersonId());
+				CustomerVisitInfo customerVisit = listVisit.get(i);
+				ContractPersonInfo personObj = contractpersonInfoService.get(customerVisit.getVisitPersonId());
 				String personName = "";
 				if(personObj!= null)
-					personName = contractpersonInfoService.get(listVisit.get(i).getVisitPersonId()).getPersonName();
+					personName = contractpersonInfoService.get(customerVisit.getVisitPersonId()).getPersonName();
 				
-				TaskInfoForJson obj = new TaskInfoForJson(listVisit.get(i).getId(),"1","",listVisit.get(i).getCustomerName(),personName,listVisit.get(i).getTel(),CalendarUtils.toLongStringNoSecond(listVisit.get(i).getVisitTime()));
+				TaskInfoForJson obj = new TaskInfoForJson(customerVisit.getId(),"1","",customerVisit.getCustomerName(),personName,customerVisit.getTel(),CalendarUtils.toLongStringNoSecond(customerVisit.getVisitTime()));
 				
-				listVisitTask.add(obj);
+				User userInfo = null;
+				
+				try
+				{
+					userInfo = userService.getUserById(customerVisit.getSalesmanId());
+				}catch(Exception ex){}
+				
+				obj.setOperator(userInfo.getUserCName());
+				
+				if(customerVisit.getVisitFlag().equals( "1" ))
+				{
+					listFinished.add(obj);
+				}else
+				{
+					Calendar now = Calendar.getInstance();
+					if(customerVisit.getVisitTime().get(Calendar.YEAR) == now.get(Calendar.YEAR) && customerVisit.getVisitTime().get(Calendar.MONTH) == now.get(Calendar.MONTH) && customerVisit.getVisitTime().get(Calendar.DATE) == now.get(Calendar.DATE))
+					{
+						listToday.add(obj);
+					}else if(customerVisit.getVisitTime().before(Calendar.getInstance()))
+					{
+						listExpired.add(obj);
+					}else if(customerVisit.getVisitTime().after(Calendar.getInstance()))
+					{
+						listRecent.add(obj);
+					}
+				}
 			}
 		}
-		map.put("visit", listVisitTask);
-		Calendar temp = Calendar.getInstance();
-		temp.set(Calendar.DATE, -15);
-		Calendar beginTime =temp;
-		Calendar endTime = Calendar.getInstance();
-		Map<String,Object> params = new HashMap<String, Object>();
-//			params.put("personId", this.sessionUserId);
-		 
-		params.put("beginTime", beginTime);
-		params.put("endTime", endTime); 
-		params.put("employeeId", userId);
-		
-		List<TimePlan> listTimePlan = timePlanService.findTimePlan(params);
-		List<TimePlanForJson> listTim = new ArrayList<TimePlanForJson>();
-		if(listTimePlan != null && listTimePlan.size() > 0)
-		{
-			for(int i = 0;i<listTimePlan.size();i++)
-			{
-				TimePlanForJson obj = new TimePlanForJson();
-				//0:'日报',1:'周报',2:'月报'
-//					if(listTimePlan.get(i).getPlanType().equals("0")){
-//						obj.setType("日报");
-//					}
-//					if(listTimePlan.get(i).getPlanType().equals("1")){
-//						obj.setType("周报");
-//					}
-//					if(listTimePlan.get(i).getPlanType().equals("2")){
-//						obj.setType("月报");
-//					}
-				obj.setType("2");
-				obj.setDate(CalendarUtils.toLongStringNoSecond(listTimePlan.get(i).getSubmitTime()));
-				obj.setSummary(listTimePlan.get(i).getMemo());
-				obj.setPlan(listTimePlan.get(i).getPlanContent());
-				listTim.add(obj);
-			}
-		}
-		
-		map.put("dialy", listTim);
+		map.put("today", listToday);
+		map.put("expired", listExpired);
+		map.put("recent", listRecent);
+		map.put("finished", listFinished);
+//		map.put("visit", listVisitTask);
+//		Calendar temp = Calendar.getInstance();
+//		temp.set(Calendar.DATE, -15);
+//		Calendar beginTime =temp;
+//		Calendar endTime = Calendar.getInstance();
+//		Map<String,Object> params = new HashMap<String, Object>();
+////			params.put("personId", this.sessionUserId);
+//		 
+//		params.put("beginTime", beginTime);
+//		params.put("endTime", endTime); 
+//		params.put("employeeId", userId);
+//		
+//		List<TimePlan> listTimePlan = timePlanService.findTimePlan(params);
+//		List<TimePlanForJson> listTim = new ArrayList<TimePlanForJson>();
+//		if(listTimePlan != null && listTimePlan.size() > 0)
+//		{
+//			for(int i = 0;i<listTimePlan.size();i++)
+//			{
+//				TimePlanForJson obj = new TimePlanForJson();
+//				//0:'日报',1:'周报',2:'月报'
+////					if(listTimePlan.get(i).getPlanType().equals("0")){
+////						obj.setType("日报");
+////					}
+////					if(listTimePlan.get(i).getPlanType().equals("1")){
+////						obj.setType("周报");
+////					}
+////					if(listTimePlan.get(i).getPlanType().equals("2")){
+////						obj.setType("月报");
+////					}
+//				obj.setType("2");
+//				obj.setDate(CalendarUtils.toLongStringNoSecond(listTimePlan.get(i).getSubmitTime()));
+//				obj.setSummary(listTimePlan.get(i).getMemo());
+//				obj.setPlan(listTimePlan.get(i).getPlanContent());
+//				listTim.add(obj);
+//			}
+//		}
+//		
+//		map.put("dialy", listTim);
 		request.setAttribute("map", map);
 		return COMMON_MAP;
 	}
