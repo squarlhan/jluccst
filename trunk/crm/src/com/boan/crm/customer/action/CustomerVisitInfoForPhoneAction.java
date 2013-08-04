@@ -123,7 +123,8 @@ public class CustomerVisitInfoForPhoneAction extends BaseActionSupport{
 			obj.setActualVisitTime(MySimpleDateFormat.parse( realTime,"yyyy-MM-dd HH:mm:ss"));
 		if(time != null && time.length() > 0)
 			obj.setVisitTime(MySimpleDateFormat.parse( time,"yyyy-MM-dd HH:mm:ss"));
-		
+		else
+			obj.setVisitTime(Calendar.getInstance());
 		customerVisitInfoService.save(obj);
 		id = obj.getId();
 		message = "success";

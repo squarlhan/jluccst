@@ -120,6 +120,8 @@ public class CustomerTraceInfoForPhoneAction extends BaseActionSupport{
 			obj.setActualTraceTime(MySimpleDateFormat.parse( realTime,"yyyy-MM-dd HH:mm:ss"));
 		if(time != null && time.length() > 0)
 			obj.setTraceTime(MySimpleDateFormat.parse( time,"yyyy-MM-dd HH:mm:ss"));
+		else
+			obj.setTraceTime(Calendar.getInstance());
 		
 		customerTraceInfoService.save(obj);
 		id = obj.getId();
