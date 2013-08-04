@@ -896,15 +896,21 @@ public class CustomerInfoAction extends BaseActionSupport{
 				}else
 				{
 					Calendar now = Calendar.getInstance();
-					if(traceInfo.getTraceTime().get(Calendar.YEAR) == now.get(Calendar.YEAR) && traceInfo.getTraceTime().get(Calendar.MONTH) == now.get(Calendar.MONTH) && traceInfo.getTraceTime().get(Calendar.DATE) == now.get(Calendar.DATE))
+					if(traceInfo.getTraceTime() != null)
 					{
-						status = "1";
-					}else if(traceInfo.getTraceTime().before(Calendar.getInstance()))
+						if(traceInfo.getTraceTime().get(Calendar.YEAR) == now.get(Calendar.YEAR) && traceInfo.getTraceTime().get(Calendar.MONTH) == now.get(Calendar.MONTH) && traceInfo.getTraceTime().get(Calendar.DATE) == now.get(Calendar.DATE))
+						{
+							status = "1";
+						}else if(traceInfo.getTraceTime().before(Calendar.getInstance()))
+						{
+							status = "2";
+						}else if(traceInfo.getTraceTime().after(Calendar.getInstance()))
+						{
+							status = "3";
+						}
+					}else
 					{
-						status = "2";
-					}else if(traceInfo.getTraceTime().after(Calendar.getInstance()))
-					{
-						status = "3";
+						status = "0";
 					}
 				}
 				TaskInfoForJson obj = new TaskInfoForJson(traceInfo.getId(),"1",status,traceInfo.getCustomerName(),traceInfo.getPerson().getPersonName(),traceInfo.getTel(),traceInfo.getTraceTimeStr());
@@ -926,16 +932,22 @@ public class CustomerInfoAction extends BaseActionSupport{
 					status = "4";
 				}else
 				{
-					Calendar now = Calendar.getInstance();
-					if(visitInfo.getVisitTime().get(Calendar.YEAR) == now.get(Calendar.YEAR) && visitInfo.getVisitTime().get(Calendar.MONTH) == now.get(Calendar.MONTH) && visitInfo.getVisitTime().get(Calendar.DATE) == now.get(Calendar.DATE))
+					if(visitInfo.getVisitTime() != null)
 					{
-						status = "1";
-					}else if(visitInfo.getVisitTime().before(Calendar.getInstance()))
+						Calendar now = Calendar.getInstance();
+						if(visitInfo.getVisitTime().get(Calendar.YEAR) == now.get(Calendar.YEAR) && visitInfo.getVisitTime().get(Calendar.MONTH) == now.get(Calendar.MONTH) && visitInfo.getVisitTime().get(Calendar.DATE) == now.get(Calendar.DATE))
+						{
+							status = "1";
+						}else if(visitInfo.getVisitTime().before(Calendar.getInstance()))
+						{
+							status = "2";
+						}else if(visitInfo.getVisitTime().after(Calendar.getInstance()))
+						{
+							status = "3";
+						}
+					}else
 					{
-						status = "2";
-					}else if(visitInfo.getVisitTime().after(Calendar.getInstance()))
-					{
-						status = "3";
+						status = "0";
 					}
 				}
 				String personName = "";

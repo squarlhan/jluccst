@@ -48,6 +48,9 @@ public class CustomerInfoForPhoneAction extends BaseActionSupport{
 	private String detailAddress = "";
 	private String id = "";
 	private String message = "";
+	private String commpanyId= "";
+	
+	
 	/**
 	 * 保存客户信息
 	 * @return String
@@ -56,7 +59,7 @@ public class CustomerInfoForPhoneAction extends BaseActionSupport{
 	{
 		CustomerInfo customerInfo = new CustomerInfo();
 		
-		//customerInfo.setCompanyId(sessionCompanyId);
+		customerInfo.setCompanyId(commpanyId);
 		
 		customerInfo.setCreatorId(userId);
 		customerInfo.setSalesmanId(userId);
@@ -67,18 +70,18 @@ public class CustomerInfoForPhoneAction extends BaseActionSupport{
 		customerInfo.setProgressId(BusinessProgressKey.NEW);
 		
 		customerInfo.setAddress(detailAddress);
-		customerInfo.setCategoryId(customerInfo.getCategoryId());
+		customerInfo.setCategoryId(clientType);
 		customerInfo.setSourceId(clientComeWay);
 		//customerInfo.setCity(customerInfo.getCity());
 		//customerInfo.setDistrict(customerInfo.getDistrict());
-		customerInfo.setLevelId(customerInfo.getLevelId());
+		customerInfo.setLevelId(developProcess);
 //		customerInfo.setProvince(customerInfo.getProvince());
 		
 		customerInfo.setRegisterTime(Calendar.getInstance());
 		customerInfo.setMainIndustry(industry);
 		customerInfo.setCompanyFullName(companyFullName);
 		customerInfo.setCustomerName(clientName);
-		
+		customerInfo.setFax(companyFax);
 		customerInfoService.save(customerInfo);
 		id = customerInfo.getId();
 		message = "success";
@@ -95,17 +98,15 @@ public class CustomerInfoForPhoneAction extends BaseActionSupport{
 	{
 		CustomerInfo customerInfo = customerInfoService.get(id);
 		
-		//customerInfo.setCompanyId(sessionCompanyId);
-		
 		customerInfo.setAddress(detailAddress);
-		customerInfo.setCategoryId(customerInfo.getCategoryId());
+		customerInfo.setCategoryId(clientType);
 		customerInfo.setSourceId(clientComeWay);
-		//customerInfo.setCity(customerInfo.getCity());
-		//customerInfo.setDistrict(customerInfo.getDistrict());
-		customerInfo.setLevelId(customerInfo.getLevelId());
-//		customerInfo.setProvince(customerInfo.getProvince());
+		customerInfo.setLevelId(developProcess);
 		customerInfo.setMainIndustry(industry);
 		customerInfo.setCompanyFullName(companyFullName);
+		customerInfo.setMainIndustry(industry);
+		customerInfo.setCustomerName(clientName);
+		customerInfo.setFax(companyFax);
 		
 		customerInfoService.save(customerInfo);
 		message = "success";
@@ -190,5 +191,11 @@ public class CustomerInfoForPhoneAction extends BaseActionSupport{
 	}
 	public void setMessage(String message) {
 		this.message = message;
+	}
+	public String getCommpanyId() {
+		return commpanyId;
+	}
+	public void setCommpanyId(String commpanyId) {
+		this.commpanyId = commpanyId;
 	}
 }
