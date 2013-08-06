@@ -86,6 +86,8 @@ public class CustomerTraceInfoForPhoneAction extends BaseActionSupport{
 			obj.setEmail(email);
 			obj.setTraceOption(connectWay);
 			//obj.setTracePerson
+			obj.setTracePersonId(vistPeople);
+			
 			customerTraceInfoService.save(obj);
 			
 			message = "success";
