@@ -437,7 +437,7 @@ public class CustomerVisitInfoAction extends BaseActionSupport{
 			map.put("object_name", contractPersonService.get(customerVisitInfo.getVisitPersonId()).getPersonName());
 			visitTime = CalendarUtils.toLongStringNoSecond(customerVisitInfo.getVisitTime());
 			map.put("date", visitTime);
-			
+			map.put("object_id", customerVisitInfo.getVisitPersonId());
 			visitOption = dataDictionaryService.get(customerVisitInfo.getVisitOption()).getName();
 			map.put("connect_way", visitOption);
 			map.put("QQ", customerVisitInfo.getQq());
