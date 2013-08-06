@@ -117,7 +117,7 @@ public class CustomerTraceInfoForPhoneAction extends BaseActionSupport{
 		obj.setTraceOption(type);
 		obj.setSalesmanId(userId);
 		obj.setTracePersonId(vistPeople);
-		
+		obj.setTel(telphone);
 		if(realTime != null && realTime.length() > 0)
 			obj.setActualTraceTime(MySimpleDateFormat.parse( realTime,"yyyy-MM-dd HH:mm:ss"));
 		if(time != null && time.length() > 0)
