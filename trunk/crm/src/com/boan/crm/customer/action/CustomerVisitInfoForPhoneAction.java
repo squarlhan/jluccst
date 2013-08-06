@@ -89,6 +89,8 @@ public class CustomerVisitInfoForPhoneAction extends BaseActionSupport{
 			obj.setRemark(vistMark);
 			obj.setEmail(email);
 			obj.setVisitOption(connectWay);
+			obj.setVisitPersonId(followPeople);
+			
 			customerVisitInfoService.save(obj);
 			
 			message = "success";
