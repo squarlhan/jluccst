@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
+<%@ page import="com.boan.crm.groupmanage.common.UserSession" %>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%@ taglib prefix="j" uri="/script-tags"%>
 <%
@@ -22,6 +23,8 @@
 	response.setHeader( "Expires", "0" );
 	request.setCharacterEncoding( "utf-8" );
 	String path = request.getContextPath();
+	
+	int productType = ((UserSession) session.getAttribute("userSession")).getProductType();
 %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html xmlns="http://www.w3.org/1999/xhtml">
@@ -78,7 +81,9 @@
 										d.add(107,0,'跟进方式','datadictionarylist.action?typeFlag=6','','groupmain');
 										d.add(108,0,'业务进展','datadictionarylist.action?typeFlag=7','','groupmain');
 										//d.add(109,0,'经营产品','datadictionarylist.action?typeFlag=8','','groupmain');
+										<%if(productType!=2){%>
 										d.add(110,0,'会员类别','datadictionarylist.action?typeFlag=9','','groupmain');
+										<%}%>
 										d.add(111,0,'销售设置','../openSellDutyListAction.action','','groupmain');
 										d.add(112,0,'开发程度','datadictionarylist.action?typeFlag=10','','groupmain');
 										document.write(d);
