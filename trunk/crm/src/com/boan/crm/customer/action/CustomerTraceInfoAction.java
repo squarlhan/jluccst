@@ -397,6 +397,9 @@ public class CustomerTraceInfoAction extends BaseActionSupport{
 			else
 				map.put("object_name", "");
 			
+			map.put("object_id", customerTraceInfo.getTracePersonId());
+			
+			
 			traceTime = CalendarUtils.toLongStringNoSecond(customerTraceInfo.getTraceTime());
 			map.put("date", traceTime);
 			
