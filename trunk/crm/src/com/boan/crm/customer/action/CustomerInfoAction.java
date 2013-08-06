@@ -853,10 +853,10 @@ public class CustomerInfoAction extends BaseActionSupport{
 						detail.setBirth_day(CurrentDateTime.getCurrentDate(listPerson.get(i).getBirthday()));
 					detail.setBirth_type(String.valueOf(listPerson.get(i).getLunar()));
 					detail.setEmail(listPerson.get(i).getEmail());
-					detail.setMobile(listPerson.get(i).getTel());
+					detail.setMobile(listPerson.get(i).getPhone());
 					detail.setName(listPerson.get(i).getPersonName());
 					detail.setNick_name(listPerson.get(i).getNickName());
-					detail.setPhone(listPerson.get(i).getPhone());
+					detail.setPhone(listPerson.get(i).getTel());
 					detail.setPosition(listPerson.get(i).getDeptOrDuty());
 					detail.setQQ(listPerson.get(i).getQq());
 					list.add(detail);
