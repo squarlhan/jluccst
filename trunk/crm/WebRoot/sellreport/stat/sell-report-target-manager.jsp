@@ -65,7 +65,7 @@ import="java.util.Calendar,com.boan.crm.groupmanage.common.RoleFlag,com.boan.crm
 											<img src="<%=path %>/images/header_01.jpg" width="11" height="36" alt="">
 										</td>
 										<td background="<%=path %>/images/header_02.jpg">
-											<span class="STYLE1">您当前的位置：销售管理&gt;&gt;&gt;销售目标&gt;&gt;&gt;销售目标</span>
+											<span class="STYLE1">您当前的位置：销售管理&gt;&gt;&gt;销售目标统计</span>
 										</td>
 										<td width="12">
 											<img src="<%=path %>/images/header_03.jpg" width="12" height="36" alt="">
