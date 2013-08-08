@@ -78,6 +78,38 @@ public class ContractPersonInfoForPhoneAction extends BaseActionSupport{
 		request.setAttribute("id", id);
 		return COMMON_RESULT;
 	}
+	/**
+	 * 修改联系人
+	 * @return
+	 */
+	public String updateContactPersonForPhone()
+	{
+		ContractPersonInfo obj = contractpersonInfoService.get(id);
+		
+		if(birthDay != null && birthDay.length() > 0)
+			obj.setBirthday(MySimpleDateFormat.parse(birthDay,"yyyy-MM-dd"));
+		
+		obj.setCreateTime(Calendar.getInstance());
+		obj.setCustomerId(customerId);
+		obj.setDeptOrDuty(position);
+		obj.setEmail(email);
+		if(birtyType == null)
+			obj.setLunar(0);
+		else
+			obj.setLunar(Integer.parseInt(birtyType));
+		
+		obj.setNickName(nickName);
+		obj.setPersonName(name);
+		obj.setPhone(mobile);
+		obj.setQq(QQ);
+		obj.setTel(telephone);
+		
+		contractpersonInfoService.save(obj);
+		message = "success";
+		HttpServletRequest request = ServletActionContext.getRequest();
+		request.setAttribute("message", message);
+		return COMMON_RESULT;
+	}
 	public String getName() {
 		return name;
 	}
