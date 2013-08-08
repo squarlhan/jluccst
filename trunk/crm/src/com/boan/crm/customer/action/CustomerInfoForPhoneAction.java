@@ -82,6 +82,8 @@ public class CustomerInfoForPhoneAction extends BaseActionSupport{
 		customerInfo.setCompanyFullName(companyFullName);
 		customerInfo.setCustomerName(clientName);
 		customerInfo.setFax(companyFax);
+		customerInfo.setDeleteFlag(0);
+		
 		customerInfoService.save(customerInfo);
 		id = customerInfo.getId();
 		message = "success";

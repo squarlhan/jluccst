@@ -33,7 +33,7 @@ public class CustomerVisitInfoForPhoneAction extends BaseActionSupport{
 	@Autowired
 	@Qualifier("customerVisitInfoService")
 	private ICustomerVisitInfoService customerVisitInfoService;
-	
+	private String companyId = "";
 	private String id = "";
 	private String followPeople = null;
 	private String vistDate = "";
@@ -90,7 +90,7 @@ public class CustomerVisitInfoForPhoneAction extends BaseActionSupport{
 			obj.setEmail(email);
 			obj.setVisitOption(connectWay);
 			obj.setVisitPersonId(followPeople);
-			
+			obj.setCompanyId(companyId);
 			customerVisitInfoService.save(obj);
 			
 			message = "success";
@@ -127,6 +127,8 @@ public class CustomerVisitInfoForPhoneAction extends BaseActionSupport{
 			obj.setVisitTime(MySimpleDateFormat.parse( time,"yyyy-MM-dd HH:mm:ss"));
 		else
 			obj.setVisitTime(Calendar.getInstance());
+		
+		obj.setCompanyId(companyId);
 		customerVisitInfoService.save(obj);
 		id = obj.getId();
 		message = "success";
@@ -235,84 +237,58 @@ public class CustomerVisitInfoForPhoneAction extends BaseActionSupport{
 	public void setContactId(String contactId) {
 		this.contactId = contactId;
 	}
-
-
 	public String getVistPeople() {
 		return vistPeople;
 	}
-
-
 	public void setVistPeople(String vistPeople) {
 		this.vistPeople = vistPeople;
 	}
-
-
 	public String getTime() {
 		return time;
 	}
-
-
 	public void setTime(String time) {
 		this.time = time;
 	}
-
-
 	public String getType() {
 		return type;
 	}
-
-
 	public void setType(String type) {
 		this.type = type;
 	}
-
-
 	public String getQq() {
 		return qq;
 	}
-
-
 	public void setQq(String qq) {
 		this.qq = qq;
 	}
-
-
 	public String getEmial() {
 		return emial;
 	}
-
-
 	public void setEmial(String emial) {
 		this.emial = emial;
 	}
-
-
 	public String getVistTask() {
 		return vistTask;
 	}
-
-
 	public void setVistTask(String vistTask) {
 		this.vistTask = vistTask;
 	}
-
-
 	public String getRealTime() {
 		return realTime;
 	}
-
-
 	public void setRealTime(String realTime) {
 		this.realTime = realTime;
 	}
-
-
 	public String getResult() {
 		return result;
 	}
-
-
 	public void setResult(String result) {
 		this.result = result;
+	}
+	public String getCompanyId() {
+		return companyId;
+	}
+	public void setCompanyId(String companyId) {
+		this.companyId = companyId;
 	}
 }

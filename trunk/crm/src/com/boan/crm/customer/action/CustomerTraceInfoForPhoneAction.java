@@ -33,7 +33,7 @@ public class CustomerTraceInfoForPhoneAction extends BaseActionSupport{
 	@Autowired
 	@Qualifier("customerTraceInfoService")
 	private ICustomerTraceInfoService customerTraceInfoService;
-	
+	private String companyId = "";
 	private String id = "";
 	private String followPeople = null;
 	private String followDate = "";
@@ -87,7 +87,7 @@ public class CustomerTraceInfoForPhoneAction extends BaseActionSupport{
 			obj.setTraceOption(connectWay);
 			//obj.setTracePerson
 			obj.setTracePersonId(followPeople);
-			
+			obj.setCompanyId(companyId);
 			customerTraceInfoService.save(obj);
 			
 			message = "success";
@@ -125,6 +125,8 @@ public class CustomerTraceInfoForPhoneAction extends BaseActionSupport{
 		else
 			obj.setTraceTime(Calendar.getInstance());
 		
+		obj.setDeleteFlag(0);
+		obj.setCompanyId(companyId);
 		customerTraceInfoService.save(obj);
 		id = obj.getId();
 		message = "success";
@@ -295,5 +297,13 @@ public class CustomerTraceInfoForPhoneAction extends BaseActionSupport{
 
 	public void setUnAgree(String unAgree) {
 		this.unAgree = unAgree;
+	}
+
+	public String getCompanyId() {
+		return companyId;
+	}
+
+	public void setCompanyId(String companyId) {
+		this.companyId = companyId;
 	}
 }
