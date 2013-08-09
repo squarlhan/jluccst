@@ -141,7 +141,7 @@
 			</td>
               <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="name"/></td>
               <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="goodsStandard"/></td>
-              <td height="26" align="left" bgcolor="#FFFFFF"><s:property value="factoryName"/></td>
+              <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="factoryName"/></td>
               <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="goodsPrice"/></td>
           <td height="26" colspan="2" align="center" bgcolor="#FFFFFF">
           	<s:url id="edit_url" action="goodsinfobaseinfo">   
