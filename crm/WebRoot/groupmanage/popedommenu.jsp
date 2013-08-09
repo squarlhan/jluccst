@@ -63,7 +63,7 @@
 		d.add(302,-200,'计划管理','<%=url%>?menuKey=<%=MenuKey.DESKTOP_PLAN_MANAGER%>&companyId=<%=companyId%>','','groupmain','<%=path%>/js/tree/img/imgfolder.gif','<%=path%>/js/tree/img/imgfolder.gif');
 			d.add(3021,302,'月计划','<%=url%>?menuKey=<%=MenuKey.DESKTOP_SUB_MONTH_PLAN%>&companyId=<%=companyId%>','','groupmain');
 			d.add(3022,302,'周计划','<%=url%>?menuKey=<%=MenuKey.DESKTOP_SUB_WEEK_PLAN%>&companyId=<%=companyId%>','','groupmain');
-			d.add(3023,302,'日报','<%=url%>?menuKey=<%=MenuKey.DESKTOP_SUB_DAILY_PAPER%>&companyId=<%=companyId%>','','groupmain');
+			d.add(3023,302,'日计划','<%=url%>?menuKey=<%=MenuKey.DESKTOP_SUB_DAILY_PAPER%>&companyId=<%=companyId%>','','groupmain');
 			d.add(3024,302,'行动计划','<%=url%>?menuKey=<%=MenuKey.DESKTOP_SUB_ACT_PLAN%>&companyId=<%=companyId%>','','groupmain');
 		d.add(303,-200,'销售统计','<%=url%>?menuKey=<%=MenuKey.DESKTOP_SALES_STAT%>&companyId=<%=companyId%>','','groupmain','<%=path%>/js/tree/img/imgfolder.gif','<%=path%>/js/tree/img/imgfolder.gif');
 			d.add(3031,303,'本月销售目标','<%=url%>?menuKey=<%=MenuKey.DESKTOP_SUB_SALES_GOAL%>&companyId=<%=companyId%>','','groupmain');

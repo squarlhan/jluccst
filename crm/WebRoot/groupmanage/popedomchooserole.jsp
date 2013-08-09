@@ -77,6 +77,11 @@
 											</td>
 										</tr>
 										<tr>
+											<td align="center" nowrap>
+												<font color="red" style="font-size:9pt;">注：多选时，请用鼠标拖拽，或按住Ctrl键！</font>
+											</td>
+										</tr>
+										<tr>
 											<td align="center" nowrap height="20px">
 												<input type="button" name="btnSave" value="确定"
 													class="btn_2_3" onClick="gosubmit();">
