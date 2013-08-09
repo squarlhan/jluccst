@@ -92,5 +92,10 @@ public class GoodsTypeServiceImpl implements IGoodsTypeService{
 		}
 		return goodsTypes;
 	}
+
+	@Override
+	public List<GoodsType> findAllLeafGoodsType(String companyId) {
+		return goodsTypeDao.findAllLeafGoodsType(companyId);
+	}
 	
 }

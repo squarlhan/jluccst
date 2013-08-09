@@ -18,6 +18,10 @@ public interface IGoodsTypeService {
 	 * 获得所有商品类别
 	 */
 	public List<GoodsType> findAllGoodsType(String companyId);
+	/**
+	 * 获得所有叶子商品类别
+	 */
+	public List<GoodsType> findAllLeafGoodsType(String companyId);
 
 	/**
 	 * 获得指定类别下商品类别
