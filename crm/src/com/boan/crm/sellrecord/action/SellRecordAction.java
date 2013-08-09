@@ -216,7 +216,7 @@ public class SellRecordAction extends BaseActionSupport {
 	 * @throws Exception
 	 */
 	public String openSellRecordList() throws Exception {
-		goodsTypes = goodsTypeService.findAllGoodsType(sessionCompanyId);
+		goodsTypes = goodsTypeService.findAllLeafGoodsType(sessionCompanyId);
 		userList = userService.queryUserList(sessionCompanyId, sessionDeptId, new Pagination<User>()).getData();
 		Map<String, String> params = new HashMap<String, String>();
 
@@ -259,7 +259,7 @@ public class SellRecordAction extends BaseActionSupport {
 	 * @throws Exception
 	 */
 	public String openSellRecordListForSeller() throws Exception {
-		goodsTypes = goodsTypeService.findAllGoodsType(sessionCompanyId);
+		goodsTypes = goodsTypeService.findAllLeafGoodsType(sessionCompanyId);
 		userList = userService.queryUserList(sessionCompanyId, sessionDeptId, new Pagination<User>()).getData();
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("companyId", sessionCompanyId);
@@ -296,7 +296,7 @@ public class SellRecordAction extends BaseActionSupport {
 	 * @throws Exception
 	 */
 	public String openSellRecordListForOneCustomer() throws Exception {
-		goodsTypes = goodsTypeService.findAllGoodsType(sessionCompanyId);
+		goodsTypes = goodsTypeService.findAllLeafGoodsType(sessionCompanyId);
 		userList = userService.queryUserList(sessionCompanyId, sessionDeptId, new Pagination<User>()).getData();
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("companyId", sessionCompanyId);
@@ -324,7 +324,7 @@ public class SellRecordAction extends BaseActionSupport {
 	}
 
 	public String openSellRecordListForCustomer() throws Exception {
-//		goodsTypes = goodsTypeService.findAllGoodsType(sessionCompanyId);
+//		goodsTypes = goodsTypeService.findAllLeafGoodsType(sessionCompanyId);
 //		//userList = userService.queryUserList(sessionCompanyId, sessionDeptId, new Pagination<User>()).getData();
 //		Map<String, String> params = new HashMap<String, String>();
 //		if (customerId != null) {
@@ -348,7 +348,7 @@ public class SellRecordAction extends BaseActionSupport {
 	}
 
 	public String openSellRecordListForMyCustomer() throws Exception {
-		goodsTypes = goodsTypeService.findAllGoodsType(sessionCompanyId);
+		goodsTypes = goodsTypeService.findAllLeafGoodsType(sessionCompanyId);
 		userList = userService.queryUserList(sessionCompanyId, sessionDeptId, new Pagination<User>()).getData();
 		Map<String, String> params = new HashMap<String, String>();
 		params.put("companyId", sessionCompanyId);
@@ -378,7 +378,7 @@ public class SellRecordAction extends BaseActionSupport {
 	}
 	
 	public String openAddSellRecordForMyCustomer() {
-		goodsTypes = goodsTypeService.findAllGoodsType(sessionCompanyId);
+		goodsTypes = goodsTypeService.findAllLeafGoodsType(sessionCompanyId);
 		Calendar rightNow = Calendar.getInstance();
 		SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd"); // 日期格式化格式
 		String date = format.format(rightNow.getTime()); // 取得当前时间，并格式化成相应格式
@@ -421,7 +421,7 @@ public class SellRecordAction extends BaseActionSupport {
 			customerInfos = customerInfoService.findAllCustomerInfoByCompanyId(sessionCompanyId);//本公司的所有客户
 		}
 		sellRecord = sellRecordService.getSellRecordById(sellRecord.getId());
-		goodsTypes = goodsTypeService.findAllGoodsType(sessionCompanyId);
+		goodsTypes = goodsTypeService.findAllLeafGoodsType(sessionCompanyId);
 		//获取短信通知对象
 		smsInfo= smsInfoService.getSMSInfoBySellRecordId(sellRecord.getId());
 		if(smsInfo!=null){
@@ -461,7 +461,7 @@ public class SellRecordAction extends BaseActionSupport {
 	
 	
 	public String openSellRecordListForCustomerView() throws Exception {
-		goodsTypes = goodsTypeService.findAllGoodsType(sessionCompanyId);
+		goodsTypes = goodsTypeService.findAllLeafGoodsType(sessionCompanyId);
 		//userList = userService.queryUserList(sessionCompanyId, sessionDeptId, new Pagination<User>()).getData();
 		Map<String, String> params = new HashMap<String, String>();
 		if (customerId != null) {
@@ -481,7 +481,7 @@ public class SellRecordAction extends BaseActionSupport {
 	}
 	
 	public String openSellRecordListForOneCustomerView() throws Exception {
-		goodsTypes = goodsTypeService.findAllGoodsType(sessionCompanyId);
+		goodsTypes = goodsTypeService.findAllLeafGoodsType(sessionCompanyId);
 		//userList = userService.queryUserList(sessionCompanyId, sessionDeptId, new Pagination<User>()).getData();
 		Map<String, String> params = new HashMap<String, String>();
 		if (customerId != null) {
@@ -501,7 +501,7 @@ public class SellRecordAction extends BaseActionSupport {
 	}
 
 	public String openViewSellRecord() throws Exception {
-		goodsTypes = goodsTypeService.findAllGoodsType(sessionCompanyId);
+		goodsTypes = goodsTypeService.findAllLeafGoodsType(sessionCompanyId);
 		customerInfos = customerInfoService.findAllCustomerInfoBySalesmanId(sessionUserId); //查本公司业务员所管辖的客户
 		if(customerInfos==null || customerInfos.size()==0){
 			customerInfos = customerInfoService.findAllCustomerInfoByCompanyId(sessionCompanyId);//本公司的所有客户
@@ -512,7 +512,7 @@ public class SellRecordAction extends BaseActionSupport {
 	
 	public String openAddSellRecordForSeller() {
 
-		goodsTypes = goodsTypeService.findAllGoodsType(sessionCompanyId);
+		goodsTypes = goodsTypeService.findAllLeafGoodsType(sessionCompanyId);
 		Calendar rightNow = Calendar.getInstance();
 		SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd"); // 日期格式化格式
 		String date = format.format(rightNow.getTime()); // 取得当前时间，并格式化成相应格式
@@ -548,7 +548,7 @@ public class SellRecordAction extends BaseActionSupport {
 			customerInfos = customerInfoService.findAllCustomerInfoByCompanyId(sessionCompanyId);//本公司的所有客户
 		}
 		sellRecord = sellRecordService.getSellRecordById(sellRecord.getId());
-		goodsTypes = goodsTypeService.findAllGoodsType(sessionCompanyId);
+		goodsTypes = goodsTypeService.findAllLeafGoodsType(sessionCompanyId);
 		
 		//获取短信通知对象
 		smsInfo= smsInfoService.getSMSInfoBySellRecordId(sellRecord.getId());
@@ -564,7 +564,7 @@ public class SellRecordAction extends BaseActionSupport {
 		if(customerInfos==null || customerInfos.size()==0){
 			customerInfos = customerInfoService.findAllCustomerInfoByCompanyId(sessionCompanyId);//本公司的所有客户
 		}
-		goodsTypes = goodsTypeService.findAllGoodsType(sessionCompanyId);
+		goodsTypes = goodsTypeService.findAllLeafGoodsType(sessionCompanyId);
 		// 查找客户信息
 		customer = customerInfoService.get(sellRecord.getCustomerId());
 		sellRecord.setCustomer(customer);
@@ -673,7 +673,7 @@ public class SellRecordAction extends BaseActionSupport {
 	
 	
 	public String openAddSellRecordForOneCustomer() {
-		goodsTypes = goodsTypeService.findAllGoodsType(sessionCompanyId);
+		goodsTypes = goodsTypeService.findAllLeafGoodsType(sessionCompanyId);
 		Calendar rightNow = Calendar.getInstance();
 		SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd"); // 日期格式化格式
 		String date = format.format(rightNow.getTime()); // 取得当前时间，并格式化成相应格式
@@ -710,7 +710,7 @@ public class SellRecordAction extends BaseActionSupport {
 			customerInfos = customerInfoService.findAllCustomerInfoByCompanyId(sessionCompanyId);//本公司的所有客户
 		}
 		sellRecord = sellRecordService.getSellRecordById(sellRecord.getId());
-		goodsTypes = goodsTypeService.findAllGoodsType(sessionCompanyId);
+		goodsTypes = goodsTypeService.findAllLeafGoodsType(sessionCompanyId);
 		//获取短信通知对象
 		smsInfo= smsInfoService.getSMSInfoBySellRecordId(sellRecord.getId());
 		if(smsInfo!=null){
@@ -726,7 +726,7 @@ public class SellRecordAction extends BaseActionSupport {
 			customerInfos = customerInfoService.findAllCustomerInfoByCompanyId(sessionCompanyId);//本公司的所有客户
 		}
 		sellRecord = sellRecordService.getSellRecordById(sellRecord.getId());
-		goodsTypes = goodsTypeService.findAllGoodsType(sessionCompanyId);
+		goodsTypes = goodsTypeService.findAllLeafGoodsType(sessionCompanyId);
 		return SUCCESS;
 	}
 
@@ -735,7 +735,7 @@ public class SellRecordAction extends BaseActionSupport {
 		if(customerInfos==null || customerInfos.size()==0){
 			customerInfos = customerInfoService.findAllCustomerInfoByCompanyId(sessionCompanyId);//本公司的所有客户
 		}
-		goodsTypes = goodsTypeService.findAllGoodsType(sessionCompanyId);
+		goodsTypes = goodsTypeService.findAllLeafGoodsType(sessionCompanyId);
 		// 查找客户信息
 		customer = customerInfoService.get(sellRecord.getCustomerId());
 		sellRecord.setCustomer(customer);
