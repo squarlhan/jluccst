@@ -96,6 +96,7 @@
 				$("#txt_name").focus();
 				if($("#message").val()!=""){
 					alert($("#message").val());
+					parent.$("#windown-close").click();
 				}
 			}
 		</script>
