@@ -78,7 +78,7 @@ public interface IMenuService {
 	 * @return
 	 */
 
-	public List<Menu> getOneLevelMenuListByProductType(int productId,String popedomType, int levelNum);
+	public List<Menu> getOneLevelMenuListByProductType(int productId,String[] popedomType, int levelNum);
 
 	/**
 	 * 保存排序菜单项

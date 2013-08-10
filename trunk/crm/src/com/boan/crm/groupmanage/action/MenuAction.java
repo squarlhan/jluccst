@@ -23,10 +23,12 @@ import com.boan.crm.groupmanage.model.Role;
 import com.boan.crm.groupmanage.service.IMenuService;
 import com.boan.crm.groupmanage.service.IPopedomService;
 import com.boan.crm.utils.action.BaseActionSupport;
+
 /**
  * 菜单Action
+ * 
  * @author Administrator
- *
+ * 
  */
 @Controller("menuAction")
 @Scope("prototype")
@@ -34,7 +36,7 @@ public class MenuAction extends BaseActionSupport {
 	@Autowired
 	@Qualifier("menuService")
 	private IMenuService menuService = null;
-	
+
 	/**
 	 * 权限接口
 	 */
@@ -42,35 +44,35 @@ public class MenuAction extends BaseActionSupport {
 	@Qualifier("popedomService")
 	private IPopedomService popedomService = null;
 	private List<Menu> menuList = null;
-	
+
 	private String parentKey = null;
-	
-	private List<ProductType> productList = null;//ProductType.getProductTypeList();
-	
+
+	private List<ProductType> productList = null;// ProductType.getProductTypeList();
+
 	private List<MenuPopedomType> popedomTypeList = MenuPopedomType.getMenuPopedomTypeList();
 
 	private Menu menu = null;
 
 	private Message message = new Message();
-	
+
 	private String productId = null;
-	
+
 	private String[] menuIds = null;
-	
+
 	/**
 	 * 打开菜单信息页
 	 * 
 	 * @return
 	 */
 	public String showMenuInfo() {
-		if( StringUtils.isBlank(menu.getId()) ){
+		if (StringUtils.isBlank(menu.getId())) {
 			menu = new Menu();
 			menu.setProductId(Integer.parseInt(productId));
 			menu.setParentKey(parentKey);
-		}else{
+		} else {
 			menu = menuService.getMenuById(menu.getId());
 		}
-		
+
 		return "show-menu-info";
 	}
 
@@ -87,9 +89,9 @@ public class MenuAction extends BaseActionSupport {
 			message.setContent("相同菜单关键字已存在，请重新输入！");
 			return "save-error";
 		} else {
-			if( "0".equals(menu.getParentKey()) ){
+			if ("0".equals(menu.getParentKey())) {
 				menu.setLevelNum(1);
-			}else{
+			} else {
 				menu.setLevelNum(2);
 			}
 			menuService.saveOrUpdateMenu(menu);
@@ -103,50 +105,47 @@ public class MenuAction extends BaseActionSupport {
 			return "save-success";
 		}
 	}
+
 	/**
 	 * 显示一级菜单列表，用于菜单管理，只用于超级管理员
+	 * 
 	 * @return
 	 */
-	public String showRootMenuList() throws Exception{
+	public String showRootMenuList() throws Exception {
 		HttpSession session = ServletActionContext.getRequest().getSession();
 		UserSession userSession = (UserSession) session.getAttribute("userSession");
 		boolean b = popedomService.isSuperAdministrator(userSession.getUserId(), String.valueOf(userSession.getUserType()));
 		menuList = new ArrayList<Menu>();
-		if( b  ){
-			List<Menu> menuList1 = menuService.getOneLevelMenuListByProductType(ProductType.CRM, null,1);
-			if( menuList1 != null && menuList1.size() > 0 )
-			{
+		if (b) {
+			List<Menu> menuList1 = menuService.getOneLevelMenuListByProductType(ProductType.CRM, null, 1);
+			if (menuList1 != null && menuList1.size() > 0) {
 				menuList.addAll(menuList1);
 			}
 			List<Menu> menuList2 = menuService.getOneLevelMenuListByProductType(ProductType.ERP, null, 1);
-			if( menuList2 != null && menuList2.size() > 0 )
-			{
+			if (menuList2 != null && menuList2.size() > 0) {
 				menuList.addAll(menuList2);
 			}
 			List<Menu> menuList3 = menuService.getOneLevelMenuListByProductType(ProductType.TEAM_MANAGE, null, 1);
-			if( menuList3 != null && menuList3.size() > 0 )
-			{
+			if (menuList3 != null && menuList3.size() > 0) {
 				menuList.addAll(menuList3);
-			}	
+			}
 			productList = ProductType.getProductTypeList();
 		}
 		/*
-		else{
-			int productId = userSession.getProductType();
-			List<Menu> menuListx = menuService.getOneLevelMenuListByProductType(productId,MenuPopedomType.ONLY_COMPANY_ADMIN, 1);
-			menuListx.addAll( menuService.getOneLevelMenuListByProductType(productId,MenuPopedomType.COMMON, 2) );
-			if( menuListx != null && menuListx.size() > 0 )
-			{
-				menuList.addAll(menuListx);
-			}
-			ProductType type = new ProductType();
-			type.setName(ProductType.getMean(productId));
-			type.setNum(productId);
-			productList = new ArrayList<ProductType>();
-			productList .add(type);
-		}*/
+		 * else{ int productId = userSession.getProductType(); List<Menu>
+		 * menuListx =
+		 * menuService.getOneLevelMenuListByProductType(productId,MenuPopedomType
+		 * .ONLY_COMPANY_ADMIN, 1); menuListx.addAll(
+		 * menuService.getOneLevelMenuListByProductType
+		 * (productId,MenuPopedomType.COMMON, 2) ); if( menuListx != null &&
+		 * menuListx.size() > 0 ) { menuList.addAll(menuListx); } ProductType
+		 * type = new ProductType();
+		 * type.setName(ProductType.getMean(productId)); type.setNum(productId);
+		 * productList = new ArrayList<ProductType>(); productList .add(type); }
+		 */
 		return "show-root-menu-tree";
 	}
+
 	/**
 	 * 删除菜单
 	 * 
@@ -159,7 +158,7 @@ public class MenuAction extends BaseActionSupport {
 			for (int i = 0; i < menuIds.length; i++) {
 				rl = menuService.getMenuById(menuIds[i]);
 				if (rl != null) {
-					menuService.deleteMenuByParentKey(rl.getProductId() , new String[]{rl.getMenuKey()});
+					menuService.deleteMenuByParentKey(rl.getProductId(), new String[] { rl.getMenuKey() });
 					log = new Log();
 					log.setLogType(LogType.INFO);
 					log.setLogContent("[" + rl.getMenuName() + "]" + "菜单信息删除成功");
@@ -170,73 +169,98 @@ public class MenuAction extends BaseActionSupport {
 		menuService.deleteMenuByIds(menuIds);
 		return this.showMenuList();
 	}
+
 	/**
 	 * 显示菜单列表，用于菜单管理
+	 * 
 	 * @return
 	 */
 	public String showMenuList() {
 		menuList = menuService.getMenuListByParentKey(Integer.parseInt(productId), parentKey);
 		return "show-menu-list";
 	}
+
 	/**
 	 * 显示菜单列表，用于权限分配
+	 * 
 	 * @return
 	 */
-	public String showMenuListForPopedom(){
+	public String showMenuListForPopedom() throws Exception {
 		ProductType type = new ProductType();
 		type.setName(ProductType.getMean(Integer.parseInt(productId)));
 		type.setNum(Integer.parseInt(productId));
 		productList = new ArrayList<ProductType>();
-		productList .add(type);
-		
-		menuList = menuService.getOneLevelMenuListByProductType(Integer.parseInt(productId), null,1);
+		productList.add(type);
+		HttpSession session = ServletActionContext.getRequest().getSession();
+		UserSession userSession = (UserSession) session.getAttribute("userSession");
+
+		boolean comanyFlag = popedomService.isCompanyAdministrator(userSession.getUserId(), String.valueOf(userSession.getUserType()));
+		if (comanyFlag) {
+			//公司管理员不能看超级管理员菜单
+			String[] companyPopedoms = new String[]{MenuPopedomType.ONLY_COMPANY_ADMIN, MenuPopedomType.COMMON, MenuPopedomType.OPEN};
+			menuList = menuService.getOneLevelMenuListByProductType(Integer.parseInt(productId), companyPopedoms, 1);
+		} else {
+			menuList = menuService.getOneLevelMenuListByProductType(Integer.parseInt(productId), null, 1);
+		}
 		List<Menu> subMenuList = null;
-		for( int i = 0; i < menuList.size(); i++ ){
+		for (int i = 0; i < menuList.size(); i++) {
 			subMenuList = menuService.getMenuListByParentKey(Integer.parseInt(productId), menuList.get(i).getMenuKey());
-			if( subMenuList  != null && subMenuList .size() > 0){
+			if (subMenuList != null && subMenuList.size() > 0) {
 				menuList.addAll(subMenuList);
 			}
 		}
 		return "show-menu-list-for-popedom";
 	}
+
 	/**
 	 * 显示可排序的菜单
+	 * 
 	 * @return
 	 */
-	public String showSortMenuList(){
+	public String showSortMenuList() {
 		menuList = menuService.getMenuListByParentKey(Integer.parseInt(productId), parentKey);
 		return "show-sort-menu-list";
 	}
+
 	/**
 	 * 保存排序好的菜单
+	 * 
 	 * @return
 	 */
-	public String saveSortMenu(){
+	public String saveSortMenu() {
 		menuService.saveSortMenu(menuIds);
 		message.setContent("菜单排序成功！");
 		return "save-sort-success";
 	}
+
 	public IMenuService getMenuService() {
 		return menuService;
 	}
+
 	public void setMenuService(IMenuService menuService) {
 		this.menuService = menuService;
 	}
+
 	public List<Menu> getMenuList() {
 		return menuList;
 	}
+
 	public void setMenuList(List<Menu> menuList) {
 		this.menuList = menuList;
 	}
+
 	public String getParentKey() {
 		return parentKey;
 	}
+
 	public void setParentKey(String parentKey) {
 		this.parentKey = parentKey;
 	}
+
 	public List<ProductType> getProductList() {
 		return productList;
 	}
+
 	public void setProductList(List<ProductType> productList) {
 		this.productList = productList;
 	}

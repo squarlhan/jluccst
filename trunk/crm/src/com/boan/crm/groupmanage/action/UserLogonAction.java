@@ -646,25 +646,25 @@ public class UserLogonAction extends ActionSupport {
 		boolean comanyFlag = popedomService.isCompanyAdministrator(userSession.getUserId(), String.valueOf(userSession.getUserType()));
 		// 如果是系统管理员，则只取超级管理员菜单
 		if (superFlag) {
-			menuList = menuService.getOneLevelMenuListByProductType(productId, MenuPopedomType.ONLY_SUPER_ADMIN, 1);
+			menuList = menuService.getOneLevelMenuListByProductType(productId, new String[]{MenuPopedomType.ONLY_SUPER_ADMIN}, 1);
 			if (menuList == null || menuList.size() == 0) {
 				menuList = new ArrayList<Menu>();
 			}
-			menuList.addAll(menuService.getOneLevelMenuListByProductType(productId, MenuPopedomType.OPEN, 1));
+			menuList.addAll(menuService.getOneLevelMenuListByProductType(productId, new String[]{MenuPopedomType.OPEN}, 1));
 		} else {
 			// 如果是公司管理员，则要取出公司级菜单
 			if (menuList == null || menuList.size() == 0) {
 				menuList = new ArrayList<Menu>();
 			}
 			if (comanyFlag) {
-				menuList.addAll(menuService.getOneLevelMenuListByProductType(productId, MenuPopedomType.ONLY_COMPANY_ADMIN, 1));
+				menuList.addAll(menuService.getOneLevelMenuListByProductType(productId, new String[]{ MenuPopedomType.ONLY_COMPANY_ADMIN}, 1));
 			}
-			menuList.addAll(menuService.getOneLevelMenuListByProductType(productId, MenuPopedomType.OPEN, 1));
+			menuList.addAll(menuService.getOneLevelMenuListByProductType(productId, new String[]{MenuPopedomType.OPEN}, 1));
 			if (menuList == null || menuList.size() == 0) {
 				menuList = new ArrayList<Menu>();
 			}
 
-			List<Menu> menuCommonList = menuService.getOneLevelMenuListByProductType(productId, MenuPopedomType.COMMON, 1);
+			List<Menu> menuCommonList = menuService.getOneLevelMenuListByProductType(productId, new String[]{MenuPopedomType.COMMON}, 1);
 			if (menuCommonList != null && menuCommonList.size() > 0) {
 				for (int i = 0; i < menuCommonList.size(); i++) {
 					if (MenuPopedomType.COMMON.equals(menuCommonList.get(i).getPopedomType())) {

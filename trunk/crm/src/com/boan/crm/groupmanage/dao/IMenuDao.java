@@ -66,7 +66,7 @@ public interface IMenuDao {
 	 * @return
 	 */
 
-	public List<Menu> getOneLevelMenuListByProductType(int productId, String popedomType, int levelNum);
+	public List<Menu> getOneLevelMenuListByProductType(int productId, String[] popedomType, int levelNum);
 	/**
 	 * 根据父key，取所有菜单
 	 * @param parentKey
