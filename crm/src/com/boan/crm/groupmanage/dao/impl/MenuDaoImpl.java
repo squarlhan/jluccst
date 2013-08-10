@@ -52,14 +52,25 @@ public class MenuDaoImpl extends BaseDao<Menu, String> implements IMenuDao {
 	}
 
 	@Override
-	public List<Menu> getOneLevelMenuListByProductType(int productId, String popedomType,	int levelNum) {
+	public List<Menu> getOneLevelMenuListByProductType(int productId, String[] popedomType, int levelNum) {
 		String hql = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		if( StringUtils.isNotBlank(popedomType) ){
-			hql = "from Menu where productId = :productId and popedomType = :popedomType and levelNum = :levelNum order by sortIndex";
+		if (popedomType != null && popedomType.length > 0) {
+			hql = "from Menu where productId = :productId  and levelNum = :levelNum and popedomType in ( :popedomType ) order by sortIndex";
 			map.put("popedomType", popedomType);
-		}
-		else{
+			/*
+			hql = "from Menu where productId = :productId and popedomType in (";
+			for (int i = 0; i < popedomType.length; i++) {
+				if (i == 0) {
+					hql += " :popedomType" + i;
+				} else {
+					hql += ", :popedomType" + i;
+				}
+				map.put("popedomType" + i, popedomType[i]);
+			}
+			hql += " ) and levelNum = :levelNum order by sortIndex";
+			*/
+		} else {
 			hql = "from Menu where productId = :productId  and levelNum = :levelNum order by sortIndex";
 		}
 		map.put("productId", productId);
@@ -130,21 +141,17 @@ public class MenuDaoImpl extends BaseDao<Menu, String> implements IMenuDao {
 		int rowCount = 0;
 		String hql = null;
 		Map<String, Object> map = new HashMap<String, Object>();
-		map.put( "productId", productId );
-		map.put( "menuKey", menuKey );
-		if( StringUtils.isNotBlank( id ) )
-		{
+		map.put("productId", productId);
+		map.put("menuKey", menuKey);
+		if (StringUtils.isNotBlank(id)) {
 			hql = "select count(id) from Menu where id <> :id and productId= :productId and menuKey = :menuKey";
-			map.put( "id", id );
-		}
-		else
-		{
+			map.put("id", id);
+		} else {
 			hql = "select count(id) from Menu where productId = :productId and menuKey = :menuKey";
 		}
-		
-		rowCount = super.findCountForPage( hql, map );			
-		if( rowCount > 0 )
-		{
+
+		rowCount = super.findCountForPage(hql, map);
+		if (rowCount > 0) {
 			b = true;
 		}
 		return b;

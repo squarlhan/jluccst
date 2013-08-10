@@ -32,7 +32,7 @@ public class MenuServiceImpl implements IMenuService {
 	}
 
 	@Override
-	public List<Menu> getOneLevelMenuListByProductType(int productId,String popedomType,int levelNum) {
+	public List<Menu> getOneLevelMenuListByProductType(int productId,String[] popedomType,int levelNum) {
 		return menuDao.getOneLevelMenuListByProductType(productId,popedomType, levelNum);
 	}
 
