@@ -349,6 +349,28 @@ public class CustomerInfoAction extends BaseActionSupport{
 			map.put("address", customerInfo.getAddress());
 			map.put("company_full_name", customerInfo.getCompanyFullName());
 			map.put("fax", customerInfo.getFax());
+			//新建客户为1，跟踪客户为2，要成单客户为3，成单客户为4，回访客户为5
+			String progressStr = customerInfo.getProgressId();
+			if(progressStr.equals(BusinessProgressKey.NEW))
+			{
+				progressStr = "1";
+			}else if(progressStr.equals(BusinessProgressKey.TRACE))
+			{
+				progressStr = "2";
+			}else if(progressStr.equals(BusinessProgressKey.DEALING))
+			{
+				progressStr = "3";
+			}else if(progressStr.equals(BusinessProgressKey.DEALED))
+			{
+				progressStr = "4";
+			}else if(progressStr.equals(BusinessProgressKey.VISIT))
+			{
+				progressStr = "5";
+			}else
+			{
+				progressStr = "1";
+			}
+			map.put("type", progressStr);
 			List<ContractPersonInfoForJson> listContractPerson = new ArrayList<ContractPersonInfoForJson>();
 			List<ContractPersonInfo> listPerson = contractpersonInfoService.findAllContractPersonInfoByCustomerId(customerInfo.getId());
 			if(listPerson != null && listPerson.size() > 0)
@@ -849,6 +871,8 @@ public class CustomerInfoAction extends BaseActionSupport{
 				for(int i=0;i<listPerson.size();i++)
 				{
 					ContractPersonDetailInfoForJson detail = new ContractPersonDetailInfoForJson();
+					
+					detail.setId(listPerson.get(i).getId());
 					if(listPerson.get(i).getBirthday() != null)
 						detail.setBirth_day(CurrentDateTime.getCurrentDate(listPerson.get(i).getBirthday()));
 					detail.setBirth_type(String.valueOf(listPerson.get(i).getLunar()));
