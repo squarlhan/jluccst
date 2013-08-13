@@ -13,6 +13,9 @@ public class ContractPersonInfoForJson
 	private String contact_id = "";
 	private String name = "";
 	private String phone = "";
+	private String QQ = "";
+	private String email = "";
+	
 	public String getContact_id() {
 		return contact_id;
 	}
@@ -30,5 +33,17 @@ public class ContractPersonInfoForJson
 	}
 	public void setPhone(String phone) {
 		this.phone = phone;
+	}
+	public String getQQ() {
+		return QQ;
+	}
+	public void setQQ(String qQ) {
+		QQ = qQ;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
 	}
 }

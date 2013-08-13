@@ -343,7 +343,10 @@ public class CustomerInfoAction extends BaseActionSupport{
 		if(StringUtils.trimToNull(id)!=null)
 		{
 			customerInfo = customerInfoService.get(id);
-			
+			//TODO
+			map.put("clientComeWay", customerInfo.getSourceId());
+			map.put("clientType", customerInfo.getCategoryId());
+			map.put("developProcess", customerInfo.getLevelId());
 			map.put("company", customerInfo.getCustomerName());
 			map.put("industry", customerInfo.getMainIndustry());
 			map.put("address", customerInfo.getAddress());
@@ -381,6 +384,8 @@ public class CustomerInfoAction extends BaseActionSupport{
 					obj.setContact_id(listPerson.get(i).getId());
 					obj.setName(listPerson.get(i).getPersonName());
 					obj.setPhone(listPerson.get(i).getPhone());
+					obj.setQQ(listPerson.get(i).getQq());
+					obj.setEmail(listPerson.get(i).getEmail());
 					
 					listContractPerson.add(obj);
 				}
