@@ -82,9 +82,12 @@
 				if($("#hid_message").val()!="" && $("#hid_timePlanId").val()!=null){
 					alert($("#hid_message").val());
 				}
-				$('#txt_submitTime').val((new Date()).getFullYear()+"-"+(((new Date()).getMonth()+1)<10 ? "0"+((new Date()).getMonth()+1) : (new Date()).getMonth()+1)+"-"+((new Date()).getDate()<10 ? "0"+(new Date()).getDate() : (new Date()).getDate()));
-		  		//日期控件
-				$('#txt_submitTime').datetimepicker({showTimepicker: false});
+				if($("#hid_timePlanId").val()==null || $("#hid_timePlanId").val()==""){
+					$('#txt_submitTime').val((new Date()).getFullYear()+"-"+(((new Date()).getMonth()+1)<10 ? "0"+((new Date()).getMonth()+1) : (new Date()).getMonth()+1)+"-"+((new Date()).getDate()<10 ? "0"+(new Date()).getDate() : (new Date()).getDate()));
+					//日期控件
+					$('#txt_submitTime').datetimepicker({showTimepicker: false});
+				}
+		  		
 				$.validator.setDefaults({
 					debug: false,onkeyup: false,onfocusout:false,focusCleanup: true,
 				    errorPlacement:function(error, element) {},
@@ -155,11 +158,11 @@
 								<table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#d5e4fd">
 									<tr>
 										<td height="26" align="right" bgcolor="#FFFFFF">
-											<strong>员工姓名：</strong>
+											<strong>提交人：</strong>
 										</td>
 										<td height="26" align="left" bgcolor="#FFFFFF">
 											<span onmousemove="this.setCapture();" onmouseout="this.releaseCapture();" onfocus="this.blur();"> 
-												<s:select id="sel_employee"   name="timePlan.employeeId" list="userList"  listKey="id"  listValue="userCName"  cssStyle="width: 160px;" ></s:select>
+												<s:select tabindex="-1" id="sel_employee"   name="timePlan.employeeId" list="userList"  listKey="id"  listValue="userCName"  cssStyle="width: 160px;" ></s:select>
 											</span>
 										</td>
 										<td height="26" align="right" bgcolor="#FFFFFF">
@@ -167,7 +170,7 @@
 										</td>
 										<td height="26" align="left" bgcolor="#FFFFFF">
 											<span onmousemove="this.setCapture();" onmouseout="this.releaseCapture();" onfocus="this.blur();"> 
-												<s:select id="sel_dept"  name="timePlan.deptId" list="deptList" listKey="id"  listValue="deptName" cssStyle="width: 160px;" ></s:select>
+												<s:select tabindex="-1" id="sel_dept"  name="timePlan.deptId" list="deptList" listKey="id"  listValue="deptName" cssStyle="width: 160px;" ></s:select>
 											</span>
 										</td>
 									</tr>
@@ -176,14 +179,23 @@
 											<strong>计划类型：</strong>
 										</td>
 										<td height="26" align="left" bgcolor="#FFFFFF">
-											<s:select id="sel_planType"  name="timePlan.planType"  list="#{0:'日报',1:'周报',2:'月报' }"  cssStyle="width: 160px;" ></s:select>
+											<span onmousemove="this.setCapture();" onmouseout="this.releaseCapture();" onfocus="this.blur();"> 
+												<s:select tabindex="-1" id="sel_planType"  name="timePlan.planType"  list="#{0:'日计划',1:'周报',2:'月报' }"  cssStyle="width: 160px;" ></s:select>
+											</span>
 										</td>
 										<td height="26" align="right" bgcolor="#FFFFFF">
 											<strong >提交日期：</strong>
 										</td>
 										<td height="26" align="left" bgcolor="#FFFFFF">
-											<s:textfield id="txt_submitTime" name="timePlan.submitTime" cssStyle="width: 160px;" maxlength="25"></s:textfield>
-											<font color="red">*</font>
+											<s:if test='timePlan.id==null'>
+												<s:textfield id="txt_submitTime" name="timePlan.submitTime" cssStyle="width: 160px;" maxlength="25"></s:textfield>
+												<font color="red">*</font>
+											</s:if>
+											<s:else>
+												<span onmousemove="this.setCapture();" onmouseout="this.releaseCapture();" onfocus="this.blur();"> 
+													<s:textfield tabindex="-1" id="txt_submitTime" name="timePlan.submitTime" cssStyle="width: 160px;" maxlength="25"></s:textfield>
+												</span>
+											</s:else>
 										</td>
 									</tr>
 									

@@ -146,7 +146,7 @@
 								<span onmousemove="this.setCapture();" onmouseout="this.releaseCapture();" onfocus="this.blur();"> 
 									<tr>
 										<td height="26" align="right" bgcolor="#FFFFFF" nowrap="nowrap">
-											<strong>员工姓名：</strong>
+											<strong>提交人：</strong>
 										</td>
 										<td height="26" align="left" bgcolor="#FFFFFF">
 											<s:select tabindex="-1" id="sel_employee"   name="timePlan.employeeId" list="userList"  listKey="id"  listValue="userCName"  cssStyle="width: 160px;" ></s:select>
@@ -170,7 +170,6 @@
 										</td>
 										<td height="26" align="left" bgcolor="#FFFFFF">
 											<s:textfield tabindex="-1"  id="txt_submitTime" name="timePlan.submitTime" cssStyle="width: 160px;" maxlength="25"></s:textfield>
-											<font color="red">*</font>
 										</td>
 									</tr>
 									<tr>
@@ -187,7 +186,6 @@
 										</td>
 										<td height="26" align="left" bgcolor="#FFFFFF" colspan="3">
 											<s:textarea  id="txt_planContent" name="timePlan.planContent" cssStyle="width: 438px;height:100px;resize:none;" maxlength="500"></s:textarea>
-											<font color="red">*</font>
 										</td>
 									</tr>
 									</span>
