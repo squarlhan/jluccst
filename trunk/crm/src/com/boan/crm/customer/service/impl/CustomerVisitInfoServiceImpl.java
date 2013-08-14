@@ -165,6 +165,17 @@ public class CustomerVisitInfoServiceImpl implements ICustomerVisitInfoService{
 		{
 			hql.append(" and (visitFlag = '0' or visitFlag is null) ");
 		}
+		if(values.get("startTime") != null && values.get("endTime") != null)
+		{
+			hql.append(" and (visitTime between :startTime and :endTime) ");
+		}
+		if(values.get("taskStatus") != null && values.get("taskStatus").equals("expired"))
+		{
+			hql.append(" and visitTime <= :now ");
+		}else if(values.get("taskStatus") != null && values.get("taskStatus").equals("recent"))
+		{
+			hql.append(" and visitTime >= :now ");
+		}
 		hql.append(" order by visitTime desc,actualVisitTime asc");
 		List<CustomerVisitInfo> data = customerVisitInfoDao.findForPage(hql.toString(), values, pagination.getStartIndex(), pagination.getPageSize());
 		hql.delete(0, hql.length());
@@ -214,6 +225,17 @@ public class CustomerVisitInfoServiceImpl implements ICustomerVisitInfoService{
 		}else if(values.get("visitFlag") != null && values.get("visitFlag").equals("0"))
 		{
 			hql.append(" and (visitFlag = '0' or visitFlag is null) ");
+		}
+		if(values.get("startTime") != null && values.get("endTime") != null)
+		{
+			hql.append(" and (visitTime between :startTime and :endTime) ");
+		}
+		if(values.get("taskStatus") != null && values.get("taskStatus").equals("expired"))
+		{
+			hql.append(" and visitTime <= :now ");
+		}else if(values.get("taskStatus") != null && values.get("taskStatus").equals("recent"))
+		{
+			hql.append(" and visitTime >= :now ");
 		}
 		int totalRows = customerVisitInfoDao.findCountForPage(hql.toString(), values);
 		pagination.setTotalRows(totalRows);

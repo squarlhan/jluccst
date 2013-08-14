@@ -55,6 +55,7 @@ import com.boan.crm.groupmanage.common.RoleFlag;
 import com.boan.crm.groupmanage.common.UserSession;
 import com.boan.crm.groupmanage.model.Deptment;
 import com.boan.crm.groupmanage.model.User;
+import com.boan.crm.groupmanage.security.PropertiesUtil;
 import com.boan.crm.groupmanage.service.IDeptmentService;
 import com.boan.crm.groupmanage.service.IPopedomService;
 import com.boan.crm.groupmanage.service.IUserService;
@@ -902,6 +903,156 @@ public class CustomerInfoAction extends BaseActionSupport{
 		return COMMON_OBJECT;
 	}
 	/**
+	 * 取我的任务更多
+	 * @return
+	 */
+	public String getMyTaskListByTypeForPhone()
+	{
+		List<TaskInfoForJson> list = new ArrayList<TaskInfoForJson>();
+		Map<String,Object> values = new HashMap<String,Object>();
+		values.put("salesmanId", salesmanId);
+		
+		if(type.equals("1"))
+		{
+			Calendar c1 = Calendar.getInstance();
+			c1.set(Calendar.HOUR, 0);
+			c1.set(Calendar.MINUTE, 0);
+			c1.set(Calendar.SECOND, 0);
+			
+			Calendar c2 = Calendar.getInstance();
+			c2.set(Calendar.HOUR, 23);
+			c2.set(Calendar.MINUTE, 59);
+			c2.set(Calendar.SECOND, 59);
+			
+			values.put("startTime", c1);
+			values.put("endTime", c2);
+			values.put("traceFlag", "0");
+		}else if(type.equals("2")) //过期
+		{
+			int expiredDays = PropertiesUtil.getInstance().getDaysOfExpired();
+			Calendar c1 = Calendar.getInstance();
+			c1.add(Calendar.DAY_OF_MONTH, -expiredDays);
+			c1.set(Calendar.HOUR, 0);
+			c1.set(Calendar.MINUTE, 0);
+			c1.set(Calendar.SECOND, 0);
+			
+			Calendar c2 = Calendar.getInstance();
+			c2.set(Calendar.HOUR, 23);
+			c2.set(Calendar.MINUTE, 59);
+			c2.set(Calendar.SECOND, 59);
+			
+			values.put("startTime", c1);
+			values.put("endTime", c2);
+			values.put("now", Calendar.getInstance());
+			values.put("taskStatus", "expired");
+			values.put("traceFlag", "0");
+		}else if(type.equals("3")) //最近
+		{
+			int recentDays = PropertiesUtil.getInstance().getDaysOfRecent();
+			Calendar c1 = Calendar.getInstance();
+			c1.add(Calendar.DAY_OF_MONTH, recentDays);
+			c1.set(Calendar.HOUR, 23);
+			c1.set(Calendar.MINUTE, 59);
+			c1.set(Calendar.SECOND, 59);
+			
+			Calendar c2 = Calendar.getInstance();
+			c2.set(Calendar.HOUR, 0);
+			c2.set(Calendar.MINUTE, 0);
+			c2.set(Calendar.SECOND, 0);
+			
+			values.put("startTime", c2);
+			values.put("endTime", c1);
+			values.put("now", Calendar.getInstance());
+			values.put("taskStatus", "recent");
+			values.put("traceFlag", "0");
+		}else if(type.equals("4")) //已完成			
+		{
+			int expiredDays = PropertiesUtil.getInstance().getDaysOfExpired();
+			Calendar c1 = Calendar.getInstance();
+			c1.add(Calendar.DAY_OF_MONTH, -expiredDays);
+			c1.set(Calendar.HOUR, 0);
+			c1.set(Calendar.MINUTE, 0);
+			c1.set(Calendar.SECOND, 0);
+			
+			Calendar c2 = Calendar.getInstance();
+			c2.set(Calendar.HOUR, 23);
+			c2.set(Calendar.MINUTE, 59);
+			c2.set(Calendar.SECOND, 59);
+			
+			values.put("startTime", c1);
+			values.put("endTime", c2);
+			
+			values.put("traceFlag", "1");
+		}
+		Pagination<CustomerTraceInfo> paginationTraceInfo = new Pagination<CustomerTraceInfo>();
+		List<CustomerTraceInfo> listTraceInfo = customerTraceInfoService.findCustomerTraceInfoForPage(values, paginationTraceInfo).getData();
+		if(listTraceInfo != null && listTraceInfo.size()>0)
+		{
+			if(type.equals("1") && type.equals("3"))
+			{
+				for(int i=listTraceInfo.size() - 1;i>0;i--)
+				{
+					TaskInfoForJson obj = null;
+					CustomerTraceInfo traceInfo = listTraceInfo.get(i);
+					obj = new TaskInfoForJson(traceInfo.getId(),"1",type,traceInfo.getCustomerName(),traceInfo.getPerson().getPersonName(),traceInfo.getTel(),traceInfo.getTraceTimeStr());
+					list.add(obj);
+				}
+			}else if(type.equals("2") && type.equals("4"))
+			{
+				for(int i=0;i<listTraceInfo.size() ;i++)
+				{
+					TaskInfoForJson obj = null;
+					CustomerTraceInfo traceInfo = listTraceInfo.get(i);
+					obj = new TaskInfoForJson(traceInfo.getId(),"1",type,traceInfo.getCustomerName(),traceInfo.getPerson().getPersonName(),traceInfo.getTel(),traceInfo.getTraceTimeStr());
+					list.add(obj);
+				}
+			}
+		}
+		Pagination<CustomerVisitInfo> paginationVisitInfo = new Pagination<CustomerVisitInfo>();
+		
+		List<CustomerVisitInfo>  listVisitInfo = customerVisitInfoService.findCustomerVisitInfoForPage(values, paginationVisitInfo).getData();
+		if(listVisitInfo != null && listVisitInfo.size() >0)
+		{
+			if(type.equals("1")&& type.equals("3"))
+			{
+				for(int i=listVisitInfo.size()-1;i>0;i--)
+				{
+					CustomerVisitInfo visitInfo = listVisitInfo.get(i);
+					TaskInfoForJson obj = null;
+					String personName = "";
+					if(visitInfo.getPerson() != null)
+					{
+						personName = visitInfo.getPerson().getPersonName();
+					}
+					
+					obj = new TaskInfoForJson(visitInfo.getId(),"2",type,visitInfo.getCustomerName(),personName,visitInfo.getTel(),visitInfo.getVisitTimeStr());
+					list.add(obj);
+				}
+			}else if(type.equals("2") && type.equals("4"))
+			{
+				for(int i=0;i<listVisitInfo.size();i++)
+				{
+					CustomerVisitInfo visitInfo = listVisitInfo.get(i);
+					TaskInfoForJson obj = null;
+					String personName = "";
+					if(visitInfo.getPerson() != null)
+					{
+						personName = visitInfo.getPerson().getPersonName();
+					}
+					
+					obj = new TaskInfoForJson(visitInfo.getId(),"2",type,visitInfo.getCustomerName(),personName,visitInfo.getTel(),visitInfo.getVisitTimeStr());
+					list.add(obj);
+				}
+			}
+		}
+		
+		HttpServletRequest request = ServletActionContext.getRequest();
+		request.setAttribute("list", list);
+		request.setAttribute("jsonRootName", "task");
+		return COMMON_LIST; 
+	}
+	
+	/**
 	 * 获取我的任务列表
 	 * @return 
 	 */
@@ -910,16 +1061,45 @@ public class CustomerInfoAction extends BaseActionSupport{
 		List<TaskInfoForJson> list = new ArrayList<TaskInfoForJson>();
 		Map<String,Object> values = new HashMap<String,Object>();
 		values.put("salesmanId", salesmanId);
+		
+		int expiredDays = PropertiesUtil.getInstance().getDaysOfExpired();
+		int finishedDays = PropertiesUtil.getInstance().getDaysOfFinished();
+		int recentDays = PropertiesUtil.getInstance().getDaysOfRecent();
+		
+		int beforeDays = 0;
+		if(expiredDays >= finishedDays)
+		{
+			beforeDays = expiredDays;
+		}else
+		{
+			beforeDays = finishedDays;
+		}
+		
 		Calendar c1 = Calendar.getInstance();
-		c1.add(Calendar.MONTH, -1);
+		c1.add(Calendar.DAY_OF_MONTH, -beforeDays);
 		Calendar c2 = Calendar.getInstance();
-		c2.add(Calendar.MONTH, 1);
+		c2.add(Calendar.DAY_OF_MONTH, recentDays);
+		
+		c1.set(Calendar.HOUR, 0);
+		c1.set(Calendar.MINUTE, 0);
+		c1.set(Calendar.SECOND, 0);
 		
 		values.put("startTime", c1);
+		
+		
+		c2.set(Calendar.HOUR, 23);
+		c2.set(Calendar.MINUTE, 59);
+		c2.set(Calendar.SECOND, 59);
+		
 		values.put("endTime", c2);
 		
 		Pagination<CustomerTraceInfo> paginationTraceInfo = new Pagination<CustomerTraceInfo>();
 		List<CustomerTraceInfo>  listTraceInfo = customerTraceInfoService.findCustomerTraceInfoForPage(values, paginationTraceInfo).getData();
+		List<TaskInfoForJson> listExpired = new ArrayList<TaskInfoForJson>();
+		List<TaskInfoForJson> listToday = new ArrayList<TaskInfoForJson>();
+		List<TaskInfoForJson> listRecent = new ArrayList<TaskInfoForJson>();
+		List<TaskInfoForJson> listFinished = new ArrayList<TaskInfoForJson>();
+		
 		if(listTraceInfo != null && listTraceInfo.size() >0)
 		{
 			for(int i=0;i<listTraceInfo.size();i++)
@@ -931,6 +1111,7 @@ public class CustomerInfoAction extends BaseActionSupport{
 				{
 					status = "4";
 					obj = new TaskInfoForJson(traceInfo.getId(),"1",status,traceInfo.getCustomerName(),traceInfo.getPerson().getPersonName(),traceInfo.getTel(),traceInfo.getActualTraceTimeStr());
+					listFinished.add(obj);
 				}else
 				{
 					Calendar now = Calendar.getInstance();
@@ -939,22 +1120,23 @@ public class CustomerInfoAction extends BaseActionSupport{
 						if(traceInfo.getTraceTime().get(Calendar.YEAR) == now.get(Calendar.YEAR) && traceInfo.getTraceTime().get(Calendar.MONTH) == now.get(Calendar.MONTH) && traceInfo.getTraceTime().get(Calendar.DATE) == now.get(Calendar.DATE))
 						{
 							status = "1";
+							obj = new TaskInfoForJson(traceInfo.getId(),"1",status,traceInfo.getCustomerName(),traceInfo.getPerson().getPersonName(),traceInfo.getTel(),traceInfo.getTraceTimeStr());
+							listToday.add(obj);
 						}else if(traceInfo.getTraceTime().before(Calendar.getInstance()))
 						{
 							status = "2";
+							obj = new TaskInfoForJson(traceInfo.getId(),"1",status,traceInfo.getCustomerName(),traceInfo.getPerson().getPersonName(),traceInfo.getTel(),traceInfo.getTraceTimeStr());
+							listExpired.add(obj);
 						}else if(traceInfo.getTraceTime().after(Calendar.getInstance()))
 						{
 							status = "3";
+							obj = new TaskInfoForJson(traceInfo.getId(),"1",status,traceInfo.getCustomerName(),traceInfo.getPerson().getPersonName(),traceInfo.getTel(),traceInfo.getTraceTimeStr());
+							
+							listRecent.add(obj);
 						}
-					}else
-					{
-						status = "0";
 					}
-					
-					obj = new TaskInfoForJson(traceInfo.getId(),"1",status,traceInfo.getCustomerName(),traceInfo.getPerson().getPersonName(),traceInfo.getTel(),traceInfo.getTraceTimeStr());
 				}
-				
-				list.add(obj);
+//				list.add(obj);
 			}
 		}
 		
@@ -977,33 +1159,93 @@ public class CustomerInfoAction extends BaseActionSupport{
 				{
 					status = "4";
 					obj = new TaskInfoForJson(visitInfo.getId(),"2",status,visitInfo.getCustomerName(),personName,visitInfo.getTel(),visitInfo.getActualVisitTimeStr());
+					listFinished.add(obj);
 				}else
 				{
+					Calendar now = Calendar.getInstance();
 					if(visitInfo.getVisitTime() != null)
 					{
-						Calendar now = Calendar.getInstance();
 						if(visitInfo.getVisitTime().get(Calendar.YEAR) == now.get(Calendar.YEAR) && visitInfo.getVisitTime().get(Calendar.MONTH) == now.get(Calendar.MONTH) && visitInfo.getVisitTime().get(Calendar.DATE) == now.get(Calendar.DATE))
 						{
 							status = "1";
+							obj = new TaskInfoForJson(visitInfo.getId(),"2",status,visitInfo.getCustomerName(),personName,visitInfo.getTel(),visitInfo.getVisitTimeStr());
+							listToday.add(obj);
 						}else if(visitInfo.getVisitTime().before(Calendar.getInstance()))
 						{
 							status = "2";
+							obj = new TaskInfoForJson(visitInfo.getId(),"2",status,visitInfo.getCustomerName(),personName,visitInfo.getTel(),visitInfo.getVisitTimeStr());
+							listExpired.add(obj);
 						}else if(visitInfo.getVisitTime().after(Calendar.getInstance()))
 						{
 							status = "3";
+							obj = new TaskInfoForJson(visitInfo.getId(),"2",status,visitInfo.getCustomerName(),personName,visitInfo.getTel(),visitInfo.getVisitTimeStr());
+							
+							listRecent.add(obj);
 						}
-					}else
-					{
-						status = "0";
 					}
-					
-					obj = new TaskInfoForJson(visitInfo.getId(),"2",status,visitInfo.getCustomerName(),personName,visitInfo.getTel(),visitInfo.getVisitTimeStr());
 				}
-				
-				
-				list.add(obj);
 			}
 		}
+		
+		
+		//处理今日计划
+		//升序
+		if(listToday.size() > 3)
+		{
+			list.add(listToday.get(listToday.size()-1));
+			list.add(listToday.get(listToday.size()-2));
+			list.add(listToday.get(listToday.size()-3));
+		}else
+		{
+			for(int i=listToday.size()-1;i>0;i--)
+			{
+				list.add(listToday.get(i));
+			}
+		}
+		//处理已完成
+		//升序
+		if(listFinished.size() > 3)
+		{
+			list.add(listFinished.get(listFinished.size()-1));
+			list.add(listFinished.get(listFinished.size()-2));
+			list.add(listFinished.get(listFinished.size()-3));
+		}else
+		{
+			for(int i=listFinished.size()-1;i>0;i--)
+			{
+				list.add(listFinished.get(i));
+			}
+		}
+		
+		//处理已过期
+		//降序
+		if(listFinished.size() > 3)
+		{
+			list.add(listFinished.get(0));
+			list.add(listFinished.get(1));
+			list.add(listFinished.get(2));
+		}else
+		{
+			for(int i=0;i<listFinished.size();i++)
+			{
+				list.add(listFinished.get(i));
+			}
+		}
+		//处理最近
+		//降序
+		if(listRecent.size() > 3)
+		{
+			list.add(listRecent.get(0));
+			list.add(listRecent.get(1));
+			list.add(listRecent.get(2));
+		}else
+		{
+			for(int i=0;i<listRecent.size();i++)
+			{
+				list.add(listRecent.get(i));
+			}
+		}
+		
 		HttpServletRequest request = ServletActionContext.getRequest();
 		request.setAttribute("list", list);
 		request.setAttribute("jsonRootName", "task");
