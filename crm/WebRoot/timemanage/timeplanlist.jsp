@@ -54,7 +54,7 @@
 			$('#txt_query_endTime').datetimepicker({showTimepicker: false});
 			
 			$("#addbtn").click(function(){
-				parent.parent.tipsWindown("添加时间计划","iframe:openAddTimePlanAction.action","620","380","true","","true","no");
+				parent.parent.tipsWindown("添加日计划","iframe:openAddTimePlanAction.action","620","380","true","","true","no");
 				parent.parent.$("#windown-close").bind('click',function(){
 					window.location.href="./openTimePlanListAction.action";
 				});
@@ -69,7 +69,7 @@
 	  		$('a[name="edit"]').each(function(){
 	  			$(this).click(function(){
 	  				var url = $(this).attr("url");
-	  				parent.parent.tipsWindown("修改时间计划","iframe:"+url,"620","380","true","","true","no");
+	  				parent.parent.tipsWindown("修改日计划","iframe:"+url,"620","380","true","","true","no");
 	  				parent.parent.$("#windown-close").bind('click',function(){
 						window.location.href="./openTimePlanListAction.action";
 					});
@@ -131,13 +131,15 @@
 					<td height="26" width = "80px"  align="left" bgcolor="#FFFFFF">
 						<s:textfield id="txt_query_employee_name" name="employeeName" cssStyle="width:120px"></s:textfield>
 					</td>
-					 -->
+					
 					<td height="26" align="left" bgcolor="#FFFFFF" nowrap="nowrap">
 						<strong>计划类型：</strong>
 					</td>
 					<td height="26" width = "80px"  align="left" bgcolor="#FFFFFF">
 						<s:select id="sel_query_planType"  name="planType"  list="#{-1:'--全部--',0:'日报',1:'周报',2:'月报' }"  cssStyle="width: 120px;" ></s:select>
 					</td>
+					 -->
+					<s:hidden name="planType" value="0"></s:hidden>
 					<td height="26" width = "80px"  align="left" bgcolor="#FFFFFF" nowrap="nowrap">
 						<strong>提交时间：</strong>
 					</td>
@@ -163,9 +165,9 @@
          	<td align="center" background="<%=path %>/images/headerbg.jpg">  
    				<s:checkbox theme="simple" id="cbk_all" name="all"></s:checkbox>
    			</td>
-              <td align="center" background="<%=path %>/images/headerbg.jpg" nowrap="nowrap"><strong>业务员</strong></td>
+              <td align="center" background="<%=path %>/images/headerbg.jpg" nowrap="nowrap"><strong>提交人</strong></td>
               <td align="center" background="<%=path %>/images/headerbg.jpg" nowrap="nowrap"><strong>提交日期</strong></td>
-              <td align="center" background="<%=path %>/images/headerbg.jpg" nowrap="nowrap"><strong>计划类型</strong></td>
+              <!-- <td align="center" background="<%=path %>/images/headerbg.jpg" nowrap="nowrap"><strong>计划类型</strong></td> -->
                <td align="center" background="<%=path %>/images/headerbg.jpg" ><strong>总结</strong></td>
                <td align="center" background="<%=path %>/images/headerbg.jpg"><strong>计划</strong></td>
               <td align="center" background="<%=path %>/images/headerbg.jpg" nowrap="nowrap"><strong>操作</strong></td>
@@ -177,9 +179,10 @@
 		</td>
               <td height="26" align="center" bgcolor="#FFFFFF"><s:property value="employeeName"/></td>
               <td height="26" align="center" bgcolor="#FFFFFF"  nowrap="nowrap"><s:property value="submitTime"/></td>
+              <!-- 
               <td height="26" align="center" bgcolor="#FFFFFF">
               	<s:if test="planType==0">
-	              	日报
+	              	日计划
 	              	</s:if>
 	              	<s:elseif test="planType==1">
 	              	周报
@@ -188,6 +191,7 @@
 	              	月报
 	              	</s:else>
               	</td>
+              	 -->
                 <td height="26" align="left" bgcolor="#FFFFFF"><s:property value="memo"/></td>
                 <td height="26" align="left" bgcolor="#FFFFFF"><s:property value="planContent"/></td>
           <td height="26" colspan="2" align="center" bgcolor="#FFFFFF"  nowrap="nowrap">
