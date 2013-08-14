@@ -194,7 +194,7 @@ pageEncoding="UTF-8"%>
       		<table   border="0" cellpadding="5" cellspacing="1" bgcolor="#d5e4fd">
 		      <tr>
 					<td height="26" width = "80px" align="left" bgcolor="#FFFFFF" nowrap="nowrap">
-						<strong>计划人：</strong>
+						<strong>提交人：</strong>
 					</td>
 					<td height="26" width = "80px"  align="left" bgcolor="#FFFFFF">
 						<s:textfield id="txt_query_person_name" name="personName" cssStyle="width:120px"></s:textfield>
@@ -218,7 +218,7 @@ pageEncoding="UTF-8"%>
     <td valign="top">
       <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#d5e4fd">
         <tr>
-              <td align="center" background="<%=path %>/images/headerbg.jpg" nowrap="nowrap"><strong>计划人</strong></td>
+              <td align="center" background="<%=path %>/images/headerbg.jpg" nowrap="nowrap"><strong>提交人</strong></td>
               <td align="center" background="<%=path %>/images/headerbg.jpg" nowrap="nowrap"><strong>计划时间</strong></td>
               <td align="center" background="<%=path %>/images/headerbg.jpg" nowrap="nowrap"><strong>所在部门</strong></td>
                <td align="center" background="<%=path %>/images/headerbg.jpg" ><strong>职务  </strong></td>
