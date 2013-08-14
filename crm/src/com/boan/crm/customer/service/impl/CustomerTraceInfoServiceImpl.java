@@ -171,6 +171,13 @@ public class CustomerTraceInfoServiceImpl implements ICustomerTraceInfoService{
 		{
 			hql.append(" and (traceTime between :startTime and :endTime) ");
 		}
+		if(values.get("taskStatus") != null && values.get("taskStatus").equals("expired"))
+		{
+			hql.append(" and traceTime <= :now ");
+		}else if(values.get("taskStatus") != null && values.get("taskStatus").equals("recent"))
+		{
+			hql.append(" and traceTime >= :now ");
+		}
 		hql.append(" order by traceTime desc,actualTraceTime");
 		List<CustomerTraceInfo> data = customerTraceInfoDao.findForPage(hql.toString(), values, pagination.getStartIndex(), pagination.getPageSize());
 		hql.delete(0, hql.length());
@@ -234,6 +241,13 @@ public class CustomerTraceInfoServiceImpl implements ICustomerTraceInfoService{
 		}else if(values.get("taskType") != null && values.get("taskType").equals("3"))
 		{
 			hql.append(" and traceFlag = 0 and traceTime < :now ");
+		}
+		if(values.get("taskStatus") != null && values.get("taskStatus").equals("expired"))
+		{
+			hql.append(" and traceTime <= :now ");
+		}else if(values.get("taskStatus") != null && values.get("taskStatus").equals("recent"))
+		{
+			hql.append(" and traceTime >= :now ");
 		}
 		int totalRows = customerTraceInfoDao.findCountForPage(hql.toString(), values);
 		pagination.setTotalRows(totalRows);

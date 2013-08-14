@@ -25,6 +25,7 @@
 	<!-- 客户信息 -->
 	<package name="customerinfo" extends="phonejson">
 		<action name="getMyTaskListForPhoneAction" class="customerInfoAction" method="getMyTaskListForPhone"></action>
+		<action name="getMyTaskListByTypeForPhoneAction" class="customerInfoAction" method="getMyTaskListByTypeForPhone"></action>
 		<action name="finishedMyTaskForPhoneAction" class="customerInfoAction" method="finishedMyTaskForPhone"></action>
 		<action name="getMyCutomerListForPhoneAction" class="customerInfoAction" method="getMyCutomerListForPhone"></action>
 		<action name="getCutomerInfoForPhoneAction" class="customerInfoAction" method="getCutomerInfoForPhone"></action>
