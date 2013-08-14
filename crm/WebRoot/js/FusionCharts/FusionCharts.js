@@ -46,6 +46,24 @@ infosoftglobal.FusionCharts = function(swf, id, w, h, debugMode, registerWithJS,
 	this.addParam('allowScriptAccess', 'always');
 	
 	//Pass width and height to be appended as chartWidth and chartHeight
+	
+	
+	//////////////提示信息处理//////////////////
+	//chart.setTransparent(true);//设置透明
+	//此设置很重要，不然图表区域会显示白色的背景
+	this.addVariable("ChartNoDataText","没有数据显示!");
+	this.addVariable("LoadDataErrorText","加载数据出错!");
+	this.addVariable("XMLLoadingText","加载数据中......");
+	this.addVariable("InvalidXMLText","初始化......");
+	this.addVariable("ReadingDataText","读取数据......");
+	this.addVariable("ChartNotSupported","图表不支持!");
+	this.addVariable("LoadingText","加载......");
+	this.addVariable("RenderChartErrorText","加载数据出错!");   
+    //////////////提示信息处理//////////////////
+	
+	
+	
+	
 	this.addVariable('chartWidth', w);
 	this.addVariable('chartHeight', h);
 
