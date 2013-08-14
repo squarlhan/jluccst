@@ -72,7 +72,7 @@ $(document).ready(function(){
 						<td colspan="12"><strong><b>日期：<s:property value="monthlyMainInfo.planInterzone"></s:property></strong></b></td>
 					</tr>
 					<tr>
-						<td nowrap="nowrap"><strong><b>计划人：</strong></b></td>
+						<td nowrap="nowrap"><strong><b>提交人：</strong></b></td>
 						<td nowrap="nowrap"><strong><b><s:property value="monthlyMainInfo.personName"></s:property></strong></b></td>
 						<td nowrap="nowrap"><strong><b>部门：</strong></b></td>
 						<td nowrap="nowrap"><strong><b><s:property value="monthlyMainInfo.deptName"></s:property></strong></b></td>

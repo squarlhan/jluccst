@@ -103,7 +103,7 @@
 								<span onmousemove="this.setCapture();" onmouseout="this.releaseCapture();" onfocus="this.blur();"> 
 									<tr>
 										<td height="26" align="right" bgcolor="#FFFFFF">
-											<strong>计划人：</strong>
+											<strong>提交人：</strong>
 										</td>
 										<td height="26" align="left" bgcolor="#FFFFFF" >
 											<s:select tabindex="-1"  id="sel_personId"   name="weeklyMainInfo.personId" list="userList"  listKey="id"  listValue="userCName"  cssStyle="width: 160px;" ></s:select>

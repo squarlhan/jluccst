@@ -149,10 +149,12 @@
 								<table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#d5e4fd">
 									<tr>
 										<td height="26" align="right" bgcolor="#FFFFFF">
-											<strong>计划人：</strong>
+											<strong>提交人：</strong>
 										</td>
 										<td height="26" align="left" bgcolor="#FFFFFF" >
-											<s:select id="sel_personId"   name="weeklyMainInfo.personId" list="userList"  listKey="id"  listValue="userCName"  cssStyle="width: 160px;" ></s:select>
+											<span onmousemove="this.setCapture();" onmouseout="this.releaseCapture();" onfocus="this.blur();">
+												<s:select tabindex="-1" id="sel_personId"   name="weeklyMainInfo.personId" list="userList"  listKey="id"  listValue="userCName"  cssStyle="width: 160px;" ></s:select>
+											</span>
 										</td>
 										<td height="26" align="right" bgcolor="#FFFFFF">
 											<strong>职务：</strong>

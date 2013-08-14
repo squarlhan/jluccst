@@ -161,7 +161,7 @@
 		      <tr>
 		      		<!-- 
 					<td height="26" width = "80px" align="left" bgcolor="#FFFFFF" nowrap="nowrap">
-						<strong>计划人：</strong>
+						<strong>提交人：</strong>
 					</td>
 					<td height="26" width = "80px"  align="left" bgcolor="#FFFFFF">
 						<s:textfield id="txt_query_person_name" name="personName" cssStyle="width:120px"></s:textfield>
@@ -191,7 +191,7 @@
          	<td align="center" background="<%=path %>/images/headerbg.jpg">  
    				<s:checkbox theme="simple" id="cbk_all" name="all"></s:checkbox>
    			</td>
-              <td align="center" background="<%=path %>/images/headerbg.jpg" nowrap="nowrap"><strong>计划人</strong></td>
+              <td align="center" background="<%=path %>/images/headerbg.jpg" nowrap="nowrap"><strong>提交人</strong></td>
               <td align="center" background="<%=path %>/images/headerbg.jpg" nowrap="nowrap"><strong>计划时间</strong></td>
               <td align="center" background="<%=path %>/images/headerbg.jpg" nowrap="nowrap"><strong>所在部门</strong></td>
                <td align="center" background="<%=path %>/images/headerbg.jpg" ><strong>职务  </strong></td>
