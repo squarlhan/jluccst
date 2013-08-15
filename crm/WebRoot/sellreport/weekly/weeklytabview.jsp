@@ -62,7 +62,7 @@
 <s:hidden id="mainInfoId" name = "mainInfoId" ></s:hidden>
 <!-- tab开始 -->
 <div id="tt" class="tabs-container">
-	<div title="周计划主信息"  style="padding: 1px; display: none;" id="main">
+	<div title="周计划基本信息"  style="padding: 1px; display: none;" id="main">
 		<iframe id="iframe1" scrolling="none" frameborder="0" style="width:100%; height:100%" src="<%=src %>" ></iframe>
 	</div>
 	<div title="周计划明细"  style="padding: 1px; display:none;" id="item">

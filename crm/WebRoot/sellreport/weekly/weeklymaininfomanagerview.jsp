@@ -68,7 +68,7 @@ import="com.boan.crm.groupmanage.common.UserSession,com.boan.crm.groupmanage.ser
 												alt="">
 										</td>
 										<td background="<%=path %>/images/header_02.jpg">
-											<span class="STYLE1">您当前的位置：销售管理&gt;&gt;&gt;周计划查询</span>
+											<span class="STYLE1">您当前的位置：计划管理&gt;&gt;&gt;周计划查询</span>
 										</td>
 										<td width="12">
 											<img src="<%=path %>/images/header_03.jpg" width="12" height="36"
