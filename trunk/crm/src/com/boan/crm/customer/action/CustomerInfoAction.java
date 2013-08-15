@@ -1189,62 +1189,62 @@ public class CustomerInfoAction extends BaseActionSupport{
 		
 		
 		//处理今日计划
-		//升序
-		if(listToday.size() > 3)
-		{
-			list.add(listToday.get(listToday.size()-1));
-			list.add(listToday.get(listToday.size()-2));
-			list.add(listToday.get(listToday.size()-3));
-		}else
-		{
+//		//升序
+//		if(listToday.size() > 3)
+//		{
+//			list.add(listToday.get(listToday.size()-1));
+//			list.add(listToday.get(listToday.size()-2));
+//			list.add(listToday.get(listToday.size()-3));
+//		}else
+//		{
 			for(int i=listToday.size()-1;i>0;i--)
 			{
 				list.add(listToday.get(i));
 			}
-		}
+//		}
 		//处理已完成
 		//升序
-		if(listFinished.size() > 3)
-		{
-			list.add(listFinished.get(listFinished.size()-1));
-			list.add(listFinished.get(listFinished.size()-2));
-			list.add(listFinished.get(listFinished.size()-3));
-		}else
-		{
+//		if(listFinished.size() > 3)
+//		{
+//			list.add(listFinished.get(listFinished.size()-1));
+//			list.add(listFinished.get(listFinished.size()-2));
+//			list.add(listFinished.get(listFinished.size()-3));
+//		}else
+//		{
 			for(int i=listFinished.size()-1;i>0;i--)
 			{
 				list.add(listFinished.get(i));
 			}
-		}
+//		}
 		
 		//处理已过期
 		//降序
-		if(listFinished.size() > 3)
-		{
-			list.add(listFinished.get(0));
-			list.add(listFinished.get(1));
-			list.add(listFinished.get(2));
-		}else
-		{
+//		if(listFinished.size() > 3)
+//		{
+//			list.add(listFinished.get(0));
+//			list.add(listFinished.get(1));
+//			list.add(listFinished.get(2));
+//		}else
+//		{
 			for(int i=0;i<listFinished.size();i++)
 			{
 				list.add(listFinished.get(i));
 			}
-		}
+//		}
 		//处理最近
 		//降序
-		if(listRecent.size() > 3)
-		{
-			list.add(listRecent.get(0));
-			list.add(listRecent.get(1));
-			list.add(listRecent.get(2));
-		}else
-		{
+//		if(listRecent.size() > 3)
+//		{
+//			list.add(listRecent.get(0));
+//			list.add(listRecent.get(1));
+//			list.add(listRecent.get(2));
+//		}else
+//		{
 			for(int i=0;i<listRecent.size();i++)
 			{
 				list.add(listRecent.get(i));
 			}
-		}
+//		}
 		
 		HttpServletRequest request = ServletActionContext.getRequest();
 		request.setAttribute("list", list);
