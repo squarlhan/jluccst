@@ -1094,7 +1094,7 @@ public class CustomerInfoAction extends BaseActionSupport{
 		values.put("endTime", c2);
 		
 		Pagination<CustomerTraceInfo> paginationTraceInfo = new Pagination<CustomerTraceInfo>();
-		List<CustomerTraceInfo>  listTraceInfo = customerTraceInfoService.findCustomerTraceInfoForPage(values, paginationTraceInfo).getData();
+		List<CustomerTraceInfo> listTraceInfo = customerTraceInfoService.findCustomerTraceInfoForPage(values, paginationTraceInfo).getData();
 		List<TaskInfoForJson> listExpired = new ArrayList<TaskInfoForJson>();
 		List<TaskInfoForJson> listToday = new ArrayList<TaskInfoForJson>();
 		List<TaskInfoForJson> listRecent = new ArrayList<TaskInfoForJson>();
@@ -1197,7 +1197,7 @@ public class CustomerInfoAction extends BaseActionSupport{
 //			list.add(listToday.get(listToday.size()-3));
 //		}else
 //		{
-			for(int i=listToday.size()-1;i>0;i--)
+			for(int i=listToday.size()-1;i>=0;i--)
 			{
 				list.add(listToday.get(i));
 			}
@@ -1211,7 +1211,7 @@ public class CustomerInfoAction extends BaseActionSupport{
 //			list.add(listFinished.get(listFinished.size()-3));
 //		}else
 //		{
-			for(int i=listFinished.size()-1;i>0;i--)
+			for(int i=listFinished.size()-1;i>=0;i--)
 			{
 				list.add(listFinished.get(i));
 			}
@@ -1226,9 +1226,9 @@ public class CustomerInfoAction extends BaseActionSupport{
 //			list.add(listFinished.get(2));
 //		}else
 //		{
-			for(int i=0;i<listFinished.size();i++)
+			for(int i=0;i<listExpired.size();i++)
 			{
-				list.add(listFinished.get(i));
+				list.add(listExpired.get(i));
 			}
 //		}
 		//处理最近
