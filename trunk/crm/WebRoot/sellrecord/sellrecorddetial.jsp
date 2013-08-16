@@ -93,7 +93,9 @@
 	  			var allPrice= $("#txt_allPrice").val();
 	  			var memo= $("#txt_memo").val()+" ";
 	  			info = goodsProductId+"☆"+goodsName+"☆" + standard+"☆" + factory+"☆" + price+"☆"+number+"☆"+allPrice +"☆" + memo +"☆";
-	  			$.cookie('detial',info); 
+	  			//$.cookie('detial',info); 
+	  			parent.parent.parent.parent.detial ="";
+	  			parent.parent.parent.parent.detial = info;
 	  			parent.$("#windown-close").click();
 			});
 	  		$.fn.close();

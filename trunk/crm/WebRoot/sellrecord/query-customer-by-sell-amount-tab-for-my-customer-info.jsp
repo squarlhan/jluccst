@@ -91,8 +91,22 @@
 	  		
 		  		//日期控件
 				$('#txt_bargainTime').datetimepicker({showTimepicker: false});
+		  		
+				$("#txt_realCollection").blur(function(){
+					//重新计算qiank额
+					var newReceivable = $("#txt_receivable").val();
+					//重新计算欠款额
+				    var newDebt = newReceivable - $(this).val();
+				    if(newDebt.toFixed(2)=="-0.00"){
+				    	newDebt="0.00";
+				    }else{
+				    	newDebt = newDebt.toFixed(2);
+				    }
+				    $("#txt_debt").val(newDebt); //欠款
+				});
+				
 		  		$("#btn_add").click(function(){
-		  			$.cookie('detial', '', { expires: -1 }); //先清理一下cookie，防止原来没有清理的数据还存在
+		  			//$.cookie('detial', '', { expires: -1 }); //先清理一下cookie，防止原来没有清理的数据还存在
 		  			var goodsTypeId = $("#txt_goodsType").val();
 		  			if(goodsTypeId==""){
 		  				alert('请先选择产品种类！');
@@ -101,8 +115,10 @@
 		  			}
 					tipsWindown("商品明细","iframe:openAddSellRecordDetialAction.action?goodsTypeId="+goodsTypeId,"780","300","true","","true","no");
 					$("#windown-close").bind('click',function(){
-						var detials = $.cookie('detial'); // 读取 cookie中的被选择的产品
-			  			$.cookie('detial', '', { expires: -1 }); //读取完毕后删除cookie
+						//var detials = $.cookie('detial'); // 读取 cookie中的被选择的产品
+			  			//$.cookie('detial', '', { expires: -1 }); //读取完毕后删除cookie
+			  			var detials =parent.parent.parent.detial;
+			  			parent.parent.parent.detial="";//删除临时值
 	  					if(detials!=null && detials!=undefined){
 	  						var info = detials.split("☆");//☆
 	  						if(info[1]!=undefined && info[2]!=undefined && info[3]!=undefined&& info[4]!=undefined&& info[5]!=undefined&& info[6]!=undefined){
@@ -128,15 +144,13 @@
 				  			    var receivable=$("#txt_receivable").val() * 1;
 				  			    var temp =info[4]*info[5];
 				  				receivable=temp+receivable;
-				  				 $("#txt_receivable").val(receivable);
-				  				 
-				  				 
+				  				 $("#txt_receivable").val(receivable.toFixed(2));
 				  				var realCollection=$("#txt_realCollection").val() * 1;
 				  			    var temp2 =info[6]*1;
 				  			  	realCollection=temp2+realCollection;
-				  				$("#txt_realCollection").val(realCollection);
-				  				$("#txt_debt").val(receivable-realCollection);
-				  			  	$("#txt_receivable").focus();
+				  			  	$("#txt_receivable").focus(); //应收
+				  			    $("#txt_realCollection").val(realCollection.toFixed(2));//实收
+				  			    $("#txt_debt").val((receivable-realCollection).toFixed(2)); //欠款
 	  						}
 	  					}
 					});
@@ -160,9 +174,14 @@
 		  		*/
 	  			$("#btn_delAll").click(function(){
 	  				if(window.confirm("您确定要删除所选信息吗？")){
+	  					//重新计算数值
+	  					$(":checkbox[name='ids']:checked").each(function(){
+		  					$.fn.calculation($(this));
+	  					});
+
 		  				$(":checkbox[name='ids']:checked").each(function(){
 		  					if($(this).parent().parent().find("a")){
-		  						var url = $(this).parent().parent().find("a").attr("url")
+		  						var url = $(this).parent().parent().find("a").attr("url");
 		  		  				$.post(url, null, function(data){});
 		  					}
 		  					$(this).parent().parent().remove();
@@ -249,9 +268,41 @@
 	  	 * @param obj 元素本身
 	  	 */
 	  	$.fn.deletetemp = function(obj){
+	  		//重新计算数值
+			$.fn.calculation(obj);
 	  		obj.parent().parent().remove();
 	  	};
-		
+	  	
+		/**
+	  	 *  数值计算
+	  	 * @param obj 元素本身
+	  	 */
+	  	$.fn.calculation = function(obj){
+	  		//本行的预付额
+			var yf = obj.parent().parent().find("td:eq(6)").text();
+			//本行的应收额
+			var ys =obj.parent().parent().find("td:eq(4)").text()*obj.parent().parent().find("td:eq(5)").text();
+			//重新计算应收额
+			var newReceivable = $("#txt_receivable").val()-ys;
+			 if(newReceivable.toFixed(2)=="-0.00"){
+			 	newReceivable="0.00";
+		     }else{
+		    	newReceivable = newReceivable.toFixed(2);
+		    }
+			
+			$("#txt_receivable").val(newReceivable);
+			//重新计算实收额
+			var newRealCollection = $("#txt_realCollection").val()-yf ;
+		    $("#txt_realCollection").val( newRealCollection.toFixed(2) );//实收
+			//重新计算欠款额
+		    var newDebt = newReceivable - newRealCollection;
+		    if(newDebt.toFixed(2)=="-0.00"){
+		    	newDebt="0.00";
+		    }else{
+		    	newDebt = newDebt.toFixed(2);
+		    }
+		    $("#txt_debt").val(newDebt); //欠款
+		};
 	</script>
   </head>
   
@@ -368,27 +419,29 @@
 					</fieldset>
 					<fieldset >
 					<legend>结算信息</legend>
-						<span>
 						<table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#d5e4fd">
 							<tr>
-								<span onmousemove="this.setCapture();" onmouseout="this.releaseCapture();" onfocus="this.blur();">
 								<td height="26" align="right" bgcolor="#FFFFFF" nowrap="nowrap" width="100px">
 									<strong >应收总计：</strong>
 								</td>
 								<td height="26" align="left" bgcolor="#FFFFFF"  nowrap="nowrap" width="150px">
-									<s:textfield id="txt_receivable" name="sellRecord.receivable" cssStyle="width:100px"  readonly="true"></s:textfield>元
+									<span onmousemove="this.setCapture();" onmouseout="this.releaseCapture();" onfocus="this.blur();">
+										<s:textfield id="txt_receivable" name="sellRecord.receivable" cssStyle="width:100px"  readonly="true"></s:textfield>元
+									</span>
 								</td>
 								<td height="26" align="right" bgcolor="#FFFFFF" nowrap="nowrap" width="80px">
 									<strong>实 收：</strong>
 								</td>
 								<td height="26" align="left" bgcolor="#FFFFFF"  nowrap="nowrap" width="190px">
-									<s:textfield id="txt_realCollection" name="sellRecord.realCollection" cssStyle="width:100px"   readonly="true"></s:textfield>元
+									<s:textfield id="txt_realCollection" name="sellRecord.realCollection" cssStyle="width:100px"  onkeypress="if((event.keyCode<48 || event.keyCode>57) && event.keyCode!=46 || /\.\d\d$/.test(value))event.returnValue=false"></s:textfield>
 								</td>
 								<td height="26" align="right" bgcolor="#FFFFFF" nowrap="nowrap" width="80px">
 									<strong>欠 款：</strong>
 								</td>
 								<td height="26" align="left" bgcolor="#FFFFFF" nowrap="nowrap">
-									<s:textfield  id="txt_debt" name="sellRecord.debt" cssStyle="width:100px"   readonly="true"></s:textfield>元
+									<span onmousemove="this.setCapture();" onmouseout="this.releaseCapture();" onfocus="this.blur();">
+										<s:textfield  id="txt_debt" name="sellRecord.debt" cssStyle="width:100px"   readonly="true"></s:textfield>元
+									</span>
 								</td>
 								</span>
 								<td height="26" align="right" bgcolor="#FFFFFF" nowrap="nowrap" width="100px">
@@ -399,7 +452,6 @@
 								</td>
 							</tr>
 						</table>
-						</span>
 					</fieldset>
 					<fieldset >
 					<legend>短信还款提醒</legend>
