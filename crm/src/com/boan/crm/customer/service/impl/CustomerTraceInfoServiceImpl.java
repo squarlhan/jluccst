@@ -178,7 +178,7 @@ public class CustomerTraceInfoServiceImpl implements ICustomerTraceInfoService{
 		{
 			hql.append(" and traceTime >= :now ");
 		}
-		hql.append(" order by traceTime desc,actualTraceTime");
+		hql.append(" order by traceTime asc,actualTraceTime");
 		List<CustomerTraceInfo> data = customerTraceInfoDao.findForPage(hql.toString(), values, pagination.getStartIndex(), pagination.getPageSize());
 		hql.delete(0, hql.length());
 		if(values.get("showAllFlag") != null && values.get("showAllFlag").equals("1"))
