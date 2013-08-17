@@ -90,7 +90,6 @@ public class CustomerVisitInfoForPhoneAction extends BaseActionSupport{
 			obj.setEmail(email);
 			obj.setVisitOption(connectWay);
 			obj.setVisitPersonId(followPeople);
-			obj.setCompanyId(companyId);
 			customerVisitInfoService.save(obj);
 			
 			message = "success";
@@ -123,6 +122,9 @@ public class CustomerVisitInfoForPhoneAction extends BaseActionSupport{
 		
 		if(realTime != null && realTime.length() > 0)
 			obj.setActualVisitTime(MySimpleDateFormat.parse( realTime,"yyyy-MM-dd HH:mm:ss"));
+		else
+			obj.setActualVisitTime(null);
+		
 		if(time != null && time.length() > 0)
 			obj.setVisitTime(MySimpleDateFormat.parse( time,"yyyy-MM-dd HH:mm:ss"));
 		else
