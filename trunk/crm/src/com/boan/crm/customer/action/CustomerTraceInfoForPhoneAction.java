@@ -87,7 +87,6 @@ public class CustomerTraceInfoForPhoneAction extends BaseActionSupport{
 			obj.setTraceOption(connectWay);
 			//obj.setTracePerson
 			obj.setTracePersonId(followPeople);
-			obj.setCompanyId(companyId);
 			customerTraceInfoService.save(obj);
 			
 			message = "success";
@@ -120,6 +119,9 @@ public class CustomerTraceInfoForPhoneAction extends BaseActionSupport{
 		obj.setTel(telphone);
 		if(realTime != null && realTime.length() > 0)
 			obj.setActualTraceTime(MySimpleDateFormat.parse( realTime,"yyyy-MM-dd HH:mm:ss"));
+		else
+			obj.setActualTraceTime(null);
+		
 		if(time != null && time.length() > 0)
 			obj.setTraceTime(MySimpleDateFormat.parse( time,"yyyy-MM-dd HH:mm:ss"));
 		else
