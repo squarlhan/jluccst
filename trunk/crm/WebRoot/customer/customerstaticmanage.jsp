@@ -43,30 +43,42 @@
 </head>
 <title>客户信息统计</title>
 <body>
-<div id="tt" class="tabs-container" style="width:100%">
+<table width="100%" border="0" cellspacing="5" cellpadding="0">
+  <tr>
+    <td colspan="2" style="height:36px;"><table id="__01" width="100%" height="36" border="0" cellpadding="0" cellspacing="0">
+        <tr>
+          <td width="11"><img src="../images/header_01.jpg" width="11" height="36" alt=""></td>
+          <td background="../images/header_02.jpg"><span class="STYLE1">您当前的位置：客户管理&gt;&gt;&gt;客户统计信息</span></td>
+          <td width="12"><img src="../images/header_03.jpg" width="12" height="36" alt=""></td>
+        </tr>
+        </table>
+    </td>
+  </tr>
+</table>
+<div id="tt" class="tabs-container" style="width:100%;height:200">
 	<div title="客户分类信息统计"
 		style="padding: 1px; display: none;">
-		<iframe scrolling="auto" frameborder="0" style="width:100%; height:100%"
+		<iframe scrolling="auto" frameborder="0" style="width:100%; height:90%"
 			src="customerStaticInfo.action?flag=category"></iframe>
 	</div>
 	<div title="客户来源信息统计"
 		style="padding: 1px; display: none;" id="traceDiv">
-		<iframe id="traceDivFrame" scrolling="auto" frameborder="0" style="width:100%; height:100%"
+		<iframe id="traceDivFrame" scrolling="auto" frameborder="0" style="width:100%; height:90%"
 			src="about:blank" url="customerStaticInfo.action?flag=source"></iframe>
 	</div>
 	<div title="客户忠诚度信息统计"
 		style="padding: 1px; display: none;">
-		<iframe scrolling="auto" frameborder="0" style="width:100%; height:100%"
+		<iframe scrolling="auto" frameborder="0" style="width:100%; height:90%"
 			src="about:blank" url="customerStaticInfo.action?flag=maturity"></iframe>
 	</div>
 	<div title="客户业务进展信息统计"
 		style="padding: 1px; display: none;" id="visitDiv">
-		<iframe id="visitDivFrame" scrolling="auto" frameborder="0" style="width:100%; height:100%"
+		<iframe id="visitDivFrame" scrolling="auto" frameborder="0" style="width:100%; height:90%"
 			src="about:blank" url="customerStaticInfo.action?flag=progress"></iframe>
 	</div>
 	<div title="客户开发程度信息统计"
 		style="padding: 1px; display: none;">
-		<iframe scrolling="auto" frameborder="0" style="width:100%; height:100%"
+		<iframe scrolling="auto" frameborder="0" style="width:100%; height:90%"
 			src="about:blank" url="customerStaticInfo.action?flag=level"></iframe>
 	</div>
 </div>
