@@ -161,6 +161,10 @@
 		  		$("a[name='del_one']").each(function(){
 		  			$(this).click(function(){
 		  				if(window.confirm("您确定要删除这条信息吗？")){
+		  					
+		  					//重新计算数值
+		  					$.fn.calculation($(this));
+		  				
 			  				var url = $(this).attr("url");
 			  				$.post(url, null, function(data){});
 			  				$(this).parent().parent().remove();
