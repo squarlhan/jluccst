@@ -607,86 +607,87 @@ public class CustomerVisitInfoAction extends BaseActionSupport{
 		
 		if(inserFLag)
 		{
-			ActionPlan actionPlan = new ActionPlan();
-			actionPlan.setDeptId(sessionDeptId);
-			actionPlan.setCreateTime(Calendar.getInstance());
-			actionPlan.setDeptName(sessionDeptName);
-			actionPlan.setEmployeeId(obj.getSalesmanId());
-			actionPlan.setEmployeeName(obj.getSalesman());
-			actionPlan.setOrganId(sessionCompanyId);
-			actionPlan.setPersonId(obj.getSalesmanId());
-			actionPlan.setPlanType("4");
-			StringBuilder sb = new StringBuilder();
-			sb.append("回访计划：");
-			sb.append(CalendarUtils.toLongStringNoSecond(obj.getVisitTime()));
-			sb.append(",对客户[");
-			sb.append(obj.getCustomerName());
-			sb.append("]进行["+dataDictionaryService.get(obj.getVisitOption()).getName()+"]方式回访");
-			sb.append(",回访任务：[");
-			sb.append(obj.getTask());
-			sb.append("]。");
-			actionPlan.setPlanContent(sb.toString());
-			actionPlan.setSubmitTime(Calendar.getInstance());
-			
-			actionPlanService.saveOrUpdateActionPlan(actionPlan);
-			
-			TimePlan timePlan = new TimePlan();
-			timePlan.setCreateTime(Calendar.getInstance());
-			timePlan.setDeptId(sessionDeptId);
-			timePlan.setDeptName(sessionDeptName);
-			timePlan.setEmployeeId(sessionUserId);
-			timePlan.setEmployeeName(sessionUserCName);
-			timePlan.setPersonId(sessionUserId);
-			timePlan.setOrganId(sessionCompanyId);
-			timePlan.setPlanType("0");
-			timePlan.setSubmitTime(Calendar.getInstance());
-			timePlanService.saveOrUpdateTimePlan(timePlan, 0, sb.toString(), obj.getId());
+			//暂时屏蔽2013-8-18
+//			ActionPlan actionPlan = new ActionPlan();
+//			actionPlan.setDeptId(sessionDeptId);
+//			actionPlan.setCreateTime(Calendar.getInstance());
+//			actionPlan.setDeptName(sessionDeptName);
+//			actionPlan.setEmployeeId(obj.getSalesmanId());
+//			actionPlan.setEmployeeName(obj.getSalesman());
+//			actionPlan.setOrganId(sessionCompanyId);
+//			actionPlan.setPersonId(obj.getSalesmanId());
+//			actionPlan.setPlanType("4");
+//			StringBuilder sb = new StringBuilder();
+//			sb.append("回访计划：");
+//			sb.append(CalendarUtils.toLongStringNoSecond(obj.getVisitTime()));
+//			sb.append(",对客户[");
+//			sb.append(obj.getCustomerName());
+//			sb.append("]进行["+dataDictionaryService.get(obj.getVisitOption()).getName()+"]方式回访");
+//			sb.append(",回访任务：[");
+//			sb.append(obj.getTask());
+//			sb.append("]。");
+//			actionPlan.setPlanContent(sb.toString());
+//			actionPlan.setSubmitTime(Calendar.getInstance());
+//			
+//			actionPlanService.saveOrUpdateActionPlan(actionPlan);
+//			
+//			TimePlan timePlan = new TimePlan();
+//			timePlan.setCreateTime(Calendar.getInstance());
+//			timePlan.setDeptId(sessionDeptId);
+//			timePlan.setDeptName(sessionDeptName);
+//			timePlan.setEmployeeId(sessionUserId);
+//			timePlan.setEmployeeName(sessionUserCName);
+//			timePlan.setPersonId(sessionUserId);
+//			timePlan.setOrganId(sessionCompanyId);
+//			timePlan.setPlanType("0");
+//			timePlan.setSubmitTime(Calendar.getInstance());
+//			timePlanService.saveOrUpdateTimePlan(timePlan, 0, sb.toString(), obj.getId());
 			
 			
 		}else
 		{
 			if (visitFlag != null && visitFlag.equals("1"))
 			{
-				
-				if(!timePlanService.hasTimePlanForTrackOrVisit(obj.getId()))
-				{
-					TimePlan timePlan = new TimePlan();
-					timePlan.setCreateTime(Calendar.getInstance());
-					timePlan.setDeptId(sessionDeptId);
-					timePlan.setDeptName(sessionDeptName);
-					timePlan.setEmployeeId(sessionUserId);
-					timePlan.setEmployeeName(sessionUserCName);
-					timePlan.setPersonId(sessionUserId);
-					timePlan.setOrganId(sessionCompanyId);
-					timePlan.setPlanType("0");
-					timePlan.setSubmitTime(Calendar.getInstance());
-					StringBuilder sb = new StringBuilder();
-					sb.append("回访完成：");
-					sb.append(CalendarUtils.toLongStringNoSecond(obj.getVisitTime()));
-					sb.append(",对客户[");
-					sb.append(obj.getCustomerName());
-					sb.append("]进行["+dataDictionaryService.get(obj.getVisitOption()).getName()+"]方式回访");
-					sb.append(",回访任务：[");
-					sb.append(obj.getTask());
-					sb.append("]。");
-					
-					timePlanService.saveOrUpdateTimePlan(timePlan, 1, sb.toString(), obj.getId());
-				}else
-				{
-					TimePlanAndTrackOrVisitRelation timePlanAndTrackOrVisitRelation = timePlanService.getTimePlanForTrackOrVisit(obj.getId());
-					TimePlan objTemp = timePlanService.getTimePlanById(timePlanAndTrackOrVisitRelation.getTime_Planand());
-					StringBuilder sb = new StringBuilder();
-					sb.append("回访完成：");
-					sb.append(CalendarUtils.toLongStringNoSecond(obj.getActualVisitTime()));
-					sb.append(",对客户[");
-					sb.append(obj.getCustomerName());
-					sb.append("]进行["+dataDictionaryService.get(obj.getVisitOption()).getName()+"]方式回访");
-					sb.append(",回访任务：[");
-					sb.append(obj.getTask());
-					sb.append("]。");
-					objTemp.setMemo(sb.toString());
-					timePlanService.saveOrUpdateTimePlan(objTemp);
-				}
+				//暂时屏蔽2013-8-18
+//				if(!timePlanService.hasTimePlanForTrackOrVisit(obj.getId()))
+//				{
+//					TimePlan timePlan = new TimePlan();
+//					timePlan.setCreateTime(Calendar.getInstance());
+//					timePlan.setDeptId(sessionDeptId);
+//					timePlan.setDeptName(sessionDeptName);
+//					timePlan.setEmployeeId(sessionUserId);
+//					timePlan.setEmployeeName(sessionUserCName);
+//					timePlan.setPersonId(sessionUserId);
+//					timePlan.setOrganId(sessionCompanyId);
+//					timePlan.setPlanType("0");
+//					timePlan.setSubmitTime(Calendar.getInstance());
+//					StringBuilder sb = new StringBuilder();
+//					sb.append("回访完成：");
+//					sb.append(CalendarUtils.toLongStringNoSecond(obj.getVisitTime()));
+//					sb.append(",对客户[");
+//					sb.append(obj.getCustomerName());
+//					sb.append("]进行["+dataDictionaryService.get(obj.getVisitOption()).getName()+"]方式回访");
+//					sb.append(",回访任务：[");
+//					sb.append(obj.getTask());
+//					sb.append("]。");
+//					
+//					timePlanService.saveOrUpdateTimePlan(timePlan, 1, sb.toString(), obj.getId());
+//				}else
+//				{
+//					TimePlanAndTrackOrVisitRelation timePlanAndTrackOrVisitRelation = timePlanService.getTimePlanForTrackOrVisit(obj.getId());
+//					TimePlan objTemp = timePlanService.getTimePlanById(timePlanAndTrackOrVisitRelation.getTime_Planand());
+//					StringBuilder sb = new StringBuilder();
+//					sb.append("回访完成：");
+//					sb.append(CalendarUtils.toLongStringNoSecond(obj.getActualVisitTime()));
+//					sb.append(",对客户[");
+//					sb.append(obj.getCustomerName());
+//					sb.append("]进行["+dataDictionaryService.get(obj.getVisitOption()).getName()+"]方式回访");
+//					sb.append(",回访任务：[");
+//					sb.append(obj.getTask());
+//					sb.append("]。");
+//					objTemp.setMemo(sb.toString());
+//					timePlanService.saveOrUpdateTimePlan(objTemp);
+//				}
 			}
 		}
 		
