@@ -48,7 +48,7 @@ public class CustomerInfoForPhoneAction extends BaseActionSupport{
 	private String detailAddress = "";
 	private String id = "";
 	private String message = "";
-	private String commpanyId= "";
+	private String companyId= "";
 	
 	
 	/**
@@ -59,7 +59,7 @@ public class CustomerInfoForPhoneAction extends BaseActionSupport{
 	{
 		CustomerInfo customerInfo = new CustomerInfo();
 		
-		customerInfo.setCompanyId(commpanyId);
+		customerInfo.setCompanyId(companyId);
 		
 		customerInfo.setCreatorId(userId);
 		customerInfo.setSalesmanId(userId);
@@ -194,10 +194,10 @@ public class CustomerInfoForPhoneAction extends BaseActionSupport{
 	public void setMessage(String message) {
 		this.message = message;
 	}
-	public String getCommpanyId() {
-		return commpanyId;
+	public String getCompanyId() {
+		return companyId;
 	}
-	public void setCommpanyId(String commpanyId) {
-		this.commpanyId = commpanyId;
+	public void setCompanyId(String companyId) {
+		this.companyId = companyId;
 	}
 }
