@@ -56,7 +56,7 @@
     <td colspan="2" style="height:36px;"><table id="__01" width="100%" height="36" border="0" cellpadding="0" cellspacing="0">
         <tr>
           <td width="11"><img src="../images/header_01.jpg" width="11" height="36" alt=""></td>
-          <td background="../images/header_02.jpg"><span class="STYLE1">您当前的位置：我的客户管理&gt;&gt;&gt;我的统计</span></td>
+          <td background="../images/header_02.jpg"><span class="STYLE1">您当前的位置：客户查询&gt;&gt;&gt;信息统计</span></td>
           <td width="12"><img src="../images/header_03.jpg" width="12" height="36" alt=""></td>
         </tr>
         </table>
