@@ -1267,12 +1267,14 @@ public class CustomerInfoAction extends BaseActionSupport{
 				CustomerTraceInfo customerTrace = customerTraceInfoService.get(id);
 				//customerTraceInfoService.deleteCustomerTraceInfo(taskId);
 				customerTrace.setTraceFlag("1");
+				customerTrace.setActualTraceTime(Calendar.getInstance());
 				customerTraceInfoService.save(customerTrace);
 			}else
 			{
 				customerVisitInfoService.deleteCustomerVisitInfo(taskId);
 				CustomerVisitInfo customerVisit = customerVisitInfoService.get(id);
 				//customerTraceInfoService.deleteCustomerTraceInfo(taskId);
+				customerVisit.setActualVisitTime(Calendar.getInstance());
 				customerVisit.setVisitFlag("1");
 				customerVisitInfoService.save(customerVisit);
 			}
