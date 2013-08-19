@@ -20,6 +20,7 @@ import com.boan.crm.customer.service.IContractPersonService;
 import com.boan.crm.customer.service.ICustomerVisitInfoService;
 import com.boan.crm.groupmanage.service.IUserService;
 import com.boan.crm.utils.calendar.CalendarUtils;
+import com.boan.crm.utils.calendar.CurrentDateTime;
 import com.boan.crm.utils.page.Pagination;
 
 /**
@@ -265,7 +266,7 @@ public class CustomerVisitInfoServiceImpl implements ICustomerVisitInfoService{
 					
 					if(customerVisitInfo.getActualVisitTime() != null)
 						customerVisitInfo.setActualVisitTimeStr(CalendarUtils.toLongStringNoSecond(customerVisitInfo.getActualVisitTime()));
-					customerVisitInfo.setVisitTimeStr(CalendarUtils.toLongStringNoSecond(customerVisitInfo.getVisitTime()));
+					customerVisitInfo.setVisitTimeStr(CurrentDateTime.getCurrentDateTime(customerVisitInfo.getVisitTime()));
 				}catch(Exception e)
 				{
 					e.printStackTrace();
