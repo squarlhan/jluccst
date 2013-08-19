@@ -20,6 +20,7 @@ import com.boan.crm.customer.service.IContractPersonService;
 import com.boan.crm.customer.service.ICustomerTraceInfoService;
 import com.boan.crm.groupmanage.service.IUserService;
 import com.boan.crm.utils.calendar.CalendarUtils;
+import com.boan.crm.utils.calendar.CurrentDateTime;
 import com.boan.crm.utils.page.Pagination;
 
 /**
@@ -273,7 +274,7 @@ public class CustomerTraceInfoServiceImpl implements ICustomerTraceInfoService{
 					}
 					customerTraceInfo.setSalesman(userService.getUserById(customerTraceInfo.getSalesmanId()).getUserCName());
 					customerTraceInfo.setPerson(contractPersonService.get(customerTraceInfo.getTracePersonId()));
-					customerTraceInfo.setTraceTimeStr(CalendarUtils.toLongStringNoSecond(customerTraceInfo.getTraceTime()));
+					customerTraceInfo.setTraceTimeStr(CurrentDateTime.getCurrentDateTime(customerTraceInfo.getTraceTime()));
 					if(customerTraceInfo.getActualTraceTime() != null)
 						customerTraceInfo.setActualTraceTimeStr(CalendarUtils.toLongStringNoSecond(customerTraceInfo.getActualTraceTime()));
 				}catch(Exception e)
