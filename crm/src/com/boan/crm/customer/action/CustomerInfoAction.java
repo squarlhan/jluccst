@@ -1094,6 +1094,9 @@ public class CustomerInfoAction extends BaseActionSupport{
 		values.put("endTime", c2);
 		
 		Pagination<CustomerTraceInfo> paginationTraceInfo = new Pagination<CustomerTraceInfo>();
+		
+		paginationTraceInfo.setPageSize(100);
+		
 		List<CustomerTraceInfo> listTraceInfo = customerTraceInfoService.findCustomerTraceInfoForPage(values, paginationTraceInfo).getData();
 		List<TaskInfoForJson> listExpired = new ArrayList<TaskInfoForJson>();
 		List<TaskInfoForJson> listToday = new ArrayList<TaskInfoForJson>();
@@ -1141,7 +1144,7 @@ public class CustomerInfoAction extends BaseActionSupport{
 		}
 		
 		Pagination<CustomerVisitInfo> paginationVisitInfo = new Pagination<CustomerVisitInfo>();
-		
+		paginationVisitInfo.setPageSize(100);
 		List<CustomerVisitInfo>  listVisitInfo = customerVisitInfoService.findCustomerVisitInfoForPage(values, paginationVisitInfo).getData();
 		if(listVisitInfo != null && listVisitInfo.size() >0)
 		{
