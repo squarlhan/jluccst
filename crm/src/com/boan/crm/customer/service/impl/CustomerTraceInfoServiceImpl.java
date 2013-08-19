@@ -276,7 +276,7 @@ public class CustomerTraceInfoServiceImpl implements ICustomerTraceInfoService{
 					customerTraceInfo.setPerson(contractPersonService.get(customerTraceInfo.getTracePersonId()));
 					customerTraceInfo.setTraceTimeStr(CurrentDateTime.getCurrentDateTime(customerTraceInfo.getTraceTime()));
 					if(customerTraceInfo.getActualTraceTime() != null)
-						customerTraceInfo.setActualTraceTimeStr(CalendarUtils.toLongStringNoSecond(customerTraceInfo.getActualTraceTime()));
+						customerTraceInfo.setActualTraceTimeStr(CurrentDateTime.getCurrentDateTime(customerTraceInfo.getActualTraceTime()));
 				}catch(Exception e)
 				{
 					e.printStackTrace();
