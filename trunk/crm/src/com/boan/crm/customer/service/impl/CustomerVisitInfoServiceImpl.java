@@ -265,7 +265,7 @@ public class CustomerVisitInfoServiceImpl implements ICustomerVisitInfoService{
 					customerVisitInfo.setPerson(contractPersonService.get(customerVisitInfo.getVisitPersonId()));
 					
 					if(customerVisitInfo.getActualVisitTime() != null)
-						customerVisitInfo.setActualVisitTimeStr(CalendarUtils.toLongStringNoSecond(customerVisitInfo.getActualVisitTime()));
+						customerVisitInfo.setActualVisitTimeStr(CurrentDateTime.getCurrentDateTime(customerVisitInfo.getActualVisitTime()));
 					customerVisitInfo.setVisitTimeStr(CurrentDateTime.getCurrentDateTime(customerVisitInfo.getVisitTime()));
 				}catch(Exception e)
 				{
