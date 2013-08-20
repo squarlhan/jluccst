@@ -40,9 +40,29 @@
 	});
 //-->
 </script>
+<style type="text/css">
+<!--
+.STYLE1 {
+	color: #FFFFFF;
+	font-weight: bold;
+}
+-->
+</style>
 </head>
 <title>客户信息录入</title>
 <body>
+<table width="100%" border="0" cellspacing="0" cellpadding="0">
+  <tr>
+    <td><table id="__01" width="100%" border="0" cellpadding="0" cellspacing="0">
+        <tr>
+          <td width="11"><img src="../images/header_01.jpg" width="11" height="36" alt=""></td>
+          <td background="../images/header_02.jpg"><span class="STYLE1">您当前的位置：客户管理&gt;&gt;&gt;客户信息</span></td>
+          <td width="12"><img src="../images/header_03.jpg" width="12" height="36" alt=""></td>
+        </tr>
+        </table>
+    </td>
+  </tr>
+</table>
 <div id="tt" class="tabs-container" style="width:100%">
 	<div title="基本信息"
 		style="padding: 1px; display: none;">

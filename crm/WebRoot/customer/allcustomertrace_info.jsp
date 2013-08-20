@@ -221,6 +221,13 @@
 	               	if(!validator.form()){
 						return false;
 					}
+					
+					if(document.getElementById("task").value.length > 500)
+					{
+						alert("字数超过500汉字!");
+						return false;
+					}
+					
 					form1.action = "customer/saveAllTraceInfo.action";
 					form1.customerId.value  = form1.customerId_t.value;
 	               	form1.submit();

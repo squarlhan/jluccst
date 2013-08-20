@@ -40,6 +40,14 @@
 	});
 //-->
 </script>
+<style type="text/css">
+<!--
+.STYLE1 {
+	color: #FFFFFF;
+	font-weight: bold;
+}
+-->
+</style>
 </head>
 <title>客户信息统计</title>
 <body>
