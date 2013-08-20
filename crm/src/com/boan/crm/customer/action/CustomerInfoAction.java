@@ -656,15 +656,13 @@ public class CustomerInfoAction extends BaseActionSupport{
 				}
 			}
 			map.put("visit", listVisitTask);
-			Calendar temp = Calendar.getInstance();
-			temp.set(Calendar.DATE, -15);
-			Calendar beginTime =temp;
-			Calendar endTime = Calendar.getInstance();
 			Map<String,Object> params = new HashMap<String, Object>();
 //			params.put("personId", this.sessionUserId);
-			 
-			params.put("beginTime", beginTime);
-			params.put("endTime", endTime); 
+			if(startTime != null)
+				params.put("startTime", MySimpleDateFormat.parse(startTime,"yyyy-MM-dd HH:mm:ss"));
+			if(endTime != null)
+				params.put("endTime", MySimpleDateFormat.parse(endTime,"yyyy-MM-dd HH:mm:ss"));
+
 			params.put("employeeId", userId);
 			
 			List<TimePlan> listTimePlan = timePlanService.findTimePlan(params);
