@@ -659,7 +659,7 @@ public class CustomerInfoAction extends BaseActionSupport{
 			Map<String,Object> params = new HashMap<String, Object>();
 //			params.put("personId", this.sessionUserId);
 			if(startTime != null)
-				params.put("startTime", MySimpleDateFormat.parse(startTime,"yyyy-MM-dd HH:mm:ss"));
+				params.put("beginTime", MySimpleDateFormat.parse(startTime,"yyyy-MM-dd HH:mm:ss"));
 			if(endTime != null)
 				params.put("endTime", MySimpleDateFormat.parse(endTime,"yyyy-MM-dd HH:mm:ss"));
 
