@@ -32,26 +32,26 @@
 			/**
 	  		 */
 			$("#addbtn").click(function(){
-				parent.parent.tipsWindown("添加销售职责","iframe:openAddSellDutyAction.action","470","320","true","","true","no");
+				parent.parent.tipsWindown("添加职责类型","iframe:openAddSellDutyAction.action","470","320","true","","true","no");
 				parent.parent.$("#windown-close").bind('click',function(){
 					window.location.href="openSellDutyListAction.action";
 				});
 			});
 			
 			$(".showInfo").css("cursor","hand").click(function(){
-				parent.parent.tipsWindown("修改销售职责","iframe:openModifySellDutyAction.action?sellDuty.id="+ $(this).attr("tid") ,"470","320","true","","true","no");
+				parent.parent.tipsWindown("修改职责类型","iframe:openModifySellDutyAction.action?sellDuty.id="+ $(this).attr("tid") ,"470","320","true","","true","no");
 				parent.parent.$("#windown-close").bind('click',function(){
 					window.location.href="openSellDutyListAction.action";
 				});
 			});
 			
 			/**
-	  		 * 修改公司信息
+	  		 * 修改职责类型
 	  		 */
 	  		$('a[name="edit"]').each(function(){
 	  			$(this).click(function(){
 	  				var url = $(this).attr("url");
-	  				parent.parent.tipsWindown("修改销售职责","iframe:"+url,"470","320","true","","true","no");
+	  				parent.parent.tipsWindown("修改职责类型","iframe:"+url,"470","320","true","","true","no");
 	  				parent.parent.$("#windown-close").bind('click',function(){
 						window.location.href="./openSellDutyListAction.action";
 					});
