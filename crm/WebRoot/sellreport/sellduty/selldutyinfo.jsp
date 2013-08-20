@@ -123,18 +123,18 @@
 										cellspacing="1" bgcolor="#d5e4fd">
 										<tr>
 											<td height="26" align="right" bgcolor="#FFFFFF">
-												<strong>职责名称：</strong>
+												<strong>职责类型：</strong>
 											</td>
 											<td height="26" align="left" bgcolor="#FFFFFF">
 												<s:textfield id="name" name="sellDuty.name"
-													maxlength="25" cssStyle="width: 230px;"></s:textfield> 销售额
+													maxlength="25" cssStyle="width: 200px;"></s:textfield> 销售额统计
 													<s:checkbox id="chk_numberType"  name="sellDuty.numberType" fieldvalue="true"  title="选中表示是销售额" ></s:checkbox>
 												<font color="red">*</font>
 											</td>
 										</tr>
 										<tr>
 											<td height="26" align="right" bgcolor="#FFFFFF">
-												<strong>职责类型：</strong>
+												<strong>计划类型：</strong>
 											</td>
 											<td height="26" align="left" bgcolor="#FFFFFF">
 												<s:radio list="#{'0':'周报/周计划','1':'月报/月计划'}" name="sellDuty.dutyType"></s:radio>

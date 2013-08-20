@@ -123,15 +123,15 @@
 
 								<td align="center"
 									background="<%=path%>/images/headerbg.jpg">
-									<strong>职责名称</strong>
-								</td>
-								<td align="center"
-									background="<%=path%>/images/headerbg.jpg">
 									<strong>职责类型</strong>
 								</td>
 								<td align="center"
 									background="<%=path%>/images/headerbg.jpg">
-									<strong>销售额</strong>
+									<strong>计划类型</strong>
+								</td>
+								<td align="center"
+									background="<%=path%>/images/headerbg.jpg">
+									<strong>销售额统计</strong>
 								</td>
 								<td align="center"
 									background="<%=path%>/images/headerbg.jpg">
