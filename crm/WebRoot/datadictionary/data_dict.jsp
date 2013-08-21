@@ -73,7 +73,7 @@
 										d = new dTree('d','<%=path%>');
 										d.add(0,-1,'数据字典类别','','','Menu');
 										d.add(101,0,'客户分类','datadictionarylist.action?typeFlag=0','','groupmain');
-										d.add(102,0,'客户状态','datadictionarylist.action?typeFlag=1','','groupmain');
+										//d.add(102,0,'客户状态','datadictionarylist.action?typeFlag=1','','groupmain');
 										d.add(103,0,'客户来源','datadictionarylist.action?typeFlag=2','','groupmain');
 										d.add(104,0,'主营行业','datadictionarylist.action?typeFlag=3','','groupmain');
 										d.add(105,0,'客户忠诚度','datadictionarylist.action?typeFlag=4','','groupmain');
