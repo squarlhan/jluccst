@@ -345,8 +345,8 @@ public class CustomerInfoAction extends BaseActionSupport{
 		{
 			customerInfo = customerInfoService.get(id);
 			//TODO
-			map.put("clientComeWay", customerInfo.getSourceId());
-			map.put("clientType", customerInfo.getCategoryId());
+			map.put("clientComeWay", dataDictionaryService.get(customerInfo.getSourceId()).getName());
+			map.put("clientType", dataDictionaryService.get(customerInfo.getCategoryId()).getName());
 			map.put("developProcess", customerInfo.getLevelId());
 			map.put("company", customerInfo.getCustomerName());
 			map.put("industry", customerInfo.getMainIndustry());
@@ -682,6 +682,7 @@ public class CustomerInfoAction extends BaseActionSupport{
 //					if(listTimePlan.get(i).getPlanType().equals("2")){
 //						obj.setType("月报");
 //					}
+					obj.setId(listTimePlan.get(i).getId());
 					obj.setType("2");
 					obj.setDate(CalendarUtils.toLongStringNoSecond(listTimePlan.get(i).getSubmitTime()));
 					obj.setSummary(listTimePlan.get(i).getMemo());
