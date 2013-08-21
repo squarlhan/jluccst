@@ -155,7 +155,7 @@
 	</tr>
 	<tr>
 		<td></td>
-		<td align="center" nowrap>回访时间：</td>
+		<td align="center" nowrap>预计回访时间：</td>
 		<td><s:textfield type="text" readOnly="true" style="width:150px" name="visitTime" id="visitTime" readOnly="true"></s:textfield></td>
 		<td align="center"  nowrap>回访任务：</td>
 		<td colspan="3"><s:textarea type="text" style="width:400px;height:60px" name="customerVisitInfo.task" id="task" readOnly="true"></s:textarea></td>
