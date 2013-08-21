@@ -860,14 +860,36 @@ public class CustomerInfoAction extends BaseActionSupport{
 			customerInfo = customerInfoService.get(id);
 			CustomerDetailInfoForJson obj = new CustomerDetailInfoForJson();
 			obj.setAddress(customerInfo.getAddress());
-			obj.setCome_from(customerInfo.getSource());
+			obj.setCome_from(dataDictionaryService.get(customerInfo.getSource()).getName());
 			obj.setCompany(customerInfo.getCustomerName());
 			obj.setCompany_full_name(customerInfo.getCompanyFullName());
 			obj.setDevelope(customerInfo.getLevelId());
 			obj.setFax(customerInfo.getFax());
 			obj.setIndustry(customerInfo.getMainIndustry());
 			obj.setProgress(customerInfo.getProgressId());
-			obj.setType(customerInfo.getCategory());
+			String progressStr = customerInfo.getProgressId();
+			if(progressStr.equals(BusinessProgressKey.NEW))
+			{
+				progressStr = "1";
+			}else if(progressStr.equals(BusinessProgressKey.TRACE))
+			{
+				progressStr = "2";
+			}else if(progressStr.equals(BusinessProgressKey.DEALING))
+			{
+				progressStr = "3";
+			}else if(progressStr.equals(BusinessProgressKey.DEALED))
+			{
+				progressStr = "4";
+			}else if(progressStr.equals(BusinessProgressKey.VISIT))
+			{
+				progressStr = "5";
+			}else
+			{
+				progressStr = "1";
+			}
+			obj.setProgress(progressStr);
+			obj.setType(dataDictionaryService.get(customerInfo.getCategory()).getName());
+			obj.setId(customerInfo.getId());
 			
 			List<ContractPersonInfo>  listPerson = contractpersonInfoService.findAllContractPersonInfoByCustomerId(id);
 			List<ContractPersonDetailInfoForJson> list = new ArrayList<ContractPersonDetailInfoForJson>();
