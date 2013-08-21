@@ -345,8 +345,20 @@ public class CustomerInfoAction extends BaseActionSupport{
 		{
 			customerInfo = customerInfoService.get(id);
 			//TODO
-			map.put("clientComeWay", dataDictionaryService.get(customerInfo.getSourceId()).getName());
-			map.put("clientType", dataDictionaryService.get(customerInfo.getCategoryId()).getName());
+			DataDictionary dc = dataDictionaryService.get(customerInfo.getSourceId());
+			String tempStr = "";
+			if(dc != null)
+			{
+				tempStr = dc.getName();
+			}
+			map.put("clientComeWay",tempStr);
+			DataDictionary dc1 = dataDictionaryService.get(customerInfo.getCategoryId());
+		    tempStr = "";
+			if(dc1 != null)
+			{
+				tempStr = dc1.getName();
+			}
+			map.put("clientType", tempStr);
 			map.put("developProcess", customerInfo.getLevelId());
 			map.put("company", customerInfo.getCustomerName());
 			map.put("industry", customerInfo.getMainIndustry());
@@ -860,7 +872,23 @@ public class CustomerInfoAction extends BaseActionSupport{
 			customerInfo = customerInfoService.get(id);
 			CustomerDetailInfoForJson obj = new CustomerDetailInfoForJson();
 			obj.setAddress(customerInfo.getAddress());
-			obj.setCome_from(dataDictionaryService.get(customerInfo.getSource()).getName());
+			
+			DataDictionary dc = dataDictionaryService.get(customerInfo.getSourceId());
+			String tempStr = "";
+			if(dc != null)
+			{
+				tempStr = dc.getName();
+			}
+			obj.setCome_from(tempStr);
+			
+			DataDictionary dc1 = dataDictionaryService.get(customerInfo.getCategoryId());
+		    tempStr = "";
+			if(dc1 != null)
+			{
+				tempStr = dc1.getName();
+			}
+			obj.setType(tempStr);
+			
 			obj.setCompany(customerInfo.getCustomerName());
 			obj.setCompany_full_name(customerInfo.getCompanyFullName());
 			obj.setDevelope(customerInfo.getLevelId());
@@ -888,7 +916,7 @@ public class CustomerInfoAction extends BaseActionSupport{
 				progressStr = "1";
 			}
 			obj.setProgress(progressStr);
-			obj.setType(dataDictionaryService.get(customerInfo.getCategory()).getName());
+			
 			obj.setId(customerInfo.getId());
 			
 			List<ContractPersonInfo>  listPerson = contractpersonInfoService.findAllContractPersonInfoByCustomerId(id);

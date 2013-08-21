@@ -313,7 +313,7 @@
 	</tr>
 	<tr>
 		<td></td>
-		<td align="right" nowrap>回访时间：</td>
+		<td align="right" nowrap>预计回访时间：</td>
 		<td><s:textfield type="text" style="width:150px" name="customerVisitInfo.visitTime" id="visitTime" readOnly="true"></s:textfield></td>
 		<td align="right">任务：</td>
 		<td colspan="3"><s:textarea type="text" style="width:400px;height:60px" name="customerVisitInfo.task" id="task" readOnly="true"></s:textarea></td>

@@ -112,6 +112,19 @@
 							  $("#customerId_t").val(allData[i].id);
 				  			  $("#salesman").val(allData[i].salesman);
 			  				  $("#progressId").val(allData[i].progressId);
+			  				  if(allData[i].progressId == "NEW" || allData[i].progressId=="")
+				  				  $("#progressName").val("新建");
+				  			  if(allData[i].progressId == "TRACE")
+				  				  $("#progressName").val("跟进");
+				  			  if(allData[i].progressId == "DEALING")
+				  				  $("#progressName").val("要成单");
+				  			  if(allData[i].progressId == "DEALED")
+				  				  $("#progressName").val("成单");
+				  			  if(allData[i].progressId == "VISIT")
+				  				  $("#progressName").val("回访");
+				  			  if(allData[i].progressId == "LOYAL")
+				  				  $("#progressName").val("忠诚客户");	  
+				  				  
 			  				  $("#category").val(allData[i].category);
 			  				  var contractPerson = "";
 			  				  var tel = "";
@@ -318,7 +331,8 @@
 		<td><s:property value="sessionUserCName"/></td>
 		<td align="right">业务进展：</td>
 		<td style="width: 150px">
-		<s:textfield type="text" readOnly="true" style="width:150px" name="customerInfo.progress" id="progressId"></s:textfield>
+		<s:textfield type="text" readOnly="true" style="width:140px" name="progress" id="progressName"></s:textfield>
+		<s:hidden name="customerInfo.progress" id="progressId" />
 		</td>
 	</tr>
 	<tr>
