@@ -491,7 +491,7 @@ public class CustomerStaticInfoServiceImpl implements ICustomerStaticInfoService
 			
 			CustomerStaticInfo staticInfo6 = new CustomerStaticInfo();
 			staticInfo6.setKey(key);
-			staticInfo6.setCategory(BusinessProgressKey.getBusinessProgressNameByKey(BusinessProgressKey.VISIT));
+			staticInfo6.setCategory(BusinessProgressKey.getBusinessProgressNameByKey(BusinessProgressKey.LOYAL));
 			hql.delete(0, hql.length());
 			hql.append("select Count(id) from CustomerInfo where progressId = :progressId and companyId = :companyId"+ deleteFlagStr);
 			values.put("progressId", BusinessProgressKey.LOYAL);

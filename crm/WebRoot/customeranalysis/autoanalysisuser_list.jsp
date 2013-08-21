@@ -188,7 +188,7 @@ background-color:#d3eaef}
 		<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg'); width: 90px;"></td>
 		 --><td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">客户名称</td>
 		 <td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">评估值</td>
-		<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">评估结论</td>
+		<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">忠诚度值</td>
 		<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">消费额度</td>
 		<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">消费次数</td>
 		<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">转介绍客户情况</td>
