@@ -282,8 +282,8 @@
 		$.fn.dynamicsAddPerson = function(){
 			$("#btn_AddPerson").click(function(){
 				var param="?onlycustomer=no";
-		  		parent.parent.tipsWindown("添加人员","iframe:sms/selectperson.jsp?"+param ,"650","450","true","","true","no");
-		  		parent.parent.$("#windown-close").bind('click',function(){
+				parent.parent.parent.tipsWindown("添加人员","iframe:sms/selectperson.jsp?"+param ,"650","450","true","","true","no");
+				parent.parent.parent.$("#windown-close").bind('click',function(){
 		  			var personIds = $.cookie('personIds'); // 读取 cookie中的被选择的人员Id
 		  			$.cookie('personIds', '', { expires: -1 }); //读取完毕后删除cookie
 		  			if(personIds!=null && personIds.length>0){
@@ -347,7 +347,7 @@
 	  	 */
 		$.fn.dynamicsAddAllPerson = function(){
 			$("#btn_AddAllPerson").click(function(){
-				parent.parent.setPerson=function(queryType,queryProvince,querycCity,queryArea,queryCategoryId,queryProgress){
+				parent.parent.parent.setPerson=function(queryType,queryProvince,querycCity,queryArea,queryCategoryId,queryProgress){
 					$.ajax({
 						type:"post",
 						url: "loadCustomerInfoForAjaxAction.action",
@@ -392,7 +392,7 @@
 						}
 					});
 				};
-				parent.parent.tipsWindown("查询条件","iframe:<%=basePath%>openSelectWindowAction.action","450","200","true","","true","no");
+				parent.parent.parent.tipsWindown("查询条件","iframe:<%=basePath%>openSelectWindowAction.action","450","200","true","","true","no");
 				
 			});
 		};
