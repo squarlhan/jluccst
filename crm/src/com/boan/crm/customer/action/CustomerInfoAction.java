@@ -501,7 +501,7 @@ public class CustomerInfoAction extends BaseActionSupport{
 					userInfo = userService.getUserById(traceInfo.getSalesmanId());
 				}catch(Exception ex){}
 				
-				TaskInfoForJson obj = new TaskInfoForJson(traceInfo.getId(),"1","",traceInfo.getCustomerName(),personName,traceInfo.getTel(),CalendarUtils.toLongStringNoSecond(traceInfo.getTraceTime()));
+				TaskInfoForJson obj = new TaskInfoForJson(traceInfo.getId(),"1","",traceInfo.getCustomerName(),personName,traceInfo.getTel(),CalendarUtils.toLongStringNoSecond(traceInfo.getTraceTime()),traceInfo.getCustomerId());
 				
 				obj.setOperator(userInfo.getUserCName());
 				
@@ -535,7 +535,7 @@ public class CustomerInfoAction extends BaseActionSupport{
 				if(personObj!= null)
 					personName = contractpersonInfoService.get(customerVisit.getVisitPersonId()).getPersonName();
 				
-				TaskInfoForJson obj = new TaskInfoForJson(customerVisit.getId(),"2","",customerVisit.getCustomerName(),personName,customerVisit.getTel(),CalendarUtils.toLongStringNoSecond(customerVisit.getVisitTime()));
+				TaskInfoForJson obj = new TaskInfoForJson(customerVisit.getId(),"2","",customerVisit.getCustomerName(),personName,customerVisit.getTel(),CalendarUtils.toLongStringNoSecond(customerVisit.getVisitTime()),customerVisit.getCustomerId());
 				
 				User userInfo = null;
 				
@@ -644,7 +644,7 @@ public class CustomerInfoAction extends BaseActionSupport{
 					if(personObj!= null)
 						personName = contractpersonInfoService.get(listTrace.get(i).getTracePersonId()).getPersonName();
 					
-					TaskInfoForJson obj = new TaskInfoForJson(listTrace.get(i).getId(),"1","",listTrace.get(i).getCustomerName(),personName,listTrace.get(i).getTel(),CalendarUtils.toLongStringNoSecond(listTrace.get(i).getTraceTime()));
+					TaskInfoForJson obj = new TaskInfoForJson(listTrace.get(i).getId(),"1","",listTrace.get(i).getCustomerName(),personName,listTrace.get(i).getTel(),CalendarUtils.toLongStringNoSecond(listTrace.get(i).getTraceTime()),listTrace.get(i).getCustomerId());
 					
 					listTraceTask.add(obj);
 				}
@@ -662,7 +662,7 @@ public class CustomerInfoAction extends BaseActionSupport{
 					if(personObj!= null)
 						personName = contractpersonInfoService.get(listVisit.get(i).getVisitPersonId()).getPersonName();
 					
-					TaskInfoForJson obj = new TaskInfoForJson(listVisit.get(i).getId(),"2","",listVisit.get(i).getCustomerName(),personName,listVisit.get(i).getTel(),CalendarUtils.toLongStringNoSecond(listVisit.get(i).getVisitTime()));
+					TaskInfoForJson obj = new TaskInfoForJson(listVisit.get(i).getId(),"2","",listVisit.get(i).getCustomerName(),personName,listVisit.get(i).getTel(),CalendarUtils.toLongStringNoSecond(listVisit.get(i).getVisitTime()),listTrace.get(i).getCustomerId());
 					
 					listVisitTask.add(obj);
 				}
@@ -741,7 +741,7 @@ public class CustomerInfoAction extends BaseActionSupport{
 					if(personObj!= null)
 						personName = contractpersonInfoService.get(listTrace.get(i).getTracePersonId()).getPersonName();
 					
-					TaskInfoForJson obj = new TaskInfoForJson(listTrace.get(i).getId(),"1","",listTrace.get(i).getCustomerName(),personName,listTrace.get(i).getTel(),CalendarUtils.toLongStringNoSecond(listTrace.get(i).getTraceTime()));
+					TaskInfoForJson obj = new TaskInfoForJson(listTrace.get(i).getId(),"1","",listTrace.get(i).getCustomerName(),personName,listTrace.get(i).getTel(),CalendarUtils.toLongStringNoSecond(listTrace.get(i).getTraceTime()),listTrace.get(i).getCustomerId());
 					
 					list.add(obj);
 				}
@@ -757,7 +757,7 @@ public class CustomerInfoAction extends BaseActionSupport{
 					if(personObj!= null)
 						personName = contractpersonInfoService.get(listVisit.get(i).getVisitPersonId()).getPersonName();
 					
-					TaskInfoForJson obj = new TaskInfoForJson(listVisit.get(i).getId(),"2","",listVisit.get(i).getCustomerName(),personName,listVisit.get(i).getTel(),CalendarUtils.toLongStringNoSecond(listVisit.get(i).getVisitTime()));
+					TaskInfoForJson obj = new TaskInfoForJson(listVisit.get(i).getId(),"2","",listVisit.get(i).getCustomerName(),personName,listVisit.get(i).getTel(),CalendarUtils.toLongStringNoSecond(listVisit.get(i).getVisitTime()),listTrace.get(i).getCustomerId());
 					
 					list.add(obj);
 				}
@@ -1043,7 +1043,7 @@ public class CustomerInfoAction extends BaseActionSupport{
 				{
 					TaskInfoForJson obj = null;
 					CustomerTraceInfo traceInfo = listTraceInfo.get(i);
-					obj = new TaskInfoForJson(traceInfo.getId(),"1",type,traceInfo.getCustomerName(),traceInfo.getPerson().getPersonName(),traceInfo.getTel(),traceInfo.getTraceTimeStr());
+					obj = new TaskInfoForJson(traceInfo.getId(),"1",type,traceInfo.getCustomerName(),traceInfo.getPerson().getPersonName(),traceInfo.getTel(),traceInfo.getTraceTimeStr(),traceInfo.getCustomerId());
 					list.add(obj);
 				}
 			}else if(type.equals("2") && type.equals("4"))
@@ -1052,7 +1052,7 @@ public class CustomerInfoAction extends BaseActionSupport{
 				{
 					TaskInfoForJson obj = null;
 					CustomerTraceInfo traceInfo = listTraceInfo.get(i);
-					obj = new TaskInfoForJson(traceInfo.getId(),"1",type,traceInfo.getCustomerName(),traceInfo.getPerson().getPersonName(),traceInfo.getTel(),traceInfo.getTraceTimeStr());
+					obj = new TaskInfoForJson(traceInfo.getId(),"1",type,traceInfo.getCustomerName(),traceInfo.getPerson().getPersonName(),traceInfo.getTel(),traceInfo.getTraceTimeStr(),traceInfo.getCustomerId());
 					list.add(obj);
 				}
 			}
@@ -1074,7 +1074,7 @@ public class CustomerInfoAction extends BaseActionSupport{
 						personName = visitInfo.getPerson().getPersonName();
 					}
 					
-					obj = new TaskInfoForJson(visitInfo.getId(),"2",type,visitInfo.getCustomerName(),personName,visitInfo.getTel(),visitInfo.getVisitTimeStr());
+					obj = new TaskInfoForJson(visitInfo.getId(),"2",type,visitInfo.getCustomerName(),personName,visitInfo.getTel(),visitInfo.getVisitTimeStr(),visitInfo.getCustomerId());
 					list.add(obj);
 				}
 			}else if(type.equals("2") && type.equals("4"))
@@ -1089,7 +1089,7 @@ public class CustomerInfoAction extends BaseActionSupport{
 						personName = visitInfo.getPerson().getPersonName();
 					}
 					
-					obj = new TaskInfoForJson(visitInfo.getId(),"2",type,visitInfo.getCustomerName(),personName,visitInfo.getTel(),visitInfo.getVisitTimeStr());
+					obj = new TaskInfoForJson(visitInfo.getId(),"2",type,visitInfo.getCustomerName(),personName,visitInfo.getTel(),visitInfo.getVisitTimeStr(),visitInfo.getCustomerId());
 					list.add(obj);
 				}
 			}
@@ -1162,7 +1162,7 @@ public class CustomerInfoAction extends BaseActionSupport{
 				if(traceInfo.getTraceFlag().equals( "1" ))
 				{
 					status = "4";
-					obj = new TaskInfoForJson(traceInfo.getId(),"1",status,traceInfo.getCustomerName(),traceInfo.getPerson().getPersonName(),traceInfo.getTel(),traceInfo.getActualTraceTimeStr());
+					obj = new TaskInfoForJson(traceInfo.getId(),"1",status,traceInfo.getCustomerName(),traceInfo.getPerson().getPersonName(),traceInfo.getTel(),traceInfo.getActualTraceTimeStr(),traceInfo.getCustomerId());
 					listFinished.add(obj);
 				}else
 				{
@@ -1172,17 +1172,17 @@ public class CustomerInfoAction extends BaseActionSupport{
 						if(traceInfo.getTraceTime().get(Calendar.YEAR) == now.get(Calendar.YEAR) && traceInfo.getTraceTime().get(Calendar.MONTH) == now.get(Calendar.MONTH) && traceInfo.getTraceTime().get(Calendar.DATE) == now.get(Calendar.DATE))
 						{
 							status = "1";
-							obj = new TaskInfoForJson(traceInfo.getId(),"1",status,traceInfo.getCustomerName(),traceInfo.getPerson().getPersonName(),traceInfo.getTel(),traceInfo.getTraceTimeStr());
+							obj = new TaskInfoForJson(traceInfo.getId(),"1",status,traceInfo.getCustomerName(),traceInfo.getPerson().getPersonName(),traceInfo.getTel(),traceInfo.getTraceTimeStr(),traceInfo.getCustomerId());
 							listToday.add(obj);
 						}else if(traceInfo.getTraceTime().before(Calendar.getInstance()))
 						{
 							status = "2";
-							obj = new TaskInfoForJson(traceInfo.getId(),"1",status,traceInfo.getCustomerName(),traceInfo.getPerson().getPersonName(),traceInfo.getTel(),traceInfo.getTraceTimeStr());
+							obj = new TaskInfoForJson(traceInfo.getId(),"1",status,traceInfo.getCustomerName(),traceInfo.getPerson().getPersonName(),traceInfo.getTel(),traceInfo.getTraceTimeStr(),traceInfo.getCustomerId());
 							listExpired.add(obj);
 						}else if(traceInfo.getTraceTime().after(Calendar.getInstance()))
 						{
 							status = "3";
-							obj = new TaskInfoForJson(traceInfo.getId(),"1",status,traceInfo.getCustomerName(),traceInfo.getPerson().getPersonName(),traceInfo.getTel(),traceInfo.getTraceTimeStr());
+							obj = new TaskInfoForJson(traceInfo.getId(),"1",status,traceInfo.getCustomerName(),traceInfo.getPerson().getPersonName(),traceInfo.getTel(),traceInfo.getTraceTimeStr(),traceInfo.getCustomerId());
 							
 							listRecent.add(obj);
 						}
@@ -1210,7 +1210,7 @@ public class CustomerInfoAction extends BaseActionSupport{
 				if(visitInfo.getVisitFlag().equals( "1" ))
 				{
 					status = "4";
-					obj = new TaskInfoForJson(visitInfo.getId(),"2",status,visitInfo.getCustomerName(),personName,visitInfo.getTel(),visitInfo.getActualVisitTimeStr());
+					obj = new TaskInfoForJson(visitInfo.getId(),"2",status,visitInfo.getCustomerName(),personName,visitInfo.getTel(),visitInfo.getActualVisitTimeStr(),visitInfo.getCustomerId());
 					listFinished.add(obj);
 				}else
 				{
@@ -1220,17 +1220,17 @@ public class CustomerInfoAction extends BaseActionSupport{
 						if(visitInfo.getVisitTime().get(Calendar.YEAR) == now.get(Calendar.YEAR) && visitInfo.getVisitTime().get(Calendar.MONTH) == now.get(Calendar.MONTH) && visitInfo.getVisitTime().get(Calendar.DATE) == now.get(Calendar.DATE))
 						{
 							status = "1";
-							obj = new TaskInfoForJson(visitInfo.getId(),"2",status,visitInfo.getCustomerName(),personName,visitInfo.getTel(),visitInfo.getVisitTimeStr());
+							obj = new TaskInfoForJson(visitInfo.getId(),"2",status,visitInfo.getCustomerName(),personName,visitInfo.getTel(),visitInfo.getVisitTimeStr(),visitInfo.getCustomerId());
 							listToday.add(obj);
 						}else if(visitInfo.getVisitTime().before(Calendar.getInstance()))
 						{
 							status = "2";
-							obj = new TaskInfoForJson(visitInfo.getId(),"2",status,visitInfo.getCustomerName(),personName,visitInfo.getTel(),visitInfo.getVisitTimeStr());
+							obj = new TaskInfoForJson(visitInfo.getId(),"2",status,visitInfo.getCustomerName(),personName,visitInfo.getTel(),visitInfo.getVisitTimeStr(),visitInfo.getCustomerId());
 							listExpired.add(obj);
 						}else if(visitInfo.getVisitTime().after(Calendar.getInstance()))
 						{
 							status = "3";
-							obj = new TaskInfoForJson(visitInfo.getId(),"2",status,visitInfo.getCustomerName(),personName,visitInfo.getTel(),visitInfo.getVisitTimeStr());
+							obj = new TaskInfoForJson(visitInfo.getId(),"2",status,visitInfo.getCustomerName(),personName,visitInfo.getTel(),visitInfo.getVisitTimeStr(),visitInfo.getCustomerId());
 							
 							listRecent.add(obj);
 						}
