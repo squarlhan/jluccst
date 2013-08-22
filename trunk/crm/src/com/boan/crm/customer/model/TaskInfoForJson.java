@@ -23,6 +23,7 @@ public class TaskInfoForJson {
 		this.object_name = object_name;
 		this.phone = phone;
 		this.date = date;
+		this.customerId = customerId;
 	}
 	public String getId() {
 		return id;
