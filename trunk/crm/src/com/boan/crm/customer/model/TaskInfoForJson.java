@@ -13,7 +13,8 @@ public class TaskInfoForJson {
 	private String phone = "";
 	private String date = "";
 	private String operator = "";
-	public TaskInfoForJson(String id,String type,String task_staus,String company,String object_name,String phone,String date)
+	private String customerId = "";
+	public TaskInfoForJson(String id,String type,String task_staus,String company,String object_name,String phone,String date,String customerId)
 	{
 		this.id = id;
 		this.type = type;
@@ -70,6 +71,12 @@ public class TaskInfoForJson {
 	}
 	public void setOperator(String operator) {
 		this.operator = operator;
+	}
+	public String getCustomerId() {
+		return customerId;
+	}
+	public void setCustomerId(String customerId) {
+		this.customerId = customerId;
 	}
 	
 }
