@@ -1,3 +1,4 @@
+<%@page import="com.boan.crm.groupmanage.common.RoleFlag"%>
 <%@page import="com.boan.crm.groupmanage.service.IPopedomService"%>
 <%@page import="org.springframework.web.context.WebApplicationContext"%>
 <%@page import="com.boan.crm.groupmanage.common.UserSession"%>
@@ -30,6 +31,7 @@
 	IPopedomService popedomService = (IPopedomService) context.getBean("popedomService");
 	boolean b = false;
 	boolean sub = false;
+	
 %>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -57,6 +59,20 @@
 				});
 			});
 		});
+		//打开默认菜单
+		<%
+		if (RoleFlag.YE_WU_YUAN.equalsIgnoreCase(us.getRoleKey())) {
+		%>
+		$("strong[s='我的客户管理']").click();
+		<%
+		}else if(RoleFlag.BU_MEN_LING_DAO.equalsIgnoreCase(us.getRoleKey())) {
+		%>
+		$("strong[s='计划管理']").click();
+		<%
+		}else if(RoleFlag.GONG_SI_LING_DAO.equalsIgnoreCase(us.getRoleKey())) {
+		%>
+		$("strong[s='销售管理']").click();
+		<%}%>
 	});
 	$(window).resize(function() {
 		var ifrHeight = $("#leftFrame", parent.document).height();
@@ -75,14 +91,14 @@
 			<td align="center" style="vertical-align: top;">
 				<div id="menuArea" style="overflow: auto; display: block; height: 100%">
 					<table width="100%" border="0" cellspacing="0" cellpadding="0">
-					<s:iterator value="menuList">
+					<s:iterator value="menuList" status="status">
 						<tr>
 							<td height="24" align="left" background="images/menubg.jpg">
 								<table width="100%" border="0" cellspacing="5" cellpadding="0">
 									<tr>
 										<td width="40" align="right" style="padding-bottom: 4px;"><img src="images/up.gif" width="10" height="12" />
 										</td>
-										<td><strong name="menus"><s:property value="menuName"/></strong>
+										<td><strong name="menus" s="<s:property value="menuName"/>"><s:property value="menuName"/></strong>
 										</td>
 									</tr>
 								</table>
