@@ -13,7 +13,10 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
+import com.boan.crm.customer.model.BusinessProgressKey;
+import com.boan.crm.customer.model.CustomerInfo;
 import com.boan.crm.customer.model.CustomerTraceInfo;
+import com.boan.crm.customer.service.ICustomerInfoService;
 import com.boan.crm.customer.service.ICustomerTraceInfoService;
 import com.boan.crm.utils.action.BaseActionSupport;
 import com.boan.crm.utils.calendar.MySimpleDateFormat;
@@ -33,6 +36,12 @@ public class CustomerTraceInfoForPhoneAction extends BaseActionSupport{
 	@Autowired
 	@Qualifier("customerTraceInfoService")
 	private ICustomerTraceInfoService customerTraceInfoService;
+	
+	@Autowired
+	@Qualifier("customerInfoService")
+	//客户状态接口类
+	private ICustomerInfoService customerInfoService;
+	
 	private String companyId = "";
 	private String id = "";
 	private String followPeople = null;
@@ -132,6 +141,11 @@ public class CustomerTraceInfoForPhoneAction extends BaseActionSupport{
 		customerTraceInfoService.save(obj);
 		id = obj.getId();
 		message = "success";
+		
+		CustomerInfo customer = customerInfoService.get(obj.getCustomerId());
+		customer.setProgressId(BusinessProgressKey.TRACE);
+		customer.setProgress(BusinessProgressKey.getBusinessProgressNameByKey(BusinessProgressKey.TRACE));
+		customerInfoService.save(customer);
 		
 		HttpServletRequest request = ServletActionContext.getRequest();
 		request.setAttribute("message", message);
