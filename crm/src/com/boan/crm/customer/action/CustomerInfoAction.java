@@ -662,7 +662,7 @@ public class CustomerInfoAction extends BaseActionSupport{
 					if(personObj!= null)
 						personName = contractpersonInfoService.get(listVisit.get(i).getVisitPersonId()).getPersonName();
 					
-					TaskInfoForJson obj = new TaskInfoForJson(listVisit.get(i).getId(),"2","",listVisit.get(i).getCustomerName(),personName,listVisit.get(i).getTel(),CalendarUtils.toLongStringNoSecond(listVisit.get(i).getVisitTime()),listTrace.get(i).getCustomerId());
+					TaskInfoForJson obj = new TaskInfoForJson(listVisit.get(i).getId(),"2","",listVisit.get(i).getCustomerName(),personName,listVisit.get(i).getTel(),CalendarUtils.toLongStringNoSecond(listVisit.get(i).getVisitTime()),listVisit.get(i).getCustomerId());
 					
 					listVisitTask.add(obj);
 				}
@@ -757,7 +757,7 @@ public class CustomerInfoAction extends BaseActionSupport{
 					if(personObj!= null)
 						personName = contractpersonInfoService.get(listVisit.get(i).getVisitPersonId()).getPersonName();
 					
-					TaskInfoForJson obj = new TaskInfoForJson(listVisit.get(i).getId(),"2","",listVisit.get(i).getCustomerName(),personName,listVisit.get(i).getTel(),CalendarUtils.toLongStringNoSecond(listVisit.get(i).getVisitTime()),listTrace.get(i).getCustomerId());
+					TaskInfoForJson obj = new TaskInfoForJson(listVisit.get(i).getId(),"2","",listVisit.get(i).getCustomerName(),personName,listVisit.get(i).getTel(),CalendarUtils.toLongStringNoSecond(listVisit.get(i).getVisitTime()),listVisit.get(i).getCustomerId());
 					
 					list.add(obj);
 				}
