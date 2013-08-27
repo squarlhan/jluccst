@@ -172,6 +172,17 @@ public class CustomerTraceInfoServiceImpl implements ICustomerTraceInfoService{
 		{
 			hql.append(" and (traceTime between :startTime and :endTime) ");
 		}
+		if(values.get("taskType") != null && values.get("taskType").equals("1"))
+		{
+			hql.append(" and traceFlag = 1 ");
+		}else if(values.get("taskType") != null && values.get("taskType").equals("2"))
+		{
+			hql.append(" and traceFlag = 0 and traceTime >= :now ");
+			
+		}else if(values.get("taskType") != null && values.get("taskType").equals("3"))
+		{
+			hql.append(" and traceFlag = 0 and traceTime < :now ");
+		}
 		if(values.get("taskStatus") != null && values.get("taskStatus").equals("expired"))
 		{
 			hql.append(" and traceTime <= :now ");
