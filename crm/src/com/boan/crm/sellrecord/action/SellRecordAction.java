@@ -48,6 +48,7 @@ import com.boan.crm.servicemanage.service.IPointInfoService;
 import com.boan.crm.sms.model.SMSInfo;
 import com.boan.crm.sms.service.ISMSInfoService;
 import com.boan.crm.utils.action.BaseActionSupport;
+import com.boan.crm.utils.calendar.CalendarUtils;
 import com.boan.crm.utils.calendar.CurrentDateTime;
 import com.boan.crm.utils.page.Pagination;
 
@@ -201,6 +202,24 @@ public class SellRecordAction extends BaseActionSupport {
 
 	// --------------查询条件-------------------------//
 
+	/**
+	 * 统计年分
+	 */
+	private String statYear;
+	/**
+	 * 统计月份
+	 */
+	private String statMonth;
+	
+	/**
+	 * 1：周统计   2：月统计
+	 */
+	private String type="";
+	
+	/**
+	 * 第几周
+	 */
+	private int weekIndex=1;
 	
 	/**
 	 * 给领导使用
@@ -989,11 +1008,124 @@ public class SellRecordAction extends BaseActionSupport {
 		Map<String,Object> map = new HashMap<String,Object>();
 //		if(userId!=null && !userId.equals("") && salesmanId!=null && !salesmanId.equals("")){
 		if( salesmanId!=null && !salesmanId.equals("")){
-//			String companyId = userService.getUserById(userId).getCompanyId();
 			Map<String, String> params = new HashMap<String, String>();
-//			params.put("companyId", companyId);
+			
 			params.put("salesmanId", salesmanId);
-			List<SellRecord> tempList = sellRecordService.findAllSellRecord(params);
+			if(type.equals("2")){
+				//月报表开始时间记录的年月日
+				Calendar monthBegin = Calendar.getInstance();
+				monthBegin.set(Calendar.YEAR, Integer.parseInt(statYear)  );
+				monthBegin.set(Calendar.MONTH, Integer.parseInt(statMonth )-1);
+				monthBegin.set(Calendar.DAY_OF_MONTH, monthBegin.getMinimum(Calendar.DATE));
+				monthBegin.set(Calendar.HOUR_OF_DAY, 0);
+				monthBegin.set(Calendar.MINUTE , 0 );
+				monthBegin.set(Calendar.SECOND, 0);
+				
+				Calendar monthkEnd = Calendar.getInstance();
+				monthkEnd.set(Calendar.YEAR,  Integer.parseInt(statYear) );
+				monthkEnd.set(Calendar.MONTH,  Integer.parseInt(statMonth )-1 );
+				monthkEnd.set(Calendar.DAY_OF_MONTH, 1);
+				int value = monthkEnd.getActualMaximum(Calendar.DAY_OF_MONTH);
+				monthkEnd.set(Calendar.DAY_OF_MONTH, value);
+				monthkEnd.set(Calendar.HOUR_OF_DAY, 23);
+				monthkEnd.set(Calendar.MINUTE , 59 );
+				monthkEnd.set(Calendar.SECOND, 59);
+				//指定月的实际销售额
+				System.out.println(CalendarUtils.toLongString(monthBegin));
+				System.out.println(CalendarUtils.toLongString(monthkEnd));
+				
+				params.put("queryBargainTimeBegin", CalendarUtils.toLongString(monthBegin));
+				params.put("queryBargainTimeEnd", CalendarUtils.toLongString(monthkEnd));
+			}else if(type.equals("1")){
+				if(weekIndex==1){
+					Calendar firstWeekBegin = Calendar.getInstance();
+					Calendar firstWeekEnd = Calendar.getInstance();
+					//第一周开始时间
+					firstWeekBegin.set(Calendar.YEAR, Integer.parseInt(statYear) );
+					firstWeekBegin.set(Calendar.MONTH,  Integer.parseInt(statMonth )-1 );
+					firstWeekBegin.set(Calendar.DAY_OF_MONTH, 1);
+					firstWeekBegin.set(Calendar.HOUR_OF_DAY, 0);
+					firstWeekBegin.set(Calendar.MINUTE , 0 );
+					firstWeekBegin.set(Calendar.SECOND, 0);
+					//第一周结束时间
+					firstWeekEnd.set(Calendar.YEAR, Integer.parseInt(statYear) );
+					firstWeekEnd.set(Calendar.MONTH,  Integer.parseInt(statMonth )-1 );
+					firstWeekEnd.set(Calendar.DAY_OF_MONTH, 7);
+					firstWeekEnd.set(Calendar.HOUR_OF_DAY, 23);
+					firstWeekEnd.set(Calendar.MINUTE , 59 );
+					firstWeekEnd.set(Calendar.SECOND, 59);
+					
+					params.put("queryBargainTimeBegin", CalendarUtils.toLongString(firstWeekBegin));
+					params.put("queryBargainTimeEnd", CalendarUtils.toLongString(firstWeekEnd));
+				}
+				
+				if(weekIndex==2){
+					Calendar secondWeekBegin = Calendar.getInstance();
+					Calendar secondWeekEnd = Calendar.getInstance();
+					//第二周开始时间
+					secondWeekBegin.set(Calendar.YEAR, Integer.parseInt(statYear) );
+					secondWeekBegin.set(Calendar.MONTH,  Integer.parseInt(statMonth )-1 );
+					secondWeekBegin.set(Calendar.DAY_OF_MONTH, 8);
+					secondWeekBegin.set(Calendar.HOUR_OF_DAY, 0);
+					secondWeekBegin.set(Calendar.MINUTE , 0 );
+					secondWeekBegin.set(Calendar.SECOND, 0);
+					//第二周结束时间
+					secondWeekEnd.set(Calendar.YEAR, Integer.parseInt(statYear) );
+					secondWeekEnd.set(Calendar.MONTH, Integer.parseInt(statMonth )-1 );
+					secondWeekEnd.set(Calendar.DAY_OF_MONTH, 14);
+					secondWeekEnd.set(Calendar.HOUR_OF_DAY, 23);
+					secondWeekEnd.set(Calendar.MINUTE , 59 );
+					secondWeekEnd.set(Calendar.SECOND, 59);
+					
+					params.put("queryBargainTimeBegin", CalendarUtils.toLongString(secondWeekBegin));
+					params.put("queryBargainTimeEnd", CalendarUtils.toLongString(secondWeekEnd));
+				}
+				if(weekIndex==3){
+					Calendar thirdWeekBegin = Calendar.getInstance();
+					Calendar thirdWeekEnd = Calendar.getInstance();
+					//第三周开始时间
+					thirdWeekBegin.set(Calendar.YEAR, Integer.parseInt(statYear) );
+					thirdWeekBegin.set(Calendar.MONTH,  Integer.parseInt(statMonth )-1 );
+					thirdWeekBegin.set(Calendar.DAY_OF_MONTH, 15);
+					thirdWeekBegin.set(Calendar.HOUR_OF_DAY, 0);
+					thirdWeekBegin.set(Calendar.MINUTE , 0 );
+					thirdWeekBegin.set(Calendar.SECOND, 0);
+					//第三周结束时间
+					thirdWeekEnd.set(Calendar.YEAR, Integer.parseInt(statYear) );
+					thirdWeekEnd.set(Calendar.MONTH,  Integer.parseInt(statMonth )-1 );
+					thirdWeekEnd.set(Calendar.DAY_OF_MONTH, 21);
+					thirdWeekEnd.set(Calendar.HOUR_OF_DAY, 23);
+					thirdWeekEnd.set(Calendar.MINUTE , 59 );
+					thirdWeekEnd.set(Calendar.SECOND, 59);
+					
+					params.put("queryBargainTimeBegin", CalendarUtils.toLongString(thirdWeekBegin));
+					params.put("queryBargainTimeEnd", CalendarUtils.toLongString(thirdWeekEnd));
+				}
+				if(weekIndex==4){
+					Calendar fourthWeekBegin = Calendar.getInstance();
+					Calendar fourthWeekEnd = Calendar.getInstance();
+					//第四周开始时间
+					fourthWeekBegin.set(Calendar.YEAR, Integer.parseInt(statYear) );
+					fourthWeekBegin.set(Calendar.MONTH,  Integer.parseInt(statMonth )-1 );
+					fourthWeekBegin.set(Calendar.DAY_OF_MONTH, 22);
+					fourthWeekBegin.set(Calendar.HOUR_OF_DAY, 0);
+					fourthWeekBegin.set(Calendar.MINUTE , 0 );
+					fourthWeekBegin.set(Calendar.SECOND, 0);
+					//第四周结束时间
+					fourthWeekEnd.set(Calendar.YEAR, Integer.parseInt(statYear) );
+					fourthWeekEnd.set(Calendar.MONTH,  Integer.parseInt(statMonth )-1 );
+					fourthWeekEnd.set(Calendar.DAY_OF_MONTH, fourthWeekEnd.getActualMaximum(Calendar.DAY_OF_MONTH));
+					fourthWeekEnd.set(Calendar.HOUR_OF_DAY, 23);
+					fourthWeekEnd.set(Calendar.MINUTE , 59 );
+					fourthWeekEnd.set(Calendar.SECOND, 59);
+					
+					params.put("queryBargainTimeBegin", CalendarUtils.toLongString(fourthWeekBegin));
+					params.put("queryBargainTimeEnd", CalendarUtils.toLongString(fourthWeekEnd));
+				}
+			}
+			
+			
+			List<SellRecord> tempList = sellRecordService.findAllSellRecordOrderByBargainTime(params);
 			List<SellRecordForPhone> list = new ArrayList<SellRecordForPhone>();
 			for(SellRecord obj : tempList){
 				SellRecordForPhone temp = new SellRecordForPhone();
@@ -1312,5 +1444,53 @@ public class SellRecordAction extends BaseActionSupport {
 	 */
 	public void setSalesmanId(String salesmanId) {
 		this.salesmanId = salesmanId;
+	}
+	/**
+	 * @return the statYear
+	 */
+	public String getStatYear() {
+		return statYear;
+	}
+	/**
+	 * @param statYear the statYear to set
+	 */
+	public void setStatYear(String statYear) {
+		this.statYear = statYear;
+	}
+	/**
+	 * @return the statMonth
+	 */
+	public String getStatMonth() {
+		return statMonth;
+	}
+	/**
+	 * @param statMonth the statMonth to set
+	 */
+	public void setStatMonth(String statMonth) {
+		this.statMonth = statMonth;
+	}
+	/**
+	 * @return the type
+	 */
+	public String getType() {
+		return type;
+	}
+	/**
+	 * @param type the type to set
+	 */
+	public void setType(String type) {
+		this.type = type;
+	}
+	/**
+	 * @return the weekIndex
+	 */
+	public int getWeekIndex() {
+		return weekIndex;
+	}
+	/**
+	 * @param weekIndex the weekIndex to set
+	 */
+	public void setWeekIndex(int weekIndex) {
+		this.weekIndex = weekIndex;
 	}
 }
