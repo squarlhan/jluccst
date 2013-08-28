@@ -133,7 +133,9 @@
 		<s:hidden id="hid_sequence" name="weeklyItemInfo.sequence"></s:hidden>
 		<s:hidden id="hid_sellDutyName" name="weeklyItemInfo.sellDutyName"></s:hidden>
 		<span onmousemove="this.setCapture();" onmouseout="this.releaseCapture();" onfocus="this.blur();"> 
-			<table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#d5e4fd">
+		<fieldset style="margin-top: 15px">
+				<legend><b><strong><font color="red">【周计划】</font></strong></b></legend>
+				<table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#d5e4fd">
 				<tr>
 					<td height="26" align="left" bgcolor="#FFFFFF" width="80px"  nowrap="nowrap">
 						<strong>职责类型：</strong>
@@ -216,6 +218,12 @@
 						<s:textarea  tabindex="-1"  id="txt_sunday" name="weeklyItemInfo.sunday" cssStyle="width: 630px;height:50px;resize:none;" maxlength="500"></s:textarea>
 					</td>
 				</tr>
+				</table>
+		</fieldset>
+		
+		<fieldset style="margin-top: 15px">
+				<legend><b><strong><font color="red">【周报】</font></strong></b></legend>
+				<table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#d5e4fd">
 				<tr>
 					<td height="26" align="left" bgcolor="#FFFFFF" width="80px"  nowrap="nowrap">
 						<strong>实际结果：</strong>
@@ -261,6 +269,7 @@
 					</td>
 				</tr>
 			</table>
+		</fieldset>
 		</span>
 		<div align="center" style="height: 50px;vertical-align: middle;">
 			<input name="closeBtn" type="button" class="btn_2_3" id="closeBtn" value="关闭">
