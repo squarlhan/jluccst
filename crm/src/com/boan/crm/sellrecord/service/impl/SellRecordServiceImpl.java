@@ -540,4 +540,83 @@ public class SellRecordServiceImpl implements ISellRecordService {
 		}
 		return data;
 	}
+	
+	
+	/**
+     * 查询指定销售员的所有销售记录
+     * @return 记录数组
+     */
+	public List<SellRecord> findAllSellRecordOrderByBargainTime(Map<String, ?> values){
+		StringBuffer param = new StringBuffer();
+		
+		if(values.containsKey("customerId")){
+			param = param.append("  and customer.id ='"+values.get("customerId")+"'  ");
+		}
+		if(values.containsKey("customerId")){
+			param = param.append("  and customer.id ='"+values.get("customerId")+"'  ");
+		}
+		if(values.containsKey("queryCustomerName")){
+			param = param.append("  and customer.customerName like '%"+values.get("queryCustomerName")+"%'  ");
+		}
+		if(values.containsKey("querySalesman")){
+			param = param.append("  and  record. salesmanId='"+values.get("querySalesman")+"'" );
+		}
+		if(values.containsKey("queryBargainTimeBegin")){
+			param.append(" and record. bargainTime >='"+values.get("queryBargainTimeBegin")+"'" );
+		}
+		if(values.containsKey("queryBargainTimeEnd")){
+			param.append(" and record. bargainTime <='"+values.get("queryBargainTimeEnd")+"'" );
+		}
+		if(values.containsKey("deptId")){
+			param = param.append("  and record. deptId ='"+values.get("deptId")+"'  ");
+		}
+		if(values.containsKey("salesmanId")){
+			param = param.append("  and record. salesmanId ='"+values.get("salesmanId")+"'  ");
+		}
+		if(values.containsKey("companyId")){
+			param = param.append("  and record. companyId ='"+values.get("companyId")+"'  ");
+		}
+		/////////////////
+		if(values.get("queryAmountBegin")!=null && !values.get("queryAmountBegin").equals("")){
+			param = param.append("   and record.receivable >= "+values.get("queryAmountBegin") );
+		}
+		if(values.get("queryAmountEnd")!=null && !values.get("queryAmountEnd").equals("")){
+			param = param.append("  and  record.receivable <= "+values.get("queryAmountEnd"));
+		}
+		if(values.get("queryIsArrearage")!=null && values.get("queryIsArrearage").equals("0")){
+			param = param.append("  and  record.debt  = 0 ");
+		}
+		if(values.get("queryIsArrearage")!=null && values.get("queryIsArrearage").equals("1")){
+			param = param.append(" and  record.debt > 0");
+		}
+		/////////////////
+		String hql = "select new SellRecord" +
+				"(record.id,record. goodsType,record. customerId,record. customerName," +
+				"record. salesmanId,record. salesmanName,record. orderID,record. rate," +
+				"record. receivable,record. realCollection,record. debt,record. advance," +
+				"record. invoice,record. bargainTime) " +
+				"from SellRecord as record,CustomerInfo as customer where 1=1 " +
+				"and record.customerId=customer.id "+param.toString()+"" +
+				" order by record.bargainTime desc";
+		List<SellRecord> data =sellRecordDao.find(hql, values);
+		for(int i=0;i<data.size();i++){
+			SellRecord temp  = data.get(i);
+			String id = temp.getCustomerId();
+			if(id!=null){
+				CustomerInfo customer = customerInfoService.get(id);
+				temp.setCustomer(customer);
+			}
+			List<GoodsInfo> detials= goodsInfoService.queryGoodsInfoByRecordId(temp.getId());
+			
+			if(detials!=null){
+				Set<GoodsInfo> setTemp = new HashSet<GoodsInfo>();
+				for(GoodsInfo goods : detials){
+					setTemp.add(goods);
+				}
+				temp.setGoodsDetials(setTemp);
+			}
+			data.set(i, temp);
+		}
+		return data;
+	}
 }

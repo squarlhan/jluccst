@@ -140,5 +140,11 @@ public interface ISellRecordService {
      * @return 记录数组
      */
 	public List<SellRecord> findAllSellRecord(Map<String, ?> values);
+	
+	/**
+     * 查询指定销售员的所有销售记录
+     * @return 记录数组
+     */
+	public List<SellRecord> findAllSellRecordOrderByBargainTime(Map<String, ?> values);
 
 }
