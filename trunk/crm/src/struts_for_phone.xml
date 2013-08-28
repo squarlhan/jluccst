@@ -66,5 +66,6 @@
 	<package name="sellreportstatforphone" extends="phonejson">
 		<action name="getDeptSellerSellRecordListForPhoneAction" class="sellReportStatAction" method="getDeptSellerSellRecordListForPhone"></action>
 		<action name="getLeadSellRecordListForPhoneAction" class="sellReportStatAction" method="getLeadSellRecordListForPhone"></action>
+		<action name="getLeadSellRecordListByDeptForPhoneAction" class="sellReportStatAction" method="getLeadSellRecordListByDeptForPhone"></action>
 	</package>
 </struts>
