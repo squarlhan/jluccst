@@ -26,7 +26,7 @@
 		$('.selector').tabs({ ajaxOptions: { async: false } });
 		//$('.selector').tabs({ selected: 1 });
 		$("#tt").click(function(){
-			$("#iframe1").attr("src","openSellRecordListForMyCustomerAction.action?customerId=<%=customerId%>&hasReturn=<%=hasReturn %>");
+			//$("#iframe1").attr("src","openSellRecordListForMyCustomerAction.action?customerId=<%=customerId%>&hasReturn=<%=hasReturn %>");
 		});
 		$.fn.showOrHideTab(1,false);
 		$("#closeBtn").show();
