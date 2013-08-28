@@ -15,7 +15,7 @@
 		$('.selector').tabs({ ajaxOptions: { async: false } });
 		//$('.selector').tabs({ selected: 1 });
 		$("#tt").click(function(){
-			$("#iframe1").attr("src","openSellRecordListAction.action?companyId=<s:property value='commpanyId'/>&deptId=<s:property value='deptId'/>&userId=<s:property value='userId'/>&who=<s:property value='who'/>");
+			//$("#iframe1").attr("src","openSellRecordListAction.action?companyId=<s:property value='commpanyId'/>&deptId=<s:property value='deptId'/>&userId=<s:property value='userId'/>&who=<s:property value='who'/>");
 		});
 		$.fn.showOrHideTab(1,false);
 	});

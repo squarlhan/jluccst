@@ -15,7 +15,7 @@
 		$('.selector').tabs({ ajaxOptions: { async: false } });
 		//$('.selector').tabs({ selected: 1 });
 		$("#tt").click(function(){
-			$("#iframe1").attr("src","openSellRecordListForSellerAction.action");
+			//$("#iframe1").attr("src","openSellRecordListForSellerAction.action");
 		});
 		$.fn.showOrHideTab(1,false);
 	});
