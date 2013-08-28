@@ -65,7 +65,7 @@ public class CustomerTraceInfoServiceImpl implements ICustomerTraceInfoService{
 	public List<CustomerTraceInfo> findAllCustomerTraceInfoByCustomerId(String customerId) {
 		Map<String,String> values = new HashMap<String,String>();
 		values.put("customerId", customerId);
-		return customerTraceInfoDao.find("from CustomerTraceInfo where customerId = :customerId and deleteFlag = 0 order by traceTime asc", values);
+		return customerTraceInfoDao.find("from CustomerTraceInfo where customerId = :customerId and deleteFlag = 0 order by traceTime desc", values);
 	}
 	
 	@Override

@@ -57,7 +57,7 @@ public class CustomerVisitInfoServiceImpl implements ICustomerVisitInfoService{
 	public List<CustomerVisitInfo> findAllCustomerVisitInfoByCustomerId(String customerId) {
 		Map<String,String> values = new HashMap<String,String>();
 		values.put("customerId", customerId);
-		return customerVisitInfoDao.find("from CustomerVisitInfo where customerId = :customerId and (deleteFlag = 0 ) order by visitTime asc", values);
+		return customerVisitInfoDao.find("from CustomerVisitInfo where customerId = :customerId and (deleteFlag = 0 ) order by visitTime desc", values);
 	}
 	@Override
 	public void deleteAllCustomerVisitInfoByCustomerId(String customerId) {
