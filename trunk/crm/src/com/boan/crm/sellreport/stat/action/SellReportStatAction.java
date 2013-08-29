@@ -1375,6 +1375,7 @@ public class SellReportStatAction extends BaseActionSupport{
 			int month = Integer.parseInt(statMonth) ;
 			
 			if(type.equals("1")){
+				deptId = dept.getId();
 				DeptSellInfoForPhone deptTemp = new DeptSellInfoForPhone();
 				//计算某年某月第某周的销售总额
 				sellAmount = getSellAmountForWeek( companyId, deptId, null , year, month , weekIndex);
@@ -1394,6 +1395,7 @@ public class SellReportStatAction extends BaseActionSupport{
 				deptSellInfoForPhoneList.add(deptTemp);
 				
 			}else if(type.equals("2")){
+				deptId = dept.getId();
 				DeptSellInfoForPhone deptTemp = new DeptSellInfoForPhone();
 				//计算某年某月销售总额
 				sellAmount = getSellAmountForMonth( companyId, deptId, null , year, month);
