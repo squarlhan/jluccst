@@ -1383,6 +1383,7 @@ public class SellReportStatAction extends BaseActionSupport{
 					sellAmount = new BigDecimal(0);
 				}
 				//计算某年某月第某周的计划销售总额
+				roleKey = RoleFlag.BU_MEN_LING_DAO;
 				planAmount = getPlanAmountForWeek(roleKey, companyId, deptId, null,  year, month ,weekIndex );
 				if(planAmount==null){
 					planAmount = new BigDecimal(0);
@@ -1403,6 +1404,7 @@ public class SellReportStatAction extends BaseActionSupport{
 					sellAmount = new BigDecimal(0);
 				}
 				//计算某年某月计划销售总额
+				roleKey = RoleFlag.BU_MEN_LING_DAO;
 				planAmount = getPlanAmountForMonth(roleKey, companyId, deptId, null,  year, month);
 				if(planAmount==null){
 					planAmount = new BigDecimal(0);
