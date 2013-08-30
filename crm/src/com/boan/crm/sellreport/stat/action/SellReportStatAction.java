@@ -1067,18 +1067,36 @@ public class SellReportStatAction extends BaseActionSupport{
 				//计算某年某月计划销售总额
 				planAmount = getPlanAmountForMonth(roleKey, companyId, deptId, null,  year, month);
 			}
+			
+			//json返回部门名称
+			map.put("name", deptService.get(deptId).getDeptName() );
+			
 			//未完成的销售值比例
 			if(planAmount.doubleValue()==0){
+				map.put("plane",0 );
+				map.put("finished", sellAmount );
 				unfinished= "100";
 			}else{
 				if(planAmount.subtract( sellAmount ).doubleValue()>0){
+					//计划值-销售值=完成的销售值
 					BigDecimal a= planAmount.subtract( sellAmount );
+					//未完成的销售值 / 计划值 = 未完成比例
 					BigDecimal b= a. divide( planAmount,2,BigDecimal.ROUND_HALF_UP );
+					
+					//json返回部门计划销售额
+					map.put("plane", planAmount );
+					//json返回部门完成销售额
+					map.put("finished", sellAmount);
+					//未完成值乘以100
 					unfinished = b .multiply(new BigDecimal(100)).toString();
 				}else{
+					map.put("plane",planAmount );
+					map.put("finished", sellAmount );
 					unfinished= "100";
 				}
 			}
+			//json返回部门完成比例
+			map.put("unfinished", unfinished );
 			
 			List<User> tempList = userService.queryUserList(companyId, deptId);
 			for(User user : tempList){
@@ -1107,7 +1125,7 @@ public class SellReportStatAction extends BaseActionSupport{
 					salesmanSellInfoForPhoneList.add(obj);
 				}
 			}
-			map.put("unfinished", unfinished );
+			
 			map.put("sell", salesmanSellInfoForPhoneList);
 		}
 		request.setAttribute("map", map);
