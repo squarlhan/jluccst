@@ -157,33 +157,6 @@
 		  	<legend>查询条件</legend>
 			<table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#d5e4fd">
 				<tr>
-					<!-- 
-					<td height="26"  align="right" bgcolor="#FFFFFF" nowrap="nowrap">
-						<strong>客户名称：</strong>
-					</td>
-					<td height="26" align="left" bgcolor="#FFFFFF">
-						<s:textfield name="customerName" id="customerName" style="width: 100px"></s:textfield>
-					</td>
-					<td height="26"  align="right" bgcolor="#FFFFFF" nowrap="nowrap">
-						<strong>联 系 人：</strong>
-					</td>
-					<td height="26" align="left" bgcolor="#FFFFFF">
-						<s:textfield name="contractorName" id="contractorName" style="width: 100px"></s:textfield>
-					</td>
-					<td height="26" align="right" bgcolor="#FFFFFF" nowrap="nowrap">
-						<strong>客户分类：</strong>
-					</td>
-					<td height="26"  align="left" bgcolor="#FFFFFF">
-						<s:select list="listCategory" listKey="id" listValue="name" value="customerCategory"  id="categoryId" name="customerCategory" cssStyle="width:100px" headerKey="" headerValue="--请选择--"></s:select>
-					</td>
-					<td height="26"  align="right" bgcolor="#FFFFFF" nowrap="nowrap">
-						<strong>业务员：：</strong>
-					</td>
-					<td height="26"  align="left" bgcolor="#FFFFFF">
-						<s:select list="userList" listKey="id" listValue="userCName" value="salesmanId"  id="salesmanId" name="salesmanId" cssStyle="width:100px" headerKey="" headerValue="--请选择--"></s:select>
-					</td>
-					 -->
-					 
 					<td height="26"  align="right" bgcolor="#FFFFFF" nowrap="nowrap">
 						<strong>成交日期：</strong>
 					</td>
