@@ -252,9 +252,24 @@ public class SellRecordAction extends BaseActionSupport {
 		if (queryBargainTimeBegin != null && !queryBargainTimeBegin.trim().equals("")) {
 			params.put("queryBargainTimeEnd", queryBargainTimeEnd);
 		}
-		if (deptId != null && !deptId.trim().equals("")) {
-			params.put("deptId", deptId);
+		UserSession us = this.getSession();
+		boolean popodomFlag = popedomService.isCompanyAdministrator(us.getUserId(), String.valueOf(us.getUserType()) ) 
+				||popedomService.isHasCompanyPopedom(us.getRoleKey());
+		if( popodomFlag ){
+			//公司级
+			if (deptId != null && deptId.length() > 0) {
+				params.put("deptId", deptId);
+			}
+		}else{
+			//部门级
+			if (userId != null && userId.length() == 0 && deptId != null && deptId.length() == 0) {
+				params.put("deptId", this.sessionDeptId);
+			}
+			if (deptId != null && deptId.length() > 0) {
+				params.put("deptId", deptId);
+			}
 		}
+		
 		if (userId != null && !userId.trim().equals("")) {
 			params.put("salesmanId", userId);
 		}

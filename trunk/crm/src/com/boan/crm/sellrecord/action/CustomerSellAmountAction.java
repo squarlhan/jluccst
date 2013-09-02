@@ -140,20 +140,11 @@ public class CustomerSellAmountAction extends BaseActionSupport {
 		return showGroupTreeForQueryCustomerBySellAmount();
 	}
 	
-	public String queryCustomerBySellAmount() {
+	public String queryCustomerBySellAmount() throws Exception {
 		// 客户分类： 传0
 		listCategory = dataDictionaryService.findDataDictionaryByType( sessionCompanyId, 0);
-		try {
-			if (deptId != null && deptId.length() > 0) {
-				userList = userService.queryUserListByCompanyIdRoleKey(sessionCompanyId, deptId, RoleFlag.YE_WU_YUAN);
-			} else {
-				userList = userService.queryUserListByCompanyIdRoleKey(sessionCompanyId, RoleFlag.YE_WU_YUAN);
-			}
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
 		Map<String, String> values = new HashMap<String, String>();
-
+		
 		if (customerName != null && customerName.length() > 0) {
 			values.put("customerName", "%" + customerName + "%");
 		}
@@ -167,9 +158,26 @@ public class CustomerSellAmountAction extends BaseActionSupport {
 			values.put("salesmanId", salesmanId);
 		}
 		
-		if (deptId != null && deptId.length() > 0) {
-			values.put("deptId", deptId);
+		UserSession us = this.getSession();
+		boolean popodomFlag = popedomService.isCompanyAdministrator(us.getUserId(), String.valueOf(us.getUserType()) ) 
+				||popedomService.isHasCompanyPopedom(us.getRoleKey());
+		if( popodomFlag ){
+			//公司级
+			if (deptId != null && deptId.length() > 0) {
+				values.put("deptId", deptId);
+			}
+		}else{
+			//部门级
+			if (salesmanId != null && salesmanId.length() == 0 && deptId != null && deptId.length() == 0) {
+				values.put("deptId", this.sessionDeptId);
+			}
+			if (deptId != null && deptId.length() > 0) {
+				values.put("deptId", deptId);
+			}
 		}
+		
+		
+		
 		if (queryIsArrearage != null && !queryIsArrearage.equals("")) {
 			values.put("queryIsArrearage", queryIsArrearage);
 		}
@@ -193,7 +201,7 @@ public class CustomerSellAmountAction extends BaseActionSupport {
 		return SUCCESS;
 	}
 	
-	public String queryCustomerBySellAmountForEdit(){
+	public String queryCustomerBySellAmountForEdit() throws Exception{
 		return queryCustomerBySellAmount();
 	}
 
