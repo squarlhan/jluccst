@@ -332,7 +332,7 @@ public class CustomerInfoServiceImpl implements ICustomerInfoService{
 			hql.append(" and id in ( select customerId from ContractPersonInfo where personName like :contractorName) ");
 		}
 		//销售额范围条件
-		hql.append(" and id in ( select record.customerId  from SellRecord as record group by  record.customerId , record.bargainTime  having 1=1 ");
+		hql.append(" and id in ( select record.customerId  from SellRecord as record group by  record.customerId   having 1=1 ");
 		
 		if(values.get("queryBeginTime")!=null && !values.get("queryBeginTime").equals("")){
 			hql. append( " and record.bargainTime >='"+values.get("queryBeginTime")+"' ");
@@ -389,7 +389,7 @@ public class CustomerInfoServiceImpl implements ICustomerInfoService{
 		}
 		
 		//销售额范围条件
-		hql.append(" and id in ( select record.customerId  from SellRecord as record group by  record.customerId , record.bargainTime  having 1=1 ");
+		hql.append(" and id in ( select record.customerId  from SellRecord as record group by  record.customerId  having 1=1 ");
 		
 		if(values.get("queryBeginTime")!=null && !values.get("queryBeginTime").equals("")){
 			hql. append( " and record.bargainTime >='"+values.get("queryBeginTime")+"' ");
