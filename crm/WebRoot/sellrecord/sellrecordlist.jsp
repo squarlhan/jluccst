@@ -264,6 +264,8 @@
 	</head>
   <body>
    <s:form id="form1" name="form1" method="post" theme="simple" action="">
+   	<s:hidden name="deptId"></s:hidden>
+   	<s:hidden name="userId"></s:hidden>
    		<fieldset >
 		<legend>查询条件</legend>
    		<span>
