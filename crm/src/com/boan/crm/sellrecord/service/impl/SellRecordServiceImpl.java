@@ -131,7 +131,7 @@ public class SellRecordServiceImpl implements ISellRecordService {
 				"record. invoice,record. bargainTime) " +
 				"from SellRecord as record,CustomerInfo as customer where 1=1 " +
 				"and record.customerId=customer.id "+param.toString()+"" +
-				" order by receivable desc,record.bargainTime desc";
+				" order by receivable desc desc";
 		List<SellRecord> data =sellRecordDao.findForPage(hql, values, pagination.getStartIndex(), pagination.getPageSize());
 		for(int i=0;i<data.size();i++){
 			SellRecord temp  = data.get(i);

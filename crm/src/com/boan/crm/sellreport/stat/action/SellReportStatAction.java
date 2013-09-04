@@ -1075,7 +1075,7 @@ public class SellReportStatAction extends BaseActionSupport{
 			if(planAmount.doubleValue()==0){
 				map.put("plane",0 );
 				map.put("finished", sellAmount );
-				unfinished= "100";
+				unfinished= "0";
 			}else{
 				if(planAmount.subtract( sellAmount ).doubleValue()>0){
 					//计划值-销售值=完成的销售值
@@ -1092,7 +1092,7 @@ public class SellReportStatAction extends BaseActionSupport{
 				}else{
 					map.put("plane",planAmount );
 					map.put("finished", sellAmount );
-					unfinished= "100";
+					unfinished= "0";
 				}
 			}
 			//json返回部门完成比例
@@ -1445,14 +1445,14 @@ public class SellReportStatAction extends BaseActionSupport{
 		}
 		//未完成的销售值比例
 		if(planAmount.doubleValue()==0){
-			unfinished= "100";
+			unfinished= "0";
 		}else{
 			if(planAmount.subtract( sellAmount ).doubleValue()>0){
 				BigDecimal a= planAmount.subtract( sellAmount );
 				BigDecimal b= a. divide( planAmount,2,BigDecimal.ROUND_HALF_UP );
 				unfinished = b .multiply(new BigDecimal(100)).toString();
 			}else{
-				unfinished= "100";
+				unfinished= "0";
 			}
 		}
 		

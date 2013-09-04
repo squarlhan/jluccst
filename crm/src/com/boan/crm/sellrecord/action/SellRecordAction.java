@@ -258,7 +258,13 @@ public class SellRecordAction extends BaseActionSupport {
 		if( popodomFlag ){
 			//公司级
 			if (deptId != null && deptId.length() > 0) {
-				params.put("deptId", deptId);
+				String[] str = deptId.split(",");
+				if(str.length>1 && !str[0].trim().equals("")){
+					deptId = str[0];
+					params.put("deptId", deptId);
+				}else if(str.length==1){
+					params.put("deptId", deptId);
+				}
 			}
 		}else{
 			//部门级
@@ -266,12 +272,24 @@ public class SellRecordAction extends BaseActionSupport {
 				params.put("deptId", this.sessionDeptId);
 			}
 			if (deptId != null && deptId.length() > 0) {
-				params.put("deptId", deptId);
+				String[] str = deptId.split(",");
+				if(str.length>1 && !str[0].trim().equals("")){
+					deptId = str[0];
+					params.put("deptId", deptId);
+				}else if(str.length==1){
+					params.put("deptId", deptId);
+				}
 			}
 		}
 		
 		if (userId != null && !userId.trim().equals("")) {
-			params.put("salesmanId", userId);
+			String[] str = userId.split(",");
+			if(str.length>1 && !str[0].trim().equals("")){
+				userId = str[0];
+				
+			}else if(str.length==1){
+				params.put("salesmanId", userId);
+			}
 		}
 		//销售总额相关条件
 		if (queryIsArrearage != null && !queryIsArrearage.equals("")) {
@@ -1008,6 +1026,8 @@ public class SellRecordAction extends BaseActionSupport {
 			}
 			if (tempUserList != null && tempUserList.size() > 0) {
 				userList.addAll(tempUserList);
+//				for(User u : tempUserList)
+//					System.out.print(u.getUserCName());
 			}
 		}
 		return "group-tree-for-sell-record";
