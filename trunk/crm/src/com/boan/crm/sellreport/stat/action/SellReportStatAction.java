@@ -1073,8 +1073,8 @@ public class SellReportStatAction extends BaseActionSupport{
 			
 			//未完成的销售值比例
 			if(planAmount.doubleValue()==0){
-				map.put("plane",0 );
-				map.put("finished", sellAmount );
+				map.put("plane",0.00 );
+				map.put("finished", sellAmount.setScale(2,BigDecimal.ROUND_HALF_UP).toString() );
 				unfinished= "0";
 			}else{
 				if(planAmount.subtract( sellAmount ).doubleValue()>0){
@@ -1084,14 +1084,14 @@ public class SellReportStatAction extends BaseActionSupport{
 					BigDecimal b= a. divide( planAmount,2,BigDecimal.ROUND_HALF_UP );
 					
 					//json返回部门计划销售额
-					map.put("plane", planAmount );
+					map.put("plane", planAmount.setScale(2,BigDecimal.ROUND_HALF_UP).toString() );
 					//json返回部门完成销售额
-					map.put("finished", sellAmount);
+					map.put("finished",  sellAmount.setScale(2,BigDecimal.ROUND_HALF_UP).toString() );
 					//未完成值乘以100
 					unfinished = b .multiply(new BigDecimal(100)).toString();
 				}else{
-					map.put("plane",planAmount );
-					map.put("finished", sellAmount );
+					map.put("plane",planAmount.setScale(2,BigDecimal.ROUND_HALF_UP).toString() );
+					map.put("finished",  sellAmount.setScale(2,BigDecimal.ROUND_HALF_UP).toString() );
 					unfinished= "0";
 				}
 			}
@@ -1120,8 +1120,8 @@ public class SellReportStatAction extends BaseActionSupport{
 					SalesmanSellInfoForPhone obj  = new SalesmanSellInfoForPhone();
 					obj.setId(tempId);
 					obj.setName(tempName);
-					obj.setFinished(tempSellAmount.toString());
-					obj.setPlane(tempPlanAmount.toString());
+					obj.setFinished(tempSellAmount.setScale(2,BigDecimal.ROUND_HALF_UP).toString());
+					obj.setPlane( tempPlanAmount.setScale(2,BigDecimal.ROUND_HALF_UP).toString());
 					salesmanSellInfoForPhoneList.add(obj);
 				}
 			}
@@ -1398,18 +1398,19 @@ public class SellReportStatAction extends BaseActionSupport{
 				//计算某年某月第某周的销售总额
 				sellAmount = getSellAmountForWeek( companyId, deptId, null , year, month , weekIndex);
 				if(sellAmount==null){
-					sellAmount = new BigDecimal(0);
+					sellAmount = new BigDecimal(0.00);
 				}
 				//计算某年某月第某周的计划销售总额
 				roleKey = RoleFlag.BU_MEN_LING_DAO;
 				planAmount = getPlanAmountForWeek(roleKey, companyId, deptId, null,  year, month ,weekIndex );
 				if(planAmount==null){
-					planAmount = new BigDecimal(0);
+					planAmount = new BigDecimal(0.00);
 				}
 				deptTemp.setId(dept.getId());
 				deptTemp.setName(dept.getDeptName());
-				deptTemp.setFinished(sellAmount.toString());
-				deptTemp.setPlane(planAmount.toString());
+				
+				deptTemp.setFinished(sellAmount.setScale(2,BigDecimal.ROUND_HALF_UP).toString());
+				deptTemp.setPlane(planAmount.setScale(2,BigDecimal.ROUND_HALF_UP).toString());
 				
 				deptSellInfoForPhoneList.add(deptTemp);
 				
@@ -1419,25 +1420,26 @@ public class SellReportStatAction extends BaseActionSupport{
 				//计算某年某月销售总额
 				sellAmount = getSellAmountForMonth( companyId, deptId, null , year, month);
 				if(sellAmount==null){
-					sellAmount = new BigDecimal(0);
+					sellAmount = new BigDecimal(0.00);
 				}
 				//计算某年某月计划销售总额
 				roleKey = RoleFlag.BU_MEN_LING_DAO;
 				planAmount = getPlanAmountForMonth(roleKey, companyId, deptId, null,  year, month);
 				if(planAmount==null){
-					planAmount = new BigDecimal(0);
+					planAmount = new BigDecimal(0.00);
 				}
 				deptTemp.setId(dept.getId());
 				deptTemp.setName(dept.getDeptName());
-				deptTemp.setFinished(sellAmount.toString());
-				deptTemp.setPlane(planAmount.toString());
+				
+				deptTemp.setFinished(sellAmount.setScale(2,BigDecimal.ROUND_HALF_UP).toString());
+				deptTemp.setPlane(planAmount.setScale(2,BigDecimal.ROUND_HALF_UP).toString());
 				
 				deptSellInfoForPhoneList.add(deptTemp);
 			}
 			
 		}
-		planAmount= new BigDecimal (0);
-		sellAmount= new BigDecimal (0);
+		planAmount= new BigDecimal (0.00);
+		sellAmount= new BigDecimal (0.00);
 		//计算所有部门的总计划销售值和所有实际销售值
 		for(DeptSellInfoForPhone obj : deptSellInfoForPhoneList){
 			planAmount = new BigDecimal (compute ( planAmount.toString() , obj.getPlane()));
