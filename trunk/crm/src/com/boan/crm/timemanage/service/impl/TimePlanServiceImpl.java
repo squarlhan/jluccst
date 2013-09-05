@@ -95,7 +95,7 @@ public class TimePlanServiceImpl implements ITimePlanService {
 			}
 		}
 		
-		String hql = "from TimePlan "+strb.toString()+" order by createTime desc";
+		String hql = "from TimePlan "+strb.toString()+" order by submitTime desc ,createTime desc";
 		List<TimePlan> data = timePlanDao.findForPage(hql, values, pagination.getStartIndex(), pagination.getPageSize());
 		hql = "select count(*) from TimePlan" +strb.toString();
 		int totalRows = timePlanDao.findCountForPage(hql, values);
@@ -175,8 +175,7 @@ public class TimePlanServiceImpl implements ITimePlanService {
 				strb.append(" And  employeeId=:employeeId");
 			}
 		}
-		
-		String hql = "from TimePlan "+strb.toString()+" order by createTime desc";
+		String hql = "from TimePlan "+strb.toString()+" order by submitTime desc, createTime desc";
 		List<TimePlan> data = timePlanDao.find(hql, values);
 		hql = "select count(*) from TimePlan" +strb.toString();
 		return data;
