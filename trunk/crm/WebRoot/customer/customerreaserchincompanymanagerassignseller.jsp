@@ -56,17 +56,27 @@
 			
 			$("#sellerList").dblclick( function () { 
 				$("#sellerList option:selected").each(function(){  
-                    var option = "<option value='"+$(this).val()+"'>"+$(this).text()+"</option>";                   
-                    $("#selectedSellerList").append(option);  
-                    $(this).remove();  
+					if($("#selectedSellerList option").length==0){
+						var option = "<option value='"+$(this).val()+"'>"+$(this).text()+"</option>";                   
+	                    $("#selectedSellerList").append(option);  
+	                    $(this).remove();  
+					}else{
+						alert("每个客户只能分配给一个业务员人员！");
+						return false;
+					}
                 });  
 			}); 
 			
 			$("#addBtn").click(function(){
 				$("#sellerList option:selected").each(function(){  
-                    var option = "<option value='"+$(this).val()+"'>"+$(this).text()+"</option>";                   
-                    $("#selectedSellerList").append(option);  
-                    $(this).remove();  
+					if($("#selectedSellerList option").length==0){
+						var option = "<option value='"+$(this).val()+"'>"+$(this).text()+"</option>";                   
+	                    $("#selectedSellerList").append(option);  
+	                    $(this).remove();  
+					}else{
+						alert("每个客户只能分配给一个业务员人员！");
+						return false;
+					}
                 });  
 			});
 			
