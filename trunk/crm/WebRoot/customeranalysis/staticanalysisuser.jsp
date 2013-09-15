@@ -123,6 +123,13 @@ background-color:#d3eaef}
      	 	parent.location.href = "../customer/customermanage.jsp";
 	  			//parent.location.href = "autoAnalysisCustomerList.action";
 	  		});
+	  	 $("#closeBtn3").click(function(){
+	  			//parent.$("#windown-close").click();
+     	 	parent.location.href = "../customer/customersearch.jsp";
+	  			//parent.location.href = "autoAnalysisCustomerList.action";
+	  		});	
+	  		
+	  		
          /*
  		$.fn.close();
 		
@@ -152,6 +159,9 @@ background-color:#d3eaef}
   </s:if>
   <s:if test='option!=null && option.length() > 0 && option.equals("customer")'>
   <tr><td align="center"><input type="button" name="closeBtn2" id="closeBtn2" value="返回客户列表" class="btn_5" /></td></tr>
+  </s:if>
+  <s:if test='option!=null && option.length() > 0 && option.equals("search")'>
+  <tr><td align="center"><input type="button" name="closeBtn3" id="closeBtn3" value="返回客户列表" class="btn_5" /></td></tr>
   </s:if>
   <s:if test='option == null || option.length() ==0 '>
   <tr><td align="center"><input type="button" name="closeBtn1" id="closeBtn1" value="关闭" class="btn_2_3" /></td></tr>
