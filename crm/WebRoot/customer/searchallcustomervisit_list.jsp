@@ -97,7 +97,7 @@
 	  				var url = $(this).attr("url");
 	  				parent.parent.parent.tipsWindown("查看回访信息","iframe:" + url,"800","500","true","","true","no");
 					parent.parent.parent.$("#windown-close").bind('click',function(){
-						window.location.href= window.location.href;
+						//window.location.href= window.location.href;
 					});
 	  			});
 	  		});

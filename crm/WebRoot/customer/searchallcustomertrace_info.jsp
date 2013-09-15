@@ -320,7 +320,7 @@
 	</tr>
 	<tr>
 		<td></td>
-		<td align="right" nowrap>跟进时间：</td>
+		<td align="right" nowrap>预计跟进时间：</td>
 		<td><s:textfield readOnly="true" type="text" style="width:150px" name="traceTime" id="traceTime" readOnly="true"></s:textfield></td>
 		<td align="right">任务：</td>
 		<td colspan="3"><s:textarea type="text" style="width:400px;height:60px" name="customerTraceInfo.task" id="task" readOnly="true"></s:textarea></td>
