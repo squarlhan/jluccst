@@ -97,7 +97,7 @@
 	  				var url = $(this).attr("url");
 	  				parent.parent.parent.tipsWindown("查看跟进信息","iframe:" + url,"800","500","true","","true","no");
 					parent.parent.parent.$("#windown-close").bind('click',function(){
-						window.location.href= window.location.href;
+						//window.location.href= window.location.href;
 					});
 	  			});
 	  		});
@@ -143,7 +143,7 @@
     </table>
       <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#d5e4fd">
         <tr>
-              <td align="center" background="../images/headerbg.jpg"><strong>跟进时间</strong></td>
+              <td align="center" background="../images/headerbg.jpg"><strong>预计跟进时间</strong></td>
               <td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">客户名称</td>
 			<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">业务员</td>
 			<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">业务进展</td>
