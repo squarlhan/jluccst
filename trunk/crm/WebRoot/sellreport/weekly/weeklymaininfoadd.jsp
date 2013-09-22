@@ -170,7 +170,9 @@
 											<strong>所属部门：</strong>
 										</td>
 										<td height="26" align="left" bgcolor="#FFFFFF">
-												<s:select id="sel_dept"  name="weeklyMainInfo.deptId" list="deptList" listKey="id"  listValue="deptName" cssStyle="width: 160px;" ></s:select>
+												<span onmousemove="this.setCapture();" onmouseout="this.releaseCapture();" onfocus="this.blur();">
+													<s:select tabindex="-1"  id="sel_dept"  name="weeklyMainInfo.deptId" list="deptList" listKey="id"  listValue="deptName" cssStyle="width: 160px;" ></s:select>
+												</span>
 										</td>
 										<td height="26" align="right" bgcolor="#FFFFFF">
 											<strong>直接上级：</strong>
