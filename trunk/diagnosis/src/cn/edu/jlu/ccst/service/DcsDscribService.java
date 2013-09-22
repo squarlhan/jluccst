@@ -1,6 +1,8 @@
 package cn.edu.jlu.ccst.service;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -59,9 +61,24 @@ public class DcsDscribService {
 	 * 树形菜单服务类
 	 */
 	private TreeunitServiceInter treeunitServiceImpl;
-	
+	private RuleService ruleService;
+	private MotoErrorlogService motoerrorlogService;
 
 	
+	public RuleService getRuleService() {
+		return ruleService;
+	}
+	@Resource
+	public void setRuleService(RuleService ruleService) {
+		this.ruleService = ruleService;
+	}
+	public MotoErrorlogService getMotoerrorlogService() {
+		return motoerrorlogService;
+	}
+	@Resource
+	public void setMotoerrorlogService(MotoErrorlogService motoerrorlogService) {
+		this.motoerrorlogService = motoerrorlogService;
+	}
 	public TreeunitServiceInter getTreeunitServiceImpl() {
 		return treeunitServiceImpl;
 	}
@@ -418,6 +435,97 @@ public class DcsDscribService {
 
 		}
 
+		return results;
+	}
+	
+	public List<BackwardandResult> validateinput3() {
+		List<MotoDcsdata> alldata = motoDcsdataService.findAll();
+		List<BackwardandResult> results = new ArrayList();
+		MotoErrorlog err = null;
+		BackwardandResult br = null;
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		String mytime = formatter.format(new Date());
+		for (MotoDcsdata dd : alldata) {
+			List<DcsDscrib> dcsDscribs = dcsDscribServiceImpl.findbyname(
+					dd.getEquipment(), dd.getItem());
+			int level = 0;
+			if (dd.getItem().contains("COD")) {
+				level = 9;
+			} else if (dd.getItem().contains("NH3-N")
+					|| dd.getItem().contains("NH3N")) {
+				level = 8;
+			} else if (dd.getItem().contains("SS")) {
+				level = 7;
+			} else if (dd.getItem().contains("PH")) {
+				level = 6;
+			} else if (dd.getItem().contains("BOD")) {
+				level = 5;
+			} else {
+				level = 2;
+			}
+			if (dcsDscribs != null && dcsDscribs.size() > 0) {
+				DcsDscrib db = dcsDscribs.get(0);
+				if (dd.getValue() > db.getUpper()) {
+					if (dd.getValue() > db.getUpper2()) {
+						level += 3;
+					} else if (dd.getValue() > db.getUpper1()) {
+						level += 2;
+					} else {
+						level++;
+					}
+					br = new BackwardandResult();
+					br.setNouns(db.getName());
+					br.setVerb("过高");
+					br.setMemo(db.getEque());
+					err = new MotoErrorlog();
+					err.setWrong("过高");
+					results.add(br);
+					// errorlogImpl.save(err);
+				}
+				if (dd.getValue() < db.getLower()) {
+					if (dd.getValue() < db.getLower2()) {
+						level += 3;
+					} else if (dd.getValue() < db.getLower1()) {
+						level += 2;
+					} else {
+						level++;
+					}
+					br = new BackwardandResult();
+					br.setNouns(db.getName());
+					br.setMemo(db.getEque());
+					br.setVerb("过低");
+					err = new MotoErrorlog();
+					err.setWrong("过低");
+					results.add(br);
+					// errorlogImpl.save(err);
+				}
+			}
+			if (br != null) {
+				List<BackwardandResult> brs = new ArrayList();
+				brs.add(br);
+				
+				List<BackwardandReason> bss = ruleService.findreasons(brs);
+				if (bss != null && bss.size() > 0) {
+					String reasons = "";
+					String suggs = "";
+					for (BackwardandReason bs : bss) {
+						reasons = reasons + bs.getNouns() + bs.getVerb() + ";";
+						suggs = suggs + bs.getSugg() + ";";
+					}
+					err.setError(reasons);
+					err.setSugg(suggs);
+				}
+				err.setItem(dd.getItem());
+				err.setValue(dd.getValue());
+				err.setEquipment(dd.getEquipment());
+				err.setTime(mytime);
+				err.setLevel(String.valueOf(level));
+				if (err.getEquipment() != null) {
+					motoerrorlogService.save(err);
+				}
+
+			}
+		}
 		return results;
 	}
 }

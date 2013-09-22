@@ -11,11 +11,13 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Component;
 
 import cn.edu.jlu.ccst.dao.DcsDscribServiceInter;
+import cn.edu.jlu.ccst.dao.Init_PredictServiceInter;
 import cn.edu.jlu.ccst.dao.MotoDcsdataServiceInter;
 import cn.edu.jlu.ccst.dao.TreeunitServiceInter;
 
 import cn.edu.jlu.ccst.model.DcsDscrib;
 import cn.edu.jlu.ccst.model.Dcsdata;
+import cn.edu.jlu.ccst.model.Init_Predict;
 import cn.edu.jlu.ccst.model.MotoDcsdata;
 
 /**
@@ -24,6 +26,7 @@ import cn.edu.jlu.ccst.model.MotoDcsdata;
 */
 @Component("motodcsdataService")
 public class MotoDcsdataService {
+	private Init_PredictServiceInter init_predictServiceImpl;
 	/**
 	*实时数据监控实例
 	*/
@@ -42,7 +45,14 @@ public class MotoDcsdataService {
   // private DcsDscrib dcsDscrib;
 	private TreeunitServiceInter treeunitServiceImpl;
 	
-
+	public Init_PredictServiceInter getInit_predictServiceImpl() {
+		return init_predictServiceImpl;
+	}
+	@Resource
+	public void setInit_predictServiceImpl(
+			Init_PredictServiceInter init_predictServiceImpl) {
+		this.init_predictServiceImpl = init_predictServiceImpl;
+	}
 	
 	public TreeunitServiceInter getTreeunitServiceImpl() {
 		return treeunitServiceImpl;
@@ -97,6 +107,27 @@ public class MotoDcsdataService {
 	}
 
 
+	public List<MotoDcsdata> validatemoto(List<MotoDcsdata> input){
+		List<MotoDcsdata> resultlist = new ArrayList();
+		for(MotoDcsdata md:input){
+			Init_Predict ip = init_predictServiceImpl.findbyid(md.getEquipment());
+			if(ip!=null){
+				String ipname = ip.getName();
+				String ni = ipname.replace('.', ',');
+				if (ni != null && ni.length() >= 1&&ni.indexOf(",")>0) {
+					String[] niarray = ni.split(",");
+					if (niarray.length == 2) {						
+						MotoDcsdata temp = new MotoDcsdata();
+						temp.setEquipment(niarray[0].trim());
+						temp.setItem(niarray[1].trim());
+						temp.setValue(md.getValue());
+						resultlist.add(temp);
+					}
+				}
+			}
+		}
+		return resultlist;
+	}
 
 
 	/**
@@ -106,7 +137,7 @@ public class MotoDcsdataService {
 	public List<MotoDcsdata> findAll() {
 		List<MotoDcsdata> resultlist = new ArrayList();
 		resultlist = motodcsdataServiceImpl.findAll();
-		return resultlist;
+		return validatemoto(resultlist);
 	}
 	/**
 	*查找所有实时数据预处理
@@ -120,7 +151,7 @@ public class MotoDcsdataService {
 			List<MotoDcsdata> temp =  getalldcsddatan(jiedian);
 			results.addAll(temp);
 		}
-		return results;
+		return validatemoto(results);
 	}
 	/**
 	*查找所有实时数据预处理进行规则转化

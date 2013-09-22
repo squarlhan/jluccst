@@ -30,4 +30,6 @@ public interface Init_PredictServiceInter {
 	  * @return 关联
 	  */
 	 public List<String> findbyjiedian(String jiedian);
+	 
+	 public Init_Predict findbyid(String id);
 }
