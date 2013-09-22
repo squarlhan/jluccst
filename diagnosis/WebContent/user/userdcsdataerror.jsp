@@ -46,7 +46,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		    <th width="35%">报警原因</th>
 			<th style="width:60%">相关建议</th>
 			
-	  </tr><!--怎么写一个for循环 让每一个resonlist元素内部迭代？  -->
+	  </tr>
     <s:iterator id="reasons" value="rule" status="index1">
       
          <tr  align="left"  bordercolor="#000000" bgcolor="<s:if test="#index1.odd == true">#ffffff</s:if><s:else>#EDEDED</s:else>">
