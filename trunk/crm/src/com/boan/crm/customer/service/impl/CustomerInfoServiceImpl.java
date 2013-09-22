@@ -332,7 +332,7 @@ public class CustomerInfoServiceImpl implements ICustomerInfoService{
 			hql.append(" and id in ( select customerId from ContractPersonInfo where personName like :contractorName) ");
 		}
 		//销售额范围条件
-		hql.append(" and id in ( select record.customerId  from SellRecord as record group by  record.customerId   having 1=1 ");
+		hql.append(" and id in ( select record.customerId  from SellRecord as record    where 1=1 ");
 		
 		if(values.get("queryBeginTime")!=null && !values.get("queryBeginTime").equals("")){
 			hql. append( " and record.bargainTime >='"+values.get("queryBeginTime")+"' ");
@@ -340,6 +340,9 @@ public class CustomerInfoServiceImpl implements ICustomerInfoService{
 		if(values.get("queryEndTime")!=null && !values.get("queryEndTime").equals("")){
 			hql. append( " and record.bargainTime <='"+values.get("queryEndTime")+"' ");
 		}
+		
+		hql. append( " group by  record.customerId  having 1=1 ");
+		
 		if(values.get("queryAmountBegin")!=null && !values.get("queryAmountBegin").equals("")){
 			hql.append("  and sum(record.receivable) >= "+values.get("queryAmountBegin") );
 		}
@@ -353,7 +356,8 @@ public class CustomerInfoServiceImpl implements ICustomerInfoService{
 			hql.append(" and  sum(record.debt) > 0");
 		}
 		
-		hql. append( " ) ");
+		hql. append( "   ) ");
+		
 		
 		if(values.get("customerCategory") != null)
 		{
@@ -389,7 +393,7 @@ public class CustomerInfoServiceImpl implements ICustomerInfoService{
 		}
 		
 		//销售额范围条件
-		hql.append(" and id in ( select record.customerId  from SellRecord as record group by  record.customerId  having 1=1 ");
+		hql.append(" and id in ( select record.customerId  from SellRecord as record   where 1=1 ");
 		
 		if(values.get("queryBeginTime")!=null && !values.get("queryBeginTime").equals("")){
 			hql. append( " and record.bargainTime >='"+values.get("queryBeginTime")+"' ");
@@ -397,6 +401,9 @@ public class CustomerInfoServiceImpl implements ICustomerInfoService{
 		if(values.get("queryEndTime")!=null && !values.get("queryEndTime").equals("")){
 			hql. append( " and record.bargainTime <='"+values.get("queryEndTime")+"' ");
 		}
+		
+		hql. append( " group by  record.customerId  having 1=1 ");
+		
 		if(values.get("queryAmountBegin")!=null && !values.get("queryAmountBegin").equals("")){
 			hql.append("  and sum(record.receivable) >= "+values.get("queryAmountBegin") );
 		}
@@ -410,7 +417,7 @@ public class CustomerInfoServiceImpl implements ICustomerInfoService{
 			hql.append(" and  sum(record.debt) > 0");
 		}
 		
-		hql. append( " ) ");
+		hql. append( "   ) ");
 				
 		if(values.get("customerCategory") != null)
 		{
