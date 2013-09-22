@@ -81,7 +81,7 @@ public class MonitorAction extends ActionSupport {
 	 * 根据目前DCS数据状态得到推理结果
 	 */
 	public String execute() {
-		backwardandResult = dcsDscribService.validateinput2();
+		backwardandResult = dcsDscribService.validateinput3();
 		if (backwardandResult.size() > 0) {
 			reasonlist = ruleService.findreasons(backwardandResult);
 			

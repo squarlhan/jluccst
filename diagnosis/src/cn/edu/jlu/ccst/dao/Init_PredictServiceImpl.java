@@ -57,4 +57,16 @@ public class Init_PredictServiceImpl implements Init_PredictServiceInter {
 		result = query.getResultList();
 		return result;
 	}
+
+	@Override
+	public Init_Predict findbyid(String id) {
+		// TODO Auto-generated method stub
+		Query query = getEntityManager().createQuery(
+				"select u FROM Init_Predict u WHERE u.id = '"+id+"'");
+		if(query.getResultList().size()==0){
+			return null;
+		}else{
+			return (Init_Predict)query.getSingleResult();
+		}
+	}
 }
