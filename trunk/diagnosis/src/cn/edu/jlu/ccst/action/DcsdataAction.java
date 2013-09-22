@@ -500,6 +500,7 @@ public class DcsdataAction extends ActionSupport {
 			}
 		}
 		if (backwardandResult != null && backwardandResult.size() > 0){
+			rule.clear();
 			for(int j = 0; j < backwardandResult.size();j++){
 				Backward backward=new Backward();
 				List<BackwardandResult> tempb =new ArrayList<BackwardandResult>();
@@ -512,7 +513,8 @@ public class DcsdataAction extends ActionSupport {
 			
 			    rule.add(backward);
 			    System.out.print(rule);
-		}return "saveerror";	
+		    }
+			return "saveerror";	
 		}
 //		if (backwardandResult != null && backwardandResult.size() > 0) {
 //			reasonlist = ruleService.findreasons(backwardandResult);
