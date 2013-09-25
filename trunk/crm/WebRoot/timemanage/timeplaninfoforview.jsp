@@ -172,12 +172,13 @@
 											<s:textfield tabindex="-1"  id="txt_submitTime" name="timePlan.submitTime" cssStyle="width: 160px;" maxlength="25"></s:textfield>
 										</td>
 									</tr>
+									</span>
 									<tr>
 										<td height="26" align="right" bgcolor="#FFFFFF">
 											<strong id="aa">今日总结：</strong>
 										</td>
 										<td height="26" align="left" bgcolor="#FFFFFF" colspan="3">
-											<s:textarea  id="txt_memo" name="timePlan.memo" cssStyle="width: 438px;height:100px;resize:none;" maxlength="500"></s:textarea>
+											<s:textarea  id="txt_memo" name="timePlan.memo" cssStyle="width: 438px;height:100px;resize:none;" maxlength="500" readonly="true"></s:textarea>
 										</td>
 									</tr>
 									<tr>
@@ -185,10 +186,9 @@
 											<strong  id="bb">明日计划：</strong>
 										</td>
 										<td height="26" align="left" bgcolor="#FFFFFF" colspan="3">
-											<s:textarea  id="txt_planContent" name="timePlan.planContent" cssStyle="width: 438px;height:100px;resize:none;" maxlength="500"></s:textarea>
+											<s:textarea  id="txt_planContent" name="timePlan.planContent" cssStyle="width: 438px;height:100px;resize:none;" maxlength="500" readonly="true"></s:textarea>
 										</td>
 									</tr>
-									</span>
 									<tr>
 										<td height="26" colspan="4" align="center" bgcolor="#FFFFFF">
 											<input name="closeBtn" type="button" class="btn_2_3" id="closeBtn" value="关闭">
