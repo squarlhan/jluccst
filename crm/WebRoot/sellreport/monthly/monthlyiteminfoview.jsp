@@ -132,7 +132,6 @@
 		<s:hidden id="hid_mainInfoId" name="monthlyItemInfo.mainInfoId"></s:hidden>
 		<s:hidden id="hid_sequence" name="monthlyItemInfo.sequence"></s:hidden>
 		<s:hidden id="hid_sellDutyName" name="monthlyItemInfo.sellDutyName"></s:hidden>
-		<span onmousemove="this.setCapture();" onmouseout="this.releaseCapture();" onfocus="this.blur();"> 
 			<fieldset style="margin-top: 15px">
 				<legend><b><strong><font color="red">【月计划】</font></strong></b></legend>
 				<table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#d5e4fd">
@@ -141,6 +140,7 @@
 						<strong>职责类型：</strong>
 					</td>
 					<td height="26" align="left" bgcolor="#FFFFFF"  colspan="4">
+						<span onmousemove="this.setCapture();" onmouseout="this.releaseCapture();" onfocus="this.blur();"> 
 						<s:select tabindex="-1" id="sel_sellDuty"   name="monthlyItemInfo.sellDutyId" list="sellDutyList"  listKey="id"  listValue="name"  cssStyle="width: 160px;" headerKey="" headerValue="----请选择---" ></s:select>
 						 <span id="myspan">
 							<s:iterator value="sellDutyList" status="obj">
@@ -152,6 +152,7 @@
 								</s:if>
 							</s:iterator>
 						</span>
+						</span>
 					</td>
 				</tr>
 				<tr>
@@ -159,7 +160,7 @@
 						<strong>结果定义：</strong>
 					</td>
 					<td height="26" align="left" bgcolor="#FFFFFF" colspan="4">
-						<s:textarea  tabindex="-1"   id="txt_monthResult" name="monthlyItemInfo.monthResult" cssStyle="width: 610px;height:100px;resize:none;" maxlength="500"></s:textarea>
+						<s:textarea readonly="true"  tabindex="-1"   id="txt_monthResult" name="monthlyItemInfo.monthResult" cssStyle="width: 610px;height:100px;resize:none;" maxlength="500"></s:textarea>
 					</td>
 				</tr>
 
@@ -168,13 +169,13 @@
 						<strong>第一周：</strong>
 					</td>
 					<td height="26" align="left" bgcolor="#FFFFFF" >
-						<s:textarea  tabindex="-1"  id="txt_firstWeek" name="monthlyItemInfo.firstWeek" cssStyle="width: 250px;height:50px;resize:none;" maxlength="500"></s:textarea>
+						<s:textarea readonly="true"  tabindex="-1"  id="txt_firstWeek" name="monthlyItemInfo.firstWeek" cssStyle="width: 250px;height:50px;resize:none;" maxlength="500"></s:textarea>
 					</td>
 					<td height="26" align="left" bgcolor="#FFFFFF" width="80px"  nowrap="nowrap">
 						<strong>第二周：</strong>
 					</td>
 					<td height="26" align="left" bgcolor="#FFFFFF" >
-						<s:textarea  tabindex="-1"  id="txt_secondWeek" name="monthlyItemInfo.secondWeek" cssStyle="width: 250px;height:50px;resize:none;" maxlength="500"></s:textarea>
+						<s:textarea readonly="true"  tabindex="-1"  id="txt_secondWeek" name="monthlyItemInfo.secondWeek" cssStyle="width: 250px;height:50px;resize:none;" maxlength="500"></s:textarea>
 					</td>
 				</tr>
 				<tr>
@@ -182,13 +183,13 @@
 						<strong>第三周：</strong>
 					</td>
 					<td height="26" align="left" bgcolor="#FFFFFF" >
-						<s:textarea  tabindex="-1"  id="txt_thirdWeek" name="monthlyItemInfo.thirdWeek" cssStyle="width: 250px;height:50px;resize:none;" maxlength="500"></s:textarea>
+						<s:textarea readonly="true"  tabindex="-1"  id="txt_thirdWeek" name="monthlyItemInfo.thirdWeek" cssStyle="width: 250px;height:50px;resize:none;" maxlength="500"></s:textarea>
 					</td>
 					<td height="26" align="left" bgcolor="#FFFFFF" width="80px" >
 						<strong>第四周：</strong>
 					</td>
 					<td height="26" align="left" bgcolor="#FFFFFF" >
-						<s:textarea  tabindex="-1"  id="txt_fourthWeek" name="monthlyItemInfo.fourthWeek" cssStyle="width: 250px;height:50px;resize:none;" maxlength="500"></s:textarea>
+						<s:textarea readonly="true"  tabindex="-1"  id="txt_fourthWeek" name="monthlyItemInfo.fourthWeek" cssStyle="width: 250px;height:50px;resize:none;" maxlength="500"></s:textarea>
 					</td>
 				</tr>
 				</table>
@@ -203,13 +204,13 @@
 							<strong>实际结果：</strong>
 						</td>
 						<td height="26" align="left" bgcolor="#FFFFFF" >
-							<s:textarea  tabindex="-1"  id="txt_superiorResult" name="monthlyItemInfo.superiorResult" cssStyle="width: 250px;height:50px;resize:none;" maxlength="500"></s:textarea>
+							<s:textarea readonly="true"  tabindex="-1"  id="txt_superiorResult" name="monthlyItemInfo.superiorResult" cssStyle="width: 250px;height:50px;resize:none;" maxlength="500"></s:textarea>
 						</td>
 						<td height="26" align="left" bgcolor="#FFFFFF" width="90px" >
 							<strong>延期原因：</strong>
 						</td>
 						<td height="26" align="left" bgcolor="#FFFFFF" >
-							<s:textarea  tabindex="-1"  id="txt_superiorReason" name="monthlyItemInfo.superiorReason" cssStyle="width: 250px;height:50px;resize:none;" maxlength="500"></s:textarea>
+							<s:textarea readonly="true"  tabindex="-1"  id="txt_superiorReason" name="monthlyItemInfo.superiorReason" cssStyle="width: 250px;height:50px;resize:none;" maxlength="500"></s:textarea>
 						</td>
 					</tr>
 					<tr>
@@ -218,20 +219,20 @@
 							<strong>实际得分：</strong>
 						</td>
 						<td height="26" align="left" bgcolor="#FFFFFF" >
-							<s:textarea  id="txt_factScore" name="monthlyItemInfo.factScore" cssStyle="width: 250px;height:50px;resize:none;" maxlength="500"></s:textarea>
+							<s:textarea readonly="true"  id="txt_factScore" name="monthlyItemInfo.factScore" cssStyle="width: 250px;height:50px;resize:none;" maxlength="500"></s:textarea>
 						</td>
 						 -->
 						<td height="26" align="left" bgcolor="#FFFFFF" width="80px" >
 							<strong>改进措施：</strong>
 						</td>
 						<td height="26" align="left" bgcolor="#FFFFFF" >
-							<s:textarea  tabindex="-1"  id="txt_superiorMethod" name="monthlyItemInfo.superiorMethod" cssStyle="width: 250px;height:50px;resize:none;" maxlength="500"></s:textarea>
+							<s:textarea readonly="true"  tabindex="-1"  id="txt_superiorMethod" name="monthlyItemInfo.superiorMethod" cssStyle="width: 250px;height:50px;resize:none;" maxlength="500"></s:textarea>
 						</td>
 						<td height="26" align="left" bgcolor="#FFFFFF" width="80px" >
 							<strong>执行基金：</strong>
 						</td>
 						<td height="26" align="left" bgcolor="#FFFFFF" >
-							<s:textfield  tabindex="-1"  id="txt_executeMoney" name="monthlyItemInfo.executeMoney" cssStyle="width: 250px;" maxlength="25"></s:textfield>
+							<s:textfield readonly="true"  tabindex="-1"  id="txt_executeMoney" name="monthlyItemInfo.executeMoney" cssStyle="width: 250px;" maxlength="25"></s:textfield>
 						</td>
 					</tr>
 					<!-- 
@@ -269,7 +270,7 @@
 							<strong>新结果定义：</strong>
 						</td>
 						<td height="26" align="left" bgcolor="#FFFFFF" colspan="4">
-							<s:textarea  tabindex="-1"  id="txt_nextMonthlyResult" name="monthlyItemInfo.nextMonthlyResult" cssStyle="width: 610px;height:50px;resize:none;" maxlength="500"></s:textarea>
+							<s:textarea readonly="true"  tabindex="-1"  id="txt_nextMonthlyResult" name="monthlyItemInfo.nextMonthlyResult" cssStyle="width: 610px;height:50px;resize:none;" maxlength="500"></s:textarea>
 						</td>
 					</tr>
 					<tr>
@@ -277,12 +278,11 @@
 							<strong>备注：</strong>
 						</td>
 						<td height="26" align="left" bgcolor="#FFFFFF" colspan="4">
-							<s:textarea  tabindex="-1"  id="txt_memo" name="monthlyItemInfo.memo" cssStyle="width: 610px;height:50px;resize:none;" maxlength="500"></s:textarea>
+							<s:textarea readonly="true"  tabindex="-1"  id="txt_memo" name="monthlyItemInfo.memo" cssStyle="width: 610px;height:50px;resize:none;" maxlength="500"></s:textarea>
 						</td>
 					</tr>
 				</table>
 			</fieldset>
-		</span>
 		<div align="center" style="height: 50px;vertical-align: middle;">
 			<input name="closeBtn" type="button" class="btn_2_3" id="closeBtn" value="关闭">
 		</div>
