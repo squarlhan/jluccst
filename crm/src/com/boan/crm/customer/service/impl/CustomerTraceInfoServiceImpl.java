@@ -165,7 +165,7 @@ public class CustomerTraceInfoServiceImpl implements ICustomerTraceInfoService{
 			hql.append(" and traceFlag = '1' ");
 		}else if(values.get("traceFlag") != null && values.get("traceFlag").equals("0"))
 		{
-			hql.append(" and (traceFlag = '0' or traceFlag is null) ");
+			hql.append(" and (traceFlag = '0' or traceFlag is null or traceFlag = '') ");
 		}
 		if(values.get("startTime") != null && values.get("endTime") != null)
 		{
@@ -236,7 +236,7 @@ public class CustomerTraceInfoServiceImpl implements ICustomerTraceInfoService{
 			hql.append(" and traceFlag = '1' ");
 		}else if(values.get("traceFlag") != null && values.get("traceFlag").equals("0"))
 		{
-			hql.append(" and (traceFlag = '0' or traceFlag is null) ");
+			hql.append(" and (traceFlag = '0' or traceFlag is null or traceFlag = '') ");
 		}
 		if(values.get("startTime") != null && values.get("endTime") != null)
 		{
