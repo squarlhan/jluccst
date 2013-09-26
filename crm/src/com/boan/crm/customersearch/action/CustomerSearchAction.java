@@ -254,6 +254,9 @@ public class CustomerSearchAction  extends BaseActionSupport{
 			try
 			{
 				String baseDirectory = PathUtil.getInstance().getWebRoot()+"uploadfiles/importcustomer/";
+				
+				baseDirectory = baseDirectory.replace("/", File.separator);
+				
 				String extendName = null;
 				if( StringUtils.isNotBlank( uploadFileFileName ) && uploadFileFileName.lastIndexOf( "." ) != -1 )
 					extendName = uploadFileFileName.substring( uploadFileFileName.lastIndexOf("."), uploadFileFileName.length() );
@@ -276,7 +279,7 @@ public class CustomerSearchAction  extends BaseActionSupport{
 					is.close();
 					sheet = wb.getSheetAt( 0 );
 					
-					int totalRecord = ( sheet.getLastRowNum() + 1 ) - 1;
+					int totalRecord = ( sheet.getLastRowNum() + 1 ) ;//- 1;
 					if( totalRecord == 0 )
 					{
 					}else
@@ -308,132 +311,133 @@ public class CustomerSearchAction  extends BaseActionSupport{
 									String customerPostCode = "";
 									String customerEmail = "";
 									String customerMainIndustry = "";
-									if( customerNameCell != null )
+									if( customerNameCell != null && !customerNameCell.getStringCellValue().trim().equals(""))
 									{
 										customerName = customerNameCell.getStringCellValue() ;
-									}
-									if( customerTelCell != null )
-									{
-										customerTel = customerTelCell.getStringCellValue() ;
-									}
-									if( customerFaxCell != null )
-									{
-										customerFax = customerFaxCell.getStringCellValue() ;
-									}
-									if( customerPhoneCell != null )
-									{
-										customerPhone = customerPhoneCell.getStringCellValue() ;
-									}
-									if( customerContractPersonNameCell != null )
-									{
-										customerContractPersonName = customerContractPersonNameCell.getStringCellValue() ;
-									}
-									if( customerContractDeptCell != null )
-									{
-										customerContractDept = customerContractDeptCell.getStringCellValue() ;
-									}
-									if( customerAddressCell != null )
-									{
-										customerAddress = customerAddressCell.getStringCellValue() ;
-									}
-									if( customerPostCodeCell != null )
-									{
-										customerPostCode = customerPostCodeCell.getStringCellValue() ;
-									}
-									if( customerEmailCell != null )
-									{
-										customerEmail = customerEmailCell.getStringCellValue() ;
-									}
-									if( customerMainIndustryCell != null )
-									{
-										customerMainIndustry = customerMainIndustryCell.getStringCellValue() ;
-									}
-									CustomerLibInfo customer = new CustomerLibInfo();
-									if(customerName.length() > 255)
-									{
-										customerName = customerName.substring(0,254);
-									}
-									customer.setCustomerName(customerName);
-									customer.setAddress(customerAddress);
-									customer.setMainIndustry(customerMainIndustry);
-									customer.setFax(customerFax);
-									customer.setPostCode(customerPostCode);
-									customer.setCreateTime(Calendar.getInstance());
-									customer.setCompanyId( sessionCompanyId );
-									customer.setCreatorId(sessionUserId);
-									customer.setCompanyFullName(customerName);
 
-									String customerAddressTemp = customerAddress.replaceAll("-", " ");
-									customerAddressTemp = customerAddressTemp.replaceAll("省", "省 ");
-									customerAddressTemp = customerAddressTemp.replaceAll("市", "市 ");
-									customerAddressTemp = customerAddressTemp.replaceAll("区", "区 ");
-									customerAddressTemp = customerAddressTemp.replaceAll("县", "县 ");
-									customerAddressTemp = customerAddressTemp.replaceAll("  ", " ");
-									String[] customerAddressArray = customerAddressTemp.split(" ");
-									boolean bProvinceFlag = false;
-									boolean bCityFlag = false;
-									boolean bAreaFlag = false;
-									String tempProvinceId = "";
-									String tempCityId = "";
-									for(int kk=0;kk<customerAddressArray.length ;kk++)
-									{
-										if(customerAddressArray[0].trim().equals("中国"))
+										if( customerTelCell != null )
 										{
-											if(!bProvinceFlag)
+											customerTel = customerTelCell.getStringCellValue() ;
+										}
+										if( customerFaxCell != null )
+										{
+											customerFax = customerFaxCell.getStringCellValue() ;
+										}
+										if( customerPhoneCell != null )
+										{
+											customerPhone = customerPhoneCell.getStringCellValue() ;
+										}
+										if( customerContractPersonNameCell != null )
+										{
+											customerContractPersonName = customerContractPersonNameCell.getStringCellValue() ;
+										}
+										if( customerContractDeptCell != null )
+										{
+											customerContractDept = customerContractDeptCell.getStringCellValue() ;
+										}
+										if( customerAddressCell != null )
+										{
+											customerAddress = customerAddressCell.getStringCellValue() ;
+										}
+										if( customerPostCodeCell != null )
+										{
+											customerPostCode = customerPostCodeCell.getStringCellValue() ;
+										}
+										if( customerEmailCell != null )
+										{
+											customerEmail = customerEmailCell.getStringCellValue() ;
+										}
+										if( customerMainIndustryCell != null )
+										{
+											customerMainIndustry = customerMainIndustryCell.getStringCellValue() ;
+										}
+										CustomerLibInfo customer = new CustomerLibInfo();
+										if(customerName.length() > 255)
+										{
+											customerName = customerName.substring(0,254);
+										}
+										customer.setCustomerName(customerName);
+										customer.setAddress(customerAddress);
+										customer.setMainIndustry(customerMainIndustry);
+										customer.setFax(customerFax);
+										customer.setPostCode(customerPostCode);
+										customer.setCreateTime(Calendar.getInstance());
+										customer.setCompanyId( sessionCompanyId );
+										customer.setCreatorId(sessionUserId);
+										customer.setCompanyFullName(customerName);
+
+										String customerAddressTemp = customerAddress.replaceAll("-", " ");
+										customerAddressTemp = customerAddressTemp.replaceAll("省", "省 ");
+										customerAddressTemp = customerAddressTemp.replaceAll("市", "市 ");
+										customerAddressTemp = customerAddressTemp.replaceAll("区", "区 ");
+										customerAddressTemp = customerAddressTemp.replaceAll("县", "县 ");
+										customerAddressTemp = customerAddressTemp.replaceAll("  ", " ");
+										String[] customerAddressArray = customerAddressTemp.split(" ");
+										boolean bProvinceFlag = false;
+										boolean bCityFlag = false;
+										boolean bAreaFlag = false;
+										String tempProvinceId = "";
+										String tempCityId = "";
+										for(int kk=0;kk<customerAddressArray.length ;kk++)
+										{
+											if(customerAddressArray[0].trim().equals("中国"))
 											{
-												ProvinceInfo province = areaService.getProvinceByName(customerAddressArray[kk].trim());
-												if(province != null)
+												if(!bProvinceFlag)
 												{
-													customer.setProvince(province.getId());
-													bProvinceFlag = true;
-													tempProvinceId = customer.getProvince();
-													continue;
-												}
-											}
-											if(!bCityFlag)
-											{
-												if(!tempProvinceId .equals(""))
-												{
-													CityInfo city = areaService.getCityByNameAndProvinceId(customerAddressArray[kk].trim(),tempProvinceId);
-													if(city != null)
+													ProvinceInfo province = areaService.getProvinceByName(customerAddressArray[kk].trim());
+													if(province != null)
 													{
-														customer.setCity(city.getId());
-														customer.setProvince(city.getProvinceId());
-														bCityFlag = true;
-														tempCityId = city.getId();
+														customer.setProvince(province.getId());
+														bProvinceFlag = true;
+														tempProvinceId = customer.getProvince();
 														continue;
 													}
 												}
-											}
-											if(!bAreaFlag)
-											{
-												AreaInfo area = null;
-												if(tempCityId != null && tempCityId.length() > 0)
+												if(!bCityFlag)
 												{
-													area = areaService.getAreaByNameAndCityId(customerAddressArray[kk],tempCityId);
-												}else
-												{
-													area = areaService.getAreaByName(customerAddressArray[kk]);
+													if(!tempProvinceId .equals(""))
+													{
+														CityInfo city = areaService.getCityByNameAndProvinceId(customerAddressArray[kk].trim(),tempProvinceId);
+														if(city != null)
+														{
+															customer.setCity(city.getId());
+															customer.setProvince(city.getProvinceId());
+															bCityFlag = true;
+															tempCityId = city.getId();
+															continue;
+														}
+													}
 												}
-												if(area != null)
+												if(!bAreaFlag)
 												{
-													customer.setDistrict(area.getId());
-													customer.setCity(area.getCityId());
-													bAreaFlag = true;
-													continue;
-												}	
+													AreaInfo area = null;
+													if(tempCityId != null && tempCityId.length() > 0)
+													{
+														area = areaService.getAreaByNameAndCityId(customerAddressArray[kk],tempCityId);
+													}else
+													{
+														area = areaService.getAreaByName(customerAddressArray[kk]);
+													}
+													if(area != null)
+													{
+														customer.setDistrict(area.getId());
+														customer.setCity(area.getCityId());
+														bAreaFlag = true;
+														continue;
+													}	
+												}
 											}
 										}
+										customerInfoService.save(customer);
+										ContractPersonLibInfo contractPerson = new ContractPersonLibInfo();
+										contractPerson.setCustomerId(customer.getId());
+										contractPerson.setPersonName(customerContractPersonName);
+										contractPerson.setTel(customerTel);
+										contractPerson.setPhone(customerPhone);
+										contractPerson.setDeptOrDuty(customerContractDept);
+										contractPerson.setEmail(customerEmail);
+										contractpersonService.save(contractPerson);
 									}
-									customerInfoService.save(customer);
-									ContractPersonLibInfo contractPerson = new ContractPersonLibInfo();
-									contractPerson.setCustomerId(customer.getId());
-									contractPerson.setPersonName(customerContractPersonName);
-									contractPerson.setTel(customerTel);
-									contractPerson.setPhone(customerPhone);
-									contractPerson.setDeptOrDuty(customerContractDept);
-									contractPerson.setEmail(customerEmail);
-									contractpersonService.save(contractPerson);
 								}
 							}catch(Exception ex)
 							{
@@ -830,6 +834,9 @@ public class CustomerSearchAction  extends BaseActionSupport{
 			try
 			{
 				String baseDirectory = PathUtil.getInstance().getWebRoot()+"uploadfiles/importcustomer/";
+				
+				baseDirectory = baseDirectory.replace("/", File.separator);
+				
 				String extendName = null;
 				if( StringUtils.isNotBlank( uploadFileFileName ) && uploadFileFileName.lastIndexOf( "." ) != -1 )
 					extendName = uploadFileFileName.substring( uploadFileFileName.lastIndexOf("."), uploadFileFileName.length() );
@@ -852,7 +859,7 @@ public class CustomerSearchAction  extends BaseActionSupport{
 					is.close();
 					
 					sheet = wb.getSheetAt( 0 );
-					int totalRecord = ( sheet.getLastRowNum() + 1 ) - 1;
+					int totalRecord = ( sheet.getLastRowNum() + 1 );// - 1;
 					if( totalRecord == 0 )
 					{
 						
@@ -885,146 +892,145 @@ public class CustomerSearchAction  extends BaseActionSupport{
 									String customerPostCode = "";
 									String customerEmail = "";
 									String customerMainIndustry = "";
-									if( customerNameCell != null )
+									if( customerNameCell != null && !customerNameCell.getStringCellValue().trim().equals(""))
 									{
 										customerName = customerNameCell.getStringCellValue() ;
-									}
-									if( customerTelCell != null )
-									{
-										customerTel = customerTelCell.getStringCellValue() ;
-									}
-									if( customerFaxCell != null )
-									{
-										customerFax = customerFaxCell.getStringCellValue() ;
-									}
-									if( customerPhoneCell != null )
-									{
-										customerPhone = customerPhoneCell.getStringCellValue() ;
-									}
-									if( customerContractPersonNameCell != null )
-									{
-										customerContractPersonName = customerContractPersonNameCell.getStringCellValue() ;
-									}
-									if( customerContractDeptCell != null )
-									{
-										customerContractDept = customerContractDeptCell.getStringCellValue() ;
-									}
-									if( customerAddressCell != null )
-									{
-										customerAddress = customerAddressCell.getStringCellValue() ;
-									}
-									if( customerPostCodeCell != null )
-									{
-										customerPostCode = customerPostCodeCell.getStringCellValue() ;
-									}
-									if( customerEmailCell != null )
-									{
-										customerEmail = customerEmailCell.getStringCellValue() ;
-									}
-									if( customerMainIndustryCell != null )
-									{
-										customerMainIndustry = customerMainIndustryCell.getStringCellValue() ;
-									}
-									
-									
-									CustomerLibInfo customer = new CustomerLibInfo();
-									if(customerName.length() > 255)
-									{
-										customerName = customerName.substring(0,254);
-									}
-									customer.setCustomerName(customerName);
-									customer.setAddress(customerAddress);
-									customer.setMainIndustry(customerMainIndustry);
-									customer.setFax(customerFax);
-									customer.setPostCode(customerPostCode);
-									customer.setCreateTime(Calendar.getInstance());
-									customer.setCompanyId( sessionCompanyId );
-									customer.setCreatorId(sessionUserId);
-									customer.setProvince(provinceId);
-									if(cityId != null && cityId.length() > 0)
-									{
-										customer.setCity(cityId);
-									}
-									customer.setCompanyFullName(customerName);
-
-									String customerAddressTemp = customerAddress.replaceAll("-", " ");
-									customerAddressTemp = customerAddressTemp.replaceAll("省", "省 ");
-									customerAddressTemp = customerAddressTemp.replaceAll("市", "市 ");
-									customerAddressTemp = customerAddressTemp.replaceAll("区", "区 ");
-									customerAddressTemp = customerAddressTemp.replaceAll("县", "县 ");
-									customerAddressTemp = customerAddressTemp.replaceAll("  ", " ");
-									String[] customerAddressArray = customerAddressTemp.split(" ");
-									boolean bProvinceFlag = false;
-									boolean bCityFlag = false;
-									boolean bAreaFlag = false;
-									String tempCityId = cityId;
-									for(int kk=0;kk<customerAddressArray.length - 1;kk++)
-									{
-										
-										if(!customerAddressArray[kk].equals("中国"))
+										if( customerTelCell != null )
 										{
-//											if(!bProvinceFlag)
-//											{
-//												ProvinceInfo province = areaService.getProvinceByName(customerAddressArray[kk]);
-//												if(province != null)
-//												{
-//													customer.setProvince(province.getId());
-//													bProvinceFlag = true;
-//													continue;
-//												}
-//											}
-											if(cityId == null || cityId.length() == 0)
+											customerTel = customerTelCell.getStringCellValue() ;
+										}
+										if( customerFaxCell != null )
+										{
+											customerFax = customerFaxCell.getStringCellValue() ;
+										}
+										if( customerPhoneCell != null )
+										{
+											customerPhone = customerPhoneCell.getStringCellValue() ;
+										}
+										if( customerContractPersonNameCell != null )
+										{
+											customerContractPersonName = customerContractPersonNameCell.getStringCellValue() ;
+										}
+										if( customerContractDeptCell != null )
+										{
+											customerContractDept = customerContractDeptCell.getStringCellValue() ;
+										}
+										if( customerAddressCell != null )
+										{
+											customerAddress = customerAddressCell.getStringCellValue() ;
+										}
+										if( customerPostCodeCell != null )
+										{
+											customerPostCode = customerPostCodeCell.getStringCellValue() ;
+										}
+										if( customerEmailCell != null )
+										{
+											customerEmail = customerEmailCell.getStringCellValue() ;
+										}
+										if( customerMainIndustryCell != null )
+										{
+											customerMainIndustry = customerMainIndustryCell.getStringCellValue() ;
+										}
+										
+										
+										CustomerLibInfo customer = new CustomerLibInfo();
+										if(customerName.length() > 255)
+										{
+											customerName = customerName.substring(0,254);
+										}
+										customer.setCustomerName(customerName);
+										customer.setAddress(customerAddress);
+										customer.setMainIndustry(customerMainIndustry);
+										customer.setFax(customerFax);
+										customer.setPostCode(customerPostCode);
+										customer.setCreateTime(Calendar.getInstance());
+										customer.setCompanyId( sessionCompanyId );
+										customer.setCreatorId(sessionUserId);
+										customer.setProvince(provinceId);
+										if(cityId != null && cityId.length() > 0)
+										{
+											customer.setCity(cityId);
+										}
+										customer.setCompanyFullName(customerName);
+
+										String customerAddressTemp = customerAddress.replaceAll("-", " ");
+										customerAddressTemp = customerAddressTemp.replaceAll("省", "省 ");
+										customerAddressTemp = customerAddressTemp.replaceAll("市", "市 ");
+										customerAddressTemp = customerAddressTemp.replaceAll("区", "区 ");
+										customerAddressTemp = customerAddressTemp.replaceAll("县", "县 ");
+										customerAddressTemp = customerAddressTemp.replaceAll("  ", " ");
+										String[] customerAddressArray = customerAddressTemp.split(" ");
+										boolean bProvinceFlag = false;
+										boolean bCityFlag = false;
+										boolean bAreaFlag = false;
+										String tempCityId = cityId;
+										for(int kk=0;kk<customerAddressArray.length - 1;kk++)
+										{
+											
+											if(!customerAddressArray[kk].equals("中国"))
 											{
-												if(!bCityFlag)
+//												if(!bProvinceFlag)
+//												{
+//													ProvinceInfo province = areaService.getProvinceByName(customerAddressArray[kk]);
+//													if(province != null)
+//													{
+//														customer.setProvince(province.getId());
+//														bProvinceFlag = true;
+//														continue;
+//													}
+//												}
+												if(cityId == null || cityId.length() == 0)
 												{
-													CityInfo city = areaService.getCityByNameAndProvinceId(customerAddressArray[kk],provinceId);
-													if(city != null)
+													if(!bCityFlag)
 													{
-														customer.setCity(city.getId());
-														//customer.setProvince(city.getProvinceId());
-														bCityFlag = true;
-														tempCityId = city.getId();
-														continue;
+														CityInfo city = areaService.getCityByNameAndProvinceId(customerAddressArray[kk],provinceId);
+														if(city != null)
+														{
+															customer.setCity(city.getId());
+															//customer.setProvince(city.getProvinceId());
+															bCityFlag = true;
+															tempCityId = city.getId();
+															continue;
+														}
 													}
 												}
-											}
-											if(!bAreaFlag)
-											{
-												AreaInfo area = null;
-												if(tempCityId != null && tempCityId.length() > 0)
+												if(!bAreaFlag)
 												{
-													area = areaService.getAreaByNameAndCityId(customerAddressArray[kk],tempCityId);
-												}else
-												{
-													area = areaService.getAreaByName(customerAddressArray[kk]);
+													AreaInfo area = null;
+													if(tempCityId != null && tempCityId.length() > 0)
+													{
+														area = areaService.getAreaByNameAndCityId(customerAddressArray[kk],tempCityId);
+													}else
+													{
+														area = areaService.getAreaByName(customerAddressArray[kk]);
+													}
+													if(area != null)
+													{
+														customer.setDistrict(area.getId());
+														customer.setCity(area.getCityId());
+														bAreaFlag = true;
+														continue;
+													}	
 												}
-												if(area != null)
-												{
-													customer.setDistrict(area.getId());
-													customer.setCity(area.getCityId());
-													bAreaFlag = true;
-													continue;
-												}	
 											}
 										}
+										ProvinceInfo province = areaService.getProvince(provinceId);
+										if(province!=null){
+											String provincName = province.getProvinceName();
+											customerInfoService.save ( provincName , customer);
+		//									customerInfoService.save(customer);
+											
+											ContractPersonLibInfo contractPerson = new ContractPersonLibInfo();
+											contractPerson.setCustomerId(customer.getId());
+											contractPerson.setPersonName(customerContractPersonName);
+											contractPerson.setTel(customerTel);
+											contractPerson.setPhone(customerPhone);
+											contractPerson.setDeptOrDuty(customerContractDept);
+											contractPerson.setEmail(customerEmail);
+		
+											contractpersonService.save(provincName,contractPerson);
+										}
 									}
-									ProvinceInfo province = areaService.getProvince(provinceId);
-									if(province!=null){
-										String provincName = province.getProvinceName();
-										customerInfoService.save ( provincName , customer);
-	//									customerInfoService.save(customer);
-										
-										ContractPersonLibInfo contractPerson = new ContractPersonLibInfo();
-										contractPerson.setCustomerId(customer.getId());
-										contractPerson.setPersonName(customerContractPersonName);
-										contractPerson.setTel(customerTel);
-										contractPerson.setPhone(customerPhone);
-										contractPerson.setDeptOrDuty(customerContractDept);
-										contractPerson.setEmail(customerEmail);
-	
-										contractpersonService.save(provincName,contractPerson);
-									}
-									
 								}
 							}catch(Exception ex)
 							{
