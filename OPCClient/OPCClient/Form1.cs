@@ -18,7 +18,7 @@ namespace OPCClient
         private OPCGroup G;
         private OPCItems Items;
         private OPCBrowser brow;
-
+        private ClientConfig clientConfig;
 
         List<int> clientHandles = new List<int>();
         List<int> serverHandles = new List<int>();
@@ -27,6 +27,7 @@ namespace OPCClient
         public Form1()
         {
             InitializeComponent();
+            clientConfig = new ClientConfig();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -205,6 +206,19 @@ namespace OPCClient
             //    string s = ClientHandles.GetValue(i).ToString() + ":" + ItemValues.GetValue(i).ToString();
             //    listBox3.Items.Add(s);
             //}
+        }
+
+        private void readini()
+        {
+            
+        }
+
+        private void saveini()
+        {
+            
+        })
+        {
+
         }
 
     }
