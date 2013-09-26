@@ -117,7 +117,7 @@ namespace OPCClient
 
         private void button3_Click(object sender, EventArgs e)
         {
-            if(!listBox2.Items.Contains(listBox1.SelectedItem))
+            if(listBox1.SelectedItems.Count>0&&!listBox2.Items.Contains(listBox1.SelectedItem))
             {
                 int k = clientHandles.Count;
                 string id = brow.GetItemID(listBox1.SelectedItem.ToString());
@@ -268,9 +268,10 @@ namespace OPCClient
                         textBox8.Text = ns[1].Trim();
                         clientConfig.Timespan = int.Parse(ns[1].Trim());
                     }
-                    if (row.Trim().IndexOf('=') < 0)
+                    if (row.Trim().IndexOf('=') < 0 && row.Trim().IndexOf(':') > 0)
                     {
-                        listBox2.Items.Add(row.Trim());
+                        String[] ns = row.Trim().Split(':');
+                        listBox2.Items.Add(ns[0].Trim());
                     }
                 }
                    
@@ -292,9 +293,9 @@ namespace OPCClient
 			output.Write("dbpsw="+textBox7.Text+"\r\n");
 			output.Write("dbport="+textBox5.Text+"\r\n");
 			output.Write("timespan="+textBox8.Text+"\r\n");
-			foreach(string s in listBox2.Items)
+            foreach (OPCItem oi in selectedItems)
             {
-                output.Write(s + "\r\n");
+                output.Write(oi.ItemID + ":"+oi.ServerHandle+"\r\n");
 			}
             //清空缓冲区
             output.Flush();
@@ -311,11 +312,18 @@ namespace OPCClient
         private void button6_Click(object sender, EventArgs e)
         {
             listBox2.Items.Clear();
+            selectedItems.Clear();
+            clientHandles.Clear();
+            serverHandles.Clear();
         }
 
         private void button7_Click(object sender, EventArgs e)
         {
-            listBox2.Items.Remove(listBox2.SelectedItem);
+            int si = listBox2.SelectedIndex;
+            listBox2.Items.RemoveAt(si);
+            selectedItems.RemoveAt(si);
+            clientHandles.RemoveAt(si);
+            serverHandles.RemoveAt(si);
         }
 
         private void button5_Click(object sender, EventArgs e)
