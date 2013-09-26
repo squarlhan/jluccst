@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OPCClient", "OPCClient\OPCClient.csproj", "{69C27121-93E1-44DB-A1A8-A472C8B47538}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{69C27121-93E1-44DB-A1A8-A472C8B47538}.Debug|Any CPU.ActiveCfg = Debug|x86
+		{69C27121-93E1-44DB-A1A8-A472C8B47538}.Debug|Any CPU.Build.0 = Debug|x86
+		{69C27121-93E1-44DB-A1A8-A472C8B47538}.Debug|x86.ActiveCfg = Debug|x86
+		{69C27121-93E1-44DB-A1A8-A472C8B47538}.Debug|x86.Build.0 = Debug|x86
+		{69C27121-93E1-44DB-A1A8-A472C8B47538}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{69C27121-93E1-44DB-A1A8-A472C8B47538}.Release|Any CPU.Build.0 = Release|Any CPU
+		{69C27121-93E1-44DB-A1A8-A472C8B47538}.Release|x86.ActiveCfg = Release|x86
+		{69C27121-93E1-44DB-A1A8-A472C8B47538}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
