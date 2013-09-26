@@ -1,9 +1,7 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Text;
+using System.IO;
 using System.Windows.Forms;
 using OPCAutomation;
 
@@ -28,6 +26,7 @@ namespace OPCClient
         {
             InitializeComponent();
             clientConfig = new ClientConfig();
+            readini();
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -52,14 +51,14 @@ namespace OPCClient
             try
             {
                 Server = new OPCServer();
-                Server.Connect(textBox1.Text,textBox2.Text);
+                Server.Connect(textBox1.Text, textBox2.Text);
 
                 brow = Server.CreateBrowser();
                 brow.ShowBranches();
-                TreeNode root=treeView1.Nodes.Add("root");
+                TreeNode root = treeView1.Nodes.Add("root");
                 for (int i = 1; i <= brow.Count; i++)
                 {
-                    root.Nodes.Add(brow.Item(i));                    
+                    root.Nodes.Add(brow.Item(i));
                 }
 
                 for (int i = 0; i < root.Nodes.Count; i++)
@@ -127,7 +126,7 @@ namespace OPCClient
             listBox2.Items.Add(listBox1.SelectedItem.ToString());
         }
 
-        
+
         private void timer1_Tick(object sender, EventArgs e)
         {
             //单项同步读取
@@ -176,7 +175,7 @@ namespace OPCClient
             listBox1.Items.Clear();
             if (e.Node.Level == 2)
             {
-                string[] path ={"",e.Node.Parent.Text,e.Node.Text };
+                string[] path = { "", e.Node.Parent.Text, e.Node.Text };
                 Array aPath = path as Array;
                 brow.MoveTo(ref aPath);
                 brow.ShowLeafs(false);
@@ -210,15 +209,100 @@ namespace OPCClient
 
         private void readini()
         {
-            
+            StreamReader objReader = new StreamReader("opcConfig.ini");
+            string row = "";
+            ArrayList LineList = new ArrayList();
+            while (row != null)
+            {
+                row = objReader.ReadLine();
+                if (row != null && !row.Equals(""))
+                {
+                    if (row.Trim().StartsWith("host"))
+                    {
+                        String[] ns = row.Trim().Split('=');
+                        textBox2.Text = ns[1].Trim();
+                        clientConfig.OpcAddr = ns[1].Trim();
+                    }
+                    if (row.Trim().StartsWith("name"))
+                    {
+                        String[] ns = row.Trim().Split('=');
+                        textBox1.Text = ns[1].Trim();
+                        clientConfig.OpcName = ns[1].Trim();
+                    }
+                    if (row.Trim().StartsWith("dbname"))
+                    {
+                        String[] ns = row.Trim().Split('=');
+                        textBox4.Text = ns[1].Trim();
+                        clientConfig.DbName = ns[1].Trim();
+                    }
+                    if (row.Trim().StartsWith("dbhost"))
+                    {
+                        String[] ns = row.Trim().Split('=');
+                        textBox3.Text = ns[1].Trim();
+                        clientConfig.DbAddr = ns[1].Trim();
+                    }
+                    if (row.Trim().StartsWith("dbport"))
+                    {
+                        String[] ns = row.Trim().Split('=');
+                        textBox5.Text = ns[1].Trim();
+                        clientConfig.DbPort = ns[1].Trim();
+                    }
+                    if (row.Trim().StartsWith("dbuser"))
+                    {
+                        String[] ns = row.Trim().Split('=');
+                        textBox6.Text = ns[1].Trim();
+                        clientConfig.DbUser = ns[1].Trim();
+                    }
+                    if (row.Trim().StartsWith("dbpsw"))
+                    {
+                        String[] ns = row.Trim().Split('=');
+                        textBox7.Text = ns[1].Trim();
+                        clientConfig.DbPasw = ns[1].Trim();
+                    }
+                    if (row.Trim().StartsWith("timespan"))
+                    {
+                        String[] ns = row.Trim().Split('=');
+                        textBox8.Text = ns[1].Trim();
+                        clientConfig.Timespan = int.Parse(ns[1].Trim());
+                    }
+                    if (row.Trim().IndexOf('=') < 0)
+                    {
+                        listBox2.Items.Add(row.Trim());
+                    }
+                }
+                   
+
+            }
+            objReader.Close();
         }
 
         private void saveini()
         {
-            
-        })
-        {
+            FileStream fs = new FileStream("opcConfig.ini", FileMode.Truncate);
+            StreamWriter output = new StreamWriter(fs);
+            //开始写入
+            output.Write("host="+textBox2.Text+"\r\n");
+			output.Write("name="+textBox1.Text+"\r\n");
+			output.Write("dbhost="+textBox3.Text+"\r\n");
+			output.Write("dbname="+textBox4.Text+"\r\n");
+			output.Write("dbuser="+textBox6.Text+"\r\n");
+			output.Write("dbpsw="+textBox7.Text+"\r\n");
+			output.Write("dbport="+textBox5.Text+"\r\n");
+			output.Write("timespan="+textBox8.Text+"\r\n");
+			foreach(string s in listBox2.Items)
+            {
+                output.Write(s + "\r\n");
+			}
+            //清空缓冲区
+            output.Flush();
+            //关闭流
+            output.Close();
+            fs.Close();
+        }
 
+        private void button4_Click(object sender, EventArgs e)
+        {
+            saveini();
         }
 
     }
