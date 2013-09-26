@@ -117,13 +117,16 @@ namespace OPCClient
 
         private void button3_Click(object sender, EventArgs e)
         {
-            int k = clientHandles.Count;
-            string id = brow.GetItemID(listBox1.SelectedItem.ToString());
-            OPCItem item = Items.AddItem(id, k);
-            clientHandles.Add(k);
-            serverHandles.Add(item.ServerHandle);
-            selectedItems.Add(item);
-            listBox2.Items.Add(listBox1.SelectedItem.ToString());
+            if(!listBox2.Items.Contains(listBox1.SelectedItem))
+            {
+                int k = clientHandles.Count;
+                string id = brow.GetItemID(listBox1.SelectedItem.ToString());
+                OPCItem item = Items.AddItem(id, k);
+                clientHandles.Add(k);
+                serverHandles.Add(item.ServerHandle);
+                selectedItems.Add(item);
+                listBox2.Items.Add(listBox1.SelectedItem.ToString());
+            }
         }
 
 
@@ -305,5 +308,31 @@ namespace OPCClient
             saveini();
         }
 
+        private void button6_Click(object sender, EventArgs e)
+        {
+            listBox2.Items.Clear();
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            listBox2.Items.Remove(listBox2.SelectedItem);
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            foreach (object o in listBox1.Items)
+            {
+                if (!listBox2.Items.Contains(o))
+                {
+                    int k = clientHandles.Count;
+                    string id = brow.GetItemID(o.ToString());
+                    OPCItem item = Items.AddItem(id, k);
+                    clientHandles.Add(k);
+                    serverHandles.Add(item.ServerHandle);
+                    selectedItems.Add(item);
+                    listBox2.Items.Add(o.ToString());
+                }
+            }          
+        }
     }
 }
