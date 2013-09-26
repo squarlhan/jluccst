@@ -135,6 +135,7 @@
  <s:form id="form1" name="form1" method="post" theme="simple">
  <s:hidden id="customerId" name="customerVisitInfo.customerId"></s:hidden>
  <s:hidden id="customerId_t" name="customerId"></s:hidden>
+<s:hidden id="deptId" name="deptId"></s:hidden>
 <table width="100%" style="height:100%;" border="0" cellspacing="5" cellpadding="0">
   <tr>
     <td valign="top"><table width="100%" border="0" cellspacing="5" cellpadding="0">
@@ -165,8 +166,8 @@
     </table>
       <table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#d5e4fd">
         <tr>
-              <td align="center" background="../images/headerbg.jpg"><strong>回访日期</strong></td>
-              <td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">客户名称</td>
+            <td align="center" background="../images/headerbg.jpg"><strong>回访日期</strong></td>
+            <td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">客户名称</td>
 			<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">业务员</td>
 			<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">业务进展</td>
 			<td align="center" style="height: 26px; background-image:url('../images/headerbg.jpg')">受访人</td>
