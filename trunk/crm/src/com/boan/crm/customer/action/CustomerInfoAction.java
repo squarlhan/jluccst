@@ -1874,6 +1874,10 @@ public class CustomerInfoAction extends BaseActionSupport{
 		if(customerInfo.getId() != null && customerInfo.getId().length() > 0)
 		{
 			obj =  customerInfoService.get(customerInfo.getId());
+			if(obj.getDeleteFlag() == 1)
+			{
+				obj.setDeleteFlag(0);
+			}
 		}else
 		{
 			obj = new CustomerInfo();
