@@ -110,7 +110,7 @@ public class CustomerVisitInfoServiceImpl implements ICustomerVisitInfoService{
 			hql.append(" and visitFlag = '1' ");
 		}else if(values.get("visitFlag") != null && values.get("visitFlag").equals("0"))
 		{
-			hql.append(" and (visitFlag = '0' or visitFlag is null) ");
+			hql.append(" and (visitFlag = '0' or visitFlag is null  or visitFlag = '') ");
 		}
 		int totalRows = customerVisitInfoDao.findCountForPage(hql.toString(), values);
 		return totalRows;
@@ -163,7 +163,7 @@ public class CustomerVisitInfoServiceImpl implements ICustomerVisitInfoService{
 			hql.append(" and visitFlag = '1' ");
 		}else if(values.get("visitFlag") != null && values.get("visitFlag").equals("0"))
 		{
-			hql.append(" and (visitFlag = '0' or visitFlag is null) ");
+			hql.append(" and (visitFlag = '0' or visitFlag is null or visitFlag = '') ");
 		}
 		if(values.get("startTime") != null && values.get("endTime") != null)
 		{
