@@ -284,12 +284,25 @@
 													name="customerInfo.customerName"></s:textfield>
 													<font color="red">*</font>
 											</td>
-											<td align="right" nowrap>业 务 员：</td>
+											<td align="right" nowrap>
+											<s:if test="customerInfo.deleteFlag == 1">
+											<font color="red" title="被删除用户,请重新分配业务员!">业 务 员：</font>
+											</s:if>
+											<s:else>
+											业 务 员：
+											</s:else>
+											</td>
 											<td><s:select list="userList" listKey="id"
 													listValue="userCName" value="customerInfo.salesmanId"
 													id="salesmanId" name="customerInfo.salesmanId"
 													cssStyle="width:120px" headerKey=""
-													headerValue="--请选择--"></s:select></td>
+													headerValue="--请选择--"></s:select>
+											<s:if test="customerInfo.deleteFlag == 1">
+												<script language="javascript">
+												document.getElementById("salesmanId").value= "";
+												</script>
+											</s:if>		
+													</td>
 											<td align="center" nowrap>客户来源：</td>
 											<td><s:select list="listSource" listKey="id"
 													listValue="name" value="customerInfo.sourceId"
