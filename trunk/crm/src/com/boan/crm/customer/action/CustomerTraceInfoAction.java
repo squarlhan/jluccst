@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
+import com.boan.crm.actionplan.model.ActionPlan;
 import com.boan.crm.actionplan.service.IActionPlanService;
 import com.boan.crm.customer.model.BusinessProgressKey;
 import com.boan.crm.customer.model.ContractPersonInfo;
@@ -579,29 +580,28 @@ public class CustomerTraceInfoAction extends BaseActionSupport{
 		
 		if(inserFLag)
 		{
-			//暂时屏蔽2013-8-18
-//			ActionPlan actionPlan = new ActionPlan();
-//			actionPlan.setDeptId(sessionDeptId);
-//			actionPlan.setCreateTime(Calendar.getInstance());
-//			actionPlan.setDeptName(sessionDeptName);
-//			actionPlan.setEmployeeId(obj.getSalesmanId());
-//			actionPlan.setEmployeeName(obj.getSalesman());
-//			actionPlan.setOrganId(sessionCompanyId);
-//			actionPlan.setPersonId(obj.getSalesmanId());
-//			actionPlan.setPlanType("3");
-//			StringBuilder sb = new StringBuilder();
-//			sb.append("跟进计划：");
-//			sb.append(CalendarUtils.toLongStringNoSecond(obj.getTraceTime()));
-//			sb.append(",对客户[");
-//			sb.append(obj.getCustomerName());
-//			sb.append("]进行["+dataDictionaryService.get(obj.getTraceOption()).getName()+"]方式跟进");
-//			sb.append(",跟进任务：[");
-//			sb.append(obj.getTask());
-//			sb.append("]。");
-//			actionPlan.setPlanContent(sb.toString());
-//			actionPlan.setSubmitTime(Calendar.getInstance());
-//			
-//			actionPlanService.saveOrUpdateActionPlan(actionPlan);
+			ActionPlan actionPlan = new ActionPlan();
+			actionPlan.setDeptId(sessionDeptId);
+			actionPlan.setCreateTime(Calendar.getInstance());
+			actionPlan.setDeptName(sessionDeptName);
+			actionPlan.setEmployeeId(obj.getSalesmanId());
+			actionPlan.setEmployeeName(obj.getSalesman());
+			actionPlan.setOrganId(sessionCompanyId);
+			actionPlan.setPersonId(obj.getSalesmanId());
+			actionPlan.setPlanType("3");
+			StringBuilder sb = new StringBuilder();
+			sb.append("跟进计划：");
+			sb.append(CalendarUtils.toLongStringNoSecond(obj.getTraceTime()));
+			sb.append(",对客户[");
+			sb.append(obj.getCustomerName());
+			sb.append("]进行["+dataDictionaryService.get(obj.getTraceOption()).getName()+"]方式跟进");
+			sb.append(",跟进任务：[");
+			sb.append(obj.getTask());
+			sb.append("]。");
+			actionPlan.setPlanContent(sb.toString());
+			actionPlan.setSubmitTime(Calendar.getInstance());
+			
+			actionPlanService.saveOrUpdateActionPlan(actionPlan);
 //			
 //			TimePlan timePlan = new TimePlan();
 //			timePlan.setCreateTime(Calendar.getInstance());
