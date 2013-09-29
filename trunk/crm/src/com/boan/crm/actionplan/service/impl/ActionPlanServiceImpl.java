@@ -69,8 +69,11 @@ public class ActionPlanServiceImpl implements IActionPlanService {
 					strb.append(" And  planType=:planType");
 				}
 			}
-			if(values.containsKey("beginTime") && values.containsKey("endTime")){
-				strb.append(" And  submitTime>=:beginTime And submitTime<=:endTime");
+			if(values.containsKey("beginTime") ){
+				strb.append(" And  submitTime>=:beginTime ");
+			}
+			if(values.containsKey("endTime")){
+				strb.append("  And submitTime<=:endTime");
 			}
 
 			if(values.containsKey("deptId")){
