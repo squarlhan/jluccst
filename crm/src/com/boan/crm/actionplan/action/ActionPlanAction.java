@@ -165,8 +165,12 @@ public class ActionPlanAction extends BaseActionSupport{
 		params.put("organId", this.sessionCompanyId);
 		params.put("employeeName", employeeName);
 		params.put("planType", planType);
-		params.put("beginTime", beginTime);
-		params.put("endTime", endTime); 
+		if(beginTime!=null){
+			params.put("beginTime", beginTime);
+		}
+		if(endTime!=null){
+			params.put("endTime", endTime); 
+		}
 		params.put("deptId", deptId);
 		if(userId!=null && !userId.equals("")){
 			params.put("employeeId", userId);
@@ -193,8 +197,12 @@ public class ActionPlanAction extends BaseActionSupport{
 		params.put("organId", this.sessionCompanyId);
 		params.put("employeeName", employeeName);
 		params.put("planType", planType);
-		params.put("beginTime", beginTime);
-		params.put("endTime", endTime); 
+		if(beginTime!=null){
+			params.put("beginTime", beginTime);
+		}
+		if(endTime!=null){
+			params.put("endTime", endTime); 
+		}
 		pagination = actionPlanService.findActionPlanForPage(params,pagination);
 		
 		return SUCCESS;
