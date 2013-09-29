@@ -1465,6 +1465,7 @@ public class CustomerInfoAction extends BaseActionSupport{
 		}
 		
 		values.put("companyId", sessionCompanyId);
+		values.put("salesmanId", salesmanId);
 		if(type != null && type.equals("visit"))
 			values.put("progressId", BusinessProgressKey.DEALED);
 		pagination.setPageSize(5);
