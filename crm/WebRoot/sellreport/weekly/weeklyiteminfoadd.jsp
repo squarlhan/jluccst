@@ -134,8 +134,15 @@
 	               		$("#hid_sellDutyName").focus();
 	               		return false;
 	               	}
-	               	
+	               
 	               if($("#txt_sellTarget").length!=0){ //如果选择了销售额类型
+	            	   if($("#txt_sellTarget").length!=0){
+							 if( $("#txt_sellTarget").val()==""){
+				            	   alert("请在额度内填写数字信息，如：10000！");
+				            	   $("#txt_sellTarget").focus();
+				            	   return false;
+				               }
+						}
 		               if( !onlyNumbers("txt_monday")){
 		            	   alert("当前职责类型为销售额类型，请在本周各天内填写数字信息，如：10000！");
 		            	   return false;

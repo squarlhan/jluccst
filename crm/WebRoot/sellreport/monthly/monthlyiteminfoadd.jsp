@@ -45,12 +45,12 @@
 					"monthlyItemInfo.sellDutyId":{required:true,strangecode:true},
 					"monthlyItemInfo.monthResult":{required:true,strangecode:false}
 				},messages:{
-					"weeklyItemInfo.sellDutyId":
+					"monthlyItemInfo.sellDutyId":
 					{
 					    required:"请选择职责类型！",
 					    strangecode:"职责类型包含特殊字符！"
 					},
-					"weeklyItemInfo.monthResult":
+					"monthlyItemInfo.monthResult":
 					{
 					    required:"结果定义为必填项！",
 					    strangecode:"结果定义中包含特殊字符！"
@@ -136,6 +136,13 @@
 	               	}
 	               	
 		  			if($("#txt_sellTarget").length!=0){ //如果选择了销售额类型
+		  				if($("#txt_sellTarget").length!=0){
+							 if( $("#txt_sellTarget").val()==""){
+				            	   alert("请在额度内填写数字信息，如：10000！");
+				            	   $("#txt_sellTarget").focus();
+				            	   return false;
+				               }
+						}
 		                if( !onlyNumbers("txt_firstWeek")){
 		            	   alert("当前职责类型为销售额类型，请在本月各周天内填写数字信息，如：10000！");
 		            	   return false;
