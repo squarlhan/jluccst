@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ page language="java" import="com.boan.crm.groupmanage.common.UserSession,java.util.*" pageEncoding="UTF-8"%>
 <%@ taglib prefix="s" uri="/struts-tags"%>
 <%@ taglib prefix="j" uri="/script-tags"%>
 <%@ taglib prefix="page" uri="/page-tags"%> 
@@ -26,6 +26,8 @@
 	if(customerId==null){
 		customerId="";
 	}
+	UserSession us = (UserSession) session.getAttribute("userSession");
+	String salesmanId = us.getUserId();
 %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
@@ -73,7 +75,7 @@
 	<script type="text/javascript">
 	
 		$(function(){
-			$("#txt_queryCustomerName").autocomplete("../customer/getCustomerByName.action",
+			$("#txt_queryCustomerName").autocomplete("../customer/getCustomerByName.action?salesmanId=<%=salesmanId%>",
 		     {
 	           minChars: 1,
 	           max:5,
