@@ -58,7 +58,7 @@ import="com.boan.crm.groupmanage.common.UserSession,com.boan.crm.groupmanage.ser
 		<!--
 		d = new dTree('d','<%=path%>');
 		<% if( popodomFlag ){%>
-			d.add(0,-1,'22222<s:property value="companyName"/>','./toTabPageAction.action?companyId=<s:property value="companyId"/>&deptId=<s:property value="id"/>&who=session','','groupmain');
+			d.add(0,-1,'<s:property value="companyName"/>','','','groupmain');
 		<% }else{%>
 			d.add(0,-1,'<s:property value="companyName"/>','','','groupmain');
 		<% }%>
