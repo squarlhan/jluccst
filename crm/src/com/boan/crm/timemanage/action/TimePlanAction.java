@@ -177,8 +177,12 @@ public class TimePlanAction extends BaseActionSupport{
 		params.put("organId", this.sessionCompanyId);
 		params.put("employeeName", employeeName);
 		params.put("planType", planType);
-		params.put("beginTime", beginTime);
-		params.put("endTime", endTime); 
+		if(beginTime!=null){
+			params.put("beginTime", beginTime);
+		}
+		if(endTime!=null){
+			params.put("endTime", endTime);
+		}
 		if(!deptId.equals("")){
 			params.put("deptId", deptId);
 		}
@@ -206,8 +210,12 @@ public class TimePlanAction extends BaseActionSupport{
 		params.put("organId", this.sessionCompanyId);
 		params.put("employeeName", employeeName);
 		params.put("planType", planType);
-		params.put("beginTime", beginTime);
-		params.put("endTime", endTime); 
+		if(beginTime!=null){
+			params.put("beginTime", beginTime);
+		}
+		if(endTime!=null){
+			params.put("endTime", endTime);
+		}
 		pagination = timePlanService.findTimePlanForPage(params,pagination);
 		
 		return SUCCESS;
