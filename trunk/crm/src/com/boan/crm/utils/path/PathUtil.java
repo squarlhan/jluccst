@@ -9,6 +9,8 @@
 
 package com.boan.crm.utils.path;
 
+import java.io.File;
+
 /**
  * 获取工程目录类
  * 
@@ -75,7 +77,7 @@ public class PathUtil
 		String path = getWebClassesPath();
 		if( path.indexOf( "WEB-INF" ) > 0 )
 		{
-			path = path.substring( 0, path.indexOf( "WEB-INF/" ) );
+			path = path.substring( 0, path.indexOf( "WEB-INF"+File.separator ) );
 		}
 		else
 		{
