@@ -15,6 +15,9 @@ namespace OPCClient
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Form1());
+
+            //DBAction dba = new DBAction();
+            //dba.dosth();
         }
     }
 }
