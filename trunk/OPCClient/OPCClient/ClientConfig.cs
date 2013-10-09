@@ -74,7 +74,8 @@ namespace OPCClient
         public ClientConfig()
         {
             ItemNames = new List<string>();
-            StreamReader objReader = new StreamReader("opcConfig.ini");
+            string str = System.Windows.Forms.Application.StartupPath;
+            StreamReader objReader = new StreamReader(str+"\\opcConfig.ini");
             string row = "";
             ArrayList LineList = new ArrayList();
             while (row != null)
