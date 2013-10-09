@@ -37,18 +37,6 @@ namespace OPCClient
             serverHandles.Add(0);
         }
 
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            if (Groups != null && Groups.Count > 0)
-            {
-                Groups.Remove("TestGroup");
-            }
-            if (Server != null && Server.ServerState != (int)OPCServerState.OPCDisconnected)
-            {
-                Server.Disconnect();
-            }
-        }
-
         private void button1_Click(object sender, EventArgs e)
         {
             try
@@ -318,6 +306,39 @@ namespace OPCClient
                     listBox2.Items.Add(o.ToString());
                 }
             }          
+        }
+
+        private void Form1_SizeChanged(object sender, EventArgs e)
+        {
+            if (this.WindowState == FormWindowState.Minimized)  // 最小化 
+            {
+                this.Hide();  // 隐藏窗体 
+            } 
+        }
+
+        private void notifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            this.Show();
+        }
+
+        private void 退出ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (Groups != null && Groups.Count > 0)
+            {
+                Groups.Remove("TestGroup");
+            }
+            if (Server != null && Server.ServerState != (int)OPCServerState.OPCDisconnected)
+            {
+                Server.Disconnect();
+            }
+            timer1.Enabled = false;
+            this.Dispose();
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            e.Cancel = true;
+            this.Hide();
         }
     }
 }
