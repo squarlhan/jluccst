@@ -213,14 +213,26 @@ public class MarketInquiryAction extends BaseActionSupport{
 		}else{
 			params.put("organId",sessionCompanyId);
 		}
+		
 		if(goodsId!=null && !goodsId.equals("")){
 			params.put("goodsId", goodsId);
 		}
-		params.put("goodsName", goodsName);
-		params.put("inquiryPersonName", inquiryPersonName);
-		params.put("goodsStandard", goodsStandard);
-		params.put("beginTime", beginTime); 
-		params.put("endTime", endTime); 
+		if(goodsName!=null && !goodsName.equals("")){
+			params.put("goodsName", goodsName);
+		}
+		if(inquiryPersonName!=null && !inquiryPersonName.equals("")){
+			params.put("inquiryPersonName", inquiryPersonName);
+		}
+		if(goodsStandard!=null && !goodsStandard.equals("")){
+			params.put("goodsStandard", goodsStandard);
+		}
+		if(beginTime!=null && !beginTime.equals("")){
+			params.put("beginTime", beginTime); 
+		}
+		if(endTime!=null && !endTime.equals("")){
+			params.put("endTime", endTime); 
+		}
+		
 		pagination = marketInquiryService.findMarketInquiryForPage(params,pagination);
 		
 		return SUCCESS;
