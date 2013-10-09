@@ -15,7 +15,7 @@
 	<!-- 指定每次配置文件更改后，自动重新加载 -->
 	<constant name="struts.configuration.xml.reload" value="true" />
 	<!-- 上传文件时的临时目录-->
-	<constant name="struts.multipart.saveDir" value="c:/temp"/>
+	<!-- <constant name="struts.multipart.saveDir" value="crm/temp"/>-->
 	<!-- 上传组件最大上传文件大小 1G-->
 	<constant name="struts.multipart.maxSize" value="1073741824" /> 
 	
