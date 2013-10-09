@@ -66,6 +66,7 @@
             this.停止ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.开机启动ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.退出ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.timer2 = new System.Windows.Forms.Timer(this.components);
             this.groupBox1.SuspendLayout();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -364,41 +365,47 @@
             this.开机启动ToolStripMenuItem,
             this.退出ToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(123, 114);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(153, 136);
             // 
             // 配置ToolStripMenuItem
             // 
             this.配置ToolStripMenuItem.Name = "配置ToolStripMenuItem";
-            this.配置ToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
+            this.配置ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.配置ToolStripMenuItem.Text = "配置";
+            this.配置ToolStripMenuItem.Click += new System.EventHandler(this.配置ToolStripMenuItem_Click);
             // 
             // 运行ToolStripMenuItem
             // 
             this.运行ToolStripMenuItem.Name = "运行ToolStripMenuItem";
-            this.运行ToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
+            this.运行ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.运行ToolStripMenuItem.Text = "运行";
+            this.运行ToolStripMenuItem.Click += new System.EventHandler(this.运行ToolStripMenuItem_Click);
             // 
             // 停止ToolStripMenuItem
             // 
             this.停止ToolStripMenuItem.Name = "停止ToolStripMenuItem";
-            this.停止ToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
+            this.停止ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.停止ToolStripMenuItem.Text = "停止";
+            this.停止ToolStripMenuItem.Click += new System.EventHandler(this.停止ToolStripMenuItem_Click);
             // 
             // 开机启动ToolStripMenuItem
             // 
-            this.开机启动ToolStripMenuItem.Checked = true;
             this.开机启动ToolStripMenuItem.CheckOnClick = true;
-            this.开机启动ToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
             this.开机启动ToolStripMenuItem.Name = "开机启动ToolStripMenuItem";
-            this.开机启动ToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
+            this.开机启动ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.开机启动ToolStripMenuItem.Text = "开机启动";
+            this.开机启动ToolStripMenuItem.CheckedChanged += new System.EventHandler(this.开机启动ToolStripMenuItem_CheckedChanged);
             // 
             // 退出ToolStripMenuItem
             // 
             this.退出ToolStripMenuItem.Name = "退出ToolStripMenuItem";
-            this.退出ToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
+            this.退出ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.退出ToolStripMenuItem.Text = "退出";
             this.退出ToolStripMenuItem.Click += new System.EventHandler(this.退出ToolStripMenuItem_Click);
+            // 
+            // timer2
+            // 
+            this.timer2.Tick += new System.EventHandler(this.timer2_Tick);
             // 
             // Form1
             // 
@@ -467,6 +474,7 @@
         private System.Windows.Forms.ToolStripMenuItem 停止ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 开机启动ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 退出ToolStripMenuItem;
+        private System.Windows.Forms.Timer timer2;
     }
 }
 

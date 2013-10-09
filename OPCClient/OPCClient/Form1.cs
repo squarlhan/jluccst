@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Windows.Forms;
+using Microsoft.Win32;
 using OPCAutomation;
 
 
@@ -17,15 +18,18 @@ namespace OPCClient
         private OPCItems Items;
         private OPCBrowser brow;
         private ClientConfig clientConfig;
+        private DBAction dba;
 
         private List<int> clientHandles ;
         private List<int> serverHandles ;
-        private List<OPCItem> selectedItems ;
+        private List<OPCItem> selectedItems ;   
+
 
         public Form1()
         {
             InitializeComponent();
             clientConfig = new ClientConfig();
+            dba = new DBAction();
             readini();
         }
 
@@ -35,6 +39,24 @@ namespace OPCClient
             serverHandles = new List<int>();
             selectedItems = new List<OPCItem>();
             serverHandles.Add(0);
+            this.Visible = false;
+            this.ShowInTaskbar = false;
+            RegistryKey R_local = Registry.LocalMachine;
+            RegistryKey R_run = R_local.CreateSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Run");
+            if (R_run.GetValue("BirthdayTipF") == null)
+            {
+                开机启动ToolStripMenuItem.Checked = false;
+            }
+            else
+            {
+                开机启动ToolStripMenuItem.Checked = true;
+            }
+            R_run.Close();
+            R_local.Close();
+            停止ToolStripMenuItem.Enabled = true;
+            运行ToolStripMenuItem.Enabled = false;
+            timer2.Interval = clientConfig.Timespan * 1000;
+            timer2.Enabled = true;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -236,8 +258,9 @@ namespace OPCClient
             clientConfig.DbPasw = textBox7.Text.Trim();
             clientConfig.Timespan = Int32.Parse(textBox8.Text.Trim());
             clientConfig.ItemNames.Clear();
-            
-            FileStream fs = new FileStream("opcConfig.ini", FileMode.Truncate);
+
+            string str = System.Windows.Forms.Application.StartupPath;
+            FileStream fs = new FileStream(str+"\\opcConfig.ini", FileMode.Truncate);
             StreamWriter output = new StreamWriter(fs);
             //开始写入
             output.Write("host="+textBox2.Text+"\r\n");
@@ -319,6 +342,7 @@ namespace OPCClient
         private void notifyIcon1_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             this.Show();
+            this.ShowInTaskbar = true;
         }
 
         private void 退出ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -340,5 +364,64 @@ namespace OPCClient
             e.Cancel = true;
             this.Hide();
         }
+
+        private void 开机启动ToolStripMenuItem_CheckedChanged(object sender, EventArgs e)
+        {
+             string R_startPath = Application.ExecutablePath;
+            if (开机启动ToolStripMenuItem.Checked == true)
+            {
+                RegistryKey R_local = Registry.LocalMachine;
+                RegistryKey R_run = R_local.CreateSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Run");
+                R_run.SetValue("BirthdayTipF", R_startPath);
+                R_run.Close();
+                R_local.Close();
+            }
+            else
+            {
+                try
+                {
+                    RegistryKey R_local = Registry.LocalMachine;
+                    RegistryKey R_run = R_local.CreateSubKey(@"SOFTWARE\Microsoft\Windows\CurrentVersion\Run");
+                    R_run.DeleteValue("BirthdayTipF", false);
+                    R_run.Close();
+                    R_local.Close();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("您需要管理员权限修改", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    throw;
+                }
+            }
+        }
+
+        private void 配置ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Show();
+            this.ShowInTaskbar = true;
+        }
+
+        private void timer2_Tick(object sender, EventArgs e)
+        {
+            dba.dosth();
+        }
+
+        private void 运行ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            clientConfig = new ClientConfig();
+            this.readini();
+            dba = new DBAction(clientConfig, clientHandles, serverHandles, selectedItems);           
+            停止ToolStripMenuItem.Enabled = true;
+            运行ToolStripMenuItem.Enabled = false;
+            timer2.Interval = clientConfig.Timespan*1000;
+            timer2.Enabled = true;
+        }
+
+        private void 停止ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            停止ToolStripMenuItem.Enabled = false;
+            运行ToolStripMenuItem.Enabled = true;
+            timer2.Enabled = false;
+        }
+
     }
 }

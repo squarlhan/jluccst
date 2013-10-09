@@ -14,10 +14,8 @@ namespace OPCClient
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Form1 form1 = new Form1();          
+            Form1 form1 = new Form1();
             Application.Run(form1);
-            form1.Visible = false;
-            form1.Hide();
 
             //DBAction dba = new DBAction();
             //dba.dosth();

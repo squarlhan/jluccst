@@ -33,6 +33,16 @@ namespace OPCClient
             connect2OPC();
         }
 
+        public DBAction(ClientConfig clientConfig, List<int> clientHandles, List<int> serverHandles, List<OPCItem> selectedItems)
+        {
+            this.clientConfig = clientConfig;
+            this.clientHandles = clientHandles;
+            this.serverHandles = serverHandles;
+            this.selectedItems = selectedItems;
+            connect2DB();
+            connect2OPC();
+        }
+
         /// <summary>
         /// 每当项数据有变化时执行的事件
         /// </summary>
@@ -130,6 +140,7 @@ namespace OPCClient
             }
         }
 
+      
         private void connect2DB()
         {
             string connStr = String.Format("server={0};uid={1};pwd={2};database={3}",
