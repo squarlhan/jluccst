@@ -89,8 +89,11 @@ public class MarketInquiryServiceImpl implements IMarketInquiryService {
 			}
 		}
 
-		if(values.containsKey("beginTime") && values.containsKey("endTime")){
-			strb.append(" And  inquiryTime>=:beginTime And inquiryTime<=:endTime");
+		if(values.containsKey("beginTime") ){
+			strb.append(" And  inquiryTime>=:beginTime  ");
+		}
+		if(values.containsKey("endTime")){
+			strb.append("  And inquiryTime<=:endTime");
 		}
 		
 		String hql = "from MarketInquiry "+strb.toString()+" order by createTime desc";
