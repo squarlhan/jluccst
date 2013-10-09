@@ -18,9 +18,9 @@ namespace OPCClient
         private OPCBrowser brow;
         private ClientConfig clientConfig;
 
-        List<int> clientHandles = new List<int>();
-        List<int> serverHandles = new List<int>();
-        List<OPCItem> selectedItems = new List<OPCItem>();
+        private List<int> clientHandles ;
+        private List<int> serverHandles ;
+        private List<OPCItem> selectedItems ;
 
         public Form1()
         {
@@ -31,6 +31,9 @@ namespace OPCClient
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            clientHandles = new List<int>();
+            serverHandles = new List<int>();
+            selectedItems = new List<OPCItem>();
             serverHandles.Add(0);
         }
 
@@ -102,7 +105,18 @@ namespace OPCClient
                 G.UpdateRate = 1000;
                 G.DataChange += new DIOPCGroupEvent_DataChangeEventHandler(GroupDataChange); //订阅
                 Items = G.OPCItems;
-
+                int c = clientConfig.ItemNames.Count;
+                if (c > 0)
+                {
+                     for (int i = 0; i <= c - 1; i++)
+                    {
+                        OPCItem item = Items.AddItem(clientConfig.ItemNames[i], i);
+                        clientHandles.Add(i);
+                        serverHandles.Add(item.ServerHandle);
+                        selectedItems.Add(item);
+                    }
+                }               
+                button2.Enabled = true;
             }
             catch (Exception ex)
             {
@@ -212,76 +226,29 @@ namespace OPCClient
 
         private void readini()
         {
-            StreamReader objReader = new StreamReader("opcConfig.ini");
-            string row = "";
-            ArrayList LineList = new ArrayList();
-            while (row != null)
-            {
-                row = objReader.ReadLine();
-                if (row != null && !row.Equals(""))
-                {
-                    if (row.Trim().StartsWith("host"))
-                    {
-                        String[] ns = row.Trim().Split('=');
-                        textBox2.Text = ns[1].Trim();
-                        clientConfig.OpcAddr = ns[1].Trim();
-                    }
-                    if (row.Trim().StartsWith("name"))
-                    {
-                        String[] ns = row.Trim().Split('=');
-                        textBox1.Text = ns[1].Trim();
-                        clientConfig.OpcName = ns[1].Trim();
-                    }
-                    if (row.Trim().StartsWith("dbname"))
-                    {
-                        String[] ns = row.Trim().Split('=');
-                        textBox4.Text = ns[1].Trim();
-                        clientConfig.DbName = ns[1].Trim();
-                    }
-                    if (row.Trim().StartsWith("dbhost"))
-                    {
-                        String[] ns = row.Trim().Split('=');
-                        textBox3.Text = ns[1].Trim();
-                        clientConfig.DbAddr = ns[1].Trim();
-                    }
-                    if (row.Trim().StartsWith("dbport"))
-                    {
-                        String[] ns = row.Trim().Split('=');
-                        textBox5.Text = ns[1].Trim();
-                        clientConfig.DbPort = ns[1].Trim();
-                    }
-                    if (row.Trim().StartsWith("dbuser"))
-                    {
-                        String[] ns = row.Trim().Split('=');
-                        textBox6.Text = ns[1].Trim();
-                        clientConfig.DbUser = ns[1].Trim();
-                    }
-                    if (row.Trim().StartsWith("dbpsw"))
-                    {
-                        String[] ns = row.Trim().Split('=');
-                        textBox7.Text = ns[1].Trim();
-                        clientConfig.DbPasw = ns[1].Trim();
-                    }
-                    if (row.Trim().StartsWith("timespan"))
-                    {
-                        String[] ns = row.Trim().Split('=');
-                        textBox8.Text = ns[1].Trim();
-                        clientConfig.Timespan = int.Parse(ns[1].Trim());
-                    }
-                    if (row.Trim().IndexOf('=') < 0 && row.Trim().IndexOf(':') > 0)
-                    {
-                        String[] ns = row.Trim().Split(':');
-                        listBox2.Items.Add(ns[0].Trim());
-                    }
-                }
-                   
-
-            }
-            objReader.Close();
+            textBox2.Text = clientConfig.OpcAddr;
+            textBox1.Text = clientConfig.OpcName;
+            textBox3.Text = clientConfig.DbAddr;
+            textBox4.Text = clientConfig.DbName;
+            textBox5.Text = clientConfig.DbPort;
+            textBox6.Text = clientConfig.DbUser;
+            textBox7.Text = clientConfig.DbPasw;
+            textBox8.Text = clientConfig.Timespan.ToString();
+            listBox2.Items.AddRange(clientConfig.ItemNames.ToArray());
         }
 
         private void saveini()
         {
+            clientConfig.OpcAddr = textBox2.Text.Trim();
+            clientConfig.OpcName = textBox1.Text.Trim();
+            clientConfig.DbAddr = textBox3.Text.Trim();
+            clientConfig.DbName = textBox4.Text.Trim();
+            clientConfig.DbPort = textBox5.Text.Trim();
+            clientConfig.DbUser = textBox6.Text.Trim();
+            clientConfig.DbPasw = textBox7.Text.Trim();
+            clientConfig.Timespan = Int32.Parse(textBox8.Text.Trim());
+            clientConfig.ItemNames.Clear();
+            
             FileStream fs = new FileStream("opcConfig.ini", FileMode.Truncate);
             StreamWriter output = new StreamWriter(fs);
             //开始写入
@@ -292,11 +259,14 @@ namespace OPCClient
 			output.Write("dbuser="+textBox6.Text+"\r\n");
 			output.Write("dbpsw="+textBox7.Text+"\r\n");
 			output.Write("dbport="+textBox5.Text+"\r\n");
-			output.Write("timespan="+textBox8.Text+"\r\n");
-            foreach (OPCItem oi in selectedItems)
+			output.Write("timespan="+textBox8.Text+"\r\n");            
+            foreach(object o in listBox2.Items)
             {
-                output.Write(oi.ItemID + ":"+oi.ServerHandle+"\r\n");
-			}
+                string temp_str = o.ToString();
+                clientConfig.ItemNames.Add(temp_str);
+                output.Write(temp_str + "\r\n");
+            }
+            
             //清空缓冲区
             output.Flush();
             //关闭流
@@ -319,11 +289,18 @@ namespace OPCClient
 
         private void button7_Click(object sender, EventArgs e)
         {
-            int si = listBox2.SelectedIndex;
-            listBox2.Items.RemoveAt(si);
-            selectedItems.RemoveAt(si);
-            clientHandles.RemoveAt(si);
-            serverHandles.RemoveAt(si);
+            int si = listBox2.SelectedIndex;    
+            if (si > -1)
+            {
+                listBox2.Items.RemoveAt(si);
+                if (selectedItems.Count == listBox2.Items.Count+1)
+                {
+                    selectedItems.RemoveAt(si);
+                    clientHandles.RemoveAt(si);
+                    serverHandles.RemoveAt(si);
+                }  
+            }
+                    
         }
 
         private void button5_Click(object sender, EventArgs e)

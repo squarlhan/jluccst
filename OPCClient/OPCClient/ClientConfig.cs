@@ -1,4 +1,9 @@
-﻿namespace OPCClient
+﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.IO;
+
+namespace OPCClient
 {
     public class ClientConfig
     {
@@ -10,7 +15,7 @@
         private string db_user;
         private string db_pasw;
         private int timespan;
-        //private HashSet items;
+        private List<string> item_names;
 
         public string OpcAddr
         {
@@ -58,6 +63,74 @@
         {
             get { return timespan; }
             set { timespan = value; }
+        }
+
+        public List<string> ItemNames
+        {
+            get { return item_names; }
+            set { item_names = value; }
+        }
+
+        public ClientConfig()
+        {
+            ItemNames = new List<string>();
+            StreamReader objReader = new StreamReader("opcConfig.ini");
+            string row = "";
+            ArrayList LineList = new ArrayList();
+            while (row != null)
+            {
+                row = objReader.ReadLine();
+                if (row != null && !row.Equals(""))
+                {
+                    if (row.Trim().StartsWith("host"))
+                    {
+                        String[] ns = row.Trim().Split('=');
+                        OpcAddr = ns[1].Trim();
+                    }
+                    if (row.Trim().StartsWith("name"))
+                    {
+                        String[] ns = row.Trim().Split('=');
+                        OpcName = ns[1].Trim();
+                    }
+                    if (row.Trim().StartsWith("dbname"))
+                    {
+                        String[] ns = row.Trim().Split('=');
+                        DbName = ns[1].Trim();
+                    }
+                    if (row.Trim().StartsWith("dbhost"))
+                    {
+                        String[] ns = row.Trim().Split('=');
+                        DbAddr = ns[1].Trim();
+                    }
+                    if (row.Trim().StartsWith("dbport"))
+                    {
+                        String[] ns = row.Trim().Split('=');
+                        DbPort = ns[1].Trim();
+                    }
+                    if (row.Trim().StartsWith("dbuser"))
+                    {
+                        String[] ns = row.Trim().Split('=');
+                        DbUser = ns[1].Trim();
+                    }
+                    if (row.Trim().StartsWith("dbpsw"))
+                    {
+                        String[] ns = row.Trim().Split('=');
+                        DbPasw = ns[1].Trim();
+                    }
+                    if (row.Trim().StartsWith("timespan"))
+                    {
+                        String[] ns = row.Trim().Split('=');
+                        Timespan = int.Parse(ns[1].Trim());
+                    }
+                    if (row.Trim().IndexOf('=') < 0)
+                    {
+                        ItemNames.Add(row.Trim());
+                    }
+                }
+
+
+            }
+            objReader.Close();
         }
     }
 }
