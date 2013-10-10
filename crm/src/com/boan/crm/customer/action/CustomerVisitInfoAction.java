@@ -87,9 +87,9 @@ public class CustomerVisitInfoAction extends BaseActionSupport{
 	@Autowired
 	@Qualifier("actionPlanService")
 	private IActionPlanService actionPlanService = null;
-	@Autowired
-	@Qualifier("timePlanService")
-	private ITimePlanService timePlanService = null;
+//	@Autowired
+//	@Qualifier("timePlanService")
+//	private ITimePlanService timePlanService = null;
 	@Autowired
 	@Qualifier("popedomService")
 	private IPopedomService popedomService = null;
@@ -356,7 +356,7 @@ public class CustomerVisitInfoAction extends BaseActionSupport{
 			else
 				customerInfo.setProgress("新建");
 			
-			List<ContractPersonInfo> listPerson = contractPersonService.findAllContractPersonInfoByCustomerId(customerId);
+			listPerson = contractPersonService.findAllContractPersonInfoByCustomerId(customerId);
 			if(listPerson != null)
 			{
 				for(int i=0;i<listPerson.size();i++)
@@ -400,11 +400,18 @@ public class CustomerVisitInfoAction extends BaseActionSupport{
 			Calendar time = Calendar.getInstance();
 			time.add(Calendar.HOUR, 1);
 			visitTime = CalendarUtils.toLongStringNoSecond(time);
+			if(customerId != null && customerId.length() > 0)
+			{
+				listPerson = contractPersonService.findAllContractPersonInfoByCustomerId(customerId);
+			}else
+			{
+				listPerson = new ArrayList<ContractPersonInfo>();
+			}
 		}
 		
 		listVisitOption = dataDictionaryService.findDataDictionaryByType(sessionCompanyId, 5);
 		
-		listPerson = contractPersonService.findAllContractPersonInfoByCustomerId(customerId);
+		//listPerson = contractPersonService.findAllContractPersonInfoByCustomerId(customerId);
 		
 		try
 		{

@@ -365,6 +365,13 @@ public class CustomerInfoAction extends BaseActionSupport{
 			map.put("address", customerInfo.getAddress());
 			map.put("company_full_name", customerInfo.getCompanyFullName());
 			map.put("fax", customerInfo.getFax());
+			if(customerInfo.getDeleteFlag() == 1)
+			{
+				map.put("isDeleted", "1");
+			}else
+			{
+				map.put("isDeleted", "0");
+			}
 			//新建客户为1，跟踪客户为2，要成单客户为3，成单客户为4，回访客户为5
 			String progressStr = customerInfo.getProgressId();
 			if(progressStr.equals(BusinessProgressKey.NEW))
