@@ -1,5 +1,6 @@
 package com.boan.crm.actionplan.service.impl;
 
+import java.util.Calendar;
 import java.util.List;
 import java.util.Map;
 
@@ -24,6 +25,45 @@ public class ActionPlanServiceImpl implements IActionPlanService {
 		 */
 		public void saveOrUpdateActionPlan(ActionPlan actionPlan){
 			actionPlanDao.saveOrUpdate(actionPlan);
+		}
+		
+		/**
+		 * 保存或修改行动计划,用于跟进/回访信息的保存
+		 * @param trackOrVisitId 跟进/回访Id
+		 * @param planOrSummarizeInfo 要保存到行动计划中的计划或总结信息
+		 * @param companyId 当前公司Id 
+		 * @param employeeId 当前业务员Id 
+		 * @param employeeName  当前业务员名称
+		 * @param deptId 当前业务员部门Id
+		 * @param deptName 当前业务员部门名称
+		 * @param infoType 信息类型（3：跟进  4：回访）
+		 * @param submitTime 提交时间
+		 */
+		public void saveOrUpdateActionPlan(String trackOrVisitId ,String planOrSummarizeInfo , String companyId ,String employeeId,String employeeName , String deptId, String deptName,String infoType ,Calendar submitTime){
+			ActionPlan actionPlan = new ActionPlan();
+			//根据跟进/回访Id查询行动计划，判断是否是第一次保存
+			List<ActionPlan> actinoPlanList = actionPlanDao.findByProperty("trackOrVisitId", trackOrVisitId);
+			//如果是第一次保存，，即行动计划中不存在跟进/回访信息，则添加行动计划，并将信息保存到行动计划的计划字段中
+			if(actinoPlanList==null || actinoPlanList.size()==0){
+				actionPlan.setOrganId(companyId);
+				actionPlan.setPersonId(employeeId);
+				actionPlan.setEmployeeId(employeeId);
+				actionPlan.setEmployeeName(employeeName);
+				actionPlan.setDeptId(deptId);
+				actionPlan.setDeptName(deptName);
+				actionPlan.setPlanType(infoType);
+				actionPlan.setSubmitTime(submitTime);
+				actionPlan.setPlanContent(planOrSummarizeInfo);//保存计划字段中
+				actionPlan.setCreateTime(Calendar.getInstance());
+				actionPlanDao.saveOrUpdate(actionPlan);
+			}else{
+				//如果是修改行动计划，即行动计划中已经存在跟进/回访信息，则将信息保存到总结字段中
+				actionPlan = actinoPlanList.get(0);
+				if(actionPlan!=null){
+					actionPlan.setMemo(planOrSummarizeInfo);
+					actionPlanDao.saveOrUpdate(actionPlan);//保存计划字段中
+				}
+			}
 		}
 		
 		 /**
