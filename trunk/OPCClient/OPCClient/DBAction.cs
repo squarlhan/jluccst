@@ -143,15 +143,22 @@ namespace OPCClient
       
         private void connect2DB()
         {
-            string connStr = String.Format("server={0};uid={1};pwd={2};database={3}",
-                clientConfig.DbAddr , clientConfig.DbUser,
-                clientConfig.DbPasw, clientConfig.DbName);
-            conn = new MySqlConnection(connStr);
+            try
+            {
+                string connStr = String.Format("server={0};uid={1};pwd={2};database={3}",
+                    clientConfig.DbAddr , clientConfig.DbUser,
+                    clientConfig.DbPasw, clientConfig.DbName);
+                conn = new MySqlConnection(connStr);
+                }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
         public void dosth()
        {
-           //try
+           try
            {
                conn.Open();
                string sql_tr = "truncate table motodcsdata";
@@ -191,10 +198,10 @@ namespace OPCClient
                }
                conn.Close();
            }
-           //catch (Exception ex)
-           //{
-           //    MessageBox.Show("Exception: " + ex.Message);
-           //}
+           catch (Exception ex)
+           {
+               MessageBox.Show("Exception: " + ex.Message);
+           }
 
        }
     }
