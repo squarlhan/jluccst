@@ -60,6 +60,9 @@ public class ActionPlan implements Serializable{
 	@Column(name = "CREATE_TIME")
 	private Calendar createTime;
 	
+	@Column(name = "TRACK_OR_VISIT_ID" , length = 50)
+	private String trackOrVisitId;
+	
 	/**
 	 * @return
 	 */
@@ -187,7 +190,7 @@ public class ActionPlan implements Serializable{
 	}
 
 	/**
-	 * 备注
+	 * 总结
 	 * @return
 	 */
 	public String getMemo() {
@@ -195,7 +198,7 @@ public class ActionPlan implements Serializable{
 	}
 
 	/**
-	 * 备注
+	 * 总结
 	 * @param memo
 	 */
 	public void setMemo(String memo) {
@@ -226,11 +229,33 @@ public class ActionPlan implements Serializable{
 		this.personId = personId;
 	}
 
+	/**
+	 * 公司Id
+	 * @param organId
+	 */
 	public String getOrganId() {
 		return organId;
 	}
 
+	/**
+	 * 公司Id
+	 * @param organId
+	 */
 	public void setOrganId(String organId) {
 		this.organId = organId;
+	}
+
+	/**
+	 * @return the trackOrVisitId
+	 */
+	public String getTrackOrVisitId() {
+		return trackOrVisitId;
+	}
+
+	/**
+	 * @param trackOrVisitId the trackOrVisitId to set
+	 */
+	public void setTrackOrVisitId(String trackOrVisitId) {
+		this.trackOrVisitId = trackOrVisitId;
 	}
 }
