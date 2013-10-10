@@ -60,6 +60,7 @@ public class ActionPlanServiceImpl implements IActionPlanService {
 				//如果是修改行动计划，即行动计划中已经存在跟进/回访信息，则将信息保存到总结字段中
 				actionPlan = actinoPlanList.get(0);
 				if(actionPlan!=null){
+					//actionPlan.setPlanContent(null);
 					actionPlan.setMemo(planOrSummarizeInfo);
 					actionPlanDao.saveOrUpdate(actionPlan);//保存计划字段中
 				}
