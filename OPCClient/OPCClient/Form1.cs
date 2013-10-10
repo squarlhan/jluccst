@@ -388,7 +388,7 @@ namespace OPCClient
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("您需要管理员权限修改", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(ex.Message+"您需要管理员权限修改！", "提示", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     throw;
                 }
             }
