@@ -89,9 +89,9 @@ public class CustomerTraceInfoAction extends BaseActionSupport{
 	@Qualifier("actionPlanService")
 	private IActionPlanService actionPlanService = null;
 	
-	@Autowired
-	@Qualifier("timePlanService")
-	private ITimePlanService  timePlanService = null;
+//	@Autowired
+//	@Qualifier("timePlanService")
+//	private ITimePlanService  timePlanService = null;
 	
 	@Autowired
 	@Qualifier("popedomService")
@@ -310,7 +310,8 @@ public class CustomerTraceInfoAction extends BaseActionSupport{
 			else
 				customerInfo.setProgress("新建");
 			
-			List<ContractPersonInfo> listPerson = contractPersonService.findAllContractPersonInfoByCustomerId(customerId);
+			listPerson = contractPersonService.findAllContractPersonInfoByCustomerId(customerId);
+			
 			if(listPerson != null)
 			{
 				for(int i=0;i<listPerson.size();i++)
@@ -354,11 +355,17 @@ public class CustomerTraceInfoAction extends BaseActionSupport{
 			Calendar time = Calendar.getInstance();
 			time.add(Calendar.HOUR, 1);
 			traceTime = CalendarUtils.toLongStringNoSecond(time);
+			
+			if(customerId != null && customerId.length() > 0)
+			{
+				listPerson = contractPersonService.findAllContractPersonInfoByCustomerId(customerId);
+			}else
+			{
+				listPerson = new ArrayList<ContractPersonInfo>();
+			}
 		}
 		
 		listTraceOption = dataDictionaryService.findDataDictionaryByType(sessionCompanyId, 6);
-		
-		listPerson = contractPersonService.findAllContractPersonInfoByCustomerId(customerId);
 		
 		try
 		{
