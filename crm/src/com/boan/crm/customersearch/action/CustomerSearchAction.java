@@ -251,6 +251,7 @@ public class CustomerSearchAction  extends BaseActionSupport{
 	public String importCustomerInCompany(){
 		if(uploadFile != null)
 		{
+			System.out.println("==============================["+uploadFileContentType+"]");
 			try
 			{
 				String baseDirectory = PathUtil.getInstance().getWebRoot()+"uploadfiles/importcustomer/";
