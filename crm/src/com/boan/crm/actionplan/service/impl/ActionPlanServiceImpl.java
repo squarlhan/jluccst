@@ -45,6 +45,7 @@ public class ActionPlanServiceImpl implements IActionPlanService {
 			List<ActionPlan> actinoPlanList = actionPlanDao.findByProperty("trackOrVisitId", trackOrVisitId);
 			//如果是第一次保存，，即行动计划中不存在跟进/回访信息，则添加行动计划，并将信息保存到行动计划的计划字段中
 			if(actinoPlanList==null || actinoPlanList.size()==0){
+				actionPlan.setTrackOrVisitId(trackOrVisitId);
 				actionPlan.setOrganId(companyId);
 				actionPlan.setPersonId(employeeId);
 				actionPlan.setEmployeeId(employeeId);
