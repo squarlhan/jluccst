@@ -105,6 +105,7 @@
   <center>
  <s:form id="form1" name="form1" method="post" theme="simple" action="toAssignSellerAction.action" >
  <s:hidden name="customerLibInfo.id"></s:hidden>
+ <s:hidden name="assignCustomerIds"></s:hidden>
  <s:label  name="message" id ="message" cssStyle="display:none"></s:label>
 <table width="400" border="0" cellspacing="1" cellpadding="0"  bgcolor="#FFFFFF">
 	<tr>
