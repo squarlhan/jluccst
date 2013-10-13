@@ -100,6 +100,9 @@ public class CustomerSearchAction  extends BaseActionSupport{
 	
 	private String[] selectedSellerIds;
 	
+	//已选的待分配用户数组
+	private String[] assignCustomerIds;
+	
 	@Autowired
 	@Qualifier("deptService")
 	private IDeptmentService deptService = null;
@@ -492,6 +495,17 @@ public class CustomerSearchAction  extends BaseActionSupport{
 		if(cityId!=null){
 			areaList = areaService.findAreaInfoByCityId(cityId);
 		}
+		List<CustomerLibInfo> data = pagination.getData();
+		for(CustomerLibInfo info :  data){
+			List<CustomerLibInfoViewAndSellerRelation> customerLibInfoViewAndSellerRelations =  customerLibInfoViewAndSellerRelationService.queryCustomerLibInfoViewAndSellerRelation(info.getId());
+			if(customerLibInfoViewAndSellerRelations!=null){
+				int n = customerLibInfoViewAndSellerRelations.size();
+				if(n>0){
+					info.setAssign(true);//已分配给业务员
+				}
+			}
+		}
+		pagination.setData(data);
 		return SUCCESS;
 	}
 	
@@ -549,10 +563,23 @@ public class CustomerSearchAction  extends BaseActionSupport{
 		
 		customerLibInfoViewAndSellerRelationService.deleteCustomerLibInfoViewAndSellerRelationByCustomerLibInfoViewId(customerLibInfo.getId());
 		for(String sellerId : selectedSellerIds){
-			CustomerLibInfoViewAndSellerRelation obj = new CustomerLibInfoViewAndSellerRelation();
-			obj.setCustomerLibInfoViewId(customerLibInfo.getId());
-			obj.setSellerId(sellerId);
-			customerLibInfoViewAndSellerRelationService.saveOrUpdate(obj);
+			
+			if(assignCustomerIds.length!=0){
+				String[] customerIds= assignCustomerIds[0].split(",");
+				for(String id :customerIds){
+					CustomerLibInfoViewAndSellerRelation obj = new CustomerLibInfoViewAndSellerRelation();
+					obj.setCustomerLibInfoViewId(id);
+					obj.setSellerId(sellerId);
+					customerLibInfoViewAndSellerRelationService.saveOrUpdate(obj);
+				}
+			}
+			if(!customerLibInfo.getId().equals("")){
+				CustomerLibInfoViewAndSellerRelation obj = new CustomerLibInfoViewAndSellerRelation();
+				obj.setCustomerLibInfoViewId(customerLibInfo.getId());
+				obj.setSellerId(sellerId);
+				customerLibInfoViewAndSellerRelationService.saveOrUpdate(obj);
+			}
+			
 		}
 		message="分配成功！";
 		
@@ -1157,5 +1184,19 @@ public class CustomerSearchAction  extends BaseActionSupport{
 	 */
 	public void setIsCommonly(int isCommonly) {
 		this.isCommonly = isCommonly;
+	}
+
+	/**
+	 * @return the assignCustomerIds
+	 */
+	public String[] getAssignCustomerIds() {
+		return assignCustomerIds;
+	}
+
+	/**
+	 * @param assignCustomerIds the assignCustomerIds to set
+	 */
+	public void setAssignCustomerIds(String[] assignCustomerIds) {
+		this.assignCustomerIds = assignCustomerIds;
 	}
 }
