@@ -97,6 +97,12 @@ public class CustomerLibInfo implements Serializable
 	@Column(name = "IMPORTANT_FLAG",nullable=false)
 	private Integer importantFlag = 0;
 	
+	/**
+	 * 判断客户是否已经分配给业务员，false：未分配 true：已分配
+	 */
+	@Transient
+	private boolean isAssign = false; 
+	
 	//管理员设的不在查询（0：查询  1：不查询）
 	@Column(name = "no_Search"  ,nullable=false,columnDefinition="INT default 0")
 	private int noSearch = 0;
@@ -553,5 +559,19 @@ public class CustomerLibInfo implements Serializable
 	}
 	public void setImportantFlag(Integer importantFlag) {
 		this.importantFlag = importantFlag;
+	}
+	/**
+	 * 判断客户是否已经分配给业务员，false：未分配 true：已分配
+	 * @return the isAssign
+	 */
+	public boolean getIsAssign() {
+		return isAssign;
+	}
+	/**
+	 * 判断客户是否已经分配给业务员，false：未分配 true：已分配
+	 * @param isAssign the isAssign to set
+	 */
+	public void setAssign(boolean isAssign) {
+		this.isAssign = isAssign;
 	}
 }

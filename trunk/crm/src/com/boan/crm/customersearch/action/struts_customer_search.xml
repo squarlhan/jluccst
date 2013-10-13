@@ -50,6 +50,7 @@
 					,vnd.ms-excel.sheet.binary.macroEnabled.12
 					,vnd.ms-excel.sheet.macroEnabled.12
 					,vnd.ms-excel.template.macroEnabled.12
+					,application/kset
 				</param>
 			</interceptor-ref>
 			<result name="success">/customer/customerreaserchincompanymanager.jsp</result>
