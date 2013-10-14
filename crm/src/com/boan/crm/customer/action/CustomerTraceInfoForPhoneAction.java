@@ -66,6 +66,7 @@ public class CustomerTraceInfoForPhoneAction extends BaseActionSupport{
 	private String realTime   = "";
 	private String intrester  = ""; 
 	private String unAgree  = "";
+	private String isFinish = "";
 	/**
 	 * 手机端完成任务，保存客户跟进信息
 	 * @return String
@@ -86,7 +87,7 @@ public class CustomerTraceInfoForPhoneAction extends BaseActionSupport{
 			{
 				obj.setActualTraceTime(MySimpleDateFormat.parse(followRealDate, "yyyy-MM-dd HH:mm"));
 			}
-			obj.setTraceFlag("1");
+			obj.setTraceFlag(isFinish);
 			obj.setQq(QQ);
 			obj.setTel(telphone);
 			obj.setTask(followTask);
@@ -321,5 +322,13 @@ public class CustomerTraceInfoForPhoneAction extends BaseActionSupport{
 
 	public void setCompanyId(String companyId) {
 		this.companyId = companyId;
+	}
+
+	public String getIsFinish() {
+		return isFinish;
+	}
+
+	public void setIsFinish(String isFinish) {
+		this.isFinish = isFinish;
 	}
 }
