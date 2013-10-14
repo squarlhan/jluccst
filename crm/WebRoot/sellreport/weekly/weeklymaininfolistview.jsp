@@ -151,7 +151,7 @@ pageEncoding="UTF-8"%>
 	  		$('a[name="seeAll"]').each(function(){
 	  			$(this).click(function(){
 	  				var url = $(this).attr("url");
-	  				parent.parent.tipsWindown("查看全部计划","iframe:"+url,"900","520","true","","true","no");
+	  				parent.parent.tipsWindown("查看全部计划","iframe:"+url,"900","550","true","","true","no");
 	  			});
 	  		});
 	  		

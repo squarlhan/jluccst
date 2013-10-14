@@ -57,6 +57,17 @@ $(document).ready(function(){
 		parent.$("#windown-close").click();
 	});
 });
+function printdiv(divId)
+{
+	var headstr = "<html><head><title></title></head><body>";
+	var footstr = "</body>";
+	var newstr = document.all.item(divId).innerHTML;
+	var oldstr = document.body.innerHTML;
+	document.body.innerHTML = headstr+newstr+footstr;
+	window.print(); 
+	document.body.innerHTML = oldstr;
+	return false;
+}
 </script>
 
 </head>
@@ -66,7 +77,7 @@ $(document).ready(function(){
 	<table width="100%" border="0" >
 		<tr>
 			<td>
-				<div style="border:0px;padding:3px; PADDING:0px; height:470px; LINE-HEIGHT: 20px; OVERFLOW: auto; ">
+				<div id="printDiv" style="border:0px;padding:3px; PADDING:0px; height:470px; LINE-HEIGHT: 20px; OVERFLOW: auto; ">
 				<table border="1" width="100%"   height="50%"   class="myTable">
 					<tr>
 						<td colspan="12"><strong><b>日期：<s:property value="monthlyMainInfo.planInterzone"></s:property></strong></b></td>
@@ -123,7 +134,7 @@ $(document).ready(function(){
 		</tr>
 		<tr>
 			<td align="center" height="30">
-				<input name="addBtn" type="button" class="btn_2_3" id="addBtn" value="打印"  onclick="javascript:window.print();" >&nbsp;&nbsp;
+				<input name="addBtn" type="button" class="btn_2_3" id="addBtn" value="打印"  onclick="javascript:printdiv('printDiv');" >&nbsp;&nbsp;
 				<input name="closeBtn" type="button" class="btn_2_3" id="closeBtn" value="关闭">
 			</td>
 		</tr>

@@ -25,7 +25,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<title>月计划报表</title>
+<title>周计划报表</title>
 
 <meta http-equiv="pragma" content="no-cache">
 <meta http-equiv="cache-control" content="no-cache">
@@ -52,11 +52,58 @@
 -->
 </style>
 <script type="text/javascript">
+(function ($) {
+    var printAreaCount = 0;
+    $.fn.printArea = function () {
+        var ele = $(this);
+        var idPrefix = "printArea_";
+        removePrintArea(idPrefix + printAreaCount);
+        printAreaCount++;
+        var iframeId = idPrefix + printAreaCount;
+        var iframeStyle = 'position:absolute;width:0px;height:0px;left:-500px;top:-500px;';
+        iframe = document.createElement('IFRAME');
+        $(iframe).attr({
+            style: iframeStyle,
+            id: iframeId
+        });
+        document.body.appendChild(iframe);
+        var doc = iframe.contentWindow.document;
+        $(document).find("link").filter(function () {
+            return $(this).attr("rel").toLowerCase() == "stylesheet";
+        }).each(
+                function () {
+                    doc.write('<link type="text/css" rel="stylesheet" href="'
+                            + $(this).attr("href") + '" >');
+                });
+        doc.write('<div class="' + $(ele).attr("class") + '">' + $(ele).html()
+                + '</div>');
+        doc.close();
+        var frameWindow = iframe.contentWindow;
+        frameWindow.close();
+        frameWindow.focus();
+        frameWindow.print();
+    }
+    var removePrintArea = function (id) {
+        $("iframe#" + id).remove();
+    };
+})(jQuery);
+
 $(document).ready(function(){
 	$("#closeBtn").click(function(){
 		parent.$("#windown-close").click();
 	});
 });
+function printdiv(divId)
+{
+	var headstr = "<html><head><title></title></head><body>";
+	var footstr = "</body>";
+	var newstr = document.all.item(divId).innerHTML;
+	var oldstr = document.body.innerHTML;
+	document.body.innerHTML = headstr+newstr+footstr;
+	window.print(); 
+	document.body.innerHTML = oldstr;
+	return false;
+}
 </script>
 
 </head>
@@ -66,7 +113,7 @@ $(document).ready(function(){
 	<table width="100%" border="0" >
 		<tr>
 			<td>
-				<div style="border:0px;padding:3px; PADDING:0px; height:470px; LINE-HEIGHT: 20px; OVERFLOW: auto; ">
+				<div id="printDiv" style="border:0px;padding:3px; PADDING:0px; height:470px; LINE-HEIGHT: 20px; OVERFLOW: auto; ">
 				<table border="1" width="100%"   height="50%"   class="myTable">
 					<tr>
 						<td colspan="15"><strong><b>日期：<s:property value="weeklyMainInfo.planInterzone"></s:property></strong></b></td>
@@ -129,7 +176,7 @@ $(document).ready(function(){
 		</tr>
 		<tr>
 			<td align="center" height="30">
-				<input name="addBtn" type="button" class="btn_2_3" id="addBtn" value="打印"  onclick="javascript:window.print();" >&nbsp;&nbsp;
+				<input name="addBtn" type="button" class="btn_2_3" id="addBtn" value="打印"  onclick="javascript:printdiv('printDiv');" >&nbsp;&nbsp;
 				<input name="closeBtn" type="button" class="btn_2_3" id="closeBtn" value="关闭">
 			</td>
 		</tr>
