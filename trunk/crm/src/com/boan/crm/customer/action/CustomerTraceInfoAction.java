@@ -18,7 +18,6 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
-import com.boan.crm.actionplan.model.ActionPlan;
 import com.boan.crm.actionplan.service.IActionPlanService;
 import com.boan.crm.customer.model.BusinessProgressKey;
 import com.boan.crm.customer.model.ContractPersonInfo;
@@ -38,7 +37,6 @@ import com.boan.crm.sms.model.SMSCustomerInfo;
 import com.boan.crm.sms.model.SMSInfo;
 import com.boan.crm.sms.service.ISMSCustomerInfoService;
 import com.boan.crm.sms.service.ISMSInfoService;
-import com.boan.crm.timemanage.service.ITimePlanService;
 import com.boan.crm.utils.action.BaseActionSupport;
 import com.boan.crm.utils.calendar.CalendarUtils;
 import com.boan.crm.utils.calendar.MySimpleDateFormat;
@@ -587,15 +585,6 @@ public class CustomerTraceInfoAction extends BaseActionSupport{
 		
 		if(inserFLag)
 		{
-			ActionPlan actionPlan = new ActionPlan();
-			actionPlan.setDeptId(sessionDeptId);
-			actionPlan.setCreateTime(Calendar.getInstance());
-			actionPlan.setDeptName(sessionDeptName);
-			actionPlan.setEmployeeId(obj.getSalesmanId());
-			actionPlan.setEmployeeName(obj.getSalesman());
-			actionPlan.setOrganId(sessionCompanyId);
-			actionPlan.setPersonId(obj.getSalesmanId());
-			actionPlan.setPlanType("3");
 			StringBuilder sb = new StringBuilder();
 			sb.append("跟进计划：");
 			sb.append(CalendarUtils.toLongStringNoSecond(obj.getTraceTime()));
@@ -605,10 +594,10 @@ public class CustomerTraceInfoAction extends BaseActionSupport{
 			sb.append(",跟进任务：[");
 			sb.append(obj.getTask());
 			sb.append("]。");
-			actionPlan.setPlanContent(sb.toString());
-			actionPlan.setSubmitTime(Calendar.getInstance());
 			
-			actionPlanService.saveOrUpdateActionPlan(actionPlan);
+			//actionPlanService.saveOrUpdateActionPlan(actionPlan);
+			
+			actionPlanService.saveOrUpdateActionPlan(obj.getId(), sb.toString(), sessionCompanyId, sessionUserId, sessionUserCName, sessionDeptId, sessionDeptName, "3", Calendar.getInstance());
 //			
 //			TimePlan timePlan = new TimePlan();
 //			timePlan.setCreateTime(Calendar.getInstance());
@@ -625,6 +614,10 @@ public class CustomerTraceInfoAction extends BaseActionSupport{
 		{
 			if (traceFlag != null && traceFlag.equals("1"))
 			{
+				StringBuilder sb = new StringBuilder();
+				sb.append("跟进完成。");
+				
+				actionPlanService.saveOrUpdateActionPlan(obj.getId(), sb.toString(), sessionCompanyId, sessionUserId, sessionUserCName, sessionDeptId, sessionDeptName, "3", Calendar.getInstance());
 //				//暂时屏蔽2013-8-18
 //				if(!timePlanService.hasTimePlanForTrackOrVisit(obj.getId()))
 //				{

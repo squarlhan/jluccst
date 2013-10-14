@@ -54,7 +54,7 @@ public class CustomerVisitInfoForPhoneAction extends BaseActionSupport{
 	private String message = null;
 	private String vistResult  ="";
 	private String vistMark = "";
-	private String isFinisehd = "";
+	private String isFinish = "";
 	
 	
 	private String userId  = "";
@@ -89,7 +89,7 @@ public class CustomerVisitInfoForPhoneAction extends BaseActionSupport{
 			{
 				obj.setActualVisitTime(MySimpleDateFormat.parse(vistRealDate, "yyyy-MM-dd HH:mm"));
 			}
-			obj.setVisitFlag(isFinisehd);
+			obj.setVisitFlag(isFinish);
 			obj.setQq(QQ);
 			obj.setTel(telphone);
 			obj.setTask(task);
@@ -226,11 +226,15 @@ public class CustomerVisitInfoForPhoneAction extends BaseActionSupport{
 	public void setVistMark(String vistMark) {
 		this.vistMark = vistMark;
 	}
-	public String getIsFinisehd() {
-		return isFinisehd;
+
+
+	public String getIsFinish() {
+		return isFinish;
 	}
-	public void setIsFinisehd(String isFinisehd) {
-		this.isFinisehd = isFinisehd;
+
+
+	public void setIsFinish(String isFinish) {
+		this.isFinish = isFinish;
 	}
 
 
