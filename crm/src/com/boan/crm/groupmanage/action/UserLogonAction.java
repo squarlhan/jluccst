@@ -121,6 +121,8 @@ public class UserLogonAction extends ActionSupport {
 
 	private String companyName = null;
 
+	private String deptId = null;
+	
 	private String deptName = null;
 
 	private String factoryName = null;
@@ -580,6 +582,7 @@ public class UserLogonAction extends ActionSupport {
 		isHashPopedom01 = popedomService.isHasPopedom(userSession.getUserId(), String.valueOf(userSession.getUserType()), MenuKey.DESKTOP_CUSTOMER, userSession.getPopedomKeys());
 		isHashPopedom02 = popedomService.isHasPopedom(userSession.getUserId(), String.valueOf(userSession.getUserType()), MenuKey.DESKTOP_PLAN_MANAGER, userSession.getPopedomKeys());
 		isHashPopedom03 = popedomService.isHasPopedom(userSession.getUserId(), String.valueOf(userSession.getUserType()), MenuKey.DESKTOP_SALES_STAT, userSession.getPopedomKeys());
+		deptId = userSession.getDeptId();
 		return desktopUrl;
 	}
 
@@ -1149,6 +1152,14 @@ public class UserLogonAction extends ActionSupport {
 
 	public void setUserId(String userId) {
 		this.userId = userId;
+	}
+
+	public String getDeptId() {
+		return deptId;
+	}
+
+	public void setDeptId(String deptId) {
+		this.deptId = deptId;
 	}
 
 }
