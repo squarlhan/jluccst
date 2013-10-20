@@ -459,6 +459,28 @@ $.fn.trimSpaceAtSub=function ()
 		}
 	);
 }
+//提交前过滤非法字符，主要用于查询前
+$.fn.isexiststrangecodeforsearch=function ()
+{
+	var isexist = false;
+	$("input[type='text']").each
+	(
+		function(i)
+		{
+			$(this).val($.trim($(this).val()));
+			if( $(this).val() != ""){
+				var isExist = $.fn.strangecode( $(this).val(),"文本框" );
+				if(isExist ){
+					//存在非法字符
+					isexist = true;
+					//跳出each必须用 return false;
+					return false;
+				}
+			}
+		}
+	);
+	return isexist;
+}
 //光标移到int型输入域自动选中
 $.fn.focusOnIntSelected=function (id)
 {
