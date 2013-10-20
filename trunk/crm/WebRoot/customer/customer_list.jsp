@@ -68,6 +68,10 @@
 					window.location.href="./customerList.action";
 				});*/
 				//window.parent.location.href = "customerTabInfo.action";
+				if($.fn.isexiststrangecodeforsearch()){
+					return false;
+				}
+				$("#currentPage").val(1);
 				form1.action = "customerList.action";
 				form1.submit();
 		
