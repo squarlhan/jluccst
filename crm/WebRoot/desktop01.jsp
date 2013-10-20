@@ -81,9 +81,12 @@
             	flag = popedomService.isHasPopedom(us.getUserId(), String.valueOf(us.getUserType()), MenuKey.DESKTOP_SUB_NEW_CUSTOMER, us.getPopedomKeys());
             	if( flag ){
             	%>
-            	onclick="window.location.href='<%=url %>NEW'" style="cursor:pointer"
+            	onclick="window.location.href='./customer/customerTabInfo.action?deptId=<s:property value='deptId'/>'" style="cursor:pointer"
             	<%} %>
           >
+          <!-- 
+            	onclick="window.location.href='<%=url %>NEW'" style="cursor:pointer"
+           -->
             <td style="width:312px; height:64px; background-image:url(images/desktop/01_01.jpg); background-repeat:no-repeat;">
             	<table width="100%"  style="height:64px;" border="0" cellspacing="0" cellpadding="0">
                 <tr>
