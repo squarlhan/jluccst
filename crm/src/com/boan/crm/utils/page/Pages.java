@@ -152,6 +152,15 @@ public class Pages extends Component {
 			} else {
 				str.append(">");
 			}
+			//跳转控件
+			StringBuffer sbPage = new StringBuffer();
+			sbPage.append("<input type=\"text\" style=\"width:40px;ime-mode:disabled;\" value=\""+ currentPage +"\" id=\"gopage\");" );
+			sbPage.append(" onkeypress=\"return event.keyCode>=48 && event.keyCode<=57\" ");
+			sbPage.append(" ondragenter=\"return false\" ");
+			sbPage.append(" onpaste=\"return false\" ");
+			sbPage.append(" maxlength=\"8\">");
+			sbPage.append(" <input type=\"button\" class=\"btn_2_3\" value=\"跳 转\" onclick=\"gomypage();\"> ");
+			
 			// 文本样式
 			if (theme == null || "text".equals(theme)) {
 				// 当前页与总页数相等
@@ -163,12 +172,14 @@ public class Pages extends Component {
 						str.append("<a >上一页&nbsp;&nbsp;&nbsp;&nbsp;</a>");
 						str.append("下一页&nbsp;&nbsp;&nbsp;&nbsp;");
 						str.append("尾　页&nbsp;&nbsp;&nbsp;&nbsp;");
+						str.append( sbPage );
 						str.append("当前["+ currentPage + "/" + totalPages + "]页");
 					}else{
 						str.append("<a "+ hrefStyle +" onclick='javascript:turnOverPage(1)'>首　页&nbsp;&nbsp;&nbsp;&nbsp;</a> ");
 						str.append("<a "+ hrefStyle +" onclick='javascript:turnOverPage("+ ( cpageInt - 1) + ")'>上一页&nbsp;&nbsp;&nbsp;&nbsp;</a>");
 						str.append("下一页&nbsp;&nbsp;&nbsp;&nbsp;");
 						str.append("尾　页&nbsp;&nbsp;&nbsp;&nbsp;");
+						str.append( sbPage );
 						str.append("当前["+ currentPage + "/" + totalPages + "]页");
 					}
 				} else {
@@ -178,12 +189,14 @@ public class Pages extends Component {
 						str.append("上一页&nbsp;&nbsp;&nbsp;&nbsp;");
 						str.append("<a "+ hrefStyle +" onclick='javascript:turnOverPage("+ (cpageInt + 1) + ")'>下一页&nbsp;&nbsp;&nbsp;&nbsp;</a>");
 						str.append("<a "+ hrefStyle +" onclick='javascript:turnOverPage("+totalPages + ")'>尾　页&nbsp;&nbsp;&nbsp;&nbsp;</a>");
+						str.append( sbPage );
 						str.append("当前["+ currentPage + "/" + totalPages + "]页");
 					} else {
 						str.append("<a "+ hrefStyle +"  onclick='javascript:turnOverPage(1)'>首　页&nbsp;&nbsp;&nbsp;&nbsp;</a>");
 						str.append("<a "+ hrefStyle +" onclick='javascript:turnOverPage("+ ( cpageInt - 1) + ")'>上一页&nbsp;&nbsp;&nbsp;&nbsp;</a>");
 						str.append("<a "+ hrefStyle +" onclick='javascript:turnOverPage("+ (cpageInt + 1) + ")'>下一页&nbsp;&nbsp;&nbsp;&nbsp;</a>");
 						str.append("<a  "+ hrefStyle +" onclick='javascript:turnOverPage("+totalPages + ")'>尾　页&nbsp;&nbsp;&nbsp;&nbsp;</a>");
+						str.append( sbPage );
 						str.append("当前["+ currentPage + "/" + totalPages + "]页");
 					}
 				}
@@ -212,7 +225,14 @@ public class Pages extends Component {
 			}else{
 				str.append( "document.forms[0].submit();\r\n " );
 			}
-			str.append("  }\r\n");  
+			str.append("  }\r\n"); 
+			//跳转
+			str.append( "function gomypage(){\r\n");
+			str.append( "var g = document.getElementById(\"gopage\").value; \r\n");
+			str.append( "if( g != null && g != \"\"){\r\n" );
+			str.append( "	turnOverPage(g); \r\n");
+			str.append( "}" );
+			str.append( "} \r\n");
 			str.append("</script>\r\n");  
 			str.append("</span>");
 
