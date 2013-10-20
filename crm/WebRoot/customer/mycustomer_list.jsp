@@ -68,6 +68,13 @@
 					window.location.href="./customerList.action";
 				});*/
 				//window.parent.location.href = "customerTabInfo.action";
+				
+				//过滤非法字符
+				if($.fn.isexiststrangecodeforsearch()){
+					return false;
+				}
+				//点查询按钮，页面自动转到第一页
+				$("#currentPage").val(1);
 				form1.action = "myCustomerList.action";
 				form1.submit();
 		
