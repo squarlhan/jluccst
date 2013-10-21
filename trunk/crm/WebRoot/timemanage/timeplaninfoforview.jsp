@@ -80,9 +80,11 @@
 				if($("#hid_message").val()!="" && $("#hid_timePlanId").val()!=null){
 					alert($("#hid_message").val());
 				}
-				$('#txt_submitTime').val((new Date()).getFullYear()+"-"+(((new Date()).getMonth()+1)<10 ? "0"+((new Date()).getMonth()+1) : (new Date()).getMonth()+1)+"-"+((new Date()).getDate()<10 ? "0"+(new Date()).getDate() : (new Date()).getDate()));
-		  		//日期控件
-				$('#txt_submitTime').datetimepicker({showTimepicker: false});
+				if($("#hid_timePlanId").val()==null || $("#hid_timePlanId").val()==""){
+					$('#txt_submitTime').val((new Date()).getFullYear()+"-"+(((new Date()).getMonth()+1)<10 ? "0"+((new Date()).getMonth()+1) : (new Date()).getMonth()+1)+"-"+((new Date()).getDate()<10 ? "0"+(new Date()).getDate() : (new Date()).getDate()));
+					//日期控件
+					$('#txt_submitTime').datetimepicker({showTimepicker: false});
+				}
 				$.validator.setDefaults({
 					debug: false,onkeyup: false,onfocusout:false,focusCleanup: true,
 				    errorPlacement:function(error, element) {},
