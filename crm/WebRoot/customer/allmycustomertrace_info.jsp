@@ -62,7 +62,7 @@
 			var allData;
 			$(function() {
 				<s:if test='%{customerTraceInfo.id.equals("")}'>
-				$("#customerName").autocomplete("customer/getMyCustomerByName.action?type=visit",
+				$("#customerName").autocomplete("customer/getMyCustomerByName.action?type=trace",
 			     {
 		           minChars: 1,
 		           max:5,
