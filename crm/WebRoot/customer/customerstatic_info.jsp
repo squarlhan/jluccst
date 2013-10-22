@@ -98,47 +98,47 @@ background-color:#d3eaef}
 				xml = xml + "<set label=\""+document.getElementById("category<s:property value="#obj.index"/>").textStr+"\"  name=\""+document.getElementById("category<s:property value="#obj.index"/>").textStr+"\" value=\""+document.getElementById("category<s:property value="#obj.index"/>").valueStr+"\" />";
 			</s:iterator>
 			xml = xml + "</graph>";
-			var chart = new FusionCharts("../js/FusionCharts/Charts/FCF_Column3D.swf", "chartdiv1", "500", "350");
+			var chart = new FusionCharts("../js/FusionCharts/Charts/Column3D.swf", "chartdiv1", "500", "350");
 			chart.setDataXML(xml);
 			chart.render("chartdiv1");
 		</s:if>
 		<s:if test="flag.equals('source')">
-			var xml2 = "<graph caption='客户来源信息统计' baseFontSize='16' xAxisName='客户来源' yAxisName='客户个数' showNames='1' yAxisMaxValue='"+recordCount+"'  decimalPrecision='0'>";
+			var xml2 = "<graph caption='客户来源信息统计' baseFontSize='16' xAxisName='客户来源' yAxisName='客户个数' showNames='1' yAxisMaxValue='"+recordCount+"'  decimalPrecision='0' showLegend='1'>";
 			<s:iterator value="listSourceStatic" status="obj">
 				xml2 = xml2 + "<set name=\""+document.getElementById("source<s:property value="#obj.index"/>").textStr+"\" value=\""+document.getElementById("source<s:property value="#obj.index"/>").valueStr+"\" />";
 			</s:iterator>
 			xml2 = xml2 + "</graph>";
-			var chart2 = new FusionCharts("../js/FusionCharts/Charts/FCF_Column3D.swf", "chartdiv2", "500", "350");
+			var chart2 = new FusionCharts("../js/FusionCharts/Charts/Column3D.swf", "chartdiv2", "600", "450");
 			chart2.setDataXML(xml2);
 			chart2.render("chartdiv2");
 		</s:if>
 		<s:if test="flag.equals('maturity')">
-			var xml3 = "<graph caption='客户忠诚度信息统计' baseFontSize='16' xAxisName='客户忠诚度' showNames='1' yAxisMaxValue='"+recordCount+"' decimalPrecision='0'>";
+			var xml3 = "<graph caption='客户忠诚度信息统计' baseFontSize='16' xAxisName='客户忠诚度' showNames='1' yAxisMaxValue='"+recordCount+"' decimalPrecision='0' showLegend='1'>";
 			<s:iterator value="listMaturityStatic" status="obj">
 				xml3 = xml3 + "<set name=\""+document.getElementById("maturity<s:property value="#obj.index"/>").textStr+"\" value=\""+document.getElementById("maturity<s:property value="#obj.index"/>").valueStr+"\" />";
 			</s:iterator>
 			xml3 = xml3 + "</graph>";
-			var chart3 = new FusionCharts("../js/FusionCharts/Charts/FCF_Column3D.swf", "chartdiv3", "500", "350");
+			var chart3 = new FusionCharts("../js/FusionCharts/Charts/Column3D.swf", "chartdiv3", "600", "450");
 			chart3.setDataXML(xml3);
 			chart3.render("chartdiv3");
 		</s:if>
 		<s:if test="flag.equals('progress')">
-			var xml4 = "<graph caption='客户业务进展信息统计' baseFontSize='16' xAxisName='客户业务进展' showNames='1' yAxisMaxValue='"+recordCount+"' decimalPrecision='0'>";
+			var xml4 = "<graph caption='客户业务进展信息统计' baseFontSize='16' xAxisName='客户业务进展' showNames='1' yAxisMaxValue='"+recordCount+"' decimalPrecision='0' showLegend='1'>";
 			<s:iterator value="listProgressStatic" status="obj">
 				xml4 = xml4 + "<set name=\""+document.getElementById("progress<s:property value="#obj.index"/>").textStr+"\" value=\""+document.getElementById("progress<s:property value="#obj.index"/>").valueStr+"\" />";
 			</s:iterator>
 			xml4 = xml4 + "</graph>";
-			var chart4 = new FusionCharts("../js/FusionCharts/Charts/FCF_Column3D.swf", "chartdiv4", "500", "350");
+			var chart4 = new FusionCharts("../js/FusionCharts/Charts/Column3D.swf", "chartdiv4", "600", "450");
 			chart4.setDataXML(xml4);
 			chart4.render("chartdiv4");
 		</s:if>
 		<s:if test="flag.equals('level')">
-			var xml5 = "<graph caption='客户开发程度信息统计' baseFontSize='16' xAxisName='客户开发程度' showNames='1' yAxisMaxValue='"+recordCount+"' rotateNames='1'  decimalPrecision='0'>";
+			var xml5 = "<graph caption='客户开发程度信息统计' baseFontSize='16' xAxisName='客户开发程度' showNames='1' yAxisMaxValue='"+recordCount+"'  decimalPrecision='0' showLegend='1'>";
 			<s:iterator value="listLevelStatic" status="obj">
 				xml5 = xml5 + "<set name=\""+document.getElementById("level<s:property value="#obj.index"/>").textStr+"\" value=\""+document.getElementById("level<s:property value="#obj.index"/>").valueStr+"\" />";
 			</s:iterator>
 			xml5 = xml5 + "</graph>";
-			var chart5 = new FusionCharts("../js/FusionCharts/Charts/FCF_Column3D.swf", "chartdiv5", "500", "350");
+			var chart5 = new FusionCharts("../js/FusionCharts/Charts/Column3D.swf", "chartdiv5", "600", "450");
 			chart5.setDataXML(xml5);
 			chart5.render("chartdiv5");
 		</s:if>
