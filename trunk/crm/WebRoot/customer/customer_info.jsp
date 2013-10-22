@@ -94,6 +94,7 @@
 		  		$.fn.close();
 		  		$.fn.initpage();
 		  		$('#registerTime').datetimepicker({showTimepicker: false});
+		  		
 		  		loadCity($("#province").val());
 		  		
 		  		$("#province").change(function() {
@@ -110,9 +111,16 @@
 		                    timeout: 5000,
 		                    error: function() { alert('Error loading data!'); },
 		                    success: function(msg) {
+		                    	var cityId = $("#city").val();
 		                        $("#city").empty();
 		                        $.each(eval(msg), function(i, item) {
-		                            $("<option value='" + item.id + "'>" + item.name + "</option>").appendTo($("#city"));
+		                        	if(cityId != "" && item.id  == cityId)
+		                        	{
+		                            	$("<option value='" + item.id + "' selected>" + item.name + "</option>").appendTo($("#city"));
+		                            }else
+		                            {
+		                            	$("<option value='" + item.id + "'>" + item.name + "</option>").appendTo($("#city"));
+		                            }
 		                        });
 		                        
 		                        loadArea($("#city").val());
@@ -127,9 +135,17 @@
 	                    timeout: 5000,
 	                    error: function() { alert('Error loading data!'); },
 	                    success: function(msg) {
+	                    	var areaId = $("#area").val();
 	                        $("#area").empty();
 	                        $.each(eval(msg), function(i, item) {
-	                            $("<option value='" + item.id + "'>" + item.name + "</option>").appendTo($("#area"));
+	                        	if(areaId != "" && item.id  == areaId)
+	                        	{
+	                            	$("<option value='" + item.id + "' selected>" + item.name + "</option>").appendTo($("#city"));
+	                            }else
+	                            {
+	                            	$("<option value='" + item.id + "'>" + item.name + "</option>").appendTo($("#area"));
+	                            }
+	                            
 	                        });
 	                    }
 	                });
