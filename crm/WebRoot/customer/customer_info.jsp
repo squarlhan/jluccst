@@ -114,7 +114,7 @@
 		                    	var cityId = $("#city").val();
 		                        $("#city").empty();
 		                        $.each(eval(msg), function(i, item) {
-		                        	if(cityId != "" && item.id  == cityId)
+		                        	if("<s:property value='customerInfo.city'/>" == item.id)
 		                        	{
 		                            	$("<option value='" + item.id + "' selected>" + item.name + "</option>").appendTo($("#city"));
 		                            }else
@@ -135,17 +135,15 @@
 	                    timeout: 5000,
 	                    error: function() { alert('Error loading data!'); },
 	                    success: function(msg) {
-	                    	var areaId = $("#area").val();
 	                        $("#area").empty();
 	                        $.each(eval(msg), function(i, item) {
-	                        	if(areaId != "" && item.id  == areaId)
+	                        	if("<s:property value='customerInfo.district'/>" == item.id)
 	                        	{
-	                            	$("<option value='" + item.id + "' selected>" + item.name + "</option>").appendTo($("#city"));
+	                            	$("<option value='" + item.id + "' selected>" + item.name + "</option>").appendTo($("#area"));
 	                            }else
 	                            {
 	                            	$("<option value='" + item.id + "'>" + item.name + "</option>").appendTo($("#area"));
 	                            }
-	                            
 	                        });
 	                    }
 	                });

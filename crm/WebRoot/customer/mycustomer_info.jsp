@@ -115,7 +115,13 @@
 		                    success: function(msg) {
 		                        $("#city").empty();
 		                        $.each(eval(msg), function(i, item) {
-		                            $("<option value='" + item.id + "'>" + item.name + "</option>").appendTo($("#city"));
+		                        	if("<s:property value='customerInfo.city'/>" == item.id)
+		                        	{
+		                            	$("<option value='" + item.id + "' selected>" + item.name + "</option>").appendTo($("#city"));
+		                            }else
+		                            {
+		                            	$("<option value='" + item.id + "'>" + item.name + "</option>").appendTo($("#city"));
+		                            }
 		                        });
 		                        
 		                        loadArea($("#city").val());
@@ -134,7 +140,13 @@
 	                    success: function(msg) {
 	                        $("#area").empty();
 	                        $.each(eval(msg), function(i, item) {
-	                            $("<option value='" + item.id + "'>" + item.name + "</option>").appendTo($("#area"));
+	                        	if("<s:property value='customerInfo.district'/>" == item.id)
+	                        	{
+	                            	$("<option value='" + item.id + "' selected>" + item.name + "</option>").appendTo($("#area"));
+	                            }else
+	                            {
+	                            	$("<option value='" + item.id + "'>" + item.name + "</option>").appendTo($("#area"));
+	                            }
 	                        });
 	                    }
 	                });
