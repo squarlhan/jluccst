@@ -114,8 +114,7 @@
 								<td align="right"></td>
 							</tr>
 						</table>
-						<table width="100%" border="0" cellpadding="5" cellspacing="1"
-							bgcolor="#d5e4fd">
+						<table width="100%" border="0" cellpadding="5" cellspacing="1" bgcolor="#d5e4fd">
 							<tr>
 								<td align="center" background="<%=path%>/images/headerbg.jpg">
 									<s:checkbox theme="simple" id="cbk_all" name="all"></s:checkbox>
