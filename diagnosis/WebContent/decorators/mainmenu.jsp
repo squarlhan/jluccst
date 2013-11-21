@@ -21,7 +21,7 @@
         <td><a href="/diagnosis/monitoraction.action">DCS数据推理</a></td>
        
        
-        <td><a href="/diagnosis/dcsdataaction!showmotodcsdatas.action">DCS数据查询</a></td>
+        <td><a href="user/usermotodcslist.jsp">DCS数据查询</a></td>
         <td><a href="/diagnosis/motoerrorlogaction.action">DCS日志查询</a></td>
         <td><a href="/diagnosis/interfaceaction.action">预警数据推理</a></td>
         <td><a href="/diagnosis/dcsdataaction!showgongyidatas.action">预警数据查询</a></td>

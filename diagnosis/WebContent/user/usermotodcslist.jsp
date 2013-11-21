@@ -26,198 +26,80 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
-	    <script language="JavaScript" type="text/javascript">
-    	
-    	//下面开始分页      
-
-        var perpage = 13;
-    	var eques = new Array(
-    			<s:iterator id="result" value="motodcsdatalist">
-    				"<s:property value='#result.equipment'/>",
-    			</s:iterator>
-    		0);
-    	var items = new Array(
-    			<s:iterator id="result" value="motodcsdatalist">
-    				"<s:property value='#result.item'/>",
-    			</s:iterator>
-    		0);
-    	var bids = new Array(
-    		    <s:iterator id="result" value="motodcsdatalist">
-    			    "<s:property value='#result.value'/>",
-    		    </s:iterator>
-    	    0);
-    	var isoks = new Array(
-    		    <s:iterator id="result" value="motodcsdatalist">
-    			    "<s:property value='#result.isok'/>",
-    		    </s:iterator>
-    	    0);
-    	
-    	function createrow(mytable,a)
-    	{
-    		var tr = mytable.insertRow(1);
-    		if(a%2==1){
-    			tr.style.backgroundColor="#ffffff";
-    		}else{
-    			tr.style.backgroundColor="#EDEDED";
-    		}
-    	    var td1 = tr.insertCell(-1);
-    	    var td2 = tr.insertCell(-1);
-    	    var td3 = tr.insertCell(-1);
-			td1.align = "left";
-			td2.align = "left";
-			td3.align = "left";
-			 if(isoks[a]=="1"){
-    			td3.style.color="goldenrod";
-    		}else if(isoks[a]=="2"){
-    			td3.style.color="chocolate";
-    		}else if(isoks[a]=="3"){
-    			td3.style.color="red";
-    		}else{
-    			td3.style.color="black";
-    		}
-    	    td1.innerHTML = eques[a]+"&nbsp;";
-    	    td2.innerHTML = items[a]+"&nbsp;";
-    	    td3.innerHTML = "<b>"+bids[a]+"&nbsp;</b>";
-    		}
-
-    	function firstpage()
-    	{
-    		var mytable = document.getElementById("mytable");		
-    		while(mytable.rows.length>1){
-    			mytable.deleteRow(mytable.rows.length-1);
-    		}
-    		var stopnum;
-    		if(bids.length<=perpage+1){
-    			stopnum = bids.length-1;		
-    		}else{
-    			stopnum = perpage;			
-    		}	
-    		for(var a=0;a<stopnum;a++){
-    			createrow(mytable,a);
-    		}
-    		var current = document.getElementById("current");
-    		current.value = 1;
-    		var sum = document.getElementById("sum");
-    		sum.value = Math.ceil((bids.length-1)/perpage);
-    		
-    		var last = document.getElementById("last");
-    		last.disabled=true;
-    		var next = document.getElementById("next");
-    		if(sum.value>1){
-    			next.disabled=false;
-    		}else{
-    			next.disabled=true;
-    		}
-    		var myfinal = document.getElementById("final");
-    		if(sum.value==0){
-    			myfinal.disabled=true;
-    		}
-    		
-    	}
-    	function lastpage()
-    	{
-    		var current = document.getElementById("current").value;
-    		var sum = document.getElementById("sum").value;
-    		var mytable = document.getElementById("mytable");
-    		while(mytable.rows.length>1){
-    			mytable.deleteRow(mytable.rows.length-1);
-    		}
-    		var startnum = (current-2)*perpage;
-    		var stopnum = (current-1)*perpage;	
-    		if(current>=2){
-    		    for(var a=startnum;a<stopnum;a++){
-    		    	createrow(mytable,a);
-    		    }
-    		}
-    		var next = document.getElementById("next");
-    		next.disabled=false;		
-    		var last = document.getElementById("last");
-    		if(current==2){
-    			last.disabled=true;
-    		}else{			
-    			last.disabled=false;
-    		}
-    		document.getElementById("current").value--;
-    	}
-    	function nextpage()
-    	{
-    		var current = document.getElementById("current").value;
-    		var sum = document.getElementById("sum").value;
-    		var mytable = document.getElementById("mytable");
-    		while(mytable.rows.length>1){
-    			mytable.deleteRow(mytable.rows.length-1);
-    		}
-    		var startnum = current*perpage;
-    		var stopnum;
-    		if(current==sum-1){
-    			stopnum = bids.length-1;
-    	    }else{
-    	    	stopnum = startnum+perpage;
-    	    }
-    		for(var a=startnum;a<stopnum;a++){
-    			createrow(mytable,a);
-    		}
-    		var last = document.getElementById("last");
-    		last.disabled=false;		
-    		var next = document.getElementById("next");
-    		if(current==sum-1){
-    			next.disabled=true;
-    		}else{		
-    			next.disabled=false;
-    		}
-    		document.getElementById("current").value++;
-    	}
-    	function finalpage()
-    	{
-    		var mytable = document.getElementById("mytable");
-    		while(mytable.rows.length>1){
-    			mytable.deleteRow(mytable.rows.length-1);
-    		}
-    		var sum = document.getElementById("sum").value;		
-    		var startnum = (sum-1)*perpage;
-    		for(var a=startnum;a<bids.length-1;a++){
-    			createrow(mytable,a);
-    			}	
-    		document.getElementById("current").value = sum;
-    		var last = document.getElementById("last");
-    		if(sum!=1){
-    			last.disabled=false;
-    		}else{
-    			last.disabled=true;
-    		}
-    		var next = document.getElementById("next");
-    		next.disabled=true;
-    	}
-    	
-    	
-    </script>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" type="text/css" href="/diagnosis/themes/default/easyui.css">
+    <link rel="stylesheet" type="text/css" href="/diagnosis/themes/icon.css">
+    <link rel="stylesheet" type="text/css" href="/diagnosis/css/demo.css">
+    <script type="text/javascript" src="/diagnosis/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/diagnosis/js/jquery.easyui.min.js"></script>
 
 
   </head>
   
   <body>
-
-     <div id="rightmain">
 	  <h2>DCS数据查询</h2>
 	
-  <table bordercolor="#FFFFFF" id="mytable" class="list_table" align="center" >
-		<tr bgcolor="#4A708B">
-		    <th width = "35%">故障节点</th>
-			<th width = "35%">控制参数</th>
-			<th width = "30%">参数值</th>
-	  </tr>
-  </table>
-   <div align="center">
-       <input type="button" id="first" value="第一页" onclick="javascript:firstpage()"/>
-       <input type="button" id="last" value="上一页" onclick="javascript:lastpage()"/>
-       <input type="button" id="next" value="下一页" onclick="javascript:nextpage()"/>
-       <input type="button" id="final" value="最后一页" onclick="javascript:finalpage()"/>
-	       第<input align="MIDDLE" type="text" size="2" readonly="readonly" id="current"/>页 &nbsp;
-	       共<input align="MIDDLE" type="text" size="2" readonly="readonly" id="sum"/>页
-	</div>
-</div>
-  <script language="JavaScript" type="text/javascript">
-     firstpage();
- </script>
+ <table id="dg" style="width:1000px;height:500px" data-options="
+                rownumbers:true,
+                singleSelect:true,
+                autoRowHeight:false,
+                pagination:true,
+                pageSize:20,
+                loadMsg:'正在加载数据，请稍候……',
+                url:'/diagnosis/dcsdataaction!showmotodcsdatas.action'">
+        <thead>
+            <tr>
+                <th field="equipment" width="350">故障节点</th>
+                <th field="item" width="300">控制参数</th>
+                <th data-options="field:'value',width:300,align:'right',formatter:formatValue">参数值</th>
+            </tr>
+        </thead>
+    </table>
+    <script>
+    function formatValue(val,row){
+    	if(row.isok=="1"){
+    		return '<span style="color:goldenrod;">('+val+')</span>';
+		}else if(row.isok=="2"){
+			return '<span style="color:chocolate;">('+val+')</span>';
+		}else if(row.isok=="3"){
+			return '<span style="color:red;">('+val+')</span>';
+		}else{
+			return val;
+		}
+    }
+        function pagerFilter(data){
+            if (typeof data.length == 'number' && typeof data.splice == 'function'){    // is array
+                data = {
+                    total: data.length,
+                    rows: data
+                }
+            }
+            var dg = $(this);
+            var opts = dg.datagrid('options');
+            var pager = dg.datagrid('getPager');
+            pager.pagination({
+                onSelectPage:function(pageNum, pageSize){
+                    opts.pageNumber = pageNum;
+                    opts.pageSize = pageSize;
+                    pager.pagination('refresh',{
+                        pageNumber:pageNum,
+                        pageSize:pageSize
+                    });
+                    dg.datagrid('loadData',data);
+                }
+            });
+            if (!data.originalRows){
+                data.originalRows = (data.rows);
+            }
+            var start = (opts.pageNumber-1)*parseInt(opts.pageSize);
+            var end = start + parseInt(opts.pageSize);
+            data.rows = (data.originalRows.slice(start, end));
+            return data;
+        }
+        
+        $(function(){
+            $('#dg').datagrid({loadFilter:pagerFilter}).datagrid('loadData',motodcsdatalist.rows);
+        });
+    </script>
   </body>
 </html>
