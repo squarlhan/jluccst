@@ -3,13 +3,14 @@ package cn.edu.jlu.ccst.action;
 import java.io.UnsupportedEncodingException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
 import javax.annotation.Resource;
+
+import net.sf.json.JSONObject;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -27,7 +28,6 @@ import cn.edu.jlu.ccst.model.Dcshistory;
 import cn.edu.jlu.ccst.model.Errorlog;
 import cn.edu.jlu.ccst.model.Pre_dss;
 import cn.edu.jlu.ccst.model.Wwdcsdata;
-
 import cn.edu.jlu.ccst.model.User;
 import cn.edu.jlu.ccst.service.DcsdataService;
 import cn.edu.jlu.ccst.service.MotoDcsdataService;
@@ -55,7 +55,7 @@ public class DcsdataAction extends ActionSupport {
 	/**
 	 * 自动获得的DCS数据列表
 	 */
-	private List<MotoDcsdata> motodcsdatalist;
+	private JSONObject motodcsdatalist;
 	/**
 	 * DCS相关服务类
 	 */
@@ -126,11 +126,11 @@ public class DcsdataAction extends ActionSupport {
 		this.papkey = papkey;
 	}
 
-	public List<MotoDcsdata> getMotodcsdatalist() {
+	public JSONObject getMotodcsdatalist() {
 		return motodcsdatalist;
 	}
 
-	public void setMotodcsdatalist(List<MotoDcsdata> motodcsdatalist) {
+	public void setMotodcsdatalist(JSONObject motodcsdatalist) {
 		this.motodcsdatalist = motodcsdatalist;
 	}
 

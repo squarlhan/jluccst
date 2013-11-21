@@ -4,10 +4,10 @@
     "http://struts.apache.org/dtds/struts-2.0.dtd">
 
 <struts>
-    <include file="struts-default.xml"/>
+    <include file="struts-admin.xml"/>
 	<constant name="struts.i18n.encoding" value="UTF-8"/>
 	<constant name="struts.objectFactory" value="spring" />  
-	<package name="struts2" extends="struts-default" namespace="/">
+	<package name="struts2" extends="json-default" namespace="/">
 		<action name="useraction" class="userAction">
 		    <result name="logoffusersuccess">user/userlogin.jsp</result>
 		    <result name="profsuccess">prof/profsuccess.jsp</result>
@@ -50,7 +50,10 @@
 			<result name="savelistsuccess">savesuccess.jsp</result>
 			<result name="gongyi">user/usergongyilist.jsp</result>
 			<result name="dcs">user/userdcslist.jsp</result>
-				<result name="motodcs">user/usermotodcslist.jsp</result>
+			<result name="motodcs"  type="json">
+			 <param name="root">motodcsdatalist</param>  
+			 user/usermotodcslist.jsp
+			 </result>
 		</action> 
 
 		
@@ -142,5 +145,6 @@
 			<!-- <result name="unuserlogin">user/userlogin.jsp</result>-->
 		</action>
 	</package>
+	
 
 </struts>
