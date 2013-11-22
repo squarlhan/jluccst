@@ -17,7 +17,8 @@
 
 	<div style="margin-top: 16px; width: 200px; margin-left: 0px; overflow-y: auto; height: 400px; width: 220px;">
 		<p>
-			<a href="javascript:void(0)" class="easyui-linkbutton" onclick="collapseAll()">全部折叠</a>
+			<!--<a href="javascript:void(0)" class="easyui-linkbutton" onclick="collapseAll()">全部折叠</a>  -->
+			<a href="javascript:void(0)" class="easyui-linkbutton" onclick="getSelected()">展示</a>
             <a href="javascript:void(0)" class="easyui-linkbutton" onclick="expandAll()">全部展开</a>
 		</p>
 		<ul id="tt" class="easyui-tree" data-options="animate:true">
@@ -102,15 +103,37 @@
             $('#tt').tree('expandTo', node.target).tree('select', node.target);
         }
         function getSelected(){
-            var node = $('#tt').tree('getSelected');
-            if (node){
-                var s = node.text;
-                if (node.attributes){
-                    s += ","+node.attributes.p1+","+node.attributes.p2;
-                }
-                alert(s);
-            }
-        }
-    </script>
+            
+		    var node = $('#tt').tree('getSelected');
+			if (node) {
+				var s = node.text;
+				if ($('#tt').tree('isLeaf', node.target)) {
+					s += "叶子";
+			}
+
+			alert(s);
+
+			$.ajax({
+				url : '/diagnosis/dcsdataaction!showmotodcsdata?keyword=' + s,
+				cache : false,
+				success : function(data) {
+					eval('data=' + data);
+					if (data.success) {
+						alert('保存成功');
+						window.location.href = 'Permission.aspx';
+					}
+				}
+			});
+
+			}
+		}
+		$(function() {
+			$('#tt').tree({
+				onClick : function(node) {
+					getSelected();
+				}
+			});
+		});
+	</script>
 </body>
 </html>
