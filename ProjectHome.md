@@ -1,0 +1,1 @@
+use ssh to communate with remote linux computer
